@@ -1,0 +1,38 @@
+{
+  "name": "gid",
+  "description": "GObject introspection D binding package repository",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "none",
+  "dependencies": {
+    ":cairo-1-0": "*",
+    ":freetype2-2-0": "*",
+    ":gdk-4-0": "*",
+    ":gdkpixbuf-2-0": "*",
+    ":gio-2-0": "*",
+    ":glib-2-0": "*",
+    ":gmodule-2-0": "*",
+    ":graphene-1-0": "*",
+    ":gsk-4-0": "*",
+    ":gtk-4-0": "*",
+    ":harfbuzz-0-0": "*",
+    ":pango-1-0": "*",
+    ":pangocairo-1-0": "*"
+  },
+  "subPackages": [
+    "packages/cairo-1-0/",
+    "packages/freetype2-2-0/",
+    "packages/gdk-4-0/",
+    "packages/gdkpixbuf-2-0/",
+    "packages/gio-2-0/",
+    "packages/glib-2-0/",
+    "packages/gmodule-2-0/",
+    "packages/graphene-1-0/",
+    "packages/gsk-4-0/",
+    "packages/gtk-4-0/",
+    "packages/harfbuzz-0-0/",
+    "packages/pango-1-0/",
+    "packages/pangocairo-1-0/"
+  ]
+}

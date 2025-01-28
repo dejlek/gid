@@ -1,0 +1,2 @@
+//!namespace Gid
+//!merge GLib
