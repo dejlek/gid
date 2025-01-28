@@ -92,7 +92,7 @@ the `ref` attribute is used for those which are input and output.
 
 The following table is a map of how GLib basic scalar types are changed from C to D:
 
-| D Type           | GLib C Type                                                      |
+| D Type           | GLib C Types                                                     |
 |------------------|------------------------------------------------------------------|
 | bool             | gboolean                                                         |
 | byte             | gint8, int8_t                                                    |
@@ -185,7 +185,7 @@ For getting the GLib GType for the underlying C GObject. There is also a static 
 For each GObject signal a `SignalNameCallback` delegate alias is defined and `connectSignalName` method is added.
 The delegate arguments are the C signal arguments marshalled to D and the object instance is the last argument (instead of the first).
 
-Here is an example of what the "activate" signal of Gio.Application looks like:
+Here is an example of what the [command-line](https://docs.gtk.org/gio/signal.Application.command-line.html) signal of Gio.Application looks like:
 
 ```D
 alias CommandLineCallback = int delegate(ApplicationCommandLine commandLine, Application application);
@@ -206,7 +206,7 @@ Where **Interface** is the interface type name.
 For example, the Gio.File interface would have `File`, `FileT`, and `FileIfaceProxy` modules.
 The first one defines the interface and static methods,
 the second defines a mixin template that contains method implementations which is mixed into objects implementing the interface,
-and the third defines an interface proxy wrapper object that is used when an unknown C GObject with an unknown type is cast as the interface.
+and the third defines an interface proxy wrapper object that is used when a C GObject with an unknown type is cast as the interface.
 
 
 ## Boxed Types
@@ -304,8 +304,9 @@ The `setVal` template is also available for setting a GValue directly without a 
 
 ## VariantG
 
-The GLib GVariant type provides a way to store structure data of varying types
-and is very similar to the functionality offered by D std.variant and the giD binding uses VariantG in order to not conflict with it.
+The GLib GVariant type provides a way to store structured data of varying types
+and is very similar to the functionality offered by D [std.variant](https://dlang.org/phobos/std_variant.html)
+and the giD binding uses VariantG in order to not conflict with it.
 
 
 ### Built-in VariantG Methods
@@ -323,12 +324,12 @@ For getting the GVariant C instance from a VariantG object. `addRef` can be set 
 ```D
 override bool opEquals(Object other)
 ```
-Equivalency operator override to be able to compare VariantG objects.
+Equivalency operator overload to be able to compare VariantG objects.
 
 ```D
 override int opCmp(Object other)
 ```
-Comparison operator override to be able to compare and sort VariantG objects.
+Comparison operator overload to be able to compare and sort VariantG objects.
 
 ```D
 override string toString()
@@ -354,6 +355,28 @@ Get a single value from a VariantG as a static D type. The type must match the V
 auto get(T...)()
 ```
 Get multiple values from a VariantG as static D types. The types must match the VariantG value types.
+
+
+## VariantType
+
+GVariantType describes the type of data assigned to a GVariant. It is a boxed type and thus inherits the methods for Boxed.
+
+
+### Built-in VariantType Methods
+
+Additional built-in methods not part of the GIR API or Boxed are described below.
+
+```D
+static VariantType create(T...)()
+```
+A static method to create a new VariantType from one or more D types. Multiple D types will result in a tuple VariantType.
+
+
+```D
+static string getStr(T...)()
+```
+A static method to get a [GVariant Format String](https://docs.gtk.org/glib/gvariant-format-strings.html) from one or more D types.
+Multiple D types will result in a GVariant tuple.
 
 
 ## Callbacks
