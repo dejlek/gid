@@ -27,9 +27,9 @@ import Gtk.c.types;
 class Spinner : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,7 +50,7 @@ class Spinner : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_spinner_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**

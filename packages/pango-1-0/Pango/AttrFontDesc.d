@@ -15,14 +15,14 @@ class AttrFontDesc
 {
   PangoAttrFontDesc cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.AttrFontDesc");
 
     cInstance = *cast(PangoAttrFontDesc*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -54,8 +54,8 @@ class AttrFontDesc
   static Attribute new_(FontDescription desc)
   {
     PangoAttribute* _cretval;
-    _cretval = pango_attr_font_desc_new(desc ? cast(PangoFontDescription*)desc.cPtr(false) : null);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+    _cretval = pango_attr_font_desc_new(desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

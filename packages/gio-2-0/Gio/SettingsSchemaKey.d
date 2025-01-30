@@ -15,14 +15,14 @@ import Gio.c.types;
 class SettingsSchemaKey : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -45,7 +45,7 @@ class SettingsSchemaKey : Boxed
   {
     VariantC* _cretval;
     _cretval = g_settings_schema_key_get_default_value(cast(GSettingsSchemaKey*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class SettingsSchemaKey : Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_description(cast(GSettingsSchemaKey*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class SettingsSchemaKey : Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_name(cast(GSettingsSchemaKey*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class SettingsSchemaKey : Boxed
   {
     VariantC* _cretval;
     _cretval = g_settings_schema_key_get_range(cast(GSettingsSchemaKey*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class SettingsSchemaKey : Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_summary(cast(GSettingsSchemaKey*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class SettingsSchemaKey : Boxed
   {
     const(GVariantType)* _cretval;
     _cretval = g_settings_schema_key_get_value_type(cast(GSettingsSchemaKey*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class SettingsSchemaKey : Boxed
   bool rangeCheck(VariantG value)
   {
     bool _retval;
-    _retval = g_settings_schema_key_range_check(cast(GSettingsSchemaKey*)cPtr, value ? cast(VariantC*)value.cPtr(false) : null);
+    _retval = g_settings_schema_key_range_check(cast(GSettingsSchemaKey*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 }

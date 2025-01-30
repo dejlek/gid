@@ -46,9 +46,9 @@ import Gtk.c.types;
 class PageSetup : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -69,7 +69,7 @@ class PageSetup : ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_page_setup_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -84,12 +84,12 @@ class PageSetup : ObjectG
   static PageSetup newFromFile(string fileName)
   {
     GtkPageSetup* _cretval;
-    const(char)* _fileName = fileName.toCString(false);
+    const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
     _cretval = gtk_page_setup_new_from_file(_fileName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -104,8 +104,8 @@ class PageSetup : ObjectG
   static PageSetup newFromGvariant(VariantG variant)
   {
     GtkPageSetup* _cretval;
-    _cretval = gtk_page_setup_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, true) : null;
+    _cretval = gtk_page_setup_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -123,12 +123,12 @@ class PageSetup : ObjectG
   static PageSetup newFromKeyFile(KeyFile keyFile, string groupName)
   {
     GtkPageSetup* _cretval;
-    const(char)* _groupName = groupName.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _cretval = gtk_page_setup_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(false) : null, _groupName, &_err);
+    _cretval = gtk_page_setup_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class PageSetup : ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_page_setup_copy(cast(GtkPageSetup*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class PageSetup : ObjectG
   {
     GtkPaperSize* _cretval;
     _cretval = gtk_page_setup_get_paper_size(cast(GtkPageSetup*)cPtr);
-    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class PageSetup : ObjectG
   bool loadFile(string fileName)
   {
     bool _retval;
-    const(char)* _fileName = fileName.toCString(false);
+    const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_page_setup_load_file(cast(GtkPageSetup*)cPtr, _fileName, &_err);
     if (_err)
@@ -314,9 +314,9 @@ class PageSetup : ObjectG
   bool loadKeyFile(KeyFile keyFile, string groupName)
   {
     bool _retval;
-    const(char)* _groupName = groupName.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_page_setup_load_key_file(cast(GtkPageSetup*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(false) : null, _groupName, &_err);
+    _retval = gtk_page_setup_load_key_file(cast(GtkPageSetup*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -363,7 +363,7 @@ class PageSetup : ObjectG
    */
   void setPaperSize(PaperSize size)
   {
-    gtk_page_setup_set_paper_size(cast(GtkPageSetup*)cPtr, size ? cast(GtkPaperSize*)size.cPtr(false) : null);
+    gtk_page_setup_set_paper_size(cast(GtkPageSetup*)cPtr, size ? cast(GtkPaperSize*)size.cPtr(No.Dup) : null);
   }
 
   /**
@@ -374,7 +374,7 @@ class PageSetup : ObjectG
    */
   void setPaperSizeAndDefaultMargins(PaperSize size)
   {
-    gtk_page_setup_set_paper_size_and_default_margins(cast(GtkPageSetup*)cPtr, size ? cast(GtkPaperSize*)size.cPtr(false) : null);
+    gtk_page_setup_set_paper_size_and_default_margins(cast(GtkPageSetup*)cPtr, size ? cast(GtkPaperSize*)size.cPtr(No.Dup) : null);
   }
 
   /**
@@ -408,7 +408,7 @@ class PageSetup : ObjectG
   bool toFile(string fileName)
   {
     bool _retval;
-    const(char)* _fileName = fileName.toCString(false);
+    const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_page_setup_to_file(cast(GtkPageSetup*)cPtr, _fileName, &_err);
     if (_err)
@@ -424,7 +424,7 @@ class PageSetup : ObjectG
   {
     VariantC* _cretval;
     _cretval = gtk_page_setup_to_gvariant(cast(GtkPageSetup*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -437,7 +437,7 @@ class PageSetup : ObjectG
    */
   void toKeyFile(KeyFile keyFile, string groupName)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    gtk_page_setup_to_key_file(cast(GtkPageSetup*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(false) : null, _groupName);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    gtk_page_setup_to_key_file(cast(GtkPageSetup*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName);
   }
 }

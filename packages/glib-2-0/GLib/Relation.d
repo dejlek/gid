@@ -42,14 +42,14 @@ class Relation
   GRelation* cInstancePtr;
   bool owned;
 
-  this(void* ptr, bool owned = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.Relation");
 
     cInstancePtr = cast(GRelation*)ptr;
 
-    this.owned = owned;
+    owned = take;
   }
 
   void* cPtr()

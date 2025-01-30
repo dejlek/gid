@@ -16,14 +16,14 @@ class OptionContext
   GOptionContext* cInstancePtr;
   bool owned;
 
-  this(void* ptr, bool owned = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.OptionContext");
 
     cInstancePtr = cast(GOptionContext*)ptr;
 
-    this.owned = owned;
+    owned = take;
   }
 
   ~this()
@@ -46,7 +46,7 @@ class OptionContext
    */
   void addGroup(OptionGroup group)
   {
-    g_option_context_add_group(cast(GOptionContext*)cPtr, group ? cast(GOptionGroup*)group.cPtr(true) : null);
+    g_option_context_add_group(cast(GOptionContext*)cPtr, group ? cast(GOptionGroup*)group.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -61,7 +61,7 @@ class OptionContext
   void addMainEntries(OptionEntry[] entries, string translationDomain)
   {
     auto _entries = cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr;
-    const(char)* _translationDomain = translationDomain.toCString(false);
+    const(char)* _translationDomain = translationDomain.toCString(No.Alloc);
     g_option_context_add_main_entries(cast(GOptionContext*)cPtr, _entries, _translationDomain);
   }
 
@@ -73,7 +73,7 @@ class OptionContext
   {
     const(char)* _cretval;
     _cretval = g_option_context_get_description(cast(GOptionContext*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -93,8 +93,8 @@ class OptionContext
   string getHelp(bool mainHelp, OptionGroup group)
   {
     char* _cretval;
-    _cretval = g_option_context_get_help(cast(GOptionContext*)cPtr, mainHelp, group ? cast(GOptionGroup*)group.cPtr(false) : null);
-    string _retval = _cretval.fromCString(true);
+    _cretval = g_option_context_get_help(cast(GOptionContext*)cPtr, mainHelp, group ? cast(GOptionGroup*)group.cPtr(No.Dup) : null);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class OptionContext
   {
     GOptionGroup* _cretval;
     _cretval = g_option_context_get_main_group(cast(GOptionContext*)cPtr);
-    auto _retval = _cretval ? new OptionGroup(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new OptionGroup(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class OptionContext
   {
     const(char)* _cretval;
     _cretval = g_option_context_get_summary(cast(GOptionContext*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class OptionContext
    */
   void setDescription(string description)
   {
-    const(char)* _description = description.toCString(false);
+    const(char)* _description = description.toCString(No.Alloc);
     g_option_context_set_description(cast(GOptionContext*)cPtr, _description);
   }
 
@@ -214,7 +214,7 @@ class OptionContext
    */
   void setMainGroup(OptionGroup group)
   {
-    g_option_context_set_main_group(cast(GOptionContext*)cPtr, group ? cast(GOptionGroup*)group.cPtr(true) : null);
+    g_option_context_set_main_group(cast(GOptionContext*)cPtr, group ? cast(GOptionGroup*)group.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -257,7 +257,7 @@ class OptionContext
    */
   void setSummary(string summary)
   {
-    const(char)* _summary = summary.toCString(false);
+    const(char)* _summary = summary.toCString(No.Alloc);
     g_option_context_set_summary(cast(GOptionContext*)cPtr, _summary);
   }
 
@@ -280,10 +280,10 @@ class OptionContext
     {
       string _dretval;
       auto _dlg = cast(TranslateFunc*)data;
-      string _str = str.fromCString(false);
+      string _str = str.fromCString(No.Free);
 
       _dretval = (*_dlg)(_str);
-      const(char)* _retval = _dretval.toCString(false);
+      const(char)* _retval = _dretval.toCString(No.Alloc);
 
       return _retval;
     }
@@ -300,7 +300,7 @@ class OptionContext
    */
   void setTranslationDomain(string domain)
   {
-    const(char)* _domain = domain.toCString(false);
+    const(char)* _domain = domain.toCString(No.Alloc);
     g_option_context_set_translation_domain(cast(GOptionContext*)cPtr, _domain);
   }
 }

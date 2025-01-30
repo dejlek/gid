@@ -14,17 +14,17 @@ class Size : Boxed
 
   this()
   {
-    super(safeMalloc(graphene_size_t.sizeof), true);
+    super(safeMalloc(graphene_size_t.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -66,7 +66,7 @@ class Size : Boxed
   {
     graphene_size_t* _cretval;
     _cretval = graphene_size_alloc();
-    auto _retval = _cretval ? new Size(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Size(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class Size : Boxed
   bool equal(Size b)
   {
     bool _retval;
-    _retval = graphene_size_equal(cast(graphene_size_t*)cPtr, b ? cast(graphene_size_t*)b.cPtr(false) : null);
+    _retval = graphene_size_equal(cast(graphene_size_t*)cPtr, b ? cast(graphene_size_t*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class Size : Boxed
   {
     graphene_size_t* _cretval;
     _cretval = graphene_size_init(cast(graphene_size_t*)cPtr, width, height);
-    auto _retval = _cretval ? new Size(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Size(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -108,8 +108,8 @@ class Size : Boxed
   Size initFromSize(Size src)
   {
     graphene_size_t* _cretval;
-    _cretval = graphene_size_init_from_size(cast(graphene_size_t*)cPtr, src ? cast(graphene_size_t*)src.cPtr(false) : null);
-    auto _retval = _cretval ? new Size(cast(void*)_cretval, false) : null;
+    _cretval = graphene_size_init_from_size(cast(graphene_size_t*)cPtr, src ? cast(graphene_size_t*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Size(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -124,8 +124,8 @@ class Size : Boxed
   void interpolate(Size b, double factor, out Size res)
   {
     graphene_size_t _res;
-    graphene_size_interpolate(cast(graphene_size_t*)cPtr, b ? cast(graphene_size_t*)b.cPtr(false) : null, factor, &_res);
-    res = new Size(cast(void*)&_res, false);
+    graphene_size_interpolate(cast(graphene_size_t*)cPtr, b ? cast(graphene_size_t*)b.cPtr(No.Dup) : null, factor, &_res);
+    res = new Size(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -138,7 +138,7 @@ class Size : Boxed
   {
     graphene_size_t _res;
     graphene_size_scale(cast(graphene_size_t*)cPtr, factor, &_res);
-    res = new Size(cast(void*)&_res, false);
+    res = new Size(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -150,7 +150,7 @@ class Size : Boxed
   {
     const(graphene_size_t)* _cretval;
     _cretval = graphene_size_zero();
-    auto _retval = _cretval ? new Size(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Size(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

@@ -32,9 +32,9 @@ import Gio.c.types;
 class SocketListener : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -57,7 +57,7 @@ class SocketListener : ObjectG
   {
     GSocketListener* _cretval;
     _cretval = g_socket_listener_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -80,11 +80,11 @@ class SocketListener : ObjectG
     GSocketConnection* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
-    _cretval = g_socket_listener_accept(cast(GSocketListener*)cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_socket_listener_accept(cast(GSocketListener*)cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, true) : null;
-    sourceObject = new ObjectG(cast(void*)_sourceObject, false);
+    auto _retval = ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, Yes.Take);
+    sourceObject = new ObjectG(cast(void*)_sourceObject, No.Take);
     return _retval;
   }
 
@@ -104,11 +104,11 @@ class SocketListener : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_socket_listener_accept_async(cast(GSocketListener*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_socket_listener_accept_async(cast(GSocketListener*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -123,11 +123,11 @@ class SocketListener : ObjectG
     GSocketConnection* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
-    _cretval = g_socket_listener_accept_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_sourceObject, &_err);
+    _cretval = g_socket_listener_accept_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_sourceObject, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, true) : null;
-    sourceObject = new ObjectG(cast(void*)_sourceObject, false);
+    auto _retval = ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, Yes.Take);
+    sourceObject = new ObjectG(cast(void*)_sourceObject, No.Take);
     return _retval;
   }
 
@@ -153,11 +153,11 @@ class SocketListener : ObjectG
     GSocket* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
-    _cretval = g_socket_listener_accept_socket(cast(GSocketListener*)cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_socket_listener_accept_socket(cast(GSocketListener*)cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Socket(cast(GSocket*)_cretval, true) : null;
-    sourceObject = new ObjectG(cast(void*)_sourceObject, false);
+    auto _retval = ObjectG.getDObject!Socket(cast(GSocket*)_cretval, Yes.Take);
+    sourceObject = new ObjectG(cast(void*)_sourceObject, No.Take);
     return _retval;
   }
 
@@ -177,11 +177,11 @@ class SocketListener : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_socket_listener_accept_socket_async(cast(GSocketListener*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_socket_listener_accept_socket_async(cast(GSocketListener*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -196,11 +196,11 @@ class SocketListener : ObjectG
     GSocket* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
-    _cretval = g_socket_listener_accept_socket_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_sourceObject, &_err);
+    _cretval = g_socket_listener_accept_socket_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_sourceObject, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Socket(cast(GSocket*)_cretval, true) : null;
-    sourceObject = new ObjectG(cast(void*)_sourceObject, false);
+    auto _retval = ObjectG.getDObject!Socket(cast(GSocket*)_cretval, Yes.Take);
+    sourceObject = new ObjectG(cast(void*)_sourceObject, No.Take);
     return _retval;
   }
 
@@ -237,10 +237,10 @@ class SocketListener : ObjectG
     bool _retval;
     GSocketAddress* _effectiveAddress;
     GError *_err;
-    _retval = g_socket_listener_add_address(cast(GSocketListener*)cPtr, address ? cast(GSocketAddress*)address.cPtr(false) : null, type, protocol, sourceObject ? cast(ObjectC*)sourceObject.cPtr(false) : null, &_effectiveAddress, &_err);
+    _retval = g_socket_listener_add_address(cast(GSocketListener*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, type, protocol, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_effectiveAddress, &_err);
     if (_err)
       throw new ErrorG(_err);
-    effectiveAddress = new SocketAddress(cast(void*)_effectiveAddress, true);
+    effectiveAddress = new SocketAddress(cast(void*)_effectiveAddress, Yes.Take);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class SocketListener : ObjectG
   {
     ushort _retval;
     GError *_err;
-    _retval = g_socket_listener_add_any_inet_port(cast(GSocketListener*)cPtr, sourceObject ? cast(ObjectC*)sourceObject.cPtr(false) : null, &_err);
+    _retval = g_socket_listener_add_any_inet_port(cast(GSocketListener*)cPtr, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -287,7 +287,7 @@ class SocketListener : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_listener_add_inet_port(cast(GSocketListener*)cPtr, port, sourceObject ? cast(ObjectC*)sourceObject.cPtr(false) : null, &_err);
+    _retval = g_socket_listener_add_inet_port(cast(GSocketListener*)cPtr, port, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -314,7 +314,7 @@ class SocketListener : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_listener_add_socket(cast(GSocketListener*)cPtr, socket ? cast(GSocket*)socket.cPtr(false) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(false) : null, &_err);
+    _retval = g_socket_listener_add_socket(cast(GSocketListener*)cPtr, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

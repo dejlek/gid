@@ -88,9 +88,9 @@ import Gtk.c.types;
 class Popover : Widget, Native, ShortcutManager
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -114,7 +114,7 @@ class Popover : Widget, Native, ShortcutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -149,7 +149,7 @@ class Popover : Widget, Native, ShortcutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_get_child(cast(GtkPopover*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class Popover : Widget, Native, ShortcutManager
     bool _retval;
     GdkRectangle _rect;
     _retval = gtk_popover_get_pointing_to(cast(GtkPopover*)cPtr, &_rect);
-    rect = new Rectangle(cast(void*)&_rect, false);
+    rect = new Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
 
@@ -284,7 +284,7 @@ class Popover : Widget, Native, ShortcutManager
    */
   void setChild(Widget child)
   {
-    gtk_popover_set_child(cast(GtkPopover*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_popover_set_child(cast(GtkPopover*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -298,7 +298,7 @@ class Popover : Widget, Native, ShortcutManager
    */
   void setDefaultWidget(Widget widget)
   {
-    gtk_popover_set_default_widget(cast(GtkPopover*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_popover_set_default_widget(cast(GtkPopover*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -344,7 +344,7 @@ class Popover : Widget, Native, ShortcutManager
    */
   void setPointingTo(Rectangle rect)
   {
-    gtk_popover_set_pointing_to(cast(GtkPopover*)cPtr, rect ? cast(GdkRectangle*)rect.cPtr(false) : null);
+    gtk_popover_set_pointing_to(cast(GtkPopover*)cPtr, rect ? cast(GdkRectangle*)rect.cPtr(No.Dup) : null);
   }
 
   /**

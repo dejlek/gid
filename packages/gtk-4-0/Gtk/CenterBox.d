@@ -42,9 +42,9 @@ import Gtk.c.types;
 class CenterBox : Widget, Orientable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -67,7 +67,7 @@ class CenterBox : Widget, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -90,7 +90,7 @@ class CenterBox : Widget, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_center_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class CenterBox : Widget, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_end_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class CenterBox : Widget, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_start_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class CenterBox : Widget, Orientable
    */
   void setCenterWidget(Widget child)
   {
-    gtk_center_box_set_center_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_center_box_set_center_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -163,7 +163,7 @@ class CenterBox : Widget, Orientable
    */
   void setEndWidget(Widget child)
   {
-    gtk_center_box_set_end_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_center_box_set_end_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -189,6 +189,6 @@ class CenterBox : Widget, Orientable
    */
   void setStartWidget(Widget child)
   {
-    gtk_center_box_set_start_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_center_box_set_start_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 }

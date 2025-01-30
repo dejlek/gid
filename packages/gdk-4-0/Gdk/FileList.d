@@ -15,14 +15,14 @@ import Gio.FileT;
 class FileList : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -54,7 +54,7 @@ class FileList : Boxed
       _tmpfiles ~= obj ? cast(GFile*)(cast(ObjectG)obj).cPtr : null;
     GFile** _files = _tmpfiles.ptr;
     _cretval = gdk_file_list_new_from_array(_files, _nFiles);
-    auto _retval = _cretval ? new FileList(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FileList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -72,7 +72,7 @@ class FileList : Boxed
     auto _files = gSListFromD!(File)(files);
     scope(exit) containerFree!(GSList*, File, GidOwnership.None)(_files);
     _cretval = gdk_file_list_new_from_list(_files);
-    auto _retval = _cretval ? new FileList(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FileList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

@@ -33,7 +33,7 @@ template ToplevelT()
    */
   override void beginMove(Device device, int button, double x, double y, uint timestamp)
   {
-    gdk_toplevel_begin_move(cast(GdkToplevel*)cPtr, device ? cast(GdkDevice*)device.cPtr(false) : null, button, x, y, timestamp);
+    gdk_toplevel_begin_move(cast(GdkToplevel*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, x, y, timestamp);
   }
 
   /**
@@ -50,7 +50,7 @@ template ToplevelT()
    */
   override void beginResize(SurfaceEdge edge, Device device, int button, double x, double y, uint timestamp)
   {
-    gdk_toplevel_begin_resize(cast(GdkToplevel*)cPtr, edge, device ? cast(GdkDevice*)device.cPtr(false) : null, button, x, y, timestamp);
+    gdk_toplevel_begin_resize(cast(GdkToplevel*)cPtr, edge, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, x, y, timestamp);
   }
 
   /**
@@ -102,7 +102,7 @@ template ToplevelT()
    */
   override void inhibitSystemShortcuts(Event event)
   {
-    gdk_toplevel_inhibit_system_shortcuts(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(false) : null);
+    gdk_toplevel_inhibit_system_shortcuts(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
   }
 
   /**
@@ -143,7 +143,7 @@ template ToplevelT()
    */
   override void present(ToplevelLayout layout)
   {
-    gdk_toplevel_present(cast(GdkToplevel*)cPtr, layout ? cast(GdkToplevelLayout*)layout.cPtr(false) : null);
+    gdk_toplevel_present(cast(GdkToplevel*)cPtr, layout ? cast(GdkToplevelLayout*)layout.cPtr(No.Dup) : null);
   }
 
   /**
@@ -225,7 +225,7 @@ template ToplevelT()
    */
   override void setStartupId(string startupId)
   {
-    const(char)* _startupId = startupId.toCString(false);
+    const(char)* _startupId = startupId.toCString(No.Alloc);
     gdk_toplevel_set_startup_id(cast(GdkToplevel*)cPtr, _startupId);
   }
 
@@ -238,7 +238,7 @@ template ToplevelT()
    */
   override void setTitle(string title)
   {
-    const(char)* _title = title.toCString(false);
+    const(char)* _title = title.toCString(No.Alloc);
     gdk_toplevel_set_title(cast(GdkToplevel*)cPtr, _title);
   }
 
@@ -255,7 +255,7 @@ template ToplevelT()
    */
   override void setTransientFor(Surface parent)
   {
-    gdk_toplevel_set_transient_for(cast(GdkToplevel*)cPtr, parent ? cast(GdkSurface*)parent.cPtr(false) : null);
+    gdk_toplevel_set_transient_for(cast(GdkToplevel*)cPtr, parent ? cast(GdkSurface*)parent.cPtr(No.Dup) : null);
   }
 
   /**
@@ -271,7 +271,7 @@ template ToplevelT()
   override bool showWindowMenu(Event event)
   {
     bool _retval;
-    _retval = gdk_toplevel_show_window_menu(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(false) : null);
+    _retval = gdk_toplevel_show_window_menu(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
     return _retval;
   }
 

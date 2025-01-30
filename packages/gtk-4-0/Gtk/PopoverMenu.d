@@ -118,9 +118,9 @@ class PopoverMenu : Popover
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -151,8 +151,8 @@ class PopoverMenu : Popover
   static PopoverMenu newFromModel(MenuModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_menu_new_from_model(model ? cast(GMenuModel*)model.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!PopoverMenu(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_popover_menu_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!PopoverMenu(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -171,8 +171,8 @@ class PopoverMenu : Popover
   static PopoverMenu newFromModelFull(MenuModel model, PopoverMenuFlags flags)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_menu_new_from_model_full(model ? cast(GMenuModel*)model.cPtr(false) : null, flags);
-    auto _retval = _cretval ? ObjectG.getDObject!PopoverMenu(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_popover_menu_new_from_model_full(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, flags);
+    auto _retval = ObjectG.getDObject!PopoverMenu(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -188,8 +188,8 @@ class PopoverMenu : Popover
   bool addChild(Widget child, string id)
   {
     bool _retval;
-    const(char)* _id = id.toCString(false);
-    _retval = gtk_popover_menu_add_child(cast(GtkPopoverMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, _id);
+    const(char)* _id = id.toCString(No.Alloc);
+    _retval = gtk_popover_menu_add_child(cast(GtkPopoverMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _id);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class PopoverMenu : Popover
   {
     GMenuModel* _cretval;
     _cretval = gtk_popover_menu_get_menu_model(cast(GtkPopoverMenu*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class PopoverMenu : Popover
   bool removeChild(Widget child)
   {
     bool _retval;
-    _retval = gtk_popover_menu_remove_child(cast(GtkPopoverMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    _retval = gtk_popover_menu_remove_child(cast(GtkPopoverMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -253,6 +253,6 @@ class PopoverMenu : Popover
    */
   void setMenuModel(MenuModel model)
   {
-    gtk_popover_menu_set_menu_model(cast(GtkPopoverMenu*)cPtr, model ? cast(GMenuModel*)model.cPtr(false) : null);
+    gtk_popover_menu_set_menu_model(cast(GtkPopoverMenu*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
 }

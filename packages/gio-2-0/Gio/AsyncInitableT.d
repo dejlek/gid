@@ -146,11 +146,11 @@ template AsyncInitableT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_async_initable_init_async(cast(GAsyncInitable*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_async_initable_init_async(cast(GAsyncInitable*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -165,7 +165,7 @@ template AsyncInitableT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_async_initable_init_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _retval = g_async_initable_init_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -183,10 +183,10 @@ template AsyncInitableT()
   {
     ObjectC* _cretval;
     GError *_err;
-    _cretval = g_async_initable_new_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_async_initable_new_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 }

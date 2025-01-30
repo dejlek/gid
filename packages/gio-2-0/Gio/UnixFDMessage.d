@@ -25,9 +25,9 @@ import Gio.c.types;
 class UnixFDMessage : SocketControlMessage
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -49,7 +49,7 @@ class UnixFDMessage : SocketControlMessage
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_fd_message_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -61,8 +61,8 @@ class UnixFDMessage : SocketControlMessage
   static UnixFDMessage newWithFdList(UnixFDList fdList)
   {
     GSocketControlMessage* _cretval;
-    _cretval = g_unix_fd_message_new_with_fd_list(fdList ? cast(GUnixFDList*)fdList.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!UnixFDMessage(cast(GSocketControlMessage*)_cretval, true) : null;
+    _cretval = g_unix_fd_message_new_with_fd_list(fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!UnixFDMessage(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class UnixFDMessage : SocketControlMessage
   {
     GUnixFDList* _cretval;
     _cretval = g_unix_fd_message_get_fd_list(cast(GUnixFDMessage*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!UnixFDList(cast(GUnixFDList*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!UnixFDList(cast(GUnixFDList*)_cretval, No.Take);
     return _retval;
   }
 

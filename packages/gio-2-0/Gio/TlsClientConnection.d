@@ -40,10 +40,10 @@ interface TlsClientConnection
   {
     GIOStream* _cretval;
     GError *_err;
-    _cretval = g_tls_client_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(false) : null, serverIdentity ? cast(GSocketConnectable*)(cast(ObjectG)serverIdentity).cPtr(false) : null, &_err);
+    _cretval = g_tls_client_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(No.Dup) : null, serverIdentity ? cast(GSocketConnectable*)(cast(ObjectG)serverIdentity).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!TlsClientConnection(cast(GIOStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!TlsClientConnection(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 

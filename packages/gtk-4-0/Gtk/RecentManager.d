@@ -59,9 +59,9 @@ import Gtk.c.types;
 class RecentManager : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -89,7 +89,7 @@ class RecentManager : ObjectG
   {
     GtkRecentManager* _cretval;
     _cretval = gtk_recent_manager_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -102,7 +102,7 @@ class RecentManager : ObjectG
   {
     GtkRecentManager* _cretval;
     _cretval = gtk_recent_manager_get_default();
-    auto _retval = _cretval ? ObjectG.getDObject!RecentManager(cast(GtkRecentManager*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!RecentManager(cast(GtkRecentManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class RecentManager : ObjectG
   bool addFull(string uri, RecentData recentData)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _retval = gtk_recent_manager_add_full(cast(GtkRecentManager*)cPtr, _uri, recentData ? cast(GtkRecentData*)recentData.cPtr : null);
     return _retval;
   }
@@ -153,7 +153,7 @@ class RecentManager : ObjectG
   bool addItem(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _retval = gtk_recent_manager_add_item(cast(GtkRecentManager*)cPtr, _uri);
     return _retval;
   }
@@ -183,7 +183,7 @@ class RecentManager : ObjectG
   bool hasItem(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _retval = gtk_recent_manager_has_item(cast(GtkRecentManager*)cPtr, _uri);
     return _retval;
   }
@@ -202,12 +202,12 @@ class RecentManager : ObjectG
   RecentInfo lookupItem(string uri)
   {
     GtkRecentInfo* _cretval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = gtk_recent_manager_lookup_item(cast(GtkRecentManager*)cPtr, _uri, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new RecentInfo(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new RecentInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -224,8 +224,8 @@ class RecentManager : ObjectG
   bool moveItem(string uri, string newUri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(false);
-    const(char)* _newUri = newUri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _newUri = newUri.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_recent_manager_move_item(cast(GtkRecentManager*)cPtr, _uri, _newUri, &_err);
     if (_err)
@@ -259,7 +259,7 @@ class RecentManager : ObjectG
   bool removeItem(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_recent_manager_remove_item(cast(GtkRecentManager*)cPtr, _uri, &_err);
     if (_err)

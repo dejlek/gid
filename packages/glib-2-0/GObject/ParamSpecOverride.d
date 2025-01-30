@@ -20,11 +20,11 @@ import Gid.gid;
 class ParamSpecOverride : ParamSpec
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.ParamSpecOverride");
 
-    super(cast(GParamSpec*)ptr, ownedRef);
+    super(cast(GParamSpec*)ptr, take);
   }
 }

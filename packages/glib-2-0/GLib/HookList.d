@@ -13,14 +13,14 @@ class HookList
 {
   GHookList cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.HookList");
 
     cInstance = *cast(GHookList*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -133,7 +133,7 @@ class HookList
     {
       auto _dlg = cast(HookMarshaller*)marshalData;
 
-      (*_dlg)(hook ? new Hook(cast(void*)hook, false) : null);
+      (*_dlg)(hook ? new Hook(cast(void*)hook, No.Take) : null);
     }
 
     auto _marshaller = cast(void*)&marshaller;
@@ -155,7 +155,7 @@ class HookList
     {
       auto _dlg = cast(HookCheckMarshaller*)marshalData;
 
-      bool _retval = (*_dlg)(hook ? new Hook(cast(void*)hook, false) : null);
+      bool _retval = (*_dlg)(hook ? new Hook(cast(void*)hook, No.Take) : null);
       return _retval;
     }
 

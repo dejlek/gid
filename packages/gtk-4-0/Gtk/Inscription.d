@@ -34,9 +34,9 @@ class Inscription : Widget, AccessibleText
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -60,9 +60,9 @@ class Inscription : Widget, AccessibleText
   this(string text)
   {
     GtkWidget* _cretval;
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     _cretval = gtk_inscription_new(_text);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -73,7 +73,7 @@ class Inscription : Widget, AccessibleText
   {
     PangoAttrList* _cretval;
     _cretval = gtk_inscription_get_attributes(cast(GtkInscription*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class Inscription : Widget, AccessibleText
   {
     const(char)* _cretval;
     _cretval = gtk_inscription_get_text(cast(GtkInscription*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class Inscription : Widget, AccessibleText
    */
   void setAttributes(AttrList attrs)
   {
-    gtk_inscription_set_attributes(cast(GtkInscription*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(false) : null);
+    gtk_inscription_set_attributes(cast(GtkInscription*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -205,7 +205,7 @@ class Inscription : Widget, AccessibleText
    */
   void setMarkup(string markup)
   {
-    const(char)* _markup = markup.toCString(false);
+    const(char)* _markup = markup.toCString(No.Alloc);
     gtk_inscription_set_markup(cast(GtkInscription*)cPtr, _markup);
   }
 
@@ -260,7 +260,7 @@ class Inscription : Widget, AccessibleText
    */
   void setText(string text)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_inscription_set_text(cast(GtkInscription*)cPtr, _text);
   }
 

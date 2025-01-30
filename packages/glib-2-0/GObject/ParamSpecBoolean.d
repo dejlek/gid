@@ -12,11 +12,11 @@ import Gid.gid;
 class ParamSpecBoolean : ParamSpec
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.ParamSpecBoolean");
 
-    super(cast(GParamSpec*)ptr, ownedRef);
+    super(cast(GParamSpec*)ptr, take);
   }
 }

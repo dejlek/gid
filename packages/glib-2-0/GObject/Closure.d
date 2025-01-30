@@ -52,17 +52,17 @@ class Closure : Boxed
 
   this()
   {
-    super(safeMalloc(GClosure.sizeof), true);
+    super(safeMalloc(GClosure.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -117,8 +117,8 @@ class Closure : Boxed
   static Closure newObject(uint sizeofClosure, ObjectG object)
   {
     GClosure* _cretval;
-    _cretval = g_closure_new_object(sizeofClosure, object ? cast(ObjectC*)object.cPtr(false) : null);
-    auto _retval = _cretval ? new Closure(cast(void*)_cretval, false) : null;
+    _cretval = g_closure_new_object(sizeofClosure, object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Closure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class Closure : Boxed
   {
     GClosure* _cretval;
     _cretval = g_closure_new_simple(sizeofClosure, data);
-    auto _retval = _cretval ? new Closure(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Closure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class Closure : Boxed
       _tmpparamValues ~= *cast(GValue*)obj.cPtr;
     const(GValue)* _paramValues = _tmpparamValues.ptr;
     g_closure_invoke(cast(GClosure*)cPtr, &_returnValue, _nParamValues, _paramValues, invocationHint);
-    returnValue = new Value(cast(void*)&_returnValue, false);
+    returnValue = new Value(cast(void*)&_returnValue, No.Take);
   }
 
   /**

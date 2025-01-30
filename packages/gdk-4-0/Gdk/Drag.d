@@ -29,9 +29,9 @@ class Drag : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -68,8 +68,8 @@ class Drag : ObjectG
   static Drag begin(Surface surface, Device device, ContentProvider content, DragAction actions, double dx, double dy)
   {
     GdkDrag* _cretval;
-    _cretval = gdk_drag_begin(surface ? cast(GdkSurface*)surface.cPtr(false) : null, device ? cast(GdkDevice*)device.cPtr(false) : null, content ? cast(GdkContentProvider*)content.cPtr(false) : null, actions, dx, dy);
-    auto _retval = _cretval ? ObjectG.getDObject!Drag(cast(GdkDrag*)_cretval, true) : null;
+    _cretval = gdk_drag_begin(surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, content ? cast(GdkContentProvider*)content.cPtr(No.Dup) : null, actions, dx, dy);
+    auto _retval = ObjectG.getDObject!Drag(cast(GdkDrag*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class Drag : ObjectG
   {
     GdkContentProvider* _cretval;
     _cretval = gdk_drag_get_content(cast(GdkDrag*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class Drag : ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_drag_get_device(cast(GdkDrag*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class Drag : ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_drag_get_display(cast(GdkDrag*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class Drag : ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_drag_get_drag_surface(cast(GdkDrag*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class Drag : ObjectG
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_drag_get_formats(cast(GdkDrag*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class Drag : ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_drag_get_surface(cast(GdkDrag*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

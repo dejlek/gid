@@ -140,7 +140,7 @@ interface Editable
   static bool delegateGetProperty(ObjectG object, uint propId, Value value, ParamSpec pspec)
   {
     bool _retval;
-    _retval = gtk_editable_delegate_get_property(object ? cast(ObjectC*)object.cPtr(false) : null, propId, value ? cast(GValue*)value.cPtr(false) : null, pspec ? cast(GParamSpec*)pspec.cPtr(false) : null);
+    _retval = gtk_editable_delegate_get_property(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, propId, value ? cast(GValue*)value.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ interface Editable
   static bool delegateSetProperty(ObjectG object, uint propId, Value value, ParamSpec pspec)
   {
     bool _retval;
-    _retval = gtk_editable_delegate_set_property(object ? cast(ObjectC*)object.cPtr(false) : null, propId, value ? cast(GValue*)value.cPtr(false) : null, pspec ? cast(GParamSpec*)pspec.cPtr(false) : null);
+    _retval = gtk_editable_delegate_set_property(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, propId, value ? cast(GValue*)value.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
     return _retval;
   }
 

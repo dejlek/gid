@@ -15,14 +15,14 @@ class AttrLanguage
 {
   PangoAttrLanguage cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.AttrLanguage");
 
     cInstance = *cast(PangoAttrLanguage*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -52,8 +52,8 @@ class AttrLanguage
   static Attribute new_(PgLanguage language)
   {
     PangoAttribute* _cretval;
-    _cretval = pango_attr_language_new(language ? cast(PangoLanguage*)language.cPtr(false) : null);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+    _cretval = pango_attr_language_new(language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

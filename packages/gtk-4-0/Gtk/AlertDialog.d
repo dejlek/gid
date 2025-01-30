@@ -28,9 +28,9 @@ class AlertDialog : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -63,11 +63,11 @@ class AlertDialog : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gtk_alert_dialog_choose(cast(GtkAlertDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gtk_alert_dialog_choose(cast(GtkAlertDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -83,7 +83,7 @@ class AlertDialog : ObjectG
   {
     int _retval;
     GError *_err;
-    _retval = gtk_alert_dialog_choose_finish(cast(GtkAlertDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = gtk_alert_dialog_choose_finish(cast(GtkAlertDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -106,7 +106,7 @@ class AlertDialog : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(false);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -141,7 +141,7 @@ class AlertDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_alert_dialog_get_detail(cast(GtkAlertDialog*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class AlertDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_alert_dialog_get_message(cast(GtkAlertDialog*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class AlertDialog : ObjectG
   {
     char*[] _tmplabels;
     foreach (s; labels)
-      _tmplabels ~= s.toCString(false);
+      _tmplabels ~= s.toCString(No.Alloc);
     _tmplabels ~= null;
     const(char*)* _labels = _tmplabels.ptr;
     gtk_alert_dialog_set_buttons(cast(GtkAlertDialog*)cPtr, _labels);
@@ -215,7 +215,7 @@ class AlertDialog : ObjectG
    */
   void setDetail(string detail)
   {
-    const(char)* _detail = detail.toCString(false);
+    const(char)* _detail = detail.toCString(No.Alloc);
     gtk_alert_dialog_set_detail(cast(GtkAlertDialog*)cPtr, _detail);
   }
 
@@ -226,7 +226,7 @@ class AlertDialog : ObjectG
    */
   void setMessage(string message)
   {
-    const(char)* _message = message.toCString(false);
+    const(char)* _message = message.toCString(No.Alloc);
     gtk_alert_dialog_set_message(cast(GtkAlertDialog*)cPtr, _message);
   }
 
@@ -253,6 +253,6 @@ class AlertDialog : ObjectG
    */
   void show(Window parent)
   {
-    gtk_alert_dialog_show(cast(GtkAlertDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(false) : null);
+    gtk_alert_dialog_show(cast(GtkAlertDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }
 }

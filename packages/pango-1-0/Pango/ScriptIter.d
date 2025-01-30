@@ -13,14 +13,14 @@ import Pango.c.types;
 class ScriptIter : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -50,9 +50,9 @@ class ScriptIter : Boxed
   this(string text, int length)
   {
     PangoScriptIter* _cretval;
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     _cretval = pango_script_iter_new(_text, length);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -73,8 +73,8 @@ class ScriptIter : Boxed
     char* _start;
     char* _end;
     pango_script_iter_get_range(cast(PangoScriptIter*)cPtr, &_start, &_end, &script);
-    start = _start.fromCString(true);
-    end = _end.fromCString(true);
+    start = _start.fromCString(Yes.Free);
+    end = _end.fromCString(Yes.Free);
   }
 
   /**

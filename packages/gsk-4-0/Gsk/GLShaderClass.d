@@ -10,14 +10,14 @@ class GLShaderClass
 {
   GskGLShaderClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.GLShaderClass");
 
     cInstance = *cast(GskGLShaderClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

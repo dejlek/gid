@@ -152,9 +152,9 @@ class ApplicationCommandLine : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -180,9 +180,9 @@ class ApplicationCommandLine : ObjectG
   File createFileForArg(string arg)
   {
     GFile* _cretval;
-    const(char)* _arg = arg.toCString(false);
+    const(char)* _arg = arg.toCString(No.Alloc);
     _cretval = g_application_command_line_create_file_for_arg(cast(GApplicationCommandLine*)cPtr, _arg);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class ApplicationCommandLine : ObjectG
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -243,7 +243,7 @@ class ApplicationCommandLine : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_application_command_line_get_cwd(cast(GApplicationCommandLine*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class ApplicationCommandLine : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(false);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -319,7 +319,7 @@ class ApplicationCommandLine : ObjectG
   {
     GVariantDict* _cretval;
     _cretval = g_application_command_line_get_options_dict(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = _cretval ? new VariantDict(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantDict(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -338,7 +338,7 @@ class ApplicationCommandLine : ObjectG
   {
     VariantC* _cretval;
     _cretval = g_application_command_line_get_platform_data(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class ApplicationCommandLine : ObjectG
   {
     GInputStream* _cretval;
     _cretval = g_application_command_line_get_stdin(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -378,9 +378,9 @@ class ApplicationCommandLine : ObjectG
   string getenv(string name)
   {
     const(char)* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_application_command_line_getenv(cast(GApplicationCommandLine*)cPtr, _name);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -394,7 +394,7 @@ class ApplicationCommandLine : ObjectG
    */
   void printLiteral(string message)
   {
-    const(char)* _message = message.toCString(false);
+    const(char)* _message = message.toCString(No.Alloc);
     g_application_command_line_print_literal(cast(GApplicationCommandLine*)cPtr, _message);
   }
 
@@ -408,7 +408,7 @@ class ApplicationCommandLine : ObjectG
    */
   void printerrLiteral(string message)
   {
-    const(char)* _message = message.toCString(false);
+    const(char)* _message = message.toCString(No.Alloc);
     g_application_command_line_printerr_literal(cast(GApplicationCommandLine*)cPtr, _message);
   }
 

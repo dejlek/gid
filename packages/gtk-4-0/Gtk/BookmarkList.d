@@ -23,9 +23,9 @@ class BookmarkList : ObjectG, ListModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,10 +50,10 @@ class BookmarkList : ObjectG, ListModel
   this(string filename, string attributes)
   {
     GtkBookmarkList* _cretval;
-    const(char)* _filename = filename.toCString(false);
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     _cretval = gtk_bookmark_list_new(_filename, _attributes);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -64,7 +64,7 @@ class BookmarkList : ObjectG, ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_bookmark_list_get_attributes(cast(GtkBookmarkList*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class BookmarkList : ObjectG, ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_bookmark_list_get_filename(cast(GtkBookmarkList*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class BookmarkList : ObjectG, ListModel
    */
   void setAttributes(string attributes)
   {
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     gtk_bookmark_list_set_attributes(cast(GtkBookmarkList*)cPtr, _attributes);
   }
 

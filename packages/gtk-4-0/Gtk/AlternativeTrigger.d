@@ -19,9 +19,9 @@ class AlternativeTrigger : ShortcutTrigger
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -47,8 +47,8 @@ class AlternativeTrigger : ShortcutTrigger
   this(ShortcutTrigger first, ShortcutTrigger second)
   {
     GtkShortcutTrigger* _cretval;
-    _cretval = gtk_alternative_trigger_new(first ? cast(GtkShortcutTrigger*)first.cPtr(true) : null, second ? cast(GtkShortcutTrigger*)second.cPtr(true) : null);
-    this(_cretval, true);
+    _cretval = gtk_alternative_trigger_new(first ? cast(GtkShortcutTrigger*)first.cPtr(Yes.Dup) : null, second ? cast(GtkShortcutTrigger*)second.cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -62,7 +62,7 @@ class AlternativeTrigger : ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_alternative_trigger_get_first(cast(GtkAlternativeTrigger*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ShortcutTrigger(cast(GtkShortcutTrigger*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ShortcutTrigger(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class AlternativeTrigger : ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_alternative_trigger_get_second(cast(GtkAlternativeTrigger*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ShortcutTrigger(cast(GtkShortcutTrigger*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ShortcutTrigger(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 }

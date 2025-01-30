@@ -28,9 +28,9 @@ import Gtk.c.types;
 class ColorDialog : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -51,7 +51,7 @@ class ColorDialog : ObjectG
   {
     GtkColorDialog* _cretval;
     _cretval = gtk_color_dialog_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -73,11 +73,11 @@ class ColorDialog : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gtk_color_dialog_choose_rgba(cast(GtkColorDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(false) : null, initialColor ? cast(GdkRGBA*)initialColor.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gtk_color_dialog_choose_rgba(cast(GtkColorDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, initialColor ? cast(GdkRGBA*)initialColor.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -92,10 +92,10 @@ class ColorDialog : ObjectG
   {
     GdkRGBA* _cretval;
     GError *_err;
-    _cretval = gtk_color_dialog_choose_rgba_finish(cast(GtkColorDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = gtk_color_dialog_choose_rgba_finish(cast(GtkColorDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class ColorDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_color_dialog_get_title(cast(GtkColorDialog*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class ColorDialog : ObjectG
    */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(false);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_color_dialog_set_title(cast(GtkColorDialog*)cPtr, _title);
   }
 

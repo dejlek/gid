@@ -21,14 +21,14 @@ import Gid.gid;
 class TextureDownloader : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -50,8 +50,8 @@ class TextureDownloader : Boxed
   this(Texture texture)
   {
     GdkTextureDownloader* _cretval;
-    _cretval = gdk_texture_downloader_new(texture ? cast(GdkTexture*)texture.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gdk_texture_downloader_new(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -63,7 +63,7 @@ class TextureDownloader : Boxed
   {
     GdkTextureDownloader* _cretval;
     _cretval = gdk_texture_downloader_copy(cast(GdkTextureDownloader*)cPtr);
-    auto _retval = _cretval ? new TextureDownloader(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TextureDownloader(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class TextureDownloader : Boxed
   {
     GdkTexture* _cretval;
     _cretval = gdk_texture_downloader_get_texture(cast(GdkTextureDownloader*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,6 +109,6 @@ class TextureDownloader : Boxed
    */
   void setTexture(Texture texture)
   {
-    gdk_texture_downloader_set_texture(cast(GdkTextureDownloader*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(false) : null);
+    gdk_texture_downloader_set_texture(cast(GdkTextureDownloader*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
   }
 }

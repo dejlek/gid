@@ -34,7 +34,7 @@ template NativeT()
   {
     GskRenderer* _cretval;
     _cretval = gtk_native_get_renderer(cast(GtkNative*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Renderer(cast(GskRenderer*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Renderer(cast(GskRenderer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -46,7 +46,7 @@ template NativeT()
   {
     GdkSurface* _cretval;
     _cretval = gtk_native_get_surface(cast(GtkNative*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

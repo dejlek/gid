@@ -21,9 +21,9 @@ class FontsetSimple : Fontset
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -45,8 +45,8 @@ class FontsetSimple : Fontset
   this(PgLanguage language)
   {
     PangoFontsetSimple* _cretval;
-    _cretval = pango_fontset_simple_new(language ? cast(PangoLanguage*)language.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = pango_fontset_simple_new(language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -57,7 +57,7 @@ class FontsetSimple : Fontset
    */
   void append(Font font)
   {
-    pango_fontset_simple_append(cast(PangoFontsetSimple*)cPtr, font ? cast(PangoFont*)font.cPtr(true) : null);
+    pango_fontset_simple_append(cast(PangoFontsetSimple*)cPtr, font ? cast(PangoFont*)font.cPtr(Yes.Dup) : null);
   }
 
   /**

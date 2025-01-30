@@ -31,9 +31,9 @@ class ContentProvider : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -55,8 +55,8 @@ class ContentProvider : ObjectG
   static ContentProvider newForValue(Value value)
   {
     GdkContentProvider* _cretval;
-    _cretval = gdk_content_provider_new_for_value(value ? cast(GValue*)value.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, true) : null;
+    _cretval = gdk_content_provider_new_for_value(value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class ContentProvider : ObjectG
     _retval = gdk_content_provider_get_value(cast(GdkContentProvider*)cPtr, &_value, &_err);
     if (_err)
       throw new ErrorG(_err);
-    value = new Value(cast(void*)&_value, false);
+    value = new Value(cast(void*)&_value, No.Take);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class ContentProvider : ObjectG
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_provider_ref_formats(cast(GdkContentProvider*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class ContentProvider : ObjectG
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_provider_ref_storable_formats(cast(GdkContentProvider*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -143,12 +143,12 @@ class ContentProvider : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _mimeType = mimeType.toCString(false);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_content_provider_write_mime_type_async(cast(GdkContentProvider*)cPtr, _mimeType, stream ? cast(GOutputStream*)stream.cPtr(false) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gdk_content_provider_write_mime_type_async(cast(GdkContentProvider*)cPtr, _mimeType, stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -163,7 +163,7 @@ class ContentProvider : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_content_provider_write_mime_type_finish(cast(GdkContentProvider*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = gdk_content_provider_write_mime_type_finish(cast(GdkContentProvider*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

@@ -22,9 +22,9 @@ import Gtk.c.types;
 class ConstraintGuide : ObjectG, ConstraintTarget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -47,7 +47,7 @@ class ConstraintGuide : ObjectG, ConstraintTarget
   {
     GtkConstraintGuide* _cretval;
     _cretval = gtk_constraint_guide_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -80,7 +80,7 @@ class ConstraintGuide : ObjectG, ConstraintTarget
   {
     const(char)* _cretval;
     _cretval = gtk_constraint_guide_get_name(cast(GtkConstraintGuide*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class ConstraintGuide : ObjectG, ConstraintTarget
    */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_constraint_guide_set_name(cast(GtkConstraintGuide*)cPtr, _name);
   }
 

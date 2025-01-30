@@ -16,14 +16,14 @@ import Gid.gid;
 class MarkupParseContext : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -41,7 +41,7 @@ class MarkupParseContext : Boxed
     GMarkupParseContext* _cretval;
     GMarkupParseFlags _flags = cast(GMarkupParseFlags)cast(uint)flags;
     _cretval = g_markup_parse_context_new(&parser, _flags, null, null);
-    this(&_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
 
@@ -73,7 +73,7 @@ class MarkupParseContext : Boxed
   {
     const(char)* _cretval;
     _cretval = g_markup_parse_context_get_element(cast(GMarkupParseContext*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class MarkupParseContext : Boxed
   bool parse(string text, ptrdiff_t textLen)
   {
     bool _retval;
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     GError *_err;
     _retval = g_markup_parse_context_parse(cast(GMarkupParseContext*)cPtr, _text, textLen, &_err);
     if (_err)

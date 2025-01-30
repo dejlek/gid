@@ -14,14 +14,14 @@ class AttrInt
 {
   PangoAttrInt cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.AttrInt");
 
     cInstance = *cast(PangoAttrInt*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

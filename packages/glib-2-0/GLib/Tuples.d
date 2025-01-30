@@ -17,14 +17,14 @@ class Tuples
 {
   GTuples cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.Tuples");
 
     cInstance = *cast(GTuples*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

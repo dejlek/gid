@@ -12,14 +12,14 @@ class NativeDialogClass
 {
   GtkNativeDialogClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.NativeDialogClass");
 
     cInstance = *cast(GtkNativeDialogClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

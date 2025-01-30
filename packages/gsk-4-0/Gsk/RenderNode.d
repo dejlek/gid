@@ -24,14 +24,14 @@ class RenderNode
 {
   GskRenderNode* cInstancePtr;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.RenderNode");
 
     cInstancePtr = cast(GskRenderNode*)ptr;
 
-    if (!ownedRef)
+    if (!take)
       gsk_render_node_ref(cInstancePtr);
   }
 
@@ -41,9 +41,9 @@ class RenderNode
   }
 
 
-  void* cPtr(bool addRef = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    if (addRef)
+    if (dup)
       gsk_render_node_ref(cInstancePtr);
 
     return cInstancePtr;
@@ -61,7 +61,7 @@ class RenderNode
    */
   void draw(Context cr)
   {
-    gsk_render_node_draw(cast(GskRenderNode*)cPtr, cr ? cast(cairo_t*)cr.cPtr(false) : null);
+    gsk_render_node_draw(cast(GskRenderNode*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
   }
 
   /**
@@ -74,7 +74,7 @@ class RenderNode
   {
     graphene_rect_t _bounds;
     gsk_render_node_get_bounds(cast(GskRenderNode*)cPtr, &_bounds);
-    bounds = new Rect(cast(void*)&_bounds, false);
+    bounds = new Rect(cast(void*)&_bounds, No.Take);
   }
 
   /**
@@ -102,7 +102,7 @@ class RenderNode
   bool writeToFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = gsk_render_node_write_to_file(cast(GskRenderNode*)cPtr, _filename, &_err);
     if (_err)

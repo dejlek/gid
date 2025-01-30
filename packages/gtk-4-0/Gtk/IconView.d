@@ -55,9 +55,9 @@ import Gtk.c.types;
 class IconView : Widget, CellLayout, Scrollable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -83,7 +83,7 @@ class IconView : Widget, CellLayout, Scrollable
   {
     GtkWidget* _cretval;
     _cretval = gtk_icon_view_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -98,8 +98,8 @@ class IconView : Widget, CellLayout, Scrollable
   static IconView newWithArea(CellArea area)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_icon_view_new_with_area(area ? cast(GtkCellArea*)area.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!IconView(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_icon_view_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!IconView(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -114,8 +114,8 @@ class IconView : Widget, CellLayout, Scrollable
   static IconView newWithModel(TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_icon_view_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!IconView(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_icon_view_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!IconView(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -131,8 +131,8 @@ class IconView : Widget, CellLayout, Scrollable
   Paintable createDragIcon(TreePath path)
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_icon_view_create_drag_icon(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, true) : null;
+    _cretval = gtk_icon_view_create_drag_icon(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class IconView : Widget, CellLayout, Scrollable
    */
   void enableModelDragDest(ContentFormats formats, DragAction actions)
   {
-    gtk_icon_view_enable_model_drag_dest(cast(GtkIconView*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(false) : null, actions);
+    gtk_icon_view_enable_model_drag_dest(cast(GtkIconView*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
   }
 
   /**
@@ -164,7 +164,7 @@ class IconView : Widget, CellLayout, Scrollable
    */
   void enableModelDragSource(ModifierType startButtonMask, ContentFormats formats, DragAction actions)
   {
-    gtk_icon_view_enable_model_drag_source(cast(GtkIconView*)cPtr, startButtonMask, formats ? cast(GdkContentFormats*)formats.cPtr(false) : null, actions);
+    gtk_icon_view_enable_model_drag_source(cast(GtkIconView*)cPtr, startButtonMask, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
   }
 
   /**
@@ -196,8 +196,8 @@ class IconView : Widget, CellLayout, Scrollable
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_icon_view_get_cell_rect(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(false) : null, &_rect);
-    rect = new Rectangle(cast(void*)&_rect, false);
+    _retval = gtk_icon_view_get_cell_rect(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, &_rect);
+    rect = new Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
 
@@ -247,8 +247,8 @@ class IconView : Widget, CellLayout, Scrollable
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
     _retval = gtk_icon_view_get_cursor(cast(GtkIconView*)cPtr, &_path, &_cell);
-    path = new TreePath(cast(void*)_path, true);
-    cell = new CellRenderer(cast(void*)_cell, false);
+    path = new TreePath(cast(void*)_path, Yes.Take);
+    cell = new CellRenderer(cast(void*)_cell, No.Take);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class IconView : Widget, CellLayout, Scrollable
     bool _retval;
     GtkTreePath* _path;
     _retval = gtk_icon_view_get_dest_item_at_pos(cast(GtkIconView*)cPtr, dragX, dragY, &_path, &pos);
-    path = new TreePath(cast(void*)_path, true);
+    path = new TreePath(cast(void*)_path, Yes.Take);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class IconView : Widget, CellLayout, Scrollable
   {
     GtkTreePath* _path;
     gtk_icon_view_get_drag_dest_item(cast(GtkIconView*)cPtr, &_path, &pos);
-    path = new TreePath(cast(void*)_path, true);
+    path = new TreePath(cast(void*)_path, Yes.Take);
   }
 
   /**
@@ -306,8 +306,8 @@ class IconView : Widget, CellLayout, Scrollable
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
     _retval = gtk_icon_view_get_item_at_pos(cast(GtkIconView*)cPtr, x, y, &_path, &_cell);
-    path = new TreePath(cast(void*)_path, true);
-    cell = new CellRenderer(cast(void*)_cell, false);
+    path = new TreePath(cast(void*)_path, Yes.Take);
+    cell = new CellRenderer(cast(void*)_cell, No.Take);
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class IconView : Widget, CellLayout, Scrollable
   int getItemColumn(TreePath path)
   {
     int _retval;
-    _retval = gtk_icon_view_get_item_column(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    _retval = gtk_icon_view_get_item_column(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -367,7 +367,7 @@ class IconView : Widget, CellLayout, Scrollable
   int getItemRow(TreePath path)
   {
     int _retval;
-    _retval = gtk_icon_view_get_item_row(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    _retval = gtk_icon_view_get_item_row(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -421,7 +421,7 @@ class IconView : Widget, CellLayout, Scrollable
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_icon_view_get_model(cast(GtkIconView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -439,7 +439,7 @@ class IconView : Widget, CellLayout, Scrollable
   {
     GtkTreePath* _cretval;
     _cretval = gtk_icon_view_get_path_at_pos(cast(GtkIconView*)cPtr, x, y);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -591,9 +591,9 @@ class IconView : Widget, CellLayout, Scrollable
     GtkTreePath* _path;
     GtkTreeIter _iter;
     _retval = gtk_icon_view_get_tooltip_context(cast(GtkIconView*)cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
-    model = _model ? ObjectG.getDObject!TreeModel(_model, false) : null;
-    path = new TreePath(cast(void*)_path, true);
-    iter = new TreeIter(cast(void*)&_iter, false);
+    model = ObjectG.getDObject!TreeModel(_model, No.Take);
+    path = new TreePath(cast(void*)_path, Yes.Take);
+    iter = new TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -614,8 +614,8 @@ class IconView : Widget, CellLayout, Scrollable
     GtkTreePath* _startPath;
     GtkTreePath* _endPath;
     _retval = gtk_icon_view_get_visible_range(cast(GtkIconView*)cPtr, &_startPath, &_endPath);
-    startPath = new TreePath(cast(void*)_startPath, true);
-    endPath = new TreePath(cast(void*)_endPath, true);
+    startPath = new TreePath(cast(void*)_startPath, Yes.Take);
+    endPath = new TreePath(cast(void*)_endPath, Yes.Take);
     return _retval;
   }
 
@@ -628,7 +628,7 @@ class IconView : Widget, CellLayout, Scrollable
    */
   void itemActivated(TreePath path)
   {
-    gtk_icon_view_item_activated(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    gtk_icon_view_item_activated(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -643,7 +643,7 @@ class IconView : Widget, CellLayout, Scrollable
   bool pathIsSelected(TreePath path)
   {
     bool _retval;
-    _retval = gtk_icon_view_path_is_selected(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    _retval = gtk_icon_view_path_is_selected(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -670,7 +670,7 @@ class IconView : Widget, CellLayout, Scrollable
    */
   void scrollToPath(TreePath path, bool useAlign, float rowAlign, float colAlign)
   {
-    gtk_icon_view_scroll_to_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, useAlign, rowAlign, colAlign);
+    gtk_icon_view_scroll_to_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, useAlign, rowAlign, colAlign);
   }
 
   /**
@@ -693,7 +693,7 @@ class IconView : Widget, CellLayout, Scrollable
    */
   void selectPath(TreePath path)
   {
-    gtk_icon_view_select_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    gtk_icon_view_select_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -710,7 +710,7 @@ class IconView : Widget, CellLayout, Scrollable
     {
       auto _dlg = cast(IconViewForeachFunc*)data;
 
-      (*_dlg)(iconView ? ObjectG.getDObject!IconView(cast(void*)iconView, false) : null, path ? new TreePath(cast(void*)path, false) : null);
+      (*_dlg)(ObjectG.getDObject!IconView(cast(void*)iconView, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null);
     }
 
     auto _func = cast(void*)&func;
@@ -776,7 +776,7 @@ class IconView : Widget, CellLayout, Scrollable
    */
   void setCursor(TreePath path, CellRenderer cell, bool startEditing)
   {
-    gtk_icon_view_set_cursor(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(false) : null, startEditing);
+    gtk_icon_view_set_cursor(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, startEditing);
   }
 
   /**
@@ -789,7 +789,7 @@ class IconView : Widget, CellLayout, Scrollable
    */
   void setDragDestItem(TreePath path, IconViewDropPosition pos)
   {
-    gtk_icon_view_set_drag_dest_item(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, pos);
+    gtk_icon_view_set_drag_dest_item(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, pos);
   }
 
   /**
@@ -873,7 +873,7 @@ class IconView : Widget, CellLayout, Scrollable
    */
   void setModel(TreeModel model)
   {
-    gtk_icon_view_set_model(cast(GtkIconView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_icon_view_set_model(cast(GtkIconView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -976,7 +976,7 @@ class IconView : Widget, CellLayout, Scrollable
    */
   void setTooltipCell(Tooltip tooltip, TreePath path, CellRenderer cell)
   {
-    gtk_icon_view_set_tooltip_cell(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(false) : null, path ? cast(GtkTreePath*)path.cPtr(false) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(false) : null);
+    gtk_icon_view_set_tooltip_cell(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1010,7 +1010,7 @@ class IconView : Widget, CellLayout, Scrollable
    */
   void setTooltipItem(Tooltip tooltip, TreePath path)
   {
-    gtk_icon_view_set_tooltip_item(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(false) : null, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    gtk_icon_view_set_tooltip_item(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1032,7 +1032,7 @@ class IconView : Widget, CellLayout, Scrollable
    */
   void unselectPath(TreePath path)
   {
-    gtk_icon_view_unselect_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    gtk_icon_view_unselect_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**

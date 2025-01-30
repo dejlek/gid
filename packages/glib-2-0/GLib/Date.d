@@ -46,14 +46,14 @@ import Gid.gid;
 class Date : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -137,7 +137,7 @@ class Date : Boxed
   {
     GDate* _cretval;
     _cretval = g_date_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -156,7 +156,7 @@ class Date : Boxed
   {
     GDate* _cretval;
     _cretval = g_date_new_dmy(day, month, year);
-    auto _retval = _cretval ? new Date(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Date(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class Date : Boxed
   {
     GDate* _cretval;
     _cretval = g_date_new_julian(julianDay);
-    auto _retval = _cretval ? new Date(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Date(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Date : Boxed
    */
   void clamp(Date minDate, Date maxDate)
   {
-    g_date_clamp(cast(GDate*)cPtr, minDate ? cast(GDate*)minDate.cPtr(false) : null, maxDate ? cast(GDate*)maxDate.cPtr(false) : null);
+    g_date_clamp(cast(GDate*)cPtr, minDate ? cast(GDate*)minDate.cPtr(No.Dup) : null, maxDate ? cast(GDate*)maxDate.cPtr(No.Dup) : null);
   }
 
   /**
@@ -256,7 +256,7 @@ class Date : Boxed
   int compare(Date rhs)
   {
     int _retval;
-    _retval = g_date_compare(cast(GDate*)cPtr, rhs ? cast(GDate*)rhs.cPtr(false) : null);
+    _retval = g_date_compare(cast(GDate*)cPtr, rhs ? cast(GDate*)rhs.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class Date : Boxed
   {
     GDate* _cretval;
     _cretval = g_date_copy(cast(GDate*)cPtr);
-    auto _retval = _cretval ? new Date(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Date(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class Date : Boxed
   int daysBetween(Date date2)
   {
     int _retval;
-    _retval = g_date_days_between(cast(GDate*)cPtr, date2 ? cast(GDate*)date2.cPtr(false) : null);
+    _retval = g_date_days_between(cast(GDate*)cPtr, date2 ? cast(GDate*)date2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -431,7 +431,7 @@ class Date : Boxed
    */
   void order(Date date2)
   {
-    g_date_order(cast(GDate*)cPtr, date2 ? cast(GDate*)date2.cPtr(false) : null);
+    g_date_order(cast(GDate*)cPtr, date2 ? cast(GDate*)date2.cPtr(No.Dup) : null);
   }
 
   /**
@@ -497,7 +497,7 @@ class Date : Boxed
    */
   void setParse(string str)
   {
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     g_date_set_parse(cast(GDate*)cPtr, _str);
   }
 
@@ -716,9 +716,9 @@ class Date : Boxed
   static size_t strftime(string s, size_t slen, string format, Date date)
   {
     size_t _retval;
-    char* _s = s.toCString(false);
-    const(char)* _format = format.toCString(false);
-    _retval = g_date_strftime(_s, slen, _format, date ? cast(GDate*)date.cPtr(false) : null);
+    char* _s = s.toCString(No.Alloc);
+    const(char)* _format = format.toCString(No.Alloc);
+    _retval = g_date_strftime(_s, slen, _format, date ? cast(GDate*)date.cPtr(No.Dup) : null);
     return _retval;
   }
 

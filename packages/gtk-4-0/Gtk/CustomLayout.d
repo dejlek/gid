@@ -22,9 +22,9 @@ class CustomLayout : LayoutManager
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -59,7 +59,7 @@ class CustomLayout : LayoutManager
     {
       SizeRequestMode _dretval;
 
-      _dretval = _static_requestMode(widget ? ObjectG.getDObject!Widget(cast(void*)widget, false) : null);
+      _dretval = _static_requestMode(ObjectG.getDObject!Widget(cast(void*)widget, No.Take));
       auto _retval = cast(GtkSizeRequestMode)_dretval;
 
       return _retval;
@@ -70,7 +70,7 @@ class CustomLayout : LayoutManager
 
     extern(C) void _measureCallback(GtkWidget* widget, GtkOrientation orientation, int forSize, int* minimum, int* natural, int* minimumBaseline, int* naturalBaseline)
     {
-      _static_measure(widget ? ObjectG.getDObject!Widget(cast(void*)widget, false) : null, orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
+      _static_measure(ObjectG.getDObject!Widget(cast(void*)widget, No.Take), orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
     }
 
     _static_measure = measure;
@@ -78,7 +78,7 @@ class CustomLayout : LayoutManager
 
     extern(C) void _allocateCallback(GtkWidget* widget, int width, int height, int baseline)
     {
-      _static_allocate(widget ? ObjectG.getDObject!Widget(cast(void*)widget, false) : null, width, height, baseline);
+      _static_allocate(ObjectG.getDObject!Widget(cast(void*)widget, No.Take), width, height, baseline);
     }
 
     _static_allocate = allocate;
@@ -87,6 +87,6 @@ class CustomLayout : LayoutManager
     _static_requestMode = null;
     _static_measure = null;
     _static_allocate = null;
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

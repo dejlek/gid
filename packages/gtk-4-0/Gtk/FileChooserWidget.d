@@ -32,9 +32,9 @@ class FileChooserWidget : Widget, FileChooser
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -64,7 +64,7 @@ class FileChooserWidget : Widget, FileChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_file_chooser_widget_new(action);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**

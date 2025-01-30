@@ -18,17 +18,17 @@ class DBusInterfaceInfo : Boxed
 
   this()
   {
-    super(safeMalloc(GDBusInterfaceInfo.sizeof), true);
+    super(safeMalloc(GDBusInterfaceInfo.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -53,13 +53,13 @@ class DBusInterfaceInfo : Boxed
 
   @property string name()
   {
-    return (cast(GDBusInterfaceInfo*)cPtr).name.fromCString(false);
+    return (cast(GDBusInterfaceInfo*)cPtr).name.fromCString(No.Free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GDBusInterfaceInfo*)cPtr).name);
-    (cast(GDBusInterfaceInfo*)cPtr).name = propval.toCString(true);
+    (cast(GDBusInterfaceInfo*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
   /**
@@ -99,7 +99,7 @@ class DBusInterfaceInfo : Boxed
    */
   void generateXml(uint indent, String stringBuilder)
   {
-    g_dbus_interface_info_generate_xml(cast(GDBusInterfaceInfo*)cPtr, indent, stringBuilder ? cast(GString*)stringBuilder.cPtr(false) : null);
+    g_dbus_interface_info_generate_xml(cast(GDBusInterfaceInfo*)cPtr, indent, stringBuilder ? cast(GString*)stringBuilder.cPtr(No.Dup) : null);
   }
 
   /**
@@ -113,9 +113,9 @@ class DBusInterfaceInfo : Boxed
   DBusMethodInfo lookupMethod(string name)
   {
     GDBusMethodInfo* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_dbus_interface_info_lookup_method(cast(GDBusInterfaceInfo*)cPtr, _name);
-    auto _retval = _cretval ? new DBusMethodInfo(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new DBusMethodInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -130,9 +130,9 @@ class DBusInterfaceInfo : Boxed
   DBusPropertyInfo lookupProperty(string name)
   {
     GDBusPropertyInfo* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_dbus_interface_info_lookup_property(cast(GDBusInterfaceInfo*)cPtr, _name);
-    auto _retval = _cretval ? new DBusPropertyInfo(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new DBusPropertyInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -147,9 +147,9 @@ class DBusInterfaceInfo : Boxed
   DBusSignalInfo lookupSignal(string name)
   {
     GDBusSignalInfo* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_dbus_interface_info_lookup_signal(cast(GDBusInterfaceInfo*)cPtr, _name);
-    auto _retval = _cretval ? new DBusSignalInfo(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new DBusSignalInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

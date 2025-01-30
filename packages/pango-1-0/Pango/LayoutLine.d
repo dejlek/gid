@@ -20,17 +20,17 @@ class LayoutLine : Boxed
 
   this()
   {
-    super(safeMalloc(PangoLayoutLine.sizeof), true);
+    super(safeMalloc(PangoLayoutLine.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -45,7 +45,7 @@ class LayoutLine : Boxed
 
   @property Layout layout()
   {
-    return ObjectG.getDObject!Layout((cast(PangoLayoutLine*)cPtr).layout, false);
+    return ObjectG.getDObject!Layout((cast(PangoLayoutLine*)cPtr).layout, No.Take);
   }
 
   @property int startIndex()

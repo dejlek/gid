@@ -69,9 +69,9 @@ import Gtk.c.types;
 class PrintOperation : ObjectG, PrintOperationPreview
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -94,7 +94,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
   {
     GtkPrintOperation* _cretval;
     _cretval = gtk_print_operation_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -128,7 +128,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_operation_get_default_page_setup(cast(GtkPrintOperation*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_operation_get_print_settings(cast(GtkPrintOperation*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
   {
     const(char)* _cretval;
     _cretval = gtk_print_operation_get_status_string(cast(GtkPrintOperation*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
   {
     GtkPrintOperationResult _cretval;
     GError *_err;
-    _cretval = gtk_print_operation_run(cast(GtkPrintOperation*)cPtr, action, parent ? cast(GtkWindow*)parent.cPtr(false) : null, &_err);
+    _cretval = gtk_print_operation_run(cast(GtkPrintOperation*)cPtr, action, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     PrintOperationResult _retval = cast(PrintOperationResult)_cretval;
@@ -366,7 +366,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    */
   void setCustomTabLabel(string label)
   {
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_print_operation_set_custom_tab_label(cast(GtkPrintOperation*)cPtr, _label);
   }
 
@@ -380,7 +380,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    */
   void setDefaultPageSetup(PageSetup defaultPageSetup)
   {
-    gtk_print_operation_set_default_page_setup(cast(GtkPrintOperation*)cPtr, defaultPageSetup ? cast(GtkPageSetup*)defaultPageSetup.cPtr(false) : null);
+    gtk_print_operation_set_default_page_setup(cast(GtkPrintOperation*)cPtr, defaultPageSetup ? cast(GtkPageSetup*)defaultPageSetup.cPtr(No.Dup) : null);
   }
 
   /**
@@ -417,7 +417,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    */
   void setExportFilename(string filename)
   {
-    const(char)* _filename = filename.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
     gtk_print_operation_set_export_filename(cast(GtkPrintOperation*)cPtr, _filename);
   }
 
@@ -445,7 +445,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    */
   void setJobName(string jobName)
   {
-    const(char)* _jobName = jobName.toCString(false);
+    const(char)* _jobName = jobName.toCString(No.Alloc);
     gtk_print_operation_set_job_name(cast(GtkPrintOperation*)cPtr, _jobName);
   }
 
@@ -476,7 +476,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    */
   void setPrintSettings(PrintSettings printSettings)
   {
-    gtk_print_operation_set_print_settings(cast(GtkPrintOperation*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(false) : null);
+    gtk_print_operation_set_print_settings(cast(GtkPrintOperation*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);
   }
 
   /**

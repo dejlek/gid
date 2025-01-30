@@ -82,9 +82,9 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -127,8 +127,8 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
   {
     bool _retval;
     GtkTreeIter _filterIter;
-    _retval = gtk_tree_model_filter_convert_child_iter_to_iter(cast(GtkTreeModelFilter*)cPtr, &_filterIter, childIter ? cast(GtkTreeIter*)childIter.cPtr(false) : null);
-    filterIter = new TreeIter(cast(void*)&_filterIter, false);
+    _retval = gtk_tree_model_filter_convert_child_iter_to_iter(cast(GtkTreeModelFilter*)cPtr, &_filterIter, childIter ? cast(GtkTreeIter*)childIter.cPtr(No.Dup) : null);
+    filterIter = new TreeIter(cast(void*)&_filterIter, No.Take);
     return _retval;
   }
 
@@ -145,8 +145,8 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
   TreePath convertChildPathToPath(TreePath childPath)
   {
     GtkTreePath* _cretval;
-    _cretval = gtk_tree_model_filter_convert_child_path_to_path(cast(GtkTreeModelFilter*)cPtr, childPath ? cast(GtkTreePath*)childPath.cPtr(false) : null);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, true) : null;
+    _cretval = gtk_tree_model_filter_convert_child_path_to_path(cast(GtkTreeModelFilter*)cPtr, childPath ? cast(GtkTreePath*)childPath.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -159,8 +159,8 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
   void convertIterToChildIter(out TreeIter childIter, TreeIter filterIter)
   {
     GtkTreeIter _childIter;
-    gtk_tree_model_filter_convert_iter_to_child_iter(cast(GtkTreeModelFilter*)cPtr, &_childIter, filterIter ? cast(GtkTreeIter*)filterIter.cPtr(false) : null);
-    childIter = new TreeIter(cast(void*)&_childIter, false);
+    gtk_tree_model_filter_convert_iter_to_child_iter(cast(GtkTreeModelFilter*)cPtr, &_childIter, filterIter ? cast(GtkTreeIter*)filterIter.cPtr(No.Dup) : null);
+    childIter = new TreeIter(cast(void*)&_childIter, No.Take);
   }
 
   /**
@@ -175,8 +175,8 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
   TreePath convertPathToChildPath(TreePath filterPath)
   {
     GtkTreePath* _cretval;
-    _cretval = gtk_tree_model_filter_convert_path_to_child_path(cast(GtkTreeModelFilter*)cPtr, filterPath ? cast(GtkTreePath*)filterPath.cPtr(false) : null);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, true) : null;
+    _cretval = gtk_tree_model_filter_convert_path_to_child_path(cast(GtkTreeModelFilter*)cPtr, filterPath ? cast(GtkTreePath*)filterPath.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_model_filter_get_model(cast(GtkTreeModelFilter*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -220,9 +220,9 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
     extern(C) void _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, GValue* value, int column, void* data)
     {
       auto _dlg = cast(TreeModelFilterModifyFunc*)data;
-      auto _value = new Value(value, false);
+      auto _value = new Value(value, No.Take);
 
-      (*_dlg)(model ? ObjectG.getDObject!TreeModel(cast(void*)model, false) : null, iter ? new TreeIter(cast(void*)iter, false) : null, _value, column);
+      (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null, _value, column);
        *value = *cast(GValue*)_value.cPtr;
 
     }
@@ -291,7 +291,7 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
     {
       auto _dlg = cast(TreeModelFilterVisibleFunc*)data;
 
-      bool _retval = (*_dlg)(model ? ObjectG.getDObject!TreeModel(cast(void*)model, false) : null, iter ? new TreeIter(cast(void*)iter, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
 

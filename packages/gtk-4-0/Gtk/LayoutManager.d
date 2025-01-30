@@ -57,9 +57,9 @@ class LayoutManager : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -84,7 +84,7 @@ class LayoutManager : ObjectG
    */
   void allocate(Widget widget, int width, int height, int baseline)
   {
-    gtk_layout_manager_allocate(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, width, height, baseline);
+    gtk_layout_manager_allocate(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, width, height, baseline);
   }
 
   /**
@@ -101,8 +101,8 @@ class LayoutManager : ObjectG
   LayoutChild getLayoutChild(Widget child)
   {
     GtkLayoutChild* _cretval;
-    _cretval = gtk_layout_manager_get_layout_child(cast(GtkLayoutManager*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!LayoutChild(cast(GtkLayoutChild*)_cretval, false) : null;
+    _cretval = gtk_layout_manager_get_layout_child(cast(GtkLayoutManager*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!LayoutChild(cast(GtkLayoutChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class LayoutManager : ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_manager_get_widget(cast(GtkLayoutManager*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -165,6 +165,6 @@ class LayoutManager : ObjectG
    */
   void measure(Widget widget, Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
   {
-    gtk_layout_manager_measure(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
+    gtk_layout_manager_measure(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
   }
 }

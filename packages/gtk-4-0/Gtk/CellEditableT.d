@@ -50,7 +50,7 @@ template CellEditableT()
    */
   override void startEditing(Event event)
   {
-    gtk_cell_editable_start_editing(cast(GtkCellEditable*)cPtr, event ? cast(GdkEvent*)event.cPtr(false) : null);
+    gtk_cell_editable_start_editing(cast(GtkCellEditable*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
   }
 
   /**

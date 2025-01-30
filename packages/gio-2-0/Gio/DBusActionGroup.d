@@ -24,9 +24,9 @@ class DBusActionGroup : ObjectG, ActionGroup, RemoteActionGroup
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -64,10 +64,10 @@ class DBusActionGroup : ObjectG, ActionGroup, RemoteActionGroup
   static DBusActionGroup get(DBusConnection connection, string busName, string objectPath)
   {
     GDBusActionGroup* _cretval;
-    const(char)* _busName = busName.toCString(false);
-    const(char)* _objectPath = objectPath.toCString(false);
-    _cretval = g_dbus_action_group_get(connection ? cast(GDBusConnection*)connection.cPtr(false) : null, _busName, _objectPath);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusActionGroup(cast(GDBusActionGroup*)_cretval, true) : null;
+    const(char)* _busName = busName.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    _cretval = g_dbus_action_group_get(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _busName, _objectPath);
+    auto _retval = ObjectG.getDObject!DBusActionGroup(cast(GDBusActionGroup*)_cretval, Yes.Take);
     return _retval;
   }
 }

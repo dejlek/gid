@@ -36,9 +36,9 @@ class Range : Widget, AccessibleRange, Orientable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -62,7 +62,7 @@ class Range : Widget, AccessibleRange, Orientable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_range_get_adjustment(cast(GtkRange*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class Range : Widget, AccessibleRange, Orientable
   {
     GdkRectangle _rangeRect;
     gtk_range_get_range_rect(cast(GtkRange*)cPtr, &_rangeRect);
-    rangeRect = new Rectangle(cast(void*)&_rangeRect, false);
+    rangeRect = new Rectangle(cast(void*)&_rangeRect, No.Take);
   }
 
   /**
@@ -199,7 +199,7 @@ class Range : Widget, AccessibleRange, Orientable
    */
   void setAdjustment(Adjustment adjustment)
   {
-    gtk_range_set_adjustment(cast(GtkRange*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(false) : null);
+    gtk_range_set_adjustment(cast(GtkRange*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**

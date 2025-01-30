@@ -12,14 +12,14 @@ class ApplicationClass
 {
   GApplicationClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.ApplicationClass");
 
     cInstance = *cast(GApplicationClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

@@ -15,14 +15,14 @@ import Gtk.c.types;
 class ScrollInfo : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -43,7 +43,7 @@ class ScrollInfo : Boxed
   {
     GtkScrollInfo* _cretval;
     _cretval = gtk_scroll_info_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

@@ -24,9 +24,9 @@ class GLTexture : Texture
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -69,8 +69,8 @@ class GLTexture : Texture
     }
 
     GdkTexture* _cretval;
-    _cretval = gdk_gl_texture_new(context ? cast(GdkGLContext*)context.cPtr(false) : null, id, width, height, &_destroyCallback, data);
-    this(_cretval, true);
+    _cretval = gdk_gl_texture_new(context ? cast(GdkGLContext*)context.cPtr(No.Dup) : null, id, width, height, &_destroyCallback, data);
+    this(_cretval, Yes.Take);
   }
 
   /**

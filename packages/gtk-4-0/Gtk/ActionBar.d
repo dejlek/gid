@@ -47,9 +47,9 @@ import Gtk.c.types;
 class ActionBar : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -70,7 +70,7 @@ class ActionBar : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -81,7 +81,7 @@ class ActionBar : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_get_center_widget(cast(GtkActionBar*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class ActionBar : Widget
    */
   void packEnd(Widget child)
   {
-    gtk_action_bar_pack_end(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_action_bar_pack_end(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -116,7 +116,7 @@ class ActionBar : Widget
    */
   void packStart(Widget child)
   {
-    gtk_action_bar_pack_start(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_action_bar_pack_start(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -126,7 +126,7 @@ class ActionBar : Widget
    */
   void remove(Widget child)
   {
-    gtk_action_bar_remove(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_action_bar_remove(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -136,7 +136,7 @@ class ActionBar : Widget
    */
   void setCenterWidget(Widget centerWidget)
   {
-    gtk_action_bar_set_center_widget(cast(GtkActionBar*)cPtr, centerWidget ? cast(GtkWidget*)centerWidget.cPtr(false) : null);
+    gtk_action_bar_set_center_widget(cast(GtkActionBar*)cPtr, centerWidget ? cast(GtkWidget*)centerWidget.cPtr(No.Dup) : null);
   }
 
   /**

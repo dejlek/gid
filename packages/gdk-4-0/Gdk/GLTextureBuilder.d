@@ -24,9 +24,9 @@ import cairo.Region;
 class GLTextureBuilder : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -47,7 +47,7 @@ class GLTextureBuilder : ObjectG
   {
     GdkGLTextureBuilder* _cretval;
     _cretval = gdk_gl_texture_builder_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -79,7 +79,7 @@ class GLTextureBuilder : ObjectG
 
     GdkTexture* _cretval;
     _cretval = gdk_gl_texture_builder_build(cast(GdkGLTextureBuilder*)cPtr, &_destroyCallback, data);
-    auto _retval = _cretval ? ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class GLTextureBuilder : ObjectG
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_texture_builder_get_context(cast(GdkGLTextureBuilder*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class GLTextureBuilder : ObjectG
   {
     cairo_region_t* _cretval;
     _cretval = gdk_gl_texture_builder_get_update_region(cast(GdkGLTextureBuilder*)cPtr);
-    auto _retval = _cretval ? new Region(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Region(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class GLTextureBuilder : ObjectG
   {
     GdkTexture* _cretval;
     _cretval = gdk_gl_texture_builder_get_update_texture(cast(GdkGLTextureBuilder*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class GLTextureBuilder : ObjectG
    */
   void setContext(GLContext context)
   {
-    gdk_gl_texture_builder_set_context(cast(GdkGLTextureBuilder*)cPtr, context ? cast(GdkGLContext*)context.cPtr(false) : null);
+    gdk_gl_texture_builder_set_context(cast(GdkGLTextureBuilder*)cPtr, context ? cast(GdkGLContext*)context.cPtr(No.Dup) : null);
   }
 
   /**
@@ -290,7 +290,7 @@ class GLTextureBuilder : ObjectG
    */
   void setUpdateRegion(Region region)
   {
-    gdk_gl_texture_builder_set_update_region(cast(GdkGLTextureBuilder*)cPtr, region ? cast(cairo_region_t*)region.cPtr(false) : null);
+    gdk_gl_texture_builder_set_update_region(cast(GdkGLTextureBuilder*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -301,7 +301,7 @@ class GLTextureBuilder : ObjectG
    */
   void setUpdateTexture(Texture texture)
   {
-    gdk_gl_texture_builder_set_update_texture(cast(GdkGLTextureBuilder*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(false) : null);
+    gdk_gl_texture_builder_set_update_texture(cast(GdkGLTextureBuilder*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
   }
 
   /**

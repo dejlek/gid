@@ -16,9 +16,9 @@ import Gtk.c.types;
 class GestureZoom : Gesture
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -40,7 +40,7 @@ class GestureZoom : Gesture
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_zoom_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

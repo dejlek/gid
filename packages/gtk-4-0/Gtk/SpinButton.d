@@ -117,9 +117,9 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -149,8 +149,8 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
   this(Adjustment adjustment, double climbRate, uint digits)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_spin_button_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(false) : null, climbRate, digits);
-    this(_cretval, false);
+    _cretval = gtk_spin_button_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null, climbRate, digits);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -175,7 +175,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_spin_button_new_with_range(min, max, step);
-    auto _retval = _cretval ? ObjectG.getDObject!SpinButton(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!SpinButton(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    */
   void configure(Adjustment adjustment, double climbRate, uint digits)
   {
-    gtk_spin_button_configure(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(false) : null, climbRate, digits);
+    gtk_spin_button_configure(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null, climbRate, digits);
   }
 
   /**
@@ -213,7 +213,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_spin_button_get_adjustment(cast(GtkSpinButton*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    */
   void setAdjustment(Adjustment adjustment)
   {
-    gtk_spin_button_set_adjustment(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(false) : null);
+    gtk_spin_button_set_adjustment(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**

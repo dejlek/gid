@@ -56,9 +56,9 @@ class GLContext : DrawContext
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -89,7 +89,7 @@ class GLContext : DrawContext
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_current();
-    auto _retval = _cretval ? ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class GLContext : DrawContext
   {
     GdkDisplay* _cretval;
     _cretval = gdk_gl_context_get_display(cast(GdkGLContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class GLContext : DrawContext
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_shared_context(cast(GdkGLContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class GLContext : DrawContext
   {
     GdkSurface* _cretval;
     _cretval = gdk_gl_context_get_surface(cast(GdkGLContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class GLContext : DrawContext
   bool isShared(GLContext other)
   {
     bool _retval;
-    _retval = gdk_gl_context_is_shared(cast(GdkGLContext*)cPtr, other ? cast(GdkGLContext*)other.cPtr(false) : null);
+    _retval = gdk_gl_context_is_shared(cast(GdkGLContext*)cPtr, other ? cast(GdkGLContext*)other.cPtr(No.Dup) : null);
     return _retval;
   }
 

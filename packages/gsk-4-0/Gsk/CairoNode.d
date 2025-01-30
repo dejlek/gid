@@ -15,12 +15,12 @@ import cairo.Surface;
 class CairoNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.CairoNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -34,8 +34,8 @@ class CairoNode : RenderNode
   this(Rect bounds)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_cairo_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gsk_cairo_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -50,7 +50,7 @@ class CairoNode : RenderNode
   {
     cairo_t* _cretval;
     _cretval = gsk_cairo_node_get_draw_context(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Context(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -62,7 +62,7 @@ class CairoNode : RenderNode
   {
     cairo_surface_t* _cretval;
     _cretval = gsk_cairo_node_get_surface(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

@@ -32,9 +32,9 @@ class OutputStream : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -87,7 +87,7 @@ class OutputStream : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_close(cast(GOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_output_stream_close(cast(GOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -115,11 +115,11 @@ class OutputStream : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_output_stream_close_async(cast(GOutputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_output_stream_close_async(cast(GOutputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -132,7 +132,7 @@ class OutputStream : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_close_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_output_stream_close_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -154,7 +154,7 @@ class OutputStream : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_flush(cast(GOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_output_stream_flush(cast(GOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -180,11 +180,11 @@ class OutputStream : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_output_stream_flush_async(cast(GOutputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_output_stream_flush_async(cast(GOutputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -197,7 +197,7 @@ class OutputStream : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_flush_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_output_stream_flush_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -271,7 +271,7 @@ class OutputStream : ObjectG
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_splice(cast(GOutputStream*)cPtr, source ? cast(GInputStream*)source.cPtr(false) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_output_stream_splice(cast(GOutputStream*)cPtr, source ? cast(GInputStream*)source.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -299,11 +299,11 @@ class OutputStream : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_output_stream_splice_async(cast(GOutputStream*)cPtr, source ? cast(GInputStream*)source.cPtr(false) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_output_stream_splice_async(cast(GOutputStream*)cPtr, source ? cast(GInputStream*)source.cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -319,7 +319,7 @@ class OutputStream : ObjectG
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_splice_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_output_stream_splice_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -356,7 +356,7 @@ class OutputStream : ObjectG
 
     auto _buffer = cast(void*)buffer.ptr;
     GError *_err;
-    _retval = g_output_stream_write(cast(GOutputStream*)cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_output_stream_write(cast(GOutputStream*)cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -394,7 +394,7 @@ class OutputStream : ObjectG
 
     auto _buffer = cast(void*)buffer.ptr;
     GError *_err;
-    _retval = g_output_stream_write_all(cast(GOutputStream*)cPtr, _buffer, _count, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_output_stream_write_all(cast(GOutputStream*)cPtr, _buffer, _count, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -426,7 +426,7 @@ class OutputStream : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     size_t _count;
@@ -435,7 +435,7 @@ class OutputStream : ObjectG
 
     auto _buffer = cast(void*)buffer.ptr;
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_output_stream_write_all_async(cast(GOutputStream*)cPtr, _buffer, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_output_stream_write_all_async(cast(GOutputStream*)cPtr, _buffer, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -457,7 +457,7 @@ class OutputStream : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_write_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, cast(size_t*)&bytesWritten, &_err);
+    _retval = g_output_stream_write_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -505,7 +505,7 @@ class OutputStream : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     size_t _count;
@@ -514,7 +514,7 @@ class OutputStream : ObjectG
 
     auto _buffer = cast(void*)buffer.ptr;
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_output_stream_write_async(cast(GOutputStream*)cPtr, _buffer, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_output_stream_write_async(cast(GOutputStream*)cPtr, _buffer, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -527,7 +527,7 @@ class OutputStream : ObjectG
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_write_bytes_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_output_stream_write_bytes_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -543,7 +543,7 @@ class OutputStream : ObjectG
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_write_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_output_stream_write_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -585,7 +585,7 @@ class OutputStream : ObjectG
 
     auto _vectors = cast(const(GOutputVector)*)vectors.ptr;
     GError *_err;
-    _retval = g_output_stream_writev(cast(GOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_output_stream_writev(cast(GOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -625,7 +625,7 @@ class OutputStream : ObjectG
 
     auto _vectors = cast(GOutputVector*)vectors.ptr;
     GError *_err;
-    _retval = g_output_stream_writev_all(cast(GOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_output_stream_writev_all(cast(GOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -658,7 +658,7 @@ class OutputStream : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     size_t _nVectors;
@@ -667,7 +667,7 @@ class OutputStream : ObjectG
 
     auto _vectors = cast(GOutputVector*)vectors.ptr;
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_output_stream_writev_all_async(cast(GOutputStream*)cPtr, _vectors, _nVectors, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_output_stream_writev_all_async(cast(GOutputStream*)cPtr, _vectors, _nVectors, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -689,7 +689,7 @@ class OutputStream : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_writev_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, cast(size_t*)&bytesWritten, &_err);
+    _retval = g_output_stream_writev_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -733,7 +733,7 @@ class OutputStream : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     size_t _nVectors;
@@ -742,7 +742,7 @@ class OutputStream : ObjectG
 
     auto _vectors = cast(const(GOutputVector)*)vectors.ptr;
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_output_stream_writev_async(cast(GOutputStream*)cPtr, _vectors, _nVectors, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_output_stream_writev_async(cast(GOutputStream*)cPtr, _vectors, _nVectors, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -756,7 +756,7 @@ class OutputStream : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_writev_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, cast(size_t*)&bytesWritten, &_err);
+    _retval = g_output_stream_writev_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

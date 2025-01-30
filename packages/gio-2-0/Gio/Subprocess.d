@@ -71,9 +71,9 @@ class Subprocess : ObjectG, Initable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -102,7 +102,7 @@ class Subprocess : ObjectG, Initable
     GSubprocess* _cretval;
     const(char)*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(false);
+      _tmpargv ~= s.toCString(No.Alloc);
     _tmpargv ~= null;
     const(char*)* _argv = _tmpargv.ptr;
 
@@ -110,7 +110,7 @@ class Subprocess : ObjectG, Initable
     _cretval = g_subprocess_newv(_argv, flags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Subprocess(cast(GSubprocess*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Subprocess(cast(GSubprocess*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -129,15 +129,15 @@ class Subprocess : ObjectG, Initable
   bool communicateUtf8(string stdinBuf, Cancellable cancellable, out string stdoutBuf, out string stderrBuf)
   {
     bool _retval;
-    const(char)* _stdinBuf = stdinBuf.toCString(false);
+    const(char)* _stdinBuf = stdinBuf.toCString(No.Alloc);
     char* _stdoutBuf;
     char* _stderrBuf;
     GError *_err;
-    _retval = g_subprocess_communicate_utf8(cast(GSubprocess*)cPtr, _stdinBuf, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_stdoutBuf, &_stderrBuf, &_err);
+    _retval = g_subprocess_communicate_utf8(cast(GSubprocess*)cPtr, _stdinBuf, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
       throw new ErrorG(_err);
-    stdoutBuf = _stdoutBuf.fromCString(true);
-    stderrBuf = _stderrBuf.fromCString(true);
+    stdoutBuf = _stdoutBuf.fromCString(Yes.Free);
+    stderrBuf = _stderrBuf.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -156,12 +156,12 @@ class Subprocess : ObjectG, Initable
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _stdinBuf = stdinBuf.toCString(false);
+    const(char)* _stdinBuf = stdinBuf.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_subprocess_communicate_utf8_async(cast(GSubprocess*)cPtr, _stdinBuf, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_subprocess_communicate_utf8_async(cast(GSubprocess*)cPtr, _stdinBuf, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -178,11 +178,11 @@ class Subprocess : ObjectG, Initable
     char* _stdoutBuf;
     char* _stderrBuf;
     GError *_err;
-    _retval = g_subprocess_communicate_utf8_finish(cast(GSubprocess*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_stdoutBuf, &_stderrBuf, &_err);
+    _retval = g_subprocess_communicate_utf8_finish(cast(GSubprocess*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_stdoutBuf, &_stderrBuf, &_err);
     if (_err)
       throw new ErrorG(_err);
-    stdoutBuf = _stdoutBuf.fromCString(true);
-    stderrBuf = _stderrBuf.fromCString(true);
+    stdoutBuf = _stdoutBuf.fromCString(Yes.Free);
+    stderrBuf = _stderrBuf.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class Subprocess : ObjectG, Initable
   {
     const(char)* _cretval;
     _cretval = g_subprocess_get_identifier(cast(GSubprocess*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -288,7 +288,7 @@ class Subprocess : ObjectG, Initable
   {
     GInputStream* _cretval;
     _cretval = g_subprocess_get_stderr_pipe(cast(GSubprocess*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class Subprocess : ObjectG, Initable
   {
     GOutputStream* _cretval;
     _cretval = g_subprocess_get_stdin_pipe(cast(GSubprocess*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class Subprocess : ObjectG, Initable
   {
     GInputStream* _cretval;
     _cretval = g_subprocess_get_stdout_pipe(cast(GSubprocess*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -383,7 +383,7 @@ class Subprocess : ObjectG, Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_subprocess_wait(cast(GSubprocess*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_subprocess_wait(cast(GSubprocess*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -403,11 +403,11 @@ class Subprocess : ObjectG, Initable
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_subprocess_wait_async(cast(GSubprocess*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_subprocess_wait_async(cast(GSubprocess*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -421,7 +421,7 @@ class Subprocess : ObjectG, Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_subprocess_wait_check(cast(GSubprocess*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_subprocess_wait_check(cast(GSubprocess*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -441,11 +441,11 @@ class Subprocess : ObjectG, Initable
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_subprocess_wait_check_async(cast(GSubprocess*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_subprocess_wait_check_async(cast(GSubprocess*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -459,7 +459,7 @@ class Subprocess : ObjectG, Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_subprocess_wait_check_finish(cast(GSubprocess*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_subprocess_wait_check_finish(cast(GSubprocess*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -476,7 +476,7 @@ class Subprocess : ObjectG, Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_subprocess_wait_finish(cast(GSubprocess*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_subprocess_wait_finish(cast(GSubprocess*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

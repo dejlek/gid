@@ -12,12 +12,12 @@ import Gsk.c.types;
 class OpacityNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.OpacityNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -31,8 +31,8 @@ class OpacityNode : RenderNode
   this(RenderNode child, float opacity)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_opacity_node_new(child ? cast(GskRenderNode*)child.cPtr(false) : null, opacity);
-    this(_cretval, true);
+    _cretval = gsk_opacity_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, opacity);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -43,7 +43,7 @@ class OpacityNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_opacity_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 

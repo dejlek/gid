@@ -20,9 +20,9 @@ import Gtk.c.types;
 class GestureDrag : GestureSingle
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -43,7 +43,7 @@ class GestureDrag : GestureSingle
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_drag_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

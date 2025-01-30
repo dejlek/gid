@@ -34,14 +34,14 @@ import Gid.gid;
 class DateTime : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -89,8 +89,8 @@ class DateTime : Boxed
   this(TimeZone tz, int year, int month, int day, int hour, int minute, double seconds)
   {
     GDateTime* _cretval;
-    _cretval = g_date_time_new(tz ? cast(GTimeZone*)tz.cPtr(false) : null, year, month, day, hour, minute, seconds);
-    this(_cretval, true);
+    _cretval = g_date_time_new(tz ? cast(GTimeZone*)tz.cPtr(No.Dup) : null, year, month, day, hour, minute, seconds);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -135,9 +135,9 @@ class DateTime : Boxed
   static DateTime newFromIso8601(string text, TimeZone defaultTz)
   {
     GDateTime* _cretval;
-    const(char)* _text = text.toCString(false);
-    _cretval = g_date_time_new_from_iso8601(_text, defaultTz ? cast(GTimeZone*)defaultTz.cPtr(false) : null);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    const(char)* _text = text.toCString(No.Alloc);
+    _cretval = g_date_time_new_from_iso8601(_text, defaultTz ? cast(GTimeZone*)defaultTz.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_timeval_local(tv ? cast(GTimeVal*)tv.cPtr : null);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_timeval_utc(tv ? cast(GTimeVal*)tv.cPtr : null);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_unix_local(t);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_unix_local_usec(usecs);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_unix_utc(t);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_unix_utc_usec(usecs);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -289,7 +289,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_local(year, month, day, hour, minute, seconds);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -308,8 +308,8 @@ class DateTime : Boxed
   static DateTime newNow(TimeZone tz)
   {
     GDateTime* _cretval;
-    _cretval = g_date_time_new_now(tz ? cast(GTimeZone*)tz.cPtr(false) : null);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    _cretval = g_date_time_new_now(tz ? cast(GTimeZone*)tz.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -324,7 +324,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_now_local();
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -338,7 +338,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_now_utc();
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -360,7 +360,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_utc(year, month, day, hour, minute, seconds);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add(cast(GDateTime*)cPtr, timespan);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -391,7 +391,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_days(cast(GDateTime*)cPtr, days);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -412,7 +412,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_full(cast(GDateTime*)cPtr, years, months, days, hours, minutes, seconds);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -428,7 +428,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_hours(cast(GDateTime*)cPtr, hours);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -444,7 +444,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_minutes(cast(GDateTime*)cPtr, minutes);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -464,7 +464,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_months(cast(GDateTime*)cPtr, months);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -480,7 +480,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_seconds(cast(GDateTime*)cPtr, seconds);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -496,7 +496,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_weeks(cast(GDateTime*)cPtr, weeks);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -514,7 +514,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_years(cast(GDateTime*)cPtr, years);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -529,7 +529,7 @@ class DateTime : Boxed
   int compare(DateTime dt2)
   {
     int _retval;
-    _retval = g_date_time_compare(cast(GDateTime*)cPtr, dt2 ? cast(GDateTime*)dt2.cPtr(false) : null);
+    _retval = g_date_time_compare(cast(GDateTime*)cPtr, dt2 ? cast(GDateTime*)dt2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -545,7 +545,7 @@ class DateTime : Boxed
   TimeSpan difference(DateTime begin)
   {
     TimeSpan _retval;
-    _retval = g_date_time_difference(cast(GDateTime*)cPtr, begin ? cast(GDateTime*)begin.cPtr(false) : null);
+    _retval = g_date_time_difference(cast(GDateTime*)cPtr, begin ? cast(GDateTime*)begin.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -560,7 +560,7 @@ class DateTime : Boxed
   bool equal(DateTime dt2)
   {
     bool _retval;
-    _retval = g_date_time_equal(cast(GDateTime*)cPtr, dt2 ? cast(GDateTime*)dt2.cPtr(false) : null);
+    _retval = g_date_time_equal(cast(GDateTime*)cPtr, dt2 ? cast(GDateTime*)dt2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -688,9 +688,9 @@ class DateTime : Boxed
   string format(string format)
   {
     char* _cretval;
-    const(char)* _format = format.toCString(false);
+    const(char)* _format = format.toCString(No.Alloc);
     _cretval = g_date_time_format(cast(GDateTime*)cPtr, _format);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -707,7 +707,7 @@ class DateTime : Boxed
   {
     char* _cretval;
     _cretval = g_date_time_format_iso8601(cast(GDateTime*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -823,7 +823,7 @@ class DateTime : Boxed
   {
     GTimeZone* _cretval;
     _cretval = g_date_time_get_timezone(cast(GDateTime*)cPtr);
-    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -841,7 +841,7 @@ class DateTime : Boxed
   {
     const(char)* _cretval;
     _cretval = g_date_time_get_timezone_abbreviation(cast(GDateTime*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -977,7 +977,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_to_local(cast(GDateTime*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1020,8 +1020,8 @@ class DateTime : Boxed
   DateTime toTimezone(TimeZone tz)
   {
     GDateTime* _cretval;
-    _cretval = g_date_time_to_timezone(cast(GDateTime*)cPtr, tz ? cast(GTimeZone*)tz.cPtr(false) : null);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    _cretval = g_date_time_to_timezone(cast(GDateTime*)cPtr, tz ? cast(GTimeZone*)tz.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1064,7 +1064,7 @@ class DateTime : Boxed
   {
     GDateTime* _cretval;
     _cretval = g_date_time_to_utc(cast(GDateTime*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

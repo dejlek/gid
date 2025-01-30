@@ -62,9 +62,9 @@ class IOStream : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -87,7 +87,7 @@ class IOStream : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_splice_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_io_stream_splice_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -136,7 +136,7 @@ class IOStream : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_close(cast(GIOStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_io_stream_close(cast(GIOStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -164,11 +164,11 @@ class IOStream : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_io_stream_close_async(cast(GIOStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_io_stream_close_async(cast(GIOStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -181,7 +181,7 @@ class IOStream : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_close_finish(cast(GIOStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_io_stream_close_finish(cast(GIOStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -197,7 +197,7 @@ class IOStream : ObjectG
   {
     GInputStream* _cretval;
     _cretval = g_io_stream_get_input_stream(cast(GIOStream*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class IOStream : ObjectG
   {
     GOutputStream* _cretval;
     _cretval = g_io_stream_get_output_stream(cast(GIOStream*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -275,10 +275,10 @@ class IOStream : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_io_stream_splice_async(cast(GIOStream*)cPtr, stream2 ? cast(GIOStream*)stream2.cPtr(false) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_io_stream_splice_async(cast(GIOStream*)cPtr, stream2 ? cast(GIOStream*)stream2.cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 }

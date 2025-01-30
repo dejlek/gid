@@ -32,14 +32,14 @@ import Gid.gid;
 class TimeZone : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -68,9 +68,9 @@ class TimeZone : Boxed
   this(string identifier)
   {
     GTimeZone* _cretval;
-    const(char)* _identifier = identifier.toCString(false);
+    const(char)* _identifier = identifier.toCString(No.Alloc);
     _cretval = g_time_zone_new(_identifier);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -138,9 +138,9 @@ class TimeZone : Boxed
   static TimeZone newIdentifier(string identifier)
   {
     GTimeZone* _cretval;
-    const(char)* _identifier = identifier.toCString(false);
+    const(char)* _identifier = identifier.toCString(No.Alloc);
     _cretval = g_time_zone_new_identifier(_identifier);
-    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class TimeZone : Boxed
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_local();
-    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class TimeZone : Boxed
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_offset(seconds);
-    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class TimeZone : Boxed
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_utc();
-    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class TimeZone : Boxed
   {
     const(char)* _cretval;
     _cretval = g_time_zone_get_abbreviation(cast(GTimeZone*)cPtr, interval);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -286,7 +286,7 @@ class TimeZone : Boxed
   {
     const(char)* _cretval;
     _cretval = g_time_zone_get_identifier(cast(GTimeZone*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

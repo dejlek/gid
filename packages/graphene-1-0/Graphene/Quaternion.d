@@ -20,17 +20,17 @@ class Quaternion : Boxed
 
   this()
   {
-    super(safeMalloc(graphene_quaternion_t.sizeof), true);
+    super(safeMalloc(graphene_quaternion_t.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -52,7 +52,7 @@ class Quaternion : Boxed
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_alloc();
-    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -65,8 +65,8 @@ class Quaternion : Boxed
   void add(Quaternion b, out Quaternion res)
   {
     graphene_quaternion_t _res;
-    graphene_quaternion_add(cast(graphene_quaternion_t*)cPtr, b ? cast(graphene_quaternion_t*)b.cPtr(false) : null, &_res);
-    res = new Quaternion(cast(void*)&_res, false);
+    graphene_quaternion_add(cast(graphene_quaternion_t*)cPtr, b ? cast(graphene_quaternion_t*)b.cPtr(No.Dup) : null, &_res);
+    res = new Quaternion(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -78,7 +78,7 @@ class Quaternion : Boxed
   float dot(Quaternion b)
   {
     float _retval;
-    _retval = graphene_quaternion_dot(cast(graphene_quaternion_t*)cPtr, b ? cast(graphene_quaternion_t*)b.cPtr(false) : null);
+    _retval = graphene_quaternion_dot(cast(graphene_quaternion_t*)cPtr, b ? cast(graphene_quaternion_t*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class Quaternion : Boxed
   bool equal(Quaternion b)
   {
     bool _retval;
-    _retval = graphene_quaternion_equal(cast(graphene_quaternion_t*)cPtr, b ? cast(graphene_quaternion_t*)b.cPtr(false) : null);
+    _retval = graphene_quaternion_equal(cast(graphene_quaternion_t*)cPtr, b ? cast(graphene_quaternion_t*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class Quaternion : Boxed
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init(cast(graphene_quaternion_t*)cPtr, x, y, z, w);
-    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -123,8 +123,8 @@ class Quaternion : Boxed
   Quaternion initFromAngleVec3(float angle, Vec3 axis)
   {
     graphene_quaternion_t* _cretval;
-    _cretval = graphene_quaternion_init_from_angle_vec3(cast(graphene_quaternion_t*)cPtr, angle, axis ? cast(graphene_vec3_t*)axis.cPtr(false) : null);
-    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, false) : null;
+    _cretval = graphene_quaternion_init_from_angle_vec3(cast(graphene_quaternion_t*)cPtr, angle, axis ? cast(graphene_vec3_t*)axis.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class Quaternion : Boxed
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init_from_angles(cast(graphene_quaternion_t*)cPtr, degX, degY, degZ);
-    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -156,8 +156,8 @@ class Quaternion : Boxed
   Quaternion initFromEuler(Euler e)
   {
     graphene_quaternion_t* _cretval;
-    _cretval = graphene_quaternion_init_from_euler(cast(graphene_quaternion_t*)cPtr, e ? cast(graphene_euler_t*)e.cPtr(false) : null);
-    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, false) : null;
+    _cretval = graphene_quaternion_init_from_euler(cast(graphene_quaternion_t*)cPtr, e ? cast(graphene_euler_t*)e.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -171,8 +171,8 @@ class Quaternion : Boxed
   Quaternion initFromMatrix(Matrix m)
   {
     graphene_quaternion_t* _cretval;
-    _cretval = graphene_quaternion_init_from_matrix(cast(graphene_quaternion_t*)cPtr, m ? cast(graphene_matrix_t*)m.cPtr(false) : null);
-    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, false) : null;
+    _cretval = graphene_quaternion_init_from_matrix(cast(graphene_quaternion_t*)cPtr, m ? cast(graphene_matrix_t*)m.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -185,8 +185,8 @@ class Quaternion : Boxed
   Quaternion initFromQuaternion(Quaternion src)
   {
     graphene_quaternion_t* _cretval;
-    _cretval = graphene_quaternion_init_from_quaternion(cast(graphene_quaternion_t*)cPtr, src ? cast(graphene_quaternion_t*)src.cPtr(false) : null);
-    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, false) : null;
+    _cretval = graphene_quaternion_init_from_quaternion(cast(graphene_quaternion_t*)cPtr, src ? cast(graphene_quaternion_t*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class Quaternion : Boxed
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init_from_radians(cast(graphene_quaternion_t*)cPtr, radX, radY, radZ);
-    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -218,8 +218,8 @@ class Quaternion : Boxed
   Quaternion initFromVec4(Vec4 src)
   {
     graphene_quaternion_t* _cretval;
-    _cretval = graphene_quaternion_init_from_vec4(cast(graphene_quaternion_t*)cPtr, src ? cast(graphene_vec4_t*)src.cPtr(false) : null);
-    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, false) : null;
+    _cretval = graphene_quaternion_init_from_vec4(cast(graphene_quaternion_t*)cPtr, src ? cast(graphene_vec4_t*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class Quaternion : Boxed
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init_identity(cast(graphene_quaternion_t*)cPtr);
-    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Quaternion(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class Quaternion : Boxed
   {
     graphene_quaternion_t _res;
     graphene_quaternion_invert(cast(graphene_quaternion_t*)cPtr, &_res);
-    res = new Quaternion(cast(void*)&_res, false);
+    res = new Quaternion(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -259,8 +259,8 @@ class Quaternion : Boxed
   void multiply(Quaternion b, out Quaternion res)
   {
     graphene_quaternion_t _res;
-    graphene_quaternion_multiply(cast(graphene_quaternion_t*)cPtr, b ? cast(graphene_quaternion_t*)b.cPtr(false) : null, &_res);
-    res = new Quaternion(cast(void*)&_res, false);
+    graphene_quaternion_multiply(cast(graphene_quaternion_t*)cPtr, b ? cast(graphene_quaternion_t*)b.cPtr(No.Dup) : null, &_res);
+    res = new Quaternion(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -273,7 +273,7 @@ class Quaternion : Boxed
   {
     graphene_quaternion_t _res;
     graphene_quaternion_normalize(cast(graphene_quaternion_t*)cPtr, &_res);
-    res = new Quaternion(cast(void*)&_res, false);
+    res = new Quaternion(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -287,7 +287,7 @@ class Quaternion : Boxed
   {
     graphene_quaternion_t _res;
     graphene_quaternion_scale(cast(graphene_quaternion_t*)cPtr, factor, &_res);
-    res = new Quaternion(cast(void*)&_res, false);
+    res = new Quaternion(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -303,8 +303,8 @@ class Quaternion : Boxed
   void slerp(Quaternion b, float factor, out Quaternion res)
   {
     graphene_quaternion_t _res;
-    graphene_quaternion_slerp(cast(graphene_quaternion_t*)cPtr, b ? cast(graphene_quaternion_t*)b.cPtr(false) : null, factor, &_res);
-    res = new Quaternion(cast(void*)&_res, false);
+    graphene_quaternion_slerp(cast(graphene_quaternion_t*)cPtr, b ? cast(graphene_quaternion_t*)b.cPtr(No.Dup) : null, factor, &_res);
+    res = new Quaternion(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -317,7 +317,7 @@ class Quaternion : Boxed
   {
     graphene_vec3_t _axis;
     graphene_quaternion_to_angle_vec3(cast(graphene_quaternion_t*)cPtr, cast(float*)&angle, &_axis);
-    axis = new Vec3(cast(void*)&_axis, false);
+    axis = new Vec3(cast(void*)&_axis, No.Take);
   }
 
   /**
@@ -347,7 +347,7 @@ class Quaternion : Boxed
   {
     graphene_matrix_t _m;
     graphene_quaternion_to_matrix(cast(graphene_quaternion_t*)cPtr, &_m);
-    m = new Matrix(cast(void*)&_m, false);
+    m = new Matrix(cast(void*)&_m, No.Take);
   }
 
   /**
@@ -378,6 +378,6 @@ class Quaternion : Boxed
   {
     graphene_vec4_t _res;
     graphene_quaternion_to_vec4(cast(graphene_quaternion_t*)cPtr, &_res);
-    res = new Vec4(cast(void*)&_res, false);
+    res = new Vec4(cast(void*)&_res, No.Take);
   }
 }

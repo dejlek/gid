@@ -37,9 +37,9 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -68,9 +68,9 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
   this(string objectPath)
   {
     GDBusObjectManagerServer* _cretval;
-    const(char)* _objectPath = objectPath.toCString(false);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_dbus_object_manager_server_new(_objectPath);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -86,7 +86,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
    */
   void export_(DBusObjectSkeleton object)
   {
-    g_dbus_object_manager_server_export(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(false) : null);
+    g_dbus_object_manager_server_export(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.Dup) : null);
   }
 
   /**
@@ -99,7 +99,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
    */
   void exportUniquely(DBusObjectSkeleton object)
   {
-    g_dbus_object_manager_server_export_uniquely(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(false) : null);
+    g_dbus_object_manager_server_export_uniquely(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.Dup) : null);
   }
 
   /**
@@ -112,7 +112,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_object_manager_server_get_connection(cast(GDBusObjectManagerServer*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
   bool isExported(DBusObjectSkeleton object)
   {
     bool _retval;
-    _retval = g_dbus_object_manager_server_is_exported(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(false) : null);
+    _retval = g_dbus_object_manager_server_is_exported(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
    */
   void setConnection(DBusConnection connection)
   {
-    g_dbus_object_manager_server_set_connection(cast(GDBusObjectManagerServer*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(false) : null);
+    g_dbus_object_manager_server_set_connection(cast(GDBusObjectManagerServer*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null);
   }
 
   /**
@@ -152,7 +152,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
   bool unexport(string objectPath)
   {
     bool _retval;
-    const(char)* _objectPath = objectPath.toCString(false);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _retval = g_dbus_object_manager_server_unexport(cast(GDBusObjectManagerServer*)cPtr, _objectPath);
     return _retval;
   }

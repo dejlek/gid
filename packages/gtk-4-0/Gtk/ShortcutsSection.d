@@ -42,9 +42,9 @@ class ShortcutsSection : Box
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -68,7 +68,7 @@ class ShortcutsSection : Box
    */
   void addGroup(ShortcutsGroup group)
   {
-    gtk_shortcuts_section_add_group(cast(GtkShortcutsSection*)cPtr, group ? cast(GtkShortcutsGroup*)group.cPtr(false) : null);
+    gtk_shortcuts_section_add_group(cast(GtkShortcutsSection*)cPtr, group ? cast(GtkShortcutsGroup*)group.cPtr(No.Dup) : null);
   }
 
   alias ChangeCurrentPageCallback = bool delegate(int object, ShortcutsSection shortcutsSection);

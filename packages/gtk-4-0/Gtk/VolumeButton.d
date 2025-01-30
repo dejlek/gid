@@ -26,9 +26,9 @@ import Gtk.c.types;
 class VolumeButton : ScaleButton
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -54,6 +54,6 @@ class VolumeButton : ScaleButton
   {
     GtkWidget* _cretval;
     _cretval = gtk_volume_button_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 }

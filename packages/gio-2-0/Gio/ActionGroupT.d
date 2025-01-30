@@ -58,7 +58,7 @@ template ActionGroupT()
    */
   override void actionAdded(string actionName)
   {
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_action_added(cast(GActionGroup*)cPtr, _actionName);
   }
 
@@ -71,7 +71,7 @@ template ActionGroupT()
    */
   override void actionEnabledChanged(string actionName, bool enabled)
   {
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_action_enabled_changed(cast(GActionGroup*)cPtr, _actionName, enabled);
   }
 
@@ -83,7 +83,7 @@ template ActionGroupT()
    */
   override void actionRemoved(string actionName)
   {
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_action_removed(cast(GActionGroup*)cPtr, _actionName);
   }
 
@@ -96,8 +96,8 @@ template ActionGroupT()
    */
   override void actionStateChanged(string actionName, VariantG state)
   {
-    const(char)* _actionName = actionName.toCString(false);
-    g_action_group_action_state_changed(cast(GActionGroup*)cPtr, _actionName, state ? cast(VariantC*)state.cPtr(false) : null);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
+    g_action_group_action_state_changed(cast(GActionGroup*)cPtr, _actionName, state ? cast(VariantC*)state.cPtr(No.Dup) : null);
   }
 
   /**
@@ -133,8 +133,8 @@ template ActionGroupT()
    */
   override void activateAction(string actionName, VariantG parameter)
   {
-    const(char)* _actionName = actionName.toCString(false);
-    g_action_group_activate_action(cast(GActionGroup*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(false) : null);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
+    g_action_group_activate_action(cast(GActionGroup*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -152,8 +152,8 @@ template ActionGroupT()
    */
   override void changeActionState(string actionName, VariantG value)
   {
-    const(char)* _actionName = actionName.toCString(false);
-    g_action_group_change_action_state(cast(GActionGroup*)cPtr, _actionName, value ? cast(VariantC*)value.cPtr(false) : null);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
+    g_action_group_change_action_state(cast(GActionGroup*)cPtr, _actionName, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -167,7 +167,7 @@ template ActionGroupT()
   override bool getActionEnabled(string actionName)
   {
     bool _retval;
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _retval = g_action_group_get_action_enabled(cast(GActionGroup*)cPtr, _actionName);
     return _retval;
   }
@@ -190,9 +190,9 @@ template ActionGroupT()
   override VariantType getActionParameterType(string actionName)
   {
     const(GVariantType)* _cretval;
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_group_get_action_parameter_type(cast(GActionGroup*)cPtr, _actionName);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -210,9 +210,9 @@ template ActionGroupT()
   override VariantG getActionState(string actionName)
   {
     VariantC* _cretval;
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_group_get_action_state(cast(GActionGroup*)cPtr, _actionName);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -238,9 +238,9 @@ template ActionGroupT()
   override VariantG getActionStateHint(string actionName)
   {
     VariantC* _cretval;
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_group_get_action_state_hint(cast(GActionGroup*)cPtr, _actionName);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -265,9 +265,9 @@ template ActionGroupT()
   override VariantType getActionStateType(string actionName)
   {
     const(GVariantType)* _cretval;
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_group_get_action_state_type(cast(GActionGroup*)cPtr, _actionName);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -280,7 +280,7 @@ template ActionGroupT()
   override bool hasAction(string actionName)
   {
     bool _retval;
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _retval = g_action_group_has_action(cast(GActionGroup*)cPtr, _actionName);
     return _retval;
   }
@@ -305,7 +305,7 @@ template ActionGroupT()
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -345,16 +345,16 @@ template ActionGroupT()
   override bool queryAction(string actionName, out bool enabled, out VariantType parameterType, out VariantType stateType, out VariantG stateHint, out VariantG state)
   {
     bool _retval;
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     const(GVariantType)* _parameterType;
     const(GVariantType)* _stateType;
     VariantC* _stateHint;
     VariantC* _state;
     _retval = g_action_group_query_action(cast(GActionGroup*)cPtr, _actionName, cast(bool*)&enabled, &_parameterType, &_stateType, &_stateHint, &_state);
-    parameterType = new VariantType(cast(void*)_parameterType, false);
-    stateType = new VariantType(cast(void*)_stateType, false);
-    stateHint = new VariantG(cast(void*)_stateHint, true);
-    state = new VariantG(cast(void*)_state, true);
+    parameterType = new VariantType(cast(void*)_parameterType, No.Take);
+    stateType = new VariantType(cast(void*)_stateType, No.Take);
+    stateHint = new VariantG(cast(void*)_stateHint, Yes.Take);
+    state = new VariantG(cast(void*)_state, Yes.Take);
     return _retval;
   }
 

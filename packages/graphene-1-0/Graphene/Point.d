@@ -15,17 +15,17 @@ class Point : Boxed
 
   this()
   {
-    super(safeMalloc(graphene_point_t.sizeof), true);
+    super(safeMalloc(graphene_point_t.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -83,7 +83,7 @@ class Point : Boxed
   {
     graphene_point_t* _cretval;
     _cretval = graphene_point_alloc();
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Point(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class Point : Boxed
   float distance(Point b, out float dX, out float dY)
   {
     float _retval;
-    _retval = graphene_point_distance(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(false) : null, cast(float*)&dX, cast(float*)&dY);
+    _retval = graphene_point_distance(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(No.Dup) : null, cast(float*)&dX, cast(float*)&dY);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class Point : Boxed
   bool equal(Point b)
   {
     bool _retval;
-    _retval = graphene_point_equal(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(false) : null);
+    _retval = graphene_point_equal(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class Point : Boxed
   {
     graphene_point_t* _cretval;
     _cretval = graphene_point_init(cast(graphene_point_t*)cPtr, x, y);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -144,8 +144,8 @@ class Point : Boxed
   Point initFromPoint(Point src)
   {
     graphene_point_t* _cretval;
-    _cretval = graphene_point_init_from_point(cast(graphene_point_t*)cPtr, src ? cast(graphene_point_t*)src.cPtr(false) : null);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, false) : null;
+    _cretval = graphene_point_init_from_point(cast(graphene_point_t*)cPtr, src ? cast(graphene_point_t*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -158,8 +158,8 @@ class Point : Boxed
   Point initFromVec2(Vec2 src)
   {
     graphene_point_t* _cretval;
-    _cretval = graphene_point_init_from_vec2(cast(graphene_point_t*)cPtr, src ? cast(graphene_vec2_t*)src.cPtr(false) : null);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, false) : null;
+    _cretval = graphene_point_init_from_vec2(cast(graphene_point_t*)cPtr, src ? cast(graphene_vec2_t*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -175,8 +175,8 @@ class Point : Boxed
   void interpolate(Point b, double factor, out Point res)
   {
     graphene_point_t _res;
-    graphene_point_interpolate(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(false) : null, factor, &_res);
-    res = new Point(cast(void*)&_res, false);
+    graphene_point_interpolate(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(No.Dup) : null, factor, &_res);
+    res = new Point(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -190,7 +190,7 @@ class Point : Boxed
   bool near(Point b, float epsilon)
   {
     bool _retval;
-    _retval = graphene_point_near(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(false) : null, epsilon);
+    _retval = graphene_point_near(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(No.Dup) : null, epsilon);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class Point : Boxed
   {
     graphene_vec2_t _v;
     graphene_point_to_vec2(cast(graphene_point_t*)cPtr, &_v);
-    v = new Vec2(cast(void*)&_v, false);
+    v = new Vec2(cast(void*)&_v, No.Take);
   }
 
   /**
@@ -215,7 +215,7 @@ class Point : Boxed
   {
     const(graphene_point_t)* _cretval;
     _cretval = graphene_point_zero();
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

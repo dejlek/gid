@@ -26,9 +26,9 @@ class NoSelection : ObjectG, ListModel, SectionModel, SelectionModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -54,8 +54,8 @@ class NoSelection : ObjectG, ListModel, SectionModel, SelectionModel
   this(ListModel model)
   {
     GtkNoSelection* _cretval;
-    _cretval = gtk_no_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(true) : null);
-    this(_cretval, true);
+    _cretval = gtk_no_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -66,7 +66,7 @@ class NoSelection : ObjectG, ListModel, SectionModel, SelectionModel
   {
     GListModel* _cretval;
     _cretval = gtk_no_selection_get_model(cast(GtkNoSelection*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -78,6 +78,6 @@ class NoSelection : ObjectG, ListModel, SectionModel, SelectionModel
    */
   void setModel(ListModel model)
   {
-    gtk_no_selection_set_model(cast(GtkNoSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_no_selection_set_model(cast(GtkNoSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 }

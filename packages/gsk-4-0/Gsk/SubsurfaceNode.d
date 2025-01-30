@@ -12,12 +12,12 @@ import Gsk.c.types;
 class SubsurfaceNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.SubsurfaceNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -28,7 +28,7 @@ class SubsurfaceNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_subsurface_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 }

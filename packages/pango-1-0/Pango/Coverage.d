@@ -18,9 +18,9 @@ import Pango.c.types;
 class Coverage : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -43,7 +43,7 @@ class Coverage : ObjectG
   {
     PangoCoverage* _cretval;
     _cretval = pango_coverage_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -65,7 +65,7 @@ class Coverage : ObjectG
 
     auto _bytes = cast(ubyte*)bytes.ptr;
     _cretval = pango_coverage_from_bytes(_bytes, _nBytes);
-    auto _retval = _cretval ? ObjectG.getDObject!Coverage(cast(PangoCoverage*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Coverage(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class Coverage : ObjectG
   {
     PangoCoverage* _cretval;
     _cretval = pango_coverage_copy(cast(PangoCoverage*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Coverage(cast(PangoCoverage*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Coverage(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class Coverage : ObjectG
    */
   void max(Coverage other)
   {
-    pango_coverage_max(cast(PangoCoverage*)cPtr, other ? cast(PangoCoverage*)other.cPtr(false) : null);
+    pango_coverage_max(cast(PangoCoverage*)cPtr, other ? cast(PangoCoverage*)other.cPtr(No.Dup) : null);
   }
 
   /**

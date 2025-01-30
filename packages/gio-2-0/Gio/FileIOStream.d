@@ -38,9 +38,9 @@ class FileIOStream : IOStream, Seekable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -65,7 +65,7 @@ class FileIOStream : IOStream, Seekable
   {
     char* _cretval;
     _cretval = g_file_io_stream_get_etag(cast(GFileIOStream*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -93,12 +93,12 @@ class FileIOStream : IOStream, Seekable
   FileInfo queryInfo(string attributes, Cancellable cancellable)
   {
     GFileInfo* _cretval;
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_io_stream_query_info(cast(GFileIOStream*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_io_stream_query_info(cast(GFileIOStream*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -123,12 +123,12 @@ class FileIOStream : IOStream, Seekable
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_io_stream_query_info_async(cast(GFileIOStream*)cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_io_stream_query_info_async(cast(GFileIOStream*)cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -142,10 +142,10 @@ class FileIOStream : IOStream, Seekable
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_io_stream_query_info_finish(cast(GFileIOStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_file_io_stream_query_info_finish(cast(GFileIOStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 }

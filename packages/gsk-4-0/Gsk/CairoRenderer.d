@@ -14,9 +14,9 @@ import Gsk.c.types;
 class CairoRenderer : Renderer
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -42,6 +42,6 @@ class CairoRenderer : Renderer
   {
     GskRenderer* _cretval;
     _cretval = gsk_cairo_renderer_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

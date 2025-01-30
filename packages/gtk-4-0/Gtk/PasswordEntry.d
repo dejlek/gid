@@ -45,9 +45,9 @@ import Gtk.c.types;
 class PasswordEntry : Widget, Editable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -70,7 +70,7 @@ class PasswordEntry : Widget, Editable
   {
     GtkWidget* _cretval;
     _cretval = gtk_password_entry_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -81,7 +81,7 @@ class PasswordEntry : Widget, Editable
   {
     GMenuModel* _cretval;
     _cretval = gtk_password_entry_get_extra_menu(cast(GtkPasswordEntry*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class PasswordEntry : Widget, Editable
    */
   void setExtraMenu(MenuModel model)
   {
-    gtk_password_entry_set_extra_menu(cast(GtkPasswordEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(false) : null);
+    gtk_password_entry_set_extra_menu(cast(GtkPasswordEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
 
   /**

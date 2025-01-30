@@ -29,9 +29,9 @@ class PrintJob : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -56,9 +56,9 @@ class PrintJob : ObjectG
   this(string title, Printer printer, PrintSettings settings, PageSetup pageSetup)
   {
     GtkPrintJob* _cretval;
-    const(char)* _title = title.toCString(false);
-    _cretval = gtk_print_job_new(_title, printer ? cast(GtkPrinter*)printer.cPtr(false) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(false) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(false) : null);
-    this(_cretval, true);
+    const(char)* _title = title.toCString(No.Alloc);
+    _cretval = gtk_print_job_new(_title, printer ? cast(GtkPrinter*)printer.cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -159,7 +159,7 @@ class PrintJob : ObjectG
   {
     GtkPrinter* _cretval;
     _cretval = gtk_print_job_get_printer(cast(GtkPrintJob*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Printer(cast(GtkPrinter*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Printer(cast(GtkPrinter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class PrintJob : ObjectG
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_job_get_settings(cast(GtkPrintJob*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class PrintJob : ObjectG
     _cretval = gtk_print_job_get_surface(cast(GtkPrintJob*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class PrintJob : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_job_get_title(cast(GtkPrintJob*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class PrintJob : ObjectG
     {
       auto _dlg = cast(PrintJobCompleteFunc*)userData;
 
-      (*_dlg)(printJob ? ObjectG.getDObject!PrintJob(cast(void*)printJob, false) : null, error ? new ErrorG(cast(void*)error, false) : null);
+      (*_dlg)(ObjectG.getDObject!PrintJob(cast(void*)printJob, No.Take), error ? new ErrorG(cast(void*)error, No.Take) : null);
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
@@ -407,7 +407,7 @@ class PrintJob : ObjectG
   bool setSourceFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_print_job_set_source_file(cast(GtkPrintJob*)cPtr, _filename, &_err);
     if (_err)

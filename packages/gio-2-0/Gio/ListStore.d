@@ -22,9 +22,9 @@ class ListStore : ObjectG, ListModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -59,13 +59,13 @@ class ListStore : ObjectG, ListModel
 
     extern(C) bool _equalFuncCallback(const(void)* a, const(void)* b)
     {
-      bool _retval = _static_equalFunc(a ? getDObject!ObjectG(cast(void*)a) : null, b ? getDObject!ObjectG(cast(void*)b) : null);
+      bool _retval = _static_equalFunc(getDObject!ObjectG(cast(void*)a), getDObject!ObjectG(cast(void*)b));
       return _retval;
     }
 
     _static_equalFunc = equalFunc;
     bool _retval;
-    _retval = g_list_store_find_with_equal_func(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(false) : null, &_equalFuncCallback, cast(uint*)&position);
+    _retval = g_list_store_find_with_equal_func(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr : null, &_equalFuncCallback, cast(uint*)&position);
     _static_equalFunc = null;
     return _retval;
   }
@@ -88,13 +88,13 @@ class ListStore : ObjectG, ListModel
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(a ? getDObject!ObjectG(cast(void*)a) : null, b ? getDObject!ObjectG(cast(void*)b) : null);
+      int _retval = _static_compareFunc(getDObject!ObjectG(cast(void*)a), getDObject!ObjectG(cast(void*)b));
       return _retval;
     }
 
     _static_compareFunc = compareFunc;
     uint _retval;
-    _retval = g_list_store_insert_sorted(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(false) : null, &_compareFuncCallback, null);
+    _retval = g_list_store_insert_sorted(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr : null, &_compareFuncCallback, null);
     _static_compareFunc = null;
     return _retval;
   }
@@ -110,7 +110,7 @@ class ListStore : ObjectG, ListModel
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(a ? getDObject!ObjectG(cast(void*)a) : null, b ? getDObject!ObjectG(cast(void*)b) : null);
+      int _retval = _static_compareFunc(getDObject!ObjectG(cast(void*)a), getDObject!ObjectG(cast(void*)b));
       return _retval;
     }
 
@@ -130,7 +130,7 @@ class ListStore : ObjectG, ListModel
   {
     GListStore* _cretval;
     _cretval = g_list_store_new(itemType);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -143,7 +143,7 @@ class ListStore : ObjectG, ListModel
    */
   void append(ObjectG item)
   {
-    g_list_store_append(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(false) : null);
+    g_list_store_append(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
   }
 
   /**
@@ -161,7 +161,7 @@ class ListStore : ObjectG, ListModel
   bool find(ObjectG item, out uint position)
   {
     bool _retval;
-    _retval = g_list_store_find(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(false) : null, cast(uint*)&position);
+    _retval = g_list_store_find(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null, cast(uint*)&position);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class ListStore : ObjectG, ListModel
    */
   void insert(uint position, ObjectG item)
   {
-    g_list_store_insert(cast(GListStore*)cPtr, position, item ? cast(ObjectC*)item.cPtr(false) : null);
+    g_list_store_insert(cast(GListStore*)cPtr, position, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
   }
 
   /**

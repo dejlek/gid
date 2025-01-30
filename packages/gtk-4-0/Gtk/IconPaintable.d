@@ -23,9 +23,9 @@ class IconPaintable : ObjectG, Paintable, SymbolicPaintable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -54,8 +54,8 @@ class IconPaintable : ObjectG, Paintable, SymbolicPaintable
   static IconPaintable newForFile(File file, int size, int scale)
   {
     GtkIconPaintable* _cretval;
-    _cretval = gtk_icon_paintable_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(false) : null, size, scale);
-    auto _retval = _cretval ? ObjectG.getDObject!IconPaintable(cast(GtkIconPaintable*)_cretval, true) : null;
+    _cretval = gtk_icon_paintable_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, size, scale);
+    auto _retval = ObjectG.getDObject!IconPaintable(cast(GtkIconPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class IconPaintable : ObjectG, Paintable, SymbolicPaintable
   {
     GFile* _cretval;
     _cretval = gtk_icon_paintable_get_file(cast(GtkIconPaintable*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class IconPaintable : ObjectG, Paintable, SymbolicPaintable
   {
     const(char)* _cretval;
     _cretval = gtk_icon_paintable_get_icon_name(cast(GtkIconPaintable*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

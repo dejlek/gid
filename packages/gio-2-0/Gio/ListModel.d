@@ -92,7 +92,7 @@ interface ListModel
   T getItem(T)(uint position)
   {
     auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(ObjectG)this).cPtr, position);
-    return gobj ? ObjectG.getDObject!T(gobj, true) : null;
+    return ObjectG.getDObject!T(gobj, Yes.Take);
   }
 
 

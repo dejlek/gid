@@ -102,9 +102,9 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -133,10 +133,10 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
   {
     GDBusObjectManager* _cretval;
     GError *_err;
-    _cretval = g_dbus_object_manager_client_new_finish(res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_dbus_object_manager_client_new_finish(res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusObjectManagerClient(cast(GDBusObjectManager*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!DBusObjectManagerClient(cast(GDBusObjectManager*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -152,10 +152,10 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
   {
     GDBusObjectManager* _cretval;
     GError *_err;
-    _cretval = g_dbus_object_manager_client_new_for_bus_finish(res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_dbus_object_manager_client_new_for_bus_finish(res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusObjectManagerClient(cast(GDBusObjectManager*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!DBusObjectManagerClient(cast(GDBusObjectManager*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -181,22 +181,22 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
     extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
     {
       auto _dlg = cast(DBusProxyTypeFunc*)data;
-      string _objectPath = objectPath.fromCString(false);
-      string _interfaceName = interfaceName.fromCString(false);
+      string _objectPath = objectPath.fromCString(No.Free);
+      string _interfaceName = interfaceName.fromCString(No.Free);
 
-      GType _retval = (*_dlg)(manager ? ObjectG.getDObject!DBusObjectManagerClient(cast(void*)manager, false) : null, _objectPath, _interfaceName);
+      GType _retval = (*_dlg)(ObjectG.getDObject!DBusObjectManagerClient(cast(void*)manager, No.Take), _objectPath, _interfaceName);
       return _retval;
     }
 
     GDBusObjectManager* _cretval;
-    const(char)* _name = name.toCString(false);
-    const(char)* _objectPath = objectPath.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     auto _getProxyTypeFunc = freezeDelegate(cast(void*)&getProxyTypeFunc);
     GError *_err;
-    _cretval = g_dbus_object_manager_client_new_for_bus_sync(busType, flags, _name, _objectPath, &_getProxyTypeFuncCallback, _getProxyTypeFunc, &thawDelegate, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_dbus_object_manager_client_new_for_bus_sync(busType, flags, _name, _objectPath, &_getProxyTypeFuncCallback, _getProxyTypeFunc, &thawDelegate, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusObjectManagerClient(cast(GDBusObjectManager*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!DBusObjectManagerClient(cast(GDBusObjectManager*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -221,22 +221,22 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
     extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
     {
       auto _dlg = cast(DBusProxyTypeFunc*)data;
-      string _objectPath = objectPath.fromCString(false);
-      string _interfaceName = interfaceName.fromCString(false);
+      string _objectPath = objectPath.fromCString(No.Free);
+      string _interfaceName = interfaceName.fromCString(No.Free);
 
-      GType _retval = (*_dlg)(manager ? ObjectG.getDObject!DBusObjectManagerClient(cast(void*)manager, false) : null, _objectPath, _interfaceName);
+      GType _retval = (*_dlg)(ObjectG.getDObject!DBusObjectManagerClient(cast(void*)manager, No.Take), _objectPath, _interfaceName);
       return _retval;
     }
 
     GDBusObjectManager* _cretval;
-    const(char)* _name = name.toCString(false);
-    const(char)* _objectPath = objectPath.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     auto _getProxyTypeFunc = freezeDelegate(cast(void*)&getProxyTypeFunc);
     GError *_err;
-    _cretval = g_dbus_object_manager_client_new_sync(connection ? cast(GDBusConnection*)connection.cPtr(false) : null, flags, _name, _objectPath, &_getProxyTypeFuncCallback, _getProxyTypeFunc, &thawDelegate, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_dbus_object_manager_client_new_sync(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, flags, _name, _objectPath, &_getProxyTypeFuncCallback, _getProxyTypeFunc, &thawDelegate, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusObjectManagerClient(cast(GDBusObjectManager*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!DBusObjectManagerClient(cast(GDBusObjectManager*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_object_manager_client_get_connection(cast(GDBusObjectManagerClient*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -276,7 +276,7 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
   {
     const(char)* _cretval;
     _cretval = g_dbus_object_manager_client_get_name(cast(GDBusObjectManagerClient*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
   {
     char* _cretval;
     _cretval = g_dbus_object_manager_client_get_name_owner(cast(GDBusObjectManagerClient*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
         for (; invalidatedProperties[_leninvalidatedProperties] !is null; _leninvalidatedProperties++)
         break;
       foreach (i; 0 .. _leninvalidatedProperties)
-        _invalidatedProperties ~= invalidatedProperties[i].fromCString(false);
+        _invalidatedProperties ~= invalidatedProperties[i].fromCString(No.Free);
       _dgClosure.dlg(objectProxy, interfaceProxy, changedProperties, _invalidatedProperties, dBusObjectManagerClient);
     }
 

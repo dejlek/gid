@@ -22,9 +22,9 @@ class FontFamily : ObjectG, ListModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -51,9 +51,9 @@ class FontFamily : ObjectG, ListModel
   FontFace getFace(string name)
   {
     PangoFontFace* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = pango_font_family_get_face(cast(PangoFontFamily*)cPtr, _name);
-    auto _retval = _cretval ? ObjectG.getDObject!FontFace(cast(PangoFontFace*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FontFace(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class FontFamily : ObjectG, ListModel
   {
     const(char)* _cretval;
     _cretval = pango_font_family_get_name(cast(PangoFontFamily*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class FontFamily : ObjectG, ListModel
     pango_font_family_list_faces(cast(PangoFontFamily*)cPtr, &_faces, &_nFaces);
     faces.length = _nFaces;
     foreach (i; 0 .. _nFaces)
-      faces[i] = ObjectG.getDObject!FontFace(_faces[i], false);
+      faces[i] = ObjectG.getDObject!FontFace(_faces[i], No.Take);
     safeFree(cast(void*)_faces);
   }
 }

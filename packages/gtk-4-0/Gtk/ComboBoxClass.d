@@ -10,14 +10,14 @@ class ComboBoxClass
 {
   GtkComboBoxClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.ComboBoxClass");
 
     cInstance = *cast(GtkComboBoxClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

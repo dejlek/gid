@@ -152,14 +152,14 @@ import Gio.c.types;
 class Resource : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -187,7 +187,7 @@ class Resource : Boxed
   string[] enumerateChildren(string path, ResourceLookupFlags lookupFlags)
   {
     char** _cretval;
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
     _cretval = g_resource_enumerate_children(cast(GResource*)cPtr, _path, lookupFlags, &_err);
     if (_err)
@@ -201,7 +201,7 @@ class Resource : Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -222,7 +222,7 @@ class Resource : Boxed
   bool getInfo(string path, ResourceLookupFlags lookupFlags, out size_t size, out uint flags)
   {
     bool _retval;
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
     _retval = g_resource_get_info(cast(GResource*)cPtr, _path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
     if (_err)
@@ -243,12 +243,12 @@ class Resource : Boxed
   InputStream openStream(string path, ResourceLookupFlags lookupFlags)
   {
     GInputStream* _cretval;
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
     _cretval = g_resource_open_stream(cast(GResource*)cPtr, _path, lookupFlags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -268,12 +268,12 @@ class Resource : Boxed
   static Resource load(string filename)
   {
     GResource* _cretval;
-    const(char)* _filename = filename.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _cretval = g_resource_load(_filename, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Resource(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Resource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

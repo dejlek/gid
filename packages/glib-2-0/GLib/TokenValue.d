@@ -12,14 +12,14 @@ class TokenValue
 {
   GTokenValue cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.TokenValue");
 
     cInstance = *cast(GTokenValue*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -30,13 +30,13 @@ class TokenValue
 
   @property string vIdentifier()
   {
-    return (cast(GTokenValue*)cPtr).vIdentifier.fromCString(false);
+    return (cast(GTokenValue*)cPtr).vIdentifier.fromCString(No.Free);
   }
 
   @property void vIdentifier(string propval)
   {
     safeFree(cast(void*)(cast(GTokenValue*)cPtr).vIdentifier);
-    (cast(GTokenValue*)cPtr).vIdentifier = propval.toCString(true);
+    (cast(GTokenValue*)cPtr).vIdentifier = propval.toCString(Yes.Alloc);
   }
 
   @property ulong vBinary()
@@ -101,24 +101,24 @@ class TokenValue
 
   @property string vString()
   {
-    return (cast(GTokenValue*)cPtr).vString.fromCString(false);
+    return (cast(GTokenValue*)cPtr).vString.fromCString(No.Free);
   }
 
   @property void vString(string propval)
   {
     safeFree(cast(void*)(cast(GTokenValue*)cPtr).vString);
-    (cast(GTokenValue*)cPtr).vString = propval.toCString(true);
+    (cast(GTokenValue*)cPtr).vString = propval.toCString(Yes.Alloc);
   }
 
   @property string vComment()
   {
-    return (cast(GTokenValue*)cPtr).vComment.fromCString(false);
+    return (cast(GTokenValue*)cPtr).vComment.fromCString(No.Free);
   }
 
   @property void vComment(string propval)
   {
     safeFree(cast(void*)(cast(GTokenValue*)cPtr).vComment);
-    (cast(GTokenValue*)cPtr).vComment = propval.toCString(true);
+    (cast(GTokenValue*)cPtr).vComment = propval.toCString(Yes.Alloc);
   }
 
   @property ubyte vChar()

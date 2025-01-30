@@ -13,14 +13,14 @@ class TreeNode
   GTreeNode* cInstancePtr;
   bool owned;
 
-  this(void* ptr, bool owned = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.TreeNode");
 
     cInstancePtr = cast(GTreeNode*)ptr;
 
-    this.owned = owned;
+    owned = take;
   }
 
   void* cPtr()
@@ -48,7 +48,7 @@ class TreeNode
   {
     GTreeNode* _cretval;
     _cretval = g_tree_node_next(cast(GTreeNode*)cPtr);
-    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -61,7 +61,7 @@ class TreeNode
   {
     GTreeNode* _cretval;
     _cretval = g_tree_node_previous(cast(GTreeNode*)cPtr);
-    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
 

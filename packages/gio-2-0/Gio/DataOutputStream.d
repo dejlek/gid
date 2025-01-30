@@ -22,9 +22,9 @@ class DataOutputStream : FilterOutputStream, Seekable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -48,8 +48,8 @@ class DataOutputStream : FilterOutputStream, Seekable
   this(OutputStream baseStream)
   {
     GDataOutputStream* _cretval;
-    _cretval = g_data_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = g_data_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -75,7 +75,7 @@ class DataOutputStream : FilterOutputStream, Seekable
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_byte(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_output_stream_put_byte(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -92,7 +92,7 @@ class DataOutputStream : FilterOutputStream, Seekable
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_int16(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_output_stream_put_int16(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -109,7 +109,7 @@ class DataOutputStream : FilterOutputStream, Seekable
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_int32(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_output_stream_put_int32(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -126,7 +126,7 @@ class DataOutputStream : FilterOutputStream, Seekable
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_int64(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_output_stream_put_int64(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -142,9 +142,9 @@ class DataOutputStream : FilterOutputStream, Seekable
   bool putString(string str, Cancellable cancellable)
   {
     bool _retval;
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     GError *_err;
-    _retval = g_data_output_stream_put_string(cast(GDataOutputStream*)cPtr, _str, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_output_stream_put_string(cast(GDataOutputStream*)cPtr, _str, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -161,7 +161,7 @@ class DataOutputStream : FilterOutputStream, Seekable
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_uint16(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_output_stream_put_uint16(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -178,7 +178,7 @@ class DataOutputStream : FilterOutputStream, Seekable
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_uint32(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_output_stream_put_uint32(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -195,7 +195,7 @@ class DataOutputStream : FilterOutputStream, Seekable
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_uint64(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_output_stream_put_uint64(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

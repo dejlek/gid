@@ -34,14 +34,14 @@ import Gid.gid;
 class ValueArray : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -83,7 +83,7 @@ class ValueArray : Boxed
   {
     GValueArray* _cretval;
     _cretval = g_value_array_new(nPrealloced);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -98,8 +98,8 @@ class ValueArray : Boxed
   ValueArray append(Value value)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_append(cast(GValueArray*)cPtr, value ? cast(GValue*)value.cPtr(false) : null);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, false) : null;
+    _cretval = g_value_array_append(cast(GValueArray*)cPtr, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class ValueArray : Boxed
   {
     GValueArray* _cretval;
     _cretval = g_value_array_copy(cast(GValueArray*)cPtr);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class ValueArray : Boxed
   {
     GValue* _cretval;
     _cretval = g_value_array_get_nth(cast(GValueArray*)cPtr, index);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -147,8 +147,8 @@ class ValueArray : Boxed
   ValueArray insert(uint index, Value value)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_insert(cast(GValueArray*)cPtr, index, value ? cast(GValue*)value.cPtr(false) : null);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, false) : null;
+    _cretval = g_value_array_insert(cast(GValueArray*)cPtr, index, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -164,8 +164,8 @@ class ValueArray : Boxed
   ValueArray prepend(Value value)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_prepend(cast(GValueArray*)cPtr, value ? cast(GValue*)value.cPtr(false) : null);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, false) : null;
+    _cretval = g_value_array_prepend(cast(GValueArray*)cPtr, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class ValueArray : Boxed
   {
     GValueArray* _cretval;
     _cretval = g_value_array_remove(cast(GValueArray*)cPtr, index);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class ValueArray : Boxed
     GValueArray* _cretval;
     auto _compareFunc = cast(void*)&compareFunc;
     _cretval = g_value_array_sort_with_data(cast(GValueArray*)cPtr, &_compareFuncCallback, _compareFunc);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

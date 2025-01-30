@@ -37,9 +37,9 @@ import Gtk.c.types;
 class CellAreaBox : CellArea, Orientable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -62,7 +62,7 @@ class CellAreaBox : CellArea, Orientable
   {
     GtkCellArea* _cretval;
     _cretval = gtk_cell_area_box_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -89,7 +89,7 @@ class CellAreaBox : CellArea, Orientable
    */
   void packEnd(CellRenderer renderer, bool expand, bool align_, bool fixed)
   {
-    gtk_cell_area_box_pack_end(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, expand, align_, fixed);
+    gtk_cell_area_box_pack_end(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, expand, align_, fixed);
   }
 
   /**
@@ -105,7 +105,7 @@ class CellAreaBox : CellArea, Orientable
    */
   void packStart(CellRenderer renderer, bool expand, bool align_, bool fixed)
   {
-    gtk_cell_area_box_pack_start(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, expand, align_, fixed);
+    gtk_cell_area_box_pack_start(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, expand, align_, fixed);
   }
 
   /**

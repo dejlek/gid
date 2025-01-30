@@ -26,9 +26,9 @@ import Gtk.c.types;
 class BuilderCScope : ObjectG, BuilderScope
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -54,6 +54,6 @@ class BuilderCScope : ObjectG, BuilderScope
   {
     GtkBuilderScope* _cretval;
     _cretval = gtk_builder_cscope_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

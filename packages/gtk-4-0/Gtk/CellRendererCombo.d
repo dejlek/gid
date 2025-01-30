@@ -26,9 +26,9 @@ import Gtk.c.types;
 class CellRendererCombo : CellRendererText
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -55,7 +55,7 @@ class CellRendererCombo : CellRendererText
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_combo_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**

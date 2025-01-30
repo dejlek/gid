@@ -15,14 +15,14 @@ class FlagsClass
 {
   GFlagsClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.FlagsClass");
 
     cInstance = *cast(GFlagsClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

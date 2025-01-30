@@ -79,9 +79,9 @@ class Paned : Widget, AccessibleRange, Orientable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -107,7 +107,7 @@ class Paned : Widget, AccessibleRange, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_new(orientation);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -118,7 +118,7 @@ class Paned : Widget, AccessibleRange, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_end_child(cast(GtkPaned*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class Paned : Widget, AccessibleRange, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_start_child(cast(GtkPaned*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class Paned : Widget, AccessibleRange, Orientable
    */
   void setEndChild(Widget child)
   {
-    gtk_paned_set_end_child(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_paned_set_end_child(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -270,7 +270,7 @@ class Paned : Widget, AccessibleRange, Orientable
    */
   void setStartChild(Widget child)
   {
-    gtk_paned_set_start_child(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_paned_set_start_child(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

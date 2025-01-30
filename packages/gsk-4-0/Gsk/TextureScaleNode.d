@@ -15,12 +15,12 @@ import Gsk.c.types;
 class TextureScaleNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.TextureScaleNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -43,8 +43,8 @@ class TextureScaleNode : RenderNode
   this(Texture texture, Rect bounds, ScalingFilter filter)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_texture_scale_node_new(texture ? cast(GdkTexture*)texture.cPtr(false) : null, bounds ? cast(graphene_rect_t*)bounds.cPtr(false) : null, filter);
-    this(_cretval, true);
+    _cretval = gsk_texture_scale_node_new(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, filter);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -67,7 +67,7 @@ class TextureScaleNode : RenderNode
   {
     GdkTexture* _cretval;
     _cretval = gsk_texture_scale_node_get_texture(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 }

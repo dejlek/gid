@@ -266,9 +266,9 @@ class Settings : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -300,9 +300,9 @@ class Settings : ObjectG
   this(string schemaId)
   {
     GSettings* _cretval;
-    const(char)* _schemaId = schemaId.toCString(false);
+    const(char)* _schemaId = schemaId.toCString(No.Alloc);
     _cretval = g_settings_new(_schemaId);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -333,9 +333,9 @@ class Settings : ObjectG
   static Settings newFull(SettingsSchema schema, SettingsBackend backend, string path)
   {
     GSettings* _cretval;
-    const(char)* _path = path.toCString(false);
-    _cretval = g_settings_new_full(schema ? cast(GSettingsSchema*)schema.cPtr(false) : null, backend ? cast(GSettingsBackend*)backend.cPtr(false) : null, _path);
-    auto _retval = _cretval ? ObjectG.getDObject!Settings(cast(GSettings*)_cretval, true) : null;
+    const(char)* _path = path.toCString(No.Alloc);
+    _cretval = g_settings_new_full(schema ? cast(GSettingsSchema*)schema.cPtr(No.Dup) : null, backend ? cast(GSettingsBackend*)backend.cPtr(No.Dup) : null, _path);
+    auto _retval = ObjectG.getDObject!Settings(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -355,9 +355,9 @@ class Settings : ObjectG
   static Settings newWithBackend(string schemaId, SettingsBackend backend)
   {
     GSettings* _cretval;
-    const(char)* _schemaId = schemaId.toCString(false);
-    _cretval = g_settings_new_with_backend(_schemaId, backend ? cast(GSettingsBackend*)backend.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Settings(cast(GSettings*)_cretval, true) : null;
+    const(char)* _schemaId = schemaId.toCString(No.Alloc);
+    _cretval = g_settings_new_with_backend(_schemaId, backend ? cast(GSettingsBackend*)backend.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Settings(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -375,10 +375,10 @@ class Settings : ObjectG
   static Settings newWithBackendAndPath(string schemaId, SettingsBackend backend, string path)
   {
     GSettings* _cretval;
-    const(char)* _schemaId = schemaId.toCString(false);
-    const(char)* _path = path.toCString(false);
-    _cretval = g_settings_new_with_backend_and_path(_schemaId, backend ? cast(GSettingsBackend*)backend.cPtr(false) : null, _path);
-    auto _retval = _cretval ? ObjectG.getDObject!Settings(cast(GSettings*)_cretval, true) : null;
+    const(char)* _schemaId = schemaId.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.Alloc);
+    _cretval = g_settings_new_with_backend_and_path(_schemaId, backend ? cast(GSettingsBackend*)backend.cPtr(No.Dup) : null, _path);
+    auto _retval = ObjectG.getDObject!Settings(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -401,10 +401,10 @@ class Settings : ObjectG
   static Settings newWithPath(string schemaId, string path)
   {
     GSettings* _cretval;
-    const(char)* _schemaId = schemaId.toCString(false);
-    const(char)* _path = path.toCString(false);
+    const(char)* _schemaId = schemaId.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_settings_new_with_path(_schemaId, _path);
-    auto _retval = _cretval ? ObjectG.getDObject!Settings(cast(GSettings*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Settings(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -429,7 +429,7 @@ class Settings : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(false);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -458,7 +458,7 @@ class Settings : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(false);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -489,8 +489,8 @@ class Settings : ObjectG
    */
   static void unbind(ObjectG object, string property)
   {
-    const(char)* _property = property.toCString(false);
-    g_settings_unbind(object ? cast(ObjectC*)object.cPtr(false) : null, _property);
+    const(char)* _property = property.toCString(No.Alloc);
+    g_settings_unbind(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
   }
 
   /**
@@ -530,9 +530,9 @@ class Settings : ObjectG
    */
   void bind(string key, ObjectG object, string property, SettingsBindFlags flags)
   {
-    const(char)* _key = key.toCString(false);
-    const(char)* _property = property.toCString(false);
-    g_settings_bind(cast(GSettings*)cPtr, _key, object ? cast(ObjectC*)object.cPtr(false) : null, _property, flags);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _property = property.toCString(No.Alloc);
+    g_settings_bind(cast(GSettings*)cPtr, _key, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property, flags);
   }
 
   /**
@@ -558,9 +558,9 @@ class Settings : ObjectG
    */
   void bindWritable(string key, ObjectG object, string property, bool inverted)
   {
-    const(char)* _key = key.toCString(false);
-    const(char)* _property = property.toCString(false);
-    g_settings_bind_writable(cast(GSettings*)cPtr, _key, object ? cast(ObjectC*)object.cPtr(false) : null, _property, inverted);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _property = property.toCString(No.Alloc);
+    g_settings_bind_writable(cast(GSettings*)cPtr, _key, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property, inverted);
   }
 
   /**
@@ -582,9 +582,9 @@ class Settings : ObjectG
   Action createAction(string key)
   {
     GAction* _cretval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_create_action(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? ObjectG.getDObject!Action(cast(GAction*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Action(cast(GAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -610,7 +610,7 @@ class Settings : ObjectG
   bool getBoolean(string key)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_get_boolean(cast(GSettings*)cPtr, _key);
     return _retval;
   }
@@ -630,9 +630,9 @@ class Settings : ObjectG
   Settings getChild(string name)
   {
     GSettings* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_settings_get_child(cast(GSettings*)cPtr, _name);
-    auto _retval = _cretval ? ObjectG.getDObject!Settings(cast(GSettings*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Settings(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -660,9 +660,9 @@ class Settings : ObjectG
   VariantG getDefaultValue(string key)
   {
     VariantC* _cretval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_default_value(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -678,7 +678,7 @@ class Settings : ObjectG
   double getDouble(string key)
   {
     double _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_get_double(cast(GSettings*)cPtr, _key);
     return _retval;
   }
@@ -700,7 +700,7 @@ class Settings : ObjectG
   int getEnum(string key)
   {
     int _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_get_enum(cast(GSettings*)cPtr, _key);
     return _retval;
   }
@@ -722,7 +722,7 @@ class Settings : ObjectG
   uint getFlags(string key)
   {
     uint _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_get_flags(cast(GSettings*)cPtr, _key);
     return _retval;
   }
@@ -751,7 +751,7 @@ class Settings : ObjectG
   int getInt(string key)
   {
     int _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_get_int(cast(GSettings*)cPtr, _key);
     return _retval;
   }
@@ -768,7 +768,7 @@ class Settings : ObjectG
   long getInt64(string key)
   {
     long _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_get_int64(cast(GSettings*)cPtr, _key);
     return _retval;
   }
@@ -808,12 +808,12 @@ class Settings : ObjectG
     {
       auto _dlg = cast(SettingsGetMapping*)userData;
 
-      bool _retval = (*_dlg)(value ? new VariantG(cast(void*)value, false) : null, *result);
+      bool _retval = (*_dlg)(value ? new VariantG(cast(void*)value, No.Take) : null, *result);
       return _retval;
     }
 
     void* _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     auto _mapping = cast(void*)&mapping;
     _retval = g_settings_get_mapped(cast(GSettings*)cPtr, _key, &_mappingCallback, _mapping);
     return _retval;
@@ -830,9 +830,9 @@ class Settings : ObjectG
   VariantG getRange(string key)
   {
     VariantC* _cretval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_range(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -848,9 +848,9 @@ class Settings : ObjectG
   string getString(string key)
   {
     char* _cretval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_string(cast(GSettings*)cPtr, _key);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -867,7 +867,7 @@ class Settings : ObjectG
   string[] getStrv(string key)
   {
     char** _cretval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_strv(cast(GSettings*)cPtr, _key);
     string[] _retval;
 
@@ -878,7 +878,7 @@ class Settings : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -896,7 +896,7 @@ class Settings : ObjectG
   uint getUint(string key)
   {
     uint _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_get_uint(cast(GSettings*)cPtr, _key);
     return _retval;
   }
@@ -914,7 +914,7 @@ class Settings : ObjectG
   ulong getUint64(string key)
   {
     ulong _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_get_uint64(cast(GSettings*)cPtr, _key);
     return _retval;
   }
@@ -940,9 +940,9 @@ class Settings : ObjectG
   VariantG getUserValue(string key)
   {
     VariantC* _cretval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_user_value(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -957,9 +957,9 @@ class Settings : ObjectG
   VariantG getValue(string key)
   {
     VariantC* _cretval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_value(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -972,7 +972,7 @@ class Settings : ObjectG
   bool isWritable(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = g_settings_is_writable(cast(GSettings*)cPtr, _name);
     return _retval;
   }
@@ -1002,7 +1002,7 @@ class Settings : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -1032,7 +1032,7 @@ class Settings : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -1050,8 +1050,8 @@ class Settings : ObjectG
   bool rangeCheck(string key, VariantG value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
-    _retval = g_settings_range_check(cast(GSettings*)cPtr, _key, value ? cast(VariantC*)value.cPtr(false) : null);
+    const(char)* _key = key.toCString(No.Alloc);
+    _retval = g_settings_range_check(cast(GSettings*)cPtr, _key, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1065,7 +1065,7 @@ class Settings : ObjectG
    */
   void reset(string key)
   {
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     g_settings_reset(cast(GSettings*)cPtr, _key);
   }
 
@@ -1095,7 +1095,7 @@ class Settings : ObjectG
   bool setBoolean(string key, bool value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_set_boolean(cast(GSettings*)cPtr, _key, value);
     return _retval;
   }
@@ -1114,7 +1114,7 @@ class Settings : ObjectG
   bool setDouble(string key, double value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_set_double(cast(GSettings*)cPtr, _key, value);
     return _retval;
   }
@@ -1136,7 +1136,7 @@ class Settings : ObjectG
   bool setEnum(string key, int value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_set_enum(cast(GSettings*)cPtr, _key, value);
     return _retval;
   }
@@ -1159,7 +1159,7 @@ class Settings : ObjectG
   bool setFlags(string key, uint value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_set_flags(cast(GSettings*)cPtr, _key, value);
     return _retval;
   }
@@ -1178,7 +1178,7 @@ class Settings : ObjectG
   bool setInt(string key, int value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_set_int(cast(GSettings*)cPtr, _key, value);
     return _retval;
   }
@@ -1197,7 +1197,7 @@ class Settings : ObjectG
   bool setInt64(string key, long value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_set_int64(cast(GSettings*)cPtr, _key, value);
     return _retval;
   }
@@ -1216,8 +1216,8 @@ class Settings : ObjectG
   bool setString(string key, string value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
-    const(char)* _value = value.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     _retval = g_settings_set_string(cast(GSettings*)cPtr, _key, _value);
     return _retval;
   }
@@ -1237,10 +1237,10 @@ class Settings : ObjectG
   bool setStrv(string key, string[] value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     char*[] _tmpvalue;
     foreach (s; value)
-      _tmpvalue ~= s.toCString(false);
+      _tmpvalue ~= s.toCString(No.Alloc);
     _tmpvalue ~= null;
     const(char*)* _value = _tmpvalue.ptr;
     _retval = g_settings_set_strv(cast(GSettings*)cPtr, _key, _value);
@@ -1262,7 +1262,7 @@ class Settings : ObjectG
   bool setUint(string key, uint value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_set_uint(cast(GSettings*)cPtr, _key, value);
     return _retval;
   }
@@ -1282,7 +1282,7 @@ class Settings : ObjectG
   bool setUint64(string key, ulong value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_settings_set_uint64(cast(GSettings*)cPtr, _key, value);
     return _retval;
   }
@@ -1302,8 +1302,8 @@ class Settings : ObjectG
   bool setValue(string key, VariantG value)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
-    _retval = g_settings_set_value(cast(GSettings*)cPtr, _key, value ? cast(VariantC*)value.cPtr(false) : null);
+    const(char)* _key = key.toCString(No.Alloc);
+    _retval = g_settings_set_value(cast(GSettings*)cPtr, _key, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 

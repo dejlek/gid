@@ -12,14 +12,14 @@ class FileAttributeInfo
 {
   GFileAttributeInfo cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.FileAttributeInfo");
 
     cInstance = *cast(GFileAttributeInfo*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -30,13 +30,13 @@ class FileAttributeInfo
 
   @property string name()
   {
-    return (cast(GFileAttributeInfo*)cPtr).name.fromCString(false);
+    return (cast(GFileAttributeInfo*)cPtr).name.fromCString(No.Free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GFileAttributeInfo*)cPtr).name);
-    (cast(GFileAttributeInfo*)cPtr).name = propval.toCString(true);
+    (cast(GFileAttributeInfo*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
   @property FileAttributeType type()

@@ -32,9 +32,9 @@ class ContentSerializer : ObjectG, AsyncResult
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -58,7 +58,7 @@ class ContentSerializer : ObjectG, AsyncResult
   {
     GCancellable* _cretval;
     _cretval = gdk_content_serializer_get_cancellable(cast(GdkContentSerializer*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Cancellable(cast(GCancellable*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Cancellable(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class ContentSerializer : ObjectG, AsyncResult
   {
     const(char)* _cretval;
     _cretval = gdk_content_serializer_get_mime_type(cast(GdkContentSerializer*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class ContentSerializer : ObjectG, AsyncResult
   {
     GOutputStream* _cretval;
     _cretval = gdk_content_serializer_get_output_stream(cast(GdkContentSerializer*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class ContentSerializer : ObjectG, AsyncResult
   {
     const(GValue)* _cretval;
     _cretval = gdk_content_serializer_get_value(cast(GdkContentSerializer*)cPtr);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

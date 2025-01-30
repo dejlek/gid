@@ -35,10 +35,10 @@ template DBusObjectManagerT()
   override DBusInterface getInterface(string objectPath, string interfaceName)
   {
     GDBusInterface* _cretval;
-    const(char)* _objectPath = objectPath.toCString(false);
-    const(char)* _interfaceName = interfaceName.toCString(false);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     _cretval = g_dbus_object_manager_get_interface(cast(GDBusObjectManager*)cPtr, _objectPath, _interfaceName);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusInterface(cast(GDBusInterface*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!DBusInterface(cast(GDBusInterface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -52,9 +52,9 @@ template DBusObjectManagerT()
   override DBusObject getObject(string objectPath)
   {
     GDBusObject* _cretval;
-    const(char)* _objectPath = objectPath.toCString(false);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_dbus_object_manager_get_object(cast(GDBusObjectManager*)cPtr, _objectPath);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusObject(cast(GDBusObject*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!DBusObject(cast(GDBusObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -66,7 +66,7 @@ template DBusObjectManagerT()
   {
     const(char)* _cretval;
     _cretval = g_dbus_object_manager_get_object_path(cast(GDBusObjectManager*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

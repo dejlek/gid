@@ -17,9 +17,9 @@ class KeyvalTrigger : ShortcutTrigger
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -44,7 +44,7 @@ class KeyvalTrigger : ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_keyval_trigger_new(keyval, modifiers);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

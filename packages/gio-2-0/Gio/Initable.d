@@ -69,10 +69,10 @@ interface Initable
     GParameter* _parameters = _tmpparameters.ptr;
 
     GError *_err;
-    _cretval = g_initable_newv(objectType, _nParameters, _parameters, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_initable_newv(objectType, _nParameters, _parameters, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 

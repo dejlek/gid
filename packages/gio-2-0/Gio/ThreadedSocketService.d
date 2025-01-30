@@ -31,9 +31,9 @@ class ThreadedSocketService : SocketService
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -58,7 +58,7 @@ class ThreadedSocketService : SocketService
   {
     GSocketService* _cretval;
     _cretval = g_threaded_socket_service_new(maxThreads);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

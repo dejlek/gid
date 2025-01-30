@@ -15,14 +15,14 @@ import Gid.gid;
 class Tree : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -92,7 +92,7 @@ class Tree : Boxed
     {
       auto _dlg = cast(TraverseNodeFunc*)data;
 
-      bool _retval = (*_dlg)(node ? new TreeNode(cast(void*)node, false) : null);
+      bool _retval = (*_dlg)(node ? new TreeNode(cast(void*)node, No.Take) : null);
       return _retval;
     }
 
@@ -149,7 +149,7 @@ class Tree : Boxed
   {
     GTreeNode* _cretval;
     _cretval = g_tree_insert_node(cast(GTree*)cPtr, key, value);
-    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class Tree : Boxed
   {
     GTreeNode* _cretval;
     _cretval = g_tree_lookup_node(cast(GTree*)cPtr, key);
-    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class Tree : Boxed
   {
     GTreeNode* _cretval;
     _cretval = g_tree_lower_bound(cast(GTree*)cPtr, key);
-    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class Tree : Boxed
   {
     GTreeNode* _cretval;
     _cretval = g_tree_node_first(cast(GTree*)cPtr);
-    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class Tree : Boxed
   {
     GTreeNode* _cretval;
     _cretval = g_tree_node_last(cast(GTree*)cPtr);
-    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class Tree : Boxed
   {
     GTreeNode* _cretval;
     _cretval = g_tree_replace_node(cast(GTree*)cPtr, key, value);
-    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -389,7 +389,7 @@ class Tree : Boxed
   {
     GTreeNode* _cretval;
     _cretval = g_tree_upper_bound(cast(GTree*)cPtr, key);
-    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
 }

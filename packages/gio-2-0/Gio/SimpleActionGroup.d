@@ -21,9 +21,9 @@ import Gio.c.types;
 class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -47,7 +47,7 @@ class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
   {
     GSimpleActionGroup* _cretval;
     _cretval = g_simple_action_group_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -85,7 +85,7 @@ class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
    */
   void insert(Action action)
   {
-    g_simple_action_group_insert(cast(GSimpleActionGroup*)cPtr, action ? cast(GAction*)(cast(ObjectG)action).cPtr(false) : null);
+    g_simple_action_group_insert(cast(GSimpleActionGroup*)cPtr, action ? cast(GAction*)(cast(ObjectG)action).cPtr(No.Dup) : null);
   }
 
   /**
@@ -100,9 +100,9 @@ class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
   Action lookup(string actionName)
   {
     GAction* _cretval;
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_simple_action_group_lookup(cast(GSimpleActionGroup*)cPtr, _actionName);
-    auto _retval = _cretval ? ObjectG.getDObject!Action(cast(GAction*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Action(cast(GAction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
    */
   void remove(string actionName)
   {
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     g_simple_action_group_remove(cast(GSimpleActionGroup*)cPtr, _actionName);
   }
 }

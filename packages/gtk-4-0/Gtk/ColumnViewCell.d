@@ -28,9 +28,9 @@ class ColumnViewCell : ListItem
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,7 +52,7 @@ class ColumnViewCell : ListItem
   {
     GtkWidget* _cretval;
     _cretval = gtk_column_view_cell_get_child(cast(GtkColumnViewCell*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class ColumnViewCell : ListItem
   {
     ObjectC* _cretval;
     _cretval = gtk_column_view_cell_get_item(cast(GtkColumnViewCell*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class ColumnViewCell : ListItem
    */
   override void setChild(Widget child)
   {
-    gtk_column_view_cell_set_child(cast(GtkColumnViewCell*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_column_view_cell_set_child(cast(GtkColumnViewCell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

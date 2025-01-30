@@ -18,12 +18,12 @@ import Pango.GlyphString;
 class TextNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.TextNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -40,8 +40,8 @@ class TextNode : RenderNode
   this(Font font, GlyphString glyphs, RGBA color, Point offset)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_text_node_new(font ? cast(PangoFont*)font.cPtr(false) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(false) : null, color ? cast(GdkRGBA*)color.cPtr(false) : null, offset ? cast(graphene_point_t*)offset.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gsk_text_node_new(font ? cast(PangoFont*)font.cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, color ? cast(GdkRGBA*)color.cPtr(No.Dup) : null, offset ? cast(graphene_point_t*)offset.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -52,7 +52,7 @@ class TextNode : RenderNode
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_text_node_get_color(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -64,7 +64,7 @@ class TextNode : RenderNode
   {
     PangoFont* _cretval;
     _cretval = gsk_text_node_get_font(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Font(cast(PangoFont*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Font(cast(PangoFont*)_cretval, No.Take);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class TextNode : RenderNode
     {
       _retval = new GlyphInfo[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new GlyphInfo(cast(void*)&_cretval[i], false);
+        _retval[i] = new GlyphInfo(cast(void*)&_cretval[i], No.Take);
     }
     return _retval;
   }
@@ -107,7 +107,7 @@ class TextNode : RenderNode
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_text_node_get_offset(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

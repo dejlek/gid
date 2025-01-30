@@ -15,14 +15,14 @@ import Pango.c.types;
 class PgLanguage : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -57,7 +57,7 @@ class PgLanguage : Boxed
   {
     const(char)* _cretval;
     _cretval = pango_language_get_sample_string(cast(PangoLanguage*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class PgLanguage : Boxed
   bool matches(string rangeList)
   {
     bool _retval;
-    const(char)* _rangeList = rangeList.toCString(false);
+    const(char)* _rangeList = rangeList.toCString(No.Alloc);
     _retval = pango_language_matches(cast(PangoLanguage*)cPtr, _rangeList);
     return _retval;
   }
@@ -153,7 +153,7 @@ class PgLanguage : Boxed
   {
     const(char)* _cretval;
     _cretval = pango_language_to_string(cast(PangoLanguage*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -174,9 +174,9 @@ class PgLanguage : Boxed
   static PgLanguage fromString(string language)
   {
     PangoLanguage* _cretval;
-    const(char)* _language = language.toCString(false);
+    const(char)* _language = language.toCString(No.Alloc);
     _cretval = pango_language_from_string(_language);
-    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class PgLanguage : Boxed
   {
     PangoLanguage* _cretval;
     _cretval = pango_language_get_default();
-    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class PgLanguage : Boxed
         break;
       _retval = new PgLanguage[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new PgLanguage(cast(void*)_cretval[i], false);
+        _retval[i] = new PgLanguage(cast(void*)_cretval[i], No.Take);
     }
     return _retval;
   }

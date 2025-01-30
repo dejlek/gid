@@ -32,9 +32,9 @@ import Gtk.c.types;
 class TextTagTable : ObjectG, Buildable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -58,7 +58,7 @@ class TextTagTable : ObjectG, Buildable
   {
     GtkTextTagTable* _cretval;
     _cretval = gtk_text_tag_table_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -73,7 +73,7 @@ class TextTagTable : ObjectG, Buildable
   bool add(TextTag tag)
   {
     bool _retval;
-    _retval = gtk_text_tag_table_add(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(false) : null);
+    _retval = gtk_text_tag_table_add(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class TextTagTable : ObjectG, Buildable
     {
       auto _dlg = cast(TextTagTableForeach*)data;
 
-      (*_dlg)(tag ? ObjectG.getDObject!TextTag(cast(void*)tag, false) : null);
+      (*_dlg)(ObjectG.getDObject!TextTag(cast(void*)tag, No.Take));
     }
 
     auto _func = cast(void*)&func;
@@ -117,9 +117,9 @@ class TextTagTable : ObjectG, Buildable
   TextTag lookup(string name)
   {
     GtkTextTag* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_text_tag_table_lookup(cast(GtkTextTagTable*)cPtr, _name);
-    auto _retval = _cretval ? ObjectG.getDObject!TextTag(cast(GtkTextTag*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TextTag(cast(GtkTextTag*)_cretval, No.Take);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class TextTagTable : ObjectG, Buildable
    */
   void remove(TextTag tag)
   {
-    gtk_text_tag_table_remove(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(false) : null);
+    gtk_text_tag_table_remove(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
   }
 
   /**

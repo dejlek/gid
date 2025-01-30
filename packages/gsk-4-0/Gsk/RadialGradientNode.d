@@ -15,12 +15,12 @@ import Gsk.c.types;
 class RadialGradientNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.RadialGradientNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -52,8 +52,8 @@ class RadialGradientNode : RenderNode
     foreach (obj; colorStops)
       _tmpcolorStops ~= obj.cInstance;
     const(GskColorStop)* _colorStops = _tmpcolorStops.ptr;
-    _cretval = gsk_radial_gradient_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(false) : null, center ? cast(graphene_point_t*)center.cPtr(false) : null, hradius, vradius, start, end, _colorStops, _nColorStops);
-    this(_cretval, true);
+    _cretval = gsk_radial_gradient_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, center ? cast(graphene_point_t*)center.cPtr(No.Dup) : null, hradius, vradius, start, end, _colorStops, _nColorStops);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -64,7 +64,7 @@ class RadialGradientNode : RenderNode
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_radial_gradient_node_get_center(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class RadialGradientNode : RenderNode
     {
       _retval = new ColorStop[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new ColorStop(cast(void*)&_cretval[i], false);
+        _retval[i] = new ColorStop(cast(void*)&_cretval[i], No.Take);
     }
     return _retval;
   }

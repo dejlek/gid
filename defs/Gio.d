@@ -125,7 +125,7 @@
   T getItem(T)(uint position)
   {
     auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(ObjectG)this).cPtr, position);
-    return gobj ? ObjectG.getDObject!T(gobj, true) : null;
+    return ObjectG.getDObject!T(gobj, Yes.Take);
   }
 
 //# Disable ListStore.findWithEqualFuncFull with unnecessary additional user_data
@@ -158,13 +158,13 @@
 
     extern(C) bool _equalFuncCallback(const(void)* a, const(void)* b)
     {
-      bool _retval = _static_equalFunc(a ? getDObject!ObjectG(cast(void*)a) : null, b ? getDObject!ObjectG(cast(void*)b) : null);
+      bool _retval = _static_equalFunc(getDObject!ObjectG(cast(void*)a), getDObject!ObjectG(cast(void*)b));
       return _retval;
     }
 
     _static_equalFunc = equalFunc;
     bool _retval;
-    _retval = g_list_store_find_with_equal_func(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(false) : null, &_equalFuncCallback, cast(uint*)&position);
+    _retval = g_list_store_find_with_equal_func(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr : null, &_equalFuncCallback, cast(uint*)&position);
     _static_equalFunc = null;
     return _retval;
   }
@@ -187,13 +187,13 @@
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(a ? getDObject!ObjectG(cast(void*)a) : null, b ? getDObject!ObjectG(cast(void*)b) : null);
+      int _retval = _static_compareFunc(getDObject!ObjectG(cast(void*)a), getDObject!ObjectG(cast(void*)b));
       return _retval;
     }
 
     _static_compareFunc = compareFunc;
     uint _retval;
-    _retval = g_list_store_insert_sorted(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(false) : null, &_compareFuncCallback, null);
+    _retval = g_list_store_insert_sorted(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr : null, &_compareFuncCallback, null);
     _static_compareFunc = null;
     return _retval;
   }
@@ -209,7 +209,7 @@
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(a ? getDObject!ObjectG(cast(void*)a) : null, b ? getDObject!ObjectG(cast(void*)b) : null);
+      int _retval = _static_compareFunc(getDObject!ObjectG(cast(void*)a), getDObject!ObjectG(cast(void*)b));
       return _retval;
     }
 

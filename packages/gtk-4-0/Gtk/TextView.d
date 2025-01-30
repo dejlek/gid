@@ -57,9 +57,9 @@ import Pango.TabArray;
 class TextView : Widget, AccessibleText, Scrollable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -87,7 +87,7 @@ class TextView : Widget, AccessibleText, Scrollable
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_view_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -103,8 +103,8 @@ class TextView : Widget, AccessibleText, Scrollable
   static TextView newWithBuffer(TextBuffer buffer)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_text_view_new_with_buffer(buffer ? cast(GtkTextBuffer*)buffer.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!TextView(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_text_view_new_with_buffer(buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!TextView(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class TextView : Widget, AccessibleText, Scrollable
    */
   void addChildAtAnchor(Widget child, TextChildAnchor anchor)
   {
-    gtk_text_view_add_child_at_anchor(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(false) : null);
+    gtk_text_view_add_child_at_anchor(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -134,7 +134,7 @@ class TextView : Widget, AccessibleText, Scrollable
    */
   void addOverlay(Widget child, int xpos, int ypos)
   {
-    gtk_text_view_add_overlay(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, xpos, ypos);
+    gtk_text_view_add_overlay(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, xpos, ypos);
   }
 
   /**
@@ -153,7 +153,7 @@ class TextView : Widget, AccessibleText, Scrollable
   bool backwardDisplayLine(TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_backward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null);
+    _retval = gtk_text_view_backward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class TextView : Widget, AccessibleText, Scrollable
   bool backwardDisplayLineStart(TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_backward_display_line_start(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null);
+    _retval = gtk_text_view_backward_display_line_start(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class TextView : Widget, AccessibleText, Scrollable
   bool forwardDisplayLine(TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_forward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null);
+    _retval = gtk_text_view_forward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class TextView : Widget, AccessibleText, Scrollable
   bool forwardDisplayLineEnd(TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_forward_display_line_end(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null);
+    _retval = gtk_text_view_forward_display_line_end(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class TextView : Widget, AccessibleText, Scrollable
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_view_get_buffer(cast(GtkTextView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TextBuffer(cast(GtkTextBuffer*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TextBuffer(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -295,9 +295,9 @@ class TextView : Widget, AccessibleText, Scrollable
   {
     GdkRectangle _strong;
     GdkRectangle _weak;
-    gtk_text_view_get_cursor_locations(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, &_strong, &_weak);
-    strong = new Rectangle(cast(void*)&_strong, false);
-    weak = new Rectangle(cast(void*)&_weak, false);
+    gtk_text_view_get_cursor_locations(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, &_strong, &_weak);
+    strong = new Rectangle(cast(void*)&_strong, No.Take);
+    weak = new Rectangle(cast(void*)&_weak, No.Take);
   }
 
   /**
@@ -332,7 +332,7 @@ class TextView : Widget, AccessibleText, Scrollable
   {
     GMenuModel* _cretval;
     _cretval = gtk_text_view_get_extra_menu(cast(GtkTextView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -349,7 +349,7 @@ class TextView : Widget, AccessibleText, Scrollable
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_view_get_gutter(cast(GtkTextView*)cPtr, win);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -407,7 +407,7 @@ class TextView : Widget, AccessibleText, Scrollable
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_view_get_iter_at_location(cast(GtkTextView*)cPtr, &_iter, x, y);
-    iter = new TextIter(cast(void*)&_iter, false);
+    iter = new TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ class TextView : Widget, AccessibleText, Scrollable
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_view_get_iter_at_position(cast(GtkTextView*)cPtr, &_iter, cast(int*)&trailing, x, y);
-    iter = new TextIter(cast(void*)&_iter, false);
+    iter = new TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -451,8 +451,8 @@ class TextView : Widget, AccessibleText, Scrollable
   void getIterLocation(TextIter iter, out Rectangle location)
   {
     GdkRectangle _location;
-    gtk_text_view_get_iter_location(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, &_location);
-    location = new Rectangle(cast(void*)&_location, false);
+    gtk_text_view_get_iter_location(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, &_location);
+    location = new Rectangle(cast(void*)&_location, No.Take);
   }
 
   /**
@@ -496,7 +496,7 @@ class TextView : Widget, AccessibleText, Scrollable
   {
     GtkTextIter _targetIter;
     gtk_text_view_get_line_at_y(cast(GtkTextView*)cPtr, &_targetIter, y, cast(int*)&lineTop);
-    targetIter = new TextIter(cast(void*)&_targetIter, false);
+    targetIter = new TextIter(cast(void*)&_targetIter, No.Take);
   }
 
   /**
@@ -511,7 +511,7 @@ class TextView : Widget, AccessibleText, Scrollable
    */
   void getLineYrange(TextIter iter, out int y, out int height)
   {
-    gtk_text_view_get_line_yrange(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, cast(int*)&y, cast(int*)&height);
+    gtk_text_view_get_line_yrange(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, cast(int*)&y, cast(int*)&height);
   }
 
   /**
@@ -524,7 +524,7 @@ class TextView : Widget, AccessibleText, Scrollable
   {
     PangoContext* _cretval;
     _cretval = gtk_text_view_get_ltr_context(cast(GtkTextView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Context(cast(PangoContext*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -610,7 +610,7 @@ class TextView : Widget, AccessibleText, Scrollable
   {
     PangoContext* _cretval;
     _cretval = gtk_text_view_get_rtl_context(cast(GtkTextView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Context(cast(PangoContext*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -627,7 +627,7 @@ class TextView : Widget, AccessibleText, Scrollable
   {
     PangoTabArray* _cretval;
     _cretval = gtk_text_view_get_tabs(cast(GtkTextView*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -654,7 +654,7 @@ class TextView : Widget, AccessibleText, Scrollable
   {
     GdkRectangle _visibleRect;
     gtk_text_view_get_visible_rect(cast(GtkTextView*)cPtr, &_visibleRect);
-    visibleRect = new Rectangle(cast(void*)&_visibleRect, false);
+    visibleRect = new Rectangle(cast(void*)&_visibleRect, No.Take);
   }
 
   /**
@@ -701,7 +701,7 @@ class TextView : Widget, AccessibleText, Scrollable
   bool imContextFilterKeypress(Event event)
   {
     bool _retval;
-    _retval = gtk_text_view_im_context_filter_keypress(cast(GtkTextView*)cPtr, event ? cast(GdkEvent*)event.cPtr(false) : null);
+    _retval = gtk_text_view_im_context_filter_keypress(cast(GtkTextView*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -715,7 +715,7 @@ class TextView : Widget, AccessibleText, Scrollable
   bool moveMarkOnscreen(TextMark mark)
   {
     bool _retval;
-    _retval = gtk_text_view_move_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(false) : null);
+    _retval = gtk_text_view_move_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -729,7 +729,7 @@ class TextView : Widget, AccessibleText, Scrollable
    */
   void moveOverlay(Widget child, int xpos, int ypos)
   {
-    gtk_text_view_move_overlay(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, xpos, ypos);
+    gtk_text_view_move_overlay(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, xpos, ypos);
   }
 
   /**
@@ -752,7 +752,7 @@ class TextView : Widget, AccessibleText, Scrollable
   bool moveVisually(TextIter iter, int count)
   {
     bool _retval;
-    _retval = gtk_text_view_move_visually(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, count);
+    _retval = gtk_text_view_move_visually(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, count);
     return _retval;
   }
 
@@ -775,7 +775,7 @@ class TextView : Widget, AccessibleText, Scrollable
    */
   void remove(Widget child)
   {
-    gtk_text_view_remove(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_text_view_remove(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -809,7 +809,7 @@ class TextView : Widget, AccessibleText, Scrollable
    */
   void scrollMarkOnscreen(TextMark mark)
   {
-    gtk_text_view_scroll_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(false) : null);
+    gtk_text_view_scroll_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
   }
 
   /**
@@ -838,7 +838,7 @@ class TextView : Widget, AccessibleText, Scrollable
   bool scrollToIter(TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign)
   {
     bool _retval;
-    _retval = gtk_text_view_scroll_to_iter(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, withinMargin, useAlign, xalign, yalign);
+    _retval = gtk_text_view_scroll_to_iter(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
     return _retval;
   }
 
@@ -860,7 +860,7 @@ class TextView : Widget, AccessibleText, Scrollable
    */
   void scrollToMark(TextMark mark, double withinMargin, bool useAlign, double xalign, double yalign)
   {
-    gtk_text_view_scroll_to_mark(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(false) : null, withinMargin, useAlign, xalign, yalign);
+    gtk_text_view_scroll_to_mark(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
   }
 
   /**
@@ -902,7 +902,7 @@ class TextView : Widget, AccessibleText, Scrollable
    */
   void setBuffer(TextBuffer buffer)
   {
-    gtk_text_view_set_buffer(cast(GtkTextView*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(false) : null);
+    gtk_text_view_set_buffer(cast(GtkTextView*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -940,7 +940,7 @@ class TextView : Widget, AccessibleText, Scrollable
    */
   void setExtraMenu(MenuModel model)
   {
-    gtk_text_view_set_extra_menu(cast(GtkTextView*)cPtr, model ? cast(GMenuModel*)model.cPtr(false) : null);
+    gtk_text_view_set_extra_menu(cast(GtkTextView*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
 
   /**
@@ -953,7 +953,7 @@ class TextView : Widget, AccessibleText, Scrollable
    */
   void setGutter(TextWindowType win, Widget widget)
   {
-    gtk_text_view_set_gutter(cast(GtkTextView*)cPtr, win, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_text_view_set_gutter(cast(GtkTextView*)cPtr, win, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1092,7 +1092,7 @@ class TextView : Widget, AccessibleText, Scrollable
    */
   void setTabs(TabArray tabs)
   {
-    gtk_text_view_set_tabs(cast(GtkTextView*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(false) : null);
+    gtk_text_view_set_tabs(cast(GtkTextView*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1128,7 +1128,7 @@ class TextView : Widget, AccessibleText, Scrollable
   bool startsDisplayLine(TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_starts_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null);
+    _retval = gtk_text_view_starts_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 

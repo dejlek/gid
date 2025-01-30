@@ -59,9 +59,9 @@ class CellRenderer : InitiallyUnowned
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -91,8 +91,8 @@ class CellRenderer : InitiallyUnowned
   bool activate(Event event, Widget widget, string path, Rectangle backgroundArea, Rectangle cellArea, CellRendererState flags)
   {
     bool _retval;
-    const(char)* _path = path.toCString(false);
-    _retval = gtk_cell_renderer_activate(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, _path, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(false) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, flags);
+    const(char)* _path = path.toCString(No.Alloc);
+    _retval = gtk_cell_renderer_activate(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _path, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, flags);
     return _retval;
   }
 
@@ -109,8 +109,8 @@ class CellRenderer : InitiallyUnowned
   void getAlignedArea(Widget widget, CellRendererState flags, Rectangle cellArea, out Rectangle alignedArea)
   {
     GdkRectangle _alignedArea;
-    gtk_cell_renderer_get_aligned_area(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, flags, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, &_alignedArea);
-    alignedArea = new Rectangle(cast(void*)&_alignedArea, false);
+    gtk_cell_renderer_get_aligned_area(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, flags, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, &_alignedArea);
+    alignedArea = new Rectangle(cast(void*)&_alignedArea, No.Take);
   }
 
   /**
@@ -177,7 +177,7 @@ class CellRenderer : InitiallyUnowned
    */
   void getPreferredHeight(Widget widget, out int minimumSize, out int naturalSize)
   {
-    gtk_cell_renderer_get_preferred_height(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
+    gtk_cell_renderer_get_preferred_height(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
   }
 
   /**
@@ -191,7 +191,7 @@ class CellRenderer : InitiallyUnowned
    */
   void getPreferredHeightForWidth(Widget widget, int width, out int minimumHeight, out int naturalHeight)
   {
-    gtk_cell_renderer_get_preferred_height_for_width(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+    gtk_cell_renderer_get_preferred_height_for_width(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
 
   /**
@@ -206,9 +206,9 @@ class CellRenderer : InitiallyUnowned
   {
     GtkRequisition _minimumSize;
     GtkRequisition _naturalSize;
-    gtk_cell_renderer_get_preferred_size(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, &_minimumSize, &_naturalSize);
-    minimumSize = new Requisition(cast(void*)&_minimumSize, false);
-    naturalSize = new Requisition(cast(void*)&_naturalSize, false);
+    gtk_cell_renderer_get_preferred_size(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, &_minimumSize, &_naturalSize);
+    minimumSize = new Requisition(cast(void*)&_minimumSize, No.Take);
+    naturalSize = new Requisition(cast(void*)&_naturalSize, No.Take);
   }
 
   /**
@@ -220,7 +220,7 @@ class CellRenderer : InitiallyUnowned
    */
   void getPreferredWidth(Widget widget, out int minimumSize, out int naturalSize)
   {
-    gtk_cell_renderer_get_preferred_width(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
+    gtk_cell_renderer_get_preferred_width(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
   }
 
   /**
@@ -234,7 +234,7 @@ class CellRenderer : InitiallyUnowned
    */
   void getPreferredWidthForHeight(Widget widget, int height, out int minimumWidth, out int naturalWidth)
   {
-    gtk_cell_renderer_get_preferred_width_for_height(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+    gtk_cell_renderer_get_preferred_width_for_height(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
 
   /**
@@ -273,7 +273,7 @@ class CellRenderer : InitiallyUnowned
   StateFlags getState(Widget widget, CellRendererState cellState)
   {
     GtkStateFlags _cretval;
-    _cretval = gtk_cell_renderer_get_state(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, cellState);
+    _cretval = gtk_cell_renderer_get_state(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cellState);
     StateFlags _retval = cast(StateFlags)_cretval;
     return _retval;
   }
@@ -391,7 +391,7 @@ class CellRenderer : InitiallyUnowned
    */
   void snapshot(Snapshot snapshot, Widget widget, Rectangle backgroundArea, Rectangle cellArea, CellRendererState flags)
   {
-    gtk_cell_renderer_snapshot(cast(GtkCellRenderer*)cPtr, snapshot ? cast(GtkSnapshot*)snapshot.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(false) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, flags);
+    gtk_cell_renderer_snapshot(cast(GtkCellRenderer*)cPtr, snapshot ? cast(GtkSnapshot*)snapshot.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, flags);
   }
 
   /**
@@ -411,9 +411,9 @@ class CellRenderer : InitiallyUnowned
   CellEditable startEditing(Event event, Widget widget, string path, Rectangle backgroundArea, Rectangle cellArea, CellRendererState flags)
   {
     GtkCellEditable* _cretval;
-    const(char)* _path = path.toCString(false);
-    _cretval = gtk_cell_renderer_start_editing(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, _path, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(false) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, flags);
-    auto _retval = _cretval ? ObjectG.getDObject!CellEditable(cast(GtkCellEditable*)_cretval, false) : null;
+    const(char)* _path = path.toCString(No.Alloc);
+    _cretval = gtk_cell_renderer_start_editing(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _path, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, flags);
+    auto _retval = ObjectG.getDObject!CellEditable(cast(GtkCellEditable*)_cretval, No.Take);
     return _retval;
   }
 

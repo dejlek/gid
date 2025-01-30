@@ -135,14 +135,14 @@ class Expression
 {
   GtkExpression* cInstancePtr;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.Expression");
 
     cInstancePtr = cast(GtkExpression*)ptr;
 
-    if (!ownedRef)
+    if (!take)
       gtk_expression_ref(cInstancePtr);
   }
 
@@ -152,9 +152,9 @@ class Expression
   }
 
 
-  void* cPtr(bool addRef = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    if (addRef)
+    if (dup)
       gtk_expression_ref(cInstancePtr);
 
     return cInstancePtr;
@@ -180,9 +180,9 @@ class Expression
   ExpressionWatch bind(ObjectG target, string property, ObjectG this_)
   {
     GtkExpressionWatch* _cretval;
-    const(char)* _property = property.toCString(false);
-    _cretval = gtk_expression_bind(cast(GtkExpression*)cPtr, target ? cast(ObjectC*)target.cPtr(false) : null, _property, this_ ? cast(ObjectC*)this_.cPtr(false) : null);
-    auto _retval = _cretval ? new ExpressionWatch(cast(void*)_cretval, false) : null;
+    const(char)* _property = property.toCString(No.Alloc);
+    _cretval = gtk_expression_bind(cast(GtkExpression*)cPtr, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _property, this_ ? cast(ObjectC*)this_.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new ExpressionWatch(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class Expression
   bool evaluate(ObjectG this_, Value value)
   {
     bool _retval;
-    _retval = gtk_expression_evaluate(cast(GtkExpression*)cPtr, this_ ? cast(ObjectC*)this_.cPtr(false) : null, value ? cast(GValue*)value.cPtr(false) : null);
+    _retval = gtk_expression_evaluate(cast(GtkExpression*)cPtr, this_ ? cast(ObjectC*)this_.cPtr(No.Dup) : null, value ? cast(GValue*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -263,8 +263,8 @@ class Expression
 
     GtkExpressionWatch* _cretval;
     auto _notify = freezeDelegate(cast(void*)&notify);
-    _cretval = gtk_expression_watch(cast(GtkExpression*)cPtr, this_ ? cast(ObjectC*)this_.cPtr(false) : null, &_notifyCallback, _notify, &thawDelegate);
-    auto _retval = _cretval ? new ExpressionWatch(cast(void*)_cretval, false) : null;
+    _cretval = gtk_expression_watch(cast(GtkExpression*)cPtr, this_ ? cast(ObjectC*)this_.cPtr(No.Dup) : null, &_notifyCallback, _notify, &thawDelegate);
+    auto _retval = _cretval ? new ExpressionWatch(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

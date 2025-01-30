@@ -85,11 +85,11 @@ template MountT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_mount_eject(cast(GMount*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_mount_eject(cast(GMount*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -105,7 +105,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_eject_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_mount_eject_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -129,11 +129,11 @@ template MountT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_mount_eject_with_operation(cast(GMount*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_mount_eject_with_operation(cast(GMount*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -147,7 +147,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_eject_with_operation_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_mount_eject_with_operation_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -165,7 +165,7 @@ template MountT()
   {
     GFile* _cretval;
     _cretval = g_mount_get_default_location(cast(GMount*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ template MountT()
   {
     GDrive* _cretval;
     _cretval = g_mount_get_drive(cast(GMount*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Drive(cast(GDrive*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Drive(cast(GDrive*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ template MountT()
   {
     GIcon* _cretval;
     _cretval = g_mount_get_icon(cast(GMount*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Icon(cast(GIcon*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ template MountT()
   {
     char* _cretval;
     _cretval = g_mount_get_name(cast(GMount*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ template MountT()
   {
     GFile* _cretval;
     _cretval = g_mount_get_root(cast(GMount*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ template MountT()
   {
     const(char)* _cretval;
     _cretval = g_mount_get_sort_key(cast(GMount*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -250,7 +250,7 @@ template MountT()
   {
     GIcon* _cretval;
     _cretval = g_mount_get_symbolic_icon(cast(GMount*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Icon(cast(GIcon*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ template MountT()
   {
     char* _cretval;
     _cretval = g_mount_get_uuid(cast(GMount*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ template MountT()
   {
     GVolume* _cretval;
     _cretval = g_mount_get_volume(cast(GMount*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Volume(cast(GVolume*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Volume(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -311,11 +311,11 @@ template MountT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_mount_guess_content_type(cast(GMount*)cPtr, forceRescan, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_mount_guess_content_type(cast(GMount*)cPtr, forceRescan, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -333,7 +333,7 @@ template MountT()
   {
     char** _cretval;
     GError *_err;
-    _cretval = g_mount_guess_content_type_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_mount_guess_content_type_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     string[] _retval;
@@ -345,7 +345,7 @@ template MountT()
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -370,7 +370,7 @@ template MountT()
   {
     char** _cretval;
     GError *_err;
-    _cretval = g_mount_guess_content_type_sync(cast(GMount*)cPtr, forceRescan, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_mount_guess_content_type_sync(cast(GMount*)cPtr, forceRescan, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     string[] _retval;
@@ -382,7 +382,7 @@ template MountT()
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -440,11 +440,11 @@ template MountT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_mount_remount(cast(GMount*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_mount_remount(cast(GMount*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -458,7 +458,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_remount_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_mount_remount_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -493,11 +493,11 @@ template MountT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_mount_unmount(cast(GMount*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_mount_unmount(cast(GMount*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -513,7 +513,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_unmount_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_mount_unmount_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -537,11 +537,11 @@ template MountT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_mount_unmount_with_operation(cast(GMount*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_mount_unmount_with_operation(cast(GMount*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -555,7 +555,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_unmount_with_operation_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_mount_unmount_with_operation_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

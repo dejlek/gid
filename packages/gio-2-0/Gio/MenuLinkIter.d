@@ -18,9 +18,9 @@ class MenuLinkIter : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -42,7 +42,7 @@ class MenuLinkIter : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_menu_link_iter_get_name(cast(GMenuLinkIter*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -69,8 +69,8 @@ class MenuLinkIter : ObjectG
     char* _outLink;
     GMenuModel* _value;
     _retval = g_menu_link_iter_get_next(cast(GMenuLinkIter*)cPtr, &_outLink, &_value);
-    outLink = _outLink.fromCString(false);
-    value = new MenuModel(cast(void*)_value, true);
+    outLink = _outLink.fromCString(No.Free);
+    value = new MenuModel(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class MenuLinkIter : ObjectG
   {
     GMenuModel* _cretval;
     _cretval = g_menu_link_iter_get_value(cast(GMenuLinkIter*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 

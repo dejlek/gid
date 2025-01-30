@@ -127,11 +127,11 @@ interface File
     GFile* _cretval;
     const(char)*[] _tmpargs;
     foreach (s; args)
-      _tmpargs ~= s.toCString(false);
+      _tmpargs ~= s.toCString(No.Alloc);
     _tmpargs ~= null;
     const(char*)* _args = _tmpargs.ptr;
     _cretval = g_file_new_build_filenamev(_args);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -157,9 +157,9 @@ interface File
   static File newForCommandlineArg(string arg)
   {
     GFile* _cretval;
-    const(char)* _arg = arg.toCString(false);
+    const(char)* _arg = arg.toCString(No.Alloc);
     _cretval = g_file_new_for_commandline_arg(_arg);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -180,10 +180,10 @@ interface File
   static File newForCommandlineArgAndCwd(string arg, string cwd)
   {
     GFile* _cretval;
-    const(char)* _arg = arg.toCString(false);
-    const(char)* _cwd = cwd.toCString(false);
+    const(char)* _arg = arg.toCString(No.Alloc);
+    const(char)* _cwd = cwd.toCString(No.Alloc);
     _cretval = g_file_new_for_commandline_arg_and_cwd(_arg, _cwd);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -200,9 +200,9 @@ interface File
   static File newForPath(string path)
   {
     GFile* _cretval;
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_file_new_for_path(_path);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -219,9 +219,9 @@ interface File
   static File newForUri(string uri)
   {
     GFile* _cretval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = g_file_new_for_uri(_uri);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -244,14 +244,14 @@ interface File
   static File newTmp(string tmpl, out FileIOStream iostream)
   {
     GFile* _cretval;
-    const(char)* _tmpl = tmpl.toCString(false);
+    const(char)* _tmpl = tmpl.toCString(No.Alloc);
     GFileIOStream* _iostream;
     GError *_err;
     _cretval = g_file_new_tmp(_tmpl, &_iostream, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
-    iostream = new FileIOStream(cast(void*)_iostream, true);
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    iostream = new FileIOStream(cast(void*)_iostream, Yes.Take);
     return _retval;
   }
 
@@ -275,12 +275,12 @@ interface File
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _tmpl = tmpl.toCString(false);
+    const(char)* _tmpl = tmpl.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_new_tmp_async(_tmpl, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_new_tmp_async(_tmpl, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -303,12 +303,12 @@ interface File
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _tmpl = tmpl.toCString(false);
+    const(char)* _tmpl = tmpl.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_new_tmp_dir_async(_tmpl, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_new_tmp_dir_async(_tmpl, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -323,10 +323,10 @@ interface File
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = g_file_new_tmp_dir_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_file_new_tmp_dir_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -343,11 +343,11 @@ interface File
     GFile* _cretval;
     GFileIOStream* _iostream;
     GError *_err;
-    _cretval = g_file_new_tmp_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_iostream, &_err);
+    _cretval = g_file_new_tmp_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_iostream, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
-    iostream = new FileIOStream(cast(void*)_iostream, true);
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    iostream = new FileIOStream(cast(void*)_iostream, Yes.Take);
     return _retval;
   }
 
@@ -363,9 +363,9 @@ interface File
   static File parseName(string parseName)
   {
     GFile* _cretval;
-    const(char)* _parseName = parseName.toCString(false);
+    const(char)* _parseName = parseName.toCString(No.Alloc);
     _cretval = g_file_parse_name(_parseName);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 

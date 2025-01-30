@@ -14,12 +14,12 @@ import Gsk.c.types;
 class OutsetShadowNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.OutsetShadowNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -37,8 +37,8 @@ class OutsetShadowNode : RenderNode
   this(RoundedRect outline, RGBA color, float dx, float dy, float spread, float blurRadius)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_outset_shadow_node_new(outline ? cast(GskRoundedRect*)outline.cPtr : null, color ? cast(GdkRGBA*)color.cPtr(false) : null, dx, dy, spread, blurRadius);
-    this(_cretval, true);
+    _cretval = gsk_outset_shadow_node_new(outline ? cast(GskRoundedRect*)outline.cPtr : null, color ? cast(GdkRGBA*)color.cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -60,7 +60,7 @@ class OutsetShadowNode : RenderNode
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_outset_shadow_node_get_color(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

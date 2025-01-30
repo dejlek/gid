@@ -26,9 +26,9 @@ class StringFilter : Filter
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,8 +52,8 @@ class StringFilter : Filter
   this(Expression expression)
   {
     GtkStringFilter* _cretval;
-    _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression.cPtr(true) : null);
-    this(_cretval, true);
+    _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -65,7 +65,7 @@ class StringFilter : Filter
   {
     GtkExpression* _cretval;
     _cretval = gtk_string_filter_get_expression(cast(GtkStringFilter*)cPtr);
-    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, false) : null;
+    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class StringFilter : Filter
   {
     const(char)* _cretval;
     _cretval = gtk_string_filter_get_search(cast(GtkStringFilter*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class StringFilter : Filter
    */
   void setExpression(Expression expression)
   {
-    gtk_string_filter_set_expression(cast(GtkStringFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(false) : null);
+    gtk_string_filter_set_expression(cast(GtkStringFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
 
   /**
@@ -144,7 +144,7 @@ class StringFilter : Filter
    */
   void setSearch(string search)
   {
-    const(char)* _search = search.toCString(false);
+    const(char)* _search = search.toCString(No.Alloc);
     gtk_string_filter_set_search(cast(GtkStringFilter*)cPtr, _search);
   }
 }

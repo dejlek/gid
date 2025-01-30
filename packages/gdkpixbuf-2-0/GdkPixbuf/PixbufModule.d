@@ -49,14 +49,14 @@ class PixbufModule
 {
   GdkPixbufModule cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GdkPixbuf.PixbufModule");
 
     cInstance = *cast(GdkPixbufModule*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -67,24 +67,24 @@ class PixbufModule
 
   @property string moduleName()
   {
-    return (cast(GdkPixbufModule*)cPtr).moduleName.fromCString(false);
+    return (cast(GdkPixbufModule*)cPtr).moduleName.fromCString(No.Free);
   }
 
   @property void moduleName(string propval)
   {
     safeFree(cast(void*)(cast(GdkPixbufModule*)cPtr).moduleName);
-    (cast(GdkPixbufModule*)cPtr).moduleName = propval.toCString(true);
+    (cast(GdkPixbufModule*)cPtr).moduleName = propval.toCString(Yes.Alloc);
   }
 
   @property string modulePath()
   {
-    return (cast(GdkPixbufModule*)cPtr).modulePath.fromCString(false);
+    return (cast(GdkPixbufModule*)cPtr).modulePath.fromCString(No.Free);
   }
 
   @property void modulePath(string propval)
   {
     safeFree(cast(void*)(cast(GdkPixbufModule*)cPtr).modulePath);
-    (cast(GdkPixbufModule*)cPtr).modulePath = propval.toCString(true);
+    (cast(GdkPixbufModule*)cPtr).modulePath = propval.toCString(Yes.Alloc);
   }
 
   @property Module module_()

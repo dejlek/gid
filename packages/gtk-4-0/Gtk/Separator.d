@@ -33,9 +33,9 @@ class Separator : Widget, Orientable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -60,6 +60,6 @@ class Separator : Widget, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_separator_new(orientation);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 }

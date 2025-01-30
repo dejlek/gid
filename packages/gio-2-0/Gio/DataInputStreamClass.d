@@ -10,14 +10,14 @@ class DataInputStreamClass
 {
   GDataInputStreamClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.DataInputStreamClass");
 
     cInstance = *cast(GDataInputStreamClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

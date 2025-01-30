@@ -40,9 +40,9 @@ class PageSetupUnixDialog : Dialog
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -65,9 +65,9 @@ class PageSetupUnixDialog : Dialog
   this(string title, Window parent)
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(false);
-    _cretval = gtk_page_setup_unix_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(false) : null);
-    this(_cretval, false);
+    const(char)* _title = title.toCString(No.Alloc);
+    _cretval = gtk_page_setup_unix_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -78,7 +78,7 @@ class PageSetupUnixDialog : Dialog
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_page_setup_unix_dialog_get_page_setup(cast(GtkPageSetupUnixDialog*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class PageSetupUnixDialog : Dialog
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_page_setup_unix_dialog_get_print_settings(cast(GtkPageSetupUnixDialog*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class PageSetupUnixDialog : Dialog
    */
   void setPageSetup(PageSetup pageSetup)
   {
-    gtk_page_setup_unix_dialog_set_page_setup(cast(GtkPageSetupUnixDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(false) : null);
+    gtk_page_setup_unix_dialog_set_page_setup(cast(GtkPageSetupUnixDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
   }
 
   /**
@@ -113,6 +113,6 @@ class PageSetupUnixDialog : Dialog
    */
   void setPrintSettings(PrintSettings printSettings)
   {
-    gtk_page_setup_unix_dialog_set_print_settings(cast(GtkPageSetupUnixDialog*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(false) : null);
+    gtk_page_setup_unix_dialog_set_print_settings(cast(GtkPageSetupUnixDialog*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);
   }
 }

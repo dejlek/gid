@@ -17,9 +17,9 @@ class ActivateAction : ShortcutAction
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -42,7 +42,7 @@ class ActivateAction : ShortcutAction
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_activate_action_get();
-    auto _retval = _cretval ? ObjectG.getDObject!ActivateAction(cast(GtkShortcutAction*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ActivateAction(cast(GtkShortcutAction*)_cretval, No.Take);
     return _retval;
   }
 }

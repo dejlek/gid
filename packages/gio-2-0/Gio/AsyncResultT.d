@@ -91,7 +91,7 @@ template AsyncResultT()
   {
     ObjectC* _cretval;
     _cretval = g_async_result_get_source_object(cast(GAsyncResult*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 

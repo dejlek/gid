@@ -15,9 +15,9 @@ import Gtk.c.types;
 class TextChildAnchor : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -42,7 +42,7 @@ class TextChildAnchor : ObjectG
   {
     GtkTextChildAnchor* _cretval;
     _cretval = gtk_text_child_anchor_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -56,9 +56,9 @@ class TextChildAnchor : ObjectG
   static TextChildAnchor newWithReplacement(string character)
   {
     GtkTextChildAnchor* _cretval;
-    const(char)* _character = character.toCString(false);
+    const(char)* _character = character.toCString(No.Alloc);
     _cretval = gtk_text_child_anchor_new_with_replacement(_character);
-    auto _retval = _cretval ? ObjectG.getDObject!TextChildAnchor(cast(GtkTextChildAnchor*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!TextChildAnchor(cast(GtkTextChildAnchor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class TextChildAnchor : ObjectG
     {
       _retval = new Widget[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = ObjectG.getDObject!Widget(_cretval[i], false);
+        _retval[i] = ObjectG.getDObject!Widget(_cretval[i], No.Take);
     }
     return _retval;
   }

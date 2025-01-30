@@ -35,14 +35,14 @@ class ObjectClass
 {
   GObjectClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.ObjectClass");
 
     cInstance = *cast(GObjectClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -115,9 +115,9 @@ class ObjectClass
   ParamSpec findProperty(string propertyName)
   {
     GParamSpec* _cretval;
-    const(char)* _propertyName = propertyName.toCString(false);
+    const(char)* _propertyName = propertyName.toCString(No.Alloc);
     _cretval = g_object_class_find_property(cast(GObjectClass*)cPtr, _propertyName);
-    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, false) : null;
+    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class ObjectClass
    */
   void installProperty(uint propertyId, ParamSpec pspec)
   {
-    g_object_class_install_property(cast(GObjectClass*)cPtr, propertyId, pspec ? cast(GParamSpec*)pspec.cPtr(false) : null);
+    g_object_class_install_property(cast(GObjectClass*)cPtr, propertyId, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
   }
 
   /**
@@ -224,7 +224,7 @@ class ObjectClass
     {
       _retval = new ParamSpec[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new ParamSpec(cast(void*)_cretval[i], false);
+        _retval[i] = new ParamSpec(cast(void*)_cretval[i], No.Take);
     }
     return _retval;
   }
@@ -252,7 +252,7 @@ class ObjectClass
    */
   void overrideProperty(uint propertyId, string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     g_object_class_override_property(cast(GObjectClass*)cPtr, propertyId, _name);
   }
 }

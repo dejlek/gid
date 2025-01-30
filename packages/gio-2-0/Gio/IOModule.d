@@ -20,9 +20,9 @@ class IOModule : TypeModule
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -46,9 +46,9 @@ class IOModule : TypeModule
   this(string filename)
   {
     GIOModule* _cretval;
-    const(char)* _filename = filename.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = g_io_module_new(_filename);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -94,7 +94,7 @@ class IOModule : TypeModule
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }

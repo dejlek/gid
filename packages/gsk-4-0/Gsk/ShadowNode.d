@@ -13,12 +13,12 @@ import Gsk.c.types;
 class ShadowNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.ShadowNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -40,8 +40,8 @@ class ShadowNode : RenderNode
     foreach (obj; shadows)
       _tmpshadows ~= obj.cInstance;
     const(GskShadow)* _shadows = _tmpshadows.ptr;
-    _cretval = gsk_shadow_node_new(child ? cast(GskRenderNode*)child.cPtr(false) : null, _shadows, _nShadows);
-    this(_cretval, true);
+    _cretval = gsk_shadow_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, _shadows, _nShadows);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -52,7 +52,7 @@ class ShadowNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_shadow_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 

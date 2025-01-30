@@ -30,9 +30,9 @@ class AspectFrame : Widget
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -61,7 +61,7 @@ class AspectFrame : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_aspect_frame_new(xalign, yalign, ratio, obeyChild);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -72,7 +72,7 @@ class AspectFrame : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_aspect_frame_get_child(cast(GtkAspectFrame*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class AspectFrame : Widget
    */
   void setChild(Widget child)
   {
-    gtk_aspect_frame_set_child(cast(GtkAspectFrame*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_aspect_frame_set_child(cast(GtkAspectFrame*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

@@ -22,9 +22,9 @@ import Gtk.c.types;
 class ListBoxRow : Widget, Actionable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -47,7 +47,7 @@ class ListBoxRow : Widget, Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -91,7 +91,7 @@ class ListBoxRow : Widget, Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_get_child(cast(GtkListBoxRow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class ListBoxRow : Widget, Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_get_header(cast(GtkListBoxRow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class ListBoxRow : Widget, Actionable
    */
   void setChild(Widget child)
   {
-    gtk_list_box_row_set_child(cast(GtkListBoxRow*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_list_box_row_set_child(cast(GtkListBoxRow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -176,7 +176,7 @@ class ListBoxRow : Widget, Actionable
    */
   void setHeader(Widget header)
   {
-    gtk_list_box_row_set_header(cast(GtkListBoxRow*)cPtr, header ? cast(GtkWidget*)header.cPtr(false) : null);
+    gtk_list_box_row_set_header(cast(GtkListBoxRow*)cPtr, header ? cast(GtkWidget*)header.cPtr(No.Dup) : null);
   }
 
   /**

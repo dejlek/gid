@@ -16,14 +16,14 @@ class WidgetClass
 {
   GtkWidgetClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.WidgetClass");
 
     cInstance = *cast(GtkWidgetClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -225,7 +225,7 @@ class WidgetClass
    */
   void addShortcut(Shortcut shortcut)
   {
-    gtk_widget_class_add_shortcut(cast(GtkWidgetClass*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(false) : null);
+    gtk_widget_class_add_shortcut(cast(GtkWidgetClass*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(No.Dup) : null);
   }
 
   /**
@@ -262,7 +262,7 @@ class WidgetClass
    */
   void bindTemplateChildFull(string name, bool internalChild, ptrdiff_t structOffset)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_class_bind_template_child_full(cast(GtkWidgetClass*)cPtr, _name, internalChild, structOffset);
   }
 
@@ -304,7 +304,7 @@ class WidgetClass
   {
     const(char)* _cretval;
     _cretval = gtk_widget_class_get_css_name(cast(GtkWidgetClass*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -341,8 +341,8 @@ class WidgetClass
    */
   void installPropertyAction(string actionName, string propertyName)
   {
-    const(char)* _actionName = actionName.toCString(false);
-    const(char)* _propertyName = propertyName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString(No.Alloc);
     gtk_widget_class_install_property_action(cast(GtkWidgetClass*)cPtr, _actionName, _propertyName);
   }
 
@@ -370,9 +370,9 @@ class WidgetClass
     const(GVariantType)* _parameterType;
     char* _propertyName;
     _retval = gtk_widget_class_query_action(cast(GtkWidgetClass*)cPtr, index, cast(GType*)&owner, &_actionName, &_parameterType, &_propertyName);
-    actionName = _actionName.fromCString(false);
-    parameterType = new VariantType(cast(void*)_parameterType, false);
-    propertyName = _propertyName.fromCString(false);
+    actionName = _actionName.fromCString(No.Free);
+    parameterType = new VariantType(cast(void*)_parameterType, No.Take);
+    propertyName = _propertyName.fromCString(No.Free);
     return _retval;
   }
 
@@ -413,7 +413,7 @@ class WidgetClass
    */
   void setActivateSignalFromName(string signalName)
   {
-    const(char)* _signalName = signalName.toCString(false);
+    const(char)* _signalName = signalName.toCString(No.Alloc);
     gtk_widget_class_set_activate_signal_from_name(cast(GtkWidgetClass*)cPtr, _signalName);
   }
 
@@ -427,7 +427,7 @@ class WidgetClass
    */
   void setCssName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_class_set_css_name(cast(GtkWidgetClass*)cPtr, _name);
   }
 
@@ -457,7 +457,7 @@ class WidgetClass
    */
   void setTemplateFromResource(string resourceName)
   {
-    const(char)* _resourceName = resourceName.toCString(false);
+    const(char)* _resourceName = resourceName.toCString(No.Alloc);
     gtk_widget_class_set_template_from_resource(cast(GtkWidgetClass*)cPtr, _resourceName);
   }
 
@@ -473,6 +473,6 @@ class WidgetClass
    */
   void setTemplateScope(BuilderScope scope_)
   {
-    gtk_widget_class_set_template_scope(cast(GtkWidgetClass*)cPtr, scope_ ? cast(GtkBuilderScope*)(cast(ObjectG)scope_).cPtr(false) : null);
+    gtk_widget_class_set_template_scope(cast(GtkWidgetClass*)cPtr, scope_ ? cast(GtkBuilderScope*)(cast(ObjectG)scope_).cPtr(No.Dup) : null);
   }
 }

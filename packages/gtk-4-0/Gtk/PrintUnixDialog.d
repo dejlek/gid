@@ -78,9 +78,9 @@ class PrintUnixDialog : Dialog
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -106,9 +106,9 @@ class PrintUnixDialog : Dialog
   this(string title, Window parent)
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(false);
-    _cretval = gtk_print_unix_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(false) : null);
-    this(_cretval, false);
+    const(char)* _title = title.toCString(No.Alloc);
+    _cretval = gtk_print_unix_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -119,7 +119,7 @@ class PrintUnixDialog : Dialog
    */
   void addCustomTab(Widget child, Widget tabLabel)
   {
-    gtk_print_unix_dialog_add_custom_tab(cast(GtkPrintUnixDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(false) : null);
+    gtk_print_unix_dialog_add_custom_tab(cast(GtkPrintUnixDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
   }
 
   /**
@@ -175,7 +175,7 @@ class PrintUnixDialog : Dialog
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_unix_dialog_get_page_setup(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class PrintUnixDialog : Dialog
   {
     GtkPrinter* _cretval;
     _cretval = gtk_print_unix_dialog_get_selected_printer(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Printer(cast(GtkPrinter*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Printer(cast(GtkPrinter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class PrintUnixDialog : Dialog
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_unix_dialog_get_settings(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class PrintUnixDialog : Dialog
    */
   void setPageSetup(PageSetup pageSetup)
   {
-    gtk_print_unix_dialog_set_page_setup(cast(GtkPrintUnixDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(false) : null);
+    gtk_print_unix_dialog_set_page_setup(cast(GtkPrintUnixDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
   }
 
   /**
@@ -295,7 +295,7 @@ class PrintUnixDialog : Dialog
    */
   void setSettings(PrintSettings settings)
   {
-    gtk_print_unix_dialog_set_settings(cast(GtkPrintUnixDialog*)cPtr, settings ? cast(GtkPrintSettings*)settings.cPtr(false) : null);
+    gtk_print_unix_dialog_set_settings(cast(GtkPrintUnixDialog*)cPtr, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null);
   }
 
   /**

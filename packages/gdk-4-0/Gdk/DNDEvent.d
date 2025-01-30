@@ -14,12 +14,12 @@ import Gid.gid;
 class DNDEvent : Event
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.DNDEvent");
 
-    super(cast(GdkEvent*)ptr, ownedRef);
+    super(cast(GdkEvent*)ptr, take);
   }
 
   /**
@@ -30,7 +30,7 @@ class DNDEvent : Event
   {
     GdkDrop* _cretval;
     _cretval = gdk_dnd_event_get_drop(cast(GdkEvent*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 }

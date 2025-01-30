@@ -117,9 +117,9 @@ class DebugControllerDBus : ObjectG, DebugController, Initable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -151,10 +151,10 @@ class DebugControllerDBus : ObjectG, DebugController, Initable
   {
     GDebugControllerDBus* _cretval;
     GError *_err;
-    _cretval = g_debug_controller_dbus_new(connection ? cast(GDBusConnection*)connection.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_debug_controller_dbus_new(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

@@ -44,9 +44,9 @@ class EditableLabel : Widget, Editable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -70,9 +70,9 @@ class EditableLabel : Widget, Editable
   this(string str)
   {
     GtkWidget* _cretval;
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     _cretval = gtk_editable_label_new(_str);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**

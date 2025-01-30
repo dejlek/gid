@@ -24,9 +24,9 @@ class MonitorG : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,7 +50,7 @@ class MonitorG : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_connector(cast(GdkMonitor*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class MonitorG : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_description(cast(GdkMonitor*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class MonitorG : ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_monitor_get_display(cast(GdkMonitor*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class MonitorG : ObjectG
   {
     GdkRectangle _geometry;
     gdk_monitor_get_geometry(cast(GdkMonitor*)cPtr, &_geometry);
-    geometry = new Rectangle(cast(void*)&_geometry, false);
+    geometry = new Rectangle(cast(void*)&_geometry, No.Take);
   }
 
   /**
@@ -117,7 +117,7 @@ class MonitorG : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_manufacturer(cast(GdkMonitor*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class MonitorG : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_model(cast(GdkMonitor*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

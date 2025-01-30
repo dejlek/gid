@@ -18,9 +18,9 @@ import Gtk.c.types;
 class EventControllerKey : EventController
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -41,7 +41,7 @@ class EventControllerKey : EventController
   {
     GtkEventController* _cretval;
     _cretval = gtk_event_controller_key_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -57,7 +57,7 @@ class EventControllerKey : EventController
   bool forward(Widget widget)
   {
     bool _retval;
-    _retval = gtk_event_controller_key_forward(cast(GtkEventControllerKey*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    _retval = gtk_event_controller_key_forward(cast(GtkEventControllerKey*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class EventControllerKey : EventController
   {
     GtkIMContext* _cretval;
     _cretval = gtk_event_controller_key_get_im_context(cast(GtkEventControllerKey*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!IMContext(cast(GtkIMContext*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!IMContext(cast(GtkIMContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class EventControllerKey : EventController
    */
   void setImContext(IMContext imContext)
   {
-    gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)cPtr, imContext ? cast(GtkIMContext*)imContext.cPtr(false) : null);
+    gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)cPtr, imContext ? cast(GtkIMContext*)imContext.cPtr(No.Dup) : null);
   }
 
   /**

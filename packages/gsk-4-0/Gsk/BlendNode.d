@@ -12,12 +12,12 @@ import Gsk.c.types;
 class BlendNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.BlendNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -32,8 +32,8 @@ class BlendNode : RenderNode
   this(RenderNode bottom, RenderNode top, BlendMode blendMode)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_blend_node_new(bottom ? cast(GskRenderNode*)bottom.cPtr(false) : null, top ? cast(GskRenderNode*)top.cPtr(false) : null, blendMode);
-    this(_cretval, true);
+    _cretval = gsk_blend_node_new(bottom ? cast(GskRenderNode*)bottom.cPtr(No.Dup) : null, top ? cast(GskRenderNode*)top.cPtr(No.Dup) : null, blendMode);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -56,7 +56,7 @@ class BlendNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_blend_node_get_bottom_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class BlendNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_blend_node_get_top_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 }

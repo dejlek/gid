@@ -44,14 +44,14 @@ import Gid.gid;
 class IOChannel : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -79,13 +79,13 @@ class IOChannel : Boxed
   static IOChannel newFile(string filename, string mode)
   {
     GIOChannel* _cretval;
-    const(char)* _filename = filename.toCString(false);
-    const(char)* _mode = mode.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _mode = mode.toCString(No.Alloc);
     GError *_err;
     _cretval = g_io_channel_new_file(_filename, _mode, &_err);
     if (_err)
       throw new IOChannelException(_err);
-    auto _retval = _cretval ? new IOChannel(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new IOChannel(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class IOChannel : Boxed
   {
     GIOChannel* _cretval;
     _cretval = g_io_channel_unix_new(fd);
-    auto _retval = _cretval ? new IOChannel(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new IOChannel(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class IOChannel : Boxed
   {
     const(char)* _cretval;
     _cretval = g_io_channel_get_encoding(cast(GIOChannel*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class IOChannel : Boxed
   {
     const(char)* _cretval;
     _cretval = g_io_channel_get_line_term(cast(GIOChannel*)cPtr, cast(int*)&length);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -325,7 +325,7 @@ class IOChannel : Boxed
     if (_err)
       throw new IOChannelException(_err);
     IOStatus _retval = cast(IOStatus)_cretval;
-    strReturn = _strReturn.fromCString(true);
+    strReturn = _strReturn.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class IOChannel : Boxed
   {
     GIOStatus _cretval;
     GError *_err;
-    _cretval = g_io_channel_read_line_string(cast(GIOChannel*)cPtr, buffer ? cast(GString*)buffer.cPtr(false) : null, cast(size_t*)&terminatorPos, &_err);
+    _cretval = g_io_channel_read_line_string(cast(GIOChannel*)cPtr, buffer ? cast(GString*)buffer.cPtr(No.Dup) : null, cast(size_t*)&terminatorPos, &_err);
     if (_err)
       throw new IOChannelException(_err);
     IOStatus _retval = cast(IOStatus)_cretval;
@@ -519,7 +519,7 @@ class IOChannel : Boxed
   IOStatus setEncoding(string encoding)
   {
     GIOStatus _cretval;
-    const(char)* _encoding = encoding.toCString(false);
+    const(char)* _encoding = encoding.toCString(No.Alloc);
     GError *_err;
     _cretval = g_io_channel_set_encoding(cast(GIOChannel*)cPtr, _encoding, &_err);
     if (_err)
@@ -559,7 +559,7 @@ class IOChannel : Boxed
    */
   void setLineTerm(string lineTerm, int length)
   {
-    const(char)* _lineTerm = lineTerm.toCString(false);
+    const(char)* _lineTerm = lineTerm.toCString(No.Alloc);
     g_io_channel_set_line_term(cast(GIOChannel*)cPtr, _lineTerm, length);
   }
 
@@ -608,7 +608,7 @@ class IOChannel : Boxed
   IOError write(string buf, size_t count, out size_t bytesWritten)
   {
     GIOError _cretval;
-    const(char)* _buf = buf.toCString(false);
+    const(char)* _buf = buf.toCString(No.Alloc);
     _cretval = g_io_channel_write(cast(GIOChannel*)cPtr, _buf, count, cast(size_t*)&bytesWritten);
     IOError _retval = cast(IOError)_cretval;
     return _retval;

@@ -40,9 +40,9 @@ class StringList : ObjectG, ListModel, Buildable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -69,11 +69,11 @@ class StringList : ObjectG, ListModel, Buildable
     GtkStringList* _cretval;
     char*[] _tmpstrings;
     foreach (s; strings)
-      _tmpstrings ~= s.toCString(false);
+      _tmpstrings ~= s.toCString(No.Alloc);
     _tmpstrings ~= null;
     const(char*)* _strings = _tmpstrings.ptr;
     _cretval = gtk_string_list_new(_strings);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -85,7 +85,7 @@ class StringList : ObjectG, ListModel, Buildable
    */
   void append(string string_)
   {
-    const(char)* _string_ = string_.toCString(false);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     gtk_string_list_append(cast(GtkStringList*)cPtr, _string_);
   }
 
@@ -102,7 +102,7 @@ class StringList : ObjectG, ListModel, Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_string_list_get_string(cast(GtkStringList*)cPtr, position);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class StringList : ObjectG, ListModel, Buildable
   {
     char*[] _tmpadditions;
     foreach (s; additions)
-      _tmpadditions ~= s.toCString(false);
+      _tmpadditions ~= s.toCString(No.Alloc);
     _tmpadditions ~= null;
     const(char*)* _additions = _tmpadditions.ptr;
     gtk_string_list_splice(cast(GtkStringList*)cPtr, position, nRemovals, _additions);
@@ -156,7 +156,7 @@ class StringList : ObjectG, ListModel, Buildable
    */
   void take(string string_)
   {
-    char* _string_ = string_.toCString(true);
+    char* _string_ = string_.toCString(Yes.Alloc);
     gtk_string_list_take(cast(GtkStringList*)cPtr, _string_);
   }
 }

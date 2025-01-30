@@ -25,9 +25,9 @@ import Gtk.c.types;
 class WindowGroup : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,7 +50,7 @@ class WindowGroup : ObjectG
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_group_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -60,7 +60,7 @@ class WindowGroup : ObjectG
    */
   void addWindow(Window window)
   {
-    gtk_window_group_add_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(false) : null);
+    gtk_window_group_add_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
 
   /**
@@ -83,6 +83,6 @@ class WindowGroup : ObjectG
    */
   void removeWindow(Window window)
   {
-    gtk_window_group_remove_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(false) : null);
+    gtk_window_group_remove_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
 }

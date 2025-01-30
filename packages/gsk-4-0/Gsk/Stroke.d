@@ -14,14 +14,14 @@ import cairo.Context;
 class Stroke : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -44,7 +44,7 @@ class Stroke : Boxed
   {
     GskStroke* _cretval;
     _cretval = gsk_stroke_new(lineWidth);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -55,7 +55,7 @@ class Stroke : Boxed
   {
     GskStroke* _cretval;
     _cretval = gsk_stroke_copy(cast(GskStroke*)cPtr);
-    auto _retval = _cretval ? new Stroke(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Stroke(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class Stroke : Boxed
    */
   void toCairo(Context cr)
   {
-    gsk_stroke_to_cairo(cast(GskStroke*)cPtr, cr ? cast(cairo_t*)cr.cPtr(false) : null);
+    gsk_stroke_to_cairo(cast(GskStroke*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
   }
 
   /**

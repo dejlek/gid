@@ -19,9 +19,9 @@ import Gtk.c.types;
 class MultiSorter : Sorter, ListModel, Buildable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -49,7 +49,7 @@ class MultiSorter : Sorter, ListModel, Buildable
   {
     GtkMultiSorter* _cretval;
     _cretval = gtk_multi_sorter_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -61,7 +61,7 @@ class MultiSorter : Sorter, ListModel, Buildable
    */
   void append(Sorter sorter)
   {
-    gtk_multi_sorter_append(cast(GtkMultiSorter*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(true) : null);
+    gtk_multi_sorter_append(cast(GtkMultiSorter*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
   }
 
   /**

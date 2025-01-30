@@ -21,9 +21,9 @@ import Gtk.c.types;
 class CellRendererAccel : CellRendererText
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -44,7 +44,7 @@ class CellRendererAccel : CellRendererText
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_accel_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**

@@ -74,9 +74,9 @@ class PrintContext : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -98,7 +98,7 @@ class PrintContext : ObjectG
   {
     PangoContext* _cretval;
     _cretval = gtk_print_context_create_pango_context(cast(GtkPrintContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Context(cast(PangoContext*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class PrintContext : ObjectG
   {
     PangoLayout* _cretval;
     _cretval = gtk_print_context_create_pango_layout(cast(GtkPrintContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class PrintContext : ObjectG
   {
     cairo_t* _cretval;
     _cretval = gtk_print_context_get_cairo_context(cast(GtkPrintContext*)cPtr);
-    auto _retval = _cretval ? new DcairoContext(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new DcairoContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class PrintContext : ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_context_get_page_setup(cast(GtkPrintContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class PrintContext : ObjectG
   {
     PangoFontMap* _cretval;
     _cretval = gtk_print_context_get_pango_fontmap(cast(GtkPrintContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!FontMap(cast(PangoFontMap*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FontMap(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -230,6 +230,6 @@ class PrintContext : ObjectG
    */
   void setCairoContext(DcairoContext cr, double dpiX, double dpiY)
   {
-    gtk_print_context_set_cairo_context(cast(GtkPrintContext*)cPtr, cr ? cast(cairo_t*)cr.cPtr(false) : null, dpiX, dpiY);
+    gtk_print_context_set_cairo_context(cast(GtkPrintContext*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, dpiX, dpiY);
   }
 }

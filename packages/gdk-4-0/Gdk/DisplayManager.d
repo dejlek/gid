@@ -53,9 +53,9 @@ class DisplayManager : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -82,7 +82,7 @@ class DisplayManager : ObjectG
   {
     GdkDisplayManager* _cretval;
     _cretval = gdk_display_manager_get();
-    auto _retval = _cretval ? ObjectG.getDObject!DisplayManager(cast(GdkDisplayManager*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!DisplayManager(cast(GdkDisplayManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class DisplayManager : ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_manager_get_default_display(cast(GdkDisplayManager*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,9 +121,9 @@ class DisplayManager : ObjectG
   Display openDisplay(string name)
   {
     GdkDisplay* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gdk_display_manager_open_display(cast(GdkDisplayManager*)cPtr, _name);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class DisplayManager : ObjectG
    */
   void setDefaultDisplay(Display display)
   {
-    gdk_display_manager_set_default_display(cast(GdkDisplayManager*)cPtr, display ? cast(GdkDisplay*)display.cPtr(false) : null);
+    gdk_display_manager_set_default_display(cast(GdkDisplayManager*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
 
   /**

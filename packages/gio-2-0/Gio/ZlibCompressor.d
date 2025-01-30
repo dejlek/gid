@@ -20,9 +20,9 @@ class ZlibCompressor : ObjectG, Converter
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -48,7 +48,7 @@ class ZlibCompressor : ObjectG, Converter
   {
     GZlibCompressor* _cretval;
     _cretval = g_zlib_compressor_new(format, level);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -59,7 +59,7 @@ class ZlibCompressor : ObjectG, Converter
   {
     GFileInfo* _cretval;
     _cretval = g_zlib_compressor_get_file_info(cast(GZlibCompressor*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, No.Take);
     return _retval;
   }
 
@@ -76,6 +76,6 @@ class ZlibCompressor : ObjectG, Converter
    */
   void setFileInfo(FileInfo fileInfo)
   {
-    g_zlib_compressor_set_file_info(cast(GZlibCompressor*)cPtr, fileInfo ? cast(GFileInfo*)fileInfo.cPtr(false) : null);
+    g_zlib_compressor_set_file_info(cast(GZlibCompressor*)cPtr, fileInfo ? cast(GFileInfo*)fileInfo.cPtr(No.Dup) : null);
   }
 }

@@ -18,17 +18,17 @@ class TreeIter : Boxed
 
   this()
   {
-    super(safeMalloc(GtkTreeIter.sizeof), true);
+    super(safeMalloc(GtkTreeIter.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -63,7 +63,7 @@ class TreeIter : Boxed
   {
     GtkTreeIter* _cretval;
     _cretval = gtk_tree_iter_copy(cast(GtkTreeIter*)cPtr);
-    auto _retval = _cretval ? new TreeIter(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TreeIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

@@ -31,17 +31,17 @@ class Value : Boxed
 
   this()
   {
-    super(safeMalloc(GValue.sizeof), true);
+    super(safeMalloc(GValue.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -60,12 +60,12 @@ class Value : Boxed
    *   T = The D type to initialize the value to
    *   val = The value to assign
    */
-  static Value create(T)(T val)
+  this(T)(T val)
+  if (!is(T == void*))
   {
-    Value value = new Value;
-    value.init_!T();
-    value.set!T(val);
-    return value;
+    this();
+    init_!T();
+    set!T(val);
   }
 
   /**
@@ -107,7 +107,7 @@ class Value : Boxed
    */
   void copy(Value destValue)
   {
-    g_value_copy(cast(GValue*)cPtr, destValue ? cast(GValue*)destValue.cPtr(false) : null);
+    g_value_copy(cast(GValue*)cPtr, destValue ? cast(GValue*)destValue.cPtr(No.Dup) : null);
   }
 
   /**
@@ -121,7 +121,7 @@ class Value : Boxed
   {
     ObjectC* _cretval;
     _cretval = g_value_dup_object(cast(GValue*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class Value : Boxed
   {
     char* _cretval;
     _cretval = g_value_dup_string(cast(GValue*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class Value : Boxed
   {
     VariantC* _cretval;
     _cretval = g_value_dup_variant(cast(GValue*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -296,7 +296,7 @@ class Value : Boxed
   {
     ObjectC* _cretval;
     _cretval = g_value_get_object(cast(GValue*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -308,7 +308,7 @@ class Value : Boxed
   {
     GParamSpec* _cretval;
     _cretval = g_value_get_param(cast(GValue*)cPtr);
-    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, false) : null;
+    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class Value : Boxed
   {
     const(char)* _cretval;
     _cretval = g_value_get_string(cast(GValue*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class Value : Boxed
   {
     VariantC* _cretval;
     _cretval = g_value_get_variant(cast(GValue*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -412,7 +412,7 @@ class Value : Boxed
   {
     GValue* _cretval;
     _cretval = g_value_init(cast(GValue*)cPtr, gType);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -453,7 +453,7 @@ class Value : Boxed
   {
     GValue* _cretval;
     _cretval = g_value_reset(cast(GValue*)cPtr);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -591,7 +591,7 @@ class Value : Boxed
    */
   void setInternedString(string vString)
   {
-    const(char)* _vString = vString.toCString(false);
+    const(char)* _vString = vString.toCString(No.Alloc);
     g_value_set_interned_string(cast(GValue*)cPtr, _vString);
   }
 
@@ -620,7 +620,7 @@ class Value : Boxed
    */
   void setObject(ObjectG vObject)
   {
-    g_value_set_object(cast(GValue*)cPtr, vObject ? cast(ObjectC*)vObject.cPtr(false) : null);
+    g_value_set_object(cast(GValue*)cPtr, vObject ? cast(ObjectC*)vObject.cPtr(No.Dup) : null);
   }
 
   /**
@@ -630,7 +630,7 @@ class Value : Boxed
    */
   void setParam(ParamSpec param)
   {
-    g_value_set_param(cast(GValue*)cPtr, param ? cast(GParamSpec*)param.cPtr(false) : null);
+    g_value_set_param(cast(GValue*)cPtr, param ? cast(GParamSpec*)param.cPtr(No.Dup) : null);
   }
 
   /**
@@ -676,7 +676,7 @@ class Value : Boxed
    */
   void setStaticString(string vString)
   {
-    const(char)* _vString = vString.toCString(false);
+    const(char)* _vString = vString.toCString(No.Alloc);
     g_value_set_static_string(cast(GValue*)cPtr, _vString);
   }
 
@@ -687,7 +687,7 @@ class Value : Boxed
    */
   void setString(string vString)
   {
-    const(char)* _vString = vString.toCString(false);
+    const(char)* _vString = vString.toCString(No.Alloc);
     g_value_set_string(cast(GValue*)cPtr, _vString);
   }
 
@@ -700,7 +700,7 @@ class Value : Boxed
    */
   void setStringTakeOwnership(string vString)
   {
-    char* _vString = vString.toCString(false);
+    char* _vString = vString.toCString(No.Alloc);
     g_value_set_string_take_ownership(cast(GValue*)cPtr, _vString);
   }
 
@@ -752,7 +752,7 @@ class Value : Boxed
    */
   void setVariant(VariantG variant)
   {
-    g_value_set_variant(cast(GValue*)cPtr, variant ? cast(VariantC*)variant.cPtr(false) : null);
+    g_value_set_variant(cast(GValue*)cPtr, variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
   }
 
   /**
@@ -770,7 +770,7 @@ class Value : Boxed
   {
     char* _cretval;
     _cretval = g_value_steal_string(cast(GValue*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -793,7 +793,7 @@ class Value : Boxed
    */
   void takeString(string vString)
   {
-    char* _vString = vString.toCString(true);
+    char* _vString = vString.toCString(Yes.Alloc);
     g_value_take_string(cast(GValue*)cPtr, _vString);
   }
 
@@ -812,7 +812,7 @@ class Value : Boxed
    */
   void takeVariant(VariantG variant)
   {
-    g_value_take_variant(cast(GValue*)cPtr, variant ? cast(VariantC*)variant.cPtr(true) : null);
+    g_value_take_variant(cast(GValue*)cPtr, variant ? cast(VariantC*)variant.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -831,7 +831,7 @@ class Value : Boxed
   bool transform(Value destValue)
   {
     bool _retval;
-    _retval = g_value_transform(cast(GValue*)cPtr, destValue ? cast(GValue*)destValue.cPtr(false) : null);
+    _retval = g_value_transform(cast(GValue*)cPtr, destValue ? cast(GValue*)destValue.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -942,26 +942,26 @@ T getVal(T)(const(GValue)* gval)
   else static if (is(T == enum)) // enum or flags
     return g_type_is_a(gval.gType, GTypeEnum.Flags) ? cast(T)g_value_get_flags(gval) : cast(T)g_value_get_enum(gval);
   else static if (is(T == string))
-    return g_value_get_string(gval).fromCString(false);
+    return g_value_get_string(gval).fromCString(No.Free);
   else static if (is(T == VariantG))
   {
     auto v = g_value_get_variant(gval);
-    return v ? new VariantG(v, false) : null;
+    return v ? new VariantG(v, No.Take) : null;
   }
   else static if (is(T : ParamSpec))
   {
     auto v = g_value_get_param(gval);
-    return v ? new T(v, false) : null;
+    return v ? new T(v, No.Take) : null;
   }
   else static if (is(T : Boxed))
   {
     auto v = g_value_get_boxed(gval);
-    return v ? new T(v, false) : null;
+    return v ? new T(v, No.Take) : null;
   }
   else static if (is(T : ObjectG) || is(T == interface))
   {
     auto v = g_value_get_object(gval);
-    return v ? ObjectG.getDObject!T(v, false) : null;
+    return ObjectG.getDObject!T(v, No.Take);
   }
   else static if (is(T : Object) || isPointer!T)
     return cast(T)g_value_get_pointer(gval);
@@ -998,7 +998,7 @@ void setVal(T)(GValue* gval, T v)
       g_value_set_enum(gval, v);
   }
   else static if (is(T == string))
-    g_value_take_string(gval, v.toCString(true));
+    g_value_take_string(gval, v.toCString(Yes.Alloc));
   else static if (is(T == VariantG))
     g_value_set_variant(gval, cast(VariantC*)v.cPtr);
   else static if (is(T : ParamSpec))
@@ -1009,11 +1009,11 @@ void setVal(T)(GValue* gval, T v)
     g_value_set_boxed(gval, v.cInstancePtr);
   }
   else static if (is(T : ObjectG))
-    g_value_set_object(gval, cast(ObjectC*)v.cPtr(false));
+    g_value_set_object(gval, cast(ObjectC*)v.cPtr(No.Dup));
   else static if (is(T == interface))
   {
     if (auto objG = cast(ObjectG)v)
-      g_value_set_object(gval, cast(ObjectC*)objG.cPtr(false));
+      g_value_set_object(gval, cast(ObjectC*)objG.cPtr(No.Dup));
     else
       assert(0, "Object type " ~ typeid(v).toString ~ " is not an ObjectG in Value.setVal");
   }

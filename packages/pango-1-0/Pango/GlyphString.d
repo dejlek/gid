@@ -17,14 +17,14 @@ import Pango.c.types;
 class GlyphString : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -56,7 +56,7 @@ class GlyphString : Boxed
   {
     PangoGlyphString* _cretval;
     _cretval = pango_glyph_string_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -67,7 +67,7 @@ class GlyphString : Boxed
   {
     PangoGlyphString* _cretval;
     _cretval = pango_glyph_string_copy(cast(PangoGlyphString*)cPtr);
-    auto _retval = _cretval ? new GlyphString(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new GlyphString(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class GlyphString : Boxed
    */
   void extents(Font font, out Rectangle inkRect, out Rectangle logicalRect)
   {
-    pango_glyph_string_extents(cast(PangoGlyphString*)cPtr, font ? cast(PangoFont*)font.cPtr(false) : null, &inkRect, &logicalRect);
+    pango_glyph_string_extents(cast(PangoGlyphString*)cPtr, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, &inkRect, &logicalRect);
   }
 
   /**
@@ -104,7 +104,7 @@ class GlyphString : Boxed
    */
   void extentsRange(int start, int end, Font font, out Rectangle inkRect, out Rectangle logicalRect)
   {
-    pango_glyph_string_extents_range(cast(PangoGlyphString*)cPtr, start, end, font ? cast(PangoFont*)font.cPtr(false) : null, &inkRect, &logicalRect);
+    pango_glyph_string_extents_range(cast(PangoGlyphString*)cPtr, start, end, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, &inkRect, &logicalRect);
   }
 
   /**
@@ -143,7 +143,7 @@ class GlyphString : Boxed
    */
   void indexToX(string text, int length, Analysis analysis, int index, bool trailing, out int xPos)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     pango_glyph_string_index_to_x(cast(PangoGlyphString*)cPtr, _text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, index, trailing, cast(int*)&xPos);
   }
 
@@ -165,7 +165,7 @@ class GlyphString : Boxed
    */
   void indexToXFull(string text, int length, Analysis analysis, LogAttr attrs, int index, bool trailing, out int xPos)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     pango_glyph_string_index_to_x_full(cast(PangoGlyphString*)cPtr, _text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, &attrs, index, trailing, cast(int*)&xPos);
   }
 
@@ -197,7 +197,7 @@ class GlyphString : Boxed
    */
   void xToIndex(string text, int length, Analysis analysis, int xPos, out int index, out int trailing)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     pango_glyph_string_x_to_index(cast(PangoGlyphString*)cPtr, _text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, xPos, cast(int*)&index, cast(int*)&trailing);
   }
 }

@@ -13,14 +13,14 @@ class TlsFileDatabaseInterface
 {
   GTlsFileDatabaseInterface cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.TlsFileDatabaseInterface");
 
     cInstance = *cast(GTlsFileDatabaseInterface*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

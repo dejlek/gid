@@ -51,9 +51,9 @@ import Gtk.c.types;
 class Image : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -74,7 +74,7 @@ class Image : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -95,9 +95,9 @@ class Image : Widget
   static Image newFromFile(string filename)
   {
     GtkWidget* _cretval;
-    const(char)* _filename = filename.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_image_new_from_file(_filename);
-    auto _retval = _cretval ? ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,8 +113,8 @@ class Image : Widget
   static Image newFromGicon(Icon icon)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -130,9 +130,9 @@ class Image : Widget
   static Image newFromIconName(string iconName)
   {
     GtkWidget* _cretval;
-    const(char)* _iconName = iconName.toCString(false);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_image_new_from_icon_name(_iconName);
-    auto _retval = _cretval ? ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -150,8 +150,8 @@ class Image : Widget
   static Image newFromPaintable(Paintable paintable)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_paintable(paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_image_new_from_paintable(paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -175,8 +175,8 @@ class Image : Widget
   static Image newFromPixbuf(Pixbuf pixbuf)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -198,9 +198,9 @@ class Image : Widget
   static Image newFromResource(string resourcePath)
   {
     GtkWidget* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(false);
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_image_new_from_resource(_resourcePath);
-    auto _retval = _cretval ? ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class Image : Widget
   {
     GIcon* _cretval;
     _cretval = gtk_image_get_gicon(cast(GtkImage*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Icon(cast(GIcon*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class Image : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_image_get_icon_name(cast(GtkImage*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class Image : Widget
   {
     GdkPaintable* _cretval;
     _cretval = gtk_image_get_paintable(cast(GtkImage*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class Image : Widget
    */
   void setFromFile(string filename)
   {
-    const(char)* _filename = filename.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
     gtk_image_set_from_file(cast(GtkImage*)cPtr, _filename);
   }
 
@@ -318,7 +318,7 @@ class Image : Widget
    */
   void setFromGicon(Icon icon)
   {
-    gtk_image_set_from_gicon(cast(GtkImage*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(false) : null);
+    gtk_image_set_from_gicon(cast(GtkImage*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -329,7 +329,7 @@ class Image : Widget
    */
   void setFromIconName(string iconName)
   {
-    const(char)* _iconName = iconName.toCString(false);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_image_set_from_icon_name(cast(GtkImage*)cPtr, _iconName);
   }
 
@@ -341,7 +341,7 @@ class Image : Widget
    */
   void setFromPaintable(Paintable paintable)
   {
-    gtk_image_set_from_paintable(cast(GtkImage*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(false) : null);
+    gtk_image_set_from_paintable(cast(GtkImage*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
 
   /**
@@ -357,7 +357,7 @@ class Image : Widget
    */
   void setFromPixbuf(Pixbuf pixbuf)
   {
-    gtk_image_set_from_pixbuf(cast(GtkImage*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(false) : null);
+    gtk_image_set_from_pixbuf(cast(GtkImage*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**
@@ -368,7 +368,7 @@ class Image : Widget
    */
   void setFromResource(string resourcePath)
   {
-    const(char)* _resourcePath = resourcePath.toCString(false);
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_image_set_from_resource(cast(GtkImage*)cPtr, _resourcePath);
   }
 

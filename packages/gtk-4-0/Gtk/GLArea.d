@@ -107,9 +107,9 @@ import Gtk.c.types;
 class GLArea : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -130,7 +130,7 @@ class GLArea : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_gl_area_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -192,7 +192,7 @@ class GLArea : Widget
   {
     GdkGLContext* _cretval;
     _cretval = gtk_gl_area_get_context(cast(GtkGLArea*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 

@@ -30,7 +30,7 @@ template DtlsClientConnectionT()
   {
     GSocketConnectable* _cretval;
     _cretval = g_dtls_client_connection_get_server_identity(cast(GDtlsClientConnection*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnectable(cast(GSocketConnectable*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!SocketConnectable(cast(GSocketConnectable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -61,7 +61,7 @@ template DtlsClientConnectionT()
    */
   override void setServerIdentity(SocketConnectable identity)
   {
-    g_dtls_client_connection_set_server_identity(cast(GDtlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(false) : null);
+    g_dtls_client_connection_set_server_identity(cast(GDtlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null);
   }
 
   /**

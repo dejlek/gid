@@ -24,9 +24,9 @@ class TcpWrapperConnection : TcpConnection
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -49,8 +49,8 @@ class TcpWrapperConnection : TcpConnection
   this(IOStream baseIoStream, Socket socket)
   {
     GSocketConnection* _cretval;
-    _cretval = g_tcp_wrapper_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(false) : null, socket ? cast(GSocket*)socket.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = g_tcp_wrapper_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(No.Dup) : null, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -61,7 +61,7 @@ class TcpWrapperConnection : TcpConnection
   {
     GIOStream* _cretval;
     _cretval = g_tcp_wrapper_connection_get_base_io_stream(cast(GTcpWrapperConnection*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!IOStream(cast(GIOStream*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!IOStream(cast(GIOStream*)_cretval, No.Take);
     return _retval;
   }
 }

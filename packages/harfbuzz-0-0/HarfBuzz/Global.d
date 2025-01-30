@@ -41,7 +41,7 @@ import freetype2.Types;
 OtNameId aatLayoutFeatureTypeGetNameId(HBFace face, AatLayoutFeatureType featureType)
 {
   OtNameId _retval;
-  _retval = hb_aat_layout_feature_type_get_name_id(face ? cast(hb_face_t*)face.cPtr(false) : null, featureType);
+  _retval = hb_aat_layout_feature_type_get_name_id(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, featureType);
   return _retval;
 }
 
@@ -62,7 +62,7 @@ uint aatLayoutFeatureTypeGetSelectorInfos(HBFace face, AatLayoutFeatureType feat
 {
   uint _retval;
   uint _selectorCount;
-  _retval = hb_aat_layout_feature_type_get_selector_infos(face ? cast(hb_face_t*)face.cPtr(false) : null, featureType, startOffset, &_selectorCount, selectors.ptr, cast(uint*)&defaultIndex);
+  _retval = hb_aat_layout_feature_type_get_selector_infos(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, featureType, startOffset, &_selectorCount, selectors.ptr, cast(uint*)&defaultIndex);
   return _retval;
 }
 
@@ -78,7 +78,7 @@ uint aatLayoutGetFeatureTypes(HBFace face, uint startOffset, ref AatLayoutFeatur
 {
   uint _retval;
   uint _featureCount;
-  _retval = hb_aat_layout_get_feature_types(face ? cast(hb_face_t*)face.cPtr(false) : null, startOffset, &_featureCount, features.ptr);
+  _retval = hb_aat_layout_get_feature_types(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, startOffset, &_featureCount, features.ptr);
   return _retval;
 }
 
@@ -93,7 +93,7 @@ uint aatLayoutGetFeatureTypes(HBFace face, uint startOffset, ref AatLayoutFeatur
 Bool aatLayoutHasPositioning(HBFace face)
 {
   Bool _retval;
-  _retval = hb_aat_layout_has_positioning(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_aat_layout_has_positioning(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -108,7 +108,7 @@ Bool aatLayoutHasPositioning(HBFace face)
 Bool aatLayoutHasSubstitution(HBFace face)
 {
   Bool _retval;
-  _retval = hb_aat_layout_has_substitution(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_aat_layout_has_substitution(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -122,7 +122,7 @@ Bool aatLayoutHasSubstitution(HBFace face)
 Bool aatLayoutHasTracking(HBFace face)
 {
   Bool _retval;
-  _retval = hb_aat_layout_has_tracking(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_aat_layout_has_tracking(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -135,8 +135,8 @@ Bool aatLayoutHasTracking(HBFace face)
 Blob blobCopyWritableOrFail(Blob blob)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_blob_copy_writable_or_fail(blob ? cast(hb_blob_t*)blob.cPtr(false) : null);
-  auto _retval = _cretval ? new Blob(cast(void*)_cretval, true) : null;
+  _cretval = hb_blob_copy_writable_or_fail(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -151,9 +151,9 @@ Blob blobCopyWritableOrFail(Blob blob)
 Blob blobCreateFromFile(string fileName)
 {
   hb_blob_t* _cretval;
-  const(char)* _fileName = fileName.toCString(false);
+  const(char)* _fileName = fileName.toCString(No.Alloc);
   _cretval = hb_blob_create_from_file(_fileName);
-  auto _retval = _cretval ? new Blob(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -168,9 +168,9 @@ Blob blobCreateFromFile(string fileName)
 Blob blobCreateFromFileOrFail(string fileName)
 {
   hb_blob_t* _cretval;
-  const(char)* _fileName = fileName.toCString(false);
+  const(char)* _fileName = fileName.toCString(No.Alloc);
   _cretval = hb_blob_create_from_file_or_fail(_fileName);
-  auto _retval = _cretval ? new Blob(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -192,8 +192,8 @@ Blob blobCreateFromFileOrFail(string fileName)
 Blob blobCreateSubBlob(Blob parent, uint offset, uint length)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_blob_create_sub_blob(parent ? cast(hb_blob_t*)parent.cPtr(false) : null, offset, length);
-  auto _retval = _cretval ? new Blob(cast(void*)_cretval, true) : null;
+  _cretval = hb_blob_create_sub_blob(parent ? cast(hb_blob_t*)parent.cPtr(No.Dup) : null, offset, length);
+  auto _retval = _cretval ? new Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -207,7 +207,7 @@ string blobGetData(Blob blob)
 {
   const(char)* _cretval;
   uint _cretlength;
-  _cretval = hb_blob_get_data(blob ? cast(hb_blob_t*)blob.cPtr(false) : null, &_cretlength);
+  _cretval = hb_blob_get_data(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null, &_cretlength);
   string _retval;
 
   if (_cretval)
@@ -231,7 +231,7 @@ string blobGetDataWritable(Blob blob)
 {
   char* _cretval;
   uint _cretlength;
-  _cretval = hb_blob_get_data_writable(blob ? cast(hb_blob_t*)blob.cPtr(false) : null, &_cretlength);
+  _cretval = hb_blob_get_data_writable(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null, &_cretlength);
   string _retval;
 
   if (_cretval)
@@ -250,7 +250,7 @@ Blob blobGetEmpty()
 {
   hb_blob_t* _cretval;
   _cretval = hb_blob_get_empty();
-  auto _retval = _cretval ? new Blob(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -263,7 +263,7 @@ Blob blobGetEmpty()
 uint blobGetLength(Blob blob)
 {
   uint _retval;
-  _retval = hb_blob_get_length(blob ? cast(hb_blob_t*)blob.cPtr(false) : null);
+  _retval = hb_blob_get_length(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -276,7 +276,7 @@ uint blobGetLength(Blob blob)
 Bool blobIsImmutable(Blob blob)
 {
   Bool _retval;
-  _retval = hb_blob_is_immutable(blob ? cast(hb_blob_t*)blob.cPtr(false) : null);
+  _retval = hb_blob_is_immutable(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -287,7 +287,7 @@ Bool blobIsImmutable(Blob blob)
  */
 void blobMakeImmutable(Blob blob)
 {
-  hb_blob_make_immutable(blob ? cast(hb_blob_t*)blob.cPtr(false) : null);
+  hb_blob_make_immutable(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
 }
 
 /**
@@ -305,7 +305,7 @@ void blobMakeImmutable(Blob blob)
  */
 void bufferAdd(Buffer buffer, Codepoint codepoint, uint cluster)
 {
-  hb_buffer_add(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, codepoint, cluster);
+  hb_buffer_add(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, codepoint, cluster);
 }
 
 /**
@@ -336,7 +336,7 @@ void bufferAddCodepoints(Buffer buffer, Codepoint[] text, uint itemOffset, int i
     _textLength = cast(int)text.length;
 
   auto _text = cast(const(hb_codepoint_t)*)text.ptr;
-  hb_buffer_add_codepoints(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, _text, _textLength, itemOffset, itemLength);
+  hb_buffer_add_codepoints(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _text, _textLength, itemOffset, itemLength);
 }
 
 /**
@@ -358,7 +358,7 @@ void bufferAddLatin1(Buffer buffer, ubyte[] text, uint itemOffset, int itemLengt
     _textLength = cast(int)text.length;
 
   auto _text = cast(const(ubyte)*)text.ptr;
-  hb_buffer_add_latin1(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, _text, _textLength, itemOffset, itemLength);
+  hb_buffer_add_latin1(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _text, _textLength, itemOffset, itemLength);
 }
 
 /**
@@ -379,7 +379,7 @@ void bufferAddUtf16(Buffer buffer, ushort[] text, uint itemOffset, int itemLengt
     _textLength = cast(int)text.length;
 
   auto _text = cast(const(ushort)*)text.ptr;
-  hb_buffer_add_utf16(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, _text, _textLength, itemOffset, itemLength);
+  hb_buffer_add_utf16(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _text, _textLength, itemOffset, itemLength);
 }
 
 /**
@@ -400,7 +400,7 @@ void bufferAddUtf32(Buffer buffer, uint[] text, uint itemOffset, int itemLength)
     _textLength = cast(int)text.length;
 
   auto _text = cast(const(uint)*)text.ptr;
-  hb_buffer_add_utf32(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, _text, _textLength, itemOffset, itemLength);
+  hb_buffer_add_utf32(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _text, _textLength, itemOffset, itemLength);
 }
 
 /**
@@ -422,7 +422,7 @@ void bufferAddUtf8(Buffer buffer, ubyte[] text, uint itemOffset, int itemLength)
     _textLength = cast(int)text.length;
 
   auto _text = cast(const(ubyte)*)text.ptr;
-  hb_buffer_add_utf8(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, _text, _textLength, itemOffset, itemLength);
+  hb_buffer_add_utf8(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _text, _textLength, itemOffset, itemLength);
 }
 
 /**
@@ -434,7 +434,7 @@ void bufferAddUtf8(Buffer buffer, ubyte[] text, uint itemOffset, int itemLength)
 Bool bufferAllocationSuccessful(Buffer buffer)
 {
   Bool _retval;
-  _retval = hb_buffer_allocation_successful(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  _retval = hb_buffer_allocation_successful(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -448,7 +448,7 @@ Bool bufferAllocationSuccessful(Buffer buffer)
  */
 void bufferAppend(Buffer buffer, Buffer source, uint start, uint end)
 {
-  hb_buffer_append(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, source ? cast(hb_buffer_t*)source.cPtr(false) : null, start, end);
+  hb_buffer_append(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, source ? cast(hb_buffer_t*)source.cPtr(No.Dup) : null, start, end);
 }
 
 /**
@@ -459,7 +459,7 @@ void bufferAppend(Buffer buffer, Buffer source, uint start, uint end)
  */
 void bufferClearContents(Buffer buffer)
 {
-  hb_buffer_clear_contents(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  hb_buffer_clear_contents(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -474,7 +474,7 @@ Buffer bufferCreate()
 {
   hb_buffer_t* _cretval;
   _cretval = hb_buffer_create();
-  auto _retval = _cretval ? new Buffer(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -488,8 +488,8 @@ Buffer bufferCreate()
 Buffer bufferCreateSimilar(Buffer src)
 {
   hb_buffer_t* _cretval;
-  _cretval = hb_buffer_create_similar(src ? cast(hb_buffer_t*)src.cPtr(false) : null);
-  auto _retval = _cretval ? new Buffer(cast(void*)_cretval, true) : null;
+  _cretval = hb_buffer_create_similar(src ? cast(hb_buffer_t*)src.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -515,8 +515,8 @@ Bool bufferDeserializeGlyphs(Buffer buffer, string buf, out string endPtr, Font 
 
   auto _buf = cast(const(char)*)buf.ptr;
   char* _endPtr;
-  _retval = hb_buffer_deserialize_glyphs(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, _buf, _bufLen, &_endPtr, font ? cast(hb_font_t*)font.cPtr(false) : null, format);
-  endPtr = _endPtr.fromCString(true);
+  _retval = hb_buffer_deserialize_glyphs(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _buf, _bufLen, &_endPtr, font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, format);
+  endPtr = _endPtr.fromCString(Yes.Free);
   return _retval;
 }
 
@@ -541,8 +541,8 @@ Bool bufferDeserializeUnicode(Buffer buffer, string buf, out string endPtr, Buff
 
   auto _buf = cast(const(char)*)buf.ptr;
   char* _endPtr;
-  _retval = hb_buffer_deserialize_unicode(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, _buf, _bufLen, &_endPtr, format);
-  endPtr = _endPtr.fromCString(true);
+  _retval = hb_buffer_deserialize_unicode(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _buf, _bufLen, &_endPtr, format);
+  endPtr = _endPtr.fromCString(Yes.Free);
   return _retval;
 }
 
@@ -560,7 +560,7 @@ Bool bufferDeserializeUnicode(Buffer buffer, string buf, out string endPtr, Buff
 BufferDiffFlags bufferDiff(Buffer buffer, Buffer reference, Codepoint dottedcircleGlyph, uint positionFuzz)
 {
   hb_buffer_diff_flags_t _cretval;
-  _cretval = hb_buffer_diff(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, reference ? cast(hb_buffer_t*)reference.cPtr(false) : null, dottedcircleGlyph, positionFuzz);
+  _cretval = hb_buffer_diff(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, reference ? cast(hb_buffer_t*)reference.cPtr(No.Dup) : null, dottedcircleGlyph, positionFuzz);
   BufferDiffFlags _retval = cast(BufferDiffFlags)_cretval;
   return _retval;
 }
@@ -576,7 +576,7 @@ BufferDiffFlags bufferDiff(Buffer buffer, Buffer reference, Codepoint dottedcirc
 BufferClusterLevel bufferGetClusterLevel(Buffer buffer)
 {
   hb_buffer_cluster_level_t _cretval;
-  _cretval = hb_buffer_get_cluster_level(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  _cretval = hb_buffer_get_cluster_level(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   BufferClusterLevel _retval = cast(BufferClusterLevel)_cretval;
   return _retval;
 }
@@ -591,7 +591,7 @@ BufferClusterLevel bufferGetClusterLevel(Buffer buffer)
 BufferContentType bufferGetContentType(Buffer buffer)
 {
   hb_buffer_content_type_t _cretval;
-  _cretval = hb_buffer_get_content_type(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  _cretval = hb_buffer_get_content_type(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   BufferContentType _retval = cast(BufferContentType)_cretval;
   return _retval;
 }
@@ -605,7 +605,7 @@ BufferContentType bufferGetContentType(Buffer buffer)
 Direction bufferGetDirection(Buffer buffer)
 {
   hb_direction_t _cretval;
-  _cretval = hb_buffer_get_direction(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  _cretval = hb_buffer_get_direction(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   Direction _retval = cast(Direction)_cretval;
   return _retval;
 }
@@ -618,7 +618,7 @@ Buffer bufferGetEmpty()
 {
   hb_buffer_t* _cretval;
   _cretval = hb_buffer_get_empty();
-  auto _retval = _cretval ? new Buffer(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -631,7 +631,7 @@ Buffer bufferGetEmpty()
 BufferFlags bufferGetFlags(Buffer buffer)
 {
   hb_buffer_flags_t _cretval;
-  _cretval = hb_buffer_get_flags(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  _cretval = hb_buffer_get_flags(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   BufferFlags _retval = cast(BufferFlags)_cretval;
   return _retval;
 }
@@ -648,14 +648,14 @@ GlyphInfo[] bufferGetGlyphInfos(Buffer buffer)
 {
   hb_glyph_info_t* _cretval;
   uint _cretlength;
-  _cretval = hb_buffer_get_glyph_infos(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, &_cretlength);
+  _cretval = hb_buffer_get_glyph_infos(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, &_cretlength);
   GlyphInfo[] _retval;
 
   if (_cretval)
   {
     _retval = new GlyphInfo[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = new GlyphInfo(cast(void*)&_cretval[i], false);
+      _retval[i] = new GlyphInfo(cast(void*)&_cretval[i], No.Take);
   }
   return _retval;
 }
@@ -676,14 +676,14 @@ GlyphPosition[] bufferGetGlyphPositions(Buffer buffer)
 {
   hb_glyph_position_t* _cretval;
   uint _cretlength;
-  _cretval = hb_buffer_get_glyph_positions(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, &_cretlength);
+  _cretval = hb_buffer_get_glyph_positions(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, &_cretlength);
   GlyphPosition[] _retval;
 
   if (_cretval)
   {
     _retval = new GlyphPosition[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = new GlyphPosition(cast(void*)&_cretval[i], false);
+      _retval[i] = new GlyphPosition(cast(void*)&_cretval[i], No.Take);
   }
   return _retval;
 }
@@ -697,7 +697,7 @@ GlyphPosition[] bufferGetGlyphPositions(Buffer buffer)
 Codepoint bufferGetInvisibleGlyph(Buffer buffer)
 {
   Codepoint _retval;
-  _retval = hb_buffer_get_invisible_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  _retval = hb_buffer_get_invisible_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -709,7 +709,7 @@ Codepoint bufferGetInvisibleGlyph(Buffer buffer)
  */
 Language bufferGetLanguage(Buffer buffer)
 {
-  auto _retval = hb_buffer_get_language(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  auto _retval = hb_buffer_get_language(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -723,7 +723,7 @@ Language bufferGetLanguage(Buffer buffer)
 uint bufferGetLength(Buffer buffer)
 {
   uint _retval;
-  _retval = hb_buffer_get_length(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  _retval = hb_buffer_get_length(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -736,7 +736,7 @@ uint bufferGetLength(Buffer buffer)
 Codepoint bufferGetNotFoundGlyph(Buffer buffer)
 {
   Codepoint _retval;
-  _retval = hb_buffer_get_not_found_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  _retval = hb_buffer_get_not_found_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -750,7 +750,7 @@ Codepoint bufferGetNotFoundGlyph(Buffer buffer)
 Codepoint bufferGetReplacementCodepoint(Buffer buffer)
 {
   Codepoint _retval;
-  _retval = hb_buffer_get_replacement_codepoint(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  _retval = hb_buffer_get_replacement_codepoint(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -763,7 +763,7 @@ Codepoint bufferGetReplacementCodepoint(Buffer buffer)
 Script bufferGetScript(Buffer buffer)
 {
   hb_script_t _cretval;
-  _cretval = hb_buffer_get_script(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  _cretval = hb_buffer_get_script(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   Script _retval = cast(Script)_cretval;
   return _retval;
 }
@@ -777,8 +777,8 @@ Script bufferGetScript(Buffer buffer)
 void bufferGetSegmentProperties(Buffer buffer, out SegmentProperties props)
 {
   hb_segment_properties_t _props;
-  hb_buffer_get_segment_properties(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, &_props);
-  props = new SegmentProperties(cast(void*)&_props, false);
+  hb_buffer_get_segment_properties(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, &_props);
+  props = new SegmentProperties(cast(void*)&_props, No.Take);
 }
 
 /**
@@ -790,8 +790,8 @@ void bufferGetSegmentProperties(Buffer buffer, out SegmentProperties props)
 UnicodeFuncs bufferGetUnicodeFuncs(Buffer buffer)
 {
   hb_unicode_funcs_t* _cretval;
-  _cretval = hb_buffer_get_unicode_funcs(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
-  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, true) : null;
+  _cretval = hb_buffer_get_unicode_funcs(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -819,7 +819,7 @@ UnicodeFuncs bufferGetUnicodeFuncs(Buffer buffer)
  */
 void bufferGuessSegmentProperties(Buffer buffer)
 {
-  hb_buffer_guess_segment_properties(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  hb_buffer_guess_segment_properties(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -833,7 +833,7 @@ void bufferGuessSegmentProperties(Buffer buffer)
 Bool bufferHasPositions(Buffer buffer)
 {
   Bool _retval;
-  _retval = hb_buffer_has_positions(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  _retval = hb_buffer_has_positions(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -846,7 +846,7 @@ Bool bufferHasPositions(Buffer buffer)
  */
 void bufferNormalizeGlyphs(Buffer buffer)
 {
-  hb_buffer_normalize_glyphs(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  hb_buffer_normalize_glyphs(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -859,7 +859,7 @@ void bufferNormalizeGlyphs(Buffer buffer)
 Bool bufferPreAllocate(Buffer buffer, uint size)
 {
   Bool _retval;
-  _retval = hb_buffer_pre_allocate(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, size);
+  _retval = hb_buffer_pre_allocate(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, size);
   return _retval;
 }
 
@@ -871,7 +871,7 @@ Bool bufferPreAllocate(Buffer buffer, uint size)
  */
 void bufferReset(Buffer buffer)
 {
-  hb_buffer_reset(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  hb_buffer_reset(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -881,7 +881,7 @@ void bufferReset(Buffer buffer)
  */
 void bufferReverse(Buffer buffer)
 {
-  hb_buffer_reverse(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  hb_buffer_reverse(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -893,7 +893,7 @@ void bufferReverse(Buffer buffer)
  */
 void bufferReverseClusters(Buffer buffer)
 {
-  hb_buffer_reverse_clusters(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null);
+  hb_buffer_reverse_clusters(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -905,7 +905,7 @@ void bufferReverseClusters(Buffer buffer)
  */
 void bufferReverseRange(Buffer buffer, uint start, uint end)
 {
-  hb_buffer_reverse_range(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, start, end);
+  hb_buffer_reverse_range(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, start, end);
 }
 
 /**
@@ -940,7 +940,7 @@ string bufferSerializeFormatToString(BufferSerializeFormat format)
 {
   const(char)* _cretval;
   _cretval = hb_buffer_serialize_format_to_string(format);
-  string _retval = _cretval.fromCString(false);
+  string _retval = _cretval.fromCString(No.Free);
   return _retval;
 }
 
@@ -961,7 +961,7 @@ string[] bufferSerializeListFormats()
       break;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(false);
+      _retval[i] = _cretval[i].fromCString(No.Free);
   }
   return _retval;
 }
@@ -976,7 +976,7 @@ string[] bufferSerializeListFormats()
  */
 void bufferSetClusterLevel(Buffer buffer, BufferClusterLevel clusterLevel)
 {
-  hb_buffer_set_cluster_level(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, clusterLevel);
+  hb_buffer_set_cluster_level(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, clusterLevel);
 }
 
 /**
@@ -1009,7 +1009,7 @@ void bufferSetClusterLevel(Buffer buffer, BufferClusterLevel clusterLevel)
  */
 void bufferSetContentType(Buffer buffer, BufferContentType contentType)
 {
-  hb_buffer_set_content_type(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, contentType);
+  hb_buffer_set_content_type(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, contentType);
 }
 
 /**
@@ -1026,7 +1026,7 @@ void bufferSetContentType(Buffer buffer, BufferContentType contentType)
  */
 void bufferSetDirection(Buffer buffer, Direction direction)
 {
-  hb_buffer_set_direction(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, direction);
+  hb_buffer_set_direction(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, direction);
 }
 
 /**
@@ -1037,7 +1037,7 @@ void bufferSetDirection(Buffer buffer, Direction direction)
  */
 void bufferSetFlags(Buffer buffer, BufferFlags flags)
 {
-  hb_buffer_set_flags(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, flags);
+  hb_buffer_set_flags(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, flags);
 }
 
 /**
@@ -1051,7 +1051,7 @@ void bufferSetFlags(Buffer buffer, BufferFlags flags)
  */
 void bufferSetInvisibleGlyph(Buffer buffer, Codepoint invisible)
 {
-  hb_buffer_set_invisible_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, invisible);
+  hb_buffer_set_invisible_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, invisible);
 }
 
 /**
@@ -1068,7 +1068,7 @@ void bufferSetInvisibleGlyph(Buffer buffer, Codepoint invisible)
  */
 void bufferSetLanguage(Buffer buffer, Language language)
 {
-  hb_buffer_set_language(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, language);
+  hb_buffer_set_language(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, language);
 }
 
 /**
@@ -1082,7 +1082,7 @@ void bufferSetLanguage(Buffer buffer, Language language)
 Bool bufferSetLength(Buffer buffer, uint length)
 {
   Bool _retval;
-  _retval = hb_buffer_set_length(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, length);
+  _retval = hb_buffer_set_length(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, length);
   return _retval;
 }
 
@@ -1097,14 +1097,14 @@ void bufferSetMessageFunc(Buffer buffer, BufferMessageFunc func)
   extern(C) hb_bool_t _funcCallback(hb_buffer_t* buffer, hb_font_t* font, const(char)* message, void* userData)
   {
     auto _dlg = cast(BufferMessageFunc*)userData;
-    string _message = message.fromCString(false);
+    string _message = message.fromCString(No.Free);
 
-    hb_bool_t _retval = (*_dlg)(buffer ? new Buffer(cast(void*)buffer, false) : null, font ? new Font(cast(void*)font, false) : null, _message);
+    hb_bool_t _retval = (*_dlg)(buffer ? new Buffer(cast(void*)buffer, No.Take) : null, font ? new Font(cast(void*)font, No.Take) : null, _message);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_buffer_set_message_func(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_buffer_set_message_func(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -1118,7 +1118,7 @@ void bufferSetMessageFunc(Buffer buffer, BufferMessageFunc func)
  */
 void bufferSetNotFoundGlyph(Buffer buffer, Codepoint notFound)
 {
-  hb_buffer_set_not_found_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, notFound);
+  hb_buffer_set_not_found_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, notFound);
 }
 
 /**
@@ -1131,7 +1131,7 @@ void bufferSetNotFoundGlyph(Buffer buffer, Codepoint notFound)
  */
 void bufferSetReplacementCodepoint(Buffer buffer, Codepoint replacement)
 {
-  hb_buffer_set_replacement_codepoint(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, replacement);
+  hb_buffer_set_replacement_codepoint(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, replacement);
 }
 
 /**
@@ -1148,7 +1148,7 @@ void bufferSetReplacementCodepoint(Buffer buffer, Codepoint replacement)
  */
 void bufferSetScript(Buffer buffer, Script script)
 {
-  hb_buffer_set_script(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, script);
+  hb_buffer_set_script(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, script);
 }
 
 /**
@@ -1161,7 +1161,7 @@ void bufferSetScript(Buffer buffer, Script script)
  */
 void bufferSetSegmentProperties(Buffer buffer, SegmentProperties props)
 {
-  hb_buffer_set_segment_properties(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, props ? cast(hb_segment_properties_t*)props.cPtr(false) : null);
+  hb_buffer_set_segment_properties(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, props ? cast(hb_segment_properties_t*)props.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1173,7 +1173,7 @@ void bufferSetSegmentProperties(Buffer buffer, SegmentProperties props)
  */
 void bufferSetUnicodeFuncs(Buffer buffer, UnicodeFuncs unicodeFuncs)
 {
-  hb_buffer_set_unicode_funcs(buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, unicodeFuncs ? cast(hb_unicode_funcs_t*)unicodeFuncs.cPtr(false) : null);
+  hb_buffer_set_unicode_funcs(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, unicodeFuncs ? cast(hb_unicode_funcs_t*)unicodeFuncs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1245,10 +1245,10 @@ uint colorLineGetColorStops(ColorLine colorLine, uint start, ref ColorStop[] col
   uint _count;
   hb_color_stop_t[] _colorStops;
   _colorStops.length = _count;
-  _retval = hb_color_line_get_color_stops(colorLine ? cast(hb_color_line_t*)colorLine.cPtr(false) : null, start, &_count, _colorStops.ptr);
+  _retval = hb_color_line_get_color_stops(colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.Dup) : null, start, &_count, _colorStops.ptr);
   colorStops.length = _count;
   foreach (i; 0 .. _count)
-    colorStops[i] = new ColorStop(cast(void*)&_colorStops[i], false);
+    colorStops[i] = new ColorStop(cast(void*)&_colorStops[i], No.Take);
   return _retval;
 }
 
@@ -1261,7 +1261,7 @@ uint colorLineGetColorStops(ColorLine colorLine, uint start, ref ColorStop[] col
 PaintExtend colorLineGetExtend(ColorLine colorLine)
 {
   hb_paint_extend_t _cretval;
-  _cretval = hb_color_line_get_extend(colorLine ? cast(hb_color_line_t*)colorLine.cPtr(false) : null);
+  _cretval = hb_color_line_get_extend(colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.Dup) : null);
   PaintExtend _retval = cast(PaintExtend)_cretval;
   return _retval;
 }
@@ -1298,7 +1298,7 @@ string directionToString(Direction direction)
 {
   const(char)* _cretval;
   _cretval = hb_direction_to_string(direction);
-  string _retval = _cretval.fromCString(false);
+  string _retval = _cretval.fromCString(No.Free);
   return _retval;
 }
 
@@ -1311,7 +1311,7 @@ string directionToString(Direction direction)
  */
 void drawClosePath(DrawFuncs dfuncs, void* drawData, DrawState st)
 {
-  hb_draw_close_path(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(false) : null);
+  hb_draw_close_path(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1329,7 +1329,7 @@ void drawClosePath(DrawFuncs dfuncs, void* drawData, DrawState st)
  */
 void drawCubicTo(DrawFuncs dfuncs, void* drawData, DrawState st, float control1X, float control1Y, float control2X, float control2Y, float toX, float toY)
 {
-  hb_draw_cubic_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(false) : null, control1X, control1Y, control2X, control2Y, toX, toY);
+  hb_draw_cubic_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.Dup) : null, control1X, control1Y, control2X, control2Y, toX, toY);
 }
 
 /**
@@ -1344,7 +1344,7 @@ DrawFuncs drawFuncsCreate()
 {
   hb_draw_funcs_t* _cretval;
   _cretval = hb_draw_funcs_create();
-  auto _retval = _cretval ? new DrawFuncs(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new DrawFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1356,7 +1356,7 @@ DrawFuncs drawFuncsGetEmpty()
 {
   hb_draw_funcs_t* _cretval;
   _cretval = hb_draw_funcs_get_empty();
-  auto _retval = _cretval ? new DrawFuncs(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new DrawFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1369,7 +1369,7 @@ DrawFuncs drawFuncsGetEmpty()
 Bool drawFuncsIsImmutable(DrawFuncs dfuncs)
 {
   Bool _retval;
-  _retval = hb_draw_funcs_is_immutable(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null);
+  _retval = hb_draw_funcs_is_immutable(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1380,7 +1380,7 @@ Bool drawFuncsIsImmutable(DrawFuncs dfuncs)
  */
 void drawFuncsMakeImmutable(DrawFuncs dfuncs)
 {
-  hb_draw_funcs_make_immutable(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null);
+  hb_draw_funcs_make_immutable(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1395,11 +1395,11 @@ void drawFuncsSetClosePathFunc(DrawFuncs dfuncs, DrawClosePathFunc func)
   {
     auto _dlg = cast(DrawClosePathFunc*)userData;
 
-    (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, false) : null, drawData, st ? new DrawState(cast(void*)st, false) : null);
+    (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new DrawState(cast(void*)st, No.Take) : null);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_draw_funcs_set_close_path_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_draw_funcs_set_close_path_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -1414,11 +1414,11 @@ void drawFuncsSetCubicToFunc(DrawFuncs dfuncs, DrawCubicToFunc func)
   {
     auto _dlg = cast(DrawCubicToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, false) : null, drawData, st ? new DrawState(cast(void*)st, false) : null, control1X, control1Y, control2X, control2Y, toX, toY);
+    (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new DrawState(cast(void*)st, No.Take) : null, control1X, control1Y, control2X, control2Y, toX, toY);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_draw_funcs_set_cubic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_draw_funcs_set_cubic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -1433,11 +1433,11 @@ void drawFuncsSetLineToFunc(DrawFuncs dfuncs, DrawLineToFunc func)
   {
     auto _dlg = cast(DrawLineToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, false) : null, drawData, st ? new DrawState(cast(void*)st, false) : null, toX, toY);
+    (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new DrawState(cast(void*)st, No.Take) : null, toX, toY);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_draw_funcs_set_line_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_draw_funcs_set_line_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -1452,11 +1452,11 @@ void drawFuncsSetMoveToFunc(DrawFuncs dfuncs, DrawMoveToFunc func)
   {
     auto _dlg = cast(DrawMoveToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, false) : null, drawData, st ? new DrawState(cast(void*)st, false) : null, toX, toY);
+    (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new DrawState(cast(void*)st, No.Take) : null, toX, toY);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_draw_funcs_set_move_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_draw_funcs_set_move_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -1471,11 +1471,11 @@ void drawFuncsSetQuadraticToFunc(DrawFuncs dfuncs, DrawQuadraticToFunc func)
   {
     auto _dlg = cast(DrawQuadraticToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, false) : null, drawData, st ? new DrawState(cast(void*)st, false) : null, controlX, controlY, toX, toY);
+    (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new DrawState(cast(void*)st, No.Take) : null, controlX, controlY, toX, toY);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_draw_funcs_set_quadratic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_draw_funcs_set_quadratic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -1489,7 +1489,7 @@ void drawFuncsSetQuadraticToFunc(DrawFuncs dfuncs, DrawQuadraticToFunc func)
  */
 void drawLineTo(DrawFuncs dfuncs, void* drawData, DrawState st, float toX, float toY)
 {
-  hb_draw_line_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(false) : null, toX, toY);
+  hb_draw_line_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.Dup) : null, toX, toY);
 }
 
 /**
@@ -1503,7 +1503,7 @@ void drawLineTo(DrawFuncs dfuncs, void* drawData, DrawState st, float toX, float
  */
 void drawMoveTo(DrawFuncs dfuncs, void* drawData, DrawState st, float toX, float toY)
 {
-  hb_draw_move_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(false) : null, toX, toY);
+  hb_draw_move_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.Dup) : null, toX, toY);
 }
 
 /**
@@ -1519,7 +1519,7 @@ void drawMoveTo(DrawFuncs dfuncs, void* drawData, DrawState st, float toX, float
  */
 void drawQuadraticTo(DrawFuncs dfuncs, void* drawData, DrawState st, float controlX, float controlY, float toX, float toY)
 {
-  hb_draw_quadratic_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(false) : null, controlX, controlY, toX, toY);
+  hb_draw_quadratic_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.Dup) : null, controlX, controlY, toX, toY);
 }
 
 /**
@@ -1534,7 +1534,7 @@ void drawQuadraticTo(DrawFuncs dfuncs, void* drawData, DrawState st, float contr
 Bool faceBuilderAddTable(HBFace face, Tag tag, Blob blob)
 {
   Bool _retval;
-  _retval = hb_face_builder_add_table(face ? cast(hb_face_t*)face.cPtr(false) : null, tag, blob ? cast(hb_blob_t*)blob.cPtr(false) : null);
+  _retval = hb_face_builder_add_table(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tag, blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1548,7 +1548,7 @@ HBFace faceBuilderCreate()
 {
   hb_face_t* _cretval;
   _cretval = hb_face_builder_create();
-  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1564,7 +1564,7 @@ HBFace faceBuilderCreate()
 void faceBuilderSortTables(HBFace face, Tag[] tags)
 {
   auto _tags = cast(const(hb_tag_t)*)(tags ~ hb_tag_t.init).ptr;
-  hb_face_builder_sort_tables(face ? cast(hb_face_t*)face.cPtr(false) : null, _tags);
+  hb_face_builder_sort_tables(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, _tags);
 }
 
 /**
@@ -1576,7 +1576,7 @@ void faceBuilderSortTables(HBFace face, Tag[] tags)
 uint faceCount(Blob blob)
 {
   uint _retval;
-  _retval = hb_face_count(blob ? cast(hb_blob_t*)blob.cPtr(false) : null);
+  _retval = hb_face_count(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1600,8 +1600,8 @@ uint faceCount(Blob blob)
 HBFace faceCreate(Blob blob, uint index)
 {
   hb_face_t* _cretval;
-  _cretval = hb_face_create(blob ? cast(hb_blob_t*)blob.cPtr(false) : null, index);
-  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, true) : null;
+  _cretval = hb_face_create(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null, index);
+  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1623,8 +1623,8 @@ HBFace faceCreateForTables(ReferenceTableFunc referenceTableFunc)
     Blob _dretval;
     auto _dlg = cast(ReferenceTableFunc*)userData;
 
-    _dretval = (*_dlg)(face ? new HBFace(cast(void*)face, false) : null, tag);
-    hb_blob_t* _retval = cast(hb_blob_t*)_dretval.cPtr(true);
+    _dretval = (*_dlg)(face ? new HBFace(cast(void*)face, No.Take) : null, tag);
+    hb_blob_t* _retval = cast(hb_blob_t*)_dretval.cPtr(Yes.Dup);
 
     return _retval;
   }
@@ -1632,7 +1632,7 @@ HBFace faceCreateForTables(ReferenceTableFunc referenceTableFunc)
   hb_face_t* _cretval;
   auto _referenceTableFunc = freezeDelegate(cast(void*)&referenceTableFunc);
   _cretval = hb_face_create_for_tables(&_referenceTableFuncCallback, _referenceTableFunc, &thawDelegate);
-  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1644,7 +1644,7 @@ HBFace faceGetEmpty()
 {
   hb_face_t* _cretval;
   _cretval = hb_face_get_empty();
-  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1657,7 +1657,7 @@ HBFace faceGetEmpty()
 uint faceGetGlyphCount(HBFace face)
 {
   uint _retval;
-  _retval = hb_face_get_glyph_count(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_face_get_glyph_count(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1671,7 +1671,7 @@ uint faceGetGlyphCount(HBFace face)
 uint faceGetIndex(HBFace face)
 {
   uint _retval;
-  _retval = hb_face_get_index(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_face_get_index(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1688,7 +1688,7 @@ uint faceGetTableTags(HBFace face, uint startOffset, ref Tag[] tableTags)
 {
   uint _retval;
   uint _tableCount;
-  _retval = hb_face_get_table_tags(face ? cast(hb_face_t*)face.cPtr(false) : null, startOffset, &_tableCount, tableTags.ptr);
+  _retval = hb_face_get_table_tags(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, startOffset, &_tableCount, tableTags.ptr);
   return _retval;
 }
 
@@ -1703,7 +1703,7 @@ uint faceGetTableTags(HBFace face, uint startOffset, ref Tag[] tableTags)
 uint faceGetUpem(HBFace face)
 {
   uint _retval;
-  _retval = hb_face_get_upem(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_face_get_upem(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1716,7 +1716,7 @@ uint faceGetUpem(HBFace face)
 Bool faceIsImmutable(HBFace face)
 {
   Bool _retval;
-  _retval = hb_face_is_immutable(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_face_is_immutable(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1727,7 +1727,7 @@ Bool faceIsImmutable(HBFace face)
  */
 void faceMakeImmutable(HBFace face)
 {
-  hb_face_make_immutable(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  hb_face_make_immutable(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1741,8 +1741,8 @@ void faceMakeImmutable(HBFace face)
 Blob faceReferenceBlob(HBFace face)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_face_reference_blob(face ? cast(hb_face_t*)face.cPtr(false) : null);
-  auto _retval = _cretval ? new Blob(cast(void*)_cretval, true) : null;
+  _cretval = hb_face_reference_blob(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1757,8 +1757,8 @@ Blob faceReferenceBlob(HBFace face)
 Blob faceReferenceTable(HBFace face, Tag tag)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_face_reference_table(face ? cast(hb_face_t*)face.cPtr(false) : null, tag);
-  auto _retval = _cretval ? new Blob(cast(void*)_cretval, true) : null;
+  _cretval = hb_face_reference_table(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tag);
+  auto _retval = _cretval ? new Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1771,7 +1771,7 @@ Blob faceReferenceTable(HBFace face, Tag tag)
  */
 void faceSetGlyphCount(HBFace face, uint glyphCount)
 {
-  hb_face_set_glyph_count(face ? cast(hb_face_t*)face.cPtr(false) : null, glyphCount);
+  hb_face_set_glyph_count(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyphCount);
 }
 
 /**
@@ -1785,7 +1785,7 @@ void faceSetGlyphCount(HBFace face, uint glyphCount)
  */
 void faceSetIndex(HBFace face, uint index)
 {
-  hb_face_set_index(face ? cast(hb_face_t*)face.cPtr(false) : null, index);
+  hb_face_set_index(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, index);
 }
 
 /**
@@ -1797,7 +1797,7 @@ void faceSetIndex(HBFace face, uint index)
  */
 void faceSetUpem(HBFace face, uint upem)
 {
-  hb_face_set_upem(face ? cast(hb_face_t*)face.cPtr(false) : null, upem);
+  hb_face_set_upem(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, upem);
 }
 
 /**
@@ -1849,7 +1849,7 @@ Bool featureFromString(ubyte[] str, out Feature feature)
   auto _str = cast(const(ubyte)*)str.ptr;
   hb_feature_t _feature;
   _retval = hb_feature_from_string(_str, _len, &_feature);
-  feature = new Feature(cast(void*)&_feature, false);
+  feature = new Feature(cast(void*)&_feature, No.Take);
   return _retval;
 }
 
@@ -1869,7 +1869,7 @@ Bool featureFromString(ubyte[] str, out Feature feature)
  */
 void fontAddGlyphOriginForDirection(Font font, Codepoint glyph, Direction direction, ref Position x, ref Position y)
 {
-  hb_font_add_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  hb_font_add_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
 
 /**
@@ -1881,7 +1881,7 @@ void fontAddGlyphOriginForDirection(Font font, Codepoint glyph, Direction direct
  */
 void fontChanged(Font font)
 {
-  hb_font_changed(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  hb_font_changed(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1899,8 +1899,8 @@ void fontChanged(Font font)
 Font fontCreate(HBFace face)
 {
   hb_font_t* _cretval;
-  _cretval = hb_font_create(face ? cast(hb_face_t*)face.cPtr(false) : null);
-  auto _retval = _cretval ? new Font(cast(void*)_cretval, true) : null;
+  _cretval = hb_font_create(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new Font(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1914,8 +1914,8 @@ Font fontCreate(HBFace face)
 Font fontCreateSubFont(Font parent)
 {
   hb_font_t* _cretval;
-  _cretval = hb_font_create_sub_font(parent ? cast(hb_font_t*)parent.cPtr(false) : null);
-  auto _retval = _cretval ? new Font(cast(void*)_cretval, true) : null;
+  _cretval = hb_font_create_sub_font(parent ? cast(hb_font_t*)parent.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new Font(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1931,7 +1931,7 @@ Font fontCreateSubFont(Font parent)
  */
 void fontDrawGlyph(Font font, Codepoint glyph, DrawFuncs dfuncs, void* drawData)
 {
-  hb_font_draw_glyph(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, drawData);
+  hb_font_draw_glyph(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData);
 }
 
 /**
@@ -1942,7 +1942,7 @@ FontFuncs fontFuncsCreate()
 {
   hb_font_funcs_t* _cretval;
   _cretval = hb_font_funcs_create();
-  auto _retval = _cretval ? new FontFuncs(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new FontFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1954,7 +1954,7 @@ FontFuncs fontFuncsGetEmpty()
 {
   hb_font_funcs_t* _cretval;
   _cretval = hb_font_funcs_get_empty();
-  auto _retval = _cretval ? new FontFuncs(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new FontFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1967,7 +1967,7 @@ FontFuncs fontFuncsGetEmpty()
 Bool fontFuncsIsImmutable(FontFuncs ffuncs)
 {
   Bool _retval;
-  _retval = hb_font_funcs_is_immutable(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null);
+  _retval = hb_font_funcs_is_immutable(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1978,7 +1978,7 @@ Bool fontFuncsIsImmutable(FontFuncs ffuncs)
  */
 void fontFuncsMakeImmutable(FontFuncs ffuncs)
 {
-  hb_font_funcs_make_immutable(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null);
+  hb_font_funcs_make_immutable(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1993,11 +1993,11 @@ void fontFuncsSetDrawGlyphFunc(FontFuncs ffuncs, FontDrawGlyphFunc func)
   {
     auto _dlg = cast(FontDrawGlyphFunc*)userData;
 
-    (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, glyph, drawFuncs ? new DrawFuncs(cast(void*)drawFuncs, false) : null, drawData);
+    (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_draw_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_draw_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2012,12 +2012,12 @@ void fontFuncsSetFontHExtentsFunc(FontFuncs ffuncs, FontGetFontHExtentsFunc func
   {
     auto _dlg = cast(FontGetFontHExtentsFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, *extents);
+    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, *extents);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_font_h_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_font_h_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2032,12 +2032,12 @@ void fontFuncsSetFontVExtentsFunc(FontFuncs ffuncs, FontGetFontVExtentsFunc func
   {
     auto _dlg = cast(FontGetFontVExtentsFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, *extents);
+    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, *extents);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_font_v_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_font_v_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2052,12 +2052,12 @@ void fontFuncsSetGlyphContourPointFunc(FontFuncs ffuncs, FontGetGlyphContourPoin
   {
     auto _dlg = cast(FontGetGlyphContourPointFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, glyph, pointIndex, *x, *y);
+    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, pointIndex, *x, *y);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_contour_point_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_contour_point_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2072,12 +2072,12 @@ void fontFuncsSetGlyphExtentsFunc(FontFuncs ffuncs, FontGetGlyphExtentsFunc func
   {
     auto _dlg = cast(FontGetGlyphExtentsFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, glyph, *extents);
+    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, *extents);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2095,12 +2095,12 @@ void fontFuncsSetGlyphFromNameFunc(FontFuncs ffuncs, FontGetGlyphFromNameFunc fu
     _name.length = len;
     _name[0 .. len] = name[0 .. len];
 
-    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, _name, *glyph);
+    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, _name, *glyph);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_from_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_from_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2116,12 +2116,12 @@ void fontFuncsSetGlyphFunc(FontFuncs ffuncs, FontGetGlyphFunc func)
   {
     auto _dlg = cast(FontGetGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, unicode, variationSelector, *glyph);
+    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2136,12 +2136,12 @@ void fontFuncsSetGlyphHAdvanceFunc(FontFuncs ffuncs, FontGetGlyphHAdvanceFunc fu
   {
     auto _dlg = cast(FontGetGlyphHAdvanceFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, glyph);
+    hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_h_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_h_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2156,12 +2156,12 @@ void fontFuncsSetGlyphHKerningFunc(FontFuncs ffuncs, FontGetGlyphHKerningFunc fu
   {
     auto _dlg = cast(FontGetGlyphHKerningFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, firstGlyph, secondGlyph);
+    hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_h_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_h_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2176,12 +2176,12 @@ void fontFuncsSetGlyphHOriginFunc(FontFuncs ffuncs, FontGetGlyphHOriginFunc func
   {
     auto _dlg = cast(FontGetGlyphHOriginFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, glyph, *x, *y);
+    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_h_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_h_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2197,15 +2197,15 @@ void fontFuncsSetGlyphNameFunc(FontFuncs ffuncs, FontGetGlyphNameFunc func)
     auto _dlg = cast(FontGetGlyphNameFunc*)userData;
     char[] _name;
 
-    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, glyph, _name);
+    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, _name);
     size = cast(uint)_name.length;
-    name = arrayDtoC!(char, Yes.UseMalloc, No.ZeroTerm)(_name);
+    name = arrayDtoC!(char, Yes.Alloc, No.ZeroTerm)(_name);
 
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2223,11 +2223,11 @@ void fontFuncsSetGlyphShapeFunc(FontFuncs ffuncs, FontGetGlyphShapeFunc func)
   {
     auto _dlg = cast(FontGetGlyphShapeFunc*)userData;
 
-    (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, glyph, drawFuncs ? new DrawFuncs(cast(void*)drawFuncs, false) : null, drawData);
+    (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_shape_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_shape_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2242,12 +2242,12 @@ void fontFuncsSetGlyphVAdvanceFunc(FontFuncs ffuncs, FontGetGlyphVAdvanceFunc fu
   {
     auto _dlg = cast(FontGetGlyphVAdvanceFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, glyph);
+    hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_v_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_v_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2262,12 +2262,12 @@ void fontFuncsSetGlyphVKerningFunc(FontFuncs ffuncs, FontGetGlyphVKerningFunc fu
   {
     auto _dlg = cast(FontGetGlyphVKerningFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, firstGlyph, secondGlyph);
+    hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_v_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_v_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2282,12 +2282,12 @@ void fontFuncsSetGlyphVOriginFunc(FontFuncs ffuncs, FontGetGlyphVOriginFunc func
   {
     auto _dlg = cast(FontGetGlyphVOriginFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, glyph, *x, *y);
+    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_v_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_glyph_v_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2302,12 +2302,12 @@ void fontFuncsSetNominalGlyphFunc(FontFuncs ffuncs, FontGetNominalGlyphFunc func
   {
     auto _dlg = cast(FontGetNominalGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, unicode, *glyph);
+    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, unicode, *glyph);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_nominal_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_nominal_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2322,11 +2322,11 @@ void fontFuncsSetPaintGlyphFunc(FontFuncs ffuncs, FontPaintGlyphFunc func)
   {
     auto _dlg = cast(FontPaintGlyphFunc*)userData;
 
-    (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, glyph, paintFuncs ? new PaintFuncs(cast(void*)paintFuncs, false) : null, paintData, paletteIndex, foreground);
+    (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, paintFuncs ? new PaintFuncs(cast(void*)paintFuncs, No.Take) : null, paintData, paletteIndex, foreground);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_paint_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_paint_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2341,12 +2341,12 @@ void fontFuncsSetVariationGlyphFunc(FontFuncs ffuncs, FontGetVariationGlyphFunc 
   {
     auto _dlg = cast(FontGetVariationGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, false) : null, fontData, unicode, variationSelector, *glyph);
+    hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_variation_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_font_funcs_set_variation_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -2357,7 +2357,7 @@ Font fontGetEmpty()
 {
   hb_font_t* _cretval;
   _cretval = hb_font_get_empty();
-  auto _retval = _cretval ? new Font(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Font(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -2373,7 +2373,7 @@ Font fontGetEmpty()
  */
 void fontGetExtentsForDirection(Font font, Direction direction, out FontExtents extents)
 {
-  hb_font_get_extents_for_direction(font ? cast(hb_font_t*)font.cPtr(false) : null, direction, &extents);
+  hb_font_get_extents_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, direction, &extents);
 }
 
 /**
@@ -2385,8 +2385,8 @@ void fontGetExtentsForDirection(Font font, Direction direction, out FontExtents 
 HBFace fontGetFace(Font font)
 {
   hb_face_t* _cretval;
-  _cretval = hb_font_get_face(font ? cast(hb_font_t*)font.cPtr(false) : null);
-  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, false) : null;
+  _cretval = hb_font_get_face(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -2405,7 +2405,7 @@ HBFace fontGetFace(Font font)
 Bool fontGetGlyph(Font font, Codepoint unicode, Codepoint variationSelector, out Codepoint glyph)
 {
   Bool _retval;
-  _retval = hb_font_get_glyph(font ? cast(hb_font_t*)font.cPtr(false) : null, unicode, variationSelector, cast(hb_codepoint_t*)&glyph);
+  _retval = hb_font_get_glyph(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, unicode, variationSelector, cast(hb_codepoint_t*)&glyph);
   return _retval;
 }
 
@@ -2423,7 +2423,7 @@ Bool fontGetGlyph(Font font, Codepoint unicode, Codepoint variationSelector, out
  */
 void fontGetGlyphAdvanceForDirection(Font font, Codepoint glyph, Direction direction, out Position x, out Position y)
 {
-  hb_font_get_glyph_advance_for_direction(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  hb_font_get_glyph_advance_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
 
 /**
@@ -2440,7 +2440,7 @@ void fontGetGlyphAdvanceForDirection(Font font, Codepoint glyph, Direction direc
 Bool fontGetGlyphContourPoint(Font font, Codepoint glyph, uint pointIndex, out Position x, out Position y)
 {
   Bool _retval;
-  _retval = hb_font_get_glyph_contour_point(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, pointIndex, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  _retval = hb_font_get_glyph_contour_point(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, pointIndex, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
   return _retval;
 }
 
@@ -2462,7 +2462,7 @@ Bool fontGetGlyphContourPoint(Font font, Codepoint glyph, uint pointIndex, out P
 Bool fontGetGlyphContourPointForOrigin(Font font, Codepoint glyph, uint pointIndex, Direction direction, out Position x, out Position y)
 {
   Bool _retval;
-  _retval = hb_font_get_glyph_contour_point_for_origin(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, pointIndex, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  _retval = hb_font_get_glyph_contour_point_for_origin(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, pointIndex, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
   return _retval;
 }
 
@@ -2478,7 +2478,7 @@ Bool fontGetGlyphContourPointForOrigin(Font font, Codepoint glyph, uint pointInd
 Bool fontGetGlyphExtents(Font font, Codepoint glyph, out GlyphExtents extents)
 {
   Bool _retval;
-  _retval = hb_font_get_glyph_extents(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, &extents);
+  _retval = hb_font_get_glyph_extents(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, &extents);
   return _retval;
 }
 
@@ -2498,7 +2498,7 @@ Bool fontGetGlyphExtents(Font font, Codepoint glyph, out GlyphExtents extents)
 Bool fontGetGlyphExtentsForOrigin(Font font, Codepoint glyph, Direction direction, out GlyphExtents extents)
 {
   Bool _retval;
-  _retval = hb_font_get_glyph_extents_for_origin(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, direction, &extents);
+  _retval = hb_font_get_glyph_extents_for_origin(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, &extents);
   return _retval;
 }
 
@@ -2519,7 +2519,7 @@ Bool fontGetGlyphFromName(Font font, string name, out Codepoint glyph)
     _len = cast(int)name.length;
 
   auto _name = cast(const(char)*)name.ptr;
-  _retval = hb_font_get_glyph_from_name(font ? cast(hb_font_t*)font.cPtr(false) : null, _name, _len, cast(hb_codepoint_t*)&glyph);
+  _retval = hb_font_get_glyph_from_name(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, _name, _len, cast(hb_codepoint_t*)&glyph);
   return _retval;
 }
 
@@ -2534,7 +2534,7 @@ Bool fontGetGlyphFromName(Font font, string name, out Codepoint glyph)
 Position fontGetGlyphHAdvance(Font font, Codepoint glyph)
 {
   Position _retval;
-  _retval = hb_font_get_glyph_h_advance(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph);
+  _retval = hb_font_get_glyph_h_advance(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -2552,7 +2552,7 @@ Position fontGetGlyphHAdvance(Font font, Codepoint glyph)
 Position fontGetGlyphHKerning(Font font, Codepoint leftGlyph, Codepoint rightGlyph)
 {
   Position _retval;
-  _retval = hb_font_get_glyph_h_kerning(font ? cast(hb_font_t*)font.cPtr(false) : null, leftGlyph, rightGlyph);
+  _retval = hb_font_get_glyph_h_kerning(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, leftGlyph, rightGlyph);
   return _retval;
 }
 
@@ -2569,7 +2569,7 @@ Position fontGetGlyphHKerning(Font font, Codepoint leftGlyph, Codepoint rightGly
 Bool fontGetGlyphHOrigin(Font font, Codepoint glyph, out Position x, out Position y)
 {
   Bool _retval;
-  _retval = hb_font_get_glyph_h_origin(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  _retval = hb_font_get_glyph_h_origin(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
   return _retval;
 }
 
@@ -2587,7 +2587,7 @@ Bool fontGetGlyphHOrigin(Font font, Codepoint glyph, out Position x, out Positio
  */
 void fontGetGlyphKerningForDirection(Font font, Codepoint firstGlyph, Codepoint secondGlyph, Direction direction, out Position x, out Position y)
 {
-  hb_font_get_glyph_kerning_for_direction(font ? cast(hb_font_t*)font.cPtr(false) : null, firstGlyph, secondGlyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  hb_font_get_glyph_kerning_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, firstGlyph, secondGlyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
 
 /**
@@ -2604,7 +2604,7 @@ void fontGetGlyphKerningForDirection(Font font, Codepoint firstGlyph, Codepoint 
  */
 void fontGetGlyphOriginForDirection(Font font, Codepoint glyph, Direction direction, out Position x, out Position y)
 {
-  hb_font_get_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  hb_font_get_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
 
 /**
@@ -2621,7 +2621,7 @@ void fontGetGlyphOriginForDirection(Font font, Codepoint glyph, Direction direct
  */
 void fontGetGlyphShape(Font font, Codepoint glyph, DrawFuncs dfuncs, void* drawData)
 {
-  hb_font_get_glyph_shape(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(false) : null, drawData);
+  hb_font_get_glyph_shape(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData);
 }
 
 /**
@@ -2635,7 +2635,7 @@ void fontGetGlyphShape(Font font, Codepoint glyph, DrawFuncs dfuncs, void* drawD
 Position fontGetGlyphVAdvance(Font font, Codepoint glyph)
 {
   Position _retval;
-  _retval = hb_font_get_glyph_v_advance(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph);
+  _retval = hb_font_get_glyph_v_advance(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -2653,7 +2653,7 @@ Position fontGetGlyphVAdvance(Font font, Codepoint glyph)
 Position fontGetGlyphVKerning(Font font, Codepoint topGlyph, Codepoint bottomGlyph)
 {
   Position _retval;
-  _retval = hb_font_get_glyph_v_kerning(font ? cast(hb_font_t*)font.cPtr(false) : null, topGlyph, bottomGlyph);
+  _retval = hb_font_get_glyph_v_kerning(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, topGlyph, bottomGlyph);
   return _retval;
 }
 
@@ -2670,7 +2670,7 @@ Position fontGetGlyphVKerning(Font font, Codepoint topGlyph, Codepoint bottomGly
 Bool fontGetGlyphVOrigin(Font font, Codepoint glyph, out Position x, out Position y)
 {
   Bool _retval;
-  _retval = hb_font_get_glyph_v_origin(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  _retval = hb_font_get_glyph_v_origin(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
   return _retval;
 }
 
@@ -2685,7 +2685,7 @@ Bool fontGetGlyphVOrigin(Font font, Codepoint glyph, out Position x, out Positio
 Bool fontGetHExtents(Font font, out FontExtents extents)
 {
   Bool _retval;
-  _retval = hb_font_get_h_extents(font ? cast(hb_font_t*)font.cPtr(false) : null, &extents);
+  _retval = hb_font_get_h_extents(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, &extents);
   return _retval;
 }
 
@@ -2704,7 +2704,7 @@ Bool fontGetHExtents(Font font, out FontExtents extents)
 Bool fontGetNominalGlyph(Font font, Codepoint unicode, out Codepoint glyph)
 {
   Bool _retval;
-  _retval = hb_font_get_nominal_glyph(font ? cast(hb_font_t*)font.cPtr(false) : null, unicode, cast(hb_codepoint_t*)&glyph);
+  _retval = hb_font_get_nominal_glyph(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, unicode, cast(hb_codepoint_t*)&glyph);
   return _retval;
 }
 
@@ -2717,8 +2717,8 @@ Bool fontGetNominalGlyph(Font font, Codepoint unicode, out Codepoint glyph)
 Font fontGetParent(Font font)
 {
   hb_font_t* _cretval;
-  _cretval = hb_font_get_parent(font ? cast(hb_font_t*)font.cPtr(false) : null);
-  auto _retval = _cretval ? new Font(cast(void*)_cretval, false) : null;
+  _cretval = hb_font_get_parent(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new Font(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -2731,7 +2731,7 @@ Font fontGetParent(Font font)
  */
 void fontGetPpem(Font font, out uint xPpem, out uint yPpem)
 {
-  hb_font_get_ppem(font ? cast(hb_font_t*)font.cPtr(false) : null, cast(uint*)&xPpem, cast(uint*)&yPpem);
+  hb_font_get_ppem(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, cast(uint*)&xPpem, cast(uint*)&yPpem);
 }
 
 /**
@@ -2744,7 +2744,7 @@ void fontGetPpem(Font font, out uint xPpem, out uint yPpem)
 float fontGetPtem(Font font)
 {
   float _retval;
-  _retval = hb_font_get_ptem(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  _retval = hb_font_get_ptem(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2757,7 +2757,7 @@ float fontGetPtem(Font font)
  */
 void fontGetScale(Font font, out int xScale, out int yScale)
 {
-  hb_font_get_scale(font ? cast(hb_font_t*)font.cPtr(false) : null, cast(int*)&xScale, cast(int*)&yScale);
+  hb_font_get_scale(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, cast(int*)&xScale, cast(int*)&yScale);
 }
 
 /**
@@ -2771,7 +2771,7 @@ void fontGetScale(Font font, out int xScale, out int yScale)
 uint fontGetSerial(Font font)
 {
   uint _retval;
-  _retval = hb_font_get_serial(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  _retval = hb_font_get_serial(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2785,7 +2785,7 @@ uint fontGetSerial(Font font)
  */
 void fontGetSyntheticBold(Font font, out float xEmbolden, out float yEmbolden, out Bool inPlace)
 {
-  hb_font_get_synthetic_bold(font ? cast(hb_font_t*)font.cPtr(false) : null, cast(float*)&xEmbolden, cast(float*)&yEmbolden, cast(hb_bool_t*)&inPlace);
+  hb_font_get_synthetic_bold(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, cast(float*)&xEmbolden, cast(float*)&yEmbolden, cast(hb_bool_t*)&inPlace);
 }
 
 /**
@@ -2797,7 +2797,7 @@ void fontGetSyntheticBold(Font font, out float xEmbolden, out float yEmbolden, o
 float fontGetSyntheticSlant(Font font)
 {
   float _retval;
-  _retval = hb_font_get_synthetic_slant(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  _retval = hb_font_get_synthetic_slant(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2812,7 +2812,7 @@ float fontGetSyntheticSlant(Font font)
 Bool fontGetVExtents(Font font, out FontExtents extents)
 {
   Bool _retval;
-  _retval = hb_font_get_v_extents(font ? cast(hb_font_t*)font.cPtr(false) : null, &extents);
+  _retval = hb_font_get_v_extents(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, &extents);
   return _retval;
 }
 
@@ -2825,7 +2825,7 @@ Bool fontGetVExtents(Font font, out FontExtents extents)
 uint fontGetVarNamedInstance(Font font)
 {
   uint _retval;
-  _retval = hb_font_get_var_named_instance(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  _retval = hb_font_get_var_named_instance(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2843,7 +2843,7 @@ uint fontGetVarNamedInstance(Font font)
 Bool fontGetVariationGlyph(Font font, Codepoint unicode, Codepoint variationSelector, out Codepoint glyph)
 {
   Bool _retval;
-  _retval = hb_font_get_variation_glyph(font ? cast(hb_font_t*)font.cPtr(false) : null, unicode, variationSelector, cast(hb_codepoint_t*)&glyph);
+  _retval = hb_font_get_variation_glyph(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, unicode, variationSelector, cast(hb_codepoint_t*)&glyph);
   return _retval;
 }
 
@@ -2865,7 +2865,7 @@ Bool fontGlyphFromString(Font font, ubyte[] s, out Codepoint glyph)
     _len = cast(int)s.length;
 
   auto _s = cast(const(ubyte)*)s.ptr;
-  _retval = hb_font_glyph_from_string(font ? cast(hb_font_t*)font.cPtr(false) : null, _s, _len, cast(hb_codepoint_t*)&glyph);
+  _retval = hb_font_glyph_from_string(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, _s, _len, cast(hb_codepoint_t*)&glyph);
   return _retval;
 }
 
@@ -2878,7 +2878,7 @@ Bool fontGlyphFromString(Font font, ubyte[] s, out Codepoint glyph)
 Bool fontIsImmutable(Font font)
 {
   Bool _retval;
-  _retval = hb_font_is_immutable(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  _retval = hb_font_is_immutable(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2889,7 +2889,7 @@ Bool fontIsImmutable(Font font)
  */
 void fontMakeImmutable(Font font)
 {
-  hb_font_make_immutable(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  hb_font_make_immutable(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -2910,7 +2910,7 @@ void fontMakeImmutable(Font font)
  */
 void fontPaintGlyph(Font font, Codepoint glyph, PaintFuncs pfuncs, void* paintData, uint paletteIndex, Color foreground)
 {
-  hb_font_paint_glyph(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, pfuncs ? cast(hb_paint_funcs_t*)pfuncs.cPtr(false) : null, paintData, paletteIndex, foreground);
+  hb_font_paint_glyph(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, pfuncs ? cast(hb_paint_funcs_t*)pfuncs.cPtr(No.Dup) : null, paintData, paletteIndex, foreground);
 }
 
 /**
@@ -2921,7 +2921,7 @@ void fontPaintGlyph(Font font, Codepoint glyph, PaintFuncs pfuncs, void* paintDa
  */
 void fontSetFace(Font font, HBFace face)
 {
-  hb_font_set_face(font ? cast(hb_font_t*)font.cPtr(false) : null, face ? cast(hb_face_t*)face.cPtr(false) : null);
+  hb_font_set_face(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
 }
 
 /**
@@ -2932,7 +2932,7 @@ void fontSetFace(Font font, HBFace face)
  */
 void fontSetParent(Font font, Font parent)
 {
-  hb_font_set_parent(font ? cast(hb_font_t*)font.cPtr(false) : null, parent ? cast(hb_font_t*)parent.cPtr(false) : null);
+  hb_font_set_parent(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, parent ? cast(hb_font_t*)parent.cPtr(No.Dup) : null);
 }
 
 /**
@@ -2947,7 +2947,7 @@ void fontSetParent(Font font, Font parent)
  */
 void fontSetPpem(Font font, uint xPpem, uint yPpem)
 {
-  hb_font_set_ppem(font ? cast(hb_font_t*)font.cPtr(false) : null, xPpem, yPpem);
+  hb_font_set_ppem(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, xPpem, yPpem);
 }
 
 /**
@@ -2960,7 +2960,7 @@ void fontSetPpem(Font font, uint xPpem, uint yPpem)
  */
 void fontSetPtem(Font font, float ptem)
 {
-  hb_font_set_ptem(font ? cast(hb_font_t*)font.cPtr(false) : null, ptem);
+  hb_font_set_ptem(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, ptem);
 }
 
 /**
@@ -2992,7 +2992,7 @@ void fontSetPtem(Font font, float ptem)
  */
 void fontSetScale(Font font, int xScale, int yScale)
 {
-  hb_font_set_scale(font ? cast(hb_font_t*)font.cPtr(false) : null, xScale, yScale);
+  hb_font_set_scale(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, xScale, yScale);
 }
 
 /**
@@ -3015,7 +3015,7 @@ void fontSetScale(Font font, int xScale, int yScale)
  */
 void fontSetSyntheticBold(Font font, float xEmbolden, float yEmbolden, Bool inPlace)
 {
-  hb_font_set_synthetic_bold(font ? cast(hb_font_t*)font.cPtr(false) : null, xEmbolden, yEmbolden, inPlace);
+  hb_font_set_synthetic_bold(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, xEmbolden, yEmbolden, inPlace);
 }
 
 /**
@@ -3034,7 +3034,7 @@ void fontSetSyntheticBold(Font font, float xEmbolden, float yEmbolden, Bool inPl
  */
 void fontSetSyntheticSlant(Font font, float slant)
 {
-  hb_font_set_synthetic_slant(font ? cast(hb_font_t*)font.cPtr(false) : null, slant);
+  hb_font_set_synthetic_slant(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, slant);
 }
 
 /**
@@ -3054,7 +3054,7 @@ void fontSetVarCoordsDesign(Font font, float[] coords)
     _coordsLength = cast(uint)coords.length;
 
   auto _coords = cast(const(float)*)coords.ptr;
-  hb_font_set_var_coords_design(font ? cast(hb_font_t*)font.cPtr(false) : null, _coords, _coordsLength);
+  hb_font_set_var_coords_design(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, _coords, _coordsLength);
 }
 
 /**
@@ -3075,7 +3075,7 @@ void fontSetVarCoordsNormalized(Font font, int[] coords)
     _coordsLength = cast(uint)coords.length;
 
   auto _coords = cast(const(int)*)coords.ptr;
-  hb_font_set_var_coords_normalized(font ? cast(hb_font_t*)font.cPtr(false) : null, _coords, _coordsLength);
+  hb_font_set_var_coords_normalized(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, _coords, _coordsLength);
 }
 
 /**
@@ -3086,7 +3086,7 @@ void fontSetVarCoordsNormalized(Font font, int[] coords)
  */
 void fontSetVarNamedInstance(Font font, uint instanceIndex)
 {
-  hb_font_set_var_named_instance(font ? cast(hb_font_t*)font.cPtr(false) : null, instanceIndex);
+  hb_font_set_var_named_instance(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, instanceIndex);
 }
 
 /**
@@ -3101,7 +3101,7 @@ void fontSetVarNamedInstance(Font font, uint instanceIndex)
  */
 void fontSetVariation(Font font, Tag tag, float value)
 {
-  hb_font_set_variation(font ? cast(hb_font_t*)font.cPtr(false) : null, tag, value);
+  hb_font_set_variation(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, tag, value);
 }
 
 /**
@@ -3123,7 +3123,7 @@ void fontSetVariations(Font font, Variation[] variations)
   foreach (obj; variations)
     _tmpvariations ~= obj.cInstance;
   const(hb_variation_t)* _variations = _tmpvariations.ptr;
-  hb_font_set_variations(font ? cast(hb_font_t*)font.cPtr(false) : null, _variations, _variationsLength);
+  hb_font_set_variations(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, _variations, _variationsLength);
 }
 
 /**
@@ -3142,7 +3142,7 @@ void fontSetVariations(Font font, Variation[] variations)
  */
 void fontSubtractGlyphOriginForDirection(Font font, Codepoint glyph, Direction direction, ref Position x, ref Position y)
 {
-  hb_font_subtract_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  hb_font_subtract_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
 
 /**
@@ -3165,7 +3165,7 @@ HBFace ftFaceCreateCached(Face ftFace)
 {
   hb_face_t* _cretval;
   _cretval = hb_ft_face_create_cached(ftFace);
-  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3188,7 +3188,7 @@ HBFace ftFaceCreateReferenced(Face ftFace)
 {
   hb_face_t* _cretval;
   _cretval = hb_ft_face_create_referenced(ftFace);
-  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new HBFace(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3201,7 +3201,7 @@ HBFace ftFaceCreateReferenced(Face ftFace)
  */
 void ftFontChanged(Font font)
 {
-  hb_ft_font_changed(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  hb_ft_font_changed(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3222,7 +3222,7 @@ Font ftFontCreateReferenced(Face ftFace)
 {
   hb_font_t* _cretval;
   _cretval = hb_ft_font_create_referenced(ftFace);
-  auto _retval = _cretval ? new Font(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Font(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3239,7 +3239,7 @@ Font ftFontCreateReferenced(Face ftFace)
 int ftFontGetLoadFlags(Font font)
 {
   int _retval;
-  _retval = hb_ft_font_get_load_flags(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  _retval = hb_ft_font_get_load_flags(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3264,7 +3264,7 @@ int ftFontGetLoadFlags(Font font)
  */
 void ftFontSetFuncs(Font font)
 {
-  hb_ft_font_set_funcs(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  hb_ft_font_set_funcs(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3279,7 +3279,7 @@ void ftFontSetFuncs(Font font)
  */
 void ftFontSetLoadFlags(Font font, int loadFlags)
 {
-  hb_ft_font_set_load_flags(font ? cast(hb_font_t*)font.cPtr(false) : null, loadFlags);
+  hb_ft_font_set_load_flags(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, loadFlags);
 }
 
 /**
@@ -3295,7 +3295,7 @@ void ftFontSetLoadFlags(Font font, int loadFlags)
 Bool ftHbFontChanged(Font font)
 {
   Bool _retval;
-  _retval = hb_ft_hb_font_changed(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  _retval = hb_ft_hb_font_changed(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3308,7 +3308,7 @@ UnicodeFuncs glibGetUnicodeFuncs()
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_glib_get_unicode_funcs();
-  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, false) : null;
+  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -3351,7 +3351,7 @@ Script glibScriptToScript(UnicodeScript script)
 GlyphFlags glyphInfoGetGlyphFlags(GlyphInfo info)
 {
   hb_glyph_flags_t _cretval;
-  _cretval = hb_glyph_info_get_glyph_flags(info ? cast(hb_glyph_info_t*)info.cPtr(false) : null);
+  _cretval = hb_glyph_info_get_glyph_flags(info ? cast(hb_glyph_info_t*)info.cPtr(No.Dup) : null);
   GlyphFlags _retval = cast(GlyphFlags)_cretval;
   return _retval;
 }
@@ -3419,7 +3419,7 @@ string languageToString(Language language)
 {
   const(char)* _cretval;
   _cretval = hb_language_to_string(language);
-  string _retval = _cretval.fromCString(false);
+  string _retval = _cretval.fromCString(No.Free);
   return _retval;
 }
 
@@ -3432,7 +3432,7 @@ string languageToString(Language language)
 Bool mapAllocationSuccessful(Map map)
 {
   Bool _retval;
-  _retval = hb_map_allocation_successful(map ? cast(hb_map_t*)map.cPtr(false) : null);
+  _retval = hb_map_allocation_successful(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3443,7 +3443,7 @@ Bool mapAllocationSuccessful(Map map)
  */
 void mapClear(Map map)
 {
-  hb_map_clear(map ? cast(hb_map_t*)map.cPtr(false) : null);
+  hb_map_clear(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3455,8 +3455,8 @@ void mapClear(Map map)
 Map mapCopy(Map map)
 {
   hb_map_t* _cretval;
-  _cretval = hb_map_copy(map ? cast(hb_map_t*)map.cPtr(false) : null);
-  auto _retval = _cretval ? new Map(cast(void*)_cretval, true) : null;
+  _cretval = hb_map_copy(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new Map(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3468,7 +3468,7 @@ Map mapCreate()
 {
   hb_map_t* _cretval;
   _cretval = hb_map_create();
-  auto _retval = _cretval ? new Map(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Map(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3480,7 +3480,7 @@ Map mapCreate()
  */
 void mapDel(Map map, Codepoint key)
 {
-  hb_map_del(map ? cast(hb_map_t*)map.cPtr(false) : null, key);
+  hb_map_del(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, key);
 }
 
 /**
@@ -3493,7 +3493,7 @@ void mapDel(Map map, Codepoint key)
 Codepoint mapGet(Map map, Codepoint key)
 {
   Codepoint _retval;
-  _retval = hb_map_get(map ? cast(hb_map_t*)map.cPtr(false) : null, key);
+  _retval = hb_map_get(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, key);
   return _retval;
 }
 
@@ -3505,7 +3505,7 @@ Map mapGetEmpty()
 {
   hb_map_t* _cretval;
   _cretval = hb_map_get_empty();
-  auto _retval = _cretval ? new Map(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Map(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3518,7 +3518,7 @@ Map mapGetEmpty()
 uint mapGetPopulation(Map map)
 {
   uint _retval;
-  _retval = hb_map_get_population(map ? cast(hb_map_t*)map.cPtr(false) : null);
+  _retval = hb_map_get_population(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3532,7 +3532,7 @@ uint mapGetPopulation(Map map)
 Bool mapHas(Map map, Codepoint key)
 {
   Bool _retval;
-  _retval = hb_map_has(map ? cast(hb_map_t*)map.cPtr(false) : null, key);
+  _retval = hb_map_has(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, key);
   return _retval;
 }
 
@@ -3545,7 +3545,7 @@ Bool mapHas(Map map, Codepoint key)
 uint mapHash(Map map)
 {
   uint _retval;
-  _retval = hb_map_hash(map ? cast(hb_map_t*)map.cPtr(false) : null);
+  _retval = hb_map_hash(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3558,7 +3558,7 @@ uint mapHash(Map map)
 Bool mapIsEmpty(Map map)
 {
   Bool _retval;
-  _retval = hb_map_is_empty(map ? cast(hb_map_t*)map.cPtr(false) : null);
+  _retval = hb_map_is_empty(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3573,7 +3573,7 @@ Bool mapIsEmpty(Map map)
 Bool mapIsEqual(Map map, Map other)
 {
   Bool _retval;
-  _retval = hb_map_is_equal(map ? cast(hb_map_t*)map.cPtr(false) : null, other ? cast(hb_map_t*)other.cPtr(false) : null);
+  _retval = hb_map_is_equal(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, other ? cast(hb_map_t*)other.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3585,7 +3585,7 @@ Bool mapIsEqual(Map map, Map other)
  */
 void mapKeys(Map map, Set keys)
 {
-  hb_map_keys(map ? cast(hb_map_t*)map.cPtr(false) : null, keys ? cast(hb_set_t*)keys.cPtr(false) : null);
+  hb_map_keys(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, keys ? cast(hb_set_t*)keys.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3603,7 +3603,7 @@ void mapKeys(Map map, Set keys)
 Bool mapNext(Map map, ref int idx, out Codepoint key, out Codepoint value)
 {
   Bool _retval;
-  _retval = hb_map_next(map ? cast(hb_map_t*)map.cPtr(false) : null, cast(int*)&idx, cast(hb_codepoint_t*)&key, cast(hb_codepoint_t*)&value);
+  _retval = hb_map_next(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, cast(int*)&idx, cast(hb_codepoint_t*)&key, cast(hb_codepoint_t*)&value);
   return _retval;
 }
 
@@ -3616,7 +3616,7 @@ Bool mapNext(Map map, ref int idx, out Codepoint key, out Codepoint value)
  */
 void mapSet(Map map, Codepoint key, Codepoint value)
 {
-  hb_map_set(map ? cast(hb_map_t*)map.cPtr(false) : null, key, value);
+  hb_map_set(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, key, value);
 }
 
 /**
@@ -3627,7 +3627,7 @@ void mapSet(Map map, Codepoint key, Codepoint value)
  */
 void mapUpdate(Map map, Map other)
 {
-  hb_map_update(map ? cast(hb_map_t*)map.cPtr(false) : null, other ? cast(hb_map_t*)other.cPtr(false) : null);
+  hb_map_update(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, other ? cast(hb_map_t*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3638,7 +3638,7 @@ void mapUpdate(Map map, Map other)
  */
 void mapValues(Map map, Set values)
 {
-  hb_map_values(map ? cast(hb_map_t*)map.cPtr(false) : null, values ? cast(hb_set_t*)values.cPtr(false) : null);
+  hb_map_values(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, values ? cast(hb_set_t*)values.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3655,7 +3655,7 @@ uint otColorGlyphGetLayers(HBFace face, Codepoint glyph, uint startOffset, ref O
 {
   uint _retval;
   uint _layerCount;
-  _retval = hb_ot_color_glyph_get_layers(face ? cast(hb_face_t*)face.cPtr(false) : null, glyph, startOffset, &_layerCount, layers.ptr);
+  _retval = hb_ot_color_glyph_get_layers(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph, startOffset, &_layerCount, layers.ptr);
   return _retval;
 }
 
@@ -3670,7 +3670,7 @@ uint otColorGlyphGetLayers(HBFace face, Codepoint glyph, uint startOffset, ref O
 Bool otColorGlyphHasPaint(HBFace face, Codepoint glyph)
 {
   Bool _retval;
-  _retval = hb_ot_color_glyph_has_paint(face ? cast(hb_face_t*)face.cPtr(false) : null, glyph);
+  _retval = hb_ot_color_glyph_has_paint(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -3687,8 +3687,8 @@ Bool otColorGlyphHasPaint(HBFace face, Codepoint glyph)
 Blob otColorGlyphReferencePng(Font font, Codepoint glyph)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_ot_color_glyph_reference_png(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph);
-  auto _retval = _cretval ? new Blob(cast(void*)_cretval, true) : null;
+  _cretval = hb_ot_color_glyph_reference_png(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph);
+  auto _retval = _cretval ? new Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3703,8 +3703,8 @@ Blob otColorGlyphReferencePng(Font font, Codepoint glyph)
 Blob otColorGlyphReferenceSvg(HBFace face, Codepoint glyph)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_ot_color_glyph_reference_svg(face ? cast(hb_face_t*)face.cPtr(false) : null, glyph);
-  auto _retval = _cretval ? new Blob(cast(void*)_cretval, true) : null;
+  _cretval = hb_ot_color_glyph_reference_svg(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph);
+  auto _retval = _cretval ? new Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3718,7 +3718,7 @@ Blob otColorGlyphReferenceSvg(HBFace face, Codepoint glyph)
 Bool otColorHasLayers(HBFace face)
 {
   Bool _retval;
-  _retval = hb_ot_color_has_layers(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_color_has_layers(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3732,7 +3732,7 @@ Bool otColorHasLayers(HBFace face)
 Bool otColorHasPaint(HBFace face)
 {
   Bool _retval;
-  _retval = hb_ot_color_has_paint(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_color_has_paint(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3745,7 +3745,7 @@ Bool otColorHasPaint(HBFace face)
 Bool otColorHasPalettes(HBFace face)
 {
   Bool _retval;
-  _retval = hb_ot_color_has_palettes(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_color_has_palettes(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3758,7 +3758,7 @@ Bool otColorHasPalettes(HBFace face)
 Bool otColorHasPng(HBFace face)
 {
   Bool _retval;
-  _retval = hb_ot_color_has_png(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_color_has_png(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3771,7 +3771,7 @@ Bool otColorHasPng(HBFace face)
 Bool otColorHasSvg(HBFace face)
 {
   Bool _retval;
-  _retval = hb_ot_color_has_svg(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_color_has_svg(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3788,7 +3788,7 @@ Bool otColorHasSvg(HBFace face)
 OtNameId otColorPaletteColorGetNameId(HBFace face, uint colorIndex)
 {
   OtNameId _retval;
-  _retval = hb_ot_color_palette_color_get_name_id(face ? cast(hb_face_t*)face.cPtr(false) : null, colorIndex);
+  _retval = hb_ot_color_palette_color_get_name_id(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, colorIndex);
   return _retval;
 }
 
@@ -3813,7 +3813,7 @@ uint otColorPaletteGetColors(HBFace face, uint paletteIndex, uint startOffset, r
 {
   uint _retval;
   uint _colorCount;
-  _retval = hb_ot_color_palette_get_colors(face ? cast(hb_face_t*)face.cPtr(false) : null, paletteIndex, startOffset, &_colorCount, colors.ptr);
+  _retval = hb_ot_color_palette_get_colors(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, paletteIndex, startOffset, &_colorCount, colors.ptr);
   return _retval;
 }
 
@@ -3826,7 +3826,7 @@ uint otColorPaletteGetColors(HBFace face, uint paletteIndex, uint startOffset, r
 uint otColorPaletteGetCount(HBFace face)
 {
   uint _retval;
-  _retval = hb_ot_color_palette_get_count(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_color_palette_get_count(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3840,7 +3840,7 @@ uint otColorPaletteGetCount(HBFace face)
 OtColorPaletteFlags otColorPaletteGetFlags(HBFace face, uint paletteIndex)
 {
   hb_ot_color_palette_flags_t _cretval;
-  _cretval = hb_ot_color_palette_get_flags(face ? cast(hb_face_t*)face.cPtr(false) : null, paletteIndex);
+  _cretval = hb_ot_color_palette_get_flags(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, paletteIndex);
   OtColorPaletteFlags _retval = cast(OtColorPaletteFlags)_cretval;
   return _retval;
 }
@@ -3859,7 +3859,7 @@ OtColorPaletteFlags otColorPaletteGetFlags(HBFace face, uint paletteIndex)
 OtNameId otColorPaletteGetNameId(HBFace face, uint paletteIndex)
 {
   OtNameId _retval;
-  _retval = hb_ot_color_palette_get_name_id(face ? cast(hb_face_t*)face.cPtr(false) : null, paletteIndex);
+  _retval = hb_ot_color_palette_get_name_id(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, paletteIndex);
   return _retval;
 }
 
@@ -3870,7 +3870,7 @@ OtNameId otColorPaletteGetNameId(HBFace face, uint paletteIndex)
  */
 void otFontSetFuncs(Font font)
 {
-  hb_ot_font_set_funcs(font ? cast(hb_font_t*)font.cPtr(false) : null);
+  hb_ot_font_set_funcs(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3890,7 +3890,7 @@ uint otLayoutFeatureGetCharacters(HBFace face, Tag tableTag, uint featureIndex, 
 {
   uint _retval;
   uint _charCount;
-  _retval = hb_ot_layout_feature_get_characters(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, featureIndex, startOffset, &_charCount, characters.ptr);
+  _retval = hb_ot_layout_feature_get_characters(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, featureIndex, startOffset, &_charCount, characters.ptr);
   return _retval;
 }
 
@@ -3910,7 +3910,7 @@ uint otLayoutFeatureGetLookups(HBFace face, Tag tableTag, uint featureIndex, uin
 {
   uint _retval;
   uint _lookupCount;
-  _retval = hb_ot_layout_feature_get_lookups(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, featureIndex, startOffset, &_lookupCount, lookupIndexes.ptr);
+  _retval = hb_ot_layout_feature_get_lookups(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, featureIndex, startOffset, &_lookupCount, lookupIndexes.ptr);
   return _retval;
 }
 
@@ -3937,7 +3937,7 @@ uint otLayoutFeatureGetLookups(HBFace face, Tag tableTag, uint featureIndex, uin
 Bool otLayoutFeatureGetNameIds(HBFace face, Tag tableTag, uint featureIndex, out OtNameId labelId, out OtNameId tooltipId, out OtNameId sampleId, out uint numNamedParameters, out OtNameId firstParamId)
 {
   Bool _retval;
-  _retval = hb_ot_layout_feature_get_name_ids(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, featureIndex, cast(hb_ot_name_id_t*)&labelId, cast(hb_ot_name_id_t*)&tooltipId, cast(hb_ot_name_id_t*)&sampleId, cast(uint*)&numNamedParameters, cast(hb_ot_name_id_t*)&firstParamId);
+  _retval = hb_ot_layout_feature_get_name_ids(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, featureIndex, cast(hb_ot_name_id_t*)&labelId, cast(hb_ot_name_id_t*)&tooltipId, cast(hb_ot_name_id_t*)&sampleId, cast(uint*)&numNamedParameters, cast(hb_ot_name_id_t*)&firstParamId);
   return _retval;
 }
 
@@ -3958,7 +3958,7 @@ uint otLayoutFeatureWithVariationsGetLookups(HBFace face, Tag tableTag, uint fea
 {
   uint _retval;
   uint _lookupCount;
-  _retval = hb_ot_layout_feature_with_variations_get_lookups(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, featureIndex, variationsIndex, startOffset, &_lookupCount, lookupIndexes.ptr);
+  _retval = hb_ot_layout_feature_with_variations_get_lookups(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, featureIndex, variationsIndex, startOffset, &_lookupCount, lookupIndexes.ptr);
   return _retval;
 }
 
@@ -3977,7 +3977,7 @@ uint otLayoutGetAttachPoints(HBFace face, Codepoint glyph, uint startOffset, ref
 {
   uint _retval;
   uint _pointCount;
-  _retval = hb_ot_layout_get_attach_points(face ? cast(hb_face_t*)face.cPtr(false) : null, glyph, startOffset, &_pointCount, pointArray.ptr);
+  _retval = hb_ot_layout_get_attach_points(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph, startOffset, &_pointCount, pointArray.ptr);
   return _retval;
 }
 
@@ -3995,7 +3995,7 @@ uint otLayoutGetAttachPoints(HBFace face, Codepoint glyph, uint startOffset, ref
 Bool otLayoutGetBaseline(Font font, OtLayoutBaselineTag baselineTag, Direction direction, Tag scriptTag, Tag languageTag, out Position coord)
 {
   Bool _retval;
-  _retval = hb_ot_layout_get_baseline(font ? cast(hb_font_t*)font.cPtr(false) : null, baselineTag, direction, scriptTag, languageTag, cast(hb_position_t*)&coord);
+  _retval = hb_ot_layout_get_baseline(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, baselineTag, direction, scriptTag, languageTag, cast(hb_position_t*)&coord);
   return _retval;
 }
 
@@ -4015,7 +4015,7 @@ Bool otLayoutGetBaseline(Font font, OtLayoutBaselineTag baselineTag, Direction d
 Bool otLayoutGetBaseline2(Font font, OtLayoutBaselineTag baselineTag, Direction direction, Script script, Language language, out Position coord)
 {
   Bool _retval;
-  _retval = hb_ot_layout_get_baseline2(font ? cast(hb_font_t*)font.cPtr(false) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
+  _retval = hb_ot_layout_get_baseline2(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
   return _retval;
 }
 
@@ -4032,7 +4032,7 @@ Bool otLayoutGetBaseline2(Font font, OtLayoutBaselineTag baselineTag, Direction 
  */
 void otLayoutGetBaselineWithFallback(Font font, OtLayoutBaselineTag baselineTag, Direction direction, Tag scriptTag, Tag languageTag, out Position coord)
 {
-  hb_ot_layout_get_baseline_with_fallback(font ? cast(hb_font_t*)font.cPtr(false) : null, baselineTag, direction, scriptTag, languageTag, cast(hb_position_t*)&coord);
+  hb_ot_layout_get_baseline_with_fallback(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, baselineTag, direction, scriptTag, languageTag, cast(hb_position_t*)&coord);
 }
 
 /**
@@ -4050,7 +4050,7 @@ void otLayoutGetBaselineWithFallback(Font font, OtLayoutBaselineTag baselineTag,
  */
 void otLayoutGetBaselineWithFallback2(Font font, OtLayoutBaselineTag baselineTag, Direction direction, Script script, Language language, out Position coord)
 {
-  hb_ot_layout_get_baseline_with_fallback2(font ? cast(hb_font_t*)font.cPtr(false) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
+  hb_ot_layout_get_baseline_with_fallback2(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
 }
 
 /**
@@ -4072,7 +4072,7 @@ void otLayoutGetBaselineWithFallback2(Font font, OtLayoutBaselineTag baselineTag
 Bool otLayoutGetFontExtents(Font font, Direction direction, Tag scriptTag, Tag languageTag, out FontExtents extents)
 {
   Bool _retval;
-  _retval = hb_ot_layout_get_font_extents(font ? cast(hb_font_t*)font.cPtr(false) : null, direction, scriptTag, languageTag, &extents);
+  _retval = hb_ot_layout_get_font_extents(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, direction, scriptTag, languageTag, &extents);
   return _retval;
 }
 
@@ -4097,7 +4097,7 @@ Bool otLayoutGetFontExtents(Font font, Direction direction, Tag scriptTag, Tag l
 Bool otLayoutGetFontExtents2(Font font, Direction direction, Script script, Language language, out FontExtents extents)
 {
   Bool _retval;
-  _retval = hb_ot_layout_get_font_extents2(font ? cast(hb_font_t*)font.cPtr(false) : null, direction, script, language, &extents);
+  _retval = hb_ot_layout_get_font_extents2(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, direction, script, language, &extents);
   return _retval;
 }
 
@@ -4112,7 +4112,7 @@ Bool otLayoutGetFontExtents2(Font font, Direction direction, Script script, Lang
 OtLayoutGlyphClass otLayoutGetGlyphClass(HBFace face, Codepoint glyph)
 {
   hb_ot_layout_glyph_class_t _cretval;
-  _cretval = hb_ot_layout_get_glyph_class(face ? cast(hb_face_t*)face.cPtr(false) : null, glyph);
+  _cretval = hb_ot_layout_get_glyph_class(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph);
   OtLayoutGlyphClass _retval = cast(OtLayoutGlyphClass)_cretval;
   return _retval;
 }
@@ -4151,7 +4151,7 @@ uint otLayoutGetLigatureCarets(Font font, Direction direction, Codepoint glyph, 
 {
   uint _retval;
   uint _caretCount;
-  _retval = hb_ot_layout_get_ligature_carets(font ? cast(hb_font_t*)font.cPtr(false) : null, direction, glyph, startOffset, &_caretCount, caretArray.ptr);
+  _retval = hb_ot_layout_get_ligature_carets(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, direction, glyph, startOffset, &_caretCount, caretArray.ptr);
   return _retval;
 }
 
@@ -4175,7 +4175,7 @@ uint otLayoutGetLigatureCarets(Font font, Direction direction, Codepoint glyph, 
 Bool otLayoutGetSizeParams(HBFace face, out uint designSize, out uint subfamilyId, out OtNameId subfamilyNameId, out uint rangeStart, out uint rangeEnd)
 {
   Bool _retval;
-  _retval = hb_ot_layout_get_size_params(face ? cast(hb_face_t*)face.cPtr(false) : null, cast(uint*)&designSize, cast(uint*)&subfamilyId, cast(hb_ot_name_id_t*)&subfamilyNameId, cast(uint*)&rangeStart, cast(uint*)&rangeEnd);
+  _retval = hb_ot_layout_get_size_params(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, cast(uint*)&designSize, cast(uint*)&subfamilyId, cast(hb_ot_name_id_t*)&subfamilyNameId, cast(uint*)&rangeStart, cast(uint*)&rangeEnd);
   return _retval;
 }
 
@@ -4188,7 +4188,7 @@ Bool otLayoutGetSizeParams(HBFace face, out uint designSize, out uint subfamilyI
 Bool otLayoutHasGlyphClasses(HBFace face)
 {
   Bool _retval;
-  _retval = hb_ot_layout_has_glyph_classes(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_layout_has_glyph_classes(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -4201,7 +4201,7 @@ Bool otLayoutHasGlyphClasses(HBFace face)
 Bool otLayoutHasPositioning(HBFace face)
 {
   Bool _retval;
-  _retval = hb_ot_layout_has_positioning(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_layout_has_positioning(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -4214,7 +4214,7 @@ Bool otLayoutHasPositioning(HBFace face)
 Bool otLayoutHasSubstitution(HBFace face)
 {
   Bool _retval;
-  _retval = hb_ot_layout_has_substitution(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_layout_has_substitution(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -4233,7 +4233,7 @@ Bool otLayoutHasSubstitution(HBFace face)
 Bool otLayoutLanguageFindFeature(HBFace face, Tag tableTag, uint scriptIndex, uint languageIndex, Tag featureTag, out uint featureIndex)
 {
   Bool _retval;
-  _retval = hb_ot_layout_language_find_feature(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, scriptIndex, languageIndex, featureTag, cast(uint*)&featureIndex);
+  _retval = hb_ot_layout_language_find_feature(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, featureTag, cast(uint*)&featureIndex);
   return _retval;
 }
 
@@ -4254,7 +4254,7 @@ uint otLayoutLanguageGetFeatureIndexes(HBFace face, Tag tableTag, uint scriptInd
 {
   uint _retval;
   uint _featureCount;
-  _retval = hb_ot_layout_language_get_feature_indexes(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, scriptIndex, languageIndex, startOffset, &_featureCount, featureIndexes.ptr);
+  _retval = hb_ot_layout_language_get_feature_indexes(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, startOffset, &_featureCount, featureIndexes.ptr);
   return _retval;
 }
 
@@ -4275,7 +4275,7 @@ uint otLayoutLanguageGetFeatureTags(HBFace face, Tag tableTag, uint scriptIndex,
 {
   uint _retval;
   uint _featureCount;
-  _retval = hb_ot_layout_language_get_feature_tags(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, scriptIndex, languageIndex, startOffset, &_featureCount, featureTags.ptr);
+  _retval = hb_ot_layout_language_get_feature_tags(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, startOffset, &_featureCount, featureTags.ptr);
   return _retval;
 }
 
@@ -4294,7 +4294,7 @@ uint otLayoutLanguageGetFeatureTags(HBFace face, Tag tableTag, uint scriptIndex,
 Bool otLayoutLanguageGetRequiredFeature(HBFace face, Tag tableTag, uint scriptIndex, uint languageIndex, out uint featureIndex, out Tag featureTag)
 {
   Bool _retval;
-  _retval = hb_ot_layout_language_get_required_feature(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, scriptIndex, languageIndex, cast(uint*)&featureIndex, cast(hb_tag_t*)&featureTag);
+  _retval = hb_ot_layout_language_get_required_feature(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, cast(uint*)&featureIndex, cast(hb_tag_t*)&featureTag);
   return _retval;
 }
 
@@ -4312,7 +4312,7 @@ Bool otLayoutLanguageGetRequiredFeature(HBFace face, Tag tableTag, uint scriptIn
 Bool otLayoutLanguageGetRequiredFeatureIndex(HBFace face, Tag tableTag, uint scriptIndex, uint languageIndex, out uint featureIndex)
 {
   Bool _retval;
-  _retval = hb_ot_layout_language_get_required_feature_index(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, scriptIndex, languageIndex, cast(uint*)&featureIndex);
+  _retval = hb_ot_layout_language_get_required_feature_index(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, cast(uint*)&featureIndex);
   return _retval;
 }
 
@@ -4331,7 +4331,7 @@ uint otLayoutLookupGetGlyphAlternates(HBFace face, uint lookupIndex, Codepoint g
 {
   uint _retval;
   uint _alternateCount;
-  _retval = hb_ot_layout_lookup_get_glyph_alternates(face ? cast(hb_face_t*)face.cPtr(false) : null, lookupIndex, glyph, startOffset, &_alternateCount, alternateGlyphs.ptr);
+  _retval = hb_ot_layout_lookup_get_glyph_alternates(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, lookupIndex, glyph, startOffset, &_alternateCount, alternateGlyphs.ptr);
   return _retval;
 }
 
@@ -4348,7 +4348,7 @@ uint otLayoutLookupGetGlyphAlternates(HBFace face, uint lookupIndex, Codepoint g
 Position otLayoutLookupGetOpticalBound(Font font, uint lookupIndex, Direction direction, Codepoint glyph)
 {
   Position _retval;
-  _retval = hb_ot_layout_lookup_get_optical_bound(font ? cast(hb_font_t*)font.cPtr(false) : null, lookupIndex, direction, glyph);
+  _retval = hb_ot_layout_lookup_get_optical_bound(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, lookupIndex, direction, glyph);
   return _retval;
 }
 
@@ -4371,7 +4371,7 @@ Bool otLayoutLookupWouldSubstitute(HBFace face, uint lookupIndex, Codepoint[] gl
     _glyphsLength = cast(uint)glyphs.length;
 
   auto _glyphs = cast(const(hb_codepoint_t)*)glyphs.ptr;
-  _retval = hb_ot_layout_lookup_would_substitute(face ? cast(hb_face_t*)face.cPtr(false) : null, lookupIndex, _glyphs, _glyphsLength, zeroContext);
+  _retval = hb_ot_layout_lookup_would_substitute(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, lookupIndex, _glyphs, _glyphsLength, zeroContext);
   return _retval;
 }
 
@@ -4389,7 +4389,7 @@ Bool otLayoutLookupWouldSubstitute(HBFace face, uint lookupIndex, Codepoint[] gl
 Bool otLayoutScriptFindLanguage(HBFace face, Tag tableTag, uint scriptIndex, Tag languageTag, out uint languageIndex)
 {
   Bool _retval;
-  _retval = hb_ot_layout_script_find_language(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, scriptIndex, languageTag, cast(uint*)&languageIndex);
+  _retval = hb_ot_layout_script_find_language(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageTag, cast(uint*)&languageIndex);
   return _retval;
 }
 
@@ -4408,7 +4408,7 @@ uint otLayoutScriptGetLanguageTags(HBFace face, Tag tableTag, uint scriptIndex, 
 {
   uint _retval;
   uint _languageCount;
-  _retval = hb_ot_layout_script_get_language_tags(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, scriptIndex, startOffset, &_languageCount, languageTags.ptr);
+  _retval = hb_ot_layout_script_get_language_tags(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, startOffset, &_languageCount, languageTags.ptr);
   return _retval;
 }
 
@@ -4434,7 +4434,7 @@ Bool otLayoutScriptSelectLanguage(HBFace face, Tag tableTag, uint scriptIndex, T
     _languageCount = cast(uint)languageTags.length;
 
   auto _languageTags = cast(const(hb_tag_t)*)languageTags.ptr;
-  _retval = hb_ot_layout_script_select_language(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, scriptIndex, _languageCount, _languageTags, cast(uint*)&languageIndex);
+  _retval = hb_ot_layout_script_select_language(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, _languageCount, _languageTags, cast(uint*)&languageIndex);
   return _retval;
 }
 
@@ -4462,7 +4462,7 @@ Bool otLayoutScriptSelectLanguage2(HBFace face, Tag tableTag, uint scriptIndex, 
     _languageCount = cast(uint)languageTags.length;
 
   auto _languageTags = cast(const(hb_tag_t)*)languageTags.ptr;
-  _retval = hb_ot_layout_script_select_language2(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, scriptIndex, _languageCount, _languageTags, cast(uint*)&languageIndex, cast(hb_tag_t*)&chosenLanguage);
+  _retval = hb_ot_layout_script_select_language2(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, _languageCount, _languageTags, cast(uint*)&languageIndex, cast(hb_tag_t*)&chosenLanguage);
   return _retval;
 }
 
@@ -4484,7 +4484,7 @@ Bool otLayoutTableFindFeatureVariations(HBFace face, Tag tableTag, int[] coords,
     _numCoords = cast(uint)coords.length;
 
   auto _coords = cast(const(int)*)coords.ptr;
-  _retval = hb_ot_layout_table_find_feature_variations(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, _coords, _numCoords, cast(uint*)&variationsIndex);
+  _retval = hb_ot_layout_table_find_feature_variations(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, _coords, _numCoords, cast(uint*)&variationsIndex);
   return _retval;
 }
 
@@ -4501,7 +4501,7 @@ Bool otLayoutTableFindFeatureVariations(HBFace face, Tag tableTag, int[] coords,
 Bool otLayoutTableFindScript(HBFace face, Tag tableTag, Tag scriptTag, out uint scriptIndex)
 {
   Bool _retval;
-  _retval = hb_ot_layout_table_find_script(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, scriptTag, cast(uint*)&scriptIndex);
+  _retval = hb_ot_layout_table_find_script(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptTag, cast(uint*)&scriptIndex);
   return _retval;
 }
 
@@ -4520,7 +4520,7 @@ uint otLayoutTableGetFeatureTags(HBFace face, Tag tableTag, uint startOffset, re
 {
   uint _retval;
   uint _featureCount;
-  _retval = hb_ot_layout_table_get_feature_tags(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, startOffset, &_featureCount, featureTags.ptr);
+  _retval = hb_ot_layout_table_get_feature_tags(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, startOffset, &_featureCount, featureTags.ptr);
   return _retval;
 }
 
@@ -4535,7 +4535,7 @@ uint otLayoutTableGetFeatureTags(HBFace face, Tag tableTag, uint startOffset, re
 uint otLayoutTableGetLookupCount(HBFace face, Tag tableTag)
 {
   uint _retval;
-  _retval = hb_ot_layout_table_get_lookup_count(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag);
+  _retval = hb_ot_layout_table_get_lookup_count(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag);
   return _retval;
 }
 
@@ -4553,7 +4553,7 @@ uint otLayoutTableGetScriptTags(HBFace face, Tag tableTag, uint startOffset, ref
 {
   uint _retval;
   uint _scriptCount;
-  _retval = hb_ot_layout_table_get_script_tags(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, startOffset, &_scriptCount, scriptTags.ptr);
+  _retval = hb_ot_layout_table_get_script_tags(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, startOffset, &_scriptCount, scriptTags.ptr);
   return _retval;
 }
 
@@ -4580,7 +4580,7 @@ Bool otLayoutTableSelectScript(HBFace face, Tag tableTag, Tag[] scriptTags, out 
     _scriptCount = cast(uint)scriptTags.length;
 
   auto _scriptTags = cast(const(hb_tag_t)*)scriptTags.ptr;
-  _retval = hb_ot_layout_table_select_script(face ? cast(hb_face_t*)face.cPtr(false) : null, tableTag, _scriptCount, _scriptTags, cast(uint*)&scriptIndex, cast(hb_tag_t*)&chosenScript);
+  _retval = hb_ot_layout_table_select_script(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, _scriptCount, _scriptTags, cast(uint*)&scriptIndex, cast(hb_tag_t*)&chosenScript);
   return _retval;
 }
 
@@ -4599,7 +4599,7 @@ Bool otLayoutTableSelectScript(HBFace face, Tag tableTag, Tag[] scriptTags, out 
 Position otMathGetConstant(Font font, OtMathConstant constant)
 {
   Position _retval;
-  _retval = hb_ot_math_get_constant(font ? cast(hb_font_t*)font.cPtr(false) : null, constant);
+  _retval = hb_ot_math_get_constant(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, constant);
   return _retval;
 }
 
@@ -4627,10 +4627,10 @@ uint otMathGetGlyphAssembly(Font font, Codepoint glyph, Direction direction, uin
   uint _partsCount;
   hb_ot_math_glyph_part_t[] _parts;
   _parts.length = _partsCount;
-  _retval = hb_ot_math_get_glyph_assembly(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, direction, startOffset, &_partsCount, _parts.ptr, cast(hb_position_t*)&italicsCorrection);
+  _retval = hb_ot_math_get_glyph_assembly(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, startOffset, &_partsCount, _parts.ptr, cast(hb_position_t*)&italicsCorrection);
   parts.length = _partsCount;
   foreach (i; 0 .. _partsCount)
-    parts[i] = new OtMathGlyphPart(cast(void*)&_parts[i], false);
+    parts[i] = new OtMathGlyphPart(cast(void*)&_parts[i], No.Take);
   return _retval;
 }
 
@@ -4645,7 +4645,7 @@ uint otMathGetGlyphAssembly(Font font, Codepoint glyph, Direction direction, uin
 Position otMathGetGlyphItalicsCorrection(Font font, Codepoint glyph)
 {
   Position _retval;
-  _retval = hb_ot_math_get_glyph_italics_correction(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph);
+  _retval = hb_ot_math_get_glyph_italics_correction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -4666,7 +4666,7 @@ Position otMathGetGlyphItalicsCorrection(Font font, Codepoint glyph)
 Position otMathGetGlyphKerning(Font font, Codepoint glyph, OtMathKern kern, Position correctionHeight)
 {
   Position _retval;
-  _retval = hb_ot_math_get_glyph_kerning(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, kern, correctionHeight);
+  _retval = hb_ot_math_get_glyph_kerning(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, kern, correctionHeight);
   return _retval;
 }
 
@@ -4695,7 +4695,7 @@ uint otMathGetGlyphKernings(Font font, Codepoint glyph, OtMathKern kern, uint st
 {
   uint _retval;
   uint _entriesCount;
-  _retval = hb_ot_math_get_glyph_kernings(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, kern, startOffset, &_entriesCount, kernEntries.ptr);
+  _retval = hb_ot_math_get_glyph_kernings(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, kern, startOffset, &_entriesCount, kernEntries.ptr);
   return _retval;
 }
 
@@ -4716,7 +4716,7 @@ uint otMathGetGlyphKernings(Font font, Codepoint glyph, OtMathKern kern, uint st
 Position otMathGetGlyphTopAccentAttachment(Font font, Codepoint glyph)
 {
   Position _retval;
-  _retval = hb_ot_math_get_glyph_top_accent_attachment(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph);
+  _retval = hb_ot_math_get_glyph_top_accent_attachment(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -4742,10 +4742,10 @@ uint otMathGetGlyphVariants(Font font, Codepoint glyph, Direction direction, uin
   uint _variantsCount;
   hb_ot_math_glyph_variant_t[] _variants;
   _variants.length = _variantsCount;
-  _retval = hb_ot_math_get_glyph_variants(font ? cast(hb_font_t*)font.cPtr(false) : null, glyph, direction, startOffset, &_variantsCount, _variants.ptr);
+  _retval = hb_ot_math_get_glyph_variants(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, startOffset, &_variantsCount, _variants.ptr);
   variants.length = _variantsCount;
   foreach (i; 0 .. _variantsCount)
-    variants[i] = new OtMathGlyphVariant(cast(void*)&_variants[i], false);
+    variants[i] = new OtMathGlyphVariant(cast(void*)&_variants[i], No.Take);
   return _retval;
 }
 
@@ -4765,7 +4765,7 @@ uint otMathGetGlyphVariants(Font font, Codepoint glyph, Direction direction, uin
 Position otMathGetMinConnectorOverlap(Font font, Direction direction)
 {
   Position _retval;
-  _retval = hb_ot_math_get_min_connector_overlap(font ? cast(hb_font_t*)font.cPtr(false) : null, direction);
+  _retval = hb_ot_math_get_min_connector_overlap(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, direction);
   return _retval;
 }
 
@@ -4778,7 +4778,7 @@ Position otMathGetMinConnectorOverlap(Font font, Direction direction)
 Bool otMathHasData(HBFace face)
 {
   Bool _retval;
-  _retval = hb_ot_math_has_data(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_math_has_data(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -4792,7 +4792,7 @@ Bool otMathHasData(HBFace face)
 Bool otMathIsGlyphExtendedShape(HBFace face, Codepoint glyph)
 {
   Bool _retval;
-  _retval = hb_ot_math_is_glyph_extended_shape(face ? cast(hb_face_t*)face.cPtr(false) : null, glyph);
+  _retval = hb_ot_math_is_glyph_extended_shape(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -4806,8 +4806,8 @@ Bool otMathIsGlyphExtendedShape(HBFace face, Codepoint glyph)
 Blob otMetaReferenceEntry(HBFace face, OtMetaTag metaTag)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_ot_meta_reference_entry(face ? cast(hb_face_t*)face.cPtr(false) : null, metaTag);
-  auto _retval = _cretval ? new Blob(cast(void*)_cretval, true) : null;
+  _cretval = hb_ot_meta_reference_entry(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, metaTag);
+  auto _retval = _cretval ? new Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -4822,7 +4822,7 @@ Blob otMetaReferenceEntry(HBFace face, OtMetaTag metaTag)
 Bool otMetricsGetPosition(Font font, OtMetricsTag metricsTag, out Position position)
 {
   Bool _retval;
-  _retval = hb_ot_metrics_get_position(font ? cast(hb_font_t*)font.cPtr(false) : null, metricsTag, cast(hb_position_t*)&position);
+  _retval = hb_ot_metrics_get_position(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, metricsTag, cast(hb_position_t*)&position);
   return _retval;
 }
 
@@ -4836,7 +4836,7 @@ Bool otMetricsGetPosition(Font font, OtMetricsTag metricsTag, out Position posit
  */
 void otMetricsGetPositionWithFallback(Font font, OtMetricsTag metricsTag, out Position position)
 {
-  hb_ot_metrics_get_position_with_fallback(font ? cast(hb_font_t*)font.cPtr(false) : null, metricsTag, cast(hb_position_t*)&position);
+  hb_ot_metrics_get_position_with_fallback(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, metricsTag, cast(hb_position_t*)&position);
 }
 
 /**
@@ -4850,7 +4850,7 @@ void otMetricsGetPositionWithFallback(Font font, OtMetricsTag metricsTag, out Po
 float otMetricsGetVariation(Font font, OtMetricsTag metricsTag)
 {
   float _retval;
-  _retval = hb_ot_metrics_get_variation(font ? cast(hb_font_t*)font.cPtr(false) : null, metricsTag);
+  _retval = hb_ot_metrics_get_variation(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, metricsTag);
   return _retval;
 }
 
@@ -4865,7 +4865,7 @@ float otMetricsGetVariation(Font font, OtMetricsTag metricsTag)
 Position otMetricsGetXVariation(Font font, OtMetricsTag metricsTag)
 {
   Position _retval;
-  _retval = hb_ot_metrics_get_x_variation(font ? cast(hb_font_t*)font.cPtr(false) : null, metricsTag);
+  _retval = hb_ot_metrics_get_x_variation(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, metricsTag);
   return _retval;
 }
 
@@ -4880,7 +4880,7 @@ Position otMetricsGetXVariation(Font font, OtMetricsTag metricsTag)
 Position otMetricsGetYVariation(Font font, OtMetricsTag metricsTag)
 {
   Position _retval;
-  _retval = hb_ot_metrics_get_y_variation(font ? cast(hb_font_t*)font.cPtr(false) : null, metricsTag);
+  _retval = hb_ot_metrics_get_y_variation(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, metricsTag);
   return _retval;
 }
 
@@ -4896,14 +4896,14 @@ OtNameEntry[] otNameListNames(HBFace face)
 {
   const(hb_ot_name_entry_t)* _cretval;
   uint _cretlength;
-  _cretval = hb_ot_name_list_names(face ? cast(hb_face_t*)face.cPtr(false) : null, &_cretlength);
+  _cretval = hb_ot_name_list_names(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, &_cretlength);
   OtNameEntry[] _retval;
 
   if (_cretval)
   {
     _retval = new OtNameEntry[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = new OtNameEntry(cast(void*)&_cretval[i], false);
+      _retval[i] = new OtNameEntry(cast(void*)&_cretval[i], No.Take);
   }
   return _retval;
 }
@@ -5010,8 +5010,8 @@ Bool otVarFindAxisInfo(HBFace face, Tag axisTag, out OtVarAxisInfo axisInfo)
 {
   Bool _retval;
   hb_ot_var_axis_info_t _axisInfo;
-  _retval = hb_ot_var_find_axis_info(face ? cast(hb_face_t*)face.cPtr(false) : null, axisTag, &_axisInfo);
-  axisInfo = new OtVarAxisInfo(cast(void*)&_axisInfo, false);
+  _retval = hb_ot_var_find_axis_info(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, axisTag, &_axisInfo);
+  axisInfo = new OtVarAxisInfo(cast(void*)&_axisInfo, No.Take);
   return _retval;
 }
 
@@ -5030,7 +5030,7 @@ uint otVarGetAxes(HBFace face, uint startOffset, ref OtVarAxis[] axesArray)
 {
   uint _retval;
   uint _axesCount;
-  _retval = hb_ot_var_get_axes(face ? cast(hb_face_t*)face.cPtr(false) : null, startOffset, &_axesCount, axesArray.ptr);
+  _retval = hb_ot_var_get_axes(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, startOffset, &_axesCount, axesArray.ptr);
   return _retval;
 }
 
@@ -5043,7 +5043,7 @@ uint otVarGetAxes(HBFace face, uint startOffset, ref OtVarAxis[] axesArray)
 uint otVarGetAxisCount(HBFace face)
 {
   uint _retval;
-  _retval = hb_ot_var_get_axis_count(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_var_get_axis_count(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5062,10 +5062,10 @@ uint otVarGetAxisInfos(HBFace face, uint startOffset, ref OtVarAxisInfo[] axesAr
   uint _axesCount;
   hb_ot_var_axis_info_t[] _axesArray;
   _axesArray.length = _axesCount;
-  _retval = hb_ot_var_get_axis_infos(face ? cast(hb_face_t*)face.cPtr(false) : null, startOffset, &_axesCount, _axesArray.ptr);
+  _retval = hb_ot_var_get_axis_infos(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, startOffset, &_axesCount, _axesArray.ptr);
   axesArray.length = _axesCount;
   foreach (i; 0 .. _axesCount)
-    axesArray[i] = new OtVarAxisInfo(cast(void*)&_axesArray[i], false);
+    axesArray[i] = new OtVarAxisInfo(cast(void*)&_axesArray[i], No.Take);
   return _retval;
 }
 
@@ -5078,7 +5078,7 @@ uint otVarGetAxisInfos(HBFace face, uint startOffset, ref OtVarAxisInfo[] axesAr
 uint otVarGetNamedInstanceCount(HBFace face)
 {
   uint _retval;
-  _retval = hb_ot_var_get_named_instance_count(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_var_get_named_instance_count(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5091,7 +5091,7 @@ uint otVarGetNamedInstanceCount(HBFace face)
 Bool otVarHasData(HBFace face)
 {
   Bool _retval;
-  _retval = hb_ot_var_has_data(face ? cast(hb_face_t*)face.cPtr(false) : null);
+  _retval = hb_ot_var_has_data(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5108,7 +5108,7 @@ uint otVarNamedInstanceGetDesignCoords(HBFace face, uint instanceIndex, ref floa
 {
   uint _retval;
   uint _coordsLength;
-  _retval = hb_ot_var_named_instance_get_design_coords(face ? cast(hb_face_t*)face.cPtr(false) : null, instanceIndex, &_coordsLength, coords.ptr);
+  _retval = hb_ot_var_named_instance_get_design_coords(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, instanceIndex, &_coordsLength, coords.ptr);
   return _retval;
 }
 
@@ -5123,7 +5123,7 @@ uint otVarNamedInstanceGetDesignCoords(HBFace face, uint instanceIndex, ref floa
 OtNameId otVarNamedInstanceGetPostscriptNameId(HBFace face, uint instanceIndex)
 {
   OtNameId _retval;
-  _retval = hb_ot_var_named_instance_get_postscript_name_id(face ? cast(hb_face_t*)face.cPtr(false) : null, instanceIndex);
+  _retval = hb_ot_var_named_instance_get_postscript_name_id(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, instanceIndex);
   return _retval;
 }
 
@@ -5138,7 +5138,7 @@ OtNameId otVarNamedInstanceGetPostscriptNameId(HBFace face, uint instanceIndex)
 OtNameId otVarNamedInstanceGetSubfamilyNameId(HBFace face, uint instanceIndex)
 {
   OtNameId _retval;
-  _retval = hb_ot_var_named_instance_get_subfamily_name_id(face ? cast(hb_face_t*)face.cPtr(false) : null, instanceIndex);
+  _retval = hb_ot_var_named_instance_get_subfamily_name_id(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, instanceIndex);
   return _retval;
 }
 
@@ -5162,7 +5162,7 @@ void otVarNormalizeCoords(HBFace face, float[] designCoords, out int normalizedC
     _coordsLength = cast(uint)designCoords.length;
 
   auto _designCoords = cast(const(float)*)designCoords.ptr;
-  hb_ot_var_normalize_coords(face ? cast(hb_face_t*)face.cPtr(false) : null, _coordsLength, _designCoords, cast(int*)&normalizedCoords);
+  hb_ot_var_normalize_coords(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, _coordsLength, _designCoords, cast(int*)&normalizedCoords);
 }
 
 /**
@@ -5175,7 +5175,7 @@ void otVarNormalizeCoords(HBFace face, float[] designCoords, out int normalizedC
  */
 void paintColor(PaintFuncs funcs, void* paintData, Bool isForeground, Color color)
 {
-  hb_paint_color(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData, isForeground, color);
+  hb_paint_color(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, isForeground, color);
 }
 
 /**
@@ -5190,7 +5190,7 @@ void paintColor(PaintFuncs funcs, void* paintData, Bool isForeground, Color colo
 Bool paintColorGlyph(PaintFuncs funcs, void* paintData, Codepoint glyph, Font font)
 {
   Bool _retval;
-  _retval = hb_paint_color_glyph(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData, glyph, font ? cast(hb_font_t*)font.cPtr(false) : null);
+  _retval = hb_paint_color_glyph(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, glyph, font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5206,7 +5206,7 @@ Bool paintColorGlyph(PaintFuncs funcs, void* paintData, Codepoint glyph, Font fo
 Bool paintCustomPaletteColor(PaintFuncs funcs, void* paintData, uint colorIndex, out Color color)
 {
   Bool _retval;
-  _retval = hb_paint_custom_palette_color(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData, colorIndex, cast(hb_color_t*)&color);
+  _retval = hb_paint_custom_palette_color(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, colorIndex, cast(hb_color_t*)&color);
   return _retval;
 }
 
@@ -5222,7 +5222,7 @@ PaintFuncs paintFuncsCreate()
 {
   hb_paint_funcs_t* _cretval;
   _cretval = hb_paint_funcs_create();
-  auto _retval = _cretval ? new PaintFuncs(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new PaintFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -5234,7 +5234,7 @@ PaintFuncs paintFuncsGetEmpty()
 {
   hb_paint_funcs_t* _cretval;
   _cretval = hb_paint_funcs_get_empty();
-  auto _retval = _cretval ? new PaintFuncs(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new PaintFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -5247,7 +5247,7 @@ PaintFuncs paintFuncsGetEmpty()
 Bool paintFuncsIsImmutable(PaintFuncs funcs)
 {
   Bool _retval;
-  _retval = hb_paint_funcs_is_immutable(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null);
+  _retval = hb_paint_funcs_is_immutable(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5260,7 +5260,7 @@ Bool paintFuncsIsImmutable(PaintFuncs funcs)
  */
 void paintFuncsMakeImmutable(PaintFuncs funcs)
 {
-  hb_paint_funcs_make_immutable(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null);
+  hb_paint_funcs_make_immutable(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -5275,11 +5275,11 @@ void paintFuncsSetColorFunc(PaintFuncs funcs, PaintColorFunc func)
   {
     auto _dlg = cast(PaintColorFunc*)userData;
 
-    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData, isForeground, color);
+    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, isForeground, color);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5294,12 +5294,12 @@ void paintFuncsSetColorGlyphFunc(PaintFuncs funcs, PaintColorGlyphFunc func)
   {
     auto _dlg = cast(PaintColorGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData, glyph, font ? new Font(cast(void*)font, false) : null);
+    hb_bool_t _retval = (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new Font(cast(void*)font, No.Take) : null);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_color_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_color_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5314,12 +5314,12 @@ void paintFuncsSetCustomPaletteColorFunc(PaintFuncs funcs, PaintCustomPaletteCol
   {
     auto _dlg = cast(PaintCustomPaletteColorFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData, colorIndex, *color);
+    hb_bool_t _retval = (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorIndex, *color);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_custom_palette_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_custom_palette_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5334,12 +5334,12 @@ void paintFuncsSetImageFunc(PaintFuncs funcs, PaintImageFunc func)
   {
     auto _dlg = cast(PaintImageFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData, image ? new Blob(cast(void*)image, false) : null, width, height, format, slant, *extents);
+    hb_bool_t _retval = (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, image ? new Blob(cast(void*)image, No.Take) : null, width, height, format, slant, *extents);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_image_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_image_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5354,11 +5354,11 @@ void paintFuncsSetLinearGradientFunc(PaintFuncs funcs, PaintLinearGradientFunc f
   {
     auto _dlg = cast(PaintLinearGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData, colorLine ? new ColorLine(cast(void*)colorLine, false) : null, x0, y0, x1, y1, x2, y2);
+    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, x1, y1, x2, y2);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_linear_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_linear_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5373,11 +5373,11 @@ void paintFuncsSetPopClipFunc(PaintFuncs funcs, PaintPopClipFunc func)
   {
     auto _dlg = cast(PaintPopClipFunc*)userData;
 
-    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData);
+    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_pop_clip_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_pop_clip_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5392,11 +5392,11 @@ void paintFuncsSetPopGroupFunc(PaintFuncs funcs, PaintPopGroupFunc func)
   {
     auto _dlg = cast(PaintPopGroupFunc*)userData;
 
-    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData, mode);
+    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, mode);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_pop_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_pop_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5411,11 +5411,11 @@ void paintFuncsSetPopTransformFunc(PaintFuncs funcs, PaintPopTransformFunc func)
   {
     auto _dlg = cast(PaintPopTransformFunc*)userData;
 
-    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData);
+    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_pop_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_pop_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5430,11 +5430,11 @@ void paintFuncsSetPushClipGlyphFunc(PaintFuncs funcs, PaintPushClipGlyphFunc fun
   {
     auto _dlg = cast(PaintPushClipGlyphFunc*)userData;
 
-    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData, glyph, font ? new Font(cast(void*)font, false) : null);
+    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new Font(cast(void*)font, No.Take) : null);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_push_clip_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_push_clip_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5449,11 +5449,11 @@ void paintFuncsSetPushClipRectangleFunc(PaintFuncs funcs, PaintPushClipRectangle
   {
     auto _dlg = cast(PaintPushClipRectangleFunc*)userData;
 
-    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData, xmin, ymin, xmax, ymax);
+    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xmin, ymin, xmax, ymax);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_push_clip_rectangle_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_push_clip_rectangle_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5468,11 +5468,11 @@ void paintFuncsSetPushGroupFunc(PaintFuncs funcs, PaintPushGroupFunc func)
   {
     auto _dlg = cast(PaintPushGroupFunc*)userData;
 
-    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData);
+    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_push_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_push_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5487,11 +5487,11 @@ void paintFuncsSetPushTransformFunc(PaintFuncs funcs, PaintPushTransformFunc fun
   {
     auto _dlg = cast(PaintPushTransformFunc*)userData;
 
-    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData, xx, yx, xy, yy, dx, dy);
+    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xx, yx, xy, yy, dx, dy);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_push_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_push_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5506,11 +5506,11 @@ void paintFuncsSetRadialGradientFunc(PaintFuncs funcs, PaintRadialGradientFunc f
   {
     auto _dlg = cast(PaintRadialGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData, colorLine ? new ColorLine(cast(void*)colorLine, false) : null, x0, y0, r0, x1, y1, r1);
+    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, r0, x1, y1, r1);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_radial_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_radial_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5525,11 +5525,11 @@ void paintFuncsSetSweepGradientFunc(PaintFuncs funcs, PaintSweepGradientFunc fun
   {
     auto _dlg = cast(PaintSweepGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, false) : null, paintData, colorLine ? new ColorLine(cast(void*)colorLine, false) : null, x0, y0, startAngle, endAngle);
+    (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, startAngle, endAngle);
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_sweep_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_paint_funcs_set_sweep_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -5546,7 +5546,7 @@ void paintFuncsSetSweepGradientFunc(PaintFuncs funcs, PaintSweepGradientFunc fun
  */
 void paintImage(PaintFuncs funcs, void* paintData, Blob image, uint width, uint height, Tag format, float slant, GlyphExtents extents)
 {
-  hb_paint_image(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData, image ? cast(hb_blob_t*)image.cPtr(false) : null, width, height, format, slant, &extents);
+  hb_paint_image(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, image ? cast(hb_blob_t*)image.cPtr(No.Dup) : null, width, height, format, slant, &extents);
 }
 
 /**
@@ -5564,7 +5564,7 @@ void paintImage(PaintFuncs funcs, void* paintData, Blob image, uint width, uint 
  */
 void paintLinearGradient(PaintFuncs funcs, void* paintData, ColorLine colorLine, float x0, float y0, float x1, float y1, float x2, float y2)
 {
-  hb_paint_linear_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(false) : null, x0, y0, x1, y1, x2, y2);
+  hb_paint_linear_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.Dup) : null, x0, y0, x1, y1, x2, y2);
 }
 
 /**
@@ -5575,7 +5575,7 @@ void paintLinearGradient(PaintFuncs funcs, void* paintData, ColorLine colorLine,
  */
 void paintPopClip(PaintFuncs funcs, void* paintData)
 {
-  hb_paint_pop_clip(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData);
+  hb_paint_pop_clip(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData);
 }
 
 /**
@@ -5587,7 +5587,7 @@ void paintPopClip(PaintFuncs funcs, void* paintData)
  */
 void paintPopGroup(PaintFuncs funcs, void* paintData, PaintCompositeMode mode)
 {
-  hb_paint_pop_group(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData, mode);
+  hb_paint_pop_group(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, mode);
 }
 
 /**
@@ -5598,7 +5598,7 @@ void paintPopGroup(PaintFuncs funcs, void* paintData, PaintCompositeMode mode)
  */
 void paintPopTransform(PaintFuncs funcs, void* paintData)
 {
-  hb_paint_pop_transform(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData);
+  hb_paint_pop_transform(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData);
 }
 
 /**
@@ -5611,7 +5611,7 @@ void paintPopTransform(PaintFuncs funcs, void* paintData)
  */
 void paintPushClipGlyph(PaintFuncs funcs, void* paintData, Codepoint glyph, Font font)
 {
-  hb_paint_push_clip_glyph(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData, glyph, font ? cast(hb_font_t*)font.cPtr(false) : null);
+  hb_paint_push_clip_glyph(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, glyph, font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -5626,7 +5626,7 @@ void paintPushClipGlyph(PaintFuncs funcs, void* paintData, Codepoint glyph, Font
  */
 void paintPushClipRectangle(PaintFuncs funcs, void* paintData, float xmin, float ymin, float xmax, float ymax)
 {
-  hb_paint_push_clip_rectangle(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData, xmin, ymin, xmax, ymax);
+  hb_paint_push_clip_rectangle(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, xmin, ymin, xmax, ymax);
 }
 
 /**
@@ -5637,7 +5637,7 @@ void paintPushClipRectangle(PaintFuncs funcs, void* paintData, float xmin, float
  */
 void paintPushGroup(PaintFuncs funcs, void* paintData)
 {
-  hb_paint_push_group(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData);
+  hb_paint_push_group(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData);
 }
 
 /**
@@ -5654,7 +5654,7 @@ void paintPushGroup(PaintFuncs funcs, void* paintData)
  */
 void paintPushTransform(PaintFuncs funcs, void* paintData, float xx, float yx, float xy, float yy, float dx, float dy)
 {
-  hb_paint_push_transform(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData, xx, yx, xy, yy, dx, dy);
+  hb_paint_push_transform(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, xx, yx, xy, yy, dx, dy);
 }
 
 /**
@@ -5672,7 +5672,7 @@ void paintPushTransform(PaintFuncs funcs, void* paintData, float xx, float yx, f
  */
 void paintRadialGradient(PaintFuncs funcs, void* paintData, ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1)
 {
-  hb_paint_radial_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(false) : null, x0, y0, r0, x1, y1, r1);
+  hb_paint_radial_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.Dup) : null, x0, y0, r0, x1, y1, r1);
 }
 
 /**
@@ -5688,7 +5688,7 @@ void paintRadialGradient(PaintFuncs funcs, void* paintData, ColorLine colorLine,
  */
 void paintSweepGradient(PaintFuncs funcs, void* paintData, ColorLine colorLine, float x0, float y0, float startAngle, float endAngle)
 {
-  hb_paint_sweep_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(false) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(false) : null, x0, y0, startAngle, endAngle);
+  hb_paint_sweep_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.Dup) : null, x0, y0, startAngle, endAngle);
 }
 
 /**
@@ -5769,7 +5769,7 @@ Tag scriptToIso15924Tag(Script script)
 Bool segmentPropertiesEqual(SegmentProperties a, SegmentProperties b)
 {
   Bool _retval;
-  _retval = hb_segment_properties_equal(a ? cast(hb_segment_properties_t*)a.cPtr(false) : null, b ? cast(hb_segment_properties_t*)b.cPtr(false) : null);
+  _retval = hb_segment_properties_equal(a ? cast(hb_segment_properties_t*)a.cPtr(No.Dup) : null, b ? cast(hb_segment_properties_t*)b.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5782,7 +5782,7 @@ Bool segmentPropertiesEqual(SegmentProperties a, SegmentProperties b)
 uint segmentPropertiesHash(SegmentProperties p)
 {
   uint _retval;
-  _retval = hb_segment_properties_hash(p ? cast(hb_segment_properties_t*)p.cPtr(false) : null);
+  _retval = hb_segment_properties_hash(p ? cast(hb_segment_properties_t*)p.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5800,7 +5800,7 @@ uint segmentPropertiesHash(SegmentProperties p)
  */
 void segmentPropertiesOverlay(SegmentProperties p, SegmentProperties src)
 {
-  hb_segment_properties_overlay(p ? cast(hb_segment_properties_t*)p.cPtr(false) : null, src ? cast(hb_segment_properties_t*)src.cPtr(false) : null);
+  hb_segment_properties_overlay(p ? cast(hb_segment_properties_t*)p.cPtr(No.Dup) : null, src ? cast(hb_segment_properties_t*)src.cPtr(No.Dup) : null);
 }
 
 /**
@@ -5811,7 +5811,7 @@ void segmentPropertiesOverlay(SegmentProperties p, SegmentProperties src)
  */
 void setAdd(Set set, Codepoint codepoint)
 {
-  hb_set_add(set ? cast(hb_set_t*)set.cPtr(false) : null, codepoint);
+  hb_set_add(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, codepoint);
 }
 
 /**
@@ -5824,7 +5824,7 @@ void setAdd(Set set, Codepoint codepoint)
  */
 void setAddRange(Set set, Codepoint first, Codepoint last)
 {
-  hb_set_add_range(set ? cast(hb_set_t*)set.cPtr(false) : null, first, last);
+  hb_set_add_range(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, first, last);
 }
 
 /**
@@ -5842,7 +5842,7 @@ void setAddSortedArray(Set set, Codepoint[] sortedCodepoints)
     _numCodepoints = cast(uint)sortedCodepoints.length;
 
   auto _sortedCodepoints = cast(const(hb_codepoint_t)*)sortedCodepoints.ptr;
-  hb_set_add_sorted_array(set ? cast(hb_set_t*)set.cPtr(false) : null, _sortedCodepoints, _numCodepoints);
+  hb_set_add_sorted_array(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, _sortedCodepoints, _numCodepoints);
 }
 
 /**
@@ -5854,7 +5854,7 @@ void setAddSortedArray(Set set, Codepoint[] sortedCodepoints)
 Bool setAllocationSuccessful(Set set)
 {
   Bool _retval;
-  _retval = hb_set_allocation_successful(set ? cast(hb_set_t*)set.cPtr(false) : null);
+  _retval = hb_set_allocation_successful(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5865,7 +5865,7 @@ Bool setAllocationSuccessful(Set set)
  */
 void setClear(Set set)
 {
-  hb_set_clear(set ? cast(hb_set_t*)set.cPtr(false) : null);
+  hb_set_clear(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
 }
 
 /**
@@ -5877,8 +5877,8 @@ void setClear(Set set)
 Set setCopy(Set set)
 {
   hb_set_t* _cretval;
-  _cretval = hb_set_copy(set ? cast(hb_set_t*)set.cPtr(false) : null);
-  auto _retval = _cretval ? new Set(cast(void*)_cretval, true) : null;
+  _cretval = hb_set_copy(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new Set(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -5890,7 +5890,7 @@ Set setCreate()
 {
   hb_set_t* _cretval;
   _cretval = hb_set_create();
-  auto _retval = _cretval ? new Set(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Set(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -5902,7 +5902,7 @@ Set setCreate()
  */
 void setDel(Set set, Codepoint codepoint)
 {
-  hb_set_del(set ? cast(hb_set_t*)set.cPtr(false) : null, codepoint);
+  hb_set_del(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, codepoint);
 }
 
 /**
@@ -5917,7 +5917,7 @@ void setDel(Set set, Codepoint codepoint)
  */
 void setDelRange(Set set, Codepoint first, Codepoint last)
 {
-  hb_set_del_range(set ? cast(hb_set_t*)set.cPtr(false) : null, first, last);
+  hb_set_del_range(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, first, last);
 }
 
 /**
@@ -5928,7 +5928,7 @@ Set setGetEmpty()
 {
   hb_set_t* _cretval;
   _cretval = hb_set_get_empty();
-  auto _retval = _cretval ? new Set(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Set(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -5941,7 +5941,7 @@ Set setGetEmpty()
 Codepoint setGetMax(Set set)
 {
   Codepoint _retval;
-  _retval = hb_set_get_max(set ? cast(hb_set_t*)set.cPtr(false) : null);
+  _retval = hb_set_get_max(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5954,7 +5954,7 @@ Codepoint setGetMax(Set set)
 Codepoint setGetMin(Set set)
 {
   Codepoint _retval;
-  _retval = hb_set_get_min(set ? cast(hb_set_t*)set.cPtr(false) : null);
+  _retval = hb_set_get_min(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5967,7 +5967,7 @@ Codepoint setGetMin(Set set)
 uint setGetPopulation(Set set)
 {
   uint _retval;
-  _retval = hb_set_get_population(set ? cast(hb_set_t*)set.cPtr(false) : null);
+  _retval = hb_set_get_population(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5981,7 +5981,7 @@ uint setGetPopulation(Set set)
 Bool setHas(Set set, Codepoint codepoint)
 {
   Bool _retval;
-  _retval = hb_set_has(set ? cast(hb_set_t*)set.cPtr(false) : null, codepoint);
+  _retval = hb_set_has(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, codepoint);
   return _retval;
 }
 
@@ -5994,7 +5994,7 @@ Bool setHas(Set set, Codepoint codepoint)
 uint setHash(Set set)
 {
   uint _retval;
-  _retval = hb_set_hash(set ? cast(hb_set_t*)set.cPtr(false) : null);
+  _retval = hb_set_hash(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6006,7 +6006,7 @@ uint setHash(Set set)
  */
 void setIntersect(Set set, Set other)
 {
-  hb_set_intersect(set ? cast(hb_set_t*)set.cPtr(false) : null, other ? cast(hb_set_t*)other.cPtr(false) : null);
+  hb_set_intersect(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, other ? cast(hb_set_t*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6016,7 +6016,7 @@ void setIntersect(Set set, Set other)
  */
 void setInvert(Set set)
 {
-  hb_set_invert(set ? cast(hb_set_t*)set.cPtr(false) : null);
+  hb_set_invert(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6028,7 +6028,7 @@ void setInvert(Set set)
 Bool setIsEmpty(Set set)
 {
   Bool _retval;
-  _retval = hb_set_is_empty(set ? cast(hb_set_t*)set.cPtr(false) : null);
+  _retval = hb_set_is_empty(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6043,7 +6043,7 @@ Bool setIsEmpty(Set set)
 Bool setIsEqual(Set set, Set other)
 {
   Bool _retval;
-  _retval = hb_set_is_equal(set ? cast(hb_set_t*)set.cPtr(false) : null, other ? cast(hb_set_t*)other.cPtr(false) : null);
+  _retval = hb_set_is_equal(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, other ? cast(hb_set_t*)other.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6056,7 +6056,7 @@ Bool setIsEqual(Set set, Set other)
 Bool setIsInverted(Set set)
 {
   Bool _retval;
-  _retval = hb_set_is_inverted(set ? cast(hb_set_t*)set.cPtr(false) : null);
+  _retval = hb_set_is_inverted(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6070,7 +6070,7 @@ Bool setIsInverted(Set set)
 Bool setIsSubset(Set set, Set largerSet)
 {
   Bool _retval;
-  _retval = hb_set_is_subset(set ? cast(hb_set_t*)set.cPtr(false) : null, largerSet ? cast(hb_set_t*)largerSet.cPtr(false) : null);
+  _retval = hb_set_is_subset(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, largerSet ? cast(hb_set_t*)largerSet.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6086,7 +6086,7 @@ Bool setIsSubset(Set set, Set largerSet)
 Bool setNext(Set set, ref Codepoint codepoint)
 {
   Bool _retval;
-  _retval = hb_set_next(set ? cast(hb_set_t*)set.cPtr(false) : null, cast(hb_codepoint_t*)&codepoint);
+  _retval = hb_set_next(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, cast(hb_codepoint_t*)&codepoint);
   return _retval;
 }
 
@@ -6109,7 +6109,7 @@ uint setNextMany(Set set, Codepoint codepoint, Codepoint[] out_)
     _size = cast(uint)out_.length;
 
   auto _out_ = cast(hb_codepoint_t*)out_.ptr;
-  _retval = hb_set_next_many(set ? cast(hb_set_t*)set.cPtr(false) : null, codepoint, _out_, _size);
+  _retval = hb_set_next_many(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, codepoint, _out_, _size);
   return _retval;
 }
 
@@ -6127,7 +6127,7 @@ uint setNextMany(Set set, Codepoint codepoint, Codepoint[] out_)
 Bool setNextRange(Set set, out Codepoint first, ref Codepoint last)
 {
   Bool _retval;
-  _retval = hb_set_next_range(set ? cast(hb_set_t*)set.cPtr(false) : null, cast(hb_codepoint_t*)&first, cast(hb_codepoint_t*)&last);
+  _retval = hb_set_next_range(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, cast(hb_codepoint_t*)&first, cast(hb_codepoint_t*)&last);
   return _retval;
 }
 
@@ -6143,7 +6143,7 @@ Bool setNextRange(Set set, out Codepoint first, ref Codepoint last)
 Bool setPrevious(Set set, ref Codepoint codepoint)
 {
   Bool _retval;
-  _retval = hb_set_previous(set ? cast(hb_set_t*)set.cPtr(false) : null, cast(hb_codepoint_t*)&codepoint);
+  _retval = hb_set_previous(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, cast(hb_codepoint_t*)&codepoint);
   return _retval;
 }
 
@@ -6161,7 +6161,7 @@ Bool setPrevious(Set set, ref Codepoint codepoint)
 Bool setPreviousRange(Set set, ref Codepoint first, out Codepoint last)
 {
   Bool _retval;
-  _retval = hb_set_previous_range(set ? cast(hb_set_t*)set.cPtr(false) : null, cast(hb_codepoint_t*)&first, cast(hb_codepoint_t*)&last);
+  _retval = hb_set_previous_range(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, cast(hb_codepoint_t*)&first, cast(hb_codepoint_t*)&last);
   return _retval;
 }
 
@@ -6173,7 +6173,7 @@ Bool setPreviousRange(Set set, ref Codepoint first, out Codepoint last)
  */
 void setSet(Set set, Set other)
 {
-  hb_set_set(set ? cast(hb_set_t*)set.cPtr(false) : null, other ? cast(hb_set_t*)other.cPtr(false) : null);
+  hb_set_set(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, other ? cast(hb_set_t*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6184,7 +6184,7 @@ void setSet(Set set, Set other)
  */
 void setSubtract(Set set, Set other)
 {
-  hb_set_subtract(set ? cast(hb_set_t*)set.cPtr(false) : null, other ? cast(hb_set_t*)other.cPtr(false) : null);
+  hb_set_subtract(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, other ? cast(hb_set_t*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6196,7 +6196,7 @@ void setSubtract(Set set, Set other)
  */
 void setSymmetricDifference(Set set, Set other)
 {
-  hb_set_symmetric_difference(set ? cast(hb_set_t*)set.cPtr(false) : null, other ? cast(hb_set_t*)other.cPtr(false) : null);
+  hb_set_symmetric_difference(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, other ? cast(hb_set_t*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6207,7 +6207,7 @@ void setSymmetricDifference(Set set, Set other)
  */
 void setUnion(Set set, Set other)
 {
-  hb_set_union(set ? cast(hb_set_t*)set.cPtr(false) : null, other ? cast(hb_set_t*)other.cPtr(false) : null);
+  hb_set_union(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, other ? cast(hb_set_t*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6232,7 +6232,7 @@ void shape(Font font, Buffer buffer, Feature[] features)
   foreach (obj; features)
     _tmpfeatures ~= *cast(hb_feature_t*)obj.cPtr;
   const(hb_feature_t)* _features = _tmpfeatures.ptr;
-  hb_shape(font ? cast(hb_font_t*)font.cPtr(false) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, _features, _numFeatures);
+  hb_shape(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _features, _numFeatures);
 }
 
 /**
@@ -6262,10 +6262,10 @@ Bool shapeFull(Font font, Buffer buffer, Feature[] features, string[] shaperList
 
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(false);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _retval = hb_shape_full(font ? cast(hb_font_t*)font.cPtr(false) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, _features, _numFeatures, _shaperList);
+  _retval = hb_shape_full(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _features, _numFeatures, _shaperList);
   return _retval;
 }
 
@@ -6307,10 +6307,10 @@ Bool shapeJustify(Font font, Buffer buffer, Feature[] features, string[] shaperL
 
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(false);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _retval = hb_shape_justify(font ? cast(hb_font_t*)font.cPtr(false) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, _features, _numFeatures, _shaperList, minTargetAdvance, maxTargetAdvance, cast(float*)&advance, cast(hb_tag_t*)&varTag, cast(float*)&varValue);
+  _retval = hb_shape_justify(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _features, _numFeatures, _shaperList, minTargetAdvance, maxTargetAdvance, cast(float*)&advance, cast(hb_tag_t*)&varTag, cast(float*)&varValue);
   return _retval;
 }
 
@@ -6332,7 +6332,7 @@ string[] shapeListShapers()
       break;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(false);
+      _retval[i] = _cretval[i].fromCString(No.Free);
   }
   return _retval;
 }
@@ -6361,11 +6361,11 @@ ShapePlan shapePlanCreate(HBFace face, SegmentProperties props, Feature[] userFe
 
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(false);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _cretval = hb_shape_plan_create(face ? cast(hb_face_t*)face.cPtr(false) : null, props ? cast(hb_segment_properties_t*)props.cPtr(false) : null, _userFeatures, _numUserFeatures, _shaperList);
-  auto _retval = _cretval ? new ShapePlan(cast(void*)_cretval, true) : null;
+  _cretval = hb_shape_plan_create(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, props ? cast(hb_segment_properties_t*)props.cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _shaperList);
+  auto _retval = _cretval ? new ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6400,11 +6400,11 @@ ShapePlan shapePlanCreate2(HBFace face, SegmentProperties props, Feature[] userF
   auto _coords = cast(const(int)*)coords.ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(false);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _cretval = hb_shape_plan_create2(face ? cast(hb_face_t*)face.cPtr(false) : null, props ? cast(hb_segment_properties_t*)props.cPtr(false) : null, _userFeatures, _numUserFeatures, _coords, _numCoords, _shaperList);
-  auto _retval = _cretval ? new ShapePlan(cast(void*)_cretval, true) : null;
+  _cretval = hb_shape_plan_create2(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, props ? cast(hb_segment_properties_t*)props.cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _coords, _numCoords, _shaperList);
+  auto _retval = _cretval ? new ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6432,11 +6432,11 @@ ShapePlan shapePlanCreateCached(HBFace face, SegmentProperties props, Feature[] 
 
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(false);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _cretval = hb_shape_plan_create_cached(face ? cast(hb_face_t*)face.cPtr(false) : null, props ? cast(hb_segment_properties_t*)props.cPtr(false) : null, _userFeatures, _numUserFeatures, _shaperList);
-  auto _retval = _cretval ? new ShapePlan(cast(void*)_cretval, true) : null;
+  _cretval = hb_shape_plan_create_cached(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, props ? cast(hb_segment_properties_t*)props.cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _shaperList);
+  auto _retval = _cretval ? new ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6472,11 +6472,11 @@ ShapePlan shapePlanCreateCached2(HBFace face, SegmentProperties props, Feature[]
   auto _coords = cast(const(int)*)coords.ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(false);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _cretval = hb_shape_plan_create_cached2(face ? cast(hb_face_t*)face.cPtr(false) : null, props ? cast(hb_segment_properties_t*)props.cPtr(false) : null, _userFeatures, _numUserFeatures, _coords, _numCoords, _shaperList);
-  auto _retval = _cretval ? new ShapePlan(cast(void*)_cretval, true) : null;
+  _cretval = hb_shape_plan_create_cached2(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, props ? cast(hb_segment_properties_t*)props.cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _coords, _numCoords, _shaperList);
+  auto _retval = _cretval ? new ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6501,7 +6501,7 @@ Bool shapePlanExecute(ShapePlan shapePlan, Font font, Buffer buffer, Feature[] f
   foreach (obj; features)
     _tmpfeatures ~= *cast(hb_feature_t*)obj.cPtr;
   const(hb_feature_t)* _features = _tmpfeatures.ptr;
-  _retval = hb_shape_plan_execute(shapePlan ? cast(hb_shape_plan_t*)shapePlan.cPtr(false) : null, font ? cast(hb_font_t*)font.cPtr(false) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(false) : null, _features, _numFeatures);
+  _retval = hb_shape_plan_execute(shapePlan ? cast(hb_shape_plan_t*)shapePlan.cPtr(No.Dup) : null, font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _features, _numFeatures);
   return _retval;
 }
 
@@ -6513,7 +6513,7 @@ ShapePlan shapePlanGetEmpty()
 {
   hb_shape_plan_t* _cretval;
   _cretval = hb_shape_plan_get_empty();
-  auto _retval = _cretval ? new ShapePlan(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6526,8 +6526,8 @@ ShapePlan shapePlanGetEmpty()
 string shapePlanGetShaper(ShapePlan shapePlan)
 {
   const(char)* _cretval;
-  _cretval = hb_shape_plan_get_shaper(shapePlan ? cast(hb_shape_plan_t*)shapePlan.cPtr(false) : null);
-  string _retval = _cretval.fromCString(false);
+  _cretval = hb_shape_plan_get_shaper(shapePlan ? cast(hb_shape_plan_t*)shapePlan.cPtr(No.Dup) : null);
+  string _retval = _cretval.fromCString(No.Free);
   return _retval;
 }
 
@@ -6543,7 +6543,7 @@ string shapePlanGetShaper(ShapePlan shapePlan)
 float styleGetValue(Font font, StyleTag styleTag)
 {
   float _retval;
-  _retval = hb_style_get_value(font ? cast(hb_font_t*)font.cPtr(false) : null, styleTag);
+  _retval = hb_style_get_value(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, styleTag);
   return _retval;
 }
 
@@ -6579,7 +6579,7 @@ Tag tagFromString(ubyte[] str)
 UnicodeCombiningClass unicodeCombiningClass(UnicodeFuncs ufuncs, Codepoint unicode)
 {
   hb_unicode_combining_class_t _cretval;
-  _cretval = hb_unicode_combining_class(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, unicode);
+  _cretval = hb_unicode_combining_class(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, unicode);
   UnicodeCombiningClass _retval = cast(UnicodeCombiningClass)_cretval;
   return _retval;
 }
@@ -6599,7 +6599,7 @@ UnicodeCombiningClass unicodeCombiningClass(UnicodeFuncs ufuncs, Codepoint unico
 Bool unicodeCompose(UnicodeFuncs ufuncs, Codepoint a, Codepoint b, out Codepoint ab)
 {
   Bool _retval;
-  _retval = hb_unicode_compose(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, a, b, cast(hb_codepoint_t*)&ab);
+  _retval = hb_unicode_compose(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, a, b, cast(hb_codepoint_t*)&ab);
   return _retval;
 }
 
@@ -6617,7 +6617,7 @@ Bool unicodeCompose(UnicodeFuncs ufuncs, Codepoint a, Codepoint b, out Codepoint
 Bool unicodeDecompose(UnicodeFuncs ufuncs, Codepoint ab, out Codepoint a, out Codepoint b)
 {
   Bool _retval;
-  _retval = hb_unicode_decompose(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, ab, cast(hb_codepoint_t*)&a, cast(hb_codepoint_t*)&b);
+  _retval = hb_unicode_decompose(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, ab, cast(hb_codepoint_t*)&a, cast(hb_codepoint_t*)&b);
   return _retval;
 }
 
@@ -6633,7 +6633,7 @@ Bool unicodeDecompose(UnicodeFuncs ufuncs, Codepoint ab, out Codepoint a, out Co
 uint unicodeDecomposeCompatibility(UnicodeFuncs ufuncs, Codepoint u, out Codepoint decomposed)
 {
   uint _retval;
-  _retval = hb_unicode_decompose_compatibility(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, u, cast(hb_codepoint_t*)&decomposed);
+  _retval = hb_unicode_decompose_compatibility(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, u, cast(hb_codepoint_t*)&decomposed);
   return _retval;
 }
 
@@ -6647,7 +6647,7 @@ uint unicodeDecomposeCompatibility(UnicodeFuncs ufuncs, Codepoint u, out Codepoi
 uint unicodeEastasianWidth(UnicodeFuncs ufuncs, Codepoint unicode)
 {
   uint _retval;
-  _retval = hb_unicode_eastasian_width(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, unicode);
+  _retval = hb_unicode_eastasian_width(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, unicode);
   return _retval;
 }
 
@@ -6660,8 +6660,8 @@ uint unicodeEastasianWidth(UnicodeFuncs ufuncs, Codepoint unicode)
 UnicodeFuncs unicodeFuncsCreate(UnicodeFuncs parent)
 {
   hb_unicode_funcs_t* _cretval;
-  _cretval = hb_unicode_funcs_create(parent ? cast(hb_unicode_funcs_t*)parent.cPtr(false) : null);
-  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, true) : null;
+  _cretval = hb_unicode_funcs_create(parent ? cast(hb_unicode_funcs_t*)parent.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6674,7 +6674,7 @@ UnicodeFuncs unicodeFuncsGetDefault()
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_unicode_funcs_get_default();
-  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, false) : null;
+  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -6686,7 +6686,7 @@ UnicodeFuncs unicodeFuncsGetEmpty()
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_unicode_funcs_get_empty();
-  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6700,8 +6700,8 @@ UnicodeFuncs unicodeFuncsGetEmpty()
 UnicodeFuncs unicodeFuncsGetParent(UnicodeFuncs ufuncs)
 {
   hb_unicode_funcs_t* _cretval;
-  _cretval = hb_unicode_funcs_get_parent(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null);
-  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, true) : null;
+  _cretval = hb_unicode_funcs_get_parent(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new UnicodeFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6715,7 +6715,7 @@ UnicodeFuncs unicodeFuncsGetParent(UnicodeFuncs ufuncs)
 Bool unicodeFuncsIsImmutable(UnicodeFuncs ufuncs)
 {
   Bool _retval;
-  _retval = hb_unicode_funcs_is_immutable(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null);
+  _retval = hb_unicode_funcs_is_immutable(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6727,7 +6727,7 @@ Bool unicodeFuncsIsImmutable(UnicodeFuncs ufuncs)
  */
 void unicodeFuncsMakeImmutable(UnicodeFuncs ufuncs)
 {
-  hb_unicode_funcs_make_immutable(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null);
+  hb_unicode_funcs_make_immutable(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6743,14 +6743,14 @@ void unicodeFuncsSetCombiningClassFunc(UnicodeFuncs ufuncs, UnicodeCombiningClas
     UnicodeCombiningClass _dretval;
     auto _dlg = cast(UnicodeCombiningClassFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, false) : null, unicode);
+    _dretval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     auto _retval = cast(hb_unicode_combining_class_t)_dretval;
 
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_combining_class_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_unicode_funcs_set_combining_class_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -6765,12 +6765,12 @@ void unicodeFuncsSetComposeFunc(UnicodeFuncs ufuncs, UnicodeComposeFunc func)
   {
     auto _dlg = cast(UnicodeComposeFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, false) : null, a, b, *ab);
+    hb_bool_t _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, a, b, *ab);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_compose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_unicode_funcs_set_compose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -6785,12 +6785,12 @@ void unicodeFuncsSetDecomposeFunc(UnicodeFuncs ufuncs, UnicodeDecomposeFunc func
   {
     auto _dlg = cast(UnicodeDecomposeFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, false) : null, ab, *a, *b);
+    hb_bool_t _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, ab, *a, *b);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_decompose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_unicode_funcs_set_decompose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -6805,12 +6805,12 @@ void unicodeFuncsSetEastasianWidthFunc(UnicodeFuncs ufuncs, UnicodeEastasianWidt
   {
     auto _dlg = cast(UnicodeEastasianWidthFunc*)userData;
 
-    uint _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, false) : null, unicode);
+    uint _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_eastasian_width_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_unicode_funcs_set_eastasian_width_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -6826,14 +6826,14 @@ void unicodeFuncsSetGeneralCategoryFunc(UnicodeFuncs ufuncs, UnicodeGeneralCateg
     UnicodeGeneralCategory _dretval;
     auto _dlg = cast(UnicodeGeneralCategoryFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, false) : null, unicode);
+    _dretval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     auto _retval = cast(hb_unicode_general_category_t)_dretval;
 
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_general_category_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_unicode_funcs_set_general_category_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -6848,12 +6848,12 @@ void unicodeFuncsSetMirroringFunc(UnicodeFuncs ufuncs, UnicodeMirroringFunc func
   {
     auto _dlg = cast(UnicodeMirroringFunc*)userData;
 
-    hb_codepoint_t _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, false) : null, unicode);
+    hb_codepoint_t _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_mirroring_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_unicode_funcs_set_mirroring_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -6869,14 +6869,14 @@ void unicodeFuncsSetScriptFunc(UnicodeFuncs ufuncs, UnicodeScriptFunc func)
     Script _dretval;
     auto _dlg = cast(UnicodeScriptFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, false) : null, unicode);
+    _dretval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     auto _retval = cast(hb_script_t)_dretval;
 
     return _retval;
   }
 
   auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_script_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+  hb_unicode_funcs_set_script_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
 }
 
 /**
@@ -6890,7 +6890,7 @@ void unicodeFuncsSetScriptFunc(UnicodeFuncs ufuncs, UnicodeScriptFunc func)
 UnicodeGeneralCategory unicodeGeneralCategory(UnicodeFuncs ufuncs, Codepoint unicode)
 {
   hb_unicode_general_category_t _cretval;
-  _cretval = hb_unicode_general_category(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, unicode);
+  _cretval = hb_unicode_general_category(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, unicode);
   UnicodeGeneralCategory _retval = cast(UnicodeGeneralCategory)_cretval;
   return _retval;
 }
@@ -6906,7 +6906,7 @@ UnicodeGeneralCategory unicodeGeneralCategory(UnicodeFuncs ufuncs, Codepoint uni
 Codepoint unicodeMirroring(UnicodeFuncs ufuncs, Codepoint unicode)
 {
   Codepoint _retval;
-  _retval = hb_unicode_mirroring(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, unicode);
+  _retval = hb_unicode_mirroring(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, unicode);
   return _retval;
 }
 
@@ -6921,7 +6921,7 @@ Codepoint unicodeMirroring(UnicodeFuncs ufuncs, Codepoint unicode)
 Script unicodeScript(UnicodeFuncs ufuncs, Codepoint unicode)
 {
   hb_script_t _cretval;
-  _cretval = hb_unicode_script(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(false) : null, unicode);
+  _cretval = hb_unicode_script(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, unicode);
   Script _retval = cast(Script)_cretval;
   return _retval;
 }

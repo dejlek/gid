@@ -45,9 +45,9 @@ import Gtk.c.types;
 class SignalListItemFactory : ListItemFactory
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -69,7 +69,7 @@ class SignalListItemFactory : ListItemFactory
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_signal_list_item_factory_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

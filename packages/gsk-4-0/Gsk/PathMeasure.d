@@ -20,14 +20,14 @@ import Gsk.c.types;
 class PathMeasure : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -50,8 +50,8 @@ class PathMeasure : Boxed
   this(Path path)
   {
     GskPathMeasure* _cretval;
-    _cretval = gsk_path_measure_new(path ? cast(GskPath*)path.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gsk_path_measure_new(path ? cast(GskPath*)path.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -64,8 +64,8 @@ class PathMeasure : Boxed
   static PathMeasure newWithTolerance(Path path, float tolerance)
   {
     GskPathMeasure* _cretval;
-    _cretval = gsk_path_measure_new_with_tolerance(path ? cast(GskPath*)path.cPtr(false) : null, tolerance);
-    auto _retval = _cretval ? new PathMeasure(cast(void*)_cretval, true) : null;
+    _cretval = gsk_path_measure_new_with_tolerance(path ? cast(GskPath*)path.cPtr(No.Dup) : null, tolerance);
+    auto _retval = _cretval ? new PathMeasure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class PathMeasure : Boxed
   {
     GskPath* _cretval;
     _cretval = gsk_path_measure_get_path(cast(GskPathMeasure*)cPtr);
-    auto _retval = _cretval ? new Path(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Path(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

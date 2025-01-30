@@ -15,14 +15,14 @@ import Gid.gid;
 class MatchInfo : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -57,12 +57,12 @@ class MatchInfo : Boxed
   string expandReferences(string stringToExpand)
   {
     char* _cretval;
-    const(char)* _stringToExpand = stringToExpand.toCString(false);
+    const(char)* _stringToExpand = stringToExpand.toCString(No.Alloc);
     GError *_err;
     _cretval = g_match_info_expand_references(cast(GMatchInfo*)cPtr, _stringToExpand, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class MatchInfo : Boxed
   {
     char* _cretval;
     _cretval = g_match_info_fetch(cast(GMatchInfo*)cPtr, matchNum);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class MatchInfo : Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -144,9 +144,9 @@ class MatchInfo : Boxed
   string fetchNamed(string name)
   {
     char* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_match_info_fetch_named(cast(GMatchInfo*)cPtr, _name);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class MatchInfo : Boxed
   bool fetchNamedPos(string name, out int startPos, out int endPos)
   {
     bool _retval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = g_match_info_fetch_named_pos(cast(GMatchInfo*)cPtr, _name, cast(int*)&startPos, cast(int*)&endPos);
     return _retval;
   }
@@ -229,7 +229,7 @@ class MatchInfo : Boxed
   {
     GRegex* _cretval;
     _cretval = g_match_info_get_regex(cast(GMatchInfo*)cPtr);
-    auto _retval = _cretval ? new Regex(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Regex(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class MatchInfo : Boxed
   {
     const(char)* _cretval;
     _cretval = g_match_info_get_string(cast(GMatchInfo*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

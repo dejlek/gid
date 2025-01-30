@@ -21,9 +21,9 @@ class Seat : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -73,7 +73,7 @@ class Seat : ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_seat_get_display(cast(GdkSeat*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class Seat : ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_keyboard(cast(GdkSeat*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class Seat : ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_pointer(cast(GdkSeat*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 

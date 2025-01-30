@@ -55,9 +55,9 @@ import Gid.gid;
 class PixbufLoader : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -78,7 +78,7 @@ class PixbufLoader : ObjectG
   {
     GdkPixbufLoader* _cretval;
     _cretval = gdk_pixbuf_loader_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -102,12 +102,12 @@ class PixbufLoader : ObjectG
   static PixbufLoader newWithMimeType(string mimeType)
   {
     GdkPixbufLoader* _cretval;
-    const(char)* _mimeType = mimeType.toCString(false);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     GError *_err;
     _cretval = gdk_pixbuf_loader_new_with_mime_type(_mimeType, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!PixbufLoader(cast(GdkPixbufLoader*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!PixbufLoader(cast(GdkPixbufLoader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -131,12 +131,12 @@ class PixbufLoader : ObjectG
   static PixbufLoader newWithType(string imageType)
   {
     GdkPixbufLoader* _cretval;
-    const(char)* _imageType = imageType.toCString(false);
+    const(char)* _imageType = imageType.toCString(No.Alloc);
     GError *_err;
     _cretval = gdk_pixbuf_loader_new_with_type(_imageType, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!PixbufLoader(cast(GdkPixbufLoader*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!PixbufLoader(cast(GdkPixbufLoader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class PixbufLoader : ObjectG
   {
     GdkPixbufAnimation* _cretval;
     _cretval = gdk_pixbuf_loader_get_animation(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PixbufAnimation(cast(GdkPixbufAnimation*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!PixbufAnimation(cast(GdkPixbufAnimation*)_cretval, No.Take);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class PixbufLoader : ObjectG
   {
     GdkPixbufFormat* _cretval;
     _cretval = gdk_pixbuf_loader_get_format(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = _cretval ? new PixbufFormat(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new PixbufFormat(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class PixbufLoader : ObjectG
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_loader_get_pixbuf(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 

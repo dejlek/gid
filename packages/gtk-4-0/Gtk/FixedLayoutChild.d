@@ -17,9 +17,9 @@ class FixedLayoutChild : LayoutChild
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -40,7 +40,7 @@ class FixedLayoutChild : LayoutChild
   {
     GskTransform* _cretval;
     _cretval = gtk_fixed_layout_child_get_transform(cast(GtkFixedLayoutChild*)cPtr);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -51,6 +51,6 @@ class FixedLayoutChild : LayoutChild
    */
   void setTransform(Transform transform)
   {
-    gtk_fixed_layout_child_set_transform(cast(GtkFixedLayoutChild*)cPtr, transform ? cast(GskTransform*)transform.cPtr(false) : null);
+    gtk_fixed_layout_child_set_transform(cast(GtkFixedLayoutChild*)cPtr, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);
   }
 }

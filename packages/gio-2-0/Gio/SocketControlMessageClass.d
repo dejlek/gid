@@ -13,14 +13,14 @@ class SocketControlMessageClass
 {
   GSocketControlMessageClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.SocketControlMessageClass");
 
     cInstance = *cast(GSocketControlMessageClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

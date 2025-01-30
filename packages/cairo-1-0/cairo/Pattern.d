@@ -26,14 +26,14 @@ import cairo.c.types;
 class Pattern : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -208,7 +208,7 @@ class Pattern : Boxed
    */
   void getMatrix(Matrix matrix)
   {
-    cairo_pattern_get_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(false) : null);
+    cairo_pattern_get_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
   }
 
   /**
@@ -266,7 +266,7 @@ class Pattern : Boxed
   Status getSurface(Surface surface)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_pattern_get_surface(cast(cairo_pattern_t*)cPtr, surface ? cast(cairo_surface_t**)surface.cPtr(false) : null);
+    _cretval = cairo_pattern_get_surface(cast(cairo_pattern_t*)cPtr, surface ? cast(cairo_surface_t**)surface.cPtr(No.Dup) : null);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }
@@ -374,7 +374,7 @@ class Pattern : Boxed
    */
   void setMatrix(Matrix matrix)
   {
-    cairo_pattern_set_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(false) : null);
+    cairo_pattern_set_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
   }
 
   /**

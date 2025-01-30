@@ -36,9 +36,9 @@ class SettingsBackend : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -70,8 +70,8 @@ class SettingsBackend : ObjectG
     char* _path;
     const(char*)* _keys;
     VariantC** _values;
-    g_settings_backend_flatten_tree(tree ? cast(GTree*)tree.cPtr(false) : null, &_path, &_keys, &_values);
-    path = _path.fromCString(true);
+    g_settings_backend_flatten_tree(tree ? cast(GTree*)tree.cPtr(No.Dup) : null, &_path, &_keys, &_values);
+    path = _path.fromCString(Yes.Free);
     uint _lenkeys;
     if (_keys)
     {
@@ -81,7 +81,7 @@ class SettingsBackend : ObjectG
     }
     keys.length = _lenkeys;
     foreach (i; 0 .. _lenkeys)
-      keys[i] = _keys[i].fromCString(false);
+      keys[i] = _keys[i].fromCString(No.Free);
     safeFree(cast(void*)_keys);
     uint _lenvalues;
     if (_values)
@@ -92,7 +92,7 @@ class SettingsBackend : ObjectG
     }
     values.length = _lenvalues;
     foreach (i; 0 .. _lenvalues)
-      values[i] = new VariantG(cast(void*)_values[i], false);
+      values[i] = new VariantG(cast(void*)_values[i], No.Take);
     safeFree(cast(void*)_values);
   }
 
@@ -109,7 +109,7 @@ class SettingsBackend : ObjectG
   {
     GSettingsBackend* _cretval;
     _cretval = g_settings_backend_get_default();
-    auto _retval = _cretval ? ObjectG.getDObject!SettingsBackend(cast(GSettingsBackend*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SettingsBackend(cast(GSettingsBackend*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class SettingsBackend : ObjectG
    */
   void changed(string key, void* originTag)
   {
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     g_settings_backend_changed(cast(GSettingsBackend*)cPtr, _key, originTag);
   }
 
@@ -152,7 +152,7 @@ class SettingsBackend : ObjectG
    */
   void changedTree(Tree tree, void* originTag)
   {
-    g_settings_backend_changed_tree(cast(GSettingsBackend*)cPtr, tree ? cast(GTree*)tree.cPtr(false) : null, originTag);
+    g_settings_backend_changed_tree(cast(GSettingsBackend*)cPtr, tree ? cast(GTree*)tree.cPtr(No.Dup) : null, originTag);
   }
 
   /**
@@ -180,10 +180,10 @@ class SettingsBackend : ObjectG
    */
   void keysChanged(string path, string[] items, void* originTag)
   {
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     char*[] _tmpitems;
     foreach (s; items)
-      _tmpitems ~= s.toCString(false);
+      _tmpitems ~= s.toCString(No.Alloc);
     _tmpitems ~= null;
     const(char*)* _items = _tmpitems.ptr;
     g_settings_backend_keys_changed(cast(GSettingsBackend*)cPtr, _path, _items, originTag);
@@ -213,7 +213,7 @@ class SettingsBackend : ObjectG
    */
   void pathChanged(string path, void* originTag)
   {
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     g_settings_backend_path_changed(cast(GSettingsBackend*)cPtr, _path, originTag);
   }
 
@@ -227,7 +227,7 @@ class SettingsBackend : ObjectG
    */
   void pathWritableChanged(string path)
   {
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     g_settings_backend_path_writable_changed(cast(GSettingsBackend*)cPtr, _path);
   }
 
@@ -240,7 +240,7 @@ class SettingsBackend : ObjectG
    */
   void writableChanged(string key)
   {
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     g_settings_backend_writable_changed(cast(GSettingsBackend*)cPtr, _key);
   }
 }

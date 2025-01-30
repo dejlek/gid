@@ -37,7 +37,7 @@ interface ProxyResolver
   {
     GProxyResolver* _cretval;
     _cretval = g_proxy_resolver_get_default();
-    auto _retval = _cretval ? ObjectG.getDObject!ProxyResolver(cast(GProxyResolver*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ProxyResolver(cast(GProxyResolver*)_cretval, No.Take);
     return _retval;
   }
 

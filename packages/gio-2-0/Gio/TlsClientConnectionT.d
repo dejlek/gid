@@ -51,7 +51,7 @@ template TlsClientConnectionT()
    */
   override void copySessionState(TlsClientConnection source)
   {
-    g_tls_client_connection_copy_session_state(cast(GTlsClientConnection*)cPtr, source ? cast(GTlsClientConnection*)(cast(ObjectG)source).cPtr(false) : null);
+    g_tls_client_connection_copy_session_state(cast(GTlsClientConnection*)cPtr, source ? cast(GTlsClientConnection*)(cast(ObjectG)source).cPtr(No.Dup) : null);
   }
 
   /**
@@ -64,7 +64,7 @@ template TlsClientConnectionT()
   {
     GSocketConnectable* _cretval;
     _cretval = g_tls_client_connection_get_server_identity(cast(GTlsClientConnection*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnectable(cast(GSocketConnectable*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!SocketConnectable(cast(GSocketConnectable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ template TlsClientConnectionT()
    */
   override void setServerIdentity(SocketConnectable identity)
   {
-    g_tls_client_connection_set_server_identity(cast(GTlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(false) : null);
+    g_tls_client_connection_set_server_identity(cast(GTlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null);
   }
 
   /**

@@ -22,9 +22,9 @@ class MenuItem : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,10 +52,10 @@ class MenuItem : ObjectG
   this(string label, string detailedAction)
   {
     GMenuItem* _cretval;
-    const(char)* _label = label.toCString(false);
-    const(char)* _detailedAction = detailedAction.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
     _cretval = g_menu_item_new(_label, _detailedAction);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -71,8 +71,8 @@ class MenuItem : ObjectG
   static MenuItem newFromModel(MenuModel model, int itemIndex)
   {
     GMenuItem* _cretval;
-    _cretval = g_menu_item_new_from_model(model ? cast(GMenuModel*)model.cPtr(false) : null, itemIndex);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuItem(cast(GMenuItem*)_cretval, true) : null;
+    _cretval = g_menu_item_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, itemIndex);
+    auto _retval = ObjectG.getDObject!MenuItem(cast(GMenuItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -139,9 +139,9 @@ class MenuItem : ObjectG
   static MenuItem newSection(string label, MenuModel section)
   {
     GMenuItem* _cretval;
-    const(char)* _label = label.toCString(false);
-    _cretval = g_menu_item_new_section(_label, section ? cast(GMenuModel*)section.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuItem(cast(GMenuItem*)_cretval, true) : null;
+    const(char)* _label = label.toCString(No.Alloc);
+    _cretval = g_menu_item_new_section(_label, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!MenuItem(cast(GMenuItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -157,9 +157,9 @@ class MenuItem : ObjectG
   static MenuItem newSubmenu(string label, MenuModel submenu)
   {
     GMenuItem* _cretval;
-    const(char)* _label = label.toCString(false);
-    _cretval = g_menu_item_new_submenu(_label, submenu ? cast(GMenuModel*)submenu.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuItem(cast(GMenuItem*)_cretval, true) : null;
+    const(char)* _label = label.toCString(No.Alloc);
+    _cretval = g_menu_item_new_submenu(_label, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!MenuItem(cast(GMenuItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -176,9 +176,9 @@ class MenuItem : ObjectG
   VariantG getAttributeValue(string attribute, VariantType expectedType)
   {
     VariantC* _cretval;
-    const(char)* _attribute = attribute.toCString(false);
-    _cretval = g_menu_item_get_attribute_value(cast(GMenuItem*)cPtr, _attribute, expectedType ? cast(GVariantType*)expectedType.cPtr(false) : null);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    _cretval = g_menu_item_get_attribute_value(cast(GMenuItem*)cPtr, _attribute, expectedType ? cast(GVariantType*)expectedType.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -191,9 +191,9 @@ class MenuItem : ObjectG
   MenuModel getLink(string link)
   {
     GMenuModel* _cretval;
-    const(char)* _link = link.toCString(false);
+    const(char)* _link = link.toCString(No.Alloc);
     _cretval = g_menu_item_get_link(cast(GMenuItem*)cPtr, _link);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -232,8 +232,8 @@ class MenuItem : ObjectG
    */
   void setActionAndTargetValue(string action, VariantG targetValue)
   {
-    const(char)* _action = action.toCString(false);
-    g_menu_item_set_action_and_target_value(cast(GMenuItem*)cPtr, _action, targetValue ? cast(VariantC*)targetValue.cPtr(false) : null);
+    const(char)* _action = action.toCString(No.Alloc);
+    g_menu_item_set_action_and_target_value(cast(GMenuItem*)cPtr, _action, targetValue ? cast(VariantC*)targetValue.cPtr(No.Dup) : null);
   }
 
   /**
@@ -258,8 +258,8 @@ class MenuItem : ObjectG
    */
   void setAttributeValue(string attribute, VariantG value)
   {
-    const(char)* _attribute = attribute.toCString(false);
-    g_menu_item_set_attribute_value(cast(GMenuItem*)cPtr, _attribute, value ? cast(VariantC*)value.cPtr(false) : null);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    g_menu_item_set_attribute_value(cast(GMenuItem*)cPtr, _attribute, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -276,7 +276,7 @@ class MenuItem : ObjectG
    */
   void setDetailedAction(string detailedAction)
   {
-    const(char)* _detailedAction = detailedAction.toCString(false);
+    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
     g_menu_item_set_detailed_action(cast(GMenuItem*)cPtr, _detailedAction);
   }
 
@@ -295,7 +295,7 @@ class MenuItem : ObjectG
    */
   void setIcon(Icon icon)
   {
-    g_menu_item_set_icon(cast(GMenuItem*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(false) : null);
+    g_menu_item_set_icon(cast(GMenuItem*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -307,7 +307,7 @@ class MenuItem : ObjectG
    */
   void setLabel(string label)
   {
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     g_menu_item_set_label(cast(GMenuItem*)cPtr, _label);
   }
 
@@ -327,8 +327,8 @@ class MenuItem : ObjectG
    */
   void setLink(string link, MenuModel model)
   {
-    const(char)* _link = link.toCString(false);
-    g_menu_item_set_link(cast(GMenuItem*)cPtr, _link, model ? cast(GMenuModel*)model.cPtr(false) : null);
+    const(char)* _link = link.toCString(No.Alloc);
+    g_menu_item_set_link(cast(GMenuItem*)cPtr, _link, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
 
   /**
@@ -343,7 +343,7 @@ class MenuItem : ObjectG
    */
   void setSection(MenuModel section)
   {
-    g_menu_item_set_section(cast(GMenuItem*)cPtr, section ? cast(GMenuModel*)section.cPtr(false) : null);
+    g_menu_item_set_section(cast(GMenuItem*)cPtr, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
   }
 
   /**
@@ -357,6 +357,6 @@ class MenuItem : ObjectG
    */
   void setSubmenu(MenuModel submenu)
   {
-    g_menu_item_set_submenu(cast(GMenuItem*)cPtr, submenu ? cast(GMenuModel*)submenu.cPtr(false) : null);
+    g_menu_item_set_submenu(cast(GMenuItem*)cPtr, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
   }
 }

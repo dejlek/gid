@@ -72,9 +72,9 @@ class SizeGroup : ObjectG, Buildable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -99,7 +99,7 @@ class SizeGroup : ObjectG, Buildable
   {
     GtkSizeGroup* _cretval;
     _cretval = gtk_size_group_new(mode);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -117,7 +117,7 @@ class SizeGroup : ObjectG, Buildable
    */
   void addWidget(Widget widget)
   {
-    gtk_size_group_add_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_size_group_add_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -152,7 +152,7 @@ class SizeGroup : ObjectG, Buildable
    */
   void removeWidget(Widget widget)
   {
-    gtk_size_group_remove_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_size_group_remove_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**

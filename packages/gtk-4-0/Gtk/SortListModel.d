@@ -42,9 +42,9 @@ class SortListModel : ObjectG, ListModel, SectionModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -70,8 +70,8 @@ class SortListModel : ObjectG, ListModel, SectionModel
   this(ListModel model, Sorter sorter)
   {
     GtkSortListModel* _cretval;
-    _cretval = gtk_sort_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(true) : null, sorter ? cast(GtkSorter*)sorter.cPtr(true) : null);
-    this(_cretval, true);
+    _cretval = gtk_sort_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -94,7 +94,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
   {
     GListModel* _cretval;
     _cretval = gtk_sort_list_model_get_model(cast(GtkSortListModel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
   {
     GtkSorter* _cretval;
     _cretval = gtk_sort_list_model_get_section_sorter(cast(GtkSortListModel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Sorter(cast(GtkSorter*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Sorter(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
   {
     GtkSorter* _cretval;
     _cretval = gtk_sort_list_model_get_sorter(cast(GtkSortListModel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Sorter(cast(GtkSorter*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Sorter(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
    */
   void setModel(ListModel model)
   {
-    gtk_sort_list_model_set_model(cast(GtkSortListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_sort_list_model_set_model(cast(GtkSortListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -186,7 +186,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
    */
   void setSectionSorter(Sorter sorter)
   {
-    gtk_sort_list_model_set_section_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(false) : null);
+    gtk_sort_list_model_set_section_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -196,6 +196,6 @@ class SortListModel : ObjectG, ListModel, SectionModel
    */
   void setSorter(Sorter sorter)
   {
-    gtk_sort_list_model_set_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(false) : null);
+    gtk_sort_list_model_set_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }
 }

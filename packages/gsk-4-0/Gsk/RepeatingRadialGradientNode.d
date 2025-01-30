@@ -15,12 +15,12 @@ import Gsk.c.types;
 class RepeatingRadialGradientNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.RepeatingRadialGradientNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -52,7 +52,7 @@ class RepeatingRadialGradientNode : RenderNode
     foreach (obj; colorStops)
       _tmpcolorStops ~= obj.cInstance;
     const(GskColorStop)* _colorStops = _tmpcolorStops.ptr;
-    _cretval = gsk_repeating_radial_gradient_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(false) : null, center ? cast(graphene_point_t*)center.cPtr(false) : null, hradius, vradius, start, end, _colorStops, _nColorStops);
-    this(_cretval, true);
+    _cretval = gsk_repeating_radial_gradient_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, center ? cast(graphene_point_t*)center.cPtr(No.Dup) : null, hradius, vradius, start, end, _colorStops, _nColorStops);
+    this(_cretval, Yes.Take);
   }
 }

@@ -20,17 +20,17 @@ class Matrix : Boxed
 
   this()
   {
-    super(safeMalloc(cairo_matrix_t.sizeof), true);
+    super(safeMalloc(cairo_matrix_t.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -200,7 +200,7 @@ class Matrix : Boxed
    */
   void multiply(Matrix a, Matrix b)
   {
-    cairo_matrix_multiply(cast(cairo_matrix_t*)cPtr, a ? cast(cairo_matrix_t*)a.cPtr(false) : null, b ? cast(cairo_matrix_t*)b.cPtr(false) : null);
+    cairo_matrix_multiply(cast(cairo_matrix_t*)cPtr, a ? cast(cairo_matrix_t*)a.cPtr(No.Dup) : null, b ? cast(cairo_matrix_t*)b.cPtr(No.Dup) : null);
   }
 
   /**

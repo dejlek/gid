@@ -75,9 +75,9 @@ import Gtk.c.types;
 class HeaderBar : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -98,7 +98,7 @@ class HeaderBar : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_header_bar_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -109,7 +109,7 @@ class HeaderBar : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_header_bar_get_decoration_layout(cast(GtkHeaderBar*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class HeaderBar : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_header_bar_get_title_widget(cast(GtkHeaderBar*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class HeaderBar : Widget
    */
   void packEnd(Widget child)
   {
-    gtk_header_bar_pack_end(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_header_bar_pack_end(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -157,7 +157,7 @@ class HeaderBar : Widget
    */
   void packStart(Widget child)
   {
-    gtk_header_bar_pack_start(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_header_bar_pack_start(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -171,7 +171,7 @@ class HeaderBar : Widget
    */
   void remove(Widget child)
   {
-    gtk_header_bar_remove(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_header_bar_remove(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -193,7 +193,7 @@ class HeaderBar : Widget
    */
   void setDecorationLayout(string layout)
   {
-    const(char)* _layout = layout.toCString(false);
+    const(char)* _layout = layout.toCString(No.Alloc);
     gtk_header_bar_set_decoration_layout(cast(GtkHeaderBar*)cPtr, _layout);
   }
 
@@ -222,6 +222,6 @@ class HeaderBar : Widget
    */
   void setTitleWidget(Widget titleWidget)
   {
-    gtk_header_bar_set_title_widget(cast(GtkHeaderBar*)cPtr, titleWidget ? cast(GtkWidget*)titleWidget.cPtr(false) : null);
+    gtk_header_bar_set_title_widget(cast(GtkHeaderBar*)cPtr, titleWidget ? cast(GtkWidget*)titleWidget.cPtr(No.Dup) : null);
   }
 }

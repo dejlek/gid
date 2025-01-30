@@ -35,9 +35,9 @@ class WidgetPaintable : ObjectG, Paintable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -61,8 +61,8 @@ class WidgetPaintable : ObjectG, Paintable
   this(Widget widget)
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_widget_paintable_new(widget ? cast(GtkWidget*)widget.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gtk_widget_paintable_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -73,7 +73,7 @@ class WidgetPaintable : ObjectG, Paintable
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_paintable_get_widget(cast(GtkWidgetPaintable*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -84,6 +84,6 @@ class WidgetPaintable : ObjectG, Paintable
    */
   void setWidget(Widget widget)
   {
-    gtk_widget_paintable_set_widget(cast(GtkWidgetPaintable*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_widget_paintable_set_widget(cast(GtkWidgetPaintable*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 }

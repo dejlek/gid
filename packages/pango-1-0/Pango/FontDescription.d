@@ -16,14 +16,14 @@ import Pango.c.types;
 class FontDescription : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -45,7 +45,7 @@ class FontDescription : Boxed
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_description_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -66,7 +66,7 @@ class FontDescription : Boxed
   bool betterMatch(FontDescription oldMatch, FontDescription newMatch)
   {
     bool _retval;
-    _retval = pango_font_description_better_match(cast(PangoFontDescription*)cPtr, oldMatch ? cast(PangoFontDescription*)oldMatch.cPtr(false) : null, newMatch ? cast(PangoFontDescription*)newMatch.cPtr(false) : null);
+    _retval = pango_font_description_better_match(cast(PangoFontDescription*)cPtr, oldMatch ? cast(PangoFontDescription*)oldMatch.cPtr(No.Dup) : null, newMatch ? cast(PangoFontDescription*)newMatch.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class FontDescription : Boxed
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_description_copy(cast(PangoFontDescription*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class FontDescription : Boxed
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_description_copy_static(cast(PangoFontDescription*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class FontDescription : Boxed
   bool equal(FontDescription desc2)
   {
     bool _retval;
-    _retval = pango_font_description_equal(cast(PangoFontDescription*)cPtr, desc2 ? cast(PangoFontDescription*)desc2.cPtr(false) : null);
+    _retval = pango_font_description_equal(cast(PangoFontDescription*)cPtr, desc2 ? cast(PangoFontDescription*)desc2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class FontDescription : Boxed
   {
     const(char)* _cretval;
     _cretval = pango_font_description_get_family(cast(PangoFontDescription*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class FontDescription : Boxed
   {
     const(char)* _cretval;
     _cretval = pango_font_description_get_variations(cast(PangoFontDescription*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class FontDescription : Boxed
    */
   void merge(FontDescription descToMerge, bool replaceExisting)
   {
-    pango_font_description_merge(cast(PangoFontDescription*)cPtr, descToMerge ? cast(PangoFontDescription*)descToMerge.cPtr(false) : null, replaceExisting);
+    pango_font_description_merge(cast(PangoFontDescription*)cPtr, descToMerge ? cast(PangoFontDescription*)descToMerge.cPtr(No.Dup) : null, replaceExisting);
   }
 
   /**
@@ -321,7 +321,7 @@ class FontDescription : Boxed
    */
   void mergeStatic(FontDescription descToMerge, bool replaceExisting)
   {
-    pango_font_description_merge_static(cast(PangoFontDescription*)cPtr, descToMerge ? cast(PangoFontDescription*)descToMerge.cPtr(false) : null, replaceExisting);
+    pango_font_description_merge_static(cast(PangoFontDescription*)cPtr, descToMerge ? cast(PangoFontDescription*)descToMerge.cPtr(No.Dup) : null, replaceExisting);
   }
 
   /**
@@ -350,7 +350,7 @@ class FontDescription : Boxed
    */
   void setFamily(string family)
   {
-    const(char)* _family = family.toCString(false);
+    const(char)* _family = family.toCString(No.Alloc);
     pango_font_description_set_family(cast(PangoFontDescription*)cPtr, _family);
   }
 
@@ -366,7 +366,7 @@ class FontDescription : Boxed
    */
   void setFamilyStatic(string family)
   {
-    const(char)* _family = family.toCString(false);
+    const(char)* _family = family.toCString(No.Alloc);
     pango_font_description_set_family_static(cast(PangoFontDescription*)cPtr, _family);
   }
 
@@ -463,7 +463,7 @@ class FontDescription : Boxed
    */
   void setVariations(string variations)
   {
-    const(char)* _variations = variations.toCString(false);
+    const(char)* _variations = variations.toCString(No.Alloc);
     pango_font_description_set_variations(cast(PangoFontDescription*)cPtr, _variations);
   }
 
@@ -480,7 +480,7 @@ class FontDescription : Boxed
    */
   void setVariationsStatic(string variations)
   {
-    const(char)* _variations = variations.toCString(false);
+    const(char)* _variations = variations.toCString(No.Alloc);
     pango_font_description_set_variations_static(cast(PangoFontDescription*)cPtr, _variations);
   }
 
@@ -510,7 +510,7 @@ class FontDescription : Boxed
   {
     char* _cretval;
     _cretval = pango_font_description_to_filename(cast(PangoFontDescription*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -526,7 +526,7 @@ class FontDescription : Boxed
   {
     char* _cretval;
     _cretval = pango_font_description_to_string(cast(PangoFontDescription*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -582,9 +582,9 @@ class FontDescription : Boxed
   static FontDescription fromString(string str)
   {
     PangoFontDescription* _cretval;
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     _cretval = pango_font_description_from_string(_str);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

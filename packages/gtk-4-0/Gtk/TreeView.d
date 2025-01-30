@@ -106,9 +106,9 @@ import Gtk.c.types;
 class TreeView : Widget, Scrollable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -133,7 +133,7 @@ class TreeView : Widget, Scrollable
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_view_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -147,8 +147,8 @@ class TreeView : Widget, Scrollable
   static TreeView newWithModel(TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_tree_view_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeView(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_tree_view_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!TreeView(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class TreeView : Widget, Scrollable
   int appendColumn(TreeViewColumn column)
   {
     int _retval;
-    _retval = gtk_tree_view_append_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(false) : null);
+    _retval = gtk_tree_view_append_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class TreeView : Widget, Scrollable
   bool collapseRow(TreePath path)
   {
     bool _retval;
-    _retval = gtk_tree_view_collapse_row(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    _retval = gtk_tree_view_collapse_row(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -311,8 +311,8 @@ class TreeView : Widget, Scrollable
   Paintable createRowDragIcon(TreePath path)
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_tree_view_create_row_drag_icon(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, true) : null;
+    _cretval = gtk_tree_view_create_row_drag_icon(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -328,7 +328,7 @@ class TreeView : Widget, Scrollable
    */
   void enableModelDragDest(ContentFormats formats, DragAction actions)
   {
-    gtk_tree_view_enable_model_drag_dest(cast(GtkTreeView*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(false) : null, actions);
+    gtk_tree_view_enable_model_drag_dest(cast(GtkTreeView*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
   }
 
   /**
@@ -344,7 +344,7 @@ class TreeView : Widget, Scrollable
    */
   void enableModelDragSource(ModifierType startButtonMask, ContentFormats formats, DragAction actions)
   {
-    gtk_tree_view_enable_model_drag_source(cast(GtkTreeView*)cPtr, startButtonMask, formats ? cast(GdkContentFormats*)formats.cPtr(false) : null, actions);
+    gtk_tree_view_enable_model_drag_source(cast(GtkTreeView*)cPtr, startButtonMask, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
   }
 
   /**
@@ -369,7 +369,7 @@ class TreeView : Widget, Scrollable
   bool expandRow(TreePath path, bool openAll)
   {
     bool _retval;
-    _retval = gtk_tree_view_expand_row(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, openAll);
+    _retval = gtk_tree_view_expand_row(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, openAll);
     return _retval;
   }
 
@@ -383,7 +383,7 @@ class TreeView : Widget, Scrollable
    */
   void expandToPath(TreePath path)
   {
-    gtk_tree_view_expand_to_path(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    gtk_tree_view_expand_to_path(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -419,8 +419,8 @@ class TreeView : Widget, Scrollable
   void getBackgroundArea(TreePath path, TreeViewColumn column, out Rectangle rect)
   {
     GdkRectangle _rect;
-    gtk_tree_view_get_background_area(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(false) : null, &_rect);
-    rect = new Rectangle(cast(void*)&_rect, false);
+    gtk_tree_view_get_background_area(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, &_rect);
+    rect = new Rectangle(cast(void*)&_rect, No.Take);
   }
 
   /**
@@ -443,8 +443,8 @@ class TreeView : Widget, Scrollable
   void getCellArea(TreePath path, TreeViewColumn column, out Rectangle rect)
   {
     GdkRectangle _rect;
-    gtk_tree_view_get_cell_area(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(false) : null, &_rect);
-    rect = new Rectangle(cast(void*)&_rect, false);
+    gtk_tree_view_get_cell_area(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, &_rect);
+    rect = new Rectangle(cast(void*)&_rect, No.Take);
   }
 
   /**
@@ -460,7 +460,7 @@ class TreeView : Widget, Scrollable
   {
     GtkTreeViewColumn* _cretval;
     _cretval = gtk_tree_view_get_column(cast(GtkTreeView*)cPtr, n);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeViewColumn(cast(GtkTreeViewColumn*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeViewColumn(cast(GtkTreeViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -498,8 +498,8 @@ class TreeView : Widget, Scrollable
     GtkTreePath* _path;
     GtkTreeViewColumn* _focusColumn;
     gtk_tree_view_get_cursor(cast(GtkTreeView*)cPtr, &_path, &_focusColumn);
-    path = new TreePath(cast(void*)_path, true);
-    focusColumn = new TreeViewColumn(cast(void*)_focusColumn, false);
+    path = new TreePath(cast(void*)_path, Yes.Take);
+    focusColumn = new TreeViewColumn(cast(void*)_focusColumn, No.Take);
   }
 
   /**
@@ -524,7 +524,7 @@ class TreeView : Widget, Scrollable
     bool _retval;
     GtkTreePath* _path;
     _retval = gtk_tree_view_get_dest_row_at_pos(cast(GtkTreeView*)cPtr, dragX, dragY, &_path, &pos);
-    path = new TreePath(cast(void*)_path, true);
+    path = new TreePath(cast(void*)_path, Yes.Take);
     return _retval;
   }
 
@@ -540,7 +540,7 @@ class TreeView : Widget, Scrollable
   {
     GtkTreePath* _path;
     gtk_tree_view_get_drag_dest_row(cast(GtkTreeView*)cPtr, &_path, &pos);
-    path = new TreePath(cast(void*)_path, true);
+    path = new TreePath(cast(void*)_path, Yes.Take);
   }
 
   /**
@@ -583,7 +583,7 @@ class TreeView : Widget, Scrollable
   {
     GtkTreeViewColumn* _cretval;
     _cretval = gtk_tree_view_get_expander_column(cast(GtkTreeView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeViewColumn(cast(GtkTreeViewColumn*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeViewColumn(cast(GtkTreeViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -693,7 +693,7 @@ class TreeView : Widget, Scrollable
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_view_get_model(cast(GtkTreeView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -747,8 +747,8 @@ class TreeView : Widget, Scrollable
     GtkTreePath* _path;
     GtkTreeViewColumn* _column;
     _retval = gtk_tree_view_get_path_at_pos(cast(GtkTreeView*)cPtr, x, y, &_path, &_column, cast(int*)&cellX, cast(int*)&cellY);
-    path = new TreePath(cast(void*)_path, true);
-    column = new TreeViewColumn(cast(void*)_column, false);
+    path = new TreePath(cast(void*)_path, Yes.Take);
+    column = new TreeViewColumn(cast(void*)_column, No.Take);
     return _retval;
   }
 
@@ -806,7 +806,7 @@ class TreeView : Widget, Scrollable
   {
     GtkEditable* _cretval;
     _cretval = gtk_tree_view_get_search_entry(cast(GtkTreeView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Editable(cast(GtkEditable*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Editable(cast(GtkEditable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -820,7 +820,7 @@ class TreeView : Widget, Scrollable
   {
     GtkTreeSelection* _cretval;
     _cretval = gtk_tree_view_get_selection(cast(GtkTreeView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeSelection(cast(GtkTreeSelection*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeSelection(cast(GtkTreeSelection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -883,9 +883,9 @@ class TreeView : Widget, Scrollable
     GtkTreePath* _path;
     GtkTreeIter _iter;
     _retval = gtk_tree_view_get_tooltip_context(cast(GtkTreeView*)cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
-    model = _model ? ObjectG.getDObject!TreeModel(_model, false) : null;
-    path = new TreePath(cast(void*)_path, true);
-    iter = new TreeIter(cast(void*)&_iter, false);
+    model = ObjectG.getDObject!TreeModel(_model, No.Take);
+    path = new TreePath(cast(void*)_path, Yes.Take);
+    iter = new TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -906,8 +906,8 @@ class TreeView : Widget, Scrollable
     GtkTreePath* _startPath;
     GtkTreePath* _endPath;
     _retval = gtk_tree_view_get_visible_range(cast(GtkTreeView*)cPtr, &_startPath, &_endPath);
-    startPath = new TreePath(cast(void*)_startPath, true);
-    endPath = new TreePath(cast(void*)_endPath, true);
+    startPath = new TreePath(cast(void*)_startPath, Yes.Take);
+    endPath = new TreePath(cast(void*)_endPath, Yes.Take);
     return _retval;
   }
 
@@ -926,7 +926,7 @@ class TreeView : Widget, Scrollable
   {
     GdkRectangle _visibleRect;
     gtk_tree_view_get_visible_rect(cast(GtkTreeView*)cPtr, &_visibleRect);
-    visibleRect = new Rectangle(cast(void*)&_visibleRect, false);
+    visibleRect = new Rectangle(cast(void*)&_visibleRect, No.Take);
   }
 
   /**
@@ -944,7 +944,7 @@ class TreeView : Widget, Scrollable
   int insertColumn(TreeViewColumn column, int position)
   {
     int _retval;
-    _retval = gtk_tree_view_insert_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(false) : null, position);
+    _retval = gtk_tree_view_insert_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, position);
     return _retval;
   }
 
@@ -970,13 +970,13 @@ class TreeView : Widget, Scrollable
     {
       auto _dlg = cast(TreeCellDataFunc*)data;
 
-      (*_dlg)(treeColumn ? ObjectG.getDObject!TreeViewColumn(cast(void*)treeColumn, false) : null, cell ? ObjectG.getDObject!CellRenderer(cast(void*)cell, false) : null, treeModel ? ObjectG.getDObject!TreeModel(cast(void*)treeModel, false) : null, iter ? new TreeIter(cast(void*)iter, false) : null);
+      (*_dlg)(ObjectG.getDObject!TreeViewColumn(cast(void*)treeColumn, No.Take), ObjectG.getDObject!CellRenderer(cast(void*)cell, No.Take), ObjectG.getDObject!TreeModel(cast(void*)treeModel, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
     }
 
     int _retval;
-    const(char)* _title = title.toCString(false);
+    const(char)* _title = title.toCString(No.Alloc);
     auto _func = freezeDelegate(cast(void*)&func);
-    _retval = gtk_tree_view_insert_column_with_data_func(cast(GtkTreeView*)cPtr, position, _title, cell ? cast(GtkCellRenderer*)cell.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+    _retval = gtk_tree_view_insert_column_with_data_func(cast(GtkTreeView*)cPtr, position, _title, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
     return _retval;
   }
 
@@ -1017,8 +1017,8 @@ class TreeView : Widget, Scrollable
     GtkTreePath* _path;
     GtkTreeViewColumn* _column;
     _retval = gtk_tree_view_is_blank_at_pos(cast(GtkTreeView*)cPtr, x, y, &_path, &_column, cast(int*)&cellX, cast(int*)&cellY);
-    path = new TreePath(cast(void*)_path, true);
-    column = new TreeViewColumn(cast(void*)_column, false);
+    path = new TreePath(cast(void*)_path, Yes.Take);
+    column = new TreeViewColumn(cast(void*)_column, No.Take);
     return _retval;
   }
 
@@ -1050,7 +1050,7 @@ class TreeView : Widget, Scrollable
     {
       auto _dlg = cast(TreeViewMappingFunc*)userData;
 
-      (*_dlg)(treeView ? ObjectG.getDObject!TreeView(cast(void*)treeView, false) : null, path ? new TreePath(cast(void*)path, false) : null);
+      (*_dlg)(ObjectG.getDObject!TreeView(cast(void*)treeView, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null);
     }
 
     auto _func = cast(void*)&func;
@@ -1068,7 +1068,7 @@ class TreeView : Widget, Scrollable
    */
   void moveColumnAfter(TreeViewColumn column, TreeViewColumn baseColumn)
   {
-    gtk_tree_view_move_column_after(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(false) : null, baseColumn ? cast(GtkTreeViewColumn*)baseColumn.cPtr(false) : null);
+    gtk_tree_view_move_column_after(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, baseColumn ? cast(GtkTreeViewColumn*)baseColumn.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1082,7 +1082,7 @@ class TreeView : Widget, Scrollable
   int removeColumn(TreeViewColumn column)
   {
     int _retval;
-    _retval = gtk_tree_view_remove_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(false) : null);
+    _retval = gtk_tree_view_remove_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1096,7 +1096,7 @@ class TreeView : Widget, Scrollable
    */
   void rowActivated(TreePath path, TreeViewColumn column)
   {
-    gtk_tree_view_row_activated(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(false) : null);
+    gtk_tree_view_row_activated(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1110,7 +1110,7 @@ class TreeView : Widget, Scrollable
   bool rowExpanded(TreePath path)
   {
     bool _retval;
-    _retval = gtk_tree_view_row_expanded(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    _retval = gtk_tree_view_row_expanded(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1140,7 +1140,7 @@ class TreeView : Widget, Scrollable
    */
   void scrollToCell(TreePath path, TreeViewColumn column, bool useAlign, float rowAlign, float colAlign)
   {
-    gtk_tree_view_scroll_to_cell(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(false) : null, useAlign, rowAlign, colAlign);
+    gtk_tree_view_scroll_to_cell(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, useAlign, rowAlign, colAlign);
   }
 
   /**
@@ -1195,7 +1195,7 @@ class TreeView : Widget, Scrollable
     {
       auto _dlg = cast(TreeViewColumnDropFunc*)data;
 
-      bool _retval = (*_dlg)(treeView ? ObjectG.getDObject!TreeView(cast(void*)treeView, false) : null, column ? ObjectG.getDObject!TreeViewColumn(cast(void*)column, false) : null, prevColumn ? ObjectG.getDObject!TreeViewColumn(cast(void*)prevColumn, false) : null, nextColumn ? ObjectG.getDObject!TreeViewColumn(cast(void*)nextColumn, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!TreeView(cast(void*)treeView, No.Take), ObjectG.getDObject!TreeViewColumn(cast(void*)column, No.Take), ObjectG.getDObject!TreeViewColumn(cast(void*)prevColumn, No.Take), ObjectG.getDObject!TreeViewColumn(cast(void*)nextColumn, No.Take));
       return _retval;
     }
 
@@ -1223,7 +1223,7 @@ class TreeView : Widget, Scrollable
    */
   void setCursor(TreePath path, TreeViewColumn focusColumn, bool startEditing)
   {
-    gtk_tree_view_set_cursor(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, focusColumn ? cast(GtkTreeViewColumn*)focusColumn.cPtr(false) : null, startEditing);
+    gtk_tree_view_set_cursor(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, focusColumn ? cast(GtkTreeViewColumn*)focusColumn.cPtr(No.Dup) : null, startEditing);
   }
 
   /**
@@ -1250,7 +1250,7 @@ class TreeView : Widget, Scrollable
    */
   void setCursorOnCell(TreePath path, TreeViewColumn focusColumn, CellRenderer focusCell, bool startEditing)
   {
-    gtk_tree_view_set_cursor_on_cell(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, focusColumn ? cast(GtkTreeViewColumn*)focusColumn.cPtr(false) : null, focusCell ? cast(GtkCellRenderer*)focusCell.cPtr(false) : null, startEditing);
+    gtk_tree_view_set_cursor_on_cell(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, focusColumn ? cast(GtkTreeViewColumn*)focusColumn.cPtr(No.Dup) : null, focusCell ? cast(GtkCellRenderer*)focusCell.cPtr(No.Dup) : null, startEditing);
   }
 
   /**
@@ -1264,7 +1264,7 @@ class TreeView : Widget, Scrollable
    */
   void setDragDestRow(TreePath path, TreeViewDropPosition pos)
   {
-    gtk_tree_view_set_drag_dest_row(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null, pos);
+    gtk_tree_view_set_drag_dest_row(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, pos);
   }
 
   /**
@@ -1308,7 +1308,7 @@ class TreeView : Widget, Scrollable
    */
   void setExpanderColumn(TreeViewColumn column)
   {
-    gtk_tree_view_set_expander_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(false) : null);
+    gtk_tree_view_set_expander_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1420,7 +1420,7 @@ class TreeView : Widget, Scrollable
    */
   void setModel(TreeModel model)
   {
-    gtk_tree_view_set_model(cast(GtkTreeView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_tree_view_set_model(cast(GtkTreeView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1462,7 +1462,7 @@ class TreeView : Widget, Scrollable
     {
       auto _dlg = cast(TreeViewRowSeparatorFunc*)data;
 
-      bool _retval = (*_dlg)(model ? ObjectG.getDObject!TreeModel(cast(void*)model, false) : null, iter ? new TreeIter(cast(void*)iter, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
 
@@ -1515,7 +1515,7 @@ class TreeView : Widget, Scrollable
    */
   void setSearchEntry(Editable entry)
   {
-    gtk_tree_view_set_search_entry(cast(GtkTreeView*)cPtr, entry ? cast(GtkEditable*)(cast(ObjectG)entry).cPtr(false) : null);
+    gtk_tree_view_set_search_entry(cast(GtkTreeView*)cPtr, entry ? cast(GtkEditable*)(cast(ObjectG)entry).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1532,9 +1532,9 @@ class TreeView : Widget, Scrollable
     extern(C) bool _searchEqualFuncCallback(GtkTreeModel* model, int column, const(char)* key, GtkTreeIter* iter, void* searchData)
     {
       auto _dlg = cast(TreeViewSearchEqualFunc*)searchData;
-      string _key = key.fromCString(false);
+      string _key = key.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(model ? ObjectG.getDObject!TreeModel(cast(void*)model, false) : null, column, _key, iter ? new TreeIter(cast(void*)iter, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), column, _key, iter ? new TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
 
@@ -1580,7 +1580,7 @@ class TreeView : Widget, Scrollable
    */
   void setTooltipCell(Tooltip tooltip, TreePath path, TreeViewColumn column, CellRenderer cell)
   {
-    gtk_tree_view_set_tooltip_cell(cast(GtkTreeView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(false) : null, path ? cast(GtkTreePath*)path.cPtr(false) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(false) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(false) : null);
+    gtk_tree_view_set_tooltip_cell(cast(GtkTreeView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1614,7 +1614,7 @@ class TreeView : Widget, Scrollable
    */
   void setTooltipRow(Tooltip tooltip, TreePath path)
   {
-    gtk_tree_view_set_tooltip_row(cast(GtkTreeView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(false) : null, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    gtk_tree_view_set_tooltip_row(cast(GtkTreeView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**

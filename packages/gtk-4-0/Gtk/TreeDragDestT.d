@@ -34,7 +34,7 @@ template TreeDragDestT()
   override bool dragDataReceived(TreePath dest, Value value)
   {
     bool _retval;
-    _retval = gtk_tree_drag_dest_drag_data_received(cast(GtkTreeDragDest*)cPtr, dest ? cast(GtkTreePath*)dest.cPtr(false) : null, value ? cast(GValue*)value.cPtr(false) : null);
+    _retval = gtk_tree_drag_dest_drag_data_received(cast(GtkTreeDragDest*)cPtr, dest ? cast(GtkTreePath*)dest.cPtr(No.Dup) : null, value ? cast(GValue*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -54,7 +54,7 @@ template TreeDragDestT()
   override bool rowDropPossible(TreePath destPath, Value value)
   {
     bool _retval;
-    _retval = gtk_tree_drag_dest_row_drop_possible(cast(GtkTreeDragDest*)cPtr, destPath ? cast(GtkTreePath*)destPath.cPtr(false) : null, value ? cast(GValue*)value.cPtr(false) : null);
+    _retval = gtk_tree_drag_dest_row_drop_possible(cast(GtkTreeDragDest*)cPtr, destPath ? cast(GtkTreePath*)destPath.cPtr(No.Dup) : null, value ? cast(GValue*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 }

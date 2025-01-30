@@ -26,9 +26,9 @@ class MediaControls : Widget
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,8 +50,8 @@ class MediaControls : Widget
   this(MediaStream stream)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_media_controls_new(stream ? cast(GtkMediaStream*)stream.cPtr(false) : null);
-    this(_cretval, false);
+    _cretval = gtk_media_controls_new(stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -62,7 +62,7 @@ class MediaControls : Widget
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_media_controls_get_media_stream(cast(GtkMediaControls*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!MediaStream(cast(GtkMediaStream*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!MediaStream(cast(GtkMediaStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -73,6 +73,6 @@ class MediaControls : Widget
    */
   void setMediaStream(MediaStream stream)
   {
-    gtk_media_controls_set_media_stream(cast(GtkMediaControls*)cPtr, stream ? cast(GtkMediaStream*)stream.cPtr(false) : null);
+    gtk_media_controls_set_media_stream(cast(GtkMediaControls*)cPtr, stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
   }
 }

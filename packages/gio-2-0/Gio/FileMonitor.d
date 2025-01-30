@@ -29,9 +29,9 @@ class FileMonitor : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -69,7 +69,7 @@ class FileMonitor : ObjectG
    */
   void emitEvent(File child, File otherFile, FileMonitorEvent eventType)
   {
-    g_file_monitor_emit_event(cast(GFileMonitor*)cPtr, child ? cast(GFile*)(cast(ObjectG)child).cPtr(false) : null, otherFile ? cast(GFile*)(cast(ObjectG)otherFile).cPtr(false) : null, eventType);
+    g_file_monitor_emit_event(cast(GFileMonitor*)cPtr, child ? cast(GFile*)(cast(ObjectG)child).cPtr(No.Dup) : null, otherFile ? cast(GFile*)(cast(ObjectG)otherFile).cPtr(No.Dup) : null, eventType);
   }
 
   /**

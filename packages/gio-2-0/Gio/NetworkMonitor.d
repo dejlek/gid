@@ -38,7 +38,7 @@ interface NetworkMonitor
   {
     GNetworkMonitor* _cretval;
     _cretval = g_network_monitor_get_default();
-    auto _retval = _cretval ? ObjectG.getDObject!NetworkMonitor(cast(GNetworkMonitor*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!NetworkMonitor(cast(GNetworkMonitor*)_cretval, No.Take);
     return _retval;
   }
 

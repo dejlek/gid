@@ -49,9 +49,9 @@ class AppInfoMonitor : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -81,7 +81,7 @@ class AppInfoMonitor : ObjectG
   {
     GAppInfoMonitor* _cretval;
     _cretval = g_app_info_monitor_get();
-    auto _retval = _cretval ? ObjectG.getDObject!AppInfoMonitor(cast(GAppInfoMonitor*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!AppInfoMonitor(cast(GAppInfoMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 

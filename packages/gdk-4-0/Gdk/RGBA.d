@@ -21,17 +21,17 @@ class RGBA : Boxed
 
   this()
   {
-    super(safeMalloc(GdkRGBA.sizeof), true);
+    super(safeMalloc(GdkRGBA.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -93,7 +93,7 @@ class RGBA : Boxed
   {
     GdkRGBA* _cretval;
     _cretval = gdk_rgba_copy(cast(GdkRGBA*)cPtr);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class RGBA : Boxed
   bool equal(RGBA p2)
   {
     bool _retval;
-    _retval = gdk_rgba_equal(cast(GdkRGBA*)cPtr, p2 ? cast(GdkRGBA*)p2.cPtr(false) : null);
+    _retval = gdk_rgba_equal(cast(GdkRGBA*)cPtr, p2 ? cast(GdkRGBA*)p2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class RGBA : Boxed
   bool parse(string spec)
   {
     bool _retval;
-    const(char)* _spec = spec.toCString(false);
+    const(char)* _spec = spec.toCString(No.Alloc);
     _retval = gdk_rgba_parse(cast(GdkRGBA*)cPtr, _spec);
     return _retval;
   }
@@ -195,7 +195,7 @@ class RGBA : Boxed
   {
     char* _cretval;
     _cretval = gdk_rgba_to_string(cast(GdkRGBA*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 }

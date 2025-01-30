@@ -17,14 +17,14 @@ class Module
   ModuleC* cInstancePtr;
   bool owned;
 
-  this(void* ptr, bool owned = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GModule.Module");
 
     cInstancePtr = cast(ModuleC*)ptr;
 
-    this.owned = owned;
+    owned = take;
   }
 
   void* cPtr()
@@ -61,7 +61,7 @@ class Module
   {
     const(char)* _cretval;
     _cretval = g_module_name(cast(ModuleC*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class Module
   bool symbol(string symbolName, out void* symbol)
   {
     bool _retval;
-    const(char)* _symbolName = symbolName.toCString(false);
+    const(char)* _symbolName = symbolName.toCString(No.Alloc);
     _retval = g_module_symbol(cast(ModuleC*)cPtr, _symbolName, cast(void**)&symbol);
     return _retval;
   }
@@ -107,10 +107,10 @@ class Module
   static string buildPath(string directory, string moduleName)
   {
     char* _cretval;
-    const(char)* _directory = directory.toCString(false);
-    const(char)* _moduleName = moduleName.toCString(false);
+    const(char)* _directory = directory.toCString(No.Alloc);
+    const(char)* _moduleName = moduleName.toCString(No.Alloc);
     _cretval = g_module_build_path(_directory, _moduleName);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class Module
   {
     const(char)* _cretval;
     _cretval = g_module_error();
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

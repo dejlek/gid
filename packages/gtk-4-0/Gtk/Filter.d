@@ -30,9 +30,9 @@ class Filter : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -90,7 +90,7 @@ class Filter : ObjectG
   bool match(ObjectG item)
   {
     bool _retval;
-    _retval = gtk_filter_match(cast(GtkFilter*)cPtr, item ? cast(ObjectC*)item.cPtr(false) : null);
+    _retval = gtk_filter_match(cast(GtkFilter*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
     return _retval;
   }
 

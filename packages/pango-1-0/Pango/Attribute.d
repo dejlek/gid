@@ -29,17 +29,17 @@ class Attribute : Boxed
 
   this()
   {
-    super(safeMalloc(PangoAttribute.sizeof), true);
+    super(safeMalloc(PangoAttribute.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -218,7 +218,7 @@ class Attribute : Boxed
   {
     PangoAttribute* _cretval;
     _cretval = pango_attribute_copy(cast(PangoAttribute*)cPtr);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class Attribute : Boxed
   bool equal(Attribute attr2)
   {
     bool _retval;
-    _retval = pango_attribute_equal(cast(PangoAttribute*)cPtr, attr2 ? cast(PangoAttribute*)attr2.cPtr(false) : null);
+    _retval = pango_attribute_equal(cast(PangoAttribute*)cPtr, attr2 ? cast(PangoAttribute*)attr2.cPtr(No.Dup) : null);
     return _retval;
   }
 

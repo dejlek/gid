@@ -22,9 +22,9 @@ class StringSorter : Sorter
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -49,8 +49,8 @@ class StringSorter : Sorter
   this(Expression expression)
   {
     GtkStringSorter* _cretval;
-    _cretval = gtk_string_sorter_new(expression ? cast(GtkExpression*)expression.cPtr(true) : null);
-    this(_cretval, true);
+    _cretval = gtk_string_sorter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -73,7 +73,7 @@ class StringSorter : Sorter
   {
     GtkExpression* _cretval;
     _cretval = gtk_string_sorter_get_expression(cast(GtkStringSorter*)cPtr);
-    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, false) : null;
+    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class StringSorter : Sorter
    */
   void setExpression(Expression expression)
   {
-    gtk_string_sorter_set_expression(cast(GtkStringSorter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(false) : null);
+    gtk_string_sorter_set_expression(cast(GtkStringSorter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
 
   /**

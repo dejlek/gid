@@ -56,7 +56,7 @@ template SelectionModelT()
   {
     GtkBitset* _cretval;
     _cretval = gtk_selection_model_get_selection(cast(GtkSelectionModel*)cPtr);
-    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -78,7 +78,7 @@ template SelectionModelT()
   {
     GtkBitset* _cretval;
     _cretval = gtk_selection_model_get_selection_in_range(cast(GtkSelectionModel*)cPtr, position, nItems);
-    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -188,7 +188,7 @@ template SelectionModelT()
   override bool setSelection(Bitset selected, Bitset mask)
   {
     bool _retval;
-    _retval = gtk_selection_model_set_selection(cast(GtkSelectionModel*)cPtr, selected ? cast(GtkBitset*)selected.cPtr(false) : null, mask ? cast(GtkBitset*)mask.cPtr(false) : null);
+    _retval = gtk_selection_model_set_selection(cast(GtkSelectionModel*)cPtr, selected ? cast(GtkBitset*)selected.cPtr(No.Dup) : null, mask ? cast(GtkBitset*)mask.cPtr(No.Dup) : null);
     return _retval;
   }
 

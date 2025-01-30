@@ -19,9 +19,9 @@ import Gio.c.types;
 class Menu : MenuModel
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -43,7 +43,7 @@ class Menu : MenuModel
   {
     GMenu* _cretval;
     _cretval = g_menu_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -56,8 +56,8 @@ class Menu : MenuModel
    */
   void append(string label, string detailedAction)
   {
-    const(char)* _label = label.toCString(false);
-    const(char)* _detailedAction = detailedAction.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
     g_menu_append(cast(GMenu*)cPtr, _label, _detailedAction);
   }
 
@@ -69,7 +69,7 @@ class Menu : MenuModel
    */
   void appendItem(MenuItem item)
   {
-    g_menu_append_item(cast(GMenu*)cPtr, item ? cast(GMenuItem*)item.cPtr(false) : null);
+    g_menu_append_item(cast(GMenu*)cPtr, item ? cast(GMenuItem*)item.cPtr(No.Dup) : null);
   }
 
   /**
@@ -82,8 +82,8 @@ class Menu : MenuModel
    */
   void appendSection(string label, MenuModel section)
   {
-    const(char)* _label = label.toCString(false);
-    g_menu_append_section(cast(GMenu*)cPtr, _label, section ? cast(GMenuModel*)section.cPtr(false) : null);
+    const(char)* _label = label.toCString(No.Alloc);
+    g_menu_append_section(cast(GMenu*)cPtr, _label, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
   }
 
   /**
@@ -96,8 +96,8 @@ class Menu : MenuModel
    */
   void appendSubmenu(string label, MenuModel submenu)
   {
-    const(char)* _label = label.toCString(false);
-    g_menu_append_submenu(cast(GMenu*)cPtr, _label, submenu ? cast(GMenuModel*)submenu.cPtr(false) : null);
+    const(char)* _label = label.toCString(No.Alloc);
+    g_menu_append_submenu(cast(GMenu*)cPtr, _label, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
   }
 
   /**
@@ -124,8 +124,8 @@ class Menu : MenuModel
    */
   void insert(int position, string label, string detailedAction)
   {
-    const(char)* _label = label.toCString(false);
-    const(char)* _detailedAction = detailedAction.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
     g_menu_insert(cast(GMenu*)cPtr, position, _label, _detailedAction);
   }
 
@@ -149,7 +149,7 @@ class Menu : MenuModel
    */
   void insertItem(int position, MenuItem item)
   {
-    g_menu_insert_item(cast(GMenu*)cPtr, position, item ? cast(GMenuItem*)item.cPtr(false) : null);
+    g_menu_insert_item(cast(GMenu*)cPtr, position, item ? cast(GMenuItem*)item.cPtr(No.Dup) : null);
   }
 
   /**
@@ -163,8 +163,8 @@ class Menu : MenuModel
    */
   void insertSection(int position, string label, MenuModel section)
   {
-    const(char)* _label = label.toCString(false);
-    g_menu_insert_section(cast(GMenu*)cPtr, position, _label, section ? cast(GMenuModel*)section.cPtr(false) : null);
+    const(char)* _label = label.toCString(No.Alloc);
+    g_menu_insert_section(cast(GMenu*)cPtr, position, _label, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
   }
 
   /**
@@ -178,8 +178,8 @@ class Menu : MenuModel
    */
   void insertSubmenu(int position, string label, MenuModel submenu)
   {
-    const(char)* _label = label.toCString(false);
-    g_menu_insert_submenu(cast(GMenu*)cPtr, position, _label, submenu ? cast(GMenuModel*)submenu.cPtr(false) : null);
+    const(char)* _label = label.toCString(No.Alloc);
+    g_menu_insert_submenu(cast(GMenu*)cPtr, position, _label, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
   }
 
   /**
@@ -192,8 +192,8 @@ class Menu : MenuModel
    */
   void prepend(string label, string detailedAction)
   {
-    const(char)* _label = label.toCString(false);
-    const(char)* _detailedAction = detailedAction.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
     g_menu_prepend(cast(GMenu*)cPtr, _label, _detailedAction);
   }
 
@@ -205,7 +205,7 @@ class Menu : MenuModel
    */
   void prependItem(MenuItem item)
   {
-    g_menu_prepend_item(cast(GMenu*)cPtr, item ? cast(GMenuItem*)item.cPtr(false) : null);
+    g_menu_prepend_item(cast(GMenu*)cPtr, item ? cast(GMenuItem*)item.cPtr(No.Dup) : null);
   }
 
   /**
@@ -218,8 +218,8 @@ class Menu : MenuModel
    */
   void prependSection(string label, MenuModel section)
   {
-    const(char)* _label = label.toCString(false);
-    g_menu_prepend_section(cast(GMenu*)cPtr, _label, section ? cast(GMenuModel*)section.cPtr(false) : null);
+    const(char)* _label = label.toCString(No.Alloc);
+    g_menu_prepend_section(cast(GMenu*)cPtr, _label, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
   }
 
   /**
@@ -232,8 +232,8 @@ class Menu : MenuModel
    */
   void prependSubmenu(string label, MenuModel submenu)
   {
-    const(char)* _label = label.toCString(false);
-    g_menu_prepend_submenu(cast(GMenu*)cPtr, _label, submenu ? cast(GMenuModel*)submenu.cPtr(false) : null);
+    const(char)* _label = label.toCString(No.Alloc);
+    g_menu_prepend_submenu(cast(GMenu*)cPtr, _label, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
   }
 
   /**

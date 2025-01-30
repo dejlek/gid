@@ -26,17 +26,17 @@ class TextIter : Boxed
 
   this()
   {
-    super(safeMalloc(GtkTextIter.sizeof), true);
+    super(safeMalloc(GtkTextIter.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -59,7 +59,7 @@ class TextIter : Boxed
    */
   void assign(TextIter other)
   {
-    gtk_text_iter_assign(cast(GtkTextIter*)cPtr, other ? cast(GtkTextIter*)other.cPtr(false) : null);
+    gtk_text_iter_assign(cast(GtkTextIter*)cPtr, other ? cast(GtkTextIter*)other.cPtr(No.Dup) : null);
   }
 
   /**
@@ -140,7 +140,7 @@ class TextIter : Boxed
 
     bool _retval;
     auto _pred = cast(void*)&pred;
-    _retval = gtk_text_iter_backward_find_char(cast(GtkTextIter*)cPtr, &_predCallback, _pred, limit ? cast(GtkTextIter*)limit.cPtr(false) : null);
+    _retval = gtk_text_iter_backward_find_char(cast(GtkTextIter*)cPtr, &_predCallback, _pred, limit ? cast(GtkTextIter*)limit.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -197,12 +197,12 @@ class TextIter : Boxed
   bool backwardSearch(string str, TextSearchFlags flags, out TextIter matchStart, out TextIter matchEnd, TextIter limit)
   {
     bool _retval;
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     GtkTextIter _matchStart;
     GtkTextIter _matchEnd;
-    _retval = gtk_text_iter_backward_search(cast(GtkTextIter*)cPtr, _str, flags, &_matchStart, &_matchEnd, limit ? cast(GtkTextIter*)limit.cPtr(false) : null);
-    matchStart = new TextIter(cast(void*)&_matchStart, false);
-    matchEnd = new TextIter(cast(void*)&_matchEnd, false);
+    _retval = gtk_text_iter_backward_search(cast(GtkTextIter*)cPtr, _str, flags, &_matchStart, &_matchEnd, limit ? cast(GtkTextIter*)limit.cPtr(No.Dup) : null);
+    matchStart = new TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new TextIter(cast(void*)&_matchEnd, No.Take);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class TextIter : Boxed
   bool backwardToTagToggle(TextTag tag)
   {
     bool _retval;
-    _retval = gtk_text_iter_backward_to_tag_toggle(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(false) : null);
+    _retval = gtk_text_iter_backward_to_tag_toggle(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -406,7 +406,7 @@ class TextIter : Boxed
   int compare(TextIter rhs)
   {
     int _retval;
-    _retval = gtk_text_iter_compare(cast(GtkTextIter*)cPtr, rhs ? cast(GtkTextIter*)rhs.cPtr(false) : null);
+    _retval = gtk_text_iter_compare(cast(GtkTextIter*)cPtr, rhs ? cast(GtkTextIter*)rhs.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -422,7 +422,7 @@ class TextIter : Boxed
   {
     GtkTextIter* _cretval;
     _cretval = gtk_text_iter_copy(cast(GtkTextIter*)cPtr);
-    auto _retval = _cretval ? new TextIter(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TextIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -497,7 +497,7 @@ class TextIter : Boxed
   bool endsTag(TextTag tag)
   {
     bool _retval;
-    _retval = gtk_text_iter_ends_tag(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(false) : null);
+    _retval = gtk_text_iter_ends_tag(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -528,7 +528,7 @@ class TextIter : Boxed
   bool equal(TextIter rhs)
   {
     bool _retval;
-    _retval = gtk_text_iter_equal(cast(GtkTextIter*)cPtr, rhs ? cast(GtkTextIter*)rhs.cPtr(false) : null);
+    _retval = gtk_text_iter_equal(cast(GtkTextIter*)cPtr, rhs ? cast(GtkTextIter*)rhs.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -625,7 +625,7 @@ class TextIter : Boxed
 
     bool _retval;
     auto _pred = cast(void*)&pred;
-    _retval = gtk_text_iter_forward_find_char(cast(GtkTextIter*)cPtr, &_predCallback, _pred, limit ? cast(GtkTextIter*)limit.cPtr(false) : null);
+    _retval = gtk_text_iter_forward_find_char(cast(GtkTextIter*)cPtr, &_predCallback, _pred, limit ? cast(GtkTextIter*)limit.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -684,12 +684,12 @@ class TextIter : Boxed
   bool forwardSearch(string str, TextSearchFlags flags, out TextIter matchStart, out TextIter matchEnd, TextIter limit)
   {
     bool _retval;
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     GtkTextIter _matchStart;
     GtkTextIter _matchEnd;
-    _retval = gtk_text_iter_forward_search(cast(GtkTextIter*)cPtr, _str, flags, &_matchStart, &_matchEnd, limit ? cast(GtkTextIter*)limit.cPtr(false) : null);
-    matchStart = new TextIter(cast(void*)&_matchStart, false);
-    matchEnd = new TextIter(cast(void*)&_matchEnd, false);
+    _retval = gtk_text_iter_forward_search(cast(GtkTextIter*)cPtr, _str, flags, &_matchStart, &_matchEnd, limit ? cast(GtkTextIter*)limit.cPtr(No.Dup) : null);
+    matchStart = new TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new TextIter(cast(void*)&_matchEnd, No.Take);
     return _retval;
   }
 
@@ -768,7 +768,7 @@ class TextIter : Boxed
   bool forwardToTagToggle(TextTag tag)
   {
     bool _retval;
-    _retval = gtk_text_iter_forward_to_tag_toggle(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(false) : null);
+    _retval = gtk_text_iter_forward_to_tag_toggle(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -897,7 +897,7 @@ class TextIter : Boxed
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_iter_get_buffer(cast(GtkTextIter*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TextBuffer(cast(GtkTextBuffer*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TextBuffer(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -952,7 +952,7 @@ class TextIter : Boxed
   {
     GtkTextChildAnchor* _cretval;
     _cretval = gtk_text_iter_get_child_anchor(cast(GtkTextIter*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TextChildAnchor(cast(GtkTextChildAnchor*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TextChildAnchor(cast(GtkTextChildAnchor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -966,7 +966,7 @@ class TextIter : Boxed
   {
     PangoLanguage* _cretval;
     _cretval = gtk_text_iter_get_language(cast(GtkTextIter*)cPtr);
-    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1051,7 +1051,7 @@ class TextIter : Boxed
   {
     GdkPaintable* _cretval;
     _cretval = gtk_text_iter_get_paintable(cast(GtkTextIter*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1072,8 +1072,8 @@ class TextIter : Boxed
   string getSlice(TextIter end)
   {
     char* _cretval;
-    _cretval = gtk_text_iter_get_slice(cast(GtkTextIter*)cPtr, end ? cast(GtkTextIter*)end.cPtr(false) : null);
-    string _retval = _cretval.fromCString(true);
+    _cretval = gtk_text_iter_get_slice(cast(GtkTextIter*)cPtr, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1108,8 +1108,8 @@ class TextIter : Boxed
   string getText(TextIter end)
   {
     char* _cretval;
-    _cretval = gtk_text_iter_get_text(cast(GtkTextIter*)cPtr, end ? cast(GtkTextIter*)end.cPtr(false) : null);
-    string _retval = _cretval.fromCString(true);
+    _cretval = gtk_text_iter_get_text(cast(GtkTextIter*)cPtr, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1175,8 +1175,8 @@ class TextIter : Boxed
   string getVisibleSlice(TextIter end)
   {
     char* _cretval;
-    _cretval = gtk_text_iter_get_visible_slice(cast(GtkTextIter*)cPtr, end ? cast(GtkTextIter*)end.cPtr(false) : null);
-    string _retval = _cretval.fromCString(true);
+    _cretval = gtk_text_iter_get_visible_slice(cast(GtkTextIter*)cPtr, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1194,8 +1194,8 @@ class TextIter : Boxed
   string getVisibleText(TextIter end)
   {
     char* _cretval;
-    _cretval = gtk_text_iter_get_visible_text(cast(GtkTextIter*)cPtr, end ? cast(GtkTextIter*)end.cPtr(false) : null);
-    string _retval = _cretval.fromCString(true);
+    _cretval = gtk_text_iter_get_visible_text(cast(GtkTextIter*)cPtr, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1211,7 +1211,7 @@ class TextIter : Boxed
   bool hasTag(TextTag tag)
   {
     bool _retval;
-    _retval = gtk_text_iter_has_tag(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(false) : null);
+    _retval = gtk_text_iter_has_tag(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1226,7 +1226,7 @@ class TextIter : Boxed
   bool inRange(TextIter start, TextIter end)
   {
     bool _retval;
-    _retval = gtk_text_iter_in_range(cast(GtkTextIter*)cPtr, start ? cast(GtkTextIter*)start.cPtr(false) : null, end ? cast(GtkTextIter*)end.cPtr(false) : null);
+    _retval = gtk_text_iter_in_range(cast(GtkTextIter*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1315,7 +1315,7 @@ class TextIter : Boxed
    */
   void order(TextIter second)
   {
-    gtk_text_iter_order(cast(GtkTextIter*)cPtr, second ? cast(GtkTextIter*)second.cPtr(false) : null);
+    gtk_text_iter_order(cast(GtkTextIter*)cPtr, second ? cast(GtkTextIter*)second.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1438,7 +1438,7 @@ class TextIter : Boxed
   bool startsTag(TextTag tag)
   {
     bool _retval;
-    _retval = gtk_text_iter_starts_tag(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(false) : null);
+    _retval = gtk_text_iter_starts_tag(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1467,7 +1467,7 @@ class TextIter : Boxed
   bool togglesTag(TextTag tag)
   {
     bool _retval;
-    _retval = gtk_text_iter_toggles_tag(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(false) : null);
+    _retval = gtk_text_iter_toggles_tag(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
     return _retval;
   }
 }

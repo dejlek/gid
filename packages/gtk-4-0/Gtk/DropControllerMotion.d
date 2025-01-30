@@ -20,9 +20,9 @@ import Gtk.c.types;
 class DropControllerMotion : EventController
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -44,7 +44,7 @@ class DropControllerMotion : EventController
   {
     GtkEventController* _cretval;
     _cretval = gtk_drop_controller_motion_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -69,7 +69,7 @@ class DropControllerMotion : EventController
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_controller_motion_get_drop(cast(GtkDropControllerMotion*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 

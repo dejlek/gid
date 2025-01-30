@@ -46,9 +46,9 @@ class Box : Widget, Orientable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -74,7 +74,7 @@ class Box : Widget, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_box_new(orientation, spacing);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -84,7 +84,7 @@ class Box : Widget, Orientable
    */
   void append(Widget child)
   {
-    gtk_box_append(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_box_append(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -143,7 +143,7 @@ class Box : Widget, Orientable
    */
   void insertChildAfter(Widget child, Widget sibling)
   {
-    gtk_box_insert_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, sibling ? cast(GtkWidget*)sibling.cPtr(false) : null);
+    gtk_box_insert_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
   }
 
   /**
@@ -153,7 +153,7 @@ class Box : Widget, Orientable
    */
   void prepend(Widget child)
   {
-    gtk_box_prepend(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_box_prepend(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -166,7 +166,7 @@ class Box : Widget, Orientable
    */
   void remove(Widget child)
   {
-    gtk_box_remove(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_box_remove(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -179,7 +179,7 @@ class Box : Widget, Orientable
    */
   void reorderChildAfter(Widget child, Widget sibling)
   {
-    gtk_box_reorder_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, sibling ? cast(GtkWidget*)sibling.cPtr(false) : null);
+    gtk_box_reorder_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
   }
 
   /**

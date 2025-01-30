@@ -40,9 +40,9 @@ class Settings : ObjectG, StyleProvider
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -68,7 +68,7 @@ class Settings : ObjectG, StyleProvider
   {
     GtkSettings* _cretval;
     _cretval = gtk_settings_get_default();
-    auto _retval = _cretval ? ObjectG.getDObject!Settings(cast(GtkSettings*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Settings(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -81,8 +81,8 @@ class Settings : ObjectG, StyleProvider
   static Settings getForDisplay(Display display)
   {
     GtkSettings* _cretval;
-    _cretval = gtk_settings_get_for_display(display ? cast(GdkDisplay*)display.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Settings(cast(GtkSettings*)_cretval, false) : null;
+    _cretval = gtk_settings_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Settings(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class Settings : ObjectG, StyleProvider
    */
   void resetProperty(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_settings_reset_property(cast(GtkSettings*)cPtr, _name);
   }
 }

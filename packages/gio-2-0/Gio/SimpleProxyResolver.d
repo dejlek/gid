@@ -24,9 +24,9 @@ class SimpleProxyResolver : ObjectG, ProxyResolver
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -56,14 +56,14 @@ class SimpleProxyResolver : ObjectG, ProxyResolver
   static ProxyResolver new_(string defaultProxy, string[] ignoreHosts)
   {
     GProxyResolver* _cretval;
-    const(char)* _defaultProxy = defaultProxy.toCString(false);
+    const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);
     char*[] _tmpignoreHosts;
     foreach (s; ignoreHosts)
-      _tmpignoreHosts ~= s.toCString(false);
+      _tmpignoreHosts ~= s.toCString(No.Alloc);
     _tmpignoreHosts ~= null;
     char** _ignoreHosts = _tmpignoreHosts.ptr;
     _cretval = g_simple_proxy_resolver_new(_defaultProxy, _ignoreHosts);
-    auto _retval = _cretval ? ObjectG.getDObject!ProxyResolver(cast(GProxyResolver*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ProxyResolver(cast(GProxyResolver*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class SimpleProxyResolver : ObjectG, ProxyResolver
    */
   void setDefaultProxy(string defaultProxy)
   {
-    const(char)* _defaultProxy = defaultProxy.toCString(false);
+    const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);
     g_simple_proxy_resolver_set_default_proxy(cast(GSimpleProxyResolver*)cPtr, _defaultProxy);
   }
 
@@ -95,7 +95,7 @@ class SimpleProxyResolver : ObjectG, ProxyResolver
   {
     char*[] _tmpignoreHosts;
     foreach (s; ignoreHosts)
-      _tmpignoreHosts ~= s.toCString(false);
+      _tmpignoreHosts ~= s.toCString(No.Alloc);
     _tmpignoreHosts ~= null;
     char** _ignoreHosts = _tmpignoreHosts.ptr;
     g_simple_proxy_resolver_set_ignore_hosts(cast(GSimpleProxyResolver*)cPtr, _ignoreHosts);
@@ -115,8 +115,8 @@ class SimpleProxyResolver : ObjectG, ProxyResolver
    */
   void setUriProxy(string uriScheme, string proxy)
   {
-    const(char)* _uriScheme = uriScheme.toCString(false);
-    const(char)* _proxy = proxy.toCString(false);
+    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
+    const(char)* _proxy = proxy.toCString(No.Alloc);
     g_simple_proxy_resolver_set_uri_proxy(cast(GSimpleProxyResolver*)cPtr, _uriScheme, _proxy);
   }
 }

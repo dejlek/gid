@@ -20,14 +20,14 @@ import Pango.c.types;
 class AttrIterator : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -50,7 +50,7 @@ class AttrIterator : Boxed
   {
     PangoAttrIterator* _cretval;
     _cretval = pango_attr_iterator_copy(cast(PangoAttrIterator*)cPtr);
-    auto _retval = _cretval ? new AttrIterator(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new AttrIterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -78,7 +78,7 @@ class AttrIterator : Boxed
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_iterator_get(cast(PangoAttrIterator*)cPtr, type);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -120,8 +120,8 @@ class AttrIterator : Boxed
   {
     PangoLanguage* _language;
     GSList* _extraAttrs;
-    pango_attr_iterator_get_font(cast(PangoAttrIterator*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(false) : null, &_language, &_extraAttrs);
-    language = new PgLanguage(cast(void*)_language, true);
+    pango_attr_iterator_get_font(cast(PangoAttrIterator*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null, &_language, &_extraAttrs);
+    language = new PgLanguage(cast(void*)_language, Yes.Take);
     extraAttrs = gSListToD!(Attribute, GidOwnership.Full)(_extraAttrs);
   }
 

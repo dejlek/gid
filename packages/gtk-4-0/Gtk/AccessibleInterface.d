@@ -13,14 +13,14 @@ class AccessibleInterface
 {
   GtkAccessibleInterface cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.AccessibleInterface");
 
     cInstance = *cast(GtkAccessibleInterface*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

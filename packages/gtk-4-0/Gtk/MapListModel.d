@@ -41,9 +41,9 @@ class MapListModel : ObjectG, ListModel, SectionModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -73,16 +73,16 @@ class MapListModel : ObjectG, ListModel, SectionModel
       ObjectG _dretval;
       auto _dlg = cast(MapListModelMapFunc*)userData;
 
-      _dretval = (*_dlg)(item ? ObjectG.getDObject!ObjectG(cast(void*)item, true) : null);
-      ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(true);
+      _dretval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, Yes.Take));
+      ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
     }
 
     GtkMapListModel* _cretval;
     auto _mapFunc = freezeDelegate(cast(void*)&mapFunc);
-    _cretval = gtk_map_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(true) : null, &_mapFuncCallback, _mapFunc, &thawDelegate);
-    this(_cretval, true);
+    _cretval = gtk_map_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, &_mapFuncCallback, _mapFunc, &thawDelegate);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -93,7 +93,7 @@ class MapListModel : ObjectG, ListModel, SectionModel
   {
     GListModel* _cretval;
     _cretval = gtk_map_list_model_get_model(cast(GtkMapListModel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -127,8 +127,8 @@ class MapListModel : ObjectG, ListModel, SectionModel
       ObjectG _dretval;
       auto _dlg = cast(MapListModelMapFunc*)userData;
 
-      _dretval = (*_dlg)(item ? ObjectG.getDObject!ObjectG(cast(void*)item, true) : null);
-      ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(true);
+      _dretval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, Yes.Take));
+      ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
     }
@@ -147,6 +147,6 @@ class MapListModel : ObjectG, ListModel, SectionModel
    */
   void setModel(ListModel model)
   {
-    gtk_map_list_model_set_model(cast(GtkMapListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_map_list_model_set_model(cast(GtkMapListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 }

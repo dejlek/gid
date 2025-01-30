@@ -43,9 +43,9 @@ import Gtk.c.types;
 class CssProvider : ObjectG, StyleProvider
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -68,7 +68,7 @@ class CssProvider : ObjectG, StyleProvider
   {
     GtkCssProvider* _cretval;
     _cretval = gtk_css_provider_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -83,7 +83,7 @@ class CssProvider : ObjectG, StyleProvider
    */
   void loadFromData(string data, ptrdiff_t length)
   {
-    const(char)* _data = data.toCString(false);
+    const(char)* _data = data.toCString(No.Alloc);
     gtk_css_provider_load_from_data(cast(GtkCssProvider*)cPtr, _data, length);
   }
 
@@ -95,7 +95,7 @@ class CssProvider : ObjectG, StyleProvider
    */
   void loadFromFile(File file)
   {
-    gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(false) : null);
+    gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
 
   /**
@@ -106,7 +106,7 @@ class CssProvider : ObjectG, StyleProvider
    */
   void loadFromPath(string path)
   {
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     gtk_css_provider_load_from_path(cast(GtkCssProvider*)cPtr, _path);
   }
 
@@ -119,7 +119,7 @@ class CssProvider : ObjectG, StyleProvider
    */
   void loadFromResource(string resourcePath)
   {
-    const(char)* _resourcePath = resourcePath.toCString(false);
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_css_provider_load_from_resource(cast(GtkCssProvider*)cPtr, _resourcePath);
   }
 
@@ -131,7 +131,7 @@ class CssProvider : ObjectG, StyleProvider
    */
   void loadFromString(string string_)
   {
-    const(char)* _string_ = string_.toCString(false);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     gtk_css_provider_load_from_string(cast(GtkCssProvider*)cPtr, _string_);
   }
 
@@ -147,8 +147,8 @@ class CssProvider : ObjectG, StyleProvider
    */
   void loadNamed(string name, string variant)
   {
-    const(char)* _name = name.toCString(false);
-    const(char)* _variant = variant.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _variant = variant.toCString(No.Alloc);
     gtk_css_provider_load_named(cast(GtkCssProvider*)cPtr, _name, _variant);
   }
 
@@ -165,7 +165,7 @@ class CssProvider : ObjectG, StyleProvider
   {
     char* _cretval;
     _cretval = gtk_css_provider_to_string(cast(GtkCssProvider*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 

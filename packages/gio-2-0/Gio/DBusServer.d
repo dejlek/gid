@@ -39,9 +39,9 @@ class DBusServer : ObjectG, Initable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -83,13 +83,13 @@ class DBusServer : ObjectG, Initable
   static DBusServer newSync(string address, DBusServerFlags flags, string guid, DBusAuthObserver observer, Cancellable cancellable)
   {
     GDBusServer* _cretval;
-    const(char)* _address = address.toCString(false);
-    const(char)* _guid = guid.toCString(false);
+    const(char)* _address = address.toCString(No.Alloc);
+    const(char)* _guid = guid.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_dbus_server_new_sync(_address, flags, _guid, observer ? cast(GDBusAuthObserver*)observer.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_dbus_server_new_sync(_address, flags, _guid, observer ? cast(GDBusAuthObserver*)observer.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusServer(cast(GDBusServer*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!DBusServer(cast(GDBusServer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class DBusServer : ObjectG, Initable
   {
     const(char)* _cretval;
     _cretval = g_dbus_server_get_client_address(cast(GDBusServer*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class DBusServer : ObjectG, Initable
   {
     const(char)* _cretval;
     _cretval = g_dbus_server_get_guid(cast(GDBusServer*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

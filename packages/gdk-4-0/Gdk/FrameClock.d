@@ -45,9 +45,9 @@ class FrameClock : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -93,7 +93,7 @@ class FrameClock : ObjectG
   {
     GdkFrameTimings* _cretval;
     _cretval = gdk_frame_clock_get_current_timings(cast(GdkFrameClock*)cPtr);
-    auto _retval = _cretval ? new FrameTimings(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new FrameTimings(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class FrameClock : ObjectG
   {
     GdkFrameTimings* _cretval;
     _cretval = gdk_frame_clock_get_timings(cast(GdkFrameClock*)cPtr, frameCounter);
-    auto _retval = _cretval ? new FrameTimings(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new FrameTimings(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

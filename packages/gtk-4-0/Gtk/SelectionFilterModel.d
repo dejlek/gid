@@ -21,9 +21,9 @@ class SelectionFilterModel : ObjectG, ListModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -48,8 +48,8 @@ class SelectionFilterModel : ObjectG, ListModel
   this(SelectionModel model)
   {
     GtkSelectionFilterModel* _cretval;
-    _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -60,7 +60,7 @@ class SelectionFilterModel : ObjectG, ListModel
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_selection_filter_model_get_model(cast(GtkSelectionFilterModel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!SelectionModel(cast(GtkSelectionModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!SelectionModel(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -75,6 +75,6 @@ class SelectionFilterModel : ObjectG, ListModel
    */
   void setModel(SelectionModel model)
   {
-    gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 }

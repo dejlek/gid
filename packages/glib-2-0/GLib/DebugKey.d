@@ -13,14 +13,14 @@ class DebugKey
 {
   GDebugKey cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.DebugKey");
 
     cInstance = *cast(GDebugKey*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -31,13 +31,13 @@ class DebugKey
 
   @property string key()
   {
-    return (cast(GDebugKey*)cPtr).key.fromCString(false);
+    return (cast(GDebugKey*)cPtr).key.fromCString(No.Free);
   }
 
   @property void key(string propval)
   {
     safeFree(cast(void*)(cast(GDebugKey*)cPtr).key);
-    (cast(GDebugKey*)cPtr).key = propval.toCString(true);
+    (cast(GDebugKey*)cPtr).key = propval.toCString(Yes.Alloc);
   }
 
   @property uint value()

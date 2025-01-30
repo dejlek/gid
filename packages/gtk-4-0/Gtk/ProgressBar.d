@@ -58,9 +58,9 @@ import Pango.Types;
 class ProgressBar : Widget, AccessibleRange, Orientable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -84,7 +84,7 @@ class ProgressBar : Widget, AccessibleRange, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_progress_bar_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -156,7 +156,7 @@ class ProgressBar : Widget, AccessibleRange, Orientable
   {
     const(char)* _cretval;
     _cretval = gtk_progress_bar_get_text(cast(GtkProgressBar*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -252,7 +252,7 @@ class ProgressBar : Widget, AccessibleRange, Orientable
    */
   void setText(string text)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_progress_bar_set_text(cast(GtkProgressBar*)cPtr, _text);
   }
 }

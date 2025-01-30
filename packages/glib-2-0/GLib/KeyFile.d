@@ -114,14 +114,14 @@ import Gid.gid;
 class KeyFile : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -145,7 +145,7 @@ class KeyFile : Boxed
   {
     GKeyFile* _cretval;
     _cretval = g_key_file_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -164,8 +164,8 @@ class KeyFile : Boxed
   bool getBoolean(string groupName, string key)
   {
     bool _retval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_get_boolean(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
@@ -191,8 +191,8 @@ class KeyFile : Boxed
   {
     bool* _cretval;
     size_t _cretlength;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _cretval = g_key_file_get_boolean_list(cast(GKeyFile*)cPtr, _groupName, _key, &_cretlength, &_err);
     if (_err)
@@ -222,13 +222,13 @@ class KeyFile : Boxed
   string getComment(string groupName, string key)
   {
     char* _cretval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _cretval = g_key_file_get_comment(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -248,8 +248,8 @@ class KeyFile : Boxed
   double getDouble(string groupName, string key)
   {
     double _retval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_get_double(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
@@ -275,8 +275,8 @@ class KeyFile : Boxed
   {
     double* _cretval;
     size_t _cretlength;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _cretval = g_key_file_get_double_list(cast(GKeyFile*)cPtr, _groupName, _key, &_cretlength, &_err);
     if (_err)
@@ -312,7 +312,7 @@ class KeyFile : Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -330,8 +330,8 @@ class KeyFile : Boxed
   long getInt64(string groupName, string key)
   {
     long _retval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_get_int64(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
@@ -356,8 +356,8 @@ class KeyFile : Boxed
   int getInteger(string groupName, string key)
   {
     int _retval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_get_integer(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
@@ -384,8 +384,8 @@ class KeyFile : Boxed
   {
     int* _cretval;
     size_t _cretlength;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _cretval = g_key_file_get_integer_list(cast(GKeyFile*)cPtr, _groupName, _key, &_cretlength, &_err);
     if (_err)
@@ -414,7 +414,7 @@ class KeyFile : Boxed
   string[] getKeys(string groupName, out size_t length)
   {
     char** _cretval;
-    const(char)* _groupName = groupName.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
     _cretval = g_key_file_get_keys(cast(GKeyFile*)cPtr, _groupName, cast(size_t*)&length, &_err);
     if (_err)
@@ -428,7 +428,7 @@ class KeyFile : Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -452,11 +452,11 @@ class KeyFile : Boxed
   string getLocaleForKey(string groupName, string key, string locale)
   {
     char* _cretval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
-    const(char)* _locale = locale.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _locale = locale.toCString(No.Alloc);
     _cretval = g_key_file_get_locale_for_key(cast(GKeyFile*)cPtr, _groupName, _key, _locale);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -481,14 +481,14 @@ class KeyFile : Boxed
   string getLocaleString(string groupName, string key, string locale)
   {
     char* _cretval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
-    const(char)* _locale = locale.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _locale = locale.toCString(No.Alloc);
     GError *_err;
     _cretval = g_key_file_get_locale_string(cast(GKeyFile*)cPtr, _groupName, _key, _locale, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -517,9 +517,9 @@ class KeyFile : Boxed
   {
     char** _cretval;
     size_t _cretlength;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
-    const(char)* _locale = locale.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _locale = locale.toCString(No.Alloc);
     GError *_err;
     _cretval = g_key_file_get_locale_string_list(cast(GKeyFile*)cPtr, _groupName, _key, _locale, &_cretlength, &_err);
     if (_err)
@@ -530,7 +530,7 @@ class KeyFile : Boxed
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -543,7 +543,7 @@ class KeyFile : Boxed
   {
     char* _cretval;
     _cretval = g_key_file_get_start_group(cast(GKeyFile*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -564,13 +564,13 @@ class KeyFile : Boxed
   string getString(string groupName, string key)
   {
     char* _cretval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _cretval = g_key_file_get_string(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -590,8 +590,8 @@ class KeyFile : Boxed
   {
     char** _cretval;
     size_t _cretlength;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _cretval = g_key_file_get_string_list(cast(GKeyFile*)cPtr, _groupName, _key, &_cretlength, &_err);
     if (_err)
@@ -602,7 +602,7 @@ class KeyFile : Boxed
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -620,8 +620,8 @@ class KeyFile : Boxed
   ulong getUint64(string groupName, string key)
   {
     ulong _retval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_get_uint64(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
@@ -645,13 +645,13 @@ class KeyFile : Boxed
   string getValue(string groupName, string key)
   {
     char* _cretval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _cretval = g_key_file_get_value(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -665,7 +665,7 @@ class KeyFile : Boxed
   bool hasGroup(string groupName)
   {
     bool _retval;
-    const(char)* _groupName = groupName.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
     _retval = g_key_file_has_group(cast(GKeyFile*)cPtr, _groupName);
     return _retval;
   }
@@ -682,7 +682,7 @@ class KeyFile : Boxed
   bool loadFromData(string data, size_t length, KeyFileFlags flags)
   {
     bool _retval;
-    const(char)* _data = data.toCString(false);
+    const(char)* _data = data.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_load_from_data(cast(GKeyFile*)cPtr, _data, length, flags, &_err);
     if (_err)
@@ -706,13 +706,13 @@ class KeyFile : Boxed
   bool loadFromDataDirs(string file, out string fullPath, KeyFileFlags flags)
   {
     bool _retval;
-    const(char)* _file = file.toCString(false);
+    const(char)* _file = file.toCString(No.Alloc);
     char* _fullPath;
     GError *_err;
     _retval = g_key_file_load_from_data_dirs(cast(GKeyFile*)cPtr, _file, &_fullPath, flags, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    fullPath = _fullPath.fromCString(true);
+    fullPath = _fullPath.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -736,10 +736,10 @@ class KeyFile : Boxed
   bool loadFromDirs(string file, string[] searchDirs, out string fullPath, KeyFileFlags flags)
   {
     bool _retval;
-    const(char)* _file = file.toCString(false);
+    const(char)* _file = file.toCString(No.Alloc);
     const(char)*[] _tmpsearchDirs;
     foreach (s; searchDirs)
-      _tmpsearchDirs ~= s.toCString(false);
+      _tmpsearchDirs ~= s.toCString(No.Alloc);
     _tmpsearchDirs ~= null;
     const(char*)* _searchDirs = _tmpsearchDirs.ptr;
 
@@ -748,7 +748,7 @@ class KeyFile : Boxed
     _retval = g_key_file_load_from_dirs(cast(GKeyFile*)cPtr, _file, _searchDirs, &_fullPath, flags, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    fullPath = _fullPath.fromCString(true);
+    fullPath = _fullPath.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -767,7 +767,7 @@ class KeyFile : Boxed
   bool loadFromFile(string file, KeyFileFlags flags)
   {
     bool _retval;
-    const(char)* _file = file.toCString(false);
+    const(char)* _file = file.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_load_from_file(cast(GKeyFile*)cPtr, _file, flags, &_err);
     if (_err)
@@ -788,8 +788,8 @@ class KeyFile : Boxed
   bool removeComment(string groupName, string key)
   {
     bool _retval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_remove_comment(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
@@ -807,7 +807,7 @@ class KeyFile : Boxed
   bool removeGroup(string groupName)
   {
     bool _retval;
-    const(char)* _groupName = groupName.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_remove_group(cast(GKeyFile*)cPtr, _groupName, &_err);
     if (_err)
@@ -825,8 +825,8 @@ class KeyFile : Boxed
   bool removeKey(string groupName, string key)
   {
     bool _retval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_remove_key(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
@@ -848,7 +848,7 @@ class KeyFile : Boxed
   bool saveToFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_save_to_file(cast(GKeyFile*)cPtr, _filename, &_err);
     if (_err)
@@ -866,8 +866,8 @@ class KeyFile : Boxed
    */
   void setBoolean(string groupName, string key, bool value)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     g_key_file_set_boolean(cast(GKeyFile*)cPtr, _groupName, _key, value);
   }
 
@@ -882,8 +882,8 @@ class KeyFile : Boxed
    */
   void setBooleanList(string groupName, string key, bool[] list)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     size_t _length;
     if (list)
       _length = cast(size_t)list.length;
@@ -908,9 +908,9 @@ class KeyFile : Boxed
   bool setComment(string groupName, string key, string comment)
   {
     bool _retval;
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
-    const(char)* _comment = comment.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _comment = comment.toCString(No.Alloc);
     GError *_err;
     _retval = g_key_file_set_comment(cast(GKeyFile*)cPtr, _groupName, _key, _comment, &_err);
     if (_err)
@@ -928,8 +928,8 @@ class KeyFile : Boxed
    */
   void setDouble(string groupName, string key, double value)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     g_key_file_set_double(cast(GKeyFile*)cPtr, _groupName, _key, value);
   }
 
@@ -943,8 +943,8 @@ class KeyFile : Boxed
    */
   void setDoubleList(string groupName, string key, double[] list)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     size_t _length;
     if (list)
       _length = cast(size_t)list.length;
@@ -963,8 +963,8 @@ class KeyFile : Boxed
    */
   void setInt64(string groupName, string key, long value)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     g_key_file_set_int64(cast(GKeyFile*)cPtr, _groupName, _key, value);
   }
 
@@ -978,8 +978,8 @@ class KeyFile : Boxed
    */
   void setInteger(string groupName, string key, int value)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     g_key_file_set_integer(cast(GKeyFile*)cPtr, _groupName, _key, value);
   }
 
@@ -993,8 +993,8 @@ class KeyFile : Boxed
    */
   void setIntegerList(string groupName, string key, int[] list)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     size_t _length;
     if (list)
       _length = cast(size_t)list.length;
@@ -1026,10 +1026,10 @@ class KeyFile : Boxed
    */
   void setLocaleString(string groupName, string key, string locale, string string_)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
-    const(char)* _locale = locale.toCString(false);
-    const(char)* _string_ = string_.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _locale = locale.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     g_key_file_set_locale_string(cast(GKeyFile*)cPtr, _groupName, _key, _locale, _string_);
   }
 
@@ -1045,16 +1045,16 @@ class KeyFile : Boxed
    */
   void setLocaleStringList(string groupName, string key, string locale, string[] list)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
-    const(char)* _locale = locale.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _locale = locale.toCString(No.Alloc);
     size_t _length;
     if (list)
       _length = cast(size_t)list.length;
 
     char*[] _tmplist;
     foreach (s; list)
-      _tmplist ~= s.toCString(false);
+      _tmplist ~= s.toCString(No.Alloc);
     _tmplist ~= null;
     const(char*)* _list = _tmplist.ptr;
     g_key_file_set_locale_string_list(cast(GKeyFile*)cPtr, _groupName, _key, _locale, _list, _length);
@@ -1073,9 +1073,9 @@ class KeyFile : Boxed
    */
   void setString(string groupName, string key, string string_)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
-    const(char)* _string_ = string_.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     g_key_file_set_string(cast(GKeyFile*)cPtr, _groupName, _key, _string_);
   }
 
@@ -1090,15 +1090,15 @@ class KeyFile : Boxed
    */
   void setStringList(string groupName, string key, string[] list)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     size_t _length;
     if (list)
       _length = cast(size_t)list.length;
 
     const(char)*[] _tmplist;
     foreach (s; list)
-      _tmplist ~= s.toCString(false);
+      _tmplist ~= s.toCString(No.Alloc);
     _tmplist ~= null;
     const(char*)* _list = _tmplist.ptr;
     g_key_file_set_string_list(cast(GKeyFile*)cPtr, _groupName, _key, _list, _length);
@@ -1114,8 +1114,8 @@ class KeyFile : Boxed
    */
   void setUint64(string groupName, string key, ulong value)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     g_key_file_set_uint64(cast(GKeyFile*)cPtr, _groupName, _key, value);
   }
 
@@ -1132,9 +1132,9 @@ class KeyFile : Boxed
    */
   void setValue(string groupName, string key, string value)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    const(char)* _key = key.toCString(false);
-    const(char)* _value = value.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     g_key_file_set_value(cast(GKeyFile*)cPtr, _groupName, _key, _value);
   }
 
@@ -1155,7 +1155,7 @@ class KeyFile : Boxed
     _cretval = g_key_file_to_data(cast(GKeyFile*)cPtr, cast(size_t*)&length, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 

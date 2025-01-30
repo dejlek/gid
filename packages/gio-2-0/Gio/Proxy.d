@@ -40,9 +40,9 @@ interface Proxy
   static Proxy getDefaultForProtocol(string protocol)
   {
     GProxy* _cretval;
-    const(char)* _protocol = protocol.toCString(false);
+    const(char)* _protocol = protocol.toCString(No.Alloc);
     _cretval = g_proxy_get_default_for_protocol(_protocol);
-    auto _retval = _cretval ? ObjectG.getDObject!Proxy(cast(GProxy*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Proxy(cast(GProxy*)_cretval, Yes.Take);
     return _retval;
   }
 

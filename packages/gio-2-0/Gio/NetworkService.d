@@ -25,9 +25,9 @@ class NetworkService : ObjectG, SocketConnectable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -55,11 +55,11 @@ class NetworkService : ObjectG, SocketConnectable
   this(string service, string protocol, string domain)
   {
     GSocketConnectable* _cretval;
-    const(char)* _service = service.toCString(false);
-    const(char)* _protocol = protocol.toCString(false);
-    const(char)* _domain = domain.toCString(false);
+    const(char)* _service = service.toCString(No.Alloc);
+    const(char)* _protocol = protocol.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.Alloc);
     _cretval = g_network_service_new(_service, _protocol, _domain);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -71,7 +71,7 @@ class NetworkService : ObjectG, SocketConnectable
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_domain(cast(GNetworkService*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class NetworkService : ObjectG, SocketConnectable
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_protocol(cast(GNetworkService*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class NetworkService : ObjectG, SocketConnectable
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_scheme(cast(GNetworkService*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class NetworkService : ObjectG, SocketConnectable
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_service(cast(GNetworkService*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class NetworkService : ObjectG, SocketConnectable
    */
   void setScheme(string scheme)
   {
-    const(char)* _scheme = scheme.toCString(false);
+    const(char)* _scheme = scheme.toCString(No.Alloc);
     g_network_service_set_scheme(cast(GNetworkService*)cPtr, _scheme);
   }
 }

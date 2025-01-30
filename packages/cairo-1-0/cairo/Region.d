@@ -17,14 +17,14 @@ import cairo.c.types;
 class Region : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -63,7 +63,7 @@ class Region : Boxed
   RegionOverlap containsRectangle(RectangleInt rectangle)
   {
     cairo_region_overlap_t _cretval;
-    _cretval = cairo_region_contains_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(false) : null);
+    _cretval = cairo_region_contains_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
     RegionOverlap _retval = cast(RegionOverlap)_cretval;
     return _retval;
   }
@@ -80,7 +80,7 @@ class Region : Boxed
   {
     cairo_region_t* _cretval;
     _cretval = cairo_region_copy(cast(cairo_region_t*)cPtr);
-    auto _retval = _cretval ? new Region(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class Region : Boxed
   Bool equal(Region b)
   {
     Bool _retval;
-    _retval = cairo_region_equal(cast(cairo_region_t*)cPtr, b ? cast(cairo_region_t*)b.cPtr(false) : null);
+    _retval = cairo_region_equal(cast(cairo_region_t*)cPtr, b ? cast(cairo_region_t*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class Region : Boxed
    */
   void getExtents(RectangleInt extents)
   {
-    cairo_region_get_extents(cast(cairo_region_t*)cPtr, extents ? cast(cairo_rectangle_int_t*)extents.cPtr(false) : null);
+    cairo_region_get_extents(cast(cairo_region_t*)cPtr, extents ? cast(cairo_rectangle_int_t*)extents.cPtr(No.Dup) : null);
   }
 
   /**
@@ -117,7 +117,7 @@ class Region : Boxed
    */
   void getRectangle(int nth, RectangleInt rectangle)
   {
-    cairo_region_get_rectangle(cast(cairo_region_t*)cPtr, nth, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(false) : null);
+    cairo_region_get_rectangle(cast(cairo_region_t*)cPtr, nth, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
   }
 
   /**
@@ -129,7 +129,7 @@ class Region : Boxed
   Status intersect(Region other)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_intersect(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(false) : null);
+    _cretval = cairo_region_intersect(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(No.Dup) : null);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }
@@ -144,7 +144,7 @@ class Region : Boxed
   Status intersectRectangle(RectangleInt rectangle)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_intersect_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(false) : null);
+    _cretval = cairo_region_intersect_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }
@@ -193,7 +193,7 @@ class Region : Boxed
   Status subtract(Region other)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_subtract(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(false) : null);
+    _cretval = cairo_region_subtract(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(No.Dup) : null);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }
@@ -207,7 +207,7 @@ class Region : Boxed
   Status subtractRectangle(RectangleInt rectangle)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_subtract_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(false) : null);
+    _cretval = cairo_region_subtract_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }
@@ -232,7 +232,7 @@ class Region : Boxed
   Status union_(Region other)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_union(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(false) : null);
+    _cretval = cairo_region_union(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(No.Dup) : null);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }
@@ -246,7 +246,7 @@ class Region : Boxed
   Status unionRectangle(RectangleInt rectangle)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_union_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(false) : null);
+    _cretval = cairo_region_union_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }
@@ -262,7 +262,7 @@ class Region : Boxed
   Status xor(Region other)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_xor(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(false) : null);
+    _cretval = cairo_region_xor(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(No.Dup) : null);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }
@@ -278,7 +278,7 @@ class Region : Boxed
   Status xorRectangle(RectangleInt rectangle)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_xor_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(false) : null);
+    _cretval = cairo_region_xor_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }

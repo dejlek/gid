@@ -55,8 +55,8 @@ template PollableInputStreamT()
   override Source createSource(Cancellable cancellable)
   {
     GSource* _cretval;
-    _cretval = g_pollable_input_stream_create_source(cast(GPollableInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null);
-    auto _retval = _cretval ? new Source(cast(void*)_cretval, true) : null;
+    _cretval = g_pollable_input_stream_create_source(cast(GPollableInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -107,7 +107,7 @@ template PollableInputStreamT()
     ptrdiff_t _retval;
     size_t _count;
     GError *_err;
-    _retval = g_pollable_input_stream_read_nonblocking(cast(GPollableInputStream*)cPtr, buffer.ptr, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_pollable_input_stream_read_nonblocking(cast(GPollableInputStream*)cPtr, buffer.ptr, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

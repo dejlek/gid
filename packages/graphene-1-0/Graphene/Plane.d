@@ -20,17 +20,17 @@ class Plane : Boxed
 
   this()
   {
-    super(safeMalloc(graphene_plane_t.sizeof), true);
+    super(safeMalloc(graphene_plane_t.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -54,7 +54,7 @@ class Plane : Boxed
   {
     graphene_plane_t* _cretval;
     _cretval = graphene_plane_alloc();
-    auto _retval = _cretval ? new Plane(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Plane(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class Plane : Boxed
   float distance(Point3D point)
   {
     float _retval;
-    _retval = graphene_plane_distance(cast(graphene_plane_t*)cPtr, point ? cast(graphene_point3d_t*)point.cPtr(false) : null);
+    _retval = graphene_plane_distance(cast(graphene_plane_t*)cPtr, point ? cast(graphene_point3d_t*)point.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class Plane : Boxed
   bool equal(Plane b)
   {
     bool _retval;
-    _retval = graphene_plane_equal(cast(graphene_plane_t*)cPtr, b ? cast(graphene_plane_t*)b.cPtr(false) : null);
+    _retval = graphene_plane_equal(cast(graphene_plane_t*)cPtr, b ? cast(graphene_plane_t*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class Plane : Boxed
   {
     graphene_vec3_t _normal;
     graphene_plane_get_normal(cast(graphene_plane_t*)cPtr, &_normal);
-    normal = new Vec3(cast(void*)&_normal, false);
+    normal = new Vec3(cast(void*)&_normal, No.Take);
   }
 
   /**
@@ -123,8 +123,8 @@ class Plane : Boxed
   Plane init_(Vec3 normal, float constant)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init(cast(graphene_plane_t*)cPtr, normal ? cast(graphene_vec3_t*)normal.cPtr(false) : null, constant);
-    auto _retval = _cretval ? new Plane(cast(void*)_cretval, false) : null;
+    _cretval = graphene_plane_init(cast(graphene_plane_t*)cPtr, normal ? cast(graphene_vec3_t*)normal.cPtr(No.Dup) : null, constant);
+    auto _retval = _cretval ? new Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -138,8 +138,8 @@ class Plane : Boxed
   Plane initFromPlane(Plane src)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init_from_plane(cast(graphene_plane_t*)cPtr, src ? cast(graphene_plane_t*)src.cPtr(false) : null);
-    auto _retval = _cretval ? new Plane(cast(void*)_cretval, false) : null;
+    _cretval = graphene_plane_init_from_plane(cast(graphene_plane_t*)cPtr, src ? cast(graphene_plane_t*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -154,8 +154,8 @@ class Plane : Boxed
   Plane initFromPoint(Vec3 normal, Point3D point)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init_from_point(cast(graphene_plane_t*)cPtr, normal ? cast(graphene_vec3_t*)normal.cPtr(false) : null, point ? cast(graphene_point3d_t*)point.cPtr(false) : null);
-    auto _retval = _cretval ? new Plane(cast(void*)_cretval, false) : null;
+    _cretval = graphene_plane_init_from_point(cast(graphene_plane_t*)cPtr, normal ? cast(graphene_vec3_t*)normal.cPtr(No.Dup) : null, point ? cast(graphene_point3d_t*)point.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -173,8 +173,8 @@ class Plane : Boxed
   Plane initFromPoints(Point3D a, Point3D b, Point3D c)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init_from_points(cast(graphene_plane_t*)cPtr, a ? cast(graphene_point3d_t*)a.cPtr(false) : null, b ? cast(graphene_point3d_t*)b.cPtr(false) : null, c ? cast(graphene_point3d_t*)c.cPtr(false) : null);
-    auto _retval = _cretval ? new Plane(cast(void*)_cretval, false) : null;
+    _cretval = graphene_plane_init_from_points(cast(graphene_plane_t*)cPtr, a ? cast(graphene_point3d_t*)a.cPtr(No.Dup) : null, b ? cast(graphene_point3d_t*)b.cPtr(No.Dup) : null, c ? cast(graphene_point3d_t*)c.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -189,8 +189,8 @@ class Plane : Boxed
   Plane initFromVec4(Vec4 src)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init_from_vec4(cast(graphene_plane_t*)cPtr, src ? cast(graphene_vec4_t*)src.cPtr(false) : null);
-    auto _retval = _cretval ? new Plane(cast(void*)_cretval, false) : null;
+    _cretval = graphene_plane_init_from_vec4(cast(graphene_plane_t*)cPtr, src ? cast(graphene_vec4_t*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class Plane : Boxed
   {
     graphene_plane_t _res;
     graphene_plane_negate(cast(graphene_plane_t*)cPtr, &_res);
-    res = new Plane(cast(void*)&_res, false);
+    res = new Plane(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -217,7 +217,7 @@ class Plane : Boxed
   {
     graphene_plane_t _res;
     graphene_plane_normalize(cast(graphene_plane_t*)cPtr, &_res);
-    res = new Plane(cast(void*)&_res, false);
+    res = new Plane(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -236,7 +236,7 @@ class Plane : Boxed
   void transform(Matrix matrix, Matrix normalMatrix, out Plane res)
   {
     graphene_plane_t _res;
-    graphene_plane_transform(cast(graphene_plane_t*)cPtr, matrix ? cast(graphene_matrix_t*)matrix.cPtr(false) : null, normalMatrix ? cast(graphene_matrix_t*)normalMatrix.cPtr(false) : null, &_res);
-    res = new Plane(cast(void*)&_res, false);
+    graphene_plane_transform(cast(graphene_plane_t*)cPtr, matrix ? cast(graphene_matrix_t*)matrix.cPtr(No.Dup) : null, normalMatrix ? cast(graphene_matrix_t*)normalMatrix.cPtr(No.Dup) : null, &_res);
+    res = new Plane(cast(void*)&_res, No.Take);
   }
 }

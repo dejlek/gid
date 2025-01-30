@@ -19,9 +19,9 @@ import Gio.c.types;
 class MemoryInputStream : InputStream, PollableInputStream, Seekable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -45,6 +45,6 @@ class MemoryInputStream : InputStream, PollableInputStream, Seekable
   {
     GInputStream* _cretval;
     _cretval = g_memory_input_stream_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

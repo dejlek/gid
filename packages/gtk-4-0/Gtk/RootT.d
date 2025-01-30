@@ -31,7 +31,7 @@ template RootT()
   {
     GdkDisplay* _cretval;
     _cretval = gtk_root_get_display(cast(GtkRoot*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -47,7 +47,7 @@ template RootT()
   {
     GtkWidget* _cretval;
     _cretval = gtk_root_get_focus(cast(GtkRoot*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -64,6 +64,6 @@ template RootT()
    */
   override void setFocus(Widget focus)
   {
-    gtk_root_set_focus(cast(GtkRoot*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(false) : null);
+    gtk_root_set_focus(cast(GtkRoot*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
   }
 }

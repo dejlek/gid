@@ -21,14 +21,14 @@ import Gtk.c.types;
 class Bitset : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -49,7 +49,7 @@ class Bitset : Boxed
   {
     GtkBitset* _cretval;
     _cretval = gtk_bitset_new_empty();
-    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -64,7 +64,7 @@ class Bitset : Boxed
   {
     GtkBitset* _cretval;
     _cretval = gtk_bitset_new_range(start, nItems);
-    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class Bitset : Boxed
   {
     GtkBitset* _cretval;
     _cretval = gtk_bitset_copy(cast(GtkBitset*)cPtr);
-    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class Bitset : Boxed
    */
   void difference(Bitset other)
   {
-    gtk_bitset_difference(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(false) : null);
+    gtk_bitset_difference(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(No.Dup) : null);
   }
 
   /**
@@ -170,7 +170,7 @@ class Bitset : Boxed
   bool equals(Bitset other)
   {
     bool _retval;
-    _retval = gtk_bitset_equals(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(false) : null);
+    _retval = gtk_bitset_equals(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class Bitset : Boxed
    */
   void intersect(Bitset other)
   {
-    gtk_bitset_intersect(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(false) : null);
+    gtk_bitset_intersect(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(No.Dup) : null);
   }
 
   /**
@@ -381,7 +381,7 @@ class Bitset : Boxed
    */
   void subtract(Bitset other)
   {
-    gtk_bitset_subtract(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(false) : null);
+    gtk_bitset_subtract(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(No.Dup) : null);
   }
 
   /**
@@ -394,6 +394,6 @@ class Bitset : Boxed
    */
   void union_(Bitset other)
   {
-    gtk_bitset_union(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(false) : null);
+    gtk_bitset_union(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(No.Dup) : null);
   }
 }

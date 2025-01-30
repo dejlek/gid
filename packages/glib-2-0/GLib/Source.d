@@ -15,14 +15,14 @@ import Gid.gid;
 class Source : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -53,7 +53,7 @@ class Source : Boxed
   {
     GSource* _cretval;
     _cretval = g_source_new(&sourceFuncs, structSize);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -76,7 +76,7 @@ class Source : Boxed
    */
   void addChildSource(Source childSource)
   {
-    g_source_add_child_source(cast(GSource*)cPtr, childSource ? cast(GSource*)childSource.cPtr(false) : null);
+    g_source_add_child_source(cast(GSource*)cPtr, childSource ? cast(GSource*)childSource.cPtr(No.Dup) : null);
   }
 
   /**
@@ -135,7 +135,7 @@ class Source : Boxed
   uint attach(MainContext context)
   {
     uint _retval;
-    _retval = g_source_attach(cast(GSource*)cPtr, context ? cast(GMainContext*)context.cPtr(false) : null);
+    _retval = g_source_attach(cast(GSource*)cPtr, context ? cast(GMainContext*)context.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class Source : Boxed
   {
     GMainContext* _cretval;
     _cretval = g_source_get_context(cast(GSource*)cPtr);
-    auto _retval = _cretval ? new MainContext(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Source : Boxed
   {
     const(char)* _cretval;
     _cretval = g_source_get_name(cast(GSource*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -393,7 +393,7 @@ class Source : Boxed
    */
   void removeChildSource(Source childSource)
   {
-    g_source_remove_child_source(cast(GSource*)cPtr, childSource ? cast(GSource*)childSource.cPtr(false) : null);
+    g_source_remove_child_source(cast(GSource*)cPtr, childSource ? cast(GSource*)childSource.cPtr(No.Dup) : null);
   }
 
   /**
@@ -522,7 +522,7 @@ class Source : Boxed
    */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     g_source_set_name(cast(GSource*)cPtr, _name);
   }
 
@@ -578,7 +578,7 @@ class Source : Boxed
    */
   void setStaticName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     g_source_set_static_name(cast(GSource*)cPtr, _name);
   }
 
@@ -661,7 +661,7 @@ class Source : Boxed
    */
   static void setNameById(uint tag, string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     g_source_set_name_by_id(tag, _name);
   }
 }

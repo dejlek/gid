@@ -72,7 +72,7 @@ template SeekableT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_seekable_seek(cast(GSeekable*)cPtr, offset, type, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_seekable_seek(cast(GSeekable*)cPtr, offset, type, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -110,7 +110,7 @@ template SeekableT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_seekable_truncate(cast(GSeekable*)cPtr, offset, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_seekable_truncate(cast(GSeekable*)cPtr, offset, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

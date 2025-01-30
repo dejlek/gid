@@ -13,9 +13,9 @@ import Gio.c.types;
 class UnixMountMonitor : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -40,7 +40,7 @@ class UnixMountMonitor : ObjectG
   {
     GUnixMountMonitor* _cretval;
     _cretval = g_unix_mount_monitor_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -57,7 +57,7 @@ class UnixMountMonitor : ObjectG
   {
     GUnixMountMonitor* _cretval;
     _cretval = g_unix_mount_monitor_get();
-    auto _retval = _cretval ? ObjectG.getDObject!UnixMountMonitor(cast(GUnixMountMonitor*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!UnixMountMonitor(cast(GUnixMountMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 

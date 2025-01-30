@@ -14,14 +14,14 @@ class AttrSize
 {
   PangoAttrSize cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.AttrSize");
 
     cInstance = *cast(PangoAttrSize*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -67,7 +67,7 @@ class AttrSize
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_size_new(size);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class AttrSize
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_size_new_absolute(size);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

@@ -51,7 +51,7 @@ template TlsBackendT()
   {
     GTlsDatabase* _cretval;
     _cretval = g_tls_backend_get_default_database(cast(GTlsBackend*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TlsDatabase(cast(GTlsDatabase*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!TlsDatabase(cast(GTlsDatabase*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ template TlsBackendT()
    */
   override void setDefaultDatabase(TlsDatabase database)
   {
-    g_tls_backend_set_default_database(cast(GTlsBackend*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(false) : null);
+    g_tls_backend_set_default_database(cast(GTlsBackend*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
   }
 
   /**

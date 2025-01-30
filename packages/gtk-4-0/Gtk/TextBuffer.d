@@ -32,9 +32,9 @@ class TextBuffer : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -56,8 +56,8 @@ class TextBuffer : ObjectG
   this(TextTagTable table)
   {
     GtkTextBuffer* _cretval;
-    _cretval = gtk_text_buffer_new(table ? cast(GtkTextTagTable*)table.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gtk_text_buffer_new(table ? cast(GtkTextTagTable*)table.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -73,7 +73,7 @@ class TextBuffer : ObjectG
    */
   void addMark(TextMark mark, TextIter where)
   {
-    gtk_text_buffer_add_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(false) : null, where ? cast(GtkTextIter*)where.cPtr(false) : null);
+    gtk_text_buffer_add_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, where ? cast(GtkTextIter*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -86,7 +86,7 @@ class TextBuffer : ObjectG
    */
   void addSelectionClipboard(Clipboard clipboard)
   {
-    gtk_text_buffer_add_selection_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(false) : null);
+    gtk_text_buffer_add_selection_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(No.Dup) : null);
   }
 
   /**
@@ -101,7 +101,7 @@ class TextBuffer : ObjectG
    */
   void applyTag(TextTag tag, TextIter start, TextIter end)
   {
-    gtk_text_buffer_apply_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(false) : null, start ? cast(GtkTextIter*)start.cPtr(false) : null, end ? cast(GtkTextIter*)end.cPtr(false) : null);
+    gtk_text_buffer_apply_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -116,8 +116,8 @@ class TextBuffer : ObjectG
    */
   void applyTagByName(string name, TextIter start, TextIter end)
   {
-    const(char)* _name = name.toCString(false);
-    gtk_text_buffer_apply_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(GtkTextIter*)start.cPtr(false) : null, end ? cast(GtkTextIter*)end.cPtr(false) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    gtk_text_buffer_apply_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -139,7 +139,7 @@ class TextBuffer : ObjectG
   bool backspace(TextIter iter, bool interactive, bool defaultEditable)
   {
     bool _retval;
-    _retval = gtk_text_buffer_backspace(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, interactive, defaultEditable);
+    _retval = gtk_text_buffer_backspace(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, interactive, defaultEditable);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class TextBuffer : ObjectG
    */
   void copyClipboard(Clipboard clipboard)
   {
-    gtk_text_buffer_copy_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(false) : null);
+    gtk_text_buffer_copy_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(No.Dup) : null);
   }
 
   /**
@@ -205,8 +205,8 @@ class TextBuffer : ObjectG
   TextChildAnchor createChildAnchor(TextIter iter)
   {
     GtkTextChildAnchor* _cretval;
-    _cretval = gtk_text_buffer_create_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!TextChildAnchor(cast(GtkTextChildAnchor*)_cretval, false) : null;
+    _cretval = gtk_text_buffer_create_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!TextChildAnchor(cast(GtkTextChildAnchor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -236,9 +236,9 @@ class TextBuffer : ObjectG
   TextMark createMark(string markName, TextIter where, bool leftGravity)
   {
     GtkTextMark* _cretval;
-    const(char)* _markName = markName.toCString(false);
-    _cretval = gtk_text_buffer_create_mark(cast(GtkTextBuffer*)cPtr, _markName, where ? cast(GtkTextIter*)where.cPtr(false) : null, leftGravity);
-    auto _retval = _cretval ? ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, false) : null;
+    const(char)* _markName = markName.toCString(No.Alloc);
+    _cretval = gtk_text_buffer_create_mark(cast(GtkTextBuffer*)cPtr, _markName, where ? cast(GtkTextIter*)where.cPtr(No.Dup) : null, leftGravity);
+    auto _retval = ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class TextBuffer : ObjectG
    */
   void cutClipboard(Clipboard clipboard, bool defaultEditable)
   {
-    gtk_text_buffer_cut_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(false) : null, defaultEditable);
+    gtk_text_buffer_cut_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(No.Dup) : null, defaultEditable);
   }
 
   /**
@@ -269,7 +269,7 @@ class TextBuffer : ObjectG
    */
   void delete_(TextIter start, TextIter end)
   {
-    gtk_text_buffer_delete(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(false) : null, end ? cast(GtkTextIter*)end.cPtr(false) : null);
+    gtk_text_buffer_delete(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -287,7 +287,7 @@ class TextBuffer : ObjectG
   bool deleteInteractive(TextIter startIter, TextIter endIter, bool defaultEditable)
   {
     bool _retval;
-    _retval = gtk_text_buffer_delete_interactive(cast(GtkTextBuffer*)cPtr, startIter ? cast(GtkTextIter*)startIter.cPtr(false) : null, endIter ? cast(GtkTextIter*)endIter.cPtr(false) : null, defaultEditable);
+    _retval = gtk_text_buffer_delete_interactive(cast(GtkTextBuffer*)cPtr, startIter ? cast(GtkTextIter*)startIter.cPtr(No.Dup) : null, endIter ? cast(GtkTextIter*)endIter.cPtr(No.Dup) : null, defaultEditable);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class TextBuffer : ObjectG
    */
   void deleteMark(TextMark mark)
   {
-    gtk_text_buffer_delete_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(false) : null);
+    gtk_text_buffer_delete_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
   }
 
   /**
@@ -318,7 +318,7 @@ class TextBuffer : ObjectG
    */
   void deleteMarkByName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_text_buffer_delete_mark_by_name(cast(GtkTextBuffer*)cPtr, _name);
   }
 
@@ -377,8 +377,8 @@ class TextBuffer : ObjectG
     GtkTextIter _start;
     GtkTextIter _end;
     gtk_text_buffer_get_bounds(cast(GtkTextBuffer*)cPtr, &_start, &_end);
-    start = new TextIter(cast(void*)&_start, false);
-    end = new TextIter(cast(void*)&_end, false);
+    start = new TextIter(cast(void*)&_start, No.Take);
+    end = new TextIter(cast(void*)&_end, No.Take);
   }
 
   /**
@@ -448,7 +448,7 @@ class TextBuffer : ObjectG
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_end_iter(cast(GtkTextBuffer*)cPtr, &_iter);
-    iter = new TextIter(cast(void*)&_iter, false);
+    iter = new TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -473,7 +473,7 @@ class TextBuffer : ObjectG
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_insert(cast(GtkTextBuffer*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -486,8 +486,8 @@ class TextBuffer : ObjectG
   void getIterAtChildAnchor(out TextIter iter, TextChildAnchor anchor)
   {
     GtkTextIter _iter;
-    gtk_text_buffer_get_iter_at_child_anchor(cast(GtkTextBuffer*)cPtr, &_iter, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(false) : null);
-    iter = new TextIter(cast(void*)&_iter, false);
+    gtk_text_buffer_get_iter_at_child_anchor(cast(GtkTextBuffer*)cPtr, &_iter, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.Dup) : null);
+    iter = new TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -504,7 +504,7 @@ class TextBuffer : ObjectG
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_buffer_get_iter_at_line(cast(GtkTextBuffer*)cPtr, &_iter, lineNumber);
-    iter = new TextIter(cast(void*)&_iter, false);
+    iter = new TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -526,7 +526,7 @@ class TextBuffer : ObjectG
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_buffer_get_iter_at_line_index(cast(GtkTextBuffer*)cPtr, &_iter, lineNumber, byteIndex);
-    iter = new TextIter(cast(void*)&_iter, false);
+    iter = new TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -548,7 +548,7 @@ class TextBuffer : ObjectG
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_buffer_get_iter_at_line_offset(cast(GtkTextBuffer*)cPtr, &_iter, lineNumber, charOffset);
-    iter = new TextIter(cast(void*)&_iter, false);
+    iter = new TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -561,8 +561,8 @@ class TextBuffer : ObjectG
   void getIterAtMark(out TextIter iter, TextMark mark)
   {
     GtkTextIter _iter;
-    gtk_text_buffer_get_iter_at_mark(cast(GtkTextBuffer*)cPtr, &_iter, mark ? cast(GtkTextMark*)mark.cPtr(false) : null);
-    iter = new TextIter(cast(void*)&_iter, false);
+    gtk_text_buffer_get_iter_at_mark(cast(GtkTextBuffer*)cPtr, &_iter, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
+    iter = new TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -579,7 +579,7 @@ class TextBuffer : ObjectG
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_offset(cast(GtkTextBuffer*)cPtr, &_iter, charOffset);
-    iter = new TextIter(cast(void*)&_iter, false);
+    iter = new TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -604,9 +604,9 @@ class TextBuffer : ObjectG
   TextMark getMark(string name)
   {
     GtkTextMark* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_text_buffer_get_mark(cast(GtkTextBuffer*)cPtr, _name);
-    auto _retval = _cretval ? ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -655,7 +655,7 @@ class TextBuffer : ObjectG
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_selection_bound(cast(GtkTextBuffer*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -677,8 +677,8 @@ class TextBuffer : ObjectG
     GtkTextIter _start;
     GtkTextIter _end;
     _retval = gtk_text_buffer_get_selection_bounds(cast(GtkTextBuffer*)cPtr, &_start, &_end);
-    start = new TextIter(cast(void*)&_start, false);
-    end = new TextIter(cast(void*)&_end, false);
+    start = new TextIter(cast(void*)&_start, No.Take);
+    end = new TextIter(cast(void*)&_end, No.Take);
     return _retval;
   }
 
@@ -692,7 +692,7 @@ class TextBuffer : ObjectG
   {
     GdkContentProvider* _cretval;
     _cretval = gtk_text_buffer_get_selection_content(cast(GtkTextBuffer*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -715,8 +715,8 @@ class TextBuffer : ObjectG
   string getSlice(TextIter start, TextIter end, bool includeHiddenChars)
   {
     char* _cretval;
-    _cretval = gtk_text_buffer_get_slice(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(false) : null, end ? cast(GtkTextIter*)end.cPtr(false) : null, includeHiddenChars);
-    string _retval = _cretval.fromCString(true);
+    _cretval = gtk_text_buffer_get_slice(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null, includeHiddenChars);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -731,7 +731,7 @@ class TextBuffer : ObjectG
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_start_iter(cast(GtkTextBuffer*)cPtr, &_iter);
-    iter = new TextIter(cast(void*)&_iter, false);
+    iter = new TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -742,7 +742,7 @@ class TextBuffer : ObjectG
   {
     GtkTextTagTable* _cretval;
     _cretval = gtk_text_buffer_get_tag_table(cast(GtkTextBuffer*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TextTagTable(cast(GtkTextTagTable*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TextTagTable(cast(GtkTextTagTable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -763,8 +763,8 @@ class TextBuffer : ObjectG
   string getText(TextIter start, TextIter end, bool includeHiddenChars)
   {
     char* _cretval;
-    _cretval = gtk_text_buffer_get_text(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(false) : null, end ? cast(GtkTextIter*)end.cPtr(false) : null, includeHiddenChars);
-    string _retval = _cretval.fromCString(true);
+    _cretval = gtk_text_buffer_get_text(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null, includeHiddenChars);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -783,8 +783,8 @@ class TextBuffer : ObjectG
    */
   void insert(TextIter iter, string text, int len)
   {
-    const(char)* _text = text.toCString(false);
-    gtk_text_buffer_insert(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, _text, len);
+    const(char)* _text = text.toCString(No.Alloc);
+    gtk_text_buffer_insert(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _text, len);
   }
 
   /**
@@ -797,7 +797,7 @@ class TextBuffer : ObjectG
    */
   void insertAtCursor(string text, int len)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_text_buffer_insert_at_cursor(cast(GtkTextBuffer*)cPtr, _text, len);
   }
 
@@ -819,7 +819,7 @@ class TextBuffer : ObjectG
    */
   void insertChildAnchor(TextIter iter, TextChildAnchor anchor)
   {
-    gtk_text_buffer_insert_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(false) : null);
+    gtk_text_buffer_insert_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -841,8 +841,8 @@ class TextBuffer : ObjectG
   bool insertInteractive(TextIter iter, string text, int len, bool defaultEditable)
   {
     bool _retval;
-    const(char)* _text = text.toCString(false);
-    _retval = gtk_text_buffer_insert_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, _text, len, defaultEditable);
+    const(char)* _text = text.toCString(No.Alloc);
+    _retval = gtk_text_buffer_insert_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _text, len, defaultEditable);
     return _retval;
   }
 
@@ -862,7 +862,7 @@ class TextBuffer : ObjectG
   bool insertInteractiveAtCursor(string text, int len, bool defaultEditable)
   {
     bool _retval;
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     _retval = gtk_text_buffer_insert_interactive_at_cursor(cast(GtkTextBuffer*)cPtr, _text, len, defaultEditable);
     return _retval;
   }
@@ -880,8 +880,8 @@ class TextBuffer : ObjectG
    */
   void insertMarkup(TextIter iter, string markup, int len)
   {
-    const(char)* _markup = markup.toCString(false);
-    gtk_text_buffer_insert_markup(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, _markup, len);
+    const(char)* _markup = markup.toCString(No.Alloc);
+    gtk_text_buffer_insert_markup(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _markup, len);
   }
 
   /**
@@ -899,7 +899,7 @@ class TextBuffer : ObjectG
    */
   void insertPaintable(TextIter iter, Paintable paintable)
   {
-    gtk_text_buffer_insert_paintable(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(false) : null);
+    gtk_text_buffer_insert_paintable(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
 
   /**
@@ -918,7 +918,7 @@ class TextBuffer : ObjectG
    */
   void insertRange(TextIter iter, TextIter start, TextIter end)
   {
-    gtk_text_buffer_insert_range(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, start ? cast(GtkTextIter*)start.cPtr(false) : null, end ? cast(GtkTextIter*)end.cPtr(false) : null);
+    gtk_text_buffer_insert_range(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -939,7 +939,7 @@ class TextBuffer : ObjectG
   bool insertRangeInteractive(TextIter iter, TextIter start, TextIter end, bool defaultEditable)
   {
     bool _retval;
-    _retval = gtk_text_buffer_insert_range_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(false) : null, start ? cast(GtkTextIter*)start.cPtr(false) : null, end ? cast(GtkTextIter*)end.cPtr(false) : null, defaultEditable);
+    _retval = gtk_text_buffer_insert_range_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null, defaultEditable);
     return _retval;
   }
 
@@ -953,7 +953,7 @@ class TextBuffer : ObjectG
    */
   void moveMark(TextMark mark, TextIter where)
   {
-    gtk_text_buffer_move_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(false) : null, where ? cast(GtkTextIter*)where.cPtr(false) : null);
+    gtk_text_buffer_move_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, where ? cast(GtkTextIter*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -965,8 +965,8 @@ class TextBuffer : ObjectG
    */
   void moveMarkByName(string name, TextIter where)
   {
-    const(char)* _name = name.toCString(false);
-    gtk_text_buffer_move_mark_by_name(cast(GtkTextBuffer*)cPtr, _name, where ? cast(GtkTextIter*)where.cPtr(false) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    gtk_text_buffer_move_mark_by_name(cast(GtkTextBuffer*)cPtr, _name, where ? cast(GtkTextIter*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -984,7 +984,7 @@ class TextBuffer : ObjectG
    */
   void pasteClipboard(Clipboard clipboard, TextIter overrideLocation, bool defaultEditable)
   {
-    gtk_text_buffer_paste_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(false) : null, overrideLocation ? cast(GtkTextIter*)overrideLocation.cPtr(false) : null, defaultEditable);
+    gtk_text_buffer_paste_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(No.Dup) : null, overrideLocation ? cast(GtkTextIter*)overrideLocation.cPtr(No.Dup) : null, defaultEditable);
   }
 
   /**
@@ -1001,7 +1001,7 @@ class TextBuffer : ObjectG
    */
   void placeCursor(TextIter where)
   {
-    gtk_text_buffer_place_cursor(cast(GtkTextBuffer*)cPtr, where ? cast(GtkTextIter*)where.cPtr(false) : null);
+    gtk_text_buffer_place_cursor(cast(GtkTextBuffer*)cPtr, where ? cast(GtkTextIter*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1024,7 +1024,7 @@ class TextBuffer : ObjectG
    */
   void removeAllTags(TextIter start, TextIter end)
   {
-    gtk_text_buffer_remove_all_tags(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(false) : null, end ? cast(GtkTextIter*)end.cPtr(false) : null);
+    gtk_text_buffer_remove_all_tags(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1036,7 +1036,7 @@ class TextBuffer : ObjectG
    */
   void removeSelectionClipboard(Clipboard clipboard)
   {
-    gtk_text_buffer_remove_selection_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(false) : null);
+    gtk_text_buffer_remove_selection_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1051,7 +1051,7 @@ class TextBuffer : ObjectG
    */
   void removeTag(TextTag tag, TextIter start, TextIter end)
   {
-    gtk_text_buffer_remove_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(false) : null, start ? cast(GtkTextIter*)start.cPtr(false) : null, end ? cast(GtkTextIter*)end.cPtr(false) : null);
+    gtk_text_buffer_remove_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1066,8 +1066,8 @@ class TextBuffer : ObjectG
    */
   void removeTagByName(string name, TextIter start, TextIter end)
   {
-    const(char)* _name = name.toCString(false);
-    gtk_text_buffer_remove_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(GtkTextIter*)start.cPtr(false) : null, end ? cast(GtkTextIter*)end.cPtr(false) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    gtk_text_buffer_remove_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1085,7 +1085,7 @@ class TextBuffer : ObjectG
    */
   void selectRange(TextIter ins, TextIter bound)
   {
-    gtk_text_buffer_select_range(cast(GtkTextBuffer*)cPtr, ins ? cast(GtkTextIter*)ins.cPtr(false) : null, bound ? cast(GtkTextIter*)bound.cPtr(false) : null);
+    gtk_text_buffer_select_range(cast(GtkTextBuffer*)cPtr, ins ? cast(GtkTextIter*)ins.cPtr(No.Dup) : null, bound ? cast(GtkTextIter*)bound.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1148,7 +1148,7 @@ class TextBuffer : ObjectG
    */
   void setText(string text, int len)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_text_buffer_set_text(cast(GtkTextBuffer*)cPtr, _text, len);
   }
 

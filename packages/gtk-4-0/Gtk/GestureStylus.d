@@ -18,9 +18,9 @@ import Gtk.c.types;
 class GestureStylus : GestureSingle
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -41,7 +41,7 @@ class GestureStylus : GestureSingle
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_stylus_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -101,7 +101,7 @@ class GestureStylus : GestureSingle
   {
     GdkDeviceTool* _cretval;
     _cretval = gtk_gesture_stylus_get_device_tool(cast(GtkGestureStylus*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!DeviceTool(cast(GdkDeviceTool*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!DeviceTool(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 

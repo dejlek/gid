@@ -1,5 +1,7 @@
 //!generate funcs
 import core.atomic;
+import std.conv : to;
+public import std.typecons : Flag, No, Yes;
 
 import GLib.Types;
 import GLib.c.functions;
@@ -52,21 +54,21 @@ class ObjectG
    */
   this(GType type)
   {
-    this(g_object_new(type, null), true);
+    this(g_object_new(type, null), Yes.Take);
   }
 
   /**
    * Constructor to wrap a C GObject with a D proxy object.
    * Params:
    *   cObj = Pointer to the GObject
-   *   owned = true if the D object should take ownership of the passed reference, false to add a new reference
+   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
    */
-  this(void* cObj, bool owned)
+  this(void* cObj, Flag!"Take" take = No.Take)
   {
     if (!cObj)
       throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
 
-    setGObject(cObj, owned);
+    setGObject(cObj, take);
   }
 
   ~this()
@@ -86,9 +88,9 @@ class ObjectG
    * Set the GObject of a D ObjectG wrapper.
    * Params:
    *   cObj = Pointer to the GObject
-   *   owned = true if the D object should take ownership of the passed reference, false to add a new reference
+   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
    */
-  final void setGObject(void* cObj, bool owned)
+  final void setGObject(void* cObj, Flag!"Take" take = No.Take)
   {
     assert(!cInstancePtr);
 
@@ -110,7 +112,7 @@ class ObjectG
 
     // If taking ownership of the object, remove the extra reference. May trigger toggle notify if it is the last remaining ref,
     // which will call GC.removeRoot() allowing the D object to be garbage collected if it is no longer being accessed, resulting in the destruction of the GObject in dtor.
-    if (owned)
+    if (take)
       g_object_unref(cInstancePtr);
 
     debug objectDebugLog("new");
@@ -128,15 +130,15 @@ class ObjectG
   /**
    * Get a pointer to the underlying C object.
    * Params:
-   *   addRef = true to add a reference with g_object_ref(), false otherwise (default)
+   *   dup = Yes.Dup to add a reference with g_object_ref(), No.Dup otherwise (default)
    * Returns: The C object (reference added according to addRef parameter)
    */
-  void* cPtr(bool addRef = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    if (addRef)
+    if (dup)
       g_object_ref(cInstancePtr);
 
-    debug objectDebugLog("cPtr(addRef=true)");
+    debug objectDebugLog("cPtr(" ~ dup.to!string ~ ")");
 
     return cast(void*)cInstancePtr;
   }
@@ -184,14 +186,23 @@ class ObjectG
    * Template to get the D object from a C GObject and cast it to the given D object type.
    * Params:
    *   T = The D object type
-   *   cptr = The C GObject
-   *   owned = If true then the D object will take ownership of the GObject reference (false by default).
+   *   cInstance = The C GObject (can be null, in which case null is returned)
+   *   take = If Yes.Take then the D object will consume a GObject reference (No.Take by default).
    * Returns: The D object (which may be a new object if the GObject wasn't already wrapped)
    */
-  static T getDObject(T)(void* cptr, bool owned = false)
-  { // Cast return value to ObjectG or D pointer resolution will break if T is an interface (cast from void* to Interface not the same as Object to Interface)
+  static T getDObject(T)(void* cptr, Flag!"Take" take = No.Take)
+  {
+    if (!cptr)
+      return null;
+
+    // Cast return value to ObjectG or D pointer resolution will break if T is an interface (cast from void* to Interface not the same as Object to Interface)
     if (auto dObj = cast(ObjectG)g_object_get_qdata(cast(ObjectC*)cptr, gidObjectQuark))
+    {
+      if (take)
+        g_object_unref(cast(ObjectC*)cptr);
+
       return cast(T)dObj;
+    }
 
     if (!atomicLoad(classMapsInitialized)) // One time initialization of class maps
     {
@@ -242,7 +253,7 @@ class ObjectG
 
         if (auto obj = _d_newclass(cast()*dClassType))
         {
-          (cast(ObjectG)obj).setGObject(cptr, owned);
+          (cast(ObjectG)obj).setGObject(cptr, take);
           return cast(T)obj;
         }
 
@@ -256,7 +267,7 @@ class ObjectG
       {
         if (auto obj = _d_newclass(cast()*proxyClass)) // Create the object without calling the constructor
         {
-          (cast(ObjectG)obj).setGObject(cptr, owned); // Assign the C GObject
+          (cast(ObjectG)obj).setGObject(cptr, take); // Assign the C GObject
           return cast(T)obj;
         }
       }
@@ -264,7 +275,7 @@ class ObjectG
       return null;
     }
     else
-      return new T(cptr, owned); // Fallback to attempting to create Object from this template Object type
+      return new T(cptr, take); // Fallback to attempting to create Object from this template Object type
   }
 
   debug
@@ -291,7 +302,7 @@ class ObjectG
    */
   ulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After)
   {
-    return g_signal_connect_closure(cInstancePtr, signalDetail.toCString(false), cast(GClosure*)(cast(Closure)closure).cPtr, after == Yes.After);
+    return g_signal_connect_closure(cInstancePtr, signalDetail.toCString(No.Alloc), cast(GClosure*)(cast(Closure)closure).cPtr, after == Yes.After);
   }
 
   /**
@@ -305,7 +316,7 @@ class ObjectG
     GValue value;
     initVal!T(&value);
     setVal(&value, val);
-    g_object_set_property(cInstancePtr, toCString(propertyName, false), &value);
+    g_object_set_property(cInstancePtr, toCString(propertyName, No.Alloc), &value);
     g_value_unset(&value);
   }
 
@@ -319,7 +330,7 @@ class ObjectG
   {
     GValue value;
     initVal!T(&value);
-    g_object_get_property(cInstancePtr, toCString(propertyName, false), &value);
+    g_object_get_property(cInstancePtr, toCString(propertyName, No.Alloc), &value);
     T retval = getVal(&value, val);
     g_value_unset(&value);
     return retval;
@@ -333,9 +344,9 @@ abstract class IfaceProxy : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(ptr, ownedRef);
+    super(ptr, take);
   }
 
   abstract TypeInfo_Interface getIface();

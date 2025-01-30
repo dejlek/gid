@@ -35,9 +35,9 @@ import Gtk.c.types;
 class FontButton : Widget, FontChooser
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -62,7 +62,7 @@ class FontButton : Widget, FontChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_button_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -76,9 +76,9 @@ class FontButton : Widget, FontChooser
   static FontButton newWithFont(string fontname)
   {
     GtkWidget* _cretval;
-    const(char)* _fontname = fontname.toCString(false);
+    const(char)* _fontname = fontname.toCString(No.Alloc);
     _cretval = gtk_font_button_new_with_font(_fontname);
-    auto _retval = _cretval ? ObjectG.getDObject!FontButton(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FontButton(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class FontButton : Widget, FontChooser
   {
     const(char)* _cretval;
     _cretval = gtk_font_button_get_title(cast(GtkFontButton*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class FontButton : Widget, FontChooser
    */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(false);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_font_button_set_title(cast(GtkFontButton*)cPtr, _title);
   }
 

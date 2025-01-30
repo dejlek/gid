@@ -27,9 +27,9 @@ class ListItem : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,7 +50,7 @@ class ListItem : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_list_item_get_accessible_description(cast(GtkListItem*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ class ListItem : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_list_item_get_accessible_label(cast(GtkListItem*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class ListItem : ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_item_get_child(cast(GtkListItem*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class ListItem : ObjectG
   {
     ObjectC* _cretval;
     _cretval = gtk_list_item_get_item(cast(GtkListItem*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class ListItem : ObjectG
    */
   void setAccessibleDescription(string description)
   {
-    const(char)* _description = description.toCString(false);
+    const(char)* _description = description.toCString(No.Alloc);
     gtk_list_item_set_accessible_description(cast(GtkListItem*)cPtr, _description);
   }
 
@@ -174,7 +174,7 @@ class ListItem : ObjectG
    */
   void setAccessibleLabel(string label)
   {
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_list_item_set_accessible_label(cast(GtkListItem*)cPtr, _label);
   }
 
@@ -204,7 +204,7 @@ class ListItem : ObjectG
    */
   void setChild(Widget child)
   {
-    gtk_list_item_set_child(cast(GtkListItem*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_list_item_set_child(cast(GtkListItem*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

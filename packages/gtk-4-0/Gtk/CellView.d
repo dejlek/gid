@@ -46,9 +46,9 @@ import Gtk.c.types;
 class CellView : Widget, CellLayout, Orientable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -72,7 +72,7 @@ class CellView : Widget, CellLayout, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_cell_view_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -90,8 +90,8 @@ class CellView : Widget, CellLayout, Orientable
   static CellView newWithContext(CellArea area, CellAreaContext context)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_cell_view_new_with_context(area ? cast(GtkCellArea*)area.cPtr(false) : null, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!CellView(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_cell_view_new_with_context(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!CellView(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,9 +106,9 @@ class CellView : Widget, CellLayout, Orientable
   static CellView newWithMarkup(string markup)
   {
     GtkWidget* _cretval;
-    const(char)* _markup = markup.toCString(false);
+    const(char)* _markup = markup.toCString(No.Alloc);
     _cretval = gtk_cell_view_new_with_markup(_markup);
-    auto _retval = _cretval ? ObjectG.getDObject!CellView(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!CellView(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -122,9 +122,9 @@ class CellView : Widget, CellLayout, Orientable
   static CellView newWithText(string text)
   {
     GtkWidget* _cretval;
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     _cretval = gtk_cell_view_new_with_text(_text);
-    auto _retval = _cretval ? ObjectG.getDObject!CellView(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!CellView(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,8 +138,8 @@ class CellView : Widget, CellLayout, Orientable
   static CellView newWithTexture(Texture texture)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_cell_view_new_with_texture(texture ? cast(GdkTexture*)texture.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!CellView(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_cell_view_new_with_texture(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!CellView(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class CellView : Widget, CellLayout, Orientable
   {
     GtkTreePath* _cretval;
     _cretval = gtk_cell_view_get_displayed_row(cast(GtkCellView*)cPtr);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class CellView : Widget, CellLayout, Orientable
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_cell_view_get_model(cast(GtkCellView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class CellView : Widget, CellLayout, Orientable
    */
   void setDisplayedRow(TreePath path)
   {
-    gtk_cell_view_set_displayed_row(cast(GtkCellView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    gtk_cell_view_set_displayed_row(cast(GtkCellView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -246,6 +246,6 @@ class CellView : Widget, CellLayout, Orientable
    */
   void setModel(TreeModel model)
   {
-    gtk_cell_view_set_model(cast(GtkCellView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_cell_view_set_model(cast(GtkCellView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 }

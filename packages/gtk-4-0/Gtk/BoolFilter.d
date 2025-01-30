@@ -18,9 +18,9 @@ class BoolFilter : Filter
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -42,8 +42,8 @@ class BoolFilter : Filter
   this(Expression expression)
   {
     GtkBoolFilter* _cretval;
-    _cretval = gtk_bool_filter_new(expression ? cast(GtkExpression*)expression.cPtr(true) : null);
-    this(_cretval, true);
+    _cretval = gtk_bool_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -55,7 +55,7 @@ class BoolFilter : Filter
   {
     GtkExpression* _cretval;
     _cretval = gtk_bool_filter_get_expression(cast(GtkBoolFilter*)cPtr);
-    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, false) : null;
+    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class BoolFilter : Filter
    */
   void setExpression(Expression expression)
   {
-    gtk_bool_filter_set_expression(cast(GtkBoolFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(false) : null);
+    gtk_bool_filter_set_expression(cast(GtkBoolFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
 
   /**

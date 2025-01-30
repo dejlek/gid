@@ -14,9 +14,9 @@ import Gtk.c.types;
 class PasswordEntryBuffer : EntryBuffer
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -37,6 +37,6 @@ class PasswordEntryBuffer : EntryBuffer
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_password_entry_buffer_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

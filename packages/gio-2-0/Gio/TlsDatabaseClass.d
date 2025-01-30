@@ -15,14 +15,14 @@ class TlsDatabaseClass
 {
   GTlsDatabaseClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.TlsDatabaseClass");
 
     cInstance = *cast(GTlsDatabaseClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

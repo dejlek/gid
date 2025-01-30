@@ -13,12 +13,12 @@ import Gsk.c.types;
 class RoundedClipNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.RoundedClipNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -32,8 +32,8 @@ class RoundedClipNode : RenderNode
   this(RenderNode child, RoundedRect clip)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_rounded_clip_node_new(child ? cast(GskRenderNode*)child.cPtr(false) : null, clip ? cast(GskRoundedRect*)clip.cPtr : null);
-    this(_cretval, true);
+    _cretval = gsk_rounded_clip_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, clip ? cast(GskRoundedRect*)clip.cPtr : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -44,7 +44,7 @@ class RoundedClipNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_rounded_clip_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 

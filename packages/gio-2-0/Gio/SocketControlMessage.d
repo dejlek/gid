@@ -31,9 +31,9 @@ class SocketControlMessage : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -68,7 +68,7 @@ class SocketControlMessage : ObjectG
 
     auto _data = cast(void*)data.ptr;
     _cretval = g_socket_control_message_deserialize(level, type, _size, _data);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketControlMessage(cast(GSocketControlMessage*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketControlMessage(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -86,15 +86,15 @@ extern(C) void thawDelegate(void* dlg)
  * Convert a D string to a zero terminated C string, with allocation parameter.
  * Params:
  *   dstr = String to convert
- *   transfer = true if string is being transferred to C (use g_malloc), false for D allocation (no transfer)
+ *   alloc = Yes.Alloc if string is being transferred to C (use g_malloc), No.Alloc for D allocation (no transfer)
  * Returns: Zero terminated C string (D or C allocation)
  */
-char* toCString(string dstr, bool transfer)
+char* toCString(string dstr, Flag!"Alloc" alloc)
 {
   if (dstr is null)
     return null;
 
-  if (transfer)
+  if (alloc)
   {
     char* cstr = cast(char*)g_try_malloc(dstr.length + 1);
 
@@ -113,17 +113,17 @@ char* toCString(string dstr, bool transfer)
  * Convert a C string to a D string, with parameter to consume (free) the C string with g_free().
  * Params:
  *   cstr = Zero terminated C string
- *   transfer = true to transfer the string (freed with g_free()), false to just copy it
+ *   free = Yes.Free to free the C string with g_free, No.Free to just copy it
  * Returns: The D string copy
  */
-string fromCString(const(char)* cstr, bool transfer)
+string fromCString(const(char)* cstr, Flag!"Free" free)
 {
   if (!cstr)
     return null;
 
   string dstr = cstr[0 .. strlen(cstr)].dup;
 
-  if (transfer && cstr)
+  if (free && cstr)
     g_free(cast(void*)cstr);
 
   return dstr;
@@ -177,19 +177,19 @@ void zero(void* p, size_t len)
  * Template to copy a D array for use by C.
  * Params:
  *   T = The array type
- *   useMalloc = Yes.UseMalloc to use g_malloc() to allocate the array, No to use D memory (defaults to No)
+ *   alloc = Yes.Alloc to use g_malloc() to allocate the array, No.Alloc to use D memory (defaults to No)
  *   zeroTerm = Yes.ZeroTerminated if the resulting array should be zero terminated (defaults to No)
  *   array = The array to copy
  * Returns: C array or null if array is empty
  */
-T* arrayDtoC(T, Flag!"UseMalloc" useMalloc = No.UseMalloc, Flag!"ZeroTerm" zeroTerm = No.ZeroTerm)(T[] array)
+T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.ZeroTerm)(T[] array)
 {
   if (array.length == 0)
     return null;
 
   T* retArray;
 
-  static if (useMalloc)
+  static if (alloc)
   {
     static if (zeroTerm)
     {
@@ -223,7 +223,7 @@ T* arrayDtoC(T, Flag!"UseMalloc" useMalloc = No.UseMalloc, Flag!"ZeroTerm" zeroT
   else static if (is(T : string))
   {
     foreach(i, elem; array)
-      retarray[i] = toCString(array[i], useMalloc);
+      retarray[i] = toCString(array[i], alloc);
   }
   else
     retArray[0 .. array.length] = array[0 .. $];
@@ -624,7 +624,7 @@ GHashTable* gHashTableFromD(K, V)(V[K] map)
  */
 bool isTypeBoxedOrReffed(T)()
 {
-  return __traits(compiles, {auto c = new T(cast(void*)null, false); c.cPtr(false);});
+  return __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c.cPtr();});
 }
 
 /**
@@ -757,11 +757,11 @@ T containerGetItem(T)(void* data)
   if (containerTypeIsSupported!T)
 {
   static if (is(T : ObjectG) || is(T == interface))
-    return ObjectG.getDObject!T(data, false);
+    return ObjectG.getDObject!T(data, No.Take);
   else static if (is(T == string))
-    return fromCString(cast(const(char)*)data, false);
+    return fromCString(cast(const(char)*)data, No.Free);
   else static if (isTypeBoxedOrReffed!T)
-    return new T(data, false);
+    return new T(data, No.Take);
   else static if (is(T == void*) || is(T == const(void)*))
     return data;
   else static if (containerTypeIsSimple!T)
@@ -780,16 +780,16 @@ void containerSetItem(T)(T val, void* data)
   if (containerTypeIsSupported!T)
 {
   static if (is(T : ObjectG) || isTypeBoxedOrReffed!T)
-    *(cast(void**)data) = val.cPtr(true);
+    *(cast(void**)data) = val.cPtr(Yes.Dup);
   else static if (is(T == interface))
   {
     if (auto objG = cast(ObjectG)val)
-      *(cast(void**)data) = objG.cPtr(true);
+      *(cast(void**)data) = objG.cPtr(Yes.Dup);
     else
       assert(0, "Object implementing " ~ T.stringof ~ " interface is not an ObjectG");
   }
   else static if (is(T == string))
-    *cast(char**)data = toCString(val, true); // Transfer the string to C (use g_malloc)
+    *cast(char**)data = toCString(val, Yes.Alloc); // Transfer the string to C (use g_malloc)
   else static if (is(T == void*) || is(T == const(void)*))
     *(cast(void**)data) = cast(void*)val;
   else static if (containerTypeIsSimple!T)

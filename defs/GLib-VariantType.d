@@ -50,7 +50,7 @@ class VariantType : Boxed
         typeStr ~= "a" ~ getStr!E;
       else static if (is(Arg : V[K], V, K))
         typeStr ~= "a{" ~ getStr!K ~ getStr!V ~ "}";
-      else static if (Arg == Variant)
+      else static if (Arg == VariantG)
         typeStr ~= "v";
       else static if (isTuple!Arg)
         typeStr ~= "r";

@@ -20,9 +20,9 @@ import Gtk.c.types;
 class EventControllerMotion : EventController
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -43,7 +43,7 @@ class EventControllerMotion : EventController
   {
     GtkEventController* _cretval;
     _cretval = gtk_event_controller_motion_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

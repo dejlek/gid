@@ -63,9 +63,9 @@ import Gtk.c.types;
 class ListBox : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -86,7 +86,7 @@ class ListBox : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -98,7 +98,7 @@ class ListBox : Widget
    */
   void append(Widget child)
   {
-    gtk_list_box_append(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_list_box_append(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -125,14 +125,14 @@ class ListBox : Widget
       Widget _dretval;
       auto _dlg = cast(ListBoxCreateWidgetFunc*)userData;
 
-      _dretval = (*_dlg)(item ? ObjectG.getDObject!ObjectG(cast(void*)item, false) : null);
-      GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(true);
+      _dretval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, No.Take));
+      GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
     }
 
     auto _createWidgetFunc = freezeDelegate(cast(void*)&createWidgetFunc);
-    gtk_list_box_bind_model(cast(GtkListBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(false) : null, &_createWidgetFuncCallback, _createWidgetFunc, &thawDelegate);
+    gtk_list_box_bind_model(cast(GtkListBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, &_createWidgetFuncCallback, _createWidgetFunc, &thawDelegate);
   }
 
   /**
@@ -148,7 +148,7 @@ class ListBox : Widget
    */
   void dragHighlightRow(ListBoxRow row)
   {
-    gtk_list_box_drag_highlight_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(false) : null);
+    gtk_list_box_drag_highlight_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
   }
 
   /**
@@ -180,7 +180,7 @@ class ListBox : Widget
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_list_box_get_adjustment(cast(GtkListBox*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class ListBox : Widget
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_row_at_index(cast(GtkListBox*)cPtr, index);
-    auto _retval = _cretval ? ObjectG.getDObject!ListBoxRow(cast(GtkListBoxRow*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListBoxRow(cast(GtkListBoxRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class ListBox : Widget
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_row_at_y(cast(GtkListBox*)cPtr, y);
-    auto _retval = _cretval ? ObjectG.getDObject!ListBoxRow(cast(GtkListBoxRow*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListBoxRow(cast(GtkListBoxRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class ListBox : Widget
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_selected_row(cast(GtkListBox*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListBoxRow(cast(GtkListBoxRow*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListBoxRow(cast(GtkListBoxRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class ListBox : Widget
    */
   void insert(Widget child, int position)
   {
-    gtk_list_box_insert(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, position);
+    gtk_list_box_insert(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -325,7 +325,7 @@ class ListBox : Widget
    */
   void prepend(Widget child)
   {
-    gtk_list_box_prepend(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_list_box_prepend(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -335,7 +335,7 @@ class ListBox : Widget
    */
   void remove(Widget child)
   {
-    gtk_list_box_remove(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_list_box_remove(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -362,7 +362,7 @@ class ListBox : Widget
    */
   void selectRow(ListBoxRow row)
   {
-    gtk_list_box_select_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(false) : null);
+    gtk_list_box_select_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
   }
 
   /**
@@ -377,7 +377,7 @@ class ListBox : Widget
     {
       auto _dlg = cast(ListBoxForeachFunc*)userData;
 
-      (*_dlg)(box ? ObjectG.getDObject!ListBox(cast(void*)box, false) : null, row ? ObjectG.getDObject!ListBoxRow(cast(void*)row, false) : null);
+      (*_dlg)(ObjectG.getDObject!ListBox(cast(void*)box, No.Take), ObjectG.getDObject!ListBoxRow(cast(void*)row, No.Take));
     }
 
     auto _func = cast(void*)&func;
@@ -409,7 +409,7 @@ class ListBox : Widget
    */
   void setAdjustment(Adjustment adjustment)
   {
-    gtk_list_box_set_adjustment(cast(GtkListBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(false) : null);
+    gtk_list_box_set_adjustment(cast(GtkListBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -432,7 +432,7 @@ class ListBox : Widget
     {
       auto _dlg = cast(ListBoxFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(row ? ObjectG.getDObject!ListBoxRow(cast(void*)row, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!ListBoxRow(cast(void*)row, No.Take));
       return _retval;
     }
 
@@ -470,7 +470,7 @@ class ListBox : Widget
     {
       auto _dlg = cast(ListBoxUpdateHeaderFunc*)userData;
 
-      (*_dlg)(row ? ObjectG.getDObject!ListBoxRow(cast(void*)row, false) : null, before ? ObjectG.getDObject!ListBoxRow(cast(void*)before, false) : null);
+      (*_dlg)(ObjectG.getDObject!ListBoxRow(cast(void*)row, No.Take), ObjectG.getDObject!ListBoxRow(cast(void*)before, No.Take));
     }
 
     auto _updateHeader = freezeDelegate(cast(void*)&updateHeader);
@@ -485,7 +485,7 @@ class ListBox : Widget
    */
   void setPlaceholder(Widget placeholder)
   {
-    gtk_list_box_set_placeholder(cast(GtkListBox*)cPtr, placeholder ? cast(GtkWidget*)placeholder.cPtr(false) : null);
+    gtk_list_box_set_placeholder(cast(GtkListBox*)cPtr, placeholder ? cast(GtkWidget*)placeholder.cPtr(No.Dup) : null);
   }
 
   /**
@@ -528,7 +528,7 @@ class ListBox : Widget
     {
       auto _dlg = cast(ListBoxSortFunc*)userData;
 
-      int _retval = (*_dlg)(row1 ? ObjectG.getDObject!ListBoxRow(cast(void*)row1, false) : null, row2 ? ObjectG.getDObject!ListBoxRow(cast(void*)row2, false) : null);
+      int _retval = (*_dlg)(ObjectG.getDObject!ListBoxRow(cast(void*)row1, No.Take), ObjectG.getDObject!ListBoxRow(cast(void*)row2, No.Take));
       return _retval;
     }
 
@@ -551,7 +551,7 @@ class ListBox : Widget
    */
   void unselectRow(ListBoxRow row)
   {
-    gtk_list_box_unselect_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(false) : null);
+    gtk_list_box_unselect_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
   }
 
   alias ActivateCursorRowCallback = void delegate(ListBox listBox);

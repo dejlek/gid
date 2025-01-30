@@ -24,14 +24,14 @@ import cairo.c.types;
 class ScaledFont : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -64,7 +64,7 @@ class ScaledFont : Boxed
    */
   void getCtm(Matrix ctm)
   {
-    cairo_scaled_font_get_ctm(cast(cairo_scaled_font_t*)cPtr, ctm ? cast(cairo_matrix_t*)ctm.cPtr(false) : null);
+    cairo_scaled_font_get_ctm(cast(cairo_scaled_font_t*)cPtr, ctm ? cast(cairo_matrix_t*)ctm.cPtr(No.Dup) : null);
   }
 
   /**
@@ -79,7 +79,7 @@ class ScaledFont : Boxed
   {
     cairo_font_face_t* _cretval;
     _cretval = cairo_scaled_font_get_font_face(cast(cairo_scaled_font_t*)cPtr);
-    auto _retval = _cretval ? new FontFace(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FontFace(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class ScaledFont : Boxed
    */
   void getFontMatrix(Matrix fontMatrix)
   {
-    cairo_scaled_font_get_font_matrix(cast(cairo_scaled_font_t*)cPtr, fontMatrix ? cast(cairo_matrix_t*)fontMatrix.cPtr(false) : null);
+    cairo_scaled_font_get_font_matrix(cast(cairo_scaled_font_t*)cPtr, fontMatrix ? cast(cairo_matrix_t*)fontMatrix.cPtr(No.Dup) : null);
   }
 
   /**
@@ -102,7 +102,7 @@ class ScaledFont : Boxed
    */
   void getFontOptions(FontOptions options)
   {
-    cairo_scaled_font_get_font_options(cast(cairo_scaled_font_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(false) : null);
+    cairo_scaled_font_get_font_options(cast(cairo_scaled_font_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
   }
 
   /**
@@ -115,7 +115,7 @@ class ScaledFont : Boxed
    */
   void getScaleMatrix(Matrix scaleMatrix)
   {
-    cairo_scaled_font_get_scale_matrix(cast(cairo_scaled_font_t*)cPtr, scaleMatrix ? cast(cairo_matrix_t*)scaleMatrix.cPtr(false) : null);
+    cairo_scaled_font_get_scale_matrix(cast(cairo_scaled_font_t*)cPtr, scaleMatrix ? cast(cairo_matrix_t*)scaleMatrix.cPtr(No.Dup) : null);
   }
 
   /**
@@ -165,7 +165,7 @@ class ScaledFont : Boxed
    */
   void glyphExtents(Glyph glyphs, int numGlyphs, TextExtents extents)
   {
-    cairo_scaled_font_glyph_extents(cast(cairo_scaled_font_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(false) : null, numGlyphs, &extents);
+    cairo_scaled_font_glyph_extents(cast(cairo_scaled_font_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(No.Dup) : null, numGlyphs, &extents);
   }
 
   /**
@@ -202,7 +202,7 @@ class ScaledFont : Boxed
    */
   void textExtents(string utf8, TextExtents extents)
   {
-    const(char)* _utf8 = utf8.toCString(false);
+    const(char)* _utf8 = utf8.toCString(No.Alloc);
     cairo_scaled_font_text_extents(cast(cairo_scaled_font_t*)cPtr, _utf8, &extents);
   }
 }

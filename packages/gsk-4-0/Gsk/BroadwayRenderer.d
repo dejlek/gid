@@ -9,9 +9,9 @@ import Gsk.c.types;
 class BroadwayRenderer : Renderer
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -37,6 +37,6 @@ class BroadwayRenderer : Renderer
   {
     GskRenderer* _cretval;
     _cretval = gsk_broadway_renderer_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

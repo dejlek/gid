@@ -174,7 +174,7 @@
 //# Change Variant to a class, set to glib:fundamental, and add ref and unref functions
 //!rename record[Variant] class
 //!set class[Variant][glib:fundamental] 1
-//!set class[Variant][glib:ref-func] g_variant_ref
+//!set class[Variant][glib:ref-func] g_variant_ref_sink
 //!set class[Variant][glib:unref-func] g_variant_unref
 
 //# Disable deprecated g_variant_parser_get_error_quark since it confuses the exception generator
@@ -289,7 +289,7 @@
     GMarkupParseContext* _cretval;
     GMarkupParseFlags _flags = cast(GMarkupParseFlags)cast(uint)flags;
     _cretval = g_markup_parse_context_new(&parser, _flags, null, null);
-    this(&_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
 //# g_option_group_new() has unnecessary closure and destroy notify, override the new() method
@@ -299,11 +299,11 @@
   this(string name, string description, string helpDescription)
   {
     GOptionGroup* _cretval;
-    const(char)* _name = name.toCString(false);
-    const(char)* _description = description.toCString(false);
-    const(char)* _helpDescription = helpDescription.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _helpDescription = helpDescription.toCString(No.Alloc);
     _cretval = g_option_group_new(_name, _description, _helpDescription, null, null);
-    this(&_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
 //# Use a custom free function since g_thread_pool_free takes 3 arguments

@@ -77,9 +77,9 @@ class MessageDialog : Dialog
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -107,7 +107,7 @@ class MessageDialog : Dialog
   {
     GtkWidget* _cretval;
     _cretval = gtk_message_dialog_get_message_area(cast(GtkMessageDialog*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class MessageDialog : Dialog
    */
   void setMarkup(string str)
   {
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_message_dialog_set_markup(cast(GtkMessageDialog*)cPtr, _str);
   }
 }

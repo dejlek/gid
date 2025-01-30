@@ -43,9 +43,9 @@ class ColumnViewSorter : Sorter
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -88,7 +88,7 @@ class ColumnViewSorter : Sorter
   {
     GtkColumnViewColumn* _cretval;
     _cretval = gtk_column_view_sorter_get_nth_sort_column(cast(GtkColumnViewSorter*)cPtr, position, &sortOrder);
-    auto _retval = _cretval ? ObjectG.getDObject!ColumnViewColumn(cast(GtkColumnViewColumn*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ColumnViewColumn(cast(GtkColumnViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class ColumnViewSorter : Sorter
   {
     GtkColumnViewColumn* _cretval;
     _cretval = gtk_column_view_sorter_get_primary_sort_column(cast(GtkColumnViewSorter*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ColumnViewColumn(cast(GtkColumnViewColumn*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ColumnViewColumn(cast(GtkColumnViewColumn*)_cretval, No.Take);
     return _retval;
   }
 

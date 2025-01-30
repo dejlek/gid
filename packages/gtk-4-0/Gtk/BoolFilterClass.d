@@ -10,14 +10,14 @@ class BoolFilterClass
 {
   GtkBoolFilterClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.BoolFilterClass");
 
     cInstance = *cast(GtkBoolFilterClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

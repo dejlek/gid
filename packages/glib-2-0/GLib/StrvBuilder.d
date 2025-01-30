@@ -19,14 +19,14 @@ import Gid.gid;
 class StrvBuilder : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -48,7 +48,7 @@ class StrvBuilder : Boxed
   {
     GStrvBuilder* _cretval;
     _cretval = g_strv_builder_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -59,7 +59,7 @@ class StrvBuilder : Boxed
    */
   void add(string value)
   {
-    const(char)* _value = value.toCString(false);
+    const(char)* _value = value.toCString(No.Alloc);
     g_strv_builder_add(cast(GStrvBuilder*)cPtr, _value);
   }
 
@@ -73,7 +73,7 @@ class StrvBuilder : Boxed
   {
     char*[] _tmpvalue;
     foreach (s; value)
-      _tmpvalue ~= s.toCString(false);
+      _tmpvalue ~= s.toCString(No.Alloc);
     _tmpvalue ~= null;
     const(char*)* _value = _tmpvalue.ptr;
     g_strv_builder_addv(cast(GStrvBuilder*)cPtr, _value);
@@ -99,7 +99,7 @@ class StrvBuilder : Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -114,7 +114,7 @@ class StrvBuilder : Boxed
    */
   void take(string value)
   {
-    char* _value = value.toCString(true);
+    char* _value = value.toCString(Yes.Alloc);
     g_strv_builder_take(cast(GStrvBuilder*)cPtr, _value);
   }
 }

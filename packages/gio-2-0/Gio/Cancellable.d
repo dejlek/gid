@@ -19,9 +19,9 @@ import Gio.c.types;
 class Cancellable : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -47,7 +47,7 @@ class Cancellable : ObjectG
   {
     GCancellable* _cretval;
     _cretval = g_cancellable_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -59,7 +59,7 @@ class Cancellable : ObjectG
   {
     GCancellable* _cretval;
     _cretval = g_cancellable_get_current();
-    auto _retval = _cretval ? ObjectG.getDObject!Cancellable(cast(GCancellable*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Cancellable(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class Cancellable : ObjectG
   {
     GSource* _cretval;
     _cretval = g_cancellable_source_new(cast(GCancellable*)cPtr);
-    auto _retval = _cretval ? new Source(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

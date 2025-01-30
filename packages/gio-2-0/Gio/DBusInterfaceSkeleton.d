@@ -24,9 +24,9 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -56,9 +56,9 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
   bool export_(DBusConnection connection, string objectPath)
   {
     bool _retval;
-    const(char)* _objectPath = objectPath.toCString(false);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     GError *_err;
-    _retval = g_dbus_interface_skeleton_export(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(false) : null, _objectPath, &_err);
+    _retval = g_dbus_interface_skeleton_export(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _objectPath, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -87,7 +87,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_interface_skeleton_get_connection(cast(GDBusInterfaceSkeleton*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
   {
     GDBusInterfaceInfo* _cretval;
     _cretval = g_dbus_interface_skeleton_get_info(cast(GDBusInterfaceSkeleton*)cPtr);
-    auto _retval = _cretval ? new DBusInterfaceInfo(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
   {
     const(char)* _cretval;
     _cretval = g_dbus_interface_skeleton_get_object_path(cast(GDBusInterfaceSkeleton*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
   {
     VariantC* _cretval;
     _cretval = g_dbus_interface_skeleton_get_properties(cast(GDBusInterfaceSkeleton*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
   bool hasConnection(DBusConnection connection)
   {
     bool _retval;
-    _retval = g_dbus_interface_skeleton_has_connection(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(false) : null);
+    _retval = g_dbus_interface_skeleton_has_connection(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    */
   void unexportFromConnection(DBusConnection connection)
   {
-    g_dbus_interface_skeleton_unexport_from_connection(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(false) : null);
+    g_dbus_interface_skeleton_unexport_from_connection(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null);
   }
 
   /**

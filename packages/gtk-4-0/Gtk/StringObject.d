@@ -19,9 +19,9 @@ class StringObject : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -43,9 +43,9 @@ class StringObject : ObjectG
   this(string string_)
   {
     GtkStringObject* _cretval;
-    const(char)* _string_ = string_.toCString(false);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gtk_string_object_new(_string_);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -56,7 +56,7 @@ class StringObject : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_string_object_get_string(cast(GtkStringObject*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 }

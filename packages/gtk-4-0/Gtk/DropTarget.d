@@ -81,9 +81,9 @@ class DropTarget : EventController
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -110,7 +110,7 @@ class DropTarget : EventController
   {
     GtkDropTarget* _cretval;
     _cretval = gtk_drop_target_new(type, actions);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -134,7 +134,7 @@ class DropTarget : EventController
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_target_get_current_drop(cast(GtkDropTarget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class DropTarget : EventController
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_target_get_drop(cast(GtkDropTarget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class DropTarget : EventController
   {
     GdkContentFormats* _cretval;
     _cretval = gtk_drop_target_get_formats(cast(GtkDropTarget*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class DropTarget : EventController
   {
     const(GValue)* _cretval;
     _cretval = gtk_drop_target_get_value(cast(GtkDropTarget*)cPtr);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

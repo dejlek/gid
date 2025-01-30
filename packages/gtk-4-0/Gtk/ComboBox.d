@@ -77,9 +77,9 @@ import Gtk.c.types;
 class ComboBox : Widget, CellEditable, CellLayout
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -105,7 +105,7 @@ class ComboBox : Widget, CellEditable, CellLayout
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -121,7 +121,7 @@ class ComboBox : Widget, CellEditable, CellLayout
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_entry();
-    auto _retval = _cretval ? ObjectG.getDObject!ComboBox(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ComboBox(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,8 +136,8 @@ class ComboBox : Widget, CellEditable, CellLayout
   static ComboBox newWithModel(TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!ComboBox(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!ComboBox(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -153,8 +153,8 @@ class ComboBox : Widget, CellEditable, CellLayout
   static ComboBox newWithModelAndEntry(TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!ComboBox(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!ComboBox(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class ComboBox : Widget, CellEditable, CellLayout
   {
     const(char)* _cretval;
     _cretval = gtk_combo_box_get_active_id(cast(GtkComboBox*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class ComboBox : Widget, CellEditable, CellLayout
     bool _retval;
     GtkTreeIter _iter;
     _retval = gtk_combo_box_get_active_iter(cast(GtkComboBox*)cPtr, &_iter);
-    iter = new TreeIter(cast(void*)&_iter, false);
+    iter = new TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class ComboBox : Widget, CellEditable, CellLayout
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_get_child(cast(GtkComboBox*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class ComboBox : Widget, CellEditable, CellLayout
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_combo_box_get_model(cast(GtkComboBox*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    */
   void popupForDevice(Device device)
   {
-    gtk_combo_box_popup_for_device(cast(GtkComboBox*)cPtr, device ? cast(GdkDevice*)device.cPtr(false) : null);
+    gtk_combo_box_popup_for_device(cast(GtkComboBox*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
   }
 
   /**
@@ -392,7 +392,7 @@ class ComboBox : Widget, CellEditable, CellLayout
   bool setActiveId(string activeId)
   {
     bool _retval;
-    const(char)* _activeId = activeId.toCString(false);
+    const(char)* _activeId = activeId.toCString(No.Alloc);
     _retval = gtk_combo_box_set_active_id(cast(GtkComboBox*)cPtr, _activeId);
     return _retval;
   }
@@ -407,7 +407,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    */
   void setActiveIter(TreeIter iter)
   {
-    gtk_combo_box_set_active_iter(cast(GtkComboBox*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(false) : null);
+    gtk_combo_box_set_active_iter(cast(GtkComboBox*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -432,7 +432,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    */
   void setChild(Widget child)
   {
-    gtk_combo_box_set_child(cast(GtkComboBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_combo_box_set_child(cast(GtkComboBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -484,7 +484,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    */
   void setModel(TreeModel model)
   {
-    gtk_combo_box_set_model(cast(GtkComboBox*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_combo_box_set_model(cast(GtkComboBox*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -517,7 +517,7 @@ class ComboBox : Widget, CellEditable, CellLayout
     {
       auto _dlg = cast(TreeViewRowSeparatorFunc*)data;
 
-      bool _retval = (*_dlg)(model ? ObjectG.getDObject!TreeModel(cast(void*)model, false) : null, iter ? new TreeIter(cast(void*)iter, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
 

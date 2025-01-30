@@ -28,9 +28,9 @@ class BoxLayout : LayoutManager, Orientable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -55,7 +55,7 @@ class BoxLayout : LayoutManager, Orientable
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_box_layout_new(orientation);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

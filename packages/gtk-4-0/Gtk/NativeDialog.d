@@ -31,9 +31,9 @@ class NativeDialog : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -82,7 +82,7 @@ class NativeDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_native_dialog_get_title(cast(GtkNativeDialog*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class NativeDialog : ObjectG
   {
     GtkWindow* _cretval;
     _cretval = gtk_native_dialog_get_transient_for(cast(GtkNativeDialog*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class NativeDialog : ObjectG
    */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(false);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_native_dialog_set_title(cast(GtkNativeDialog*)cPtr, _title);
   }
 
@@ -159,7 +159,7 @@ class NativeDialog : ObjectG
    */
   void setTransientFor(Window parent)
   {
-    gtk_native_dialog_set_transient_for(cast(GtkNativeDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(false) : null);
+    gtk_native_dialog_set_transient_for(cast(GtkNativeDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }
 
   /**

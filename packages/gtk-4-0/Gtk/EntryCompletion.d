@@ -54,9 +54,9 @@ import Gtk.c.types;
 class EntryCompletion : ObjectG, Buildable, CellLayout
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -82,7 +82,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
   {
     GtkEntryCompletion* _cretval;
     _cretval = gtk_entry_completion_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -99,8 +99,8 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
   static EntryCompletion newWithArea(CellArea area)
   {
     GtkEntryCompletion* _cretval;
-    _cretval = gtk_entry_completion_new_with_area(area ? cast(GtkCellArea*)area.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!EntryCompletion(cast(GtkEntryCompletion*)_cretval, true) : null;
+    _cretval = gtk_entry_completion_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!EntryCompletion(cast(GtkEntryCompletion*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,9 +132,9 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
   string computePrefix(string key)
   {
     char* _cretval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = gtk_entry_completion_compute_prefix(cast(GtkEntryCompletion*)cPtr, _key);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
   {
     const(char)* _cretval;
     _cretval = gtk_entry_completion_get_completion_prefix(cast(GtkEntryCompletion*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
   {
     GtkWidget* _cretval;
     _cretval = gtk_entry_completion_get_entry(cast(GtkEntryCompletion*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_entry_completion_get_model(cast(GtkEntryCompletion*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -328,9 +328,9 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
     extern(C) bool _funcCallback(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData)
     {
       auto _dlg = cast(EntryCompletionMatchFunc*)userData;
-      string _key = key.fromCString(false);
+      string _key = key.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(completion ? ObjectG.getDObject!EntryCompletion(cast(void*)completion, false) : null, _key, iter ? new TreeIter(cast(void*)iter, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!EntryCompletion(cast(void*)completion, No.Take), _key, iter ? new TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
 
@@ -366,7 +366,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    */
   void setModel(TreeModel model)
   {
-    gtk_entry_completion_set_model(cast(GtkEntryCompletion*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_entry_completion_set_model(cast(GtkEntryCompletion*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**

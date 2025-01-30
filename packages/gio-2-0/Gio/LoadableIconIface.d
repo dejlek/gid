@@ -13,14 +13,14 @@ class LoadableIconIface
 {
   GLoadableIconIface cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.LoadableIconIface");
 
     cInstance = *cast(GLoadableIconIface*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

@@ -25,14 +25,14 @@ import Gsk.c.types;
 class PathPoint : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -56,7 +56,7 @@ class PathPoint : Boxed
   int compare(PathPoint point2)
   {
     int _retval;
-    _retval = gsk_path_point_compare(cast(GskPathPoint*)cPtr, point2 ? cast(GskPathPoint*)point2.cPtr(false) : null);
+    _retval = gsk_path_point_compare(cast(GskPathPoint*)cPtr, point2 ? cast(GskPathPoint*)point2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -64,7 +64,7 @@ class PathPoint : Boxed
   {
     GskPathPoint* _cretval;
     _cretval = gsk_path_point_copy(cast(GskPathPoint*)cPtr);
-    auto _retval = _cretval ? new PathPoint(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new PathPoint(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class PathPoint : Boxed
   bool equal(PathPoint point2)
   {
     bool _retval;
-    _retval = gsk_path_point_equal(cast(GskPathPoint*)cPtr, point2 ? cast(GskPathPoint*)point2.cPtr(false) : null);
+    _retval = gsk_path_point_equal(cast(GskPathPoint*)cPtr, point2 ? cast(GskPathPoint*)point2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -114,8 +114,8 @@ class PathPoint : Boxed
   {
     float _retval;
     graphene_point_t _center;
-    _retval = gsk_path_point_get_curvature(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(false) : null, direction, &_center);
-    center = new Point(cast(void*)&_center, false);
+    _retval = gsk_path_point_get_curvature(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, direction, &_center);
+    center = new Point(cast(void*)&_center, No.Take);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class PathPoint : Boxed
   float getDistance(PathMeasure measure)
   {
     float _retval;
-    _retval = gsk_path_point_get_distance(cast(GskPathPoint*)cPtr, measure ? cast(GskPathMeasure*)measure.cPtr(false) : null);
+    _retval = gsk_path_point_get_distance(cast(GskPathPoint*)cPtr, measure ? cast(GskPathMeasure*)measure.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -143,8 +143,8 @@ class PathPoint : Boxed
   void getPosition(Path path, out Point position)
   {
     graphene_point_t _position;
-    gsk_path_point_get_position(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(false) : null, &_position);
-    position = new Point(cast(void*)&_position, false);
+    gsk_path_point_get_position(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, &_position);
+    position = new Point(cast(void*)&_position, No.Take);
   }
 
   /**
@@ -161,7 +161,7 @@ class PathPoint : Boxed
   float getRotation(Path path, PathDirection direction)
   {
     float _retval;
-    _retval = gsk_path_point_get_rotation(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(false) : null, direction);
+    _retval = gsk_path_point_get_rotation(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, direction);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class PathPoint : Boxed
   void getTangent(Path path, PathDirection direction, out Vec2 tangent)
   {
     graphene_vec2_t _tangent;
-    gsk_path_point_get_tangent(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(false) : null, direction, &_tangent);
-    tangent = new Vec2(cast(void*)&_tangent, false);
+    gsk_path_point_get_tangent(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, direction, &_tangent);
+    tangent = new Vec2(cast(void*)&_tangent, No.Take);
   }
 }

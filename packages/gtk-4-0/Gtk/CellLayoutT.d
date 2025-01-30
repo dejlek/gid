@@ -124,8 +124,8 @@ template CellLayoutT()
    */
   override void addAttribute(CellRenderer cell, string attribute, int column)
   {
-    const(char)* _attribute = attribute.toCString(false);
-    gtk_cell_layout_add_attribute(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(false) : null, _attribute, column);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    gtk_cell_layout_add_attribute(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, _attribute, column);
   }
 
   /**
@@ -145,7 +145,7 @@ template CellLayoutT()
    */
   override void clearAttributes(CellRenderer cell)
   {
-    gtk_cell_layout_clear_attributes(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(false) : null);
+    gtk_cell_layout_clear_attributes(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null);
   }
 
   /**
@@ -158,7 +158,7 @@ template CellLayoutT()
   {
     GtkCellArea* _cretval;
     _cretval = gtk_cell_layout_get_area(cast(GtkCellLayout*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!CellArea(cast(GtkCellArea*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!CellArea(cast(GtkCellArea*)_cretval, No.Take);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ template CellLayoutT()
    */
   override void packEnd(CellRenderer cell, bool expand)
   {
-    gtk_cell_layout_pack_end(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(false) : null, expand);
+    gtk_cell_layout_pack_end(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, expand);
   }
 
   /**
@@ -201,7 +201,7 @@ template CellLayoutT()
    */
   override void packStart(CellRenderer cell, bool expand)
   {
-    gtk_cell_layout_pack_start(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(false) : null, expand);
+    gtk_cell_layout_pack_start(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, expand);
   }
 
   /**
@@ -214,7 +214,7 @@ template CellLayoutT()
    */
   override void reorder(CellRenderer cell, int position)
   {
-    gtk_cell_layout_reorder(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(false) : null, position);
+    gtk_cell_layout_reorder(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -233,10 +233,10 @@ template CellLayoutT()
     {
       auto _dlg = cast(CellLayoutDataFunc*)data;
 
-      (*_dlg)(cellLayout ? ObjectG.getDObject!CellLayout(cast(void*)cellLayout, false) : null, cell ? ObjectG.getDObject!CellRenderer(cast(void*)cell, false) : null, treeModel ? ObjectG.getDObject!TreeModel(cast(void*)treeModel, false) : null, iter ? new TreeIter(cast(void*)iter, false) : null);
+      (*_dlg)(ObjectG.getDObject!CellLayout(cast(void*)cellLayout, No.Take), ObjectG.getDObject!CellRenderer(cast(void*)cell, No.Take), ObjectG.getDObject!TreeModel(cast(void*)treeModel, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
     }
 
     auto _func = freezeDelegate(cast(void*)&func);
-    gtk_cell_layout_set_cell_data_func(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(false) : null, &_funcCallback, _func, &thawDelegate);
+    gtk_cell_layout_set_cell_data_func(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
   }
 }

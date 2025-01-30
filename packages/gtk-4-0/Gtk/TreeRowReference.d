@@ -20,14 +20,14 @@ import Gtk.c.types;
 class TreeRowReference : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -54,8 +54,8 @@ class TreeRowReference : Boxed
   this(TreeModel model, TreePath path)
   {
     GtkTreeRowReference* _cretval;
-    _cretval = gtk_tree_row_reference_new(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(false) : null, path ? cast(GtkTreePath*)path.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gtk_tree_row_reference_new(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -88,8 +88,8 @@ class TreeRowReference : Boxed
   static TreeRowReference newProxy(ObjectG proxy, TreeModel model, TreePath path)
   {
     GtkTreeRowReference* _cretval;
-    _cretval = gtk_tree_row_reference_new_proxy(proxy ? cast(ObjectC*)proxy.cPtr(false) : null, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(false) : null, path ? cast(GtkTreePath*)path.cPtr(false) : null);
-    auto _retval = _cretval ? new TreeRowReference(cast(void*)_cretval, true) : null;
+    _cretval = gtk_tree_row_reference_new_proxy(proxy ? cast(ObjectC*)proxy.cPtr(No.Dup) : null, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new TreeRowReference(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class TreeRowReference : Boxed
   {
     GtkTreeRowReference* _cretval;
     _cretval = gtk_tree_row_reference_copy(cast(GtkTreeRowReference*)cPtr);
-    auto _retval = _cretval ? new TreeRowReference(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TreeRowReference(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class TreeRowReference : Boxed
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_row_reference_get_model(cast(GtkTreeRowReference*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class TreeRowReference : Boxed
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_row_reference_get_path(cast(GtkTreeRowReference*)cPtr);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class TreeRowReference : Boxed
    */
   static void deleted(ObjectG proxy, TreePath path)
   {
-    gtk_tree_row_reference_deleted(proxy ? cast(ObjectC*)proxy.cPtr(false) : null, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    gtk_tree_row_reference_deleted(proxy ? cast(ObjectC*)proxy.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -165,6 +165,6 @@ class TreeRowReference : Boxed
    */
   static void inserted(ObjectG proxy, TreePath path)
   {
-    gtk_tree_row_reference_inserted(proxy ? cast(ObjectC*)proxy.cPtr(false) : null, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    gtk_tree_row_reference_inserted(proxy ? cast(ObjectC*)proxy.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 }

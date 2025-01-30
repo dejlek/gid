@@ -52,9 +52,9 @@ class Layout : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -77,8 +77,8 @@ class Layout : ObjectG
   this(Context context)
   {
     PangoLayout* _cretval;
-    _cretval = pango_layout_new(context ? cast(PangoContext*)context.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = pango_layout_new(context ? cast(PangoContext*)context.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -102,7 +102,7 @@ class Layout : ObjectG
   {
     PangoLayout* _cretval;
     _cretval = pango_layout_copy(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class Layout : ObjectG
   {
     PangoAttrList* _cretval;
     _cretval = pango_layout_get_attributes(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class Layout : ObjectG
   {
     PangoContext* _cretval;
     _cretval = pango_layout_get_context(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Context(cast(PangoContext*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class Layout : ObjectG
   {
     const(PangoFontDescription)* _cretval;
     _cretval = pango_layout_get_font_description(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class Layout : ObjectG
   {
     PangoLayoutIter* _cretval;
     _cretval = pango_layout_get_iter(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new LayoutIter(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new LayoutIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -373,7 +373,7 @@ class Layout : ObjectG
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_get_line(cast(PangoLayout*)cPtr, line);
-    auto _retval = _cretval ? new LayoutLine(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -405,7 +405,7 @@ class Layout : ObjectG
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_get_line_readonly(cast(PangoLayout*)cPtr, line);
-    auto _retval = _cretval ? new LayoutLine(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -602,7 +602,7 @@ class Layout : ObjectG
   {
     PangoTabArray* _cretval;
     _cretval = pango_layout_get_tabs(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -615,7 +615,7 @@ class Layout : ObjectG
   {
     const(char)* _cretval;
     _cretval = pango_layout_get_text(cast(PangoLayout*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -784,7 +784,7 @@ class Layout : ObjectG
    */
   void setAttributes(AttrList attrs)
   {
-    pango_layout_set_attributes(cast(PangoLayout*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(false) : null);
+    pango_layout_set_attributes(cast(PangoLayout*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -840,7 +840,7 @@ class Layout : ObjectG
    */
   void setFontDescription(FontDescription desc)
   {
-    pango_layout_set_font_description(cast(PangoLayout*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(false) : null);
+    pango_layout_set_font_description(cast(PangoLayout*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null);
   }
 
   /**
@@ -957,7 +957,7 @@ class Layout : ObjectG
    */
   void setMarkup(string markup, int length)
   {
-    const(char)* _markup = markup.toCString(false);
+    const(char)* _markup = markup.toCString(No.Alloc);
     pango_layout_set_markup(cast(PangoLayout*)cPtr, _markup, length);
   }
 
@@ -982,7 +982,7 @@ class Layout : ObjectG
    */
   void setMarkupWithAccel(string markup, int length, dchar accelMarker, out dchar accelChar)
   {
-    const(char)* _markup = markup.toCString(false);
+    const(char)* _markup = markup.toCString(No.Alloc);
     pango_layout_set_markup_with_accel(cast(PangoLayout*)cPtr, _markup, length, accelMarker, cast(dchar*)&accelChar);
   }
 
@@ -1037,7 +1037,7 @@ class Layout : ObjectG
    */
   void setTabs(TabArray tabs)
   {
-    pango_layout_set_tabs(cast(PangoLayout*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(false) : null);
+    pango_layout_set_tabs(cast(PangoLayout*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1104,7 +1104,7 @@ class Layout : ObjectG
   bool writeToFile(LayoutSerializeFlags flags, string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = pango_layout_write_to_file(cast(PangoLayout*)cPtr, flags, _filename, &_err);
     if (_err)

@@ -23,9 +23,9 @@ class MultiSelection : ObjectG, ListModel, SectionModel, SelectionModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -51,8 +51,8 @@ class MultiSelection : ObjectG, ListModel, SectionModel, SelectionModel
   this(ListModel model)
   {
     GtkMultiSelection* _cretval;
-    _cretval = gtk_multi_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(true) : null);
-    this(_cretval, true);
+    _cretval = gtk_multi_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -63,7 +63,7 @@ class MultiSelection : ObjectG, ListModel, SectionModel, SelectionModel
   {
     GListModel* _cretval;
     _cretval = gtk_multi_selection_get_model(cast(GtkMultiSelection*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -75,6 +75,6 @@ class MultiSelection : ObjectG, ListModel, SectionModel, SelectionModel
    */
   void setModel(ListModel model)
   {
-    gtk_multi_selection_set_model(cast(GtkMultiSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_multi_selection_set_model(cast(GtkMultiSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 }

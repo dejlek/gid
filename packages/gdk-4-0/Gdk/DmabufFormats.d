@@ -26,14 +26,14 @@ import Gid.gid;
 class DmabufFormats : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -71,7 +71,7 @@ class DmabufFormats : Boxed
   bool equal(DmabufFormats formats2)
   {
     bool _retval;
-    _retval = gdk_dmabuf_formats_equal(cast(GdkDmabufFormats*)cPtr, formats2 ? cast(GdkDmabufFormats*)formats2.cPtr(false) : null);
+    _retval = gdk_dmabuf_formats_equal(cast(GdkDmabufFormats*)cPtr, formats2 ? cast(GdkDmabufFormats*)formats2.cPtr(No.Dup) : null);
     return _retval;
   }
 

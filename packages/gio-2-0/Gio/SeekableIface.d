@@ -13,14 +13,14 @@ class SeekableIface
 {
   GSeekableIface cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.SeekableIface");
 
     cInstance = *cast(GSeekableIface*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

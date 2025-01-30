@@ -31,9 +31,9 @@ import Gio.c.types;
 class MountOperation : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -54,7 +54,7 @@ class MountOperation : ObjectG
   {
     GMountOperation* _cretval;
     _cretval = g_mount_operation_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -89,7 +89,7 @@ class MountOperation : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_domain(cast(GMountOperation*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class MountOperation : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_password(cast(GMountOperation*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class MountOperation : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_username(cast(GMountOperation*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class MountOperation : ObjectG
    */
   void setDomain(string domain)
   {
-    const(char)* _domain = domain.toCString(false);
+    const(char)* _domain = domain.toCString(No.Alloc);
     g_mount_operation_set_domain(cast(GMountOperation*)cPtr, _domain);
   }
 
@@ -232,7 +232,7 @@ class MountOperation : ObjectG
    */
   void setPassword(string password)
   {
-    const(char)* _password = password.toCString(false);
+    const(char)* _password = password.toCString(No.Alloc);
     g_mount_operation_set_password(cast(GMountOperation*)cPtr, _password);
   }
 
@@ -263,7 +263,7 @@ class MountOperation : ObjectG
    */
   void setUsername(string username)
   {
-    const(char)* _username = username.toCString(false);
+    const(char)* _username = username.toCString(No.Alloc);
     g_mount_operation_set_username(cast(GMountOperation*)cPtr, _username);
   }
 
@@ -371,7 +371,7 @@ class MountOperation : ObjectG
         for (; choices[_lenchoices] !is null; _lenchoices++)
         break;
       foreach (i; 0 .. _lenchoices)
-        _choices ~= choices[i].fromCString(false);
+        _choices ~= choices[i].fromCString(No.Free);
       _dgClosure.dlg(message, _choices, mountOperation);
     }
 

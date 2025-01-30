@@ -42,9 +42,9 @@ class Clipboard : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -68,7 +68,7 @@ class Clipboard : ObjectG
   {
     GdkContentProvider* _cretval;
     _cretval = gdk_clipboard_get_content(cast(GdkClipboard*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class Clipboard : ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_clipboard_get_display(cast(GdkClipboard*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class Clipboard : ObjectG
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_clipboard_get_formats(cast(GdkClipboard*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -131,17 +131,17 @@ class Clipboard : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     char*[] _tmpmimeTypes;
     foreach (s; mimeTypes)
-      _tmpmimeTypes ~= s.toCString(false);
+      _tmpmimeTypes ~= s.toCString(No.Alloc);
     _tmpmimeTypes ~= null;
     const(char*)* _mimeTypes = _tmpmimeTypes.ptr;
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_clipboard_read_async(cast(GdkClipboard*)cPtr, _mimeTypes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gdk_clipboard_read_async(cast(GdkClipboard*)cPtr, _mimeTypes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -158,11 +158,11 @@ class Clipboard : ObjectG
     GInputStream* _cretval;
     char* _outMimeType;
     GError *_err;
-    _cretval = gdk_clipboard_read_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_outMimeType, &_err);
+    _cretval = gdk_clipboard_read_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_outMimeType, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, true) : null;
-    outMimeType = _outMimeType.fromCString(false);
+    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
+    outMimeType = _outMimeType.fromCString(No.Free);
     return _retval;
   }
 
@@ -184,11 +184,11 @@ class Clipboard : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_clipboard_read_text_async(cast(GdkClipboard*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gdk_clipboard_read_text_async(cast(GdkClipboard*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -202,10 +202,10 @@ class Clipboard : ObjectG
   {
     char* _cretval;
     GError *_err;
-    _cretval = gdk_clipboard_read_text_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = gdk_clipboard_read_text_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -227,11 +227,11 @@ class Clipboard : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_clipboard_read_texture_async(cast(GdkClipboard*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gdk_clipboard_read_texture_async(cast(GdkClipboard*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -245,10 +245,10 @@ class Clipboard : ObjectG
   {
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = gdk_clipboard_read_texture_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = gdk_clipboard_read_texture_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -273,11 +273,11 @@ class Clipboard : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_clipboard_read_value_async(cast(GdkClipboard*)cPtr, type, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gdk_clipboard_read_value_async(cast(GdkClipboard*)cPtr, type, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -291,10 +291,10 @@ class Clipboard : ObjectG
   {
     const(GValue)* _cretval;
     GError *_err;
-    _cretval = gdk_clipboard_read_value_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = gdk_clipboard_read_value_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class Clipboard : ObjectG
   bool setContent(ContentProvider provider)
   {
     bool _retval;
-    _retval = gdk_clipboard_set_content(cast(GdkClipboard*)cPtr, provider ? cast(GdkContentProvider*)provider.cPtr(false) : null);
+    _retval = gdk_clipboard_set_content(cast(GdkClipboard*)cPtr, provider ? cast(GdkContentProvider*)provider.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class Clipboard : ObjectG
    */
   void set(Value value)
   {
-    gdk_clipboard_set_value(cast(GdkClipboard*)cPtr, value ? cast(GValue*)value.cPtr(false) : null);
+    gdk_clipboard_set_value(cast(GdkClipboard*)cPtr, value ? cast(GValue*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -353,11 +353,11 @@ class Clipboard : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_clipboard_store_async(cast(GdkClipboard*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gdk_clipboard_store_async(cast(GdkClipboard*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -371,7 +371,7 @@ class Clipboard : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_clipboard_store_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = gdk_clipboard_store_finish(cast(GdkClipboard*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

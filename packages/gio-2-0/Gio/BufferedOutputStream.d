@@ -29,9 +29,9 @@ class BufferedOutputStream : FilterOutputStream, Seekable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -55,8 +55,8 @@ class BufferedOutputStream : FilterOutputStream, Seekable
   this(OutputStream baseStream)
   {
     GOutputStream* _cretval;
-    _cretval = g_buffered_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = g_buffered_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -69,8 +69,8 @@ class BufferedOutputStream : FilterOutputStream, Seekable
   static BufferedOutputStream newSized(OutputStream baseStream, size_t size)
   {
     GOutputStream* _cretval;
-    _cretval = g_buffered_output_stream_new_sized(baseStream ? cast(GOutputStream*)baseStream.cPtr(false) : null, size);
-    auto _retval = _cretval ? ObjectG.getDObject!BufferedOutputStream(cast(GOutputStream*)_cretval, true) : null;
+    _cretval = g_buffered_output_stream_new_sized(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null, size);
+    auto _retval = ObjectG.getDObject!BufferedOutputStream(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 

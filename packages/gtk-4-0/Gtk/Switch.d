@@ -43,9 +43,9 @@ import Gtk.c.types;
 class Switch : Widget, Actionable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -68,7 +68,7 @@ class Switch : Widget, Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_switch_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**

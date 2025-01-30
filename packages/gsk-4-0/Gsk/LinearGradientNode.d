@@ -15,12 +15,12 @@ import Gsk.c.types;
 class LinearGradientNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.LinearGradientNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -47,8 +47,8 @@ class LinearGradientNode : RenderNode
     foreach (obj; colorStops)
       _tmpcolorStops ~= obj.cInstance;
     const(GskColorStop)* _colorStops = _tmpcolorStops.ptr;
-    _cretval = gsk_linear_gradient_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(false) : null, start ? cast(graphene_point_t*)start.cPtr(false) : null, end ? cast(graphene_point_t*)end.cPtr(false) : null, _colorStops, _nColorStops);
-    this(_cretval, true);
+    _cretval = gsk_linear_gradient_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, start ? cast(graphene_point_t*)start.cPtr(No.Dup) : null, end ? cast(graphene_point_t*)end.cPtr(No.Dup) : null, _colorStops, _nColorStops);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -66,7 +66,7 @@ class LinearGradientNode : RenderNode
     {
       _retval = new ColorStop[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new ColorStop(cast(void*)&_cretval[i], false);
+        _retval[i] = new ColorStop(cast(void*)&_cretval[i], No.Take);
     }
     return _retval;
   }
@@ -79,7 +79,7 @@ class LinearGradientNode : RenderNode
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_linear_gradient_node_get_end(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class LinearGradientNode : RenderNode
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_linear_gradient_node_get_start(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

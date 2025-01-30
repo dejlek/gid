@@ -58,9 +58,9 @@ class PadController : EventController
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -93,8 +93,8 @@ class PadController : EventController
   this(ActionGroup group, Device pad)
   {
     GtkPadController* _cretval;
-    _cretval = gtk_pad_controller_new(group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(false) : null, pad ? cast(GdkDevice*)pad.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gtk_pad_controller_new(group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null, pad ? cast(GdkDevice*)pad.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -115,8 +115,8 @@ class PadController : EventController
    */
   void setAction(PadActionType type, int index, int mode, string label, string actionName)
   {
-    const(char)* _label = label.toCString(false);
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     gtk_pad_controller_set_action(cast(GtkPadController*)cPtr, type, index, mode, _label, _actionName);
   }
 

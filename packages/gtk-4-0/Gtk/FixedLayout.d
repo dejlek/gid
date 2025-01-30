@@ -36,9 +36,9 @@ import Gtk.c.types;
 class FixedLayout : LayoutManager
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -59,6 +59,6 @@ class FixedLayout : LayoutManager
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_fixed_layout_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

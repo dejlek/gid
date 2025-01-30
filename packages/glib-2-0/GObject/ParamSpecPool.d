@@ -17,14 +17,14 @@ class ParamSpecPool
   GParamSpecPool* cInstancePtr;
   bool owned;
 
-  this(void* ptr, bool owned = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.ParamSpecPool");
 
     cInstancePtr = cast(GParamSpecPool*)ptr;
 
-    this.owned = owned;
+    owned = take;
   }
 
   void* cPtr()
@@ -40,7 +40,7 @@ class ParamSpecPool
    */
   void insert(ParamSpec pspec, GType ownerType)
   {
-    g_param_spec_pool_insert(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(false) : null, ownerType);
+    g_param_spec_pool_insert(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, ownerType);
   }
 
   /**
@@ -63,7 +63,7 @@ class ParamSpecPool
     {
       _retval = new ParamSpec[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new ParamSpec(cast(void*)_cretval[i], false);
+        _retval[i] = new ParamSpec(cast(void*)_cretval[i], No.Take);
     }
     return _retval;
   }
@@ -98,9 +98,9 @@ class ParamSpecPool
   ParamSpec lookup(string paramName, GType ownerType, bool walkAncestors)
   {
     GParamSpec* _cretval;
-    const(char)* _paramName = paramName.toCString(false);
+    const(char)* _paramName = paramName.toCString(No.Alloc);
     _cretval = g_param_spec_pool_lookup(cast(GParamSpecPool*)cPtr, _paramName, ownerType, walkAncestors);
-    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, false) : null;
+    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class ParamSpecPool
    */
   void remove(ParamSpec pspec)
   {
-    g_param_spec_pool_remove(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(false) : null);
+    g_param_spec_pool_remove(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
   }
 
   /**
@@ -128,6 +128,6 @@ class ParamSpecPool
   {
     GParamSpecPool* _cretval;
     _cretval = g_param_spec_pool_new(typePrefixing);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

@@ -14,14 +14,14 @@ class InitableIface
 {
   GInitableIface cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.InitableIface");
 
     cInstance = *cast(GInitableIface*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

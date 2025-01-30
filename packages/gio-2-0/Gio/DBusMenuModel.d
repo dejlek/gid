@@ -20,9 +20,9 @@ class DBusMenuModel : MenuModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -54,10 +54,10 @@ class DBusMenuModel : MenuModel
   static DBusMenuModel get(DBusConnection connection, string busName, string objectPath)
   {
     GDBusMenuModel* _cretval;
-    const(char)* _busName = busName.toCString(false);
-    const(char)* _objectPath = objectPath.toCString(false);
-    _cretval = g_dbus_menu_model_get(connection ? cast(GDBusConnection*)connection.cPtr(false) : null, _busName, _objectPath);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusMenuModel(cast(GDBusMenuModel*)_cretval, true) : null;
+    const(char)* _busName = busName.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    _cretval = g_dbus_menu_model_get(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _busName, _objectPath);
+    auto _retval = ObjectG.getDObject!DBusMenuModel(cast(GDBusMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 }

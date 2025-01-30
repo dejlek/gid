@@ -28,9 +28,9 @@ class FilterListModel : ObjectG, ListModel, SectionModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -57,8 +57,8 @@ class FilterListModel : ObjectG, ListModel, SectionModel
   this(ListModel model, Filter filter)
   {
     GtkFilterListModel* _cretval;
-    _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(true) : null, filter ? cast(GtkFilter*)filter.cPtr(true) : null);
-    this(_cretval, true);
+    _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -69,7 +69,7 @@ class FilterListModel : ObjectG, ListModel, SectionModel
   {
     GtkFilter* _cretval;
     _cretval = gtk_filter_list_model_get_filter(cast(GtkFilterListModel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Filter(cast(GtkFilter*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Filter(cast(GtkFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class FilterListModel : ObjectG, ListModel, SectionModel
   {
     GListModel* _cretval;
     _cretval = gtk_filter_list_model_get_model(cast(GtkFilterListModel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class FilterListModel : ObjectG, ListModel, SectionModel
    */
   void setFilter(Filter filter)
   {
-    gtk_filter_list_model_set_filter(cast(GtkFilterListModel*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(false) : null);
+    gtk_filter_list_model_set_filter(cast(GtkFilterListModel*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -162,6 +162,6 @@ class FilterListModel : ObjectG, ListModel, SectionModel
    */
   void setModel(ListModel model)
   {
-    gtk_filter_list_model_set_model(cast(GtkFilterListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_filter_list_model_set_model(cast(GtkFilterListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 }

@@ -24,9 +24,9 @@ class InetAddress : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,7 +52,7 @@ class InetAddress : ObjectG
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_new_any(family);
-    auto _retval = _cretval ? ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class InetAddress : ObjectG
     GInetAddress* _cretval;
     auto _bytes = cast(const(ubyte)*)(bytes ~ ubyte.init).ptr;
     _cretval = g_inet_address_new_from_bytes(_bytes, family);
-    auto _retval = _cretval ? ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -86,9 +86,9 @@ class InetAddress : ObjectG
   static InetAddress newFromString(string string_)
   {
     GInetAddress* _cretval;
-    const(char)* _string_ = string_.toCString(false);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = g_inet_address_new_from_string(_string_);
-    auto _retval = _cretval ? ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class InetAddress : ObjectG
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_new_loopback(family);
-    auto _retval = _cretval ? ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class InetAddress : ObjectG
   bool equal(InetAddress otherAddress)
   {
     bool _retval;
-    _retval = g_inet_address_equal(cast(GInetAddress*)cPtr, otherAddress ? cast(GInetAddress*)otherAddress.cPtr(false) : null);
+    _retval = g_inet_address_equal(cast(GInetAddress*)cPtr, otherAddress ? cast(GInetAddress*)otherAddress.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -269,7 +269,7 @@ class InetAddress : ObjectG
   {
     char* _cretval;
     _cretval = g_inet_address_to_string(cast(GInetAddress*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 }

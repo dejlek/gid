@@ -10,14 +10,14 @@ class IOStreamClass
 {
   GIOStreamClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.IOStreamClass");
 
     cInstance = *cast(GIOStreamClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

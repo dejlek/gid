@@ -12,11 +12,11 @@ import Gid.gid;
 class ProximityEvent : Event
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.ProximityEvent");
 
-    super(cast(GdkEvent*)ptr, ownedRef);
+    super(cast(GdkEvent*)ptr, take);
   }
 }

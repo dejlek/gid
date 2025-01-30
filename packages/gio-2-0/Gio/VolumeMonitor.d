@@ -31,9 +31,9 @@ class VolumeMonitor : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -84,8 +84,8 @@ class VolumeMonitor : ObjectG
   static Volume adoptOrphanMount(Mount mount)
   {
     GVolume* _cretval;
-    _cretval = g_volume_monitor_adopt_orphan_mount(mount ? cast(GMount*)(cast(ObjectG)mount).cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Volume(cast(GVolume*)_cretval, true) : null;
+    _cretval = g_volume_monitor_adopt_orphan_mount(mount ? cast(GMount*)(cast(ObjectG)mount).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Volume(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class VolumeMonitor : ObjectG
   {
     GVolumeMonitor* _cretval;
     _cretval = g_volume_monitor_get();
-    auto _retval = _cretval ? ObjectG.getDObject!VolumeMonitor(cast(GVolumeMonitor*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!VolumeMonitor(cast(GVolumeMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -126,9 +126,9 @@ class VolumeMonitor : ObjectG
   Mount getMountForUuid(string uuid)
   {
     GMount* _cretval;
-    const(char)* _uuid = uuid.toCString(false);
+    const(char)* _uuid = uuid.toCString(No.Alloc);
     _cretval = g_volume_monitor_get_mount_for_uuid(cast(GVolumeMonitor*)cPtr, _uuid);
-    auto _retval = _cretval ? ObjectG.getDObject!Mount(cast(GMount*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Mount(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -156,9 +156,9 @@ class VolumeMonitor : ObjectG
   Volume getVolumeForUuid(string uuid)
   {
     GVolume* _cretval;
-    const(char)* _uuid = uuid.toCString(false);
+    const(char)* _uuid = uuid.toCString(No.Alloc);
     _cretval = g_volume_monitor_get_volume_for_uuid(cast(GVolumeMonitor*)cPtr, _uuid);
-    auto _retval = _cretval ? ObjectG.getDObject!Volume(cast(GVolume*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Volume(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 

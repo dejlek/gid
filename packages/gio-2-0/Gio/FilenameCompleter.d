@@ -15,9 +15,9 @@ import Gio.c.types;
 class FilenameCompleter : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -38,7 +38,7 @@ class FilenameCompleter : ObjectG
   {
     GFilenameCompleter* _cretval;
     _cretval = g_filename_completer_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -52,9 +52,9 @@ class FilenameCompleter : ObjectG
   string getCompletionSuffix(string initialText)
   {
     char* _cretval;
-    const(char)* _initialText = initialText.toCString(false);
+    const(char)* _initialText = initialText.toCString(No.Alloc);
     _cretval = g_filename_completer_get_completion_suffix(cast(GFilenameCompleter*)cPtr, _initialText);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class FilenameCompleter : ObjectG
   string[] getCompletions(string initialText)
   {
     char** _cretval;
-    const(char)* _initialText = initialText.toCString(false);
+    const(char)* _initialText = initialText.toCString(No.Alloc);
     _cretval = g_filename_completer_get_completions(cast(GFilenameCompleter*)cPtr, _initialText);
     string[] _retval;
 
@@ -79,7 +79,7 @@ class FilenameCompleter : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }

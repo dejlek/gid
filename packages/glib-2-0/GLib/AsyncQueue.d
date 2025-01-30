@@ -15,14 +15,14 @@ class AsyncQueue
   GAsyncQueue* cInstancePtr;
   bool owned;
 
-  this(void* ptr, bool owned = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.AsyncQueue");
 
     cInstancePtr = cast(GAsyncQueue*)ptr;
 
-    this.owned = owned;
+    owned = take;
   }
 
   ~this()

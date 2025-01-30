@@ -22,9 +22,9 @@ class Emblem : ObjectG, Icon
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -48,8 +48,8 @@ class Emblem : ObjectG, Icon
   this(Icon icon)
   {
     GEmblem* _cretval;
-    _cretval = g_emblem_new(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = g_emblem_new(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -62,8 +62,8 @@ class Emblem : ObjectG, Icon
   static Emblem newWithOrigin(Icon icon, EmblemOrigin origin)
   {
     GEmblem* _cretval;
-    _cretval = g_emblem_new_with_origin(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(false) : null, origin);
-    auto _retval = _cretval ? ObjectG.getDObject!Emblem(cast(GEmblem*)_cretval, true) : null;
+    _cretval = g_emblem_new_with_origin(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, origin);
+    auto _retval = ObjectG.getDObject!Emblem(cast(GEmblem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class Emblem : ObjectG, Icon
   {
     GIcon* _cretval;
     _cretval = g_emblem_get_icon(cast(GEmblem*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Icon(cast(GIcon*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 

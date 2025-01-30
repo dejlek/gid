@@ -9,9 +9,9 @@ import Gsk.c.types;
 class NglRenderer : Renderer
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -28,6 +28,6 @@ class NglRenderer : Renderer
   {
     GskRenderer* _cretval;
     _cretval = gsk_ngl_renderer_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

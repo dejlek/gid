@@ -22,9 +22,9 @@ class Fontset : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,7 +50,7 @@ class Fontset : ObjectG
     {
       auto _dlg = cast(FontsetForeachFunc*)userData;
 
-      bool _retval = (*_dlg)(fontset ? ObjectG.getDObject!Fontset(cast(void*)fontset, false) : null, font ? ObjectG.getDObject!Font(cast(void*)font, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!Fontset(cast(void*)fontset, No.Take), ObjectG.getDObject!Font(cast(void*)font, No.Take));
       return _retval;
     }
 
@@ -69,7 +69,7 @@ class Fontset : ObjectG
   {
     PangoFont* _cretval;
     _cretval = pango_fontset_get_font(cast(PangoFontset*)cPtr, wc);
-    auto _retval = _cretval ? ObjectG.getDObject!Font(cast(PangoFont*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Font(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class Fontset : ObjectG
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_fontset_get_metrics(cast(PangoFontset*)cPtr);
-    auto _retval = _cretval ? new FontMetrics(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FontMetrics(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

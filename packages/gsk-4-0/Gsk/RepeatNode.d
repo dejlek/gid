@@ -13,12 +13,12 @@ import Gsk.c.types;
 class RepeatNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.RepeatNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -34,8 +34,8 @@ class RepeatNode : RenderNode
   this(Rect bounds, RenderNode child, Rect childBounds)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_repeat_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(false) : null, child ? cast(GskRenderNode*)child.cPtr(false) : null, childBounds ? cast(graphene_rect_t*)childBounds.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gsk_repeat_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, childBounds ? cast(graphene_rect_t*)childBounds.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -46,7 +46,7 @@ class RepeatNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_repeat_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class RepeatNode : RenderNode
   {
     const(graphene_rect_t)* _cretval;
     _cretval = gsk_repeat_node_get_child_bounds(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Rect(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

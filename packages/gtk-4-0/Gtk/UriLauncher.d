@@ -30,9 +30,9 @@ class UriLauncher : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -54,9 +54,9 @@ class UriLauncher : ObjectG
   this(string uri)
   {
     GtkUriLauncher* _cretval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = gtk_uri_launcher_new(_uri);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -67,7 +67,7 @@ class UriLauncher : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_uri_launcher_get_uri(cast(GtkUriLauncher*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -89,11 +89,11 @@ class UriLauncher : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gtk_uri_launcher_launch(cast(GtkUriLauncher*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gtk_uri_launcher_launch(cast(GtkUriLauncher*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -108,7 +108,7 @@ class UriLauncher : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_uri_launcher_launch_finish(cast(GtkUriLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = gtk_uri_launcher_launch_finish(cast(GtkUriLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -121,7 +121,7 @@ class UriLauncher : ObjectG
    */
   void setUri(string uri)
   {
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     gtk_uri_launcher_set_uri(cast(GtkUriLauncher*)cPtr, _uri);
   }
 }

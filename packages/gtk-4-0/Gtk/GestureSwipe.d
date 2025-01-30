@@ -21,9 +21,9 @@ import Gtk.c.types;
 class GestureSwipe : GestureSingle
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -44,7 +44,7 @@ class GestureSwipe : GestureSingle
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_swipe_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

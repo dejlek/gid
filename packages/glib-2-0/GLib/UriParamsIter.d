@@ -20,14 +20,14 @@ class UriParamsIter
 {
   GUriParamsIter cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.UriParamsIter");
 
     cInstance = *cast(GUriParamsIter*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -78,8 +78,8 @@ class UriParamsIter
    */
   void init_(string params, ptrdiff_t length, string separators, UriParamsFlags flags)
   {
-    const(char)* _params = params.toCString(false);
-    const(char)* _separators = separators.toCString(false);
+    const(char)* _params = params.toCString(No.Alloc);
+    const(char)* _separators = separators.toCString(No.Alloc);
     g_uri_params_iter_init(cast(GUriParamsIter*)cPtr, _params, length, _separators, flags);
   }
 
@@ -109,8 +109,8 @@ class UriParamsIter
     _retval = g_uri_params_iter_next(cast(GUriParamsIter*)cPtr, &_attribute, &_value, &_err);
     if (_err)
       throw new ErrorG(_err);
-    attribute = _attribute.fromCString(true);
-    value = _value.fromCString(true);
+    attribute = _attribute.fromCString(Yes.Free);
+    value = _value.fromCString(Yes.Free);
     return _retval;
   }
 }

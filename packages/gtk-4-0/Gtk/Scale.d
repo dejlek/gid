@@ -91,9 +91,9 @@ class Scale : Range
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -117,8 +117,8 @@ class Scale : Range
   this(Orientation orientation, Adjustment adjustment)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(false) : null);
-    this(_cretval, false);
+    _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -142,7 +142,7 @@ class Scale : Range
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_new_with_range(orientation, min, max, step);
-    auto _retval = _cretval ? ObjectG.getDObject!Scale(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Scale(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class Scale : Range
    */
   void addMark(double value, PositionType position, string markup)
   {
-    const(char)* _markup = markup.toCString(false);
+    const(char)* _markup = markup.toCString(No.Alloc);
     gtk_scale_add_mark(cast(GtkScale*)cPtr, value, position, _markup);
   }
 
@@ -222,7 +222,7 @@ class Scale : Range
   {
     PangoLayout* _cretval;
     _cretval = gtk_scale_get_layout(cast(GtkScale*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -302,8 +302,8 @@ class Scale : Range
       string _dretval;
       auto _dlg = cast(ScaleFormatValueFunc*)userData;
 
-      _dretval = (*_dlg)(scale ? ObjectG.getDObject!Scale(cast(void*)scale, false) : null, value);
-      char* _retval = _dretval.toCString(true);
+      _dretval = (*_dlg)(ObjectG.getDObject!Scale(cast(void*)scale, No.Take), value);
+      char* _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
     }

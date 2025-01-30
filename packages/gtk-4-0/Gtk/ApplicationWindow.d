@@ -91,9 +91,9 @@ class ApplicationWindow : Window, ActionGroup, ActionMap
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -121,8 +121,8 @@ class ApplicationWindow : Window, ActionGroup, ActionMap
   this(Application application)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_application_window_new(application ? cast(GtkApplication*)application.cPtr(false) : null);
-    this(_cretval, false);
+    _cretval = gtk_application_window_new(application ? cast(GtkApplication*)application.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -135,7 +135,7 @@ class ApplicationWindow : Window, ActionGroup, ActionMap
   {
     GtkShortcutsWindow* _cretval;
     _cretval = gtk_application_window_get_help_overlay(cast(GtkApplicationWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ShortcutsWindow(cast(GtkShortcutsWindow*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ShortcutsWindow(cast(GtkShortcutsWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class ApplicationWindow : Window, ActionGroup, ActionMap
    */
   void setHelpOverlay(ShortcutsWindow helpOverlay)
   {
-    gtk_application_window_set_help_overlay(cast(GtkApplicationWindow*)cPtr, helpOverlay ? cast(GtkShortcutsWindow*)helpOverlay.cPtr(false) : null);
+    gtk_application_window_set_help_overlay(cast(GtkApplicationWindow*)cPtr, helpOverlay ? cast(GtkShortcutsWindow*)helpOverlay.cPtr(No.Dup) : null);
   }
 
   /**

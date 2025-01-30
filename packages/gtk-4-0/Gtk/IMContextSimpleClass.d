@@ -10,14 +10,14 @@ class IMContextSimpleClass
 {
   GtkIMContextSimpleClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.IMContextSimpleClass");
 
     cInstance = *cast(GtkIMContextSimpleClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

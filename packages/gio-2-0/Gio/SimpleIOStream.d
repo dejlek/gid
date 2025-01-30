@@ -26,9 +26,9 @@ class SimpleIOStream : IOStream
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,7 +52,7 @@ class SimpleIOStream : IOStream
   this(InputStream inputStream, OutputStream outputStream)
   {
     GIOStream* _cretval;
-    _cretval = g_simple_io_stream_new(inputStream ? cast(GInputStream*)inputStream.cPtr(false) : null, outputStream ? cast(GOutputStream*)outputStream.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = g_simple_io_stream_new(inputStream ? cast(GInputStream*)inputStream.cPtr(No.Dup) : null, outputStream ? cast(GOutputStream*)outputStream.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 }

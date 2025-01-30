@@ -23,14 +23,14 @@ import Gid.gid;
 class Thread : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -82,10 +82,10 @@ class Thread : Boxed
     }
 
     GThread* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     auto _func = freezeDelegate(cast(void*)&func);
     _cretval = g_thread_new(_name, &_funcCallback, _func);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -110,13 +110,13 @@ class Thread : Boxed
     }
 
     GThread* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     auto _func = freezeDelegate(cast(void*)&func);
     GError *_err;
     _cretval = g_thread_try_new(_name, &_funcCallback, _func, &_err);
     if (_err)
       throw new ThreadException(_err);
-    auto _retval = _cretval ? new Thread(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Thread(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class Thread : Boxed
   {
     GThread* _cretval;
     _cretval = g_thread_self();
-    auto _retval = _cretval ? new Thread(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Thread(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

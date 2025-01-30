@@ -36,9 +36,9 @@ import Gtk.c.types;
 class IMContextSimple : IMContext
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -59,7 +59,7 @@ class IMContextSimple : IMContext
   {
     GtkIMContext* _cretval;
     _cretval = gtk_im_context_simple_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -69,7 +69,7 @@ class IMContextSimple : IMContext
    */
   void addComposeFile(string composeFile)
   {
-    const(char)* _composeFile = composeFile.toCString(false);
+    const(char)* _composeFile = composeFile.toCString(No.Alloc);
     gtk_im_context_simple_add_compose_file(cast(GtkIMContextSimple*)cPtr, _composeFile);
   }
 }

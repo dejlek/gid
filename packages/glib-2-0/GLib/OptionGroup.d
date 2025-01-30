@@ -17,14 +17,14 @@ import Gid.gid;
 class OptionGroup : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -40,11 +40,11 @@ class OptionGroup : Boxed
   this(string name, string description, string helpDescription)
   {
     GOptionGroup* _cretval;
-    const(char)* _name = name.toCString(false);
-    const(char)* _description = description.toCString(false);
-    const(char)* _helpDescription = helpDescription.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _helpDescription = helpDescription.toCString(No.Alloc);
     _cretval = g_option_group_new(_name, _description, _helpDescription, null, null);
-    this(&_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
 
@@ -74,10 +74,10 @@ class OptionGroup : Boxed
     {
       string _dretval;
       auto _dlg = cast(TranslateFunc*)data;
-      string _str = str.fromCString(false);
+      string _str = str.fromCString(No.Free);
 
       _dretval = (*_dlg)(_str);
-      const(char)* _retval = _dretval.toCString(false);
+      const(char)* _retval = _dretval.toCString(No.Alloc);
 
       return _retval;
     }
@@ -94,7 +94,7 @@ class OptionGroup : Boxed
    */
   void setTranslationDomain(string domain)
   {
-    const(char)* _domain = domain.toCString(false);
+    const(char)* _domain = domain.toCString(No.Alloc);
     g_option_group_set_translation_domain(cast(GOptionGroup*)cPtr, _domain);
   }
 }

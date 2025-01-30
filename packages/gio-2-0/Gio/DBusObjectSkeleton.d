@@ -24,9 +24,9 @@ class DBusObjectSkeleton : ObjectG, DBusObject
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,9 +50,9 @@ class DBusObjectSkeleton : ObjectG, DBusObject
   this(string objectPath)
   {
     GDBusObjectSkeleton* _cretval;
-    const(char)* _objectPath = objectPath.toCString(false);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_dbus_object_skeleton_new(_objectPath);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -66,7 +66,7 @@ class DBusObjectSkeleton : ObjectG, DBusObject
    */
   void addInterface(DBusInterfaceSkeleton interface_)
   {
-    g_dbus_object_skeleton_add_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(false) : null);
+    g_dbus_object_skeleton_add_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -86,7 +86,7 @@ class DBusObjectSkeleton : ObjectG, DBusObject
    */
   void removeInterface(DBusInterfaceSkeleton interface_)
   {
-    g_dbus_object_skeleton_remove_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(false) : null);
+    g_dbus_object_skeleton_remove_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -98,7 +98,7 @@ class DBusObjectSkeleton : ObjectG, DBusObject
    */
   void removeInterfaceByName(string interfaceName)
   {
-    const(char)* _interfaceName = interfaceName.toCString(false);
+    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     g_dbus_object_skeleton_remove_interface_by_name(cast(GDBusObjectSkeleton*)cPtr, _interfaceName);
   }
 
@@ -109,7 +109,7 @@ class DBusObjectSkeleton : ObjectG, DBusObject
    */
   void setObjectPath(string objectPath)
   {
-    const(char)* _objectPath = objectPath.toCString(false);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     g_dbus_object_skeleton_set_object_path(cast(GDBusObjectSkeleton*)cPtr, _objectPath);
   }
 

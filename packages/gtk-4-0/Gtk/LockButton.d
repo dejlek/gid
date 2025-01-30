@@ -53,9 +53,9 @@ class LockButton : Button
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -79,8 +79,8 @@ class LockButton : Button
   this(Permission permission)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_lock_button_new(permission ? cast(GPermission*)permission.cPtr(false) : null);
-    this(_cretval, false);
+    _cretval = gtk_lock_button_new(permission ? cast(GPermission*)permission.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -93,7 +93,7 @@ class LockButton : Button
   {
     GPermission* _cretval;
     _cretval = gtk_lock_button_get_permission(cast(GtkLockButton*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Permission(cast(GPermission*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Permission(cast(GPermission*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,6 +106,6 @@ class LockButton : Button
    */
   void setPermission(Permission permission)
   {
-    gtk_lock_button_set_permission(cast(GtkLockButton*)cPtr, permission ? cast(GPermission*)permission.cPtr(false) : null);
+    gtk_lock_button_set_permission(cast(GtkLockButton*)cPtr, permission ? cast(GPermission*)permission.cPtr(No.Dup) : null);
   }
 }

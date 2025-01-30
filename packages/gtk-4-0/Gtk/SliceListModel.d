@@ -24,9 +24,9 @@ class SliceListModel : ObjectG, ListModel, SectionModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -55,8 +55,8 @@ class SliceListModel : ObjectG, ListModel, SectionModel
   this(ListModel model, uint offset, uint size)
   {
     GtkSliceListModel* _cretval;
-    _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(true) : null, offset, size);
-    this(_cretval, true);
+    _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, offset, size);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -67,7 +67,7 @@ class SliceListModel : ObjectG, ListModel, SectionModel
   {
     GListModel* _cretval;
     _cretval = gtk_slice_list_model_get_model(cast(GtkSliceListModel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class SliceListModel : ObjectG, ListModel, SectionModel
    */
   void setModel(ListModel model)
   {
-    gtk_slice_list_model_set_model(cast(GtkSliceListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_slice_list_model_set_model(cast(GtkSliceListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**

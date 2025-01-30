@@ -57,9 +57,9 @@ class Scrollbar : Widget, Orientable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -85,8 +85,8 @@ class Scrollbar : Widget, Orientable
   this(Orientation orientation, Adjustment adjustment)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(false) : null);
-    this(_cretval, false);
+    _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -97,7 +97,7 @@ class Scrollbar : Widget, Orientable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollbar_get_adjustment(cast(GtkScrollbar*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -108,6 +108,6 @@ class Scrollbar : Widget, Orientable
    */
   void setAdjustment(Adjustment adjustment)
   {
-    gtk_scrollbar_set_adjustment(cast(GtkScrollbar*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(false) : null);
+    gtk_scrollbar_set_adjustment(cast(GtkScrollbar*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 }

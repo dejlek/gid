@@ -13,14 +13,14 @@ class TestSuite
   GTestSuite* cInstancePtr;
   bool owned;
 
-  this(void* ptr, bool owned = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.TestSuite");
 
     cInstancePtr = cast(GTestSuite*)ptr;
 
-    this.owned = owned;
+    owned = take;
   }
 
   ~this()

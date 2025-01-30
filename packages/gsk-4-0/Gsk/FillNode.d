@@ -14,12 +14,12 @@ import Gsk.c.types;
 class FillNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.FillNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -34,8 +34,8 @@ class FillNode : RenderNode
   this(RenderNode child, Path path, FillRule fillRule)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_fill_node_new(child ? cast(GskRenderNode*)child.cPtr(false) : null, path ? cast(GskPath*)path.cPtr(false) : null, fillRule);
-    this(_cretval, false);
+    _cretval = gsk_fill_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, path ? cast(GskPath*)path.cPtr(No.Dup) : null, fillRule);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -46,7 +46,7 @@ class FillNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_fill_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class FillNode : RenderNode
   {
     GskPath* _cretval;
     _cretval = gsk_fill_node_get_path(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Path(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Path(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

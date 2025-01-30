@@ -98,9 +98,9 @@ import Gtk.c.types;
 class LevelBar : Widget, AccessibleRange, Orientable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -124,7 +124,7 @@ class LevelBar : Widget, AccessibleRange, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_level_bar_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -138,7 +138,7 @@ class LevelBar : Widget, AccessibleRange, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_level_bar_new_for_interval(minValue, maxValue);
-    auto _retval = _cretval ? ObjectG.getDObject!LevelBar(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!LevelBar(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class LevelBar : Widget, AccessibleRange, Orientable
    */
   void addOffsetValue(string name, double value)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_level_bar_add_offset_value(cast(GtkLevelBar*)cPtr, _name, value);
   }
 
@@ -215,7 +215,7 @@ class LevelBar : Widget, AccessibleRange, Orientable
   bool getOffsetValue(string name, out double value)
   {
     bool _retval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = gtk_level_bar_get_offset_value(cast(GtkLevelBar*)cPtr, _name, cast(double*)&value);
     return _retval;
   }
@@ -241,7 +241,7 @@ class LevelBar : Widget, AccessibleRange, Orientable
    */
   void removeOffsetValue(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_level_bar_remove_offset_value(cast(GtkLevelBar*)cPtr, _name);
   }
 

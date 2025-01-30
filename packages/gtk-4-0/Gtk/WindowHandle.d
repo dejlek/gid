@@ -26,9 +26,9 @@ import Gtk.c.types;
 class WindowHandle : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -49,7 +49,7 @@ class WindowHandle : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_handle_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -60,7 +60,7 @@ class WindowHandle : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_handle_get_child(cast(GtkWindowHandle*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -71,6 +71,6 @@ class WindowHandle : Widget
    */
   void setChild(Widget child)
   {
-    gtk_window_handle_set_child(cast(GtkWindowHandle*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_window_handle_set_child(cast(GtkWindowHandle*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 }

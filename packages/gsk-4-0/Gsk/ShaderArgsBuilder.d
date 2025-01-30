@@ -15,14 +15,14 @@ import Gsk.c.types;
 class ShaderArgsBuilder : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -92,7 +92,7 @@ class ShaderArgsBuilder : Boxed
    */
   void setVec2(int idx, Vec2 value)
   {
-    gsk_shader_args_builder_set_vec2(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(graphene_vec2_t*)value.cPtr(false) : null);
+    gsk_shader_args_builder_set_vec2(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(graphene_vec2_t*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -104,7 +104,7 @@ class ShaderArgsBuilder : Boxed
    */
   void setVec3(int idx, Vec3 value)
   {
-    gsk_shader_args_builder_set_vec3(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(graphene_vec3_t*)value.cPtr(false) : null);
+    gsk_shader_args_builder_set_vec3(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(graphene_vec3_t*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -116,6 +116,6 @@ class ShaderArgsBuilder : Boxed
    */
   void setVec4(int idx, Vec4 value)
   {
-    gsk_shader_args_builder_set_vec4(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(graphene_vec4_t*)value.cPtr(false) : null);
+    gsk_shader_args_builder_set_vec4(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(graphene_vec4_t*)value.cPtr(No.Dup) : null);
   }
 }

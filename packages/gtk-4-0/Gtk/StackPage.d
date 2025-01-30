@@ -19,9 +19,9 @@ class StackPage : ObjectG, Accessible
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -44,7 +44,7 @@ class StackPage : ObjectG, Accessible
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_page_get_child(cast(GtkStackPage*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -56,7 +56,7 @@ class StackPage : ObjectG, Accessible
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_icon_name(cast(GtkStackPage*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class StackPage : ObjectG, Accessible
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_name(cast(GtkStackPage*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class StackPage : ObjectG, Accessible
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_title(cast(GtkStackPage*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class StackPage : ObjectG, Accessible
    */
   void setIconName(string setting)
   {
-    const(char)* _setting = setting.toCString(false);
+    const(char)* _setting = setting.toCString(No.Alloc);
     gtk_stack_page_set_icon_name(cast(GtkStackPage*)cPtr, _setting);
   }
 
@@ -138,7 +138,7 @@ class StackPage : ObjectG, Accessible
    */
   void setName(string setting)
   {
-    const(char)* _setting = setting.toCString(false);
+    const(char)* _setting = setting.toCString(No.Alloc);
     gtk_stack_page_set_name(cast(GtkStackPage*)cPtr, _setting);
   }
 
@@ -159,7 +159,7 @@ class StackPage : ObjectG, Accessible
    */
   void setTitle(string setting)
   {
-    const(char)* _setting = setting.toCString(false);
+    const(char)* _setting = setting.toCString(No.Alloc);
     gtk_stack_page_set_title(cast(GtkStackPage*)cPtr, _setting);
   }
 

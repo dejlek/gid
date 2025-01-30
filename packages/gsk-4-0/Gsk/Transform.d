@@ -24,14 +24,14 @@ import Gsk.c.types;
 class Transform : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -48,7 +48,7 @@ class Transform : Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -60,7 +60,7 @@ class Transform : Boxed
   bool equal(Transform second)
   {
     bool _retval;
-    _retval = gsk_transform_equal(cast(GskTransform*)cPtr, second ? cast(GskTransform*)second.cPtr(false) : null);
+    _retval = gsk_transform_equal(cast(GskTransform*)cPtr, second ? cast(GskTransform*)second.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class Transform : Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_invert(cast(GskTransform*)cPtr);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -102,8 +102,8 @@ class Transform : Boxed
   Transform matrix(Matrix matrix)
   {
     GskTransform* _cretval;
-    _cretval = gsk_transform_matrix(cast(GskTransform*)cPtr, matrix ? cast(graphene_matrix_t*)matrix.cPtr(false) : null);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, true) : null;
+    _cretval = gsk_transform_matrix(cast(GskTransform*)cPtr, matrix ? cast(graphene_matrix_t*)matrix.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class Transform : Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_perspective(cast(GskTransform*)cPtr, depth);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class Transform : Boxed
    */
   void print(String string_)
   {
-    gsk_transform_print(cast(GskTransform*)cPtr, string_ ? cast(GString*)string_.cPtr(false) : null);
+    gsk_transform_print(cast(GskTransform*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -151,7 +151,7 @@ class Transform : Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_rotate(cast(GskTransform*)cPtr, angle);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -166,8 +166,8 @@ class Transform : Boxed
   Transform rotate3d(float angle, Vec3 axis)
   {
     GskTransform* _cretval;
-    _cretval = gsk_transform_rotate_3d(cast(GskTransform*)cPtr, angle, axis ? cast(graphene_vec3_t*)axis.cPtr(false) : null);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, true) : null;
+    _cretval = gsk_transform_rotate_3d(cast(GskTransform*)cPtr, angle, axis ? cast(graphene_vec3_t*)axis.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class Transform : Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_scale(cast(GskTransform*)cPtr, factorX, factorY);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class Transform : Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_scale_3d(cast(GskTransform*)cPtr, factorX, factorY, factorZ);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class Transform : Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_skew(cast(GskTransform*)cPtr, skewX, skewY);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -315,7 +315,7 @@ class Transform : Boxed
   {
     graphene_matrix_t _outMatrix;
     gsk_transform_to_matrix(cast(GskTransform*)cPtr, &_outMatrix);
-    outMatrix = new Matrix(cast(void*)&_outMatrix, false);
+    outMatrix = new Matrix(cast(void*)&_outMatrix, No.Take);
   }
 
   /**
@@ -328,7 +328,7 @@ class Transform : Boxed
   {
     char* _cretval;
     _cretval = gsk_transform_to_string(cast(GskTransform*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -358,8 +358,8 @@ class Transform : Boxed
   Transform transform(Transform other)
   {
     GskTransform* _cretval;
-    _cretval = gsk_transform_transform(cast(GskTransform*)cPtr, other ? cast(GskTransform*)other.cPtr(false) : null);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, true) : null;
+    _cretval = gsk_transform_transform(cast(GskTransform*)cPtr, other ? cast(GskTransform*)other.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -374,8 +374,8 @@ class Transform : Boxed
   void transformBounds(Rect rect, out Rect outRect)
   {
     graphene_rect_t _outRect;
-    gsk_transform_transform_bounds(cast(GskTransform*)cPtr, rect ? cast(graphene_rect_t*)rect.cPtr(false) : null, &_outRect);
-    outRect = new Rect(cast(void*)&_outRect, false);
+    gsk_transform_transform_bounds(cast(GskTransform*)cPtr, rect ? cast(graphene_rect_t*)rect.cPtr(No.Dup) : null, &_outRect);
+    outRect = new Rect(cast(void*)&_outRect, No.Take);
   }
 
   /**
@@ -388,8 +388,8 @@ class Transform : Boxed
   void transformPoint(Point point, out Point outPoint)
   {
     graphene_point_t _outPoint;
-    gsk_transform_transform_point(cast(GskTransform*)cPtr, point ? cast(graphene_point_t*)point.cPtr(false) : null, &_outPoint);
-    outPoint = new Point(cast(void*)&_outPoint, false);
+    gsk_transform_transform_point(cast(GskTransform*)cPtr, point ? cast(graphene_point_t*)point.cPtr(No.Dup) : null, &_outPoint);
+    outPoint = new Point(cast(void*)&_outPoint, No.Take);
   }
 
   /**
@@ -401,8 +401,8 @@ class Transform : Boxed
   Transform translate(Point point)
   {
     GskTransform* _cretval;
-    _cretval = gsk_transform_translate(cast(GskTransform*)cPtr, point ? cast(graphene_point_t*)point.cPtr(false) : null);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, true) : null;
+    _cretval = gsk_transform_translate(cast(GskTransform*)cPtr, point ? cast(graphene_point_t*)point.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -415,8 +415,8 @@ class Transform : Boxed
   Transform translate3d(Point3D point)
   {
     GskTransform* _cretval;
-    _cretval = gsk_transform_translate_3d(cast(GskTransform*)cPtr, point ? cast(graphene_point3d_t*)point.cPtr(false) : null);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, true) : null;
+    _cretval = gsk_transform_translate_3d(cast(GskTransform*)cPtr, point ? cast(graphene_point3d_t*)point.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -435,10 +435,10 @@ class Transform : Boxed
   static bool parse(string string_, out Transform outTransform)
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(false);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     GskTransform* _outTransform;
     _retval = gsk_transform_parse(_string_, &_outTransform);
-    outTransform = new Transform(cast(void*)_outTransform, true);
+    outTransform = new Transform(cast(void*)_outTransform, Yes.Take);
     return _retval;
   }
 }

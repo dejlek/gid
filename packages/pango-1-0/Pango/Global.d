@@ -32,7 +32,7 @@ Attribute attrAllowBreaksNew(bool allowBreaks)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_allow_breaks_new(allowBreaks);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -48,7 +48,7 @@ Attribute attrBackgroundAlphaNew(ushort alpha)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_background_alpha_new(alpha);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -66,7 +66,7 @@ Attribute attrBackgroundNew(ushort red, ushort green, ushort blue)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_background_new(red, green, blue);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -90,7 +90,7 @@ Attribute attrBaselineShiftNew(int shift)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_baseline_shift_new(shift);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -108,13 +108,13 @@ Attribute attrBaselineShiftNew(int shift)
  */
 void attrBreak(string text, int length, AttrList attrList, int offset, LogAttr[] attrs)
 {
-  const(char)* _text = text.toCString(false);
+  const(char)* _text = text.toCString(No.Alloc);
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_attr_break(_text, length, attrList ? cast(PangoAttrList*)attrList.cPtr(false) : null, offset, _attrs, _attrsLen);
+  pango_attr_break(_text, length, attrList ? cast(PangoAttrList*)attrList.cPtr(No.Dup) : null, offset, _attrs, _attrsLen);
 }
 
 /**
@@ -134,7 +134,7 @@ Attribute attrFallbackNew(bool enableFallback)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_fallback_new(enableFallback);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -149,9 +149,9 @@ Attribute attrFallbackNew(bool enableFallback)
 Attribute attrFamilyNew(string family)
 {
   PangoAttribute* _cretval;
-  const(char)* _family = family.toCString(false);
+  const(char)* _family = family.toCString(No.Alloc);
   _cretval = pango_attr_family_new(_family);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -170,7 +170,7 @@ Attribute attrFontScaleNew(FontScale scale)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_font_scale_new(scale);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -186,7 +186,7 @@ Attribute attrForegroundAlphaNew(ushort alpha)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_foreground_alpha_new(alpha);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -204,7 +204,7 @@ Attribute attrForegroundNew(ushort red, ushort green, ushort blue)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_foreground_new(red, green, blue);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -220,7 +220,7 @@ Attribute attrGravityHintNew(GravityHint hint)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_gravity_hint_new(hint);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -236,7 +236,7 @@ Attribute attrGravityNew(Gravity gravity)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_gravity_new(gravity);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -255,7 +255,7 @@ Attribute attrInsertHyphensNew(bool insertHyphens)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_insert_hyphens_new(insertHyphens);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -272,7 +272,7 @@ Attribute attrLetterSpacingNew(int letterSpacing)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_letter_spacing_new(letterSpacing);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -290,7 +290,7 @@ Attribute attrLineHeightNew(double factor)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_line_height_new(factor);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -308,7 +308,7 @@ Attribute attrLineHeightNewAbsolute(int height)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_line_height_new_absolute(height);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -328,7 +328,7 @@ Attribute attrOverlineColorNew(ushort red, ushort green, ushort blue)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_overline_color_new(red, green, blue);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -344,7 +344,7 @@ Attribute attrOverlineNew(Overline overline)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_overline_new(overline);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -361,7 +361,7 @@ Attribute attrRiseNew(int rise)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_rise_new(rise);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -379,7 +379,7 @@ Attribute attrScaleNew(double scaleFactor)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_scale_new(scaleFactor);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -395,7 +395,7 @@ Attribute attrSentenceNew()
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_sentence_new();
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -412,7 +412,7 @@ Attribute attrShowNew(ShowFlags flags)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_show_new(flags);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -428,7 +428,7 @@ Attribute attrStretchNew(Stretch stretch)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_stretch_new(stretch);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -448,7 +448,7 @@ Attribute attrStrikethroughColorNew(ushort red, ushort green, ushort blue)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_strikethrough_color_new(red, green, blue);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -464,7 +464,7 @@ Attribute attrStrikethroughNew(bool strikethrough)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_strikethrough_new(strikethrough);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -480,7 +480,7 @@ Attribute attrStyleNew(Style style)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_style_new(style);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -497,7 +497,7 @@ Attribute attrTextTransformNew(TextTransform transform)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_text_transform_new(transform);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -517,7 +517,7 @@ Attribute attrUnderlineColorNew(ushort red, ushort green, ushort blue)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_underline_color_new(red, green, blue);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -533,7 +533,7 @@ Attribute attrUnderlineNew(Underline underline)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_underline_new(underline);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -548,7 +548,7 @@ Attribute attrVariantNew(Variant variant)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_variant_new(variant);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -564,7 +564,7 @@ Attribute attrWeightNew(Weight weight)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_weight_new(weight);
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -580,7 +580,7 @@ Attribute attrWordNew()
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_word_new();
-  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+  auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -599,7 +599,7 @@ Attribute attrWordNew()
  */
 void break_(string text, int length, Analysis analysis, LogAttr[] attrs)
 {
-  const(char)* _text = text.toCString(false);
+  const(char)* _text = text.toCString(No.Alloc);
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
@@ -624,7 +624,7 @@ void break_(string text, int length, Analysis analysis, LogAttr[] attrs)
  */
 void defaultBreak(string text, int length, Analysis analysis, LogAttr attrs, int attrsLen)
 {
-  const(char)* _text = text.toCString(false);
+  const(char)* _text = text.toCString(No.Alloc);
   pango_default_break(_text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, &attrs, attrsLen);
 }
 
@@ -663,7 +663,7 @@ void extentsToPixels(Rectangle inclusive, Rectangle nearest)
 Direction findBaseDir(string text, int length)
 {
   PangoDirection _cretval;
-  const(char)* _text = text.toCString(false);
+  const(char)* _text = text.toCString(No.Alloc);
   _cretval = pango_find_base_dir(_text, length);
   Direction _retval = cast(Direction)_cretval;
   return _retval;
@@ -691,7 +691,7 @@ Direction findBaseDir(string text, int length)
  */
 void findParagraphBoundary(string text, int length, out int paragraphDelimiterIndex, out int nextParagraphStart)
 {
-  const(char)* _text = text.toCString(false);
+  const(char)* _text = text.toCString(No.Alloc);
   pango_find_paragraph_boundary(_text, length, cast(int*)&paragraphDelimiterIndex, cast(int*)&nextParagraphStart);
 }
 
@@ -714,13 +714,13 @@ void findParagraphBoundary(string text, int length, out int paragraphDelimiterIn
  */
 void getLogAttrs(string text, int length, int level, PgLanguage language, LogAttr[] attrs)
 {
-  const(char)* _text = text.toCString(false);
+  const(char)* _text = text.toCString(No.Alloc);
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_get_log_attrs(_text, length, level, language ? cast(PangoLanguage*)language.cPtr(false) : null, _attrs, _attrsLen);
+  pango_get_log_attrs(_text, length, level, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null, _attrs, _attrsLen);
 }
 
 /**
@@ -766,8 +766,8 @@ bool isZeroWidth(dchar ch)
 Item[] itemize(Context context, string text, int startIndex, int length, AttrList attrs, AttrIterator cachedIter)
 {
   GList* _cretval;
-  const(char)* _text = text.toCString(false);
-  _cretval = pango_itemize(context ? cast(PangoContext*)context.cPtr(false) : null, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs.cPtr(false) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter.cPtr(false) : null);
+  const(char)* _text = text.toCString(No.Alloc);
+  _cretval = pango_itemize(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter.cPtr(No.Dup) : null);
   auto _retval = gListToD!(Item, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }
@@ -794,8 +794,8 @@ Item[] itemize(Context context, string text, int startIndex, int length, AttrLis
 Item[] itemizeWithBaseDir(Context context, Direction baseDir, string text, int startIndex, int length, AttrList attrs, AttrIterator cachedIter)
 {
   GList* _cretval;
-  const(char)* _text = text.toCString(false);
-  _cretval = pango_itemize_with_base_dir(context ? cast(PangoContext*)context.cPtr(false) : null, baseDir, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs.cPtr(false) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter.cPtr(false) : null);
+  const(char)* _text = text.toCString(No.Alloc);
+  _cretval = pango_itemize_with_base_dir(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, baseDir, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter.cPtr(No.Dup) : null);
   auto _retval = gListToD!(Item, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }
@@ -819,11 +819,11 @@ bool markupParserFinish(MarkupParseContext context, out AttrList attrList, out s
   PangoAttrList* _attrList;
   char* _text;
   GError *_err;
-  _retval = pango_markup_parser_finish(context ? cast(GMarkupParseContext*)context.cPtr(false) : null, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
+  _retval = pango_markup_parser_finish(context ? cast(GMarkupParseContext*)context.cPtr(No.Dup) : null, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
     throw new ErrorG(_err);
-  attrList = new AttrList(cast(void*)_attrList, true);
-  text = _text.fromCString(true);
+  attrList = new AttrList(cast(void*)_attrList, Yes.Take);
+  text = _text.fromCString(Yes.Free);
   return _retval;
 }
 
@@ -855,7 +855,7 @@ MarkupParseContext markupParserNew(dchar accelMarker)
 {
   GMarkupParseContext* _cretval;
   _cretval = pango_markup_parser_new(accelMarker);
-  auto _retval = _cretval ? new MarkupParseContext(cast(void*)_cretval, false) : null;
+  auto _retval = _cretval ? new MarkupParseContext(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -880,10 +880,10 @@ MarkupParseContext markupParserNew(dchar accelMarker)
 bool parseEnum(GType type, string str, out int value, bool warn, out string possibleValues)
 {
   bool _retval;
-  const(char)* _str = str.toCString(false);
+  const(char)* _str = str.toCString(No.Alloc);
   char* _possibleValues;
   _retval = pango_parse_enum(type, _str, cast(int*)&value, warn, &_possibleValues);
-  possibleValues = _possibleValues.fromCString(true);
+  possibleValues = _possibleValues.fromCString(Yes.Free);
   return _retval;
 }
 
@@ -913,15 +913,15 @@ bool parseEnum(GType type, string str, out int value, bool warn, out string poss
 bool parseMarkup(string markupText, int length, dchar accelMarker, out AttrList attrList, out string text, out dchar accelChar)
 {
   bool _retval;
-  const(char)* _markupText = markupText.toCString(false);
+  const(char)* _markupText = markupText.toCString(No.Alloc);
   PangoAttrList* _attrList;
   char* _text;
   GError *_err;
   _retval = pango_parse_markup(_markupText, length, accelMarker, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
     throw new ErrorG(_err);
-  attrList = new AttrList(cast(void*)_attrList, true);
-  text = _text.fromCString(true);
+  attrList = new AttrList(cast(void*)_attrList, Yes.Take);
+  text = _text.fromCString(Yes.Free);
   return _retval;
 }
 
@@ -941,7 +941,7 @@ bool parseMarkup(string markupText, int length, dchar accelMarker, out AttrList 
 bool parseStretch(string str, out Stretch stretch, bool warn)
 {
   bool _retval;
-  const(char)* _str = str.toCString(false);
+  const(char)* _str = str.toCString(No.Alloc);
   _retval = pango_parse_stretch(_str, &stretch, warn);
   return _retval;
 }
@@ -960,7 +960,7 @@ bool parseStretch(string str, out Stretch stretch, bool warn)
 bool parseStyle(string str, out Style style, bool warn)
 {
   bool _retval;
-  const(char)* _str = str.toCString(false);
+  const(char)* _str = str.toCString(No.Alloc);
   _retval = pango_parse_style(_str, &style, warn);
   return _retval;
 }
@@ -979,7 +979,7 @@ bool parseStyle(string str, out Style style, bool warn)
 bool parseVariant(string str, out Variant variant, bool warn)
 {
   bool _retval;
-  const(char)* _str = str.toCString(false);
+  const(char)* _str = str.toCString(No.Alloc);
   _retval = pango_parse_variant(_str, &variant, warn);
   return _retval;
 }
@@ -998,7 +998,7 @@ bool parseVariant(string str, out Variant variant, bool warn)
 bool parseWeight(string str, out Weight weight, bool warn)
 {
   bool _retval;
-  const(char)* _str = str.toCString(false);
+  const(char)* _str = str.toCString(No.Alloc);
   _retval = pango_parse_weight(_str, &weight, warn);
   return _retval;
 }
@@ -1037,7 +1037,7 @@ void quantizeLineGeometry(ref int thickness, ref int position)
 int readLine(void* stream, String str)
 {
   int _retval;
-  _retval = pango_read_line(stream, str ? cast(GString*)str.cPtr(false) : null);
+  _retval = pango_read_line(stream, str ? cast(GString*)str.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1087,8 +1087,8 @@ Item[] reorderItems(Item[] items)
  */
 void shape(string text, int length, Analysis analysis, GlyphString glyphs)
 {
-  const(char)* _text = text.toCString(false);
-  pango_shape(_text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(false) : null);
+  const(char)* _text = text.toCString(No.Alloc);
+  pango_shape(_text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1119,9 +1119,9 @@ void shape(string text, int length, Analysis analysis, GlyphString glyphs)
  */
 void shapeFull(string itemText, int itemLength, string paragraphText, int paragraphLength, Analysis analysis, GlyphString glyphs)
 {
-  const(char)* _itemText = itemText.toCString(false);
-  const(char)* _paragraphText = paragraphText.toCString(false);
-  pango_shape_full(_itemText, itemLength, _paragraphText, paragraphLength, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(false) : null);
+  const(char)* _itemText = itemText.toCString(No.Alloc);
+  const(char)* _paragraphText = paragraphText.toCString(No.Alloc);
+  pango_shape_full(_itemText, itemLength, _paragraphText, paragraphLength, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1146,8 +1146,8 @@ void shapeFull(string itemText, int itemLength, string paragraphText, int paragr
  */
 void shapeItem(Item item, string paragraphText, int paragraphLength, LogAttr logAttrs, GlyphString glyphs, ShapeFlags flags)
 {
-  const(char)* _paragraphText = paragraphText.toCString(false);
-  pango_shape_item(item ? cast(PangoItem*)item.cPtr(false) : null, _paragraphText, paragraphLength, &logAttrs, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(false) : null, flags);
+  const(char)* _paragraphText = paragraphText.toCString(No.Alloc);
+  pango_shape_item(item ? cast(PangoItem*)item.cPtr(No.Dup) : null, _paragraphText, paragraphLength, &logAttrs, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, flags);
 }
 
 /**
@@ -1178,9 +1178,9 @@ void shapeItem(Item item, string paragraphText, int paragraphLength, LogAttr log
  */
 void shapeWithFlags(string itemText, int itemLength, string paragraphText, int paragraphLength, Analysis analysis, GlyphString glyphs, ShapeFlags flags)
 {
-  const(char)* _itemText = itemText.toCString(false);
-  const(char)* _paragraphText = paragraphText.toCString(false);
-  pango_shape_with_flags(_itemText, itemLength, _paragraphText, paragraphLength, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(false) : null, flags);
+  const(char)* _itemText = itemText.toCString(No.Alloc);
+  const(char)* _paragraphText = paragraphText.toCString(No.Alloc);
+  pango_shape_with_flags(_itemText, itemLength, _paragraphText, paragraphLength, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, flags);
 }
 
 /**
@@ -1194,7 +1194,7 @@ void shapeWithFlags(string itemText, int itemLength, string paragraphText, int p
 string[] splitFileList(string str)
 {
   char** _cretval;
-  const(char)* _str = str.toCString(false);
+  const(char)* _str = str.toCString(No.Alloc);
   _cretval = pango_split_file_list(_str);
   string[] _retval;
 
@@ -1205,7 +1205,7 @@ string[] splitFileList(string str)
       break;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(true);
+      _retval[i] = _cretval[i].fromCString(Yes.Free);
   }
   return _retval;
 }
@@ -1228,7 +1228,7 @@ string[] splitFileList(string str)
  */
 void tailorBreak(string text, int length, Analysis analysis, int offset, LogAttr[] attrs)
 {
-  const(char)* _text = text.toCString(false);
+  const(char)* _text = text.toCString(No.Alloc);
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
@@ -1246,9 +1246,9 @@ void tailorBreak(string text, int length, Analysis analysis, int offset, LogAttr
 string trimString(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(false);
+  const(char)* _str = str.toCString(No.Alloc);
   _cretval = pango_trim_string(_str);
-  string _retval = _cretval.fromCString(true);
+  string _retval = _cretval.fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1343,7 +1343,7 @@ string versionCheck(int requiredMajor, int requiredMinor, int requiredMicro)
 {
   const(char)* _cretval;
   _cretval = pango_version_check(requiredMajor, requiredMinor, requiredMicro);
-  string _retval = _cretval.fromCString(false);
+  string _retval = _cretval.fromCString(No.Free);
   return _retval;
 }
 
@@ -1359,6 +1359,6 @@ string versionString()
 {
   const(char)* _cretval;
   _cretval = pango_version_string();
-  string _retval = _cretval.fromCString(false);
+  string _retval = _cretval.fromCString(No.Free);
   return _retval;
 }

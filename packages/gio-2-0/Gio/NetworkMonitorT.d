@@ -49,7 +49,7 @@ template NetworkMonitorT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_network_monitor_can_reach(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_network_monitor_can_reach(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -76,11 +76,11 @@ template NetworkMonitorT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_network_monitor_can_reach_async(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_network_monitor_can_reach_async(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -94,7 +94,7 @@ template NetworkMonitorT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_network_monitor_can_reach_finish(cast(GNetworkMonitor*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_network_monitor_can_reach_finish(cast(GNetworkMonitor*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

@@ -20,9 +20,9 @@ class FilterOutputStream : OutputStream
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -43,7 +43,7 @@ class FilterOutputStream : OutputStream
   {
     GOutputStream* _cretval;
     _cretval = g_filter_output_stream_get_base_stream(cast(GFilterOutputStream*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 

@@ -47,9 +47,9 @@ import Gtk.c.types;
 class Fixed : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -70,7 +70,7 @@ class Fixed : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_fixed_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -84,7 +84,7 @@ class Fixed : Widget
    */
   void getChildPosition(Widget widget, out double x, out double y)
   {
-    gtk_fixed_get_child_position(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, cast(double*)&x, cast(double*)&y);
+    gtk_fixed_get_child_position(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
   }
 
   /**
@@ -97,8 +97,8 @@ class Fixed : Widget
   Transform getChildTransform(Widget widget)
   {
     GskTransform* _cretval;
-    _cretval = gtk_fixed_get_child_transform(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, false) : null;
+    _cretval = gtk_fixed_get_child_transform(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Transform(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class Fixed : Widget
    */
   void move(Widget widget, double x, double y)
   {
-    gtk_fixed_move(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, x, y);
+    gtk_fixed_move(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -124,7 +124,7 @@ class Fixed : Widget
    */
   void put(Widget widget, double x, double y)
   {
-    gtk_fixed_put(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, x, y);
+    gtk_fixed_put(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -134,7 +134,7 @@ class Fixed : Widget
    */
   void remove(Widget widget)
   {
-    gtk_fixed_remove(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_fixed_remove(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -149,6 +149,6 @@ class Fixed : Widget
    */
   void setChildTransform(Widget widget, Transform transform)
   {
-    gtk_fixed_set_child_transform(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, transform ? cast(GskTransform*)transform.cPtr(false) : null);
+    gtk_fixed_set_child_transform(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);
   }
 }

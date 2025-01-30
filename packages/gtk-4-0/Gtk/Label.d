@@ -171,9 +171,9 @@ class Label : Widget, AccessibleText
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -198,9 +198,9 @@ class Label : Widget, AccessibleText
   this(string str)
   {
     GtkWidget* _cretval;
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     _cretval = gtk_label_new(_str);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -224,9 +224,9 @@ class Label : Widget, AccessibleText
   static Label newWithMnemonic(string str)
   {
     GtkWidget* _cretval;
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     _cretval = gtk_label_new_with_mnemonic(_str);
-    auto _retval = _cretval ? ObjectG.getDObject!Label(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Label(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class Label : Widget, AccessibleText
   {
     PangoAttrList* _cretval;
     _cretval = gtk_label_get_attributes(cast(GtkLabel*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class Label : Widget, AccessibleText
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_current_uri(cast(GtkLabel*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class Label : Widget, AccessibleText
   {
     GMenuModel* _cretval;
     _cretval = gtk_label_get_extra_menu(cast(GtkLabel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -315,7 +315,7 @@ class Label : Widget, AccessibleText
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_label(cast(GtkLabel*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class Label : Widget, AccessibleText
   {
     PangoLayout* _cretval;
     _cretval = gtk_label_get_layout(cast(GtkLabel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -402,7 +402,7 @@ class Label : Widget, AccessibleText
   {
     GtkWidget* _cretval;
     _cretval = gtk_label_get_mnemonic_widget(cast(GtkLabel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -467,7 +467,7 @@ class Label : Widget, AccessibleText
   {
     PangoTabArray* _cretval;
     _cretval = gtk_label_get_tabs(cast(GtkLabel*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -483,7 +483,7 @@ class Label : Widget, AccessibleText
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_text(cast(GtkLabel*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -600,7 +600,7 @@ class Label : Widget, AccessibleText
    */
   void setAttributes(AttrList attrs)
   {
-    gtk_label_set_attributes(cast(GtkLabel*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(false) : null);
+    gtk_label_set_attributes(cast(GtkLabel*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -623,7 +623,7 @@ class Label : Widget, AccessibleText
    */
   void setExtraMenu(MenuModel model)
   {
-    gtk_label_set_extra_menu(cast(GtkLabel*)cPtr, model ? cast(GMenuModel*)model.cPtr(false) : null);
+    gtk_label_set_extra_menu(cast(GtkLabel*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
 
   /**
@@ -652,7 +652,7 @@ class Label : Widget, AccessibleText
    */
   void setLabel(string str)
   {
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_label(cast(GtkLabel*)cPtr, _str);
   }
 
@@ -695,7 +695,7 @@ class Label : Widget, AccessibleText
    */
   void setMarkup(string str)
   {
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_markup(cast(GtkLabel*)cPtr, _str);
   }
 
@@ -712,7 +712,7 @@ class Label : Widget, AccessibleText
    */
   void setMarkupWithMnemonic(string str)
   {
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_markup_with_mnemonic(cast(GtkLabel*)cPtr, _str);
   }
 
@@ -747,7 +747,7 @@ class Label : Widget, AccessibleText
    */
   void setMnemonicWidget(Widget widget)
   {
-    gtk_label_set_mnemonic_widget(cast(GtkLabel*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_label_set_mnemonic_widget(cast(GtkLabel*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -791,7 +791,7 @@ class Label : Widget, AccessibleText
    */
   void setTabs(TabArray tabs)
   {
-    gtk_label_set_tabs(cast(GtkLabel*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(false) : null);
+    gtk_label_set_tabs(cast(GtkLabel*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -808,7 +808,7 @@ class Label : Widget, AccessibleText
    */
   void setText(string str)
   {
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_text(cast(GtkLabel*)cPtr, _str);
   }
 
@@ -823,7 +823,7 @@ class Label : Widget, AccessibleText
    */
   void setTextWithMnemonic(string str)
   {
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_text_with_mnemonic(cast(GtkLabel*)cPtr, _str);
   }
 

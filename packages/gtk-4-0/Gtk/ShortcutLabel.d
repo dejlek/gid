@@ -23,9 +23,9 @@ class ShortcutLabel : Widget
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -47,9 +47,9 @@ class ShortcutLabel : Widget
   this(string accelerator)
   {
     GtkWidget* _cretval;
-    const(char)* _accelerator = accelerator.toCString(false);
+    const(char)* _accelerator = accelerator.toCString(No.Alloc);
     _cretval = gtk_shortcut_label_new(_accelerator);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -60,7 +60,7 @@ class ShortcutLabel : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_shortcut_label_get_accelerator(cast(GtkShortcutLabel*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class ShortcutLabel : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_shortcut_label_get_disabled_text(cast(GtkShortcutLabel*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class ShortcutLabel : Widget
    */
   void setAccelerator(string accelerator)
   {
-    const(char)* _accelerator = accelerator.toCString(false);
+    const(char)* _accelerator = accelerator.toCString(No.Alloc);
     gtk_shortcut_label_set_accelerator(cast(GtkShortcutLabel*)cPtr, _accelerator);
   }
 
@@ -95,7 +95,7 @@ class ShortcutLabel : Widget
    */
   void setDisabledText(string disabledText)
   {
-    const(char)* _disabledText = disabledText.toCString(false);
+    const(char)* _disabledText = disabledText.toCString(No.Alloc);
     gtk_shortcut_label_set_disabled_text(cast(GtkShortcutLabel*)cPtr, _disabledText);
   }
 }

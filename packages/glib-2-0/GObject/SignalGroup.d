@@ -32,9 +32,9 @@ class SignalGroup : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -57,7 +57,7 @@ class SignalGroup : ObjectG
   {
     GSignalGroup* _cretval;
     _cretval = g_signal_group_new(targetType);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -82,8 +82,8 @@ class SignalGroup : ObjectG
    */
   void connectClosure(string detailedSignal, Closure closure, bool after)
   {
-    const(char)* _detailedSignal = detailedSignal.toCString(false);
-    g_signal_group_connect_closure(cast(GSignalGroup*)cPtr, _detailedSignal, closure ? cast(GClosure*)closure.cPtr(false) : null, after);
+    const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
+    g_signal_group_connect_closure(cast(GSignalGroup*)cPtr, _detailedSignal, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, after);
   }
 
   /**
@@ -94,7 +94,7 @@ class SignalGroup : ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_signal_group_dup_target(cast(GSignalGroup*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class SignalGroup : ObjectG
    */
   void setTarget(ObjectG target)
   {
-    g_signal_group_set_target(cast(GSignalGroup*)cPtr, target ? cast(ObjectC*)target.cPtr(false) : null);
+    g_signal_group_set_target(cast(GSignalGroup*)cPtr, target ? cast(ObjectC*)target.cPtr(No.Dup) : null);
   }
 
   /**

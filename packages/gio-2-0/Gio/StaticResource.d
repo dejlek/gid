@@ -14,14 +14,14 @@ class StaticResource
 {
   GStaticResource cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.StaticResource");
 
     cInstance = *cast(GStaticResource*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -52,7 +52,7 @@ class StaticResource
   {
     GResource* _cretval;
     _cretval = g_static_resource_get_resource(cast(GStaticResource*)cPtr);
-    auto _retval = _cretval ? new Resource(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Resource(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

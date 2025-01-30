@@ -21,9 +21,9 @@ class ListHeader : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -45,7 +45,7 @@ class ListHeader : ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_header_get_child(cast(GtkListHeader*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class ListHeader : ObjectG
   {
     ObjectC* _cretval;
     _cretval = gtk_list_header_get_item(cast(GtkListHeader*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,6 +112,6 @@ class ListHeader : ObjectG
    */
   void setChild(Widget child)
   {
-    gtk_list_header_set_child(cast(GtkListHeader*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_list_header_set_child(cast(GtkListHeader*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 }

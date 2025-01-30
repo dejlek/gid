@@ -77,9 +77,9 @@ class Application : DGioApplication
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -114,9 +114,9 @@ class Application : DGioApplication
   this(string applicationId, ApplicationFlags flags)
   {
     GtkApplication* _cretval;
-    const(char)* _applicationId = applicationId.toCString(false);
+    const(char)* _applicationId = applicationId.toCString(No.Alloc);
     _cretval = gtk_application_new(_applicationId, flags);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -136,7 +136,7 @@ class Application : DGioApplication
    */
   void addWindow(Window window)
   {
-    gtk_application_add_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(false) : null);
+    gtk_application_add_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
 
   /**
@@ -150,7 +150,7 @@ class Application : DGioApplication
   string[] getAccelsForAction(string detailedActionName)
   {
     char** _cretval;
-    const(char)* _detailedActionName = detailedActionName.toCString(false);
+    const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
     _cretval = gtk_application_get_accels_for_action(cast(GtkApplication*)cPtr, _detailedActionName);
     string[] _retval;
 
@@ -161,7 +161,7 @@ class Application : DGioApplication
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -186,7 +186,7 @@ class Application : DGioApplication
   string[] getActionsForAccel(string accel)
   {
     char** _cretval;
-    const(char)* _accel = accel.toCString(false);
+    const(char)* _accel = accel.toCString(No.Alloc);
     _cretval = gtk_application_get_actions_for_accel(cast(GtkApplication*)cPtr, _accel);
     string[] _retval;
 
@@ -197,7 +197,7 @@ class Application : DGioApplication
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -214,7 +214,7 @@ class Application : DGioApplication
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_active_window(cast(GtkApplication*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -230,9 +230,9 @@ class Application : DGioApplication
   Menu getMenuById(string id)
   {
     GMenu* _cretval;
-    const(char)* _id = id.toCString(false);
+    const(char)* _id = id.toCString(No.Alloc);
     _cretval = gtk_application_get_menu_by_id(cast(GtkApplication*)cPtr, _id);
-    auto _retval = _cretval ? ObjectG.getDObject!Menu(cast(GMenu*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Menu(cast(GMenu*)_cretval, No.Take);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class Application : DGioApplication
   {
     GMenuModel* _cretval;
     _cretval = gtk_application_get_menubar(cast(GtkApplication*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class Application : DGioApplication
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_window_by_id(cast(GtkApplication*)cPtr, id);
-    auto _retval = _cretval ? ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -316,8 +316,8 @@ class Application : DGioApplication
   uint inhibit(Window window, ApplicationInhibitFlags flags, string reason)
   {
     uint _retval;
-    const(char)* _reason = reason.toCString(false);
-    _retval = gtk_application_inhibit(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(false) : null, flags, _reason);
+    const(char)* _reason = reason.toCString(No.Alloc);
+    _retval = gtk_application_inhibit(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null, flags, _reason);
     return _retval;
   }
 
@@ -339,7 +339,7 @@ class Application : DGioApplication
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -356,7 +356,7 @@ class Application : DGioApplication
    */
   void removeWindow(Window window)
   {
-    gtk_application_remove_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(false) : null);
+    gtk_application_remove_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
 
   /**
@@ -376,10 +376,10 @@ class Application : DGioApplication
    */
   void setAccelsForAction(string detailedActionName, string[] accels)
   {
-    const(char)* _detailedActionName = detailedActionName.toCString(false);
+    const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
     char*[] _tmpaccels;
     foreach (s; accels)
-      _tmpaccels ~= s.toCString(false);
+      _tmpaccels ~= s.toCString(No.Alloc);
     _tmpaccels ~= null;
     const(char*)* _accels = _tmpaccels.ptr;
     gtk_application_set_accels_for_action(cast(GtkApplication*)cPtr, _detailedActionName, _accels);
@@ -405,7 +405,7 @@ class Application : DGioApplication
    */
   void setMenubar(MenuModel menubar)
   {
-    gtk_application_set_menubar(cast(GtkApplication*)cPtr, menubar ? cast(GMenuModel*)menubar.cPtr(false) : null);
+    gtk_application_set_menubar(cast(GtkApplication*)cPtr, menubar ? cast(GMenuModel*)menubar.cPtr(No.Dup) : null);
   }
 
   /**

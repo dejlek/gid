@@ -59,9 +59,9 @@ class WindowControls : Widget
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -84,7 +84,7 @@ class WindowControls : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_controls_new(side);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -95,7 +95,7 @@ class WindowControls : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_window_controls_get_decoration_layout(cast(GtkWindowControls*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class WindowControls : Widget
    */
   void setDecorationLayout(string layout)
   {
-    const(char)* _layout = layout.toCString(false);
+    const(char)* _layout = layout.toCString(No.Alloc);
     gtk_window_controls_set_decoration_layout(cast(GtkWindowControls*)cPtr, _layout);
   }
 

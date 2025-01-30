@@ -28,9 +28,9 @@ class CellAreaContext : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -99,7 +99,7 @@ class CellAreaContext : ObjectG
   {
     GtkCellArea* _cretval;
     _cretval = gtk_cell_area_context_get_area(cast(GtkCellAreaContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!CellArea(cast(GtkCellArea*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!CellArea(cast(GtkCellArea*)_cretval, No.Take);
     return _retval;
   }
 

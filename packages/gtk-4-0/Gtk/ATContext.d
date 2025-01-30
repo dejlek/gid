@@ -24,9 +24,9 @@ class ATContext : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -53,8 +53,8 @@ class ATContext : ObjectG
   static ATContext create(AccessibleRole accessibleRole, Accessible accessible, Display display)
   {
     GtkATContext* _cretval;
-    _cretval = gtk_at_context_create(accessibleRole, accessible ? cast(GtkAccessible*)(cast(ObjectG)accessible).cPtr(false) : null, display ? cast(GdkDisplay*)display.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!ATContext(cast(GtkATContext*)_cretval, true) : null;
+    _cretval = gtk_at_context_create(accessibleRole, accessible ? cast(GtkAccessible*)(cast(ObjectG)accessible).cPtr(No.Dup) : null, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!ATContext(cast(GtkATContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -66,7 +66,7 @@ class ATContext : ObjectG
   {
     GtkAccessible* _cretval;
     _cretval = gtk_at_context_get_accessible(cast(GtkATContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Accessible(cast(GtkAccessible*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Accessible(cast(GtkAccessible*)_cretval, No.Take);
     return _retval;
   }
 

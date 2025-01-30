@@ -20,9 +20,9 @@ class MultiFilter : Filter, ListModel, Buildable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -45,7 +45,7 @@ class MultiFilter : Filter, ListModel, Buildable
    */
   void append(Filter filter)
   {
-    gtk_multi_filter_append(cast(GtkMultiFilter*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(true) : null);
+    gtk_multi_filter_append(cast(GtkMultiFilter*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
   }
 
   /**

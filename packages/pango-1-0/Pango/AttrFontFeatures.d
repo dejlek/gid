@@ -14,14 +14,14 @@ class AttrFontFeatures
 {
   PangoAttrFontFeatures cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.AttrFontFeatures");
 
     cInstance = *cast(PangoAttrFontFeatures*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -37,13 +37,13 @@ class AttrFontFeatures
 
   @property string features()
   {
-    return (cast(PangoAttrFontFeatures*)cPtr).features.fromCString(false);
+    return (cast(PangoAttrFontFeatures*)cPtr).features.fromCString(No.Free);
   }
 
   @property void features(string propval)
   {
     safeFree(cast(void*)(cast(PangoAttrFontFeatures*)cPtr).features);
-    (cast(PangoAttrFontFeatures*)cPtr).features = propval.toCString(true);
+    (cast(PangoAttrFontFeatures*)cPtr).features = propval.toCString(Yes.Alloc);
   }
 
   /**
@@ -60,9 +60,9 @@ class AttrFontFeatures
   static Attribute new_(string features)
   {
     PangoAttribute* _cretval;
-    const(char)* _features = features.toCString(false);
+    const(char)* _features = features.toCString(No.Alloc);
     _cretval = pango_attr_font_features_new(_features);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

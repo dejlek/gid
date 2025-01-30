@@ -56,9 +56,9 @@ import cairo.Region;
 class DmabufTextureBuilder : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -79,7 +79,7 @@ class DmabufTextureBuilder : ObjectG
   {
     GdkDmabufTextureBuilder* _cretval;
     _cretval = gdk_dmabuf_texture_builder_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -117,7 +117,7 @@ class DmabufTextureBuilder : ObjectG
     _cretval = gdk_dmabuf_texture_builder_build(cast(GdkDmabufTextureBuilder*)cPtr, &_destroyCallback, data, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class DmabufTextureBuilder : ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_dmabuf_texture_builder_get_display(cast(GdkDmabufTextureBuilder*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class DmabufTextureBuilder : ObjectG
   {
     cairo_region_t* _cretval;
     _cretval = gdk_dmabuf_texture_builder_get_update_region(cast(GdkDmabufTextureBuilder*)cPtr);
-    auto _retval = _cretval ? new Region(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Region(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class DmabufTextureBuilder : ObjectG
   {
     GdkTexture* _cretval;
     _cretval = gdk_dmabuf_texture_builder_get_update_texture(cast(GdkDmabufTextureBuilder*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class DmabufTextureBuilder : ObjectG
    */
   void setDisplay(Display display)
   {
-    gdk_dmabuf_texture_builder_set_display(cast(GdkDmabufTextureBuilder*)cPtr, display ? cast(GdkDisplay*)display.cPtr(false) : null);
+    gdk_dmabuf_texture_builder_set_display(cast(GdkDmabufTextureBuilder*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
 
   /**
@@ -385,7 +385,7 @@ class DmabufTextureBuilder : ObjectG
    */
   void setUpdateRegion(Region region)
   {
-    gdk_dmabuf_texture_builder_set_update_region(cast(GdkDmabufTextureBuilder*)cPtr, region ? cast(cairo_region_t*)region.cPtr(false) : null);
+    gdk_dmabuf_texture_builder_set_update_region(cast(GdkDmabufTextureBuilder*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -396,7 +396,7 @@ class DmabufTextureBuilder : ObjectG
    */
   void setUpdateTexture(Texture texture)
   {
-    gdk_dmabuf_texture_builder_set_update_texture(cast(GdkDmabufTextureBuilder*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(false) : null);
+    gdk_dmabuf_texture_builder_set_update_texture(cast(GdkDmabufTextureBuilder*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
   }
 
   /**

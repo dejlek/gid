@@ -43,9 +43,9 @@ import Gtk.c.types;
 class StackSwitcher : Widget, Orientable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -68,7 +68,7 @@ class StackSwitcher : Widget, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_switcher_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -79,7 +79,7 @@ class StackSwitcher : Widget, Orientable
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_switcher_get_stack(cast(GtkStackSwitcher*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Stack(cast(GtkStack*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Stack(cast(GtkStack*)_cretval, No.Take);
     return _retval;
   }
 
@@ -90,6 +90,6 @@ class StackSwitcher : Widget, Orientable
    */
   void setStack(Stack stack)
   {
-    gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)cPtr, stack ? cast(GtkStack*)stack.cPtr(false) : null);
+    gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);
   }
 }

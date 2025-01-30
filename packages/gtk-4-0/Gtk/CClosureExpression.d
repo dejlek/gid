@@ -12,11 +12,11 @@ import Gtk.c.types;
 class CClosureExpression : Expression
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.CClosureExpression");
 
-    super(cast(GtkExpression*)ptr, ownedRef);
+    super(cast(GtkExpression*)ptr, take);
   }
 }

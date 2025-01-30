@@ -21,14 +21,14 @@ import Gtk.c.types;
 class PrintSetup : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -51,7 +51,7 @@ class PrintSetup : Boxed
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_setup_get_page_setup(cast(GtkPrintSetup*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -65,7 +65,7 @@ class PrintSetup : Boxed
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_setup_get_print_settings(cast(GtkPrintSetup*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -42,9 +42,9 @@ class LinkButton : Button
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -66,9 +66,9 @@ class LinkButton : Button
   this(string uri)
   {
     GtkWidget* _cretval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = gtk_link_button_new(_uri);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -81,10 +81,10 @@ class LinkButton : Button
   static LinkButton newWithLabel(string uri, string label)
   {
     GtkWidget* _cretval;
-    const(char)* _uri = uri.toCString(false);
-    const(char)* _label = label.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_link_button_new_with_label(_uri, _label);
-    auto _retval = _cretval ? ObjectG.getDObject!LinkButton(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!LinkButton(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class LinkButton : Button
   {
     const(char)* _cretval;
     _cretval = gtk_link_button_get_uri(cast(GtkLinkButton*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class LinkButton : Button
    */
   void setUri(string uri)
   {
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     gtk_link_button_set_uri(cast(GtkLinkButton*)cPtr, _uri);
   }
 

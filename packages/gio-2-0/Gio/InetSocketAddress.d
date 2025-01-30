@@ -23,9 +23,9 @@ class InetSocketAddress : SocketAddress
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -48,8 +48,8 @@ class InetSocketAddress : SocketAddress
   this(InetAddress address, ushort port)
   {
     GSocketAddress* _cretval;
-    _cretval = g_inet_socket_address_new(address ? cast(GInetAddress*)address.cPtr(false) : null, port);
-    this(_cretval, true);
+    _cretval = g_inet_socket_address_new(address ? cast(GInetAddress*)address.cPtr(No.Dup) : null, port);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -65,9 +65,9 @@ class InetSocketAddress : SocketAddress
   static InetSocketAddress newFromString(string address, uint port)
   {
     GSocketAddress* _cretval;
-    const(char)* _address = address.toCString(false);
+    const(char)* _address = address.toCString(No.Alloc);
     _cretval = g_inet_socket_address_new_from_string(_address, port);
-    auto _retval = _cretval ? ObjectG.getDObject!InetSocketAddress(cast(GSocketAddress*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!InetSocketAddress(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class InetSocketAddress : SocketAddress
   {
     GInetAddress* _cretval;
     _cretval = g_inet_socket_address_get_address(cast(GInetSocketAddress*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, No.Take);
     return _retval;
   }
 

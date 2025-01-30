@@ -161,9 +161,9 @@ class SimpleAsyncResult : ObjectG, AsyncResult
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -202,13 +202,13 @@ class SimpleAsyncResult : ObjectG, AsyncResult
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     GSimpleAsyncResult* _cretval;
     auto _callback = freezeDelegate(cast(void*)&callback);
-    _cretval = g_simple_async_result_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(false) : null, &_callbackCallback, _callback, sourceTag);
-    this(_cretval, true);
+    _cretval = g_simple_async_result_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_callbackCallback, _callback, sourceTag);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -228,13 +228,13 @@ class SimpleAsyncResult : ObjectG, AsyncResult
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     GSimpleAsyncResult* _cretval;
     auto _callback = freezeDelegate(cast(void*)&callback);
-    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(false) : null, &_callbackCallback, _callback, error ? cast(GError*)error.cPtr : null);
-    auto _retval = _cretval ? ObjectG.getDObject!SimpleAsyncResult(cast(GSimpleAsyncResult*)_cretval, true) : null;
+    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_callbackCallback, _callback, error ? cast(GError*)error.cPtr : null);
+    auto _retval = ObjectG.getDObject!SimpleAsyncResult(cast(GSimpleAsyncResult*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class SimpleAsyncResult : ObjectG, AsyncResult
   static bool isValid(AsyncResult result, ObjectG source, void* sourceTag)
   {
     bool _retval;
-    _retval = g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, source ? cast(ObjectC*)source.cPtr(false) : null, sourceTag);
+    _retval = g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, source ? cast(ObjectC*)source.cPtr(No.Dup) : null, sourceTag);
     return _retval;
   }
 
@@ -362,7 +362,7 @@ class SimpleAsyncResult : ObjectG, AsyncResult
    */
   void setCheckCancellable(Cancellable checkCancellable)
   {
-    g_simple_async_result_set_check_cancellable(cast(GSimpleAsyncResult*)cPtr, checkCancellable ? cast(GCancellable*)checkCancellable.cPtr(false) : null);
+    g_simple_async_result_set_check_cancellable(cast(GSimpleAsyncResult*)cPtr, checkCancellable ? cast(GCancellable*)checkCancellable.cPtr(No.Dup) : null);
   }
 
   /**

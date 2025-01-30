@@ -25,14 +25,14 @@ import cairo.c.types;
 class FontOptions : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -58,7 +58,7 @@ class FontOptions : Boxed
   {
     cairo_font_options_t* _cretval;
     _cretval = cairo_font_options_copy(cast(cairo_font_options_t*)cPtr);
-    auto _retval = _cretval ? new FontOptions(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FontOptions(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class FontOptions : Boxed
   Bool equal(FontOptions other)
   {
     Bool _retval;
-    _retval = cairo_font_options_equal(cast(cairo_font_options_t*)cPtr, other ? cast(cairo_font_options_t*)other.cPtr(false) : null);
+    _retval = cairo_font_options_equal(cast(cairo_font_options_t*)cPtr, other ? cast(cairo_font_options_t*)other.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class FontOptions : Boxed
   {
     const(char)* _cretval;
     _cretval = cairo_font_options_get_variations(cast(cairo_font_options_t*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class FontOptions : Boxed
    */
   void merge(FontOptions other)
   {
-    cairo_font_options_merge(cast(cairo_font_options_t*)cPtr, other ? cast(cairo_font_options_t*)other.cPtr(false) : null);
+    cairo_font_options_merge(cast(cairo_font_options_t*)cPtr, other ? cast(cairo_font_options_t*)other.cPtr(No.Dup) : null);
   }
 
   /**
@@ -331,7 +331,7 @@ class FontOptions : Boxed
    */
   void setVariations(string variations)
   {
-    const(char)* _variations = variations.toCString(false);
+    const(char)* _variations = variations.toCString(No.Alloc);
     cairo_font_options_set_variations(cast(cairo_font_options_t*)cPtr, _variations);
   }
 

@@ -23,14 +23,14 @@ import Gtk.c.types;
 class PaperSize : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -57,9 +57,9 @@ class PaperSize : Boxed
   this(string name)
   {
     GtkPaperSize* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_paper_size_new(_name);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -77,10 +77,10 @@ class PaperSize : Boxed
   static PaperSize newCustom(string name, string displayName, double width, double height, Unit unit)
   {
     GtkPaperSize* _cretval;
-    const(char)* _name = name.toCString(false);
-    const(char)* _displayName = displayName.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _displayName = displayName.toCString(No.Alloc);
     _cretval = gtk_paper_size_new_custom(_name, _displayName, width, height, unit);
-    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -95,8 +95,8 @@ class PaperSize : Boxed
   static PaperSize newFromGvariant(VariantG variant)
   {
     GtkPaperSize* _cretval;
-    _cretval = gtk_paper_size_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(false) : null);
-    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, true) : null;
+    _cretval = gtk_paper_size_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -116,9 +116,9 @@ class PaperSize : Boxed
   static PaperSize newFromIpp(string ippName, double width, double height)
   {
     GtkPaperSize* _cretval;
-    const(char)* _ippName = ippName.toCString(false);
+    const(char)* _ippName = ippName.toCString(No.Alloc);
     _cretval = gtk_paper_size_new_from_ipp(_ippName, width, height);
-    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -134,12 +134,12 @@ class PaperSize : Boxed
   static PaperSize newFromKeyFile(KeyFile keyFile, string groupName)
   {
     GtkPaperSize* _cretval;
-    const(char)* _groupName = groupName.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _cretval = gtk_paper_size_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(false) : null, _groupName, &_err);
+    _cretval = gtk_paper_size_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -160,10 +160,10 @@ class PaperSize : Boxed
   static PaperSize newFromPpd(string ppdName, string ppdDisplayName, double width, double height)
   {
     GtkPaperSize* _cretval;
-    const(char)* _ppdName = ppdName.toCString(false);
-    const(char)* _ppdDisplayName = ppdDisplayName.toCString(false);
+    const(char)* _ppdName = ppdName.toCString(No.Alloc);
+    const(char)* _ppdDisplayName = ppdDisplayName.toCString(No.Alloc);
     _cretval = gtk_paper_size_new_from_ppd(_ppdName, _ppdDisplayName, width, height);
-    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class PaperSize : Boxed
   {
     GtkPaperSize* _cretval;
     _cretval = gtk_paper_size_copy(cast(GtkPaperSize*)cPtr);
-    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class PaperSize : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_display_name(cast(GtkPaperSize*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class PaperSize : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_name(cast(GtkPaperSize*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class PaperSize : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_ppd_name(cast(GtkPaperSize*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class PaperSize : Boxed
   bool isEqual(PaperSize size2)
   {
     bool _retval;
-    _retval = gtk_paper_size_is_equal(cast(GtkPaperSize*)cPtr, size2 ? cast(GtkPaperSize*)size2.cPtr(false) : null);
+    _retval = gtk_paper_size_is_equal(cast(GtkPaperSize*)cPtr, size2 ? cast(GtkPaperSize*)size2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -352,7 +352,7 @@ class PaperSize : Boxed
   {
     VariantC* _cretval;
     _cretval = gtk_paper_size_to_gvariant(cast(GtkPaperSize*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -364,8 +364,8 @@ class PaperSize : Boxed
    */
   void toKeyFile(KeyFile keyFile, string groupName)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    gtk_paper_size_to_key_file(cast(GtkPaperSize*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(false) : null, _groupName);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    gtk_paper_size_to_key_file(cast(GtkPaperSize*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName);
   }
 
   /**
@@ -378,7 +378,7 @@ class PaperSize : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_default();
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

@@ -11,9 +11,9 @@ class CellEditableIfaceProxy : IfaceProxy, CellEditable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   override TypeInfo_Interface getIface()

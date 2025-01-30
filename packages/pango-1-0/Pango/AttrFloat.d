@@ -14,14 +14,14 @@ class AttrFloat
 {
   PangoAttrFloat cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.AttrFloat");
 
     cInstance = *cast(PangoAttrFloat*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

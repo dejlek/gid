@@ -16,14 +16,14 @@ class TypeInterface
 {
   GTypeInterface cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.TypeInterface");
 
     cInstance = *cast(GTypeInterface*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -80,7 +80,7 @@ class TypeInterface
   {
     GTypePlugin* _cretval;
     _cretval = g_type_interface_get_plugin(instanceType, interfaceType);
-    auto _retval = _cretval ? ObjectG.getDObject!TypePlugin(cast(GTypePlugin*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TypePlugin(cast(GTypePlugin*)_cretval, No.Take);
     return _retval;
   }
 

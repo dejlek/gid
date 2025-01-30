@@ -44,7 +44,7 @@ interface PowerProfileMonitor
   {
     GPowerProfileMonitor* _cretval;
     _cretval = g_power_profile_monitor_dup_default();
-    auto _retval = _cretval ? ObjectG.getDObject!PowerProfileMonitor(cast(GPowerProfileMonitor*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!PowerProfileMonitor(cast(GPowerProfileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 

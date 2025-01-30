@@ -382,9 +382,9 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -434,7 +434,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void actionSetEnabled(string actionName, bool enabled)
   {
-    const(char)* _actionName = actionName.toCString(false);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     gtk_widget_action_set_enabled(cast(GtkWidget*)cPtr, _actionName, enabled);
   }
 
@@ -476,8 +476,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   bool activateAction(string name, VariantG args)
   {
     bool _retval;
-    const(char)* _name = name.toCString(false);
-    _retval = gtk_widget_activate_action_variant(cast(GtkWidget*)cPtr, _name, args ? cast(VariantC*)args.cPtr(false) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    _retval = gtk_widget_activate_action_variant(cast(GtkWidget*)cPtr, _name, args ? cast(VariantC*)args.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -499,7 +499,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void addController(EventController controller)
   {
-    gtk_widget_add_controller(cast(GtkWidget*)cPtr, controller ? cast(GtkEventController*)controller.cPtr(true) : null);
+    gtk_widget_add_controller(cast(GtkWidget*)cPtr, controller ? cast(GtkEventController*)controller.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -514,7 +514,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void addCssClass(string cssClass)
   {
-    const(char)* _cssClass = cssClass.toCString(false);
+    const(char)* _cssClass = cssClass.toCString(No.Alloc);
     gtk_widget_add_css_class(cast(GtkWidget*)cPtr, _cssClass);
   }
 
@@ -529,7 +529,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void addMnemonicLabel(Widget label)
   {
-    gtk_widget_add_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(false) : null);
+    gtk_widget_add_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(No.Dup) : null);
   }
 
   /**
@@ -564,7 +564,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     {
       auto _dlg = cast(TickCallback*)userData;
 
-      bool _retval = (*_dlg)(widget ? ObjectG.getDObject!Widget(cast(void*)widget, false) : null, frameClock ? ObjectG.getDObject!FrameClock(cast(void*)frameClock, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!Widget(cast(void*)widget, No.Take), ObjectG.getDObject!FrameClock(cast(void*)frameClock, No.Take));
       return _retval;
     }
 
@@ -591,7 +591,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void allocate(int width, int height, int baseline, Transform transform)
   {
-    gtk_widget_allocate(cast(GtkWidget*)cPtr, width, height, baseline, transform ? cast(GskTransform*)transform.cPtr(true) : null);
+    gtk_widget_allocate(cast(GtkWidget*)cPtr, width, height, baseline, transform ? cast(GskTransform*)transform.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -641,8 +641,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     bool _retval;
     graphene_rect_t _outBounds;
-    _retval = gtk_widget_compute_bounds(cast(GtkWidget*)cPtr, target ? cast(GtkWidget*)target.cPtr(false) : null, &_outBounds);
-    outBounds = new Rect(cast(void*)&_outBounds, false);
+    _retval = gtk_widget_compute_bounds(cast(GtkWidget*)cPtr, target ? cast(GtkWidget*)target.cPtr(No.Dup) : null, &_outBounds);
+    outBounds = new Rect(cast(void*)&_outBounds, No.Take);
     return _retval;
   }
 
@@ -685,8 +685,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     bool _retval;
     graphene_point_t _outPoint;
-    _retval = gtk_widget_compute_point(cast(GtkWidget*)cPtr, target ? cast(GtkWidget*)target.cPtr(false) : null, point ? cast(graphene_point_t*)point.cPtr(false) : null, &_outPoint);
-    outPoint = new Point(cast(void*)&_outPoint, false);
+    _retval = gtk_widget_compute_point(cast(GtkWidget*)cPtr, target ? cast(GtkWidget*)target.cPtr(No.Dup) : null, point ? cast(graphene_point_t*)point.cPtr(No.Dup) : null, &_outPoint);
+    outPoint = new Point(cast(void*)&_outPoint, No.Take);
     return _retval;
   }
 
@@ -708,8 +708,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     bool _retval;
     graphene_matrix_t _outTransform;
-    _retval = gtk_widget_compute_transform(cast(GtkWidget*)cPtr, target ? cast(GtkWidget*)target.cPtr(false) : null, &_outTransform);
-    outTransform = new Matrix(cast(void*)&_outTransform, false);
+    _retval = gtk_widget_compute_transform(cast(GtkWidget*)cPtr, target ? cast(GtkWidget*)target.cPtr(No.Dup) : null, &_outTransform);
+    outTransform = new Matrix(cast(void*)&_outTransform, No.Take);
     return _retval;
   }
 
@@ -740,7 +740,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     PangoContext* _cretval;
     _cretval = gtk_widget_create_pango_context(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Context(cast(PangoContext*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -759,9 +759,9 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   Layout createPangoLayout(string text)
   {
     PangoLayout* _cretval;
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     _cretval = gtk_widget_create_pango_layout(cast(GtkWidget*)cPtr, _text);
-    auto _retval = _cretval ? ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -885,7 +885,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_ancestor(cast(GtkWidget*)cPtr, widgetType);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -954,7 +954,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GdkClipboard* _cretval;
     _cretval = gtk_widget_get_clipboard(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -971,7 +971,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GdkRGBA _color;
     gtk_widget_get_color(cast(GtkWidget*)cPtr, &_color);
-    color = new RGBA(cast(void*)&_color, false);
+    color = new RGBA(cast(void*)&_color, No.Take);
   }
 
   /**
@@ -993,7 +993,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -1006,7 +1006,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_css_name(cast(GtkWidget*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -1020,7 +1020,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GdkCursor* _cretval;
     _cretval = gtk_widget_get_cursor(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1052,7 +1052,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GdkDisplay* _cretval;
     _cretval = gtk_widget_get_display(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1065,7 +1065,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_first_child(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1078,7 +1078,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_focus_child(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1117,7 +1117,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     PangoFontMap* _cretval;
     _cretval = gtk_widget_get_font_map(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!FontMap(cast(PangoFontMap*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FontMap(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1131,7 +1131,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     const(cairo_font_options_t)* _cretval;
     _cretval = gtk_widget_get_font_options(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? new FontOptions(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new FontOptions(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1160,7 +1160,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GdkFrameClock* _cretval;
     _cretval = gtk_widget_get_frame_clock(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!FrameClock(cast(GdkFrameClock*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FrameClock(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1258,7 +1258,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_last_child(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1271,7 +1271,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_widget_get_layout_manager(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!LayoutManager(cast(GtkLayoutManager*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!LayoutManager(cast(GtkLayoutManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1340,7 +1340,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_name(cast(GtkWidget*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -1355,7 +1355,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkNative* _cretval;
     _cretval = gtk_widget_get_native(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Native(cast(GtkNative*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Native(cast(GtkNative*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1368,7 +1368,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_next_sibling(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1411,7 +1411,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     PangoContext* _cretval;
     _cretval = gtk_widget_get_pango_context(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Context(cast(PangoContext*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1423,7 +1423,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_parent(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1448,8 +1448,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     GtkRequisition _minimumSize;
     GtkRequisition _naturalSize;
     gtk_widget_get_preferred_size(cast(GtkWidget*)cPtr, &_minimumSize, &_naturalSize);
-    minimumSize = new Requisition(cast(void*)&_minimumSize, false);
-    naturalSize = new Requisition(cast(void*)&_naturalSize, false);
+    minimumSize = new Requisition(cast(void*)&_minimumSize, No.Take);
+    naturalSize = new Requisition(cast(void*)&_naturalSize, No.Take);
   }
 
   /**
@@ -1461,7 +1461,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_prev_sibling(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1477,7 +1477,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GdkClipboard* _cretval;
     _cretval = gtk_widget_get_primary_clipboard(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1535,7 +1535,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkRoot* _cretval;
     _cretval = gtk_widget_get_root(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Root(cast(GtkRoot*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Root(cast(GtkRoot*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1582,7 +1582,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkSettings* _cretval;
     _cretval = gtk_widget_get_settings(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Settings(cast(GtkSettings*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Settings(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1655,7 +1655,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_widget_get_style_context(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!StyleContext(cast(GtkStyleContext*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!StyleContext(cast(GtkStyleContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1677,9 +1677,9 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   ObjectG getTemplateChild(GType widgetType, string name)
   {
     ObjectC* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_widget_get_template_child(cast(GtkWidget*)cPtr, widgetType, _name);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1694,7 +1694,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_tooltip_markup(cast(GtkWidget*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -1709,7 +1709,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_tooltip_text(cast(GtkWidget*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -1812,7 +1812,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   bool hasCssClass(string cssClass)
   {
     bool _retval;
-    const(char)* _cssClass = cssClass.toCString(false);
+    const(char)* _cssClass = cssClass.toCString(No.Alloc);
     _retval = gtk_widget_has_css_class(cast(GtkWidget*)cPtr, _cssClass);
     return _retval;
   }
@@ -1927,8 +1927,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void insertActionGroup(string name, ActionGroup group)
   {
-    const(char)* _name = name.toCString(false);
-    gtk_widget_insert_action_group(cast(GtkWidget*)cPtr, _name, group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(false) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    gtk_widget_insert_action_group(cast(GtkWidget*)cPtr, _name, group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1948,7 +1948,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void insertAfter(Widget parent, Widget previousSibling)
   {
-    gtk_widget_insert_after(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(false) : null, previousSibling ? cast(GtkWidget*)previousSibling.cPtr(false) : null);
+    gtk_widget_insert_after(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null, previousSibling ? cast(GtkWidget*)previousSibling.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1967,7 +1967,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void insertBefore(Widget parent, Widget nextSibling)
   {
-    gtk_widget_insert_before(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(false) : null, nextSibling ? cast(GtkWidget*)nextSibling.cPtr(false) : null);
+    gtk_widget_insert_before(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null, nextSibling ? cast(GtkWidget*)nextSibling.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1981,7 +1981,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   bool isAncestor(Widget ancestor)
   {
     bool _retval;
-    _retval = gtk_widget_is_ancestor(cast(GtkWidget*)cPtr, ancestor ? cast(GtkWidget*)ancestor.cPtr(false) : null);
+    _retval = gtk_widget_is_ancestor(cast(GtkWidget*)cPtr, ancestor ? cast(GtkWidget*)ancestor.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -2161,7 +2161,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GListModel* _cretval;
     _cretval = gtk_widget_observe_children(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2179,7 +2179,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GListModel* _cretval;
     _cretval = gtk_widget_observe_controllers(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2206,7 +2206,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_pick(cast(GtkWidget*)cPtr, x, y, flags);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2283,7 +2283,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void removeController(EventController controller)
   {
-    gtk_widget_remove_controller(cast(GtkWidget*)cPtr, controller ? cast(GtkEventController*)controller.cPtr(false) : null);
+    gtk_widget_remove_controller(cast(GtkWidget*)cPtr, controller ? cast(GtkEventController*)controller.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2295,7 +2295,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void removeCssClass(string cssClass)
   {
-    const(char)* _cssClass = cssClass.toCString(false);
+    const(char)* _cssClass = cssClass.toCString(No.Alloc);
     gtk_widget_remove_css_class(cast(GtkWidget*)cPtr, _cssClass);
   }
 
@@ -2310,7 +2310,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void removeMnemonicLabel(Widget label)
   {
-    gtk_widget_remove_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(false) : null);
+    gtk_widget_remove_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2389,7 +2389,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     char*[] _tmpclasses;
     foreach (s; classes)
-      _tmpclasses ~= s.toCString(false);
+      _tmpclasses ~= s.toCString(No.Alloc);
     _tmpclasses ~= null;
     const(char*)* _classes = _tmpclasses.ptr;
     gtk_widget_set_css_classes(cast(GtkWidget*)cPtr, _classes);
@@ -2405,7 +2405,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void setCursor(Cursor cursor)
   {
-    gtk_widget_set_cursor(cast(GtkWidget*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(false) : null);
+    gtk_widget_set_cursor(cast(GtkWidget*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2423,7 +2423,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void setCursorFromName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_set_cursor_from_name(cast(GtkWidget*)cPtr, _name);
   }
 
@@ -2458,7 +2458,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void setFocusChild(Widget child)
   {
-    gtk_widget_set_focus_child(cast(GtkWidget*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_widget_set_focus_child(cast(GtkWidget*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2508,7 +2508,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void setFontMap(FontMap fontMap)
   {
-    gtk_widget_set_font_map(cast(GtkWidget*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(false) : null);
+    gtk_widget_set_font_map(cast(GtkWidget*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2522,7 +2522,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void setFontOptions(FontOptions options)
   {
-    gtk_widget_set_font_options(cast(GtkWidget*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(false) : null);
+    gtk_widget_set_font_options(cast(GtkWidget*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2604,7 +2604,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void setLayoutManager(LayoutManager layoutManager)
   {
-    gtk_widget_set_layout_manager(cast(GtkWidget*)cPtr, layoutManager ? cast(GtkLayoutManager*)layoutManager.cPtr(true) : null);
+    gtk_widget_set_layout_manager(cast(GtkWidget*)cPtr, layoutManager ? cast(GtkLayoutManager*)layoutManager.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -2662,7 +2662,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_set_name(cast(GtkWidget*)cPtr, _name);
   }
 
@@ -2721,7 +2721,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void setParent(Widget parent)
   {
-    gtk_widget_set_parent(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(false) : null);
+    gtk_widget_set_parent(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2817,7 +2817,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void setTooltipMarkup(string markup)
   {
-    const(char)* _markup = markup.toCString(false);
+    const(char)* _markup = markup.toCString(No.Alloc);
     gtk_widget_set_tooltip_markup(cast(GtkWidget*)cPtr, _markup);
   }
 
@@ -2834,7 +2834,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void setTooltipText(string text)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_widget_set_tooltip_text(cast(GtkWidget*)cPtr, _text);
   }
 
@@ -2934,7 +2934,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    */
   void snapshotChild(Widget child, Snapshot snapshot)
   {
-    gtk_widget_snapshot_child(cast(GtkWidget*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, snapshot ? cast(GtkSnapshot*)snapshot.cPtr(false) : null);
+    gtk_widget_snapshot_child(cast(GtkWidget*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, snapshot ? cast(GtkSnapshot*)snapshot.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2957,7 +2957,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   bool translateCoordinates(Widget destWidget, double srcX, double srcY, out double destX, out double destY)
   {
     bool _retval;
-    _retval = gtk_widget_translate_coordinates(cast(GtkWidget*)cPtr, destWidget ? cast(GtkWidget*)destWidget.cPtr(false) : null, srcX, srcY, cast(double*)&destX, cast(double*)&destY);
+    _retval = gtk_widget_translate_coordinates(cast(GtkWidget*)cPtr, destWidget ? cast(GtkWidget*)destWidget.cPtr(No.Dup) : null, srcX, srcY, cast(double*)&destX, cast(double*)&destY);
     return _retval;
   }
 

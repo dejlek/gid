@@ -108,9 +108,9 @@ class GLShader : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -133,9 +133,9 @@ class GLShader : ObjectG
   static GLShader newFromResource(string resourcePath)
   {
     GskGLShader* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(false);
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gsk_gl_shader_new_from_resource(_resourcePath);
-    auto _retval = _cretval ? ObjectG.getDObject!GLShader(cast(GskGLShader*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!GLShader(cast(GskGLShader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class GLShader : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gsk_gl_shader_compile(cast(GskGLShader*)cPtr, renderer ? cast(GskRenderer*)renderer.cPtr(false) : null, &_err);
+    _retval = gsk_gl_shader_compile(cast(GskGLShader*)cPtr, renderer ? cast(GskRenderer*)renderer.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -174,7 +174,7 @@ class GLShader : ObjectG
   int findUniformByName(string name)
   {
     int _retval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = gsk_gl_shader_find_uniform_by_name(cast(GskGLShader*)cPtr, _name);
     return _retval;
   }
@@ -224,7 +224,7 @@ class GLShader : ObjectG
   {
     const(char)* _cretval;
     _cretval = gsk_gl_shader_get_resource(cast(GskGLShader*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class GLShader : ObjectG
   {
     const(char)* _cretval;
     _cretval = gsk_gl_shader_get_uniform_name(cast(GskGLShader*)cPtr, idx);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

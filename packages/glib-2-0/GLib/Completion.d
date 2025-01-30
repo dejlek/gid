@@ -31,14 +31,14 @@ class Completion
 {
   GCompletion cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.Completion");
 
     cInstance = *cast(GCompletion*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -59,13 +59,13 @@ class Completion
 
   @property string prefix()
   {
-    return (cast(GCompletion*)cPtr).prefix.fromCString(false);
+    return (cast(GCompletion*)cPtr).prefix.fromCString(No.Free);
   }
 
   @property void prefix(string propval)
   {
     safeFree(cast(void*)(cast(GCompletion*)cPtr).prefix);
-    (cast(GCompletion*)cPtr).prefix = propval.toCString(true);
+    (cast(GCompletion*)cPtr).prefix = propval.toCString(Yes.Alloc);
   }
 
   @property GCompletionStrncmpFunc strncmpFunc()
@@ -111,11 +111,11 @@ class Completion
   string[] completeUtf8(string prefix, out string newPrefix)
   {
     GList* _cretval;
-    const(char)* _prefix = prefix.toCString(false);
+    const(char)* _prefix = prefix.toCString(No.Alloc);
     char* _newPrefix;
     _cretval = g_completion_complete_utf8(cast(GCompletion*)cPtr, _prefix, &_newPrefix);
     auto _retval = gListToD!(string, GidOwnership.None)(cast(GList*)_cretval);
-    newPrefix = _newPrefix.fromCString(true);
+    newPrefix = _newPrefix.fromCString(Yes.Free);
     return _retval;
   }
 }

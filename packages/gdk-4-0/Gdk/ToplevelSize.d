@@ -14,14 +14,14 @@ class ToplevelSize
   GdkToplevelSize* cInstancePtr;
   bool owned;
 
-  this(void* ptr, bool owned = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.ToplevelSize");
 
     cInstancePtr = cast(GdkToplevelSize*)ptr;
 
-    this.owned = owned;
+    owned = take;
   }
 
   void* cPtr()

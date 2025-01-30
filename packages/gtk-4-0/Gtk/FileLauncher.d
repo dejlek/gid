@@ -32,9 +32,9 @@ class FileLauncher : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -56,8 +56,8 @@ class FileLauncher : ObjectG
   this(File file)
   {
     GtkFileLauncher* _cretval;
-    _cretval = gtk_file_launcher_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gtk_file_launcher_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -79,7 +79,7 @@ class FileLauncher : ObjectG
   {
     GFile* _cretval;
     _cretval = gtk_file_launcher_get_file(cast(GtkFileLauncher*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,11 +112,11 @@ class FileLauncher : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gtk_file_launcher_launch(cast(GtkFileLauncher*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gtk_file_launcher_launch(cast(GtkFileLauncher*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -131,7 +131,7 @@ class FileLauncher : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_launcher_launch_finish(cast(GtkFileLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = gtk_file_launcher_launch_finish(cast(GtkFileLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -156,11 +156,11 @@ class FileLauncher : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gtk_file_launcher_open_containing_folder(cast(GtkFileLauncher*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gtk_file_launcher_open_containing_folder(cast(GtkFileLauncher*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -175,7 +175,7 @@ class FileLauncher : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_launcher_open_containing_folder_finish(cast(GtkFileLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = gtk_file_launcher_open_containing_folder_finish(cast(GtkFileLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -199,7 +199,7 @@ class FileLauncher : ObjectG
    */
   void setFile(File file)
   {
-    gtk_file_launcher_set_file(cast(GtkFileLauncher*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(false) : null);
+    gtk_file_launcher_set_file(cast(GtkFileLauncher*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
 
   /**

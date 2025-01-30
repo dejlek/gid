@@ -67,7 +67,7 @@ template ColorChooserT()
   {
     GdkRGBA _color;
     gtk_color_chooser_get_rgba(cast(GtkColorChooser*)cPtr, &_color);
-    color = new RGBA(cast(void*)&_color, false);
+    color = new RGBA(cast(void*)&_color, No.Take);
   }
 
   /**
@@ -93,7 +93,7 @@ template ColorChooserT()
    */
   override void setRgba(RGBA color)
   {
-    gtk_color_chooser_set_rgba(cast(GtkColorChooser*)cPtr, color ? cast(GdkRGBA*)color.cPtr(false) : null);
+    gtk_color_chooser_set_rgba(cast(GtkColorChooser*)cPtr, color ? cast(GdkRGBA*)color.cPtr(No.Dup) : null);
   }
 
   /**

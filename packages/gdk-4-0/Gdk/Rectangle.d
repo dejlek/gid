@@ -24,17 +24,17 @@ class Rectangle : Boxed
 
   this()
   {
-    super(safeMalloc(GdkRectangle.sizeof), true);
+    super(safeMalloc(GdkRectangle.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -110,7 +110,7 @@ class Rectangle : Boxed
   bool equal(Rectangle rect2)
   {
     bool _retval;
-    _retval = gdk_rectangle_equal(cast(GdkRectangle*)cPtr, rect2 ? cast(GdkRectangle*)rect2.cPtr(false) : null);
+    _retval = gdk_rectangle_equal(cast(GdkRectangle*)cPtr, rect2 ? cast(GdkRectangle*)rect2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -131,8 +131,8 @@ class Rectangle : Boxed
   {
     bool _retval;
     GdkRectangle _dest;
-    _retval = gdk_rectangle_intersect(cast(GdkRectangle*)cPtr, src2 ? cast(GdkRectangle*)src2.cPtr(false) : null, &_dest);
-    dest = new Rectangle(cast(void*)&_dest, false);
+    _retval = gdk_rectangle_intersect(cast(GdkRectangle*)cPtr, src2 ? cast(GdkRectangle*)src2.cPtr(No.Dup) : null, &_dest);
+    dest = new Rectangle(cast(void*)&_dest, No.Take);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class Rectangle : Boxed
   void union_(Rectangle src2, out Rectangle dest)
   {
     GdkRectangle _dest;
-    gdk_rectangle_union(cast(GdkRectangle*)cPtr, src2 ? cast(GdkRectangle*)src2.cPtr(false) : null, &_dest);
-    dest = new Rectangle(cast(void*)&_dest, false);
+    gdk_rectangle_union(cast(GdkRectangle*)cPtr, src2 ? cast(GdkRectangle*)src2.cPtr(No.Dup) : null, &_dest);
+    dest = new Rectangle(cast(void*)&_dest, No.Take);
   }
 }

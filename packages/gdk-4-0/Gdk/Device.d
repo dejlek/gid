@@ -25,9 +25,9 @@ class Device : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -60,7 +60,7 @@ class Device : ObjectG
   {
     GdkDeviceTool* _cretval;
     _cretval = gdk_device_get_device_tool(cast(GdkDevice*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!DeviceTool(cast(GdkDeviceTool*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!DeviceTool(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class Device : ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_device_get_display(cast(GdkDevice*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class Device : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_name(cast(GdkDevice*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class Device : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_product_id(cast(GdkDevice*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class Device : ObjectG
   {
     GdkSeat* _cretval;
     _cretval = gdk_device_get_seat(cast(GdkDevice*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Seat(cast(GdkSeat*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Seat(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class Device : ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_device_get_surface_at_position(cast(GdkDevice*)cPtr, cast(double*)&winX, cast(double*)&winY);
-    auto _retval = _cretval ? ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class Device : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_vendor_id(cast(GdkDevice*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

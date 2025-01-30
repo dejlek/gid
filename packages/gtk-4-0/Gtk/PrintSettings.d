@@ -25,9 +25,9 @@ import Gtk.c.types;
 class PrintSettings : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -48,7 +48,7 @@ class PrintSettings : ObjectG
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_settings_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -64,12 +64,12 @@ class PrintSettings : ObjectG
   static PrintSettings newFromFile(string fileName)
   {
     GtkPrintSettings* _cretval;
-    const(char)* _fileName = fileName.toCString(false);
+    const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
     _cretval = gtk_print_settings_new_from_file(_fileName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -84,8 +84,8 @@ class PrintSettings : ObjectG
   static PrintSettings newFromGvariant(VariantG variant)
   {
     GtkPrintSettings* _cretval;
-    _cretval = gtk_print_settings_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, true) : null;
+    _cretval = gtk_print_settings_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -103,12 +103,12 @@ class PrintSettings : ObjectG
   static PrintSettings newFromKeyFile(KeyFile keyFile, string groupName)
   {
     GtkPrintSettings* _cretval;
-    const(char)* _groupName = groupName.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _cretval = gtk_print_settings_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(false) : null, _groupName, &_err);
+    _cretval = gtk_print_settings_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class PrintSettings : ObjectG
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_settings_copy(cast(GtkPrintSettings*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -134,8 +134,8 @@ class PrintSettings : ObjectG
     extern(C) void _funcCallback(const(char)* key, const(char)* value, void* userData)
     {
       auto _dlg = cast(PrintSettingsFunc*)userData;
-      string _key = key.fromCString(false);
-      string _value = value.fromCString(false);
+      string _key = key.fromCString(No.Free);
+      string _value = value.fromCString(No.Free);
 
       (*_dlg)(_key, _value);
     }
@@ -153,9 +153,9 @@ class PrintSettings : ObjectG
   string get(string key)
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = gtk_print_settings_get(cast(GtkPrintSettings*)cPtr, _key);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class PrintSettings : ObjectG
   bool getBool(string key)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = gtk_print_settings_get_bool(cast(GtkPrintSettings*)cPtr, _key);
     return _retval;
   }
@@ -195,7 +195,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_default_source(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_dither(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class PrintSettings : ObjectG
   double getDouble(string key)
   {
     double _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = gtk_print_settings_get_double(cast(GtkPrintSettings*)cPtr, _key);
     return _retval;
   }
@@ -238,7 +238,7 @@ class PrintSettings : ObjectG
   double getDoubleWithDefault(string key, double def)
   {
     double _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = gtk_print_settings_get_double_with_default(cast(GtkPrintSettings*)cPtr, _key, def);
     return _retval;
   }
@@ -263,7 +263,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_finishings(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -276,7 +276,7 @@ class PrintSettings : ObjectG
   int getInt(string key)
   {
     int _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = gtk_print_settings_get_int(cast(GtkPrintSettings*)cPtr, _key);
     return _retval;
   }
@@ -292,7 +292,7 @@ class PrintSettings : ObjectG
   int getIntWithDefault(string key, int def)
   {
     int _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = gtk_print_settings_get_int_with_default(cast(GtkPrintSettings*)cPtr, _key, def);
     return _retval;
   }
@@ -309,7 +309,7 @@ class PrintSettings : ObjectG
   double getLength(string key, Unit unit)
   {
     double _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = gtk_print_settings_get_length(cast(GtkPrintSettings*)cPtr, _key, unit);
     return _retval;
   }
@@ -323,7 +323,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_media_type(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -382,7 +382,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_output_bin(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -443,7 +443,7 @@ class PrintSettings : ObjectG
   {
     GtkPaperSize* _cretval;
     _cretval = gtk_print_settings_get_paper_size(cast(GtkPrintSettings*)cPtr);
-    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -482,7 +482,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_printer(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -584,7 +584,7 @@ class PrintSettings : ObjectG
   bool hasKey(string key)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = gtk_print_settings_has_key(cast(GtkPrintSettings*)cPtr, _key);
     return _retval;
   }
@@ -601,7 +601,7 @@ class PrintSettings : ObjectG
   bool loadFile(string fileName)
   {
     bool _retval;
-    const(char)* _fileName = fileName.toCString(false);
+    const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_print_settings_load_file(cast(GtkPrintSettings*)cPtr, _fileName, &_err);
     if (_err)
@@ -622,9 +622,9 @@ class PrintSettings : ObjectG
   bool loadKeyFile(KeyFile keyFile, string groupName)
   {
     bool _retval;
-    const(char)* _groupName = groupName.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_print_settings_load_key_file(cast(GtkPrintSettings*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(false) : null, _groupName, &_err);
+    _retval = gtk_print_settings_load_key_file(cast(GtkPrintSettings*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -638,8 +638,8 @@ class PrintSettings : ObjectG
    */
   void set(string key, string value)
   {
-    const(char)* _key = key.toCString(false);
-    const(char)* _value = value.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     gtk_print_settings_set(cast(GtkPrintSettings*)cPtr, _key, _value);
   }
 
@@ -651,7 +651,7 @@ class PrintSettings : ObjectG
    */
   void setBool(string key, bool value)
   {
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_set_bool(cast(GtkPrintSettings*)cPtr, _key, value);
   }
 
@@ -672,7 +672,7 @@ class PrintSettings : ObjectG
    */
   void setDefaultSource(string defaultSource)
   {
-    const(char)* _defaultSource = defaultSource.toCString(false);
+    const(char)* _defaultSource = defaultSource.toCString(No.Alloc);
     gtk_print_settings_set_default_source(cast(GtkPrintSettings*)cPtr, _defaultSource);
   }
 
@@ -683,7 +683,7 @@ class PrintSettings : ObjectG
    */
   void setDither(string dither)
   {
-    const(char)* _dither = dither.toCString(false);
+    const(char)* _dither = dither.toCString(No.Alloc);
     gtk_print_settings_set_dither(cast(GtkPrintSettings*)cPtr, _dither);
   }
 
@@ -695,7 +695,7 @@ class PrintSettings : ObjectG
    */
   void setDouble(string key, double value)
   {
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_set_double(cast(GtkPrintSettings*)cPtr, _key, value);
   }
 
@@ -716,7 +716,7 @@ class PrintSettings : ObjectG
    */
   void setFinishings(string finishings)
   {
-    const(char)* _finishings = finishings.toCString(false);
+    const(char)* _finishings = finishings.toCString(No.Alloc);
     gtk_print_settings_set_finishings(cast(GtkPrintSettings*)cPtr, _finishings);
   }
 
@@ -728,7 +728,7 @@ class PrintSettings : ObjectG
    */
   void setInt(string key, int value)
   {
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_set_int(cast(GtkPrintSettings*)cPtr, _key, value);
   }
 
@@ -741,7 +741,7 @@ class PrintSettings : ObjectG
    */
   void setLength(string key, double value, Unit unit)
   {
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_set_length(cast(GtkPrintSettings*)cPtr, _key, value, unit);
   }
 
@@ -753,7 +753,7 @@ class PrintSettings : ObjectG
    */
   void setMediaType(string mediaType)
   {
-    const(char)* _mediaType = mediaType.toCString(false);
+    const(char)* _mediaType = mediaType.toCString(No.Alloc);
     gtk_print_settings_set_media_type(cast(GtkPrintSettings*)cPtr, _mediaType);
   }
 
@@ -804,7 +804,7 @@ class PrintSettings : ObjectG
    */
   void setOutputBin(string outputBin)
   {
-    const(char)* _outputBin = outputBin.toCString(false);
+    const(char)* _outputBin = outputBin.toCString(No.Alloc);
     gtk_print_settings_set_output_bin(cast(GtkPrintSettings*)cPtr, _outputBin);
   }
 
@@ -853,7 +853,7 @@ class PrintSettings : ObjectG
    */
   void setPaperSize(PaperSize paperSize)
   {
-    gtk_print_settings_set_paper_size(cast(GtkPrintSettings*)cPtr, paperSize ? cast(GtkPaperSize*)paperSize.cPtr(false) : null);
+    gtk_print_settings_set_paper_size(cast(GtkPrintSettings*)cPtr, paperSize ? cast(GtkPaperSize*)paperSize.cPtr(No.Dup) : null);
   }
 
   /**
@@ -885,7 +885,7 @@ class PrintSettings : ObjectG
    */
   void setPrinter(string printer)
   {
-    const(char)* _printer = printer.toCString(false);
+    const(char)* _printer = printer.toCString(No.Alloc);
     gtk_print_settings_set_printer(cast(GtkPrintSettings*)cPtr, _printer);
   }
 
@@ -975,7 +975,7 @@ class PrintSettings : ObjectG
   bool toFile(string fileName)
   {
     bool _retval;
-    const(char)* _fileName = fileName.toCString(false);
+    const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_print_settings_to_file(cast(GtkPrintSettings*)cPtr, _fileName, &_err);
     if (_err)
@@ -991,7 +991,7 @@ class PrintSettings : ObjectG
   {
     VariantC* _cretval;
     _cretval = gtk_print_settings_to_gvariant(cast(GtkPrintSettings*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1004,8 +1004,8 @@ class PrintSettings : ObjectG
    */
   void toKeyFile(KeyFile keyFile, string groupName)
   {
-    const(char)* _groupName = groupName.toCString(false);
-    gtk_print_settings_to_key_file(cast(GtkPrintSettings*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(false) : null, _groupName);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
+    gtk_print_settings_to_key_file(cast(GtkPrintSettings*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName);
   }
 
   /**
@@ -1016,7 +1016,7 @@ class PrintSettings : ObjectG
    */
   void unset(string key)
   {
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_unset(cast(GtkPrintSettings*)cPtr, _key);
   }
 }

@@ -37,14 +37,14 @@ import Gid.gid;
 class PopupLayout : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -76,8 +76,8 @@ class PopupLayout : Boxed
   this(Rectangle anchorRect, Gravity rectAnchor, Gravity surfaceAnchor)
   {
     GdkPopupLayout* _cretval;
-    _cretval = gdk_popup_layout_new(anchorRect ? cast(GdkRectangle*)anchorRect.cPtr(false) : null, rectAnchor, surfaceAnchor);
-    this(_cretval, true);
+    _cretval = gdk_popup_layout_new(anchorRect ? cast(GdkRectangle*)anchorRect.cPtr(No.Dup) : null, rectAnchor, surfaceAnchor);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -88,7 +88,7 @@ class PopupLayout : Boxed
   {
     GdkPopupLayout* _cretval;
     _cretval = gdk_popup_layout_copy(cast(GdkPopupLayout*)cPtr);
-    auto _retval = _cretval ? new PopupLayout(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new PopupLayout(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class PopupLayout : Boxed
   bool equal(PopupLayout other)
   {
     bool _retval;
-    _retval = gdk_popup_layout_equal(cast(GdkPopupLayout*)cPtr, other ? cast(GdkPopupLayout*)other.cPtr(false) : null);
+    _retval = gdk_popup_layout_equal(cast(GdkPopupLayout*)cPtr, other ? cast(GdkPopupLayout*)other.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class PopupLayout : Boxed
   {
     const(GdkRectangle)* _cretval;
     _cretval = gdk_popup_layout_get_anchor_rect(cast(GdkPopupLayout*)cPtr);
-    auto _retval = _cretval ? new Rectangle(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Rectangle(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class PopupLayout : Boxed
    */
   void setAnchorRect(Rectangle anchorRect)
   {
-    gdk_popup_layout_set_anchor_rect(cast(GdkPopupLayout*)cPtr, anchorRect ? cast(GdkRectangle*)anchorRect.cPtr(false) : null);
+    gdk_popup_layout_set_anchor_rect(cast(GdkPopupLayout*)cPtr, anchorRect ? cast(GdkRectangle*)anchorRect.cPtr(No.Dup) : null);
   }
 
   /**

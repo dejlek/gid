@@ -42,9 +42,9 @@ import Gtk.c.types;
 class Overlay : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -65,7 +65,7 @@ class Overlay : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_overlay_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -80,7 +80,7 @@ class Overlay : Widget
    */
   void addOverlay(Widget widget)
   {
-    gtk_overlay_add_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_overlay_add_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -91,7 +91,7 @@ class Overlay : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_overlay_get_child(cast(GtkOverlay*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class Overlay : Widget
   bool getClipOverlay(Widget widget)
   {
     bool _retval;
-    _retval = gtk_overlay_get_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    _retval = gtk_overlay_get_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class Overlay : Widget
   bool getMeasureOverlay(Widget widget)
   {
     bool _retval;
-    _retval = gtk_overlay_get_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    _retval = gtk_overlay_get_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class Overlay : Widget
    */
   void removeOverlay(Widget widget)
   {
-    gtk_overlay_remove_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_overlay_remove_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -139,7 +139,7 @@ class Overlay : Widget
    */
   void setChild(Widget child)
   {
-    gtk_overlay_set_child(cast(GtkOverlay*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_overlay_set_child(cast(GtkOverlay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -150,7 +150,7 @@ class Overlay : Widget
    */
   void setClipOverlay(Widget widget, bool clipOverlay)
   {
-    gtk_overlay_set_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, clipOverlay);
+    gtk_overlay_set_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, clipOverlay);
   }
 
   /**
@@ -164,6 +164,6 @@ class Overlay : Widget
    */
   void setMeasureOverlay(Widget widget, bool measure)
   {
-    gtk_overlay_set_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, measure);
+    gtk_overlay_set_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, measure);
   }
 }

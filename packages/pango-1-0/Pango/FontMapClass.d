@@ -14,14 +14,14 @@ class FontMapClass
 {
   PangoFontMapClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.FontMapClass");
 
     cInstance = *cast(PangoFontMapClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -58,7 +58,7 @@ class FontMapClass
 
   @property string shapeEngineType()
   {
-    return (cast(PangoFontMapClass*)cPtr).shapeEngineType.fromCString(false);
+    return (cast(PangoFontMapClass*)cPtr).shapeEngineType.fromCString(No.Free);
   }
 
   alias GetSerialFuncType = extern(C) uint function(PangoFontMap* fontmap);

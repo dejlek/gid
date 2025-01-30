@@ -55,8 +55,8 @@ template PollableOutputStreamT()
   override Source createSource(Cancellable cancellable)
   {
     GSource* _cretval;
-    _cretval = g_pollable_output_stream_create_source(cast(GPollableOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null);
-    auto _retval = _cretval ? new Source(cast(void*)_cretval, true) : null;
+    _cretval = g_pollable_output_stream_create_source(cast(GPollableOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -114,7 +114,7 @@ template PollableOutputStreamT()
 
     auto _buffer = cast(void*)buffer.ptr;
     GError *_err;
-    _retval = g_pollable_output_stream_write_nonblocking(cast(GPollableOutputStream*)cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_pollable_output_stream_write_nonblocking(cast(GPollableOutputStream*)cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -156,7 +156,7 @@ template PollableOutputStreamT()
 
     auto _vectors = cast(const(GOutputVector)*)vectors.ptr;
     GError *_err;
-    _cretval = g_pollable_output_stream_writev_nonblocking(cast(GPollableOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_pollable_output_stream_writev_nonblocking(cast(GPollableOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     PollableReturn _retval = cast(PollableReturn)_cretval;

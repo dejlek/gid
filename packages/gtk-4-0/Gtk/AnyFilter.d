@@ -17,9 +17,9 @@ import Gtk.c.types;
 class AnyFilter : MultiFilter
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -44,6 +44,6 @@ class AnyFilter : MultiFilter
   {
     GtkAnyFilter* _cretval;
     _cretval = gtk_any_filter_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

@@ -89,9 +89,9 @@ import Gtk.c.types;
 class Grid : Widget, Orientable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -114,7 +114,7 @@ class Grid : Widget, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_grid_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -131,7 +131,7 @@ class Grid : Widget, Orientable
    */
   void attach(Widget child, int column, int row, int width, int height)
   {
-    gtk_grid_attach(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, column, row, width, height);
+    gtk_grid_attach(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, column, row, width, height);
   }
 
   /**
@@ -152,7 +152,7 @@ class Grid : Widget, Orientable
    */
   void attachNextTo(Widget child, Widget sibling, PositionType side, int width, int height)
   {
-    gtk_grid_attach_next_to(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, sibling ? cast(GtkWidget*)sibling.cPtr(false) : null, side, width, height);
+    gtk_grid_attach_next_to(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null, side, width, height);
   }
 
   /**
@@ -178,7 +178,7 @@ class Grid : Widget, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_grid_get_child_at(cast(GtkGrid*)cPtr, column, row);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class Grid : Widget, Orientable
    */
   void insertNextTo(Widget sibling, PositionType side)
   {
-    gtk_grid_insert_next_to(cast(GtkGrid*)cPtr, sibling ? cast(GtkWidget*)sibling.cPtr(false) : null, side);
+    gtk_grid_insert_next_to(cast(GtkGrid*)cPtr, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null, side);
   }
 
   /**
@@ -294,7 +294,7 @@ class Grid : Widget, Orientable
    */
   void queryChild(Widget child, out int column, out int row, out int width, out int height)
   {
-    gtk_grid_query_child(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, cast(int*)&column, cast(int*)&row, cast(int*)&width, cast(int*)&height);
+    gtk_grid_query_child(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, cast(int*)&column, cast(int*)&row, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -306,7 +306,7 @@ class Grid : Widget, Orientable
    */
   void remove(Widget child)
   {
-    gtk_grid_remove(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_grid_remove(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

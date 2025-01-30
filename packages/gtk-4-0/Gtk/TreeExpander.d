@@ -61,9 +61,9 @@ import Gtk.c.types;
 class TreeExpander : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -84,7 +84,7 @@ class TreeExpander : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_expander_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -95,7 +95,7 @@ class TreeExpander : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_expander_get_child(cast(GtkTreeExpander*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class TreeExpander : Widget
   {
     ObjectC* _cretval;
     _cretval = gtk_tree_expander_get_item(cast(GtkTreeExpander*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class TreeExpander : Widget
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_expander_get_list_row(cast(GtkTreeExpander*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeListRow(cast(GtkTreeListRow*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeListRow(cast(GtkTreeListRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class TreeExpander : Widget
    */
   void setChild(Widget child)
   {
-    gtk_tree_expander_set_child(cast(GtkTreeExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_tree_expander_set_child(cast(GtkTreeExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -207,6 +207,6 @@ class TreeExpander : Widget
    */
   void setListRow(TreeListRow listRow)
   {
-    gtk_tree_expander_set_list_row(cast(GtkTreeExpander*)cPtr, listRow ? cast(GtkTreeListRow*)listRow.cPtr(false) : null);
+    gtk_tree_expander_set_list_row(cast(GtkTreeExpander*)cPtr, listRow ? cast(GtkTreeListRow*)listRow.cPtr(No.Dup) : null);
   }
 }

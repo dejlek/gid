@@ -84,14 +84,14 @@ import Gid.gid;
 class VariantDict : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -121,8 +121,8 @@ class VariantDict : Boxed
   this(VariantG fromAsv)
   {
     GVariantDict* _cretval;
-    _cretval = g_variant_dict_new(fromAsv ? cast(VariantC*)fromAsv.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = g_variant_dict_new(fromAsv ? cast(VariantC*)fromAsv.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -153,7 +153,7 @@ class VariantDict : Boxed
   bool contains(string key)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_variant_dict_contains(cast(GVariantDict*)cPtr, _key);
     return _retval;
   }
@@ -171,7 +171,7 @@ class VariantDict : Boxed
   {
     VariantC* _cretval;
     _cretval = g_variant_dict_end(cast(GVariantDict*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -184,8 +184,8 @@ class VariantDict : Boxed
    */
   void insertValue(string key, VariantG value)
   {
-    const(char)* _key = key.toCString(false);
-    g_variant_dict_insert_value(cast(GVariantDict*)cPtr, _key, value ? cast(VariantC*)value.cPtr(false) : null);
+    const(char)* _key = key.toCString(No.Alloc);
+    g_variant_dict_insert_value(cast(GVariantDict*)cPtr, _key, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -205,9 +205,9 @@ class VariantDict : Boxed
   VariantG lookupValue(string key, VariantType expectedType)
   {
     VariantC* _cretval;
-    const(char)* _key = key.toCString(false);
-    _cretval = g_variant_dict_lookup_value(cast(GVariantDict*)cPtr, _key, expectedType ? cast(GVariantType*)expectedType.cPtr(false) : null);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    const(char)* _key = key.toCString(No.Alloc);
+    _cretval = g_variant_dict_lookup_value(cast(GVariantDict*)cPtr, _key, expectedType ? cast(GVariantType*)expectedType.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class VariantDict : Boxed
   bool remove(string key)
   {
     bool _retval;
-    const(char)* _key = key.toCString(false);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_variant_dict_remove(cast(GVariantDict*)cPtr, _key);
     return _retval;
   }

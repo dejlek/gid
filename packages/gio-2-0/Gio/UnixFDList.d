@@ -23,9 +23,9 @@ import Gio.c.types;
 class UnixFDList : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -46,7 +46,7 @@ class UnixFDList : ObjectG
   {
     GUnixFDList* _cretval;
     _cretval = g_unix_fd_list_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -69,7 +69,7 @@ class UnixFDList : ObjectG
 
     auto _fds = cast(const(int)*)fds.ptr;
     _cretval = g_unix_fd_list_new_from_array(_fds, _nFds);
-    auto _retval = _cretval ? ObjectG.getDObject!UnixFDList(cast(GUnixFDList*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!UnixFDList(cast(GUnixFDList*)_cretval, Yes.Take);
     return _retval;
   }
 

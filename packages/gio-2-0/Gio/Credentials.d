@@ -37,9 +37,9 @@ import Gio.c.types;
 class Credentials : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -61,7 +61,7 @@ class Credentials : ObjectG
   {
     GCredentials* _cretval;
     _cretval = g_credentials_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -113,7 +113,7 @@ class Credentials : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_credentials_is_same_user(cast(GCredentials*)cPtr, otherCredentials ? cast(GCredentials*)otherCredentials.cPtr(false) : null, &_err);
+    _retval = g_credentials_is_same_user(cast(GCredentials*)cPtr, otherCredentials ? cast(GCredentials*)otherCredentials.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -165,7 +165,7 @@ class Credentials : ObjectG
   {
     char* _cretval;
     _cretval = g_credentials_to_string(cast(GCredentials*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 }

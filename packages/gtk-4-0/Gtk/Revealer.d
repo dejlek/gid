@@ -32,9 +32,9 @@ import Gtk.c.types;
 class Revealer : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -55,7 +55,7 @@ class Revealer : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_revealer_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -66,7 +66,7 @@ class Revealer : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_revealer_get_child(cast(GtkRevealer*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class Revealer : Widget
    */
   void setChild(Widget child)
   {
-    gtk_revealer_set_child(cast(GtkRevealer*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_revealer_set_child(cast(GtkRevealer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

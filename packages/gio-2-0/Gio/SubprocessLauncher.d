@@ -24,9 +24,9 @@ class SubprocessLauncher : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,7 +52,7 @@ class SubprocessLauncher : ObjectG
   {
     GSubprocessLauncher* _cretval;
     _cretval = g_subprocess_launcher_new(flags);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -83,9 +83,9 @@ class SubprocessLauncher : ObjectG
   string getenv(string variable)
   {
     const(char)* _cretval;
-    const(char)* _variable = variable.toCString(false);
+    const(char)* _variable = variable.toCString(No.Alloc);
     _cretval = g_subprocess_launcher_getenv(cast(GSubprocessLauncher*)cPtr, _variable);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class SubprocessLauncher : ObjectG
    */
   void setCwd(string cwd)
   {
-    const(char)* _cwd = cwd.toCString(false);
+    const(char)* _cwd = cwd.toCString(No.Alloc);
     g_subprocess_launcher_set_cwd(cast(GSubprocessLauncher*)cPtr, _cwd);
   }
 
@@ -126,7 +126,7 @@ class SubprocessLauncher : ObjectG
   {
     char*[] _tmpenv;
     foreach (s; env)
-      _tmpenv ~= s.toCString(false);
+      _tmpenv ~= s.toCString(No.Alloc);
     _tmpenv ~= null;
     char** _env = _tmpenv.ptr;
     g_subprocess_launcher_set_environ(cast(GSubprocessLauncher*)cPtr, _env);
@@ -165,7 +165,7 @@ class SubprocessLauncher : ObjectG
    */
   void setStderrFilePath(string path)
   {
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stderr_file_path(cast(GSubprocessLauncher*)cPtr, _path);
   }
 
@@ -181,7 +181,7 @@ class SubprocessLauncher : ObjectG
    */
   void setStdinFilePath(string path)
   {
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stdin_file_path(cast(GSubprocessLauncher*)cPtr, _path);
   }
 
@@ -198,7 +198,7 @@ class SubprocessLauncher : ObjectG
    */
   void setStdoutFilePath(string path)
   {
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stdout_file_path(cast(GSubprocessLauncher*)cPtr, _path);
   }
 
@@ -216,8 +216,8 @@ class SubprocessLauncher : ObjectG
    */
   void setenv(string variable, string value, bool overwrite)
   {
-    const(char)* _variable = variable.toCString(false);
-    const(char)* _value = value.toCString(false);
+    const(char)* _variable = variable.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     g_subprocess_launcher_setenv(cast(GSubprocessLauncher*)cPtr, _variable, _value, overwrite);
   }
 
@@ -232,7 +232,7 @@ class SubprocessLauncher : ObjectG
     GSubprocess* _cretval;
     const(char)*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(false);
+      _tmpargv ~= s.toCString(No.Alloc);
     _tmpargv ~= null;
     const(char*)* _argv = _tmpargv.ptr;
 
@@ -240,7 +240,7 @@ class SubprocessLauncher : ObjectG
     _cretval = g_subprocess_launcher_spawnv(cast(GSubprocessLauncher*)cPtr, _argv, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Subprocess(cast(GSubprocess*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Subprocess(cast(GSubprocess*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -338,7 +338,7 @@ class SubprocessLauncher : ObjectG
    */
   void unsetenv(string variable)
   {
-    const(char)* _variable = variable.toCString(false);
+    const(char)* _variable = variable.toCString(No.Alloc);
     g_subprocess_launcher_unsetenv(cast(GSubprocessLauncher*)cPtr, _variable);
   }
 }

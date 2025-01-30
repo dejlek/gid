@@ -33,9 +33,9 @@ import Gio.c.types;
 class SocketClient : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -57,7 +57,7 @@ class SocketClient : ObjectG
   {
     GSocketClient* _cretval;
     _cretval = g_socket_client_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -83,7 +83,7 @@ class SocketClient : ObjectG
    */
   void addApplicationProxy(string protocol)
   {
-    const(char)* _protocol = protocol.toCString(false);
+    const(char)* _protocol = protocol.toCString(No.Alloc);
     g_socket_client_add_application_proxy(cast(GSocketClient*)cPtr, _protocol);
   }
 
@@ -111,10 +111,10 @@ class SocketClient : ObjectG
   {
     GSocketConnection* _cretval;
     GError *_err;
-    _cretval = g_socket_client_connect(cast(GSocketClient*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_socket_client_connect(cast(GSocketClient*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -143,11 +143,11 @@ class SocketClient : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_socket_client_connect_async(cast(GSocketClient*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_socket_client_connect_async(cast(GSocketClient*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -160,10 +160,10 @@ class SocketClient : ObjectG
   {
     GSocketConnection* _cretval;
     GError *_err;
-    _cretval = g_socket_client_connect_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_socket_client_connect_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -200,12 +200,12 @@ class SocketClient : ObjectG
   SocketConnection connectToHost(string hostAndPort, ushort defaultPort, Cancellable cancellable)
   {
     GSocketConnection* _cretval;
-    const(char)* _hostAndPort = hostAndPort.toCString(false);
+    const(char)* _hostAndPort = hostAndPort.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_socket_client_connect_to_host(cast(GSocketClient*)cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_socket_client_connect_to_host(cast(GSocketClient*)cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -227,12 +227,12 @@ class SocketClient : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _hostAndPort = hostAndPort.toCString(false);
+    const(char)* _hostAndPort = hostAndPort.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_socket_client_connect_to_host_async(cast(GSocketClient*)cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_socket_client_connect_to_host_async(cast(GSocketClient*)cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -245,10 +245,10 @@ class SocketClient : ObjectG
   {
     GSocketConnection* _cretval;
     GError *_err;
-    _cretval = g_socket_client_connect_to_host_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_socket_client_connect_to_host_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -273,13 +273,13 @@ class SocketClient : ObjectG
   SocketConnection connectToService(string domain, string service, Cancellable cancellable)
   {
     GSocketConnection* _cretval;
-    const(char)* _domain = domain.toCString(false);
-    const(char)* _service = service.toCString(false);
+    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _service = service.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_socket_client_connect_to_service(cast(GSocketClient*)cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_socket_client_connect_to_service(cast(GSocketClient*)cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -299,13 +299,13 @@ class SocketClient : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _domain = domain.toCString(false);
-    const(char)* _service = service.toCString(false);
+    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _service = service.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_socket_client_connect_to_service_async(cast(GSocketClient*)cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_socket_client_connect_to_service_async(cast(GSocketClient*)cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -318,10 +318,10 @@ class SocketClient : ObjectG
   {
     GSocketConnection* _cretval;
     GError *_err;
-    _cretval = g_socket_client_connect_to_service_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_socket_client_connect_to_service_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -351,12 +351,12 @@ class SocketClient : ObjectG
   SocketConnection connectToUri(string uri, ushort defaultPort, Cancellable cancellable)
   {
     GSocketConnection* _cretval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_socket_client_connect_to_uri(cast(GSocketClient*)cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_socket_client_connect_to_uri(cast(GSocketClient*)cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -378,12 +378,12 @@ class SocketClient : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_socket_client_connect_to_uri_async(cast(GSocketClient*)cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_socket_client_connect_to_uri_async(cast(GSocketClient*)cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -396,10 +396,10 @@ class SocketClient : ObjectG
   {
     GSocketConnection* _cretval;
     GError *_err;
-    _cretval = g_socket_client_connect_to_uri_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_socket_client_connect_to_uri_finish(cast(GSocketClient*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -436,7 +436,7 @@ class SocketClient : ObjectG
   {
     GSocketAddress* _cretval;
     _cretval = g_socket_client_get_local_address(cast(GSocketClient*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketAddress(cast(GSocketAddress*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!SocketAddress(cast(GSocketAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -464,7 +464,7 @@ class SocketClient : ObjectG
   {
     GProxyResolver* _cretval;
     _cretval = g_socket_client_get_proxy_resolver(cast(GSocketClient*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ProxyResolver(cast(GProxyResolver*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ProxyResolver(cast(GProxyResolver*)_cretval, No.Take);
     return _retval;
   }
 
@@ -565,7 +565,7 @@ class SocketClient : ObjectG
    */
   void setLocalAddress(SocketAddress address)
   {
-    g_socket_client_set_local_address(cast(GSocketClient*)cPtr, address ? cast(GSocketAddress*)address.cPtr(false) : null);
+    g_socket_client_set_local_address(cast(GSocketClient*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null);
   }
 
   /**
@@ -595,7 +595,7 @@ class SocketClient : ObjectG
    */
   void setProxyResolver(ProxyResolver proxyResolver)
   {
-    g_socket_client_set_proxy_resolver(cast(GSocketClient*)cPtr, proxyResolver ? cast(GProxyResolver*)(cast(ObjectG)proxyResolver).cPtr(false) : null);
+    g_socket_client_set_proxy_resolver(cast(GSocketClient*)cPtr, proxyResolver ? cast(GProxyResolver*)(cast(ObjectG)proxyResolver).cPtr(No.Dup) : null);
   }
 
   /**

@@ -18,14 +18,14 @@ import Gid.gid;
 class VariantBuilder : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -53,8 +53,8 @@ class VariantBuilder : Boxed
   this(VariantType type)
   {
     GVariantBuilder* _cretval;
-    _cretval = g_variant_builder_new(type ? cast(GVariantType*)type.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = g_variant_builder_new(type ? cast(GVariantType*)type.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -71,7 +71,7 @@ class VariantBuilder : Boxed
    */
   void addValue(VariantG value)
   {
-    g_variant_builder_add_value(cast(GVariantBuilder*)cPtr, value ? cast(VariantC*)value.cPtr(false) : null);
+    g_variant_builder_add_value(cast(GVariantBuilder*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -108,7 +108,7 @@ class VariantBuilder : Boxed
   {
     VariantC* _cretval;
     _cretval = g_variant_builder_end(cast(GVariantBuilder*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -148,6 +148,6 @@ class VariantBuilder : Boxed
    */
   void open(VariantType type)
   {
-    g_variant_builder_open(cast(GVariantBuilder*)cPtr, type ? cast(GVariantType*)type.cPtr(false) : null);
+    g_variant_builder_open(cast(GVariantBuilder*)cPtr, type ? cast(GVariantType*)type.cPtr(No.Dup) : null);
   }
 }

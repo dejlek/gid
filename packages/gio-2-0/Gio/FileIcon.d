@@ -24,9 +24,9 @@ class FileIcon : ObjectG, Icon, LoadableIcon
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,8 +52,8 @@ class FileIcon : ObjectG, Icon, LoadableIcon
   this(File file)
   {
     GIcon* _cretval;
-    _cretval = g_file_icon_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = g_file_icon_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -64,7 +64,7 @@ class FileIcon : ObjectG, Icon, LoadableIcon
   {
     GFile* _cretval;
     _cretval = g_file_icon_get_file(cast(GFileIcon*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 }

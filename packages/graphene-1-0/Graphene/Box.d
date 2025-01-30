@@ -18,17 +18,17 @@ class Box : Boxed
 
   this()
   {
-    super(safeMalloc(graphene_box_t.sizeof), true);
+    super(safeMalloc(graphene_box_t.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -51,7 +51,7 @@ class Box : Boxed
   {
     graphene_box_t* _cretval;
     _cretval = graphene_box_alloc();
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -65,7 +65,7 @@ class Box : Boxed
   bool containsBox(Box b)
   {
     bool _retval;
-    _retval = graphene_box_contains_box(cast(graphene_box_t*)cPtr, b ? cast(graphene_box_t*)b.cPtr(false) : null);
+    _retval = graphene_box_contains_box(cast(graphene_box_t*)cPtr, b ? cast(graphene_box_t*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -78,7 +78,7 @@ class Box : Boxed
   bool containsPoint(Point3D point)
   {
     bool _retval;
-    _retval = graphene_box_contains_point(cast(graphene_box_t*)cPtr, point ? cast(graphene_point3d_t*)point.cPtr(false) : null);
+    _retval = graphene_box_contains_point(cast(graphene_box_t*)cPtr, point ? cast(graphene_point3d_t*)point.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class Box : Boxed
   bool equal(Box b)
   {
     bool _retval;
-    _retval = graphene_box_equal(cast(graphene_box_t*)cPtr, b ? cast(graphene_box_t*)b.cPtr(false) : null);
+    _retval = graphene_box_equal(cast(graphene_box_t*)cPtr, b ? cast(graphene_box_t*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -104,8 +104,8 @@ class Box : Boxed
   void expand(Point3D point, out Box res)
   {
     graphene_box_t _res;
-    graphene_box_expand(cast(graphene_box_t*)cPtr, point ? cast(graphene_point3d_t*)point.cPtr(false) : null, &_res);
-    res = new Box(cast(void*)&_res, false);
+    graphene_box_expand(cast(graphene_box_t*)cPtr, point ? cast(graphene_point3d_t*)point.cPtr(No.Dup) : null, &_res);
+    res = new Box(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -120,7 +120,7 @@ class Box : Boxed
   {
     graphene_box_t _res;
     graphene_box_expand_scalar(cast(graphene_box_t*)cPtr, scalar, &_res);
-    res = new Box(cast(void*)&_res, false);
+    res = new Box(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -133,8 +133,8 @@ class Box : Boxed
   void expandVec3(Vec3 vec, out Box res)
   {
     graphene_box_t _res;
-    graphene_box_expand_vec3(cast(graphene_box_t*)cPtr, vec ? cast(graphene_vec3_t*)vec.cPtr(false) : null, &_res);
-    res = new Box(cast(void*)&_res, false);
+    graphene_box_expand_vec3(cast(graphene_box_t*)cPtr, vec ? cast(graphene_vec3_t*)vec.cPtr(No.Dup) : null, &_res);
+    res = new Box(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -147,7 +147,7 @@ class Box : Boxed
   {
     graphene_sphere_t _sphere;
     graphene_box_get_bounding_sphere(cast(graphene_box_t*)cPtr, &_sphere);
-    sphere = new Sphere(cast(void*)&_sphere, false);
+    sphere = new Sphere(cast(void*)&_sphere, No.Take);
   }
 
   /**
@@ -160,7 +160,7 @@ class Box : Boxed
   {
     graphene_point3d_t _center;
     graphene_box_get_center(cast(graphene_box_t*)cPtr, &_center);
-    center = new Point3D(cast(void*)&_center, false);
+    center = new Point3D(cast(void*)&_center, No.Take);
   }
 
   /**
@@ -195,7 +195,7 @@ class Box : Boxed
   {
     graphene_point3d_t _max;
     graphene_box_get_max(cast(graphene_box_t*)cPtr, &_max);
-    max = new Point3D(cast(void*)&_max, false);
+    max = new Point3D(cast(void*)&_max, No.Take);
   }
 
   /**
@@ -208,7 +208,7 @@ class Box : Boxed
   {
     graphene_point3d_t _min;
     graphene_box_get_min(cast(graphene_box_t*)cPtr, &_min);
-    min = new Point3D(cast(void*)&_min, false);
+    min = new Point3D(cast(void*)&_min, No.Take);
   }
 
   /**
@@ -221,7 +221,7 @@ class Box : Boxed
   {
     graphene_vec3_t _size;
     graphene_box_get_size(cast(graphene_box_t*)cPtr, &_size);
-    size = new Vec3(cast(void*)&_size, false);
+    size = new Vec3(cast(void*)&_size, No.Take);
   }
 
   /**
@@ -237,7 +237,7 @@ class Box : Boxed
     graphene_box_get_vertices(cast(graphene_box_t*)cPtr, _vertices.ptr);
     vertices.length = 8;
     foreach (i; 0 .. 8)
-      vertices[i] = new Vec3(cast(void*)&_vertices[i], false);
+      vertices[i] = new Vec3(cast(void*)&_vertices[i], No.Take);
   }
 
   /**
@@ -261,8 +261,8 @@ class Box : Boxed
   Box init_(Point3D min, Point3D max)
   {
     graphene_box_t* _cretval;
-    _cretval = graphene_box_init(cast(graphene_box_t*)cPtr, min ? cast(graphene_point3d_t*)min.cPtr(false) : null, max ? cast(graphene_point3d_t*)max.cPtr(false) : null);
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, false) : null;
+    _cretval = graphene_box_init(cast(graphene_box_t*)cPtr, min ? cast(graphene_point3d_t*)min.cPtr(No.Dup) : null, max ? cast(graphene_point3d_t*)max.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -276,8 +276,8 @@ class Box : Boxed
   Box initFromBox(Box src)
   {
     graphene_box_t* _cretval;
-    _cretval = graphene_box_init_from_box(cast(graphene_box_t*)cPtr, src ? cast(graphene_box_t*)src.cPtr(false) : null);
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, false) : null;
+    _cretval = graphene_box_init_from_box(cast(graphene_box_t*)cPtr, src ? cast(graphene_box_t*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class Box : Boxed
       _tmppoints ~= *cast(graphene_point3d_t*)obj.cPtr;
     const(graphene_point3d_t)* _points = _tmppoints.ptr;
     _cretval = graphene_box_init_from_points(cast(graphene_box_t*)cPtr, _nPoints, _points);
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -317,8 +317,8 @@ class Box : Boxed
   Box initFromVec3(Vec3 min, Vec3 max)
   {
     graphene_box_t* _cretval;
-    _cretval = graphene_box_init_from_vec3(cast(graphene_box_t*)cPtr, min ? cast(graphene_vec3_t*)min.cPtr(false) : null, max ? cast(graphene_vec3_t*)max.cPtr(false) : null);
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, false) : null;
+    _cretval = graphene_box_init_from_vec3(cast(graphene_box_t*)cPtr, min ? cast(graphene_vec3_t*)min.cPtr(No.Dup) : null, max ? cast(graphene_vec3_t*)max.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class Box : Boxed
       _tmpvectors ~= *cast(graphene_vec3_t*)obj.cPtr;
     const(graphene_vec3_t)* _vectors = _tmpvectors.ptr;
     _cretval = graphene_box_init_from_vectors(cast(graphene_box_t*)cPtr, _nVectors, _vectors);
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -360,8 +360,8 @@ class Box : Boxed
   {
     bool _retval;
     graphene_box_t _res;
-    _retval = graphene_box_intersection(cast(graphene_box_t*)cPtr, b ? cast(graphene_box_t*)b.cPtr(false) : null, &_res);
-    res = new Box(cast(void*)&_res, false);
+    _retval = graphene_box_intersection(cast(graphene_box_t*)cPtr, b ? cast(graphene_box_t*)b.cPtr(No.Dup) : null, &_res);
+    res = new Box(cast(void*)&_res, No.Take);
     return _retval;
   }
 
@@ -374,8 +374,8 @@ class Box : Boxed
   void union_(Box b, out Box res)
   {
     graphene_box_t _res;
-    graphene_box_union(cast(graphene_box_t*)cPtr, b ? cast(graphene_box_t*)b.cPtr(false) : null, &_res);
-    res = new Box(cast(void*)&_res, false);
+    graphene_box_union(cast(graphene_box_t*)cPtr, b ? cast(graphene_box_t*)b.cPtr(No.Dup) : null, &_res);
+    res = new Box(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -387,7 +387,7 @@ class Box : Boxed
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_empty();
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -400,7 +400,7 @@ class Box : Boxed
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_infinite();
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -414,7 +414,7 @@ class Box : Boxed
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_minus_one();
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -428,7 +428,7 @@ class Box : Boxed
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_one();
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -442,7 +442,7 @@ class Box : Boxed
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_one_minus_one();
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -455,7 +455,7 @@ class Box : Boxed
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_zero();
-    auto _retval = _cretval ? new Box(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Box(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

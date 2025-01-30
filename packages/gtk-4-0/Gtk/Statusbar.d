@@ -46,9 +46,9 @@ import Gtk.c.types;
 class Statusbar : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -71,7 +71,7 @@ class Statusbar : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_statusbar_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -88,7 +88,7 @@ class Statusbar : Widget
   uint getContextId(string contextDescription)
   {
     uint _retval;
-    const(char)* _contextDescription = contextDescription.toCString(false);
+    const(char)* _contextDescription = contextDescription.toCString(No.Alloc);
     _retval = gtk_statusbar_get_context_id(cast(GtkStatusbar*)cPtr, _contextDescription);
     return _retval;
   }
@@ -123,7 +123,7 @@ class Statusbar : Widget
   uint push(uint contextId, string text)
   {
     uint _retval;
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     _retval = gtk_statusbar_push(cast(GtkStatusbar*)cPtr, contextId, _text);
     return _retval;
   }

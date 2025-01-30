@@ -44,7 +44,7 @@ interface FontMap
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_get_default();
-    auto _retval = _cretval ? ObjectG.getDObject!DPangoFontMap(cast(PangoFontMap*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!DPangoFontMap(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ interface FontMap
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_new();
-    auto _retval = _cretval ? ObjectG.getDObject!DPangoFontMap(cast(PangoFontMap*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!DPangoFontMap(cast(PangoFontMap*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ interface FontMap
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_new_for_font_type(fonttype);
-    auto _retval = _cretval ? ObjectG.getDObject!DPangoFontMap(cast(PangoFontMap*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!DPangoFontMap(cast(PangoFontMap*)_cretval, Yes.Take);
     return _retval;
   }
 

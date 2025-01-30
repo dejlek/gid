@@ -44,9 +44,9 @@ class FileEnumerator : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -73,7 +73,7 @@ class FileEnumerator : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_enumerator_close(cast(GFileEnumerator*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_enumerator_close(cast(GFileEnumerator*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -98,11 +98,11 @@ class FileEnumerator : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_enumerator_close_async(cast(GFileEnumerator*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_enumerator_close_async(cast(GFileEnumerator*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -123,7 +123,7 @@ class FileEnumerator : ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_enumerator_close_finish(cast(GFileEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_enumerator_close_finish(cast(GFileEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -149,8 +149,8 @@ class FileEnumerator : ObjectG
   File getChild(FileInfo info)
   {
     GFile* _cretval;
-    _cretval = g_file_enumerator_get_child(cast(GFileEnumerator*)cPtr, info ? cast(GFileInfo*)info.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    _cretval = g_file_enumerator_get_child(cast(GFileEnumerator*)cPtr, info ? cast(GFileInfo*)info.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class FileEnumerator : ObjectG
   {
     GFile* _cretval;
     _cretval = g_file_enumerator_get_container(cast(GFileEnumerator*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -232,11 +232,11 @@ class FileEnumerator : ObjectG
     GFileInfo* _outInfo;
     GFile* _outChild;
     GError *_err;
-    _retval = g_file_enumerator_iterate(cast(GFileEnumerator*)cPtr, &_outInfo, &_outChild, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_enumerator_iterate(cast(GFileEnumerator*)cPtr, &_outInfo, &_outChild, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    outInfo = new FileInfo(cast(void*)_outInfo, false);
-    outChild = _outChild ? ObjectG.getDObject!File(_outChild, false) : null;
+    outInfo = new FileInfo(cast(void*)_outInfo, No.Take);
+    outChild = ObjectG.getDObject!File(_outChild, No.Take);
     return _retval;
   }
 
@@ -260,10 +260,10 @@ class FileEnumerator : ObjectG
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_enumerator_next_file(cast(GFileEnumerator*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_enumerator_next_file(cast(GFileEnumerator*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -336,11 +336,11 @@ class FileEnumerator : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_enumerator_next_files_async(cast(GFileEnumerator*)cPtr, numFiles, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_enumerator_next_files_async(cast(GFileEnumerator*)cPtr, numFiles, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -355,7 +355,7 @@ class FileEnumerator : ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_file_enumerator_next_files_finish(cast(GFileEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_file_enumerator_next_files_finish(cast(GFileEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(FileInfo, GidOwnership.Full)(cast(GList*)_cretval);

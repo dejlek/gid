@@ -24,9 +24,9 @@ class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -51,7 +51,7 @@ class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
   {
     GOutputStream* _cretval;
     _cretval = g_memory_output_stream_new_resizable();
-    auto _retval = _cretval ? ObjectG.getDObject!MemoryOutputStream(cast(GOutputStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!MemoryOutputStream(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 

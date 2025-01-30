@@ -20,9 +20,9 @@ import Gio.c.types;
 class AppLaunchContext : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -44,7 +44,7 @@ class AppLaunchContext : ObjectG
   {
     GAppLaunchContext* _cretval;
     _cretval = g_app_launch_context_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -61,8 +61,8 @@ class AppLaunchContext : ObjectG
     char* _cretval;
     auto _files = gListFromD!(File)(files);
     scope(exit) containerFree!(GList*, File, GidOwnership.None)(_files);
-    _cretval = g_app_launch_context_get_display(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(false) : null, _files);
-    string _retval = _cretval.fromCString(true);
+    _cretval = g_app_launch_context_get_display(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(No.Dup) : null, _files);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class AppLaunchContext : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -113,8 +113,8 @@ class AppLaunchContext : ObjectG
     char* _cretval;
     auto _files = gListFromD!(File)(files);
     scope(exit) containerFree!(GList*, File, GidOwnership.None)(_files);
-    _cretval = g_app_launch_context_get_startup_notify_id(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(false) : null, _files);
-    string _retval = _cretval.fromCString(true);
+    _cretval = g_app_launch_context_get_startup_notify_id(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(No.Dup) : null, _files);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class AppLaunchContext : ObjectG
    */
   void launchFailed(string startupNotifyId)
   {
-    const(char)* _startupNotifyId = startupNotifyId.toCString(false);
+    const(char)* _startupNotifyId = startupNotifyId.toCString(No.Alloc);
     g_app_launch_context_launch_failed(cast(GAppLaunchContext*)cPtr, _startupNotifyId);
   }
 
@@ -139,8 +139,8 @@ class AppLaunchContext : ObjectG
    */
   void setenv(string variable, string value)
   {
-    const(char)* _variable = variable.toCString(false);
-    const(char)* _value = value.toCString(false);
+    const(char)* _variable = variable.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     g_app_launch_context_setenv(cast(GAppLaunchContext*)cPtr, _variable, _value);
   }
 
@@ -152,7 +152,7 @@ class AppLaunchContext : ObjectG
    */
   void unsetenv(string variable)
   {
-    const(char)* _variable = variable.toCString(false);
+    const(char)* _variable = variable.toCString(No.Alloc);
     g_app_launch_context_unsetenv(cast(GAppLaunchContext*)cPtr, _variable);
   }
 

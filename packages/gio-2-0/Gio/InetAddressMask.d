@@ -23,9 +23,9 @@ class InetAddressMask : ObjectG, Initable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,10 +52,10 @@ class InetAddressMask : ObjectG, Initable
   {
     GInetAddressMask* _cretval;
     GError *_err;
-    _cretval = g_inet_address_mask_new(addr ? cast(GInetAddress*)addr.cPtr(false) : null, length, &_err);
+    _cretval = g_inet_address_mask_new(addr ? cast(GInetAddress*)addr.cPtr(No.Dup) : null, length, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -71,12 +71,12 @@ class InetAddressMask : ObjectG, Initable
   static InetAddressMask newFromString(string maskString)
   {
     GInetAddressMask* _cretval;
-    const(char)* _maskString = maskString.toCString(false);
+    const(char)* _maskString = maskString.toCString(No.Alloc);
     GError *_err;
     _cretval = g_inet_address_mask_new_from_string(_maskString, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!InetAddressMask(cast(GInetAddressMask*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!InetAddressMask(cast(GInetAddressMask*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class InetAddressMask : ObjectG, Initable
   bool equal(InetAddressMask mask2)
   {
     bool _retval;
-    _retval = g_inet_address_mask_equal(cast(GInetAddressMask*)cPtr, mask2 ? cast(GInetAddressMask*)mask2.cPtr(false) : null);
+    _retval = g_inet_address_mask_equal(cast(GInetAddressMask*)cPtr, mask2 ? cast(GInetAddressMask*)mask2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class InetAddressMask : ObjectG, Initable
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_mask_get_address(cast(GInetAddressMask*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class InetAddressMask : ObjectG, Initable
   bool matches(InetAddress address)
   {
     bool _retval;
-    _retval = g_inet_address_mask_matches(cast(GInetAddressMask*)cPtr, address ? cast(GInetAddress*)address.cPtr(false) : null);
+    _retval = g_inet_address_mask_matches(cast(GInetAddressMask*)cPtr, address ? cast(GInetAddress*)address.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class InetAddressMask : ObjectG, Initable
   {
     char* _cretval;
     _cretval = g_inet_address_mask_to_string(cast(GInetAddressMask*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 }

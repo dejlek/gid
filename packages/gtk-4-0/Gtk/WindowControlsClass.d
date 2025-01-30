@@ -10,14 +10,14 @@ class WindowControlsClass
 {
   GtkWindowControlsClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.WindowControlsClass");
 
     cInstance = *cast(GtkWindowControlsClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

@@ -43,9 +43,9 @@ import Gtk.c.types;
 class Button : Widget, Actionable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -69,7 +69,7 @@ class Button : Widget, Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -84,9 +84,9 @@ class Button : Widget, Actionable
   static Button newFromIconName(string iconName)
   {
     GtkWidget* _cretval;
-    const(char)* _iconName = iconName.toCString(false);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_button_new_from_icon_name(_iconName);
-    auto _retval = _cretval ? ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,9 +99,9 @@ class Button : Widget, Actionable
   static Button newWithLabel(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_label(_label);
-    auto _retval = _cretval ? ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -120,9 +120,9 @@ class Button : Widget, Actionable
   static Button newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_mnemonic(_label);
-    auto _retval = _cretval ? ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class Button : Widget, Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_get_child(cast(GtkButton*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class Button : Widget, Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_button_get_icon_name(cast(GtkButton*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class Button : Widget, Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_button_get_label(cast(GtkButton*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class Button : Widget, Actionable
    */
   void setChild(Widget child)
   {
-    gtk_button_set_child(cast(GtkButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_button_set_child(cast(GtkButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -253,7 +253,7 @@ class Button : Widget, Actionable
    */
   void setIconName(string iconName)
   {
-    const(char)* _iconName = iconName.toCString(false);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_button_set_icon_name(cast(GtkButton*)cPtr, _iconName);
   }
 
@@ -265,7 +265,7 @@ class Button : Widget, Actionable
    */
   void setLabel(string label)
   {
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_button_set_label(cast(GtkButton*)cPtr, _label);
   }
 

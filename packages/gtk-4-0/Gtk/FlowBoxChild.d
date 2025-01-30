@@ -20,9 +20,9 @@ import Gtk.c.types;
 class FlowBoxChild : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -44,7 +44,7 @@ class FlowBoxChild : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_flow_box_child_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -77,7 +77,7 @@ class FlowBoxChild : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_flow_box_child_get_child(cast(GtkFlowBoxChild*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class FlowBoxChild : Widget
    */
   void setChild(Widget child)
   {
-    gtk_flow_box_child_set_child(cast(GtkFlowBoxChild*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_flow_box_child_set_child(cast(GtkFlowBoxChild*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

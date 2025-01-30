@@ -16,9 +16,9 @@ import Gtk.c.types;
 class OverlayLayout : LayoutManager
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -39,6 +39,6 @@ class OverlayLayout : LayoutManager
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_overlay_layout_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

@@ -37,9 +37,9 @@ class Viewport : Widget, Scrollable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -66,8 +66,8 @@ class Viewport : Widget, Scrollable
   this(Adjustment hadjustment, Adjustment vadjustment)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(false) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(false) : null);
-    this(_cretval, false);
+    _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -78,7 +78,7 @@ class Viewport : Widget, Scrollable
   {
     GtkWidget* _cretval;
     _cretval = gtk_viewport_get_child(cast(GtkViewport*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class Viewport : Widget, Scrollable
    */
   void scrollTo(Widget descendant, ScrollInfo scroll)
   {
-    gtk_viewport_scroll_to(cast(GtkViewport*)cPtr, descendant ? cast(GtkWidget*)descendant.cPtr(false) : null, scroll ? cast(GtkScrollInfo*)scroll.cPtr(true) : null);
+    gtk_viewport_scroll_to(cast(GtkViewport*)cPtr, descendant ? cast(GtkWidget*)descendant.cPtr(No.Dup) : null, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -115,7 +115,7 @@ class Viewport : Widget, Scrollable
    */
   void setChild(Widget child)
   {
-    gtk_viewport_set_child(cast(GtkViewport*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_viewport_set_child(cast(GtkViewport*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

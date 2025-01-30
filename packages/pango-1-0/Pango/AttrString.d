@@ -14,14 +14,14 @@ class AttrString
 {
   PangoAttrString cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.AttrString");
 
     cInstance = *cast(PangoAttrString*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -37,12 +37,12 @@ class AttrString
 
   @property string value()
   {
-    return (cast(PangoAttrString*)cPtr).value.fromCString(false);
+    return (cast(PangoAttrString*)cPtr).value.fromCString(No.Free);
   }
 
   @property void value(string propval)
   {
     safeFree(cast(void*)(cast(PangoAttrString*)cPtr).value);
-    (cast(PangoAttrString*)cPtr).value = propval.toCString(true);
+    (cast(PangoAttrString*)cPtr).value = propval.toCString(Yes.Alloc);
   }
 }

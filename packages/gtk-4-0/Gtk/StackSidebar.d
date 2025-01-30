@@ -30,9 +30,9 @@ import Gtk.c.types;
 class StackSidebar : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -53,7 +53,7 @@ class StackSidebar : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_sidebar_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -65,7 +65,7 @@ class StackSidebar : Widget
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_sidebar_get_stack(cast(GtkStackSidebar*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Stack(cast(GtkStack*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Stack(cast(GtkStack*)_cretval, No.Take);
     return _retval;
   }
 
@@ -78,6 +78,6 @@ class StackSidebar : Widget
    */
   void setStack(Stack stack)
   {
-    gtk_stack_sidebar_set_stack(cast(GtkStackSidebar*)cPtr, stack ? cast(GtkStack*)stack.cPtr(false) : null);
+    gtk_stack_sidebar_set_stack(cast(GtkStackSidebar*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);
   }
 }

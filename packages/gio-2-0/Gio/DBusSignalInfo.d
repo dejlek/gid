@@ -14,17 +14,17 @@ class DBusSignalInfo : Boxed
 
   this()
   {
-    super(safeMalloc(GDBusSignalInfo.sizeof), true);
+    super(safeMalloc(GDBusSignalInfo.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -49,12 +49,12 @@ class DBusSignalInfo : Boxed
 
   @property string name()
   {
-    return (cast(GDBusSignalInfo*)cPtr).name.fromCString(false);
+    return (cast(GDBusSignalInfo*)cPtr).name.fromCString(No.Free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GDBusSignalInfo*)cPtr).name);
-    (cast(GDBusSignalInfo*)cPtr).name = propval.toCString(true);
+    (cast(GDBusSignalInfo*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 }

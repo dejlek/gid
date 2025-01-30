@@ -96,9 +96,9 @@ class Expander : Widget
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -120,9 +120,9 @@ class Expander : Widget
   this(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_expander_new(_label);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -140,9 +140,9 @@ class Expander : Widget
   static Expander newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_expander_new_with_mnemonic(_label);
-    auto _retval = _cretval ? ObjectG.getDObject!Expander(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Expander(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class Expander : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_child(cast(GtkExpander*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class Expander : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_expander_get_label(cast(GtkExpander*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class Expander : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_label_widget(cast(GtkExpander*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class Expander : Widget
    */
   void setChild(Widget child)
   {
-    gtk_expander_set_child(cast(GtkExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_expander_set_child(cast(GtkExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -265,7 +265,7 @@ class Expander : Widget
    */
   void setLabel(string label)
   {
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_expander_set_label(cast(GtkExpander*)cPtr, _label);
   }
 
@@ -278,7 +278,7 @@ class Expander : Widget
    */
   void setLabelWidget(Widget labelWidget)
   {
-    gtk_expander_set_label_widget(cast(GtkExpander*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(false) : null);
+    gtk_expander_set_label_widget(cast(GtkExpander*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }
 
   /**

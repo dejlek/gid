@@ -82,14 +82,14 @@ import Gio.c.types;
 class SettingsSchema : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -110,7 +110,7 @@ class SettingsSchema : Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_get_id(cast(GSettingsSchema*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -125,9 +125,9 @@ class SettingsSchema : Boxed
   SettingsSchemaKey getKey(string name)
   {
     GSettingsSchemaKey* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_settings_schema_get_key(cast(GSettingsSchema*)cPtr, _name);
-    auto _retval = _cretval ? new SettingsSchemaKey(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new SettingsSchemaKey(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class SettingsSchema : Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_get_path(cast(GSettingsSchema*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class SettingsSchema : Boxed
   bool hasKey(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = g_settings_schema_has_key(cast(GSettingsSchema*)cPtr, _name);
     return _retval;
   }
@@ -183,7 +183,7 @@ class SettingsSchema : Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -209,7 +209,7 @@ class SettingsSchema : Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }

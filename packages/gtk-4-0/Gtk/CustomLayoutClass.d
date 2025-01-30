@@ -10,14 +10,14 @@ class CustomLayoutClass
 {
   GtkCustomLayoutClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.CustomLayoutClass");
 
     cInstance = *cast(GtkCustomLayoutClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

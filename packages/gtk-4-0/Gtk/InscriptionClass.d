@@ -10,14 +10,14 @@ class InscriptionClass
 {
   GtkInscriptionClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.InscriptionClass");
 
     cInstance = *cast(GtkInscriptionClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

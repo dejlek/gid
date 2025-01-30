@@ -141,9 +141,9 @@ import Gtk.c.types;
 class ConstraintLayout : LayoutManager, Buildable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -166,7 +166,7 @@ class ConstraintLayout : LayoutManager, Buildable
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_constraint_layout_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -185,7 +185,7 @@ class ConstraintLayout : LayoutManager, Buildable
    */
   void addConstraint(Constraint constraint)
   {
-    gtk_constraint_layout_add_constraint(cast(GtkConstraintLayout*)cPtr, constraint ? cast(GtkConstraint*)constraint.cPtr(true) : null);
+    gtk_constraint_layout_add_constraint(cast(GtkConstraintLayout*)cPtr, constraint ? cast(GtkConstraint*)constraint.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -199,7 +199,7 @@ class ConstraintLayout : LayoutManager, Buildable
    */
   void addGuide(ConstraintGuide guide)
   {
-    gtk_constraint_layout_add_guide(cast(GtkConstraintLayout*)cPtr, guide ? cast(GtkConstraintGuide*)guide.cPtr(true) : null);
+    gtk_constraint_layout_add_guide(cast(GtkConstraintLayout*)cPtr, guide ? cast(GtkConstraintGuide*)guide.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -217,7 +217,7 @@ class ConstraintLayout : LayoutManager, Buildable
   {
     GListModel* _cretval;
     _cretval = gtk_constraint_layout_observe_constraints(cast(GtkConstraintLayout*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class ConstraintLayout : LayoutManager, Buildable
   {
     GListModel* _cretval;
     _cretval = gtk_constraint_layout_observe_guides(cast(GtkConstraintLayout*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class ConstraintLayout : LayoutManager, Buildable
    */
   void removeConstraint(Constraint constraint)
   {
-    gtk_constraint_layout_remove_constraint(cast(GtkConstraintLayout*)cPtr, constraint ? cast(GtkConstraint*)constraint.cPtr(false) : null);
+    gtk_constraint_layout_remove_constraint(cast(GtkConstraintLayout*)cPtr, constraint ? cast(GtkConstraint*)constraint.cPtr(No.Dup) : null);
   }
 
   /**
@@ -267,6 +267,6 @@ class ConstraintLayout : LayoutManager, Buildable
    */
   void removeGuide(ConstraintGuide guide)
   {
-    gtk_constraint_layout_remove_guide(cast(GtkConstraintLayout*)cPtr, guide ? cast(GtkConstraintGuide*)guide.cPtr(false) : null);
+    gtk_constraint_layout_remove_guide(cast(GtkConstraintLayout*)cPtr, guide ? cast(GtkConstraintGuide*)guide.cPtr(No.Dup) : null);
   }
 }

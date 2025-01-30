@@ -85,13 +85,13 @@ interface AppInfo
   static AppInfo createFromCommandline(string commandline, string applicationName, AppInfoCreateFlags flags)
   {
     GAppInfo* _cretval;
-    const(char)* _commandline = commandline.toCString(false);
-    const(char)* _applicationName = applicationName.toCString(false);
+    const(char)* _commandline = commandline.toCString(No.Alloc);
+    const(char)* _applicationName = applicationName.toCString(No.Alloc);
     GError *_err;
     _cretval = g_app_info_create_from_commandline(_commandline, _applicationName, flags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ interface AppInfo
   static AppInfo[] getAllForType(string contentType)
   {
     GList* _cretval;
-    const(char)* _contentType = contentType.toCString(false);
+    const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = g_app_info_get_all_for_type(_contentType);
     auto _retval = gListToD!(AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
@@ -144,9 +144,9 @@ interface AppInfo
   static AppInfo getDefaultForType(string contentType, bool mustSupportUris)
   {
     GAppInfo* _cretval;
-    const(char)* _contentType = contentType.toCString(false);
+    const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = g_app_info_get_default_for_type(_contentType, mustSupportUris);
-    auto _retval = _cretval ? ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -166,12 +166,12 @@ interface AppInfo
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _contentType = contentType.toCString(false);
+    const(char)* _contentType = contentType.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_app_info_get_default_for_type_async(_contentType, mustSupportUris, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_app_info_get_default_for_type_async(_contentType, mustSupportUris, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -187,10 +187,10 @@ interface AppInfo
   {
     GAppInfo* _cretval;
     GError *_err;
-    _cretval = g_app_info_get_default_for_type_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_app_info_get_default_for_type_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -207,9 +207,9 @@ interface AppInfo
   static AppInfo getDefaultForUriScheme(string uriScheme)
   {
     GAppInfo* _cretval;
-    const(char)* _uriScheme = uriScheme.toCString(false);
+    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
     _cretval = g_app_info_get_default_for_uri_scheme(_uriScheme);
-    auto _retval = _cretval ? ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -230,12 +230,12 @@ interface AppInfo
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _uriScheme = uriScheme.toCString(false);
+    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_app_info_get_default_for_uri_scheme_async(_uriScheme, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_app_info_get_default_for_uri_scheme_async(_uriScheme, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -251,10 +251,10 @@ interface AppInfo
   {
     GAppInfo* _cretval;
     GError *_err;
-    _cretval = g_app_info_get_default_for_uri_scheme_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_app_info_get_default_for_uri_scheme_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ interface AppInfo
   static AppInfo[] getFallbackForType(string contentType)
   {
     GList* _cretval;
-    const(char)* _contentType = contentType.toCString(false);
+    const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = g_app_info_get_fallback_for_type(_contentType);
     auto _retval = gListToD!(AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
@@ -291,7 +291,7 @@ interface AppInfo
   static AppInfo[] getRecommendedForType(string contentType)
   {
     GList* _cretval;
-    const(char)* _contentType = contentType.toCString(false);
+    const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = g_app_info_get_recommended_for_type(_contentType);
     auto _retval = gListToD!(AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
@@ -313,9 +313,9 @@ interface AppInfo
   static bool launchDefaultForUri(string uri, AppLaunchContext context)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = g_app_info_launch_default_for_uri(_uri, context ? cast(GAppLaunchContext*)context.cPtr(false) : null, &_err);
+    _retval = g_app_info_launch_default_for_uri(_uri, context ? cast(GAppLaunchContext*)context.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -343,12 +343,12 @@ interface AppInfo
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_app_info_launch_default_for_uri_async(_uri, context ? cast(GAppLaunchContext*)context.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_app_info_launch_default_for_uri_async(_uri, context ? cast(GAppLaunchContext*)context.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -361,7 +361,7 @@ interface AppInfo
   {
     bool _retval;
     GError *_err;
-    _retval = g_app_info_launch_default_for_uri_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_app_info_launch_default_for_uri_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -378,7 +378,7 @@ interface AppInfo
    */
   static void resetTypeAssociations(string contentType)
   {
-    const(char)* _contentType = contentType.toCString(false);
+    const(char)* _contentType = contentType.toCString(No.Alloc);
     g_app_info_reset_type_associations(_contentType);
   }
 

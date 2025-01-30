@@ -14,17 +14,17 @@ class DBusPropertyInfo : Boxed
 
   this()
   {
-    super(safeMalloc(GDBusPropertyInfo.sizeof), true);
+    super(safeMalloc(GDBusPropertyInfo.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -49,24 +49,24 @@ class DBusPropertyInfo : Boxed
 
   @property string name()
   {
-    return (cast(GDBusPropertyInfo*)cPtr).name.fromCString(false);
+    return (cast(GDBusPropertyInfo*)cPtr).name.fromCString(No.Free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GDBusPropertyInfo*)cPtr).name);
-    (cast(GDBusPropertyInfo*)cPtr).name = propval.toCString(true);
+    (cast(GDBusPropertyInfo*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
   @property string signature()
   {
-    return (cast(GDBusPropertyInfo*)cPtr).signature.fromCString(false);
+    return (cast(GDBusPropertyInfo*)cPtr).signature.fromCString(No.Free);
   }
 
   @property void signature(string propval)
   {
     safeFree(cast(void*)(cast(GDBusPropertyInfo*)cPtr).signature);
-    (cast(GDBusPropertyInfo*)cPtr).signature = propval.toCString(true);
+    (cast(GDBusPropertyInfo*)cPtr).signature = propval.toCString(Yes.Alloc);
   }
 
   @property DBusPropertyInfoFlags flags()

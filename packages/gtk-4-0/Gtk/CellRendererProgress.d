@@ -19,9 +19,9 @@ import Gtk.c.types;
 class CellRendererProgress : CellRenderer, Orientable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -44,6 +44,6 @@ class CellRendererProgress : CellRenderer, Orientable
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_progress_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 }

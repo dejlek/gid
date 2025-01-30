@@ -17,17 +17,17 @@ class DBusNodeInfo : Boxed
 
   this()
   {
-    super(safeMalloc(GDBusNodeInfo.sizeof), true);
+    super(safeMalloc(GDBusNodeInfo.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -52,13 +52,13 @@ class DBusNodeInfo : Boxed
 
   @property string path()
   {
-    return (cast(GDBusNodeInfo*)cPtr).path.fromCString(false);
+    return (cast(GDBusNodeInfo*)cPtr).path.fromCString(No.Free);
   }
 
   @property void path(string propval)
   {
     safeFree(cast(void*)(cast(GDBusNodeInfo*)cPtr).path);
-    (cast(GDBusNodeInfo*)cPtr).path = propval.toCString(true);
+    (cast(GDBusNodeInfo*)cPtr).path = propval.toCString(Yes.Alloc);
   }
 
   /**
@@ -76,12 +76,12 @@ class DBusNodeInfo : Boxed
   static DBusNodeInfo newForXml(string xmlData)
   {
     GDBusNodeInfo* _cretval;
-    const(char)* _xmlData = xmlData.toCString(false);
+    const(char)* _xmlData = xmlData.toCString(No.Alloc);
     GError *_err;
     _cretval = g_dbus_node_info_new_for_xml(_xmlData, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new DBusNodeInfo(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DBusNodeInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class DBusNodeInfo : Boxed
    */
   void generateXml(uint indent, String stringBuilder)
   {
-    g_dbus_node_info_generate_xml(cast(GDBusNodeInfo*)cPtr, indent, stringBuilder ? cast(GString*)stringBuilder.cPtr(false) : null);
+    g_dbus_node_info_generate_xml(cast(GDBusNodeInfo*)cPtr, indent, stringBuilder ? cast(GString*)stringBuilder.cPtr(No.Dup) : null);
   }
 
   /**
@@ -108,9 +108,9 @@ class DBusNodeInfo : Boxed
   DBusInterfaceInfo lookupInterface(string name)
   {
     GDBusInterfaceInfo* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_dbus_node_info_lookup_interface(cast(GDBusNodeInfo*)cPtr, _name);
-    auto _retval = _cretval ? new DBusInterfaceInfo(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

@@ -12,12 +12,12 @@ import Gid.gid;
 class TouchEvent : Event
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.TouchEvent");
 
-    super(cast(GdkEvent*)ptr, ownedRef);
+    super(cast(GdkEvent*)ptr, take);
   }
 
   /**

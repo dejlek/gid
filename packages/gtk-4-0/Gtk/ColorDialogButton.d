@@ -38,9 +38,9 @@ class ColorDialogButton : Widget
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -65,8 +65,8 @@ class ColorDialogButton : Widget
   this(ColorDialog dialog)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_color_dialog_button_new(dialog ? cast(GtkColorDialog*)dialog.cPtr(true) : null);
-    this(_cretval, false);
+    _cretval = gtk_color_dialog_button_new(dialog ? cast(GtkColorDialog*)dialog.cPtr(Yes.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -77,7 +77,7 @@ class ColorDialogButton : Widget
   {
     GtkColorDialog* _cretval;
     _cretval = gtk_color_dialog_button_get_dialog(cast(GtkColorDialogButton*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ColorDialog(cast(GtkColorDialog*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ColorDialog(cast(GtkColorDialog*)_cretval, No.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class ColorDialogButton : Widget
   {
     const(GdkRGBA)* _cretval;
     _cretval = gtk_color_dialog_button_get_rgba(cast(GtkColorDialogButton*)cPtr);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class ColorDialogButton : Widget
    */
   void setDialog(ColorDialog dialog)
   {
-    gtk_color_dialog_button_set_dialog(cast(GtkColorDialogButton*)cPtr, dialog ? cast(GtkColorDialog*)dialog.cPtr(false) : null);
+    gtk_color_dialog_button_set_dialog(cast(GtkColorDialogButton*)cPtr, dialog ? cast(GtkColorDialog*)dialog.cPtr(No.Dup) : null);
   }
 
   /**
@@ -115,7 +115,7 @@ class ColorDialogButton : Widget
    */
   void setRgba(RGBA color)
   {
-    gtk_color_dialog_button_set_rgba(cast(GtkColorDialogButton*)cPtr, color ? cast(GdkRGBA*)color.cPtr(false) : null);
+    gtk_color_dialog_button_set_rgba(cast(GtkColorDialogButton*)cPtr, color ? cast(GdkRGBA*)color.cPtr(No.Dup) : null);
   }
 
   /**

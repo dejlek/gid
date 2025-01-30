@@ -24,9 +24,9 @@ class Adjustment : InitiallyUnowned
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -54,7 +54,7 @@ class Adjustment : InitiallyUnowned
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_adjustment_new(value, lower, upper, stepIncrement, pageIncrement, pageSize);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**

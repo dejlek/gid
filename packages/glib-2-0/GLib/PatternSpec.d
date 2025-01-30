@@ -24,14 +24,14 @@ import Gid.gid;
 class PatternSpec : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -53,9 +53,9 @@ class PatternSpec : Boxed
   this(string pattern)
   {
     GPatternSpec* _cretval;
-    const(char)* _pattern = pattern.toCString(false);
+    const(char)* _pattern = pattern.toCString(No.Alloc);
     _cretval = g_pattern_spec_new(_pattern);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -66,7 +66,7 @@ class PatternSpec : Boxed
   {
     GPatternSpec* _cretval;
     _cretval = g_pattern_spec_copy(cast(GPatternSpec*)cPtr);
-    auto _retval = _cretval ? new PatternSpec(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new PatternSpec(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class PatternSpec : Boxed
   bool equal(PatternSpec pspec2)
   {
     bool _retval;
-    _retval = g_pattern_spec_equal(cast(GPatternSpec*)cPtr, pspec2 ? cast(GPatternSpec*)pspec2.cPtr(false) : null);
+    _retval = g_pattern_spec_equal(cast(GPatternSpec*)cPtr, pspec2 ? cast(GPatternSpec*)pspec2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -110,8 +110,8 @@ class PatternSpec : Boxed
   bool match(size_t stringLength, string string_, string stringReversed)
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(false);
-    const(char)* _stringReversed = stringReversed.toCString(false);
+    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _stringReversed = stringReversed.toCString(No.Alloc);
     _retval = g_pattern_spec_match(cast(GPatternSpec*)cPtr, stringLength, _string_, _stringReversed);
     return _retval;
   }
@@ -127,7 +127,7 @@ class PatternSpec : Boxed
   bool matchString(string string_)
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(false);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _retval = g_pattern_spec_match_string(cast(GPatternSpec*)cPtr, _string_);
     return _retval;
   }

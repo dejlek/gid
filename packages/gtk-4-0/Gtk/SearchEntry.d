@@ -53,9 +53,9 @@ import Gtk.c.types;
 class SearchEntry : Widget, Editable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -78,7 +78,7 @@ class SearchEntry : Widget, Editable
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_entry_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -113,7 +113,7 @@ class SearchEntry : Widget, Editable
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_entry_get_key_capture_widget(cast(GtkSearchEntry*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class SearchEntry : Widget, Editable
   {
     const(char)* _cretval;
     _cretval = gtk_search_entry_get_placeholder_text(cast(GtkSearchEntry*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class SearchEntry : Widget, Editable
    */
   void setKeyCaptureWidget(Widget widget)
   {
-    gtk_search_entry_set_key_capture_widget(cast(GtkSearchEntry*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_search_entry_set_key_capture_widget(cast(GtkSearchEntry*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -191,7 +191,7 @@ class SearchEntry : Widget, Editable
    */
   void setPlaceholderText(string text)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_search_entry_set_placeholder_text(cast(GtkSearchEntry*)cPtr, _text);
   }
 

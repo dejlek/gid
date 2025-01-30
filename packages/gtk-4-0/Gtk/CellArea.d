@@ -295,9 +295,9 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -329,7 +329,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   bool activate(CellAreaContext context, Widget widget, Rectangle cellArea, CellRendererState flags, bool editOnly)
   {
     bool _retval;
-    _retval = gtk_cell_area_activate(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, flags, editOnly);
+    _retval = gtk_cell_area_activate(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, flags, editOnly);
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   bool activateCell(Widget widget, CellRenderer renderer, Event event, Rectangle cellArea, CellRendererState flags)
   {
     bool _retval;
-    _retval = gtk_cell_area_activate_cell(cast(GtkCellArea*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, event ? cast(GdkEvent*)event.cPtr(false) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, flags);
+    _retval = gtk_cell_area_activate_cell(cast(GtkCellArea*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, flags);
     return _retval;
   }
 
@@ -361,7 +361,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void add(CellRenderer renderer)
   {
-    gtk_cell_area_add(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null);
+    gtk_cell_area_add(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -376,7 +376,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void addFocusSibling(CellRenderer renderer, CellRenderer sibling)
   {
-    gtk_cell_area_add_focus_sibling(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, sibling ? cast(GtkCellRenderer*)sibling.cPtr(false) : null);
+    gtk_cell_area_add_focus_sibling(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, sibling ? cast(GtkCellRenderer*)sibling.cPtr(No.Dup) : null);
   }
 
   /**
@@ -391,7 +391,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void applyAttributes(TreeModel treeModel, TreeIter iter, bool isExpander, bool isExpanded)
   {
-    gtk_cell_area_apply_attributes(cast(GtkCellArea*)cPtr, treeModel ? cast(GtkTreeModel*)(cast(ObjectG)treeModel).cPtr(false) : null, iter ? cast(GtkTreeIter*)iter.cPtr(false) : null, isExpander, isExpanded);
+    gtk_cell_area_apply_attributes(cast(GtkCellArea*)cPtr, treeModel ? cast(GtkTreeModel*)(cast(ObjectG)treeModel).cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, isExpander, isExpanded);
   }
 
   /**
@@ -404,8 +404,8 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void attributeConnect(CellRenderer renderer, string attribute, int column)
   {
-    const(char)* _attribute = attribute.toCString(false);
-    gtk_cell_area_attribute_connect(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, _attribute, column);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    gtk_cell_area_attribute_connect(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, _attribute, column);
   }
 
   /**
@@ -418,8 +418,8 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void attributeDisconnect(CellRenderer renderer, string attribute)
   {
-    const(char)* _attribute = attribute.toCString(false);
-    gtk_cell_area_attribute_disconnect(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, _attribute);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    gtk_cell_area_attribute_disconnect(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, _attribute);
   }
 
   /**
@@ -433,8 +433,8 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   int attributeGetColumn(CellRenderer renderer, string attribute)
   {
     int _retval;
-    const(char)* _attribute = attribute.toCString(false);
-    _retval = gtk_cell_area_attribute_get_column(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, _attribute);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    _retval = gtk_cell_area_attribute_get_column(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, _attribute);
     return _retval;
   }
 
@@ -447,8 +447,8 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void cellGetProperty(CellRenderer renderer, string propertyName, Value value)
   {
-    const(char)* _propertyName = propertyName.toCString(false);
-    gtk_cell_area_cell_get_property(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, _propertyName, value ? cast(GValue*)value.cPtr(false) : null);
+    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    gtk_cell_area_cell_get_property(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, _propertyName, value ? cast(GValue*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -460,8 +460,8 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void cellSetProperty(CellRenderer renderer, string propertyName, Value value)
   {
-    const(char)* _propertyName = propertyName.toCString(false);
-    gtk_cell_area_cell_set_property(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, _propertyName, value ? cast(GValue*)value.cPtr(false) : null);
+    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    gtk_cell_area_cell_set_property(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, _propertyName, value ? cast(GValue*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -482,8 +482,8 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   CellAreaContext copyContext(CellAreaContext context)
   {
     GtkCellAreaContext* _cretval;
-    _cretval = gtk_cell_area_copy_context(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!CellAreaContext(cast(GtkCellAreaContext*)_cretval, true) : null;
+    _cretval = gtk_cell_area_copy_context(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!CellAreaContext(cast(GtkCellAreaContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -500,7 +500,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   {
     GtkCellAreaContext* _cretval;
     _cretval = gtk_cell_area_create_context(cast(GtkCellArea*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!CellAreaContext(cast(GtkCellAreaContext*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!CellAreaContext(cast(GtkCellAreaContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -517,7 +517,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   int event(CellAreaContext context, Widget widget, Event event, Rectangle cellArea, CellRendererState flags)
   {
     int _retval;
-    _retval = gtk_cell_area_event(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, event ? cast(GdkEvent*)event.cPtr(false) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, flags);
+    _retval = gtk_cell_area_event(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, flags);
     return _retval;
   }
 
@@ -550,7 +550,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
     {
       auto _dlg = cast(CellCallback*)data;
 
-      bool _retval = (*_dlg)(renderer ? ObjectG.getDObject!CellRenderer(cast(void*)renderer, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!CellRenderer(cast(void*)renderer, No.Take));
       return _retval;
     }
 
@@ -574,12 +574,12 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
     {
       auto _dlg = cast(CellAllocCallback*)data;
 
-      bool _retval = (*_dlg)(renderer ? ObjectG.getDObject!CellRenderer(cast(void*)renderer, false) : null, cellArea ? new Rectangle(cast(void*)cellArea, false) : null, cellBackground ? new Rectangle(cast(void*)cellBackground, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!CellRenderer(cast(void*)renderer, No.Take), cellArea ? new Rectangle(cast(void*)cellArea, No.Take) : null, cellBackground ? new Rectangle(cast(void*)cellBackground, No.Take) : null);
       return _retval;
     }
 
     auto _callback = cast(void*)&callback;
-    gtk_cell_area_foreach_alloc(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(false) : null, &_callbackCallback, _callback);
+    gtk_cell_area_foreach_alloc(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -596,8 +596,8 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   void getCellAllocation(CellAreaContext context, Widget widget, CellRenderer renderer, Rectangle cellArea, out Rectangle allocation)
   {
     GdkRectangle _allocation;
-    gtk_cell_area_get_cell_allocation(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, &_allocation);
-    allocation = new Rectangle(cast(void*)&_allocation, false);
+    gtk_cell_area_get_cell_allocation(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, &_allocation);
+    allocation = new Rectangle(cast(void*)&_allocation, No.Take);
   }
 
   /**
@@ -618,9 +618,9 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   {
     GtkCellRenderer* _cretval;
     GdkRectangle _allocArea;
-    _cretval = gtk_cell_area_get_cell_at_position(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, x, y, &_allocArea);
-    auto _retval = _cretval ? ObjectG.getDObject!CellRenderer(cast(GtkCellRenderer*)_cretval, false) : null;
-    allocArea = new Rectangle(cast(void*)&_allocArea, false);
+    _cretval = gtk_cell_area_get_cell_at_position(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, x, y, &_allocArea);
+    auto _retval = ObjectG.getDObject!CellRenderer(cast(GtkCellRenderer*)_cretval, No.Take);
+    allocArea = new Rectangle(cast(void*)&_allocArea, No.Take);
     return _retval;
   }
 
@@ -638,7 +638,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   {
     const(char)* _cretval;
     _cretval = gtk_cell_area_get_current_path_string(cast(GtkCellArea*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -651,7 +651,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   {
     GtkCellEditable* _cretval;
     _cretval = gtk_cell_area_get_edit_widget(cast(GtkCellArea*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!CellEditable(cast(GtkCellEditable*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!CellEditable(cast(GtkCellEditable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -664,7 +664,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_area_get_edited_cell(cast(GtkCellArea*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!CellRenderer(cast(GtkCellRenderer*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!CellRenderer(cast(GtkCellRenderer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -676,7 +676,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_area_get_focus_cell(cast(GtkCellArea*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!CellRenderer(cast(GtkCellRenderer*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!CellRenderer(cast(GtkCellRenderer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -695,8 +695,8 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   CellRenderer getFocusFromSibling(CellRenderer renderer)
   {
     GtkCellRenderer* _cretval;
-    _cretval = gtk_cell_area_get_focus_from_sibling(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!CellRenderer(cast(GtkCellRenderer*)_cretval, false) : null;
+    _cretval = gtk_cell_area_get_focus_from_sibling(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!CellRenderer(cast(GtkCellRenderer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -710,7 +710,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   CellRenderer[] getFocusSiblings(CellRenderer renderer)
   {
     const(GList)* _cretval;
-    _cretval = gtk_cell_area_get_focus_siblings(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null);
+    _cretval = gtk_cell_area_get_focus_siblings(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null);
     auto _retval = gListToD!(CellRenderer, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -730,7 +730,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void getPreferredHeight(CellAreaContext context, Widget widget, out int minimumHeight, out int naturalHeight)
   {
-    gtk_cell_area_get_preferred_height(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+    gtk_cell_area_get_preferred_height(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
 
   /**
@@ -755,7 +755,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void getPreferredHeightForWidth(CellAreaContext context, Widget widget, int width, out int minimumHeight, out int naturalHeight)
   {
-    gtk_cell_area_get_preferred_height_for_width(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+    gtk_cell_area_get_preferred_height_for_width(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
 
   /**
@@ -773,7 +773,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void getPreferredWidth(CellAreaContext context, Widget widget, out int minimumWidth, out int naturalWidth)
   {
-    gtk_cell_area_get_preferred_width(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+    gtk_cell_area_get_preferred_width(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
 
   /**
@@ -798,7 +798,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void getPreferredWidthForHeight(CellAreaContext context, Widget widget, int height, out int minimumWidth, out int naturalWidth)
   {
-    gtk_cell_area_get_preferred_width_for_height(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+    gtk_cell_area_get_preferred_width_for_height(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
 
   /**
@@ -823,7 +823,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   bool hasRenderer(CellRenderer renderer)
   {
     bool _retval;
-    _retval = gtk_cell_area_has_renderer(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null);
+    _retval = gtk_cell_area_has_renderer(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -840,8 +840,8 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   void innerCellArea(Widget widget, Rectangle cellArea, out Rectangle innerArea)
   {
     GdkRectangle _innerArea;
-    gtk_cell_area_inner_cell_area(cast(GtkCellArea*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, &_innerArea);
-    innerArea = new Rectangle(cast(void*)&_innerArea, false);
+    gtk_cell_area_inner_cell_area(cast(GtkCellArea*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, &_innerArea);
+    innerArea = new Rectangle(cast(void*)&_innerArea, No.Take);
   }
 
   /**
@@ -867,7 +867,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
   bool isFocusSibling(CellRenderer renderer, CellRenderer sibling)
   {
     bool _retval;
-    _retval = gtk_cell_area_is_focus_sibling(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, sibling ? cast(GtkCellRenderer*)sibling.cPtr(false) : null);
+    _retval = gtk_cell_area_is_focus_sibling(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, sibling ? cast(GtkCellRenderer*)sibling.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -878,7 +878,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void remove(CellRenderer renderer)
   {
-    gtk_cell_area_remove(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null);
+    gtk_cell_area_remove(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -890,7 +890,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void removeFocusSibling(CellRenderer renderer, CellRenderer sibling)
   {
-    gtk_cell_area_remove_focus_sibling(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, sibling ? cast(GtkCellRenderer*)sibling.cPtr(false) : null);
+    gtk_cell_area_remove_focus_sibling(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, sibling ? cast(GtkCellRenderer*)sibling.cPtr(No.Dup) : null);
   }
 
   /**
@@ -910,7 +910,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void requestRenderer(CellRenderer renderer, Orientation orientation, Widget widget, int forSize, out int minimumSize, out int naturalSize)
   {
-    gtk_cell_area_request_renderer(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null, orientation, widget ? cast(GtkWidget*)widget.cPtr(false) : null, forSize, cast(int*)&minimumSize, cast(int*)&naturalSize);
+    gtk_cell_area_request_renderer(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, orientation, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, forSize, cast(int*)&minimumSize, cast(int*)&naturalSize);
   }
 
   /**
@@ -924,7 +924,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void setFocusCell(CellRenderer renderer)
   {
-    gtk_cell_area_set_focus_cell(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(false) : null);
+    gtk_cell_area_set_focus_cell(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -941,7 +941,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    */
   void snapshot(CellAreaContext context, Widget widget, Snapshot snapshot, Rectangle backgroundArea, Rectangle cellArea, CellRendererState flags, bool paintFocus)
   {
-    gtk_cell_area_snapshot(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(false) : null, widget ? cast(GtkWidget*)widget.cPtr(false) : null, snapshot ? cast(GtkSnapshot*)snapshot.cPtr(false) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(false) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(false) : null, flags, paintFocus);
+    gtk_cell_area_snapshot(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, snapshot ? cast(GtkSnapshot*)snapshot.cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, flags, paintFocus);
   }
 
   /**

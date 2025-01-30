@@ -17,11 +17,11 @@ import Gid.gid;
 class ParamSpecVariant : ParamSpec
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.ParamSpecVariant");
 
-    super(cast(GParamSpec*)ptr, ownedRef);
+    super(cast(GParamSpec*)ptr, take);
   }
 }

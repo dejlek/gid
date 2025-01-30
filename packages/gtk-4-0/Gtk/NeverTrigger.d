@@ -17,9 +17,9 @@ class NeverTrigger : ShortcutTrigger
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -43,7 +43,7 @@ class NeverTrigger : ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_never_trigger_get();
-    auto _retval = _cretval ? ObjectG.getDObject!NeverTrigger(cast(GtkShortcutTrigger*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!NeverTrigger(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 }

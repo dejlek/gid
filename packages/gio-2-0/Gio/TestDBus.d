@@ -79,9 +79,9 @@ class TestDBus : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -104,7 +104,7 @@ class TestDBus : ObjectG
   {
     GTestDBus* _cretval;
     _cretval = g_test_dbus_new(flags);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -127,7 +127,7 @@ class TestDBus : ObjectG
    */
   void addServiceDir(string path)
   {
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     g_test_dbus_add_service_dir(cast(GTestDBus*)cPtr, _path);
   }
 
@@ -152,7 +152,7 @@ class TestDBus : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_test_dbus_get_bus_address(cast(GTestDBus*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

@@ -87,7 +87,7 @@
     GtkCustomSorter* _cretval;
     auto _sortFunc = freezeDelegate(cast(void*)&sortFunc);
     _cretval = gtk_custom_sorter_new(&_sortFuncCallback, _sortFunc, &thawDelegate);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

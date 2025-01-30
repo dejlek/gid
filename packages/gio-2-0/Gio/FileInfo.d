@@ -44,9 +44,9 @@ import Gio.c.types;
 class FileInfo : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -67,7 +67,7 @@ class FileInfo : ObjectG
   {
     GFileInfo* _cretval;
     _cretval = g_file_info_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -86,7 +86,7 @@ class FileInfo : ObjectG
    */
   void copyInto(FileInfo destInfo)
   {
-    g_file_info_copy_into(cast(GFileInfo*)cPtr, destInfo ? cast(GFileInfo*)destInfo.cPtr(false) : null);
+    g_file_info_copy_into(cast(GFileInfo*)cPtr, destInfo ? cast(GFileInfo*)destInfo.cPtr(No.Dup) : null);
   }
 
   /**
@@ -97,7 +97,7 @@ class FileInfo : ObjectG
   {
     GFileInfo* _cretval;
     _cretval = g_file_info_dup(cast(GFileInfo*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class FileInfo : ObjectG
   {
     GDateTime* _cretval;
     _cretval = g_file_info_get_access_date_time(cast(GFileInfo*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -133,9 +133,9 @@ class FileInfo : ObjectG
   string getAttributeAsString(string attribute)
   {
     char* _cretval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _cretval = g_file_info_get_attribute_as_string(cast(GFileInfo*)cPtr, _attribute);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class FileInfo : ObjectG
   bool getAttributeBoolean(string attribute)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _retval = g_file_info_get_attribute_boolean(cast(GFileInfo*)cPtr, _attribute);
     return _retval;
   }
@@ -165,9 +165,9 @@ class FileInfo : ObjectG
   string getAttributeByteString(string attribute)
   {
     const(char)* _cretval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _cretval = g_file_info_get_attribute_byte_string(cast(GFileInfo*)cPtr, _attribute);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class FileInfo : ObjectG
   bool getAttributeData(string attribute, out FileAttributeType type, out void* valuePp, out FileAttributeStatus status)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _retval = g_file_info_get_attribute_data(cast(GFileInfo*)cPtr, _attribute, &type, cast(void**)&valuePp, &status);
     return _retval;
   }
@@ -203,9 +203,9 @@ class FileInfo : ObjectG
   string getAttributeFilePath(string attribute)
   {
     const(char)* _cretval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _cretval = g_file_info_get_attribute_file_path(cast(GFileInfo*)cPtr, _attribute);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class FileInfo : ObjectG
   int getAttributeInt32(string attribute)
   {
     int _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _retval = g_file_info_get_attribute_int32(cast(GFileInfo*)cPtr, _attribute);
     return _retval;
   }
@@ -236,7 +236,7 @@ class FileInfo : ObjectG
   long getAttributeInt64(string attribute)
   {
     long _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _retval = g_file_info_get_attribute_int64(cast(GFileInfo*)cPtr, _attribute);
     return _retval;
   }
@@ -252,9 +252,9 @@ class FileInfo : ObjectG
   ObjectG getAttributeObject(string attribute)
   {
     ObjectC* _cretval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _cretval = g_file_info_get_attribute_object(cast(GFileInfo*)cPtr, _attribute);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class FileInfo : ObjectG
   FileAttributeStatus getAttributeStatus(string attribute)
   {
     GFileAttributeStatus _cretval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _cretval = g_file_info_get_attribute_status(cast(GFileInfo*)cPtr, _attribute);
     FileAttributeStatus _retval = cast(FileAttributeStatus)_cretval;
     return _retval;
@@ -285,9 +285,9 @@ class FileInfo : ObjectG
   string getAttributeString(string attribute)
   {
     const(char)* _cretval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _cretval = g_file_info_get_attribute_string(cast(GFileInfo*)cPtr, _attribute);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class FileInfo : ObjectG
   string[] getAttributeStringv(string attribute)
   {
     char** _cretval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _cretval = g_file_info_get_attribute_stringv(cast(GFileInfo*)cPtr, _attribute);
     string[] _retval;
 
@@ -313,7 +313,7 @@ class FileInfo : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(false);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -328,7 +328,7 @@ class FileInfo : ObjectG
   FileAttributeType getAttributeType(string attribute)
   {
     GFileAttributeType _cretval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _cretval = g_file_info_get_attribute_type(cast(GFileInfo*)cPtr, _attribute);
     FileAttributeType _retval = cast(FileAttributeType)_cretval;
     return _retval;
@@ -345,7 +345,7 @@ class FileInfo : ObjectG
   uint getAttributeUint32(string attribute)
   {
     uint _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _retval = g_file_info_get_attribute_uint32(cast(GFileInfo*)cPtr, _attribute);
     return _retval;
   }
@@ -361,7 +361,7 @@ class FileInfo : ObjectG
   ulong getAttributeUint64(string attribute)
   {
     ulong _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _retval = g_file_info_get_attribute_uint64(cast(GFileInfo*)cPtr, _attribute);
     return _retval;
   }
@@ -377,7 +377,7 @@ class FileInfo : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_content_type(cast(GFileInfo*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -396,7 +396,7 @@ class FileInfo : ObjectG
   {
     GDateTime* _cretval;
     _cretval = g_file_info_get_creation_date_time(cast(GFileInfo*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -410,7 +410,7 @@ class FileInfo : ObjectG
   {
     GDateTime* _cretval;
     _cretval = g_file_info_get_deletion_date(cast(GFileInfo*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -424,7 +424,7 @@ class FileInfo : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_display_name(cast(GFileInfo*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -438,7 +438,7 @@ class FileInfo : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_edit_name(cast(GFileInfo*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -453,7 +453,7 @@ class FileInfo : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_etag(cast(GFileInfo*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -482,7 +482,7 @@ class FileInfo : ObjectG
   {
     GIcon* _cretval;
     _cretval = g_file_info_get_icon(cast(GFileInfo*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Icon(cast(GIcon*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -540,7 +540,7 @@ class FileInfo : ObjectG
   {
     GDateTime* _cretval;
     _cretval = g_file_info_get_modification_date_time(cast(GFileInfo*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -573,7 +573,7 @@ class FileInfo : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_name(cast(GFileInfo*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -616,7 +616,7 @@ class FileInfo : ObjectG
   {
     GIcon* _cretval;
     _cretval = g_file_info_get_symbolic_icon(cast(GFileInfo*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Icon(cast(GIcon*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -630,7 +630,7 @@ class FileInfo : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_symlink_target(cast(GFileInfo*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -644,7 +644,7 @@ class FileInfo : ObjectG
   bool hasAttribute(string attribute)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _retval = g_file_info_has_attribute(cast(GFileInfo*)cPtr, _attribute);
     return _retval;
   }
@@ -660,7 +660,7 @@ class FileInfo : ObjectG
   bool hasNamespace(string nameSpace)
   {
     bool _retval;
-    const(char)* _nameSpace = nameSpace.toCString(false);
+    const(char)* _nameSpace = nameSpace.toCString(No.Alloc);
     _retval = g_file_info_has_namespace(cast(GFileInfo*)cPtr, _nameSpace);
     return _retval;
   }
@@ -677,7 +677,7 @@ class FileInfo : ObjectG
   string[] listAttributes(string nameSpace)
   {
     char** _cretval;
-    const(char)* _nameSpace = nameSpace.toCString(false);
+    const(char)* _nameSpace = nameSpace.toCString(No.Alloc);
     _cretval = g_file_info_list_attributes(cast(GFileInfo*)cPtr, _nameSpace);
     string[] _retval;
 
@@ -688,7 +688,7 @@ class FileInfo : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -700,7 +700,7 @@ class FileInfo : ObjectG
    */
   void removeAttribute(string attribute)
   {
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_remove_attribute(cast(GFileInfo*)cPtr, _attribute);
   }
 
@@ -714,7 +714,7 @@ class FileInfo : ObjectG
    */
   void setAccessDateTime(DateTime atime)
   {
-    g_file_info_set_access_date_time(cast(GFileInfo*)cPtr, atime ? cast(GDateTime*)atime.cPtr(false) : null);
+    g_file_info_set_access_date_time(cast(GFileInfo*)cPtr, atime ? cast(GDateTime*)atime.cPtr(No.Dup) : null);
   }
 
   /**
@@ -727,7 +727,7 @@ class FileInfo : ObjectG
    */
   void setAttribute(string attribute, FileAttributeType type, void* valueP)
   {
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute(cast(GFileInfo*)cPtr, _attribute, type, valueP);
   }
 
@@ -740,7 +740,7 @@ class FileInfo : ObjectG
    */
   void setAttributeBoolean(string attribute, bool attrValue)
   {
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_boolean(cast(GFileInfo*)cPtr, _attribute, attrValue);
   }
 
@@ -753,8 +753,8 @@ class FileInfo : ObjectG
    */
   void setAttributeByteString(string attribute, string attrValue)
   {
-    const(char)* _attribute = attribute.toCString(false);
-    const(char)* _attrValue = attrValue.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attrValue = attrValue.toCString(No.Alloc);
     g_file_info_set_attribute_byte_string(cast(GFileInfo*)cPtr, _attribute, _attrValue);
   }
 
@@ -769,8 +769,8 @@ class FileInfo : ObjectG
    */
   void setAttributeFilePath(string attribute, string attrValue)
   {
-    const(char)* _attribute = attribute.toCString(false);
-    const(char)* _attrValue = attrValue.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attrValue = attrValue.toCString(No.Alloc);
     g_file_info_set_attribute_file_path(cast(GFileInfo*)cPtr, _attribute, _attrValue);
   }
 
@@ -783,7 +783,7 @@ class FileInfo : ObjectG
    */
   void setAttributeInt32(string attribute, int attrValue)
   {
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_int32(cast(GFileInfo*)cPtr, _attribute, attrValue);
   }
 
@@ -796,7 +796,7 @@ class FileInfo : ObjectG
    */
   void setAttributeInt64(string attribute, long attrValue)
   {
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_int64(cast(GFileInfo*)cPtr, _attribute, attrValue);
   }
 
@@ -807,7 +807,7 @@ class FileInfo : ObjectG
    */
   void setAttributeMask(FileAttributeMatcher mask)
   {
-    g_file_info_set_attribute_mask(cast(GFileInfo*)cPtr, mask ? cast(GFileAttributeMatcher*)mask.cPtr(false) : null);
+    g_file_info_set_attribute_mask(cast(GFileInfo*)cPtr, mask ? cast(GFileAttributeMatcher*)mask.cPtr(No.Dup) : null);
   }
 
   /**
@@ -819,8 +819,8 @@ class FileInfo : ObjectG
    */
   void setAttributeObject(string attribute, ObjectG attrValue)
   {
-    const(char)* _attribute = attribute.toCString(false);
-    g_file_info_set_attribute_object(cast(GFileInfo*)cPtr, _attribute, attrValue ? cast(ObjectC*)attrValue.cPtr(false) : null);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    g_file_info_set_attribute_object(cast(GFileInfo*)cPtr, _attribute, attrValue ? cast(ObjectC*)attrValue.cPtr(No.Dup) : null);
   }
 
   /**
@@ -837,7 +837,7 @@ class FileInfo : ObjectG
   bool setAttributeStatus(string attribute, FileAttributeStatus status)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     _retval = g_file_info_set_attribute_status(cast(GFileInfo*)cPtr, _attribute, status);
     return _retval;
   }
@@ -851,8 +851,8 @@ class FileInfo : ObjectG
    */
   void setAttributeString(string attribute, string attrValue)
   {
-    const(char)* _attribute = attribute.toCString(false);
-    const(char)* _attrValue = attrValue.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _attrValue = attrValue.toCString(No.Alloc);
     g_file_info_set_attribute_string(cast(GFileInfo*)cPtr, _attribute, _attrValue);
   }
 
@@ -867,10 +867,10 @@ class FileInfo : ObjectG
    */
   void setAttributeStringv(string attribute, string[] attrValue)
   {
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     char*[] _tmpattrValue;
     foreach (s; attrValue)
-      _tmpattrValue ~= s.toCString(false);
+      _tmpattrValue ~= s.toCString(No.Alloc);
     _tmpattrValue ~= null;
     char** _attrValue = _tmpattrValue.ptr;
     g_file_info_set_attribute_stringv(cast(GFileInfo*)cPtr, _attribute, _attrValue);
@@ -885,7 +885,7 @@ class FileInfo : ObjectG
    */
   void setAttributeUint32(string attribute, uint attrValue)
   {
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_uint32(cast(GFileInfo*)cPtr, _attribute, attrValue);
   }
 
@@ -898,7 +898,7 @@ class FileInfo : ObjectG
    */
   void setAttributeUint64(string attribute, ulong attrValue)
   {
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_uint64(cast(GFileInfo*)cPtr, _attribute, attrValue);
   }
 
@@ -910,7 +910,7 @@ class FileInfo : ObjectG
    */
   void setContentType(string contentType)
   {
-    const(char)* _contentType = contentType.toCString(false);
+    const(char)* _contentType = contentType.toCString(No.Alloc);
     g_file_info_set_content_type(cast(GFileInfo*)cPtr, _contentType);
   }
 
@@ -924,7 +924,7 @@ class FileInfo : ObjectG
    */
   void setCreationDateTime(DateTime creationTime)
   {
-    g_file_info_set_creation_date_time(cast(GFileInfo*)cPtr, creationTime ? cast(GDateTime*)creationTime.cPtr(false) : null);
+    g_file_info_set_creation_date_time(cast(GFileInfo*)cPtr, creationTime ? cast(GDateTime*)creationTime.cPtr(No.Dup) : null);
   }
 
   /**
@@ -935,7 +935,7 @@ class FileInfo : ObjectG
    */
   void setDisplayName(string displayName)
   {
-    const(char)* _displayName = displayName.toCString(false);
+    const(char)* _displayName = displayName.toCString(No.Alloc);
     g_file_info_set_display_name(cast(GFileInfo*)cPtr, _displayName);
   }
 
@@ -947,7 +947,7 @@ class FileInfo : ObjectG
    */
   void setEditName(string editName)
   {
-    const(char)* _editName = editName.toCString(false);
+    const(char)* _editName = editName.toCString(No.Alloc);
     g_file_info_set_edit_name(cast(GFileInfo*)cPtr, _editName);
   }
 
@@ -970,7 +970,7 @@ class FileInfo : ObjectG
    */
   void setIcon(Icon icon)
   {
-    g_file_info_set_icon(cast(GFileInfo*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(false) : null);
+    g_file_info_set_icon(cast(GFileInfo*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1005,7 +1005,7 @@ class FileInfo : ObjectG
    */
   void setModificationDateTime(DateTime mtime)
   {
-    g_file_info_set_modification_date_time(cast(GFileInfo*)cPtr, mtime ? cast(GDateTime*)mtime.cPtr(false) : null);
+    g_file_info_set_modification_date_time(cast(GFileInfo*)cPtr, mtime ? cast(GDateTime*)mtime.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1032,7 +1032,7 @@ class FileInfo : ObjectG
    */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     g_file_info_set_name(cast(GFileInfo*)cPtr, _name);
   }
 
@@ -1066,7 +1066,7 @@ class FileInfo : ObjectG
    */
   void setSymbolicIcon(Icon icon)
   {
-    g_file_info_set_symbolic_icon(cast(GFileInfo*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(false) : null);
+    g_file_info_set_symbolic_icon(cast(GFileInfo*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1077,7 +1077,7 @@ class FileInfo : ObjectG
    */
   void setSymlinkTarget(string symlinkTarget)
   {
-    const(char)* _symlinkTarget = symlinkTarget.toCString(false);
+    const(char)* _symlinkTarget = symlinkTarget.toCString(No.Alloc);
     g_file_info_set_symlink_target(cast(GFileInfo*)cPtr, _symlinkTarget);
   }
 

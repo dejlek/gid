@@ -13,14 +13,14 @@ class UnixCredentialsMessageClass
 {
   GUnixCredentialsMessageClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.UnixCredentialsMessageClass");
 
     cInstance = *cast(GUnixCredentialsMessageClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

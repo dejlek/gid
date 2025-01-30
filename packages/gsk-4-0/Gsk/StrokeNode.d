@@ -15,12 +15,12 @@ import Gsk.c.types;
 class StrokeNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.StrokeNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -36,8 +36,8 @@ class StrokeNode : RenderNode
   this(RenderNode child, Path path, Stroke stroke)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_stroke_node_new(child ? cast(GskRenderNode*)child.cPtr(false) : null, path ? cast(GskPath*)path.cPtr(false) : null, stroke ? cast(GskStroke*)stroke.cPtr(false) : null);
-    this(_cretval, false);
+    _cretval = gsk_stroke_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, path ? cast(GskPath*)path.cPtr(No.Dup) : null, stroke ? cast(GskStroke*)stroke.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -48,7 +48,7 @@ class StrokeNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_stroke_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -61,7 +61,7 @@ class StrokeNode : RenderNode
   {
     GskPath* _cretval;
     _cretval = gsk_stroke_node_get_path(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Path(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Path(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class StrokeNode : RenderNode
   {
     const(GskStroke)* _cretval;
     _cretval = gsk_stroke_node_get_stroke(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Stroke(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Stroke(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

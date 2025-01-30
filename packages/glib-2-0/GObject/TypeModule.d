@@ -47,9 +47,9 @@ class TypeModule : ObjectG, TypePlugin
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -102,7 +102,7 @@ class TypeModule : ObjectG, TypePlugin
   GType registerEnum(string name, EnumValue constStaticValues)
   {
     GType _retval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = g_type_module_register_enum(cast(GTypeModule*)cPtr, _name, constStaticValues ? cast(GEnumValue*)constStaticValues.cPtr : null);
     return _retval;
   }
@@ -127,7 +127,7 @@ class TypeModule : ObjectG, TypePlugin
   GType registerFlags(string name, FlagsValue constStaticValues)
   {
     GType _retval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = g_type_module_register_flags(cast(GTypeModule*)cPtr, _name, constStaticValues ? cast(GFlagsValue*)constStaticValues.cPtr : null);
     return _retval;
   }
@@ -154,7 +154,7 @@ class TypeModule : ObjectG, TypePlugin
   GType registerType(GType parentType, string typeName, TypeInfoG typeInfo, TypeFlags flags)
   {
     GType _retval;
-    const(char)* _typeName = typeName.toCString(false);
+    const(char)* _typeName = typeName.toCString(No.Alloc);
     _retval = g_type_module_register_type(cast(GTypeModule*)cPtr, parentType, _typeName, typeInfo ? cast(GTypeInfo*)typeInfo.cPtr : null, flags);
     return _retval;
   }
@@ -166,7 +166,7 @@ class TypeModule : ObjectG, TypePlugin
    */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     g_type_module_set_name(cast(GTypeModule*)cPtr, _name);
   }
 

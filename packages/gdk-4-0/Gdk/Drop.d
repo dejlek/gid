@@ -39,9 +39,9 @@ class Drop : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -97,7 +97,7 @@ class Drop : ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_drop_get_device(cast(GdkDrop*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class Drop : ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_drop_get_display(cast(GdkDrop*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class Drop : ObjectG
   {
     GdkDrag* _cretval;
     _cretval = gdk_drop_get_drag(cast(GdkDrop*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Drag(cast(GdkDrag*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Drag(cast(GdkDrag*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class Drop : ObjectG
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_drop_get_formats(cast(GdkDrop*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Drop : ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_drop_get_surface(cast(GdkDrop*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -169,17 +169,17 @@ class Drop : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     const(char)*[] _tmpmimeTypes;
     foreach (s; mimeTypes)
-      _tmpmimeTypes ~= s.toCString(false);
+      _tmpmimeTypes ~= s.toCString(No.Alloc);
     _tmpmimeTypes ~= null;
     const(char*)* _mimeTypes = _tmpmimeTypes.ptr;
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_drop_read_async(cast(GdkDrop*)cPtr, _mimeTypes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gdk_drop_read_async(cast(GdkDrop*)cPtr, _mimeTypes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -199,11 +199,11 @@ class Drop : ObjectG
     GInputStream* _cretval;
     char* _outMimeType;
     GError *_err;
-    _cretval = gdk_drop_read_finish(cast(GdkDrop*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_outMimeType, &_err);
+    _cretval = gdk_drop_read_finish(cast(GdkDrop*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_outMimeType, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, true) : null;
-    outMimeType = _outMimeType.fromCString(false);
+    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
+    outMimeType = _outMimeType.fromCString(No.Free);
     return _retval;
   }
 
@@ -229,11 +229,11 @@ class Drop : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_drop_read_value_async(cast(GdkDrop*)cPtr, type, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    gdk_drop_read_value_async(cast(GdkDrop*)cPtr, type, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -247,10 +247,10 @@ class Drop : ObjectG
   {
     const(GValue)* _cretval;
     GError *_err;
-    _cretval = gdk_drop_read_value_finish(cast(GdkDrop*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = gdk_drop_read_value_finish(cast(GdkDrop*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

@@ -144,10 +144,10 @@ template FileT()
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_append_to(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_append_to(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -173,11 +173,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_append_to_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_append_to_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -193,10 +193,10 @@ template FileT()
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_append_to_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_append_to_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -220,10 +220,10 @@ template FileT()
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_file_build_attribute_list_for_copy(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_build_attribute_list_for_copy(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ template FileT()
     bool _retval;
     auto _progressCallback = cast(void*)&progressCallback;
     GError *_err;
-    _retval = g_file_copy(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(false) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_progressCallbackCallback, _progressCallback, &_err);
+    _retval = g_file_copy(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_progressCallbackCallback, _progressCallback, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -305,7 +305,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_copy_attributes(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(false) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_copy_attributes(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -321,7 +321,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_copy_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _retval = g_file_copy_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -356,10 +356,10 @@ template FileT()
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_create(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_create(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -386,11 +386,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_create_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_create_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -405,10 +405,10 @@ template FileT()
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_create_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_create_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -444,10 +444,10 @@ template FileT()
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_create_readwrite(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_create_readwrite(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -474,11 +474,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_create_readwrite_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_create_readwrite_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -493,10 +493,10 @@ template FileT()
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_create_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_create_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -529,7 +529,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_delete(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_delete(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -553,11 +553,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_delete_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_delete_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -570,7 +570,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_delete_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_delete_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -592,7 +592,7 @@ template FileT()
   {
     GFile* _cretval;
     _cretval = g_file_dup(cast(GFile*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -620,11 +620,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_eject_mountable(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_eject_mountable(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -642,7 +642,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_eject_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_eject_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -672,11 +672,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_eject_mountable_with_operation(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_eject_mountable_with_operation(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -691,7 +691,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_eject_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_eject_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -731,12 +731,12 @@ template FileT()
   override FileEnumerator enumerateChildren(string attributes, FileQueryInfoFlags flags, Cancellable cancellable)
   {
     GFileEnumerator* _cretval;
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_enumerate_children(cast(GFile*)cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_enumerate_children(cast(GFile*)cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileEnumerator(cast(GFileEnumerator*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileEnumerator(cast(GFileEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -765,12 +765,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_enumerate_children_async(cast(GFile*)cPtr, _attributes, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_enumerate_children_async(cast(GFile*)cPtr, _attributes, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -786,10 +786,10 @@ template FileT()
   {
     GFileEnumerator* _cretval;
     GError *_err;
-    _cretval = g_file_enumerate_children_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_enumerate_children_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileEnumerator(cast(GFileEnumerator*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileEnumerator(cast(GFileEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -806,7 +806,7 @@ template FileT()
   override bool equal(File file2)
   {
     bool _retval;
-    _retval = g_file_equal(cast(GFile*)cPtr, file2 ? cast(GFile*)(cast(ObjectG)file2).cPtr(false) : null);
+    _retval = g_file_equal(cast(GFile*)cPtr, file2 ? cast(GFile*)(cast(ObjectG)file2).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -829,10 +829,10 @@ template FileT()
   {
     GMount* _cretval;
     GError *_err;
-    _cretval = g_file_find_enclosing_mount(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_find_enclosing_mount(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Mount(cast(GMount*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Mount(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -857,11 +857,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_find_enclosing_mount_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_find_enclosing_mount_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -876,10 +876,10 @@ template FileT()
   {
     GMount* _cretval;
     GError *_err;
-    _cretval = g_file_find_enclosing_mount_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_find_enclosing_mount_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Mount(cast(GMount*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Mount(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -902,7 +902,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_basename(cast(GFile*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -920,9 +920,9 @@ template FileT()
   override File getChild(string name)
   {
     GFile* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_file_get_child(cast(GFile*)cPtr, _name);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -943,12 +943,12 @@ template FileT()
   override File getChildForDisplayName(string displayName)
   {
     GFile* _cretval;
-    const(char)* _displayName = displayName.toCString(false);
+    const(char)* _displayName = displayName.toCString(No.Alloc);
     GError *_err;
     _cretval = g_file_get_child_for_display_name(cast(GFile*)cPtr, _displayName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -965,7 +965,7 @@ template FileT()
   {
     GFile* _cretval;
     _cretval = g_file_get_parent(cast(GFile*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -989,7 +989,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_parse_name(cast(GFile*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1005,7 +1005,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_path(cast(GFile*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1022,8 +1022,8 @@ template FileT()
   override string getRelativePath(File descendant)
   {
     char* _cretval;
-    _cretval = g_file_get_relative_path(cast(GFile*)cPtr, descendant ? cast(GFile*)(cast(ObjectG)descendant).cPtr(false) : null);
-    string _retval = _cretval.fromCString(true);
+    _cretval = g_file_get_relative_path(cast(GFile*)cPtr, descendant ? cast(GFile*)(cast(ObjectG)descendant).cPtr(No.Dup) : null);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1039,7 +1039,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_uri(cast(GFile*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1061,7 +1061,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_uri_scheme(cast(GFile*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1078,7 +1078,7 @@ template FileT()
   override bool hasParent(File parent)
   {
     bool _retval;
-    _retval = g_file_has_parent(cast(GFile*)cPtr, parent ? cast(GFile*)(cast(ObjectG)parent).cPtr(false) : null);
+    _retval = g_file_has_parent(cast(GFile*)cPtr, parent ? cast(GFile*)(cast(ObjectG)parent).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1102,7 +1102,7 @@ template FileT()
   override bool hasPrefix(File prefix)
   {
     bool _retval;
-    _retval = g_file_has_prefix(cast(GFile*)cPtr, prefix ? cast(GFile*)(cast(ObjectG)prefix).cPtr(false) : null);
+    _retval = g_file_has_prefix(cast(GFile*)cPtr, prefix ? cast(GFile*)(cast(ObjectG)prefix).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1118,7 +1118,7 @@ template FileT()
   override bool hasUriScheme(string uriScheme)
   {
     bool _retval;
-    const(char)* _uriScheme = uriScheme.toCString(false);
+    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
     _retval = g_file_has_uri_scheme(cast(GFile*)cPtr, _uriScheme);
     return _retval;
   }
@@ -1176,11 +1176,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_load_bytes_async(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_load_bytes_async(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -1206,13 +1206,13 @@ template FileT()
     ubyte* _contents;
     char* _etagOut;
     GError *_err;
-    _retval = g_file_load_contents(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_contents, &_length, &_etagOut, &_err);
+    _retval = g_file_load_contents(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
       throw new ErrorG(_err);
     contents.length = _length;
     contents[0 .. $] = _contents[0 .. _length];
     safeFree(cast(void*)_contents);
-    etagOut = _etagOut.fromCString(true);
+    etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1238,11 +1238,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_load_contents_async(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_load_contents_async(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -1266,13 +1266,13 @@ template FileT()
     ubyte* _contents;
     char* _etagOut;
     GError *_err;
-    _retval = g_file_load_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_contents, &_length, &_etagOut, &_err);
+    _retval = g_file_load_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
       throw new ErrorG(_err);
     contents.length = _length;
     contents[0 .. $] = _contents[0 .. _length];
     safeFree(cast(void*)_contents);
-    etagOut = _etagOut.fromCString(true);
+    etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1297,13 +1297,13 @@ template FileT()
     ubyte* _contents;
     char* _etagOut;
     GError *_err;
-    _retval = g_file_load_partial_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_contents, &_length, &_etagOut, &_err);
+    _retval = g_file_load_partial_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
       throw new ErrorG(_err);
     contents.length = _length;
     contents[0 .. $] = _contents[0 .. _length];
     safeFree(cast(void*)_contents);
-    etagOut = _etagOut.fromCString(true);
+    etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1329,7 +1329,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_directory(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_make_directory(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1351,11 +1351,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_make_directory_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_make_directory_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -1369,7 +1369,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_directory_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_make_directory_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1397,7 +1397,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_directory_with_parents(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_make_directory_with_parents(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1419,9 +1419,9 @@ template FileT()
   override bool makeSymbolicLink(string symlinkValue, Cancellable cancellable)
   {
     bool _retval;
-    const(char)* _symlinkValue = symlinkValue.toCString(false);
+    const(char)* _symlinkValue = symlinkValue.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_make_symbolic_link(cast(GFile*)cPtr, _symlinkValue, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_make_symbolic_link(cast(GFile*)cPtr, _symlinkValue, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1446,12 +1446,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _symlinkValue = symlinkValue.toCString(false);
+    const(char)* _symlinkValue = symlinkValue.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_make_symbolic_link_async(cast(GFile*)cPtr, _symlinkValue, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_make_symbolic_link_async(cast(GFile*)cPtr, _symlinkValue, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -1465,7 +1465,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_symbolic_link_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_make_symbolic_link_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1508,7 +1508,7 @@ template FileT()
     bool _retval;
     auto _progressCallback = cast(void*)&progressCallback;
     GError *_err;
-    _retval = g_file_measure_disk_usage(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_progressCallbackCallback, _progressCallback, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
+    _retval = g_file_measure_disk_usage(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_progressCallbackCallback, _progressCallback, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1530,7 +1530,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_measure_disk_usage_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
+    _retval = g_file_measure_disk_usage_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1554,10 +1554,10 @@ template FileT()
   {
     GFileMonitor* _cretval;
     GError *_err;
-    _cretval = g_file_monitor(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_monitor(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileMonitor(cast(GFileMonitor*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileMonitor(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1583,10 +1583,10 @@ template FileT()
   {
     GFileMonitor* _cretval;
     GError *_err;
-    _cretval = g_file_monitor_directory(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_monitor_directory(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileMonitor(cast(GFileMonitor*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileMonitor(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1615,10 +1615,10 @@ template FileT()
   {
     GFileMonitor* _cretval;
     GError *_err;
-    _cretval = g_file_monitor_file(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_monitor_file(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileMonitor(cast(GFileMonitor*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileMonitor(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1647,11 +1647,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_mount_enclosing_volume(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_mount_enclosing_volume(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -1666,7 +1666,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_mount_enclosing_volume_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_mount_enclosing_volume_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1698,11 +1698,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_mount_mountable(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_mount_mountable(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -1718,10 +1718,10 @@ template FileT()
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = g_file_mount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_file_mount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1773,7 +1773,7 @@ template FileT()
     bool _retval;
     auto _progressCallback = cast(void*)&progressCallback;
     GError *_err;
-    _retval = g_file_move(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(false) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_progressCallbackCallback, _progressCallback, &_err);
+    _retval = g_file_move(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_progressCallbackCallback, _progressCallback, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1790,7 +1790,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_move_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_move_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1820,10 +1820,10 @@ template FileT()
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_open_readwrite(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_open_readwrite(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1848,11 +1848,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_open_readwrite_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_open_readwrite_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -1867,10 +1867,10 @@ template FileT()
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_open_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_open_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1888,7 +1888,7 @@ template FileT()
   {
     const(char)* _cretval;
     _cretval = g_file_peek_path(cast(GFile*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -1912,11 +1912,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_poll_mountable(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_poll_mountable(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -1932,7 +1932,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_poll_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_poll_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1954,10 +1954,10 @@ template FileT()
   {
     GAppInfo* _cretval;
     GError *_err;
-    _cretval = g_file_query_default_handler(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_query_default_handler(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1975,11 +1975,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_query_default_handler_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_query_default_handler_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -1994,10 +1994,10 @@ template FileT()
   {
     GAppInfo* _cretval;
     GError *_err;
-    _cretval = g_file_query_default_handler_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_file_query_default_handler_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2030,7 +2030,7 @@ template FileT()
   override bool queryExists(Cancellable cancellable)
   {
     bool _retval;
-    _retval = g_file_query_exists(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null);
+    _retval = g_file_query_exists(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -2049,7 +2049,7 @@ template FileT()
   override FileType queryFileType(FileQueryInfoFlags flags, Cancellable cancellable)
   {
     GFileType _cretval;
-    _cretval = g_file_query_file_type(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null);
+    _cretval = g_file_query_file_type(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
     FileType _retval = cast(FileType)_cretval;
     return _retval;
   }
@@ -2087,12 +2087,12 @@ template FileT()
   override FileInfo queryFilesystemInfo(string attributes, Cancellable cancellable)
   {
     GFileInfo* _cretval;
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_query_filesystem_info(cast(GFile*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_query_filesystem_info(cast(GFile*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2121,12 +2121,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_query_filesystem_info_async(cast(GFile*)cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_query_filesystem_info_async(cast(GFile*)cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -2142,10 +2142,10 @@ template FileT()
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_query_filesystem_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_query_filesystem_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2187,12 +2187,12 @@ template FileT()
   override FileInfo queryInfo(string attributes, FileQueryInfoFlags flags, Cancellable cancellable)
   {
     GFileInfo* _cretval;
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_query_info(cast(GFile*)cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_query_info(cast(GFile*)cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2220,12 +2220,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_query_info_async(cast(GFile*)cPtr, _attributes, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_query_info_async(cast(GFile*)cPtr, _attributes, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -2241,10 +2241,10 @@ template FileT()
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_query_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_query_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2268,10 +2268,10 @@ template FileT()
   {
     GFileAttributeInfoList* _cretval;
     GError *_err;
-    _cretval = g_file_query_settable_attributes(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_query_settable_attributes(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new FileAttributeInfoList(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -2293,10 +2293,10 @@ template FileT()
   {
     GFileAttributeInfoList* _cretval;
     GError *_err;
-    _cretval = g_file_query_writable_namespaces(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_query_writable_namespaces(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new FileAttributeInfoList(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -2319,10 +2319,10 @@ template FileT()
   {
     GFileInputStream* _cretval;
     GError *_err;
-    _cretval = g_file_read(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_read(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileInputStream(cast(GFileInputStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileInputStream(cast(GFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2347,11 +2347,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_read_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_read_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -2366,10 +2366,10 @@ template FileT()
   {
     GFileInputStream* _cretval;
     GError *_err;
-    _cretval = g_file_read_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_read_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileInputStream(cast(GFileInputStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileInputStream(cast(GFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2422,12 +2422,12 @@ template FileT()
   override FileOutputStream replace(string etag, bool makeBackup, FileCreateFlags flags, Cancellable cancellable)
   {
     GFileOutputStream* _cretval;
-    const(char)* _etag = etag.toCString(false);
+    const(char)* _etag = etag.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_replace(cast(GFile*)cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_replace(cast(GFile*)cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2457,12 +2457,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _etag = etag.toCString(false);
+    const(char)* _etag = etag.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_replace_async(cast(GFile*)cPtr, _etag, makeBackup, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_replace_async(cast(GFile*)cPtr, _etag, makeBackup, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -2499,13 +2499,13 @@ template FileT()
       _length = cast(size_t)contents.length;
 
     auto _contents = cast(const(ubyte)*)contents.ptr;
-    const(char)* _etag = etag.toCString(false);
+    const(char)* _etag = etag.toCString(No.Alloc);
     char* _newEtag;
     GError *_err;
-    _retval = g_file_replace_contents(cast(GFile*)cPtr, _contents, _length, _etag, makeBackup, flags, &_newEtag, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_replace_contents(cast(GFile*)cPtr, _contents, _length, _etag, makeBackup, flags, &_newEtag, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    newEtag = _newEtag.fromCString(true);
+    newEtag = _newEtag.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -2540,7 +2540,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     size_t _length;
@@ -2548,9 +2548,9 @@ template FileT()
       _length = cast(size_t)contents.length;
 
     auto _contents = cast(const(ubyte)*)contents.ptr;
-    const(char)* _etag = etag.toCString(false);
+    const(char)* _etag = etag.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_replace_contents_async(cast(GFile*)cPtr, _contents, _length, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_replace_contents_async(cast(GFile*)cPtr, _contents, _length, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -2569,10 +2569,10 @@ template FileT()
     bool _retval;
     char* _newEtag;
     GError *_err;
-    _retval = g_file_replace_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_newEtag, &_err);
+    _retval = g_file_replace_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_newEtag, &_err);
     if (_err)
       throw new ErrorG(_err);
-    newEtag = _newEtag.fromCString(true);
+    newEtag = _newEtag.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -2588,10 +2588,10 @@ template FileT()
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_replace_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_replace_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileOutputStream(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2617,12 +2617,12 @@ template FileT()
   override FileIOStream replaceReadwrite(string etag, bool makeBackup, FileCreateFlags flags, Cancellable cancellable)
   {
     GFileIOStream* _cretval;
-    const(char)* _etag = etag.toCString(false);
+    const(char)* _etag = etag.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_replace_readwrite(cast(GFile*)cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_replace_readwrite(cast(GFile*)cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2653,12 +2653,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _etag = etag.toCString(false);
+    const(char)* _etag = etag.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_replace_readwrite_async(cast(GFile*)cPtr, _etag, makeBackup, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_replace_readwrite_async(cast(GFile*)cPtr, _etag, makeBackup, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -2673,10 +2673,10 @@ template FileT()
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_replace_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_replace_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!FileIOStream(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2692,9 +2692,9 @@ template FileT()
   override File resolveRelativePath(string relativePath)
   {
     GFile* _cretval;
-    const(char)* _relativePath = relativePath.toCString(false);
+    const(char)* _relativePath = relativePath.toCString(No.Alloc);
     _cretval = g_file_resolve_relative_path(cast(GFile*)cPtr, _relativePath);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2718,9 +2718,9 @@ template FileT()
   override bool setAttribute(string attribute, FileAttributeType type, void* valueP, FileQueryInfoFlags flags, Cancellable cancellable)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute(cast(GFile*)cPtr, _attribute, type, valueP, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_set_attribute(cast(GFile*)cPtr, _attribute, type, valueP, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -2745,10 +2745,10 @@ template FileT()
   override bool setAttributeByteString(string attribute, string value, FileQueryInfoFlags flags, Cancellable cancellable)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(false);
-    const(char)* _value = value.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_byte_string(cast(GFile*)cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_set_attribute_byte_string(cast(GFile*)cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -2772,9 +2772,9 @@ template FileT()
   override bool setAttributeInt32(string attribute, int value, FileQueryInfoFlags flags, Cancellable cancellable)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_int32(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_set_attribute_int32(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -2797,9 +2797,9 @@ template FileT()
   override bool setAttributeInt64(string attribute, long value, FileQueryInfoFlags flags, Cancellable cancellable)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_int64(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_set_attribute_int64(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -2822,10 +2822,10 @@ template FileT()
   override bool setAttributeString(string attribute, string value, FileQueryInfoFlags flags, Cancellable cancellable)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(false);
-    const(char)* _value = value.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_string(cast(GFile*)cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_set_attribute_string(cast(GFile*)cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -2849,9 +2849,9 @@ template FileT()
   override bool setAttributeUint32(string attribute, uint value, FileQueryInfoFlags flags, Cancellable cancellable)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_uint32(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_set_attribute_uint32(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -2875,9 +2875,9 @@ template FileT()
   override bool setAttributeUint64(string attribute, ulong value, FileQueryInfoFlags flags, Cancellable cancellable)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(false);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_uint64(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_set_attribute_uint64(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -2906,11 +2906,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_set_attributes_async(cast(GFile*)cPtr, info ? cast(GFileInfo*)info.cPtr(false) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_set_attributes_async(cast(GFile*)cPtr, info ? cast(GFileInfo*)info.cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -2925,10 +2925,10 @@ template FileT()
     bool _retval;
     GFileInfo* _info;
     GError *_err;
-    _retval = g_file_set_attributes_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_info, &_err);
+    _retval = g_file_set_attributes_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_info, &_err);
     if (_err)
       throw new ErrorG(_err);
-    info = new FileInfo(cast(void*)_info, true);
+    info = new FileInfo(cast(void*)_info, Yes.Take);
     return _retval;
   }
 
@@ -2954,7 +2954,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_set_attributes_from_info(cast(GFile*)cPtr, info ? cast(GFileInfo*)info.cPtr(false) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_set_attributes_from_info(cast(GFile*)cPtr, info ? cast(GFileInfo*)info.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -2983,12 +2983,12 @@ template FileT()
   override File setDisplayName(string displayName, Cancellable cancellable)
   {
     GFile* _cretval;
-    const(char)* _displayName = displayName.toCString(false);
+    const(char)* _displayName = displayName.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_set_display_name(cast(GFile*)cPtr, _displayName, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_file_set_display_name(cast(GFile*)cPtr, _displayName, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3014,12 +3014,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _displayName = displayName.toCString(false);
+    const(char)* _displayName = displayName.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_set_display_name_async(cast(GFile*)cPtr, _displayName, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_set_display_name_async(cast(GFile*)cPtr, _displayName, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -3034,10 +3034,10 @@ template FileT()
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = g_file_set_display_name_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(false) : null, &_err);
+    _cretval = g_file_set_display_name_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3064,11 +3064,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_start_mountable(cast(GFile*)cPtr, flags, startOperation ? cast(GMountOperation*)startOperation.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_start_mountable(cast(GFile*)cPtr, flags, startOperation ? cast(GMountOperation*)startOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -3084,7 +3084,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_start_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_start_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -3114,11 +3114,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_stop_mountable(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_stop_mountable(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -3134,7 +3134,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_stop_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_stop_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -3173,7 +3173,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_trash(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_file_trash(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -3195,11 +3195,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_trash_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_trash_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -3213,7 +3213,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_trash_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_trash_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -3243,11 +3243,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_unmount_mountable(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_unmount_mountable(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -3266,7 +3266,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_unmount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_unmount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -3296,11 +3296,11 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_file_unmount_mountable_with_operation(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_file_unmount_mountable_with_operation(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -3317,7 +3317,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_unmount_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_file_unmount_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

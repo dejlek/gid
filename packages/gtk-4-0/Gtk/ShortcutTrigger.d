@@ -27,9 +27,9 @@ class ShortcutTrigger : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -62,9 +62,9 @@ class ShortcutTrigger : ObjectG
   static ShortcutTrigger parseString(string string_)
   {
     GtkShortcutTrigger* _cretval;
-    const(char)* _string_ = string_.toCString(false);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gtk_shortcut_trigger_parse_string(_string_);
-    auto _retval = _cretval ? ObjectG.getDObject!ShortcutTrigger(cast(GtkShortcutTrigger*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ShortcutTrigger(cast(GtkShortcutTrigger*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class ShortcutTrigger : ObjectG
   int compare(ShortcutTrigger trigger2)
   {
     int _retval;
-    _retval = gtk_shortcut_trigger_compare(cast(GtkShortcutTrigger*)cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2.cPtr(false) : null);
+    _retval = gtk_shortcut_trigger_compare(cast(GtkShortcutTrigger*)cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class ShortcutTrigger : ObjectG
   bool equal(ShortcutTrigger trigger2)
   {
     bool _retval;
-    _retval = gtk_shortcut_trigger_equal(cast(GtkShortcutTrigger*)cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2.cPtr(false) : null);
+    _retval = gtk_shortcut_trigger_equal(cast(GtkShortcutTrigger*)cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class ShortcutTrigger : ObjectG
    */
   void print(String string_)
   {
-    gtk_shortcut_trigger_print(cast(GtkShortcutTrigger*)cPtr, string_ ? cast(GString*)string_.cPtr(false) : null);
+    gtk_shortcut_trigger_print(cast(GtkShortcutTrigger*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -149,7 +149,7 @@ class ShortcutTrigger : ObjectG
   bool printLabel(Display display, String string_)
   {
     bool _retval;
-    _retval = gtk_shortcut_trigger_print_label(cast(GtkShortcutTrigger*)cPtr, display ? cast(GdkDisplay*)display.cPtr(false) : null, string_ ? cast(GString*)string_.cPtr(false) : null);
+    _retval = gtk_shortcut_trigger_print_label(cast(GtkShortcutTrigger*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -170,8 +170,8 @@ class ShortcutTrigger : ObjectG
   string toLabel(Display display)
   {
     char* _cretval;
-    _cretval = gtk_shortcut_trigger_to_label(cast(GtkShortcutTrigger*)cPtr, display ? cast(GdkDisplay*)display.cPtr(false) : null);
-    string _retval = _cretval.fromCString(true);
+    _cretval = gtk_shortcut_trigger_to_label(cast(GtkShortcutTrigger*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class ShortcutTrigger : ObjectG
   {
     char* _cretval;
     _cretval = gtk_shortcut_trigger_to_string(cast(GtkShortcutTrigger*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class ShortcutTrigger : ObjectG
   KeyMatch trigger(Event event, bool enableMnemonics)
   {
     GdkKeyMatch _cretval;
-    _cretval = gtk_shortcut_trigger_trigger(cast(GtkShortcutTrigger*)cPtr, event ? cast(GdkEvent*)event.cPtr(false) : null, enableMnemonics);
+    _cretval = gtk_shortcut_trigger_trigger(cast(GtkShortcutTrigger*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null, enableMnemonics);
     KeyMatch _retval = cast(KeyMatch)_cretval;
     return _retval;
   }

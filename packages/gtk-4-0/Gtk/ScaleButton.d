@@ -41,9 +41,9 @@ class ScaleButton : Widget, AccessibleRange, Orientable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -78,11 +78,11 @@ class ScaleButton : Widget, AccessibleRange, Orientable
     GtkWidget* _cretval;
     char*[] _tmpicons;
     foreach (s; icons)
-      _tmpicons ~= s.toCString(false);
+      _tmpicons ~= s.toCString(No.Alloc);
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
     _cretval = gtk_scale_button_new(min, max, step, _icons);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -107,7 +107,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scale_button_get_adjustment(cast(GtkScaleButton*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_minus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_plus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_popup(cast(GtkScaleButton*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    */
   void setAdjustment(Adjustment adjustment)
   {
-    gtk_scale_button_set_adjustment(cast(GtkScaleButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(false) : null);
+    gtk_scale_button_set_adjustment(cast(GtkScaleButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -202,7 +202,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
   {
     char*[] _tmpicons;
     foreach (s; icons)
-      _tmpicons ~= s.toCString(false);
+      _tmpicons ~= s.toCString(No.Alloc);
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
     gtk_scale_button_set_icons(cast(GtkScaleButton*)cPtr, _icons);

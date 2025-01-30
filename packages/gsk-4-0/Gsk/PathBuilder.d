@@ -47,14 +47,14 @@ import cairo.Path;
 class PathBuilder : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -77,7 +77,7 @@ class PathBuilder : Boxed
   {
     GskPathBuilder* _cretval;
     _cretval = gsk_path_builder_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -89,7 +89,7 @@ class PathBuilder : Boxed
    */
   void addCairoPath(Path path)
   {
-    gsk_path_builder_add_cairo_path(cast(GskPathBuilder*)cPtr, path ? cast(cairo_path_t*)path.cPtr(false) : null);
+    gsk_path_builder_add_cairo_path(cast(GskPathBuilder*)cPtr, path ? cast(cairo_path_t*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -102,7 +102,7 @@ class PathBuilder : Boxed
    */
   void addCircle(Point center, float radius)
   {
-    gsk_path_builder_add_circle(cast(GskPathBuilder*)cPtr, center ? cast(graphene_point_t*)center.cPtr(false) : null, radius);
+    gsk_path_builder_add_circle(cast(GskPathBuilder*)cPtr, center ? cast(graphene_point_t*)center.cPtr(No.Dup) : null, radius);
   }
 
   /**
@@ -112,7 +112,7 @@ class PathBuilder : Boxed
    */
   void addLayout(Layout layout)
   {
-    gsk_path_builder_add_layout(cast(GskPathBuilder*)cPtr, layout ? cast(PangoLayout*)layout.cPtr(false) : null);
+    gsk_path_builder_add_layout(cast(GskPathBuilder*)cPtr, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null);
   }
 
   /**
@@ -122,7 +122,7 @@ class PathBuilder : Boxed
    */
   void addPath(DGskPath path)
   {
-    gsk_path_builder_add_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(false) : null);
+    gsk_path_builder_add_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -135,7 +135,7 @@ class PathBuilder : Boxed
    */
   void addRect(Rect rect)
   {
-    gsk_path_builder_add_rect(cast(GskPathBuilder*)cPtr, rect ? cast(graphene_rect_t*)rect.cPtr(false) : null);
+    gsk_path_builder_add_rect(cast(GskPathBuilder*)cPtr, rect ? cast(graphene_rect_t*)rect.cPtr(No.Dup) : null);
   }
 
   /**
@@ -145,7 +145,7 @@ class PathBuilder : Boxed
    */
   void addReversePath(DGskPath path)
   {
-    gsk_path_builder_add_reverse_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(false) : null);
+    gsk_path_builder_add_reverse_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -174,7 +174,7 @@ class PathBuilder : Boxed
    */
   void addSegment(DGskPath path, PathPoint start, PathPoint end)
   {
-    gsk_path_builder_add_segment(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(false) : null, start ? cast(GskPathPoint*)start.cPtr(false) : null, end ? cast(GskPathPoint*)end.cPtr(false) : null);
+    gsk_path_builder_add_segment(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, start ? cast(GskPathPoint*)start.cPtr(No.Dup) : null, end ? cast(GskPathPoint*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -273,7 +273,7 @@ class PathBuilder : Boxed
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_path_builder_get_current_point(cast(GskPathBuilder*)cPtr);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -509,7 +509,7 @@ class PathBuilder : Boxed
   {
     GskPath* _cretval;
     _cretval = gsk_path_builder_to_path(cast(GskPathBuilder*)cPtr);
-    auto _retval = _cretval ? new DGskPath(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DGskPath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

@@ -127,9 +127,9 @@ import Gtk.c.types;
 class Dialog : Window
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -155,7 +155,7 @@ class Dialog : Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -174,7 +174,7 @@ class Dialog : Window
    */
   void addActionWidget(Widget child, int responseId)
   {
-    gtk_dialog_add_action_widget(cast(GtkDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, responseId);
+    gtk_dialog_add_action_widget(cast(GtkDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, responseId);
   }
 
   /**
@@ -193,9 +193,9 @@ class Dialog : Window
   Widget addButton(string buttonText, int responseId)
   {
     GtkWidget* _cretval;
-    const(char)* _buttonText = buttonText.toCString(false);
+    const(char)* _buttonText = buttonText.toCString(No.Alloc);
     _cretval = gtk_dialog_add_button(cast(GtkDialog*)cPtr, _buttonText, responseId);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class Dialog : Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_content_area(cast(GtkDialog*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Box(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Box(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class Dialog : Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_header_bar(cast(GtkDialog*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!HeaderBar(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!HeaderBar(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class Dialog : Window
   int getResponseForWidget(Widget widget)
   {
     int _retval;
-    _retval = gtk_dialog_get_response_for_widget(cast(GtkDialog*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    _retval = gtk_dialog_get_response_for_widget(cast(GtkDialog*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class Dialog : Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_widget_for_response(cast(GtkDialog*)cPtr, responseId);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

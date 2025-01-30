@@ -15,14 +15,14 @@ import Pango.c.types;
 class TabArray : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -49,7 +49,7 @@ class TabArray : Boxed
   {
     PangoTabArray* _cretval;
     _cretval = pango_tab_array_new(initialSize, positionsInPixels);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -61,7 +61,7 @@ class TabArray : Boxed
   {
     PangoTabArray* _cretval;
     _cretval = pango_tab_array_copy(cast(PangoTabArray*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class TabArray : Boxed
   {
     char* _cretval;
     _cretval = pango_tab_array_to_string(cast(PangoTabArray*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -205,9 +205,9 @@ class TabArray : Boxed
   static TabArray fromString(string text)
   {
     PangoTabArray* _cretval;
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     _cretval = pango_tab_array_from_string(_text);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

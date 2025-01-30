@@ -24,9 +24,9 @@ class Font : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -49,7 +49,7 @@ class Font : ObjectG
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_describe(cast(PangoFont*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class Font : ObjectG
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_describe_with_absolute_size(cast(PangoFont*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -77,8 +77,8 @@ class Font : ObjectG
   Coverage getCoverage(PgLanguage language)
   {
     PangoCoverage* _cretval;
-    _cretval = pango_font_get_coverage(cast(PangoFont*)cPtr, language ? cast(PangoLanguage*)language.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Coverage(cast(PangoCoverage*)_cretval, true) : null;
+    _cretval = pango_font_get_coverage(cast(PangoFont*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Coverage(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class Font : ObjectG
   {
     PangoFontFace* _cretval;
     _cretval = pango_font_get_face(cast(PangoFont*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!FontFace(cast(PangoFontFace*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FontFace(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class Font : ObjectG
     pango_font_get_features(cast(PangoFont*)cPtr, _features.ptr, _len, cast(uint*)&numFeatures);
     features.length = _len;
     foreach (i; 0 .. _len)
-      features[i] = new Feature(cast(void*)&_features[i], false);
+      features[i] = new Feature(cast(void*)&_features[i], No.Take);
   }
 
   /**
@@ -132,7 +132,7 @@ class Font : ObjectG
   {
     PangoFontMap* _cretval;
     _cretval = pango_font_get_font_map(cast(PangoFont*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!FontMap(cast(PangoFontMap*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FontMap(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class Font : ObjectG
         break;
       _retval = new PgLanguage[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new PgLanguage(cast(void*)_cretval[i], false);
+        _retval[i] = new PgLanguage(cast(void*)_cretval[i], No.Take);
     }
     return _retval;
   }
@@ -200,8 +200,8 @@ class Font : ObjectG
   FontMetrics getMetrics(PgLanguage language)
   {
     PangoFontMetrics* _cretval;
-    _cretval = pango_font_get_metrics(cast(PangoFont*)cPtr, language ? cast(PangoLanguage*)language.cPtr(false) : null);
-    auto _retval = _cretval ? new FontMetrics(cast(void*)_cretval, true) : null;
+    _cretval = pango_font_get_metrics(cast(PangoFont*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new FontMetrics(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

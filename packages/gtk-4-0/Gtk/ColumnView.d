@@ -86,9 +86,9 @@ class ColumnView : Widget, Scrollable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -114,8 +114,8 @@ class ColumnView : Widget, Scrollable
   this(SelectionModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_column_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(true) : null);
-    this(_cretval, false);
+    _cretval = gtk_column_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -126,7 +126,7 @@ class ColumnView : Widget, Scrollable
    */
   void appendColumn(ColumnViewColumn column)
   {
-    gtk_column_view_append_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(false) : null);
+    gtk_column_view_append_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
   }
 
   /**
@@ -140,7 +140,7 @@ class ColumnView : Widget, Scrollable
   {
     GListModel* _cretval;
     _cretval = gtk_column_view_get_columns(cast(GtkColumnView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class ColumnView : Widget, Scrollable
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_get_header_factory(cast(GtkColumnView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class ColumnView : Widget, Scrollable
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_column_view_get_model(cast(GtkColumnView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!SelectionModel(cast(GtkSelectionModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!SelectionModel(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class ColumnView : Widget, Scrollable
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_get_row_factory(cast(GtkColumnView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class ColumnView : Widget, Scrollable
   {
     GtkSorter* _cretval;
     _cretval = gtk_column_view_get_sorter(cast(GtkColumnView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Sorter(cast(GtkSorter*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Sorter(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -286,7 +286,7 @@ class ColumnView : Widget, Scrollable
    */
   void insertColumn(uint position, ColumnViewColumn column)
   {
-    gtk_column_view_insert_column(cast(GtkColumnView*)cPtr, position, column ? cast(GtkColumnViewColumn*)column.cPtr(false) : null);
+    gtk_column_view_insert_column(cast(GtkColumnView*)cPtr, position, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
   }
 
   /**
@@ -296,7 +296,7 @@ class ColumnView : Widget, Scrollable
    */
   void removeColumn(ColumnViewColumn column)
   {
-    gtk_column_view_remove_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(false) : null);
+    gtk_column_view_remove_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
   }
 
   /**
@@ -314,7 +314,7 @@ class ColumnView : Widget, Scrollable
    */
   void scrollTo(uint pos, ColumnViewColumn column, ListScrollFlags flags, ScrollInfo scroll)
   {
-    gtk_column_view_scroll_to(cast(GtkColumnView*)cPtr, pos, column ? cast(GtkColumnViewColumn*)column.cPtr(false) : null, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(true) : null);
+    gtk_column_view_scroll_to(cast(GtkColumnView*)cPtr, pos, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -337,7 +337,7 @@ class ColumnView : Widget, Scrollable
    */
   void setHeaderFactory(ListItemFactory factory)
   {
-    gtk_column_view_set_header_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(false) : null);
+    gtk_column_view_set_header_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
 
   /**
@@ -348,7 +348,7 @@ class ColumnView : Widget, Scrollable
    */
   void setModel(SelectionModel model)
   {
-    gtk_column_view_set_model(cast(GtkColumnView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_column_view_set_model(cast(GtkColumnView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -372,7 +372,7 @@ class ColumnView : Widget, Scrollable
    */
   void setRowFactory(ListItemFactory factory)
   {
-    gtk_column_view_set_row_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(false) : null);
+    gtk_column_view_set_row_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
 
   /**
@@ -434,7 +434,7 @@ class ColumnView : Widget, Scrollable
    */
   void sortByColumn(ColumnViewColumn column, SortType direction)
   {
-    gtk_column_view_sort_by_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(false) : null, direction);
+    gtk_column_view_sort_by_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null, direction);
   }
 
   /**

@@ -52,9 +52,9 @@ import Gtk.c.types;
 class SearchBar : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -77,7 +77,7 @@ class SearchBar : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -91,7 +91,7 @@ class SearchBar : Widget
    */
   void connectEntry(Editable entry)
   {
-    gtk_search_bar_connect_entry(cast(GtkSearchBar*)cPtr, entry ? cast(GtkEditable*)(cast(ObjectG)entry).cPtr(false) : null);
+    gtk_search_bar_connect_entry(cast(GtkSearchBar*)cPtr, entry ? cast(GtkEditable*)(cast(ObjectG)entry).cPtr(No.Dup) : null);
   }
 
   /**
@@ -102,7 +102,7 @@ class SearchBar : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_get_child(cast(GtkSearchBar*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class SearchBar : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_get_key_capture_widget(cast(GtkSearchBar*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class SearchBar : Widget
    */
   void setChild(Widget child)
   {
-    gtk_search_bar_set_child(cast(GtkSearchBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_search_bar_set_child(cast(GtkSearchBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -166,7 +166,7 @@ class SearchBar : Widget
    */
   void setKeyCaptureWidget(Widget widget)
   {
-    gtk_search_bar_set_key_capture_widget(cast(GtkSearchBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_search_bar_set_key_capture_widget(cast(GtkSearchBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**

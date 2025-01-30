@@ -25,9 +25,9 @@ class Printer : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -51,9 +51,9 @@ class Printer : ObjectG
   this(string name, PrintBackend backend, bool virtual)
   {
     GtkPrinter* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_printer_new(_name, backend, virtual);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -90,7 +90,7 @@ class Printer : ObjectG
   int compare(Printer b)
   {
     int _retval;
-    _retval = gtk_printer_compare(cast(GtkPrinter*)cPtr, b ? cast(GtkPrinter*)b.cPtr(false) : null);
+    _retval = gtk_printer_compare(cast(GtkPrinter*)cPtr, b ? cast(GtkPrinter*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class Printer : ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_printer_get_default_page_size(cast(GtkPrinter*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class Printer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_description(cast(GtkPrinter*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Printer : ObjectG
   bool getHardMarginsForPaperSize(PaperSize paperSize, out double top, out double bottom, out double left, out double right)
   {
     bool _retval;
-    _retval = gtk_printer_get_hard_margins_for_paper_size(cast(GtkPrinter*)cPtr, paperSize ? cast(GtkPaperSize*)paperSize.cPtr(false) : null, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
+    _retval = gtk_printer_get_hard_margins_for_paper_size(cast(GtkPrinter*)cPtr, paperSize ? cast(GtkPaperSize*)paperSize.cPtr(No.Dup) : null, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class Printer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_icon_name(cast(GtkPrinter*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class Printer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_location(cast(GtkPrinter*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Printer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_name(cast(GtkPrinter*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class Printer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_state_message(cast(GtkPrinter*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

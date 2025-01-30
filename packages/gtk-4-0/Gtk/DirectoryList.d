@@ -37,9 +37,9 @@ class DirectoryList : ObjectG, ListModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -66,9 +66,9 @@ class DirectoryList : ObjectG, ListModel
   this(string attributes, File file)
   {
     GtkDirectoryList* _cretval;
-    const(char)* _attributes = attributes.toCString(false);
-    _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(ObjectG)file).cPtr(false) : null);
-    this(_cretval, true);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
+    _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -79,7 +79,7 @@ class DirectoryList : ObjectG, ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_directory_list_get_attributes(cast(GtkDirectoryList*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class DirectoryList : ObjectG, ListModel
   {
     GFile* _cretval;
     _cretval = gtk_directory_list_get_file(cast(GtkDirectoryList*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class DirectoryList : ObjectG, ListModel
    */
   void setAttributes(string attributes)
   {
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     gtk_directory_list_set_attributes(cast(GtkDirectoryList*)cPtr, _attributes);
   }
 
@@ -172,7 +172,7 @@ class DirectoryList : ObjectG, ListModel
    */
   void setFile(File file)
   {
-    gtk_directory_list_set_file(cast(GtkDirectoryList*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(false) : null);
+    gtk_directory_list_set_file(cast(GtkDirectoryList*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
 
   /**

@@ -36,9 +36,9 @@ class Surface : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -63,8 +63,8 @@ class Surface : ObjectG
   static Surface newPopup(Surface parent, bool autohide)
   {
     GdkSurface* _cretval;
-    _cretval = gdk_surface_new_popup(parent ? cast(GdkSurface*)parent.cPtr(false) : null, autohide);
-    auto _retval = _cretval ? ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, true) : null;
+    _cretval = gdk_surface_new_popup(parent ? cast(GdkSurface*)parent.cPtr(No.Dup) : null, autohide);
+    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -77,8 +77,8 @@ class Surface : ObjectG
   static Surface newToplevel(Display display)
   {
     GdkSurface* _cretval;
-    _cretval = gdk_surface_new_toplevel(display ? cast(GdkDisplay*)display.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, true) : null;
+    _cretval = gdk_surface_new_toplevel(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class Surface : ObjectG
   {
     GdkCairoContext* _cretval;
     _cretval = gdk_surface_create_cairo_context(cast(GdkSurface*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!CairoContext(cast(GdkCairoContext*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!CairoContext(cast(GdkCairoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class Surface : ObjectG
     _cretval = gdk_surface_create_gl_context(cast(GdkSurface*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class Surface : ObjectG
   {
     cairo_surface_t* _cretval;
     _cretval = gdk_surface_create_similar_surface(cast(GdkSurface*)cPtr, content, width, height);
-    auto _retval = _cretval ? new DcairoSurface(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DcairoSurface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class Surface : ObjectG
     _cretval = gdk_surface_create_vulkan_context(cast(GdkSurface*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!VulkanContext(cast(GdkVulkanContext*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!VulkanContext(cast(GdkVulkanContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class Surface : ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_surface_get_cursor(cast(GdkSurface*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -215,8 +215,8 @@ class Surface : ObjectG
   Cursor getDeviceCursor(Device device)
   {
     GdkCursor* _cretval;
-    _cretval = gdk_surface_get_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, false) : null;
+    _cretval = gdk_surface_get_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class Surface : ObjectG
   bool getDevicePosition(Device device, out double x, out double y, out ModifierType mask)
   {
     bool _retval;
-    _retval = gdk_surface_get_device_position(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(false) : null, cast(double*)&x, cast(double*)&y, &mask);
+    _retval = gdk_surface_get_device_position(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, &mask);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class Surface : ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_surface_get_display(cast(GdkSurface*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class Surface : ObjectG
   {
     GdkFrameClock* _cretval;
     _cretval = gdk_surface_get_frame_clock(cast(GdkSurface*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!FrameClock(cast(GdkFrameClock*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FrameClock(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -395,7 +395,7 @@ class Surface : ObjectG
    */
   void setCursor(Cursor cursor)
   {
-    gdk_surface_set_cursor(cast(GdkSurface*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(false) : null);
+    gdk_surface_set_cursor(cast(GdkSurface*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -410,7 +410,7 @@ class Surface : ObjectG
    */
   void setDeviceCursor(Device device, Cursor cursor)
   {
-    gdk_surface_set_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(false) : null, cursor ? cast(GdkCursor*)cursor.cPtr(false) : null);
+    gdk_surface_set_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -430,7 +430,7 @@ class Surface : ObjectG
    */
   void setInputRegion(Region region)
   {
-    gdk_surface_set_input_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(false) : null);
+    gdk_surface_set_input_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -452,7 +452,7 @@ class Surface : ObjectG
    */
   void setOpaqueRegion(Region region)
   {
-    gdk_surface_set_opaque_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(false) : null);
+    gdk_surface_set_opaque_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -468,7 +468,7 @@ class Surface : ObjectG
   bool translateCoordinates(Surface to, ref double x, ref double y)
   {
     bool _retval;
-    _retval = gdk_surface_translate_coordinates(cast(GdkSurface*)cPtr, to ? cast(GdkSurface*)to.cPtr(false) : null, cast(double*)&x, cast(double*)&y);
+    _retval = gdk_surface_translate_coordinates(cast(GdkSurface*)cPtr, to ? cast(GdkSurface*)to.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 

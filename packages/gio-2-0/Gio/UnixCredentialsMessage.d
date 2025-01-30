@@ -29,9 +29,9 @@ import Gio.c.types;
 class UnixCredentialsMessage : SocketControlMessage
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,7 +52,7 @@ class UnixCredentialsMessage : SocketControlMessage
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_credentials_message_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -64,8 +64,8 @@ class UnixCredentialsMessage : SocketControlMessage
   static UnixCredentialsMessage newWithCredentials(Credentials credentials)
   {
     GSocketControlMessage* _cretval;
-    _cretval = g_unix_credentials_message_new_with_credentials(credentials ? cast(GCredentials*)credentials.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!UnixCredentialsMessage(cast(GSocketControlMessage*)_cretval, true) : null;
+    _cretval = g_unix_credentials_message_new_with_credentials(credentials ? cast(GCredentials*)credentials.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!UnixCredentialsMessage(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class UnixCredentialsMessage : SocketControlMessage
   {
     GCredentials* _cretval;
     _cretval = g_unix_credentials_message_get_credentials(cast(GUnixCredentialsMessage*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Credentials(cast(GCredentials*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Credentials(cast(GCredentials*)_cretval, No.Take);
     return _retval;
   }
 }

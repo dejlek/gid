@@ -28,14 +28,14 @@ import cairo.c.types;
 class Context : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -60,7 +60,7 @@ class Context : Boxed
    */
   void appendPath(Path path)
   {
-    cairo_append_path(cast(cairo_t*)cPtr, path ? cast(cairo_path_t*)path.cPtr(false) : null);
+    cairo_append_path(cast(cairo_t*)cPtr, path ? cast(cairo_path_t*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -223,7 +223,7 @@ class Context : Boxed
   {
     cairo_rectangle_list_t* _cretval;
     _cretval = cairo_copy_clip_rectangle_list(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new RectangleList(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new RectangleList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -264,7 +264,7 @@ class Context : Boxed
   {
     cairo_path_t* _cretval;
     _cretval = cairo_copy_path(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Path(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Path(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -298,7 +298,7 @@ class Context : Boxed
   {
     cairo_path_t* _cretval;
     _cretval = cairo_copy_path_flat(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Path(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Path(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -507,7 +507,7 @@ class Context : Boxed
   {
     cairo_font_face_t* _cretval;
     _cretval = cairo_get_font_face(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new FontFace(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new FontFace(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -519,7 +519,7 @@ class Context : Boxed
    */
   void getFontMatrix(Matrix matrix)
   {
-    cairo_get_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(false) : null);
+    cairo_get_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
   }
 
   /**
@@ -533,7 +533,7 @@ class Context : Boxed
    */
   void getFontOptions(FontOptions options)
   {
-    cairo_get_font_options(cast(cairo_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(false) : null);
+    cairo_get_font_options(cast(cairo_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
   }
 
   /**
@@ -553,7 +553,7 @@ class Context : Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_get_group_target(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -613,7 +613,7 @@ class Context : Boxed
    */
   void getMatrix(Matrix matrix)
   {
-    cairo_get_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(false) : null);
+    cairo_get_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
   }
 
   /**
@@ -656,7 +656,7 @@ class Context : Boxed
   {
     cairo_scaled_font_t* _cretval;
     _cretval = cairo_get_scaled_font(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new ScaledFont(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new ScaledFont(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -670,7 +670,7 @@ class Context : Boxed
   {
     cairo_pattern_t* _cretval;
     _cretval = cairo_get_source(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Pattern(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -689,7 +689,7 @@ class Context : Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_get_target(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -721,7 +721,7 @@ class Context : Boxed
    */
   void glyphExtents(Glyph glyphs, int numGlyphs, TextExtents extents)
   {
-    cairo_glyph_extents(cast(cairo_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(false) : null, numGlyphs, &extents);
+    cairo_glyph_extents(cast(cairo_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(No.Dup) : null, numGlyphs, &extents);
   }
 
   /**
@@ -734,7 +734,7 @@ class Context : Boxed
    */
   void glyphPath(Glyph glyphs, int numGlyphs)
   {
-    cairo_glyph_path(cast(cairo_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(false) : null, numGlyphs);
+    cairo_glyph_path(cast(cairo_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(No.Dup) : null, numGlyphs);
   }
 
   /**
@@ -843,7 +843,7 @@ class Context : Boxed
    */
   void mask(Pattern pattern)
   {
-    cairo_mask(cast(cairo_t*)cPtr, pattern ? cast(cairo_pattern_t*)pattern.cPtr(false) : null);
+    cairo_mask(cast(cairo_t*)cPtr, pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
   }
 
   /**
@@ -858,7 +858,7 @@ class Context : Boxed
    */
   void maskSurface(Surface surface, double surfaceX, double surfaceY)
   {
-    cairo_mask_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(false) : null, surfaceX, surfaceY);
+    cairo_mask_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, surfaceX, surfaceY);
   }
 
   /**
@@ -967,7 +967,7 @@ class Context : Boxed
   {
     cairo_pattern_t* _cretval;
     _cretval = cairo_pop_group(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Pattern(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1252,7 +1252,7 @@ class Context : Boxed
    */
   void selectFontFace(string family, FontSlant slant, FontWeight weight)
   {
-    const(char)* _family = family.toCString(false);
+    const(char)* _family = family.toCString(No.Alloc);
     cairo_select_font_face(cast(cairo_t*)cPtr, _family, slant, weight);
   }
 
@@ -1329,7 +1329,7 @@ class Context : Boxed
    */
   void setFontFace(FontFace fontFace)
   {
-    cairo_set_font_face(cast(cairo_t*)cPtr, fontFace ? cast(cairo_font_face_t*)fontFace.cPtr(false) : null);
+    cairo_set_font_face(cast(cairo_t*)cPtr, fontFace ? cast(cairo_font_face_t*)fontFace.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1345,7 +1345,7 @@ class Context : Boxed
    */
   void setFontMatrix(Matrix matrix)
   {
-    cairo_set_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(false) : null);
+    cairo_set_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1359,7 +1359,7 @@ class Context : Boxed
    */
   void setFontOptions(FontOptions options)
   {
-    cairo_set_font_options(cast(cairo_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(false) : null);
+    cairo_set_font_options(cast(cairo_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1470,7 +1470,7 @@ class Context : Boxed
    */
   void setMatrix(Matrix matrix)
   {
-    cairo_set_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(false) : null);
+    cairo_set_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1523,7 +1523,7 @@ class Context : Boxed
    */
   void setScaledFont(ScaledFont scaledFont)
   {
-    cairo_set_scaled_font(cast(cairo_t*)cPtr, scaledFont ? cast(cairo_scaled_font_t*)scaledFont.cPtr(false) : null);
+    cairo_set_scaled_font(cast(cairo_t*)cPtr, scaledFont ? cast(cairo_scaled_font_t*)scaledFont.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1543,7 +1543,7 @@ class Context : Boxed
    */
   void setSource(Pattern source)
   {
-    cairo_set_source(cast(cairo_t*)cPtr, source ? cast(cairo_pattern_t*)source.cPtr(false) : null);
+    cairo_set_source(cast(cairo_t*)cPtr, source ? cast(cairo_pattern_t*)source.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1607,7 +1607,7 @@ class Context : Boxed
    */
   void setSourceSurface(Surface surface, double x, double y)
   {
-    cairo_set_source_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(false) : null, x, y);
+    cairo_set_source_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -1639,7 +1639,7 @@ class Context : Boxed
    */
   void showGlyphs(Glyph glyphs, int numGlyphs)
   {
-    cairo_show_glyphs(cast(cairo_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(false) : null, numGlyphs);
+    cairo_show_glyphs(cast(cairo_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(No.Dup) : null, numGlyphs);
   }
 
   /**
@@ -1677,7 +1677,7 @@ class Context : Boxed
    */
   void showText(string utf8)
   {
-    const(char)* _utf8 = utf8.toCString(false);
+    const(char)* _utf8 = utf8.toCString(No.Alloc);
     cairo_show_text(cast(cairo_t*)cPtr, _utf8);
   }
 
@@ -1710,8 +1710,8 @@ class Context : Boxed
    */
   void showTextGlyphs(string utf8, int utf8Len, Glyph glyphs, int numGlyphs, TextCluster clusters, int numClusters, TextClusterFlags clusterFlags)
   {
-    const(char)* _utf8 = utf8.toCString(false);
-    cairo_show_text_glyphs(cast(cairo_t*)cPtr, _utf8, utf8Len, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(false) : null, numGlyphs, clusters ? cast(cairo_text_cluster_t*)clusters.cPtr(false) : null, numClusters, clusterFlags);
+    const(char)* _utf8 = utf8.toCString(No.Alloc);
+    cairo_show_text_glyphs(cast(cairo_t*)cPtr, _utf8, utf8Len, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(No.Dup) : null, numGlyphs, clusters ? cast(cairo_text_cluster_t*)clusters.cPtr(No.Dup) : null, numClusters, clusterFlags);
   }
 
   /**
@@ -1824,8 +1824,8 @@ class Context : Boxed
    */
   void tagBegin(string tagName, string attributes)
   {
-    const(char)* _tagName = tagName.toCString(false);
-    const(char)* _attributes = attributes.toCString(false);
+    const(char)* _tagName = tagName.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     cairo_tag_begin(cast(cairo_t*)cPtr, _tagName, _attributes);
   }
 
@@ -1839,7 +1839,7 @@ class Context : Boxed
    */
   void tagEnd(string tagName)
   {
-    const(char)* _tagName = tagName.toCString(false);
+    const(char)* _tagName = tagName.toCString(No.Alloc);
     cairo_tag_end(cast(cairo_t*)cPtr, _tagName);
   }
 
@@ -1862,7 +1862,7 @@ class Context : Boxed
    */
   void textExtents(string utf8, TextExtents extents)
   {
-    const(char)* _utf8 = utf8.toCString(false);
+    const(char)* _utf8 = utf8.toCString(No.Alloc);
     cairo_text_extents(cast(cairo_t*)cPtr, _utf8, &extents);
   }
 
@@ -1887,7 +1887,7 @@ class Context : Boxed
    */
   void textPath(string utf8)
   {
-    const(char)* _utf8 = utf8.toCString(false);
+    const(char)* _utf8 = utf8.toCString(No.Alloc);
     cairo_text_path(cast(cairo_t*)cPtr, _utf8);
   }
 
@@ -1900,7 +1900,7 @@ class Context : Boxed
    */
   void transform(Matrix matrix)
   {
-    cairo_transform(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(false) : null);
+    cairo_transform(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
   }
 
   /**

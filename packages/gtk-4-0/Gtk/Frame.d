@@ -57,9 +57,9 @@ class Frame : Widget
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -82,9 +82,9 @@ class Frame : Widget
   this(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_frame_new(_label);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -95,7 +95,7 @@ class Frame : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_child(cast(GtkFrame*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class Frame : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_frame_get_label(cast(GtkFrame*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class Frame : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class Frame : Widget
    */
   void setChild(Widget child)
   {
-    gtk_frame_set_child(cast(GtkFrame*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_frame_set_child(cast(GtkFrame*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -156,7 +156,7 @@ class Frame : Widget
    */
   void setLabel(string label)
   {
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_frame_set_label(cast(GtkFrame*)cPtr, _label);
   }
 
@@ -182,6 +182,6 @@ class Frame : Widget
    */
   void setLabelWidget(Widget labelWidget)
   {
-    gtk_frame_set_label_widget(cast(GtkFrame*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(false) : null);
+    gtk_frame_set_label_widget(cast(GtkFrame*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }
 }

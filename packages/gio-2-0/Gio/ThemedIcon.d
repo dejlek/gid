@@ -25,9 +25,9 @@ class ThemedIcon : ObjectG, Icon
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -51,9 +51,9 @@ class ThemedIcon : ObjectG, Icon
   this(string iconname)
   {
     GIcon* _cretval;
-    const(char)* _iconname = iconname.toCString(false);
+    const(char)* _iconname = iconname.toCString(No.Alloc);
     _cretval = g_themed_icon_new(_iconname);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -71,10 +71,10 @@ class ThemedIcon : ObjectG, Icon
 
     char*[] _tmpiconnames;
     foreach (s; iconnames)
-      _tmpiconnames ~= s.toCString(false);
+      _tmpiconnames ~= s.toCString(No.Alloc);
     char** _iconnames = _tmpiconnames.ptr;
     _cretval = g_themed_icon_new_from_names(_iconnames, _len);
-    auto _retval = _cretval ? ObjectG.getDObject!ThemedIcon(cast(GIcon*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ThemedIcon(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -99,9 +99,9 @@ class ThemedIcon : ObjectG, Icon
   static ThemedIcon newWithDefaultFallbacks(string iconname)
   {
     GIcon* _cretval;
-    const(char)* _iconname = iconname.toCString(false);
+    const(char)* _iconname = iconname.toCString(No.Alloc);
     _cretval = g_themed_icon_new_with_default_fallbacks(_iconname);
-    auto _retval = _cretval ? ObjectG.getDObject!ThemedIcon(cast(GIcon*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ThemedIcon(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class ThemedIcon : ObjectG, Icon
    */
   void appendName(string iconname)
   {
-    const(char)* _iconname = iconname.toCString(false);
+    const(char)* _iconname = iconname.toCString(No.Alloc);
     g_themed_icon_append_name(cast(GThemedIcon*)cPtr, _iconname);
   }
 
@@ -135,7 +135,7 @@ class ThemedIcon : ObjectG, Icon
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(false);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -149,7 +149,7 @@ class ThemedIcon : ObjectG, Icon
    */
   void prependName(string iconname)
   {
-    const(char)* _iconname = iconname.toCString(false);
+    const(char)* _iconname = iconname.toCString(No.Alloc);
     g_themed_icon_prepend_name(cast(GThemedIcon*)cPtr, _iconname);
   }
 }

@@ -17,9 +17,9 @@ class NotebookPage : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -40,7 +40,7 @@ class NotebookPage : ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_page_get_child(cast(GtkNotebookPage*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

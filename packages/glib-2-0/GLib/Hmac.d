@@ -23,14 +23,14 @@ import Gid.gid;
 class Hmac : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -73,7 +73,7 @@ class Hmac : Boxed
 
     auto _key = cast(const(ubyte)*)key.ptr;
     _cretval = g_hmac_new(digestType, _key, _keyLen);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -87,7 +87,7 @@ class Hmac : Boxed
   {
     GHmac* _cretval;
     _cretval = g_hmac_copy(cast(GHmac*)cPtr);
-    auto _retval = _cretval ? new Hmac(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Hmac(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class Hmac : Boxed
   {
     const(char)* _cretval;
     _cretval = g_hmac_get_string(cast(GHmac*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

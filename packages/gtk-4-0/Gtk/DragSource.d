@@ -83,9 +83,9 @@ import Gtk.c.types;
 class DragSource : GestureSingle
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -106,7 +106,7 @@ class DragSource : GestureSingle
   {
     GtkDragSource* _cretval;
     _cretval = gtk_drag_source_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -137,7 +137,7 @@ class DragSource : GestureSingle
   {
     GdkContentProvider* _cretval;
     _cretval = gtk_drag_source_get_content(cast(GtkDragSource*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class DragSource : GestureSingle
   {
     GdkDrag* _cretval;
     _cretval = gtk_drag_source_get_drag(cast(GtkDragSource*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Drag(cast(GdkDrag*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Drag(cast(GdkDrag*)_cretval, No.Take);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class DragSource : GestureSingle
    */
   void setContent(ContentProvider content)
   {
-    gtk_drag_source_set_content(cast(GtkDragSource*)cPtr, content ? cast(GdkContentProvider*)content.cPtr(false) : null);
+    gtk_drag_source_set_content(cast(GtkDragSource*)cPtr, content ? cast(GdkContentProvider*)content.cPtr(No.Dup) : null);
   }
 
   /**
@@ -201,7 +201,7 @@ class DragSource : GestureSingle
    */
   void setIcon(Paintable paintable, int hotX, int hotY)
   {
-    gtk_drag_source_set_icon(cast(GtkDragSource*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(false) : null, hotX, hotY);
+    gtk_drag_source_set_icon(cast(GtkDragSource*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null, hotX, hotY);
   }
 
   /**

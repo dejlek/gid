@@ -38,9 +38,9 @@ class Resolver : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -63,7 +63,7 @@ class Resolver : ObjectG
   {
     GResolver* _cretval;
     _cretval = g_resolver_get_default();
-    auto _retval = _cretval ? ObjectG.getDObject!Resolver(cast(GResolver*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Resolver(cast(GResolver*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -96,10 +96,10 @@ class Resolver : ObjectG
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_by_address(cast(GResolver*)cPtr, address ? cast(GInetAddress*)address.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_resolver_lookup_by_address(cast(GResolver*)cPtr, address ? cast(GInetAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -119,11 +119,11 @@ class Resolver : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_resolver_lookup_by_address_async(cast(GResolver*)cPtr, address ? cast(GInetAddress*)address.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_resolver_lookup_by_address_async(cast(GResolver*)cPtr, address ? cast(GInetAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -141,10 +141,10 @@ class Resolver : ObjectG
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_by_address_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_resolver_lookup_by_address_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -179,9 +179,9 @@ class Resolver : ObjectG
   InetAddress[] lookupByName(string hostname, Cancellable cancellable)
   {
     GList* _cretval;
-    const(char)* _hostname = hostname.toCString(false);
+    const(char)* _hostname = hostname.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_resolver_lookup_by_name(cast(GResolver*)cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_resolver_lookup_by_name(cast(GResolver*)cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
@@ -205,12 +205,12 @@ class Resolver : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _hostname = hostname.toCString(false);
+    const(char)* _hostname = hostname.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_resolver_lookup_by_name_async(cast(GResolver*)cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_resolver_lookup_by_name_async(cast(GResolver*)cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -229,7 +229,7 @@ class Resolver : ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_by_name_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_resolver_lookup_by_name_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
@@ -252,9 +252,9 @@ class Resolver : ObjectG
   InetAddress[] lookupByNameWithFlags(string hostname, ResolverNameLookupFlags flags, Cancellable cancellable)
   {
     GList* _cretval;
-    const(char)* _hostname = hostname.toCString(false);
+    const(char)* _hostname = hostname.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_resolver_lookup_by_name_with_flags(cast(GResolver*)cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_resolver_lookup_by_name_with_flags(cast(GResolver*)cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
@@ -279,12 +279,12 @@ class Resolver : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _hostname = hostname.toCString(false);
+    const(char)* _hostname = hostname.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_resolver_lookup_by_name_with_flags_async(cast(GResolver*)cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_resolver_lookup_by_name_with_flags_async(cast(GResolver*)cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -303,7 +303,7 @@ class Resolver : ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_by_name_with_flags_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_resolver_lookup_by_name_with_flags_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
@@ -331,9 +331,9 @@ class Resolver : ObjectG
   VariantG[] lookupRecords(string rrname, ResolverRecordType recordType, Cancellable cancellable)
   {
     GList* _cretval;
-    const(char)* _rrname = rrname.toCString(false);
+    const(char)* _rrname = rrname.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_resolver_lookup_records(cast(GResolver*)cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_resolver_lookup_records(cast(GResolver*)cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(VariantG, GidOwnership.Full)(cast(GList*)_cretval);
@@ -358,12 +358,12 @@ class Resolver : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _rrname = rrname.toCString(false);
+    const(char)* _rrname = rrname.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_resolver_lookup_records_async(cast(GResolver*)cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_resolver_lookup_records_async(cast(GResolver*)cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -385,7 +385,7 @@ class Resolver : ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_records_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_resolver_lookup_records_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(VariantG, GidOwnership.Full)(cast(GList*)_cretval);
@@ -423,11 +423,11 @@ class Resolver : ObjectG
   SrvTarget[] lookupService(string service, string protocol, string domain, Cancellable cancellable)
   {
     GList* _cretval;
-    const(char)* _service = service.toCString(false);
-    const(char)* _protocol = protocol.toCString(false);
-    const(char)* _domain = domain.toCString(false);
+    const(char)* _service = service.toCString(No.Alloc);
+    const(char)* _protocol = protocol.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_resolver_lookup_service(cast(GResolver*)cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_resolver_lookup_service(cast(GResolver*)cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(SrvTarget, GidOwnership.Full)(cast(GList*)_cretval);
@@ -454,14 +454,14 @@ class Resolver : ObjectG
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _service = service.toCString(false);
-    const(char)* _protocol = protocol.toCString(false);
-    const(char)* _domain = domain.toCString(false);
+    const(char)* _service = service.toCString(No.Alloc);
+    const(char)* _protocol = protocol.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_resolver_lookup_service_async(cast(GResolver*)cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_resolver_lookup_service_async(cast(GResolver*)cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -480,7 +480,7 @@ class Resolver : ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_service_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_resolver_lookup_service_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(SrvTarget, GidOwnership.Full)(cast(GList*)_cretval);

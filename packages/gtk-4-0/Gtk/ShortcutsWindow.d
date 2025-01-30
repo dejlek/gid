@@ -62,9 +62,9 @@ class ShortcutsWindow : Window
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -88,7 +88,7 @@ class ShortcutsWindow : Window
    */
   void addSection(ShortcutsSection section)
   {
-    gtk_shortcuts_window_add_section(cast(GtkShortcutsWindow*)cPtr, section ? cast(GtkShortcutsSection*)section.cPtr(false) : null);
+    gtk_shortcuts_window_add_section(cast(GtkShortcutsWindow*)cPtr, section ? cast(GtkShortcutsSection*)section.cPtr(No.Dup) : null);
   }
 
   /**

@@ -12,12 +12,12 @@ import Gsk.c.types;
 class MaskNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.MaskNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -34,8 +34,8 @@ class MaskNode : RenderNode
   this(RenderNode source, RenderNode mask, MaskMode maskMode)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_mask_node_new(source ? cast(GskRenderNode*)source.cPtr(false) : null, mask ? cast(GskRenderNode*)mask.cPtr(false) : null, maskMode);
-    this(_cretval, true);
+    _cretval = gsk_mask_node_new(source ? cast(GskRenderNode*)source.cPtr(No.Dup) : null, mask ? cast(GskRenderNode*)mask.cPtr(No.Dup) : null, maskMode);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -46,7 +46,7 @@ class MaskNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_mask_node_get_mask(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class MaskNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_mask_node_get_source(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 }

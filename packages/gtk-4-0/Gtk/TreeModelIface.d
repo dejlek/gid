@@ -9,14 +9,14 @@ class TreeModelIface
 {
   GtkTreeModelIface cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.TreeModelIface");
 
     cInstance = *cast(GtkTreeModelIface*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

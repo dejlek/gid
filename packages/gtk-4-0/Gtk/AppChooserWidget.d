@@ -48,9 +48,9 @@ class AppChooserWidget : Widget, AppChooser
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -77,9 +77,9 @@ class AppChooserWidget : Widget, AppChooser
   this(string contentType)
   {
     GtkWidget* _cretval;
-    const(char)* _contentType = contentType.toCString(false);
+    const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = gtk_app_chooser_widget_new(_contentType);
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -93,7 +93,7 @@ class AppChooserWidget : Widget, AppChooser
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_widget_get_default_text(cast(GtkAppChooserWidget*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class AppChooserWidget : Widget, AppChooser
    */
   void setDefaultText(string text)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_app_chooser_widget_set_default_text(cast(GtkAppChooserWidget*)cPtr, _text);
   }
 

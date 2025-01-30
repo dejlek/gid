@@ -72,9 +72,9 @@ import Gtk.c.types;
 class Window : Widget, Native, Root, ShortcutManager
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -107,7 +107,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -121,7 +121,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_default_icon_name();
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     GListModel* _cretval;
     _cretval = gtk_window_get_toplevels();
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   static void setDefaultIconName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_window_set_default_icon_name(_name);
   }
 
@@ -252,7 +252,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   void fullscreenOnMonitor(MonitorG monitor)
   {
-    gtk_window_fullscreen_on_monitor(cast(GtkWindow*)cPtr, monitor ? cast(GdkMonitor*)monitor.cPtr(false) : null);
+    gtk_window_fullscreen_on_monitor(cast(GtkWindow*)cPtr, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -263,7 +263,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     GtkApplication* _cretval;
     _cretval = gtk_window_get_application(cast(GtkWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Application(cast(GtkApplication*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Application(cast(GtkApplication*)_cretval, No.Take);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_child(cast(GtkWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_default_widget(cast(GtkWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -352,7 +352,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_focus(cast(GtkWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -378,7 +378,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_get_group(cast(GtkWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!WindowGroup(cast(GtkWindowGroup*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!WindowGroup(cast(GtkWindowGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -413,7 +413,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_icon_name(cast(GtkWindow*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -460,7 +460,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_title(cast(GtkWindow*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -473,7 +473,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_titlebar(cast(GtkWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -485,7 +485,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     GtkWindow* _cretval;
     _cretval = gtk_window_get_transient_for(cast(GtkWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -647,7 +647,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   void setApplication(Application application)
   {
-    gtk_window_set_application(cast(GtkWindow*)cPtr, application ? cast(GtkApplication*)application.cPtr(false) : null);
+    gtk_window_set_application(cast(GtkWindow*)cPtr, application ? cast(GtkApplication*)application.cPtr(No.Dup) : null);
   }
 
   /**
@@ -657,7 +657,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   void setChild(Widget child)
   {
-    gtk_window_set_child(cast(GtkWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_window_set_child(cast(GtkWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -723,7 +723,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   void setDefaultWidget(Widget defaultWidget)
   {
-    gtk_window_set_default_widget(cast(GtkWindow*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(false) : null);
+    gtk_window_set_default_widget(cast(GtkWindow*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -767,7 +767,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   void setDisplay(Display display)
   {
-    gtk_window_set_display(cast(GtkWindow*)cPtr, display ? cast(GdkDisplay*)display.cPtr(false) : null);
+    gtk_window_set_display(cast(GtkWindow*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
 
   /**
@@ -783,7 +783,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   void setFocus(Widget focus)
   {
-    gtk_window_set_focus(cast(GtkWindow*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(false) : null);
+    gtk_window_set_focus(cast(GtkWindow*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
   }
 
   /**
@@ -831,7 +831,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   void setIconName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_window_set_icon_name(cast(GtkWindow*)cPtr, _name);
   }
 
@@ -890,7 +890,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   void setStartupId(string startupId)
   {
-    const(char)* _startupId = startupId.toCString(false);
+    const(char)* _startupId = startupId.toCString(No.Alloc);
     gtk_window_set_startup_id(cast(GtkWindow*)cPtr, _startupId);
   }
 
@@ -908,7 +908,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(false);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_window_set_title(cast(GtkWindow*)cPtr, _title);
   }
 
@@ -927,7 +927,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   void setTitlebar(Widget titlebar)
   {
-    gtk_window_set_titlebar(cast(GtkWindow*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(false) : null);
+    gtk_window_set_titlebar(cast(GtkWindow*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(No.Dup) : null);
   }
 
   /**
@@ -945,7 +945,7 @@ class Window : Widget, Native, Root, ShortcutManager
    */
   void setTransientFor(Window parent)
   {
-    gtk_window_set_transient_for(cast(GtkWindow*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(false) : null);
+    gtk_window_set_transient_for(cast(GtkWindow*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }
 
   /**

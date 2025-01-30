@@ -39,9 +39,9 @@ class Display : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -65,7 +65,7 @@ class Display : ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_get_default();
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -79,9 +79,9 @@ class Display : ObjectG
   static Display open(string displayName)
   {
     GdkDisplay* _cretval;
-    const(char)* _displayName = displayName.toCString(false);
+    const(char)* _displayName = displayName.toCString(No.Alloc);
     _cretval = gdk_display_open(_displayName);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class Display : ObjectG
     _cretval = gdk_display_create_gl_context(cast(GdkDisplay*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class Display : ObjectG
   bool deviceIsGrabbed(Device device)
   {
     bool _retval;
-    _retval = gdk_display_device_is_grabbed(cast(GdkDisplay*)cPtr, device ? cast(GdkDevice*)device.cPtr(false) : null);
+    _retval = gdk_display_device_is_grabbed(cast(GdkDisplay*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class Display : ObjectG
   {
     GdkAppLaunchContext* _cretval;
     _cretval = gdk_display_get_app_launch_context(cast(GdkDisplay*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!AppLaunchContext(cast(GdkAppLaunchContext*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!AppLaunchContext(cast(GdkAppLaunchContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class Display : ObjectG
   {
     GdkClipboard* _cretval;
     _cretval = gdk_display_get_clipboard(cast(GdkDisplay*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Display : ObjectG
   {
     GdkSeat* _cretval;
     _cretval = gdk_display_get_default_seat(cast(GdkDisplay*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Seat(cast(GdkSeat*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Seat(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class Display : ObjectG
   {
     GdkDmabufFormats* _cretval;
     _cretval = gdk_display_get_dmabuf_formats(cast(GdkDisplay*)cPtr);
-    auto _retval = _cretval ? new DmabufFormats(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new DmabufFormats(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -218,8 +218,8 @@ class Display : ObjectG
   MonitorG getMonitorAtSurface(Surface surface)
   {
     GdkMonitor* _cretval;
-    _cretval = gdk_display_get_monitor_at_surface(cast(GdkDisplay*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!MonitorG(cast(GdkMonitor*)_cretval, false) : null;
+    _cretval = gdk_display_get_monitor_at_surface(cast(GdkDisplay*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!MonitorG(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class Display : ObjectG
   {
     GListModel* _cretval;
     _cretval = gdk_display_get_monitors(cast(GdkDisplay*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class Display : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_display_get_name(cast(GdkDisplay*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class Display : ObjectG
   {
     GdkClipboard* _cretval;
     _cretval = gdk_display_get_primary_clipboard(cast(GdkDisplay*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -278,8 +278,8 @@ class Display : ObjectG
   bool getSetting(string name, Value value)
   {
     bool _retval;
-    const(char)* _name = name.toCString(false);
-    _retval = gdk_display_get_setting(cast(GdkDisplay*)cPtr, _name, value ? cast(GValue*)value.cPtr(false) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    _retval = gdk_display_get_setting(cast(GdkDisplay*)cPtr, _name, value ? cast(GValue*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class Display : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_display_get_startup_notification_id(cast(GdkDisplay*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ class Display : ObjectG
    */
   void notifyStartupComplete(string startupId)
   {
-    const(char)* _startupId = startupId.toCString(false);
+    const(char)* _startupId = startupId.toCString(No.Alloc);
     gdk_display_notify_startup_complete(cast(GdkDisplay*)cPtr, _startupId);
   }
 
@@ -473,7 +473,7 @@ class Display : ObjectG
    */
   void putEvent(Event event)
   {
-    gdk_display_put_event(cast(GdkDisplay*)cPtr, event ? cast(GdkEvent*)event.cPtr(false) : null);
+    gdk_display_put_event(cast(GdkDisplay*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
   }
 
   /**

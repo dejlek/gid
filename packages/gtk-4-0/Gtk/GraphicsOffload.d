@@ -45,9 +45,9 @@ class GraphicsOffload : Widget
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -69,8 +69,8 @@ class GraphicsOffload : Widget
   this(Widget child)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -81,7 +81,7 @@ class GraphicsOffload : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_graphics_offload_get_child(cast(GtkGraphicsOffload*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class GraphicsOffload : Widget
    */
   void setChild(Widget child)
   {
-    gtk_graphics_offload_set_child(cast(GtkGraphicsOffload*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_graphics_offload_set_child(cast(GtkGraphicsOffload*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

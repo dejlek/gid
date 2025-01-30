@@ -45,9 +45,9 @@ class TreeSelection : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -107,8 +107,8 @@ class TreeSelection : ObjectG
     GtkTreeModel* _model;
     GtkTreeIter _iter;
     _retval = gtk_tree_selection_get_selected(cast(GtkTreeSelection*)cPtr, &_model, &_iter);
-    model = _model ? ObjectG.getDObject!TreeModel(_model, false) : null;
-    iter = new TreeIter(cast(void*)&_iter, false);
+    model = ObjectG.getDObject!TreeModel(_model, No.Take);
+    iter = new TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class TreeSelection : ObjectG
     GtkTreeModel* _model;
     _cretval = gtk_tree_selection_get_selected_rows(cast(GtkTreeSelection*)cPtr, &_model);
     auto _retval = gListToD!(TreePath, GidOwnership.Full)(cast(GList*)_cretval);
-    model = _model ? ObjectG.getDObject!TreeModel(_model, false) : null;
+    model = ObjectG.getDObject!TreeModel(_model, No.Take);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class TreeSelection : ObjectG
   {
     GtkTreeView* _cretval;
     _cretval = gtk_tree_selection_get_tree_view(cast(GtkTreeSelection*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeView(cast(GtkTreeView*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TreeView(cast(GtkTreeView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class TreeSelection : ObjectG
   bool iterIsSelected(TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_selection_iter_is_selected(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(false) : null);
+    _retval = gtk_tree_selection_iter_is_selected(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class TreeSelection : ObjectG
   bool pathIsSelected(TreePath path)
   {
     bool _retval;
-    _retval = gtk_tree_selection_path_is_selected(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    _retval = gtk_tree_selection_path_is_selected(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class TreeSelection : ObjectG
    */
   void selectIter(TreeIter iter)
   {
-    gtk_tree_selection_select_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(false) : null);
+    gtk_tree_selection_select_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -214,7 +214,7 @@ class TreeSelection : ObjectG
    */
   void selectPath(TreePath path)
   {
-    gtk_tree_selection_select_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    gtk_tree_selection_select_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -228,7 +228,7 @@ class TreeSelection : ObjectG
    */
   void selectRange(TreePath startPath, TreePath endPath)
   {
-    gtk_tree_selection_select_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(false) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(false) : null);
+    gtk_tree_selection_select_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(No.Dup) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(No.Dup) : null);
   }
 
   /**
@@ -246,7 +246,7 @@ class TreeSelection : ObjectG
     {
       auto _dlg = cast(TreeSelectionForeachFunc*)data;
 
-      (*_dlg)(model ? ObjectG.getDObject!TreeModel(cast(void*)model, false) : null, path ? new TreePath(cast(void*)path, false) : null, iter ? new TreeIter(cast(void*)iter, false) : null);
+      (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null, iter ? new TreeIter(cast(void*)iter, No.Take) : null);
     }
 
     auto _func = cast(void*)&func;
@@ -284,7 +284,7 @@ class TreeSelection : ObjectG
     {
       auto _dlg = cast(TreeSelectionFunc*)data;
 
-      bool _retval = (*_dlg)(selection ? ObjectG.getDObject!TreeSelection(cast(void*)selection, false) : null, model ? ObjectG.getDObject!TreeModel(cast(void*)model, false) : null, path ? new TreePath(cast(void*)path, false) : null, pathCurrentlySelected);
+      bool _retval = (*_dlg)(ObjectG.getDObject!TreeSelection(cast(void*)selection, No.Take), ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null, pathCurrentlySelected);
       return _retval;
     }
 
@@ -311,7 +311,7 @@ class TreeSelection : ObjectG
    */
   void unselectIter(TreeIter iter)
   {
-    gtk_tree_selection_unselect_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(false) : null);
+    gtk_tree_selection_unselect_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -323,7 +323,7 @@ class TreeSelection : ObjectG
    */
   void unselectPath(TreePath path)
   {
-    gtk_tree_selection_unselect_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(false) : null);
+    gtk_tree_selection_unselect_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -337,7 +337,7 @@ class TreeSelection : ObjectG
    */
   void unselectRange(TreePath startPath, TreePath endPath)
   {
-    gtk_tree_selection_unselect_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(false) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(false) : null);
+    gtk_tree_selection_unselect_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(No.Dup) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(No.Dup) : null);
   }
 
   /**

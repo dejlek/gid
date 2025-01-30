@@ -26,9 +26,9 @@ class NetworkAddress : ObjectG, SocketConnectable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -59,9 +59,9 @@ class NetworkAddress : ObjectG, SocketConnectable
   this(string hostname, ushort port)
   {
     GSocketConnectable* _cretval;
-    const(char)* _hostname = hostname.toCString(false);
+    const(char)* _hostname = hostname.toCString(No.Alloc);
     _cretval = g_network_address_new(_hostname, port);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -83,7 +83,7 @@ class NetworkAddress : ObjectG, SocketConnectable
   {
     GSocketConnectable* _cretval;
     _cretval = g_network_address_new_loopback(port);
-    auto _retval = _cretval ? ObjectG.getDObject!NetworkAddress(cast(GSocketConnectable*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!NetworkAddress(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -114,12 +114,12 @@ class NetworkAddress : ObjectG, SocketConnectable
   static NetworkAddress parse(string hostAndPort, ushort defaultPort)
   {
     GSocketConnectable* _cretval;
-    const(char)* _hostAndPort = hostAndPort.toCString(false);
+    const(char)* _hostAndPort = hostAndPort.toCString(No.Alloc);
     GError *_err;
     _cretval = g_network_address_parse(_hostAndPort, defaultPort, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!NetworkAddress(cast(GSocketConnectable*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!NetworkAddress(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -138,12 +138,12 @@ class NetworkAddress : ObjectG, SocketConnectable
   static NetworkAddress parseUri(string uri, ushort defaultPort)
   {
     GSocketConnectable* _cretval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = g_network_address_parse_uri(_uri, defaultPort, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!NetworkAddress(cast(GSocketConnectable*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!NetworkAddress(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class NetworkAddress : ObjectG, SocketConnectable
   {
     const(char)* _cretval;
     _cretval = g_network_address_get_hostname(cast(GNetworkAddress*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class NetworkAddress : ObjectG, SocketConnectable
   {
     const(char)* _cretval;
     _cretval = g_network_address_get_scheme(cast(GNetworkAddress*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 }

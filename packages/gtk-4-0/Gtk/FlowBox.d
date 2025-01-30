@@ -60,9 +60,9 @@ import Gtk.c.types;
 class FlowBox : Widget, Orientable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -85,7 +85,7 @@ class FlowBox : Widget, Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_flow_box_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -98,7 +98,7 @@ class FlowBox : Widget, Orientable
    */
   void append(Widget child)
   {
-    gtk_flow_box_append(cast(GtkFlowBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_flow_box_append(cast(GtkFlowBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -124,14 +124,14 @@ class FlowBox : Widget, Orientable
       Widget _dretval;
       auto _dlg = cast(FlowBoxCreateWidgetFunc*)userData;
 
-      _dretval = (*_dlg)(item ? ObjectG.getDObject!ObjectG(cast(void*)item, false) : null);
-      GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(true);
+      _dretval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, No.Take));
+      GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
     }
 
     auto _createWidgetFunc = freezeDelegate(cast(void*)&createWidgetFunc);
-    gtk_flow_box_bind_model(cast(GtkFlowBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(false) : null, &_createWidgetFuncCallback, _createWidgetFunc, &thawDelegate);
+    gtk_flow_box_bind_model(cast(GtkFlowBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, &_createWidgetFuncCallback, _createWidgetFunc, &thawDelegate);
   }
 
   /**
@@ -158,7 +158,7 @@ class FlowBox : Widget, Orientable
   {
     GtkFlowBoxChild* _cretval;
     _cretval = gtk_flow_box_get_child_at_index(cast(GtkFlowBox*)cPtr, idx);
-    auto _retval = _cretval ? ObjectG.getDObject!FlowBoxChild(cast(GtkFlowBoxChild*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FlowBoxChild(cast(GtkFlowBoxChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class FlowBox : Widget, Orientable
   {
     GtkFlowBoxChild* _cretval;
     _cretval = gtk_flow_box_get_child_at_pos(cast(GtkFlowBox*)cPtr, x, y);
-    auto _retval = _cretval ? ObjectG.getDObject!FlowBoxChild(cast(GtkFlowBoxChild*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FlowBoxChild(cast(GtkFlowBoxChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class FlowBox : Widget, Orientable
    */
   void insert(Widget widget, int position)
   {
-    gtk_flow_box_insert(cast(GtkFlowBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null, position);
+    gtk_flow_box_insert(cast(GtkFlowBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -308,7 +308,7 @@ class FlowBox : Widget, Orientable
    */
   void prepend(Widget child)
   {
-    gtk_flow_box_prepend(cast(GtkFlowBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_flow_box_prepend(cast(GtkFlowBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -318,7 +318,7 @@ class FlowBox : Widget, Orientable
    */
   void remove(Widget widget)
   {
-    gtk_flow_box_remove(cast(GtkFlowBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_flow_box_remove(cast(GtkFlowBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -347,7 +347,7 @@ class FlowBox : Widget, Orientable
    */
   void selectChild(FlowBoxChild child)
   {
-    gtk_flow_box_select_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(false) : null);
+    gtk_flow_box_select_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -363,7 +363,7 @@ class FlowBox : Widget, Orientable
     {
       auto _dlg = cast(FlowBoxForeachFunc*)userData;
 
-      (*_dlg)(box ? ObjectG.getDObject!FlowBox(cast(void*)box, false) : null, child ? ObjectG.getDObject!FlowBoxChild(cast(void*)child, false) : null);
+      (*_dlg)(ObjectG.getDObject!FlowBox(cast(void*)box, No.Take), ObjectG.getDObject!FlowBoxChild(cast(void*)child, No.Take));
     }
 
     auto _func = cast(void*)&func;
@@ -412,7 +412,7 @@ class FlowBox : Widget, Orientable
     {
       auto _dlg = cast(FlowBoxFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(child ? ObjectG.getDObject!FlowBoxChild(cast(void*)child, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!FlowBoxChild(cast(void*)child, No.Take));
       return _retval;
     }
 
@@ -436,7 +436,7 @@ class FlowBox : Widget, Orientable
    */
   void setHadjustment(Adjustment adjustment)
   {
-    gtk_flow_box_set_hadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(false) : null);
+    gtk_flow_box_set_hadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -515,7 +515,7 @@ class FlowBox : Widget, Orientable
     {
       auto _dlg = cast(FlowBoxSortFunc*)userData;
 
-      int _retval = (*_dlg)(child1 ? ObjectG.getDObject!FlowBoxChild(cast(void*)child1, false) : null, child2 ? ObjectG.getDObject!FlowBoxChild(cast(void*)child2, false) : null);
+      int _retval = (*_dlg)(ObjectG.getDObject!FlowBoxChild(cast(void*)child1, No.Take), ObjectG.getDObject!FlowBoxChild(cast(void*)child2, No.Take));
       return _retval;
     }
 
@@ -539,7 +539,7 @@ class FlowBox : Widget, Orientable
    */
   void setVadjustment(Adjustment adjustment)
   {
-    gtk_flow_box_set_vadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(false) : null);
+    gtk_flow_box_set_vadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -559,7 +559,7 @@ class FlowBox : Widget, Orientable
    */
   void unselectChild(FlowBoxChild child)
   {
-    gtk_flow_box_unselect_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(false) : null);
+    gtk_flow_box_unselect_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(No.Dup) : null);
   }
 
   /**

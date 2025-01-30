@@ -37,9 +37,9 @@ import Gtk.c.types;
 class ColorButton : Widget, ColorChooser
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -69,7 +69,7 @@ class ColorButton : Widget, ColorChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_button_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -81,8 +81,8 @@ class ColorButton : Widget, ColorChooser
   static ColorButton newWithRgba(RGBA rgba)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_color_button_new_with_rgba(rgba ? cast(GdkRGBA*)rgba.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!ColorButton(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_color_button_new_with_rgba(rgba ? cast(GdkRGBA*)rgba.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!ColorButton(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class ColorButton : Widget, ColorChooser
   {
     const(char)* _cretval;
     _cretval = gtk_color_button_get_title(cast(GtkColorButton*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class ColorButton : Widget, ColorChooser
    */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(false);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_color_button_set_title(cast(GtkColorButton*)cPtr, _title);
   }
 

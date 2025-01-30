@@ -68,17 +68,17 @@ template FileChooserT()
    */
   override void addChoice(string id, string label, string[] options, string[] optionLabels)
   {
-    const(char)* _id = id.toCString(false);
-    const(char)* _label = label.toCString(false);
+    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     char*[] _tmpoptions;
     foreach (s; options)
-      _tmpoptions ~= s.toCString(false);
+      _tmpoptions ~= s.toCString(No.Alloc);
     _tmpoptions ~= null;
     const(char*)* _options = _tmpoptions.ptr;
 
     char*[] _tmpoptionLabels;
     foreach (s; optionLabels)
-      _tmpoptionLabels ~= s.toCString(false);
+      _tmpoptionLabels ~= s.toCString(No.Alloc);
     _tmpoptionLabels ~= null;
     const(char*)* _optionLabels = _tmpoptionLabels.ptr;
     gtk_file_chooser_add_choice(cast(GtkFileChooser*)cPtr, _id, _label, _options, _optionLabels);
@@ -97,7 +97,7 @@ template FileChooserT()
    */
   override void addFilter(FileFilter filter)
   {
-    gtk_file_chooser_add_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(false) : null);
+    gtk_file_chooser_add_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -114,7 +114,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(false) : null, &_err);
+    _retval = gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -145,9 +145,9 @@ template FileChooserT()
   override string getChoice(string id)
   {
     const(char)* _cretval;
-    const(char)* _id = id.toCString(false);
+    const(char)* _id = id.toCString(No.Alloc);
     _cretval = gtk_file_chooser_get_choice(cast(GtkFileChooser*)cPtr, _id);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ template FileChooserT()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_current_folder(cast(GtkFileChooser*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_current_name(cast(GtkFileChooser*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ template FileChooserT()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_file(cast(GtkFileChooser*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ template FileChooserT()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_files(cast(GtkFileChooser*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ template FileChooserT()
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_chooser_get_filter(cast(GtkFileChooser*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!FileFilter(cast(GtkFileFilter*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FileFilter(cast(GtkFileFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -264,7 +264,7 @@ template FileChooserT()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_filters(cast(GtkFileChooser*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ template FileChooserT()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_shortcut_folders(cast(GtkFileChooser*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ template FileChooserT()
    */
   override void removeChoice(string id)
   {
-    const(char)* _id = id.toCString(false);
+    const(char)* _id = id.toCString(No.Alloc);
     gtk_file_chooser_remove_choice(cast(GtkFileChooser*)cPtr, _id);
   }
 
@@ -320,7 +320,7 @@ template FileChooserT()
    */
   override void removeFilter(FileFilter filter)
   {
-    gtk_file_chooser_remove_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(false) : null);
+    gtk_file_chooser_remove_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -336,7 +336,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(false) : null, &_err);
+    _retval = gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -370,8 +370,8 @@ template FileChooserT()
    */
   override void setChoice(string id, string option)
   {
-    const(char)* _id = id.toCString(false);
-    const(char)* _option = option.toCString(false);
+    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _option = option.toCString(No.Alloc);
     gtk_file_chooser_set_choice(cast(GtkFileChooser*)cPtr, _id, _option);
   }
 
@@ -402,7 +402,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(false) : null, &_err);
+    _retval = gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -426,7 +426,7 @@ template FileChooserT()
    */
   override void setCurrentName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_file_chooser_set_current_name(cast(GtkFileChooser*)cPtr, _name);
   }
 
@@ -476,7 +476,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(false) : null, &_err);
+    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -497,7 +497,7 @@ template FileChooserT()
    */
   override void setFilter(FileFilter filter)
   {
-    gtk_file_chooser_set_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(false) : null);
+    gtk_file_chooser_set_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
 
   /**

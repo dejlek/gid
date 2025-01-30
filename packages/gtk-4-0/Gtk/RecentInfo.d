@@ -20,14 +20,14 @@ import Gtk.c.types;
 class RecentInfo : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -53,12 +53,12 @@ class RecentInfo : Boxed
   AppInfo createAppInfo(string appName)
   {
     GAppInfo* _cretval;
-    const(char)* _appName = appName.toCString(false);
+    const(char)* _appName = appName.toCString(No.Alloc);
     GError *_err;
     _cretval = gtk_recent_info_create_app_info(cast(GtkRecentInfo*)cPtr, _appName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class RecentInfo : Boxed
   {
     GDateTime* _cretval;
     _cretval = gtk_recent_info_get_added(cast(GtkRecentInfo*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -122,12 +122,12 @@ class RecentInfo : Boxed
   bool getApplicationInfo(string appName, out string appExec, out uint count, out DateTime stamp)
   {
     bool _retval;
-    const(char)* _appName = appName.toCString(false);
+    const(char)* _appName = appName.toCString(No.Alloc);
     char* _appExec;
     GDateTime* _stamp;
     _retval = gtk_recent_info_get_application_info(cast(GtkRecentInfo*)cPtr, _appName, &_appExec, cast(uint*)&count, &_stamp);
-    appExec = _appExec.fromCString(false);
-    stamp = new DateTime(cast(void*)_stamp, false);
+    appExec = _appExec.fromCString(No.Free);
+    stamp = new DateTime(cast(void*)_stamp, No.Take);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class RecentInfo : Boxed
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -161,7 +161,7 @@ class RecentInfo : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_description(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class RecentInfo : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_display_name(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class RecentInfo : Boxed
   {
     GIcon* _cretval;
     _cretval = gtk_recent_info_get_gicon(cast(GtkRecentInfo*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Icon(cast(GIcon*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class RecentInfo : Boxed
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -224,7 +224,7 @@ class RecentInfo : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_mime_type(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class RecentInfo : Boxed
   {
     GDateTime* _cretval;
     _cretval = gtk_recent_info_get_modified(cast(GtkRecentInfo*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class RecentInfo : Boxed
   {
     char* _cretval;
     _cretval = gtk_recent_info_get_short_name(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class RecentInfo : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_uri(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class RecentInfo : Boxed
   {
     char* _cretval;
     _cretval = gtk_recent_info_get_uri_display(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class RecentInfo : Boxed
   {
     GDateTime* _cretval;
     _cretval = gtk_recent_info_get_visited(cast(GtkRecentInfo*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -325,7 +325,7 @@ class RecentInfo : Boxed
   bool hasApplication(string appName)
   {
     bool _retval;
-    const(char)* _appName = appName.toCString(false);
+    const(char)* _appName = appName.toCString(No.Alloc);
     _retval = gtk_recent_info_has_application(cast(GtkRecentInfo*)cPtr, _appName);
     return _retval;
   }
@@ -340,7 +340,7 @@ class RecentInfo : Boxed
   bool hasGroup(string groupName)
   {
     bool _retval;
-    const(char)* _groupName = groupName.toCString(false);
+    const(char)* _groupName = groupName.toCString(No.Alloc);
     _retval = gtk_recent_info_has_group(cast(GtkRecentInfo*)cPtr, _groupName);
     return _retval;
   }
@@ -366,7 +366,7 @@ class RecentInfo : Boxed
   {
     char* _cretval;
     _cretval = gtk_recent_info_last_application(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class RecentInfo : Boxed
   bool match(RecentInfo infoB)
   {
     bool _retval;
-    _retval = gtk_recent_info_match(cast(GtkRecentInfo*)cPtr, infoB ? cast(GtkRecentInfo*)infoB.cPtr(false) : null);
+    _retval = gtk_recent_info_match(cast(GtkRecentInfo*)cPtr, infoB ? cast(GtkRecentInfo*)infoB.cPtr(No.Dup) : null);
     return _retval;
   }
 }

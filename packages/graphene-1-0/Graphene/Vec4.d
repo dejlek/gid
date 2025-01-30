@@ -18,17 +18,17 @@ class Vec4 : Boxed
 
   this()
   {
-    super(safeMalloc(graphene_vec4_t.sizeof), true);
+    super(safeMalloc(graphene_vec4_t.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -53,7 +53,7 @@ class Vec4 : Boxed
   {
     graphene_vec4_t* _cretval;
     _cretval = graphene_vec4_alloc();
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -66,8 +66,8 @@ class Vec4 : Boxed
   void add(Vec4 b, out Vec4 res)
   {
     graphene_vec4_t _res;
-    graphene_vec4_add(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(false) : null, &_res);
-    res = new Vec4(cast(void*)&_res, false);
+    graphene_vec4_add(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(No.Dup) : null, &_res);
+    res = new Vec4(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -81,8 +81,8 @@ class Vec4 : Boxed
   void divide(Vec4 b, out Vec4 res)
   {
     graphene_vec4_t _res;
-    graphene_vec4_divide(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(false) : null, &_res);
-    res = new Vec4(cast(void*)&_res, false);
+    graphene_vec4_divide(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(No.Dup) : null, &_res);
+    res = new Vec4(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -94,7 +94,7 @@ class Vec4 : Boxed
   float dot(Vec4 b)
   {
     float _retval;
-    _retval = graphene_vec4_dot(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(false) : null);
+    _retval = graphene_vec4_dot(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class Vec4 : Boxed
   bool equal(Vec4 v2)
   {
     bool _retval;
-    _retval = graphene_vec4_equal(cast(graphene_vec4_t*)cPtr, v2 ? cast(graphene_vec4_t*)v2.cPtr(false) : null);
+    _retval = graphene_vec4_equal(cast(graphene_vec4_t*)cPtr, v2 ? cast(graphene_vec4_t*)v2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class Vec4 : Boxed
   {
     graphene_vec2_t _res;
     graphene_vec4_get_xy(cast(graphene_vec4_t*)cPtr, &_res);
-    res = new Vec2(cast(void*)&_res, false);
+    res = new Vec2(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -156,7 +156,7 @@ class Vec4 : Boxed
   {
     graphene_vec3_t _res;
     graphene_vec4_get_xyz(cast(graphene_vec4_t*)cPtr, &_res);
-    res = new Vec3(cast(void*)&_res, false);
+    res = new Vec3(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -196,7 +196,7 @@ class Vec4 : Boxed
   {
     graphene_vec4_t* _cretval;
     _cretval = graphene_vec4_init(cast(graphene_vec4_t*)cPtr, x, y, z, w);
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class Vec4 : Boxed
     assert(!src || src.length == 4);
     auto _src = cast(const(float)*)src.ptr;
     _cretval = graphene_vec4_init_from_float(cast(graphene_vec4_t*)cPtr, _src);
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -228,8 +228,8 @@ class Vec4 : Boxed
   Vec4 initFromVec2(Vec2 src, float z, float w)
   {
     graphene_vec4_t* _cretval;
-    _cretval = graphene_vec4_init_from_vec2(cast(graphene_vec4_t*)cPtr, src ? cast(graphene_vec2_t*)src.cPtr(false) : null, z, w);
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    _cretval = graphene_vec4_init_from_vec2(cast(graphene_vec4_t*)cPtr, src ? cast(graphene_vec2_t*)src.cPtr(No.Dup) : null, z, w);
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -244,8 +244,8 @@ class Vec4 : Boxed
   Vec4 initFromVec3(Vec3 src, float w)
   {
     graphene_vec4_t* _cretval;
-    _cretval = graphene_vec4_init_from_vec3(cast(graphene_vec4_t*)cPtr, src ? cast(graphene_vec3_t*)src.cPtr(false) : null, w);
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    _cretval = graphene_vec4_init_from_vec3(cast(graphene_vec4_t*)cPtr, src ? cast(graphene_vec3_t*)src.cPtr(No.Dup) : null, w);
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -259,8 +259,8 @@ class Vec4 : Boxed
   Vec4 initFromVec4(Vec4 src)
   {
     graphene_vec4_t* _cretval;
-    _cretval = graphene_vec4_init_from_vec4(cast(graphene_vec4_t*)cPtr, src ? cast(graphene_vec4_t*)src.cPtr(false) : null);
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    _cretval = graphene_vec4_init_from_vec4(cast(graphene_vec4_t*)cPtr, src ? cast(graphene_vec4_t*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -274,8 +274,8 @@ class Vec4 : Boxed
   void interpolate(Vec4 v2, double factor, out Vec4 res)
   {
     graphene_vec4_t _res;
-    graphene_vec4_interpolate(cast(graphene_vec4_t*)cPtr, v2 ? cast(graphene_vec4_t*)v2.cPtr(false) : null, factor, &_res);
-    res = new Vec4(cast(void*)&_res, false);
+    graphene_vec4_interpolate(cast(graphene_vec4_t*)cPtr, v2 ? cast(graphene_vec4_t*)v2.cPtr(No.Dup) : null, factor, &_res);
+    res = new Vec4(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -299,8 +299,8 @@ class Vec4 : Boxed
   void max(Vec4 b, out Vec4 res)
   {
     graphene_vec4_t _res;
-    graphene_vec4_max(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(false) : null, &_res);
-    res = new Vec4(cast(void*)&_res, false);
+    graphene_vec4_max(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(No.Dup) : null, &_res);
+    res = new Vec4(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -313,8 +313,8 @@ class Vec4 : Boxed
   void min(Vec4 b, out Vec4 res)
   {
     graphene_vec4_t _res;
-    graphene_vec4_min(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(false) : null, &_res);
-    res = new Vec4(cast(void*)&_res, false);
+    graphene_vec4_min(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(No.Dup) : null, &_res);
+    res = new Vec4(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -326,8 +326,8 @@ class Vec4 : Boxed
   void multiply(Vec4 b, out Vec4 res)
   {
     graphene_vec4_t _res;
-    graphene_vec4_multiply(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(false) : null, &_res);
-    res = new Vec4(cast(void*)&_res, false);
+    graphene_vec4_multiply(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(No.Dup) : null, &_res);
+    res = new Vec4(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -341,7 +341,7 @@ class Vec4 : Boxed
   bool near(Vec4 v2, float epsilon)
   {
     bool _retval;
-    _retval = graphene_vec4_near(cast(graphene_vec4_t*)cPtr, v2 ? cast(graphene_vec4_t*)v2.cPtr(false) : null, epsilon);
+    _retval = graphene_vec4_near(cast(graphene_vec4_t*)cPtr, v2 ? cast(graphene_vec4_t*)v2.cPtr(No.Dup) : null, epsilon);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class Vec4 : Boxed
   {
     graphene_vec4_t _res;
     graphene_vec4_negate(cast(graphene_vec4_t*)cPtr, &_res);
-    res = new Vec4(cast(void*)&_res, false);
+    res = new Vec4(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -367,7 +367,7 @@ class Vec4 : Boxed
   {
     graphene_vec4_t _res;
     graphene_vec4_normalize(cast(graphene_vec4_t*)cPtr, &_res);
-    res = new Vec4(cast(void*)&_res, false);
+    res = new Vec4(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -380,7 +380,7 @@ class Vec4 : Boxed
   {
     graphene_vec4_t _res;
     graphene_vec4_scale(cast(graphene_vec4_t*)cPtr, factor, &_res);
-    res = new Vec4(cast(void*)&_res, false);
+    res = new Vec4(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -394,8 +394,8 @@ class Vec4 : Boxed
   void subtract(Vec4 b, out Vec4 res)
   {
     graphene_vec4_t _res;
-    graphene_vec4_subtract(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(false) : null, &_res);
-    res = new Vec4(cast(void*)&_res, false);
+    graphene_vec4_subtract(cast(graphene_vec4_t*)cPtr, b ? cast(graphene_vec4_t*)b.cPtr(No.Dup) : null, &_res);
+    res = new Vec4(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -419,7 +419,7 @@ class Vec4 : Boxed
   {
     const(graphene_vec4_t)* _cretval;
     _cretval = graphene_vec4_one();
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -432,7 +432,7 @@ class Vec4 : Boxed
   {
     const(graphene_vec4_t)* _cretval;
     _cretval = graphene_vec4_w_axis();
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -445,7 +445,7 @@ class Vec4 : Boxed
   {
     const(graphene_vec4_t)* _cretval;
     _cretval = graphene_vec4_x_axis();
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -458,7 +458,7 @@ class Vec4 : Boxed
   {
     const(graphene_vec4_t)* _cretval;
     _cretval = graphene_vec4_y_axis();
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -471,7 +471,7 @@ class Vec4 : Boxed
   {
     const(graphene_vec4_t)* _cretval;
     _cretval = graphene_vec4_z_axis();
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -484,7 +484,7 @@ class Vec4 : Boxed
   {
     const(graphene_vec4_t)* _cretval;
     _cretval = graphene_vec4_zero();
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

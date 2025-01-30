@@ -25,14 +25,14 @@ import Gio.c.types;
 class SrvTarget : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -59,9 +59,9 @@ class SrvTarget : Boxed
   this(string hostname, ushort port, ushort priority, ushort weight)
   {
     GSrvTarget* _cretval;
-    const(char)* _hostname = hostname.toCString(false);
+    const(char)* _hostname = hostname.toCString(No.Alloc);
     _cretval = g_srv_target_new(_hostname, port, priority, weight);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -72,7 +72,7 @@ class SrvTarget : Boxed
   {
     GSrvTarget* _cretval;
     _cretval = g_srv_target_copy(cast(GSrvTarget*)cPtr);
-    auto _retval = _cretval ? new SrvTarget(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new SrvTarget(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class SrvTarget : Boxed
   {
     const(char)* _cretval;
     _cretval = g_srv_target_get_hostname(cast(GSrvTarget*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

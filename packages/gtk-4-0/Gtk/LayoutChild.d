@@ -24,9 +24,9 @@ class LayoutChild : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -47,7 +47,7 @@ class LayoutChild : ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_child_get_child_widget(cast(GtkLayoutChild*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -60,7 +60,7 @@ class LayoutChild : ObjectG
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_layout_child_get_layout_manager(cast(GtkLayoutChild*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!LayoutManager(cast(GtkLayoutManager*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!LayoutManager(cast(GtkLayoutManager*)_cretval, No.Take);
     return _retval;
   }
 }

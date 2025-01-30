@@ -21,17 +21,17 @@ class GlyphItem : Boxed
 
   this()
   {
-    super(safeMalloc(PangoGlyphItem.sizeof), true);
+    super(safeMalloc(PangoGlyphItem.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -110,8 +110,8 @@ class GlyphItem : Boxed
   GlyphItem[] applyAttrs(string text, AttrList list)
   {
     GSList* _cretval;
-    const(char)* _text = text.toCString(false);
-    _cretval = pango_glyph_item_apply_attrs(cast(PangoGlyphItem*)cPtr, _text, list ? cast(PangoAttrList*)list.cPtr(false) : null);
+    const(char)* _text = text.toCString(No.Alloc);
+    _cretval = pango_glyph_item_apply_attrs(cast(PangoGlyphItem*)cPtr, _text, list ? cast(PangoAttrList*)list.cPtr(No.Dup) : null);
     auto _retval = gSListToD!(GlyphItem, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -124,7 +124,7 @@ class GlyphItem : Boxed
   {
     PangoGlyphItem* _cretval;
     _cretval = pango_glyph_item_copy(cast(PangoGlyphItem*)cPtr);
-    auto _retval = _cretval ? new GlyphItem(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new GlyphItem(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -149,9 +149,9 @@ class GlyphItem : Boxed
   GlyphItem split(string text, int splitIndex)
   {
     PangoGlyphItem* _cretval;
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     _cretval = pango_glyph_item_split(cast(PangoGlyphItem*)cPtr, _text, splitIndex);
-    auto _retval = _cretval ? new GlyphItem(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new GlyphItem(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

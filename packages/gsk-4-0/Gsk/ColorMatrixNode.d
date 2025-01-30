@@ -14,12 +14,12 @@ import Gsk.c.types;
 class ColorMatrixNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.ColorMatrixNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -38,8 +38,8 @@ class ColorMatrixNode : RenderNode
   this(RenderNode child, Matrix colorMatrix, Vec4 colorOffset)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_color_matrix_node_new(child ? cast(GskRenderNode*)child.cPtr(false) : null, colorMatrix ? cast(graphene_matrix_t*)colorMatrix.cPtr(false) : null, colorOffset ? cast(graphene_vec4_t*)colorOffset.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gsk_color_matrix_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, colorMatrix ? cast(graphene_matrix_t*)colorMatrix.cPtr(No.Dup) : null, colorOffset ? cast(graphene_vec4_t*)colorOffset.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -50,7 +50,7 @@ class ColorMatrixNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_color_matrix_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -62,7 +62,7 @@ class ColorMatrixNode : RenderNode
   {
     const(graphene_matrix_t)* _cretval;
     _cretval = gsk_color_matrix_node_get_color_matrix(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Matrix(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Matrix(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class ColorMatrixNode : RenderNode
   {
     const(graphene_vec4_t)* _cretval;
     _cretval = gsk_color_matrix_node_get_color_offset(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

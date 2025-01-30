@@ -16,14 +16,14 @@ class Parameter
 {
   GParameter cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.Parameter");
 
     cInstance = *cast(GParameter*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -34,13 +34,13 @@ class Parameter
 
   @property string name()
   {
-    return (cast(GParameter*)cPtr).name.fromCString(false);
+    return (cast(GParameter*)cPtr).name.fromCString(No.Free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GParameter*)cPtr).name);
-    (cast(GParameter*)cPtr).name = propval.toCString(true);
+    (cast(GParameter*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
   @property Value value()

@@ -22,9 +22,9 @@ class SocketAddress : ObjectG, SocketConnectable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,7 +52,7 @@ class SocketAddress : ObjectG, SocketConnectable
   {
     GSocketAddress* _cretval;
     _cretval = g_socket_address_new_from_native(native, len);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketAddress(cast(GSocketAddress*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketAddress(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -88,9 +88,9 @@ class Socket : ObjectG, DatagramBased, Initable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -132,7 +132,7 @@ class Socket : ObjectG, DatagramBased, Initable
     _cretval = g_socket_new(family, type, protocol, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -158,7 +158,7 @@ class Socket : ObjectG, DatagramBased, Initable
     _cretval = g_socket_new_from_fd(fd, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Socket(cast(GSocket*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Socket(cast(GSocket*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -180,10 +180,10 @@ class Socket : ObjectG, DatagramBased, Initable
   {
     GSocket* _cretval;
     GError *_err;
-    _cretval = g_socket_accept(cast(GSocket*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_socket_accept(cast(GSocket*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Socket(cast(GSocket*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Socket(cast(GSocket*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class Socket : ObjectG, DatagramBased, Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_bind(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(false) : null, allowReuse, &_err);
+    _retval = g_socket_bind(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, allowReuse, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -328,7 +328,7 @@ class Socket : ObjectG, DatagramBased, Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_condition_timed_wait(cast(GSocket*)cPtr, condition, timeoutUs, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_condition_timed_wait(cast(GSocket*)cPtr, condition, timeoutUs, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -352,7 +352,7 @@ class Socket : ObjectG, DatagramBased, Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_condition_wait(cast(GSocket*)cPtr, condition, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_condition_wait(cast(GSocket*)cPtr, condition, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -381,7 +381,7 @@ class Socket : ObjectG, DatagramBased, Initable
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_connect(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_connect(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -396,7 +396,7 @@ class Socket : ObjectG, DatagramBased, Initable
   {
     GSocketConnection* _cretval;
     _cretval = g_socket_connection_factory_create_connection(cast(GSocket*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketConnection(cast(GSocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -473,7 +473,7 @@ class Socket : ObjectG, DatagramBased, Initable
     _cretval = g_socket_get_credentials(cast(GSocket*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Credentials(cast(GCredentials*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Credentials(cast(GCredentials*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -542,7 +542,7 @@ class Socket : ObjectG, DatagramBased, Initable
     _cretval = g_socket_get_local_address(cast(GSocket*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketAddress(cast(GSocketAddress*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketAddress(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -627,7 +627,7 @@ class Socket : ObjectG, DatagramBased, Initable
     _cretval = g_socket_get_remote_address(cast(GSocket*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketAddress(cast(GSocketAddress*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketAddress(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -715,9 +715,9 @@ class Socket : ObjectG, DatagramBased, Initable
   bool joinMulticastGroup(InetAddress group, bool sourceSpecific, string iface)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(false);
+    const(char)* _iface = iface.toCString(No.Alloc);
     GError *_err;
-    _retval = g_socket_join_multicast_group(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(false) : null, sourceSpecific, _iface, &_err);
+    _retval = g_socket_join_multicast_group(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -746,9 +746,9 @@ class Socket : ObjectG, DatagramBased, Initable
   bool joinMulticastGroupSsm(InetAddress group, InetAddress sourceSpecific, string iface)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(false);
+    const(char)* _iface = iface.toCString(No.Alloc);
     GError *_err;
-    _retval = g_socket_join_multicast_group_ssm(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(false) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific.cPtr(false) : null, _iface, &_err);
+    _retval = g_socket_join_multicast_group_ssm(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific.cPtr(No.Dup) : null, _iface, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -771,9 +771,9 @@ class Socket : ObjectG, DatagramBased, Initable
   bool leaveMulticastGroup(InetAddress group, bool sourceSpecific, string iface)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(false);
+    const(char)* _iface = iface.toCString(No.Alloc);
     GError *_err;
-    _retval = g_socket_leave_multicast_group(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(false) : null, sourceSpecific, _iface, &_err);
+    _retval = g_socket_leave_multicast_group(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -795,9 +795,9 @@ class Socket : ObjectG, DatagramBased, Initable
   bool leaveMulticastGroupSsm(InetAddress group, InetAddress sourceSpecific, string iface)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(false);
+    const(char)* _iface = iface.toCString(No.Alloc);
     GError *_err;
-    _retval = g_socket_leave_multicast_group_ssm(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(false) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific.cPtr(false) : null, _iface, &_err);
+    _retval = g_socket_leave_multicast_group_ssm(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific.cPtr(No.Dup) : null, _iface, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -853,7 +853,7 @@ class Socket : ObjectG, DatagramBased, Initable
     ptrdiff_t _retval;
     size_t _size;
     GError *_err;
-    _retval = g_socket_receive(cast(GSocket*)cPtr, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_receive(cast(GSocket*)cPtr, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -879,10 +879,10 @@ class Socket : ObjectG, DatagramBased, Initable
     GSocketAddress* _address;
     size_t _size;
     GError *_err;
-    _retval = g_socket_receive_from(cast(GSocket*)cPtr, &_address, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_receive_from(cast(GSocket*)cPtr, &_address, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    address = new SocketAddress(cast(void*)_address, true);
+    address = new SocketAddress(cast(void*)_address, Yes.Take);
     return _retval;
   }
 
@@ -961,13 +961,13 @@ class Socket : ObjectG, DatagramBased, Initable
     int _numMessages;
     GSocketControlMessage** _messages;
     GError *_err;
-    _retval = g_socket_receive_message(cast(GSocket*)cPtr, &_address, _vectors, _numVectors, &_messages, &_numMessages, cast(int*)&flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_receive_message(cast(GSocket*)cPtr, &_address, _vectors, _numVectors, &_messages, &_numMessages, cast(int*)&flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    address = new SocketAddress(cast(void*)_address, true);
+    address = new SocketAddress(cast(void*)_address, Yes.Take);
     messages.length = _numMessages;
     foreach (i; 0 .. _numMessages)
-      messages[i] = ObjectG.getDObject!SocketControlMessage(_messages[i], true);
+      messages[i] = ObjectG.getDObject!SocketControlMessage(_messages[i], Yes.Take);
     safeFree(cast(void*)_messages);
     return _retval;
   }
@@ -1037,7 +1037,7 @@ class Socket : ObjectG, DatagramBased, Initable
     GInputMessage* _messages = _tmpmessages.ptr;
 
     GError *_err;
-    _retval = g_socket_receive_messages(cast(GSocket*)cPtr, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_receive_messages(cast(GSocket*)cPtr, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1059,7 +1059,7 @@ class Socket : ObjectG, DatagramBased, Initable
     ptrdiff_t _retval;
     size_t _size;
     GError *_err;
-    _retval = g_socket_receive_with_blocking(cast(GSocket*)cPtr, buffer.ptr, _size, blocking, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_receive_with_blocking(cast(GSocket*)cPtr, buffer.ptr, _size, blocking, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1094,7 +1094,7 @@ class Socket : ObjectG, DatagramBased, Initable
 
     auto _buffer = cast(const(ubyte)*)buffer.ptr;
     GError *_err;
-    _retval = g_socket_send(cast(GSocket*)cPtr, _buffer, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_send(cast(GSocket*)cPtr, _buffer, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1165,7 +1165,7 @@ class Socket : ObjectG, DatagramBased, Initable
     GSocketControlMessage** _messages = cast(GSocketControlMessage**)_tmpmessages.ptr;
 
     GError *_err;
-    _retval = g_socket_send_message(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(false) : null, _vectors, _numVectors, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_send_message(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, _vectors, _numVectors, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1210,7 +1210,7 @@ class Socket : ObjectG, DatagramBased, Initable
     GSocketControlMessage** _messages = cast(GSocketControlMessage**)_tmpmessages.ptr;
 
     GError *_err;
-    _cretval = g_socket_send_message_with_timeout(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(false) : null, _vectors, _numVectors, _messages, _numMessages, flags, timeoutUs, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_socket_send_message_with_timeout(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, _vectors, _numVectors, _messages, _numMessages, flags, timeoutUs, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     PollableReturn _retval = cast(PollableReturn)_cretval;
@@ -1271,7 +1271,7 @@ class Socket : ObjectG, DatagramBased, Initable
     GOutputMessage* _messages = _tmpmessages.ptr;
 
     GError *_err;
-    _retval = g_socket_send_messages(cast(GSocket*)cPtr, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_send_messages(cast(GSocket*)cPtr, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1299,7 +1299,7 @@ class Socket : ObjectG, DatagramBased, Initable
 
     auto _buffer = cast(const(ubyte)*)buffer.ptr;
     GError *_err;
-    _retval = g_socket_send_to(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(false) : null, _buffer, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_send_to(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, _buffer, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1326,7 +1326,7 @@ class Socket : ObjectG, DatagramBased, Initable
 
     auto _buffer = cast(const(ubyte)*)buffer.ptr;
     GError *_err;
-    _retval = g_socket_send_with_blocking(cast(GSocket*)cPtr, _buffer, _size, blocking, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_socket_send_with_blocking(cast(GSocket*)cPtr, _buffer, _size, blocking, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

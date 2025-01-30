@@ -56,9 +56,9 @@ import Gtk.c.types;
 class Calendar : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -79,7 +79,7 @@ class Calendar : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_calendar_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -100,7 +100,7 @@ class Calendar : Widget
   {
     GDateTime* _cretval;
     _cretval = gtk_calendar_get_date(cast(GtkCalendar*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class Calendar : Widget
    */
   void selectDay(DateTime date)
   {
-    gtk_calendar_select_day(cast(GtkCalendar*)cPtr, date ? cast(GDateTime*)date.cPtr(false) : null);
+    gtk_calendar_select_day(cast(GtkCalendar*)cPtr, date ? cast(GDateTime*)date.cPtr(No.Dup) : null);
   }
 
   /**

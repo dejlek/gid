@@ -87,7 +87,7 @@ template ListModelT()
   T getItem(T)(uint position)
   {
     auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(ObjectG)this).cPtr, position);
-    return gobj ? ObjectG.getDObject!T(gobj, true) : null;
+    return ObjectG.getDObject!T(gobj, Yes.Take);
   }
 
 
@@ -139,7 +139,7 @@ template ListModelT()
   {
     ObjectC* _cretval;
     _cretval = g_list_model_get_object(cast(GListModel*)cPtr, position);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 

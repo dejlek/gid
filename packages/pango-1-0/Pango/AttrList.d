@@ -22,14 +22,14 @@ import Pango.c.types;
 class AttrList : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -53,7 +53,7 @@ class AttrList : Boxed
   {
     PangoAttrList* _cretval;
     _cretval = pango_attr_list_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -72,7 +72,7 @@ class AttrList : Boxed
    */
   void change(Attribute attr)
   {
-    pango_attr_list_change(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(true) : null);
+    pango_attr_list_change(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -86,7 +86,7 @@ class AttrList : Boxed
   {
     PangoAttrList* _cretval;
     _cretval = pango_attr_list_copy(cast(PangoAttrList*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class AttrList : Boxed
   bool equal(AttrList otherList)
   {
     bool _retval;
-    _retval = pango_attr_list_equal(cast(PangoAttrList*)cPtr, otherList ? cast(PangoAttrList*)otherList.cPtr(false) : null);
+    _retval = pango_attr_list_equal(cast(PangoAttrList*)cPtr, otherList ? cast(PangoAttrList*)otherList.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -125,14 +125,14 @@ class AttrList : Boxed
     {
       auto _dlg = cast(AttrFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(attribute ? new Attribute(cast(void*)attribute, false) : null);
+      bool _retval = (*_dlg)(attribute ? new Attribute(cast(void*)attribute, No.Take) : null);
       return _retval;
     }
 
     PangoAttrList* _cretval;
     auto _func = cast(void*)&func;
     _cretval = pango_attr_list_filter(cast(PangoAttrList*)cPtr, &_funcCallback, _func);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class AttrList : Boxed
   {
     PangoAttrIterator* _cretval;
     _cretval = pango_attr_list_get_iterator(cast(PangoAttrList*)cPtr);
-    auto _retval = _cretval ? new AttrIterator(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new AttrIterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class AttrList : Boxed
    */
   void insert(Attribute attr)
   {
-    pango_attr_list_insert(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(true) : null);
+    pango_attr_list_insert(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -186,7 +186,7 @@ class AttrList : Boxed
    */
   void insertBefore(Attribute attr)
   {
-    pango_attr_list_insert_before(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(true) : null);
+    pango_attr_list_insert_before(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -213,7 +213,7 @@ class AttrList : Boxed
    */
   void splice(AttrList other, int pos, int len)
   {
-    pango_attr_list_splice(cast(PangoAttrList*)cPtr, other ? cast(PangoAttrList*)other.cPtr(false) : null, pos, len);
+    pango_attr_list_splice(cast(PangoAttrList*)cPtr, other ? cast(PangoAttrList*)other.cPtr(No.Dup) : null, pos, len);
   }
 
   /**
@@ -248,7 +248,7 @@ class AttrList : Boxed
   {
     char* _cretval;
     _cretval = pango_attr_list_to_string(cast(PangoAttrList*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -284,9 +284,9 @@ class AttrList : Boxed
   static AttrList fromString(string text)
   {
     PangoAttrList* _cretval;
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     _cretval = pango_attr_list_from_string(_text);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

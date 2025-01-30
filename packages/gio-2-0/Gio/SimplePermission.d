@@ -20,9 +20,9 @@ class SimplePermission : Permission
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -46,6 +46,6 @@ class SimplePermission : Permission
   {
     GPermission* _cretval;
     _cretval = g_simple_permission_new(allowed);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

@@ -17,14 +17,14 @@ class LogField
 {
   GLogField cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.LogField");
 
     cInstance = *cast(GLogField*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -35,13 +35,13 @@ class LogField
 
   @property string key()
   {
-    return (cast(GLogField*)cPtr).key.fromCString(false);
+    return (cast(GLogField*)cPtr).key.fromCString(No.Free);
   }
 
   @property void key(string propval)
   {
     safeFree(cast(void*)(cast(GLogField*)cPtr).key);
-    (cast(GLogField*)cPtr).key = propval.toCString(true);
+    (cast(GLogField*)cPtr).key = propval.toCString(Yes.Alloc);
   }
 
   @property ptrdiff_t length()

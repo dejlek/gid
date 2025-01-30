@@ -58,9 +58,9 @@ class GridView : ListBase
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -90,8 +90,8 @@ class GridView : ListBase
   this(SelectionModel model, ListItemFactory factory)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(true) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(true) : null);
-    this(_cretval, false);
+    _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -113,7 +113,7 @@ class GridView : ListBase
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_grid_view_get_factory(cast(GtkGridView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class GridView : ListBase
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_grid_view_get_model(cast(GtkGridView*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!SelectionModel(cast(GtkSelectionModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!SelectionModel(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class GridView : ListBase
    */
   void scrollTo(uint pos, ListScrollFlags flags, ScrollInfo scroll)
   {
-    gtk_grid_view_scroll_to(cast(GtkGridView*)cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(true) : null);
+    gtk_grid_view_scroll_to(cast(GtkGridView*)cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -208,7 +208,7 @@ class GridView : ListBase
    */
   void setFactory(ListItemFactory factory)
   {
-    gtk_grid_view_set_factory(cast(GtkGridView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(false) : null);
+    gtk_grid_view_set_factory(cast(GtkGridView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
 
   /**
@@ -245,7 +245,7 @@ class GridView : ListBase
    */
   void setModel(SelectionModel model)
   {
-    gtk_grid_view_set_model(cast(GtkGridView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_grid_view_set_model(cast(GtkGridView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**

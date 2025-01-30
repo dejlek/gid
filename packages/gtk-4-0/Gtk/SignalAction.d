@@ -18,9 +18,9 @@ class SignalAction : ShortcutAction
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -44,9 +44,9 @@ class SignalAction : ShortcutAction
   this(string signalName)
   {
     GtkShortcutAction* _cretval;
-    const(char)* _signalName = signalName.toCString(false);
+    const(char)* _signalName = signalName.toCString(No.Alloc);
     _cretval = gtk_signal_action_new(_signalName);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -57,7 +57,7 @@ class SignalAction : ShortcutAction
   {
     const(char)* _cretval;
     _cretval = gtk_signal_action_get_signal_name(cast(GtkSignalAction*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 }

@@ -92,7 +92,7 @@ template PaintableT()
   {
     GdkPaintable* _cretval;
     _cretval = gdk_paintable_get_current_image(cast(GdkPaintable*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ template PaintableT()
    */
   override void snapshot(Snapshot snapshot, double width, double height)
   {
-    gdk_paintable_snapshot(cast(GdkPaintable*)cPtr, snapshot ? cast(GdkSnapshot*)snapshot.cPtr(false) : null, width, height);
+    gdk_paintable_snapshot(cast(GdkPaintable*)cPtr, snapshot ? cast(GdkSnapshot*)snapshot.cPtr(No.Dup) : null, width, height);
   }
 
   /**

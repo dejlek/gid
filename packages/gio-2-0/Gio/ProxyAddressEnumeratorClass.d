@@ -12,14 +12,14 @@ class ProxyAddressEnumeratorClass
 {
   GProxyAddressEnumeratorClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.ProxyAddressEnumeratorClass");
 
     cInstance = *cast(GProxyAddressEnumeratorClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

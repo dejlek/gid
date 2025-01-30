@@ -28,9 +28,9 @@ class Constraint : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -60,8 +60,8 @@ class Constraint : ObjectG
   this(ConstraintTarget target, ConstraintAttribute targetAttribute, ConstraintRelation relation, ConstraintTarget source, ConstraintAttribute sourceAttribute, double multiplier, double constant, int strength)
   {
     GtkConstraint* _cretval;
-    _cretval = gtk_constraint_new(target ? cast(GtkConstraintTarget*)(cast(ObjectG)target).cPtr(false) : null, targetAttribute, relation, source ? cast(GtkConstraintTarget*)(cast(ObjectG)source).cPtr(false) : null, sourceAttribute, multiplier, constant, strength);
-    this(_cretval, true);
+    _cretval = gtk_constraint_new(target ? cast(GtkConstraintTarget*)(cast(ObjectG)target).cPtr(No.Dup) : null, targetAttribute, relation, source ? cast(GtkConstraintTarget*)(cast(ObjectG)source).cPtr(No.Dup) : null, sourceAttribute, multiplier, constant, strength);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -78,8 +78,8 @@ class Constraint : ObjectG
   static Constraint newConstant(ConstraintTarget target, ConstraintAttribute targetAttribute, ConstraintRelation relation, double constant, int strength)
   {
     GtkConstraint* _cretval;
-    _cretval = gtk_constraint_new_constant(target ? cast(GtkConstraintTarget*)(cast(ObjectG)target).cPtr(false) : null, targetAttribute, relation, constant, strength);
-    auto _retval = _cretval ? ObjectG.getDObject!Constraint(cast(GtkConstraint*)_cretval, true) : null;
+    _cretval = gtk_constraint_new_constant(target ? cast(GtkConstraintTarget*)(cast(ObjectG)target).cPtr(No.Dup) : null, targetAttribute, relation, constant, strength);
+    auto _retval = ObjectG.getDObject!Constraint(cast(GtkConstraint*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class Constraint : ObjectG
   {
     GtkConstraintTarget* _cretval;
     _cretval = gtk_constraint_get_source(cast(GtkConstraint*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ConstraintTarget(cast(GtkConstraintTarget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ConstraintTarget(cast(GtkConstraintTarget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class Constraint : ObjectG
   {
     GtkConstraintTarget* _cretval;
     _cretval = gtk_constraint_get_target(cast(GtkConstraint*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ConstraintTarget(cast(GtkConstraintTarget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ConstraintTarget(cast(GtkConstraintTarget*)_cretval, No.Take);
     return _retval;
   }
 

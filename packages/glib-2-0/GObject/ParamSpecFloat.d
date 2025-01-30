@@ -12,11 +12,11 @@ import Gid.gid;
 class ParamSpecFloat : ParamSpec
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.ParamSpecFloat");
 
-    super(cast(GParamSpec*)ptr, ownedRef);
+    super(cast(GParamSpec*)ptr, take);
   }
 }

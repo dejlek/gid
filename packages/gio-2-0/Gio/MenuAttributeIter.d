@@ -18,9 +18,9 @@ class MenuAttributeIter : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -43,7 +43,7 @@ class MenuAttributeIter : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_menu_attribute_iter_get_name(cast(GMenuAttributeIter*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -72,8 +72,8 @@ class MenuAttributeIter : ObjectG
     char* _outName;
     VariantC* _value;
     _retval = g_menu_attribute_iter_get_next(cast(GMenuAttributeIter*)cPtr, &_outName, &_value);
-    outName = _outName.fromCString(false);
-    value = new VariantG(cast(void*)_value, true);
+    outName = _outName.fromCString(No.Free);
+    value = new VariantG(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class MenuAttributeIter : ObjectG
   {
     VariantC* _cretval;
     _cretval = g_menu_attribute_iter_get_value(cast(GMenuAttributeIter*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

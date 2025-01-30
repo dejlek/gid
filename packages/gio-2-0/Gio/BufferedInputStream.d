@@ -33,9 +33,9 @@ class BufferedInputStream : FilterInputStream, Seekable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -60,8 +60,8 @@ class BufferedInputStream : FilterInputStream, Seekable
   this(InputStream baseStream)
   {
     GInputStream* _cretval;
-    _cretval = g_buffered_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = g_buffered_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -75,8 +75,8 @@ class BufferedInputStream : FilterInputStream, Seekable
   static BufferedInputStream newSized(InputStream baseStream, size_t size)
   {
     GInputStream* _cretval;
-    _cretval = g_buffered_input_stream_new_sized(baseStream ? cast(GInputStream*)baseStream.cPtr(false) : null, size);
-    auto _retval = _cretval ? ObjectG.getDObject!BufferedInputStream(cast(GInputStream*)_cretval, true) : null;
+    _cretval = g_buffered_input_stream_new_sized(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null, size);
+    auto _retval = ObjectG.getDObject!BufferedInputStream(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class BufferedInputStream : FilterInputStream, Seekable
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_buffered_input_stream_fill(cast(GBufferedInputStream*)cPtr, count, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_buffered_input_stream_fill(cast(GBufferedInputStream*)cPtr, count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -134,11 +134,11 @@ class BufferedInputStream : FilterInputStream, Seekable
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_buffered_input_stream_fill_async(cast(GBufferedInputStream*)cPtr, count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_buffered_input_stream_fill_async(cast(GBufferedInputStream*)cPtr, count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -151,7 +151,7 @@ class BufferedInputStream : FilterInputStream, Seekable
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_buffered_input_stream_fill_finish(cast(GBufferedInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_buffered_input_stream_fill_finish(cast(GBufferedInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -239,7 +239,7 @@ class BufferedInputStream : FilterInputStream, Seekable
   {
     int _retval;
     GError *_err;
-    _retval = g_buffered_input_stream_read_byte(cast(GBufferedInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_buffered_input_stream_read_byte(cast(GBufferedInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

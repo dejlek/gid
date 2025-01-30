@@ -72,9 +72,9 @@ import Gtk.c.types;
 class ScrolledWindow : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -95,7 +95,7 @@ class ScrolledWindow : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -109,7 +109,7 @@ class ScrolledWindow : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_child(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class ScrolledWindow : Widget
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrolled_window_get_hadjustment(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class ScrolledWindow : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_hscrollbar(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class ScrolledWindow : Widget
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrolled_window_get_vadjustment(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -289,7 +289,7 @@ class ScrolledWindow : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_vscrollbar(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class ScrolledWindow : Widget
    */
   void setChild(Widget child)
   {
-    gtk_scrolled_window_set_child(cast(GtkScrolledWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null);
+    gtk_scrolled_window_set_child(cast(GtkScrolledWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -313,7 +313,7 @@ class ScrolledWindow : Widget
    */
   void setHadjustment(Adjustment hadjustment)
   {
-    gtk_scrolled_window_set_hadjustment(cast(GtkScrolledWindow*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(false) : null);
+    gtk_scrolled_window_set_hadjustment(cast(GtkScrolledWindow*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -467,7 +467,7 @@ class ScrolledWindow : Widget
    */
   void setVadjustment(Adjustment vadjustment)
   {
-    gtk_scrolled_window_set_vadjustment(cast(GtkScrolledWindow*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(false) : null);
+    gtk_scrolled_window_set_vadjustment(cast(GtkScrolledWindow*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
   }
 
   /**

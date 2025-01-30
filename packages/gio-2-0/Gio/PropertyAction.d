@@ -57,9 +57,9 @@ class PropertyAction : ObjectG, Action
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -91,9 +91,9 @@ class PropertyAction : ObjectG, Action
   this(string name, ObjectG object, string propertyName)
   {
     GPropertyAction* _cretval;
-    const(char)* _name = name.toCString(false);
-    const(char)* _propertyName = propertyName.toCString(false);
-    _cretval = g_property_action_new(_name, object ? cast(ObjectC*)object.cPtr(false) : null, _propertyName);
-    this(_cretval, true);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    _cretval = g_property_action_new(_name, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _propertyName);
+    this(_cretval, Yes.Take);
   }
 }

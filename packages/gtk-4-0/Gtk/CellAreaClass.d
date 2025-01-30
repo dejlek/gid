@@ -10,14 +10,14 @@ class CellAreaClass
 {
   GtkCellAreaClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.CellAreaClass");
 
     cInstance = *cast(GtkCellAreaClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 
@@ -168,9 +168,9 @@ class CellAreaClass
   ParamSpec findCellProperty(string propertyName)
   {
     GParamSpec* _cretval;
-    const(char)* _propertyName = propertyName.toCString(false);
+    const(char)* _propertyName = propertyName.toCString(No.Alloc);
     _cretval = gtk_cell_area_class_find_cell_property(cast(GtkCellAreaClass*)cPtr, _propertyName);
-    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, false) : null;
+    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class CellAreaClass
    */
   void installCellProperty(uint propertyId, ParamSpec pspec)
   {
-    gtk_cell_area_class_install_cell_property(cast(GtkCellAreaClass*)cPtr, propertyId, pspec ? cast(GParamSpec*)pspec.cPtr(false) : null);
+    gtk_cell_area_class_install_cell_property(cast(GtkCellAreaClass*)cPtr, propertyId, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
   }
 
   /**
@@ -202,7 +202,7 @@ class CellAreaClass
     {
       _retval = new ParamSpec[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new ParamSpec(cast(void*)_cretval[i], false);
+        _retval[i] = new ParamSpec(cast(void*)_cretval[i], No.Take);
     }
     return _retval;
   }

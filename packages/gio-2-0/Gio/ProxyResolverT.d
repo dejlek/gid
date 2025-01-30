@@ -61,9 +61,9 @@ template ProxyResolverT()
   override string[] lookup(string uri, Cancellable cancellable)
   {
     char** _cretval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_proxy_resolver_lookup(cast(GProxyResolver*)cPtr, _uri, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_proxy_resolver_lookup(cast(GProxyResolver*)cPtr, _uri, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     string[] _retval;
@@ -75,7 +75,7 @@ template ProxyResolverT()
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -95,12 +95,12 @@ template ProxyResolverT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_proxy_resolver_lookup_async(cast(GProxyResolver*)cPtr, _uri, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_proxy_resolver_lookup_async(cast(GProxyResolver*)cPtr, _uri, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -117,7 +117,7 @@ template ProxyResolverT()
   {
     char** _cretval;
     GError *_err;
-    _cretval = g_proxy_resolver_lookup_finish(cast(GProxyResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _cretval = g_proxy_resolver_lookup_finish(cast(GProxyResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     string[] _retval;
@@ -129,7 +129,7 @@ template ProxyResolverT()
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(true);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }

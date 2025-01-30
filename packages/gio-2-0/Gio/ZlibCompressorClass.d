@@ -10,14 +10,14 @@ class ZlibCompressorClass
 {
   GZlibCompressorClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.ZlibCompressorClass");
 
     cInstance = *cast(GZlibCompressorClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

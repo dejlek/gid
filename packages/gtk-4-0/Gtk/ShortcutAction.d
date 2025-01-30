@@ -40,9 +40,9 @@ class ShortcutAction : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -72,9 +72,9 @@ class ShortcutAction : ObjectG
   static ShortcutAction parseString(string string_)
   {
     GtkShortcutAction* _cretval;
-    const(char)* _string_ = string_.toCString(false);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gtk_shortcut_action_parse_string(_string_);
-    auto _retval = _cretval ? ObjectG.getDObject!ShortcutAction(cast(GtkShortcutAction*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ShortcutAction(cast(GtkShortcutAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class ShortcutAction : ObjectG
   bool activate(ShortcutActionFlags flags, Widget widget, VariantG args)
   {
     bool _retval;
-    _retval = gtk_shortcut_action_activate(cast(GtkShortcutAction*)cPtr, flags, widget ? cast(GtkWidget*)widget.cPtr(false) : null, args ? cast(VariantC*)args.cPtr(false) : null);
+    _retval = gtk_shortcut_action_activate(cast(GtkShortcutAction*)cPtr, flags, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, args ? cast(VariantC*)args.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class ShortcutAction : ObjectG
    */
   void print(String string_)
   {
-    gtk_shortcut_action_print(cast(GtkShortcutAction*)cPtr, string_ ? cast(GString*)string_.cPtr(false) : null);
+    gtk_shortcut_action_print(cast(GtkShortcutAction*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -120,7 +120,7 @@ class ShortcutAction : ObjectG
   {
     char* _cretval;
     _cretval = gtk_shortcut_action_to_string(cast(GtkShortcutAction*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 }

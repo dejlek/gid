@@ -13,12 +13,12 @@ import Gsk.c.types;
 class DebugNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.DebugNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -33,9 +33,9 @@ class DebugNode : RenderNode
   this(RenderNode child, string message)
   {
     GskRenderNode* _cretval;
-    char* _message = message.toCString(true);
-    _cretval = gsk_debug_node_new(child ? cast(GskRenderNode*)child.cPtr(false) : null, _message);
-    this(_cretval, true);
+    char* _message = message.toCString(Yes.Alloc);
+    _cretval = gsk_debug_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, _message);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -46,7 +46,7 @@ class DebugNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_debug_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class DebugNode : RenderNode
   {
     const(char)* _cretval;
     _cretval = gsk_debug_node_get_message(cast(GskRenderNode*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 }

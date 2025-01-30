@@ -34,9 +34,9 @@ class MediaStream : ObjectG, Paintable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -271,7 +271,7 @@ class MediaStream : ObjectG, Paintable
    */
   void realize(Surface surface)
   {
-    gtk_media_stream_realize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(false) : null);
+    gtk_media_stream_realize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
   }
 
   /**
@@ -422,7 +422,7 @@ class MediaStream : ObjectG, Paintable
    */
   void unrealize(Surface surface)
   {
-    gtk_media_stream_unrealize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(false) : null);
+    gtk_media_stream_unrealize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
   }
 
   /**

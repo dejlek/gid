@@ -14,9 +14,9 @@ class PixbufNonAnim : PixbufAnimation
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -32,7 +32,7 @@ class PixbufNonAnim : PixbufAnimation
   this(Pixbuf pixbuf)
   {
     GdkPixbufAnimation* _cretval;
-    _cretval = gdk_pixbuf_non_anim_new(pixbuf ? cast(PixbufC*)pixbuf.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gdk_pixbuf_non_anim_new(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 }

@@ -20,14 +20,14 @@ import Gid.gid;
 class ToplevelLayout : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -52,7 +52,7 @@ class ToplevelLayout : Boxed
   {
     GdkToplevelLayout* _cretval;
     _cretval = gdk_toplevel_layout_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -63,7 +63,7 @@ class ToplevelLayout : Boxed
   {
     GdkToplevelLayout* _cretval;
     _cretval = gdk_toplevel_layout_copy(cast(GdkToplevelLayout*)cPtr);
-    auto _retval = _cretval ? new ToplevelLayout(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new ToplevelLayout(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class ToplevelLayout : Boxed
   bool equal(ToplevelLayout other)
   {
     bool _retval;
-    _retval = gdk_toplevel_layout_equal(cast(GdkToplevelLayout*)cPtr, other ? cast(GdkToplevelLayout*)other.cPtr(false) : null);
+    _retval = gdk_toplevel_layout_equal(cast(GdkToplevelLayout*)cPtr, other ? cast(GdkToplevelLayout*)other.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class ToplevelLayout : Boxed
   {
     GdkMonitor* _cretval;
     _cretval = gdk_toplevel_layout_get_fullscreen_monitor(cast(GdkToplevelLayout*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!MonitorG(cast(GdkMonitor*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!MonitorG(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class ToplevelLayout : Boxed
    */
   void setFullscreen(bool fullscreen, MonitorG monitor)
   {
-    gdk_toplevel_layout_set_fullscreen(cast(GdkToplevelLayout*)cPtr, fullscreen, monitor ? cast(GdkMonitor*)monitor.cPtr(false) : null);
+    gdk_toplevel_layout_set_fullscreen(cast(GdkToplevelLayout*)cPtr, fullscreen, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }
 
   /**

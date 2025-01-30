@@ -25,9 +25,9 @@ class TreeListRow : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -51,7 +51,7 @@ class TreeListRow : ObjectG
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_row_get_child_row(cast(GtkTreeListRow*)cPtr, position);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeListRow(cast(GtkTreeListRow*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!TreeListRow(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class TreeListRow : ObjectG
   {
     GListModel* _cretval;
     _cretval = gtk_tree_list_row_get_children(cast(GtkTreeListRow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class TreeListRow : ObjectG
   {
     ObjectC* _cretval;
     _cretval = gtk_tree_list_row_get_item(cast(GtkTreeListRow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class TreeListRow : ObjectG
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_row_get_parent(cast(GtkTreeListRow*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TreeListRow(cast(GtkTreeListRow*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!TreeListRow(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 

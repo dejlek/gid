@@ -13,14 +13,14 @@ import Gtk.c.types;
 class Border : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -82,7 +82,7 @@ class Border : Boxed
   {
     GtkBorder* _cretval;
     _cretval = gtk_border_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -93,7 +93,7 @@ class Border : Boxed
   {
     GtkBorder* _cretval;
     _cretval = gtk_border_copy(cast(GtkBorder*)cPtr);
-    auto _retval = _cretval ? new Border(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Border(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

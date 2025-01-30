@@ -28,9 +28,9 @@ class TextTag : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,9 +52,9 @@ class TextTag : ObjectG
   this(string name)
   {
     GtkTextTag* _cretval;
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_text_tag_new(_name);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

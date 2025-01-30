@@ -83,9 +83,9 @@ import Gtk.c.types;
 class InfoBar : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -106,7 +106,7 @@ class InfoBar : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_info_bar_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -121,7 +121,7 @@ class InfoBar : Widget
    */
   void addActionWidget(Widget child, int responseId)
   {
-    gtk_info_bar_add_action_widget(cast(GtkInfoBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(false) : null, responseId);
+    gtk_info_bar_add_action_widget(cast(GtkInfoBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, responseId);
   }
 
   /**
@@ -139,9 +139,9 @@ class InfoBar : Widget
   Button addButton(string buttonText, int responseId)
   {
     GtkWidget* _cretval;
-    const(char)* _buttonText = buttonText.toCString(false);
+    const(char)* _buttonText = buttonText.toCString(No.Alloc);
     _cretval = gtk_info_bar_add_button(cast(GtkInfoBar*)cPtr, _buttonText, responseId);
-    auto _retval = _cretval ? ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class InfoBar : Widget
    */
   void addChild(Widget widget)
   {
-    gtk_info_bar_add_child(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_info_bar_add_child(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -198,7 +198,7 @@ class InfoBar : Widget
    */
   void removeActionWidget(Widget widget)
   {
-    gtk_info_bar_remove_action_widget(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_info_bar_remove_action_widget(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -208,7 +208,7 @@ class InfoBar : Widget
    */
   void removeChild(Widget widget)
   {
-    gtk_info_bar_remove_child(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_info_bar_remove_child(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**

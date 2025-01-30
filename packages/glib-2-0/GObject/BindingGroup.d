@@ -18,9 +18,9 @@ import Gid.gid;
 class BindingGroup : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -41,7 +41,7 @@ class BindingGroup : ObjectG
   {
     GBindingGroup* _cretval;
     _cretval = g_binding_group_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -58,9 +58,9 @@ class BindingGroup : ObjectG
    */
   void bind(string sourceProperty, ObjectG target, string targetProperty, BindingFlags flags)
   {
-    const(char)* _sourceProperty = sourceProperty.toCString(false);
-    const(char)* _targetProperty = targetProperty.toCString(false);
-    g_binding_group_bind(cast(GBindingGroup*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(false) : null, _targetProperty, flags);
+    const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
+    const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
+    g_binding_group_bind(cast(GBindingGroup*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags);
   }
 
   /**
@@ -86,9 +86,9 @@ class BindingGroup : ObjectG
    */
   void bindFull(string sourceProperty, ObjectG target, string targetProperty, BindingFlags flags, Closure transformTo, Closure transformFrom)
   {
-    const(char)* _sourceProperty = sourceProperty.toCString(false);
-    const(char)* _targetProperty = targetProperty.toCString(false);
-    g_binding_group_bind_with_closures(cast(GBindingGroup*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(false) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo.cPtr(false) : null, transformFrom ? cast(GClosure*)transformFrom.cPtr(false) : null);
+    const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
+    const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
+    g_binding_group_bind_with_closures(cast(GBindingGroup*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo.cPtr(No.Dup) : null, transformFrom ? cast(GClosure*)transformFrom.cPtr(No.Dup) : null);
   }
 
   /**
@@ -99,7 +99,7 @@ class BindingGroup : ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_binding_group_dup_source(cast(GBindingGroup*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -114,6 +114,6 @@ class BindingGroup : ObjectG
    */
   void setSource(ObjectG source)
   {
-    g_binding_group_set_source(cast(GBindingGroup*)cPtr, source ? cast(ObjectC*)source.cPtr(false) : null);
+    g_binding_group_set_source(cast(GBindingGroup*)cPtr, source ? cast(ObjectC*)source.cPtr(No.Dup) : null);
   }
 }

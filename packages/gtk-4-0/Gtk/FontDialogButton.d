@@ -38,9 +38,9 @@ class FontDialogButton : Widget
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -65,8 +65,8 @@ class FontDialogButton : Widget
   this(FontDialog dialog)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_font_dialog_button_new(dialog ? cast(GtkFontDialog*)dialog.cPtr(true) : null);
-    this(_cretval, false);
+    _cretval = gtk_font_dialog_button_new(dialog ? cast(GtkFontDialog*)dialog.cPtr(Yes.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -77,7 +77,7 @@ class FontDialogButton : Widget
   {
     GtkFontDialog* _cretval;
     _cretval = gtk_font_dialog_button_get_dialog(cast(GtkFontDialogButton*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!FontDialog(cast(GtkFontDialog*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!FontDialog(cast(GtkFontDialog*)_cretval, No.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class FontDialogButton : Widget
   {
     PangoFontDescription* _cretval;
     _cretval = gtk_font_dialog_button_get_font_desc(cast(GtkFontDialogButton*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class FontDialogButton : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_font_dialog_button_get_font_features(cast(GtkFontDialogButton*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class FontDialogButton : Widget
   {
     PangoLanguage* _cretval;
     _cretval = gtk_font_dialog_button_get_language(cast(GtkFontDialogButton*)cPtr);
-    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class FontDialogButton : Widget
    */
   void setDialog(FontDialog dialog)
   {
-    gtk_font_dialog_button_set_dialog(cast(GtkFontDialogButton*)cPtr, dialog ? cast(GtkFontDialog*)dialog.cPtr(false) : null);
+    gtk_font_dialog_button_set_dialog(cast(GtkFontDialogButton*)cPtr, dialog ? cast(GtkFontDialog*)dialog.cPtr(No.Dup) : null);
   }
 
   /**
@@ -180,7 +180,7 @@ class FontDialogButton : Widget
    */
   void setFontDesc(FontDescription fontDesc)
   {
-    gtk_font_dialog_button_set_font_desc(cast(GtkFontDialogButton*)cPtr, fontDesc ? cast(PangoFontDescription*)fontDesc.cPtr(false) : null);
+    gtk_font_dialog_button_set_font_desc(cast(GtkFontDialogButton*)cPtr, fontDesc ? cast(PangoFontDescription*)fontDesc.cPtr(No.Dup) : null);
   }
 
   /**
@@ -190,7 +190,7 @@ class FontDialogButton : Widget
    */
   void setFontFeatures(string fontFeatures)
   {
-    const(char)* _fontFeatures = fontFeatures.toCString(false);
+    const(char)* _fontFeatures = fontFeatures.toCString(No.Alloc);
     gtk_font_dialog_button_set_font_features(cast(GtkFontDialogButton*)cPtr, _fontFeatures);
   }
 
@@ -201,7 +201,7 @@ class FontDialogButton : Widget
    */
   void setLanguage(PgLanguage language)
   {
-    gtk_font_dialog_button_set_language(cast(GtkFontDialogButton*)cPtr, language ? cast(PangoLanguage*)language.cPtr(false) : null);
+    gtk_font_dialog_button_set_language(cast(GtkFontDialogButton*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
   }
 
   /**

@@ -72,7 +72,7 @@ template TreeSortableT()
     {
       auto _dlg = cast(TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(model ? ObjectG.getDObject!TreeModel(cast(void*)model, false) : null, a ? new TreeIter(cast(void*)a, false) : null, b ? new TreeIter(cast(void*)b, false) : null);
+      int _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), a ? new TreeIter(cast(void*)a, No.Take) : null, b ? new TreeIter(cast(void*)b, No.Take) : null);
       return _retval;
     }
 
@@ -111,7 +111,7 @@ template TreeSortableT()
     {
       auto _dlg = cast(TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(model ? ObjectG.getDObject!TreeModel(cast(void*)model, false) : null, a ? new TreeIter(cast(void*)a, false) : null, b ? new TreeIter(cast(void*)b, false) : null);
+      int _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), a ? new TreeIter(cast(void*)a, No.Take) : null, b ? new TreeIter(cast(void*)b, No.Take) : null);
       return _retval;
     }
 

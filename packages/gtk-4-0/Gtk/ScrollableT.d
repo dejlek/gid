@@ -50,7 +50,7 @@ template ScrollableT()
     bool _retval;
     GtkBorder _border;
     _retval = gtk_scrollable_get_border(cast(GtkScrollable*)cPtr, &_border);
-    border = new Border(cast(void*)&_border, false);
+    border = new Border(cast(void*)&_border, No.Take);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ template ScrollableT()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollable_get_hadjustment(cast(GtkScrollable*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ template ScrollableT()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollable_get_vadjustment(cast(GtkScrollable*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ template ScrollableT()
    */
   override void setHadjustment(Adjustment hadjustment)
   {
-    gtk_scrollable_set_hadjustment(cast(GtkScrollable*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(false) : null);
+    gtk_scrollable_set_hadjustment(cast(GtkScrollable*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -131,7 +131,7 @@ template ScrollableT()
    */
   override void setVadjustment(Adjustment vadjustment)
   {
-    gtk_scrollable_set_vadjustment(cast(GtkScrollable*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(false) : null);
+    gtk_scrollable_set_vadjustment(cast(GtkScrollable*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
   }
 
   /**

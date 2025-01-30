@@ -20,14 +20,14 @@ class TypeInfoG
 {
   GTypeInfo cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.TypeInfoG");
 
     cInstance = *cast(GTypeInfo*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

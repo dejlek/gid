@@ -75,9 +75,9 @@ class Binding : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -102,7 +102,7 @@ class Binding : ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_binding_dup_source(cast(GBinding*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class Binding : ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_binding_dup_target(cast(GBinding*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class Binding : ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_binding_get_source(cast(GBinding*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class Binding : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_binding_get_source_property(cast(GBinding*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class Binding : ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_binding_get_target(cast(GBinding*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class Binding : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_binding_get_target_property(cast(GBinding*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

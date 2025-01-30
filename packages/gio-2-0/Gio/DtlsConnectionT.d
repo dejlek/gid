@@ -61,7 +61,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_close(cast(GDtlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_dtls_connection_close(cast(GDtlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -82,11 +82,11 @@ template DtlsConnectionT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_dtls_connection_close_async(cast(GDtlsConnection*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_dtls_connection_close_async(cast(GDtlsConnection*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -101,7 +101,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_close_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_dtls_connection_close_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -119,7 +119,7 @@ template DtlsConnectionT()
   override bool emitAcceptCertificate(TlsCertificate peerCert, TlsCertificateFlags errors)
   {
     bool _retval;
-    _retval = g_dtls_connection_emit_accept_certificate(cast(GDtlsConnection*)cPtr, peerCert ? cast(GTlsCertificate*)peerCert.cPtr(false) : null, errors);
+    _retval = g_dtls_connection_emit_accept_certificate(cast(GDtlsConnection*)cPtr, peerCert ? cast(GTlsCertificate*)peerCert.cPtr(No.Dup) : null, errors);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ template DtlsConnectionT()
   {
     GTlsCertificate* _cretval;
     _cretval = g_dtls_connection_get_certificate(cast(GDtlsConnection*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TlsCertificate(cast(GTlsCertificate*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TlsCertificate(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ template DtlsConnectionT()
   {
     char* _cretval;
     _cretval = g_dtls_connection_get_ciphersuite_name(cast(GDtlsConnection*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ template DtlsConnectionT()
   {
     GTlsDatabase* _cretval;
     _cretval = g_dtls_connection_get_database(cast(GDtlsConnection*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TlsDatabase(cast(GTlsDatabase*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TlsDatabase(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ template DtlsConnectionT()
   {
     GTlsInteraction* _cretval;
     _cretval = g_dtls_connection_get_interaction(cast(GDtlsConnection*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TlsInteraction(cast(GTlsInteraction*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TlsInteraction(cast(GTlsInteraction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ template DtlsConnectionT()
   {
     const(char)* _cretval;
     _cretval = g_dtls_connection_get_negotiated_protocol(cast(GDtlsConnection*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ template DtlsConnectionT()
   {
     GTlsCertificate* _cretval;
     _cretval = g_dtls_connection_get_peer_certificate(cast(GDtlsConnection*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!TlsCertificate(cast(GTlsCertificate*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!TlsCertificate(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_handshake(cast(GDtlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_dtls_connection_handshake(cast(GDtlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -324,11 +324,11 @@ template DtlsConnectionT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_dtls_connection_handshake_async(cast(GDtlsConnection*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_dtls_connection_handshake_async(cast(GDtlsConnection*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -343,7 +343,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_handshake_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_dtls_connection_handshake_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -367,7 +367,7 @@ template DtlsConnectionT()
   {
     char*[] _tmpprotocols;
     foreach (s; protocols)
-      _tmpprotocols ~= s.toCString(false);
+      _tmpprotocols ~= s.toCString(No.Alloc);
     _tmpprotocols ~= null;
     const(char*)* _protocols = _tmpprotocols.ptr;
     g_dtls_connection_set_advertised_protocols(cast(GDtlsConnection*)cPtr, _protocols);
@@ -395,7 +395,7 @@ template DtlsConnectionT()
    */
   override void setCertificate(TlsCertificate certificate)
   {
-    g_dtls_connection_set_certificate(cast(GDtlsConnection*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(false) : null);
+    g_dtls_connection_set_certificate(cast(GDtlsConnection*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
   }
 
   /**
@@ -414,7 +414,7 @@ template DtlsConnectionT()
    */
   override void setDatabase(TlsDatabase database)
   {
-    g_dtls_connection_set_database(cast(GDtlsConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(false) : null);
+    g_dtls_connection_set_database(cast(GDtlsConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
   }
 
   /**
@@ -428,7 +428,7 @@ template DtlsConnectionT()
    */
   override void setInteraction(TlsInteraction interaction)
   {
-    g_dtls_connection_set_interaction(cast(GDtlsConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(false) : null);
+    g_dtls_connection_set_interaction(cast(GDtlsConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null);
   }
 
   /**
@@ -503,7 +503,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_shutdown(cast(GDtlsConnection*)cPtr, shutdownRead, shutdownWrite, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_dtls_connection_shutdown(cast(GDtlsConnection*)cPtr, shutdownRead, shutdownWrite, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -526,11 +526,11 @@ template DtlsConnectionT()
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_dtls_connection_shutdown_async(cast(GDtlsConnection*)cPtr, shutdownRead, shutdownWrite, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_dtls_connection_shutdown_async(cast(GDtlsConnection*)cPtr, shutdownRead, shutdownWrite, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -545,7 +545,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_shutdown_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, &_err);
+    _retval = g_dtls_connection_shutdown_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

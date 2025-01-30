@@ -37,9 +37,9 @@ import Gtk.c.types;
 class ColorChooserWidget : Widget, ColorChooser
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -62,6 +62,6 @@ class ColorChooserWidget : Widget, ColorChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_chooser_widget_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 }

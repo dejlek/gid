@@ -14,14 +14,14 @@ class DesktopAppInfoLookupIface
 {
   GDesktopAppInfoLookupIface cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.DesktopAppInfoLookupIface");
 
     cInstance = *cast(GDesktopAppInfoLookupIface*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

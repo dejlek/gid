@@ -10,14 +10,14 @@ class FontFamilyClass
 {
   PangoFontFamilyClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.FontFamilyClass");
 
     cInstance = *cast(PangoFontFamilyClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

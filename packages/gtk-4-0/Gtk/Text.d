@@ -75,9 +75,9 @@ import Pango.TabArray;
 class Text : Widget, AccessibleText, Editable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -101,7 +101,7 @@ class Text : Widget, AccessibleText, Editable
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -113,8 +113,8 @@ class Text : Widget, AccessibleText, Editable
   static Text newWithBuffer(EntryBuffer buffer)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_text_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Text(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_text_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Text(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -137,8 +137,8 @@ class Text : Widget, AccessibleText, Editable
     graphene_rect_t _strong;
     graphene_rect_t _weak;
     gtk_text_compute_cursor_extents(cast(GtkText*)cPtr, position, &_strong, &_weak);
-    strong = new Rect(cast(void*)&_strong, false);
-    weak = new Rect(cast(void*)&_weak, false);
+    strong = new Rect(cast(void*)&_strong, No.Take);
+    weak = new Rect(cast(void*)&_weak, No.Take);
   }
 
   /**
@@ -163,7 +163,7 @@ class Text : Widget, AccessibleText, Editable
   {
     PangoAttrList* _cretval;
     _cretval = gtk_text_get_attributes(cast(GtkText*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class Text : Widget, AccessibleText, Editable
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_text_get_buffer(cast(GtkText*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!EntryBuffer(cast(GtkEntryBuffer*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!EntryBuffer(cast(GtkEntryBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class Text : Widget, AccessibleText, Editable
   {
     GMenuModel* _cretval;
     _cretval = gtk_text_get_extra_menu(cast(GtkText*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class Text : Widget, AccessibleText, Editable
   {
     const(char)* _cretval;
     _cretval = gtk_text_get_placeholder_text(cast(GtkText*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class Text : Widget, AccessibleText, Editable
   {
     PangoTabArray* _cretval;
     _cretval = gtk_text_get_tabs(cast(GtkText*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -384,7 +384,7 @@ class Text : Widget, AccessibleText, Editable
    */
   void setAttributes(AttrList attrs)
   {
-    gtk_text_set_attributes(cast(GtkText*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(false) : null);
+    gtk_text_set_attributes(cast(GtkText*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -395,7 +395,7 @@ class Text : Widget, AccessibleText, Editable
    */
   void setBuffer(EntryBuffer buffer)
   {
-    gtk_text_set_buffer(cast(GtkText*)cPtr, buffer ? cast(GtkEntryBuffer*)buffer.cPtr(false) : null);
+    gtk_text_set_buffer(cast(GtkText*)cPtr, buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -419,7 +419,7 @@ class Text : Widget, AccessibleText, Editable
    */
   void setExtraMenu(MenuModel model)
   {
-    gtk_text_set_extra_menu(cast(GtkText*)cPtr, model ? cast(GMenuModel*)model.cPtr(false) : null);
+    gtk_text_set_extra_menu(cast(GtkText*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
 
   /**
@@ -496,7 +496,7 @@ class Text : Widget, AccessibleText, Editable
    */
   void setPlaceholderText(string text)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_text_set_placeholder_text(cast(GtkText*)cPtr, _text);
   }
 
@@ -517,7 +517,7 @@ class Text : Widget, AccessibleText, Editable
    */
   void setTabs(TabArray tabs)
   {
-    gtk_text_set_tabs(cast(GtkText*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(false) : null);
+    gtk_text_set_tabs(cast(GtkText*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
 
   /**

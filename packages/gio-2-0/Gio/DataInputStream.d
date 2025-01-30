@@ -25,9 +25,9 @@ class DataInputStream : BufferedInputStream
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -49,8 +49,8 @@ class DataInputStream : BufferedInputStream
   this(InputStream baseStream)
   {
     GDataInputStream* _cretval;
-    _cretval = g_data_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = g_data_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -88,7 +88,7 @@ class DataInputStream : BufferedInputStream
   {
     ubyte _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_byte(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_input_stream_read_byte(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -107,7 +107,7 @@ class DataInputStream : BufferedInputStream
   {
     short _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_int16(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_input_stream_read_int16(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -129,7 +129,7 @@ class DataInputStream : BufferedInputStream
   {
     int _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_int32(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_input_stream_read_int32(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -151,7 +151,7 @@ class DataInputStream : BufferedInputStream
   {
     long _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_int64(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_input_stream_read_int64(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -175,11 +175,11 @@ class DataInputStream : BufferedInputStream
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_data_input_stream_read_line_async(cast(GDataInputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_data_input_stream_read_line_async(cast(GDataInputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -199,10 +199,10 @@ class DataInputStream : BufferedInputStream
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_data_input_stream_read_line_finish_utf8(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, cast(size_t*)&length, &_err);
+    _cretval = g_data_input_stream_read_line_finish_utf8(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -226,10 +226,10 @@ class DataInputStream : BufferedInputStream
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_data_input_stream_read_line_utf8(cast(GDataInputStream*)cPtr, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_data_input_stream_read_line_utf8(cast(GDataInputStream*)cPtr, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class DataInputStream : BufferedInputStream
   {
     ushort _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_uint16(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_input_stream_read_uint16(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -268,7 +268,7 @@ class DataInputStream : BufferedInputStream
   {
     uint _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_uint32(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_input_stream_read_uint32(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -290,7 +290,7 @@ class DataInputStream : BufferedInputStream
   {
     ulong _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_uint64(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_data_input_stream_read_uint64(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -321,12 +321,12 @@ class DataInputStream : BufferedInputStream
   string readUntil(string stopChars, out size_t length, Cancellable cancellable)
   {
     char* _cretval;
-    const(char)* _stopChars = stopChars.toCString(false);
+    const(char)* _stopChars = stopChars.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_data_input_stream_read_until(cast(GDataInputStream*)cPtr, _stopChars, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_data_input_stream_read_until(cast(GDataInputStream*)cPtr, _stopChars, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -359,12 +359,12 @@ class DataInputStream : BufferedInputStream
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _stopChars = stopChars.toCString(false);
+    const(char)* _stopChars = stopChars.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_data_input_stream_read_until_async(cast(GDataInputStream*)cPtr, _stopChars, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_data_input_stream_read_until_async(cast(GDataInputStream*)cPtr, _stopChars, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -385,10 +385,10 @@ class DataInputStream : BufferedInputStream
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_data_input_stream_read_until_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, cast(size_t*)&length, &_err);
+    _cretval = g_data_input_stream_read_until_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -416,12 +416,12 @@ class DataInputStream : BufferedInputStream
   string readUpto(string stopChars, ptrdiff_t stopCharsLen, out size_t length, Cancellable cancellable)
   {
     char* _cretval;
-    const(char)* _stopChars = stopChars.toCString(false);
+    const(char)* _stopChars = stopChars.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_data_input_stream_read_upto(cast(GDataInputStream*)cPtr, _stopChars, stopCharsLen, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _cretval = g_data_input_stream_read_upto(cast(GDataInputStream*)cPtr, _stopChars, stopCharsLen, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -452,12 +452,12 @@ class DataInputStream : BufferedInputStream
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
-    const(char)* _stopChars = stopChars.toCString(false);
+    const(char)* _stopChars = stopChars.toCString(No.Alloc);
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_data_input_stream_read_upto_async(cast(GDataInputStream*)cPtr, _stopChars, stopCharsLen, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
+    g_data_input_stream_read_upto_async(cast(GDataInputStream*)cPtr, _stopChars, stopCharsLen, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**
@@ -479,10 +479,10 @@ class DataInputStream : BufferedInputStream
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_data_input_stream_read_upto_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, cast(size_t*)&length, &_err);
+    _cretval = g_data_input_stream_read_upto_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 

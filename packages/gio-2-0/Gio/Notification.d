@@ -56,9 +56,9 @@ class Notification : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -84,9 +84,9 @@ class Notification : ObjectG
   this(string title)
   {
     GNotification* _cretval;
-    const(char)* _title = title.toCString(false);
+    const(char)* _title = title.toCString(No.Alloc);
     _cretval = g_notification_new(_title);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -103,8 +103,8 @@ class Notification : ObjectG
    */
   void addButton(string label, string detailedAction)
   {
-    const(char)* _label = label.toCString(false);
-    const(char)* _detailedAction = detailedAction.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
     g_notification_add_button(cast(GNotification*)cPtr, _label, _detailedAction);
   }
 
@@ -120,9 +120,9 @@ class Notification : ObjectG
    */
   void addButtonWithTarget(string label, string action, VariantG target)
   {
-    const(char)* _label = label.toCString(false);
-    const(char)* _action = action.toCString(false);
-    g_notification_add_button_with_target_value(cast(GNotification*)cPtr, _label, _action, target ? cast(VariantC*)target.cPtr(false) : null);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _action = action.toCString(No.Alloc);
+    g_notification_add_button_with_target_value(cast(GNotification*)cPtr, _label, _action, target ? cast(VariantC*)target.cPtr(No.Dup) : null);
   }
 
   /**
@@ -132,7 +132,7 @@ class Notification : ObjectG
    */
   void setBody(string body_)
   {
-    const(char)* _body_ = body_.toCString(false);
+    const(char)* _body_ = body_.toCString(No.Alloc);
     g_notification_set_body(cast(GNotification*)cPtr, _body_);
   }
 
@@ -147,7 +147,7 @@ class Notification : ObjectG
    */
   void setCategory(string category)
   {
-    const(char)* _category = category.toCString(false);
+    const(char)* _category = category.toCString(No.Alloc);
     g_notification_set_category(cast(GNotification*)cPtr, _category);
   }
 
@@ -166,7 +166,7 @@ class Notification : ObjectG
    */
   void setDefaultAction(string detailedAction)
   {
-    const(char)* _detailedAction = detailedAction.toCString(false);
+    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
     g_notification_set_default_action(cast(GNotification*)cPtr, _detailedAction);
   }
 
@@ -184,8 +184,8 @@ class Notification : ObjectG
    */
   void setDefaultActionAndTarget(string action, VariantG target)
   {
-    const(char)* _action = action.toCString(false);
-    g_notification_set_default_action_and_target_value(cast(GNotification*)cPtr, _action, target ? cast(VariantC*)target.cPtr(false) : null);
+    const(char)* _action = action.toCString(No.Alloc);
+    g_notification_set_default_action_and_target_value(cast(GNotification*)cPtr, _action, target ? cast(VariantC*)target.cPtr(No.Dup) : null);
   }
 
   /**
@@ -195,7 +195,7 @@ class Notification : ObjectG
    */
   void setIcon(Icon icon)
   {
-    g_notification_set_icon(cast(GNotification*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(false) : null);
+    g_notification_set_icon(cast(GNotification*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -216,7 +216,7 @@ class Notification : ObjectG
    */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(false);
+    const(char)* _title = title.toCString(No.Alloc);
     g_notification_set_title(cast(GNotification*)cPtr, _title);
   }
 

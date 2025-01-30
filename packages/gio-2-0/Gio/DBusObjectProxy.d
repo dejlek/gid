@@ -22,9 +22,9 @@ class DBusObjectProxy : ObjectG, DBusObject
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,9 +50,9 @@ class DBusObjectProxy : ObjectG, DBusObject
   this(DBusConnection connection, string objectPath)
   {
     GDBusObjectProxy* _cretval;
-    const(char)* _objectPath = objectPath.toCString(false);
-    _cretval = g_dbus_object_proxy_new(connection ? cast(GDBusConnection*)connection.cPtr(false) : null, _objectPath);
-    this(_cretval, true);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    _cretval = g_dbus_object_proxy_new(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _objectPath);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -64,7 +64,7 @@ class DBusObjectProxy : ObjectG, DBusObject
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_object_proxy_get_connection(cast(GDBusObjectProxy*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 }

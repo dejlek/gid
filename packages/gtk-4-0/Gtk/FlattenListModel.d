@@ -22,9 +22,9 @@ class FlattenListModel : ObjectG, ListModel, SectionModel
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -49,8 +49,8 @@ class FlattenListModel : ObjectG, ListModel, SectionModel
   this(ListModel model)
   {
     GtkFlattenListModel* _cretval;
-    _cretval = gtk_flatten_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(true) : null);
-    this(_cretval, true);
+    _cretval = gtk_flatten_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -61,7 +61,7 @@ class FlattenListModel : ObjectG, ListModel, SectionModel
   {
     GListModel* _cretval;
     _cretval = gtk_flatten_list_model_get_model(cast(GtkFlattenListModel*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class FlattenListModel : ObjectG, ListModel, SectionModel
   {
     GListModel* _cretval;
     _cretval = gtk_flatten_list_model_get_model_for_item(cast(GtkFlattenListModel*)cPtr, position);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -86,6 +86,6 @@ class FlattenListModel : ObjectG, ListModel, SectionModel
    */
   void setModel(ListModel model)
   {
-    gtk_flatten_list_model_set_model(cast(GtkFlattenListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_flatten_list_model_set_model(cast(GtkFlattenListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 }

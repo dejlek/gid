@@ -17,9 +17,9 @@ class CustomFilter : Filter
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -48,14 +48,14 @@ class CustomFilter : Filter
     {
       auto _dlg = cast(CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(item ? ObjectG.getDObject!ObjectG(cast(void*)item, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, No.Take));
       return _retval;
     }
 
     GtkCustomFilter* _cretval;
     auto _matchFunc = freezeDelegate(cast(void*)&matchFunc);
     _cretval = gtk_custom_filter_new(&_matchFuncCallback, _matchFunc, &thawDelegate);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -74,7 +74,7 @@ class CustomFilter : Filter
     {
       auto _dlg = cast(CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(item ? ObjectG.getDObject!ObjectG(cast(void*)item, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, No.Take));
       return _retval;
     }
 

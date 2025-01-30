@@ -30,9 +30,9 @@ template DBusObjectT()
   override DBusInterface getInterface(string interfaceName)
   {
     GDBusInterface* _cretval;
-    const(char)* _interfaceName = interfaceName.toCString(false);
+    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     _cretval = g_dbus_object_get_interface(cast(GDBusObject*)cPtr, _interfaceName);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusInterface(cast(GDBusInterface*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!DBusInterface(cast(GDBusInterface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ template DBusObjectT()
   {
     const(char)* _cretval;
     _cretval = g_dbus_object_get_object_path(cast(GDBusObject*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

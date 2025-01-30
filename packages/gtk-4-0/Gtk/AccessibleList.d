@@ -15,14 +15,14 @@ import Gtk.c.types;
 class AccessibleList : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -53,7 +53,7 @@ class AccessibleList : Boxed
       _tmpaccessibles ~= obj ? cast(GtkAccessible*)(cast(ObjectG)obj).cPtr : null;
     GtkAccessible** _accessibles = _tmpaccessibles.ptr;
     _cretval = gtk_accessible_list_new_from_array(_accessibles, _nAccessibles);
-    auto _retval = _cretval ? new AccessibleList(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new AccessibleList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class AccessibleList : Boxed
     auto _list = gListFromD!(Accessible)(list);
     scope(exit) containerFree!(GList*, Accessible, GidOwnership.None)(_list);
     _cretval = gtk_accessible_list_new_from_list(_list);
-    auto _retval = _cretval ? new AccessibleList(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new AccessibleList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

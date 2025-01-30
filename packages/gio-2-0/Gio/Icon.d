@@ -52,8 +52,8 @@ interface Icon
   static Icon deserialize(VariantG value)
   {
     GIcon* _cretval;
-    _cretval = g_icon_deserialize(value ? cast(VariantC*)value.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Icon(cast(GIcon*)_cretval, true) : null;
+    _cretval = g_icon_deserialize(value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -71,12 +71,12 @@ interface Icon
   static Icon newForString(string str)
   {
     GIcon* _cretval;
-    const(char)* _str = str.toCString(false);
+    const(char)* _str = str.toCString(No.Alloc);
     GError *_err;
     _cretval = g_icon_new_for_string(_str, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? ObjectG.getDObject!Icon(cast(GIcon*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 

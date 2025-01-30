@@ -31,9 +31,9 @@ class AppLaunchContext : DGioAppLaunchContext
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -54,7 +54,7 @@ class AppLaunchContext : DGioAppLaunchContext
   {
     GdkDisplay* _cretval;
     _cretval = gdk_app_launch_context_get_display(cast(GdkAppLaunchContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class AppLaunchContext : DGioAppLaunchContext
    */
   void setIcon(Icon icon)
   {
-    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(false) : null);
+    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -104,7 +104,7 @@ class AppLaunchContext : DGioAppLaunchContext
    */
   void setIconName(string iconName)
   {
-    const(char)* _iconName = iconName.toCString(false);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gdk_app_launch_context_set_icon_name(cast(GdkAppLaunchContext*)cPtr, _iconName);
   }
 

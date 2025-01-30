@@ -77,9 +77,9 @@ import Gtk.c.types;
 class ToggleButton : Button
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -101,7 +101,7 @@ class ToggleButton : Button
   {
     GtkWidget* _cretval;
     _cretval = gtk_toggle_button_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -113,9 +113,9 @@ class ToggleButton : Button
   static ToggleButton newWithLabel(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_toggle_button_new_with_label(_label);
-    auto _retval = _cretval ? ObjectG.getDObject!ToggleButton(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ToggleButton(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -131,9 +131,9 @@ class ToggleButton : Button
   static ToggleButton newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(false);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_toggle_button_new_with_mnemonic(_label);
-    auto _retval = _cretval ? ObjectG.getDObject!ToggleButton(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ToggleButton(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class ToggleButton : Button
    */
   void setGroup(ToggleButton group)
   {
-    gtk_toggle_button_set_group(cast(GtkToggleButton*)cPtr, group ? cast(GtkToggleButton*)group.cPtr(false) : null);
+    gtk_toggle_button_set_group(cast(GtkToggleButton*)cPtr, group ? cast(GtkToggleButton*)group.cPtr(No.Dup) : null);
   }
 
   /**

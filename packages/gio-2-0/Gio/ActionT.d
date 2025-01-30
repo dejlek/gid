@@ -51,7 +51,7 @@ template ActionT()
    */
   override void activate(VariantG parameter)
   {
-    g_action_activate(cast(GAction*)cPtr, parameter ? cast(VariantC*)parameter.cPtr(false) : null);
+    g_action_activate(cast(GAction*)cPtr, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -67,7 +67,7 @@ template ActionT()
    */
   override void changeState(VariantG value)
   {
-    g_action_change_state(cast(GAction*)cPtr, value ? cast(VariantC*)value.cPtr(false) : null);
+    g_action_change_state(cast(GAction*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -91,7 +91,7 @@ template ActionT()
   {
     const(char)* _cretval;
     _cretval = g_action_get_name(cast(GAction*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ template ActionT()
   {
     const(GVariantType)* _cretval;
     _cretval = g_action_get_parameter_type(cast(GAction*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -125,7 +125,7 @@ template ActionT()
   {
     VariantC* _cretval;
     _cretval = g_action_get_state(cast(GAction*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -150,7 +150,7 @@ template ActionT()
   {
     VariantC* _cretval;
     _cretval = g_action_get_state_hint(cast(GAction*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -171,7 +171,7 @@ template ActionT()
   {
     const(GVariantType)* _cretval;
     _cretval = g_action_get_state_type(cast(GAction*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

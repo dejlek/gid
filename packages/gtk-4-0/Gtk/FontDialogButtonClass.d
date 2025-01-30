@@ -10,14 +10,14 @@ class FontDialogButtonClass
 {
   GtkFontDialogButtonClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.FontDialogButtonClass");
 
     cInstance = *cast(GtkFontDialogButtonClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

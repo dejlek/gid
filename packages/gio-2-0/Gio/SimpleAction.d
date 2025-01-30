@@ -23,9 +23,9 @@ class SimpleAction : ObjectG, Action
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -53,9 +53,9 @@ class SimpleAction : ObjectG, Action
   this(string name, VariantType parameterType)
   {
     GSimpleAction* _cretval;
-    const(char)* _name = name.toCString(false);
-    _cretval = g_simple_action_new(_name, parameterType ? cast(GVariantType*)parameterType.cPtr(false) : null);
-    this(_cretval, true);
+    const(char)* _name = name.toCString(No.Alloc);
+    _cretval = g_simple_action_new(_name, parameterType ? cast(GVariantType*)parameterType.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -73,9 +73,9 @@ class SimpleAction : ObjectG, Action
   static SimpleAction newStateful(string name, VariantType parameterType, VariantG state)
   {
     GSimpleAction* _cretval;
-    const(char)* _name = name.toCString(false);
-    _cretval = g_simple_action_new_stateful(_name, parameterType ? cast(GVariantType*)parameterType.cPtr(false) : null, state ? cast(VariantC*)state.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!SimpleAction(cast(GSimpleAction*)_cretval, true) : null;
+    const(char)* _name = name.toCString(No.Alloc);
+    _cretval = g_simple_action_new_stateful(_name, parameterType ? cast(GVariantType*)parameterType.cPtr(No.Dup) : null, state ? cast(VariantC*)state.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!SimpleAction(cast(GSimpleAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class SimpleAction : ObjectG, Action
    */
   void setState(VariantG value)
   {
-    g_simple_action_set_state(cast(GSimpleAction*)cPtr, value ? cast(VariantC*)value.cPtr(false) : null);
+    g_simple_action_set_state(cast(GSimpleAction*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -118,7 +118,7 @@ class SimpleAction : ObjectG, Action
    */
   void setStateHint(VariantG stateHint)
   {
-    g_simple_action_set_state_hint(cast(GSimpleAction*)cPtr, stateHint ? cast(VariantC*)stateHint.cPtr(false) : null);
+    g_simple_action_set_state_hint(cast(GSimpleAction*)cPtr, stateHint ? cast(VariantC*)stateHint.cPtr(No.Dup) : null);
   }
 
   /**

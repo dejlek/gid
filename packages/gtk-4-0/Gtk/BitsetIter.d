@@ -19,17 +19,17 @@ class BitsetIter : Boxed
 
   this()
   {
-    super(safeMalloc(GtkBitsetIter.sizeof), true);
+    super(safeMalloc(GtkBitsetIter.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -111,8 +111,8 @@ class BitsetIter : Boxed
   {
     bool _retval;
     GtkBitsetIter _iter;
-    _retval = gtk_bitset_iter_init_at(&_iter, set ? cast(GtkBitset*)set.cPtr(false) : null, target, cast(uint*)&value);
-    iter = new BitsetIter(cast(void*)&_iter, false);
+    _retval = gtk_bitset_iter_init_at(&_iter, set ? cast(GtkBitset*)set.cPtr(No.Dup) : null, target, cast(uint*)&value);
+    iter = new BitsetIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -130,8 +130,8 @@ class BitsetIter : Boxed
   {
     bool _retval;
     GtkBitsetIter _iter;
-    _retval = gtk_bitset_iter_init_first(&_iter, set ? cast(GtkBitset*)set.cPtr(false) : null, cast(uint*)&value);
-    iter = new BitsetIter(cast(void*)&_iter, false);
+    _retval = gtk_bitset_iter_init_first(&_iter, set ? cast(GtkBitset*)set.cPtr(No.Dup) : null, cast(uint*)&value);
+    iter = new BitsetIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -149,8 +149,8 @@ class BitsetIter : Boxed
   {
     bool _retval;
     GtkBitsetIter _iter;
-    _retval = gtk_bitset_iter_init_last(&_iter, set ? cast(GtkBitset*)set.cPtr(false) : null, cast(uint*)&value);
-    iter = new BitsetIter(cast(void*)&_iter, false);
+    _retval = gtk_bitset_iter_init_last(&_iter, set ? cast(GtkBitset*)set.cPtr(No.Dup) : null, cast(uint*)&value);
+    iter = new BitsetIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 }

@@ -34,9 +34,9 @@ class UnixSocketAddress : SocketAddress
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -60,9 +60,9 @@ class UnixSocketAddress : SocketAddress
   this(string path)
   {
     GSocketAddress* _cretval;
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_unix_socket_address_new(_path);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -83,7 +83,7 @@ class UnixSocketAddress : SocketAddress
 
     auto _path = cast(const(char)*)path.ptr;
     _cretval = g_unix_socket_address_new_abstract(_path, _pathLen);
-    auto _retval = _cretval ? ObjectG.getDObject!UnixSocketAddress(cast(GSocketAddress*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!UnixSocketAddress(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class UnixSocketAddress : SocketAddress
 
     auto _path = cast(const(char)*)path.ptr;
     _cretval = g_unix_socket_address_new_with_type(_path, _pathLen, type);
-    auto _retval = _cretval ? ObjectG.getDObject!UnixSocketAddress(cast(GSocketAddress*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!UnixSocketAddress(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class UnixSocketAddress : SocketAddress
   {
     const(char)* _cretval;
     _cretval = g_unix_socket_address_get_path(cast(GUnixSocketAddress*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 

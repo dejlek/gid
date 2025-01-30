@@ -18,9 +18,9 @@ class TlsPassword : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -43,9 +43,9 @@ class TlsPassword : ObjectG
   this(TlsPasswordFlags flags, string description)
   {
     GTlsPassword* _cretval;
-    const(char)* _description = description.toCString(false);
+    const(char)* _description = description.toCString(No.Alloc);
     _cretval = g_tls_password_new(flags, _description);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -56,7 +56,7 @@ class TlsPassword : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_tls_password_get_description(cast(GTlsPassword*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class TlsPassword : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_tls_password_get_warning(cast(GTlsPassword*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class TlsPassword : ObjectG
    */
   void setDescription(string description)
   {
-    const(char)* _description = description.toCString(false);
+    const(char)* _description = description.toCString(No.Alloc);
     g_tls_password_set_description(cast(GTlsPassword*)cPtr, _description);
   }
 
@@ -188,7 +188,7 @@ class TlsPassword : ObjectG
    */
   void setWarning(string warning)
   {
-    const(char)* _warning = warning.toCString(false);
+    const(char)* _warning = warning.toCString(No.Alloc);
     g_tls_password_set_warning(cast(GTlsPassword*)cPtr, _warning);
   }
 }

@@ -15,14 +15,14 @@ class PixbufAnimationClass
 {
   GdkPixbufAnimationClass cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GdkPixbuf.PixbufAnimationClass");
 
     cInstance = *cast(GdkPixbufAnimationClass*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

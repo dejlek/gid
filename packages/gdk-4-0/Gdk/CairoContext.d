@@ -21,9 +21,9 @@ class CairoContext : DrawContext
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,7 +50,7 @@ class CairoContext : DrawContext
   {
     cairo_t* _cretval;
     _cretval = gdk_cairo_context_cairo_create(cast(GdkCairoContext*)cPtr);
-    auto _retval = _cretval ? new Context(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

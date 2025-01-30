@@ -25,9 +25,9 @@ class ConverterInputStream : FilterInputStream, PollableInputStream
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -52,8 +52,8 @@ class ConverterInputStream : FilterInputStream, PollableInputStream
   this(InputStream baseStream, Converter converter)
   {
     GInputStream* _cretval;
-    _cretval = g_converter_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(false) : null, converter ? cast(GConverter*)(cast(ObjectG)converter).cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = g_converter_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null, converter ? cast(GConverter*)(cast(ObjectG)converter).cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -64,7 +64,7 @@ class ConverterInputStream : FilterInputStream, PollableInputStream
   {
     GConverter* _cretval;
     _cretval = g_converter_input_stream_get_converter(cast(GConverterInputStream*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Converter(cast(GConverter*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Converter(cast(GConverter*)_cretval, No.Take);
     return _retval;
   }
 }

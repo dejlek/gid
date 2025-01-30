@@ -38,9 +38,9 @@ template DesktopAppInfoLookupT()
   override AppInfo getDefaultForUriScheme(string uriScheme)
   {
     GAppInfo* _cretval;
-    const(char)* _uriScheme = uriScheme.toCString(false);
+    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
     _cretval = g_desktop_app_info_lookup_get_default_for_uri_scheme(cast(GDesktopAppInfoLookup*)cPtr, _uriScheme);
-    auto _retval = _cretval ? ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 }

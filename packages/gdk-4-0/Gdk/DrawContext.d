@@ -24,9 +24,9 @@ class DrawContext : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -65,7 +65,7 @@ class DrawContext : ObjectG
    */
   void beginFrame(Region region)
   {
-    gdk_draw_context_begin_frame(cast(GdkDrawContext*)cPtr, region ? cast(cairo_region_t*)region.cPtr(false) : null);
+    gdk_draw_context_begin_frame(cast(GdkDrawContext*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -89,7 +89,7 @@ class DrawContext : ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_draw_context_get_display(cast(GdkDrawContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class DrawContext : ObjectG
   {
     const(cairo_region_t)* _cretval;
     _cretval = gdk_draw_context_get_frame_region(cast(GdkDrawContext*)cPtr);
-    auto _retval = _cretval ? new Region(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new Region(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class DrawContext : ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_draw_context_get_surface(cast(GdkDrawContext*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

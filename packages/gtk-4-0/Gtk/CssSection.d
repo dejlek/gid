@@ -18,14 +18,14 @@ import Gtk.c.types;
 class CssSection : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -51,8 +51,8 @@ class CssSection : Boxed
   this(File file, CssLocation start, CssLocation end)
   {
     GtkCssSection* _cretval;
-    _cretval = gtk_css_section_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(false) : null, &start, &end);
-    this(_cretval, true);
+    _cretval = gtk_css_section_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &start, &end);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -81,7 +81,7 @@ class CssSection : Boxed
   {
     GFile* _cretval;
     _cretval = gtk_css_section_get_file(cast(GtkCssSection*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class CssSection : Boxed
   {
     GtkCssSection* _cretval;
     _cretval = gtk_css_section_get_parent(cast(GtkCssSection*)cPtr);
-    auto _retval = _cretval ? new CssSection(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new CssSection(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class CssSection : Boxed
    */
   void print(String string_)
   {
-    gtk_css_section_print(cast(GtkCssSection*)cPtr, string_ ? cast(GString*)string_.cPtr(false) : null);
+    gtk_css_section_print(cast(GtkCssSection*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -139,7 +139,7 @@ class CssSection : Boxed
   {
     char* _cretval;
     _cretval = gtk_css_section_to_string(cast(GtkCssSection*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 }

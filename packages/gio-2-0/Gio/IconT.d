@@ -49,7 +49,7 @@ template IconT()
   override bool equal(Icon icon2)
   {
     bool _retval;
-    _retval = g_icon_equal(cast(GIcon*)cPtr, icon2 ? cast(GIcon*)(cast(ObjectG)icon2).cPtr(false) : null);
+    _retval = g_icon_equal(cast(GIcon*)cPtr, icon2 ? cast(GIcon*)(cast(ObjectG)icon2).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ template IconT()
   {
     VariantC* _cretval;
     _cretval = g_icon_serialize(cast(GIcon*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -102,7 +102,7 @@ template IconT()
   {
     char* _cretval;
     _cretval = g_icon_to_string(cast(GIcon*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 }

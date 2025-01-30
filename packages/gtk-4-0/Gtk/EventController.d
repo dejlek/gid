@@ -28,9 +28,9 @@ class EventController : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -53,7 +53,7 @@ class EventController : ObjectG
   {
     GdkEvent* _cretval;
     _cretval = gtk_event_controller_get_current_event(cast(GtkEventController*)cPtr);
-    auto _retval = _cretval ? new Event(cast(GdkEvent*)_cretval, false) : null;
+    auto _retval = _cretval ? new Event(cast(GdkEvent*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class EventController : ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gtk_event_controller_get_current_event_device(cast(GtkEventController*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class EventController : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_event_controller_get_name(cast(GtkEventController*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class EventController : ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_event_controller_get_widget(cast(GtkEventController*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class EventController : ObjectG
    */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_event_controller_set_name(cast(GtkEventController*)cPtr, _name);
   }
 
@@ -198,7 +198,7 @@ class EventController : ObjectG
    */
   void setStaticName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_event_controller_set_static_name(cast(GtkEventController*)cPtr, _name);
   }
 }

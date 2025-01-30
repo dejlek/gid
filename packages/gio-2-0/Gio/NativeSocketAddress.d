@@ -20,9 +20,9 @@ class NativeSocketAddress : SocketAddress
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -46,6 +46,6 @@ class NativeSocketAddress : SocketAddress
   {
     GSocketAddress* _cretval;
     _cretval = g_native_socket_address_new(native, len);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

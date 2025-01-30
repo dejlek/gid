@@ -52,7 +52,7 @@ template AccessibleT()
    */
   override void announce(string message, AccessibleAnnouncementPriority priority)
   {
-    const(char)* _message = message.toCString(false);
+    const(char)* _message = message.toCString(No.Alloc);
     gtk_accessible_announce(cast(GtkAccessible*)cPtr, _message, priority);
   }
 
@@ -65,7 +65,7 @@ template AccessibleT()
   {
     GtkAccessible* _cretval;
     _cretval = gtk_accessible_get_accessible_parent(cast(GtkAccessible*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Accessible(cast(GtkAccessible*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Accessible(cast(GtkAccessible*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ template AccessibleT()
   {
     GtkATContext* _cretval;
     _cretval = gtk_accessible_get_at_context(cast(GtkAccessible*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ATContext(cast(GtkATContext*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!ATContext(cast(GtkATContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ template AccessibleT()
   {
     GtkAccessible* _cretval;
     _cretval = gtk_accessible_get_first_accessible_child(cast(GtkAccessible*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Accessible(cast(GtkAccessible*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Accessible(cast(GtkAccessible*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ template AccessibleT()
   {
     GtkAccessible* _cretval;
     _cretval = gtk_accessible_get_next_accessible_sibling(cast(GtkAccessible*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Accessible(cast(GtkAccessible*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!Accessible(cast(GtkAccessible*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ template AccessibleT()
    */
   override void setAccessibleParent(Accessible parent, Accessible nextSibling)
   {
-    gtk_accessible_set_accessible_parent(cast(GtkAccessible*)cPtr, parent ? cast(GtkAccessible*)(cast(ObjectG)parent).cPtr(false) : null, nextSibling ? cast(GtkAccessible*)(cast(ObjectG)nextSibling).cPtr(false) : null);
+    gtk_accessible_set_accessible_parent(cast(GtkAccessible*)cPtr, parent ? cast(GtkAccessible*)(cast(ObjectG)parent).cPtr(No.Dup) : null, nextSibling ? cast(GtkAccessible*)(cast(ObjectG)nextSibling).cPtr(No.Dup) : null);
   }
 
   /**
@@ -210,7 +210,7 @@ template AccessibleT()
    */
   override void updateNextAccessibleSibling(Accessible newSibling)
   {
-    gtk_accessible_update_next_accessible_sibling(cast(GtkAccessible*)cPtr, newSibling ? cast(GtkAccessible*)(cast(ObjectG)newSibling).cPtr(false) : null);
+    gtk_accessible_update_next_accessible_sibling(cast(GtkAccessible*)cPtr, newSibling ? cast(GtkAccessible*)(cast(ObjectG)newSibling).cPtr(No.Dup) : null);
   }
 
   /**

@@ -81,9 +81,9 @@ import cairo.Context;
 class DrawingArea : Widget
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -104,7 +104,7 @@ class DrawingArea : Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_drawing_area_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -181,7 +181,7 @@ class DrawingArea : Widget
     {
       auto _dlg = cast(DrawingAreaDrawFunc*)userData;
 
-      (*_dlg)(drawingArea ? ObjectG.getDObject!DrawingArea(cast(void*)drawingArea, false) : null, cr ? new Context(cast(void*)cr, false) : null, width, height);
+      (*_dlg)(ObjectG.getDObject!DrawingArea(cast(void*)drawingArea, No.Take), cr ? new Context(cast(void*)cr, No.Take) : null, width, height);
     }
 
     auto _drawFunc = freezeDelegate(cast(void*)&drawFunc);

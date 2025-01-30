@@ -12,12 +12,12 @@ import Gsk.c.types;
 class CrossFadeNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.CrossFadeNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -32,8 +32,8 @@ class CrossFadeNode : RenderNode
   this(RenderNode start, RenderNode end, float progress)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_cross_fade_node_new(start ? cast(GskRenderNode*)start.cPtr(false) : null, end ? cast(GskRenderNode*)end.cPtr(false) : null, progress);
-    this(_cretval, true);
+    _cretval = gsk_cross_fade_node_new(start ? cast(GskRenderNode*)start.cPtr(No.Dup) : null, end ? cast(GskRenderNode*)end.cPtr(No.Dup) : null, progress);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -44,7 +44,7 @@ class CrossFadeNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_cross_fade_node_get_end_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class CrossFadeNode : RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_cross_fade_node_get_start_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, false) : null;
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 }

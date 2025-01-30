@@ -32,14 +32,14 @@ import cairo.c.types;
 class Surface : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -93,7 +93,7 @@ class Surface : Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_for_rectangle(cast(cairo_surface_t*)cPtr, x, y, width, height);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class Surface : Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_observer(cast(cairo_surface_t*)cPtr, mode);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Surface : Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_similar(cast(cairo_surface_t*)cPtr, content, width, height);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class Surface : Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_similar_image(cast(cairo_surface_t*)cPtr, format, width, height);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class Surface : Boxed
   {
     cairo_device_t* _cretval;
     _cretval = cairo_surface_get_device(cast(cairo_surface_t*)cPtr);
-    auto _retval = _cretval ? new Device(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Device(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class Surface : Boxed
    */
   void getFontOptions(FontOptions options)
   {
-    cairo_surface_get_font_options(cast(cairo_surface_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(false) : null);
+    cairo_surface_get_font_options(cast(cairo_surface_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
   }
 
   /**
@@ -303,7 +303,7 @@ class Surface : Boxed
    */
   void getMimeData(string mimeType, out ubyte[] data)
   {
-    const(char)* _mimeType = mimeType.toCString(false);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     ulong _length;
     const(ubyte)* _data;
     cairo_surface_get_mime_data(cast(cairo_surface_t*)cPtr, _mimeType, &_data, &_length);
@@ -385,8 +385,8 @@ class Surface : Boxed
   Surface mapToImage(RectangleInt extents)
   {
     cairo_surface_t* _cretval;
-    _cretval = cairo_surface_map_to_image(cast(cairo_surface_t*)cPtr, extents ? cast(cairo_rectangle_int_t*)extents.cPtr(false) : null);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, true) : null;
+    _cretval = cairo_surface_map_to_image(cast(cairo_surface_t*)cPtr, extents ? cast(cairo_rectangle_int_t*)extents.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -573,7 +573,7 @@ class Surface : Boxed
     }
 
     cairo_status_t _cretval;
-    const(char)* _mimeType = mimeType.toCString(false);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     ulong _length;
     if (data)
       _length = cast(ulong)data.length;
@@ -622,7 +622,7 @@ class Surface : Boxed
   Bool supportsMimeType(string mimeType)
   {
     Bool _retval;
-    const(char)* _mimeType = mimeType.toCString(false);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     _retval = cairo_surface_supports_mime_type(cast(cairo_surface_t*)cPtr, _mimeType);
     return _retval;
   }
@@ -638,7 +638,7 @@ class Surface : Boxed
    */
   void unmapImage(Surface image)
   {
-    cairo_surface_unmap_image(cast(cairo_surface_t*)cPtr, image ? cast(cairo_surface_t*)image.cPtr(false) : null);
+    cairo_surface_unmap_image(cast(cairo_surface_t*)cPtr, image ? cast(cairo_surface_t*)image.cPtr(No.Dup) : null);
   }
 
   /**
@@ -658,7 +658,7 @@ class Surface : Boxed
   Status writeToPng(string filename)
   {
     cairo_status_t _cretval;
-    const(char)* _filename = filename.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = cairo_surface_write_to_png(cast(cairo_surface_t*)cPtr, _filename);
     Status _retval = cast(Status)_cretval;
     return _retval;

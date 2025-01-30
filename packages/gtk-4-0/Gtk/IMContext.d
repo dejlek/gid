@@ -45,9 +45,9 @@ class IMContext : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -72,7 +72,7 @@ class IMContext : ObjectG
   bool activateOsk(Event event)
   {
     bool _retval;
-    _retval = gtk_im_context_activate_osk(cast(GtkIMContext*)cPtr, event ? cast(GdkEvent*)event.cPtr(false) : null);
+    _retval = gtk_im_context_activate_osk(cast(GtkIMContext*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class IMContext : ObjectG
   bool filterKey(bool press, Surface surface, Device device, uint time, uint keycode, ModifierType state, int group)
   {
     bool _retval;
-    _retval = gtk_im_context_filter_key(cast(GtkIMContext*)cPtr, press, surface ? cast(GdkSurface*)surface.cPtr(false) : null, device ? cast(GdkDevice*)device.cPtr(false) : null, time, keycode, state, group);
+    _retval = gtk_im_context_filter_key(cast(GtkIMContext*)cPtr, press, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, time, keycode, state, group);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class IMContext : ObjectG
   bool filterKeypress(Event event)
   {
     bool _retval;
-    _retval = gtk_im_context_filter_keypress(cast(GtkIMContext*)cPtr, event ? cast(GdkEvent*)event.cPtr(false) : null);
+    _retval = gtk_im_context_filter_keypress(cast(GtkIMContext*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -181,8 +181,8 @@ class IMContext : ObjectG
     char* _str;
     PangoAttrList* _attrs;
     gtk_im_context_get_preedit_string(cast(GtkIMContext*)cPtr, &_str, &_attrs, cast(int*)&cursorPos);
-    str = _str.fromCString(true);
-    attrs = new AttrList(cast(void*)_attrs, true);
+    str = _str.fromCString(Yes.Free);
+    attrs = new AttrList(cast(void*)_attrs, Yes.Take);
   }
 
   /**
@@ -215,7 +215,7 @@ class IMContext : ObjectG
     bool _retval;
     char* _text;
     _retval = gtk_im_context_get_surrounding(cast(GtkIMContext*)cPtr, &_text, cast(int*)&cursorIndex);
-    text = _text.fromCString(true);
+    text = _text.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class IMContext : ObjectG
     bool _retval;
     char* _text;
     _retval = gtk_im_context_get_surrounding_with_selection(cast(GtkIMContext*)cPtr, &_text, cast(int*)&cursorIndex, cast(int*)&anchorIndex);
-    text = _text.fromCString(true);
+    text = _text.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class IMContext : ObjectG
    */
   void setClientWidget(Widget widget)
   {
-    gtk_im_context_set_client_widget(cast(GtkIMContext*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_im_context_set_client_widget(cast(GtkIMContext*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -286,7 +286,7 @@ class IMContext : ObjectG
    */
   void setCursorLocation(Rectangle area)
   {
-    gtk_im_context_set_cursor_location(cast(GtkIMContext*)cPtr, area ? cast(GdkRectangle*)area.cPtr(false) : null);
+    gtk_im_context_set_cursor_location(cast(GtkIMContext*)cPtr, area ? cast(GdkRectangle*)area.cPtr(No.Dup) : null);
   }
 
   /**
@@ -305,7 +305,7 @@ class IMContext : ObjectG
    */
   void setSurrounding(string text, int len, int cursorIndex)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_im_context_set_surrounding(cast(GtkIMContext*)cPtr, _text, len, cursorIndex);
   }
 
@@ -323,7 +323,7 @@ class IMContext : ObjectG
    */
   void setSurroundingWithSelection(string text, int len, int cursorIndex, int anchorIndex)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_im_context_set_surrounding_with_selection(cast(GtkIMContext*)cPtr, _text, len, cursorIndex, anchorIndex);
   }
 

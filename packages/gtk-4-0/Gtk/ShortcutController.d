@@ -51,9 +51,9 @@ import Gtk.c.types;
 class ShortcutController : EventController, ListModel, Buildable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -77,7 +77,7 @@ class ShortcutController : EventController, ListModel, Buildable
   {
     GtkEventController* _cretval;
     _cretval = gtk_shortcut_controller_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -93,8 +93,8 @@ class ShortcutController : EventController, ListModel, Buildable
   static ShortcutController newForModel(ListModel model)
   {
     GtkEventController* _cretval;
-    _cretval = gtk_shortcut_controller_new_for_model(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!ShortcutController(cast(GtkEventController*)_cretval, true) : null;
+    _cretval = gtk_shortcut_controller_new_for_model(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!ShortcutController(cast(GtkEventController*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class ShortcutController : EventController, ListModel, Buildable
    */
   void addShortcut(Shortcut shortcut)
   {
-    gtk_shortcut_controller_add_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(true) : null);
+    gtk_shortcut_controller_add_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -144,7 +144,7 @@ class ShortcutController : EventController, ListModel, Buildable
    */
   void removeShortcut(Shortcut shortcut)
   {
-    gtk_shortcut_controller_remove_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(false) : null);
+    gtk_shortcut_controller_remove_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(No.Dup) : null);
   }
 
   /**

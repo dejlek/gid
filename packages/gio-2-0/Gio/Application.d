@@ -133,9 +133,9 @@ class Application : ObjectG, ActionGroup, ActionMap
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -165,9 +165,9 @@ class Application : ObjectG, ActionGroup, ActionMap
   this(string applicationId, ApplicationFlags flags)
   {
     GApplication* _cretval;
-    const(char)* _applicationId = applicationId.toCString(false);
+    const(char)* _applicationId = applicationId.toCString(No.Alloc);
     _cretval = g_application_new(_applicationId, flags);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -182,7 +182,7 @@ class Application : ObjectG, ActionGroup, ActionMap
   {
     GApplication* _cretval;
     _cretval = g_application_get_default();
-    auto _retval = _cretval ? ObjectG.getDObject!Application(cast(GApplication*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Application(cast(GApplication*)_cretval, No.Take);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Application : ObjectG, ActionGroup, ActionMap
   static bool idIsValid(string applicationId)
   {
     bool _retval;
-    const(char)* _applicationId = applicationId.toCString(false);
+    const(char)* _applicationId = applicationId.toCString(No.Alloc);
     _retval = g_application_id_is_valid(_applicationId);
     return _retval;
   }
@@ -267,9 +267,9 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void addMainOption(string longName, char shortName, OptionFlags flags, OptionArg arg, string description, string argDescription)
   {
-    const(char)* _longName = longName.toCString(false);
-    const(char)* _description = description.toCString(false);
-    const(char)* _argDescription = argDescription.toCString(false);
+    const(char)* _longName = longName.toCString(No.Alloc);
+    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _argDescription = argDescription.toCString(No.Alloc);
     g_application_add_main_option(cast(GApplication*)cPtr, _longName, shortName, flags, arg, _description, _argDescription);
   }
 
@@ -359,7 +359,7 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void addOptionGroup(OptionGroup group)
   {
-    g_application_add_option_group(cast(GApplication*)cPtr, group ? cast(GOptionGroup*)group.cPtr(true) : null);
+    g_application_add_option_group(cast(GApplication*)cPtr, group ? cast(GOptionGroup*)group.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -374,8 +374,8 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void bindBusyProperty(ObjectG object, string property)
   {
-    const(char)* _property = property.toCString(false);
-    g_application_bind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(false) : null, _property);
+    const(char)* _property = property.toCString(No.Alloc);
+    g_application_bind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
   }
 
   /**
@@ -386,7 +386,7 @@ class Application : ObjectG, ActionGroup, ActionMap
   {
     const(char)* _cretval;
     _cretval = g_application_get_application_id(cast(GApplication*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -407,7 +407,7 @@ class Application : ObjectG, ActionGroup, ActionMap
   {
     GDBusConnection* _cretval;
     _cretval = g_application_get_dbus_connection(cast(GApplication*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -429,7 +429,7 @@ class Application : ObjectG, ActionGroup, ActionMap
   {
     const(char)* _cretval;
     _cretval = g_application_get_dbus_object_path(cast(GApplication*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -511,7 +511,7 @@ class Application : ObjectG, ActionGroup, ActionMap
   {
     const(char)* _cretval;
     _cretval = g_application_get_resource_base_path(cast(GApplication*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -523,7 +523,7 @@ class Application : ObjectG, ActionGroup, ActionMap
   {
     const(char)* _cretval;
     _cretval = g_application_get_version(cast(GApplication*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -580,7 +580,7 @@ class Application : ObjectG, ActionGroup, ActionMap
       _tmpfiles ~= obj ? cast(GFile*)(cast(ObjectG)obj).cPtr : null;
     GFile** _files = _tmpfiles.ptr;
 
-    const(char)* _hint = hint.toCString(false);
+    const(char)* _hint = hint.toCString(No.Alloc);
     g_application_open(cast(GApplication*)cPtr, _files, _nFiles, _hint);
   }
 
@@ -633,7 +633,7 @@ class Application : ObjectG, ActionGroup, ActionMap
   {
     bool _retval;
     GError *_err;
-    _retval = g_application_register(cast(GApplication*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_application_register(cast(GApplication*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -729,7 +729,7 @@ class Application : ObjectG, ActionGroup, ActionMap
 
     char*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(false);
+      _tmpargv ~= s.toCString(No.Alloc);
     char** _argv = _tmpargv.ptr;
     _retval = g_application_run(cast(GApplication*)cPtr, _argc, _argv);
     return _retval;
@@ -764,8 +764,8 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void sendNotification(string id, Notification notification)
   {
-    const(char)* _id = id.toCString(false);
-    g_application_send_notification(cast(GApplication*)cPtr, _id, notification ? cast(GNotification*)notification.cPtr(false) : null);
+    const(char)* _id = id.toCString(No.Alloc);
+    g_application_send_notification(cast(GApplication*)cPtr, _id, notification ? cast(GNotification*)notification.cPtr(No.Dup) : null);
   }
 
   /**
@@ -782,7 +782,7 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void setActionGroup(ActionGroup actionGroup)
   {
-    g_application_set_action_group(cast(GApplication*)cPtr, actionGroup ? cast(GActionGroup*)(cast(ObjectG)actionGroup).cPtr(false) : null);
+    g_application_set_action_group(cast(GApplication*)cPtr, actionGroup ? cast(GActionGroup*)(cast(ObjectG)actionGroup).cPtr(No.Dup) : null);
   }
 
   /**
@@ -796,7 +796,7 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void setApplicationId(string applicationId)
   {
-    const(char)* _applicationId = applicationId.toCString(false);
+    const(char)* _applicationId = applicationId.toCString(No.Alloc);
     g_application_set_application_id(cast(GApplication*)cPtr, _applicationId);
   }
 
@@ -849,7 +849,7 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void setOptionContextDescription(string description)
   {
-    const(char)* _description = description.toCString(false);
+    const(char)* _description = description.toCString(No.Alloc);
     g_application_set_option_context_description(cast(GApplication*)cPtr, _description);
   }
 
@@ -864,7 +864,7 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void setOptionContextParameterString(string parameterString)
   {
-    const(char)* _parameterString = parameterString.toCString(false);
+    const(char)* _parameterString = parameterString.toCString(No.Alloc);
     g_application_set_option_context_parameter_string(cast(GApplication*)cPtr, _parameterString);
   }
 
@@ -877,7 +877,7 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void setOptionContextSummary(string summary)
   {
-    const(char)* _summary = summary.toCString(false);
+    const(char)* _summary = summary.toCString(No.Alloc);
     g_application_set_option_context_summary(cast(GApplication*)cPtr, _summary);
   }
 
@@ -914,7 +914,7 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void setResourceBasePath(string resourcePath)
   {
-    const(char)* _resourcePath = resourcePath.toCString(false);
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     g_application_set_resource_base_path(cast(GApplication*)cPtr, _resourcePath);
   }
 
@@ -928,7 +928,7 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void setVersion(string version_)
   {
-    const(char)* _version_ = version_.toCString(false);
+    const(char)* _version_ = version_.toCString(No.Alloc);
     g_application_set_version(cast(GApplication*)cPtr, _version_);
   }
 
@@ -942,8 +942,8 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void unbindBusyProperty(ObjectG object, string property)
   {
-    const(char)* _property = property.toCString(false);
-    g_application_unbind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(false) : null, _property);
+    const(char)* _property = property.toCString(No.Alloc);
+    g_application_unbind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
   }
 
   /**
@@ -974,7 +974,7 @@ class Application : ObjectG, ActionGroup, ActionMap
    */
   void withdrawNotification(string id)
   {
-    const(char)* _id = id.toCString(false);
+    const(char)* _id = id.toCString(No.Alloc);
     g_application_withdraw_notification(cast(GApplication*)cPtr, _id);
   }
 
@@ -1174,7 +1174,7 @@ class Application : ObjectG, ActionGroup, ActionMap
       auto nFiles = getVal!int(&_paramVals[2]);
       auto hint = getVal!string(&_paramVals[3]);
       foreach (i; 0 .. nFiles)
-        _files ~= ObjectG.getDObject!File(files[i], false);
+        _files ~= ObjectG.getDObject!File(files[i], No.Take);
       _dgClosure.dlg(_files, hint, application);
     }
 

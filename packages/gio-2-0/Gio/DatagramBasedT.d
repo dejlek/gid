@@ -117,7 +117,7 @@ template DatagramBasedT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_datagram_based_condition_wait(cast(GDatagramBased*)cPtr, condition, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_datagram_based_condition_wait(cast(GDatagramBased*)cPtr, condition, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -143,8 +143,8 @@ template DatagramBasedT()
   override Source createSource(IOCondition condition, Cancellable cancellable)
   {
     GSource* _cretval;
-    _cretval = g_datagram_based_create_source(cast(GDatagramBased*)cPtr, condition, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null);
-    auto _retval = _cretval ? new Source(cast(void*)_cretval, true) : null;
+    _cretval = g_datagram_based_create_source(cast(GDatagramBased*)cPtr, condition, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -214,7 +214,7 @@ template DatagramBasedT()
     GInputMessage* _messages = _tmpmessages.ptr;
 
     GError *_err;
-    _retval = g_datagram_based_receive_messages(cast(GDatagramBased*)cPtr, _messages, _numMessages, flags, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_datagram_based_receive_messages(cast(GDatagramBased*)cPtr, _messages, _numMessages, flags, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -277,7 +277,7 @@ template DatagramBasedT()
     GOutputMessage* _messages = _tmpmessages.ptr;
 
     GError *_err;
-    _retval = g_datagram_based_send_messages(cast(GDatagramBased*)cPtr, _messages, _numMessages, flags, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_err);
+    _retval = g_datagram_based_send_messages(cast(GDatagramBased*)cPtr, _messages, _numMessages, flags, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

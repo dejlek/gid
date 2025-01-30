@@ -18,9 +18,9 @@ class Vfs : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -42,7 +42,7 @@ class Vfs : ObjectG
   {
     GVfs* _cretval;
     _cretval = g_vfs_get_default();
-    auto _retval = _cretval ? ObjectG.getDObject!Vfs(cast(GVfs*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Vfs(cast(GVfs*)_cretval, No.Take);
     return _retval;
   }
 
@@ -54,7 +54,7 @@ class Vfs : ObjectG
   {
     GVfs* _cretval;
     _cretval = g_vfs_get_local();
-    auto _retval = _cretval ? ObjectG.getDObject!Vfs(cast(GVfs*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Vfs(cast(GVfs*)_cretval, No.Take);
     return _retval;
   }
 
@@ -68,9 +68,9 @@ class Vfs : ObjectG
   File getFileForPath(string path)
   {
     GFile* _cretval;
-    const(char)* _path = path.toCString(false);
+    const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_vfs_get_file_for_path(cast(GVfs*)cPtr, _path);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -87,9 +87,9 @@ class Vfs : ObjectG
   File getFileForUri(string uri)
   {
     GFile* _cretval;
-    const(char)* _uri = uri.toCString(false);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = g_vfs_get_file_for_uri(cast(GVfs*)cPtr, _uri);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class Vfs : ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(false);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -141,9 +141,9 @@ class Vfs : ObjectG
   File parseName(string parseName)
   {
     GFile* _cretval;
-    const(char)* _parseName = parseName.toCString(false);
+    const(char)* _parseName = parseName.toCString(No.Alloc);
     _cretval = g_vfs_parse_name(cast(GVfs*)cPtr, _parseName);
-    auto _retval = _cretval ? ObjectG.getDObject!File(cast(GFile*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class Vfs : ObjectG
   bool unregisterUriScheme(string scheme)
   {
     bool _retval;
-    const(char)* _scheme = scheme.toCString(false);
+    const(char)* _scheme = scheme.toCString(No.Alloc);
     _retval = g_vfs_unregister_uri_scheme(cast(GVfs*)cPtr, _scheme);
     return _retval;
   }

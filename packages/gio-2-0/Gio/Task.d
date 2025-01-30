@@ -473,9 +473,9 @@ class Task : ObjectG, AsyncResult
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -519,13 +519,13 @@ class Task : ObjectG, AsyncResult
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     GTask* _cretval;
     auto _callback = freezeDelegate(cast(void*)&callback);
-    _cretval = g_task_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(false) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(false) : null, &_callbackCallback, _callback);
-    this(_cretval, true);
+    _cretval = g_task_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -542,7 +542,7 @@ class Task : ObjectG, AsyncResult
   static bool isValid(AsyncResult result, ObjectG sourceObject)
   {
     bool _retval;
-    _retval = g_task_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(false) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(false) : null);
+    _retval = g_task_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -568,11 +568,11 @@ class Task : ObjectG, AsyncResult
       ptrThawGC(data);
       auto _dlg = cast(AsyncReadyCallback*)data;
 
-      (*_dlg)(sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, res ? ObjectG.getDObject!AsyncResult(cast(void*)res, false) : null);
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
 
     auto _callback = freezeDelegate(cast(void*)&callback);
-    g_task_report_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(false) : null, &_callbackCallback, _callback, sourceTag, error ? cast(GError*)error.cPtr : null);
+    g_task_report_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_callbackCallback, _callback, sourceTag, error ? cast(GError*)error.cPtr : null);
   }
 
   /**
@@ -583,7 +583,7 @@ class Task : ObjectG, AsyncResult
   {
     GCancellable* _cretval;
     _cretval = g_task_get_cancellable(cast(GTask*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Cancellable(cast(GCancellable*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Cancellable(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -625,7 +625,7 @@ class Task : ObjectG, AsyncResult
   {
     GMainContext* _cretval;
     _cretval = g_task_get_context(cast(GTask*)cPtr);
-    auto _retval = _cretval ? new MainContext(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -637,7 +637,7 @@ class Task : ObjectG, AsyncResult
   {
     const(char)* _cretval;
     _cretval = g_task_get_name(cast(GTask*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -673,7 +673,7 @@ class Task : ObjectG, AsyncResult
   {
     ObjectC* _cretval;
     _cretval = g_task_get_source_object(cast(GTask*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -786,7 +786,7 @@ class Task : ObjectG, AsyncResult
     _retval = g_task_propagate_value(cast(GTask*)cPtr, &_value, &_err);
     if (_err)
       throw new ErrorG(_err);
-    value = new Value(cast(void*)&_value, false);
+    value = new Value(cast(void*)&_value, No.Take);
     return _retval;
   }
 
@@ -860,7 +860,7 @@ class Task : ObjectG, AsyncResult
    */
   void returnNewErrorLiteral(Quark domain, int code, string message)
   {
-    const(char)* _message = message.toCString(false);
+    const(char)* _message = message.toCString(No.Alloc);
     g_task_return_new_error_literal(cast(GTask*)cPtr, domain, code, _message);
   }
 
@@ -911,7 +911,7 @@ class Task : ObjectG, AsyncResult
    */
   void returnValue(Value result)
   {
-    g_task_return_value(cast(GTask*)cPtr, result ? cast(GValue*)result.cPtr(false) : null);
+    g_task_return_value(cast(GTask*)cPtr, result ? cast(GValue*)result.cPtr(No.Dup) : null);
   }
 
   /**
@@ -940,7 +940,7 @@ class Task : ObjectG, AsyncResult
       ptrThawGC(taskData);
       auto _dlg = cast(TaskThreadFunc*)taskData;
 
-      (*_dlg)(task ? ObjectG.getDObject!Task(cast(void*)task, false) : null, sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, cancellable ? ObjectG.getDObject!Cancellable(cast(void*)cancellable, false) : null);
+      (*_dlg)(ObjectG.getDObject!Task(cast(void*)task, No.Take), ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!Cancellable(cast(void*)cancellable, No.Take));
     }
     g_task_run_in_thread(cast(GTask*)cPtr, &_taskFuncCallback);
   }
@@ -969,7 +969,7 @@ class Task : ObjectG, AsyncResult
       ptrThawGC(taskData);
       auto _dlg = cast(TaskThreadFunc*)taskData;
 
-      (*_dlg)(task ? ObjectG.getDObject!Task(cast(void*)task, false) : null, sourceObject ? ObjectG.getDObject!ObjectG(cast(void*)sourceObject, false) : null, cancellable ? ObjectG.getDObject!Cancellable(cast(void*)cancellable, false) : null);
+      (*_dlg)(ObjectG.getDObject!Task(cast(void*)task, No.Take), ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!Cancellable(cast(void*)cancellable, No.Take));
     }
     g_task_run_in_thread_sync(cast(GTask*)cPtr, &_taskFuncCallback);
   }
@@ -1010,7 +1010,7 @@ class Task : ObjectG, AsyncResult
    */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     g_task_set_name(cast(GTask*)cPtr, _name);
   }
 
@@ -1095,7 +1095,7 @@ class Task : ObjectG, AsyncResult
    */
   void setStaticName(string name)
   {
-    const(char)* _name = name.toCString(false);
+    const(char)* _name = name.toCString(No.Alloc);
     g_task_set_static_name(cast(GTask*)cPtr, _name);
   }
 

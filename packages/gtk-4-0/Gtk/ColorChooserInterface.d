@@ -10,14 +10,14 @@ class ColorChooserInterface
 {
   GtkColorChooserInterface cInstance;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.ColorChooserInterface");
 
     cInstance = *cast(GtkColorChooserInterface*)ptr;
 
-    if (ownedRef)
+    if (take)
       safeFree(ptr);
   }
 

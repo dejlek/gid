@@ -18,9 +18,9 @@ import Gtk.c.types;
 class CenterLayout : LayoutManager
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -41,7 +41,7 @@ class CenterLayout : LayoutManager
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_center_layout_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -64,7 +64,7 @@ class CenterLayout : LayoutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_center_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class CenterLayout : LayoutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_end_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class CenterLayout : LayoutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_start_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class CenterLayout : LayoutManager
    */
   void setCenterWidget(Widget widget)
   {
-    gtk_center_layout_set_center_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_center_layout_set_center_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -144,7 +144,7 @@ class CenterLayout : LayoutManager
    */
   void setEndWidget(Widget widget)
   {
-    gtk_center_layout_set_end_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_center_layout_set_end_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -180,6 +180,6 @@ class CenterLayout : LayoutManager
    */
   void setStartWidget(Widget widget)
   {
-    gtk_center_layout_set_start_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(false) : null);
+    gtk_center_layout_set_start_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 }

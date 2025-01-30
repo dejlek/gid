@@ -15,14 +15,14 @@ import Gid.gid;
 class MappedFile : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -59,12 +59,12 @@ class MappedFile : Boxed
   this(string filename, bool writable)
   {
     GMappedFile* _cretval;
-    const(char)* _filename = filename.toCString(false);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _cretval = g_mapped_file_new(_filename, writable, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -90,7 +90,7 @@ class MappedFile : Boxed
     _cretval = g_mapped_file_new_from_fd(fd, writable, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new MappedFile(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new MappedFile(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class MappedFile : Boxed
   {
     char* _cretval;
     _cretval = g_mapped_file_get_contents(cast(GMappedFile*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 

@@ -14,12 +14,12 @@ import Gsk.c.types;
 class ColorNode : RenderNode
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.ColorNode");
 
-    super(cast(GskRenderNode*)ptr, ownedRef);
+    super(cast(GskRenderNode*)ptr, take);
   }
 
   /**
@@ -33,8 +33,8 @@ class ColorNode : RenderNode
   this(RGBA rgba, Rect bounds)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_color_node_new(rgba ? cast(GdkRGBA*)rgba.cPtr(false) : null, bounds ? cast(graphene_rect_t*)bounds.cPtr(false) : null);
-    this(_cretval, true);
+    _cretval = gsk_color_node_new(rgba ? cast(GdkRGBA*)rgba.cPtr(No.Dup) : null, bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -45,7 +45,7 @@ class ColorNode : RenderNode
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_color_node_get_color(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

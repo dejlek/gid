@@ -27,9 +27,9 @@ class UnixInputStream : InputStream, FileDescriptorBased, PollableInputStream
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -58,7 +58,7 @@ class UnixInputStream : InputStream, FileDescriptorBased, PollableInputStream
   {
     GInputStream* _cretval;
     _cretval = g_unix_input_stream_new(fd, closeFd);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

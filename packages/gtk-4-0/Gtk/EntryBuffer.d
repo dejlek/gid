@@ -24,9 +24,9 @@ class EntryBuffer : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,9 +50,9 @@ class EntryBuffer : ObjectG
   this(string initialChars, int nInitialChars)
   {
     GtkEntryBuffer* _cretval;
-    const(char)* _initialChars = initialChars.toCString(false);
+    const(char)* _initialChars = initialChars.toCString(No.Alloc);
     _cretval = gtk_entry_buffer_new(_initialChars, nInitialChars);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -96,7 +96,7 @@ class EntryBuffer : ObjectG
    */
   void emitInsertedText(uint position, string chars, uint nChars)
   {
-    const(char)* _chars = chars.toCString(false);
+    const(char)* _chars = chars.toCString(No.Alloc);
     gtk_entry_buffer_emit_inserted_text(cast(GtkEntryBuffer*)cPtr, position, _chars, nChars);
   }
 
@@ -147,7 +147,7 @@ class EntryBuffer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_entry_buffer_get_text(cast(GtkEntryBuffer*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class EntryBuffer : ObjectG
   uint insertText(uint position, string chars, int nChars)
   {
     uint _retval;
-    const(char)* _chars = chars.toCString(false);
+    const(char)* _chars = chars.toCString(No.Alloc);
     _retval = gtk_entry_buffer_insert_text(cast(GtkEntryBuffer*)cPtr, position, _chars, nChars);
     return _retval;
   }
@@ -199,7 +199,7 @@ class EntryBuffer : ObjectG
    */
   void setText(string chars, int nChars)
   {
-    const(char)* _chars = chars.toCString(false);
+    const(char)* _chars = chars.toCString(No.Alloc);
     gtk_entry_buffer_set_text(cast(GtkEntryBuffer*)cPtr, _chars, nChars);
   }
 

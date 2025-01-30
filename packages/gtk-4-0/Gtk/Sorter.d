@@ -31,9 +31,9 @@ class Sorter : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -84,7 +84,7 @@ class Sorter : ObjectG
   Ordering compare(ObjectG item1, ObjectG item2)
   {
     GtkOrdering _cretval;
-    _cretval = gtk_sorter_compare(cast(GtkSorter*)cPtr, item1 ? cast(ObjectC*)item1.cPtr(false) : null, item2 ? cast(ObjectC*)item2.cPtr(false) : null);
+    _cretval = gtk_sorter_compare(cast(GtkSorter*)cPtr, item1 ? cast(ObjectC*)item1.cPtr(No.Dup) : null, item2 ? cast(ObjectC*)item2.cPtr(No.Dup) : null);
     Ordering _retval = cast(Ordering)_cretval;
     return _retval;
   }

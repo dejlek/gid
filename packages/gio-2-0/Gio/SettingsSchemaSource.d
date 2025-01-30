@@ -14,14 +14,14 @@ import Gio.c.types;
 class SettingsSchemaSource : Boxed
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -67,12 +67,12 @@ class SettingsSchemaSource : Boxed
   static SettingsSchemaSource newFromDirectory(string directory, SettingsSchemaSource parent, bool trusted)
   {
     GSettingsSchemaSource* _cretval;
-    const(char)* _directory = directory.toCString(false);
+    const(char)* _directory = directory.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_settings_schema_source_new_from_directory(_directory, parent ? cast(GSettingsSchemaSource*)parent.cPtr(false) : null, trusted, &_err);
+    _cretval = g_settings_schema_source_new_from_directory(_directory, parent ? cast(GSettingsSchemaSource*)parent.cPtr(No.Dup) : null, trusted, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new SettingsSchemaSource(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new SettingsSchemaSource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class SettingsSchemaSource : Boxed
     }
     nonRelocatable.length = _lennonRelocatable;
     foreach (i; 0 .. _lennonRelocatable)
-      nonRelocatable[i] = _nonRelocatable[i].fromCString(true);
+      nonRelocatable[i] = _nonRelocatable[i].fromCString(Yes.Free);
     safeFree(cast(void*)_nonRelocatable);
     uint _lenrelocatable;
     if (_relocatable)
@@ -118,7 +118,7 @@ class SettingsSchemaSource : Boxed
     }
     relocatable.length = _lenrelocatable;
     foreach (i; 0 .. _lenrelocatable)
-      relocatable[i] = _relocatable[i].fromCString(true);
+      relocatable[i] = _relocatable[i].fromCString(Yes.Free);
     safeFree(cast(void*)_relocatable);
   }
 
@@ -138,9 +138,9 @@ class SettingsSchemaSource : Boxed
   SettingsSchema lookup(string schemaId, bool recursive)
   {
     GSettingsSchema* _cretval;
-    const(char)* _schemaId = schemaId.toCString(false);
+    const(char)* _schemaId = schemaId.toCString(No.Alloc);
     _cretval = g_settings_schema_source_lookup(cast(GSettingsSchemaSource*)cPtr, _schemaId, recursive);
-    auto _retval = _cretval ? new SettingsSchema(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new SettingsSchema(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class SettingsSchemaSource : Boxed
   {
     GSettingsSchemaSource* _cretval;
     _cretval = g_settings_schema_source_get_default();
-    auto _retval = _cretval ? new SettingsSchemaSource(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new SettingsSchemaSource(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

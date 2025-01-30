@@ -74,7 +74,7 @@ template SocketConnectableT()
   {
     GSocketAddressEnumerator* _cretval;
     _cretval = g_socket_connectable_enumerate(cast(GSocketConnectable*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketAddressEnumerator(cast(GSocketAddressEnumerator*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketAddressEnumerator(cast(GSocketAddressEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ template SocketConnectableT()
   {
     GSocketAddressEnumerator* _cretval;
     _cretval = g_socket_connectable_proxy_enumerate(cast(GSocketConnectable*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!SocketAddressEnumerator(cast(GSocketAddressEnumerator*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!SocketAddressEnumerator(cast(GSocketAddressEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ template SocketConnectableT()
   {
     char* _cretval;
     _cretval = g_socket_connectable_to_string(cast(GSocketConnectable*)cPtr);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 }

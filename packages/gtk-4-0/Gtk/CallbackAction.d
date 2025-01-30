@@ -19,9 +19,9 @@ class CallbackAction : ShortcutAction
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -47,13 +47,13 @@ class CallbackAction : ShortcutAction
     {
       auto _dlg = cast(ShortcutFunc*)userData;
 
-      bool _retval = (*_dlg)(widget ? ObjectG.getDObject!Widget(cast(void*)widget, false) : null, args ? new VariantG(cast(void*)args, false) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!Widget(cast(void*)widget, No.Take), args ? new VariantG(cast(void*)args, No.Take) : null);
       return _retval;
     }
 
     GtkShortcutAction* _cretval;
     auto _callback = freezeDelegate(cast(void*)&callback);
     _cretval = gtk_callback_action_new(&_callbackCallback, _callback, &thawDelegate);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 }

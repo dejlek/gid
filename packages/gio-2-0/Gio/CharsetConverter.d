@@ -22,9 +22,9 @@ class CharsetConverter : ObjectG, Converter, Initable
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -50,13 +50,13 @@ class CharsetConverter : ObjectG, Converter, Initable
   this(string toCharset, string fromCharset)
   {
     GCharsetConverter* _cretval;
-    const(char)* _toCharset = toCharset.toCString(false);
-    const(char)* _fromCharset = fromCharset.toCString(false);
+    const(char)* _toCharset = toCharset.toCString(No.Alloc);
+    const(char)* _fromCharset = fromCharset.toCString(No.Alloc);
     GError *_err;
     _cretval = g_charset_converter_new(_toCharset, _fromCharset, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

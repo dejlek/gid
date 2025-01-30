@@ -104,9 +104,9 @@ import Pango.TabArray;
 class Entry : Widget, CellEditable, Editable
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -130,7 +130,7 @@ class Entry : Widget, CellEditable, Editable
   {
     GtkWidget* _cretval;
     _cretval = gtk_entry_new();
-    this(_cretval, false);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -142,8 +142,8 @@ class Entry : Widget, CellEditable, Editable
   static Entry newWithBuffer(EntryBuffer buffer)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_entry_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(false) : null);
-    auto _retval = _cretval ? ObjectG.getDObject!Entry(cast(GtkWidget*)_cretval, false) : null;
+    _cretval = gtk_entry_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!Entry(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class Entry : Widget, CellEditable, Editable
   {
     PangoAttrList* _cretval;
     _cretval = gtk_entry_get_attributes(cast(GtkEntry*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class Entry : Widget, CellEditable, Editable
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_entry_get_buffer(cast(GtkEntry*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!EntryBuffer(cast(GtkEntryBuffer*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!EntryBuffer(cast(GtkEntryBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class Entry : Widget, CellEditable, Editable
   {
     GtkEntryCompletion* _cretval;
     _cretval = gtk_entry_get_completion(cast(GtkEntry*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!EntryCompletion(cast(GtkEntryCompletion*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!EntryCompletion(cast(GtkEntryCompletion*)_cretval, No.Take);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Entry : Widget, CellEditable, Editable
   {
     GMenuModel* _cretval;
     _cretval = gtk_entry_get_extra_menu(cast(GtkEntry*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class Entry : Widget, CellEditable, Editable
   {
     GdkRectangle _iconArea;
     gtk_entry_get_icon_area(cast(GtkEntry*)cPtr, iconPos, &_iconArea);
-    iconArea = new Rectangle(cast(void*)&_iconArea, false);
+    iconArea = new Rectangle(cast(void*)&_iconArea, No.Take);
   }
 
   /**
@@ -310,7 +310,7 @@ class Entry : Widget, CellEditable, Editable
   {
     GIcon* _cretval;
     _cretval = gtk_entry_get_icon_gicon(cast(GtkEntry*)cPtr, iconPos);
-    auto _retval = _cretval ? ObjectG.getDObject!Icon(cast(GIcon*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class Entry : Widget, CellEditable, Editable
   {
     const(char)* _cretval;
     _cretval = gtk_entry_get_icon_name(cast(GtkEntry*)cPtr, iconPos);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class Entry : Widget, CellEditable, Editable
   {
     GdkPaintable* _cretval;
     _cretval = gtk_entry_get_icon_paintable(cast(GtkEntry*)cPtr, iconPos);
-    auto _retval = _cretval ? ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -388,7 +388,7 @@ class Entry : Widget, CellEditable, Editable
   {
     char* _cretval;
     _cretval = gtk_entry_get_icon_tooltip_markup(cast(GtkEntry*)cPtr, iconPos);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -403,7 +403,7 @@ class Entry : Widget, CellEditable, Editable
   {
     char* _cretval;
     _cretval = gtk_entry_get_icon_tooltip_text(cast(GtkEntry*)cPtr, iconPos);
-    string _retval = _cretval.fromCString(true);
+    string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -481,7 +481,7 @@ class Entry : Widget, CellEditable, Editable
   {
     const(char)* _cretval;
     _cretval = gtk_entry_get_placeholder_text(cast(GtkEntry*)cPtr);
-    string _retval = _cretval.fromCString(false);
+    string _retval = _cretval.fromCString(No.Free);
     return _retval;
   }
 
@@ -518,7 +518,7 @@ class Entry : Widget, CellEditable, Editable
   {
     PangoTabArray* _cretval;
     _cretval = gtk_entry_get_tabs(cast(GtkEntry*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -625,7 +625,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setAttributes(AttrList attrs)
   {
-    gtk_entry_set_attributes(cast(GtkEntry*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(false) : null);
+    gtk_entry_set_attributes(cast(GtkEntry*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -636,7 +636,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setBuffer(EntryBuffer buffer)
   {
-    gtk_entry_set_buffer(cast(GtkEntry*)cPtr, buffer ? cast(GtkEntryBuffer*)buffer.cPtr(false) : null);
+    gtk_entry_set_buffer(cast(GtkEntry*)cPtr, buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -652,7 +652,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setCompletion(EntryCompletion completion)
   {
-    gtk_entry_set_completion(cast(GtkEntry*)cPtr, completion ? cast(GtkEntryCompletion*)completion.cPtr(false) : null);
+    gtk_entry_set_completion(cast(GtkEntry*)cPtr, completion ? cast(GtkEntryCompletion*)completion.cPtr(No.Dup) : null);
   }
 
   /**
@@ -663,7 +663,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setExtraMenu(MenuModel model)
   {
-    gtk_entry_set_extra_menu(cast(GtkEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(false) : null);
+    gtk_entry_set_extra_menu(cast(GtkEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
 
   /**
@@ -698,7 +698,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setIconDragSource(EntryIconPosition iconPos, ContentProvider provider, DragAction actions)
   {
-    gtk_entry_set_icon_drag_source(cast(GtkEntry*)cPtr, iconPos, provider ? cast(GdkContentProvider*)provider.cPtr(false) : null, actions);
+    gtk_entry_set_icon_drag_source(cast(GtkEntry*)cPtr, iconPos, provider ? cast(GdkContentProvider*)provider.cPtr(No.Dup) : null, actions);
   }
 
   /**
@@ -714,7 +714,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setIconFromGicon(EntryIconPosition iconPos, Icon icon)
   {
-    gtk_entry_set_icon_from_gicon(cast(GtkEntry*)cPtr, iconPos, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(false) : null);
+    gtk_entry_set_icon_from_gicon(cast(GtkEntry*)cPtr, iconPos, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -730,7 +730,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setIconFromIconName(EntryIconPosition iconPos, string iconName)
   {
-    const(char)* _iconName = iconName.toCString(false);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_entry_set_icon_from_icon_name(cast(GtkEntry*)cPtr, iconPos, _iconName);
   }
 
@@ -743,7 +743,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setIconFromPaintable(EntryIconPosition iconPos, Paintable paintable)
   {
-    gtk_entry_set_icon_from_paintable(cast(GtkEntry*)cPtr, iconPos, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(false) : null);
+    gtk_entry_set_icon_from_paintable(cast(GtkEntry*)cPtr, iconPos, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
 
   /**
@@ -771,7 +771,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setIconTooltipMarkup(EntryIconPosition iconPos, string tooltip)
   {
-    const(char)* _tooltip = tooltip.toCString(false);
+    const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_markup(cast(GtkEntry*)cPtr, iconPos, _tooltip);
   }
 
@@ -796,7 +796,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setIconTooltipText(EntryIconPosition iconPos, string tooltip)
   {
-    const(char)* _tooltip = tooltip.toCString(false);
+    const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_text(cast(GtkEntry*)cPtr, iconPos, _tooltip);
   }
 
@@ -874,7 +874,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setPlaceholderText(string text)
   {
-    const(char)* _text = text.toCString(false);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_entry_set_placeholder_text(cast(GtkEntry*)cPtr, _text);
   }
 
@@ -911,7 +911,7 @@ class Entry : Widget, CellEditable, Editable
    */
   void setTabs(TabArray tabs)
   {
-    gtk_entry_set_tabs(cast(GtkEntry*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(false) : null);
+    gtk_entry_set_tabs(cast(GtkEntry*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
 
   /**

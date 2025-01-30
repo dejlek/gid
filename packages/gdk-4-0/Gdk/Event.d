@@ -23,14 +23,14 @@ class Event
 {
   GdkEvent* cInstancePtr;
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.Event");
 
     cInstancePtr = cast(GdkEvent*)ptr;
 
-    if (!ownedRef)
+    if (!take)
       gdk_event_ref(cInstancePtr);
   }
 
@@ -40,9 +40,9 @@ class Event
   }
 
 
-  void* cPtr(bool addRef = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    if (addRef)
+    if (dup)
       gdk_event_ref(cInstancePtr);
 
     return cInstancePtr;
@@ -92,7 +92,7 @@ class Event
   {
     GdkDevice* _cretval;
     _cretval = gdk_event_get_device(cast(GdkEvent*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class Event
   {
     GdkDeviceTool* _cretval;
     _cretval = gdk_event_get_device_tool(cast(GdkEvent*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!DeviceTool(cast(GdkDeviceTool*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!DeviceTool(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class Event
   {
     GdkDisplay* _cretval;
     _cretval = gdk_event_get_display(cast(GdkEvent*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class Event
   {
     GdkEventSequence* _cretval;
     _cretval = gdk_event_get_event_sequence(cast(GdkEvent*)cPtr);
-    auto _retval = _cretval ? new EventSequence(cast(void*)_cretval, false) : null;
+    auto _retval = _cretval ? new EventSequence(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class Event
   {
     GdkSeat* _cretval;
     _cretval = gdk_event_get_seat(cast(GdkEvent*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Seat(cast(GdkSeat*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Seat(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class Event
   {
     GdkSurface* _cretval;
     _cretval = gdk_event_get_surface(cast(GdkEvent*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

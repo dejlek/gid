@@ -44,9 +44,9 @@ class ColorChooserDialog : Dialog, ColorChooser
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -73,8 +73,8 @@ class ColorChooserDialog : Dialog, ColorChooser
   this(string title, Window parent)
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(false);
-    _cretval = gtk_color_chooser_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(false) : null);
-    this(_cretval, false);
+    const(char)* _title = title.toCString(No.Alloc);
+    _cretval = gtk_color_chooser_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 }

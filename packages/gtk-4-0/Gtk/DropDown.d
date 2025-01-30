@@ -69,9 +69,9 @@ class DropDown : Widget
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -96,8 +96,8 @@ class DropDown : Widget
   this(ListModel model, Expression expression)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_drop_down_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(true) : null, expression ? cast(GtkExpression*)expression.cPtr(true) : null);
-    this(_cretval, false);
+    _cretval = gtk_drop_down_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -112,11 +112,11 @@ class DropDown : Widget
     GtkWidget* _cretval;
     char*[] _tmpstrings;
     foreach (s; strings)
-      _tmpstrings ~= s.toCString(false);
+      _tmpstrings ~= s.toCString(No.Alloc);
     _tmpstrings ~= null;
     const(char*)* _strings = _tmpstrings.ptr;
     _cretval = gtk_drop_down_new_from_strings(_strings);
-    auto _retval = _cretval ? ObjectG.getDObject!DropDown(cast(GtkWidget*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!DropDown(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class DropDown : Widget
   {
     GtkExpression* _cretval;
     _cretval = gtk_drop_down_get_expression(cast(GtkDropDown*)cPtr);
-    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, false) : null;
+    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class DropDown : Widget
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class DropDown : Widget
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_header_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class DropDown : Widget
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_list_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class DropDown : Widget
   {
     GListModel* _cretval;
     _cretval = gtk_drop_down_get_model(cast(GtkDropDown*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class DropDown : Widget
   {
     ObjectC* _cretval;
     _cretval = gtk_drop_down_get_selected_item(cast(GtkDropDown*)cPtr);
-    auto _retval = _cretval ? ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, false) : null;
+    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -264,7 +264,7 @@ class DropDown : Widget
    */
   void setExpression(Expression expression)
   {
-    gtk_drop_down_set_expression(cast(GtkDropDown*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(false) : null);
+    gtk_drop_down_set_expression(cast(GtkDropDown*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
 
   /**
@@ -274,7 +274,7 @@ class DropDown : Widget
    */
   void setFactory(ListItemFactory factory)
   {
-    gtk_drop_down_set_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(false) : null);
+    gtk_drop_down_set_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
 
   /**
@@ -284,7 +284,7 @@ class DropDown : Widget
    */
   void setHeaderFactory(ListItemFactory factory)
   {
-    gtk_drop_down_set_header_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(false) : null);
+    gtk_drop_down_set_header_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
 
   /**
@@ -294,7 +294,7 @@ class DropDown : Widget
    */
   void setListFactory(ListItemFactory factory)
   {
-    gtk_drop_down_set_list_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(false) : null);
+    gtk_drop_down_set_list_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
 
   /**
@@ -304,7 +304,7 @@ class DropDown : Widget
    */
   void setModel(ListModel model)
   {
-    gtk_drop_down_set_model(cast(GtkDropDown*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(false) : null);
+    gtk_drop_down_set_model(cast(GtkDropDown*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**

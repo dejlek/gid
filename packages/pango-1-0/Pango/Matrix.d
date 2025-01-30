@@ -20,17 +20,17 @@ class Matrix : Boxed
 
   this()
   {
-    super(safeMalloc(PangoMatrix.sizeof), true);
+    super(safeMalloc(PangoMatrix.sizeof), Yes.Take);
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
-  void* cPtr(bool makeCopy = false)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
-    return makeCopy ? copy_ : cInstancePtr;
+    return dup ? copy_ : cInstancePtr;
   }
 
   static GType getType()
@@ -112,7 +112,7 @@ class Matrix : Boxed
    */
   void concat(Matrix newMatrix)
   {
-    pango_matrix_concat(cast(PangoMatrix*)cPtr, newMatrix ? cast(PangoMatrix*)newMatrix.cPtr(false) : null);
+    pango_matrix_concat(cast(PangoMatrix*)cPtr, newMatrix ? cast(PangoMatrix*)newMatrix.cPtr(No.Dup) : null);
   }
 
   /**
@@ -123,7 +123,7 @@ class Matrix : Boxed
   {
     PangoMatrix* _cretval;
     _cretval = pango_matrix_copy(cast(PangoMatrix*)cPtr);
-    auto _retval = _cretval ? new Matrix(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new Matrix(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

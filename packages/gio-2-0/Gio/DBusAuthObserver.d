@@ -67,9 +67,9 @@ import Gio.c.types;
 class DBusAuthObserver : ObjectG
 {
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -90,7 +90,7 @@ class DBusAuthObserver : ObjectG
   {
     GDBusAuthObserver* _cretval;
     _cretval = g_dbus_auth_observer_new();
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -102,7 +102,7 @@ class DBusAuthObserver : ObjectG
   bool allowMechanism(string mechanism)
   {
     bool _retval;
-    const(char)* _mechanism = mechanism.toCString(false);
+    const(char)* _mechanism = mechanism.toCString(No.Alloc);
     _retval = g_dbus_auth_observer_allow_mechanism(cast(GDBusAuthObserver*)cPtr, _mechanism);
     return _retval;
   }
@@ -117,7 +117,7 @@ class DBusAuthObserver : ObjectG
   bool authorizeAuthenticatedPeer(IOStream stream, Credentials credentials)
   {
     bool _retval;
-    _retval = g_dbus_auth_observer_authorize_authenticated_peer(cast(GDBusAuthObserver*)cPtr, stream ? cast(GIOStream*)stream.cPtr(false) : null, credentials ? cast(GCredentials*)credentials.cPtr(false) : null);
+    _retval = g_dbus_auth_observer_authorize_authenticated_peer(cast(GDBusAuthObserver*)cPtr, stream ? cast(GIOStream*)stream.cPtr(No.Dup) : null, credentials ? cast(GCredentials*)credentials.cPtr(No.Dup) : null);
     return _retval;
   }
 

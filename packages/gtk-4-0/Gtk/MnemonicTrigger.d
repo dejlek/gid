@@ -18,9 +18,9 @@ class MnemonicTrigger : ShortcutTrigger
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -46,7 +46,7 @@ class MnemonicTrigger : ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_mnemonic_trigger_new(keyval);
-    this(_cretval, true);
+    this(_cretval, Yes.Take);
   }
 
   /**

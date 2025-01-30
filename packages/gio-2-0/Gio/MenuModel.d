@@ -111,9 +111,9 @@ class MenuModel : ObjectG
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -145,9 +145,9 @@ class MenuModel : ObjectG
   VariantG getItemAttributeValue(int itemIndex, string attribute, VariantType expectedType)
   {
     VariantC* _cretval;
-    const(char)* _attribute = attribute.toCString(false);
-    _cretval = g_menu_model_get_item_attribute_value(cast(GMenuModel*)cPtr, itemIndex, _attribute, expectedType ? cast(GVariantType*)expectedType.cPtr(false) : null);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, true) : null;
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    _cretval = g_menu_model_get_item_attribute_value(cast(GMenuModel*)cPtr, itemIndex, _attribute, expectedType ? cast(GVariantType*)expectedType.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -164,9 +164,9 @@ class MenuModel : ObjectG
   MenuModel getItemLink(int itemIndex, string link)
   {
     GMenuModel* _cretval;
-    const(char)* _link = link.toCString(false);
+    const(char)* _link = link.toCString(No.Alloc);
     _cretval = g_menu_model_get_item_link(cast(GMenuModel*)cPtr, itemIndex, _link);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class MenuModel : ObjectG
   {
     GMenuAttributeIter* _cretval;
     _cretval = g_menu_model_iterate_item_attributes(cast(GMenuModel*)cPtr, itemIndex);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuAttributeIter(cast(GMenuAttributeIter*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!MenuAttributeIter(cast(GMenuAttributeIter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class MenuModel : ObjectG
   {
     GMenuLinkIter* _cretval;
     _cretval = g_menu_model_iterate_item_links(cast(GMenuModel*)cPtr, itemIndex);
-    auto _retval = _cretval ? ObjectG.getDObject!MenuLinkIter(cast(GMenuLinkIter*)_cretval, true) : null;
+    auto _retval = ObjectG.getDObject!MenuLinkIter(cast(GMenuLinkIter*)_cretval, Yes.Take);
     return _retval;
   }
 

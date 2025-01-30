@@ -47,9 +47,9 @@ class DropTargetAsync : EventController
   {
   }
 
-  this(void* ptr, bool ownedRef = false)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
-    super(cast(void*)ptr, ownedRef);
+    super(cast(void*)ptr, take);
   }
 
   static GType getType()
@@ -72,8 +72,8 @@ class DropTargetAsync : EventController
   this(ContentFormats formats, DragAction actions)
   {
     GtkDropTargetAsync* _cretval;
-    _cretval = gtk_drop_target_async_new(formats ? cast(GdkContentFormats*)formats.cPtr(true) : null, actions);
-    this(_cretval, true);
+    _cretval = gtk_drop_target_async_new(formats ? cast(GdkContentFormats*)formats.cPtr(Yes.Dup) : null, actions);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -97,7 +97,7 @@ class DropTargetAsync : EventController
   {
     GdkContentFormats* _cretval;
     _cretval = gtk_drop_target_async_get_formats(cast(GtkDropTargetAsync*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, true) : null;
+    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class DropTargetAsync : EventController
    */
   void rejectDrop(Drop drop)
   {
-    gtk_drop_target_async_reject_drop(cast(GtkDropTargetAsync*)cPtr, drop ? cast(GdkDrop*)drop.cPtr(false) : null);
+    gtk_drop_target_async_reject_drop(cast(GtkDropTargetAsync*)cPtr, drop ? cast(GdkDrop*)drop.cPtr(No.Dup) : null);
   }
 
   /**
@@ -131,7 +131,7 @@ class DropTargetAsync : EventController
    */
   void setFormats(ContentFormats formats)
   {
-    gtk_drop_target_async_set_formats(cast(GtkDropTargetAsync*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(false) : null);
+    gtk_drop_target_async_set_formats(cast(GtkDropTargetAsync*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null);
   }
 
   /**
