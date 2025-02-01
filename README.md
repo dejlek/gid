@@ -14,7 +14,7 @@ potentially any of those listed in the Python [PyGObject API Reference](https://
 
 ## Quickstart
 
-For a quickstart guide to developing Gtk4 GUI applications, please consult the [giD Examples](https://github.com/Kymorphia/gid/tree/main/examples/).
+For a quickstart guide to developing Gtk4 GUI applications, please consult the [giD Gtk4 Examples](https://github.com/Kymorphia/gid-gtk4-examples/).
 
 The remainder of this document provides an overview of the giD bindings.
 
