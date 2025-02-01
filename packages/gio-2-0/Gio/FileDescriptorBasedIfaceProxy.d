@@ -7,10 +7,6 @@ import Gio.FileDescriptorBasedT;
 /// Proxy object for Gio.FileDescriptorBased interface when a GObject has no applicable D binding
 class FileDescriptorBasedIfaceProxy : IfaceProxy, FileDescriptorBased
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

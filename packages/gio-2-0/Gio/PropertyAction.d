@@ -53,10 +53,6 @@ import Gio.c.types;
 class PropertyAction : ObjectG, Action
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -27,10 +27,6 @@ import Gio.c.types;
 class VolumeMonitor : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -182,27 +178,29 @@ class VolumeMonitor : ObjectG
    *   drive = the drive that changed
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias DriveChangedCallback = void delegate(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveChangedCallbackDlg = void delegate(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveChangedCallbackFunc = void function(Drive drive, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to DriveChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDriveChanged(DriveChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectDriveChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DriveChangedCallbackDlg) || is(T == DriveChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto drive = getVal!Drive(&_paramVals[1]);
-      _dgClosure.dlg(drive, volumeMonitor);
+      _dClosure.dlg(drive, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drive-changed", closure, after);
   }
 
@@ -212,27 +210,29 @@ class VolumeMonitor : ObjectG
    *   drive = a #GDrive that was connected.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias DriveConnectedCallback = void delegate(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveConnectedCallbackDlg = void delegate(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveConnectedCallbackFunc = void function(Drive drive, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to DriveConnected signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDriveConnected(DriveConnectedCallback dlg, Flag!"After" after = No.After)
+  ulong connectDriveConnected(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DriveConnectedCallbackDlg) || is(T == DriveConnectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto drive = getVal!Drive(&_paramVals[1]);
-      _dgClosure.dlg(drive, volumeMonitor);
+      _dClosure.dlg(drive, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drive-connected", closure, after);
   }
 
@@ -242,27 +242,29 @@ class VolumeMonitor : ObjectG
    *   drive = a #GDrive that was disconnected.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias DriveDisconnectedCallback = void delegate(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveDisconnectedCallbackDlg = void delegate(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveDisconnectedCallbackFunc = void function(Drive drive, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to DriveDisconnected signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDriveDisconnected(DriveDisconnectedCallback dlg, Flag!"After" after = No.After)
+  ulong connectDriveDisconnected(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DriveDisconnectedCallbackDlg) || is(T == DriveDisconnectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto drive = getVal!Drive(&_paramVals[1]);
-      _dgClosure.dlg(drive, volumeMonitor);
+      _dClosure.dlg(drive, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drive-disconnected", closure, after);
   }
 
@@ -272,27 +274,29 @@ class VolumeMonitor : ObjectG
    *   drive = the drive where the eject button was pressed
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias DriveEjectButtonCallback = void delegate(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveEjectButtonCallbackDlg = void delegate(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveEjectButtonCallbackFunc = void function(Drive drive, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to DriveEjectButton signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDriveEjectButton(DriveEjectButtonCallback dlg, Flag!"After" after = No.After)
+  ulong connectDriveEjectButton(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DriveEjectButtonCallbackDlg) || is(T == DriveEjectButtonCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto drive = getVal!Drive(&_paramVals[1]);
-      _dgClosure.dlg(drive, volumeMonitor);
+      _dClosure.dlg(drive, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drive-eject-button", closure, after);
   }
 
@@ -302,27 +306,29 @@ class VolumeMonitor : ObjectG
    *   drive = the drive where the stop button was pressed
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias DriveStopButtonCallback = void delegate(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveStopButtonCallbackDlg = void delegate(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveStopButtonCallbackFunc = void function(Drive drive, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to DriveStopButton signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDriveStopButton(DriveStopButtonCallback dlg, Flag!"After" after = No.After)
+  ulong connectDriveStopButton(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DriveStopButtonCallbackDlg) || is(T == DriveStopButtonCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto drive = getVal!Drive(&_paramVals[1]);
-      _dgClosure.dlg(drive, volumeMonitor);
+      _dClosure.dlg(drive, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drive-stop-button", closure, after);
   }
 
@@ -332,27 +338,29 @@ class VolumeMonitor : ObjectG
    *   mount = a #GMount that was added.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias MountAddedCallback = void delegate(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountAddedCallbackDlg = void delegate(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountAddedCallbackFunc = void function(Mount mount, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to MountAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMountAdded(MountAddedCallback dlg, Flag!"After" after = No.After)
+  ulong connectMountAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MountAddedCallbackDlg) || is(T == MountAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto mount = getVal!Mount(&_paramVals[1]);
-      _dgClosure.dlg(mount, volumeMonitor);
+      _dClosure.dlg(mount, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("mount-added", closure, after);
   }
 
@@ -362,27 +370,29 @@ class VolumeMonitor : ObjectG
    *   mount = a #GMount that changed.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias MountChangedCallback = void delegate(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountChangedCallbackDlg = void delegate(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountChangedCallbackFunc = void function(Mount mount, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to MountChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMountChanged(MountChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectMountChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MountChangedCallbackDlg) || is(T == MountChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto mount = getVal!Mount(&_paramVals[1]);
-      _dgClosure.dlg(mount, volumeMonitor);
+      _dClosure.dlg(mount, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("mount-changed", closure, after);
   }
 
@@ -394,27 +404,29 @@ class VolumeMonitor : ObjectG
    *   mount = a #GMount that is being unmounted.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias MountPreUnmountCallback = void delegate(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountPreUnmountCallbackDlg = void delegate(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountPreUnmountCallbackFunc = void function(Mount mount, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to MountPreUnmount signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMountPreUnmount(MountPreUnmountCallback dlg, Flag!"After" after = No.After)
+  ulong connectMountPreUnmount(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MountPreUnmountCallbackDlg) || is(T == MountPreUnmountCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto mount = getVal!Mount(&_paramVals[1]);
-      _dgClosure.dlg(mount, volumeMonitor);
+      _dClosure.dlg(mount, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("mount-pre-unmount", closure, after);
   }
 
@@ -424,27 +436,29 @@ class VolumeMonitor : ObjectG
    *   mount = a #GMount that was removed.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias MountRemovedCallback = void delegate(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountRemovedCallbackDlg = void delegate(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountRemovedCallbackFunc = void function(Mount mount, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to MountRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMountRemoved(MountRemovedCallback dlg, Flag!"After" after = No.After)
+  ulong connectMountRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MountRemovedCallbackDlg) || is(T == MountRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto mount = getVal!Mount(&_paramVals[1]);
-      _dgClosure.dlg(mount, volumeMonitor);
+      _dClosure.dlg(mount, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("mount-removed", closure, after);
   }
 
@@ -454,27 +468,29 @@ class VolumeMonitor : ObjectG
    *   volume = a #GVolume that was added.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias VolumeAddedCallback = void delegate(Volume volume, VolumeMonitor volumeMonitor);
+  alias VolumeAddedCallbackDlg = void delegate(Volume volume, VolumeMonitor volumeMonitor);
+  alias VolumeAddedCallbackFunc = void function(Volume volume, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to VolumeAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectVolumeAdded(VolumeAddedCallback dlg, Flag!"After" after = No.After)
+  ulong connectVolumeAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == VolumeAddedCallbackDlg) || is(T == VolumeAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto volume = getVal!Volume(&_paramVals[1]);
-      _dgClosure.dlg(volume, volumeMonitor);
+      _dClosure.dlg(volume, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("volume-added", closure, after);
   }
 
@@ -484,27 +500,29 @@ class VolumeMonitor : ObjectG
    *   volume = a #GVolume that changed.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias VolumeChangedCallback = void delegate(Volume volume, VolumeMonitor volumeMonitor);
+  alias VolumeChangedCallbackDlg = void delegate(Volume volume, VolumeMonitor volumeMonitor);
+  alias VolumeChangedCallbackFunc = void function(Volume volume, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to VolumeChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectVolumeChanged(VolumeChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectVolumeChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == VolumeChangedCallbackDlg) || is(T == VolumeChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto volume = getVal!Volume(&_paramVals[1]);
-      _dgClosure.dlg(volume, volumeMonitor);
+      _dClosure.dlg(volume, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("volume-changed", closure, after);
   }
 
@@ -514,27 +532,29 @@ class VolumeMonitor : ObjectG
    *   volume = a #GVolume that was removed.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias VolumeRemovedCallback = void delegate(Volume volume, VolumeMonitor volumeMonitor);
+  alias VolumeRemovedCallbackDlg = void delegate(Volume volume, VolumeMonitor volumeMonitor);
+  alias VolumeRemovedCallbackFunc = void function(Volume volume, VolumeMonitor volumeMonitor);
 
   /**
    * Connect to VolumeRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectVolumeRemoved(VolumeRemovedCallback dlg, Flag!"After" after = No.After)
+  ulong connectVolumeRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == VolumeRemovedCallbackDlg) || is(T == VolumeRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
       auto volume = getVal!Volume(&_paramVals[1]);
-      _dgClosure.dlg(volume, volumeMonitor);
+      _dClosure.dlg(volume, volumeMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("volume-removed", closure, after);
   }
 }

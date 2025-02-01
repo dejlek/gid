@@ -120,27 +120,29 @@ template ColorChooserT()
    * Deprecated: Use [Gtk.ColorDialog] and [Gtk.ColorDialogButton]
    *   instead of widgets implementing `GtkColorChooser`
    */
-  alias ColorActivatedCallback = void delegate(RGBA color, ColorChooser colorChooser);
+  alias ColorActivatedCallbackDlg = void delegate(RGBA color, ColorChooser colorChooser);
+  alias ColorActivatedCallbackFunc = void function(RGBA color, ColorChooser colorChooser);
 
   /**
    * Connect to ColorActivated signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectColorActivated(ColorActivatedCallback dlg, Flag!"After" after = No.After)
+  ulong connectColorActivated(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ColorActivatedCallbackDlg) || is(T == ColorActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto colorChooser = getVal!ColorChooser(_paramVals);
       auto color = getVal!RGBA(&_paramVals[1]);
-      _dgClosure.dlg(color, colorChooser);
+      _dClosure.dlg(color, colorChooser);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("color-activated", closure, after);
   }
 }

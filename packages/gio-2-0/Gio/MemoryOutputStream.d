@@ -20,10 +20,6 @@ import Gio.c.types;
 class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -249,10 +249,11 @@ class VariantG
   this(T)(T val)
   if (!is(T == void*))
   {
+    // Somewhat counter-intuitive.. We don't "own" a reference, it is floating, so pass false to sink it.
     static if (is(T : VariantG)) // A variant (wrap it)
-      this(cast(void*)createVariant(cast(VariantC*)val.cPtr), false);
+      this(cast(void*)createVariant(cast(VariantC*)val.cPtr), No.Take);
     else
-      this(cast(void*)createVariant(val), false); // Somewhat counter-intuitive.. We don't "own" a reference, it is floating, so pass false to sink it.
+      this(cast(void*)createVariant(val), No.Take);
   }
 
   /**
@@ -277,7 +278,7 @@ class VariantG
         g_variant_builder_add_value(&builder, createVariant(v)); // !! takes over floating reference of new VariantC
     }
 
-    this(g_variant_builder_end(&builder), false);
+    this(g_variant_builder_end(&builder), No.Take);
   }
 
   override bool opEquals(Object other)

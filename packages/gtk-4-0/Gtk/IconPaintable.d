@@ -19,10 +19,6 @@ import Gtk.c.types;
 class IconPaintable : ObjectG, Paintable, SymbolicPaintable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

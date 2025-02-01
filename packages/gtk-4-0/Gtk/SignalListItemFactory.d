@@ -85,27 +85,29 @@ class SignalListItemFactory : ListItemFactory
    *   object = The `GObject` to bind
    *   signalListItemFactory = the instance the signal is connected to
    */
-  alias BindCallback = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias BindCallbackDlg = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias BindCallbackFunc = void function(ObjectG object, SignalListItemFactory signalListItemFactory);
 
   /**
    * Connect to Bind signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectBind(BindCallback dlg, Flag!"After" after = No.After)
+  ulong connectBind(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == BindCallbackDlg) || is(T == BindCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto signalListItemFactory = getVal!SignalListItemFactory(_paramVals);
       auto object = getVal!ObjectG(&_paramVals[1]);
-      _dgClosure.dlg(object, signalListItemFactory);
+      _dClosure.dlg(object, signalListItemFactory);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("bind", closure, after);
   }
 
@@ -118,27 +120,29 @@ class SignalListItemFactory : ListItemFactory
    *   object = The `GObject` to set up
    *   signalListItemFactory = the instance the signal is connected to
    */
-  alias SetupCallback = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias SetupCallbackDlg = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias SetupCallbackFunc = void function(ObjectG object, SignalListItemFactory signalListItemFactory);
 
   /**
    * Connect to Setup signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSetup(SetupCallback dlg, Flag!"After" after = No.After)
+  ulong connectSetup(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SetupCallbackDlg) || is(T == SetupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto signalListItemFactory = getVal!SignalListItemFactory(_paramVals);
       auto object = getVal!ObjectG(&_paramVals[1]);
-      _dgClosure.dlg(object, signalListItemFactory);
+      _dClosure.dlg(object, signalListItemFactory);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("setup", closure, after);
   }
 
@@ -151,27 +155,29 @@ class SignalListItemFactory : ListItemFactory
    *   object = The `GObject` to tear down
    *   signalListItemFactory = the instance the signal is connected to
    */
-  alias TeardownCallback = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias TeardownCallbackDlg = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias TeardownCallbackFunc = void function(ObjectG object, SignalListItemFactory signalListItemFactory);
 
   /**
    * Connect to Teardown signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectTeardown(TeardownCallback dlg, Flag!"After" after = No.After)
+  ulong connectTeardown(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == TeardownCallbackDlg) || is(T == TeardownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto signalListItemFactory = getVal!SignalListItemFactory(_paramVals);
       auto object = getVal!ObjectG(&_paramVals[1]);
-      _dgClosure.dlg(object, signalListItemFactory);
+      _dClosure.dlg(object, signalListItemFactory);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("teardown", closure, after);
   }
 
@@ -185,27 +191,29 @@ class SignalListItemFactory : ListItemFactory
    *   object = The `GObject` to unbind
    *   signalListItemFactory = the instance the signal is connected to
    */
-  alias UnbindCallback = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias UnbindCallbackDlg = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias UnbindCallbackFunc = void function(ObjectG object, SignalListItemFactory signalListItemFactory);
 
   /**
    * Connect to Unbind signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUnbind(UnbindCallback dlg, Flag!"After" after = No.After)
+  ulong connectUnbind(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UnbindCallbackDlg) || is(T == UnbindCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto signalListItemFactory = getVal!SignalListItemFactory(_paramVals);
       auto object = getVal!ObjectG(&_paramVals[1]);
-      _dgClosure.dlg(object, signalListItemFactory);
+      _dClosure.dlg(object, signalListItemFactory);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unbind", closure, after);
   }
 }

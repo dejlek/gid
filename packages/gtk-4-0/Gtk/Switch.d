@@ -122,26 +122,28 @@ class Switch : Widget, Actionable
    * but use the [Gtk.Switch.active] property.
    *   switch_ = the instance the signal is connected to
    */
-  alias ActivateCallback = void delegate(Switch switch_);
+  alias ActivateCallbackDlg = void delegate(Switch switch_);
+  alias ActivateCallbackFunc = void function(Switch switch_);
 
   /**
    * Connect to Activate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivate(ActivateCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto switch_ = getVal!Switch(_paramVals);
-      _dgClosure.dlg(switch_);
+      _dClosure.dlg(switch_);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
   }
 
@@ -163,29 +165,31 @@ class Switch : Widget, Actionable
    *   switch_ = the instance the signal is connected to
    * Returns: %TRUE to stop the signal emission
    */
-  alias StateSetCallback = bool delegate(bool state, Switch switch_);
+  alias StateSetCallbackDlg = bool delegate(bool state, Switch switch_);
+  alias StateSetCallbackFunc = bool function(bool state, Switch switch_);
 
   /**
    * Connect to StateSet signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectStateSet(StateSetCallback dlg, Flag!"After" after = No.After)
+  ulong connectStateSet(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == StateSetCallbackDlg) || is(T == StateSetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto switch_ = getVal!Switch(_paramVals);
       auto state = getVal!bool(&_paramVals[1]);
-      _retval = _dgClosure.dlg(state, switch_);
+      _retval = _dClosure.dlg(state, switch_);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("state-set", closure, after);
   }
 }

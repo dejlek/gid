@@ -61,16 +61,18 @@ interface CellEditable
    * for emitting `GtkCellEditable::editing-done`.
    *   cellEditable = the instance the signal is connected to
    */
-  alias EditingDoneCallback = void delegate(CellEditable cellEditable);
+  alias EditingDoneCallbackDlg = void delegate(CellEditable cellEditable);
+  alias EditingDoneCallbackFunc = void function(CellEditable cellEditable);
 
   /**
    * Connect to EditingDone signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEditingDone(EditingDoneCallback dlg, Flag!"After" after = No.After);
+  ulong connectEditingDone(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EditingDoneCallbackDlg) || is(T == EditingDoneCallbackFunc));
 
   /**
    * This signal is meant to indicate that the cell is finished
@@ -85,14 +87,16 @@ interface CellEditable
    * for emitting `GtkCellEditable::remove-widget`.
    *   cellEditable = the instance the signal is connected to
    */
-  alias RemoveWidgetCallback = void delegate(CellEditable cellEditable);
+  alias RemoveWidgetCallbackDlg = void delegate(CellEditable cellEditable);
+  alias RemoveWidgetCallbackFunc = void function(CellEditable cellEditable);
 
   /**
    * Connect to RemoveWidget signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRemoveWidget(RemoveWidgetCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RemoveWidgetCallbackDlg) || is(T == RemoveWidgetCallbackFunc));
+  }

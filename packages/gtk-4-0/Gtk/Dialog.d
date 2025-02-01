@@ -313,26 +313,28 @@ class Dialog : Window
 
    * Deprecated: Use [Gtk.Window] instead
    */
-  alias CloseCallback = void delegate(Dialog dialog);
+  alias CloseCallbackDlg = void delegate(Dialog dialog);
+  alias CloseCallbackFunc = void function(Dialog dialog);
 
   /**
    * Connect to Close signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectClose(CloseCallback dlg, Flag!"After" after = No.After)
+  ulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CloseCallbackDlg) || is(T == CloseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dialog = getVal!Dialog(_paramVals);
-      _dgClosure.dlg(dialog);
+      _dClosure.dlg(dialog);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("close", closure, after);
   }
 
@@ -348,27 +350,29 @@ class Dialog : Window
 
    * Deprecated: Use [Gtk.Window] instead
    */
-  alias ResponseCallback = void delegate(int responseId, Dialog dialog);
+  alias ResponseCallbackDlg = void delegate(int responseId, Dialog dialog);
+  alias ResponseCallbackFunc = void function(int responseId, Dialog dialog);
 
   /**
    * Connect to Response signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectResponse(ResponseCallback dlg, Flag!"After" after = No.After)
+  ulong connectResponse(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ResponseCallbackDlg) || is(T == ResponseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dialog = getVal!Dialog(_paramVals);
       auto responseId = getVal!int(&_paramVals[1]);
-      _dgClosure.dlg(responseId, dialog);
+      _dClosure.dlg(responseId, dialog);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("response", closure, after);
   }
 }

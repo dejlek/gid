@@ -75,10 +75,6 @@ import Gio.c.types;
 class TestDBus : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

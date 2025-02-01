@@ -7,10 +7,6 @@ import Gio.VolumeT;
 /// Proxy object for Gio.Volume interface when a GObject has no applicable D binding
 class VolumeIfaceProxy : IfaceProxy, Volume
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

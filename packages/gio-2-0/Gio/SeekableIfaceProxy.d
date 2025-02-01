@@ -7,10 +7,6 @@ import Gio.SeekableT;
 /// Proxy object for Gio.Seekable interface when a GObject has no applicable D binding
 class SeekableIfaceProxy : IfaceProxy, Seekable
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

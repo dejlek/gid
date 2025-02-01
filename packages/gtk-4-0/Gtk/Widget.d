@@ -378,10 +378,6 @@ import cairo.FontOptions;
 class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -3018,26 +3014,28 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * This signal is not suitable for saving widget state.
    *   widget = the instance the signal is connected to
    */
-  alias DestroyCallback = void delegate(Widget widget);
+  alias DestroyCallbackDlg = void delegate(Widget widget);
+  alias DestroyCallbackFunc = void function(Widget widget);
 
   /**
    * Connect to Destroy signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDestroy(DestroyCallback dlg, Flag!"After" after = No.After)
+  ulong connectDestroy(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DestroyCallbackDlg) || is(T == DestroyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto widget = getVal!Widget(_paramVals);
-      _dgClosure.dlg(widget);
+      _dClosure.dlg(widget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("destroy", closure, after);
   }
 
@@ -3047,27 +3045,29 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   previousDirection = the previous text direction of widget
    *   widget = the instance the signal is connected to
    */
-  alias DirectionChangedCallback = void delegate(TextDirection previousDirection, Widget widget);
+  alias DirectionChangedCallbackDlg = void delegate(TextDirection previousDirection, Widget widget);
+  alias DirectionChangedCallbackFunc = void function(TextDirection previousDirection, Widget widget);
 
   /**
    * Connect to DirectionChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDirectionChanged(DirectionChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DirectionChangedCallbackDlg) || is(T == DirectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto widget = getVal!Widget(_paramVals);
       auto previousDirection = getVal!TextDirection(&_paramVals[1]);
-      _dgClosure.dlg(previousDirection, widget);
+      _dClosure.dlg(previousDirection, widget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("direction-changed", closure, after);
   }
 
@@ -3075,26 +3075,28 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Emitted when widget is hidden.
    *   widget = the instance the signal is connected to
    */
-  alias HideCallback = void delegate(Widget widget);
+  alias HideCallbackDlg = void delegate(Widget widget);
+  alias HideCallbackFunc = void function(Widget widget);
 
   /**
    * Connect to Hide signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectHide(HideCallback dlg, Flag!"After" after = No.After)
+  ulong connectHide(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == HideCallbackDlg) || is(T == HideCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto widget = getVal!Widget(_paramVals);
-      _dgClosure.dlg(widget);
+      _dClosure.dlg(widget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("hide", closure, after);
   }
 
@@ -3108,29 +3110,31 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   if the emitting widget should try to handle the keyboard
    *   navigation attempt in its parent widget$(LPAREN)s$(RPAREN).
    */
-  alias KeynavFailedCallback = bool delegate(DirectionType direction, Widget widget);
+  alias KeynavFailedCallbackDlg = bool delegate(DirectionType direction, Widget widget);
+  alias KeynavFailedCallbackFunc = bool function(DirectionType direction, Widget widget);
 
   /**
    * Connect to KeynavFailed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectKeynavFailed(KeynavFailedCallback dlg, Flag!"After" after = No.After)
+  ulong connectKeynavFailed(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == KeynavFailedCallbackDlg) || is(T == KeynavFailedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto widget = getVal!Widget(_paramVals);
       auto direction = getVal!DirectionType(&_paramVals[1]);
-      _retval = _dgClosure.dlg(direction, widget);
+      _retval = _dClosure.dlg(direction, widget);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("keynav-failed", closure, after);
   }
 
@@ -3144,26 +3148,28 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * emission of [Gtk.Widget.unmap].
    *   widget = the instance the signal is connected to
    */
-  alias MapCallback = void delegate(Widget widget);
+  alias MapCallbackDlg = void delegate(Widget widget);
+  alias MapCallbackFunc = void function(Widget widget);
 
   /**
    * Connect to Map signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMap(MapCallback dlg, Flag!"After" after = No.After)
+  ulong connectMap(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MapCallbackDlg) || is(T == MapCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto widget = getVal!Widget(_paramVals);
-      _dgClosure.dlg(widget);
+      _dClosure.dlg(widget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("map", closure, after);
   }
 
@@ -3177,29 +3183,31 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: %TRUE to stop other handlers from being invoked for the event.
    *   %FALSE to propagate the event further.
    */
-  alias MnemonicActivateCallback = bool delegate(bool groupCycling, Widget widget);
+  alias MnemonicActivateCallbackDlg = bool delegate(bool groupCycling, Widget widget);
+  alias MnemonicActivateCallbackFunc = bool function(bool groupCycling, Widget widget);
 
   /**
    * Connect to MnemonicActivate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMnemonicActivate(MnemonicActivateCallback dlg, Flag!"After" after = No.After)
+  ulong connectMnemonicActivate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MnemonicActivateCallbackDlg) || is(T == MnemonicActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto widget = getVal!Widget(_paramVals);
       auto groupCycling = getVal!bool(&_paramVals[1]);
-      _retval = _dgClosure.dlg(groupCycling, widget);
+      _retval = _dClosure.dlg(groupCycling, widget);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("mnemonic-activate", closure, after);
   }
 
@@ -3212,27 +3220,29 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   direction = the direction of the focus move
    *   widget = the instance the signal is connected to
    */
-  alias MoveFocusCallback = void delegate(DirectionType direction, Widget widget);
+  alias MoveFocusCallbackDlg = void delegate(DirectionType direction, Widget widget);
+  alias MoveFocusCallbackFunc = void function(DirectionType direction, Widget widget);
 
   /**
    * Connect to MoveFocus signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveFocus(MoveFocusCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveFocus(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveFocusCallbackDlg) || is(T == MoveFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto widget = getVal!Widget(_paramVals);
       auto direction = getVal!DirectionType(&_paramVals[1]);
-      _dgClosure.dlg(direction, widget);
+      _dClosure.dlg(direction, widget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-focus", closure, after);
   }
 
@@ -3258,32 +3268,34 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   widget = the instance the signal is connected to
    * Returns: %TRUE if tooltip should be shown right now, %FALSE otherwise.
    */
-  alias QueryTooltipCallback = bool delegate(int x, int y, bool keyboardMode, Tooltip tooltip, Widget widget);
+  alias QueryTooltipCallbackDlg = bool delegate(int x, int y, bool keyboardMode, Tooltip tooltip, Widget widget);
+  alias QueryTooltipCallbackFunc = bool function(int x, int y, bool keyboardMode, Tooltip tooltip, Widget widget);
 
   /**
    * Connect to QueryTooltip signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectQueryTooltip(QueryTooltipCallback dlg, Flag!"After" after = No.After)
+  ulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == QueryTooltipCallbackDlg) || is(T == QueryTooltipCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto widget = getVal!Widget(_paramVals);
       auto x = getVal!int(&_paramVals[1]);
       auto y = getVal!int(&_paramVals[2]);
       auto keyboardMode = getVal!bool(&_paramVals[3]);
       auto tooltip = getVal!Tooltip(&_paramVals[4]);
-      _retval = _dgClosure.dlg(x, y, keyboardMode, tooltip, widget);
+      _retval = _dClosure.dlg(x, y, keyboardMode, tooltip, widget);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("query-tooltip", closure, after);
   }
 
@@ -3293,26 +3305,28 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * or the widget has been mapped $(LPAREN)that is, it is going to be drawn$(RPAREN).
    *   widget = the instance the signal is connected to
    */
-  alias RealizeCallback = void delegate(Widget widget);
+  alias RealizeCallbackDlg = void delegate(Widget widget);
+  alias RealizeCallbackFunc = void function(Widget widget);
 
   /**
    * Connect to Realize signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRealize(RealizeCallback dlg, Flag!"After" after = No.After)
+  ulong connectRealize(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RealizeCallbackDlg) || is(T == RealizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto widget = getVal!Widget(_paramVals);
-      _dgClosure.dlg(widget);
+      _dClosure.dlg(widget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("realize", closure, after);
   }
 
@@ -3320,26 +3334,28 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Emitted when widget is shown.
    *   widget = the instance the signal is connected to
    */
-  alias ShowCallback = void delegate(Widget widget);
+  alias ShowCallbackDlg = void delegate(Widget widget);
+  alias ShowCallbackFunc = void function(Widget widget);
 
   /**
    * Connect to Show signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectShow(ShowCallback dlg, Flag!"After" after = No.After)
+  ulong connectShow(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ShowCallbackDlg) || is(T == ShowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto widget = getVal!Widget(_paramVals);
-      _dgClosure.dlg(widget);
+      _dClosure.dlg(widget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("show", closure, after);
   }
 
@@ -3350,27 +3366,29 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   flags = The previous state flags.
    *   widget = the instance the signal is connected to
    */
-  alias StateFlagsChangedCallback = void delegate(StateFlags flags, Widget widget);
+  alias StateFlagsChangedCallbackDlg = void delegate(StateFlags flags, Widget widget);
+  alias StateFlagsChangedCallbackFunc = void function(StateFlags flags, Widget widget);
 
   /**
    * Connect to StateFlagsChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectStateFlagsChanged(StateFlagsChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectStateFlagsChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == StateFlagsChangedCallbackDlg) || is(T == StateFlagsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto widget = getVal!Widget(_paramVals);
       auto flags = getVal!StateFlags(&_paramVals[1]);
-      _dgClosure.dlg(flags, widget);
+      _dClosure.dlg(flags, widget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("state-flags-changed", closure, after);
   }
 
@@ -3382,26 +3400,28 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * it can be used to, for example, stop an animation on the widget.
    *   widget = the instance the signal is connected to
    */
-  alias UnmapCallback = void delegate(Widget widget);
+  alias UnmapCallbackDlg = void delegate(Widget widget);
+  alias UnmapCallbackFunc = void function(Widget widget);
 
   /**
    * Connect to Unmap signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUnmap(UnmapCallback dlg, Flag!"After" after = No.After)
+  ulong connectUnmap(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UnmapCallbackDlg) || is(T == UnmapCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto widget = getVal!Widget(_paramVals);
-      _dgClosure.dlg(widget);
+      _dClosure.dlg(widget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unmap", closure, after);
   }
 
@@ -3411,26 +3431,28 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * or the widget has been unmapped $(LPAREN)that is, it is going to be hidden$(RPAREN).
    *   widget = the instance the signal is connected to
    */
-  alias UnrealizeCallback = void delegate(Widget widget);
+  alias UnrealizeCallbackDlg = void delegate(Widget widget);
+  alias UnrealizeCallbackFunc = void function(Widget widget);
 
   /**
    * Connect to Unrealize signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUnrealize(UnrealizeCallback dlg, Flag!"After" after = No.After)
+  ulong connectUnrealize(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UnrealizeCallbackDlg) || is(T == UnrealizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto widget = getVal!Widget(_paramVals);
-      _dgClosure.dlg(widget);
+      _dClosure.dlg(widget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unrealize", closure, after);
   }
 }

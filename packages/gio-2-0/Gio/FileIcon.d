@@ -20,10 +20,6 @@ import Gio.c.types;
 class FileIcon : ObjectG, Icon, LoadableIcon
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -58,14 +58,16 @@ interface SectionModel
    *   nItems = number of items with changes
    *   sectionModel = the instance the signal is connected to
    */
-  alias SectionsChangedCallback = void delegate(uint position, uint nItems, SectionModel sectionModel);
+  alias SectionsChangedCallbackDlg = void delegate(uint position, uint nItems, SectionModel sectionModel);
+  alias SectionsChangedCallbackFunc = void function(uint position, uint nItems, SectionModel sectionModel);
 
   /**
    * Connect to SectionsChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSectionsChanged(SectionsChangedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectSectionsChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SectionsChangedCallbackDlg) || is(T == SectionsChangedCallbackFunc));
+  }

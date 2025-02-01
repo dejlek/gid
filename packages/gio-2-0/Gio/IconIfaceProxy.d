@@ -7,10 +7,6 @@ import Gio.IconT;
 /// Proxy object for Gio.Icon interface when a GObject has no applicable D binding
 class IconIfaceProxy : IfaceProxy, Icon
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

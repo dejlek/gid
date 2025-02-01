@@ -24,10 +24,6 @@ import Gtk.c.types;
 class CellAreaContext : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

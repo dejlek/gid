@@ -266,14 +266,16 @@ interface FontChooser
 
    * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton] instead
    */
-  alias FontActivatedCallback = void delegate(string fontname, FontChooser fontChooser);
+  alias FontActivatedCallbackDlg = void delegate(string fontname, FontChooser fontChooser);
+  alias FontActivatedCallbackFunc = void function(string fontname, FontChooser fontChooser);
 
   /**
    * Connect to FontActivated signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectFontActivated(FontActivatedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectFontActivated(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == FontActivatedCallbackDlg) || is(T == FontActivatedCallbackFunc));
+  }

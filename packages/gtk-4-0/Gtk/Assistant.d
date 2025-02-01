@@ -457,26 +457,28 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias ApplyCallback = void delegate(Assistant assistant);
+  alias ApplyCallbackDlg = void delegate(Assistant assistant);
+  alias ApplyCallbackFunc = void function(Assistant assistant);
 
   /**
    * Connect to Apply signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectApply(ApplyCallback dlg, Flag!"After" after = No.After)
+  ulong connectApply(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ApplyCallbackDlg) || is(T == ApplyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto assistant = getVal!Assistant(_paramVals);
-      _dgClosure.dlg(assistant);
+      _dClosure.dlg(assistant);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("apply", closure, after);
   }
 
@@ -486,26 +488,28 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias CancelCallback = void delegate(Assistant assistant);
+  alias CancelCallbackDlg = void delegate(Assistant assistant);
+  alias CancelCallbackFunc = void function(Assistant assistant);
 
   /**
    * Connect to Cancel signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCancel(CancelCallback dlg, Flag!"After" after = No.After)
+  ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CancelCallbackDlg) || is(T == CancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto assistant = getVal!Assistant(_paramVals);
-      _dgClosure.dlg(assistant);
+      _dClosure.dlg(assistant);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cancel", closure, after);
   }
 
@@ -517,26 +521,28 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias CloseCallback = void delegate(Assistant assistant);
+  alias CloseCallbackDlg = void delegate(Assistant assistant);
+  alias CloseCallbackFunc = void function(Assistant assistant);
 
   /**
    * Connect to Close signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectClose(CloseCallback dlg, Flag!"After" after = No.After)
+  ulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CloseCallbackDlg) || is(T == CloseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto assistant = getVal!Assistant(_paramVals);
-      _dgClosure.dlg(assistant);
+      _dClosure.dlg(assistant);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("close", closure, after);
   }
 
@@ -546,26 +552,28 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias EscapeCallback = void delegate(Assistant assistant);
+  alias EscapeCallbackDlg = void delegate(Assistant assistant);
+  alias EscapeCallbackFunc = void function(Assistant assistant);
 
   /**
    * Connect to Escape signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEscape(EscapeCallback dlg, Flag!"After" after = No.After)
+  ulong connectEscape(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EscapeCallbackDlg) || is(T == EscapeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto assistant = getVal!Assistant(_paramVals);
-      _dgClosure.dlg(assistant);
+      _dClosure.dlg(assistant);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("escape", closure, after);
   }
 
@@ -580,27 +588,29 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias PrepareCallback = void delegate(Widget page, Assistant assistant);
+  alias PrepareCallbackDlg = void delegate(Widget page, Assistant assistant);
+  alias PrepareCallbackFunc = void function(Widget page, Assistant assistant);
 
   /**
    * Connect to Prepare signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPrepare(PrepareCallback dlg, Flag!"After" after = No.After)
+  ulong connectPrepare(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PrepareCallbackDlg) || is(T == PrepareCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto assistant = getVal!Assistant(_paramVals);
       auto page = getVal!Widget(&_paramVals[1]);
-      _dgClosure.dlg(page, assistant);
+      _dClosure.dlg(page, assistant);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("prepare", closure, after);
   }
 }

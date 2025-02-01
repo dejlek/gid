@@ -7,10 +7,6 @@ import Gtk.AppChooserT;
 /// Proxy object for Gtk.AppChooser interface when a GObject has no applicable D binding
 class AppChooserIfaceProxy : IfaceProxy, AppChooser
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -87,10 +87,6 @@ import Gtk.c.types;
 class ApplicationWindow : Window, ActionGroup, ActionMap
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

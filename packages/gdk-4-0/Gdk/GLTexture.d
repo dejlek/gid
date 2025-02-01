@@ -20,10 +20,6 @@ import Gio.LoadableIconT;
 class GLTexture : Texture
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

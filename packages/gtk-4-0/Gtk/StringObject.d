@@ -15,10 +15,6 @@ import Gtk.c.types;
 class StringObject : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

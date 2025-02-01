@@ -110,7 +110,26 @@ __gshared extern(C)
   void function(GAppLaunchContext* context, const(char)* variable, const(char)* value) c_g_app_launch_context_setenv;
   void function(GAppLaunchContext* context, const(char)* variable) c_g_app_launch_context_unsetenv;
 
-  // Application
+  // ApplicationCommandLine
+  GType function() c_g_application_command_line_get_type;
+  GFile* function(GApplicationCommandLine* cmdline, const(char)* arg) c_g_application_command_line_create_file_for_arg;
+  void function(GApplicationCommandLine* cmdline) c_g_application_command_line_done;
+  char** function(GApplicationCommandLine* cmdline, int* argc) c_g_application_command_line_get_arguments;
+  const(char)* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_cwd;
+  const(char*)* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_environ;
+  int function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_exit_status;
+  bool function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_is_remote;
+  GVariantDict* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_options_dict;
+  VariantC* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_platform_data;
+  GInputStream* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_stdin;
+  const(char)* function(GApplicationCommandLine* cmdline, const(char)* name) c_g_application_command_line_getenv;
+  void function(GApplicationCommandLine* cmdline, const(char)* format,  ...) c_g_application_command_line_print;
+  void function(GApplicationCommandLine* cmdline, const(char)* message) c_g_application_command_line_print_literal;
+  void function(GApplicationCommandLine* cmdline, const(char)* format,  ...) c_g_application_command_line_printerr;
+  void function(GApplicationCommandLine* cmdline, const(char)* message) c_g_application_command_line_printerr_literal;
+  void function(GApplicationCommandLine* cmdline, int exitStatus) c_g_application_command_line_set_exit_status;
+
+  // ApplicationGio
   GType function() c_g_application_get_type;
   GApplication* function(const(char)* applicationId, GApplicationFlags flags) c_g_application_new;
   GApplication* function() c_g_application_get_default;
@@ -151,25 +170,6 @@ __gshared extern(C)
   void function(GApplication* application, ObjectC* object, const(char)* property) c_g_application_unbind_busy_property;
   void function(GApplication* application) c_g_application_unmark_busy;
   void function(GApplication* application, const(char)* id) c_g_application_withdraw_notification;
-
-  // ApplicationCommandLine
-  GType function() c_g_application_command_line_get_type;
-  GFile* function(GApplicationCommandLine* cmdline, const(char)* arg) c_g_application_command_line_create_file_for_arg;
-  void function(GApplicationCommandLine* cmdline) c_g_application_command_line_done;
-  char** function(GApplicationCommandLine* cmdline, int* argc) c_g_application_command_line_get_arguments;
-  const(char)* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_cwd;
-  const(char*)* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_environ;
-  int function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_exit_status;
-  bool function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_is_remote;
-  GVariantDict* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_options_dict;
-  VariantC* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_platform_data;
-  GInputStream* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_stdin;
-  const(char)* function(GApplicationCommandLine* cmdline, const(char)* name) c_g_application_command_line_getenv;
-  void function(GApplicationCommandLine* cmdline, const(char)* format,  ...) c_g_application_command_line_print;
-  void function(GApplicationCommandLine* cmdline, const(char)* message) c_g_application_command_line_print_literal;
-  void function(GApplicationCommandLine* cmdline, const(char)* format,  ...) c_g_application_command_line_printerr;
-  void function(GApplicationCommandLine* cmdline, const(char)* message) c_g_application_command_line_printerr_literal;
-  void function(GApplicationCommandLine* cmdline, int exitStatus) c_g_application_command_line_set_exit_status;
 
   // AsyncInitable
   GType function() c_g_async_initable_get_type;
@@ -2456,7 +2456,26 @@ alias g_app_launch_context_launch_failed = c_g_app_launch_context_launch_failed;
 alias g_app_launch_context_setenv = c_g_app_launch_context_setenv;
 alias g_app_launch_context_unsetenv = c_g_app_launch_context_unsetenv;
 
-// Application
+// ApplicationCommandLine
+alias g_application_command_line_get_type = c_g_application_command_line_get_type;
+alias g_application_command_line_create_file_for_arg = c_g_application_command_line_create_file_for_arg;
+alias g_application_command_line_done = c_g_application_command_line_done;
+alias g_application_command_line_get_arguments = c_g_application_command_line_get_arguments;
+alias g_application_command_line_get_cwd = c_g_application_command_line_get_cwd;
+alias g_application_command_line_get_environ = c_g_application_command_line_get_environ;
+alias g_application_command_line_get_exit_status = c_g_application_command_line_get_exit_status;
+alias g_application_command_line_get_is_remote = c_g_application_command_line_get_is_remote;
+alias g_application_command_line_get_options_dict = c_g_application_command_line_get_options_dict;
+alias g_application_command_line_get_platform_data = c_g_application_command_line_get_platform_data;
+alias g_application_command_line_get_stdin = c_g_application_command_line_get_stdin;
+alias g_application_command_line_getenv = c_g_application_command_line_getenv;
+alias g_application_command_line_print = c_g_application_command_line_print;
+alias g_application_command_line_print_literal = c_g_application_command_line_print_literal;
+alias g_application_command_line_printerr = c_g_application_command_line_printerr;
+alias g_application_command_line_printerr_literal = c_g_application_command_line_printerr_literal;
+alias g_application_command_line_set_exit_status = c_g_application_command_line_set_exit_status;
+
+// ApplicationGio
 alias g_application_get_type = c_g_application_get_type;
 alias g_application_new = c_g_application_new;
 alias g_application_get_default = c_g_application_get_default;
@@ -2497,25 +2516,6 @@ alias g_application_set_version = c_g_application_set_version;
 alias g_application_unbind_busy_property = c_g_application_unbind_busy_property;
 alias g_application_unmark_busy = c_g_application_unmark_busy;
 alias g_application_withdraw_notification = c_g_application_withdraw_notification;
-
-// ApplicationCommandLine
-alias g_application_command_line_get_type = c_g_application_command_line_get_type;
-alias g_application_command_line_create_file_for_arg = c_g_application_command_line_create_file_for_arg;
-alias g_application_command_line_done = c_g_application_command_line_done;
-alias g_application_command_line_get_arguments = c_g_application_command_line_get_arguments;
-alias g_application_command_line_get_cwd = c_g_application_command_line_get_cwd;
-alias g_application_command_line_get_environ = c_g_application_command_line_get_environ;
-alias g_application_command_line_get_exit_status = c_g_application_command_line_get_exit_status;
-alias g_application_command_line_get_is_remote = c_g_application_command_line_get_is_remote;
-alias g_application_command_line_get_options_dict = c_g_application_command_line_get_options_dict;
-alias g_application_command_line_get_platform_data = c_g_application_command_line_get_platform_data;
-alias g_application_command_line_get_stdin = c_g_application_command_line_get_stdin;
-alias g_application_command_line_getenv = c_g_application_command_line_getenv;
-alias g_application_command_line_print = c_g_application_command_line_print;
-alias g_application_command_line_print_literal = c_g_application_command_line_print_literal;
-alias g_application_command_line_printerr = c_g_application_command_line_printerr;
-alias g_application_command_line_printerr_literal = c_g_application_command_line_printerr_literal;
-alias g_application_command_line_set_exit_status = c_g_application_command_line_set_exit_status;
 
 // AsyncInitable
 alias g_async_initable_get_type = c_g_async_initable_get_type;
@@ -4803,7 +4803,26 @@ shared static this()
   link(g_app_launch_context_setenv, "g_app_launch_context_setenv");
   link(g_app_launch_context_unsetenv, "g_app_launch_context_unsetenv");
 
-  // Application
+  // ApplicationCommandLine
+  link(g_application_command_line_get_type, "g_application_command_line_get_type");
+  link(g_application_command_line_create_file_for_arg, "g_application_command_line_create_file_for_arg");
+  link(g_application_command_line_done, "g_application_command_line_done");
+  link(g_application_command_line_get_arguments, "g_application_command_line_get_arguments");
+  link(g_application_command_line_get_cwd, "g_application_command_line_get_cwd");
+  link(g_application_command_line_get_environ, "g_application_command_line_get_environ");
+  link(g_application_command_line_get_exit_status, "g_application_command_line_get_exit_status");
+  link(g_application_command_line_get_is_remote, "g_application_command_line_get_is_remote");
+  link(g_application_command_line_get_options_dict, "g_application_command_line_get_options_dict");
+  link(g_application_command_line_get_platform_data, "g_application_command_line_get_platform_data");
+  link(g_application_command_line_get_stdin, "g_application_command_line_get_stdin");
+  link(g_application_command_line_getenv, "g_application_command_line_getenv");
+  link(g_application_command_line_print, "g_application_command_line_print");
+  link(g_application_command_line_print_literal, "g_application_command_line_print_literal");
+  link(g_application_command_line_printerr, "g_application_command_line_printerr");
+  link(g_application_command_line_printerr_literal, "g_application_command_line_printerr_literal");
+  link(g_application_command_line_set_exit_status, "g_application_command_line_set_exit_status");
+
+  // ApplicationGio
   link(g_application_get_type, "g_application_get_type");
   link(g_application_new, "g_application_new");
   link(g_application_get_default, "g_application_get_default");
@@ -4844,25 +4863,6 @@ shared static this()
   link(g_application_unbind_busy_property, "g_application_unbind_busy_property");
   link(g_application_unmark_busy, "g_application_unmark_busy");
   link(g_application_withdraw_notification, "g_application_withdraw_notification");
-
-  // ApplicationCommandLine
-  link(g_application_command_line_get_type, "g_application_command_line_get_type");
-  link(g_application_command_line_create_file_for_arg, "g_application_command_line_create_file_for_arg");
-  link(g_application_command_line_done, "g_application_command_line_done");
-  link(g_application_command_line_get_arguments, "g_application_command_line_get_arguments");
-  link(g_application_command_line_get_cwd, "g_application_command_line_get_cwd");
-  link(g_application_command_line_get_environ, "g_application_command_line_get_environ");
-  link(g_application_command_line_get_exit_status, "g_application_command_line_get_exit_status");
-  link(g_application_command_line_get_is_remote, "g_application_command_line_get_is_remote");
-  link(g_application_command_line_get_options_dict, "g_application_command_line_get_options_dict");
-  link(g_application_command_line_get_platform_data, "g_application_command_line_get_platform_data");
-  link(g_application_command_line_get_stdin, "g_application_command_line_get_stdin");
-  link(g_application_command_line_getenv, "g_application_command_line_getenv");
-  link(g_application_command_line_print, "g_application_command_line_print");
-  link(g_application_command_line_print_literal, "g_application_command_line_print_literal");
-  link(g_application_command_line_printerr, "g_application_command_line_printerr");
-  link(g_application_command_line_printerr_literal, "g_application_command_line_printerr_literal");
-  link(g_application_command_line_set_exit_status, "g_application_command_line_set_exit_status");
 
   // AsyncInitable
   link(g_async_initable_get_type, "g_async_initable_get_type");

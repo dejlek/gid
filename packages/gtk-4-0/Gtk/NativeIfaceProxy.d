@@ -7,10 +7,6 @@ import Gtk.NativeT;
 /// Proxy object for Gtk.Native interface when a GObject has no applicable D binding
 class NativeIfaceProxy : IfaceProxy, Native
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

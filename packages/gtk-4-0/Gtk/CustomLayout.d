@@ -18,10 +18,6 @@ import Gtk.c.types;
 class CustomLayout : LayoutManager
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

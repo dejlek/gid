@@ -104,10 +104,6 @@ import Gsk.c.types;
 class GLShader : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

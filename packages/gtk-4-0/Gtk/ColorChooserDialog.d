@@ -40,10 +40,6 @@ import Gtk.c.types;
 class ColorChooserDialog : Dialog, ColorChooser
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

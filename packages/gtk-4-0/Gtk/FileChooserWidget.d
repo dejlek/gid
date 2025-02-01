@@ -28,10 +28,6 @@ import Gtk.c.types;
 class FileChooserWidget : Widget, FileChooser
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -75,26 +71,28 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>D</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias DesktopFolderCallback = void delegate(FileChooserWidget fileChooserWidget);
+  alias DesktopFolderCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
+  alias DesktopFolderCallbackFunc = void function(FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to DesktopFolder signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDesktopFolder(DesktopFolderCallback dlg, Flag!"After" after = No.After)
+  ulong connectDesktopFolder(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DesktopFolderCallbackDlg) || is(T == DesktopFolderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      _dgClosure.dlg(fileChooserWidget);
+      _dClosure.dlg(fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("desktop-folder", closure, after);
   }
 
@@ -110,26 +108,28 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>Down</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias DownFolderCallback = void delegate(FileChooserWidget fileChooserWidget);
+  alias DownFolderCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
+  alias DownFolderCallbackFunc = void function(FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to DownFolder signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDownFolder(DownFolderCallback dlg, Flag!"After" after = No.After)
+  ulong connectDownFolder(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DownFolderCallbackDlg) || is(T == DownFolderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      _dgClosure.dlg(fileChooserWidget);
+      _dClosure.dlg(fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("down-folder", closure, after);
   }
 
@@ -141,26 +141,28 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>Home</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias HomeFolderCallback = void delegate(FileChooserWidget fileChooserWidget);
+  alias HomeFolderCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
+  alias HomeFolderCallbackFunc = void function(FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to HomeFolder signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectHomeFolder(HomeFolderCallback dlg, Flag!"After" after = No.After)
+  ulong connectHomeFolder(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == HomeFolderCallbackDlg) || is(T == HomeFolderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      _dgClosure.dlg(fileChooserWidget);
+      _dClosure.dlg(fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("home-folder", closure, after);
   }
 
@@ -179,27 +181,29 @@ class FileChooserWidget : Widget, FileChooser
    *   path = a string that gets put in the text entry for the file name
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias LocationPopupCallback = void delegate(string path, FileChooserWidget fileChooserWidget);
+  alias LocationPopupCallbackDlg = void delegate(string path, FileChooserWidget fileChooserWidget);
+  alias LocationPopupCallbackFunc = void function(string path, FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to LocationPopup signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectLocationPopup(LocationPopupCallback dlg, Flag!"After" after = No.After)
+  ulong connectLocationPopup(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == LocationPopupCallbackDlg) || is(T == LocationPopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
       auto path = getVal!string(&_paramVals[1]);
-      _dgClosure.dlg(path, fileChooserWidget);
+      _dClosure.dlg(path, fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("location-popup", closure, after);
   }
 
@@ -211,26 +215,28 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Control</kbd>-<kbd>V</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias LocationPopupOnPasteCallback = void delegate(FileChooserWidget fileChooserWidget);
+  alias LocationPopupOnPasteCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
+  alias LocationPopupOnPasteCallbackFunc = void function(FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to LocationPopupOnPaste signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectLocationPopupOnPaste(LocationPopupOnPasteCallback dlg, Flag!"After" after = No.After)
+  ulong connectLocationPopupOnPaste(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == LocationPopupOnPasteCallbackDlg) || is(T == LocationPopupOnPasteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      _dgClosure.dlg(fileChooserWidget);
+      _dClosure.dlg(fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("location-popup-on-paste", closure, after);
   }
 
@@ -243,26 +249,28 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Control</kbd>-<kbd>L</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias LocationTogglePopupCallback = void delegate(FileChooserWidget fileChooserWidget);
+  alias LocationTogglePopupCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
+  alias LocationTogglePopupCallbackFunc = void function(FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to LocationTogglePopup signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectLocationTogglePopup(LocationTogglePopupCallback dlg, Flag!"After" after = No.After)
+  ulong connectLocationTogglePopup(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == LocationTogglePopupCallbackDlg) || is(T == LocationTogglePopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      _dgClosure.dlg(fileChooserWidget);
+      _dClosure.dlg(fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("location-toggle-popup", closure, after);
   }
 
@@ -273,26 +281,28 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>P</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias PlacesShortcutCallback = void delegate(FileChooserWidget fileChooserWidget);
+  alias PlacesShortcutCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
+  alias PlacesShortcutCallbackFunc = void function(FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to PlacesShortcut signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPlacesShortcut(PlacesShortcutCallback dlg, Flag!"After" after = No.After)
+  ulong connectPlacesShortcut(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PlacesShortcutCallbackDlg) || is(T == PlacesShortcutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      _dgClosure.dlg(fileChooserWidget);
+      _dClosure.dlg(fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("places-shortcut", closure, after);
   }
 
@@ -312,27 +322,29 @@ class FileChooserWidget : Widget, FileChooser
    *   bookmarkIndex = the number of the bookmark to switch to
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias QuickBookmarkCallback = void delegate(int bookmarkIndex, FileChooserWidget fileChooserWidget);
+  alias QuickBookmarkCallbackDlg = void delegate(int bookmarkIndex, FileChooserWidget fileChooserWidget);
+  alias QuickBookmarkCallbackFunc = void function(int bookmarkIndex, FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to QuickBookmark signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectQuickBookmark(QuickBookmarkCallback dlg, Flag!"After" after = No.After)
+  ulong connectQuickBookmark(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == QuickBookmarkCallbackDlg) || is(T == QuickBookmarkCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
       auto bookmarkIndex = getVal!int(&_paramVals[1]);
-      _dgClosure.dlg(bookmarkIndex, fileChooserWidget);
+      _dClosure.dlg(bookmarkIndex, fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("quick-bookmark", closure, after);
   }
 
@@ -343,26 +355,28 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>R</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias RecentShortcutCallback = void delegate(FileChooserWidget fileChooserWidget);
+  alias RecentShortcutCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
+  alias RecentShortcutCallbackFunc = void function(FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to RecentShortcut signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRecentShortcut(RecentShortcutCallback dlg, Flag!"After" after = No.After)
+  ulong connectRecentShortcut(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RecentShortcutCallbackDlg) || is(T == RecentShortcutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      _dgClosure.dlg(fileChooserWidget);
+      _dClosure.dlg(fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("recent-shortcut", closure, after);
   }
 
@@ -373,26 +387,28 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>S</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias SearchShortcutCallback = void delegate(FileChooserWidget fileChooserWidget);
+  alias SearchShortcutCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
+  alias SearchShortcutCallbackFunc = void function(FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to SearchShortcut signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSearchShortcut(SearchShortcutCallback dlg, Flag!"After" after = No.After)
+  ulong connectSearchShortcut(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SearchShortcutCallbackDlg) || is(T == SearchShortcutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      _dgClosure.dlg(fileChooserWidget);
+      _dClosure.dlg(fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("search-shortcut", closure, after);
   }
 
@@ -403,26 +419,28 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Control</kbd>-<kbd>H</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias ShowHiddenCallback = void delegate(FileChooserWidget fileChooserWidget);
+  alias ShowHiddenCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
+  alias ShowHiddenCallbackFunc = void function(FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to ShowHidden signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectShowHidden(ShowHiddenCallback dlg, Flag!"After" after = No.After)
+  ulong connectShowHidden(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ShowHiddenCallbackDlg) || is(T == ShowHiddenCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      _dgClosure.dlg(fileChooserWidget);
+      _dClosure.dlg(fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("show-hidden", closure, after);
   }
 
@@ -434,26 +452,28 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>Up</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias UpFolderCallback = void delegate(FileChooserWidget fileChooserWidget);
+  alias UpFolderCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
+  alias UpFolderCallbackFunc = void function(FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to UpFolder signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUpFolder(UpFolderCallback dlg, Flag!"After" after = No.After)
+  ulong connectUpFolder(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UpFolderCallbackDlg) || is(T == UpFolderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      _dgClosure.dlg(fileChooserWidget);
+      _dClosure.dlg(fileChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("up-folder", closure, after);
   }
 }

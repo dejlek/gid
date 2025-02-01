@@ -169,14 +169,16 @@ interface ListModel
    *   added = the number of items added
    *   listModel = the instance the signal is connected to
    */
-  alias ItemsChangedCallback = void delegate(uint position, uint removed, uint added, ListModel listModel);
+  alias ItemsChangedCallbackDlg = void delegate(uint position, uint removed, uint added, ListModel listModel);
+  alias ItemsChangedCallbackFunc = void function(uint position, uint removed, uint added, ListModel listModel);
 
   /**
    * Connect to ItemsChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectItemsChanged(ItemsChangedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ItemsChangedCallbackDlg) || is(T == ItemsChangedCallbackFunc));
+  }

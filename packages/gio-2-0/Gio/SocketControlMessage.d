@@ -27,10 +27,6 @@ import Gio.c.types;
 class SocketControlMessage : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -20,10 +20,6 @@ import Gtk.c.types;
 class EntryBuffer : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -212,28 +208,30 @@ class EntryBuffer : ObjectG
    *   nChars = The number of characters that were deleted.
    *   entryBuffer = the instance the signal is connected to
    */
-  alias DeletedTextCallback = void delegate(uint position, uint nChars, EntryBuffer entryBuffer);
+  alias DeletedTextCallbackDlg = void delegate(uint position, uint nChars, EntryBuffer entryBuffer);
+  alias DeletedTextCallbackFunc = void function(uint position, uint nChars, EntryBuffer entryBuffer);
 
   /**
    * Connect to DeletedText signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDeletedText(DeletedTextCallback dlg, Flag!"After" after = No.After)
+  ulong connectDeletedText(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DeletedTextCallbackDlg) || is(T == DeletedTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto entryBuffer = getVal!EntryBuffer(_paramVals);
       auto position = getVal!uint(&_paramVals[1]);
       auto nChars = getVal!uint(&_paramVals[2]);
-      _dgClosure.dlg(position, nChars, entryBuffer);
+      _dClosure.dlg(position, nChars, entryBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("deleted-text", closure, after);
   }
 
@@ -245,29 +243,31 @@ class EntryBuffer : ObjectG
    *   nChars = The number of characters that were inserted.
    *   entryBuffer = the instance the signal is connected to
    */
-  alias InsertedTextCallback = void delegate(uint position, string chars, uint nChars, EntryBuffer entryBuffer);
+  alias InsertedTextCallbackDlg = void delegate(uint position, string chars, uint nChars, EntryBuffer entryBuffer);
+  alias InsertedTextCallbackFunc = void function(uint position, string chars, uint nChars, EntryBuffer entryBuffer);
 
   /**
    * Connect to InsertedText signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInsertedText(InsertedTextCallback dlg, Flag!"After" after = No.After)
+  ulong connectInsertedText(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InsertedTextCallbackDlg) || is(T == InsertedTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto entryBuffer = getVal!EntryBuffer(_paramVals);
       auto position = getVal!uint(&_paramVals[1]);
       auto chars = getVal!string(&_paramVals[2]);
       auto nChars = getVal!uint(&_paramVals[3]);
-      _dgClosure.dlg(position, chars, nChars, entryBuffer);
+      _dClosure.dlg(position, chars, nChars, entryBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("inserted-text", closure, after);
   }
 }

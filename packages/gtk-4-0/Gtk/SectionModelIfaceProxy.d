@@ -7,10 +7,6 @@ import Gtk.SectionModelT;
 /// Proxy object for Gtk.SectionModel interface when a GObject has no applicable D binding
 class SectionModelIfaceProxy : IfaceProxy, SectionModel
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

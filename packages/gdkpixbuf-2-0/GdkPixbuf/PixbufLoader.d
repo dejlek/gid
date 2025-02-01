@@ -265,26 +265,28 @@ class PixbufLoader : ObjectG
    * pixbuf.
    *   pixbufLoader = the instance the signal is connected to
    */
-  alias AreaPreparedCallback = void delegate(PixbufLoader pixbufLoader);
+  alias AreaPreparedCallbackDlg = void delegate(PixbufLoader pixbufLoader);
+  alias AreaPreparedCallbackFunc = void function(PixbufLoader pixbufLoader);
 
   /**
    * Connect to AreaPrepared signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAreaPrepared(AreaPreparedCallback dlg, Flag!"After" after = No.After)
+  ulong connectAreaPrepared(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AreaPreparedCallbackDlg) || is(T == AreaPreparedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto pixbufLoader = getVal!PixbufLoader(_paramVals);
-      _dgClosure.dlg(pixbufLoader);
+      _dClosure.dlg(pixbufLoader);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("area-prepared", closure, after);
   }
 
@@ -302,30 +304,32 @@ class PixbufLoader : ObjectG
    *   height = Height of updated area.
    *   pixbufLoader = the instance the signal is connected to
    */
-  alias AreaUpdatedCallback = void delegate(int x, int y, int width, int height, PixbufLoader pixbufLoader);
+  alias AreaUpdatedCallbackDlg = void delegate(int x, int y, int width, int height, PixbufLoader pixbufLoader);
+  alias AreaUpdatedCallbackFunc = void function(int x, int y, int width, int height, PixbufLoader pixbufLoader);
 
   /**
    * Connect to AreaUpdated signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAreaUpdated(AreaUpdatedCallback dlg, Flag!"After" after = No.After)
+  ulong connectAreaUpdated(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AreaUpdatedCallbackDlg) || is(T == AreaUpdatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto pixbufLoader = getVal!PixbufLoader(_paramVals);
       auto x = getVal!int(&_paramVals[1]);
       auto y = getVal!int(&_paramVals[2]);
       auto width = getVal!int(&_paramVals[3]);
       auto height = getVal!int(&_paramVals[4]);
-      _dgClosure.dlg(x, y, width, height, pixbufLoader);
+      _dClosure.dlg(x, y, width, height, pixbufLoader);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("area-updated", closure, after);
   }
 
@@ -336,26 +340,28 @@ class PixbufLoader : ObjectG
    * drives it.
    *   pixbufLoader = the instance the signal is connected to
    */
-  alias ClosedCallback = void delegate(PixbufLoader pixbufLoader);
+  alias ClosedCallbackDlg = void delegate(PixbufLoader pixbufLoader);
+  alias ClosedCallbackFunc = void function(PixbufLoader pixbufLoader);
 
   /**
    * Connect to Closed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectClosed(ClosedCallback dlg, Flag!"After" after = No.After)
+  ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ClosedCallbackDlg) || is(T == ClosedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto pixbufLoader = getVal!PixbufLoader(_paramVals);
-      _dgClosure.dlg(pixbufLoader);
+      _dClosure.dlg(pixbufLoader);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("closed", closure, after);
   }
 
@@ -371,28 +377,30 @@ class PixbufLoader : ObjectG
    *   height = the original height of the image
    *   pixbufLoader = the instance the signal is connected to
    */
-  alias SizePreparedCallback = void delegate(int width, int height, PixbufLoader pixbufLoader);
+  alias SizePreparedCallbackDlg = void delegate(int width, int height, PixbufLoader pixbufLoader);
+  alias SizePreparedCallbackFunc = void function(int width, int height, PixbufLoader pixbufLoader);
 
   /**
    * Connect to SizePrepared signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSizePrepared(SizePreparedCallback dlg, Flag!"After" after = No.After)
+  ulong connectSizePrepared(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SizePreparedCallbackDlg) || is(T == SizePreparedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto pixbufLoader = getVal!PixbufLoader(_paramVals);
       auto width = getVal!int(&_paramVals[1]);
       auto height = getVal!int(&_paramVals[2]);
-      _dgClosure.dlg(width, height, pixbufLoader);
+      _dClosure.dlg(width, height, pixbufLoader);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("size-prepared", closure, after);
   }
 }

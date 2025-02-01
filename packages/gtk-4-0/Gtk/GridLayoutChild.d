@@ -12,10 +12,6 @@ import Gtk.c.types;
 class GridLayoutChild : LayoutChild
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

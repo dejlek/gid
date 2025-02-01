@@ -70,10 +70,6 @@ import cairo.Context : DcairoContext = Context;
 class PrintContext : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

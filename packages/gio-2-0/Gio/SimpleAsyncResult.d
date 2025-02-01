@@ -157,10 +157,6 @@ import Gio.c.types;
 class SimpleAsyncResult : ObjectG, AsyncResult
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

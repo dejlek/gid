@@ -15,10 +15,6 @@ import Gtk.c.types;
 class ColumnViewRow : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

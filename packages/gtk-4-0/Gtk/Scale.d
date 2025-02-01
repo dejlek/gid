@@ -87,10 +87,6 @@ import Pango.Layout;
 class Scale : Range
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -36,10 +36,6 @@ import Gtk.c.types;
 class StringList : ObjectG, ListModel, Buildable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

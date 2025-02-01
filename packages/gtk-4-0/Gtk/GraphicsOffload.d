@@ -41,10 +41,6 @@ import Gtk.c.types;
 class GraphicsOffload : Widget
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

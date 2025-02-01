@@ -44,10 +44,6 @@ import Gtk.c.types;
 class AppChooserWidget : Widget, AppChooser
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -255,27 +251,29 @@ class AppChooserWidget : Widget, AppChooser
    *   application = the activated `GAppInfo`
    *   appChooserWidget = the instance the signal is connected to
    */
-  alias ApplicationActivatedCallback = void delegate(AppInfo application, AppChooserWidget appChooserWidget);
+  alias ApplicationActivatedCallbackDlg = void delegate(AppInfo application, AppChooserWidget appChooserWidget);
+  alias ApplicationActivatedCallbackFunc = void function(AppInfo application, AppChooserWidget appChooserWidget);
 
   /**
    * Connect to ApplicationActivated signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectApplicationActivated(ApplicationActivatedCallback dlg, Flag!"After" after = No.After)
+  ulong connectApplicationActivated(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ApplicationActivatedCallbackDlg) || is(T == ApplicationActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto appChooserWidget = getVal!AppChooserWidget(_paramVals);
       auto application = getVal!AppInfo(&_paramVals[1]);
-      _dgClosure.dlg(application, appChooserWidget);
+      _dClosure.dlg(application, appChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("application-activated", closure, after);
   }
 
@@ -285,27 +283,29 @@ class AppChooserWidget : Widget, AppChooser
    *   application = the selected `GAppInfo`
    *   appChooserWidget = the instance the signal is connected to
    */
-  alias ApplicationSelectedCallback = void delegate(AppInfo application, AppChooserWidget appChooserWidget);
+  alias ApplicationSelectedCallbackDlg = void delegate(AppInfo application, AppChooserWidget appChooserWidget);
+  alias ApplicationSelectedCallbackFunc = void function(AppInfo application, AppChooserWidget appChooserWidget);
 
   /**
    * Connect to ApplicationSelected signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectApplicationSelected(ApplicationSelectedCallback dlg, Flag!"After" after = No.After)
+  ulong connectApplicationSelected(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ApplicationSelectedCallbackDlg) || is(T == ApplicationSelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto appChooserWidget = getVal!AppChooserWidget(_paramVals);
       auto application = getVal!AppInfo(&_paramVals[1]);
-      _dgClosure.dlg(application, appChooserWidget);
+      _dClosure.dlg(application, appChooserWidget);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("application-selected", closure, after);
   }
 }

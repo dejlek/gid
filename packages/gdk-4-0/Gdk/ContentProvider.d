@@ -27,10 +27,6 @@ import Gio.Types;
 class ContentProvider : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -173,26 +169,28 @@ class ContentProvider : ObjectG
    * Emitted whenever the content provided by this provider has changed.
    *   contentProvider = the instance the signal is connected to
    */
-  alias ContentChangedCallback = void delegate(ContentProvider contentProvider);
+  alias ContentChangedCallbackDlg = void delegate(ContentProvider contentProvider);
+  alias ContentChangedCallbackFunc = void function(ContentProvider contentProvider);
 
   /**
    * Connect to ContentChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectContentChanged(ContentChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectContentChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ContentChangedCallbackDlg) || is(T == ContentChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto contentProvider = getVal!ContentProvider(_paramVals);
-      _dgClosure.dlg(contentProvider);
+      _dClosure.dlg(contentProvider);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("content-changed", closure, after);
   }
 }

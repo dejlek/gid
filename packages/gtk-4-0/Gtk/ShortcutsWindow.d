@@ -58,10 +58,6 @@ import Gtk.c.types;
 class ShortcutsWindow : Window
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -97,26 +93,28 @@ class ShortcutsWindow : Window
    * The default binding for this signal is the Escape key.
    *   shortcutsWindow = the instance the signal is connected to
    */
-  alias CloseCallback = void delegate(ShortcutsWindow shortcutsWindow);
+  alias CloseCallbackDlg = void delegate(ShortcutsWindow shortcutsWindow);
+  alias CloseCallbackFunc = void function(ShortcutsWindow shortcutsWindow);
 
   /**
    * Connect to Close signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectClose(CloseCallback dlg, Flag!"After" after = No.After)
+  ulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CloseCallbackDlg) || is(T == CloseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto shortcutsWindow = getVal!ShortcutsWindow(_paramVals);
-      _dgClosure.dlg(shortcutsWindow);
+      _dClosure.dlg(shortcutsWindow);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("close", closure, after);
   }
 
@@ -126,26 +124,28 @@ class ShortcutsWindow : Window
    * The default binding for this signal is Control-F.
    *   shortcutsWindow = the instance the signal is connected to
    */
-  alias SearchCallback = void delegate(ShortcutsWindow shortcutsWindow);
+  alias SearchCallbackDlg = void delegate(ShortcutsWindow shortcutsWindow);
+  alias SearchCallbackFunc = void function(ShortcutsWindow shortcutsWindow);
 
   /**
    * Connect to Search signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSearch(SearchCallback dlg, Flag!"After" after = No.After)
+  ulong connectSearch(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SearchCallbackDlg) || is(T == SearchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto shortcutsWindow = getVal!ShortcutsWindow(_paramVals);
-      _dgClosure.dlg(shortcutsWindow);
+      _dClosure.dlg(shortcutsWindow);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("search", closure, after);
   }
 }

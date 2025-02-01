@@ -80,26 +80,28 @@ class EventControllerFocus : EventController
    * property for changes.
    *   eventControllerFocus = the instance the signal is connected to
    */
-  alias EnterCallback = void delegate(EventControllerFocus eventControllerFocus);
+  alias EnterCallbackDlg = void delegate(EventControllerFocus eventControllerFocus);
+  alias EnterCallbackFunc = void function(EventControllerFocus eventControllerFocus);
 
   /**
    * Connect to Enter signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEnter(EnterCallback dlg, Flag!"After" after = No.After)
+  ulong connectEnter(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EnterCallbackDlg) || is(T == EnterCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto eventControllerFocus = getVal!EventControllerFocus(_paramVals);
-      _dgClosure.dlg(eventControllerFocus);
+      _dClosure.dlg(eventControllerFocus);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("enter", closure, after);
   }
 
@@ -114,26 +116,28 @@ class EventControllerFocus : EventController
    * property for changes.
    *   eventControllerFocus = the instance the signal is connected to
    */
-  alias LeaveCallback = void delegate(EventControllerFocus eventControllerFocus);
+  alias LeaveCallbackDlg = void delegate(EventControllerFocus eventControllerFocus);
+  alias LeaveCallbackFunc = void function(EventControllerFocus eventControllerFocus);
 
   /**
    * Connect to Leave signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectLeave(LeaveCallback dlg, Flag!"After" after = No.After)
+  ulong connectLeave(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == LeaveCallbackDlg) || is(T == LeaveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto eventControllerFocus = getVal!EventControllerFocus(_paramVals);
-      _dgClosure.dlg(eventControllerFocus);
+      _dClosure.dlg(eventControllerFocus);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("leave", closure, after);
   }
 }

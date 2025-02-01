@@ -216,26 +216,28 @@ template PaintableT()
    * the icon theme for an icon changing.
    *   paintable = the instance the signal is connected to
    */
-  alias InvalidateContentsCallback = void delegate(Paintable paintable);
+  alias InvalidateContentsCallbackDlg = void delegate(Paintable paintable);
+  alias InvalidateContentsCallbackFunc = void function(Paintable paintable);
 
   /**
    * Connect to InvalidateContents signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInvalidateContents(InvalidateContentsCallback dlg, Flag!"After" after = No.After)
+  ulong connectInvalidateContents(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InvalidateContentsCallbackDlg) || is(T == InvalidateContentsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto paintable = getVal!Paintable(_paramVals);
-      _dgClosure.dlg(paintable);
+      _dClosure.dlg(paintable);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("invalidate-contents", closure, after);
   }
 
@@ -250,26 +252,28 @@ template PaintableT()
    * the contents of a toplevel surface being resized.
    *   paintable = the instance the signal is connected to
    */
-  alias InvalidateSizeCallback = void delegate(Paintable paintable);
+  alias InvalidateSizeCallbackDlg = void delegate(Paintable paintable);
+  alias InvalidateSizeCallbackFunc = void function(Paintable paintable);
 
   /**
    * Connect to InvalidateSize signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInvalidateSize(InvalidateSizeCallback dlg, Flag!"After" after = No.After)
+  ulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InvalidateSizeCallbackDlg) || is(T == InvalidateSizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto paintable = getVal!Paintable(_paramVals);
-      _dgClosure.dlg(paintable);
+      _dClosure.dlg(paintable);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("invalidate-size", closure, after);
   }
 }

@@ -34,17 +34,24 @@ private shared TypeInfo_Class[GType] gtypeClasses; // Map of GTypes to D class i
 private shared TypeInfo_Class[TypeInfo_Interface] ifaceProxyClasses; // Map of interface type info to proxy class info
 private shared bool classMapsInitialized;
 
+/**
+ * A convenient string mixin to be used for ObjectG derived classes to declare boilerplate constructors.
+ * Returns: A string value to use with mixin() within ObjectG derived classes.
+ */
+string objectGMixin()
+{
+  return
+`  this(void* cObj, Flag!"Take" take = No.Take)
+  {
+    super(cObj, take);
+  }
+`;
+}
+
 /// Base class wrapper for GObject types
 class ObjectG
 {
   protected ObjectC* cInstancePtr; // Pointer to wrapped C GObject
-
-  /**
-   * Create an unset GObject wrapper.
-   */
-  this()
-  {
-  }
 
   /**
    * Create an ObjectG which is wrapping a C GObject with the given GType.
@@ -52,7 +59,7 @@ class ObjectG
    * Params:
    *   type = The GType value to use for creating the wrapped GObject
    */
-  this(GType type)
+  final this(GType type)
   {
     this(g_object_new(type, null), Yes.Take);
   }
@@ -63,7 +70,7 @@ class ObjectG
    *   cObj = Pointer to the GObject
    *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
    */
-  this(void* cObj, Flag!"Take" take = No.Take)
+  final this(void* cObj, Flag!"Take" take = No.Take)
   {
     if (!cObj)
       throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
@@ -340,10 +347,6 @@ class ObjectG
 /// Interface proxy class - used to wrap unknown GObjects as a specific interface
 abstract class IfaceProxy : ObjectG
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(ptr, take);

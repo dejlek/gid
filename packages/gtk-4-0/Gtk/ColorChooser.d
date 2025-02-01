@@ -98,14 +98,16 @@ interface ColorChooser
    * Deprecated: Use [Gtk.ColorDialog] and [Gtk.ColorDialogButton]
    *   instead of widgets implementing `GtkColorChooser`
    */
-  alias ColorActivatedCallback = void delegate(RGBA color, ColorChooser colorChooser);
+  alias ColorActivatedCallbackDlg = void delegate(RGBA color, ColorChooser colorChooser);
+  alias ColorActivatedCallbackFunc = void function(RGBA color, ColorChooser colorChooser);
 
   /**
    * Connect to ColorActivated signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectColorActivated(ColorActivatedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectColorActivated(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ColorActivatedCallbackDlg) || is(T == ColorActivatedCallbackFunc));
+  }

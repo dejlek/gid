@@ -43,10 +43,6 @@ import Gid.gid;
 class TypeModule : ObjectG, TypePlugin
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

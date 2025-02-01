@@ -19,10 +19,6 @@ import Gio.c.types;
 class SimpleAction : ObjectG, Action
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -138,27 +134,29 @@ class SimpleAction : ObjectG, Action
    *     no parameter
    *   simpleAction = the instance the signal is connected to
    */
-  alias ActivateCallback = void delegate(VariantG parameter, SimpleAction simpleAction);
+  alias ActivateCallbackDlg = void delegate(VariantG parameter, SimpleAction simpleAction);
+  alias ActivateCallbackFunc = void function(VariantG parameter, SimpleAction simpleAction);
 
   /**
    * Connect to Activate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivate(ActivateCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto simpleAction = getVal!SimpleAction(_paramVals);
       auto parameter = getVal!VariantG(&_paramVals[1]);
-      _dgClosure.dlg(parameter, simpleAction);
+      _dClosure.dlg(parameter, simpleAction);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
   }
 
@@ -194,27 +192,29 @@ class SimpleAction : ObjectG, Action
    *   value = the requested value for the state
    *   simpleAction = the instance the signal is connected to
    */
-  alias ChangeStateCallback = void delegate(VariantG value, SimpleAction simpleAction);
+  alias ChangeStateCallbackDlg = void delegate(VariantG value, SimpleAction simpleAction);
+  alias ChangeStateCallbackFunc = void function(VariantG value, SimpleAction simpleAction);
 
   /**
    * Connect to ChangeState signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChangeState(ChangeStateCallback dlg, Flag!"After" after = No.After)
+  ulong connectChangeState(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangeStateCallbackDlg) || is(T == ChangeStateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto simpleAction = getVal!SimpleAction(_paramVals);
       auto value = getVal!VariantG(&_paramVals[1]);
-      _dgClosure.dlg(value, simpleAction);
+      _dClosure.dlg(value, simpleAction);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("change-state", closure, after);
   }
 }

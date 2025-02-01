@@ -13,10 +13,6 @@ import Gio.c.types;
 class TcpConnection : SocketConnection
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

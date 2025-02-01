@@ -72,10 +72,6 @@ import Gio.c.types;
 class DBusConnection : ObjectG, AsyncInitable, Initable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -1438,28 +1434,30 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    *   error = a #GError with more details about the event or %NULL
    *   dBusConnection = the instance the signal is connected to
    */
-  alias ClosedCallback = void delegate(bool remotePeerVanished, ErrorG error, DBusConnection dBusConnection);
+  alias ClosedCallbackDlg = void delegate(bool remotePeerVanished, ErrorG error, DBusConnection dBusConnection);
+  alias ClosedCallbackFunc = void function(bool remotePeerVanished, ErrorG error, DBusConnection dBusConnection);
 
   /**
    * Connect to Closed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectClosed(ClosedCallback dlg, Flag!"After" after = No.After)
+  ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ClosedCallbackDlg) || is(T == ClosedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dBusConnection = getVal!DBusConnection(_paramVals);
       auto remotePeerVanished = getVal!bool(&_paramVals[1]);
       auto error = getVal!ErrorG(&_paramVals[2]);
-      _dgClosure.dlg(remotePeerVanished, error, dBusConnection);
+      _dClosure.dlg(remotePeerVanished, error, dBusConnection);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("closed", closure, after);
   }
 }

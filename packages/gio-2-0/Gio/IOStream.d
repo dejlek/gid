@@ -58,10 +58,6 @@ import Gio.c.types;
 class IOStream : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

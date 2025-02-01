@@ -125,26 +125,28 @@ class PasswordEntry : Widget, Editable
    * The keybindings for this signal are all forms of the Enter key.
    *   passwordEntry = the instance the signal is connected to
    */
-  alias ActivateCallback = void delegate(PasswordEntry passwordEntry);
+  alias ActivateCallbackDlg = void delegate(PasswordEntry passwordEntry);
+  alias ActivateCallbackFunc = void function(PasswordEntry passwordEntry);
 
   /**
    * Connect to Activate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivate(ActivateCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto passwordEntry = getVal!PasswordEntry(_paramVals);
-      _dgClosure.dlg(passwordEntry);
+      _dClosure.dlg(passwordEntry);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
   }
 }

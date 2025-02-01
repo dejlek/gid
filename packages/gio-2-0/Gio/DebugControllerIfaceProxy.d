@@ -7,10 +7,6 @@ import Gio.DebugControllerT;
 /// Proxy object for Gio.DebugController interface when a GObject has no applicable D binding
 class DebugControllerIfaceProxy : IfaceProxy, DebugController
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -311,28 +311,30 @@ class LevelBar : Widget, AccessibleRange, Orientable
    *   name = the name of the offset that changed value
    *   levelBar = the instance the signal is connected to
    */
-  alias OffsetChangedCallback = void delegate(string name, LevelBar levelBar);
+  alias OffsetChangedCallbackDlg = void delegate(string name, LevelBar levelBar);
+  alias OffsetChangedCallbackFunc = void function(string name, LevelBar levelBar);
 
   /**
    * Connect to OffsetChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectOffsetChanged(OffsetChangedCallback dlg, string detail = null, Flag!"After" after = No.After)
+  ulong connectOffsetChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == OffsetChangedCallbackDlg) || is(T == OffsetChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto levelBar = getVal!LevelBar(_paramVals);
       auto name = getVal!string(&_paramVals[1]);
-      _dgClosure.dlg(name, levelBar);
+      _dClosure.dlg(name, levelBar);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("offset-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
   }
 }

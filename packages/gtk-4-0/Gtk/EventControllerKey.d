@@ -102,26 +102,28 @@ class EventControllerKey : EventController
    * [Gtk.IMContext.filterKeypress].
    *   eventControllerKey = the instance the signal is connected to
    */
-  alias ImUpdateCallback = void delegate(EventControllerKey eventControllerKey);
+  alias ImUpdateCallbackDlg = void delegate(EventControllerKey eventControllerKey);
+  alias ImUpdateCallbackFunc = void function(EventControllerKey eventControllerKey);
 
   /**
    * Connect to ImUpdate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectImUpdate(ImUpdateCallback dlg, Flag!"After" after = No.After)
+  ulong connectImUpdate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ImUpdateCallbackDlg) || is(T == ImUpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto eventControllerKey = getVal!EventControllerKey(_paramVals);
-      _dgClosure.dlg(eventControllerKey);
+      _dClosure.dlg(eventControllerKey);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("im-update", closure, after);
   }
 
@@ -134,31 +136,33 @@ class EventControllerKey : EventController
    *   eventControllerKey = the instance the signal is connected to
    * Returns: %TRUE if the key press was handled, %FALSE otherwise.
    */
-  alias KeyPressedCallback = bool delegate(uint keyval, uint keycode, ModifierType state, EventControllerKey eventControllerKey);
+  alias KeyPressedCallbackDlg = bool delegate(uint keyval, uint keycode, ModifierType state, EventControllerKey eventControllerKey);
+  alias KeyPressedCallbackFunc = bool function(uint keyval, uint keycode, ModifierType state, EventControllerKey eventControllerKey);
 
   /**
    * Connect to KeyPressed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectKeyPressed(KeyPressedCallback dlg, Flag!"After" after = No.After)
+  ulong connectKeyPressed(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == KeyPressedCallbackDlg) || is(T == KeyPressedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto eventControllerKey = getVal!EventControllerKey(_paramVals);
       auto keyval = getVal!uint(&_paramVals[1]);
       auto keycode = getVal!uint(&_paramVals[2]);
       auto state = getVal!ModifierType(&_paramVals[3]);
-      _retval = _dgClosure.dlg(keyval, keycode, state, eventControllerKey);
+      _retval = _dClosure.dlg(keyval, keycode, state, eventControllerKey);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("key-pressed", closure, after);
   }
 
@@ -170,29 +174,31 @@ class EventControllerKey : EventController
    *   state = the bitmask, representing the state of modifier keys and pointer buttons.
    *   eventControllerKey = the instance the signal is connected to
    */
-  alias KeyReleasedCallback = void delegate(uint keyval, uint keycode, ModifierType state, EventControllerKey eventControllerKey);
+  alias KeyReleasedCallbackDlg = void delegate(uint keyval, uint keycode, ModifierType state, EventControllerKey eventControllerKey);
+  alias KeyReleasedCallbackFunc = void function(uint keyval, uint keycode, ModifierType state, EventControllerKey eventControllerKey);
 
   /**
    * Connect to KeyReleased signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectKeyReleased(KeyReleasedCallback dlg, Flag!"After" after = No.After)
+  ulong connectKeyReleased(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == KeyReleasedCallbackDlg) || is(T == KeyReleasedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto eventControllerKey = getVal!EventControllerKey(_paramVals);
       auto keyval = getVal!uint(&_paramVals[1]);
       auto keycode = getVal!uint(&_paramVals[2]);
       auto state = getVal!ModifierType(&_paramVals[3]);
-      _dgClosure.dlg(keyval, keycode, state, eventControllerKey);
+      _dClosure.dlg(keyval, keycode, state, eventControllerKey);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("key-released", closure, after);
   }
 
@@ -204,29 +210,31 @@ class EventControllerKey : EventController
    *   eventControllerKey = the instance the signal is connected to
    * Returns:
    */
-  alias ModifiersCallback = bool delegate(ModifierType state, EventControllerKey eventControllerKey);
+  alias ModifiersCallbackDlg = bool delegate(ModifierType state, EventControllerKey eventControllerKey);
+  alias ModifiersCallbackFunc = bool function(ModifierType state, EventControllerKey eventControllerKey);
 
   /**
    * Connect to Modifiers signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectModifiers(ModifiersCallback dlg, Flag!"After" after = No.After)
+  ulong connectModifiers(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ModifiersCallbackDlg) || is(T == ModifiersCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto eventControllerKey = getVal!EventControllerKey(_paramVals);
       auto state = getVal!ModifierType(&_paramVals[1]);
-      _retval = _dgClosure.dlg(state, eventControllerKey);
+      _retval = _dClosure.dlg(state, eventControllerKey);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("modifiers", closure, after);
   }
 }

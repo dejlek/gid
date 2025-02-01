@@ -41,10 +41,6 @@ import Pango.AttrList;
 class IMContext : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -352,27 +348,29 @@ class IMContext : ObjectG
    *   str = the completed character$(LPAREN)s$(RPAREN) entered by the user
    *   iMContext = the instance the signal is connected to
    */
-  alias CommitCallback = void delegate(string str, IMContext iMContext);
+  alias CommitCallbackDlg = void delegate(string str, IMContext iMContext);
+  alias CommitCallbackFunc = void function(string str, IMContext iMContext);
 
   /**
    * Connect to Commit signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCommit(CommitCallback dlg, Flag!"After" after = No.After)
+  ulong connectCommit(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CommitCallbackDlg) || is(T == CommitCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto iMContext = getVal!IMContext(_paramVals);
       auto str = getVal!string(&_paramVals[1]);
-      _dgClosure.dlg(str, iMContext);
+      _dClosure.dlg(str, iMContext);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("commit", closure, after);
   }
 
@@ -387,30 +385,32 @@ class IMContext : ObjectG
    *   iMContext = the instance the signal is connected to
    * Returns: %TRUE if the signal was handled.
    */
-  alias DeleteSurroundingCallback = bool delegate(int offset, int nChars, IMContext iMContext);
+  alias DeleteSurroundingCallbackDlg = bool delegate(int offset, int nChars, IMContext iMContext);
+  alias DeleteSurroundingCallbackFunc = bool function(int offset, int nChars, IMContext iMContext);
 
   /**
    * Connect to DeleteSurrounding signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDeleteSurrounding(DeleteSurroundingCallback dlg, Flag!"After" after = No.After)
+  ulong connectDeleteSurrounding(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DeleteSurroundingCallbackDlg) || is(T == DeleteSurroundingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto iMContext = getVal!IMContext(_paramVals);
       auto offset = getVal!int(&_paramVals[1]);
       auto nChars = getVal!int(&_paramVals[2]);
-      _retval = _dgClosure.dlg(offset, nChars, iMContext);
+      _retval = _dClosure.dlg(offset, nChars, iMContext);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("delete-surrounding", closure, after);
   }
 
@@ -421,26 +421,28 @@ class IMContext : ObjectG
    * [Gtk.IMContext.getPreeditString] returns the empty string.
    *   iMContext = the instance the signal is connected to
    */
-  alias PreeditChangedCallback = void delegate(IMContext iMContext);
+  alias PreeditChangedCallbackDlg = void delegate(IMContext iMContext);
+  alias PreeditChangedCallbackFunc = void function(IMContext iMContext);
 
   /**
    * Connect to PreeditChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPreeditChanged(PreeditChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PreeditChangedCallbackDlg) || is(T == PreeditChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto iMContext = getVal!IMContext(_paramVals);
-      _dgClosure.dlg(iMContext);
+      _dClosure.dlg(iMContext);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("preedit-changed", closure, after);
   }
 
@@ -449,26 +451,28 @@ class IMContext : ObjectG
    * has been completed or canceled.
    *   iMContext = the instance the signal is connected to
    */
-  alias PreeditEndCallback = void delegate(IMContext iMContext);
+  alias PreeditEndCallbackDlg = void delegate(IMContext iMContext);
+  alias PreeditEndCallbackFunc = void function(IMContext iMContext);
 
   /**
    * Connect to PreeditEnd signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPreeditEnd(PreeditEndCallback dlg, Flag!"After" after = No.After)
+  ulong connectPreeditEnd(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PreeditEndCallbackDlg) || is(T == PreeditEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto iMContext = getVal!IMContext(_paramVals);
-      _dgClosure.dlg(iMContext);
+      _dClosure.dlg(iMContext);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("preedit-end", closure, after);
   }
 
@@ -477,26 +481,28 @@ class IMContext : ObjectG
    * starts.
    *   iMContext = the instance the signal is connected to
    */
-  alias PreeditStartCallback = void delegate(IMContext iMContext);
+  alias PreeditStartCallbackDlg = void delegate(IMContext iMContext);
+  alias PreeditStartCallbackFunc = void function(IMContext iMContext);
 
   /**
    * Connect to PreeditStart signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPreeditStart(PreeditStartCallback dlg, Flag!"After" after = No.After)
+  ulong connectPreeditStart(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PreeditStartCallbackDlg) || is(T == PreeditStartCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto iMContext = getVal!IMContext(_paramVals);
-      _dgClosure.dlg(iMContext);
+      _dClosure.dlg(iMContext);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("preedit-start", closure, after);
   }
 
@@ -508,28 +514,30 @@ class IMContext : ObjectG
    *   iMContext = the instance the signal is connected to
    * Returns: %TRUE if the signal was handled.
    */
-  alias RetrieveSurroundingCallback = bool delegate(IMContext iMContext);
+  alias RetrieveSurroundingCallbackDlg = bool delegate(IMContext iMContext);
+  alias RetrieveSurroundingCallbackFunc = bool function(IMContext iMContext);
 
   /**
    * Connect to RetrieveSurrounding signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRetrieveSurrounding(RetrieveSurroundingCallback dlg, Flag!"After" after = No.After)
+  ulong connectRetrieveSurrounding(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RetrieveSurroundingCallbackDlg) || is(T == RetrieveSurroundingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto iMContext = getVal!IMContext(_paramVals);
-      _retval = _dgClosure.dlg(iMContext);
+      _retval = _dClosure.dlg(iMContext);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("retrieve-surrounding", closure, after);
   }
 }

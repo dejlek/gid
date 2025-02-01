@@ -32,10 +32,6 @@ import Gio.LoadableIconT;
 class Texture : ObjectG, Paintable, Icon, LoadableIcon
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

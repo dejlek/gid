@@ -16,10 +16,6 @@ import Gio.c.types;
 class ZlibDecompressor : ObjectG, Converter
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

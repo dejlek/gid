@@ -41,10 +41,6 @@ import Gtk.c.types;
 class EventControllerScroll : EventController
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -121,28 +117,30 @@ class EventControllerScroll : EventController
    *   velY = Y velocity
    *   eventControllerScroll = the instance the signal is connected to
    */
-  alias DecelerateCallback = void delegate(double velX, double velY, EventControllerScroll eventControllerScroll);
+  alias DecelerateCallbackDlg = void delegate(double velX, double velY, EventControllerScroll eventControllerScroll);
+  alias DecelerateCallbackFunc = void function(double velX, double velY, EventControllerScroll eventControllerScroll);
 
   /**
    * Connect to Decelerate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDecelerate(DecelerateCallback dlg, Flag!"After" after = No.After)
+  ulong connectDecelerate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DecelerateCallbackDlg) || is(T == DecelerateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto eventControllerScroll = getVal!EventControllerScroll(_paramVals);
       auto velX = getVal!double(&_paramVals[1]);
       auto velY = getVal!double(&_paramVals[2]);
-      _dgClosure.dlg(velX, velY, eventControllerScroll);
+      _dClosure.dlg(velX, velY, eventControllerScroll);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("decelerate", closure, after);
   }
 
@@ -158,30 +156,32 @@ class EventControllerScroll : EventController
    * Returns: %TRUE if the scroll event was handled,
    *   %FALSE otherwise.
    */
-  alias ScrollCallback = bool delegate(double dx, double dy, EventControllerScroll eventControllerScroll);
+  alias ScrollCallbackDlg = bool delegate(double dx, double dy, EventControllerScroll eventControllerScroll);
+  alias ScrollCallbackFunc = bool function(double dx, double dy, EventControllerScroll eventControllerScroll);
 
   /**
    * Connect to Scroll signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectScroll(ScrollCallback dlg, Flag!"After" after = No.After)
+  ulong connectScroll(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ScrollCallbackDlg) || is(T == ScrollCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto eventControllerScroll = getVal!EventControllerScroll(_paramVals);
       auto dx = getVal!double(&_paramVals[1]);
       auto dy = getVal!double(&_paramVals[2]);
-      _retval = _dgClosure.dlg(dx, dy, eventControllerScroll);
+      _retval = _dClosure.dlg(dx, dy, eventControllerScroll);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("scroll", closure, after);
   }
 
@@ -190,26 +190,28 @@ class EventControllerScroll : EventController
    * It will only be emitted on devices capable of it.
    *   eventControllerScroll = the instance the signal is connected to
    */
-  alias ScrollBeginCallback = void delegate(EventControllerScroll eventControllerScroll);
+  alias ScrollBeginCallbackDlg = void delegate(EventControllerScroll eventControllerScroll);
+  alias ScrollBeginCallbackFunc = void function(EventControllerScroll eventControllerScroll);
 
   /**
    * Connect to ScrollBegin signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectScrollBegin(ScrollBeginCallback dlg, Flag!"After" after = No.After)
+  ulong connectScrollBegin(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ScrollBeginCallbackDlg) || is(T == ScrollBeginCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto eventControllerScroll = getVal!EventControllerScroll(_paramVals);
-      _dgClosure.dlg(eventControllerScroll);
+      _dClosure.dlg(eventControllerScroll);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("scroll-begin", closure, after);
   }
 
@@ -218,26 +220,28 @@ class EventControllerScroll : EventController
    * It will only be emitted on devices capable of it.
    *   eventControllerScroll = the instance the signal is connected to
    */
-  alias ScrollEndCallback = void delegate(EventControllerScroll eventControllerScroll);
+  alias ScrollEndCallbackDlg = void delegate(EventControllerScroll eventControllerScroll);
+  alias ScrollEndCallbackFunc = void function(EventControllerScroll eventControllerScroll);
 
   /**
    * Connect to ScrollEnd signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectScrollEnd(ScrollEndCallback dlg, Flag!"After" after = No.After)
+  ulong connectScrollEnd(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ScrollEndCallbackDlg) || is(T == ScrollEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto eventControllerScroll = getVal!EventControllerScroll(_paramVals);
-      _dgClosure.dlg(eventControllerScroll);
+      _dClosure.dlg(eventControllerScroll);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("scroll-end", closure, after);
   }
 }

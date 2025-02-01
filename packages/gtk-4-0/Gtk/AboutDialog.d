@@ -565,29 +565,31 @@ class AboutDialog : Window
    *   aboutDialog = the instance the signal is connected to
    * Returns: `TRUE` if the link has been activated
    */
-  alias ActivateLinkCallback = bool delegate(string uri, AboutDialog aboutDialog);
+  alias ActivateLinkCallbackDlg = bool delegate(string uri, AboutDialog aboutDialog);
+  alias ActivateLinkCallbackFunc = bool function(string uri, AboutDialog aboutDialog);
 
   /**
    * Connect to ActivateLink signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivateLink(ActivateLinkCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateLinkCallbackDlg) || is(T == ActivateLinkCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto aboutDialog = getVal!AboutDialog(_paramVals);
       auto uri = getVal!string(&_paramVals[1]);
-      _retval = _dgClosure.dlg(uri, aboutDialog);
+      _retval = _dClosure.dlg(uri, aboutDialog);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-link", closure, after);
   }
 }

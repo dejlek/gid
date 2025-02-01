@@ -38,10 +38,6 @@ import Gtk.c.types;
 class SortListModel : ObjectG, ListModel, SectionModel
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

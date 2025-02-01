@@ -114,10 +114,6 @@ import Gtk.c.types;
 class PopoverMenu : Popover
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -442,30 +442,32 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    *   entryCompletion = the instance the signal is connected to
    * Returns: %TRUE if the signal has been handled
    */
-  alias CursorOnMatchCallback = bool delegate(TreeModel model, TreeIter iter, EntryCompletion entryCompletion);
+  alias CursorOnMatchCallbackDlg = bool delegate(TreeModel model, TreeIter iter, EntryCompletion entryCompletion);
+  alias CursorOnMatchCallbackFunc = bool function(TreeModel model, TreeIter iter, EntryCompletion entryCompletion);
 
   /**
    * Connect to CursorOnMatch signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCursorOnMatch(CursorOnMatchCallback dlg, Flag!"After" after = No.After)
+  ulong connectCursorOnMatch(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CursorOnMatchCallbackDlg) || is(T == CursorOnMatchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto entryCompletion = getVal!EntryCompletion(_paramVals);
       auto model = getVal!TreeModel(&_paramVals[1]);
       auto iter = getVal!TreeIter(&_paramVals[2]);
-      _retval = _dgClosure.dlg(model, iter, entryCompletion);
+      _retval = _dClosure.dlg(model, iter, entryCompletion);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cursor-on-match", closure, after);
   }
 
@@ -482,29 +484,31 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    *   entryCompletion = the instance the signal is connected to
    * Returns: %TRUE if the signal has been handled
    */
-  alias InsertPrefixCallback = bool delegate(string prefix, EntryCompletion entryCompletion);
+  alias InsertPrefixCallbackDlg = bool delegate(string prefix, EntryCompletion entryCompletion);
+  alias InsertPrefixCallbackFunc = bool function(string prefix, EntryCompletion entryCompletion);
 
   /**
    * Connect to InsertPrefix signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInsertPrefix(InsertPrefixCallback dlg, Flag!"After" after = No.After)
+  ulong connectInsertPrefix(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InsertPrefixCallbackDlg) || is(T == InsertPrefixCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto entryCompletion = getVal!EntryCompletion(_paramVals);
       auto prefix = getVal!string(&_paramVals[1]);
-      _retval = _dgClosure.dlg(prefix, entryCompletion);
+      _retval = _dClosure.dlg(prefix, entryCompletion);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("insert-prefix", closure, after);
   }
 
@@ -521,30 +525,32 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    *   entryCompletion = the instance the signal is connected to
    * Returns: %TRUE if the signal has been handled
    */
-  alias MatchSelectedCallback = bool delegate(TreeModel model, TreeIter iter, EntryCompletion entryCompletion);
+  alias MatchSelectedCallbackDlg = bool delegate(TreeModel model, TreeIter iter, EntryCompletion entryCompletion);
+  alias MatchSelectedCallbackFunc = bool function(TreeModel model, TreeIter iter, EntryCompletion entryCompletion);
 
   /**
    * Connect to MatchSelected signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMatchSelected(MatchSelectedCallback dlg, Flag!"After" after = No.After)
+  ulong connectMatchSelected(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MatchSelectedCallbackDlg) || is(T == MatchSelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto entryCompletion = getVal!EntryCompletion(_paramVals);
       auto model = getVal!TreeModel(&_paramVals[1]);
       auto iter = getVal!TreeIter(&_paramVals[2]);
-      _retval = _dgClosure.dlg(model, iter, entryCompletion);
+      _retval = _dClosure.dlg(model, iter, entryCompletion);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("match-selected", closure, after);
   }
 
@@ -554,26 +560,28 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    * In other words when `GtkEntryCompletion` is out of suggestions.
    *   entryCompletion = the instance the signal is connected to
    */
-  alias NoMatchesCallback = void delegate(EntryCompletion entryCompletion);
+  alias NoMatchesCallbackDlg = void delegate(EntryCompletion entryCompletion);
+  alias NoMatchesCallbackFunc = void function(EntryCompletion entryCompletion);
 
   /**
    * Connect to NoMatches signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectNoMatches(NoMatchesCallback dlg, Flag!"After" after = No.After)
+  ulong connectNoMatches(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == NoMatchesCallbackDlg) || is(T == NoMatchesCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto entryCompletion = getVal!EntryCompletion(_paramVals);
-      _dgClosure.dlg(entryCompletion);
+      _dClosure.dlg(entryCompletion);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("no-matches", closure, after);
   }
 }

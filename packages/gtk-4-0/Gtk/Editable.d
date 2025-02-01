@@ -435,16 +435,18 @@ interface Editable
    * to be emitted$(RPAREN).
    *   editable = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(Editable editable);
+  alias ChangedCallbackDlg = void delegate(Editable editable);
+  alias ChangedCallbackFunc = void function(Editable editable);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, Flag!"After" after = No.After);
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc));
 
   /**
    * Emitted when text is deleted from the widget by the user.
@@ -459,14 +461,16 @@ interface Editable
    *   endPos = the end position
    *   editable = the instance the signal is connected to
    */
-  alias DeleteTextCallback = void delegate(int startPos, int endPos, Editable editable);
+  alias DeleteTextCallbackDlg = void delegate(int startPos, int endPos, Editable editable);
+  alias DeleteTextCallbackFunc = void function(int startPos, int endPos, Editable editable);
 
   /**
    * Connect to DeleteText signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDeleteText(DeleteTextCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectDeleteText(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DeleteTextCallbackDlg) || is(T == DeleteTextCallbackFunc));
+  }

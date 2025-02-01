@@ -201,16 +201,18 @@ interface Paintable
    * the icon theme for an icon changing.
    *   paintable = the instance the signal is connected to
    */
-  alias InvalidateContentsCallback = void delegate(Paintable paintable);
+  alias InvalidateContentsCallbackDlg = void delegate(Paintable paintable);
+  alias InvalidateContentsCallbackFunc = void function(Paintable paintable);
 
   /**
    * Connect to InvalidateContents signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInvalidateContents(InvalidateContentsCallback dlg, Flag!"After" after = No.After);
+  ulong connectInvalidateContents(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InvalidateContentsCallbackDlg) || is(T == InvalidateContentsCallbackFunc));
 
   /**
    * Emitted when the intrinsic size of the paintable changes.
@@ -223,14 +225,16 @@ interface Paintable
    * the contents of a toplevel surface being resized.
    *   paintable = the instance the signal is connected to
    */
-  alias InvalidateSizeCallback = void delegate(Paintable paintable);
+  alias InvalidateSizeCallbackDlg = void delegate(Paintable paintable);
+  alias InvalidateSizeCallbackFunc = void function(Paintable paintable);
 
   /**
    * Connect to InvalidateSize signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInvalidateSize(InvalidateSizeCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InvalidateSizeCallbackDlg) || is(T == InvalidateSizeCallbackFunc));
+  }

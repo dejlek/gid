@@ -198,28 +198,30 @@ class DrawingArea : Widget
    *   height = the height of the viewport
    *   drawingArea = the instance the signal is connected to
    */
-  alias ResizeCallback = void delegate(int width, int height, DrawingArea drawingArea);
+  alias ResizeCallbackDlg = void delegate(int width, int height, DrawingArea drawingArea);
+  alias ResizeCallbackFunc = void function(int width, int height, DrawingArea drawingArea);
 
   /**
    * Connect to Resize signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectResize(ResizeCallback dlg, Flag!"After" after = No.After)
+  ulong connectResize(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ResizeCallbackDlg) || is(T == ResizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto drawingArea = getVal!DrawingArea(_paramVals);
       auto width = getVal!int(&_paramVals[1]);
       auto height = getVal!int(&_paramVals[2]);
-      _dgClosure.dlg(width, height, drawingArea);
+      _dClosure.dlg(width, height, drawingArea);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("resize", closure, after);
   }
 }

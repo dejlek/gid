@@ -367,26 +367,28 @@ class Popover : Widget, Native, ShortcutManager
    * This is a [keybinding signal](class.SignalAction.html).
    *   popover = the instance the signal is connected to
    */
-  alias ActivateDefaultCallback = void delegate(Popover popover);
+  alias ActivateDefaultCallbackDlg = void delegate(Popover popover);
+  alias ActivateDefaultCallbackFunc = void function(Popover popover);
 
   /**
    * Connect to ActivateDefault signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivateDefault(ActivateDefaultCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateDefaultCallbackDlg) || is(T == ActivateDefaultCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto popover = getVal!Popover(_paramVals);
-      _dgClosure.dlg(popover);
+      _dClosure.dlg(popover);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-default", closure, after);
   }
 
@@ -394,26 +396,28 @@ class Popover : Widget, Native, ShortcutManager
    * Emitted when the popover is closed.
    *   popover = the instance the signal is connected to
    */
-  alias ClosedCallback = void delegate(Popover popover);
+  alias ClosedCallbackDlg = void delegate(Popover popover);
+  alias ClosedCallbackFunc = void function(Popover popover);
 
   /**
    * Connect to Closed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectClosed(ClosedCallback dlg, Flag!"After" after = No.After)
+  ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ClosedCallbackDlg) || is(T == ClosedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto popover = getVal!Popover(_paramVals);
-      _dgClosure.dlg(popover);
+      _dClosure.dlg(popover);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("closed", closure, after);
   }
 }

@@ -276,26 +276,28 @@ class CheckButton : Widget, Actionable
    * <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
    *   checkButton = the instance the signal is connected to
    */
-  alias ActivateCallback = void delegate(CheckButton checkButton);
+  alias ActivateCallbackDlg = void delegate(CheckButton checkButton);
+  alias ActivateCallbackFunc = void function(CheckButton checkButton);
 
   /**
    * Connect to Activate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivate(ActivateCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto checkButton = getVal!CheckButton(_paramVals);
-      _dgClosure.dlg(checkButton);
+      _dClosure.dlg(checkButton);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
   }
 
@@ -304,26 +306,28 @@ class CheckButton : Widget, Actionable
    * property changes.
    *   checkButton = the instance the signal is connected to
    */
-  alias ToggledCallback = void delegate(CheckButton checkButton);
+  alias ToggledCallbackDlg = void delegate(CheckButton checkButton);
+  alias ToggledCallbackFunc = void function(CheckButton checkButton);
 
   /**
    * Connect to Toggled signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectToggled(ToggledCallback dlg, Flag!"After" after = No.After)
+  ulong connectToggled(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ToggledCallbackDlg) || is(T == ToggledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto checkButton = getVal!CheckButton(_paramVals);
-      _dgClosure.dlg(checkButton);
+      _dClosure.dlg(checkButton);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
   }
 }

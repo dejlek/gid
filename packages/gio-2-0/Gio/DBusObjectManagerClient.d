@@ -98,10 +98,6 @@ import Gio.c.types;
 class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Initable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -314,21 +310,23 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
    *     array of properties that were invalidated.
    *   dBusObjectManagerClient = the instance the signal is connected to
    */
-  alias InterfaceProxyPropertiesChangedCallback = void delegate(DBusObjectProxy objectProxy, DBusProxy interfaceProxy, VariantG changedProperties, string[] invalidatedProperties, DBusObjectManagerClient dBusObjectManagerClient);
+  alias InterfaceProxyPropertiesChangedCallbackDlg = void delegate(DBusObjectProxy objectProxy, DBusProxy interfaceProxy, VariantG changedProperties, string[] invalidatedProperties, DBusObjectManagerClient dBusObjectManagerClient);
+  alias InterfaceProxyPropertiesChangedCallbackFunc = void function(DBusObjectProxy objectProxy, DBusProxy interfaceProxy, VariantG changedProperties, string[] invalidatedProperties, DBusObjectManagerClient dBusObjectManagerClient);
 
   /**
    * Connect to InterfaceProxyPropertiesChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInterfaceProxyPropertiesChanged(InterfaceProxyPropertiesChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectInterfaceProxyPropertiesChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InterfaceProxyPropertiesChangedCallbackDlg) || is(T == InterfaceProxyPropertiesChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dBusObjectManagerClient = getVal!DBusObjectManagerClient(_paramVals);
       auto objectProxy = getVal!DBusObjectProxy(&_paramVals[1]);
       auto interfaceProxy = getVal!DBusProxy(&_paramVals[2]);
@@ -341,10 +339,10 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
         break;
       foreach (i; 0 .. _leninvalidatedProperties)
         _invalidatedProperties ~= invalidatedProperties[i].fromCString(No.Free);
-      _dgClosure.dlg(objectProxy, interfaceProxy, changedProperties, _invalidatedProperties, dBusObjectManagerClient);
+      _dClosure.dlg(objectProxy, interfaceProxy, changedProperties, _invalidatedProperties, dBusObjectManagerClient);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("interface-proxy-properties-changed", closure, after);
   }
 
@@ -363,31 +361,33 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
    *   parameters = A #GVariant tuple with parameters for the signal.
    *   dBusObjectManagerClient = the instance the signal is connected to
    */
-  alias InterfaceProxySignalCallback = void delegate(DBusObjectProxy objectProxy, DBusProxy interfaceProxy, string senderName, string signalName, VariantG parameters, DBusObjectManagerClient dBusObjectManagerClient);
+  alias InterfaceProxySignalCallbackDlg = void delegate(DBusObjectProxy objectProxy, DBusProxy interfaceProxy, string senderName, string signalName, VariantG parameters, DBusObjectManagerClient dBusObjectManagerClient);
+  alias InterfaceProxySignalCallbackFunc = void function(DBusObjectProxy objectProxy, DBusProxy interfaceProxy, string senderName, string signalName, VariantG parameters, DBusObjectManagerClient dBusObjectManagerClient);
 
   /**
    * Connect to InterfaceProxySignal signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInterfaceProxySignal(InterfaceProxySignalCallback dlg, Flag!"After" after = No.After)
+  ulong connectInterfaceProxySignal(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InterfaceProxySignalCallbackDlg) || is(T == InterfaceProxySignalCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 6, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dBusObjectManagerClient = getVal!DBusObjectManagerClient(_paramVals);
       auto objectProxy = getVal!DBusObjectProxy(&_paramVals[1]);
       auto interfaceProxy = getVal!DBusProxy(&_paramVals[2]);
       auto senderName = getVal!string(&_paramVals[3]);
       auto signalName = getVal!string(&_paramVals[4]);
       auto parameters = getVal!VariantG(&_paramVals[5]);
-      _dgClosure.dlg(objectProxy, interfaceProxy, senderName, signalName, parameters, dBusObjectManagerClient);
+      _dClosure.dlg(objectProxy, interfaceProxy, senderName, signalName, parameters, dBusObjectManagerClient);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("interface-proxy-signal", closure, after);
   }
 }

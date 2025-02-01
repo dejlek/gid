@@ -32,10 +32,6 @@ import Gio.c.types;
 class SettingsBackend : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

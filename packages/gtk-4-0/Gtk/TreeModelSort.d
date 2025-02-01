@@ -101,10 +101,6 @@ import Gtk.c.types;
 class TreeModelSort : ObjectG, TreeDragSource, TreeModel, TreeSortable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

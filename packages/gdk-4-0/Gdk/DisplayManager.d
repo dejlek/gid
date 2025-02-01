@@ -49,10 +49,6 @@ import Gid.gid;
 class DisplayManager : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -143,27 +139,29 @@ class DisplayManager : ObjectG
    *   display = the opened display
    *   displayManager = the instance the signal is connected to
    */
-  alias DisplayOpenedCallback = void delegate(Display display, DisplayManager displayManager);
+  alias DisplayOpenedCallbackDlg = void delegate(Display display, DisplayManager displayManager);
+  alias DisplayOpenedCallbackFunc = void function(Display display, DisplayManager displayManager);
 
   /**
    * Connect to DisplayOpened signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDisplayOpened(DisplayOpenedCallback dlg, Flag!"After" after = No.After)
+  ulong connectDisplayOpened(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DisplayOpenedCallbackDlg) || is(T == DisplayOpenedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto displayManager = getVal!DisplayManager(_paramVals);
       auto display = getVal!Display(&_paramVals[1]);
-      _dgClosure.dlg(display, displayManager);
+      _dClosure.dlg(display, displayManager);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("display-opened", closure, after);
   }
 }

@@ -94,28 +94,30 @@ template DBusObjectManagerT()
    *   interface_ = The #GDBusInterface that was added.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias InterfaceAddedCallback = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceAddedCallbackDlg = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceAddedCallbackFunc = void function(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to InterfaceAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInterfaceAdded(InterfaceAddedCallback dlg, Flag!"After" after = No.After)
+  ulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InterfaceAddedCallbackDlg) || is(T == InterfaceAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dBusObjectManager = getVal!DBusObjectManager(_paramVals);
       auto object = getVal!DBusObject(&_paramVals[1]);
       auto interface_ = getVal!DBusInterface(&_paramVals[2]);
-      _dgClosure.dlg(object, interface_, dBusObjectManager);
+      _dClosure.dlg(object, interface_, dBusObjectManager);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("interface-added", closure, after);
   }
 
@@ -128,28 +130,30 @@ template DBusObjectManagerT()
    *   interface_ = The #GDBusInterface that was removed.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias InterfaceRemovedCallback = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceRemovedCallbackDlg = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceRemovedCallbackFunc = void function(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to InterfaceRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInterfaceRemoved(InterfaceRemovedCallback dlg, Flag!"After" after = No.After)
+  ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InterfaceRemovedCallbackDlg) || is(T == InterfaceRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dBusObjectManager = getVal!DBusObjectManager(_paramVals);
       auto object = getVal!DBusObject(&_paramVals[1]);
       auto interface_ = getVal!DBusInterface(&_paramVals[2]);
-      _dgClosure.dlg(object, interface_, dBusObjectManager);
+      _dClosure.dlg(object, interface_, dBusObjectManager);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("interface-removed", closure, after);
   }
 
@@ -159,27 +163,29 @@ template DBusObjectManagerT()
    *   object = The #GDBusObject that was added.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias ObjectAddedCallback = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectAddedCallbackDlg = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectAddedCallbackFunc = void function(DBusObject object, DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to ObjectAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectObjectAdded(ObjectAddedCallback dlg, Flag!"After" after = No.After)
+  ulong connectObjectAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ObjectAddedCallbackDlg) || is(T == ObjectAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dBusObjectManager = getVal!DBusObjectManager(_paramVals);
       auto object = getVal!DBusObject(&_paramVals[1]);
-      _dgClosure.dlg(object, dBusObjectManager);
+      _dClosure.dlg(object, dBusObjectManager);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("object-added", closure, after);
   }
 
@@ -189,27 +195,29 @@ template DBusObjectManagerT()
    *   object = The #GDBusObject that was removed.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias ObjectRemovedCallback = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectRemovedCallbackDlg = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectRemovedCallbackFunc = void function(DBusObject object, DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to ObjectRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectObjectRemoved(ObjectRemovedCallback dlg, Flag!"After" after = No.After)
+  ulong connectObjectRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ObjectRemovedCallbackDlg) || is(T == ObjectRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dBusObjectManager = getVal!DBusObjectManager(_paramVals);
       auto object = getVal!DBusObject(&_paramVals[1]);
-      _dgClosure.dlg(object, dBusObjectManager);
+      _dClosure.dlg(object, dBusObjectManager);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("object-removed", closure, after);
   }
 }

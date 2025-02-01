@@ -7,10 +7,6 @@ import Gio.TlsFileDatabaseT;
 /// Proxy object for Gio.TlsFileDatabase interface when a GObject has no applicable D binding
 class TlsFileDatabaseIfaceProxy : IfaceProxy, TlsFileDatabase
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

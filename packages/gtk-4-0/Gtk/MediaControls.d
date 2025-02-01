@@ -22,10 +22,6 @@ import Gtk.c.types;
 class MediaControls : Widget
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

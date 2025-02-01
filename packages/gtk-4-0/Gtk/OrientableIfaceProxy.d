@@ -7,10 +7,6 @@ import Gtk.OrientableT;
 /// Proxy object for Gtk.Orientable interface when a GObject has no applicable D binding
 class OrientableIfaceProxy : IfaceProxy, Orientable
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

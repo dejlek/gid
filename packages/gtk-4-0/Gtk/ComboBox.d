@@ -531,26 +531,28 @@ class ComboBox : Widget, CellEditable, CellLayout
    * emitting it causes the combo box to pop up its dropdown.
    *   comboBox = the instance the signal is connected to
    */
-  alias ActivateCallback = void delegate(ComboBox comboBox);
+  alias ActivateCallbackDlg = void delegate(ComboBox comboBox);
+  alias ActivateCallbackFunc = void function(ComboBox comboBox);
 
   /**
    * Connect to Activate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivate(ActivateCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto comboBox = getVal!ComboBox(_paramVals);
-      _dgClosure.dlg(comboBox);
+      _dClosure.dlg(comboBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
   }
 
@@ -561,26 +563,28 @@ class ComboBox : Widget, CellEditable, CellLayout
    * also be emitted while typing into the entry of a combo box with an entry.
    *   comboBox = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(ComboBox comboBox);
+  alias ChangedCallbackDlg = void delegate(ComboBox comboBox);
+  alias ChangedCallbackFunc = void function(ComboBox comboBox);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto comboBox = getVal!ComboBox(_paramVals);
-      _dgClosure.dlg(comboBox);
+      _dClosure.dlg(comboBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
   }
 
@@ -617,28 +621,30 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Returns: a newly allocated string representing path
    *   for the current `GtkComboBox` model.
    */
-  alias FormatEntryTextCallback = string delegate(string path, ComboBox comboBox);
+  alias FormatEntryTextCallbackDlg = string delegate(string path, ComboBox comboBox);
+  alias FormatEntryTextCallbackFunc = string function(string path, ComboBox comboBox);
 
   /**
    * Connect to FormatEntryText signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectFormatEntryText(FormatEntryTextCallback dlg, Flag!"After" after = No.After)
+  ulong connectFormatEntryText(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == FormatEntryTextCallbackDlg) || is(T == FormatEntryTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto comboBox = getVal!ComboBox(_paramVals);
       auto path = getVal!string(&_paramVals[1]);
-      auto _retval = _dgClosure.dlg(path, comboBox);
+      auto _retval = _dClosure.dlg(path, comboBox);
       setVal!string(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("format-entry-text", closure, after);
   }
 
@@ -649,27 +655,29 @@ class ComboBox : Widget, CellEditable, CellLayout
    *   scrollType = a `GtkScrollType`
    *   comboBox = the instance the signal is connected to
    */
-  alias MoveActiveCallback = void delegate(ScrollType scrollType, ComboBox comboBox);
+  alias MoveActiveCallbackDlg = void delegate(ScrollType scrollType, ComboBox comboBox);
+  alias MoveActiveCallbackFunc = void function(ScrollType scrollType, ComboBox comboBox);
 
   /**
    * Connect to MoveActive signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveActive(MoveActiveCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveActive(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveActiveCallbackDlg) || is(T == MoveActiveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto comboBox = getVal!ComboBox(_paramVals);
       auto scrollType = getVal!ScrollType(&_paramVals[1]);
-      _dgClosure.dlg(scrollType, comboBox);
+      _dClosure.dlg(scrollType, comboBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-active", closure, after);
   }
 
@@ -680,28 +688,30 @@ class ComboBox : Widget, CellEditable, CellLayout
    *   comboBox = the instance the signal is connected to
    * Returns:
    */
-  alias PopdownCallback = bool delegate(ComboBox comboBox);
+  alias PopdownCallbackDlg = bool delegate(ComboBox comboBox);
+  alias PopdownCallbackFunc = bool function(ComboBox comboBox);
 
   /**
    * Connect to Popdown signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPopdown(PopdownCallback dlg, Flag!"After" after = No.After)
+  ulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PopdownCallbackDlg) || is(T == PopdownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto comboBox = getVal!ComboBox(_paramVals);
-      _retval = _dgClosure.dlg(comboBox);
+      _retval = _dClosure.dlg(comboBox);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("popdown", closure, after);
   }
 
@@ -711,26 +721,28 @@ class ComboBox : Widget, CellEditable, CellLayout
    * The default binding for this signal is Alt+Down.
    *   comboBox = the instance the signal is connected to
    */
-  alias PopupCallback = void delegate(ComboBox comboBox);
+  alias PopupCallbackDlg = void delegate(ComboBox comboBox);
+  alias PopupCallbackFunc = void function(ComboBox comboBox);
 
   /**
    * Connect to Popup signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPopup(PopupCallback dlg, Flag!"After" after = No.After)
+  ulong connectPopup(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PopupCallbackDlg) || is(T == PopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto comboBox = getVal!ComboBox(_paramVals);
-      _dgClosure.dlg(comboBox);
+      _dClosure.dlg(comboBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("popup", closure, after);
   }
 }

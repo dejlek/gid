@@ -64,27 +64,29 @@ class GestureZoom : Gesture
    *   scale = Scale delta, taking the initial state as 1:1
    *   gestureZoom = the instance the signal is connected to
    */
-  alias ScaleChangedCallback = void delegate(double scale, GestureZoom gestureZoom);
+  alias ScaleChangedCallbackDlg = void delegate(double scale, GestureZoom gestureZoom);
+  alias ScaleChangedCallbackFunc = void function(double scale, GestureZoom gestureZoom);
 
   /**
    * Connect to ScaleChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectScaleChanged(ScaleChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectScaleChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ScaleChangedCallbackDlg) || is(T == ScaleChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureZoom = getVal!GestureZoom(_paramVals);
       auto scale = getVal!double(&_paramVals[1]);
-      _dgClosure.dlg(scale, gestureZoom);
+      _dClosure.dlg(scale, gestureZoom);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("scale-changed", closure, after);
   }
 }

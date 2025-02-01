@@ -7,10 +7,6 @@ import Gtk.BuildableT;
 /// Proxy object for Gtk.Buildable interface when a GObject has no applicable D binding
 class BuildableIfaceProxy : IfaceProxy, Buildable
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

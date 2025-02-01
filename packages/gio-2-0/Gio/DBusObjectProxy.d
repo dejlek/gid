@@ -18,10 +18,6 @@ import Gio.c.types;
 class DBusObjectProxy : ObjectG, DBusObject
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

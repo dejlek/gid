@@ -20,10 +20,6 @@ import Gio.c.types;
 class DBusActionGroup : ObjectG, ActionGroup, RemoteActionGroup
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

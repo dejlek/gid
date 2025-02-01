@@ -31,10 +31,6 @@ import Gtk.c.types;
 class WidgetPaintable : ObjectG, Paintable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

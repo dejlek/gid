@@ -55,10 +55,6 @@ import Gtk.c.types;
 class CellRenderer : InitiallyUnowned
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -439,26 +435,28 @@ class CellRenderer : InitiallyUnowned
    * See also: [Gtk.CellRenderer.stopEditing].
    *   cellRenderer = the instance the signal is connected to
    */
-  alias EditingCanceledCallback = void delegate(CellRenderer cellRenderer);
+  alias EditingCanceledCallbackDlg = void delegate(CellRenderer cellRenderer);
+  alias EditingCanceledCallbackFunc = void function(CellRenderer cellRenderer);
 
   /**
    * Connect to EditingCanceled signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEditingCanceled(EditingCanceledCallback dlg, Flag!"After" after = No.After)
+  ulong connectEditingCanceled(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EditingCanceledCallbackDlg) || is(T == EditingCanceledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto cellRenderer = getVal!CellRenderer(_paramVals);
-      _dgClosure.dlg(cellRenderer);
+      _dClosure.dlg(cellRenderer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("editing-canceled", closure, after);
   }
 
@@ -493,28 +491,30 @@ class CellRenderer : InitiallyUnowned
    *   path = the path identifying the edited cell
    *   cellRenderer = the instance the signal is connected to
    */
-  alias EditingStartedCallback = void delegate(CellEditable editable, string path, CellRenderer cellRenderer);
+  alias EditingStartedCallbackDlg = void delegate(CellEditable editable, string path, CellRenderer cellRenderer);
+  alias EditingStartedCallbackFunc = void function(CellEditable editable, string path, CellRenderer cellRenderer);
 
   /**
    * Connect to EditingStarted signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEditingStarted(EditingStartedCallback dlg, Flag!"After" after = No.After)
+  ulong connectEditingStarted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EditingStartedCallbackDlg) || is(T == EditingStartedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto cellRenderer = getVal!CellRenderer(_paramVals);
       auto editable = getVal!CellEditable(&_paramVals[1]);
       auto path = getVal!string(&_paramVals[2]);
-      _dgClosure.dlg(editable, path, cellRenderer);
+      _dClosure.dlg(editable, path, cellRenderer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("editing-started", closure, after);
   }
 }

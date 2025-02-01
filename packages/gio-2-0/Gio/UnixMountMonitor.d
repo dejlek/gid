@@ -83,26 +83,28 @@ class UnixMountMonitor : ObjectG
    * Emitted when the unix mount points have changed.
    *   unixMountMonitor = the instance the signal is connected to
    */
-  alias MountpointsChangedCallback = void delegate(UnixMountMonitor unixMountMonitor);
+  alias MountpointsChangedCallbackDlg = void delegate(UnixMountMonitor unixMountMonitor);
+  alias MountpointsChangedCallbackFunc = void function(UnixMountMonitor unixMountMonitor);
 
   /**
    * Connect to MountpointsChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMountpointsChanged(MountpointsChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectMountpointsChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MountpointsChangedCallbackDlg) || is(T == MountpointsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto unixMountMonitor = getVal!UnixMountMonitor(_paramVals);
-      _dgClosure.dlg(unixMountMonitor);
+      _dClosure.dlg(unixMountMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("mountpoints-changed", closure, after);
   }
 
@@ -110,26 +112,28 @@ class UnixMountMonitor : ObjectG
    * Emitted when the unix mounts have changed.
    *   unixMountMonitor = the instance the signal is connected to
    */
-  alias MountsChangedCallback = void delegate(UnixMountMonitor unixMountMonitor);
+  alias MountsChangedCallbackDlg = void delegate(UnixMountMonitor unixMountMonitor);
+  alias MountsChangedCallbackFunc = void function(UnixMountMonitor unixMountMonitor);
 
   /**
    * Connect to MountsChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMountsChanged(MountsChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectMountsChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MountsChangedCallbackDlg) || is(T == MountsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto unixMountMonitor = getVal!UnixMountMonitor(_paramVals);
-      _dgClosure.dlg(unixMountMonitor);
+      _dClosure.dlg(unixMountMonitor);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("mounts-changed", closure, after);
   }
 }

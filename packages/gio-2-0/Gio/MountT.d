@@ -576,26 +576,28 @@ template MountT()
    * Emitted when the mount has been changed.
    *   mount = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(Mount mount);
+  alias ChangedCallbackDlg = void delegate(Mount mount);
+  alias ChangedCallbackFunc = void function(Mount mount);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto mount = getVal!Mount(_paramVals);
-      _dgClosure.dlg(mount);
+      _dClosure.dlg(mount);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
   }
 
@@ -606,26 +608,28 @@ template MountT()
    * GIO was used to unmount.
    *   mount = the instance the signal is connected to
    */
-  alias PreUnmountCallback = void delegate(Mount mount);
+  alias PreUnmountCallbackDlg = void delegate(Mount mount);
+  alias PreUnmountCallbackFunc = void function(Mount mount);
 
   /**
    * Connect to PreUnmount signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPreUnmount(PreUnmountCallback dlg, Flag!"After" after = No.After)
+  ulong connectPreUnmount(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PreUnmountCallbackDlg) || is(T == PreUnmountCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto mount = getVal!Mount(_paramVals);
-      _dgClosure.dlg(mount);
+      _dClosure.dlg(mount);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pre-unmount", closure, after);
   }
 
@@ -636,26 +640,28 @@ template MountT()
    * finalized.
    *   mount = the instance the signal is connected to
    */
-  alias UnmountedCallback = void delegate(Mount mount);
+  alias UnmountedCallbackDlg = void delegate(Mount mount);
+  alias UnmountedCallbackFunc = void function(Mount mount);
 
   /**
    * Connect to Unmounted signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUnmounted(UnmountedCallback dlg, Flag!"After" after = No.After)
+  ulong connectUnmounted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UnmountedCallbackDlg) || is(T == UnmountedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto mount = getVal!Mount(_paramVals);
-      _dgClosure.dlg(mount);
+      _dClosure.dlg(mount);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unmounted", closure, after);
   }
 }

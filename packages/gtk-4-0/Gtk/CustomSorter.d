@@ -13,10 +13,6 @@ import Gtk.c.types;
 class CustomSorter : Sorter
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

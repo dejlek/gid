@@ -113,10 +113,6 @@ import Gio.c.types;
 class DebugControllerDBus : ObjectG, DebugController, Initable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -195,29 +191,31 @@ class DebugControllerDBus : ObjectG, DebugController, Initable
    *   debugControllerDBus = the instance the signal is connected to
    * Returns: %TRUE if the call is authorized, %FALSE otherwise.
    */
-  alias AuthorizeCallback = bool delegate(DBusMethodInvocation invocation, DebugControllerDBus debugControllerDBus);
+  alias AuthorizeCallbackDlg = bool delegate(DBusMethodInvocation invocation, DebugControllerDBus debugControllerDBus);
+  alias AuthorizeCallbackFunc = bool function(DBusMethodInvocation invocation, DebugControllerDBus debugControllerDBus);
 
   /**
    * Connect to Authorize signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAuthorize(AuthorizeCallback dlg, Flag!"After" after = No.After)
+  ulong connectAuthorize(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AuthorizeCallbackDlg) || is(T == AuthorizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto debugControllerDBus = getVal!DebugControllerDBus(_paramVals);
       auto invocation = getVal!DBusMethodInvocation(&_paramVals[1]);
-      _retval = _dgClosure.dlg(invocation, debugControllerDBus);
+      _retval = _dClosure.dlg(invocation, debugControllerDBus);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("authorize", closure, after);
   }
 }

@@ -34,10 +34,6 @@ import Gtk.c.types;
 class DragIcon : Widget, Native, Root
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

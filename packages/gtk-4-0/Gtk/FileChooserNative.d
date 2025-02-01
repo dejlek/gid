@@ -125,10 +125,6 @@ import Gtk.c.types;
 class FileChooserNative : NativeDialog, FileChooser
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

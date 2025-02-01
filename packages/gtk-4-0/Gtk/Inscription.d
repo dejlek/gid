@@ -30,10 +30,6 @@ import Pango.Types : WrapMode = WrapMode;
 class Inscription : Widget, AccessibleText
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

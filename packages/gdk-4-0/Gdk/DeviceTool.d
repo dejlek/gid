@@ -12,10 +12,6 @@ import Gid.gid;
 class DeviceTool : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

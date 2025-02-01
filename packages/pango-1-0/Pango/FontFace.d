@@ -15,10 +15,6 @@ import Pango.c.types;
 class FontFace : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -7,7 +7,7 @@ import Gio.ActionGroup;
 import Gio.ActionGroupT;
 import Gio.ActionMap;
 import Gio.ActionMapT;
-import Gio.Application : DGioApplication = Application;
+import Gio.ApplicationGio;
 import Gio.Menu;
 import Gio.MenuModel;
 import Gio.Types;
@@ -30,7 +30,7 @@ import Gtk.c.types;
  * ## Automatic resources
  * `GtkApplication` will automatically load menus from the `GtkBuilder`
  * resource located at "gtk/menus.ui", relative to the application's
- * resource base path $(LPAREN)see [Gio.DGioApplication.setResourceBasePath]$(RPAREN).
+ * resource base path $(LPAREN)see [Gio.ApplicationGio.setResourceBasePath]$(RPAREN).
  * The menu with the ID "menubar" is taken as the application's
  * menubar. Additional menus $(LPAREN)most interesting submenus$(RPAREN) can be named
  * and accessed via [Gtk.Application.getMenuById] which allows for
@@ -70,12 +70,8 @@ import Gtk.c.types;
  * [HowDoI: Using GtkApplication](https://wiki.gnome.org/HowDoI/GtkApplication),
  * [Getting Started with GTK: Basics](getting_started.html#basics)
  */
-class Application : DGioApplication
+class Application : ApplicationGio
 {
-
-  this()
-  {
-  }
 
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -103,7 +99,7 @@ class Application : DGioApplication
    * API.
    * Note that commandline arguments are not passed to funcGtk.init.
    * If `application_id` is not %NULL, then it must be valid. See
-   * `[Gio.DGioApplication.idIsValid]`.
+   * `[Gio.ApplicationGio.idIsValid]`.
    * If no application ID is given then some features $(LPAREN)most notably application
    * uniqueness$(RPAREN) will be disabled.
    * Params:
@@ -428,26 +424,28 @@ class Application : DGioApplication
    * to delay the end of the session until state has been saved.
    *   application = the instance the signal is connected to
    */
-  alias QueryEndCallback = void delegate(Application application);
+  alias QueryEndCallbackDlg = void delegate(Application application);
+  alias QueryEndCallbackFunc = void function(Application application);
 
   /**
    * Connect to QueryEnd signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectQueryEnd(QueryEndCallback dlg, Flag!"After" after = No.After)
+  ulong connectQueryEnd(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == QueryEndCallbackDlg) || is(T == QueryEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto application = getVal!Application(_paramVals);
-      _dgClosure.dlg(application);
+      _dClosure.dlg(application);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("query-end", closure, after);
   }
 
@@ -458,27 +456,29 @@ class Application : DGioApplication
    *   window = the newly-added [Gtk.Window]
    *   application = the instance the signal is connected to
    */
-  alias WindowAddedCallback = void delegate(Window window, Application application);
+  alias WindowAddedCallbackDlg = void delegate(Window window, Application application);
+  alias WindowAddedCallbackFunc = void function(Window window, Application application);
 
   /**
    * Connect to WindowAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectWindowAdded(WindowAddedCallback dlg, Flag!"After" after = No.After)
+  ulong connectWindowAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == WindowAddedCallbackDlg) || is(T == WindowAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto application = getVal!Application(_paramVals);
       auto window = getVal!Window(&_paramVals[1]);
-      _dgClosure.dlg(window, application);
+      _dClosure.dlg(window, application);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("window-added", closure, after);
   }
 
@@ -490,27 +490,29 @@ class Application : DGioApplication
    *   window = the [Gtk.Window] that is being removed
    *   application = the instance the signal is connected to
    */
-  alias WindowRemovedCallback = void delegate(Window window, Application application);
+  alias WindowRemovedCallbackDlg = void delegate(Window window, Application application);
+  alias WindowRemovedCallbackFunc = void function(Window window, Application application);
 
   /**
    * Connect to WindowRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectWindowRemoved(WindowRemovedCallback dlg, Flag!"After" after = No.After)
+  ulong connectWindowRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == WindowRemovedCallbackDlg) || is(T == WindowRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto application = getVal!Application(_paramVals);
       auto window = getVal!Window(&_paramVals[1]);
-      _dgClosure.dlg(window, application);
+      _dClosure.dlg(window, application);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("window-removed", closure, after);
   }
 }

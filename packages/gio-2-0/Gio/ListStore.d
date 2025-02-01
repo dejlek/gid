@@ -18,10 +18,6 @@ import Gio.c.types;
 class ListStore : ObjectG, ListModel
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

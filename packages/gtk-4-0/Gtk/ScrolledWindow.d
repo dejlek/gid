@@ -492,27 +492,29 @@ class ScrolledWindow : Widget
    *   pos = edge side that was hit
    *   scrolledWindow = the instance the signal is connected to
    */
-  alias EdgeOvershotCallback = void delegate(PositionType pos, ScrolledWindow scrolledWindow);
+  alias EdgeOvershotCallbackDlg = void delegate(PositionType pos, ScrolledWindow scrolledWindow);
+  alias EdgeOvershotCallbackFunc = void function(PositionType pos, ScrolledWindow scrolledWindow);
 
   /**
    * Connect to EdgeOvershot signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEdgeOvershot(EdgeOvershotCallback dlg, Flag!"After" after = No.After)
+  ulong connectEdgeOvershot(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EdgeOvershotCallbackDlg) || is(T == EdgeOvershotCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto scrolledWindow = getVal!ScrolledWindow(_paramVals);
       auto pos = getVal!PositionType(&_paramVals[1]);
-      _dgClosure.dlg(pos, scrolledWindow);
+      _dClosure.dlg(pos, scrolledWindow);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("edge-overshot", closure, after);
   }
 
@@ -528,27 +530,29 @@ class ScrolledWindow : Widget
    *   pos = edge side that was reached
    *   scrolledWindow = the instance the signal is connected to
    */
-  alias EdgeReachedCallback = void delegate(PositionType pos, ScrolledWindow scrolledWindow);
+  alias EdgeReachedCallbackDlg = void delegate(PositionType pos, ScrolledWindow scrolledWindow);
+  alias EdgeReachedCallbackFunc = void function(PositionType pos, ScrolledWindow scrolledWindow);
 
   /**
    * Connect to EdgeReached signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEdgeReached(EdgeReachedCallback dlg, Flag!"After" after = No.After)
+  ulong connectEdgeReached(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EdgeReachedCallbackDlg) || is(T == EdgeReachedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto scrolledWindow = getVal!ScrolledWindow(_paramVals);
       auto pos = getVal!PositionType(&_paramVals[1]);
-      _dgClosure.dlg(pos, scrolledWindow);
+      _dClosure.dlg(pos, scrolledWindow);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("edge-reached", closure, after);
   }
 
@@ -564,27 +568,29 @@ class ScrolledWindow : Widget
    *     %GTK_DIR_TAB_BACKWARD
    *   scrolledWindow = the instance the signal is connected to
    */
-  alias MoveFocusOutCallback = void delegate(DirectionType directionType, ScrolledWindow scrolledWindow);
+  alias MoveFocusOutCallbackDlg = void delegate(DirectionType directionType, ScrolledWindow scrolledWindow);
+  alias MoveFocusOutCallbackFunc = void function(DirectionType directionType, ScrolledWindow scrolledWindow);
 
   /**
    * Connect to MoveFocusOut signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveFocusOut(MoveFocusOutCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveFocusOut(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveFocusOutCallbackDlg) || is(T == MoveFocusOutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto scrolledWindow = getVal!ScrolledWindow(_paramVals);
       auto directionType = getVal!DirectionType(&_paramVals[1]);
-      _dgClosure.dlg(directionType, scrolledWindow);
+      _dClosure.dlg(directionType, scrolledWindow);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-focus-out", closure, after);
   }
 
@@ -600,30 +606,32 @@ class ScrolledWindow : Widget
    *   scrolledWindow = the instance the signal is connected to
    * Returns:
    */
-  alias ScrollChildCallback = bool delegate(ScrollType scroll, bool horizontal, ScrolledWindow scrolledWindow);
+  alias ScrollChildCallbackDlg = bool delegate(ScrollType scroll, bool horizontal, ScrolledWindow scrolledWindow);
+  alias ScrollChildCallbackFunc = bool function(ScrollType scroll, bool horizontal, ScrolledWindow scrolledWindow);
 
   /**
    * Connect to ScrollChild signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectScrollChild(ScrollChildCallback dlg, Flag!"After" after = No.After)
+  ulong connectScrollChild(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ScrollChildCallbackDlg) || is(T == ScrollChildCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto scrolledWindow = getVal!ScrolledWindow(_paramVals);
       auto scroll = getVal!ScrollType(&_paramVals[1]);
       auto horizontal = getVal!bool(&_paramVals[2]);
-      _retval = _dgClosure.dlg(scroll, horizontal, scrolledWindow);
+      _retval = _dClosure.dlg(scroll, horizontal, scrolledWindow);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("scroll-child", closure, after);
   }
 }

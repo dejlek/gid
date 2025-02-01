@@ -211,26 +211,28 @@ class SearchEntry : Widget, Editable
    * The keybindings for this signal are all forms of the Enter key.
    *   searchEntry = the instance the signal is connected to
    */
-  alias ActivateCallback = void delegate(SearchEntry searchEntry);
+  alias ActivateCallbackDlg = void delegate(SearchEntry searchEntry);
+  alias ActivateCallbackFunc = void function(SearchEntry searchEntry);
 
   /**
    * Connect to Activate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivate(ActivateCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto searchEntry = getVal!SearchEntry(_paramVals);
-      _dgClosure.dlg(searchEntry);
+      _dClosure.dlg(searchEntry);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
   }
 
@@ -243,26 +245,28 @@ class SearchEntry : Widget, Editable
    * The default bindings for this signal is Ctrl-g.
    *   searchEntry = the instance the signal is connected to
    */
-  alias NextMatchCallback = void delegate(SearchEntry searchEntry);
+  alias NextMatchCallbackDlg = void delegate(SearchEntry searchEntry);
+  alias NextMatchCallbackFunc = void function(SearchEntry searchEntry);
 
   /**
    * Connect to NextMatch signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectNextMatch(NextMatchCallback dlg, Flag!"After" after = No.After)
+  ulong connectNextMatch(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == NextMatchCallbackDlg) || is(T == NextMatchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto searchEntry = getVal!SearchEntry(_paramVals);
-      _dgClosure.dlg(searchEntry);
+      _dClosure.dlg(searchEntry);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("next-match", closure, after);
   }
 
@@ -275,26 +279,28 @@ class SearchEntry : Widget, Editable
    * The default bindings for this signal is Ctrl-Shift-g.
    *   searchEntry = the instance the signal is connected to
    */
-  alias PreviousMatchCallback = void delegate(SearchEntry searchEntry);
+  alias PreviousMatchCallbackDlg = void delegate(SearchEntry searchEntry);
+  alias PreviousMatchCallbackFunc = void function(SearchEntry searchEntry);
 
   /**
    * Connect to PreviousMatch signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPreviousMatch(PreviousMatchCallback dlg, Flag!"After" after = No.After)
+  ulong connectPreviousMatch(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PreviousMatchCallbackDlg) || is(T == PreviousMatchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto searchEntry = getVal!SearchEntry(_paramVals);
-      _dgClosure.dlg(searchEntry);
+      _dClosure.dlg(searchEntry);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("previous-match", closure, after);
   }
 
@@ -304,26 +310,28 @@ class SearchEntry : Widget, Editable
    * property.
    *   searchEntry = the instance the signal is connected to
    */
-  alias SearchChangedCallback = void delegate(SearchEntry searchEntry);
+  alias SearchChangedCallbackDlg = void delegate(SearchEntry searchEntry);
+  alias SearchChangedCallbackFunc = void function(SearchEntry searchEntry);
 
   /**
    * Connect to SearchChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSearchChanged(SearchChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectSearchChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SearchChangedCallbackDlg) || is(T == SearchChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto searchEntry = getVal!SearchEntry(_paramVals);
-      _dgClosure.dlg(searchEntry);
+      _dClosure.dlg(searchEntry);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("search-changed", closure, after);
   }
 
@@ -331,26 +339,28 @@ class SearchEntry : Widget, Editable
    * Emitted when the user initiated a search on the entry.
    *   searchEntry = the instance the signal is connected to
    */
-  alias SearchStartedCallback = void delegate(SearchEntry searchEntry);
+  alias SearchStartedCallbackDlg = void delegate(SearchEntry searchEntry);
+  alias SearchStartedCallbackFunc = void function(SearchEntry searchEntry);
 
   /**
    * Connect to SearchStarted signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSearchStarted(SearchStartedCallback dlg, Flag!"After" after = No.After)
+  ulong connectSearchStarted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SearchStartedCallbackDlg) || is(T == SearchStartedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto searchEntry = getVal!SearchEntry(_paramVals);
-      _dgClosure.dlg(searchEntry);
+      _dClosure.dlg(searchEntry);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("search-started", closure, after);
   }
 
@@ -362,26 +372,28 @@ class SearchEntry : Widget, Editable
    * The default bindings for this signal is Escape.
    *   searchEntry = the instance the signal is connected to
    */
-  alias StopSearchCallback = void delegate(SearchEntry searchEntry);
+  alias StopSearchCallbackDlg = void delegate(SearchEntry searchEntry);
+  alias StopSearchCallbackFunc = void function(SearchEntry searchEntry);
 
   /**
    * Connect to StopSearch signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectStopSearch(StopSearchCallback dlg, Flag!"After" after = No.After)
+  ulong connectStopSearch(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == StopSearchCallbackDlg) || is(T == StopSearchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto searchEntry = getVal!SearchEntry(_paramVals);
-      _dgClosure.dlg(searchEntry);
+      _dClosure.dlg(searchEntry);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("stop-search", closure, after);
   }
 }

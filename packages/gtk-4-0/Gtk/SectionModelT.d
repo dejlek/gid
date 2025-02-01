@@ -59,28 +59,30 @@ template SectionModelT()
    *   nItems = number of items with changes
    *   sectionModel = the instance the signal is connected to
    */
-  alias SectionsChangedCallback = void delegate(uint position, uint nItems, SectionModel sectionModel);
+  alias SectionsChangedCallbackDlg = void delegate(uint position, uint nItems, SectionModel sectionModel);
+  alias SectionsChangedCallbackFunc = void function(uint position, uint nItems, SectionModel sectionModel);
 
   /**
    * Connect to SectionsChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSectionsChanged(SectionsChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectSectionsChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SectionsChangedCallbackDlg) || is(T == SectionsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto sectionModel = getVal!SectionModel(_paramVals);
       auto position = getVal!uint(&_paramVals[1]);
       auto nItems = getVal!uint(&_paramVals[2]);
-      _dgClosure.dlg(position, nItems, sectionModel);
+      _dClosure.dlg(position, nItems, sectionModel);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("sections-changed", closure, after);
   }
 }

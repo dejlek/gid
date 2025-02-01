@@ -143,27 +143,29 @@ class TextTagTable : ObjectG, Buildable
    *   tag = the added tag.
    *   textTagTable = the instance the signal is connected to
    */
-  alias TagAddedCallback = void delegate(TextTag tag, TextTagTable textTagTable);
+  alias TagAddedCallbackDlg = void delegate(TextTag tag, TextTagTable textTagTable);
+  alias TagAddedCallbackFunc = void function(TextTag tag, TextTagTable textTagTable);
 
   /**
    * Connect to TagAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectTagAdded(TagAddedCallback dlg, Flag!"After" after = No.After)
+  ulong connectTagAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == TagAddedCallbackDlg) || is(T == TagAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textTagTable = getVal!TextTagTable(_paramVals);
       auto tag = getVal!TextTag(&_paramVals[1]);
-      _dgClosure.dlg(tag, textTagTable);
+      _dClosure.dlg(tag, textTagTable);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("tag-added", closure, after);
   }
 
@@ -174,28 +176,30 @@ class TextTagTable : ObjectG, Buildable
    *   sizeChanged = whether the change affects the `GtkTextView` layout.
    *   textTagTable = the instance the signal is connected to
    */
-  alias TagChangedCallback = void delegate(TextTag tag, bool sizeChanged, TextTagTable textTagTable);
+  alias TagChangedCallbackDlg = void delegate(TextTag tag, bool sizeChanged, TextTagTable textTagTable);
+  alias TagChangedCallbackFunc = void function(TextTag tag, bool sizeChanged, TextTagTable textTagTable);
 
   /**
    * Connect to TagChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectTagChanged(TagChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectTagChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == TagChangedCallbackDlg) || is(T == TagChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textTagTable = getVal!TextTagTable(_paramVals);
       auto tag = getVal!TextTag(&_paramVals[1]);
       auto sizeChanged = getVal!bool(&_paramVals[2]);
-      _dgClosure.dlg(tag, sizeChanged, textTagTable);
+      _dClosure.dlg(tag, sizeChanged, textTagTable);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("tag-changed", closure, after);
   }
 
@@ -207,27 +211,29 @@ class TextTagTable : ObjectG, Buildable
    *   tag = the removed tag.
    *   textTagTable = the instance the signal is connected to
    */
-  alias TagRemovedCallback = void delegate(TextTag tag, TextTagTable textTagTable);
+  alias TagRemovedCallbackDlg = void delegate(TextTag tag, TextTagTable textTagTable);
+  alias TagRemovedCallbackFunc = void function(TextTag tag, TextTagTable textTagTable);
 
   /**
    * Connect to TagRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectTagRemoved(TagRemovedCallback dlg, Flag!"After" after = No.After)
+  ulong connectTagRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == TagRemovedCallbackDlg) || is(T == TagRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textTagTable = getVal!TextTagTable(_paramVals);
       auto tag = getVal!TextTag(&_paramVals[1]);
-      _dgClosure.dlg(tag, textTagTable);
+      _dClosure.dlg(tag, textTagTable);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("tag-removed", closure, after);
   }
 }

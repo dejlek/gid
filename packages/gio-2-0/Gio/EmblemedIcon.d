@@ -19,10 +19,6 @@ import Gio.c.types;
 class EmblemedIcon : ObjectG, Icon
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -68,10 +68,6 @@ import Gtk.c.types;
 class SizeGroup : ObjectG, Buildable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

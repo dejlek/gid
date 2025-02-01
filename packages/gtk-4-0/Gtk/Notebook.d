@@ -769,29 +769,31 @@ class Notebook : Widget
     gtk_notebook_set_tab_reorderable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, reorderable);
   }
 
-  alias ChangeCurrentPageCallback = bool delegate(int object, Notebook notebook);
+  alias ChangeCurrentPageCallbackDlg = bool delegate(int object, Notebook notebook);
+  alias ChangeCurrentPageCallbackFunc = bool function(int object, Notebook notebook);
 
   /**
    * Connect to ChangeCurrentPage signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChangeCurrentPage(ChangeCurrentPageCallback dlg, Flag!"After" after = No.After)
+  ulong connectChangeCurrentPage(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangeCurrentPageCallbackDlg) || is(T == ChangeCurrentPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto notebook = getVal!Notebook(_paramVals);
       auto object = getVal!int(&_paramVals[1]);
-      _retval = _dgClosure.dlg(object, notebook);
+      _retval = _dClosure.dlg(object, notebook);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("change-current-page", closure, after);
   }
 
@@ -809,78 +811,84 @@ class Notebook : Widget
    * Returns: a `GtkNotebook` that
    *   page should be added to
    */
-  alias CreateWindowCallback = Notebook delegate(Widget page, Notebook notebook);
+  alias CreateWindowCallbackDlg = Notebook delegate(Widget page, Notebook notebook);
+  alias CreateWindowCallbackFunc = Notebook function(Widget page, Notebook notebook);
 
   /**
    * Connect to CreateWindow signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCreateWindow(CreateWindowCallback dlg, Flag!"After" after = No.After)
+  ulong connectCreateWindow(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CreateWindowCallbackDlg) || is(T == CreateWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto notebook = getVal!Notebook(_paramVals);
       auto page = getVal!Widget(&_paramVals[1]);
-      auto _retval = _dgClosure.dlg(page, notebook);
+      auto _retval = _dClosure.dlg(page, notebook);
       setVal!Notebook(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("create-window", closure, after);
   }
 
-  alias FocusTabCallback = bool delegate(NotebookTab object, Notebook notebook);
+  alias FocusTabCallbackDlg = bool delegate(NotebookTab object, Notebook notebook);
+  alias FocusTabCallbackFunc = bool function(NotebookTab object, Notebook notebook);
 
   /**
    * Connect to FocusTab signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectFocusTab(FocusTabCallback dlg, Flag!"After" after = No.After)
+  ulong connectFocusTab(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == FocusTabCallbackDlg) || is(T == FocusTabCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto notebook = getVal!Notebook(_paramVals);
       auto object = getVal!NotebookTab(&_paramVals[1]);
-      _retval = _dgClosure.dlg(object, notebook);
+      _retval = _dClosure.dlg(object, notebook);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("focus-tab", closure, after);
   }
 
-  alias MoveFocusOutCallback = void delegate(DirectionType object, Notebook notebook);
+  alias MoveFocusOutCallbackDlg = void delegate(DirectionType object, Notebook notebook);
+  alias MoveFocusOutCallbackFunc = void function(DirectionType object, Notebook notebook);
 
   /**
    * Connect to MoveFocusOut signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveFocusOut(MoveFocusOutCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveFocusOut(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveFocusOutCallbackDlg) || is(T == MoveFocusOutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto notebook = getVal!Notebook(_paramVals);
       auto object = getVal!DirectionType(&_paramVals[1]);
-      _dgClosure.dlg(object, notebook);
+      _dClosure.dlg(object, notebook);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-focus-out", closure, after);
   }
 
@@ -892,28 +900,30 @@ class Notebook : Widget
    *   pageNum = the new page number for child
    *   notebook = the instance the signal is connected to
    */
-  alias PageAddedCallback = void delegate(Widget child, uint pageNum, Notebook notebook);
+  alias PageAddedCallbackDlg = void delegate(Widget child, uint pageNum, Notebook notebook);
+  alias PageAddedCallbackFunc = void function(Widget child, uint pageNum, Notebook notebook);
 
   /**
    * Connect to PageAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPageAdded(PageAddedCallback dlg, Flag!"After" after = No.After)
+  ulong connectPageAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PageAddedCallbackDlg) || is(T == PageAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto notebook = getVal!Notebook(_paramVals);
       auto child = getVal!Widget(&_paramVals[1]);
       auto pageNum = getVal!uint(&_paramVals[2]);
-      _dgClosure.dlg(child, pageNum, notebook);
+      _dClosure.dlg(child, pageNum, notebook);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("page-added", closure, after);
   }
 
@@ -925,28 +935,30 @@ class Notebook : Widget
    *   pageNum = the child page number
    *   notebook = the instance the signal is connected to
    */
-  alias PageRemovedCallback = void delegate(Widget child, uint pageNum, Notebook notebook);
+  alias PageRemovedCallbackDlg = void delegate(Widget child, uint pageNum, Notebook notebook);
+  alias PageRemovedCallbackFunc = void function(Widget child, uint pageNum, Notebook notebook);
 
   /**
    * Connect to PageRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPageRemoved(PageRemovedCallback dlg, Flag!"After" after = No.After)
+  ulong connectPageRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PageRemovedCallbackDlg) || is(T == PageRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto notebook = getVal!Notebook(_paramVals);
       auto child = getVal!Widget(&_paramVals[1]);
       auto pageNum = getVal!uint(&_paramVals[2]);
-      _dgClosure.dlg(child, pageNum, notebook);
+      _dClosure.dlg(child, pageNum, notebook);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("page-removed", closure, after);
   }
 
@@ -958,81 +970,87 @@ class Notebook : Widget
    *   pageNum = the new page number for child
    *   notebook = the instance the signal is connected to
    */
-  alias PageReorderedCallback = void delegate(Widget child, uint pageNum, Notebook notebook);
+  alias PageReorderedCallbackDlg = void delegate(Widget child, uint pageNum, Notebook notebook);
+  alias PageReorderedCallbackFunc = void function(Widget child, uint pageNum, Notebook notebook);
 
   /**
    * Connect to PageReordered signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPageReordered(PageReorderedCallback dlg, Flag!"After" after = No.After)
+  ulong connectPageReordered(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PageReorderedCallbackDlg) || is(T == PageReorderedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto notebook = getVal!Notebook(_paramVals);
       auto child = getVal!Widget(&_paramVals[1]);
       auto pageNum = getVal!uint(&_paramVals[2]);
-      _dgClosure.dlg(child, pageNum, notebook);
+      _dClosure.dlg(child, pageNum, notebook);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("page-reordered", closure, after);
   }
 
-  alias ReorderTabCallback = bool delegate(DirectionType object, bool p0, Notebook notebook);
+  alias ReorderTabCallbackDlg = bool delegate(DirectionType object, bool p0, Notebook notebook);
+  alias ReorderTabCallbackFunc = bool function(DirectionType object, bool p0, Notebook notebook);
 
   /**
    * Connect to ReorderTab signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectReorderTab(ReorderTabCallback dlg, Flag!"After" after = No.After)
+  ulong connectReorderTab(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ReorderTabCallbackDlg) || is(T == ReorderTabCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto notebook = getVal!Notebook(_paramVals);
       auto object = getVal!DirectionType(&_paramVals[1]);
       auto p0 = getVal!bool(&_paramVals[2]);
-      _retval = _dgClosure.dlg(object, p0, notebook);
+      _retval = _dClosure.dlg(object, p0, notebook);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("reorder-tab", closure, after);
   }
 
-  alias SelectPageCallback = bool delegate(bool object, Notebook notebook);
+  alias SelectPageCallbackDlg = bool delegate(bool object, Notebook notebook);
+  alias SelectPageCallbackFunc = bool function(bool object, Notebook notebook);
 
   /**
    * Connect to SelectPage signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectPage(SelectPageCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectPage(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectPageCallbackDlg) || is(T == SelectPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto notebook = getVal!Notebook(_paramVals);
       auto object = getVal!bool(&_paramVals[1]);
-      _retval = _dgClosure.dlg(object, notebook);
+      _retval = _dClosure.dlg(object, notebook);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("select-page", closure, after);
   }
 
@@ -1043,28 +1061,30 @@ class Notebook : Widget
    *   pageNum = the index of the page
    *   notebook = the instance the signal is connected to
    */
-  alias SwitchPageCallback = void delegate(Widget page, uint pageNum, Notebook notebook);
+  alias SwitchPageCallbackDlg = void delegate(Widget page, uint pageNum, Notebook notebook);
+  alias SwitchPageCallbackFunc = void function(Widget page, uint pageNum, Notebook notebook);
 
   /**
    * Connect to SwitchPage signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSwitchPage(SwitchPageCallback dlg, Flag!"After" after = No.After)
+  ulong connectSwitchPage(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SwitchPageCallbackDlg) || is(T == SwitchPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto notebook = getVal!Notebook(_paramVals);
       auto page = getVal!Widget(&_paramVals[1]);
       auto pageNum = getVal!uint(&_paramVals[2]);
-      _dgClosure.dlg(page, pageNum, notebook);
+      _dClosure.dlg(page, pageNum, notebook);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("switch-page", closure, after);
   }
 }

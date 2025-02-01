@@ -18,10 +18,6 @@ import Pango.c.types;
 class FontFamily : ObjectG, ListModel
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -75,28 +75,30 @@ class EventControllerMotion : EventController
    *   y = coordinates of pointer location
    *   eventControllerMotion = the instance the signal is connected to
    */
-  alias EnterCallback = void delegate(double x, double y, EventControllerMotion eventControllerMotion);
+  alias EnterCallbackDlg = void delegate(double x, double y, EventControllerMotion eventControllerMotion);
+  alias EnterCallbackFunc = void function(double x, double y, EventControllerMotion eventControllerMotion);
 
   /**
    * Connect to Enter signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEnter(EnterCallback dlg, Flag!"After" after = No.After)
+  ulong connectEnter(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EnterCallbackDlg) || is(T == EnterCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto eventControllerMotion = getVal!EventControllerMotion(_paramVals);
       auto x = getVal!double(&_paramVals[1]);
       auto y = getVal!double(&_paramVals[2]);
-      _dgClosure.dlg(x, y, eventControllerMotion);
+      _dClosure.dlg(x, y, eventControllerMotion);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("enter", closure, after);
   }
 
@@ -104,26 +106,28 @@ class EventControllerMotion : EventController
    * Signals that the pointer has left the widget.
    *   eventControllerMotion = the instance the signal is connected to
    */
-  alias LeaveCallback = void delegate(EventControllerMotion eventControllerMotion);
+  alias LeaveCallbackDlg = void delegate(EventControllerMotion eventControllerMotion);
+  alias LeaveCallbackFunc = void function(EventControllerMotion eventControllerMotion);
 
   /**
    * Connect to Leave signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectLeave(LeaveCallback dlg, Flag!"After" after = No.After)
+  ulong connectLeave(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == LeaveCallbackDlg) || is(T == LeaveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto eventControllerMotion = getVal!EventControllerMotion(_paramVals);
-      _dgClosure.dlg(eventControllerMotion);
+      _dClosure.dlg(eventControllerMotion);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("leave", closure, after);
   }
 
@@ -134,28 +138,30 @@ class EventControllerMotion : EventController
    *   y = the y coordinate
    *   eventControllerMotion = the instance the signal is connected to
    */
-  alias MotionCallback = void delegate(double x, double y, EventControllerMotion eventControllerMotion);
+  alias MotionCallbackDlg = void delegate(double x, double y, EventControllerMotion eventControllerMotion);
+  alias MotionCallbackFunc = void function(double x, double y, EventControllerMotion eventControllerMotion);
 
   /**
    * Connect to Motion signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMotion(MotionCallback dlg, Flag!"After" after = No.After)
+  ulong connectMotion(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MotionCallbackDlg) || is(T == MotionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto eventControllerMotion = getVal!EventControllerMotion(_paramVals);
       auto x = getVal!double(&_paramVals[1]);
       auto y = getVal!double(&_paramVals[2]);
-      _dgClosure.dlg(x, y, eventControllerMotion);
+      _dClosure.dlg(x, y, eventControllerMotion);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("motion", closure, after);
   }
 }

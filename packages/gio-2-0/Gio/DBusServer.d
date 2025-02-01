@@ -35,10 +35,6 @@ import Gio.c.types;
 class DBusServer : ObjectG, Initable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -185,29 +181,31 @@ class DBusServer : ObjectG, Initable
    * Returns: %TRUE to claim connection, %FALSE to let other handlers
    *   run.
    */
-  alias NewConnectionCallback = bool delegate(DBusConnection connection, DBusServer dBusServer);
+  alias NewConnectionCallbackDlg = bool delegate(DBusConnection connection, DBusServer dBusServer);
+  alias NewConnectionCallbackFunc = bool function(DBusConnection connection, DBusServer dBusServer);
 
   /**
    * Connect to NewConnection signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectNewConnection(NewConnectionCallback dlg, Flag!"After" after = No.After)
+  ulong connectNewConnection(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == NewConnectionCallbackDlg) || is(T == NewConnectionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto dBusServer = getVal!DBusServer(_paramVals);
       auto connection = getVal!DBusConnection(&_paramVals[1]);
-      _retval = _dgClosure.dlg(connection, dBusServer);
+      _retval = _dClosure.dlg(connection, dBusServer);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("new-connection", closure, after);
   }
 }

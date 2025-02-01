@@ -22,10 +22,6 @@ import Gio.c.types;
 class NetworkAddress : ObjectG, SocketConnectable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

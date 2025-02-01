@@ -7,10 +7,6 @@ import Gio.PollableInputStreamT;
 /// Proxy object for Gio.PollableInputStream interface when a GObject has no applicable D binding
 class PollableInputStreamIfaceProxy : IfaceProxy, PollableInputStream
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

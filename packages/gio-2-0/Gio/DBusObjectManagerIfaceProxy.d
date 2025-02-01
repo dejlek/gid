@@ -7,10 +7,6 @@ import Gio.DBusObjectManagerT;
 /// Proxy object for Gio.DBusObjectManager interface when a GObject has no applicable D binding
 class DBusObjectManagerIfaceProxy : IfaceProxy, DBusObjectManager
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

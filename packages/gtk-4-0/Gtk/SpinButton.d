@@ -113,10 +113,6 @@ import Gtk.c.types;
 class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -490,26 +486,28 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * pressed again.
    *   spinButton = the instance the signal is connected to
    */
-  alias ActivateCallback = void delegate(SpinButton spinButton);
+  alias ActivateCallbackDlg = void delegate(SpinButton spinButton);
+  alias ActivateCallbackFunc = void function(SpinButton spinButton);
 
   /**
    * Connect to Activate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivate(ActivateCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto spinButton = getVal!SpinButton(_paramVals);
-      _dgClosure.dlg(spinButton);
+      _dClosure.dlg(spinButton);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
   }
 
@@ -524,27 +522,29 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    *   scroll = a `GtkScrollType` to specify the speed and amount of change
    *   spinButton = the instance the signal is connected to
    */
-  alias ChangeValueCallback = void delegate(ScrollType scroll, SpinButton spinButton);
+  alias ChangeValueCallbackDlg = void delegate(ScrollType scroll, SpinButton spinButton);
+  alias ChangeValueCallbackFunc = void function(ScrollType scroll, SpinButton spinButton);
 
   /**
    * Connect to ChangeValue signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChangeValue(ChangeValueCallback dlg, Flag!"After" after = No.After)
+  ulong connectChangeValue(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangeValueCallbackDlg) || is(T == ChangeValueCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto spinButton = getVal!SpinButton(_paramVals);
       auto scroll = getVal!ScrollType(&_paramVals[1]);
-      _dgClosure.dlg(scroll, spinButton);
+      _dClosure.dlg(scroll, spinButton);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("change-value", closure, after);
   }
 
@@ -568,28 +568,30 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    *   spinButton = the instance the signal is connected to
    * Returns: %TRUE if the value has been displayed
    */
-  alias OutputCallback = bool delegate(SpinButton spinButton);
+  alias OutputCallbackDlg = bool delegate(SpinButton spinButton);
+  alias OutputCallbackFunc = bool function(SpinButton spinButton);
 
   /**
    * Connect to Output signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectOutput(OutputCallback dlg, Flag!"After" after = No.After)
+  ulong connectOutput(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == OutputCallbackDlg) || is(T == OutputCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto spinButton = getVal!SpinButton(_paramVals);
-      _retval = _dgClosure.dlg(spinButton);
+      _retval = _dClosure.dlg(spinButton);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("output", closure, after);
   }
 
@@ -598,26 +600,28 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Also see the [Gtk.SpinButton.output] signal.
    *   spinButton = the instance the signal is connected to
    */
-  alias ValueChangedCallback = void delegate(SpinButton spinButton);
+  alias ValueChangedCallbackDlg = void delegate(SpinButton spinButton);
+  alias ValueChangedCallbackFunc = void function(SpinButton spinButton);
 
   /**
    * Connect to ValueChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectValueChanged(ValueChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ValueChangedCallbackDlg) || is(T == ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto spinButton = getVal!SpinButton(_paramVals);
-      _dgClosure.dlg(spinButton);
+      _dClosure.dlg(spinButton);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
   }
 
@@ -626,26 +630,28 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * to its minimum value or vice-versa.
    *   spinButton = the instance the signal is connected to
    */
-  alias WrappedCallback = void delegate(SpinButton spinButton);
+  alias WrappedCallbackDlg = void delegate(SpinButton spinButton);
+  alias WrappedCallbackFunc = void function(SpinButton spinButton);
 
   /**
    * Connect to Wrapped signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectWrapped(WrappedCallback dlg, Flag!"After" after = No.After)
+  ulong connectWrapped(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == WrappedCallbackDlg) || is(T == WrappedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto spinButton = getVal!SpinButton(_paramVals);
-      _dgClosure.dlg(spinButton);
+      _dClosure.dlg(spinButton);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("wrapped", closure, after);
   }
 }

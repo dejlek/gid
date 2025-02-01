@@ -7,10 +7,6 @@ import Gio.DatagramBasedT;
 /// Proxy object for Gio.DatagramBased interface when a GObject has no applicable D binding
 class DatagramBasedIfaceProxy : IfaceProxy, DatagramBased
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -32,10 +32,6 @@ import Gio.c.types;
 class SocketConnection : IOStream
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

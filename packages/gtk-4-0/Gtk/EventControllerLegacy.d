@@ -51,29 +51,31 @@ class EventControllerLegacy : EventController
    * Returns: %TRUE to stop other handlers from being invoked for the event
    *   and the emission of this signal. %FALSE to propagate the event further.
    */
-  alias EventCallback = bool delegate(Event event, EventControllerLegacy eventControllerLegacy);
+  alias EventCallbackDlg = bool delegate(Event event, EventControllerLegacy eventControllerLegacy);
+  alias EventCallbackFunc = bool function(Event event, EventControllerLegacy eventControllerLegacy);
 
   /**
    * Connect to Event signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEvent(EventCallback dlg, Flag!"After" after = No.After)
+  ulong connectEvent(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EventCallbackDlg) || is(T == EventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto eventControllerLegacy = getVal!EventControllerLegacy(_paramVals);
       auto event = getVal!Event(&_paramVals[1]);
-      _retval = _dgClosure.dlg(event, eventControllerLegacy);
+      _retval = _dClosure.dlg(event, eventControllerLegacy);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("event", closure, after);
   }
 }

@@ -27,10 +27,6 @@ import Gio.c.types;
 class ThreadedSocketService : SocketService
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -72,30 +68,32 @@ class ThreadedSocketService : SocketService
    *   threadedSocketService = the instance the signal is connected to
    * Returns: %TRUE to stop further signal handlers from being called
    */
-  alias RunCallback = bool delegate(SocketConnection connection, ObjectG sourceObject, ThreadedSocketService threadedSocketService);
+  alias RunCallbackDlg = bool delegate(SocketConnection connection, ObjectG sourceObject, ThreadedSocketService threadedSocketService);
+  alias RunCallbackFunc = bool function(SocketConnection connection, ObjectG sourceObject, ThreadedSocketService threadedSocketService);
 
   /**
    * Connect to Run signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRun(RunCallback dlg, Flag!"After" after = No.After)
+  ulong connectRun(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RunCallbackDlg) || is(T == RunCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto threadedSocketService = getVal!ThreadedSocketService(_paramVals);
       auto connection = getVal!SocketConnection(&_paramVals[1]);
       auto sourceObject = getVal!ObjectG(&_paramVals[2]);
-      _retval = _dgClosure.dlg(connection, sourceObject, threadedSocketService);
+      _retval = _dClosure.dlg(connection, sourceObject, threadedSocketService);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("run", closure, after);
   }
 }

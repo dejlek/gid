@@ -948,26 +948,28 @@ class Entry : Widget, CellEditable, Editable
    * The keybindings for this signal are all forms of the Enter key.
    *   entry = the instance the signal is connected to
    */
-  alias ActivateCallback = void delegate(Entry entry);
+  alias ActivateCallbackDlg = void delegate(Entry entry);
+  alias ActivateCallbackFunc = void function(Entry entry);
 
   /**
    * Connect to Activate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivate(ActivateCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto entry = getVal!Entry(_paramVals);
-      _dgClosure.dlg(entry);
+      _dClosure.dlg(entry);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
   }
 
@@ -977,27 +979,29 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = The position of the clicked icon
    *   entry = the instance the signal is connected to
    */
-  alias IconPressCallback = void delegate(EntryIconPosition iconPos, Entry entry);
+  alias IconPressCallbackDlg = void delegate(EntryIconPosition iconPos, Entry entry);
+  alias IconPressCallbackFunc = void function(EntryIconPosition iconPos, Entry entry);
 
   /**
    * Connect to IconPress signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectIconPress(IconPressCallback dlg, Flag!"After" after = No.After)
+  ulong connectIconPress(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == IconPressCallbackDlg) || is(T == IconPressCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto entry = getVal!Entry(_paramVals);
       auto iconPos = getVal!EntryIconPosition(&_paramVals[1]);
-      _dgClosure.dlg(iconPos, entry);
+      _dClosure.dlg(iconPos, entry);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("icon-press", closure, after);
   }
 
@@ -1008,27 +1012,29 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = The position of the clicked icon
    *   entry = the instance the signal is connected to
    */
-  alias IconReleaseCallback = void delegate(EntryIconPosition iconPos, Entry entry);
+  alias IconReleaseCallbackDlg = void delegate(EntryIconPosition iconPos, Entry entry);
+  alias IconReleaseCallbackFunc = void function(EntryIconPosition iconPos, Entry entry);
 
   /**
    * Connect to IconRelease signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectIconRelease(IconReleaseCallback dlg, Flag!"After" after = No.After)
+  ulong connectIconRelease(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == IconReleaseCallbackDlg) || is(T == IconReleaseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto entry = getVal!Entry(_paramVals);
       auto iconPos = getVal!EntryIconPosition(&_paramVals[1]);
-      _dgClosure.dlg(iconPos, entry);
+      _dClosure.dlg(iconPos, entry);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("icon-release", closure, after);
   }
 }

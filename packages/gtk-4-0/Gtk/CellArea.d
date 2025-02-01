@@ -291,10 +291,6 @@ import Gtk.c.types;
 class CellArea : InitiallyUnowned, Buildable, CellLayout
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -970,30 +966,32 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    *   path = the `GtkTreePath` string this edit was initiated for
    *   cellArea = the instance the signal is connected to
    */
-  alias AddEditableCallback = void delegate(CellRenderer renderer, CellEditable editable, Rectangle area, string path, CellArea cellArea);
+  alias AddEditableCallbackDlg = void delegate(CellRenderer renderer, CellEditable editable, Rectangle area, string path, CellArea cellArea);
+  alias AddEditableCallbackFunc = void function(CellRenderer renderer, CellEditable editable, Rectangle area, string path, CellArea cellArea);
 
   /**
    * Connect to AddEditable signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAddEditable(AddEditableCallback dlg, Flag!"After" after = No.After)
+  ulong connectAddEditable(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AddEditableCallbackDlg) || is(T == AddEditableCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto cellArea = getVal!CellArea(_paramVals);
       auto renderer = getVal!CellRenderer(&_paramVals[1]);
       auto editable = getVal!CellEditable(&_paramVals[2]);
       auto area = getVal!Rectangle(&_paramVals[3]);
       auto path = getVal!string(&_paramVals[4]);
-      _dgClosure.dlg(renderer, editable, area, path, cellArea);
+      _dClosure.dlg(renderer, editable, area, path, cellArea);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("add-editable", closure, after);
   }
 
@@ -1006,30 +1004,32 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    *   isExpanded = whether the view is currently showing the children of this row
    *   cellArea = the instance the signal is connected to
    */
-  alias ApplyAttributesCallback = void delegate(TreeModel model, TreeIter iter, bool isExpander, bool isExpanded, CellArea cellArea);
+  alias ApplyAttributesCallbackDlg = void delegate(TreeModel model, TreeIter iter, bool isExpander, bool isExpanded, CellArea cellArea);
+  alias ApplyAttributesCallbackFunc = void function(TreeModel model, TreeIter iter, bool isExpander, bool isExpanded, CellArea cellArea);
 
   /**
    * Connect to ApplyAttributes signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectApplyAttributes(ApplyAttributesCallback dlg, Flag!"After" after = No.After)
+  ulong connectApplyAttributes(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ApplyAttributesCallbackDlg) || is(T == ApplyAttributesCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto cellArea = getVal!CellArea(_paramVals);
       auto model = getVal!TreeModel(&_paramVals[1]);
       auto iter = getVal!TreeIter(&_paramVals[2]);
       auto isExpander = getVal!bool(&_paramVals[3]);
       auto isExpanded = getVal!bool(&_paramVals[4]);
-      _dgClosure.dlg(model, iter, isExpander, isExpanded, cellArea);
+      _dClosure.dlg(model, iter, isExpander, isExpanded, cellArea);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("apply-attributes", closure, after);
   }
 
@@ -1046,28 +1046,30 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    *   path = the current `GtkTreePath` string set for area
    *   cellArea = the instance the signal is connected to
    */
-  alias FocusChangedCallback = void delegate(CellRenderer renderer, string path, CellArea cellArea);
+  alias FocusChangedCallbackDlg = void delegate(CellRenderer renderer, string path, CellArea cellArea);
+  alias FocusChangedCallbackFunc = void function(CellRenderer renderer, string path, CellArea cellArea);
 
   /**
    * Connect to FocusChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectFocusChanged(FocusChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectFocusChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == FocusChangedCallbackDlg) || is(T == FocusChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto cellArea = getVal!CellArea(_paramVals);
       auto renderer = getVal!CellRenderer(&_paramVals[1]);
       auto path = getVal!string(&_paramVals[2]);
-      _dgClosure.dlg(renderer, path, cellArea);
+      _dClosure.dlg(renderer, path, cellArea);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("focus-changed", closure, after);
   }
 
@@ -1079,28 +1081,30 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    *   editable = the `GtkCellEditable` widget to remove
    *   cellArea = the instance the signal is connected to
    */
-  alias RemoveEditableCallback = void delegate(CellRenderer renderer, CellEditable editable, CellArea cellArea);
+  alias RemoveEditableCallbackDlg = void delegate(CellRenderer renderer, CellEditable editable, CellArea cellArea);
+  alias RemoveEditableCallbackFunc = void function(CellRenderer renderer, CellEditable editable, CellArea cellArea);
 
   /**
    * Connect to RemoveEditable signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRemoveEditable(RemoveEditableCallback dlg, Flag!"After" after = No.After)
+  ulong connectRemoveEditable(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RemoveEditableCallbackDlg) || is(T == RemoveEditableCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto cellArea = getVal!CellArea(_paramVals);
       auto renderer = getVal!CellRenderer(&_paramVals[1]);
       auto editable = getVal!CellEditable(&_paramVals[2]);
-      _dgClosure.dlg(renderer, editable, cellArea);
+      _dClosure.dlg(renderer, editable, cellArea);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("remove-editable", closure, after);
   }
 }

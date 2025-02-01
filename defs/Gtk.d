@@ -44,6 +44,9 @@
 //!set class[Widget].method[get_css_classes].return-value.array[][zero-terminated] 1
 //!set class[Widget].method[set_css_classes].parameters.parameter[classes].array[][zero-terminated] 1
 
+//# Change Builder.new_from_string to take an array of characters with a length, to remove the length and optimize
+//!set class[Builder].constructor[new_from_string].parameters.parameter[string].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'
+
 //!class ApplicationWindow
   // Add base class alias for activateAction since it is used in GtkWidget and Gio.ActionGroup interface
   alias activateAction = Widget.activateAction;

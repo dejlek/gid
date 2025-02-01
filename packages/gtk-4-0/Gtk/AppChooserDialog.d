@@ -46,10 +46,6 @@ import Gtk.c.types;
 class AppChooserDialog : Dialog, AppChooser
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

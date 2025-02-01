@@ -72,16 +72,18 @@ interface DBusObjectManager
    *   interface_ = The #GDBusInterface that was added.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias InterfaceAddedCallback = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceAddedCallbackDlg = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceAddedCallbackFunc = void function(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to InterfaceAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInterfaceAdded(InterfaceAddedCallback dlg, Flag!"After" after = No.After);
+  ulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InterfaceAddedCallbackDlg) || is(T == InterfaceAddedCallbackFunc));
 
   /**
    * Emitted when interface has been removed from object.
@@ -92,16 +94,18 @@ interface DBusObjectManager
    *   interface_ = The #GDBusInterface that was removed.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias InterfaceRemovedCallback = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceRemovedCallbackDlg = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceRemovedCallbackFunc = void function(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to InterfaceRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInterfaceRemoved(InterfaceRemovedCallback dlg, Flag!"After" after = No.After);
+  ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InterfaceRemovedCallbackDlg) || is(T == InterfaceRemovedCallbackFunc));
 
   /**
    * Emitted when object is added to manager.
@@ -109,16 +113,18 @@ interface DBusObjectManager
    *   object = The #GDBusObject that was added.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias ObjectAddedCallback = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectAddedCallbackDlg = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectAddedCallbackFunc = void function(DBusObject object, DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to ObjectAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectObjectAdded(ObjectAddedCallback dlg, Flag!"After" after = No.After);
+  ulong connectObjectAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ObjectAddedCallbackDlg) || is(T == ObjectAddedCallbackFunc));
 
   /**
    * Emitted when object is removed from manager.
@@ -126,14 +132,16 @@ interface DBusObjectManager
    *   object = The #GDBusObject that was removed.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias ObjectRemovedCallback = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectRemovedCallbackDlg = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectRemovedCallbackFunc = void function(DBusObject object, DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to ObjectRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectObjectRemoved(ObjectRemovedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectObjectRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ObjectRemovedCallbackDlg) || is(T == ObjectRemovedCallbackFunc));
+  }

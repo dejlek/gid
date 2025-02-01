@@ -40,10 +40,6 @@ import Gtk.c.types;
 class FontChooserDialog : Dialog, FontChooser
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -21,10 +21,6 @@ import Gio.c.types;
 class ConverterInputStream : FilterInputStream, PollableInputStream
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

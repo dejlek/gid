@@ -7,10 +7,6 @@ import Gtk.AccessibleRangeT;
 /// Proxy object for Gtk.AccessibleRange interface when a GObject has no applicable D binding
 class AccessibleRangeIfaceProxy : IfaceProxy, AccessibleRange
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

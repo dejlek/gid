@@ -14,10 +14,6 @@ import Gio.c.types;
 class Vfs : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

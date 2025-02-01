@@ -35,10 +35,6 @@ import Gtk.c.types;
 class BuilderListItemFactory : ListItemFactory
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

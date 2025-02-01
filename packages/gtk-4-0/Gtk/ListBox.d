@@ -554,53 +554,57 @@ class ListBox : Widget
     gtk_list_box_unselect_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
   }
 
-  alias ActivateCursorRowCallback = void delegate(ListBox listBox);
+  alias ActivateCursorRowCallbackDlg = void delegate(ListBox listBox);
+  alias ActivateCursorRowCallbackFunc = void function(ListBox listBox);
 
   /**
    * Connect to ActivateCursorRow signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivateCursorRow(ActivateCursorRowCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivateCursorRow(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCursorRowCallbackDlg) || is(T == ActivateCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto listBox = getVal!ListBox(_paramVals);
-      _dgClosure.dlg(listBox);
+      _dClosure.dlg(listBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-cursor-row", closure, after);
   }
 
-  alias MoveCursorCallback = void delegate(MovementStep object, int p0, bool p1, bool p2, ListBox listBox);
+  alias MoveCursorCallbackDlg = void delegate(MovementStep object, int p0, bool p1, bool p2, ListBox listBox);
+  alias MoveCursorCallbackFunc = void function(MovementStep object, int p0, bool p1, bool p2, ListBox listBox);
 
   /**
    * Connect to MoveCursor signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveCursor(MoveCursorCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto listBox = getVal!ListBox(_paramVals);
       auto object = getVal!MovementStep(&_paramVals[1]);
       auto p0 = getVal!int(&_paramVals[2]);
       auto p1 = getVal!bool(&_paramVals[3]);
       auto p2 = getVal!bool(&_paramVals[4]);
-      _dgClosure.dlg(object, p0, p1, p2, listBox);
+      _dClosure.dlg(object, p0, p1, p2, listBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-cursor", closure, after);
   }
 
@@ -610,27 +614,29 @@ class ListBox : Widget
    *   row = the activated row
    *   listBox = the instance the signal is connected to
    */
-  alias RowActivatedCallback = void delegate(ListBoxRow row, ListBox listBox);
+  alias RowActivatedCallbackDlg = void delegate(ListBoxRow row, ListBox listBox);
+  alias RowActivatedCallbackFunc = void function(ListBoxRow row, ListBox listBox);
 
   /**
    * Connect to RowActivated signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowActivated(RowActivatedCallback dlg, Flag!"After" after = No.After)
+  ulong connectRowActivated(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowActivatedCallbackDlg) || is(T == RowActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto listBox = getVal!ListBox(_paramVals);
       auto row = getVal!ListBoxRow(&_paramVals[1]);
-      _dgClosure.dlg(row, listBox);
+      _dClosure.dlg(row, listBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-activated", closure, after);
   }
 
@@ -644,27 +650,29 @@ class ListBox : Widget
    *   row = the selected row
    *   listBox = the instance the signal is connected to
    */
-  alias RowSelectedCallback = void delegate(ListBoxRow row, ListBox listBox);
+  alias RowSelectedCallbackDlg = void delegate(ListBoxRow row, ListBox listBox);
+  alias RowSelectedCallbackFunc = void function(ListBoxRow row, ListBox listBox);
 
   /**
    * Connect to RowSelected signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowSelected(RowSelectedCallback dlg, Flag!"After" after = No.After)
+  ulong connectRowSelected(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowSelectedCallbackDlg) || is(T == RowSelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto listBox = getVal!ListBox(_paramVals);
       auto row = getVal!ListBoxRow(&_paramVals[1]);
-      _dgClosure.dlg(row, listBox);
+      _dClosure.dlg(row, listBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-selected", closure, after);
   }
 
@@ -675,26 +683,28 @@ class ListBox : Widget
    * The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
    *   listBox = the instance the signal is connected to
    */
-  alias SelectAllCallback = void delegate(ListBox listBox);
+  alias SelectAllCallbackDlg = void delegate(ListBox listBox);
+  alias SelectAllCallbackFunc = void function(ListBox listBox);
 
   /**
    * Connect to SelectAll signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectAll(SelectAllCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectAllCallbackDlg) || is(T == SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto listBox = getVal!ListBox(_paramVals);
-      _dgClosure.dlg(listBox);
+      _dClosure.dlg(listBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("select-all", closure, after);
   }
 
@@ -702,49 +712,53 @@ class ListBox : Widget
    * Emitted when the set of selected rows changes.
    *   listBox = the instance the signal is connected to
    */
-  alias SelectedRowsChangedCallback = void delegate(ListBox listBox);
+  alias SelectedRowsChangedCallbackDlg = void delegate(ListBox listBox);
+  alias SelectedRowsChangedCallbackFunc = void function(ListBox listBox);
 
   /**
    * Connect to SelectedRowsChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectedRowsChanged(SelectedRowsChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectedRowsChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectedRowsChangedCallbackDlg) || is(T == SelectedRowsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto listBox = getVal!ListBox(_paramVals);
-      _dgClosure.dlg(listBox);
+      _dClosure.dlg(listBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("selected-rows-changed", closure, after);
   }
 
-  alias ToggleCursorRowCallback = void delegate(ListBox listBox);
+  alias ToggleCursorRowCallbackDlg = void delegate(ListBox listBox);
+  alias ToggleCursorRowCallbackFunc = void function(ListBox listBox);
 
   /**
    * Connect to ToggleCursorRow signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectToggleCursorRow(ToggleCursorRowCallback dlg, Flag!"After" after = No.After)
+  ulong connectToggleCursorRow(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ToggleCursorRowCallbackDlg) || is(T == ToggleCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto listBox = getVal!ListBox(_paramVals);
-      _dgClosure.dlg(listBox);
+      _dClosure.dlg(listBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-cursor-row", closure, after);
   }
 
@@ -756,26 +770,28 @@ class ListBox : Widget
    * <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
    *   listBox = the instance the signal is connected to
    */
-  alias UnselectAllCallback = void delegate(ListBox listBox);
+  alias UnselectAllCallbackDlg = void delegate(ListBox listBox);
+  alias UnselectAllCallbackFunc = void function(ListBox listBox);
 
   /**
    * Connect to UnselectAll signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUnselectAll(UnselectAllCallback dlg, Flag!"After" after = No.After)
+  ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UnselectAllCallbackDlg) || is(T == UnselectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto listBox = getVal!ListBox(_paramVals);
-      _dgClosure.dlg(listBox);
+      _dClosure.dlg(listBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
   }
 }

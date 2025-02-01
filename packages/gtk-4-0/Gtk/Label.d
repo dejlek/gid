@@ -167,10 +167,6 @@ import Pango.Types : WrapMode = WrapMode;
 class Label : Widget, AccessibleText
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -921,26 +917,28 @@ class Label : Widget, AccessibleText
    * The default bindings for this signal are all forms of the <kbd>Enter</kbd> key.
    *   label = the instance the signal is connected to
    */
-  alias ActivateCurrentLinkCallback = void delegate(Label label);
+  alias ActivateCurrentLinkCallbackDlg = void delegate(Label label);
+  alias ActivateCurrentLinkCallbackFunc = void function(Label label);
 
   /**
    * Connect to ActivateCurrentLink signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivateCurrentLink(ActivateCurrentLinkCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivateCurrentLink(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCurrentLinkCallbackDlg) || is(T == ActivateCurrentLinkCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto label = getVal!Label(_paramVals);
-      _dgClosure.dlg(label);
+      _dClosure.dlg(label);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-current-link", closure, after);
   }
 
@@ -953,29 +951,31 @@ class Label : Widget, AccessibleText
    *   label = the instance the signal is connected to
    * Returns: %TRUE if the link has been activated
    */
-  alias ActivateLinkCallback = bool delegate(string uri, Label label);
+  alias ActivateLinkCallbackDlg = bool delegate(string uri, Label label);
+  alias ActivateLinkCallbackFunc = bool function(string uri, Label label);
 
   /**
    * Connect to ActivateLink signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivateLink(ActivateLinkCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateLinkCallbackDlg) || is(T == ActivateLinkCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto label = getVal!Label(_paramVals);
       auto uri = getVal!string(&_paramVals[1]);
-      _retval = _dgClosure.dlg(uri, label);
+      _retval = _dClosure.dlg(uri, label);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-link", closure, after);
   }
 
@@ -985,26 +985,28 @@ class Label : Widget, AccessibleText
    * The default binding for this signal is <kbd>Ctrl</kbd>+<kbd>c</kbd>.
    *   label = the instance the signal is connected to
    */
-  alias CopyClipboardCallback = void delegate(Label label);
+  alias CopyClipboardCallbackDlg = void delegate(Label label);
+  alias CopyClipboardCallbackFunc = void function(Label label);
 
   /**
    * Connect to CopyClipboard signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCopyClipboard(CopyClipboardCallback dlg, Flag!"After" after = No.After)
+  ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CopyClipboardCallbackDlg) || is(T == CopyClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto label = getVal!Label(_paramVals);
-      _dgClosure.dlg(label);
+      _dClosure.dlg(label);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("copy-clipboard", closure, after);
   }
 
@@ -1030,29 +1032,31 @@ class Label : Widget, AccessibleText
    *   extendSelection = %TRUE if the move should extend the selection
    *   label = the instance the signal is connected to
    */
-  alias MoveCursorCallback = void delegate(MovementStep step, int count, bool extendSelection, Label label);
+  alias MoveCursorCallbackDlg = void delegate(MovementStep step, int count, bool extendSelection, Label label);
+  alias MoveCursorCallbackFunc = void function(MovementStep step, int count, bool extendSelection, Label label);
 
   /**
    * Connect to MoveCursor signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveCursor(MoveCursorCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto label = getVal!Label(_paramVals);
       auto step = getVal!MovementStep(&_paramVals[1]);
       auto count = getVal!int(&_paramVals[2]);
       auto extendSelection = getVal!bool(&_paramVals[3]);
-      _dgClosure.dlg(step, count, extendSelection, label);
+      _dClosure.dlg(step, count, extendSelection, label);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-cursor", closure, after);
   }
 }

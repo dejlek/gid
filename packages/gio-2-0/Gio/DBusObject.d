@@ -54,16 +54,18 @@ interface DBusObject
    *   interface_ = The #GDBusInterface that was added.
    *   dBusObject = the instance the signal is connected to
    */
-  alias InterfaceAddedCallback = void delegate(DBusInterface interface_, DBusObject dBusObject);
+  alias InterfaceAddedCallbackDlg = void delegate(DBusInterface interface_, DBusObject dBusObject);
+  alias InterfaceAddedCallbackFunc = void function(DBusInterface interface_, DBusObject dBusObject);
 
   /**
    * Connect to InterfaceAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInterfaceAdded(InterfaceAddedCallback dlg, Flag!"After" after = No.After);
+  ulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InterfaceAddedCallbackDlg) || is(T == InterfaceAddedCallbackFunc));
 
   /**
    * Emitted when interface is removed from object.
@@ -71,14 +73,16 @@ interface DBusObject
    *   interface_ = The #GDBusInterface that was removed.
    *   dBusObject = the instance the signal is connected to
    */
-  alias InterfaceRemovedCallback = void delegate(DBusInterface interface_, DBusObject dBusObject);
+  alias InterfaceRemovedCallbackDlg = void delegate(DBusInterface interface_, DBusObject dBusObject);
+  alias InterfaceRemovedCallbackFunc = void function(DBusInterface interface_, DBusObject dBusObject);
 
   /**
    * Connect to InterfaceRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInterfaceRemoved(InterfaceRemovedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InterfaceRemovedCallbackDlg) || is(T == InterfaceRemovedCallbackFunc));
+  }

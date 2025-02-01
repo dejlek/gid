@@ -63,16 +63,18 @@ interface PrintOperationPreview
    *   pageSetup = the `GtkPageSetup` for the current page
    *   printOperationPreview = the instance the signal is connected to
    */
-  alias GotPageSizeCallback = void delegate(PrintContext context, PageSetup pageSetup, PrintOperationPreview printOperationPreview);
+  alias GotPageSizeCallbackDlg = void delegate(PrintContext context, PageSetup pageSetup, PrintOperationPreview printOperationPreview);
+  alias GotPageSizeCallbackFunc = void function(PrintContext context, PageSetup pageSetup, PrintOperationPreview printOperationPreview);
 
   /**
    * Connect to GotPageSize signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectGotPageSize(GotPageSizeCallback dlg, Flag!"After" after = No.After);
+  ulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == GotPageSizeCallbackDlg) || is(T == GotPageSizeCallbackFunc));
 
   /**
    * The ::ready signal gets emitted once per preview operation,
@@ -82,14 +84,16 @@ interface PrintOperationPreview
    *   context = the current `GtkPrintContext`
    *   printOperationPreview = the instance the signal is connected to
    */
-  alias ReadyCallback = void delegate(PrintContext context, PrintOperationPreview printOperationPreview);
+  alias ReadyCallbackDlg = void delegate(PrintContext context, PrintOperationPreview printOperationPreview);
+  alias ReadyCallbackFunc = void function(PrintContext context, PrintOperationPreview printOperationPreview);
 
   /**
    * Connect to Ready signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectReady(ReadyCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectReady(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ReadyCallbackDlg) || is(T == ReadyCallbackFunc));
+  }

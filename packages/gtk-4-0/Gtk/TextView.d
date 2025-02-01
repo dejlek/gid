@@ -1154,26 +1154,28 @@ class TextView : Widget, AccessibleText, Scrollable
    * <kbd>Backspace</kbd> and <kbd>Shift</kbd>+<kbd>Backspace</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias BackspaceCallback = void delegate(TextView textView);
+  alias BackspaceCallbackDlg = void delegate(TextView textView);
+  alias BackspaceCallbackFunc = void function(TextView textView);
 
   /**
    * Connect to Backspace signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectBackspace(BackspaceCallback dlg, Flag!"After" after = No.After)
+  ulong connectBackspace(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == BackspaceCallbackDlg) || is(T == BackspaceCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
-      _dgClosure.dlg(textView);
+      _dClosure.dlg(textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("backspace", closure, after);
   }
 
@@ -1185,26 +1187,28 @@ class TextView : Widget, AccessibleText, Scrollable
    * <kbd>Ctrl</kbd>+<kbd>Insert</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias CopyClipboardCallback = void delegate(TextView textView);
+  alias CopyClipboardCallbackDlg = void delegate(TextView textView);
+  alias CopyClipboardCallbackFunc = void function(TextView textView);
 
   /**
    * Connect to CopyClipboard signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCopyClipboard(CopyClipboardCallback dlg, Flag!"After" after = No.After)
+  ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CopyClipboardCallbackDlg) || is(T == CopyClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
-      _dgClosure.dlg(textView);
+      _dClosure.dlg(textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("copy-clipboard", closure, after);
   }
 
@@ -1216,26 +1220,28 @@ class TextView : Widget, AccessibleText, Scrollable
    * <kbd>Shift</kbd>+<kbd>Delete</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias CutClipboardCallback = void delegate(TextView textView);
+  alias CutClipboardCallbackDlg = void delegate(TextView textView);
+  alias CutClipboardCallbackFunc = void function(TextView textView);
 
   /**
    * Connect to CutClipboard signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCutClipboard(CutClipboardCallback dlg, Flag!"After" after = No.After)
+  ulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CutClipboardCallbackDlg) || is(T == CutClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
-      _dgClosure.dlg(textView);
+      _dClosure.dlg(textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cut-clipboard", closure, after);
   }
 
@@ -1254,28 +1260,30 @@ class TextView : Widget, AccessibleText, Scrollable
    *   count = the number of type units to delete
    *   textView = the instance the signal is connected to
    */
-  alias DeleteFromCursorCallback = void delegate(DeleteType type, int count, TextView textView);
+  alias DeleteFromCursorCallbackDlg = void delegate(DeleteType type, int count, TextView textView);
+  alias DeleteFromCursorCallbackFunc = void function(DeleteType type, int count, TextView textView);
 
   /**
    * Connect to DeleteFromCursor signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDeleteFromCursor(DeleteFromCursorCallback dlg, Flag!"After" after = No.After)
+  ulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DeleteFromCursorCallbackDlg) || is(T == DeleteFromCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
       auto type = getVal!DeleteType(&_paramVals[1]);
       auto count = getVal!int(&_paramVals[2]);
-      _dgClosure.dlg(type, count, textView);
+      _dClosure.dlg(type, count, textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("delete-from-cursor", closure, after);
   }
 
@@ -1290,32 +1298,34 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: %GDK_EVENT_STOP to stop other handlers from being invoked for the
    *   event. %GDK_EVENT_PROPAGATE to propagate the event further.
    */
-  alias ExtendSelectionCallback = bool delegate(TextExtendSelection granularity, TextIter location, TextIter start, TextIter end, TextView textView);
+  alias ExtendSelectionCallbackDlg = bool delegate(TextExtendSelection granularity, TextIter location, TextIter start, TextIter end, TextView textView);
+  alias ExtendSelectionCallbackFunc = bool function(TextExtendSelection granularity, TextIter location, TextIter start, TextIter end, TextView textView);
 
   /**
    * Connect to ExtendSelection signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectExtendSelection(ExtendSelectionCallback dlg, Flag!"After" after = No.After)
+  ulong connectExtendSelection(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ExtendSelectionCallbackDlg) || is(T == ExtendSelectionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto textView = getVal!TextView(_paramVals);
       auto granularity = getVal!TextExtendSelection(&_paramVals[1]);
       auto location = getVal!TextIter(&_paramVals[2]);
       auto start = getVal!TextIter(&_paramVals[3]);
       auto end = getVal!TextIter(&_paramVals[4]);
-      _retval = _dgClosure.dlg(granularity, location, start, end, textView);
+      _retval = _dClosure.dlg(granularity, location, start, end, textView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("extend-selection", closure, after);
   }
 
@@ -1328,27 +1338,29 @@ class TextView : Widget, AccessibleText, Scrollable
    *   string_ = the string to insert
    *   textView = the instance the signal is connected to
    */
-  alias InsertAtCursorCallback = void delegate(string string_, TextView textView);
+  alias InsertAtCursorCallbackDlg = void delegate(string string_, TextView textView);
+  alias InsertAtCursorCallbackFunc = void function(string string_, TextView textView);
 
   /**
    * Connect to InsertAtCursor signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInsertAtCursor(InsertAtCursorCallback dlg, Flag!"After" after = No.After)
+  ulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InsertAtCursorCallbackDlg) || is(T == InsertAtCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
       auto string_ = getVal!string(&_paramVals[1]);
-      _dgClosure.dlg(string_, textView);
+      _dClosure.dlg(string_, textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("insert-at-cursor", closure, after);
   }
 
@@ -1360,26 +1372,28 @@ class TextView : Widget, AccessibleText, Scrollable
    * <kbd>Ctrl</kbd>+<kbd>;</kbd>
    *   textView = the instance the signal is connected to
    */
-  alias InsertEmojiCallback = void delegate(TextView textView);
+  alias InsertEmojiCallbackDlg = void delegate(TextView textView);
+  alias InsertEmojiCallbackFunc = void function(TextView textView);
 
   /**
    * Connect to InsertEmoji signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInsertEmoji(InsertEmojiCallback dlg, Flag!"After" after = No.After)
+  ulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InsertEmojiCallbackDlg) || is(T == InsertEmojiCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
-      _dgClosure.dlg(textView);
+      _dClosure.dlg(textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("insert-emoji", closure, after);
   }
 
@@ -1408,29 +1422,31 @@ class TextView : Widget, AccessibleText, Scrollable
    *   extendSelection = %TRUE if the move should extend the selection
    *   textView = the instance the signal is connected to
    */
-  alias MoveCursorCallback = void delegate(MovementStep step, int count, bool extendSelection, TextView textView);
+  alias MoveCursorCallbackDlg = void delegate(MovementStep step, int count, bool extendSelection, TextView textView);
+  alias MoveCursorCallbackFunc = void function(MovementStep step, int count, bool extendSelection, TextView textView);
 
   /**
    * Connect to MoveCursor signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveCursor(MoveCursorCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
       auto step = getVal!MovementStep(&_paramVals[1]);
       auto count = getVal!int(&_paramVals[2]);
       auto extendSelection = getVal!bool(&_paramVals[3]);
-      _dgClosure.dlg(step, count, extendSelection, textView);
+      _dClosure.dlg(step, count, extendSelection, textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-cursor", closure, after);
   }
 
@@ -1446,28 +1462,30 @@ class TextView : Widget, AccessibleText, Scrollable
    *   count = the number of step units to move
    *   textView = the instance the signal is connected to
    */
-  alias MoveViewportCallback = void delegate(ScrollStep step, int count, TextView textView);
+  alias MoveViewportCallbackDlg = void delegate(ScrollStep step, int count, TextView textView);
+  alias MoveViewportCallbackFunc = void function(ScrollStep step, int count, TextView textView);
 
   /**
    * Connect to MoveViewport signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveViewport(MoveViewportCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveViewport(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveViewportCallbackDlg) || is(T == MoveViewportCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
       auto step = getVal!ScrollStep(&_paramVals[1]);
       auto count = getVal!int(&_paramVals[2]);
-      _dgClosure.dlg(step, count, textView);
+      _dClosure.dlg(step, count, textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-viewport", closure, after);
   }
 
@@ -1480,26 +1498,28 @@ class TextView : Widget, AccessibleText, Scrollable
    * <kbd>Shift</kbd>+<kbd>Insert</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias PasteClipboardCallback = void delegate(TextView textView);
+  alias PasteClipboardCallbackDlg = void delegate(TextView textView);
+  alias PasteClipboardCallbackFunc = void function(TextView textView);
 
   /**
    * Connect to PasteClipboard signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPasteClipboard(PasteClipboardCallback dlg, Flag!"After" after = No.After)
+  ulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PasteClipboardCallbackDlg) || is(T == PasteClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
-      _dgClosure.dlg(textView);
+      _dClosure.dlg(textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("paste-clipboard", closure, after);
   }
 
@@ -1514,27 +1534,29 @@ class TextView : Widget, AccessibleText, Scrollable
    *   preedit = the current preedit string
    *   textView = the instance the signal is connected to
    */
-  alias PreeditChangedCallback = void delegate(string preedit, TextView textView);
+  alias PreeditChangedCallbackDlg = void delegate(string preedit, TextView textView);
+  alias PreeditChangedCallbackFunc = void function(string preedit, TextView textView);
 
   /**
    * Connect to PreeditChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPreeditChanged(PreeditChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PreeditChangedCallbackDlg) || is(T == PreeditChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
       auto preedit = getVal!string(&_paramVals[1]);
-      _dgClosure.dlg(preedit, textView);
+      _dClosure.dlg(preedit, textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("preedit-changed", closure, after);
   }
 
@@ -1550,27 +1572,29 @@ class TextView : Widget, AccessibleText, Scrollable
    *   select = %TRUE to select, %FALSE to unselect
    *   textView = the instance the signal is connected to
    */
-  alias SelectAllCallback = void delegate(bool select, TextView textView);
+  alias SelectAllCallbackDlg = void delegate(bool select, TextView textView);
+  alias SelectAllCallbackFunc = void function(bool select, TextView textView);
 
   /**
    * Connect to SelectAll signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectAll(SelectAllCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectAllCallbackDlg) || is(T == SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
       auto select = getVal!bool(&_paramVals[1]);
-      _dgClosure.dlg(select, textView);
+      _dClosure.dlg(select, textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("select-all", closure, after);
   }
 
@@ -1583,26 +1607,28 @@ class TextView : Widget, AccessibleText, Scrollable
    * This signal has no default bindings.
    *   textView = the instance the signal is connected to
    */
-  alias SetAnchorCallback = void delegate(TextView textView);
+  alias SetAnchorCallbackDlg = void delegate(TextView textView);
+  alias SetAnchorCallbackFunc = void function(TextView textView);
 
   /**
    * Connect to SetAnchor signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSetAnchor(SetAnchorCallback dlg, Flag!"After" after = No.After)
+  ulong connectSetAnchor(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SetAnchorCallbackDlg) || is(T == SetAnchorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
-      _dgClosure.dlg(textView);
+      _dClosure.dlg(textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("set-anchor", closure, after);
   }
 
@@ -1613,26 +1639,28 @@ class TextView : Widget, AccessibleText, Scrollable
    * The default binding for this signal is <kbd>F7</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias ToggleCursorVisibleCallback = void delegate(TextView textView);
+  alias ToggleCursorVisibleCallbackDlg = void delegate(TextView textView);
+  alias ToggleCursorVisibleCallbackFunc = void function(TextView textView);
 
   /**
    * Connect to ToggleCursorVisible signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectToggleCursorVisible(ToggleCursorVisibleCallback dlg, Flag!"After" after = No.After)
+  ulong connectToggleCursorVisible(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ToggleCursorVisibleCallbackDlg) || is(T == ToggleCursorVisibleCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
-      _dgClosure.dlg(textView);
+      _dClosure.dlg(textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-cursor-visible", closure, after);
   }
 
@@ -1642,26 +1670,28 @@ class TextView : Widget, AccessibleText, Scrollable
    * The default binding for this signal is <kbd>Insert</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias ToggleOverwriteCallback = void delegate(TextView textView);
+  alias ToggleOverwriteCallbackDlg = void delegate(TextView textView);
+  alias ToggleOverwriteCallbackFunc = void function(TextView textView);
 
   /**
    * Connect to ToggleOverwrite signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectToggleOverwrite(ToggleOverwriteCallback dlg, Flag!"After" after = No.After)
+  ulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ToggleOverwriteCallbackDlg) || is(T == ToggleOverwriteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textView = getVal!TextView(_paramVals);
-      _dgClosure.dlg(textView);
+      _dClosure.dlg(textView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-overwrite", closure, after);
   }
 }

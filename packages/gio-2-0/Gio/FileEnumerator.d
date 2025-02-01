@@ -40,10 +40,6 @@ import Gio.c.types;
 class FileEnumerator : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

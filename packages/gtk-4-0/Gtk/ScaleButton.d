@@ -37,10 +37,6 @@ import Gtk.c.types;
 class ScaleButton : Widget, AccessibleRange, Orientable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -228,26 +224,28 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    * The default binding for this signal is <kbd>Escape</kbd>.
    *   scaleButton = the instance the signal is connected to
    */
-  alias PopdownCallback = void delegate(ScaleButton scaleButton);
+  alias PopdownCallbackDlg = void delegate(ScaleButton scaleButton);
+  alias PopdownCallbackFunc = void function(ScaleButton scaleButton);
 
   /**
    * Connect to Popdown signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPopdown(PopdownCallback dlg, Flag!"After" after = No.After)
+  ulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PopdownCallbackDlg) || is(T == PopdownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto scaleButton = getVal!ScaleButton(_paramVals);
-      _dgClosure.dlg(scaleButton);
+      _dClosure.dlg(scaleButton);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("popdown", closure, after);
   }
 
@@ -258,26 +256,28 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    * <kbd>Enter</kbd> and <kbd>Return</kbd>.
    *   scaleButton = the instance the signal is connected to
    */
-  alias PopupCallback = void delegate(ScaleButton scaleButton);
+  alias PopupCallbackDlg = void delegate(ScaleButton scaleButton);
+  alias PopupCallbackFunc = void function(ScaleButton scaleButton);
 
   /**
    * Connect to Popup signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPopup(PopupCallback dlg, Flag!"After" after = No.After)
+  ulong connectPopup(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PopupCallbackDlg) || is(T == PopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto scaleButton = getVal!ScaleButton(_paramVals);
-      _dgClosure.dlg(scaleButton);
+      _dClosure.dlg(scaleButton);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("popup", closure, after);
   }
 
@@ -287,27 +287,29 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    *   value = the new value
    *   scaleButton = the instance the signal is connected to
    */
-  alias ValueChangedCallback = void delegate(double value, ScaleButton scaleButton);
+  alias ValueChangedCallbackDlg = void delegate(double value, ScaleButton scaleButton);
+  alias ValueChangedCallbackFunc = void function(double value, ScaleButton scaleButton);
 
   /**
    * Connect to ValueChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectValueChanged(ValueChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ValueChangedCallbackDlg) || is(T == ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto scaleButton = getVal!ScaleButton(_paramVals);
       auto value = getVal!double(&_paramVals[1]);
-      _dgClosure.dlg(value, scaleButton);
+      _dClosure.dlg(value, scaleButton);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
   }
 }

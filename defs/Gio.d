@@ -1,5 +1,8 @@
 //!repo Gio-2.0
 
+//# Rename Application to ApplicationGio to avoid conflicts with Gtk.Application
+//!subdtype Application ApplicationGio
+
 //!set record[IOExtension][disable] 1
 //!set record[IOExtensionPoint][disable] 1
 

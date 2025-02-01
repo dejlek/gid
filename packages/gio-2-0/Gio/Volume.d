@@ -265,16 +265,18 @@ interface Volume
    * Emitted when the volume has been changed.
    *   volume = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(Volume volume);
+  alias ChangedCallbackDlg = void delegate(Volume volume);
+  alias ChangedCallbackFunc = void function(Volume volume);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, Flag!"After" after = No.After);
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc));
 
   /**
    * This signal is emitted when the #GVolume have been removed. If
@@ -282,14 +284,16 @@ interface Volume
    * release them so the object can be finalized.
    *   volume = the instance the signal is connected to
    */
-  alias RemovedCallback = void delegate(Volume volume);
+  alias RemovedCallbackDlg = void delegate(Volume volume);
+  alias RemovedCallbackFunc = void function(Volume volume);
 
   /**
    * Connect to Removed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRemoved(RemovedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RemovedCallbackDlg) || is(T == RemovedCallbackFunc));
+  }

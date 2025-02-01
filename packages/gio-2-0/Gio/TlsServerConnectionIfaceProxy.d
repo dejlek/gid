@@ -7,10 +7,6 @@ import Gio.TlsServerConnectionT;
 /// Proxy object for Gio.TlsServerConnection interface when a GObject has no applicable D binding
 class TlsServerConnectionIfaceProxy : IfaceProxy, TlsServerConnection
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

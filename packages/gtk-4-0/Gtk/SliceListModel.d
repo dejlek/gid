@@ -20,10 +20,6 @@ import Gtk.c.types;
 class SliceListModel : ObjectG, ListModel, SectionModel
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

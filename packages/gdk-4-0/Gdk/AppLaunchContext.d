@@ -27,10 +27,6 @@ import Gio.IconT;
 class AppLaunchContext : DGioAppLaunchContext
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -277,17 +277,19 @@ interface ActionGroup
    *   actionName = the name of the action in action_group
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionAddedCallback = void delegate(string actionName, ActionGroup actionGroup);
+  alias ActionAddedCallbackDlg = void delegate(string actionName, ActionGroup actionGroup);
+  alias ActionAddedCallbackFunc = void function(string actionName, ActionGroup actionGroup);
 
   /**
    * Connect to ActionAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActionAdded(ActionAddedCallback dlg, string detail = null, Flag!"After" after = No.After);
+  ulong connectActionAdded(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == ActionAddedCallbackDlg) || is(T == ActionAddedCallbackFunc));
 
   /**
    * Signals that the enabled status of the named action has changed.
@@ -296,17 +298,19 @@ interface ActionGroup
    *   enabled = whether the action is enabled or not
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionEnabledChangedCallback = void delegate(string actionName, bool enabled, ActionGroup actionGroup);
+  alias ActionEnabledChangedCallbackDlg = void delegate(string actionName, bool enabled, ActionGroup actionGroup);
+  alias ActionEnabledChangedCallbackFunc = void function(string actionName, bool enabled, ActionGroup actionGroup);
 
   /**
    * Connect to ActionEnabledChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActionEnabledChanged(ActionEnabledChangedCallback dlg, string detail = null, Flag!"After" after = No.After);
+  ulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == ActionEnabledChangedCallbackDlg) || is(T == ActionEnabledChangedCallbackFunc));
 
   /**
    * Signals that an action is just about to be removed from the group.
@@ -316,17 +320,19 @@ interface ActionGroup
    *   actionName = the name of the action in action_group
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionRemovedCallback = void delegate(string actionName, ActionGroup actionGroup);
+  alias ActionRemovedCallbackDlg = void delegate(string actionName, ActionGroup actionGroup);
+  alias ActionRemovedCallbackFunc = void function(string actionName, ActionGroup actionGroup);
 
   /**
    * Connect to ActionRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActionRemoved(ActionRemovedCallback dlg, string detail = null, Flag!"After" after = No.After);
+  ulong connectActionRemoved(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == ActionRemovedCallbackDlg) || is(T == ActionRemovedCallbackFunc));
 
   /**
    * Signals that the state of the named action has changed.
@@ -335,15 +341,17 @@ interface ActionGroup
    *   value = the new value of the state
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionStateChangedCallback = void delegate(string actionName, VariantG value, ActionGroup actionGroup);
+  alias ActionStateChangedCallbackDlg = void delegate(string actionName, VariantG value, ActionGroup actionGroup);
+  alias ActionStateChangedCallbackFunc = void function(string actionName, VariantG value, ActionGroup actionGroup);
 
   /**
    * Connect to ActionStateChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActionStateChanged(ActionStateChangedCallback dlg, string detail = null, Flag!"After" after = No.After);
-}
+  ulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == ActionStateChangedCallbackDlg) || is(T == ActionStateChangedCallbackFunc));
+  }

@@ -85,10 +85,6 @@ import Gtk.c.types;
 class Gesture : EventController
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -446,27 +442,29 @@ class Gesture : EventController
    *     to be recognized
    *   gesture = the instance the signal is connected to
    */
-  alias BeginCallback = void delegate(EventSequence sequence, Gesture gesture);
+  alias BeginCallbackDlg = void delegate(EventSequence sequence, Gesture gesture);
+  alias BeginCallbackFunc = void function(EventSequence sequence, Gesture gesture);
 
   /**
    * Connect to Begin signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectBegin(BeginCallback dlg, Flag!"After" after = No.After)
+  ulong connectBegin(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == BeginCallbackDlg) || is(T == BeginCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gesture = getVal!Gesture(_paramVals);
       auto sequence = getVal!EventSequence(&_paramVals[1]);
-      _dgClosure.dlg(sequence, gesture);
+      _dClosure.dlg(sequence, gesture);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("begin", closure, after);
   }
 
@@ -483,27 +481,29 @@ class Gesture : EventController
    *   sequence = the `GdkEventSequence` that was cancelled
    *   gesture = the instance the signal is connected to
    */
-  alias CancelCallback = void delegate(EventSequence sequence, Gesture gesture);
+  alias CancelCallbackDlg = void delegate(EventSequence sequence, Gesture gesture);
+  alias CancelCallbackFunc = void function(EventSequence sequence, Gesture gesture);
 
   /**
    * Connect to Cancel signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCancel(CancelCallback dlg, Flag!"After" after = No.After)
+  ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CancelCallbackDlg) || is(T == CancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gesture = getVal!Gesture(_paramVals);
       auto sequence = getVal!EventSequence(&_paramVals[1]);
-      _dgClosure.dlg(sequence, gesture);
+      _dClosure.dlg(sequence, gesture);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cancel", closure, after);
   }
 
@@ -521,27 +521,29 @@ class Gesture : EventController
    *     recognition to finish
    *   gesture = the instance the signal is connected to
    */
-  alias EndCallback = void delegate(EventSequence sequence, Gesture gesture);
+  alias EndCallbackDlg = void delegate(EventSequence sequence, Gesture gesture);
+  alias EndCallbackFunc = void function(EventSequence sequence, Gesture gesture);
 
   /**
    * Connect to End signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEnd(EndCallback dlg, Flag!"After" after = No.After)
+  ulong connectEnd(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EndCallbackDlg) || is(T == EndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gesture = getVal!Gesture(_paramVals);
       auto sequence = getVal!EventSequence(&_paramVals[1]);
-      _dgClosure.dlg(sequence, gesture);
+      _dClosure.dlg(sequence, gesture);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("end", closure, after);
   }
 
@@ -554,28 +556,30 @@ class Gesture : EventController
    *   state = the new sequence state
    *   gesture = the instance the signal is connected to
    */
-  alias SequenceStateChangedCallback = void delegate(EventSequence sequence, EventSequenceState state, Gesture gesture);
+  alias SequenceStateChangedCallbackDlg = void delegate(EventSequence sequence, EventSequenceState state, Gesture gesture);
+  alias SequenceStateChangedCallbackFunc = void function(EventSequence sequence, EventSequenceState state, Gesture gesture);
 
   /**
    * Connect to SequenceStateChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSequenceStateChanged(SequenceStateChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectSequenceStateChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SequenceStateChangedCallbackDlg) || is(T == SequenceStateChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gesture = getVal!Gesture(_paramVals);
       auto sequence = getVal!EventSequence(&_paramVals[1]);
       auto state = getVal!EventSequenceState(&_paramVals[2]);
-      _dgClosure.dlg(sequence, state, gesture);
+      _dClosure.dlg(sequence, state, gesture);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("sequence-state-changed", closure, after);
   }
 
@@ -586,27 +590,29 @@ class Gesture : EventController
    *   sequence = the `GdkEventSequence` that was updated
    *   gesture = the instance the signal is connected to
    */
-  alias UpdateCallback = void delegate(EventSequence sequence, Gesture gesture);
+  alias UpdateCallbackDlg = void delegate(EventSequence sequence, Gesture gesture);
+  alias UpdateCallbackFunc = void function(EventSequence sequence, Gesture gesture);
 
   /**
    * Connect to Update signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUpdate(UpdateCallback dlg, Flag!"After" after = No.After)
+  ulong connectUpdate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UpdateCallbackDlg) || is(T == UpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gesture = getVal!Gesture(_paramVals);
       auto sequence = getVal!EventSequence(&_paramVals[1]);
-      _dgClosure.dlg(sequence, gesture);
+      _dClosure.dlg(sequence, gesture);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("update", closure, after);
   }
 }

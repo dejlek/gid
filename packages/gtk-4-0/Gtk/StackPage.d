@@ -15,10 +15,6 @@ import Gtk.c.types;
 class StackPage : ObjectG, Accessible
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

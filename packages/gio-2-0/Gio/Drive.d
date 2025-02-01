@@ -294,16 +294,18 @@ interface Drive
    * Emitted when the drive's state has changed.
    *   drive = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(Drive drive);
+  alias ChangedCallbackDlg = void delegate(Drive drive);
+  alias ChangedCallbackFunc = void function(Drive drive);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, Flag!"After" after = No.After);
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc));
 
   /**
    * This signal is emitted when the #GDrive have been
@@ -312,46 +314,52 @@ interface Drive
    * finalized.
    *   drive = the instance the signal is connected to
    */
-  alias DisconnectedCallback = void delegate(Drive drive);
+  alias DisconnectedCallbackDlg = void delegate(Drive drive);
+  alias DisconnectedCallbackFunc = void function(Drive drive);
 
   /**
    * Connect to Disconnected signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDisconnected(DisconnectedCallback dlg, Flag!"After" after = No.After);
+  ulong connectDisconnected(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DisconnectedCallbackDlg) || is(T == DisconnectedCallbackFunc));
 
   /**
    * Emitted when the physical eject button $(LPAREN)if any$(RPAREN) of a drive has
    * been pressed.
    *   drive = the instance the signal is connected to
    */
-  alias EjectButtonCallback = void delegate(Drive drive);
+  alias EjectButtonCallbackDlg = void delegate(Drive drive);
+  alias EjectButtonCallbackFunc = void function(Drive drive);
 
   /**
    * Connect to EjectButton signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEjectButton(EjectButtonCallback dlg, Flag!"After" after = No.After);
+  ulong connectEjectButton(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EjectButtonCallbackDlg) || is(T == EjectButtonCallbackFunc));
 
   /**
    * Emitted when the physical stop button $(LPAREN)if any$(RPAREN) of a drive has
    * been pressed.
    *   drive = the instance the signal is connected to
    */
-  alias StopButtonCallback = void delegate(Drive drive);
+  alias StopButtonCallbackDlg = void delegate(Drive drive);
+  alias StopButtonCallbackFunc = void function(Drive drive);
 
   /**
    * Connect to StopButton signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectStopButton(StopButtonCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectStopButton(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == StopButtonCallbackDlg) || is(T == StopButtonCallbackFunc));
+  }

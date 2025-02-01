@@ -397,7 +397,7 @@ __gshared extern(C)
   GtkBuilder* function() c_gtk_builder_new;
   GtkBuilder* function(const(char)* filename) c_gtk_builder_new_from_file;
   GtkBuilder* function(const(char)* resourcePath) c_gtk_builder_new_from_resource;
-  GtkBuilder* function(const(char)* string_, ptrdiff_t length) c_gtk_builder_new_from_string;
+  GtkBuilder* function(char* string_, ptrdiff_t length) c_gtk_builder_new_from_string;
   bool function(GtkBuilder* builder, const(char)* filename, GError** _err) c_gtk_builder_add_from_file;
   bool function(GtkBuilder* builder, const(char)* resourcePath, GError** _err) c_gtk_builder_add_from_resource;
   bool function(GtkBuilder* builder, const(char)* buffer, ptrdiff_t length, GError** _err) c_gtk_builder_add_from_string;

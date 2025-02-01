@@ -475,16 +475,18 @@ interface TreeModel
    *   iter = a valid `GtkTreeIter` pointing to the changed row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowChangedCallback = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowChangedCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowChangedCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
 
   /**
    * Connect to RowChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowChanged(RowChangedCallback dlg, Flag!"After" after = No.After);
+  ulong connectRowChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowChangedCallbackDlg) || is(T == RowChangedCallbackFunc));
 
   /**
    * This signal is emitted when a row has been deleted.
@@ -497,16 +499,18 @@ interface TreeModel
    *   path = a `GtkTreePath` identifying the row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowDeletedCallback = void delegate(TreePath path, TreeModel treeModel);
+  alias RowDeletedCallbackDlg = void delegate(TreePath path, TreeModel treeModel);
+  alias RowDeletedCallbackFunc = void function(TreePath path, TreeModel treeModel);
 
   /**
    * Connect to RowDeleted signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowDeleted(RowDeletedCallback dlg, Flag!"After" after = No.After);
+  ulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowDeletedCallbackDlg) || is(T == RowDeletedCallbackFunc));
 
   /**
    * This signal is emitted when a row has gotten the first child
@@ -516,16 +520,18 @@ interface TreeModel
    *   iter = a valid `GtkTreeIter` pointing to the row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowHasChildToggledCallback = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowHasChildToggledCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowHasChildToggledCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
 
   /**
    * Connect to RowHasChildToggled signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowHasChildToggled(RowHasChildToggledCallback dlg, Flag!"After" after = No.After);
+  ulong connectRowHasChildToggled(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowHasChildToggledCallbackDlg) || is(T == RowHasChildToggledCallbackFunc));
 
   /**
    * This signal is emitted when a new row has been inserted in
@@ -538,14 +544,16 @@ interface TreeModel
    *   iter = a valid `GtkTreeIter` pointing to the new row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowInsertedCallback = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowInsertedCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowInsertedCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
 
   /**
    * Connect to RowInserted signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowInserted(RowInsertedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowInsertedCallbackDlg) || is(T == RowInsertedCallbackFunc));
+  }

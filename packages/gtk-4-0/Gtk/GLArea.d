@@ -392,27 +392,29 @@ class GLArea : Widget
    * Returns: a newly created `GdkGLContext`;
    *   the `GtkGLArea` widget will take ownership of the returned value.
    */
-  alias CreateContextCallback = GLContext delegate(GLArea gLArea);
+  alias CreateContextCallbackDlg = GLContext delegate(GLArea gLArea);
+  alias CreateContextCallbackFunc = GLContext function(GLArea gLArea);
 
   /**
    * Connect to CreateContext signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCreateContext(CreateContextCallback dlg, Flag!"After" after = No.After)
+  ulong connectCreateContext(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CreateContextCallbackDlg) || is(T == CreateContextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gLArea = getVal!GLArea(_paramVals);
-      auto _retval = _dgClosure.dlg(gLArea);
+      auto _retval = _dClosure.dlg(gLArea);
       setVal!GLContext(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("create-context", closure, after);
   }
 
@@ -426,29 +428,31 @@ class GLArea : Widget
    * Returns: %TRUE to stop other handlers from being invoked for the event.
    *   %FALSE to propagate the event further.
    */
-  alias RenderCallback = bool delegate(GLContext context, GLArea gLArea);
+  alias RenderCallbackDlg = bool delegate(GLContext context, GLArea gLArea);
+  alias RenderCallbackFunc = bool function(GLContext context, GLArea gLArea);
 
   /**
    * Connect to Render signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRender(RenderCallback dlg, Flag!"After" after = No.After)
+  ulong connectRender(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RenderCallbackDlg) || is(T == RenderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto gLArea = getVal!GLArea(_paramVals);
       auto context = getVal!GLContext(&_paramVals[1]);
-      _retval = _dgClosure.dlg(context, gLArea);
+      _retval = _dClosure.dlg(context, gLArea);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("render", closure, after);
   }
 
@@ -466,28 +470,30 @@ class GLArea : Widget
    *   height = the height of the viewport
    *   gLArea = the instance the signal is connected to
    */
-  alias ResizeCallback = void delegate(int width, int height, GLArea gLArea);
+  alias ResizeCallbackDlg = void delegate(int width, int height, GLArea gLArea);
+  alias ResizeCallbackFunc = void function(int width, int height, GLArea gLArea);
 
   /**
    * Connect to Resize signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectResize(ResizeCallback dlg, Flag!"After" after = No.After)
+  ulong connectResize(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ResizeCallbackDlg) || is(T == ResizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gLArea = getVal!GLArea(_paramVals);
       auto width = getVal!int(&_paramVals[1]);
       auto height = getVal!int(&_paramVals[2]);
-      _dgClosure.dlg(width, height, gLArea);
+      _dClosure.dlg(width, height, gLArea);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("resize", closure, after);
   }
 }

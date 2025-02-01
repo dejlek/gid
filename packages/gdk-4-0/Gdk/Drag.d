@@ -25,10 +25,6 @@ import Gid.gid;
 class Drag : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -210,27 +206,29 @@ class Drag : ObjectG
    *   reason = The reason the drag was cancelled
    *   drag = the instance the signal is connected to
    */
-  alias CancelCallback = void delegate(DragCancelReason reason, Drag drag);
+  alias CancelCallbackDlg = void delegate(DragCancelReason reason, Drag drag);
+  alias CancelCallbackFunc = void function(DragCancelReason reason, Drag drag);
 
   /**
    * Connect to Cancel signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCancel(CancelCallback dlg, Flag!"After" after = No.After)
+  ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CancelCallbackDlg) || is(T == CancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto drag = getVal!Drag(_paramVals);
       auto reason = getVal!DragCancelReason(&_paramVals[1]);
-      _dgClosure.dlg(reason, drag);
+      _dClosure.dlg(reason, drag);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cancel", closure, after);
   }
 
@@ -239,26 +237,28 @@ class Drag : ObjectG
    * The drag object can now free all miscellaneous data.
    *   drag = the instance the signal is connected to
    */
-  alias DndFinishedCallback = void delegate(Drag drag);
+  alias DndFinishedCallbackDlg = void delegate(Drag drag);
+  alias DndFinishedCallbackFunc = void function(Drag drag);
 
   /**
    * Connect to DndFinished signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDndFinished(DndFinishedCallback dlg, Flag!"After" after = No.After)
+  ulong connectDndFinished(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DndFinishedCallbackDlg) || is(T == DndFinishedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto drag = getVal!Drag(_paramVals);
-      _dgClosure.dlg(drag);
+      _dClosure.dlg(drag);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("dnd-finished", closure, after);
   }
 
@@ -266,26 +266,28 @@ class Drag : ObjectG
    * Emitted when the drop operation is performed on an accepting client.
    *   drag = the instance the signal is connected to
    */
-  alias DropPerformedCallback = void delegate(Drag drag);
+  alias DropPerformedCallbackDlg = void delegate(Drag drag);
+  alias DropPerformedCallbackFunc = void function(Drag drag);
 
   /**
    * Connect to DropPerformed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDropPerformed(DropPerformedCallback dlg, Flag!"After" after = No.After)
+  ulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DropPerformedCallbackDlg) || is(T == DropPerformedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto drag = getVal!Drag(_paramVals);
-      _dgClosure.dlg(drag);
+      _dClosure.dlg(drag);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drop-performed", closure, after);
   }
 }

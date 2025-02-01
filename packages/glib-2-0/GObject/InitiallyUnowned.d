@@ -14,10 +14,6 @@ import Gid.gid;
 class InitiallyUnowned : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

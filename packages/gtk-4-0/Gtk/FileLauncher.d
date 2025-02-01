@@ -28,10 +28,6 @@ import Gtk.c.types;
 class FileLauncher : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

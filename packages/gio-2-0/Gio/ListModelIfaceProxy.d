@@ -7,10 +7,6 @@ import Gio.ListModelT;
 /// Proxy object for Gio.ListModel interface when a GObject has no applicable D binding
 class ListModelIfaceProxy : IfaceProxy, ListModel
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

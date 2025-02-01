@@ -366,28 +366,30 @@ template ActionGroupT()
    *   actionName = the name of the action in action_group
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionAddedCallback = void delegate(string actionName, ActionGroup actionGroup);
+  alias ActionAddedCallbackDlg = void delegate(string actionName, ActionGroup actionGroup);
+  alias ActionAddedCallbackFunc = void function(string actionName, ActionGroup actionGroup);
 
   /**
    * Connect to ActionAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActionAdded(ActionAddedCallback dlg, string detail = null, Flag!"After" after = No.After)
+  ulong connectActionAdded(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == ActionAddedCallbackDlg) || is(T == ActionAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto actionGroup = getVal!ActionGroup(_paramVals);
       auto actionName = getVal!string(&_paramVals[1]);
-      _dgClosure.dlg(actionName, actionGroup);
+      _dClosure.dlg(actionName, actionGroup);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("action-added"~ (detail.length ? "::" ~ detail : ""), closure, after);
   }
 
@@ -398,29 +400,31 @@ template ActionGroupT()
    *   enabled = whether the action is enabled or not
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionEnabledChangedCallback = void delegate(string actionName, bool enabled, ActionGroup actionGroup);
+  alias ActionEnabledChangedCallbackDlg = void delegate(string actionName, bool enabled, ActionGroup actionGroup);
+  alias ActionEnabledChangedCallbackFunc = void function(string actionName, bool enabled, ActionGroup actionGroup);
 
   /**
    * Connect to ActionEnabledChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActionEnabledChanged(ActionEnabledChangedCallback dlg, string detail = null, Flag!"After" after = No.After)
+  ulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == ActionEnabledChangedCallbackDlg) || is(T == ActionEnabledChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto actionGroup = getVal!ActionGroup(_paramVals);
       auto actionName = getVal!string(&_paramVals[1]);
       auto enabled = getVal!bool(&_paramVals[2]);
-      _dgClosure.dlg(actionName, enabled, actionGroup);
+      _dClosure.dlg(actionName, enabled, actionGroup);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("action-enabled-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
   }
 
@@ -432,28 +436,30 @@ template ActionGroupT()
    *   actionName = the name of the action in action_group
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionRemovedCallback = void delegate(string actionName, ActionGroup actionGroup);
+  alias ActionRemovedCallbackDlg = void delegate(string actionName, ActionGroup actionGroup);
+  alias ActionRemovedCallbackFunc = void function(string actionName, ActionGroup actionGroup);
 
   /**
    * Connect to ActionRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActionRemoved(ActionRemovedCallback dlg, string detail = null, Flag!"After" after = No.After)
+  ulong connectActionRemoved(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == ActionRemovedCallbackDlg) || is(T == ActionRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto actionGroup = getVal!ActionGroup(_paramVals);
       auto actionName = getVal!string(&_paramVals[1]);
-      _dgClosure.dlg(actionName, actionGroup);
+      _dClosure.dlg(actionName, actionGroup);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("action-removed"~ (detail.length ? "::" ~ detail : ""), closure, after);
   }
 
@@ -464,29 +470,31 @@ template ActionGroupT()
    *   value = the new value of the state
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionStateChangedCallback = void delegate(string actionName, VariantG value, ActionGroup actionGroup);
+  alias ActionStateChangedCallbackDlg = void delegate(string actionName, VariantG value, ActionGroup actionGroup);
+  alias ActionStateChangedCallbackFunc = void function(string actionName, VariantG value, ActionGroup actionGroup);
 
   /**
    * Connect to ActionStateChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActionStateChanged(ActionStateChangedCallback dlg, string detail = null, Flag!"After" after = No.After)
+  ulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == ActionStateChangedCallbackDlg) || is(T == ActionStateChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto actionGroup = getVal!ActionGroup(_paramVals);
       auto actionName = getVal!string(&_paramVals[1]);
       auto value = getVal!VariantG(&_paramVals[2]);
-      _dgClosure.dlg(actionName, value, actionGroup);
+      _dClosure.dlg(actionName, value, actionGroup);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("action-state-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
   }
 }

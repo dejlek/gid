@@ -274,26 +274,28 @@ class MountOperation : ObjectG
    * by dismissing open password dialogs.
    *   mountOperation = the instance the signal is connected to
    */
-  alias AbortedCallback = void delegate(MountOperation mountOperation);
+  alias AbortedCallbackDlg = void delegate(MountOperation mountOperation);
+  alias AbortedCallbackFunc = void function(MountOperation mountOperation);
 
   /**
    * Connect to Aborted signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAborted(AbortedCallback dlg, Flag!"After" after = No.After)
+  ulong connectAborted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AbortedCallbackDlg) || is(T == AbortedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto mountOperation = getVal!MountOperation(_paramVals);
-      _dgClosure.dlg(mountOperation);
+      _dClosure.dlg(mountOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("aborted", closure, after);
   }
 
@@ -309,30 +311,32 @@ class MountOperation : ObjectG
    *   flags = a set of #GAskPasswordFlags.
    *   mountOperation = the instance the signal is connected to
    */
-  alias AskPasswordCallback = void delegate(string message, string defaultUser, string defaultDomain, AskPasswordFlags flags, MountOperation mountOperation);
+  alias AskPasswordCallbackDlg = void delegate(string message, string defaultUser, string defaultDomain, AskPasswordFlags flags, MountOperation mountOperation);
+  alias AskPasswordCallbackFunc = void function(string message, string defaultUser, string defaultDomain, AskPasswordFlags flags, MountOperation mountOperation);
 
   /**
    * Connect to AskPassword signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAskPassword(AskPasswordCallback dlg, Flag!"After" after = No.After)
+  ulong connectAskPassword(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AskPasswordCallbackDlg) || is(T == AskPasswordCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto mountOperation = getVal!MountOperation(_paramVals);
       auto message = getVal!string(&_paramVals[1]);
       auto defaultUser = getVal!string(&_paramVals[2]);
       auto defaultDomain = getVal!string(&_paramVals[3]);
       auto flags = getVal!AskPasswordFlags(&_paramVals[4]);
-      _dgClosure.dlg(message, defaultUser, defaultDomain, flags, mountOperation);
+      _dClosure.dlg(message, defaultUser, defaultDomain, flags, mountOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("ask-password", closure, after);
   }
 
@@ -347,21 +351,23 @@ class MountOperation : ObjectG
    *   choices = an array of strings for each possible choice.
    *   mountOperation = the instance the signal is connected to
    */
-  alias AskQuestionCallback = void delegate(string message, string[] choices, MountOperation mountOperation);
+  alias AskQuestionCallbackDlg = void delegate(string message, string[] choices, MountOperation mountOperation);
+  alias AskQuestionCallbackFunc = void function(string message, string[] choices, MountOperation mountOperation);
 
   /**
    * Connect to AskQuestion signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAskQuestion(AskQuestionCallback dlg, Flag!"After" after = No.After)
+  ulong connectAskQuestion(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AskQuestionCallbackDlg) || is(T == AskQuestionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto mountOperation = getVal!MountOperation(_paramVals);
       auto message = getVal!string(&_paramVals[1]);
       auto choices = getVal!(char**)(&_paramVals[2]);
@@ -372,10 +378,10 @@ class MountOperation : ObjectG
         break;
       foreach (i; 0 .. _lenchoices)
         _choices ~= choices[i].fromCString(No.Free);
-      _dgClosure.dlg(message, _choices, mountOperation);
+      _dClosure.dlg(message, _choices, mountOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("ask-question", closure, after);
   }
 
@@ -385,27 +391,29 @@ class MountOperation : ObjectG
    *   result = a #GMountOperationResult indicating how the request was handled
    *   mountOperation = the instance the signal is connected to
    */
-  alias ReplyCallback = void delegate(MountOperationResult result, MountOperation mountOperation);
+  alias ReplyCallbackDlg = void delegate(MountOperationResult result, MountOperation mountOperation);
+  alias ReplyCallbackFunc = void function(MountOperationResult result, MountOperation mountOperation);
 
   /**
    * Connect to Reply signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectReply(ReplyCallback dlg, Flag!"After" after = No.After)
+  ulong connectReply(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ReplyCallbackDlg) || is(T == ReplyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto mountOperation = getVal!MountOperation(_paramVals);
       auto result = getVal!MountOperationResult(&_paramVals[1]);
-      _dgClosure.dlg(result, mountOperation);
+      _dClosure.dlg(result, mountOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("reply", closure, after);
   }
 
@@ -432,29 +440,31 @@ class MountOperation : ObjectG
    *     is completed
    *   mountOperation = the instance the signal is connected to
    */
-  alias ShowUnmountProgressCallback = void delegate(string message, long timeLeft, long bytesLeft, MountOperation mountOperation);
+  alias ShowUnmountProgressCallbackDlg = void delegate(string message, long timeLeft, long bytesLeft, MountOperation mountOperation);
+  alias ShowUnmountProgressCallbackFunc = void function(string message, long timeLeft, long bytesLeft, MountOperation mountOperation);
 
   /**
    * Connect to ShowUnmountProgress signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectShowUnmountProgress(ShowUnmountProgressCallback dlg, Flag!"After" after = No.After)
+  ulong connectShowUnmountProgress(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ShowUnmountProgressCallbackDlg) || is(T == ShowUnmountProgressCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto mountOperation = getVal!MountOperation(_paramVals);
       auto message = getVal!string(&_paramVals[1]);
       auto timeLeft = getVal!long(&_paramVals[2]);
       auto bytesLeft = getVal!long(&_paramVals[3]);
-      _dgClosure.dlg(message, timeLeft, bytesLeft, mountOperation);
+      _dClosure.dlg(message, timeLeft, bytesLeft, mountOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("show-unmount-progress", closure, after);
   }
 }

@@ -432,14 +432,16 @@ interface DtlsConnection
    *   emission to continue, which will cause the handshake to fail if
    *   no one else overrides it.
    */
-  alias AcceptCertificateCallback = bool delegate(TlsCertificate peerCert, TlsCertificateFlags errors, DtlsConnection dtlsConnection);
+  alias AcceptCertificateCallbackDlg = bool delegate(TlsCertificate peerCert, TlsCertificateFlags errors, DtlsConnection dtlsConnection);
+  alias AcceptCertificateCallbackFunc = bool function(TlsCertificate peerCert, TlsCertificateFlags errors, DtlsConnection dtlsConnection);
 
   /**
    * Connect to AcceptCertificate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAcceptCertificate(AcceptCertificateCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AcceptCertificateCallbackDlg) || is(T == AcceptCertificateCallbackFunc));
+  }

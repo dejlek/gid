@@ -20,10 +20,6 @@ import Gtk.c.types;
 class Adjustment : InitiallyUnowned
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -268,26 +264,28 @@ class Adjustment : InitiallyUnowned
    * covered by the signalGtk.Adjustment::value-changed signal.
    *   adjustment = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(Adjustment adjustment);
+  alias ChangedCallbackDlg = void delegate(Adjustment adjustment);
+  alias ChangedCallbackFunc = void function(Adjustment adjustment);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto adjustment = getVal!Adjustment(_paramVals);
-      _dgClosure.dlg(adjustment);
+      _dClosure.dlg(adjustment);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
   }
 
@@ -295,26 +293,28 @@ class Adjustment : InitiallyUnowned
    * Emitted when the value has been changed.
    *   adjustment = the instance the signal is connected to
    */
-  alias ValueChangedCallback = void delegate(Adjustment adjustment);
+  alias ValueChangedCallbackDlg = void delegate(Adjustment adjustment);
+  alias ValueChangedCallbackFunc = void function(Adjustment adjustment);
 
   /**
    * Connect to ValueChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectValueChanged(ValueChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ValueChangedCallbackDlg) || is(T == ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto adjustment = getVal!Adjustment(_paramVals);
-      _dgClosure.dlg(adjustment);
+      _dClosure.dlg(adjustment);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
   }
 }

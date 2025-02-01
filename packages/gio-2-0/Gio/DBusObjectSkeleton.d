@@ -20,10 +20,6 @@ import Gio.c.types;
 class DBusObjectSkeleton : ObjectG, DBusObject
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -126,30 +122,32 @@ class DBusObjectSkeleton : ObjectG, DBusObject
    *   dBusObjectSkeleton = the instance the signal is connected to
    * Returns: %TRUE if the call is authorized, %FALSE otherwise.
    */
-  alias AuthorizeMethodCallback = bool delegate(DBusInterfaceSkeleton interface_, DBusMethodInvocation invocation, DBusObjectSkeleton dBusObjectSkeleton);
+  alias AuthorizeMethodCallbackDlg = bool delegate(DBusInterfaceSkeleton interface_, DBusMethodInvocation invocation, DBusObjectSkeleton dBusObjectSkeleton);
+  alias AuthorizeMethodCallbackFunc = bool function(DBusInterfaceSkeleton interface_, DBusMethodInvocation invocation, DBusObjectSkeleton dBusObjectSkeleton);
 
   /**
    * Connect to AuthorizeMethod signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAuthorizeMethod(AuthorizeMethodCallback dlg, Flag!"After" after = No.After)
+  ulong connectAuthorizeMethod(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AuthorizeMethodCallbackDlg) || is(T == AuthorizeMethodCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto dBusObjectSkeleton = getVal!DBusObjectSkeleton(_paramVals);
       auto interface_ = getVal!DBusInterfaceSkeleton(&_paramVals[1]);
       auto invocation = getVal!DBusMethodInvocation(&_paramVals[2]);
-      _retval = _dgClosure.dlg(interface_, invocation, dBusObjectSkeleton);
+      _retval = _dClosure.dlg(interface_, invocation, dBusObjectSkeleton);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("authorize-method", closure, after);
   }
 }

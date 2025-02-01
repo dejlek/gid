@@ -128,29 +128,31 @@ class DBusAuthObserver : ObjectG
    *   dBusAuthObserver = the instance the signal is connected to
    * Returns: %TRUE if mechanism can be used to authenticate the other peer, %FALSE if not.
    */
-  alias AllowMechanismCallback = bool delegate(string mechanism, DBusAuthObserver dBusAuthObserver);
+  alias AllowMechanismCallbackDlg = bool delegate(string mechanism, DBusAuthObserver dBusAuthObserver);
+  alias AllowMechanismCallbackFunc = bool function(string mechanism, DBusAuthObserver dBusAuthObserver);
 
   /**
    * Connect to AllowMechanism signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAllowMechanism(AllowMechanismCallback dlg, Flag!"After" after = No.After)
+  ulong connectAllowMechanism(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AllowMechanismCallbackDlg) || is(T == AllowMechanismCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto dBusAuthObserver = getVal!DBusAuthObserver(_paramVals);
       auto mechanism = getVal!string(&_paramVals[1]);
-      _retval = _dgClosure.dlg(mechanism, dBusAuthObserver);
+      _retval = _dClosure.dlg(mechanism, dBusAuthObserver);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("allow-mechanism", closure, after);
   }
 
@@ -163,30 +165,32 @@ class DBusAuthObserver : ObjectG
    *   dBusAuthObserver = the instance the signal is connected to
    * Returns: %TRUE if the peer is authorized, %FALSE if not.
    */
-  alias AuthorizeAuthenticatedPeerCallback = bool delegate(IOStream stream, Credentials credentials, DBusAuthObserver dBusAuthObserver);
+  alias AuthorizeAuthenticatedPeerCallbackDlg = bool delegate(IOStream stream, Credentials credentials, DBusAuthObserver dBusAuthObserver);
+  alias AuthorizeAuthenticatedPeerCallbackFunc = bool function(IOStream stream, Credentials credentials, DBusAuthObserver dBusAuthObserver);
 
   /**
    * Connect to AuthorizeAuthenticatedPeer signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAuthorizeAuthenticatedPeer(AuthorizeAuthenticatedPeerCallback dlg, Flag!"After" after = No.After)
+  ulong connectAuthorizeAuthenticatedPeer(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AuthorizeAuthenticatedPeerCallbackDlg) || is(T == AuthorizeAuthenticatedPeerCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto dBusAuthObserver = getVal!DBusAuthObserver(_paramVals);
       auto stream = getVal!IOStream(&_paramVals[1]);
       auto credentials = getVal!Credentials(&_paramVals[2]);
-      _retval = _dgClosure.dlg(stream, credentials, dBusAuthObserver);
+      _retval = _dClosure.dlg(stream, credentials, dBusAuthObserver);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("authorize-authenticated-peer", closure, after);
   }
 }

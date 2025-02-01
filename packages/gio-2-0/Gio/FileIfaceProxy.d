@@ -7,10 +7,6 @@ import Gio.FileT;
 /// Proxy object for Gio.File interface when a GObject has no applicable D binding
 class FileIfaceProxy : IfaceProxy, File
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

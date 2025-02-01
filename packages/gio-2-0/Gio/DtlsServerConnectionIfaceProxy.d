@@ -7,10 +7,6 @@ import Gio.DtlsServerConnectionT;
 /// Proxy object for Gio.DtlsServerConnection interface when a GObject has no applicable D binding
 class DtlsServerConnectionIfaceProxy : IfaceProxy, DtlsServerConnection
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

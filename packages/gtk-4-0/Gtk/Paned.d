@@ -75,10 +75,6 @@ import Gtk.c.types;
 class Paned : Widget, AccessibleRange, Orientable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -292,28 +288,30 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias AcceptPositionCallback = bool delegate(Paned paned);
+  alias AcceptPositionCallbackDlg = bool delegate(Paned paned);
+  alias AcceptPositionCallbackFunc = bool function(Paned paned);
 
   /**
    * Connect to AcceptPosition signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAcceptPosition(AcceptPositionCallback dlg, Flag!"After" after = No.After)
+  ulong connectAcceptPosition(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AcceptPositionCallbackDlg) || is(T == AcceptPositionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto paned = getVal!Paned(_paramVals);
-      _retval = _dgClosure.dlg(paned);
+      _retval = _dClosure.dlg(paned);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("accept-position", closure, after);
   }
 
@@ -327,28 +325,30 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias CancelPositionCallback = bool delegate(Paned paned);
+  alias CancelPositionCallbackDlg = bool delegate(Paned paned);
+  alias CancelPositionCallbackFunc = bool function(Paned paned);
 
   /**
    * Connect to CancelPosition signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCancelPosition(CancelPositionCallback dlg, Flag!"After" after = No.After)
+  ulong connectCancelPosition(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CancelPositionCallbackDlg) || is(T == CancelPositionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto paned = getVal!Paned(_paramVals);
-      _retval = _dgClosure.dlg(paned);
+      _retval = _dClosure.dlg(paned);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cancel-position", closure, after);
   }
 
@@ -361,29 +361,31 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias CycleChildFocusCallback = bool delegate(bool reversed, Paned paned);
+  alias CycleChildFocusCallbackDlg = bool delegate(bool reversed, Paned paned);
+  alias CycleChildFocusCallbackFunc = bool function(bool reversed, Paned paned);
 
   /**
    * Connect to CycleChildFocus signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCycleChildFocus(CycleChildFocusCallback dlg, Flag!"After" after = No.After)
+  ulong connectCycleChildFocus(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CycleChildFocusCallbackDlg) || is(T == CycleChildFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto paned = getVal!Paned(_paramVals);
       auto reversed = getVal!bool(&_paramVals[1]);
-      _retval = _dgClosure.dlg(reversed, paned);
+      _retval = _dClosure.dlg(reversed, paned);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cycle-child-focus", closure, after);
   }
 
@@ -397,29 +399,31 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias CycleHandleFocusCallback = bool delegate(bool reversed, Paned paned);
+  alias CycleHandleFocusCallbackDlg = bool delegate(bool reversed, Paned paned);
+  alias CycleHandleFocusCallbackFunc = bool function(bool reversed, Paned paned);
 
   /**
    * Connect to CycleHandleFocus signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCycleHandleFocus(CycleHandleFocusCallback dlg, Flag!"After" after = No.After)
+  ulong connectCycleHandleFocus(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CycleHandleFocusCallbackDlg) || is(T == CycleHandleFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto paned = getVal!Paned(_paramVals);
       auto reversed = getVal!bool(&_paramVals[1]);
-      _retval = _dgClosure.dlg(reversed, paned);
+      _retval = _dClosure.dlg(reversed, paned);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cycle-handle-focus", closure, after);
   }
 
@@ -431,29 +435,31 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias MoveHandleCallback = bool delegate(ScrollType scrollType, Paned paned);
+  alias MoveHandleCallbackDlg = bool delegate(ScrollType scrollType, Paned paned);
+  alias MoveHandleCallbackFunc = bool function(ScrollType scrollType, Paned paned);
 
   /**
    * Connect to MoveHandle signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveHandle(MoveHandleCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveHandle(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveHandleCallbackDlg) || is(T == MoveHandleCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto paned = getVal!Paned(_paramVals);
       auto scrollType = getVal!ScrollType(&_paramVals[1]);
-      _retval = _dgClosure.dlg(scrollType, paned);
+      _retval = _dClosure.dlg(scrollType, paned);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-handle", closure, after);
   }
 
@@ -465,28 +471,30 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias ToggleHandleFocusCallback = bool delegate(Paned paned);
+  alias ToggleHandleFocusCallbackDlg = bool delegate(Paned paned);
+  alias ToggleHandleFocusCallbackFunc = bool function(Paned paned);
 
   /**
    * Connect to ToggleHandleFocus signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectToggleHandleFocus(ToggleHandleFocusCallback dlg, Flag!"After" after = No.After)
+  ulong connectToggleHandleFocus(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ToggleHandleFocusCallbackDlg) || is(T == ToggleHandleFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto paned = getVal!Paned(_paramVals);
-      _retval = _dgClosure.dlg(paned);
+      _retval = _dClosure.dlg(paned);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-handle-focus", closure, after);
   }
 }

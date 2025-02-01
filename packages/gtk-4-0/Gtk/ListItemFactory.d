@@ -49,10 +49,6 @@ import Gtk.c.types;
 class ListItemFactory : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

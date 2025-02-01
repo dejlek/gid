@@ -21,10 +21,6 @@ import Gio.c.types;
 class DataInputStream : BufferedInputStream
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

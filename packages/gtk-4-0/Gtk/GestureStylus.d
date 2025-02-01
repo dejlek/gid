@@ -137,28 +137,30 @@ class GestureStylus : GestureSingle
    *   y = the Y coordinate of the stylus event
    *   gestureStylus = the instance the signal is connected to
    */
-  alias DownCallback = void delegate(double x, double y, GestureStylus gestureStylus);
+  alias DownCallbackDlg = void delegate(double x, double y, GestureStylus gestureStylus);
+  alias DownCallbackFunc = void function(double x, double y, GestureStylus gestureStylus);
 
   /**
    * Connect to Down signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDown(DownCallback dlg, Flag!"After" after = No.After)
+  ulong connectDown(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DownCallbackDlg) || is(T == DownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureStylus = getVal!GestureStylus(_paramVals);
       auto x = getVal!double(&_paramVals[1]);
       auto y = getVal!double(&_paramVals[2]);
-      _dgClosure.dlg(x, y, gestureStylus);
+      _dClosure.dlg(x, y, gestureStylus);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("down", closure, after);
   }
 
@@ -169,28 +171,30 @@ class GestureStylus : GestureSingle
    *   y = the Y coordinate of the stylus event
    *   gestureStylus = the instance the signal is connected to
    */
-  alias MotionCallback = void delegate(double x, double y, GestureStylus gestureStylus);
+  alias MotionCallbackDlg = void delegate(double x, double y, GestureStylus gestureStylus);
+  alias MotionCallbackFunc = void function(double x, double y, GestureStylus gestureStylus);
 
   /**
    * Connect to Motion signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMotion(MotionCallback dlg, Flag!"After" after = No.After)
+  ulong connectMotion(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MotionCallbackDlg) || is(T == MotionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureStylus = getVal!GestureStylus(_paramVals);
       auto x = getVal!double(&_paramVals[1]);
       auto y = getVal!double(&_paramVals[2]);
-      _dgClosure.dlg(x, y, gestureStylus);
+      _dClosure.dlg(x, y, gestureStylus);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("motion", closure, after);
   }
 
@@ -201,28 +205,30 @@ class GestureStylus : GestureSingle
    *   y = the Y coordinate of the stylus event
    *   gestureStylus = the instance the signal is connected to
    */
-  alias ProximityCallback = void delegate(double x, double y, GestureStylus gestureStylus);
+  alias ProximityCallbackDlg = void delegate(double x, double y, GestureStylus gestureStylus);
+  alias ProximityCallbackFunc = void function(double x, double y, GestureStylus gestureStylus);
 
   /**
    * Connect to Proximity signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectProximity(ProximityCallback dlg, Flag!"After" after = No.After)
+  ulong connectProximity(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ProximityCallbackDlg) || is(T == ProximityCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureStylus = getVal!GestureStylus(_paramVals);
       auto x = getVal!double(&_paramVals[1]);
       auto y = getVal!double(&_paramVals[2]);
-      _dgClosure.dlg(x, y, gestureStylus);
+      _dClosure.dlg(x, y, gestureStylus);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("proximity", closure, after);
   }
 
@@ -233,28 +239,30 @@ class GestureStylus : GestureSingle
    *   y = the Y coordinate of the stylus event
    *   gestureStylus = the instance the signal is connected to
    */
-  alias UpCallback = void delegate(double x, double y, GestureStylus gestureStylus);
+  alias UpCallbackDlg = void delegate(double x, double y, GestureStylus gestureStylus);
+  alias UpCallbackFunc = void function(double x, double y, GestureStylus gestureStylus);
 
   /**
    * Connect to Up signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUp(UpCallback dlg, Flag!"After" after = No.After)
+  ulong connectUp(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UpCallbackDlg) || is(T == UpCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureStylus = getVal!GestureStylus(_paramVals);
       auto x = getVal!double(&_paramVals[1]);
       auto y = getVal!double(&_paramVals[2]);
-      _dgClosure.dlg(x, y, gestureStylus);
+      _dClosure.dlg(x, y, gestureStylus);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("up", closure, after);
   }
 }

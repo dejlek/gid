@@ -41,10 +41,6 @@ import Gid.gid;
 class FrameClock : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -224,26 +220,28 @@ class FrameClock : ObjectG
    * Applications should generally not handle this signal.
    *   frameClock = the instance the signal is connected to
    */
-  alias AfterPaintCallback = void delegate(FrameClock frameClock);
+  alias AfterPaintCallbackDlg = void delegate(FrameClock frameClock);
+  alias AfterPaintCallbackFunc = void function(FrameClock frameClock);
 
   /**
    * Connect to AfterPaint signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAfterPaint(AfterPaintCallback dlg, Flag!"After" after = No.After)
+  ulong connectAfterPaint(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AfterPaintCallbackDlg) || is(T == AfterPaintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto frameClock = getVal!FrameClock(_paramVals);
-      _dgClosure.dlg(frameClock);
+      _dClosure.dlg(frameClock);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("after-paint", closure, after);
   }
 
@@ -252,26 +250,28 @@ class FrameClock : ObjectG
    * Applications should generally not handle this signal.
    *   frameClock = the instance the signal is connected to
    */
-  alias BeforePaintCallback = void delegate(FrameClock frameClock);
+  alias BeforePaintCallbackDlg = void delegate(FrameClock frameClock);
+  alias BeforePaintCallbackFunc = void function(FrameClock frameClock);
 
   /**
    * Connect to BeforePaint signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectBeforePaint(BeforePaintCallback dlg, Flag!"After" after = No.After)
+  ulong connectBeforePaint(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == BeforePaintCallbackDlg) || is(T == BeforePaintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto frameClock = getVal!FrameClock(_paramVals);
-      _dgClosure.dlg(frameClock);
+      _dClosure.dlg(frameClock);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("before-paint", closure, after);
   }
 
@@ -281,26 +281,28 @@ class FrameClock : ObjectG
    * Applications should not handle this signal.
    *   frameClock = the instance the signal is connected to
    */
-  alias FlushEventsCallback = void delegate(FrameClock frameClock);
+  alias FlushEventsCallbackDlg = void delegate(FrameClock frameClock);
+  alias FlushEventsCallbackFunc = void function(FrameClock frameClock);
 
   /**
    * Connect to FlushEvents signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectFlushEvents(FlushEventsCallback dlg, Flag!"After" after = No.After)
+  ulong connectFlushEvents(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == FlushEventsCallbackDlg) || is(T == FlushEventsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto frameClock = getVal!FrameClock(_paramVals);
-      _dgClosure.dlg(frameClock);
+      _dClosure.dlg(frameClock);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("flush-events", closure, after);
   }
 
@@ -311,26 +313,28 @@ class FrameClock : ObjectG
    * should be performed. GTK normally handles this internally.
    *   frameClock = the instance the signal is connected to
    */
-  alias LayoutCallback = void delegate(FrameClock frameClock);
+  alias LayoutCallbackDlg = void delegate(FrameClock frameClock);
+  alias LayoutCallbackFunc = void function(FrameClock frameClock);
 
   /**
    * Connect to Layout signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectLayout(LayoutCallback dlg, Flag!"After" after = No.After)
+  ulong connectLayout(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == LayoutCallbackDlg) || is(T == LayoutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto frameClock = getVal!FrameClock(_paramVals);
-      _dgClosure.dlg(frameClock);
+      _dClosure.dlg(frameClock);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("layout", closure, after);
   }
 
@@ -343,26 +347,28 @@ class FrameClock : ObjectG
    * by GTK.
    *   frameClock = the instance the signal is connected to
    */
-  alias PaintCallback = void delegate(FrameClock frameClock);
+  alias PaintCallbackDlg = void delegate(FrameClock frameClock);
+  alias PaintCallbackFunc = void function(FrameClock frameClock);
 
   /**
    * Connect to Paint signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPaint(PaintCallback dlg, Flag!"After" after = No.After)
+  ulong connectPaint(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PaintCallbackDlg) || is(T == PaintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto frameClock = getVal!FrameClock(_paramVals);
-      _dgClosure.dlg(frameClock);
+      _dClosure.dlg(frameClock);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("paint", closure, after);
   }
 
@@ -372,26 +378,28 @@ class FrameClock : ObjectG
    * event processing. Applications should not handle this signal.
    *   frameClock = the instance the signal is connected to
    */
-  alias ResumeEventsCallback = void delegate(FrameClock frameClock);
+  alias ResumeEventsCallbackDlg = void delegate(FrameClock frameClock);
+  alias ResumeEventsCallbackFunc = void function(FrameClock frameClock);
 
   /**
    * Connect to ResumeEvents signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectResumeEvents(ResumeEventsCallback dlg, Flag!"After" after = No.After)
+  ulong connectResumeEvents(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ResumeEventsCallbackDlg) || is(T == ResumeEventsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto frameClock = getVal!FrameClock(_paramVals);
-      _dgClosure.dlg(frameClock);
+      _dClosure.dlg(frameClock);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("resume-events", closure, after);
   }
 
@@ -404,26 +412,28 @@ class FrameClock : ObjectG
    * as a more convenient interface.
    *   frameClock = the instance the signal is connected to
    */
-  alias UpdateCallback = void delegate(FrameClock frameClock);
+  alias UpdateCallbackDlg = void delegate(FrameClock frameClock);
+  alias UpdateCallbackFunc = void function(FrameClock frameClock);
 
   /**
    * Connect to Update signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUpdate(UpdateCallback dlg, Flag!"After" after = No.After)
+  ulong connectUpdate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UpdateCallbackDlg) || is(T == UpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto frameClock = getVal!FrameClock(_paramVals);
-      _dgClosure.dlg(frameClock);
+      _dClosure.dlg(frameClock);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("update", closure, after);
   }
 }

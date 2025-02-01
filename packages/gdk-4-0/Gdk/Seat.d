@@ -17,10 +17,6 @@ import Gid.gid;
 class Seat : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -121,27 +117,29 @@ class Seat : ObjectG
    *   device = the newly added `GdkDevice`.
    *   seat = the instance the signal is connected to
    */
-  alias DeviceAddedCallback = void delegate(Device device, Seat seat);
+  alias DeviceAddedCallbackDlg = void delegate(Device device, Seat seat);
+  alias DeviceAddedCallbackFunc = void function(Device device, Seat seat);
 
   /**
    * Connect to DeviceAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDeviceAdded(DeviceAddedCallback dlg, Flag!"After" after = No.After)
+  ulong connectDeviceAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DeviceAddedCallbackDlg) || is(T == DeviceAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto seat = getVal!Seat(_paramVals);
       auto device = getVal!Device(&_paramVals[1]);
-      _dgClosure.dlg(device, seat);
+      _dClosure.dlg(device, seat);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("device-added", closure, after);
   }
 
@@ -151,27 +149,29 @@ class Seat : ObjectG
    *   device = the just removed `GdkDevice`.
    *   seat = the instance the signal is connected to
    */
-  alias DeviceRemovedCallback = void delegate(Device device, Seat seat);
+  alias DeviceRemovedCallbackDlg = void delegate(Device device, Seat seat);
+  alias DeviceRemovedCallbackFunc = void function(Device device, Seat seat);
 
   /**
    * Connect to DeviceRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDeviceRemoved(DeviceRemovedCallback dlg, Flag!"After" after = No.After)
+  ulong connectDeviceRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DeviceRemovedCallbackDlg) || is(T == DeviceRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto seat = getVal!Seat(_paramVals);
       auto device = getVal!Device(&_paramVals[1]);
-      _dgClosure.dlg(device, seat);
+      _dClosure.dlg(device, seat);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("device-removed", closure, after);
   }
 
@@ -185,27 +185,29 @@ class Seat : ObjectG
    *   tool = the new `GdkDeviceTool` known to the seat
    *   seat = the instance the signal is connected to
    */
-  alias ToolAddedCallback = void delegate(DeviceTool tool, Seat seat);
+  alias ToolAddedCallbackDlg = void delegate(DeviceTool tool, Seat seat);
+  alias ToolAddedCallbackFunc = void function(DeviceTool tool, Seat seat);
 
   /**
    * Connect to ToolAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectToolAdded(ToolAddedCallback dlg, Flag!"After" after = No.After)
+  ulong connectToolAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ToolAddedCallbackDlg) || is(T == ToolAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto seat = getVal!Seat(_paramVals);
       auto tool = getVal!DeviceTool(&_paramVals[1]);
-      _dgClosure.dlg(tool, seat);
+      _dClosure.dlg(tool, seat);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("tool-added", closure, after);
   }
 
@@ -215,27 +217,29 @@ class Seat : ObjectG
    *   tool = the just removed `GdkDeviceTool`
    *   seat = the instance the signal is connected to
    */
-  alias ToolRemovedCallback = void delegate(DeviceTool tool, Seat seat);
+  alias ToolRemovedCallbackDlg = void delegate(DeviceTool tool, Seat seat);
+  alias ToolRemovedCallbackFunc = void function(DeviceTool tool, Seat seat);
 
   /**
    * Connect to ToolRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectToolRemoved(ToolRemovedCallback dlg, Flag!"After" after = No.After)
+  ulong connectToolRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ToolRemovedCallbackDlg) || is(T == ToolRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto seat = getVal!Seat(_paramVals);
       auto tool = getVal!DeviceTool(&_paramVals[1]);
-      _dgClosure.dlg(tool, seat);
+      _dClosure.dlg(tool, seat);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("tool-removed", closure, after);
   }
 }

@@ -147,10 +147,6 @@ import Gtk.c.types;
 class ListStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, TreeSortable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

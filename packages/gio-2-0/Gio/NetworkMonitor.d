@@ -132,14 +132,16 @@ interface NetworkMonitor
    *   networkAvailable = the current value of #GNetworkMonitor:network-available
    *   networkMonitor = the instance the signal is connected to
    */
-  alias NetworkChangedCallback = void delegate(bool networkAvailable, NetworkMonitor networkMonitor);
+  alias NetworkChangedCallbackDlg = void delegate(bool networkAvailable, NetworkMonitor networkMonitor);
+  alias NetworkChangedCallbackFunc = void function(bool networkAvailable, NetworkMonitor networkMonitor);
 
   /**
    * Connect to NetworkChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectNetworkChanged(NetworkChangedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectNetworkChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == NetworkChangedCallbackDlg) || is(T == NetworkChangedCallbackFunc));
+  }

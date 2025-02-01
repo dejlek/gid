@@ -30,10 +30,6 @@ import Gio.c.types;
 class UnixSocketAddress : SocketAddress
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

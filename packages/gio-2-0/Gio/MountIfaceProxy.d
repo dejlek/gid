@@ -7,10 +7,6 @@ import Gio.MountT;
 /// Proxy object for Gio.Mount interface when a GObject has no applicable D binding
 class MountIfaceProxy : IfaceProxy, Mount
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

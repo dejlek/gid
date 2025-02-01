@@ -14,7 +14,7 @@ import Gio.c.types;
 /**
  * `GApplicationCommandLine` represents a command-line invocation of
  * an application.
- * It is created by [Gio.Application] and emitted
+ * It is created by [Gio.ApplicationGio] and emitted
  * in the signal@Gio.Application::command-line signal and virtual function.
  * The class contains the list of arguments that the program was invoked
  * with. It is also possible to query if the commandline invocation was
@@ -147,10 +147,6 @@ import Gio.c.types;
  */
 class ApplicationCommandLine : ObjectG
 {
-
-  this()
-  {
-  }
 
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -307,7 +303,7 @@ class ApplicationCommandLine : ObjectG
    * Gets the options that were passed to g_application_command_line$(LPAREN)$(RPAREN).
    * If you did not override local_command_line$(LPAREN)$(RPAREN) then these are the same
    * options that were parsed according to the #GOptionEntrys added to the
-   * application with [Gio.Application.addMainOptionEntries] and possibly
+   * application with [Gio.ApplicationGio.addMainOptionEntries] and possibly
    * modified from your GApplication::handle-local-options handler.
    * If no options were sent then an empty dictionary is returned so that
    * you don't need to check for %NULL.

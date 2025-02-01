@@ -194,14 +194,16 @@ interface SelectionModel
    *   nItems = number of items with changes
    *   selectionModel = the instance the signal is connected to
    */
-  alias SelectionChangedCallback = void delegate(uint position, uint nItems, SelectionModel selectionModel);
+  alias SelectionChangedCallbackDlg = void delegate(uint position, uint nItems, SelectionModel selectionModel);
+  alias SelectionChangedCallbackFunc = void function(uint position, uint nItems, SelectionModel selectionModel);
 
   /**
    * Connect to SelectionChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectionChanged(SelectionChangedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectionChangedCallbackDlg) || is(T == SelectionChangedCallbackFunc));
+  }

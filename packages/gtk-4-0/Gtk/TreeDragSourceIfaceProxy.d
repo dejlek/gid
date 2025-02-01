@@ -7,10 +7,6 @@ import Gtk.TreeDragSourceT;
 /// Proxy object for Gtk.TreeDragSource interface when a GObject has no applicable D binding
 class TreeDragSourceIfaceProxy : IfaceProxy, TreeDragSource
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

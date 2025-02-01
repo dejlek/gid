@@ -1068,28 +1068,30 @@ class IconView : Widget, CellLayout, Scrollable
    *   iconView = the instance the signal is connected to
    * Returns:
    */
-  alias ActivateCursorItemCallback = bool delegate(IconView iconView);
+  alias ActivateCursorItemCallbackDlg = bool delegate(IconView iconView);
+  alias ActivateCursorItemCallbackFunc = bool function(IconView iconView);
 
   /**
    * Connect to ActivateCursorItem signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivateCursorItem(ActivateCursorItemCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivateCursorItem(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCursorItemCallbackDlg) || is(T == ActivateCursorItemCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto iconView = getVal!IconView(_paramVals);
-      _retval = _dgClosure.dlg(iconView);
+      _retval = _dClosure.dlg(iconView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-cursor-item", closure, after);
   }
 
@@ -1105,27 +1107,29 @@ class IconView : Widget, CellLayout, Scrollable
    *   path = the `GtkTreePath` for the activated item
    *   iconView = the instance the signal is connected to
    */
-  alias ItemActivatedCallback = void delegate(TreePath path, IconView iconView);
+  alias ItemActivatedCallbackDlg = void delegate(TreePath path, IconView iconView);
+  alias ItemActivatedCallbackFunc = void function(TreePath path, IconView iconView);
 
   /**
    * Connect to ItemActivated signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectItemActivated(ItemActivatedCallback dlg, Flag!"After" after = No.After)
+  ulong connectItemActivated(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ItemActivatedCallbackDlg) || is(T == ItemActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto iconView = getVal!IconView(_paramVals);
       auto path = getVal!TreePath(&_paramVals[1]);
-      _dgClosure.dlg(path, iconView);
+      _dClosure.dlg(path, iconView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("item-activated", closure, after);
   }
 
@@ -1150,32 +1154,34 @@ class IconView : Widget, CellLayout, Scrollable
    *   iconView = the instance the signal is connected to
    * Returns:
    */
-  alias MoveCursorCallback = bool delegate(MovementStep step, int count, bool extend, bool modify, IconView iconView);
+  alias MoveCursorCallbackDlg = bool delegate(MovementStep step, int count, bool extend, bool modify, IconView iconView);
+  alias MoveCursorCallbackFunc = bool function(MovementStep step, int count, bool extend, bool modify, IconView iconView);
 
   /**
    * Connect to MoveCursor signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveCursor(MoveCursorCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto iconView = getVal!IconView(_paramVals);
       auto step = getVal!MovementStep(&_paramVals[1]);
       auto count = getVal!int(&_paramVals[2]);
       auto extend = getVal!bool(&_paramVals[3]);
       auto modify = getVal!bool(&_paramVals[4]);
-      _retval = _dgClosure.dlg(step, count, extend, modify, iconView);
+      _retval = _dClosure.dlg(step, count, extend, modify, iconView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-cursor", closure, after);
   }
 
@@ -1188,26 +1194,28 @@ class IconView : Widget, CellLayout, Scrollable
    * The default binding for this signal is Ctrl-a.
    *   iconView = the instance the signal is connected to
    */
-  alias SelectAllCallback = void delegate(IconView iconView);
+  alias SelectAllCallbackDlg = void delegate(IconView iconView);
+  alias SelectAllCallbackFunc = void function(IconView iconView);
 
   /**
    * Connect to SelectAll signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectAll(SelectAllCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectAllCallbackDlg) || is(T == SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto iconView = getVal!IconView(_paramVals);
-      _dgClosure.dlg(iconView);
+      _dClosure.dlg(iconView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("select-all", closure, after);
   }
 
@@ -1221,26 +1229,28 @@ class IconView : Widget, CellLayout, Scrollable
    * There is no default binding for this signal.
    *   iconView = the instance the signal is connected to
    */
-  alias SelectCursorItemCallback = void delegate(IconView iconView);
+  alias SelectCursorItemCallbackDlg = void delegate(IconView iconView);
+  alias SelectCursorItemCallbackFunc = void function(IconView iconView);
 
   /**
    * Connect to SelectCursorItem signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectCursorItem(SelectCursorItemCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectCursorItem(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectCursorItemCallbackDlg) || is(T == SelectCursorItemCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto iconView = getVal!IconView(_paramVals);
-      _dgClosure.dlg(iconView);
+      _dClosure.dlg(iconView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("select-cursor-item", closure, after);
   }
 
@@ -1249,26 +1259,28 @@ class IconView : Widget, CellLayout, Scrollable
    * $(LPAREN)i.e. the set of selected items$(RPAREN) changes.
    *   iconView = the instance the signal is connected to
    */
-  alias SelectionChangedCallback = void delegate(IconView iconView);
+  alias SelectionChangedCallbackDlg = void delegate(IconView iconView);
+  alias SelectionChangedCallbackFunc = void function(IconView iconView);
 
   /**
    * Connect to SelectionChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectionChanged(SelectionChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectionChangedCallbackDlg) || is(T == SelectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto iconView = getVal!IconView(_paramVals);
-      _dgClosure.dlg(iconView);
+      _dClosure.dlg(iconView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("selection-changed", closure, after);
   }
 
@@ -1283,26 +1295,28 @@ class IconView : Widget, CellLayout, Scrollable
    * There is no default binding for this signal is Ctrl-Space.
    *   iconView = the instance the signal is connected to
    */
-  alias ToggleCursorItemCallback = void delegate(IconView iconView);
+  alias ToggleCursorItemCallbackDlg = void delegate(IconView iconView);
+  alias ToggleCursorItemCallbackFunc = void function(IconView iconView);
 
   /**
    * Connect to ToggleCursorItem signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectToggleCursorItem(ToggleCursorItemCallback dlg, Flag!"After" after = No.After)
+  ulong connectToggleCursorItem(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ToggleCursorItemCallbackDlg) || is(T == ToggleCursorItemCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto iconView = getVal!IconView(_paramVals);
-      _dgClosure.dlg(iconView);
+      _dClosure.dlg(iconView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-cursor-item", closure, after);
   }
 
@@ -1315,26 +1329,28 @@ class IconView : Widget, CellLayout, Scrollable
    * The default binding for this signal is Ctrl-Shift-a.
    *   iconView = the instance the signal is connected to
    */
-  alias UnselectAllCallback = void delegate(IconView iconView);
+  alias UnselectAllCallbackDlg = void delegate(IconView iconView);
+  alias UnselectAllCallbackFunc = void function(IconView iconView);
 
   /**
    * Connect to UnselectAll signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUnselectAll(UnselectAllCallback dlg, Flag!"After" after = No.After)
+  ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UnselectAllCallbackDlg) || is(T == UnselectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto iconView = getVal!IconView(_paramVals);
-      _dgClosure.dlg(iconView);
+      _dClosure.dlg(iconView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
   }
 }

@@ -164,28 +164,30 @@ class Statusbar : Widget
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias TextPoppedCallback = void delegate(uint contextId, string text, Statusbar statusbar);
+  alias TextPoppedCallbackDlg = void delegate(uint contextId, string text, Statusbar statusbar);
+  alias TextPoppedCallbackFunc = void function(uint contextId, string text, Statusbar statusbar);
 
   /**
    * Connect to TextPopped signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectTextPopped(TextPoppedCallback dlg, Flag!"After" after = No.After)
+  ulong connectTextPopped(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == TextPoppedCallbackDlg) || is(T == TextPoppedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto statusbar = getVal!Statusbar(_paramVals);
       auto contextId = getVal!uint(&_paramVals[1]);
       auto text = getVal!string(&_paramVals[2]);
-      _dgClosure.dlg(contextId, text, statusbar);
+      _dClosure.dlg(contextId, text, statusbar);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("text-popped", closure, after);
   }
 
@@ -198,28 +200,30 @@ class Statusbar : Widget
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias TextPushedCallback = void delegate(uint contextId, string text, Statusbar statusbar);
+  alias TextPushedCallbackDlg = void delegate(uint contextId, string text, Statusbar statusbar);
+  alias TextPushedCallbackFunc = void function(uint contextId, string text, Statusbar statusbar);
 
   /**
    * Connect to TextPushed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectTextPushed(TextPushedCallback dlg, Flag!"After" after = No.After)
+  ulong connectTextPushed(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == TextPushedCallbackDlg) || is(T == TextPushedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto statusbar = getVal!Statusbar(_paramVals);
       auto contextId = getVal!uint(&_paramVals[1]);
       auto text = getVal!string(&_paramVals[2]);
-      _dgClosure.dlg(contextId, text, statusbar);
+      _dClosure.dlg(contextId, text, statusbar);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("text-pushed", closure, after);
   }
 }

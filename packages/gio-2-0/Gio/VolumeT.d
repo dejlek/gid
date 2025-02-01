@@ -406,26 +406,28 @@ template VolumeT()
    * Emitted when the volume has been changed.
    *   volume = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(Volume volume);
+  alias ChangedCallbackDlg = void delegate(Volume volume);
+  alias ChangedCallbackFunc = void function(Volume volume);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volume = getVal!Volume(_paramVals);
-      _dgClosure.dlg(volume);
+      _dClosure.dlg(volume);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
   }
 
@@ -435,26 +437,28 @@ template VolumeT()
    * release them so the object can be finalized.
    *   volume = the instance the signal is connected to
    */
-  alias RemovedCallback = void delegate(Volume volume);
+  alias RemovedCallbackDlg = void delegate(Volume volume);
+  alias RemovedCallbackFunc = void function(Volume volume);
 
   /**
    * Connect to Removed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRemoved(RemovedCallback dlg, Flag!"After" after = No.After)
+  ulong connectRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RemovedCallbackDlg) || is(T == RemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto volume = getVal!Volume(_paramVals);
-      _dgClosure.dlg(volume);
+      _dClosure.dlg(volume);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("removed", closure, after);
   }
 }

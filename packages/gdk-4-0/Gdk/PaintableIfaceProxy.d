@@ -7,10 +7,6 @@ import Gdk.PaintableT;
 /// Proxy object for Gdk.Paintable interface when a GObject has no applicable D binding
 class PaintableIfaceProxy : IfaceProxy, Paintable
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

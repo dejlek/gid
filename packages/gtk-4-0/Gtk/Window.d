@@ -634,7 +634,7 @@ class Window : Widget, Native, Root, ShortcutManager
   /**
    * Sets or unsets the `GtkApplication` associated with the window.
    * The application will be kept alive for at least as long as it has
-   * any windows associated with it $(LPAREN)see [Gio.DGioApplication.hold] for a way
+   * any windows associated with it $(LPAREN)see [Gio.ApplicationGio.hold] for a way
    * to keep it alive without windows$(RPAREN).
    * Normally, the connection between the application and the window will
    * remain until the window is destroyed, but you can explicitly remove
@@ -1002,26 +1002,28 @@ class Window : Widget, Native, Root, ShortcutManager
    * This is a [keybinding signal](class.SignalAction.html).
    *   window = the instance the signal is connected to
    */
-  alias ActivateDefaultCallback = void delegate(Window window);
+  alias ActivateDefaultCallbackDlg = void delegate(Window window);
+  alias ActivateDefaultCallbackFunc = void function(Window window);
 
   /**
    * Connect to ActivateDefault signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivateDefault(ActivateDefaultCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateDefaultCallbackDlg) || is(T == ActivateDefaultCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto window = getVal!Window(_paramVals);
-      _dgClosure.dlg(window);
+      _dClosure.dlg(window);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-default", closure, after);
   }
 
@@ -1031,26 +1033,28 @@ class Window : Widget, Native, Root, ShortcutManager
    * This is a [keybinding signal](class.SignalAction.html).
    *   window = the instance the signal is connected to
    */
-  alias ActivateFocusCallback = void delegate(Window window);
+  alias ActivateFocusCallbackDlg = void delegate(Window window);
+  alias ActivateFocusCallbackFunc = void function(Window window);
 
   /**
    * Connect to ActivateFocus signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivateFocus(ActivateFocusCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivateFocus(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateFocusCallbackDlg) || is(T == ActivateFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto window = getVal!Window(_paramVals);
-      _dgClosure.dlg(window);
+      _dClosure.dlg(window);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-focus", closure, after);
   }
 
@@ -1059,28 +1063,30 @@ class Window : Widget, Native, Root, ShortcutManager
    *   window = the instance the signal is connected to
    * Returns: %TRUE to stop other handlers from being invoked for the signal
    */
-  alias CloseRequestCallback = bool delegate(Window window);
+  alias CloseRequestCallbackDlg = bool delegate(Window window);
+  alias CloseRequestCallbackFunc = bool function(Window window);
 
   /**
    * Connect to CloseRequest signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCloseRequest(CloseRequestCallback dlg, Flag!"After" after = No.After)
+  ulong connectCloseRequest(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CloseRequestCallbackDlg) || is(T == CloseRequestCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto window = getVal!Window(_paramVals);
-      _retval = _dgClosure.dlg(window);
+      _retval = _dClosure.dlg(window);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("close-request", closure, after);
   }
 
@@ -1097,29 +1103,31 @@ class Window : Widget, Native, Root, ShortcutManager
    *   window = the instance the signal is connected to
    * Returns: %TRUE if the key binding was handled
    */
-  alias EnableDebuggingCallback = bool delegate(bool toggle, Window window);
+  alias EnableDebuggingCallbackDlg = bool delegate(bool toggle, Window window);
+  alias EnableDebuggingCallbackFunc = bool function(bool toggle, Window window);
 
   /**
    * Connect to EnableDebugging signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEnableDebugging(EnableDebuggingCallback dlg, Flag!"After" after = No.After)
+  ulong connectEnableDebugging(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EnableDebuggingCallbackDlg) || is(T == EnableDebuggingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto window = getVal!Window(_paramVals);
       auto toggle = getVal!bool(&_paramVals[1]);
-      _retval = _dgClosure.dlg(toggle, window);
+      _retval = _dClosure.dlg(toggle, window);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("enable-debugging", closure, after);
   }
 
@@ -1131,26 +1139,28 @@ class Window : Widget, Native, Root, ShortcutManager
    * Deprecated: Use [Gtk.Shortcut] and [Gtk.EventController]
    *   to implement keyboard shortcuts
    */
-  alias KeysChangedCallback = void delegate(Window window);
+  alias KeysChangedCallbackDlg = void delegate(Window window);
+  alias KeysChangedCallbackFunc = void function(Window window);
 
   /**
    * Connect to KeysChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectKeysChanged(KeysChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == KeysChangedCallbackDlg) || is(T == KeysChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto window = getVal!Window(_paramVals);
-      _dgClosure.dlg(window);
+      _dClosure.dlg(window);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("keys-changed", closure, after);
   }
 }

@@ -23,10 +23,6 @@ import Pango.c.types;
 class FontMap : ObjectG, ListModel
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -7,10 +7,6 @@ import Gtk.AccessibleTextT;
 /// Proxy object for Gtk.AccessibleText interface when a GObject has no applicable D binding
 class AccessibleTextIfaceProxy : IfaceProxy, AccessibleText
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

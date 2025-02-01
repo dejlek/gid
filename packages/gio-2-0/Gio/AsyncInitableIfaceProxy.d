@@ -7,10 +7,6 @@ import Gio.AsyncInitableT;
 /// Proxy object for Gio.AsyncInitable interface when a GObject has no applicable D binding
 class AsyncInitableIfaceProxy : IfaceProxy, AsyncInitable
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

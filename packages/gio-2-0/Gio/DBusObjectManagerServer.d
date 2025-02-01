@@ -33,10 +33,6 @@ import Gio.c.types;
 class DBusObjectManagerServer : ObjectG, DBusObjectManager
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

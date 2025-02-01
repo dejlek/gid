@@ -128,10 +128,6 @@ import Gio.Types;
 class Pixbuf : ObjectG, Icon, LoadableIcon
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

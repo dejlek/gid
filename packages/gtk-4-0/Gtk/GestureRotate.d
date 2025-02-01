@@ -63,28 +63,30 @@ class GestureRotate : Gesture
    *   angleDelta = Difference with the starting angle, in radians
    *   gestureRotate = the instance the signal is connected to
    */
-  alias AngleChangedCallback = void delegate(double angle, double angleDelta, GestureRotate gestureRotate);
+  alias AngleChangedCallbackDlg = void delegate(double angle, double angleDelta, GestureRotate gestureRotate);
+  alias AngleChangedCallbackFunc = void function(double angle, double angleDelta, GestureRotate gestureRotate);
 
   /**
    * Connect to AngleChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectAngleChanged(AngleChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectAngleChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == AngleChangedCallbackDlg) || is(T == AngleChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureRotate = getVal!GestureRotate(_paramVals);
       auto angle = getVal!double(&_paramVals[1]);
       auto angleDelta = getVal!double(&_paramVals[2]);
-      _dgClosure.dlg(angle, angleDelta, gestureRotate);
+      _dClosure.dlg(angle, angleDelta, gestureRotate);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("angle-changed", closure, after);
   }
 }

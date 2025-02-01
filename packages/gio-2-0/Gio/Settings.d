@@ -262,10 +262,6 @@ import Gio.c.types;
 class Settings : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -1327,32 +1323,34 @@ class Settings : ObjectG
    * Returns: %TRUE to stop other handlers from being invoked for the
    *   event. FALSE to propagate the event further.
    */
-  alias ChangeEventCallback = bool delegate(Quark[] keys, Settings settings);
+  alias ChangeEventCallbackDlg = bool delegate(Quark[] keys, Settings settings);
+  alias ChangeEventCallbackFunc = bool function(Quark[] keys, Settings settings);
 
   /**
    * Connect to ChangeEvent signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChangeEvent(ChangeEventCallback dlg, Flag!"After" after = No.After)
+  ulong connectChangeEvent(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangeEventCallbackDlg) || is(T == ChangeEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto settings = getVal!Settings(_paramVals);
       auto keys = getVal!(uint**)(&_paramVals[1]);
       Quark[] _keys;
       auto nKeys = getVal!int(&_paramVals[2]);
       _keys = cast(Quark[])keys[0 .. nKeys];
-      _retval = _dgClosure.dlg(_keys, settings);
+      _retval = _dClosure.dlg(_keys, settings);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("change-event", closure, after);
   }
 
@@ -1369,28 +1367,30 @@ class Settings : ObjectG
    *   key = the name of the key that changed
    *   settings = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(string key, Settings settings);
+  alias ChangedCallbackDlg = void delegate(string key, Settings settings);
+  alias ChangedCallbackFunc = void function(string key, Settings settings);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, string detail = null, Flag!"After" after = No.After)
+  ulong connectChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto settings = getVal!Settings(_paramVals);
       auto key = getVal!string(&_paramVals[1]);
-      _dgClosure.dlg(key, settings);
+      _dClosure.dlg(key, settings);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
   }
 
@@ -1417,29 +1417,31 @@ class Settings : ObjectG
    * Returns: %TRUE to stop other handlers from being invoked for the
    *   event. FALSE to propagate the event further.
    */
-  alias WritableChangeEventCallback = bool delegate(uint key, Settings settings);
+  alias WritableChangeEventCallbackDlg = bool delegate(uint key, Settings settings);
+  alias WritableChangeEventCallbackFunc = bool function(uint key, Settings settings);
 
   /**
    * Connect to WritableChangeEvent signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectWritableChangeEvent(WritableChangeEventCallback dlg, Flag!"After" after = No.After)
+  ulong connectWritableChangeEvent(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == WritableChangeEventCallbackDlg) || is(T == WritableChangeEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto settings = getVal!Settings(_paramVals);
       auto key = getVal!uint(&_paramVals[1]);
-      _retval = _dgClosure.dlg(key, settings);
+      _retval = _dClosure.dlg(key, settings);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("writable-change-event", closure, after);
   }
 
@@ -1454,28 +1456,30 @@ class Settings : ObjectG
    *   key = the key
    *   settings = the instance the signal is connected to
    */
-  alias WritableChangedCallback = void delegate(string key, Settings settings);
+  alias WritableChangedCallbackDlg = void delegate(string key, Settings settings);
+  alias WritableChangedCallbackFunc = void function(string key, Settings settings);
 
   /**
    * Connect to WritableChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectWritableChanged(WritableChangedCallback dlg, string detail = null, Flag!"After" after = No.After)
+  ulong connectWritableChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == WritableChangedCallbackDlg) || is(T == WritableChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto settings = getVal!Settings(_paramVals);
       auto key = getVal!string(&_paramVals[1]);
-      _dgClosure.dlg(key, settings);
+      _dClosure.dlg(key, settings);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("writable-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
   }
 }

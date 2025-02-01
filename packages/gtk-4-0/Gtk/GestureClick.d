@@ -54,29 +54,31 @@ class GestureClick : GestureSingle
    *   y = The Y coordinate, in widget allocation coordinates
    *   gestureClick = the instance the signal is connected to
    */
-  alias PressedCallback = void delegate(int nPress, double x, double y, GestureClick gestureClick);
+  alias PressedCallbackDlg = void delegate(int nPress, double x, double y, GestureClick gestureClick);
+  alias PressedCallbackFunc = void function(int nPress, double x, double y, GestureClick gestureClick);
 
   /**
    * Connect to Pressed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPressed(PressedCallback dlg, Flag!"After" after = No.After)
+  ulong connectPressed(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PressedCallbackDlg) || is(T == PressedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureClick = getVal!GestureClick(_paramVals);
       auto nPress = getVal!int(&_paramVals[1]);
       auto x = getVal!double(&_paramVals[2]);
       auto y = getVal!double(&_paramVals[3]);
-      _dgClosure.dlg(nPress, x, y, gestureClick);
+      _dClosure.dlg(nPress, x, y, gestureClick);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pressed", closure, after);
   }
 
@@ -92,29 +94,31 @@ class GestureClick : GestureSingle
    *   y = The Y coordinate, in widget allocation coordinates
    *   gestureClick = the instance the signal is connected to
    */
-  alias ReleasedCallback = void delegate(int nPress, double x, double y, GestureClick gestureClick);
+  alias ReleasedCallbackDlg = void delegate(int nPress, double x, double y, GestureClick gestureClick);
+  alias ReleasedCallbackFunc = void function(int nPress, double x, double y, GestureClick gestureClick);
 
   /**
    * Connect to Released signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectReleased(ReleasedCallback dlg, Flag!"After" after = No.After)
+  ulong connectReleased(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ReleasedCallbackDlg) || is(T == ReleasedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureClick = getVal!GestureClick(_paramVals);
       auto nPress = getVal!int(&_paramVals[1]);
       auto x = getVal!double(&_paramVals[2]);
       auto y = getVal!double(&_paramVals[3]);
-      _dgClosure.dlg(nPress, x, y, gestureClick);
+      _dClosure.dlg(nPress, x, y, gestureClick);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("released", closure, after);
   }
 
@@ -122,26 +126,28 @@ class GestureClick : GestureSingle
    * Emitted whenever any time/distance threshold has been exceeded.
    *   gestureClick = the instance the signal is connected to
    */
-  alias StoppedCallback = void delegate(GestureClick gestureClick);
+  alias StoppedCallbackDlg = void delegate(GestureClick gestureClick);
+  alias StoppedCallbackFunc = void function(GestureClick gestureClick);
 
   /**
    * Connect to Stopped signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectStopped(StoppedCallback dlg, Flag!"After" after = No.After)
+  ulong connectStopped(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == StoppedCallbackDlg) || is(T == StoppedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureClick = getVal!GestureClick(_paramVals);
-      _dgClosure.dlg(gestureClick);
+      _dClosure.dlg(gestureClick);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("stopped", closure, after);
   }
 
@@ -158,30 +164,32 @@ class GestureClick : GestureSingle
    *   sequence = Sequence being released
    *   gestureClick = the instance the signal is connected to
    */
-  alias UnpairedReleaseCallback = void delegate(double x, double y, uint button, EventSequence sequence, GestureClick gestureClick);
+  alias UnpairedReleaseCallbackDlg = void delegate(double x, double y, uint button, EventSequence sequence, GestureClick gestureClick);
+  alias UnpairedReleaseCallbackFunc = void function(double x, double y, uint button, EventSequence sequence, GestureClick gestureClick);
 
   /**
    * Connect to UnpairedRelease signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUnpairedRelease(UnpairedReleaseCallback dlg, Flag!"After" after = No.After)
+  ulong connectUnpairedRelease(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UnpairedReleaseCallbackDlg) || is(T == UnpairedReleaseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureClick = getVal!GestureClick(_paramVals);
       auto x = getVal!double(&_paramVals[1]);
       auto y = getVal!double(&_paramVals[2]);
       auto button = getVal!uint(&_paramVals[3]);
       auto sequence = getVal!EventSequence(&_paramVals[4]);
-      _dgClosure.dlg(x, y, button, sequence, gestureClick);
+      _dClosure.dlg(x, y, button, sequence, gestureClick);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unpaired-release", closure, after);
   }
 }

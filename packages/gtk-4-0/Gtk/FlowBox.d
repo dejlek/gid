@@ -567,26 +567,28 @@ class FlowBox : Widget, Orientable
    * This is a [keybinding signal](class.SignalAction.html).
    *   flowBox = the instance the signal is connected to
    */
-  alias ActivateCursorChildCallback = void delegate(FlowBox flowBox);
+  alias ActivateCursorChildCallbackDlg = void delegate(FlowBox flowBox);
+  alias ActivateCursorChildCallbackFunc = void function(FlowBox flowBox);
 
   /**
    * Connect to ActivateCursorChild signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectActivateCursorChild(ActivateCursorChildCallback dlg, Flag!"After" after = No.After)
+  ulong connectActivateCursorChild(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ActivateCursorChildCallbackDlg) || is(T == ActivateCursorChildCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto flowBox = getVal!FlowBox(_paramVals);
-      _dgClosure.dlg(flowBox);
+      _dClosure.dlg(flowBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-cursor-child", closure, after);
   }
 
@@ -596,27 +598,29 @@ class FlowBox : Widget, Orientable
    *   child = the child that is activated
    *   flowBox = the instance the signal is connected to
    */
-  alias ChildActivatedCallback = void delegate(FlowBoxChild child, FlowBox flowBox);
+  alias ChildActivatedCallbackDlg = void delegate(FlowBoxChild child, FlowBox flowBox);
+  alias ChildActivatedCallbackFunc = void function(FlowBoxChild child, FlowBox flowBox);
 
   /**
    * Connect to ChildActivated signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChildActivated(ChildActivatedCallback dlg, Flag!"After" after = No.After)
+  ulong connectChildActivated(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChildActivatedCallbackDlg) || is(T == ChildActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto flowBox = getVal!FlowBox(_paramVals);
       auto child = getVal!FlowBoxChild(&_paramVals[1]);
-      _dgClosure.dlg(child, flowBox);
+      _dClosure.dlg(child, flowBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("child-activated", closure, after);
   }
 
@@ -643,32 +647,34 @@ class FlowBox : Widget, Orientable
    * Returns: %TRUE to stop other handlers from being invoked for the event.
    *   %FALSE to propagate the event further.
    */
-  alias MoveCursorCallback = bool delegate(MovementStep step, int count, bool extend, bool modify, FlowBox flowBox);
+  alias MoveCursorCallbackDlg = bool delegate(MovementStep step, int count, bool extend, bool modify, FlowBox flowBox);
+  alias MoveCursorCallbackFunc = bool function(MovementStep step, int count, bool extend, bool modify, FlowBox flowBox);
 
   /**
    * Connect to MoveCursor signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveCursor(MoveCursorCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto flowBox = getVal!FlowBox(_paramVals);
       auto step = getVal!MovementStep(&_paramVals[1]);
       auto count = getVal!int(&_paramVals[2]);
       auto extend = getVal!bool(&_paramVals[3]);
       auto modify = getVal!bool(&_paramVals[4]);
-      _retval = _dgClosure.dlg(step, count, extend, modify, flowBox);
+      _retval = _dClosure.dlg(step, count, extend, modify, flowBox);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-cursor", closure, after);
   }
 
@@ -679,26 +685,28 @@ class FlowBox : Widget, Orientable
    * The default bindings for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
    *   flowBox = the instance the signal is connected to
    */
-  alias SelectAllCallback = void delegate(FlowBox flowBox);
+  alias SelectAllCallbackDlg = void delegate(FlowBox flowBox);
+  alias SelectAllCallbackFunc = void function(FlowBox flowBox);
 
   /**
    * Connect to SelectAll signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectAll(SelectAllCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectAllCallbackDlg) || is(T == SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto flowBox = getVal!FlowBox(_paramVals);
-      _dgClosure.dlg(flowBox);
+      _dClosure.dlg(flowBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("select-all", closure, after);
   }
 
@@ -709,26 +717,28 @@ class FlowBox : Widget, Orientable
    * selected children.
    *   flowBox = the instance the signal is connected to
    */
-  alias SelectedChildrenChangedCallback = void delegate(FlowBox flowBox);
+  alias SelectedChildrenChangedCallbackDlg = void delegate(FlowBox flowBox);
+  alias SelectedChildrenChangedCallbackFunc = void function(FlowBox flowBox);
 
   /**
    * Connect to SelectedChildrenChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectedChildrenChanged(SelectedChildrenChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectedChildrenChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectedChildrenChangedCallbackDlg) || is(T == SelectedChildrenChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto flowBox = getVal!FlowBox(_paramVals);
-      _dgClosure.dlg(flowBox);
+      _dClosure.dlg(flowBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("selected-children-changed", closure, after);
   }
 
@@ -738,26 +748,28 @@ class FlowBox : Widget, Orientable
    * The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>Space</kbd>.
    *   flowBox = the instance the signal is connected to
    */
-  alias ToggleCursorChildCallback = void delegate(FlowBox flowBox);
+  alias ToggleCursorChildCallbackDlg = void delegate(FlowBox flowBox);
+  alias ToggleCursorChildCallbackFunc = void function(FlowBox flowBox);
 
   /**
    * Connect to ToggleCursorChild signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectToggleCursorChild(ToggleCursorChildCallback dlg, Flag!"After" after = No.After)
+  ulong connectToggleCursorChild(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ToggleCursorChildCallbackDlg) || is(T == ToggleCursorChildCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto flowBox = getVal!FlowBox(_paramVals);
-      _dgClosure.dlg(flowBox);
+      _dClosure.dlg(flowBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-cursor-child", closure, after);
   }
 
@@ -768,26 +780,28 @@ class FlowBox : Widget, Orientable
    * The default bindings for this signal is <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
    *   flowBox = the instance the signal is connected to
    */
-  alias UnselectAllCallback = void delegate(FlowBox flowBox);
+  alias UnselectAllCallbackDlg = void delegate(FlowBox flowBox);
+  alias UnselectAllCallbackFunc = void function(FlowBox flowBox);
 
   /**
    * Connect to UnselectAll signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUnselectAll(UnselectAllCallback dlg, Flag!"After" after = No.After)
+  ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UnselectAllCallbackDlg) || is(T == UnselectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto flowBox = getVal!FlowBox(_paramVals);
-      _dgClosure.dlg(flowBox);
+      _dClosure.dlg(flowBox);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
   }
 }

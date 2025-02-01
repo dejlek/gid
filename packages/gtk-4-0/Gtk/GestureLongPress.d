@@ -77,26 +77,28 @@ class GestureLongPress : GestureSingle
    * before [Gtk.GestureLongPress.pressed] happened.
    *   gestureLongPress = the instance the signal is connected to
    */
-  alias CancelledCallback = void delegate(GestureLongPress gestureLongPress);
+  alias CancelledCallbackDlg = void delegate(GestureLongPress gestureLongPress);
+  alias CancelledCallbackFunc = void function(GestureLongPress gestureLongPress);
 
   /**
    * Connect to Cancelled signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCancelled(CancelledCallback dlg, Flag!"After" after = No.After)
+  ulong connectCancelled(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CancelledCallbackDlg) || is(T == CancelledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureLongPress = getVal!GestureLongPress(_paramVals);
-      _dgClosure.dlg(gestureLongPress);
+      _dClosure.dlg(gestureLongPress);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cancelled", closure, after);
   }
 
@@ -108,28 +110,30 @@ class GestureLongPress : GestureSingle
    *   y = the Y coordinate where the press happened, relative to the widget allocation
    *   gestureLongPress = the instance the signal is connected to
    */
-  alias PressedCallback = void delegate(double x, double y, GestureLongPress gestureLongPress);
+  alias PressedCallbackDlg = void delegate(double x, double y, GestureLongPress gestureLongPress);
+  alias PressedCallbackFunc = void function(double x, double y, GestureLongPress gestureLongPress);
 
   /**
    * Connect to Pressed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPressed(PressedCallback dlg, Flag!"After" after = No.After)
+  ulong connectPressed(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PressedCallbackDlg) || is(T == PressedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto gestureLongPress = getVal!GestureLongPress(_paramVals);
       auto x = getVal!double(&_paramVals[1]);
       auto y = getVal!double(&_paramVals[2]);
-      _dgClosure.dlg(x, y, gestureLongPress);
+      _dClosure.dlg(x, y, gestureLongPress);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pressed", closure, after);
   }
 }

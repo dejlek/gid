@@ -196,26 +196,28 @@ class ToggleButton : Button
    * Emitted whenever the `GtkToggleButton`'s state is changed.
    *   toggleButton = the instance the signal is connected to
    */
-  alias ToggledCallback = void delegate(ToggleButton toggleButton);
+  alias ToggledCallbackDlg = void delegate(ToggleButton toggleButton);
+  alias ToggledCallbackFunc = void function(ToggleButton toggleButton);
 
   /**
    * Connect to Toggled signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectToggled(ToggledCallback dlg, Flag!"After" after = No.After)
+  ulong connectToggled(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ToggledCallbackDlg) || is(T == ToggledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto toggleButton = getVal!ToggleButton(_paramVals);
-      _dgClosure.dlg(toggleButton);
+      _dClosure.dlg(toggleButton);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
   }
 }

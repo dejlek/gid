@@ -28,10 +28,6 @@ import Gtk.c.types;
 class TextBuffer : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -1176,29 +1172,31 @@ class TextBuffer : ObjectG
    *   end = the end of the range the tag is applied to
    *   textBuffer = the instance the signal is connected to
    */
-  alias ApplyTagCallback = void delegate(TextTag tag, TextIter start, TextIter end, TextBuffer textBuffer);
+  alias ApplyTagCallbackDlg = void delegate(TextTag tag, TextIter start, TextIter end, TextBuffer textBuffer);
+  alias ApplyTagCallbackFunc = void function(TextTag tag, TextIter start, TextIter end, TextBuffer textBuffer);
 
   /**
    * Connect to ApplyTag signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectApplyTag(ApplyTagCallback dlg, Flag!"After" after = No.After)
+  ulong connectApplyTag(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ApplyTagCallbackDlg) || is(T == ApplyTagCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
       auto tag = getVal!TextTag(&_paramVals[1]);
       auto start = getVal!TextIter(&_paramVals[2]);
       auto end = getVal!TextIter(&_paramVals[3]);
-      _dgClosure.dlg(tag, start, end, textBuffer);
+      _dClosure.dlg(tag, start, end, textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("apply-tag", closure, after);
   }
 
@@ -1214,26 +1212,28 @@ class TextBuffer : ObjectG
    * [Gtk.TextBuffer.deleteSelection].
    *   textBuffer = the instance the signal is connected to
    */
-  alias BeginUserActionCallback = void delegate(TextBuffer textBuffer);
+  alias BeginUserActionCallbackDlg = void delegate(TextBuffer textBuffer);
+  alias BeginUserActionCallbackFunc = void function(TextBuffer textBuffer);
 
   /**
    * Connect to BeginUserAction signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectBeginUserAction(BeginUserActionCallback dlg, Flag!"After" after = No.After)
+  ulong connectBeginUserAction(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == BeginUserActionCallbackDlg) || is(T == BeginUserActionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
-      _dgClosure.dlg(textBuffer);
+      _dClosure.dlg(textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("begin-user-action", closure, after);
   }
 
@@ -1241,26 +1241,28 @@ class TextBuffer : ObjectG
    * Emitted when the content of a `GtkTextBuffer` has changed.
    *   textBuffer = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(TextBuffer textBuffer);
+  alias ChangedCallbackDlg = void delegate(TextBuffer textBuffer);
+  alias ChangedCallbackFunc = void function(TextBuffer textBuffer);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
-      _dgClosure.dlg(textBuffer);
+      _dClosure.dlg(textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
   }
 
@@ -1279,28 +1281,30 @@ class TextBuffer : ObjectG
    *   end = the end of the range to be deleted
    *   textBuffer = the instance the signal is connected to
    */
-  alias DeleteRangeCallback = void delegate(TextIter start, TextIter end, TextBuffer textBuffer);
+  alias DeleteRangeCallbackDlg = void delegate(TextIter start, TextIter end, TextBuffer textBuffer);
+  alias DeleteRangeCallbackFunc = void function(TextIter start, TextIter end, TextBuffer textBuffer);
 
   /**
    * Connect to DeleteRange signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDeleteRange(DeleteRangeCallback dlg, Flag!"After" after = No.After)
+  ulong connectDeleteRange(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DeleteRangeCallbackDlg) || is(T == DeleteRangeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
       auto start = getVal!TextIter(&_paramVals[1]);
       auto end = getVal!TextIter(&_paramVals[2]);
-      _dgClosure.dlg(start, end, textBuffer);
+      _dClosure.dlg(start, end, textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("delete-range", closure, after);
   }
 
@@ -1317,26 +1321,28 @@ class TextBuffer : ObjectG
    * [Gtk.TextBuffer.backspace].
    *   textBuffer = the instance the signal is connected to
    */
-  alias EndUserActionCallback = void delegate(TextBuffer textBuffer);
+  alias EndUserActionCallbackDlg = void delegate(TextBuffer textBuffer);
+  alias EndUserActionCallbackFunc = void function(TextBuffer textBuffer);
 
   /**
    * Connect to EndUserAction signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEndUserAction(EndUserActionCallback dlg, Flag!"After" after = No.After)
+  ulong connectEndUserAction(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EndUserActionCallbackDlg) || is(T == EndUserActionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
-      _dgClosure.dlg(textBuffer);
+      _dClosure.dlg(textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("end-user-action", closure, after);
   }
 
@@ -1353,28 +1359,30 @@ class TextBuffer : ObjectG
    *   anchor = the `GtkTextChildAnchor` to be inserted
    *   textBuffer = the instance the signal is connected to
    */
-  alias InsertChildAnchorCallback = void delegate(TextIter location, TextChildAnchor anchor, TextBuffer textBuffer);
+  alias InsertChildAnchorCallbackDlg = void delegate(TextIter location, TextChildAnchor anchor, TextBuffer textBuffer);
+  alias InsertChildAnchorCallbackFunc = void function(TextIter location, TextChildAnchor anchor, TextBuffer textBuffer);
 
   /**
    * Connect to InsertChildAnchor signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInsertChildAnchor(InsertChildAnchorCallback dlg, Flag!"After" after = No.After)
+  ulong connectInsertChildAnchor(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InsertChildAnchorCallbackDlg) || is(T == InsertChildAnchorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
       auto location = getVal!TextIter(&_paramVals[1]);
       auto anchor = getVal!TextChildAnchor(&_paramVals[2]);
-      _dgClosure.dlg(location, anchor, textBuffer);
+      _dClosure.dlg(location, anchor, textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("insert-child-anchor", closure, after);
   }
 
@@ -1391,28 +1399,30 @@ class TextBuffer : ObjectG
    *   paintable = the `GdkPaintable` to be inserted
    *   textBuffer = the instance the signal is connected to
    */
-  alias InsertPaintableCallback = void delegate(TextIter location, Paintable paintable, TextBuffer textBuffer);
+  alias InsertPaintableCallbackDlg = void delegate(TextIter location, Paintable paintable, TextBuffer textBuffer);
+  alias InsertPaintableCallbackFunc = void function(TextIter location, Paintable paintable, TextBuffer textBuffer);
 
   /**
    * Connect to InsertPaintable signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInsertPaintable(InsertPaintableCallback dlg, Flag!"After" after = No.After)
+  ulong connectInsertPaintable(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InsertPaintableCallbackDlg) || is(T == InsertPaintableCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
       auto location = getVal!TextIter(&_paramVals[1]);
       auto paintable = getVal!Paintable(&_paramVals[2]);
-      _dgClosure.dlg(location, paintable, textBuffer);
+      _dClosure.dlg(location, paintable, textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("insert-paintable", closure, after);
   }
 
@@ -1431,29 +1441,31 @@ class TextBuffer : ObjectG
    *   len = length of the inserted text in bytes
    *   textBuffer = the instance the signal is connected to
    */
-  alias InsertTextCallback = void delegate(TextIter location, string text, int len, TextBuffer textBuffer);
+  alias InsertTextCallbackDlg = void delegate(TextIter location, string text, int len, TextBuffer textBuffer);
+  alias InsertTextCallbackFunc = void function(TextIter location, string text, int len, TextBuffer textBuffer);
 
   /**
    * Connect to InsertText signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectInsertText(InsertTextCallback dlg, Flag!"After" after = No.After)
+  ulong connectInsertText(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == InsertTextCallbackDlg) || is(T == InsertTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
       auto location = getVal!TextIter(&_paramVals[1]);
       auto text = getVal!string(&_paramVals[2]);
       auto len = getVal!int(&_paramVals[3]);
-      _dgClosure.dlg(location, text, len, textBuffer);
+      _dClosure.dlg(location, text, len, textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("insert-text", closure, after);
   }
 
@@ -1464,27 +1476,29 @@ class TextBuffer : ObjectG
    *   mark = The mark that was deleted
    *   textBuffer = the instance the signal is connected to
    */
-  alias MarkDeletedCallback = void delegate(TextMark mark, TextBuffer textBuffer);
+  alias MarkDeletedCallbackDlg = void delegate(TextMark mark, TextBuffer textBuffer);
+  alias MarkDeletedCallbackFunc = void function(TextMark mark, TextBuffer textBuffer);
 
   /**
    * Connect to MarkDeleted signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMarkDeleted(MarkDeletedCallback dlg, Flag!"After" after = No.After)
+  ulong connectMarkDeleted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MarkDeletedCallbackDlg) || is(T == MarkDeletedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
       auto mark = getVal!TextMark(&_paramVals[1]);
-      _dgClosure.dlg(mark, textBuffer);
+      _dClosure.dlg(mark, textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("mark-deleted", closure, after);
   }
 
@@ -1498,28 +1512,30 @@ class TextBuffer : ObjectG
    *   mark = The mark that is set
    *   textBuffer = the instance the signal is connected to
    */
-  alias MarkSetCallback = void delegate(TextIter location, TextMark mark, TextBuffer textBuffer);
+  alias MarkSetCallbackDlg = void delegate(TextIter location, TextMark mark, TextBuffer textBuffer);
+  alias MarkSetCallbackFunc = void function(TextIter location, TextMark mark, TextBuffer textBuffer);
 
   /**
    * Connect to MarkSet signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMarkSet(MarkSetCallback dlg, Flag!"After" after = No.After)
+  ulong connectMarkSet(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MarkSetCallbackDlg) || is(T == MarkSetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
       auto location = getVal!TextIter(&_paramVals[1]);
       auto mark = getVal!TextMark(&_paramVals[2]);
-      _dgClosure.dlg(location, mark, textBuffer);
+      _dClosure.dlg(location, mark, textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("mark-set", closure, after);
   }
 
@@ -1528,26 +1544,28 @@ class TextBuffer : ObjectG
    * See also: [Gtk.TextBuffer.setModified].
    *   textBuffer = the instance the signal is connected to
    */
-  alias ModifiedChangedCallback = void delegate(TextBuffer textBuffer);
+  alias ModifiedChangedCallbackDlg = void delegate(TextBuffer textBuffer);
+  alias ModifiedChangedCallbackFunc = void function(TextBuffer textBuffer);
 
   /**
    * Connect to ModifiedChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectModifiedChanged(ModifiedChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectModifiedChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ModifiedChangedCallbackDlg) || is(T == ModifiedChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
-      _dgClosure.dlg(textBuffer);
+      _dClosure.dlg(textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("modified-changed", closure, after);
   }
 
@@ -1560,27 +1578,29 @@ class TextBuffer : ObjectG
    *   clipboard = the `GdkClipboard` pasted from
    *   textBuffer = the instance the signal is connected to
    */
-  alias PasteDoneCallback = void delegate(Clipboard clipboard, TextBuffer textBuffer);
+  alias PasteDoneCallbackDlg = void delegate(Clipboard clipboard, TextBuffer textBuffer);
+  alias PasteDoneCallbackFunc = void function(Clipboard clipboard, TextBuffer textBuffer);
 
   /**
    * Connect to PasteDone signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPasteDone(PasteDoneCallback dlg, Flag!"After" after = No.After)
+  ulong connectPasteDone(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PasteDoneCallbackDlg) || is(T == PasteDoneCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
       auto clipboard = getVal!Clipboard(&_paramVals[1]);
-      _dgClosure.dlg(clipboard, textBuffer);
+      _dClosure.dlg(clipboard, textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("paste-done", closure, after);
   }
 
@@ -1589,26 +1609,28 @@ class TextBuffer : ObjectG
    * previously undone operation.
    *   textBuffer = the instance the signal is connected to
    */
-  alias RedoCallback = void delegate(TextBuffer textBuffer);
+  alias RedoCallbackDlg = void delegate(TextBuffer textBuffer);
+  alias RedoCallbackFunc = void function(TextBuffer textBuffer);
 
   /**
    * Connect to Redo signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRedo(RedoCallback dlg, Flag!"After" after = No.After)
+  ulong connectRedo(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RedoCallbackDlg) || is(T == RedoCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
-      _dgClosure.dlg(textBuffer);
+      _dClosure.dlg(textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("redo", closure, after);
   }
 
@@ -1626,29 +1648,31 @@ class TextBuffer : ObjectG
    *   end = the end of the range the tag is removed from
    *   textBuffer = the instance the signal is connected to
    */
-  alias RemoveTagCallback = void delegate(TextTag tag, TextIter start, TextIter end, TextBuffer textBuffer);
+  alias RemoveTagCallbackDlg = void delegate(TextTag tag, TextIter start, TextIter end, TextBuffer textBuffer);
+  alias RemoveTagCallbackFunc = void function(TextTag tag, TextIter start, TextIter end, TextBuffer textBuffer);
 
   /**
    * Connect to RemoveTag signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRemoveTag(RemoveTagCallback dlg, Flag!"After" after = No.After)
+  ulong connectRemoveTag(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RemoveTagCallbackDlg) || is(T == RemoveTagCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
       auto tag = getVal!TextTag(&_paramVals[1]);
       auto start = getVal!TextIter(&_paramVals[2]);
       auto end = getVal!TextIter(&_paramVals[3]);
-      _dgClosure.dlg(tag, start, end, textBuffer);
+      _dClosure.dlg(tag, start, end, textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("remove-tag", closure, after);
   }
 
@@ -1658,26 +1682,28 @@ class TextBuffer : ObjectG
    * been grouped together.
    *   textBuffer = the instance the signal is connected to
    */
-  alias UndoCallback = void delegate(TextBuffer textBuffer);
+  alias UndoCallbackDlg = void delegate(TextBuffer textBuffer);
+  alias UndoCallbackFunc = void function(TextBuffer textBuffer);
 
   /**
    * Connect to Undo signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUndo(UndoCallback dlg, Flag!"After" after = No.After)
+  ulong connectUndo(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UndoCallbackDlg) || is(T == UndoCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto textBuffer = getVal!TextBuffer(_paramVals);
-      _dgClosure.dlg(textBuffer);
+      _dClosure.dlg(textBuffer);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("undo", closure, after);
   }
 }

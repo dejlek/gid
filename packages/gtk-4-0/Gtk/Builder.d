@@ -371,14 +371,17 @@ class Builder : ObjectG
    * from untrusted sources.
    * Params:
    *   string_ = a user interface $(LPAREN)XML$(RPAREN) description
-   *   length = the length of string, or -1
    * Returns: a `GtkBuilder` containing the interface described by string
    */
-  static Builder newFromString(string string_, ptrdiff_t length)
+  static Builder newFromString(string string_)
   {
     GtkBuilder* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
-    _cretval = gtk_builder_new_from_string(_string_, length);
+    ptrdiff_t _length;
+    if (string_)
+      _length = cast(ptrdiff_t)string_.length;
+
+    auto _string_ = cast(char*)string_.ptr;
+    _cretval = gtk_builder_new_from_string(_string_, _length);
     auto _retval = ObjectG.getDObject!Builder(cast(GtkBuilder*)_cretval, Yes.Take);
     return _retval;
   }

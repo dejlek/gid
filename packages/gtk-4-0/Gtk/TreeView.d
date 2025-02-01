@@ -1645,26 +1645,28 @@ class TreeView : Widget, Scrollable
    * The number of columns of the treeview has changed.
    *   treeView = the instance the signal is connected to
    */
-  alias ColumnsChangedCallback = void delegate(TreeView treeView);
+  alias ColumnsChangedCallbackDlg = void delegate(TreeView treeView);
+  alias ColumnsChangedCallbackFunc = void function(TreeView treeView);
 
   /**
    * Connect to ColumnsChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectColumnsChanged(ColumnsChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectColumnsChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ColumnsChangedCallbackDlg) || is(T == ColumnsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto treeView = getVal!TreeView(_paramVals);
-      _dgClosure.dlg(treeView);
+      _dClosure.dlg(treeView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("columns-changed", closure, after);
   }
 
@@ -1672,54 +1674,58 @@ class TreeView : Widget, Scrollable
    * The position of the cursor $(LPAREN)focused cell$(RPAREN) has changed.
    *   treeView = the instance the signal is connected to
    */
-  alias CursorChangedCallback = void delegate(TreeView treeView);
+  alias CursorChangedCallbackDlg = void delegate(TreeView treeView);
+  alias CursorChangedCallbackFunc = void function(TreeView treeView);
 
   /**
    * Connect to CursorChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCursorChanged(CursorChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectCursorChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CursorChangedCallbackDlg) || is(T == CursorChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto treeView = getVal!TreeView(_paramVals);
-      _dgClosure.dlg(treeView);
+      _dClosure.dlg(treeView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cursor-changed", closure, after);
   }
 
-  alias ExpandCollapseCursorRowCallback = bool delegate(bool object, bool p0, bool p1, TreeView treeView);
+  alias ExpandCollapseCursorRowCallbackDlg = bool delegate(bool object, bool p0, bool p1, TreeView treeView);
+  alias ExpandCollapseCursorRowCallbackFunc = bool function(bool object, bool p0, bool p1, TreeView treeView);
 
   /**
    * Connect to ExpandCollapseCursorRow signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectExpandCollapseCursorRow(ExpandCollapseCursorRowCallback dlg, Flag!"After" after = No.After)
+  ulong connectExpandCollapseCursorRow(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ExpandCollapseCursorRowCallbackDlg) || is(T == ExpandCollapseCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto treeView = getVal!TreeView(_paramVals);
       auto object = getVal!bool(&_paramVals[1]);
       auto p0 = getVal!bool(&_paramVals[2]);
       auto p1 = getVal!bool(&_paramVals[3]);
-      _retval = _dgClosure.dlg(object, p0, p1, treeView);
+      _retval = _dClosure.dlg(object, p0, p1, treeView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("expand-collapse-cursor-row", closure, after);
   }
 
@@ -1746,32 +1752,34 @@ class TreeView : Widget, Scrollable
    *   treeView = the instance the signal is connected to
    * Returns: %TRUE if step is supported, %FALSE otherwise.
    */
-  alias MoveCursorCallback = bool delegate(MovementStep step, int direction, bool extend, bool modify, TreeView treeView);
+  alias MoveCursorCallbackDlg = bool delegate(MovementStep step, int direction, bool extend, bool modify, TreeView treeView);
+  alias MoveCursorCallbackFunc = bool function(MovementStep step, int direction, bool extend, bool modify, TreeView treeView);
 
   /**
    * Connect to MoveCursor signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectMoveCursor(MoveCursorCallback dlg, Flag!"After" after = No.After)
+  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto treeView = getVal!TreeView(_paramVals);
       auto step = getVal!MovementStep(&_paramVals[1]);
       auto direction = getVal!int(&_paramVals[2]);
       auto extend = getVal!bool(&_paramVals[3]);
       auto modify = getVal!bool(&_paramVals[4]);
-      _retval = _dgClosure.dlg(step, direction, extend, modify, treeView);
+      _retval = _dClosure.dlg(step, direction, extend, modify, treeView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move-cursor", closure, after);
   }
 
@@ -1792,28 +1800,30 @@ class TreeView : Widget, Scrollable
    *   column = the `GtkTreeViewColumn` in which the activation occurred
    *   treeView = the instance the signal is connected to
    */
-  alias RowActivatedCallback = void delegate(TreePath path, TreeViewColumn column, TreeView treeView);
+  alias RowActivatedCallbackDlg = void delegate(TreePath path, TreeViewColumn column, TreeView treeView);
+  alias RowActivatedCallbackFunc = void function(TreePath path, TreeViewColumn column, TreeView treeView);
 
   /**
    * Connect to RowActivated signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowActivated(RowActivatedCallback dlg, Flag!"After" after = No.After)
+  ulong connectRowActivated(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowActivatedCallbackDlg) || is(T == RowActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto treeView = getVal!TreeView(_paramVals);
       auto path = getVal!TreePath(&_paramVals[1]);
       auto column = getVal!TreeViewColumn(&_paramVals[2]);
-      _dgClosure.dlg(path, column, treeView);
+      _dClosure.dlg(path, column, treeView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-activated", closure, after);
   }
 
@@ -1824,28 +1834,30 @@ class TreeView : Widget, Scrollable
    *   path = a tree path that points to the row
    *   treeView = the instance the signal is connected to
    */
-  alias RowCollapsedCallback = void delegate(TreeIter iter, TreePath path, TreeView treeView);
+  alias RowCollapsedCallbackDlg = void delegate(TreeIter iter, TreePath path, TreeView treeView);
+  alias RowCollapsedCallbackFunc = void function(TreeIter iter, TreePath path, TreeView treeView);
 
   /**
    * Connect to RowCollapsed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowCollapsed(RowCollapsedCallback dlg, Flag!"After" after = No.After)
+  ulong connectRowCollapsed(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowCollapsedCallbackDlg) || is(T == RowCollapsedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto treeView = getVal!TreeView(_paramVals);
       auto iter = getVal!TreeIter(&_paramVals[1]);
       auto path = getVal!TreePath(&_paramVals[2]);
-      _dgClosure.dlg(iter, path, treeView);
+      _dClosure.dlg(iter, path, treeView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-collapsed", closure, after);
   }
 
@@ -1856,129 +1868,139 @@ class TreeView : Widget, Scrollable
    *   path = a tree path that points to the row
    *   treeView = the instance the signal is connected to
    */
-  alias RowExpandedCallback = void delegate(TreeIter iter, TreePath path, TreeView treeView);
+  alias RowExpandedCallbackDlg = void delegate(TreeIter iter, TreePath path, TreeView treeView);
+  alias RowExpandedCallbackFunc = void function(TreeIter iter, TreePath path, TreeView treeView);
 
   /**
    * Connect to RowExpanded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowExpanded(RowExpandedCallback dlg, Flag!"After" after = No.After)
+  ulong connectRowExpanded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowExpandedCallbackDlg) || is(T == RowExpandedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto treeView = getVal!TreeView(_paramVals);
       auto iter = getVal!TreeIter(&_paramVals[1]);
       auto path = getVal!TreePath(&_paramVals[2]);
-      _dgClosure.dlg(iter, path, treeView);
+      _dClosure.dlg(iter, path, treeView);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-expanded", closure, after);
   }
 
-  alias SelectAllCallback = bool delegate(TreeView treeView);
+  alias SelectAllCallbackDlg = bool delegate(TreeView treeView);
+  alias SelectAllCallbackFunc = bool function(TreeView treeView);
 
   /**
    * Connect to SelectAll signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectAll(SelectAllCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectAllCallbackDlg) || is(T == SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto treeView = getVal!TreeView(_paramVals);
-      _retval = _dgClosure.dlg(treeView);
+      _retval = _dClosure.dlg(treeView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("select-all", closure, after);
   }
 
-  alias SelectCursorParentCallback = bool delegate(TreeView treeView);
+  alias SelectCursorParentCallbackDlg = bool delegate(TreeView treeView);
+  alias SelectCursorParentCallbackFunc = bool function(TreeView treeView);
 
   /**
    * Connect to SelectCursorParent signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectCursorParent(SelectCursorParentCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectCursorParent(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectCursorParentCallbackDlg) || is(T == SelectCursorParentCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto treeView = getVal!TreeView(_paramVals);
-      _retval = _dgClosure.dlg(treeView);
+      _retval = _dClosure.dlg(treeView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("select-cursor-parent", closure, after);
   }
 
-  alias SelectCursorRowCallback = bool delegate(bool object, TreeView treeView);
+  alias SelectCursorRowCallbackDlg = bool delegate(bool object, TreeView treeView);
+  alias SelectCursorRowCallbackFunc = bool function(bool object, TreeView treeView);
 
   /**
    * Connect to SelectCursorRow signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSelectCursorRow(SelectCursorRowCallback dlg, Flag!"After" after = No.After)
+  ulong connectSelectCursorRow(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SelectCursorRowCallbackDlg) || is(T == SelectCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto treeView = getVal!TreeView(_paramVals);
       auto object = getVal!bool(&_paramVals[1]);
-      _retval = _dgClosure.dlg(object, treeView);
+      _retval = _dClosure.dlg(object, treeView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("select-cursor-row", closure, after);
   }
 
-  alias StartInteractiveSearchCallback = bool delegate(TreeView treeView);
+  alias StartInteractiveSearchCallbackDlg = bool delegate(TreeView treeView);
+  alias StartInteractiveSearchCallbackFunc = bool function(TreeView treeView);
 
   /**
    * Connect to StartInteractiveSearch signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectStartInteractiveSearch(StartInteractiveSearchCallback dlg, Flag!"After" after = No.After)
+  ulong connectStartInteractiveSearch(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == StartInteractiveSearchCallbackDlg) || is(T == StartInteractiveSearchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto treeView = getVal!TreeView(_paramVals);
-      _retval = _dgClosure.dlg(treeView);
+      _retval = _dClosure.dlg(treeView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("start-interactive-search", closure, after);
   }
 
@@ -1991,30 +2013,32 @@ class TreeView : Widget, Scrollable
    *   treeView = the instance the signal is connected to
    * Returns: %FALSE to allow collapsing, %TRUE to reject
    */
-  alias TestCollapseRowCallback = bool delegate(TreeIter iter, TreePath path, TreeView treeView);
+  alias TestCollapseRowCallbackDlg = bool delegate(TreeIter iter, TreePath path, TreeView treeView);
+  alias TestCollapseRowCallbackFunc = bool function(TreeIter iter, TreePath path, TreeView treeView);
 
   /**
    * Connect to TestCollapseRow signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectTestCollapseRow(TestCollapseRowCallback dlg, Flag!"After" after = No.After)
+  ulong connectTestCollapseRow(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == TestCollapseRowCallbackDlg) || is(T == TestCollapseRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto treeView = getVal!TreeView(_paramVals);
       auto iter = getVal!TreeIter(&_paramVals[1]);
       auto path = getVal!TreePath(&_paramVals[2]);
-      _retval = _dgClosure.dlg(iter, path, treeView);
+      _retval = _dClosure.dlg(iter, path, treeView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("test-collapse-row", closure, after);
   }
 
@@ -2027,80 +2051,86 @@ class TreeView : Widget, Scrollable
    *   treeView = the instance the signal is connected to
    * Returns: %FALSE to allow expansion, %TRUE to reject
    */
-  alias TestExpandRowCallback = bool delegate(TreeIter iter, TreePath path, TreeView treeView);
+  alias TestExpandRowCallbackDlg = bool delegate(TreeIter iter, TreePath path, TreeView treeView);
+  alias TestExpandRowCallbackFunc = bool function(TreeIter iter, TreePath path, TreeView treeView);
 
   /**
    * Connect to TestExpandRow signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectTestExpandRow(TestExpandRowCallback dlg, Flag!"After" after = No.After)
+  ulong connectTestExpandRow(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == TestExpandRowCallbackDlg) || is(T == TestExpandRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto treeView = getVal!TreeView(_paramVals);
       auto iter = getVal!TreeIter(&_paramVals[1]);
       auto path = getVal!TreePath(&_paramVals[2]);
-      _retval = _dgClosure.dlg(iter, path, treeView);
+      _retval = _dClosure.dlg(iter, path, treeView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("test-expand-row", closure, after);
   }
 
-  alias ToggleCursorRowCallback = bool delegate(TreeView treeView);
+  alias ToggleCursorRowCallbackDlg = bool delegate(TreeView treeView);
+  alias ToggleCursorRowCallbackFunc = bool function(TreeView treeView);
 
   /**
    * Connect to ToggleCursorRow signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectToggleCursorRow(ToggleCursorRowCallback dlg, Flag!"After" after = No.After)
+  ulong connectToggleCursorRow(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ToggleCursorRowCallbackDlg) || is(T == ToggleCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto treeView = getVal!TreeView(_paramVals);
-      _retval = _dgClosure.dlg(treeView);
+      _retval = _dClosure.dlg(treeView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-cursor-row", closure, after);
   }
 
-  alias UnselectAllCallback = bool delegate(TreeView treeView);
+  alias UnselectAllCallbackDlg = bool delegate(TreeView treeView);
+  alias UnselectAllCallbackFunc = bool function(TreeView treeView);
 
   /**
    * Connect to UnselectAll signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUnselectAll(UnselectAllCallback dlg, Flag!"After" after = No.After)
+  ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UnselectAllCallbackDlg) || is(T == UnselectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto treeView = getVal!TreeView(_paramVals);
-      _retval = _dgClosure.dlg(treeView);
+      _retval = _dClosure.dlg(treeView);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
   }
 }

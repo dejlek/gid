@@ -13,10 +13,6 @@ import Gid.gid;
 class Snapshot : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

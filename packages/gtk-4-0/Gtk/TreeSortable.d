@@ -98,14 +98,16 @@ interface TreeSortable
    * the contents of sortable are resorted.
    *   treeSortable = the instance the signal is connected to
    */
-  alias SortColumnChangedCallback = void delegate(TreeSortable treeSortable);
+  alias SortColumnChangedCallbackDlg = void delegate(TreeSortable treeSortable);
+  alias SortColumnChangedCallbackFunc = void function(TreeSortable treeSortable);
 
   /**
    * Connect to SortColumnChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSortColumnChanged(SortColumnChangedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectSortColumnChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SortColumnChangedCallbackDlg) || is(T == SortColumnChangedCallbackFunc));
+  }

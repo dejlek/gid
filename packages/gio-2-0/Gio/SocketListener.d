@@ -351,28 +351,30 @@ class SocketListener : ObjectG
    *   socket = the #GSocket the event is occurring on
    *   socketListener = the instance the signal is connected to
    */
-  alias EventCallback = void delegate(SocketListenerEvent event, Socket socket, SocketListener socketListener);
+  alias EventCallbackDlg = void delegate(SocketListenerEvent event, Socket socket, SocketListener socketListener);
+  alias EventCallbackFunc = void function(SocketListenerEvent event, Socket socket, SocketListener socketListener);
 
   /**
    * Connect to Event signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEvent(EventCallback dlg, Flag!"After" after = No.After)
+  ulong connectEvent(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EventCallbackDlg) || is(T == EventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto socketListener = getVal!SocketListener(_paramVals);
       auto event = getVal!SocketListenerEvent(&_paramVals[1]);
       auto socket = getVal!Socket(&_paramVals[2]);
-      _dgClosure.dlg(event, socket, socketListener);
+      _dClosure.dlg(event, socket, socketListener);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("event", closure, after);
   }
 }

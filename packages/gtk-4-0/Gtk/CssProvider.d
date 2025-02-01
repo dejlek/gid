@@ -185,28 +185,30 @@ class CssProvider : ObjectG, StyleProvider
    *   error = The parsing error
    *   cssProvider = the instance the signal is connected to
    */
-  alias ParsingErrorCallback = void delegate(CssSection section, ErrorG error, CssProvider cssProvider);
+  alias ParsingErrorCallbackDlg = void delegate(CssSection section, ErrorG error, CssProvider cssProvider);
+  alias ParsingErrorCallbackFunc = void function(CssSection section, ErrorG error, CssProvider cssProvider);
 
   /**
    * Connect to ParsingError signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectParsingError(ParsingErrorCallback dlg, Flag!"After" after = No.After)
+  ulong connectParsingError(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ParsingErrorCallbackDlg) || is(T == ParsingErrorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto cssProvider = getVal!CssProvider(_paramVals);
       auto section = getVal!CssSection(&_paramVals[1]);
       auto error = getVal!ErrorG(&_paramVals[2]);
-      _dgClosure.dlg(section, error, cssProvider);
+      _dClosure.dlg(section, error, cssProvider);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("parsing-error", closure, after);
   }
 }

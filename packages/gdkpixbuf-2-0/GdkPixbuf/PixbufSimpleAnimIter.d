@@ -9,10 +9,6 @@ import Gid.gid;
 class PixbufSimpleAnimIter : PixbufAnimationIter
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

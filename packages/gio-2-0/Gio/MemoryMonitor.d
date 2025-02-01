@@ -79,14 +79,16 @@ interface MemoryMonitor
    *   level = the #GMemoryMonitorWarningLevel warning level
    *   memoryMonitor = the instance the signal is connected to
    */
-  alias LowMemoryWarningCallback = void delegate(MemoryMonitorWarningLevel level, MemoryMonitor memoryMonitor);
+  alias LowMemoryWarningCallbackDlg = void delegate(MemoryMonitorWarningLevel level, MemoryMonitor memoryMonitor);
+  alias LowMemoryWarningCallbackFunc = void function(MemoryMonitorWarningLevel level, MemoryMonitor memoryMonitor);
 
   /**
    * Connect to LowMemoryWarning signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectLowMemoryWarning(LowMemoryWarningCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectLowMemoryWarning(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == LowMemoryWarningCallbackDlg) || is(T == LowMemoryWarningCallbackFunc));
+  }

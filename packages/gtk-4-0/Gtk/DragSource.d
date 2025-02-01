@@ -212,27 +212,29 @@ class DragSource : GestureSingle
    *   drag = the `GdkDrag` object
    *   dragSource = the instance the signal is connected to
    */
-  alias DragBeginCallback = void delegate(Drag drag, DragSource dragSource);
+  alias DragBeginCallbackDlg = void delegate(Drag drag, DragSource dragSource);
+  alias DragBeginCallbackFunc = void function(Drag drag, DragSource dragSource);
 
   /**
    * Connect to DragBegin signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDragBegin(DragBeginCallback dlg, Flag!"After" after = No.After)
+  ulong connectDragBegin(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DragBeginCallbackDlg) || is(T == DragBeginCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dragSource = getVal!DragSource(_paramVals);
       auto drag = getVal!Drag(&_paramVals[1]);
-      _dgClosure.dlg(drag, dragSource);
+      _dClosure.dlg(drag, dragSource);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drag-begin", closure, after);
   }
 
@@ -247,30 +249,32 @@ class DragSource : GestureSingle
    *   dragSource = the instance the signal is connected to
    * Returns: %TRUE if the failed drag operation has been already handled
    */
-  alias DragCancelCallback = bool delegate(Drag drag, DragCancelReason reason, DragSource dragSource);
+  alias DragCancelCallbackDlg = bool delegate(Drag drag, DragCancelReason reason, DragSource dragSource);
+  alias DragCancelCallbackFunc = bool function(Drag drag, DragCancelReason reason, DragSource dragSource);
 
   /**
    * Connect to DragCancel signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDragCancel(DragCancelCallback dlg, Flag!"After" after = No.After)
+  ulong connectDragCancel(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DragCancelCallbackDlg) || is(T == DragCancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto dragSource = getVal!DragSource(_paramVals);
       auto drag = getVal!Drag(&_paramVals[1]);
       auto reason = getVal!DragCancelReason(&_paramVals[2]);
-      _retval = _dgClosure.dlg(drag, reason, dragSource);
+      _retval = _dClosure.dlg(drag, reason, dragSource);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drag-cancel", closure, after);
   }
 
@@ -285,28 +289,30 @@ class DragSource : GestureSingle
    *     and the data should be deleted
    *   dragSource = the instance the signal is connected to
    */
-  alias DragEndCallback = void delegate(Drag drag, bool deleteData, DragSource dragSource);
+  alias DragEndCallbackDlg = void delegate(Drag drag, bool deleteData, DragSource dragSource);
+  alias DragEndCallbackFunc = void function(Drag drag, bool deleteData, DragSource dragSource);
 
   /**
    * Connect to DragEnd signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDragEnd(DragEndCallback dlg, Flag!"After" after = No.After)
+  ulong connectDragEnd(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DragEndCallbackDlg) || is(T == DragEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dragSource = getVal!DragSource(_paramVals);
       auto drag = getVal!Drag(&_paramVals[1]);
       auto deleteData = getVal!bool(&_paramVals[2]);
-      _dgClosure.dlg(drag, deleteData, dragSource);
+      _dClosure.dlg(drag, deleteData, dragSource);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("drag-end", closure, after);
   }
 
@@ -322,29 +328,31 @@ class DragSource : GestureSingle
    *   dragSource = the instance the signal is connected to
    * Returns: a `GdkContentProvider`
    */
-  alias PrepareCallback = ContentProvider delegate(double x, double y, DragSource dragSource);
+  alias PrepareCallbackDlg = ContentProvider delegate(double x, double y, DragSource dragSource);
+  alias PrepareCallbackFunc = ContentProvider function(double x, double y, DragSource dragSource);
 
   /**
    * Connect to Prepare signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPrepare(PrepareCallback dlg, Flag!"After" after = No.After)
+  ulong connectPrepare(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PrepareCallbackDlg) || is(T == PrepareCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dragSource = getVal!DragSource(_paramVals);
       auto x = getVal!double(&_paramVals[1]);
       auto y = getVal!double(&_paramVals[2]);
-      auto _retval = _dgClosure.dlg(x, y, dragSource);
+      auto _retval = _dClosure.dlg(x, y, dragSource);
       setVal!ContentProvider(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("prepare", closure, after);
   }
 }

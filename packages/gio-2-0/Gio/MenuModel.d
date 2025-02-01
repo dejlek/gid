@@ -107,10 +107,6 @@ import Gio.c.types;
 class MenuModel : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -273,29 +269,31 @@ class MenuModel : ObjectG
    *   added = the number of items added
    *   menuModel = the instance the signal is connected to
    */
-  alias ItemsChangedCallback = void delegate(int position, int removed, int added, MenuModel menuModel);
+  alias ItemsChangedCallbackDlg = void delegate(int position, int removed, int added, MenuModel menuModel);
+  alias ItemsChangedCallbackFunc = void function(int position, int removed, int added, MenuModel menuModel);
 
   /**
    * Connect to ItemsChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectItemsChanged(ItemsChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ItemsChangedCallbackDlg) || is(T == ItemsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto menuModel = getVal!MenuModel(_paramVals);
       auto position = getVal!int(&_paramVals[1]);
       auto removed = getVal!int(&_paramVals[2]);
       auto added = getVal!int(&_paramVals[3]);
-      _dgClosure.dlg(position, removed, added, menuModel);
+      _dClosure.dlg(position, removed, added, menuModel);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("items-changed", closure, after);
   }
 }

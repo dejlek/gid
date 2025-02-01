@@ -25,10 +25,6 @@ import Gio.c.types;
 class BufferedOutputStream : FilterOutputStream, Seekable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

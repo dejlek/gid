@@ -48,6 +48,20 @@ private shared TypeInfo_Class[GType] gtypeClasses; // Map of GTypes to D class i
 private shared TypeInfo_Class[TypeInfo_Interface] ifaceProxyClasses; // Map of interface type info to proxy class info
 private shared bool classMapsInitialized;
 
+/**
+ * A convenient string mixin to be used for ObjectG derived classes to declare boilerplate constructors.
+ * Returns: A string value to use with mixin() within ObjectG derived classes.
+ */
+string objectGMixin()
+{
+  return
+  `  this(void* cObj, Flag!"Take" take = No.Take)
+  {
+    super(cObj, take);
+  }
+  `;
+}
+
 /// Base class wrapper for GObject types
 /**
  * The base object type.
@@ -75,19 +89,12 @@ class ObjectG
   protected ObjectC* cInstancePtr; // Pointer to wrapped C GObject
 
   /**
-   * Create an unset GObject wrapper.
-   */
-  this()
-  {
-  }
-
-  /**
    * Create an ObjectG which is wrapping a C GObject with the given GType.
    * Useful for creating custom D classes which are derived from ObjectG.
    * Params:
    *   type = The GType value to use for creating the wrapped GObject
    */
-  this(GType type)
+  final this(GType type)
   {
     this(g_object_new(type, null), Yes.Take);
   }
@@ -98,7 +105,7 @@ class ObjectG
    *   cObj = Pointer to the GObject
    *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
    */
-  this(void* cObj, Flag!"Take" take = No.Take)
+  final this(void* cObj, Flag!"Take" take = No.Take)
   {
     if (!cObj)
       throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
@@ -916,28 +923,30 @@ class ObjectG
    *   pspec = the #GParamSpec of the property which changed.
    *   objectG = the instance the signal is connected to
    */
-  alias NotifyCallback = void delegate(ParamSpec pspec, ObjectG objectG);
+  alias NotifyCallbackDlg = void delegate(ParamSpec pspec, ObjectG objectG);
+  alias NotifyCallbackFunc = void function(ParamSpec pspec, ObjectG objectG);
 
   /**
    * Connect to Notify signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectNotify(NotifyCallback dlg, string detail = null, Flag!"After" after = No.After)
+  ulong connectNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == NotifyCallbackDlg) || is(T == NotifyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto objectG = getVal!ObjectG(_paramVals);
       auto pspec = getVal!ParamSpec(&_paramVals[1]);
-      _dgClosure.dlg(pspec, objectG);
+      _dClosure.dlg(pspec, objectG);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("notify"~ (detail.length ? "::" ~ detail : ""), closure, after);
   }
 }
@@ -945,10 +954,6 @@ class ObjectG
 /// Interface proxy class - used to wrap unknown GObjects as a specific interface
 abstract class IfaceProxy : ObjectG
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(ptr, take);

@@ -77,27 +77,29 @@ class EmojiChooser : Popover
    *   text = the Unicode sequence for the picked Emoji, in UTF-8
    *   emojiChooser = the instance the signal is connected to
    */
-  alias EmojiPickedCallback = void delegate(string text, EmojiChooser emojiChooser);
+  alias EmojiPickedCallbackDlg = void delegate(string text, EmojiChooser emojiChooser);
+  alias EmojiPickedCallbackFunc = void function(string text, EmojiChooser emojiChooser);
 
   /**
    * Connect to EmojiPicked signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEmojiPicked(EmojiPickedCallback dlg, Flag!"After" after = No.After)
+  ulong connectEmojiPicked(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EmojiPickedCallbackDlg) || is(T == EmojiPickedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto emojiChooser = getVal!EmojiChooser(_paramVals);
       auto text = getVal!string(&_paramVals[1]);
-      _dgClosure.dlg(text, emojiChooser);
+      _dClosure.dlg(text, emojiChooser);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("emoji-picked", closure, after);
   }
 }

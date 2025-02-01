@@ -54,10 +54,6 @@ import Gtk.c.types;
 class PadController : EventController
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -33,10 +33,6 @@ import Gtk.c.types;
 class Viewport : Widget, Scrollable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

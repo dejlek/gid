@@ -7,10 +7,6 @@ import Gtk.CellLayoutT;
 /// Proxy object for Gtk.CellLayout interface when a GObject has no applicable D binding
 class CellLayoutIfaceProxy : IfaceProxy, CellLayout
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -22,10 +22,6 @@ import Gio.c.types;
 class SimpleIOStream : IOStream
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -24,14 +24,16 @@ interface StyleProvider
     return gtk_style_provider_get_type();
   }
 
-  alias GtkPrivateChangedCallback = void delegate(StyleProvider styleProvider);
+  alias GtkPrivateChangedCallbackDlg = void delegate(StyleProvider styleProvider);
+  alias GtkPrivateChangedCallbackFunc = void function(StyleProvider styleProvider);
 
   /**
    * Connect to GtkPrivateChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectGtkPrivateChanged(GtkPrivateChangedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectGtkPrivateChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == GtkPrivateChangedCallbackDlg) || is(T == GtkPrivateChangedCallbackFunc));
+  }

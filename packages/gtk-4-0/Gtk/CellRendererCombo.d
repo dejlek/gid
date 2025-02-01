@@ -76,28 +76,30 @@ class CellRendererCombo : CellRendererText
    *     $(LPAREN)relative to the combo box model$(RPAREN)
    *   cellRendererCombo = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(string pathString, TreeIter newIter, CellRendererCombo cellRendererCombo);
+  alias ChangedCallbackDlg = void delegate(string pathString, TreeIter newIter, CellRendererCombo cellRendererCombo);
+  alias ChangedCallbackFunc = void function(string pathString, TreeIter newIter, CellRendererCombo cellRendererCombo);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto cellRendererCombo = getVal!CellRendererCombo(_paramVals);
       auto pathString = getVal!string(&_paramVals[1]);
       auto newIter = getVal!TreeIter(&_paramVals[2]);
-      _dgClosure.dlg(pathString, newIter, cellRendererCombo);
+      _dClosure.dlg(pathString, newIter, cellRendererCombo);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
   }
 }

@@ -7,10 +7,6 @@ import Gtk.PrintOperationPreviewT;
 /// Proxy object for Gtk.PrintOperationPreview interface when a GObject has no applicable D binding
 class PrintOperationPreviewIfaceProxy : IfaceProxy, PrintOperationPreview
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

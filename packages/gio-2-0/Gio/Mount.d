@@ -356,16 +356,18 @@ interface Mount
    * Emitted when the mount has been changed.
    *   mount = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(Mount mount);
+  alias ChangedCallbackDlg = void delegate(Mount mount);
+  alias ChangedCallbackFunc = void function(Mount mount);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, Flag!"After" after = No.After);
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc));
 
   /**
    * This signal may be emitted when the #GMount is about to be
@@ -374,16 +376,18 @@ interface Mount
    * GIO was used to unmount.
    *   mount = the instance the signal is connected to
    */
-  alias PreUnmountCallback = void delegate(Mount mount);
+  alias PreUnmountCallbackDlg = void delegate(Mount mount);
+  alias PreUnmountCallbackFunc = void function(Mount mount);
 
   /**
    * Connect to PreUnmount signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPreUnmount(PreUnmountCallback dlg, Flag!"After" after = No.After);
+  ulong connectPreUnmount(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PreUnmountCallbackDlg) || is(T == PreUnmountCallbackFunc));
 
   /**
    * This signal is emitted when the #GMount have been
@@ -392,14 +396,16 @@ interface Mount
    * finalized.
    *   mount = the instance the signal is connected to
    */
-  alias UnmountedCallback = void delegate(Mount mount);
+  alias UnmountedCallbackDlg = void delegate(Mount mount);
+  alias UnmountedCallbackFunc = void function(Mount mount);
 
   /**
    * Connect to Unmounted signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUnmounted(UnmountedCallback dlg, Flag!"After" after = No.After);
-}
+  ulong connectUnmounted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UnmountedCallbackDlg) || is(T == UnmountedCallbackFunc));
+  }

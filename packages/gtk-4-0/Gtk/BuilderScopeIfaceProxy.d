@@ -7,10 +7,6 @@ import Gtk.BuilderScopeT;
 /// Proxy object for Gtk.BuilderScope interface when a GObject has no applicable D binding
 class BuilderScopeIfaceProxy : IfaceProxy, BuilderScope
 {
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

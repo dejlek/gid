@@ -13,10 +13,6 @@ import Gtk.c.types;
 class ActivateAction : ShortcutAction
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

@@ -28,10 +28,6 @@ import Gid.gid;
 class SignalGroup : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -133,27 +129,29 @@ class SignalGroup : ObjectG
    *   instance = a #GObject containing the new value for #GSignalGroup:target
    *   signalGroup = the instance the signal is connected to
    */
-  alias BindCallback = void delegate(ObjectG instance, SignalGroup signalGroup);
+  alias BindCallbackDlg = void delegate(ObjectG instance, SignalGroup signalGroup);
+  alias BindCallbackFunc = void function(ObjectG instance, SignalGroup signalGroup);
 
   /**
    * Connect to Bind signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectBind(BindCallback dlg, Flag!"After" after = No.After)
+  ulong connectBind(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == BindCallbackDlg) || is(T == BindCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto signalGroup = getVal!SignalGroup(_paramVals);
       auto instance = getVal!ObjectG(&_paramVals[1]);
-      _dgClosure.dlg(instance, signalGroup);
+      _dClosure.dlg(instance, signalGroup);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("bind", closure, after);
   }
 
@@ -164,26 +162,28 @@ class SignalGroup : ObjectG
    * non-%NULL.
    *   signalGroup = the instance the signal is connected to
    */
-  alias UnbindCallback = void delegate(SignalGroup signalGroup);
+  alias UnbindCallbackDlg = void delegate(SignalGroup signalGroup);
+  alias UnbindCallbackFunc = void function(SignalGroup signalGroup);
 
   /**
    * Connect to Unbind signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUnbind(UnbindCallback dlg, Flag!"After" after = No.After)
+  ulong connectUnbind(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UnbindCallbackDlg) || is(T == UnbindCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto signalGroup = getVal!SignalGroup(_paramVals);
-      _dgClosure.dlg(signalGroup);
+      _dClosure.dlg(signalGroup);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unbind", closure, after);
   }
 }

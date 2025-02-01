@@ -31,10 +31,6 @@ import Gio.c.types;
 class FileOutputStream : OutputStream, Seekable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

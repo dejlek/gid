@@ -9,10 +9,6 @@ import Gio.c.types;
 class NativeVolumeMonitor : VolumeMonitor
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

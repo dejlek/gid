@@ -23,10 +23,6 @@ import Gtk.c.types;
 class ShortcutTrigger : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

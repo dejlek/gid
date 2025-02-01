@@ -66,10 +66,6 @@ import Gio.c.types;
 class DBusProxy : ObjectG, AsyncInitable, DBusInterface, Initable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -724,21 +720,23 @@ class DBusProxy : ObjectG, AsyncInitable, DBusInterface, Initable
    *   invalidatedProperties = A %NULL terminated array of properties that was invalidated
    *   dBusProxy = the instance the signal is connected to
    */
-  alias GPropertiesChangedCallback = void delegate(VariantG changedProperties, string[] invalidatedProperties, DBusProxy dBusProxy);
+  alias GPropertiesChangedCallbackDlg = void delegate(VariantG changedProperties, string[] invalidatedProperties, DBusProxy dBusProxy);
+  alias GPropertiesChangedCallbackFunc = void function(VariantG changedProperties, string[] invalidatedProperties, DBusProxy dBusProxy);
 
   /**
    * Connect to GPropertiesChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectGPropertiesChanged(GPropertiesChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectGPropertiesChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == GPropertiesChangedCallbackDlg) || is(T == GPropertiesChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dBusProxy = getVal!DBusProxy(_paramVals);
       auto changedProperties = getVal!VariantG(&_paramVals[1]);
       auto invalidatedProperties = getVal!(char**)(&_paramVals[2]);
@@ -749,10 +747,10 @@ class DBusProxy : ObjectG, AsyncInitable, DBusInterface, Initable
         break;
       foreach (i; 0 .. _leninvalidatedProperties)
         _invalidatedProperties ~= invalidatedProperties[i].fromCString(No.Free);
-      _dgClosure.dlg(changedProperties, _invalidatedProperties, dBusProxy);
+      _dClosure.dlg(changedProperties, _invalidatedProperties, dBusProxy);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("g-properties-changed", closure, after);
   }
 
@@ -767,30 +765,32 @@ class DBusProxy : ObjectG, AsyncInitable, DBusInterface, Initable
    *   parameters = A #GVariant tuple with parameters for the signal.
    *   dBusProxy = the instance the signal is connected to
    */
-  alias GSignalCallback = void delegate(string senderName, string signalName, VariantG parameters, DBusProxy dBusProxy);
+  alias GSignalCallbackDlg = void delegate(string senderName, string signalName, VariantG parameters, DBusProxy dBusProxy);
+  alias GSignalCallbackFunc = void function(string senderName, string signalName, VariantG parameters, DBusProxy dBusProxy);
 
   /**
    * Connect to GSignal signal.
    * Params:
-   *   dlg = signal delegate callback to connect
    *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectGSignal(GSignalCallback dlg, string detail = null, Flag!"After" after = No.After)
+  ulong connectGSignal(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T == GSignalCallbackDlg) || is(T == GSignalCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto dBusProxy = getVal!DBusProxy(_paramVals);
       auto senderName = getVal!string(&_paramVals[1]);
       auto signalName = getVal!string(&_paramVals[2]);
       auto parameters = getVal!VariantG(&_paramVals[3]);
-      _dgClosure.dlg(senderName, signalName, parameters, dBusProxy);
+      _dClosure.dlg(senderName, signalName, parameters, dBusProxy);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("g-signal"~ (detail.length ? "::" ~ detail : ""), closure, after);
   }
 }

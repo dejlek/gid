@@ -28,10 +28,6 @@ import Gio.OutputStream;
 class ContentSerializer : ObjectG, AsyncResult
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

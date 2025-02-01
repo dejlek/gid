@@ -64,7 +64,7 @@ enum GApplicationFlags : uint
    * the primary instance$(RPAREN). Note that this flag only affects the default
    * implementation of local_command_line$(LPAREN)$(RPAREN), and has no effect if
    * %G_APPLICATION_HANDLES_COMMAND_LINE is given.
-   * See [Gio.Application.run] for details.
+   * See [Gio.ApplicationGio.run] for details.
    */
   HandlesOpen = 4,
 
@@ -72,7 +72,7 @@ enum GApplicationFlags : uint
    * This application handles command line
    * arguments $(LPAREN)in the primary instance$(RPAREN). Note that this flag only affect
    * the default implementation of local_command_line$(LPAREN)$(RPAREN).
-   * See [Gio.Application.run] for details.
+   * See [Gio.ApplicationGio.run] for details.
    */
   HandlesCommandLine = 8,
 
@@ -3598,118 +3598,6 @@ struct GAppLaunchContextClass
 struct GAppLaunchContextPrivate;
 
 /**
- * `GApplication` is the core class for application support.
- * A `GApplication` is the foundation of an application. It wraps some
- * low-level platform-specific services and is intended to act as the
- * foundation for higher-level application classes such as
- * `GtkApplication` or `MxApplication`. In general, you should not use
- * this class outside of a higher level framework.
- * `GApplication` provides convenient life-cycle management by maintaining
- * a "use count" for the primary application instance. The use count can
- * be changed using [Gio.Application.hold] and
- * [Gio.Application.release]. If it drops to zero, the application
- * exits. Higher-level classes such as `GtkApplication` employ the use count
- * to ensure that the application stays alive as long as it has any opened
- * windows.
- * Another feature that `GApplication` $(LPAREN)optionally$(RPAREN) provides is process
- * uniqueness. Applications can make use of this functionality by
- * providing a unique application ID. If given, only one application
- * with this ID can be running at a time per session. The session
- * concept is platform-dependent, but corresponds roughly to a graphical
- * desktop login. When your application is launched again, its
- * arguments are passed through platform communication to the already
- * running program. The already running instance of the program is
- * called the "primary instance"; for non-unique applications this is
- * always the current instance. On Linux, the D-Bus session bus
- * is used for communication.
- * The use of `GApplication` differs from some other commonly-used
- * uniqueness libraries $(LPAREN)such as libunique$(RPAREN) in important ways. The
- * application is not expected to manually register itself and check
- * if it is the primary instance. Instead, the main$(LPAREN)$(RPAREN) function of a
- * `GApplication` should do very little more than instantiating the
- * application instance, possibly connecting signal handlers, then
- * calling [Gio.Application.run]. All checks for uniqueness are done
- * internally. If the application is the primary instance then the
- * startup signal is emitted and the mainloop runs. If the application
- * is not the primary instance then a signal is sent to the primary
- * instance and [Gio.Application.run] promptly returns. See the code
- * examples below.
- * If used, the expected form of an application identifier is the
- * same as that of a
- * [D-Bus well-known bus name](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus).
- * Examples include: `com.example.MyApp`, `org.example.internal_apps.Calculator`,
- * `org._7_zip.Archiver`.
- * For details on valid application identifiers, see [Gio.Application.idIsValid].
- * On Linux, the application identifier is claimed as a well-known bus name
- * on the user's session bus. This means that the uniqueness of your
- * application is scoped to the current session. It also means that your
- * application may provide additional services $(LPAREN)through registration of other
- * object paths$(RPAREN) at that bus name. The registration of these object paths
- * should be done with the shared GDBus session bus. Note that due to the
- * internal architecture of GDBus, method calls can be dispatched at any time
- * $(LPAREN)even if a main loop is not running$(RPAREN). For this reason, you must ensure that
- * any object paths that you wish to register are registered before #GApplication
- * attempts to acquire the bus name of your application $(LPAREN)which happens in
- * [Gio.Application.register]$(RPAREN). Unfortunately, this means that you cannot
- * use property@Gio.Application:is-remote to decide if you want to register
- * object paths.
- * `GApplication` also implements the [Gio.ActionGroup] and [Gio.ActionMap]
- * interfaces and lets you easily export actions by adding them with
- * [Gio.ActionMap.addAction]. When invoking an action by calling
- * [Gio.ActionGroup.activateAction] on the application, it is always
- * invoked in the primary instance. The actions are also exported on
- * the session bus, and GIO provides the [Gio.DBusActionGroup] wrapper to
- * conveniently access them remotely. GIO provides a [Gio.DBusMenuModel] wrapper
- * for remote access to exported [Gio.MenuModel]s.
- * Note: Due to the fact that actions are exported on the session bus,
- * using `maybe` parameters is not supported, since D-Bus does not support
- * `maybe` types.
- * There is a number of different entry points into a `GApplication`:
- * - via 'Activate' $(LPAREN)i.e. just starting the application$(RPAREN)
- * - via 'Open' $(LPAREN)i.e. opening some files$(RPAREN)
- * - by handling a command-line
- * - via activating an action
- * The [Gio.Application.startup] signal lets you handle the application
- * initialization for all of these in a single place.
- * Regardless of which of these entry points is used to start the
- * application, `GApplication` passes some ‘platform data’ from the
- * launching instance to the primary instance, in the form of a
- * [GLib.VariantG] dictionary mapping strings to variants. To use platform
- * data, override the vfunc@Gio.Application.before_emit or
- * vfunc@Gio.Application.after_emit virtual functions
- * in your `GApplication` subclass. When dealing with
- * [Gio.ApplicationCommandLine] objects, the platform data is
- * directly available via [Gio.ApplicationCommandLine.getCwd],
- * [Gio.ApplicationCommandLine.getEnviron] and
- * [Gio.ApplicationCommandLine.getPlatformData].
- * As the name indicates, the platform data may vary depending on the
- * operating system, but it always includes the current directory $(LPAREN)key
- * `cwd`$(RPAREN), and optionally the environment $(LPAREN)ie the set of environment
- * variables and their values$(RPAREN) of the calling process $(LPAREN)key `environ`$(RPAREN).
- * The environment is only added to the platform data if the
- * `G_APPLICATION_SEND_ENVIRONMENT` flag is set. `GApplication` subclasses
- * can add their own platform data by overriding the
- * vfunc@Gio.Application.add_platform_data virtual function. For instance,
- * `GtkApplication` adds startup notification data in this way.
- * To parse commandline arguments you may handle the
- * signal@Gio.Application::command-line signal or override the
- * vfunc@Gio.Application.local_command_line virtual funcion, to parse them in
- * either the primary instance or the local instance, respectively.
- * For an example of opening files with a `GApplication`, see
- * [gapplication-example-open.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-open.c).
- * For an example of using actions with `GApplication`, see
- * [gapplication-example-actions.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-actions.c).
- * For an example of using extra D-Bus hooks with `GApplication`, see
- * [gapplication-example-dbushooks.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-dbushooks.c).
- */
-struct GApplication
-{
-  ObjectC parentInstance;
-
-  GApplicationPrivate* priv;
-}
-
-/**
  * Virtual function table for #GApplication.
  */
 struct GApplicationClass
@@ -3740,7 +3628,7 @@ struct GApplicationClass
   /**
    * invoked $(LPAREN)locally$(RPAREN). The virtual function has the chance
    * to inspect $(LPAREN)and possibly replace$(RPAREN) command line arguments. See
-   * [Gio.Application.run] for more information. Also see the
+   * [Gio.ApplicationGio.run] for more information. Also see the
    * #GApplication::handle-local-options signal, which is a simpler
    * alternative to handling some commandline options locally
    */
@@ -3775,7 +3663,7 @@ struct GApplicationClass
 
   /**
    * Used to be invoked on the primary instance from
-   * [Gio.Application.run] if the use-count is non-zero. Since 2.32,
+   * [Gio.ApplicationGio.run] if the use-count is non-zero. Since 2.32,
    * GApplication is iterating the main context directly and is not
    * using @run_mainloop anymore
    */
@@ -3822,7 +3710,7 @@ struct GApplicationClass
 /**
  * `GApplicationCommandLine` represents a command-line invocation of
  * an application.
- * It is created by [Gio.Application] and emitted
+ * It is created by [Gio.ApplicationGio] and emitted
  * in the signal@Gio.Application::command-line signal and virtual function.
  * The class contains the list of arguments that the program was invoked
  * with. It is also possible to query if the commandline invocation was
@@ -3980,6 +3868,118 @@ struct GApplicationCommandLineClass
 }
 
 struct GApplicationCommandLinePrivate;
+
+/**
+ * `GApplication` is the core class for application support.
+ * A `GApplication` is the foundation of an application. It wraps some
+ * low-level platform-specific services and is intended to act as the
+ * foundation for higher-level application classes such as
+ * `GtkApplication` or `MxApplication`. In general, you should not use
+ * this class outside of a higher level framework.
+ * `GApplication` provides convenient life-cycle management by maintaining
+ * a "use count" for the primary application instance. The use count can
+ * be changed using [Gio.ApplicationGio.hold] and
+ * [Gio.ApplicationGio.release]. If it drops to zero, the application
+ * exits. Higher-level classes such as `GtkApplication` employ the use count
+ * to ensure that the application stays alive as long as it has any opened
+ * windows.
+ * Another feature that `GApplication` $(LPAREN)optionally$(RPAREN) provides is process
+ * uniqueness. Applications can make use of this functionality by
+ * providing a unique application ID. If given, only one application
+ * with this ID can be running at a time per session. The session
+ * concept is platform-dependent, but corresponds roughly to a graphical
+ * desktop login. When your application is launched again, its
+ * arguments are passed through platform communication to the already
+ * running program. The already running instance of the program is
+ * called the "primary instance"; for non-unique applications this is
+ * always the current instance. On Linux, the D-Bus session bus
+ * is used for communication.
+ * The use of `GApplication` differs from some other commonly-used
+ * uniqueness libraries $(LPAREN)such as libunique$(RPAREN) in important ways. The
+ * application is not expected to manually register itself and check
+ * if it is the primary instance. Instead, the main$(LPAREN)$(RPAREN) function of a
+ * `GApplication` should do very little more than instantiating the
+ * application instance, possibly connecting signal handlers, then
+ * calling [Gio.ApplicationGio.run]. All checks for uniqueness are done
+ * internally. If the application is the primary instance then the
+ * startup signal is emitted and the mainloop runs. If the application
+ * is not the primary instance then a signal is sent to the primary
+ * instance and [Gio.ApplicationGio.run] promptly returns. See the code
+ * examples below.
+ * If used, the expected form of an application identifier is the
+ * same as that of a
+ * [D-Bus well-known bus name](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus).
+ * Examples include: `com.example.MyApp`, `org.example.internal_apps.Calculator`,
+ * `org._7_zip.Archiver`.
+ * For details on valid application identifiers, see [Gio.ApplicationGio.idIsValid].
+ * On Linux, the application identifier is claimed as a well-known bus name
+ * on the user's session bus. This means that the uniqueness of your
+ * application is scoped to the current session. It also means that your
+ * application may provide additional services $(LPAREN)through registration of other
+ * object paths$(RPAREN) at that bus name. The registration of these object paths
+ * should be done with the shared GDBus session bus. Note that due to the
+ * internal architecture of GDBus, method calls can be dispatched at any time
+ * $(LPAREN)even if a main loop is not running$(RPAREN). For this reason, you must ensure that
+ * any object paths that you wish to register are registered before #GApplication
+ * attempts to acquire the bus name of your application $(LPAREN)which happens in
+ * [Gio.ApplicationGio.register]$(RPAREN). Unfortunately, this means that you cannot
+ * use property@Gio.Application:is-remote to decide if you want to register
+ * object paths.
+ * `GApplication` also implements the [Gio.ActionGroup] and [Gio.ActionMap]
+ * interfaces and lets you easily export actions by adding them with
+ * [Gio.ActionMap.addAction]. When invoking an action by calling
+ * [Gio.ActionGroup.activateAction] on the application, it is always
+ * invoked in the primary instance. The actions are also exported on
+ * the session bus, and GIO provides the [Gio.DBusActionGroup] wrapper to
+ * conveniently access them remotely. GIO provides a [Gio.DBusMenuModel] wrapper
+ * for remote access to exported [Gio.MenuModel]s.
+ * Note: Due to the fact that actions are exported on the session bus,
+ * using `maybe` parameters is not supported, since D-Bus does not support
+ * `maybe` types.
+ * There is a number of different entry points into a `GApplication`:
+ * - via 'Activate' $(LPAREN)i.e. just starting the application$(RPAREN)
+ * - via 'Open' $(LPAREN)i.e. opening some files$(RPAREN)
+ * - by handling a command-line
+ * - via activating an action
+ * The [Gio.ApplicationGio.startup] signal lets you handle the application
+ * initialization for all of these in a single place.
+ * Regardless of which of these entry points is used to start the
+ * application, `GApplication` passes some ‘platform data’ from the
+ * launching instance to the primary instance, in the form of a
+ * [GLib.VariantG] dictionary mapping strings to variants. To use platform
+ * data, override the vfunc@Gio.Application.before_emit or
+ * vfunc@Gio.Application.after_emit virtual functions
+ * in your `GApplication` subclass. When dealing with
+ * [Gio.ApplicationCommandLine] objects, the platform data is
+ * directly available via [Gio.ApplicationCommandLine.getCwd],
+ * [Gio.ApplicationCommandLine.getEnviron] and
+ * [Gio.ApplicationCommandLine.getPlatformData].
+ * As the name indicates, the platform data may vary depending on the
+ * operating system, but it always includes the current directory $(LPAREN)key
+ * `cwd`$(RPAREN), and optionally the environment $(LPAREN)ie the set of environment
+ * variables and their values$(RPAREN) of the calling process $(LPAREN)key `environ`$(RPAREN).
+ * The environment is only added to the platform data if the
+ * `G_APPLICATION_SEND_ENVIRONMENT` flag is set. `GApplication` subclasses
+ * can add their own platform data by overriding the
+ * vfunc@Gio.Application.add_platform_data virtual function. For instance,
+ * `GtkApplication` adds startup notification data in this way.
+ * To parse commandline arguments you may handle the
+ * signal@Gio.Application::command-line signal or override the
+ * vfunc@Gio.Application.local_command_line virtual funcion, to parse them in
+ * either the primary instance or the local instance, respectively.
+ * For an example of opening files with a `GApplication`, see
+ * [gapplication-example-open.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-open.c).
+ * For an example of using actions with `GApplication`, see
+ * [gapplication-example-actions.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-actions.c).
+ * For an example of using extra D-Bus hooks with `GApplication`, see
+ * [gapplication-example-dbushooks.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-dbushooks.c).
+ */
+struct GApplication
+{
+  ObjectC parentInstance;
+
+  GApplicationPrivate* priv;
+}
 
 struct GApplicationPrivate;
 
@@ -8384,7 +8384,7 @@ struct GNetworkServicePrivate;
  * and even across system reboots.
  * Since the user may click on a notification while the application is
  * not running, applications using `GNotification` should be able to be
- * started as a D-Bus service, using [Gio.Application].
+ * started as a D-Bus service, using [Gio.ApplicationGio].
  * In order for `GNotification` to work, the application must have installed
  * a `.desktop` file. For example:
  * ```
@@ -8405,14 +8405,14 @@ struct GNetworkServicePrivate;
  * Control Center’s ‘Notifications’ panel.
  * The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
  * where `org.gnome.TestApplication` is the ID passed to
- * [Gio.Application.new_].
+ * [Gio.ApplicationGio.new_].
  * User interaction with a notification $(LPAREN)either the default action, or
  * buttons$(RPAREN) must be associated with actions on the application $(LPAREN)ie:
  * `app.` actions$(RPAREN).  It is not possible to route user interaction
  * through the notification itself, because the object will not exist if
  * the application is autostarted as a result of a notification being
  * clicked.
- * A notification can be sent with [Gio.Application.sendNotification].
+ * A notification can be sent with [Gio.ApplicationGio.sendNotification].
  */
 struct GNotification;
 

@@ -610,28 +610,30 @@ template TreeModelT()
    *   iter = a valid `GtkTreeIter` pointing to the changed row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowChangedCallback = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowChangedCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowChangedCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
 
   /**
    * Connect to RowChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowChanged(RowChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectRowChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowChangedCallbackDlg) || is(T == RowChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto treeModel = getVal!TreeModel(_paramVals);
       auto path = getVal!TreePath(&_paramVals[1]);
       auto iter = getVal!TreeIter(&_paramVals[2]);
-      _dgClosure.dlg(path, iter, treeModel);
+      _dClosure.dlg(path, iter, treeModel);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-changed", closure, after);
   }
 
@@ -646,27 +648,29 @@ template TreeModelT()
    *   path = a `GtkTreePath` identifying the row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowDeletedCallback = void delegate(TreePath path, TreeModel treeModel);
+  alias RowDeletedCallbackDlg = void delegate(TreePath path, TreeModel treeModel);
+  alias RowDeletedCallbackFunc = void function(TreePath path, TreeModel treeModel);
 
   /**
    * Connect to RowDeleted signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowDeleted(RowDeletedCallback dlg, Flag!"After" after = No.After)
+  ulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowDeletedCallbackDlg) || is(T == RowDeletedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto treeModel = getVal!TreeModel(_paramVals);
       auto path = getVal!TreePath(&_paramVals[1]);
-      _dgClosure.dlg(path, treeModel);
+      _dClosure.dlg(path, treeModel);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-deleted", closure, after);
   }
 
@@ -678,28 +682,30 @@ template TreeModelT()
    *   iter = a valid `GtkTreeIter` pointing to the row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowHasChildToggledCallback = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowHasChildToggledCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowHasChildToggledCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
 
   /**
    * Connect to RowHasChildToggled signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowHasChildToggled(RowHasChildToggledCallback dlg, Flag!"After" after = No.After)
+  ulong connectRowHasChildToggled(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowHasChildToggledCallbackDlg) || is(T == RowHasChildToggledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto treeModel = getVal!TreeModel(_paramVals);
       auto path = getVal!TreePath(&_paramVals[1]);
       auto iter = getVal!TreeIter(&_paramVals[2]);
-      _dgClosure.dlg(path, iter, treeModel);
+      _dClosure.dlg(path, iter, treeModel);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-has-child-toggled", closure, after);
   }
 
@@ -714,28 +720,30 @@ template TreeModelT()
    *   iter = a valid `GtkTreeIter` pointing to the new row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowInsertedCallback = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowInsertedCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowInsertedCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
 
   /**
    * Connect to RowInserted signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRowInserted(RowInsertedCallback dlg, Flag!"After" after = No.After)
+  ulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RowInsertedCallbackDlg) || is(T == RowInsertedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto treeModel = getVal!TreeModel(_paramVals);
       auto path = getVal!TreePath(&_paramVals[1]);
       auto iter = getVal!TreeIter(&_paramVals[2]);
-      _dgClosure.dlg(path, iter, treeModel);
+      _dClosure.dlg(path, iter, treeModel);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-inserted", closure, after);
   }
 }

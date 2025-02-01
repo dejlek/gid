@@ -23,10 +23,6 @@ import Gio.c.types;
 class UnixOutputStream : OutputStream, FileDescriptorBased, PollableOutputStream
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

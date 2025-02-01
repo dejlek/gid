@@ -35,10 +35,6 @@ import Gio.ListModelT;
 class Display : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
@@ -559,27 +555,29 @@ class Display : ObjectG
    *   isError = %TRUE if the display was closed due to an error
    *   display = the instance the signal is connected to
    */
-  alias ClosedCallback = void delegate(bool isError, Display display);
+  alias ClosedCallbackDlg = void delegate(bool isError, Display display);
+  alias ClosedCallbackFunc = void function(bool isError, Display display);
 
   /**
    * Connect to Closed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectClosed(ClosedCallback dlg, Flag!"After" after = No.After)
+  ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ClosedCallbackDlg) || is(T == ClosedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto display = getVal!Display(_paramVals);
       auto isError = getVal!bool(&_paramVals[1]);
-      _dgClosure.dlg(isError, display);
+      _dClosure.dlg(isError, display);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("closed", closure, after);
   }
 
@@ -587,26 +585,28 @@ class Display : ObjectG
    * Emitted when the connection to the windowing system for display is opened.
    *   display = the instance the signal is connected to
    */
-  alias OpenedCallback = void delegate(Display display);
+  alias OpenedCallbackDlg = void delegate(Display display);
+  alias OpenedCallbackFunc = void function(Display display);
 
   /**
    * Connect to Opened signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectOpened(OpenedCallback dlg, Flag!"After" after = No.After)
+  ulong connectOpened(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == OpenedCallbackDlg) || is(T == OpenedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto display = getVal!Display(_paramVals);
-      _dgClosure.dlg(display);
+      _dClosure.dlg(display);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("opened", closure, after);
   }
 
@@ -616,27 +616,29 @@ class Display : ObjectG
    *   seat = the seat that was just added
    *   display = the instance the signal is connected to
    */
-  alias SeatAddedCallback = void delegate(Seat seat, Display display);
+  alias SeatAddedCallbackDlg = void delegate(Seat seat, Display display);
+  alias SeatAddedCallbackFunc = void function(Seat seat, Display display);
 
   /**
    * Connect to SeatAdded signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSeatAdded(SeatAddedCallback dlg, Flag!"After" after = No.After)
+  ulong connectSeatAdded(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SeatAddedCallbackDlg) || is(T == SeatAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto display = getVal!Display(_paramVals);
       auto seat = getVal!Seat(&_paramVals[1]);
-      _dgClosure.dlg(seat, display);
+      _dClosure.dlg(seat, display);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("seat-added", closure, after);
   }
 
@@ -646,27 +648,29 @@ class Display : ObjectG
    *   seat = the seat that was just removed
    *   display = the instance the signal is connected to
    */
-  alias SeatRemovedCallback = void delegate(Seat seat, Display display);
+  alias SeatRemovedCallbackDlg = void delegate(Seat seat, Display display);
+  alias SeatRemovedCallbackFunc = void function(Seat seat, Display display);
 
   /**
    * Connect to SeatRemoved signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSeatRemoved(SeatRemovedCallback dlg, Flag!"After" after = No.After)
+  ulong connectSeatRemoved(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SeatRemovedCallbackDlg) || is(T == SeatRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto display = getVal!Display(_paramVals);
       auto seat = getVal!Seat(&_paramVals[1]);
-      _dgClosure.dlg(seat, display);
+      _dClosure.dlg(seat, display);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("seat-removed", closure, after);
   }
 
@@ -676,27 +680,29 @@ class Display : ObjectG
    *   setting = the name of the setting that changed
    *   display = the instance the signal is connected to
    */
-  alias SettingChangedCallback = void delegate(string setting, Display display);
+  alias SettingChangedCallbackDlg = void delegate(string setting, Display display);
+  alias SettingChangedCallbackFunc = void function(string setting, Display display);
 
   /**
    * Connect to SettingChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectSettingChanged(SettingChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectSettingChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == SettingChangedCallbackDlg) || is(T == SettingChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto display = getVal!Display(_paramVals);
       auto setting = getVal!string(&_paramVals[1]);
-      _dgClosure.dlg(setting, display);
+      _dClosure.dlg(setting, display);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("setting-changed", closure, after);
   }
 }

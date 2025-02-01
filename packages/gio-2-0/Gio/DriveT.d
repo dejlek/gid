@@ -498,26 +498,28 @@ template DriveT()
    * Emitted when the drive's state has changed.
    *   drive = the instance the signal is connected to
    */
-  alias ChangedCallback = void delegate(Drive drive);
+  alias ChangedCallbackDlg = void delegate(Drive drive);
+  alias ChangedCallbackFunc = void function(Drive drive);
 
   /**
    * Connect to Changed signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectChanged(ChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto drive = getVal!Drive(_paramVals);
-      _dgClosure.dlg(drive);
+      _dClosure.dlg(drive);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
   }
 
@@ -528,26 +530,28 @@ template DriveT()
    * finalized.
    *   drive = the instance the signal is connected to
    */
-  alias DisconnectedCallback = void delegate(Drive drive);
+  alias DisconnectedCallbackDlg = void delegate(Drive drive);
+  alias DisconnectedCallbackFunc = void function(Drive drive);
 
   /**
    * Connect to Disconnected signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDisconnected(DisconnectedCallback dlg, Flag!"After" after = No.After)
+  ulong connectDisconnected(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DisconnectedCallbackDlg) || is(T == DisconnectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto drive = getVal!Drive(_paramVals);
-      _dgClosure.dlg(drive);
+      _dClosure.dlg(drive);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("disconnected", closure, after);
   }
 
@@ -556,26 +560,28 @@ template DriveT()
    * been pressed.
    *   drive = the instance the signal is connected to
    */
-  alias EjectButtonCallback = void delegate(Drive drive);
+  alias EjectButtonCallbackDlg = void delegate(Drive drive);
+  alias EjectButtonCallbackFunc = void function(Drive drive);
 
   /**
    * Connect to EjectButton signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEjectButton(EjectButtonCallback dlg, Flag!"After" after = No.After)
+  ulong connectEjectButton(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EjectButtonCallbackDlg) || is(T == EjectButtonCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto drive = getVal!Drive(_paramVals);
-      _dgClosure.dlg(drive);
+      _dClosure.dlg(drive);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("eject-button", closure, after);
   }
 
@@ -584,26 +590,28 @@ template DriveT()
    * been pressed.
    *   drive = the instance the signal is connected to
    */
-  alias StopButtonCallback = void delegate(Drive drive);
+  alias StopButtonCallbackDlg = void delegate(Drive drive);
+  alias StopButtonCallbackFunc = void function(Drive drive);
 
   /**
    * Connect to StopButton signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectStopButton(StopButtonCallback dlg, Flag!"After" after = No.After)
+  ulong connectStopButton(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == StopButtonCallbackDlg) || is(T == StopButtonCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto drive = getVal!Drive(_paramVals);
-      _dgClosure.dlg(drive);
+      _dClosure.dlg(drive);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("stop-button", closure, after);
   }
 }

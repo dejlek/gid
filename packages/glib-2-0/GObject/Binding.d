@@ -71,10 +71,6 @@ import Gid.gid;
 class Binding : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

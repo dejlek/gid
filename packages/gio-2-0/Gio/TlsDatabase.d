@@ -26,10 +26,6 @@ import Gio.c.types;
 class TlsDatabase : ObjectG
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

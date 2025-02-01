@@ -16,10 +16,6 @@ import Gtk.c.types;
 class MultiFilter : Filter, ListModel, Buildable
 {
 
-  this()
-  {
-  }
-
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);

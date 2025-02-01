@@ -553,27 +553,29 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   context = the `GtkPrintContext` for the current operation
    *   printOperation = the instance the signal is connected to
    */
-  alias BeginPrintCallback = void delegate(PrintContext context, PrintOperation printOperation);
+  alias BeginPrintCallbackDlg = void delegate(PrintContext context, PrintOperation printOperation);
+  alias BeginPrintCallbackFunc = void function(PrintContext context, PrintOperation printOperation);
 
   /**
    * Connect to BeginPrint signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectBeginPrint(BeginPrintCallback dlg, Flag!"After" after = No.After)
+  ulong connectBeginPrint(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == BeginPrintCallbackDlg) || is(T == BeginPrintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto printOperation = getVal!PrintOperation(_paramVals);
       auto context = getVal!PrintContext(&_paramVals[1]);
-      _dgClosure.dlg(context, printOperation);
+      _dClosure.dlg(context, printOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("begin-print", closure, after);
   }
 
@@ -591,27 +593,29 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: A custom widget that gets embedded in
    *   the print dialog
    */
-  alias CreateCustomWidgetCallback = ObjectG delegate(PrintOperation printOperation);
+  alias CreateCustomWidgetCallbackDlg = ObjectG delegate(PrintOperation printOperation);
+  alias CreateCustomWidgetCallbackFunc = ObjectG function(PrintOperation printOperation);
 
   /**
    * Connect to CreateCustomWidget signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCreateCustomWidget(CreateCustomWidgetCallback dlg, Flag!"After" after = No.After)
+  ulong connectCreateCustomWidget(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CreateCustomWidgetCallbackDlg) || is(T == CreateCustomWidgetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto printOperation = getVal!PrintOperation(_paramVals);
-      auto _retval = _dgClosure.dlg(printOperation);
+      auto _retval = _dClosure.dlg(printOperation);
       setVal!ObjectG(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("create-custom-widget", closure, after);
   }
 
@@ -625,27 +629,29 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   widget = the custom widget added in ::create-custom-widget
    *   printOperation = the instance the signal is connected to
    */
-  alias CustomWidgetApplyCallback = void delegate(Widget widget, PrintOperation printOperation);
+  alias CustomWidgetApplyCallbackDlg = void delegate(Widget widget, PrintOperation printOperation);
+  alias CustomWidgetApplyCallbackFunc = void function(Widget widget, PrintOperation printOperation);
 
   /**
    * Connect to CustomWidgetApply signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectCustomWidgetApply(CustomWidgetApplyCallback dlg, Flag!"After" after = No.After)
+  ulong connectCustomWidgetApply(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == CustomWidgetApplyCallbackDlg) || is(T == CustomWidgetApplyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto printOperation = getVal!PrintOperation(_paramVals);
       auto widget = getVal!Widget(&_paramVals[1]);
-      _dgClosure.dlg(widget, printOperation);
+      _dClosure.dlg(widget, printOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("custom-widget-apply", closure, after);
   }
 
@@ -662,27 +668,29 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   result = the result of the print operation
    *   printOperation = the instance the signal is connected to
    */
-  alias DoneCallback = void delegate(PrintOperationResult result, PrintOperation printOperation);
+  alias DoneCallbackDlg = void delegate(PrintOperationResult result, PrintOperation printOperation);
+  alias DoneCallbackFunc = void function(PrintOperationResult result, PrintOperation printOperation);
 
   /**
    * Connect to Done signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDone(DoneCallback dlg, Flag!"After" after = No.After)
+  ulong connectDone(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DoneCallbackDlg) || is(T == DoneCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto printOperation = getVal!PrintOperation(_paramVals);
       auto result = getVal!PrintOperationResult(&_paramVals[1]);
-      _dgClosure.dlg(result, printOperation);
+      _dClosure.dlg(result, printOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("done", closure, after);
   }
 
@@ -731,28 +739,30 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   pageNr = the number of the currently printed page $(LPAREN)0-based$(RPAREN)
    *   printOperation = the instance the signal is connected to
    */
-  alias DrawPageCallback = void delegate(PrintContext context, int pageNr, PrintOperation printOperation);
+  alias DrawPageCallbackDlg = void delegate(PrintContext context, int pageNr, PrintOperation printOperation);
+  alias DrawPageCallbackFunc = void function(PrintContext context, int pageNr, PrintOperation printOperation);
 
   /**
    * Connect to DrawPage signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectDrawPage(DrawPageCallback dlg, Flag!"After" after = No.After)
+  ulong connectDrawPage(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == DrawPageCallbackDlg) || is(T == DrawPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto printOperation = getVal!PrintOperation(_paramVals);
       auto context = getVal!PrintContext(&_paramVals[1]);
       auto pageNr = getVal!int(&_paramVals[2]);
-      _dgClosure.dlg(context, pageNr, printOperation);
+      _dClosure.dlg(context, pageNr, printOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("draw-page", closure, after);
   }
 
@@ -764,27 +774,29 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   context = the `GtkPrintContext` for the current operation
    *   printOperation = the instance the signal is connected to
    */
-  alias EndPrintCallback = void delegate(PrintContext context, PrintOperation printOperation);
+  alias EndPrintCallbackDlg = void delegate(PrintContext context, PrintOperation printOperation);
+  alias EndPrintCallbackFunc = void function(PrintContext context, PrintOperation printOperation);
 
   /**
    * Connect to EndPrint signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectEndPrint(EndPrintCallback dlg, Flag!"After" after = No.After)
+  ulong connectEndPrint(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == EndPrintCallbackDlg) || is(T == EndPrintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto printOperation = getVal!PrintOperation(_paramVals);
       auto context = getVal!PrintContext(&_paramVals[1]);
-      _dgClosure.dlg(context, printOperation);
+      _dClosure.dlg(context, printOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("end-print", closure, after);
   }
 
@@ -805,29 +817,31 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   printOperation = the instance the signal is connected to
    * Returns: %TRUE if pagination is complete
    */
-  alias PaginateCallback = bool delegate(PrintContext context, PrintOperation printOperation);
+  alias PaginateCallbackDlg = bool delegate(PrintContext context, PrintOperation printOperation);
+  alias PaginateCallbackFunc = bool function(PrintContext context, PrintOperation printOperation);
 
   /**
    * Connect to Paginate signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPaginate(PaginateCallback dlg, Flag!"After" after = No.After)
+  ulong connectPaginate(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PaginateCallbackDlg) || is(T == PaginateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto printOperation = getVal!PrintOperation(_paramVals);
       auto context = getVal!PrintContext(&_paramVals[1]);
-      _retval = _dgClosure.dlg(context, printOperation);
+      _retval = _dClosure.dlg(context, printOperation);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("paginate", closure, after);
   }
 
@@ -853,31 +867,33 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   printOperation = the instance the signal is connected to
    * Returns: %TRUE if the listener wants to take over control of the preview
    */
-  alias PreviewCallback = bool delegate(PrintOperationPreview preview, PrintContext context, Window parent, PrintOperation printOperation);
+  alias PreviewCallbackDlg = bool delegate(PrintOperationPreview preview, PrintContext context, Window parent, PrintOperation printOperation);
+  alias PreviewCallbackFunc = bool function(PrintOperationPreview preview, PrintContext context, Window parent, PrintOperation printOperation);
 
   /**
    * Connect to Preview signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectPreview(PreviewCallback dlg, Flag!"After" after = No.After)
+  ulong connectPreview(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == PreviewCallbackDlg) || is(T == PreviewCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
       auto printOperation = getVal!PrintOperation(_paramVals);
       auto preview = getVal!PrintOperationPreview(&_paramVals[1]);
       auto context = getVal!PrintContext(&_paramVals[2]);
       auto parent = getVal!Window(&_paramVals[3]);
-      _retval = _dgClosure.dlg(preview, context, parent, printOperation);
+      _retval = _dClosure.dlg(preview, context, parent, printOperation);
       setVal!bool(_returnValue, _retval);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("preview", closure, after);
   }
 
@@ -892,29 +908,31 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   setup = the `GtkPageSetup`
    *   printOperation = the instance the signal is connected to
    */
-  alias RequestPageSetupCallback = void delegate(PrintContext context, int pageNr, PageSetup setup, PrintOperation printOperation);
+  alias RequestPageSetupCallbackDlg = void delegate(PrintContext context, int pageNr, PageSetup setup, PrintOperation printOperation);
+  alias RequestPageSetupCallbackFunc = void function(PrintContext context, int pageNr, PageSetup setup, PrintOperation printOperation);
 
   /**
    * Connect to RequestPageSetup signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectRequestPageSetup(RequestPageSetupCallback dlg, Flag!"After" after = No.After)
+  ulong connectRequestPageSetup(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == RequestPageSetupCallbackDlg) || is(T == RequestPageSetupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto printOperation = getVal!PrintOperation(_paramVals);
       auto context = getVal!PrintContext(&_paramVals[1]);
       auto pageNr = getVal!int(&_paramVals[2]);
       auto setup = getVal!PageSetup(&_paramVals[3]);
-      _dgClosure.dlg(context, pageNr, setup, printOperation);
+      _dClosure.dlg(context, pageNr, setup, printOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("request-page-setup", closure, after);
   }
 
@@ -925,26 +943,28 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * status.
    *   printOperation = the instance the signal is connected to
    */
-  alias StatusChangedCallback = void delegate(PrintOperation printOperation);
+  alias StatusChangedCallbackDlg = void delegate(PrintOperation printOperation);
+  alias StatusChangedCallbackFunc = void function(PrintOperation printOperation);
 
   /**
    * Connect to StatusChanged signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectStatusChanged(StatusChangedCallback dlg, Flag!"After" after = No.After)
+  ulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == StatusChangedCallbackDlg) || is(T == StatusChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto printOperation = getVal!PrintOperation(_paramVals);
-      _dgClosure.dlg(printOperation);
+      _dClosure.dlg(printOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("status-changed", closure, after);
   }
 
@@ -958,29 +978,31 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   settings = actual print settings
    *   printOperation = the instance the signal is connected to
    */
-  alias UpdateCustomWidgetCallback = void delegate(Widget widget, PageSetup setup, PrintSettings settings, PrintOperation printOperation);
+  alias UpdateCustomWidgetCallbackDlg = void delegate(Widget widget, PageSetup setup, PrintSettings settings, PrintOperation printOperation);
+  alias UpdateCustomWidgetCallbackFunc = void function(Widget widget, PageSetup setup, PrintSettings settings, PrintOperation printOperation);
 
   /**
    * Connect to UpdateCustomWidget signal.
    * Params:
-   *   dlg = signal delegate callback to connect
+   *   callback = signal callback delegate or function to connect
    *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
    * Returns: Signal ID
    */
-  ulong connectUpdateCustomWidget(UpdateCustomWidgetCallback dlg, Flag!"After" after = No.After)
+  ulong connectUpdateCustomWidget(T)(T callback, Flag!"After" after = No.After)
+  if (is(T == UpdateCustomWidgetCallbackDlg) || is(T == UpdateCustomWidgetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
-      auto _dgClosure = cast(DGClosure!(typeof(dlg))*)_closure;
+      auto _dClosure = cast(DGClosure!T*)_closure;
       auto printOperation = getVal!PrintOperation(_paramVals);
       auto widget = getVal!Widget(&_paramVals[1]);
       auto setup = getVal!PageSetup(&_paramVals[2]);
       auto settings = getVal!PrintSettings(&_paramVals[3]);
-      _dgClosure.dlg(widget, setup, settings, printOperation);
+      _dClosure.dlg(widget, setup, settings, printOperation);
     }
 
-    auto closure = new DClosure(dlg, &_cmarshal);
+    auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("update-custom-widget", closure, after);
   }
 }
