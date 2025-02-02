@@ -694,14 +694,17 @@ class Regex : Boxed
    * In this case the output string will be of course equal to string.
    * Params:
    *   string_ = the string to escape
-   *   length = the length of string
    * Returns: a newly-allocated escaped string
    */
-  static string escapeNul(string string_, int length)
+  static string escapeNul(string string_)
   {
     char* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
-    _cretval = g_regex_escape_nul(_string_, length);
+    int _length;
+    if (string_)
+      _length = cast(int)string_.length;
+
+    auto _string_ = cast(const(char)*)string_.ptr;
+    _cretval = g_regex_escape_nul(_string_, _length);
     string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
@@ -715,14 +718,17 @@ class Regex : Boxed
    * in length.
    * Params:
    *   string_ = the string to escape
-   *   length = the length of string, in bytes, or -1 if string is nul-terminated
    * Returns: a newly-allocated escaped string
    */
-  static string escapeString(string string_, int length)
+  static string escapeString(string string_)
   {
     char* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
-    _cretval = g_regex_escape_string(_string_, length);
+    int _length;
+    if (string_)
+      _length = cast(int)string_.length;
+
+    auto _string_ = cast(const(char)*)string_.ptr;
+    _cretval = g_regex_escape_string(_string_, _length);
     string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }

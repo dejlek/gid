@@ -1,5 +1,6 @@
 module Gio.TlsCertificate;
 
+import GLib.Bytes;
 import GLib.DateTime;
 import GLib.ErrorG;
 import GObject.ObjectG;
@@ -244,6 +245,19 @@ class TlsCertificate : ObjectG
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(TlsCertificate, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+   * Gets the value of #GTlsCertificate:dns-names.
+   * Returns: A #GPtrArray of
+   *   #GBytes elements, or %NULL if it's not available.
+   */
+  Bytes[] getDnsNames()
+  {
+    GPtrArray* _cretval;
+    _cretval = g_tls_certificate_get_dns_names(cast(GTlsCertificate*)cPtr);
+    auto _retval = gPtrArrayToD!(Bytes, GidOwnership.Container)(cast(GPtrArray*)_cretval);
     return _retval;
   }
 

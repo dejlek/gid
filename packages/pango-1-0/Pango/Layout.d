@@ -1,5 +1,6 @@
 module Pango.Layout;
 
+import GLib.Bytes;
 import GLib.ErrorG;
 import GObject.ObjectG;
 import Gid.gid;
@@ -75,6 +76,29 @@ class Layout : ObjectG
     PangoLayout* _cretval;
     _cretval = pango_layout_new(context ? cast(PangoContext*)context.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
+  }
+
+  /**
+   * Loads data previously created via [Pango.Layout.serialize].
+   * For a discussion of the supported format, see that function.
+   * Note: to verify that the returned layout is identical to
+   * the one that was serialized, you can compare bytes to the
+   * result of serializing the layout again.
+   * Params:
+   *   context = a `PangoContext`
+   *   bytes = the bytes containing the data
+   *   flags = `PangoLayoutDeserializeFlags`
+   * Returns: a new `PangoLayout`
+   */
+  static Layout deserialize(Context context, Bytes bytes, LayoutDeserializeFlags flags)
+  {
+    PangoLayout* _cretval;
+    GError *_err;
+    _cretval = pango_layout_deserialize(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, flags, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, Yes.Take);
+    return _retval;
   }
 
   /**
@@ -761,6 +785,25 @@ class Layout : ObjectG
   }
 
   /**
+   * Serializes the layout for later deserialization via [Pango.Layout.deserialize].
+   * There are no guarantees about the format of the output across different
+   * versions of Pango and [Pango.Layout.deserialize] will reject data
+   * that it cannot parse.
+   * The intended use of this function is testing, benchmarking and debugging.
+   * The format is not meant as a permanent storage format.
+   * Params:
+   *   flags = `PangoLayoutSerializeFlags`
+   * Returns: a `GBytes` containing the serialized form of layout
+   */
+  Bytes serialize(LayoutSerializeFlags flags)
+  {
+    GBytes* _cretval;
+    _cretval = pango_layout_serialize(cast(PangoLayout*)cPtr, flags);
+    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
    * Sets the alignment for the layout: how partial lines are
    * positioned within the horizontal space available.
    * The default alignment is %PANGO_ALIGN_LEFT.
@@ -948,13 +991,15 @@ class Layout : ObjectG
    * but the markup text isn't scanned for accelerators.
    * Params:
    *   markup = marked-up text
-   *   length = length of marked-up text in bytes, or -1 if markup is
-   *     `NUL`-terminated
    */
-  void setMarkup(string markup, int length)
+  void setMarkup(string markup)
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
-    pango_layout_set_markup(cast(PangoLayout*)cPtr, _markup, length);
+    int _length;
+    if (markup)
+      _length = cast(int)markup.length;
+
+    auto _markup = cast(const(char)*)markup.ptr;
+    pango_layout_set_markup(cast(PangoLayout*)cPtr, _markup, _length);
   }
 
   /**
@@ -970,16 +1015,18 @@ class Layout : ObjectG
    * literal accel_marker character.
    * Params:
    *   markup = marked-up text $(LPAREN)see [Pango Markup](pango_markup.html)$(RPAREN)
-   *   length = length of marked-up text in bytes, or -1 if markup is
-   *     `NUL`-terminated
    *   accelMarker = marker for accelerators in the text
    *   accelChar = return location
    *     for first located accelerator
    */
-  void setMarkupWithAccel(string markup, int length, dchar accelMarker, out dchar accelChar)
+  void setMarkupWithAccel(string markup, dchar accelMarker, out dchar accelChar)
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
-    pango_layout_set_markup_with_accel(cast(PangoLayout*)cPtr, _markup, length, accelMarker, cast(dchar*)&accelChar);
+    int _length;
+    if (markup)
+      _length = cast(int)markup.length;
+
+    auto _markup = cast(const(char)*)markup.ptr;
+    pango_layout_set_markup_with_accel(cast(PangoLayout*)cPtr, _markup, _length, accelMarker, cast(dchar*)&accelChar);
   }
 
   /**

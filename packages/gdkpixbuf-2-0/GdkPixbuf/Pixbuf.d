@@ -1,5 +1,6 @@
 module GdkPixbuf.Pixbuf;
 
+import GLib.Bytes;
 import GLib.ErrorG;
 import GObject.ObjectG;
 import GdkPixbuf.PixbufFormat;
@@ -164,6 +165,29 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_new(colorspace, hasAlpha, bitsPerSample, width, height);
     this(_cretval, Yes.Take);
+  }
+
+  /**
+   * Creates a new #GdkPixbuf out of in-memory readonly image data.
+   * Currently only RGB images with 8 bits per sample are supported.
+   * This is the `GBytes` variant of [GdkPixbuf.Pixbuf.newFromData], useful
+   * for language bindings.
+   * Params:
+   *   data = Image data in 8-bit/sample packed format inside a #GBytes
+   *   colorspace = Colorspace for the image data
+   *   hasAlpha = Whether the data has an opacity channel
+   *   bitsPerSample = Number of bits per sample
+   *   width = Width of the image in pixels, must be > 0
+   *   height = Height of the image in pixels, must be > 0
+   *   rowstride = Distance in bytes between row starts
+   * Returns: A newly-created pixbuf
+   */
+  static Pixbuf newFromBytes(Bytes data, Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height, int rowstride)
+  {
+    PixbufC* _cretval;
+    _cretval = gdk_pixbuf_new_from_bytes(data ? cast(GBytes*)data.cPtr(No.Dup) : null, colorspace, hasAlpha, bitsPerSample, width, height, rowstride);
+    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    return _retval;
   }
 
   /**
@@ -1049,6 +1073,24 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_new_subpixbuf(cast(PixbufC*)cPtr, srcX, srcY, width, height);
     auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+   * Provides a #GBytes buffer containing the raw pixel data; the data
+   * must not be modified.
+   * This function allows skipping the implicit copy that must be made
+   * if [GdkPixbuf.Pixbuf.getPixels] is called on a read-only pixbuf.
+   * Returns: A new reference to a read-only copy of
+   *   the pixel data.  Note that for mutable pixbufs, this function will
+   *   incur a one-time copy of the pixel data for conversion into the
+   *   returned #GBytes.
+   */
+  Bytes readPixelBytes()
+  {
+    GBytes* _cretval;
+    _cretval = gdk_pixbuf_read_pixel_bytes(cast(PixbufC*)cPtr);
+    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

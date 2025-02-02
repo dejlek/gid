@@ -345,13 +345,16 @@ template EditableT()
    * inserted text.
    * Params:
    *   text = the text to insert
-   *   length = the length of the text in bytes, or -1
    *   position = location of the position text will be inserted at
    */
-  override void insertText(string text, int length, ref int position)
+  override void insertText(string text, ref int position)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    gtk_editable_insert_text(cast(GtkEditable*)cPtr, _text, length, cast(int*)&position);
+    int _length;
+    if (text)
+      _length = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    gtk_editable_insert_text(cast(GtkEditable*)cPtr, _text, _length, cast(int*)&position);
   }
 
   /**

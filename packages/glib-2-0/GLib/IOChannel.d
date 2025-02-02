@@ -553,14 +553,15 @@ class IOChannel : Boxed
    *     autodetect.  Autodetection breaks on "\n", "\r\n", "\r", "\0",
    *     and the Unicode paragraph separator. Autodetection should not be
    *     used for anything other than file-based channels.
-   *   length = The length of the termination string. If -1 is passed, the
-   *     string is assumed to be nul-terminated. This option allows
-   *     termination strings with embedded nuls.
    */
-  void setLineTerm(string lineTerm, int length)
+  void setLineTerm(string lineTerm)
   {
-    const(char)* _lineTerm = lineTerm.toCString(No.Alloc);
-    g_io_channel_set_line_term(cast(GIOChannel*)cPtr, _lineTerm, length);
+    int _length;
+    if (lineTerm)
+      _length = cast(int)lineTerm.length;
+
+    auto _lineTerm = cast(const(char)*)lineTerm.ptr;
+    g_io_channel_set_line_term(cast(GIOChannel*)cPtr, _lineTerm, _length);
   }
 
   /**

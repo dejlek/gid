@@ -147,12 +147,12 @@ __gshared extern(C)
   GBytes* function(const(void)* data, size_t size) c_g_bytes_new_static;
   GBytes* function(void* data, size_t size) c_g_bytes_new_take;
   GBytes* function(const(void)* data, size_t size, GDestroyNotify freeFunc, void* userData) c_g_bytes_new_with_free_func;
-  int function(const(void)* bytes1, const(void)* bytes2) c_g_bytes_compare;
-  bool function(const(void)* bytes1, const(void)* bytes2) c_g_bytes_equal;
+  int function(GBytes* bytes1, GBytes* bytes2) c_g_bytes_compare;
+  bool function(GBytes* bytes1, GBytes* bytes2) c_g_bytes_equal;
   const(void)* function(GBytes* bytes, size_t* size) c_g_bytes_get_data;
   const(void)* function(GBytes* bytes, size_t elementSize, size_t offset, size_t nElements) c_g_bytes_get_region;
   size_t function(GBytes* bytes) c_g_bytes_get_size;
-  uint function(const(void)* bytes) c_g_bytes_hash;
+  uint function(GBytes* bytes) c_g_bytes_hash;
   GBytes* function(GBytes* bytes, size_t offset, size_t length) c_g_bytes_new_from_bytes;
   GBytes* function(GBytes* bytes) c_g_bytes_ref;
   void function(GBytes* bytes) c_g_bytes_unref;

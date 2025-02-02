@@ -340,10 +340,9 @@ interface Editable
    * inserted text.
    * Params:
    *   text = the text to insert
-   *   length = the length of the text in bytes, or -1
    *   position = location of the position text will be inserted at
    */
-  void insertText(string text, int length, ref int position);
+  void insertText(string text, ref int position);
 
   /**
    * Selects a region of text.

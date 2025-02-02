@@ -1,5 +1,6 @@
 module GLib.Global;
 
+import GLib.Bytes;
 import GLib.DebugKey;
 import GLib.ErrorG;
 import GLib.IOChannel;
@@ -1651,6 +1652,27 @@ int closefrom(int lowfd)
 }
 
 /**
+ * Computes the checksum for a binary data. This is a
+ * convenience wrapper for [GLib.Checksum.new_], [GLib.Checksum.getString]
+ * and [GLib.Checksum.free].
+ * The hexadecimal string returned will be in lower case.
+ * Params:
+ *   checksumType = a #GChecksumType
+ *   data = binary blob to compute the digest of
+ * Returns: the digest of the binary data as a
+ *   string in hexadecimal, or %NULL if [GLib.Checksum.new_] fails for
+ *   checksum_type. The returned string should be freed with [GLib.Global.gfree] when
+ *   done using it.
+ */
+string computeChecksumForBytes(ChecksumType checksumType, Bytes data)
+{
+  char* _cretval;
+  _cretval = g_compute_checksum_for_bytes(checksumType, data ? cast(GBytes*)data.cPtr(No.Dup) : null);
+  string _retval = _cretval.fromCString(Yes.Free);
+  return _retval;
+}
+
+/**
  * Computes the checksum for a binary data of length. This is a
  * convenience wrapper for [GLib.Checksum.new_], [GLib.Checksum.getString]
  * and [GLib.Checksum.free].
@@ -1692,6 +1714,26 @@ string computeChecksumForString(ChecksumType checksumType, string str, ptrdiff_t
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_compute_checksum_for_string(checksumType, _str, length);
+  string _retval = _cretval.fromCString(Yes.Free);
+  return _retval;
+}
+
+/**
+ * Computes the HMAC for a binary data. This is a
+ * convenience wrapper for [GLib.Hmac.new_], [GLib.Hmac.getString]
+ * and [GLib.Hmac.unref].
+ * The hexadecimal string returned will be in lower case.
+ * Params:
+ *   digestType = a #GChecksumType to use for the HMAC
+ *   key = the key to use in the HMAC
+ *   data = binary blob to compute the HMAC of
+ * Returns: the HMAC of the binary data as a string in hexadecimal.
+ *   The returned string should be freed with [GLib.Global.gfree] when done using it.
+ */
+string computeHmacForBytes(ChecksumType digestType, Bytes key, Bytes data)
+{
+  char* _cretval;
+  _cretval = g_compute_hmac_for_bytes(digestType, key ? cast(GBytes*)key.cPtr(No.Dup) : null, data ? cast(GBytes*)data.cPtr(No.Dup) : null);
   string _retval = _cretval.fromCString(Yes.Free);
   return _retval;
 }

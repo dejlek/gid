@@ -1,6 +1,7 @@
 module GLib.KeyFile;
 
 import GLib.Boxed;
+import GLib.Bytes;
 import GLib.ErrorG;
 import GLib.Types;
 import GLib.c.functions;
@@ -667,6 +668,24 @@ class KeyFile : Boxed
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
     _retval = g_key_file_has_group(cast(GKeyFile*)cPtr, _groupName);
+    return _retval;
+  }
+
+  /**
+   * Loads a key file from the data in bytes into an empty #GKeyFile structure.
+   * If the object cannot be created then %error is set to a #GKeyFileError.
+   * Params:
+   *   bytes = a #GBytes
+   *   flags = flags from #GKeyFileFlags
+   * Returns: %TRUE if a key file could be loaded, %FALSE otherwise
+   */
+  bool loadFromBytes(Bytes bytes, KeyFileFlags flags)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = g_key_file_load_from_bytes(cast(GKeyFile*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, flags, &_err);
+    if (_err)
+      throw new KeyFileException(_err);
     return _retval;
   }
 

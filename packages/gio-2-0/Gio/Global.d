@@ -1,5 +1,6 @@
 module Gio.Global;
 
+import GLib.Bytes;
 import GLib.ErrorG;
 import GLib.Source;
 import GLib.Types;
@@ -1445,6 +1446,36 @@ bool resourcesGetInfo(string path, ResourceLookupFlags lookupFlags, out size_t s
   _retval = g_resources_get_info(_path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
   if (_err)
     throw new ErrorG(_err);
+  return _retval;
+}
+
+/**
+ * Looks for a file at the specified path in the set of
+ * globally registered resources and returns a #GBytes that
+ * lets you directly access the data in memory.
+ * The data is always followed by a zero byte, so you
+ * can safely use the data as a C string. However, that byte
+ * is not included in the size of the GBytes.
+ * For uncompressed resource files this is a pointer directly into
+ * the resource bundle, which is typically in some readonly data section
+ * in the program binary. For compressed files we allocate memory on
+ * the heap and automatically uncompress the data.
+ * lookup_flags controls the behaviour of the lookup.
+ * Params:
+ *   path = A pathname inside the resource
+ *   lookupFlags = A #GResourceLookupFlags
+ * Returns: #GBytes or %NULL on error.
+ *   Free the returned object with [GLib.Bytes.unref]
+ */
+Bytes resourcesLookupData(string path, ResourceLookupFlags lookupFlags)
+{
+  GBytes* _cretval;
+  const(char)* _path = path.toCString(No.Alloc);
+  GError *_err;
+  _cretval = g_resources_lookup_data(_path, lookupFlags, &_err);
+  if (_err)
+    throw new ErrorG(_err);
+  auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 

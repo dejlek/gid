@@ -1,6 +1,7 @@
 module GLib.MappedFile;
 
 import GLib.Boxed;
+import GLib.Bytes;
 import GLib.ErrorG;
 import GLib.Types;
 import GLib.c.functions;
@@ -91,6 +92,21 @@ class MappedFile : Boxed
     if (_err)
       throw new ErrorG(_err);
     auto _retval = _cretval ? new MappedFile(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+   * Creates a new #GBytes which references the data mapped from file.
+   * The mapped contents of the file must not be modified after creating this
+   * bytes object, because a #GBytes should be immutable.
+   * Returns: A newly allocated #GBytes referencing data
+   *   from file
+   */
+  Bytes getBytes()
+  {
+    GBytes* _cretval;
+    _cretval = g_mapped_file_get_bytes(cast(GMappedFile*)cPtr);
+    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

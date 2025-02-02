@@ -103,6 +103,9 @@
 //!set record[Surface].method[get_mime_data].parameters.parameter[data].type '<array length="2" zero-terminated="0" c:type="const guint8**"><type name="guint8" c:type="guint8"/></array>'
 //!set record[Surface].method[set_mime_data].parameters.parameter[data].type '<array length="2" zero-terminated="0" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
 
+//# Use array of characters with a length, to remove the length and optimize
+//!set function[script_write_comment].parameters.parameter[comment].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
 //# Designate parameters as closure data
 //!set callback[ReadFunc].parameters.parameter[closure][closure] 0
 //!set callback[WriteFunc].parameters.parameter[closure][closure] 0

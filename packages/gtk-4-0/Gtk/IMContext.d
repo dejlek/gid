@@ -294,15 +294,18 @@ class IMContext : ObjectG
    * Params:
    *   text = text surrounding the insertion point, as UTF-8.
    *     the preedit string should not be included within text
-   *   len = the length of text, or -1 if text is nul-terminated
    *   cursorIndex = the byte index of the insertion cursor within text.
 
    * Deprecated: Use [Gtk.IMContext.setSurroundingWithSelection] instead
    */
-  void setSurrounding(string text, int len, int cursorIndex)
+  void setSurrounding(string text, int cursorIndex)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    gtk_im_context_set_surrounding(cast(GtkIMContext*)cPtr, _text, len, cursorIndex);
+    int _len;
+    if (text)
+      _len = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    gtk_im_context_set_surrounding(cast(GtkIMContext*)cPtr, _text, _len, cursorIndex);
   }
 
   /**
@@ -313,14 +316,17 @@ class IMContext : ObjectG
    * Params:
    *   text = text surrounding the insertion point, as UTF-8.
    *     the preedit string should not be included within text
-   *   len = the length of text, or -1 if text is nul-terminated
    *   cursorIndex = the byte index of the insertion cursor within text
    *   anchorIndex = the byte index of the selection bound within text
    */
-  void setSurroundingWithSelection(string text, int len, int cursorIndex, int anchorIndex)
+  void setSurroundingWithSelection(string text, int cursorIndex, int anchorIndex)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    gtk_im_context_set_surrounding_with_selection(cast(GtkIMContext*)cPtr, _text, len, cursorIndex, anchorIndex);
+    int _len;
+    if (text)
+      _len = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    gtk_im_context_set_surrounding_with_selection(cast(GtkIMContext*)cPtr, _text, _len, cursorIndex, anchorIndex);
   }
 
   /**

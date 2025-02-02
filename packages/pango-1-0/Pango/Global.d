@@ -100,21 +100,24 @@ Attribute attrBaselineShiftNew(int shift)
  * by funcPango.default_break and funcPango.tailor_break.
  * Params:
  *   text = text to break. Must be valid UTF-8
- *   length = length of text in bytes $(LPAREN)may be -1 if text is nul-terminated$(RPAREN)
  *   attrList = `PangoAttrList` to apply
  *   offset = Byte offset of text from the beginning of the paragraph
  *   attrs = array with one `PangoLogAttr`
  *     per character in text, plus one extra, to be filled in
  */
-void attrBreak(string text, int length, AttrList attrList, int offset, LogAttr[] attrs)
+void attrBreak(string text, AttrList attrList, int offset, LogAttr[] attrs)
 {
-  const(char)* _text = text.toCString(No.Alloc);
+  int _length;
+  if (text)
+    _length = cast(int)text.length;
+
+  auto _text = cast(const(char)*)text.ptr;
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_attr_break(_text, length, attrList ? cast(PangoAttrList*)attrList.cPtr(No.Dup) : null, offset, _attrs, _attrsLen);
+  pango_attr_break(_text, _length, attrList ? cast(PangoAttrList*)attrList.cPtr(No.Dup) : null, offset, _attrs, _attrsLen);
 }
 
 /**
@@ -590,22 +593,25 @@ Attribute attrWordNew()
  * For most purposes you may want to use funcPango.get_log_attrs.
  * Params:
  *   text = the text to process. Must be valid UTF-8
- *   length = length of text in bytes $(LPAREN)may be -1 if text is nul-terminated$(RPAREN)
  *   analysis = `PangoAnalysis` structure for text
  *   attrs = an array to store character information in
 
  * Deprecated: Use funcPango.default_break,
  *   funcPango.tailor_break and funcPango.attr_break.
  */
-void break_(string text, int length, Analysis analysis, LogAttr[] attrs)
+void break_(string text, Analysis analysis, LogAttr[] attrs)
 {
-  const(char)* _text = text.toCString(No.Alloc);
+  int _length;
+  if (text)
+    _length = cast(int)text.length;
+
+  auto _text = cast(const(char)*)text.ptr;
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_break(_text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, _attrs, _attrsLen);
+  pango_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, _attrs, _attrsLen);
 }
 
 /**
@@ -617,15 +623,18 @@ void break_(string text, int length, Analysis analysis, LogAttr[] attrs)
  * See funcPango.attr_break for attribute-based customization.
  * Params:
  *   text = text to break. Must be valid UTF-8
- *   length = length of text in bytes $(LPAREN)may be -1 if text is nul-terminated$(RPAREN)
  *   analysis = a `PangoAnalysis` structure for the text
  *   attrs = logical attributes to fill in
  *   attrsLen = size of the array passed as attrs
  */
-void defaultBreak(string text, int length, Analysis analysis, LogAttr attrs, int attrsLen)
+void defaultBreak(string text, Analysis analysis, LogAttr attrs, int attrsLen)
 {
-  const(char)* _text = text.toCString(No.Alloc);
-  pango_default_break(_text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, &attrs, attrsLen);
+  int _length;
+  if (text)
+    _length = cast(int)text.length;
+
+  auto _text = cast(const(char)*)text.ptr;
+  pango_default_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, &attrs, attrsLen);
 }
 
 /**
@@ -656,15 +665,18 @@ void extentsToPixels(Rectangle inclusive, Rectangle nearest)
  * direction, according to the Unicode bidirectional algorithm.
  * Params:
  *   text = the text to process. Must be valid UTF-8
- *   length = length of text in bytes $(LPAREN)may be -1 if text is nul-terminated$(RPAREN)
  * Returns: The direction corresponding to the first strong character.
  *   If no such character is found, then %PANGO_DIRECTION_NEUTRAL is returned.
  */
-Direction findBaseDir(string text, int length)
+Direction findBaseDir(string text)
 {
   PangoDirection _cretval;
-  const(char)* _text = text.toCString(No.Alloc);
-  _cretval = pango_find_base_dir(_text, length);
+  int _length;
+  if (text)
+    _length = cast(int)text.length;
+
+  auto _text = cast(const(char)*)text.ptr;
+  _cretval = pango_find_base_dir(_text, _length);
   Direction _retval = cast(Direction)_cretval;
   return _retval;
 }
@@ -683,16 +695,19 @@ Direction findBaseDir(string text, int length)
  * $(LPAREN)an index one off the end$(RPAREN).
  * Params:
  *   text = UTF-8 text
- *   length = length of text in bytes, or -1 if nul-terminated
  *   paragraphDelimiterIndex = return location for index of
  *     delimiter
  *   nextParagraphStart = return location for start of next
  *     paragraph
  */
-void findParagraphBoundary(string text, int length, out int paragraphDelimiterIndex, out int nextParagraphStart)
+void findParagraphBoundary(string text, out int paragraphDelimiterIndex, out int nextParagraphStart)
 {
-  const(char)* _text = text.toCString(No.Alloc);
-  pango_find_paragraph_boundary(_text, length, cast(int*)&paragraphDelimiterIndex, cast(int*)&nextParagraphStart);
+  int _length;
+  if (text)
+    _length = cast(int)text.length;
+
+  auto _text = cast(const(char)*)text.ptr;
+  pango_find_paragraph_boundary(_text, _length, cast(int*)&paragraphDelimiterIndex, cast(int*)&nextParagraphStart);
 }
 
 /**
@@ -706,21 +721,24 @@ void findParagraphBoundary(string text, int length, out int paragraphDelimiterIn
  * a word to know the word is a word$(RPAREN).
  * Params:
  *   text = text to process. Must be valid UTF-8
- *   length = length in bytes of text
  *   level = embedding level, or -1 if unknown
  *   language = language tag
  *   attrs = array with one `PangoLogAttr`
  *     per character in text, plus one extra, to be filled in
  */
-void getLogAttrs(string text, int length, int level, PgLanguage language, LogAttr[] attrs)
+void getLogAttrs(string text, int level, PgLanguage language, LogAttr[] attrs)
 {
-  const(char)* _text = text.toCString(No.Alloc);
+  int _length;
+  if (text)
+    _length = cast(int)text.length;
+
+  auto _text = cast(const(char)*)text.ptr;
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_get_log_attrs(_text, length, level, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null, _attrs, _attrsLen);
+  pango_get_log_attrs(_text, _length, level, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null, _attrs, _attrsLen);
 }
 
 /**
@@ -903,21 +921,24 @@ bool parseEnum(GType type, string str, out int value, bool warn, out string poss
  * for error.
  * Params:
  *   markupText = markup to parse $(LPAREN)see the [Pango Markup](pango_markup.html) docs$(RPAREN)
- *   length = length of markup_text, or -1 if nul-terminated
  *   accelMarker = character that precedes an accelerator, or 0 for none
  *   attrList = address of return location for a `PangoAttrList`
  *   text = address of return location for text with tags stripped
  *   accelChar = address of return location for accelerator char
  * Returns: %FALSE if error is set, otherwise %TRUE
  */
-bool parseMarkup(string markupText, int length, dchar accelMarker, out AttrList attrList, out string text, out dchar accelChar)
+bool parseMarkup(string markupText, dchar accelMarker, out AttrList attrList, out string text, out dchar accelChar)
 {
   bool _retval;
-  const(char)* _markupText = markupText.toCString(No.Alloc);
+  int _length;
+  if (markupText)
+    _length = cast(int)markupText.length;
+
+  auto _markupText = cast(const(char)*)markupText.ptr;
   PangoAttrList* _attrList;
   char* _text;
   GError *_err;
-  _retval = pango_parse_markup(_markupText, length, accelMarker, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
+  _retval = pango_parse_markup(_markupText, _length, accelMarker, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
     throw new ErrorG(_err);
   attrList = new AttrList(cast(void*)_attrList, Yes.Take);
@@ -1081,14 +1102,17 @@ Item[] reorderItems(Item[] items)
  * calling funcPango.shape.
  * Params:
  *   text = the text to process
- *   length = the length $(LPAREN)in bytes$(RPAREN) of text
  *   analysis = `PangoAnalysis` structure from funcPango.itemize
  *   glyphs = glyph string in which to store results
  */
-void shape(string text, int length, Analysis analysis, GlyphString glyphs)
+void shape(string text, Analysis analysis, GlyphString glyphs)
 {
-  const(char)* _text = text.toCString(No.Alloc);
-  pango_shape(_text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
+  int _length;
+  if (text)
+    _length = cast(int)text.length;
+
+  auto _text = cast(const(char)*)text.ptr;
+  pango_shape(_text, _length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1111,17 +1135,23 @@ void shape(string text, int length, Analysis analysis, GlyphString glyphs)
  * funcPango.shape_full.
  * Params:
  *   itemText = valid UTF-8 text to shape.
- *   itemLength = the length $(LPAREN)in bytes$(RPAREN) of item_text. -1 means nul-terminated text.
  *   paragraphText = text of the paragraph $(LPAREN)see details$(RPAREN).
- *   paragraphLength = the length $(LPAREN)in bytes$(RPAREN) of paragraph_text. -1 means nul-terminated text.
  *   analysis = `PangoAnalysis` structure from funcPango.itemize.
  *   glyphs = glyph string in which to store results.
  */
-void shapeFull(string itemText, int itemLength, string paragraphText, int paragraphLength, Analysis analysis, GlyphString glyphs)
+void shapeFull(string itemText, string paragraphText, Analysis analysis, GlyphString glyphs)
 {
-  const(char)* _itemText = itemText.toCString(No.Alloc);
-  const(char)* _paragraphText = paragraphText.toCString(No.Alloc);
-  pango_shape_full(_itemText, itemLength, _paragraphText, paragraphLength, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
+  int _itemLength;
+  if (itemText)
+    _itemLength = cast(int)itemText.length;
+
+  auto _itemText = cast(const(char)*)itemText.ptr;
+  int _paragraphLength;
+  if (paragraphText)
+    _paragraphLength = cast(int)paragraphText.length;
+
+  auto _paragraphText = cast(const(char)*)paragraphText.ptr;
+  pango_shape_full(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1138,16 +1168,18 @@ void shapeFull(string itemText, int itemLength, string paragraphText, int paragr
  * Params:
  *   item = `PangoItem` to shape
  *   paragraphText = text of the paragraph $(LPAREN)see details$(RPAREN).
- *   paragraphLength = the length $(LPAREN)in bytes$(RPAREN) of paragraph_text.
- *     -1 means nul-terminated text.
  *   logAttrs = array of `PangoLogAttr` for item
  *   glyphs = glyph string in which to store results
  *   flags = flags influencing the shaping process
  */
-void shapeItem(Item item, string paragraphText, int paragraphLength, LogAttr logAttrs, GlyphString glyphs, ShapeFlags flags)
+void shapeItem(Item item, string paragraphText, LogAttr logAttrs, GlyphString glyphs, ShapeFlags flags)
 {
-  const(char)* _paragraphText = paragraphText.toCString(No.Alloc);
-  pango_shape_item(item ? cast(PangoItem*)item.cPtr(No.Dup) : null, _paragraphText, paragraphLength, &logAttrs, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, flags);
+  int _paragraphLength;
+  if (paragraphText)
+    _paragraphLength = cast(int)paragraphText.length;
+
+  auto _paragraphText = cast(const(char)*)paragraphText.ptr;
+  pango_shape_item(item ? cast(PangoItem*)item.cPtr(No.Dup) : null, _paragraphText, _paragraphLength, &logAttrs, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, flags);
 }
 
 /**
@@ -1167,20 +1199,24 @@ void shapeItem(Item item, string paragraphText, int paragraphLength, LogAttr log
  * funcPango.shape_with_flags.
  * Params:
  *   itemText = valid UTF-8 text to shape
- *   itemLength = the length $(LPAREN)in bytes$(RPAREN) of item_text.
- *     -1 means nul-terminated text.
  *   paragraphText = text of the paragraph $(LPAREN)see details$(RPAREN).
- *   paragraphLength = the length $(LPAREN)in bytes$(RPAREN) of paragraph_text.
- *     -1 means nul-terminated text.
  *   analysis = `PangoAnalysis` structure from funcPango.itemize
  *   glyphs = glyph string in which to store results
  *   flags = flags influencing the shaping process
  */
-void shapeWithFlags(string itemText, int itemLength, string paragraphText, int paragraphLength, Analysis analysis, GlyphString glyphs, ShapeFlags flags)
+void shapeWithFlags(string itemText, string paragraphText, Analysis analysis, GlyphString glyphs, ShapeFlags flags)
 {
-  const(char)* _itemText = itemText.toCString(No.Alloc);
-  const(char)* _paragraphText = paragraphText.toCString(No.Alloc);
-  pango_shape_with_flags(_itemText, itemLength, _paragraphText, paragraphLength, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, flags);
+  int _itemLength;
+  if (itemText)
+    _itemLength = cast(int)itemText.length;
+
+  auto _itemText = cast(const(char)*)itemText.ptr;
+  int _paragraphLength;
+  if (paragraphText)
+    _paragraphLength = cast(int)paragraphText.length;
+
+  auto _paragraphText = cast(const(char)*)paragraphText.ptr;
+  pango_shape_with_flags(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, flags);
 }
 
 /**
@@ -1219,22 +1255,25 @@ string[] splitFileList(string str)
  * to apply attributes to the whole paragraph.
  * Params:
  *   text = text to process. Must be valid UTF-8
- *   length = length in bytes of text
  *   analysis = `PangoAnalysis` for text
  *   offset = Byte offset of text from the beginning of the
  *     paragraph, or -1 to ignore attributes from analysis
  *   attrs = array with one `PangoLogAttr`
  *     per character in text, plus one extra, to be filled in
  */
-void tailorBreak(string text, int length, Analysis analysis, int offset, LogAttr[] attrs)
+void tailorBreak(string text, Analysis analysis, int offset, LogAttr[] attrs)
 {
-  const(char)* _text = text.toCString(No.Alloc);
+  int _length;
+  if (text)
+    _length = cast(int)text.length;
+
+  auto _text = cast(const(char)*)text.ptr;
   int _attrsLen;
   if (attrs)
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_tailor_break(_text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, offset, _attrs, _attrsLen);
+  pango_tailor_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, offset, _attrs, _attrsLen);
 }
 
 /**

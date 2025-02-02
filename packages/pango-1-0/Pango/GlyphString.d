@@ -134,17 +134,20 @@ class GlyphString : Boxed
    * </picture>
    * Params:
    *   text = the text for the run
-   *   length = the number of bytes $(LPAREN)not characters$(RPAREN) in text.
    *   analysis = the analysis information return from funcitemize
    *   index = the byte index within text
    *   trailing = whether we should compute the result for the beginning $(LPAREN)%FALSE$(RPAREN)
    *     or end $(LPAREN)%TRUE$(RPAREN) of the character.
    *   xPos = location to store result
    */
-  void indexToX(string text, int length, Analysis analysis, int index, bool trailing, out int xPos)
+  void indexToX(string text, Analysis analysis, int index, bool trailing, out int xPos)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    pango_glyph_string_index_to_x(cast(PangoGlyphString*)cPtr, _text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, index, trailing, cast(int*)&xPos);
+    int _length;
+    if (text)
+      _length = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    pango_glyph_string_index_to_x(cast(PangoGlyphString*)cPtr, _text, _length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, index, trailing, cast(int*)&xPos);
   }
 
   /**
@@ -155,7 +158,6 @@ class GlyphString : Boxed
    * clusters.
    * Params:
    *   text = the text for the run
-   *   length = the number of bytes $(LPAREN)not characters$(RPAREN) in text.
    *   analysis = the analysis information return from funcitemize
    *   attrs = `PangoLogAttr` array for text
    *   index = the byte index within text
@@ -163,10 +165,14 @@ class GlyphString : Boxed
    *     or end $(LPAREN)%TRUE$(RPAREN) of the character.
    *   xPos = location to store result
    */
-  void indexToXFull(string text, int length, Analysis analysis, LogAttr attrs, int index, bool trailing, out int xPos)
+  void indexToXFull(string text, Analysis analysis, LogAttr attrs, int index, bool trailing, out int xPos)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    pango_glyph_string_index_to_x_full(cast(PangoGlyphString*)cPtr, _text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, &attrs, index, trailing, cast(int*)&xPos);
+    int _length;
+    if (text)
+      _length = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    pango_glyph_string_index_to_x_full(cast(PangoGlyphString*)cPtr, _text, _length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, &attrs, index, trailing, cast(int*)&xPos);
   }
 
   /**
@@ -188,16 +194,19 @@ class GlyphString : Boxed
    * attributes for the text to compute the valid cursor position.
    * Params:
    *   text = the text for the run
-   *   length = the number of bytes $(LPAREN)not characters$(RPAREN) in text.
    *   analysis = the analysis information return from funcitemize
    *   xPos = the x offset $(LPAREN)in Pango units$(RPAREN)
    *   index = location to store calculated byte index within text
    *   trailing = location to store a boolean indicating whether the
    *     user clicked on the leading or trailing edge of the character
    */
-  void xToIndex(string text, int length, Analysis analysis, int xPos, out int index, out int trailing)
+  void xToIndex(string text, Analysis analysis, int xPos, out int index, out int trailing)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    pango_glyph_string_x_to_index(cast(PangoGlyphString*)cPtr, _text, length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, xPos, cast(int*)&index, cast(int*)&trailing);
+    int _length;
+    if (text)
+      _length = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    pango_glyph_string_x_to_index(cast(PangoGlyphString*)cPtr, _text, _length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, xPos, cast(int*)&index, cast(int*)&trailing);
   }
 }

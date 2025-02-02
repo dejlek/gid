@@ -3,7 +3,6 @@
 //# Disable binding of container types
 //!set record[Array][disable] 1
 //!set record[ByteArray][disable] 1
-//!set record[Bytes][disable] 1
 //!set record[PtrArray][disable] 1
 //!set record[List][disable] 1
 //!set record[SList][disable] 1
@@ -255,6 +254,11 @@
 //!set record[Rand].constructor[new_with_seed_array].parameters.parameter[seed].type '<array length="1" zero-terminated="0" c:type="const guint32*"><type name="guint32" c:type="guint32"/></array>'
 //!set record[TestLogBuffer].method[push].parameters.parameter[bytes].type '<array length="0" zero-terminated="0" c:type="const guint8*"><type name="guint8" c:type="guint8"/></array>'
 //!set record[StrvBuilder].method[end].return-value.array '<array zero-terminated="1" c:type="char**"><type name="utf8" c:type="char*"/></array>'
+
+//# Use array of characters with a length, to remove the length and optimize
+//!set record[IOChannel].method[set_line_term].parameters.parameter[line_term].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[Regex].function[escape_nul].parameters.parameter[string].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set record[Regex].function[escape_string].parameters.parameter[string].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 
 //# Set writable to false as it should be
 //!set record[Node].field[children][writable] 0

@@ -775,12 +775,15 @@ class TextBuffer : ObjectG
    * Params:
    *   iter = a position in the buffer
    *   text = text in UTF-8 format
-   *   len = length of text in bytes, or -1
    */
-  void insert(TextIter iter, string text, int len)
+  void insert(TextIter iter, string text)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    gtk_text_buffer_insert(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _text, len);
+    int _len;
+    if (text)
+      _len = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    gtk_text_buffer_insert(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _text, _len);
   }
 
   /**
@@ -789,12 +792,15 @@ class TextBuffer : ObjectG
    * using the current cursor position as the insertion point.
    * Params:
    *   text = text in UTF-8 format
-   *   len = length of text, in bytes
    */
-  void insertAtCursor(string text, int len)
+  void insertAtCursor(string text)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    gtk_text_buffer_insert_at_cursor(cast(GtkTextBuffer*)cPtr, _text, len);
+    int _len;
+    if (text)
+      _len = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    gtk_text_buffer_insert_at_cursor(cast(GtkTextBuffer*)cPtr, _text, _len);
   }
 
   /**
@@ -830,15 +836,18 @@ class TextBuffer : ObjectG
    * Params:
    *   iter = a position in buffer
    *   text = some UTF-8 text
-   *   len = length of text in bytes, or -1
    *   defaultEditable = default editability of buffer
    * Returns: whether text was actually inserted
    */
-  bool insertInteractive(TextIter iter, string text, int len, bool defaultEditable)
+  bool insertInteractive(TextIter iter, string text, bool defaultEditable)
   {
     bool _retval;
-    const(char)* _text = text.toCString(No.Alloc);
-    _retval = gtk_text_buffer_insert_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _text, len, defaultEditable);
+    int _len;
+    if (text)
+      _len = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    _retval = gtk_text_buffer_insert_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _text, _len, defaultEditable);
     return _retval;
   }
 
@@ -851,15 +860,18 @@ class TextBuffer : ObjectG
    * result of [Gtk.TextView.getEditable] is appropriate here.
    * Params:
    *   text = text in UTF-8 format
-   *   len = length of text in bytes, or -1
    *   defaultEditable = default editability of buffer
    * Returns: whether text was actually inserted
    */
-  bool insertInteractiveAtCursor(string text, int len, bool defaultEditable)
+  bool insertInteractiveAtCursor(string text, bool defaultEditable)
   {
     bool _retval;
-    const(char)* _text = text.toCString(No.Alloc);
-    _retval = gtk_text_buffer_insert_interactive_at_cursor(cast(GtkTextBuffer*)cPtr, _text, len, defaultEditable);
+    int _len;
+    if (text)
+      _len = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    _retval = gtk_text_buffer_insert_interactive_at_cursor(cast(GtkTextBuffer*)cPtr, _text, _len, defaultEditable);
     return _retval;
   }
 
@@ -872,12 +884,15 @@ class TextBuffer : ObjectG
    * Params:
    *   iter = location to insert the markup
    *   markup = a nul-terminated UTF-8 string containing Pango markup
-   *   len = length of markup in bytes, or -1
    */
-  void insertMarkup(TextIter iter, string markup, int len)
+  void insertMarkup(TextIter iter, string markup)
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_text_buffer_insert_markup(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _markup, len);
+    int _len;
+    if (markup)
+      _len = cast(int)markup.length;
+
+    auto _markup = cast(const(char)*)markup.ptr;
+    gtk_text_buffer_insert_markup(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _markup, _len);
   }
 
   /**
@@ -1140,12 +1155,15 @@ class TextBuffer : ObjectG
    * text must be valid UTF-8.
    * Params:
    *   text = UTF-8 text to insert
-   *   len = length of text in bytes
    */
-  void setText(string text, int len)
+  void setText(string text)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    gtk_text_buffer_set_text(cast(GtkTextBuffer*)cPtr, _text, len);
+    int _len;
+    if (text)
+      _len = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    gtk_text_buffer_set_text(cast(GtkTextBuffer*)cPtr, _text, _len);
   }
 
   /**

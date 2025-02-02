@@ -1,5 +1,6 @@
 module HarfBuzz.Global;
 
+import GLib.Bytes;
 import GLib.Types;
 import Gid.gid;
 import HarfBuzz.Blob;
@@ -3296,6 +3297,21 @@ Bool ftHbFontChanged(Font font)
 {
   Bool _retval;
   _retval = hb_ft_hb_font_changed(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+ * Creates an #hb_blob_t blob from the specified
+ * GBytes data structure.
+ * Params:
+ *   gbytes = the GBytes structure to work upon
+ * Returns: the new #hb_blob_t blob object
+ */
+Blob glibBlobCreate(Bytes gbytes)
+{
+  hb_blob_t* _cretval;
+  _cretval = hb_glib_blob_create(gbytes ? cast(GBytes*)gbytes.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 

@@ -1676,12 +1676,15 @@ Surface scriptSurfaceCreateForTarget(Device script, Surface target)
  * Params:
  *   script = the script $(LPAREN)output device$(RPAREN)
  *   comment = the string to emit
- *   len = the length of the string to write, or -1 to use strlen$(LPAREN)$(RPAREN)
  */
-void scriptWriteComment(Device script, string comment, int len)
+void scriptWriteComment(Device script, string comment)
 {
-  const(char)* _comment = comment.toCString(No.Alloc);
-  cairo_script_write_comment(script ? cast(cairo_device_t*)script.cPtr(No.Dup) : null, _comment, len);
+  int _len;
+  if (comment)
+    _len = cast(int)comment.length;
+
+  auto _comment = cast(const(char)*)comment.ptr;
+  cairo_script_write_comment(script ? cast(cairo_device_t*)script.cPtr(No.Dup) : null, _comment, _len);
 }
 
 /**

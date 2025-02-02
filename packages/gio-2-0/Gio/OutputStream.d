@@ -1,5 +1,6 @@
 module Gio.OutputStream;
 
+import GLib.Bytes;
 import GLib.ErrorG;
 import GObject.ObjectG;
 import Gid.gid;
@@ -511,6 +512,65 @@ class OutputStream : ObjectG
     auto _buffer = cast(void*)buffer.ptr;
     auto _callback = freezeDelegate(cast(void*)&callback);
     g_output_stream_write_async(cast(GOutputStream*)cPtr, _buffer, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+  }
+
+  /**
+   * A wrapper function for [Gio.OutputStream.write] which takes a
+   * #GBytes as input.  This can be more convenient for use by language
+   * bindings or in other cases where the refcounted nature of #GBytes
+   * is helpful over a bare pointer interface.
+   * However, note that this function may still perform partial writes,
+   * just like [Gio.OutputStream.write].  If that occurs, to continue
+   * writing, you will need to create a new #GBytes containing just the
+   * remaining bytes, using [GLib.Bytes.newFromBytes]. Passing the same
+   * #GBytes instance multiple times potentially can result in duplicated
+   * data in the output stream.
+   * Params:
+   *   bytes = the #GBytes to write
+   *   cancellable = optional cancellable object
+   * Returns: Number of bytes written, or -1 on error
+   */
+  ptrdiff_t writeBytes(Bytes bytes, Cancellable cancellable)
+  {
+    ptrdiff_t _retval;
+    GError *_err;
+    _retval = g_output_stream_write_bytes(cast(GOutputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
+  }
+
+  /**
+   * This function is similar to [Gio.OutputStream.writeAsync], but
+   * takes a #GBytes as input.  Due to the refcounted nature of #GBytes,
+   * this allows the stream to avoid taking a copy of the data.
+   * However, note that this function may still perform partial writes,
+   * just like [Gio.OutputStream.writeAsync]. If that occurs, to continue
+   * writing, you will need to create a new #GBytes containing just the
+   * remaining bytes, using [GLib.Bytes.newFromBytes]. Passing the same
+   * #GBytes instance multiple times potentially can result in duplicated
+   * data in the output stream.
+   * For the synchronous, blocking version of this function, see
+   * [Gio.OutputStream.writeBytes].
+   * Params:
+   *   bytes = The bytes to write
+   *   ioPriority = the io priority of the request.
+   *   cancellable = optional #GCancellable object, %NULL to ignore.
+   *   callback = a #GAsyncReadyCallback
+   *     to call when the request is satisfied
+   */
+  void writeBytesAsync(Bytes bytes, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  {
+    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(AsyncReadyCallback*)data;
+
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+    }
+
+    auto _callback = freezeDelegate(cast(void*)&callback);
+    g_output_stream_write_bytes_async(cast(GOutputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**

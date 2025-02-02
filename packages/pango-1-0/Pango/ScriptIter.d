@@ -41,17 +41,20 @@ class ScriptIter : Boxed
    * [Pango.ScriptIter.free].
    * Params:
    *   text = a UTF-8 string
-   *   length = length of text, or -1 if text is nul-terminated
    * Returns: the new script iterator, initialized
    *   to point at the first range in the text, which should be
    *   freed with [Pango.ScriptIter.free]. If the string is
    *   empty, it will point at an empty range.
    */
-  this(string text, int length)
+  this(string text)
   {
     PangoScriptIter* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
-    _cretval = pango_script_iter_new(_text, length);
+    int _length;
+    if (text)
+      _length = cast(int)text.length;
+
+    auto _text = cast(const(char)*)text.ptr;
+    _cretval = pango_script_iter_new(_text, _length);
     this(_cretval, Yes.Take);
   }
 

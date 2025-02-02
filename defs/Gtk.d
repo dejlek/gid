@@ -47,6 +47,17 @@
 //# Change Builder.new_from_string to take an array of characters with a length, to remove the length and optimize
 //!set class[Builder].constructor[new_from_string].parameters.parameter[string].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'
 
+//# Use array of characters with a length, to remove the length and optimize
+//!set class[TextBuffer].method[set_text].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].method[insert].parameters.parameter[text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].method[insert_at_cursor].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].method[insert_interactive].parameters.parameter[text].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].method[insert_interactive_at_cursor].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[TextBuffer].method[insert_markup].parameters.parameter[markup].type '<array length="2" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set interface[Editable].method[insert_text].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[IMContext].method[set_surrounding].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+//!set class[IMContext].method[set_surrounding_with_selection].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
 //!class ApplicationWindow
   // Add base class alias for activateAction since it is used in GtkWidget and Gio.ActionGroup interface
   alias activateAction = Widget.activateAction;
