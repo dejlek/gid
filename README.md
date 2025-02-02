@@ -19,6 +19,13 @@ For a quickstart guide to developing Gtk4 GUI applications, please consult the [
 The remainder of this document provides an overview of the giD bindings.
 
 
+## Versions and API Stability
+
+Currently the giD API should be considered to be unstable.  This is the reason for the current versions being **0.9.x**.
+The API may break on each 0.9.x release and therefore any applications depending on giD libraries should specify the exact version `==0.9.0` for example.
+Once v1.0.0 is released, an increment in the micro version will be backwards compatible, and minor version increments may break backwards compatibility.
+
+
 ## API Reference
 
 Currently there isn't any giD specific API reference documentation for these D library bindings.
@@ -80,6 +87,17 @@ Here are some general rules about symbol renaming:
    after removing the module prefix. `GTK_INPUT_ERROR` for example becomes just `INPUT_ERROR`.
  * Any reserved words have an underscore appended to them.
    For example a function argument named `version` is a reserved D word and would therefore become `version_`.
+ * Signal names are in **kebab-case** and are converted to signal **connectKebabCase** templates.
+
+### Specific Symbol Renames
+
+| GLib C Type      | D Type            |
+|------------------|-------------------|
+| GVariant         | VariantG          |
+| GObject          | ObjectG           |
+| GioApplication   | ApplicationGio    |
+
+These renames were done to avoid conflicts with built in D types and between modules (like Gtk.Application and Gio.Application).
 
 
 ## Output and Input/Output Arguments
@@ -134,7 +152,7 @@ Flags default to using `uint` and can be logically OR'd together.
 ## Arrays and Containers
 
 All arrays and GLib container types are converted between D dynamic arrays.
-This includes: GArray, GByteArray, GBytes, GPtrArray, GList, and GSList.
+This includes: GArray, GByteArray, GPtrArray, GList, and GSList.
 
 
 ## Hash Tables
@@ -182,18 +200,20 @@ For getting the GLib GType for the underlying C GObject. There is also a static 
 
 ### Signals
 
-For each GObject signal a `SignalNameCallback` delegate alias is defined and `connectSignalName` method is added.
-The delegate arguments are the C signal arguments marshalled to D and the object instance is the last argument (instead of the first).
+For each GObject signal a `SignalNameCallbackDlg` delegate alias and `SignalNameCallbackFunc` alias is defined and a `connectSignalName` template is added.
+The delegate and function arguments are the C signal arguments marshalled to D and the object instance is the last argument (instead of the first).
 
 Here is an example of what the [command-line](https://docs.gtk.org/gio/signal.Application.command-line.html) signal of Gio.Application looks like:
 
 ```D
-alias CommandLineCallback = int delegate(ApplicationCommandLine commandLine, Application application);
+alias CommandLineCallbackDlg = int delegate(ApplicationCommandLine commandLine, ApplicationGio applicationGio);
+alias CommandLineCallbackFunc = int function(ApplicationCommandLine commandLine, ApplicationGio applicationGio);
 
-ulong connectCommandLine(CommandLineCallback dlg, Flag!"After" after = No.After)
+ulong connectCommandLine(T)(T callback, Flag!"After" after = No.After)
+if (is(T : CommandLineCallbackDlg) || is(T : CommandLineCallbackFunc))
 ```
 
-The return value from the connect method is a signal handle,
+The return value from the connect template is a signal handle,
 which can be passed to functions in GObject.Global such as: `signalHandlerBlock`, `signalHandlerDisconnect`, etc.
 
 The `after` argument can be set to `Yes.After` to execute the signal callback after other callbacks (defaults to No).
@@ -388,4 +408,4 @@ Additionally destroy callbacks for data are also unnecessary and are managed aut
 
 **NOTE:** A current limitation is that there aren't bindings for using functions instead of delegates.
 This means that callbacks must be delegates and within an Object or other context.
-One notable example is when attempting to connect a signal handler which is declared as a function.
+Signal connect handlers do have support for functions though, so this only affects other function/method bindings which have callbacks.
