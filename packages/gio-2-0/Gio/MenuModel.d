@@ -280,7 +280,7 @@ class MenuModel : ObjectG
    * Returns: Signal ID
    */
   ulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ItemsChangedCallbackDlg) || is(T == ItemsChangedCallbackFunc))
+  if (is(T : ItemsChangedCallbackDlg) || is(T : ItemsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

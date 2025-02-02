@@ -178,7 +178,7 @@ class AppLaunchContext : ObjectG
    * Returns: Signal ID
    */
   ulong connectLaunchFailed(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == LaunchFailedCallbackDlg) || is(T == LaunchFailedCallbackFunc))
+  if (is(T : LaunchFailedCallbackDlg) || is(T : LaunchFailedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -225,7 +225,7 @@ class AppLaunchContext : ObjectG
    * Returns: Signal ID
    */
   ulong connectLaunchStarted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == LaunchStartedCallbackDlg) || is(T == LaunchStartedCallbackFunc))
+  if (is(T : LaunchStartedCallbackDlg) || is(T : LaunchStartedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -274,7 +274,7 @@ class AppLaunchContext : ObjectG
    * Returns: Signal ID
    */
   ulong connectLaunched(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == LaunchedCallbackDlg) || is(T == LaunchedCallbackFunc))
+  if (is(T : LaunchedCallbackDlg) || is(T : LaunchedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

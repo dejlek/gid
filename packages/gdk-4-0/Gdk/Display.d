@@ -566,7 +566,7 @@ class Display : ObjectG
    * Returns: Signal ID
    */
   ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ClosedCallbackDlg) || is(T == ClosedCallbackFunc))
+  if (is(T : ClosedCallbackDlg) || is(T : ClosedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -596,7 +596,7 @@ class Display : ObjectG
    * Returns: Signal ID
    */
   ulong connectOpened(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == OpenedCallbackDlg) || is(T == OpenedCallbackFunc))
+  if (is(T : OpenedCallbackDlg) || is(T : OpenedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -627,7 +627,7 @@ class Display : ObjectG
    * Returns: Signal ID
    */
   ulong connectSeatAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SeatAddedCallbackDlg) || is(T == SeatAddedCallbackFunc))
+  if (is(T : SeatAddedCallbackDlg) || is(T : SeatAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -659,7 +659,7 @@ class Display : ObjectG
    * Returns: Signal ID
    */
   ulong connectSeatRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SeatRemovedCallbackDlg) || is(T == SeatRemovedCallbackFunc))
+  if (is(T : SeatRemovedCallbackDlg) || is(T : SeatRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -691,7 +691,7 @@ class Display : ObjectG
    * Returns: Signal ID
    */
   ulong connectSettingChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SettingChangedCallbackDlg) || is(T == SettingChangedCallbackFunc))
+  if (is(T : SettingChangedCallbackDlg) || is(T : SettingChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

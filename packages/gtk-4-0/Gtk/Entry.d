@@ -959,7 +959,7 @@ class Entry : Widget, CellEditable, Editable
    * Returns: Signal ID
    */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
+  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -990,7 +990,7 @@ class Entry : Widget, CellEditable, Editable
    * Returns: Signal ID
    */
   ulong connectIconPress(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == IconPressCallbackDlg) || is(T == IconPressCallbackFunc))
+  if (is(T : IconPressCallbackDlg) || is(T : IconPressCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1023,7 +1023,7 @@ class Entry : Widget, CellEditable, Editable
    * Returns: Signal ID
    */
   ulong connectIconRelease(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == IconReleaseCallbackDlg) || is(T == IconReleaseCallbackFunc))
+  if (is(T : IconReleaseCallbackDlg) || is(T : IconReleaseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

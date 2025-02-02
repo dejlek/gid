@@ -578,7 +578,7 @@ class FlowBox : Widget, Orientable
    * Returns: Signal ID
    */
   ulong connectActivateCursorChild(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateCursorChildCallbackDlg) || is(T == ActivateCursorChildCallbackFunc))
+  if (is(T : ActivateCursorChildCallbackDlg) || is(T : ActivateCursorChildCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -609,7 +609,7 @@ class FlowBox : Widget, Orientable
    * Returns: Signal ID
    */
   ulong connectChildActivated(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChildActivatedCallbackDlg) || is(T == ChildActivatedCallbackFunc))
+  if (is(T : ChildActivatedCallbackDlg) || is(T : ChildActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -658,7 +658,7 @@ class FlowBox : Widget, Orientable
    * Returns: Signal ID
    */
   ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
+  if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -696,7 +696,7 @@ class FlowBox : Widget, Orientable
    * Returns: Signal ID
    */
   ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectAllCallbackDlg) || is(T == SelectAllCallbackFunc))
+  if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -728,7 +728,7 @@ class FlowBox : Widget, Orientable
    * Returns: Signal ID
    */
   ulong connectSelectedChildrenChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectedChildrenChangedCallbackDlg) || is(T == SelectedChildrenChangedCallbackFunc))
+  if (is(T : SelectedChildrenChangedCallbackDlg) || is(T : SelectedChildrenChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -759,7 +759,7 @@ class FlowBox : Widget, Orientable
    * Returns: Signal ID
    */
   ulong connectToggleCursorChild(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ToggleCursorChildCallbackDlg) || is(T == ToggleCursorChildCallbackFunc))
+  if (is(T : ToggleCursorChildCallbackDlg) || is(T : ToggleCursorChildCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -791,7 +791,7 @@ class FlowBox : Widget, Orientable
    * Returns: Signal ID
    */
   ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UnselectAllCallbackDlg) || is(T == UnselectAllCallbackFunc))
+  if (is(T : UnselectAllCallbackDlg) || is(T : UnselectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

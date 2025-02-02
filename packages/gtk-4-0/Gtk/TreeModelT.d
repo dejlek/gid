@@ -621,7 +621,7 @@ template TreeModelT()
    * Returns: Signal ID
    */
   ulong connectRowChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowChangedCallbackDlg) || is(T == RowChangedCallbackFunc))
+  if (is(T : RowChangedCallbackDlg) || is(T : RowChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -659,7 +659,7 @@ template TreeModelT()
    * Returns: Signal ID
    */
   ulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowDeletedCallbackDlg) || is(T == RowDeletedCallbackFunc))
+  if (is(T : RowDeletedCallbackDlg) || is(T : RowDeletedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -693,7 +693,7 @@ template TreeModelT()
    * Returns: Signal ID
    */
   ulong connectRowHasChildToggled(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowHasChildToggledCallbackDlg) || is(T == RowHasChildToggledCallbackFunc))
+  if (is(T : RowHasChildToggledCallbackDlg) || is(T : RowHasChildToggledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -731,7 +731,7 @@ template TreeModelT()
    * Returns: Signal ID
    */
   ulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowInsertedCallbackDlg) || is(T == RowInsertedCallbackFunc))
+  if (is(T : RowInsertedCallbackDlg) || is(T : RowInsertedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

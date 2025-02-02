@@ -486,7 +486,7 @@ interface TreeModel
    * Returns: Signal ID
    */
   ulong connectRowChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowChangedCallbackDlg) || is(T == RowChangedCallbackFunc));
+  if (is(T : RowChangedCallbackDlg) || is(T : RowChangedCallbackFunc));
 
   /**
    * This signal is emitted when a row has been deleted.
@@ -510,7 +510,7 @@ interface TreeModel
    * Returns: Signal ID
    */
   ulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowDeletedCallbackDlg) || is(T == RowDeletedCallbackFunc));
+  if (is(T : RowDeletedCallbackDlg) || is(T : RowDeletedCallbackFunc));
 
   /**
    * This signal is emitted when a row has gotten the first child
@@ -531,7 +531,7 @@ interface TreeModel
    * Returns: Signal ID
    */
   ulong connectRowHasChildToggled(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowHasChildToggledCallbackDlg) || is(T == RowHasChildToggledCallbackFunc));
+  if (is(T : RowHasChildToggledCallbackDlg) || is(T : RowHasChildToggledCallbackFunc));
 
   /**
    * This signal is emitted when a new row has been inserted in
@@ -555,5 +555,5 @@ interface TreeModel
    * Returns: Signal ID
    */
   ulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowInsertedCallbackDlg) || is(T == RowInsertedCallbackFunc));
+  if (is(T : RowInsertedCallbackDlg) || is(T : RowInsertedCallbackFunc));
   }

@@ -1013,7 +1013,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Returns: Signal ID
    */
   ulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateDefaultCallbackDlg) || is(T == ActivateDefaultCallbackFunc))
+  if (is(T : ActivateDefaultCallbackDlg) || is(T : ActivateDefaultCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1044,7 +1044,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Returns: Signal ID
    */
   ulong connectActivateFocus(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateFocusCallbackDlg) || is(T == ActivateFocusCallbackFunc))
+  if (is(T : ActivateFocusCallbackDlg) || is(T : ActivateFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1074,7 +1074,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Returns: Signal ID
    */
   ulong connectCloseRequest(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CloseRequestCallbackDlg) || is(T == CloseRequestCallbackFunc))
+  if (is(T : CloseRequestCallbackDlg) || is(T : CloseRequestCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1114,7 +1114,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Returns: Signal ID
    */
   ulong connectEnableDebugging(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EnableDebuggingCallbackDlg) || is(T == EnableDebuggingCallbackFunc))
+  if (is(T : EnableDebuggingCallbackDlg) || is(T : EnableDebuggingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1150,7 +1150,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Returns: Signal ID
    */
   ulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == KeysChangedCallbackDlg) || is(T == KeysChangedCallbackFunc))
+  if (is(T : KeysChangedCallbackDlg) || is(T : KeysChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

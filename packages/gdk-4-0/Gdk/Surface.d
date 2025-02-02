@@ -485,7 +485,7 @@ class Surface : ObjectG
    * Returns: Signal ID
    */
   ulong connectEnterMonitor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EnterMonitorCallbackDlg) || is(T == EnterMonitorCallbackFunc))
+  if (is(T : EnterMonitorCallbackDlg) || is(T : EnterMonitorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -518,7 +518,7 @@ class Surface : ObjectG
    * Returns: Signal ID
    */
   ulong connectEvent(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EventCallbackDlg) || is(T == EventCallbackFunc))
+  if (is(T : EventCallbackDlg) || is(T : EventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -556,7 +556,7 @@ class Surface : ObjectG
    * Returns: Signal ID
    */
   ulong connectLayout(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == LayoutCallbackDlg) || is(T == LayoutCallbackFunc))
+  if (is(T : LayoutCallbackDlg) || is(T : LayoutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -589,7 +589,7 @@ class Surface : ObjectG
    * Returns: Signal ID
    */
   ulong connectLeaveMonitor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == LeaveMonitorCallbackDlg) || is(T == LeaveMonitorCallbackFunc))
+  if (is(T : LeaveMonitorCallbackDlg) || is(T : LeaveMonitorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -622,7 +622,7 @@ class Surface : ObjectG
    * Returns: Signal ID
    */
   ulong connectRender(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RenderCallbackDlg) || is(T == RenderCallbackFunc))
+  if (is(T : RenderCallbackDlg) || is(T : RenderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

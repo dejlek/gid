@@ -262,7 +262,7 @@ class AppChooserWidget : Widget, AppChooser
    * Returns: Signal ID
    */
   ulong connectApplicationActivated(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ApplicationActivatedCallbackDlg) || is(T == ApplicationActivatedCallbackFunc))
+  if (is(T : ApplicationActivatedCallbackDlg) || is(T : ApplicationActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -294,7 +294,7 @@ class AppChooserWidget : Widget, AppChooser
    * Returns: Signal ID
    */
   ulong connectApplicationSelected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ApplicationSelectedCallbackDlg) || is(T == ApplicationSelectedCallbackFunc))
+  if (is(T : ApplicationSelectedCallbackDlg) || is(T : ApplicationSelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

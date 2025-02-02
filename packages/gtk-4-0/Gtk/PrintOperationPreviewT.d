@@ -80,7 +80,7 @@ template PrintOperationPreviewT()
    * Returns: Signal ID
    */
   ulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == GotPageSizeCallbackDlg) || is(T == GotPageSizeCallbackFunc))
+  if (is(T : GotPageSizeCallbackDlg) || is(T : GotPageSizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -115,7 +115,7 @@ template PrintOperationPreviewT()
    * Returns: Signal ID
    */
   ulong connectReady(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ReadyCallbackDlg) || is(T == ReadyCallbackFunc))
+  if (is(T : ReadyCallbackDlg) || is(T : ReadyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

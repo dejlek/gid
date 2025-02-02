@@ -453,7 +453,7 @@ class Gesture : EventController
    * Returns: Signal ID
    */
   ulong connectBegin(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == BeginCallbackDlg) || is(T == BeginCallbackFunc))
+  if (is(T : BeginCallbackDlg) || is(T : BeginCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -492,7 +492,7 @@ class Gesture : EventController
    * Returns: Signal ID
    */
   ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CancelCallbackDlg) || is(T == CancelCallbackFunc))
+  if (is(T : CancelCallbackDlg) || is(T : CancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -532,7 +532,7 @@ class Gesture : EventController
    * Returns: Signal ID
    */
   ulong connectEnd(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EndCallbackDlg) || is(T == EndCallbackFunc))
+  if (is(T : EndCallbackDlg) || is(T : EndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -567,7 +567,7 @@ class Gesture : EventController
    * Returns: Signal ID
    */
   ulong connectSequenceStateChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SequenceStateChangedCallbackDlg) || is(T == SequenceStateChangedCallbackFunc))
+  if (is(T : SequenceStateChangedCallbackDlg) || is(T : SequenceStateChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -601,7 +601,7 @@ class Gesture : EventController
    * Returns: Signal ID
    */
   ulong connectUpdate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UpdateCallbackDlg) || is(T == UpdateCallbackFunc))
+  if (is(T : UpdateCallbackDlg) || is(T : UpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

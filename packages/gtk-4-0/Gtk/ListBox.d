@@ -565,7 +565,7 @@ class ListBox : Widget
    * Returns: Signal ID
    */
   ulong connectActivateCursorRow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateCursorRowCallbackDlg) || is(T == ActivateCursorRowCallbackFunc))
+  if (is(T : ActivateCursorRowCallbackDlg) || is(T : ActivateCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -590,7 +590,7 @@ class ListBox : Widget
    * Returns: Signal ID
    */
   ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
+  if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -625,7 +625,7 @@ class ListBox : Widget
    * Returns: Signal ID
    */
   ulong connectRowActivated(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowActivatedCallbackDlg) || is(T == RowActivatedCallbackFunc))
+  if (is(T : RowActivatedCallbackDlg) || is(T : RowActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -661,7 +661,7 @@ class ListBox : Widget
    * Returns: Signal ID
    */
   ulong connectRowSelected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowSelectedCallbackDlg) || is(T == RowSelectedCallbackFunc))
+  if (is(T : RowSelectedCallbackDlg) || is(T : RowSelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -694,7 +694,7 @@ class ListBox : Widget
    * Returns: Signal ID
    */
   ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectAllCallbackDlg) || is(T == SelectAllCallbackFunc))
+  if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -723,7 +723,7 @@ class ListBox : Widget
    * Returns: Signal ID
    */
   ulong connectSelectedRowsChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectedRowsChangedCallbackDlg) || is(T == SelectedRowsChangedCallbackFunc))
+  if (is(T : SelectedRowsChangedCallbackDlg) || is(T : SelectedRowsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -748,7 +748,7 @@ class ListBox : Widget
    * Returns: Signal ID
    */
   ulong connectToggleCursorRow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ToggleCursorRowCallbackDlg) || is(T == ToggleCursorRowCallbackFunc))
+  if (is(T : ToggleCursorRowCallbackDlg) || is(T : ToggleCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -781,7 +781,7 @@ class ListBox : Widget
    * Returns: Signal ID
    */
   ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UnselectAllCallbackDlg) || is(T == UnselectAllCallbackFunc))
+  if (is(T : UnselectAllCallbackDlg) || is(T : UnselectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

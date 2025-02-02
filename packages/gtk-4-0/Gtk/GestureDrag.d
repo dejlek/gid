@@ -98,7 +98,7 @@ class GestureDrag : GestureSingle
    * Returns: Signal ID
    */
   ulong connectDragBegin(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DragBeginCallbackDlg) || is(T == DragBeginCallbackFunc))
+  if (is(T : DragBeginCallbackDlg) || is(T : DragBeginCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -132,7 +132,7 @@ class GestureDrag : GestureSingle
    * Returns: Signal ID
    */
   ulong connectDragEnd(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DragEndCallbackDlg) || is(T == DragEndCallbackFunc))
+  if (is(T : DragEndCallbackDlg) || is(T : DragEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -166,7 +166,7 @@ class GestureDrag : GestureSingle
    * Returns: Signal ID
    */
   ulong connectDragUpdate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DragUpdateCallbackDlg) || is(T == DragUpdateCallbackFunc))
+  if (is(T : DragUpdateCallbackDlg) || is(T : DragUpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

@@ -276,7 +276,7 @@ interface Volume
    * Returns: Signal ID
    */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc));
+  if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc));
 
   /**
    * This signal is emitted when the #GVolume have been removed. If
@@ -295,5 +295,5 @@ interface Volume
    * Returns: Signal ID
    */
   ulong connectRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RemovedCallbackDlg) || is(T == RemovedCallbackFunc));
+  if (is(T : RemovedCallbackDlg) || is(T : RemovedCallbackFunc));
   }

@@ -780,7 +780,7 @@ class Notebook : Widget
    * Returns: Signal ID
    */
   ulong connectChangeCurrentPage(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChangeCurrentPageCallbackDlg) || is(T == ChangeCurrentPageCallbackFunc))
+  if (is(T : ChangeCurrentPageCallbackDlg) || is(T : ChangeCurrentPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -822,7 +822,7 @@ class Notebook : Widget
    * Returns: Signal ID
    */
   ulong connectCreateWindow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CreateWindowCallbackDlg) || is(T == CreateWindowCallbackFunc))
+  if (is(T : CreateWindowCallbackDlg) || is(T : CreateWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -849,7 +849,7 @@ class Notebook : Widget
    * Returns: Signal ID
    */
   ulong connectFocusTab(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == FocusTabCallbackDlg) || is(T == FocusTabCallbackFunc))
+  if (is(T : FocusTabCallbackDlg) || is(T : FocusTabCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -877,7 +877,7 @@ class Notebook : Widget
    * Returns: Signal ID
    */
   ulong connectMoveFocusOut(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveFocusOutCallbackDlg) || is(T == MoveFocusOutCallbackFunc))
+  if (is(T : MoveFocusOutCallbackDlg) || is(T : MoveFocusOutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -911,7 +911,7 @@ class Notebook : Widget
    * Returns: Signal ID
    */
   ulong connectPageAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PageAddedCallbackDlg) || is(T == PageAddedCallbackFunc))
+  if (is(T : PageAddedCallbackDlg) || is(T : PageAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -946,7 +946,7 @@ class Notebook : Widget
    * Returns: Signal ID
    */
   ulong connectPageRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PageRemovedCallbackDlg) || is(T == PageRemovedCallbackFunc))
+  if (is(T : PageRemovedCallbackDlg) || is(T : PageRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -981,7 +981,7 @@ class Notebook : Widget
    * Returns: Signal ID
    */
   ulong connectPageReordered(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PageReorderedCallbackDlg) || is(T == PageReorderedCallbackFunc))
+  if (is(T : PageReorderedCallbackDlg) || is(T : PageReorderedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1008,7 +1008,7 @@ class Notebook : Widget
    * Returns: Signal ID
    */
   ulong connectReorderTab(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ReorderTabCallbackDlg) || is(T == ReorderTabCallbackFunc))
+  if (is(T : ReorderTabCallbackDlg) || is(T : ReorderTabCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1037,7 +1037,7 @@ class Notebook : Widget
    * Returns: Signal ID
    */
   ulong connectSelectPage(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectPageCallbackDlg) || is(T == SelectPageCallbackFunc))
+  if (is(T : SelectPageCallbackDlg) || is(T : SelectPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1072,7 +1072,7 @@ class Notebook : Widget
    * Returns: Signal ID
    */
   ulong connectSwitchPage(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SwitchPageCallbackDlg) || is(T == SwitchPageCallbackFunc))
+  if (is(T : SwitchPageCallbackDlg) || is(T : SwitchPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

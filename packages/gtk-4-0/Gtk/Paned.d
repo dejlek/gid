@@ -299,7 +299,7 @@ class Paned : Widget, AccessibleRange, Orientable
    * Returns: Signal ID
    */
   ulong connectAcceptPosition(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == AcceptPositionCallbackDlg) || is(T == AcceptPositionCallbackFunc))
+  if (is(T : AcceptPositionCallbackDlg) || is(T : AcceptPositionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -336,7 +336,7 @@ class Paned : Widget, AccessibleRange, Orientable
    * Returns: Signal ID
    */
   ulong connectCancelPosition(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CancelPositionCallbackDlg) || is(T == CancelPositionCallbackFunc))
+  if (is(T : CancelPositionCallbackDlg) || is(T : CancelPositionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -372,7 +372,7 @@ class Paned : Widget, AccessibleRange, Orientable
    * Returns: Signal ID
    */
   ulong connectCycleChildFocus(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CycleChildFocusCallbackDlg) || is(T == CycleChildFocusCallbackFunc))
+  if (is(T : CycleChildFocusCallbackDlg) || is(T : CycleChildFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -410,7 +410,7 @@ class Paned : Widget, AccessibleRange, Orientable
    * Returns: Signal ID
    */
   ulong connectCycleHandleFocus(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CycleHandleFocusCallbackDlg) || is(T == CycleHandleFocusCallbackFunc))
+  if (is(T : CycleHandleFocusCallbackDlg) || is(T : CycleHandleFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -446,7 +446,7 @@ class Paned : Widget, AccessibleRange, Orientable
    * Returns: Signal ID
    */
   ulong connectMoveHandle(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveHandleCallbackDlg) || is(T == MoveHandleCallbackFunc))
+  if (is(T : MoveHandleCallbackDlg) || is(T : MoveHandleCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -482,7 +482,7 @@ class Paned : Widget, AccessibleRange, Orientable
    * Returns: Signal ID
    */
   ulong connectToggleHandleFocus(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ToggleHandleFocusCallbackDlg) || is(T == ToggleHandleFocusCallbackFunc))
+  if (is(T : ToggleHandleFocusCallbackDlg) || is(T : ToggleHandleFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

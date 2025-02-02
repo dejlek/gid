@@ -35,5 +35,5 @@ interface StyleProvider
    * Returns: Signal ID
    */
   ulong connectGtkPrivateChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == GtkPrivateChangedCallbackDlg) || is(T == GtkPrivateChangedCallbackFunc));
+  if (is(T : GtkPrivateChangedCallbackDlg) || is(T : GtkPrivateChangedCallbackFunc));
   }

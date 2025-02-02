@@ -453,7 +453,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    * Returns: Signal ID
    */
   ulong connectCursorOnMatch(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CursorOnMatchCallbackDlg) || is(T == CursorOnMatchCallbackFunc))
+  if (is(T : CursorOnMatchCallbackDlg) || is(T : CursorOnMatchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -495,7 +495,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    * Returns: Signal ID
    */
   ulong connectInsertPrefix(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InsertPrefixCallbackDlg) || is(T == InsertPrefixCallbackFunc))
+  if (is(T : InsertPrefixCallbackDlg) || is(T : InsertPrefixCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -536,7 +536,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    * Returns: Signal ID
    */
   ulong connectMatchSelected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MatchSelectedCallbackDlg) || is(T == MatchSelectedCallbackFunc))
+  if (is(T : MatchSelectedCallbackDlg) || is(T : MatchSelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -571,7 +571,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    * Returns: Signal ID
    */
   ulong connectNoMatches(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == NoMatchesCallbackDlg) || is(T == NoMatchesCallbackFunc))
+  if (is(T : NoMatchesCallbackDlg) || is(T : NoMatchesCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

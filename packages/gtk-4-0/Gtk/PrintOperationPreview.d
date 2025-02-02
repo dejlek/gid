@@ -74,7 +74,7 @@ interface PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == GotPageSizeCallbackDlg) || is(T == GotPageSizeCallbackFunc));
+  if (is(T : GotPageSizeCallbackDlg) || is(T : GotPageSizeCallbackFunc));
 
   /**
    * The ::ready signal gets emitted once per preview operation,
@@ -95,5 +95,5 @@ interface PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectReady(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ReadyCallbackDlg) || is(T == ReadyCallbackFunc));
+  if (is(T : ReadyCallbackDlg) || is(T : ReadyCallbackFunc));
   }

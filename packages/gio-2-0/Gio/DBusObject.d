@@ -65,7 +65,7 @@ interface DBusObject
    * Returns: Signal ID
    */
   ulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InterfaceAddedCallbackDlg) || is(T == InterfaceAddedCallbackFunc));
+  if (is(T : InterfaceAddedCallbackDlg) || is(T : InterfaceAddedCallbackFunc));
 
   /**
    * Emitted when interface is removed from object.
@@ -84,5 +84,5 @@ interface DBusObject
    * Returns: Signal ID
    */
   ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InterfaceRemovedCallbackDlg) || is(T == InterfaceRemovedCallbackFunc));
+  if (is(T : InterfaceRemovedCallbackDlg) || is(T : InterfaceRemovedCallbackFunc));
   }

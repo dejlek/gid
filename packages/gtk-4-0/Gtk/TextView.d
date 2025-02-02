@@ -1165,7 +1165,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectBackspace(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == BackspaceCallbackDlg) || is(T == BackspaceCallbackFunc))
+  if (is(T : BackspaceCallbackDlg) || is(T : BackspaceCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1198,7 +1198,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CopyClipboardCallbackDlg) || is(T == CopyClipboardCallbackFunc))
+  if (is(T : CopyClipboardCallbackDlg) || is(T : CopyClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1231,7 +1231,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CutClipboardCallbackDlg) || is(T == CutClipboardCallbackFunc))
+  if (is(T : CutClipboardCallbackDlg) || is(T : CutClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1271,7 +1271,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DeleteFromCursorCallbackDlg) || is(T == DeleteFromCursorCallbackFunc))
+  if (is(T : DeleteFromCursorCallbackDlg) || is(T : DeleteFromCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1309,7 +1309,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectExtendSelection(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ExtendSelectionCallbackDlg) || is(T == ExtendSelectionCallbackFunc))
+  if (is(T : ExtendSelectionCallbackDlg) || is(T : ExtendSelectionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1349,7 +1349,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InsertAtCursorCallbackDlg) || is(T == InsertAtCursorCallbackFunc))
+  if (is(T : InsertAtCursorCallbackDlg) || is(T : InsertAtCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1383,7 +1383,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InsertEmojiCallbackDlg) || is(T == InsertEmojiCallbackFunc))
+  if (is(T : InsertEmojiCallbackDlg) || is(T : InsertEmojiCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1433,7 +1433,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
+  if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1473,7 +1473,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectMoveViewport(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveViewportCallbackDlg) || is(T == MoveViewportCallbackFunc))
+  if (is(T : MoveViewportCallbackDlg) || is(T : MoveViewportCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1509,7 +1509,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PasteClipboardCallbackDlg) || is(T == PasteClipboardCallbackFunc))
+  if (is(T : PasteClipboardCallbackDlg) || is(T : PasteClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1545,7 +1545,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PreeditChangedCallbackDlg) || is(T == PreeditChangedCallbackFunc))
+  if (is(T : PreeditChangedCallbackDlg) || is(T : PreeditChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1583,7 +1583,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectAllCallbackDlg) || is(T == SelectAllCallbackFunc))
+  if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1618,7 +1618,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectSetAnchor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SetAnchorCallbackDlg) || is(T == SetAnchorCallbackFunc))
+  if (is(T : SetAnchorCallbackDlg) || is(T : SetAnchorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1650,7 +1650,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectToggleCursorVisible(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ToggleCursorVisibleCallbackDlg) || is(T == ToggleCursorVisibleCallbackFunc))
+  if (is(T : ToggleCursorVisibleCallbackDlg) || is(T : ToggleCursorVisibleCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1681,7 +1681,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: Signal ID
    */
   ulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ToggleOverwriteCallbackDlg) || is(T == ToggleOverwriteCallbackFunc))
+  if (is(T : ToggleOverwriteCallbackDlg) || is(T : ToggleOverwriteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

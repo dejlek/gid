@@ -189,7 +189,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectDriveChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DriveChangedCallbackDlg) || is(T == DriveChangedCallbackFunc))
+  if (is(T : DriveChangedCallbackDlg) || is(T : DriveChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -221,7 +221,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectDriveConnected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DriveConnectedCallbackDlg) || is(T == DriveConnectedCallbackFunc))
+  if (is(T : DriveConnectedCallbackDlg) || is(T : DriveConnectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -253,7 +253,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectDriveDisconnected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DriveDisconnectedCallbackDlg) || is(T == DriveDisconnectedCallbackFunc))
+  if (is(T : DriveDisconnectedCallbackDlg) || is(T : DriveDisconnectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -285,7 +285,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectDriveEjectButton(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DriveEjectButtonCallbackDlg) || is(T == DriveEjectButtonCallbackFunc))
+  if (is(T : DriveEjectButtonCallbackDlg) || is(T : DriveEjectButtonCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -317,7 +317,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectDriveStopButton(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DriveStopButtonCallbackDlg) || is(T == DriveStopButtonCallbackFunc))
+  if (is(T : DriveStopButtonCallbackDlg) || is(T : DriveStopButtonCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -349,7 +349,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectMountAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MountAddedCallbackDlg) || is(T == MountAddedCallbackFunc))
+  if (is(T : MountAddedCallbackDlg) || is(T : MountAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -381,7 +381,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectMountChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MountChangedCallbackDlg) || is(T == MountChangedCallbackFunc))
+  if (is(T : MountChangedCallbackDlg) || is(T : MountChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -415,7 +415,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectMountPreUnmount(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MountPreUnmountCallbackDlg) || is(T == MountPreUnmountCallbackFunc))
+  if (is(T : MountPreUnmountCallbackDlg) || is(T : MountPreUnmountCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -447,7 +447,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectMountRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MountRemovedCallbackDlg) || is(T == MountRemovedCallbackFunc))
+  if (is(T : MountRemovedCallbackDlg) || is(T : MountRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -479,7 +479,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectVolumeAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == VolumeAddedCallbackDlg) || is(T == VolumeAddedCallbackFunc))
+  if (is(T : VolumeAddedCallbackDlg) || is(T : VolumeAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -511,7 +511,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectVolumeChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == VolumeChangedCallbackDlg) || is(T == VolumeChangedCallbackFunc))
+  if (is(T : VolumeChangedCallbackDlg) || is(T : VolumeChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -543,7 +543,7 @@ class VolumeMonitor : ObjectG
    * Returns: Signal ID
    */
   ulong connectVolumeRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == VolumeRemovedCallbackDlg) || is(T == VolumeRemovedCallbackFunc))
+  if (is(T : VolumeRemovedCallbackDlg) || is(T : VolumeRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

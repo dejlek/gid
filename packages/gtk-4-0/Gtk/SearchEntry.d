@@ -222,7 +222,7 @@ class SearchEntry : Widget, Editable
    * Returns: Signal ID
    */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
+  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -256,7 +256,7 @@ class SearchEntry : Widget, Editable
    * Returns: Signal ID
    */
   ulong connectNextMatch(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == NextMatchCallbackDlg) || is(T == NextMatchCallbackFunc))
+  if (is(T : NextMatchCallbackDlg) || is(T : NextMatchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -290,7 +290,7 @@ class SearchEntry : Widget, Editable
    * Returns: Signal ID
    */
   ulong connectPreviousMatch(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PreviousMatchCallbackDlg) || is(T == PreviousMatchCallbackFunc))
+  if (is(T : PreviousMatchCallbackDlg) || is(T : PreviousMatchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -321,7 +321,7 @@ class SearchEntry : Widget, Editable
    * Returns: Signal ID
    */
   ulong connectSearchChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SearchChangedCallbackDlg) || is(T == SearchChangedCallbackFunc))
+  if (is(T : SearchChangedCallbackDlg) || is(T : SearchChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -350,7 +350,7 @@ class SearchEntry : Widget, Editable
    * Returns: Signal ID
    */
   ulong connectSearchStarted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SearchStartedCallbackDlg) || is(T == SearchStartedCallbackFunc))
+  if (is(T : SearchStartedCallbackDlg) || is(T : SearchStartedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -383,7 +383,7 @@ class SearchEntry : Widget, Editable
    * Returns: Signal ID
    */
   ulong connectStopSearch(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == StopSearchCallbackDlg) || is(T == StopSearchCallbackFunc))
+  if (is(T : StopSearchCallbackDlg) || is(T : StopSearchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

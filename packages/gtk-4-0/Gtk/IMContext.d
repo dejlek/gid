@@ -359,7 +359,7 @@ class IMContext : ObjectG
    * Returns: Signal ID
    */
   ulong connectCommit(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CommitCallbackDlg) || is(T == CommitCallbackFunc))
+  if (is(T : CommitCallbackDlg) || is(T : CommitCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -396,7 +396,7 @@ class IMContext : ObjectG
    * Returns: Signal ID
    */
   ulong connectDeleteSurrounding(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DeleteSurroundingCallbackDlg) || is(T == DeleteSurroundingCallbackFunc))
+  if (is(T : DeleteSurroundingCallbackDlg) || is(T : DeleteSurroundingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -432,7 +432,7 @@ class IMContext : ObjectG
    * Returns: Signal ID
    */
   ulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PreeditChangedCallbackDlg) || is(T == PreeditChangedCallbackFunc))
+  if (is(T : PreeditChangedCallbackDlg) || is(T : PreeditChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -462,7 +462,7 @@ class IMContext : ObjectG
    * Returns: Signal ID
    */
   ulong connectPreeditEnd(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PreeditEndCallbackDlg) || is(T == PreeditEndCallbackFunc))
+  if (is(T : PreeditEndCallbackDlg) || is(T : PreeditEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -492,7 +492,7 @@ class IMContext : ObjectG
    * Returns: Signal ID
    */
   ulong connectPreeditStart(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PreeditStartCallbackDlg) || is(T == PreeditStartCallbackFunc))
+  if (is(T : PreeditStartCallbackDlg) || is(T : PreeditStartCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -525,7 +525,7 @@ class IMContext : ObjectG
    * Returns: Signal ID
    */
   ulong connectRetrieveSurrounding(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RetrieveSurroundingCallbackDlg) || is(T == RetrieveSurroundingCallbackFunc))
+  if (is(T : RetrieveSurroundingCallbackDlg) || is(T : RetrieveSurroundingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

@@ -443,5 +443,5 @@ interface DtlsConnection
    * Returns: Signal ID
    */
   ulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == AcceptCertificateCallbackDlg) || is(T == AcceptCertificateCallbackFunc));
+  if (is(T : AcceptCertificateCallbackDlg) || is(T : AcceptCertificateCallbackFunc));
   }

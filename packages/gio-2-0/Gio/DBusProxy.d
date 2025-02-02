@@ -731,7 +731,7 @@ class DBusProxy : ObjectG, AsyncInitable, DBusInterface, Initable
    * Returns: Signal ID
    */
   ulong connectGPropertiesChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == GPropertiesChangedCallbackDlg) || is(T == GPropertiesChangedCallbackFunc))
+  if (is(T : GPropertiesChangedCallbackDlg) || is(T : GPropertiesChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -777,7 +777,7 @@ class DBusProxy : ObjectG, AsyncInitable, DBusInterface, Initable
    * Returns: Signal ID
    */
   ulong connectGSignal(T)(string detail = null, T callback, Flag!"After" after = No.After)
-  if (is(T == GSignalCallbackDlg) || is(T == GSignalCallbackFunc))
+  if (is(T : GSignalCallbackDlg) || is(T : GSignalCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

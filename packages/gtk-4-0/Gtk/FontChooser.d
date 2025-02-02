@@ -277,5 +277,5 @@ interface FontChooser
    * Returns: Signal ID
    */
   ulong connectFontActivated(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == FontActivatedCallbackDlg) || is(T == FontActivatedCallbackFunc));
+  if (is(T : FontActivatedCallbackDlg) || is(T : FontActivatedCallbackFunc));
   }

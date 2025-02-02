@@ -154,7 +154,7 @@ class TextTagTable : ObjectG, Buildable
    * Returns: Signal ID
    */
   ulong connectTagAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == TagAddedCallbackDlg) || is(T == TagAddedCallbackFunc))
+  if (is(T : TagAddedCallbackDlg) || is(T : TagAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -187,7 +187,7 @@ class TextTagTable : ObjectG, Buildable
    * Returns: Signal ID
    */
   ulong connectTagChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == TagChangedCallbackDlg) || is(T == TagChangedCallbackFunc))
+  if (is(T : TagChangedCallbackDlg) || is(T : TagChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -222,7 +222,7 @@ class TextTagTable : ObjectG, Buildable
    * Returns: Signal ID
    */
   ulong connectTagRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == TagRemovedCallbackDlg) || is(T == TagRemovedCallbackFunc))
+  if (is(T : TagRemovedCallbackDlg) || is(T : TagRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

@@ -990,7 +990,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * Returns: Signal ID
    */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
+  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1026,7 +1026,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * Returns: Signal ID
    */
   ulong connectCommandLine(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CommandLineCallbackDlg) || is(T == CommandLineCallbackFunc))
+  if (is(T : CommandLineCallbackDlg) || is(T : CommandLineCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1097,7 +1097,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * Returns: Signal ID
    */
   ulong connectHandleLocalOptions(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == HandleLocalOptionsCallbackDlg) || is(T == HandleLocalOptionsCallbackFunc))
+  if (is(T : HandleLocalOptionsCallbackDlg) || is(T : HandleLocalOptionsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1133,7 +1133,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * Returns: Signal ID
    */
   ulong connectNameLost(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == NameLostCallbackDlg) || is(T == NameLostCallbackFunc))
+  if (is(T : NameLostCallbackDlg) || is(T : NameLostCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1168,7 +1168,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * Returns: Signal ID
    */
   ulong connectOpen(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == OpenCallbackDlg) || is(T == OpenCallbackFunc))
+  if (is(T : OpenCallbackDlg) || is(T : OpenCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1204,7 +1204,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * Returns: Signal ID
    */
   ulong connectShutdown(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ShutdownCallbackDlg) || is(T == ShutdownCallbackFunc))
+  if (is(T : ShutdownCallbackDlg) || is(T : ShutdownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1234,7 +1234,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * Returns: Signal ID
    */
   ulong connectStartup(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == StartupCallbackDlg) || is(T == StartupCallbackFunc))
+  if (is(T : StartupCallbackDlg) || is(T : StartupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

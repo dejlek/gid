@@ -497,7 +497,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Returns: Signal ID
    */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
+  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -533,7 +533,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Returns: Signal ID
    */
   ulong connectChangeValue(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChangeValueCallbackDlg) || is(T == ChangeValueCallbackFunc))
+  if (is(T : ChangeValueCallbackDlg) || is(T : ChangeValueCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -579,7 +579,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Returns: Signal ID
    */
   ulong connectOutput(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == OutputCallbackDlg) || is(T == OutputCallbackFunc))
+  if (is(T : OutputCallbackDlg) || is(T : OutputCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -611,7 +611,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Returns: Signal ID
    */
   ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ValueChangedCallbackDlg) || is(T == ValueChangedCallbackFunc))
+  if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -641,7 +641,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Returns: Signal ID
    */
   ulong connectWrapped(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == WrappedCallbackDlg) || is(T == WrappedCallbackFunc))
+  if (is(T : WrappedCallbackDlg) || is(T : WrappedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

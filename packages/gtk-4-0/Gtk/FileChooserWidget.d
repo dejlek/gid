@@ -82,7 +82,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectDesktopFolder(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DesktopFolderCallbackDlg) || is(T == DesktopFolderCallbackFunc))
+  if (is(T : DesktopFolderCallbackDlg) || is(T : DesktopFolderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -119,7 +119,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectDownFolder(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DownFolderCallbackDlg) || is(T == DownFolderCallbackFunc))
+  if (is(T : DownFolderCallbackDlg) || is(T : DownFolderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -152,7 +152,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectHomeFolder(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == HomeFolderCallbackDlg) || is(T == HomeFolderCallbackFunc))
+  if (is(T : HomeFolderCallbackDlg) || is(T : HomeFolderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -192,7 +192,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectLocationPopup(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == LocationPopupCallbackDlg) || is(T == LocationPopupCallbackFunc))
+  if (is(T : LocationPopupCallbackDlg) || is(T : LocationPopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -226,7 +226,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectLocationPopupOnPaste(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == LocationPopupOnPasteCallbackDlg) || is(T == LocationPopupOnPasteCallbackFunc))
+  if (is(T : LocationPopupOnPasteCallbackDlg) || is(T : LocationPopupOnPasteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -260,7 +260,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectLocationTogglePopup(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == LocationTogglePopupCallbackDlg) || is(T == LocationTogglePopupCallbackFunc))
+  if (is(T : LocationTogglePopupCallbackDlg) || is(T : LocationTogglePopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -292,7 +292,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectPlacesShortcut(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PlacesShortcutCallbackDlg) || is(T == PlacesShortcutCallbackFunc))
+  if (is(T : PlacesShortcutCallbackDlg) || is(T : PlacesShortcutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -333,7 +333,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectQuickBookmark(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == QuickBookmarkCallbackDlg) || is(T == QuickBookmarkCallbackFunc))
+  if (is(T : QuickBookmarkCallbackDlg) || is(T : QuickBookmarkCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -366,7 +366,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectRecentShortcut(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RecentShortcutCallbackDlg) || is(T == RecentShortcutCallbackFunc))
+  if (is(T : RecentShortcutCallbackDlg) || is(T : RecentShortcutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -398,7 +398,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectSearchShortcut(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SearchShortcutCallbackDlg) || is(T == SearchShortcutCallbackFunc))
+  if (is(T : SearchShortcutCallbackDlg) || is(T : SearchShortcutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -430,7 +430,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectShowHidden(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ShowHiddenCallbackDlg) || is(T == ShowHiddenCallbackFunc))
+  if (is(T : ShowHiddenCallbackDlg) || is(T : ShowHiddenCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -463,7 +463,7 @@ class FileChooserWidget : Widget, FileChooser
    * Returns: Signal ID
    */
   ulong connectUpFolder(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UpFolderCallbackDlg) || is(T == UpFolderCallbackFunc))
+  if (is(T : UpFolderCallbackDlg) || is(T : UpFolderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

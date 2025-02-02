@@ -113,7 +113,7 @@ class EventControllerKey : EventController
    * Returns: Signal ID
    */
   ulong connectImUpdate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ImUpdateCallbackDlg) || is(T == ImUpdateCallbackFunc))
+  if (is(T : ImUpdateCallbackDlg) || is(T : ImUpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -147,7 +147,7 @@ class EventControllerKey : EventController
    * Returns: Signal ID
    */
   ulong connectKeyPressed(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == KeyPressedCallbackDlg) || is(T == KeyPressedCallbackFunc))
+  if (is(T : KeyPressedCallbackDlg) || is(T : KeyPressedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -185,7 +185,7 @@ class EventControllerKey : EventController
    * Returns: Signal ID
    */
   ulong connectKeyReleased(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == KeyReleasedCallbackDlg) || is(T == KeyReleasedCallbackFunc))
+  if (is(T : KeyReleasedCallbackDlg) || is(T : KeyReleasedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -221,7 +221,7 @@ class EventControllerKey : EventController
    * Returns: Signal ID
    */
   ulong connectModifiers(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ModifiersCallbackDlg) || is(T == ModifiersCallbackFunc))
+  if (is(T : ModifiersCallbackDlg) || is(T : ModifiersCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

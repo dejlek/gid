@@ -285,7 +285,7 @@ class MountOperation : ObjectG
    * Returns: Signal ID
    */
   ulong connectAborted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == AbortedCallbackDlg) || is(T == AbortedCallbackFunc))
+  if (is(T : AbortedCallbackDlg) || is(T : AbortedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -322,7 +322,7 @@ class MountOperation : ObjectG
    * Returns: Signal ID
    */
   ulong connectAskPassword(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == AskPasswordCallbackDlg) || is(T == AskPasswordCallbackFunc))
+  if (is(T : AskPasswordCallbackDlg) || is(T : AskPasswordCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -362,7 +362,7 @@ class MountOperation : ObjectG
    * Returns: Signal ID
    */
   ulong connectAskQuestion(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == AskQuestionCallbackDlg) || is(T == AskQuestionCallbackFunc))
+  if (is(T : AskQuestionCallbackDlg) || is(T : AskQuestionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -402,7 +402,7 @@ class MountOperation : ObjectG
    * Returns: Signal ID
    */
   ulong connectReply(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ReplyCallbackDlg) || is(T == ReplyCallbackFunc))
+  if (is(T : ReplyCallbackDlg) || is(T : ReplyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -451,7 +451,7 @@ class MountOperation : ObjectG
    * Returns: Signal ID
    */
   ulong connectShowUnmountProgress(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ShowUnmountProgressCallbackDlg) || is(T == ShowUnmountProgressCallbackFunc))
+  if (is(T : ShowUnmountProgressCallbackDlg) || is(T : ShowUnmountProgressCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

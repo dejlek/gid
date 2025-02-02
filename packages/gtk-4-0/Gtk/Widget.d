@@ -3025,7 +3025,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectDestroy(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DestroyCallbackDlg) || is(T == DestroyCallbackFunc))
+  if (is(T : DestroyCallbackDlg) || is(T : DestroyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3056,7 +3056,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DirectionChangedCallbackDlg) || is(T == DirectionChangedCallbackFunc))
+  if (is(T : DirectionChangedCallbackDlg) || is(T : DirectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3086,7 +3086,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectHide(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == HideCallbackDlg) || is(T == HideCallbackFunc))
+  if (is(T : HideCallbackDlg) || is(T : HideCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3121,7 +3121,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectKeynavFailed(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == KeynavFailedCallbackDlg) || is(T == KeynavFailedCallbackFunc))
+  if (is(T : KeynavFailedCallbackDlg) || is(T : KeynavFailedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3159,7 +3159,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectMap(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MapCallbackDlg) || is(T == MapCallbackFunc))
+  if (is(T : MapCallbackDlg) || is(T : MapCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3194,7 +3194,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectMnemonicActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MnemonicActivateCallbackDlg) || is(T == MnemonicActivateCallbackFunc))
+  if (is(T : MnemonicActivateCallbackDlg) || is(T : MnemonicActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3231,7 +3231,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectMoveFocus(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveFocusCallbackDlg) || is(T == MoveFocusCallbackFunc))
+  if (is(T : MoveFocusCallbackDlg) || is(T : MoveFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3279,7 +3279,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == QueryTooltipCallbackDlg) || is(T == QueryTooltipCallbackFunc))
+  if (is(T : QueryTooltipCallbackDlg) || is(T : QueryTooltipCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3316,7 +3316,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectRealize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RealizeCallbackDlg) || is(T == RealizeCallbackFunc))
+  if (is(T : RealizeCallbackDlg) || is(T : RealizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3345,7 +3345,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectShow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ShowCallbackDlg) || is(T == ShowCallbackFunc))
+  if (is(T : ShowCallbackDlg) || is(T : ShowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3377,7 +3377,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectStateFlagsChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == StateFlagsChangedCallbackDlg) || is(T == StateFlagsChangedCallbackFunc))
+  if (is(T : StateFlagsChangedCallbackDlg) || is(T : StateFlagsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3411,7 +3411,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectUnmap(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UnmapCallbackDlg) || is(T == UnmapCallbackFunc))
+  if (is(T : UnmapCallbackDlg) || is(T : UnmapCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -3442,7 +3442,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: Signal ID
    */
   ulong connectUnrealize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UnrealizeCallbackDlg) || is(T == UnrealizeCallbackFunc))
+  if (is(T : UnrealizeCallbackDlg) || is(T : UnrealizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

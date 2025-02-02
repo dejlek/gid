@@ -69,5 +69,5 @@ interface SectionModel
    * Returns: Signal ID
    */
   ulong connectSectionsChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SectionsChangedCallbackDlg) || is(T == SectionsChangedCallbackFunc));
+  if (is(T : SectionsChangedCallbackDlg) || is(T : SectionsChangedCallbackFunc));
   }

@@ -367,7 +367,7 @@ interface Mount
    * Returns: Signal ID
    */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc));
+  if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc));
 
   /**
    * This signal may be emitted when the #GMount is about to be
@@ -387,7 +387,7 @@ interface Mount
    * Returns: Signal ID
    */
   ulong connectPreUnmount(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PreUnmountCallbackDlg) || is(T == PreUnmountCallbackFunc));
+  if (is(T : PreUnmountCallbackDlg) || is(T : PreUnmountCallbackFunc));
 
   /**
    * This signal is emitted when the #GMount have been
@@ -407,5 +407,5 @@ interface Mount
    * Returns: Signal ID
    */
   ulong connectUnmounted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UnmountedCallbackDlg) || is(T == UnmountedCallbackFunc));
+  if (is(T : UnmountedCallbackDlg) || is(T : UnmountedCallbackFunc));
   }

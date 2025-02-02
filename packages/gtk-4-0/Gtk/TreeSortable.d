@@ -109,5 +109,5 @@ interface TreeSortable
    * Returns: Signal ID
    */
   ulong connectSortColumnChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SortColumnChangedCallbackDlg) || is(T == SortColumnChangedCallbackFunc));
+  if (is(T : SortColumnChangedCallbackDlg) || is(T : SortColumnChangedCallbackFunc));
   }

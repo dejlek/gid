@@ -1656,7 +1656,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectColumnsChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ColumnsChangedCallbackDlg) || is(T == ColumnsChangedCallbackFunc))
+  if (is(T : ColumnsChangedCallbackDlg) || is(T : ColumnsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1685,7 +1685,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectCursorChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CursorChangedCallbackDlg) || is(T == CursorChangedCallbackFunc))
+  if (is(T : CursorChangedCallbackDlg) || is(T : CursorChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1710,7 +1710,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectExpandCollapseCursorRow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ExpandCollapseCursorRowCallbackDlg) || is(T == ExpandCollapseCursorRowCallbackFunc))
+  if (is(T : ExpandCollapseCursorRowCallbackDlg) || is(T : ExpandCollapseCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1763,7 +1763,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
+  if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1811,7 +1811,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectRowActivated(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowActivatedCallbackDlg) || is(T == RowActivatedCallbackFunc))
+  if (is(T : RowActivatedCallbackDlg) || is(T : RowActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1845,7 +1845,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectRowCollapsed(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowCollapsedCallbackDlg) || is(T == RowCollapsedCallbackFunc))
+  if (is(T : RowCollapsedCallbackDlg) || is(T : RowCollapsedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1879,7 +1879,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectRowExpanded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RowExpandedCallbackDlg) || is(T == RowExpandedCallbackFunc))
+  if (is(T : RowExpandedCallbackDlg) || is(T : RowExpandedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1906,7 +1906,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectAllCallbackDlg) || is(T == SelectAllCallbackFunc))
+  if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1933,7 +1933,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectSelectCursorParent(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectCursorParentCallbackDlg) || is(T == SelectCursorParentCallbackFunc))
+  if (is(T : SelectCursorParentCallbackDlg) || is(T : SelectCursorParentCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1960,7 +1960,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectSelectCursorRow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectCursorRowCallbackDlg) || is(T == SelectCursorRowCallbackFunc))
+  if (is(T : SelectCursorRowCallbackDlg) || is(T : SelectCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1988,7 +1988,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectStartInteractiveSearch(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == StartInteractiveSearchCallbackDlg) || is(T == StartInteractiveSearchCallbackFunc))
+  if (is(T : StartInteractiveSearchCallbackDlg) || is(T : StartInteractiveSearchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -2024,7 +2024,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectTestCollapseRow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == TestCollapseRowCallbackDlg) || is(T == TestCollapseRowCallbackFunc))
+  if (is(T : TestCollapseRowCallbackDlg) || is(T : TestCollapseRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -2062,7 +2062,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectTestExpandRow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == TestExpandRowCallbackDlg) || is(T == TestExpandRowCallbackFunc))
+  if (is(T : TestExpandRowCallbackDlg) || is(T : TestExpandRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -2091,7 +2091,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectToggleCursorRow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ToggleCursorRowCallbackDlg) || is(T == ToggleCursorRowCallbackFunc))
+  if (is(T : ToggleCursorRowCallbackDlg) || is(T : ToggleCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -2118,7 +2118,7 @@ class TreeView : Widget, Scrollable
    * Returns: Signal ID
    */
   ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UnselectAllCallbackDlg) || is(T == UnselectAllCallbackFunc))
+  if (is(T : UnselectAllCallbackDlg) || is(T : UnselectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

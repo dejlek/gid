@@ -148,7 +148,7 @@ class GestureStylus : GestureSingle
    * Returns: Signal ID
    */
   ulong connectDown(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DownCallbackDlg) || is(T == DownCallbackFunc))
+  if (is(T : DownCallbackDlg) || is(T : DownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -182,7 +182,7 @@ class GestureStylus : GestureSingle
    * Returns: Signal ID
    */
   ulong connectMotion(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MotionCallbackDlg) || is(T == MotionCallbackFunc))
+  if (is(T : MotionCallbackDlg) || is(T : MotionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -216,7 +216,7 @@ class GestureStylus : GestureSingle
    * Returns: Signal ID
    */
   ulong connectProximity(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ProximityCallbackDlg) || is(T == ProximityCallbackFunc))
+  if (is(T : ProximityCallbackDlg) || is(T : ProximityCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -250,7 +250,7 @@ class GestureStylus : GestureSingle
    * Returns: Signal ID
    */
   ulong connectUp(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UpCallbackDlg) || is(T == UpCallbackFunc))
+  if (is(T : UpCallbackDlg) || is(T : UpCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

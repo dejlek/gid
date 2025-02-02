@@ -76,7 +76,7 @@ template CellEditableT()
    * Returns: Signal ID
    */
   ulong connectEditingDone(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EditingDoneCallbackDlg) || is(T == EditingDoneCallbackFunc))
+  if (is(T : EditingDoneCallbackDlg) || is(T : EditingDoneCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -114,7 +114,7 @@ template CellEditableT()
    * Returns: Signal ID
    */
   ulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RemoveWidgetCallbackDlg) || is(T == RemoveWidgetCallbackFunc))
+  if (is(T : RemoveWidgetCallbackDlg) || is(T : RemoveWidgetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

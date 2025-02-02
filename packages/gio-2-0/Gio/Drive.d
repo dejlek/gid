@@ -305,7 +305,7 @@ interface Drive
    * Returns: Signal ID
    */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc));
+  if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc));
 
   /**
    * This signal is emitted when the #GDrive have been
@@ -325,7 +325,7 @@ interface Drive
    * Returns: Signal ID
    */
   ulong connectDisconnected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DisconnectedCallbackDlg) || is(T == DisconnectedCallbackFunc));
+  if (is(T : DisconnectedCallbackDlg) || is(T : DisconnectedCallbackFunc));
 
   /**
    * Emitted when the physical eject button $(LPAREN)if any$(RPAREN) of a drive has
@@ -343,7 +343,7 @@ interface Drive
    * Returns: Signal ID
    */
   ulong connectEjectButton(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EjectButtonCallbackDlg) || is(T == EjectButtonCallbackFunc));
+  if (is(T : EjectButtonCallbackDlg) || is(T : EjectButtonCallbackFunc));
 
   /**
    * Emitted when the physical stop button $(LPAREN)if any$(RPAREN) of a drive has
@@ -361,5 +361,5 @@ interface Drive
    * Returns: Signal ID
    */
   ulong connectStopButton(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == StopButtonCallbackDlg) || is(T == StopButtonCallbackFunc));
+  if (is(T : StopButtonCallbackDlg) || is(T : StopButtonCallbackFunc));
   }

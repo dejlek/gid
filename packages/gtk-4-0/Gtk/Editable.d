@@ -446,7 +446,7 @@ interface Editable
    * Returns: Signal ID
    */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc));
+  if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc));
 
   /**
    * Emitted when text is deleted from the widget by the user.
@@ -472,5 +472,5 @@ interface Editable
    * Returns: Signal ID
    */
   ulong connectDeleteText(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DeleteTextCallbackDlg) || is(T == DeleteTextCallbackFunc));
+  if (is(T : DeleteTextCallbackDlg) || is(T : DeleteTextCallbackFunc));
   }

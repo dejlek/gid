@@ -609,7 +609,7 @@ template DtlsConnectionT()
    * Returns: Signal ID
    */
   ulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == AcceptCertificateCallbackDlg) || is(T == AcceptCertificateCallbackFunc))
+  if (is(T : AcceptCertificateCallbackDlg) || is(T : AcceptCertificateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

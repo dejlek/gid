@@ -1079,7 +1079,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns: Signal ID
    */
   ulong connectActivateCursorItem(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateCursorItemCallbackDlg) || is(T == ActivateCursorItemCallbackFunc))
+  if (is(T : ActivateCursorItemCallbackDlg) || is(T : ActivateCursorItemCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1118,7 +1118,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns: Signal ID
    */
   ulong connectItemActivated(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ItemActivatedCallbackDlg) || is(T == ItemActivatedCallbackFunc))
+  if (is(T : ItemActivatedCallbackDlg) || is(T : ItemActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1165,7 +1165,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns: Signal ID
    */
   ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
+  if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1205,7 +1205,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns: Signal ID
    */
   ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectAllCallbackDlg) || is(T == SelectAllCallbackFunc))
+  if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1240,7 +1240,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns: Signal ID
    */
   ulong connectSelectCursorItem(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectCursorItemCallbackDlg) || is(T == SelectCursorItemCallbackFunc))
+  if (is(T : SelectCursorItemCallbackDlg) || is(T : SelectCursorItemCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1270,7 +1270,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns: Signal ID
    */
   ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectionChangedCallbackDlg) || is(T == SelectionChangedCallbackFunc))
+  if (is(T : SelectionChangedCallbackDlg) || is(T : SelectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1306,7 +1306,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns: Signal ID
    */
   ulong connectToggleCursorItem(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ToggleCursorItemCallbackDlg) || is(T == ToggleCursorItemCallbackFunc))
+  if (is(T : ToggleCursorItemCallbackDlg) || is(T : ToggleCursorItemCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1340,7 +1340,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns: Signal ID
    */
   ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UnselectAllCallbackDlg) || is(T == UnselectAllCallbackFunc))
+  if (is(T : UnselectAllCallbackDlg) || is(T : UnselectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

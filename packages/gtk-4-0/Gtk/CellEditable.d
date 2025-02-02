@@ -72,7 +72,7 @@ interface CellEditable
    * Returns: Signal ID
    */
   ulong connectEditingDone(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EditingDoneCallbackDlg) || is(T == EditingDoneCallbackFunc));
+  if (is(T : EditingDoneCallbackDlg) || is(T : EditingDoneCallbackFunc));
 
   /**
    * This signal is meant to indicate that the cell is finished
@@ -98,5 +98,5 @@ interface CellEditable
    * Returns: Signal ID
    */
   ulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RemoveWidgetCallbackDlg) || is(T == RemoveWidgetCallbackFunc));
+  if (is(T : RemoveWidgetCallbackDlg) || is(T : RemoveWidgetCallbackFunc));
   }

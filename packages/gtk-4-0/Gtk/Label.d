@@ -928,7 +928,7 @@ class Label : Widget, AccessibleText
    * Returns: Signal ID
    */
   ulong connectActivateCurrentLink(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateCurrentLinkCallbackDlg) || is(T == ActivateCurrentLinkCallbackFunc))
+  if (is(T : ActivateCurrentLinkCallbackDlg) || is(T : ActivateCurrentLinkCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -962,7 +962,7 @@ class Label : Widget, AccessibleText
    * Returns: Signal ID
    */
   ulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateLinkCallbackDlg) || is(T == ActivateLinkCallbackFunc))
+  if (is(T : ActivateLinkCallbackDlg) || is(T : ActivateLinkCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -996,7 +996,7 @@ class Label : Widget, AccessibleText
    * Returns: Signal ID
    */
   ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CopyClipboardCallbackDlg) || is(T == CopyClipboardCallbackFunc))
+  if (is(T : CopyClipboardCallbackDlg) || is(T : CopyClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1043,7 +1043,7 @@ class Label : Widget, AccessibleText
    * Returns: Signal ID
    */
   ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveCursorCallbackDlg) || is(T == MoveCursorCallbackFunc))
+  if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

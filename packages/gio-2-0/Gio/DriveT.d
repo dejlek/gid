@@ -509,7 +509,7 @@ template DriveT()
    * Returns: Signal ID
    */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
+  if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -541,7 +541,7 @@ template DriveT()
    * Returns: Signal ID
    */
   ulong connectDisconnected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DisconnectedCallbackDlg) || is(T == DisconnectedCallbackFunc))
+  if (is(T : DisconnectedCallbackDlg) || is(T : DisconnectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -571,7 +571,7 @@ template DriveT()
    * Returns: Signal ID
    */
   ulong connectEjectButton(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EjectButtonCallbackDlg) || is(T == EjectButtonCallbackFunc))
+  if (is(T : EjectButtonCallbackDlg) || is(T : EjectButtonCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -601,7 +601,7 @@ template DriveT()
    * Returns: Signal ID
    */
   ulong connectStopButton(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == StopButtonCallbackDlg) || is(T == StopButtonCallbackFunc))
+  if (is(T : StopButtonCallbackDlg) || is(T : StopButtonCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

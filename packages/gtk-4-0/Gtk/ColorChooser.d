@@ -109,5 +109,5 @@ interface ColorChooser
    * Returns: Signal ID
    */
   ulong connectColorActivated(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ColorActivatedCallbackDlg) || is(T == ColorActivatedCallbackFunc));
+  if (is(T : ColorActivatedCallbackDlg) || is(T : ColorActivatedCallbackFunc));
   }

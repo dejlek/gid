@@ -1334,7 +1334,7 @@ class Settings : ObjectG
    * Returns: Signal ID
    */
   ulong connectChangeEvent(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChangeEventCallbackDlg) || is(T == ChangeEventCallbackFunc))
+  if (is(T : ChangeEventCallbackDlg) || is(T : ChangeEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1379,7 +1379,7 @@ class Settings : ObjectG
    * Returns: Signal ID
    */
   ulong connectChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
-  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
+  if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1428,7 +1428,7 @@ class Settings : ObjectG
    * Returns: Signal ID
    */
   ulong connectWritableChangeEvent(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == WritableChangeEventCallbackDlg) || is(T == WritableChangeEventCallbackFunc))
+  if (is(T : WritableChangeEventCallbackDlg) || is(T : WritableChangeEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1468,7 +1468,7 @@ class Settings : ObjectG
    * Returns: Signal ID
    */
   ulong connectWritableChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
-  if (is(T == WritableChangedCallbackDlg) || is(T == WritableChangedCallbackFunc))
+  if (is(T : WritableChangedCallbackDlg) || is(T : WritableChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

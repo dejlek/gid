@@ -90,5 +90,5 @@ interface MemoryMonitor
    * Returns: Signal ID
    */
   ulong connectLowMemoryWarning(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == LowMemoryWarningCallbackDlg) || is(T == LowMemoryWarningCallbackFunc));
+  if (is(T : LowMemoryWarningCallbackDlg) || is(T : LowMemoryWarningCallbackFunc));
   }

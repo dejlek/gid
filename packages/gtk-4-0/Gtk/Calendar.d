@@ -305,7 +305,7 @@ class Calendar : Widget
    * Returns: Signal ID
    */
   ulong connectDaySelected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DaySelectedCallbackDlg) || is(T == DaySelectedCallbackFunc))
+  if (is(T : DaySelectedCallbackDlg) || is(T : DaySelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -334,7 +334,7 @@ class Calendar : Widget
    * Returns: Signal ID
    */
   ulong connectNextMonth(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == NextMonthCallbackDlg) || is(T == NextMonthCallbackFunc))
+  if (is(T : NextMonthCallbackDlg) || is(T : NextMonthCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -363,7 +363,7 @@ class Calendar : Widget
    * Returns: Signal ID
    */
   ulong connectNextYear(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == NextYearCallbackDlg) || is(T == NextYearCallbackFunc))
+  if (is(T : NextYearCallbackDlg) || is(T : NextYearCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -392,7 +392,7 @@ class Calendar : Widget
    * Returns: Signal ID
    */
   ulong connectPrevMonth(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PrevMonthCallbackDlg) || is(T == PrevMonthCallbackFunc))
+  if (is(T : PrevMonthCallbackDlg) || is(T : PrevMonthCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -421,7 +421,7 @@ class Calendar : Widget
    * Returns: Signal ID
    */
   ulong connectPrevYear(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PrevYearCallbackDlg) || is(T == PrevYearCallbackFunc))
+  if (is(T : PrevYearCallbackDlg) || is(T : PrevYearCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

@@ -355,7 +355,7 @@ class Range : Widget, AccessibleRange, Orientable
    * Returns: Signal ID
    */
   ulong connectAdjustBounds(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == AdjustBoundsCallbackDlg) || is(T == AdjustBoundsCallbackFunc))
+  if (is(T : AdjustBoundsCallbackDlg) || is(T : AdjustBoundsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -399,7 +399,7 @@ class Range : Widget, AccessibleRange, Orientable
    * Returns: Signal ID
    */
   ulong connectChangeValue(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChangeValueCallbackDlg) || is(T == ChangeValueCallbackFunc))
+  if (is(T : ChangeValueCallbackDlg) || is(T : ChangeValueCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -435,7 +435,7 @@ class Range : Widget, AccessibleRange, Orientable
    * Returns: Signal ID
    */
   ulong connectMoveSlider(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveSliderCallbackDlg) || is(T == MoveSliderCallbackFunc))
+  if (is(T : MoveSliderCallbackDlg) || is(T : MoveSliderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -465,7 +465,7 @@ class Range : Widget, AccessibleRange, Orientable
    * Returns: Signal ID
    */
   ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ValueChangedCallbackDlg) || is(T == ValueChangedCallbackFunc))
+  if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

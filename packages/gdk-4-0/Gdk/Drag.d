@@ -217,7 +217,7 @@ class Drag : ObjectG
    * Returns: Signal ID
    */
   ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CancelCallbackDlg) || is(T == CancelCallbackFunc))
+  if (is(T : CancelCallbackDlg) || is(T : CancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -248,7 +248,7 @@ class Drag : ObjectG
    * Returns: Signal ID
    */
   ulong connectDndFinished(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DndFinishedCallbackDlg) || is(T == DndFinishedCallbackFunc))
+  if (is(T : DndFinishedCallbackDlg) || is(T : DndFinishedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -277,7 +277,7 @@ class Drag : ObjectG
    * Returns: Signal ID
    */
   ulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DropPerformedCallbackDlg) || is(T == DropPerformedCallbackFunc))
+  if (is(T : DropPerformedCallbackDlg) || is(T : DropPerformedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

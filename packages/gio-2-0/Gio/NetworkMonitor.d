@@ -143,5 +143,5 @@ interface NetworkMonitor
    * Returns: Signal ID
    */
   ulong connectNetworkChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == NetworkChangedCallbackDlg) || is(T == NetworkChangedCallbackFunc));
+  if (is(T : NetworkChangedCallbackDlg) || is(T : NetworkChangedCallbackFunc));
   }

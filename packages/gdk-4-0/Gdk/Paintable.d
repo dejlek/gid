@@ -212,7 +212,7 @@ interface Paintable
    * Returns: Signal ID
    */
   ulong connectInvalidateContents(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InvalidateContentsCallbackDlg) || is(T == InvalidateContentsCallbackFunc));
+  if (is(T : InvalidateContentsCallbackDlg) || is(T : InvalidateContentsCallbackFunc));
 
   /**
    * Emitted when the intrinsic size of the paintable changes.
@@ -236,5 +236,5 @@ interface Paintable
    * Returns: Signal ID
    */
   ulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InvalidateSizeCallbackDlg) || is(T == InvalidateSizeCallbackFunc));
+  if (is(T : InvalidateSizeCallbackDlg) || is(T : InvalidateSizeCallbackFunc));
   }

@@ -303,7 +303,7 @@ class InfoBar : Widget
    * Returns: Signal ID
    */
   ulong connectClose(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CloseCallbackDlg) || is(T == CloseCallbackFunc))
+  if (is(T : CloseCallbackDlg) || is(T : CloseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -337,7 +337,7 @@ class InfoBar : Widget
    * Returns: Signal ID
    */
   ulong connectResponse(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ResponseCallbackDlg) || is(T == ResponseCallbackFunc))
+  if (is(T : ResponseCallbackDlg) || is(T : ResponseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

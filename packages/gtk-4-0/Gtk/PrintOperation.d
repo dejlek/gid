@@ -564,7 +564,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectBeginPrint(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == BeginPrintCallbackDlg) || is(T == BeginPrintCallbackFunc))
+  if (is(T : BeginPrintCallbackDlg) || is(T : BeginPrintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -604,7 +604,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectCreateCustomWidget(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CreateCustomWidgetCallbackDlg) || is(T == CreateCustomWidgetCallbackFunc))
+  if (is(T : CreateCustomWidgetCallbackDlg) || is(T : CreateCustomWidgetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -640,7 +640,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectCustomWidgetApply(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == CustomWidgetApplyCallbackDlg) || is(T == CustomWidgetApplyCallbackFunc))
+  if (is(T : CustomWidgetApplyCallbackDlg) || is(T : CustomWidgetApplyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -679,7 +679,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectDone(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DoneCallbackDlg) || is(T == DoneCallbackFunc))
+  if (is(T : DoneCallbackDlg) || is(T : DoneCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -750,7 +750,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectDrawPage(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DrawPageCallbackDlg) || is(T == DrawPageCallbackFunc))
+  if (is(T : DrawPageCallbackDlg) || is(T : DrawPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -785,7 +785,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectEndPrint(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EndPrintCallbackDlg) || is(T == EndPrintCallbackFunc))
+  if (is(T : EndPrintCallbackDlg) || is(T : EndPrintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -828,7 +828,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectPaginate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PaginateCallbackDlg) || is(T == PaginateCallbackFunc))
+  if (is(T : PaginateCallbackDlg) || is(T : PaginateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -878,7 +878,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectPreview(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PreviewCallbackDlg) || is(T == PreviewCallbackFunc))
+  if (is(T : PreviewCallbackDlg) || is(T : PreviewCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -919,7 +919,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectRequestPageSetup(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RequestPageSetupCallbackDlg) || is(T == RequestPageSetupCallbackFunc))
+  if (is(T : RequestPageSetupCallbackDlg) || is(T : RequestPageSetupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -954,7 +954,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == StatusChangedCallbackDlg) || is(T == StatusChangedCallbackFunc))
+  if (is(T : StatusChangedCallbackDlg) || is(T : StatusChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -989,7 +989,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: Signal ID
    */
   ulong connectUpdateCustomWidget(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UpdateCustomWidgetCallbackDlg) || is(T == UpdateCustomWidgetCallbackFunc))
+  if (is(T : UpdateCustomWidgetCallbackDlg) || is(T : UpdateCustomWidgetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

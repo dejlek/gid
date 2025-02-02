@@ -503,7 +503,7 @@ class ScrolledWindow : Widget
    * Returns: Signal ID
    */
   ulong connectEdgeOvershot(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EdgeOvershotCallbackDlg) || is(T == EdgeOvershotCallbackFunc))
+  if (is(T : EdgeOvershotCallbackDlg) || is(T : EdgeOvershotCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -541,7 +541,7 @@ class ScrolledWindow : Widget
    * Returns: Signal ID
    */
   ulong connectEdgeReached(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EdgeReachedCallbackDlg) || is(T == EdgeReachedCallbackFunc))
+  if (is(T : EdgeReachedCallbackDlg) || is(T : EdgeReachedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -579,7 +579,7 @@ class ScrolledWindow : Widget
    * Returns: Signal ID
    */
   ulong connectMoveFocusOut(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveFocusOutCallbackDlg) || is(T == MoveFocusOutCallbackFunc))
+  if (is(T : MoveFocusOutCallbackDlg) || is(T : MoveFocusOutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -617,7 +617,7 @@ class ScrolledWindow : Widget
    * Returns: Signal ID
    */
   ulong connectScrollChild(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ScrollChildCallbackDlg) || is(T == ScrollChildCallbackFunc))
+  if (is(T : ScrollChildCallbackDlg) || is(T : ScrollChildCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

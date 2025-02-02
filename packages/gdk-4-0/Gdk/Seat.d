@@ -128,7 +128,7 @@ class Seat : ObjectG
    * Returns: Signal ID
    */
   ulong connectDeviceAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DeviceAddedCallbackDlg) || is(T == DeviceAddedCallbackFunc))
+  if (is(T : DeviceAddedCallbackDlg) || is(T : DeviceAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -160,7 +160,7 @@ class Seat : ObjectG
    * Returns: Signal ID
    */
   ulong connectDeviceRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DeviceRemovedCallbackDlg) || is(T == DeviceRemovedCallbackFunc))
+  if (is(T : DeviceRemovedCallbackDlg) || is(T : DeviceRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -196,7 +196,7 @@ class Seat : ObjectG
    * Returns: Signal ID
    */
   ulong connectToolAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ToolAddedCallbackDlg) || is(T == ToolAddedCallbackFunc))
+  if (is(T : ToolAddedCallbackDlg) || is(T : ToolAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -228,7 +228,7 @@ class Seat : ObjectG
    * Returns: Signal ID
    */
   ulong connectToolRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ToolRemovedCallbackDlg) || is(T == ToolRemovedCallbackFunc))
+  if (is(T : ToolRemovedCallbackDlg) || is(T : ToolRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

@@ -83,7 +83,7 @@ interface DBusObjectManager
    * Returns: Signal ID
    */
   ulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InterfaceAddedCallbackDlg) || is(T == InterfaceAddedCallbackFunc));
+  if (is(T : InterfaceAddedCallbackDlg) || is(T : InterfaceAddedCallbackFunc));
 
   /**
    * Emitted when interface has been removed from object.
@@ -105,7 +105,7 @@ interface DBusObjectManager
    * Returns: Signal ID
    */
   ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InterfaceRemovedCallbackDlg) || is(T == InterfaceRemovedCallbackFunc));
+  if (is(T : InterfaceRemovedCallbackDlg) || is(T : InterfaceRemovedCallbackFunc));
 
   /**
    * Emitted when object is added to manager.
@@ -124,7 +124,7 @@ interface DBusObjectManager
    * Returns: Signal ID
    */
   ulong connectObjectAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ObjectAddedCallbackDlg) || is(T == ObjectAddedCallbackFunc));
+  if (is(T : ObjectAddedCallbackDlg) || is(T : ObjectAddedCallbackFunc));
 
   /**
    * Emitted when object is removed from manager.
@@ -143,5 +143,5 @@ interface DBusObjectManager
    * Returns: Signal ID
    */
   ulong connectObjectRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ObjectRemovedCallbackDlg) || is(T == ObjectRemovedCallbackFunc));
+  if (is(T : ObjectRemovedCallbackDlg) || is(T : ObjectRemovedCallbackFunc));
   }

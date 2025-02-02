@@ -175,7 +175,7 @@ class Statusbar : Widget
    * Returns: Signal ID
    */
   ulong connectTextPopped(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == TextPoppedCallbackDlg) || is(T == TextPoppedCallbackFunc))
+  if (is(T : TextPoppedCallbackDlg) || is(T : TextPoppedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -211,7 +211,7 @@ class Statusbar : Widget
    * Returns: Signal ID
    */
   ulong connectTextPushed(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == TextPushedCallbackDlg) || is(T == TextPushedCallbackFunc))
+  if (is(T : TextPushedCallbackDlg) || is(T : TextPushedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

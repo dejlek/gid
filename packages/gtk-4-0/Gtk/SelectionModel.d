@@ -205,5 +205,5 @@ interface SelectionModel
    * Returns: Signal ID
    */
   ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SelectionChangedCallbackDlg) || is(T == SelectionChangedCallbackFunc));
+  if (is(T : SelectionChangedCallbackDlg) || is(T : SelectionChangedCallbackFunc));
   }

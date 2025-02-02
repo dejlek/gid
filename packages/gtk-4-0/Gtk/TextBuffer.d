@@ -1183,7 +1183,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectApplyTag(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ApplyTagCallbackDlg) || is(T == ApplyTagCallbackFunc))
+  if (is(T : ApplyTagCallbackDlg) || is(T : ApplyTagCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1223,7 +1223,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectBeginUserAction(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == BeginUserActionCallbackDlg) || is(T == BeginUserActionCallbackFunc))
+  if (is(T : BeginUserActionCallbackDlg) || is(T : BeginUserActionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1252,7 +1252,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
+  if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1292,7 +1292,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectDeleteRange(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == DeleteRangeCallbackDlg) || is(T == DeleteRangeCallbackFunc))
+  if (is(T : DeleteRangeCallbackDlg) || is(T : DeleteRangeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1332,7 +1332,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectEndUserAction(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EndUserActionCallbackDlg) || is(T == EndUserActionCallbackFunc))
+  if (is(T : EndUserActionCallbackDlg) || is(T : EndUserActionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1370,7 +1370,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectInsertChildAnchor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InsertChildAnchorCallbackDlg) || is(T == InsertChildAnchorCallbackFunc))
+  if (is(T : InsertChildAnchorCallbackDlg) || is(T : InsertChildAnchorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1410,7 +1410,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectInsertPaintable(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InsertPaintableCallbackDlg) || is(T == InsertPaintableCallbackFunc))
+  if (is(T : InsertPaintableCallbackDlg) || is(T : InsertPaintableCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1452,7 +1452,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectInsertText(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InsertTextCallbackDlg) || is(T == InsertTextCallbackFunc))
+  if (is(T : InsertTextCallbackDlg) || is(T : InsertTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1487,7 +1487,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectMarkDeleted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MarkDeletedCallbackDlg) || is(T == MarkDeletedCallbackFunc))
+  if (is(T : MarkDeletedCallbackDlg) || is(T : MarkDeletedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1523,7 +1523,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectMarkSet(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MarkSetCallbackDlg) || is(T == MarkSetCallbackFunc))
+  if (is(T : MarkSetCallbackDlg) || is(T : MarkSetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1555,7 +1555,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectModifiedChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ModifiedChangedCallbackDlg) || is(T == ModifiedChangedCallbackFunc))
+  if (is(T : ModifiedChangedCallbackDlg) || is(T : ModifiedChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1589,7 +1589,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectPasteDone(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PasteDoneCallbackDlg) || is(T == PasteDoneCallbackFunc))
+  if (is(T : PasteDoneCallbackDlg) || is(T : PasteDoneCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1620,7 +1620,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectRedo(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RedoCallbackDlg) || is(T == RedoCallbackFunc))
+  if (is(T : RedoCallbackDlg) || is(T : RedoCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1659,7 +1659,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectRemoveTag(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RemoveTagCallbackDlg) || is(T == RemoveTagCallbackFunc))
+  if (is(T : RemoveTagCallbackDlg) || is(T : RemoveTagCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1693,7 +1693,7 @@ class TextBuffer : ObjectG
    * Returns: Signal ID
    */
   ulong connectUndo(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UndoCallbackDlg) || is(T == UndoCallbackFunc))
+  if (is(T : UndoCallbackDlg) || is(T : UndoCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

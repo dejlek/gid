@@ -139,7 +139,7 @@ class DBusAuthObserver : ObjectG
    * Returns: Signal ID
    */
   ulong connectAllowMechanism(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == AllowMechanismCallbackDlg) || is(T == AllowMechanismCallbackFunc))
+  if (is(T : AllowMechanismCallbackDlg) || is(T : AllowMechanismCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -176,7 +176,7 @@ class DBusAuthObserver : ObjectG
    * Returns: Signal ID
    */
   ulong connectAuthorizeAuthenticatedPeer(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == AuthorizeAuthenticatedPeerCallbackDlg) || is(T == AuthorizeAuthenticatedPeerCallbackFunc))
+  if (is(T : AuthorizeAuthenticatedPeerCallbackDlg) || is(T : AuthorizeAuthenticatedPeerCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

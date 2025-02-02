@@ -977,7 +977,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    * Returns: Signal ID
    */
   ulong connectAddEditable(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == AddEditableCallbackDlg) || is(T == AddEditableCallbackFunc))
+  if (is(T : AddEditableCallbackDlg) || is(T : AddEditableCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1015,7 +1015,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    * Returns: Signal ID
    */
   ulong connectApplyAttributes(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ApplyAttributesCallbackDlg) || is(T == ApplyAttributesCallbackFunc))
+  if (is(T : ApplyAttributesCallbackDlg) || is(T : ApplyAttributesCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1057,7 +1057,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    * Returns: Signal ID
    */
   ulong connectFocusChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == FocusChangedCallbackDlg) || is(T == FocusChangedCallbackFunc))
+  if (is(T : FocusChangedCallbackDlg) || is(T : FocusChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -1092,7 +1092,7 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
    * Returns: Signal ID
    */
   ulong connectRemoveEditable(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == RemoveEditableCallbackDlg) || is(T == RemoveEditableCallbackFunc))
+  if (is(T : RemoveEditableCallbackDlg) || is(T : RemoveEditableCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

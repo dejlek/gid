@@ -104,7 +104,7 @@ class DropControllerMotion : EventController
    * Returns: Signal ID
    */
   ulong connectEnter(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EnterCallbackDlg) || is(T == EnterCallbackFunc))
+  if (is(T : EnterCallbackDlg) || is(T : EnterCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -135,7 +135,7 @@ class DropControllerMotion : EventController
    * Returns: Signal ID
    */
   ulong connectLeave(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == LeaveCallbackDlg) || is(T == LeaveCallbackFunc))
+  if (is(T : LeaveCallbackDlg) || is(T : LeaveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -167,7 +167,7 @@ class DropControllerMotion : EventController
    * Returns: Signal ID
    */
   ulong connectMotion(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MotionCallbackDlg) || is(T == MotionCallbackFunc))
+  if (is(T : MotionCallbackDlg) || is(T : MotionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

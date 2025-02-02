@@ -446,7 +446,7 @@ class CellRenderer : InitiallyUnowned
    * Returns: Signal ID
    */
   ulong connectEditingCanceled(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EditingCanceledCallbackDlg) || is(T == EditingCanceledCallbackFunc))
+  if (is(T : EditingCanceledCallbackDlg) || is(T : EditingCanceledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -502,7 +502,7 @@ class CellRenderer : InitiallyUnowned
    * Returns: Signal ID
    */
   ulong connectEditingStarted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == EditingStartedCallbackDlg) || is(T == EditingStartedCallbackFunc))
+  if (is(T : EditingStartedCallbackDlg) || is(T : EditingStartedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

@@ -83,7 +83,7 @@ class GestureSwipe : GestureSingle
    * Returns: Signal ID
    */
   ulong connectSwipe(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SwipeCallbackDlg) || is(T == SwipeCallbackFunc))
+  if (is(T : SwipeCallbackDlg) || is(T : SwipeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

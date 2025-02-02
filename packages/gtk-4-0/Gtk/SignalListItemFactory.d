@@ -96,7 +96,7 @@ class SignalListItemFactory : ListItemFactory
    * Returns: Signal ID
    */
   ulong connectBind(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == BindCallbackDlg) || is(T == BindCallbackFunc))
+  if (is(T : BindCallbackDlg) || is(T : BindCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -131,7 +131,7 @@ class SignalListItemFactory : ListItemFactory
    * Returns: Signal ID
    */
   ulong connectSetup(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == SetupCallbackDlg) || is(T == SetupCallbackFunc))
+  if (is(T : SetupCallbackDlg) || is(T : SetupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -166,7 +166,7 @@ class SignalListItemFactory : ListItemFactory
    * Returns: Signal ID
    */
   ulong connectTeardown(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == TeardownCallbackDlg) || is(T == TeardownCallbackFunc))
+  if (is(T : TeardownCallbackDlg) || is(T : TeardownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -202,7 +202,7 @@ class SignalListItemFactory : ListItemFactory
    * Returns: Signal ID
    */
   ulong connectUnbind(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UnbindCallbackDlg) || is(T == UnbindCallbackFunc))
+  if (is(T : UnbindCallbackDlg) || is(T : UnbindCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

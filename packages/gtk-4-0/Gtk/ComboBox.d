@@ -542,7 +542,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Returns: Signal ID
    */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ActivateCallbackDlg) || is(T == ActivateCallbackFunc))
+  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -574,7 +574,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Returns: Signal ID
    */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ChangedCallbackDlg) || is(T == ChangedCallbackFunc))
+  if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -632,7 +632,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Returns: Signal ID
    */
   ulong connectFormatEntryText(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == FormatEntryTextCallbackDlg) || is(T == FormatEntryTextCallbackFunc))
+  if (is(T : FormatEntryTextCallbackDlg) || is(T : FormatEntryTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -666,7 +666,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Returns: Signal ID
    */
   ulong connectMoveActive(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == MoveActiveCallbackDlg) || is(T == MoveActiveCallbackFunc))
+  if (is(T : MoveActiveCallbackDlg) || is(T : MoveActiveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -699,7 +699,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Returns: Signal ID
    */
   ulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PopdownCallbackDlg) || is(T == PopdownCallbackFunc))
+  if (is(T : PopdownCallbackDlg) || is(T : PopdownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -732,7 +732,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Returns: Signal ID
    */
   ulong connectPopup(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PopupCallbackDlg) || is(T == PopupCallbackFunc))
+  if (is(T : PopupCallbackDlg) || is(T : PopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

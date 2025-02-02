@@ -180,5 +180,5 @@ interface ListModel
    * Returns: Signal ID
    */
   ulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ItemsChangedCallbackDlg) || is(T == ItemsChangedCallbackFunc));
+  if (is(T : ItemsChangedCallbackDlg) || is(T : ItemsChangedCallbackFunc));
   }

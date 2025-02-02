@@ -227,7 +227,7 @@ template PaintableT()
    * Returns: Signal ID
    */
   ulong connectInvalidateContents(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InvalidateContentsCallbackDlg) || is(T == InvalidateContentsCallbackFunc))
+  if (is(T : InvalidateContentsCallbackDlg) || is(T : InvalidateContentsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -263,7 +263,7 @@ template PaintableT()
    * Returns: Signal ID
    */
   ulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == InvalidateSizeCallbackDlg) || is(T == InvalidateSizeCallbackFunc))
+  if (is(T : InvalidateSizeCallbackDlg) || is(T : InvalidateSizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {

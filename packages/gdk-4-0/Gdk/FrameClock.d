@@ -231,7 +231,7 @@ class FrameClock : ObjectG
    * Returns: Signal ID
    */
   ulong connectAfterPaint(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == AfterPaintCallbackDlg) || is(T == AfterPaintCallbackFunc))
+  if (is(T : AfterPaintCallbackDlg) || is(T : AfterPaintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -261,7 +261,7 @@ class FrameClock : ObjectG
    * Returns: Signal ID
    */
   ulong connectBeforePaint(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == BeforePaintCallbackDlg) || is(T == BeforePaintCallbackFunc))
+  if (is(T : BeforePaintCallbackDlg) || is(T : BeforePaintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -292,7 +292,7 @@ class FrameClock : ObjectG
    * Returns: Signal ID
    */
   ulong connectFlushEvents(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == FlushEventsCallbackDlg) || is(T == FlushEventsCallbackFunc))
+  if (is(T : FlushEventsCallbackDlg) || is(T : FlushEventsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -324,7 +324,7 @@ class FrameClock : ObjectG
    * Returns: Signal ID
    */
   ulong connectLayout(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == LayoutCallbackDlg) || is(T == LayoutCallbackFunc))
+  if (is(T : LayoutCallbackDlg) || is(T : LayoutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -358,7 +358,7 @@ class FrameClock : ObjectG
    * Returns: Signal ID
    */
   ulong connectPaint(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == PaintCallbackDlg) || is(T == PaintCallbackFunc))
+  if (is(T : PaintCallbackDlg) || is(T : PaintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -389,7 +389,7 @@ class FrameClock : ObjectG
    * Returns: Signal ID
    */
   ulong connectResumeEvents(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == ResumeEventsCallbackDlg) || is(T == ResumeEventsCallbackFunc))
+  if (is(T : ResumeEventsCallbackDlg) || is(T : ResumeEventsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
@@ -423,7 +423,7 @@ class FrameClock : ObjectG
    * Returns: Signal ID
    */
   ulong connectUpdate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T == UpdateCallbackDlg) || is(T == UpdateCallbackFunc))
+  if (is(T : UpdateCallbackDlg) || is(T : UpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
