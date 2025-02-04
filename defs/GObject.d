@@ -22,6 +22,9 @@
 //# Disable binding of unuseful and problematic structures
 //!set record[TypePluginClass][disable] 1
 
+//# Remove duplicate variant_get_gtype (also in GLib-2.0.gir) as it was causing duplicate C function pointer symbols with dmd
+//!del function[variant_get_gtype]
+
 //# Disable WeakRef priv union field
 //!set record[WeakRef].union[priv][disable] 1
 

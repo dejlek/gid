@@ -244,7 +244,6 @@ __gshared extern(C)
   void function(void* checkData, GTypeInterfaceCheckFunc checkFunc) c_g_type_remove_interface_check;
   void function(GType type, GQuark quark, void* data) c_g_type_set_qdata;
   bool function(GType type, uint flags) c_g_type_test_flags;
-  GType function() c_g_variant_get_gtype;
 
   // InitiallyUnowned
   GType function() c_g_initially_unowned_get_type;
@@ -721,7 +720,6 @@ alias g_type_remove_class_cache_func = c_g_type_remove_class_cache_func;
 alias g_type_remove_interface_check = c_g_type_remove_interface_check;
 alias g_type_set_qdata = c_g_type_set_qdata;
 alias g_type_test_flags = c_g_type_test_flags;
-alias g_variant_get_gtype = c_g_variant_get_gtype;
 
 // InitiallyUnowned
 alias g_initially_unowned_get_type = c_g_initially_unowned_get_type;
@@ -1199,7 +1197,6 @@ shared static this()
   link(g_type_remove_interface_check, "g_type_remove_interface_check");
   link(g_type_set_qdata, "g_type_set_qdata");
   link(g_type_test_flags, "g_type_test_flags");
-  link(g_variant_get_gtype, "g_variant_get_gtype");
 
   // InitiallyUnowned
   link(g_initially_unowned_get_type, "g_initially_unowned_get_type");

@@ -2200,10 +2200,3 @@ bool typeTestFlags(GType type, uint flags)
   _retval = g_type_test_flags(type, flags);
   return _retval;
 }
-
-GType variantGetGtype()
-{
-  GType _retval;
-  _retval = g_variant_get_gtype();
-  return _retval;
-}

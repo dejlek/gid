@@ -89,6 +89,7 @@ Here are some general rules about symbol renaming:
    For example a function argument named `version` is a reserved D word and would therefore become `version_`.
  * Signal names are in **kebab-case** and are converted to signal **connectKebabCase** templates.
 
+
 ### Specific Symbol Renames
 
 | GLib C Type      | D Type            |
