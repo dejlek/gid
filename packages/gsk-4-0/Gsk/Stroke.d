@@ -1,6 +1,6 @@
 module Gsk.Stroke;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Gsk.Types;
 import Gsk.c.functions;

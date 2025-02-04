@@ -1,6 +1,6 @@
 module Gtk.ExpressionWatch;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import GObject.Value;
 import Gid.gid;
 import Gtk.Types;

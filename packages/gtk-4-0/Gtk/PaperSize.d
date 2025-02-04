@@ -1,9 +1,9 @@
 module Gtk.PaperSize;
 
-import GLib.Boxed;
 import GLib.ErrorG;
 import GLib.KeyFile;
 import GLib.VariantG;
+import GObject.Boxed;
 import Gid.gid;
 import Gtk.Types;
 import Gtk.c.functions;

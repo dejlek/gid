@@ -1,6 +1,6 @@
 module Graphene.Size;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Graphene.Types;
 import Graphene.c.functions;

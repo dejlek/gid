@@ -1,6 +1,6 @@
 module cairo.Device;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import cairo.Types;
 import cairo.c.functions;

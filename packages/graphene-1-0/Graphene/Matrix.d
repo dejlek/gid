@@ -1,6 +1,6 @@
 module Graphene.Matrix;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Graphene.Box;
 import Graphene.Euler;

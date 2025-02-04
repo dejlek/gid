@@ -1,6 +1,6 @@
 module Gtk.Requisition;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Gtk.Types;
 import Gtk.c.functions;

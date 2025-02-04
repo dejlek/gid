@@ -1,6 +1,6 @@
 module Gsk.PathMeasure;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Gsk.Path;
 import Gsk.Types;

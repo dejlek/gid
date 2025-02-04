@@ -1,6 +1,6 @@
 module Gio.DBusPropertyInfo;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Gio.Types;
 import Gio.c.functions;

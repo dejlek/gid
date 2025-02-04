@@ -1,6 +1,6 @@
 module Pango.Item;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Pango.Analysis;
 import Pango.AttrIterator;

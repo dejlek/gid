@@ -1,6 +1,6 @@
 module Graphene.Rect;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Graphene.Point;
 import Graphene.Size;

@@ -1,6 +1,6 @@
 module Gdk.FileList;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import GObject.ObjectG;
 import Gdk.Types;
 import Gdk.c.functions;

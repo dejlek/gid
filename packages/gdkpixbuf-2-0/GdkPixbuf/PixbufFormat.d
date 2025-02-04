@@ -1,6 +1,6 @@
 module GdkPixbuf.PixbufFormat;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import GdkPixbuf.PixbufModulePattern;
 import GdkPixbuf.Types;
 import GdkPixbuf.c.functions;

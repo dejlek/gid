@@ -1,6 +1,6 @@
 module cairo.Pattern;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import cairo.Matrix;
 import cairo.Surface;

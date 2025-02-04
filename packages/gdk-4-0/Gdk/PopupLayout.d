@@ -1,6 +1,6 @@
 module Gdk.PopupLayout;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gdk.Rectangle;
 import Gdk.Types;
 import Gdk.c.functions;

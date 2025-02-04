@@ -1,6 +1,6 @@
 module Gsk.PathPoint;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Graphene.Point;
 import Graphene.Vec2;

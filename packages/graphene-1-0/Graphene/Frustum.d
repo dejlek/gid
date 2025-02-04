@@ -1,6 +1,6 @@
 module Graphene.Frustum;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Graphene.Box;
 import Graphene.Matrix;

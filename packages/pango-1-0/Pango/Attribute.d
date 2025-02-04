@@ -1,6 +1,6 @@
 module Pango.Attribute;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Pango.AttrColor;
 import Pango.AttrFloat;

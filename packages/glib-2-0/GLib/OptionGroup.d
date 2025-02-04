@@ -1,9 +1,9 @@
 module GLib.OptionGroup;
 
-import GLib.Boxed;
 import GLib.Types;
 import GLib.c.functions;
 import GLib.c.types;
+import GObject.Boxed;
 import Gid.gid;
 
 /**

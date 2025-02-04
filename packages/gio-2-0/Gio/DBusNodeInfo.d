@@ -1,8 +1,8 @@
 module Gio.DBusNodeInfo;
 
-import GLib.Boxed;
 import GLib.ErrorG;
 import GLib.String;
+import GObject.Boxed;
 import Gid.gid;
 import Gio.DBusInterfaceInfo;
 import Gio.Types;

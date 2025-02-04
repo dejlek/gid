@@ -1,7 +1,7 @@
 module Gsk.Path;
 
-import GLib.Boxed;
 import GLib.String;
+import GObject.Boxed;
 import Gid.gid;
 import Graphene.Point;
 import Graphene.Rect;

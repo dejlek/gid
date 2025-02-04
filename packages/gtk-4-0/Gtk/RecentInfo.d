@@ -1,8 +1,8 @@
 module Gtk.RecentInfo;
 
-import GLib.Boxed;
 import GLib.DateTime;
 import GLib.ErrorG;
+import GObject.Boxed;
 import GObject.ObjectG;
 import Gid.gid;
 import Gio.AppInfo;

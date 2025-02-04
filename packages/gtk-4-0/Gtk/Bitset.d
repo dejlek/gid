@@ -1,6 +1,6 @@
 module Gtk.Bitset;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Gtk.Types;
 import Gtk.c.functions;

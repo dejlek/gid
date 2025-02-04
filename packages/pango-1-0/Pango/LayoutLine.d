@@ -1,6 +1,6 @@
 module Pango.LayoutLine;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import GObject.ObjectG;
 import Gid.gid;
 import Pango.Layout;

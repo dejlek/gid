@@ -1,6 +1,6 @@
 module Graphene.Quaternion;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Graphene.Euler;
 import Graphene.Matrix;

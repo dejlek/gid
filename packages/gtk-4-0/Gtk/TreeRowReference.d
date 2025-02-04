@@ -1,6 +1,6 @@
 module Gtk.TreeRowReference;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import GObject.ObjectG;
 import Gid.gid;
 import Gtk.TreeModel;

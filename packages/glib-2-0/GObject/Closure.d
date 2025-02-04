@@ -1,6 +1,6 @@
 module GObject.Closure;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import GObject.ObjectG;
 import GObject.Types;
 import GObject.Value;

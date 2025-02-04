@@ -1,7 +1,7 @@
 module Gsk.ShaderArgsBuilder;
 
-import GLib.Boxed;
 import GLib.Bytes;
+import GObject.Boxed;
 import Gid.gid;
 import Graphene.Vec2;
 import Graphene.Vec3;

@@ -1,7 +1,7 @@
 module GObject.Value;
 
-import GLib.Boxed;
 import GLib.VariantG;
+import GObject.Boxed;
 import GObject.ObjectG;
 import GObject.ParamSpec;
 import GObject.TypeInstance;

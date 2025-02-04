@@ -1,6 +1,6 @@
 module cairo.RectangleList;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import cairo.Rectangle;
 import cairo.Types;

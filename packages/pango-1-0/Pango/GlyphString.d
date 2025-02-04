@@ -1,6 +1,6 @@
 module Pango.GlyphString;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Pango.Analysis;
 import Pango.Font;

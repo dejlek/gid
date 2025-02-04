@@ -1,6 +1,6 @@
 module Pango.AttrList;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Pango.AttrIterator;
 import Pango.Attribute;

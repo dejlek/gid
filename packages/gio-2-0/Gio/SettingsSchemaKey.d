@@ -1,8 +1,8 @@
 module Gio.SettingsSchemaKey;
 
-import GLib.Boxed;
 import GLib.VariantG;
 import GLib.VariantType;
+import GObject.Boxed;
 import Gid.gid;
 import Gio.Types;
 import Gio.c.functions;

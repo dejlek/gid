@@ -1,6 +1,6 @@
 module Gdk.RGBA;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gdk.Types;
 import Gdk.c.functions;
 import Gdk.c.types;

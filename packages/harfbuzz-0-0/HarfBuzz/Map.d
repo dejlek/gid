@@ -1,6 +1,6 @@
 module HarfBuzz.Map;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import HarfBuzz.Types;
 import HarfBuzz.c.functions;

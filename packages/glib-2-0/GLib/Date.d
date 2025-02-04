@@ -1,10 +1,10 @@
 module GLib.Date;
 
-import GLib.Boxed;
 import GLib.TimeVal;
 import GLib.Types;
 import GLib.c.functions;
 import GLib.c.types;
+import GObject.Boxed;
 import Gid.gid;
 
 /**

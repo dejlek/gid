@@ -1,7 +1,7 @@
 module GObject.ValueArray;
 
-import GLib.Boxed;
 import GLib.Types;
+import GObject.Boxed;
 import GObject.Types;
 import GObject.Value;
 import GObject.c.functions;

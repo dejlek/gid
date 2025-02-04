@@ -1,6 +1,6 @@
 module Pango.FontDescription;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Pango.Types;
 import Pango.c.functions;

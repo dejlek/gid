@@ -1,6 +1,6 @@
 module Gdk.ToplevelLayout;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import GObject.ObjectG;
 import Gdk.MonitorG;
 import Gdk.Types;

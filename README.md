@@ -232,7 +232,7 @@ and the third defines an interface proxy wrapper object that is used when a C GO
 
 ## Boxed Types
 
-GBoxed types are wrapped with an object derived from the abstract `GLib.Boxed` object.
+GBoxed types are wrapped with an object derived from the abstract `GObject.Boxed` object.
 
 
 ### Built-in Boxed Methods

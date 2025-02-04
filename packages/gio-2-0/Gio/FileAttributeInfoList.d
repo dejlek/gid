@@ -1,6 +1,6 @@
 module Gio.FileAttributeInfoList;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Gio.FileAttributeInfo;
 import Gio.Types;

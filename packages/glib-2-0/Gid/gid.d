@@ -13,9 +13,9 @@ import std.string : toStringz;
 import std.traits : hasMember, isScalarType;
 public import std.typecons : Flag, No, Yes;
 
-import GLib.Boxed;
 import GLib.c.functions;
 import GLib.c.types;
+import GObject.Boxed;
 import GObject.ObjectG;
 import GObject.c.functions;
 

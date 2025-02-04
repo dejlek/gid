@@ -1,7 +1,7 @@
 module Gdk.ContentFormats;
 
-import GLib.Boxed;
 import GLib.String;
+import GObject.Boxed;
 import GObject.Types;
 import Gdk.Types;
 import Gdk.c.functions;

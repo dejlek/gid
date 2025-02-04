@@ -1,6 +1,6 @@
 module Gtk.AccessibleList;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import GObject.ObjectG;
 import Gid.gid;
 import Gtk.Accessible;

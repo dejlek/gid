@@ -1,8 +1,8 @@
 module Gio.Resource;
 
-import GLib.Boxed;
 import GLib.Bytes;
 import GLib.ErrorG;
+import GObject.Boxed;
 import GObject.ObjectG;
 import Gid.gid;
 import Gio.InputStream;

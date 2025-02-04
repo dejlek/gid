@@ -1,6 +1,6 @@
 module Pango.GlyphItemIter;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import Pango.GlyphItem;
 import Pango.Types;

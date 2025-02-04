@@ -1,12 +1,12 @@
 module GLib.MainContext;
 
-import GLib.Boxed;
 import GLib.Cond;
 import GLib.Mutex;
 import GLib.Source;
 import GLib.Types;
 import GLib.c.functions;
 import GLib.c.types;
+import GObject.Boxed;
 import Gid.gid;
 
 /**

@@ -1,10 +1,10 @@
 module GLib.Tree;
 
-import GLib.Boxed;
 import GLib.TreeNode;
 import GLib.Types;
 import GLib.c.functions;
 import GLib.c.types;
+import GObject.Boxed;
 import Gid.gid;
 
 /**

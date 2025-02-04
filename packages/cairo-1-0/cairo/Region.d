@@ -1,6 +1,6 @@
 module cairo.Region;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import cairo.RectangleInt;
 import cairo.Types;

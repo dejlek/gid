@@ -1,6 +1,6 @@
 module Gio.UnixMountPoint;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import GObject.ObjectG;
 import Gid.gid;
 import Gio.Icon;

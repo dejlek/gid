@@ -1,7 +1,7 @@
 module Gdk.TextureDownloader;
 
-import GLib.Boxed;
 import GLib.Bytes;
+import GObject.Boxed;
 import GObject.ObjectG;
 import Gdk.Texture;
 import Gdk.Types;

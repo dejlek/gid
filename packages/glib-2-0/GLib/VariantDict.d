@@ -1,11 +1,11 @@
 module GLib.VariantDict;
 
-import GLib.Boxed;
 import GLib.Types;
 import GLib.VariantG;
 import GLib.VariantType;
 import GLib.c.functions;
 import GLib.c.types;
+import GObject.Boxed;
 import Gid.gid;
 
 /**

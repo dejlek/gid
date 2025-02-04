@@ -16,7 +16,13 @@ abstract class Boxed
     if (!boxPtr)
       throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
 
-    this.cInstancePtr = owned ? boxPtr : glib_g_boxed_copy(gType, boxPtr);
+    if (!owned)
+    {
+      auto type = gType;
+      this.cInstancePtr = g_boxed_copy(type, boxPtr);
+    }
+    else
+      this.cInstancePtr = boxPtr;
   }
 
   /**
@@ -30,7 +36,7 @@ abstract class Boxed
   ~this()
   {
     if (cInstancePtr) // Might be null if an exception occurred during construction
-      glib_g_boxed_free(gType, cInstancePtr);
+      g_boxed_free(gType, cInstancePtr);
   }
 
   /**
@@ -57,7 +63,7 @@ abstract class Boxed
    */
   void* copy_()
   {
-    return cast(void*)glib_g_boxed_copy(gType, cInstancePtr);
+    return cast(void*)g_boxed_copy(gType, cInstancePtr);
   }
 
   /**
@@ -69,7 +75,7 @@ abstract class Boxed
    */
   static void* boxedCopy(T)(void* cBoxed)
   {
-    return glib_g_boxed_copy(T.getType, cBoxed);
+    return g_boxed_copy(T.getType, cBoxed);
   }
 
   /**
@@ -80,52 +86,6 @@ abstract class Boxed
    */
   static void boxedFree(T)(void* cBoxed)
   {
-    glib_g_boxed_free(T.getType, cBoxed);
+    g_boxed_free(T.getType, cBoxed);
   }
-}
-
-// GLib binding also depends on libgobject for boxed functions
-// Resolve the symbols here to avoid circular dependency between GLib and GObject bindings
-
-void* function(GType boxedType, const(void)* srcBoxed) glib_g_boxed_copy;
-void function(GType boxedType, void* boxed) glib_g_boxed_free;
-
-static this()
-{
-  link(glib_g_boxed_copy, "g_boxed_copy");
-  link(glib_g_boxed_free, "g_boxed_free");
-}
-
-version(Windows)
-  private immutable LIBS = ["libgobject-2.0-0.dll;gobject-2.0-0.dll;gobject-2.dll"];
-version(OSX)
-  private immutable LIBS = ["libgobject-2.0.0.dylib"];
-else
-  private immutable LIBS = ["libgobject-2.0.so.0"];
-
-private void link(T)(ref T funcPtr, string symbol)
-{
-  import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
-  import std.string : fromStringz, toStringz;
-
-  foreach (lib; LIBS)
-  {
-    if (auto handle = dlopen(cast(char*)toStringz(lib), RTLD_GLOBAL | RTLD_NOW))
-    {
-      if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
-      {
-        funcPtr = cast(T)symPtr;
-        return;
-    }
-    }
-    else
-      throw new Error("Failed to load library '" ~ lib ~ "': " ~ dlerror().fromStringz.idup);
-  }
-
-  funcPtr = cast(T)&symbolNotFound;
-}
-
-private void symbolNotFound()
-{
-  throw new Error("Attempted to execute a dynamic library function which was not found");
 }

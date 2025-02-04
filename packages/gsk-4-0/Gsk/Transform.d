@@ -1,7 +1,7 @@
 module Gsk.Transform;
 
-import GLib.Boxed;
 import GLib.String;
+import GObject.Boxed;
 import Gid.gid;
 import Graphene.Matrix;
 import Graphene.Point;

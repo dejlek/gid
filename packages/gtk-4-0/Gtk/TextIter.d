@@ -1,6 +1,6 @@
 module Gtk.TextIter;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import GObject.ObjectG;
 import Gdk.Paintable;
 import Gdk.PaintableT;

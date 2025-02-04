@@ -1,6 +1,6 @@
 module cairo.Context;
 
-import GLib.Boxed;
+import GObject.Boxed;
 import Gid.gid;
 import cairo.FontFace;
 import cairo.FontOptions;
