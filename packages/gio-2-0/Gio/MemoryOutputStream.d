@@ -52,6 +52,8 @@ class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
     return _retval;
   }
 
+  alias getData = ObjectG.getData;
+
   /**
    * Gets any loaded data from the ostream.
    * Note that the returned pointer may become invalid on the next
@@ -112,6 +114,8 @@ class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
     auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
+
+  alias stealData = ObjectG.stealData;
 
   /**
    * Gets any loaded data from the ostream. Ownership of the data

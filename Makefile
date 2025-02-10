@@ -2,7 +2,7 @@ all: binding packages
 
 .PHONY: binding
 binding:
-	gidgen --defs defs --gir-path gir --pkg-path . --subpkg-path packages
+	gidgen --defs defs --gir-path gir --pkg-path . --subpkg-path packages --report --report-file report.txt
 
 .PHONY: packages
 packages:

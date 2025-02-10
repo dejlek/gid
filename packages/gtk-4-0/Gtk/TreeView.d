@@ -479,6 +479,8 @@ class TreeView : Widget, Scrollable
     return _retval;
   }
 
+  alias getCursor = Widget.getCursor;
+
   /**
    * Fills in path and focus_column with the current path and focus column.  If
    * the cursor isn’t currently set, then *path will be %NULL.  If no column
@@ -1202,6 +1204,8 @@ class TreeView : Widget, Scrollable
     auto _func = freezeDelegate(cast(void*)&func);
     gtk_tree_view_set_column_drag_function(cast(GtkTreeView*)cPtr, &_funcCallback, _func, &thawDelegate);
   }
+
+  alias setCursor = Widget.setCursor;
 
   /**
    * Sets the current keyboard focus to be at path, and selects it.  This is

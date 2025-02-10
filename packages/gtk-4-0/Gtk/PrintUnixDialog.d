@@ -88,9 +88,6 @@ class PrintUnixDialog : Dialog
   {
     return getType();
   }
-  // Add base class alias for getSettings since it is used in GtkWidget and defined in PrintUnixDialog class
-  alias getSettings = Widget.getSettings;
-
 
   /**
    * Creates a new `GtkPrintUnixDialog`.
@@ -197,6 +194,8 @@ class PrintUnixDialog : Dialog
     auto _retval = ObjectG.getDObject!Printer(cast(GtkPrinter*)_cretval, No.Take);
     return _retval;
   }
+
+  alias getSettings = Widget.getSettings;
 
   /**
    * Gets a new `GtkPrintSettings` object that represents the

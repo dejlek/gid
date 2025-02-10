@@ -58,18 +58,6 @@
 //!set class[IMContext].method[set_surrounding].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 //!set class[IMContext].method[set_surrounding_with_selection].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 
-//!class ApplicationWindow
-  // Add base class alias for activateAction since it is used in GtkWidget and Gio.ActionGroup interface
-  alias activateAction = Widget.activateAction;
-
-//!class MenuButton
-  // Add base class alias for getDirection since it is used in GtkWidget and defined in MenuButton class
-  alias getDirection = Widget.getDirection;
-
-//!class PrintUnixDialog
-  // Add base class alias for getSettings since it is used in GtkWidget and defined in PrintUnixDialog class
-  alias getSettings = Widget.getSettings;
-
 //!class CustomSorter
 //!set class[CustomSorter].constructor[new][disable] 1
 //!set class[CustomSorter].method[set_sort_func][disable] 1

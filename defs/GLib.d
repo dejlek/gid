@@ -6,6 +6,8 @@
 //!set record[PtrArray][disable] 1
 //!set record[List][disable] 1
 //!set record[SList][disable] 1
+//!set record[HashTable][disable] 1
+//!set record[HashTableIter][disable] 1
 
 //# Change Variant to VariantG so as not to conflict with std.variant
 //!subdtype Variant VariantG
@@ -27,18 +29,15 @@
 //!set record[Variant].constructor[new_from_data][introspectable] 0
 //!set record[Variant].function[parse][introspectable] 0
 
-//# Disable ByteArray functions and methods, since this type is handled by a custom range type
-//!set record[ByteArray].*function[][disable] 1
-
 //# Disable problematic functions (memory allocation issues)
 //!set record[Bytes].constructor[new_take][disable] 1
 //!set function[base64_decode_inplace][disable] 1
 
 //# Disable functions which don't have proper closures (solutions may be possible)
-//!set function[atexit][disable] 1
-//!set function[test_add_func][disable] 1
-//!set function[test_queue_destroy][disable] 1
-//!set record[Tree].constructor[new_full][disable] 1
+//!set function[atexit][unsupported] 1
+//!set function[test_add_func][unsupported] 1
+//!set function[test_queue_destroy][unsupported] 1
+//!set record[Tree].constructor[new_full][unsupported] 1
 
 //# Error conflicts with the base D Error type, rename to ErrorG
 //!subtype Error ErrorG
@@ -48,10 +47,6 @@
 
 //# Override PollFD type kind to be a simple struct, not Boxed
 //!kind PollFD Simple
-
-//# We use native associative arrays, disable HashTable bindings
-//!set record[HashTable][disable] 1
-//!set record[HashTableIter][disable] 1
 
 //# Fix Dir by specifying g_dir_close as the free function and g_dir_open as the constructor
 //!set record[Dir][free-function] g_dir_close

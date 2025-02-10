@@ -227,6 +227,8 @@ class IconView : Widget, CellLayout, Scrollable
     return _retval;
   }
 
+  alias getCursor = Widget.getCursor;
+
   /**
    * Fills in path and cell with the current cursor path and cell.
    * If the cursor isn’t currently set, then *path will be %NULL.
@@ -757,6 +759,8 @@ class IconView : Widget, CellLayout, Scrollable
   {
     gtk_icon_view_set_columns(cast(GtkIconView*)cPtr, columns);
   }
+
+  alias setCursor = Widget.setCursor;
 
   /**
    * Sets the current keyboard focus to be at path, and selects it.  This is

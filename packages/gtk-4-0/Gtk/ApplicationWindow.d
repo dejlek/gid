@@ -104,7 +104,6 @@ class ApplicationWindow : Window, ActionGroup, ActionMap
 
   mixin ActionGroupT!();
   mixin ActionMapT!();
-  // Add base class alias for activateAction since it is used in GtkWidget and Gio.ActionGroup interface
   alias activateAction = Widget.activateAction;
 
 

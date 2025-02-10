@@ -42,6 +42,8 @@ class AppLaunchContext : DGioAppLaunchContext
     return getType();
   }
 
+  alias getDisplay = DGioAppLaunchContext.getDisplay;
+
   /**
    * Gets the `GdkDisplay` that context is for.
    * Returns: the display of context

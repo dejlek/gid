@@ -83,9 +83,6 @@ class MenuButton : Widget
   {
     return getType();
   }
-  // Add base class alias for getDirection since it is used in GtkWidget and defined in MenuButton class
-  alias getDirection = Widget.getDirection;
-
 
   /**
    * Creates a new `GtkMenuButton` widget with downwards-pointing
@@ -148,6 +145,8 @@ class MenuButton : Widget
     auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
+
+  alias getDirection = Widget.getDirection;
 
   /**
    * Returns the direction the popup will be pointing at when popped up.
@@ -338,6 +337,8 @@ class MenuButton : Widget
     auto _func = freezeDelegate(cast(void*)&func);
     gtk_menu_button_set_create_popup_func(cast(GtkMenuButton*)cPtr, &_funcCallback, _func, &thawDelegate);
   }
+
+  alias setDirection = Widget.setDirection;
 
   /**
    * Sets the direction in which the popup will be popped up.
