@@ -38,7 +38,7 @@ alias WritableInterface = GArrowWritableInterface*;
 /**
  * The major version.
  */
-enum VERSION_MAJOR = 20;
+enum VERSION_MAJOR = 19;
 
 
 /**
@@ -57,5 +57,5 @@ enum VERSION_MINOR = 0;
  * The version tag. Normally, it's an empty string. It's "SNAPSHOT"
  * for snapshot version.
  */
-enum VERSION_TAG = "SNAPSHOT";
+enum VERSION_TAG = "";
 

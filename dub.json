@@ -7,6 +7,7 @@
   "targetType": "none",
   "dependencies": {
     ":arrow-1-0": "*",
+    ":arrowflight-1-0": "*",
     ":cairo-1-0": "*",
     ":freetype2-2-0": "*",
     ":gdk-4-0": "*",
@@ -19,10 +20,12 @@
     ":gtk-4-0": "*",
     ":harfbuzz-0-0": "*",
     ":pango-1-0": "*",
-    ":pangocairo-1-0": "*"
+    ":pangocairo-1-0": "*",
+    ":parquet-1-0": "*"
   },
   "subPackages": [
     "packages/arrow-1-0/",
+    "packages/arrowflight-1-0/",
     "packages/cairo-1-0/",
     "packages/freetype2-2-0/",
     "packages/gdk-4-0/",
@@ -35,6 +38,7 @@
     "packages/gtk-4-0/",
     "packages/harfbuzz-0-0/",
     "packages/pango-1-0/",
-    "packages/pangocairo-1-0/"
+    "packages/pangocairo-1-0/",
+    "packages/parquet-1-0/"
   ]
 }

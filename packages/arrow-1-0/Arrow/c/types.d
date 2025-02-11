@@ -1629,7 +1629,7 @@ struct GArrowExtensionDataTypeClass
    * It must returns a serialized #GArrowDataType from the given
    * `serialized_data`.
    */
-  extern(C) GArrowDataType* function(GArrowExtensionDataType* dataType, GArrowDataType* storageDataType, GBytes* serializedData, GError** _err) deserialize;
+  extern(C) GArrowDataType* function(GArrowExtensionDataType* dataType, GArrowDataType* storageDataType, GBytes* serializedData) deserialize;
 
   /**
    * It must returns a serialized data of this extension data type
@@ -2666,16 +2666,6 @@ struct GArrowNumericDataType
 struct GArrowNumericDataTypeClass
 {
   GArrowFixedWidthDataTypeClass parentClass;
-}
-
-struct GArrowORCFileReader
-{
-  ObjectC parentInstance;
-}
-
-struct GArrowORCFileReaderClass
-{
-  GObjectClass parentClass;
 }
 
 struct GArrowOutputStream

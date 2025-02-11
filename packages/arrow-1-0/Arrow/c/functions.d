@@ -5,11 +5,11 @@ public import GObject.c.types;
 public import Gio.c.types;
 
 version(Windows)
-  private immutable LIBS = ["libarrow-glib-2000.dll;arrow-glib-2000.dll;arrow-glib.dll"];
+  private immutable LIBS = ["libarrow-glib-1900.dll;arrow-glib-1900.dll;arrow-glib.dll"];
 version(OSX)
-  private immutable LIBS = ["libarrow-glib.2000.dylib"];
+  private immutable LIBS = ["libarrow-glib.1900.dylib"];
 else
-  private immutable LIBS = ["libarrow-glib.so.2000"];
+  private immutable LIBS = ["libarrow-glib.so.1900"];
 
 __gshared extern(C)
 {
@@ -54,8 +54,6 @@ __gshared extern(C)
   GArrowChunkedArray* function(GArrowArray* array, GArrowChunkedArray* indices, GArrowTakeOptions* options, GError** _err) c_garrow_array_take_chunked_array;
   char* function(GArrowArray* array, GError** _err) c_garrow_array_to_string;
   GArrowArray* function(GArrowArray* array, GError** _err) c_garrow_array_unique;
-  bool function(GArrowArray* array, GError** _err) c_garrow_array_validate;
-  bool function(GArrowArray* array, GError** _err) c_garrow_array_validate_full;
   GArrowArray* function(GArrowArray* array, GArrowDataType* returnType, GError** _err) c_garrow_array_view;
 
   // ArrayBuilder
@@ -1254,19 +1252,6 @@ __gshared extern(C)
   // NumericDataType
   GType function() c_garrow_numeric_data_type_get_type;
 
-  // ORCFileReader
-  GType function() c_garrow_orc_file_reader_get_type;
-  GArrowORCFileReader* function(GArrowSeekableInputStream* file, GError** _err) c_garrow_orc_file_reader_new;
-  const(int)* function(GArrowORCFileReader* reader, uint* nFieldIndexes) c_garrow_orc_file_reader_get_field_indexes;
-  const(int)* function(GArrowORCFileReader* reader, uint* nFieldIndices) c_garrow_orc_file_reader_get_field_indices;
-  long function(GArrowORCFileReader* reader) c_garrow_orc_file_reader_get_n_rows;
-  long function(GArrowORCFileReader* reader) c_garrow_orc_file_reader_get_n_stripes;
-  GArrowRecordBatch* function(GArrowORCFileReader* reader, long i, GError** _err) c_garrow_orc_file_reader_read_stripe;
-  GArrowTable* function(GArrowORCFileReader* reader, GError** _err) c_garrow_orc_file_reader_read_stripes;
-  GArrowSchema* function(GArrowORCFileReader* reader, GError** _err) c_garrow_orc_file_reader_read_type;
-  void function(GArrowORCFileReader* reader, const(int)* fieldIndexes, uint nFieldIndexes) c_garrow_orc_file_reader_set_field_indexes;
-  void function(GArrowORCFileReader* reader, const(int)* fieldIndices, uint nFieldIndices) c_garrow_orc_file_reader_set_field_indices;
-
   // OutputStream
   GType function() c_garrow_output_stream_get_type;
   bool function(GArrowOutputStream* stream, int alignment, GError** _err) c_garrow_output_stream_align;
@@ -1328,8 +1313,6 @@ __gshared extern(C)
   GArrowUInt64Array* function(GArrowRecordBatch* recordBatch, GArrowSortOptions* options, GError** _err) c_garrow_record_batch_sort_indices;
   GArrowRecordBatch* function(GArrowRecordBatch* recordBatch, GArrowArray* indices, GArrowTakeOptions* options, GError** _err) c_garrow_record_batch_take;
   char* function(GArrowRecordBatch* recordBatch, GError** _err) c_garrow_record_batch_to_string;
-  bool function(GArrowRecordBatch* recordBatch, GError** _err) c_garrow_record_batch_validate;
-  bool function(GArrowRecordBatch* recordBatch, GError** _err) c_garrow_record_batch_validate_full;
 
   // RecordBatchBuilder
   GType function() c_garrow_record_batch_builder_get_type;
@@ -1666,7 +1649,6 @@ __gshared extern(C)
   GArrowTable* function(GArrowTable* table, GArrowArray* indices, GArrowTakeOptions* options, GError** _err) c_garrow_table_take;
   GArrowTable* function(GArrowTable* table, GArrowChunkedArray* indices, GArrowTakeOptions* options, GError** _err) c_garrow_table_take_chunked_array;
   char* function(GArrowTable* table, GError** _err) c_garrow_table_to_string;
-  bool function(GArrowTable* table, GError** _err) c_garrow_table_validate;
   bool function(GArrowTable* table, GArrowOutputStream* sink, GArrowFeatherWriteProperties* properties, GError** _err) c_garrow_table_write_as_feather;
 
   // TableBatchReader
@@ -1982,8 +1964,6 @@ alias garrow_array_take = c_garrow_array_take;
 alias garrow_array_take_chunked_array = c_garrow_array_take_chunked_array;
 alias garrow_array_to_string = c_garrow_array_to_string;
 alias garrow_array_unique = c_garrow_array_unique;
-alias garrow_array_validate = c_garrow_array_validate;
-alias garrow_array_validate_full = c_garrow_array_validate_full;
 alias garrow_array_view = c_garrow_array_view;
 
 // ArrayBuilder
@@ -3182,19 +3162,6 @@ alias garrow_numeric_array_mean = c_garrow_numeric_array_mean;
 // NumericDataType
 alias garrow_numeric_data_type_get_type = c_garrow_numeric_data_type_get_type;
 
-// ORCFileReader
-alias garrow_orc_file_reader_get_type = c_garrow_orc_file_reader_get_type;
-alias garrow_orc_file_reader_new = c_garrow_orc_file_reader_new;
-alias garrow_orc_file_reader_get_field_indexes = c_garrow_orc_file_reader_get_field_indexes;
-alias garrow_orc_file_reader_get_field_indices = c_garrow_orc_file_reader_get_field_indices;
-alias garrow_orc_file_reader_get_n_rows = c_garrow_orc_file_reader_get_n_rows;
-alias garrow_orc_file_reader_get_n_stripes = c_garrow_orc_file_reader_get_n_stripes;
-alias garrow_orc_file_reader_read_stripe = c_garrow_orc_file_reader_read_stripe;
-alias garrow_orc_file_reader_read_stripes = c_garrow_orc_file_reader_read_stripes;
-alias garrow_orc_file_reader_read_type = c_garrow_orc_file_reader_read_type;
-alias garrow_orc_file_reader_set_field_indexes = c_garrow_orc_file_reader_set_field_indexes;
-alias garrow_orc_file_reader_set_field_indices = c_garrow_orc_file_reader_set_field_indices;
-
 // OutputStream
 alias garrow_output_stream_get_type = c_garrow_output_stream_get_type;
 alias garrow_output_stream_align = c_garrow_output_stream_align;
@@ -3256,8 +3223,6 @@ alias garrow_record_batch_slice = c_garrow_record_batch_slice;
 alias garrow_record_batch_sort_indices = c_garrow_record_batch_sort_indices;
 alias garrow_record_batch_take = c_garrow_record_batch_take;
 alias garrow_record_batch_to_string = c_garrow_record_batch_to_string;
-alias garrow_record_batch_validate = c_garrow_record_batch_validate;
-alias garrow_record_batch_validate_full = c_garrow_record_batch_validate_full;
 
 // RecordBatchBuilder
 alias garrow_record_batch_builder_get_type = c_garrow_record_batch_builder_get_type;
@@ -3594,7 +3559,6 @@ alias garrow_table_sort_indices = c_garrow_table_sort_indices;
 alias garrow_table_take = c_garrow_table_take;
 alias garrow_table_take_chunked_array = c_garrow_table_take_chunked_array;
 alias garrow_table_to_string = c_garrow_table_to_string;
-alias garrow_table_validate = c_garrow_table_validate;
 alias garrow_table_write_as_feather = c_garrow_table_write_as_feather;
 
 // TableBatchReader
@@ -3911,8 +3875,6 @@ shared static this()
   link(garrow_array_take_chunked_array, "garrow_array_take_chunked_array");
   link(garrow_array_to_string, "garrow_array_to_string");
   link(garrow_array_unique, "garrow_array_unique");
-  link(garrow_array_validate, "garrow_array_validate");
-  link(garrow_array_validate_full, "garrow_array_validate_full");
   link(garrow_array_view, "garrow_array_view");
 
   // ArrayBuilder
@@ -5111,19 +5073,6 @@ shared static this()
   // NumericDataType
   link(garrow_numeric_data_type_get_type, "garrow_numeric_data_type_get_type");
 
-  // ORCFileReader
-  link(garrow_orc_file_reader_get_type, "garrow_orc_file_reader_get_type");
-  link(garrow_orc_file_reader_new, "garrow_orc_file_reader_new");
-  link(garrow_orc_file_reader_get_field_indexes, "garrow_orc_file_reader_get_field_indexes");
-  link(garrow_orc_file_reader_get_field_indices, "garrow_orc_file_reader_get_field_indices");
-  link(garrow_orc_file_reader_get_n_rows, "garrow_orc_file_reader_get_n_rows");
-  link(garrow_orc_file_reader_get_n_stripes, "garrow_orc_file_reader_get_n_stripes");
-  link(garrow_orc_file_reader_read_stripe, "garrow_orc_file_reader_read_stripe");
-  link(garrow_orc_file_reader_read_stripes, "garrow_orc_file_reader_read_stripes");
-  link(garrow_orc_file_reader_read_type, "garrow_orc_file_reader_read_type");
-  link(garrow_orc_file_reader_set_field_indexes, "garrow_orc_file_reader_set_field_indexes");
-  link(garrow_orc_file_reader_set_field_indices, "garrow_orc_file_reader_set_field_indices");
-
   // OutputStream
   link(garrow_output_stream_get_type, "garrow_output_stream_get_type");
   link(garrow_output_stream_align, "garrow_output_stream_align");
@@ -5185,8 +5134,6 @@ shared static this()
   link(garrow_record_batch_sort_indices, "garrow_record_batch_sort_indices");
   link(garrow_record_batch_take, "garrow_record_batch_take");
   link(garrow_record_batch_to_string, "garrow_record_batch_to_string");
-  link(garrow_record_batch_validate, "garrow_record_batch_validate");
-  link(garrow_record_batch_validate_full, "garrow_record_batch_validate_full");
 
   // RecordBatchBuilder
   link(garrow_record_batch_builder_get_type, "garrow_record_batch_builder_get_type");
@@ -5523,7 +5470,6 @@ shared static this()
   link(garrow_table_take, "garrow_table_take");
   link(garrow_table_take_chunked_array, "garrow_table_take_chunked_array");
   link(garrow_table_to_string, "garrow_table_to_string");
-  link(garrow_table_validate, "garrow_table_validate");
   link(garrow_table_write_as_feather, "garrow_table_write_as_feather");
 
   // TableBatchReader

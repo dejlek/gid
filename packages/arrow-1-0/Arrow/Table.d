@@ -274,20 +274,6 @@ class Table : ObjectG
   }
 
   /**
-   * Validate the given table. This is a cheap validation.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
-  bool validate()
-  {
-    bool _retval;
-    GError *_err;
-    _retval = garrow_table_validate(cast(GArrowTable*)cPtr, &_err);
-    if (_err)
-      throw new ErrorG(_err);
-    return _retval;
-  }
-
-  /**
    * Writes the table as Feather format data to the sink.
    * Params:
    *   sink = The output.

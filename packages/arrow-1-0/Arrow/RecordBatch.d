@@ -204,24 +204,4 @@ class RecordBatch : ObjectG
     string _retval = _cretval.fromCString(Yes.Free);
     return _retval;
   }
-
-  bool validate()
-  {
-    bool _retval;
-    GError *_err;
-    _retval = garrow_record_batch_validate(cast(GArrowRecordBatch*)cPtr, &_err);
-    if (_err)
-      throw new ErrorG(_err);
-    return _retval;
-  }
-
-  bool validateFull()
-  {
-    bool _retval;
-    GError *_err;
-    _retval = garrow_record_batch_validate_full(cast(GArrowRecordBatch*)cPtr, &_err);
-    if (_err)
-      throw new ErrorG(_err);
-    return _retval;
-  }
 }

@@ -45,6 +45,13 @@ class ExtensionDataTypeClass
     return (cast(GArrowExtensionDataTypeClass*)cPtr).equal;
   }
 
+  alias DeserializeFuncType = extern(C) GArrowDataType* function(GArrowExtensionDataType* dataType, GArrowDataType* storageDataType, GBytes* serializedData);
+
+  @property DeserializeFuncType deserialize()
+  {
+    return (cast(GArrowExtensionDataTypeClass*)cPtr).deserialize;
+  }
+
   alias SerializeFuncType = extern(C) GBytes* function(GArrowExtensionDataType* dataType);
 
   @property SerializeFuncType serialize()

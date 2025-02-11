@@ -329,26 +329,6 @@ class Array : ObjectG
     return _retval;
   }
 
-  bool validate()
-  {
-    bool _retval;
-    GError *_err;
-    _retval = garrow_array_validate(cast(GArrowArray*)cPtr, &_err);
-    if (_err)
-      throw new ErrorG(_err);
-    return _retval;
-  }
-
-  bool validateFull()
-  {
-    bool _retval;
-    GError *_err;
-    _retval = garrow_array_validate_full(cast(GArrowArray*)cPtr, &_err);
-    if (_err)
-      throw new ErrorG(_err);
-    return _retval;
-  }
-
   Array view(DataType returnType)
   {
     GArrowArray* _cretval;
