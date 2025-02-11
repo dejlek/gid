@@ -6,6 +6,7 @@
   "license": "MIT",
   "targetType": "none",
   "dependencies": {
+    ":arrow-1-0": "*",
     ":cairo-1-0": "*",
     ":freetype2-2-0": "*",
     ":gdk-4-0": "*",
@@ -21,6 +22,7 @@
     ":pangocairo-1-0": "*"
   },
   "subPackages": [
+    "packages/arrow-1-0/",
     "packages/cairo-1-0/",
     "packages/freetype2-2-0/",
     "packages/gdk-4-0/",

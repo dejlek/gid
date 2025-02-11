@@ -1,5 +1,6 @@
 module Gtk.ConstraintLayout;
 
+import GLib.ErrorG;
 import GObject.ObjectG;
 import Gid.gid;
 import Gio.ListModel;
@@ -8,6 +9,8 @@ import Gtk.Buildable;
 import Gtk.BuildableT;
 import Gtk.Constraint;
 import Gtk.ConstraintGuide;
+import Gtk.ConstraintTarget;
+import Gtk.ConstraintTargetT;
 import Gtk.LayoutManager;
 import Gtk.Types;
 import Gtk.c.functions;
@@ -186,6 +189,101 @@ class ConstraintLayout : LayoutManager, Buildable
   void addConstraint(Constraint constraint)
   {
     gtk_constraint_layout_add_constraint(cast(GtkConstraintLayout*)cPtr, constraint ? cast(GtkConstraint*)constraint.cPtr(Yes.Dup) : null);
+  }
+
+  /**
+   * Creates a list of constraints from a VFL description.
+   * The Visual Format Language, VFL, is based on Apple's AutoLayout [VFL](https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html).
+   * The `views` dictionary is used to match [Gtk.ConstraintTarget]
+   * instances to the symbolic view name inside the VFL.
+   * The VFL grammar is:
+   * ```
+   * <visualFormatString> \= $(LPAREN)<orientation>$(RPAREN)?
+   * $(LPAREN)<superview><connection>$(RPAREN)?
+   * <view>$(LPAREN)<connection><view>$(RPAREN)*
+   * $(LPAREN)<connection><superview>$(RPAREN)?
+   * <orientation> \= 'H' | 'V'
+   * <superview> \= '|'
+   * <connection> \= '' | '-' <predicateList> '-' | '-'
+   * <predicateList> \= <simplePredicate> | <predicateListWithParens>
+   * <simplePredicate> \= <metricName> | <positiveNumber>
+   * <predicateListWithParens> \= '$(LPAREN)' <predicate> $(LPAREN)',' <predicate>$(RPAREN)* '$(RPAREN)'
+   * <predicate> \= $(LPAREN)<relation>$(RPAREN)? <objectOfPredicate> $(LPAREN)<operatorList>$(RPAREN)? $(LPAREN)'@' <priority>$(RPAREN)?
+   * <relation> \= '\=\=' | '<\=' | '>\='
+   * <objectOfPredicate> \= <constant> | <viewName> | $(LPAREN)'.' <attributeName>$(RPAREN)?
+   * <priority> \= <positiveNumber> | 'required' | 'strong' | 'medium' | 'weak'
+   * <constant> \= <number>
+   * <operatorList> \= $(LPAREN)<multiplyOperator>$(RPAREN)? $(LPAREN)<addOperator>$(RPAREN)?
+   * <multiplyOperator> \= [ '*' | '/' ] <positiveNumber>
+   * <addOperator> \= [ '+' | '-' ] <positiveNumber>
+   * <viewName> \= [A-Za-z_][](A-Za-z0-9_*) // A C identifier
+   * <metricName> \= [A-Za-z_][](A-Za-z0-9_*) // A C identifier
+   * <attributeName> \= 'top' | 'bottom' | 'left' | 'right' | 'width' | 'height' |
+   * 'start' | 'end' | 'centerX' | 'centerY' | 'baseline'
+   * <positiveNumber> // A positive real number parseable by [GLib.Global.asciiStrtod]
+   * <number> // A real number parseable by [GLib.Global.asciiStrtod]
+   * ```
+   * **Note**: The VFL grammar used by GTK is slightly different than the one
+   * defined by Apple, as it can use symbolic values for the constraint's
+   * strength instead of numeric values; additionally, GTK allows adding
+   * simple arithmetic operations inside predicates.
+   * Examples of VFL descriptions are:
+   * ```
+   * // Default spacing
+   * [button]-[textField]
+   * // Width constraint
+   * [button$(LPAREN)>\=50$(RPAREN)]
+   * // Connection to super view
+   * |-50-[purpleBox]-50-|
+   * // Vertical layout
+   * V:[topField]-10-[bottomField]
+   * // Flush views
+   * [maroonView][blueView]
+   * // Priority
+   * [button$(LPAREN)100strong$(RPAREN)]
+   * // Equal widths
+   * [button1$(LPAREN)\=\=button2$(RPAREN)]
+   * // Multiple predicates
+   * [flexibleButton$(LPAREN)>\=70,<\=100$(RPAREN)]
+   * // A complete line of layout
+   * |-[find]-[findNext]-[findField(>\=20)]-|
+   * // Operators
+   * [button1$(LPAREN)button2 / 3 + 50$(RPAREN)]
+   * // Named attributes
+   * [button1$(LPAREN)\=\=button2.height$(RPAREN)]
+   * ```
+   * Params:
+   *   lines = an array of Visual Format Language lines
+   *     defining a set of constraints
+   *   hspacing = default horizontal spacing value, or -1 for the fallback value
+   *   vspacing = default vertical spacing value, or -1 for the fallback value
+   *   views = a dictionary of `[ name, target ]`
+   *     pairs; the `name` keys map to the view names in the VFL lines, while
+   *     the `target` values map to children of the widget using a `GtkConstraintLayout`,
+   *     or guides
+   * Returns: the list of
+   *   [Gtk.Constraint] instances that were added to the layout
+   */
+  Constraint[] addConstraintsFromDescription(string[] lines, int hspacing, int vspacing, ConstraintTarget[string] views)
+  {
+    GList* _cretval;
+    size_t _nLines;
+    if (lines)
+      _nLines = cast(size_t)lines.length;
+
+    char*[] _tmplines;
+    foreach (s; lines)
+      _tmplines ~= s.toCString(No.Alloc);
+    const(char*)* _lines = _tmplines.ptr;
+
+    auto _views = gHashTableFromD!(string, ConstraintTarget)(views);
+    scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_views);
+    GError *_err;
+    _cretval = gtk_constraint_layout_add_constraints_from_descriptionv(cast(GtkConstraintLayout*)cPtr, _lines, _nLines, hspacing, vspacing, _views, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    auto _retval = gListToD!(Constraint, GidOwnership.Container)(cast(GList*)_cretval);
+    return _retval;
   }
 
   /**

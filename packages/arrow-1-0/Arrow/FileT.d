@@ -1,0 +1,47 @@
+module Arrow.FileT;
+
+public import Arrow.FileIfaceProxy;
+public import Arrow.Types;
+public import Arrow.c.functions;
+public import Arrow.c.types;
+public import GLib.ErrorG;
+public import Gid.gid;
+
+template FileT()
+{
+
+  override bool close()
+  {
+    bool _retval;
+    GError *_err;
+    _retval = garrow_file_close(cast(GArrowFile*)cPtr, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
+  }
+
+  override FileMode getMode()
+  {
+    GArrowFileMode _cretval;
+    _cretval = garrow_file_get_mode(cast(GArrowFile*)cPtr);
+    FileMode _retval = cast(FileMode)_cretval;
+    return _retval;
+  }
+
+  override bool isClosed()
+  {
+    bool _retval;
+    _retval = garrow_file_is_closed(cast(GArrowFile*)cPtr);
+    return _retval;
+  }
+
+  override long tell()
+  {
+    long _retval;
+    GError *_err;
+    _retval = garrow_file_tell(cast(GArrowFile*)cPtr, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
+  }
+}
