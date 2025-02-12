@@ -7,6 +7,7 @@
   "targetType": "none",
   "dependencies": {
     ":arrow-1-0": "*",
+    ":arrowdataset-1-0": "*",
     ":arrowflight-1-0": "*",
     ":cairo-1-0": "*",
     ":freetype2-2-0": "*",
@@ -25,6 +26,7 @@
   },
   "subPackages": [
     "packages/arrow-1-0/",
+    "packages/arrowdataset-1-0/",
     "packages/arrowflight-1-0/",
     "packages/cairo-1-0/",
     "packages/freetype2-2-0/",
