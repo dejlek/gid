@@ -1,12 +1,13 @@
 module Arrow.c.functions;
 
+import Gid.loader;
 import Arrow.c.types;
 public import GObject.c.types;
 public import Gio.c.types;
 
 version(Windows)
   private immutable LIBS = ["libarrow-glib-1900.dll;arrow-glib-1900.dll;arrow-glib.dll"];
-version(OSX)
+else version(OSX)
   private immutable LIBS = ["libarrow-glib.1900.dylib"];
 else
   private immutable LIBS = ["libarrow-glib.so.1900"];
@@ -3835,1938 +3836,1911 @@ alias garrow_write_options_new = c_garrow_write_options_new;
 shared static this()
 {
   // AggregateNodeOptions
-  link(garrow_aggregate_node_options_get_type, "garrow_aggregate_node_options_get_type");
-  link(garrow_aggregate_node_options_new, "garrow_aggregate_node_options_new");
+  gidLink(garrow_aggregate_node_options_get_type, "garrow_aggregate_node_options_get_type", LIBS);
+  gidLink(garrow_aggregate_node_options_new, "garrow_aggregate_node_options_new", LIBS);
 
   // Aggregation
-  link(garrow_aggregation_get_type, "garrow_aggregation_get_type");
-  link(garrow_aggregation_new, "garrow_aggregation_new");
+  gidLink(garrow_aggregation_get_type, "garrow_aggregation_get_type", LIBS);
+  gidLink(garrow_aggregation_new, "garrow_aggregation_new", LIBS);
 
   // Array
-  link(garrow_array_get_type, "garrow_array_get_type");
-  link(garrow_array_import, "garrow_array_import");
-  link(garrow_array_cast, "garrow_array_cast");
-  link(garrow_array_concatenate, "garrow_array_concatenate");
-  link(garrow_array_count, "garrow_array_count");
-  link(garrow_array_count_values, "garrow_array_count_values");
-  link(garrow_array_dictionary_encode, "garrow_array_dictionary_encode");
-  link(garrow_array_diff_unified, "garrow_array_diff_unified");
-  link(garrow_array_equal, "garrow_array_equal");
-  link(garrow_array_equal_approx, "garrow_array_equal_approx");
-  link(garrow_array_equal_options, "garrow_array_equal_options");
-  link(garrow_array_equal_range, "garrow_array_equal_range");
-  link(garrow_array_export, "garrow_array_export");
-  link(garrow_array_filter, "garrow_array_filter");
-  link(garrow_array_get_length, "garrow_array_get_length");
-  link(garrow_array_get_n_nulls, "garrow_array_get_n_nulls");
-  link(garrow_array_get_null_bitmap, "garrow_array_get_null_bitmap");
-  link(garrow_array_get_offset, "garrow_array_get_offset");
-  link(garrow_array_get_value_data_type, "garrow_array_get_value_data_type");
-  link(garrow_array_get_value_type, "garrow_array_get_value_type");
-  link(garrow_array_is_in, "garrow_array_is_in");
-  link(garrow_array_is_in_chunked_array, "garrow_array_is_in_chunked_array");
-  link(garrow_array_is_null, "garrow_array_is_null");
-  link(garrow_array_is_valid, "garrow_array_is_valid");
-  link(garrow_array_run_end_encode, "garrow_array_run_end_encode");
-  link(garrow_array_slice, "garrow_array_slice");
-  link(garrow_array_sort_indices, "garrow_array_sort_indices");
-  link(garrow_array_sort_to_indices, "garrow_array_sort_to_indices");
-  link(garrow_array_take, "garrow_array_take");
-  link(garrow_array_take_chunked_array, "garrow_array_take_chunked_array");
-  link(garrow_array_to_string, "garrow_array_to_string");
-  link(garrow_array_unique, "garrow_array_unique");
-  link(garrow_array_view, "garrow_array_view");
+  gidLink(garrow_array_get_type, "garrow_array_get_type", LIBS);
+  gidLink(garrow_array_import, "garrow_array_import", LIBS);
+  gidLink(garrow_array_cast, "garrow_array_cast", LIBS);
+  gidLink(garrow_array_concatenate, "garrow_array_concatenate", LIBS);
+  gidLink(garrow_array_count, "garrow_array_count", LIBS);
+  gidLink(garrow_array_count_values, "garrow_array_count_values", LIBS);
+  gidLink(garrow_array_dictionary_encode, "garrow_array_dictionary_encode", LIBS);
+  gidLink(garrow_array_diff_unified, "garrow_array_diff_unified", LIBS);
+  gidLink(garrow_array_equal, "garrow_array_equal", LIBS);
+  gidLink(garrow_array_equal_approx, "garrow_array_equal_approx", LIBS);
+  gidLink(garrow_array_equal_options, "garrow_array_equal_options", LIBS);
+  gidLink(garrow_array_equal_range, "garrow_array_equal_range", LIBS);
+  gidLink(garrow_array_export, "garrow_array_export", LIBS);
+  gidLink(garrow_array_filter, "garrow_array_filter", LIBS);
+  gidLink(garrow_array_get_length, "garrow_array_get_length", LIBS);
+  gidLink(garrow_array_get_n_nulls, "garrow_array_get_n_nulls", LIBS);
+  gidLink(garrow_array_get_null_bitmap, "garrow_array_get_null_bitmap", LIBS);
+  gidLink(garrow_array_get_offset, "garrow_array_get_offset", LIBS);
+  gidLink(garrow_array_get_value_data_type, "garrow_array_get_value_data_type", LIBS);
+  gidLink(garrow_array_get_value_type, "garrow_array_get_value_type", LIBS);
+  gidLink(garrow_array_is_in, "garrow_array_is_in", LIBS);
+  gidLink(garrow_array_is_in_chunked_array, "garrow_array_is_in_chunked_array", LIBS);
+  gidLink(garrow_array_is_null, "garrow_array_is_null", LIBS);
+  gidLink(garrow_array_is_valid, "garrow_array_is_valid", LIBS);
+  gidLink(garrow_array_run_end_encode, "garrow_array_run_end_encode", LIBS);
+  gidLink(garrow_array_slice, "garrow_array_slice", LIBS);
+  gidLink(garrow_array_sort_indices, "garrow_array_sort_indices", LIBS);
+  gidLink(garrow_array_sort_to_indices, "garrow_array_sort_to_indices", LIBS);
+  gidLink(garrow_array_take, "garrow_array_take", LIBS);
+  gidLink(garrow_array_take_chunked_array, "garrow_array_take_chunked_array", LIBS);
+  gidLink(garrow_array_to_string, "garrow_array_to_string", LIBS);
+  gidLink(garrow_array_unique, "garrow_array_unique", LIBS);
+  gidLink(garrow_array_view, "garrow_array_view", LIBS);
 
   // ArrayBuilder
-  link(garrow_array_builder_get_type, "garrow_array_builder_get_type");
-  link(garrow_array_builder_append_empty_value, "garrow_array_builder_append_empty_value");
-  link(garrow_array_builder_append_empty_values, "garrow_array_builder_append_empty_values");
-  link(garrow_array_builder_append_null, "garrow_array_builder_append_null");
-  link(garrow_array_builder_append_nulls, "garrow_array_builder_append_nulls");
-  link(garrow_array_builder_finish, "garrow_array_builder_finish");
-  link(garrow_array_builder_get_capacity, "garrow_array_builder_get_capacity");
-  link(garrow_array_builder_get_child, "garrow_array_builder_get_child");
-  link(garrow_array_builder_get_children, "garrow_array_builder_get_children");
-  link(garrow_array_builder_get_length, "garrow_array_builder_get_length");
-  link(garrow_array_builder_get_n_nulls, "garrow_array_builder_get_n_nulls");
-  link(garrow_array_builder_get_value_data_type, "garrow_array_builder_get_value_data_type");
-  link(garrow_array_builder_get_value_type, "garrow_array_builder_get_value_type");
-  link(garrow_array_builder_reserve, "garrow_array_builder_reserve");
-  link(garrow_array_builder_reset, "garrow_array_builder_reset");
-  link(garrow_array_builder_resize, "garrow_array_builder_resize");
+  gidLink(garrow_array_builder_get_type, "garrow_array_builder_get_type", LIBS);
+  gidLink(garrow_array_builder_append_empty_value, "garrow_array_builder_append_empty_value", LIBS);
+  gidLink(garrow_array_builder_append_empty_values, "garrow_array_builder_append_empty_values", LIBS);
+  gidLink(garrow_array_builder_append_null, "garrow_array_builder_append_null", LIBS);
+  gidLink(garrow_array_builder_append_nulls, "garrow_array_builder_append_nulls", LIBS);
+  gidLink(garrow_array_builder_finish, "garrow_array_builder_finish", LIBS);
+  gidLink(garrow_array_builder_get_capacity, "garrow_array_builder_get_capacity", LIBS);
+  gidLink(garrow_array_builder_get_child, "garrow_array_builder_get_child", LIBS);
+  gidLink(garrow_array_builder_get_children, "garrow_array_builder_get_children", LIBS);
+  gidLink(garrow_array_builder_get_length, "garrow_array_builder_get_length", LIBS);
+  gidLink(garrow_array_builder_get_n_nulls, "garrow_array_builder_get_n_nulls", LIBS);
+  gidLink(garrow_array_builder_get_value_data_type, "garrow_array_builder_get_value_data_type", LIBS);
+  gidLink(garrow_array_builder_get_value_type, "garrow_array_builder_get_value_type", LIBS);
+  gidLink(garrow_array_builder_reserve, "garrow_array_builder_reserve", LIBS);
+  gidLink(garrow_array_builder_reset, "garrow_array_builder_reset", LIBS);
+  gidLink(garrow_array_builder_resize, "garrow_array_builder_resize", LIBS);
 
   // ArrayDatum
-  link(garrow_array_datum_get_type, "garrow_array_datum_get_type");
-  link(garrow_array_datum_new, "garrow_array_datum_new");
+  gidLink(garrow_array_datum_get_type, "garrow_array_datum_get_type", LIBS);
+  gidLink(garrow_array_datum_new, "garrow_array_datum_new", LIBS);
 
   // ArraySortOptions
-  link(garrow_array_sort_options_get_type, "garrow_array_sort_options_get_type");
-  link(garrow_array_sort_options_new, "garrow_array_sort_options_new");
-  link(garrow_array_sort_options_equal, "garrow_array_sort_options_equal");
+  gidLink(garrow_array_sort_options_get_type, "garrow_array_sort_options_get_type", LIBS);
+  gidLink(garrow_array_sort_options_new, "garrow_array_sort_options_new", LIBS);
+  gidLink(garrow_array_sort_options_equal, "garrow_array_sort_options_equal", LIBS);
 
   // AzureFileSystem
-  link(garrow_azure_file_system_get_type, "garrow_azure_file_system_get_type");
+  gidLink(garrow_azure_file_system_get_type, "garrow_azure_file_system_get_type", LIBS);
 
   // BaseBinaryScalar
-  link(garrow_base_binary_scalar_get_type, "garrow_base_binary_scalar_get_type");
-  link(garrow_base_binary_scalar_get_value, "garrow_base_binary_scalar_get_value");
+  gidLink(garrow_base_binary_scalar_get_type, "garrow_base_binary_scalar_get_type", LIBS);
+  gidLink(garrow_base_binary_scalar_get_value, "garrow_base_binary_scalar_get_value", LIBS);
 
   // BaseListScalar
-  link(garrow_base_list_scalar_get_type, "garrow_base_list_scalar_get_type");
-  link(garrow_base_list_scalar_get_value, "garrow_base_list_scalar_get_value");
+  gidLink(garrow_base_list_scalar_get_type, "garrow_base_list_scalar_get_type", LIBS);
+  gidLink(garrow_base_list_scalar_get_value, "garrow_base_list_scalar_get_value", LIBS);
 
   // BinaryArray
-  link(garrow_binary_array_get_type, "garrow_binary_array_get_type");
-  link(garrow_binary_array_new, "garrow_binary_array_new");
-  link(garrow_binary_array_get_buffer, "garrow_binary_array_get_buffer");
-  link(garrow_binary_array_get_data_buffer, "garrow_binary_array_get_data_buffer");
-  link(garrow_binary_array_get_offsets_buffer, "garrow_binary_array_get_offsets_buffer");
-  link(garrow_binary_array_get_value, "garrow_binary_array_get_value");
+  gidLink(garrow_binary_array_get_type, "garrow_binary_array_get_type", LIBS);
+  gidLink(garrow_binary_array_new, "garrow_binary_array_new", LIBS);
+  gidLink(garrow_binary_array_get_buffer, "garrow_binary_array_get_buffer", LIBS);
+  gidLink(garrow_binary_array_get_data_buffer, "garrow_binary_array_get_data_buffer", LIBS);
+  gidLink(garrow_binary_array_get_offsets_buffer, "garrow_binary_array_get_offsets_buffer", LIBS);
+  gidLink(garrow_binary_array_get_value, "garrow_binary_array_get_value", LIBS);
 
   // BinaryArrayBuilder
-  link(garrow_binary_array_builder_get_type, "garrow_binary_array_builder_get_type");
-  link(garrow_binary_array_builder_new, "garrow_binary_array_builder_new");
-  link(garrow_binary_array_builder_append, "garrow_binary_array_builder_append");
-  link(garrow_binary_array_builder_append_null, "garrow_binary_array_builder_append_null");
-  link(garrow_binary_array_builder_append_nulls, "garrow_binary_array_builder_append_nulls");
-  link(garrow_binary_array_builder_append_value, "garrow_binary_array_builder_append_value");
-  link(garrow_binary_array_builder_append_value_bytes, "garrow_binary_array_builder_append_value_bytes");
-  link(garrow_binary_array_builder_append_values, "garrow_binary_array_builder_append_values");
+  gidLink(garrow_binary_array_builder_get_type, "garrow_binary_array_builder_get_type", LIBS);
+  gidLink(garrow_binary_array_builder_new, "garrow_binary_array_builder_new", LIBS);
+  gidLink(garrow_binary_array_builder_append, "garrow_binary_array_builder_append", LIBS);
+  gidLink(garrow_binary_array_builder_append_null, "garrow_binary_array_builder_append_null", LIBS);
+  gidLink(garrow_binary_array_builder_append_nulls, "garrow_binary_array_builder_append_nulls", LIBS);
+  gidLink(garrow_binary_array_builder_append_value, "garrow_binary_array_builder_append_value", LIBS);
+  gidLink(garrow_binary_array_builder_append_value_bytes, "garrow_binary_array_builder_append_value_bytes", LIBS);
+  gidLink(garrow_binary_array_builder_append_values, "garrow_binary_array_builder_append_values", LIBS);
 
   // BinaryDataType
-  link(garrow_binary_data_type_get_type, "garrow_binary_data_type_get_type");
-  link(garrow_binary_data_type_new, "garrow_binary_data_type_new");
+  gidLink(garrow_binary_data_type_get_type, "garrow_binary_data_type_get_type", LIBS);
+  gidLink(garrow_binary_data_type_new, "garrow_binary_data_type_new", LIBS);
 
   // BinaryDictionaryArrayBuilder
-  link(garrow_binary_dictionary_array_builder_get_type, "garrow_binary_dictionary_array_builder_get_type");
-  link(garrow_binary_dictionary_array_builder_new, "garrow_binary_dictionary_array_builder_new");
-  link(garrow_binary_dictionary_array_builder_append_array, "garrow_binary_dictionary_array_builder_append_array");
-  link(garrow_binary_dictionary_array_builder_append_indices, "garrow_binary_dictionary_array_builder_append_indices");
-  link(garrow_binary_dictionary_array_builder_append_null, "garrow_binary_dictionary_array_builder_append_null");
-  link(garrow_binary_dictionary_array_builder_append_value, "garrow_binary_dictionary_array_builder_append_value");
-  link(garrow_binary_dictionary_array_builder_append_value_bytes, "garrow_binary_dictionary_array_builder_append_value_bytes");
-  link(garrow_binary_dictionary_array_builder_finish_delta, "garrow_binary_dictionary_array_builder_finish_delta");
-  link(garrow_binary_dictionary_array_builder_get_dictionary_length, "garrow_binary_dictionary_array_builder_get_dictionary_length");
-  link(garrow_binary_dictionary_array_builder_insert_memo_values, "garrow_binary_dictionary_array_builder_insert_memo_values");
-  link(garrow_binary_dictionary_array_builder_reset_full, "garrow_binary_dictionary_array_builder_reset_full");
+  gidLink(garrow_binary_dictionary_array_builder_get_type, "garrow_binary_dictionary_array_builder_get_type", LIBS);
+  gidLink(garrow_binary_dictionary_array_builder_new, "garrow_binary_dictionary_array_builder_new", LIBS);
+  gidLink(garrow_binary_dictionary_array_builder_append_array, "garrow_binary_dictionary_array_builder_append_array", LIBS);
+  gidLink(garrow_binary_dictionary_array_builder_append_indices, "garrow_binary_dictionary_array_builder_append_indices", LIBS);
+  gidLink(garrow_binary_dictionary_array_builder_append_null, "garrow_binary_dictionary_array_builder_append_null", LIBS);
+  gidLink(garrow_binary_dictionary_array_builder_append_value, "garrow_binary_dictionary_array_builder_append_value", LIBS);
+  gidLink(garrow_binary_dictionary_array_builder_append_value_bytes, "garrow_binary_dictionary_array_builder_append_value_bytes", LIBS);
+  gidLink(garrow_binary_dictionary_array_builder_finish_delta, "garrow_binary_dictionary_array_builder_finish_delta", LIBS);
+  gidLink(garrow_binary_dictionary_array_builder_get_dictionary_length, "garrow_binary_dictionary_array_builder_get_dictionary_length", LIBS);
+  gidLink(garrow_binary_dictionary_array_builder_insert_memo_values, "garrow_binary_dictionary_array_builder_insert_memo_values", LIBS);
+  gidLink(garrow_binary_dictionary_array_builder_reset_full, "garrow_binary_dictionary_array_builder_reset_full", LIBS);
 
   // BinaryScalar
-  link(garrow_binary_scalar_get_type, "garrow_binary_scalar_get_type");
-  link(garrow_binary_scalar_new, "garrow_binary_scalar_new");
+  gidLink(garrow_binary_scalar_get_type, "garrow_binary_scalar_get_type", LIBS);
+  gidLink(garrow_binary_scalar_new, "garrow_binary_scalar_new", LIBS);
 
   // BinaryViewDataType
-  link(garrow_binary_view_data_type_get_type, "garrow_binary_view_data_type_get_type");
-  link(garrow_binary_view_data_type_new, "garrow_binary_view_data_type_new");
+  gidLink(garrow_binary_view_data_type_get_type, "garrow_binary_view_data_type_get_type", LIBS);
+  gidLink(garrow_binary_view_data_type_new, "garrow_binary_view_data_type_new", LIBS);
 
   // BooleanArray
-  link(garrow_boolean_array_get_type, "garrow_boolean_array_get_type");
-  link(garrow_boolean_array_new, "garrow_boolean_array_new");
-  link(garrow_boolean_array_and, "garrow_boolean_array_and");
-  link(garrow_boolean_array_get_value, "garrow_boolean_array_get_value");
-  link(garrow_boolean_array_get_values, "garrow_boolean_array_get_values");
-  link(garrow_boolean_array_invert, "garrow_boolean_array_invert");
-  link(garrow_boolean_array_or, "garrow_boolean_array_or");
-  link(garrow_boolean_array_xor, "garrow_boolean_array_xor");
+  gidLink(garrow_boolean_array_get_type, "garrow_boolean_array_get_type", LIBS);
+  gidLink(garrow_boolean_array_new, "garrow_boolean_array_new", LIBS);
+  gidLink(garrow_boolean_array_and, "garrow_boolean_array_and", LIBS);
+  gidLink(garrow_boolean_array_get_value, "garrow_boolean_array_get_value", LIBS);
+  gidLink(garrow_boolean_array_get_values, "garrow_boolean_array_get_values", LIBS);
+  gidLink(garrow_boolean_array_invert, "garrow_boolean_array_invert", LIBS);
+  gidLink(garrow_boolean_array_or, "garrow_boolean_array_or", LIBS);
+  gidLink(garrow_boolean_array_xor, "garrow_boolean_array_xor", LIBS);
 
   // BooleanArrayBuilder
-  link(garrow_boolean_array_builder_get_type, "garrow_boolean_array_builder_get_type");
-  link(garrow_boolean_array_builder_new, "garrow_boolean_array_builder_new");
-  link(garrow_boolean_array_builder_append, "garrow_boolean_array_builder_append");
-  link(garrow_boolean_array_builder_append_null, "garrow_boolean_array_builder_append_null");
-  link(garrow_boolean_array_builder_append_nulls, "garrow_boolean_array_builder_append_nulls");
-  link(garrow_boolean_array_builder_append_value, "garrow_boolean_array_builder_append_value");
-  link(garrow_boolean_array_builder_append_values, "garrow_boolean_array_builder_append_values");
+  gidLink(garrow_boolean_array_builder_get_type, "garrow_boolean_array_builder_get_type", LIBS);
+  gidLink(garrow_boolean_array_builder_new, "garrow_boolean_array_builder_new", LIBS);
+  gidLink(garrow_boolean_array_builder_append, "garrow_boolean_array_builder_append", LIBS);
+  gidLink(garrow_boolean_array_builder_append_null, "garrow_boolean_array_builder_append_null", LIBS);
+  gidLink(garrow_boolean_array_builder_append_nulls, "garrow_boolean_array_builder_append_nulls", LIBS);
+  gidLink(garrow_boolean_array_builder_append_value, "garrow_boolean_array_builder_append_value", LIBS);
+  gidLink(garrow_boolean_array_builder_append_values, "garrow_boolean_array_builder_append_values", LIBS);
 
   // BooleanDataType
-  link(garrow_boolean_data_type_get_type, "garrow_boolean_data_type_get_type");
-  link(garrow_boolean_data_type_new, "garrow_boolean_data_type_new");
+  gidLink(garrow_boolean_data_type_get_type, "garrow_boolean_data_type_get_type", LIBS);
+  gidLink(garrow_boolean_data_type_new, "garrow_boolean_data_type_new", LIBS);
 
   // BooleanScalar
-  link(garrow_boolean_scalar_get_type, "garrow_boolean_scalar_get_type");
-  link(garrow_boolean_scalar_new, "garrow_boolean_scalar_new");
-  link(garrow_boolean_scalar_get_value, "garrow_boolean_scalar_get_value");
+  gidLink(garrow_boolean_scalar_get_type, "garrow_boolean_scalar_get_type", LIBS);
+  gidLink(garrow_boolean_scalar_new, "garrow_boolean_scalar_new", LIBS);
+  gidLink(garrow_boolean_scalar_get_value, "garrow_boolean_scalar_get_value", LIBS);
 
   // Buffer
-  link(garrow_buffer_get_type, "garrow_buffer_get_type");
-  link(garrow_buffer_new, "garrow_buffer_new");
-  link(garrow_buffer_new_bytes, "garrow_buffer_new_bytes");
-  link(garrow_buffer_copy, "garrow_buffer_copy");
-  link(garrow_buffer_equal, "garrow_buffer_equal");
-  link(garrow_buffer_equal_n_bytes, "garrow_buffer_equal_n_bytes");
-  link(garrow_buffer_get_capacity, "garrow_buffer_get_capacity");
-  link(garrow_buffer_get_data, "garrow_buffer_get_data");
-  link(garrow_buffer_get_mutable_data, "garrow_buffer_get_mutable_data");
-  link(garrow_buffer_get_parent, "garrow_buffer_get_parent");
-  link(garrow_buffer_get_size, "garrow_buffer_get_size");
-  link(garrow_buffer_is_mutable, "garrow_buffer_is_mutable");
-  link(garrow_buffer_slice, "garrow_buffer_slice");
+  gidLink(garrow_buffer_get_type, "garrow_buffer_get_type", LIBS);
+  gidLink(garrow_buffer_new, "garrow_buffer_new", LIBS);
+  gidLink(garrow_buffer_new_bytes, "garrow_buffer_new_bytes", LIBS);
+  gidLink(garrow_buffer_copy, "garrow_buffer_copy", LIBS);
+  gidLink(garrow_buffer_equal, "garrow_buffer_equal", LIBS);
+  gidLink(garrow_buffer_equal_n_bytes, "garrow_buffer_equal_n_bytes", LIBS);
+  gidLink(garrow_buffer_get_capacity, "garrow_buffer_get_capacity", LIBS);
+  gidLink(garrow_buffer_get_data, "garrow_buffer_get_data", LIBS);
+  gidLink(garrow_buffer_get_mutable_data, "garrow_buffer_get_mutable_data", LIBS);
+  gidLink(garrow_buffer_get_parent, "garrow_buffer_get_parent", LIBS);
+  gidLink(garrow_buffer_get_size, "garrow_buffer_get_size", LIBS);
+  gidLink(garrow_buffer_is_mutable, "garrow_buffer_is_mutable", LIBS);
+  gidLink(garrow_buffer_slice, "garrow_buffer_slice", LIBS);
 
   // BufferInputStream
-  link(garrow_buffer_input_stream_get_type, "garrow_buffer_input_stream_get_type");
-  link(garrow_buffer_input_stream_new, "garrow_buffer_input_stream_new");
-  link(garrow_buffer_input_stream_get_buffer, "garrow_buffer_input_stream_get_buffer");
+  gidLink(garrow_buffer_input_stream_get_type, "garrow_buffer_input_stream_get_type", LIBS);
+  gidLink(garrow_buffer_input_stream_new, "garrow_buffer_input_stream_new", LIBS);
+  gidLink(garrow_buffer_input_stream_get_buffer, "garrow_buffer_input_stream_get_buffer", LIBS);
 
   // BufferOutputStream
-  link(garrow_buffer_output_stream_get_type, "garrow_buffer_output_stream_get_type");
-  link(garrow_buffer_output_stream_new, "garrow_buffer_output_stream_new");
+  gidLink(garrow_buffer_output_stream_get_type, "garrow_buffer_output_stream_get_type", LIBS);
+  gidLink(garrow_buffer_output_stream_new, "garrow_buffer_output_stream_new", LIBS);
 
   // CSVReadOptions
-  link(garrow_csv_read_options_get_type, "garrow_csv_read_options_get_type");
-  link(garrow_csv_read_options_new, "garrow_csv_read_options_new");
-  link(garrow_csv_read_options_add_column_name, "garrow_csv_read_options_add_column_name");
-  link(garrow_csv_read_options_add_column_type, "garrow_csv_read_options_add_column_type");
-  link(garrow_csv_read_options_add_false_value, "garrow_csv_read_options_add_false_value");
-  link(garrow_csv_read_options_add_null_value, "garrow_csv_read_options_add_null_value");
-  link(garrow_csv_read_options_add_schema, "garrow_csv_read_options_add_schema");
-  link(garrow_csv_read_options_add_timestamp_parser, "garrow_csv_read_options_add_timestamp_parser");
-  link(garrow_csv_read_options_add_true_value, "garrow_csv_read_options_add_true_value");
-  link(garrow_csv_read_options_get_column_names, "garrow_csv_read_options_get_column_names");
-  link(garrow_csv_read_options_get_column_types, "garrow_csv_read_options_get_column_types");
-  link(garrow_csv_read_options_get_false_values, "garrow_csv_read_options_get_false_values");
-  link(garrow_csv_read_options_get_null_values, "garrow_csv_read_options_get_null_values");
-  link(garrow_csv_read_options_get_timestamp_parsers, "garrow_csv_read_options_get_timestamp_parsers");
-  link(garrow_csv_read_options_get_true_values, "garrow_csv_read_options_get_true_values");
-  link(garrow_csv_read_options_set_column_names, "garrow_csv_read_options_set_column_names");
-  link(garrow_csv_read_options_set_false_values, "garrow_csv_read_options_set_false_values");
-  link(garrow_csv_read_options_set_null_values, "garrow_csv_read_options_set_null_values");
-  link(garrow_csv_read_options_set_timestamp_parsers, "garrow_csv_read_options_set_timestamp_parsers");
-  link(garrow_csv_read_options_set_true_values, "garrow_csv_read_options_set_true_values");
+  gidLink(garrow_csv_read_options_get_type, "garrow_csv_read_options_get_type", LIBS);
+  gidLink(garrow_csv_read_options_new, "garrow_csv_read_options_new", LIBS);
+  gidLink(garrow_csv_read_options_add_column_name, "garrow_csv_read_options_add_column_name", LIBS);
+  gidLink(garrow_csv_read_options_add_column_type, "garrow_csv_read_options_add_column_type", LIBS);
+  gidLink(garrow_csv_read_options_add_false_value, "garrow_csv_read_options_add_false_value", LIBS);
+  gidLink(garrow_csv_read_options_add_null_value, "garrow_csv_read_options_add_null_value", LIBS);
+  gidLink(garrow_csv_read_options_add_schema, "garrow_csv_read_options_add_schema", LIBS);
+  gidLink(garrow_csv_read_options_add_timestamp_parser, "garrow_csv_read_options_add_timestamp_parser", LIBS);
+  gidLink(garrow_csv_read_options_add_true_value, "garrow_csv_read_options_add_true_value", LIBS);
+  gidLink(garrow_csv_read_options_get_column_names, "garrow_csv_read_options_get_column_names", LIBS);
+  gidLink(garrow_csv_read_options_get_column_types, "garrow_csv_read_options_get_column_types", LIBS);
+  gidLink(garrow_csv_read_options_get_false_values, "garrow_csv_read_options_get_false_values", LIBS);
+  gidLink(garrow_csv_read_options_get_null_values, "garrow_csv_read_options_get_null_values", LIBS);
+  gidLink(garrow_csv_read_options_get_timestamp_parsers, "garrow_csv_read_options_get_timestamp_parsers", LIBS);
+  gidLink(garrow_csv_read_options_get_true_values, "garrow_csv_read_options_get_true_values", LIBS);
+  gidLink(garrow_csv_read_options_set_column_names, "garrow_csv_read_options_set_column_names", LIBS);
+  gidLink(garrow_csv_read_options_set_false_values, "garrow_csv_read_options_set_false_values", LIBS);
+  gidLink(garrow_csv_read_options_set_null_values, "garrow_csv_read_options_set_null_values", LIBS);
+  gidLink(garrow_csv_read_options_set_timestamp_parsers, "garrow_csv_read_options_set_timestamp_parsers", LIBS);
+  gidLink(garrow_csv_read_options_set_true_values, "garrow_csv_read_options_set_true_values", LIBS);
 
   // CSVReader
-  link(garrow_csv_reader_get_type, "garrow_csv_reader_get_type");
-  link(garrow_csv_reader_new, "garrow_csv_reader_new");
-  link(garrow_csv_reader_read, "garrow_csv_reader_read");
+  gidLink(garrow_csv_reader_get_type, "garrow_csv_reader_get_type", LIBS);
+  gidLink(garrow_csv_reader_new, "garrow_csv_reader_new", LIBS);
+  gidLink(garrow_csv_reader_read, "garrow_csv_reader_read", LIBS);
 
   // CallExpression
-  link(garrow_call_expression_get_type, "garrow_call_expression_get_type");
-  link(garrow_call_expression_new, "garrow_call_expression_new");
+  gidLink(garrow_call_expression_get_type, "garrow_call_expression_get_type", LIBS);
+  gidLink(garrow_call_expression_new, "garrow_call_expression_new", LIBS);
 
   // CastOptions
-  link(garrow_cast_options_get_type, "garrow_cast_options_get_type");
-  link(garrow_cast_options_new, "garrow_cast_options_new");
+  gidLink(garrow_cast_options_get_type, "garrow_cast_options_get_type", LIBS);
+  gidLink(garrow_cast_options_new, "garrow_cast_options_new", LIBS);
 
   // ChunkedArray
-  link(garrow_chunked_array_get_type, "garrow_chunked_array_get_type");
-  link(garrow_chunked_array_new, "garrow_chunked_array_new");
-  link(garrow_chunked_array_new_empty, "garrow_chunked_array_new_empty");
-  link(garrow_chunked_array_combine, "garrow_chunked_array_combine");
-  link(garrow_chunked_array_equal, "garrow_chunked_array_equal");
-  link(garrow_chunked_array_filter, "garrow_chunked_array_filter");
-  link(garrow_chunked_array_filter_chunked_array, "garrow_chunked_array_filter_chunked_array");
-  link(garrow_chunked_array_get_chunk, "garrow_chunked_array_get_chunk");
-  link(garrow_chunked_array_get_chunks, "garrow_chunked_array_get_chunks");
-  link(garrow_chunked_array_get_length, "garrow_chunked_array_get_length");
-  link(garrow_chunked_array_get_n_chunks, "garrow_chunked_array_get_n_chunks");
-  link(garrow_chunked_array_get_n_nulls, "garrow_chunked_array_get_n_nulls");
-  link(garrow_chunked_array_get_n_rows, "garrow_chunked_array_get_n_rows");
-  link(garrow_chunked_array_get_value_data_type, "garrow_chunked_array_get_value_data_type");
-  link(garrow_chunked_array_get_value_type, "garrow_chunked_array_get_value_type");
-  link(garrow_chunked_array_slice, "garrow_chunked_array_slice");
-  link(garrow_chunked_array_sort_indices, "garrow_chunked_array_sort_indices");
-  link(garrow_chunked_array_take, "garrow_chunked_array_take");
-  link(garrow_chunked_array_take_chunked_array, "garrow_chunked_array_take_chunked_array");
-  link(garrow_chunked_array_to_string, "garrow_chunked_array_to_string");
+  gidLink(garrow_chunked_array_get_type, "garrow_chunked_array_get_type", LIBS);
+  gidLink(garrow_chunked_array_new, "garrow_chunked_array_new", LIBS);
+  gidLink(garrow_chunked_array_new_empty, "garrow_chunked_array_new_empty", LIBS);
+  gidLink(garrow_chunked_array_combine, "garrow_chunked_array_combine", LIBS);
+  gidLink(garrow_chunked_array_equal, "garrow_chunked_array_equal", LIBS);
+  gidLink(garrow_chunked_array_filter, "garrow_chunked_array_filter", LIBS);
+  gidLink(garrow_chunked_array_filter_chunked_array, "garrow_chunked_array_filter_chunked_array", LIBS);
+  gidLink(garrow_chunked_array_get_chunk, "garrow_chunked_array_get_chunk", LIBS);
+  gidLink(garrow_chunked_array_get_chunks, "garrow_chunked_array_get_chunks", LIBS);
+  gidLink(garrow_chunked_array_get_length, "garrow_chunked_array_get_length", LIBS);
+  gidLink(garrow_chunked_array_get_n_chunks, "garrow_chunked_array_get_n_chunks", LIBS);
+  gidLink(garrow_chunked_array_get_n_nulls, "garrow_chunked_array_get_n_nulls", LIBS);
+  gidLink(garrow_chunked_array_get_n_rows, "garrow_chunked_array_get_n_rows", LIBS);
+  gidLink(garrow_chunked_array_get_value_data_type, "garrow_chunked_array_get_value_data_type", LIBS);
+  gidLink(garrow_chunked_array_get_value_type, "garrow_chunked_array_get_value_type", LIBS);
+  gidLink(garrow_chunked_array_slice, "garrow_chunked_array_slice", LIBS);
+  gidLink(garrow_chunked_array_sort_indices, "garrow_chunked_array_sort_indices", LIBS);
+  gidLink(garrow_chunked_array_take, "garrow_chunked_array_take", LIBS);
+  gidLink(garrow_chunked_array_take_chunked_array, "garrow_chunked_array_take_chunked_array", LIBS);
+  gidLink(garrow_chunked_array_to_string, "garrow_chunked_array_to_string", LIBS);
 
   // ChunkedArrayDatum
-  link(garrow_chunked_array_datum_get_type, "garrow_chunked_array_datum_get_type");
-  link(garrow_chunked_array_datum_new, "garrow_chunked_array_datum_new");
+  gidLink(garrow_chunked_array_datum_get_type, "garrow_chunked_array_datum_get_type", LIBS);
+  gidLink(garrow_chunked_array_datum_new, "garrow_chunked_array_datum_new", LIBS);
 
   // Codec
-  link(garrow_codec_get_type, "garrow_codec_get_type");
-  link(garrow_codec_new, "garrow_codec_new");
-  link(garrow_codec_get_compression_level, "garrow_codec_get_compression_level");
-  link(garrow_codec_get_compression_type, "garrow_codec_get_compression_type");
-  link(garrow_codec_get_name, "garrow_codec_get_name");
+  gidLink(garrow_codec_get_type, "garrow_codec_get_type", LIBS);
+  gidLink(garrow_codec_new, "garrow_codec_new", LIBS);
+  gidLink(garrow_codec_get_compression_level, "garrow_codec_get_compression_level", LIBS);
+  gidLink(garrow_codec_get_compression_type, "garrow_codec_get_compression_type", LIBS);
+  gidLink(garrow_codec_get_name, "garrow_codec_get_name", LIBS);
 
   // CompressedInputStream
-  link(garrow_compressed_input_stream_get_type, "garrow_compressed_input_stream_get_type");
-  link(garrow_compressed_input_stream_new, "garrow_compressed_input_stream_new");
+  gidLink(garrow_compressed_input_stream_get_type, "garrow_compressed_input_stream_get_type", LIBS);
+  gidLink(garrow_compressed_input_stream_new, "garrow_compressed_input_stream_new", LIBS);
 
   // CompressedOutputStream
-  link(garrow_compressed_output_stream_get_type, "garrow_compressed_output_stream_get_type");
-  link(garrow_compressed_output_stream_new, "garrow_compressed_output_stream_new");
+  gidLink(garrow_compressed_output_stream_get_type, "garrow_compressed_output_stream_get_type", LIBS);
+  gidLink(garrow_compressed_output_stream_new, "garrow_compressed_output_stream_new", LIBS);
 
   // CountOptions
-  link(garrow_count_options_get_type, "garrow_count_options_get_type");
-  link(garrow_count_options_new, "garrow_count_options_new");
+  gidLink(garrow_count_options_get_type, "garrow_count_options_get_type", LIBS);
+  gidLink(garrow_count_options_new, "garrow_count_options_new", LIBS);
 
   // DataType
-  link(garrow_data_type_get_type, "garrow_data_type_get_type");
-  link(garrow_data_type_import, "garrow_data_type_import");
-  link(garrow_data_type_equal, "garrow_data_type_equal");
-  link(garrow_data_type_export, "garrow_data_type_export");
-  link(garrow_data_type_get_id, "garrow_data_type_get_id");
-  link(garrow_data_type_get_name, "garrow_data_type_get_name");
-  link(garrow_data_type_to_string, "garrow_data_type_to_string");
+  gidLink(garrow_data_type_get_type, "garrow_data_type_get_type", LIBS);
+  gidLink(garrow_data_type_import, "garrow_data_type_import", LIBS);
+  gidLink(garrow_data_type_equal, "garrow_data_type_equal", LIBS);
+  gidLink(garrow_data_type_export, "garrow_data_type_export", LIBS);
+  gidLink(garrow_data_type_get_id, "garrow_data_type_get_id", LIBS);
+  gidLink(garrow_data_type_get_name, "garrow_data_type_get_name", LIBS);
+  gidLink(garrow_data_type_to_string, "garrow_data_type_to_string", LIBS);
 
   // Date32Array
-  link(garrow_date32_array_get_type, "garrow_date32_array_get_type");
-  link(garrow_date32_array_new, "garrow_date32_array_new");
-  link(garrow_date32_array_get_value, "garrow_date32_array_get_value");
-  link(garrow_date32_array_get_values, "garrow_date32_array_get_values");
+  gidLink(garrow_date32_array_get_type, "garrow_date32_array_get_type", LIBS);
+  gidLink(garrow_date32_array_new, "garrow_date32_array_new", LIBS);
+  gidLink(garrow_date32_array_get_value, "garrow_date32_array_get_value", LIBS);
+  gidLink(garrow_date32_array_get_values, "garrow_date32_array_get_values", LIBS);
 
   // Date32ArrayBuilder
-  link(garrow_date32_array_builder_get_type, "garrow_date32_array_builder_get_type");
-  link(garrow_date32_array_builder_new, "garrow_date32_array_builder_new");
-  link(garrow_date32_array_builder_append, "garrow_date32_array_builder_append");
-  link(garrow_date32_array_builder_append_null, "garrow_date32_array_builder_append_null");
-  link(garrow_date32_array_builder_append_nulls, "garrow_date32_array_builder_append_nulls");
-  link(garrow_date32_array_builder_append_value, "garrow_date32_array_builder_append_value");
-  link(garrow_date32_array_builder_append_values, "garrow_date32_array_builder_append_values");
+  gidLink(garrow_date32_array_builder_get_type, "garrow_date32_array_builder_get_type", LIBS);
+  gidLink(garrow_date32_array_builder_new, "garrow_date32_array_builder_new", LIBS);
+  gidLink(garrow_date32_array_builder_append, "garrow_date32_array_builder_append", LIBS);
+  gidLink(garrow_date32_array_builder_append_null, "garrow_date32_array_builder_append_null", LIBS);
+  gidLink(garrow_date32_array_builder_append_nulls, "garrow_date32_array_builder_append_nulls", LIBS);
+  gidLink(garrow_date32_array_builder_append_value, "garrow_date32_array_builder_append_value", LIBS);
+  gidLink(garrow_date32_array_builder_append_values, "garrow_date32_array_builder_append_values", LIBS);
 
   // Date32DataType
-  link(garrow_date32_data_type_get_type, "garrow_date32_data_type_get_type");
-  link(garrow_date32_data_type_new, "garrow_date32_data_type_new");
+  gidLink(garrow_date32_data_type_get_type, "garrow_date32_data_type_get_type", LIBS);
+  gidLink(garrow_date32_data_type_new, "garrow_date32_data_type_new", LIBS);
 
   // Date32Scalar
-  link(garrow_date32_scalar_get_type, "garrow_date32_scalar_get_type");
-  link(garrow_date32_scalar_new, "garrow_date32_scalar_new");
-  link(garrow_date32_scalar_get_value, "garrow_date32_scalar_get_value");
+  gidLink(garrow_date32_scalar_get_type, "garrow_date32_scalar_get_type", LIBS);
+  gidLink(garrow_date32_scalar_new, "garrow_date32_scalar_new", LIBS);
+  gidLink(garrow_date32_scalar_get_value, "garrow_date32_scalar_get_value", LIBS);
 
   // Date64Array
-  link(garrow_date64_array_get_type, "garrow_date64_array_get_type");
-  link(garrow_date64_array_new, "garrow_date64_array_new");
-  link(garrow_date64_array_get_value, "garrow_date64_array_get_value");
-  link(garrow_date64_array_get_values, "garrow_date64_array_get_values");
+  gidLink(garrow_date64_array_get_type, "garrow_date64_array_get_type", LIBS);
+  gidLink(garrow_date64_array_new, "garrow_date64_array_new", LIBS);
+  gidLink(garrow_date64_array_get_value, "garrow_date64_array_get_value", LIBS);
+  gidLink(garrow_date64_array_get_values, "garrow_date64_array_get_values", LIBS);
 
   // Date64ArrayBuilder
-  link(garrow_date64_array_builder_get_type, "garrow_date64_array_builder_get_type");
-  link(garrow_date64_array_builder_new, "garrow_date64_array_builder_new");
-  link(garrow_date64_array_builder_append, "garrow_date64_array_builder_append");
-  link(garrow_date64_array_builder_append_null, "garrow_date64_array_builder_append_null");
-  link(garrow_date64_array_builder_append_nulls, "garrow_date64_array_builder_append_nulls");
-  link(garrow_date64_array_builder_append_value, "garrow_date64_array_builder_append_value");
-  link(garrow_date64_array_builder_append_values, "garrow_date64_array_builder_append_values");
+  gidLink(garrow_date64_array_builder_get_type, "garrow_date64_array_builder_get_type", LIBS);
+  gidLink(garrow_date64_array_builder_new, "garrow_date64_array_builder_new", LIBS);
+  gidLink(garrow_date64_array_builder_append, "garrow_date64_array_builder_append", LIBS);
+  gidLink(garrow_date64_array_builder_append_null, "garrow_date64_array_builder_append_null", LIBS);
+  gidLink(garrow_date64_array_builder_append_nulls, "garrow_date64_array_builder_append_nulls", LIBS);
+  gidLink(garrow_date64_array_builder_append_value, "garrow_date64_array_builder_append_value", LIBS);
+  gidLink(garrow_date64_array_builder_append_values, "garrow_date64_array_builder_append_values", LIBS);
 
   // Date64DataType
-  link(garrow_date64_data_type_get_type, "garrow_date64_data_type_get_type");
-  link(garrow_date64_data_type_new, "garrow_date64_data_type_new");
+  gidLink(garrow_date64_data_type_get_type, "garrow_date64_data_type_get_type", LIBS);
+  gidLink(garrow_date64_data_type_new, "garrow_date64_data_type_new", LIBS);
 
   // Date64Scalar
-  link(garrow_date64_scalar_get_type, "garrow_date64_scalar_get_type");
-  link(garrow_date64_scalar_new, "garrow_date64_scalar_new");
-  link(garrow_date64_scalar_get_value, "garrow_date64_scalar_get_value");
+  gidLink(garrow_date64_scalar_get_type, "garrow_date64_scalar_get_type", LIBS);
+  gidLink(garrow_date64_scalar_new, "garrow_date64_scalar_new", LIBS);
+  gidLink(garrow_date64_scalar_get_value, "garrow_date64_scalar_get_value", LIBS);
 
   // Datum
-  link(garrow_datum_get_type, "garrow_datum_get_type");
-  link(garrow_datum_equal, "garrow_datum_equal");
-  link(garrow_datum_is_array, "garrow_datum_is_array");
-  link(garrow_datum_is_array_like, "garrow_datum_is_array_like");
-  link(garrow_datum_is_scalar, "garrow_datum_is_scalar");
-  link(garrow_datum_is_value, "garrow_datum_is_value");
-  link(garrow_datum_to_string, "garrow_datum_to_string");
+  gidLink(garrow_datum_get_type, "garrow_datum_get_type", LIBS);
+  gidLink(garrow_datum_equal, "garrow_datum_equal", LIBS);
+  gidLink(garrow_datum_is_array, "garrow_datum_is_array", LIBS);
+  gidLink(garrow_datum_is_array_like, "garrow_datum_is_array_like", LIBS);
+  gidLink(garrow_datum_is_scalar, "garrow_datum_is_scalar", LIBS);
+  gidLink(garrow_datum_is_value, "garrow_datum_is_value", LIBS);
+  gidLink(garrow_datum_to_string, "garrow_datum_to_string", LIBS);
 
   // DayMillisecond
-  link(garrow_day_millisecond_get_type, "garrow_day_millisecond_get_type");
-  link(garrow_day_millisecond_new, "garrow_day_millisecond_new");
-  link(garrow_day_millisecond_equal, "garrow_day_millisecond_equal");
-  link(garrow_day_millisecond_less_than, "garrow_day_millisecond_less_than");
+  gidLink(garrow_day_millisecond_get_type, "garrow_day_millisecond_get_type", LIBS);
+  gidLink(garrow_day_millisecond_new, "garrow_day_millisecond_new", LIBS);
+  gidLink(garrow_day_millisecond_equal, "garrow_day_millisecond_equal", LIBS);
+  gidLink(garrow_day_millisecond_less_than, "garrow_day_millisecond_less_than", LIBS);
 
   // DayTimeIntervalArray
-  link(garrow_day_time_interval_array_get_type, "garrow_day_time_interval_array_get_type");
-  link(garrow_day_time_interval_array_new, "garrow_day_time_interval_array_new");
-  link(garrow_day_time_interval_array_get_value, "garrow_day_time_interval_array_get_value");
-  link(garrow_day_time_interval_array_get_values, "garrow_day_time_interval_array_get_values");
+  gidLink(garrow_day_time_interval_array_get_type, "garrow_day_time_interval_array_get_type", LIBS);
+  gidLink(garrow_day_time_interval_array_new, "garrow_day_time_interval_array_new", LIBS);
+  gidLink(garrow_day_time_interval_array_get_value, "garrow_day_time_interval_array_get_value", LIBS);
+  gidLink(garrow_day_time_interval_array_get_values, "garrow_day_time_interval_array_get_values", LIBS);
 
   // DayTimeIntervalArrayBuilder
-  link(garrow_day_time_interval_array_builder_get_type, "garrow_day_time_interval_array_builder_get_type");
-  link(garrow_day_time_interval_array_builder_new, "garrow_day_time_interval_array_builder_new");
-  link(garrow_day_time_interval_array_builder_append_value, "garrow_day_time_interval_array_builder_append_value");
-  link(garrow_day_time_interval_array_builder_append_values, "garrow_day_time_interval_array_builder_append_values");
+  gidLink(garrow_day_time_interval_array_builder_get_type, "garrow_day_time_interval_array_builder_get_type", LIBS);
+  gidLink(garrow_day_time_interval_array_builder_new, "garrow_day_time_interval_array_builder_new", LIBS);
+  gidLink(garrow_day_time_interval_array_builder_append_value, "garrow_day_time_interval_array_builder_append_value", LIBS);
+  gidLink(garrow_day_time_interval_array_builder_append_values, "garrow_day_time_interval_array_builder_append_values", LIBS);
 
   // DayTimeIntervalDataType
-  link(garrow_day_time_interval_data_type_get_type, "garrow_day_time_interval_data_type_get_type");
-  link(garrow_day_time_interval_data_type_new, "garrow_day_time_interval_data_type_new");
+  gidLink(garrow_day_time_interval_data_type_get_type, "garrow_day_time_interval_data_type_get_type", LIBS);
+  gidLink(garrow_day_time_interval_data_type_new, "garrow_day_time_interval_data_type_new", LIBS);
 
   // DayTimeIntervalScalar
-  link(garrow_day_time_interval_scalar_get_type, "garrow_day_time_interval_scalar_get_type");
-  link(garrow_day_time_interval_scalar_new, "garrow_day_time_interval_scalar_new");
-  link(garrow_day_time_interval_scalar_get_value, "garrow_day_time_interval_scalar_get_value");
+  gidLink(garrow_day_time_interval_scalar_get_type, "garrow_day_time_interval_scalar_get_type", LIBS);
+  gidLink(garrow_day_time_interval_scalar_new, "garrow_day_time_interval_scalar_new", LIBS);
+  gidLink(garrow_day_time_interval_scalar_get_value, "garrow_day_time_interval_scalar_get_value", LIBS);
 
   // Decimal128
-  link(garrow_decimal128_get_type, "garrow_decimal128_get_type");
-  link(garrow_decimal128_new_integer, "garrow_decimal128_new_integer");
-  link(garrow_decimal128_new_string, "garrow_decimal128_new_string");
-  link(garrow_decimal128_abs, "garrow_decimal128_abs");
-  link(garrow_decimal128_copy, "garrow_decimal128_copy");
-  link(garrow_decimal128_divide, "garrow_decimal128_divide");
-  link(garrow_decimal128_equal, "garrow_decimal128_equal");
-  link(garrow_decimal128_greater_than, "garrow_decimal128_greater_than");
-  link(garrow_decimal128_greater_than_or_equal, "garrow_decimal128_greater_than_or_equal");
-  link(garrow_decimal128_less_than, "garrow_decimal128_less_than");
-  link(garrow_decimal128_less_than_or_equal, "garrow_decimal128_less_than_or_equal");
-  link(garrow_decimal128_minus, "garrow_decimal128_minus");
-  link(garrow_decimal128_multiply, "garrow_decimal128_multiply");
-  link(garrow_decimal128_negate, "garrow_decimal128_negate");
-  link(garrow_decimal128_not_equal, "garrow_decimal128_not_equal");
-  link(garrow_decimal128_plus, "garrow_decimal128_plus");
-  link(garrow_decimal128_rescale, "garrow_decimal128_rescale");
-  link(garrow_decimal128_to_bytes, "garrow_decimal128_to_bytes");
-  link(garrow_decimal128_to_integer, "garrow_decimal128_to_integer");
-  link(garrow_decimal128_to_string, "garrow_decimal128_to_string");
-  link(garrow_decimal128_to_string_scale, "garrow_decimal128_to_string_scale");
+  gidLink(garrow_decimal128_get_type, "garrow_decimal128_get_type", LIBS);
+  gidLink(garrow_decimal128_new_integer, "garrow_decimal128_new_integer", LIBS);
+  gidLink(garrow_decimal128_new_string, "garrow_decimal128_new_string", LIBS);
+  gidLink(garrow_decimal128_abs, "garrow_decimal128_abs", LIBS);
+  gidLink(garrow_decimal128_copy, "garrow_decimal128_copy", LIBS);
+  gidLink(garrow_decimal128_divide, "garrow_decimal128_divide", LIBS);
+  gidLink(garrow_decimal128_equal, "garrow_decimal128_equal", LIBS);
+  gidLink(garrow_decimal128_greater_than, "garrow_decimal128_greater_than", LIBS);
+  gidLink(garrow_decimal128_greater_than_or_equal, "garrow_decimal128_greater_than_or_equal", LIBS);
+  gidLink(garrow_decimal128_less_than, "garrow_decimal128_less_than", LIBS);
+  gidLink(garrow_decimal128_less_than_or_equal, "garrow_decimal128_less_than_or_equal", LIBS);
+  gidLink(garrow_decimal128_minus, "garrow_decimal128_minus", LIBS);
+  gidLink(garrow_decimal128_multiply, "garrow_decimal128_multiply", LIBS);
+  gidLink(garrow_decimal128_negate, "garrow_decimal128_negate", LIBS);
+  gidLink(garrow_decimal128_not_equal, "garrow_decimal128_not_equal", LIBS);
+  gidLink(garrow_decimal128_plus, "garrow_decimal128_plus", LIBS);
+  gidLink(garrow_decimal128_rescale, "garrow_decimal128_rescale", LIBS);
+  gidLink(garrow_decimal128_to_bytes, "garrow_decimal128_to_bytes", LIBS);
+  gidLink(garrow_decimal128_to_integer, "garrow_decimal128_to_integer", LIBS);
+  gidLink(garrow_decimal128_to_string, "garrow_decimal128_to_string", LIBS);
+  gidLink(garrow_decimal128_to_string_scale, "garrow_decimal128_to_string_scale", LIBS);
 
   // Decimal128Array
-  link(garrow_decimal128_array_get_type, "garrow_decimal128_array_get_type");
-  link(garrow_decimal128_array_format_value, "garrow_decimal128_array_format_value");
-  link(garrow_decimal128_array_get_value, "garrow_decimal128_array_get_value");
+  gidLink(garrow_decimal128_array_get_type, "garrow_decimal128_array_get_type", LIBS);
+  gidLink(garrow_decimal128_array_format_value, "garrow_decimal128_array_format_value", LIBS);
+  gidLink(garrow_decimal128_array_get_value, "garrow_decimal128_array_get_value", LIBS);
 
   // Decimal128ArrayBuilder
-  link(garrow_decimal128_array_builder_get_type, "garrow_decimal128_array_builder_get_type");
-  link(garrow_decimal128_array_builder_new, "garrow_decimal128_array_builder_new");
-  link(garrow_decimal128_array_builder_append, "garrow_decimal128_array_builder_append");
-  link(garrow_decimal128_array_builder_append_null, "garrow_decimal128_array_builder_append_null");
-  link(garrow_decimal128_array_builder_append_value, "garrow_decimal128_array_builder_append_value");
-  link(garrow_decimal128_array_builder_append_values, "garrow_decimal128_array_builder_append_values");
+  gidLink(garrow_decimal128_array_builder_get_type, "garrow_decimal128_array_builder_get_type", LIBS);
+  gidLink(garrow_decimal128_array_builder_new, "garrow_decimal128_array_builder_new", LIBS);
+  gidLink(garrow_decimal128_array_builder_append, "garrow_decimal128_array_builder_append", LIBS);
+  gidLink(garrow_decimal128_array_builder_append_null, "garrow_decimal128_array_builder_append_null", LIBS);
+  gidLink(garrow_decimal128_array_builder_append_value, "garrow_decimal128_array_builder_append_value", LIBS);
+  gidLink(garrow_decimal128_array_builder_append_values, "garrow_decimal128_array_builder_append_values", LIBS);
 
   // Decimal128DataType
-  link(garrow_decimal128_data_type_get_type, "garrow_decimal128_data_type_get_type");
-  link(garrow_decimal128_data_type_new, "garrow_decimal128_data_type_new");
-  link(garrow_decimal128_data_type_max_precision, "garrow_decimal128_data_type_max_precision");
+  gidLink(garrow_decimal128_data_type_get_type, "garrow_decimal128_data_type_get_type", LIBS);
+  gidLink(garrow_decimal128_data_type_new, "garrow_decimal128_data_type_new", LIBS);
+  gidLink(garrow_decimal128_data_type_max_precision, "garrow_decimal128_data_type_max_precision", LIBS);
 
   // Decimal128Scalar
-  link(garrow_decimal128_scalar_get_type, "garrow_decimal128_scalar_get_type");
-  link(garrow_decimal128_scalar_new, "garrow_decimal128_scalar_new");
-  link(garrow_decimal128_scalar_get_value, "garrow_decimal128_scalar_get_value");
+  gidLink(garrow_decimal128_scalar_get_type, "garrow_decimal128_scalar_get_type", LIBS);
+  gidLink(garrow_decimal128_scalar_new, "garrow_decimal128_scalar_new", LIBS);
+  gidLink(garrow_decimal128_scalar_get_value, "garrow_decimal128_scalar_get_value", LIBS);
 
   // Decimal256
-  link(garrow_decimal256_get_type, "garrow_decimal256_get_type");
-  link(garrow_decimal256_new_integer, "garrow_decimal256_new_integer");
-  link(garrow_decimal256_new_string, "garrow_decimal256_new_string");
-  link(garrow_decimal256_abs, "garrow_decimal256_abs");
-  link(garrow_decimal256_copy, "garrow_decimal256_copy");
-  link(garrow_decimal256_divide, "garrow_decimal256_divide");
-  link(garrow_decimal256_equal, "garrow_decimal256_equal");
-  link(garrow_decimal256_greater_than, "garrow_decimal256_greater_than");
-  link(garrow_decimal256_greater_than_or_equal, "garrow_decimal256_greater_than_or_equal");
-  link(garrow_decimal256_less_than, "garrow_decimal256_less_than");
-  link(garrow_decimal256_less_than_or_equal, "garrow_decimal256_less_than_or_equal");
-  link(garrow_decimal256_multiply, "garrow_decimal256_multiply");
-  link(garrow_decimal256_negate, "garrow_decimal256_negate");
-  link(garrow_decimal256_not_equal, "garrow_decimal256_not_equal");
-  link(garrow_decimal256_plus, "garrow_decimal256_plus");
-  link(garrow_decimal256_rescale, "garrow_decimal256_rescale");
-  link(garrow_decimal256_to_bytes, "garrow_decimal256_to_bytes");
-  link(garrow_decimal256_to_string, "garrow_decimal256_to_string");
-  link(garrow_decimal256_to_string_scale, "garrow_decimal256_to_string_scale");
+  gidLink(garrow_decimal256_get_type, "garrow_decimal256_get_type", LIBS);
+  gidLink(garrow_decimal256_new_integer, "garrow_decimal256_new_integer", LIBS);
+  gidLink(garrow_decimal256_new_string, "garrow_decimal256_new_string", LIBS);
+  gidLink(garrow_decimal256_abs, "garrow_decimal256_abs", LIBS);
+  gidLink(garrow_decimal256_copy, "garrow_decimal256_copy", LIBS);
+  gidLink(garrow_decimal256_divide, "garrow_decimal256_divide", LIBS);
+  gidLink(garrow_decimal256_equal, "garrow_decimal256_equal", LIBS);
+  gidLink(garrow_decimal256_greater_than, "garrow_decimal256_greater_than", LIBS);
+  gidLink(garrow_decimal256_greater_than_or_equal, "garrow_decimal256_greater_than_or_equal", LIBS);
+  gidLink(garrow_decimal256_less_than, "garrow_decimal256_less_than", LIBS);
+  gidLink(garrow_decimal256_less_than_or_equal, "garrow_decimal256_less_than_or_equal", LIBS);
+  gidLink(garrow_decimal256_multiply, "garrow_decimal256_multiply", LIBS);
+  gidLink(garrow_decimal256_negate, "garrow_decimal256_negate", LIBS);
+  gidLink(garrow_decimal256_not_equal, "garrow_decimal256_not_equal", LIBS);
+  gidLink(garrow_decimal256_plus, "garrow_decimal256_plus", LIBS);
+  gidLink(garrow_decimal256_rescale, "garrow_decimal256_rescale", LIBS);
+  gidLink(garrow_decimal256_to_bytes, "garrow_decimal256_to_bytes", LIBS);
+  gidLink(garrow_decimal256_to_string, "garrow_decimal256_to_string", LIBS);
+  gidLink(garrow_decimal256_to_string_scale, "garrow_decimal256_to_string_scale", LIBS);
 
   // Decimal256Array
-  link(garrow_decimal256_array_get_type, "garrow_decimal256_array_get_type");
-  link(garrow_decimal256_array_format_value, "garrow_decimal256_array_format_value");
-  link(garrow_decimal256_array_get_value, "garrow_decimal256_array_get_value");
+  gidLink(garrow_decimal256_array_get_type, "garrow_decimal256_array_get_type", LIBS);
+  gidLink(garrow_decimal256_array_format_value, "garrow_decimal256_array_format_value", LIBS);
+  gidLink(garrow_decimal256_array_get_value, "garrow_decimal256_array_get_value", LIBS);
 
   // Decimal256ArrayBuilder
-  link(garrow_decimal256_array_builder_get_type, "garrow_decimal256_array_builder_get_type");
-  link(garrow_decimal256_array_builder_new, "garrow_decimal256_array_builder_new");
-  link(garrow_decimal256_array_builder_append_value, "garrow_decimal256_array_builder_append_value");
-  link(garrow_decimal256_array_builder_append_values, "garrow_decimal256_array_builder_append_values");
+  gidLink(garrow_decimal256_array_builder_get_type, "garrow_decimal256_array_builder_get_type", LIBS);
+  gidLink(garrow_decimal256_array_builder_new, "garrow_decimal256_array_builder_new", LIBS);
+  gidLink(garrow_decimal256_array_builder_append_value, "garrow_decimal256_array_builder_append_value", LIBS);
+  gidLink(garrow_decimal256_array_builder_append_values, "garrow_decimal256_array_builder_append_values", LIBS);
 
   // Decimal256DataType
-  link(garrow_decimal256_data_type_get_type, "garrow_decimal256_data_type_get_type");
-  link(garrow_decimal256_data_type_new, "garrow_decimal256_data_type_new");
-  link(garrow_decimal256_data_type_max_precision, "garrow_decimal256_data_type_max_precision");
+  gidLink(garrow_decimal256_data_type_get_type, "garrow_decimal256_data_type_get_type", LIBS);
+  gidLink(garrow_decimal256_data_type_new, "garrow_decimal256_data_type_new", LIBS);
+  gidLink(garrow_decimal256_data_type_max_precision, "garrow_decimal256_data_type_max_precision", LIBS);
 
   // Decimal256Scalar
-  link(garrow_decimal256_scalar_get_type, "garrow_decimal256_scalar_get_type");
-  link(garrow_decimal256_scalar_new, "garrow_decimal256_scalar_new");
-  link(garrow_decimal256_scalar_get_value, "garrow_decimal256_scalar_get_value");
+  gidLink(garrow_decimal256_scalar_get_type, "garrow_decimal256_scalar_get_type", LIBS);
+  gidLink(garrow_decimal256_scalar_new, "garrow_decimal256_scalar_new", LIBS);
+  gidLink(garrow_decimal256_scalar_get_value, "garrow_decimal256_scalar_get_value", LIBS);
 
   // Decimal32
-  link(garrow_decimal32_get_type, "garrow_decimal32_get_type");
-  link(garrow_decimal32_new_integer, "garrow_decimal32_new_integer");
-  link(garrow_decimal32_new_string, "garrow_decimal32_new_string");
-  link(garrow_decimal32_abs, "garrow_decimal32_abs");
-  link(garrow_decimal32_copy, "garrow_decimal32_copy");
-  link(garrow_decimal32_divide, "garrow_decimal32_divide");
-  link(garrow_decimal32_equal, "garrow_decimal32_equal");
-  link(garrow_decimal32_greater_than, "garrow_decimal32_greater_than");
-  link(garrow_decimal32_greater_than_or_equal, "garrow_decimal32_greater_than_or_equal");
-  link(garrow_decimal32_less_than, "garrow_decimal32_less_than");
-  link(garrow_decimal32_less_than_or_equal, "garrow_decimal32_less_than_or_equal");
-  link(garrow_decimal32_minus, "garrow_decimal32_minus");
-  link(garrow_decimal32_multiply, "garrow_decimal32_multiply");
-  link(garrow_decimal32_negate, "garrow_decimal32_negate");
-  link(garrow_decimal32_not_equal, "garrow_decimal32_not_equal");
-  link(garrow_decimal32_plus, "garrow_decimal32_plus");
-  link(garrow_decimal32_rescale, "garrow_decimal32_rescale");
-  link(garrow_decimal32_to_bytes, "garrow_decimal32_to_bytes");
-  link(garrow_decimal32_to_integer, "garrow_decimal32_to_integer");
-  link(garrow_decimal32_to_string, "garrow_decimal32_to_string");
-  link(garrow_decimal32_to_string_scale, "garrow_decimal32_to_string_scale");
+  gidLink(garrow_decimal32_get_type, "garrow_decimal32_get_type", LIBS);
+  gidLink(garrow_decimal32_new_integer, "garrow_decimal32_new_integer", LIBS);
+  gidLink(garrow_decimal32_new_string, "garrow_decimal32_new_string", LIBS);
+  gidLink(garrow_decimal32_abs, "garrow_decimal32_abs", LIBS);
+  gidLink(garrow_decimal32_copy, "garrow_decimal32_copy", LIBS);
+  gidLink(garrow_decimal32_divide, "garrow_decimal32_divide", LIBS);
+  gidLink(garrow_decimal32_equal, "garrow_decimal32_equal", LIBS);
+  gidLink(garrow_decimal32_greater_than, "garrow_decimal32_greater_than", LIBS);
+  gidLink(garrow_decimal32_greater_than_or_equal, "garrow_decimal32_greater_than_or_equal", LIBS);
+  gidLink(garrow_decimal32_less_than, "garrow_decimal32_less_than", LIBS);
+  gidLink(garrow_decimal32_less_than_or_equal, "garrow_decimal32_less_than_or_equal", LIBS);
+  gidLink(garrow_decimal32_minus, "garrow_decimal32_minus", LIBS);
+  gidLink(garrow_decimal32_multiply, "garrow_decimal32_multiply", LIBS);
+  gidLink(garrow_decimal32_negate, "garrow_decimal32_negate", LIBS);
+  gidLink(garrow_decimal32_not_equal, "garrow_decimal32_not_equal", LIBS);
+  gidLink(garrow_decimal32_plus, "garrow_decimal32_plus", LIBS);
+  gidLink(garrow_decimal32_rescale, "garrow_decimal32_rescale", LIBS);
+  gidLink(garrow_decimal32_to_bytes, "garrow_decimal32_to_bytes", LIBS);
+  gidLink(garrow_decimal32_to_integer, "garrow_decimal32_to_integer", LIBS);
+  gidLink(garrow_decimal32_to_string, "garrow_decimal32_to_string", LIBS);
+  gidLink(garrow_decimal32_to_string_scale, "garrow_decimal32_to_string_scale", LIBS);
 
   // Decimal32Array
-  link(garrow_decimal32_array_get_type, "garrow_decimal32_array_get_type");
-  link(garrow_decimal32_array_format_value, "garrow_decimal32_array_format_value");
-  link(garrow_decimal32_array_get_value, "garrow_decimal32_array_get_value");
+  gidLink(garrow_decimal32_array_get_type, "garrow_decimal32_array_get_type", LIBS);
+  gidLink(garrow_decimal32_array_format_value, "garrow_decimal32_array_format_value", LIBS);
+  gidLink(garrow_decimal32_array_get_value, "garrow_decimal32_array_get_value", LIBS);
 
   // Decimal32ArrayBuilder
-  link(garrow_decimal32_array_builder_get_type, "garrow_decimal32_array_builder_get_type");
-  link(garrow_decimal32_array_builder_new, "garrow_decimal32_array_builder_new");
-  link(garrow_decimal32_array_builder_append_value, "garrow_decimal32_array_builder_append_value");
-  link(garrow_decimal32_array_builder_append_values, "garrow_decimal32_array_builder_append_values");
+  gidLink(garrow_decimal32_array_builder_get_type, "garrow_decimal32_array_builder_get_type", LIBS);
+  gidLink(garrow_decimal32_array_builder_new, "garrow_decimal32_array_builder_new", LIBS);
+  gidLink(garrow_decimal32_array_builder_append_value, "garrow_decimal32_array_builder_append_value", LIBS);
+  gidLink(garrow_decimal32_array_builder_append_values, "garrow_decimal32_array_builder_append_values", LIBS);
 
   // Decimal32DataType
-  link(garrow_decimal32_data_type_get_type, "garrow_decimal32_data_type_get_type");
-  link(garrow_decimal32_data_type_new, "garrow_decimal32_data_type_new");
-  link(garrow_decimal32_data_type_max_precision, "garrow_decimal32_data_type_max_precision");
+  gidLink(garrow_decimal32_data_type_get_type, "garrow_decimal32_data_type_get_type", LIBS);
+  gidLink(garrow_decimal32_data_type_new, "garrow_decimal32_data_type_new", LIBS);
+  gidLink(garrow_decimal32_data_type_max_precision, "garrow_decimal32_data_type_max_precision", LIBS);
 
   // Decimal32Scalar
-  link(garrow_decimal32_scalar_get_type, "garrow_decimal32_scalar_get_type");
-  link(garrow_decimal32_scalar_new, "garrow_decimal32_scalar_new");
-  link(garrow_decimal32_scalar_get_value, "garrow_decimal32_scalar_get_value");
+  gidLink(garrow_decimal32_scalar_get_type, "garrow_decimal32_scalar_get_type", LIBS);
+  gidLink(garrow_decimal32_scalar_new, "garrow_decimal32_scalar_new", LIBS);
+  gidLink(garrow_decimal32_scalar_get_value, "garrow_decimal32_scalar_get_value", LIBS);
 
   // Decimal64
-  link(garrow_decimal64_get_type, "garrow_decimal64_get_type");
-  link(garrow_decimal64_new_integer, "garrow_decimal64_new_integer");
-  link(garrow_decimal64_new_string, "garrow_decimal64_new_string");
-  link(garrow_decimal64_abs, "garrow_decimal64_abs");
-  link(garrow_decimal64_copy, "garrow_decimal64_copy");
-  link(garrow_decimal64_divide, "garrow_decimal64_divide");
-  link(garrow_decimal64_equal, "garrow_decimal64_equal");
-  link(garrow_decimal64_greater_than, "garrow_decimal64_greater_than");
-  link(garrow_decimal64_greater_than_or_equal, "garrow_decimal64_greater_than_or_equal");
-  link(garrow_decimal64_less_than, "garrow_decimal64_less_than");
-  link(garrow_decimal64_less_than_or_equal, "garrow_decimal64_less_than_or_equal");
-  link(garrow_decimal64_minus, "garrow_decimal64_minus");
-  link(garrow_decimal64_multiply, "garrow_decimal64_multiply");
-  link(garrow_decimal64_negate, "garrow_decimal64_negate");
-  link(garrow_decimal64_not_equal, "garrow_decimal64_not_equal");
-  link(garrow_decimal64_plus, "garrow_decimal64_plus");
-  link(garrow_decimal64_rescale, "garrow_decimal64_rescale");
-  link(garrow_decimal64_to_bytes, "garrow_decimal64_to_bytes");
-  link(garrow_decimal64_to_integer, "garrow_decimal64_to_integer");
-  link(garrow_decimal64_to_string, "garrow_decimal64_to_string");
-  link(garrow_decimal64_to_string_scale, "garrow_decimal64_to_string_scale");
+  gidLink(garrow_decimal64_get_type, "garrow_decimal64_get_type", LIBS);
+  gidLink(garrow_decimal64_new_integer, "garrow_decimal64_new_integer", LIBS);
+  gidLink(garrow_decimal64_new_string, "garrow_decimal64_new_string", LIBS);
+  gidLink(garrow_decimal64_abs, "garrow_decimal64_abs", LIBS);
+  gidLink(garrow_decimal64_copy, "garrow_decimal64_copy", LIBS);
+  gidLink(garrow_decimal64_divide, "garrow_decimal64_divide", LIBS);
+  gidLink(garrow_decimal64_equal, "garrow_decimal64_equal", LIBS);
+  gidLink(garrow_decimal64_greater_than, "garrow_decimal64_greater_than", LIBS);
+  gidLink(garrow_decimal64_greater_than_or_equal, "garrow_decimal64_greater_than_or_equal", LIBS);
+  gidLink(garrow_decimal64_less_than, "garrow_decimal64_less_than", LIBS);
+  gidLink(garrow_decimal64_less_than_or_equal, "garrow_decimal64_less_than_or_equal", LIBS);
+  gidLink(garrow_decimal64_minus, "garrow_decimal64_minus", LIBS);
+  gidLink(garrow_decimal64_multiply, "garrow_decimal64_multiply", LIBS);
+  gidLink(garrow_decimal64_negate, "garrow_decimal64_negate", LIBS);
+  gidLink(garrow_decimal64_not_equal, "garrow_decimal64_not_equal", LIBS);
+  gidLink(garrow_decimal64_plus, "garrow_decimal64_plus", LIBS);
+  gidLink(garrow_decimal64_rescale, "garrow_decimal64_rescale", LIBS);
+  gidLink(garrow_decimal64_to_bytes, "garrow_decimal64_to_bytes", LIBS);
+  gidLink(garrow_decimal64_to_integer, "garrow_decimal64_to_integer", LIBS);
+  gidLink(garrow_decimal64_to_string, "garrow_decimal64_to_string", LIBS);
+  gidLink(garrow_decimal64_to_string_scale, "garrow_decimal64_to_string_scale", LIBS);
 
   // Decimal64Array
-  link(garrow_decimal64_array_get_type, "garrow_decimal64_array_get_type");
-  link(garrow_decimal64_array_format_value, "garrow_decimal64_array_format_value");
-  link(garrow_decimal64_array_get_value, "garrow_decimal64_array_get_value");
+  gidLink(garrow_decimal64_array_get_type, "garrow_decimal64_array_get_type", LIBS);
+  gidLink(garrow_decimal64_array_format_value, "garrow_decimal64_array_format_value", LIBS);
+  gidLink(garrow_decimal64_array_get_value, "garrow_decimal64_array_get_value", LIBS);
 
   // Decimal64ArrayBuilder
-  link(garrow_decimal64_array_builder_get_type, "garrow_decimal64_array_builder_get_type");
-  link(garrow_decimal64_array_builder_new, "garrow_decimal64_array_builder_new");
-  link(garrow_decimal64_array_builder_append_value, "garrow_decimal64_array_builder_append_value");
-  link(garrow_decimal64_array_builder_append_values, "garrow_decimal64_array_builder_append_values");
+  gidLink(garrow_decimal64_array_builder_get_type, "garrow_decimal64_array_builder_get_type", LIBS);
+  gidLink(garrow_decimal64_array_builder_new, "garrow_decimal64_array_builder_new", LIBS);
+  gidLink(garrow_decimal64_array_builder_append_value, "garrow_decimal64_array_builder_append_value", LIBS);
+  gidLink(garrow_decimal64_array_builder_append_values, "garrow_decimal64_array_builder_append_values", LIBS);
 
   // Decimal64DataType
-  link(garrow_decimal64_data_type_get_type, "garrow_decimal64_data_type_get_type");
-  link(garrow_decimal64_data_type_new, "garrow_decimal64_data_type_new");
-  link(garrow_decimal64_data_type_max_precision, "garrow_decimal64_data_type_max_precision");
+  gidLink(garrow_decimal64_data_type_get_type, "garrow_decimal64_data_type_get_type", LIBS);
+  gidLink(garrow_decimal64_data_type_new, "garrow_decimal64_data_type_new", LIBS);
+  gidLink(garrow_decimal64_data_type_max_precision, "garrow_decimal64_data_type_max_precision", LIBS);
 
   // Decimal64Scalar
-  link(garrow_decimal64_scalar_get_type, "garrow_decimal64_scalar_get_type");
-  link(garrow_decimal64_scalar_new, "garrow_decimal64_scalar_new");
-  link(garrow_decimal64_scalar_get_value, "garrow_decimal64_scalar_get_value");
+  gidLink(garrow_decimal64_scalar_get_type, "garrow_decimal64_scalar_get_type", LIBS);
+  gidLink(garrow_decimal64_scalar_new, "garrow_decimal64_scalar_new", LIBS);
+  gidLink(garrow_decimal64_scalar_get_value, "garrow_decimal64_scalar_get_value", LIBS);
 
   // DecimalDataType
-  link(garrow_decimal_data_type_get_type, "garrow_decimal_data_type_get_type");
-  link(garrow_decimal_data_type_new, "garrow_decimal_data_type_new");
-  link(garrow_decimal_data_type_get_precision, "garrow_decimal_data_type_get_precision");
-  link(garrow_decimal_data_type_get_scale, "garrow_decimal_data_type_get_scale");
+  gidLink(garrow_decimal_data_type_get_type, "garrow_decimal_data_type_get_type", LIBS);
+  gidLink(garrow_decimal_data_type_new, "garrow_decimal_data_type_new", LIBS);
+  gidLink(garrow_decimal_data_type_get_precision, "garrow_decimal_data_type_get_precision", LIBS);
+  gidLink(garrow_decimal_data_type_get_scale, "garrow_decimal_data_type_get_scale", LIBS);
 
   // DenseUnionArray
-  link(garrow_dense_union_array_get_type, "garrow_dense_union_array_get_type");
-  link(garrow_dense_union_array_new, "garrow_dense_union_array_new");
-  link(garrow_dense_union_array_new_data_type, "garrow_dense_union_array_new_data_type");
-  link(garrow_dense_union_array_get_value_offset, "garrow_dense_union_array_get_value_offset");
+  gidLink(garrow_dense_union_array_get_type, "garrow_dense_union_array_get_type", LIBS);
+  gidLink(garrow_dense_union_array_new, "garrow_dense_union_array_new", LIBS);
+  gidLink(garrow_dense_union_array_new_data_type, "garrow_dense_union_array_new_data_type", LIBS);
+  gidLink(garrow_dense_union_array_get_value_offset, "garrow_dense_union_array_get_value_offset", LIBS);
 
   // DenseUnionArrayBuilder
-  link(garrow_dense_union_array_builder_get_type, "garrow_dense_union_array_builder_get_type");
-  link(garrow_dense_union_array_builder_new, "garrow_dense_union_array_builder_new");
+  gidLink(garrow_dense_union_array_builder_get_type, "garrow_dense_union_array_builder_get_type", LIBS);
+  gidLink(garrow_dense_union_array_builder_new, "garrow_dense_union_array_builder_new", LIBS);
 
   // DenseUnionDataType
-  link(garrow_dense_union_data_type_get_type, "garrow_dense_union_data_type_get_type");
-  link(garrow_dense_union_data_type_new, "garrow_dense_union_data_type_new");
+  gidLink(garrow_dense_union_data_type_get_type, "garrow_dense_union_data_type_get_type", LIBS);
+  gidLink(garrow_dense_union_data_type_new, "garrow_dense_union_data_type_new", LIBS);
 
   // DenseUnionScalar
-  link(garrow_dense_union_scalar_get_type, "garrow_dense_union_scalar_get_type");
-  link(garrow_dense_union_scalar_new, "garrow_dense_union_scalar_new");
+  gidLink(garrow_dense_union_scalar_get_type, "garrow_dense_union_scalar_get_type", LIBS);
+  gidLink(garrow_dense_union_scalar_new, "garrow_dense_union_scalar_new", LIBS);
 
   // DictionaryArray
-  link(garrow_dictionary_array_get_type, "garrow_dictionary_array_get_type");
-  link(garrow_dictionary_array_new, "garrow_dictionary_array_new");
-  link(garrow_dictionary_array_get_dictionary, "garrow_dictionary_array_get_dictionary");
-  link(garrow_dictionary_array_get_dictionary_data_type, "garrow_dictionary_array_get_dictionary_data_type");
-  link(garrow_dictionary_array_get_indices, "garrow_dictionary_array_get_indices");
+  gidLink(garrow_dictionary_array_get_type, "garrow_dictionary_array_get_type", LIBS);
+  gidLink(garrow_dictionary_array_new, "garrow_dictionary_array_new", LIBS);
+  gidLink(garrow_dictionary_array_get_dictionary, "garrow_dictionary_array_get_dictionary", LIBS);
+  gidLink(garrow_dictionary_array_get_dictionary_data_type, "garrow_dictionary_array_get_dictionary_data_type", LIBS);
+  gidLink(garrow_dictionary_array_get_indices, "garrow_dictionary_array_get_indices", LIBS);
 
   // DictionaryDataType
-  link(garrow_dictionary_data_type_get_type, "garrow_dictionary_data_type_get_type");
-  link(garrow_dictionary_data_type_new, "garrow_dictionary_data_type_new");
-  link(garrow_dictionary_data_type_get_index_data_type, "garrow_dictionary_data_type_get_index_data_type");
-  link(garrow_dictionary_data_type_get_value_data_type, "garrow_dictionary_data_type_get_value_data_type");
-  link(garrow_dictionary_data_type_is_ordered, "garrow_dictionary_data_type_is_ordered");
+  gidLink(garrow_dictionary_data_type_get_type, "garrow_dictionary_data_type_get_type", LIBS);
+  gidLink(garrow_dictionary_data_type_new, "garrow_dictionary_data_type_new", LIBS);
+  gidLink(garrow_dictionary_data_type_get_index_data_type, "garrow_dictionary_data_type_get_index_data_type", LIBS);
+  gidLink(garrow_dictionary_data_type_get_value_data_type, "garrow_dictionary_data_type_get_value_data_type", LIBS);
+  gidLink(garrow_dictionary_data_type_is_ordered, "garrow_dictionary_data_type_is_ordered", LIBS);
 
   // DoubleArray
-  link(garrow_double_array_get_type, "garrow_double_array_get_type");
-  link(garrow_double_array_new, "garrow_double_array_new");
-  link(garrow_double_array_get_value, "garrow_double_array_get_value");
-  link(garrow_double_array_get_values, "garrow_double_array_get_values");
-  link(garrow_double_array_sum, "garrow_double_array_sum");
+  gidLink(garrow_double_array_get_type, "garrow_double_array_get_type", LIBS);
+  gidLink(garrow_double_array_new, "garrow_double_array_new", LIBS);
+  gidLink(garrow_double_array_get_value, "garrow_double_array_get_value", LIBS);
+  gidLink(garrow_double_array_get_values, "garrow_double_array_get_values", LIBS);
+  gidLink(garrow_double_array_sum, "garrow_double_array_sum", LIBS);
 
   // DoubleArrayBuilder
-  link(garrow_double_array_builder_get_type, "garrow_double_array_builder_get_type");
-  link(garrow_double_array_builder_new, "garrow_double_array_builder_new");
-  link(garrow_double_array_builder_append, "garrow_double_array_builder_append");
-  link(garrow_double_array_builder_append_null, "garrow_double_array_builder_append_null");
-  link(garrow_double_array_builder_append_nulls, "garrow_double_array_builder_append_nulls");
-  link(garrow_double_array_builder_append_value, "garrow_double_array_builder_append_value");
-  link(garrow_double_array_builder_append_values, "garrow_double_array_builder_append_values");
+  gidLink(garrow_double_array_builder_get_type, "garrow_double_array_builder_get_type", LIBS);
+  gidLink(garrow_double_array_builder_new, "garrow_double_array_builder_new", LIBS);
+  gidLink(garrow_double_array_builder_append, "garrow_double_array_builder_append", LIBS);
+  gidLink(garrow_double_array_builder_append_null, "garrow_double_array_builder_append_null", LIBS);
+  gidLink(garrow_double_array_builder_append_nulls, "garrow_double_array_builder_append_nulls", LIBS);
+  gidLink(garrow_double_array_builder_append_value, "garrow_double_array_builder_append_value", LIBS);
+  gidLink(garrow_double_array_builder_append_values, "garrow_double_array_builder_append_values", LIBS);
 
   // DoubleDataType
-  link(garrow_double_data_type_get_type, "garrow_double_data_type_get_type");
-  link(garrow_double_data_type_new, "garrow_double_data_type_new");
+  gidLink(garrow_double_data_type_get_type, "garrow_double_data_type_get_type", LIBS);
+  gidLink(garrow_double_data_type_new, "garrow_double_data_type_new", LIBS);
 
   // DoubleScalar
-  link(garrow_double_scalar_get_type, "garrow_double_scalar_get_type");
-  link(garrow_double_scalar_new, "garrow_double_scalar_new");
-  link(garrow_double_scalar_get_value, "garrow_double_scalar_get_value");
+  gidLink(garrow_double_scalar_get_type, "garrow_double_scalar_get_type", LIBS);
+  gidLink(garrow_double_scalar_new, "garrow_double_scalar_new", LIBS);
+  gidLink(garrow_double_scalar_get_value, "garrow_double_scalar_get_value", LIBS);
 
   // EqualOptions
-  link(garrow_equal_options_get_type, "garrow_equal_options_get_type");
-  link(garrow_equal_options_new, "garrow_equal_options_new");
-  link(garrow_equal_options_is_approx, "garrow_equal_options_is_approx");
+  gidLink(garrow_equal_options_get_type, "garrow_equal_options_get_type", LIBS);
+  gidLink(garrow_equal_options_new, "garrow_equal_options_new", LIBS);
+  gidLink(garrow_equal_options_is_approx, "garrow_equal_options_is_approx", LIBS);
 
   // ExecuteContext
-  link(garrow_execute_context_get_type, "garrow_execute_context_get_type");
-  link(garrow_execute_context_new, "garrow_execute_context_new");
+  gidLink(garrow_execute_context_get_type, "garrow_execute_context_get_type", LIBS);
+  gidLink(garrow_execute_context_new, "garrow_execute_context_new", LIBS);
 
   // ExecuteNode
-  link(garrow_execute_node_get_type, "garrow_execute_node_get_type");
-  link(garrow_execute_node_get_kind_name, "garrow_execute_node_get_kind_name");
-  link(garrow_execute_node_get_output_schema, "garrow_execute_node_get_output_schema");
+  gidLink(garrow_execute_node_get_type, "garrow_execute_node_get_type", LIBS);
+  gidLink(garrow_execute_node_get_kind_name, "garrow_execute_node_get_kind_name", LIBS);
+  gidLink(garrow_execute_node_get_output_schema, "garrow_execute_node_get_output_schema", LIBS);
 
   // ExecuteNodeOptions
-  link(garrow_execute_node_options_get_type, "garrow_execute_node_options_get_type");
+  gidLink(garrow_execute_node_options_get_type, "garrow_execute_node_options_get_type", LIBS);
 
   // ExecutePlan
-  link(garrow_execute_plan_get_type, "garrow_execute_plan_get_type");
-  link(garrow_execute_plan_new, "garrow_execute_plan_new");
-  link(garrow_execute_plan_build_aggregate_node, "garrow_execute_plan_build_aggregate_node");
-  link(garrow_execute_plan_build_filter_node, "garrow_execute_plan_build_filter_node");
-  link(garrow_execute_plan_build_hash_join_node, "garrow_execute_plan_build_hash_join_node");
-  link(garrow_execute_plan_build_node, "garrow_execute_plan_build_node");
-  link(garrow_execute_plan_build_project_node, "garrow_execute_plan_build_project_node");
-  link(garrow_execute_plan_build_sink_node, "garrow_execute_plan_build_sink_node");
-  link(garrow_execute_plan_build_source_node, "garrow_execute_plan_build_source_node");
-  link(garrow_execute_plan_get_nodes, "garrow_execute_plan_get_nodes");
-  link(garrow_execute_plan_start, "garrow_execute_plan_start");
-  link(garrow_execute_plan_stop, "garrow_execute_plan_stop");
-  link(garrow_execute_plan_validate, "garrow_execute_plan_validate");
-  link(garrow_execute_plan_wait, "garrow_execute_plan_wait");
+  gidLink(garrow_execute_plan_get_type, "garrow_execute_plan_get_type", LIBS);
+  gidLink(garrow_execute_plan_new, "garrow_execute_plan_new", LIBS);
+  gidLink(garrow_execute_plan_build_aggregate_node, "garrow_execute_plan_build_aggregate_node", LIBS);
+  gidLink(garrow_execute_plan_build_filter_node, "garrow_execute_plan_build_filter_node", LIBS);
+  gidLink(garrow_execute_plan_build_hash_join_node, "garrow_execute_plan_build_hash_join_node", LIBS);
+  gidLink(garrow_execute_plan_build_node, "garrow_execute_plan_build_node", LIBS);
+  gidLink(garrow_execute_plan_build_project_node, "garrow_execute_plan_build_project_node", LIBS);
+  gidLink(garrow_execute_plan_build_sink_node, "garrow_execute_plan_build_sink_node", LIBS);
+  gidLink(garrow_execute_plan_build_source_node, "garrow_execute_plan_build_source_node", LIBS);
+  gidLink(garrow_execute_plan_get_nodes, "garrow_execute_plan_get_nodes", LIBS);
+  gidLink(garrow_execute_plan_start, "garrow_execute_plan_start", LIBS);
+  gidLink(garrow_execute_plan_stop, "garrow_execute_plan_stop", LIBS);
+  gidLink(garrow_execute_plan_validate, "garrow_execute_plan_validate", LIBS);
+  gidLink(garrow_execute_plan_wait, "garrow_execute_plan_wait", LIBS);
 
   // Expression
-  link(garrow_expression_get_type, "garrow_expression_get_type");
-  link(garrow_expression_equal, "garrow_expression_equal");
-  link(garrow_expression_to_string, "garrow_expression_to_string");
+  gidLink(garrow_expression_get_type, "garrow_expression_get_type", LIBS);
+  gidLink(garrow_expression_equal, "garrow_expression_equal", LIBS);
+  gidLink(garrow_expression_to_string, "garrow_expression_to_string", LIBS);
 
   // ExtensionArray
-  link(garrow_extension_array_get_type, "garrow_extension_array_get_type");
-  link(garrow_extension_array_get_storage, "garrow_extension_array_get_storage");
+  gidLink(garrow_extension_array_get_type, "garrow_extension_array_get_type", LIBS);
+  gidLink(garrow_extension_array_get_storage, "garrow_extension_array_get_storage", LIBS);
 
   // ExtensionDataType
-  link(garrow_extension_data_type_get_type, "garrow_extension_data_type_get_type");
-  link(garrow_extension_data_type_get_extension_name, "garrow_extension_data_type_get_extension_name");
-  link(garrow_extension_data_type_wrap_array, "garrow_extension_data_type_wrap_array");
-  link(garrow_extension_data_type_wrap_chunked_array, "garrow_extension_data_type_wrap_chunked_array");
+  gidLink(garrow_extension_data_type_get_type, "garrow_extension_data_type_get_type", LIBS);
+  gidLink(garrow_extension_data_type_get_extension_name, "garrow_extension_data_type_get_extension_name", LIBS);
+  gidLink(garrow_extension_data_type_wrap_array, "garrow_extension_data_type_wrap_array", LIBS);
+  gidLink(garrow_extension_data_type_wrap_chunked_array, "garrow_extension_data_type_wrap_chunked_array", LIBS);
 
   // ExtensionDataTypeRegistry
-  link(garrow_extension_data_type_registry_get_type, "garrow_extension_data_type_registry_get_type");
-  link(garrow_extension_data_type_registry_default, "garrow_extension_data_type_registry_default");
-  link(garrow_extension_data_type_registry_lookup, "garrow_extension_data_type_registry_lookup");
-  link(garrow_extension_data_type_registry_register, "garrow_extension_data_type_registry_register");
-  link(garrow_extension_data_type_registry_unregister, "garrow_extension_data_type_registry_unregister");
+  gidLink(garrow_extension_data_type_registry_get_type, "garrow_extension_data_type_registry_get_type", LIBS);
+  gidLink(garrow_extension_data_type_registry_default, "garrow_extension_data_type_registry_default", LIBS);
+  gidLink(garrow_extension_data_type_registry_lookup, "garrow_extension_data_type_registry_lookup", LIBS);
+  gidLink(garrow_extension_data_type_registry_register, "garrow_extension_data_type_registry_register", LIBS);
+  gidLink(garrow_extension_data_type_registry_unregister, "garrow_extension_data_type_registry_unregister", LIBS);
 
   // ExtensionScalar
-  link(garrow_extension_scalar_get_type, "garrow_extension_scalar_get_type");
+  gidLink(garrow_extension_scalar_get_type, "garrow_extension_scalar_get_type", LIBS);
 
   // FeatherFileReader
-  link(garrow_feather_file_reader_get_type, "garrow_feather_file_reader_get_type");
-  link(garrow_feather_file_reader_new, "garrow_feather_file_reader_new");
-  link(garrow_feather_file_reader_get_version, "garrow_feather_file_reader_get_version");
-  link(garrow_feather_file_reader_read, "garrow_feather_file_reader_read");
-  link(garrow_feather_file_reader_read_indices, "garrow_feather_file_reader_read_indices");
-  link(garrow_feather_file_reader_read_names, "garrow_feather_file_reader_read_names");
+  gidLink(garrow_feather_file_reader_get_type, "garrow_feather_file_reader_get_type", LIBS);
+  gidLink(garrow_feather_file_reader_new, "garrow_feather_file_reader_new", LIBS);
+  gidLink(garrow_feather_file_reader_get_version, "garrow_feather_file_reader_get_version", LIBS);
+  gidLink(garrow_feather_file_reader_read, "garrow_feather_file_reader_read", LIBS);
+  gidLink(garrow_feather_file_reader_read_indices, "garrow_feather_file_reader_read_indices", LIBS);
+  gidLink(garrow_feather_file_reader_read_names, "garrow_feather_file_reader_read_names", LIBS);
 
   // FeatherWriteProperties
-  link(garrow_feather_write_properties_get_type, "garrow_feather_write_properties_get_type");
-  link(garrow_feather_write_properties_new, "garrow_feather_write_properties_new");
+  gidLink(garrow_feather_write_properties_get_type, "garrow_feather_write_properties_get_type", LIBS);
+  gidLink(garrow_feather_write_properties_new, "garrow_feather_write_properties_new", LIBS);
 
   // Field
-  link(garrow_field_get_type, "garrow_field_get_type");
-  link(garrow_field_new, "garrow_field_new");
-  link(garrow_field_new_full, "garrow_field_new_full");
-  link(garrow_field_import, "garrow_field_import");
-  link(garrow_field_equal, "garrow_field_equal");
-  link(garrow_field_export, "garrow_field_export");
-  link(garrow_field_get_data_type, "garrow_field_get_data_type");
-  link(garrow_field_get_metadata, "garrow_field_get_metadata");
-  link(garrow_field_get_name, "garrow_field_get_name");
-  link(garrow_field_has_metadata, "garrow_field_has_metadata");
-  link(garrow_field_is_nullable, "garrow_field_is_nullable");
-  link(garrow_field_remove_metadata, "garrow_field_remove_metadata");
-  link(garrow_field_to_string, "garrow_field_to_string");
-  link(garrow_field_to_string_metadata, "garrow_field_to_string_metadata");
-  link(garrow_field_with_merged_metadata, "garrow_field_with_merged_metadata");
-  link(garrow_field_with_metadata, "garrow_field_with_metadata");
+  gidLink(garrow_field_get_type, "garrow_field_get_type", LIBS);
+  gidLink(garrow_field_new, "garrow_field_new", LIBS);
+  gidLink(garrow_field_new_full, "garrow_field_new_full", LIBS);
+  gidLink(garrow_field_import, "garrow_field_import", LIBS);
+  gidLink(garrow_field_equal, "garrow_field_equal", LIBS);
+  gidLink(garrow_field_export, "garrow_field_export", LIBS);
+  gidLink(garrow_field_get_data_type, "garrow_field_get_data_type", LIBS);
+  gidLink(garrow_field_get_metadata, "garrow_field_get_metadata", LIBS);
+  gidLink(garrow_field_get_name, "garrow_field_get_name", LIBS);
+  gidLink(garrow_field_has_metadata, "garrow_field_has_metadata", LIBS);
+  gidLink(garrow_field_is_nullable, "garrow_field_is_nullable", LIBS);
+  gidLink(garrow_field_remove_metadata, "garrow_field_remove_metadata", LIBS);
+  gidLink(garrow_field_to_string, "garrow_field_to_string", LIBS);
+  gidLink(garrow_field_to_string_metadata, "garrow_field_to_string_metadata", LIBS);
+  gidLink(garrow_field_with_merged_metadata, "garrow_field_with_merged_metadata", LIBS);
+  gidLink(garrow_field_with_metadata, "garrow_field_with_metadata", LIBS);
 
   // FieldExpression
-  link(garrow_field_expression_get_type, "garrow_field_expression_get_type");
-  link(garrow_field_expression_new, "garrow_field_expression_new");
+  gidLink(garrow_field_expression_get_type, "garrow_field_expression_get_type", LIBS);
+  gidLink(garrow_field_expression_new, "garrow_field_expression_new", LIBS);
 
   // File
-  link(garrow_file_get_type, "garrow_file_get_type");
-  link(garrow_file_close, "garrow_file_close");
-  link(garrow_file_get_mode, "garrow_file_get_mode");
-  link(garrow_file_is_closed, "garrow_file_is_closed");
-  link(garrow_file_tell, "garrow_file_tell");
+  gidLink(garrow_file_get_type, "garrow_file_get_type", LIBS);
+  gidLink(garrow_file_close, "garrow_file_close", LIBS);
+  gidLink(garrow_file_get_mode, "garrow_file_get_mode", LIBS);
+  gidLink(garrow_file_is_closed, "garrow_file_is_closed", LIBS);
+  gidLink(garrow_file_tell, "garrow_file_tell", LIBS);
 
   // FileInfo
-  link(garrow_file_info_get_type, "garrow_file_info_get_type");
-  link(garrow_file_info_new, "garrow_file_info_new");
-  link(garrow_file_info_equal, "garrow_file_info_equal");
-  link(garrow_file_info_is_dir, "garrow_file_info_is_dir");
-  link(garrow_file_info_is_file, "garrow_file_info_is_file");
-  link(garrow_file_info_to_string, "garrow_file_info_to_string");
+  gidLink(garrow_file_info_get_type, "garrow_file_info_get_type", LIBS);
+  gidLink(garrow_file_info_new, "garrow_file_info_new", LIBS);
+  gidLink(garrow_file_info_equal, "garrow_file_info_equal", LIBS);
+  gidLink(garrow_file_info_is_dir, "garrow_file_info_is_dir", LIBS);
+  gidLink(garrow_file_info_is_file, "garrow_file_info_is_file", LIBS);
+  gidLink(garrow_file_info_to_string, "garrow_file_info_to_string", LIBS);
 
   // FileInputStream
-  link(garrow_file_input_stream_get_type, "garrow_file_input_stream_get_type");
-  link(garrow_file_input_stream_new, "garrow_file_input_stream_new");
-  link(garrow_file_input_stream_new_file_descriptor, "garrow_file_input_stream_new_file_descriptor");
-  link(garrow_file_input_stream_get_file_descriptor, "garrow_file_input_stream_get_file_descriptor");
+  gidLink(garrow_file_input_stream_get_type, "garrow_file_input_stream_get_type", LIBS);
+  gidLink(garrow_file_input_stream_new, "garrow_file_input_stream_new", LIBS);
+  gidLink(garrow_file_input_stream_new_file_descriptor, "garrow_file_input_stream_new_file_descriptor", LIBS);
+  gidLink(garrow_file_input_stream_get_file_descriptor, "garrow_file_input_stream_get_file_descriptor", LIBS);
 
   // FileOutputStream
-  link(garrow_file_output_stream_get_type, "garrow_file_output_stream_get_type");
-  link(garrow_file_output_stream_new, "garrow_file_output_stream_new");
+  gidLink(garrow_file_output_stream_get_type, "garrow_file_output_stream_get_type", LIBS);
+  gidLink(garrow_file_output_stream_new, "garrow_file_output_stream_new", LIBS);
 
   // FileSelector
-  link(garrow_file_selector_get_type, "garrow_file_selector_get_type");
+  gidLink(garrow_file_selector_get_type, "garrow_file_selector_get_type", LIBS);
 
   // FileSystem
-  link(garrow_file_system_get_type, "garrow_file_system_get_type");
-  link(garrow_file_system_create, "garrow_file_system_create");
-  link(garrow_file_system_copy_file, "garrow_file_system_copy_file");
-  link(garrow_file_system_create_dir, "garrow_file_system_create_dir");
-  link(garrow_file_system_delete_dir, "garrow_file_system_delete_dir");
-  link(garrow_file_system_delete_dir_contents, "garrow_file_system_delete_dir_contents");
-  link(garrow_file_system_delete_file, "garrow_file_system_delete_file");
-  link(garrow_file_system_delete_files, "garrow_file_system_delete_files");
-  link(garrow_file_system_get_file_info, "garrow_file_system_get_file_info");
-  link(garrow_file_system_get_file_infos_paths, "garrow_file_system_get_file_infos_paths");
-  link(garrow_file_system_get_file_infos_selector, "garrow_file_system_get_file_infos_selector");
-  link(garrow_file_system_get_type_name, "garrow_file_system_get_type_name");
-  link(garrow_file_system_move, "garrow_file_system_move");
-  link(garrow_file_system_open_append_stream, "garrow_file_system_open_append_stream");
-  link(garrow_file_system_open_input_file, "garrow_file_system_open_input_file");
-  link(garrow_file_system_open_input_stream, "garrow_file_system_open_input_stream");
-  link(garrow_file_system_open_output_stream, "garrow_file_system_open_output_stream");
+  gidLink(garrow_file_system_get_type, "garrow_file_system_get_type", LIBS);
+  gidLink(garrow_file_system_create, "garrow_file_system_create", LIBS);
+  gidLink(garrow_file_system_copy_file, "garrow_file_system_copy_file", LIBS);
+  gidLink(garrow_file_system_create_dir, "garrow_file_system_create_dir", LIBS);
+  gidLink(garrow_file_system_delete_dir, "garrow_file_system_delete_dir", LIBS);
+  gidLink(garrow_file_system_delete_dir_contents, "garrow_file_system_delete_dir_contents", LIBS);
+  gidLink(garrow_file_system_delete_file, "garrow_file_system_delete_file", LIBS);
+  gidLink(garrow_file_system_delete_files, "garrow_file_system_delete_files", LIBS);
+  gidLink(garrow_file_system_get_file_info, "garrow_file_system_get_file_info", LIBS);
+  gidLink(garrow_file_system_get_file_infos_paths, "garrow_file_system_get_file_infos_paths", LIBS);
+  gidLink(garrow_file_system_get_file_infos_selector, "garrow_file_system_get_file_infos_selector", LIBS);
+  gidLink(garrow_file_system_get_type_name, "garrow_file_system_get_type_name", LIBS);
+  gidLink(garrow_file_system_move, "garrow_file_system_move", LIBS);
+  gidLink(garrow_file_system_open_append_stream, "garrow_file_system_open_append_stream", LIBS);
+  gidLink(garrow_file_system_open_input_file, "garrow_file_system_open_input_file", LIBS);
+  gidLink(garrow_file_system_open_input_stream, "garrow_file_system_open_input_stream", LIBS);
+  gidLink(garrow_file_system_open_output_stream, "garrow_file_system_open_output_stream", LIBS);
 
   // FilterNodeOptions
-  link(garrow_filter_node_options_get_type, "garrow_filter_node_options_get_type");
-  link(garrow_filter_node_options_new, "garrow_filter_node_options_new");
+  gidLink(garrow_filter_node_options_get_type, "garrow_filter_node_options_get_type", LIBS);
+  gidLink(garrow_filter_node_options_new, "garrow_filter_node_options_new", LIBS);
 
   // FilterOptions
-  link(garrow_filter_options_get_type, "garrow_filter_options_get_type");
-  link(garrow_filter_options_new, "garrow_filter_options_new");
+  gidLink(garrow_filter_options_get_type, "garrow_filter_options_get_type", LIBS);
+  gidLink(garrow_filter_options_new, "garrow_filter_options_new", LIBS);
 
   // FixedSizeBinaryArray
-  link(garrow_fixed_size_binary_array_get_type, "garrow_fixed_size_binary_array_get_type");
-  link(garrow_fixed_size_binary_array_new, "garrow_fixed_size_binary_array_new");
-  link(garrow_fixed_size_binary_array_get_byte_width, "garrow_fixed_size_binary_array_get_byte_width");
-  link(garrow_fixed_size_binary_array_get_value, "garrow_fixed_size_binary_array_get_value");
-  link(garrow_fixed_size_binary_array_get_values_bytes, "garrow_fixed_size_binary_array_get_values_bytes");
+  gidLink(garrow_fixed_size_binary_array_get_type, "garrow_fixed_size_binary_array_get_type", LIBS);
+  gidLink(garrow_fixed_size_binary_array_new, "garrow_fixed_size_binary_array_new", LIBS);
+  gidLink(garrow_fixed_size_binary_array_get_byte_width, "garrow_fixed_size_binary_array_get_byte_width", LIBS);
+  gidLink(garrow_fixed_size_binary_array_get_value, "garrow_fixed_size_binary_array_get_value", LIBS);
+  gidLink(garrow_fixed_size_binary_array_get_values_bytes, "garrow_fixed_size_binary_array_get_values_bytes", LIBS);
 
   // FixedSizeBinaryArrayBuilder
-  link(garrow_fixed_size_binary_array_builder_get_type, "garrow_fixed_size_binary_array_builder_get_type");
-  link(garrow_fixed_size_binary_array_builder_new, "garrow_fixed_size_binary_array_builder_new");
-  link(garrow_fixed_size_binary_array_builder_append_value, "garrow_fixed_size_binary_array_builder_append_value");
-  link(garrow_fixed_size_binary_array_builder_append_value_bytes, "garrow_fixed_size_binary_array_builder_append_value_bytes");
-  link(garrow_fixed_size_binary_array_builder_append_values, "garrow_fixed_size_binary_array_builder_append_values");
-  link(garrow_fixed_size_binary_array_builder_append_values_packed, "garrow_fixed_size_binary_array_builder_append_values_packed");
+  gidLink(garrow_fixed_size_binary_array_builder_get_type, "garrow_fixed_size_binary_array_builder_get_type", LIBS);
+  gidLink(garrow_fixed_size_binary_array_builder_new, "garrow_fixed_size_binary_array_builder_new", LIBS);
+  gidLink(garrow_fixed_size_binary_array_builder_append_value, "garrow_fixed_size_binary_array_builder_append_value", LIBS);
+  gidLink(garrow_fixed_size_binary_array_builder_append_value_bytes, "garrow_fixed_size_binary_array_builder_append_value_bytes", LIBS);
+  gidLink(garrow_fixed_size_binary_array_builder_append_values, "garrow_fixed_size_binary_array_builder_append_values", LIBS);
+  gidLink(garrow_fixed_size_binary_array_builder_append_values_packed, "garrow_fixed_size_binary_array_builder_append_values_packed", LIBS);
 
   // FixedSizeBinaryDataType
-  link(garrow_fixed_size_binary_data_type_get_type, "garrow_fixed_size_binary_data_type_get_type");
-  link(garrow_fixed_size_binary_data_type_new, "garrow_fixed_size_binary_data_type_new");
-  link(garrow_fixed_size_binary_data_type_get_byte_width, "garrow_fixed_size_binary_data_type_get_byte_width");
+  gidLink(garrow_fixed_size_binary_data_type_get_type, "garrow_fixed_size_binary_data_type_get_type", LIBS);
+  gidLink(garrow_fixed_size_binary_data_type_new, "garrow_fixed_size_binary_data_type_new", LIBS);
+  gidLink(garrow_fixed_size_binary_data_type_get_byte_width, "garrow_fixed_size_binary_data_type_get_byte_width", LIBS);
 
   // FixedSizeBinaryScalar
-  link(garrow_fixed_size_binary_scalar_get_type, "garrow_fixed_size_binary_scalar_get_type");
-  link(garrow_fixed_size_binary_scalar_new, "garrow_fixed_size_binary_scalar_new");
+  gidLink(garrow_fixed_size_binary_scalar_get_type, "garrow_fixed_size_binary_scalar_get_type", LIBS);
+  gidLink(garrow_fixed_size_binary_scalar_new, "garrow_fixed_size_binary_scalar_new", LIBS);
 
   // FixedWidthDataType
-  link(garrow_fixed_width_data_type_get_type, "garrow_fixed_width_data_type_get_type");
-  link(garrow_fixed_width_data_type_get_bit_width, "garrow_fixed_width_data_type_get_bit_width");
+  gidLink(garrow_fixed_width_data_type_get_type, "garrow_fixed_width_data_type_get_type", LIBS);
+  gidLink(garrow_fixed_width_data_type_get_bit_width, "garrow_fixed_width_data_type_get_bit_width", LIBS);
 
   // FloatArray
-  link(garrow_float_array_get_type, "garrow_float_array_get_type");
-  link(garrow_float_array_new, "garrow_float_array_new");
-  link(garrow_float_array_get_value, "garrow_float_array_get_value");
-  link(garrow_float_array_get_values, "garrow_float_array_get_values");
-  link(garrow_float_array_sum, "garrow_float_array_sum");
+  gidLink(garrow_float_array_get_type, "garrow_float_array_get_type", LIBS);
+  gidLink(garrow_float_array_new, "garrow_float_array_new", LIBS);
+  gidLink(garrow_float_array_get_value, "garrow_float_array_get_value", LIBS);
+  gidLink(garrow_float_array_get_values, "garrow_float_array_get_values", LIBS);
+  gidLink(garrow_float_array_sum, "garrow_float_array_sum", LIBS);
 
   // FloatArrayBuilder
-  link(garrow_float_array_builder_get_type, "garrow_float_array_builder_get_type");
-  link(garrow_float_array_builder_new, "garrow_float_array_builder_new");
-  link(garrow_float_array_builder_append, "garrow_float_array_builder_append");
-  link(garrow_float_array_builder_append_null, "garrow_float_array_builder_append_null");
-  link(garrow_float_array_builder_append_nulls, "garrow_float_array_builder_append_nulls");
-  link(garrow_float_array_builder_append_value, "garrow_float_array_builder_append_value");
-  link(garrow_float_array_builder_append_values, "garrow_float_array_builder_append_values");
+  gidLink(garrow_float_array_builder_get_type, "garrow_float_array_builder_get_type", LIBS);
+  gidLink(garrow_float_array_builder_new, "garrow_float_array_builder_new", LIBS);
+  gidLink(garrow_float_array_builder_append, "garrow_float_array_builder_append", LIBS);
+  gidLink(garrow_float_array_builder_append_null, "garrow_float_array_builder_append_null", LIBS);
+  gidLink(garrow_float_array_builder_append_nulls, "garrow_float_array_builder_append_nulls", LIBS);
+  gidLink(garrow_float_array_builder_append_value, "garrow_float_array_builder_append_value", LIBS);
+  gidLink(garrow_float_array_builder_append_values, "garrow_float_array_builder_append_values", LIBS);
 
   // FloatDataType
-  link(garrow_float_data_type_get_type, "garrow_float_data_type_get_type");
-  link(garrow_float_data_type_new, "garrow_float_data_type_new");
+  gidLink(garrow_float_data_type_get_type, "garrow_float_data_type_get_type", LIBS);
+  gidLink(garrow_float_data_type_new, "garrow_float_data_type_new", LIBS);
 
   // FloatScalar
-  link(garrow_float_scalar_get_type, "garrow_float_scalar_get_type");
-  link(garrow_float_scalar_new, "garrow_float_scalar_new");
-  link(garrow_float_scalar_get_value, "garrow_float_scalar_get_value");
+  gidLink(garrow_float_scalar_get_type, "garrow_float_scalar_get_type", LIBS);
+  gidLink(garrow_float_scalar_new, "garrow_float_scalar_new", LIBS);
+  gidLink(garrow_float_scalar_get_value, "garrow_float_scalar_get_value", LIBS);
 
   // FloatingPointDataType
-  link(garrow_floating_point_data_type_get_type, "garrow_floating_point_data_type_get_type");
+  gidLink(garrow_floating_point_data_type_get_type, "garrow_floating_point_data_type_get_type", LIBS);
 
   // Function
-  link(garrow_function_get_type, "garrow_function_get_type");
-  link(garrow_function_all, "garrow_function_all");
-  link(garrow_function_find, "garrow_function_find");
-  link(garrow_function_equal, "garrow_function_equal");
-  link(garrow_function_execute, "garrow_function_execute");
-  link(garrow_function_get_default_options, "garrow_function_get_default_options");
-  link(garrow_function_get_doc, "garrow_function_get_doc");
-  link(garrow_function_get_name, "garrow_function_get_name");
-  link(garrow_function_get_options_type, "garrow_function_get_options_type");
-  link(garrow_function_to_string, "garrow_function_to_string");
+  gidLink(garrow_function_get_type, "garrow_function_get_type", LIBS);
+  gidLink(garrow_function_all, "garrow_function_all", LIBS);
+  gidLink(garrow_function_find, "garrow_function_find", LIBS);
+  gidLink(garrow_function_equal, "garrow_function_equal", LIBS);
+  gidLink(garrow_function_execute, "garrow_function_execute", LIBS);
+  gidLink(garrow_function_get_default_options, "garrow_function_get_default_options", LIBS);
+  gidLink(garrow_function_get_doc, "garrow_function_get_doc", LIBS);
+  gidLink(garrow_function_get_name, "garrow_function_get_name", LIBS);
+  gidLink(garrow_function_get_options_type, "garrow_function_get_options_type", LIBS);
+  gidLink(garrow_function_to_string, "garrow_function_to_string", LIBS);
 
   // FunctionDoc
-  link(garrow_function_doc_get_type, "garrow_function_doc_get_type");
-  link(garrow_function_doc_get_arg_names, "garrow_function_doc_get_arg_names");
-  link(garrow_function_doc_get_description, "garrow_function_doc_get_description");
-  link(garrow_function_doc_get_options_class_name, "garrow_function_doc_get_options_class_name");
-  link(garrow_function_doc_get_summary, "garrow_function_doc_get_summary");
+  gidLink(garrow_function_doc_get_type, "garrow_function_doc_get_type", LIBS);
+  gidLink(garrow_function_doc_get_arg_names, "garrow_function_doc_get_arg_names", LIBS);
+  gidLink(garrow_function_doc_get_description, "garrow_function_doc_get_description", LIBS);
+  gidLink(garrow_function_doc_get_options_class_name, "garrow_function_doc_get_options_class_name", LIBS);
+  gidLink(garrow_function_doc_get_summary, "garrow_function_doc_get_summary", LIBS);
 
   // FunctionOptions
-  link(garrow_function_options_get_type, "garrow_function_options_get_type");
-  link(garrow_function_options_equal, "garrow_function_options_equal");
-  link(garrow_function_options_to_string, "garrow_function_options_to_string");
+  gidLink(garrow_function_options_get_type, "garrow_function_options_get_type", LIBS);
+  gidLink(garrow_function_options_equal, "garrow_function_options_equal", LIBS);
+  gidLink(garrow_function_options_to_string, "garrow_function_options_to_string", LIBS);
 
   // GCSFileSystem
-  link(garrow_gcs_file_system_get_type, "garrow_gcs_file_system_get_type");
+  gidLink(garrow_gcs_file_system_get_type, "garrow_gcs_file_system_get_type", LIBS);
 
   // GIOInputStream
-  link(garrow_gio_input_stream_get_type, "garrow_gio_input_stream_get_type");
-  link(garrow_gio_input_stream_new, "garrow_gio_input_stream_new");
-  link(garrow_gio_input_stream_get_raw, "garrow_gio_input_stream_get_raw");
+  gidLink(garrow_gio_input_stream_get_type, "garrow_gio_input_stream_get_type", LIBS);
+  gidLink(garrow_gio_input_stream_new, "garrow_gio_input_stream_new", LIBS);
+  gidLink(garrow_gio_input_stream_get_raw, "garrow_gio_input_stream_get_raw", LIBS);
 
   // GIOOutputStream
-  link(garrow_gio_output_stream_get_type, "garrow_gio_output_stream_get_type");
-  link(garrow_gio_output_stream_new, "garrow_gio_output_stream_new");
-  link(garrow_gio_output_stream_get_raw, "garrow_gio_output_stream_get_raw");
+  gidLink(garrow_gio_output_stream_get_type, "garrow_gio_output_stream_get_type", LIBS);
+  gidLink(garrow_gio_output_stream_new, "garrow_gio_output_stream_new", LIBS);
+  gidLink(garrow_gio_output_stream_get_raw, "garrow_gio_output_stream_get_raw", LIBS);
 
   // Global
-  link(garrow_s3_finalize, "garrow_s3_finalize");
-  link(garrow_s3_initialize, "garrow_s3_initialize");
-  link(garrow_s3_is_enabled, "garrow_s3_is_enabled");
+  gidLink(garrow_s3_finalize, "garrow_s3_finalize", LIBS);
+  gidLink(garrow_s3_initialize, "garrow_s3_initialize", LIBS);
+  gidLink(garrow_s3_is_enabled, "garrow_s3_is_enabled", LIBS);
 
   // HDFSFileSystem
-  link(garrow_hdfs_file_system_get_type, "garrow_hdfs_file_system_get_type");
+  gidLink(garrow_hdfs_file_system_get_type, "garrow_hdfs_file_system_get_type", LIBS);
 
   // HalfFloatArray
-  link(garrow_half_float_array_get_type, "garrow_half_float_array_get_type");
-  link(garrow_half_float_array_new, "garrow_half_float_array_new");
-  link(garrow_half_float_array_get_value, "garrow_half_float_array_get_value");
-  link(garrow_half_float_array_get_values, "garrow_half_float_array_get_values");
+  gidLink(garrow_half_float_array_get_type, "garrow_half_float_array_get_type", LIBS);
+  gidLink(garrow_half_float_array_new, "garrow_half_float_array_new", LIBS);
+  gidLink(garrow_half_float_array_get_value, "garrow_half_float_array_get_value", LIBS);
+  gidLink(garrow_half_float_array_get_values, "garrow_half_float_array_get_values", LIBS);
 
   // HalfFloatArrayBuilder
-  link(garrow_half_float_array_builder_get_type, "garrow_half_float_array_builder_get_type");
-  link(garrow_half_float_array_builder_new, "garrow_half_float_array_builder_new");
-  link(garrow_half_float_array_builder_append_value, "garrow_half_float_array_builder_append_value");
-  link(garrow_half_float_array_builder_append_values, "garrow_half_float_array_builder_append_values");
+  gidLink(garrow_half_float_array_builder_get_type, "garrow_half_float_array_builder_get_type", LIBS);
+  gidLink(garrow_half_float_array_builder_new, "garrow_half_float_array_builder_new", LIBS);
+  gidLink(garrow_half_float_array_builder_append_value, "garrow_half_float_array_builder_append_value", LIBS);
+  gidLink(garrow_half_float_array_builder_append_values, "garrow_half_float_array_builder_append_values", LIBS);
 
   // HalfFloatDataType
-  link(garrow_half_float_data_type_get_type, "garrow_half_float_data_type_get_type");
-  link(garrow_half_float_data_type_new, "garrow_half_float_data_type_new");
+  gidLink(garrow_half_float_data_type_get_type, "garrow_half_float_data_type_get_type", LIBS);
+  gidLink(garrow_half_float_data_type_new, "garrow_half_float_data_type_new", LIBS);
 
   // HalfFloatScalar
-  link(garrow_half_float_scalar_get_type, "garrow_half_float_scalar_get_type");
-  link(garrow_half_float_scalar_new, "garrow_half_float_scalar_new");
-  link(garrow_half_float_scalar_get_value, "garrow_half_float_scalar_get_value");
+  gidLink(garrow_half_float_scalar_get_type, "garrow_half_float_scalar_get_type", LIBS);
+  gidLink(garrow_half_float_scalar_new, "garrow_half_float_scalar_new", LIBS);
+  gidLink(garrow_half_float_scalar_get_value, "garrow_half_float_scalar_get_value", LIBS);
 
   // HashJoinNodeOptions
-  link(garrow_hash_join_node_options_get_type, "garrow_hash_join_node_options_get_type");
-  link(garrow_hash_join_node_options_new, "garrow_hash_join_node_options_new");
-  link(garrow_hash_join_node_options_set_left_outputs, "garrow_hash_join_node_options_set_left_outputs");
-  link(garrow_hash_join_node_options_set_right_outputs, "garrow_hash_join_node_options_set_right_outputs");
+  gidLink(garrow_hash_join_node_options_get_type, "garrow_hash_join_node_options_get_type", LIBS);
+  gidLink(garrow_hash_join_node_options_new, "garrow_hash_join_node_options_new", LIBS);
+  gidLink(garrow_hash_join_node_options_set_left_outputs, "garrow_hash_join_node_options_set_left_outputs", LIBS);
+  gidLink(garrow_hash_join_node_options_set_right_outputs, "garrow_hash_join_node_options_set_right_outputs", LIBS);
 
   // ISO8601TimestampParser
-  link(garrow_iso8601_timestamp_parser_get_type, "garrow_iso8601_timestamp_parser_get_type");
-  link(garrow_iso8601_timestamp_parser_new, "garrow_iso8601_timestamp_parser_new");
+  gidLink(garrow_iso8601_timestamp_parser_get_type, "garrow_iso8601_timestamp_parser_get_type", LIBS);
+  gidLink(garrow_iso8601_timestamp_parser_new, "garrow_iso8601_timestamp_parser_new", LIBS);
 
   // IndexOptions
-  link(garrow_index_options_get_type, "garrow_index_options_get_type");
-  link(garrow_index_options_new, "garrow_index_options_new");
+  gidLink(garrow_index_options_get_type, "garrow_index_options_get_type", LIBS);
+  gidLink(garrow_index_options_new, "garrow_index_options_new", LIBS);
 
   // InputStream
-  link(garrow_input_stream_get_type, "garrow_input_stream_get_type");
-  link(garrow_input_stream_advance, "garrow_input_stream_advance");
-  link(garrow_input_stream_align, "garrow_input_stream_align");
-  link(garrow_input_stream_read_record_batch, "garrow_input_stream_read_record_batch");
-  link(garrow_input_stream_read_tensor, "garrow_input_stream_read_tensor");
+  gidLink(garrow_input_stream_get_type, "garrow_input_stream_get_type", LIBS);
+  gidLink(garrow_input_stream_advance, "garrow_input_stream_advance", LIBS);
+  gidLink(garrow_input_stream_align, "garrow_input_stream_align", LIBS);
+  gidLink(garrow_input_stream_read_record_batch, "garrow_input_stream_read_record_batch", LIBS);
+  gidLink(garrow_input_stream_read_tensor, "garrow_input_stream_read_tensor", LIBS);
 
   // Int16Array
-  link(garrow_int16_array_get_type, "garrow_int16_array_get_type");
-  link(garrow_int16_array_new, "garrow_int16_array_new");
-  link(garrow_int16_array_get_value, "garrow_int16_array_get_value");
-  link(garrow_int16_array_get_values, "garrow_int16_array_get_values");
-  link(garrow_int16_array_sum, "garrow_int16_array_sum");
+  gidLink(garrow_int16_array_get_type, "garrow_int16_array_get_type", LIBS);
+  gidLink(garrow_int16_array_new, "garrow_int16_array_new", LIBS);
+  gidLink(garrow_int16_array_get_value, "garrow_int16_array_get_value", LIBS);
+  gidLink(garrow_int16_array_get_values, "garrow_int16_array_get_values", LIBS);
+  gidLink(garrow_int16_array_sum, "garrow_int16_array_sum", LIBS);
 
   // Int16ArrayBuilder
-  link(garrow_int16_array_builder_get_type, "garrow_int16_array_builder_get_type");
-  link(garrow_int16_array_builder_new, "garrow_int16_array_builder_new");
-  link(garrow_int16_array_builder_append, "garrow_int16_array_builder_append");
-  link(garrow_int16_array_builder_append_null, "garrow_int16_array_builder_append_null");
-  link(garrow_int16_array_builder_append_nulls, "garrow_int16_array_builder_append_nulls");
-  link(garrow_int16_array_builder_append_value, "garrow_int16_array_builder_append_value");
-  link(garrow_int16_array_builder_append_values, "garrow_int16_array_builder_append_values");
+  gidLink(garrow_int16_array_builder_get_type, "garrow_int16_array_builder_get_type", LIBS);
+  gidLink(garrow_int16_array_builder_new, "garrow_int16_array_builder_new", LIBS);
+  gidLink(garrow_int16_array_builder_append, "garrow_int16_array_builder_append", LIBS);
+  gidLink(garrow_int16_array_builder_append_null, "garrow_int16_array_builder_append_null", LIBS);
+  gidLink(garrow_int16_array_builder_append_nulls, "garrow_int16_array_builder_append_nulls", LIBS);
+  gidLink(garrow_int16_array_builder_append_value, "garrow_int16_array_builder_append_value", LIBS);
+  gidLink(garrow_int16_array_builder_append_values, "garrow_int16_array_builder_append_values", LIBS);
 
   // Int16DataType
-  link(garrow_int16_data_type_get_type, "garrow_int16_data_type_get_type");
-  link(garrow_int16_data_type_new, "garrow_int16_data_type_new");
+  gidLink(garrow_int16_data_type_get_type, "garrow_int16_data_type_get_type", LIBS);
+  gidLink(garrow_int16_data_type_new, "garrow_int16_data_type_new", LIBS);
 
   // Int16Scalar
-  link(garrow_int16_scalar_get_type, "garrow_int16_scalar_get_type");
-  link(garrow_int16_scalar_new, "garrow_int16_scalar_new");
-  link(garrow_int16_scalar_get_value, "garrow_int16_scalar_get_value");
+  gidLink(garrow_int16_scalar_get_type, "garrow_int16_scalar_get_type", LIBS);
+  gidLink(garrow_int16_scalar_new, "garrow_int16_scalar_new", LIBS);
+  gidLink(garrow_int16_scalar_get_value, "garrow_int16_scalar_get_value", LIBS);
 
   // Int32Array
-  link(garrow_int32_array_get_type, "garrow_int32_array_get_type");
-  link(garrow_int32_array_new, "garrow_int32_array_new");
-  link(garrow_int32_array_get_value, "garrow_int32_array_get_value");
-  link(garrow_int32_array_get_values, "garrow_int32_array_get_values");
-  link(garrow_int32_array_sum, "garrow_int32_array_sum");
+  gidLink(garrow_int32_array_get_type, "garrow_int32_array_get_type", LIBS);
+  gidLink(garrow_int32_array_new, "garrow_int32_array_new", LIBS);
+  gidLink(garrow_int32_array_get_value, "garrow_int32_array_get_value", LIBS);
+  gidLink(garrow_int32_array_get_values, "garrow_int32_array_get_values", LIBS);
+  gidLink(garrow_int32_array_sum, "garrow_int32_array_sum", LIBS);
 
   // Int32ArrayBuilder
-  link(garrow_int32_array_builder_get_type, "garrow_int32_array_builder_get_type");
-  link(garrow_int32_array_builder_new, "garrow_int32_array_builder_new");
-  link(garrow_int32_array_builder_append, "garrow_int32_array_builder_append");
-  link(garrow_int32_array_builder_append_null, "garrow_int32_array_builder_append_null");
-  link(garrow_int32_array_builder_append_nulls, "garrow_int32_array_builder_append_nulls");
-  link(garrow_int32_array_builder_append_value, "garrow_int32_array_builder_append_value");
-  link(garrow_int32_array_builder_append_values, "garrow_int32_array_builder_append_values");
+  gidLink(garrow_int32_array_builder_get_type, "garrow_int32_array_builder_get_type", LIBS);
+  gidLink(garrow_int32_array_builder_new, "garrow_int32_array_builder_new", LIBS);
+  gidLink(garrow_int32_array_builder_append, "garrow_int32_array_builder_append", LIBS);
+  gidLink(garrow_int32_array_builder_append_null, "garrow_int32_array_builder_append_null", LIBS);
+  gidLink(garrow_int32_array_builder_append_nulls, "garrow_int32_array_builder_append_nulls", LIBS);
+  gidLink(garrow_int32_array_builder_append_value, "garrow_int32_array_builder_append_value", LIBS);
+  gidLink(garrow_int32_array_builder_append_values, "garrow_int32_array_builder_append_values", LIBS);
 
   // Int32DataType
-  link(garrow_int32_data_type_get_type, "garrow_int32_data_type_get_type");
-  link(garrow_int32_data_type_new, "garrow_int32_data_type_new");
+  gidLink(garrow_int32_data_type_get_type, "garrow_int32_data_type_get_type", LIBS);
+  gidLink(garrow_int32_data_type_new, "garrow_int32_data_type_new", LIBS);
 
   // Int32Scalar
-  link(garrow_int32_scalar_get_type, "garrow_int32_scalar_get_type");
-  link(garrow_int32_scalar_new, "garrow_int32_scalar_new");
-  link(garrow_int32_scalar_get_value, "garrow_int32_scalar_get_value");
+  gidLink(garrow_int32_scalar_get_type, "garrow_int32_scalar_get_type", LIBS);
+  gidLink(garrow_int32_scalar_new, "garrow_int32_scalar_new", LIBS);
+  gidLink(garrow_int32_scalar_get_value, "garrow_int32_scalar_get_value", LIBS);
 
   // Int64Array
-  link(garrow_int64_array_get_type, "garrow_int64_array_get_type");
-  link(garrow_int64_array_new, "garrow_int64_array_new");
-  link(garrow_int64_array_get_value, "garrow_int64_array_get_value");
-  link(garrow_int64_array_get_values, "garrow_int64_array_get_values");
-  link(garrow_int64_array_sum, "garrow_int64_array_sum");
+  gidLink(garrow_int64_array_get_type, "garrow_int64_array_get_type", LIBS);
+  gidLink(garrow_int64_array_new, "garrow_int64_array_new", LIBS);
+  gidLink(garrow_int64_array_get_value, "garrow_int64_array_get_value", LIBS);
+  gidLink(garrow_int64_array_get_values, "garrow_int64_array_get_values", LIBS);
+  gidLink(garrow_int64_array_sum, "garrow_int64_array_sum", LIBS);
 
   // Int64ArrayBuilder
-  link(garrow_int64_array_builder_get_type, "garrow_int64_array_builder_get_type");
-  link(garrow_int64_array_builder_new, "garrow_int64_array_builder_new");
-  link(garrow_int64_array_builder_append, "garrow_int64_array_builder_append");
-  link(garrow_int64_array_builder_append_null, "garrow_int64_array_builder_append_null");
-  link(garrow_int64_array_builder_append_nulls, "garrow_int64_array_builder_append_nulls");
-  link(garrow_int64_array_builder_append_value, "garrow_int64_array_builder_append_value");
-  link(garrow_int64_array_builder_append_values, "garrow_int64_array_builder_append_values");
+  gidLink(garrow_int64_array_builder_get_type, "garrow_int64_array_builder_get_type", LIBS);
+  gidLink(garrow_int64_array_builder_new, "garrow_int64_array_builder_new", LIBS);
+  gidLink(garrow_int64_array_builder_append, "garrow_int64_array_builder_append", LIBS);
+  gidLink(garrow_int64_array_builder_append_null, "garrow_int64_array_builder_append_null", LIBS);
+  gidLink(garrow_int64_array_builder_append_nulls, "garrow_int64_array_builder_append_nulls", LIBS);
+  gidLink(garrow_int64_array_builder_append_value, "garrow_int64_array_builder_append_value", LIBS);
+  gidLink(garrow_int64_array_builder_append_values, "garrow_int64_array_builder_append_values", LIBS);
 
   // Int64DataType
-  link(garrow_int64_data_type_get_type, "garrow_int64_data_type_get_type");
-  link(garrow_int64_data_type_new, "garrow_int64_data_type_new");
+  gidLink(garrow_int64_data_type_get_type, "garrow_int64_data_type_get_type", LIBS);
+  gidLink(garrow_int64_data_type_new, "garrow_int64_data_type_new", LIBS);
 
   // Int64Scalar
-  link(garrow_int64_scalar_get_type, "garrow_int64_scalar_get_type");
-  link(garrow_int64_scalar_new, "garrow_int64_scalar_new");
-  link(garrow_int64_scalar_get_value, "garrow_int64_scalar_get_value");
+  gidLink(garrow_int64_scalar_get_type, "garrow_int64_scalar_get_type", LIBS);
+  gidLink(garrow_int64_scalar_new, "garrow_int64_scalar_new", LIBS);
+  gidLink(garrow_int64_scalar_get_value, "garrow_int64_scalar_get_value", LIBS);
 
   // Int8Array
-  link(garrow_int8_array_get_type, "garrow_int8_array_get_type");
-  link(garrow_int8_array_new, "garrow_int8_array_new");
-  link(garrow_int8_array_get_value, "garrow_int8_array_get_value");
-  link(garrow_int8_array_get_values, "garrow_int8_array_get_values");
-  link(garrow_int8_array_sum, "garrow_int8_array_sum");
+  gidLink(garrow_int8_array_get_type, "garrow_int8_array_get_type", LIBS);
+  gidLink(garrow_int8_array_new, "garrow_int8_array_new", LIBS);
+  gidLink(garrow_int8_array_get_value, "garrow_int8_array_get_value", LIBS);
+  gidLink(garrow_int8_array_get_values, "garrow_int8_array_get_values", LIBS);
+  gidLink(garrow_int8_array_sum, "garrow_int8_array_sum", LIBS);
 
   // Int8ArrayBuilder
-  link(garrow_int8_array_builder_get_type, "garrow_int8_array_builder_get_type");
-  link(garrow_int8_array_builder_new, "garrow_int8_array_builder_new");
-  link(garrow_int8_array_builder_append, "garrow_int8_array_builder_append");
-  link(garrow_int8_array_builder_append_null, "garrow_int8_array_builder_append_null");
-  link(garrow_int8_array_builder_append_nulls, "garrow_int8_array_builder_append_nulls");
-  link(garrow_int8_array_builder_append_value, "garrow_int8_array_builder_append_value");
-  link(garrow_int8_array_builder_append_values, "garrow_int8_array_builder_append_values");
+  gidLink(garrow_int8_array_builder_get_type, "garrow_int8_array_builder_get_type", LIBS);
+  gidLink(garrow_int8_array_builder_new, "garrow_int8_array_builder_new", LIBS);
+  gidLink(garrow_int8_array_builder_append, "garrow_int8_array_builder_append", LIBS);
+  gidLink(garrow_int8_array_builder_append_null, "garrow_int8_array_builder_append_null", LIBS);
+  gidLink(garrow_int8_array_builder_append_nulls, "garrow_int8_array_builder_append_nulls", LIBS);
+  gidLink(garrow_int8_array_builder_append_value, "garrow_int8_array_builder_append_value", LIBS);
+  gidLink(garrow_int8_array_builder_append_values, "garrow_int8_array_builder_append_values", LIBS);
 
   // Int8DataType
-  link(garrow_int8_data_type_get_type, "garrow_int8_data_type_get_type");
-  link(garrow_int8_data_type_new, "garrow_int8_data_type_new");
+  gidLink(garrow_int8_data_type_get_type, "garrow_int8_data_type_get_type", LIBS);
+  gidLink(garrow_int8_data_type_new, "garrow_int8_data_type_new", LIBS);
 
   // Int8Scalar
-  link(garrow_int8_scalar_get_type, "garrow_int8_scalar_get_type");
-  link(garrow_int8_scalar_new, "garrow_int8_scalar_new");
-  link(garrow_int8_scalar_get_value, "garrow_int8_scalar_get_value");
+  gidLink(garrow_int8_scalar_get_type, "garrow_int8_scalar_get_type", LIBS);
+  gidLink(garrow_int8_scalar_new, "garrow_int8_scalar_new", LIBS);
+  gidLink(garrow_int8_scalar_get_value, "garrow_int8_scalar_get_value", LIBS);
 
   // IntArrayBuilder
-  link(garrow_int_array_builder_get_type, "garrow_int_array_builder_get_type");
-  link(garrow_int_array_builder_new, "garrow_int_array_builder_new");
-  link(garrow_int_array_builder_append, "garrow_int_array_builder_append");
-  link(garrow_int_array_builder_append_null, "garrow_int_array_builder_append_null");
-  link(garrow_int_array_builder_append_nulls, "garrow_int_array_builder_append_nulls");
-  link(garrow_int_array_builder_append_value, "garrow_int_array_builder_append_value");
-  link(garrow_int_array_builder_append_values, "garrow_int_array_builder_append_values");
+  gidLink(garrow_int_array_builder_get_type, "garrow_int_array_builder_get_type", LIBS);
+  gidLink(garrow_int_array_builder_new, "garrow_int_array_builder_new", LIBS);
+  gidLink(garrow_int_array_builder_append, "garrow_int_array_builder_append", LIBS);
+  gidLink(garrow_int_array_builder_append_null, "garrow_int_array_builder_append_null", LIBS);
+  gidLink(garrow_int_array_builder_append_nulls, "garrow_int_array_builder_append_nulls", LIBS);
+  gidLink(garrow_int_array_builder_append_value, "garrow_int_array_builder_append_value", LIBS);
+  gidLink(garrow_int_array_builder_append_values, "garrow_int_array_builder_append_values", LIBS);
 
   // IntegerDataType
-  link(garrow_integer_data_type_get_type, "garrow_integer_data_type_get_type");
-  link(garrow_integer_data_type_is_signed, "garrow_integer_data_type_is_signed");
+  gidLink(garrow_integer_data_type_get_type, "garrow_integer_data_type_get_type", LIBS);
+  gidLink(garrow_integer_data_type_is_signed, "garrow_integer_data_type_is_signed", LIBS);
 
   // IntervalDataType
-  link(garrow_interval_data_type_get_type, "garrow_interval_data_type_get_type");
-  link(garrow_interval_data_type_get_interval_type, "garrow_interval_data_type_get_interval_type");
+  gidLink(garrow_interval_data_type_get_type, "garrow_interval_data_type_get_type", LIBS);
+  gidLink(garrow_interval_data_type_get_interval_type, "garrow_interval_data_type_get_interval_type", LIBS);
 
   // JSONReadOptions
-  link(garrow_json_read_options_get_type, "garrow_json_read_options_get_type");
-  link(garrow_json_read_options_new, "garrow_json_read_options_new");
+  gidLink(garrow_json_read_options_get_type, "garrow_json_read_options_get_type", LIBS);
+  gidLink(garrow_json_read_options_new, "garrow_json_read_options_new", LIBS);
 
   // JSONReader
-  link(garrow_json_reader_get_type, "garrow_json_reader_get_type");
-  link(garrow_json_reader_new, "garrow_json_reader_new");
-  link(garrow_json_reader_read, "garrow_json_reader_read");
+  gidLink(garrow_json_reader_get_type, "garrow_json_reader_get_type", LIBS);
+  gidLink(garrow_json_reader_new, "garrow_json_reader_new", LIBS);
+  gidLink(garrow_json_reader_read, "garrow_json_reader_read", LIBS);
 
   // LargeBinaryArray
-  link(garrow_large_binary_array_get_type, "garrow_large_binary_array_get_type");
-  link(garrow_large_binary_array_new, "garrow_large_binary_array_new");
-  link(garrow_large_binary_array_get_buffer, "garrow_large_binary_array_get_buffer");
-  link(garrow_large_binary_array_get_data_buffer, "garrow_large_binary_array_get_data_buffer");
-  link(garrow_large_binary_array_get_offsets_buffer, "garrow_large_binary_array_get_offsets_buffer");
-  link(garrow_large_binary_array_get_value, "garrow_large_binary_array_get_value");
+  gidLink(garrow_large_binary_array_get_type, "garrow_large_binary_array_get_type", LIBS);
+  gidLink(garrow_large_binary_array_new, "garrow_large_binary_array_new", LIBS);
+  gidLink(garrow_large_binary_array_get_buffer, "garrow_large_binary_array_get_buffer", LIBS);
+  gidLink(garrow_large_binary_array_get_data_buffer, "garrow_large_binary_array_get_data_buffer", LIBS);
+  gidLink(garrow_large_binary_array_get_offsets_buffer, "garrow_large_binary_array_get_offsets_buffer", LIBS);
+  gidLink(garrow_large_binary_array_get_value, "garrow_large_binary_array_get_value", LIBS);
 
   // LargeBinaryArrayBuilder
-  link(garrow_large_binary_array_builder_get_type, "garrow_large_binary_array_builder_get_type");
-  link(garrow_large_binary_array_builder_new, "garrow_large_binary_array_builder_new");
-  link(garrow_large_binary_array_builder_append_null, "garrow_large_binary_array_builder_append_null");
-  link(garrow_large_binary_array_builder_append_nulls, "garrow_large_binary_array_builder_append_nulls");
-  link(garrow_large_binary_array_builder_append_value, "garrow_large_binary_array_builder_append_value");
-  link(garrow_large_binary_array_builder_append_value_bytes, "garrow_large_binary_array_builder_append_value_bytes");
-  link(garrow_large_binary_array_builder_append_values, "garrow_large_binary_array_builder_append_values");
+  gidLink(garrow_large_binary_array_builder_get_type, "garrow_large_binary_array_builder_get_type", LIBS);
+  gidLink(garrow_large_binary_array_builder_new, "garrow_large_binary_array_builder_new", LIBS);
+  gidLink(garrow_large_binary_array_builder_append_null, "garrow_large_binary_array_builder_append_null", LIBS);
+  gidLink(garrow_large_binary_array_builder_append_nulls, "garrow_large_binary_array_builder_append_nulls", LIBS);
+  gidLink(garrow_large_binary_array_builder_append_value, "garrow_large_binary_array_builder_append_value", LIBS);
+  gidLink(garrow_large_binary_array_builder_append_value_bytes, "garrow_large_binary_array_builder_append_value_bytes", LIBS);
+  gidLink(garrow_large_binary_array_builder_append_values, "garrow_large_binary_array_builder_append_values", LIBS);
 
   // LargeBinaryDataType
-  link(garrow_large_binary_data_type_get_type, "garrow_large_binary_data_type_get_type");
-  link(garrow_large_binary_data_type_new, "garrow_large_binary_data_type_new");
+  gidLink(garrow_large_binary_data_type_get_type, "garrow_large_binary_data_type_get_type", LIBS);
+  gidLink(garrow_large_binary_data_type_new, "garrow_large_binary_data_type_new", LIBS);
 
   // LargeBinaryScalar
-  link(garrow_large_binary_scalar_get_type, "garrow_large_binary_scalar_get_type");
-  link(garrow_large_binary_scalar_new, "garrow_large_binary_scalar_new");
+  gidLink(garrow_large_binary_scalar_get_type, "garrow_large_binary_scalar_get_type", LIBS);
+  gidLink(garrow_large_binary_scalar_new, "garrow_large_binary_scalar_new", LIBS);
 
   // LargeListArray
-  link(garrow_large_list_array_get_type, "garrow_large_list_array_get_type");
-  link(garrow_large_list_array_new, "garrow_large_list_array_new");
-  link(garrow_large_list_array_get_value, "garrow_large_list_array_get_value");
-  link(garrow_large_list_array_get_value_length, "garrow_large_list_array_get_value_length");
-  link(garrow_large_list_array_get_value_offset, "garrow_large_list_array_get_value_offset");
-  link(garrow_large_list_array_get_value_offsets, "garrow_large_list_array_get_value_offsets");
-  link(garrow_large_list_array_get_value_type, "garrow_large_list_array_get_value_type");
-  link(garrow_large_list_array_get_values, "garrow_large_list_array_get_values");
+  gidLink(garrow_large_list_array_get_type, "garrow_large_list_array_get_type", LIBS);
+  gidLink(garrow_large_list_array_new, "garrow_large_list_array_new", LIBS);
+  gidLink(garrow_large_list_array_get_value, "garrow_large_list_array_get_value", LIBS);
+  gidLink(garrow_large_list_array_get_value_length, "garrow_large_list_array_get_value_length", LIBS);
+  gidLink(garrow_large_list_array_get_value_offset, "garrow_large_list_array_get_value_offset", LIBS);
+  gidLink(garrow_large_list_array_get_value_offsets, "garrow_large_list_array_get_value_offsets", LIBS);
+  gidLink(garrow_large_list_array_get_value_type, "garrow_large_list_array_get_value_type", LIBS);
+  gidLink(garrow_large_list_array_get_values, "garrow_large_list_array_get_values", LIBS);
 
   // LargeListArrayBuilder
-  link(garrow_large_list_array_builder_get_type, "garrow_large_list_array_builder_get_type");
-  link(garrow_large_list_array_builder_new, "garrow_large_list_array_builder_new");
-  link(garrow_large_list_array_builder_append_null, "garrow_large_list_array_builder_append_null");
-  link(garrow_large_list_array_builder_append_value, "garrow_large_list_array_builder_append_value");
-  link(garrow_large_list_array_builder_get_value_builder, "garrow_large_list_array_builder_get_value_builder");
+  gidLink(garrow_large_list_array_builder_get_type, "garrow_large_list_array_builder_get_type", LIBS);
+  gidLink(garrow_large_list_array_builder_new, "garrow_large_list_array_builder_new", LIBS);
+  gidLink(garrow_large_list_array_builder_append_null, "garrow_large_list_array_builder_append_null", LIBS);
+  gidLink(garrow_large_list_array_builder_append_value, "garrow_large_list_array_builder_append_value", LIBS);
+  gidLink(garrow_large_list_array_builder_get_value_builder, "garrow_large_list_array_builder_get_value_builder", LIBS);
 
   // LargeListDataType
-  link(garrow_large_list_data_type_get_type, "garrow_large_list_data_type_get_type");
-  link(garrow_large_list_data_type_new, "garrow_large_list_data_type_new");
-  link(garrow_large_list_data_type_get_field, "garrow_large_list_data_type_get_field");
+  gidLink(garrow_large_list_data_type_get_type, "garrow_large_list_data_type_get_type", LIBS);
+  gidLink(garrow_large_list_data_type_new, "garrow_large_list_data_type_new", LIBS);
+  gidLink(garrow_large_list_data_type_get_field, "garrow_large_list_data_type_get_field", LIBS);
 
   // LargeListScalar
-  link(garrow_large_list_scalar_get_type, "garrow_large_list_scalar_get_type");
-  link(garrow_large_list_scalar_new, "garrow_large_list_scalar_new");
+  gidLink(garrow_large_list_scalar_get_type, "garrow_large_list_scalar_get_type", LIBS);
+  gidLink(garrow_large_list_scalar_new, "garrow_large_list_scalar_new", LIBS);
 
   // LargeStringArray
-  link(garrow_large_string_array_get_type, "garrow_large_string_array_get_type");
-  link(garrow_large_string_array_new, "garrow_large_string_array_new");
-  link(garrow_large_string_array_get_string, "garrow_large_string_array_get_string");
+  gidLink(garrow_large_string_array_get_type, "garrow_large_string_array_get_type", LIBS);
+  gidLink(garrow_large_string_array_new, "garrow_large_string_array_new", LIBS);
+  gidLink(garrow_large_string_array_get_string, "garrow_large_string_array_get_string", LIBS);
 
   // LargeStringArrayBuilder
-  link(garrow_large_string_array_builder_get_type, "garrow_large_string_array_builder_get_type");
-  link(garrow_large_string_array_builder_new, "garrow_large_string_array_builder_new");
-  link(garrow_large_string_array_builder_append_string, "garrow_large_string_array_builder_append_string");
-  link(garrow_large_string_array_builder_append_string_len, "garrow_large_string_array_builder_append_string_len");
-  link(garrow_large_string_array_builder_append_strings, "garrow_large_string_array_builder_append_strings");
+  gidLink(garrow_large_string_array_builder_get_type, "garrow_large_string_array_builder_get_type", LIBS);
+  gidLink(garrow_large_string_array_builder_new, "garrow_large_string_array_builder_new", LIBS);
+  gidLink(garrow_large_string_array_builder_append_string, "garrow_large_string_array_builder_append_string", LIBS);
+  gidLink(garrow_large_string_array_builder_append_string_len, "garrow_large_string_array_builder_append_string_len", LIBS);
+  gidLink(garrow_large_string_array_builder_append_strings, "garrow_large_string_array_builder_append_strings", LIBS);
 
   // LargeStringDataType
-  link(garrow_large_string_data_type_get_type, "garrow_large_string_data_type_get_type");
-  link(garrow_large_string_data_type_new, "garrow_large_string_data_type_new");
+  gidLink(garrow_large_string_data_type_get_type, "garrow_large_string_data_type_get_type", LIBS);
+  gidLink(garrow_large_string_data_type_new, "garrow_large_string_data_type_new", LIBS);
 
   // LargeStringScalar
-  link(garrow_large_string_scalar_get_type, "garrow_large_string_scalar_get_type");
-  link(garrow_large_string_scalar_new, "garrow_large_string_scalar_new");
+  gidLink(garrow_large_string_scalar_get_type, "garrow_large_string_scalar_get_type", LIBS);
+  gidLink(garrow_large_string_scalar_new, "garrow_large_string_scalar_new", LIBS);
 
   // ListArray
-  link(garrow_list_array_get_type, "garrow_list_array_get_type");
-  link(garrow_list_array_new, "garrow_list_array_new");
-  link(garrow_list_array_get_value, "garrow_list_array_get_value");
-  link(garrow_list_array_get_value_length, "garrow_list_array_get_value_length");
-  link(garrow_list_array_get_value_offset, "garrow_list_array_get_value_offset");
-  link(garrow_list_array_get_value_offsets, "garrow_list_array_get_value_offsets");
-  link(garrow_list_array_get_value_type, "garrow_list_array_get_value_type");
-  link(garrow_list_array_get_values, "garrow_list_array_get_values");
+  gidLink(garrow_list_array_get_type, "garrow_list_array_get_type", LIBS);
+  gidLink(garrow_list_array_new, "garrow_list_array_new", LIBS);
+  gidLink(garrow_list_array_get_value, "garrow_list_array_get_value", LIBS);
+  gidLink(garrow_list_array_get_value_length, "garrow_list_array_get_value_length", LIBS);
+  gidLink(garrow_list_array_get_value_offset, "garrow_list_array_get_value_offset", LIBS);
+  gidLink(garrow_list_array_get_value_offsets, "garrow_list_array_get_value_offsets", LIBS);
+  gidLink(garrow_list_array_get_value_type, "garrow_list_array_get_value_type", LIBS);
+  gidLink(garrow_list_array_get_values, "garrow_list_array_get_values", LIBS);
 
   // ListArrayBuilder
-  link(garrow_list_array_builder_get_type, "garrow_list_array_builder_get_type");
-  link(garrow_list_array_builder_new, "garrow_list_array_builder_new");
-  link(garrow_list_array_builder_append, "garrow_list_array_builder_append");
-  link(garrow_list_array_builder_append_null, "garrow_list_array_builder_append_null");
-  link(garrow_list_array_builder_append_value, "garrow_list_array_builder_append_value");
-  link(garrow_list_array_builder_get_value_builder, "garrow_list_array_builder_get_value_builder");
+  gidLink(garrow_list_array_builder_get_type, "garrow_list_array_builder_get_type", LIBS);
+  gidLink(garrow_list_array_builder_new, "garrow_list_array_builder_new", LIBS);
+  gidLink(garrow_list_array_builder_append, "garrow_list_array_builder_append", LIBS);
+  gidLink(garrow_list_array_builder_append_null, "garrow_list_array_builder_append_null", LIBS);
+  gidLink(garrow_list_array_builder_append_value, "garrow_list_array_builder_append_value", LIBS);
+  gidLink(garrow_list_array_builder_get_value_builder, "garrow_list_array_builder_get_value_builder", LIBS);
 
   // ListDataType
-  link(garrow_list_data_type_get_type, "garrow_list_data_type_get_type");
-  link(garrow_list_data_type_new, "garrow_list_data_type_new");
-  link(garrow_list_data_type_get_field, "garrow_list_data_type_get_field");
-  link(garrow_list_data_type_get_value_field, "garrow_list_data_type_get_value_field");
+  gidLink(garrow_list_data_type_get_type, "garrow_list_data_type_get_type", LIBS);
+  gidLink(garrow_list_data_type_new, "garrow_list_data_type_new", LIBS);
+  gidLink(garrow_list_data_type_get_field, "garrow_list_data_type_get_field", LIBS);
+  gidLink(garrow_list_data_type_get_value_field, "garrow_list_data_type_get_value_field", LIBS);
 
   // ListScalar
-  link(garrow_list_scalar_get_type, "garrow_list_scalar_get_type");
-  link(garrow_list_scalar_new, "garrow_list_scalar_new");
+  gidLink(garrow_list_scalar_get_type, "garrow_list_scalar_get_type", LIBS);
+  gidLink(garrow_list_scalar_new, "garrow_list_scalar_new", LIBS);
 
   // LiteralExpression
-  link(garrow_literal_expression_get_type, "garrow_literal_expression_get_type");
-  link(garrow_literal_expression_new, "garrow_literal_expression_new");
+  gidLink(garrow_literal_expression_get_type, "garrow_literal_expression_get_type", LIBS);
+  gidLink(garrow_literal_expression_new, "garrow_literal_expression_new", LIBS);
 
   // LocalFileSystem
-  link(garrow_local_file_system_get_type, "garrow_local_file_system_get_type");
-  link(garrow_local_file_system_new, "garrow_local_file_system_new");
+  gidLink(garrow_local_file_system_get_type, "garrow_local_file_system_get_type", LIBS);
+  gidLink(garrow_local_file_system_new, "garrow_local_file_system_new", LIBS);
 
   // LocalFileSystemOptions
-  link(garrow_local_file_system_options_get_type, "garrow_local_file_system_options_get_type");
-  link(garrow_local_file_system_options_new, "garrow_local_file_system_options_new");
+  gidLink(garrow_local_file_system_options_get_type, "garrow_local_file_system_options_get_type", LIBS);
+  gidLink(garrow_local_file_system_options_new, "garrow_local_file_system_options_new", LIBS);
 
   // MapArray
-  link(garrow_map_array_get_type, "garrow_map_array_get_type");
-  link(garrow_map_array_new, "garrow_map_array_new");
-  link(garrow_map_array_get_items, "garrow_map_array_get_items");
-  link(garrow_map_array_get_keys, "garrow_map_array_get_keys");
+  gidLink(garrow_map_array_get_type, "garrow_map_array_get_type", LIBS);
+  gidLink(garrow_map_array_new, "garrow_map_array_new", LIBS);
+  gidLink(garrow_map_array_get_items, "garrow_map_array_get_items", LIBS);
+  gidLink(garrow_map_array_get_keys, "garrow_map_array_get_keys", LIBS);
 
   // MapArrayBuilder
-  link(garrow_map_array_builder_get_type, "garrow_map_array_builder_get_type");
-  link(garrow_map_array_builder_new, "garrow_map_array_builder_new");
-  link(garrow_map_array_builder_append_null, "garrow_map_array_builder_append_null");
-  link(garrow_map_array_builder_append_nulls, "garrow_map_array_builder_append_nulls");
-  link(garrow_map_array_builder_append_value, "garrow_map_array_builder_append_value");
-  link(garrow_map_array_builder_append_values, "garrow_map_array_builder_append_values");
-  link(garrow_map_array_builder_get_item_builder, "garrow_map_array_builder_get_item_builder");
-  link(garrow_map_array_builder_get_key_builder, "garrow_map_array_builder_get_key_builder");
-  link(garrow_map_array_builder_get_value_builder, "garrow_map_array_builder_get_value_builder");
+  gidLink(garrow_map_array_builder_get_type, "garrow_map_array_builder_get_type", LIBS);
+  gidLink(garrow_map_array_builder_new, "garrow_map_array_builder_new", LIBS);
+  gidLink(garrow_map_array_builder_append_null, "garrow_map_array_builder_append_null", LIBS);
+  gidLink(garrow_map_array_builder_append_nulls, "garrow_map_array_builder_append_nulls", LIBS);
+  gidLink(garrow_map_array_builder_append_value, "garrow_map_array_builder_append_value", LIBS);
+  gidLink(garrow_map_array_builder_append_values, "garrow_map_array_builder_append_values", LIBS);
+  gidLink(garrow_map_array_builder_get_item_builder, "garrow_map_array_builder_get_item_builder", LIBS);
+  gidLink(garrow_map_array_builder_get_key_builder, "garrow_map_array_builder_get_key_builder", LIBS);
+  gidLink(garrow_map_array_builder_get_value_builder, "garrow_map_array_builder_get_value_builder", LIBS);
 
   // MapDataType
-  link(garrow_map_data_type_get_type, "garrow_map_data_type_get_type");
-  link(garrow_map_data_type_new, "garrow_map_data_type_new");
-  link(garrow_map_data_type_get_item_type, "garrow_map_data_type_get_item_type");
-  link(garrow_map_data_type_get_key_type, "garrow_map_data_type_get_key_type");
+  gidLink(garrow_map_data_type_get_type, "garrow_map_data_type_get_type", LIBS);
+  gidLink(garrow_map_data_type_new, "garrow_map_data_type_new", LIBS);
+  gidLink(garrow_map_data_type_get_item_type, "garrow_map_data_type_get_item_type", LIBS);
+  gidLink(garrow_map_data_type_get_key_type, "garrow_map_data_type_get_key_type", LIBS);
 
   // MapScalar
-  link(garrow_map_scalar_get_type, "garrow_map_scalar_get_type");
-  link(garrow_map_scalar_new, "garrow_map_scalar_new");
+  gidLink(garrow_map_scalar_get_type, "garrow_map_scalar_get_type", LIBS);
+  gidLink(garrow_map_scalar_new, "garrow_map_scalar_new", LIBS);
 
   // MatchSubstringOptions
-  link(garrow_match_substring_options_get_type, "garrow_match_substring_options_get_type");
-  link(garrow_match_substring_options_new, "garrow_match_substring_options_new");
+  gidLink(garrow_match_substring_options_get_type, "garrow_match_substring_options_get_type", LIBS);
+  gidLink(garrow_match_substring_options_new, "garrow_match_substring_options_new", LIBS);
 
   // MemoryMappedInputStream
-  link(garrow_memory_mapped_input_stream_get_type, "garrow_memory_mapped_input_stream_get_type");
-  link(garrow_memory_mapped_input_stream_new, "garrow_memory_mapped_input_stream_new");
+  gidLink(garrow_memory_mapped_input_stream_get_type, "garrow_memory_mapped_input_stream_get_type", LIBS);
+  gidLink(garrow_memory_mapped_input_stream_new, "garrow_memory_mapped_input_stream_new", LIBS);
 
   // MemoryPool
-  link(garrow_memory_pool_get_type, "garrow_memory_pool_get_type");
-  link(garrow_memory_pool_default, "garrow_memory_pool_default");
-  link(garrow_memory_pool_get_backend_name, "garrow_memory_pool_get_backend_name");
-  link(garrow_memory_pool_get_bytes_allocated, "garrow_memory_pool_get_bytes_allocated");
-  link(garrow_memory_pool_get_max_memory, "garrow_memory_pool_get_max_memory");
+  gidLink(garrow_memory_pool_get_type, "garrow_memory_pool_get_type", LIBS);
+  gidLink(garrow_memory_pool_default, "garrow_memory_pool_default", LIBS);
+  gidLink(garrow_memory_pool_get_backend_name, "garrow_memory_pool_get_backend_name", LIBS);
+  gidLink(garrow_memory_pool_get_bytes_allocated, "garrow_memory_pool_get_bytes_allocated", LIBS);
+  gidLink(garrow_memory_pool_get_max_memory, "garrow_memory_pool_get_max_memory", LIBS);
 
   // MockFileSystem
-  link(garrow_mock_file_system_get_type, "garrow_mock_file_system_get_type");
+  gidLink(garrow_mock_file_system_get_type, "garrow_mock_file_system_get_type", LIBS);
 
   // MonthDayNano
-  link(garrow_month_day_nano_get_type, "garrow_month_day_nano_get_type");
-  link(garrow_month_day_nano_new, "garrow_month_day_nano_new");
-  link(garrow_month_day_nano_equal, "garrow_month_day_nano_equal");
+  gidLink(garrow_month_day_nano_get_type, "garrow_month_day_nano_get_type", LIBS);
+  gidLink(garrow_month_day_nano_new, "garrow_month_day_nano_new", LIBS);
+  gidLink(garrow_month_day_nano_equal, "garrow_month_day_nano_equal", LIBS);
 
   // MonthDayNanoIntervalArray
-  link(garrow_month_day_nano_interval_array_get_type, "garrow_month_day_nano_interval_array_get_type");
-  link(garrow_month_day_nano_interval_array_new, "garrow_month_day_nano_interval_array_new");
-  link(garrow_month_day_nano_interval_array_get_value, "garrow_month_day_nano_interval_array_get_value");
-  link(garrow_month_day_nano_interval_array_get_values, "garrow_month_day_nano_interval_array_get_values");
+  gidLink(garrow_month_day_nano_interval_array_get_type, "garrow_month_day_nano_interval_array_get_type", LIBS);
+  gidLink(garrow_month_day_nano_interval_array_new, "garrow_month_day_nano_interval_array_new", LIBS);
+  gidLink(garrow_month_day_nano_interval_array_get_value, "garrow_month_day_nano_interval_array_get_value", LIBS);
+  gidLink(garrow_month_day_nano_interval_array_get_values, "garrow_month_day_nano_interval_array_get_values", LIBS);
 
   // MonthDayNanoIntervalArrayBuilder
-  link(garrow_month_day_nano_interval_array_builder_get_type, "garrow_month_day_nano_interval_array_builder_get_type");
-  link(garrow_month_day_nano_interval_array_builder_new, "garrow_month_day_nano_interval_array_builder_new");
-  link(garrow_month_day_nano_interval_array_builder_append_value, "garrow_month_day_nano_interval_array_builder_append_value");
-  link(garrow_month_day_nano_interval_array_builder_append_values, "garrow_month_day_nano_interval_array_builder_append_values");
+  gidLink(garrow_month_day_nano_interval_array_builder_get_type, "garrow_month_day_nano_interval_array_builder_get_type", LIBS);
+  gidLink(garrow_month_day_nano_interval_array_builder_new, "garrow_month_day_nano_interval_array_builder_new", LIBS);
+  gidLink(garrow_month_day_nano_interval_array_builder_append_value, "garrow_month_day_nano_interval_array_builder_append_value", LIBS);
+  gidLink(garrow_month_day_nano_interval_array_builder_append_values, "garrow_month_day_nano_interval_array_builder_append_values", LIBS);
 
   // MonthDayNanoIntervalDataType
-  link(garrow_month_day_nano_interval_data_type_get_type, "garrow_month_day_nano_interval_data_type_get_type");
-  link(garrow_month_day_nano_interval_data_type_new, "garrow_month_day_nano_interval_data_type_new");
+  gidLink(garrow_month_day_nano_interval_data_type_get_type, "garrow_month_day_nano_interval_data_type_get_type", LIBS);
+  gidLink(garrow_month_day_nano_interval_data_type_new, "garrow_month_day_nano_interval_data_type_new", LIBS);
 
   // MonthDayNanoIntervalScalar
-  link(garrow_month_day_nano_interval_scalar_get_type, "garrow_month_day_nano_interval_scalar_get_type");
-  link(garrow_month_day_nano_interval_scalar_new, "garrow_month_day_nano_interval_scalar_new");
-  link(garrow_month_day_nano_interval_scalar_get_value, "garrow_month_day_nano_interval_scalar_get_value");
+  gidLink(garrow_month_day_nano_interval_scalar_get_type, "garrow_month_day_nano_interval_scalar_get_type", LIBS);
+  gidLink(garrow_month_day_nano_interval_scalar_new, "garrow_month_day_nano_interval_scalar_new", LIBS);
+  gidLink(garrow_month_day_nano_interval_scalar_get_value, "garrow_month_day_nano_interval_scalar_get_value", LIBS);
 
   // MonthIntervalArray
-  link(garrow_month_interval_array_get_type, "garrow_month_interval_array_get_type");
-  link(garrow_month_interval_array_new, "garrow_month_interval_array_new");
-  link(garrow_month_interval_array_get_value, "garrow_month_interval_array_get_value");
-  link(garrow_month_interval_array_get_values, "garrow_month_interval_array_get_values");
+  gidLink(garrow_month_interval_array_get_type, "garrow_month_interval_array_get_type", LIBS);
+  gidLink(garrow_month_interval_array_new, "garrow_month_interval_array_new", LIBS);
+  gidLink(garrow_month_interval_array_get_value, "garrow_month_interval_array_get_value", LIBS);
+  gidLink(garrow_month_interval_array_get_values, "garrow_month_interval_array_get_values", LIBS);
 
   // MonthIntervalArrayBuilder
-  link(garrow_month_interval_array_builder_get_type, "garrow_month_interval_array_builder_get_type");
-  link(garrow_month_interval_array_builder_new, "garrow_month_interval_array_builder_new");
-  link(garrow_month_interval_array_builder_append_value, "garrow_month_interval_array_builder_append_value");
-  link(garrow_month_interval_array_builder_append_values, "garrow_month_interval_array_builder_append_values");
+  gidLink(garrow_month_interval_array_builder_get_type, "garrow_month_interval_array_builder_get_type", LIBS);
+  gidLink(garrow_month_interval_array_builder_new, "garrow_month_interval_array_builder_new", LIBS);
+  gidLink(garrow_month_interval_array_builder_append_value, "garrow_month_interval_array_builder_append_value", LIBS);
+  gidLink(garrow_month_interval_array_builder_append_values, "garrow_month_interval_array_builder_append_values", LIBS);
 
   // MonthIntervalDataType
-  link(garrow_month_interval_data_type_get_type, "garrow_month_interval_data_type_get_type");
-  link(garrow_month_interval_data_type_new, "garrow_month_interval_data_type_new");
+  gidLink(garrow_month_interval_data_type_get_type, "garrow_month_interval_data_type_get_type", LIBS);
+  gidLink(garrow_month_interval_data_type_new, "garrow_month_interval_data_type_new", LIBS);
 
   // MonthIntervalScalar
-  link(garrow_month_interval_scalar_get_type, "garrow_month_interval_scalar_get_type");
-  link(garrow_month_interval_scalar_new, "garrow_month_interval_scalar_new");
-  link(garrow_month_interval_scalar_get_value, "garrow_month_interval_scalar_get_value");
+  gidLink(garrow_month_interval_scalar_get_type, "garrow_month_interval_scalar_get_type", LIBS);
+  gidLink(garrow_month_interval_scalar_new, "garrow_month_interval_scalar_new", LIBS);
+  gidLink(garrow_month_interval_scalar_get_value, "garrow_month_interval_scalar_get_value", LIBS);
 
   // MutableBuffer
-  link(garrow_mutable_buffer_get_type, "garrow_mutable_buffer_get_type");
-  link(garrow_mutable_buffer_new, "garrow_mutable_buffer_new");
-  link(garrow_mutable_buffer_new_bytes, "garrow_mutable_buffer_new_bytes");
-  link(garrow_mutable_buffer_set_data, "garrow_mutable_buffer_set_data");
-  link(garrow_mutable_buffer_slice, "garrow_mutable_buffer_slice");
+  gidLink(garrow_mutable_buffer_get_type, "garrow_mutable_buffer_get_type", LIBS);
+  gidLink(garrow_mutable_buffer_new, "garrow_mutable_buffer_new", LIBS);
+  gidLink(garrow_mutable_buffer_new_bytes, "garrow_mutable_buffer_new_bytes", LIBS);
+  gidLink(garrow_mutable_buffer_set_data, "garrow_mutable_buffer_set_data", LIBS);
+  gidLink(garrow_mutable_buffer_slice, "garrow_mutable_buffer_slice", LIBS);
 
   // NullArray
-  link(garrow_null_array_get_type, "garrow_null_array_get_type");
-  link(garrow_null_array_new, "garrow_null_array_new");
+  gidLink(garrow_null_array_get_type, "garrow_null_array_get_type", LIBS);
+  gidLink(garrow_null_array_new, "garrow_null_array_new", LIBS);
 
   // NullArrayBuilder
-  link(garrow_null_array_builder_get_type, "garrow_null_array_builder_get_type");
-  link(garrow_null_array_builder_new, "garrow_null_array_builder_new");
-  link(garrow_null_array_builder_append_null, "garrow_null_array_builder_append_null");
-  link(garrow_null_array_builder_append_nulls, "garrow_null_array_builder_append_nulls");
+  gidLink(garrow_null_array_builder_get_type, "garrow_null_array_builder_get_type", LIBS);
+  gidLink(garrow_null_array_builder_new, "garrow_null_array_builder_new", LIBS);
+  gidLink(garrow_null_array_builder_append_null, "garrow_null_array_builder_append_null", LIBS);
+  gidLink(garrow_null_array_builder_append_nulls, "garrow_null_array_builder_append_nulls", LIBS);
 
   // NullDataType
-  link(garrow_null_data_type_get_type, "garrow_null_data_type_get_type");
-  link(garrow_null_data_type_new, "garrow_null_data_type_new");
+  gidLink(garrow_null_data_type_get_type, "garrow_null_data_type_get_type", LIBS);
+  gidLink(garrow_null_data_type_new, "garrow_null_data_type_new", LIBS);
 
   // NullScalar
-  link(garrow_null_scalar_get_type, "garrow_null_scalar_get_type");
-  link(garrow_null_scalar_new, "garrow_null_scalar_new");
+  gidLink(garrow_null_scalar_get_type, "garrow_null_scalar_get_type", LIBS);
+  gidLink(garrow_null_scalar_new, "garrow_null_scalar_new", LIBS);
 
   // NumericArray
-  link(garrow_numeric_array_get_type, "garrow_numeric_array_get_type");
-  link(garrow_numeric_array_mean, "garrow_numeric_array_mean");
+  gidLink(garrow_numeric_array_get_type, "garrow_numeric_array_get_type", LIBS);
+  gidLink(garrow_numeric_array_mean, "garrow_numeric_array_mean", LIBS);
 
   // NumericDataType
-  link(garrow_numeric_data_type_get_type, "garrow_numeric_data_type_get_type");
+  gidLink(garrow_numeric_data_type_get_type, "garrow_numeric_data_type_get_type", LIBS);
 
   // OutputStream
-  link(garrow_output_stream_get_type, "garrow_output_stream_get_type");
-  link(garrow_output_stream_align, "garrow_output_stream_align");
-  link(garrow_output_stream_write_record_batch, "garrow_output_stream_write_record_batch");
-  link(garrow_output_stream_write_tensor, "garrow_output_stream_write_tensor");
+  gidLink(garrow_output_stream_get_type, "garrow_output_stream_get_type", LIBS);
+  gidLink(garrow_output_stream_align, "garrow_output_stream_align", LIBS);
+  gidLink(garrow_output_stream_write_record_batch, "garrow_output_stream_write_record_batch", LIBS);
+  gidLink(garrow_output_stream_write_tensor, "garrow_output_stream_write_tensor", LIBS);
 
   // PrimitiveArray
-  link(garrow_primitive_array_get_type, "garrow_primitive_array_get_type");
-  link(garrow_primitive_array_get_buffer, "garrow_primitive_array_get_buffer");
-  link(garrow_primitive_array_get_data_buffer, "garrow_primitive_array_get_data_buffer");
+  gidLink(garrow_primitive_array_get_type, "garrow_primitive_array_get_type", LIBS);
+  gidLink(garrow_primitive_array_get_buffer, "garrow_primitive_array_get_buffer", LIBS);
+  gidLink(garrow_primitive_array_get_data_buffer, "garrow_primitive_array_get_data_buffer", LIBS);
 
   // ProjectNodeOptions
-  link(garrow_project_node_options_get_type, "garrow_project_node_options_get_type");
-  link(garrow_project_node_options_new, "garrow_project_node_options_new");
+  gidLink(garrow_project_node_options_get_type, "garrow_project_node_options_get_type", LIBS);
+  gidLink(garrow_project_node_options_new, "garrow_project_node_options_new", LIBS);
 
   // QuantileOptions
-  link(garrow_quantile_options_get_type, "garrow_quantile_options_get_type");
-  link(garrow_quantile_options_new, "garrow_quantile_options_new");
-  link(garrow_quantile_options_get_qs, "garrow_quantile_options_get_qs");
-  link(garrow_quantile_options_set_q, "garrow_quantile_options_set_q");
-  link(garrow_quantile_options_set_qs, "garrow_quantile_options_set_qs");
+  gidLink(garrow_quantile_options_get_type, "garrow_quantile_options_get_type", LIBS);
+  gidLink(garrow_quantile_options_new, "garrow_quantile_options_new", LIBS);
+  gidLink(garrow_quantile_options_get_qs, "garrow_quantile_options_get_qs", LIBS);
+  gidLink(garrow_quantile_options_set_q, "garrow_quantile_options_set_q", LIBS);
+  gidLink(garrow_quantile_options_set_qs, "garrow_quantile_options_set_qs", LIBS);
 
   // RankOptions
-  link(garrow_rank_options_get_type, "garrow_rank_options_get_type");
-  link(garrow_rank_options_new, "garrow_rank_options_new");
-  link(garrow_rank_options_add_sort_key, "garrow_rank_options_add_sort_key");
-  link(garrow_rank_options_equal, "garrow_rank_options_equal");
-  link(garrow_rank_options_get_sort_keys, "garrow_rank_options_get_sort_keys");
-  link(garrow_rank_options_set_sort_keys, "garrow_rank_options_set_sort_keys");
+  gidLink(garrow_rank_options_get_type, "garrow_rank_options_get_type", LIBS);
+  gidLink(garrow_rank_options_new, "garrow_rank_options_new", LIBS);
+  gidLink(garrow_rank_options_add_sort_key, "garrow_rank_options_add_sort_key", LIBS);
+  gidLink(garrow_rank_options_equal, "garrow_rank_options_equal", LIBS);
+  gidLink(garrow_rank_options_get_sort_keys, "garrow_rank_options_get_sort_keys", LIBS);
+  gidLink(garrow_rank_options_set_sort_keys, "garrow_rank_options_set_sort_keys", LIBS);
 
   // ReadOptions
-  link(garrow_read_options_get_type, "garrow_read_options_get_type");
-  link(garrow_read_options_new, "garrow_read_options_new");
-  link(garrow_read_options_get_included_fields, "garrow_read_options_get_included_fields");
-  link(garrow_read_options_set_included_fields, "garrow_read_options_set_included_fields");
+  gidLink(garrow_read_options_get_type, "garrow_read_options_get_type", LIBS);
+  gidLink(garrow_read_options_new, "garrow_read_options_new", LIBS);
+  gidLink(garrow_read_options_get_included_fields, "garrow_read_options_get_included_fields", LIBS);
+  gidLink(garrow_read_options_set_included_fields, "garrow_read_options_set_included_fields", LIBS);
 
   // Readable
-  link(garrow_readable_get_type, "garrow_readable_get_type");
-  link(garrow_readable_read, "garrow_readable_read");
-  link(garrow_readable_read_bytes, "garrow_readable_read_bytes");
+  gidLink(garrow_readable_get_type, "garrow_readable_get_type", LIBS);
+  gidLink(garrow_readable_read, "garrow_readable_read", LIBS);
+  gidLink(garrow_readable_read_bytes, "garrow_readable_read_bytes", LIBS);
 
   // RecordBatch
-  link(garrow_record_batch_get_type, "garrow_record_batch_get_type");
-  link(garrow_record_batch_new, "garrow_record_batch_new");
-  link(garrow_record_batch_import, "garrow_record_batch_import");
-  link(garrow_record_batch_add_column, "garrow_record_batch_add_column");
-  link(garrow_record_batch_equal, "garrow_record_batch_equal");
-  link(garrow_record_batch_equal_metadata, "garrow_record_batch_equal_metadata");
-  link(garrow_record_batch_export, "garrow_record_batch_export");
-  link(garrow_record_batch_filter, "garrow_record_batch_filter");
-  link(garrow_record_batch_get_column_data, "garrow_record_batch_get_column_data");
-  link(garrow_record_batch_get_column_name, "garrow_record_batch_get_column_name");
-  link(garrow_record_batch_get_n_columns, "garrow_record_batch_get_n_columns");
-  link(garrow_record_batch_get_n_rows, "garrow_record_batch_get_n_rows");
-  link(garrow_record_batch_get_schema, "garrow_record_batch_get_schema");
-  link(garrow_record_batch_remove_column, "garrow_record_batch_remove_column");
-  link(garrow_record_batch_serialize, "garrow_record_batch_serialize");
-  link(garrow_record_batch_slice, "garrow_record_batch_slice");
-  link(garrow_record_batch_sort_indices, "garrow_record_batch_sort_indices");
-  link(garrow_record_batch_take, "garrow_record_batch_take");
-  link(garrow_record_batch_to_string, "garrow_record_batch_to_string");
+  gidLink(garrow_record_batch_get_type, "garrow_record_batch_get_type", LIBS);
+  gidLink(garrow_record_batch_new, "garrow_record_batch_new", LIBS);
+  gidLink(garrow_record_batch_import, "garrow_record_batch_import", LIBS);
+  gidLink(garrow_record_batch_add_column, "garrow_record_batch_add_column", LIBS);
+  gidLink(garrow_record_batch_equal, "garrow_record_batch_equal", LIBS);
+  gidLink(garrow_record_batch_equal_metadata, "garrow_record_batch_equal_metadata", LIBS);
+  gidLink(garrow_record_batch_export, "garrow_record_batch_export", LIBS);
+  gidLink(garrow_record_batch_filter, "garrow_record_batch_filter", LIBS);
+  gidLink(garrow_record_batch_get_column_data, "garrow_record_batch_get_column_data", LIBS);
+  gidLink(garrow_record_batch_get_column_name, "garrow_record_batch_get_column_name", LIBS);
+  gidLink(garrow_record_batch_get_n_columns, "garrow_record_batch_get_n_columns", LIBS);
+  gidLink(garrow_record_batch_get_n_rows, "garrow_record_batch_get_n_rows", LIBS);
+  gidLink(garrow_record_batch_get_schema, "garrow_record_batch_get_schema", LIBS);
+  gidLink(garrow_record_batch_remove_column, "garrow_record_batch_remove_column", LIBS);
+  gidLink(garrow_record_batch_serialize, "garrow_record_batch_serialize", LIBS);
+  gidLink(garrow_record_batch_slice, "garrow_record_batch_slice", LIBS);
+  gidLink(garrow_record_batch_sort_indices, "garrow_record_batch_sort_indices", LIBS);
+  gidLink(garrow_record_batch_take, "garrow_record_batch_take", LIBS);
+  gidLink(garrow_record_batch_to_string, "garrow_record_batch_to_string", LIBS);
 
   // RecordBatchBuilder
-  link(garrow_record_batch_builder_get_type, "garrow_record_batch_builder_get_type");
-  link(garrow_record_batch_builder_new, "garrow_record_batch_builder_new");
-  link(garrow_record_batch_builder_flush, "garrow_record_batch_builder_flush");
-  link(garrow_record_batch_builder_get_column_builder, "garrow_record_batch_builder_get_column_builder");
-  link(garrow_record_batch_builder_get_field, "garrow_record_batch_builder_get_field");
-  link(garrow_record_batch_builder_get_initial_capacity, "garrow_record_batch_builder_get_initial_capacity");
-  link(garrow_record_batch_builder_get_n_columns, "garrow_record_batch_builder_get_n_columns");
-  link(garrow_record_batch_builder_get_n_fields, "garrow_record_batch_builder_get_n_fields");
-  link(garrow_record_batch_builder_get_schema, "garrow_record_batch_builder_get_schema");
-  link(garrow_record_batch_builder_set_initial_capacity, "garrow_record_batch_builder_set_initial_capacity");
+  gidLink(garrow_record_batch_builder_get_type, "garrow_record_batch_builder_get_type", LIBS);
+  gidLink(garrow_record_batch_builder_new, "garrow_record_batch_builder_new", LIBS);
+  gidLink(garrow_record_batch_builder_flush, "garrow_record_batch_builder_flush", LIBS);
+  gidLink(garrow_record_batch_builder_get_column_builder, "garrow_record_batch_builder_get_column_builder", LIBS);
+  gidLink(garrow_record_batch_builder_get_field, "garrow_record_batch_builder_get_field", LIBS);
+  gidLink(garrow_record_batch_builder_get_initial_capacity, "garrow_record_batch_builder_get_initial_capacity", LIBS);
+  gidLink(garrow_record_batch_builder_get_n_columns, "garrow_record_batch_builder_get_n_columns", LIBS);
+  gidLink(garrow_record_batch_builder_get_n_fields, "garrow_record_batch_builder_get_n_fields", LIBS);
+  gidLink(garrow_record_batch_builder_get_schema, "garrow_record_batch_builder_get_schema", LIBS);
+  gidLink(garrow_record_batch_builder_set_initial_capacity, "garrow_record_batch_builder_set_initial_capacity", LIBS);
 
   // RecordBatchDatum
-  link(garrow_record_batch_datum_get_type, "garrow_record_batch_datum_get_type");
-  link(garrow_record_batch_datum_new, "garrow_record_batch_datum_new");
+  gidLink(garrow_record_batch_datum_get_type, "garrow_record_batch_datum_get_type", LIBS);
+  gidLink(garrow_record_batch_datum_new, "garrow_record_batch_datum_new", LIBS);
 
   // RecordBatchFileReader
-  link(garrow_record_batch_file_reader_get_type, "garrow_record_batch_file_reader_get_type");
-  link(garrow_record_batch_file_reader_new, "garrow_record_batch_file_reader_new");
-  link(garrow_record_batch_file_reader_get_n_record_batches, "garrow_record_batch_file_reader_get_n_record_batches");
-  link(garrow_record_batch_file_reader_get_record_batch, "garrow_record_batch_file_reader_get_record_batch");
-  link(garrow_record_batch_file_reader_get_schema, "garrow_record_batch_file_reader_get_schema");
-  link(garrow_record_batch_file_reader_get_version, "garrow_record_batch_file_reader_get_version");
-  link(garrow_record_batch_file_reader_read_record_batch, "garrow_record_batch_file_reader_read_record_batch");
+  gidLink(garrow_record_batch_file_reader_get_type, "garrow_record_batch_file_reader_get_type", LIBS);
+  gidLink(garrow_record_batch_file_reader_new, "garrow_record_batch_file_reader_new", LIBS);
+  gidLink(garrow_record_batch_file_reader_get_n_record_batches, "garrow_record_batch_file_reader_get_n_record_batches", LIBS);
+  gidLink(garrow_record_batch_file_reader_get_record_batch, "garrow_record_batch_file_reader_get_record_batch", LIBS);
+  gidLink(garrow_record_batch_file_reader_get_schema, "garrow_record_batch_file_reader_get_schema", LIBS);
+  gidLink(garrow_record_batch_file_reader_get_version, "garrow_record_batch_file_reader_get_version", LIBS);
+  gidLink(garrow_record_batch_file_reader_read_record_batch, "garrow_record_batch_file_reader_read_record_batch", LIBS);
 
   // RecordBatchFileWriter
-  link(garrow_record_batch_file_writer_get_type, "garrow_record_batch_file_writer_get_type");
-  link(garrow_record_batch_file_writer_new, "garrow_record_batch_file_writer_new");
+  gidLink(garrow_record_batch_file_writer_get_type, "garrow_record_batch_file_writer_get_type", LIBS);
+  gidLink(garrow_record_batch_file_writer_new, "garrow_record_batch_file_writer_new", LIBS);
 
   // RecordBatchIterator
-  link(garrow_record_batch_iterator_get_type, "garrow_record_batch_iterator_get_type");
-  link(garrow_record_batch_iterator_new, "garrow_record_batch_iterator_new");
-  link(garrow_record_batch_iterator_equal, "garrow_record_batch_iterator_equal");
-  link(garrow_record_batch_iterator_next, "garrow_record_batch_iterator_next");
-  link(garrow_record_batch_iterator_to_list, "garrow_record_batch_iterator_to_list");
+  gidLink(garrow_record_batch_iterator_get_type, "garrow_record_batch_iterator_get_type", LIBS);
+  gidLink(garrow_record_batch_iterator_new, "garrow_record_batch_iterator_new", LIBS);
+  gidLink(garrow_record_batch_iterator_equal, "garrow_record_batch_iterator_equal", LIBS);
+  gidLink(garrow_record_batch_iterator_next, "garrow_record_batch_iterator_next", LIBS);
+  gidLink(garrow_record_batch_iterator_to_list, "garrow_record_batch_iterator_to_list", LIBS);
 
   // RecordBatchReader
-  link(garrow_record_batch_reader_get_type, "garrow_record_batch_reader_get_type");
-  link(garrow_record_batch_reader_new, "garrow_record_batch_reader_new");
-  link(garrow_record_batch_reader_import, "garrow_record_batch_reader_import");
-  link(garrow_record_batch_reader_export, "garrow_record_batch_reader_export");
-  link(garrow_record_batch_reader_get_next_record_batch, "garrow_record_batch_reader_get_next_record_batch");
-  link(garrow_record_batch_reader_get_schema, "garrow_record_batch_reader_get_schema");
-  link(garrow_record_batch_reader_get_sources, "garrow_record_batch_reader_get_sources");
-  link(garrow_record_batch_reader_read_all, "garrow_record_batch_reader_read_all");
-  link(garrow_record_batch_reader_read_next, "garrow_record_batch_reader_read_next");
-  link(garrow_record_batch_reader_read_next_record_batch, "garrow_record_batch_reader_read_next_record_batch");
+  gidLink(garrow_record_batch_reader_get_type, "garrow_record_batch_reader_get_type", LIBS);
+  gidLink(garrow_record_batch_reader_new, "garrow_record_batch_reader_new", LIBS);
+  gidLink(garrow_record_batch_reader_import, "garrow_record_batch_reader_import", LIBS);
+  gidLink(garrow_record_batch_reader_export, "garrow_record_batch_reader_export", LIBS);
+  gidLink(garrow_record_batch_reader_get_next_record_batch, "garrow_record_batch_reader_get_next_record_batch", LIBS);
+  gidLink(garrow_record_batch_reader_get_schema, "garrow_record_batch_reader_get_schema", LIBS);
+  gidLink(garrow_record_batch_reader_get_sources, "garrow_record_batch_reader_get_sources", LIBS);
+  gidLink(garrow_record_batch_reader_read_all, "garrow_record_batch_reader_read_all", LIBS);
+  gidLink(garrow_record_batch_reader_read_next, "garrow_record_batch_reader_read_next", LIBS);
+  gidLink(garrow_record_batch_reader_read_next_record_batch, "garrow_record_batch_reader_read_next_record_batch", LIBS);
 
   // RecordBatchStreamReader
-  link(garrow_record_batch_stream_reader_get_type, "garrow_record_batch_stream_reader_get_type");
-  link(garrow_record_batch_stream_reader_new, "garrow_record_batch_stream_reader_new");
+  gidLink(garrow_record_batch_stream_reader_get_type, "garrow_record_batch_stream_reader_get_type", LIBS);
+  gidLink(garrow_record_batch_stream_reader_new, "garrow_record_batch_stream_reader_new", LIBS);
 
   // RecordBatchStreamWriter
-  link(garrow_record_batch_stream_writer_get_type, "garrow_record_batch_stream_writer_get_type");
-  link(garrow_record_batch_stream_writer_new, "garrow_record_batch_stream_writer_new");
+  gidLink(garrow_record_batch_stream_writer_get_type, "garrow_record_batch_stream_writer_get_type", LIBS);
+  gidLink(garrow_record_batch_stream_writer_new, "garrow_record_batch_stream_writer_new", LIBS);
 
   // RecordBatchWriter
-  link(garrow_record_batch_writer_get_type, "garrow_record_batch_writer_get_type");
-  link(garrow_record_batch_writer_close, "garrow_record_batch_writer_close");
-  link(garrow_record_batch_writer_is_closed, "garrow_record_batch_writer_is_closed");
-  link(garrow_record_batch_writer_write_record_batch, "garrow_record_batch_writer_write_record_batch");
-  link(garrow_record_batch_writer_write_table, "garrow_record_batch_writer_write_table");
+  gidLink(garrow_record_batch_writer_get_type, "garrow_record_batch_writer_get_type", LIBS);
+  gidLink(garrow_record_batch_writer_close, "garrow_record_batch_writer_close", LIBS);
+  gidLink(garrow_record_batch_writer_is_closed, "garrow_record_batch_writer_is_closed", LIBS);
+  gidLink(garrow_record_batch_writer_write_record_batch, "garrow_record_batch_writer_write_record_batch", LIBS);
+  gidLink(garrow_record_batch_writer_write_table, "garrow_record_batch_writer_write_table", LIBS);
 
   // ResizableBuffer
-  link(garrow_resizable_buffer_get_type, "garrow_resizable_buffer_get_type");
-  link(garrow_resizable_buffer_new, "garrow_resizable_buffer_new");
-  link(garrow_resizable_buffer_reserve, "garrow_resizable_buffer_reserve");
-  link(garrow_resizable_buffer_resize, "garrow_resizable_buffer_resize");
+  gidLink(garrow_resizable_buffer_get_type, "garrow_resizable_buffer_get_type", LIBS);
+  gidLink(garrow_resizable_buffer_new, "garrow_resizable_buffer_new", LIBS);
+  gidLink(garrow_resizable_buffer_reserve, "garrow_resizable_buffer_reserve", LIBS);
+  gidLink(garrow_resizable_buffer_resize, "garrow_resizable_buffer_resize", LIBS);
 
   // RoundOptions
-  link(garrow_round_options_get_type, "garrow_round_options_get_type");
-  link(garrow_round_options_new, "garrow_round_options_new");
+  gidLink(garrow_round_options_get_type, "garrow_round_options_get_type", LIBS);
+  gidLink(garrow_round_options_new, "garrow_round_options_new", LIBS);
 
   // RoundToMultipleOptions
-  link(garrow_round_to_multiple_options_get_type, "garrow_round_to_multiple_options_get_type");
-  link(garrow_round_to_multiple_options_new, "garrow_round_to_multiple_options_new");
+  gidLink(garrow_round_to_multiple_options_get_type, "garrow_round_to_multiple_options_get_type", LIBS);
+  gidLink(garrow_round_to_multiple_options_new, "garrow_round_to_multiple_options_new", LIBS);
 
   // RunEndEncodeOptions
-  link(garrow_run_end_encode_options_get_type, "garrow_run_end_encode_options_get_type");
-  link(garrow_run_end_encode_options_new, "garrow_run_end_encode_options_new");
+  gidLink(garrow_run_end_encode_options_get_type, "garrow_run_end_encode_options_get_type", LIBS);
+  gidLink(garrow_run_end_encode_options_new, "garrow_run_end_encode_options_new", LIBS);
 
   // RunEndEncodedArray
-  link(garrow_run_end_encoded_array_get_type, "garrow_run_end_encoded_array_get_type");
-  link(garrow_run_end_encoded_array_new, "garrow_run_end_encoded_array_new");
-  link(garrow_run_end_encoded_array_decode, "garrow_run_end_encoded_array_decode");
-  link(garrow_run_end_encoded_array_find_physical_length, "garrow_run_end_encoded_array_find_physical_length");
-  link(garrow_run_end_encoded_array_find_physical_offset, "garrow_run_end_encoded_array_find_physical_offset");
-  link(garrow_run_end_encoded_array_get_logical_run_ends, "garrow_run_end_encoded_array_get_logical_run_ends");
-  link(garrow_run_end_encoded_array_get_logical_values, "garrow_run_end_encoded_array_get_logical_values");
-  link(garrow_run_end_encoded_array_get_run_ends, "garrow_run_end_encoded_array_get_run_ends");
-  link(garrow_run_end_encoded_array_get_values, "garrow_run_end_encoded_array_get_values");
+  gidLink(garrow_run_end_encoded_array_get_type, "garrow_run_end_encoded_array_get_type", LIBS);
+  gidLink(garrow_run_end_encoded_array_new, "garrow_run_end_encoded_array_new", LIBS);
+  gidLink(garrow_run_end_encoded_array_decode, "garrow_run_end_encoded_array_decode", LIBS);
+  gidLink(garrow_run_end_encoded_array_find_physical_length, "garrow_run_end_encoded_array_find_physical_length", LIBS);
+  gidLink(garrow_run_end_encoded_array_find_physical_offset, "garrow_run_end_encoded_array_find_physical_offset", LIBS);
+  gidLink(garrow_run_end_encoded_array_get_logical_run_ends, "garrow_run_end_encoded_array_get_logical_run_ends", LIBS);
+  gidLink(garrow_run_end_encoded_array_get_logical_values, "garrow_run_end_encoded_array_get_logical_values", LIBS);
+  gidLink(garrow_run_end_encoded_array_get_run_ends, "garrow_run_end_encoded_array_get_run_ends", LIBS);
+  gidLink(garrow_run_end_encoded_array_get_values, "garrow_run_end_encoded_array_get_values", LIBS);
 
   // RunEndEncodedDataType
-  link(garrow_run_end_encoded_data_type_get_type, "garrow_run_end_encoded_data_type_get_type");
-  link(garrow_run_end_encoded_data_type_new, "garrow_run_end_encoded_data_type_new");
-  link(garrow_run_end_encoded_data_type_get_run_end_data_type, "garrow_run_end_encoded_data_type_get_run_end_data_type");
-  link(garrow_run_end_encoded_data_type_get_value_data_type, "garrow_run_end_encoded_data_type_get_value_data_type");
+  gidLink(garrow_run_end_encoded_data_type_get_type, "garrow_run_end_encoded_data_type_get_type", LIBS);
+  gidLink(garrow_run_end_encoded_data_type_new, "garrow_run_end_encoded_data_type_new", LIBS);
+  gidLink(garrow_run_end_encoded_data_type_get_run_end_data_type, "garrow_run_end_encoded_data_type_get_run_end_data_type", LIBS);
+  gidLink(garrow_run_end_encoded_data_type_get_value_data_type, "garrow_run_end_encoded_data_type_get_value_data_type", LIBS);
 
   // S3FileSystem
-  link(garrow_s3_file_system_get_type, "garrow_s3_file_system_get_type");
+  gidLink(garrow_s3_file_system_get_type, "garrow_s3_file_system_get_type", LIBS);
 
   // S3GlobalOptions
-  link(garrow_s3_global_options_get_type, "garrow_s3_global_options_get_type");
-  link(garrow_s3_global_options_new, "garrow_s3_global_options_new");
+  gidLink(garrow_s3_global_options_get_type, "garrow_s3_global_options_get_type", LIBS);
+  gidLink(garrow_s3_global_options_new, "garrow_s3_global_options_new", LIBS);
 
   // Scalar
-  link(garrow_scalar_get_type, "garrow_scalar_get_type");
-  link(garrow_scalar_parse, "garrow_scalar_parse");
-  link(garrow_scalar_cast, "garrow_scalar_cast");
-  link(garrow_scalar_equal, "garrow_scalar_equal");
-  link(garrow_scalar_equal_options, "garrow_scalar_equal_options");
-  link(garrow_scalar_get_data_type, "garrow_scalar_get_data_type");
-  link(garrow_scalar_is_valid, "garrow_scalar_is_valid");
-  link(garrow_scalar_to_string, "garrow_scalar_to_string");
+  gidLink(garrow_scalar_get_type, "garrow_scalar_get_type", LIBS);
+  gidLink(garrow_scalar_parse, "garrow_scalar_parse", LIBS);
+  gidLink(garrow_scalar_cast, "garrow_scalar_cast", LIBS);
+  gidLink(garrow_scalar_equal, "garrow_scalar_equal", LIBS);
+  gidLink(garrow_scalar_equal_options, "garrow_scalar_equal_options", LIBS);
+  gidLink(garrow_scalar_get_data_type, "garrow_scalar_get_data_type", LIBS);
+  gidLink(garrow_scalar_is_valid, "garrow_scalar_is_valid", LIBS);
+  gidLink(garrow_scalar_to_string, "garrow_scalar_to_string", LIBS);
 
   // ScalarAggregateOptions
-  link(garrow_scalar_aggregate_options_get_type, "garrow_scalar_aggregate_options_get_type");
-  link(garrow_scalar_aggregate_options_new, "garrow_scalar_aggregate_options_new");
+  gidLink(garrow_scalar_aggregate_options_get_type, "garrow_scalar_aggregate_options_get_type", LIBS);
+  gidLink(garrow_scalar_aggregate_options_new, "garrow_scalar_aggregate_options_new", LIBS);
 
   // ScalarDatum
-  link(garrow_scalar_datum_get_type, "garrow_scalar_datum_get_type");
-  link(garrow_scalar_datum_new, "garrow_scalar_datum_new");
+  gidLink(garrow_scalar_datum_get_type, "garrow_scalar_datum_get_type", LIBS);
+  gidLink(garrow_scalar_datum_new, "garrow_scalar_datum_new", LIBS);
 
   // Schema
-  link(garrow_schema_get_type, "garrow_schema_get_type");
-  link(garrow_schema_new, "garrow_schema_new");
-  link(garrow_schema_import, "garrow_schema_import");
-  link(garrow_schema_add_field, "garrow_schema_add_field");
-  link(garrow_schema_equal, "garrow_schema_equal");
-  link(garrow_schema_export, "garrow_schema_export");
-  link(garrow_schema_get_field, "garrow_schema_get_field");
-  link(garrow_schema_get_field_by_name, "garrow_schema_get_field_by_name");
-  link(garrow_schema_get_field_index, "garrow_schema_get_field_index");
-  link(garrow_schema_get_fields, "garrow_schema_get_fields");
-  link(garrow_schema_get_metadata, "garrow_schema_get_metadata");
-  link(garrow_schema_has_metadata, "garrow_schema_has_metadata");
-  link(garrow_schema_n_fields, "garrow_schema_n_fields");
-  link(garrow_schema_remove_field, "garrow_schema_remove_field");
-  link(garrow_schema_replace_field, "garrow_schema_replace_field");
-  link(garrow_schema_to_string, "garrow_schema_to_string");
-  link(garrow_schema_to_string_metadata, "garrow_schema_to_string_metadata");
-  link(garrow_schema_with_metadata, "garrow_schema_with_metadata");
+  gidLink(garrow_schema_get_type, "garrow_schema_get_type", LIBS);
+  gidLink(garrow_schema_new, "garrow_schema_new", LIBS);
+  gidLink(garrow_schema_import, "garrow_schema_import", LIBS);
+  gidLink(garrow_schema_add_field, "garrow_schema_add_field", LIBS);
+  gidLink(garrow_schema_equal, "garrow_schema_equal", LIBS);
+  gidLink(garrow_schema_export, "garrow_schema_export", LIBS);
+  gidLink(garrow_schema_get_field, "garrow_schema_get_field", LIBS);
+  gidLink(garrow_schema_get_field_by_name, "garrow_schema_get_field_by_name", LIBS);
+  gidLink(garrow_schema_get_field_index, "garrow_schema_get_field_index", LIBS);
+  gidLink(garrow_schema_get_fields, "garrow_schema_get_fields", LIBS);
+  gidLink(garrow_schema_get_metadata, "garrow_schema_get_metadata", LIBS);
+  gidLink(garrow_schema_has_metadata, "garrow_schema_has_metadata", LIBS);
+  gidLink(garrow_schema_n_fields, "garrow_schema_n_fields", LIBS);
+  gidLink(garrow_schema_remove_field, "garrow_schema_remove_field", LIBS);
+  gidLink(garrow_schema_replace_field, "garrow_schema_replace_field", LIBS);
+  gidLink(garrow_schema_to_string, "garrow_schema_to_string", LIBS);
+  gidLink(garrow_schema_to_string_metadata, "garrow_schema_to_string_metadata", LIBS);
+  gidLink(garrow_schema_with_metadata, "garrow_schema_with_metadata", LIBS);
 
   // SeekableInputStream
-  link(garrow_seekable_input_stream_get_type, "garrow_seekable_input_stream_get_type");
-  link(garrow_seekable_input_stream_get_size, "garrow_seekable_input_stream_get_size");
-  link(garrow_seekable_input_stream_get_support_zero_copy, "garrow_seekable_input_stream_get_support_zero_copy");
-  link(garrow_seekable_input_stream_peek, "garrow_seekable_input_stream_peek");
-  link(garrow_seekable_input_stream_read_at, "garrow_seekable_input_stream_read_at");
-  link(garrow_seekable_input_stream_read_at_bytes, "garrow_seekable_input_stream_read_at_bytes");
+  gidLink(garrow_seekable_input_stream_get_type, "garrow_seekable_input_stream_get_type", LIBS);
+  gidLink(garrow_seekable_input_stream_get_size, "garrow_seekable_input_stream_get_size", LIBS);
+  gidLink(garrow_seekable_input_stream_get_support_zero_copy, "garrow_seekable_input_stream_get_support_zero_copy", LIBS);
+  gidLink(garrow_seekable_input_stream_peek, "garrow_seekable_input_stream_peek", LIBS);
+  gidLink(garrow_seekable_input_stream_read_at, "garrow_seekable_input_stream_read_at", LIBS);
+  gidLink(garrow_seekable_input_stream_read_at_bytes, "garrow_seekable_input_stream_read_at_bytes", LIBS);
 
   // SetLookupOptions
-  link(garrow_set_lookup_options_get_type, "garrow_set_lookup_options_get_type");
-  link(garrow_set_lookup_options_new, "garrow_set_lookup_options_new");
+  gidLink(garrow_set_lookup_options_get_type, "garrow_set_lookup_options_get_type", LIBS);
+  gidLink(garrow_set_lookup_options_new, "garrow_set_lookup_options_new", LIBS);
 
   // SinkNodeOptions
-  link(garrow_sink_node_options_get_type, "garrow_sink_node_options_get_type");
-  link(garrow_sink_node_options_new, "garrow_sink_node_options_new");
-  link(garrow_sink_node_options_get_reader, "garrow_sink_node_options_get_reader");
+  gidLink(garrow_sink_node_options_get_type, "garrow_sink_node_options_get_type", LIBS);
+  gidLink(garrow_sink_node_options_new, "garrow_sink_node_options_new", LIBS);
+  gidLink(garrow_sink_node_options_get_reader, "garrow_sink_node_options_get_reader", LIBS);
 
   // SlowFileSystem
-  link(garrow_slow_file_system_get_type, "garrow_slow_file_system_get_type");
-  link(garrow_slow_file_system_new_average_latency, "garrow_slow_file_system_new_average_latency");
-  link(garrow_slow_file_system_new_average_latency_and_seed, "garrow_slow_file_system_new_average_latency_and_seed");
+  gidLink(garrow_slow_file_system_get_type, "garrow_slow_file_system_get_type", LIBS);
+  gidLink(garrow_slow_file_system_new_average_latency, "garrow_slow_file_system_new_average_latency", LIBS);
+  gidLink(garrow_slow_file_system_new_average_latency_and_seed, "garrow_slow_file_system_new_average_latency_and_seed", LIBS);
 
   // SortKey
-  link(garrow_sort_key_get_type, "garrow_sort_key_get_type");
-  link(garrow_sort_key_new, "garrow_sort_key_new");
-  link(garrow_sort_key_equal, "garrow_sort_key_equal");
+  gidLink(garrow_sort_key_get_type, "garrow_sort_key_get_type", LIBS);
+  gidLink(garrow_sort_key_new, "garrow_sort_key_new", LIBS);
+  gidLink(garrow_sort_key_equal, "garrow_sort_key_equal", LIBS);
 
   // SortOptions
-  link(garrow_sort_options_get_type, "garrow_sort_options_get_type");
-  link(garrow_sort_options_new, "garrow_sort_options_new");
-  link(garrow_sort_options_add_sort_key, "garrow_sort_options_add_sort_key");
-  link(garrow_sort_options_equal, "garrow_sort_options_equal");
-  link(garrow_sort_options_get_sort_keys, "garrow_sort_options_get_sort_keys");
-  link(garrow_sort_options_set_sort_keys, "garrow_sort_options_set_sort_keys");
+  gidLink(garrow_sort_options_get_type, "garrow_sort_options_get_type", LIBS);
+  gidLink(garrow_sort_options_new, "garrow_sort_options_new", LIBS);
+  gidLink(garrow_sort_options_add_sort_key, "garrow_sort_options_add_sort_key", LIBS);
+  gidLink(garrow_sort_options_equal, "garrow_sort_options_equal", LIBS);
+  gidLink(garrow_sort_options_get_sort_keys, "garrow_sort_options_get_sort_keys", LIBS);
+  gidLink(garrow_sort_options_set_sort_keys, "garrow_sort_options_set_sort_keys", LIBS);
 
   // SourceNodeOptions
-  link(garrow_source_node_options_get_type, "garrow_source_node_options_get_type");
-  link(garrow_source_node_options_new_record_batch, "garrow_source_node_options_new_record_batch");
-  link(garrow_source_node_options_new_record_batch_reader, "garrow_source_node_options_new_record_batch_reader");
-  link(garrow_source_node_options_new_table, "garrow_source_node_options_new_table");
+  gidLink(garrow_source_node_options_get_type, "garrow_source_node_options_get_type", LIBS);
+  gidLink(garrow_source_node_options_new_record_batch, "garrow_source_node_options_new_record_batch", LIBS);
+  gidLink(garrow_source_node_options_new_record_batch_reader, "garrow_source_node_options_new_record_batch_reader", LIBS);
+  gidLink(garrow_source_node_options_new_table, "garrow_source_node_options_new_table", LIBS);
 
   // SparseUnionArray
-  link(garrow_sparse_union_array_get_type, "garrow_sparse_union_array_get_type");
-  link(garrow_sparse_union_array_new, "garrow_sparse_union_array_new");
-  link(garrow_sparse_union_array_new_data_type, "garrow_sparse_union_array_new_data_type");
+  gidLink(garrow_sparse_union_array_get_type, "garrow_sparse_union_array_get_type", LIBS);
+  gidLink(garrow_sparse_union_array_new, "garrow_sparse_union_array_new", LIBS);
+  gidLink(garrow_sparse_union_array_new_data_type, "garrow_sparse_union_array_new_data_type", LIBS);
 
   // SparseUnionArrayBuilder
-  link(garrow_sparse_union_array_builder_get_type, "garrow_sparse_union_array_builder_get_type");
-  link(garrow_sparse_union_array_builder_new, "garrow_sparse_union_array_builder_new");
+  gidLink(garrow_sparse_union_array_builder_get_type, "garrow_sparse_union_array_builder_get_type", LIBS);
+  gidLink(garrow_sparse_union_array_builder_new, "garrow_sparse_union_array_builder_new", LIBS);
 
   // SparseUnionDataType
-  link(garrow_sparse_union_data_type_get_type, "garrow_sparse_union_data_type_get_type");
-  link(garrow_sparse_union_data_type_new, "garrow_sparse_union_data_type_new");
+  gidLink(garrow_sparse_union_data_type_get_type, "garrow_sparse_union_data_type_get_type", LIBS);
+  gidLink(garrow_sparse_union_data_type_new, "garrow_sparse_union_data_type_new", LIBS);
 
   // SparseUnionScalar
-  link(garrow_sparse_union_scalar_get_type, "garrow_sparse_union_scalar_get_type");
-  link(garrow_sparse_union_scalar_new, "garrow_sparse_union_scalar_new");
+  gidLink(garrow_sparse_union_scalar_get_type, "garrow_sparse_union_scalar_get_type", LIBS);
+  gidLink(garrow_sparse_union_scalar_new, "garrow_sparse_union_scalar_new", LIBS);
 
   // SplitPatternOptions
-  link(garrow_split_pattern_options_get_type, "garrow_split_pattern_options_get_type");
-  link(garrow_split_pattern_options_new, "garrow_split_pattern_options_new");
+  gidLink(garrow_split_pattern_options_get_type, "garrow_split_pattern_options_get_type", LIBS);
+  gidLink(garrow_split_pattern_options_new, "garrow_split_pattern_options_new", LIBS);
 
   // StreamDecoder
-  link(garrow_stream_decoder_get_type, "garrow_stream_decoder_get_type");
-  link(garrow_stream_decoder_new, "garrow_stream_decoder_new");
-  link(garrow_stream_decoder_consume_buffer, "garrow_stream_decoder_consume_buffer");
-  link(garrow_stream_decoder_consume_bytes, "garrow_stream_decoder_consume_bytes");
-  link(garrow_stream_decoder_get_next_required_size, "garrow_stream_decoder_get_next_required_size");
-  link(garrow_stream_decoder_get_schema, "garrow_stream_decoder_get_schema");
-  link(garrow_stream_decoder_reset, "garrow_stream_decoder_reset");
+  gidLink(garrow_stream_decoder_get_type, "garrow_stream_decoder_get_type", LIBS);
+  gidLink(garrow_stream_decoder_new, "garrow_stream_decoder_new", LIBS);
+  gidLink(garrow_stream_decoder_consume_buffer, "garrow_stream_decoder_consume_buffer", LIBS);
+  gidLink(garrow_stream_decoder_consume_bytes, "garrow_stream_decoder_consume_bytes", LIBS);
+  gidLink(garrow_stream_decoder_get_next_required_size, "garrow_stream_decoder_get_next_required_size", LIBS);
+  gidLink(garrow_stream_decoder_get_schema, "garrow_stream_decoder_get_schema", LIBS);
+  gidLink(garrow_stream_decoder_reset, "garrow_stream_decoder_reset", LIBS);
 
   // StreamListener
-  link(garrow_stream_listener_get_type, "garrow_stream_listener_get_type");
-  link(garrow_stream_listener_on_eos, "garrow_stream_listener_on_eos");
-  link(garrow_stream_listener_on_record_batch_decoded, "garrow_stream_listener_on_record_batch_decoded");
-  link(garrow_stream_listener_on_schema_decoded, "garrow_stream_listener_on_schema_decoded");
+  gidLink(garrow_stream_listener_get_type, "garrow_stream_listener_get_type", LIBS);
+  gidLink(garrow_stream_listener_on_eos, "garrow_stream_listener_on_eos", LIBS);
+  gidLink(garrow_stream_listener_on_record_batch_decoded, "garrow_stream_listener_on_record_batch_decoded", LIBS);
+  gidLink(garrow_stream_listener_on_schema_decoded, "garrow_stream_listener_on_schema_decoded", LIBS);
 
   // StrftimeOptions
-  link(garrow_strftime_options_get_type, "garrow_strftime_options_get_type");
-  link(garrow_strftime_options_new, "garrow_strftime_options_new");
+  gidLink(garrow_strftime_options_get_type, "garrow_strftime_options_get_type", LIBS);
+  gidLink(garrow_strftime_options_new, "garrow_strftime_options_new", LIBS);
 
   // StringArray
-  link(garrow_string_array_get_type, "garrow_string_array_get_type");
-  link(garrow_string_array_new, "garrow_string_array_new");
-  link(garrow_string_array_get_string, "garrow_string_array_get_string");
+  gidLink(garrow_string_array_get_type, "garrow_string_array_get_type", LIBS);
+  gidLink(garrow_string_array_new, "garrow_string_array_new", LIBS);
+  gidLink(garrow_string_array_get_string, "garrow_string_array_get_string", LIBS);
 
   // StringArrayBuilder
-  link(garrow_string_array_builder_get_type, "garrow_string_array_builder_get_type");
-  link(garrow_string_array_builder_new, "garrow_string_array_builder_new");
-  link(garrow_string_array_builder_append, "garrow_string_array_builder_append");
-  link(garrow_string_array_builder_append_string, "garrow_string_array_builder_append_string");
-  link(garrow_string_array_builder_append_string_len, "garrow_string_array_builder_append_string_len");
-  link(garrow_string_array_builder_append_strings, "garrow_string_array_builder_append_strings");
-  link(garrow_string_array_builder_append_value, "garrow_string_array_builder_append_value");
-  link(garrow_string_array_builder_append_values, "garrow_string_array_builder_append_values");
+  gidLink(garrow_string_array_builder_get_type, "garrow_string_array_builder_get_type", LIBS);
+  gidLink(garrow_string_array_builder_new, "garrow_string_array_builder_new", LIBS);
+  gidLink(garrow_string_array_builder_append, "garrow_string_array_builder_append", LIBS);
+  gidLink(garrow_string_array_builder_append_string, "garrow_string_array_builder_append_string", LIBS);
+  gidLink(garrow_string_array_builder_append_string_len, "garrow_string_array_builder_append_string_len", LIBS);
+  gidLink(garrow_string_array_builder_append_strings, "garrow_string_array_builder_append_strings", LIBS);
+  gidLink(garrow_string_array_builder_append_value, "garrow_string_array_builder_append_value", LIBS);
+  gidLink(garrow_string_array_builder_append_values, "garrow_string_array_builder_append_values", LIBS);
 
   // StringDataType
-  link(garrow_string_data_type_get_type, "garrow_string_data_type_get_type");
-  link(garrow_string_data_type_new, "garrow_string_data_type_new");
+  gidLink(garrow_string_data_type_get_type, "garrow_string_data_type_get_type", LIBS);
+  gidLink(garrow_string_data_type_new, "garrow_string_data_type_new", LIBS);
 
   // StringDictionaryArrayBuilder
-  link(garrow_string_dictionary_array_builder_get_type, "garrow_string_dictionary_array_builder_get_type");
-  link(garrow_string_dictionary_array_builder_new, "garrow_string_dictionary_array_builder_new");
-  link(garrow_string_dictionary_array_builder_append_array, "garrow_string_dictionary_array_builder_append_array");
-  link(garrow_string_dictionary_array_builder_append_indices, "garrow_string_dictionary_array_builder_append_indices");
-  link(garrow_string_dictionary_array_builder_append_null, "garrow_string_dictionary_array_builder_append_null");
-  link(garrow_string_dictionary_array_builder_append_string, "garrow_string_dictionary_array_builder_append_string");
-  link(garrow_string_dictionary_array_builder_finish_delta, "garrow_string_dictionary_array_builder_finish_delta");
-  link(garrow_string_dictionary_array_builder_get_dictionary_length, "garrow_string_dictionary_array_builder_get_dictionary_length");
-  link(garrow_string_dictionary_array_builder_insert_memo_values, "garrow_string_dictionary_array_builder_insert_memo_values");
-  link(garrow_string_dictionary_array_builder_reset_full, "garrow_string_dictionary_array_builder_reset_full");
+  gidLink(garrow_string_dictionary_array_builder_get_type, "garrow_string_dictionary_array_builder_get_type", LIBS);
+  gidLink(garrow_string_dictionary_array_builder_new, "garrow_string_dictionary_array_builder_new", LIBS);
+  gidLink(garrow_string_dictionary_array_builder_append_array, "garrow_string_dictionary_array_builder_append_array", LIBS);
+  gidLink(garrow_string_dictionary_array_builder_append_indices, "garrow_string_dictionary_array_builder_append_indices", LIBS);
+  gidLink(garrow_string_dictionary_array_builder_append_null, "garrow_string_dictionary_array_builder_append_null", LIBS);
+  gidLink(garrow_string_dictionary_array_builder_append_string, "garrow_string_dictionary_array_builder_append_string", LIBS);
+  gidLink(garrow_string_dictionary_array_builder_finish_delta, "garrow_string_dictionary_array_builder_finish_delta", LIBS);
+  gidLink(garrow_string_dictionary_array_builder_get_dictionary_length, "garrow_string_dictionary_array_builder_get_dictionary_length", LIBS);
+  gidLink(garrow_string_dictionary_array_builder_insert_memo_values, "garrow_string_dictionary_array_builder_insert_memo_values", LIBS);
+  gidLink(garrow_string_dictionary_array_builder_reset_full, "garrow_string_dictionary_array_builder_reset_full", LIBS);
 
   // StringScalar
-  link(garrow_string_scalar_get_type, "garrow_string_scalar_get_type");
-  link(garrow_string_scalar_new, "garrow_string_scalar_new");
+  gidLink(garrow_string_scalar_get_type, "garrow_string_scalar_get_type", LIBS);
+  gidLink(garrow_string_scalar_new, "garrow_string_scalar_new", LIBS);
 
   // StringViewDataType
-  link(garrow_string_view_data_type_get_type, "garrow_string_view_data_type_get_type");
-  link(garrow_string_view_data_type_new, "garrow_string_view_data_type_new");
+  gidLink(garrow_string_view_data_type_get_type, "garrow_string_view_data_type_get_type", LIBS);
+  gidLink(garrow_string_view_data_type_new, "garrow_string_view_data_type_new", LIBS);
 
   // StrptimeOptions
-  link(garrow_strptime_options_get_type, "garrow_strptime_options_get_type");
-  link(garrow_strptime_options_new, "garrow_strptime_options_new");
+  gidLink(garrow_strptime_options_get_type, "garrow_strptime_options_get_type", LIBS);
+  gidLink(garrow_strptime_options_new, "garrow_strptime_options_new", LIBS);
 
   // StrptimeTimestampParser
-  link(garrow_strptime_timestamp_parser_get_type, "garrow_strptime_timestamp_parser_get_type");
-  link(garrow_strptime_timestamp_parser_new, "garrow_strptime_timestamp_parser_new");
-  link(garrow_strptime_timestamp_parser_get_format, "garrow_strptime_timestamp_parser_get_format");
+  gidLink(garrow_strptime_timestamp_parser_get_type, "garrow_strptime_timestamp_parser_get_type", LIBS);
+  gidLink(garrow_strptime_timestamp_parser_new, "garrow_strptime_timestamp_parser_new", LIBS);
+  gidLink(garrow_strptime_timestamp_parser_get_format, "garrow_strptime_timestamp_parser_get_format", LIBS);
 
   // StructArray
-  link(garrow_struct_array_get_type, "garrow_struct_array_get_type");
-  link(garrow_struct_array_new, "garrow_struct_array_new");
-  link(garrow_struct_array_flatten, "garrow_struct_array_flatten");
-  link(garrow_struct_array_get_field, "garrow_struct_array_get_field");
-  link(garrow_struct_array_get_fields, "garrow_struct_array_get_fields");
+  gidLink(garrow_struct_array_get_type, "garrow_struct_array_get_type", LIBS);
+  gidLink(garrow_struct_array_new, "garrow_struct_array_new", LIBS);
+  gidLink(garrow_struct_array_flatten, "garrow_struct_array_flatten", LIBS);
+  gidLink(garrow_struct_array_get_field, "garrow_struct_array_get_field", LIBS);
+  gidLink(garrow_struct_array_get_fields, "garrow_struct_array_get_fields", LIBS);
 
   // StructArrayBuilder
-  link(garrow_struct_array_builder_get_type, "garrow_struct_array_builder_get_type");
-  link(garrow_struct_array_builder_new, "garrow_struct_array_builder_new");
-  link(garrow_struct_array_builder_append, "garrow_struct_array_builder_append");
-  link(garrow_struct_array_builder_append_null, "garrow_struct_array_builder_append_null");
-  link(garrow_struct_array_builder_append_value, "garrow_struct_array_builder_append_value");
-  link(garrow_struct_array_builder_get_field_builder, "garrow_struct_array_builder_get_field_builder");
-  link(garrow_struct_array_builder_get_field_builders, "garrow_struct_array_builder_get_field_builders");
+  gidLink(garrow_struct_array_builder_get_type, "garrow_struct_array_builder_get_type", LIBS);
+  gidLink(garrow_struct_array_builder_new, "garrow_struct_array_builder_new", LIBS);
+  gidLink(garrow_struct_array_builder_append, "garrow_struct_array_builder_append", LIBS);
+  gidLink(garrow_struct_array_builder_append_null, "garrow_struct_array_builder_append_null", LIBS);
+  gidLink(garrow_struct_array_builder_append_value, "garrow_struct_array_builder_append_value", LIBS);
+  gidLink(garrow_struct_array_builder_get_field_builder, "garrow_struct_array_builder_get_field_builder", LIBS);
+  gidLink(garrow_struct_array_builder_get_field_builders, "garrow_struct_array_builder_get_field_builders", LIBS);
 
   // StructDataType
-  link(garrow_struct_data_type_get_type, "garrow_struct_data_type_get_type");
-  link(garrow_struct_data_type_new, "garrow_struct_data_type_new");
-  link(garrow_struct_data_type_get_field, "garrow_struct_data_type_get_field");
-  link(garrow_struct_data_type_get_field_by_name, "garrow_struct_data_type_get_field_by_name");
-  link(garrow_struct_data_type_get_field_index, "garrow_struct_data_type_get_field_index");
-  link(garrow_struct_data_type_get_fields, "garrow_struct_data_type_get_fields");
-  link(garrow_struct_data_type_get_n_fields, "garrow_struct_data_type_get_n_fields");
+  gidLink(garrow_struct_data_type_get_type, "garrow_struct_data_type_get_type", LIBS);
+  gidLink(garrow_struct_data_type_new, "garrow_struct_data_type_new", LIBS);
+  gidLink(garrow_struct_data_type_get_field, "garrow_struct_data_type_get_field", LIBS);
+  gidLink(garrow_struct_data_type_get_field_by_name, "garrow_struct_data_type_get_field_by_name", LIBS);
+  gidLink(garrow_struct_data_type_get_field_index, "garrow_struct_data_type_get_field_index", LIBS);
+  gidLink(garrow_struct_data_type_get_fields, "garrow_struct_data_type_get_fields", LIBS);
+  gidLink(garrow_struct_data_type_get_n_fields, "garrow_struct_data_type_get_n_fields", LIBS);
 
   // StructFieldOptions
-  link(garrow_struct_field_options_get_type, "garrow_struct_field_options_get_type");
-  link(garrow_struct_field_options_new, "garrow_struct_field_options_new");
-  link(garrow_struct_field_options_set_field_ref, "garrow_struct_field_options_set_field_ref");
+  gidLink(garrow_struct_field_options_get_type, "garrow_struct_field_options_get_type", LIBS);
+  gidLink(garrow_struct_field_options_new, "garrow_struct_field_options_new", LIBS);
+  gidLink(garrow_struct_field_options_set_field_ref, "garrow_struct_field_options_set_field_ref", LIBS);
 
   // StructScalar
-  link(garrow_struct_scalar_get_type, "garrow_struct_scalar_get_type");
-  link(garrow_struct_scalar_new, "garrow_struct_scalar_new");
-  link(garrow_struct_scalar_get_value, "garrow_struct_scalar_get_value");
+  gidLink(garrow_struct_scalar_get_type, "garrow_struct_scalar_get_type", LIBS);
+  gidLink(garrow_struct_scalar_new, "garrow_struct_scalar_new", LIBS);
+  gidLink(garrow_struct_scalar_get_value, "garrow_struct_scalar_get_value", LIBS);
 
   // SubTreeFileSystem
-  link(garrow_sub_tree_file_system_get_type, "garrow_sub_tree_file_system_get_type");
-  link(garrow_sub_tree_file_system_new, "garrow_sub_tree_file_system_new");
+  gidLink(garrow_sub_tree_file_system_get_type, "garrow_sub_tree_file_system_get_type", LIBS);
+  gidLink(garrow_sub_tree_file_system_new, "garrow_sub_tree_file_system_new", LIBS);
 
   // Table
-  link(garrow_table_get_type, "garrow_table_get_type");
-  link(garrow_table_new_arrays, "garrow_table_new_arrays");
-  link(garrow_table_new_chunked_arrays, "garrow_table_new_chunked_arrays");
-  link(garrow_table_new_record_batches, "garrow_table_new_record_batches");
-  link(garrow_table_new_values, "garrow_table_new_values");
-  link(garrow_table_add_column, "garrow_table_add_column");
-  link(garrow_table_combine_chunks, "garrow_table_combine_chunks");
-  link(garrow_table_concatenate, "garrow_table_concatenate");
-  link(garrow_table_equal, "garrow_table_equal");
-  link(garrow_table_equal_metadata, "garrow_table_equal_metadata");
-  link(garrow_table_filter, "garrow_table_filter");
-  link(garrow_table_filter_chunked_array, "garrow_table_filter_chunked_array");
-  link(garrow_table_get_column_data, "garrow_table_get_column_data");
-  link(garrow_table_get_n_columns, "garrow_table_get_n_columns");
-  link(garrow_table_get_n_rows, "garrow_table_get_n_rows");
-  link(garrow_table_get_schema, "garrow_table_get_schema");
-  link(garrow_table_remove_column, "garrow_table_remove_column");
-  link(garrow_table_replace_column, "garrow_table_replace_column");
-  link(garrow_table_slice, "garrow_table_slice");
-  link(garrow_table_sort_indices, "garrow_table_sort_indices");
-  link(garrow_table_take, "garrow_table_take");
-  link(garrow_table_take_chunked_array, "garrow_table_take_chunked_array");
-  link(garrow_table_to_string, "garrow_table_to_string");
-  link(garrow_table_write_as_feather, "garrow_table_write_as_feather");
+  gidLink(garrow_table_get_type, "garrow_table_get_type", LIBS);
+  gidLink(garrow_table_new_arrays, "garrow_table_new_arrays", LIBS);
+  gidLink(garrow_table_new_chunked_arrays, "garrow_table_new_chunked_arrays", LIBS);
+  gidLink(garrow_table_new_record_batches, "garrow_table_new_record_batches", LIBS);
+  gidLink(garrow_table_new_values, "garrow_table_new_values", LIBS);
+  gidLink(garrow_table_add_column, "garrow_table_add_column", LIBS);
+  gidLink(garrow_table_combine_chunks, "garrow_table_combine_chunks", LIBS);
+  gidLink(garrow_table_concatenate, "garrow_table_concatenate", LIBS);
+  gidLink(garrow_table_equal, "garrow_table_equal", LIBS);
+  gidLink(garrow_table_equal_metadata, "garrow_table_equal_metadata", LIBS);
+  gidLink(garrow_table_filter, "garrow_table_filter", LIBS);
+  gidLink(garrow_table_filter_chunked_array, "garrow_table_filter_chunked_array", LIBS);
+  gidLink(garrow_table_get_column_data, "garrow_table_get_column_data", LIBS);
+  gidLink(garrow_table_get_n_columns, "garrow_table_get_n_columns", LIBS);
+  gidLink(garrow_table_get_n_rows, "garrow_table_get_n_rows", LIBS);
+  gidLink(garrow_table_get_schema, "garrow_table_get_schema", LIBS);
+  gidLink(garrow_table_remove_column, "garrow_table_remove_column", LIBS);
+  gidLink(garrow_table_replace_column, "garrow_table_replace_column", LIBS);
+  gidLink(garrow_table_slice, "garrow_table_slice", LIBS);
+  gidLink(garrow_table_sort_indices, "garrow_table_sort_indices", LIBS);
+  gidLink(garrow_table_take, "garrow_table_take", LIBS);
+  gidLink(garrow_table_take_chunked_array, "garrow_table_take_chunked_array", LIBS);
+  gidLink(garrow_table_to_string, "garrow_table_to_string", LIBS);
+  gidLink(garrow_table_write_as_feather, "garrow_table_write_as_feather", LIBS);
 
   // TableBatchReader
-  link(garrow_table_batch_reader_get_type, "garrow_table_batch_reader_get_type");
-  link(garrow_table_batch_reader_new, "garrow_table_batch_reader_new");
-  link(garrow_table_batch_reader_set_max_chunk_size, "garrow_table_batch_reader_set_max_chunk_size");
+  gidLink(garrow_table_batch_reader_get_type, "garrow_table_batch_reader_get_type", LIBS);
+  gidLink(garrow_table_batch_reader_new, "garrow_table_batch_reader_new", LIBS);
+  gidLink(garrow_table_batch_reader_set_max_chunk_size, "garrow_table_batch_reader_set_max_chunk_size", LIBS);
 
   // TableConcatenateOptions
-  link(garrow_table_concatenate_options_get_type, "garrow_table_concatenate_options_get_type");
-  link(garrow_table_concatenate_options_new, "garrow_table_concatenate_options_new");
+  gidLink(garrow_table_concatenate_options_get_type, "garrow_table_concatenate_options_get_type", LIBS);
+  gidLink(garrow_table_concatenate_options_new, "garrow_table_concatenate_options_new", LIBS);
 
   // TableDatum
-  link(garrow_table_datum_get_type, "garrow_table_datum_get_type");
-  link(garrow_table_datum_new, "garrow_table_datum_new");
+  gidLink(garrow_table_datum_get_type, "garrow_table_datum_get_type", LIBS);
+  gidLink(garrow_table_datum_new, "garrow_table_datum_new", LIBS);
 
   // TakeOptions
-  link(garrow_take_options_get_type, "garrow_take_options_get_type");
-  link(garrow_take_options_new, "garrow_take_options_new");
+  gidLink(garrow_take_options_get_type, "garrow_take_options_get_type", LIBS);
+  gidLink(garrow_take_options_new, "garrow_take_options_new", LIBS);
 
   // TemporalDataType
-  link(garrow_temporal_data_type_get_type, "garrow_temporal_data_type_get_type");
+  gidLink(garrow_temporal_data_type_get_type, "garrow_temporal_data_type_get_type", LIBS);
 
   // Tensor
-  link(garrow_tensor_get_type, "garrow_tensor_get_type");
-  link(garrow_tensor_new, "garrow_tensor_new");
-  link(garrow_tensor_equal, "garrow_tensor_equal");
-  link(garrow_tensor_get_buffer, "garrow_tensor_get_buffer");
-  link(garrow_tensor_get_dimension_name, "garrow_tensor_get_dimension_name");
-  link(garrow_tensor_get_n_dimensions, "garrow_tensor_get_n_dimensions");
-  link(garrow_tensor_get_shape, "garrow_tensor_get_shape");
-  link(garrow_tensor_get_size, "garrow_tensor_get_size");
-  link(garrow_tensor_get_strides, "garrow_tensor_get_strides");
-  link(garrow_tensor_get_value_data_type, "garrow_tensor_get_value_data_type");
-  link(garrow_tensor_get_value_type, "garrow_tensor_get_value_type");
-  link(garrow_tensor_is_column_major, "garrow_tensor_is_column_major");
-  link(garrow_tensor_is_contiguous, "garrow_tensor_is_contiguous");
-  link(garrow_tensor_is_mutable, "garrow_tensor_is_mutable");
-  link(garrow_tensor_is_row_major, "garrow_tensor_is_row_major");
+  gidLink(garrow_tensor_get_type, "garrow_tensor_get_type", LIBS);
+  gidLink(garrow_tensor_new, "garrow_tensor_new", LIBS);
+  gidLink(garrow_tensor_equal, "garrow_tensor_equal", LIBS);
+  gidLink(garrow_tensor_get_buffer, "garrow_tensor_get_buffer", LIBS);
+  gidLink(garrow_tensor_get_dimension_name, "garrow_tensor_get_dimension_name", LIBS);
+  gidLink(garrow_tensor_get_n_dimensions, "garrow_tensor_get_n_dimensions", LIBS);
+  gidLink(garrow_tensor_get_shape, "garrow_tensor_get_shape", LIBS);
+  gidLink(garrow_tensor_get_size, "garrow_tensor_get_size", LIBS);
+  gidLink(garrow_tensor_get_strides, "garrow_tensor_get_strides", LIBS);
+  gidLink(garrow_tensor_get_value_data_type, "garrow_tensor_get_value_data_type", LIBS);
+  gidLink(garrow_tensor_get_value_type, "garrow_tensor_get_value_type", LIBS);
+  gidLink(garrow_tensor_is_column_major, "garrow_tensor_is_column_major", LIBS);
+  gidLink(garrow_tensor_is_contiguous, "garrow_tensor_is_contiguous", LIBS);
+  gidLink(garrow_tensor_is_mutable, "garrow_tensor_is_mutable", LIBS);
+  gidLink(garrow_tensor_is_row_major, "garrow_tensor_is_row_major", LIBS);
 
   // Time32Array
-  link(garrow_time32_array_get_type, "garrow_time32_array_get_type");
-  link(garrow_time32_array_new, "garrow_time32_array_new");
-  link(garrow_time32_array_get_value, "garrow_time32_array_get_value");
-  link(garrow_time32_array_get_values, "garrow_time32_array_get_values");
+  gidLink(garrow_time32_array_get_type, "garrow_time32_array_get_type", LIBS);
+  gidLink(garrow_time32_array_new, "garrow_time32_array_new", LIBS);
+  gidLink(garrow_time32_array_get_value, "garrow_time32_array_get_value", LIBS);
+  gidLink(garrow_time32_array_get_values, "garrow_time32_array_get_values", LIBS);
 
   // Time32ArrayBuilder
-  link(garrow_time32_array_builder_get_type, "garrow_time32_array_builder_get_type");
-  link(garrow_time32_array_builder_new, "garrow_time32_array_builder_new");
-  link(garrow_time32_array_builder_append, "garrow_time32_array_builder_append");
-  link(garrow_time32_array_builder_append_null, "garrow_time32_array_builder_append_null");
-  link(garrow_time32_array_builder_append_nulls, "garrow_time32_array_builder_append_nulls");
-  link(garrow_time32_array_builder_append_value, "garrow_time32_array_builder_append_value");
-  link(garrow_time32_array_builder_append_values, "garrow_time32_array_builder_append_values");
+  gidLink(garrow_time32_array_builder_get_type, "garrow_time32_array_builder_get_type", LIBS);
+  gidLink(garrow_time32_array_builder_new, "garrow_time32_array_builder_new", LIBS);
+  gidLink(garrow_time32_array_builder_append, "garrow_time32_array_builder_append", LIBS);
+  gidLink(garrow_time32_array_builder_append_null, "garrow_time32_array_builder_append_null", LIBS);
+  gidLink(garrow_time32_array_builder_append_nulls, "garrow_time32_array_builder_append_nulls", LIBS);
+  gidLink(garrow_time32_array_builder_append_value, "garrow_time32_array_builder_append_value", LIBS);
+  gidLink(garrow_time32_array_builder_append_values, "garrow_time32_array_builder_append_values", LIBS);
 
   // Time32DataType
-  link(garrow_time32_data_type_get_type, "garrow_time32_data_type_get_type");
-  link(garrow_time32_data_type_new, "garrow_time32_data_type_new");
+  gidLink(garrow_time32_data_type_get_type, "garrow_time32_data_type_get_type", LIBS);
+  gidLink(garrow_time32_data_type_new, "garrow_time32_data_type_new", LIBS);
 
   // Time32Scalar
-  link(garrow_time32_scalar_get_type, "garrow_time32_scalar_get_type");
-  link(garrow_time32_scalar_new, "garrow_time32_scalar_new");
-  link(garrow_time32_scalar_get_value, "garrow_time32_scalar_get_value");
+  gidLink(garrow_time32_scalar_get_type, "garrow_time32_scalar_get_type", LIBS);
+  gidLink(garrow_time32_scalar_new, "garrow_time32_scalar_new", LIBS);
+  gidLink(garrow_time32_scalar_get_value, "garrow_time32_scalar_get_value", LIBS);
 
   // Time64Array
-  link(garrow_time64_array_get_type, "garrow_time64_array_get_type");
-  link(garrow_time64_array_new, "garrow_time64_array_new");
-  link(garrow_time64_array_get_value, "garrow_time64_array_get_value");
-  link(garrow_time64_array_get_values, "garrow_time64_array_get_values");
+  gidLink(garrow_time64_array_get_type, "garrow_time64_array_get_type", LIBS);
+  gidLink(garrow_time64_array_new, "garrow_time64_array_new", LIBS);
+  gidLink(garrow_time64_array_get_value, "garrow_time64_array_get_value", LIBS);
+  gidLink(garrow_time64_array_get_values, "garrow_time64_array_get_values", LIBS);
 
   // Time64ArrayBuilder
-  link(garrow_time64_array_builder_get_type, "garrow_time64_array_builder_get_type");
-  link(garrow_time64_array_builder_new, "garrow_time64_array_builder_new");
-  link(garrow_time64_array_builder_append, "garrow_time64_array_builder_append");
-  link(garrow_time64_array_builder_append_null, "garrow_time64_array_builder_append_null");
-  link(garrow_time64_array_builder_append_nulls, "garrow_time64_array_builder_append_nulls");
-  link(garrow_time64_array_builder_append_value, "garrow_time64_array_builder_append_value");
-  link(garrow_time64_array_builder_append_values, "garrow_time64_array_builder_append_values");
+  gidLink(garrow_time64_array_builder_get_type, "garrow_time64_array_builder_get_type", LIBS);
+  gidLink(garrow_time64_array_builder_new, "garrow_time64_array_builder_new", LIBS);
+  gidLink(garrow_time64_array_builder_append, "garrow_time64_array_builder_append", LIBS);
+  gidLink(garrow_time64_array_builder_append_null, "garrow_time64_array_builder_append_null", LIBS);
+  gidLink(garrow_time64_array_builder_append_nulls, "garrow_time64_array_builder_append_nulls", LIBS);
+  gidLink(garrow_time64_array_builder_append_value, "garrow_time64_array_builder_append_value", LIBS);
+  gidLink(garrow_time64_array_builder_append_values, "garrow_time64_array_builder_append_values", LIBS);
 
   // Time64DataType
-  link(garrow_time64_data_type_get_type, "garrow_time64_data_type_get_type");
-  link(garrow_time64_data_type_new, "garrow_time64_data_type_new");
+  gidLink(garrow_time64_data_type_get_type, "garrow_time64_data_type_get_type", LIBS);
+  gidLink(garrow_time64_data_type_new, "garrow_time64_data_type_new", LIBS);
 
   // Time64Scalar
-  link(garrow_time64_scalar_get_type, "garrow_time64_scalar_get_type");
-  link(garrow_time64_scalar_new, "garrow_time64_scalar_new");
-  link(garrow_time64_scalar_get_value, "garrow_time64_scalar_get_value");
+  gidLink(garrow_time64_scalar_get_type, "garrow_time64_scalar_get_type", LIBS);
+  gidLink(garrow_time64_scalar_new, "garrow_time64_scalar_new", LIBS);
+  gidLink(garrow_time64_scalar_get_value, "garrow_time64_scalar_get_value", LIBS);
 
   // TimeDataType
-  link(garrow_time_data_type_get_type, "garrow_time_data_type_get_type");
-  link(garrow_time_data_type_get_unit, "garrow_time_data_type_get_unit");
+  gidLink(garrow_time_data_type_get_type, "garrow_time_data_type_get_type", LIBS);
+  gidLink(garrow_time_data_type_get_unit, "garrow_time_data_type_get_unit", LIBS);
 
   // TimestampArray
-  link(garrow_timestamp_array_get_type, "garrow_timestamp_array_get_type");
-  link(garrow_timestamp_array_new, "garrow_timestamp_array_new");
-  link(garrow_timestamp_array_get_value, "garrow_timestamp_array_get_value");
-  link(garrow_timestamp_array_get_values, "garrow_timestamp_array_get_values");
+  gidLink(garrow_timestamp_array_get_type, "garrow_timestamp_array_get_type", LIBS);
+  gidLink(garrow_timestamp_array_new, "garrow_timestamp_array_new", LIBS);
+  gidLink(garrow_timestamp_array_get_value, "garrow_timestamp_array_get_value", LIBS);
+  gidLink(garrow_timestamp_array_get_values, "garrow_timestamp_array_get_values", LIBS);
 
   // TimestampArrayBuilder
-  link(garrow_timestamp_array_builder_get_type, "garrow_timestamp_array_builder_get_type");
-  link(garrow_timestamp_array_builder_new, "garrow_timestamp_array_builder_new");
-  link(garrow_timestamp_array_builder_append, "garrow_timestamp_array_builder_append");
-  link(garrow_timestamp_array_builder_append_null, "garrow_timestamp_array_builder_append_null");
-  link(garrow_timestamp_array_builder_append_nulls, "garrow_timestamp_array_builder_append_nulls");
-  link(garrow_timestamp_array_builder_append_value, "garrow_timestamp_array_builder_append_value");
-  link(garrow_timestamp_array_builder_append_values, "garrow_timestamp_array_builder_append_values");
+  gidLink(garrow_timestamp_array_builder_get_type, "garrow_timestamp_array_builder_get_type", LIBS);
+  gidLink(garrow_timestamp_array_builder_new, "garrow_timestamp_array_builder_new", LIBS);
+  gidLink(garrow_timestamp_array_builder_append, "garrow_timestamp_array_builder_append", LIBS);
+  gidLink(garrow_timestamp_array_builder_append_null, "garrow_timestamp_array_builder_append_null", LIBS);
+  gidLink(garrow_timestamp_array_builder_append_nulls, "garrow_timestamp_array_builder_append_nulls", LIBS);
+  gidLink(garrow_timestamp_array_builder_append_value, "garrow_timestamp_array_builder_append_value", LIBS);
+  gidLink(garrow_timestamp_array_builder_append_values, "garrow_timestamp_array_builder_append_values", LIBS);
 
   // TimestampDataType
-  link(garrow_timestamp_data_type_get_type, "garrow_timestamp_data_type_get_type");
-  link(garrow_timestamp_data_type_new, "garrow_timestamp_data_type_new");
-  link(garrow_timestamp_data_type_get_unit, "garrow_timestamp_data_type_get_unit");
+  gidLink(garrow_timestamp_data_type_get_type, "garrow_timestamp_data_type_get_type", LIBS);
+  gidLink(garrow_timestamp_data_type_new, "garrow_timestamp_data_type_new", LIBS);
+  gidLink(garrow_timestamp_data_type_get_unit, "garrow_timestamp_data_type_get_unit", LIBS);
 
   // TimestampParser
-  link(garrow_timestamp_parser_get_type, "garrow_timestamp_parser_get_type");
-  link(garrow_timestamp_parser_get_kind, "garrow_timestamp_parser_get_kind");
+  gidLink(garrow_timestamp_parser_get_type, "garrow_timestamp_parser_get_type", LIBS);
+  gidLink(garrow_timestamp_parser_get_kind, "garrow_timestamp_parser_get_kind", LIBS);
 
   // TimestampScalar
-  link(garrow_timestamp_scalar_get_type, "garrow_timestamp_scalar_get_type");
-  link(garrow_timestamp_scalar_new, "garrow_timestamp_scalar_new");
-  link(garrow_timestamp_scalar_get_value, "garrow_timestamp_scalar_get_value");
+  gidLink(garrow_timestamp_scalar_get_type, "garrow_timestamp_scalar_get_type", LIBS);
+  gidLink(garrow_timestamp_scalar_new, "garrow_timestamp_scalar_new", LIBS);
+  gidLink(garrow_timestamp_scalar_get_value, "garrow_timestamp_scalar_get_value", LIBS);
 
   // UInt16Array
-  link(garrow_uint16_array_get_type, "garrow_uint16_array_get_type");
-  link(garrow_uint16_array_new, "garrow_uint16_array_new");
-  link(garrow_uint16_array_get_value, "garrow_uint16_array_get_value");
-  link(garrow_uint16_array_get_values, "garrow_uint16_array_get_values");
-  link(garrow_uint16_array_sum, "garrow_uint16_array_sum");
+  gidLink(garrow_uint16_array_get_type, "garrow_uint16_array_get_type", LIBS);
+  gidLink(garrow_uint16_array_new, "garrow_uint16_array_new", LIBS);
+  gidLink(garrow_uint16_array_get_value, "garrow_uint16_array_get_value", LIBS);
+  gidLink(garrow_uint16_array_get_values, "garrow_uint16_array_get_values", LIBS);
+  gidLink(garrow_uint16_array_sum, "garrow_uint16_array_sum", LIBS);
 
   // UInt16ArrayBuilder
-  link(garrow_uint16_array_builder_get_type, "garrow_uint16_array_builder_get_type");
-  link(garrow_uint16_array_builder_new, "garrow_uint16_array_builder_new");
-  link(garrow_uint16_array_builder_append, "garrow_uint16_array_builder_append");
-  link(garrow_uint16_array_builder_append_null, "garrow_uint16_array_builder_append_null");
-  link(garrow_uint16_array_builder_append_nulls, "garrow_uint16_array_builder_append_nulls");
-  link(garrow_uint16_array_builder_append_value, "garrow_uint16_array_builder_append_value");
-  link(garrow_uint16_array_builder_append_values, "garrow_uint16_array_builder_append_values");
+  gidLink(garrow_uint16_array_builder_get_type, "garrow_uint16_array_builder_get_type", LIBS);
+  gidLink(garrow_uint16_array_builder_new, "garrow_uint16_array_builder_new", LIBS);
+  gidLink(garrow_uint16_array_builder_append, "garrow_uint16_array_builder_append", LIBS);
+  gidLink(garrow_uint16_array_builder_append_null, "garrow_uint16_array_builder_append_null", LIBS);
+  gidLink(garrow_uint16_array_builder_append_nulls, "garrow_uint16_array_builder_append_nulls", LIBS);
+  gidLink(garrow_uint16_array_builder_append_value, "garrow_uint16_array_builder_append_value", LIBS);
+  gidLink(garrow_uint16_array_builder_append_values, "garrow_uint16_array_builder_append_values", LIBS);
 
   // UInt16DataType
-  link(garrow_uint16_data_type_get_type, "garrow_uint16_data_type_get_type");
-  link(garrow_uint16_data_type_new, "garrow_uint16_data_type_new");
+  gidLink(garrow_uint16_data_type_get_type, "garrow_uint16_data_type_get_type", LIBS);
+  gidLink(garrow_uint16_data_type_new, "garrow_uint16_data_type_new", LIBS);
 
   // UInt16Scalar
-  link(garrow_uint16_scalar_get_type, "garrow_uint16_scalar_get_type");
-  link(garrow_uint16_scalar_new, "garrow_uint16_scalar_new");
-  link(garrow_uint16_scalar_get_value, "garrow_uint16_scalar_get_value");
+  gidLink(garrow_uint16_scalar_get_type, "garrow_uint16_scalar_get_type", LIBS);
+  gidLink(garrow_uint16_scalar_new, "garrow_uint16_scalar_new", LIBS);
+  gidLink(garrow_uint16_scalar_get_value, "garrow_uint16_scalar_get_value", LIBS);
 
   // UInt32Array
-  link(garrow_uint32_array_get_type, "garrow_uint32_array_get_type");
-  link(garrow_uint32_array_new, "garrow_uint32_array_new");
-  link(garrow_uint32_array_get_value, "garrow_uint32_array_get_value");
-  link(garrow_uint32_array_get_values, "garrow_uint32_array_get_values");
-  link(garrow_uint32_array_sum, "garrow_uint32_array_sum");
+  gidLink(garrow_uint32_array_get_type, "garrow_uint32_array_get_type", LIBS);
+  gidLink(garrow_uint32_array_new, "garrow_uint32_array_new", LIBS);
+  gidLink(garrow_uint32_array_get_value, "garrow_uint32_array_get_value", LIBS);
+  gidLink(garrow_uint32_array_get_values, "garrow_uint32_array_get_values", LIBS);
+  gidLink(garrow_uint32_array_sum, "garrow_uint32_array_sum", LIBS);
 
   // UInt32ArrayBuilder
-  link(garrow_uint32_array_builder_get_type, "garrow_uint32_array_builder_get_type");
-  link(garrow_uint32_array_builder_new, "garrow_uint32_array_builder_new");
-  link(garrow_uint32_array_builder_append, "garrow_uint32_array_builder_append");
-  link(garrow_uint32_array_builder_append_null, "garrow_uint32_array_builder_append_null");
-  link(garrow_uint32_array_builder_append_nulls, "garrow_uint32_array_builder_append_nulls");
-  link(garrow_uint32_array_builder_append_value, "garrow_uint32_array_builder_append_value");
-  link(garrow_uint32_array_builder_append_values, "garrow_uint32_array_builder_append_values");
+  gidLink(garrow_uint32_array_builder_get_type, "garrow_uint32_array_builder_get_type", LIBS);
+  gidLink(garrow_uint32_array_builder_new, "garrow_uint32_array_builder_new", LIBS);
+  gidLink(garrow_uint32_array_builder_append, "garrow_uint32_array_builder_append", LIBS);
+  gidLink(garrow_uint32_array_builder_append_null, "garrow_uint32_array_builder_append_null", LIBS);
+  gidLink(garrow_uint32_array_builder_append_nulls, "garrow_uint32_array_builder_append_nulls", LIBS);
+  gidLink(garrow_uint32_array_builder_append_value, "garrow_uint32_array_builder_append_value", LIBS);
+  gidLink(garrow_uint32_array_builder_append_values, "garrow_uint32_array_builder_append_values", LIBS);
 
   // UInt32DataType
-  link(garrow_uint32_data_type_get_type, "garrow_uint32_data_type_get_type");
-  link(garrow_uint32_data_type_new, "garrow_uint32_data_type_new");
+  gidLink(garrow_uint32_data_type_get_type, "garrow_uint32_data_type_get_type", LIBS);
+  gidLink(garrow_uint32_data_type_new, "garrow_uint32_data_type_new", LIBS);
 
   // UInt32Scalar
-  link(garrow_uint32_scalar_get_type, "garrow_uint32_scalar_get_type");
-  link(garrow_uint32_scalar_new, "garrow_uint32_scalar_new");
-  link(garrow_uint32_scalar_get_value, "garrow_uint32_scalar_get_value");
+  gidLink(garrow_uint32_scalar_get_type, "garrow_uint32_scalar_get_type", LIBS);
+  gidLink(garrow_uint32_scalar_new, "garrow_uint32_scalar_new", LIBS);
+  gidLink(garrow_uint32_scalar_get_value, "garrow_uint32_scalar_get_value", LIBS);
 
   // UInt64Array
-  link(garrow_uint64_array_get_type, "garrow_uint64_array_get_type");
-  link(garrow_uint64_array_new, "garrow_uint64_array_new");
-  link(garrow_uint64_array_get_value, "garrow_uint64_array_get_value");
-  link(garrow_uint64_array_get_values, "garrow_uint64_array_get_values");
-  link(garrow_uint64_array_sum, "garrow_uint64_array_sum");
+  gidLink(garrow_uint64_array_get_type, "garrow_uint64_array_get_type", LIBS);
+  gidLink(garrow_uint64_array_new, "garrow_uint64_array_new", LIBS);
+  gidLink(garrow_uint64_array_get_value, "garrow_uint64_array_get_value", LIBS);
+  gidLink(garrow_uint64_array_get_values, "garrow_uint64_array_get_values", LIBS);
+  gidLink(garrow_uint64_array_sum, "garrow_uint64_array_sum", LIBS);
 
   // UInt64ArrayBuilder
-  link(garrow_uint64_array_builder_get_type, "garrow_uint64_array_builder_get_type");
-  link(garrow_uint64_array_builder_new, "garrow_uint64_array_builder_new");
-  link(garrow_uint64_array_builder_append, "garrow_uint64_array_builder_append");
-  link(garrow_uint64_array_builder_append_null, "garrow_uint64_array_builder_append_null");
-  link(garrow_uint64_array_builder_append_nulls, "garrow_uint64_array_builder_append_nulls");
-  link(garrow_uint64_array_builder_append_value, "garrow_uint64_array_builder_append_value");
-  link(garrow_uint64_array_builder_append_values, "garrow_uint64_array_builder_append_values");
+  gidLink(garrow_uint64_array_builder_get_type, "garrow_uint64_array_builder_get_type", LIBS);
+  gidLink(garrow_uint64_array_builder_new, "garrow_uint64_array_builder_new", LIBS);
+  gidLink(garrow_uint64_array_builder_append, "garrow_uint64_array_builder_append", LIBS);
+  gidLink(garrow_uint64_array_builder_append_null, "garrow_uint64_array_builder_append_null", LIBS);
+  gidLink(garrow_uint64_array_builder_append_nulls, "garrow_uint64_array_builder_append_nulls", LIBS);
+  gidLink(garrow_uint64_array_builder_append_value, "garrow_uint64_array_builder_append_value", LIBS);
+  gidLink(garrow_uint64_array_builder_append_values, "garrow_uint64_array_builder_append_values", LIBS);
 
   // UInt64DataType
-  link(garrow_uint64_data_type_get_type, "garrow_uint64_data_type_get_type");
-  link(garrow_uint64_data_type_new, "garrow_uint64_data_type_new");
+  gidLink(garrow_uint64_data_type_get_type, "garrow_uint64_data_type_get_type", LIBS);
+  gidLink(garrow_uint64_data_type_new, "garrow_uint64_data_type_new", LIBS);
 
   // UInt64Scalar
-  link(garrow_uint64_scalar_get_type, "garrow_uint64_scalar_get_type");
-  link(garrow_uint64_scalar_new, "garrow_uint64_scalar_new");
-  link(garrow_uint64_scalar_get_value, "garrow_uint64_scalar_get_value");
+  gidLink(garrow_uint64_scalar_get_type, "garrow_uint64_scalar_get_type", LIBS);
+  gidLink(garrow_uint64_scalar_new, "garrow_uint64_scalar_new", LIBS);
+  gidLink(garrow_uint64_scalar_get_value, "garrow_uint64_scalar_get_value", LIBS);
 
   // UInt8Array
-  link(garrow_uint8_array_get_type, "garrow_uint8_array_get_type");
-  link(garrow_uint8_array_new, "garrow_uint8_array_new");
-  link(garrow_uint8_array_get_value, "garrow_uint8_array_get_value");
-  link(garrow_uint8_array_get_values, "garrow_uint8_array_get_values");
-  link(garrow_uint8_array_sum, "garrow_uint8_array_sum");
+  gidLink(garrow_uint8_array_get_type, "garrow_uint8_array_get_type", LIBS);
+  gidLink(garrow_uint8_array_new, "garrow_uint8_array_new", LIBS);
+  gidLink(garrow_uint8_array_get_value, "garrow_uint8_array_get_value", LIBS);
+  gidLink(garrow_uint8_array_get_values, "garrow_uint8_array_get_values", LIBS);
+  gidLink(garrow_uint8_array_sum, "garrow_uint8_array_sum", LIBS);
 
   // UInt8ArrayBuilder
-  link(garrow_uint8_array_builder_get_type, "garrow_uint8_array_builder_get_type");
-  link(garrow_uint8_array_builder_new, "garrow_uint8_array_builder_new");
-  link(garrow_uint8_array_builder_append, "garrow_uint8_array_builder_append");
-  link(garrow_uint8_array_builder_append_null, "garrow_uint8_array_builder_append_null");
-  link(garrow_uint8_array_builder_append_nulls, "garrow_uint8_array_builder_append_nulls");
-  link(garrow_uint8_array_builder_append_value, "garrow_uint8_array_builder_append_value");
-  link(garrow_uint8_array_builder_append_values, "garrow_uint8_array_builder_append_values");
+  gidLink(garrow_uint8_array_builder_get_type, "garrow_uint8_array_builder_get_type", LIBS);
+  gidLink(garrow_uint8_array_builder_new, "garrow_uint8_array_builder_new", LIBS);
+  gidLink(garrow_uint8_array_builder_append, "garrow_uint8_array_builder_append", LIBS);
+  gidLink(garrow_uint8_array_builder_append_null, "garrow_uint8_array_builder_append_null", LIBS);
+  gidLink(garrow_uint8_array_builder_append_nulls, "garrow_uint8_array_builder_append_nulls", LIBS);
+  gidLink(garrow_uint8_array_builder_append_value, "garrow_uint8_array_builder_append_value", LIBS);
+  gidLink(garrow_uint8_array_builder_append_values, "garrow_uint8_array_builder_append_values", LIBS);
 
   // UInt8DataType
-  link(garrow_uint8_data_type_get_type, "garrow_uint8_data_type_get_type");
-  link(garrow_uint8_data_type_new, "garrow_uint8_data_type_new");
+  gidLink(garrow_uint8_data_type_get_type, "garrow_uint8_data_type_get_type", LIBS);
+  gidLink(garrow_uint8_data_type_new, "garrow_uint8_data_type_new", LIBS);
 
   // UInt8Scalar
-  link(garrow_uint8_scalar_get_type, "garrow_uint8_scalar_get_type");
-  link(garrow_uint8_scalar_new, "garrow_uint8_scalar_new");
-  link(garrow_uint8_scalar_get_value, "garrow_uint8_scalar_get_value");
+  gidLink(garrow_uint8_scalar_get_type, "garrow_uint8_scalar_get_type", LIBS);
+  gidLink(garrow_uint8_scalar_new, "garrow_uint8_scalar_new", LIBS);
+  gidLink(garrow_uint8_scalar_get_value, "garrow_uint8_scalar_get_value", LIBS);
 
   // UIntArrayBuilder
-  link(garrow_uint_array_builder_get_type, "garrow_uint_array_builder_get_type");
-  link(garrow_uint_array_builder_new, "garrow_uint_array_builder_new");
-  link(garrow_uint_array_builder_append, "garrow_uint_array_builder_append");
-  link(garrow_uint_array_builder_append_null, "garrow_uint_array_builder_append_null");
-  link(garrow_uint_array_builder_append_nulls, "garrow_uint_array_builder_append_nulls");
-  link(garrow_uint_array_builder_append_value, "garrow_uint_array_builder_append_value");
-  link(garrow_uint_array_builder_append_values, "garrow_uint_array_builder_append_values");
+  gidLink(garrow_uint_array_builder_get_type, "garrow_uint_array_builder_get_type", LIBS);
+  gidLink(garrow_uint_array_builder_new, "garrow_uint_array_builder_new", LIBS);
+  gidLink(garrow_uint_array_builder_append, "garrow_uint_array_builder_append", LIBS);
+  gidLink(garrow_uint_array_builder_append_null, "garrow_uint_array_builder_append_null", LIBS);
+  gidLink(garrow_uint_array_builder_append_nulls, "garrow_uint_array_builder_append_nulls", LIBS);
+  gidLink(garrow_uint_array_builder_append_value, "garrow_uint_array_builder_append_value", LIBS);
+  gidLink(garrow_uint_array_builder_append_values, "garrow_uint_array_builder_append_values", LIBS);
 
   // UTF8NormalizeOptions
-  link(garrow_utf8_normalize_options_get_type, "garrow_utf8_normalize_options_get_type");
-  link(garrow_utf8_normalize_options_new, "garrow_utf8_normalize_options_new");
+  gidLink(garrow_utf8_normalize_options_get_type, "garrow_utf8_normalize_options_get_type", LIBS);
+  gidLink(garrow_utf8_normalize_options_new, "garrow_utf8_normalize_options_new", LIBS);
 
   // UnionArray
-  link(garrow_union_array_get_type, "garrow_union_array_get_type");
-  link(garrow_union_array_get_child_id, "garrow_union_array_get_child_id");
-  link(garrow_union_array_get_field, "garrow_union_array_get_field");
-  link(garrow_union_array_get_type_code, "garrow_union_array_get_type_code");
+  gidLink(garrow_union_array_get_type, "garrow_union_array_get_type", LIBS);
+  gidLink(garrow_union_array_get_child_id, "garrow_union_array_get_child_id", LIBS);
+  gidLink(garrow_union_array_get_field, "garrow_union_array_get_field", LIBS);
+  gidLink(garrow_union_array_get_type_code, "garrow_union_array_get_type_code", LIBS);
 
   // UnionArrayBuilder
-  link(garrow_union_array_builder_get_type, "garrow_union_array_builder_get_type");
-  link(garrow_union_array_builder_append_child, "garrow_union_array_builder_append_child");
-  link(garrow_union_array_builder_append_value, "garrow_union_array_builder_append_value");
+  gidLink(garrow_union_array_builder_get_type, "garrow_union_array_builder_get_type", LIBS);
+  gidLink(garrow_union_array_builder_append_child, "garrow_union_array_builder_append_child", LIBS);
+  gidLink(garrow_union_array_builder_append_value, "garrow_union_array_builder_append_value", LIBS);
 
   // UnionDataType
-  link(garrow_union_data_type_get_type, "garrow_union_data_type_get_type");
-  link(garrow_union_data_type_get_field, "garrow_union_data_type_get_field");
-  link(garrow_union_data_type_get_fields, "garrow_union_data_type_get_fields");
-  link(garrow_union_data_type_get_n_fields, "garrow_union_data_type_get_n_fields");
-  link(garrow_union_data_type_get_type_codes, "garrow_union_data_type_get_type_codes");
+  gidLink(garrow_union_data_type_get_type, "garrow_union_data_type_get_type", LIBS);
+  gidLink(garrow_union_data_type_get_field, "garrow_union_data_type_get_field", LIBS);
+  gidLink(garrow_union_data_type_get_fields, "garrow_union_data_type_get_fields", LIBS);
+  gidLink(garrow_union_data_type_get_n_fields, "garrow_union_data_type_get_n_fields", LIBS);
+  gidLink(garrow_union_data_type_get_type_codes, "garrow_union_data_type_get_type_codes", LIBS);
 
   // UnionScalar
-  link(garrow_union_scalar_get_type, "garrow_union_scalar_get_type");
-  link(garrow_union_scalar_get_type_code, "garrow_union_scalar_get_type_code");
-  link(garrow_union_scalar_get_value, "garrow_union_scalar_get_value");
+  gidLink(garrow_union_scalar_get_type, "garrow_union_scalar_get_type", LIBS);
+  gidLink(garrow_union_scalar_get_type_code, "garrow_union_scalar_get_type_code", LIBS);
+  gidLink(garrow_union_scalar_get_value, "garrow_union_scalar_get_value", LIBS);
 
   // VarianceOptions
-  link(garrow_variance_options_get_type, "garrow_variance_options_get_type");
-  link(garrow_variance_options_new, "garrow_variance_options_new");
+  gidLink(garrow_variance_options_get_type, "garrow_variance_options_get_type", LIBS);
+  gidLink(garrow_variance_options_new, "garrow_variance_options_new", LIBS);
 
   // Writable
-  link(garrow_writable_get_type, "garrow_writable_get_type");
-  link(garrow_writable_flush, "garrow_writable_flush");
-  link(garrow_writable_write, "garrow_writable_write");
+  gidLink(garrow_writable_get_type, "garrow_writable_get_type", LIBS);
+  gidLink(garrow_writable_flush, "garrow_writable_flush", LIBS);
+  gidLink(garrow_writable_write, "garrow_writable_write", LIBS);
 
   // WritableFile
-  link(garrow_writable_file_get_type, "garrow_writable_file_get_type");
-  link(garrow_writable_file_write_at, "garrow_writable_file_write_at");
+  gidLink(garrow_writable_file_get_type, "garrow_writable_file_get_type", LIBS);
+  gidLink(garrow_writable_file_write_at, "garrow_writable_file_write_at", LIBS);
 
   // WriteOptions
-  link(garrow_write_options_get_type, "garrow_write_options_get_type");
-  link(garrow_write_options_new, "garrow_write_options_new");
-}
-
-import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
-import std.string : fromStringz, toStringz;
-
-private void link(T)(ref T funcPtr, string symbol)
-{
-  foreach (lib; LIBS)
-  {
-  if (auto handle = dlopen(cast(char*)toStringz(lib), RTLD_GLOBAL | RTLD_NOW))
-  {
-  if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
-  {
-  funcPtr = cast(T)symPtr;
-  return;
-  }
-  }
-  else
-  throw new Error("Failed to load library '" ~ lib ~ "': " ~ dlerror().fromStringz.idup);
-  }
-
-  funcPtr = cast(T)&symbolNotFound;
-}
-
-private void symbolNotFound()
-{
-  throw new Error("Attempted to execute a dynamic library function which was not found");
+  gidLink(garrow_write_options_get_type, "garrow_write_options_get_type", LIBS);
+  gidLink(garrow_write_options_new, "garrow_write_options_new", LIBS);
 }

@@ -1,11 +1,12 @@
 module ArrowFlight.c.functions;
 
+import Gid.loader;
 import ArrowFlight.c.types;
 public import Arrow.c.types;
 
 version(Windows)
   private immutable LIBS = ["libarrow-flight-glib-1900.dll;arrow-flight-glib-1900.dll;arrow-flight-glib.dll"];
-version(OSX)
+else version(OSX)
   private immutable LIBS = ["libarrow-flight-glib.1900.dylib"];
 else
   private immutable LIBS = ["libarrow-flight-glib.so.1900"];
@@ -318,180 +319,153 @@ alias gaflight_ticket_equal = c_gaflight_ticket_equal;
 shared static this()
 {
   // CallOptions
-  link(gaflight_call_options_get_type, "gaflight_call_options_get_type");
-  link(gaflight_call_options_new, "gaflight_call_options_new");
-  link(gaflight_call_options_add_header, "gaflight_call_options_add_header");
-  link(gaflight_call_options_clear_headers, "gaflight_call_options_clear_headers");
-  link(gaflight_call_options_foreach_header, "gaflight_call_options_foreach_header");
+  gidLink(gaflight_call_options_get_type, "gaflight_call_options_get_type", LIBS);
+  gidLink(gaflight_call_options_new, "gaflight_call_options_new", LIBS);
+  gidLink(gaflight_call_options_add_header, "gaflight_call_options_add_header", LIBS);
+  gidLink(gaflight_call_options_clear_headers, "gaflight_call_options_clear_headers", LIBS);
+  gidLink(gaflight_call_options_foreach_header, "gaflight_call_options_foreach_header", LIBS);
 
   // Client
-  link(gaflight_client_get_type, "gaflight_client_get_type");
-  link(gaflight_client_new, "gaflight_client_new");
-  link(gaflight_client_authenticate_basic_token, "gaflight_client_authenticate_basic_token");
-  link(gaflight_client_close, "gaflight_client_close");
-  link(gaflight_client_do_get, "gaflight_client_do_get");
-  link(gaflight_client_do_put, "gaflight_client_do_put");
-  link(gaflight_client_get_flight_info, "gaflight_client_get_flight_info");
-  link(gaflight_client_list_flights, "gaflight_client_list_flights");
+  gidLink(gaflight_client_get_type, "gaflight_client_get_type", LIBS);
+  gidLink(gaflight_client_new, "gaflight_client_new", LIBS);
+  gidLink(gaflight_client_authenticate_basic_token, "gaflight_client_authenticate_basic_token", LIBS);
+  gidLink(gaflight_client_close, "gaflight_client_close", LIBS);
+  gidLink(gaflight_client_do_get, "gaflight_client_do_get", LIBS);
+  gidLink(gaflight_client_do_put, "gaflight_client_do_put", LIBS);
+  gidLink(gaflight_client_get_flight_info, "gaflight_client_get_flight_info", LIBS);
+  gidLink(gaflight_client_list_flights, "gaflight_client_list_flights", LIBS);
 
   // ClientOptions
-  link(gaflight_client_options_get_type, "gaflight_client_options_get_type");
-  link(gaflight_client_options_new, "gaflight_client_options_new");
+  gidLink(gaflight_client_options_get_type, "gaflight_client_options_get_type", LIBS);
+  gidLink(gaflight_client_options_new, "gaflight_client_options_new", LIBS);
 
   // CommandDescriptor
-  link(gaflight_command_descriptor_get_type, "gaflight_command_descriptor_get_type");
-  link(gaflight_command_descriptor_new, "gaflight_command_descriptor_new");
-  link(gaflight_command_descriptor_get_command, "gaflight_command_descriptor_get_command");
+  gidLink(gaflight_command_descriptor_get_type, "gaflight_command_descriptor_get_type", LIBS);
+  gidLink(gaflight_command_descriptor_new, "gaflight_command_descriptor_new", LIBS);
+  gidLink(gaflight_command_descriptor_get_command, "gaflight_command_descriptor_get_command", LIBS);
 
   // Criteria
-  link(gaflight_criteria_get_type, "gaflight_criteria_get_type");
-  link(gaflight_criteria_new, "gaflight_criteria_new");
+  gidLink(gaflight_criteria_get_type, "gaflight_criteria_get_type", LIBS);
+  gidLink(gaflight_criteria_new, "gaflight_criteria_new", LIBS);
 
   // DataStream
-  link(gaflight_data_stream_get_type, "gaflight_data_stream_get_type");
+  gidLink(gaflight_data_stream_get_type, "gaflight_data_stream_get_type", LIBS);
 
   // Descriptor
-  link(gaflight_descriptor_get_type, "gaflight_descriptor_get_type");
-  link(gaflight_descriptor_equal, "gaflight_descriptor_equal");
-  link(gaflight_descriptor_to_string, "gaflight_descriptor_to_string");
+  gidLink(gaflight_descriptor_get_type, "gaflight_descriptor_get_type", LIBS);
+  gidLink(gaflight_descriptor_equal, "gaflight_descriptor_equal", LIBS);
+  gidLink(gaflight_descriptor_to_string, "gaflight_descriptor_to_string", LIBS);
 
   // DoPutResult
-  link(gaflight_do_put_result_get_type, "gaflight_do_put_result_get_type");
+  gidLink(gaflight_do_put_result_get_type, "gaflight_do_put_result_get_type", LIBS);
 
   // Endpoint
-  link(gaflight_endpoint_get_type, "gaflight_endpoint_get_type");
-  link(gaflight_endpoint_new, "gaflight_endpoint_new");
-  link(gaflight_endpoint_equal, "gaflight_endpoint_equal");
-  link(gaflight_endpoint_get_locations, "gaflight_endpoint_get_locations");
+  gidLink(gaflight_endpoint_get_type, "gaflight_endpoint_get_type", LIBS);
+  gidLink(gaflight_endpoint_new, "gaflight_endpoint_new", LIBS);
+  gidLink(gaflight_endpoint_equal, "gaflight_endpoint_equal", LIBS);
+  gidLink(gaflight_endpoint_get_locations, "gaflight_endpoint_get_locations", LIBS);
 
   // Info
-  link(gaflight_info_get_type, "gaflight_info_get_type");
-  link(gaflight_info_new, "gaflight_info_new");
-  link(gaflight_info_equal, "gaflight_info_equal");
-  link(gaflight_info_get_descriptor, "gaflight_info_get_descriptor");
-  link(gaflight_info_get_endpoints, "gaflight_info_get_endpoints");
-  link(gaflight_info_get_schema, "gaflight_info_get_schema");
-  link(gaflight_info_get_total_bytes, "gaflight_info_get_total_bytes");
-  link(gaflight_info_get_total_records, "gaflight_info_get_total_records");
+  gidLink(gaflight_info_get_type, "gaflight_info_get_type", LIBS);
+  gidLink(gaflight_info_new, "gaflight_info_new", LIBS);
+  gidLink(gaflight_info_equal, "gaflight_info_equal", LIBS);
+  gidLink(gaflight_info_get_descriptor, "gaflight_info_get_descriptor", LIBS);
+  gidLink(gaflight_info_get_endpoints, "gaflight_info_get_endpoints", LIBS);
+  gidLink(gaflight_info_get_schema, "gaflight_info_get_schema", LIBS);
+  gidLink(gaflight_info_get_total_bytes, "gaflight_info_get_total_bytes", LIBS);
+  gidLink(gaflight_info_get_total_records, "gaflight_info_get_total_records", LIBS);
 
   // Location
-  link(gaflight_location_get_type, "gaflight_location_get_type");
-  link(gaflight_location_new, "gaflight_location_new");
-  link(gaflight_location_equal, "gaflight_location_equal");
-  link(gaflight_location_get_scheme, "gaflight_location_get_scheme");
-  link(gaflight_location_to_string, "gaflight_location_to_string");
+  gidLink(gaflight_location_get_type, "gaflight_location_get_type", LIBS);
+  gidLink(gaflight_location_new, "gaflight_location_new", LIBS);
+  gidLink(gaflight_location_equal, "gaflight_location_equal", LIBS);
+  gidLink(gaflight_location_get_scheme, "gaflight_location_get_scheme", LIBS);
+  gidLink(gaflight_location_to_string, "gaflight_location_to_string", LIBS);
 
   // MessageReader
-  link(gaflight_message_reader_get_type, "gaflight_message_reader_get_type");
-  link(gaflight_message_reader_get_descriptor, "gaflight_message_reader_get_descriptor");
+  gidLink(gaflight_message_reader_get_type, "gaflight_message_reader_get_type", LIBS);
+  gidLink(gaflight_message_reader_get_descriptor, "gaflight_message_reader_get_descriptor", LIBS);
 
   // MetadataReader
-  link(gaflight_metadata_reader_get_type, "gaflight_metadata_reader_get_type");
-  link(gaflight_metadata_reader_read, "gaflight_metadata_reader_read");
+  gidLink(gaflight_metadata_reader_get_type, "gaflight_metadata_reader_get_type", LIBS);
+  gidLink(gaflight_metadata_reader_read, "gaflight_metadata_reader_read", LIBS);
 
   // MetadataWriter
-  link(gaflight_metadata_writer_get_type, "gaflight_metadata_writer_get_type");
-  link(gaflight_metadata_writer_write, "gaflight_metadata_writer_write");
+  gidLink(gaflight_metadata_writer_get_type, "gaflight_metadata_writer_get_type", LIBS);
+  gidLink(gaflight_metadata_writer_write, "gaflight_metadata_writer_write", LIBS);
 
   // PathDescriptor
-  link(gaflight_path_descriptor_get_type, "gaflight_path_descriptor_get_type");
-  link(gaflight_path_descriptor_new, "gaflight_path_descriptor_new");
-  link(gaflight_path_descriptor_get_paths, "gaflight_path_descriptor_get_paths");
+  gidLink(gaflight_path_descriptor_get_type, "gaflight_path_descriptor_get_type", LIBS);
+  gidLink(gaflight_path_descriptor_new, "gaflight_path_descriptor_new", LIBS);
+  gidLink(gaflight_path_descriptor_get_paths, "gaflight_path_descriptor_get_paths", LIBS);
 
   // RecordBatchReader
-  link(gaflight_record_batch_reader_get_type, "gaflight_record_batch_reader_get_type");
-  link(gaflight_record_batch_reader_read_all, "gaflight_record_batch_reader_read_all");
-  link(gaflight_record_batch_reader_read_next, "gaflight_record_batch_reader_read_next");
+  gidLink(gaflight_record_batch_reader_get_type, "gaflight_record_batch_reader_get_type", LIBS);
+  gidLink(gaflight_record_batch_reader_read_all, "gaflight_record_batch_reader_read_all", LIBS);
+  gidLink(gaflight_record_batch_reader_read_next, "gaflight_record_batch_reader_read_next", LIBS);
 
   // RecordBatchStream
-  link(gaflight_record_batch_stream_get_type, "gaflight_record_batch_stream_get_type");
-  link(gaflight_record_batch_stream_new, "gaflight_record_batch_stream_new");
+  gidLink(gaflight_record_batch_stream_get_type, "gaflight_record_batch_stream_get_type", LIBS);
+  gidLink(gaflight_record_batch_stream_new, "gaflight_record_batch_stream_new", LIBS);
 
   // RecordBatchWriter
-  link(gaflight_record_batch_writer_get_type, "gaflight_record_batch_writer_get_type");
-  link(gaflight_record_batch_writer_begin, "gaflight_record_batch_writer_begin");
-  link(gaflight_record_batch_writer_write_metadata, "gaflight_record_batch_writer_write_metadata");
-  link(gaflight_record_batch_writer_write_record_batch, "gaflight_record_batch_writer_write_record_batch");
+  gidLink(gaflight_record_batch_writer_get_type, "gaflight_record_batch_writer_get_type", LIBS);
+  gidLink(gaflight_record_batch_writer_begin, "gaflight_record_batch_writer_begin", LIBS);
+  gidLink(gaflight_record_batch_writer_write_metadata, "gaflight_record_batch_writer_write_metadata", LIBS);
+  gidLink(gaflight_record_batch_writer_write_record_batch, "gaflight_record_batch_writer_write_record_batch", LIBS);
 
   // Servable
-  link(gaflight_servable_get_type, "gaflight_servable_get_type");
+  gidLink(gaflight_servable_get_type, "gaflight_servable_get_type", LIBS);
 
   // Server
-  link(gaflight_server_get_type, "gaflight_server_get_type");
-  link(gaflight_server_do_get, "gaflight_server_do_get");
-  link(gaflight_server_do_put, "gaflight_server_do_put");
-  link(gaflight_server_get_flight_info, "gaflight_server_get_flight_info");
-  link(gaflight_server_get_port, "gaflight_server_get_port");
-  link(gaflight_server_list_flights, "gaflight_server_list_flights");
-  link(gaflight_server_listen, "gaflight_server_listen");
-  link(gaflight_server_shutdown, "gaflight_server_shutdown");
-  link(gaflight_server_wait, "gaflight_server_wait");
+  gidLink(gaflight_server_get_type, "gaflight_server_get_type", LIBS);
+  gidLink(gaflight_server_do_get, "gaflight_server_do_get", LIBS);
+  gidLink(gaflight_server_do_put, "gaflight_server_do_put", LIBS);
+  gidLink(gaflight_server_get_flight_info, "gaflight_server_get_flight_info", LIBS);
+  gidLink(gaflight_server_get_port, "gaflight_server_get_port", LIBS);
+  gidLink(gaflight_server_list_flights, "gaflight_server_list_flights", LIBS);
+  gidLink(gaflight_server_listen, "gaflight_server_listen", LIBS);
+  gidLink(gaflight_server_shutdown, "gaflight_server_shutdown", LIBS);
+  gidLink(gaflight_server_wait, "gaflight_server_wait", LIBS);
 
   // ServerAuthHandler
-  link(gaflight_server_auth_handler_get_type, "gaflight_server_auth_handler_get_type");
+  gidLink(gaflight_server_auth_handler_get_type, "gaflight_server_auth_handler_get_type", LIBS);
 
   // ServerAuthReader
-  link(gaflight_server_auth_reader_get_type, "gaflight_server_auth_reader_get_type");
-  link(gaflight_server_auth_reader_read, "gaflight_server_auth_reader_read");
+  gidLink(gaflight_server_auth_reader_get_type, "gaflight_server_auth_reader_get_type", LIBS);
+  gidLink(gaflight_server_auth_reader_read, "gaflight_server_auth_reader_read", LIBS);
 
   // ServerAuthSender
-  link(gaflight_server_auth_sender_get_type, "gaflight_server_auth_sender_get_type");
-  link(gaflight_server_auth_sender_write, "gaflight_server_auth_sender_write");
+  gidLink(gaflight_server_auth_sender_get_type, "gaflight_server_auth_sender_get_type", LIBS);
+  gidLink(gaflight_server_auth_sender_write, "gaflight_server_auth_sender_write", LIBS);
 
   // ServerCallContext
-  link(gaflight_server_call_context_get_type, "gaflight_server_call_context_get_type");
-  link(gaflight_server_call_context_foreach_incoming_header, "gaflight_server_call_context_foreach_incoming_header");
+  gidLink(gaflight_server_call_context_get_type, "gaflight_server_call_context_get_type", LIBS);
+  gidLink(gaflight_server_call_context_foreach_incoming_header, "gaflight_server_call_context_foreach_incoming_header", LIBS);
 
   // ServerCustomAuthHandler
-  link(gaflight_server_custom_auth_handler_get_type, "gaflight_server_custom_auth_handler_get_type");
-  link(gaflight_server_custom_auth_handler_authenticate, "gaflight_server_custom_auth_handler_authenticate");
-  link(gaflight_server_custom_auth_handler_is_valid, "gaflight_server_custom_auth_handler_is_valid");
+  gidLink(gaflight_server_custom_auth_handler_get_type, "gaflight_server_custom_auth_handler_get_type", LIBS);
+  gidLink(gaflight_server_custom_auth_handler_authenticate, "gaflight_server_custom_auth_handler_authenticate", LIBS);
+  gidLink(gaflight_server_custom_auth_handler_is_valid, "gaflight_server_custom_auth_handler_is_valid", LIBS);
 
   // ServerOptions
-  link(gaflight_server_options_get_type, "gaflight_server_options_get_type");
-  link(gaflight_server_options_new, "gaflight_server_options_new");
+  gidLink(gaflight_server_options_get_type, "gaflight_server_options_get_type", LIBS);
+  gidLink(gaflight_server_options_new, "gaflight_server_options_new", LIBS);
 
   // StreamChunk
-  link(gaflight_stream_chunk_get_type, "gaflight_stream_chunk_get_type");
-  link(gaflight_stream_chunk_get_data, "gaflight_stream_chunk_get_data");
-  link(gaflight_stream_chunk_get_metadata, "gaflight_stream_chunk_get_metadata");
+  gidLink(gaflight_stream_chunk_get_type, "gaflight_stream_chunk_get_type", LIBS);
+  gidLink(gaflight_stream_chunk_get_data, "gaflight_stream_chunk_get_data", LIBS);
+  gidLink(gaflight_stream_chunk_get_metadata, "gaflight_stream_chunk_get_metadata", LIBS);
 
   // StreamReader
-  link(gaflight_stream_reader_get_type, "gaflight_stream_reader_get_type");
+  gidLink(gaflight_stream_reader_get_type, "gaflight_stream_reader_get_type", LIBS);
 
   // StreamWriter
-  link(gaflight_stream_writer_get_type, "gaflight_stream_writer_get_type");
-  link(gaflight_stream_writer_done_writing, "gaflight_stream_writer_done_writing");
+  gidLink(gaflight_stream_writer_get_type, "gaflight_stream_writer_get_type", LIBS);
+  gidLink(gaflight_stream_writer_done_writing, "gaflight_stream_writer_done_writing", LIBS);
 
   // Ticket
-  link(gaflight_ticket_get_type, "gaflight_ticket_get_type");
-  link(gaflight_ticket_new, "gaflight_ticket_new");
-  link(gaflight_ticket_equal, "gaflight_ticket_equal");
-}
-
-import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
-import std.string : fromStringz, toStringz;
-
-private void link(T)(ref T funcPtr, string symbol)
-{
-  foreach (lib; LIBS)
-  {
-  if (auto handle = dlopen(cast(char*)toStringz(lib), RTLD_GLOBAL | RTLD_NOW))
-  {
-  if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
-  {
-  funcPtr = cast(T)symPtr;
-  return;
-  }
-  }
-  else
-  throw new Error("Failed to load library '" ~ lib ~ "': " ~ dlerror().fromStringz.idup);
-  }
-
-  funcPtr = cast(T)&symbolNotFound;
-}
-
-private void symbolNotFound()
-{
-  throw new Error("Attempted to execute a dynamic library function which was not found");
+  gidLink(gaflight_ticket_get_type, "gaflight_ticket_get_type", LIBS);
+  gidLink(gaflight_ticket_new, "gaflight_ticket_new", LIBS);
+  gidLink(gaflight_ticket_equal, "gaflight_ticket_equal", LIBS);
 }

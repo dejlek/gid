@@ -1,12 +1,13 @@
 module GdkPixbuf.c.functions;
 
+import Gid.loader;
 import GdkPixbuf.c.types;
 public import GModule.c.types;
 public import Gio.c.types;
 
 version(Windows)
   private immutable LIBS = ["libgdk_pixbuf-2.0-0.dll;gdk_pixbuf-2.0-0.dll;gdk_pixbuf-2.dll"];
-version(OSX)
+else version(OSX)
   private immutable LIBS = ["libgdk_pixbuf-2.0.0.dylib"];
 else
   private immutable LIBS = ["libgdk_pixbuf-2.0.so.0"];
@@ -281,161 +282,134 @@ alias gdk_pixbuf_simple_anim_iter_get_type = c_gdk_pixbuf_simple_anim_iter_get_t
 shared static this()
 {
   // Pixbuf
-  link(gdk_pixbuf_get_type, "gdk_pixbuf_get_type");
-  link(gdk_pixbuf_new, "gdk_pixbuf_new");
-  link(gdk_pixbuf_new_from_bytes, "gdk_pixbuf_new_from_bytes");
-  link(gdk_pixbuf_new_from_data, "gdk_pixbuf_new_from_data");
-  link(gdk_pixbuf_new_from_file, "gdk_pixbuf_new_from_file");
-  link(gdk_pixbuf_new_from_file_at_scale, "gdk_pixbuf_new_from_file_at_scale");
-  link(gdk_pixbuf_new_from_file_at_size, "gdk_pixbuf_new_from_file_at_size");
-  link(gdk_pixbuf_new_from_inline, "gdk_pixbuf_new_from_inline");
-  link(gdk_pixbuf_new_from_resource, "gdk_pixbuf_new_from_resource");
-  link(gdk_pixbuf_new_from_resource_at_scale, "gdk_pixbuf_new_from_resource_at_scale");
-  link(gdk_pixbuf_new_from_stream, "gdk_pixbuf_new_from_stream");
-  link(gdk_pixbuf_new_from_stream_at_scale, "gdk_pixbuf_new_from_stream_at_scale");
-  link(gdk_pixbuf_new_from_stream_finish, "gdk_pixbuf_new_from_stream_finish");
-  link(gdk_pixbuf_new_from_xpm_data, "gdk_pixbuf_new_from_xpm_data");
-  link(gdk_pixbuf_calculate_rowstride, "gdk_pixbuf_calculate_rowstride");
-  link(gdk_pixbuf_get_file_info, "gdk_pixbuf_get_file_info");
-  link(gdk_pixbuf_get_file_info_async, "gdk_pixbuf_get_file_info_async");
-  link(gdk_pixbuf_get_file_info_finish, "gdk_pixbuf_get_file_info_finish");
-  link(gdk_pixbuf_get_formats, "gdk_pixbuf_get_formats");
-  link(gdk_pixbuf_init_modules, "gdk_pixbuf_init_modules");
-  link(gdk_pixbuf_new_from_stream_async, "gdk_pixbuf_new_from_stream_async");
-  link(gdk_pixbuf_new_from_stream_at_scale_async, "gdk_pixbuf_new_from_stream_at_scale_async");
-  link(gdk_pixbuf_save_to_stream_finish, "gdk_pixbuf_save_to_stream_finish");
-  link(gdk_pixbuf_add_alpha, "gdk_pixbuf_add_alpha");
-  link(gdk_pixbuf_apply_embedded_orientation, "gdk_pixbuf_apply_embedded_orientation");
-  link(gdk_pixbuf_composite, "gdk_pixbuf_composite");
-  link(gdk_pixbuf_composite_color, "gdk_pixbuf_composite_color");
-  link(gdk_pixbuf_composite_color_simple, "gdk_pixbuf_composite_color_simple");
-  link(gdk_pixbuf_copy, "gdk_pixbuf_copy");
-  link(gdk_pixbuf_copy_area, "gdk_pixbuf_copy_area");
-  link(gdk_pixbuf_copy_options, "gdk_pixbuf_copy_options");
-  link(gdk_pixbuf_fill, "gdk_pixbuf_fill");
-  link(gdk_pixbuf_flip, "gdk_pixbuf_flip");
-  link(gdk_pixbuf_get_bits_per_sample, "gdk_pixbuf_get_bits_per_sample");
-  link(gdk_pixbuf_get_byte_length, "gdk_pixbuf_get_byte_length");
-  link(gdk_pixbuf_get_colorspace, "gdk_pixbuf_get_colorspace");
-  link(gdk_pixbuf_get_has_alpha, "gdk_pixbuf_get_has_alpha");
-  link(gdk_pixbuf_get_height, "gdk_pixbuf_get_height");
-  link(gdk_pixbuf_get_n_channels, "gdk_pixbuf_get_n_channels");
-  link(gdk_pixbuf_get_option, "gdk_pixbuf_get_option");
-  link(gdk_pixbuf_get_options, "gdk_pixbuf_get_options");
-  link(gdk_pixbuf_get_pixels, "gdk_pixbuf_get_pixels");
-  link(gdk_pixbuf_get_pixels_with_length, "gdk_pixbuf_get_pixels_with_length");
-  link(gdk_pixbuf_get_rowstride, "gdk_pixbuf_get_rowstride");
-  link(gdk_pixbuf_get_width, "gdk_pixbuf_get_width");
-  link(gdk_pixbuf_new_subpixbuf, "gdk_pixbuf_new_subpixbuf");
-  link(gdk_pixbuf_read_pixel_bytes, "gdk_pixbuf_read_pixel_bytes");
-  link(gdk_pixbuf_read_pixels, "gdk_pixbuf_read_pixels");
-  link(gdk_pixbuf_ref, "gdk_pixbuf_ref");
-  link(gdk_pixbuf_remove_option, "gdk_pixbuf_remove_option");
-  link(gdk_pixbuf_rotate_simple, "gdk_pixbuf_rotate_simple");
-  link(gdk_pixbuf_saturate_and_pixelate, "gdk_pixbuf_saturate_and_pixelate");
-  link(gdk_pixbuf_save, "gdk_pixbuf_save");
-  link(gdk_pixbuf_save_to_buffer, "gdk_pixbuf_save_to_buffer");
-  link(gdk_pixbuf_save_to_bufferv, "gdk_pixbuf_save_to_bufferv");
-  link(gdk_pixbuf_save_to_callback, "gdk_pixbuf_save_to_callback");
-  link(gdk_pixbuf_save_to_callbackv, "gdk_pixbuf_save_to_callbackv");
-  link(gdk_pixbuf_save_to_stream, "gdk_pixbuf_save_to_stream");
-  link(gdk_pixbuf_save_to_stream_async, "gdk_pixbuf_save_to_stream_async");
-  link(gdk_pixbuf_save_to_streamv, "gdk_pixbuf_save_to_streamv");
-  link(gdk_pixbuf_save_to_streamv_async, "gdk_pixbuf_save_to_streamv_async");
-  link(gdk_pixbuf_savev, "gdk_pixbuf_savev");
-  link(gdk_pixbuf_scale, "gdk_pixbuf_scale");
-  link(gdk_pixbuf_scale_simple, "gdk_pixbuf_scale_simple");
-  link(gdk_pixbuf_set_option, "gdk_pixbuf_set_option");
-  link(gdk_pixbuf_unref, "gdk_pixbuf_unref");
+  gidLink(gdk_pixbuf_get_type, "gdk_pixbuf_get_type", LIBS);
+  gidLink(gdk_pixbuf_new, "gdk_pixbuf_new", LIBS);
+  gidLink(gdk_pixbuf_new_from_bytes, "gdk_pixbuf_new_from_bytes", LIBS);
+  gidLink(gdk_pixbuf_new_from_data, "gdk_pixbuf_new_from_data", LIBS);
+  gidLink(gdk_pixbuf_new_from_file, "gdk_pixbuf_new_from_file", LIBS);
+  gidLink(gdk_pixbuf_new_from_file_at_scale, "gdk_pixbuf_new_from_file_at_scale", LIBS);
+  gidLink(gdk_pixbuf_new_from_file_at_size, "gdk_pixbuf_new_from_file_at_size", LIBS);
+  gidLink(gdk_pixbuf_new_from_inline, "gdk_pixbuf_new_from_inline", LIBS);
+  gidLink(gdk_pixbuf_new_from_resource, "gdk_pixbuf_new_from_resource", LIBS);
+  gidLink(gdk_pixbuf_new_from_resource_at_scale, "gdk_pixbuf_new_from_resource_at_scale", LIBS);
+  gidLink(gdk_pixbuf_new_from_stream, "gdk_pixbuf_new_from_stream", LIBS);
+  gidLink(gdk_pixbuf_new_from_stream_at_scale, "gdk_pixbuf_new_from_stream_at_scale", LIBS);
+  gidLink(gdk_pixbuf_new_from_stream_finish, "gdk_pixbuf_new_from_stream_finish", LIBS);
+  gidLink(gdk_pixbuf_new_from_xpm_data, "gdk_pixbuf_new_from_xpm_data", LIBS);
+  gidLink(gdk_pixbuf_calculate_rowstride, "gdk_pixbuf_calculate_rowstride", LIBS);
+  gidLink(gdk_pixbuf_get_file_info, "gdk_pixbuf_get_file_info", LIBS);
+  gidLink(gdk_pixbuf_get_file_info_async, "gdk_pixbuf_get_file_info_async", LIBS);
+  gidLink(gdk_pixbuf_get_file_info_finish, "gdk_pixbuf_get_file_info_finish", LIBS);
+  gidLink(gdk_pixbuf_get_formats, "gdk_pixbuf_get_formats", LIBS);
+  gidLink(gdk_pixbuf_init_modules, "gdk_pixbuf_init_modules", LIBS);
+  gidLink(gdk_pixbuf_new_from_stream_async, "gdk_pixbuf_new_from_stream_async", LIBS);
+  gidLink(gdk_pixbuf_new_from_stream_at_scale_async, "gdk_pixbuf_new_from_stream_at_scale_async", LIBS);
+  gidLink(gdk_pixbuf_save_to_stream_finish, "gdk_pixbuf_save_to_stream_finish", LIBS);
+  gidLink(gdk_pixbuf_add_alpha, "gdk_pixbuf_add_alpha", LIBS);
+  gidLink(gdk_pixbuf_apply_embedded_orientation, "gdk_pixbuf_apply_embedded_orientation", LIBS);
+  gidLink(gdk_pixbuf_composite, "gdk_pixbuf_composite", LIBS);
+  gidLink(gdk_pixbuf_composite_color, "gdk_pixbuf_composite_color", LIBS);
+  gidLink(gdk_pixbuf_composite_color_simple, "gdk_pixbuf_composite_color_simple", LIBS);
+  gidLink(gdk_pixbuf_copy, "gdk_pixbuf_copy", LIBS);
+  gidLink(gdk_pixbuf_copy_area, "gdk_pixbuf_copy_area", LIBS);
+  gidLink(gdk_pixbuf_copy_options, "gdk_pixbuf_copy_options", LIBS);
+  gidLink(gdk_pixbuf_fill, "gdk_pixbuf_fill", LIBS);
+  gidLink(gdk_pixbuf_flip, "gdk_pixbuf_flip", LIBS);
+  gidLink(gdk_pixbuf_get_bits_per_sample, "gdk_pixbuf_get_bits_per_sample", LIBS);
+  gidLink(gdk_pixbuf_get_byte_length, "gdk_pixbuf_get_byte_length", LIBS);
+  gidLink(gdk_pixbuf_get_colorspace, "gdk_pixbuf_get_colorspace", LIBS);
+  gidLink(gdk_pixbuf_get_has_alpha, "gdk_pixbuf_get_has_alpha", LIBS);
+  gidLink(gdk_pixbuf_get_height, "gdk_pixbuf_get_height", LIBS);
+  gidLink(gdk_pixbuf_get_n_channels, "gdk_pixbuf_get_n_channels", LIBS);
+  gidLink(gdk_pixbuf_get_option, "gdk_pixbuf_get_option", LIBS);
+  gidLink(gdk_pixbuf_get_options, "gdk_pixbuf_get_options", LIBS);
+  gidLink(gdk_pixbuf_get_pixels, "gdk_pixbuf_get_pixels", LIBS);
+  gidLink(gdk_pixbuf_get_pixels_with_length, "gdk_pixbuf_get_pixels_with_length", LIBS);
+  gidLink(gdk_pixbuf_get_rowstride, "gdk_pixbuf_get_rowstride", LIBS);
+  gidLink(gdk_pixbuf_get_width, "gdk_pixbuf_get_width", LIBS);
+  gidLink(gdk_pixbuf_new_subpixbuf, "gdk_pixbuf_new_subpixbuf", LIBS);
+  gidLink(gdk_pixbuf_read_pixel_bytes, "gdk_pixbuf_read_pixel_bytes", LIBS);
+  gidLink(gdk_pixbuf_read_pixels, "gdk_pixbuf_read_pixels", LIBS);
+  gidLink(gdk_pixbuf_ref, "gdk_pixbuf_ref", LIBS);
+  gidLink(gdk_pixbuf_remove_option, "gdk_pixbuf_remove_option", LIBS);
+  gidLink(gdk_pixbuf_rotate_simple, "gdk_pixbuf_rotate_simple", LIBS);
+  gidLink(gdk_pixbuf_saturate_and_pixelate, "gdk_pixbuf_saturate_and_pixelate", LIBS);
+  gidLink(gdk_pixbuf_save, "gdk_pixbuf_save", LIBS);
+  gidLink(gdk_pixbuf_save_to_buffer, "gdk_pixbuf_save_to_buffer", LIBS);
+  gidLink(gdk_pixbuf_save_to_bufferv, "gdk_pixbuf_save_to_bufferv", LIBS);
+  gidLink(gdk_pixbuf_save_to_callback, "gdk_pixbuf_save_to_callback", LIBS);
+  gidLink(gdk_pixbuf_save_to_callbackv, "gdk_pixbuf_save_to_callbackv", LIBS);
+  gidLink(gdk_pixbuf_save_to_stream, "gdk_pixbuf_save_to_stream", LIBS);
+  gidLink(gdk_pixbuf_save_to_stream_async, "gdk_pixbuf_save_to_stream_async", LIBS);
+  gidLink(gdk_pixbuf_save_to_streamv, "gdk_pixbuf_save_to_streamv", LIBS);
+  gidLink(gdk_pixbuf_save_to_streamv_async, "gdk_pixbuf_save_to_streamv_async", LIBS);
+  gidLink(gdk_pixbuf_savev, "gdk_pixbuf_savev", LIBS);
+  gidLink(gdk_pixbuf_scale, "gdk_pixbuf_scale", LIBS);
+  gidLink(gdk_pixbuf_scale_simple, "gdk_pixbuf_scale_simple", LIBS);
+  gidLink(gdk_pixbuf_set_option, "gdk_pixbuf_set_option", LIBS);
+  gidLink(gdk_pixbuf_unref, "gdk_pixbuf_unref", LIBS);
 
   // PixbufAnimation
-  link(gdk_pixbuf_animation_get_type, "gdk_pixbuf_animation_get_type");
-  link(gdk_pixbuf_animation_new_from_file, "gdk_pixbuf_animation_new_from_file");
-  link(gdk_pixbuf_animation_new_from_resource, "gdk_pixbuf_animation_new_from_resource");
-  link(gdk_pixbuf_animation_new_from_stream, "gdk_pixbuf_animation_new_from_stream");
-  link(gdk_pixbuf_animation_new_from_stream_finish, "gdk_pixbuf_animation_new_from_stream_finish");
-  link(gdk_pixbuf_animation_new_from_stream_async, "gdk_pixbuf_animation_new_from_stream_async");
-  link(gdk_pixbuf_animation_get_height, "gdk_pixbuf_animation_get_height");
-  link(gdk_pixbuf_animation_get_iter, "gdk_pixbuf_animation_get_iter");
-  link(gdk_pixbuf_animation_get_static_image, "gdk_pixbuf_animation_get_static_image");
-  link(gdk_pixbuf_animation_get_width, "gdk_pixbuf_animation_get_width");
-  link(gdk_pixbuf_animation_is_static_image, "gdk_pixbuf_animation_is_static_image");
-  link(gdk_pixbuf_animation_ref, "gdk_pixbuf_animation_ref");
-  link(gdk_pixbuf_animation_unref, "gdk_pixbuf_animation_unref");
+  gidLink(gdk_pixbuf_animation_get_type, "gdk_pixbuf_animation_get_type", LIBS);
+  gidLink(gdk_pixbuf_animation_new_from_file, "gdk_pixbuf_animation_new_from_file", LIBS);
+  gidLink(gdk_pixbuf_animation_new_from_resource, "gdk_pixbuf_animation_new_from_resource", LIBS);
+  gidLink(gdk_pixbuf_animation_new_from_stream, "gdk_pixbuf_animation_new_from_stream", LIBS);
+  gidLink(gdk_pixbuf_animation_new_from_stream_finish, "gdk_pixbuf_animation_new_from_stream_finish", LIBS);
+  gidLink(gdk_pixbuf_animation_new_from_stream_async, "gdk_pixbuf_animation_new_from_stream_async", LIBS);
+  gidLink(gdk_pixbuf_animation_get_height, "gdk_pixbuf_animation_get_height", LIBS);
+  gidLink(gdk_pixbuf_animation_get_iter, "gdk_pixbuf_animation_get_iter", LIBS);
+  gidLink(gdk_pixbuf_animation_get_static_image, "gdk_pixbuf_animation_get_static_image", LIBS);
+  gidLink(gdk_pixbuf_animation_get_width, "gdk_pixbuf_animation_get_width", LIBS);
+  gidLink(gdk_pixbuf_animation_is_static_image, "gdk_pixbuf_animation_is_static_image", LIBS);
+  gidLink(gdk_pixbuf_animation_ref, "gdk_pixbuf_animation_ref", LIBS);
+  gidLink(gdk_pixbuf_animation_unref, "gdk_pixbuf_animation_unref", LIBS);
 
   // PixbufAnimationIter
-  link(gdk_pixbuf_animation_iter_get_type, "gdk_pixbuf_animation_iter_get_type");
-  link(gdk_pixbuf_animation_iter_advance, "gdk_pixbuf_animation_iter_advance");
-  link(gdk_pixbuf_animation_iter_get_delay_time, "gdk_pixbuf_animation_iter_get_delay_time");
-  link(gdk_pixbuf_animation_iter_get_pixbuf, "gdk_pixbuf_animation_iter_get_pixbuf");
-  link(gdk_pixbuf_animation_iter_on_currently_loading_frame, "gdk_pixbuf_animation_iter_on_currently_loading_frame");
+  gidLink(gdk_pixbuf_animation_iter_get_type, "gdk_pixbuf_animation_iter_get_type", LIBS);
+  gidLink(gdk_pixbuf_animation_iter_advance, "gdk_pixbuf_animation_iter_advance", LIBS);
+  gidLink(gdk_pixbuf_animation_iter_get_delay_time, "gdk_pixbuf_animation_iter_get_delay_time", LIBS);
+  gidLink(gdk_pixbuf_animation_iter_get_pixbuf, "gdk_pixbuf_animation_iter_get_pixbuf", LIBS);
+  gidLink(gdk_pixbuf_animation_iter_on_currently_loading_frame, "gdk_pixbuf_animation_iter_on_currently_loading_frame", LIBS);
 
   // PixbufFormat
-  link(gdk_pixbuf_format_get_type, "gdk_pixbuf_format_get_type");
-  link(gdk_pixbuf_format_copy, "gdk_pixbuf_format_copy");
-  link(gdk_pixbuf_format_free, "gdk_pixbuf_format_free");
-  link(gdk_pixbuf_format_get_description, "gdk_pixbuf_format_get_description");
-  link(gdk_pixbuf_format_get_extensions, "gdk_pixbuf_format_get_extensions");
-  link(gdk_pixbuf_format_get_license, "gdk_pixbuf_format_get_license");
-  link(gdk_pixbuf_format_get_mime_types, "gdk_pixbuf_format_get_mime_types");
-  link(gdk_pixbuf_format_get_name, "gdk_pixbuf_format_get_name");
-  link(gdk_pixbuf_format_is_disabled, "gdk_pixbuf_format_is_disabled");
-  link(gdk_pixbuf_format_is_save_option_supported, "gdk_pixbuf_format_is_save_option_supported");
-  link(gdk_pixbuf_format_is_scalable, "gdk_pixbuf_format_is_scalable");
-  link(gdk_pixbuf_format_is_writable, "gdk_pixbuf_format_is_writable");
-  link(gdk_pixbuf_format_set_disabled, "gdk_pixbuf_format_set_disabled");
+  gidLink(gdk_pixbuf_format_get_type, "gdk_pixbuf_format_get_type", LIBS);
+  gidLink(gdk_pixbuf_format_copy, "gdk_pixbuf_format_copy", LIBS);
+  gidLink(gdk_pixbuf_format_free, "gdk_pixbuf_format_free", LIBS);
+  gidLink(gdk_pixbuf_format_get_description, "gdk_pixbuf_format_get_description", LIBS);
+  gidLink(gdk_pixbuf_format_get_extensions, "gdk_pixbuf_format_get_extensions", LIBS);
+  gidLink(gdk_pixbuf_format_get_license, "gdk_pixbuf_format_get_license", LIBS);
+  gidLink(gdk_pixbuf_format_get_mime_types, "gdk_pixbuf_format_get_mime_types", LIBS);
+  gidLink(gdk_pixbuf_format_get_name, "gdk_pixbuf_format_get_name", LIBS);
+  gidLink(gdk_pixbuf_format_is_disabled, "gdk_pixbuf_format_is_disabled", LIBS);
+  gidLink(gdk_pixbuf_format_is_save_option_supported, "gdk_pixbuf_format_is_save_option_supported", LIBS);
+  gidLink(gdk_pixbuf_format_is_scalable, "gdk_pixbuf_format_is_scalable", LIBS);
+  gidLink(gdk_pixbuf_format_is_writable, "gdk_pixbuf_format_is_writable", LIBS);
+  gidLink(gdk_pixbuf_format_set_disabled, "gdk_pixbuf_format_set_disabled", LIBS);
 
   // PixbufLoader
-  link(gdk_pixbuf_loader_get_type, "gdk_pixbuf_loader_get_type");
-  link(gdk_pixbuf_loader_new, "gdk_pixbuf_loader_new");
-  link(gdk_pixbuf_loader_new_with_mime_type, "gdk_pixbuf_loader_new_with_mime_type");
-  link(gdk_pixbuf_loader_new_with_type, "gdk_pixbuf_loader_new_with_type");
-  link(gdk_pixbuf_loader_close, "gdk_pixbuf_loader_close");
-  link(gdk_pixbuf_loader_get_animation, "gdk_pixbuf_loader_get_animation");
-  link(gdk_pixbuf_loader_get_format, "gdk_pixbuf_loader_get_format");
-  link(gdk_pixbuf_loader_get_pixbuf, "gdk_pixbuf_loader_get_pixbuf");
-  link(gdk_pixbuf_loader_set_size, "gdk_pixbuf_loader_set_size");
-  link(gdk_pixbuf_loader_write, "gdk_pixbuf_loader_write");
-  link(gdk_pixbuf_loader_write_bytes, "gdk_pixbuf_loader_write_bytes");
+  gidLink(gdk_pixbuf_loader_get_type, "gdk_pixbuf_loader_get_type", LIBS);
+  gidLink(gdk_pixbuf_loader_new, "gdk_pixbuf_loader_new", LIBS);
+  gidLink(gdk_pixbuf_loader_new_with_mime_type, "gdk_pixbuf_loader_new_with_mime_type", LIBS);
+  gidLink(gdk_pixbuf_loader_new_with_type, "gdk_pixbuf_loader_new_with_type", LIBS);
+  gidLink(gdk_pixbuf_loader_close, "gdk_pixbuf_loader_close", LIBS);
+  gidLink(gdk_pixbuf_loader_get_animation, "gdk_pixbuf_loader_get_animation", LIBS);
+  gidLink(gdk_pixbuf_loader_get_format, "gdk_pixbuf_loader_get_format", LIBS);
+  gidLink(gdk_pixbuf_loader_get_pixbuf, "gdk_pixbuf_loader_get_pixbuf", LIBS);
+  gidLink(gdk_pixbuf_loader_set_size, "gdk_pixbuf_loader_set_size", LIBS);
+  gidLink(gdk_pixbuf_loader_write, "gdk_pixbuf_loader_write", LIBS);
+  gidLink(gdk_pixbuf_loader_write_bytes, "gdk_pixbuf_loader_write_bytes", LIBS);
 
   // PixbufNonAnim
-  link(gdk_pixbuf_non_anim_get_type, "gdk_pixbuf_non_anim_get_type");
-  link(gdk_pixbuf_non_anim_new, "gdk_pixbuf_non_anim_new");
+  gidLink(gdk_pixbuf_non_anim_get_type, "gdk_pixbuf_non_anim_get_type", LIBS);
+  gidLink(gdk_pixbuf_non_anim_new, "gdk_pixbuf_non_anim_new", LIBS);
 
   // PixbufSimpleAnim
-  link(gdk_pixbuf_simple_anim_get_type, "gdk_pixbuf_simple_anim_get_type");
-  link(gdk_pixbuf_simple_anim_new, "gdk_pixbuf_simple_anim_new");
-  link(gdk_pixbuf_simple_anim_add_frame, "gdk_pixbuf_simple_anim_add_frame");
-  link(gdk_pixbuf_simple_anim_get_loop, "gdk_pixbuf_simple_anim_get_loop");
-  link(gdk_pixbuf_simple_anim_set_loop, "gdk_pixbuf_simple_anim_set_loop");
+  gidLink(gdk_pixbuf_simple_anim_get_type, "gdk_pixbuf_simple_anim_get_type", LIBS);
+  gidLink(gdk_pixbuf_simple_anim_new, "gdk_pixbuf_simple_anim_new", LIBS);
+  gidLink(gdk_pixbuf_simple_anim_add_frame, "gdk_pixbuf_simple_anim_add_frame", LIBS);
+  gidLink(gdk_pixbuf_simple_anim_get_loop, "gdk_pixbuf_simple_anim_get_loop", LIBS);
+  gidLink(gdk_pixbuf_simple_anim_set_loop, "gdk_pixbuf_simple_anim_set_loop", LIBS);
 
   // PixbufSimpleAnimIter
-  link(gdk_pixbuf_simple_anim_iter_get_type, "gdk_pixbuf_simple_anim_iter_get_type");
-}
-
-import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
-import std.string : fromStringz, toStringz;
-
-private void link(T)(ref T funcPtr, string symbol)
-{
-  foreach (lib; LIBS)
-  {
-  if (auto handle = dlopen(cast(char*)toStringz(lib), RTLD_GLOBAL | RTLD_NOW))
-  {
-  if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
-  {
-  funcPtr = cast(T)symPtr;
-  return;
-  }
-  }
-  else
-  throw new Error("Failed to load library '" ~ lib ~ "': " ~ dlerror().fromStringz.idup);
-  }
-
-  funcPtr = cast(T)&symbolNotFound;
-}
-
-private void symbolNotFound()
-{
-  throw new Error("Attempted to execute a dynamic library function which was not found");
+  gidLink(gdk_pixbuf_simple_anim_iter_get_type, "gdk_pixbuf_simple_anim_iter_get_type", LIBS);
 }

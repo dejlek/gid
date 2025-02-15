@@ -1,11 +1,12 @@
 module Parquet.c.functions;
 
+import Gid.loader;
 import Parquet.c.types;
 public import Arrow.c.types;
 
 version(Windows)
   private immutable LIBS = ["libparquet-glib-1900.dll;parquet-glib-1900.dll;parquet-glib.dll"];
-version(OSX)
+else version(OSX)
   private immutable LIBS = ["libparquet-glib.1900.dylib"];
 else
   private immutable LIBS = ["libparquet-glib.so.1900"];
@@ -254,148 +255,121 @@ alias gparquet_writer_properties_set_max_row_group_length = c_gparquet_writer_pr
 shared static this()
 {
   // ArrowFileReader
-  link(gparquet_arrow_file_reader_get_type, "gparquet_arrow_file_reader_get_type");
-  link(gparquet_arrow_file_reader_new_arrow, "gparquet_arrow_file_reader_new_arrow");
-  link(gparquet_arrow_file_reader_new_path, "gparquet_arrow_file_reader_new_path");
-  link(gparquet_arrow_file_reader_get_metadata, "gparquet_arrow_file_reader_get_metadata");
-  link(gparquet_arrow_file_reader_get_n_row_groups, "gparquet_arrow_file_reader_get_n_row_groups");
-  link(gparquet_arrow_file_reader_get_n_rows, "gparquet_arrow_file_reader_get_n_rows");
-  link(gparquet_arrow_file_reader_get_schema, "gparquet_arrow_file_reader_get_schema");
-  link(gparquet_arrow_file_reader_read_column_data, "gparquet_arrow_file_reader_read_column_data");
-  link(gparquet_arrow_file_reader_read_row_group, "gparquet_arrow_file_reader_read_row_group");
-  link(gparquet_arrow_file_reader_read_table, "gparquet_arrow_file_reader_read_table");
-  link(gparquet_arrow_file_reader_set_use_threads, "gparquet_arrow_file_reader_set_use_threads");
+  gidLink(gparquet_arrow_file_reader_get_type, "gparquet_arrow_file_reader_get_type", LIBS);
+  gidLink(gparquet_arrow_file_reader_new_arrow, "gparquet_arrow_file_reader_new_arrow", LIBS);
+  gidLink(gparquet_arrow_file_reader_new_path, "gparquet_arrow_file_reader_new_path", LIBS);
+  gidLink(gparquet_arrow_file_reader_get_metadata, "gparquet_arrow_file_reader_get_metadata", LIBS);
+  gidLink(gparquet_arrow_file_reader_get_n_row_groups, "gparquet_arrow_file_reader_get_n_row_groups", LIBS);
+  gidLink(gparquet_arrow_file_reader_get_n_rows, "gparquet_arrow_file_reader_get_n_rows", LIBS);
+  gidLink(gparquet_arrow_file_reader_get_schema, "gparquet_arrow_file_reader_get_schema", LIBS);
+  gidLink(gparquet_arrow_file_reader_read_column_data, "gparquet_arrow_file_reader_read_column_data", LIBS);
+  gidLink(gparquet_arrow_file_reader_read_row_group, "gparquet_arrow_file_reader_read_row_group", LIBS);
+  gidLink(gparquet_arrow_file_reader_read_table, "gparquet_arrow_file_reader_read_table", LIBS);
+  gidLink(gparquet_arrow_file_reader_set_use_threads, "gparquet_arrow_file_reader_set_use_threads", LIBS);
 
   // ArrowFileWriter
-  link(gparquet_arrow_file_writer_get_type, "gparquet_arrow_file_writer_get_type");
-  link(gparquet_arrow_file_writer_new_arrow, "gparquet_arrow_file_writer_new_arrow");
-  link(gparquet_arrow_file_writer_new_path, "gparquet_arrow_file_writer_new_path");
-  link(gparquet_arrow_file_writer_close, "gparquet_arrow_file_writer_close");
-  link(gparquet_arrow_file_writer_get_schema, "gparquet_arrow_file_writer_get_schema");
-  link(gparquet_arrow_file_writer_new_buffered_row_group, "gparquet_arrow_file_writer_new_buffered_row_group");
-  link(gparquet_arrow_file_writer_new_row_group, "gparquet_arrow_file_writer_new_row_group");
-  link(gparquet_arrow_file_writer_write_chunked_array, "gparquet_arrow_file_writer_write_chunked_array");
-  link(gparquet_arrow_file_writer_write_record_batch, "gparquet_arrow_file_writer_write_record_batch");
-  link(gparquet_arrow_file_writer_write_table, "gparquet_arrow_file_writer_write_table");
+  gidLink(gparquet_arrow_file_writer_get_type, "gparquet_arrow_file_writer_get_type", LIBS);
+  gidLink(gparquet_arrow_file_writer_new_arrow, "gparquet_arrow_file_writer_new_arrow", LIBS);
+  gidLink(gparquet_arrow_file_writer_new_path, "gparquet_arrow_file_writer_new_path", LIBS);
+  gidLink(gparquet_arrow_file_writer_close, "gparquet_arrow_file_writer_close", LIBS);
+  gidLink(gparquet_arrow_file_writer_get_schema, "gparquet_arrow_file_writer_get_schema", LIBS);
+  gidLink(gparquet_arrow_file_writer_new_buffered_row_group, "gparquet_arrow_file_writer_new_buffered_row_group", LIBS);
+  gidLink(gparquet_arrow_file_writer_new_row_group, "gparquet_arrow_file_writer_new_row_group", LIBS);
+  gidLink(gparquet_arrow_file_writer_write_chunked_array, "gparquet_arrow_file_writer_write_chunked_array", LIBS);
+  gidLink(gparquet_arrow_file_writer_write_record_batch, "gparquet_arrow_file_writer_write_record_batch", LIBS);
+  gidLink(gparquet_arrow_file_writer_write_table, "gparquet_arrow_file_writer_write_table", LIBS);
 
   // BooleanStatistics
-  link(gparquet_boolean_statistics_get_type, "gparquet_boolean_statistics_get_type");
-  link(gparquet_boolean_statistics_get_max, "gparquet_boolean_statistics_get_max");
-  link(gparquet_boolean_statistics_get_min, "gparquet_boolean_statistics_get_min");
+  gidLink(gparquet_boolean_statistics_get_type, "gparquet_boolean_statistics_get_type", LIBS);
+  gidLink(gparquet_boolean_statistics_get_max, "gparquet_boolean_statistics_get_max", LIBS);
+  gidLink(gparquet_boolean_statistics_get_min, "gparquet_boolean_statistics_get_min", LIBS);
 
   // ByteArrayStatistics
-  link(gparquet_byte_array_statistics_get_type, "gparquet_byte_array_statistics_get_type");
-  link(gparquet_byte_array_statistics_get_max, "gparquet_byte_array_statistics_get_max");
-  link(gparquet_byte_array_statistics_get_min, "gparquet_byte_array_statistics_get_min");
+  gidLink(gparquet_byte_array_statistics_get_type, "gparquet_byte_array_statistics_get_type", LIBS);
+  gidLink(gparquet_byte_array_statistics_get_max, "gparquet_byte_array_statistics_get_max", LIBS);
+  gidLink(gparquet_byte_array_statistics_get_min, "gparquet_byte_array_statistics_get_min", LIBS);
 
   // ColumnChunkMetadata
-  link(gparquet_column_chunk_metadata_get_type, "gparquet_column_chunk_metadata_get_type");
-  link(gparquet_column_chunk_metadata_can_decompress, "gparquet_column_chunk_metadata_can_decompress");
-  link(gparquet_column_chunk_metadata_equal, "gparquet_column_chunk_metadata_equal");
-  link(gparquet_column_chunk_metadata_get_file_offset, "gparquet_column_chunk_metadata_get_file_offset");
-  link(gparquet_column_chunk_metadata_get_statistics, "gparquet_column_chunk_metadata_get_statistics");
-  link(gparquet_column_chunk_metadata_get_total_compressed_size, "gparquet_column_chunk_metadata_get_total_compressed_size");
-  link(gparquet_column_chunk_metadata_get_total_size, "gparquet_column_chunk_metadata_get_total_size");
+  gidLink(gparquet_column_chunk_metadata_get_type, "gparquet_column_chunk_metadata_get_type", LIBS);
+  gidLink(gparquet_column_chunk_metadata_can_decompress, "gparquet_column_chunk_metadata_can_decompress", LIBS);
+  gidLink(gparquet_column_chunk_metadata_equal, "gparquet_column_chunk_metadata_equal", LIBS);
+  gidLink(gparquet_column_chunk_metadata_get_file_offset, "gparquet_column_chunk_metadata_get_file_offset", LIBS);
+  gidLink(gparquet_column_chunk_metadata_get_statistics, "gparquet_column_chunk_metadata_get_statistics", LIBS);
+  gidLink(gparquet_column_chunk_metadata_get_total_compressed_size, "gparquet_column_chunk_metadata_get_total_compressed_size", LIBS);
+  gidLink(gparquet_column_chunk_metadata_get_total_size, "gparquet_column_chunk_metadata_get_total_size", LIBS);
 
   // DoubleStatistics
-  link(gparquet_double_statistics_get_type, "gparquet_double_statistics_get_type");
-  link(gparquet_double_statistics_get_max, "gparquet_double_statistics_get_max");
-  link(gparquet_double_statistics_get_min, "gparquet_double_statistics_get_min");
+  gidLink(gparquet_double_statistics_get_type, "gparquet_double_statistics_get_type", LIBS);
+  gidLink(gparquet_double_statistics_get_max, "gparquet_double_statistics_get_max", LIBS);
+  gidLink(gparquet_double_statistics_get_min, "gparquet_double_statistics_get_min", LIBS);
 
   // FileMetadata
-  link(gparquet_file_metadata_get_type, "gparquet_file_metadata_get_type");
-  link(gparquet_file_metadata_can_decompress, "gparquet_file_metadata_can_decompress");
-  link(gparquet_file_metadata_equal, "gparquet_file_metadata_equal");
-  link(gparquet_file_metadata_get_created_by, "gparquet_file_metadata_get_created_by");
-  link(gparquet_file_metadata_get_n_columns, "gparquet_file_metadata_get_n_columns");
-  link(gparquet_file_metadata_get_n_row_groups, "gparquet_file_metadata_get_n_row_groups");
-  link(gparquet_file_metadata_get_n_rows, "gparquet_file_metadata_get_n_rows");
-  link(gparquet_file_metadata_get_n_schema_elements, "gparquet_file_metadata_get_n_schema_elements");
-  link(gparquet_file_metadata_get_row_group, "gparquet_file_metadata_get_row_group");
-  link(gparquet_file_metadata_get_size, "gparquet_file_metadata_get_size");
+  gidLink(gparquet_file_metadata_get_type, "gparquet_file_metadata_get_type", LIBS);
+  gidLink(gparquet_file_metadata_can_decompress, "gparquet_file_metadata_can_decompress", LIBS);
+  gidLink(gparquet_file_metadata_equal, "gparquet_file_metadata_equal", LIBS);
+  gidLink(gparquet_file_metadata_get_created_by, "gparquet_file_metadata_get_created_by", LIBS);
+  gidLink(gparquet_file_metadata_get_n_columns, "gparquet_file_metadata_get_n_columns", LIBS);
+  gidLink(gparquet_file_metadata_get_n_row_groups, "gparquet_file_metadata_get_n_row_groups", LIBS);
+  gidLink(gparquet_file_metadata_get_n_rows, "gparquet_file_metadata_get_n_rows", LIBS);
+  gidLink(gparquet_file_metadata_get_n_schema_elements, "gparquet_file_metadata_get_n_schema_elements", LIBS);
+  gidLink(gparquet_file_metadata_get_row_group, "gparquet_file_metadata_get_row_group", LIBS);
+  gidLink(gparquet_file_metadata_get_size, "gparquet_file_metadata_get_size", LIBS);
 
   // FixedLengthByteArrayStatistics
-  link(gparquet_fixed_length_byte_array_statistics_get_type, "gparquet_fixed_length_byte_array_statistics_get_type");
-  link(gparquet_fixed_length_byte_array_statistics_get_max, "gparquet_fixed_length_byte_array_statistics_get_max");
-  link(gparquet_fixed_length_byte_array_statistics_get_min, "gparquet_fixed_length_byte_array_statistics_get_min");
+  gidLink(gparquet_fixed_length_byte_array_statistics_get_type, "gparquet_fixed_length_byte_array_statistics_get_type", LIBS);
+  gidLink(gparquet_fixed_length_byte_array_statistics_get_max, "gparquet_fixed_length_byte_array_statistics_get_max", LIBS);
+  gidLink(gparquet_fixed_length_byte_array_statistics_get_min, "gparquet_fixed_length_byte_array_statistics_get_min", LIBS);
 
   // FloatStatistics
-  link(gparquet_float_statistics_get_type, "gparquet_float_statistics_get_type");
-  link(gparquet_float_statistics_get_max, "gparquet_float_statistics_get_max");
-  link(gparquet_float_statistics_get_min, "gparquet_float_statistics_get_min");
+  gidLink(gparquet_float_statistics_get_type, "gparquet_float_statistics_get_type", LIBS);
+  gidLink(gparquet_float_statistics_get_max, "gparquet_float_statistics_get_max", LIBS);
+  gidLink(gparquet_float_statistics_get_min, "gparquet_float_statistics_get_min", LIBS);
 
   // Int32Statistics
-  link(gparquet_int32_statistics_get_type, "gparquet_int32_statistics_get_type");
-  link(gparquet_int32_statistics_get_max, "gparquet_int32_statistics_get_max");
-  link(gparquet_int32_statistics_get_min, "gparquet_int32_statistics_get_min");
+  gidLink(gparquet_int32_statistics_get_type, "gparquet_int32_statistics_get_type", LIBS);
+  gidLink(gparquet_int32_statistics_get_max, "gparquet_int32_statistics_get_max", LIBS);
+  gidLink(gparquet_int32_statistics_get_min, "gparquet_int32_statistics_get_min", LIBS);
 
   // Int64Statistics
-  link(gparquet_int64_statistics_get_type, "gparquet_int64_statistics_get_type");
-  link(gparquet_int64_statistics_get_max, "gparquet_int64_statistics_get_max");
-  link(gparquet_int64_statistics_get_min, "gparquet_int64_statistics_get_min");
+  gidLink(gparquet_int64_statistics_get_type, "gparquet_int64_statistics_get_type", LIBS);
+  gidLink(gparquet_int64_statistics_get_max, "gparquet_int64_statistics_get_max", LIBS);
+  gidLink(gparquet_int64_statistics_get_min, "gparquet_int64_statistics_get_min", LIBS);
 
   // RowGroupMetadata
-  link(gparquet_row_group_metadata_get_type, "gparquet_row_group_metadata_get_type");
-  link(gparquet_row_group_metadata_can_decompress, "gparquet_row_group_metadata_can_decompress");
-  link(gparquet_row_group_metadata_equal, "gparquet_row_group_metadata_equal");
-  link(gparquet_row_group_metadata_get_column_chunk, "gparquet_row_group_metadata_get_column_chunk");
-  link(gparquet_row_group_metadata_get_file_offset, "gparquet_row_group_metadata_get_file_offset");
-  link(gparquet_row_group_metadata_get_n_columns, "gparquet_row_group_metadata_get_n_columns");
-  link(gparquet_row_group_metadata_get_n_rows, "gparquet_row_group_metadata_get_n_rows");
-  link(gparquet_row_group_metadata_get_total_compressed_size, "gparquet_row_group_metadata_get_total_compressed_size");
-  link(gparquet_row_group_metadata_get_total_size, "gparquet_row_group_metadata_get_total_size");
+  gidLink(gparquet_row_group_metadata_get_type, "gparquet_row_group_metadata_get_type", LIBS);
+  gidLink(gparquet_row_group_metadata_can_decompress, "gparquet_row_group_metadata_can_decompress", LIBS);
+  gidLink(gparquet_row_group_metadata_equal, "gparquet_row_group_metadata_equal", LIBS);
+  gidLink(gparquet_row_group_metadata_get_column_chunk, "gparquet_row_group_metadata_get_column_chunk", LIBS);
+  gidLink(gparquet_row_group_metadata_get_file_offset, "gparquet_row_group_metadata_get_file_offset", LIBS);
+  gidLink(gparquet_row_group_metadata_get_n_columns, "gparquet_row_group_metadata_get_n_columns", LIBS);
+  gidLink(gparquet_row_group_metadata_get_n_rows, "gparquet_row_group_metadata_get_n_rows", LIBS);
+  gidLink(gparquet_row_group_metadata_get_total_compressed_size, "gparquet_row_group_metadata_get_total_compressed_size", LIBS);
+  gidLink(gparquet_row_group_metadata_get_total_size, "gparquet_row_group_metadata_get_total_size", LIBS);
 
   // Statistics
-  link(gparquet_statistics_get_type, "gparquet_statistics_get_type");
-  link(gparquet_statistics_equal, "gparquet_statistics_equal");
-  link(gparquet_statistics_get_n_distinct_values, "gparquet_statistics_get_n_distinct_values");
-  link(gparquet_statistics_get_n_nulls, "gparquet_statistics_get_n_nulls");
-  link(gparquet_statistics_get_n_values, "gparquet_statistics_get_n_values");
-  link(gparquet_statistics_has_min_max, "gparquet_statistics_has_min_max");
-  link(gparquet_statistics_has_n_distinct_values, "gparquet_statistics_has_n_distinct_values");
-  link(gparquet_statistics_has_n_nulls, "gparquet_statistics_has_n_nulls");
+  gidLink(gparquet_statistics_get_type, "gparquet_statistics_get_type", LIBS);
+  gidLink(gparquet_statistics_equal, "gparquet_statistics_equal", LIBS);
+  gidLink(gparquet_statistics_get_n_distinct_values, "gparquet_statistics_get_n_distinct_values", LIBS);
+  gidLink(gparquet_statistics_get_n_nulls, "gparquet_statistics_get_n_nulls", LIBS);
+  gidLink(gparquet_statistics_get_n_values, "gparquet_statistics_get_n_values", LIBS);
+  gidLink(gparquet_statistics_has_min_max, "gparquet_statistics_has_min_max", LIBS);
+  gidLink(gparquet_statistics_has_n_distinct_values, "gparquet_statistics_has_n_distinct_values", LIBS);
+  gidLink(gparquet_statistics_has_n_nulls, "gparquet_statistics_has_n_nulls", LIBS);
 
   // WriterProperties
-  link(gparquet_writer_properties_get_type, "gparquet_writer_properties_get_type");
-  link(gparquet_writer_properties_new, "gparquet_writer_properties_new");
-  link(gparquet_writer_properties_disable_dictionary, "gparquet_writer_properties_disable_dictionary");
-  link(gparquet_writer_properties_enable_dictionary, "gparquet_writer_properties_enable_dictionary");
-  link(gparquet_writer_properties_get_batch_size, "gparquet_writer_properties_get_batch_size");
-  link(gparquet_writer_properties_get_compression_path, "gparquet_writer_properties_get_compression_path");
-  link(gparquet_writer_properties_get_data_page_size, "gparquet_writer_properties_get_data_page_size");
-  link(gparquet_writer_properties_get_dictionary_page_size_limit, "gparquet_writer_properties_get_dictionary_page_size_limit");
-  link(gparquet_writer_properties_get_max_row_group_length, "gparquet_writer_properties_get_max_row_group_length");
-  link(gparquet_writer_properties_is_dictionary_enabled, "gparquet_writer_properties_is_dictionary_enabled");
-  link(gparquet_writer_properties_set_batch_size, "gparquet_writer_properties_set_batch_size");
-  link(gparquet_writer_properties_set_compression, "gparquet_writer_properties_set_compression");
-  link(gparquet_writer_properties_set_data_page_size, "gparquet_writer_properties_set_data_page_size");
-  link(gparquet_writer_properties_set_dictionary_page_size_limit, "gparquet_writer_properties_set_dictionary_page_size_limit");
-  link(gparquet_writer_properties_set_max_row_group_length, "gparquet_writer_properties_set_max_row_group_length");
-}
-
-import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
-import std.string : fromStringz, toStringz;
-
-private void link(T)(ref T funcPtr, string symbol)
-{
-  foreach (lib; LIBS)
-  {
-  if (auto handle = dlopen(cast(char*)toStringz(lib), RTLD_GLOBAL | RTLD_NOW))
-  {
-  if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
-  {
-  funcPtr = cast(T)symPtr;
-  return;
-  }
-  }
-  else
-  throw new Error("Failed to load library '" ~ lib ~ "': " ~ dlerror().fromStringz.idup);
-  }
-
-  funcPtr = cast(T)&symbolNotFound;
-}
-
-private void symbolNotFound()
-{
-  throw new Error("Attempted to execute a dynamic library function which was not found");
+  gidLink(gparquet_writer_properties_get_type, "gparquet_writer_properties_get_type", LIBS);
+  gidLink(gparquet_writer_properties_new, "gparquet_writer_properties_new", LIBS);
+  gidLink(gparquet_writer_properties_disable_dictionary, "gparquet_writer_properties_disable_dictionary", LIBS);
+  gidLink(gparquet_writer_properties_enable_dictionary, "gparquet_writer_properties_enable_dictionary", LIBS);
+  gidLink(gparquet_writer_properties_get_batch_size, "gparquet_writer_properties_get_batch_size", LIBS);
+  gidLink(gparquet_writer_properties_get_compression_path, "gparquet_writer_properties_get_compression_path", LIBS);
+  gidLink(gparquet_writer_properties_get_data_page_size, "gparquet_writer_properties_get_data_page_size", LIBS);
+  gidLink(gparquet_writer_properties_get_dictionary_page_size_limit, "gparquet_writer_properties_get_dictionary_page_size_limit", LIBS);
+  gidLink(gparquet_writer_properties_get_max_row_group_length, "gparquet_writer_properties_get_max_row_group_length", LIBS);
+  gidLink(gparquet_writer_properties_is_dictionary_enabled, "gparquet_writer_properties_is_dictionary_enabled", LIBS);
+  gidLink(gparquet_writer_properties_set_batch_size, "gparquet_writer_properties_set_batch_size", LIBS);
+  gidLink(gparquet_writer_properties_set_compression, "gparquet_writer_properties_set_compression", LIBS);
+  gidLink(gparquet_writer_properties_set_data_page_size, "gparquet_writer_properties_set_data_page_size", LIBS);
+  gidLink(gparquet_writer_properties_set_dictionary_page_size_limit, "gparquet_writer_properties_set_dictionary_page_size_limit", LIBS);
+  gidLink(gparquet_writer_properties_set_max_row_group_length, "gparquet_writer_properties_set_max_row_group_length", LIBS);
 }

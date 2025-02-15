@@ -1,5 +1,6 @@
 module PangoCairo.c.functions;
 
+import Gid.loader;
 import PangoCairo.c.types;
 public import GObject.c.types;
 public import Pango.c.types;
@@ -7,7 +8,7 @@ public import cairo.c.types;
 
 version(Windows)
   private immutable LIBS = ["libpangocairo-1.0-0.dll;pangocairo-1.0-0.dll;pangocairo-1.dll"];
-version(OSX)
+else version(OSX)
   private immutable LIBS = ["libpangocairo-1.0.0.dylib"];
 else
   private immutable LIBS = ["libpangocairo-1.0.so.0"];
@@ -90,65 +91,38 @@ alias pango_cairo_update_layout = c_pango_cairo_update_layout;
 shared static this()
 {
   // Font
-  link(pango_cairo_font_get_type, "pango_cairo_font_get_type");
-  link(pango_cairo_font_get_scaled_font, "pango_cairo_font_get_scaled_font");
+  gidLink(pango_cairo_font_get_type, "pango_cairo_font_get_type", LIBS);
+  gidLink(pango_cairo_font_get_scaled_font, "pango_cairo_font_get_scaled_font", LIBS);
 
   // FontMap
-  link(pango_cairo_font_map_get_type, "pango_cairo_font_map_get_type");
-  link(pango_cairo_font_map_get_default, "pango_cairo_font_map_get_default");
-  link(pango_cairo_font_map_new, "pango_cairo_font_map_new");
-  link(pango_cairo_font_map_new_for_font_type, "pango_cairo_font_map_new_for_font_type");
-  link(pango_cairo_font_map_create_context, "pango_cairo_font_map_create_context");
-  link(pango_cairo_font_map_get_font_type, "pango_cairo_font_map_get_font_type");
-  link(pango_cairo_font_map_get_resolution, "pango_cairo_font_map_get_resolution");
-  link(pango_cairo_font_map_set_default, "pango_cairo_font_map_set_default");
-  link(pango_cairo_font_map_set_resolution, "pango_cairo_font_map_set_resolution");
+  gidLink(pango_cairo_font_map_get_type, "pango_cairo_font_map_get_type", LIBS);
+  gidLink(pango_cairo_font_map_get_default, "pango_cairo_font_map_get_default", LIBS);
+  gidLink(pango_cairo_font_map_new, "pango_cairo_font_map_new", LIBS);
+  gidLink(pango_cairo_font_map_new_for_font_type, "pango_cairo_font_map_new_for_font_type", LIBS);
+  gidLink(pango_cairo_font_map_create_context, "pango_cairo_font_map_create_context", LIBS);
+  gidLink(pango_cairo_font_map_get_font_type, "pango_cairo_font_map_get_font_type", LIBS);
+  gidLink(pango_cairo_font_map_get_resolution, "pango_cairo_font_map_get_resolution", LIBS);
+  gidLink(pango_cairo_font_map_set_default, "pango_cairo_font_map_set_default", LIBS);
+  gidLink(pango_cairo_font_map_set_resolution, "pango_cairo_font_map_set_resolution", LIBS);
 
   // Global
-  link(pango_cairo_context_get_font_options, "pango_cairo_context_get_font_options");
-  link(pango_cairo_context_get_resolution, "pango_cairo_context_get_resolution");
-  link(pango_cairo_context_get_shape_renderer, "pango_cairo_context_get_shape_renderer");
-  link(pango_cairo_context_set_font_options, "pango_cairo_context_set_font_options");
-  link(pango_cairo_context_set_resolution, "pango_cairo_context_set_resolution");
-  link(pango_cairo_context_set_shape_renderer, "pango_cairo_context_set_shape_renderer");
-  link(pango_cairo_create_context, "pango_cairo_create_context");
-  link(pango_cairo_create_layout, "pango_cairo_create_layout");
-  link(pango_cairo_error_underline_path, "pango_cairo_error_underline_path");
-  link(pango_cairo_glyph_string_path, "pango_cairo_glyph_string_path");
-  link(pango_cairo_layout_line_path, "pango_cairo_layout_line_path");
-  link(pango_cairo_layout_path, "pango_cairo_layout_path");
-  link(pango_cairo_show_error_underline, "pango_cairo_show_error_underline");
-  link(pango_cairo_show_glyph_item, "pango_cairo_show_glyph_item");
-  link(pango_cairo_show_glyph_string, "pango_cairo_show_glyph_string");
-  link(pango_cairo_show_layout, "pango_cairo_show_layout");
-  link(pango_cairo_show_layout_line, "pango_cairo_show_layout_line");
-  link(pango_cairo_update_context, "pango_cairo_update_context");
-  link(pango_cairo_update_layout, "pango_cairo_update_layout");
-}
-
-import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
-import std.string : fromStringz, toStringz;
-
-private void link(T)(ref T funcPtr, string symbol)
-{
-  foreach (lib; LIBS)
-  {
-  if (auto handle = dlopen(cast(char*)toStringz(lib), RTLD_GLOBAL | RTLD_NOW))
-  {
-  if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
-  {
-  funcPtr = cast(T)symPtr;
-  return;
-  }
-  }
-  else
-  throw new Error("Failed to load library '" ~ lib ~ "': " ~ dlerror().fromStringz.idup);
-  }
-
-  funcPtr = cast(T)&symbolNotFound;
-}
-
-private void symbolNotFound()
-{
-  throw new Error("Attempted to execute a dynamic library function which was not found");
+  gidLink(pango_cairo_context_get_font_options, "pango_cairo_context_get_font_options", LIBS);
+  gidLink(pango_cairo_context_get_resolution, "pango_cairo_context_get_resolution", LIBS);
+  gidLink(pango_cairo_context_get_shape_renderer, "pango_cairo_context_get_shape_renderer", LIBS);
+  gidLink(pango_cairo_context_set_font_options, "pango_cairo_context_set_font_options", LIBS);
+  gidLink(pango_cairo_context_set_resolution, "pango_cairo_context_set_resolution", LIBS);
+  gidLink(pango_cairo_context_set_shape_renderer, "pango_cairo_context_set_shape_renderer", LIBS);
+  gidLink(pango_cairo_create_context, "pango_cairo_create_context", LIBS);
+  gidLink(pango_cairo_create_layout, "pango_cairo_create_layout", LIBS);
+  gidLink(pango_cairo_error_underline_path, "pango_cairo_error_underline_path", LIBS);
+  gidLink(pango_cairo_glyph_string_path, "pango_cairo_glyph_string_path", LIBS);
+  gidLink(pango_cairo_layout_line_path, "pango_cairo_layout_line_path", LIBS);
+  gidLink(pango_cairo_layout_path, "pango_cairo_layout_path", LIBS);
+  gidLink(pango_cairo_show_error_underline, "pango_cairo_show_error_underline", LIBS);
+  gidLink(pango_cairo_show_glyph_item, "pango_cairo_show_glyph_item", LIBS);
+  gidLink(pango_cairo_show_glyph_string, "pango_cairo_show_glyph_string", LIBS);
+  gidLink(pango_cairo_show_layout, "pango_cairo_show_layout", LIBS);
+  gidLink(pango_cairo_show_layout_line, "pango_cairo_show_layout_line", LIBS);
+  gidLink(pango_cairo_update_context, "pango_cairo_update_context", LIBS);
+  gidLink(pango_cairo_update_layout, "pango_cairo_update_layout", LIBS);
 }

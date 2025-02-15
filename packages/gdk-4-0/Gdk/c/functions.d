@@ -1,5 +1,6 @@
 module Gdk.c.functions;
 
+import Gid.loader;
 import Gdk.c.types;
 public import GdkPixbuf.c.types;
 public import Gio.c.types;
@@ -9,7 +10,7 @@ public import cairo.c.types;
 
 version(Windows)
   private immutable LIBS = ["libgtk-4-1.dll;gtk-4-1.dll;gtk-4.dll"];
-version(OSX)
+else version(OSX)
   private immutable LIBS = ["libgtk-4.1.dylib"];
 else
   private immutable LIBS = ["libgtk-4.so.1"];
@@ -1388,713 +1389,686 @@ alias gdk_vulkan_context_get_type = c_gdk_vulkan_context_get_type;
 shared static this()
 {
   // AppLaunchContext
-  link(gdk_app_launch_context_get_type, "gdk_app_launch_context_get_type");
-  link(gdk_app_launch_context_get_display, "gdk_app_launch_context_get_display");
-  link(gdk_app_launch_context_set_desktop, "gdk_app_launch_context_set_desktop");
-  link(gdk_app_launch_context_set_icon, "gdk_app_launch_context_set_icon");
-  link(gdk_app_launch_context_set_icon_name, "gdk_app_launch_context_set_icon_name");
-  link(gdk_app_launch_context_set_timestamp, "gdk_app_launch_context_set_timestamp");
+  gidLink(gdk_app_launch_context_get_type, "gdk_app_launch_context_get_type", LIBS);
+  gidLink(gdk_app_launch_context_get_display, "gdk_app_launch_context_get_display", LIBS);
+  gidLink(gdk_app_launch_context_set_desktop, "gdk_app_launch_context_set_desktop", LIBS);
+  gidLink(gdk_app_launch_context_set_icon, "gdk_app_launch_context_set_icon", LIBS);
+  gidLink(gdk_app_launch_context_set_icon_name, "gdk_app_launch_context_set_icon_name", LIBS);
+  gidLink(gdk_app_launch_context_set_timestamp, "gdk_app_launch_context_set_timestamp", LIBS);
 
   // ButtonEvent
-  link(gdk_button_event_get_type, "gdk_button_event_get_type");
-  link(gdk_button_event_get_button, "gdk_button_event_get_button");
+  gidLink(gdk_button_event_get_type, "gdk_button_event_get_type", LIBS);
+  gidLink(gdk_button_event_get_button, "gdk_button_event_get_button", LIBS);
 
   // CairoContext
-  link(gdk_cairo_context_get_type, "gdk_cairo_context_get_type");
-  link(gdk_cairo_context_cairo_create, "gdk_cairo_context_cairo_create");
+  gidLink(gdk_cairo_context_get_type, "gdk_cairo_context_get_type", LIBS);
+  gidLink(gdk_cairo_context_cairo_create, "gdk_cairo_context_cairo_create", LIBS);
 
   // Clipboard
-  link(gdk_clipboard_get_type, "gdk_clipboard_get_type");
-  link(gdk_clipboard_get_content, "gdk_clipboard_get_content");
-  link(gdk_clipboard_get_display, "gdk_clipboard_get_display");
-  link(gdk_clipboard_get_formats, "gdk_clipboard_get_formats");
-  link(gdk_clipboard_is_local, "gdk_clipboard_is_local");
-  link(gdk_clipboard_read_async, "gdk_clipboard_read_async");
-  link(gdk_clipboard_read_finish, "gdk_clipboard_read_finish");
-  link(gdk_clipboard_read_text_async, "gdk_clipboard_read_text_async");
-  link(gdk_clipboard_read_text_finish, "gdk_clipboard_read_text_finish");
-  link(gdk_clipboard_read_texture_async, "gdk_clipboard_read_texture_async");
-  link(gdk_clipboard_read_texture_finish, "gdk_clipboard_read_texture_finish");
-  link(gdk_clipboard_read_value_async, "gdk_clipboard_read_value_async");
-  link(gdk_clipboard_read_value_finish, "gdk_clipboard_read_value_finish");
-  link(gdk_clipboard_set, "gdk_clipboard_set");
-  link(gdk_clipboard_set_content, "gdk_clipboard_set_content");
-  link(gdk_clipboard_set_text, "gdk_clipboard_set_text");
-  link(gdk_clipboard_set_texture, "gdk_clipboard_set_texture");
-  link(gdk_clipboard_set_valist, "gdk_clipboard_set_valist");
-  link(gdk_clipboard_set_value, "gdk_clipboard_set_value");
-  link(gdk_clipboard_store_async, "gdk_clipboard_store_async");
-  link(gdk_clipboard_store_finish, "gdk_clipboard_store_finish");
+  gidLink(gdk_clipboard_get_type, "gdk_clipboard_get_type", LIBS);
+  gidLink(gdk_clipboard_get_content, "gdk_clipboard_get_content", LIBS);
+  gidLink(gdk_clipboard_get_display, "gdk_clipboard_get_display", LIBS);
+  gidLink(gdk_clipboard_get_formats, "gdk_clipboard_get_formats", LIBS);
+  gidLink(gdk_clipboard_is_local, "gdk_clipboard_is_local", LIBS);
+  gidLink(gdk_clipboard_read_async, "gdk_clipboard_read_async", LIBS);
+  gidLink(gdk_clipboard_read_finish, "gdk_clipboard_read_finish", LIBS);
+  gidLink(gdk_clipboard_read_text_async, "gdk_clipboard_read_text_async", LIBS);
+  gidLink(gdk_clipboard_read_text_finish, "gdk_clipboard_read_text_finish", LIBS);
+  gidLink(gdk_clipboard_read_texture_async, "gdk_clipboard_read_texture_async", LIBS);
+  gidLink(gdk_clipboard_read_texture_finish, "gdk_clipboard_read_texture_finish", LIBS);
+  gidLink(gdk_clipboard_read_value_async, "gdk_clipboard_read_value_async", LIBS);
+  gidLink(gdk_clipboard_read_value_finish, "gdk_clipboard_read_value_finish", LIBS);
+  gidLink(gdk_clipboard_set, "gdk_clipboard_set", LIBS);
+  gidLink(gdk_clipboard_set_content, "gdk_clipboard_set_content", LIBS);
+  gidLink(gdk_clipboard_set_text, "gdk_clipboard_set_text", LIBS);
+  gidLink(gdk_clipboard_set_texture, "gdk_clipboard_set_texture", LIBS);
+  gidLink(gdk_clipboard_set_valist, "gdk_clipboard_set_valist", LIBS);
+  gidLink(gdk_clipboard_set_value, "gdk_clipboard_set_value", LIBS);
+  gidLink(gdk_clipboard_store_async, "gdk_clipboard_store_async", LIBS);
+  gidLink(gdk_clipboard_store_finish, "gdk_clipboard_store_finish", LIBS);
 
   // ContentDeserializer
-  link(gdk_content_deserializer_get_type, "gdk_content_deserializer_get_type");
-  link(gdk_content_deserializer_get_cancellable, "gdk_content_deserializer_get_cancellable");
-  link(gdk_content_deserializer_get_gtype, "gdk_content_deserializer_get_gtype");
-  link(gdk_content_deserializer_get_input_stream, "gdk_content_deserializer_get_input_stream");
-  link(gdk_content_deserializer_get_mime_type, "gdk_content_deserializer_get_mime_type");
-  link(gdk_content_deserializer_get_priority, "gdk_content_deserializer_get_priority");
-  link(gdk_content_deserializer_get_task_data, "gdk_content_deserializer_get_task_data");
-  link(gdk_content_deserializer_get_user_data, "gdk_content_deserializer_get_user_data");
-  link(gdk_content_deserializer_get_value, "gdk_content_deserializer_get_value");
-  link(gdk_content_deserializer_return_error, "gdk_content_deserializer_return_error");
-  link(gdk_content_deserializer_return_success, "gdk_content_deserializer_return_success");
-  link(gdk_content_deserializer_set_task_data, "gdk_content_deserializer_set_task_data");
+  gidLink(gdk_content_deserializer_get_type, "gdk_content_deserializer_get_type", LIBS);
+  gidLink(gdk_content_deserializer_get_cancellable, "gdk_content_deserializer_get_cancellable", LIBS);
+  gidLink(gdk_content_deserializer_get_gtype, "gdk_content_deserializer_get_gtype", LIBS);
+  gidLink(gdk_content_deserializer_get_input_stream, "gdk_content_deserializer_get_input_stream", LIBS);
+  gidLink(gdk_content_deserializer_get_mime_type, "gdk_content_deserializer_get_mime_type", LIBS);
+  gidLink(gdk_content_deserializer_get_priority, "gdk_content_deserializer_get_priority", LIBS);
+  gidLink(gdk_content_deserializer_get_task_data, "gdk_content_deserializer_get_task_data", LIBS);
+  gidLink(gdk_content_deserializer_get_user_data, "gdk_content_deserializer_get_user_data", LIBS);
+  gidLink(gdk_content_deserializer_get_value, "gdk_content_deserializer_get_value", LIBS);
+  gidLink(gdk_content_deserializer_return_error, "gdk_content_deserializer_return_error", LIBS);
+  gidLink(gdk_content_deserializer_return_success, "gdk_content_deserializer_return_success", LIBS);
+  gidLink(gdk_content_deserializer_set_task_data, "gdk_content_deserializer_set_task_data", LIBS);
 
   // ContentFormats
-  link(gdk_content_formats_get_type, "gdk_content_formats_get_type");
-  link(gdk_content_formats_new, "gdk_content_formats_new");
-  link(gdk_content_formats_new_for_gtype, "gdk_content_formats_new_for_gtype");
-  link(gdk_content_formats_contain_gtype, "gdk_content_formats_contain_gtype");
-  link(gdk_content_formats_contain_mime_type, "gdk_content_formats_contain_mime_type");
-  link(gdk_content_formats_get_gtypes, "gdk_content_formats_get_gtypes");
-  link(gdk_content_formats_get_mime_types, "gdk_content_formats_get_mime_types");
-  link(gdk_content_formats_match, "gdk_content_formats_match");
-  link(gdk_content_formats_match_gtype, "gdk_content_formats_match_gtype");
-  link(gdk_content_formats_match_mime_type, "gdk_content_formats_match_mime_type");
-  link(gdk_content_formats_print, "gdk_content_formats_print");
-  link(gdk_content_formats_ref, "gdk_content_formats_ref");
-  link(gdk_content_formats_to_string, "gdk_content_formats_to_string");
-  link(gdk_content_formats_union, "gdk_content_formats_union");
-  link(gdk_content_formats_union_deserialize_gtypes, "gdk_content_formats_union_deserialize_gtypes");
-  link(gdk_content_formats_union_deserialize_mime_types, "gdk_content_formats_union_deserialize_mime_types");
-  link(gdk_content_formats_union_serialize_gtypes, "gdk_content_formats_union_serialize_gtypes");
-  link(gdk_content_formats_union_serialize_mime_types, "gdk_content_formats_union_serialize_mime_types");
-  link(gdk_content_formats_unref, "gdk_content_formats_unref");
-  link(gdk_content_formats_parse, "gdk_content_formats_parse");
+  gidLink(gdk_content_formats_get_type, "gdk_content_formats_get_type", LIBS);
+  gidLink(gdk_content_formats_new, "gdk_content_formats_new", LIBS);
+  gidLink(gdk_content_formats_new_for_gtype, "gdk_content_formats_new_for_gtype", LIBS);
+  gidLink(gdk_content_formats_contain_gtype, "gdk_content_formats_contain_gtype", LIBS);
+  gidLink(gdk_content_formats_contain_mime_type, "gdk_content_formats_contain_mime_type", LIBS);
+  gidLink(gdk_content_formats_get_gtypes, "gdk_content_formats_get_gtypes", LIBS);
+  gidLink(gdk_content_formats_get_mime_types, "gdk_content_formats_get_mime_types", LIBS);
+  gidLink(gdk_content_formats_match, "gdk_content_formats_match", LIBS);
+  gidLink(gdk_content_formats_match_gtype, "gdk_content_formats_match_gtype", LIBS);
+  gidLink(gdk_content_formats_match_mime_type, "gdk_content_formats_match_mime_type", LIBS);
+  gidLink(gdk_content_formats_print, "gdk_content_formats_print", LIBS);
+  gidLink(gdk_content_formats_ref, "gdk_content_formats_ref", LIBS);
+  gidLink(gdk_content_formats_to_string, "gdk_content_formats_to_string", LIBS);
+  gidLink(gdk_content_formats_union, "gdk_content_formats_union", LIBS);
+  gidLink(gdk_content_formats_union_deserialize_gtypes, "gdk_content_formats_union_deserialize_gtypes", LIBS);
+  gidLink(gdk_content_formats_union_deserialize_mime_types, "gdk_content_formats_union_deserialize_mime_types", LIBS);
+  gidLink(gdk_content_formats_union_serialize_gtypes, "gdk_content_formats_union_serialize_gtypes", LIBS);
+  gidLink(gdk_content_formats_union_serialize_mime_types, "gdk_content_formats_union_serialize_mime_types", LIBS);
+  gidLink(gdk_content_formats_unref, "gdk_content_formats_unref", LIBS);
+  gidLink(gdk_content_formats_parse, "gdk_content_formats_parse", LIBS);
 
   // ContentFormatsBuilder
-  link(gdk_content_formats_builder_get_type, "gdk_content_formats_builder_get_type");
-  link(gdk_content_formats_builder_new, "gdk_content_formats_builder_new");
-  link(gdk_content_formats_builder_add_formats, "gdk_content_formats_builder_add_formats");
-  link(gdk_content_formats_builder_add_gtype, "gdk_content_formats_builder_add_gtype");
-  link(gdk_content_formats_builder_add_mime_type, "gdk_content_formats_builder_add_mime_type");
-  link(gdk_content_formats_builder_free_to_formats, "gdk_content_formats_builder_free_to_formats");
-  link(gdk_content_formats_builder_ref, "gdk_content_formats_builder_ref");
-  link(gdk_content_formats_builder_to_formats, "gdk_content_formats_builder_to_formats");
-  link(gdk_content_formats_builder_unref, "gdk_content_formats_builder_unref");
+  gidLink(gdk_content_formats_builder_get_type, "gdk_content_formats_builder_get_type", LIBS);
+  gidLink(gdk_content_formats_builder_new, "gdk_content_formats_builder_new", LIBS);
+  gidLink(gdk_content_formats_builder_add_formats, "gdk_content_formats_builder_add_formats", LIBS);
+  gidLink(gdk_content_formats_builder_add_gtype, "gdk_content_formats_builder_add_gtype", LIBS);
+  gidLink(gdk_content_formats_builder_add_mime_type, "gdk_content_formats_builder_add_mime_type", LIBS);
+  gidLink(gdk_content_formats_builder_free_to_formats, "gdk_content_formats_builder_free_to_formats", LIBS);
+  gidLink(gdk_content_formats_builder_ref, "gdk_content_formats_builder_ref", LIBS);
+  gidLink(gdk_content_formats_builder_to_formats, "gdk_content_formats_builder_to_formats", LIBS);
+  gidLink(gdk_content_formats_builder_unref, "gdk_content_formats_builder_unref", LIBS);
 
   // ContentProvider
-  link(gdk_content_provider_get_type, "gdk_content_provider_get_type");
-  link(gdk_content_provider_new_for_bytes, "gdk_content_provider_new_for_bytes");
-  link(gdk_content_provider_new_for_value, "gdk_content_provider_new_for_value");
-  link(gdk_content_provider_new_typed, "gdk_content_provider_new_typed");
-  link(gdk_content_provider_new_union, "gdk_content_provider_new_union");
-  link(gdk_content_provider_content_changed, "gdk_content_provider_content_changed");
-  link(gdk_content_provider_get_value, "gdk_content_provider_get_value");
-  link(gdk_content_provider_ref_formats, "gdk_content_provider_ref_formats");
-  link(gdk_content_provider_ref_storable_formats, "gdk_content_provider_ref_storable_formats");
-  link(gdk_content_provider_write_mime_type_async, "gdk_content_provider_write_mime_type_async");
-  link(gdk_content_provider_write_mime_type_finish, "gdk_content_provider_write_mime_type_finish");
+  gidLink(gdk_content_provider_get_type, "gdk_content_provider_get_type", LIBS);
+  gidLink(gdk_content_provider_new_for_bytes, "gdk_content_provider_new_for_bytes", LIBS);
+  gidLink(gdk_content_provider_new_for_value, "gdk_content_provider_new_for_value", LIBS);
+  gidLink(gdk_content_provider_new_typed, "gdk_content_provider_new_typed", LIBS);
+  gidLink(gdk_content_provider_new_union, "gdk_content_provider_new_union", LIBS);
+  gidLink(gdk_content_provider_content_changed, "gdk_content_provider_content_changed", LIBS);
+  gidLink(gdk_content_provider_get_value, "gdk_content_provider_get_value", LIBS);
+  gidLink(gdk_content_provider_ref_formats, "gdk_content_provider_ref_formats", LIBS);
+  gidLink(gdk_content_provider_ref_storable_formats, "gdk_content_provider_ref_storable_formats", LIBS);
+  gidLink(gdk_content_provider_write_mime_type_async, "gdk_content_provider_write_mime_type_async", LIBS);
+  gidLink(gdk_content_provider_write_mime_type_finish, "gdk_content_provider_write_mime_type_finish", LIBS);
 
   // ContentSerializer
-  link(gdk_content_serializer_get_type, "gdk_content_serializer_get_type");
-  link(gdk_content_serializer_get_cancellable, "gdk_content_serializer_get_cancellable");
-  link(gdk_content_serializer_get_gtype, "gdk_content_serializer_get_gtype");
-  link(gdk_content_serializer_get_mime_type, "gdk_content_serializer_get_mime_type");
-  link(gdk_content_serializer_get_output_stream, "gdk_content_serializer_get_output_stream");
-  link(gdk_content_serializer_get_priority, "gdk_content_serializer_get_priority");
-  link(gdk_content_serializer_get_task_data, "gdk_content_serializer_get_task_data");
-  link(gdk_content_serializer_get_user_data, "gdk_content_serializer_get_user_data");
-  link(gdk_content_serializer_get_value, "gdk_content_serializer_get_value");
-  link(gdk_content_serializer_return_error, "gdk_content_serializer_return_error");
-  link(gdk_content_serializer_return_success, "gdk_content_serializer_return_success");
-  link(gdk_content_serializer_set_task_data, "gdk_content_serializer_set_task_data");
+  gidLink(gdk_content_serializer_get_type, "gdk_content_serializer_get_type", LIBS);
+  gidLink(gdk_content_serializer_get_cancellable, "gdk_content_serializer_get_cancellable", LIBS);
+  gidLink(gdk_content_serializer_get_gtype, "gdk_content_serializer_get_gtype", LIBS);
+  gidLink(gdk_content_serializer_get_mime_type, "gdk_content_serializer_get_mime_type", LIBS);
+  gidLink(gdk_content_serializer_get_output_stream, "gdk_content_serializer_get_output_stream", LIBS);
+  gidLink(gdk_content_serializer_get_priority, "gdk_content_serializer_get_priority", LIBS);
+  gidLink(gdk_content_serializer_get_task_data, "gdk_content_serializer_get_task_data", LIBS);
+  gidLink(gdk_content_serializer_get_user_data, "gdk_content_serializer_get_user_data", LIBS);
+  gidLink(gdk_content_serializer_get_value, "gdk_content_serializer_get_value", LIBS);
+  gidLink(gdk_content_serializer_return_error, "gdk_content_serializer_return_error", LIBS);
+  gidLink(gdk_content_serializer_return_success, "gdk_content_serializer_return_success", LIBS);
+  gidLink(gdk_content_serializer_set_task_data, "gdk_content_serializer_set_task_data", LIBS);
 
   // CrossingEvent
-  link(gdk_crossing_event_get_type, "gdk_crossing_event_get_type");
-  link(gdk_crossing_event_get_detail, "gdk_crossing_event_get_detail");
-  link(gdk_crossing_event_get_focus, "gdk_crossing_event_get_focus");
-  link(gdk_crossing_event_get_mode, "gdk_crossing_event_get_mode");
+  gidLink(gdk_crossing_event_get_type, "gdk_crossing_event_get_type", LIBS);
+  gidLink(gdk_crossing_event_get_detail, "gdk_crossing_event_get_detail", LIBS);
+  gidLink(gdk_crossing_event_get_focus, "gdk_crossing_event_get_focus", LIBS);
+  gidLink(gdk_crossing_event_get_mode, "gdk_crossing_event_get_mode", LIBS);
 
   // Cursor
-  link(gdk_cursor_get_type, "gdk_cursor_get_type");
-  link(gdk_cursor_new_from_name, "gdk_cursor_new_from_name");
-  link(gdk_cursor_new_from_texture, "gdk_cursor_new_from_texture");
-  link(gdk_cursor_get_fallback, "gdk_cursor_get_fallback");
-  link(gdk_cursor_get_hotspot_x, "gdk_cursor_get_hotspot_x");
-  link(gdk_cursor_get_hotspot_y, "gdk_cursor_get_hotspot_y");
-  link(gdk_cursor_get_name, "gdk_cursor_get_name");
-  link(gdk_cursor_get_texture, "gdk_cursor_get_texture");
+  gidLink(gdk_cursor_get_type, "gdk_cursor_get_type", LIBS);
+  gidLink(gdk_cursor_new_from_name, "gdk_cursor_new_from_name", LIBS);
+  gidLink(gdk_cursor_new_from_texture, "gdk_cursor_new_from_texture", LIBS);
+  gidLink(gdk_cursor_get_fallback, "gdk_cursor_get_fallback", LIBS);
+  gidLink(gdk_cursor_get_hotspot_x, "gdk_cursor_get_hotspot_x", LIBS);
+  gidLink(gdk_cursor_get_hotspot_y, "gdk_cursor_get_hotspot_y", LIBS);
+  gidLink(gdk_cursor_get_name, "gdk_cursor_get_name", LIBS);
+  gidLink(gdk_cursor_get_texture, "gdk_cursor_get_texture", LIBS);
 
   // DNDEvent
-  link(gdk_dnd_event_get_type, "gdk_dnd_event_get_type");
-  link(gdk_dnd_event_get_drop, "gdk_dnd_event_get_drop");
+  gidLink(gdk_dnd_event_get_type, "gdk_dnd_event_get_type", LIBS);
+  gidLink(gdk_dnd_event_get_drop, "gdk_dnd_event_get_drop", LIBS);
 
   // DeleteEvent
-  link(gdk_delete_event_get_type, "gdk_delete_event_get_type");
+  gidLink(gdk_delete_event_get_type, "gdk_delete_event_get_type", LIBS);
 
   // Device
-  link(gdk_device_get_type, "gdk_device_get_type");
-  link(gdk_device_get_caps_lock_state, "gdk_device_get_caps_lock_state");
-  link(gdk_device_get_device_tool, "gdk_device_get_device_tool");
-  link(gdk_device_get_direction, "gdk_device_get_direction");
-  link(gdk_device_get_display, "gdk_device_get_display");
-  link(gdk_device_get_has_cursor, "gdk_device_get_has_cursor");
-  link(gdk_device_get_modifier_state, "gdk_device_get_modifier_state");
-  link(gdk_device_get_name, "gdk_device_get_name");
-  link(gdk_device_get_num_lock_state, "gdk_device_get_num_lock_state");
-  link(gdk_device_get_num_touches, "gdk_device_get_num_touches");
-  link(gdk_device_get_product_id, "gdk_device_get_product_id");
-  link(gdk_device_get_scroll_lock_state, "gdk_device_get_scroll_lock_state");
-  link(gdk_device_get_seat, "gdk_device_get_seat");
-  link(gdk_device_get_source, "gdk_device_get_source");
-  link(gdk_device_get_surface_at_position, "gdk_device_get_surface_at_position");
-  link(gdk_device_get_timestamp, "gdk_device_get_timestamp");
-  link(gdk_device_get_vendor_id, "gdk_device_get_vendor_id");
-  link(gdk_device_has_bidi_layouts, "gdk_device_has_bidi_layouts");
+  gidLink(gdk_device_get_type, "gdk_device_get_type", LIBS);
+  gidLink(gdk_device_get_caps_lock_state, "gdk_device_get_caps_lock_state", LIBS);
+  gidLink(gdk_device_get_device_tool, "gdk_device_get_device_tool", LIBS);
+  gidLink(gdk_device_get_direction, "gdk_device_get_direction", LIBS);
+  gidLink(gdk_device_get_display, "gdk_device_get_display", LIBS);
+  gidLink(gdk_device_get_has_cursor, "gdk_device_get_has_cursor", LIBS);
+  gidLink(gdk_device_get_modifier_state, "gdk_device_get_modifier_state", LIBS);
+  gidLink(gdk_device_get_name, "gdk_device_get_name", LIBS);
+  gidLink(gdk_device_get_num_lock_state, "gdk_device_get_num_lock_state", LIBS);
+  gidLink(gdk_device_get_num_touches, "gdk_device_get_num_touches", LIBS);
+  gidLink(gdk_device_get_product_id, "gdk_device_get_product_id", LIBS);
+  gidLink(gdk_device_get_scroll_lock_state, "gdk_device_get_scroll_lock_state", LIBS);
+  gidLink(gdk_device_get_seat, "gdk_device_get_seat", LIBS);
+  gidLink(gdk_device_get_source, "gdk_device_get_source", LIBS);
+  gidLink(gdk_device_get_surface_at_position, "gdk_device_get_surface_at_position", LIBS);
+  gidLink(gdk_device_get_timestamp, "gdk_device_get_timestamp", LIBS);
+  gidLink(gdk_device_get_vendor_id, "gdk_device_get_vendor_id", LIBS);
+  gidLink(gdk_device_has_bidi_layouts, "gdk_device_has_bidi_layouts", LIBS);
 
   // DevicePad
-  link(gdk_device_pad_get_type, "gdk_device_pad_get_type");
-  link(gdk_device_pad_get_feature_group, "gdk_device_pad_get_feature_group");
-  link(gdk_device_pad_get_group_n_modes, "gdk_device_pad_get_group_n_modes");
-  link(gdk_device_pad_get_n_features, "gdk_device_pad_get_n_features");
-  link(gdk_device_pad_get_n_groups, "gdk_device_pad_get_n_groups");
+  gidLink(gdk_device_pad_get_type, "gdk_device_pad_get_type", LIBS);
+  gidLink(gdk_device_pad_get_feature_group, "gdk_device_pad_get_feature_group", LIBS);
+  gidLink(gdk_device_pad_get_group_n_modes, "gdk_device_pad_get_group_n_modes", LIBS);
+  gidLink(gdk_device_pad_get_n_features, "gdk_device_pad_get_n_features", LIBS);
+  gidLink(gdk_device_pad_get_n_groups, "gdk_device_pad_get_n_groups", LIBS);
 
   // DeviceTool
-  link(gdk_device_tool_get_type, "gdk_device_tool_get_type");
-  link(gdk_device_tool_get_axes, "gdk_device_tool_get_axes");
-  link(gdk_device_tool_get_hardware_id, "gdk_device_tool_get_hardware_id");
-  link(gdk_device_tool_get_serial, "gdk_device_tool_get_serial");
-  link(gdk_device_tool_get_tool_type, "gdk_device_tool_get_tool_type");
+  gidLink(gdk_device_tool_get_type, "gdk_device_tool_get_type", LIBS);
+  gidLink(gdk_device_tool_get_axes, "gdk_device_tool_get_axes", LIBS);
+  gidLink(gdk_device_tool_get_hardware_id, "gdk_device_tool_get_hardware_id", LIBS);
+  gidLink(gdk_device_tool_get_serial, "gdk_device_tool_get_serial", LIBS);
+  gidLink(gdk_device_tool_get_tool_type, "gdk_device_tool_get_tool_type", LIBS);
 
   // Display
-  link(gdk_display_get_type, "gdk_display_get_type");
-  link(gdk_display_get_default, "gdk_display_get_default");
-  link(gdk_display_open, "gdk_display_open");
-  link(gdk_display_beep, "gdk_display_beep");
-  link(gdk_display_close, "gdk_display_close");
-  link(gdk_display_create_gl_context, "gdk_display_create_gl_context");
-  link(gdk_display_device_is_grabbed, "gdk_display_device_is_grabbed");
-  link(gdk_display_flush, "gdk_display_flush");
-  link(gdk_display_get_app_launch_context, "gdk_display_get_app_launch_context");
-  link(gdk_display_get_clipboard, "gdk_display_get_clipboard");
-  link(gdk_display_get_default_seat, "gdk_display_get_default_seat");
-  link(gdk_display_get_dmabuf_formats, "gdk_display_get_dmabuf_formats");
-  link(gdk_display_get_monitor_at_surface, "gdk_display_get_monitor_at_surface");
-  link(gdk_display_get_monitors, "gdk_display_get_monitors");
-  link(gdk_display_get_name, "gdk_display_get_name");
-  link(gdk_display_get_primary_clipboard, "gdk_display_get_primary_clipboard");
-  link(gdk_display_get_setting, "gdk_display_get_setting");
-  link(gdk_display_get_startup_notification_id, "gdk_display_get_startup_notification_id");
-  link(gdk_display_is_closed, "gdk_display_is_closed");
-  link(gdk_display_is_composited, "gdk_display_is_composited");
-  link(gdk_display_is_rgba, "gdk_display_is_rgba");
-  link(gdk_display_list_seats, "gdk_display_list_seats");
-  link(gdk_display_map_keycode, "gdk_display_map_keycode");
-  link(gdk_display_map_keyval, "gdk_display_map_keyval");
-  link(gdk_display_notify_startup_complete, "gdk_display_notify_startup_complete");
-  link(gdk_display_prepare_gl, "gdk_display_prepare_gl");
-  link(gdk_display_put_event, "gdk_display_put_event");
-  link(gdk_display_supports_input_shapes, "gdk_display_supports_input_shapes");
-  link(gdk_display_supports_shadow_width, "gdk_display_supports_shadow_width");
-  link(gdk_display_sync, "gdk_display_sync");
-  link(gdk_display_translate_key, "gdk_display_translate_key");
+  gidLink(gdk_display_get_type, "gdk_display_get_type", LIBS);
+  gidLink(gdk_display_get_default, "gdk_display_get_default", LIBS);
+  gidLink(gdk_display_open, "gdk_display_open", LIBS);
+  gidLink(gdk_display_beep, "gdk_display_beep", LIBS);
+  gidLink(gdk_display_close, "gdk_display_close", LIBS);
+  gidLink(gdk_display_create_gl_context, "gdk_display_create_gl_context", LIBS);
+  gidLink(gdk_display_device_is_grabbed, "gdk_display_device_is_grabbed", LIBS);
+  gidLink(gdk_display_flush, "gdk_display_flush", LIBS);
+  gidLink(gdk_display_get_app_launch_context, "gdk_display_get_app_launch_context", LIBS);
+  gidLink(gdk_display_get_clipboard, "gdk_display_get_clipboard", LIBS);
+  gidLink(gdk_display_get_default_seat, "gdk_display_get_default_seat", LIBS);
+  gidLink(gdk_display_get_dmabuf_formats, "gdk_display_get_dmabuf_formats", LIBS);
+  gidLink(gdk_display_get_monitor_at_surface, "gdk_display_get_monitor_at_surface", LIBS);
+  gidLink(gdk_display_get_monitors, "gdk_display_get_monitors", LIBS);
+  gidLink(gdk_display_get_name, "gdk_display_get_name", LIBS);
+  gidLink(gdk_display_get_primary_clipboard, "gdk_display_get_primary_clipboard", LIBS);
+  gidLink(gdk_display_get_setting, "gdk_display_get_setting", LIBS);
+  gidLink(gdk_display_get_startup_notification_id, "gdk_display_get_startup_notification_id", LIBS);
+  gidLink(gdk_display_is_closed, "gdk_display_is_closed", LIBS);
+  gidLink(gdk_display_is_composited, "gdk_display_is_composited", LIBS);
+  gidLink(gdk_display_is_rgba, "gdk_display_is_rgba", LIBS);
+  gidLink(gdk_display_list_seats, "gdk_display_list_seats", LIBS);
+  gidLink(gdk_display_map_keycode, "gdk_display_map_keycode", LIBS);
+  gidLink(gdk_display_map_keyval, "gdk_display_map_keyval", LIBS);
+  gidLink(gdk_display_notify_startup_complete, "gdk_display_notify_startup_complete", LIBS);
+  gidLink(gdk_display_prepare_gl, "gdk_display_prepare_gl", LIBS);
+  gidLink(gdk_display_put_event, "gdk_display_put_event", LIBS);
+  gidLink(gdk_display_supports_input_shapes, "gdk_display_supports_input_shapes", LIBS);
+  gidLink(gdk_display_supports_shadow_width, "gdk_display_supports_shadow_width", LIBS);
+  gidLink(gdk_display_sync, "gdk_display_sync", LIBS);
+  gidLink(gdk_display_translate_key, "gdk_display_translate_key", LIBS);
 
   // DisplayManager
-  link(gdk_display_manager_get_type, "gdk_display_manager_get_type");
-  link(gdk_display_manager_get, "gdk_display_manager_get");
-  link(gdk_display_manager_get_default_display, "gdk_display_manager_get_default_display");
-  link(gdk_display_manager_list_displays, "gdk_display_manager_list_displays");
-  link(gdk_display_manager_open_display, "gdk_display_manager_open_display");
-  link(gdk_display_manager_set_default_display, "gdk_display_manager_set_default_display");
+  gidLink(gdk_display_manager_get_type, "gdk_display_manager_get_type", LIBS);
+  gidLink(gdk_display_manager_get, "gdk_display_manager_get", LIBS);
+  gidLink(gdk_display_manager_get_default_display, "gdk_display_manager_get_default_display", LIBS);
+  gidLink(gdk_display_manager_list_displays, "gdk_display_manager_list_displays", LIBS);
+  gidLink(gdk_display_manager_open_display, "gdk_display_manager_open_display", LIBS);
+  gidLink(gdk_display_manager_set_default_display, "gdk_display_manager_set_default_display", LIBS);
 
   // DmabufFormats
-  link(gdk_dmabuf_formats_get_type, "gdk_dmabuf_formats_get_type");
-  link(gdk_dmabuf_formats_contains, "gdk_dmabuf_formats_contains");
-  link(gdk_dmabuf_formats_equal, "gdk_dmabuf_formats_equal");
-  link(gdk_dmabuf_formats_get_format, "gdk_dmabuf_formats_get_format");
-  link(gdk_dmabuf_formats_get_n_formats, "gdk_dmabuf_formats_get_n_formats");
-  link(gdk_dmabuf_formats_ref, "gdk_dmabuf_formats_ref");
-  link(gdk_dmabuf_formats_unref, "gdk_dmabuf_formats_unref");
+  gidLink(gdk_dmabuf_formats_get_type, "gdk_dmabuf_formats_get_type", LIBS);
+  gidLink(gdk_dmabuf_formats_contains, "gdk_dmabuf_formats_contains", LIBS);
+  gidLink(gdk_dmabuf_formats_equal, "gdk_dmabuf_formats_equal", LIBS);
+  gidLink(gdk_dmabuf_formats_get_format, "gdk_dmabuf_formats_get_format", LIBS);
+  gidLink(gdk_dmabuf_formats_get_n_formats, "gdk_dmabuf_formats_get_n_formats", LIBS);
+  gidLink(gdk_dmabuf_formats_ref, "gdk_dmabuf_formats_ref", LIBS);
+  gidLink(gdk_dmabuf_formats_unref, "gdk_dmabuf_formats_unref", LIBS);
 
   // DmabufTexture
-  link(gdk_dmabuf_texture_get_type, "gdk_dmabuf_texture_get_type");
+  gidLink(gdk_dmabuf_texture_get_type, "gdk_dmabuf_texture_get_type", LIBS);
 
   // DmabufTextureBuilder
-  link(gdk_dmabuf_texture_builder_get_type, "gdk_dmabuf_texture_builder_get_type");
-  link(gdk_dmabuf_texture_builder_new, "gdk_dmabuf_texture_builder_new");
-  link(gdk_dmabuf_texture_builder_build, "gdk_dmabuf_texture_builder_build");
-  link(gdk_dmabuf_texture_builder_get_display, "gdk_dmabuf_texture_builder_get_display");
-  link(gdk_dmabuf_texture_builder_get_fd, "gdk_dmabuf_texture_builder_get_fd");
-  link(gdk_dmabuf_texture_builder_get_fourcc, "gdk_dmabuf_texture_builder_get_fourcc");
-  link(gdk_dmabuf_texture_builder_get_height, "gdk_dmabuf_texture_builder_get_height");
-  link(gdk_dmabuf_texture_builder_get_modifier, "gdk_dmabuf_texture_builder_get_modifier");
-  link(gdk_dmabuf_texture_builder_get_n_planes, "gdk_dmabuf_texture_builder_get_n_planes");
-  link(gdk_dmabuf_texture_builder_get_offset, "gdk_dmabuf_texture_builder_get_offset");
-  link(gdk_dmabuf_texture_builder_get_premultiplied, "gdk_dmabuf_texture_builder_get_premultiplied");
-  link(gdk_dmabuf_texture_builder_get_stride, "gdk_dmabuf_texture_builder_get_stride");
-  link(gdk_dmabuf_texture_builder_get_update_region, "gdk_dmabuf_texture_builder_get_update_region");
-  link(gdk_dmabuf_texture_builder_get_update_texture, "gdk_dmabuf_texture_builder_get_update_texture");
-  link(gdk_dmabuf_texture_builder_get_width, "gdk_dmabuf_texture_builder_get_width");
-  link(gdk_dmabuf_texture_builder_set_display, "gdk_dmabuf_texture_builder_set_display");
-  link(gdk_dmabuf_texture_builder_set_fd, "gdk_dmabuf_texture_builder_set_fd");
-  link(gdk_dmabuf_texture_builder_set_fourcc, "gdk_dmabuf_texture_builder_set_fourcc");
-  link(gdk_dmabuf_texture_builder_set_height, "gdk_dmabuf_texture_builder_set_height");
-  link(gdk_dmabuf_texture_builder_set_modifier, "gdk_dmabuf_texture_builder_set_modifier");
-  link(gdk_dmabuf_texture_builder_set_n_planes, "gdk_dmabuf_texture_builder_set_n_planes");
-  link(gdk_dmabuf_texture_builder_set_offset, "gdk_dmabuf_texture_builder_set_offset");
-  link(gdk_dmabuf_texture_builder_set_premultiplied, "gdk_dmabuf_texture_builder_set_premultiplied");
-  link(gdk_dmabuf_texture_builder_set_stride, "gdk_dmabuf_texture_builder_set_stride");
-  link(gdk_dmabuf_texture_builder_set_update_region, "gdk_dmabuf_texture_builder_set_update_region");
-  link(gdk_dmabuf_texture_builder_set_update_texture, "gdk_dmabuf_texture_builder_set_update_texture");
-  link(gdk_dmabuf_texture_builder_set_width, "gdk_dmabuf_texture_builder_set_width");
+  gidLink(gdk_dmabuf_texture_builder_get_type, "gdk_dmabuf_texture_builder_get_type", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_new, "gdk_dmabuf_texture_builder_new", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_build, "gdk_dmabuf_texture_builder_build", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_display, "gdk_dmabuf_texture_builder_get_display", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_fd, "gdk_dmabuf_texture_builder_get_fd", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_fourcc, "gdk_dmabuf_texture_builder_get_fourcc", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_height, "gdk_dmabuf_texture_builder_get_height", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_modifier, "gdk_dmabuf_texture_builder_get_modifier", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_n_planes, "gdk_dmabuf_texture_builder_get_n_planes", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_offset, "gdk_dmabuf_texture_builder_get_offset", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_premultiplied, "gdk_dmabuf_texture_builder_get_premultiplied", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_stride, "gdk_dmabuf_texture_builder_get_stride", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_update_region, "gdk_dmabuf_texture_builder_get_update_region", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_update_texture, "gdk_dmabuf_texture_builder_get_update_texture", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_get_width, "gdk_dmabuf_texture_builder_get_width", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_display, "gdk_dmabuf_texture_builder_set_display", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_fd, "gdk_dmabuf_texture_builder_set_fd", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_fourcc, "gdk_dmabuf_texture_builder_set_fourcc", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_height, "gdk_dmabuf_texture_builder_set_height", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_modifier, "gdk_dmabuf_texture_builder_set_modifier", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_n_planes, "gdk_dmabuf_texture_builder_set_n_planes", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_offset, "gdk_dmabuf_texture_builder_set_offset", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_premultiplied, "gdk_dmabuf_texture_builder_set_premultiplied", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_stride, "gdk_dmabuf_texture_builder_set_stride", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_update_region, "gdk_dmabuf_texture_builder_set_update_region", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_update_texture, "gdk_dmabuf_texture_builder_set_update_texture", LIBS);
+  gidLink(gdk_dmabuf_texture_builder_set_width, "gdk_dmabuf_texture_builder_set_width", LIBS);
 
   // Drag
-  link(gdk_drag_get_type, "gdk_drag_get_type");
-  link(gdk_drag_begin, "gdk_drag_begin");
-  link(gdk_drag_drop_done, "gdk_drag_drop_done");
-  link(gdk_drag_get_actions, "gdk_drag_get_actions");
-  link(gdk_drag_get_content, "gdk_drag_get_content");
-  link(gdk_drag_get_device, "gdk_drag_get_device");
-  link(gdk_drag_get_display, "gdk_drag_get_display");
-  link(gdk_drag_get_drag_surface, "gdk_drag_get_drag_surface");
-  link(gdk_drag_get_formats, "gdk_drag_get_formats");
-  link(gdk_drag_get_selected_action, "gdk_drag_get_selected_action");
-  link(gdk_drag_get_surface, "gdk_drag_get_surface");
-  link(gdk_drag_set_hotspot, "gdk_drag_set_hotspot");
+  gidLink(gdk_drag_get_type, "gdk_drag_get_type", LIBS);
+  gidLink(gdk_drag_begin, "gdk_drag_begin", LIBS);
+  gidLink(gdk_drag_drop_done, "gdk_drag_drop_done", LIBS);
+  gidLink(gdk_drag_get_actions, "gdk_drag_get_actions", LIBS);
+  gidLink(gdk_drag_get_content, "gdk_drag_get_content", LIBS);
+  gidLink(gdk_drag_get_device, "gdk_drag_get_device", LIBS);
+  gidLink(gdk_drag_get_display, "gdk_drag_get_display", LIBS);
+  gidLink(gdk_drag_get_drag_surface, "gdk_drag_get_drag_surface", LIBS);
+  gidLink(gdk_drag_get_formats, "gdk_drag_get_formats", LIBS);
+  gidLink(gdk_drag_get_selected_action, "gdk_drag_get_selected_action", LIBS);
+  gidLink(gdk_drag_get_surface, "gdk_drag_get_surface", LIBS);
+  gidLink(gdk_drag_set_hotspot, "gdk_drag_set_hotspot", LIBS);
 
   // DragSurface
-  link(gdk_drag_surface_get_type, "gdk_drag_surface_get_type");
-  link(gdk_drag_surface_present, "gdk_drag_surface_present");
+  gidLink(gdk_drag_surface_get_type, "gdk_drag_surface_get_type", LIBS);
+  gidLink(gdk_drag_surface_present, "gdk_drag_surface_present", LIBS);
 
   // DragSurfaceSize
-  link(gdk_drag_surface_size_set_size, "gdk_drag_surface_size_set_size");
+  gidLink(gdk_drag_surface_size_set_size, "gdk_drag_surface_size_set_size", LIBS);
 
   // DrawContext
-  link(gdk_draw_context_get_type, "gdk_draw_context_get_type");
-  link(gdk_draw_context_begin_frame, "gdk_draw_context_begin_frame");
-  link(gdk_draw_context_end_frame, "gdk_draw_context_end_frame");
-  link(gdk_draw_context_get_display, "gdk_draw_context_get_display");
-  link(gdk_draw_context_get_frame_region, "gdk_draw_context_get_frame_region");
-  link(gdk_draw_context_get_surface, "gdk_draw_context_get_surface");
-  link(gdk_draw_context_is_in_frame, "gdk_draw_context_is_in_frame");
+  gidLink(gdk_draw_context_get_type, "gdk_draw_context_get_type", LIBS);
+  gidLink(gdk_draw_context_begin_frame, "gdk_draw_context_begin_frame", LIBS);
+  gidLink(gdk_draw_context_end_frame, "gdk_draw_context_end_frame", LIBS);
+  gidLink(gdk_draw_context_get_display, "gdk_draw_context_get_display", LIBS);
+  gidLink(gdk_draw_context_get_frame_region, "gdk_draw_context_get_frame_region", LIBS);
+  gidLink(gdk_draw_context_get_surface, "gdk_draw_context_get_surface", LIBS);
+  gidLink(gdk_draw_context_is_in_frame, "gdk_draw_context_is_in_frame", LIBS);
 
   // Drop
-  link(gdk_drop_get_type, "gdk_drop_get_type");
-  link(gdk_drop_finish, "gdk_drop_finish");
-  link(gdk_drop_get_actions, "gdk_drop_get_actions");
-  link(gdk_drop_get_device, "gdk_drop_get_device");
-  link(gdk_drop_get_display, "gdk_drop_get_display");
-  link(gdk_drop_get_drag, "gdk_drop_get_drag");
-  link(gdk_drop_get_formats, "gdk_drop_get_formats");
-  link(gdk_drop_get_surface, "gdk_drop_get_surface");
-  link(gdk_drop_read_async, "gdk_drop_read_async");
-  link(gdk_drop_read_finish, "gdk_drop_read_finish");
-  link(gdk_drop_read_value_async, "gdk_drop_read_value_async");
-  link(gdk_drop_read_value_finish, "gdk_drop_read_value_finish");
-  link(gdk_drop_status, "gdk_drop_status");
+  gidLink(gdk_drop_get_type, "gdk_drop_get_type", LIBS);
+  gidLink(gdk_drop_finish, "gdk_drop_finish", LIBS);
+  gidLink(gdk_drop_get_actions, "gdk_drop_get_actions", LIBS);
+  gidLink(gdk_drop_get_device, "gdk_drop_get_device", LIBS);
+  gidLink(gdk_drop_get_display, "gdk_drop_get_display", LIBS);
+  gidLink(gdk_drop_get_drag, "gdk_drop_get_drag", LIBS);
+  gidLink(gdk_drop_get_formats, "gdk_drop_get_formats", LIBS);
+  gidLink(gdk_drop_get_surface, "gdk_drop_get_surface", LIBS);
+  gidLink(gdk_drop_read_async, "gdk_drop_read_async", LIBS);
+  gidLink(gdk_drop_read_finish, "gdk_drop_read_finish", LIBS);
+  gidLink(gdk_drop_read_value_async, "gdk_drop_read_value_async", LIBS);
+  gidLink(gdk_drop_read_value_finish, "gdk_drop_read_value_finish", LIBS);
+  gidLink(gdk_drop_status, "gdk_drop_status", LIBS);
 
   // Event
-  link(gdk_event_get_type, "gdk_event_get_type");
-  link(gdk_event_get_axes, "gdk_event_get_axes");
-  link(gdk_event_get_axis, "gdk_event_get_axis");
-  link(gdk_event_get_device, "gdk_event_get_device");
-  link(gdk_event_get_device_tool, "gdk_event_get_device_tool");
-  link(gdk_event_get_display, "gdk_event_get_display");
-  link(gdk_event_get_event_sequence, "gdk_event_get_event_sequence");
-  link(gdk_event_get_event_type, "gdk_event_get_event_type");
-  link(gdk_event_get_history, "gdk_event_get_history");
-  link(gdk_event_get_modifier_state, "gdk_event_get_modifier_state");
-  link(gdk_event_get_pointer_emulated, "gdk_event_get_pointer_emulated");
-  link(gdk_event_get_position, "gdk_event_get_position");
-  link(gdk_event_get_seat, "gdk_event_get_seat");
-  link(gdk_event_get_surface, "gdk_event_get_surface");
-  link(gdk_event_get_time, "gdk_event_get_time");
-  link(gdk_event_ref, "gdk_event_ref");
-  link(gdk_event_triggers_context_menu, "gdk_event_triggers_context_menu");
-  link(gdk_event_unref, "gdk_event_unref");
+  gidLink(gdk_event_get_type, "gdk_event_get_type", LIBS);
+  gidLink(gdk_event_get_axes, "gdk_event_get_axes", LIBS);
+  gidLink(gdk_event_get_axis, "gdk_event_get_axis", LIBS);
+  gidLink(gdk_event_get_device, "gdk_event_get_device", LIBS);
+  gidLink(gdk_event_get_device_tool, "gdk_event_get_device_tool", LIBS);
+  gidLink(gdk_event_get_display, "gdk_event_get_display", LIBS);
+  gidLink(gdk_event_get_event_sequence, "gdk_event_get_event_sequence", LIBS);
+  gidLink(gdk_event_get_event_type, "gdk_event_get_event_type", LIBS);
+  gidLink(gdk_event_get_history, "gdk_event_get_history", LIBS);
+  gidLink(gdk_event_get_modifier_state, "gdk_event_get_modifier_state", LIBS);
+  gidLink(gdk_event_get_pointer_emulated, "gdk_event_get_pointer_emulated", LIBS);
+  gidLink(gdk_event_get_position, "gdk_event_get_position", LIBS);
+  gidLink(gdk_event_get_seat, "gdk_event_get_seat", LIBS);
+  gidLink(gdk_event_get_surface, "gdk_event_get_surface", LIBS);
+  gidLink(gdk_event_get_time, "gdk_event_get_time", LIBS);
+  gidLink(gdk_event_ref, "gdk_event_ref", LIBS);
+  gidLink(gdk_event_triggers_context_menu, "gdk_event_triggers_context_menu", LIBS);
+  gidLink(gdk_event_unref, "gdk_event_unref", LIBS);
 
   // EventSequence
-  link(gdk_event_sequence_get_type, "gdk_event_sequence_get_type");
+  gidLink(gdk_event_sequence_get_type, "gdk_event_sequence_get_type", LIBS);
 
   // FileList
-  link(gdk_file_list_get_type, "gdk_file_list_get_type");
-  link(gdk_file_list_new_from_array, "gdk_file_list_new_from_array");
-  link(gdk_file_list_new_from_list, "gdk_file_list_new_from_list");
-  link(gdk_file_list_get_files, "gdk_file_list_get_files");
+  gidLink(gdk_file_list_get_type, "gdk_file_list_get_type", LIBS);
+  gidLink(gdk_file_list_new_from_array, "gdk_file_list_new_from_array", LIBS);
+  gidLink(gdk_file_list_new_from_list, "gdk_file_list_new_from_list", LIBS);
+  gidLink(gdk_file_list_get_files, "gdk_file_list_get_files", LIBS);
 
   // FocusEvent
-  link(gdk_focus_event_get_type, "gdk_focus_event_get_type");
-  link(gdk_focus_event_get_in, "gdk_focus_event_get_in");
+  gidLink(gdk_focus_event_get_type, "gdk_focus_event_get_type", LIBS);
+  gidLink(gdk_focus_event_get_in, "gdk_focus_event_get_in", LIBS);
 
   // FrameClock
-  link(gdk_frame_clock_get_type, "gdk_frame_clock_get_type");
-  link(gdk_frame_clock_begin_updating, "gdk_frame_clock_begin_updating");
-  link(gdk_frame_clock_end_updating, "gdk_frame_clock_end_updating");
-  link(gdk_frame_clock_get_current_timings, "gdk_frame_clock_get_current_timings");
-  link(gdk_frame_clock_get_fps, "gdk_frame_clock_get_fps");
-  link(gdk_frame_clock_get_frame_counter, "gdk_frame_clock_get_frame_counter");
-  link(gdk_frame_clock_get_frame_time, "gdk_frame_clock_get_frame_time");
-  link(gdk_frame_clock_get_history_start, "gdk_frame_clock_get_history_start");
-  link(gdk_frame_clock_get_refresh_info, "gdk_frame_clock_get_refresh_info");
-  link(gdk_frame_clock_get_timings, "gdk_frame_clock_get_timings");
-  link(gdk_frame_clock_request_phase, "gdk_frame_clock_request_phase");
+  gidLink(gdk_frame_clock_get_type, "gdk_frame_clock_get_type", LIBS);
+  gidLink(gdk_frame_clock_begin_updating, "gdk_frame_clock_begin_updating", LIBS);
+  gidLink(gdk_frame_clock_end_updating, "gdk_frame_clock_end_updating", LIBS);
+  gidLink(gdk_frame_clock_get_current_timings, "gdk_frame_clock_get_current_timings", LIBS);
+  gidLink(gdk_frame_clock_get_fps, "gdk_frame_clock_get_fps", LIBS);
+  gidLink(gdk_frame_clock_get_frame_counter, "gdk_frame_clock_get_frame_counter", LIBS);
+  gidLink(gdk_frame_clock_get_frame_time, "gdk_frame_clock_get_frame_time", LIBS);
+  gidLink(gdk_frame_clock_get_history_start, "gdk_frame_clock_get_history_start", LIBS);
+  gidLink(gdk_frame_clock_get_refresh_info, "gdk_frame_clock_get_refresh_info", LIBS);
+  gidLink(gdk_frame_clock_get_timings, "gdk_frame_clock_get_timings", LIBS);
+  gidLink(gdk_frame_clock_request_phase, "gdk_frame_clock_request_phase", LIBS);
 
   // FrameTimings
-  link(gdk_frame_timings_get_type, "gdk_frame_timings_get_type");
-  link(gdk_frame_timings_get_complete, "gdk_frame_timings_get_complete");
-  link(gdk_frame_timings_get_frame_counter, "gdk_frame_timings_get_frame_counter");
-  link(gdk_frame_timings_get_frame_time, "gdk_frame_timings_get_frame_time");
-  link(gdk_frame_timings_get_predicted_presentation_time, "gdk_frame_timings_get_predicted_presentation_time");
-  link(gdk_frame_timings_get_presentation_time, "gdk_frame_timings_get_presentation_time");
-  link(gdk_frame_timings_get_refresh_interval, "gdk_frame_timings_get_refresh_interval");
-  link(gdk_frame_timings_ref, "gdk_frame_timings_ref");
-  link(gdk_frame_timings_unref, "gdk_frame_timings_unref");
+  gidLink(gdk_frame_timings_get_type, "gdk_frame_timings_get_type", LIBS);
+  gidLink(gdk_frame_timings_get_complete, "gdk_frame_timings_get_complete", LIBS);
+  gidLink(gdk_frame_timings_get_frame_counter, "gdk_frame_timings_get_frame_counter", LIBS);
+  gidLink(gdk_frame_timings_get_frame_time, "gdk_frame_timings_get_frame_time", LIBS);
+  gidLink(gdk_frame_timings_get_predicted_presentation_time, "gdk_frame_timings_get_predicted_presentation_time", LIBS);
+  gidLink(gdk_frame_timings_get_presentation_time, "gdk_frame_timings_get_presentation_time", LIBS);
+  gidLink(gdk_frame_timings_get_refresh_interval, "gdk_frame_timings_get_refresh_interval", LIBS);
+  gidLink(gdk_frame_timings_ref, "gdk_frame_timings_ref", LIBS);
+  gidLink(gdk_frame_timings_unref, "gdk_frame_timings_unref", LIBS);
 
   // GLContext
-  link(gdk_gl_context_get_type, "gdk_gl_context_get_type");
-  link(gdk_gl_context_clear_current, "gdk_gl_context_clear_current");
-  link(gdk_gl_context_get_current, "gdk_gl_context_get_current");
-  link(gdk_gl_context_get_allowed_apis, "gdk_gl_context_get_allowed_apis");
-  link(gdk_gl_context_get_api, "gdk_gl_context_get_api");
-  link(gdk_gl_context_get_debug_enabled, "gdk_gl_context_get_debug_enabled");
-  link(gdk_gl_context_get_display, "gdk_gl_context_get_display");
-  link(gdk_gl_context_get_forward_compatible, "gdk_gl_context_get_forward_compatible");
-  link(gdk_gl_context_get_required_version, "gdk_gl_context_get_required_version");
-  link(gdk_gl_context_get_shared_context, "gdk_gl_context_get_shared_context");
-  link(gdk_gl_context_get_surface, "gdk_gl_context_get_surface");
-  link(gdk_gl_context_get_use_es, "gdk_gl_context_get_use_es");
-  link(gdk_gl_context_get_version, "gdk_gl_context_get_version");
-  link(gdk_gl_context_is_legacy, "gdk_gl_context_is_legacy");
-  link(gdk_gl_context_is_shared, "gdk_gl_context_is_shared");
-  link(gdk_gl_context_make_current, "gdk_gl_context_make_current");
-  link(gdk_gl_context_realize, "gdk_gl_context_realize");
-  link(gdk_gl_context_set_allowed_apis, "gdk_gl_context_set_allowed_apis");
-  link(gdk_gl_context_set_debug_enabled, "gdk_gl_context_set_debug_enabled");
-  link(gdk_gl_context_set_forward_compatible, "gdk_gl_context_set_forward_compatible");
-  link(gdk_gl_context_set_required_version, "gdk_gl_context_set_required_version");
-  link(gdk_gl_context_set_use_es, "gdk_gl_context_set_use_es");
+  gidLink(gdk_gl_context_get_type, "gdk_gl_context_get_type", LIBS);
+  gidLink(gdk_gl_context_clear_current, "gdk_gl_context_clear_current", LIBS);
+  gidLink(gdk_gl_context_get_current, "gdk_gl_context_get_current", LIBS);
+  gidLink(gdk_gl_context_get_allowed_apis, "gdk_gl_context_get_allowed_apis", LIBS);
+  gidLink(gdk_gl_context_get_api, "gdk_gl_context_get_api", LIBS);
+  gidLink(gdk_gl_context_get_debug_enabled, "gdk_gl_context_get_debug_enabled", LIBS);
+  gidLink(gdk_gl_context_get_display, "gdk_gl_context_get_display", LIBS);
+  gidLink(gdk_gl_context_get_forward_compatible, "gdk_gl_context_get_forward_compatible", LIBS);
+  gidLink(gdk_gl_context_get_required_version, "gdk_gl_context_get_required_version", LIBS);
+  gidLink(gdk_gl_context_get_shared_context, "gdk_gl_context_get_shared_context", LIBS);
+  gidLink(gdk_gl_context_get_surface, "gdk_gl_context_get_surface", LIBS);
+  gidLink(gdk_gl_context_get_use_es, "gdk_gl_context_get_use_es", LIBS);
+  gidLink(gdk_gl_context_get_version, "gdk_gl_context_get_version", LIBS);
+  gidLink(gdk_gl_context_is_legacy, "gdk_gl_context_is_legacy", LIBS);
+  gidLink(gdk_gl_context_is_shared, "gdk_gl_context_is_shared", LIBS);
+  gidLink(gdk_gl_context_make_current, "gdk_gl_context_make_current", LIBS);
+  gidLink(gdk_gl_context_realize, "gdk_gl_context_realize", LIBS);
+  gidLink(gdk_gl_context_set_allowed_apis, "gdk_gl_context_set_allowed_apis", LIBS);
+  gidLink(gdk_gl_context_set_debug_enabled, "gdk_gl_context_set_debug_enabled", LIBS);
+  gidLink(gdk_gl_context_set_forward_compatible, "gdk_gl_context_set_forward_compatible", LIBS);
+  gidLink(gdk_gl_context_set_required_version, "gdk_gl_context_set_required_version", LIBS);
+  gidLink(gdk_gl_context_set_use_es, "gdk_gl_context_set_use_es", LIBS);
 
   // GLTexture
-  link(gdk_gl_texture_get_type, "gdk_gl_texture_get_type");
-  link(gdk_gl_texture_new, "gdk_gl_texture_new");
-  link(gdk_gl_texture_release, "gdk_gl_texture_release");
+  gidLink(gdk_gl_texture_get_type, "gdk_gl_texture_get_type", LIBS);
+  gidLink(gdk_gl_texture_new, "gdk_gl_texture_new", LIBS);
+  gidLink(gdk_gl_texture_release, "gdk_gl_texture_release", LIBS);
 
   // GLTextureBuilder
-  link(gdk_gl_texture_builder_get_type, "gdk_gl_texture_builder_get_type");
-  link(gdk_gl_texture_builder_new, "gdk_gl_texture_builder_new");
-  link(gdk_gl_texture_builder_build, "gdk_gl_texture_builder_build");
-  link(gdk_gl_texture_builder_get_context, "gdk_gl_texture_builder_get_context");
-  link(gdk_gl_texture_builder_get_format, "gdk_gl_texture_builder_get_format");
-  link(gdk_gl_texture_builder_get_has_mipmap, "gdk_gl_texture_builder_get_has_mipmap");
-  link(gdk_gl_texture_builder_get_height, "gdk_gl_texture_builder_get_height");
-  link(gdk_gl_texture_builder_get_id, "gdk_gl_texture_builder_get_id");
-  link(gdk_gl_texture_builder_get_sync, "gdk_gl_texture_builder_get_sync");
-  link(gdk_gl_texture_builder_get_update_region, "gdk_gl_texture_builder_get_update_region");
-  link(gdk_gl_texture_builder_get_update_texture, "gdk_gl_texture_builder_get_update_texture");
-  link(gdk_gl_texture_builder_get_width, "gdk_gl_texture_builder_get_width");
-  link(gdk_gl_texture_builder_set_context, "gdk_gl_texture_builder_set_context");
-  link(gdk_gl_texture_builder_set_format, "gdk_gl_texture_builder_set_format");
-  link(gdk_gl_texture_builder_set_has_mipmap, "gdk_gl_texture_builder_set_has_mipmap");
-  link(gdk_gl_texture_builder_set_height, "gdk_gl_texture_builder_set_height");
-  link(gdk_gl_texture_builder_set_id, "gdk_gl_texture_builder_set_id");
-  link(gdk_gl_texture_builder_set_sync, "gdk_gl_texture_builder_set_sync");
-  link(gdk_gl_texture_builder_set_update_region, "gdk_gl_texture_builder_set_update_region");
-  link(gdk_gl_texture_builder_set_update_texture, "gdk_gl_texture_builder_set_update_texture");
-  link(gdk_gl_texture_builder_set_width, "gdk_gl_texture_builder_set_width");
+  gidLink(gdk_gl_texture_builder_get_type, "gdk_gl_texture_builder_get_type", LIBS);
+  gidLink(gdk_gl_texture_builder_new, "gdk_gl_texture_builder_new", LIBS);
+  gidLink(gdk_gl_texture_builder_build, "gdk_gl_texture_builder_build", LIBS);
+  gidLink(gdk_gl_texture_builder_get_context, "gdk_gl_texture_builder_get_context", LIBS);
+  gidLink(gdk_gl_texture_builder_get_format, "gdk_gl_texture_builder_get_format", LIBS);
+  gidLink(gdk_gl_texture_builder_get_has_mipmap, "gdk_gl_texture_builder_get_has_mipmap", LIBS);
+  gidLink(gdk_gl_texture_builder_get_height, "gdk_gl_texture_builder_get_height", LIBS);
+  gidLink(gdk_gl_texture_builder_get_id, "gdk_gl_texture_builder_get_id", LIBS);
+  gidLink(gdk_gl_texture_builder_get_sync, "gdk_gl_texture_builder_get_sync", LIBS);
+  gidLink(gdk_gl_texture_builder_get_update_region, "gdk_gl_texture_builder_get_update_region", LIBS);
+  gidLink(gdk_gl_texture_builder_get_update_texture, "gdk_gl_texture_builder_get_update_texture", LIBS);
+  gidLink(gdk_gl_texture_builder_get_width, "gdk_gl_texture_builder_get_width", LIBS);
+  gidLink(gdk_gl_texture_builder_set_context, "gdk_gl_texture_builder_set_context", LIBS);
+  gidLink(gdk_gl_texture_builder_set_format, "gdk_gl_texture_builder_set_format", LIBS);
+  gidLink(gdk_gl_texture_builder_set_has_mipmap, "gdk_gl_texture_builder_set_has_mipmap", LIBS);
+  gidLink(gdk_gl_texture_builder_set_height, "gdk_gl_texture_builder_set_height", LIBS);
+  gidLink(gdk_gl_texture_builder_set_id, "gdk_gl_texture_builder_set_id", LIBS);
+  gidLink(gdk_gl_texture_builder_set_sync, "gdk_gl_texture_builder_set_sync", LIBS);
+  gidLink(gdk_gl_texture_builder_set_update_region, "gdk_gl_texture_builder_set_update_region", LIBS);
+  gidLink(gdk_gl_texture_builder_set_update_texture, "gdk_gl_texture_builder_set_update_texture", LIBS);
+  gidLink(gdk_gl_texture_builder_set_width, "gdk_gl_texture_builder_set_width", LIBS);
 
   // Global
-  link(gdk_cairo_draw_from_gl, "gdk_cairo_draw_from_gl");
-  link(gdk_cairo_rectangle, "gdk_cairo_rectangle");
-  link(gdk_cairo_region, "gdk_cairo_region");
-  link(gdk_cairo_region_create_from_surface, "gdk_cairo_region_create_from_surface");
-  link(gdk_cairo_set_source_pixbuf, "gdk_cairo_set_source_pixbuf");
-  link(gdk_cairo_set_source_rgba, "gdk_cairo_set_source_rgba");
-  link(gdk_content_deserialize_async, "gdk_content_deserialize_async");
-  link(gdk_content_deserialize_finish, "gdk_content_deserialize_finish");
-  link(gdk_content_register_deserializer, "gdk_content_register_deserializer");
-  link(gdk_content_register_serializer, "gdk_content_register_serializer");
-  link(gdk_content_serialize_async, "gdk_content_serialize_async");
-  link(gdk_content_serialize_finish, "gdk_content_serialize_finish");
-  link(gdk_drag_surface_size_get_type, "gdk_drag_surface_size_get_type");
-  link(gdk_events_get_angle, "gdk_events_get_angle");
-  link(gdk_events_get_center, "gdk_events_get_center");
-  link(gdk_events_get_distance, "gdk_events_get_distance");
-  link(gdk_intern_mime_type, "gdk_intern_mime_type");
-  link(gdk_keyval_convert_case, "gdk_keyval_convert_case");
-  link(gdk_keyval_from_name, "gdk_keyval_from_name");
-  link(gdk_keyval_is_lower, "gdk_keyval_is_lower");
-  link(gdk_keyval_is_upper, "gdk_keyval_is_upper");
-  link(gdk_keyval_name, "gdk_keyval_name");
-  link(gdk_keyval_to_lower, "gdk_keyval_to_lower");
-  link(gdk_keyval_to_unicode, "gdk_keyval_to_unicode");
-  link(gdk_keyval_to_upper, "gdk_keyval_to_upper");
-  link(gdk_pango_layout_get_clip_region, "gdk_pango_layout_get_clip_region");
-  link(gdk_pango_layout_line_get_clip_region, "gdk_pango_layout_line_get_clip_region");
-  link(gdk_pixbuf_get_from_surface, "gdk_pixbuf_get_from_surface");
-  link(gdk_pixbuf_get_from_texture, "gdk_pixbuf_get_from_texture");
-  link(gdk_set_allowed_backends, "gdk_set_allowed_backends");
-  link(gdk_toplevel_size_get_type, "gdk_toplevel_size_get_type");
-  link(gdk_unicode_to_keyval, "gdk_unicode_to_keyval");
+  gidLink(gdk_cairo_draw_from_gl, "gdk_cairo_draw_from_gl", LIBS);
+  gidLink(gdk_cairo_rectangle, "gdk_cairo_rectangle", LIBS);
+  gidLink(gdk_cairo_region, "gdk_cairo_region", LIBS);
+  gidLink(gdk_cairo_region_create_from_surface, "gdk_cairo_region_create_from_surface", LIBS);
+  gidLink(gdk_cairo_set_source_pixbuf, "gdk_cairo_set_source_pixbuf", LIBS);
+  gidLink(gdk_cairo_set_source_rgba, "gdk_cairo_set_source_rgba", LIBS);
+  gidLink(gdk_content_deserialize_async, "gdk_content_deserialize_async", LIBS);
+  gidLink(gdk_content_deserialize_finish, "gdk_content_deserialize_finish", LIBS);
+  gidLink(gdk_content_register_deserializer, "gdk_content_register_deserializer", LIBS);
+  gidLink(gdk_content_register_serializer, "gdk_content_register_serializer", LIBS);
+  gidLink(gdk_content_serialize_async, "gdk_content_serialize_async", LIBS);
+  gidLink(gdk_content_serialize_finish, "gdk_content_serialize_finish", LIBS);
+  gidLink(gdk_drag_surface_size_get_type, "gdk_drag_surface_size_get_type", LIBS);
+  gidLink(gdk_events_get_angle, "gdk_events_get_angle", LIBS);
+  gidLink(gdk_events_get_center, "gdk_events_get_center", LIBS);
+  gidLink(gdk_events_get_distance, "gdk_events_get_distance", LIBS);
+  gidLink(gdk_intern_mime_type, "gdk_intern_mime_type", LIBS);
+  gidLink(gdk_keyval_convert_case, "gdk_keyval_convert_case", LIBS);
+  gidLink(gdk_keyval_from_name, "gdk_keyval_from_name", LIBS);
+  gidLink(gdk_keyval_is_lower, "gdk_keyval_is_lower", LIBS);
+  gidLink(gdk_keyval_is_upper, "gdk_keyval_is_upper", LIBS);
+  gidLink(gdk_keyval_name, "gdk_keyval_name", LIBS);
+  gidLink(gdk_keyval_to_lower, "gdk_keyval_to_lower", LIBS);
+  gidLink(gdk_keyval_to_unicode, "gdk_keyval_to_unicode", LIBS);
+  gidLink(gdk_keyval_to_upper, "gdk_keyval_to_upper", LIBS);
+  gidLink(gdk_pango_layout_get_clip_region, "gdk_pango_layout_get_clip_region", LIBS);
+  gidLink(gdk_pango_layout_line_get_clip_region, "gdk_pango_layout_line_get_clip_region", LIBS);
+  gidLink(gdk_pixbuf_get_from_surface, "gdk_pixbuf_get_from_surface", LIBS);
+  gidLink(gdk_pixbuf_get_from_texture, "gdk_pixbuf_get_from_texture", LIBS);
+  gidLink(gdk_set_allowed_backends, "gdk_set_allowed_backends", LIBS);
+  gidLink(gdk_toplevel_size_get_type, "gdk_toplevel_size_get_type", LIBS);
+  gidLink(gdk_unicode_to_keyval, "gdk_unicode_to_keyval", LIBS);
 
   // GrabBrokenEvent
-  link(gdk_grab_broken_event_get_type, "gdk_grab_broken_event_get_type");
-  link(gdk_grab_broken_event_get_grab_surface, "gdk_grab_broken_event_get_grab_surface");
-  link(gdk_grab_broken_event_get_implicit, "gdk_grab_broken_event_get_implicit");
+  gidLink(gdk_grab_broken_event_get_type, "gdk_grab_broken_event_get_type", LIBS);
+  gidLink(gdk_grab_broken_event_get_grab_surface, "gdk_grab_broken_event_get_grab_surface", LIBS);
+  gidLink(gdk_grab_broken_event_get_implicit, "gdk_grab_broken_event_get_implicit", LIBS);
 
   // KeyEvent
-  link(gdk_key_event_get_type, "gdk_key_event_get_type");
-  link(gdk_key_event_get_consumed_modifiers, "gdk_key_event_get_consumed_modifiers");
-  link(gdk_key_event_get_keycode, "gdk_key_event_get_keycode");
-  link(gdk_key_event_get_keyval, "gdk_key_event_get_keyval");
-  link(gdk_key_event_get_layout, "gdk_key_event_get_layout");
-  link(gdk_key_event_get_level, "gdk_key_event_get_level");
-  link(gdk_key_event_get_match, "gdk_key_event_get_match");
-  link(gdk_key_event_is_modifier, "gdk_key_event_is_modifier");
-  link(gdk_key_event_matches, "gdk_key_event_matches");
+  gidLink(gdk_key_event_get_type, "gdk_key_event_get_type", LIBS);
+  gidLink(gdk_key_event_get_consumed_modifiers, "gdk_key_event_get_consumed_modifiers", LIBS);
+  gidLink(gdk_key_event_get_keycode, "gdk_key_event_get_keycode", LIBS);
+  gidLink(gdk_key_event_get_keyval, "gdk_key_event_get_keyval", LIBS);
+  gidLink(gdk_key_event_get_layout, "gdk_key_event_get_layout", LIBS);
+  gidLink(gdk_key_event_get_level, "gdk_key_event_get_level", LIBS);
+  gidLink(gdk_key_event_get_match, "gdk_key_event_get_match", LIBS);
+  gidLink(gdk_key_event_is_modifier, "gdk_key_event_is_modifier", LIBS);
+  gidLink(gdk_key_event_matches, "gdk_key_event_matches", LIBS);
 
   // MemoryTexture
-  link(gdk_memory_texture_get_type, "gdk_memory_texture_get_type");
-  link(gdk_memory_texture_new, "gdk_memory_texture_new");
+  gidLink(gdk_memory_texture_get_type, "gdk_memory_texture_get_type", LIBS);
+  gidLink(gdk_memory_texture_new, "gdk_memory_texture_new", LIBS);
 
   // MonitorG
-  link(gdk_monitor_get_type, "gdk_monitor_get_type");
-  link(gdk_monitor_get_connector, "gdk_monitor_get_connector");
-  link(gdk_monitor_get_description, "gdk_monitor_get_description");
-  link(gdk_monitor_get_display, "gdk_monitor_get_display");
-  link(gdk_monitor_get_geometry, "gdk_monitor_get_geometry");
-  link(gdk_monitor_get_height_mm, "gdk_monitor_get_height_mm");
-  link(gdk_monitor_get_manufacturer, "gdk_monitor_get_manufacturer");
-  link(gdk_monitor_get_model, "gdk_monitor_get_model");
-  link(gdk_monitor_get_refresh_rate, "gdk_monitor_get_refresh_rate");
-  link(gdk_monitor_get_scale, "gdk_monitor_get_scale");
-  link(gdk_monitor_get_scale_factor, "gdk_monitor_get_scale_factor");
-  link(gdk_monitor_get_subpixel_layout, "gdk_monitor_get_subpixel_layout");
-  link(gdk_monitor_get_width_mm, "gdk_monitor_get_width_mm");
-  link(gdk_monitor_is_valid, "gdk_monitor_is_valid");
+  gidLink(gdk_monitor_get_type, "gdk_monitor_get_type", LIBS);
+  gidLink(gdk_monitor_get_connector, "gdk_monitor_get_connector", LIBS);
+  gidLink(gdk_monitor_get_description, "gdk_monitor_get_description", LIBS);
+  gidLink(gdk_monitor_get_display, "gdk_monitor_get_display", LIBS);
+  gidLink(gdk_monitor_get_geometry, "gdk_monitor_get_geometry", LIBS);
+  gidLink(gdk_monitor_get_height_mm, "gdk_monitor_get_height_mm", LIBS);
+  gidLink(gdk_monitor_get_manufacturer, "gdk_monitor_get_manufacturer", LIBS);
+  gidLink(gdk_monitor_get_model, "gdk_monitor_get_model", LIBS);
+  gidLink(gdk_monitor_get_refresh_rate, "gdk_monitor_get_refresh_rate", LIBS);
+  gidLink(gdk_monitor_get_scale, "gdk_monitor_get_scale", LIBS);
+  gidLink(gdk_monitor_get_scale_factor, "gdk_monitor_get_scale_factor", LIBS);
+  gidLink(gdk_monitor_get_subpixel_layout, "gdk_monitor_get_subpixel_layout", LIBS);
+  gidLink(gdk_monitor_get_width_mm, "gdk_monitor_get_width_mm", LIBS);
+  gidLink(gdk_monitor_is_valid, "gdk_monitor_is_valid", LIBS);
 
   // MotionEvent
-  link(gdk_motion_event_get_type, "gdk_motion_event_get_type");
+  gidLink(gdk_motion_event_get_type, "gdk_motion_event_get_type", LIBS);
 
   // PadEvent
-  link(gdk_pad_event_get_type, "gdk_pad_event_get_type");
-  link(gdk_pad_event_get_axis_value, "gdk_pad_event_get_axis_value");
-  link(gdk_pad_event_get_button, "gdk_pad_event_get_button");
-  link(gdk_pad_event_get_group_mode, "gdk_pad_event_get_group_mode");
+  gidLink(gdk_pad_event_get_type, "gdk_pad_event_get_type", LIBS);
+  gidLink(gdk_pad_event_get_axis_value, "gdk_pad_event_get_axis_value", LIBS);
+  gidLink(gdk_pad_event_get_button, "gdk_pad_event_get_button", LIBS);
+  gidLink(gdk_pad_event_get_group_mode, "gdk_pad_event_get_group_mode", LIBS);
 
   // Paintable
-  link(gdk_paintable_get_type, "gdk_paintable_get_type");
-  link(gdk_paintable_new_empty, "gdk_paintable_new_empty");
-  link(gdk_paintable_compute_concrete_size, "gdk_paintable_compute_concrete_size");
-  link(gdk_paintable_get_current_image, "gdk_paintable_get_current_image");
-  link(gdk_paintable_get_flags, "gdk_paintable_get_flags");
-  link(gdk_paintable_get_intrinsic_aspect_ratio, "gdk_paintable_get_intrinsic_aspect_ratio");
-  link(gdk_paintable_get_intrinsic_height, "gdk_paintable_get_intrinsic_height");
-  link(gdk_paintable_get_intrinsic_width, "gdk_paintable_get_intrinsic_width");
-  link(gdk_paintable_invalidate_contents, "gdk_paintable_invalidate_contents");
-  link(gdk_paintable_invalidate_size, "gdk_paintable_invalidate_size");
-  link(gdk_paintable_snapshot, "gdk_paintable_snapshot");
+  gidLink(gdk_paintable_get_type, "gdk_paintable_get_type", LIBS);
+  gidLink(gdk_paintable_new_empty, "gdk_paintable_new_empty", LIBS);
+  gidLink(gdk_paintable_compute_concrete_size, "gdk_paintable_compute_concrete_size", LIBS);
+  gidLink(gdk_paintable_get_current_image, "gdk_paintable_get_current_image", LIBS);
+  gidLink(gdk_paintable_get_flags, "gdk_paintable_get_flags", LIBS);
+  gidLink(gdk_paintable_get_intrinsic_aspect_ratio, "gdk_paintable_get_intrinsic_aspect_ratio", LIBS);
+  gidLink(gdk_paintable_get_intrinsic_height, "gdk_paintable_get_intrinsic_height", LIBS);
+  gidLink(gdk_paintable_get_intrinsic_width, "gdk_paintable_get_intrinsic_width", LIBS);
+  gidLink(gdk_paintable_invalidate_contents, "gdk_paintable_invalidate_contents", LIBS);
+  gidLink(gdk_paintable_invalidate_size, "gdk_paintable_invalidate_size", LIBS);
+  gidLink(gdk_paintable_snapshot, "gdk_paintable_snapshot", LIBS);
 
   // Popup
-  link(gdk_popup_get_type, "gdk_popup_get_type");
-  link(gdk_popup_get_autohide, "gdk_popup_get_autohide");
-  link(gdk_popup_get_parent, "gdk_popup_get_parent");
-  link(gdk_popup_get_position_x, "gdk_popup_get_position_x");
-  link(gdk_popup_get_position_y, "gdk_popup_get_position_y");
-  link(gdk_popup_get_rect_anchor, "gdk_popup_get_rect_anchor");
-  link(gdk_popup_get_surface_anchor, "gdk_popup_get_surface_anchor");
-  link(gdk_popup_present, "gdk_popup_present");
+  gidLink(gdk_popup_get_type, "gdk_popup_get_type", LIBS);
+  gidLink(gdk_popup_get_autohide, "gdk_popup_get_autohide", LIBS);
+  gidLink(gdk_popup_get_parent, "gdk_popup_get_parent", LIBS);
+  gidLink(gdk_popup_get_position_x, "gdk_popup_get_position_x", LIBS);
+  gidLink(gdk_popup_get_position_y, "gdk_popup_get_position_y", LIBS);
+  gidLink(gdk_popup_get_rect_anchor, "gdk_popup_get_rect_anchor", LIBS);
+  gidLink(gdk_popup_get_surface_anchor, "gdk_popup_get_surface_anchor", LIBS);
+  gidLink(gdk_popup_present, "gdk_popup_present", LIBS);
 
   // PopupLayout
-  link(gdk_popup_layout_get_type, "gdk_popup_layout_get_type");
-  link(gdk_popup_layout_new, "gdk_popup_layout_new");
-  link(gdk_popup_layout_copy, "gdk_popup_layout_copy");
-  link(gdk_popup_layout_equal, "gdk_popup_layout_equal");
-  link(gdk_popup_layout_get_anchor_hints, "gdk_popup_layout_get_anchor_hints");
-  link(gdk_popup_layout_get_anchor_rect, "gdk_popup_layout_get_anchor_rect");
-  link(gdk_popup_layout_get_offset, "gdk_popup_layout_get_offset");
-  link(gdk_popup_layout_get_rect_anchor, "gdk_popup_layout_get_rect_anchor");
-  link(gdk_popup_layout_get_shadow_width, "gdk_popup_layout_get_shadow_width");
-  link(gdk_popup_layout_get_surface_anchor, "gdk_popup_layout_get_surface_anchor");
-  link(gdk_popup_layout_ref, "gdk_popup_layout_ref");
-  link(gdk_popup_layout_set_anchor_hints, "gdk_popup_layout_set_anchor_hints");
-  link(gdk_popup_layout_set_anchor_rect, "gdk_popup_layout_set_anchor_rect");
-  link(gdk_popup_layout_set_offset, "gdk_popup_layout_set_offset");
-  link(gdk_popup_layout_set_rect_anchor, "gdk_popup_layout_set_rect_anchor");
-  link(gdk_popup_layout_set_shadow_width, "gdk_popup_layout_set_shadow_width");
-  link(gdk_popup_layout_set_surface_anchor, "gdk_popup_layout_set_surface_anchor");
-  link(gdk_popup_layout_unref, "gdk_popup_layout_unref");
+  gidLink(gdk_popup_layout_get_type, "gdk_popup_layout_get_type", LIBS);
+  gidLink(gdk_popup_layout_new, "gdk_popup_layout_new", LIBS);
+  gidLink(gdk_popup_layout_copy, "gdk_popup_layout_copy", LIBS);
+  gidLink(gdk_popup_layout_equal, "gdk_popup_layout_equal", LIBS);
+  gidLink(gdk_popup_layout_get_anchor_hints, "gdk_popup_layout_get_anchor_hints", LIBS);
+  gidLink(gdk_popup_layout_get_anchor_rect, "gdk_popup_layout_get_anchor_rect", LIBS);
+  gidLink(gdk_popup_layout_get_offset, "gdk_popup_layout_get_offset", LIBS);
+  gidLink(gdk_popup_layout_get_rect_anchor, "gdk_popup_layout_get_rect_anchor", LIBS);
+  gidLink(gdk_popup_layout_get_shadow_width, "gdk_popup_layout_get_shadow_width", LIBS);
+  gidLink(gdk_popup_layout_get_surface_anchor, "gdk_popup_layout_get_surface_anchor", LIBS);
+  gidLink(gdk_popup_layout_ref, "gdk_popup_layout_ref", LIBS);
+  gidLink(gdk_popup_layout_set_anchor_hints, "gdk_popup_layout_set_anchor_hints", LIBS);
+  gidLink(gdk_popup_layout_set_anchor_rect, "gdk_popup_layout_set_anchor_rect", LIBS);
+  gidLink(gdk_popup_layout_set_offset, "gdk_popup_layout_set_offset", LIBS);
+  gidLink(gdk_popup_layout_set_rect_anchor, "gdk_popup_layout_set_rect_anchor", LIBS);
+  gidLink(gdk_popup_layout_set_shadow_width, "gdk_popup_layout_set_shadow_width", LIBS);
+  gidLink(gdk_popup_layout_set_surface_anchor, "gdk_popup_layout_set_surface_anchor", LIBS);
+  gidLink(gdk_popup_layout_unref, "gdk_popup_layout_unref", LIBS);
 
   // ProximityEvent
-  link(gdk_proximity_event_get_type, "gdk_proximity_event_get_type");
+  gidLink(gdk_proximity_event_get_type, "gdk_proximity_event_get_type", LIBS);
 
   // RGBA
-  link(gdk_rgba_get_type, "gdk_rgba_get_type");
-  link(gdk_rgba_copy, "gdk_rgba_copy");
-  link(gdk_rgba_equal, "gdk_rgba_equal");
-  link(gdk_rgba_free, "gdk_rgba_free");
-  link(gdk_rgba_hash, "gdk_rgba_hash");
-  link(gdk_rgba_is_clear, "gdk_rgba_is_clear");
-  link(gdk_rgba_is_opaque, "gdk_rgba_is_opaque");
-  link(gdk_rgba_parse, "gdk_rgba_parse");
-  link(gdk_rgba_to_string, "gdk_rgba_to_string");
+  gidLink(gdk_rgba_get_type, "gdk_rgba_get_type", LIBS);
+  gidLink(gdk_rgba_copy, "gdk_rgba_copy", LIBS);
+  gidLink(gdk_rgba_equal, "gdk_rgba_equal", LIBS);
+  gidLink(gdk_rgba_free, "gdk_rgba_free", LIBS);
+  gidLink(gdk_rgba_hash, "gdk_rgba_hash", LIBS);
+  gidLink(gdk_rgba_is_clear, "gdk_rgba_is_clear", LIBS);
+  gidLink(gdk_rgba_is_opaque, "gdk_rgba_is_opaque", LIBS);
+  gidLink(gdk_rgba_parse, "gdk_rgba_parse", LIBS);
+  gidLink(gdk_rgba_to_string, "gdk_rgba_to_string", LIBS);
 
   // Rectangle
-  link(gdk_rectangle_get_type, "gdk_rectangle_get_type");
-  link(gdk_rectangle_contains_point, "gdk_rectangle_contains_point");
-  link(gdk_rectangle_equal, "gdk_rectangle_equal");
-  link(gdk_rectangle_intersect, "gdk_rectangle_intersect");
-  link(gdk_rectangle_union, "gdk_rectangle_union");
+  gidLink(gdk_rectangle_get_type, "gdk_rectangle_get_type", LIBS);
+  gidLink(gdk_rectangle_contains_point, "gdk_rectangle_contains_point", LIBS);
+  gidLink(gdk_rectangle_equal, "gdk_rectangle_equal", LIBS);
+  gidLink(gdk_rectangle_intersect, "gdk_rectangle_intersect", LIBS);
+  gidLink(gdk_rectangle_union, "gdk_rectangle_union", LIBS);
 
   // ScrollEvent
-  link(gdk_scroll_event_get_type, "gdk_scroll_event_get_type");
-  link(gdk_scroll_event_get_deltas, "gdk_scroll_event_get_deltas");
-  link(gdk_scroll_event_get_direction, "gdk_scroll_event_get_direction");
-  link(gdk_scroll_event_get_unit, "gdk_scroll_event_get_unit");
-  link(gdk_scroll_event_is_stop, "gdk_scroll_event_is_stop");
+  gidLink(gdk_scroll_event_get_type, "gdk_scroll_event_get_type", LIBS);
+  gidLink(gdk_scroll_event_get_deltas, "gdk_scroll_event_get_deltas", LIBS);
+  gidLink(gdk_scroll_event_get_direction, "gdk_scroll_event_get_direction", LIBS);
+  gidLink(gdk_scroll_event_get_unit, "gdk_scroll_event_get_unit", LIBS);
+  gidLink(gdk_scroll_event_is_stop, "gdk_scroll_event_is_stop", LIBS);
 
   // Seat
-  link(gdk_seat_get_type, "gdk_seat_get_type");
-  link(gdk_seat_get_capabilities, "gdk_seat_get_capabilities");
-  link(gdk_seat_get_devices, "gdk_seat_get_devices");
-  link(gdk_seat_get_display, "gdk_seat_get_display");
-  link(gdk_seat_get_keyboard, "gdk_seat_get_keyboard");
-  link(gdk_seat_get_pointer, "gdk_seat_get_pointer");
-  link(gdk_seat_get_tools, "gdk_seat_get_tools");
+  gidLink(gdk_seat_get_type, "gdk_seat_get_type", LIBS);
+  gidLink(gdk_seat_get_capabilities, "gdk_seat_get_capabilities", LIBS);
+  gidLink(gdk_seat_get_devices, "gdk_seat_get_devices", LIBS);
+  gidLink(gdk_seat_get_display, "gdk_seat_get_display", LIBS);
+  gidLink(gdk_seat_get_keyboard, "gdk_seat_get_keyboard", LIBS);
+  gidLink(gdk_seat_get_pointer, "gdk_seat_get_pointer", LIBS);
+  gidLink(gdk_seat_get_tools, "gdk_seat_get_tools", LIBS);
 
   // Snapshot
-  link(gdk_snapshot_get_type, "gdk_snapshot_get_type");
+  gidLink(gdk_snapshot_get_type, "gdk_snapshot_get_type", LIBS);
 
   // Surface
-  link(gdk_surface_get_type, "gdk_surface_get_type");
-  link(gdk_surface_new_popup, "gdk_surface_new_popup");
-  link(gdk_surface_new_toplevel, "gdk_surface_new_toplevel");
-  link(gdk_surface_beep, "gdk_surface_beep");
-  link(gdk_surface_create_cairo_context, "gdk_surface_create_cairo_context");
-  link(gdk_surface_create_gl_context, "gdk_surface_create_gl_context");
-  link(gdk_surface_create_similar_surface, "gdk_surface_create_similar_surface");
-  link(gdk_surface_create_vulkan_context, "gdk_surface_create_vulkan_context");
-  link(gdk_surface_destroy, "gdk_surface_destroy");
-  link(gdk_surface_get_cursor, "gdk_surface_get_cursor");
-  link(gdk_surface_get_device_cursor, "gdk_surface_get_device_cursor");
-  link(gdk_surface_get_device_position, "gdk_surface_get_device_position");
-  link(gdk_surface_get_display, "gdk_surface_get_display");
-  link(gdk_surface_get_frame_clock, "gdk_surface_get_frame_clock");
-  link(gdk_surface_get_height, "gdk_surface_get_height");
-  link(gdk_surface_get_mapped, "gdk_surface_get_mapped");
-  link(gdk_surface_get_scale, "gdk_surface_get_scale");
-  link(gdk_surface_get_scale_factor, "gdk_surface_get_scale_factor");
-  link(gdk_surface_get_width, "gdk_surface_get_width");
-  link(gdk_surface_hide, "gdk_surface_hide");
-  link(gdk_surface_is_destroyed, "gdk_surface_is_destroyed");
-  link(gdk_surface_queue_render, "gdk_surface_queue_render");
-  link(gdk_surface_request_layout, "gdk_surface_request_layout");
-  link(gdk_surface_set_cursor, "gdk_surface_set_cursor");
-  link(gdk_surface_set_device_cursor, "gdk_surface_set_device_cursor");
-  link(gdk_surface_set_input_region, "gdk_surface_set_input_region");
-  link(gdk_surface_set_opaque_region, "gdk_surface_set_opaque_region");
-  link(gdk_surface_translate_coordinates, "gdk_surface_translate_coordinates");
+  gidLink(gdk_surface_get_type, "gdk_surface_get_type", LIBS);
+  gidLink(gdk_surface_new_popup, "gdk_surface_new_popup", LIBS);
+  gidLink(gdk_surface_new_toplevel, "gdk_surface_new_toplevel", LIBS);
+  gidLink(gdk_surface_beep, "gdk_surface_beep", LIBS);
+  gidLink(gdk_surface_create_cairo_context, "gdk_surface_create_cairo_context", LIBS);
+  gidLink(gdk_surface_create_gl_context, "gdk_surface_create_gl_context", LIBS);
+  gidLink(gdk_surface_create_similar_surface, "gdk_surface_create_similar_surface", LIBS);
+  gidLink(gdk_surface_create_vulkan_context, "gdk_surface_create_vulkan_context", LIBS);
+  gidLink(gdk_surface_destroy, "gdk_surface_destroy", LIBS);
+  gidLink(gdk_surface_get_cursor, "gdk_surface_get_cursor", LIBS);
+  gidLink(gdk_surface_get_device_cursor, "gdk_surface_get_device_cursor", LIBS);
+  gidLink(gdk_surface_get_device_position, "gdk_surface_get_device_position", LIBS);
+  gidLink(gdk_surface_get_display, "gdk_surface_get_display", LIBS);
+  gidLink(gdk_surface_get_frame_clock, "gdk_surface_get_frame_clock", LIBS);
+  gidLink(gdk_surface_get_height, "gdk_surface_get_height", LIBS);
+  gidLink(gdk_surface_get_mapped, "gdk_surface_get_mapped", LIBS);
+  gidLink(gdk_surface_get_scale, "gdk_surface_get_scale", LIBS);
+  gidLink(gdk_surface_get_scale_factor, "gdk_surface_get_scale_factor", LIBS);
+  gidLink(gdk_surface_get_width, "gdk_surface_get_width", LIBS);
+  gidLink(gdk_surface_hide, "gdk_surface_hide", LIBS);
+  gidLink(gdk_surface_is_destroyed, "gdk_surface_is_destroyed", LIBS);
+  gidLink(gdk_surface_queue_render, "gdk_surface_queue_render", LIBS);
+  gidLink(gdk_surface_request_layout, "gdk_surface_request_layout", LIBS);
+  gidLink(gdk_surface_set_cursor, "gdk_surface_set_cursor", LIBS);
+  gidLink(gdk_surface_set_device_cursor, "gdk_surface_set_device_cursor", LIBS);
+  gidLink(gdk_surface_set_input_region, "gdk_surface_set_input_region", LIBS);
+  gidLink(gdk_surface_set_opaque_region, "gdk_surface_set_opaque_region", LIBS);
+  gidLink(gdk_surface_translate_coordinates, "gdk_surface_translate_coordinates", LIBS);
 
   // Texture
-  link(gdk_texture_get_type, "gdk_texture_get_type");
-  link(gdk_texture_new_for_pixbuf, "gdk_texture_new_for_pixbuf");
-  link(gdk_texture_new_from_bytes, "gdk_texture_new_from_bytes");
-  link(gdk_texture_new_from_file, "gdk_texture_new_from_file");
-  link(gdk_texture_new_from_filename, "gdk_texture_new_from_filename");
-  link(gdk_texture_new_from_resource, "gdk_texture_new_from_resource");
-  link(gdk_texture_download, "gdk_texture_download");
-  link(gdk_texture_get_format, "gdk_texture_get_format");
-  link(gdk_texture_get_height, "gdk_texture_get_height");
-  link(gdk_texture_get_width, "gdk_texture_get_width");
-  link(gdk_texture_save_to_png, "gdk_texture_save_to_png");
-  link(gdk_texture_save_to_png_bytes, "gdk_texture_save_to_png_bytes");
-  link(gdk_texture_save_to_tiff, "gdk_texture_save_to_tiff");
-  link(gdk_texture_save_to_tiff_bytes, "gdk_texture_save_to_tiff_bytes");
+  gidLink(gdk_texture_get_type, "gdk_texture_get_type", LIBS);
+  gidLink(gdk_texture_new_for_pixbuf, "gdk_texture_new_for_pixbuf", LIBS);
+  gidLink(gdk_texture_new_from_bytes, "gdk_texture_new_from_bytes", LIBS);
+  gidLink(gdk_texture_new_from_file, "gdk_texture_new_from_file", LIBS);
+  gidLink(gdk_texture_new_from_filename, "gdk_texture_new_from_filename", LIBS);
+  gidLink(gdk_texture_new_from_resource, "gdk_texture_new_from_resource", LIBS);
+  gidLink(gdk_texture_download, "gdk_texture_download", LIBS);
+  gidLink(gdk_texture_get_format, "gdk_texture_get_format", LIBS);
+  gidLink(gdk_texture_get_height, "gdk_texture_get_height", LIBS);
+  gidLink(gdk_texture_get_width, "gdk_texture_get_width", LIBS);
+  gidLink(gdk_texture_save_to_png, "gdk_texture_save_to_png", LIBS);
+  gidLink(gdk_texture_save_to_png_bytes, "gdk_texture_save_to_png_bytes", LIBS);
+  gidLink(gdk_texture_save_to_tiff, "gdk_texture_save_to_tiff", LIBS);
+  gidLink(gdk_texture_save_to_tiff_bytes, "gdk_texture_save_to_tiff_bytes", LIBS);
 
   // TextureDownloader
-  link(gdk_texture_downloader_get_type, "gdk_texture_downloader_get_type");
-  link(gdk_texture_downloader_new, "gdk_texture_downloader_new");
-  link(gdk_texture_downloader_copy, "gdk_texture_downloader_copy");
-  link(gdk_texture_downloader_download_bytes, "gdk_texture_downloader_download_bytes");
-  link(gdk_texture_downloader_download_into, "gdk_texture_downloader_download_into");
-  link(gdk_texture_downloader_free, "gdk_texture_downloader_free");
-  link(gdk_texture_downloader_get_format, "gdk_texture_downloader_get_format");
-  link(gdk_texture_downloader_get_texture, "gdk_texture_downloader_get_texture");
-  link(gdk_texture_downloader_set_format, "gdk_texture_downloader_set_format");
-  link(gdk_texture_downloader_set_texture, "gdk_texture_downloader_set_texture");
+  gidLink(gdk_texture_downloader_get_type, "gdk_texture_downloader_get_type", LIBS);
+  gidLink(gdk_texture_downloader_new, "gdk_texture_downloader_new", LIBS);
+  gidLink(gdk_texture_downloader_copy, "gdk_texture_downloader_copy", LIBS);
+  gidLink(gdk_texture_downloader_download_bytes, "gdk_texture_downloader_download_bytes", LIBS);
+  gidLink(gdk_texture_downloader_download_into, "gdk_texture_downloader_download_into", LIBS);
+  gidLink(gdk_texture_downloader_free, "gdk_texture_downloader_free", LIBS);
+  gidLink(gdk_texture_downloader_get_format, "gdk_texture_downloader_get_format", LIBS);
+  gidLink(gdk_texture_downloader_get_texture, "gdk_texture_downloader_get_texture", LIBS);
+  gidLink(gdk_texture_downloader_set_format, "gdk_texture_downloader_set_format", LIBS);
+  gidLink(gdk_texture_downloader_set_texture, "gdk_texture_downloader_set_texture", LIBS);
 
   // Toplevel
-  link(gdk_toplevel_get_type, "gdk_toplevel_get_type");
-  link(gdk_toplevel_begin_move, "gdk_toplevel_begin_move");
-  link(gdk_toplevel_begin_resize, "gdk_toplevel_begin_resize");
-  link(gdk_toplevel_focus, "gdk_toplevel_focus");
-  link(gdk_toplevel_get_state, "gdk_toplevel_get_state");
-  link(gdk_toplevel_inhibit_system_shortcuts, "gdk_toplevel_inhibit_system_shortcuts");
-  link(gdk_toplevel_lower, "gdk_toplevel_lower");
-  link(gdk_toplevel_minimize, "gdk_toplevel_minimize");
-  link(gdk_toplevel_present, "gdk_toplevel_present");
-  link(gdk_toplevel_restore_system_shortcuts, "gdk_toplevel_restore_system_shortcuts");
-  link(gdk_toplevel_set_decorated, "gdk_toplevel_set_decorated");
-  link(gdk_toplevel_set_deletable, "gdk_toplevel_set_deletable");
-  link(gdk_toplevel_set_icon_list, "gdk_toplevel_set_icon_list");
-  link(gdk_toplevel_set_modal, "gdk_toplevel_set_modal");
-  link(gdk_toplevel_set_startup_id, "gdk_toplevel_set_startup_id");
-  link(gdk_toplevel_set_title, "gdk_toplevel_set_title");
-  link(gdk_toplevel_set_transient_for, "gdk_toplevel_set_transient_for");
-  link(gdk_toplevel_show_window_menu, "gdk_toplevel_show_window_menu");
-  link(gdk_toplevel_supports_edge_constraints, "gdk_toplevel_supports_edge_constraints");
-  link(gdk_toplevel_titlebar_gesture, "gdk_toplevel_titlebar_gesture");
+  gidLink(gdk_toplevel_get_type, "gdk_toplevel_get_type", LIBS);
+  gidLink(gdk_toplevel_begin_move, "gdk_toplevel_begin_move", LIBS);
+  gidLink(gdk_toplevel_begin_resize, "gdk_toplevel_begin_resize", LIBS);
+  gidLink(gdk_toplevel_focus, "gdk_toplevel_focus", LIBS);
+  gidLink(gdk_toplevel_get_state, "gdk_toplevel_get_state", LIBS);
+  gidLink(gdk_toplevel_inhibit_system_shortcuts, "gdk_toplevel_inhibit_system_shortcuts", LIBS);
+  gidLink(gdk_toplevel_lower, "gdk_toplevel_lower", LIBS);
+  gidLink(gdk_toplevel_minimize, "gdk_toplevel_minimize", LIBS);
+  gidLink(gdk_toplevel_present, "gdk_toplevel_present", LIBS);
+  gidLink(gdk_toplevel_restore_system_shortcuts, "gdk_toplevel_restore_system_shortcuts", LIBS);
+  gidLink(gdk_toplevel_set_decorated, "gdk_toplevel_set_decorated", LIBS);
+  gidLink(gdk_toplevel_set_deletable, "gdk_toplevel_set_deletable", LIBS);
+  gidLink(gdk_toplevel_set_icon_list, "gdk_toplevel_set_icon_list", LIBS);
+  gidLink(gdk_toplevel_set_modal, "gdk_toplevel_set_modal", LIBS);
+  gidLink(gdk_toplevel_set_startup_id, "gdk_toplevel_set_startup_id", LIBS);
+  gidLink(gdk_toplevel_set_title, "gdk_toplevel_set_title", LIBS);
+  gidLink(gdk_toplevel_set_transient_for, "gdk_toplevel_set_transient_for", LIBS);
+  gidLink(gdk_toplevel_show_window_menu, "gdk_toplevel_show_window_menu", LIBS);
+  gidLink(gdk_toplevel_supports_edge_constraints, "gdk_toplevel_supports_edge_constraints", LIBS);
+  gidLink(gdk_toplevel_titlebar_gesture, "gdk_toplevel_titlebar_gesture", LIBS);
 
   // ToplevelLayout
-  link(gdk_toplevel_layout_get_type, "gdk_toplevel_layout_get_type");
-  link(gdk_toplevel_layout_new, "gdk_toplevel_layout_new");
-  link(gdk_toplevel_layout_copy, "gdk_toplevel_layout_copy");
-  link(gdk_toplevel_layout_equal, "gdk_toplevel_layout_equal");
-  link(gdk_toplevel_layout_get_fullscreen, "gdk_toplevel_layout_get_fullscreen");
-  link(gdk_toplevel_layout_get_fullscreen_monitor, "gdk_toplevel_layout_get_fullscreen_monitor");
-  link(gdk_toplevel_layout_get_maximized, "gdk_toplevel_layout_get_maximized");
-  link(gdk_toplevel_layout_get_resizable, "gdk_toplevel_layout_get_resizable");
-  link(gdk_toplevel_layout_ref, "gdk_toplevel_layout_ref");
-  link(gdk_toplevel_layout_set_fullscreen, "gdk_toplevel_layout_set_fullscreen");
-  link(gdk_toplevel_layout_set_maximized, "gdk_toplevel_layout_set_maximized");
-  link(gdk_toplevel_layout_set_resizable, "gdk_toplevel_layout_set_resizable");
-  link(gdk_toplevel_layout_unref, "gdk_toplevel_layout_unref");
+  gidLink(gdk_toplevel_layout_get_type, "gdk_toplevel_layout_get_type", LIBS);
+  gidLink(gdk_toplevel_layout_new, "gdk_toplevel_layout_new", LIBS);
+  gidLink(gdk_toplevel_layout_copy, "gdk_toplevel_layout_copy", LIBS);
+  gidLink(gdk_toplevel_layout_equal, "gdk_toplevel_layout_equal", LIBS);
+  gidLink(gdk_toplevel_layout_get_fullscreen, "gdk_toplevel_layout_get_fullscreen", LIBS);
+  gidLink(gdk_toplevel_layout_get_fullscreen_monitor, "gdk_toplevel_layout_get_fullscreen_monitor", LIBS);
+  gidLink(gdk_toplevel_layout_get_maximized, "gdk_toplevel_layout_get_maximized", LIBS);
+  gidLink(gdk_toplevel_layout_get_resizable, "gdk_toplevel_layout_get_resizable", LIBS);
+  gidLink(gdk_toplevel_layout_ref, "gdk_toplevel_layout_ref", LIBS);
+  gidLink(gdk_toplevel_layout_set_fullscreen, "gdk_toplevel_layout_set_fullscreen", LIBS);
+  gidLink(gdk_toplevel_layout_set_maximized, "gdk_toplevel_layout_set_maximized", LIBS);
+  gidLink(gdk_toplevel_layout_set_resizable, "gdk_toplevel_layout_set_resizable", LIBS);
+  gidLink(gdk_toplevel_layout_unref, "gdk_toplevel_layout_unref", LIBS);
 
   // ToplevelSize
-  link(gdk_toplevel_size_get_bounds, "gdk_toplevel_size_get_bounds");
-  link(gdk_toplevel_size_set_min_size, "gdk_toplevel_size_set_min_size");
-  link(gdk_toplevel_size_set_shadow_width, "gdk_toplevel_size_set_shadow_width");
-  link(gdk_toplevel_size_set_size, "gdk_toplevel_size_set_size");
+  gidLink(gdk_toplevel_size_get_bounds, "gdk_toplevel_size_get_bounds", LIBS);
+  gidLink(gdk_toplevel_size_set_min_size, "gdk_toplevel_size_set_min_size", LIBS);
+  gidLink(gdk_toplevel_size_set_shadow_width, "gdk_toplevel_size_set_shadow_width", LIBS);
+  gidLink(gdk_toplevel_size_set_size, "gdk_toplevel_size_set_size", LIBS);
 
   // TouchEvent
-  link(gdk_touch_event_get_type, "gdk_touch_event_get_type");
-  link(gdk_touch_event_get_emulating_pointer, "gdk_touch_event_get_emulating_pointer");
+  gidLink(gdk_touch_event_get_type, "gdk_touch_event_get_type", LIBS);
+  gidLink(gdk_touch_event_get_emulating_pointer, "gdk_touch_event_get_emulating_pointer", LIBS);
 
   // TouchpadEvent
-  link(gdk_touchpad_event_get_type, "gdk_touchpad_event_get_type");
-  link(gdk_touchpad_event_get_deltas, "gdk_touchpad_event_get_deltas");
-  link(gdk_touchpad_event_get_gesture_phase, "gdk_touchpad_event_get_gesture_phase");
-  link(gdk_touchpad_event_get_n_fingers, "gdk_touchpad_event_get_n_fingers");
-  link(gdk_touchpad_event_get_pinch_angle_delta, "gdk_touchpad_event_get_pinch_angle_delta");
-  link(gdk_touchpad_event_get_pinch_scale, "gdk_touchpad_event_get_pinch_scale");
+  gidLink(gdk_touchpad_event_get_type, "gdk_touchpad_event_get_type", LIBS);
+  gidLink(gdk_touchpad_event_get_deltas, "gdk_touchpad_event_get_deltas", LIBS);
+  gidLink(gdk_touchpad_event_get_gesture_phase, "gdk_touchpad_event_get_gesture_phase", LIBS);
+  gidLink(gdk_touchpad_event_get_n_fingers, "gdk_touchpad_event_get_n_fingers", LIBS);
+  gidLink(gdk_touchpad_event_get_pinch_angle_delta, "gdk_touchpad_event_get_pinch_angle_delta", LIBS);
+  gidLink(gdk_touchpad_event_get_pinch_scale, "gdk_touchpad_event_get_pinch_scale", LIBS);
 
   // VulkanContext
-  link(gdk_vulkan_context_get_type, "gdk_vulkan_context_get_type");
-}
-
-import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
-import std.string : fromStringz, toStringz;
-
-private void link(T)(ref T funcPtr, string symbol)
-{
-  foreach (lib; LIBS)
-  {
-  if (auto handle = dlopen(cast(char*)toStringz(lib), RTLD_GLOBAL | RTLD_NOW))
-  {
-  if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
-  {
-  funcPtr = cast(T)symPtr;
-  return;
-  }
-  }
-  else
-  throw new Error("Failed to load library '" ~ lib ~ "': " ~ dlerror().fromStringz.idup);
-  }
-
-  funcPtr = cast(T)&symbolNotFound;
-}
-
-private void symbolNotFound()
-{
-  throw new Error("Attempted to execute a dynamic library function which was not found");
+  gidLink(gdk_vulkan_context_get_type, "gdk_vulkan_context_get_type", LIBS);
 }
