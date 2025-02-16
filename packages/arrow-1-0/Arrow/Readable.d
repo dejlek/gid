@@ -15,7 +15,8 @@ interface Readable
 
   static GType getType()
   {
-    return garrow_readable_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_readable_get_type != &gidSymbolNotFound ? garrow_readable_get_type() : cast(GType)0;
   }
 
   Buffer read(long nBytes);

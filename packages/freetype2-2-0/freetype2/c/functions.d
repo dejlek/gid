@@ -1,5 +1,6 @@
 module freetype2.c.functions;
 
+public import Gid.basictypes;
 import Gid.loader;
 import freetype2.c.types;
 public import GLib.c.types;

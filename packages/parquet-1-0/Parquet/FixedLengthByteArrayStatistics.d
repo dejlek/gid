@@ -17,7 +17,8 @@ class FixedLengthByteArrayStatistics : Statistics
 
   static GType getType()
   {
-    return gparquet_fixed_length_byte_array_statistics_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gparquet_fixed_length_byte_array_statistics_get_type != &gidSymbolNotFound ? gparquet_fixed_length_byte_array_statistics_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

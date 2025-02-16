@@ -1,5 +1,6 @@
 module cairo.c.types;
 
+public import Gid.basictypes;
 public import GObject.c.types;
 public import freetype2.c.types;
 
@@ -1655,7 +1656,7 @@ struct cairo_glyph_t
    * glyph index in the font. The exact interpretation of the
    * glyph index depends on the font technology being used.
    */
-  ulong index;
+  gulong index;
 
   /**
    * the offset in the X direction between the origin used for
@@ -2065,11 +2066,11 @@ alias extern(C) void function(cairo_surface_t* observer, cairo_surface_t* target
 
 alias extern(C) cairo_status_t function(cairo_scaled_font_t* scaledFont, cairo_t* cr, cairo_font_extents_t* extents) cairo_user_scaled_font_init_func_t;
 
-alias extern(C) cairo_status_t function(cairo_scaled_font_t* scaledFont, ulong glyph, cairo_t* cr, cairo_text_extents_t* extents) cairo_user_scaled_font_render_glyph_func_t;
+alias extern(C) cairo_status_t function(cairo_scaled_font_t* scaledFont, gulong glyph, cairo_t* cr, cairo_text_extents_t* extents) cairo_user_scaled_font_render_glyph_func_t;
 
 alias extern(C) cairo_status_t function(cairo_scaled_font_t* scaledFont, const(char)* utf8, int utf8Len, cairo_glyph_t** glyphs, int* numGlyphs, cairo_text_cluster_t** clusters, int* numClusters, cairo_text_cluster_flags_t* clusterFlags) cairo_user_scaled_font_text_to_glyphs_func_t;
 
-alias extern(C) cairo_status_t function(cairo_scaled_font_t* scaledFont, ulong unicode, ulong* glyphIndex) cairo_user_scaled_font_unicode_to_glyph_func_t;
+alias extern(C) cairo_status_t function(cairo_scaled_font_t* scaledFont, gulong unicode, gulong* glyphIndex) cairo_user_scaled_font_unicode_to_glyph_func_t;
 
 alias extern(C) cairo_status_t function(void* closure, const(ubyte)* data, uint length) cairo_write_func_t;
 

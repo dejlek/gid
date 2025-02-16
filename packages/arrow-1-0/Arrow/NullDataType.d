@@ -16,7 +16,8 @@ class NullDataType : DataType
 
   static GType getType()
   {
-    return garrow_null_data_type_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_null_data_type_get_type != &gidSymbolNotFound ? garrow_null_data_type_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

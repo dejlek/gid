@@ -12,7 +12,8 @@ interface Writable
 
   static GType getType()
   {
-    return garrow_writable_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_writable_get_type != &gidSymbolNotFound ? garrow_writable_get_type() : cast(GType)0;
   }
 
   /**

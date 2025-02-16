@@ -16,7 +16,8 @@ class QuantileOptions : FunctionOptions
 
   static GType getType()
   {
-    return garrow_quantile_options_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_quantile_options_get_type != &gidSymbolNotFound ? garrow_quantile_options_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -1,5 +1,6 @@
 module Gsk.c.types;
 
+public import Gid.basictypes;
 public import Gdk.c.types;
 public import Graphene.c.types;
 

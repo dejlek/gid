@@ -57,7 +57,8 @@ class StyleContext : ObjectG
 
   static GType getType()
   {
-    return gtk_style_context_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_style_context_get_type != &gidSymbolNotFound ? gtk_style_context_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

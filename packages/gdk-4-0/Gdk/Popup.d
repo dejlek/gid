@@ -21,7 +21,8 @@ interface Popup
 
   static GType getType()
   {
-    return gdk_popup_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_popup_get_type != &gidSymbolNotFound ? gdk_popup_get_type() : cast(GType)0;
   }
 
   /**

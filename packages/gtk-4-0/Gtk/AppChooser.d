@@ -36,7 +36,8 @@ interface AppChooser
 
   static GType getType()
   {
-    return gtk_app_chooser_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_app_chooser_get_type != &gidSymbolNotFound ? gtk_app_chooser_get_type() : cast(GType)0;
   }
 
   /**

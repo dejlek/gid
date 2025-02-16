@@ -32,7 +32,8 @@ class OtVarAxisInfo : Boxed
 
   static GType getType()
   {
-    return hb_gobject_ot_var_axis_info_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())hb_gobject_ot_var_axis_info_get_type != &gidSymbolNotFound ? hb_gobject_ot_var_axis_info_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

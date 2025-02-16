@@ -27,7 +27,8 @@ interface Native
 
   static GType getType()
   {
-    return gtk_native_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_native_get_type != &gidSymbolNotFound ? gtk_native_get_type() : cast(GType)0;
   }
 
   /**

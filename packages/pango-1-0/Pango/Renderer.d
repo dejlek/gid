@@ -30,7 +30,8 @@ class Renderer : ObjectG
 
   static GType getType()
   {
-    return pango_renderer_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())pango_renderer_get_type != &gidSymbolNotFound ? pango_renderer_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

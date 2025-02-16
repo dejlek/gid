@@ -32,7 +32,8 @@ class AttrIterator : Boxed
 
   static GType getType()
   {
-    return pango_attr_iterator_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())pango_attr_iterator_get_type != &gidSymbolNotFound ? pango_attr_iterator_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

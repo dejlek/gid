@@ -18,7 +18,8 @@ interface Font
 
   static GType getType()
   {
-    return pango_cairo_font_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())pango_cairo_font_get_type != &gidSymbolNotFound ? pango_cairo_font_get_type() : cast(GType)0;
   }
 
   /**

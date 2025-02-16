@@ -19,7 +19,8 @@ class RecordBatchReader : ObjectG
 
   static GType getType()
   {
-    return gaflight_record_batch_reader_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gaflight_record_batch_reader_get_type != &gidSymbolNotFound ? gaflight_record_batch_reader_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

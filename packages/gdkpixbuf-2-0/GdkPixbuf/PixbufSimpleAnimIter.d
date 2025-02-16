@@ -16,7 +16,8 @@ class PixbufSimpleAnimIter : PixbufAnimationIter
 
   static GType getType()
   {
-    return gdk_pixbuf_simple_anim_iter_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_pixbuf_simple_anim_iter_get_type != &gidSymbolNotFound ? gdk_pixbuf_simple_anim_iter_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

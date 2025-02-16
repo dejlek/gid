@@ -33,7 +33,8 @@ class DBusMethodInvocation : ObjectG
 
   static GType getType()
   {
-    return g_dbus_method_invocation_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_dbus_method_invocation_get_type != &gidSymbolNotFound ? g_dbus_method_invocation_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

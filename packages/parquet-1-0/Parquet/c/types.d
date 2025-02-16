@@ -1,5 +1,6 @@
 module Parquet.c.types;
 
+public import Gid.basictypes;
 public import Arrow.c.types;
 
 struct GParquetArrowFileReader

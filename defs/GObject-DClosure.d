@@ -1,4 +1,5 @@
 //!kind DClosure Opaque
+//!inhibit init funcs
 
 import GObject.Closure;
 public import GObject.Value;

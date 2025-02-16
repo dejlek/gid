@@ -108,7 +108,8 @@ class ListView : ListBase
 
   static GType getType()
   {
-    return gtk_list_view_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_list_view_get_type != &gidSymbolNotFound ? gtk_list_view_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

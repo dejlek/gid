@@ -35,7 +35,8 @@ class Matrix : Boxed
 
   static GType getType()
   {
-    return cairo_gobject_matrix_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())cairo_gobject_matrix_get_type != &gidSymbolNotFound ? cairo_gobject_matrix_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

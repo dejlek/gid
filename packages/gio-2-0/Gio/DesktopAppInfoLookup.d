@@ -21,7 +21,8 @@ interface DesktopAppInfoLookup
 
   static GType getType()
   {
-    return g_desktop_app_info_lookup_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_desktop_app_info_lookup_get_type != &gidSymbolNotFound ? g_desktop_app_info_lookup_get_type() : cast(GType)0;
   }
 
   /**

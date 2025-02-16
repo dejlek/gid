@@ -30,7 +30,8 @@ class ShapePlan : Boxed
 
   static GType getType()
   {
-    return hb_gobject_shape_plan_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())hb_gobject_shape_plan_get_type != &gidSymbolNotFound ? hb_gobject_shape_plan_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -25,7 +25,8 @@ class BindingGroup : ObjectG
 
   static GType getType()
   {
-    return g_binding_group_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_binding_group_get_type != &gidSymbolNotFound ? g_binding_group_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

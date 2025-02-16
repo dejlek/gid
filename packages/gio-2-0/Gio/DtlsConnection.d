@@ -39,7 +39,8 @@ interface DtlsConnection
 
   static GType getType()
   {
-    return g_dtls_connection_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_dtls_connection_get_type != &gidSymbolNotFound ? g_dtls_connection_get_type() : cast(GType)0;
   }
 
   /**

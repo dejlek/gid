@@ -28,7 +28,8 @@ class CellRendererText : CellRenderer
 
   static GType getType()
   {
-    return gtk_cell_renderer_text_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_cell_renderer_text_get_type != &gidSymbolNotFound ? gtk_cell_renderer_text_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

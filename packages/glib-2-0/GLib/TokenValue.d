@@ -39,32 +39,32 @@ class TokenValue
     (cast(GTokenValue*)cPtr).vIdentifier = propval.toCString(Yes.Alloc);
   }
 
-  @property ulong vBinary()
+  @property gulong vBinary()
   {
     return (cast(GTokenValue*)cPtr).vBinary;
   }
 
-  @property void vBinary(ulong propval)
+  @property void vBinary(gulong propval)
   {
     (cast(GTokenValue*)cPtr).vBinary = propval;
   }
 
-  @property ulong vOctal()
+  @property gulong vOctal()
   {
     return (cast(GTokenValue*)cPtr).vOctal;
   }
 
-  @property void vOctal(ulong propval)
+  @property void vOctal(gulong propval)
   {
     (cast(GTokenValue*)cPtr).vOctal = propval;
   }
 
-  @property ulong vInt()
+  @property gulong vInt()
   {
     return (cast(GTokenValue*)cPtr).vInt;
   }
 
-  @property void vInt(ulong propval)
+  @property void vInt(gulong propval)
   {
     (cast(GTokenValue*)cPtr).vInt = propval;
   }
@@ -89,12 +89,12 @@ class TokenValue
     (cast(GTokenValue*)cPtr).vFloat = propval;
   }
 
-  @property ulong vHex()
+  @property gulong vHex()
   {
     return (cast(GTokenValue*)cPtr).vHex;
   }
 
-  @property void vHex(ulong propval)
+  @property void vHex(gulong propval)
   {
     (cast(GTokenValue*)cPtr).vHex = propval;
   }

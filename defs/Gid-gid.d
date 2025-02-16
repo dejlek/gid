@@ -1,4 +1,5 @@
 //!kind gid Namespace
+//!inhibit imports init funcs
 
 import core.exception : OutOfMemoryError;
 import core.memory : GC;

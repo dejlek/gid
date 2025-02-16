@@ -16,7 +16,8 @@ class GLRenderer : Renderer
 
   static GType getType()
   {
-    return gsk_gl_renderer_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gsk_gl_renderer_get_type != &gidSymbolNotFound ? gsk_gl_renderer_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

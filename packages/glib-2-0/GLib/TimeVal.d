@@ -37,22 +37,22 @@ class TimeVal
     return cast(void*)&cInstance;
   }
 
-  @property long tvSec()
+  @property glong tvSec()
   {
     return (cast(GTimeVal*)cPtr).tvSec;
   }
 
-  @property void tvSec(long propval)
+  @property void tvSec(glong propval)
   {
     (cast(GTimeVal*)cPtr).tvSec = propval;
   }
 
-  @property long tvUsec()
+  @property glong tvUsec()
   {
     return (cast(GTimeVal*)cPtr).tvUsec;
   }
 
-  @property void tvUsec(long propval)
+  @property void tvUsec(glong propval)
   {
     (cast(GTimeVal*)cPtr).tvUsec = propval;
   }
@@ -66,7 +66,7 @@ class TimeVal
    * Deprecated: #GTimeVal is not year-2038-safe. Use `guint64` for
    *   representing microseconds since the epoch, or use #GDateTime.
    */
-  void add(long microseconds)
+  void add(glong microseconds)
   {
     g_time_val_add(cast(GTimeVal*)cPtr, microseconds);
   }

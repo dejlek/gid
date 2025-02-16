@@ -26,7 +26,8 @@ class EmblemedIcon : ObjectG, Icon
 
   static GType getType()
   {
-    return g_emblemed_icon_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_emblemed_icon_get_type != &gidSymbolNotFound ? g_emblemed_icon_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

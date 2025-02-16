@@ -17,7 +17,8 @@ class Time32DataType : TimeDataType
 
   static GType getType()
   {
-    return garrow_time32_data_type_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_time32_data_type_get_type != &gidSymbolNotFound ? garrow_time32_data_type_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -28,7 +28,8 @@ class MarkupParseContext : Boxed
 
   static GType getType()
   {
-    return g_markup_parse_context_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_markup_parse_context_get_type != &gidSymbolNotFound ? g_markup_parse_context_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

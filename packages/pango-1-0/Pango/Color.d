@@ -30,7 +30,8 @@ class Color : Boxed
 
   static GType getType()
   {
-    return pango_color_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())pango_color_get_type != &gidSymbolNotFound ? pango_color_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

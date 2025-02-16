@@ -19,7 +19,8 @@ class LargeListArrayBuilder : ArrayBuilder
 
   static GType getType()
   {
-    return garrow_large_list_array_builder_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_large_list_array_builder_get_type != &gidSymbolNotFound ? garrow_large_list_array_builder_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

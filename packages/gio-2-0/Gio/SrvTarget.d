@@ -37,7 +37,8 @@ class SrvTarget : Boxed
 
   static GType getType()
   {
-    return g_srv_target_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_srv_target_get_type != &gidSymbolNotFound ? g_srv_target_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

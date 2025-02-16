@@ -19,7 +19,8 @@ class Decimal64ArrayBuilder : FixedSizeBinaryArrayBuilder
 
   static GType getType()
   {
-    return garrow_decimal64_array_builder_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_decimal64_array_builder_get_type != &gidSymbolNotFound ? garrow_decimal64_array_builder_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

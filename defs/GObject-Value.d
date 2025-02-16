@@ -1,6 +1,3 @@
-//!generate init
-//!generate funcs
-
 import std.traits : isPointer;
 
 import GObject.ObjectG;

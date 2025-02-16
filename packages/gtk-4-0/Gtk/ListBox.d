@@ -70,7 +70,8 @@ class ListBox : Widget
 
   static GType getType()
   {
-    return gtk_list_box_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_list_box_get_type != &gidSymbolNotFound ? gtk_list_box_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

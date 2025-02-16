@@ -44,7 +44,8 @@ class TimeZone : Boxed
 
   static GType getType()
   {
-    return g_time_zone_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_time_zone_get_type != &gidSymbolNotFound ? g_time_zone_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

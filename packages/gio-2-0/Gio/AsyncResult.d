@@ -84,7 +84,8 @@ interface AsyncResult
 
   static GType getType()
   {
-    return g_async_result_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_async_result_get_type != &gidSymbolNotFound ? g_async_result_get_type() : cast(GType)0;
   }
 
   /**

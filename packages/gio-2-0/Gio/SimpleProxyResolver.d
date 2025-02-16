@@ -27,7 +27,8 @@ class SimpleProxyResolver : ObjectG, ProxyResolver
 
   static GType getType()
   {
-    return g_simple_proxy_resolver_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_simple_proxy_resolver_get_type != &gidSymbolNotFound ? g_simple_proxy_resolver_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

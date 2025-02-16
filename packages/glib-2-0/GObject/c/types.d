@@ -1,5 +1,6 @@
 module GObject.c.types;
 
+public import Gid.basictypes;
 public import GLib.c.types;
 
 /**
@@ -1276,17 +1277,17 @@ struct GParamSpecLong
   /**
    * minimum value for the property specified
    */
-  long minimum;
+  glong minimum;
 
   /**
    * maximum value for the property specified
    */
-  long maximum;
+  glong maximum;
 
   /**
    * default value for the property specified
    */
-  long defaultValue;
+  glong defaultValue;
 }
 
 /**
@@ -1539,17 +1540,17 @@ struct GParamSpecULong
   /**
    * minimum value for the property specified
    */
-  ulong minimum;
+  gulong minimum;
 
   /**
    * maximum value for the property specified
    */
-  ulong maximum;
+  gulong maximum;
 
   /**
    * default value for the property specified
    */
-  ulong defaultValue;
+  gulong defaultValue;
 }
 
 /**
@@ -1743,7 +1744,7 @@ union GTypeCValue
   /**
    * the field for holding long integer values
    */
-  long vLong;
+  glong vLong;
 
   /**
    * the field for holding 64 bit integer values
@@ -2173,9 +2174,9 @@ union _Value__data__union
 
   uint vUint;
 
-  long vLong;
+  glong vLong;
 
-  ulong vUlong;
+  gulong vUlong;
 
   long vInt64;
 

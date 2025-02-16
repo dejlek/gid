@@ -17,7 +17,8 @@ class SlowFileSystem : FileSystem
 
   static GType getType()
   {
-    return garrow_slow_file_system_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_slow_file_system_get_type != &gidSymbolNotFound ? garrow_slow_file_system_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

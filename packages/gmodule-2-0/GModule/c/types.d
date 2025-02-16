@@ -1,5 +1,6 @@
 module GModule.c.types;
 
+public import Gid.basictypes;
 public import GLib.c.types;
 
 /**

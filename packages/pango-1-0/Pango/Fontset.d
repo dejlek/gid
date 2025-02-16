@@ -25,7 +25,8 @@ class Fontset : ObjectG
 
   static GType getType()
   {
-    return pango_fontset_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())pango_fontset_get_type != &gidSymbolNotFound ? pango_fontset_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

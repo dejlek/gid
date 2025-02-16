@@ -90,7 +90,8 @@ class DragSource : GestureSingle
 
   static GType getType()
   {
-    return gtk_drag_source_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_drag_source_get_type != &gidSymbolNotFound ? gtk_drag_source_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

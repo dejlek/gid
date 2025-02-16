@@ -16,7 +16,8 @@ class UInt8DataType : IntegerDataType
 
   static GType getType()
   {
-    return garrow_uint8_data_type_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_uint8_data_type_get_type != &gidSymbolNotFound ? garrow_uint8_data_type_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

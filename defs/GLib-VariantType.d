@@ -1,6 +1,3 @@
-//!generate init
-//!generate funcs
-
 import std.traits : isSomeString;
 import std.typecons : isTuple;
 

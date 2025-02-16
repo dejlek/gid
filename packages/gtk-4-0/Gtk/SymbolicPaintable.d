@@ -24,7 +24,8 @@ interface SymbolicPaintable
 
   static GType getType()
   {
-    return gtk_symbolic_paintable_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_symbolic_paintable_get_type != &gidSymbolNotFound ? gtk_symbolic_paintable_get_type() : cast(GType)0;
   }
 
   /**

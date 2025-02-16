@@ -34,7 +34,8 @@ class AppLaunchContext : DGioAppLaunchContext
 
   static GType getType()
   {
-    return gdk_app_launch_context_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_app_launch_context_get_type != &gidSymbolNotFound ? gdk_app_launch_context_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -22,7 +22,8 @@ class AssistantPage : ObjectG
 
   static GType getType()
   {
-    return gtk_assistant_page_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_assistant_page_get_type != &gidSymbolNotFound ? gtk_assistant_page_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

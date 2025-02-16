@@ -18,7 +18,8 @@ class InMemoryFragment : Fragment
 
   static GType getType()
   {
-    return gadataset_in_memory_fragment_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gadataset_in_memory_fragment_get_type != &gidSymbolNotFound ? gadataset_in_memory_fragment_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

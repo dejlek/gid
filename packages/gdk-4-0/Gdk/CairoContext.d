@@ -24,7 +24,8 @@ class CairoContext : DrawContext
 
   static GType getType()
   {
-    return gdk_cairo_context_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_cairo_context_get_type != &gidSymbolNotFound ? gdk_cairo_context_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

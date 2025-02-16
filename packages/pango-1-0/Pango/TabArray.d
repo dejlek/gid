@@ -27,7 +27,8 @@ class TabArray : Boxed
 
   static GType getType()
   {
-    return pango_tab_array_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())pango_tab_array_get_type != &gidSymbolNotFound ? pango_tab_array_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

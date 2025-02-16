@@ -17,7 +17,8 @@ class WriterProperties : ObjectG
 
   static GType getType()
   {
-    return gparquet_writer_properties_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gparquet_writer_properties_get_type != &gidSymbolNotFound ? gparquet_writer_properties_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

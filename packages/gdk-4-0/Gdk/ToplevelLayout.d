@@ -32,7 +32,8 @@ class ToplevelLayout : Boxed
 
   static GType getType()
   {
-    return gdk_toplevel_layout_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_toplevel_layout_get_type != &gidSymbolNotFound ? gdk_toplevel_layout_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

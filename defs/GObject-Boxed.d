@@ -1,4 +1,5 @@
 //!kind Boxed Boxed
+//!inhibit init funcs
 
 /// Class wrapper for boxed types
 abstract class Boxed

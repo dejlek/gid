@@ -17,7 +17,8 @@ class ChunkedArrayDatum : Datum
 
   static GType getType()
   {
-    return garrow_chunked_array_datum_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_chunked_array_datum_get_type != &gidSymbolNotFound ? garrow_chunked_array_datum_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

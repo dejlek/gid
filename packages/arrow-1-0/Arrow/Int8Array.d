@@ -18,7 +18,8 @@ class Int8Array : NumericArray
 
   static GType getType()
   {
-    return garrow_int8_array_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_int8_array_get_type != &gidSymbolNotFound ? garrow_int8_array_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

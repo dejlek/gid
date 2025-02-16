@@ -70,7 +70,8 @@ class AboutDialog : Window
 
   static GType getType()
   {
-    return gtk_about_dialog_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_about_dialog_get_type != &gidSymbolNotFound ? gtk_about_dialog_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

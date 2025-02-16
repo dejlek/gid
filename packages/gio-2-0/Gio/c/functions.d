@@ -1,5 +1,6 @@
 module Gio.c.functions;
 
+public import Gid.basictypes;
 import Gid.loader;
 import Gio.c.types;
 public import GLib.c.types;
@@ -16,7 +17,7 @@ else
 __gshared extern(C)
 {
   // Action
-  GType function() c_g_action_get_type;
+  extern(C) GType function() c_g_action_get_type;
   bool function(const(char)* actionName) c_g_action_name_is_valid;
   bool function(const(char)* detailedName, char** actionName, VariantC** targetValue, GError** _err) c_g_action_parse_detailed_name;
   char* function(const(char)* actionName, VariantC* targetValue) c_g_action_print_detailed_name;
@@ -30,7 +31,7 @@ __gshared extern(C)
   const(GVariantType)* function(GAction* action) c_g_action_get_state_type;
 
   // ActionGroup
-  GType function() c_g_action_group_get_type;
+  extern(C) GType function() c_g_action_group_get_type;
   void function(GActionGroup* actionGroup, const(char)* actionName) c_g_action_group_action_added;
   void function(GActionGroup* actionGroup, const(char)* actionName, bool enabled) c_g_action_group_action_enabled_changed;
   void function(GActionGroup* actionGroup, const(char)* actionName) c_g_action_group_action_removed;
@@ -47,7 +48,7 @@ __gshared extern(C)
   bool function(GActionGroup* actionGroup, const(char)* actionName, bool* enabled, const(GVariantType*)* parameterType, const(GVariantType*)* stateType, VariantC** stateHint, VariantC** state) c_g_action_group_query_action;
 
   // ActionMap
-  GType function() c_g_action_map_get_type;
+  extern(C) GType function() c_g_action_map_get_type;
   void function(GActionMap* actionMap, GAction* action) c_g_action_map_add_action;
   void function(GActionMap* actionMap, const(GActionEntry)* entries, int nEntries, void* userData) c_g_action_map_add_action_entries;
   GAction* function(GActionMap* actionMap, const(char)* actionName) c_g_action_map_lookup_action;
@@ -55,7 +56,7 @@ __gshared extern(C)
   void function(GActionMap* actionMap, const(GActionEntry)* entries, int nEntries) c_g_action_map_remove_action_entries;
 
   // AppInfo
-  GType function() c_g_app_info_get_type;
+  extern(C) GType function() c_g_app_info_get_type;
   GAppInfo* function(const(char)* commandline, const(char)* applicationName, GAppInfoCreateFlags flags, GError** _err) c_g_app_info_create_from_commandline;
   GList* function() c_g_app_info_get_all;
   GList* function(const(char)* contentType) c_g_app_info_get_all_for_type;
@@ -98,11 +99,11 @@ __gshared extern(C)
   bool function(GAppInfo* appinfo) c_g_app_info_supports_uris;
 
   // AppInfoMonitor
-  GType function() c_g_app_info_monitor_get_type;
+  extern(C) GType function() c_g_app_info_monitor_get_type;
   GAppInfoMonitor* function() c_g_app_info_monitor_get;
 
   // AppLaunchContext
-  GType function() c_g_app_launch_context_get_type;
+  extern(C) GType function() c_g_app_launch_context_get_type;
   GAppLaunchContext* function() c_g_app_launch_context_new;
   char* function(GAppLaunchContext* context, GAppInfo* info, GList* files) c_g_app_launch_context_get_display;
   char** function(GAppLaunchContext* context) c_g_app_launch_context_get_environment;
@@ -112,7 +113,7 @@ __gshared extern(C)
   void function(GAppLaunchContext* context, const(char)* variable) c_g_app_launch_context_unsetenv;
 
   // ApplicationCommandLine
-  GType function() c_g_application_command_line_get_type;
+  extern(C) GType function() c_g_application_command_line_get_type;
   GFile* function(GApplicationCommandLine* cmdline, const(char)* arg) c_g_application_command_line_create_file_for_arg;
   void function(GApplicationCommandLine* cmdline) c_g_application_command_line_done;
   char** function(GApplicationCommandLine* cmdline, int* argc) c_g_application_command_line_get_arguments;
@@ -131,7 +132,7 @@ __gshared extern(C)
   void function(GApplicationCommandLine* cmdline, int exitStatus) c_g_application_command_line_set_exit_status;
 
   // ApplicationGio
-  GType function() c_g_application_get_type;
+  extern(C) GType function() c_g_application_get_type;
   GApplication* function(const(char)* applicationId, GApplicationFlags flags) c_g_application_new;
   GApplication* function() c_g_application_get_default;
   bool function(const(char)* applicationId) c_g_application_id_is_valid;
@@ -173,7 +174,7 @@ __gshared extern(C)
   void function(GApplication* application, const(char)* id) c_g_application_withdraw_notification;
 
   // AsyncInitable
-  GType function() c_g_async_initable_get_type;
+  extern(C) GType function() c_g_async_initable_get_type;
   void function(GType objectType, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData, const(char)* firstPropertyName,  ...) c_g_async_initable_new_async;
   void function(GType objectType, const(char)* firstPropertyName, void* varArgs, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_async_initable_new_valist_async;
   void function(GType objectType, uint nParameters, GParameter* parameters, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_async_initable_newv_async;
@@ -182,14 +183,14 @@ __gshared extern(C)
   ObjectC* function(GAsyncInitable* initable, GAsyncResult* res, GError** _err) c_g_async_initable_new_finish;
 
   // AsyncResult
-  GType function() c_g_async_result_get_type;
+  extern(C) GType function() c_g_async_result_get_type;
   ObjectC* function(GAsyncResult* res) c_g_async_result_get_source_object;
   void* function(GAsyncResult* res) c_g_async_result_get_user_data;
   bool function(GAsyncResult* res, void* sourceTag) c_g_async_result_is_tagged;
   bool function(GAsyncResult* res, GError** _err) c_g_async_result_legacy_propagate_error;
 
   // BufferedInputStream
-  GType function() c_g_buffered_input_stream_get_type;
+  extern(C) GType function() c_g_buffered_input_stream_get_type;
   GInputStream* function(GInputStream* baseStream) c_g_buffered_input_stream_new;
   GInputStream* function(GInputStream* baseStream, size_t size) c_g_buffered_input_stream_new_sized;
   ptrdiff_t function(GBufferedInputStream* stream, ptrdiff_t count, GCancellable* cancellable, GError** _err) c_g_buffered_input_stream_fill;
@@ -203,7 +204,7 @@ __gshared extern(C)
   void function(GBufferedInputStream* stream, size_t size) c_g_buffered_input_stream_set_buffer_size;
 
   // BufferedOutputStream
-  GType function() c_g_buffered_output_stream_get_type;
+  extern(C) GType function() c_g_buffered_output_stream_get_type;
   GOutputStream* function(GOutputStream* baseStream) c_g_buffered_output_stream_new;
   GOutputStream* function(GOutputStream* baseStream, size_t size) c_g_buffered_output_stream_new_sized;
   bool function(GBufferedOutputStream* stream) c_g_buffered_output_stream_get_auto_grow;
@@ -212,17 +213,17 @@ __gshared extern(C)
   void function(GBufferedOutputStream* stream, size_t size) c_g_buffered_output_stream_set_buffer_size;
 
   // BytesIcon
-  GType function() c_g_bytes_icon_get_type;
+  extern(C) GType function() c_g_bytes_icon_get_type;
   GIcon* function(GBytes* bytes) c_g_bytes_icon_new;
   GBytes* function(GBytesIcon* icon) c_g_bytes_icon_get_bytes;
 
   // Cancellable
-  GType function() c_g_cancellable_get_type;
+  extern(C) GType function() c_g_cancellable_get_type;
   GCancellable* function() c_g_cancellable_new;
   GCancellable* function() c_g_cancellable_get_current;
   void function(GCancellable* cancellable) c_g_cancellable_cancel;
-  ulong function(GCancellable* cancellable, GCallback callback, void* data, GDestroyNotify dataDestroyFunc) c_g_cancellable_connect;
-  void function(GCancellable* cancellable, ulong handlerId) c_g_cancellable_disconnect;
+  gulong function(GCancellable* cancellable, GCallback callback, void* data, GDestroyNotify dataDestroyFunc) c_g_cancellable_connect;
+  void function(GCancellable* cancellable, gulong handlerId) c_g_cancellable_disconnect;
   int function(GCancellable* cancellable) c_g_cancellable_get_fd;
   bool function(GCancellable* cancellable) c_g_cancellable_is_cancelled;
   bool function(GCancellable* cancellable, GPollFD* pollfd) c_g_cancellable_make_pollfd;
@@ -234,29 +235,29 @@ __gshared extern(C)
   GSource* function(GCancellable* cancellable) c_g_cancellable_source_new;
 
   // CharsetConverter
-  GType function() c_g_charset_converter_get_type;
+  extern(C) GType function() c_g_charset_converter_get_type;
   GCharsetConverter* function(const(char)* toCharset, const(char)* fromCharset, GError** _err) c_g_charset_converter_new;
   uint function(GCharsetConverter* converter) c_g_charset_converter_get_num_fallbacks;
   bool function(GCharsetConverter* converter) c_g_charset_converter_get_use_fallback;
   void function(GCharsetConverter* converter, bool useFallback) c_g_charset_converter_set_use_fallback;
 
   // Converter
-  GType function() c_g_converter_get_type;
+  extern(C) GType function() c_g_converter_get_type;
   GConverterResult function(GConverter* converter, void* inbuf, size_t inbufSize, void* outbuf, size_t outbufSize, GConverterFlags flags, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_converter_convert;
   void function(GConverter* converter) c_g_converter_reset;
 
   // ConverterInputStream
-  GType function() c_g_converter_input_stream_get_type;
+  extern(C) GType function() c_g_converter_input_stream_get_type;
   GInputStream* function(GInputStream* baseStream, GConverter* converter) c_g_converter_input_stream_new;
   GConverter* function(GConverterInputStream* converterStream) c_g_converter_input_stream_get_converter;
 
   // ConverterOutputStream
-  GType function() c_g_converter_output_stream_get_type;
+  extern(C) GType function() c_g_converter_output_stream_get_type;
   GOutputStream* function(GOutputStream* baseStream, GConverter* converter) c_g_converter_output_stream_new;
   GConverter* function(GConverterOutputStream* converterStream) c_g_converter_output_stream_get_converter;
 
   // Credentials
-  GType function() c_g_credentials_get_type;
+  extern(C) GType function() c_g_credentials_get_type;
   GCredentials* function() c_g_credentials_new;
   void* function(GCredentials* credentials, GCredentialsType nativeType) c_g_credentials_get_native;
   int function(GCredentials* credentials, GError** _err) c_g_credentials_get_unix_pid;
@@ -267,28 +268,28 @@ __gshared extern(C)
   char* function(GCredentials* credentials) c_g_credentials_to_string;
 
   // DBusActionGroup
-  GType function() c_g_dbus_action_group_get_type;
+  extern(C) GType function() c_g_dbus_action_group_get_type;
   GDBusActionGroup* function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath) c_g_dbus_action_group_get;
 
   // DBusAnnotationInfo
-  GType function() c_g_dbus_annotation_info_get_type;
+  extern(C) GType function() c_g_dbus_annotation_info_get_type;
   GDBusAnnotationInfo* function(GDBusAnnotationInfo* info) c_g_dbus_annotation_info_ref;
   void function(GDBusAnnotationInfo* info) c_g_dbus_annotation_info_unref;
   const(char)* function(GDBusAnnotationInfo** annotations, const(char)* name) c_g_dbus_annotation_info_lookup;
 
   // DBusArgInfo
-  GType function() c_g_dbus_arg_info_get_type;
+  extern(C) GType function() c_g_dbus_arg_info_get_type;
   GDBusArgInfo* function(GDBusArgInfo* info) c_g_dbus_arg_info_ref;
   void function(GDBusArgInfo* info) c_g_dbus_arg_info_unref;
 
   // DBusAuthObserver
-  GType function() c_g_dbus_auth_observer_get_type;
+  extern(C) GType function() c_g_dbus_auth_observer_get_type;
   GDBusAuthObserver* function() c_g_dbus_auth_observer_new;
   bool function(GDBusAuthObserver* observer, const(char)* mechanism) c_g_dbus_auth_observer_allow_mechanism;
   bool function(GDBusAuthObserver* observer, GIOStream* stream, GCredentials* credentials) c_g_dbus_auth_observer_authorize_authenticated_peer;
 
   // DBusConnection
-  GType function() c_g_dbus_connection_get_type;
+  extern(C) GType function() c_g_dbus_connection_get_type;
   GDBusConnection* function(GAsyncResult* res, GError** _err) c_g_dbus_connection_new_finish;
   GDBusConnection* function(GAsyncResult* res, GError** _err) c_g_dbus_connection_new_for_address_finish;
   GDBusConnection* function(const(char)* address, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GError** _err) c_g_dbus_connection_new_for_address_sync;
@@ -338,14 +339,14 @@ __gshared extern(C)
   bool function(GDBusConnection* connection, uint registrationId) c_g_dbus_connection_unregister_subtree;
 
   // DBusInterface
-  GType function() c_g_dbus_interface_get_type;
+  extern(C) GType function() c_g_dbus_interface_get_type;
   GDBusObject* function(GDBusInterface* interface_) c_g_dbus_interface_dup_object;
   GDBusInterfaceInfo* function(GDBusInterface* interface_) c_g_dbus_interface_get_info;
   GDBusObject* function(GDBusInterface* interface_) c_g_dbus_interface_get_object;
   void function(GDBusInterface* interface_, GDBusObject* object) c_g_dbus_interface_set_object;
 
   // DBusInterfaceInfo
-  GType function() c_g_dbus_interface_info_get_type;
+  extern(C) GType function() c_g_dbus_interface_info_get_type;
   void function(GDBusInterfaceInfo* info) c_g_dbus_interface_info_cache_build;
   void function(GDBusInterfaceInfo* info) c_g_dbus_interface_info_cache_release;
   void function(GDBusInterfaceInfo* info, uint indent, GString* stringBuilder) c_g_dbus_interface_info_generate_xml;
@@ -356,7 +357,7 @@ __gshared extern(C)
   void function(GDBusInterfaceInfo* info) c_g_dbus_interface_info_unref;
 
   // DBusInterfaceSkeleton
-  GType function() c_g_dbus_interface_skeleton_get_type;
+  extern(C) GType function() c_g_dbus_interface_skeleton_get_type;
   bool function(GDBusInterfaceSkeleton* interface_, GDBusConnection* connection, const(char)* objectPath, GError** _err) c_g_dbus_interface_skeleton_export;
   void function(GDBusInterfaceSkeleton* interface_) c_g_dbus_interface_skeleton_flush;
   GDBusConnection* function(GDBusInterfaceSkeleton* interface_) c_g_dbus_interface_skeleton_get_connection;
@@ -372,11 +373,11 @@ __gshared extern(C)
   void function(GDBusInterfaceSkeleton* interface_, GDBusConnection* connection) c_g_dbus_interface_skeleton_unexport_from_connection;
 
   // DBusMenuModel
-  GType function() c_g_dbus_menu_model_get_type;
+  extern(C) GType function() c_g_dbus_menu_model_get_type;
   GDBusMenuModel* function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath) c_g_dbus_menu_model_get;
 
   // DBusMessage
-  GType function() c_g_dbus_message_get_type;
+  extern(C) GType function() c_g_dbus_message_get_type;
   GDBusMessage* function() c_g_dbus_message_new;
   GDBusMessage* function(ubyte* blob, size_t blobLen, GDBusCapabilityFlags capabilities, GError** _err) c_g_dbus_message_new_from_blob;
   GDBusMessage* function(const(char)* name, const(char)* path, const(char)* interface_, const(char)* method) c_g_dbus_message_new_method_call;
@@ -429,12 +430,12 @@ __gshared extern(C)
   bool function(GDBusMessage* message, GError** _err) c_g_dbus_message_to_gerror;
 
   // DBusMethodInfo
-  GType function() c_g_dbus_method_info_get_type;
+  extern(C) GType function() c_g_dbus_method_info_get_type;
   GDBusMethodInfo* function(GDBusMethodInfo* info) c_g_dbus_method_info_ref;
   void function(GDBusMethodInfo* info) c_g_dbus_method_info_unref;
 
   // DBusMethodInvocation
-  GType function() c_g_dbus_method_invocation_get_type;
+  extern(C) GType function() c_g_dbus_method_invocation_get_type;
   GDBusConnection* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_connection;
   const(char)* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_interface_name;
   GDBusMessage* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_message;
@@ -455,7 +456,7 @@ __gshared extern(C)
   void function(GDBusMethodInvocation* invocation, GError* error) c_g_dbus_method_invocation_take_error;
 
   // DBusNodeInfo
-  GType function() c_g_dbus_node_info_get_type;
+  extern(C) GType function() c_g_dbus_node_info_get_type;
   GDBusNodeInfo* function(const(char)* xmlData, GError** _err) c_g_dbus_node_info_new_for_xml;
   void function(GDBusNodeInfo* info, uint indent, GString* stringBuilder) c_g_dbus_node_info_generate_xml;
   GDBusInterfaceInfo* function(GDBusNodeInfo* info, const(char)* name) c_g_dbus_node_info_lookup_interface;
@@ -463,20 +464,20 @@ __gshared extern(C)
   void function(GDBusNodeInfo* info) c_g_dbus_node_info_unref;
 
   // DBusObject
-  GType function() c_g_dbus_object_get_type;
+  extern(C) GType function() c_g_dbus_object_get_type;
   GDBusInterface* function(GDBusObject* object, const(char)* interfaceName) c_g_dbus_object_get_interface;
   GList* function(GDBusObject* object) c_g_dbus_object_get_interfaces;
   const(char)* function(GDBusObject* object) c_g_dbus_object_get_object_path;
 
   // DBusObjectManager
-  GType function() c_g_dbus_object_manager_get_type;
+  extern(C) GType function() c_g_dbus_object_manager_get_type;
   GDBusInterface* function(GDBusObjectManager* manager, const(char)* objectPath, const(char)* interfaceName) c_g_dbus_object_manager_get_interface;
   GDBusObject* function(GDBusObjectManager* manager, const(char)* objectPath) c_g_dbus_object_manager_get_object;
   const(char)* function(GDBusObjectManager* manager) c_g_dbus_object_manager_get_object_path;
   GList* function(GDBusObjectManager* manager) c_g_dbus_object_manager_get_objects;
 
   // DBusObjectManagerClient
-  GType function() c_g_dbus_object_manager_client_get_type;
+  extern(C) GType function() c_g_dbus_object_manager_client_get_type;
   GDBusObjectManager* function(GAsyncResult* res, GError** _err) c_g_dbus_object_manager_client_new_finish;
   GDBusObjectManager* function(GAsyncResult* res, GError** _err) c_g_dbus_object_manager_client_new_for_bus_finish;
   GDBusObjectManager* function(GBusType busType, GDBusObjectManagerClientFlags flags, const(char)* name, const(char)* objectPath, GDBusProxyTypeFunc getProxyTypeFunc, void* getProxyTypeUserData, GDestroyNotify getProxyTypeDestroyNotify, GCancellable* cancellable, GError** _err) c_g_dbus_object_manager_client_new_for_bus_sync;
@@ -489,7 +490,7 @@ __gshared extern(C)
   char* function(GDBusObjectManagerClient* manager) c_g_dbus_object_manager_client_get_name_owner;
 
   // DBusObjectManagerServer
-  GType function() c_g_dbus_object_manager_server_get_type;
+  extern(C) GType function() c_g_dbus_object_manager_server_get_type;
   GDBusObjectManagerServer* function(const(char)* objectPath) c_g_dbus_object_manager_server_new;
   void function(GDBusObjectManagerServer* manager, GDBusObjectSkeleton* object) c_g_dbus_object_manager_server_export;
   void function(GDBusObjectManagerServer* manager, GDBusObjectSkeleton* object) c_g_dbus_object_manager_server_export_uniquely;
@@ -499,12 +500,12 @@ __gshared extern(C)
   bool function(GDBusObjectManagerServer* manager, const(char)* objectPath) c_g_dbus_object_manager_server_unexport;
 
   // DBusObjectProxy
-  GType function() c_g_dbus_object_proxy_get_type;
+  extern(C) GType function() c_g_dbus_object_proxy_get_type;
   GDBusObjectProxy* function(GDBusConnection* connection, const(char)* objectPath) c_g_dbus_object_proxy_new;
   GDBusConnection* function(GDBusObjectProxy* proxy) c_g_dbus_object_proxy_get_connection;
 
   // DBusObjectSkeleton
-  GType function() c_g_dbus_object_skeleton_get_type;
+  extern(C) GType function() c_g_dbus_object_skeleton_get_type;
   GDBusObjectSkeleton* function(const(char)* objectPath) c_g_dbus_object_skeleton_new;
   void function(GDBusObjectSkeleton* object, GDBusInterfaceSkeleton* interface_) c_g_dbus_object_skeleton_add_interface;
   void function(GDBusObjectSkeleton* object) c_g_dbus_object_skeleton_flush;
@@ -513,12 +514,12 @@ __gshared extern(C)
   void function(GDBusObjectSkeleton* object, const(char)* objectPath) c_g_dbus_object_skeleton_set_object_path;
 
   // DBusPropertyInfo
-  GType function() c_g_dbus_property_info_get_type;
+  extern(C) GType function() c_g_dbus_property_info_get_type;
   GDBusPropertyInfo* function(GDBusPropertyInfo* info) c_g_dbus_property_info_ref;
   void function(GDBusPropertyInfo* info) c_g_dbus_property_info_unref;
 
   // DBusProxy
-  GType function() c_g_dbus_proxy_get_type;
+  extern(C) GType function() c_g_dbus_proxy_get_type;
   GDBusProxy* function(GAsyncResult* res, GError** _err) c_g_dbus_proxy_new_finish;
   GDBusProxy* function(GAsyncResult* res, GError** _err) c_g_dbus_proxy_new_for_bus_finish;
   GDBusProxy* function(GBusType busType, GDBusProxyFlags flags, GDBusInterfaceInfo* info, const(char)* name, const(char)* objectPath, const(char)* interfaceName, GCancellable* cancellable, GError** _err) c_g_dbus_proxy_new_for_bus_sync;
@@ -546,7 +547,7 @@ __gshared extern(C)
   void function(GDBusProxy* proxy, GDBusInterfaceInfo* info) c_g_dbus_proxy_set_interface_info;
 
   // DBusServer
-  GType function() c_g_dbus_server_get_type;
+  extern(C) GType function() c_g_dbus_server_get_type;
   GDBusServer* function(const(char)* address, GDBusServerFlags flags, const(char)* guid, GDBusAuthObserver* observer, GCancellable* cancellable, GError** _err) c_g_dbus_server_new_sync;
   const(char)* function(GDBusServer* server) c_g_dbus_server_get_client_address;
   GDBusServerFlags function(GDBusServer* server) c_g_dbus_server_get_flags;
@@ -556,12 +557,12 @@ __gshared extern(C)
   void function(GDBusServer* server) c_g_dbus_server_stop;
 
   // DBusSignalInfo
-  GType function() c_g_dbus_signal_info_get_type;
+  extern(C) GType function() c_g_dbus_signal_info_get_type;
   GDBusSignalInfo* function(GDBusSignalInfo* info) c_g_dbus_signal_info_ref;
   void function(GDBusSignalInfo* info) c_g_dbus_signal_info_unref;
 
   // DataInputStream
-  GType function() c_g_data_input_stream_get_type;
+  extern(C) GType function() c_g_data_input_stream_get_type;
   GDataInputStream* function(GInputStream* baseStream) c_g_data_input_stream_new;
   GDataStreamByteOrder function(GDataInputStream* stream) c_g_data_input_stream_get_byte_order;
   GDataStreamNewlineType function(GDataInputStream* stream) c_g_data_input_stream_get_newline_type;
@@ -587,7 +588,7 @@ __gshared extern(C)
   void function(GDataInputStream* stream, GDataStreamNewlineType type) c_g_data_input_stream_set_newline_type;
 
   // DataOutputStream
-  GType function() c_g_data_output_stream_get_type;
+  extern(C) GType function() c_g_data_output_stream_get_type;
   GDataOutputStream* function(GOutputStream* baseStream) c_g_data_output_stream_new;
   GDataStreamByteOrder function(GDataOutputStream* stream) c_g_data_output_stream_get_byte_order;
   bool function(GDataOutputStream* stream, ubyte data, GCancellable* cancellable, GError** _err) c_g_data_output_stream_put_byte;
@@ -601,7 +602,7 @@ __gshared extern(C)
   void function(GDataOutputStream* stream, GDataStreamByteOrder order) c_g_data_output_stream_set_byte_order;
 
   // DatagramBased
-  GType function() c_g_datagram_based_get_type;
+  extern(C) GType function() c_g_datagram_based_get_type;
   GIOCondition function(GDatagramBased* datagramBased, GIOCondition condition) c_g_datagram_based_condition_check;
   bool function(GDatagramBased* datagramBased, GIOCondition condition, long timeout, GCancellable* cancellable, GError** _err) c_g_datagram_based_condition_wait;
   GSource* function(GDatagramBased* datagramBased, GIOCondition condition, GCancellable* cancellable) c_g_datagram_based_create_source;
@@ -609,17 +610,17 @@ __gshared extern(C)
   int function(GDatagramBased* datagramBased, GOutputMessage* messages, uint numMessages, int flags, long timeout, GCancellable* cancellable, GError** _err) c_g_datagram_based_send_messages;
 
   // DebugController
-  GType function() c_g_debug_controller_get_type;
+  extern(C) GType function() c_g_debug_controller_get_type;
   bool function(GDebugController* self) c_g_debug_controller_get_debug_enabled;
   void function(GDebugController* self, bool debugEnabled) c_g_debug_controller_set_debug_enabled;
 
   // DebugControllerDBus
-  GType function() c_g_debug_controller_dbus_get_type;
+  extern(C) GType function() c_g_debug_controller_dbus_get_type;
   GDebugControllerDBus* function(GDBusConnection* connection, GCancellable* cancellable, GError** _err) c_g_debug_controller_dbus_new;
   void function(GDebugControllerDBus* self) c_g_debug_controller_dbus_stop;
 
   // DesktopAppInfo
-  GType function() c_g_desktop_app_info_get_type;
+  extern(C) GType function() c_g_desktop_app_info_get_type;
   GDesktopAppInfo* function(const(char)* desktopId) c_g_desktop_app_info_new;
   GDesktopAppInfo* function(const(char)* filename) c_g_desktop_app_info_new_from_filename;
   GDesktopAppInfo* function(GKeyFile* keyFile) c_g_desktop_app_info_new_from_keyfile;
@@ -646,11 +647,11 @@ __gshared extern(C)
   const(char*)* function(GDesktopAppInfo* info) c_g_desktop_app_info_list_actions;
 
   // DesktopAppInfoLookup
-  GType function() c_g_desktop_app_info_lookup_get_type;
+  extern(C) GType function() c_g_desktop_app_info_lookup_get_type;
   GAppInfo* function(GDesktopAppInfoLookup* lookup, const(char)* uriScheme) c_g_desktop_app_info_lookup_get_default_for_uri_scheme;
 
   // Drive
-  GType function() c_g_drive_get_type;
+  extern(C) GType function() c_g_drive_get_type;
   bool function(GDrive* drive) c_g_drive_can_eject;
   bool function(GDrive* drive) c_g_drive_can_poll_for_media;
   bool function(GDrive* drive) c_g_drive_can_start;
@@ -681,7 +682,7 @@ __gshared extern(C)
   bool function(GDrive* drive, GAsyncResult* result, GError** _err) c_g_drive_stop_finish;
 
   // DtlsClientConnection
-  GType function() c_g_dtls_client_connection_get_type;
+  extern(C) GType function() c_g_dtls_client_connection_get_type;
   GDatagramBased* function(GDatagramBased* baseSocket, GSocketConnectable* serverIdentity, GError** _err) c_g_dtls_client_connection_new;
   GList* function(GDtlsClientConnection* conn) c_g_dtls_client_connection_get_accepted_cas;
   GSocketConnectable* function(GDtlsClientConnection* conn) c_g_dtls_client_connection_get_server_identity;
@@ -690,7 +691,7 @@ __gshared extern(C)
   void function(GDtlsClientConnection* conn, GTlsCertificateFlags flags) c_g_dtls_client_connection_set_validation_flags;
 
   // DtlsConnection
-  GType function() c_g_dtls_connection_get_type;
+  extern(C) GType function() c_g_dtls_connection_get_type;
   bool function(GDtlsConnection* conn, GCancellable* cancellable, GError** _err) c_g_dtls_connection_close;
   void function(GDtlsConnection* conn, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dtls_connection_close_async;
   bool function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) c_g_dtls_connection_close_finish;
@@ -720,18 +721,18 @@ __gshared extern(C)
   bool function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) c_g_dtls_connection_shutdown_finish;
 
   // DtlsServerConnection
-  GType function() c_g_dtls_server_connection_get_type;
+  extern(C) GType function() c_g_dtls_server_connection_get_type;
   GDatagramBased* function(GDatagramBased* baseSocket, GTlsCertificate* certificate, GError** _err) c_g_dtls_server_connection_new;
 
   // Emblem
-  GType function() c_g_emblem_get_type;
+  extern(C) GType function() c_g_emblem_get_type;
   GEmblem* function(GIcon* icon) c_g_emblem_new;
   GEmblem* function(GIcon* icon, GEmblemOrigin origin) c_g_emblem_new_with_origin;
   GIcon* function(GEmblem* emblem) c_g_emblem_get_icon;
   GEmblemOrigin function(GEmblem* emblem) c_g_emblem_get_origin;
 
   // EmblemedIcon
-  GType function() c_g_emblemed_icon_get_type;
+  extern(C) GType function() c_g_emblemed_icon_get_type;
   GIcon* function(GIcon* icon, GEmblem* emblem) c_g_emblemed_icon_new;
   void function(GEmblemedIcon* emblemed, GEmblem* emblem) c_g_emblemed_icon_add_emblem;
   void function(GEmblemedIcon* emblemed) c_g_emblemed_icon_clear_emblems;
@@ -739,7 +740,7 @@ __gshared extern(C)
   GIcon* function(GEmblemedIcon* emblemed) c_g_emblemed_icon_get_icon;
 
   // File
-  GType function() c_g_file_get_type;
+  extern(C) GType function() c_g_file_get_type;
   GFile* function(const(char)* firstElement,  ...) c_g_file_new_build_filename;
   GFile* function(const(char*)* args) c_g_file_new_build_filenamev;
   GFile* function(const(char)* arg) c_g_file_new_for_commandline_arg;
@@ -883,7 +884,7 @@ __gshared extern(C)
   bool function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_unmount_mountable_with_operation_finish;
 
   // FileAttributeInfoList
-  GType function() c_g_file_attribute_info_list_get_type;
+  extern(C) GType function() c_g_file_attribute_info_list_get_type;
   GFileAttributeInfoList* function() c_g_file_attribute_info_list_new;
   void function(GFileAttributeInfoList* list, const(char)* name, GFileAttributeType type, GFileAttributeInfoFlags flags) c_g_file_attribute_info_list_add;
   GFileAttributeInfoList* function(GFileAttributeInfoList* list) c_g_file_attribute_info_list_dup;
@@ -892,7 +893,7 @@ __gshared extern(C)
   void function(GFileAttributeInfoList* list) c_g_file_attribute_info_list_unref;
 
   // FileAttributeMatcher
-  GType function() c_g_file_attribute_matcher_get_type;
+  extern(C) GType function() c_g_file_attribute_matcher_get_type;
   GFileAttributeMatcher* function(const(char)* attributes) c_g_file_attribute_matcher_new;
   bool function(GFileAttributeMatcher* matcher, const(char)* ns) c_g_file_attribute_matcher_enumerate_namespace;
   const(char)* function(GFileAttributeMatcher* matcher) c_g_file_attribute_matcher_enumerate_next;
@@ -904,11 +905,11 @@ __gshared extern(C)
   void function(GFileAttributeMatcher* matcher) c_g_file_attribute_matcher_unref;
 
   // FileDescriptorBased
-  GType function() c_g_file_descriptor_based_get_type;
+  extern(C) GType function() c_g_file_descriptor_based_get_type;
   int function(GFileDescriptorBased* fdBased) c_g_file_descriptor_based_get_fd;
 
   // FileEnumerator
-  GType function() c_g_file_enumerator_get_type;
+  extern(C) GType function() c_g_file_enumerator_get_type;
   bool function(GFileEnumerator* enumerator, GCancellable* cancellable, GError** _err) c_g_file_enumerator_close;
   void function(GFileEnumerator* enumerator, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_enumerator_close_async;
   bool function(GFileEnumerator* enumerator, GAsyncResult* result, GError** _err) c_g_file_enumerator_close_finish;
@@ -923,19 +924,19 @@ __gshared extern(C)
   void function(GFileEnumerator* enumerator, bool pending) c_g_file_enumerator_set_pending;
 
   // FileIOStream
-  GType function() c_g_file_io_stream_get_type;
+  extern(C) GType function() c_g_file_io_stream_get_type;
   char* function(GFileIOStream* stream) c_g_file_io_stream_get_etag;
   GFileInfo* function(GFileIOStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) c_g_file_io_stream_query_info;
   void function(GFileIOStream* stream, const(char)* attributes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_io_stream_query_info_async;
   GFileInfo* function(GFileIOStream* stream, GAsyncResult* result, GError** _err) c_g_file_io_stream_query_info_finish;
 
   // FileIcon
-  GType function() c_g_file_icon_get_type;
+  extern(C) GType function() c_g_file_icon_get_type;
   GIcon* function(GFile* file) c_g_file_icon_new;
   GFile* function(GFileIcon* icon) c_g_file_icon_get_file;
 
   // FileInfo
-  GType function() c_g_file_info_get_type;
+  extern(C) GType function() c_g_file_info_get_type;
   GFileInfo* function() c_g_file_info_new;
   void function(GFileInfo* info) c_g_file_info_clear_status;
   void function(GFileInfo* srcInfo, GFileInfo* destInfo) c_g_file_info_copy_into;
@@ -1009,40 +1010,40 @@ __gshared extern(C)
   void function(GFileInfo* info) c_g_file_info_unset_attribute_mask;
 
   // FileInputStream
-  GType function() c_g_file_input_stream_get_type;
+  extern(C) GType function() c_g_file_input_stream_get_type;
   GFileInfo* function(GFileInputStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) c_g_file_input_stream_query_info;
   void function(GFileInputStream* stream, const(char)* attributes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_input_stream_query_info_async;
   GFileInfo* function(GFileInputStream* stream, GAsyncResult* result, GError** _err) c_g_file_input_stream_query_info_finish;
 
   // FileMonitor
-  GType function() c_g_file_monitor_get_type;
+  extern(C) GType function() c_g_file_monitor_get_type;
   bool function(GFileMonitor* monitor) c_g_file_monitor_cancel;
   void function(GFileMonitor* monitor, GFile* child, GFile* otherFile, GFileMonitorEvent eventType) c_g_file_monitor_emit_event;
   bool function(GFileMonitor* monitor) c_g_file_monitor_is_cancelled;
   void function(GFileMonitor* monitor, int limitMsecs) c_g_file_monitor_set_rate_limit;
 
   // FileOutputStream
-  GType function() c_g_file_output_stream_get_type;
+  extern(C) GType function() c_g_file_output_stream_get_type;
   char* function(GFileOutputStream* stream) c_g_file_output_stream_get_etag;
   GFileInfo* function(GFileOutputStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) c_g_file_output_stream_query_info;
   void function(GFileOutputStream* stream, const(char)* attributes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_output_stream_query_info_async;
   GFileInfo* function(GFileOutputStream* stream, GAsyncResult* result, GError** _err) c_g_file_output_stream_query_info_finish;
 
   // FilenameCompleter
-  GType function() c_g_filename_completer_get_type;
+  extern(C) GType function() c_g_filename_completer_get_type;
   GFilenameCompleter* function() c_g_filename_completer_new;
   char* function(GFilenameCompleter* completer, const(char)* initialText) c_g_filename_completer_get_completion_suffix;
   char** function(GFilenameCompleter* completer, const(char)* initialText) c_g_filename_completer_get_completions;
   void function(GFilenameCompleter* completer, bool dirsOnly) c_g_filename_completer_set_dirs_only;
 
   // FilterInputStream
-  GType function() c_g_filter_input_stream_get_type;
+  extern(C) GType function() c_g_filter_input_stream_get_type;
   GInputStream* function(GFilterInputStream* stream) c_g_filter_input_stream_get_base_stream;
   bool function(GFilterInputStream* stream) c_g_filter_input_stream_get_close_base_stream;
   void function(GFilterInputStream* stream, bool closeBase) c_g_filter_input_stream_set_close_base_stream;
 
   // FilterOutputStream
-  GType function() c_g_filter_output_stream_get_type;
+  extern(C) GType function() c_g_filter_output_stream_get_type;
   GOutputStream* function(GFilterOutputStream* stream) c_g_filter_output_stream_get_base_stream;
   bool function(GFilterOutputStream* stream) c_g_filter_output_stream_get_close_base_stream;
   void function(GFilterOutputStream* stream, bool closeBase) c_g_filter_output_stream_set_close_base_stream;
@@ -1164,7 +1165,7 @@ __gshared extern(C)
   GIOExtensionPoint* function(const(char)* name) c_g_io_extension_point_register;
 
   // IOModule
-  GType function() c_g_io_module_get_type;
+  extern(C) GType function() c_g_io_module_get_type;
   GIOModule* function(const(char)* filename) c_g_io_module_new;
   char** function() c_g_io_module_query;
   void function(GIOModule* module_) c_g_io_module_load;
@@ -1180,7 +1181,7 @@ __gshared extern(C)
   void function(GIOSchedulerJob* job, GSourceFunc func, void* userData, GDestroyNotify notify) c_g_io_scheduler_job_send_to_mainloop_async;
 
   // IOStream
-  GType function() c_g_io_stream_get_type;
+  extern(C) GType function() c_g_io_stream_get_type;
   bool function(GAsyncResult* result, GError** _err) c_g_io_stream_splice_finish;
   void function(GIOStream* stream) c_g_io_stream_clear_pending;
   bool function(GIOStream* stream, GCancellable* cancellable, GError** _err) c_g_io_stream_close;
@@ -1194,7 +1195,7 @@ __gshared extern(C)
   void function(GIOStream* stream1, GIOStream* stream2, GIOStreamSpliceFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_io_stream_splice_async;
 
   // Icon
-  GType function() c_g_icon_get_type;
+  extern(C) GType function() c_g_icon_get_type;
   GIcon* function(VariantC* value) c_g_icon_deserialize;
   GIcon* function(const(char)* str, GError** _err) c_g_icon_new_for_string;
   bool function(GIcon* icon1, GIcon* icon2) c_g_icon_equal;
@@ -1203,7 +1204,7 @@ __gshared extern(C)
   char* function(GIcon* icon) c_g_icon_to_string;
 
   // InetAddress
-  GType function() c_g_inet_address_get_type;
+  extern(C) GType function() c_g_inet_address_get_type;
   GInetAddress* function(GSocketFamily family) c_g_inet_address_new_any;
   GInetAddress* function(const(ubyte)* bytes, GSocketFamily family) c_g_inet_address_new_from_bytes;
   GInetAddress* function(const(char)* string_) c_g_inet_address_new_from_string;
@@ -1225,7 +1226,7 @@ __gshared extern(C)
   char* function(GInetAddress* address) c_g_inet_address_to_string;
 
   // InetAddressMask
-  GType function() c_g_inet_address_mask_get_type;
+  extern(C) GType function() c_g_inet_address_mask_get_type;
   GInetAddressMask* function(GInetAddress* addr, uint length, GError** _err) c_g_inet_address_mask_new;
   GInetAddressMask* function(const(char)* maskString, GError** _err) c_g_inet_address_mask_new_from_string;
   bool function(GInetAddressMask* mask, GInetAddressMask* mask2) c_g_inet_address_mask_equal;
@@ -1236,7 +1237,7 @@ __gshared extern(C)
   char* function(GInetAddressMask* mask) c_g_inet_address_mask_to_string;
 
   // InetSocketAddress
-  GType function() c_g_inet_socket_address_get_type;
+  extern(C) GType function() c_g_inet_socket_address_get_type;
   GSocketAddress* function(GInetAddress* address, ushort port) c_g_inet_socket_address_new;
   GSocketAddress* function(const(char)* address, uint port) c_g_inet_socket_address_new_from_string;
   GInetAddress* function(GInetSocketAddress* address) c_g_inet_socket_address_get_address;
@@ -1245,14 +1246,14 @@ __gshared extern(C)
   uint function(GInetSocketAddress* address) c_g_inet_socket_address_get_scope_id;
 
   // Initable
-  GType function() c_g_initable_get_type;
+  extern(C) GType function() c_g_initable_get_type;
   ObjectC* function(GType objectType, GCancellable* cancellable, GError** error, const(char)* firstPropertyName,  ...) c_g_initable_new;
   ObjectC* function(GType objectType, const(char)* firstPropertyName, void* varArgs, GCancellable* cancellable, GError** _err) c_g_initable_new_valist;
   ObjectC* function(GType objectType, uint nParameters, GParameter* parameters, GCancellable* cancellable, GError** _err) c_g_initable_newv;
   bool function(GInitable* initable, GCancellable* cancellable, GError** _err) c_g_initable_init;
 
   // InputStream
-  GType function() c_g_input_stream_get_type;
+  extern(C) GType function() c_g_input_stream_get_type;
   void function(GInputStream* stream) c_g_input_stream_clear_pending;
   bool function(GInputStream* stream, GCancellable* cancellable, GError** _err) c_g_input_stream_close;
   void function(GInputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_input_stream_close_async;
@@ -1274,7 +1275,7 @@ __gshared extern(C)
   ptrdiff_t function(GInputStream* stream, GAsyncResult* result, GError** _err) c_g_input_stream_skip_finish;
 
   // ListModel
-  GType function() c_g_list_model_get_type;
+  extern(C) GType function() c_g_list_model_get_type;
   void* function(GListModel* list, uint position) c_g_list_model_get_item;
   GType function(GListModel* list) c_g_list_model_get_item_type;
   uint function(GListModel* list) c_g_list_model_get_n_items;
@@ -1282,7 +1283,7 @@ __gshared extern(C)
   void function(GListModel* list, uint position, uint removed, uint added) c_g_list_model_items_changed;
 
   // ListStore
-  GType function() c_g_list_store_get_type;
+  extern(C) GType function() c_g_list_store_get_type;
   GListStore* function(GType itemType) c_g_list_store_new;
   void function(GListStore* store, ObjectC* item) c_g_list_store_append;
   bool function(GListStore* store, ObjectC* item, uint* position) c_g_list_store_find;
@@ -1296,13 +1297,13 @@ __gshared extern(C)
   void function(GListStore* store, uint position, uint nRemovals, void** additions, uint nAdditions) c_g_list_store_splice;
 
   // LoadableIcon
-  GType function() c_g_loadable_icon_get_type;
+  extern(C) GType function() c_g_loadable_icon_get_type;
   GInputStream* function(GLoadableIcon* icon, int size, char** type, GCancellable* cancellable, GError** _err) c_g_loadable_icon_load;
   void function(GLoadableIcon* icon, int size, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_loadable_icon_load_async;
   GInputStream* function(GLoadableIcon* icon, GAsyncResult* res, char** type, GError** _err) c_g_loadable_icon_load_finish;
 
   // MemoryInputStream
-  GType function() c_g_memory_input_stream_get_type;
+  extern(C) GType function() c_g_memory_input_stream_get_type;
   GInputStream* function() c_g_memory_input_stream_new;
   GInputStream* function(GBytes* bytes) c_g_memory_input_stream_new_from_bytes;
   GInputStream* function(void* data, ptrdiff_t len, GDestroyNotify destroy) c_g_memory_input_stream_new_from_data;
@@ -1310,11 +1311,11 @@ __gshared extern(C)
   void function(GMemoryInputStream* stream, void* data, ptrdiff_t len, GDestroyNotify destroy) c_g_memory_input_stream_add_data;
 
   // MemoryMonitor
-  GType function() c_g_memory_monitor_get_type;
+  extern(C) GType function() c_g_memory_monitor_get_type;
   GMemoryMonitor* function() c_g_memory_monitor_dup_default;
 
   // MemoryOutputStream
-  GType function() c_g_memory_output_stream_get_type;
+  extern(C) GType function() c_g_memory_output_stream_get_type;
   GOutputStream* function(void* data, size_t size, GReallocFunc reallocFunction, GDestroyNotify destroyFunction) c_g_memory_output_stream_new;
   GOutputStream* function() c_g_memory_output_stream_new_resizable;
   void* function(GMemoryOutputStream* ostream) c_g_memory_output_stream_get_data;
@@ -1324,7 +1325,7 @@ __gshared extern(C)
   void* function(GMemoryOutputStream* ostream) c_g_memory_output_stream_steal_data;
 
   // Menu
-  GType function() c_g_menu_get_type;
+  extern(C) GType function() c_g_menu_get_type;
   GMenu* function() c_g_menu_new;
   void function(GMenu* menu, const(char)* label, const(char)* detailedAction) c_g_menu_append;
   void function(GMenu* menu, GMenuItem* item) c_g_menu_append_item;
@@ -1343,14 +1344,14 @@ __gshared extern(C)
   void function(GMenu* menu) c_g_menu_remove_all;
 
   // MenuAttributeIter
-  GType function() c_g_menu_attribute_iter_get_type;
+  extern(C) GType function() c_g_menu_attribute_iter_get_type;
   const(char)* function(GMenuAttributeIter* iter) c_g_menu_attribute_iter_get_name;
   bool function(GMenuAttributeIter* iter, const(char*)* outName, VariantC** value) c_g_menu_attribute_iter_get_next;
   VariantC* function(GMenuAttributeIter* iter) c_g_menu_attribute_iter_get_value;
   bool function(GMenuAttributeIter* iter) c_g_menu_attribute_iter_next;
 
   // MenuItem
-  GType function() c_g_menu_item_get_type;
+  extern(C) GType function() c_g_menu_item_get_type;
   GMenuItem* function(const(char)* label, const(char)* detailedAction) c_g_menu_item_new;
   GMenuItem* function(GMenuModel* model, int itemIndex) c_g_menu_item_new_from_model;
   GMenuItem* function(const(char)* label, GMenuModel* section) c_g_menu_item_new_section;
@@ -1370,14 +1371,14 @@ __gshared extern(C)
   void function(GMenuItem* menuItem, GMenuModel* submenu) c_g_menu_item_set_submenu;
 
   // MenuLinkIter
-  GType function() c_g_menu_link_iter_get_type;
+  extern(C) GType function() c_g_menu_link_iter_get_type;
   const(char)* function(GMenuLinkIter* iter) c_g_menu_link_iter_get_name;
   bool function(GMenuLinkIter* iter, const(char*)* outLink, GMenuModel** value) c_g_menu_link_iter_get_next;
   GMenuModel* function(GMenuLinkIter* iter) c_g_menu_link_iter_get_value;
   bool function(GMenuLinkIter* iter) c_g_menu_link_iter_next;
 
   // MenuModel
-  GType function() c_g_menu_model_get_type;
+  extern(C) GType function() c_g_menu_model_get_type;
   bool function(GMenuModel* model, int itemIndex, const(char)* attribute, const(char)* formatString,  ...) c_g_menu_model_get_item_attribute;
   VariantC* function(GMenuModel* model, int itemIndex, const(char)* attribute, const(GVariantType)* expectedType) c_g_menu_model_get_item_attribute_value;
   GMenuModel* function(GMenuModel* model, int itemIndex, const(char)* link) c_g_menu_model_get_item_link;
@@ -1388,7 +1389,7 @@ __gshared extern(C)
   GMenuLinkIter* function(GMenuModel* model, int itemIndex) c_g_menu_model_iterate_item_links;
 
   // Mount
-  GType function() c_g_mount_get_type;
+  extern(C) GType function() c_g_mount_get_type;
   bool function(GMount* mount) c_g_mount_can_eject;
   bool function(GMount* mount) c_g_mount_can_unmount;
   void function(GMount* mount, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_mount_eject;
@@ -1418,7 +1419,7 @@ __gshared extern(C)
   void function(GMount* mount) c_g_mount_unshadow;
 
   // MountOperation
-  GType function() c_g_mount_operation_get_type;
+  extern(C) GType function() c_g_mount_operation_get_type;
   GMountOperation* function() c_g_mount_operation_new;
   bool function(GMountOperation* op) c_g_mount_operation_get_anonymous;
   int function(GMountOperation* op) c_g_mount_operation_get_choice;
@@ -1441,14 +1442,14 @@ __gshared extern(C)
   void function(GMountOperation* op, const(char)* username) c_g_mount_operation_set_username;
 
   // NativeSocketAddress
-  GType function() c_g_native_socket_address_get_type;
+  extern(C) GType function() c_g_native_socket_address_get_type;
   GSocketAddress* function(void* native, size_t len) c_g_native_socket_address_new;
 
   // NativeVolumeMonitor
-  GType function() c_g_native_volume_monitor_get_type;
+  extern(C) GType function() c_g_native_volume_monitor_get_type;
 
   // NetworkAddress
-  GType function() c_g_network_address_get_type;
+  extern(C) GType function() c_g_network_address_get_type;
   GSocketConnectable* function(const(char)* hostname, ushort port) c_g_network_address_new;
   GSocketConnectable* function(ushort port) c_g_network_address_new_loopback;
   GSocketConnectable* function(const(char)* hostAndPort, ushort defaultPort, GError** _err) c_g_network_address_parse;
@@ -1458,7 +1459,7 @@ __gshared extern(C)
   const(char)* function(GNetworkAddress* addr) c_g_network_address_get_scheme;
 
   // NetworkMonitor
-  GType function() c_g_network_monitor_get_type;
+  extern(C) GType function() c_g_network_monitor_get_type;
   GNetworkMonitor* function() c_g_network_monitor_get_default;
   bool function(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GError** _err) c_g_network_monitor_can_reach;
   void function(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_network_monitor_can_reach_async;
@@ -1468,7 +1469,7 @@ __gshared extern(C)
   bool function(GNetworkMonitor* monitor) c_g_network_monitor_get_network_metered;
 
   // NetworkService
-  GType function() c_g_network_service_get_type;
+  extern(C) GType function() c_g_network_service_get_type;
   GSocketConnectable* function(const(char)* service, const(char)* protocol, const(char)* domain) c_g_network_service_new;
   const(char)* function(GNetworkService* srv) c_g_network_service_get_domain;
   const(char)* function(GNetworkService* srv) c_g_network_service_get_protocol;
@@ -1477,7 +1478,7 @@ __gshared extern(C)
   void function(GNetworkService* srv, const(char)* scheme) c_g_network_service_set_scheme;
 
   // Notification
-  GType function() c_g_notification_get_type;
+  extern(C) GType function() c_g_notification_get_type;
   GNotification* function(const(char)* title) c_g_notification_new;
   void function(GNotification* notification, const(char)* label, const(char)* detailedAction) c_g_notification_add_button;
   void function(GNotification* notification, const(char)* label, const(char)* action, const(char)* targetFormat,  ...) c_g_notification_add_button_with_target;
@@ -1493,7 +1494,7 @@ __gshared extern(C)
   void function(GNotification* notification, bool urgent) c_g_notification_set_urgent;
 
   // OutputStream
-  GType function() c_g_output_stream_get_type;
+  extern(C) GType function() c_g_output_stream_get_type;
   void function(GOutputStream* stream) c_g_output_stream_clear_pending;
   bool function(GOutputStream* stream, GCancellable* cancellable, GError** _err) c_g_output_stream_close;
   void function(GOutputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_output_stream_close_async;
@@ -1527,7 +1528,7 @@ __gshared extern(C)
   bool function(GOutputStream* stream, GAsyncResult* result, size_t* bytesWritten, GError** _err) c_g_output_stream_writev_finish;
 
   // Permission
-  GType function() c_g_permission_get_type;
+  extern(C) GType function() c_g_permission_get_type;
   bool function(GPermission* permission, GCancellable* cancellable, GError** _err) c_g_permission_acquire;
   void function(GPermission* permission, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_permission_acquire_async;
   bool function(GPermission* permission, GAsyncResult* result, GError** _err) c_g_permission_acquire_finish;
@@ -1540,14 +1541,14 @@ __gshared extern(C)
   bool function(GPermission* permission, GAsyncResult* result, GError** _err) c_g_permission_release_finish;
 
   // PollableInputStream
-  GType function() c_g_pollable_input_stream_get_type;
+  extern(C) GType function() c_g_pollable_input_stream_get_type;
   bool function(GPollableInputStream* stream) c_g_pollable_input_stream_can_poll;
   GSource* function(GPollableInputStream* stream, GCancellable* cancellable) c_g_pollable_input_stream_create_source;
   bool function(GPollableInputStream* stream) c_g_pollable_input_stream_is_readable;
   ptrdiff_t function(GPollableInputStream* stream, void* buffer, size_t count, GCancellable* cancellable, GError** _err) c_g_pollable_input_stream_read_nonblocking;
 
   // PollableOutputStream
-  GType function() c_g_pollable_output_stream_get_type;
+  extern(C) GType function() c_g_pollable_output_stream_get_type;
   bool function(GPollableOutputStream* stream) c_g_pollable_output_stream_can_poll;
   GSource* function(GPollableOutputStream* stream, GCancellable* cancellable) c_g_pollable_output_stream_create_source;
   bool function(GPollableOutputStream* stream) c_g_pollable_output_stream_is_writable;
@@ -1555,16 +1556,16 @@ __gshared extern(C)
   GPollableReturn function(GPollableOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, size_t* bytesWritten, GCancellable* cancellable, GError** _err) c_g_pollable_output_stream_writev_nonblocking;
 
   // PowerProfileMonitor
-  GType function() c_g_power_profile_monitor_get_type;
+  extern(C) GType function() c_g_power_profile_monitor_get_type;
   GPowerProfileMonitor* function() c_g_power_profile_monitor_dup_default;
   bool function(GPowerProfileMonitor* monitor) c_g_power_profile_monitor_get_power_saver_enabled;
 
   // PropertyAction
-  GType function() c_g_property_action_get_type;
+  extern(C) GType function() c_g_property_action_get_type;
   GPropertyAction* function(const(char)* name, ObjectC* object, const(char)* propertyName) c_g_property_action_new;
 
   // Proxy
-  GType function() c_g_proxy_get_type;
+  extern(C) GType function() c_g_proxy_get_type;
   GProxy* function(const(char)* protocol) c_g_proxy_get_default_for_protocol;
   GIOStream* function(GProxy* proxy, GIOStream* connection, GProxyAddress* proxyAddress, GCancellable* cancellable, GError** _err) c_g_proxy_connect;
   void function(GProxy* proxy, GIOStream* connection, GProxyAddress* proxyAddress, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_proxy_connect_async;
@@ -1572,7 +1573,7 @@ __gshared extern(C)
   bool function(GProxy* proxy) c_g_proxy_supports_hostname;
 
   // ProxyAddress
-  GType function() c_g_proxy_address_get_type;
+  extern(C) GType function() c_g_proxy_address_get_type;
   GSocketAddress* function(GInetAddress* inetaddr, ushort port, const(char)* protocol, const(char)* destHostname, ushort destPort, const(char)* username, const(char)* password) c_g_proxy_address_new;
   const(char)* function(GProxyAddress* proxy) c_g_proxy_address_get_destination_hostname;
   ushort function(GProxyAddress* proxy) c_g_proxy_address_get_destination_port;
@@ -1583,10 +1584,10 @@ __gshared extern(C)
   const(char)* function(GProxyAddress* proxy) c_g_proxy_address_get_username;
 
   // ProxyAddressEnumerator
-  GType function() c_g_proxy_address_enumerator_get_type;
+  extern(C) GType function() c_g_proxy_address_enumerator_get_type;
 
   // ProxyResolver
-  GType function() c_g_proxy_resolver_get_type;
+  extern(C) GType function() c_g_proxy_resolver_get_type;
   GProxyResolver* function() c_g_proxy_resolver_get_default;
   bool function(GProxyResolver* resolver) c_g_proxy_resolver_is_supported;
   char** function(GProxyResolver* resolver, const(char)* uri, GCancellable* cancellable, GError** _err) c_g_proxy_resolver_lookup;
@@ -1594,12 +1595,12 @@ __gshared extern(C)
   char** function(GProxyResolver* resolver, GAsyncResult* result, GError** _err) c_g_proxy_resolver_lookup_finish;
 
   // RemoteActionGroup
-  GType function() c_g_remote_action_group_get_type;
+  extern(C) GType function() c_g_remote_action_group_get_type;
   void function(GRemoteActionGroup* remote, const(char)* actionName, VariantC* parameter, VariantC* platformData) c_g_remote_action_group_activate_action_full;
   void function(GRemoteActionGroup* remote, const(char)* actionName, VariantC* value, VariantC* platformData) c_g_remote_action_group_change_action_state_full;
 
   // Resolver
-  GType function() c_g_resolver_get_type;
+  extern(C) GType function() c_g_resolver_get_type;
   void function(GList* addresses) c_g_resolver_free_addresses;
   void function(GList* targets) c_g_resolver_free_targets;
   GResolver* function() c_g_resolver_get_default;
@@ -1623,7 +1624,7 @@ __gshared extern(C)
   void function(GResolver* resolver, uint timeoutMs) c_g_resolver_set_timeout;
 
   // Resource
-  GType function() c_g_resource_get_type;
+  extern(C) GType function() c_g_resource_get_type;
   GResource* function(GBytes* data, GError** _err) c_g_resource_new_from_data;
   char** function(GResource* resource, const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) c_g_resource_enumerate_children;
   bool function(GResource* resource, const(char)* path, GResourceLookupFlags lookupFlags, size_t* size, uint* flags, GError** _err) c_g_resource_get_info;
@@ -1634,7 +1635,7 @@ __gshared extern(C)
   GResource* function(const(char)* filename, GError** _err) c_g_resource_load;
 
   // Seekable
-  GType function() c_g_seekable_get_type;
+  extern(C) GType function() c_g_seekable_get_type;
   bool function(GSeekable* seekable) c_g_seekable_can_seek;
   bool function(GSeekable* seekable) c_g_seekable_can_truncate;
   bool function(GSeekable* seekable, long offset, GSeekType type, GCancellable* cancellable, GError** _err) c_g_seekable_seek;
@@ -1642,7 +1643,7 @@ __gshared extern(C)
   bool function(GSeekable* seekable, long offset, GCancellable* cancellable, GError** _err) c_g_seekable_truncate;
 
   // Settings
-  GType function() c_g_settings_get_type;
+  extern(C) GType function() c_g_settings_get_type;
   GSettings* function(const(char)* schemaId) c_g_settings_new;
   GSettings* function(GSettingsSchema* schema, GSettingsBackend* backend, const(char)* path) c_g_settings_new_full;
   GSettings* function(const(char)* schemaId, GSettingsBackend* backend) c_g_settings_new_with_backend;
@@ -1696,7 +1697,7 @@ __gshared extern(C)
   bool function(GSettings* settings, const(char)* key, VariantC* value) c_g_settings_set_value;
 
   // SettingsBackend
-  GType function() c_g_settings_backend_get_type;
+  extern(C) GType function() c_g_settings_backend_get_type;
   void function(GTree* tree, char** path, const(char**)* keys, VariantC*** values) c_g_settings_backend_flatten_tree;
   GSettingsBackend* function() c_g_settings_backend_get_default;
   void function(GSettingsBackend* backend, const(char)* key, void* originTag) c_g_settings_backend_changed;
@@ -1707,7 +1708,7 @@ __gshared extern(C)
   void function(GSettingsBackend* backend, const(char)* key) c_g_settings_backend_writable_changed;
 
   // SettingsSchema
-  GType function() c_g_settings_schema_get_type;
+  extern(C) GType function() c_g_settings_schema_get_type;
   const(char)* function(GSettingsSchema* schema) c_g_settings_schema_get_id;
   GSettingsSchemaKey* function(GSettingsSchema* schema, const(char)* name) c_g_settings_schema_get_key;
   const(char)* function(GSettingsSchema* schema) c_g_settings_schema_get_path;
@@ -1718,7 +1719,7 @@ __gshared extern(C)
   void function(GSettingsSchema* schema) c_g_settings_schema_unref;
 
   // SettingsSchemaKey
-  GType function() c_g_settings_schema_key_get_type;
+  extern(C) GType function() c_g_settings_schema_key_get_type;
   VariantC* function(GSettingsSchemaKey* key) c_g_settings_schema_key_get_default_value;
   const(char)* function(GSettingsSchemaKey* key) c_g_settings_schema_key_get_description;
   const(char)* function(GSettingsSchemaKey* key) c_g_settings_schema_key_get_name;
@@ -1730,7 +1731,7 @@ __gshared extern(C)
   void function(GSettingsSchemaKey* key) c_g_settings_schema_key_unref;
 
   // SettingsSchemaSource
-  GType function() c_g_settings_schema_source_get_type;
+  extern(C) GType function() c_g_settings_schema_source_get_type;
   GSettingsSchemaSource* function(const(char)* directory, GSettingsSchemaSource* parent, bool trusted, GError** _err) c_g_settings_schema_source_new_from_directory;
   void function(GSettingsSchemaSource* source, bool recursive, char*** nonRelocatable, char*** relocatable) c_g_settings_schema_source_list_schemas;
   GSettingsSchema* function(GSettingsSchemaSource* source, const(char)* schemaId, bool recursive) c_g_settings_schema_source_lookup;
@@ -1739,7 +1740,7 @@ __gshared extern(C)
   GSettingsSchemaSource* function() c_g_settings_schema_source_get_default;
 
   // SimpleAction
-  GType function() c_g_simple_action_get_type;
+  extern(C) GType function() c_g_simple_action_get_type;
   GSimpleAction* function(const(char)* name, const(GVariantType)* parameterType) c_g_simple_action_new;
   GSimpleAction* function(const(char)* name, const(GVariantType)* parameterType, VariantC* state) c_g_simple_action_new_stateful;
   void function(GSimpleAction* simple, bool enabled) c_g_simple_action_set_enabled;
@@ -1747,7 +1748,7 @@ __gshared extern(C)
   void function(GSimpleAction* simple, VariantC* stateHint) c_g_simple_action_set_state_hint;
 
   // SimpleActionGroup
-  GType function() c_g_simple_action_group_get_type;
+  extern(C) GType function() c_g_simple_action_group_get_type;
   GSimpleActionGroup* function() c_g_simple_action_group_new;
   void function(GSimpleActionGroup* simple, const(GActionEntry)* entries, int nEntries, void* userData) c_g_simple_action_group_add_entries;
   void function(GSimpleActionGroup* simple, GAction* action) c_g_simple_action_group_insert;
@@ -1755,7 +1756,7 @@ __gshared extern(C)
   void function(GSimpleActionGroup* simple, const(char)* actionName) c_g_simple_action_group_remove;
 
   // SimpleAsyncResult
-  GType function() c_g_simple_async_result_get_type;
+  extern(C) GType function() c_g_simple_async_result_get_type;
   GSimpleAsyncResult* function(ObjectC* sourceObject, GAsyncReadyCallback callback, void* userData, void* sourceTag) c_g_simple_async_result_new;
   GSimpleAsyncResult* function(ObjectC* sourceObject, GAsyncReadyCallback callback, void* userData, GQuark domain, int code, const(char)* format,  ...) c_g_simple_async_result_new_error;
   GSimpleAsyncResult* function(ObjectC* sourceObject, GAsyncReadyCallback callback, void* userData, const(GError)* error) c_g_simple_async_result_new_from_error;
@@ -1780,22 +1781,22 @@ __gshared extern(C)
   void function(GSimpleAsyncResult* simple, GError* error) c_g_simple_async_result_take_error;
 
   // SimpleIOStream
-  GType function() c_g_simple_io_stream_get_type;
+  extern(C) GType function() c_g_simple_io_stream_get_type;
   GIOStream* function(GInputStream* inputStream, GOutputStream* outputStream) c_g_simple_io_stream_new;
 
   // SimplePermission
-  GType function() c_g_simple_permission_get_type;
+  extern(C) GType function() c_g_simple_permission_get_type;
   GPermission* function(bool allowed) c_g_simple_permission_new;
 
   // SimpleProxyResolver
-  GType function() c_g_simple_proxy_resolver_get_type;
+  extern(C) GType function() c_g_simple_proxy_resolver_get_type;
   GProxyResolver* function(const(char)* defaultProxy, char** ignoreHosts) c_g_simple_proxy_resolver_new;
   void function(GSimpleProxyResolver* resolver, const(char)* defaultProxy) c_g_simple_proxy_resolver_set_default_proxy;
   void function(GSimpleProxyResolver* resolver, char** ignoreHosts) c_g_simple_proxy_resolver_set_ignore_hosts;
   void function(GSimpleProxyResolver* resolver, const(char)* uriScheme, const(char)* proxy) c_g_simple_proxy_resolver_set_uri_proxy;
 
   // Socket
-  GType function() c_g_socket_get_type;
+  extern(C) GType function() c_g_socket_get_type;
   GSocket* function(GSocketFamily family, GSocketType type, GSocketProtocol protocol, GError** _err) c_g_socket_new;
   GSocket* function(int fd, GError** _err) c_g_socket_new_from_fd;
   GSocket* function(GSocket* socket, GCancellable* cancellable, GError** _err) c_g_socket_accept;
@@ -1858,20 +1859,20 @@ __gshared extern(C)
   bool function(GSocket* socket) c_g_socket_speaks_ipv4;
 
   // SocketAddress
-  GType function() c_g_socket_address_get_type;
+  extern(C) GType function() c_g_socket_address_get_type;
   GSocketAddress* function(void* native, size_t len) c_g_socket_address_new_from_native;
   GSocketFamily function(GSocketAddress* address) c_g_socket_address_get_family;
   ptrdiff_t function(GSocketAddress* address) c_g_socket_address_get_native_size;
   bool function(GSocketAddress* address, void* dest, size_t destlen, GError** _err) c_g_socket_address_to_native;
 
   // SocketAddressEnumerator
-  GType function() c_g_socket_address_enumerator_get_type;
+  extern(C) GType function() c_g_socket_address_enumerator_get_type;
   GSocketAddress* function(GSocketAddressEnumerator* enumerator, GCancellable* cancellable, GError** _err) c_g_socket_address_enumerator_next;
   void function(GSocketAddressEnumerator* enumerator, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_socket_address_enumerator_next_async;
   GSocketAddress* function(GSocketAddressEnumerator* enumerator, GAsyncResult* result, GError** _err) c_g_socket_address_enumerator_next_finish;
 
   // SocketClient
-  GType function() c_g_socket_client_get_type;
+  extern(C) GType function() c_g_socket_client_get_type;
   GSocketClient* function() c_g_socket_client_new;
   void function(GSocketClient* client, const(char)* protocol) c_g_socket_client_add_application_proxy;
   GSocketConnection* function(GSocketClient* client, GSocketConnectable* connectable, GCancellable* cancellable, GError** _err) c_g_socket_client_connect;
@@ -1906,13 +1907,13 @@ __gshared extern(C)
   void function(GSocketClient* client, GTlsCertificateFlags flags) c_g_socket_client_set_tls_validation_flags;
 
   // SocketConnectable
-  GType function() c_g_socket_connectable_get_type;
+  extern(C) GType function() c_g_socket_connectable_get_type;
   GSocketAddressEnumerator* function(GSocketConnectable* connectable) c_g_socket_connectable_enumerate;
   GSocketAddressEnumerator* function(GSocketConnectable* connectable) c_g_socket_connectable_proxy_enumerate;
   char* function(GSocketConnectable* connectable) c_g_socket_connectable_to_string;
 
   // SocketConnection
-  GType function() c_g_socket_connection_get_type;
+  extern(C) GType function() c_g_socket_connection_get_type;
   GType function(GSocketFamily family, GSocketType type, int protocolId) c_g_socket_connection_factory_lookup_type;
   void function(GType gType, GSocketFamily family, GSocketType type, int protocol) c_g_socket_connection_factory_register_type;
   bool function(GSocketConnection* connection, GSocketAddress* address, GCancellable* cancellable, GError** _err) c_g_socket_connection_connect;
@@ -1924,7 +1925,7 @@ __gshared extern(C)
   bool function(GSocketConnection* connection) c_g_socket_connection_is_connected;
 
   // SocketControlMessage
-  GType function() c_g_socket_control_message_get_type;
+  extern(C) GType function() c_g_socket_control_message_get_type;
   GSocketControlMessage* function(int level, int type, size_t size, void* data) c_g_socket_control_message_deserialize;
   int function(GSocketControlMessage* message) c_g_socket_control_message_get_level;
   int function(GSocketControlMessage* message) c_g_socket_control_message_get_msg_type;
@@ -1932,7 +1933,7 @@ __gshared extern(C)
   void function(GSocketControlMessage* message, void* data) c_g_socket_control_message_serialize;
 
   // SocketListener
-  GType function() c_g_socket_listener_get_type;
+  extern(C) GType function() c_g_socket_listener_get_type;
   GSocketListener* function() c_g_socket_listener_new;
   GSocketConnection* function(GSocketListener* listener, ObjectC** sourceObject, GCancellable* cancellable, GError** _err) c_g_socket_listener_accept;
   void function(GSocketListener* listener, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_socket_listener_accept_async;
@@ -1948,14 +1949,14 @@ __gshared extern(C)
   void function(GSocketListener* listener, int listenBacklog) c_g_socket_listener_set_backlog;
 
   // SocketService
-  GType function() c_g_socket_service_get_type;
+  extern(C) GType function() c_g_socket_service_get_type;
   GSocketService* function() c_g_socket_service_new;
   bool function(GSocketService* service) c_g_socket_service_is_active;
   void function(GSocketService* service) c_g_socket_service_start;
   void function(GSocketService* service) c_g_socket_service_stop;
 
   // SrvTarget
-  GType function() c_g_srv_target_get_type;
+  extern(C) GType function() c_g_srv_target_get_type;
   GSrvTarget* function(const(char)* hostname, ushort port, ushort priority, ushort weight) c_g_srv_target_new;
   GSrvTarget* function(GSrvTarget* target) c_g_srv_target_copy;
   void function(GSrvTarget* target) c_g_srv_target_free;
@@ -1971,7 +1972,7 @@ __gshared extern(C)
   void function(GStaticResource* staticResource) c_g_static_resource_init;
 
   // Subprocess
-  GType function() c_g_subprocess_get_type;
+  extern(C) GType function() c_g_subprocess_get_type;
   GSubprocess* function(GSubprocessFlags flags, GError** error, const(char)* argv0,  ...) c_g_subprocess_new;
   GSubprocess* function(const(char*)* argv, GSubprocessFlags flags, GError** _err) c_g_subprocess_newv;
   bool function(GSubprocess* subprocess, GBytes* stdinBuf, GCancellable* cancellable, GBytes** stdoutBuf, GBytes** stderrBuf, GError** _err) c_g_subprocess_communicate;
@@ -2000,7 +2001,7 @@ __gshared extern(C)
   bool function(GSubprocess* subprocess, GAsyncResult* result, GError** _err) c_g_subprocess_wait_finish;
 
   // SubprocessLauncher
-  GType function() c_g_subprocess_launcher_get_type;
+  extern(C) GType function() c_g_subprocess_launcher_get_type;
   GSubprocessLauncher* function(GSubprocessFlags flags) c_g_subprocess_launcher_new;
   void function(GSubprocessLauncher* self) c_g_subprocess_launcher_close;
   const(char)* function(GSubprocessLauncher* self, const(char)* variable) c_g_subprocess_launcher_getenv;
@@ -2021,7 +2022,7 @@ __gshared extern(C)
   void function(GSubprocessLauncher* self, const(char)* variable) c_g_subprocess_launcher_unsetenv;
 
   // Task
-  GType function() c_g_task_get_type;
+  extern(C) GType function() c_g_task_get_type;
   GTask* function(ObjectC* sourceObject, GCancellable* cancellable, GAsyncReadyCallback callback, void* callbackData) c_g_task_new;
   bool function(GAsyncResult* result, ObjectC* sourceObject) c_g_task_is_valid;
   void function(ObjectC* sourceObject, GAsyncReadyCallback callback, void* callbackData, void* sourceTag, GError* error) c_g_task_report_error;
@@ -2062,17 +2063,17 @@ __gshared extern(C)
   void function(GTask* task, void* taskData, GDestroyNotify taskDataDestroy) c_g_task_set_task_data;
 
   // TcpConnection
-  GType function() c_g_tcp_connection_get_type;
+  extern(C) GType function() c_g_tcp_connection_get_type;
   bool function(GTcpConnection* connection) c_g_tcp_connection_get_graceful_disconnect;
   void function(GTcpConnection* connection, bool gracefulDisconnect) c_g_tcp_connection_set_graceful_disconnect;
 
   // TcpWrapperConnection
-  GType function() c_g_tcp_wrapper_connection_get_type;
+  extern(C) GType function() c_g_tcp_wrapper_connection_get_type;
   GSocketConnection* function(GIOStream* baseIoStream, GSocket* socket) c_g_tcp_wrapper_connection_new;
   GIOStream* function(GTcpWrapperConnection* conn) c_g_tcp_wrapper_connection_get_base_io_stream;
 
   // TestDBus
-  GType function() c_g_test_dbus_get_type;
+  extern(C) GType function() c_g_test_dbus_get_type;
   GTestDBus* function(GTestDBusFlags flags) c_g_test_dbus_new;
   void function() c_g_test_dbus_unset;
   void function(GTestDBus* self, const(char)* path) c_g_test_dbus_add_service_dir;
@@ -2083,7 +2084,7 @@ __gshared extern(C)
   void function(GTestDBus* self) c_g_test_dbus_up;
 
   // ThemedIcon
-  GType function() c_g_themed_icon_get_type;
+  extern(C) GType function() c_g_themed_icon_get_type;
   GIcon* function(const(char)* iconname) c_g_themed_icon_new;
   GIcon* function(char** iconnames, int len) c_g_themed_icon_new_from_names;
   GIcon* function(const(char)* iconname) c_g_themed_icon_new_with_default_fallbacks;
@@ -2092,14 +2093,14 @@ __gshared extern(C)
   void function(GThemedIcon* icon, const(char)* iconname) c_g_themed_icon_prepend_name;
 
   // ThreadedResolver
-  GType function() c_g_threaded_resolver_get_type;
+  extern(C) GType function() c_g_threaded_resolver_get_type;
 
   // ThreadedSocketService
-  GType function() c_g_threaded_socket_service_get_type;
+  extern(C) GType function() c_g_threaded_socket_service_get_type;
   GSocketService* function(int maxThreads) c_g_threaded_socket_service_new;
 
   // TlsBackend
-  GType function() c_g_tls_backend_get_type;
+  extern(C) GType function() c_g_tls_backend_get_type;
   GTlsBackend* function() c_g_tls_backend_get_default;
   GType function(GTlsBackend* backend) c_g_tls_backend_get_certificate_type;
   GType function(GTlsBackend* backend) c_g_tls_backend_get_client_connection_type;
@@ -2113,7 +2114,7 @@ __gshared extern(C)
   bool function(GTlsBackend* backend) c_g_tls_backend_supports_tls;
 
   // TlsCertificate
-  GType function() c_g_tls_certificate_get_type;
+  extern(C) GType function() c_g_tls_certificate_get_type;
   GTlsCertificate* function(const(char)* file, GError** _err) c_g_tls_certificate_new_from_file;
   GTlsCertificate* function(const(char)* file, const(char)* password, GError** _err) c_g_tls_certificate_new_from_file_with_password;
   GTlsCertificate* function(const(char)* certFile, const(char)* keyFile, GError** _err) c_g_tls_certificate_new_from_files;
@@ -2132,7 +2133,7 @@ __gshared extern(C)
   GTlsCertificateFlags function(GTlsCertificate* cert, GSocketConnectable* identity, GTlsCertificate* trustedCa) c_g_tls_certificate_verify;
 
   // TlsClientConnection
-  GType function() c_g_tls_client_connection_get_type;
+  extern(C) GType function() c_g_tls_client_connection_get_type;
   GIOStream* function(GIOStream* baseIoStream, GSocketConnectable* serverIdentity, GError** _err) c_g_tls_client_connection_new;
   void function(GTlsClientConnection* conn, GTlsClientConnection* source) c_g_tls_client_connection_copy_session_state;
   GList* function(GTlsClientConnection* conn) c_g_tls_client_connection_get_accepted_cas;
@@ -2144,7 +2145,7 @@ __gshared extern(C)
   void function(GTlsClientConnection* conn, GTlsCertificateFlags flags) c_g_tls_client_connection_set_validation_flags;
 
   // TlsConnection
-  GType function() c_g_tls_connection_get_type;
+  extern(C) GType function() c_g_tls_connection_get_type;
   bool function(GTlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors) c_g_tls_connection_emit_accept_certificate;
   GTlsCertificate* function(GTlsConnection* conn) c_g_tls_connection_get_certificate;
   bool function(GTlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) c_g_tls_connection_get_channel_binding_data;
@@ -2170,7 +2171,7 @@ __gshared extern(C)
   void function(GTlsConnection* conn, bool useSystemCertdb) c_g_tls_connection_set_use_system_certdb;
 
   // TlsDatabase
-  GType function() c_g_tls_database_get_type;
+  extern(C) GType function() c_g_tls_database_get_type;
   char* function(GTlsDatabase* self, GTlsCertificate* certificate) c_g_tls_database_create_certificate_handle;
   GTlsCertificate* function(GTlsDatabase* self, const(char)* handle, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) c_g_tls_database_lookup_certificate_for_handle;
   void function(GTlsDatabase* self, const(char)* handle, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_tls_database_lookup_certificate_for_handle_async;
@@ -2186,11 +2187,11 @@ __gshared extern(C)
   GTlsCertificateFlags function(GTlsDatabase* self, GAsyncResult* result, GError** _err) c_g_tls_database_verify_chain_finish;
 
   // TlsFileDatabase
-  GType function() c_g_tls_file_database_get_type;
+  extern(C) GType function() c_g_tls_file_database_get_type;
   GTlsDatabase* function(const(char)* anchors, GError** _err) c_g_tls_file_database_new;
 
   // TlsInteraction
-  GType function() c_g_tls_interaction_get_type;
+  extern(C) GType function() c_g_tls_interaction_get_type;
   GTlsInteractionResult function(GTlsInteraction* interaction, GTlsPassword* password, GCancellable* cancellable, GError** _err) c_g_tls_interaction_ask_password;
   void function(GTlsInteraction* interaction, GTlsPassword* password, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_tls_interaction_ask_password_async;
   GTlsInteractionResult function(GTlsInteraction* interaction, GAsyncResult* result, GError** _err) c_g_tls_interaction_ask_password_finish;
@@ -2201,7 +2202,7 @@ __gshared extern(C)
   GTlsInteractionResult function(GTlsInteraction* interaction, GAsyncResult* result, GError** _err) c_g_tls_interaction_request_certificate_finish;
 
   // TlsPassword
-  GType function() c_g_tls_password_get_type;
+  extern(C) GType function() c_g_tls_password_get_type;
   GTlsPassword* function(GTlsPasswordFlags flags, const(char)* description) c_g_tls_password_new;
   const(char)* function(GTlsPassword* password) c_g_tls_password_get_description;
   GTlsPasswordFlags function(GTlsPassword* password) c_g_tls_password_get_flags;
@@ -2214,11 +2215,11 @@ __gshared extern(C)
   void function(GTlsPassword* password, const(char)* warning) c_g_tls_password_set_warning;
 
   // TlsServerConnection
-  GType function() c_g_tls_server_connection_get_type;
+  extern(C) GType function() c_g_tls_server_connection_get_type;
   GIOStream* function(GIOStream* baseIoStream, GTlsCertificate* certificate, GError** _err) c_g_tls_server_connection_new;
 
   // UnixConnection
-  GType function() c_g_unix_connection_get_type;
+  extern(C) GType function() c_g_unix_connection_get_type;
   GCredentials* function(GUnixConnection* connection, GCancellable* cancellable, GError** _err) c_g_unix_connection_receive_credentials;
   void function(GUnixConnection* connection, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_unix_connection_receive_credentials_async;
   GCredentials* function(GUnixConnection* connection, GAsyncResult* result, GError** _err) c_g_unix_connection_receive_credentials_finish;
@@ -2229,14 +2230,14 @@ __gshared extern(C)
   bool function(GUnixConnection* connection, int fd, GCancellable* cancellable, GError** _err) c_g_unix_connection_send_fd;
 
   // UnixCredentialsMessage
-  GType function() c_g_unix_credentials_message_get_type;
+  extern(C) GType function() c_g_unix_credentials_message_get_type;
   GSocketControlMessage* function() c_g_unix_credentials_message_new;
   GSocketControlMessage* function(GCredentials* credentials) c_g_unix_credentials_message_new_with_credentials;
   bool function() c_g_unix_credentials_message_is_supported;
   GCredentials* function(GUnixCredentialsMessage* message) c_g_unix_credentials_message_get_credentials;
 
   // UnixFDList
-  GType function() c_g_unix_fd_list_get_type;
+  extern(C) GType function() c_g_unix_fd_list_get_type;
   GUnixFDList* function() c_g_unix_fd_list_new;
   GUnixFDList* function(const(int)* fds, int nFds) c_g_unix_fd_list_new_from_array;
   int function(GUnixFDList* list, int fd, GError** _err) c_g_unix_fd_list_append;
@@ -2246,7 +2247,7 @@ __gshared extern(C)
   int* function(GUnixFDList* list, int* length) c_g_unix_fd_list_steal_fds;
 
   // UnixFDMessage
-  GType function() c_g_unix_fd_message_get_type;
+  extern(C) GType function() c_g_unix_fd_message_get_type;
   GSocketControlMessage* function() c_g_unix_fd_message_new;
   GSocketControlMessage* function(GUnixFDList* fdList) c_g_unix_fd_message_new_with_fd_list;
   bool function(GUnixFDMessage* message, int fd, GError** _err) c_g_unix_fd_message_append_fd;
@@ -2254,23 +2255,23 @@ __gshared extern(C)
   int* function(GUnixFDMessage* message, int* length) c_g_unix_fd_message_steal_fds;
 
   // UnixInputStream
-  GType function() c_g_unix_input_stream_get_type;
+  extern(C) GType function() c_g_unix_input_stream_get_type;
   GInputStream* function(int fd, bool closeFd) c_g_unix_input_stream_new;
   bool function(GUnixInputStream* stream) c_g_unix_input_stream_get_close_fd;
   int function(GUnixInputStream* stream) c_g_unix_input_stream_get_fd;
   void function(GUnixInputStream* stream, bool closeFd) c_g_unix_input_stream_set_close_fd;
 
   // UnixMountEntry
-  GType function() c_g_unix_mount_entry_get_type;
+  extern(C) GType function() c_g_unix_mount_entry_get_type;
 
   // UnixMountMonitor
-  GType function() c_g_unix_mount_monitor_get_type;
+  extern(C) GType function() c_g_unix_mount_monitor_get_type;
   GUnixMountMonitor* function() c_g_unix_mount_monitor_new;
   GUnixMountMonitor* function() c_g_unix_mount_monitor_get;
   void function(GUnixMountMonitor* mountMonitor, int limitMsec) c_g_unix_mount_monitor_set_rate_limit;
 
   // UnixMountPoint
-  GType function() c_g_unix_mount_point_get_type;
+  extern(C) GType function() c_g_unix_mount_point_get_type;
   int function(GUnixMountPoint* mount1, GUnixMountPoint* mount2) c_g_unix_mount_point_compare;
   GUnixMountPoint* function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_copy;
   void function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_free;
@@ -2288,14 +2289,14 @@ __gshared extern(C)
   GUnixMountPoint* function(const(char)* mountPath, ulong* timeRead) c_g_unix_mount_point_at;
 
   // UnixOutputStream
-  GType function() c_g_unix_output_stream_get_type;
+  extern(C) GType function() c_g_unix_output_stream_get_type;
   GOutputStream* function(int fd, bool closeFd) c_g_unix_output_stream_new;
   bool function(GUnixOutputStream* stream) c_g_unix_output_stream_get_close_fd;
   int function(GUnixOutputStream* stream) c_g_unix_output_stream_get_fd;
   void function(GUnixOutputStream* stream, bool closeFd) c_g_unix_output_stream_set_close_fd;
 
   // UnixSocketAddress
-  GType function() c_g_unix_socket_address_get_type;
+  extern(C) GType function() c_g_unix_socket_address_get_type;
   GSocketAddress* function(const(char)* path) c_g_unix_socket_address_new;
   GSocketAddress* function(const(char)* path, int pathLen) c_g_unix_socket_address_new_abstract;
   GSocketAddress* function(const(char)* path, int pathLen, GUnixSocketAddressType type) c_g_unix_socket_address_new_with_type;
@@ -2306,7 +2307,7 @@ __gshared extern(C)
   size_t function(GUnixSocketAddress* address) c_g_unix_socket_address_get_path_len;
 
   // Vfs
-  GType function() c_g_vfs_get_type;
+  extern(C) GType function() c_g_vfs_get_type;
   GVfs* function() c_g_vfs_get_default;
   GVfs* function() c_g_vfs_get_local;
   GFile* function(GVfs* vfs, const(char)* path) c_g_vfs_get_file_for_path;
@@ -2318,7 +2319,7 @@ __gshared extern(C)
   bool function(GVfs* vfs, const(char)* scheme) c_g_vfs_unregister_uri_scheme;
 
   // Volume
-  GType function() c_g_volume_get_type;
+  extern(C) GType function() c_g_volume_get_type;
   bool function(GVolume* volume) c_g_volume_can_eject;
   bool function(GVolume* volume) c_g_volume_can_mount;
   void function(GVolume* volume, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_volume_eject;
@@ -2340,7 +2341,7 @@ __gshared extern(C)
   bool function(GVolume* volume) c_g_volume_should_automount;
 
   // VolumeMonitor
-  GType function() c_g_volume_monitor_get_type;
+  extern(C) GType function() c_g_volume_monitor_get_type;
   GVolume* function(GMount* mount) c_g_volume_monitor_adopt_orphan_mount;
   GVolumeMonitor* function() c_g_volume_monitor_get;
   GList* function(GVolumeMonitor* volumeMonitor) c_g_volume_monitor_get_connected_drives;
@@ -2350,13 +2351,13 @@ __gshared extern(C)
   GList* function(GVolumeMonitor* volumeMonitor) c_g_volume_monitor_get_volumes;
 
   // ZlibCompressor
-  GType function() c_g_zlib_compressor_get_type;
+  extern(C) GType function() c_g_zlib_compressor_get_type;
   GZlibCompressor* function(GZlibCompressorFormat format, int level) c_g_zlib_compressor_new;
   GFileInfo* function(GZlibCompressor* compressor) c_g_zlib_compressor_get_file_info;
   void function(GZlibCompressor* compressor, GFileInfo* fileInfo) c_g_zlib_compressor_set_file_info;
 
   // ZlibDecompressor
-  GType function() c_g_zlib_decompressor_get_type;
+  extern(C) GType function() c_g_zlib_decompressor_get_type;
   GZlibDecompressor* function(GZlibCompressorFormat format) c_g_zlib_decompressor_new;
   GFileInfo* function(GZlibDecompressor* decompressor) c_g_zlib_decompressor_get_file_info;
 }
@@ -4709,2347 +4710,2347 @@ alias g_zlib_decompressor_get_file_info = c_g_zlib_decompressor_get_file_info;
 shared static this()
 {
   // Action
-  gidLink(g_action_get_type, "g_action_get_type", LIBS);
-  gidLink(g_action_name_is_valid, "g_action_name_is_valid", LIBS);
-  gidLink(g_action_parse_detailed_name, "g_action_parse_detailed_name", LIBS);
-  gidLink(g_action_print_detailed_name, "g_action_print_detailed_name", LIBS);
-  gidLink(g_action_activate, "g_action_activate", LIBS);
-  gidLink(g_action_change_state, "g_action_change_state", LIBS);
-  gidLink(g_action_get_enabled, "g_action_get_enabled", LIBS);
-  gidLink(g_action_get_name, "g_action_get_name", LIBS);
-  gidLink(g_action_get_parameter_type, "g_action_get_parameter_type", LIBS);
-  gidLink(g_action_get_state, "g_action_get_state", LIBS);
-  gidLink(g_action_get_state_hint, "g_action_get_state_hint", LIBS);
-  gidLink(g_action_get_state_type, "g_action_get_state_type", LIBS);
+  gidLink(cast(void**)&g_action_get_type, "g_action_get_type", LIBS);
+  gidLink(cast(void**)&g_action_name_is_valid, "g_action_name_is_valid", LIBS);
+  gidLink(cast(void**)&g_action_parse_detailed_name, "g_action_parse_detailed_name", LIBS);
+  gidLink(cast(void**)&g_action_print_detailed_name, "g_action_print_detailed_name", LIBS);
+  gidLink(cast(void**)&g_action_activate, "g_action_activate", LIBS);
+  gidLink(cast(void**)&g_action_change_state, "g_action_change_state", LIBS);
+  gidLink(cast(void**)&g_action_get_enabled, "g_action_get_enabled", LIBS);
+  gidLink(cast(void**)&g_action_get_name, "g_action_get_name", LIBS);
+  gidLink(cast(void**)&g_action_get_parameter_type, "g_action_get_parameter_type", LIBS);
+  gidLink(cast(void**)&g_action_get_state, "g_action_get_state", LIBS);
+  gidLink(cast(void**)&g_action_get_state_hint, "g_action_get_state_hint", LIBS);
+  gidLink(cast(void**)&g_action_get_state_type, "g_action_get_state_type", LIBS);
 
   // ActionGroup
-  gidLink(g_action_group_get_type, "g_action_group_get_type", LIBS);
-  gidLink(g_action_group_action_added, "g_action_group_action_added", LIBS);
-  gidLink(g_action_group_action_enabled_changed, "g_action_group_action_enabled_changed", LIBS);
-  gidLink(g_action_group_action_removed, "g_action_group_action_removed", LIBS);
-  gidLink(g_action_group_action_state_changed, "g_action_group_action_state_changed", LIBS);
-  gidLink(g_action_group_activate_action, "g_action_group_activate_action", LIBS);
-  gidLink(g_action_group_change_action_state, "g_action_group_change_action_state", LIBS);
-  gidLink(g_action_group_get_action_enabled, "g_action_group_get_action_enabled", LIBS);
-  gidLink(g_action_group_get_action_parameter_type, "g_action_group_get_action_parameter_type", LIBS);
-  gidLink(g_action_group_get_action_state, "g_action_group_get_action_state", LIBS);
-  gidLink(g_action_group_get_action_state_hint, "g_action_group_get_action_state_hint", LIBS);
-  gidLink(g_action_group_get_action_state_type, "g_action_group_get_action_state_type", LIBS);
-  gidLink(g_action_group_has_action, "g_action_group_has_action", LIBS);
-  gidLink(g_action_group_list_actions, "g_action_group_list_actions", LIBS);
-  gidLink(g_action_group_query_action, "g_action_group_query_action", LIBS);
+  gidLink(cast(void**)&g_action_group_get_type, "g_action_group_get_type", LIBS);
+  gidLink(cast(void**)&g_action_group_action_added, "g_action_group_action_added", LIBS);
+  gidLink(cast(void**)&g_action_group_action_enabled_changed, "g_action_group_action_enabled_changed", LIBS);
+  gidLink(cast(void**)&g_action_group_action_removed, "g_action_group_action_removed", LIBS);
+  gidLink(cast(void**)&g_action_group_action_state_changed, "g_action_group_action_state_changed", LIBS);
+  gidLink(cast(void**)&g_action_group_activate_action, "g_action_group_activate_action", LIBS);
+  gidLink(cast(void**)&g_action_group_change_action_state, "g_action_group_change_action_state", LIBS);
+  gidLink(cast(void**)&g_action_group_get_action_enabled, "g_action_group_get_action_enabled", LIBS);
+  gidLink(cast(void**)&g_action_group_get_action_parameter_type, "g_action_group_get_action_parameter_type", LIBS);
+  gidLink(cast(void**)&g_action_group_get_action_state, "g_action_group_get_action_state", LIBS);
+  gidLink(cast(void**)&g_action_group_get_action_state_hint, "g_action_group_get_action_state_hint", LIBS);
+  gidLink(cast(void**)&g_action_group_get_action_state_type, "g_action_group_get_action_state_type", LIBS);
+  gidLink(cast(void**)&g_action_group_has_action, "g_action_group_has_action", LIBS);
+  gidLink(cast(void**)&g_action_group_list_actions, "g_action_group_list_actions", LIBS);
+  gidLink(cast(void**)&g_action_group_query_action, "g_action_group_query_action", LIBS);
 
   // ActionMap
-  gidLink(g_action_map_get_type, "g_action_map_get_type", LIBS);
-  gidLink(g_action_map_add_action, "g_action_map_add_action", LIBS);
-  gidLink(g_action_map_add_action_entries, "g_action_map_add_action_entries", LIBS);
-  gidLink(g_action_map_lookup_action, "g_action_map_lookup_action", LIBS);
-  gidLink(g_action_map_remove_action, "g_action_map_remove_action", LIBS);
-  gidLink(g_action_map_remove_action_entries, "g_action_map_remove_action_entries", LIBS);
+  gidLink(cast(void**)&g_action_map_get_type, "g_action_map_get_type", LIBS);
+  gidLink(cast(void**)&g_action_map_add_action, "g_action_map_add_action", LIBS);
+  gidLink(cast(void**)&g_action_map_add_action_entries, "g_action_map_add_action_entries", LIBS);
+  gidLink(cast(void**)&g_action_map_lookup_action, "g_action_map_lookup_action", LIBS);
+  gidLink(cast(void**)&g_action_map_remove_action, "g_action_map_remove_action", LIBS);
+  gidLink(cast(void**)&g_action_map_remove_action_entries, "g_action_map_remove_action_entries", LIBS);
 
   // AppInfo
-  gidLink(g_app_info_get_type, "g_app_info_get_type", LIBS);
-  gidLink(g_app_info_create_from_commandline, "g_app_info_create_from_commandline", LIBS);
-  gidLink(g_app_info_get_all, "g_app_info_get_all", LIBS);
-  gidLink(g_app_info_get_all_for_type, "g_app_info_get_all_for_type", LIBS);
-  gidLink(g_app_info_get_default_for_type, "g_app_info_get_default_for_type", LIBS);
-  gidLink(g_app_info_get_default_for_type_async, "g_app_info_get_default_for_type_async", LIBS);
-  gidLink(g_app_info_get_default_for_type_finish, "g_app_info_get_default_for_type_finish", LIBS);
-  gidLink(g_app_info_get_default_for_uri_scheme, "g_app_info_get_default_for_uri_scheme", LIBS);
-  gidLink(g_app_info_get_default_for_uri_scheme_async, "g_app_info_get_default_for_uri_scheme_async", LIBS);
-  gidLink(g_app_info_get_default_for_uri_scheme_finish, "g_app_info_get_default_for_uri_scheme_finish", LIBS);
-  gidLink(g_app_info_get_fallback_for_type, "g_app_info_get_fallback_for_type", LIBS);
-  gidLink(g_app_info_get_recommended_for_type, "g_app_info_get_recommended_for_type", LIBS);
-  gidLink(g_app_info_launch_default_for_uri, "g_app_info_launch_default_for_uri", LIBS);
-  gidLink(g_app_info_launch_default_for_uri_async, "g_app_info_launch_default_for_uri_async", LIBS);
-  gidLink(g_app_info_launch_default_for_uri_finish, "g_app_info_launch_default_for_uri_finish", LIBS);
-  gidLink(g_app_info_reset_type_associations, "g_app_info_reset_type_associations", LIBS);
-  gidLink(g_app_info_add_supports_type, "g_app_info_add_supports_type", LIBS);
-  gidLink(g_app_info_can_delete, "g_app_info_can_delete", LIBS);
-  gidLink(g_app_info_can_remove_supports_type, "g_app_info_can_remove_supports_type", LIBS);
-  gidLink(g_app_info_delete, "g_app_info_delete", LIBS);
-  gidLink(g_app_info_dup, "g_app_info_dup", LIBS);
-  gidLink(g_app_info_equal, "g_app_info_equal", LIBS);
-  gidLink(g_app_info_get_commandline, "g_app_info_get_commandline", LIBS);
-  gidLink(g_app_info_get_description, "g_app_info_get_description", LIBS);
-  gidLink(g_app_info_get_display_name, "g_app_info_get_display_name", LIBS);
-  gidLink(g_app_info_get_executable, "g_app_info_get_executable", LIBS);
-  gidLink(g_app_info_get_icon, "g_app_info_get_icon", LIBS);
-  gidLink(g_app_info_get_id, "g_app_info_get_id", LIBS);
-  gidLink(g_app_info_get_name, "g_app_info_get_name", LIBS);
-  gidLink(g_app_info_get_supported_types, "g_app_info_get_supported_types", LIBS);
-  gidLink(g_app_info_launch, "g_app_info_launch", LIBS);
-  gidLink(g_app_info_launch_uris, "g_app_info_launch_uris", LIBS);
-  gidLink(g_app_info_launch_uris_async, "g_app_info_launch_uris_async", LIBS);
-  gidLink(g_app_info_launch_uris_finish, "g_app_info_launch_uris_finish", LIBS);
-  gidLink(g_app_info_remove_supports_type, "g_app_info_remove_supports_type", LIBS);
-  gidLink(g_app_info_set_as_default_for_extension, "g_app_info_set_as_default_for_extension", LIBS);
-  gidLink(g_app_info_set_as_default_for_type, "g_app_info_set_as_default_for_type", LIBS);
-  gidLink(g_app_info_set_as_last_used_for_type, "g_app_info_set_as_last_used_for_type", LIBS);
-  gidLink(g_app_info_should_show, "g_app_info_should_show", LIBS);
-  gidLink(g_app_info_supports_files, "g_app_info_supports_files", LIBS);
-  gidLink(g_app_info_supports_uris, "g_app_info_supports_uris", LIBS);
+  gidLink(cast(void**)&g_app_info_get_type, "g_app_info_get_type", LIBS);
+  gidLink(cast(void**)&g_app_info_create_from_commandline, "g_app_info_create_from_commandline", LIBS);
+  gidLink(cast(void**)&g_app_info_get_all, "g_app_info_get_all", LIBS);
+  gidLink(cast(void**)&g_app_info_get_all_for_type, "g_app_info_get_all_for_type", LIBS);
+  gidLink(cast(void**)&g_app_info_get_default_for_type, "g_app_info_get_default_for_type", LIBS);
+  gidLink(cast(void**)&g_app_info_get_default_for_type_async, "g_app_info_get_default_for_type_async", LIBS);
+  gidLink(cast(void**)&g_app_info_get_default_for_type_finish, "g_app_info_get_default_for_type_finish", LIBS);
+  gidLink(cast(void**)&g_app_info_get_default_for_uri_scheme, "g_app_info_get_default_for_uri_scheme", LIBS);
+  gidLink(cast(void**)&g_app_info_get_default_for_uri_scheme_async, "g_app_info_get_default_for_uri_scheme_async", LIBS);
+  gidLink(cast(void**)&g_app_info_get_default_for_uri_scheme_finish, "g_app_info_get_default_for_uri_scheme_finish", LIBS);
+  gidLink(cast(void**)&g_app_info_get_fallback_for_type, "g_app_info_get_fallback_for_type", LIBS);
+  gidLink(cast(void**)&g_app_info_get_recommended_for_type, "g_app_info_get_recommended_for_type", LIBS);
+  gidLink(cast(void**)&g_app_info_launch_default_for_uri, "g_app_info_launch_default_for_uri", LIBS);
+  gidLink(cast(void**)&g_app_info_launch_default_for_uri_async, "g_app_info_launch_default_for_uri_async", LIBS);
+  gidLink(cast(void**)&g_app_info_launch_default_for_uri_finish, "g_app_info_launch_default_for_uri_finish", LIBS);
+  gidLink(cast(void**)&g_app_info_reset_type_associations, "g_app_info_reset_type_associations", LIBS);
+  gidLink(cast(void**)&g_app_info_add_supports_type, "g_app_info_add_supports_type", LIBS);
+  gidLink(cast(void**)&g_app_info_can_delete, "g_app_info_can_delete", LIBS);
+  gidLink(cast(void**)&g_app_info_can_remove_supports_type, "g_app_info_can_remove_supports_type", LIBS);
+  gidLink(cast(void**)&g_app_info_delete, "g_app_info_delete", LIBS);
+  gidLink(cast(void**)&g_app_info_dup, "g_app_info_dup", LIBS);
+  gidLink(cast(void**)&g_app_info_equal, "g_app_info_equal", LIBS);
+  gidLink(cast(void**)&g_app_info_get_commandline, "g_app_info_get_commandline", LIBS);
+  gidLink(cast(void**)&g_app_info_get_description, "g_app_info_get_description", LIBS);
+  gidLink(cast(void**)&g_app_info_get_display_name, "g_app_info_get_display_name", LIBS);
+  gidLink(cast(void**)&g_app_info_get_executable, "g_app_info_get_executable", LIBS);
+  gidLink(cast(void**)&g_app_info_get_icon, "g_app_info_get_icon", LIBS);
+  gidLink(cast(void**)&g_app_info_get_id, "g_app_info_get_id", LIBS);
+  gidLink(cast(void**)&g_app_info_get_name, "g_app_info_get_name", LIBS);
+  gidLink(cast(void**)&g_app_info_get_supported_types, "g_app_info_get_supported_types", LIBS);
+  gidLink(cast(void**)&g_app_info_launch, "g_app_info_launch", LIBS);
+  gidLink(cast(void**)&g_app_info_launch_uris, "g_app_info_launch_uris", LIBS);
+  gidLink(cast(void**)&g_app_info_launch_uris_async, "g_app_info_launch_uris_async", LIBS);
+  gidLink(cast(void**)&g_app_info_launch_uris_finish, "g_app_info_launch_uris_finish", LIBS);
+  gidLink(cast(void**)&g_app_info_remove_supports_type, "g_app_info_remove_supports_type", LIBS);
+  gidLink(cast(void**)&g_app_info_set_as_default_for_extension, "g_app_info_set_as_default_for_extension", LIBS);
+  gidLink(cast(void**)&g_app_info_set_as_default_for_type, "g_app_info_set_as_default_for_type", LIBS);
+  gidLink(cast(void**)&g_app_info_set_as_last_used_for_type, "g_app_info_set_as_last_used_for_type", LIBS);
+  gidLink(cast(void**)&g_app_info_should_show, "g_app_info_should_show", LIBS);
+  gidLink(cast(void**)&g_app_info_supports_files, "g_app_info_supports_files", LIBS);
+  gidLink(cast(void**)&g_app_info_supports_uris, "g_app_info_supports_uris", LIBS);
 
   // AppInfoMonitor
-  gidLink(g_app_info_monitor_get_type, "g_app_info_monitor_get_type", LIBS);
-  gidLink(g_app_info_monitor_get, "g_app_info_monitor_get", LIBS);
+  gidLink(cast(void**)&g_app_info_monitor_get_type, "g_app_info_monitor_get_type", LIBS);
+  gidLink(cast(void**)&g_app_info_monitor_get, "g_app_info_monitor_get", LIBS);
 
   // AppLaunchContext
-  gidLink(g_app_launch_context_get_type, "g_app_launch_context_get_type", LIBS);
-  gidLink(g_app_launch_context_new, "g_app_launch_context_new", LIBS);
-  gidLink(g_app_launch_context_get_display, "g_app_launch_context_get_display", LIBS);
-  gidLink(g_app_launch_context_get_environment, "g_app_launch_context_get_environment", LIBS);
-  gidLink(g_app_launch_context_get_startup_notify_id, "g_app_launch_context_get_startup_notify_id", LIBS);
-  gidLink(g_app_launch_context_launch_failed, "g_app_launch_context_launch_failed", LIBS);
-  gidLink(g_app_launch_context_setenv, "g_app_launch_context_setenv", LIBS);
-  gidLink(g_app_launch_context_unsetenv, "g_app_launch_context_unsetenv", LIBS);
+  gidLink(cast(void**)&g_app_launch_context_get_type, "g_app_launch_context_get_type", LIBS);
+  gidLink(cast(void**)&g_app_launch_context_new, "g_app_launch_context_new", LIBS);
+  gidLink(cast(void**)&g_app_launch_context_get_display, "g_app_launch_context_get_display", LIBS);
+  gidLink(cast(void**)&g_app_launch_context_get_environment, "g_app_launch_context_get_environment", LIBS);
+  gidLink(cast(void**)&g_app_launch_context_get_startup_notify_id, "g_app_launch_context_get_startup_notify_id", LIBS);
+  gidLink(cast(void**)&g_app_launch_context_launch_failed, "g_app_launch_context_launch_failed", LIBS);
+  gidLink(cast(void**)&g_app_launch_context_setenv, "g_app_launch_context_setenv", LIBS);
+  gidLink(cast(void**)&g_app_launch_context_unsetenv, "g_app_launch_context_unsetenv", LIBS);
 
   // ApplicationCommandLine
-  gidLink(g_application_command_line_get_type, "g_application_command_line_get_type", LIBS);
-  gidLink(g_application_command_line_create_file_for_arg, "g_application_command_line_create_file_for_arg", LIBS);
-  gidLink(g_application_command_line_done, "g_application_command_line_done", LIBS);
-  gidLink(g_application_command_line_get_arguments, "g_application_command_line_get_arguments", LIBS);
-  gidLink(g_application_command_line_get_cwd, "g_application_command_line_get_cwd", LIBS);
-  gidLink(g_application_command_line_get_environ, "g_application_command_line_get_environ", LIBS);
-  gidLink(g_application_command_line_get_exit_status, "g_application_command_line_get_exit_status", LIBS);
-  gidLink(g_application_command_line_get_is_remote, "g_application_command_line_get_is_remote", LIBS);
-  gidLink(g_application_command_line_get_options_dict, "g_application_command_line_get_options_dict", LIBS);
-  gidLink(g_application_command_line_get_platform_data, "g_application_command_line_get_platform_data", LIBS);
-  gidLink(g_application_command_line_get_stdin, "g_application_command_line_get_stdin", LIBS);
-  gidLink(g_application_command_line_getenv, "g_application_command_line_getenv", LIBS);
-  gidLink(g_application_command_line_print, "g_application_command_line_print", LIBS);
-  gidLink(g_application_command_line_print_literal, "g_application_command_line_print_literal", LIBS);
-  gidLink(g_application_command_line_printerr, "g_application_command_line_printerr", LIBS);
-  gidLink(g_application_command_line_printerr_literal, "g_application_command_line_printerr_literal", LIBS);
-  gidLink(g_application_command_line_set_exit_status, "g_application_command_line_set_exit_status", LIBS);
+  gidLink(cast(void**)&g_application_command_line_get_type, "g_application_command_line_get_type", LIBS);
+  gidLink(cast(void**)&g_application_command_line_create_file_for_arg, "g_application_command_line_create_file_for_arg", LIBS);
+  gidLink(cast(void**)&g_application_command_line_done, "g_application_command_line_done", LIBS);
+  gidLink(cast(void**)&g_application_command_line_get_arguments, "g_application_command_line_get_arguments", LIBS);
+  gidLink(cast(void**)&g_application_command_line_get_cwd, "g_application_command_line_get_cwd", LIBS);
+  gidLink(cast(void**)&g_application_command_line_get_environ, "g_application_command_line_get_environ", LIBS);
+  gidLink(cast(void**)&g_application_command_line_get_exit_status, "g_application_command_line_get_exit_status", LIBS);
+  gidLink(cast(void**)&g_application_command_line_get_is_remote, "g_application_command_line_get_is_remote", LIBS);
+  gidLink(cast(void**)&g_application_command_line_get_options_dict, "g_application_command_line_get_options_dict", LIBS);
+  gidLink(cast(void**)&g_application_command_line_get_platform_data, "g_application_command_line_get_platform_data", LIBS);
+  gidLink(cast(void**)&g_application_command_line_get_stdin, "g_application_command_line_get_stdin", LIBS);
+  gidLink(cast(void**)&g_application_command_line_getenv, "g_application_command_line_getenv", LIBS);
+  gidLink(cast(void**)&g_application_command_line_print, "g_application_command_line_print", LIBS);
+  gidLink(cast(void**)&g_application_command_line_print_literal, "g_application_command_line_print_literal", LIBS);
+  gidLink(cast(void**)&g_application_command_line_printerr, "g_application_command_line_printerr", LIBS);
+  gidLink(cast(void**)&g_application_command_line_printerr_literal, "g_application_command_line_printerr_literal", LIBS);
+  gidLink(cast(void**)&g_application_command_line_set_exit_status, "g_application_command_line_set_exit_status", LIBS);
 
   // ApplicationGio
-  gidLink(g_application_get_type, "g_application_get_type", LIBS);
-  gidLink(g_application_new, "g_application_new", LIBS);
-  gidLink(g_application_get_default, "g_application_get_default", LIBS);
-  gidLink(g_application_id_is_valid, "g_application_id_is_valid", LIBS);
-  gidLink(g_application_activate, "g_application_activate", LIBS);
-  gidLink(g_application_add_main_option, "g_application_add_main_option", LIBS);
-  gidLink(g_application_add_main_option_entries, "g_application_add_main_option_entries", LIBS);
-  gidLink(g_application_add_option_group, "g_application_add_option_group", LIBS);
-  gidLink(g_application_bind_busy_property, "g_application_bind_busy_property", LIBS);
-  gidLink(g_application_get_application_id, "g_application_get_application_id", LIBS);
-  gidLink(g_application_get_dbus_connection, "g_application_get_dbus_connection", LIBS);
-  gidLink(g_application_get_dbus_object_path, "g_application_get_dbus_object_path", LIBS);
-  gidLink(g_application_get_flags, "g_application_get_flags", LIBS);
-  gidLink(g_application_get_inactivity_timeout, "g_application_get_inactivity_timeout", LIBS);
-  gidLink(g_application_get_is_busy, "g_application_get_is_busy", LIBS);
-  gidLink(g_application_get_is_registered, "g_application_get_is_registered", LIBS);
-  gidLink(g_application_get_is_remote, "g_application_get_is_remote", LIBS);
-  gidLink(g_application_get_resource_base_path, "g_application_get_resource_base_path", LIBS);
-  gidLink(g_application_get_version, "g_application_get_version", LIBS);
-  gidLink(g_application_hold, "g_application_hold", LIBS);
-  gidLink(g_application_mark_busy, "g_application_mark_busy", LIBS);
-  gidLink(g_application_open, "g_application_open", LIBS);
-  gidLink(g_application_quit, "g_application_quit", LIBS);
-  gidLink(g_application_register, "g_application_register", LIBS);
-  gidLink(g_application_release, "g_application_release", LIBS);
-  gidLink(g_application_run, "g_application_run", LIBS);
-  gidLink(g_application_send_notification, "g_application_send_notification", LIBS);
-  gidLink(g_application_set_action_group, "g_application_set_action_group", LIBS);
-  gidLink(g_application_set_application_id, "g_application_set_application_id", LIBS);
-  gidLink(g_application_set_default, "g_application_set_default", LIBS);
-  gidLink(g_application_set_flags, "g_application_set_flags", LIBS);
-  gidLink(g_application_set_inactivity_timeout, "g_application_set_inactivity_timeout", LIBS);
-  gidLink(g_application_set_option_context_description, "g_application_set_option_context_description", LIBS);
-  gidLink(g_application_set_option_context_parameter_string, "g_application_set_option_context_parameter_string", LIBS);
-  gidLink(g_application_set_option_context_summary, "g_application_set_option_context_summary", LIBS);
-  gidLink(g_application_set_resource_base_path, "g_application_set_resource_base_path", LIBS);
-  gidLink(g_application_set_version, "g_application_set_version", LIBS);
-  gidLink(g_application_unbind_busy_property, "g_application_unbind_busy_property", LIBS);
-  gidLink(g_application_unmark_busy, "g_application_unmark_busy", LIBS);
-  gidLink(g_application_withdraw_notification, "g_application_withdraw_notification", LIBS);
+  gidLink(cast(void**)&g_application_get_type, "g_application_get_type", LIBS);
+  gidLink(cast(void**)&g_application_new, "g_application_new", LIBS);
+  gidLink(cast(void**)&g_application_get_default, "g_application_get_default", LIBS);
+  gidLink(cast(void**)&g_application_id_is_valid, "g_application_id_is_valid", LIBS);
+  gidLink(cast(void**)&g_application_activate, "g_application_activate", LIBS);
+  gidLink(cast(void**)&g_application_add_main_option, "g_application_add_main_option", LIBS);
+  gidLink(cast(void**)&g_application_add_main_option_entries, "g_application_add_main_option_entries", LIBS);
+  gidLink(cast(void**)&g_application_add_option_group, "g_application_add_option_group", LIBS);
+  gidLink(cast(void**)&g_application_bind_busy_property, "g_application_bind_busy_property", LIBS);
+  gidLink(cast(void**)&g_application_get_application_id, "g_application_get_application_id", LIBS);
+  gidLink(cast(void**)&g_application_get_dbus_connection, "g_application_get_dbus_connection", LIBS);
+  gidLink(cast(void**)&g_application_get_dbus_object_path, "g_application_get_dbus_object_path", LIBS);
+  gidLink(cast(void**)&g_application_get_flags, "g_application_get_flags", LIBS);
+  gidLink(cast(void**)&g_application_get_inactivity_timeout, "g_application_get_inactivity_timeout", LIBS);
+  gidLink(cast(void**)&g_application_get_is_busy, "g_application_get_is_busy", LIBS);
+  gidLink(cast(void**)&g_application_get_is_registered, "g_application_get_is_registered", LIBS);
+  gidLink(cast(void**)&g_application_get_is_remote, "g_application_get_is_remote", LIBS);
+  gidLink(cast(void**)&g_application_get_resource_base_path, "g_application_get_resource_base_path", LIBS);
+  gidLink(cast(void**)&g_application_get_version, "g_application_get_version", LIBS);
+  gidLink(cast(void**)&g_application_hold, "g_application_hold", LIBS);
+  gidLink(cast(void**)&g_application_mark_busy, "g_application_mark_busy", LIBS);
+  gidLink(cast(void**)&g_application_open, "g_application_open", LIBS);
+  gidLink(cast(void**)&g_application_quit, "g_application_quit", LIBS);
+  gidLink(cast(void**)&g_application_register, "g_application_register", LIBS);
+  gidLink(cast(void**)&g_application_release, "g_application_release", LIBS);
+  gidLink(cast(void**)&g_application_run, "g_application_run", LIBS);
+  gidLink(cast(void**)&g_application_send_notification, "g_application_send_notification", LIBS);
+  gidLink(cast(void**)&g_application_set_action_group, "g_application_set_action_group", LIBS);
+  gidLink(cast(void**)&g_application_set_application_id, "g_application_set_application_id", LIBS);
+  gidLink(cast(void**)&g_application_set_default, "g_application_set_default", LIBS);
+  gidLink(cast(void**)&g_application_set_flags, "g_application_set_flags", LIBS);
+  gidLink(cast(void**)&g_application_set_inactivity_timeout, "g_application_set_inactivity_timeout", LIBS);
+  gidLink(cast(void**)&g_application_set_option_context_description, "g_application_set_option_context_description", LIBS);
+  gidLink(cast(void**)&g_application_set_option_context_parameter_string, "g_application_set_option_context_parameter_string", LIBS);
+  gidLink(cast(void**)&g_application_set_option_context_summary, "g_application_set_option_context_summary", LIBS);
+  gidLink(cast(void**)&g_application_set_resource_base_path, "g_application_set_resource_base_path", LIBS);
+  gidLink(cast(void**)&g_application_set_version, "g_application_set_version", LIBS);
+  gidLink(cast(void**)&g_application_unbind_busy_property, "g_application_unbind_busy_property", LIBS);
+  gidLink(cast(void**)&g_application_unmark_busy, "g_application_unmark_busy", LIBS);
+  gidLink(cast(void**)&g_application_withdraw_notification, "g_application_withdraw_notification", LIBS);
 
   // AsyncInitable
-  gidLink(g_async_initable_get_type, "g_async_initable_get_type", LIBS);
-  gidLink(g_async_initable_new_async, "g_async_initable_new_async", LIBS);
-  gidLink(g_async_initable_new_valist_async, "g_async_initable_new_valist_async", LIBS);
-  gidLink(g_async_initable_newv_async, "g_async_initable_newv_async", LIBS);
-  gidLink(g_async_initable_init_async, "g_async_initable_init_async", LIBS);
-  gidLink(g_async_initable_init_finish, "g_async_initable_init_finish", LIBS);
-  gidLink(g_async_initable_new_finish, "g_async_initable_new_finish", LIBS);
+  gidLink(cast(void**)&g_async_initable_get_type, "g_async_initable_get_type", LIBS);
+  gidLink(cast(void**)&g_async_initable_new_async, "g_async_initable_new_async", LIBS);
+  gidLink(cast(void**)&g_async_initable_new_valist_async, "g_async_initable_new_valist_async", LIBS);
+  gidLink(cast(void**)&g_async_initable_newv_async, "g_async_initable_newv_async", LIBS);
+  gidLink(cast(void**)&g_async_initable_init_async, "g_async_initable_init_async", LIBS);
+  gidLink(cast(void**)&g_async_initable_init_finish, "g_async_initable_init_finish", LIBS);
+  gidLink(cast(void**)&g_async_initable_new_finish, "g_async_initable_new_finish", LIBS);
 
   // AsyncResult
-  gidLink(g_async_result_get_type, "g_async_result_get_type", LIBS);
-  gidLink(g_async_result_get_source_object, "g_async_result_get_source_object", LIBS);
-  gidLink(g_async_result_get_user_data, "g_async_result_get_user_data", LIBS);
-  gidLink(g_async_result_is_tagged, "g_async_result_is_tagged", LIBS);
-  gidLink(g_async_result_legacy_propagate_error, "g_async_result_legacy_propagate_error", LIBS);
+  gidLink(cast(void**)&g_async_result_get_type, "g_async_result_get_type", LIBS);
+  gidLink(cast(void**)&g_async_result_get_source_object, "g_async_result_get_source_object", LIBS);
+  gidLink(cast(void**)&g_async_result_get_user_data, "g_async_result_get_user_data", LIBS);
+  gidLink(cast(void**)&g_async_result_is_tagged, "g_async_result_is_tagged", LIBS);
+  gidLink(cast(void**)&g_async_result_legacy_propagate_error, "g_async_result_legacy_propagate_error", LIBS);
 
   // BufferedInputStream
-  gidLink(g_buffered_input_stream_get_type, "g_buffered_input_stream_get_type", LIBS);
-  gidLink(g_buffered_input_stream_new, "g_buffered_input_stream_new", LIBS);
-  gidLink(g_buffered_input_stream_new_sized, "g_buffered_input_stream_new_sized", LIBS);
-  gidLink(g_buffered_input_stream_fill, "g_buffered_input_stream_fill", LIBS);
-  gidLink(g_buffered_input_stream_fill_async, "g_buffered_input_stream_fill_async", LIBS);
-  gidLink(g_buffered_input_stream_fill_finish, "g_buffered_input_stream_fill_finish", LIBS);
-  gidLink(g_buffered_input_stream_get_available, "g_buffered_input_stream_get_available", LIBS);
-  gidLink(g_buffered_input_stream_get_buffer_size, "g_buffered_input_stream_get_buffer_size", LIBS);
-  gidLink(g_buffered_input_stream_peek, "g_buffered_input_stream_peek", LIBS);
-  gidLink(g_buffered_input_stream_peek_buffer, "g_buffered_input_stream_peek_buffer", LIBS);
-  gidLink(g_buffered_input_stream_read_byte, "g_buffered_input_stream_read_byte", LIBS);
-  gidLink(g_buffered_input_stream_set_buffer_size, "g_buffered_input_stream_set_buffer_size", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_get_type, "g_buffered_input_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_new, "g_buffered_input_stream_new", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_new_sized, "g_buffered_input_stream_new_sized", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_fill, "g_buffered_input_stream_fill", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_fill_async, "g_buffered_input_stream_fill_async", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_fill_finish, "g_buffered_input_stream_fill_finish", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_get_available, "g_buffered_input_stream_get_available", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_get_buffer_size, "g_buffered_input_stream_get_buffer_size", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_peek, "g_buffered_input_stream_peek", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_peek_buffer, "g_buffered_input_stream_peek_buffer", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_read_byte, "g_buffered_input_stream_read_byte", LIBS);
+  gidLink(cast(void**)&g_buffered_input_stream_set_buffer_size, "g_buffered_input_stream_set_buffer_size", LIBS);
 
   // BufferedOutputStream
-  gidLink(g_buffered_output_stream_get_type, "g_buffered_output_stream_get_type", LIBS);
-  gidLink(g_buffered_output_stream_new, "g_buffered_output_stream_new", LIBS);
-  gidLink(g_buffered_output_stream_new_sized, "g_buffered_output_stream_new_sized", LIBS);
-  gidLink(g_buffered_output_stream_get_auto_grow, "g_buffered_output_stream_get_auto_grow", LIBS);
-  gidLink(g_buffered_output_stream_get_buffer_size, "g_buffered_output_stream_get_buffer_size", LIBS);
-  gidLink(g_buffered_output_stream_set_auto_grow, "g_buffered_output_stream_set_auto_grow", LIBS);
-  gidLink(g_buffered_output_stream_set_buffer_size, "g_buffered_output_stream_set_buffer_size", LIBS);
+  gidLink(cast(void**)&g_buffered_output_stream_get_type, "g_buffered_output_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_buffered_output_stream_new, "g_buffered_output_stream_new", LIBS);
+  gidLink(cast(void**)&g_buffered_output_stream_new_sized, "g_buffered_output_stream_new_sized", LIBS);
+  gidLink(cast(void**)&g_buffered_output_stream_get_auto_grow, "g_buffered_output_stream_get_auto_grow", LIBS);
+  gidLink(cast(void**)&g_buffered_output_stream_get_buffer_size, "g_buffered_output_stream_get_buffer_size", LIBS);
+  gidLink(cast(void**)&g_buffered_output_stream_set_auto_grow, "g_buffered_output_stream_set_auto_grow", LIBS);
+  gidLink(cast(void**)&g_buffered_output_stream_set_buffer_size, "g_buffered_output_stream_set_buffer_size", LIBS);
 
   // BytesIcon
-  gidLink(g_bytes_icon_get_type, "g_bytes_icon_get_type", LIBS);
-  gidLink(g_bytes_icon_new, "g_bytes_icon_new", LIBS);
-  gidLink(g_bytes_icon_get_bytes, "g_bytes_icon_get_bytes", LIBS);
+  gidLink(cast(void**)&g_bytes_icon_get_type, "g_bytes_icon_get_type", LIBS);
+  gidLink(cast(void**)&g_bytes_icon_new, "g_bytes_icon_new", LIBS);
+  gidLink(cast(void**)&g_bytes_icon_get_bytes, "g_bytes_icon_get_bytes", LIBS);
 
   // Cancellable
-  gidLink(g_cancellable_get_type, "g_cancellable_get_type", LIBS);
-  gidLink(g_cancellable_new, "g_cancellable_new", LIBS);
-  gidLink(g_cancellable_get_current, "g_cancellable_get_current", LIBS);
-  gidLink(g_cancellable_cancel, "g_cancellable_cancel", LIBS);
-  gidLink(g_cancellable_connect, "g_cancellable_connect", LIBS);
-  gidLink(g_cancellable_disconnect, "g_cancellable_disconnect", LIBS);
-  gidLink(g_cancellable_get_fd, "g_cancellable_get_fd", LIBS);
-  gidLink(g_cancellable_is_cancelled, "g_cancellable_is_cancelled", LIBS);
-  gidLink(g_cancellable_make_pollfd, "g_cancellable_make_pollfd", LIBS);
-  gidLink(g_cancellable_pop_current, "g_cancellable_pop_current", LIBS);
-  gidLink(g_cancellable_push_current, "g_cancellable_push_current", LIBS);
-  gidLink(g_cancellable_release_fd, "g_cancellable_release_fd", LIBS);
-  gidLink(g_cancellable_reset, "g_cancellable_reset", LIBS);
-  gidLink(g_cancellable_set_error_if_cancelled, "g_cancellable_set_error_if_cancelled", LIBS);
-  gidLink(g_cancellable_source_new, "g_cancellable_source_new", LIBS);
+  gidLink(cast(void**)&g_cancellable_get_type, "g_cancellable_get_type", LIBS);
+  gidLink(cast(void**)&g_cancellable_new, "g_cancellable_new", LIBS);
+  gidLink(cast(void**)&g_cancellable_get_current, "g_cancellable_get_current", LIBS);
+  gidLink(cast(void**)&g_cancellable_cancel, "g_cancellable_cancel", LIBS);
+  gidLink(cast(void**)&g_cancellable_connect, "g_cancellable_connect", LIBS);
+  gidLink(cast(void**)&g_cancellable_disconnect, "g_cancellable_disconnect", LIBS);
+  gidLink(cast(void**)&g_cancellable_get_fd, "g_cancellable_get_fd", LIBS);
+  gidLink(cast(void**)&g_cancellable_is_cancelled, "g_cancellable_is_cancelled", LIBS);
+  gidLink(cast(void**)&g_cancellable_make_pollfd, "g_cancellable_make_pollfd", LIBS);
+  gidLink(cast(void**)&g_cancellable_pop_current, "g_cancellable_pop_current", LIBS);
+  gidLink(cast(void**)&g_cancellable_push_current, "g_cancellable_push_current", LIBS);
+  gidLink(cast(void**)&g_cancellable_release_fd, "g_cancellable_release_fd", LIBS);
+  gidLink(cast(void**)&g_cancellable_reset, "g_cancellable_reset", LIBS);
+  gidLink(cast(void**)&g_cancellable_set_error_if_cancelled, "g_cancellable_set_error_if_cancelled", LIBS);
+  gidLink(cast(void**)&g_cancellable_source_new, "g_cancellable_source_new", LIBS);
 
   // CharsetConverter
-  gidLink(g_charset_converter_get_type, "g_charset_converter_get_type", LIBS);
-  gidLink(g_charset_converter_new, "g_charset_converter_new", LIBS);
-  gidLink(g_charset_converter_get_num_fallbacks, "g_charset_converter_get_num_fallbacks", LIBS);
-  gidLink(g_charset_converter_get_use_fallback, "g_charset_converter_get_use_fallback", LIBS);
-  gidLink(g_charset_converter_set_use_fallback, "g_charset_converter_set_use_fallback", LIBS);
+  gidLink(cast(void**)&g_charset_converter_get_type, "g_charset_converter_get_type", LIBS);
+  gidLink(cast(void**)&g_charset_converter_new, "g_charset_converter_new", LIBS);
+  gidLink(cast(void**)&g_charset_converter_get_num_fallbacks, "g_charset_converter_get_num_fallbacks", LIBS);
+  gidLink(cast(void**)&g_charset_converter_get_use_fallback, "g_charset_converter_get_use_fallback", LIBS);
+  gidLink(cast(void**)&g_charset_converter_set_use_fallback, "g_charset_converter_set_use_fallback", LIBS);
 
   // Converter
-  gidLink(g_converter_get_type, "g_converter_get_type", LIBS);
-  gidLink(g_converter_convert, "g_converter_convert", LIBS);
-  gidLink(g_converter_reset, "g_converter_reset", LIBS);
+  gidLink(cast(void**)&g_converter_get_type, "g_converter_get_type", LIBS);
+  gidLink(cast(void**)&g_converter_convert, "g_converter_convert", LIBS);
+  gidLink(cast(void**)&g_converter_reset, "g_converter_reset", LIBS);
 
   // ConverterInputStream
-  gidLink(g_converter_input_stream_get_type, "g_converter_input_stream_get_type", LIBS);
-  gidLink(g_converter_input_stream_new, "g_converter_input_stream_new", LIBS);
-  gidLink(g_converter_input_stream_get_converter, "g_converter_input_stream_get_converter", LIBS);
+  gidLink(cast(void**)&g_converter_input_stream_get_type, "g_converter_input_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_converter_input_stream_new, "g_converter_input_stream_new", LIBS);
+  gidLink(cast(void**)&g_converter_input_stream_get_converter, "g_converter_input_stream_get_converter", LIBS);
 
   // ConverterOutputStream
-  gidLink(g_converter_output_stream_get_type, "g_converter_output_stream_get_type", LIBS);
-  gidLink(g_converter_output_stream_new, "g_converter_output_stream_new", LIBS);
-  gidLink(g_converter_output_stream_get_converter, "g_converter_output_stream_get_converter", LIBS);
+  gidLink(cast(void**)&g_converter_output_stream_get_type, "g_converter_output_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_converter_output_stream_new, "g_converter_output_stream_new", LIBS);
+  gidLink(cast(void**)&g_converter_output_stream_get_converter, "g_converter_output_stream_get_converter", LIBS);
 
   // Credentials
-  gidLink(g_credentials_get_type, "g_credentials_get_type", LIBS);
-  gidLink(g_credentials_new, "g_credentials_new", LIBS);
-  gidLink(g_credentials_get_native, "g_credentials_get_native", LIBS);
-  gidLink(g_credentials_get_unix_pid, "g_credentials_get_unix_pid", LIBS);
-  gidLink(g_credentials_get_unix_user, "g_credentials_get_unix_user", LIBS);
-  gidLink(g_credentials_is_same_user, "g_credentials_is_same_user", LIBS);
-  gidLink(g_credentials_set_native, "g_credentials_set_native", LIBS);
-  gidLink(g_credentials_set_unix_user, "g_credentials_set_unix_user", LIBS);
-  gidLink(g_credentials_to_string, "g_credentials_to_string", LIBS);
+  gidLink(cast(void**)&g_credentials_get_type, "g_credentials_get_type", LIBS);
+  gidLink(cast(void**)&g_credentials_new, "g_credentials_new", LIBS);
+  gidLink(cast(void**)&g_credentials_get_native, "g_credentials_get_native", LIBS);
+  gidLink(cast(void**)&g_credentials_get_unix_pid, "g_credentials_get_unix_pid", LIBS);
+  gidLink(cast(void**)&g_credentials_get_unix_user, "g_credentials_get_unix_user", LIBS);
+  gidLink(cast(void**)&g_credentials_is_same_user, "g_credentials_is_same_user", LIBS);
+  gidLink(cast(void**)&g_credentials_set_native, "g_credentials_set_native", LIBS);
+  gidLink(cast(void**)&g_credentials_set_unix_user, "g_credentials_set_unix_user", LIBS);
+  gidLink(cast(void**)&g_credentials_to_string, "g_credentials_to_string", LIBS);
 
   // DBusActionGroup
-  gidLink(g_dbus_action_group_get_type, "g_dbus_action_group_get_type", LIBS);
-  gidLink(g_dbus_action_group_get, "g_dbus_action_group_get", LIBS);
+  gidLink(cast(void**)&g_dbus_action_group_get_type, "g_dbus_action_group_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_action_group_get, "g_dbus_action_group_get", LIBS);
 
   // DBusAnnotationInfo
-  gidLink(g_dbus_annotation_info_get_type, "g_dbus_annotation_info_get_type", LIBS);
-  gidLink(g_dbus_annotation_info_ref, "g_dbus_annotation_info_ref", LIBS);
-  gidLink(g_dbus_annotation_info_unref, "g_dbus_annotation_info_unref", LIBS);
-  gidLink(g_dbus_annotation_info_lookup, "g_dbus_annotation_info_lookup", LIBS);
+  gidLink(cast(void**)&g_dbus_annotation_info_get_type, "g_dbus_annotation_info_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_annotation_info_ref, "g_dbus_annotation_info_ref", LIBS);
+  gidLink(cast(void**)&g_dbus_annotation_info_unref, "g_dbus_annotation_info_unref", LIBS);
+  gidLink(cast(void**)&g_dbus_annotation_info_lookup, "g_dbus_annotation_info_lookup", LIBS);
 
   // DBusArgInfo
-  gidLink(g_dbus_arg_info_get_type, "g_dbus_arg_info_get_type", LIBS);
-  gidLink(g_dbus_arg_info_ref, "g_dbus_arg_info_ref", LIBS);
-  gidLink(g_dbus_arg_info_unref, "g_dbus_arg_info_unref", LIBS);
+  gidLink(cast(void**)&g_dbus_arg_info_get_type, "g_dbus_arg_info_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_arg_info_ref, "g_dbus_arg_info_ref", LIBS);
+  gidLink(cast(void**)&g_dbus_arg_info_unref, "g_dbus_arg_info_unref", LIBS);
 
   // DBusAuthObserver
-  gidLink(g_dbus_auth_observer_get_type, "g_dbus_auth_observer_get_type", LIBS);
-  gidLink(g_dbus_auth_observer_new, "g_dbus_auth_observer_new", LIBS);
-  gidLink(g_dbus_auth_observer_allow_mechanism, "g_dbus_auth_observer_allow_mechanism", LIBS);
-  gidLink(g_dbus_auth_observer_authorize_authenticated_peer, "g_dbus_auth_observer_authorize_authenticated_peer", LIBS);
+  gidLink(cast(void**)&g_dbus_auth_observer_get_type, "g_dbus_auth_observer_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_auth_observer_new, "g_dbus_auth_observer_new", LIBS);
+  gidLink(cast(void**)&g_dbus_auth_observer_allow_mechanism, "g_dbus_auth_observer_allow_mechanism", LIBS);
+  gidLink(cast(void**)&g_dbus_auth_observer_authorize_authenticated_peer, "g_dbus_auth_observer_authorize_authenticated_peer", LIBS);
 
   // DBusConnection
-  gidLink(g_dbus_connection_get_type, "g_dbus_connection_get_type", LIBS);
-  gidLink(g_dbus_connection_new_finish, "g_dbus_connection_new_finish", LIBS);
-  gidLink(g_dbus_connection_new_for_address_finish, "g_dbus_connection_new_for_address_finish", LIBS);
-  gidLink(g_dbus_connection_new_for_address_sync, "g_dbus_connection_new_for_address_sync", LIBS);
-  gidLink(g_dbus_connection_new_sync, "g_dbus_connection_new_sync", LIBS);
-  gidLink(g_dbus_connection_new, "g_dbus_connection_new", LIBS);
-  gidLink(g_dbus_connection_new_for_address, "g_dbus_connection_new_for_address", LIBS);
-  gidLink(g_dbus_connection_add_filter, "g_dbus_connection_add_filter", LIBS);
-  gidLink(g_dbus_connection_call, "g_dbus_connection_call", LIBS);
-  gidLink(g_dbus_connection_call_finish, "g_dbus_connection_call_finish", LIBS);
-  gidLink(g_dbus_connection_call_sync, "g_dbus_connection_call_sync", LIBS);
-  gidLink(g_dbus_connection_call_with_unix_fd_list, "g_dbus_connection_call_with_unix_fd_list", LIBS);
-  gidLink(g_dbus_connection_call_with_unix_fd_list_finish, "g_dbus_connection_call_with_unix_fd_list_finish", LIBS);
-  gidLink(g_dbus_connection_call_with_unix_fd_list_sync, "g_dbus_connection_call_with_unix_fd_list_sync", LIBS);
-  gidLink(g_dbus_connection_close, "g_dbus_connection_close", LIBS);
-  gidLink(g_dbus_connection_close_finish, "g_dbus_connection_close_finish", LIBS);
-  gidLink(g_dbus_connection_close_sync, "g_dbus_connection_close_sync", LIBS);
-  gidLink(g_dbus_connection_emit_signal, "g_dbus_connection_emit_signal", LIBS);
-  gidLink(g_dbus_connection_export_action_group, "g_dbus_connection_export_action_group", LIBS);
-  gidLink(g_dbus_connection_export_menu_model, "g_dbus_connection_export_menu_model", LIBS);
-  gidLink(g_dbus_connection_flush, "g_dbus_connection_flush", LIBS);
-  gidLink(g_dbus_connection_flush_finish, "g_dbus_connection_flush_finish", LIBS);
-  gidLink(g_dbus_connection_flush_sync, "g_dbus_connection_flush_sync", LIBS);
-  gidLink(g_dbus_connection_get_capabilities, "g_dbus_connection_get_capabilities", LIBS);
-  gidLink(g_dbus_connection_get_exit_on_close, "g_dbus_connection_get_exit_on_close", LIBS);
-  gidLink(g_dbus_connection_get_flags, "g_dbus_connection_get_flags", LIBS);
-  gidLink(g_dbus_connection_get_guid, "g_dbus_connection_get_guid", LIBS);
-  gidLink(g_dbus_connection_get_last_serial, "g_dbus_connection_get_last_serial", LIBS);
-  gidLink(g_dbus_connection_get_peer_credentials, "g_dbus_connection_get_peer_credentials", LIBS);
-  gidLink(g_dbus_connection_get_stream, "g_dbus_connection_get_stream", LIBS);
-  gidLink(g_dbus_connection_get_unique_name, "g_dbus_connection_get_unique_name", LIBS);
-  gidLink(g_dbus_connection_is_closed, "g_dbus_connection_is_closed", LIBS);
-  gidLink(g_dbus_connection_register_object, "g_dbus_connection_register_object", LIBS);
-  gidLink(g_dbus_connection_register_object_with_closures, "g_dbus_connection_register_object_with_closures", LIBS);
-  gidLink(g_dbus_connection_register_subtree, "g_dbus_connection_register_subtree", LIBS);
-  gidLink(g_dbus_connection_remove_filter, "g_dbus_connection_remove_filter", LIBS);
-  gidLink(g_dbus_connection_send_message, "g_dbus_connection_send_message", LIBS);
-  gidLink(g_dbus_connection_send_message_with_reply, "g_dbus_connection_send_message_with_reply", LIBS);
-  gidLink(g_dbus_connection_send_message_with_reply_finish, "g_dbus_connection_send_message_with_reply_finish", LIBS);
-  gidLink(g_dbus_connection_send_message_with_reply_sync, "g_dbus_connection_send_message_with_reply_sync", LIBS);
-  gidLink(g_dbus_connection_set_exit_on_close, "g_dbus_connection_set_exit_on_close", LIBS);
-  gidLink(g_dbus_connection_signal_subscribe, "g_dbus_connection_signal_subscribe", LIBS);
-  gidLink(g_dbus_connection_signal_unsubscribe, "g_dbus_connection_signal_unsubscribe", LIBS);
-  gidLink(g_dbus_connection_start_message_processing, "g_dbus_connection_start_message_processing", LIBS);
-  gidLink(g_dbus_connection_unexport_action_group, "g_dbus_connection_unexport_action_group", LIBS);
-  gidLink(g_dbus_connection_unexport_menu_model, "g_dbus_connection_unexport_menu_model", LIBS);
-  gidLink(g_dbus_connection_unregister_object, "g_dbus_connection_unregister_object", LIBS);
-  gidLink(g_dbus_connection_unregister_subtree, "g_dbus_connection_unregister_subtree", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_get_type, "g_dbus_connection_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_new_finish, "g_dbus_connection_new_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_new_for_address_finish, "g_dbus_connection_new_for_address_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_new_for_address_sync, "g_dbus_connection_new_for_address_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_new_sync, "g_dbus_connection_new_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_new, "g_dbus_connection_new", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_new_for_address, "g_dbus_connection_new_for_address", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_add_filter, "g_dbus_connection_add_filter", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_call, "g_dbus_connection_call", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_call_finish, "g_dbus_connection_call_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_call_sync, "g_dbus_connection_call_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_call_with_unix_fd_list, "g_dbus_connection_call_with_unix_fd_list", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_call_with_unix_fd_list_finish, "g_dbus_connection_call_with_unix_fd_list_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_call_with_unix_fd_list_sync, "g_dbus_connection_call_with_unix_fd_list_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_close, "g_dbus_connection_close", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_close_finish, "g_dbus_connection_close_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_close_sync, "g_dbus_connection_close_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_emit_signal, "g_dbus_connection_emit_signal", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_export_action_group, "g_dbus_connection_export_action_group", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_export_menu_model, "g_dbus_connection_export_menu_model", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_flush, "g_dbus_connection_flush", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_flush_finish, "g_dbus_connection_flush_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_flush_sync, "g_dbus_connection_flush_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_get_capabilities, "g_dbus_connection_get_capabilities", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_get_exit_on_close, "g_dbus_connection_get_exit_on_close", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_get_flags, "g_dbus_connection_get_flags", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_get_guid, "g_dbus_connection_get_guid", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_get_last_serial, "g_dbus_connection_get_last_serial", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_get_peer_credentials, "g_dbus_connection_get_peer_credentials", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_get_stream, "g_dbus_connection_get_stream", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_get_unique_name, "g_dbus_connection_get_unique_name", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_is_closed, "g_dbus_connection_is_closed", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_register_object, "g_dbus_connection_register_object", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_register_object_with_closures, "g_dbus_connection_register_object_with_closures", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_register_subtree, "g_dbus_connection_register_subtree", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_remove_filter, "g_dbus_connection_remove_filter", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_send_message, "g_dbus_connection_send_message", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_send_message_with_reply, "g_dbus_connection_send_message_with_reply", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_send_message_with_reply_finish, "g_dbus_connection_send_message_with_reply_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_send_message_with_reply_sync, "g_dbus_connection_send_message_with_reply_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_set_exit_on_close, "g_dbus_connection_set_exit_on_close", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_signal_subscribe, "g_dbus_connection_signal_subscribe", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_signal_unsubscribe, "g_dbus_connection_signal_unsubscribe", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_start_message_processing, "g_dbus_connection_start_message_processing", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_unexport_action_group, "g_dbus_connection_unexport_action_group", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_unexport_menu_model, "g_dbus_connection_unexport_menu_model", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_unregister_object, "g_dbus_connection_unregister_object", LIBS);
+  gidLink(cast(void**)&g_dbus_connection_unregister_subtree, "g_dbus_connection_unregister_subtree", LIBS);
 
   // DBusInterface
-  gidLink(g_dbus_interface_get_type, "g_dbus_interface_get_type", LIBS);
-  gidLink(g_dbus_interface_dup_object, "g_dbus_interface_dup_object", LIBS);
-  gidLink(g_dbus_interface_get_info, "g_dbus_interface_get_info", LIBS);
-  gidLink(g_dbus_interface_get_object, "g_dbus_interface_get_object", LIBS);
-  gidLink(g_dbus_interface_set_object, "g_dbus_interface_set_object", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_get_type, "g_dbus_interface_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_dup_object, "g_dbus_interface_dup_object", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_get_info, "g_dbus_interface_get_info", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_get_object, "g_dbus_interface_get_object", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_set_object, "g_dbus_interface_set_object", LIBS);
 
   // DBusInterfaceInfo
-  gidLink(g_dbus_interface_info_get_type, "g_dbus_interface_info_get_type", LIBS);
-  gidLink(g_dbus_interface_info_cache_build, "g_dbus_interface_info_cache_build", LIBS);
-  gidLink(g_dbus_interface_info_cache_release, "g_dbus_interface_info_cache_release", LIBS);
-  gidLink(g_dbus_interface_info_generate_xml, "g_dbus_interface_info_generate_xml", LIBS);
-  gidLink(g_dbus_interface_info_lookup_method, "g_dbus_interface_info_lookup_method", LIBS);
-  gidLink(g_dbus_interface_info_lookup_property, "g_dbus_interface_info_lookup_property", LIBS);
-  gidLink(g_dbus_interface_info_lookup_signal, "g_dbus_interface_info_lookup_signal", LIBS);
-  gidLink(g_dbus_interface_info_ref, "g_dbus_interface_info_ref", LIBS);
-  gidLink(g_dbus_interface_info_unref, "g_dbus_interface_info_unref", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_info_get_type, "g_dbus_interface_info_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_info_cache_build, "g_dbus_interface_info_cache_build", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_info_cache_release, "g_dbus_interface_info_cache_release", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_info_generate_xml, "g_dbus_interface_info_generate_xml", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_info_lookup_method, "g_dbus_interface_info_lookup_method", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_info_lookup_property, "g_dbus_interface_info_lookup_property", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_info_lookup_signal, "g_dbus_interface_info_lookup_signal", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_info_ref, "g_dbus_interface_info_ref", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_info_unref, "g_dbus_interface_info_unref", LIBS);
 
   // DBusInterfaceSkeleton
-  gidLink(g_dbus_interface_skeleton_get_type, "g_dbus_interface_skeleton_get_type", LIBS);
-  gidLink(g_dbus_interface_skeleton_export, "g_dbus_interface_skeleton_export", LIBS);
-  gidLink(g_dbus_interface_skeleton_flush, "g_dbus_interface_skeleton_flush", LIBS);
-  gidLink(g_dbus_interface_skeleton_get_connection, "g_dbus_interface_skeleton_get_connection", LIBS);
-  gidLink(g_dbus_interface_skeleton_get_connections, "g_dbus_interface_skeleton_get_connections", LIBS);
-  gidLink(g_dbus_interface_skeleton_get_flags, "g_dbus_interface_skeleton_get_flags", LIBS);
-  gidLink(g_dbus_interface_skeleton_get_info, "g_dbus_interface_skeleton_get_info", LIBS);
-  gidLink(g_dbus_interface_skeleton_get_object_path, "g_dbus_interface_skeleton_get_object_path", LIBS);
-  gidLink(g_dbus_interface_skeleton_get_properties, "g_dbus_interface_skeleton_get_properties", LIBS);
-  gidLink(g_dbus_interface_skeleton_get_vtable, "g_dbus_interface_skeleton_get_vtable", LIBS);
-  gidLink(g_dbus_interface_skeleton_has_connection, "g_dbus_interface_skeleton_has_connection", LIBS);
-  gidLink(g_dbus_interface_skeleton_set_flags, "g_dbus_interface_skeleton_set_flags", LIBS);
-  gidLink(g_dbus_interface_skeleton_unexport, "g_dbus_interface_skeleton_unexport", LIBS);
-  gidLink(g_dbus_interface_skeleton_unexport_from_connection, "g_dbus_interface_skeleton_unexport_from_connection", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_get_type, "g_dbus_interface_skeleton_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_export, "g_dbus_interface_skeleton_export", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_flush, "g_dbus_interface_skeleton_flush", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_get_connection, "g_dbus_interface_skeleton_get_connection", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_get_connections, "g_dbus_interface_skeleton_get_connections", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_get_flags, "g_dbus_interface_skeleton_get_flags", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_get_info, "g_dbus_interface_skeleton_get_info", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_get_object_path, "g_dbus_interface_skeleton_get_object_path", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_get_properties, "g_dbus_interface_skeleton_get_properties", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_get_vtable, "g_dbus_interface_skeleton_get_vtable", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_has_connection, "g_dbus_interface_skeleton_has_connection", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_set_flags, "g_dbus_interface_skeleton_set_flags", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_unexport, "g_dbus_interface_skeleton_unexport", LIBS);
+  gidLink(cast(void**)&g_dbus_interface_skeleton_unexport_from_connection, "g_dbus_interface_skeleton_unexport_from_connection", LIBS);
 
   // DBusMenuModel
-  gidLink(g_dbus_menu_model_get_type, "g_dbus_menu_model_get_type", LIBS);
-  gidLink(g_dbus_menu_model_get, "g_dbus_menu_model_get", LIBS);
+  gidLink(cast(void**)&g_dbus_menu_model_get_type, "g_dbus_menu_model_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_menu_model_get, "g_dbus_menu_model_get", LIBS);
 
   // DBusMessage
-  gidLink(g_dbus_message_get_type, "g_dbus_message_get_type", LIBS);
-  gidLink(g_dbus_message_new, "g_dbus_message_new", LIBS);
-  gidLink(g_dbus_message_new_from_blob, "g_dbus_message_new_from_blob", LIBS);
-  gidLink(g_dbus_message_new_method_call, "g_dbus_message_new_method_call", LIBS);
-  gidLink(g_dbus_message_new_signal, "g_dbus_message_new_signal", LIBS);
-  gidLink(g_dbus_message_bytes_needed, "g_dbus_message_bytes_needed", LIBS);
-  gidLink(g_dbus_message_copy, "g_dbus_message_copy", LIBS);
-  gidLink(g_dbus_message_get_arg0, "g_dbus_message_get_arg0", LIBS);
-  gidLink(g_dbus_message_get_arg0_path, "g_dbus_message_get_arg0_path", LIBS);
-  gidLink(g_dbus_message_get_body, "g_dbus_message_get_body", LIBS);
-  gidLink(g_dbus_message_get_byte_order, "g_dbus_message_get_byte_order", LIBS);
-  gidLink(g_dbus_message_get_destination, "g_dbus_message_get_destination", LIBS);
-  gidLink(g_dbus_message_get_error_name, "g_dbus_message_get_error_name", LIBS);
-  gidLink(g_dbus_message_get_flags, "g_dbus_message_get_flags", LIBS);
-  gidLink(g_dbus_message_get_header, "g_dbus_message_get_header", LIBS);
-  gidLink(g_dbus_message_get_header_fields, "g_dbus_message_get_header_fields", LIBS);
-  gidLink(g_dbus_message_get_interface, "g_dbus_message_get_interface", LIBS);
-  gidLink(g_dbus_message_get_locked, "g_dbus_message_get_locked", LIBS);
-  gidLink(g_dbus_message_get_member, "g_dbus_message_get_member", LIBS);
-  gidLink(g_dbus_message_get_message_type, "g_dbus_message_get_message_type", LIBS);
-  gidLink(g_dbus_message_get_num_unix_fds, "g_dbus_message_get_num_unix_fds", LIBS);
-  gidLink(g_dbus_message_get_path, "g_dbus_message_get_path", LIBS);
-  gidLink(g_dbus_message_get_reply_serial, "g_dbus_message_get_reply_serial", LIBS);
-  gidLink(g_dbus_message_get_sender, "g_dbus_message_get_sender", LIBS);
-  gidLink(g_dbus_message_get_serial, "g_dbus_message_get_serial", LIBS);
-  gidLink(g_dbus_message_get_signature, "g_dbus_message_get_signature", LIBS);
-  gidLink(g_dbus_message_get_unix_fd_list, "g_dbus_message_get_unix_fd_list", LIBS);
-  gidLink(g_dbus_message_lock, "g_dbus_message_lock", LIBS);
-  gidLink(g_dbus_message_new_method_error, "g_dbus_message_new_method_error", LIBS);
-  gidLink(g_dbus_message_new_method_error_literal, "g_dbus_message_new_method_error_literal", LIBS);
-  gidLink(g_dbus_message_new_method_error_valist, "g_dbus_message_new_method_error_valist", LIBS);
-  gidLink(g_dbus_message_new_method_reply, "g_dbus_message_new_method_reply", LIBS);
-  gidLink(g_dbus_message_print, "g_dbus_message_print", LIBS);
-  gidLink(g_dbus_message_set_body, "g_dbus_message_set_body", LIBS);
-  gidLink(g_dbus_message_set_byte_order, "g_dbus_message_set_byte_order", LIBS);
-  gidLink(g_dbus_message_set_destination, "g_dbus_message_set_destination", LIBS);
-  gidLink(g_dbus_message_set_error_name, "g_dbus_message_set_error_name", LIBS);
-  gidLink(g_dbus_message_set_flags, "g_dbus_message_set_flags", LIBS);
-  gidLink(g_dbus_message_set_header, "g_dbus_message_set_header", LIBS);
-  gidLink(g_dbus_message_set_interface, "g_dbus_message_set_interface", LIBS);
-  gidLink(g_dbus_message_set_member, "g_dbus_message_set_member", LIBS);
-  gidLink(g_dbus_message_set_message_type, "g_dbus_message_set_message_type", LIBS);
-  gidLink(g_dbus_message_set_num_unix_fds, "g_dbus_message_set_num_unix_fds", LIBS);
-  gidLink(g_dbus_message_set_path, "g_dbus_message_set_path", LIBS);
-  gidLink(g_dbus_message_set_reply_serial, "g_dbus_message_set_reply_serial", LIBS);
-  gidLink(g_dbus_message_set_sender, "g_dbus_message_set_sender", LIBS);
-  gidLink(g_dbus_message_set_serial, "g_dbus_message_set_serial", LIBS);
-  gidLink(g_dbus_message_set_signature, "g_dbus_message_set_signature", LIBS);
-  gidLink(g_dbus_message_set_unix_fd_list, "g_dbus_message_set_unix_fd_list", LIBS);
-  gidLink(g_dbus_message_to_blob, "g_dbus_message_to_blob", LIBS);
-  gidLink(g_dbus_message_to_gerror, "g_dbus_message_to_gerror", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_type, "g_dbus_message_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_message_new, "g_dbus_message_new", LIBS);
+  gidLink(cast(void**)&g_dbus_message_new_from_blob, "g_dbus_message_new_from_blob", LIBS);
+  gidLink(cast(void**)&g_dbus_message_new_method_call, "g_dbus_message_new_method_call", LIBS);
+  gidLink(cast(void**)&g_dbus_message_new_signal, "g_dbus_message_new_signal", LIBS);
+  gidLink(cast(void**)&g_dbus_message_bytes_needed, "g_dbus_message_bytes_needed", LIBS);
+  gidLink(cast(void**)&g_dbus_message_copy, "g_dbus_message_copy", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_arg0, "g_dbus_message_get_arg0", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_arg0_path, "g_dbus_message_get_arg0_path", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_body, "g_dbus_message_get_body", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_byte_order, "g_dbus_message_get_byte_order", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_destination, "g_dbus_message_get_destination", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_error_name, "g_dbus_message_get_error_name", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_flags, "g_dbus_message_get_flags", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_header, "g_dbus_message_get_header", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_header_fields, "g_dbus_message_get_header_fields", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_interface, "g_dbus_message_get_interface", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_locked, "g_dbus_message_get_locked", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_member, "g_dbus_message_get_member", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_message_type, "g_dbus_message_get_message_type", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_num_unix_fds, "g_dbus_message_get_num_unix_fds", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_path, "g_dbus_message_get_path", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_reply_serial, "g_dbus_message_get_reply_serial", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_sender, "g_dbus_message_get_sender", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_serial, "g_dbus_message_get_serial", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_signature, "g_dbus_message_get_signature", LIBS);
+  gidLink(cast(void**)&g_dbus_message_get_unix_fd_list, "g_dbus_message_get_unix_fd_list", LIBS);
+  gidLink(cast(void**)&g_dbus_message_lock, "g_dbus_message_lock", LIBS);
+  gidLink(cast(void**)&g_dbus_message_new_method_error, "g_dbus_message_new_method_error", LIBS);
+  gidLink(cast(void**)&g_dbus_message_new_method_error_literal, "g_dbus_message_new_method_error_literal", LIBS);
+  gidLink(cast(void**)&g_dbus_message_new_method_error_valist, "g_dbus_message_new_method_error_valist", LIBS);
+  gidLink(cast(void**)&g_dbus_message_new_method_reply, "g_dbus_message_new_method_reply", LIBS);
+  gidLink(cast(void**)&g_dbus_message_print, "g_dbus_message_print", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_body, "g_dbus_message_set_body", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_byte_order, "g_dbus_message_set_byte_order", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_destination, "g_dbus_message_set_destination", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_error_name, "g_dbus_message_set_error_name", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_flags, "g_dbus_message_set_flags", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_header, "g_dbus_message_set_header", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_interface, "g_dbus_message_set_interface", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_member, "g_dbus_message_set_member", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_message_type, "g_dbus_message_set_message_type", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_num_unix_fds, "g_dbus_message_set_num_unix_fds", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_path, "g_dbus_message_set_path", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_reply_serial, "g_dbus_message_set_reply_serial", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_sender, "g_dbus_message_set_sender", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_serial, "g_dbus_message_set_serial", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_signature, "g_dbus_message_set_signature", LIBS);
+  gidLink(cast(void**)&g_dbus_message_set_unix_fd_list, "g_dbus_message_set_unix_fd_list", LIBS);
+  gidLink(cast(void**)&g_dbus_message_to_blob, "g_dbus_message_to_blob", LIBS);
+  gidLink(cast(void**)&g_dbus_message_to_gerror, "g_dbus_message_to_gerror", LIBS);
 
   // DBusMethodInfo
-  gidLink(g_dbus_method_info_get_type, "g_dbus_method_info_get_type", LIBS);
-  gidLink(g_dbus_method_info_ref, "g_dbus_method_info_ref", LIBS);
-  gidLink(g_dbus_method_info_unref, "g_dbus_method_info_unref", LIBS);
+  gidLink(cast(void**)&g_dbus_method_info_get_type, "g_dbus_method_info_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_method_info_ref, "g_dbus_method_info_ref", LIBS);
+  gidLink(cast(void**)&g_dbus_method_info_unref, "g_dbus_method_info_unref", LIBS);
 
   // DBusMethodInvocation
-  gidLink(g_dbus_method_invocation_get_type, "g_dbus_method_invocation_get_type", LIBS);
-  gidLink(g_dbus_method_invocation_get_connection, "g_dbus_method_invocation_get_connection", LIBS);
-  gidLink(g_dbus_method_invocation_get_interface_name, "g_dbus_method_invocation_get_interface_name", LIBS);
-  gidLink(g_dbus_method_invocation_get_message, "g_dbus_method_invocation_get_message", LIBS);
-  gidLink(g_dbus_method_invocation_get_method_info, "g_dbus_method_invocation_get_method_info", LIBS);
-  gidLink(g_dbus_method_invocation_get_method_name, "g_dbus_method_invocation_get_method_name", LIBS);
-  gidLink(g_dbus_method_invocation_get_object_path, "g_dbus_method_invocation_get_object_path", LIBS);
-  gidLink(g_dbus_method_invocation_get_parameters, "g_dbus_method_invocation_get_parameters", LIBS);
-  gidLink(g_dbus_method_invocation_get_property_info, "g_dbus_method_invocation_get_property_info", LIBS);
-  gidLink(g_dbus_method_invocation_get_sender, "g_dbus_method_invocation_get_sender", LIBS);
-  gidLink(g_dbus_method_invocation_get_user_data, "g_dbus_method_invocation_get_user_data", LIBS);
-  gidLink(g_dbus_method_invocation_return_dbus_error, "g_dbus_method_invocation_return_dbus_error", LIBS);
-  gidLink(g_dbus_method_invocation_return_error, "g_dbus_method_invocation_return_error", LIBS);
-  gidLink(g_dbus_method_invocation_return_error_literal, "g_dbus_method_invocation_return_error_literal", LIBS);
-  gidLink(g_dbus_method_invocation_return_error_valist, "g_dbus_method_invocation_return_error_valist", LIBS);
-  gidLink(g_dbus_method_invocation_return_gerror, "g_dbus_method_invocation_return_gerror", LIBS);
-  gidLink(g_dbus_method_invocation_return_value, "g_dbus_method_invocation_return_value", LIBS);
-  gidLink(g_dbus_method_invocation_return_value_with_unix_fd_list, "g_dbus_method_invocation_return_value_with_unix_fd_list", LIBS);
-  gidLink(g_dbus_method_invocation_take_error, "g_dbus_method_invocation_take_error", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_get_type, "g_dbus_method_invocation_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_get_connection, "g_dbus_method_invocation_get_connection", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_get_interface_name, "g_dbus_method_invocation_get_interface_name", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_get_message, "g_dbus_method_invocation_get_message", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_get_method_info, "g_dbus_method_invocation_get_method_info", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_get_method_name, "g_dbus_method_invocation_get_method_name", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_get_object_path, "g_dbus_method_invocation_get_object_path", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_get_parameters, "g_dbus_method_invocation_get_parameters", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_get_property_info, "g_dbus_method_invocation_get_property_info", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_get_sender, "g_dbus_method_invocation_get_sender", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_get_user_data, "g_dbus_method_invocation_get_user_data", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_return_dbus_error, "g_dbus_method_invocation_return_dbus_error", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_return_error, "g_dbus_method_invocation_return_error", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_return_error_literal, "g_dbus_method_invocation_return_error_literal", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_return_error_valist, "g_dbus_method_invocation_return_error_valist", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_return_gerror, "g_dbus_method_invocation_return_gerror", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_return_value, "g_dbus_method_invocation_return_value", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_return_value_with_unix_fd_list, "g_dbus_method_invocation_return_value_with_unix_fd_list", LIBS);
+  gidLink(cast(void**)&g_dbus_method_invocation_take_error, "g_dbus_method_invocation_take_error", LIBS);
 
   // DBusNodeInfo
-  gidLink(g_dbus_node_info_get_type, "g_dbus_node_info_get_type", LIBS);
-  gidLink(g_dbus_node_info_new_for_xml, "g_dbus_node_info_new_for_xml", LIBS);
-  gidLink(g_dbus_node_info_generate_xml, "g_dbus_node_info_generate_xml", LIBS);
-  gidLink(g_dbus_node_info_lookup_interface, "g_dbus_node_info_lookup_interface", LIBS);
-  gidLink(g_dbus_node_info_ref, "g_dbus_node_info_ref", LIBS);
-  gidLink(g_dbus_node_info_unref, "g_dbus_node_info_unref", LIBS);
+  gidLink(cast(void**)&g_dbus_node_info_get_type, "g_dbus_node_info_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_node_info_new_for_xml, "g_dbus_node_info_new_for_xml", LIBS);
+  gidLink(cast(void**)&g_dbus_node_info_generate_xml, "g_dbus_node_info_generate_xml", LIBS);
+  gidLink(cast(void**)&g_dbus_node_info_lookup_interface, "g_dbus_node_info_lookup_interface", LIBS);
+  gidLink(cast(void**)&g_dbus_node_info_ref, "g_dbus_node_info_ref", LIBS);
+  gidLink(cast(void**)&g_dbus_node_info_unref, "g_dbus_node_info_unref", LIBS);
 
   // DBusObject
-  gidLink(g_dbus_object_get_type, "g_dbus_object_get_type", LIBS);
-  gidLink(g_dbus_object_get_interface, "g_dbus_object_get_interface", LIBS);
-  gidLink(g_dbus_object_get_interfaces, "g_dbus_object_get_interfaces", LIBS);
-  gidLink(g_dbus_object_get_object_path, "g_dbus_object_get_object_path", LIBS);
+  gidLink(cast(void**)&g_dbus_object_get_type, "g_dbus_object_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_object_get_interface, "g_dbus_object_get_interface", LIBS);
+  gidLink(cast(void**)&g_dbus_object_get_interfaces, "g_dbus_object_get_interfaces", LIBS);
+  gidLink(cast(void**)&g_dbus_object_get_object_path, "g_dbus_object_get_object_path", LIBS);
 
   // DBusObjectManager
-  gidLink(g_dbus_object_manager_get_type, "g_dbus_object_manager_get_type", LIBS);
-  gidLink(g_dbus_object_manager_get_interface, "g_dbus_object_manager_get_interface", LIBS);
-  gidLink(g_dbus_object_manager_get_object, "g_dbus_object_manager_get_object", LIBS);
-  gidLink(g_dbus_object_manager_get_object_path, "g_dbus_object_manager_get_object_path", LIBS);
-  gidLink(g_dbus_object_manager_get_objects, "g_dbus_object_manager_get_objects", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_get_type, "g_dbus_object_manager_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_get_interface, "g_dbus_object_manager_get_interface", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_get_object, "g_dbus_object_manager_get_object", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_get_object_path, "g_dbus_object_manager_get_object_path", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_get_objects, "g_dbus_object_manager_get_objects", LIBS);
 
   // DBusObjectManagerClient
-  gidLink(g_dbus_object_manager_client_get_type, "g_dbus_object_manager_client_get_type", LIBS);
-  gidLink(g_dbus_object_manager_client_new_finish, "g_dbus_object_manager_client_new_finish", LIBS);
-  gidLink(g_dbus_object_manager_client_new_for_bus_finish, "g_dbus_object_manager_client_new_for_bus_finish", LIBS);
-  gidLink(g_dbus_object_manager_client_new_for_bus_sync, "g_dbus_object_manager_client_new_for_bus_sync", LIBS);
-  gidLink(g_dbus_object_manager_client_new_sync, "g_dbus_object_manager_client_new_sync", LIBS);
-  gidLink(g_dbus_object_manager_client_new, "g_dbus_object_manager_client_new", LIBS);
-  gidLink(g_dbus_object_manager_client_new_for_bus, "g_dbus_object_manager_client_new_for_bus", LIBS);
-  gidLink(g_dbus_object_manager_client_get_connection, "g_dbus_object_manager_client_get_connection", LIBS);
-  gidLink(g_dbus_object_manager_client_get_flags, "g_dbus_object_manager_client_get_flags", LIBS);
-  gidLink(g_dbus_object_manager_client_get_name, "g_dbus_object_manager_client_get_name", LIBS);
-  gidLink(g_dbus_object_manager_client_get_name_owner, "g_dbus_object_manager_client_get_name_owner", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_client_get_type, "g_dbus_object_manager_client_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_client_new_finish, "g_dbus_object_manager_client_new_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_client_new_for_bus_finish, "g_dbus_object_manager_client_new_for_bus_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_client_new_for_bus_sync, "g_dbus_object_manager_client_new_for_bus_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_client_new_sync, "g_dbus_object_manager_client_new_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_client_new, "g_dbus_object_manager_client_new", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_client_new_for_bus, "g_dbus_object_manager_client_new_for_bus", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_client_get_connection, "g_dbus_object_manager_client_get_connection", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_client_get_flags, "g_dbus_object_manager_client_get_flags", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_client_get_name, "g_dbus_object_manager_client_get_name", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_client_get_name_owner, "g_dbus_object_manager_client_get_name_owner", LIBS);
 
   // DBusObjectManagerServer
-  gidLink(g_dbus_object_manager_server_get_type, "g_dbus_object_manager_server_get_type", LIBS);
-  gidLink(g_dbus_object_manager_server_new, "g_dbus_object_manager_server_new", LIBS);
-  gidLink(g_dbus_object_manager_server_export, "g_dbus_object_manager_server_export", LIBS);
-  gidLink(g_dbus_object_manager_server_export_uniquely, "g_dbus_object_manager_server_export_uniquely", LIBS);
-  gidLink(g_dbus_object_manager_server_get_connection, "g_dbus_object_manager_server_get_connection", LIBS);
-  gidLink(g_dbus_object_manager_server_is_exported, "g_dbus_object_manager_server_is_exported", LIBS);
-  gidLink(g_dbus_object_manager_server_set_connection, "g_dbus_object_manager_server_set_connection", LIBS);
-  gidLink(g_dbus_object_manager_server_unexport, "g_dbus_object_manager_server_unexport", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_server_get_type, "g_dbus_object_manager_server_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_server_new, "g_dbus_object_manager_server_new", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_server_export, "g_dbus_object_manager_server_export", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_server_export_uniquely, "g_dbus_object_manager_server_export_uniquely", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_server_get_connection, "g_dbus_object_manager_server_get_connection", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_server_is_exported, "g_dbus_object_manager_server_is_exported", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_server_set_connection, "g_dbus_object_manager_server_set_connection", LIBS);
+  gidLink(cast(void**)&g_dbus_object_manager_server_unexport, "g_dbus_object_manager_server_unexport", LIBS);
 
   // DBusObjectProxy
-  gidLink(g_dbus_object_proxy_get_type, "g_dbus_object_proxy_get_type", LIBS);
-  gidLink(g_dbus_object_proxy_new, "g_dbus_object_proxy_new", LIBS);
-  gidLink(g_dbus_object_proxy_get_connection, "g_dbus_object_proxy_get_connection", LIBS);
+  gidLink(cast(void**)&g_dbus_object_proxy_get_type, "g_dbus_object_proxy_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_object_proxy_new, "g_dbus_object_proxy_new", LIBS);
+  gidLink(cast(void**)&g_dbus_object_proxy_get_connection, "g_dbus_object_proxy_get_connection", LIBS);
 
   // DBusObjectSkeleton
-  gidLink(g_dbus_object_skeleton_get_type, "g_dbus_object_skeleton_get_type", LIBS);
-  gidLink(g_dbus_object_skeleton_new, "g_dbus_object_skeleton_new", LIBS);
-  gidLink(g_dbus_object_skeleton_add_interface, "g_dbus_object_skeleton_add_interface", LIBS);
-  gidLink(g_dbus_object_skeleton_flush, "g_dbus_object_skeleton_flush", LIBS);
-  gidLink(g_dbus_object_skeleton_remove_interface, "g_dbus_object_skeleton_remove_interface", LIBS);
-  gidLink(g_dbus_object_skeleton_remove_interface_by_name, "g_dbus_object_skeleton_remove_interface_by_name", LIBS);
-  gidLink(g_dbus_object_skeleton_set_object_path, "g_dbus_object_skeleton_set_object_path", LIBS);
+  gidLink(cast(void**)&g_dbus_object_skeleton_get_type, "g_dbus_object_skeleton_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_object_skeleton_new, "g_dbus_object_skeleton_new", LIBS);
+  gidLink(cast(void**)&g_dbus_object_skeleton_add_interface, "g_dbus_object_skeleton_add_interface", LIBS);
+  gidLink(cast(void**)&g_dbus_object_skeleton_flush, "g_dbus_object_skeleton_flush", LIBS);
+  gidLink(cast(void**)&g_dbus_object_skeleton_remove_interface, "g_dbus_object_skeleton_remove_interface", LIBS);
+  gidLink(cast(void**)&g_dbus_object_skeleton_remove_interface_by_name, "g_dbus_object_skeleton_remove_interface_by_name", LIBS);
+  gidLink(cast(void**)&g_dbus_object_skeleton_set_object_path, "g_dbus_object_skeleton_set_object_path", LIBS);
 
   // DBusPropertyInfo
-  gidLink(g_dbus_property_info_get_type, "g_dbus_property_info_get_type", LIBS);
-  gidLink(g_dbus_property_info_ref, "g_dbus_property_info_ref", LIBS);
-  gidLink(g_dbus_property_info_unref, "g_dbus_property_info_unref", LIBS);
+  gidLink(cast(void**)&g_dbus_property_info_get_type, "g_dbus_property_info_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_property_info_ref, "g_dbus_property_info_ref", LIBS);
+  gidLink(cast(void**)&g_dbus_property_info_unref, "g_dbus_property_info_unref", LIBS);
 
   // DBusProxy
-  gidLink(g_dbus_proxy_get_type, "g_dbus_proxy_get_type", LIBS);
-  gidLink(g_dbus_proxy_new_finish, "g_dbus_proxy_new_finish", LIBS);
-  gidLink(g_dbus_proxy_new_for_bus_finish, "g_dbus_proxy_new_for_bus_finish", LIBS);
-  gidLink(g_dbus_proxy_new_for_bus_sync, "g_dbus_proxy_new_for_bus_sync", LIBS);
-  gidLink(g_dbus_proxy_new_sync, "g_dbus_proxy_new_sync", LIBS);
-  gidLink(g_dbus_proxy_new, "g_dbus_proxy_new", LIBS);
-  gidLink(g_dbus_proxy_new_for_bus, "g_dbus_proxy_new_for_bus", LIBS);
-  gidLink(g_dbus_proxy_call, "g_dbus_proxy_call", LIBS);
-  gidLink(g_dbus_proxy_call_finish, "g_dbus_proxy_call_finish", LIBS);
-  gidLink(g_dbus_proxy_call_sync, "g_dbus_proxy_call_sync", LIBS);
-  gidLink(g_dbus_proxy_call_with_unix_fd_list, "g_dbus_proxy_call_with_unix_fd_list", LIBS);
-  gidLink(g_dbus_proxy_call_with_unix_fd_list_finish, "g_dbus_proxy_call_with_unix_fd_list_finish", LIBS);
-  gidLink(g_dbus_proxy_call_with_unix_fd_list_sync, "g_dbus_proxy_call_with_unix_fd_list_sync", LIBS);
-  gidLink(g_dbus_proxy_get_cached_property, "g_dbus_proxy_get_cached_property", LIBS);
-  gidLink(g_dbus_proxy_get_cached_property_names, "g_dbus_proxy_get_cached_property_names", LIBS);
-  gidLink(g_dbus_proxy_get_connection, "g_dbus_proxy_get_connection", LIBS);
-  gidLink(g_dbus_proxy_get_default_timeout, "g_dbus_proxy_get_default_timeout", LIBS);
-  gidLink(g_dbus_proxy_get_flags, "g_dbus_proxy_get_flags", LIBS);
-  gidLink(g_dbus_proxy_get_interface_info, "g_dbus_proxy_get_interface_info", LIBS);
-  gidLink(g_dbus_proxy_get_interface_name, "g_dbus_proxy_get_interface_name", LIBS);
-  gidLink(g_dbus_proxy_get_name, "g_dbus_proxy_get_name", LIBS);
-  gidLink(g_dbus_proxy_get_name_owner, "g_dbus_proxy_get_name_owner", LIBS);
-  gidLink(g_dbus_proxy_get_object_path, "g_dbus_proxy_get_object_path", LIBS);
-  gidLink(g_dbus_proxy_set_cached_property, "g_dbus_proxy_set_cached_property", LIBS);
-  gidLink(g_dbus_proxy_set_default_timeout, "g_dbus_proxy_set_default_timeout", LIBS);
-  gidLink(g_dbus_proxy_set_interface_info, "g_dbus_proxy_set_interface_info", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_get_type, "g_dbus_proxy_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_new_finish, "g_dbus_proxy_new_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_new_for_bus_finish, "g_dbus_proxy_new_for_bus_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_new_for_bus_sync, "g_dbus_proxy_new_for_bus_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_new_sync, "g_dbus_proxy_new_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_new, "g_dbus_proxy_new", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_new_for_bus, "g_dbus_proxy_new_for_bus", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_call, "g_dbus_proxy_call", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_call_finish, "g_dbus_proxy_call_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_call_sync, "g_dbus_proxy_call_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_call_with_unix_fd_list, "g_dbus_proxy_call_with_unix_fd_list", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_call_with_unix_fd_list_finish, "g_dbus_proxy_call_with_unix_fd_list_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_call_with_unix_fd_list_sync, "g_dbus_proxy_call_with_unix_fd_list_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_get_cached_property, "g_dbus_proxy_get_cached_property", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_get_cached_property_names, "g_dbus_proxy_get_cached_property_names", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_get_connection, "g_dbus_proxy_get_connection", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_get_default_timeout, "g_dbus_proxy_get_default_timeout", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_get_flags, "g_dbus_proxy_get_flags", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_get_interface_info, "g_dbus_proxy_get_interface_info", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_get_interface_name, "g_dbus_proxy_get_interface_name", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_get_name, "g_dbus_proxy_get_name", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_get_name_owner, "g_dbus_proxy_get_name_owner", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_get_object_path, "g_dbus_proxy_get_object_path", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_set_cached_property, "g_dbus_proxy_set_cached_property", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_set_default_timeout, "g_dbus_proxy_set_default_timeout", LIBS);
+  gidLink(cast(void**)&g_dbus_proxy_set_interface_info, "g_dbus_proxy_set_interface_info", LIBS);
 
   // DBusServer
-  gidLink(g_dbus_server_get_type, "g_dbus_server_get_type", LIBS);
-  gidLink(g_dbus_server_new_sync, "g_dbus_server_new_sync", LIBS);
-  gidLink(g_dbus_server_get_client_address, "g_dbus_server_get_client_address", LIBS);
-  gidLink(g_dbus_server_get_flags, "g_dbus_server_get_flags", LIBS);
-  gidLink(g_dbus_server_get_guid, "g_dbus_server_get_guid", LIBS);
-  gidLink(g_dbus_server_is_active, "g_dbus_server_is_active", LIBS);
-  gidLink(g_dbus_server_start, "g_dbus_server_start", LIBS);
-  gidLink(g_dbus_server_stop, "g_dbus_server_stop", LIBS);
+  gidLink(cast(void**)&g_dbus_server_get_type, "g_dbus_server_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_server_new_sync, "g_dbus_server_new_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_server_get_client_address, "g_dbus_server_get_client_address", LIBS);
+  gidLink(cast(void**)&g_dbus_server_get_flags, "g_dbus_server_get_flags", LIBS);
+  gidLink(cast(void**)&g_dbus_server_get_guid, "g_dbus_server_get_guid", LIBS);
+  gidLink(cast(void**)&g_dbus_server_is_active, "g_dbus_server_is_active", LIBS);
+  gidLink(cast(void**)&g_dbus_server_start, "g_dbus_server_start", LIBS);
+  gidLink(cast(void**)&g_dbus_server_stop, "g_dbus_server_stop", LIBS);
 
   // DBusSignalInfo
-  gidLink(g_dbus_signal_info_get_type, "g_dbus_signal_info_get_type", LIBS);
-  gidLink(g_dbus_signal_info_ref, "g_dbus_signal_info_ref", LIBS);
-  gidLink(g_dbus_signal_info_unref, "g_dbus_signal_info_unref", LIBS);
+  gidLink(cast(void**)&g_dbus_signal_info_get_type, "g_dbus_signal_info_get_type", LIBS);
+  gidLink(cast(void**)&g_dbus_signal_info_ref, "g_dbus_signal_info_ref", LIBS);
+  gidLink(cast(void**)&g_dbus_signal_info_unref, "g_dbus_signal_info_unref", LIBS);
 
   // DataInputStream
-  gidLink(g_data_input_stream_get_type, "g_data_input_stream_get_type", LIBS);
-  gidLink(g_data_input_stream_new, "g_data_input_stream_new", LIBS);
-  gidLink(g_data_input_stream_get_byte_order, "g_data_input_stream_get_byte_order", LIBS);
-  gidLink(g_data_input_stream_get_newline_type, "g_data_input_stream_get_newline_type", LIBS);
-  gidLink(g_data_input_stream_read_byte, "g_data_input_stream_read_byte", LIBS);
-  gidLink(g_data_input_stream_read_int16, "g_data_input_stream_read_int16", LIBS);
-  gidLink(g_data_input_stream_read_int32, "g_data_input_stream_read_int32", LIBS);
-  gidLink(g_data_input_stream_read_int64, "g_data_input_stream_read_int64", LIBS);
-  gidLink(g_data_input_stream_read_line, "g_data_input_stream_read_line", LIBS);
-  gidLink(g_data_input_stream_read_line_async, "g_data_input_stream_read_line_async", LIBS);
-  gidLink(g_data_input_stream_read_line_finish, "g_data_input_stream_read_line_finish", LIBS);
-  gidLink(g_data_input_stream_read_line_finish_utf8, "g_data_input_stream_read_line_finish_utf8", LIBS);
-  gidLink(g_data_input_stream_read_line_utf8, "g_data_input_stream_read_line_utf8", LIBS);
-  gidLink(g_data_input_stream_read_uint16, "g_data_input_stream_read_uint16", LIBS);
-  gidLink(g_data_input_stream_read_uint32, "g_data_input_stream_read_uint32", LIBS);
-  gidLink(g_data_input_stream_read_uint64, "g_data_input_stream_read_uint64", LIBS);
-  gidLink(g_data_input_stream_read_until, "g_data_input_stream_read_until", LIBS);
-  gidLink(g_data_input_stream_read_until_async, "g_data_input_stream_read_until_async", LIBS);
-  gidLink(g_data_input_stream_read_until_finish, "g_data_input_stream_read_until_finish", LIBS);
-  gidLink(g_data_input_stream_read_upto, "g_data_input_stream_read_upto", LIBS);
-  gidLink(g_data_input_stream_read_upto_async, "g_data_input_stream_read_upto_async", LIBS);
-  gidLink(g_data_input_stream_read_upto_finish, "g_data_input_stream_read_upto_finish", LIBS);
-  gidLink(g_data_input_stream_set_byte_order, "g_data_input_stream_set_byte_order", LIBS);
-  gidLink(g_data_input_stream_set_newline_type, "g_data_input_stream_set_newline_type", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_get_type, "g_data_input_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_new, "g_data_input_stream_new", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_get_byte_order, "g_data_input_stream_get_byte_order", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_get_newline_type, "g_data_input_stream_get_newline_type", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_byte, "g_data_input_stream_read_byte", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_int16, "g_data_input_stream_read_int16", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_int32, "g_data_input_stream_read_int32", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_int64, "g_data_input_stream_read_int64", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_line, "g_data_input_stream_read_line", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_line_async, "g_data_input_stream_read_line_async", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_line_finish, "g_data_input_stream_read_line_finish", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_line_finish_utf8, "g_data_input_stream_read_line_finish_utf8", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_line_utf8, "g_data_input_stream_read_line_utf8", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_uint16, "g_data_input_stream_read_uint16", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_uint32, "g_data_input_stream_read_uint32", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_uint64, "g_data_input_stream_read_uint64", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_until, "g_data_input_stream_read_until", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_until_async, "g_data_input_stream_read_until_async", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_until_finish, "g_data_input_stream_read_until_finish", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_upto, "g_data_input_stream_read_upto", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_upto_async, "g_data_input_stream_read_upto_async", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_read_upto_finish, "g_data_input_stream_read_upto_finish", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_set_byte_order, "g_data_input_stream_set_byte_order", LIBS);
+  gidLink(cast(void**)&g_data_input_stream_set_newline_type, "g_data_input_stream_set_newline_type", LIBS);
 
   // DataOutputStream
-  gidLink(g_data_output_stream_get_type, "g_data_output_stream_get_type", LIBS);
-  gidLink(g_data_output_stream_new, "g_data_output_stream_new", LIBS);
-  gidLink(g_data_output_stream_get_byte_order, "g_data_output_stream_get_byte_order", LIBS);
-  gidLink(g_data_output_stream_put_byte, "g_data_output_stream_put_byte", LIBS);
-  gidLink(g_data_output_stream_put_int16, "g_data_output_stream_put_int16", LIBS);
-  gidLink(g_data_output_stream_put_int32, "g_data_output_stream_put_int32", LIBS);
-  gidLink(g_data_output_stream_put_int64, "g_data_output_stream_put_int64", LIBS);
-  gidLink(g_data_output_stream_put_string, "g_data_output_stream_put_string", LIBS);
-  gidLink(g_data_output_stream_put_uint16, "g_data_output_stream_put_uint16", LIBS);
-  gidLink(g_data_output_stream_put_uint32, "g_data_output_stream_put_uint32", LIBS);
-  gidLink(g_data_output_stream_put_uint64, "g_data_output_stream_put_uint64", LIBS);
-  gidLink(g_data_output_stream_set_byte_order, "g_data_output_stream_set_byte_order", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_get_type, "g_data_output_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_new, "g_data_output_stream_new", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_get_byte_order, "g_data_output_stream_get_byte_order", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_put_byte, "g_data_output_stream_put_byte", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_put_int16, "g_data_output_stream_put_int16", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_put_int32, "g_data_output_stream_put_int32", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_put_int64, "g_data_output_stream_put_int64", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_put_string, "g_data_output_stream_put_string", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_put_uint16, "g_data_output_stream_put_uint16", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_put_uint32, "g_data_output_stream_put_uint32", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_put_uint64, "g_data_output_stream_put_uint64", LIBS);
+  gidLink(cast(void**)&g_data_output_stream_set_byte_order, "g_data_output_stream_set_byte_order", LIBS);
 
   // DatagramBased
-  gidLink(g_datagram_based_get_type, "g_datagram_based_get_type", LIBS);
-  gidLink(g_datagram_based_condition_check, "g_datagram_based_condition_check", LIBS);
-  gidLink(g_datagram_based_condition_wait, "g_datagram_based_condition_wait", LIBS);
-  gidLink(g_datagram_based_create_source, "g_datagram_based_create_source", LIBS);
-  gidLink(g_datagram_based_receive_messages, "g_datagram_based_receive_messages", LIBS);
-  gidLink(g_datagram_based_send_messages, "g_datagram_based_send_messages", LIBS);
+  gidLink(cast(void**)&g_datagram_based_get_type, "g_datagram_based_get_type", LIBS);
+  gidLink(cast(void**)&g_datagram_based_condition_check, "g_datagram_based_condition_check", LIBS);
+  gidLink(cast(void**)&g_datagram_based_condition_wait, "g_datagram_based_condition_wait", LIBS);
+  gidLink(cast(void**)&g_datagram_based_create_source, "g_datagram_based_create_source", LIBS);
+  gidLink(cast(void**)&g_datagram_based_receive_messages, "g_datagram_based_receive_messages", LIBS);
+  gidLink(cast(void**)&g_datagram_based_send_messages, "g_datagram_based_send_messages", LIBS);
 
   // DebugController
-  gidLink(g_debug_controller_get_type, "g_debug_controller_get_type", LIBS);
-  gidLink(g_debug_controller_get_debug_enabled, "g_debug_controller_get_debug_enabled", LIBS);
-  gidLink(g_debug_controller_set_debug_enabled, "g_debug_controller_set_debug_enabled", LIBS);
+  gidLink(cast(void**)&g_debug_controller_get_type, "g_debug_controller_get_type", LIBS);
+  gidLink(cast(void**)&g_debug_controller_get_debug_enabled, "g_debug_controller_get_debug_enabled", LIBS);
+  gidLink(cast(void**)&g_debug_controller_set_debug_enabled, "g_debug_controller_set_debug_enabled", LIBS);
 
   // DebugControllerDBus
-  gidLink(g_debug_controller_dbus_get_type, "g_debug_controller_dbus_get_type", LIBS);
-  gidLink(g_debug_controller_dbus_new, "g_debug_controller_dbus_new", LIBS);
-  gidLink(g_debug_controller_dbus_stop, "g_debug_controller_dbus_stop", LIBS);
+  gidLink(cast(void**)&g_debug_controller_dbus_get_type, "g_debug_controller_dbus_get_type", LIBS);
+  gidLink(cast(void**)&g_debug_controller_dbus_new, "g_debug_controller_dbus_new", LIBS);
+  gidLink(cast(void**)&g_debug_controller_dbus_stop, "g_debug_controller_dbus_stop", LIBS);
 
   // DesktopAppInfo
-  gidLink(g_desktop_app_info_get_type, "g_desktop_app_info_get_type", LIBS);
-  gidLink(g_desktop_app_info_new, "g_desktop_app_info_new", LIBS);
-  gidLink(g_desktop_app_info_new_from_filename, "g_desktop_app_info_new_from_filename", LIBS);
-  gidLink(g_desktop_app_info_new_from_keyfile, "g_desktop_app_info_new_from_keyfile", LIBS);
-  gidLink(g_desktop_app_info_get_implementations, "g_desktop_app_info_get_implementations", LIBS);
-  gidLink(g_desktop_app_info_search, "g_desktop_app_info_search", LIBS);
-  gidLink(g_desktop_app_info_set_desktop_env, "g_desktop_app_info_set_desktop_env", LIBS);
-  gidLink(g_desktop_app_info_get_action_name, "g_desktop_app_info_get_action_name", LIBS);
-  gidLink(g_desktop_app_info_get_boolean, "g_desktop_app_info_get_boolean", LIBS);
-  gidLink(g_desktop_app_info_get_categories, "g_desktop_app_info_get_categories", LIBS);
-  gidLink(g_desktop_app_info_get_filename, "g_desktop_app_info_get_filename", LIBS);
-  gidLink(g_desktop_app_info_get_generic_name, "g_desktop_app_info_get_generic_name", LIBS);
-  gidLink(g_desktop_app_info_get_is_hidden, "g_desktop_app_info_get_is_hidden", LIBS);
-  gidLink(g_desktop_app_info_get_keywords, "g_desktop_app_info_get_keywords", LIBS);
-  gidLink(g_desktop_app_info_get_locale_string, "g_desktop_app_info_get_locale_string", LIBS);
-  gidLink(g_desktop_app_info_get_nodisplay, "g_desktop_app_info_get_nodisplay", LIBS);
-  gidLink(g_desktop_app_info_get_show_in, "g_desktop_app_info_get_show_in", LIBS);
-  gidLink(g_desktop_app_info_get_startup_wm_class, "g_desktop_app_info_get_startup_wm_class", LIBS);
-  gidLink(g_desktop_app_info_get_string, "g_desktop_app_info_get_string", LIBS);
-  gidLink(g_desktop_app_info_get_string_list, "g_desktop_app_info_get_string_list", LIBS);
-  gidLink(g_desktop_app_info_has_key, "g_desktop_app_info_has_key", LIBS);
-  gidLink(g_desktop_app_info_launch_action, "g_desktop_app_info_launch_action", LIBS);
-  gidLink(g_desktop_app_info_launch_uris_as_manager, "g_desktop_app_info_launch_uris_as_manager", LIBS);
-  gidLink(g_desktop_app_info_launch_uris_as_manager_with_fds, "g_desktop_app_info_launch_uris_as_manager_with_fds", LIBS);
-  gidLink(g_desktop_app_info_list_actions, "g_desktop_app_info_list_actions", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_type, "g_desktop_app_info_get_type", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_new, "g_desktop_app_info_new", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_new_from_filename, "g_desktop_app_info_new_from_filename", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_new_from_keyfile, "g_desktop_app_info_new_from_keyfile", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_implementations, "g_desktop_app_info_get_implementations", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_search, "g_desktop_app_info_search", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_set_desktop_env, "g_desktop_app_info_set_desktop_env", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_action_name, "g_desktop_app_info_get_action_name", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_boolean, "g_desktop_app_info_get_boolean", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_categories, "g_desktop_app_info_get_categories", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_filename, "g_desktop_app_info_get_filename", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_generic_name, "g_desktop_app_info_get_generic_name", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_is_hidden, "g_desktop_app_info_get_is_hidden", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_keywords, "g_desktop_app_info_get_keywords", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_locale_string, "g_desktop_app_info_get_locale_string", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_nodisplay, "g_desktop_app_info_get_nodisplay", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_show_in, "g_desktop_app_info_get_show_in", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_startup_wm_class, "g_desktop_app_info_get_startup_wm_class", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_string, "g_desktop_app_info_get_string", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_get_string_list, "g_desktop_app_info_get_string_list", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_has_key, "g_desktop_app_info_has_key", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_launch_action, "g_desktop_app_info_launch_action", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_launch_uris_as_manager, "g_desktop_app_info_launch_uris_as_manager", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_launch_uris_as_manager_with_fds, "g_desktop_app_info_launch_uris_as_manager_with_fds", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_list_actions, "g_desktop_app_info_list_actions", LIBS);
 
   // DesktopAppInfoLookup
-  gidLink(g_desktop_app_info_lookup_get_type, "g_desktop_app_info_lookup_get_type", LIBS);
-  gidLink(g_desktop_app_info_lookup_get_default_for_uri_scheme, "g_desktop_app_info_lookup_get_default_for_uri_scheme", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_lookup_get_type, "g_desktop_app_info_lookup_get_type", LIBS);
+  gidLink(cast(void**)&g_desktop_app_info_lookup_get_default_for_uri_scheme, "g_desktop_app_info_lookup_get_default_for_uri_scheme", LIBS);
 
   // Drive
-  gidLink(g_drive_get_type, "g_drive_get_type", LIBS);
-  gidLink(g_drive_can_eject, "g_drive_can_eject", LIBS);
-  gidLink(g_drive_can_poll_for_media, "g_drive_can_poll_for_media", LIBS);
-  gidLink(g_drive_can_start, "g_drive_can_start", LIBS);
-  gidLink(g_drive_can_start_degraded, "g_drive_can_start_degraded", LIBS);
-  gidLink(g_drive_can_stop, "g_drive_can_stop", LIBS);
-  gidLink(g_drive_eject, "g_drive_eject", LIBS);
-  gidLink(g_drive_eject_finish, "g_drive_eject_finish", LIBS);
-  gidLink(g_drive_eject_with_operation, "g_drive_eject_with_operation", LIBS);
-  gidLink(g_drive_eject_with_operation_finish, "g_drive_eject_with_operation_finish", LIBS);
-  gidLink(g_drive_enumerate_identifiers, "g_drive_enumerate_identifiers", LIBS);
-  gidLink(g_drive_get_icon, "g_drive_get_icon", LIBS);
-  gidLink(g_drive_get_identifier, "g_drive_get_identifier", LIBS);
-  gidLink(g_drive_get_name, "g_drive_get_name", LIBS);
-  gidLink(g_drive_get_sort_key, "g_drive_get_sort_key", LIBS);
-  gidLink(g_drive_get_start_stop_type, "g_drive_get_start_stop_type", LIBS);
-  gidLink(g_drive_get_symbolic_icon, "g_drive_get_symbolic_icon", LIBS);
-  gidLink(g_drive_get_volumes, "g_drive_get_volumes", LIBS);
-  gidLink(g_drive_has_media, "g_drive_has_media", LIBS);
-  gidLink(g_drive_has_volumes, "g_drive_has_volumes", LIBS);
-  gidLink(g_drive_is_media_check_automatic, "g_drive_is_media_check_automatic", LIBS);
-  gidLink(g_drive_is_media_removable, "g_drive_is_media_removable", LIBS);
-  gidLink(g_drive_is_removable, "g_drive_is_removable", LIBS);
-  gidLink(g_drive_poll_for_media, "g_drive_poll_for_media", LIBS);
-  gidLink(g_drive_poll_for_media_finish, "g_drive_poll_for_media_finish", LIBS);
-  gidLink(g_drive_start, "g_drive_start", LIBS);
-  gidLink(g_drive_start_finish, "g_drive_start_finish", LIBS);
-  gidLink(g_drive_stop, "g_drive_stop", LIBS);
-  gidLink(g_drive_stop_finish, "g_drive_stop_finish", LIBS);
+  gidLink(cast(void**)&g_drive_get_type, "g_drive_get_type", LIBS);
+  gidLink(cast(void**)&g_drive_can_eject, "g_drive_can_eject", LIBS);
+  gidLink(cast(void**)&g_drive_can_poll_for_media, "g_drive_can_poll_for_media", LIBS);
+  gidLink(cast(void**)&g_drive_can_start, "g_drive_can_start", LIBS);
+  gidLink(cast(void**)&g_drive_can_start_degraded, "g_drive_can_start_degraded", LIBS);
+  gidLink(cast(void**)&g_drive_can_stop, "g_drive_can_stop", LIBS);
+  gidLink(cast(void**)&g_drive_eject, "g_drive_eject", LIBS);
+  gidLink(cast(void**)&g_drive_eject_finish, "g_drive_eject_finish", LIBS);
+  gidLink(cast(void**)&g_drive_eject_with_operation, "g_drive_eject_with_operation", LIBS);
+  gidLink(cast(void**)&g_drive_eject_with_operation_finish, "g_drive_eject_with_operation_finish", LIBS);
+  gidLink(cast(void**)&g_drive_enumerate_identifiers, "g_drive_enumerate_identifiers", LIBS);
+  gidLink(cast(void**)&g_drive_get_icon, "g_drive_get_icon", LIBS);
+  gidLink(cast(void**)&g_drive_get_identifier, "g_drive_get_identifier", LIBS);
+  gidLink(cast(void**)&g_drive_get_name, "g_drive_get_name", LIBS);
+  gidLink(cast(void**)&g_drive_get_sort_key, "g_drive_get_sort_key", LIBS);
+  gidLink(cast(void**)&g_drive_get_start_stop_type, "g_drive_get_start_stop_type", LIBS);
+  gidLink(cast(void**)&g_drive_get_symbolic_icon, "g_drive_get_symbolic_icon", LIBS);
+  gidLink(cast(void**)&g_drive_get_volumes, "g_drive_get_volumes", LIBS);
+  gidLink(cast(void**)&g_drive_has_media, "g_drive_has_media", LIBS);
+  gidLink(cast(void**)&g_drive_has_volumes, "g_drive_has_volumes", LIBS);
+  gidLink(cast(void**)&g_drive_is_media_check_automatic, "g_drive_is_media_check_automatic", LIBS);
+  gidLink(cast(void**)&g_drive_is_media_removable, "g_drive_is_media_removable", LIBS);
+  gidLink(cast(void**)&g_drive_is_removable, "g_drive_is_removable", LIBS);
+  gidLink(cast(void**)&g_drive_poll_for_media, "g_drive_poll_for_media", LIBS);
+  gidLink(cast(void**)&g_drive_poll_for_media_finish, "g_drive_poll_for_media_finish", LIBS);
+  gidLink(cast(void**)&g_drive_start, "g_drive_start", LIBS);
+  gidLink(cast(void**)&g_drive_start_finish, "g_drive_start_finish", LIBS);
+  gidLink(cast(void**)&g_drive_stop, "g_drive_stop", LIBS);
+  gidLink(cast(void**)&g_drive_stop_finish, "g_drive_stop_finish", LIBS);
 
   // DtlsClientConnection
-  gidLink(g_dtls_client_connection_get_type, "g_dtls_client_connection_get_type", LIBS);
-  gidLink(g_dtls_client_connection_new, "g_dtls_client_connection_new", LIBS);
-  gidLink(g_dtls_client_connection_get_accepted_cas, "g_dtls_client_connection_get_accepted_cas", LIBS);
-  gidLink(g_dtls_client_connection_get_server_identity, "g_dtls_client_connection_get_server_identity", LIBS);
-  gidLink(g_dtls_client_connection_get_validation_flags, "g_dtls_client_connection_get_validation_flags", LIBS);
-  gidLink(g_dtls_client_connection_set_server_identity, "g_dtls_client_connection_set_server_identity", LIBS);
-  gidLink(g_dtls_client_connection_set_validation_flags, "g_dtls_client_connection_set_validation_flags", LIBS);
+  gidLink(cast(void**)&g_dtls_client_connection_get_type, "g_dtls_client_connection_get_type", LIBS);
+  gidLink(cast(void**)&g_dtls_client_connection_new, "g_dtls_client_connection_new", LIBS);
+  gidLink(cast(void**)&g_dtls_client_connection_get_accepted_cas, "g_dtls_client_connection_get_accepted_cas", LIBS);
+  gidLink(cast(void**)&g_dtls_client_connection_get_server_identity, "g_dtls_client_connection_get_server_identity", LIBS);
+  gidLink(cast(void**)&g_dtls_client_connection_get_validation_flags, "g_dtls_client_connection_get_validation_flags", LIBS);
+  gidLink(cast(void**)&g_dtls_client_connection_set_server_identity, "g_dtls_client_connection_set_server_identity", LIBS);
+  gidLink(cast(void**)&g_dtls_client_connection_set_validation_flags, "g_dtls_client_connection_set_validation_flags", LIBS);
 
   // DtlsConnection
-  gidLink(g_dtls_connection_get_type, "g_dtls_connection_get_type", LIBS);
-  gidLink(g_dtls_connection_close, "g_dtls_connection_close", LIBS);
-  gidLink(g_dtls_connection_close_async, "g_dtls_connection_close_async", LIBS);
-  gidLink(g_dtls_connection_close_finish, "g_dtls_connection_close_finish", LIBS);
-  gidLink(g_dtls_connection_emit_accept_certificate, "g_dtls_connection_emit_accept_certificate", LIBS);
-  gidLink(g_dtls_connection_get_certificate, "g_dtls_connection_get_certificate", LIBS);
-  gidLink(g_dtls_connection_get_channel_binding_data, "g_dtls_connection_get_channel_binding_data", LIBS);
-  gidLink(g_dtls_connection_get_ciphersuite_name, "g_dtls_connection_get_ciphersuite_name", LIBS);
-  gidLink(g_dtls_connection_get_database, "g_dtls_connection_get_database", LIBS);
-  gidLink(g_dtls_connection_get_interaction, "g_dtls_connection_get_interaction", LIBS);
-  gidLink(g_dtls_connection_get_negotiated_protocol, "g_dtls_connection_get_negotiated_protocol", LIBS);
-  gidLink(g_dtls_connection_get_peer_certificate, "g_dtls_connection_get_peer_certificate", LIBS);
-  gidLink(g_dtls_connection_get_peer_certificate_errors, "g_dtls_connection_get_peer_certificate_errors", LIBS);
-  gidLink(g_dtls_connection_get_protocol_version, "g_dtls_connection_get_protocol_version", LIBS);
-  gidLink(g_dtls_connection_get_rehandshake_mode, "g_dtls_connection_get_rehandshake_mode", LIBS);
-  gidLink(g_dtls_connection_get_require_close_notify, "g_dtls_connection_get_require_close_notify", LIBS);
-  gidLink(g_dtls_connection_handshake, "g_dtls_connection_handshake", LIBS);
-  gidLink(g_dtls_connection_handshake_async, "g_dtls_connection_handshake_async", LIBS);
-  gidLink(g_dtls_connection_handshake_finish, "g_dtls_connection_handshake_finish", LIBS);
-  gidLink(g_dtls_connection_set_advertised_protocols, "g_dtls_connection_set_advertised_protocols", LIBS);
-  gidLink(g_dtls_connection_set_certificate, "g_dtls_connection_set_certificate", LIBS);
-  gidLink(g_dtls_connection_set_database, "g_dtls_connection_set_database", LIBS);
-  gidLink(g_dtls_connection_set_interaction, "g_dtls_connection_set_interaction", LIBS);
-  gidLink(g_dtls_connection_set_rehandshake_mode, "g_dtls_connection_set_rehandshake_mode", LIBS);
-  gidLink(g_dtls_connection_set_require_close_notify, "g_dtls_connection_set_require_close_notify", LIBS);
-  gidLink(g_dtls_connection_shutdown, "g_dtls_connection_shutdown", LIBS);
-  gidLink(g_dtls_connection_shutdown_async, "g_dtls_connection_shutdown_async", LIBS);
-  gidLink(g_dtls_connection_shutdown_finish, "g_dtls_connection_shutdown_finish", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_type, "g_dtls_connection_get_type", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_close, "g_dtls_connection_close", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_close_async, "g_dtls_connection_close_async", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_close_finish, "g_dtls_connection_close_finish", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_emit_accept_certificate, "g_dtls_connection_emit_accept_certificate", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_certificate, "g_dtls_connection_get_certificate", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_channel_binding_data, "g_dtls_connection_get_channel_binding_data", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_ciphersuite_name, "g_dtls_connection_get_ciphersuite_name", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_database, "g_dtls_connection_get_database", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_interaction, "g_dtls_connection_get_interaction", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_negotiated_protocol, "g_dtls_connection_get_negotiated_protocol", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_peer_certificate, "g_dtls_connection_get_peer_certificate", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_peer_certificate_errors, "g_dtls_connection_get_peer_certificate_errors", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_protocol_version, "g_dtls_connection_get_protocol_version", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_rehandshake_mode, "g_dtls_connection_get_rehandshake_mode", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_get_require_close_notify, "g_dtls_connection_get_require_close_notify", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_handshake, "g_dtls_connection_handshake", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_handshake_async, "g_dtls_connection_handshake_async", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_handshake_finish, "g_dtls_connection_handshake_finish", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_set_advertised_protocols, "g_dtls_connection_set_advertised_protocols", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_set_certificate, "g_dtls_connection_set_certificate", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_set_database, "g_dtls_connection_set_database", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_set_interaction, "g_dtls_connection_set_interaction", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_set_rehandshake_mode, "g_dtls_connection_set_rehandshake_mode", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_set_require_close_notify, "g_dtls_connection_set_require_close_notify", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_shutdown, "g_dtls_connection_shutdown", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_shutdown_async, "g_dtls_connection_shutdown_async", LIBS);
+  gidLink(cast(void**)&g_dtls_connection_shutdown_finish, "g_dtls_connection_shutdown_finish", LIBS);
 
   // DtlsServerConnection
-  gidLink(g_dtls_server_connection_get_type, "g_dtls_server_connection_get_type", LIBS);
-  gidLink(g_dtls_server_connection_new, "g_dtls_server_connection_new", LIBS);
+  gidLink(cast(void**)&g_dtls_server_connection_get_type, "g_dtls_server_connection_get_type", LIBS);
+  gidLink(cast(void**)&g_dtls_server_connection_new, "g_dtls_server_connection_new", LIBS);
 
   // Emblem
-  gidLink(g_emblem_get_type, "g_emblem_get_type", LIBS);
-  gidLink(g_emblem_new, "g_emblem_new", LIBS);
-  gidLink(g_emblem_new_with_origin, "g_emblem_new_with_origin", LIBS);
-  gidLink(g_emblem_get_icon, "g_emblem_get_icon", LIBS);
-  gidLink(g_emblem_get_origin, "g_emblem_get_origin", LIBS);
+  gidLink(cast(void**)&g_emblem_get_type, "g_emblem_get_type", LIBS);
+  gidLink(cast(void**)&g_emblem_new, "g_emblem_new", LIBS);
+  gidLink(cast(void**)&g_emblem_new_with_origin, "g_emblem_new_with_origin", LIBS);
+  gidLink(cast(void**)&g_emblem_get_icon, "g_emblem_get_icon", LIBS);
+  gidLink(cast(void**)&g_emblem_get_origin, "g_emblem_get_origin", LIBS);
 
   // EmblemedIcon
-  gidLink(g_emblemed_icon_get_type, "g_emblemed_icon_get_type", LIBS);
-  gidLink(g_emblemed_icon_new, "g_emblemed_icon_new", LIBS);
-  gidLink(g_emblemed_icon_add_emblem, "g_emblemed_icon_add_emblem", LIBS);
-  gidLink(g_emblemed_icon_clear_emblems, "g_emblemed_icon_clear_emblems", LIBS);
-  gidLink(g_emblemed_icon_get_emblems, "g_emblemed_icon_get_emblems", LIBS);
-  gidLink(g_emblemed_icon_get_icon, "g_emblemed_icon_get_icon", LIBS);
+  gidLink(cast(void**)&g_emblemed_icon_get_type, "g_emblemed_icon_get_type", LIBS);
+  gidLink(cast(void**)&g_emblemed_icon_new, "g_emblemed_icon_new", LIBS);
+  gidLink(cast(void**)&g_emblemed_icon_add_emblem, "g_emblemed_icon_add_emblem", LIBS);
+  gidLink(cast(void**)&g_emblemed_icon_clear_emblems, "g_emblemed_icon_clear_emblems", LIBS);
+  gidLink(cast(void**)&g_emblemed_icon_get_emblems, "g_emblemed_icon_get_emblems", LIBS);
+  gidLink(cast(void**)&g_emblemed_icon_get_icon, "g_emblemed_icon_get_icon", LIBS);
 
   // File
-  gidLink(g_file_get_type, "g_file_get_type", LIBS);
-  gidLink(g_file_new_build_filename, "g_file_new_build_filename", LIBS);
-  gidLink(g_file_new_build_filenamev, "g_file_new_build_filenamev", LIBS);
-  gidLink(g_file_new_for_commandline_arg, "g_file_new_for_commandline_arg", LIBS);
-  gidLink(g_file_new_for_commandline_arg_and_cwd, "g_file_new_for_commandline_arg_and_cwd", LIBS);
-  gidLink(g_file_new_for_path, "g_file_new_for_path", LIBS);
-  gidLink(g_file_new_for_uri, "g_file_new_for_uri", LIBS);
-  gidLink(g_file_new_tmp, "g_file_new_tmp", LIBS);
-  gidLink(g_file_new_tmp_async, "g_file_new_tmp_async", LIBS);
-  gidLink(g_file_new_tmp_dir_async, "g_file_new_tmp_dir_async", LIBS);
-  gidLink(g_file_new_tmp_dir_finish, "g_file_new_tmp_dir_finish", LIBS);
-  gidLink(g_file_new_tmp_finish, "g_file_new_tmp_finish", LIBS);
-  gidLink(g_file_parse_name, "g_file_parse_name", LIBS);
-  gidLink(g_file_append_to, "g_file_append_to", LIBS);
-  gidLink(g_file_append_to_async, "g_file_append_to_async", LIBS);
-  gidLink(g_file_append_to_finish, "g_file_append_to_finish", LIBS);
-  gidLink(g_file_build_attribute_list_for_copy, "g_file_build_attribute_list_for_copy", LIBS);
-  gidLink(g_file_copy, "g_file_copy", LIBS);
-  gidLink(g_file_copy_async, "g_file_copy_async", LIBS);
-  gidLink(g_file_copy_attributes, "g_file_copy_attributes", LIBS);
-  gidLink(g_file_copy_finish, "g_file_copy_finish", LIBS);
-  gidLink(g_file_create, "g_file_create", LIBS);
-  gidLink(g_file_create_async, "g_file_create_async", LIBS);
-  gidLink(g_file_create_finish, "g_file_create_finish", LIBS);
-  gidLink(g_file_create_readwrite, "g_file_create_readwrite", LIBS);
-  gidLink(g_file_create_readwrite_async, "g_file_create_readwrite_async", LIBS);
-  gidLink(g_file_create_readwrite_finish, "g_file_create_readwrite_finish", LIBS);
-  gidLink(g_file_delete, "g_file_delete", LIBS);
-  gidLink(g_file_delete_async, "g_file_delete_async", LIBS);
-  gidLink(g_file_delete_finish, "g_file_delete_finish", LIBS);
-  gidLink(g_file_dup, "g_file_dup", LIBS);
-  gidLink(g_file_eject_mountable, "g_file_eject_mountable", LIBS);
-  gidLink(g_file_eject_mountable_finish, "g_file_eject_mountable_finish", LIBS);
-  gidLink(g_file_eject_mountable_with_operation, "g_file_eject_mountable_with_operation", LIBS);
-  gidLink(g_file_eject_mountable_with_operation_finish, "g_file_eject_mountable_with_operation_finish", LIBS);
-  gidLink(g_file_enumerate_children, "g_file_enumerate_children", LIBS);
-  gidLink(g_file_enumerate_children_async, "g_file_enumerate_children_async", LIBS);
-  gidLink(g_file_enumerate_children_finish, "g_file_enumerate_children_finish", LIBS);
-  gidLink(g_file_equal, "g_file_equal", LIBS);
-  gidLink(g_file_find_enclosing_mount, "g_file_find_enclosing_mount", LIBS);
-  gidLink(g_file_find_enclosing_mount_async, "g_file_find_enclosing_mount_async", LIBS);
-  gidLink(g_file_find_enclosing_mount_finish, "g_file_find_enclosing_mount_finish", LIBS);
-  gidLink(g_file_get_basename, "g_file_get_basename", LIBS);
-  gidLink(g_file_get_child, "g_file_get_child", LIBS);
-  gidLink(g_file_get_child_for_display_name, "g_file_get_child_for_display_name", LIBS);
-  gidLink(g_file_get_parent, "g_file_get_parent", LIBS);
-  gidLink(g_file_get_parse_name, "g_file_get_parse_name", LIBS);
-  gidLink(g_file_get_path, "g_file_get_path", LIBS);
-  gidLink(g_file_get_relative_path, "g_file_get_relative_path", LIBS);
-  gidLink(g_file_get_uri, "g_file_get_uri", LIBS);
-  gidLink(g_file_get_uri_scheme, "g_file_get_uri_scheme", LIBS);
-  gidLink(g_file_has_parent, "g_file_has_parent", LIBS);
-  gidLink(g_file_has_prefix, "g_file_has_prefix", LIBS);
-  gidLink(g_file_has_uri_scheme, "g_file_has_uri_scheme", LIBS);
-  gidLink(g_file_hash, "g_file_hash", LIBS);
-  gidLink(g_file_is_native, "g_file_is_native", LIBS);
-  gidLink(g_file_load_bytes, "g_file_load_bytes", LIBS);
-  gidLink(g_file_load_bytes_async, "g_file_load_bytes_async", LIBS);
-  gidLink(g_file_load_bytes_finish, "g_file_load_bytes_finish", LIBS);
-  gidLink(g_file_load_contents, "g_file_load_contents", LIBS);
-  gidLink(g_file_load_contents_async, "g_file_load_contents_async", LIBS);
-  gidLink(g_file_load_contents_finish, "g_file_load_contents_finish", LIBS);
-  gidLink(g_file_load_partial_contents_async, "g_file_load_partial_contents_async", LIBS);
-  gidLink(g_file_load_partial_contents_finish, "g_file_load_partial_contents_finish", LIBS);
-  gidLink(g_file_make_directory, "g_file_make_directory", LIBS);
-  gidLink(g_file_make_directory_async, "g_file_make_directory_async", LIBS);
-  gidLink(g_file_make_directory_finish, "g_file_make_directory_finish", LIBS);
-  gidLink(g_file_make_directory_with_parents, "g_file_make_directory_with_parents", LIBS);
-  gidLink(g_file_make_symbolic_link, "g_file_make_symbolic_link", LIBS);
-  gidLink(g_file_make_symbolic_link_async, "g_file_make_symbolic_link_async", LIBS);
-  gidLink(g_file_make_symbolic_link_finish, "g_file_make_symbolic_link_finish", LIBS);
-  gidLink(g_file_measure_disk_usage, "g_file_measure_disk_usage", LIBS);
-  gidLink(g_file_measure_disk_usage_async, "g_file_measure_disk_usage_async", LIBS);
-  gidLink(g_file_measure_disk_usage_finish, "g_file_measure_disk_usage_finish", LIBS);
-  gidLink(g_file_monitor, "g_file_monitor", LIBS);
-  gidLink(g_file_monitor_directory, "g_file_monitor_directory", LIBS);
-  gidLink(g_file_monitor_file, "g_file_monitor_file", LIBS);
-  gidLink(g_file_mount_enclosing_volume, "g_file_mount_enclosing_volume", LIBS);
-  gidLink(g_file_mount_enclosing_volume_finish, "g_file_mount_enclosing_volume_finish", LIBS);
-  gidLink(g_file_mount_mountable, "g_file_mount_mountable", LIBS);
-  gidLink(g_file_mount_mountable_finish, "g_file_mount_mountable_finish", LIBS);
-  gidLink(g_file_move, "g_file_move", LIBS);
-  gidLink(g_file_move_async, "g_file_move_async", LIBS);
-  gidLink(g_file_move_finish, "g_file_move_finish", LIBS);
-  gidLink(g_file_open_readwrite, "g_file_open_readwrite", LIBS);
-  gidLink(g_file_open_readwrite_async, "g_file_open_readwrite_async", LIBS);
-  gidLink(g_file_open_readwrite_finish, "g_file_open_readwrite_finish", LIBS);
-  gidLink(g_file_peek_path, "g_file_peek_path", LIBS);
-  gidLink(g_file_poll_mountable, "g_file_poll_mountable", LIBS);
-  gidLink(g_file_poll_mountable_finish, "g_file_poll_mountable_finish", LIBS);
-  gidLink(g_file_query_default_handler, "g_file_query_default_handler", LIBS);
-  gidLink(g_file_query_default_handler_async, "g_file_query_default_handler_async", LIBS);
-  gidLink(g_file_query_default_handler_finish, "g_file_query_default_handler_finish", LIBS);
-  gidLink(g_file_query_exists, "g_file_query_exists", LIBS);
-  gidLink(g_file_query_file_type, "g_file_query_file_type", LIBS);
-  gidLink(g_file_query_filesystem_info, "g_file_query_filesystem_info", LIBS);
-  gidLink(g_file_query_filesystem_info_async, "g_file_query_filesystem_info_async", LIBS);
-  gidLink(g_file_query_filesystem_info_finish, "g_file_query_filesystem_info_finish", LIBS);
-  gidLink(g_file_query_info, "g_file_query_info", LIBS);
-  gidLink(g_file_query_info_async, "g_file_query_info_async", LIBS);
-  gidLink(g_file_query_info_finish, "g_file_query_info_finish", LIBS);
-  gidLink(g_file_query_settable_attributes, "g_file_query_settable_attributes", LIBS);
-  gidLink(g_file_query_writable_namespaces, "g_file_query_writable_namespaces", LIBS);
-  gidLink(g_file_read, "g_file_read", LIBS);
-  gidLink(g_file_read_async, "g_file_read_async", LIBS);
-  gidLink(g_file_read_finish, "g_file_read_finish", LIBS);
-  gidLink(g_file_replace, "g_file_replace", LIBS);
-  gidLink(g_file_replace_async, "g_file_replace_async", LIBS);
-  gidLink(g_file_replace_contents, "g_file_replace_contents", LIBS);
-  gidLink(g_file_replace_contents_async, "g_file_replace_contents_async", LIBS);
-  gidLink(g_file_replace_contents_bytes_async, "g_file_replace_contents_bytes_async", LIBS);
-  gidLink(g_file_replace_contents_finish, "g_file_replace_contents_finish", LIBS);
-  gidLink(g_file_replace_finish, "g_file_replace_finish", LIBS);
-  gidLink(g_file_replace_readwrite, "g_file_replace_readwrite", LIBS);
-  gidLink(g_file_replace_readwrite_async, "g_file_replace_readwrite_async", LIBS);
-  gidLink(g_file_replace_readwrite_finish, "g_file_replace_readwrite_finish", LIBS);
-  gidLink(g_file_resolve_relative_path, "g_file_resolve_relative_path", LIBS);
-  gidLink(g_file_set_attribute, "g_file_set_attribute", LIBS);
-  gidLink(g_file_set_attribute_byte_string, "g_file_set_attribute_byte_string", LIBS);
-  gidLink(g_file_set_attribute_int32, "g_file_set_attribute_int32", LIBS);
-  gidLink(g_file_set_attribute_int64, "g_file_set_attribute_int64", LIBS);
-  gidLink(g_file_set_attribute_string, "g_file_set_attribute_string", LIBS);
-  gidLink(g_file_set_attribute_uint32, "g_file_set_attribute_uint32", LIBS);
-  gidLink(g_file_set_attribute_uint64, "g_file_set_attribute_uint64", LIBS);
-  gidLink(g_file_set_attributes_async, "g_file_set_attributes_async", LIBS);
-  gidLink(g_file_set_attributes_finish, "g_file_set_attributes_finish", LIBS);
-  gidLink(g_file_set_attributes_from_info, "g_file_set_attributes_from_info", LIBS);
-  gidLink(g_file_set_display_name, "g_file_set_display_name", LIBS);
-  gidLink(g_file_set_display_name_async, "g_file_set_display_name_async", LIBS);
-  gidLink(g_file_set_display_name_finish, "g_file_set_display_name_finish", LIBS);
-  gidLink(g_file_start_mountable, "g_file_start_mountable", LIBS);
-  gidLink(g_file_start_mountable_finish, "g_file_start_mountable_finish", LIBS);
-  gidLink(g_file_stop_mountable, "g_file_stop_mountable", LIBS);
-  gidLink(g_file_stop_mountable_finish, "g_file_stop_mountable_finish", LIBS);
-  gidLink(g_file_supports_thread_contexts, "g_file_supports_thread_contexts", LIBS);
-  gidLink(g_file_trash, "g_file_trash", LIBS);
-  gidLink(g_file_trash_async, "g_file_trash_async", LIBS);
-  gidLink(g_file_trash_finish, "g_file_trash_finish", LIBS);
-  gidLink(g_file_unmount_mountable, "g_file_unmount_mountable", LIBS);
-  gidLink(g_file_unmount_mountable_finish, "g_file_unmount_mountable_finish", LIBS);
-  gidLink(g_file_unmount_mountable_with_operation, "g_file_unmount_mountable_with_operation", LIBS);
-  gidLink(g_file_unmount_mountable_with_operation_finish, "g_file_unmount_mountable_with_operation_finish", LIBS);
+  gidLink(cast(void**)&g_file_get_type, "g_file_get_type", LIBS);
+  gidLink(cast(void**)&g_file_new_build_filename, "g_file_new_build_filename", LIBS);
+  gidLink(cast(void**)&g_file_new_build_filenamev, "g_file_new_build_filenamev", LIBS);
+  gidLink(cast(void**)&g_file_new_for_commandline_arg, "g_file_new_for_commandline_arg", LIBS);
+  gidLink(cast(void**)&g_file_new_for_commandline_arg_and_cwd, "g_file_new_for_commandline_arg_and_cwd", LIBS);
+  gidLink(cast(void**)&g_file_new_for_path, "g_file_new_for_path", LIBS);
+  gidLink(cast(void**)&g_file_new_for_uri, "g_file_new_for_uri", LIBS);
+  gidLink(cast(void**)&g_file_new_tmp, "g_file_new_tmp", LIBS);
+  gidLink(cast(void**)&g_file_new_tmp_async, "g_file_new_tmp_async", LIBS);
+  gidLink(cast(void**)&g_file_new_tmp_dir_async, "g_file_new_tmp_dir_async", LIBS);
+  gidLink(cast(void**)&g_file_new_tmp_dir_finish, "g_file_new_tmp_dir_finish", LIBS);
+  gidLink(cast(void**)&g_file_new_tmp_finish, "g_file_new_tmp_finish", LIBS);
+  gidLink(cast(void**)&g_file_parse_name, "g_file_parse_name", LIBS);
+  gidLink(cast(void**)&g_file_append_to, "g_file_append_to", LIBS);
+  gidLink(cast(void**)&g_file_append_to_async, "g_file_append_to_async", LIBS);
+  gidLink(cast(void**)&g_file_append_to_finish, "g_file_append_to_finish", LIBS);
+  gidLink(cast(void**)&g_file_build_attribute_list_for_copy, "g_file_build_attribute_list_for_copy", LIBS);
+  gidLink(cast(void**)&g_file_copy, "g_file_copy", LIBS);
+  gidLink(cast(void**)&g_file_copy_async, "g_file_copy_async", LIBS);
+  gidLink(cast(void**)&g_file_copy_attributes, "g_file_copy_attributes", LIBS);
+  gidLink(cast(void**)&g_file_copy_finish, "g_file_copy_finish", LIBS);
+  gidLink(cast(void**)&g_file_create, "g_file_create", LIBS);
+  gidLink(cast(void**)&g_file_create_async, "g_file_create_async", LIBS);
+  gidLink(cast(void**)&g_file_create_finish, "g_file_create_finish", LIBS);
+  gidLink(cast(void**)&g_file_create_readwrite, "g_file_create_readwrite", LIBS);
+  gidLink(cast(void**)&g_file_create_readwrite_async, "g_file_create_readwrite_async", LIBS);
+  gidLink(cast(void**)&g_file_create_readwrite_finish, "g_file_create_readwrite_finish", LIBS);
+  gidLink(cast(void**)&g_file_delete, "g_file_delete", LIBS);
+  gidLink(cast(void**)&g_file_delete_async, "g_file_delete_async", LIBS);
+  gidLink(cast(void**)&g_file_delete_finish, "g_file_delete_finish", LIBS);
+  gidLink(cast(void**)&g_file_dup, "g_file_dup", LIBS);
+  gidLink(cast(void**)&g_file_eject_mountable, "g_file_eject_mountable", LIBS);
+  gidLink(cast(void**)&g_file_eject_mountable_finish, "g_file_eject_mountable_finish", LIBS);
+  gidLink(cast(void**)&g_file_eject_mountable_with_operation, "g_file_eject_mountable_with_operation", LIBS);
+  gidLink(cast(void**)&g_file_eject_mountable_with_operation_finish, "g_file_eject_mountable_with_operation_finish", LIBS);
+  gidLink(cast(void**)&g_file_enumerate_children, "g_file_enumerate_children", LIBS);
+  gidLink(cast(void**)&g_file_enumerate_children_async, "g_file_enumerate_children_async", LIBS);
+  gidLink(cast(void**)&g_file_enumerate_children_finish, "g_file_enumerate_children_finish", LIBS);
+  gidLink(cast(void**)&g_file_equal, "g_file_equal", LIBS);
+  gidLink(cast(void**)&g_file_find_enclosing_mount, "g_file_find_enclosing_mount", LIBS);
+  gidLink(cast(void**)&g_file_find_enclosing_mount_async, "g_file_find_enclosing_mount_async", LIBS);
+  gidLink(cast(void**)&g_file_find_enclosing_mount_finish, "g_file_find_enclosing_mount_finish", LIBS);
+  gidLink(cast(void**)&g_file_get_basename, "g_file_get_basename", LIBS);
+  gidLink(cast(void**)&g_file_get_child, "g_file_get_child", LIBS);
+  gidLink(cast(void**)&g_file_get_child_for_display_name, "g_file_get_child_for_display_name", LIBS);
+  gidLink(cast(void**)&g_file_get_parent, "g_file_get_parent", LIBS);
+  gidLink(cast(void**)&g_file_get_parse_name, "g_file_get_parse_name", LIBS);
+  gidLink(cast(void**)&g_file_get_path, "g_file_get_path", LIBS);
+  gidLink(cast(void**)&g_file_get_relative_path, "g_file_get_relative_path", LIBS);
+  gidLink(cast(void**)&g_file_get_uri, "g_file_get_uri", LIBS);
+  gidLink(cast(void**)&g_file_get_uri_scheme, "g_file_get_uri_scheme", LIBS);
+  gidLink(cast(void**)&g_file_has_parent, "g_file_has_parent", LIBS);
+  gidLink(cast(void**)&g_file_has_prefix, "g_file_has_prefix", LIBS);
+  gidLink(cast(void**)&g_file_has_uri_scheme, "g_file_has_uri_scheme", LIBS);
+  gidLink(cast(void**)&g_file_hash, "g_file_hash", LIBS);
+  gidLink(cast(void**)&g_file_is_native, "g_file_is_native", LIBS);
+  gidLink(cast(void**)&g_file_load_bytes, "g_file_load_bytes", LIBS);
+  gidLink(cast(void**)&g_file_load_bytes_async, "g_file_load_bytes_async", LIBS);
+  gidLink(cast(void**)&g_file_load_bytes_finish, "g_file_load_bytes_finish", LIBS);
+  gidLink(cast(void**)&g_file_load_contents, "g_file_load_contents", LIBS);
+  gidLink(cast(void**)&g_file_load_contents_async, "g_file_load_contents_async", LIBS);
+  gidLink(cast(void**)&g_file_load_contents_finish, "g_file_load_contents_finish", LIBS);
+  gidLink(cast(void**)&g_file_load_partial_contents_async, "g_file_load_partial_contents_async", LIBS);
+  gidLink(cast(void**)&g_file_load_partial_contents_finish, "g_file_load_partial_contents_finish", LIBS);
+  gidLink(cast(void**)&g_file_make_directory, "g_file_make_directory", LIBS);
+  gidLink(cast(void**)&g_file_make_directory_async, "g_file_make_directory_async", LIBS);
+  gidLink(cast(void**)&g_file_make_directory_finish, "g_file_make_directory_finish", LIBS);
+  gidLink(cast(void**)&g_file_make_directory_with_parents, "g_file_make_directory_with_parents", LIBS);
+  gidLink(cast(void**)&g_file_make_symbolic_link, "g_file_make_symbolic_link", LIBS);
+  gidLink(cast(void**)&g_file_make_symbolic_link_async, "g_file_make_symbolic_link_async", LIBS);
+  gidLink(cast(void**)&g_file_make_symbolic_link_finish, "g_file_make_symbolic_link_finish", LIBS);
+  gidLink(cast(void**)&g_file_measure_disk_usage, "g_file_measure_disk_usage", LIBS);
+  gidLink(cast(void**)&g_file_measure_disk_usage_async, "g_file_measure_disk_usage_async", LIBS);
+  gidLink(cast(void**)&g_file_measure_disk_usage_finish, "g_file_measure_disk_usage_finish", LIBS);
+  gidLink(cast(void**)&g_file_monitor, "g_file_monitor", LIBS);
+  gidLink(cast(void**)&g_file_monitor_directory, "g_file_monitor_directory", LIBS);
+  gidLink(cast(void**)&g_file_monitor_file, "g_file_monitor_file", LIBS);
+  gidLink(cast(void**)&g_file_mount_enclosing_volume, "g_file_mount_enclosing_volume", LIBS);
+  gidLink(cast(void**)&g_file_mount_enclosing_volume_finish, "g_file_mount_enclosing_volume_finish", LIBS);
+  gidLink(cast(void**)&g_file_mount_mountable, "g_file_mount_mountable", LIBS);
+  gidLink(cast(void**)&g_file_mount_mountable_finish, "g_file_mount_mountable_finish", LIBS);
+  gidLink(cast(void**)&g_file_move, "g_file_move", LIBS);
+  gidLink(cast(void**)&g_file_move_async, "g_file_move_async", LIBS);
+  gidLink(cast(void**)&g_file_move_finish, "g_file_move_finish", LIBS);
+  gidLink(cast(void**)&g_file_open_readwrite, "g_file_open_readwrite", LIBS);
+  gidLink(cast(void**)&g_file_open_readwrite_async, "g_file_open_readwrite_async", LIBS);
+  gidLink(cast(void**)&g_file_open_readwrite_finish, "g_file_open_readwrite_finish", LIBS);
+  gidLink(cast(void**)&g_file_peek_path, "g_file_peek_path", LIBS);
+  gidLink(cast(void**)&g_file_poll_mountable, "g_file_poll_mountable", LIBS);
+  gidLink(cast(void**)&g_file_poll_mountable_finish, "g_file_poll_mountable_finish", LIBS);
+  gidLink(cast(void**)&g_file_query_default_handler, "g_file_query_default_handler", LIBS);
+  gidLink(cast(void**)&g_file_query_default_handler_async, "g_file_query_default_handler_async", LIBS);
+  gidLink(cast(void**)&g_file_query_default_handler_finish, "g_file_query_default_handler_finish", LIBS);
+  gidLink(cast(void**)&g_file_query_exists, "g_file_query_exists", LIBS);
+  gidLink(cast(void**)&g_file_query_file_type, "g_file_query_file_type", LIBS);
+  gidLink(cast(void**)&g_file_query_filesystem_info, "g_file_query_filesystem_info", LIBS);
+  gidLink(cast(void**)&g_file_query_filesystem_info_async, "g_file_query_filesystem_info_async", LIBS);
+  gidLink(cast(void**)&g_file_query_filesystem_info_finish, "g_file_query_filesystem_info_finish", LIBS);
+  gidLink(cast(void**)&g_file_query_info, "g_file_query_info", LIBS);
+  gidLink(cast(void**)&g_file_query_info_async, "g_file_query_info_async", LIBS);
+  gidLink(cast(void**)&g_file_query_info_finish, "g_file_query_info_finish", LIBS);
+  gidLink(cast(void**)&g_file_query_settable_attributes, "g_file_query_settable_attributes", LIBS);
+  gidLink(cast(void**)&g_file_query_writable_namespaces, "g_file_query_writable_namespaces", LIBS);
+  gidLink(cast(void**)&g_file_read, "g_file_read", LIBS);
+  gidLink(cast(void**)&g_file_read_async, "g_file_read_async", LIBS);
+  gidLink(cast(void**)&g_file_read_finish, "g_file_read_finish", LIBS);
+  gidLink(cast(void**)&g_file_replace, "g_file_replace", LIBS);
+  gidLink(cast(void**)&g_file_replace_async, "g_file_replace_async", LIBS);
+  gidLink(cast(void**)&g_file_replace_contents, "g_file_replace_contents", LIBS);
+  gidLink(cast(void**)&g_file_replace_contents_async, "g_file_replace_contents_async", LIBS);
+  gidLink(cast(void**)&g_file_replace_contents_bytes_async, "g_file_replace_contents_bytes_async", LIBS);
+  gidLink(cast(void**)&g_file_replace_contents_finish, "g_file_replace_contents_finish", LIBS);
+  gidLink(cast(void**)&g_file_replace_finish, "g_file_replace_finish", LIBS);
+  gidLink(cast(void**)&g_file_replace_readwrite, "g_file_replace_readwrite", LIBS);
+  gidLink(cast(void**)&g_file_replace_readwrite_async, "g_file_replace_readwrite_async", LIBS);
+  gidLink(cast(void**)&g_file_replace_readwrite_finish, "g_file_replace_readwrite_finish", LIBS);
+  gidLink(cast(void**)&g_file_resolve_relative_path, "g_file_resolve_relative_path", LIBS);
+  gidLink(cast(void**)&g_file_set_attribute, "g_file_set_attribute", LIBS);
+  gidLink(cast(void**)&g_file_set_attribute_byte_string, "g_file_set_attribute_byte_string", LIBS);
+  gidLink(cast(void**)&g_file_set_attribute_int32, "g_file_set_attribute_int32", LIBS);
+  gidLink(cast(void**)&g_file_set_attribute_int64, "g_file_set_attribute_int64", LIBS);
+  gidLink(cast(void**)&g_file_set_attribute_string, "g_file_set_attribute_string", LIBS);
+  gidLink(cast(void**)&g_file_set_attribute_uint32, "g_file_set_attribute_uint32", LIBS);
+  gidLink(cast(void**)&g_file_set_attribute_uint64, "g_file_set_attribute_uint64", LIBS);
+  gidLink(cast(void**)&g_file_set_attributes_async, "g_file_set_attributes_async", LIBS);
+  gidLink(cast(void**)&g_file_set_attributes_finish, "g_file_set_attributes_finish", LIBS);
+  gidLink(cast(void**)&g_file_set_attributes_from_info, "g_file_set_attributes_from_info", LIBS);
+  gidLink(cast(void**)&g_file_set_display_name, "g_file_set_display_name", LIBS);
+  gidLink(cast(void**)&g_file_set_display_name_async, "g_file_set_display_name_async", LIBS);
+  gidLink(cast(void**)&g_file_set_display_name_finish, "g_file_set_display_name_finish", LIBS);
+  gidLink(cast(void**)&g_file_start_mountable, "g_file_start_mountable", LIBS);
+  gidLink(cast(void**)&g_file_start_mountable_finish, "g_file_start_mountable_finish", LIBS);
+  gidLink(cast(void**)&g_file_stop_mountable, "g_file_stop_mountable", LIBS);
+  gidLink(cast(void**)&g_file_stop_mountable_finish, "g_file_stop_mountable_finish", LIBS);
+  gidLink(cast(void**)&g_file_supports_thread_contexts, "g_file_supports_thread_contexts", LIBS);
+  gidLink(cast(void**)&g_file_trash, "g_file_trash", LIBS);
+  gidLink(cast(void**)&g_file_trash_async, "g_file_trash_async", LIBS);
+  gidLink(cast(void**)&g_file_trash_finish, "g_file_trash_finish", LIBS);
+  gidLink(cast(void**)&g_file_unmount_mountable, "g_file_unmount_mountable", LIBS);
+  gidLink(cast(void**)&g_file_unmount_mountable_finish, "g_file_unmount_mountable_finish", LIBS);
+  gidLink(cast(void**)&g_file_unmount_mountable_with_operation, "g_file_unmount_mountable_with_operation", LIBS);
+  gidLink(cast(void**)&g_file_unmount_mountable_with_operation_finish, "g_file_unmount_mountable_with_operation_finish", LIBS);
 
   // FileAttributeInfoList
-  gidLink(g_file_attribute_info_list_get_type, "g_file_attribute_info_list_get_type", LIBS);
-  gidLink(g_file_attribute_info_list_new, "g_file_attribute_info_list_new", LIBS);
-  gidLink(g_file_attribute_info_list_add, "g_file_attribute_info_list_add", LIBS);
-  gidLink(g_file_attribute_info_list_dup, "g_file_attribute_info_list_dup", LIBS);
-  gidLink(g_file_attribute_info_list_lookup, "g_file_attribute_info_list_lookup", LIBS);
-  gidLink(g_file_attribute_info_list_ref, "g_file_attribute_info_list_ref", LIBS);
-  gidLink(g_file_attribute_info_list_unref, "g_file_attribute_info_list_unref", LIBS);
+  gidLink(cast(void**)&g_file_attribute_info_list_get_type, "g_file_attribute_info_list_get_type", LIBS);
+  gidLink(cast(void**)&g_file_attribute_info_list_new, "g_file_attribute_info_list_new", LIBS);
+  gidLink(cast(void**)&g_file_attribute_info_list_add, "g_file_attribute_info_list_add", LIBS);
+  gidLink(cast(void**)&g_file_attribute_info_list_dup, "g_file_attribute_info_list_dup", LIBS);
+  gidLink(cast(void**)&g_file_attribute_info_list_lookup, "g_file_attribute_info_list_lookup", LIBS);
+  gidLink(cast(void**)&g_file_attribute_info_list_ref, "g_file_attribute_info_list_ref", LIBS);
+  gidLink(cast(void**)&g_file_attribute_info_list_unref, "g_file_attribute_info_list_unref", LIBS);
 
   // FileAttributeMatcher
-  gidLink(g_file_attribute_matcher_get_type, "g_file_attribute_matcher_get_type", LIBS);
-  gidLink(g_file_attribute_matcher_new, "g_file_attribute_matcher_new", LIBS);
-  gidLink(g_file_attribute_matcher_enumerate_namespace, "g_file_attribute_matcher_enumerate_namespace", LIBS);
-  gidLink(g_file_attribute_matcher_enumerate_next, "g_file_attribute_matcher_enumerate_next", LIBS);
-  gidLink(g_file_attribute_matcher_matches, "g_file_attribute_matcher_matches", LIBS);
-  gidLink(g_file_attribute_matcher_matches_only, "g_file_attribute_matcher_matches_only", LIBS);
-  gidLink(g_file_attribute_matcher_ref, "g_file_attribute_matcher_ref", LIBS);
-  gidLink(g_file_attribute_matcher_subtract, "g_file_attribute_matcher_subtract", LIBS);
-  gidLink(g_file_attribute_matcher_to_string, "g_file_attribute_matcher_to_string", LIBS);
-  gidLink(g_file_attribute_matcher_unref, "g_file_attribute_matcher_unref", LIBS);
+  gidLink(cast(void**)&g_file_attribute_matcher_get_type, "g_file_attribute_matcher_get_type", LIBS);
+  gidLink(cast(void**)&g_file_attribute_matcher_new, "g_file_attribute_matcher_new", LIBS);
+  gidLink(cast(void**)&g_file_attribute_matcher_enumerate_namespace, "g_file_attribute_matcher_enumerate_namespace", LIBS);
+  gidLink(cast(void**)&g_file_attribute_matcher_enumerate_next, "g_file_attribute_matcher_enumerate_next", LIBS);
+  gidLink(cast(void**)&g_file_attribute_matcher_matches, "g_file_attribute_matcher_matches", LIBS);
+  gidLink(cast(void**)&g_file_attribute_matcher_matches_only, "g_file_attribute_matcher_matches_only", LIBS);
+  gidLink(cast(void**)&g_file_attribute_matcher_ref, "g_file_attribute_matcher_ref", LIBS);
+  gidLink(cast(void**)&g_file_attribute_matcher_subtract, "g_file_attribute_matcher_subtract", LIBS);
+  gidLink(cast(void**)&g_file_attribute_matcher_to_string, "g_file_attribute_matcher_to_string", LIBS);
+  gidLink(cast(void**)&g_file_attribute_matcher_unref, "g_file_attribute_matcher_unref", LIBS);
 
   // FileDescriptorBased
-  gidLink(g_file_descriptor_based_get_type, "g_file_descriptor_based_get_type", LIBS);
-  gidLink(g_file_descriptor_based_get_fd, "g_file_descriptor_based_get_fd", LIBS);
+  gidLink(cast(void**)&g_file_descriptor_based_get_type, "g_file_descriptor_based_get_type", LIBS);
+  gidLink(cast(void**)&g_file_descriptor_based_get_fd, "g_file_descriptor_based_get_fd", LIBS);
 
   // FileEnumerator
-  gidLink(g_file_enumerator_get_type, "g_file_enumerator_get_type", LIBS);
-  gidLink(g_file_enumerator_close, "g_file_enumerator_close", LIBS);
-  gidLink(g_file_enumerator_close_async, "g_file_enumerator_close_async", LIBS);
-  gidLink(g_file_enumerator_close_finish, "g_file_enumerator_close_finish", LIBS);
-  gidLink(g_file_enumerator_get_child, "g_file_enumerator_get_child", LIBS);
-  gidLink(g_file_enumerator_get_container, "g_file_enumerator_get_container", LIBS);
-  gidLink(g_file_enumerator_has_pending, "g_file_enumerator_has_pending", LIBS);
-  gidLink(g_file_enumerator_is_closed, "g_file_enumerator_is_closed", LIBS);
-  gidLink(g_file_enumerator_iterate, "g_file_enumerator_iterate", LIBS);
-  gidLink(g_file_enumerator_next_file, "g_file_enumerator_next_file", LIBS);
-  gidLink(g_file_enumerator_next_files_async, "g_file_enumerator_next_files_async", LIBS);
-  gidLink(g_file_enumerator_next_files_finish, "g_file_enumerator_next_files_finish", LIBS);
-  gidLink(g_file_enumerator_set_pending, "g_file_enumerator_set_pending", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_get_type, "g_file_enumerator_get_type", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_close, "g_file_enumerator_close", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_close_async, "g_file_enumerator_close_async", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_close_finish, "g_file_enumerator_close_finish", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_get_child, "g_file_enumerator_get_child", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_get_container, "g_file_enumerator_get_container", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_has_pending, "g_file_enumerator_has_pending", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_is_closed, "g_file_enumerator_is_closed", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_iterate, "g_file_enumerator_iterate", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_next_file, "g_file_enumerator_next_file", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_next_files_async, "g_file_enumerator_next_files_async", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_next_files_finish, "g_file_enumerator_next_files_finish", LIBS);
+  gidLink(cast(void**)&g_file_enumerator_set_pending, "g_file_enumerator_set_pending", LIBS);
 
   // FileIOStream
-  gidLink(g_file_io_stream_get_type, "g_file_io_stream_get_type", LIBS);
-  gidLink(g_file_io_stream_get_etag, "g_file_io_stream_get_etag", LIBS);
-  gidLink(g_file_io_stream_query_info, "g_file_io_stream_query_info", LIBS);
-  gidLink(g_file_io_stream_query_info_async, "g_file_io_stream_query_info_async", LIBS);
-  gidLink(g_file_io_stream_query_info_finish, "g_file_io_stream_query_info_finish", LIBS);
+  gidLink(cast(void**)&g_file_io_stream_get_type, "g_file_io_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_file_io_stream_get_etag, "g_file_io_stream_get_etag", LIBS);
+  gidLink(cast(void**)&g_file_io_stream_query_info, "g_file_io_stream_query_info", LIBS);
+  gidLink(cast(void**)&g_file_io_stream_query_info_async, "g_file_io_stream_query_info_async", LIBS);
+  gidLink(cast(void**)&g_file_io_stream_query_info_finish, "g_file_io_stream_query_info_finish", LIBS);
 
   // FileIcon
-  gidLink(g_file_icon_get_type, "g_file_icon_get_type", LIBS);
-  gidLink(g_file_icon_new, "g_file_icon_new", LIBS);
-  gidLink(g_file_icon_get_file, "g_file_icon_get_file", LIBS);
+  gidLink(cast(void**)&g_file_icon_get_type, "g_file_icon_get_type", LIBS);
+  gidLink(cast(void**)&g_file_icon_new, "g_file_icon_new", LIBS);
+  gidLink(cast(void**)&g_file_icon_get_file, "g_file_icon_get_file", LIBS);
 
   // FileInfo
-  gidLink(g_file_info_get_type, "g_file_info_get_type", LIBS);
-  gidLink(g_file_info_new, "g_file_info_new", LIBS);
-  gidLink(g_file_info_clear_status, "g_file_info_clear_status", LIBS);
-  gidLink(g_file_info_copy_into, "g_file_info_copy_into", LIBS);
-  gidLink(g_file_info_dup, "g_file_info_dup", LIBS);
-  gidLink(g_file_info_get_access_date_time, "g_file_info_get_access_date_time", LIBS);
-  gidLink(g_file_info_get_attribute_as_string, "g_file_info_get_attribute_as_string", LIBS);
-  gidLink(g_file_info_get_attribute_boolean, "g_file_info_get_attribute_boolean", LIBS);
-  gidLink(g_file_info_get_attribute_byte_string, "g_file_info_get_attribute_byte_string", LIBS);
-  gidLink(g_file_info_get_attribute_data, "g_file_info_get_attribute_data", LIBS);
-  gidLink(g_file_info_get_attribute_file_path, "g_file_info_get_attribute_file_path", LIBS);
-  gidLink(g_file_info_get_attribute_int32, "g_file_info_get_attribute_int32", LIBS);
-  gidLink(g_file_info_get_attribute_int64, "g_file_info_get_attribute_int64", LIBS);
-  gidLink(g_file_info_get_attribute_object, "g_file_info_get_attribute_object", LIBS);
-  gidLink(g_file_info_get_attribute_status, "g_file_info_get_attribute_status", LIBS);
-  gidLink(g_file_info_get_attribute_string, "g_file_info_get_attribute_string", LIBS);
-  gidLink(g_file_info_get_attribute_stringv, "g_file_info_get_attribute_stringv", LIBS);
-  gidLink(g_file_info_get_attribute_type, "g_file_info_get_attribute_type", LIBS);
-  gidLink(g_file_info_get_attribute_uint32, "g_file_info_get_attribute_uint32", LIBS);
-  gidLink(g_file_info_get_attribute_uint64, "g_file_info_get_attribute_uint64", LIBS);
-  gidLink(g_file_info_get_content_type, "g_file_info_get_content_type", LIBS);
-  gidLink(g_file_info_get_creation_date_time, "g_file_info_get_creation_date_time", LIBS);
-  gidLink(g_file_info_get_deletion_date, "g_file_info_get_deletion_date", LIBS);
-  gidLink(g_file_info_get_display_name, "g_file_info_get_display_name", LIBS);
-  gidLink(g_file_info_get_edit_name, "g_file_info_get_edit_name", LIBS);
-  gidLink(g_file_info_get_etag, "g_file_info_get_etag", LIBS);
-  gidLink(g_file_info_get_file_type, "g_file_info_get_file_type", LIBS);
-  gidLink(g_file_info_get_icon, "g_file_info_get_icon", LIBS);
-  gidLink(g_file_info_get_is_backup, "g_file_info_get_is_backup", LIBS);
-  gidLink(g_file_info_get_is_hidden, "g_file_info_get_is_hidden", LIBS);
-  gidLink(g_file_info_get_is_symlink, "g_file_info_get_is_symlink", LIBS);
-  gidLink(g_file_info_get_modification_date_time, "g_file_info_get_modification_date_time", LIBS);
-  gidLink(g_file_info_get_modification_time, "g_file_info_get_modification_time", LIBS);
-  gidLink(g_file_info_get_name, "g_file_info_get_name", LIBS);
-  gidLink(g_file_info_get_size, "g_file_info_get_size", LIBS);
-  gidLink(g_file_info_get_sort_order, "g_file_info_get_sort_order", LIBS);
-  gidLink(g_file_info_get_symbolic_icon, "g_file_info_get_symbolic_icon", LIBS);
-  gidLink(g_file_info_get_symlink_target, "g_file_info_get_symlink_target", LIBS);
-  gidLink(g_file_info_has_attribute, "g_file_info_has_attribute", LIBS);
-  gidLink(g_file_info_has_namespace, "g_file_info_has_namespace", LIBS);
-  gidLink(g_file_info_list_attributes, "g_file_info_list_attributes", LIBS);
-  gidLink(g_file_info_remove_attribute, "g_file_info_remove_attribute", LIBS);
-  gidLink(g_file_info_set_access_date_time, "g_file_info_set_access_date_time", LIBS);
-  gidLink(g_file_info_set_attribute, "g_file_info_set_attribute", LIBS);
-  gidLink(g_file_info_set_attribute_boolean, "g_file_info_set_attribute_boolean", LIBS);
-  gidLink(g_file_info_set_attribute_byte_string, "g_file_info_set_attribute_byte_string", LIBS);
-  gidLink(g_file_info_set_attribute_file_path, "g_file_info_set_attribute_file_path", LIBS);
-  gidLink(g_file_info_set_attribute_int32, "g_file_info_set_attribute_int32", LIBS);
-  gidLink(g_file_info_set_attribute_int64, "g_file_info_set_attribute_int64", LIBS);
-  gidLink(g_file_info_set_attribute_mask, "g_file_info_set_attribute_mask", LIBS);
-  gidLink(g_file_info_set_attribute_object, "g_file_info_set_attribute_object", LIBS);
-  gidLink(g_file_info_set_attribute_status, "g_file_info_set_attribute_status", LIBS);
-  gidLink(g_file_info_set_attribute_string, "g_file_info_set_attribute_string", LIBS);
-  gidLink(g_file_info_set_attribute_stringv, "g_file_info_set_attribute_stringv", LIBS);
-  gidLink(g_file_info_set_attribute_uint32, "g_file_info_set_attribute_uint32", LIBS);
-  gidLink(g_file_info_set_attribute_uint64, "g_file_info_set_attribute_uint64", LIBS);
-  gidLink(g_file_info_set_content_type, "g_file_info_set_content_type", LIBS);
-  gidLink(g_file_info_set_creation_date_time, "g_file_info_set_creation_date_time", LIBS);
-  gidLink(g_file_info_set_display_name, "g_file_info_set_display_name", LIBS);
-  gidLink(g_file_info_set_edit_name, "g_file_info_set_edit_name", LIBS);
-  gidLink(g_file_info_set_file_type, "g_file_info_set_file_type", LIBS);
-  gidLink(g_file_info_set_icon, "g_file_info_set_icon", LIBS);
-  gidLink(g_file_info_set_is_hidden, "g_file_info_set_is_hidden", LIBS);
-  gidLink(g_file_info_set_is_symlink, "g_file_info_set_is_symlink", LIBS);
-  gidLink(g_file_info_set_modification_date_time, "g_file_info_set_modification_date_time", LIBS);
-  gidLink(g_file_info_set_modification_time, "g_file_info_set_modification_time", LIBS);
-  gidLink(g_file_info_set_name, "g_file_info_set_name", LIBS);
-  gidLink(g_file_info_set_size, "g_file_info_set_size", LIBS);
-  gidLink(g_file_info_set_sort_order, "g_file_info_set_sort_order", LIBS);
-  gidLink(g_file_info_set_symbolic_icon, "g_file_info_set_symbolic_icon", LIBS);
-  gidLink(g_file_info_set_symlink_target, "g_file_info_set_symlink_target", LIBS);
-  gidLink(g_file_info_unset_attribute_mask, "g_file_info_unset_attribute_mask", LIBS);
+  gidLink(cast(void**)&g_file_info_get_type, "g_file_info_get_type", LIBS);
+  gidLink(cast(void**)&g_file_info_new, "g_file_info_new", LIBS);
+  gidLink(cast(void**)&g_file_info_clear_status, "g_file_info_clear_status", LIBS);
+  gidLink(cast(void**)&g_file_info_copy_into, "g_file_info_copy_into", LIBS);
+  gidLink(cast(void**)&g_file_info_dup, "g_file_info_dup", LIBS);
+  gidLink(cast(void**)&g_file_info_get_access_date_time, "g_file_info_get_access_date_time", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_as_string, "g_file_info_get_attribute_as_string", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_boolean, "g_file_info_get_attribute_boolean", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_byte_string, "g_file_info_get_attribute_byte_string", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_data, "g_file_info_get_attribute_data", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_file_path, "g_file_info_get_attribute_file_path", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_int32, "g_file_info_get_attribute_int32", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_int64, "g_file_info_get_attribute_int64", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_object, "g_file_info_get_attribute_object", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_status, "g_file_info_get_attribute_status", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_string, "g_file_info_get_attribute_string", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_stringv, "g_file_info_get_attribute_stringv", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_type, "g_file_info_get_attribute_type", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_uint32, "g_file_info_get_attribute_uint32", LIBS);
+  gidLink(cast(void**)&g_file_info_get_attribute_uint64, "g_file_info_get_attribute_uint64", LIBS);
+  gidLink(cast(void**)&g_file_info_get_content_type, "g_file_info_get_content_type", LIBS);
+  gidLink(cast(void**)&g_file_info_get_creation_date_time, "g_file_info_get_creation_date_time", LIBS);
+  gidLink(cast(void**)&g_file_info_get_deletion_date, "g_file_info_get_deletion_date", LIBS);
+  gidLink(cast(void**)&g_file_info_get_display_name, "g_file_info_get_display_name", LIBS);
+  gidLink(cast(void**)&g_file_info_get_edit_name, "g_file_info_get_edit_name", LIBS);
+  gidLink(cast(void**)&g_file_info_get_etag, "g_file_info_get_etag", LIBS);
+  gidLink(cast(void**)&g_file_info_get_file_type, "g_file_info_get_file_type", LIBS);
+  gidLink(cast(void**)&g_file_info_get_icon, "g_file_info_get_icon", LIBS);
+  gidLink(cast(void**)&g_file_info_get_is_backup, "g_file_info_get_is_backup", LIBS);
+  gidLink(cast(void**)&g_file_info_get_is_hidden, "g_file_info_get_is_hidden", LIBS);
+  gidLink(cast(void**)&g_file_info_get_is_symlink, "g_file_info_get_is_symlink", LIBS);
+  gidLink(cast(void**)&g_file_info_get_modification_date_time, "g_file_info_get_modification_date_time", LIBS);
+  gidLink(cast(void**)&g_file_info_get_modification_time, "g_file_info_get_modification_time", LIBS);
+  gidLink(cast(void**)&g_file_info_get_name, "g_file_info_get_name", LIBS);
+  gidLink(cast(void**)&g_file_info_get_size, "g_file_info_get_size", LIBS);
+  gidLink(cast(void**)&g_file_info_get_sort_order, "g_file_info_get_sort_order", LIBS);
+  gidLink(cast(void**)&g_file_info_get_symbolic_icon, "g_file_info_get_symbolic_icon", LIBS);
+  gidLink(cast(void**)&g_file_info_get_symlink_target, "g_file_info_get_symlink_target", LIBS);
+  gidLink(cast(void**)&g_file_info_has_attribute, "g_file_info_has_attribute", LIBS);
+  gidLink(cast(void**)&g_file_info_has_namespace, "g_file_info_has_namespace", LIBS);
+  gidLink(cast(void**)&g_file_info_list_attributes, "g_file_info_list_attributes", LIBS);
+  gidLink(cast(void**)&g_file_info_remove_attribute, "g_file_info_remove_attribute", LIBS);
+  gidLink(cast(void**)&g_file_info_set_access_date_time, "g_file_info_set_access_date_time", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute, "g_file_info_set_attribute", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_boolean, "g_file_info_set_attribute_boolean", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_byte_string, "g_file_info_set_attribute_byte_string", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_file_path, "g_file_info_set_attribute_file_path", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_int32, "g_file_info_set_attribute_int32", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_int64, "g_file_info_set_attribute_int64", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_mask, "g_file_info_set_attribute_mask", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_object, "g_file_info_set_attribute_object", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_status, "g_file_info_set_attribute_status", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_string, "g_file_info_set_attribute_string", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_stringv, "g_file_info_set_attribute_stringv", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_uint32, "g_file_info_set_attribute_uint32", LIBS);
+  gidLink(cast(void**)&g_file_info_set_attribute_uint64, "g_file_info_set_attribute_uint64", LIBS);
+  gidLink(cast(void**)&g_file_info_set_content_type, "g_file_info_set_content_type", LIBS);
+  gidLink(cast(void**)&g_file_info_set_creation_date_time, "g_file_info_set_creation_date_time", LIBS);
+  gidLink(cast(void**)&g_file_info_set_display_name, "g_file_info_set_display_name", LIBS);
+  gidLink(cast(void**)&g_file_info_set_edit_name, "g_file_info_set_edit_name", LIBS);
+  gidLink(cast(void**)&g_file_info_set_file_type, "g_file_info_set_file_type", LIBS);
+  gidLink(cast(void**)&g_file_info_set_icon, "g_file_info_set_icon", LIBS);
+  gidLink(cast(void**)&g_file_info_set_is_hidden, "g_file_info_set_is_hidden", LIBS);
+  gidLink(cast(void**)&g_file_info_set_is_symlink, "g_file_info_set_is_symlink", LIBS);
+  gidLink(cast(void**)&g_file_info_set_modification_date_time, "g_file_info_set_modification_date_time", LIBS);
+  gidLink(cast(void**)&g_file_info_set_modification_time, "g_file_info_set_modification_time", LIBS);
+  gidLink(cast(void**)&g_file_info_set_name, "g_file_info_set_name", LIBS);
+  gidLink(cast(void**)&g_file_info_set_size, "g_file_info_set_size", LIBS);
+  gidLink(cast(void**)&g_file_info_set_sort_order, "g_file_info_set_sort_order", LIBS);
+  gidLink(cast(void**)&g_file_info_set_symbolic_icon, "g_file_info_set_symbolic_icon", LIBS);
+  gidLink(cast(void**)&g_file_info_set_symlink_target, "g_file_info_set_symlink_target", LIBS);
+  gidLink(cast(void**)&g_file_info_unset_attribute_mask, "g_file_info_unset_attribute_mask", LIBS);
 
   // FileInputStream
-  gidLink(g_file_input_stream_get_type, "g_file_input_stream_get_type", LIBS);
-  gidLink(g_file_input_stream_query_info, "g_file_input_stream_query_info", LIBS);
-  gidLink(g_file_input_stream_query_info_async, "g_file_input_stream_query_info_async", LIBS);
-  gidLink(g_file_input_stream_query_info_finish, "g_file_input_stream_query_info_finish", LIBS);
+  gidLink(cast(void**)&g_file_input_stream_get_type, "g_file_input_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_file_input_stream_query_info, "g_file_input_stream_query_info", LIBS);
+  gidLink(cast(void**)&g_file_input_stream_query_info_async, "g_file_input_stream_query_info_async", LIBS);
+  gidLink(cast(void**)&g_file_input_stream_query_info_finish, "g_file_input_stream_query_info_finish", LIBS);
 
   // FileMonitor
-  gidLink(g_file_monitor_get_type, "g_file_monitor_get_type", LIBS);
-  gidLink(g_file_monitor_cancel, "g_file_monitor_cancel", LIBS);
-  gidLink(g_file_monitor_emit_event, "g_file_monitor_emit_event", LIBS);
-  gidLink(g_file_monitor_is_cancelled, "g_file_monitor_is_cancelled", LIBS);
-  gidLink(g_file_monitor_set_rate_limit, "g_file_monitor_set_rate_limit", LIBS);
+  gidLink(cast(void**)&g_file_monitor_get_type, "g_file_monitor_get_type", LIBS);
+  gidLink(cast(void**)&g_file_monitor_cancel, "g_file_monitor_cancel", LIBS);
+  gidLink(cast(void**)&g_file_monitor_emit_event, "g_file_monitor_emit_event", LIBS);
+  gidLink(cast(void**)&g_file_monitor_is_cancelled, "g_file_monitor_is_cancelled", LIBS);
+  gidLink(cast(void**)&g_file_monitor_set_rate_limit, "g_file_monitor_set_rate_limit", LIBS);
 
   // FileOutputStream
-  gidLink(g_file_output_stream_get_type, "g_file_output_stream_get_type", LIBS);
-  gidLink(g_file_output_stream_get_etag, "g_file_output_stream_get_etag", LIBS);
-  gidLink(g_file_output_stream_query_info, "g_file_output_stream_query_info", LIBS);
-  gidLink(g_file_output_stream_query_info_async, "g_file_output_stream_query_info_async", LIBS);
-  gidLink(g_file_output_stream_query_info_finish, "g_file_output_stream_query_info_finish", LIBS);
+  gidLink(cast(void**)&g_file_output_stream_get_type, "g_file_output_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_file_output_stream_get_etag, "g_file_output_stream_get_etag", LIBS);
+  gidLink(cast(void**)&g_file_output_stream_query_info, "g_file_output_stream_query_info", LIBS);
+  gidLink(cast(void**)&g_file_output_stream_query_info_async, "g_file_output_stream_query_info_async", LIBS);
+  gidLink(cast(void**)&g_file_output_stream_query_info_finish, "g_file_output_stream_query_info_finish", LIBS);
 
   // FilenameCompleter
-  gidLink(g_filename_completer_get_type, "g_filename_completer_get_type", LIBS);
-  gidLink(g_filename_completer_new, "g_filename_completer_new", LIBS);
-  gidLink(g_filename_completer_get_completion_suffix, "g_filename_completer_get_completion_suffix", LIBS);
-  gidLink(g_filename_completer_get_completions, "g_filename_completer_get_completions", LIBS);
-  gidLink(g_filename_completer_set_dirs_only, "g_filename_completer_set_dirs_only", LIBS);
+  gidLink(cast(void**)&g_filename_completer_get_type, "g_filename_completer_get_type", LIBS);
+  gidLink(cast(void**)&g_filename_completer_new, "g_filename_completer_new", LIBS);
+  gidLink(cast(void**)&g_filename_completer_get_completion_suffix, "g_filename_completer_get_completion_suffix", LIBS);
+  gidLink(cast(void**)&g_filename_completer_get_completions, "g_filename_completer_get_completions", LIBS);
+  gidLink(cast(void**)&g_filename_completer_set_dirs_only, "g_filename_completer_set_dirs_only", LIBS);
 
   // FilterInputStream
-  gidLink(g_filter_input_stream_get_type, "g_filter_input_stream_get_type", LIBS);
-  gidLink(g_filter_input_stream_get_base_stream, "g_filter_input_stream_get_base_stream", LIBS);
-  gidLink(g_filter_input_stream_get_close_base_stream, "g_filter_input_stream_get_close_base_stream", LIBS);
-  gidLink(g_filter_input_stream_set_close_base_stream, "g_filter_input_stream_set_close_base_stream", LIBS);
+  gidLink(cast(void**)&g_filter_input_stream_get_type, "g_filter_input_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_filter_input_stream_get_base_stream, "g_filter_input_stream_get_base_stream", LIBS);
+  gidLink(cast(void**)&g_filter_input_stream_get_close_base_stream, "g_filter_input_stream_get_close_base_stream", LIBS);
+  gidLink(cast(void**)&g_filter_input_stream_set_close_base_stream, "g_filter_input_stream_set_close_base_stream", LIBS);
 
   // FilterOutputStream
-  gidLink(g_filter_output_stream_get_type, "g_filter_output_stream_get_type", LIBS);
-  gidLink(g_filter_output_stream_get_base_stream, "g_filter_output_stream_get_base_stream", LIBS);
-  gidLink(g_filter_output_stream_get_close_base_stream, "g_filter_output_stream_get_close_base_stream", LIBS);
-  gidLink(g_filter_output_stream_set_close_base_stream, "g_filter_output_stream_set_close_base_stream", LIBS);
+  gidLink(cast(void**)&g_filter_output_stream_get_type, "g_filter_output_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_filter_output_stream_get_base_stream, "g_filter_output_stream_get_base_stream", LIBS);
+  gidLink(cast(void**)&g_filter_output_stream_get_close_base_stream, "g_filter_output_stream_get_close_base_stream", LIBS);
+  gidLink(cast(void**)&g_filter_output_stream_set_close_base_stream, "g_filter_output_stream_set_close_base_stream", LIBS);
 
   // Global
-  gidLink(g_bus_get, "g_bus_get", LIBS);
-  gidLink(g_bus_get_finish, "g_bus_get_finish", LIBS);
-  gidLink(g_bus_get_sync, "g_bus_get_sync", LIBS);
-  gidLink(g_bus_own_name, "g_bus_own_name", LIBS);
-  gidLink(g_bus_own_name_on_connection, "g_bus_own_name_on_connection", LIBS);
-  gidLink(g_bus_own_name_on_connection_with_closures, "g_bus_own_name_on_connection_with_closures", LIBS);
-  gidLink(g_bus_own_name_with_closures, "g_bus_own_name_with_closures", LIBS);
-  gidLink(g_bus_unown_name, "g_bus_unown_name", LIBS);
-  gidLink(g_bus_unwatch_name, "g_bus_unwatch_name", LIBS);
-  gidLink(g_bus_watch_name, "g_bus_watch_name", LIBS);
-  gidLink(g_bus_watch_name_on_connection, "g_bus_watch_name_on_connection", LIBS);
-  gidLink(g_bus_watch_name_on_connection_with_closures, "g_bus_watch_name_on_connection_with_closures", LIBS);
-  gidLink(g_bus_watch_name_with_closures, "g_bus_watch_name_with_closures", LIBS);
-  gidLink(g_content_type_can_be_executable, "g_content_type_can_be_executable", LIBS);
-  gidLink(g_content_type_equals, "g_content_type_equals", LIBS);
-  gidLink(g_content_type_from_mime_type, "g_content_type_from_mime_type", LIBS);
-  gidLink(g_content_type_get_description, "g_content_type_get_description", LIBS);
-  gidLink(g_content_type_get_generic_icon_name, "g_content_type_get_generic_icon_name", LIBS);
-  gidLink(g_content_type_get_icon, "g_content_type_get_icon", LIBS);
-  gidLink(g_content_type_get_mime_dirs, "g_content_type_get_mime_dirs", LIBS);
-  gidLink(g_content_type_get_mime_type, "g_content_type_get_mime_type", LIBS);
-  gidLink(g_content_type_get_symbolic_icon, "g_content_type_get_symbolic_icon", LIBS);
-  gidLink(g_content_type_guess, "g_content_type_guess", LIBS);
-  gidLink(g_content_type_guess_for_tree, "g_content_type_guess_for_tree", LIBS);
-  gidLink(g_content_type_is_a, "g_content_type_is_a", LIBS);
-  gidLink(g_content_type_is_mime_type, "g_content_type_is_mime_type", LIBS);
-  gidLink(g_content_type_is_unknown, "g_content_type_is_unknown", LIBS);
-  gidLink(g_content_type_set_mime_dirs, "g_content_type_set_mime_dirs", LIBS);
-  gidLink(g_content_types_get_registered, "g_content_types_get_registered", LIBS);
-  gidLink(g_dbus_address_escape_value, "g_dbus_address_escape_value", LIBS);
-  gidLink(g_dbus_address_get_for_bus_sync, "g_dbus_address_get_for_bus_sync", LIBS);
-  gidLink(g_dbus_address_get_stream, "g_dbus_address_get_stream", LIBS);
-  gidLink(g_dbus_address_get_stream_finish, "g_dbus_address_get_stream_finish", LIBS);
-  gidLink(g_dbus_address_get_stream_sync, "g_dbus_address_get_stream_sync", LIBS);
-  gidLink(g_dbus_escape_object_path, "g_dbus_escape_object_path", LIBS);
-  gidLink(g_dbus_escape_object_path_bytestring, "g_dbus_escape_object_path_bytestring", LIBS);
-  gidLink(g_dbus_generate_guid, "g_dbus_generate_guid", LIBS);
-  gidLink(g_dbus_gvalue_to_gvariant, "g_dbus_gvalue_to_gvariant", LIBS);
-  gidLink(g_dbus_gvariant_to_gvalue, "g_dbus_gvariant_to_gvalue", LIBS);
-  gidLink(g_dbus_is_address, "g_dbus_is_address", LIBS);
-  gidLink(g_dbus_is_error_name, "g_dbus_is_error_name", LIBS);
-  gidLink(g_dbus_is_guid, "g_dbus_is_guid", LIBS);
-  gidLink(g_dbus_is_interface_name, "g_dbus_is_interface_name", LIBS);
-  gidLink(g_dbus_is_member_name, "g_dbus_is_member_name", LIBS);
-  gidLink(g_dbus_is_name, "g_dbus_is_name", LIBS);
-  gidLink(g_dbus_is_supported_address, "g_dbus_is_supported_address", LIBS);
-  gidLink(g_dbus_is_unique_name, "g_dbus_is_unique_name", LIBS);
-  gidLink(g_dbus_unescape_object_path, "g_dbus_unescape_object_path", LIBS);
-  gidLink(g_io_error_from_errno, "g_io_error_from_errno", LIBS);
-  gidLink(g_io_error_from_file_error, "g_io_error_from_file_error", LIBS);
-  gidLink(g_io_error_quark, "g_io_error_quark", LIBS);
-  gidLink(g_io_modules_load_all_in_directory, "g_io_modules_load_all_in_directory", LIBS);
-  gidLink(g_io_modules_load_all_in_directory_with_scope, "g_io_modules_load_all_in_directory_with_scope", LIBS);
-  gidLink(g_io_modules_scan_all_in_directory, "g_io_modules_scan_all_in_directory", LIBS);
-  gidLink(g_io_modules_scan_all_in_directory_with_scope, "g_io_modules_scan_all_in_directory_with_scope", LIBS);
-  gidLink(g_io_scheduler_cancel_all_jobs, "g_io_scheduler_cancel_all_jobs", LIBS);
-  gidLink(g_io_scheduler_push_job, "g_io_scheduler_push_job", LIBS);
-  gidLink(g_keyfile_settings_backend_new, "g_keyfile_settings_backend_new", LIBS);
-  gidLink(g_memory_settings_backend_new, "g_memory_settings_backend_new", LIBS);
-  gidLink(g_networking_init, "g_networking_init", LIBS);
-  gidLink(g_null_settings_backend_new, "g_null_settings_backend_new", LIBS);
-  gidLink(g_pollable_source_new, "g_pollable_source_new", LIBS);
-  gidLink(g_pollable_source_new_full, "g_pollable_source_new_full", LIBS);
-  gidLink(g_pollable_stream_read, "g_pollable_stream_read", LIBS);
-  gidLink(g_pollable_stream_write, "g_pollable_stream_write", LIBS);
-  gidLink(g_pollable_stream_write_all, "g_pollable_stream_write_all", LIBS);
-  gidLink(g_resources_enumerate_children, "g_resources_enumerate_children", LIBS);
-  gidLink(g_resources_get_info, "g_resources_get_info", LIBS);
-  gidLink(g_resources_lookup_data, "g_resources_lookup_data", LIBS);
-  gidLink(g_resources_open_stream, "g_resources_open_stream", LIBS);
-  gidLink(g_resources_register, "g_resources_register", LIBS);
-  gidLink(g_resources_unregister, "g_resources_unregister", LIBS);
-  gidLink(g_simple_async_report_error_in_idle, "g_simple_async_report_error_in_idle", LIBS);
-  gidLink(g_simple_async_report_gerror_in_idle, "g_simple_async_report_gerror_in_idle", LIBS);
-  gidLink(g_simple_async_report_take_gerror_in_idle, "g_simple_async_report_take_gerror_in_idle", LIBS);
-  gidLink(g_unix_is_mount_path_system_internal, "g_unix_is_mount_path_system_internal", LIBS);
-  gidLink(g_unix_is_system_device_path, "g_unix_is_system_device_path", LIBS);
-  gidLink(g_unix_is_system_fs_type, "g_unix_is_system_fs_type", LIBS);
-  gidLink(g_unix_mount_at, "g_unix_mount_at", LIBS);
-  gidLink(g_unix_mount_compare, "g_unix_mount_compare", LIBS);
-  gidLink(g_unix_mount_copy, "g_unix_mount_copy", LIBS);
-  gidLink(g_unix_mount_for, "g_unix_mount_for", LIBS);
-  gidLink(g_unix_mount_free, "g_unix_mount_free", LIBS);
-  gidLink(g_unix_mount_get_device_path, "g_unix_mount_get_device_path", LIBS);
-  gidLink(g_unix_mount_get_fs_type, "g_unix_mount_get_fs_type", LIBS);
-  gidLink(g_unix_mount_get_mount_path, "g_unix_mount_get_mount_path", LIBS);
-  gidLink(g_unix_mount_get_options, "g_unix_mount_get_options", LIBS);
-  gidLink(g_unix_mount_get_root_path, "g_unix_mount_get_root_path", LIBS);
-  gidLink(g_unix_mount_guess_can_eject, "g_unix_mount_guess_can_eject", LIBS);
-  gidLink(g_unix_mount_guess_icon, "g_unix_mount_guess_icon", LIBS);
-  gidLink(g_unix_mount_guess_name, "g_unix_mount_guess_name", LIBS);
-  gidLink(g_unix_mount_guess_should_display, "g_unix_mount_guess_should_display", LIBS);
-  gidLink(g_unix_mount_guess_symbolic_icon, "g_unix_mount_guess_symbolic_icon", LIBS);
-  gidLink(g_unix_mount_is_readonly, "g_unix_mount_is_readonly", LIBS);
-  gidLink(g_unix_mount_is_system_internal, "g_unix_mount_is_system_internal", LIBS);
-  gidLink(g_unix_mount_points_changed_since, "g_unix_mount_points_changed_since", LIBS);
-  gidLink(g_unix_mount_points_get, "g_unix_mount_points_get", LIBS);
-  gidLink(g_unix_mounts_changed_since, "g_unix_mounts_changed_since", LIBS);
-  gidLink(g_unix_mounts_get, "g_unix_mounts_get", LIBS);
+  gidLink(cast(void**)&g_bus_get, "g_bus_get", LIBS);
+  gidLink(cast(void**)&g_bus_get_finish, "g_bus_get_finish", LIBS);
+  gidLink(cast(void**)&g_bus_get_sync, "g_bus_get_sync", LIBS);
+  gidLink(cast(void**)&g_bus_own_name, "g_bus_own_name", LIBS);
+  gidLink(cast(void**)&g_bus_own_name_on_connection, "g_bus_own_name_on_connection", LIBS);
+  gidLink(cast(void**)&g_bus_own_name_on_connection_with_closures, "g_bus_own_name_on_connection_with_closures", LIBS);
+  gidLink(cast(void**)&g_bus_own_name_with_closures, "g_bus_own_name_with_closures", LIBS);
+  gidLink(cast(void**)&g_bus_unown_name, "g_bus_unown_name", LIBS);
+  gidLink(cast(void**)&g_bus_unwatch_name, "g_bus_unwatch_name", LIBS);
+  gidLink(cast(void**)&g_bus_watch_name, "g_bus_watch_name", LIBS);
+  gidLink(cast(void**)&g_bus_watch_name_on_connection, "g_bus_watch_name_on_connection", LIBS);
+  gidLink(cast(void**)&g_bus_watch_name_on_connection_with_closures, "g_bus_watch_name_on_connection_with_closures", LIBS);
+  gidLink(cast(void**)&g_bus_watch_name_with_closures, "g_bus_watch_name_with_closures", LIBS);
+  gidLink(cast(void**)&g_content_type_can_be_executable, "g_content_type_can_be_executable", LIBS);
+  gidLink(cast(void**)&g_content_type_equals, "g_content_type_equals", LIBS);
+  gidLink(cast(void**)&g_content_type_from_mime_type, "g_content_type_from_mime_type", LIBS);
+  gidLink(cast(void**)&g_content_type_get_description, "g_content_type_get_description", LIBS);
+  gidLink(cast(void**)&g_content_type_get_generic_icon_name, "g_content_type_get_generic_icon_name", LIBS);
+  gidLink(cast(void**)&g_content_type_get_icon, "g_content_type_get_icon", LIBS);
+  gidLink(cast(void**)&g_content_type_get_mime_dirs, "g_content_type_get_mime_dirs", LIBS);
+  gidLink(cast(void**)&g_content_type_get_mime_type, "g_content_type_get_mime_type", LIBS);
+  gidLink(cast(void**)&g_content_type_get_symbolic_icon, "g_content_type_get_symbolic_icon", LIBS);
+  gidLink(cast(void**)&g_content_type_guess, "g_content_type_guess", LIBS);
+  gidLink(cast(void**)&g_content_type_guess_for_tree, "g_content_type_guess_for_tree", LIBS);
+  gidLink(cast(void**)&g_content_type_is_a, "g_content_type_is_a", LIBS);
+  gidLink(cast(void**)&g_content_type_is_mime_type, "g_content_type_is_mime_type", LIBS);
+  gidLink(cast(void**)&g_content_type_is_unknown, "g_content_type_is_unknown", LIBS);
+  gidLink(cast(void**)&g_content_type_set_mime_dirs, "g_content_type_set_mime_dirs", LIBS);
+  gidLink(cast(void**)&g_content_types_get_registered, "g_content_types_get_registered", LIBS);
+  gidLink(cast(void**)&g_dbus_address_escape_value, "g_dbus_address_escape_value", LIBS);
+  gidLink(cast(void**)&g_dbus_address_get_for_bus_sync, "g_dbus_address_get_for_bus_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_address_get_stream, "g_dbus_address_get_stream", LIBS);
+  gidLink(cast(void**)&g_dbus_address_get_stream_finish, "g_dbus_address_get_stream_finish", LIBS);
+  gidLink(cast(void**)&g_dbus_address_get_stream_sync, "g_dbus_address_get_stream_sync", LIBS);
+  gidLink(cast(void**)&g_dbus_escape_object_path, "g_dbus_escape_object_path", LIBS);
+  gidLink(cast(void**)&g_dbus_escape_object_path_bytestring, "g_dbus_escape_object_path_bytestring", LIBS);
+  gidLink(cast(void**)&g_dbus_generate_guid, "g_dbus_generate_guid", LIBS);
+  gidLink(cast(void**)&g_dbus_gvalue_to_gvariant, "g_dbus_gvalue_to_gvariant", LIBS);
+  gidLink(cast(void**)&g_dbus_gvariant_to_gvalue, "g_dbus_gvariant_to_gvalue", LIBS);
+  gidLink(cast(void**)&g_dbus_is_address, "g_dbus_is_address", LIBS);
+  gidLink(cast(void**)&g_dbus_is_error_name, "g_dbus_is_error_name", LIBS);
+  gidLink(cast(void**)&g_dbus_is_guid, "g_dbus_is_guid", LIBS);
+  gidLink(cast(void**)&g_dbus_is_interface_name, "g_dbus_is_interface_name", LIBS);
+  gidLink(cast(void**)&g_dbus_is_member_name, "g_dbus_is_member_name", LIBS);
+  gidLink(cast(void**)&g_dbus_is_name, "g_dbus_is_name", LIBS);
+  gidLink(cast(void**)&g_dbus_is_supported_address, "g_dbus_is_supported_address", LIBS);
+  gidLink(cast(void**)&g_dbus_is_unique_name, "g_dbus_is_unique_name", LIBS);
+  gidLink(cast(void**)&g_dbus_unescape_object_path, "g_dbus_unescape_object_path", LIBS);
+  gidLink(cast(void**)&g_io_error_from_errno, "g_io_error_from_errno", LIBS);
+  gidLink(cast(void**)&g_io_error_from_file_error, "g_io_error_from_file_error", LIBS);
+  gidLink(cast(void**)&g_io_error_quark, "g_io_error_quark", LIBS);
+  gidLink(cast(void**)&g_io_modules_load_all_in_directory, "g_io_modules_load_all_in_directory", LIBS);
+  gidLink(cast(void**)&g_io_modules_load_all_in_directory_with_scope, "g_io_modules_load_all_in_directory_with_scope", LIBS);
+  gidLink(cast(void**)&g_io_modules_scan_all_in_directory, "g_io_modules_scan_all_in_directory", LIBS);
+  gidLink(cast(void**)&g_io_modules_scan_all_in_directory_with_scope, "g_io_modules_scan_all_in_directory_with_scope", LIBS);
+  gidLink(cast(void**)&g_io_scheduler_cancel_all_jobs, "g_io_scheduler_cancel_all_jobs", LIBS);
+  gidLink(cast(void**)&g_io_scheduler_push_job, "g_io_scheduler_push_job", LIBS);
+  gidLink(cast(void**)&g_keyfile_settings_backend_new, "g_keyfile_settings_backend_new", LIBS);
+  gidLink(cast(void**)&g_memory_settings_backend_new, "g_memory_settings_backend_new", LIBS);
+  gidLink(cast(void**)&g_networking_init, "g_networking_init", LIBS);
+  gidLink(cast(void**)&g_null_settings_backend_new, "g_null_settings_backend_new", LIBS);
+  gidLink(cast(void**)&g_pollable_source_new, "g_pollable_source_new", LIBS);
+  gidLink(cast(void**)&g_pollable_source_new_full, "g_pollable_source_new_full", LIBS);
+  gidLink(cast(void**)&g_pollable_stream_read, "g_pollable_stream_read", LIBS);
+  gidLink(cast(void**)&g_pollable_stream_write, "g_pollable_stream_write", LIBS);
+  gidLink(cast(void**)&g_pollable_stream_write_all, "g_pollable_stream_write_all", LIBS);
+  gidLink(cast(void**)&g_resources_enumerate_children, "g_resources_enumerate_children", LIBS);
+  gidLink(cast(void**)&g_resources_get_info, "g_resources_get_info", LIBS);
+  gidLink(cast(void**)&g_resources_lookup_data, "g_resources_lookup_data", LIBS);
+  gidLink(cast(void**)&g_resources_open_stream, "g_resources_open_stream", LIBS);
+  gidLink(cast(void**)&g_resources_register, "g_resources_register", LIBS);
+  gidLink(cast(void**)&g_resources_unregister, "g_resources_unregister", LIBS);
+  gidLink(cast(void**)&g_simple_async_report_error_in_idle, "g_simple_async_report_error_in_idle", LIBS);
+  gidLink(cast(void**)&g_simple_async_report_gerror_in_idle, "g_simple_async_report_gerror_in_idle", LIBS);
+  gidLink(cast(void**)&g_simple_async_report_take_gerror_in_idle, "g_simple_async_report_take_gerror_in_idle", LIBS);
+  gidLink(cast(void**)&g_unix_is_mount_path_system_internal, "g_unix_is_mount_path_system_internal", LIBS);
+  gidLink(cast(void**)&g_unix_is_system_device_path, "g_unix_is_system_device_path", LIBS);
+  gidLink(cast(void**)&g_unix_is_system_fs_type, "g_unix_is_system_fs_type", LIBS);
+  gidLink(cast(void**)&g_unix_mount_at, "g_unix_mount_at", LIBS);
+  gidLink(cast(void**)&g_unix_mount_compare, "g_unix_mount_compare", LIBS);
+  gidLink(cast(void**)&g_unix_mount_copy, "g_unix_mount_copy", LIBS);
+  gidLink(cast(void**)&g_unix_mount_for, "g_unix_mount_for", LIBS);
+  gidLink(cast(void**)&g_unix_mount_free, "g_unix_mount_free", LIBS);
+  gidLink(cast(void**)&g_unix_mount_get_device_path, "g_unix_mount_get_device_path", LIBS);
+  gidLink(cast(void**)&g_unix_mount_get_fs_type, "g_unix_mount_get_fs_type", LIBS);
+  gidLink(cast(void**)&g_unix_mount_get_mount_path, "g_unix_mount_get_mount_path", LIBS);
+  gidLink(cast(void**)&g_unix_mount_get_options, "g_unix_mount_get_options", LIBS);
+  gidLink(cast(void**)&g_unix_mount_get_root_path, "g_unix_mount_get_root_path", LIBS);
+  gidLink(cast(void**)&g_unix_mount_guess_can_eject, "g_unix_mount_guess_can_eject", LIBS);
+  gidLink(cast(void**)&g_unix_mount_guess_icon, "g_unix_mount_guess_icon", LIBS);
+  gidLink(cast(void**)&g_unix_mount_guess_name, "g_unix_mount_guess_name", LIBS);
+  gidLink(cast(void**)&g_unix_mount_guess_should_display, "g_unix_mount_guess_should_display", LIBS);
+  gidLink(cast(void**)&g_unix_mount_guess_symbolic_icon, "g_unix_mount_guess_symbolic_icon", LIBS);
+  gidLink(cast(void**)&g_unix_mount_is_readonly, "g_unix_mount_is_readonly", LIBS);
+  gidLink(cast(void**)&g_unix_mount_is_system_internal, "g_unix_mount_is_system_internal", LIBS);
+  gidLink(cast(void**)&g_unix_mount_points_changed_since, "g_unix_mount_points_changed_since", LIBS);
+  gidLink(cast(void**)&g_unix_mount_points_get, "g_unix_mount_points_get", LIBS);
+  gidLink(cast(void**)&g_unix_mounts_changed_since, "g_unix_mounts_changed_since", LIBS);
+  gidLink(cast(void**)&g_unix_mounts_get, "g_unix_mounts_get", LIBS);
 
   // IOExtension
-  gidLink(g_io_extension_get_name, "g_io_extension_get_name", LIBS);
-  gidLink(g_io_extension_get_priority, "g_io_extension_get_priority", LIBS);
-  gidLink(g_io_extension_get_type, "g_io_extension_get_type", LIBS);
-  gidLink(g_io_extension_ref_class, "g_io_extension_ref_class", LIBS);
+  gidLink(cast(void**)&g_io_extension_get_name, "g_io_extension_get_name", LIBS);
+  gidLink(cast(void**)&g_io_extension_get_priority, "g_io_extension_get_priority", LIBS);
+  gidLink(cast(void**)&g_io_extension_get_type, "g_io_extension_get_type", LIBS);
+  gidLink(cast(void**)&g_io_extension_ref_class, "g_io_extension_ref_class", LIBS);
 
   // IOExtensionPoint
-  gidLink(g_io_extension_point_get_extension_by_name, "g_io_extension_point_get_extension_by_name", LIBS);
-  gidLink(g_io_extension_point_get_extensions, "g_io_extension_point_get_extensions", LIBS);
-  gidLink(g_io_extension_point_get_required_type, "g_io_extension_point_get_required_type", LIBS);
-  gidLink(g_io_extension_point_set_required_type, "g_io_extension_point_set_required_type", LIBS);
-  gidLink(g_io_extension_point_implement, "g_io_extension_point_implement", LIBS);
-  gidLink(g_io_extension_point_lookup, "g_io_extension_point_lookup", LIBS);
-  gidLink(g_io_extension_point_register, "g_io_extension_point_register", LIBS);
+  gidLink(cast(void**)&g_io_extension_point_get_extension_by_name, "g_io_extension_point_get_extension_by_name", LIBS);
+  gidLink(cast(void**)&g_io_extension_point_get_extensions, "g_io_extension_point_get_extensions", LIBS);
+  gidLink(cast(void**)&g_io_extension_point_get_required_type, "g_io_extension_point_get_required_type", LIBS);
+  gidLink(cast(void**)&g_io_extension_point_set_required_type, "g_io_extension_point_set_required_type", LIBS);
+  gidLink(cast(void**)&g_io_extension_point_implement, "g_io_extension_point_implement", LIBS);
+  gidLink(cast(void**)&g_io_extension_point_lookup, "g_io_extension_point_lookup", LIBS);
+  gidLink(cast(void**)&g_io_extension_point_register, "g_io_extension_point_register", LIBS);
 
   // IOModule
-  gidLink(g_io_module_get_type, "g_io_module_get_type", LIBS);
-  gidLink(g_io_module_new, "g_io_module_new", LIBS);
-  gidLink(g_io_module_query, "g_io_module_query", LIBS);
-  gidLink(g_io_module_load, "g_io_module_load", LIBS);
-  gidLink(g_io_module_unload, "g_io_module_unload", LIBS);
+  gidLink(cast(void**)&g_io_module_get_type, "g_io_module_get_type", LIBS);
+  gidLink(cast(void**)&g_io_module_new, "g_io_module_new", LIBS);
+  gidLink(cast(void**)&g_io_module_query, "g_io_module_query", LIBS);
+  gidLink(cast(void**)&g_io_module_load, "g_io_module_load", LIBS);
+  gidLink(cast(void**)&g_io_module_unload, "g_io_module_unload", LIBS);
 
   // IOModuleScope
-  gidLink(g_io_module_scope_block, "g_io_module_scope_block", LIBS);
-  gidLink(g_io_module_scope_free, "g_io_module_scope_free", LIBS);
-  gidLink(g_io_module_scope_new, "g_io_module_scope_new", LIBS);
+  gidLink(cast(void**)&g_io_module_scope_block, "g_io_module_scope_block", LIBS);
+  gidLink(cast(void**)&g_io_module_scope_free, "g_io_module_scope_free", LIBS);
+  gidLink(cast(void**)&g_io_module_scope_new, "g_io_module_scope_new", LIBS);
 
   // IOSchedulerJob
-  gidLink(g_io_scheduler_job_send_to_mainloop, "g_io_scheduler_job_send_to_mainloop", LIBS);
-  gidLink(g_io_scheduler_job_send_to_mainloop_async, "g_io_scheduler_job_send_to_mainloop_async", LIBS);
+  gidLink(cast(void**)&g_io_scheduler_job_send_to_mainloop, "g_io_scheduler_job_send_to_mainloop", LIBS);
+  gidLink(cast(void**)&g_io_scheduler_job_send_to_mainloop_async, "g_io_scheduler_job_send_to_mainloop_async", LIBS);
 
   // IOStream
-  gidLink(g_io_stream_get_type, "g_io_stream_get_type", LIBS);
-  gidLink(g_io_stream_splice_finish, "g_io_stream_splice_finish", LIBS);
-  gidLink(g_io_stream_clear_pending, "g_io_stream_clear_pending", LIBS);
-  gidLink(g_io_stream_close, "g_io_stream_close", LIBS);
-  gidLink(g_io_stream_close_async, "g_io_stream_close_async", LIBS);
-  gidLink(g_io_stream_close_finish, "g_io_stream_close_finish", LIBS);
-  gidLink(g_io_stream_get_input_stream, "g_io_stream_get_input_stream", LIBS);
-  gidLink(g_io_stream_get_output_stream, "g_io_stream_get_output_stream", LIBS);
-  gidLink(g_io_stream_has_pending, "g_io_stream_has_pending", LIBS);
-  gidLink(g_io_stream_is_closed, "g_io_stream_is_closed", LIBS);
-  gidLink(g_io_stream_set_pending, "g_io_stream_set_pending", LIBS);
-  gidLink(g_io_stream_splice_async, "g_io_stream_splice_async", LIBS);
+  gidLink(cast(void**)&g_io_stream_get_type, "g_io_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_io_stream_splice_finish, "g_io_stream_splice_finish", LIBS);
+  gidLink(cast(void**)&g_io_stream_clear_pending, "g_io_stream_clear_pending", LIBS);
+  gidLink(cast(void**)&g_io_stream_close, "g_io_stream_close", LIBS);
+  gidLink(cast(void**)&g_io_stream_close_async, "g_io_stream_close_async", LIBS);
+  gidLink(cast(void**)&g_io_stream_close_finish, "g_io_stream_close_finish", LIBS);
+  gidLink(cast(void**)&g_io_stream_get_input_stream, "g_io_stream_get_input_stream", LIBS);
+  gidLink(cast(void**)&g_io_stream_get_output_stream, "g_io_stream_get_output_stream", LIBS);
+  gidLink(cast(void**)&g_io_stream_has_pending, "g_io_stream_has_pending", LIBS);
+  gidLink(cast(void**)&g_io_stream_is_closed, "g_io_stream_is_closed", LIBS);
+  gidLink(cast(void**)&g_io_stream_set_pending, "g_io_stream_set_pending", LIBS);
+  gidLink(cast(void**)&g_io_stream_splice_async, "g_io_stream_splice_async", LIBS);
 
   // Icon
-  gidLink(g_icon_get_type, "g_icon_get_type", LIBS);
-  gidLink(g_icon_deserialize, "g_icon_deserialize", LIBS);
-  gidLink(g_icon_new_for_string, "g_icon_new_for_string", LIBS);
-  gidLink(g_icon_equal, "g_icon_equal", LIBS);
-  gidLink(g_icon_hash, "g_icon_hash", LIBS);
-  gidLink(g_icon_serialize, "g_icon_serialize", LIBS);
-  gidLink(g_icon_to_string, "g_icon_to_string", LIBS);
+  gidLink(cast(void**)&g_icon_get_type, "g_icon_get_type", LIBS);
+  gidLink(cast(void**)&g_icon_deserialize, "g_icon_deserialize", LIBS);
+  gidLink(cast(void**)&g_icon_new_for_string, "g_icon_new_for_string", LIBS);
+  gidLink(cast(void**)&g_icon_equal, "g_icon_equal", LIBS);
+  gidLink(cast(void**)&g_icon_hash, "g_icon_hash", LIBS);
+  gidLink(cast(void**)&g_icon_serialize, "g_icon_serialize", LIBS);
+  gidLink(cast(void**)&g_icon_to_string, "g_icon_to_string", LIBS);
 
   // InetAddress
-  gidLink(g_inet_address_get_type, "g_inet_address_get_type", LIBS);
-  gidLink(g_inet_address_new_any, "g_inet_address_new_any", LIBS);
-  gidLink(g_inet_address_new_from_bytes, "g_inet_address_new_from_bytes", LIBS);
-  gidLink(g_inet_address_new_from_string, "g_inet_address_new_from_string", LIBS);
-  gidLink(g_inet_address_new_loopback, "g_inet_address_new_loopback", LIBS);
-  gidLink(g_inet_address_equal, "g_inet_address_equal", LIBS);
-  gidLink(g_inet_address_get_family, "g_inet_address_get_family", LIBS);
-  gidLink(g_inet_address_get_is_any, "g_inet_address_get_is_any", LIBS);
-  gidLink(g_inet_address_get_is_link_local, "g_inet_address_get_is_link_local", LIBS);
-  gidLink(g_inet_address_get_is_loopback, "g_inet_address_get_is_loopback", LIBS);
-  gidLink(g_inet_address_get_is_mc_global, "g_inet_address_get_is_mc_global", LIBS);
-  gidLink(g_inet_address_get_is_mc_link_local, "g_inet_address_get_is_mc_link_local", LIBS);
-  gidLink(g_inet_address_get_is_mc_node_local, "g_inet_address_get_is_mc_node_local", LIBS);
-  gidLink(g_inet_address_get_is_mc_org_local, "g_inet_address_get_is_mc_org_local", LIBS);
-  gidLink(g_inet_address_get_is_mc_site_local, "g_inet_address_get_is_mc_site_local", LIBS);
-  gidLink(g_inet_address_get_is_multicast, "g_inet_address_get_is_multicast", LIBS);
-  gidLink(g_inet_address_get_is_site_local, "g_inet_address_get_is_site_local", LIBS);
-  gidLink(g_inet_address_get_native_size, "g_inet_address_get_native_size", LIBS);
-  gidLink(g_inet_address_to_bytes, "g_inet_address_to_bytes", LIBS);
-  gidLink(g_inet_address_to_string, "g_inet_address_to_string", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_type, "g_inet_address_get_type", LIBS);
+  gidLink(cast(void**)&g_inet_address_new_any, "g_inet_address_new_any", LIBS);
+  gidLink(cast(void**)&g_inet_address_new_from_bytes, "g_inet_address_new_from_bytes", LIBS);
+  gidLink(cast(void**)&g_inet_address_new_from_string, "g_inet_address_new_from_string", LIBS);
+  gidLink(cast(void**)&g_inet_address_new_loopback, "g_inet_address_new_loopback", LIBS);
+  gidLink(cast(void**)&g_inet_address_equal, "g_inet_address_equal", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_family, "g_inet_address_get_family", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_is_any, "g_inet_address_get_is_any", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_is_link_local, "g_inet_address_get_is_link_local", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_is_loopback, "g_inet_address_get_is_loopback", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_is_mc_global, "g_inet_address_get_is_mc_global", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_is_mc_link_local, "g_inet_address_get_is_mc_link_local", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_is_mc_node_local, "g_inet_address_get_is_mc_node_local", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_is_mc_org_local, "g_inet_address_get_is_mc_org_local", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_is_mc_site_local, "g_inet_address_get_is_mc_site_local", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_is_multicast, "g_inet_address_get_is_multicast", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_is_site_local, "g_inet_address_get_is_site_local", LIBS);
+  gidLink(cast(void**)&g_inet_address_get_native_size, "g_inet_address_get_native_size", LIBS);
+  gidLink(cast(void**)&g_inet_address_to_bytes, "g_inet_address_to_bytes", LIBS);
+  gidLink(cast(void**)&g_inet_address_to_string, "g_inet_address_to_string", LIBS);
 
   // InetAddressMask
-  gidLink(g_inet_address_mask_get_type, "g_inet_address_mask_get_type", LIBS);
-  gidLink(g_inet_address_mask_new, "g_inet_address_mask_new", LIBS);
-  gidLink(g_inet_address_mask_new_from_string, "g_inet_address_mask_new_from_string", LIBS);
-  gidLink(g_inet_address_mask_equal, "g_inet_address_mask_equal", LIBS);
-  gidLink(g_inet_address_mask_get_address, "g_inet_address_mask_get_address", LIBS);
-  gidLink(g_inet_address_mask_get_family, "g_inet_address_mask_get_family", LIBS);
-  gidLink(g_inet_address_mask_get_length, "g_inet_address_mask_get_length", LIBS);
-  gidLink(g_inet_address_mask_matches, "g_inet_address_mask_matches", LIBS);
-  gidLink(g_inet_address_mask_to_string, "g_inet_address_mask_to_string", LIBS);
+  gidLink(cast(void**)&g_inet_address_mask_get_type, "g_inet_address_mask_get_type", LIBS);
+  gidLink(cast(void**)&g_inet_address_mask_new, "g_inet_address_mask_new", LIBS);
+  gidLink(cast(void**)&g_inet_address_mask_new_from_string, "g_inet_address_mask_new_from_string", LIBS);
+  gidLink(cast(void**)&g_inet_address_mask_equal, "g_inet_address_mask_equal", LIBS);
+  gidLink(cast(void**)&g_inet_address_mask_get_address, "g_inet_address_mask_get_address", LIBS);
+  gidLink(cast(void**)&g_inet_address_mask_get_family, "g_inet_address_mask_get_family", LIBS);
+  gidLink(cast(void**)&g_inet_address_mask_get_length, "g_inet_address_mask_get_length", LIBS);
+  gidLink(cast(void**)&g_inet_address_mask_matches, "g_inet_address_mask_matches", LIBS);
+  gidLink(cast(void**)&g_inet_address_mask_to_string, "g_inet_address_mask_to_string", LIBS);
 
   // InetSocketAddress
-  gidLink(g_inet_socket_address_get_type, "g_inet_socket_address_get_type", LIBS);
-  gidLink(g_inet_socket_address_new, "g_inet_socket_address_new", LIBS);
-  gidLink(g_inet_socket_address_new_from_string, "g_inet_socket_address_new_from_string", LIBS);
-  gidLink(g_inet_socket_address_get_address, "g_inet_socket_address_get_address", LIBS);
-  gidLink(g_inet_socket_address_get_flowinfo, "g_inet_socket_address_get_flowinfo", LIBS);
-  gidLink(g_inet_socket_address_get_port, "g_inet_socket_address_get_port", LIBS);
-  gidLink(g_inet_socket_address_get_scope_id, "g_inet_socket_address_get_scope_id", LIBS);
+  gidLink(cast(void**)&g_inet_socket_address_get_type, "g_inet_socket_address_get_type", LIBS);
+  gidLink(cast(void**)&g_inet_socket_address_new, "g_inet_socket_address_new", LIBS);
+  gidLink(cast(void**)&g_inet_socket_address_new_from_string, "g_inet_socket_address_new_from_string", LIBS);
+  gidLink(cast(void**)&g_inet_socket_address_get_address, "g_inet_socket_address_get_address", LIBS);
+  gidLink(cast(void**)&g_inet_socket_address_get_flowinfo, "g_inet_socket_address_get_flowinfo", LIBS);
+  gidLink(cast(void**)&g_inet_socket_address_get_port, "g_inet_socket_address_get_port", LIBS);
+  gidLink(cast(void**)&g_inet_socket_address_get_scope_id, "g_inet_socket_address_get_scope_id", LIBS);
 
   // Initable
-  gidLink(g_initable_get_type, "g_initable_get_type", LIBS);
-  gidLink(g_initable_new, "g_initable_new", LIBS);
-  gidLink(g_initable_new_valist, "g_initable_new_valist", LIBS);
-  gidLink(g_initable_newv, "g_initable_newv", LIBS);
-  gidLink(g_initable_init, "g_initable_init", LIBS);
+  gidLink(cast(void**)&g_initable_get_type, "g_initable_get_type", LIBS);
+  gidLink(cast(void**)&g_initable_new, "g_initable_new", LIBS);
+  gidLink(cast(void**)&g_initable_new_valist, "g_initable_new_valist", LIBS);
+  gidLink(cast(void**)&g_initable_newv, "g_initable_newv", LIBS);
+  gidLink(cast(void**)&g_initable_init, "g_initable_init", LIBS);
 
   // InputStream
-  gidLink(g_input_stream_get_type, "g_input_stream_get_type", LIBS);
-  gidLink(g_input_stream_clear_pending, "g_input_stream_clear_pending", LIBS);
-  gidLink(g_input_stream_close, "g_input_stream_close", LIBS);
-  gidLink(g_input_stream_close_async, "g_input_stream_close_async", LIBS);
-  gidLink(g_input_stream_close_finish, "g_input_stream_close_finish", LIBS);
-  gidLink(g_input_stream_has_pending, "g_input_stream_has_pending", LIBS);
-  gidLink(g_input_stream_is_closed, "g_input_stream_is_closed", LIBS);
-  gidLink(g_input_stream_read, "g_input_stream_read", LIBS);
-  gidLink(g_input_stream_read_all, "g_input_stream_read_all", LIBS);
-  gidLink(g_input_stream_read_all_async, "g_input_stream_read_all_async", LIBS);
-  gidLink(g_input_stream_read_all_finish, "g_input_stream_read_all_finish", LIBS);
-  gidLink(g_input_stream_read_async, "g_input_stream_read_async", LIBS);
-  gidLink(g_input_stream_read_bytes, "g_input_stream_read_bytes", LIBS);
-  gidLink(g_input_stream_read_bytes_async, "g_input_stream_read_bytes_async", LIBS);
-  gidLink(g_input_stream_read_bytes_finish, "g_input_stream_read_bytes_finish", LIBS);
-  gidLink(g_input_stream_read_finish, "g_input_stream_read_finish", LIBS);
-  gidLink(g_input_stream_set_pending, "g_input_stream_set_pending", LIBS);
-  gidLink(g_input_stream_skip, "g_input_stream_skip", LIBS);
-  gidLink(g_input_stream_skip_async, "g_input_stream_skip_async", LIBS);
-  gidLink(g_input_stream_skip_finish, "g_input_stream_skip_finish", LIBS);
+  gidLink(cast(void**)&g_input_stream_get_type, "g_input_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_input_stream_clear_pending, "g_input_stream_clear_pending", LIBS);
+  gidLink(cast(void**)&g_input_stream_close, "g_input_stream_close", LIBS);
+  gidLink(cast(void**)&g_input_stream_close_async, "g_input_stream_close_async", LIBS);
+  gidLink(cast(void**)&g_input_stream_close_finish, "g_input_stream_close_finish", LIBS);
+  gidLink(cast(void**)&g_input_stream_has_pending, "g_input_stream_has_pending", LIBS);
+  gidLink(cast(void**)&g_input_stream_is_closed, "g_input_stream_is_closed", LIBS);
+  gidLink(cast(void**)&g_input_stream_read, "g_input_stream_read", LIBS);
+  gidLink(cast(void**)&g_input_stream_read_all, "g_input_stream_read_all", LIBS);
+  gidLink(cast(void**)&g_input_stream_read_all_async, "g_input_stream_read_all_async", LIBS);
+  gidLink(cast(void**)&g_input_stream_read_all_finish, "g_input_stream_read_all_finish", LIBS);
+  gidLink(cast(void**)&g_input_stream_read_async, "g_input_stream_read_async", LIBS);
+  gidLink(cast(void**)&g_input_stream_read_bytes, "g_input_stream_read_bytes", LIBS);
+  gidLink(cast(void**)&g_input_stream_read_bytes_async, "g_input_stream_read_bytes_async", LIBS);
+  gidLink(cast(void**)&g_input_stream_read_bytes_finish, "g_input_stream_read_bytes_finish", LIBS);
+  gidLink(cast(void**)&g_input_stream_read_finish, "g_input_stream_read_finish", LIBS);
+  gidLink(cast(void**)&g_input_stream_set_pending, "g_input_stream_set_pending", LIBS);
+  gidLink(cast(void**)&g_input_stream_skip, "g_input_stream_skip", LIBS);
+  gidLink(cast(void**)&g_input_stream_skip_async, "g_input_stream_skip_async", LIBS);
+  gidLink(cast(void**)&g_input_stream_skip_finish, "g_input_stream_skip_finish", LIBS);
 
   // ListModel
-  gidLink(g_list_model_get_type, "g_list_model_get_type", LIBS);
-  gidLink(g_list_model_get_item, "g_list_model_get_item", LIBS);
-  gidLink(g_list_model_get_item_type, "g_list_model_get_item_type", LIBS);
-  gidLink(g_list_model_get_n_items, "g_list_model_get_n_items", LIBS);
-  gidLink(g_list_model_get_object, "g_list_model_get_object", LIBS);
-  gidLink(g_list_model_items_changed, "g_list_model_items_changed", LIBS);
+  gidLink(cast(void**)&g_list_model_get_type, "g_list_model_get_type", LIBS);
+  gidLink(cast(void**)&g_list_model_get_item, "g_list_model_get_item", LIBS);
+  gidLink(cast(void**)&g_list_model_get_item_type, "g_list_model_get_item_type", LIBS);
+  gidLink(cast(void**)&g_list_model_get_n_items, "g_list_model_get_n_items", LIBS);
+  gidLink(cast(void**)&g_list_model_get_object, "g_list_model_get_object", LIBS);
+  gidLink(cast(void**)&g_list_model_items_changed, "g_list_model_items_changed", LIBS);
 
   // ListStore
-  gidLink(g_list_store_get_type, "g_list_store_get_type", LIBS);
-  gidLink(g_list_store_new, "g_list_store_new", LIBS);
-  gidLink(g_list_store_append, "g_list_store_append", LIBS);
-  gidLink(g_list_store_find, "g_list_store_find", LIBS);
-  gidLink(g_list_store_find_with_equal_func, "g_list_store_find_with_equal_func", LIBS);
-  gidLink(g_list_store_find_with_equal_func_full, "g_list_store_find_with_equal_func_full", LIBS);
-  gidLink(g_list_store_insert, "g_list_store_insert", LIBS);
-  gidLink(g_list_store_insert_sorted, "g_list_store_insert_sorted", LIBS);
-  gidLink(g_list_store_remove, "g_list_store_remove", LIBS);
-  gidLink(g_list_store_remove_all, "g_list_store_remove_all", LIBS);
-  gidLink(g_list_store_sort, "g_list_store_sort", LIBS);
-  gidLink(g_list_store_splice, "g_list_store_splice", LIBS);
+  gidLink(cast(void**)&g_list_store_get_type, "g_list_store_get_type", LIBS);
+  gidLink(cast(void**)&g_list_store_new, "g_list_store_new", LIBS);
+  gidLink(cast(void**)&g_list_store_append, "g_list_store_append", LIBS);
+  gidLink(cast(void**)&g_list_store_find, "g_list_store_find", LIBS);
+  gidLink(cast(void**)&g_list_store_find_with_equal_func, "g_list_store_find_with_equal_func", LIBS);
+  gidLink(cast(void**)&g_list_store_find_with_equal_func_full, "g_list_store_find_with_equal_func_full", LIBS);
+  gidLink(cast(void**)&g_list_store_insert, "g_list_store_insert", LIBS);
+  gidLink(cast(void**)&g_list_store_insert_sorted, "g_list_store_insert_sorted", LIBS);
+  gidLink(cast(void**)&g_list_store_remove, "g_list_store_remove", LIBS);
+  gidLink(cast(void**)&g_list_store_remove_all, "g_list_store_remove_all", LIBS);
+  gidLink(cast(void**)&g_list_store_sort, "g_list_store_sort", LIBS);
+  gidLink(cast(void**)&g_list_store_splice, "g_list_store_splice", LIBS);
 
   // LoadableIcon
-  gidLink(g_loadable_icon_get_type, "g_loadable_icon_get_type", LIBS);
-  gidLink(g_loadable_icon_load, "g_loadable_icon_load", LIBS);
-  gidLink(g_loadable_icon_load_async, "g_loadable_icon_load_async", LIBS);
-  gidLink(g_loadable_icon_load_finish, "g_loadable_icon_load_finish", LIBS);
+  gidLink(cast(void**)&g_loadable_icon_get_type, "g_loadable_icon_get_type", LIBS);
+  gidLink(cast(void**)&g_loadable_icon_load, "g_loadable_icon_load", LIBS);
+  gidLink(cast(void**)&g_loadable_icon_load_async, "g_loadable_icon_load_async", LIBS);
+  gidLink(cast(void**)&g_loadable_icon_load_finish, "g_loadable_icon_load_finish", LIBS);
 
   // MemoryInputStream
-  gidLink(g_memory_input_stream_get_type, "g_memory_input_stream_get_type", LIBS);
-  gidLink(g_memory_input_stream_new, "g_memory_input_stream_new", LIBS);
-  gidLink(g_memory_input_stream_new_from_bytes, "g_memory_input_stream_new_from_bytes", LIBS);
-  gidLink(g_memory_input_stream_new_from_data, "g_memory_input_stream_new_from_data", LIBS);
-  gidLink(g_memory_input_stream_add_bytes, "g_memory_input_stream_add_bytes", LIBS);
-  gidLink(g_memory_input_stream_add_data, "g_memory_input_stream_add_data", LIBS);
+  gidLink(cast(void**)&g_memory_input_stream_get_type, "g_memory_input_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_memory_input_stream_new, "g_memory_input_stream_new", LIBS);
+  gidLink(cast(void**)&g_memory_input_stream_new_from_bytes, "g_memory_input_stream_new_from_bytes", LIBS);
+  gidLink(cast(void**)&g_memory_input_stream_new_from_data, "g_memory_input_stream_new_from_data", LIBS);
+  gidLink(cast(void**)&g_memory_input_stream_add_bytes, "g_memory_input_stream_add_bytes", LIBS);
+  gidLink(cast(void**)&g_memory_input_stream_add_data, "g_memory_input_stream_add_data", LIBS);
 
   // MemoryMonitor
-  gidLink(g_memory_monitor_get_type, "g_memory_monitor_get_type", LIBS);
-  gidLink(g_memory_monitor_dup_default, "g_memory_monitor_dup_default", LIBS);
+  gidLink(cast(void**)&g_memory_monitor_get_type, "g_memory_monitor_get_type", LIBS);
+  gidLink(cast(void**)&g_memory_monitor_dup_default, "g_memory_monitor_dup_default", LIBS);
 
   // MemoryOutputStream
-  gidLink(g_memory_output_stream_get_type, "g_memory_output_stream_get_type", LIBS);
-  gidLink(g_memory_output_stream_new, "g_memory_output_stream_new", LIBS);
-  gidLink(g_memory_output_stream_new_resizable, "g_memory_output_stream_new_resizable", LIBS);
-  gidLink(g_memory_output_stream_get_data, "g_memory_output_stream_get_data", LIBS);
-  gidLink(g_memory_output_stream_get_data_size, "g_memory_output_stream_get_data_size", LIBS);
-  gidLink(g_memory_output_stream_get_size, "g_memory_output_stream_get_size", LIBS);
-  gidLink(g_memory_output_stream_steal_as_bytes, "g_memory_output_stream_steal_as_bytes", LIBS);
-  gidLink(g_memory_output_stream_steal_data, "g_memory_output_stream_steal_data", LIBS);
+  gidLink(cast(void**)&g_memory_output_stream_get_type, "g_memory_output_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_memory_output_stream_new, "g_memory_output_stream_new", LIBS);
+  gidLink(cast(void**)&g_memory_output_stream_new_resizable, "g_memory_output_stream_new_resizable", LIBS);
+  gidLink(cast(void**)&g_memory_output_stream_get_data, "g_memory_output_stream_get_data", LIBS);
+  gidLink(cast(void**)&g_memory_output_stream_get_data_size, "g_memory_output_stream_get_data_size", LIBS);
+  gidLink(cast(void**)&g_memory_output_stream_get_size, "g_memory_output_stream_get_size", LIBS);
+  gidLink(cast(void**)&g_memory_output_stream_steal_as_bytes, "g_memory_output_stream_steal_as_bytes", LIBS);
+  gidLink(cast(void**)&g_memory_output_stream_steal_data, "g_memory_output_stream_steal_data", LIBS);
 
   // Menu
-  gidLink(g_menu_get_type, "g_menu_get_type", LIBS);
-  gidLink(g_menu_new, "g_menu_new", LIBS);
-  gidLink(g_menu_append, "g_menu_append", LIBS);
-  gidLink(g_menu_append_item, "g_menu_append_item", LIBS);
-  gidLink(g_menu_append_section, "g_menu_append_section", LIBS);
-  gidLink(g_menu_append_submenu, "g_menu_append_submenu", LIBS);
-  gidLink(g_menu_freeze, "g_menu_freeze", LIBS);
-  gidLink(g_menu_insert, "g_menu_insert", LIBS);
-  gidLink(g_menu_insert_item, "g_menu_insert_item", LIBS);
-  gidLink(g_menu_insert_section, "g_menu_insert_section", LIBS);
-  gidLink(g_menu_insert_submenu, "g_menu_insert_submenu", LIBS);
-  gidLink(g_menu_prepend, "g_menu_prepend", LIBS);
-  gidLink(g_menu_prepend_item, "g_menu_prepend_item", LIBS);
-  gidLink(g_menu_prepend_section, "g_menu_prepend_section", LIBS);
-  gidLink(g_menu_prepend_submenu, "g_menu_prepend_submenu", LIBS);
-  gidLink(g_menu_remove, "g_menu_remove", LIBS);
-  gidLink(g_menu_remove_all, "g_menu_remove_all", LIBS);
+  gidLink(cast(void**)&g_menu_get_type, "g_menu_get_type", LIBS);
+  gidLink(cast(void**)&g_menu_new, "g_menu_new", LIBS);
+  gidLink(cast(void**)&g_menu_append, "g_menu_append", LIBS);
+  gidLink(cast(void**)&g_menu_append_item, "g_menu_append_item", LIBS);
+  gidLink(cast(void**)&g_menu_append_section, "g_menu_append_section", LIBS);
+  gidLink(cast(void**)&g_menu_append_submenu, "g_menu_append_submenu", LIBS);
+  gidLink(cast(void**)&g_menu_freeze, "g_menu_freeze", LIBS);
+  gidLink(cast(void**)&g_menu_insert, "g_menu_insert", LIBS);
+  gidLink(cast(void**)&g_menu_insert_item, "g_menu_insert_item", LIBS);
+  gidLink(cast(void**)&g_menu_insert_section, "g_menu_insert_section", LIBS);
+  gidLink(cast(void**)&g_menu_insert_submenu, "g_menu_insert_submenu", LIBS);
+  gidLink(cast(void**)&g_menu_prepend, "g_menu_prepend", LIBS);
+  gidLink(cast(void**)&g_menu_prepend_item, "g_menu_prepend_item", LIBS);
+  gidLink(cast(void**)&g_menu_prepend_section, "g_menu_prepend_section", LIBS);
+  gidLink(cast(void**)&g_menu_prepend_submenu, "g_menu_prepend_submenu", LIBS);
+  gidLink(cast(void**)&g_menu_remove, "g_menu_remove", LIBS);
+  gidLink(cast(void**)&g_menu_remove_all, "g_menu_remove_all", LIBS);
 
   // MenuAttributeIter
-  gidLink(g_menu_attribute_iter_get_type, "g_menu_attribute_iter_get_type", LIBS);
-  gidLink(g_menu_attribute_iter_get_name, "g_menu_attribute_iter_get_name", LIBS);
-  gidLink(g_menu_attribute_iter_get_next, "g_menu_attribute_iter_get_next", LIBS);
-  gidLink(g_menu_attribute_iter_get_value, "g_menu_attribute_iter_get_value", LIBS);
-  gidLink(g_menu_attribute_iter_next, "g_menu_attribute_iter_next", LIBS);
+  gidLink(cast(void**)&g_menu_attribute_iter_get_type, "g_menu_attribute_iter_get_type", LIBS);
+  gidLink(cast(void**)&g_menu_attribute_iter_get_name, "g_menu_attribute_iter_get_name", LIBS);
+  gidLink(cast(void**)&g_menu_attribute_iter_get_next, "g_menu_attribute_iter_get_next", LIBS);
+  gidLink(cast(void**)&g_menu_attribute_iter_get_value, "g_menu_attribute_iter_get_value", LIBS);
+  gidLink(cast(void**)&g_menu_attribute_iter_next, "g_menu_attribute_iter_next", LIBS);
 
   // MenuItem
-  gidLink(g_menu_item_get_type, "g_menu_item_get_type", LIBS);
-  gidLink(g_menu_item_new, "g_menu_item_new", LIBS);
-  gidLink(g_menu_item_new_from_model, "g_menu_item_new_from_model", LIBS);
-  gidLink(g_menu_item_new_section, "g_menu_item_new_section", LIBS);
-  gidLink(g_menu_item_new_submenu, "g_menu_item_new_submenu", LIBS);
-  gidLink(g_menu_item_get_attribute, "g_menu_item_get_attribute", LIBS);
-  gidLink(g_menu_item_get_attribute_value, "g_menu_item_get_attribute_value", LIBS);
-  gidLink(g_menu_item_get_link, "g_menu_item_get_link", LIBS);
-  gidLink(g_menu_item_set_action_and_target, "g_menu_item_set_action_and_target", LIBS);
-  gidLink(g_menu_item_set_action_and_target_value, "g_menu_item_set_action_and_target_value", LIBS);
-  gidLink(g_menu_item_set_attribute, "g_menu_item_set_attribute", LIBS);
-  gidLink(g_menu_item_set_attribute_value, "g_menu_item_set_attribute_value", LIBS);
-  gidLink(g_menu_item_set_detailed_action, "g_menu_item_set_detailed_action", LIBS);
-  gidLink(g_menu_item_set_icon, "g_menu_item_set_icon", LIBS);
-  gidLink(g_menu_item_set_label, "g_menu_item_set_label", LIBS);
-  gidLink(g_menu_item_set_link, "g_menu_item_set_link", LIBS);
-  gidLink(g_menu_item_set_section, "g_menu_item_set_section", LIBS);
-  gidLink(g_menu_item_set_submenu, "g_menu_item_set_submenu", LIBS);
+  gidLink(cast(void**)&g_menu_item_get_type, "g_menu_item_get_type", LIBS);
+  gidLink(cast(void**)&g_menu_item_new, "g_menu_item_new", LIBS);
+  gidLink(cast(void**)&g_menu_item_new_from_model, "g_menu_item_new_from_model", LIBS);
+  gidLink(cast(void**)&g_menu_item_new_section, "g_menu_item_new_section", LIBS);
+  gidLink(cast(void**)&g_menu_item_new_submenu, "g_menu_item_new_submenu", LIBS);
+  gidLink(cast(void**)&g_menu_item_get_attribute, "g_menu_item_get_attribute", LIBS);
+  gidLink(cast(void**)&g_menu_item_get_attribute_value, "g_menu_item_get_attribute_value", LIBS);
+  gidLink(cast(void**)&g_menu_item_get_link, "g_menu_item_get_link", LIBS);
+  gidLink(cast(void**)&g_menu_item_set_action_and_target, "g_menu_item_set_action_and_target", LIBS);
+  gidLink(cast(void**)&g_menu_item_set_action_and_target_value, "g_menu_item_set_action_and_target_value", LIBS);
+  gidLink(cast(void**)&g_menu_item_set_attribute, "g_menu_item_set_attribute", LIBS);
+  gidLink(cast(void**)&g_menu_item_set_attribute_value, "g_menu_item_set_attribute_value", LIBS);
+  gidLink(cast(void**)&g_menu_item_set_detailed_action, "g_menu_item_set_detailed_action", LIBS);
+  gidLink(cast(void**)&g_menu_item_set_icon, "g_menu_item_set_icon", LIBS);
+  gidLink(cast(void**)&g_menu_item_set_label, "g_menu_item_set_label", LIBS);
+  gidLink(cast(void**)&g_menu_item_set_link, "g_menu_item_set_link", LIBS);
+  gidLink(cast(void**)&g_menu_item_set_section, "g_menu_item_set_section", LIBS);
+  gidLink(cast(void**)&g_menu_item_set_submenu, "g_menu_item_set_submenu", LIBS);
 
   // MenuLinkIter
-  gidLink(g_menu_link_iter_get_type, "g_menu_link_iter_get_type", LIBS);
-  gidLink(g_menu_link_iter_get_name, "g_menu_link_iter_get_name", LIBS);
-  gidLink(g_menu_link_iter_get_next, "g_menu_link_iter_get_next", LIBS);
-  gidLink(g_menu_link_iter_get_value, "g_menu_link_iter_get_value", LIBS);
-  gidLink(g_menu_link_iter_next, "g_menu_link_iter_next", LIBS);
+  gidLink(cast(void**)&g_menu_link_iter_get_type, "g_menu_link_iter_get_type", LIBS);
+  gidLink(cast(void**)&g_menu_link_iter_get_name, "g_menu_link_iter_get_name", LIBS);
+  gidLink(cast(void**)&g_menu_link_iter_get_next, "g_menu_link_iter_get_next", LIBS);
+  gidLink(cast(void**)&g_menu_link_iter_get_value, "g_menu_link_iter_get_value", LIBS);
+  gidLink(cast(void**)&g_menu_link_iter_next, "g_menu_link_iter_next", LIBS);
 
   // MenuModel
-  gidLink(g_menu_model_get_type, "g_menu_model_get_type", LIBS);
-  gidLink(g_menu_model_get_item_attribute, "g_menu_model_get_item_attribute", LIBS);
-  gidLink(g_menu_model_get_item_attribute_value, "g_menu_model_get_item_attribute_value", LIBS);
-  gidLink(g_menu_model_get_item_link, "g_menu_model_get_item_link", LIBS);
-  gidLink(g_menu_model_get_n_items, "g_menu_model_get_n_items", LIBS);
-  gidLink(g_menu_model_is_mutable, "g_menu_model_is_mutable", LIBS);
-  gidLink(g_menu_model_items_changed, "g_menu_model_items_changed", LIBS);
-  gidLink(g_menu_model_iterate_item_attributes, "g_menu_model_iterate_item_attributes", LIBS);
-  gidLink(g_menu_model_iterate_item_links, "g_menu_model_iterate_item_links", LIBS);
+  gidLink(cast(void**)&g_menu_model_get_type, "g_menu_model_get_type", LIBS);
+  gidLink(cast(void**)&g_menu_model_get_item_attribute, "g_menu_model_get_item_attribute", LIBS);
+  gidLink(cast(void**)&g_menu_model_get_item_attribute_value, "g_menu_model_get_item_attribute_value", LIBS);
+  gidLink(cast(void**)&g_menu_model_get_item_link, "g_menu_model_get_item_link", LIBS);
+  gidLink(cast(void**)&g_menu_model_get_n_items, "g_menu_model_get_n_items", LIBS);
+  gidLink(cast(void**)&g_menu_model_is_mutable, "g_menu_model_is_mutable", LIBS);
+  gidLink(cast(void**)&g_menu_model_items_changed, "g_menu_model_items_changed", LIBS);
+  gidLink(cast(void**)&g_menu_model_iterate_item_attributes, "g_menu_model_iterate_item_attributes", LIBS);
+  gidLink(cast(void**)&g_menu_model_iterate_item_links, "g_menu_model_iterate_item_links", LIBS);
 
   // Mount
-  gidLink(g_mount_get_type, "g_mount_get_type", LIBS);
-  gidLink(g_mount_can_eject, "g_mount_can_eject", LIBS);
-  gidLink(g_mount_can_unmount, "g_mount_can_unmount", LIBS);
-  gidLink(g_mount_eject, "g_mount_eject", LIBS);
-  gidLink(g_mount_eject_finish, "g_mount_eject_finish", LIBS);
-  gidLink(g_mount_eject_with_operation, "g_mount_eject_with_operation", LIBS);
-  gidLink(g_mount_eject_with_operation_finish, "g_mount_eject_with_operation_finish", LIBS);
-  gidLink(g_mount_get_default_location, "g_mount_get_default_location", LIBS);
-  gidLink(g_mount_get_drive, "g_mount_get_drive", LIBS);
-  gidLink(g_mount_get_icon, "g_mount_get_icon", LIBS);
-  gidLink(g_mount_get_name, "g_mount_get_name", LIBS);
-  gidLink(g_mount_get_root, "g_mount_get_root", LIBS);
-  gidLink(g_mount_get_sort_key, "g_mount_get_sort_key", LIBS);
-  gidLink(g_mount_get_symbolic_icon, "g_mount_get_symbolic_icon", LIBS);
-  gidLink(g_mount_get_uuid, "g_mount_get_uuid", LIBS);
-  gidLink(g_mount_get_volume, "g_mount_get_volume", LIBS);
-  gidLink(g_mount_guess_content_type, "g_mount_guess_content_type", LIBS);
-  gidLink(g_mount_guess_content_type_finish, "g_mount_guess_content_type_finish", LIBS);
-  gidLink(g_mount_guess_content_type_sync, "g_mount_guess_content_type_sync", LIBS);
-  gidLink(g_mount_is_shadowed, "g_mount_is_shadowed", LIBS);
-  gidLink(g_mount_remount, "g_mount_remount", LIBS);
-  gidLink(g_mount_remount_finish, "g_mount_remount_finish", LIBS);
-  gidLink(g_mount_shadow, "g_mount_shadow", LIBS);
-  gidLink(g_mount_unmount, "g_mount_unmount", LIBS);
-  gidLink(g_mount_unmount_finish, "g_mount_unmount_finish", LIBS);
-  gidLink(g_mount_unmount_with_operation, "g_mount_unmount_with_operation", LIBS);
-  gidLink(g_mount_unmount_with_operation_finish, "g_mount_unmount_with_operation_finish", LIBS);
-  gidLink(g_mount_unshadow, "g_mount_unshadow", LIBS);
+  gidLink(cast(void**)&g_mount_get_type, "g_mount_get_type", LIBS);
+  gidLink(cast(void**)&g_mount_can_eject, "g_mount_can_eject", LIBS);
+  gidLink(cast(void**)&g_mount_can_unmount, "g_mount_can_unmount", LIBS);
+  gidLink(cast(void**)&g_mount_eject, "g_mount_eject", LIBS);
+  gidLink(cast(void**)&g_mount_eject_finish, "g_mount_eject_finish", LIBS);
+  gidLink(cast(void**)&g_mount_eject_with_operation, "g_mount_eject_with_operation", LIBS);
+  gidLink(cast(void**)&g_mount_eject_with_operation_finish, "g_mount_eject_with_operation_finish", LIBS);
+  gidLink(cast(void**)&g_mount_get_default_location, "g_mount_get_default_location", LIBS);
+  gidLink(cast(void**)&g_mount_get_drive, "g_mount_get_drive", LIBS);
+  gidLink(cast(void**)&g_mount_get_icon, "g_mount_get_icon", LIBS);
+  gidLink(cast(void**)&g_mount_get_name, "g_mount_get_name", LIBS);
+  gidLink(cast(void**)&g_mount_get_root, "g_mount_get_root", LIBS);
+  gidLink(cast(void**)&g_mount_get_sort_key, "g_mount_get_sort_key", LIBS);
+  gidLink(cast(void**)&g_mount_get_symbolic_icon, "g_mount_get_symbolic_icon", LIBS);
+  gidLink(cast(void**)&g_mount_get_uuid, "g_mount_get_uuid", LIBS);
+  gidLink(cast(void**)&g_mount_get_volume, "g_mount_get_volume", LIBS);
+  gidLink(cast(void**)&g_mount_guess_content_type, "g_mount_guess_content_type", LIBS);
+  gidLink(cast(void**)&g_mount_guess_content_type_finish, "g_mount_guess_content_type_finish", LIBS);
+  gidLink(cast(void**)&g_mount_guess_content_type_sync, "g_mount_guess_content_type_sync", LIBS);
+  gidLink(cast(void**)&g_mount_is_shadowed, "g_mount_is_shadowed", LIBS);
+  gidLink(cast(void**)&g_mount_remount, "g_mount_remount", LIBS);
+  gidLink(cast(void**)&g_mount_remount_finish, "g_mount_remount_finish", LIBS);
+  gidLink(cast(void**)&g_mount_shadow, "g_mount_shadow", LIBS);
+  gidLink(cast(void**)&g_mount_unmount, "g_mount_unmount", LIBS);
+  gidLink(cast(void**)&g_mount_unmount_finish, "g_mount_unmount_finish", LIBS);
+  gidLink(cast(void**)&g_mount_unmount_with_operation, "g_mount_unmount_with_operation", LIBS);
+  gidLink(cast(void**)&g_mount_unmount_with_operation_finish, "g_mount_unmount_with_operation_finish", LIBS);
+  gidLink(cast(void**)&g_mount_unshadow, "g_mount_unshadow", LIBS);
 
   // MountOperation
-  gidLink(g_mount_operation_get_type, "g_mount_operation_get_type", LIBS);
-  gidLink(g_mount_operation_new, "g_mount_operation_new", LIBS);
-  gidLink(g_mount_operation_get_anonymous, "g_mount_operation_get_anonymous", LIBS);
-  gidLink(g_mount_operation_get_choice, "g_mount_operation_get_choice", LIBS);
-  gidLink(g_mount_operation_get_domain, "g_mount_operation_get_domain", LIBS);
-  gidLink(g_mount_operation_get_is_tcrypt_hidden_volume, "g_mount_operation_get_is_tcrypt_hidden_volume", LIBS);
-  gidLink(g_mount_operation_get_is_tcrypt_system_volume, "g_mount_operation_get_is_tcrypt_system_volume", LIBS);
-  gidLink(g_mount_operation_get_password, "g_mount_operation_get_password", LIBS);
-  gidLink(g_mount_operation_get_password_save, "g_mount_operation_get_password_save", LIBS);
-  gidLink(g_mount_operation_get_pim, "g_mount_operation_get_pim", LIBS);
-  gidLink(g_mount_operation_get_username, "g_mount_operation_get_username", LIBS);
-  gidLink(g_mount_operation_reply, "g_mount_operation_reply", LIBS);
-  gidLink(g_mount_operation_set_anonymous, "g_mount_operation_set_anonymous", LIBS);
-  gidLink(g_mount_operation_set_choice, "g_mount_operation_set_choice", LIBS);
-  gidLink(g_mount_operation_set_domain, "g_mount_operation_set_domain", LIBS);
-  gidLink(g_mount_operation_set_is_tcrypt_hidden_volume, "g_mount_operation_set_is_tcrypt_hidden_volume", LIBS);
-  gidLink(g_mount_operation_set_is_tcrypt_system_volume, "g_mount_operation_set_is_tcrypt_system_volume", LIBS);
-  gidLink(g_mount_operation_set_password, "g_mount_operation_set_password", LIBS);
-  gidLink(g_mount_operation_set_password_save, "g_mount_operation_set_password_save", LIBS);
-  gidLink(g_mount_operation_set_pim, "g_mount_operation_set_pim", LIBS);
-  gidLink(g_mount_operation_set_username, "g_mount_operation_set_username", LIBS);
+  gidLink(cast(void**)&g_mount_operation_get_type, "g_mount_operation_get_type", LIBS);
+  gidLink(cast(void**)&g_mount_operation_new, "g_mount_operation_new", LIBS);
+  gidLink(cast(void**)&g_mount_operation_get_anonymous, "g_mount_operation_get_anonymous", LIBS);
+  gidLink(cast(void**)&g_mount_operation_get_choice, "g_mount_operation_get_choice", LIBS);
+  gidLink(cast(void**)&g_mount_operation_get_domain, "g_mount_operation_get_domain", LIBS);
+  gidLink(cast(void**)&g_mount_operation_get_is_tcrypt_hidden_volume, "g_mount_operation_get_is_tcrypt_hidden_volume", LIBS);
+  gidLink(cast(void**)&g_mount_operation_get_is_tcrypt_system_volume, "g_mount_operation_get_is_tcrypt_system_volume", LIBS);
+  gidLink(cast(void**)&g_mount_operation_get_password, "g_mount_operation_get_password", LIBS);
+  gidLink(cast(void**)&g_mount_operation_get_password_save, "g_mount_operation_get_password_save", LIBS);
+  gidLink(cast(void**)&g_mount_operation_get_pim, "g_mount_operation_get_pim", LIBS);
+  gidLink(cast(void**)&g_mount_operation_get_username, "g_mount_operation_get_username", LIBS);
+  gidLink(cast(void**)&g_mount_operation_reply, "g_mount_operation_reply", LIBS);
+  gidLink(cast(void**)&g_mount_operation_set_anonymous, "g_mount_operation_set_anonymous", LIBS);
+  gidLink(cast(void**)&g_mount_operation_set_choice, "g_mount_operation_set_choice", LIBS);
+  gidLink(cast(void**)&g_mount_operation_set_domain, "g_mount_operation_set_domain", LIBS);
+  gidLink(cast(void**)&g_mount_operation_set_is_tcrypt_hidden_volume, "g_mount_operation_set_is_tcrypt_hidden_volume", LIBS);
+  gidLink(cast(void**)&g_mount_operation_set_is_tcrypt_system_volume, "g_mount_operation_set_is_tcrypt_system_volume", LIBS);
+  gidLink(cast(void**)&g_mount_operation_set_password, "g_mount_operation_set_password", LIBS);
+  gidLink(cast(void**)&g_mount_operation_set_password_save, "g_mount_operation_set_password_save", LIBS);
+  gidLink(cast(void**)&g_mount_operation_set_pim, "g_mount_operation_set_pim", LIBS);
+  gidLink(cast(void**)&g_mount_operation_set_username, "g_mount_operation_set_username", LIBS);
 
   // NativeSocketAddress
-  gidLink(g_native_socket_address_get_type, "g_native_socket_address_get_type", LIBS);
-  gidLink(g_native_socket_address_new, "g_native_socket_address_new", LIBS);
+  gidLink(cast(void**)&g_native_socket_address_get_type, "g_native_socket_address_get_type", LIBS);
+  gidLink(cast(void**)&g_native_socket_address_new, "g_native_socket_address_new", LIBS);
 
   // NativeVolumeMonitor
-  gidLink(g_native_volume_monitor_get_type, "g_native_volume_monitor_get_type", LIBS);
+  gidLink(cast(void**)&g_native_volume_monitor_get_type, "g_native_volume_monitor_get_type", LIBS);
 
   // NetworkAddress
-  gidLink(g_network_address_get_type, "g_network_address_get_type", LIBS);
-  gidLink(g_network_address_new, "g_network_address_new", LIBS);
-  gidLink(g_network_address_new_loopback, "g_network_address_new_loopback", LIBS);
-  gidLink(g_network_address_parse, "g_network_address_parse", LIBS);
-  gidLink(g_network_address_parse_uri, "g_network_address_parse_uri", LIBS);
-  gidLink(g_network_address_get_hostname, "g_network_address_get_hostname", LIBS);
-  gidLink(g_network_address_get_port, "g_network_address_get_port", LIBS);
-  gidLink(g_network_address_get_scheme, "g_network_address_get_scheme", LIBS);
+  gidLink(cast(void**)&g_network_address_get_type, "g_network_address_get_type", LIBS);
+  gidLink(cast(void**)&g_network_address_new, "g_network_address_new", LIBS);
+  gidLink(cast(void**)&g_network_address_new_loopback, "g_network_address_new_loopback", LIBS);
+  gidLink(cast(void**)&g_network_address_parse, "g_network_address_parse", LIBS);
+  gidLink(cast(void**)&g_network_address_parse_uri, "g_network_address_parse_uri", LIBS);
+  gidLink(cast(void**)&g_network_address_get_hostname, "g_network_address_get_hostname", LIBS);
+  gidLink(cast(void**)&g_network_address_get_port, "g_network_address_get_port", LIBS);
+  gidLink(cast(void**)&g_network_address_get_scheme, "g_network_address_get_scheme", LIBS);
 
   // NetworkMonitor
-  gidLink(g_network_monitor_get_type, "g_network_monitor_get_type", LIBS);
-  gidLink(g_network_monitor_get_default, "g_network_monitor_get_default", LIBS);
-  gidLink(g_network_monitor_can_reach, "g_network_monitor_can_reach", LIBS);
-  gidLink(g_network_monitor_can_reach_async, "g_network_monitor_can_reach_async", LIBS);
-  gidLink(g_network_monitor_can_reach_finish, "g_network_monitor_can_reach_finish", LIBS);
-  gidLink(g_network_monitor_get_connectivity, "g_network_monitor_get_connectivity", LIBS);
-  gidLink(g_network_monitor_get_network_available, "g_network_monitor_get_network_available", LIBS);
-  gidLink(g_network_monitor_get_network_metered, "g_network_monitor_get_network_metered", LIBS);
+  gidLink(cast(void**)&g_network_monitor_get_type, "g_network_monitor_get_type", LIBS);
+  gidLink(cast(void**)&g_network_monitor_get_default, "g_network_monitor_get_default", LIBS);
+  gidLink(cast(void**)&g_network_monitor_can_reach, "g_network_monitor_can_reach", LIBS);
+  gidLink(cast(void**)&g_network_monitor_can_reach_async, "g_network_monitor_can_reach_async", LIBS);
+  gidLink(cast(void**)&g_network_monitor_can_reach_finish, "g_network_monitor_can_reach_finish", LIBS);
+  gidLink(cast(void**)&g_network_monitor_get_connectivity, "g_network_monitor_get_connectivity", LIBS);
+  gidLink(cast(void**)&g_network_monitor_get_network_available, "g_network_monitor_get_network_available", LIBS);
+  gidLink(cast(void**)&g_network_monitor_get_network_metered, "g_network_monitor_get_network_metered", LIBS);
 
   // NetworkService
-  gidLink(g_network_service_get_type, "g_network_service_get_type", LIBS);
-  gidLink(g_network_service_new, "g_network_service_new", LIBS);
-  gidLink(g_network_service_get_domain, "g_network_service_get_domain", LIBS);
-  gidLink(g_network_service_get_protocol, "g_network_service_get_protocol", LIBS);
-  gidLink(g_network_service_get_scheme, "g_network_service_get_scheme", LIBS);
-  gidLink(g_network_service_get_service, "g_network_service_get_service", LIBS);
-  gidLink(g_network_service_set_scheme, "g_network_service_set_scheme", LIBS);
+  gidLink(cast(void**)&g_network_service_get_type, "g_network_service_get_type", LIBS);
+  gidLink(cast(void**)&g_network_service_new, "g_network_service_new", LIBS);
+  gidLink(cast(void**)&g_network_service_get_domain, "g_network_service_get_domain", LIBS);
+  gidLink(cast(void**)&g_network_service_get_protocol, "g_network_service_get_protocol", LIBS);
+  gidLink(cast(void**)&g_network_service_get_scheme, "g_network_service_get_scheme", LIBS);
+  gidLink(cast(void**)&g_network_service_get_service, "g_network_service_get_service", LIBS);
+  gidLink(cast(void**)&g_network_service_set_scheme, "g_network_service_set_scheme", LIBS);
 
   // Notification
-  gidLink(g_notification_get_type, "g_notification_get_type", LIBS);
-  gidLink(g_notification_new, "g_notification_new", LIBS);
-  gidLink(g_notification_add_button, "g_notification_add_button", LIBS);
-  gidLink(g_notification_add_button_with_target, "g_notification_add_button_with_target", LIBS);
-  gidLink(g_notification_add_button_with_target_value, "g_notification_add_button_with_target_value", LIBS);
-  gidLink(g_notification_set_body, "g_notification_set_body", LIBS);
-  gidLink(g_notification_set_category, "g_notification_set_category", LIBS);
-  gidLink(g_notification_set_default_action, "g_notification_set_default_action", LIBS);
-  gidLink(g_notification_set_default_action_and_target, "g_notification_set_default_action_and_target", LIBS);
-  gidLink(g_notification_set_default_action_and_target_value, "g_notification_set_default_action_and_target_value", LIBS);
-  gidLink(g_notification_set_icon, "g_notification_set_icon", LIBS);
-  gidLink(g_notification_set_priority, "g_notification_set_priority", LIBS);
-  gidLink(g_notification_set_title, "g_notification_set_title", LIBS);
-  gidLink(g_notification_set_urgent, "g_notification_set_urgent", LIBS);
+  gidLink(cast(void**)&g_notification_get_type, "g_notification_get_type", LIBS);
+  gidLink(cast(void**)&g_notification_new, "g_notification_new", LIBS);
+  gidLink(cast(void**)&g_notification_add_button, "g_notification_add_button", LIBS);
+  gidLink(cast(void**)&g_notification_add_button_with_target, "g_notification_add_button_with_target", LIBS);
+  gidLink(cast(void**)&g_notification_add_button_with_target_value, "g_notification_add_button_with_target_value", LIBS);
+  gidLink(cast(void**)&g_notification_set_body, "g_notification_set_body", LIBS);
+  gidLink(cast(void**)&g_notification_set_category, "g_notification_set_category", LIBS);
+  gidLink(cast(void**)&g_notification_set_default_action, "g_notification_set_default_action", LIBS);
+  gidLink(cast(void**)&g_notification_set_default_action_and_target, "g_notification_set_default_action_and_target", LIBS);
+  gidLink(cast(void**)&g_notification_set_default_action_and_target_value, "g_notification_set_default_action_and_target_value", LIBS);
+  gidLink(cast(void**)&g_notification_set_icon, "g_notification_set_icon", LIBS);
+  gidLink(cast(void**)&g_notification_set_priority, "g_notification_set_priority", LIBS);
+  gidLink(cast(void**)&g_notification_set_title, "g_notification_set_title", LIBS);
+  gidLink(cast(void**)&g_notification_set_urgent, "g_notification_set_urgent", LIBS);
 
   // OutputStream
-  gidLink(g_output_stream_get_type, "g_output_stream_get_type", LIBS);
-  gidLink(g_output_stream_clear_pending, "g_output_stream_clear_pending", LIBS);
-  gidLink(g_output_stream_close, "g_output_stream_close", LIBS);
-  gidLink(g_output_stream_close_async, "g_output_stream_close_async", LIBS);
-  gidLink(g_output_stream_close_finish, "g_output_stream_close_finish", LIBS);
-  gidLink(g_output_stream_flush, "g_output_stream_flush", LIBS);
-  gidLink(g_output_stream_flush_async, "g_output_stream_flush_async", LIBS);
-  gidLink(g_output_stream_flush_finish, "g_output_stream_flush_finish", LIBS);
-  gidLink(g_output_stream_has_pending, "g_output_stream_has_pending", LIBS);
-  gidLink(g_output_stream_is_closed, "g_output_stream_is_closed", LIBS);
-  gidLink(g_output_stream_is_closing, "g_output_stream_is_closing", LIBS);
-  gidLink(g_output_stream_printf, "g_output_stream_printf", LIBS);
-  gidLink(g_output_stream_set_pending, "g_output_stream_set_pending", LIBS);
-  gidLink(g_output_stream_splice, "g_output_stream_splice", LIBS);
-  gidLink(g_output_stream_splice_async, "g_output_stream_splice_async", LIBS);
-  gidLink(g_output_stream_splice_finish, "g_output_stream_splice_finish", LIBS);
-  gidLink(g_output_stream_vprintf, "g_output_stream_vprintf", LIBS);
-  gidLink(g_output_stream_write, "g_output_stream_write", LIBS);
-  gidLink(g_output_stream_write_all, "g_output_stream_write_all", LIBS);
-  gidLink(g_output_stream_write_all_async, "g_output_stream_write_all_async", LIBS);
-  gidLink(g_output_stream_write_all_finish, "g_output_stream_write_all_finish", LIBS);
-  gidLink(g_output_stream_write_async, "g_output_stream_write_async", LIBS);
-  gidLink(g_output_stream_write_bytes, "g_output_stream_write_bytes", LIBS);
-  gidLink(g_output_stream_write_bytes_async, "g_output_stream_write_bytes_async", LIBS);
-  gidLink(g_output_stream_write_bytes_finish, "g_output_stream_write_bytes_finish", LIBS);
-  gidLink(g_output_stream_write_finish, "g_output_stream_write_finish", LIBS);
-  gidLink(g_output_stream_writev, "g_output_stream_writev", LIBS);
-  gidLink(g_output_stream_writev_all, "g_output_stream_writev_all", LIBS);
-  gidLink(g_output_stream_writev_all_async, "g_output_stream_writev_all_async", LIBS);
-  gidLink(g_output_stream_writev_all_finish, "g_output_stream_writev_all_finish", LIBS);
-  gidLink(g_output_stream_writev_async, "g_output_stream_writev_async", LIBS);
-  gidLink(g_output_stream_writev_finish, "g_output_stream_writev_finish", LIBS);
+  gidLink(cast(void**)&g_output_stream_get_type, "g_output_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_output_stream_clear_pending, "g_output_stream_clear_pending", LIBS);
+  gidLink(cast(void**)&g_output_stream_close, "g_output_stream_close", LIBS);
+  gidLink(cast(void**)&g_output_stream_close_async, "g_output_stream_close_async", LIBS);
+  gidLink(cast(void**)&g_output_stream_close_finish, "g_output_stream_close_finish", LIBS);
+  gidLink(cast(void**)&g_output_stream_flush, "g_output_stream_flush", LIBS);
+  gidLink(cast(void**)&g_output_stream_flush_async, "g_output_stream_flush_async", LIBS);
+  gidLink(cast(void**)&g_output_stream_flush_finish, "g_output_stream_flush_finish", LIBS);
+  gidLink(cast(void**)&g_output_stream_has_pending, "g_output_stream_has_pending", LIBS);
+  gidLink(cast(void**)&g_output_stream_is_closed, "g_output_stream_is_closed", LIBS);
+  gidLink(cast(void**)&g_output_stream_is_closing, "g_output_stream_is_closing", LIBS);
+  gidLink(cast(void**)&g_output_stream_printf, "g_output_stream_printf", LIBS);
+  gidLink(cast(void**)&g_output_stream_set_pending, "g_output_stream_set_pending", LIBS);
+  gidLink(cast(void**)&g_output_stream_splice, "g_output_stream_splice", LIBS);
+  gidLink(cast(void**)&g_output_stream_splice_async, "g_output_stream_splice_async", LIBS);
+  gidLink(cast(void**)&g_output_stream_splice_finish, "g_output_stream_splice_finish", LIBS);
+  gidLink(cast(void**)&g_output_stream_vprintf, "g_output_stream_vprintf", LIBS);
+  gidLink(cast(void**)&g_output_stream_write, "g_output_stream_write", LIBS);
+  gidLink(cast(void**)&g_output_stream_write_all, "g_output_stream_write_all", LIBS);
+  gidLink(cast(void**)&g_output_stream_write_all_async, "g_output_stream_write_all_async", LIBS);
+  gidLink(cast(void**)&g_output_stream_write_all_finish, "g_output_stream_write_all_finish", LIBS);
+  gidLink(cast(void**)&g_output_stream_write_async, "g_output_stream_write_async", LIBS);
+  gidLink(cast(void**)&g_output_stream_write_bytes, "g_output_stream_write_bytes", LIBS);
+  gidLink(cast(void**)&g_output_stream_write_bytes_async, "g_output_stream_write_bytes_async", LIBS);
+  gidLink(cast(void**)&g_output_stream_write_bytes_finish, "g_output_stream_write_bytes_finish", LIBS);
+  gidLink(cast(void**)&g_output_stream_write_finish, "g_output_stream_write_finish", LIBS);
+  gidLink(cast(void**)&g_output_stream_writev, "g_output_stream_writev", LIBS);
+  gidLink(cast(void**)&g_output_stream_writev_all, "g_output_stream_writev_all", LIBS);
+  gidLink(cast(void**)&g_output_stream_writev_all_async, "g_output_stream_writev_all_async", LIBS);
+  gidLink(cast(void**)&g_output_stream_writev_all_finish, "g_output_stream_writev_all_finish", LIBS);
+  gidLink(cast(void**)&g_output_stream_writev_async, "g_output_stream_writev_async", LIBS);
+  gidLink(cast(void**)&g_output_stream_writev_finish, "g_output_stream_writev_finish", LIBS);
 
   // Permission
-  gidLink(g_permission_get_type, "g_permission_get_type", LIBS);
-  gidLink(g_permission_acquire, "g_permission_acquire", LIBS);
-  gidLink(g_permission_acquire_async, "g_permission_acquire_async", LIBS);
-  gidLink(g_permission_acquire_finish, "g_permission_acquire_finish", LIBS);
-  gidLink(g_permission_get_allowed, "g_permission_get_allowed", LIBS);
-  gidLink(g_permission_get_can_acquire, "g_permission_get_can_acquire", LIBS);
-  gidLink(g_permission_get_can_release, "g_permission_get_can_release", LIBS);
-  gidLink(g_permission_impl_update, "g_permission_impl_update", LIBS);
-  gidLink(g_permission_release, "g_permission_release", LIBS);
-  gidLink(g_permission_release_async, "g_permission_release_async", LIBS);
-  gidLink(g_permission_release_finish, "g_permission_release_finish", LIBS);
+  gidLink(cast(void**)&g_permission_get_type, "g_permission_get_type", LIBS);
+  gidLink(cast(void**)&g_permission_acquire, "g_permission_acquire", LIBS);
+  gidLink(cast(void**)&g_permission_acquire_async, "g_permission_acquire_async", LIBS);
+  gidLink(cast(void**)&g_permission_acquire_finish, "g_permission_acquire_finish", LIBS);
+  gidLink(cast(void**)&g_permission_get_allowed, "g_permission_get_allowed", LIBS);
+  gidLink(cast(void**)&g_permission_get_can_acquire, "g_permission_get_can_acquire", LIBS);
+  gidLink(cast(void**)&g_permission_get_can_release, "g_permission_get_can_release", LIBS);
+  gidLink(cast(void**)&g_permission_impl_update, "g_permission_impl_update", LIBS);
+  gidLink(cast(void**)&g_permission_release, "g_permission_release", LIBS);
+  gidLink(cast(void**)&g_permission_release_async, "g_permission_release_async", LIBS);
+  gidLink(cast(void**)&g_permission_release_finish, "g_permission_release_finish", LIBS);
 
   // PollableInputStream
-  gidLink(g_pollable_input_stream_get_type, "g_pollable_input_stream_get_type", LIBS);
-  gidLink(g_pollable_input_stream_can_poll, "g_pollable_input_stream_can_poll", LIBS);
-  gidLink(g_pollable_input_stream_create_source, "g_pollable_input_stream_create_source", LIBS);
-  gidLink(g_pollable_input_stream_is_readable, "g_pollable_input_stream_is_readable", LIBS);
-  gidLink(g_pollable_input_stream_read_nonblocking, "g_pollable_input_stream_read_nonblocking", LIBS);
+  gidLink(cast(void**)&g_pollable_input_stream_get_type, "g_pollable_input_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_pollable_input_stream_can_poll, "g_pollable_input_stream_can_poll", LIBS);
+  gidLink(cast(void**)&g_pollable_input_stream_create_source, "g_pollable_input_stream_create_source", LIBS);
+  gidLink(cast(void**)&g_pollable_input_stream_is_readable, "g_pollable_input_stream_is_readable", LIBS);
+  gidLink(cast(void**)&g_pollable_input_stream_read_nonblocking, "g_pollable_input_stream_read_nonblocking", LIBS);
 
   // PollableOutputStream
-  gidLink(g_pollable_output_stream_get_type, "g_pollable_output_stream_get_type", LIBS);
-  gidLink(g_pollable_output_stream_can_poll, "g_pollable_output_stream_can_poll", LIBS);
-  gidLink(g_pollable_output_stream_create_source, "g_pollable_output_stream_create_source", LIBS);
-  gidLink(g_pollable_output_stream_is_writable, "g_pollable_output_stream_is_writable", LIBS);
-  gidLink(g_pollable_output_stream_write_nonblocking, "g_pollable_output_stream_write_nonblocking", LIBS);
-  gidLink(g_pollable_output_stream_writev_nonblocking, "g_pollable_output_stream_writev_nonblocking", LIBS);
+  gidLink(cast(void**)&g_pollable_output_stream_get_type, "g_pollable_output_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_pollable_output_stream_can_poll, "g_pollable_output_stream_can_poll", LIBS);
+  gidLink(cast(void**)&g_pollable_output_stream_create_source, "g_pollable_output_stream_create_source", LIBS);
+  gidLink(cast(void**)&g_pollable_output_stream_is_writable, "g_pollable_output_stream_is_writable", LIBS);
+  gidLink(cast(void**)&g_pollable_output_stream_write_nonblocking, "g_pollable_output_stream_write_nonblocking", LIBS);
+  gidLink(cast(void**)&g_pollable_output_stream_writev_nonblocking, "g_pollable_output_stream_writev_nonblocking", LIBS);
 
   // PowerProfileMonitor
-  gidLink(g_power_profile_monitor_get_type, "g_power_profile_monitor_get_type", LIBS);
-  gidLink(g_power_profile_monitor_dup_default, "g_power_profile_monitor_dup_default", LIBS);
-  gidLink(g_power_profile_monitor_get_power_saver_enabled, "g_power_profile_monitor_get_power_saver_enabled", LIBS);
+  gidLink(cast(void**)&g_power_profile_monitor_get_type, "g_power_profile_monitor_get_type", LIBS);
+  gidLink(cast(void**)&g_power_profile_monitor_dup_default, "g_power_profile_monitor_dup_default", LIBS);
+  gidLink(cast(void**)&g_power_profile_monitor_get_power_saver_enabled, "g_power_profile_monitor_get_power_saver_enabled", LIBS);
 
   // PropertyAction
-  gidLink(g_property_action_get_type, "g_property_action_get_type", LIBS);
-  gidLink(g_property_action_new, "g_property_action_new", LIBS);
+  gidLink(cast(void**)&g_property_action_get_type, "g_property_action_get_type", LIBS);
+  gidLink(cast(void**)&g_property_action_new, "g_property_action_new", LIBS);
 
   // Proxy
-  gidLink(g_proxy_get_type, "g_proxy_get_type", LIBS);
-  gidLink(g_proxy_get_default_for_protocol, "g_proxy_get_default_for_protocol", LIBS);
-  gidLink(g_proxy_connect, "g_proxy_connect", LIBS);
-  gidLink(g_proxy_connect_async, "g_proxy_connect_async", LIBS);
-  gidLink(g_proxy_connect_finish, "g_proxy_connect_finish", LIBS);
-  gidLink(g_proxy_supports_hostname, "g_proxy_supports_hostname", LIBS);
+  gidLink(cast(void**)&g_proxy_get_type, "g_proxy_get_type", LIBS);
+  gidLink(cast(void**)&g_proxy_get_default_for_protocol, "g_proxy_get_default_for_protocol", LIBS);
+  gidLink(cast(void**)&g_proxy_connect, "g_proxy_connect", LIBS);
+  gidLink(cast(void**)&g_proxy_connect_async, "g_proxy_connect_async", LIBS);
+  gidLink(cast(void**)&g_proxy_connect_finish, "g_proxy_connect_finish", LIBS);
+  gidLink(cast(void**)&g_proxy_supports_hostname, "g_proxy_supports_hostname", LIBS);
 
   // ProxyAddress
-  gidLink(g_proxy_address_get_type, "g_proxy_address_get_type", LIBS);
-  gidLink(g_proxy_address_new, "g_proxy_address_new", LIBS);
-  gidLink(g_proxy_address_get_destination_hostname, "g_proxy_address_get_destination_hostname", LIBS);
-  gidLink(g_proxy_address_get_destination_port, "g_proxy_address_get_destination_port", LIBS);
-  gidLink(g_proxy_address_get_destination_protocol, "g_proxy_address_get_destination_protocol", LIBS);
-  gidLink(g_proxy_address_get_password, "g_proxy_address_get_password", LIBS);
-  gidLink(g_proxy_address_get_protocol, "g_proxy_address_get_protocol", LIBS);
-  gidLink(g_proxy_address_get_uri, "g_proxy_address_get_uri", LIBS);
-  gidLink(g_proxy_address_get_username, "g_proxy_address_get_username", LIBS);
+  gidLink(cast(void**)&g_proxy_address_get_type, "g_proxy_address_get_type", LIBS);
+  gidLink(cast(void**)&g_proxy_address_new, "g_proxy_address_new", LIBS);
+  gidLink(cast(void**)&g_proxy_address_get_destination_hostname, "g_proxy_address_get_destination_hostname", LIBS);
+  gidLink(cast(void**)&g_proxy_address_get_destination_port, "g_proxy_address_get_destination_port", LIBS);
+  gidLink(cast(void**)&g_proxy_address_get_destination_protocol, "g_proxy_address_get_destination_protocol", LIBS);
+  gidLink(cast(void**)&g_proxy_address_get_password, "g_proxy_address_get_password", LIBS);
+  gidLink(cast(void**)&g_proxy_address_get_protocol, "g_proxy_address_get_protocol", LIBS);
+  gidLink(cast(void**)&g_proxy_address_get_uri, "g_proxy_address_get_uri", LIBS);
+  gidLink(cast(void**)&g_proxy_address_get_username, "g_proxy_address_get_username", LIBS);
 
   // ProxyAddressEnumerator
-  gidLink(g_proxy_address_enumerator_get_type, "g_proxy_address_enumerator_get_type", LIBS);
+  gidLink(cast(void**)&g_proxy_address_enumerator_get_type, "g_proxy_address_enumerator_get_type", LIBS);
 
   // ProxyResolver
-  gidLink(g_proxy_resolver_get_type, "g_proxy_resolver_get_type", LIBS);
-  gidLink(g_proxy_resolver_get_default, "g_proxy_resolver_get_default", LIBS);
-  gidLink(g_proxy_resolver_is_supported, "g_proxy_resolver_is_supported", LIBS);
-  gidLink(g_proxy_resolver_lookup, "g_proxy_resolver_lookup", LIBS);
-  gidLink(g_proxy_resolver_lookup_async, "g_proxy_resolver_lookup_async", LIBS);
-  gidLink(g_proxy_resolver_lookup_finish, "g_proxy_resolver_lookup_finish", LIBS);
+  gidLink(cast(void**)&g_proxy_resolver_get_type, "g_proxy_resolver_get_type", LIBS);
+  gidLink(cast(void**)&g_proxy_resolver_get_default, "g_proxy_resolver_get_default", LIBS);
+  gidLink(cast(void**)&g_proxy_resolver_is_supported, "g_proxy_resolver_is_supported", LIBS);
+  gidLink(cast(void**)&g_proxy_resolver_lookup, "g_proxy_resolver_lookup", LIBS);
+  gidLink(cast(void**)&g_proxy_resolver_lookup_async, "g_proxy_resolver_lookup_async", LIBS);
+  gidLink(cast(void**)&g_proxy_resolver_lookup_finish, "g_proxy_resolver_lookup_finish", LIBS);
 
   // RemoteActionGroup
-  gidLink(g_remote_action_group_get_type, "g_remote_action_group_get_type", LIBS);
-  gidLink(g_remote_action_group_activate_action_full, "g_remote_action_group_activate_action_full", LIBS);
-  gidLink(g_remote_action_group_change_action_state_full, "g_remote_action_group_change_action_state_full", LIBS);
+  gidLink(cast(void**)&g_remote_action_group_get_type, "g_remote_action_group_get_type", LIBS);
+  gidLink(cast(void**)&g_remote_action_group_activate_action_full, "g_remote_action_group_activate_action_full", LIBS);
+  gidLink(cast(void**)&g_remote_action_group_change_action_state_full, "g_remote_action_group_change_action_state_full", LIBS);
 
   // Resolver
-  gidLink(g_resolver_get_type, "g_resolver_get_type", LIBS);
-  gidLink(g_resolver_free_addresses, "g_resolver_free_addresses", LIBS);
-  gidLink(g_resolver_free_targets, "g_resolver_free_targets", LIBS);
-  gidLink(g_resolver_get_default, "g_resolver_get_default", LIBS);
-  gidLink(g_resolver_get_timeout, "g_resolver_get_timeout", LIBS);
-  gidLink(g_resolver_lookup_by_address, "g_resolver_lookup_by_address", LIBS);
-  gidLink(g_resolver_lookup_by_address_async, "g_resolver_lookup_by_address_async", LIBS);
-  gidLink(g_resolver_lookup_by_address_finish, "g_resolver_lookup_by_address_finish", LIBS);
-  gidLink(g_resolver_lookup_by_name, "g_resolver_lookup_by_name", LIBS);
-  gidLink(g_resolver_lookup_by_name_async, "g_resolver_lookup_by_name_async", LIBS);
-  gidLink(g_resolver_lookup_by_name_finish, "g_resolver_lookup_by_name_finish", LIBS);
-  gidLink(g_resolver_lookup_by_name_with_flags, "g_resolver_lookup_by_name_with_flags", LIBS);
-  gidLink(g_resolver_lookup_by_name_with_flags_async, "g_resolver_lookup_by_name_with_flags_async", LIBS);
-  gidLink(g_resolver_lookup_by_name_with_flags_finish, "g_resolver_lookup_by_name_with_flags_finish", LIBS);
-  gidLink(g_resolver_lookup_records, "g_resolver_lookup_records", LIBS);
-  gidLink(g_resolver_lookup_records_async, "g_resolver_lookup_records_async", LIBS);
-  gidLink(g_resolver_lookup_records_finish, "g_resolver_lookup_records_finish", LIBS);
-  gidLink(g_resolver_lookup_service, "g_resolver_lookup_service", LIBS);
-  gidLink(g_resolver_lookup_service_async, "g_resolver_lookup_service_async", LIBS);
-  gidLink(g_resolver_lookup_service_finish, "g_resolver_lookup_service_finish", LIBS);
-  gidLink(g_resolver_set_default, "g_resolver_set_default", LIBS);
-  gidLink(g_resolver_set_timeout, "g_resolver_set_timeout", LIBS);
+  gidLink(cast(void**)&g_resolver_get_type, "g_resolver_get_type", LIBS);
+  gidLink(cast(void**)&g_resolver_free_addresses, "g_resolver_free_addresses", LIBS);
+  gidLink(cast(void**)&g_resolver_free_targets, "g_resolver_free_targets", LIBS);
+  gidLink(cast(void**)&g_resolver_get_default, "g_resolver_get_default", LIBS);
+  gidLink(cast(void**)&g_resolver_get_timeout, "g_resolver_get_timeout", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_by_address, "g_resolver_lookup_by_address", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_by_address_async, "g_resolver_lookup_by_address_async", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_by_address_finish, "g_resolver_lookup_by_address_finish", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_by_name, "g_resolver_lookup_by_name", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_by_name_async, "g_resolver_lookup_by_name_async", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_by_name_finish, "g_resolver_lookup_by_name_finish", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_by_name_with_flags, "g_resolver_lookup_by_name_with_flags", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_by_name_with_flags_async, "g_resolver_lookup_by_name_with_flags_async", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_by_name_with_flags_finish, "g_resolver_lookup_by_name_with_flags_finish", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_records, "g_resolver_lookup_records", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_records_async, "g_resolver_lookup_records_async", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_records_finish, "g_resolver_lookup_records_finish", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_service, "g_resolver_lookup_service", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_service_async, "g_resolver_lookup_service_async", LIBS);
+  gidLink(cast(void**)&g_resolver_lookup_service_finish, "g_resolver_lookup_service_finish", LIBS);
+  gidLink(cast(void**)&g_resolver_set_default, "g_resolver_set_default", LIBS);
+  gidLink(cast(void**)&g_resolver_set_timeout, "g_resolver_set_timeout", LIBS);
 
   // Resource
-  gidLink(g_resource_get_type, "g_resource_get_type", LIBS);
-  gidLink(g_resource_new_from_data, "g_resource_new_from_data", LIBS);
-  gidLink(g_resource_enumerate_children, "g_resource_enumerate_children", LIBS);
-  gidLink(g_resource_get_info, "g_resource_get_info", LIBS);
-  gidLink(g_resource_lookup_data, "g_resource_lookup_data", LIBS);
-  gidLink(g_resource_open_stream, "g_resource_open_stream", LIBS);
-  gidLink(g_resource_ref, "g_resource_ref", LIBS);
-  gidLink(g_resource_unref, "g_resource_unref", LIBS);
-  gidLink(g_resource_load, "g_resource_load", LIBS);
+  gidLink(cast(void**)&g_resource_get_type, "g_resource_get_type", LIBS);
+  gidLink(cast(void**)&g_resource_new_from_data, "g_resource_new_from_data", LIBS);
+  gidLink(cast(void**)&g_resource_enumerate_children, "g_resource_enumerate_children", LIBS);
+  gidLink(cast(void**)&g_resource_get_info, "g_resource_get_info", LIBS);
+  gidLink(cast(void**)&g_resource_lookup_data, "g_resource_lookup_data", LIBS);
+  gidLink(cast(void**)&g_resource_open_stream, "g_resource_open_stream", LIBS);
+  gidLink(cast(void**)&g_resource_ref, "g_resource_ref", LIBS);
+  gidLink(cast(void**)&g_resource_unref, "g_resource_unref", LIBS);
+  gidLink(cast(void**)&g_resource_load, "g_resource_load", LIBS);
 
   // Seekable
-  gidLink(g_seekable_get_type, "g_seekable_get_type", LIBS);
-  gidLink(g_seekable_can_seek, "g_seekable_can_seek", LIBS);
-  gidLink(g_seekable_can_truncate, "g_seekable_can_truncate", LIBS);
-  gidLink(g_seekable_seek, "g_seekable_seek", LIBS);
-  gidLink(g_seekable_tell, "g_seekable_tell", LIBS);
-  gidLink(g_seekable_truncate, "g_seekable_truncate", LIBS);
+  gidLink(cast(void**)&g_seekable_get_type, "g_seekable_get_type", LIBS);
+  gidLink(cast(void**)&g_seekable_can_seek, "g_seekable_can_seek", LIBS);
+  gidLink(cast(void**)&g_seekable_can_truncate, "g_seekable_can_truncate", LIBS);
+  gidLink(cast(void**)&g_seekable_seek, "g_seekable_seek", LIBS);
+  gidLink(cast(void**)&g_seekable_tell, "g_seekable_tell", LIBS);
+  gidLink(cast(void**)&g_seekable_truncate, "g_seekable_truncate", LIBS);
 
   // Settings
-  gidLink(g_settings_get_type, "g_settings_get_type", LIBS);
-  gidLink(g_settings_new, "g_settings_new", LIBS);
-  gidLink(g_settings_new_full, "g_settings_new_full", LIBS);
-  gidLink(g_settings_new_with_backend, "g_settings_new_with_backend", LIBS);
-  gidLink(g_settings_new_with_backend_and_path, "g_settings_new_with_backend_and_path", LIBS);
-  gidLink(g_settings_new_with_path, "g_settings_new_with_path", LIBS);
-  gidLink(g_settings_list_relocatable_schemas, "g_settings_list_relocatable_schemas", LIBS);
-  gidLink(g_settings_list_schemas, "g_settings_list_schemas", LIBS);
-  gidLink(g_settings_sync, "g_settings_sync", LIBS);
-  gidLink(g_settings_unbind, "g_settings_unbind", LIBS);
-  gidLink(g_settings_apply, "g_settings_apply", LIBS);
-  gidLink(g_settings_bind, "g_settings_bind", LIBS);
-  gidLink(g_settings_bind_with_mapping, "g_settings_bind_with_mapping", LIBS);
-  gidLink(g_settings_bind_writable, "g_settings_bind_writable", LIBS);
-  gidLink(g_settings_create_action, "g_settings_create_action", LIBS);
-  gidLink(g_settings_delay, "g_settings_delay", LIBS);
-  gidLink(g_settings_get, "g_settings_get", LIBS);
-  gidLink(g_settings_get_boolean, "g_settings_get_boolean", LIBS);
-  gidLink(g_settings_get_child, "g_settings_get_child", LIBS);
-  gidLink(g_settings_get_default_value, "g_settings_get_default_value", LIBS);
-  gidLink(g_settings_get_double, "g_settings_get_double", LIBS);
-  gidLink(g_settings_get_enum, "g_settings_get_enum", LIBS);
-  gidLink(g_settings_get_flags, "g_settings_get_flags", LIBS);
-  gidLink(g_settings_get_has_unapplied, "g_settings_get_has_unapplied", LIBS);
-  gidLink(g_settings_get_int, "g_settings_get_int", LIBS);
-  gidLink(g_settings_get_int64, "g_settings_get_int64", LIBS);
-  gidLink(g_settings_get_mapped, "g_settings_get_mapped", LIBS);
-  gidLink(g_settings_get_range, "g_settings_get_range", LIBS);
-  gidLink(g_settings_get_string, "g_settings_get_string", LIBS);
-  gidLink(g_settings_get_strv, "g_settings_get_strv", LIBS);
-  gidLink(g_settings_get_uint, "g_settings_get_uint", LIBS);
-  gidLink(g_settings_get_uint64, "g_settings_get_uint64", LIBS);
-  gidLink(g_settings_get_user_value, "g_settings_get_user_value", LIBS);
-  gidLink(g_settings_get_value, "g_settings_get_value", LIBS);
-  gidLink(g_settings_is_writable, "g_settings_is_writable", LIBS);
-  gidLink(g_settings_list_children, "g_settings_list_children", LIBS);
-  gidLink(g_settings_list_keys, "g_settings_list_keys", LIBS);
-  gidLink(g_settings_range_check, "g_settings_range_check", LIBS);
-  gidLink(g_settings_reset, "g_settings_reset", LIBS);
-  gidLink(g_settings_revert, "g_settings_revert", LIBS);
-  gidLink(g_settings_set, "g_settings_set", LIBS);
-  gidLink(g_settings_set_boolean, "g_settings_set_boolean", LIBS);
-  gidLink(g_settings_set_double, "g_settings_set_double", LIBS);
-  gidLink(g_settings_set_enum, "g_settings_set_enum", LIBS);
-  gidLink(g_settings_set_flags, "g_settings_set_flags", LIBS);
-  gidLink(g_settings_set_int, "g_settings_set_int", LIBS);
-  gidLink(g_settings_set_int64, "g_settings_set_int64", LIBS);
-  gidLink(g_settings_set_string, "g_settings_set_string", LIBS);
-  gidLink(g_settings_set_strv, "g_settings_set_strv", LIBS);
-  gidLink(g_settings_set_uint, "g_settings_set_uint", LIBS);
-  gidLink(g_settings_set_uint64, "g_settings_set_uint64", LIBS);
-  gidLink(g_settings_set_value, "g_settings_set_value", LIBS);
+  gidLink(cast(void**)&g_settings_get_type, "g_settings_get_type", LIBS);
+  gidLink(cast(void**)&g_settings_new, "g_settings_new", LIBS);
+  gidLink(cast(void**)&g_settings_new_full, "g_settings_new_full", LIBS);
+  gidLink(cast(void**)&g_settings_new_with_backend, "g_settings_new_with_backend", LIBS);
+  gidLink(cast(void**)&g_settings_new_with_backend_and_path, "g_settings_new_with_backend_and_path", LIBS);
+  gidLink(cast(void**)&g_settings_new_with_path, "g_settings_new_with_path", LIBS);
+  gidLink(cast(void**)&g_settings_list_relocatable_schemas, "g_settings_list_relocatable_schemas", LIBS);
+  gidLink(cast(void**)&g_settings_list_schemas, "g_settings_list_schemas", LIBS);
+  gidLink(cast(void**)&g_settings_sync, "g_settings_sync", LIBS);
+  gidLink(cast(void**)&g_settings_unbind, "g_settings_unbind", LIBS);
+  gidLink(cast(void**)&g_settings_apply, "g_settings_apply", LIBS);
+  gidLink(cast(void**)&g_settings_bind, "g_settings_bind", LIBS);
+  gidLink(cast(void**)&g_settings_bind_with_mapping, "g_settings_bind_with_mapping", LIBS);
+  gidLink(cast(void**)&g_settings_bind_writable, "g_settings_bind_writable", LIBS);
+  gidLink(cast(void**)&g_settings_create_action, "g_settings_create_action", LIBS);
+  gidLink(cast(void**)&g_settings_delay, "g_settings_delay", LIBS);
+  gidLink(cast(void**)&g_settings_get, "g_settings_get", LIBS);
+  gidLink(cast(void**)&g_settings_get_boolean, "g_settings_get_boolean", LIBS);
+  gidLink(cast(void**)&g_settings_get_child, "g_settings_get_child", LIBS);
+  gidLink(cast(void**)&g_settings_get_default_value, "g_settings_get_default_value", LIBS);
+  gidLink(cast(void**)&g_settings_get_double, "g_settings_get_double", LIBS);
+  gidLink(cast(void**)&g_settings_get_enum, "g_settings_get_enum", LIBS);
+  gidLink(cast(void**)&g_settings_get_flags, "g_settings_get_flags", LIBS);
+  gidLink(cast(void**)&g_settings_get_has_unapplied, "g_settings_get_has_unapplied", LIBS);
+  gidLink(cast(void**)&g_settings_get_int, "g_settings_get_int", LIBS);
+  gidLink(cast(void**)&g_settings_get_int64, "g_settings_get_int64", LIBS);
+  gidLink(cast(void**)&g_settings_get_mapped, "g_settings_get_mapped", LIBS);
+  gidLink(cast(void**)&g_settings_get_range, "g_settings_get_range", LIBS);
+  gidLink(cast(void**)&g_settings_get_string, "g_settings_get_string", LIBS);
+  gidLink(cast(void**)&g_settings_get_strv, "g_settings_get_strv", LIBS);
+  gidLink(cast(void**)&g_settings_get_uint, "g_settings_get_uint", LIBS);
+  gidLink(cast(void**)&g_settings_get_uint64, "g_settings_get_uint64", LIBS);
+  gidLink(cast(void**)&g_settings_get_user_value, "g_settings_get_user_value", LIBS);
+  gidLink(cast(void**)&g_settings_get_value, "g_settings_get_value", LIBS);
+  gidLink(cast(void**)&g_settings_is_writable, "g_settings_is_writable", LIBS);
+  gidLink(cast(void**)&g_settings_list_children, "g_settings_list_children", LIBS);
+  gidLink(cast(void**)&g_settings_list_keys, "g_settings_list_keys", LIBS);
+  gidLink(cast(void**)&g_settings_range_check, "g_settings_range_check", LIBS);
+  gidLink(cast(void**)&g_settings_reset, "g_settings_reset", LIBS);
+  gidLink(cast(void**)&g_settings_revert, "g_settings_revert", LIBS);
+  gidLink(cast(void**)&g_settings_set, "g_settings_set", LIBS);
+  gidLink(cast(void**)&g_settings_set_boolean, "g_settings_set_boolean", LIBS);
+  gidLink(cast(void**)&g_settings_set_double, "g_settings_set_double", LIBS);
+  gidLink(cast(void**)&g_settings_set_enum, "g_settings_set_enum", LIBS);
+  gidLink(cast(void**)&g_settings_set_flags, "g_settings_set_flags", LIBS);
+  gidLink(cast(void**)&g_settings_set_int, "g_settings_set_int", LIBS);
+  gidLink(cast(void**)&g_settings_set_int64, "g_settings_set_int64", LIBS);
+  gidLink(cast(void**)&g_settings_set_string, "g_settings_set_string", LIBS);
+  gidLink(cast(void**)&g_settings_set_strv, "g_settings_set_strv", LIBS);
+  gidLink(cast(void**)&g_settings_set_uint, "g_settings_set_uint", LIBS);
+  gidLink(cast(void**)&g_settings_set_uint64, "g_settings_set_uint64", LIBS);
+  gidLink(cast(void**)&g_settings_set_value, "g_settings_set_value", LIBS);
 
   // SettingsBackend
-  gidLink(g_settings_backend_get_type, "g_settings_backend_get_type", LIBS);
-  gidLink(g_settings_backend_flatten_tree, "g_settings_backend_flatten_tree", LIBS);
-  gidLink(g_settings_backend_get_default, "g_settings_backend_get_default", LIBS);
-  gidLink(g_settings_backend_changed, "g_settings_backend_changed", LIBS);
-  gidLink(g_settings_backend_changed_tree, "g_settings_backend_changed_tree", LIBS);
-  gidLink(g_settings_backend_keys_changed, "g_settings_backend_keys_changed", LIBS);
-  gidLink(g_settings_backend_path_changed, "g_settings_backend_path_changed", LIBS);
-  gidLink(g_settings_backend_path_writable_changed, "g_settings_backend_path_writable_changed", LIBS);
-  gidLink(g_settings_backend_writable_changed, "g_settings_backend_writable_changed", LIBS);
+  gidLink(cast(void**)&g_settings_backend_get_type, "g_settings_backend_get_type", LIBS);
+  gidLink(cast(void**)&g_settings_backend_flatten_tree, "g_settings_backend_flatten_tree", LIBS);
+  gidLink(cast(void**)&g_settings_backend_get_default, "g_settings_backend_get_default", LIBS);
+  gidLink(cast(void**)&g_settings_backend_changed, "g_settings_backend_changed", LIBS);
+  gidLink(cast(void**)&g_settings_backend_changed_tree, "g_settings_backend_changed_tree", LIBS);
+  gidLink(cast(void**)&g_settings_backend_keys_changed, "g_settings_backend_keys_changed", LIBS);
+  gidLink(cast(void**)&g_settings_backend_path_changed, "g_settings_backend_path_changed", LIBS);
+  gidLink(cast(void**)&g_settings_backend_path_writable_changed, "g_settings_backend_path_writable_changed", LIBS);
+  gidLink(cast(void**)&g_settings_backend_writable_changed, "g_settings_backend_writable_changed", LIBS);
 
   // SettingsSchema
-  gidLink(g_settings_schema_get_type, "g_settings_schema_get_type", LIBS);
-  gidLink(g_settings_schema_get_id, "g_settings_schema_get_id", LIBS);
-  gidLink(g_settings_schema_get_key, "g_settings_schema_get_key", LIBS);
-  gidLink(g_settings_schema_get_path, "g_settings_schema_get_path", LIBS);
-  gidLink(g_settings_schema_has_key, "g_settings_schema_has_key", LIBS);
-  gidLink(g_settings_schema_list_children, "g_settings_schema_list_children", LIBS);
-  gidLink(g_settings_schema_list_keys, "g_settings_schema_list_keys", LIBS);
-  gidLink(g_settings_schema_ref, "g_settings_schema_ref", LIBS);
-  gidLink(g_settings_schema_unref, "g_settings_schema_unref", LIBS);
+  gidLink(cast(void**)&g_settings_schema_get_type, "g_settings_schema_get_type", LIBS);
+  gidLink(cast(void**)&g_settings_schema_get_id, "g_settings_schema_get_id", LIBS);
+  gidLink(cast(void**)&g_settings_schema_get_key, "g_settings_schema_get_key", LIBS);
+  gidLink(cast(void**)&g_settings_schema_get_path, "g_settings_schema_get_path", LIBS);
+  gidLink(cast(void**)&g_settings_schema_has_key, "g_settings_schema_has_key", LIBS);
+  gidLink(cast(void**)&g_settings_schema_list_children, "g_settings_schema_list_children", LIBS);
+  gidLink(cast(void**)&g_settings_schema_list_keys, "g_settings_schema_list_keys", LIBS);
+  gidLink(cast(void**)&g_settings_schema_ref, "g_settings_schema_ref", LIBS);
+  gidLink(cast(void**)&g_settings_schema_unref, "g_settings_schema_unref", LIBS);
 
   // SettingsSchemaKey
-  gidLink(g_settings_schema_key_get_type, "g_settings_schema_key_get_type", LIBS);
-  gidLink(g_settings_schema_key_get_default_value, "g_settings_schema_key_get_default_value", LIBS);
-  gidLink(g_settings_schema_key_get_description, "g_settings_schema_key_get_description", LIBS);
-  gidLink(g_settings_schema_key_get_name, "g_settings_schema_key_get_name", LIBS);
-  gidLink(g_settings_schema_key_get_range, "g_settings_schema_key_get_range", LIBS);
-  gidLink(g_settings_schema_key_get_summary, "g_settings_schema_key_get_summary", LIBS);
-  gidLink(g_settings_schema_key_get_value_type, "g_settings_schema_key_get_value_type", LIBS);
-  gidLink(g_settings_schema_key_range_check, "g_settings_schema_key_range_check", LIBS);
-  gidLink(g_settings_schema_key_ref, "g_settings_schema_key_ref", LIBS);
-  gidLink(g_settings_schema_key_unref, "g_settings_schema_key_unref", LIBS);
+  gidLink(cast(void**)&g_settings_schema_key_get_type, "g_settings_schema_key_get_type", LIBS);
+  gidLink(cast(void**)&g_settings_schema_key_get_default_value, "g_settings_schema_key_get_default_value", LIBS);
+  gidLink(cast(void**)&g_settings_schema_key_get_description, "g_settings_schema_key_get_description", LIBS);
+  gidLink(cast(void**)&g_settings_schema_key_get_name, "g_settings_schema_key_get_name", LIBS);
+  gidLink(cast(void**)&g_settings_schema_key_get_range, "g_settings_schema_key_get_range", LIBS);
+  gidLink(cast(void**)&g_settings_schema_key_get_summary, "g_settings_schema_key_get_summary", LIBS);
+  gidLink(cast(void**)&g_settings_schema_key_get_value_type, "g_settings_schema_key_get_value_type", LIBS);
+  gidLink(cast(void**)&g_settings_schema_key_range_check, "g_settings_schema_key_range_check", LIBS);
+  gidLink(cast(void**)&g_settings_schema_key_ref, "g_settings_schema_key_ref", LIBS);
+  gidLink(cast(void**)&g_settings_schema_key_unref, "g_settings_schema_key_unref", LIBS);
 
   // SettingsSchemaSource
-  gidLink(g_settings_schema_source_get_type, "g_settings_schema_source_get_type", LIBS);
-  gidLink(g_settings_schema_source_new_from_directory, "g_settings_schema_source_new_from_directory", LIBS);
-  gidLink(g_settings_schema_source_list_schemas, "g_settings_schema_source_list_schemas", LIBS);
-  gidLink(g_settings_schema_source_lookup, "g_settings_schema_source_lookup", LIBS);
-  gidLink(g_settings_schema_source_ref, "g_settings_schema_source_ref", LIBS);
-  gidLink(g_settings_schema_source_unref, "g_settings_schema_source_unref", LIBS);
-  gidLink(g_settings_schema_source_get_default, "g_settings_schema_source_get_default", LIBS);
+  gidLink(cast(void**)&g_settings_schema_source_get_type, "g_settings_schema_source_get_type", LIBS);
+  gidLink(cast(void**)&g_settings_schema_source_new_from_directory, "g_settings_schema_source_new_from_directory", LIBS);
+  gidLink(cast(void**)&g_settings_schema_source_list_schemas, "g_settings_schema_source_list_schemas", LIBS);
+  gidLink(cast(void**)&g_settings_schema_source_lookup, "g_settings_schema_source_lookup", LIBS);
+  gidLink(cast(void**)&g_settings_schema_source_ref, "g_settings_schema_source_ref", LIBS);
+  gidLink(cast(void**)&g_settings_schema_source_unref, "g_settings_schema_source_unref", LIBS);
+  gidLink(cast(void**)&g_settings_schema_source_get_default, "g_settings_schema_source_get_default", LIBS);
 
   // SimpleAction
-  gidLink(g_simple_action_get_type, "g_simple_action_get_type", LIBS);
-  gidLink(g_simple_action_new, "g_simple_action_new", LIBS);
-  gidLink(g_simple_action_new_stateful, "g_simple_action_new_stateful", LIBS);
-  gidLink(g_simple_action_set_enabled, "g_simple_action_set_enabled", LIBS);
-  gidLink(g_simple_action_set_state, "g_simple_action_set_state", LIBS);
-  gidLink(g_simple_action_set_state_hint, "g_simple_action_set_state_hint", LIBS);
+  gidLink(cast(void**)&g_simple_action_get_type, "g_simple_action_get_type", LIBS);
+  gidLink(cast(void**)&g_simple_action_new, "g_simple_action_new", LIBS);
+  gidLink(cast(void**)&g_simple_action_new_stateful, "g_simple_action_new_stateful", LIBS);
+  gidLink(cast(void**)&g_simple_action_set_enabled, "g_simple_action_set_enabled", LIBS);
+  gidLink(cast(void**)&g_simple_action_set_state, "g_simple_action_set_state", LIBS);
+  gidLink(cast(void**)&g_simple_action_set_state_hint, "g_simple_action_set_state_hint", LIBS);
 
   // SimpleActionGroup
-  gidLink(g_simple_action_group_get_type, "g_simple_action_group_get_type", LIBS);
-  gidLink(g_simple_action_group_new, "g_simple_action_group_new", LIBS);
-  gidLink(g_simple_action_group_add_entries, "g_simple_action_group_add_entries", LIBS);
-  gidLink(g_simple_action_group_insert, "g_simple_action_group_insert", LIBS);
-  gidLink(g_simple_action_group_lookup, "g_simple_action_group_lookup", LIBS);
-  gidLink(g_simple_action_group_remove, "g_simple_action_group_remove", LIBS);
+  gidLink(cast(void**)&g_simple_action_group_get_type, "g_simple_action_group_get_type", LIBS);
+  gidLink(cast(void**)&g_simple_action_group_new, "g_simple_action_group_new", LIBS);
+  gidLink(cast(void**)&g_simple_action_group_add_entries, "g_simple_action_group_add_entries", LIBS);
+  gidLink(cast(void**)&g_simple_action_group_insert, "g_simple_action_group_insert", LIBS);
+  gidLink(cast(void**)&g_simple_action_group_lookup, "g_simple_action_group_lookup", LIBS);
+  gidLink(cast(void**)&g_simple_action_group_remove, "g_simple_action_group_remove", LIBS);
 
   // SimpleAsyncResult
-  gidLink(g_simple_async_result_get_type, "g_simple_async_result_get_type", LIBS);
-  gidLink(g_simple_async_result_new, "g_simple_async_result_new", LIBS);
-  gidLink(g_simple_async_result_new_error, "g_simple_async_result_new_error", LIBS);
-  gidLink(g_simple_async_result_new_from_error, "g_simple_async_result_new_from_error", LIBS);
-  gidLink(g_simple_async_result_new_take_error, "g_simple_async_result_new_take_error", LIBS);
-  gidLink(g_simple_async_result_is_valid, "g_simple_async_result_is_valid", LIBS);
-  gidLink(g_simple_async_result_complete, "g_simple_async_result_complete", LIBS);
-  gidLink(g_simple_async_result_complete_in_idle, "g_simple_async_result_complete_in_idle", LIBS);
-  gidLink(g_simple_async_result_get_op_res_gboolean, "g_simple_async_result_get_op_res_gboolean", LIBS);
-  gidLink(g_simple_async_result_get_op_res_gpointer, "g_simple_async_result_get_op_res_gpointer", LIBS);
-  gidLink(g_simple_async_result_get_op_res_gssize, "g_simple_async_result_get_op_res_gssize", LIBS);
-  gidLink(g_simple_async_result_get_source_tag, "g_simple_async_result_get_source_tag", LIBS);
-  gidLink(g_simple_async_result_propagate_error, "g_simple_async_result_propagate_error", LIBS);
-  gidLink(g_simple_async_result_run_in_thread, "g_simple_async_result_run_in_thread", LIBS);
-  gidLink(g_simple_async_result_set_check_cancellable, "g_simple_async_result_set_check_cancellable", LIBS);
-  gidLink(g_simple_async_result_set_error, "g_simple_async_result_set_error", LIBS);
-  gidLink(g_simple_async_result_set_error_va, "g_simple_async_result_set_error_va", LIBS);
-  gidLink(g_simple_async_result_set_from_error, "g_simple_async_result_set_from_error", LIBS);
-  gidLink(g_simple_async_result_set_handle_cancellation, "g_simple_async_result_set_handle_cancellation", LIBS);
-  gidLink(g_simple_async_result_set_op_res_gboolean, "g_simple_async_result_set_op_res_gboolean", LIBS);
-  gidLink(g_simple_async_result_set_op_res_gpointer, "g_simple_async_result_set_op_res_gpointer", LIBS);
-  gidLink(g_simple_async_result_set_op_res_gssize, "g_simple_async_result_set_op_res_gssize", LIBS);
-  gidLink(g_simple_async_result_take_error, "g_simple_async_result_take_error", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_get_type, "g_simple_async_result_get_type", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_new, "g_simple_async_result_new", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_new_error, "g_simple_async_result_new_error", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_new_from_error, "g_simple_async_result_new_from_error", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_new_take_error, "g_simple_async_result_new_take_error", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_is_valid, "g_simple_async_result_is_valid", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_complete, "g_simple_async_result_complete", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_complete_in_idle, "g_simple_async_result_complete_in_idle", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_get_op_res_gboolean, "g_simple_async_result_get_op_res_gboolean", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_get_op_res_gpointer, "g_simple_async_result_get_op_res_gpointer", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_get_op_res_gssize, "g_simple_async_result_get_op_res_gssize", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_get_source_tag, "g_simple_async_result_get_source_tag", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_propagate_error, "g_simple_async_result_propagate_error", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_run_in_thread, "g_simple_async_result_run_in_thread", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_set_check_cancellable, "g_simple_async_result_set_check_cancellable", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_set_error, "g_simple_async_result_set_error", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_set_error_va, "g_simple_async_result_set_error_va", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_set_from_error, "g_simple_async_result_set_from_error", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_set_handle_cancellation, "g_simple_async_result_set_handle_cancellation", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_set_op_res_gboolean, "g_simple_async_result_set_op_res_gboolean", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_set_op_res_gpointer, "g_simple_async_result_set_op_res_gpointer", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_set_op_res_gssize, "g_simple_async_result_set_op_res_gssize", LIBS);
+  gidLink(cast(void**)&g_simple_async_result_take_error, "g_simple_async_result_take_error", LIBS);
 
   // SimpleIOStream
-  gidLink(g_simple_io_stream_get_type, "g_simple_io_stream_get_type", LIBS);
-  gidLink(g_simple_io_stream_new, "g_simple_io_stream_new", LIBS);
+  gidLink(cast(void**)&g_simple_io_stream_get_type, "g_simple_io_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_simple_io_stream_new, "g_simple_io_stream_new", LIBS);
 
   // SimplePermission
-  gidLink(g_simple_permission_get_type, "g_simple_permission_get_type", LIBS);
-  gidLink(g_simple_permission_new, "g_simple_permission_new", LIBS);
+  gidLink(cast(void**)&g_simple_permission_get_type, "g_simple_permission_get_type", LIBS);
+  gidLink(cast(void**)&g_simple_permission_new, "g_simple_permission_new", LIBS);
 
   // SimpleProxyResolver
-  gidLink(g_simple_proxy_resolver_get_type, "g_simple_proxy_resolver_get_type", LIBS);
-  gidLink(g_simple_proxy_resolver_new, "g_simple_proxy_resolver_new", LIBS);
-  gidLink(g_simple_proxy_resolver_set_default_proxy, "g_simple_proxy_resolver_set_default_proxy", LIBS);
-  gidLink(g_simple_proxy_resolver_set_ignore_hosts, "g_simple_proxy_resolver_set_ignore_hosts", LIBS);
-  gidLink(g_simple_proxy_resolver_set_uri_proxy, "g_simple_proxy_resolver_set_uri_proxy", LIBS);
+  gidLink(cast(void**)&g_simple_proxy_resolver_get_type, "g_simple_proxy_resolver_get_type", LIBS);
+  gidLink(cast(void**)&g_simple_proxy_resolver_new, "g_simple_proxy_resolver_new", LIBS);
+  gidLink(cast(void**)&g_simple_proxy_resolver_set_default_proxy, "g_simple_proxy_resolver_set_default_proxy", LIBS);
+  gidLink(cast(void**)&g_simple_proxy_resolver_set_ignore_hosts, "g_simple_proxy_resolver_set_ignore_hosts", LIBS);
+  gidLink(cast(void**)&g_simple_proxy_resolver_set_uri_proxy, "g_simple_proxy_resolver_set_uri_proxy", LIBS);
 
   // Socket
-  gidLink(g_socket_get_type, "g_socket_get_type", LIBS);
-  gidLink(g_socket_new, "g_socket_new", LIBS);
-  gidLink(g_socket_new_from_fd, "g_socket_new_from_fd", LIBS);
-  gidLink(g_socket_accept, "g_socket_accept", LIBS);
-  gidLink(g_socket_bind, "g_socket_bind", LIBS);
-  gidLink(g_socket_check_connect_result, "g_socket_check_connect_result", LIBS);
-  gidLink(g_socket_close, "g_socket_close", LIBS);
-  gidLink(g_socket_condition_check, "g_socket_condition_check", LIBS);
-  gidLink(g_socket_condition_timed_wait, "g_socket_condition_timed_wait", LIBS);
-  gidLink(g_socket_condition_wait, "g_socket_condition_wait", LIBS);
-  gidLink(g_socket_connect, "g_socket_connect", LIBS);
-  gidLink(g_socket_connection_factory_create_connection, "g_socket_connection_factory_create_connection", LIBS);
-  gidLink(g_socket_create_source, "g_socket_create_source", LIBS);
-  gidLink(g_socket_get_available_bytes, "g_socket_get_available_bytes", LIBS);
-  gidLink(g_socket_get_blocking, "g_socket_get_blocking", LIBS);
-  gidLink(g_socket_get_broadcast, "g_socket_get_broadcast", LIBS);
-  gidLink(g_socket_get_credentials, "g_socket_get_credentials", LIBS);
-  gidLink(g_socket_get_family, "g_socket_get_family", LIBS);
-  gidLink(g_socket_get_fd, "g_socket_get_fd", LIBS);
-  gidLink(g_socket_get_keepalive, "g_socket_get_keepalive", LIBS);
-  gidLink(g_socket_get_listen_backlog, "g_socket_get_listen_backlog", LIBS);
-  gidLink(g_socket_get_local_address, "g_socket_get_local_address", LIBS);
-  gidLink(g_socket_get_multicast_loopback, "g_socket_get_multicast_loopback", LIBS);
-  gidLink(g_socket_get_multicast_ttl, "g_socket_get_multicast_ttl", LIBS);
-  gidLink(g_socket_get_option, "g_socket_get_option", LIBS);
-  gidLink(g_socket_get_protocol, "g_socket_get_protocol", LIBS);
-  gidLink(g_socket_get_remote_address, "g_socket_get_remote_address", LIBS);
-  gidLink(g_socket_get_socket_type, "g_socket_get_socket_type", LIBS);
-  gidLink(g_socket_get_timeout, "g_socket_get_timeout", LIBS);
-  gidLink(g_socket_get_ttl, "g_socket_get_ttl", LIBS);
-  gidLink(g_socket_is_closed, "g_socket_is_closed", LIBS);
-  gidLink(g_socket_is_connected, "g_socket_is_connected", LIBS);
-  gidLink(g_socket_join_multicast_group, "g_socket_join_multicast_group", LIBS);
-  gidLink(g_socket_join_multicast_group_ssm, "g_socket_join_multicast_group_ssm", LIBS);
-  gidLink(g_socket_leave_multicast_group, "g_socket_leave_multicast_group", LIBS);
-  gidLink(g_socket_leave_multicast_group_ssm, "g_socket_leave_multicast_group_ssm", LIBS);
-  gidLink(g_socket_listen, "g_socket_listen", LIBS);
-  gidLink(g_socket_receive, "g_socket_receive", LIBS);
-  gidLink(g_socket_receive_bytes, "g_socket_receive_bytes", LIBS);
-  gidLink(g_socket_receive_bytes_from, "g_socket_receive_bytes_from", LIBS);
-  gidLink(g_socket_receive_from, "g_socket_receive_from", LIBS);
-  gidLink(g_socket_receive_message, "g_socket_receive_message", LIBS);
-  gidLink(g_socket_receive_messages, "g_socket_receive_messages", LIBS);
-  gidLink(g_socket_receive_with_blocking, "g_socket_receive_with_blocking", LIBS);
-  gidLink(g_socket_send, "g_socket_send", LIBS);
-  gidLink(g_socket_send_message, "g_socket_send_message", LIBS);
-  gidLink(g_socket_send_message_with_timeout, "g_socket_send_message_with_timeout", LIBS);
-  gidLink(g_socket_send_messages, "g_socket_send_messages", LIBS);
-  gidLink(g_socket_send_to, "g_socket_send_to", LIBS);
-  gidLink(g_socket_send_with_blocking, "g_socket_send_with_blocking", LIBS);
-  gidLink(g_socket_set_blocking, "g_socket_set_blocking", LIBS);
-  gidLink(g_socket_set_broadcast, "g_socket_set_broadcast", LIBS);
-  gidLink(g_socket_set_keepalive, "g_socket_set_keepalive", LIBS);
-  gidLink(g_socket_set_listen_backlog, "g_socket_set_listen_backlog", LIBS);
-  gidLink(g_socket_set_multicast_loopback, "g_socket_set_multicast_loopback", LIBS);
-  gidLink(g_socket_set_multicast_ttl, "g_socket_set_multicast_ttl", LIBS);
-  gidLink(g_socket_set_option, "g_socket_set_option", LIBS);
-  gidLink(g_socket_set_timeout, "g_socket_set_timeout", LIBS);
-  gidLink(g_socket_set_ttl, "g_socket_set_ttl", LIBS);
-  gidLink(g_socket_shutdown, "g_socket_shutdown", LIBS);
-  gidLink(g_socket_speaks_ipv4, "g_socket_speaks_ipv4", LIBS);
+  gidLink(cast(void**)&g_socket_get_type, "g_socket_get_type", LIBS);
+  gidLink(cast(void**)&g_socket_new, "g_socket_new", LIBS);
+  gidLink(cast(void**)&g_socket_new_from_fd, "g_socket_new_from_fd", LIBS);
+  gidLink(cast(void**)&g_socket_accept, "g_socket_accept", LIBS);
+  gidLink(cast(void**)&g_socket_bind, "g_socket_bind", LIBS);
+  gidLink(cast(void**)&g_socket_check_connect_result, "g_socket_check_connect_result", LIBS);
+  gidLink(cast(void**)&g_socket_close, "g_socket_close", LIBS);
+  gidLink(cast(void**)&g_socket_condition_check, "g_socket_condition_check", LIBS);
+  gidLink(cast(void**)&g_socket_condition_timed_wait, "g_socket_condition_timed_wait", LIBS);
+  gidLink(cast(void**)&g_socket_condition_wait, "g_socket_condition_wait", LIBS);
+  gidLink(cast(void**)&g_socket_connect, "g_socket_connect", LIBS);
+  gidLink(cast(void**)&g_socket_connection_factory_create_connection, "g_socket_connection_factory_create_connection", LIBS);
+  gidLink(cast(void**)&g_socket_create_source, "g_socket_create_source", LIBS);
+  gidLink(cast(void**)&g_socket_get_available_bytes, "g_socket_get_available_bytes", LIBS);
+  gidLink(cast(void**)&g_socket_get_blocking, "g_socket_get_blocking", LIBS);
+  gidLink(cast(void**)&g_socket_get_broadcast, "g_socket_get_broadcast", LIBS);
+  gidLink(cast(void**)&g_socket_get_credentials, "g_socket_get_credentials", LIBS);
+  gidLink(cast(void**)&g_socket_get_family, "g_socket_get_family", LIBS);
+  gidLink(cast(void**)&g_socket_get_fd, "g_socket_get_fd", LIBS);
+  gidLink(cast(void**)&g_socket_get_keepalive, "g_socket_get_keepalive", LIBS);
+  gidLink(cast(void**)&g_socket_get_listen_backlog, "g_socket_get_listen_backlog", LIBS);
+  gidLink(cast(void**)&g_socket_get_local_address, "g_socket_get_local_address", LIBS);
+  gidLink(cast(void**)&g_socket_get_multicast_loopback, "g_socket_get_multicast_loopback", LIBS);
+  gidLink(cast(void**)&g_socket_get_multicast_ttl, "g_socket_get_multicast_ttl", LIBS);
+  gidLink(cast(void**)&g_socket_get_option, "g_socket_get_option", LIBS);
+  gidLink(cast(void**)&g_socket_get_protocol, "g_socket_get_protocol", LIBS);
+  gidLink(cast(void**)&g_socket_get_remote_address, "g_socket_get_remote_address", LIBS);
+  gidLink(cast(void**)&g_socket_get_socket_type, "g_socket_get_socket_type", LIBS);
+  gidLink(cast(void**)&g_socket_get_timeout, "g_socket_get_timeout", LIBS);
+  gidLink(cast(void**)&g_socket_get_ttl, "g_socket_get_ttl", LIBS);
+  gidLink(cast(void**)&g_socket_is_closed, "g_socket_is_closed", LIBS);
+  gidLink(cast(void**)&g_socket_is_connected, "g_socket_is_connected", LIBS);
+  gidLink(cast(void**)&g_socket_join_multicast_group, "g_socket_join_multicast_group", LIBS);
+  gidLink(cast(void**)&g_socket_join_multicast_group_ssm, "g_socket_join_multicast_group_ssm", LIBS);
+  gidLink(cast(void**)&g_socket_leave_multicast_group, "g_socket_leave_multicast_group", LIBS);
+  gidLink(cast(void**)&g_socket_leave_multicast_group_ssm, "g_socket_leave_multicast_group_ssm", LIBS);
+  gidLink(cast(void**)&g_socket_listen, "g_socket_listen", LIBS);
+  gidLink(cast(void**)&g_socket_receive, "g_socket_receive", LIBS);
+  gidLink(cast(void**)&g_socket_receive_bytes, "g_socket_receive_bytes", LIBS);
+  gidLink(cast(void**)&g_socket_receive_bytes_from, "g_socket_receive_bytes_from", LIBS);
+  gidLink(cast(void**)&g_socket_receive_from, "g_socket_receive_from", LIBS);
+  gidLink(cast(void**)&g_socket_receive_message, "g_socket_receive_message", LIBS);
+  gidLink(cast(void**)&g_socket_receive_messages, "g_socket_receive_messages", LIBS);
+  gidLink(cast(void**)&g_socket_receive_with_blocking, "g_socket_receive_with_blocking", LIBS);
+  gidLink(cast(void**)&g_socket_send, "g_socket_send", LIBS);
+  gidLink(cast(void**)&g_socket_send_message, "g_socket_send_message", LIBS);
+  gidLink(cast(void**)&g_socket_send_message_with_timeout, "g_socket_send_message_with_timeout", LIBS);
+  gidLink(cast(void**)&g_socket_send_messages, "g_socket_send_messages", LIBS);
+  gidLink(cast(void**)&g_socket_send_to, "g_socket_send_to", LIBS);
+  gidLink(cast(void**)&g_socket_send_with_blocking, "g_socket_send_with_blocking", LIBS);
+  gidLink(cast(void**)&g_socket_set_blocking, "g_socket_set_blocking", LIBS);
+  gidLink(cast(void**)&g_socket_set_broadcast, "g_socket_set_broadcast", LIBS);
+  gidLink(cast(void**)&g_socket_set_keepalive, "g_socket_set_keepalive", LIBS);
+  gidLink(cast(void**)&g_socket_set_listen_backlog, "g_socket_set_listen_backlog", LIBS);
+  gidLink(cast(void**)&g_socket_set_multicast_loopback, "g_socket_set_multicast_loopback", LIBS);
+  gidLink(cast(void**)&g_socket_set_multicast_ttl, "g_socket_set_multicast_ttl", LIBS);
+  gidLink(cast(void**)&g_socket_set_option, "g_socket_set_option", LIBS);
+  gidLink(cast(void**)&g_socket_set_timeout, "g_socket_set_timeout", LIBS);
+  gidLink(cast(void**)&g_socket_set_ttl, "g_socket_set_ttl", LIBS);
+  gidLink(cast(void**)&g_socket_shutdown, "g_socket_shutdown", LIBS);
+  gidLink(cast(void**)&g_socket_speaks_ipv4, "g_socket_speaks_ipv4", LIBS);
 
   // SocketAddress
-  gidLink(g_socket_address_get_type, "g_socket_address_get_type", LIBS);
-  gidLink(g_socket_address_new_from_native, "g_socket_address_new_from_native", LIBS);
-  gidLink(g_socket_address_get_family, "g_socket_address_get_family", LIBS);
-  gidLink(g_socket_address_get_native_size, "g_socket_address_get_native_size", LIBS);
-  gidLink(g_socket_address_to_native, "g_socket_address_to_native", LIBS);
+  gidLink(cast(void**)&g_socket_address_get_type, "g_socket_address_get_type", LIBS);
+  gidLink(cast(void**)&g_socket_address_new_from_native, "g_socket_address_new_from_native", LIBS);
+  gidLink(cast(void**)&g_socket_address_get_family, "g_socket_address_get_family", LIBS);
+  gidLink(cast(void**)&g_socket_address_get_native_size, "g_socket_address_get_native_size", LIBS);
+  gidLink(cast(void**)&g_socket_address_to_native, "g_socket_address_to_native", LIBS);
 
   // SocketAddressEnumerator
-  gidLink(g_socket_address_enumerator_get_type, "g_socket_address_enumerator_get_type", LIBS);
-  gidLink(g_socket_address_enumerator_next, "g_socket_address_enumerator_next", LIBS);
-  gidLink(g_socket_address_enumerator_next_async, "g_socket_address_enumerator_next_async", LIBS);
-  gidLink(g_socket_address_enumerator_next_finish, "g_socket_address_enumerator_next_finish", LIBS);
+  gidLink(cast(void**)&g_socket_address_enumerator_get_type, "g_socket_address_enumerator_get_type", LIBS);
+  gidLink(cast(void**)&g_socket_address_enumerator_next, "g_socket_address_enumerator_next", LIBS);
+  gidLink(cast(void**)&g_socket_address_enumerator_next_async, "g_socket_address_enumerator_next_async", LIBS);
+  gidLink(cast(void**)&g_socket_address_enumerator_next_finish, "g_socket_address_enumerator_next_finish", LIBS);
 
   // SocketClient
-  gidLink(g_socket_client_get_type, "g_socket_client_get_type", LIBS);
-  gidLink(g_socket_client_new, "g_socket_client_new", LIBS);
-  gidLink(g_socket_client_add_application_proxy, "g_socket_client_add_application_proxy", LIBS);
-  gidLink(g_socket_client_connect, "g_socket_client_connect", LIBS);
-  gidLink(g_socket_client_connect_async, "g_socket_client_connect_async", LIBS);
-  gidLink(g_socket_client_connect_finish, "g_socket_client_connect_finish", LIBS);
-  gidLink(g_socket_client_connect_to_host, "g_socket_client_connect_to_host", LIBS);
-  gidLink(g_socket_client_connect_to_host_async, "g_socket_client_connect_to_host_async", LIBS);
-  gidLink(g_socket_client_connect_to_host_finish, "g_socket_client_connect_to_host_finish", LIBS);
-  gidLink(g_socket_client_connect_to_service, "g_socket_client_connect_to_service", LIBS);
-  gidLink(g_socket_client_connect_to_service_async, "g_socket_client_connect_to_service_async", LIBS);
-  gidLink(g_socket_client_connect_to_service_finish, "g_socket_client_connect_to_service_finish", LIBS);
-  gidLink(g_socket_client_connect_to_uri, "g_socket_client_connect_to_uri", LIBS);
-  gidLink(g_socket_client_connect_to_uri_async, "g_socket_client_connect_to_uri_async", LIBS);
-  gidLink(g_socket_client_connect_to_uri_finish, "g_socket_client_connect_to_uri_finish", LIBS);
-  gidLink(g_socket_client_get_enable_proxy, "g_socket_client_get_enable_proxy", LIBS);
-  gidLink(g_socket_client_get_family, "g_socket_client_get_family", LIBS);
-  gidLink(g_socket_client_get_local_address, "g_socket_client_get_local_address", LIBS);
-  gidLink(g_socket_client_get_protocol, "g_socket_client_get_protocol", LIBS);
-  gidLink(g_socket_client_get_proxy_resolver, "g_socket_client_get_proxy_resolver", LIBS);
-  gidLink(g_socket_client_get_socket_type, "g_socket_client_get_socket_type", LIBS);
-  gidLink(g_socket_client_get_timeout, "g_socket_client_get_timeout", LIBS);
-  gidLink(g_socket_client_get_tls, "g_socket_client_get_tls", LIBS);
-  gidLink(g_socket_client_get_tls_validation_flags, "g_socket_client_get_tls_validation_flags", LIBS);
-  gidLink(g_socket_client_set_enable_proxy, "g_socket_client_set_enable_proxy", LIBS);
-  gidLink(g_socket_client_set_family, "g_socket_client_set_family", LIBS);
-  gidLink(g_socket_client_set_local_address, "g_socket_client_set_local_address", LIBS);
-  gidLink(g_socket_client_set_protocol, "g_socket_client_set_protocol", LIBS);
-  gidLink(g_socket_client_set_proxy_resolver, "g_socket_client_set_proxy_resolver", LIBS);
-  gidLink(g_socket_client_set_socket_type, "g_socket_client_set_socket_type", LIBS);
-  gidLink(g_socket_client_set_timeout, "g_socket_client_set_timeout", LIBS);
-  gidLink(g_socket_client_set_tls, "g_socket_client_set_tls", LIBS);
-  gidLink(g_socket_client_set_tls_validation_flags, "g_socket_client_set_tls_validation_flags", LIBS);
+  gidLink(cast(void**)&g_socket_client_get_type, "g_socket_client_get_type", LIBS);
+  gidLink(cast(void**)&g_socket_client_new, "g_socket_client_new", LIBS);
+  gidLink(cast(void**)&g_socket_client_add_application_proxy, "g_socket_client_add_application_proxy", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect, "g_socket_client_connect", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect_async, "g_socket_client_connect_async", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect_finish, "g_socket_client_connect_finish", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect_to_host, "g_socket_client_connect_to_host", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect_to_host_async, "g_socket_client_connect_to_host_async", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect_to_host_finish, "g_socket_client_connect_to_host_finish", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect_to_service, "g_socket_client_connect_to_service", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect_to_service_async, "g_socket_client_connect_to_service_async", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect_to_service_finish, "g_socket_client_connect_to_service_finish", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect_to_uri, "g_socket_client_connect_to_uri", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect_to_uri_async, "g_socket_client_connect_to_uri_async", LIBS);
+  gidLink(cast(void**)&g_socket_client_connect_to_uri_finish, "g_socket_client_connect_to_uri_finish", LIBS);
+  gidLink(cast(void**)&g_socket_client_get_enable_proxy, "g_socket_client_get_enable_proxy", LIBS);
+  gidLink(cast(void**)&g_socket_client_get_family, "g_socket_client_get_family", LIBS);
+  gidLink(cast(void**)&g_socket_client_get_local_address, "g_socket_client_get_local_address", LIBS);
+  gidLink(cast(void**)&g_socket_client_get_protocol, "g_socket_client_get_protocol", LIBS);
+  gidLink(cast(void**)&g_socket_client_get_proxy_resolver, "g_socket_client_get_proxy_resolver", LIBS);
+  gidLink(cast(void**)&g_socket_client_get_socket_type, "g_socket_client_get_socket_type", LIBS);
+  gidLink(cast(void**)&g_socket_client_get_timeout, "g_socket_client_get_timeout", LIBS);
+  gidLink(cast(void**)&g_socket_client_get_tls, "g_socket_client_get_tls", LIBS);
+  gidLink(cast(void**)&g_socket_client_get_tls_validation_flags, "g_socket_client_get_tls_validation_flags", LIBS);
+  gidLink(cast(void**)&g_socket_client_set_enable_proxy, "g_socket_client_set_enable_proxy", LIBS);
+  gidLink(cast(void**)&g_socket_client_set_family, "g_socket_client_set_family", LIBS);
+  gidLink(cast(void**)&g_socket_client_set_local_address, "g_socket_client_set_local_address", LIBS);
+  gidLink(cast(void**)&g_socket_client_set_protocol, "g_socket_client_set_protocol", LIBS);
+  gidLink(cast(void**)&g_socket_client_set_proxy_resolver, "g_socket_client_set_proxy_resolver", LIBS);
+  gidLink(cast(void**)&g_socket_client_set_socket_type, "g_socket_client_set_socket_type", LIBS);
+  gidLink(cast(void**)&g_socket_client_set_timeout, "g_socket_client_set_timeout", LIBS);
+  gidLink(cast(void**)&g_socket_client_set_tls, "g_socket_client_set_tls", LIBS);
+  gidLink(cast(void**)&g_socket_client_set_tls_validation_flags, "g_socket_client_set_tls_validation_flags", LIBS);
 
   // SocketConnectable
-  gidLink(g_socket_connectable_get_type, "g_socket_connectable_get_type", LIBS);
-  gidLink(g_socket_connectable_enumerate, "g_socket_connectable_enumerate", LIBS);
-  gidLink(g_socket_connectable_proxy_enumerate, "g_socket_connectable_proxy_enumerate", LIBS);
-  gidLink(g_socket_connectable_to_string, "g_socket_connectable_to_string", LIBS);
+  gidLink(cast(void**)&g_socket_connectable_get_type, "g_socket_connectable_get_type", LIBS);
+  gidLink(cast(void**)&g_socket_connectable_enumerate, "g_socket_connectable_enumerate", LIBS);
+  gidLink(cast(void**)&g_socket_connectable_proxy_enumerate, "g_socket_connectable_proxy_enumerate", LIBS);
+  gidLink(cast(void**)&g_socket_connectable_to_string, "g_socket_connectable_to_string", LIBS);
 
   // SocketConnection
-  gidLink(g_socket_connection_get_type, "g_socket_connection_get_type", LIBS);
-  gidLink(g_socket_connection_factory_lookup_type, "g_socket_connection_factory_lookup_type", LIBS);
-  gidLink(g_socket_connection_factory_register_type, "g_socket_connection_factory_register_type", LIBS);
-  gidLink(g_socket_connection_connect, "g_socket_connection_connect", LIBS);
-  gidLink(g_socket_connection_connect_async, "g_socket_connection_connect_async", LIBS);
-  gidLink(g_socket_connection_connect_finish, "g_socket_connection_connect_finish", LIBS);
-  gidLink(g_socket_connection_get_local_address, "g_socket_connection_get_local_address", LIBS);
-  gidLink(g_socket_connection_get_remote_address, "g_socket_connection_get_remote_address", LIBS);
-  gidLink(g_socket_connection_get_socket, "g_socket_connection_get_socket", LIBS);
-  gidLink(g_socket_connection_is_connected, "g_socket_connection_is_connected", LIBS);
+  gidLink(cast(void**)&g_socket_connection_get_type, "g_socket_connection_get_type", LIBS);
+  gidLink(cast(void**)&g_socket_connection_factory_lookup_type, "g_socket_connection_factory_lookup_type", LIBS);
+  gidLink(cast(void**)&g_socket_connection_factory_register_type, "g_socket_connection_factory_register_type", LIBS);
+  gidLink(cast(void**)&g_socket_connection_connect, "g_socket_connection_connect", LIBS);
+  gidLink(cast(void**)&g_socket_connection_connect_async, "g_socket_connection_connect_async", LIBS);
+  gidLink(cast(void**)&g_socket_connection_connect_finish, "g_socket_connection_connect_finish", LIBS);
+  gidLink(cast(void**)&g_socket_connection_get_local_address, "g_socket_connection_get_local_address", LIBS);
+  gidLink(cast(void**)&g_socket_connection_get_remote_address, "g_socket_connection_get_remote_address", LIBS);
+  gidLink(cast(void**)&g_socket_connection_get_socket, "g_socket_connection_get_socket", LIBS);
+  gidLink(cast(void**)&g_socket_connection_is_connected, "g_socket_connection_is_connected", LIBS);
 
   // SocketControlMessage
-  gidLink(g_socket_control_message_get_type, "g_socket_control_message_get_type", LIBS);
-  gidLink(g_socket_control_message_deserialize, "g_socket_control_message_deserialize", LIBS);
-  gidLink(g_socket_control_message_get_level, "g_socket_control_message_get_level", LIBS);
-  gidLink(g_socket_control_message_get_msg_type, "g_socket_control_message_get_msg_type", LIBS);
-  gidLink(g_socket_control_message_get_size, "g_socket_control_message_get_size", LIBS);
-  gidLink(g_socket_control_message_serialize, "g_socket_control_message_serialize", LIBS);
+  gidLink(cast(void**)&g_socket_control_message_get_type, "g_socket_control_message_get_type", LIBS);
+  gidLink(cast(void**)&g_socket_control_message_deserialize, "g_socket_control_message_deserialize", LIBS);
+  gidLink(cast(void**)&g_socket_control_message_get_level, "g_socket_control_message_get_level", LIBS);
+  gidLink(cast(void**)&g_socket_control_message_get_msg_type, "g_socket_control_message_get_msg_type", LIBS);
+  gidLink(cast(void**)&g_socket_control_message_get_size, "g_socket_control_message_get_size", LIBS);
+  gidLink(cast(void**)&g_socket_control_message_serialize, "g_socket_control_message_serialize", LIBS);
 
   // SocketListener
-  gidLink(g_socket_listener_get_type, "g_socket_listener_get_type", LIBS);
-  gidLink(g_socket_listener_new, "g_socket_listener_new", LIBS);
-  gidLink(g_socket_listener_accept, "g_socket_listener_accept", LIBS);
-  gidLink(g_socket_listener_accept_async, "g_socket_listener_accept_async", LIBS);
-  gidLink(g_socket_listener_accept_finish, "g_socket_listener_accept_finish", LIBS);
-  gidLink(g_socket_listener_accept_socket, "g_socket_listener_accept_socket", LIBS);
-  gidLink(g_socket_listener_accept_socket_async, "g_socket_listener_accept_socket_async", LIBS);
-  gidLink(g_socket_listener_accept_socket_finish, "g_socket_listener_accept_socket_finish", LIBS);
-  gidLink(g_socket_listener_add_address, "g_socket_listener_add_address", LIBS);
-  gidLink(g_socket_listener_add_any_inet_port, "g_socket_listener_add_any_inet_port", LIBS);
-  gidLink(g_socket_listener_add_inet_port, "g_socket_listener_add_inet_port", LIBS);
-  gidLink(g_socket_listener_add_socket, "g_socket_listener_add_socket", LIBS);
-  gidLink(g_socket_listener_close, "g_socket_listener_close", LIBS);
-  gidLink(g_socket_listener_set_backlog, "g_socket_listener_set_backlog", LIBS);
+  gidLink(cast(void**)&g_socket_listener_get_type, "g_socket_listener_get_type", LIBS);
+  gidLink(cast(void**)&g_socket_listener_new, "g_socket_listener_new", LIBS);
+  gidLink(cast(void**)&g_socket_listener_accept, "g_socket_listener_accept", LIBS);
+  gidLink(cast(void**)&g_socket_listener_accept_async, "g_socket_listener_accept_async", LIBS);
+  gidLink(cast(void**)&g_socket_listener_accept_finish, "g_socket_listener_accept_finish", LIBS);
+  gidLink(cast(void**)&g_socket_listener_accept_socket, "g_socket_listener_accept_socket", LIBS);
+  gidLink(cast(void**)&g_socket_listener_accept_socket_async, "g_socket_listener_accept_socket_async", LIBS);
+  gidLink(cast(void**)&g_socket_listener_accept_socket_finish, "g_socket_listener_accept_socket_finish", LIBS);
+  gidLink(cast(void**)&g_socket_listener_add_address, "g_socket_listener_add_address", LIBS);
+  gidLink(cast(void**)&g_socket_listener_add_any_inet_port, "g_socket_listener_add_any_inet_port", LIBS);
+  gidLink(cast(void**)&g_socket_listener_add_inet_port, "g_socket_listener_add_inet_port", LIBS);
+  gidLink(cast(void**)&g_socket_listener_add_socket, "g_socket_listener_add_socket", LIBS);
+  gidLink(cast(void**)&g_socket_listener_close, "g_socket_listener_close", LIBS);
+  gidLink(cast(void**)&g_socket_listener_set_backlog, "g_socket_listener_set_backlog", LIBS);
 
   // SocketService
-  gidLink(g_socket_service_get_type, "g_socket_service_get_type", LIBS);
-  gidLink(g_socket_service_new, "g_socket_service_new", LIBS);
-  gidLink(g_socket_service_is_active, "g_socket_service_is_active", LIBS);
-  gidLink(g_socket_service_start, "g_socket_service_start", LIBS);
-  gidLink(g_socket_service_stop, "g_socket_service_stop", LIBS);
+  gidLink(cast(void**)&g_socket_service_get_type, "g_socket_service_get_type", LIBS);
+  gidLink(cast(void**)&g_socket_service_new, "g_socket_service_new", LIBS);
+  gidLink(cast(void**)&g_socket_service_is_active, "g_socket_service_is_active", LIBS);
+  gidLink(cast(void**)&g_socket_service_start, "g_socket_service_start", LIBS);
+  gidLink(cast(void**)&g_socket_service_stop, "g_socket_service_stop", LIBS);
 
   // SrvTarget
-  gidLink(g_srv_target_get_type, "g_srv_target_get_type", LIBS);
-  gidLink(g_srv_target_new, "g_srv_target_new", LIBS);
-  gidLink(g_srv_target_copy, "g_srv_target_copy", LIBS);
-  gidLink(g_srv_target_free, "g_srv_target_free", LIBS);
-  gidLink(g_srv_target_get_hostname, "g_srv_target_get_hostname", LIBS);
-  gidLink(g_srv_target_get_port, "g_srv_target_get_port", LIBS);
-  gidLink(g_srv_target_get_priority, "g_srv_target_get_priority", LIBS);
-  gidLink(g_srv_target_get_weight, "g_srv_target_get_weight", LIBS);
-  gidLink(g_srv_target_list_sort, "g_srv_target_list_sort", LIBS);
+  gidLink(cast(void**)&g_srv_target_get_type, "g_srv_target_get_type", LIBS);
+  gidLink(cast(void**)&g_srv_target_new, "g_srv_target_new", LIBS);
+  gidLink(cast(void**)&g_srv_target_copy, "g_srv_target_copy", LIBS);
+  gidLink(cast(void**)&g_srv_target_free, "g_srv_target_free", LIBS);
+  gidLink(cast(void**)&g_srv_target_get_hostname, "g_srv_target_get_hostname", LIBS);
+  gidLink(cast(void**)&g_srv_target_get_port, "g_srv_target_get_port", LIBS);
+  gidLink(cast(void**)&g_srv_target_get_priority, "g_srv_target_get_priority", LIBS);
+  gidLink(cast(void**)&g_srv_target_get_weight, "g_srv_target_get_weight", LIBS);
+  gidLink(cast(void**)&g_srv_target_list_sort, "g_srv_target_list_sort", LIBS);
 
   // StaticResource
-  gidLink(g_static_resource_fini, "g_static_resource_fini", LIBS);
-  gidLink(g_static_resource_get_resource, "g_static_resource_get_resource", LIBS);
-  gidLink(g_static_resource_init, "g_static_resource_init", LIBS);
+  gidLink(cast(void**)&g_static_resource_fini, "g_static_resource_fini", LIBS);
+  gidLink(cast(void**)&g_static_resource_get_resource, "g_static_resource_get_resource", LIBS);
+  gidLink(cast(void**)&g_static_resource_init, "g_static_resource_init", LIBS);
 
   // Subprocess
-  gidLink(g_subprocess_get_type, "g_subprocess_get_type", LIBS);
-  gidLink(g_subprocess_new, "g_subprocess_new", LIBS);
-  gidLink(g_subprocess_newv, "g_subprocess_newv", LIBS);
-  gidLink(g_subprocess_communicate, "g_subprocess_communicate", LIBS);
-  gidLink(g_subprocess_communicate_async, "g_subprocess_communicate_async", LIBS);
-  gidLink(g_subprocess_communicate_finish, "g_subprocess_communicate_finish", LIBS);
-  gidLink(g_subprocess_communicate_utf8, "g_subprocess_communicate_utf8", LIBS);
-  gidLink(g_subprocess_communicate_utf8_async, "g_subprocess_communicate_utf8_async", LIBS);
-  gidLink(g_subprocess_communicate_utf8_finish, "g_subprocess_communicate_utf8_finish", LIBS);
-  gidLink(g_subprocess_force_exit, "g_subprocess_force_exit", LIBS);
-  gidLink(g_subprocess_get_exit_status, "g_subprocess_get_exit_status", LIBS);
-  gidLink(g_subprocess_get_identifier, "g_subprocess_get_identifier", LIBS);
-  gidLink(g_subprocess_get_if_exited, "g_subprocess_get_if_exited", LIBS);
-  gidLink(g_subprocess_get_if_signaled, "g_subprocess_get_if_signaled", LIBS);
-  gidLink(g_subprocess_get_status, "g_subprocess_get_status", LIBS);
-  gidLink(g_subprocess_get_stderr_pipe, "g_subprocess_get_stderr_pipe", LIBS);
-  gidLink(g_subprocess_get_stdin_pipe, "g_subprocess_get_stdin_pipe", LIBS);
-  gidLink(g_subprocess_get_stdout_pipe, "g_subprocess_get_stdout_pipe", LIBS);
-  gidLink(g_subprocess_get_successful, "g_subprocess_get_successful", LIBS);
-  gidLink(g_subprocess_get_term_sig, "g_subprocess_get_term_sig", LIBS);
-  gidLink(g_subprocess_send_signal, "g_subprocess_send_signal", LIBS);
-  gidLink(g_subprocess_wait, "g_subprocess_wait", LIBS);
-  gidLink(g_subprocess_wait_async, "g_subprocess_wait_async", LIBS);
-  gidLink(g_subprocess_wait_check, "g_subprocess_wait_check", LIBS);
-  gidLink(g_subprocess_wait_check_async, "g_subprocess_wait_check_async", LIBS);
-  gidLink(g_subprocess_wait_check_finish, "g_subprocess_wait_check_finish", LIBS);
-  gidLink(g_subprocess_wait_finish, "g_subprocess_wait_finish", LIBS);
+  gidLink(cast(void**)&g_subprocess_get_type, "g_subprocess_get_type", LIBS);
+  gidLink(cast(void**)&g_subprocess_new, "g_subprocess_new", LIBS);
+  gidLink(cast(void**)&g_subprocess_newv, "g_subprocess_newv", LIBS);
+  gidLink(cast(void**)&g_subprocess_communicate, "g_subprocess_communicate", LIBS);
+  gidLink(cast(void**)&g_subprocess_communicate_async, "g_subprocess_communicate_async", LIBS);
+  gidLink(cast(void**)&g_subprocess_communicate_finish, "g_subprocess_communicate_finish", LIBS);
+  gidLink(cast(void**)&g_subprocess_communicate_utf8, "g_subprocess_communicate_utf8", LIBS);
+  gidLink(cast(void**)&g_subprocess_communicate_utf8_async, "g_subprocess_communicate_utf8_async", LIBS);
+  gidLink(cast(void**)&g_subprocess_communicate_utf8_finish, "g_subprocess_communicate_utf8_finish", LIBS);
+  gidLink(cast(void**)&g_subprocess_force_exit, "g_subprocess_force_exit", LIBS);
+  gidLink(cast(void**)&g_subprocess_get_exit_status, "g_subprocess_get_exit_status", LIBS);
+  gidLink(cast(void**)&g_subprocess_get_identifier, "g_subprocess_get_identifier", LIBS);
+  gidLink(cast(void**)&g_subprocess_get_if_exited, "g_subprocess_get_if_exited", LIBS);
+  gidLink(cast(void**)&g_subprocess_get_if_signaled, "g_subprocess_get_if_signaled", LIBS);
+  gidLink(cast(void**)&g_subprocess_get_status, "g_subprocess_get_status", LIBS);
+  gidLink(cast(void**)&g_subprocess_get_stderr_pipe, "g_subprocess_get_stderr_pipe", LIBS);
+  gidLink(cast(void**)&g_subprocess_get_stdin_pipe, "g_subprocess_get_stdin_pipe", LIBS);
+  gidLink(cast(void**)&g_subprocess_get_stdout_pipe, "g_subprocess_get_stdout_pipe", LIBS);
+  gidLink(cast(void**)&g_subprocess_get_successful, "g_subprocess_get_successful", LIBS);
+  gidLink(cast(void**)&g_subprocess_get_term_sig, "g_subprocess_get_term_sig", LIBS);
+  gidLink(cast(void**)&g_subprocess_send_signal, "g_subprocess_send_signal", LIBS);
+  gidLink(cast(void**)&g_subprocess_wait, "g_subprocess_wait", LIBS);
+  gidLink(cast(void**)&g_subprocess_wait_async, "g_subprocess_wait_async", LIBS);
+  gidLink(cast(void**)&g_subprocess_wait_check, "g_subprocess_wait_check", LIBS);
+  gidLink(cast(void**)&g_subprocess_wait_check_async, "g_subprocess_wait_check_async", LIBS);
+  gidLink(cast(void**)&g_subprocess_wait_check_finish, "g_subprocess_wait_check_finish", LIBS);
+  gidLink(cast(void**)&g_subprocess_wait_finish, "g_subprocess_wait_finish", LIBS);
 
   // SubprocessLauncher
-  gidLink(g_subprocess_launcher_get_type, "g_subprocess_launcher_get_type", LIBS);
-  gidLink(g_subprocess_launcher_new, "g_subprocess_launcher_new", LIBS);
-  gidLink(g_subprocess_launcher_close, "g_subprocess_launcher_close", LIBS);
-  gidLink(g_subprocess_launcher_getenv, "g_subprocess_launcher_getenv", LIBS);
-  gidLink(g_subprocess_launcher_set_child_setup, "g_subprocess_launcher_set_child_setup", LIBS);
-  gidLink(g_subprocess_launcher_set_cwd, "g_subprocess_launcher_set_cwd", LIBS);
-  gidLink(g_subprocess_launcher_set_environ, "g_subprocess_launcher_set_environ", LIBS);
-  gidLink(g_subprocess_launcher_set_flags, "g_subprocess_launcher_set_flags", LIBS);
-  gidLink(g_subprocess_launcher_set_stderr_file_path, "g_subprocess_launcher_set_stderr_file_path", LIBS);
-  gidLink(g_subprocess_launcher_set_stdin_file_path, "g_subprocess_launcher_set_stdin_file_path", LIBS);
-  gidLink(g_subprocess_launcher_set_stdout_file_path, "g_subprocess_launcher_set_stdout_file_path", LIBS);
-  gidLink(g_subprocess_launcher_setenv, "g_subprocess_launcher_setenv", LIBS);
-  gidLink(g_subprocess_launcher_spawn, "g_subprocess_launcher_spawn", LIBS);
-  gidLink(g_subprocess_launcher_spawnv, "g_subprocess_launcher_spawnv", LIBS);
-  gidLink(g_subprocess_launcher_take_fd, "g_subprocess_launcher_take_fd", LIBS);
-  gidLink(g_subprocess_launcher_take_stderr_fd, "g_subprocess_launcher_take_stderr_fd", LIBS);
-  gidLink(g_subprocess_launcher_take_stdin_fd, "g_subprocess_launcher_take_stdin_fd", LIBS);
-  gidLink(g_subprocess_launcher_take_stdout_fd, "g_subprocess_launcher_take_stdout_fd", LIBS);
-  gidLink(g_subprocess_launcher_unsetenv, "g_subprocess_launcher_unsetenv", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_get_type, "g_subprocess_launcher_get_type", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_new, "g_subprocess_launcher_new", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_close, "g_subprocess_launcher_close", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_getenv, "g_subprocess_launcher_getenv", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_set_child_setup, "g_subprocess_launcher_set_child_setup", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_set_cwd, "g_subprocess_launcher_set_cwd", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_set_environ, "g_subprocess_launcher_set_environ", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_set_flags, "g_subprocess_launcher_set_flags", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_set_stderr_file_path, "g_subprocess_launcher_set_stderr_file_path", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_set_stdin_file_path, "g_subprocess_launcher_set_stdin_file_path", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_set_stdout_file_path, "g_subprocess_launcher_set_stdout_file_path", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_setenv, "g_subprocess_launcher_setenv", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_spawn, "g_subprocess_launcher_spawn", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_spawnv, "g_subprocess_launcher_spawnv", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_take_fd, "g_subprocess_launcher_take_fd", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_take_stderr_fd, "g_subprocess_launcher_take_stderr_fd", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_take_stdin_fd, "g_subprocess_launcher_take_stdin_fd", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_take_stdout_fd, "g_subprocess_launcher_take_stdout_fd", LIBS);
+  gidLink(cast(void**)&g_subprocess_launcher_unsetenv, "g_subprocess_launcher_unsetenv", LIBS);
 
   // Task
-  gidLink(g_task_get_type, "g_task_get_type", LIBS);
-  gidLink(g_task_new, "g_task_new", LIBS);
-  gidLink(g_task_is_valid, "g_task_is_valid", LIBS);
-  gidLink(g_task_report_error, "g_task_report_error", LIBS);
-  gidLink(g_task_report_new_error, "g_task_report_new_error", LIBS);
-  gidLink(g_task_attach_source, "g_task_attach_source", LIBS);
-  gidLink(g_task_get_cancellable, "g_task_get_cancellable", LIBS);
-  gidLink(g_task_get_check_cancellable, "g_task_get_check_cancellable", LIBS);
-  gidLink(g_task_get_completed, "g_task_get_completed", LIBS);
-  gidLink(g_task_get_context, "g_task_get_context", LIBS);
-  gidLink(g_task_get_name, "g_task_get_name", LIBS);
-  gidLink(g_task_get_priority, "g_task_get_priority", LIBS);
-  gidLink(g_task_get_return_on_cancel, "g_task_get_return_on_cancel", LIBS);
-  gidLink(g_task_get_source_object, "g_task_get_source_object", LIBS);
-  gidLink(g_task_get_source_tag, "g_task_get_source_tag", LIBS);
-  gidLink(g_task_get_task_data, "g_task_get_task_data", LIBS);
-  gidLink(g_task_had_error, "g_task_had_error", LIBS);
-  gidLink(g_task_propagate_boolean, "g_task_propagate_boolean", LIBS);
-  gidLink(g_task_propagate_int, "g_task_propagate_int", LIBS);
-  gidLink(g_task_propagate_pointer, "g_task_propagate_pointer", LIBS);
-  gidLink(g_task_propagate_value, "g_task_propagate_value", LIBS);
-  gidLink(g_task_return_boolean, "g_task_return_boolean", LIBS);
-  gidLink(g_task_return_error, "g_task_return_error", LIBS);
-  gidLink(g_task_return_error_if_cancelled, "g_task_return_error_if_cancelled", LIBS);
-  gidLink(g_task_return_int, "g_task_return_int", LIBS);
-  gidLink(g_task_return_new_error, "g_task_return_new_error", LIBS);
-  gidLink(g_task_return_new_error_literal, "g_task_return_new_error_literal", LIBS);
-  gidLink(g_task_return_pointer, "g_task_return_pointer", LIBS);
-  gidLink(g_task_return_prefixed_error, "g_task_return_prefixed_error", LIBS);
-  gidLink(g_task_return_value, "g_task_return_value", LIBS);
-  gidLink(g_task_run_in_thread, "g_task_run_in_thread", LIBS);
-  gidLink(g_task_run_in_thread_sync, "g_task_run_in_thread_sync", LIBS);
-  gidLink(g_task_set_check_cancellable, "g_task_set_check_cancellable", LIBS);
-  gidLink(g_task_set_name, "g_task_set_name", LIBS);
-  gidLink(g_task_set_priority, "g_task_set_priority", LIBS);
-  gidLink(g_task_set_return_on_cancel, "g_task_set_return_on_cancel", LIBS);
-  gidLink(g_task_set_source_tag, "g_task_set_source_tag", LIBS);
-  gidLink(g_task_set_static_name, "g_task_set_static_name", LIBS);
-  gidLink(g_task_set_task_data, "g_task_set_task_data", LIBS);
+  gidLink(cast(void**)&g_task_get_type, "g_task_get_type", LIBS);
+  gidLink(cast(void**)&g_task_new, "g_task_new", LIBS);
+  gidLink(cast(void**)&g_task_is_valid, "g_task_is_valid", LIBS);
+  gidLink(cast(void**)&g_task_report_error, "g_task_report_error", LIBS);
+  gidLink(cast(void**)&g_task_report_new_error, "g_task_report_new_error", LIBS);
+  gidLink(cast(void**)&g_task_attach_source, "g_task_attach_source", LIBS);
+  gidLink(cast(void**)&g_task_get_cancellable, "g_task_get_cancellable", LIBS);
+  gidLink(cast(void**)&g_task_get_check_cancellable, "g_task_get_check_cancellable", LIBS);
+  gidLink(cast(void**)&g_task_get_completed, "g_task_get_completed", LIBS);
+  gidLink(cast(void**)&g_task_get_context, "g_task_get_context", LIBS);
+  gidLink(cast(void**)&g_task_get_name, "g_task_get_name", LIBS);
+  gidLink(cast(void**)&g_task_get_priority, "g_task_get_priority", LIBS);
+  gidLink(cast(void**)&g_task_get_return_on_cancel, "g_task_get_return_on_cancel", LIBS);
+  gidLink(cast(void**)&g_task_get_source_object, "g_task_get_source_object", LIBS);
+  gidLink(cast(void**)&g_task_get_source_tag, "g_task_get_source_tag", LIBS);
+  gidLink(cast(void**)&g_task_get_task_data, "g_task_get_task_data", LIBS);
+  gidLink(cast(void**)&g_task_had_error, "g_task_had_error", LIBS);
+  gidLink(cast(void**)&g_task_propagate_boolean, "g_task_propagate_boolean", LIBS);
+  gidLink(cast(void**)&g_task_propagate_int, "g_task_propagate_int", LIBS);
+  gidLink(cast(void**)&g_task_propagate_pointer, "g_task_propagate_pointer", LIBS);
+  gidLink(cast(void**)&g_task_propagate_value, "g_task_propagate_value", LIBS);
+  gidLink(cast(void**)&g_task_return_boolean, "g_task_return_boolean", LIBS);
+  gidLink(cast(void**)&g_task_return_error, "g_task_return_error", LIBS);
+  gidLink(cast(void**)&g_task_return_error_if_cancelled, "g_task_return_error_if_cancelled", LIBS);
+  gidLink(cast(void**)&g_task_return_int, "g_task_return_int", LIBS);
+  gidLink(cast(void**)&g_task_return_new_error, "g_task_return_new_error", LIBS);
+  gidLink(cast(void**)&g_task_return_new_error_literal, "g_task_return_new_error_literal", LIBS);
+  gidLink(cast(void**)&g_task_return_pointer, "g_task_return_pointer", LIBS);
+  gidLink(cast(void**)&g_task_return_prefixed_error, "g_task_return_prefixed_error", LIBS);
+  gidLink(cast(void**)&g_task_return_value, "g_task_return_value", LIBS);
+  gidLink(cast(void**)&g_task_run_in_thread, "g_task_run_in_thread", LIBS);
+  gidLink(cast(void**)&g_task_run_in_thread_sync, "g_task_run_in_thread_sync", LIBS);
+  gidLink(cast(void**)&g_task_set_check_cancellable, "g_task_set_check_cancellable", LIBS);
+  gidLink(cast(void**)&g_task_set_name, "g_task_set_name", LIBS);
+  gidLink(cast(void**)&g_task_set_priority, "g_task_set_priority", LIBS);
+  gidLink(cast(void**)&g_task_set_return_on_cancel, "g_task_set_return_on_cancel", LIBS);
+  gidLink(cast(void**)&g_task_set_source_tag, "g_task_set_source_tag", LIBS);
+  gidLink(cast(void**)&g_task_set_static_name, "g_task_set_static_name", LIBS);
+  gidLink(cast(void**)&g_task_set_task_data, "g_task_set_task_data", LIBS);
 
   // TcpConnection
-  gidLink(g_tcp_connection_get_type, "g_tcp_connection_get_type", LIBS);
-  gidLink(g_tcp_connection_get_graceful_disconnect, "g_tcp_connection_get_graceful_disconnect", LIBS);
-  gidLink(g_tcp_connection_set_graceful_disconnect, "g_tcp_connection_set_graceful_disconnect", LIBS);
+  gidLink(cast(void**)&g_tcp_connection_get_type, "g_tcp_connection_get_type", LIBS);
+  gidLink(cast(void**)&g_tcp_connection_get_graceful_disconnect, "g_tcp_connection_get_graceful_disconnect", LIBS);
+  gidLink(cast(void**)&g_tcp_connection_set_graceful_disconnect, "g_tcp_connection_set_graceful_disconnect", LIBS);
 
   // TcpWrapperConnection
-  gidLink(g_tcp_wrapper_connection_get_type, "g_tcp_wrapper_connection_get_type", LIBS);
-  gidLink(g_tcp_wrapper_connection_new, "g_tcp_wrapper_connection_new", LIBS);
-  gidLink(g_tcp_wrapper_connection_get_base_io_stream, "g_tcp_wrapper_connection_get_base_io_stream", LIBS);
+  gidLink(cast(void**)&g_tcp_wrapper_connection_get_type, "g_tcp_wrapper_connection_get_type", LIBS);
+  gidLink(cast(void**)&g_tcp_wrapper_connection_new, "g_tcp_wrapper_connection_new", LIBS);
+  gidLink(cast(void**)&g_tcp_wrapper_connection_get_base_io_stream, "g_tcp_wrapper_connection_get_base_io_stream", LIBS);
 
   // TestDBus
-  gidLink(g_test_dbus_get_type, "g_test_dbus_get_type", LIBS);
-  gidLink(g_test_dbus_new, "g_test_dbus_new", LIBS);
-  gidLink(g_test_dbus_unset, "g_test_dbus_unset", LIBS);
-  gidLink(g_test_dbus_add_service_dir, "g_test_dbus_add_service_dir", LIBS);
-  gidLink(g_test_dbus_down, "g_test_dbus_down", LIBS);
-  gidLink(g_test_dbus_get_bus_address, "g_test_dbus_get_bus_address", LIBS);
-  gidLink(g_test_dbus_get_flags, "g_test_dbus_get_flags", LIBS);
-  gidLink(g_test_dbus_stop, "g_test_dbus_stop", LIBS);
-  gidLink(g_test_dbus_up, "g_test_dbus_up", LIBS);
+  gidLink(cast(void**)&g_test_dbus_get_type, "g_test_dbus_get_type", LIBS);
+  gidLink(cast(void**)&g_test_dbus_new, "g_test_dbus_new", LIBS);
+  gidLink(cast(void**)&g_test_dbus_unset, "g_test_dbus_unset", LIBS);
+  gidLink(cast(void**)&g_test_dbus_add_service_dir, "g_test_dbus_add_service_dir", LIBS);
+  gidLink(cast(void**)&g_test_dbus_down, "g_test_dbus_down", LIBS);
+  gidLink(cast(void**)&g_test_dbus_get_bus_address, "g_test_dbus_get_bus_address", LIBS);
+  gidLink(cast(void**)&g_test_dbus_get_flags, "g_test_dbus_get_flags", LIBS);
+  gidLink(cast(void**)&g_test_dbus_stop, "g_test_dbus_stop", LIBS);
+  gidLink(cast(void**)&g_test_dbus_up, "g_test_dbus_up", LIBS);
 
   // ThemedIcon
-  gidLink(g_themed_icon_get_type, "g_themed_icon_get_type", LIBS);
-  gidLink(g_themed_icon_new, "g_themed_icon_new", LIBS);
-  gidLink(g_themed_icon_new_from_names, "g_themed_icon_new_from_names", LIBS);
-  gidLink(g_themed_icon_new_with_default_fallbacks, "g_themed_icon_new_with_default_fallbacks", LIBS);
-  gidLink(g_themed_icon_append_name, "g_themed_icon_append_name", LIBS);
-  gidLink(g_themed_icon_get_names, "g_themed_icon_get_names", LIBS);
-  gidLink(g_themed_icon_prepend_name, "g_themed_icon_prepend_name", LIBS);
+  gidLink(cast(void**)&g_themed_icon_get_type, "g_themed_icon_get_type", LIBS);
+  gidLink(cast(void**)&g_themed_icon_new, "g_themed_icon_new", LIBS);
+  gidLink(cast(void**)&g_themed_icon_new_from_names, "g_themed_icon_new_from_names", LIBS);
+  gidLink(cast(void**)&g_themed_icon_new_with_default_fallbacks, "g_themed_icon_new_with_default_fallbacks", LIBS);
+  gidLink(cast(void**)&g_themed_icon_append_name, "g_themed_icon_append_name", LIBS);
+  gidLink(cast(void**)&g_themed_icon_get_names, "g_themed_icon_get_names", LIBS);
+  gidLink(cast(void**)&g_themed_icon_prepend_name, "g_themed_icon_prepend_name", LIBS);
 
   // ThreadedResolver
-  gidLink(g_threaded_resolver_get_type, "g_threaded_resolver_get_type", LIBS);
+  gidLink(cast(void**)&g_threaded_resolver_get_type, "g_threaded_resolver_get_type", LIBS);
 
   // ThreadedSocketService
-  gidLink(g_threaded_socket_service_get_type, "g_threaded_socket_service_get_type", LIBS);
-  gidLink(g_threaded_socket_service_new, "g_threaded_socket_service_new", LIBS);
+  gidLink(cast(void**)&g_threaded_socket_service_get_type, "g_threaded_socket_service_get_type", LIBS);
+  gidLink(cast(void**)&g_threaded_socket_service_new, "g_threaded_socket_service_new", LIBS);
 
   // TlsBackend
-  gidLink(g_tls_backend_get_type, "g_tls_backend_get_type", LIBS);
-  gidLink(g_tls_backend_get_default, "g_tls_backend_get_default", LIBS);
-  gidLink(g_tls_backend_get_certificate_type, "g_tls_backend_get_certificate_type", LIBS);
-  gidLink(g_tls_backend_get_client_connection_type, "g_tls_backend_get_client_connection_type", LIBS);
-  gidLink(g_tls_backend_get_default_database, "g_tls_backend_get_default_database", LIBS);
-  gidLink(g_tls_backend_get_dtls_client_connection_type, "g_tls_backend_get_dtls_client_connection_type", LIBS);
-  gidLink(g_tls_backend_get_dtls_server_connection_type, "g_tls_backend_get_dtls_server_connection_type", LIBS);
-  gidLink(g_tls_backend_get_file_database_type, "g_tls_backend_get_file_database_type", LIBS);
-  gidLink(g_tls_backend_get_server_connection_type, "g_tls_backend_get_server_connection_type", LIBS);
-  gidLink(g_tls_backend_set_default_database, "g_tls_backend_set_default_database", LIBS);
-  gidLink(g_tls_backend_supports_dtls, "g_tls_backend_supports_dtls", LIBS);
-  gidLink(g_tls_backend_supports_tls, "g_tls_backend_supports_tls", LIBS);
+  gidLink(cast(void**)&g_tls_backend_get_type, "g_tls_backend_get_type", LIBS);
+  gidLink(cast(void**)&g_tls_backend_get_default, "g_tls_backend_get_default", LIBS);
+  gidLink(cast(void**)&g_tls_backend_get_certificate_type, "g_tls_backend_get_certificate_type", LIBS);
+  gidLink(cast(void**)&g_tls_backend_get_client_connection_type, "g_tls_backend_get_client_connection_type", LIBS);
+  gidLink(cast(void**)&g_tls_backend_get_default_database, "g_tls_backend_get_default_database", LIBS);
+  gidLink(cast(void**)&g_tls_backend_get_dtls_client_connection_type, "g_tls_backend_get_dtls_client_connection_type", LIBS);
+  gidLink(cast(void**)&g_tls_backend_get_dtls_server_connection_type, "g_tls_backend_get_dtls_server_connection_type", LIBS);
+  gidLink(cast(void**)&g_tls_backend_get_file_database_type, "g_tls_backend_get_file_database_type", LIBS);
+  gidLink(cast(void**)&g_tls_backend_get_server_connection_type, "g_tls_backend_get_server_connection_type", LIBS);
+  gidLink(cast(void**)&g_tls_backend_set_default_database, "g_tls_backend_set_default_database", LIBS);
+  gidLink(cast(void**)&g_tls_backend_supports_dtls, "g_tls_backend_supports_dtls", LIBS);
+  gidLink(cast(void**)&g_tls_backend_supports_tls, "g_tls_backend_supports_tls", LIBS);
 
   // TlsCertificate
-  gidLink(g_tls_certificate_get_type, "g_tls_certificate_get_type", LIBS);
-  gidLink(g_tls_certificate_new_from_file, "g_tls_certificate_new_from_file", LIBS);
-  gidLink(g_tls_certificate_new_from_file_with_password, "g_tls_certificate_new_from_file_with_password", LIBS);
-  gidLink(g_tls_certificate_new_from_files, "g_tls_certificate_new_from_files", LIBS);
-  gidLink(g_tls_certificate_new_from_pem, "g_tls_certificate_new_from_pem", LIBS);
-  gidLink(g_tls_certificate_new_from_pkcs11_uris, "g_tls_certificate_new_from_pkcs11_uris", LIBS);
-  gidLink(g_tls_certificate_new_from_pkcs12, "g_tls_certificate_new_from_pkcs12", LIBS);
-  gidLink(g_tls_certificate_list_new_from_file, "g_tls_certificate_list_new_from_file", LIBS);
-  gidLink(g_tls_certificate_get_dns_names, "g_tls_certificate_get_dns_names", LIBS);
-  gidLink(g_tls_certificate_get_ip_addresses, "g_tls_certificate_get_ip_addresses", LIBS);
-  gidLink(g_tls_certificate_get_issuer, "g_tls_certificate_get_issuer", LIBS);
-  gidLink(g_tls_certificate_get_issuer_name, "g_tls_certificate_get_issuer_name", LIBS);
-  gidLink(g_tls_certificate_get_not_valid_after, "g_tls_certificate_get_not_valid_after", LIBS);
-  gidLink(g_tls_certificate_get_not_valid_before, "g_tls_certificate_get_not_valid_before", LIBS);
-  gidLink(g_tls_certificate_get_subject_name, "g_tls_certificate_get_subject_name", LIBS);
-  gidLink(g_tls_certificate_is_same, "g_tls_certificate_is_same", LIBS);
-  gidLink(g_tls_certificate_verify, "g_tls_certificate_verify", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_get_type, "g_tls_certificate_get_type", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_new_from_file, "g_tls_certificate_new_from_file", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_new_from_file_with_password, "g_tls_certificate_new_from_file_with_password", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_new_from_files, "g_tls_certificate_new_from_files", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_new_from_pem, "g_tls_certificate_new_from_pem", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_new_from_pkcs11_uris, "g_tls_certificate_new_from_pkcs11_uris", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_new_from_pkcs12, "g_tls_certificate_new_from_pkcs12", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_list_new_from_file, "g_tls_certificate_list_new_from_file", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_get_dns_names, "g_tls_certificate_get_dns_names", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_get_ip_addresses, "g_tls_certificate_get_ip_addresses", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_get_issuer, "g_tls_certificate_get_issuer", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_get_issuer_name, "g_tls_certificate_get_issuer_name", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_get_not_valid_after, "g_tls_certificate_get_not_valid_after", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_get_not_valid_before, "g_tls_certificate_get_not_valid_before", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_get_subject_name, "g_tls_certificate_get_subject_name", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_is_same, "g_tls_certificate_is_same", LIBS);
+  gidLink(cast(void**)&g_tls_certificate_verify, "g_tls_certificate_verify", LIBS);
 
   // TlsClientConnection
-  gidLink(g_tls_client_connection_get_type, "g_tls_client_connection_get_type", LIBS);
-  gidLink(g_tls_client_connection_new, "g_tls_client_connection_new", LIBS);
-  gidLink(g_tls_client_connection_copy_session_state, "g_tls_client_connection_copy_session_state", LIBS);
-  gidLink(g_tls_client_connection_get_accepted_cas, "g_tls_client_connection_get_accepted_cas", LIBS);
-  gidLink(g_tls_client_connection_get_server_identity, "g_tls_client_connection_get_server_identity", LIBS);
-  gidLink(g_tls_client_connection_get_use_ssl3, "g_tls_client_connection_get_use_ssl3", LIBS);
-  gidLink(g_tls_client_connection_get_validation_flags, "g_tls_client_connection_get_validation_flags", LIBS);
-  gidLink(g_tls_client_connection_set_server_identity, "g_tls_client_connection_set_server_identity", LIBS);
-  gidLink(g_tls_client_connection_set_use_ssl3, "g_tls_client_connection_set_use_ssl3", LIBS);
-  gidLink(g_tls_client_connection_set_validation_flags, "g_tls_client_connection_set_validation_flags", LIBS);
+  gidLink(cast(void**)&g_tls_client_connection_get_type, "g_tls_client_connection_get_type", LIBS);
+  gidLink(cast(void**)&g_tls_client_connection_new, "g_tls_client_connection_new", LIBS);
+  gidLink(cast(void**)&g_tls_client_connection_copy_session_state, "g_tls_client_connection_copy_session_state", LIBS);
+  gidLink(cast(void**)&g_tls_client_connection_get_accepted_cas, "g_tls_client_connection_get_accepted_cas", LIBS);
+  gidLink(cast(void**)&g_tls_client_connection_get_server_identity, "g_tls_client_connection_get_server_identity", LIBS);
+  gidLink(cast(void**)&g_tls_client_connection_get_use_ssl3, "g_tls_client_connection_get_use_ssl3", LIBS);
+  gidLink(cast(void**)&g_tls_client_connection_get_validation_flags, "g_tls_client_connection_get_validation_flags", LIBS);
+  gidLink(cast(void**)&g_tls_client_connection_set_server_identity, "g_tls_client_connection_set_server_identity", LIBS);
+  gidLink(cast(void**)&g_tls_client_connection_set_use_ssl3, "g_tls_client_connection_set_use_ssl3", LIBS);
+  gidLink(cast(void**)&g_tls_client_connection_set_validation_flags, "g_tls_client_connection_set_validation_flags", LIBS);
 
   // TlsConnection
-  gidLink(g_tls_connection_get_type, "g_tls_connection_get_type", LIBS);
-  gidLink(g_tls_connection_emit_accept_certificate, "g_tls_connection_emit_accept_certificate", LIBS);
-  gidLink(g_tls_connection_get_certificate, "g_tls_connection_get_certificate", LIBS);
-  gidLink(g_tls_connection_get_channel_binding_data, "g_tls_connection_get_channel_binding_data", LIBS);
-  gidLink(g_tls_connection_get_ciphersuite_name, "g_tls_connection_get_ciphersuite_name", LIBS);
-  gidLink(g_tls_connection_get_database, "g_tls_connection_get_database", LIBS);
-  gidLink(g_tls_connection_get_interaction, "g_tls_connection_get_interaction", LIBS);
-  gidLink(g_tls_connection_get_negotiated_protocol, "g_tls_connection_get_negotiated_protocol", LIBS);
-  gidLink(g_tls_connection_get_peer_certificate, "g_tls_connection_get_peer_certificate", LIBS);
-  gidLink(g_tls_connection_get_peer_certificate_errors, "g_tls_connection_get_peer_certificate_errors", LIBS);
-  gidLink(g_tls_connection_get_protocol_version, "g_tls_connection_get_protocol_version", LIBS);
-  gidLink(g_tls_connection_get_rehandshake_mode, "g_tls_connection_get_rehandshake_mode", LIBS);
-  gidLink(g_tls_connection_get_require_close_notify, "g_tls_connection_get_require_close_notify", LIBS);
-  gidLink(g_tls_connection_get_use_system_certdb, "g_tls_connection_get_use_system_certdb", LIBS);
-  gidLink(g_tls_connection_handshake, "g_tls_connection_handshake", LIBS);
-  gidLink(g_tls_connection_handshake_async, "g_tls_connection_handshake_async", LIBS);
-  gidLink(g_tls_connection_handshake_finish, "g_tls_connection_handshake_finish", LIBS);
-  gidLink(g_tls_connection_set_advertised_protocols, "g_tls_connection_set_advertised_protocols", LIBS);
-  gidLink(g_tls_connection_set_certificate, "g_tls_connection_set_certificate", LIBS);
-  gidLink(g_tls_connection_set_database, "g_tls_connection_set_database", LIBS);
-  gidLink(g_tls_connection_set_interaction, "g_tls_connection_set_interaction", LIBS);
-  gidLink(g_tls_connection_set_rehandshake_mode, "g_tls_connection_set_rehandshake_mode", LIBS);
-  gidLink(g_tls_connection_set_require_close_notify, "g_tls_connection_set_require_close_notify", LIBS);
-  gidLink(g_tls_connection_set_use_system_certdb, "g_tls_connection_set_use_system_certdb", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_type, "g_tls_connection_get_type", LIBS);
+  gidLink(cast(void**)&g_tls_connection_emit_accept_certificate, "g_tls_connection_emit_accept_certificate", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_certificate, "g_tls_connection_get_certificate", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_channel_binding_data, "g_tls_connection_get_channel_binding_data", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_ciphersuite_name, "g_tls_connection_get_ciphersuite_name", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_database, "g_tls_connection_get_database", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_interaction, "g_tls_connection_get_interaction", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_negotiated_protocol, "g_tls_connection_get_negotiated_protocol", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_peer_certificate, "g_tls_connection_get_peer_certificate", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_peer_certificate_errors, "g_tls_connection_get_peer_certificate_errors", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_protocol_version, "g_tls_connection_get_protocol_version", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_rehandshake_mode, "g_tls_connection_get_rehandshake_mode", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_require_close_notify, "g_tls_connection_get_require_close_notify", LIBS);
+  gidLink(cast(void**)&g_tls_connection_get_use_system_certdb, "g_tls_connection_get_use_system_certdb", LIBS);
+  gidLink(cast(void**)&g_tls_connection_handshake, "g_tls_connection_handshake", LIBS);
+  gidLink(cast(void**)&g_tls_connection_handshake_async, "g_tls_connection_handshake_async", LIBS);
+  gidLink(cast(void**)&g_tls_connection_handshake_finish, "g_tls_connection_handshake_finish", LIBS);
+  gidLink(cast(void**)&g_tls_connection_set_advertised_protocols, "g_tls_connection_set_advertised_protocols", LIBS);
+  gidLink(cast(void**)&g_tls_connection_set_certificate, "g_tls_connection_set_certificate", LIBS);
+  gidLink(cast(void**)&g_tls_connection_set_database, "g_tls_connection_set_database", LIBS);
+  gidLink(cast(void**)&g_tls_connection_set_interaction, "g_tls_connection_set_interaction", LIBS);
+  gidLink(cast(void**)&g_tls_connection_set_rehandshake_mode, "g_tls_connection_set_rehandshake_mode", LIBS);
+  gidLink(cast(void**)&g_tls_connection_set_require_close_notify, "g_tls_connection_set_require_close_notify", LIBS);
+  gidLink(cast(void**)&g_tls_connection_set_use_system_certdb, "g_tls_connection_set_use_system_certdb", LIBS);
 
   // TlsDatabase
-  gidLink(g_tls_database_get_type, "g_tls_database_get_type", LIBS);
-  gidLink(g_tls_database_create_certificate_handle, "g_tls_database_create_certificate_handle", LIBS);
-  gidLink(g_tls_database_lookup_certificate_for_handle, "g_tls_database_lookup_certificate_for_handle", LIBS);
-  gidLink(g_tls_database_lookup_certificate_for_handle_async, "g_tls_database_lookup_certificate_for_handle_async", LIBS);
-  gidLink(g_tls_database_lookup_certificate_for_handle_finish, "g_tls_database_lookup_certificate_for_handle_finish", LIBS);
-  gidLink(g_tls_database_lookup_certificate_issuer, "g_tls_database_lookup_certificate_issuer", LIBS);
-  gidLink(g_tls_database_lookup_certificate_issuer_async, "g_tls_database_lookup_certificate_issuer_async", LIBS);
-  gidLink(g_tls_database_lookup_certificate_issuer_finish, "g_tls_database_lookup_certificate_issuer_finish", LIBS);
-  gidLink(g_tls_database_lookup_certificates_issued_by, "g_tls_database_lookup_certificates_issued_by", LIBS);
-  gidLink(g_tls_database_lookup_certificates_issued_by_async, "g_tls_database_lookup_certificates_issued_by_async", LIBS);
-  gidLink(g_tls_database_lookup_certificates_issued_by_finish, "g_tls_database_lookup_certificates_issued_by_finish", LIBS);
-  gidLink(g_tls_database_verify_chain, "g_tls_database_verify_chain", LIBS);
-  gidLink(g_tls_database_verify_chain_async, "g_tls_database_verify_chain_async", LIBS);
-  gidLink(g_tls_database_verify_chain_finish, "g_tls_database_verify_chain_finish", LIBS);
+  gidLink(cast(void**)&g_tls_database_get_type, "g_tls_database_get_type", LIBS);
+  gidLink(cast(void**)&g_tls_database_create_certificate_handle, "g_tls_database_create_certificate_handle", LIBS);
+  gidLink(cast(void**)&g_tls_database_lookup_certificate_for_handle, "g_tls_database_lookup_certificate_for_handle", LIBS);
+  gidLink(cast(void**)&g_tls_database_lookup_certificate_for_handle_async, "g_tls_database_lookup_certificate_for_handle_async", LIBS);
+  gidLink(cast(void**)&g_tls_database_lookup_certificate_for_handle_finish, "g_tls_database_lookup_certificate_for_handle_finish", LIBS);
+  gidLink(cast(void**)&g_tls_database_lookup_certificate_issuer, "g_tls_database_lookup_certificate_issuer", LIBS);
+  gidLink(cast(void**)&g_tls_database_lookup_certificate_issuer_async, "g_tls_database_lookup_certificate_issuer_async", LIBS);
+  gidLink(cast(void**)&g_tls_database_lookup_certificate_issuer_finish, "g_tls_database_lookup_certificate_issuer_finish", LIBS);
+  gidLink(cast(void**)&g_tls_database_lookup_certificates_issued_by, "g_tls_database_lookup_certificates_issued_by", LIBS);
+  gidLink(cast(void**)&g_tls_database_lookup_certificates_issued_by_async, "g_tls_database_lookup_certificates_issued_by_async", LIBS);
+  gidLink(cast(void**)&g_tls_database_lookup_certificates_issued_by_finish, "g_tls_database_lookup_certificates_issued_by_finish", LIBS);
+  gidLink(cast(void**)&g_tls_database_verify_chain, "g_tls_database_verify_chain", LIBS);
+  gidLink(cast(void**)&g_tls_database_verify_chain_async, "g_tls_database_verify_chain_async", LIBS);
+  gidLink(cast(void**)&g_tls_database_verify_chain_finish, "g_tls_database_verify_chain_finish", LIBS);
 
   // TlsFileDatabase
-  gidLink(g_tls_file_database_get_type, "g_tls_file_database_get_type", LIBS);
-  gidLink(g_tls_file_database_new, "g_tls_file_database_new", LIBS);
+  gidLink(cast(void**)&g_tls_file_database_get_type, "g_tls_file_database_get_type", LIBS);
+  gidLink(cast(void**)&g_tls_file_database_new, "g_tls_file_database_new", LIBS);
 
   // TlsInteraction
-  gidLink(g_tls_interaction_get_type, "g_tls_interaction_get_type", LIBS);
-  gidLink(g_tls_interaction_ask_password, "g_tls_interaction_ask_password", LIBS);
-  gidLink(g_tls_interaction_ask_password_async, "g_tls_interaction_ask_password_async", LIBS);
-  gidLink(g_tls_interaction_ask_password_finish, "g_tls_interaction_ask_password_finish", LIBS);
-  gidLink(g_tls_interaction_invoke_ask_password, "g_tls_interaction_invoke_ask_password", LIBS);
-  gidLink(g_tls_interaction_invoke_request_certificate, "g_tls_interaction_invoke_request_certificate", LIBS);
-  gidLink(g_tls_interaction_request_certificate, "g_tls_interaction_request_certificate", LIBS);
-  gidLink(g_tls_interaction_request_certificate_async, "g_tls_interaction_request_certificate_async", LIBS);
-  gidLink(g_tls_interaction_request_certificate_finish, "g_tls_interaction_request_certificate_finish", LIBS);
+  gidLink(cast(void**)&g_tls_interaction_get_type, "g_tls_interaction_get_type", LIBS);
+  gidLink(cast(void**)&g_tls_interaction_ask_password, "g_tls_interaction_ask_password", LIBS);
+  gidLink(cast(void**)&g_tls_interaction_ask_password_async, "g_tls_interaction_ask_password_async", LIBS);
+  gidLink(cast(void**)&g_tls_interaction_ask_password_finish, "g_tls_interaction_ask_password_finish", LIBS);
+  gidLink(cast(void**)&g_tls_interaction_invoke_ask_password, "g_tls_interaction_invoke_ask_password", LIBS);
+  gidLink(cast(void**)&g_tls_interaction_invoke_request_certificate, "g_tls_interaction_invoke_request_certificate", LIBS);
+  gidLink(cast(void**)&g_tls_interaction_request_certificate, "g_tls_interaction_request_certificate", LIBS);
+  gidLink(cast(void**)&g_tls_interaction_request_certificate_async, "g_tls_interaction_request_certificate_async", LIBS);
+  gidLink(cast(void**)&g_tls_interaction_request_certificate_finish, "g_tls_interaction_request_certificate_finish", LIBS);
 
   // TlsPassword
-  gidLink(g_tls_password_get_type, "g_tls_password_get_type", LIBS);
-  gidLink(g_tls_password_new, "g_tls_password_new", LIBS);
-  gidLink(g_tls_password_get_description, "g_tls_password_get_description", LIBS);
-  gidLink(g_tls_password_get_flags, "g_tls_password_get_flags", LIBS);
-  gidLink(g_tls_password_get_value, "g_tls_password_get_value", LIBS);
-  gidLink(g_tls_password_get_warning, "g_tls_password_get_warning", LIBS);
-  gidLink(g_tls_password_set_description, "g_tls_password_set_description", LIBS);
-  gidLink(g_tls_password_set_flags, "g_tls_password_set_flags", LIBS);
-  gidLink(g_tls_password_set_value, "g_tls_password_set_value", LIBS);
-  gidLink(g_tls_password_set_value_full, "g_tls_password_set_value_full", LIBS);
-  gidLink(g_tls_password_set_warning, "g_tls_password_set_warning", LIBS);
+  gidLink(cast(void**)&g_tls_password_get_type, "g_tls_password_get_type", LIBS);
+  gidLink(cast(void**)&g_tls_password_new, "g_tls_password_new", LIBS);
+  gidLink(cast(void**)&g_tls_password_get_description, "g_tls_password_get_description", LIBS);
+  gidLink(cast(void**)&g_tls_password_get_flags, "g_tls_password_get_flags", LIBS);
+  gidLink(cast(void**)&g_tls_password_get_value, "g_tls_password_get_value", LIBS);
+  gidLink(cast(void**)&g_tls_password_get_warning, "g_tls_password_get_warning", LIBS);
+  gidLink(cast(void**)&g_tls_password_set_description, "g_tls_password_set_description", LIBS);
+  gidLink(cast(void**)&g_tls_password_set_flags, "g_tls_password_set_flags", LIBS);
+  gidLink(cast(void**)&g_tls_password_set_value, "g_tls_password_set_value", LIBS);
+  gidLink(cast(void**)&g_tls_password_set_value_full, "g_tls_password_set_value_full", LIBS);
+  gidLink(cast(void**)&g_tls_password_set_warning, "g_tls_password_set_warning", LIBS);
 
   // TlsServerConnection
-  gidLink(g_tls_server_connection_get_type, "g_tls_server_connection_get_type", LIBS);
-  gidLink(g_tls_server_connection_new, "g_tls_server_connection_new", LIBS);
+  gidLink(cast(void**)&g_tls_server_connection_get_type, "g_tls_server_connection_get_type", LIBS);
+  gidLink(cast(void**)&g_tls_server_connection_new, "g_tls_server_connection_new", LIBS);
 
   // UnixConnection
-  gidLink(g_unix_connection_get_type, "g_unix_connection_get_type", LIBS);
-  gidLink(g_unix_connection_receive_credentials, "g_unix_connection_receive_credentials", LIBS);
-  gidLink(g_unix_connection_receive_credentials_async, "g_unix_connection_receive_credentials_async", LIBS);
-  gidLink(g_unix_connection_receive_credentials_finish, "g_unix_connection_receive_credentials_finish", LIBS);
-  gidLink(g_unix_connection_receive_fd, "g_unix_connection_receive_fd", LIBS);
-  gidLink(g_unix_connection_send_credentials, "g_unix_connection_send_credentials", LIBS);
-  gidLink(g_unix_connection_send_credentials_async, "g_unix_connection_send_credentials_async", LIBS);
-  gidLink(g_unix_connection_send_credentials_finish, "g_unix_connection_send_credentials_finish", LIBS);
-  gidLink(g_unix_connection_send_fd, "g_unix_connection_send_fd", LIBS);
+  gidLink(cast(void**)&g_unix_connection_get_type, "g_unix_connection_get_type", LIBS);
+  gidLink(cast(void**)&g_unix_connection_receive_credentials, "g_unix_connection_receive_credentials", LIBS);
+  gidLink(cast(void**)&g_unix_connection_receive_credentials_async, "g_unix_connection_receive_credentials_async", LIBS);
+  gidLink(cast(void**)&g_unix_connection_receive_credentials_finish, "g_unix_connection_receive_credentials_finish", LIBS);
+  gidLink(cast(void**)&g_unix_connection_receive_fd, "g_unix_connection_receive_fd", LIBS);
+  gidLink(cast(void**)&g_unix_connection_send_credentials, "g_unix_connection_send_credentials", LIBS);
+  gidLink(cast(void**)&g_unix_connection_send_credentials_async, "g_unix_connection_send_credentials_async", LIBS);
+  gidLink(cast(void**)&g_unix_connection_send_credentials_finish, "g_unix_connection_send_credentials_finish", LIBS);
+  gidLink(cast(void**)&g_unix_connection_send_fd, "g_unix_connection_send_fd", LIBS);
 
   // UnixCredentialsMessage
-  gidLink(g_unix_credentials_message_get_type, "g_unix_credentials_message_get_type", LIBS);
-  gidLink(g_unix_credentials_message_new, "g_unix_credentials_message_new", LIBS);
-  gidLink(g_unix_credentials_message_new_with_credentials, "g_unix_credentials_message_new_with_credentials", LIBS);
-  gidLink(g_unix_credentials_message_is_supported, "g_unix_credentials_message_is_supported", LIBS);
-  gidLink(g_unix_credentials_message_get_credentials, "g_unix_credentials_message_get_credentials", LIBS);
+  gidLink(cast(void**)&g_unix_credentials_message_get_type, "g_unix_credentials_message_get_type", LIBS);
+  gidLink(cast(void**)&g_unix_credentials_message_new, "g_unix_credentials_message_new", LIBS);
+  gidLink(cast(void**)&g_unix_credentials_message_new_with_credentials, "g_unix_credentials_message_new_with_credentials", LIBS);
+  gidLink(cast(void**)&g_unix_credentials_message_is_supported, "g_unix_credentials_message_is_supported", LIBS);
+  gidLink(cast(void**)&g_unix_credentials_message_get_credentials, "g_unix_credentials_message_get_credentials", LIBS);
 
   // UnixFDList
-  gidLink(g_unix_fd_list_get_type, "g_unix_fd_list_get_type", LIBS);
-  gidLink(g_unix_fd_list_new, "g_unix_fd_list_new", LIBS);
-  gidLink(g_unix_fd_list_new_from_array, "g_unix_fd_list_new_from_array", LIBS);
-  gidLink(g_unix_fd_list_append, "g_unix_fd_list_append", LIBS);
-  gidLink(g_unix_fd_list_get, "g_unix_fd_list_get", LIBS);
-  gidLink(g_unix_fd_list_get_length, "g_unix_fd_list_get_length", LIBS);
-  gidLink(g_unix_fd_list_peek_fds, "g_unix_fd_list_peek_fds", LIBS);
-  gidLink(g_unix_fd_list_steal_fds, "g_unix_fd_list_steal_fds", LIBS);
+  gidLink(cast(void**)&g_unix_fd_list_get_type, "g_unix_fd_list_get_type", LIBS);
+  gidLink(cast(void**)&g_unix_fd_list_new, "g_unix_fd_list_new", LIBS);
+  gidLink(cast(void**)&g_unix_fd_list_new_from_array, "g_unix_fd_list_new_from_array", LIBS);
+  gidLink(cast(void**)&g_unix_fd_list_append, "g_unix_fd_list_append", LIBS);
+  gidLink(cast(void**)&g_unix_fd_list_get, "g_unix_fd_list_get", LIBS);
+  gidLink(cast(void**)&g_unix_fd_list_get_length, "g_unix_fd_list_get_length", LIBS);
+  gidLink(cast(void**)&g_unix_fd_list_peek_fds, "g_unix_fd_list_peek_fds", LIBS);
+  gidLink(cast(void**)&g_unix_fd_list_steal_fds, "g_unix_fd_list_steal_fds", LIBS);
 
   // UnixFDMessage
-  gidLink(g_unix_fd_message_get_type, "g_unix_fd_message_get_type", LIBS);
-  gidLink(g_unix_fd_message_new, "g_unix_fd_message_new", LIBS);
-  gidLink(g_unix_fd_message_new_with_fd_list, "g_unix_fd_message_new_with_fd_list", LIBS);
-  gidLink(g_unix_fd_message_append_fd, "g_unix_fd_message_append_fd", LIBS);
-  gidLink(g_unix_fd_message_get_fd_list, "g_unix_fd_message_get_fd_list", LIBS);
-  gidLink(g_unix_fd_message_steal_fds, "g_unix_fd_message_steal_fds", LIBS);
+  gidLink(cast(void**)&g_unix_fd_message_get_type, "g_unix_fd_message_get_type", LIBS);
+  gidLink(cast(void**)&g_unix_fd_message_new, "g_unix_fd_message_new", LIBS);
+  gidLink(cast(void**)&g_unix_fd_message_new_with_fd_list, "g_unix_fd_message_new_with_fd_list", LIBS);
+  gidLink(cast(void**)&g_unix_fd_message_append_fd, "g_unix_fd_message_append_fd", LIBS);
+  gidLink(cast(void**)&g_unix_fd_message_get_fd_list, "g_unix_fd_message_get_fd_list", LIBS);
+  gidLink(cast(void**)&g_unix_fd_message_steal_fds, "g_unix_fd_message_steal_fds", LIBS);
 
   // UnixInputStream
-  gidLink(g_unix_input_stream_get_type, "g_unix_input_stream_get_type", LIBS);
-  gidLink(g_unix_input_stream_new, "g_unix_input_stream_new", LIBS);
-  gidLink(g_unix_input_stream_get_close_fd, "g_unix_input_stream_get_close_fd", LIBS);
-  gidLink(g_unix_input_stream_get_fd, "g_unix_input_stream_get_fd", LIBS);
-  gidLink(g_unix_input_stream_set_close_fd, "g_unix_input_stream_set_close_fd", LIBS);
+  gidLink(cast(void**)&g_unix_input_stream_get_type, "g_unix_input_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_unix_input_stream_new, "g_unix_input_stream_new", LIBS);
+  gidLink(cast(void**)&g_unix_input_stream_get_close_fd, "g_unix_input_stream_get_close_fd", LIBS);
+  gidLink(cast(void**)&g_unix_input_stream_get_fd, "g_unix_input_stream_get_fd", LIBS);
+  gidLink(cast(void**)&g_unix_input_stream_set_close_fd, "g_unix_input_stream_set_close_fd", LIBS);
 
   // UnixMountEntry
-  gidLink(g_unix_mount_entry_get_type, "g_unix_mount_entry_get_type", LIBS);
+  gidLink(cast(void**)&g_unix_mount_entry_get_type, "g_unix_mount_entry_get_type", LIBS);
 
   // UnixMountMonitor
-  gidLink(g_unix_mount_monitor_get_type, "g_unix_mount_monitor_get_type", LIBS);
-  gidLink(g_unix_mount_monitor_new, "g_unix_mount_monitor_new", LIBS);
-  gidLink(g_unix_mount_monitor_get, "g_unix_mount_monitor_get", LIBS);
-  gidLink(g_unix_mount_monitor_set_rate_limit, "g_unix_mount_monitor_set_rate_limit", LIBS);
+  gidLink(cast(void**)&g_unix_mount_monitor_get_type, "g_unix_mount_monitor_get_type", LIBS);
+  gidLink(cast(void**)&g_unix_mount_monitor_new, "g_unix_mount_monitor_new", LIBS);
+  gidLink(cast(void**)&g_unix_mount_monitor_get, "g_unix_mount_monitor_get", LIBS);
+  gidLink(cast(void**)&g_unix_mount_monitor_set_rate_limit, "g_unix_mount_monitor_set_rate_limit", LIBS);
 
   // UnixMountPoint
-  gidLink(g_unix_mount_point_get_type, "g_unix_mount_point_get_type", LIBS);
-  gidLink(g_unix_mount_point_compare, "g_unix_mount_point_compare", LIBS);
-  gidLink(g_unix_mount_point_copy, "g_unix_mount_point_copy", LIBS);
-  gidLink(g_unix_mount_point_free, "g_unix_mount_point_free", LIBS);
-  gidLink(g_unix_mount_point_get_device_path, "g_unix_mount_point_get_device_path", LIBS);
-  gidLink(g_unix_mount_point_get_fs_type, "g_unix_mount_point_get_fs_type", LIBS);
-  gidLink(g_unix_mount_point_get_mount_path, "g_unix_mount_point_get_mount_path", LIBS);
-  gidLink(g_unix_mount_point_get_options, "g_unix_mount_point_get_options", LIBS);
-  gidLink(g_unix_mount_point_guess_can_eject, "g_unix_mount_point_guess_can_eject", LIBS);
-  gidLink(g_unix_mount_point_guess_icon, "g_unix_mount_point_guess_icon", LIBS);
-  gidLink(g_unix_mount_point_guess_name, "g_unix_mount_point_guess_name", LIBS);
-  gidLink(g_unix_mount_point_guess_symbolic_icon, "g_unix_mount_point_guess_symbolic_icon", LIBS);
-  gidLink(g_unix_mount_point_is_loopback, "g_unix_mount_point_is_loopback", LIBS);
-  gidLink(g_unix_mount_point_is_readonly, "g_unix_mount_point_is_readonly", LIBS);
-  gidLink(g_unix_mount_point_is_user_mountable, "g_unix_mount_point_is_user_mountable", LIBS);
-  gidLink(g_unix_mount_point_at, "g_unix_mount_point_at", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_get_type, "g_unix_mount_point_get_type", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_compare, "g_unix_mount_point_compare", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_copy, "g_unix_mount_point_copy", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_free, "g_unix_mount_point_free", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_get_device_path, "g_unix_mount_point_get_device_path", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_get_fs_type, "g_unix_mount_point_get_fs_type", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_get_mount_path, "g_unix_mount_point_get_mount_path", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_get_options, "g_unix_mount_point_get_options", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_guess_can_eject, "g_unix_mount_point_guess_can_eject", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_guess_icon, "g_unix_mount_point_guess_icon", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_guess_name, "g_unix_mount_point_guess_name", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_guess_symbolic_icon, "g_unix_mount_point_guess_symbolic_icon", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_is_loopback, "g_unix_mount_point_is_loopback", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_is_readonly, "g_unix_mount_point_is_readonly", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_is_user_mountable, "g_unix_mount_point_is_user_mountable", LIBS);
+  gidLink(cast(void**)&g_unix_mount_point_at, "g_unix_mount_point_at", LIBS);
 
   // UnixOutputStream
-  gidLink(g_unix_output_stream_get_type, "g_unix_output_stream_get_type", LIBS);
-  gidLink(g_unix_output_stream_new, "g_unix_output_stream_new", LIBS);
-  gidLink(g_unix_output_stream_get_close_fd, "g_unix_output_stream_get_close_fd", LIBS);
-  gidLink(g_unix_output_stream_get_fd, "g_unix_output_stream_get_fd", LIBS);
-  gidLink(g_unix_output_stream_set_close_fd, "g_unix_output_stream_set_close_fd", LIBS);
+  gidLink(cast(void**)&g_unix_output_stream_get_type, "g_unix_output_stream_get_type", LIBS);
+  gidLink(cast(void**)&g_unix_output_stream_new, "g_unix_output_stream_new", LIBS);
+  gidLink(cast(void**)&g_unix_output_stream_get_close_fd, "g_unix_output_stream_get_close_fd", LIBS);
+  gidLink(cast(void**)&g_unix_output_stream_get_fd, "g_unix_output_stream_get_fd", LIBS);
+  gidLink(cast(void**)&g_unix_output_stream_set_close_fd, "g_unix_output_stream_set_close_fd", LIBS);
 
   // UnixSocketAddress
-  gidLink(g_unix_socket_address_get_type, "g_unix_socket_address_get_type", LIBS);
-  gidLink(g_unix_socket_address_new, "g_unix_socket_address_new", LIBS);
-  gidLink(g_unix_socket_address_new_abstract, "g_unix_socket_address_new_abstract", LIBS);
-  gidLink(g_unix_socket_address_new_with_type, "g_unix_socket_address_new_with_type", LIBS);
-  gidLink(g_unix_socket_address_abstract_names_supported, "g_unix_socket_address_abstract_names_supported", LIBS);
-  gidLink(g_unix_socket_address_get_address_type, "g_unix_socket_address_get_address_type", LIBS);
-  gidLink(g_unix_socket_address_get_is_abstract, "g_unix_socket_address_get_is_abstract", LIBS);
-  gidLink(g_unix_socket_address_get_path, "g_unix_socket_address_get_path", LIBS);
-  gidLink(g_unix_socket_address_get_path_len, "g_unix_socket_address_get_path_len", LIBS);
+  gidLink(cast(void**)&g_unix_socket_address_get_type, "g_unix_socket_address_get_type", LIBS);
+  gidLink(cast(void**)&g_unix_socket_address_new, "g_unix_socket_address_new", LIBS);
+  gidLink(cast(void**)&g_unix_socket_address_new_abstract, "g_unix_socket_address_new_abstract", LIBS);
+  gidLink(cast(void**)&g_unix_socket_address_new_with_type, "g_unix_socket_address_new_with_type", LIBS);
+  gidLink(cast(void**)&g_unix_socket_address_abstract_names_supported, "g_unix_socket_address_abstract_names_supported", LIBS);
+  gidLink(cast(void**)&g_unix_socket_address_get_address_type, "g_unix_socket_address_get_address_type", LIBS);
+  gidLink(cast(void**)&g_unix_socket_address_get_is_abstract, "g_unix_socket_address_get_is_abstract", LIBS);
+  gidLink(cast(void**)&g_unix_socket_address_get_path, "g_unix_socket_address_get_path", LIBS);
+  gidLink(cast(void**)&g_unix_socket_address_get_path_len, "g_unix_socket_address_get_path_len", LIBS);
 
   // Vfs
-  gidLink(g_vfs_get_type, "g_vfs_get_type", LIBS);
-  gidLink(g_vfs_get_default, "g_vfs_get_default", LIBS);
-  gidLink(g_vfs_get_local, "g_vfs_get_local", LIBS);
-  gidLink(g_vfs_get_file_for_path, "g_vfs_get_file_for_path", LIBS);
-  gidLink(g_vfs_get_file_for_uri, "g_vfs_get_file_for_uri", LIBS);
-  gidLink(g_vfs_get_supported_uri_schemes, "g_vfs_get_supported_uri_schemes", LIBS);
-  gidLink(g_vfs_is_active, "g_vfs_is_active", LIBS);
-  gidLink(g_vfs_parse_name, "g_vfs_parse_name", LIBS);
-  gidLink(g_vfs_register_uri_scheme, "g_vfs_register_uri_scheme", LIBS);
-  gidLink(g_vfs_unregister_uri_scheme, "g_vfs_unregister_uri_scheme", LIBS);
+  gidLink(cast(void**)&g_vfs_get_type, "g_vfs_get_type", LIBS);
+  gidLink(cast(void**)&g_vfs_get_default, "g_vfs_get_default", LIBS);
+  gidLink(cast(void**)&g_vfs_get_local, "g_vfs_get_local", LIBS);
+  gidLink(cast(void**)&g_vfs_get_file_for_path, "g_vfs_get_file_for_path", LIBS);
+  gidLink(cast(void**)&g_vfs_get_file_for_uri, "g_vfs_get_file_for_uri", LIBS);
+  gidLink(cast(void**)&g_vfs_get_supported_uri_schemes, "g_vfs_get_supported_uri_schemes", LIBS);
+  gidLink(cast(void**)&g_vfs_is_active, "g_vfs_is_active", LIBS);
+  gidLink(cast(void**)&g_vfs_parse_name, "g_vfs_parse_name", LIBS);
+  gidLink(cast(void**)&g_vfs_register_uri_scheme, "g_vfs_register_uri_scheme", LIBS);
+  gidLink(cast(void**)&g_vfs_unregister_uri_scheme, "g_vfs_unregister_uri_scheme", LIBS);
 
   // Volume
-  gidLink(g_volume_get_type, "g_volume_get_type", LIBS);
-  gidLink(g_volume_can_eject, "g_volume_can_eject", LIBS);
-  gidLink(g_volume_can_mount, "g_volume_can_mount", LIBS);
-  gidLink(g_volume_eject, "g_volume_eject", LIBS);
-  gidLink(g_volume_eject_finish, "g_volume_eject_finish", LIBS);
-  gidLink(g_volume_eject_with_operation, "g_volume_eject_with_operation", LIBS);
-  gidLink(g_volume_eject_with_operation_finish, "g_volume_eject_with_operation_finish", LIBS);
-  gidLink(g_volume_enumerate_identifiers, "g_volume_enumerate_identifiers", LIBS);
-  gidLink(g_volume_get_activation_root, "g_volume_get_activation_root", LIBS);
-  gidLink(g_volume_get_drive, "g_volume_get_drive", LIBS);
-  gidLink(g_volume_get_icon, "g_volume_get_icon", LIBS);
-  gidLink(g_volume_get_identifier, "g_volume_get_identifier", LIBS);
-  gidLink(g_volume_get_mount, "g_volume_get_mount", LIBS);
-  gidLink(g_volume_get_name, "g_volume_get_name", LIBS);
-  gidLink(g_volume_get_sort_key, "g_volume_get_sort_key", LIBS);
-  gidLink(g_volume_get_symbolic_icon, "g_volume_get_symbolic_icon", LIBS);
-  gidLink(g_volume_get_uuid, "g_volume_get_uuid", LIBS);
-  gidLink(g_volume_mount, "g_volume_mount", LIBS);
-  gidLink(g_volume_mount_finish, "g_volume_mount_finish", LIBS);
-  gidLink(g_volume_should_automount, "g_volume_should_automount", LIBS);
+  gidLink(cast(void**)&g_volume_get_type, "g_volume_get_type", LIBS);
+  gidLink(cast(void**)&g_volume_can_eject, "g_volume_can_eject", LIBS);
+  gidLink(cast(void**)&g_volume_can_mount, "g_volume_can_mount", LIBS);
+  gidLink(cast(void**)&g_volume_eject, "g_volume_eject", LIBS);
+  gidLink(cast(void**)&g_volume_eject_finish, "g_volume_eject_finish", LIBS);
+  gidLink(cast(void**)&g_volume_eject_with_operation, "g_volume_eject_with_operation", LIBS);
+  gidLink(cast(void**)&g_volume_eject_with_operation_finish, "g_volume_eject_with_operation_finish", LIBS);
+  gidLink(cast(void**)&g_volume_enumerate_identifiers, "g_volume_enumerate_identifiers", LIBS);
+  gidLink(cast(void**)&g_volume_get_activation_root, "g_volume_get_activation_root", LIBS);
+  gidLink(cast(void**)&g_volume_get_drive, "g_volume_get_drive", LIBS);
+  gidLink(cast(void**)&g_volume_get_icon, "g_volume_get_icon", LIBS);
+  gidLink(cast(void**)&g_volume_get_identifier, "g_volume_get_identifier", LIBS);
+  gidLink(cast(void**)&g_volume_get_mount, "g_volume_get_mount", LIBS);
+  gidLink(cast(void**)&g_volume_get_name, "g_volume_get_name", LIBS);
+  gidLink(cast(void**)&g_volume_get_sort_key, "g_volume_get_sort_key", LIBS);
+  gidLink(cast(void**)&g_volume_get_symbolic_icon, "g_volume_get_symbolic_icon", LIBS);
+  gidLink(cast(void**)&g_volume_get_uuid, "g_volume_get_uuid", LIBS);
+  gidLink(cast(void**)&g_volume_mount, "g_volume_mount", LIBS);
+  gidLink(cast(void**)&g_volume_mount_finish, "g_volume_mount_finish", LIBS);
+  gidLink(cast(void**)&g_volume_should_automount, "g_volume_should_automount", LIBS);
 
   // VolumeMonitor
-  gidLink(g_volume_monitor_get_type, "g_volume_monitor_get_type", LIBS);
-  gidLink(g_volume_monitor_adopt_orphan_mount, "g_volume_monitor_adopt_orphan_mount", LIBS);
-  gidLink(g_volume_monitor_get, "g_volume_monitor_get", LIBS);
-  gidLink(g_volume_monitor_get_connected_drives, "g_volume_monitor_get_connected_drives", LIBS);
-  gidLink(g_volume_monitor_get_mount_for_uuid, "g_volume_monitor_get_mount_for_uuid", LIBS);
-  gidLink(g_volume_monitor_get_mounts, "g_volume_monitor_get_mounts", LIBS);
-  gidLink(g_volume_monitor_get_volume_for_uuid, "g_volume_monitor_get_volume_for_uuid", LIBS);
-  gidLink(g_volume_monitor_get_volumes, "g_volume_monitor_get_volumes", LIBS);
+  gidLink(cast(void**)&g_volume_monitor_get_type, "g_volume_monitor_get_type", LIBS);
+  gidLink(cast(void**)&g_volume_monitor_adopt_orphan_mount, "g_volume_monitor_adopt_orphan_mount", LIBS);
+  gidLink(cast(void**)&g_volume_monitor_get, "g_volume_monitor_get", LIBS);
+  gidLink(cast(void**)&g_volume_monitor_get_connected_drives, "g_volume_monitor_get_connected_drives", LIBS);
+  gidLink(cast(void**)&g_volume_monitor_get_mount_for_uuid, "g_volume_monitor_get_mount_for_uuid", LIBS);
+  gidLink(cast(void**)&g_volume_monitor_get_mounts, "g_volume_monitor_get_mounts", LIBS);
+  gidLink(cast(void**)&g_volume_monitor_get_volume_for_uuid, "g_volume_monitor_get_volume_for_uuid", LIBS);
+  gidLink(cast(void**)&g_volume_monitor_get_volumes, "g_volume_monitor_get_volumes", LIBS);
 
   // ZlibCompressor
-  gidLink(g_zlib_compressor_get_type, "g_zlib_compressor_get_type", LIBS);
-  gidLink(g_zlib_compressor_new, "g_zlib_compressor_new", LIBS);
-  gidLink(g_zlib_compressor_get_file_info, "g_zlib_compressor_get_file_info", LIBS);
-  gidLink(g_zlib_compressor_set_file_info, "g_zlib_compressor_set_file_info", LIBS);
+  gidLink(cast(void**)&g_zlib_compressor_get_type, "g_zlib_compressor_get_type", LIBS);
+  gidLink(cast(void**)&g_zlib_compressor_new, "g_zlib_compressor_new", LIBS);
+  gidLink(cast(void**)&g_zlib_compressor_get_file_info, "g_zlib_compressor_get_file_info", LIBS);
+  gidLink(cast(void**)&g_zlib_compressor_set_file_info, "g_zlib_compressor_set_file_info", LIBS);
 
   // ZlibDecompressor
-  gidLink(g_zlib_decompressor_get_type, "g_zlib_decompressor_get_type", LIBS);
-  gidLink(g_zlib_decompressor_new, "g_zlib_decompressor_new", LIBS);
-  gidLink(g_zlib_decompressor_get_file_info, "g_zlib_decompressor_get_file_info", LIBS);
+  gidLink(cast(void**)&g_zlib_decompressor_get_type, "g_zlib_decompressor_get_type", LIBS);
+  gidLink(cast(void**)&g_zlib_decompressor_new, "g_zlib_decompressor_new", LIBS);
+  gidLink(cast(void**)&g_zlib_decompressor_get_file_info, "g_zlib_decompressor_get_file_info", LIBS);
 }

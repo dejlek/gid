@@ -1,5 +1,6 @@
 module Gid.c.functions;
 
+public import Gid.basictypes;
 import Gid.loader;
 import Gid.c.types;
 

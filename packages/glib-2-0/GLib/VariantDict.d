@@ -96,7 +96,8 @@ class VariantDict : Boxed
 
   static GType getType()
   {
-    return g_variant_dict_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_variant_dict_get_type != &gidSymbolNotFound ? g_variant_dict_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

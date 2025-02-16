@@ -385,7 +385,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   static GType getType()
   {
-    return gtk_widget_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_widget_get_type != &gidSymbolNotFound ? gtk_widget_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

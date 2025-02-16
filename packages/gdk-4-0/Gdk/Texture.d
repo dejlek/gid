@@ -40,7 +40,8 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
 
   static GType getType()
   {
-    return gdk_texture_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_texture_get_type != &gidSymbolNotFound ? gdk_texture_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

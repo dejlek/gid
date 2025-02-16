@@ -1,5 +1,6 @@
 module PangoCairo.c.types;
 
+public import Gid.basictypes;
 public import GObject.c.types;
 public import Pango.c.types;
 public import cairo.c.types;

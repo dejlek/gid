@@ -1,5 +1,6 @@
 module Gdk.c.types;
 
+public import Gid.basictypes;
 public import GdkPixbuf.c.types;
 public import Gio.c.types;
 public import Pango.c.types;

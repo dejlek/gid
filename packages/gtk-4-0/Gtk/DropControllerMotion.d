@@ -27,7 +27,8 @@ class DropControllerMotion : EventController
 
   static GType getType()
   {
-    return gtk_drop_controller_motion_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_drop_controller_motion_get_type != &gidSymbolNotFound ? gtk_drop_controller_motion_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

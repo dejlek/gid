@@ -1,5 +1,6 @@
 module HarfBuzz.c.types;
 
+public import Gid.basictypes;
 public import GObject.c.types;
 public import freetype2.c.types;
 

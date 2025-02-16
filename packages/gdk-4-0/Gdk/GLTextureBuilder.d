@@ -31,7 +31,8 @@ class GLTextureBuilder : ObjectG
 
   static GType getType()
   {
-    return gdk_gl_texture_builder_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_gl_texture_builder_get_type != &gidSymbolNotFound ? gdk_gl_texture_builder_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

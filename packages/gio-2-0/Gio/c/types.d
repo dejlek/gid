@@ -1,5 +1,6 @@
 module Gio.c.types;
 
+public import Gid.basictypes;
 public import GLib.c.types;
 public import GModule.c.types;
 public import GObject.c.types;

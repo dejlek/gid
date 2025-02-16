@@ -39,7 +39,8 @@ class TextTagTable : ObjectG, Buildable
 
   static GType getType()
   {
-    return gtk_text_tag_table_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_text_tag_table_get_type != &gidSymbolNotFound ? gtk_text_tag_table_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

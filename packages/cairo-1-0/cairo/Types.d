@@ -62,8 +62,8 @@ alias RasterSourceSnapshotFunc = Status delegate(Pattern pattern);
 alias ReadFunc = Status delegate(ubyte[] data);
 alias SurfaceObserverCallback = void delegate(Surface observer, Surface target);
 alias UserScaledFontInitFunc = Status delegate(ScaledFont scaledFont, Context cr, FontExtents extents);
-alias UserScaledFontRenderGlyphFunc = Status delegate(ScaledFont scaledFont, ulong glyph, Context cr, TextExtents extents);
-alias UserScaledFontUnicodeToGlyphFunc = Status delegate(ScaledFont scaledFont, ulong unicode, out ulong glyphIndex);
+alias UserScaledFontRenderGlyphFunc = Status delegate(ScaledFont scaledFont, gulong glyph, Context cr, TextExtents extents);
+alias UserScaledFontUnicodeToGlyphFunc = Status delegate(ScaledFont scaledFont, gulong unicode, out gulong glyphIndex);
 alias WriteFunc = Status delegate(ubyte[] data);
 
 /**

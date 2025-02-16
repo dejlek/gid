@@ -25,7 +25,8 @@ class ScriptIter : Boxed
 
   static GType getType()
   {
-    return pango_script_iter_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())pango_script_iter_get_type != &gidSymbolNotFound ? pango_script_iter_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -29,7 +29,8 @@ class NetworkAddress : ObjectG, SocketConnectable
 
   static GType getType()
   {
-    return g_network_address_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_network_address_get_type != &gidSymbolNotFound ? g_network_address_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -18,7 +18,8 @@ class Buffer : ObjectG
 
   static GType getType()
   {
-    return garrow_buffer_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_buffer_get_type != &gidSymbolNotFound ? garrow_buffer_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

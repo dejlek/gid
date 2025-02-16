@@ -39,7 +39,8 @@ interface Action
 
   static GType getType()
   {
-    return g_action_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_action_get_type != &gidSymbolNotFound ? g_action_get_type() : cast(GType)0;
   }
 
   /**

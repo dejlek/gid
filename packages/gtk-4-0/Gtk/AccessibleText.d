@@ -19,7 +19,8 @@ interface AccessibleText
 
   static GType getType()
   {
-    return gtk_accessible_text_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_accessible_text_get_type != &gidSymbolNotFound ? gtk_accessible_text_get_type() : cast(GType)0;
   }
 
   /**

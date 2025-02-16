@@ -26,7 +26,8 @@ class InetAddressMask : ObjectG, Initable
 
   static GType getType()
   {
-    return g_inet_address_mask_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_inet_address_mask_get_type != &gidSymbolNotFound ? g_inet_address_mask_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

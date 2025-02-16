@@ -65,7 +65,8 @@ class ProgressBar : Widget, AccessibleRange, Orientable
 
   static GType getType()
   {
-    return gtk_progress_bar_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_progress_bar_get_type != &gidSymbolNotFound ? gtk_progress_bar_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

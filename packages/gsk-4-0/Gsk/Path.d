@@ -43,7 +43,8 @@ class Path : Boxed
 
   static GType getType()
   {
-    return gsk_path_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gsk_path_get_type != &gidSymbolNotFound ? gsk_path_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

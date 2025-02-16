@@ -26,7 +26,8 @@ interface SectionModel
 
   static GType getType()
   {
-    return gtk_section_model_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_section_model_get_type != &gidSymbolNotFound ? gtk_section_model_get_type() : cast(GType)0;
   }
 
   /**

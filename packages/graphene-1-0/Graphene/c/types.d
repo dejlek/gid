@@ -1,5 +1,6 @@
 module Graphene.c.types;
 
+public import Gid.basictypes;
 public import GObject.c.types;
 
 /**

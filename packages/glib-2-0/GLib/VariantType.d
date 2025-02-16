@@ -6,7 +6,6 @@ import GLib.c.types;
 import GObject.Boxed;
 import Gid.gid;
 
-
 import std.traits : isSomeString;
 import std.typecons : isTuple;
 
@@ -160,7 +159,8 @@ class VariantType : Boxed
 
   static GType getType()
   {
-    return g_variant_type_get_gtype();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_variant_type_get_gtype != &gidSymbolNotFound ? g_variant_type_get_gtype() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -22,7 +22,8 @@ class AlternativeTrigger : ShortcutTrigger
 
   static GType getType()
   {
-    return gtk_alternative_trigger_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_alternative_trigger_get_type != &gidSymbolNotFound ? gtk_alternative_trigger_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

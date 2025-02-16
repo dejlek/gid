@@ -29,7 +29,8 @@ class TlsCertificate : ObjectG
 
   static GType getType()
   {
-    return g_tls_certificate_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_tls_certificate_get_type != &gidSymbolNotFound ? g_tls_certificate_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

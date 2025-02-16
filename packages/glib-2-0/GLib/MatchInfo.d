@@ -27,7 +27,8 @@ class MatchInfo : Boxed
 
   static GType getType()
   {
-    return g_match_info_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_match_info_get_type != &gidSymbolNotFound ? g_match_info_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -34,7 +34,8 @@ class Triangle : Boxed
 
   static GType getType()
   {
-    return graphene_triangle_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())graphene_triangle_get_type != &gidSymbolNotFound ? graphene_triangle_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

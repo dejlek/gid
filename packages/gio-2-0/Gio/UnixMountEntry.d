@@ -25,7 +25,8 @@ class UnixMountEntry : Boxed
 
   static GType getType()
   {
-    return g_unix_mount_entry_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_unix_mount_entry_get_type != &gidSymbolNotFound ? g_unix_mount_entry_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

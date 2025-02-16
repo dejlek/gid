@@ -32,7 +32,8 @@ class PrintSettings : ObjectG
 
   static GType getType()
   {
-    return gtk_print_settings_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_print_settings_get_type != &gidSymbolNotFound ? gtk_print_settings_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

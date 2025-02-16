@@ -1,5 +1,6 @@
 module Pango.c.functions;
 
+public import Gid.basictypes;
 import Gid.loader;
 import Pango.c.types;
 public import GObject.c.types;
@@ -23,7 +24,7 @@ __gshared extern(C)
   PangoAttribute* function(const(char)* features) c_pango_attr_font_features_new;
 
   // AttrIterator
-  GType function() c_pango_attr_iterator_get_type;
+  extern(C) GType function() c_pango_attr_iterator_get_type;
   PangoAttrIterator* function(PangoAttrIterator* iterator) c_pango_attr_iterator_copy;
   void function(PangoAttrIterator* iterator) c_pango_attr_iterator_destroy;
   PangoAttribute* function(PangoAttrIterator* iterator, PangoAttrType type) c_pango_attr_iterator_get;
@@ -36,7 +37,7 @@ __gshared extern(C)
   PangoAttribute* function(PangoLanguage* language) c_pango_attr_language_new;
 
   // AttrList
-  GType function() c_pango_attr_list_get_type;
+  extern(C) GType function() c_pango_attr_list_get_type;
   PangoAttrList* function() c_pango_attr_list_new;
   void function(PangoAttrList* list, PangoAttribute* attr) c_pango_attr_list_change;
   PangoAttrList* function(PangoAttrList* list) c_pango_attr_list_copy;
@@ -62,7 +63,7 @@ __gshared extern(C)
   PangoAttribute* function(int size) c_pango_attr_size_new_absolute;
 
   // Attribute
-  GType function() c_pango_attribute_get_type;
+  extern(C) GType function() c_pango_attribute_get_type;
   PangoAttrColor* function(PangoAttribute* attr) c_pango_attribute_as_color;
   PangoAttrFloat* function(PangoAttribute* attr) c_pango_attribute_as_float;
   PangoAttrFontDesc* function(PangoAttribute* attr) c_pango_attribute_as_font_desc;
@@ -78,7 +79,7 @@ __gshared extern(C)
   void function(PangoAttribute* attr, const(PangoAttrClass)* klass) c_pango_attribute_init;
 
   // Color
-  GType function() c_pango_color_get_type;
+  extern(C) GType function() c_pango_color_get_type;
   PangoColor* function(const(PangoColor)* src) c_pango_color_copy;
   void function(PangoColor* color) c_pango_color_free;
   bool function(PangoColor* color, const(char)* spec) c_pango_color_parse;
@@ -86,7 +87,7 @@ __gshared extern(C)
   char* function(const(PangoColor)* color) c_pango_color_to_string;
 
   // Context
-  GType function() c_pango_context_get_type;
+  extern(C) GType function() c_pango_context_get_type;
   PangoContext* function() c_pango_context_new;
   void function(PangoContext* context) c_pango_context_changed;
   PangoDirection function(PangoContext* context) c_pango_context_get_base_dir;
@@ -113,7 +114,7 @@ __gshared extern(C)
   void function(PangoContext* context, bool roundPositions) c_pango_context_set_round_glyph_positions;
 
   // Coverage
-  GType function() c_pango_coverage_get_type;
+  extern(C) GType function() c_pango_coverage_get_type;
   PangoCoverage* function() c_pango_coverage_new;
   PangoCoverage* function(ubyte* bytes, int nBytes) c_pango_coverage_from_bytes;
   PangoCoverage* function(PangoCoverage* coverage) c_pango_coverage_copy;
@@ -125,7 +126,7 @@ __gshared extern(C)
   void function(PangoCoverage* coverage) c_pango_coverage_unref;
 
   // Font
-  GType function() c_pango_font_get_type;
+  extern(C) GType function() c_pango_font_get_type;
   void function(PangoFontDescription** descs, int nDescs) c_pango_font_descriptions_free;
   PangoFont* function(PangoContext* context, GBytes* bytes, GError** _err) c_pango_font_deserialize;
   PangoFontDescription* function(PangoFont* font) c_pango_font_describe;
@@ -142,7 +143,7 @@ __gshared extern(C)
   GBytes* function(PangoFont* font) c_pango_font_serialize;
 
   // FontDescription
-  GType function() c_pango_font_description_get_type;
+  extern(C) GType function() c_pango_font_description_get_type;
   PangoFontDescription* function() c_pango_font_description_new;
   bool function(const(PangoFontDescription)* desc, const(PangoFontDescription)* oldMatch, const(PangoFontDescription)* newMatch) c_pango_font_description_better_match;
   PangoFontDescription* function(const(PangoFontDescription)* desc) c_pango_font_description_copy;
@@ -179,7 +180,7 @@ __gshared extern(C)
   PangoFontDescription* function(const(char)* str) c_pango_font_description_from_string;
 
   // FontFace
-  GType function() c_pango_font_face_get_type;
+  extern(C) GType function() c_pango_font_face_get_type;
   PangoFontDescription* function(PangoFontFace* face) c_pango_font_face_describe;
   const(char)* function(PangoFontFace* face) c_pango_font_face_get_face_name;
   PangoFontFamily* function(PangoFontFace* face) c_pango_font_face_get_family;
@@ -187,7 +188,7 @@ __gshared extern(C)
   void function(PangoFontFace* face, int** sizes, int* nSizes) c_pango_font_face_list_sizes;
 
   // FontFamily
-  GType function() c_pango_font_family_get_type;
+  extern(C) GType function() c_pango_font_family_get_type;
   PangoFontFace* function(PangoFontFamily* family, const(char)* name) c_pango_font_family_get_face;
   const(char)* function(PangoFontFamily* family) c_pango_font_family_get_name;
   bool function(PangoFontFamily* family) c_pango_font_family_is_monospace;
@@ -195,7 +196,7 @@ __gshared extern(C)
   void function(PangoFontFamily* family, PangoFontFace*** faces, int* nFaces) c_pango_font_family_list_faces;
 
   // FontMap
-  GType function() c_pango_font_map_get_type;
+  extern(C) GType function() c_pango_font_map_get_type;
   void function(PangoFontMap* fontmap) c_pango_font_map_changed;
   PangoContext* function(PangoFontMap* fontmap) c_pango_font_map_create_context;
   PangoFontFamily* function(PangoFontMap* fontmap, const(char)* name) c_pango_font_map_get_family;
@@ -206,7 +207,7 @@ __gshared extern(C)
   PangoFont* function(PangoFontMap* fontmap, PangoFont* font, double scale, PangoContext* context, const(char)* variations) c_pango_font_map_reload_font;
 
   // FontMetrics
-  GType function() c_pango_font_metrics_get_type;
+  extern(C) GType function() c_pango_font_metrics_get_type;
   int function(PangoFontMetrics* metrics) c_pango_font_metrics_get_approximate_char_width;
   int function(PangoFontMetrics* metrics) c_pango_font_metrics_get_approximate_digit_width;
   int function(PangoFontMetrics* metrics) c_pango_font_metrics_get_ascent;
@@ -220,13 +221,13 @@ __gshared extern(C)
   void function(PangoFontMetrics* metrics) c_pango_font_metrics_unref;
 
   // Fontset
-  GType function() c_pango_fontset_get_type;
+  extern(C) GType function() c_pango_fontset_get_type;
   void function(PangoFontset* fontset, PangoFontsetForeachFunc func, void* data) c_pango_fontset_foreach;
   PangoFont* function(PangoFontset* fontset, uint wc) c_pango_fontset_get_font;
   PangoFontMetrics* function(PangoFontset* fontset) c_pango_fontset_get_metrics;
 
   // FontsetSimple
-  GType function() c_pango_fontset_simple_get_type;
+  extern(C) GType function() c_pango_fontset_simple_get_type;
   PangoFontsetSimple* function(PangoLanguage* language) c_pango_fontset_simple_new;
   void function(PangoFontsetSimple* fontset, PangoFont* font) c_pango_fontset_simple_append;
   int function(PangoFontsetSimple* fontset) c_pango_fontset_simple_size;
@@ -305,7 +306,7 @@ __gshared extern(C)
   const(char)* function() c_pango_version_string;
 
   // GlyphItem
-  GType function() c_pango_glyph_item_get_type;
+  extern(C) GType function() c_pango_glyph_item_get_type;
   GSList* function(PangoGlyphItem* glyphItem, const(char)* text, PangoAttrList* list) c_pango_glyph_item_apply_attrs;
   PangoGlyphItem* function(PangoGlyphItem* orig) c_pango_glyph_item_copy;
   void function(PangoGlyphItem* glyphItem) c_pango_glyph_item_free;
@@ -314,7 +315,7 @@ __gshared extern(C)
   PangoGlyphItem* function(PangoGlyphItem* orig, const(char)* text, int splitIndex) c_pango_glyph_item_split;
 
   // GlyphItemIter
-  GType function() c_pango_glyph_item_iter_get_type;
+  extern(C) GType function() c_pango_glyph_item_iter_get_type;
   PangoGlyphItemIter* function(PangoGlyphItemIter* orig) c_pango_glyph_item_iter_copy;
   void function(PangoGlyphItemIter* iter) c_pango_glyph_item_iter_free;
   bool function(PangoGlyphItemIter* iter, PangoGlyphItem* glyphItem, const(char)* text) c_pango_glyph_item_iter_init_end;
@@ -323,7 +324,7 @@ __gshared extern(C)
   bool function(PangoGlyphItemIter* iter) c_pango_glyph_item_iter_prev_cluster;
 
   // GlyphString
-  GType function() c_pango_glyph_string_get_type;
+  extern(C) GType function() c_pango_glyph_string_get_type;
   PangoGlyphString* function() c_pango_glyph_string_new;
   PangoGlyphString* function(PangoGlyphString* string_) c_pango_glyph_string_copy;
   void function(PangoGlyphString* glyphs, PangoFont* font, PangoRectangle* inkRect, PangoRectangle* logicalRect) c_pango_glyph_string_extents;
@@ -337,7 +338,7 @@ __gshared extern(C)
   void function(PangoGlyphString* glyphs, const(char)* text, int length, PangoAnalysis* analysis, int xPos, int* index, int* trailing) c_pango_glyph_string_x_to_index;
 
   // Item
-  GType function() c_pango_item_get_type;
+  extern(C) GType function() c_pango_item_get_type;
   PangoItem* function() c_pango_item_new;
   void function(PangoItem* item, PangoAttrIterator* iter) c_pango_item_apply_attrs;
   PangoItem* function(PangoItem* item) c_pango_item_copy;
@@ -345,7 +346,7 @@ __gshared extern(C)
   PangoItem* function(PangoItem* orig, int splitIndex, int splitOffset) c_pango_item_split;
 
   // Layout
-  GType function() c_pango_layout_get_type;
+  extern(C) GType function() c_pango_layout_get_type;
   PangoLayout* function(PangoContext* context) c_pango_layout_new;
   PangoLayout* function(PangoContext* context, GBytes* bytes, PangoLayoutDeserializeFlags flags, GError** _err) c_pango_layout_deserialize;
   void function(PangoLayout* layout) c_pango_layout_context_changed;
@@ -414,7 +415,7 @@ __gshared extern(C)
   bool function(PangoLayout* layout, int x, int y, int* index, int* trailing) c_pango_layout_xy_to_index;
 
   // LayoutIter
-  GType function() c_pango_layout_iter_get_type;
+  extern(C) GType function() c_pango_layout_iter_get_type;
   bool function(PangoLayoutIter* iter) c_pango_layout_iter_at_last_line;
   PangoLayoutIter* function(PangoLayoutIter* iter) c_pango_layout_iter_copy;
   void function(PangoLayoutIter* iter) c_pango_layout_iter_free;
@@ -438,7 +439,7 @@ __gshared extern(C)
   bool function(PangoLayoutIter* iter) c_pango_layout_iter_next_run;
 
   // LayoutLine
-  GType function() c_pango_layout_line_get_type;
+  extern(C) GType function() c_pango_layout_line_get_type;
   void function(PangoLayoutLine* line, PangoRectangle* inkRect, PangoRectangle* logicalRect) c_pango_layout_line_get_extents;
   void function(PangoLayoutLine* line, int* height) c_pango_layout_line_get_height;
   int function(PangoLayoutLine* line) c_pango_layout_line_get_length;
@@ -453,7 +454,7 @@ __gshared extern(C)
   bool function(PangoLayoutLine* line, int xPos, int* index, int* trailing) c_pango_layout_line_x_to_index;
 
   // Matrix
-  GType function() c_pango_matrix_get_type;
+  extern(C) GType function() c_pango_matrix_get_type;
   void function(PangoMatrix* matrix, const(PangoMatrix)* newMatrix) c_pango_matrix_concat;
   PangoMatrix* function(const(PangoMatrix)* matrix) c_pango_matrix_copy;
   void function(PangoMatrix* matrix) c_pango_matrix_free;
@@ -469,7 +470,7 @@ __gshared extern(C)
   void function(PangoMatrix* matrix, double tx, double ty) c_pango_matrix_translate;
 
   // PgLanguage
-  GType function() c_pango_language_get_type;
+  extern(C) GType function() c_pango_language_get_type;
   const(char)* function(PangoLanguage* language) c_pango_language_get_sample_string;
   const(PangoScript)* function(PangoLanguage* language, int* numScripts) c_pango_language_get_scripts;
   bool function(PangoLanguage* language, PangoScript script) c_pango_language_includes_script;
@@ -480,7 +481,7 @@ __gshared extern(C)
   PangoLanguage** function() c_pango_language_get_preferred;
 
   // Renderer
-  GType function() c_pango_renderer_get_type;
+  extern(C) GType function() c_pango_renderer_get_type;
   void function(PangoRenderer* renderer) c_pango_renderer_activate;
   void function(PangoRenderer* renderer) c_pango_renderer_deactivate;
   void function(PangoRenderer* renderer, int x, int y, int width, int height) c_pango_renderer_draw_error_underline;
@@ -502,14 +503,14 @@ __gshared extern(C)
   void function(PangoRenderer* renderer, const(PangoMatrix)* matrix) c_pango_renderer_set_matrix;
 
   // ScriptIter
-  GType function() c_pango_script_iter_get_type;
+  extern(C) GType function() c_pango_script_iter_get_type;
   PangoScriptIter* function(const(char)* text, int length) c_pango_script_iter_new;
   void function(PangoScriptIter* iter) c_pango_script_iter_free;
   void function(PangoScriptIter* iter, const(char*)* start, const(char*)* end, PangoScript* script) c_pango_script_iter_get_range;
   bool function(PangoScriptIter* iter) c_pango_script_iter_next;
 
   // TabArray
-  GType function() c_pango_tab_array_get_type;
+  extern(C) GType function() c_pango_tab_array_get_type;
   PangoTabArray* function(int initialSize, bool positionsInPixels) c_pango_tab_array_new;
   PangoTabArray* function(int size, bool positionsInPixels, PangoTabAlign firstAlignment, int firstPosition,  ...) c_pango_tab_array_new_with_positions;
   PangoTabArray* function(PangoTabArray* src) c_pango_tab_array_copy;
@@ -1042,513 +1043,513 @@ alias pango_tab_array_from_string = c_pango_tab_array_from_string;
 shared static this()
 {
   // AttrFontDesc
-  gidLink(pango_attr_font_desc_new, "pango_attr_font_desc_new", LIBS);
+  gidLink(cast(void**)&pango_attr_font_desc_new, "pango_attr_font_desc_new", LIBS);
 
   // AttrFontFeatures
-  gidLink(pango_attr_font_features_new, "pango_attr_font_features_new", LIBS);
+  gidLink(cast(void**)&pango_attr_font_features_new, "pango_attr_font_features_new", LIBS);
 
   // AttrIterator
-  gidLink(pango_attr_iterator_get_type, "pango_attr_iterator_get_type", LIBS);
-  gidLink(pango_attr_iterator_copy, "pango_attr_iterator_copy", LIBS);
-  gidLink(pango_attr_iterator_destroy, "pango_attr_iterator_destroy", LIBS);
-  gidLink(pango_attr_iterator_get, "pango_attr_iterator_get", LIBS);
-  gidLink(pango_attr_iterator_get_attrs, "pango_attr_iterator_get_attrs", LIBS);
-  gidLink(pango_attr_iterator_get_font, "pango_attr_iterator_get_font", LIBS);
-  gidLink(pango_attr_iterator_next, "pango_attr_iterator_next", LIBS);
-  gidLink(pango_attr_iterator_range, "pango_attr_iterator_range", LIBS);
+  gidLink(cast(void**)&pango_attr_iterator_get_type, "pango_attr_iterator_get_type", LIBS);
+  gidLink(cast(void**)&pango_attr_iterator_copy, "pango_attr_iterator_copy", LIBS);
+  gidLink(cast(void**)&pango_attr_iterator_destroy, "pango_attr_iterator_destroy", LIBS);
+  gidLink(cast(void**)&pango_attr_iterator_get, "pango_attr_iterator_get", LIBS);
+  gidLink(cast(void**)&pango_attr_iterator_get_attrs, "pango_attr_iterator_get_attrs", LIBS);
+  gidLink(cast(void**)&pango_attr_iterator_get_font, "pango_attr_iterator_get_font", LIBS);
+  gidLink(cast(void**)&pango_attr_iterator_next, "pango_attr_iterator_next", LIBS);
+  gidLink(cast(void**)&pango_attr_iterator_range, "pango_attr_iterator_range", LIBS);
 
   // AttrLanguage
-  gidLink(pango_attr_language_new, "pango_attr_language_new", LIBS);
+  gidLink(cast(void**)&pango_attr_language_new, "pango_attr_language_new", LIBS);
 
   // AttrList
-  gidLink(pango_attr_list_get_type, "pango_attr_list_get_type", LIBS);
-  gidLink(pango_attr_list_new, "pango_attr_list_new", LIBS);
-  gidLink(pango_attr_list_change, "pango_attr_list_change", LIBS);
-  gidLink(pango_attr_list_copy, "pango_attr_list_copy", LIBS);
-  gidLink(pango_attr_list_equal, "pango_attr_list_equal", LIBS);
-  gidLink(pango_attr_list_filter, "pango_attr_list_filter", LIBS);
-  gidLink(pango_attr_list_get_attributes, "pango_attr_list_get_attributes", LIBS);
-  gidLink(pango_attr_list_get_iterator, "pango_attr_list_get_iterator", LIBS);
-  gidLink(pango_attr_list_insert, "pango_attr_list_insert", LIBS);
-  gidLink(pango_attr_list_insert_before, "pango_attr_list_insert_before", LIBS);
-  gidLink(pango_attr_list_ref, "pango_attr_list_ref", LIBS);
-  gidLink(pango_attr_list_splice, "pango_attr_list_splice", LIBS);
-  gidLink(pango_attr_list_to_string, "pango_attr_list_to_string", LIBS);
-  gidLink(pango_attr_list_unref, "pango_attr_list_unref", LIBS);
-  gidLink(pango_attr_list_update, "pango_attr_list_update", LIBS);
-  gidLink(pango_attr_list_from_string, "pango_attr_list_from_string", LIBS);
+  gidLink(cast(void**)&pango_attr_list_get_type, "pango_attr_list_get_type", LIBS);
+  gidLink(cast(void**)&pango_attr_list_new, "pango_attr_list_new", LIBS);
+  gidLink(cast(void**)&pango_attr_list_change, "pango_attr_list_change", LIBS);
+  gidLink(cast(void**)&pango_attr_list_copy, "pango_attr_list_copy", LIBS);
+  gidLink(cast(void**)&pango_attr_list_equal, "pango_attr_list_equal", LIBS);
+  gidLink(cast(void**)&pango_attr_list_filter, "pango_attr_list_filter", LIBS);
+  gidLink(cast(void**)&pango_attr_list_get_attributes, "pango_attr_list_get_attributes", LIBS);
+  gidLink(cast(void**)&pango_attr_list_get_iterator, "pango_attr_list_get_iterator", LIBS);
+  gidLink(cast(void**)&pango_attr_list_insert, "pango_attr_list_insert", LIBS);
+  gidLink(cast(void**)&pango_attr_list_insert_before, "pango_attr_list_insert_before", LIBS);
+  gidLink(cast(void**)&pango_attr_list_ref, "pango_attr_list_ref", LIBS);
+  gidLink(cast(void**)&pango_attr_list_splice, "pango_attr_list_splice", LIBS);
+  gidLink(cast(void**)&pango_attr_list_to_string, "pango_attr_list_to_string", LIBS);
+  gidLink(cast(void**)&pango_attr_list_unref, "pango_attr_list_unref", LIBS);
+  gidLink(cast(void**)&pango_attr_list_update, "pango_attr_list_update", LIBS);
+  gidLink(cast(void**)&pango_attr_list_from_string, "pango_attr_list_from_string", LIBS);
 
   // AttrShape
-  gidLink(pango_attr_shape_new, "pango_attr_shape_new", LIBS);
-  gidLink(pango_attr_shape_new_with_data, "pango_attr_shape_new_with_data", LIBS);
+  gidLink(cast(void**)&pango_attr_shape_new, "pango_attr_shape_new", LIBS);
+  gidLink(cast(void**)&pango_attr_shape_new_with_data, "pango_attr_shape_new_with_data", LIBS);
 
   // AttrSize
-  gidLink(pango_attr_size_new, "pango_attr_size_new", LIBS);
-  gidLink(pango_attr_size_new_absolute, "pango_attr_size_new_absolute", LIBS);
+  gidLink(cast(void**)&pango_attr_size_new, "pango_attr_size_new", LIBS);
+  gidLink(cast(void**)&pango_attr_size_new_absolute, "pango_attr_size_new_absolute", LIBS);
 
   // Attribute
-  gidLink(pango_attribute_get_type, "pango_attribute_get_type", LIBS);
-  gidLink(pango_attribute_as_color, "pango_attribute_as_color", LIBS);
-  gidLink(pango_attribute_as_float, "pango_attribute_as_float", LIBS);
-  gidLink(pango_attribute_as_font_desc, "pango_attribute_as_font_desc", LIBS);
-  gidLink(pango_attribute_as_font_features, "pango_attribute_as_font_features", LIBS);
-  gidLink(pango_attribute_as_int, "pango_attribute_as_int", LIBS);
-  gidLink(pango_attribute_as_language, "pango_attribute_as_language", LIBS);
-  gidLink(pango_attribute_as_shape, "pango_attribute_as_shape", LIBS);
-  gidLink(pango_attribute_as_size, "pango_attribute_as_size", LIBS);
-  gidLink(pango_attribute_as_string, "pango_attribute_as_string", LIBS);
-  gidLink(pango_attribute_copy, "pango_attribute_copy", LIBS);
-  gidLink(pango_attribute_destroy, "pango_attribute_destroy", LIBS);
-  gidLink(pango_attribute_equal, "pango_attribute_equal", LIBS);
-  gidLink(pango_attribute_init, "pango_attribute_init", LIBS);
+  gidLink(cast(void**)&pango_attribute_get_type, "pango_attribute_get_type", LIBS);
+  gidLink(cast(void**)&pango_attribute_as_color, "pango_attribute_as_color", LIBS);
+  gidLink(cast(void**)&pango_attribute_as_float, "pango_attribute_as_float", LIBS);
+  gidLink(cast(void**)&pango_attribute_as_font_desc, "pango_attribute_as_font_desc", LIBS);
+  gidLink(cast(void**)&pango_attribute_as_font_features, "pango_attribute_as_font_features", LIBS);
+  gidLink(cast(void**)&pango_attribute_as_int, "pango_attribute_as_int", LIBS);
+  gidLink(cast(void**)&pango_attribute_as_language, "pango_attribute_as_language", LIBS);
+  gidLink(cast(void**)&pango_attribute_as_shape, "pango_attribute_as_shape", LIBS);
+  gidLink(cast(void**)&pango_attribute_as_size, "pango_attribute_as_size", LIBS);
+  gidLink(cast(void**)&pango_attribute_as_string, "pango_attribute_as_string", LIBS);
+  gidLink(cast(void**)&pango_attribute_copy, "pango_attribute_copy", LIBS);
+  gidLink(cast(void**)&pango_attribute_destroy, "pango_attribute_destroy", LIBS);
+  gidLink(cast(void**)&pango_attribute_equal, "pango_attribute_equal", LIBS);
+  gidLink(cast(void**)&pango_attribute_init, "pango_attribute_init", LIBS);
 
   // Color
-  gidLink(pango_color_get_type, "pango_color_get_type", LIBS);
-  gidLink(pango_color_copy, "pango_color_copy", LIBS);
-  gidLink(pango_color_free, "pango_color_free", LIBS);
-  gidLink(pango_color_parse, "pango_color_parse", LIBS);
-  gidLink(pango_color_parse_with_alpha, "pango_color_parse_with_alpha", LIBS);
-  gidLink(pango_color_to_string, "pango_color_to_string", LIBS);
+  gidLink(cast(void**)&pango_color_get_type, "pango_color_get_type", LIBS);
+  gidLink(cast(void**)&pango_color_copy, "pango_color_copy", LIBS);
+  gidLink(cast(void**)&pango_color_free, "pango_color_free", LIBS);
+  gidLink(cast(void**)&pango_color_parse, "pango_color_parse", LIBS);
+  gidLink(cast(void**)&pango_color_parse_with_alpha, "pango_color_parse_with_alpha", LIBS);
+  gidLink(cast(void**)&pango_color_to_string, "pango_color_to_string", LIBS);
 
   // Context
-  gidLink(pango_context_get_type, "pango_context_get_type", LIBS);
-  gidLink(pango_context_new, "pango_context_new", LIBS);
-  gidLink(pango_context_changed, "pango_context_changed", LIBS);
-  gidLink(pango_context_get_base_dir, "pango_context_get_base_dir", LIBS);
-  gidLink(pango_context_get_base_gravity, "pango_context_get_base_gravity", LIBS);
-  gidLink(pango_context_get_font_description, "pango_context_get_font_description", LIBS);
-  gidLink(pango_context_get_font_map, "pango_context_get_font_map", LIBS);
-  gidLink(pango_context_get_gravity, "pango_context_get_gravity", LIBS);
-  gidLink(pango_context_get_gravity_hint, "pango_context_get_gravity_hint", LIBS);
-  gidLink(pango_context_get_language, "pango_context_get_language", LIBS);
-  gidLink(pango_context_get_matrix, "pango_context_get_matrix", LIBS);
-  gidLink(pango_context_get_metrics, "pango_context_get_metrics", LIBS);
-  gidLink(pango_context_get_round_glyph_positions, "pango_context_get_round_glyph_positions", LIBS);
-  gidLink(pango_context_get_serial, "pango_context_get_serial", LIBS);
-  gidLink(pango_context_list_families, "pango_context_list_families", LIBS);
-  gidLink(pango_context_load_font, "pango_context_load_font", LIBS);
-  gidLink(pango_context_load_fontset, "pango_context_load_fontset", LIBS);
-  gidLink(pango_context_set_base_dir, "pango_context_set_base_dir", LIBS);
-  gidLink(pango_context_set_base_gravity, "pango_context_set_base_gravity", LIBS);
-  gidLink(pango_context_set_font_description, "pango_context_set_font_description", LIBS);
-  gidLink(pango_context_set_font_map, "pango_context_set_font_map", LIBS);
-  gidLink(pango_context_set_gravity_hint, "pango_context_set_gravity_hint", LIBS);
-  gidLink(pango_context_set_language, "pango_context_set_language", LIBS);
-  gidLink(pango_context_set_matrix, "pango_context_set_matrix", LIBS);
-  gidLink(pango_context_set_round_glyph_positions, "pango_context_set_round_glyph_positions", LIBS);
+  gidLink(cast(void**)&pango_context_get_type, "pango_context_get_type", LIBS);
+  gidLink(cast(void**)&pango_context_new, "pango_context_new", LIBS);
+  gidLink(cast(void**)&pango_context_changed, "pango_context_changed", LIBS);
+  gidLink(cast(void**)&pango_context_get_base_dir, "pango_context_get_base_dir", LIBS);
+  gidLink(cast(void**)&pango_context_get_base_gravity, "pango_context_get_base_gravity", LIBS);
+  gidLink(cast(void**)&pango_context_get_font_description, "pango_context_get_font_description", LIBS);
+  gidLink(cast(void**)&pango_context_get_font_map, "pango_context_get_font_map", LIBS);
+  gidLink(cast(void**)&pango_context_get_gravity, "pango_context_get_gravity", LIBS);
+  gidLink(cast(void**)&pango_context_get_gravity_hint, "pango_context_get_gravity_hint", LIBS);
+  gidLink(cast(void**)&pango_context_get_language, "pango_context_get_language", LIBS);
+  gidLink(cast(void**)&pango_context_get_matrix, "pango_context_get_matrix", LIBS);
+  gidLink(cast(void**)&pango_context_get_metrics, "pango_context_get_metrics", LIBS);
+  gidLink(cast(void**)&pango_context_get_round_glyph_positions, "pango_context_get_round_glyph_positions", LIBS);
+  gidLink(cast(void**)&pango_context_get_serial, "pango_context_get_serial", LIBS);
+  gidLink(cast(void**)&pango_context_list_families, "pango_context_list_families", LIBS);
+  gidLink(cast(void**)&pango_context_load_font, "pango_context_load_font", LIBS);
+  gidLink(cast(void**)&pango_context_load_fontset, "pango_context_load_fontset", LIBS);
+  gidLink(cast(void**)&pango_context_set_base_dir, "pango_context_set_base_dir", LIBS);
+  gidLink(cast(void**)&pango_context_set_base_gravity, "pango_context_set_base_gravity", LIBS);
+  gidLink(cast(void**)&pango_context_set_font_description, "pango_context_set_font_description", LIBS);
+  gidLink(cast(void**)&pango_context_set_font_map, "pango_context_set_font_map", LIBS);
+  gidLink(cast(void**)&pango_context_set_gravity_hint, "pango_context_set_gravity_hint", LIBS);
+  gidLink(cast(void**)&pango_context_set_language, "pango_context_set_language", LIBS);
+  gidLink(cast(void**)&pango_context_set_matrix, "pango_context_set_matrix", LIBS);
+  gidLink(cast(void**)&pango_context_set_round_glyph_positions, "pango_context_set_round_glyph_positions", LIBS);
 
   // Coverage
-  gidLink(pango_coverage_get_type, "pango_coverage_get_type", LIBS);
-  gidLink(pango_coverage_new, "pango_coverage_new", LIBS);
-  gidLink(pango_coverage_from_bytes, "pango_coverage_from_bytes", LIBS);
-  gidLink(pango_coverage_copy, "pango_coverage_copy", LIBS);
-  gidLink(pango_coverage_get, "pango_coverage_get", LIBS);
-  gidLink(pango_coverage_max, "pango_coverage_max", LIBS);
-  gidLink(pango_coverage_ref, "pango_coverage_ref", LIBS);
-  gidLink(pango_coverage_set, "pango_coverage_set", LIBS);
-  gidLink(pango_coverage_to_bytes, "pango_coverage_to_bytes", LIBS);
-  gidLink(pango_coverage_unref, "pango_coverage_unref", LIBS);
+  gidLink(cast(void**)&pango_coverage_get_type, "pango_coverage_get_type", LIBS);
+  gidLink(cast(void**)&pango_coverage_new, "pango_coverage_new", LIBS);
+  gidLink(cast(void**)&pango_coverage_from_bytes, "pango_coverage_from_bytes", LIBS);
+  gidLink(cast(void**)&pango_coverage_copy, "pango_coverage_copy", LIBS);
+  gidLink(cast(void**)&pango_coverage_get, "pango_coverage_get", LIBS);
+  gidLink(cast(void**)&pango_coverage_max, "pango_coverage_max", LIBS);
+  gidLink(cast(void**)&pango_coverage_ref, "pango_coverage_ref", LIBS);
+  gidLink(cast(void**)&pango_coverage_set, "pango_coverage_set", LIBS);
+  gidLink(cast(void**)&pango_coverage_to_bytes, "pango_coverage_to_bytes", LIBS);
+  gidLink(cast(void**)&pango_coverage_unref, "pango_coverage_unref", LIBS);
 
   // Font
-  gidLink(pango_font_get_type, "pango_font_get_type", LIBS);
-  gidLink(pango_font_descriptions_free, "pango_font_descriptions_free", LIBS);
-  gidLink(pango_font_deserialize, "pango_font_deserialize", LIBS);
-  gidLink(pango_font_describe, "pango_font_describe", LIBS);
-  gidLink(pango_font_describe_with_absolute_size, "pango_font_describe_with_absolute_size", LIBS);
-  gidLink(pango_font_get_coverage, "pango_font_get_coverage", LIBS);
-  gidLink(pango_font_get_face, "pango_font_get_face", LIBS);
-  gidLink(pango_font_get_features, "pango_font_get_features", LIBS);
-  gidLink(pango_font_get_font_map, "pango_font_get_font_map", LIBS);
-  gidLink(pango_font_get_glyph_extents, "pango_font_get_glyph_extents", LIBS);
-  gidLink(pango_font_get_hb_font, "pango_font_get_hb_font", LIBS);
-  gidLink(pango_font_get_languages, "pango_font_get_languages", LIBS);
-  gidLink(pango_font_get_metrics, "pango_font_get_metrics", LIBS);
-  gidLink(pango_font_has_char, "pango_font_has_char", LIBS);
-  gidLink(pango_font_serialize, "pango_font_serialize", LIBS);
+  gidLink(cast(void**)&pango_font_get_type, "pango_font_get_type", LIBS);
+  gidLink(cast(void**)&pango_font_descriptions_free, "pango_font_descriptions_free", LIBS);
+  gidLink(cast(void**)&pango_font_deserialize, "pango_font_deserialize", LIBS);
+  gidLink(cast(void**)&pango_font_describe, "pango_font_describe", LIBS);
+  gidLink(cast(void**)&pango_font_describe_with_absolute_size, "pango_font_describe_with_absolute_size", LIBS);
+  gidLink(cast(void**)&pango_font_get_coverage, "pango_font_get_coverage", LIBS);
+  gidLink(cast(void**)&pango_font_get_face, "pango_font_get_face", LIBS);
+  gidLink(cast(void**)&pango_font_get_features, "pango_font_get_features", LIBS);
+  gidLink(cast(void**)&pango_font_get_font_map, "pango_font_get_font_map", LIBS);
+  gidLink(cast(void**)&pango_font_get_glyph_extents, "pango_font_get_glyph_extents", LIBS);
+  gidLink(cast(void**)&pango_font_get_hb_font, "pango_font_get_hb_font", LIBS);
+  gidLink(cast(void**)&pango_font_get_languages, "pango_font_get_languages", LIBS);
+  gidLink(cast(void**)&pango_font_get_metrics, "pango_font_get_metrics", LIBS);
+  gidLink(cast(void**)&pango_font_has_char, "pango_font_has_char", LIBS);
+  gidLink(cast(void**)&pango_font_serialize, "pango_font_serialize", LIBS);
 
   // FontDescription
-  gidLink(pango_font_description_get_type, "pango_font_description_get_type", LIBS);
-  gidLink(pango_font_description_new, "pango_font_description_new", LIBS);
-  gidLink(pango_font_description_better_match, "pango_font_description_better_match", LIBS);
-  gidLink(pango_font_description_copy, "pango_font_description_copy", LIBS);
-  gidLink(pango_font_description_copy_static, "pango_font_description_copy_static", LIBS);
-  gidLink(pango_font_description_equal, "pango_font_description_equal", LIBS);
-  gidLink(pango_font_description_free, "pango_font_description_free", LIBS);
-  gidLink(pango_font_description_get_family, "pango_font_description_get_family", LIBS);
-  gidLink(pango_font_description_get_gravity, "pango_font_description_get_gravity", LIBS);
-  gidLink(pango_font_description_get_set_fields, "pango_font_description_get_set_fields", LIBS);
-  gidLink(pango_font_description_get_size, "pango_font_description_get_size", LIBS);
-  gidLink(pango_font_description_get_size_is_absolute, "pango_font_description_get_size_is_absolute", LIBS);
-  gidLink(pango_font_description_get_stretch, "pango_font_description_get_stretch", LIBS);
-  gidLink(pango_font_description_get_style, "pango_font_description_get_style", LIBS);
-  gidLink(pango_font_description_get_variant, "pango_font_description_get_variant", LIBS);
-  gidLink(pango_font_description_get_variations, "pango_font_description_get_variations", LIBS);
-  gidLink(pango_font_description_get_weight, "pango_font_description_get_weight", LIBS);
-  gidLink(pango_font_description_hash, "pango_font_description_hash", LIBS);
-  gidLink(pango_font_description_merge, "pango_font_description_merge", LIBS);
-  gidLink(pango_font_description_merge_static, "pango_font_description_merge_static", LIBS);
-  gidLink(pango_font_description_set_absolute_size, "pango_font_description_set_absolute_size", LIBS);
-  gidLink(pango_font_description_set_family, "pango_font_description_set_family", LIBS);
-  gidLink(pango_font_description_set_family_static, "pango_font_description_set_family_static", LIBS);
-  gidLink(pango_font_description_set_gravity, "pango_font_description_set_gravity", LIBS);
-  gidLink(pango_font_description_set_size, "pango_font_description_set_size", LIBS);
-  gidLink(pango_font_description_set_stretch, "pango_font_description_set_stretch", LIBS);
-  gidLink(pango_font_description_set_style, "pango_font_description_set_style", LIBS);
-  gidLink(pango_font_description_set_variant, "pango_font_description_set_variant", LIBS);
-  gidLink(pango_font_description_set_variations, "pango_font_description_set_variations", LIBS);
-  gidLink(pango_font_description_set_variations_static, "pango_font_description_set_variations_static", LIBS);
-  gidLink(pango_font_description_set_weight, "pango_font_description_set_weight", LIBS);
-  gidLink(pango_font_description_to_filename, "pango_font_description_to_filename", LIBS);
-  gidLink(pango_font_description_to_string, "pango_font_description_to_string", LIBS);
-  gidLink(pango_font_description_unset_fields, "pango_font_description_unset_fields", LIBS);
-  gidLink(pango_font_description_from_string, "pango_font_description_from_string", LIBS);
+  gidLink(cast(void**)&pango_font_description_get_type, "pango_font_description_get_type", LIBS);
+  gidLink(cast(void**)&pango_font_description_new, "pango_font_description_new", LIBS);
+  gidLink(cast(void**)&pango_font_description_better_match, "pango_font_description_better_match", LIBS);
+  gidLink(cast(void**)&pango_font_description_copy, "pango_font_description_copy", LIBS);
+  gidLink(cast(void**)&pango_font_description_copy_static, "pango_font_description_copy_static", LIBS);
+  gidLink(cast(void**)&pango_font_description_equal, "pango_font_description_equal", LIBS);
+  gidLink(cast(void**)&pango_font_description_free, "pango_font_description_free", LIBS);
+  gidLink(cast(void**)&pango_font_description_get_family, "pango_font_description_get_family", LIBS);
+  gidLink(cast(void**)&pango_font_description_get_gravity, "pango_font_description_get_gravity", LIBS);
+  gidLink(cast(void**)&pango_font_description_get_set_fields, "pango_font_description_get_set_fields", LIBS);
+  gidLink(cast(void**)&pango_font_description_get_size, "pango_font_description_get_size", LIBS);
+  gidLink(cast(void**)&pango_font_description_get_size_is_absolute, "pango_font_description_get_size_is_absolute", LIBS);
+  gidLink(cast(void**)&pango_font_description_get_stretch, "pango_font_description_get_stretch", LIBS);
+  gidLink(cast(void**)&pango_font_description_get_style, "pango_font_description_get_style", LIBS);
+  gidLink(cast(void**)&pango_font_description_get_variant, "pango_font_description_get_variant", LIBS);
+  gidLink(cast(void**)&pango_font_description_get_variations, "pango_font_description_get_variations", LIBS);
+  gidLink(cast(void**)&pango_font_description_get_weight, "pango_font_description_get_weight", LIBS);
+  gidLink(cast(void**)&pango_font_description_hash, "pango_font_description_hash", LIBS);
+  gidLink(cast(void**)&pango_font_description_merge, "pango_font_description_merge", LIBS);
+  gidLink(cast(void**)&pango_font_description_merge_static, "pango_font_description_merge_static", LIBS);
+  gidLink(cast(void**)&pango_font_description_set_absolute_size, "pango_font_description_set_absolute_size", LIBS);
+  gidLink(cast(void**)&pango_font_description_set_family, "pango_font_description_set_family", LIBS);
+  gidLink(cast(void**)&pango_font_description_set_family_static, "pango_font_description_set_family_static", LIBS);
+  gidLink(cast(void**)&pango_font_description_set_gravity, "pango_font_description_set_gravity", LIBS);
+  gidLink(cast(void**)&pango_font_description_set_size, "pango_font_description_set_size", LIBS);
+  gidLink(cast(void**)&pango_font_description_set_stretch, "pango_font_description_set_stretch", LIBS);
+  gidLink(cast(void**)&pango_font_description_set_style, "pango_font_description_set_style", LIBS);
+  gidLink(cast(void**)&pango_font_description_set_variant, "pango_font_description_set_variant", LIBS);
+  gidLink(cast(void**)&pango_font_description_set_variations, "pango_font_description_set_variations", LIBS);
+  gidLink(cast(void**)&pango_font_description_set_variations_static, "pango_font_description_set_variations_static", LIBS);
+  gidLink(cast(void**)&pango_font_description_set_weight, "pango_font_description_set_weight", LIBS);
+  gidLink(cast(void**)&pango_font_description_to_filename, "pango_font_description_to_filename", LIBS);
+  gidLink(cast(void**)&pango_font_description_to_string, "pango_font_description_to_string", LIBS);
+  gidLink(cast(void**)&pango_font_description_unset_fields, "pango_font_description_unset_fields", LIBS);
+  gidLink(cast(void**)&pango_font_description_from_string, "pango_font_description_from_string", LIBS);
 
   // FontFace
-  gidLink(pango_font_face_get_type, "pango_font_face_get_type", LIBS);
-  gidLink(pango_font_face_describe, "pango_font_face_describe", LIBS);
-  gidLink(pango_font_face_get_face_name, "pango_font_face_get_face_name", LIBS);
-  gidLink(pango_font_face_get_family, "pango_font_face_get_family", LIBS);
-  gidLink(pango_font_face_is_synthesized, "pango_font_face_is_synthesized", LIBS);
-  gidLink(pango_font_face_list_sizes, "pango_font_face_list_sizes", LIBS);
+  gidLink(cast(void**)&pango_font_face_get_type, "pango_font_face_get_type", LIBS);
+  gidLink(cast(void**)&pango_font_face_describe, "pango_font_face_describe", LIBS);
+  gidLink(cast(void**)&pango_font_face_get_face_name, "pango_font_face_get_face_name", LIBS);
+  gidLink(cast(void**)&pango_font_face_get_family, "pango_font_face_get_family", LIBS);
+  gidLink(cast(void**)&pango_font_face_is_synthesized, "pango_font_face_is_synthesized", LIBS);
+  gidLink(cast(void**)&pango_font_face_list_sizes, "pango_font_face_list_sizes", LIBS);
 
   // FontFamily
-  gidLink(pango_font_family_get_type, "pango_font_family_get_type", LIBS);
-  gidLink(pango_font_family_get_face, "pango_font_family_get_face", LIBS);
-  gidLink(pango_font_family_get_name, "pango_font_family_get_name", LIBS);
-  gidLink(pango_font_family_is_monospace, "pango_font_family_is_monospace", LIBS);
-  gidLink(pango_font_family_is_variable, "pango_font_family_is_variable", LIBS);
-  gidLink(pango_font_family_list_faces, "pango_font_family_list_faces", LIBS);
+  gidLink(cast(void**)&pango_font_family_get_type, "pango_font_family_get_type", LIBS);
+  gidLink(cast(void**)&pango_font_family_get_face, "pango_font_family_get_face", LIBS);
+  gidLink(cast(void**)&pango_font_family_get_name, "pango_font_family_get_name", LIBS);
+  gidLink(cast(void**)&pango_font_family_is_monospace, "pango_font_family_is_monospace", LIBS);
+  gidLink(cast(void**)&pango_font_family_is_variable, "pango_font_family_is_variable", LIBS);
+  gidLink(cast(void**)&pango_font_family_list_faces, "pango_font_family_list_faces", LIBS);
 
   // FontMap
-  gidLink(pango_font_map_get_type, "pango_font_map_get_type", LIBS);
-  gidLink(pango_font_map_changed, "pango_font_map_changed", LIBS);
-  gidLink(pango_font_map_create_context, "pango_font_map_create_context", LIBS);
-  gidLink(pango_font_map_get_family, "pango_font_map_get_family", LIBS);
-  gidLink(pango_font_map_get_serial, "pango_font_map_get_serial", LIBS);
-  gidLink(pango_font_map_list_families, "pango_font_map_list_families", LIBS);
-  gidLink(pango_font_map_load_font, "pango_font_map_load_font", LIBS);
-  gidLink(pango_font_map_load_fontset, "pango_font_map_load_fontset", LIBS);
-  gidLink(pango_font_map_reload_font, "pango_font_map_reload_font", LIBS);
+  gidLink(cast(void**)&pango_font_map_get_type, "pango_font_map_get_type", LIBS);
+  gidLink(cast(void**)&pango_font_map_changed, "pango_font_map_changed", LIBS);
+  gidLink(cast(void**)&pango_font_map_create_context, "pango_font_map_create_context", LIBS);
+  gidLink(cast(void**)&pango_font_map_get_family, "pango_font_map_get_family", LIBS);
+  gidLink(cast(void**)&pango_font_map_get_serial, "pango_font_map_get_serial", LIBS);
+  gidLink(cast(void**)&pango_font_map_list_families, "pango_font_map_list_families", LIBS);
+  gidLink(cast(void**)&pango_font_map_load_font, "pango_font_map_load_font", LIBS);
+  gidLink(cast(void**)&pango_font_map_load_fontset, "pango_font_map_load_fontset", LIBS);
+  gidLink(cast(void**)&pango_font_map_reload_font, "pango_font_map_reload_font", LIBS);
 
   // FontMetrics
-  gidLink(pango_font_metrics_get_type, "pango_font_metrics_get_type", LIBS);
-  gidLink(pango_font_metrics_get_approximate_char_width, "pango_font_metrics_get_approximate_char_width", LIBS);
-  gidLink(pango_font_metrics_get_approximate_digit_width, "pango_font_metrics_get_approximate_digit_width", LIBS);
-  gidLink(pango_font_metrics_get_ascent, "pango_font_metrics_get_ascent", LIBS);
-  gidLink(pango_font_metrics_get_descent, "pango_font_metrics_get_descent", LIBS);
-  gidLink(pango_font_metrics_get_height, "pango_font_metrics_get_height", LIBS);
-  gidLink(pango_font_metrics_get_strikethrough_position, "pango_font_metrics_get_strikethrough_position", LIBS);
-  gidLink(pango_font_metrics_get_strikethrough_thickness, "pango_font_metrics_get_strikethrough_thickness", LIBS);
-  gidLink(pango_font_metrics_get_underline_position, "pango_font_metrics_get_underline_position", LIBS);
-  gidLink(pango_font_metrics_get_underline_thickness, "pango_font_metrics_get_underline_thickness", LIBS);
-  gidLink(pango_font_metrics_ref, "pango_font_metrics_ref", LIBS);
-  gidLink(pango_font_metrics_unref, "pango_font_metrics_unref", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_get_type, "pango_font_metrics_get_type", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_get_approximate_char_width, "pango_font_metrics_get_approximate_char_width", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_get_approximate_digit_width, "pango_font_metrics_get_approximate_digit_width", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_get_ascent, "pango_font_metrics_get_ascent", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_get_descent, "pango_font_metrics_get_descent", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_get_height, "pango_font_metrics_get_height", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_get_strikethrough_position, "pango_font_metrics_get_strikethrough_position", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_get_strikethrough_thickness, "pango_font_metrics_get_strikethrough_thickness", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_get_underline_position, "pango_font_metrics_get_underline_position", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_get_underline_thickness, "pango_font_metrics_get_underline_thickness", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_ref, "pango_font_metrics_ref", LIBS);
+  gidLink(cast(void**)&pango_font_metrics_unref, "pango_font_metrics_unref", LIBS);
 
   // Fontset
-  gidLink(pango_fontset_get_type, "pango_fontset_get_type", LIBS);
-  gidLink(pango_fontset_foreach, "pango_fontset_foreach", LIBS);
-  gidLink(pango_fontset_get_font, "pango_fontset_get_font", LIBS);
-  gidLink(pango_fontset_get_metrics, "pango_fontset_get_metrics", LIBS);
+  gidLink(cast(void**)&pango_fontset_get_type, "pango_fontset_get_type", LIBS);
+  gidLink(cast(void**)&pango_fontset_foreach, "pango_fontset_foreach", LIBS);
+  gidLink(cast(void**)&pango_fontset_get_font, "pango_fontset_get_font", LIBS);
+  gidLink(cast(void**)&pango_fontset_get_metrics, "pango_fontset_get_metrics", LIBS);
 
   // FontsetSimple
-  gidLink(pango_fontset_simple_get_type, "pango_fontset_simple_get_type", LIBS);
-  gidLink(pango_fontset_simple_new, "pango_fontset_simple_new", LIBS);
-  gidLink(pango_fontset_simple_append, "pango_fontset_simple_append", LIBS);
-  gidLink(pango_fontset_simple_size, "pango_fontset_simple_size", LIBS);
+  gidLink(cast(void**)&pango_fontset_simple_get_type, "pango_fontset_simple_get_type", LIBS);
+  gidLink(cast(void**)&pango_fontset_simple_new, "pango_fontset_simple_new", LIBS);
+  gidLink(cast(void**)&pango_fontset_simple_append, "pango_fontset_simple_append", LIBS);
+  gidLink(cast(void**)&pango_fontset_simple_size, "pango_fontset_simple_size", LIBS);
 
   // Global
-  gidLink(pango_attr_allow_breaks_new, "pango_attr_allow_breaks_new", LIBS);
-  gidLink(pango_attr_background_alpha_new, "pango_attr_background_alpha_new", LIBS);
-  gidLink(pango_attr_background_new, "pango_attr_background_new", LIBS);
-  gidLink(pango_attr_baseline_shift_new, "pango_attr_baseline_shift_new", LIBS);
-  gidLink(pango_attr_break, "pango_attr_break", LIBS);
-  gidLink(pango_attr_fallback_new, "pango_attr_fallback_new", LIBS);
-  gidLink(pango_attr_family_new, "pango_attr_family_new", LIBS);
-  gidLink(pango_attr_font_scale_new, "pango_attr_font_scale_new", LIBS);
-  gidLink(pango_attr_foreground_alpha_new, "pango_attr_foreground_alpha_new", LIBS);
-  gidLink(pango_attr_foreground_new, "pango_attr_foreground_new", LIBS);
-  gidLink(pango_attr_gravity_hint_new, "pango_attr_gravity_hint_new", LIBS);
-  gidLink(pango_attr_gravity_new, "pango_attr_gravity_new", LIBS);
-  gidLink(pango_attr_insert_hyphens_new, "pango_attr_insert_hyphens_new", LIBS);
-  gidLink(pango_attr_letter_spacing_new, "pango_attr_letter_spacing_new", LIBS);
-  gidLink(pango_attr_line_height_new, "pango_attr_line_height_new", LIBS);
-  gidLink(pango_attr_line_height_new_absolute, "pango_attr_line_height_new_absolute", LIBS);
-  gidLink(pango_attr_overline_color_new, "pango_attr_overline_color_new", LIBS);
-  gidLink(pango_attr_overline_new, "pango_attr_overline_new", LIBS);
-  gidLink(pango_attr_rise_new, "pango_attr_rise_new", LIBS);
-  gidLink(pango_attr_scale_new, "pango_attr_scale_new", LIBS);
-  gidLink(pango_attr_sentence_new, "pango_attr_sentence_new", LIBS);
-  gidLink(pango_attr_show_new, "pango_attr_show_new", LIBS);
-  gidLink(pango_attr_stretch_new, "pango_attr_stretch_new", LIBS);
-  gidLink(pango_attr_strikethrough_color_new, "pango_attr_strikethrough_color_new", LIBS);
-  gidLink(pango_attr_strikethrough_new, "pango_attr_strikethrough_new", LIBS);
-  gidLink(pango_attr_style_new, "pango_attr_style_new", LIBS);
-  gidLink(pango_attr_text_transform_new, "pango_attr_text_transform_new", LIBS);
-  gidLink(pango_attr_underline_color_new, "pango_attr_underline_color_new", LIBS);
-  gidLink(pango_attr_underline_new, "pango_attr_underline_new", LIBS);
-  gidLink(pango_attr_variant_new, "pango_attr_variant_new", LIBS);
-  gidLink(pango_attr_weight_new, "pango_attr_weight_new", LIBS);
-  gidLink(pango_attr_word_new, "pango_attr_word_new", LIBS);
-  gidLink(pango_break, "pango_break", LIBS);
-  gidLink(pango_default_break, "pango_default_break", LIBS);
-  gidLink(pango_extents_to_pixels, "pango_extents_to_pixels", LIBS);
-  gidLink(pango_find_base_dir, "pango_find_base_dir", LIBS);
-  gidLink(pango_find_paragraph_boundary, "pango_find_paragraph_boundary", LIBS);
-  gidLink(pango_get_log_attrs, "pango_get_log_attrs", LIBS);
-  gidLink(pango_get_mirror_char, "pango_get_mirror_char", LIBS);
-  gidLink(pango_is_zero_width, "pango_is_zero_width", LIBS);
-  gidLink(pango_itemize, "pango_itemize", LIBS);
-  gidLink(pango_itemize_with_base_dir, "pango_itemize_with_base_dir", LIBS);
-  gidLink(pango_log2vis_get_embedding_levels, "pango_log2vis_get_embedding_levels", LIBS);
-  gidLink(pango_markup_parser_finish, "pango_markup_parser_finish", LIBS);
-  gidLink(pango_markup_parser_new, "pango_markup_parser_new", LIBS);
-  gidLink(pango_parse_enum, "pango_parse_enum", LIBS);
-  gidLink(pango_parse_markup, "pango_parse_markup", LIBS);
-  gidLink(pango_parse_stretch, "pango_parse_stretch", LIBS);
-  gidLink(pango_parse_style, "pango_parse_style", LIBS);
-  gidLink(pango_parse_variant, "pango_parse_variant", LIBS);
-  gidLink(pango_parse_weight, "pango_parse_weight", LIBS);
-  gidLink(pango_quantize_line_geometry, "pango_quantize_line_geometry", LIBS);
-  gidLink(pango_read_line, "pango_read_line", LIBS);
-  gidLink(pango_reorder_items, "pango_reorder_items", LIBS);
-  gidLink(pango_scan_int, "pango_scan_int", LIBS);
-  gidLink(pango_scan_string, "pango_scan_string", LIBS);
-  gidLink(pango_scan_word, "pango_scan_word", LIBS);
-  gidLink(pango_shape, "pango_shape", LIBS);
-  gidLink(pango_shape_full, "pango_shape_full", LIBS);
-  gidLink(pango_shape_item, "pango_shape_item", LIBS);
-  gidLink(pango_shape_with_flags, "pango_shape_with_flags", LIBS);
-  gidLink(pango_skip_space, "pango_skip_space", LIBS);
-  gidLink(pango_split_file_list, "pango_split_file_list", LIBS);
-  gidLink(pango_tailor_break, "pango_tailor_break", LIBS);
-  gidLink(pango_trim_string, "pango_trim_string", LIBS);
-  gidLink(pango_unichar_direction, "pango_unichar_direction", LIBS);
-  gidLink(pango_units_from_double, "pango_units_from_double", LIBS);
-  gidLink(pango_units_to_double, "pango_units_to_double", LIBS);
-  gidLink(pango_version, "pango_version", LIBS);
-  gidLink(pango_version_check, "pango_version_check", LIBS);
-  gidLink(pango_version_string, "pango_version_string", LIBS);
+  gidLink(cast(void**)&pango_attr_allow_breaks_new, "pango_attr_allow_breaks_new", LIBS);
+  gidLink(cast(void**)&pango_attr_background_alpha_new, "pango_attr_background_alpha_new", LIBS);
+  gidLink(cast(void**)&pango_attr_background_new, "pango_attr_background_new", LIBS);
+  gidLink(cast(void**)&pango_attr_baseline_shift_new, "pango_attr_baseline_shift_new", LIBS);
+  gidLink(cast(void**)&pango_attr_break, "pango_attr_break", LIBS);
+  gidLink(cast(void**)&pango_attr_fallback_new, "pango_attr_fallback_new", LIBS);
+  gidLink(cast(void**)&pango_attr_family_new, "pango_attr_family_new", LIBS);
+  gidLink(cast(void**)&pango_attr_font_scale_new, "pango_attr_font_scale_new", LIBS);
+  gidLink(cast(void**)&pango_attr_foreground_alpha_new, "pango_attr_foreground_alpha_new", LIBS);
+  gidLink(cast(void**)&pango_attr_foreground_new, "pango_attr_foreground_new", LIBS);
+  gidLink(cast(void**)&pango_attr_gravity_hint_new, "pango_attr_gravity_hint_new", LIBS);
+  gidLink(cast(void**)&pango_attr_gravity_new, "pango_attr_gravity_new", LIBS);
+  gidLink(cast(void**)&pango_attr_insert_hyphens_new, "pango_attr_insert_hyphens_new", LIBS);
+  gidLink(cast(void**)&pango_attr_letter_spacing_new, "pango_attr_letter_spacing_new", LIBS);
+  gidLink(cast(void**)&pango_attr_line_height_new, "pango_attr_line_height_new", LIBS);
+  gidLink(cast(void**)&pango_attr_line_height_new_absolute, "pango_attr_line_height_new_absolute", LIBS);
+  gidLink(cast(void**)&pango_attr_overline_color_new, "pango_attr_overline_color_new", LIBS);
+  gidLink(cast(void**)&pango_attr_overline_new, "pango_attr_overline_new", LIBS);
+  gidLink(cast(void**)&pango_attr_rise_new, "pango_attr_rise_new", LIBS);
+  gidLink(cast(void**)&pango_attr_scale_new, "pango_attr_scale_new", LIBS);
+  gidLink(cast(void**)&pango_attr_sentence_new, "pango_attr_sentence_new", LIBS);
+  gidLink(cast(void**)&pango_attr_show_new, "pango_attr_show_new", LIBS);
+  gidLink(cast(void**)&pango_attr_stretch_new, "pango_attr_stretch_new", LIBS);
+  gidLink(cast(void**)&pango_attr_strikethrough_color_new, "pango_attr_strikethrough_color_new", LIBS);
+  gidLink(cast(void**)&pango_attr_strikethrough_new, "pango_attr_strikethrough_new", LIBS);
+  gidLink(cast(void**)&pango_attr_style_new, "pango_attr_style_new", LIBS);
+  gidLink(cast(void**)&pango_attr_text_transform_new, "pango_attr_text_transform_new", LIBS);
+  gidLink(cast(void**)&pango_attr_underline_color_new, "pango_attr_underline_color_new", LIBS);
+  gidLink(cast(void**)&pango_attr_underline_new, "pango_attr_underline_new", LIBS);
+  gidLink(cast(void**)&pango_attr_variant_new, "pango_attr_variant_new", LIBS);
+  gidLink(cast(void**)&pango_attr_weight_new, "pango_attr_weight_new", LIBS);
+  gidLink(cast(void**)&pango_attr_word_new, "pango_attr_word_new", LIBS);
+  gidLink(cast(void**)&pango_break, "pango_break", LIBS);
+  gidLink(cast(void**)&pango_default_break, "pango_default_break", LIBS);
+  gidLink(cast(void**)&pango_extents_to_pixels, "pango_extents_to_pixels", LIBS);
+  gidLink(cast(void**)&pango_find_base_dir, "pango_find_base_dir", LIBS);
+  gidLink(cast(void**)&pango_find_paragraph_boundary, "pango_find_paragraph_boundary", LIBS);
+  gidLink(cast(void**)&pango_get_log_attrs, "pango_get_log_attrs", LIBS);
+  gidLink(cast(void**)&pango_get_mirror_char, "pango_get_mirror_char", LIBS);
+  gidLink(cast(void**)&pango_is_zero_width, "pango_is_zero_width", LIBS);
+  gidLink(cast(void**)&pango_itemize, "pango_itemize", LIBS);
+  gidLink(cast(void**)&pango_itemize_with_base_dir, "pango_itemize_with_base_dir", LIBS);
+  gidLink(cast(void**)&pango_log2vis_get_embedding_levels, "pango_log2vis_get_embedding_levels", LIBS);
+  gidLink(cast(void**)&pango_markup_parser_finish, "pango_markup_parser_finish", LIBS);
+  gidLink(cast(void**)&pango_markup_parser_new, "pango_markup_parser_new", LIBS);
+  gidLink(cast(void**)&pango_parse_enum, "pango_parse_enum", LIBS);
+  gidLink(cast(void**)&pango_parse_markup, "pango_parse_markup", LIBS);
+  gidLink(cast(void**)&pango_parse_stretch, "pango_parse_stretch", LIBS);
+  gidLink(cast(void**)&pango_parse_style, "pango_parse_style", LIBS);
+  gidLink(cast(void**)&pango_parse_variant, "pango_parse_variant", LIBS);
+  gidLink(cast(void**)&pango_parse_weight, "pango_parse_weight", LIBS);
+  gidLink(cast(void**)&pango_quantize_line_geometry, "pango_quantize_line_geometry", LIBS);
+  gidLink(cast(void**)&pango_read_line, "pango_read_line", LIBS);
+  gidLink(cast(void**)&pango_reorder_items, "pango_reorder_items", LIBS);
+  gidLink(cast(void**)&pango_scan_int, "pango_scan_int", LIBS);
+  gidLink(cast(void**)&pango_scan_string, "pango_scan_string", LIBS);
+  gidLink(cast(void**)&pango_scan_word, "pango_scan_word", LIBS);
+  gidLink(cast(void**)&pango_shape, "pango_shape", LIBS);
+  gidLink(cast(void**)&pango_shape_full, "pango_shape_full", LIBS);
+  gidLink(cast(void**)&pango_shape_item, "pango_shape_item", LIBS);
+  gidLink(cast(void**)&pango_shape_with_flags, "pango_shape_with_flags", LIBS);
+  gidLink(cast(void**)&pango_skip_space, "pango_skip_space", LIBS);
+  gidLink(cast(void**)&pango_split_file_list, "pango_split_file_list", LIBS);
+  gidLink(cast(void**)&pango_tailor_break, "pango_tailor_break", LIBS);
+  gidLink(cast(void**)&pango_trim_string, "pango_trim_string", LIBS);
+  gidLink(cast(void**)&pango_unichar_direction, "pango_unichar_direction", LIBS);
+  gidLink(cast(void**)&pango_units_from_double, "pango_units_from_double", LIBS);
+  gidLink(cast(void**)&pango_units_to_double, "pango_units_to_double", LIBS);
+  gidLink(cast(void**)&pango_version, "pango_version", LIBS);
+  gidLink(cast(void**)&pango_version_check, "pango_version_check", LIBS);
+  gidLink(cast(void**)&pango_version_string, "pango_version_string", LIBS);
 
   // GlyphItem
-  gidLink(pango_glyph_item_get_type, "pango_glyph_item_get_type", LIBS);
-  gidLink(pango_glyph_item_apply_attrs, "pango_glyph_item_apply_attrs", LIBS);
-  gidLink(pango_glyph_item_copy, "pango_glyph_item_copy", LIBS);
-  gidLink(pango_glyph_item_free, "pango_glyph_item_free", LIBS);
-  gidLink(pango_glyph_item_get_logical_widths, "pango_glyph_item_get_logical_widths", LIBS);
-  gidLink(pango_glyph_item_letter_space, "pango_glyph_item_letter_space", LIBS);
-  gidLink(pango_glyph_item_split, "pango_glyph_item_split", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_get_type, "pango_glyph_item_get_type", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_apply_attrs, "pango_glyph_item_apply_attrs", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_copy, "pango_glyph_item_copy", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_free, "pango_glyph_item_free", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_get_logical_widths, "pango_glyph_item_get_logical_widths", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_letter_space, "pango_glyph_item_letter_space", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_split, "pango_glyph_item_split", LIBS);
 
   // GlyphItemIter
-  gidLink(pango_glyph_item_iter_get_type, "pango_glyph_item_iter_get_type", LIBS);
-  gidLink(pango_glyph_item_iter_copy, "pango_glyph_item_iter_copy", LIBS);
-  gidLink(pango_glyph_item_iter_free, "pango_glyph_item_iter_free", LIBS);
-  gidLink(pango_glyph_item_iter_init_end, "pango_glyph_item_iter_init_end", LIBS);
-  gidLink(pango_glyph_item_iter_init_start, "pango_glyph_item_iter_init_start", LIBS);
-  gidLink(pango_glyph_item_iter_next_cluster, "pango_glyph_item_iter_next_cluster", LIBS);
-  gidLink(pango_glyph_item_iter_prev_cluster, "pango_glyph_item_iter_prev_cluster", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_iter_get_type, "pango_glyph_item_iter_get_type", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_iter_copy, "pango_glyph_item_iter_copy", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_iter_free, "pango_glyph_item_iter_free", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_iter_init_end, "pango_glyph_item_iter_init_end", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_iter_init_start, "pango_glyph_item_iter_init_start", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_iter_next_cluster, "pango_glyph_item_iter_next_cluster", LIBS);
+  gidLink(cast(void**)&pango_glyph_item_iter_prev_cluster, "pango_glyph_item_iter_prev_cluster", LIBS);
 
   // GlyphString
-  gidLink(pango_glyph_string_get_type, "pango_glyph_string_get_type", LIBS);
-  gidLink(pango_glyph_string_new, "pango_glyph_string_new", LIBS);
-  gidLink(pango_glyph_string_copy, "pango_glyph_string_copy", LIBS);
-  gidLink(pango_glyph_string_extents, "pango_glyph_string_extents", LIBS);
-  gidLink(pango_glyph_string_extents_range, "pango_glyph_string_extents_range", LIBS);
-  gidLink(pango_glyph_string_free, "pango_glyph_string_free", LIBS);
-  gidLink(pango_glyph_string_get_logical_widths, "pango_glyph_string_get_logical_widths", LIBS);
-  gidLink(pango_glyph_string_get_width, "pango_glyph_string_get_width", LIBS);
-  gidLink(pango_glyph_string_index_to_x, "pango_glyph_string_index_to_x", LIBS);
-  gidLink(pango_glyph_string_index_to_x_full, "pango_glyph_string_index_to_x_full", LIBS);
-  gidLink(pango_glyph_string_set_size, "pango_glyph_string_set_size", LIBS);
-  gidLink(pango_glyph_string_x_to_index, "pango_glyph_string_x_to_index", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_get_type, "pango_glyph_string_get_type", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_new, "pango_glyph_string_new", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_copy, "pango_glyph_string_copy", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_extents, "pango_glyph_string_extents", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_extents_range, "pango_glyph_string_extents_range", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_free, "pango_glyph_string_free", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_get_logical_widths, "pango_glyph_string_get_logical_widths", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_get_width, "pango_glyph_string_get_width", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_index_to_x, "pango_glyph_string_index_to_x", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_index_to_x_full, "pango_glyph_string_index_to_x_full", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_set_size, "pango_glyph_string_set_size", LIBS);
+  gidLink(cast(void**)&pango_glyph_string_x_to_index, "pango_glyph_string_x_to_index", LIBS);
 
   // Item
-  gidLink(pango_item_get_type, "pango_item_get_type", LIBS);
-  gidLink(pango_item_new, "pango_item_new", LIBS);
-  gidLink(pango_item_apply_attrs, "pango_item_apply_attrs", LIBS);
-  gidLink(pango_item_copy, "pango_item_copy", LIBS);
-  gidLink(pango_item_free, "pango_item_free", LIBS);
-  gidLink(pango_item_split, "pango_item_split", LIBS);
+  gidLink(cast(void**)&pango_item_get_type, "pango_item_get_type", LIBS);
+  gidLink(cast(void**)&pango_item_new, "pango_item_new", LIBS);
+  gidLink(cast(void**)&pango_item_apply_attrs, "pango_item_apply_attrs", LIBS);
+  gidLink(cast(void**)&pango_item_copy, "pango_item_copy", LIBS);
+  gidLink(cast(void**)&pango_item_free, "pango_item_free", LIBS);
+  gidLink(cast(void**)&pango_item_split, "pango_item_split", LIBS);
 
   // Layout
-  gidLink(pango_layout_get_type, "pango_layout_get_type", LIBS);
-  gidLink(pango_layout_new, "pango_layout_new", LIBS);
-  gidLink(pango_layout_deserialize, "pango_layout_deserialize", LIBS);
-  gidLink(pango_layout_context_changed, "pango_layout_context_changed", LIBS);
-  gidLink(pango_layout_copy, "pango_layout_copy", LIBS);
-  gidLink(pango_layout_get_alignment, "pango_layout_get_alignment", LIBS);
-  gidLink(pango_layout_get_attributes, "pango_layout_get_attributes", LIBS);
-  gidLink(pango_layout_get_auto_dir, "pango_layout_get_auto_dir", LIBS);
-  gidLink(pango_layout_get_baseline, "pango_layout_get_baseline", LIBS);
-  gidLink(pango_layout_get_caret_pos, "pango_layout_get_caret_pos", LIBS);
-  gidLink(pango_layout_get_character_count, "pango_layout_get_character_count", LIBS);
-  gidLink(pango_layout_get_context, "pango_layout_get_context", LIBS);
-  gidLink(pango_layout_get_cursor_pos, "pango_layout_get_cursor_pos", LIBS);
-  gidLink(pango_layout_get_direction, "pango_layout_get_direction", LIBS);
-  gidLink(pango_layout_get_ellipsize, "pango_layout_get_ellipsize", LIBS);
-  gidLink(pango_layout_get_extents, "pango_layout_get_extents", LIBS);
-  gidLink(pango_layout_get_font_description, "pango_layout_get_font_description", LIBS);
-  gidLink(pango_layout_get_height, "pango_layout_get_height", LIBS);
-  gidLink(pango_layout_get_indent, "pango_layout_get_indent", LIBS);
-  gidLink(pango_layout_get_iter, "pango_layout_get_iter", LIBS);
-  gidLink(pango_layout_get_justify, "pango_layout_get_justify", LIBS);
-  gidLink(pango_layout_get_justify_last_line, "pango_layout_get_justify_last_line", LIBS);
-  gidLink(pango_layout_get_line, "pango_layout_get_line", LIBS);
-  gidLink(pango_layout_get_line_count, "pango_layout_get_line_count", LIBS);
-  gidLink(pango_layout_get_line_readonly, "pango_layout_get_line_readonly", LIBS);
-  gidLink(pango_layout_get_line_spacing, "pango_layout_get_line_spacing", LIBS);
-  gidLink(pango_layout_get_lines, "pango_layout_get_lines", LIBS);
-  gidLink(pango_layout_get_lines_readonly, "pango_layout_get_lines_readonly", LIBS);
-  gidLink(pango_layout_get_log_attrs, "pango_layout_get_log_attrs", LIBS);
-  gidLink(pango_layout_get_log_attrs_readonly, "pango_layout_get_log_attrs_readonly", LIBS);
-  gidLink(pango_layout_get_pixel_extents, "pango_layout_get_pixel_extents", LIBS);
-  gidLink(pango_layout_get_pixel_size, "pango_layout_get_pixel_size", LIBS);
-  gidLink(pango_layout_get_serial, "pango_layout_get_serial", LIBS);
-  gidLink(pango_layout_get_single_paragraph_mode, "pango_layout_get_single_paragraph_mode", LIBS);
-  gidLink(pango_layout_get_size, "pango_layout_get_size", LIBS);
-  gidLink(pango_layout_get_spacing, "pango_layout_get_spacing", LIBS);
-  gidLink(pango_layout_get_tabs, "pango_layout_get_tabs", LIBS);
-  gidLink(pango_layout_get_text, "pango_layout_get_text", LIBS);
-  gidLink(pango_layout_get_unknown_glyphs_count, "pango_layout_get_unknown_glyphs_count", LIBS);
-  gidLink(pango_layout_get_width, "pango_layout_get_width", LIBS);
-  gidLink(pango_layout_get_wrap, "pango_layout_get_wrap", LIBS);
-  gidLink(pango_layout_index_to_line_x, "pango_layout_index_to_line_x", LIBS);
-  gidLink(pango_layout_index_to_pos, "pango_layout_index_to_pos", LIBS);
-  gidLink(pango_layout_is_ellipsized, "pango_layout_is_ellipsized", LIBS);
-  gidLink(pango_layout_is_wrapped, "pango_layout_is_wrapped", LIBS);
-  gidLink(pango_layout_move_cursor_visually, "pango_layout_move_cursor_visually", LIBS);
-  gidLink(pango_layout_serialize, "pango_layout_serialize", LIBS);
-  gidLink(pango_layout_set_alignment, "pango_layout_set_alignment", LIBS);
-  gidLink(pango_layout_set_attributes, "pango_layout_set_attributes", LIBS);
-  gidLink(pango_layout_set_auto_dir, "pango_layout_set_auto_dir", LIBS);
-  gidLink(pango_layout_set_ellipsize, "pango_layout_set_ellipsize", LIBS);
-  gidLink(pango_layout_set_font_description, "pango_layout_set_font_description", LIBS);
-  gidLink(pango_layout_set_height, "pango_layout_set_height", LIBS);
-  gidLink(pango_layout_set_indent, "pango_layout_set_indent", LIBS);
-  gidLink(pango_layout_set_justify, "pango_layout_set_justify", LIBS);
-  gidLink(pango_layout_set_justify_last_line, "pango_layout_set_justify_last_line", LIBS);
-  gidLink(pango_layout_set_line_spacing, "pango_layout_set_line_spacing", LIBS);
-  gidLink(pango_layout_set_markup, "pango_layout_set_markup", LIBS);
-  gidLink(pango_layout_set_markup_with_accel, "pango_layout_set_markup_with_accel", LIBS);
-  gidLink(pango_layout_set_single_paragraph_mode, "pango_layout_set_single_paragraph_mode", LIBS);
-  gidLink(pango_layout_set_spacing, "pango_layout_set_spacing", LIBS);
-  gidLink(pango_layout_set_tabs, "pango_layout_set_tabs", LIBS);
-  gidLink(pango_layout_set_text, "pango_layout_set_text", LIBS);
-  gidLink(pango_layout_set_width, "pango_layout_set_width", LIBS);
-  gidLink(pango_layout_set_wrap, "pango_layout_set_wrap", LIBS);
-  gidLink(pango_layout_write_to_file, "pango_layout_write_to_file", LIBS);
-  gidLink(pango_layout_xy_to_index, "pango_layout_xy_to_index", LIBS);
+  gidLink(cast(void**)&pango_layout_get_type, "pango_layout_get_type", LIBS);
+  gidLink(cast(void**)&pango_layout_new, "pango_layout_new", LIBS);
+  gidLink(cast(void**)&pango_layout_deserialize, "pango_layout_deserialize", LIBS);
+  gidLink(cast(void**)&pango_layout_context_changed, "pango_layout_context_changed", LIBS);
+  gidLink(cast(void**)&pango_layout_copy, "pango_layout_copy", LIBS);
+  gidLink(cast(void**)&pango_layout_get_alignment, "pango_layout_get_alignment", LIBS);
+  gidLink(cast(void**)&pango_layout_get_attributes, "pango_layout_get_attributes", LIBS);
+  gidLink(cast(void**)&pango_layout_get_auto_dir, "pango_layout_get_auto_dir", LIBS);
+  gidLink(cast(void**)&pango_layout_get_baseline, "pango_layout_get_baseline", LIBS);
+  gidLink(cast(void**)&pango_layout_get_caret_pos, "pango_layout_get_caret_pos", LIBS);
+  gidLink(cast(void**)&pango_layout_get_character_count, "pango_layout_get_character_count", LIBS);
+  gidLink(cast(void**)&pango_layout_get_context, "pango_layout_get_context", LIBS);
+  gidLink(cast(void**)&pango_layout_get_cursor_pos, "pango_layout_get_cursor_pos", LIBS);
+  gidLink(cast(void**)&pango_layout_get_direction, "pango_layout_get_direction", LIBS);
+  gidLink(cast(void**)&pango_layout_get_ellipsize, "pango_layout_get_ellipsize", LIBS);
+  gidLink(cast(void**)&pango_layout_get_extents, "pango_layout_get_extents", LIBS);
+  gidLink(cast(void**)&pango_layout_get_font_description, "pango_layout_get_font_description", LIBS);
+  gidLink(cast(void**)&pango_layout_get_height, "pango_layout_get_height", LIBS);
+  gidLink(cast(void**)&pango_layout_get_indent, "pango_layout_get_indent", LIBS);
+  gidLink(cast(void**)&pango_layout_get_iter, "pango_layout_get_iter", LIBS);
+  gidLink(cast(void**)&pango_layout_get_justify, "pango_layout_get_justify", LIBS);
+  gidLink(cast(void**)&pango_layout_get_justify_last_line, "pango_layout_get_justify_last_line", LIBS);
+  gidLink(cast(void**)&pango_layout_get_line, "pango_layout_get_line", LIBS);
+  gidLink(cast(void**)&pango_layout_get_line_count, "pango_layout_get_line_count", LIBS);
+  gidLink(cast(void**)&pango_layout_get_line_readonly, "pango_layout_get_line_readonly", LIBS);
+  gidLink(cast(void**)&pango_layout_get_line_spacing, "pango_layout_get_line_spacing", LIBS);
+  gidLink(cast(void**)&pango_layout_get_lines, "pango_layout_get_lines", LIBS);
+  gidLink(cast(void**)&pango_layout_get_lines_readonly, "pango_layout_get_lines_readonly", LIBS);
+  gidLink(cast(void**)&pango_layout_get_log_attrs, "pango_layout_get_log_attrs", LIBS);
+  gidLink(cast(void**)&pango_layout_get_log_attrs_readonly, "pango_layout_get_log_attrs_readonly", LIBS);
+  gidLink(cast(void**)&pango_layout_get_pixel_extents, "pango_layout_get_pixel_extents", LIBS);
+  gidLink(cast(void**)&pango_layout_get_pixel_size, "pango_layout_get_pixel_size", LIBS);
+  gidLink(cast(void**)&pango_layout_get_serial, "pango_layout_get_serial", LIBS);
+  gidLink(cast(void**)&pango_layout_get_single_paragraph_mode, "pango_layout_get_single_paragraph_mode", LIBS);
+  gidLink(cast(void**)&pango_layout_get_size, "pango_layout_get_size", LIBS);
+  gidLink(cast(void**)&pango_layout_get_spacing, "pango_layout_get_spacing", LIBS);
+  gidLink(cast(void**)&pango_layout_get_tabs, "pango_layout_get_tabs", LIBS);
+  gidLink(cast(void**)&pango_layout_get_text, "pango_layout_get_text", LIBS);
+  gidLink(cast(void**)&pango_layout_get_unknown_glyphs_count, "pango_layout_get_unknown_glyphs_count", LIBS);
+  gidLink(cast(void**)&pango_layout_get_width, "pango_layout_get_width", LIBS);
+  gidLink(cast(void**)&pango_layout_get_wrap, "pango_layout_get_wrap", LIBS);
+  gidLink(cast(void**)&pango_layout_index_to_line_x, "pango_layout_index_to_line_x", LIBS);
+  gidLink(cast(void**)&pango_layout_index_to_pos, "pango_layout_index_to_pos", LIBS);
+  gidLink(cast(void**)&pango_layout_is_ellipsized, "pango_layout_is_ellipsized", LIBS);
+  gidLink(cast(void**)&pango_layout_is_wrapped, "pango_layout_is_wrapped", LIBS);
+  gidLink(cast(void**)&pango_layout_move_cursor_visually, "pango_layout_move_cursor_visually", LIBS);
+  gidLink(cast(void**)&pango_layout_serialize, "pango_layout_serialize", LIBS);
+  gidLink(cast(void**)&pango_layout_set_alignment, "pango_layout_set_alignment", LIBS);
+  gidLink(cast(void**)&pango_layout_set_attributes, "pango_layout_set_attributes", LIBS);
+  gidLink(cast(void**)&pango_layout_set_auto_dir, "pango_layout_set_auto_dir", LIBS);
+  gidLink(cast(void**)&pango_layout_set_ellipsize, "pango_layout_set_ellipsize", LIBS);
+  gidLink(cast(void**)&pango_layout_set_font_description, "pango_layout_set_font_description", LIBS);
+  gidLink(cast(void**)&pango_layout_set_height, "pango_layout_set_height", LIBS);
+  gidLink(cast(void**)&pango_layout_set_indent, "pango_layout_set_indent", LIBS);
+  gidLink(cast(void**)&pango_layout_set_justify, "pango_layout_set_justify", LIBS);
+  gidLink(cast(void**)&pango_layout_set_justify_last_line, "pango_layout_set_justify_last_line", LIBS);
+  gidLink(cast(void**)&pango_layout_set_line_spacing, "pango_layout_set_line_spacing", LIBS);
+  gidLink(cast(void**)&pango_layout_set_markup, "pango_layout_set_markup", LIBS);
+  gidLink(cast(void**)&pango_layout_set_markup_with_accel, "pango_layout_set_markup_with_accel", LIBS);
+  gidLink(cast(void**)&pango_layout_set_single_paragraph_mode, "pango_layout_set_single_paragraph_mode", LIBS);
+  gidLink(cast(void**)&pango_layout_set_spacing, "pango_layout_set_spacing", LIBS);
+  gidLink(cast(void**)&pango_layout_set_tabs, "pango_layout_set_tabs", LIBS);
+  gidLink(cast(void**)&pango_layout_set_text, "pango_layout_set_text", LIBS);
+  gidLink(cast(void**)&pango_layout_set_width, "pango_layout_set_width", LIBS);
+  gidLink(cast(void**)&pango_layout_set_wrap, "pango_layout_set_wrap", LIBS);
+  gidLink(cast(void**)&pango_layout_write_to_file, "pango_layout_write_to_file", LIBS);
+  gidLink(cast(void**)&pango_layout_xy_to_index, "pango_layout_xy_to_index", LIBS);
 
   // LayoutIter
-  gidLink(pango_layout_iter_get_type, "pango_layout_iter_get_type", LIBS);
-  gidLink(pango_layout_iter_at_last_line, "pango_layout_iter_at_last_line", LIBS);
-  gidLink(pango_layout_iter_copy, "pango_layout_iter_copy", LIBS);
-  gidLink(pango_layout_iter_free, "pango_layout_iter_free", LIBS);
-  gidLink(pango_layout_iter_get_baseline, "pango_layout_iter_get_baseline", LIBS);
-  gidLink(pango_layout_iter_get_char_extents, "pango_layout_iter_get_char_extents", LIBS);
-  gidLink(pango_layout_iter_get_cluster_extents, "pango_layout_iter_get_cluster_extents", LIBS);
-  gidLink(pango_layout_iter_get_index, "pango_layout_iter_get_index", LIBS);
-  gidLink(pango_layout_iter_get_layout, "pango_layout_iter_get_layout", LIBS);
-  gidLink(pango_layout_iter_get_layout_extents, "pango_layout_iter_get_layout_extents", LIBS);
-  gidLink(pango_layout_iter_get_line, "pango_layout_iter_get_line", LIBS);
-  gidLink(pango_layout_iter_get_line_extents, "pango_layout_iter_get_line_extents", LIBS);
-  gidLink(pango_layout_iter_get_line_readonly, "pango_layout_iter_get_line_readonly", LIBS);
-  gidLink(pango_layout_iter_get_line_yrange, "pango_layout_iter_get_line_yrange", LIBS);
-  gidLink(pango_layout_iter_get_run, "pango_layout_iter_get_run", LIBS);
-  gidLink(pango_layout_iter_get_run_baseline, "pango_layout_iter_get_run_baseline", LIBS);
-  gidLink(pango_layout_iter_get_run_extents, "pango_layout_iter_get_run_extents", LIBS);
-  gidLink(pango_layout_iter_get_run_readonly, "pango_layout_iter_get_run_readonly", LIBS);
-  gidLink(pango_layout_iter_next_char, "pango_layout_iter_next_char", LIBS);
-  gidLink(pango_layout_iter_next_cluster, "pango_layout_iter_next_cluster", LIBS);
-  gidLink(pango_layout_iter_next_line, "pango_layout_iter_next_line", LIBS);
-  gidLink(pango_layout_iter_next_run, "pango_layout_iter_next_run", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_type, "pango_layout_iter_get_type", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_at_last_line, "pango_layout_iter_at_last_line", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_copy, "pango_layout_iter_copy", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_free, "pango_layout_iter_free", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_baseline, "pango_layout_iter_get_baseline", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_char_extents, "pango_layout_iter_get_char_extents", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_cluster_extents, "pango_layout_iter_get_cluster_extents", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_index, "pango_layout_iter_get_index", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_layout, "pango_layout_iter_get_layout", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_layout_extents, "pango_layout_iter_get_layout_extents", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_line, "pango_layout_iter_get_line", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_line_extents, "pango_layout_iter_get_line_extents", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_line_readonly, "pango_layout_iter_get_line_readonly", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_line_yrange, "pango_layout_iter_get_line_yrange", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_run, "pango_layout_iter_get_run", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_run_baseline, "pango_layout_iter_get_run_baseline", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_run_extents, "pango_layout_iter_get_run_extents", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_get_run_readonly, "pango_layout_iter_get_run_readonly", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_next_char, "pango_layout_iter_next_char", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_next_cluster, "pango_layout_iter_next_cluster", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_next_line, "pango_layout_iter_next_line", LIBS);
+  gidLink(cast(void**)&pango_layout_iter_next_run, "pango_layout_iter_next_run", LIBS);
 
   // LayoutLine
-  gidLink(pango_layout_line_get_type, "pango_layout_line_get_type", LIBS);
-  gidLink(pango_layout_line_get_extents, "pango_layout_line_get_extents", LIBS);
-  gidLink(pango_layout_line_get_height, "pango_layout_line_get_height", LIBS);
-  gidLink(pango_layout_line_get_length, "pango_layout_line_get_length", LIBS);
-  gidLink(pango_layout_line_get_pixel_extents, "pango_layout_line_get_pixel_extents", LIBS);
-  gidLink(pango_layout_line_get_resolved_direction, "pango_layout_line_get_resolved_direction", LIBS);
-  gidLink(pango_layout_line_get_start_index, "pango_layout_line_get_start_index", LIBS);
-  gidLink(pango_layout_line_get_x_ranges, "pango_layout_line_get_x_ranges", LIBS);
-  gidLink(pango_layout_line_index_to_x, "pango_layout_line_index_to_x", LIBS);
-  gidLink(pango_layout_line_is_paragraph_start, "pango_layout_line_is_paragraph_start", LIBS);
-  gidLink(pango_layout_line_ref, "pango_layout_line_ref", LIBS);
-  gidLink(pango_layout_line_unref, "pango_layout_line_unref", LIBS);
-  gidLink(pango_layout_line_x_to_index, "pango_layout_line_x_to_index", LIBS);
+  gidLink(cast(void**)&pango_layout_line_get_type, "pango_layout_line_get_type", LIBS);
+  gidLink(cast(void**)&pango_layout_line_get_extents, "pango_layout_line_get_extents", LIBS);
+  gidLink(cast(void**)&pango_layout_line_get_height, "pango_layout_line_get_height", LIBS);
+  gidLink(cast(void**)&pango_layout_line_get_length, "pango_layout_line_get_length", LIBS);
+  gidLink(cast(void**)&pango_layout_line_get_pixel_extents, "pango_layout_line_get_pixel_extents", LIBS);
+  gidLink(cast(void**)&pango_layout_line_get_resolved_direction, "pango_layout_line_get_resolved_direction", LIBS);
+  gidLink(cast(void**)&pango_layout_line_get_start_index, "pango_layout_line_get_start_index", LIBS);
+  gidLink(cast(void**)&pango_layout_line_get_x_ranges, "pango_layout_line_get_x_ranges", LIBS);
+  gidLink(cast(void**)&pango_layout_line_index_to_x, "pango_layout_line_index_to_x", LIBS);
+  gidLink(cast(void**)&pango_layout_line_is_paragraph_start, "pango_layout_line_is_paragraph_start", LIBS);
+  gidLink(cast(void**)&pango_layout_line_ref, "pango_layout_line_ref", LIBS);
+  gidLink(cast(void**)&pango_layout_line_unref, "pango_layout_line_unref", LIBS);
+  gidLink(cast(void**)&pango_layout_line_x_to_index, "pango_layout_line_x_to_index", LIBS);
 
   // Matrix
-  gidLink(pango_matrix_get_type, "pango_matrix_get_type", LIBS);
-  gidLink(pango_matrix_concat, "pango_matrix_concat", LIBS);
-  gidLink(pango_matrix_copy, "pango_matrix_copy", LIBS);
-  gidLink(pango_matrix_free, "pango_matrix_free", LIBS);
-  gidLink(pango_matrix_get_font_scale_factor, "pango_matrix_get_font_scale_factor", LIBS);
-  gidLink(pango_matrix_get_font_scale_factors, "pango_matrix_get_font_scale_factors", LIBS);
-  gidLink(pango_matrix_get_slant_ratio, "pango_matrix_get_slant_ratio", LIBS);
-  gidLink(pango_matrix_rotate, "pango_matrix_rotate", LIBS);
-  gidLink(pango_matrix_scale, "pango_matrix_scale", LIBS);
-  gidLink(pango_matrix_transform_distance, "pango_matrix_transform_distance", LIBS);
-  gidLink(pango_matrix_transform_pixel_rectangle, "pango_matrix_transform_pixel_rectangle", LIBS);
-  gidLink(pango_matrix_transform_point, "pango_matrix_transform_point", LIBS);
-  gidLink(pango_matrix_transform_rectangle, "pango_matrix_transform_rectangle", LIBS);
-  gidLink(pango_matrix_translate, "pango_matrix_translate", LIBS);
+  gidLink(cast(void**)&pango_matrix_get_type, "pango_matrix_get_type", LIBS);
+  gidLink(cast(void**)&pango_matrix_concat, "pango_matrix_concat", LIBS);
+  gidLink(cast(void**)&pango_matrix_copy, "pango_matrix_copy", LIBS);
+  gidLink(cast(void**)&pango_matrix_free, "pango_matrix_free", LIBS);
+  gidLink(cast(void**)&pango_matrix_get_font_scale_factor, "pango_matrix_get_font_scale_factor", LIBS);
+  gidLink(cast(void**)&pango_matrix_get_font_scale_factors, "pango_matrix_get_font_scale_factors", LIBS);
+  gidLink(cast(void**)&pango_matrix_get_slant_ratio, "pango_matrix_get_slant_ratio", LIBS);
+  gidLink(cast(void**)&pango_matrix_rotate, "pango_matrix_rotate", LIBS);
+  gidLink(cast(void**)&pango_matrix_scale, "pango_matrix_scale", LIBS);
+  gidLink(cast(void**)&pango_matrix_transform_distance, "pango_matrix_transform_distance", LIBS);
+  gidLink(cast(void**)&pango_matrix_transform_pixel_rectangle, "pango_matrix_transform_pixel_rectangle", LIBS);
+  gidLink(cast(void**)&pango_matrix_transform_point, "pango_matrix_transform_point", LIBS);
+  gidLink(cast(void**)&pango_matrix_transform_rectangle, "pango_matrix_transform_rectangle", LIBS);
+  gidLink(cast(void**)&pango_matrix_translate, "pango_matrix_translate", LIBS);
 
   // PgLanguage
-  gidLink(pango_language_get_type, "pango_language_get_type", LIBS);
-  gidLink(pango_language_get_sample_string, "pango_language_get_sample_string", LIBS);
-  gidLink(pango_language_get_scripts, "pango_language_get_scripts", LIBS);
-  gidLink(pango_language_includes_script, "pango_language_includes_script", LIBS);
-  gidLink(pango_language_matches, "pango_language_matches", LIBS);
-  gidLink(pango_language_to_string, "pango_language_to_string", LIBS);
-  gidLink(pango_language_from_string, "pango_language_from_string", LIBS);
-  gidLink(pango_language_get_default, "pango_language_get_default", LIBS);
-  gidLink(pango_language_get_preferred, "pango_language_get_preferred", LIBS);
+  gidLink(cast(void**)&pango_language_get_type, "pango_language_get_type", LIBS);
+  gidLink(cast(void**)&pango_language_get_sample_string, "pango_language_get_sample_string", LIBS);
+  gidLink(cast(void**)&pango_language_get_scripts, "pango_language_get_scripts", LIBS);
+  gidLink(cast(void**)&pango_language_includes_script, "pango_language_includes_script", LIBS);
+  gidLink(cast(void**)&pango_language_matches, "pango_language_matches", LIBS);
+  gidLink(cast(void**)&pango_language_to_string, "pango_language_to_string", LIBS);
+  gidLink(cast(void**)&pango_language_from_string, "pango_language_from_string", LIBS);
+  gidLink(cast(void**)&pango_language_get_default, "pango_language_get_default", LIBS);
+  gidLink(cast(void**)&pango_language_get_preferred, "pango_language_get_preferred", LIBS);
 
   // Renderer
-  gidLink(pango_renderer_get_type, "pango_renderer_get_type", LIBS);
-  gidLink(pango_renderer_activate, "pango_renderer_activate", LIBS);
-  gidLink(pango_renderer_deactivate, "pango_renderer_deactivate", LIBS);
-  gidLink(pango_renderer_draw_error_underline, "pango_renderer_draw_error_underline", LIBS);
-  gidLink(pango_renderer_draw_glyph, "pango_renderer_draw_glyph", LIBS);
-  gidLink(pango_renderer_draw_glyph_item, "pango_renderer_draw_glyph_item", LIBS);
-  gidLink(pango_renderer_draw_glyphs, "pango_renderer_draw_glyphs", LIBS);
-  gidLink(pango_renderer_draw_layout, "pango_renderer_draw_layout", LIBS);
-  gidLink(pango_renderer_draw_layout_line, "pango_renderer_draw_layout_line", LIBS);
-  gidLink(pango_renderer_draw_rectangle, "pango_renderer_draw_rectangle", LIBS);
-  gidLink(pango_renderer_draw_trapezoid, "pango_renderer_draw_trapezoid", LIBS);
-  gidLink(pango_renderer_get_alpha, "pango_renderer_get_alpha", LIBS);
-  gidLink(pango_renderer_get_color, "pango_renderer_get_color", LIBS);
-  gidLink(pango_renderer_get_layout, "pango_renderer_get_layout", LIBS);
-  gidLink(pango_renderer_get_layout_line, "pango_renderer_get_layout_line", LIBS);
-  gidLink(pango_renderer_get_matrix, "pango_renderer_get_matrix", LIBS);
-  gidLink(pango_renderer_part_changed, "pango_renderer_part_changed", LIBS);
-  gidLink(pango_renderer_set_alpha, "pango_renderer_set_alpha", LIBS);
-  gidLink(pango_renderer_set_color, "pango_renderer_set_color", LIBS);
-  gidLink(pango_renderer_set_matrix, "pango_renderer_set_matrix", LIBS);
+  gidLink(cast(void**)&pango_renderer_get_type, "pango_renderer_get_type", LIBS);
+  gidLink(cast(void**)&pango_renderer_activate, "pango_renderer_activate", LIBS);
+  gidLink(cast(void**)&pango_renderer_deactivate, "pango_renderer_deactivate", LIBS);
+  gidLink(cast(void**)&pango_renderer_draw_error_underline, "pango_renderer_draw_error_underline", LIBS);
+  gidLink(cast(void**)&pango_renderer_draw_glyph, "pango_renderer_draw_glyph", LIBS);
+  gidLink(cast(void**)&pango_renderer_draw_glyph_item, "pango_renderer_draw_glyph_item", LIBS);
+  gidLink(cast(void**)&pango_renderer_draw_glyphs, "pango_renderer_draw_glyphs", LIBS);
+  gidLink(cast(void**)&pango_renderer_draw_layout, "pango_renderer_draw_layout", LIBS);
+  gidLink(cast(void**)&pango_renderer_draw_layout_line, "pango_renderer_draw_layout_line", LIBS);
+  gidLink(cast(void**)&pango_renderer_draw_rectangle, "pango_renderer_draw_rectangle", LIBS);
+  gidLink(cast(void**)&pango_renderer_draw_trapezoid, "pango_renderer_draw_trapezoid", LIBS);
+  gidLink(cast(void**)&pango_renderer_get_alpha, "pango_renderer_get_alpha", LIBS);
+  gidLink(cast(void**)&pango_renderer_get_color, "pango_renderer_get_color", LIBS);
+  gidLink(cast(void**)&pango_renderer_get_layout, "pango_renderer_get_layout", LIBS);
+  gidLink(cast(void**)&pango_renderer_get_layout_line, "pango_renderer_get_layout_line", LIBS);
+  gidLink(cast(void**)&pango_renderer_get_matrix, "pango_renderer_get_matrix", LIBS);
+  gidLink(cast(void**)&pango_renderer_part_changed, "pango_renderer_part_changed", LIBS);
+  gidLink(cast(void**)&pango_renderer_set_alpha, "pango_renderer_set_alpha", LIBS);
+  gidLink(cast(void**)&pango_renderer_set_color, "pango_renderer_set_color", LIBS);
+  gidLink(cast(void**)&pango_renderer_set_matrix, "pango_renderer_set_matrix", LIBS);
 
   // ScriptIter
-  gidLink(pango_script_iter_get_type, "pango_script_iter_get_type", LIBS);
-  gidLink(pango_script_iter_new, "pango_script_iter_new", LIBS);
-  gidLink(pango_script_iter_free, "pango_script_iter_free", LIBS);
-  gidLink(pango_script_iter_get_range, "pango_script_iter_get_range", LIBS);
-  gidLink(pango_script_iter_next, "pango_script_iter_next", LIBS);
+  gidLink(cast(void**)&pango_script_iter_get_type, "pango_script_iter_get_type", LIBS);
+  gidLink(cast(void**)&pango_script_iter_new, "pango_script_iter_new", LIBS);
+  gidLink(cast(void**)&pango_script_iter_free, "pango_script_iter_free", LIBS);
+  gidLink(cast(void**)&pango_script_iter_get_range, "pango_script_iter_get_range", LIBS);
+  gidLink(cast(void**)&pango_script_iter_next, "pango_script_iter_next", LIBS);
 
   // TabArray
-  gidLink(pango_tab_array_get_type, "pango_tab_array_get_type", LIBS);
-  gidLink(pango_tab_array_new, "pango_tab_array_new", LIBS);
-  gidLink(pango_tab_array_new_with_positions, "pango_tab_array_new_with_positions", LIBS);
-  gidLink(pango_tab_array_copy, "pango_tab_array_copy", LIBS);
-  gidLink(pango_tab_array_free, "pango_tab_array_free", LIBS);
-  gidLink(pango_tab_array_get_decimal_point, "pango_tab_array_get_decimal_point", LIBS);
-  gidLink(pango_tab_array_get_positions_in_pixels, "pango_tab_array_get_positions_in_pixels", LIBS);
-  gidLink(pango_tab_array_get_size, "pango_tab_array_get_size", LIBS);
-  gidLink(pango_tab_array_get_tab, "pango_tab_array_get_tab", LIBS);
-  gidLink(pango_tab_array_get_tabs, "pango_tab_array_get_tabs", LIBS);
-  gidLink(pango_tab_array_resize, "pango_tab_array_resize", LIBS);
-  gidLink(pango_tab_array_set_decimal_point, "pango_tab_array_set_decimal_point", LIBS);
-  gidLink(pango_tab_array_set_positions_in_pixels, "pango_tab_array_set_positions_in_pixels", LIBS);
-  gidLink(pango_tab_array_set_tab, "pango_tab_array_set_tab", LIBS);
-  gidLink(pango_tab_array_sort, "pango_tab_array_sort", LIBS);
-  gidLink(pango_tab_array_to_string, "pango_tab_array_to_string", LIBS);
-  gidLink(pango_tab_array_from_string, "pango_tab_array_from_string", LIBS);
+  gidLink(cast(void**)&pango_tab_array_get_type, "pango_tab_array_get_type", LIBS);
+  gidLink(cast(void**)&pango_tab_array_new, "pango_tab_array_new", LIBS);
+  gidLink(cast(void**)&pango_tab_array_new_with_positions, "pango_tab_array_new_with_positions", LIBS);
+  gidLink(cast(void**)&pango_tab_array_copy, "pango_tab_array_copy", LIBS);
+  gidLink(cast(void**)&pango_tab_array_free, "pango_tab_array_free", LIBS);
+  gidLink(cast(void**)&pango_tab_array_get_decimal_point, "pango_tab_array_get_decimal_point", LIBS);
+  gidLink(cast(void**)&pango_tab_array_get_positions_in_pixels, "pango_tab_array_get_positions_in_pixels", LIBS);
+  gidLink(cast(void**)&pango_tab_array_get_size, "pango_tab_array_get_size", LIBS);
+  gidLink(cast(void**)&pango_tab_array_get_tab, "pango_tab_array_get_tab", LIBS);
+  gidLink(cast(void**)&pango_tab_array_get_tabs, "pango_tab_array_get_tabs", LIBS);
+  gidLink(cast(void**)&pango_tab_array_resize, "pango_tab_array_resize", LIBS);
+  gidLink(cast(void**)&pango_tab_array_set_decimal_point, "pango_tab_array_set_decimal_point", LIBS);
+  gidLink(cast(void**)&pango_tab_array_set_positions_in_pixels, "pango_tab_array_set_positions_in_pixels", LIBS);
+  gidLink(cast(void**)&pango_tab_array_set_tab, "pango_tab_array_set_tab", LIBS);
+  gidLink(cast(void**)&pango_tab_array_sort, "pango_tab_array_sort", LIBS);
+  gidLink(cast(void**)&pango_tab_array_to_string, "pango_tab_array_to_string", LIBS);
+  gidLink(cast(void**)&pango_tab_array_from_string, "pango_tab_array_from_string", LIBS);
 }

@@ -26,7 +26,8 @@ class Cancellable : ObjectG
 
   static GType getType()
   {
-    return g_cancellable_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_cancellable_get_type != &gidSymbolNotFound ? g_cancellable_get_type() : cast(GType)0;
   }
 
   override @property GType gType()
@@ -99,7 +100,7 @@ class Cancellable : ObjectG
    * Params:
    *   handlerId = Handler id of the handler to be disconnected, or `0`.
    */
-  void disconnect(ulong handlerId)
+  void disconnect(gulong handlerId)
   {
     g_cancellable_disconnect(cast(GCancellable*)cPtr, handlerId);
   }

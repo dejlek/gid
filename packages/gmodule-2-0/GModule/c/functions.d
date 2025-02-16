@@ -1,5 +1,6 @@
 module GModule.c.functions;
 
+public import Gid.basictypes;
 import Gid.loader;
 import GModule.c.types;
 public import GLib.c.types;
@@ -41,14 +42,14 @@ alias g_module_supported = c_g_module_supported;
 shared static this()
 {
   // Module
-  gidLink(g_module_close, "g_module_close", LIBS);
-  gidLink(g_module_make_resident, "g_module_make_resident", LIBS);
-  gidLink(g_module_name, "g_module_name", LIBS);
-  gidLink(g_module_symbol, "g_module_symbol", LIBS);
-  gidLink(g_module_build_path, "g_module_build_path", LIBS);
-  gidLink(g_module_error, "g_module_error", LIBS);
-  gidLink(g_module_error_quark, "g_module_error_quark", LIBS);
-  gidLink(g_module_open, "g_module_open", LIBS);
-  gidLink(g_module_open_full, "g_module_open_full", LIBS);
-  gidLink(g_module_supported, "g_module_supported", LIBS);
+  gidLink(cast(void**)&g_module_close, "g_module_close", LIBS);
+  gidLink(cast(void**)&g_module_make_resident, "g_module_make_resident", LIBS);
+  gidLink(cast(void**)&g_module_name, "g_module_name", LIBS);
+  gidLink(cast(void**)&g_module_symbol, "g_module_symbol", LIBS);
+  gidLink(cast(void**)&g_module_build_path, "g_module_build_path", LIBS);
+  gidLink(cast(void**)&g_module_error, "g_module_error", LIBS);
+  gidLink(cast(void**)&g_module_error_quark, "g_module_error_quark", LIBS);
+  gidLink(cast(void**)&g_module_open, "g_module_open", LIBS);
+  gidLink(cast(void**)&g_module_open_full, "g_module_open_full", LIBS);
+  gidLink(cast(void**)&g_module_supported, "g_module_supported", LIBS);
 }

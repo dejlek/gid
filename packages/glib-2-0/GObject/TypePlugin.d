@@ -54,7 +54,8 @@ interface TypePlugin
 
   static GType getType()
   {
-    return g_type_plugin_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_type_plugin_get_type != &gidSymbolNotFound ? g_type_plugin_get_type() : cast(GType)0;
   }
 
   /**

@@ -27,7 +27,8 @@ class GestureDrag : GestureSingle
 
   static GType getType()
   {
-    return gtk_gesture_drag_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_gesture_drag_get_type != &gidSymbolNotFound ? gtk_gesture_drag_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

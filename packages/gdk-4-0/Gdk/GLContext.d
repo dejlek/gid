@@ -59,7 +59,8 @@ class GLContext : DrawContext
 
   static GType getType()
   {
-    return gdk_gl_context_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_gl_context_get_type != &gidSymbolNotFound ? gdk_gl_context_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -39,7 +39,8 @@ class SettingsBackend : ObjectG
 
   static GType getType()
   {
-    return g_settings_backend_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_settings_backend_get_type != &gidSymbolNotFound ? g_settings_backend_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

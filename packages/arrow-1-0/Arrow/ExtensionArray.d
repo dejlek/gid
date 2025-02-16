@@ -17,7 +17,8 @@ class ExtensionArray : Array
 
   static GType getType()
   {
-    return garrow_extension_array_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_extension_array_get_type != &gidSymbolNotFound ? garrow_extension_array_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

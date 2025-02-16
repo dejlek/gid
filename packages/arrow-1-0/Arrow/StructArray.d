@@ -20,7 +20,8 @@ class StructArray : Array
 
   static GType getType()
   {
-    return garrow_struct_array_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_struct_array_get_type != &gidSymbolNotFound ? garrow_struct_array_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

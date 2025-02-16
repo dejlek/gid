@@ -17,7 +17,8 @@ class TableBatchReader : RecordBatchReader
 
   static GType getType()
   {
-    return garrow_table_batch_reader_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_table_batch_reader_get_type != &gidSymbolNotFound ? garrow_table_batch_reader_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

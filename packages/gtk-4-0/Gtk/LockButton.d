@@ -56,7 +56,8 @@ class LockButton : Button
 
   static GType getType()
   {
-    return gtk_lock_button_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_lock_button_get_type != &gidSymbolNotFound ? gtk_lock_button_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

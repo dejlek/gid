@@ -16,7 +16,8 @@ class KeyValuePartitioning : Partitioning
 
   static GType getType()
   {
-    return gadataset_key_value_partitioning_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gadataset_key_value_partitioning_get_type != &gidSymbolNotFound ? gadataset_key_value_partitioning_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

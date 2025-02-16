@@ -67,7 +67,8 @@ class FlowBox : Widget, Orientable
 
   static GType getType()
   {
-    return gtk_flow_box_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_flow_box_get_type != &gidSymbolNotFound ? gtk_flow_box_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

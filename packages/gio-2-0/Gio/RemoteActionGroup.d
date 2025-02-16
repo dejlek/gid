@@ -32,7 +32,8 @@ interface RemoteActionGroup
 
   static GType getType()
   {
-    return g_remote_action_group_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_remote_action_group_get_type != &gidSymbolNotFound ? g_remote_action_group_get_type() : cast(GType)0;
   }
 
   /**

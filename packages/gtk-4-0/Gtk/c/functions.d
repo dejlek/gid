@@ -1,5 +1,6 @@
 module Gtk.c.functions;
 
+public import Gid.basictypes;
 import Gid.loader;
 import Gtk.c.types;
 public import Gdk.c.types;
@@ -15,13 +16,13 @@ else
 __gshared extern(C)
 {
   // ATContext
-  GType function() c_gtk_at_context_get_type;
+  extern(C) GType function() c_gtk_at_context_get_type;
   GtkATContext* function(GtkAccessibleRole accessibleRole, GtkAccessible* accessible, GdkDisplay* display) c_gtk_at_context_create;
   GtkAccessible* function(GtkATContext* self) c_gtk_at_context_get_accessible;
   GtkAccessibleRole function(GtkATContext* self) c_gtk_at_context_get_accessible_role;
 
   // AboutDialog
-  GType function() c_gtk_about_dialog_get_type;
+  extern(C) GType function() c_gtk_about_dialog_get_type;
   GtkWidget* function() c_gtk_about_dialog_new;
   void function(GtkAboutDialog* about, const(char)* sectionName, const(char*)* people) c_gtk_about_dialog_add_credit_section;
   const(char*)* function(GtkAboutDialog* about) c_gtk_about_dialog_get_artists;
@@ -58,7 +59,7 @@ __gshared extern(C)
   void function(GtkAboutDialog* about, bool wrapLicense) c_gtk_about_dialog_set_wrap_license;
 
   // Accessible
-  GType function() c_gtk_accessible_get_type;
+  extern(C) GType function() c_gtk_accessible_get_type;
   void function(GtkAccessible* self, const(char)* message, GtkAccessibleAnnouncementPriority priority) c_gtk_accessible_announce;
   GtkAccessible* function(GtkAccessible* self) c_gtk_accessible_get_accessible_parent;
   GtkAccessibleRole function(GtkAccessible* self) c_gtk_accessible_get_accessible_role;
@@ -80,22 +81,22 @@ __gshared extern(C)
   void function(GtkAccessible* self, int nStates, GtkAccessibleState* states, const(GValue)* values) c_gtk_accessible_update_state_value;
 
   // AccessibleList
-  GType function() c_gtk_accessible_list_get_type;
+  extern(C) GType function() c_gtk_accessible_list_get_type;
   GtkAccessibleList* function(GtkAccessible** accessibles, size_t nAccessibles) c_gtk_accessible_list_new_from_array;
   GtkAccessibleList* function(GList* list) c_gtk_accessible_list_new_from_list;
   GList* function(GtkAccessibleList* accessibleList) c_gtk_accessible_list_get_objects;
 
   // AccessibleRange
-  GType function() c_gtk_accessible_range_get_type;
+  extern(C) GType function() c_gtk_accessible_range_get_type;
 
   // AccessibleText
-  GType function() c_gtk_accessible_text_get_type;
+  extern(C) GType function() c_gtk_accessible_text_get_type;
   void function(GtkAccessibleText* self) c_gtk_accessible_text_update_caret_position;
   void function(GtkAccessibleText* self, GtkAccessibleTextContentChange change, uint start, uint end) c_gtk_accessible_text_update_contents;
   void function(GtkAccessibleText* self) c_gtk_accessible_text_update_selection_bound;
 
   // ActionBar
-  GType function() c_gtk_action_bar_get_type;
+  extern(C) GType function() c_gtk_action_bar_get_type;
   GtkWidget* function() c_gtk_action_bar_new;
   GtkWidget* function(GtkActionBar* actionBar) c_gtk_action_bar_get_center_widget;
   bool function(GtkActionBar* actionBar) c_gtk_action_bar_get_revealed;
@@ -106,7 +107,7 @@ __gshared extern(C)
   void function(GtkActionBar* actionBar, bool revealed) c_gtk_action_bar_set_revealed;
 
   // Actionable
-  GType function() c_gtk_actionable_get_type;
+  extern(C) GType function() c_gtk_actionable_get_type;
   const(char)* function(GtkActionable* actionable) c_gtk_actionable_get_action_name;
   VariantC* function(GtkActionable* actionable) c_gtk_actionable_get_action_target_value;
   void function(GtkActionable* actionable, const(char)* actionName) c_gtk_actionable_set_action_name;
@@ -115,11 +116,11 @@ __gshared extern(C)
   void function(GtkActionable* actionable, const(char)* detailedActionName) c_gtk_actionable_set_detailed_action_name;
 
   // ActivateAction
-  GType function() c_gtk_activate_action_get_type;
+  extern(C) GType function() c_gtk_activate_action_get_type;
   GtkShortcutAction* function() c_gtk_activate_action_get;
 
   // Adjustment
-  GType function() c_gtk_adjustment_get_type;
+  extern(C) GType function() c_gtk_adjustment_get_type;
   GtkAdjustment* function(double value, double lower, double upper, double stepIncrement, double pageIncrement, double pageSize) c_gtk_adjustment_new;
   void function(GtkAdjustment* adjustment, double lower, double upper) c_gtk_adjustment_clamp_page;
   void function(GtkAdjustment* adjustment, double value, double lower, double upper, double stepIncrement, double pageIncrement, double pageSize) c_gtk_adjustment_configure;
@@ -138,7 +139,7 @@ __gshared extern(C)
   void function(GtkAdjustment* adjustment, double value) c_gtk_adjustment_set_value;
 
   // AlertDialog
-  GType function() c_gtk_alert_dialog_get_type;
+  extern(C) GType function() c_gtk_alert_dialog_get_type;
   GtkAlertDialog* function(const(char)* format,  ...) c_gtk_alert_dialog_new;
   void function(GtkAlertDialog* self, GtkWindow* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_alert_dialog_choose;
   int function(GtkAlertDialog* self, GAsyncResult* result, GError** _err) c_gtk_alert_dialog_choose_finish;
@@ -157,23 +158,23 @@ __gshared extern(C)
   void function(GtkAlertDialog* self, GtkWindow* parent) c_gtk_alert_dialog_show;
 
   // AlternativeTrigger
-  GType function() c_gtk_alternative_trigger_get_type;
+  extern(C) GType function() c_gtk_alternative_trigger_get_type;
   GtkShortcutTrigger* function(GtkShortcutTrigger* first, GtkShortcutTrigger* second) c_gtk_alternative_trigger_new;
   GtkShortcutTrigger* function(GtkAlternativeTrigger* self) c_gtk_alternative_trigger_get_first;
   GtkShortcutTrigger* function(GtkAlternativeTrigger* self) c_gtk_alternative_trigger_get_second;
 
   // AnyFilter
-  GType function() c_gtk_any_filter_get_type;
+  extern(C) GType function() c_gtk_any_filter_get_type;
   GtkAnyFilter* function() c_gtk_any_filter_new;
 
   // AppChooser
-  GType function() c_gtk_app_chooser_get_type;
+  extern(C) GType function() c_gtk_app_chooser_get_type;
   GAppInfo* function(GtkAppChooser* self) c_gtk_app_chooser_get_app_info;
   char* function(GtkAppChooser* self) c_gtk_app_chooser_get_content_type;
   void function(GtkAppChooser* self) c_gtk_app_chooser_refresh;
 
   // AppChooserButton
-  GType function() c_gtk_app_chooser_button_get_type;
+  extern(C) GType function() c_gtk_app_chooser_button_get_type;
   GtkWidget* function(const(char)* contentType) c_gtk_app_chooser_button_new;
   void function(GtkAppChooserButton* self, const(char)* name, const(char)* label, GIcon* icon) c_gtk_app_chooser_button_append_custom_item;
   void function(GtkAppChooserButton* self) c_gtk_app_chooser_button_append_separator;
@@ -188,7 +189,7 @@ __gshared extern(C)
   void function(GtkAppChooserButton* self, bool setting) c_gtk_app_chooser_button_set_show_dialog_item;
 
   // AppChooserDialog
-  GType function() c_gtk_app_chooser_dialog_get_type;
+  extern(C) GType function() c_gtk_app_chooser_dialog_get_type;
   GtkWidget* function(GtkWindow* parent, GtkDialogFlags flags, GFile* file) c_gtk_app_chooser_dialog_new;
   GtkWidget* function(GtkWindow* parent, GtkDialogFlags flags, const(char)* contentType) c_gtk_app_chooser_dialog_new_for_content_type;
   const(char)* function(GtkAppChooserDialog* self) c_gtk_app_chooser_dialog_get_heading;
@@ -196,7 +197,7 @@ __gshared extern(C)
   void function(GtkAppChooserDialog* self, const(char)* heading) c_gtk_app_chooser_dialog_set_heading;
 
   // AppChooserWidget
-  GType function() c_gtk_app_chooser_widget_get_type;
+  extern(C) GType function() c_gtk_app_chooser_widget_get_type;
   GtkWidget* function(const(char)* contentType) c_gtk_app_chooser_widget_new;
   const(char)* function(GtkAppChooserWidget* self) c_gtk_app_chooser_widget_get_default_text;
   bool function(GtkAppChooserWidget* self) c_gtk_app_chooser_widget_get_show_all;
@@ -212,7 +213,7 @@ __gshared extern(C)
   void function(GtkAppChooserWidget* self, bool setting) c_gtk_app_chooser_widget_set_show_recommended;
 
   // Application
-  GType function() c_gtk_application_get_type;
+  extern(C) GType function() c_gtk_application_get_type;
   GtkApplication* function(const(char)* applicationId, GApplicationFlags flags) c_gtk_application_new;
   void function(GtkApplication* application, GtkWindow* window) c_gtk_application_add_window;
   char** function(GtkApplication* application, const(char)* detailedActionName) c_gtk_application_get_accels_for_action;
@@ -230,7 +231,7 @@ __gshared extern(C)
   void function(GtkApplication* application, uint cookie) c_gtk_application_uninhibit;
 
   // ApplicationWindow
-  GType function() c_gtk_application_window_get_type;
+  extern(C) GType function() c_gtk_application_window_get_type;
   GtkWidget* function(GtkApplication* application) c_gtk_application_window_new;
   GtkShortcutsWindow* function(GtkApplicationWindow* window) c_gtk_application_window_get_help_overlay;
   uint function(GtkApplicationWindow* window) c_gtk_application_window_get_id;
@@ -239,7 +240,7 @@ __gshared extern(C)
   void function(GtkApplicationWindow* window, bool showMenubar) c_gtk_application_window_set_show_menubar;
 
   // AspectFrame
-  GType function() c_gtk_aspect_frame_get_type;
+  extern(C) GType function() c_gtk_aspect_frame_get_type;
   GtkWidget* function(float xalign, float yalign, float ratio, bool obeyChild) c_gtk_aspect_frame_new;
   GtkWidget* function(GtkAspectFrame* self) c_gtk_aspect_frame_get_child;
   bool function(GtkAspectFrame* self) c_gtk_aspect_frame_get_obey_child;
@@ -253,7 +254,7 @@ __gshared extern(C)
   void function(GtkAspectFrame* self, float yalign) c_gtk_aspect_frame_set_yalign;
 
   // Assistant
-  GType function() c_gtk_assistant_get_type;
+  extern(C) GType function() c_gtk_assistant_get_type;
   GtkWidget* function() c_gtk_assistant_new;
   void function(GtkAssistant* assistant, GtkWidget* child) c_gtk_assistant_add_action_widget;
   int function(GtkAssistant* assistant, GtkWidget* page) c_gtk_assistant_append_page;
@@ -280,15 +281,15 @@ __gshared extern(C)
   void function(GtkAssistant* assistant) c_gtk_assistant_update_buttons_state;
 
   // AssistantPage
-  GType function() c_gtk_assistant_page_get_type;
+  extern(C) GType function() c_gtk_assistant_page_get_type;
   GtkWidget* function(GtkAssistantPage* page) c_gtk_assistant_page_get_child;
 
   // BinLayout
-  GType function() c_gtk_bin_layout_get_type;
+  extern(C) GType function() c_gtk_bin_layout_get_type;
   GtkLayoutManager* function() c_gtk_bin_layout_new;
 
   // Bitset
-  GType function() c_gtk_bitset_get_type;
+  extern(C) GType function() c_gtk_bitset_get_type;
   GtkBitset* function() c_gtk_bitset_new_empty;
   GtkBitset* function(uint start, uint nItems) c_gtk_bitset_new_range;
   bool function(GtkBitset* self, uint value) c_gtk_bitset_add;
@@ -320,7 +321,7 @@ __gshared extern(C)
   void function(GtkBitset* self) c_gtk_bitset_unref;
 
   // BitsetIter
-  GType function() c_gtk_bitset_iter_get_type;
+  extern(C) GType function() c_gtk_bitset_iter_get_type;
   uint function(const(GtkBitsetIter)* iter) c_gtk_bitset_iter_get_value;
   bool function(const(GtkBitsetIter)* iter) c_gtk_bitset_iter_is_valid;
   bool function(GtkBitsetIter* iter, uint* value) c_gtk_bitset_iter_next;
@@ -330,7 +331,7 @@ __gshared extern(C)
   bool function(GtkBitsetIter* iter, const(GtkBitset)* set, uint* value) c_gtk_bitset_iter_init_last;
 
   // BookmarkList
-  GType function() c_gtk_bookmark_list_get_type;
+  extern(C) GType function() c_gtk_bookmark_list_get_type;
   GtkBookmarkList* function(const(char)* filename, const(char)* attributes) c_gtk_bookmark_list_new;
   const(char)* function(GtkBookmarkList* self) c_gtk_bookmark_list_get_attributes;
   const(char)* function(GtkBookmarkList* self) c_gtk_bookmark_list_get_filename;
@@ -340,7 +341,7 @@ __gshared extern(C)
   void function(GtkBookmarkList* self, int ioPriority) c_gtk_bookmark_list_set_io_priority;
 
   // BoolFilter
-  GType function() c_gtk_bool_filter_get_type;
+  extern(C) GType function() c_gtk_bool_filter_get_type;
   GtkBoolFilter* function(GtkExpression* expression) c_gtk_bool_filter_new;
   GtkExpression* function(GtkBoolFilter* self) c_gtk_bool_filter_get_expression;
   bool function(GtkBoolFilter* self) c_gtk_bool_filter_get_invert;
@@ -348,13 +349,13 @@ __gshared extern(C)
   void function(GtkBoolFilter* self, bool invert) c_gtk_bool_filter_set_invert;
 
   // Border
-  GType function() c_gtk_border_get_type;
+  extern(C) GType function() c_gtk_border_get_type;
   GtkBorder* function() c_gtk_border_new;
   GtkBorder* function(const(GtkBorder)* border) c_gtk_border_copy;
   void function(GtkBorder* border) c_gtk_border_free;
 
   // Box
-  GType function() c_gtk_box_get_type;
+  extern(C) GType function() c_gtk_box_get_type;
   GtkWidget* function(GtkOrientation orientation, int spacing) c_gtk_box_new;
   void function(GtkBox* box, GtkWidget* child) c_gtk_box_append;
   int function(GtkBox* box) c_gtk_box_get_baseline_child;
@@ -371,7 +372,7 @@ __gshared extern(C)
   void function(GtkBox* box, int spacing) c_gtk_box_set_spacing;
 
   // BoxLayout
-  GType function() c_gtk_box_layout_get_type;
+  extern(C) GType function() c_gtk_box_layout_get_type;
   GtkLayoutManager* function(GtkOrientation orientation) c_gtk_box_layout_new;
   int function(GtkBoxLayout* boxLayout) c_gtk_box_layout_get_baseline_child;
   GtkBaselinePosition function(GtkBoxLayout* boxLayout) c_gtk_box_layout_get_baseline_position;
@@ -383,7 +384,7 @@ __gshared extern(C)
   void function(GtkBoxLayout* boxLayout, uint spacing) c_gtk_box_layout_set_spacing;
 
   // Buildable
-  GType function() c_gtk_buildable_get_type;
+  extern(C) GType function() c_gtk_buildable_get_type;
   const(char)* function(GtkBuildable* buildable) c_gtk_buildable_get_buildable_id;
 
   // BuildableParseContext
@@ -394,7 +395,7 @@ __gshared extern(C)
   void function(GtkBuildableParseContext* context, const(GtkBuildableParser)* parser, void* userData) c_gtk_buildable_parse_context_push;
 
   // Builder
-  GType function() c_gtk_builder_get_type;
+  extern(C) GType function() c_gtk_builder_get_type;
   GtkBuilder* function() c_gtk_builder_new;
   GtkBuilder* function(const(char)* filename) c_gtk_builder_new_from_file;
   GtkBuilder* function(const(char)* resourcePath) c_gtk_builder_new_from_resource;
@@ -421,14 +422,14 @@ __gshared extern(C)
   bool function(GtkBuilder* builder, GType type, const(char)* string_, GValue* value, GError** _err) c_gtk_builder_value_from_string_type;
 
   // BuilderCScope
-  GType function() c_gtk_builder_cscope_get_type;
+  extern(C) GType function() c_gtk_builder_cscope_get_type;
   GtkBuilderScope* function() c_gtk_builder_cscope_new;
   void function(GtkBuilderCScope* self, const(char)* callbackName, GCallback callbackSymbol) c_gtk_builder_cscope_add_callback_symbol;
   void function(GtkBuilderCScope* self, const(char)* firstCallbackName, GCallback firstCallbackSymbol,  ...) c_gtk_builder_cscope_add_callback_symbols;
   GCallback function(GtkBuilderCScope* self, const(char)* callbackName) c_gtk_builder_cscope_lookup_callback_symbol;
 
   // BuilderListItemFactory
-  GType function() c_gtk_builder_list_item_factory_get_type;
+  extern(C) GType function() c_gtk_builder_list_item_factory_get_type;
   GtkListItemFactory* function(GtkBuilderScope* scope_, GBytes* bytes) c_gtk_builder_list_item_factory_new_from_bytes;
   GtkListItemFactory* function(GtkBuilderScope* scope_, const(char)* resourcePath) c_gtk_builder_list_item_factory_new_from_resource;
   GBytes* function(GtkBuilderListItemFactory* self) c_gtk_builder_list_item_factory_get_bytes;
@@ -436,10 +437,10 @@ __gshared extern(C)
   GtkBuilderScope* function(GtkBuilderListItemFactory* self) c_gtk_builder_list_item_factory_get_scope;
 
   // BuilderScope
-  GType function() c_gtk_builder_scope_get_type;
+  extern(C) GType function() c_gtk_builder_scope_get_type;
 
   // Button
-  GType function() c_gtk_button_get_type;
+  extern(C) GType function() c_gtk_button_get_type;
   GtkWidget* function() c_gtk_button_new;
   GtkWidget* function(const(char)* iconName) c_gtk_button_new_from_icon_name;
   GtkWidget* function(const(char)* label) c_gtk_button_new_with_label;
@@ -458,11 +459,11 @@ __gshared extern(C)
   void function(GtkButton* button, bool useUnderline) c_gtk_button_set_use_underline;
 
   // CClosureExpression
-  GType function() c_gtk_cclosure_expression_get_type;
+  extern(C) GType function() c_gtk_cclosure_expression_get_type;
   GtkExpression* function(GType valueType, GClosureMarshal marshal, uint nParams, GtkExpression** params, GCallback callbackFunc, void* userData, GClosureNotify userDestroy) c_gtk_cclosure_expression_new;
 
   // Calendar
-  GType function() c_gtk_calendar_get_type;
+  extern(C) GType function() c_gtk_calendar_get_type;
   GtkWidget* function() c_gtk_calendar_new;
   void function(GtkCalendar* calendar) c_gtk_calendar_clear_marks;
   GDateTime* function(GtkCalendar* self) c_gtk_calendar_get_date;
@@ -484,11 +485,11 @@ __gshared extern(C)
   void function(GtkCalendar* calendar, uint day) c_gtk_calendar_unmark_day;
 
   // CallbackAction
-  GType function() c_gtk_callback_action_get_type;
+  extern(C) GType function() c_gtk_callback_action_get_type;
   GtkShortcutAction* function(GtkShortcutFunc callback, void* data, GDestroyNotify destroy) c_gtk_callback_action_new;
 
   // CellArea
-  GType function() c_gtk_cell_area_get_type;
+  extern(C) GType function() c_gtk_cell_area_get_type;
   bool function(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, const(GdkRectangle)* cellArea, GtkCellRendererState flags, bool editOnly) c_gtk_cell_area_activate;
   bool function(GtkCellArea* area, GtkWidget* widget, GtkCellRenderer* renderer, GdkEvent* event, const(GdkRectangle)* cellArea, GtkCellRendererState flags) c_gtk_cell_area_activate_cell;
   void function(GtkCellArea* area, GtkCellRenderer* renderer) c_gtk_cell_area_add;
@@ -535,7 +536,7 @@ __gshared extern(C)
   void function(GtkCellArea* area, bool canceled) c_gtk_cell_area_stop_editing;
 
   // CellAreaBox
-  GType function() c_gtk_cell_area_box_get_type;
+  extern(C) GType function() c_gtk_cell_area_box_get_type;
   GtkCellArea* function() c_gtk_cell_area_box_new;
   int function(GtkCellAreaBox* box) c_gtk_cell_area_box_get_spacing;
   void function(GtkCellAreaBox* box, GtkCellRenderer* renderer, bool expand, bool align_, bool fixed) c_gtk_cell_area_box_pack_end;
@@ -548,7 +549,7 @@ __gshared extern(C)
   GParamSpec** function(GtkCellAreaClass* aclass, uint* nProperties) c_gtk_cell_area_class_list_cell_properties;
 
   // CellAreaContext
-  GType function() c_gtk_cell_area_context_get_type;
+  extern(C) GType function() c_gtk_cell_area_context_get_type;
   void function(GtkCellAreaContext* context, int width, int height) c_gtk_cell_area_context_allocate;
   void function(GtkCellAreaContext* context, int* width, int* height) c_gtk_cell_area_context_get_allocation;
   GtkCellArea* function(GtkCellAreaContext* context) c_gtk_cell_area_context_get_area;
@@ -561,13 +562,13 @@ __gshared extern(C)
   void function(GtkCellAreaContext* context) c_gtk_cell_area_context_reset;
 
   // CellEditable
-  GType function() c_gtk_cell_editable_get_type;
+  extern(C) GType function() c_gtk_cell_editable_get_type;
   void function(GtkCellEditable* cellEditable) c_gtk_cell_editable_editing_done;
   void function(GtkCellEditable* cellEditable) c_gtk_cell_editable_remove_widget;
   void function(GtkCellEditable* cellEditable, GdkEvent* event) c_gtk_cell_editable_start_editing;
 
   // CellLayout
-  GType function() c_gtk_cell_layout_get_type;
+  extern(C) GType function() c_gtk_cell_layout_get_type;
   void function(GtkCellLayout* cellLayout, GtkCellRenderer* cell, const(char)* attribute, int column) c_gtk_cell_layout_add_attribute;
   void function(GtkCellLayout* cellLayout) c_gtk_cell_layout_clear;
   void function(GtkCellLayout* cellLayout, GtkCellRenderer* cell) c_gtk_cell_layout_clear_attributes;
@@ -580,7 +581,7 @@ __gshared extern(C)
   void function(GtkCellLayout* cellLayout, GtkCellRenderer* cell, GtkCellLayoutDataFunc func, void* funcData, GDestroyNotify destroy) c_gtk_cell_layout_set_cell_data_func;
 
   // CellRenderer
-  GType function() c_gtk_cell_renderer_get_type;
+  extern(C) GType function() c_gtk_cell_renderer_get_type;
   bool function(GtkCellRenderer* cell, GdkEvent* event, GtkWidget* widget, const(char)* path, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags) c_gtk_cell_renderer_activate;
   void function(GtkCellRenderer* cell, GtkWidget* widget, GtkCellRendererState flags, const(GdkRectangle)* cellArea, GdkRectangle* alignedArea) c_gtk_cell_renderer_get_aligned_area;
   void function(GtkCellRenderer* cell, float* xalign, float* yalign) c_gtk_cell_renderer_get_alignment;
@@ -610,36 +611,36 @@ __gshared extern(C)
   void function(GtkCellRenderer* cell, bool canceled) c_gtk_cell_renderer_stop_editing;
 
   // CellRendererAccel
-  GType function() c_gtk_cell_renderer_accel_get_type;
+  extern(C) GType function() c_gtk_cell_renderer_accel_get_type;
   GtkCellRenderer* function() c_gtk_cell_renderer_accel_new;
 
   // CellRendererCombo
-  GType function() c_gtk_cell_renderer_combo_get_type;
+  extern(C) GType function() c_gtk_cell_renderer_combo_get_type;
   GtkCellRenderer* function() c_gtk_cell_renderer_combo_new;
 
   // CellRendererPixbuf
-  GType function() c_gtk_cell_renderer_pixbuf_get_type;
+  extern(C) GType function() c_gtk_cell_renderer_pixbuf_get_type;
   GtkCellRenderer* function() c_gtk_cell_renderer_pixbuf_new;
 
   // CellRendererProgress
-  GType function() c_gtk_cell_renderer_progress_get_type;
+  extern(C) GType function() c_gtk_cell_renderer_progress_get_type;
   GtkCellRenderer* function() c_gtk_cell_renderer_progress_new;
 
   // CellRendererSpin
-  GType function() c_gtk_cell_renderer_spin_get_type;
+  extern(C) GType function() c_gtk_cell_renderer_spin_get_type;
   GtkCellRenderer* function() c_gtk_cell_renderer_spin_new;
 
   // CellRendererSpinner
-  GType function() c_gtk_cell_renderer_spinner_get_type;
+  extern(C) GType function() c_gtk_cell_renderer_spinner_get_type;
   GtkCellRenderer* function() c_gtk_cell_renderer_spinner_new;
 
   // CellRendererText
-  GType function() c_gtk_cell_renderer_text_get_type;
+  extern(C) GType function() c_gtk_cell_renderer_text_get_type;
   GtkCellRenderer* function() c_gtk_cell_renderer_text_new;
   void function(GtkCellRendererText* renderer, int numberOfRows) c_gtk_cell_renderer_text_set_fixed_height_from_font;
 
   // CellRendererToggle
-  GType function() c_gtk_cell_renderer_toggle_get_type;
+  extern(C) GType function() c_gtk_cell_renderer_toggle_get_type;
   GtkCellRenderer* function() c_gtk_cell_renderer_toggle_new;
   bool function(GtkCellRendererToggle* toggle) c_gtk_cell_renderer_toggle_get_activatable;
   bool function(GtkCellRendererToggle* toggle) c_gtk_cell_renderer_toggle_get_active;
@@ -649,7 +650,7 @@ __gshared extern(C)
   void function(GtkCellRendererToggle* toggle, bool radio) c_gtk_cell_renderer_toggle_set_radio;
 
   // CellView
-  GType function() c_gtk_cell_view_get_type;
+  extern(C) GType function() c_gtk_cell_view_get_type;
   GtkWidget* function() c_gtk_cell_view_new;
   GtkWidget* function(GtkCellArea* area, GtkCellAreaContext* context) c_gtk_cell_view_new_with_context;
   GtkWidget* function(const(char)* markup) c_gtk_cell_view_new_with_markup;
@@ -665,7 +666,7 @@ __gshared extern(C)
   void function(GtkCellView* cellView, GtkTreeModel* model) c_gtk_cell_view_set_model;
 
   // CenterBox
-  GType function() c_gtk_center_box_get_type;
+  extern(C) GType function() c_gtk_center_box_get_type;
   GtkWidget* function() c_gtk_center_box_new;
   GtkBaselinePosition function(GtkCenterBox* self) c_gtk_center_box_get_baseline_position;
   GtkWidget* function(GtkCenterBox* self) c_gtk_center_box_get_center_widget;
@@ -679,7 +680,7 @@ __gshared extern(C)
   void function(GtkCenterBox* self, GtkWidget* child) c_gtk_center_box_set_start_widget;
 
   // CenterLayout
-  GType function() c_gtk_center_layout_get_type;
+  extern(C) GType function() c_gtk_center_layout_get_type;
   GtkLayoutManager* function() c_gtk_center_layout_new;
   GtkBaselinePosition function(GtkCenterLayout* self) c_gtk_center_layout_get_baseline_position;
   GtkWidget* function(GtkCenterLayout* self) c_gtk_center_layout_get_center_widget;
@@ -695,7 +696,7 @@ __gshared extern(C)
   void function(GtkCenterLayout* self, GtkWidget* widget) c_gtk_center_layout_set_start_widget;
 
   // CheckButton
-  GType function() c_gtk_check_button_get_type;
+  extern(C) GType function() c_gtk_check_button_get_type;
   GtkWidget* function() c_gtk_check_button_new;
   GtkWidget* function(const(char)* label) c_gtk_check_button_new_with_label;
   GtkWidget* function(const(char)* label) c_gtk_check_button_new_with_mnemonic;
@@ -712,11 +713,11 @@ __gshared extern(C)
   void function(GtkCheckButton* self, bool setting) c_gtk_check_button_set_use_underline;
 
   // ClosureExpression
-  GType function() c_gtk_closure_expression_get_type;
+  extern(C) GType function() c_gtk_closure_expression_get_type;
   GtkExpression* function(GType valueType, GClosure* closure, uint nParams, GtkExpression** params) c_gtk_closure_expression_new;
 
   // ColorButton
-  GType function() c_gtk_color_button_get_type;
+  extern(C) GType function() c_gtk_color_button_get_type;
   GtkWidget* function() c_gtk_color_button_new;
   GtkWidget* function(const(GdkRGBA)* rgba) c_gtk_color_button_new_with_rgba;
   bool function(GtkColorButton* button) c_gtk_color_button_get_modal;
@@ -725,7 +726,7 @@ __gshared extern(C)
   void function(GtkColorButton* button, const(char)* title) c_gtk_color_button_set_title;
 
   // ColorChooser
-  GType function() c_gtk_color_chooser_get_type;
+  extern(C) GType function() c_gtk_color_chooser_get_type;
   void function(GtkColorChooser* chooser, GtkOrientation orientation, int colorsPerLine, int nColors, GdkRGBA* colors) c_gtk_color_chooser_add_palette;
   void function(GtkColorChooser* chooser, GdkRGBA* color) c_gtk_color_chooser_get_rgba;
   bool function(GtkColorChooser* chooser) c_gtk_color_chooser_get_use_alpha;
@@ -733,15 +734,15 @@ __gshared extern(C)
   void function(GtkColorChooser* chooser, bool useAlpha) c_gtk_color_chooser_set_use_alpha;
 
   // ColorChooserDialog
-  GType function() c_gtk_color_chooser_dialog_get_type;
+  extern(C) GType function() c_gtk_color_chooser_dialog_get_type;
   GtkWidget* function(const(char)* title, GtkWindow* parent) c_gtk_color_chooser_dialog_new;
 
   // ColorChooserWidget
-  GType function() c_gtk_color_chooser_widget_get_type;
+  extern(C) GType function() c_gtk_color_chooser_widget_get_type;
   GtkWidget* function() c_gtk_color_chooser_widget_new;
 
   // ColorDialog
-  GType function() c_gtk_color_dialog_get_type;
+  extern(C) GType function() c_gtk_color_dialog_get_type;
   GtkColorDialog* function() c_gtk_color_dialog_new;
   void function(GtkColorDialog* self, GtkWindow* parent, const(GdkRGBA)* initialColor, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_color_dialog_choose_rgba;
   GdkRGBA* function(GtkColorDialog* self, GAsyncResult* result, GError** _err) c_gtk_color_dialog_choose_rgba_finish;
@@ -753,7 +754,7 @@ __gshared extern(C)
   void function(GtkColorDialog* self, bool withAlpha) c_gtk_color_dialog_set_with_alpha;
 
   // ColorDialogButton
-  GType function() c_gtk_color_dialog_button_get_type;
+  extern(C) GType function() c_gtk_color_dialog_button_get_type;
   GtkWidget* function(GtkColorDialog* dialog) c_gtk_color_dialog_button_new;
   GtkColorDialog* function(GtkColorDialogButton* self) c_gtk_color_dialog_button_get_dialog;
   const(GdkRGBA)* function(GtkColorDialogButton* self) c_gtk_color_dialog_button_get_rgba;
@@ -761,7 +762,7 @@ __gshared extern(C)
   void function(GtkColorDialogButton* self, const(GdkRGBA)* color) c_gtk_color_dialog_button_set_rgba;
 
   // ColumnView
-  GType function() c_gtk_column_view_get_type;
+  extern(C) GType function() c_gtk_column_view_get_type;
   GtkWidget* function(GtkSelectionModel* model) c_gtk_column_view_new;
   void function(GtkColumnView* self, GtkColumnViewColumn* column) c_gtk_column_view_append_column;
   GListModel* function(GtkColumnView* self) c_gtk_column_view_get_columns;
@@ -790,7 +791,7 @@ __gshared extern(C)
   void function(GtkColumnView* self, GtkColumnViewColumn* column, GtkSortType direction) c_gtk_column_view_sort_by_column;
 
   // ColumnViewCell
-  GType function() c_gtk_column_view_cell_get_type;
+  extern(C) GType function() c_gtk_column_view_cell_get_type;
   GtkWidget* function(GtkColumnViewCell* self) c_gtk_column_view_cell_get_child;
   bool function(GtkColumnViewCell* self) c_gtk_column_view_cell_get_focusable;
   ObjectC* function(GtkColumnViewCell* self) c_gtk_column_view_cell_get_item;
@@ -800,7 +801,7 @@ __gshared extern(C)
   void function(GtkColumnViewCell* self, bool focusable) c_gtk_column_view_cell_set_focusable;
 
   // ColumnViewColumn
-  GType function() c_gtk_column_view_column_get_type;
+  extern(C) GType function() c_gtk_column_view_column_get_type;
   GtkColumnViewColumn* function(const(char)* title, GtkListItemFactory* factory) c_gtk_column_view_column_new;
   GtkColumnView* function(GtkColumnViewColumn* self) c_gtk_column_view_column_get_column_view;
   bool function(GtkColumnViewColumn* self) c_gtk_column_view_column_get_expand;
@@ -823,7 +824,7 @@ __gshared extern(C)
   void function(GtkColumnViewColumn* self, bool visible) c_gtk_column_view_column_set_visible;
 
   // ColumnViewRow
-  GType function() c_gtk_column_view_row_get_type;
+  extern(C) GType function() c_gtk_column_view_row_get_type;
   const(char)* function(GtkColumnViewRow* self) c_gtk_column_view_row_get_accessible_description;
   const(char)* function(GtkColumnViewRow* self) c_gtk_column_view_row_get_accessible_label;
   bool function(GtkColumnViewRow* self) c_gtk_column_view_row_get_activatable;
@@ -839,14 +840,14 @@ __gshared extern(C)
   void function(GtkColumnViewRow* self, bool selectable) c_gtk_column_view_row_set_selectable;
 
   // ColumnViewSorter
-  GType function() c_gtk_column_view_sorter_get_type;
+  extern(C) GType function() c_gtk_column_view_sorter_get_type;
   uint function(GtkColumnViewSorter* self) c_gtk_column_view_sorter_get_n_sort_columns;
   GtkColumnViewColumn* function(GtkColumnViewSorter* self, uint position, GtkSortType* sortOrder) c_gtk_column_view_sorter_get_nth_sort_column;
   GtkColumnViewColumn* function(GtkColumnViewSorter* self) c_gtk_column_view_sorter_get_primary_sort_column;
   GtkSortType function(GtkColumnViewSorter* self) c_gtk_column_view_sorter_get_primary_sort_order;
 
   // ComboBox
-  GType function() c_gtk_combo_box_get_type;
+  extern(C) GType function() c_gtk_combo_box_get_type;
   GtkWidget* function() c_gtk_combo_box_new;
   GtkWidget* function() c_gtk_combo_box_new_with_entry;
   GtkWidget* function(GtkTreeModel* model) c_gtk_combo_box_new_with_model;
@@ -877,7 +878,7 @@ __gshared extern(C)
   void function(GtkComboBox* comboBox, GtkTreeViewRowSeparatorFunc func, void* data, GDestroyNotify destroy) c_gtk_combo_box_set_row_separator_func;
 
   // ComboBoxText
-  GType function() c_gtk_combo_box_text_get_type;
+  extern(C) GType function() c_gtk_combo_box_text_get_type;
   GtkWidget* function() c_gtk_combo_box_text_new;
   GtkWidget* function() c_gtk_combo_box_text_new_with_entry;
   void function(GtkComboBoxText* comboBox, const(char)* id, const(char)* text) c_gtk_combo_box_text_append;
@@ -891,13 +892,13 @@ __gshared extern(C)
   void function(GtkComboBoxText* comboBox) c_gtk_combo_box_text_remove_all;
 
   // ConstantExpression
-  GType function() c_gtk_constant_expression_get_type;
+  extern(C) GType function() c_gtk_constant_expression_get_type;
   GtkExpression* function(GType valueType,  ...) c_gtk_constant_expression_new;
   GtkExpression* function(const(GValue)* value) c_gtk_constant_expression_new_for_value;
   const(GValue)* function(GtkExpression* expression) c_gtk_constant_expression_get_value;
 
   // Constraint
-  GType function() c_gtk_constraint_get_type;
+  extern(C) GType function() c_gtk_constraint_get_type;
   GtkConstraint* function(GtkConstraintTarget* target, GtkConstraintAttribute targetAttribute, GtkConstraintRelation relation, GtkConstraintTarget* source, GtkConstraintAttribute sourceAttribute, double multiplier, double constant, int strength) c_gtk_constraint_new;
   GtkConstraint* function(GtkConstraintTarget* target, GtkConstraintAttribute targetAttribute, GtkConstraintRelation relation, double constant, int strength) c_gtk_constraint_new_constant;
   double function(GtkConstraint* constraint) c_gtk_constraint_get_constant;
@@ -913,7 +914,7 @@ __gshared extern(C)
   bool function(GtkConstraint* constraint) c_gtk_constraint_is_required;
 
   // ConstraintGuide
-  GType function() c_gtk_constraint_guide_get_type;
+  extern(C) GType function() c_gtk_constraint_guide_get_type;
   GtkConstraintGuide* function() c_gtk_constraint_guide_new;
   void function(GtkConstraintGuide* guide, int* width, int* height) c_gtk_constraint_guide_get_max_size;
   void function(GtkConstraintGuide* guide, int* width, int* height) c_gtk_constraint_guide_get_min_size;
@@ -927,7 +928,7 @@ __gshared extern(C)
   void function(GtkConstraintGuide* guide, GtkConstraintStrength strength) c_gtk_constraint_guide_set_strength;
 
   // ConstraintLayout
-  GType function() c_gtk_constraint_layout_get_type;
+  extern(C) GType function() c_gtk_constraint_layout_get_type;
   GtkLayoutManager* function() c_gtk_constraint_layout_new;
   void function(GtkConstraintLayout* layout, GtkConstraint* constraint) c_gtk_constraint_layout_add_constraint;
   GList* function(GtkConstraintLayout* layout, const(char*)* lines, size_t nLines, int hspacing, int vspacing, GError** error, const(char)* firstView,  ...) c_gtk_constraint_layout_add_constraints_from_description;
@@ -940,13 +941,13 @@ __gshared extern(C)
   void function(GtkConstraintLayout* layout, GtkConstraintGuide* guide) c_gtk_constraint_layout_remove_guide;
 
   // ConstraintLayoutChild
-  GType function() c_gtk_constraint_layout_child_get_type;
+  extern(C) GType function() c_gtk_constraint_layout_child_get_type;
 
   // ConstraintTarget
-  GType function() c_gtk_constraint_target_get_type;
+  extern(C) GType function() c_gtk_constraint_target_get_type;
 
   // CssProvider
-  GType function() c_gtk_css_provider_get_type;
+  extern(C) GType function() c_gtk_css_provider_get_type;
   GtkCssProvider* function() c_gtk_css_provider_new;
   void function(GtkCssProvider* cssProvider, GBytes* data) c_gtk_css_provider_load_from_bytes;
   void function(GtkCssProvider* cssProvider, const(char)* data, ptrdiff_t length) c_gtk_css_provider_load_from_data;
@@ -958,7 +959,7 @@ __gshared extern(C)
   char* function(GtkCssProvider* provider) c_gtk_css_provider_to_string;
 
   // CssSection
-  GType function() c_gtk_css_section_get_type;
+  extern(C) GType function() c_gtk_css_section_get_type;
   GtkCssSection* function(GFile* file, const(GtkCssLocation)* start, const(GtkCssLocation)* end) c_gtk_css_section_new;
   const(GtkCssLocation)* function(const(GtkCssSection)* section) c_gtk_css_section_get_end_location;
   GFile* function(const(GtkCssSection)* section) c_gtk_css_section_get_file;
@@ -970,21 +971,21 @@ __gshared extern(C)
   void function(GtkCssSection* section) c_gtk_css_section_unref;
 
   // CustomFilter
-  GType function() c_gtk_custom_filter_get_type;
+  extern(C) GType function() c_gtk_custom_filter_get_type;
   GtkCustomFilter* function(GtkCustomFilterFunc matchFunc, void* userData, GDestroyNotify userDestroy) c_gtk_custom_filter_new;
   void function(GtkCustomFilter* self, GtkCustomFilterFunc matchFunc, void* userData, GDestroyNotify userDestroy) c_gtk_custom_filter_set_filter_func;
 
   // CustomLayout
-  GType function() c_gtk_custom_layout_get_type;
+  extern(C) GType function() c_gtk_custom_layout_get_type;
   GtkLayoutManager* function(GtkCustomRequestModeFunc requestMode, GtkCustomMeasureFunc measure, GtkCustomAllocateFunc allocate) c_gtk_custom_layout_new;
 
   // CustomSorter
-  GType function() c_gtk_custom_sorter_get_type;
+  extern(C) GType function() c_gtk_custom_sorter_get_type;
   GtkCustomSorter* function(GCompareDataFunc sortFunc, void* userData, GDestroyNotify userDestroy) c_gtk_custom_sorter_new;
   void function(GtkCustomSorter* self, GCompareDataFunc sortFunc, void* userData, GDestroyNotify userDestroy) c_gtk_custom_sorter_set_sort_func;
 
   // Dialog
-  GType function() c_gtk_dialog_get_type;
+  extern(C) GType function() c_gtk_dialog_get_type;
   GtkWidget* function() c_gtk_dialog_new;
   GtkWidget* function(const(char)* title, GtkWindow* parent, GtkDialogFlags flags, const(char)* firstButtonText,  ...) c_gtk_dialog_new_with_buttons;
   void function(GtkDialog* dialog, GtkWidget* child, int responseId) c_gtk_dialog_add_action_widget;
@@ -999,7 +1000,7 @@ __gshared extern(C)
   void function(GtkDialog* dialog, int responseId, bool setting) c_gtk_dialog_set_response_sensitive;
 
   // DirectoryList
-  GType function() c_gtk_directory_list_get_type;
+  extern(C) GType function() c_gtk_directory_list_get_type;
   GtkDirectoryList* function(const(char)* attributes, GFile* file) c_gtk_directory_list_new;
   const(char)* function(GtkDirectoryList* self) c_gtk_directory_list_get_attributes;
   const(GError)* function(GtkDirectoryList* self) c_gtk_directory_list_get_error;
@@ -1013,7 +1014,7 @@ __gshared extern(C)
   void function(GtkDirectoryList* self, bool monitored) c_gtk_directory_list_set_monitored;
 
   // DragIcon
-  GType function() c_gtk_drag_icon_get_type;
+  extern(C) GType function() c_gtk_drag_icon_get_type;
   GtkWidget* function(const(GValue)* value) c_gtk_drag_icon_create_widget_for_value;
   GtkWidget* function(GdkDrag* drag) c_gtk_drag_icon_get_for_drag;
   void function(GdkDrag* drag, GdkPaintable* paintable, int hotX, int hotY) c_gtk_drag_icon_set_from_paintable;
@@ -1021,7 +1022,7 @@ __gshared extern(C)
   void function(GtkDragIcon* self, GtkWidget* child) c_gtk_drag_icon_set_child;
 
   // DragSource
-  GType function() c_gtk_drag_source_get_type;
+  extern(C) GType function() c_gtk_drag_source_get_type;
   GtkDragSource* function() c_gtk_drag_source_new;
   void function(GtkDragSource* source) c_gtk_drag_source_drag_cancel;
   GdkDragAction function(GtkDragSource* source) c_gtk_drag_source_get_actions;
@@ -1032,7 +1033,7 @@ __gshared extern(C)
   void function(GtkDragSource* source, GdkPaintable* paintable, int hotX, int hotY) c_gtk_drag_source_set_icon;
 
   // DrawingArea
-  GType function() c_gtk_drawing_area_get_type;
+  extern(C) GType function() c_gtk_drawing_area_get_type;
   GtkWidget* function() c_gtk_drawing_area_new;
   int function(GtkDrawingArea* self) c_gtk_drawing_area_get_content_height;
   int function(GtkDrawingArea* self) c_gtk_drawing_area_get_content_width;
@@ -1041,14 +1042,14 @@ __gshared extern(C)
   void function(GtkDrawingArea* self, GtkDrawingAreaDrawFunc drawFunc, void* userData, GDestroyNotify destroy) c_gtk_drawing_area_set_draw_func;
 
   // DropControllerMotion
-  GType function() c_gtk_drop_controller_motion_get_type;
+  extern(C) GType function() c_gtk_drop_controller_motion_get_type;
   GtkEventController* function() c_gtk_drop_controller_motion_new;
   bool function(GtkDropControllerMotion* self) c_gtk_drop_controller_motion_contains_pointer;
   GdkDrop* function(GtkDropControllerMotion* self) c_gtk_drop_controller_motion_get_drop;
   bool function(GtkDropControllerMotion* self) c_gtk_drop_controller_motion_is_pointer;
 
   // DropDown
-  GType function() c_gtk_drop_down_get_type;
+  extern(C) GType function() c_gtk_drop_down_get_type;
   GtkWidget* function(GListModel* model, GtkExpression* expression) c_gtk_drop_down_new;
   GtkWidget* function(const(char*)* strings) c_gtk_drop_down_new_from_strings;
   bool function(GtkDropDown* self) c_gtk_drop_down_get_enable_search;
@@ -1072,7 +1073,7 @@ __gshared extern(C)
   void function(GtkDropDown* self, bool showArrow) c_gtk_drop_down_set_show_arrow;
 
   // DropTarget
-  GType function() c_gtk_drop_target_get_type;
+  extern(C) GType function() c_gtk_drop_target_get_type;
   GtkDropTarget* function(GType type, GdkDragAction actions) c_gtk_drop_target_new;
   GdkDragAction function(GtkDropTarget* self) c_gtk_drop_target_get_actions;
   GdkDrop* function(GtkDropTarget* self) c_gtk_drop_target_get_current_drop;
@@ -1087,7 +1088,7 @@ __gshared extern(C)
   void function(GtkDropTarget* self, bool preload) c_gtk_drop_target_set_preload;
 
   // DropTargetAsync
-  GType function() c_gtk_drop_target_async_get_type;
+  extern(C) GType function() c_gtk_drop_target_async_get_type;
   GtkDropTargetAsync* function(GdkContentFormats* formats, GdkDragAction actions) c_gtk_drop_target_async_new;
   GdkDragAction function(GtkDropTargetAsync* self) c_gtk_drop_target_async_get_actions;
   GdkContentFormats* function(GtkDropTargetAsync* self) c_gtk_drop_target_async_get_formats;
@@ -1096,7 +1097,7 @@ __gshared extern(C)
   void function(GtkDropTargetAsync* self, GdkContentFormats* formats) c_gtk_drop_target_async_set_formats;
 
   // Editable
-  GType function() c_gtk_editable_get_type;
+  extern(C) GType function() c_gtk_editable_get_type;
   bool function(ObjectC* object, uint propId, GValue* value, GParamSpec* pspec) c_gtk_editable_delegate_get_property;
   bool function(ObjectC* object, uint propId, const(GValue)* value, GParamSpec* pspec) c_gtk_editable_delegate_set_property;
   uint function(GObjectClass* objectClass, uint firstProp) c_gtk_editable_install_properties;
@@ -1126,18 +1127,18 @@ __gshared extern(C)
   void function(GtkEditable* editable, int nChars) c_gtk_editable_set_width_chars;
 
   // EditableLabel
-  GType function() c_gtk_editable_label_get_type;
+  extern(C) GType function() c_gtk_editable_label_get_type;
   GtkWidget* function(const(char)* str) c_gtk_editable_label_new;
   bool function(GtkEditableLabel* self) c_gtk_editable_label_get_editing;
   void function(GtkEditableLabel* self) c_gtk_editable_label_start_editing;
   void function(GtkEditableLabel* self, bool commit) c_gtk_editable_label_stop_editing;
 
   // EmojiChooser
-  GType function() c_gtk_emoji_chooser_get_type;
+  extern(C) GType function() c_gtk_emoji_chooser_get_type;
   GtkWidget* function() c_gtk_emoji_chooser_new;
 
   // Entry
-  GType function() c_gtk_entry_get_type;
+  extern(C) GType function() c_gtk_entry_get_type;
   GtkWidget* function() c_gtk_entry_new;
   GtkWidget* function(GtkEntryBuffer* buffer) c_gtk_entry_new_with_buffer;
   bool function(GtkEntry* entry) c_gtk_entry_get_activates_default;
@@ -1200,7 +1201,7 @@ __gshared extern(C)
   void function(GtkEntry* entry) c_gtk_entry_unset_invisible_char;
 
   // EntryBuffer
-  GType function() c_gtk_entry_buffer_get_type;
+  extern(C) GType function() c_gtk_entry_buffer_get_type;
   GtkEntryBuffer* function(const(char)* initialChars, int nInitialChars) c_gtk_entry_buffer_new;
   uint function(GtkEntryBuffer* buffer, uint position, int nChars) c_gtk_entry_buffer_delete_text;
   void function(GtkEntryBuffer* buffer, uint position, uint nChars) c_gtk_entry_buffer_emit_deleted_text;
@@ -1214,7 +1215,7 @@ __gshared extern(C)
   void function(GtkEntryBuffer* buffer, const(char)* chars, int nChars) c_gtk_entry_buffer_set_text;
 
   // EntryCompletion
-  GType function() c_gtk_entry_completion_get_type;
+  extern(C) GType function() c_gtk_entry_completion_get_type;
   GtkEntryCompletion* function() c_gtk_entry_completion_new;
   GtkEntryCompletion* function(GtkCellArea* area) c_gtk_entry_completion_new_with_area;
   void function(GtkEntryCompletion* completion) c_gtk_entry_completion_complete;
@@ -1241,7 +1242,7 @@ __gshared extern(C)
   void function(GtkEntryCompletion* completion, int column) c_gtk_entry_completion_set_text_column;
 
   // EventController
-  GType function() c_gtk_event_controller_get_type;
+  extern(C) GType function() c_gtk_event_controller_get_type;
   GdkEvent* function(GtkEventController* controller) c_gtk_event_controller_get_current_event;
   GdkDevice* function(GtkEventController* controller) c_gtk_event_controller_get_current_event_device;
   GdkModifierType function(GtkEventController* controller) c_gtk_event_controller_get_current_event_state;
@@ -1257,13 +1258,13 @@ __gshared extern(C)
   void function(GtkEventController* controller, const(char)* name) c_gtk_event_controller_set_static_name;
 
   // EventControllerFocus
-  GType function() c_gtk_event_controller_focus_get_type;
+  extern(C) GType function() c_gtk_event_controller_focus_get_type;
   GtkEventController* function() c_gtk_event_controller_focus_new;
   bool function(GtkEventControllerFocus* self) c_gtk_event_controller_focus_contains_focus;
   bool function(GtkEventControllerFocus* self) c_gtk_event_controller_focus_is_focus;
 
   // EventControllerKey
-  GType function() c_gtk_event_controller_key_get_type;
+  extern(C) GType function() c_gtk_event_controller_key_get_type;
   GtkEventController* function() c_gtk_event_controller_key_new;
   bool function(GtkEventControllerKey* controller, GtkWidget* widget) c_gtk_event_controller_key_forward;
   uint function(GtkEventControllerKey* controller) c_gtk_event_controller_key_get_group;
@@ -1271,28 +1272,28 @@ __gshared extern(C)
   void function(GtkEventControllerKey* controller, GtkIMContext* imContext) c_gtk_event_controller_key_set_im_context;
 
   // EventControllerLegacy
-  GType function() c_gtk_event_controller_legacy_get_type;
+  extern(C) GType function() c_gtk_event_controller_legacy_get_type;
   GtkEventController* function() c_gtk_event_controller_legacy_new;
 
   // EventControllerMotion
-  GType function() c_gtk_event_controller_motion_get_type;
+  extern(C) GType function() c_gtk_event_controller_motion_get_type;
   GtkEventController* function() c_gtk_event_controller_motion_new;
   bool function(GtkEventControllerMotion* self) c_gtk_event_controller_motion_contains_pointer;
   bool function(GtkEventControllerMotion* self) c_gtk_event_controller_motion_is_pointer;
 
   // EventControllerScroll
-  GType function() c_gtk_event_controller_scroll_get_type;
+  extern(C) GType function() c_gtk_event_controller_scroll_get_type;
   GtkEventController* function(GtkEventControllerScrollFlags flags) c_gtk_event_controller_scroll_new;
   GtkEventControllerScrollFlags function(GtkEventControllerScroll* scroll) c_gtk_event_controller_scroll_get_flags;
   GdkScrollUnit function(GtkEventControllerScroll* scroll) c_gtk_event_controller_scroll_get_unit;
   void function(GtkEventControllerScroll* scroll, GtkEventControllerScrollFlags flags) c_gtk_event_controller_scroll_set_flags;
 
   // EveryFilter
-  GType function() c_gtk_every_filter_get_type;
+  extern(C) GType function() c_gtk_every_filter_get_type;
   GtkEveryFilter* function() c_gtk_every_filter_new;
 
   // Expander
-  GType function() c_gtk_expander_get_type;
+  extern(C) GType function() c_gtk_expander_get_type;
   GtkWidget* function(const(char)* label) c_gtk_expander_new;
   GtkWidget* function(const(char)* label) c_gtk_expander_new_with_mnemonic;
   GtkWidget* function(GtkExpander* expander) c_gtk_expander_get_child;
@@ -1311,7 +1312,7 @@ __gshared extern(C)
   void function(GtkExpander* expander, bool useUnderline) c_gtk_expander_set_use_underline;
 
   // Expression
-  GType function() c_gtk_expression_get_type;
+  extern(C) GType function() c_gtk_expression_get_type;
   GtkExpressionWatch* function(GtkExpression* self, ObjectC* target, const(char)* property, ObjectC* this_) c_gtk_expression_bind;
   bool function(GtkExpression* self, ObjectC* this_, GValue* value) c_gtk_expression_evaluate;
   GType function(GtkExpression* self) c_gtk_expression_get_value_type;
@@ -1321,14 +1322,14 @@ __gshared extern(C)
   GtkExpressionWatch* function(GtkExpression* self, ObjectC* this_, GtkExpressionNotify notify, void* userData, GDestroyNotify userDestroy) c_gtk_expression_watch;
 
   // ExpressionWatch
-  GType function() c_gtk_expression_watch_get_type;
+  extern(C) GType function() c_gtk_expression_watch_get_type;
   bool function(GtkExpressionWatch* watch, GValue* value) c_gtk_expression_watch_evaluate;
   GtkExpressionWatch* function(GtkExpressionWatch* watch) c_gtk_expression_watch_ref;
   void function(GtkExpressionWatch* watch) c_gtk_expression_watch_unref;
   void function(GtkExpressionWatch* watch) c_gtk_expression_watch_unwatch;
 
   // FileChooser
-  GType function() c_gtk_file_chooser_get_type;
+  extern(C) GType function() c_gtk_file_chooser_get_type;
   void function(GtkFileChooser* chooser, const(char)* id, const(char)* label, const(char*)* options, const(char*)* optionLabels) c_gtk_file_chooser_add_choice;
   void function(GtkFileChooser* chooser, GtkFileFilter* filter) c_gtk_file_chooser_add_filter;
   bool function(GtkFileChooser* chooser, GFile* folder, GError** _err) c_gtk_file_chooser_add_shortcut_folder;
@@ -1356,11 +1357,11 @@ __gshared extern(C)
   void function(GtkFileChooser* chooser, bool selectMultiple) c_gtk_file_chooser_set_select_multiple;
 
   // FileChooserDialog
-  GType function() c_gtk_file_chooser_dialog_get_type;
+  extern(C) GType function() c_gtk_file_chooser_dialog_get_type;
   GtkWidget* function(const(char)* title, GtkWindow* parent, GtkFileChooserAction action, const(char)* firstButtonText,  ...) c_gtk_file_chooser_dialog_new;
 
   // FileChooserNative
-  GType function() c_gtk_file_chooser_native_get_type;
+  extern(C) GType function() c_gtk_file_chooser_native_get_type;
   GtkFileChooserNative* function(const(char)* title, GtkWindow* parent, GtkFileChooserAction action, const(char)* acceptLabel, const(char)* cancelLabel) c_gtk_file_chooser_native_new;
   const(char)* function(GtkFileChooserNative* self) c_gtk_file_chooser_native_get_accept_label;
   const(char)* function(GtkFileChooserNative* self) c_gtk_file_chooser_native_get_cancel_label;
@@ -1368,11 +1369,11 @@ __gshared extern(C)
   void function(GtkFileChooserNative* self, const(char)* cancelLabel) c_gtk_file_chooser_native_set_cancel_label;
 
   // FileChooserWidget
-  GType function() c_gtk_file_chooser_widget_get_type;
+  extern(C) GType function() c_gtk_file_chooser_widget_get_type;
   GtkWidget* function(GtkFileChooserAction action) c_gtk_file_chooser_widget_new;
 
   // FileDialog
-  GType function() c_gtk_file_dialog_get_type;
+  extern(C) GType function() c_gtk_file_dialog_get_type;
   GtkFileDialog* function() c_gtk_file_dialog_new;
   const(char)* function(GtkFileDialog* self) c_gtk_file_dialog_get_accept_label;
   GtkFileFilter* function(GtkFileDialog* self) c_gtk_file_dialog_get_default_filter;
@@ -1402,7 +1403,7 @@ __gshared extern(C)
   void function(GtkFileDialog* self, const(char)* title) c_gtk_file_dialog_set_title;
 
   // FileFilter
-  GType function() c_gtk_file_filter_get_type;
+  extern(C) GType function() c_gtk_file_filter_get_type;
   GtkFileFilter* function() c_gtk_file_filter_new;
   GtkFileFilter* function(VariantC* variant) c_gtk_file_filter_new_from_gvariant;
   void function(GtkFileFilter* filter, const(char)* mimeType) c_gtk_file_filter_add_mime_type;
@@ -1415,7 +1416,7 @@ __gshared extern(C)
   VariantC* function(GtkFileFilter* filter) c_gtk_file_filter_to_gvariant;
 
   // FileLauncher
-  GType function() c_gtk_file_launcher_get_type;
+  extern(C) GType function() c_gtk_file_launcher_get_type;
   GtkFileLauncher* function(GFile* file) c_gtk_file_launcher_new;
   bool function(GtkFileLauncher* self) c_gtk_file_launcher_get_always_ask;
   GFile* function(GtkFileLauncher* self) c_gtk_file_launcher_get_file;
@@ -1429,13 +1430,13 @@ __gshared extern(C)
   void function(GtkFileLauncher* self, bool writable) c_gtk_file_launcher_set_writable;
 
   // Filter
-  GType function() c_gtk_filter_get_type;
+  extern(C) GType function() c_gtk_filter_get_type;
   void function(GtkFilter* self, GtkFilterChange change) c_gtk_filter_changed;
   GtkFilterMatch function(GtkFilter* self) c_gtk_filter_get_strictness;
   bool function(GtkFilter* self, ObjectC* item) c_gtk_filter_match;
 
   // FilterListModel
-  GType function() c_gtk_filter_list_model_get_type;
+  extern(C) GType function() c_gtk_filter_list_model_get_type;
   GtkFilterListModel* function(GListModel* model, GtkFilter* filter) c_gtk_filter_list_model_new;
   GtkFilter* function(GtkFilterListModel* self) c_gtk_filter_list_model_get_filter;
   bool function(GtkFilterListModel* self) c_gtk_filter_list_model_get_incremental;
@@ -1446,7 +1447,7 @@ __gshared extern(C)
   void function(GtkFilterListModel* self, GListModel* model) c_gtk_filter_list_model_set_model;
 
   // Fixed
-  GType function() c_gtk_fixed_get_type;
+  extern(C) GType function() c_gtk_fixed_get_type;
   GtkWidget* function() c_gtk_fixed_new;
   void function(GtkFixed* fixed, GtkWidget* widget, double* x, double* y) c_gtk_fixed_get_child_position;
   GskTransform* function(GtkFixed* fixed, GtkWidget* widget) c_gtk_fixed_get_child_transform;
@@ -1456,23 +1457,23 @@ __gshared extern(C)
   void function(GtkFixed* fixed, GtkWidget* widget, GskTransform* transform) c_gtk_fixed_set_child_transform;
 
   // FixedLayout
-  GType function() c_gtk_fixed_layout_get_type;
+  extern(C) GType function() c_gtk_fixed_layout_get_type;
   GtkLayoutManager* function() c_gtk_fixed_layout_new;
 
   // FixedLayoutChild
-  GType function() c_gtk_fixed_layout_child_get_type;
+  extern(C) GType function() c_gtk_fixed_layout_child_get_type;
   GskTransform* function(GtkFixedLayoutChild* child) c_gtk_fixed_layout_child_get_transform;
   void function(GtkFixedLayoutChild* child, GskTransform* transform) c_gtk_fixed_layout_child_set_transform;
 
   // FlattenListModel
-  GType function() c_gtk_flatten_list_model_get_type;
+  extern(C) GType function() c_gtk_flatten_list_model_get_type;
   GtkFlattenListModel* function(GListModel* model) c_gtk_flatten_list_model_new;
   GListModel* function(GtkFlattenListModel* self) c_gtk_flatten_list_model_get_model;
   GListModel* function(GtkFlattenListModel* self, uint position) c_gtk_flatten_list_model_get_model_for_item;
   void function(GtkFlattenListModel* self, GListModel* model) c_gtk_flatten_list_model_set_model;
 
   // FlowBox
-  GType function() c_gtk_flow_box_get_type;
+  extern(C) GType function() c_gtk_flow_box_get_type;
   GtkWidget* function() c_gtk_flow_box_new;
   void function(GtkFlowBox* self, GtkWidget* child) c_gtk_flow_box_append;
   void function(GtkFlowBox* box, GListModel* model, GtkFlowBoxCreateWidgetFunc createWidgetFunc, void* userData, GDestroyNotify userDataFreeFunc) c_gtk_flow_box_bind_model;
@@ -1510,7 +1511,7 @@ __gshared extern(C)
   void function(GtkFlowBox* box, GtkFlowBoxChild* child) c_gtk_flow_box_unselect_child;
 
   // FlowBoxChild
-  GType function() c_gtk_flow_box_child_get_type;
+  extern(C) GType function() c_gtk_flow_box_child_get_type;
   GtkWidget* function() c_gtk_flow_box_child_new;
   void function(GtkFlowBoxChild* child) c_gtk_flow_box_child_changed;
   GtkWidget* function(GtkFlowBoxChild* self) c_gtk_flow_box_child_get_child;
@@ -1519,7 +1520,7 @@ __gshared extern(C)
   void function(GtkFlowBoxChild* self, GtkWidget* child) c_gtk_flow_box_child_set_child;
 
   // FontButton
-  GType function() c_gtk_font_button_get_type;
+  extern(C) GType function() c_gtk_font_button_get_type;
   GtkWidget* function() c_gtk_font_button_new;
   GtkWidget* function(const(char)* fontname) c_gtk_font_button_new_with_font;
   bool function(GtkFontButton* fontButton) c_gtk_font_button_get_modal;
@@ -1532,7 +1533,7 @@ __gshared extern(C)
   void function(GtkFontButton* fontButton, bool useSize) c_gtk_font_button_set_use_size;
 
   // FontChooser
-  GType function() c_gtk_font_chooser_get_type;
+  extern(C) GType function() c_gtk_font_chooser_get_type;
   char* function(GtkFontChooser* fontchooser) c_gtk_font_chooser_get_font;
   PangoFontDescription* function(GtkFontChooser* fontchooser) c_gtk_font_chooser_get_font_desc;
   PangoFontFace* function(GtkFontChooser* fontchooser) c_gtk_font_chooser_get_font_face;
@@ -1554,15 +1555,15 @@ __gshared extern(C)
   void function(GtkFontChooser* fontchooser, bool showPreviewEntry) c_gtk_font_chooser_set_show_preview_entry;
 
   // FontChooserDialog
-  GType function() c_gtk_font_chooser_dialog_get_type;
+  extern(C) GType function() c_gtk_font_chooser_dialog_get_type;
   GtkWidget* function(const(char)* title, GtkWindow* parent) c_gtk_font_chooser_dialog_new;
 
   // FontChooserWidget
-  GType function() c_gtk_font_chooser_widget_get_type;
+  extern(C) GType function() c_gtk_font_chooser_widget_get_type;
   GtkWidget* function() c_gtk_font_chooser_widget_new;
 
   // FontDialog
-  GType function() c_gtk_font_dialog_get_type;
+  extern(C) GType function() c_gtk_font_dialog_get_type;
   GtkFontDialog* function() c_gtk_font_dialog_new;
   void function(GtkFontDialog* self, GtkWindow* parent, PangoFontFace* initialValue, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_font_dialog_choose_face;
   PangoFontFace* function(GtkFontDialog* self, GAsyncResult* result, GError** _err) c_gtk_font_dialog_choose_face_finish;
@@ -1584,7 +1585,7 @@ __gshared extern(C)
   void function(GtkFontDialog* self, const(char)* title) c_gtk_font_dialog_set_title;
 
   // FontDialogButton
-  GType function() c_gtk_font_dialog_button_get_type;
+  extern(C) GType function() c_gtk_font_dialog_button_get_type;
   GtkWidget* function(GtkFontDialog* dialog) c_gtk_font_dialog_button_new;
   GtkFontDialog* function(GtkFontDialogButton* self) c_gtk_font_dialog_button_get_dialog;
   PangoFontDescription* function(GtkFontDialogButton* self) c_gtk_font_dialog_button_get_font_desc;
@@ -1602,7 +1603,7 @@ __gshared extern(C)
   void function(GtkFontDialogButton* self, bool useSize) c_gtk_font_dialog_button_set_use_size;
 
   // Frame
-  GType function() c_gtk_frame_get_type;
+  extern(C) GType function() c_gtk_frame_get_type;
   GtkWidget* function(const(char)* label) c_gtk_frame_new;
   GtkWidget* function(GtkFrame* frame) c_gtk_frame_get_child;
   const(char)* function(GtkFrame* frame) c_gtk_frame_get_label;
@@ -1614,7 +1615,7 @@ __gshared extern(C)
   void function(GtkFrame* frame, GtkWidget* labelWidget) c_gtk_frame_set_label_widget;
 
   // GLArea
-  GType function() c_gtk_gl_area_get_type;
+  extern(C) GType function() c_gtk_gl_area_get_type;
   GtkWidget* function() c_gtk_gl_area_new;
   void function(GtkGLArea* area) c_gtk_gl_area_attach_buffers;
   GdkGLAPI function(GtkGLArea* area) c_gtk_gl_area_get_allowed_apis;
@@ -1637,7 +1638,7 @@ __gshared extern(C)
   void function(GtkGLArea* area, bool useEs) c_gtk_gl_area_set_use_es;
 
   // Gesture
-  GType function() c_gtk_gesture_get_type;
+  extern(C) GType function() c_gtk_gesture_get_type;
   bool function(GtkGesture* gesture, GdkRectangle* rect) c_gtk_gesture_get_bounding_box;
   bool function(GtkGesture* gesture, double* x, double* y) c_gtk_gesture_get_bounding_box_center;
   GdkDevice* function(GtkGesture* gesture) c_gtk_gesture_get_device;
@@ -1657,34 +1658,34 @@ __gshared extern(C)
   void function(GtkGesture* gesture) c_gtk_gesture_ungroup;
 
   // GestureClick
-  GType function() c_gtk_gesture_click_get_type;
+  extern(C) GType function() c_gtk_gesture_click_get_type;
   GtkGesture* function() c_gtk_gesture_click_new;
 
   // GestureDrag
-  GType function() c_gtk_gesture_drag_get_type;
+  extern(C) GType function() c_gtk_gesture_drag_get_type;
   GtkGesture* function() c_gtk_gesture_drag_new;
   bool function(GtkGestureDrag* gesture, double* x, double* y) c_gtk_gesture_drag_get_offset;
   bool function(GtkGestureDrag* gesture, double* x, double* y) c_gtk_gesture_drag_get_start_point;
 
   // GestureLongPress
-  GType function() c_gtk_gesture_long_press_get_type;
+  extern(C) GType function() c_gtk_gesture_long_press_get_type;
   GtkGesture* function() c_gtk_gesture_long_press_new;
   double function(GtkGestureLongPress* gesture) c_gtk_gesture_long_press_get_delay_factor;
   void function(GtkGestureLongPress* gesture, double delayFactor) c_gtk_gesture_long_press_set_delay_factor;
 
   // GesturePan
-  GType function() c_gtk_gesture_pan_get_type;
+  extern(C) GType function() c_gtk_gesture_pan_get_type;
   GtkGesture* function(GtkOrientation orientation) c_gtk_gesture_pan_new;
   GtkOrientation function(GtkGesturePan* gesture) c_gtk_gesture_pan_get_orientation;
   void function(GtkGesturePan* gesture, GtkOrientation orientation) c_gtk_gesture_pan_set_orientation;
 
   // GestureRotate
-  GType function() c_gtk_gesture_rotate_get_type;
+  extern(C) GType function() c_gtk_gesture_rotate_get_type;
   GtkGesture* function() c_gtk_gesture_rotate_new;
   double function(GtkGestureRotate* gesture) c_gtk_gesture_rotate_get_angle_delta;
 
   // GestureSingle
-  GType function() c_gtk_gesture_single_get_type;
+  extern(C) GType function() c_gtk_gesture_single_get_type;
   uint function(GtkGestureSingle* gesture) c_gtk_gesture_single_get_button;
   uint function(GtkGestureSingle* gesture) c_gtk_gesture_single_get_current_button;
   GdkEventSequence* function(GtkGestureSingle* gesture) c_gtk_gesture_single_get_current_sequence;
@@ -1695,7 +1696,7 @@ __gshared extern(C)
   void function(GtkGestureSingle* gesture, bool touchOnly) c_gtk_gesture_single_set_touch_only;
 
   // GestureStylus
-  GType function() c_gtk_gesture_stylus_get_type;
+  extern(C) GType function() c_gtk_gesture_stylus_get_type;
   GtkGesture* function() c_gtk_gesture_stylus_new;
   bool function(GtkGestureStylus* gesture, GdkAxisUse* axes, double** values) c_gtk_gesture_stylus_get_axes;
   bool function(GtkGestureStylus* gesture, GdkAxisUse axis, double* value) c_gtk_gesture_stylus_get_axis;
@@ -1705,12 +1706,12 @@ __gshared extern(C)
   void function(GtkGestureStylus* gesture, bool stylusOnly) c_gtk_gesture_stylus_set_stylus_only;
 
   // GestureSwipe
-  GType function() c_gtk_gesture_swipe_get_type;
+  extern(C) GType function() c_gtk_gesture_swipe_get_type;
   GtkGesture* function() c_gtk_gesture_swipe_new;
   bool function(GtkGestureSwipe* gesture, double* velocityX, double* velocityY) c_gtk_gesture_swipe_get_velocity;
 
   // GestureZoom
-  GType function() c_gtk_gesture_zoom_get_type;
+  extern(C) GType function() c_gtk_gesture_zoom_get_type;
   GtkGesture* function() c_gtk_gesture_zoom_new;
   double function(GtkGestureZoom* gesture) c_gtk_gesture_zoom_get_scale_delta;
 
@@ -1782,7 +1783,7 @@ __gshared extern(C)
   void function(GValue* value, GtkExpression* expression) c_gtk_value_take_expression;
 
   // GraphicsOffload
-  GType function() c_gtk_graphics_offload_get_type;
+  extern(C) GType function() c_gtk_graphics_offload_get_type;
   GtkWidget* function(GtkWidget* child) c_gtk_graphics_offload_new;
   GtkWidget* function(GtkGraphicsOffload* self) c_gtk_graphics_offload_get_child;
   GtkGraphicsOffloadEnabled function(GtkGraphicsOffload* self) c_gtk_graphics_offload_get_enabled;
@@ -1790,7 +1791,7 @@ __gshared extern(C)
   void function(GtkGraphicsOffload* self, GtkGraphicsOffloadEnabled enabled) c_gtk_graphics_offload_set_enabled;
 
   // Grid
-  GType function() c_gtk_grid_get_type;
+  extern(C) GType function() c_gtk_grid_get_type;
   GtkWidget* function() c_gtk_grid_new;
   void function(GtkGrid* grid, GtkWidget* child, int column, int row, int width, int height) c_gtk_grid_attach;
   void function(GtkGrid* grid, GtkWidget* child, GtkWidget* sibling, GtkPositionType side, int width, int height) c_gtk_grid_attach_next_to;
@@ -1816,7 +1817,7 @@ __gshared extern(C)
   void function(GtkGrid* grid, uint spacing) c_gtk_grid_set_row_spacing;
 
   // GridLayout
-  GType function() c_gtk_grid_layout_get_type;
+  extern(C) GType function() c_gtk_grid_layout_get_type;
   GtkLayoutManager* function() c_gtk_grid_layout_new;
   int function(GtkGridLayout* grid) c_gtk_grid_layout_get_baseline_row;
   bool function(GtkGridLayout* grid) c_gtk_grid_layout_get_column_homogeneous;
@@ -1832,7 +1833,7 @@ __gshared extern(C)
   void function(GtkGridLayout* grid, uint spacing) c_gtk_grid_layout_set_row_spacing;
 
   // GridLayoutChild
-  GType function() c_gtk_grid_layout_child_get_type;
+  extern(C) GType function() c_gtk_grid_layout_child_get_type;
   int function(GtkGridLayoutChild* child) c_gtk_grid_layout_child_get_column;
   int function(GtkGridLayoutChild* child) c_gtk_grid_layout_child_get_column_span;
   int function(GtkGridLayoutChild* child) c_gtk_grid_layout_child_get_row;
@@ -1843,7 +1844,7 @@ __gshared extern(C)
   void function(GtkGridLayoutChild* child, int span) c_gtk_grid_layout_child_set_row_span;
 
   // GridView
-  GType function() c_gtk_grid_view_get_type;
+  extern(C) GType function() c_gtk_grid_view_get_type;
   GtkWidget* function(GtkSelectionModel* model, GtkListItemFactory* factory) c_gtk_grid_view_new;
   bool function(GtkGridView* self) c_gtk_grid_view_get_enable_rubberband;
   GtkListItemFactory* function(GtkGridView* self) c_gtk_grid_view_get_factory;
@@ -1862,7 +1863,7 @@ __gshared extern(C)
   void function(GtkGridView* self, GtkListTabBehavior tabBehavior) c_gtk_grid_view_set_tab_behavior;
 
   // HeaderBar
-  GType function() c_gtk_header_bar_get_type;
+  extern(C) GType function() c_gtk_header_bar_get_type;
   GtkWidget* function() c_gtk_header_bar_new;
   const(char)* function(GtkHeaderBar* bar) c_gtk_header_bar_get_decoration_layout;
   bool function(GtkHeaderBar* bar) c_gtk_header_bar_get_show_title_buttons;
@@ -1875,7 +1876,7 @@ __gshared extern(C)
   void function(GtkHeaderBar* bar, GtkWidget* titleWidget) c_gtk_header_bar_set_title_widget;
 
   // IMContext
-  GType function() c_gtk_im_context_get_type;
+  extern(C) GType function() c_gtk_im_context_get_type;
   bool function(GtkIMContext* context, GdkEvent* event) c_gtk_im_context_activate_osk;
   bool function(GtkIMContext* context, int offset, int nChars) c_gtk_im_context_delete_surrounding;
   bool function(GtkIMContext* context, bool press, GdkSurface* surface, GdkDevice* device, uint time, uint keycode, GdkModifierType state, int group) c_gtk_im_context_filter_key;
@@ -1893,26 +1894,26 @@ __gshared extern(C)
   void function(GtkIMContext* context, bool usePreedit) c_gtk_im_context_set_use_preedit;
 
   // IMContextSimple
-  GType function() c_gtk_im_context_simple_get_type;
+  extern(C) GType function() c_gtk_im_context_simple_get_type;
   GtkIMContext* function() c_gtk_im_context_simple_new;
   void function(GtkIMContextSimple* contextSimple, const(char)* composeFile) c_gtk_im_context_simple_add_compose_file;
   void function(GtkIMContextSimple* contextSimple, ushort* data, int maxSeqLen, int nSeqs) c_gtk_im_context_simple_add_table;
 
   // IMMulticontext
-  GType function() c_gtk_im_multicontext_get_type;
+  extern(C) GType function() c_gtk_im_multicontext_get_type;
   GtkIMContext* function() c_gtk_im_multicontext_new;
   const(char)* function(GtkIMMulticontext* context) c_gtk_im_multicontext_get_context_id;
   void function(GtkIMMulticontext* context, const(char)* contextId) c_gtk_im_multicontext_set_context_id;
 
   // IconPaintable
-  GType function() c_gtk_icon_paintable_get_type;
+  extern(C) GType function() c_gtk_icon_paintable_get_type;
   GtkIconPaintable* function(GFile* file, int size, int scale) c_gtk_icon_paintable_new_for_file;
   GFile* function(GtkIconPaintable* self) c_gtk_icon_paintable_get_file;
   const(char)* function(GtkIconPaintable* self) c_gtk_icon_paintable_get_icon_name;
   bool function(GtkIconPaintable* self) c_gtk_icon_paintable_is_symbolic;
 
   // IconTheme
-  GType function() c_gtk_icon_theme_get_type;
+  extern(C) GType function() c_gtk_icon_theme_get_type;
   GtkIconTheme* function() c_gtk_icon_theme_new;
   GtkIconTheme* function(GdkDisplay* display) c_gtk_icon_theme_get_for_display;
   void function(GtkIconTheme* self, const(char)* path) c_gtk_icon_theme_add_resource_path;
@@ -1932,7 +1933,7 @@ __gshared extern(C)
   void function(GtkIconTheme* self, const(char)* themeName) c_gtk_icon_theme_set_theme_name;
 
   // IconView
-  GType function() c_gtk_icon_view_get_type;
+  extern(C) GType function() c_gtk_icon_view_get_type;
   GtkWidget* function() c_gtk_icon_view_new;
   GtkWidget* function(GtkCellArea* area) c_gtk_icon_view_new_with_area;
   GtkWidget* function(GtkTreeModel* model) c_gtk_icon_view_new_with_model;
@@ -1998,7 +1999,7 @@ __gshared extern(C)
   void function(GtkIconView* iconView) c_gtk_icon_view_unset_model_drag_source;
 
   // Image
-  GType function() c_gtk_image_get_type;
+  extern(C) GType function() c_gtk_image_get_type;
   GtkWidget* function() c_gtk_image_new;
   GtkWidget* function(const(char)* filename) c_gtk_image_new_from_file;
   GtkWidget* function(GIcon* icon) c_gtk_image_new_from_gicon;
@@ -2023,7 +2024,7 @@ __gshared extern(C)
   void function(GtkImage* image, int pixelSize) c_gtk_image_set_pixel_size;
 
   // InfoBar
-  GType function() c_gtk_info_bar_get_type;
+  extern(C) GType function() c_gtk_info_bar_get_type;
   GtkWidget* function() c_gtk_info_bar_new;
   GtkWidget* function(const(char)* firstButtonText,  ...) c_gtk_info_bar_new_with_buttons;
   void function(GtkInfoBar* infoBar, GtkWidget* child, int responseId) c_gtk_info_bar_add_action_widget;
@@ -2043,7 +2044,7 @@ __gshared extern(C)
   void function(GtkInfoBar* infoBar, bool setting) c_gtk_info_bar_set_show_close_button;
 
   // Inscription
-  GType function() c_gtk_inscription_get_type;
+  extern(C) GType function() c_gtk_inscription_get_type;
   GtkWidget* function(const(char)* text) c_gtk_inscription_new;
   PangoAttrList* function(GtkInscription* self) c_gtk_inscription_get_attributes;
   uint function(GtkInscription* self) c_gtk_inscription_get_min_chars;
@@ -2068,13 +2069,13 @@ __gshared extern(C)
   void function(GtkInscription* self, float yalign) c_gtk_inscription_set_yalign;
 
   // KeyvalTrigger
-  GType function() c_gtk_keyval_trigger_get_type;
+  extern(C) GType function() c_gtk_keyval_trigger_get_type;
   GtkShortcutTrigger* function(uint keyval, GdkModifierType modifiers) c_gtk_keyval_trigger_new;
   uint function(GtkKeyvalTrigger* self) c_gtk_keyval_trigger_get_keyval;
   GdkModifierType function(GtkKeyvalTrigger* self) c_gtk_keyval_trigger_get_modifiers;
 
   // Label
-  GType function() c_gtk_label_get_type;
+  extern(C) GType function() c_gtk_label_get_type;
   GtkWidget* function(const(char)* str) c_gtk_label_new;
   GtkWidget* function(const(char)* str) c_gtk_label_new_with_mnemonic;
   PangoAttrList* function(GtkLabel* self) c_gtk_label_get_attributes;
@@ -2128,12 +2129,12 @@ __gshared extern(C)
   void function(GtkLabel* self, float yalign) c_gtk_label_set_yalign;
 
   // LayoutChild
-  GType function() c_gtk_layout_child_get_type;
+  extern(C) GType function() c_gtk_layout_child_get_type;
   GtkWidget* function(GtkLayoutChild* layoutChild) c_gtk_layout_child_get_child_widget;
   GtkLayoutManager* function(GtkLayoutChild* layoutChild) c_gtk_layout_child_get_layout_manager;
 
   // LayoutManager
-  GType function() c_gtk_layout_manager_get_type;
+  extern(C) GType function() c_gtk_layout_manager_get_type;
   void function(GtkLayoutManager* manager, GtkWidget* widget, int width, int height, int baseline) c_gtk_layout_manager_allocate;
   GtkLayoutChild* function(GtkLayoutManager* manager, GtkWidget* child) c_gtk_layout_manager_get_layout_child;
   GtkSizeRequestMode function(GtkLayoutManager* manager) c_gtk_layout_manager_get_request_mode;
@@ -2142,7 +2143,7 @@ __gshared extern(C)
   void function(GtkLayoutManager* manager, GtkWidget* widget, GtkOrientation orientation, int forSize, int* minimum, int* natural, int* minimumBaseline, int* naturalBaseline) c_gtk_layout_manager_measure;
 
   // LevelBar
-  GType function() c_gtk_level_bar_get_type;
+  extern(C) GType function() c_gtk_level_bar_get_type;
   GtkWidget* function() c_gtk_level_bar_new;
   GtkWidget* function(double minValue, double maxValue) c_gtk_level_bar_new_for_interval;
   void function(GtkLevelBar* self, const(char)* name, double value) c_gtk_level_bar_add_offset_value;
@@ -2160,7 +2161,7 @@ __gshared extern(C)
   void function(GtkLevelBar* self, double value) c_gtk_level_bar_set_value;
 
   // LinkButton
-  GType function() c_gtk_link_button_get_type;
+  extern(C) GType function() c_gtk_link_button_get_type;
   GtkWidget* function(const(char)* uri) c_gtk_link_button_new;
   GtkWidget* function(const(char)* uri, const(char)* label) c_gtk_link_button_new_with_label;
   const(char)* function(GtkLinkButton* linkButton) c_gtk_link_button_get_uri;
@@ -2169,10 +2170,10 @@ __gshared extern(C)
   void function(GtkLinkButton* linkButton, bool visited) c_gtk_link_button_set_visited;
 
   // ListBase
-  GType function() c_gtk_list_base_get_type;
+  extern(C) GType function() c_gtk_list_base_get_type;
 
   // ListBox
-  GType function() c_gtk_list_box_get_type;
+  extern(C) GType function() c_gtk_list_box_get_type;
   GtkWidget* function() c_gtk_list_box_new;
   void function(GtkListBox* box, GtkWidget* child) c_gtk_list_box_append;
   void function(GtkListBox* box, GListModel* model, GtkListBoxCreateWidgetFunc createWidgetFunc, void* userData, GDestroyNotify userDataFreeFunc) c_gtk_list_box_bind_model;
@@ -2208,7 +2209,7 @@ __gshared extern(C)
   void function(GtkListBox* box, GtkListBoxRow* row) c_gtk_list_box_unselect_row;
 
   // ListBoxRow
-  GType function() c_gtk_list_box_row_get_type;
+  extern(C) GType function() c_gtk_list_box_row_get_type;
   GtkWidget* function() c_gtk_list_box_row_new;
   void function(GtkListBoxRow* row) c_gtk_list_box_row_changed;
   bool function(GtkListBoxRow* row) c_gtk_list_box_row_get_activatable;
@@ -2223,7 +2224,7 @@ __gshared extern(C)
   void function(GtkListBoxRow* row, bool selectable) c_gtk_list_box_row_set_selectable;
 
   // ListHeader
-  GType function() c_gtk_list_header_get_type;
+  extern(C) GType function() c_gtk_list_header_get_type;
   GtkWidget* function(GtkListHeader* self) c_gtk_list_header_get_child;
   uint function(GtkListHeader* self) c_gtk_list_header_get_end;
   ObjectC* function(GtkListHeader* self) c_gtk_list_header_get_item;
@@ -2232,7 +2233,7 @@ __gshared extern(C)
   void function(GtkListHeader* self, GtkWidget* child) c_gtk_list_header_set_child;
 
   // ListItem
-  GType function() c_gtk_list_item_get_type;
+  extern(C) GType function() c_gtk_list_item_get_type;
   const(char)* function(GtkListItem* self) c_gtk_list_item_get_accessible_description;
   const(char)* function(GtkListItem* self) c_gtk_list_item_get_accessible_label;
   bool function(GtkListItem* self) c_gtk_list_item_get_activatable;
@@ -2250,10 +2251,10 @@ __gshared extern(C)
   void function(GtkListItem* self, bool selectable) c_gtk_list_item_set_selectable;
 
   // ListItemFactory
-  GType function() c_gtk_list_item_factory_get_type;
+  extern(C) GType function() c_gtk_list_item_factory_get_type;
 
   // ListStore
-  GType function() c_gtk_list_store_get_type;
+  extern(C) GType function() c_gtk_list_store_get_type;
   GtkListStore* function(int nColumns,  ...) c_gtk_list_store_new;
   GtkListStore* function(int nColumns, GType* types) c_gtk_list_store_newv;
   void function(GtkListStore* listStore, GtkTreeIter* iter) c_gtk_list_store_append;
@@ -2277,7 +2278,7 @@ __gshared extern(C)
   void function(GtkListStore* store, GtkTreeIter* a, GtkTreeIter* b) c_gtk_list_store_swap;
 
   // ListView
-  GType function() c_gtk_list_view_get_type;
+  extern(C) GType function() c_gtk_list_view_get_type;
   GtkWidget* function(GtkSelectionModel* model, GtkListItemFactory* factory) c_gtk_list_view_new;
   bool function(GtkListView* self) c_gtk_list_view_get_enable_rubberband;
   GtkListItemFactory* function(GtkListView* self) c_gtk_list_view_get_factory;
@@ -2296,13 +2297,13 @@ __gshared extern(C)
   void function(GtkListView* self, GtkListTabBehavior tabBehavior) c_gtk_list_view_set_tab_behavior;
 
   // LockButton
-  GType function() c_gtk_lock_button_get_type;
+  extern(C) GType function() c_gtk_lock_button_get_type;
   GtkWidget* function(GPermission* permission) c_gtk_lock_button_new;
   GPermission* function(GtkLockButton* button) c_gtk_lock_button_get_permission;
   void function(GtkLockButton* button, GPermission* permission) c_gtk_lock_button_set_permission;
 
   // MapListModel
-  GType function() c_gtk_map_list_model_get_type;
+  extern(C) GType function() c_gtk_map_list_model_get_type;
   GtkMapListModel* function(GListModel* model, GtkMapListModelMapFunc mapFunc, void* userData, GDestroyNotify userDestroy) c_gtk_map_list_model_new;
   GListModel* function(GtkMapListModel* self) c_gtk_map_list_model_get_model;
   bool function(GtkMapListModel* self) c_gtk_map_list_model_has_map;
@@ -2310,13 +2311,13 @@ __gshared extern(C)
   void function(GtkMapListModel* self, GListModel* model) c_gtk_map_list_model_set_model;
 
   // MediaControls
-  GType function() c_gtk_media_controls_get_type;
+  extern(C) GType function() c_gtk_media_controls_get_type;
   GtkWidget* function(GtkMediaStream* stream) c_gtk_media_controls_new;
   GtkMediaStream* function(GtkMediaControls* controls) c_gtk_media_controls_get_media_stream;
   void function(GtkMediaControls* controls, GtkMediaStream* stream) c_gtk_media_controls_set_media_stream;
 
   // MediaFile
-  GType function() c_gtk_media_file_get_type;
+  extern(C) GType function() c_gtk_media_file_get_type;
   GtkMediaStream* function() c_gtk_media_file_new;
   GtkMediaStream* function(GFile* file) c_gtk_media_file_new_for_file;
   GtkMediaStream* function(const(char)* filename) c_gtk_media_file_new_for_filename;
@@ -2331,7 +2332,7 @@ __gshared extern(C)
   void function(GtkMediaFile* self, const(char)* resourcePath) c_gtk_media_file_set_resource;
 
   // MediaStream
-  GType function() c_gtk_media_stream_get_type;
+  extern(C) GType function() c_gtk_media_stream_get_type;
   void function(GtkMediaStream* self) c_gtk_media_stream_ended;
   void function(GtkMediaStream* self, GQuark domain, int code, const(char)* format,  ...) c_gtk_media_stream_error;
   void function(GtkMediaStream* self, GQuark domain, int code, const(char)* format, void* args) c_gtk_media_stream_error_valist;
@@ -2368,7 +2369,7 @@ __gshared extern(C)
   void function(GtkMediaStream* self, long timestamp) c_gtk_media_stream_update;
 
   // MenuButton
-  GType function() c_gtk_menu_button_get_type;
+  extern(C) GType function() c_gtk_menu_button_get_type;
   GtkWidget* function() c_gtk_menu_button_new;
   bool function(GtkMenuButton* menuButton) c_gtk_menu_button_get_active;
   bool function(GtkMenuButton* menuButton) c_gtk_menu_button_get_always_show_arrow;
@@ -2399,7 +2400,7 @@ __gshared extern(C)
   void function(GtkMenuButton* menuButton, bool useUnderline) c_gtk_menu_button_set_use_underline;
 
   // MessageDialog
-  GType function() c_gtk_message_dialog_get_type;
+  extern(C) GType function() c_gtk_message_dialog_get_type;
   GtkWidget* function(GtkWindow* parent, GtkDialogFlags flags, GtkMessageType type, GtkButtonsType buttons, const(char)* messageFormat,  ...) c_gtk_message_dialog_new;
   GtkWidget* function(GtkWindow* parent, GtkDialogFlags flags, GtkMessageType type, GtkButtonsType buttons, const(char)* messageFormat,  ...) c_gtk_message_dialog_new_with_markup;
   void function(GtkMessageDialog* messageDialog, const(char)* messageFormat,  ...) c_gtk_message_dialog_format_secondary_markup;
@@ -2408,16 +2409,16 @@ __gshared extern(C)
   void function(GtkMessageDialog* messageDialog, const(char)* str) c_gtk_message_dialog_set_markup;
 
   // MnemonicAction
-  GType function() c_gtk_mnemonic_action_get_type;
+  extern(C) GType function() c_gtk_mnemonic_action_get_type;
   GtkShortcutAction* function() c_gtk_mnemonic_action_get;
 
   // MnemonicTrigger
-  GType function() c_gtk_mnemonic_trigger_get_type;
+  extern(C) GType function() c_gtk_mnemonic_trigger_get_type;
   GtkShortcutTrigger* function(uint keyval) c_gtk_mnemonic_trigger_new;
   uint function(GtkMnemonicTrigger* self) c_gtk_mnemonic_trigger_get_keyval;
 
   // MountOperation
-  GType function() c_gtk_mount_operation_get_type;
+  extern(C) GType function() c_gtk_mount_operation_get_type;
   GMountOperation* function(GtkWindow* parent) c_gtk_mount_operation_new;
   GdkDisplay* function(GtkMountOperation* op) c_gtk_mount_operation_get_display;
   GtkWindow* function(GtkMountOperation* op) c_gtk_mount_operation_get_parent;
@@ -2426,29 +2427,29 @@ __gshared extern(C)
   void function(GtkMountOperation* op, GtkWindow* parent) c_gtk_mount_operation_set_parent;
 
   // MultiFilter
-  GType function() c_gtk_multi_filter_get_type;
+  extern(C) GType function() c_gtk_multi_filter_get_type;
   void function(GtkMultiFilter* self, GtkFilter* filter) c_gtk_multi_filter_append;
   void function(GtkMultiFilter* self, uint position) c_gtk_multi_filter_remove;
 
   // MultiSelection
-  GType function() c_gtk_multi_selection_get_type;
+  extern(C) GType function() c_gtk_multi_selection_get_type;
   GtkMultiSelection* function(GListModel* model) c_gtk_multi_selection_new;
   GListModel* function(GtkMultiSelection* self) c_gtk_multi_selection_get_model;
   void function(GtkMultiSelection* self, GListModel* model) c_gtk_multi_selection_set_model;
 
   // MultiSorter
-  GType function() c_gtk_multi_sorter_get_type;
+  extern(C) GType function() c_gtk_multi_sorter_get_type;
   GtkMultiSorter* function() c_gtk_multi_sorter_new;
   void function(GtkMultiSorter* self, GtkSorter* sorter) c_gtk_multi_sorter_append;
   void function(GtkMultiSorter* self, uint position) c_gtk_multi_sorter_remove;
 
   // NamedAction
-  GType function() c_gtk_named_action_get_type;
+  extern(C) GType function() c_gtk_named_action_get_type;
   GtkShortcutAction* function(const(char)* name) c_gtk_named_action_new;
   const(char)* function(GtkNamedAction* self) c_gtk_named_action_get_action_name;
 
   // Native
-  GType function() c_gtk_native_get_type;
+  extern(C) GType function() c_gtk_native_get_type;
   GtkNative* function(GdkSurface* surface) c_gtk_native_get_for_surface;
   GskRenderer* function(GtkNative* self) c_gtk_native_get_renderer;
   GdkSurface* function(GtkNative* self) c_gtk_native_get_surface;
@@ -2457,7 +2458,7 @@ __gshared extern(C)
   void function(GtkNative* self) c_gtk_native_unrealize;
 
   // NativeDialog
-  GType function() c_gtk_native_dialog_get_type;
+  extern(C) GType function() c_gtk_native_dialog_get_type;
   void function(GtkNativeDialog* self) c_gtk_native_dialog_destroy;
   bool function(GtkNativeDialog* self) c_gtk_native_dialog_get_modal;
   const(char)* function(GtkNativeDialog* self) c_gtk_native_dialog_get_title;
@@ -2470,17 +2471,17 @@ __gshared extern(C)
   void function(GtkNativeDialog* self) c_gtk_native_dialog_show;
 
   // NeverTrigger
-  GType function() c_gtk_never_trigger_get_type;
+  extern(C) GType function() c_gtk_never_trigger_get_type;
   GtkShortcutTrigger* function() c_gtk_never_trigger_get;
 
   // NoSelection
-  GType function() c_gtk_no_selection_get_type;
+  extern(C) GType function() c_gtk_no_selection_get_type;
   GtkNoSelection* function(GListModel* model) c_gtk_no_selection_new;
   GListModel* function(GtkNoSelection* self) c_gtk_no_selection_get_model;
   void function(GtkNoSelection* self, GListModel* model) c_gtk_no_selection_set_model;
 
   // Notebook
-  GType function() c_gtk_notebook_get_type;
+  extern(C) GType function() c_gtk_notebook_get_type;
   GtkWidget* function() c_gtk_notebook_new;
   int function(GtkNotebook* notebook, GtkWidget* child, GtkWidget* tabLabel) c_gtk_notebook_append_page;
   int function(GtkNotebook* notebook, GtkWidget* child, GtkWidget* tabLabel, GtkWidget* menuLabel) c_gtk_notebook_append_page_menu;
@@ -2528,15 +2529,15 @@ __gshared extern(C)
   void function(GtkNotebook* notebook, GtkWidget* child, bool reorderable) c_gtk_notebook_set_tab_reorderable;
 
   // NotebookPage
-  GType function() c_gtk_notebook_page_get_type;
+  extern(C) GType function() c_gtk_notebook_page_get_type;
   GtkWidget* function(GtkNotebookPage* page) c_gtk_notebook_page_get_child;
 
   // NothingAction
-  GType function() c_gtk_nothing_action_get_type;
+  extern(C) GType function() c_gtk_nothing_action_get_type;
   GtkShortcutAction* function() c_gtk_nothing_action_get;
 
   // NumericSorter
-  GType function() c_gtk_numeric_sorter_get_type;
+  extern(C) GType function() c_gtk_numeric_sorter_get_type;
   GtkNumericSorter* function(GtkExpression* expression) c_gtk_numeric_sorter_new;
   GtkExpression* function(GtkNumericSorter* self) c_gtk_numeric_sorter_get_expression;
   GtkSortType function(GtkNumericSorter* self) c_gtk_numeric_sorter_get_sort_order;
@@ -2544,17 +2545,17 @@ __gshared extern(C)
   void function(GtkNumericSorter* self, GtkSortType sortOrder) c_gtk_numeric_sorter_set_sort_order;
 
   // ObjectExpression
-  GType function() c_gtk_object_expression_get_type;
+  extern(C) GType function() c_gtk_object_expression_get_type;
   GtkExpression* function(ObjectC* object) c_gtk_object_expression_new;
   ObjectC* function(GtkExpression* expression) c_gtk_object_expression_get_object;
 
   // Orientable
-  GType function() c_gtk_orientable_get_type;
+  extern(C) GType function() c_gtk_orientable_get_type;
   GtkOrientation function(GtkOrientable* orientable) c_gtk_orientable_get_orientation;
   void function(GtkOrientable* orientable, GtkOrientation orientation) c_gtk_orientable_set_orientation;
 
   // Overlay
-  GType function() c_gtk_overlay_get_type;
+  extern(C) GType function() c_gtk_overlay_get_type;
   GtkWidget* function() c_gtk_overlay_new;
   void function(GtkOverlay* overlay, GtkWidget* widget) c_gtk_overlay_add_overlay;
   GtkWidget* function(GtkOverlay* overlay) c_gtk_overlay_get_child;
@@ -2566,24 +2567,24 @@ __gshared extern(C)
   void function(GtkOverlay* overlay, GtkWidget* widget, bool measure) c_gtk_overlay_set_measure_overlay;
 
   // OverlayLayout
-  GType function() c_gtk_overlay_layout_get_type;
+  extern(C) GType function() c_gtk_overlay_layout_get_type;
   GtkLayoutManager* function() c_gtk_overlay_layout_new;
 
   // OverlayLayoutChild
-  GType function() c_gtk_overlay_layout_child_get_type;
+  extern(C) GType function() c_gtk_overlay_layout_child_get_type;
   bool function(GtkOverlayLayoutChild* child) c_gtk_overlay_layout_child_get_clip_overlay;
   bool function(GtkOverlayLayoutChild* child) c_gtk_overlay_layout_child_get_measure;
   void function(GtkOverlayLayoutChild* child, bool clipOverlay) c_gtk_overlay_layout_child_set_clip_overlay;
   void function(GtkOverlayLayoutChild* child, bool measure) c_gtk_overlay_layout_child_set_measure;
 
   // PadController
-  GType function() c_gtk_pad_controller_get_type;
+  extern(C) GType function() c_gtk_pad_controller_get_type;
   GtkPadController* function(GActionGroup* group, GdkDevice* pad) c_gtk_pad_controller_new;
   void function(GtkPadController* controller, GtkPadActionType type, int index, int mode, const(char)* label, const(char)* actionName) c_gtk_pad_controller_set_action;
   void function(GtkPadController* controller, const(GtkPadActionEntry)* entries, int nEntries) c_gtk_pad_controller_set_action_entries;
 
   // PageSetup
-  GType function() c_gtk_page_setup_get_type;
+  extern(C) GType function() c_gtk_page_setup_get_type;
   GtkPageSetup* function() c_gtk_page_setup_new;
   GtkPageSetup* function(const(char)* fileName, GError** _err) c_gtk_page_setup_new_from_file;
   GtkPageSetup* function(VariantC* variant) c_gtk_page_setup_new_from_gvariant;
@@ -2613,7 +2614,7 @@ __gshared extern(C)
   void function(GtkPageSetup* setup, GKeyFile* keyFile, const(char)* groupName) c_gtk_page_setup_to_key_file;
 
   // PageSetupUnixDialog
-  GType function() c_gtk_page_setup_unix_dialog_get_type;
+  extern(C) GType function() c_gtk_page_setup_unix_dialog_get_type;
   GtkWidget* function(const(char)* title, GtkWindow* parent) c_gtk_page_setup_unix_dialog_new;
   GtkPageSetup* function(GtkPageSetupUnixDialog* dialog) c_gtk_page_setup_unix_dialog_get_page_setup;
   GtkPrintSettings* function(GtkPageSetupUnixDialog* dialog) c_gtk_page_setup_unix_dialog_get_print_settings;
@@ -2621,7 +2622,7 @@ __gshared extern(C)
   void function(GtkPageSetupUnixDialog* dialog, GtkPrintSettings* printSettings) c_gtk_page_setup_unix_dialog_set_print_settings;
 
   // Paned
-  GType function() c_gtk_paned_get_type;
+  extern(C) GType function() c_gtk_paned_get_type;
   GtkWidget* function(GtkOrientation orientation) c_gtk_paned_new;
   GtkWidget* function(GtkPaned* paned) c_gtk_paned_get_end_child;
   int function(GtkPaned* paned) c_gtk_paned_get_position;
@@ -2641,7 +2642,7 @@ __gshared extern(C)
   void function(GtkPaned* paned, bool wide) c_gtk_paned_set_wide_handle;
 
   // PaperSize
-  GType function() c_gtk_paper_size_get_type;
+  extern(C) GType function() c_gtk_paper_size_get_type;
   GtkPaperSize* function(const(char)* name) c_gtk_paper_size_new;
   GtkPaperSize* function(const(char)* name, const(char)* displayName, double width, double height, GtkUnit unit) c_gtk_paper_size_new_custom;
   GtkPaperSize* function(VariantC* variant) c_gtk_paper_size_new_from_gvariant;
@@ -2669,10 +2670,10 @@ __gshared extern(C)
   GList* function(bool includeCustom) c_gtk_paper_size_get_paper_sizes;
 
   // ParamSpecExpression
-  GType function() c_gtk_param_expression_get_type;
+  extern(C) GType function() c_gtk_param_expression_get_type;
 
   // PasswordEntry
-  GType function() c_gtk_password_entry_get_type;
+  extern(C) GType function() c_gtk_password_entry_get_type;
   GtkWidget* function() c_gtk_password_entry_new;
   GMenuModel* function(GtkPasswordEntry* entry) c_gtk_password_entry_get_extra_menu;
   bool function(GtkPasswordEntry* entry) c_gtk_password_entry_get_show_peek_icon;
@@ -2680,11 +2681,11 @@ __gshared extern(C)
   void function(GtkPasswordEntry* entry, bool showPeekIcon) c_gtk_password_entry_set_show_peek_icon;
 
   // PasswordEntryBuffer
-  GType function() c_gtk_password_entry_buffer_get_type;
+  extern(C) GType function() c_gtk_password_entry_buffer_get_type;
   GtkEntryBuffer* function() c_gtk_password_entry_buffer_new;
 
   // Picture
-  GType function() c_gtk_picture_get_type;
+  extern(C) GType function() c_gtk_picture_get_type;
   GtkWidget* function() c_gtk_picture_new;
   GtkWidget* function(GFile* file) c_gtk_picture_new_for_file;
   GtkWidget* function(const(char)* filename) c_gtk_picture_new_for_filename;
@@ -2708,7 +2709,7 @@ __gshared extern(C)
   void function(GtkPicture* self, const(char)* resourcePath) c_gtk_picture_set_resource;
 
   // Popover
-  GType function() c_gtk_popover_get_type;
+  extern(C) GType function() c_gtk_popover_get_type;
   GtkWidget* function() c_gtk_popover_new;
   bool function(GtkPopover* popover) c_gtk_popover_get_autohide;
   bool function(GtkPopover* popover) c_gtk_popover_get_cascade_popdown;
@@ -2732,7 +2733,7 @@ __gshared extern(C)
   void function(GtkPopover* popover, GtkPositionType position) c_gtk_popover_set_position;
 
   // PopoverMenu
-  GType function() c_gtk_popover_menu_get_type;
+  extern(C) GType function() c_gtk_popover_menu_get_type;
   GtkWidget* function(GMenuModel* model) c_gtk_popover_menu_new_from_model;
   GtkWidget* function(GMenuModel* model, GtkPopoverMenuFlags flags) c_gtk_popover_menu_new_from_model_full;
   bool function(GtkPopoverMenu* popover, GtkWidget* child, const(char)* id) c_gtk_popover_menu_add_child;
@@ -2743,7 +2744,7 @@ __gshared extern(C)
   void function(GtkPopoverMenu* popover, GMenuModel* model) c_gtk_popover_menu_set_menu_model;
 
   // PopoverMenuBar
-  GType function() c_gtk_popover_menu_bar_get_type;
+  extern(C) GType function() c_gtk_popover_menu_bar_get_type;
   GtkWidget* function(GMenuModel* model) c_gtk_popover_menu_bar_new_from_model;
   bool function(GtkPopoverMenuBar* bar, GtkWidget* child, const(char)* id) c_gtk_popover_menu_bar_add_child;
   GMenuModel* function(GtkPopoverMenuBar* bar) c_gtk_popover_menu_bar_get_menu_model;
@@ -2751,7 +2752,7 @@ __gshared extern(C)
   void function(GtkPopoverMenuBar* bar, GMenuModel* model) c_gtk_popover_menu_bar_set_menu_model;
 
   // PrintContext
-  GType function() c_gtk_print_context_get_type;
+  extern(C) GType function() c_gtk_print_context_get_type;
   PangoContext* function(GtkPrintContext* context) c_gtk_print_context_create_pango_context;
   PangoLayout* function(GtkPrintContext* context) c_gtk_print_context_create_pango_layout;
   cairo_t* function(GtkPrintContext* context) c_gtk_print_context_get_cairo_context;
@@ -2765,7 +2766,7 @@ __gshared extern(C)
   void function(GtkPrintContext* context, cairo_t* cr, double dpiX, double dpiY) c_gtk_print_context_set_cairo_context;
 
   // PrintDialog
-  GType function() c_gtk_print_dialog_get_type;
+  extern(C) GType function() c_gtk_print_dialog_get_type;
   GtkPrintDialog* function() c_gtk_print_dialog_new;
   const(char)* function(GtkPrintDialog* self) c_gtk_print_dialog_get_accept_label;
   bool function(GtkPrintDialog* self) c_gtk_print_dialog_get_modal;
@@ -2785,7 +2786,7 @@ __gshared extern(C)
   GtkPrintSetup* function(GtkPrintDialog* self, GAsyncResult* result, GError** _err) c_gtk_print_dialog_setup_finish;
 
   // PrintJob
-  GType function() c_gtk_print_job_get_type;
+  extern(C) GType function() c_gtk_print_job_get_type;
   GtkPrintJob* function(const(char)* title, GtkPrinter* printer, GtkPrintSettings* settings, GtkPageSetup* pageSetup) c_gtk_print_job_new;
   bool function(GtkPrintJob* job) c_gtk_print_job_get_collate;
   uint function(GtkPrintJob* job) c_gtk_print_job_get_n_up;
@@ -2819,7 +2820,7 @@ __gshared extern(C)
   void function(GtkPrintJob* job, bool trackStatus) c_gtk_print_job_set_track_print_status;
 
   // PrintOperation
-  GType function() c_gtk_print_operation_get_type;
+  extern(C) GType function() c_gtk_print_operation_get_type;
   GtkPrintOperation* function() c_gtk_print_operation_new;
   void function(GtkPrintOperation* op) c_gtk_print_operation_cancel;
   void function(GtkPrintOperation* op) c_gtk_print_operation_draw_page_finish;
@@ -2852,13 +2853,13 @@ __gshared extern(C)
   void function(GtkPrintOperation* op, bool fullPage) c_gtk_print_operation_set_use_full_page;
 
   // PrintOperationPreview
-  GType function() c_gtk_print_operation_preview_get_type;
+  extern(C) GType function() c_gtk_print_operation_preview_get_type;
   void function(GtkPrintOperationPreview* preview) c_gtk_print_operation_preview_end_preview;
   bool function(GtkPrintOperationPreview* preview, int pageNr) c_gtk_print_operation_preview_is_selected;
   void function(GtkPrintOperationPreview* preview, int pageNr) c_gtk_print_operation_preview_render_page;
 
   // PrintSettings
-  GType function() c_gtk_print_settings_get_type;
+  extern(C) GType function() c_gtk_print_settings_get_type;
   GtkPrintSettings* function() c_gtk_print_settings_new;
   GtkPrintSettings* function(const(char)* fileName, GError** _err) c_gtk_print_settings_new_from_file;
   GtkPrintSettings* function(VariantC* variant) c_gtk_print_settings_new_from_gvariant;
@@ -2937,14 +2938,14 @@ __gshared extern(C)
   void function(GtkPrintSettings* settings, const(char)* key) c_gtk_print_settings_unset;
 
   // PrintSetup
-  GType function() c_gtk_print_setup_get_type;
+  extern(C) GType function() c_gtk_print_setup_get_type;
   GtkPageSetup* function(GtkPrintSetup* setup) c_gtk_print_setup_get_page_setup;
   GtkPrintSettings* function(GtkPrintSetup* setup) c_gtk_print_setup_get_print_settings;
   GtkPrintSetup* function(GtkPrintSetup* setup) c_gtk_print_setup_ref;
   void function(GtkPrintSetup* setup) c_gtk_print_setup_unref;
 
   // PrintUnixDialog
-  GType function() c_gtk_print_unix_dialog_get_type;
+  extern(C) GType function() c_gtk_print_unix_dialog_get_type;
   GtkWidget* function(const(char)* title, GtkWindow* parent) c_gtk_print_unix_dialog_new;
   void function(GtkPrintUnixDialog* dialog, GtkWidget* child, GtkWidget* tabLabel) c_gtk_print_unix_dialog_add_custom_tab;
   int function(GtkPrintUnixDialog* dialog) c_gtk_print_unix_dialog_get_current_page;
@@ -2965,7 +2966,7 @@ __gshared extern(C)
   void function(GtkPrintUnixDialog* dialog, bool supportSelection) c_gtk_print_unix_dialog_set_support_selection;
 
   // Printer
-  GType function() c_gtk_printer_get_type;
+  extern(C) GType function() c_gtk_printer_get_type;
   GtkPrinter* function(const(char)* name, GtkPrintBackend* backend, bool virtual) c_gtk_printer_new;
   bool function(GtkPrinter* printer) c_gtk_printer_accepts_pdf;
   bool function(GtkPrinter* printer) c_gtk_printer_accepts_ps;
@@ -2991,7 +2992,7 @@ __gshared extern(C)
   void function(GtkPrinter* printer) c_gtk_printer_request_details;
 
   // ProgressBar
-  GType function() c_gtk_progress_bar_get_type;
+  extern(C) GType function() c_gtk_progress_bar_get_type;
   GtkWidget* function() c_gtk_progress_bar_new;
   PangoEllipsizeMode function(GtkProgressBar* pbar) c_gtk_progress_bar_get_ellipsize;
   double function(GtkProgressBar* pbar) c_gtk_progress_bar_get_fraction;
@@ -3008,14 +3009,14 @@ __gshared extern(C)
   void function(GtkProgressBar* pbar, const(char)* text) c_gtk_progress_bar_set_text;
 
   // PropertyExpression
-  GType function() c_gtk_property_expression_get_type;
+  extern(C) GType function() c_gtk_property_expression_get_type;
   GtkExpression* function(GType thisType, GtkExpression* expression, const(char)* propertyName) c_gtk_property_expression_new;
   GtkExpression* function(GtkExpression* expression, GParamSpec* pspec) c_gtk_property_expression_new_for_pspec;
   GtkExpression* function(GtkExpression* expression) c_gtk_property_expression_get_expression;
   GParamSpec* function(GtkExpression* expression) c_gtk_property_expression_get_pspec;
 
   // Range
-  GType function() c_gtk_range_get_type;
+  extern(C) GType function() c_gtk_range_get_type;
   GtkAdjustment* function(GtkRange* range) c_gtk_range_get_adjustment;
   double function(GtkRange* range) c_gtk_range_get_fill_level;
   bool function(GtkRange* range) c_gtk_range_get_flippable;
@@ -3040,7 +3041,7 @@ __gshared extern(C)
   void function(GtkRange* range, double value) c_gtk_range_set_value;
 
   // RecentInfo
-  GType function() c_gtk_recent_info_get_type;
+  extern(C) GType function() c_gtk_recent_info_get_type;
   GAppInfo* function(GtkRecentInfo* info, const(char)* appName, GError** _err) c_gtk_recent_info_create_app_info;
   bool function(GtkRecentInfo* info) c_gtk_recent_info_exists;
   GDateTime* function(GtkRecentInfo* info) c_gtk_recent_info_get_added;
@@ -3067,7 +3068,7 @@ __gshared extern(C)
   void function(GtkRecentInfo* info) c_gtk_recent_info_unref;
 
   // RecentManager
-  GType function() c_gtk_recent_manager_get_type;
+  extern(C) GType function() c_gtk_recent_manager_get_type;
   GtkRecentManager* function() c_gtk_recent_manager_new;
   GtkRecentManager* function() c_gtk_recent_manager_get_default;
   bool function(GtkRecentManager* manager, const(char)* uri, const(GtkRecentData)* recentData) c_gtk_recent_manager_add_full;
@@ -3080,13 +3081,13 @@ __gshared extern(C)
   bool function(GtkRecentManager* manager, const(char)* uri, GError** _err) c_gtk_recent_manager_remove_item;
 
   // Requisition
-  GType function() c_gtk_requisition_get_type;
+  extern(C) GType function() c_gtk_requisition_get_type;
   GtkRequisition* function() c_gtk_requisition_new;
   GtkRequisition* function(const(GtkRequisition)* requisition) c_gtk_requisition_copy;
   void function(GtkRequisition* requisition) c_gtk_requisition_free;
 
   // Revealer
-  GType function() c_gtk_revealer_get_type;
+  extern(C) GType function() c_gtk_revealer_get_type;
   GtkWidget* function() c_gtk_revealer_new;
   GtkWidget* function(GtkRevealer* revealer) c_gtk_revealer_get_child;
   bool function(GtkRevealer* revealer) c_gtk_revealer_get_child_revealed;
@@ -3099,13 +3100,13 @@ __gshared extern(C)
   void function(GtkRevealer* revealer, GtkRevealerTransitionType transition) c_gtk_revealer_set_transition_type;
 
   // Root
-  GType function() c_gtk_root_get_type;
+  extern(C) GType function() c_gtk_root_get_type;
   GdkDisplay* function(GtkRoot* self) c_gtk_root_get_display;
   GtkWidget* function(GtkRoot* self) c_gtk_root_get_focus;
   void function(GtkRoot* self, GtkWidget* focus) c_gtk_root_set_focus;
 
   // Scale
-  GType function() c_gtk_scale_get_type;
+  extern(C) GType function() c_gtk_scale_get_type;
   GtkWidget* function(GtkOrientation orientation, GtkAdjustment* adjustment) c_gtk_scale_new;
   GtkWidget* function(GtkOrientation orientation, double min, double max, double step) c_gtk_scale_new_with_range;
   void function(GtkScale* scale, double value, GtkPositionType position, const(char)* markup) c_gtk_scale_add_mark;
@@ -3123,7 +3124,7 @@ __gshared extern(C)
   void function(GtkScale* scale, GtkPositionType pos) c_gtk_scale_set_value_pos;
 
   // ScaleButton
-  GType function() c_gtk_scale_button_get_type;
+  extern(C) GType function() c_gtk_scale_button_get_type;
   GtkWidget* function(double min, double max, double step, const(char*)* icons) c_gtk_scale_button_new;
   bool function(GtkScaleButton* button) c_gtk_scale_button_get_active;
   GtkAdjustment* function(GtkScaleButton* button) c_gtk_scale_button_get_adjustment;
@@ -3138,7 +3139,7 @@ __gshared extern(C)
   void function(GtkScaleButton* button, double value) c_gtk_scale_button_set_value;
 
   // ScrollInfo
-  GType function() c_gtk_scroll_info_get_type;
+  extern(C) GType function() c_gtk_scroll_info_get_type;
   GtkScrollInfo* function() c_gtk_scroll_info_new;
   bool function(GtkScrollInfo* self) c_gtk_scroll_info_get_enable_horizontal;
   bool function(GtkScrollInfo* self) c_gtk_scroll_info_get_enable_vertical;
@@ -3148,7 +3149,7 @@ __gshared extern(C)
   void function(GtkScrollInfo* self) c_gtk_scroll_info_unref;
 
   // Scrollable
-  GType function() c_gtk_scrollable_get_type;
+  extern(C) GType function() c_gtk_scrollable_get_type;
   bool function(GtkScrollable* scrollable, GtkBorder* border) c_gtk_scrollable_get_border;
   GtkAdjustment* function(GtkScrollable* scrollable) c_gtk_scrollable_get_hadjustment;
   GtkScrollablePolicy function(GtkScrollable* scrollable) c_gtk_scrollable_get_hscroll_policy;
@@ -3160,13 +3161,13 @@ __gshared extern(C)
   void function(GtkScrollable* scrollable, GtkScrollablePolicy policy) c_gtk_scrollable_set_vscroll_policy;
 
   // Scrollbar
-  GType function() c_gtk_scrollbar_get_type;
+  extern(C) GType function() c_gtk_scrollbar_get_type;
   GtkWidget* function(GtkOrientation orientation, GtkAdjustment* adjustment) c_gtk_scrollbar_new;
   GtkAdjustment* function(GtkScrollbar* self) c_gtk_scrollbar_get_adjustment;
   void function(GtkScrollbar* self, GtkAdjustment* adjustment) c_gtk_scrollbar_set_adjustment;
 
   // ScrolledWindow
-  GType function() c_gtk_scrolled_window_get_type;
+  extern(C) GType function() c_gtk_scrolled_window_get_type;
   GtkWidget* function() c_gtk_scrolled_window_new;
   GtkWidget* function(GtkScrolledWindow* scrolledWindow) c_gtk_scrolled_window_get_child;
   GtkAdjustment* function(GtkScrolledWindow* scrolledWindow) c_gtk_scrolled_window_get_hadjustment;
@@ -3201,7 +3202,7 @@ __gshared extern(C)
   void function(GtkScrolledWindow* scrolledWindow) c_gtk_scrolled_window_unset_placement;
 
   // SearchBar
-  GType function() c_gtk_search_bar_get_type;
+  extern(C) GType function() c_gtk_search_bar_get_type;
   GtkWidget* function() c_gtk_search_bar_new;
   void function(GtkSearchBar* bar, GtkEditable* entry) c_gtk_search_bar_connect_entry;
   GtkWidget* function(GtkSearchBar* bar) c_gtk_search_bar_get_child;
@@ -3214,7 +3215,7 @@ __gshared extern(C)
   void function(GtkSearchBar* bar, bool visible) c_gtk_search_bar_set_show_close_button;
 
   // SearchEntry
-  GType function() c_gtk_search_entry_get_type;
+  extern(C) GType function() c_gtk_search_entry_get_type;
   GtkWidget* function() c_gtk_search_entry_new;
   GtkInputHints function(GtkSearchEntry* entry) c_gtk_search_entry_get_input_hints;
   GtkInputPurpose function(GtkSearchEntry* entry) c_gtk_search_entry_get_input_purpose;
@@ -3228,18 +3229,18 @@ __gshared extern(C)
   void function(GtkSearchEntry* entry, uint delay) c_gtk_search_entry_set_search_delay;
 
   // SectionModel
-  GType function() c_gtk_section_model_get_type;
+  extern(C) GType function() c_gtk_section_model_get_type;
   void function(GtkSectionModel* self, uint position, uint* outStart, uint* outEnd) c_gtk_section_model_get_section;
   void function(GtkSectionModel* self, uint position, uint nItems) c_gtk_section_model_sections_changed;
 
   // SelectionFilterModel
-  GType function() c_gtk_selection_filter_model_get_type;
+  extern(C) GType function() c_gtk_selection_filter_model_get_type;
   GtkSelectionFilterModel* function(GtkSelectionModel* model) c_gtk_selection_filter_model_new;
   GtkSelectionModel* function(GtkSelectionFilterModel* self) c_gtk_selection_filter_model_get_model;
   void function(GtkSelectionFilterModel* self, GtkSelectionModel* model) c_gtk_selection_filter_model_set_model;
 
   // SelectionModel
-  GType function() c_gtk_selection_model_get_type;
+  extern(C) GType function() c_gtk_selection_model_get_type;
   GtkBitset* function(GtkSelectionModel* model) c_gtk_selection_model_get_selection;
   GtkBitset* function(GtkSelectionModel* model, uint position, uint nItems) c_gtk_selection_model_get_selection_in_range;
   bool function(GtkSelectionModel* model, uint position) c_gtk_selection_model_is_selected;
@@ -3253,17 +3254,17 @@ __gshared extern(C)
   bool function(GtkSelectionModel* model, uint position, uint nItems) c_gtk_selection_model_unselect_range;
 
   // Separator
-  GType function() c_gtk_separator_get_type;
+  extern(C) GType function() c_gtk_separator_get_type;
   GtkWidget* function(GtkOrientation orientation) c_gtk_separator_new;
 
   // Settings
-  GType function() c_gtk_settings_get_type;
+  extern(C) GType function() c_gtk_settings_get_type;
   GtkSettings* function() c_gtk_settings_get_default;
   GtkSettings* function(GdkDisplay* display) c_gtk_settings_get_for_display;
   void function(GtkSettings* settings, const(char)* name) c_gtk_settings_reset_property;
 
   // Shortcut
-  GType function() c_gtk_shortcut_get_type;
+  extern(C) GType function() c_gtk_shortcut_get_type;
   GtkShortcut* function(GtkShortcutTrigger* trigger, GtkShortcutAction* action) c_gtk_shortcut_new;
   GtkShortcut* function(GtkShortcutTrigger* trigger, GtkShortcutAction* action, const(char)* formatString,  ...) c_gtk_shortcut_new_with_arguments;
   GtkShortcutAction* function(GtkShortcut* self) c_gtk_shortcut_get_action;
@@ -3274,14 +3275,14 @@ __gshared extern(C)
   void function(GtkShortcut* self, GtkShortcutTrigger* trigger) c_gtk_shortcut_set_trigger;
 
   // ShortcutAction
-  GType function() c_gtk_shortcut_action_get_type;
+  extern(C) GType function() c_gtk_shortcut_action_get_type;
   GtkShortcutAction* function(const(char)* string_) c_gtk_shortcut_action_parse_string;
   bool function(GtkShortcutAction* self, GtkShortcutActionFlags flags, GtkWidget* widget, VariantC* args) c_gtk_shortcut_action_activate;
   void function(GtkShortcutAction* self, GString* string_) c_gtk_shortcut_action_print;
   char* function(GtkShortcutAction* self) c_gtk_shortcut_action_to_string;
 
   // ShortcutController
-  GType function() c_gtk_shortcut_controller_get_type;
+  extern(C) GType function() c_gtk_shortcut_controller_get_type;
   GtkEventController* function() c_gtk_shortcut_controller_new;
   GtkEventController* function(GListModel* model) c_gtk_shortcut_controller_new_for_model;
   void function(GtkShortcutController* self, GtkShortcut* shortcut) c_gtk_shortcut_controller_add_shortcut;
@@ -3292,7 +3293,7 @@ __gshared extern(C)
   void function(GtkShortcutController* self, GtkShortcutScope scope_) c_gtk_shortcut_controller_set_scope;
 
   // ShortcutLabel
-  GType function() c_gtk_shortcut_label_get_type;
+  extern(C) GType function() c_gtk_shortcut_label_get_type;
   GtkWidget* function(const(char)* accelerator) c_gtk_shortcut_label_new;
   const(char)* function(GtkShortcutLabel* self) c_gtk_shortcut_label_get_accelerator;
   const(char)* function(GtkShortcutLabel* self) c_gtk_shortcut_label_get_disabled_text;
@@ -3300,10 +3301,10 @@ __gshared extern(C)
   void function(GtkShortcutLabel* self, const(char)* disabledText) c_gtk_shortcut_label_set_disabled_text;
 
   // ShortcutManager
-  GType function() c_gtk_shortcut_manager_get_type;
+  extern(C) GType function() c_gtk_shortcut_manager_get_type;
 
   // ShortcutTrigger
-  GType function() c_gtk_shortcut_trigger_get_type;
+  extern(C) GType function() c_gtk_shortcut_trigger_get_type;
   GtkShortcutTrigger* function(const(char)* string_) c_gtk_shortcut_trigger_parse_string;
   int function(GtkShortcutTrigger* trigger1, GtkShortcutTrigger* trigger2) c_gtk_shortcut_trigger_compare;
   bool function(GtkShortcutTrigger* trigger1, GtkShortcutTrigger* trigger2) c_gtk_shortcut_trigger_equal;
@@ -3315,31 +3316,31 @@ __gshared extern(C)
   GdkKeyMatch function(GtkShortcutTrigger* self, GdkEvent* event, bool enableMnemonics) c_gtk_shortcut_trigger_trigger;
 
   // ShortcutsGroup
-  GType function() c_gtk_shortcuts_group_get_type;
+  extern(C) GType function() c_gtk_shortcuts_group_get_type;
   void function(GtkShortcutsGroup* self, GtkShortcutsShortcut* shortcut) c_gtk_shortcuts_group_add_shortcut;
 
   // ShortcutsSection
-  GType function() c_gtk_shortcuts_section_get_type;
+  extern(C) GType function() c_gtk_shortcuts_section_get_type;
   void function(GtkShortcutsSection* self, GtkShortcutsGroup* group) c_gtk_shortcuts_section_add_group;
 
   // ShortcutsShortcut
-  GType function() c_gtk_shortcuts_shortcut_get_type;
+  extern(C) GType function() c_gtk_shortcuts_shortcut_get_type;
 
   // ShortcutsWindow
-  GType function() c_gtk_shortcuts_window_get_type;
+  extern(C) GType function() c_gtk_shortcuts_window_get_type;
   void function(GtkShortcutsWindow* self, GtkShortcutsSection* section) c_gtk_shortcuts_window_add_section;
 
   // SignalAction
-  GType function() c_gtk_signal_action_get_type;
+  extern(C) GType function() c_gtk_signal_action_get_type;
   GtkShortcutAction* function(const(char)* signalName) c_gtk_signal_action_new;
   const(char)* function(GtkSignalAction* self) c_gtk_signal_action_get_signal_name;
 
   // SignalListItemFactory
-  GType function() c_gtk_signal_list_item_factory_get_type;
+  extern(C) GType function() c_gtk_signal_list_item_factory_get_type;
   GtkListItemFactory* function() c_gtk_signal_list_item_factory_new;
 
   // SingleSelection
-  GType function() c_gtk_single_selection_get_type;
+  extern(C) GType function() c_gtk_single_selection_get_type;
   GtkSingleSelection* function(GListModel* model) c_gtk_single_selection_new;
   bool function(GtkSingleSelection* self) c_gtk_single_selection_get_autoselect;
   bool function(GtkSingleSelection* self) c_gtk_single_selection_get_can_unselect;
@@ -3352,7 +3353,7 @@ __gshared extern(C)
   void function(GtkSingleSelection* self, uint position) c_gtk_single_selection_set_selected;
 
   // SizeGroup
-  GType function() c_gtk_size_group_get_type;
+  extern(C) GType function() c_gtk_size_group_get_type;
   GtkSizeGroup* function(GtkSizeGroupMode mode) c_gtk_size_group_new;
   void function(GtkSizeGroup* sizeGroup, GtkWidget* widget) c_gtk_size_group_add_widget;
   GtkSizeGroupMode function(GtkSizeGroup* sizeGroup) c_gtk_size_group_get_mode;
@@ -3361,7 +3362,7 @@ __gshared extern(C)
   void function(GtkSizeGroup* sizeGroup, GtkSizeGroupMode mode) c_gtk_size_group_set_mode;
 
   // SliceListModel
-  GType function() c_gtk_slice_list_model_get_type;
+  extern(C) GType function() c_gtk_slice_list_model_get_type;
   GtkSliceListModel* function(GListModel* model, uint offset, uint size) c_gtk_slice_list_model_new;
   GListModel* function(GtkSliceListModel* self) c_gtk_slice_list_model_get_model;
   uint function(GtkSliceListModel* self) c_gtk_slice_list_model_get_offset;
@@ -3371,7 +3372,7 @@ __gshared extern(C)
   void function(GtkSliceListModel* self, uint size) c_gtk_slice_list_model_set_size;
 
   // Snapshot
-  GType function() c_gtk_snapshot_get_type;
+  extern(C) GType function() c_gtk_snapshot_get_type;
   GtkSnapshot* function() c_gtk_snapshot_new;
   void function(GtkSnapshot* snapshot, const(GskRoundedRect)* outline, const(float)* borderWidth, const(GdkRGBA)* borderColor) c_gtk_snapshot_append_border;
   cairo_t* function(GtkSnapshot* snapshot, const(graphene_rect_t)* bounds) c_gtk_snapshot_append_cairo;
@@ -3427,7 +3428,7 @@ __gshared extern(C)
   void function(GtkSnapshot* snapshot, const(graphene_point3d_t)* point) c_gtk_snapshot_translate_3d;
 
   // SortListModel
-  GType function() c_gtk_sort_list_model_get_type;
+  extern(C) GType function() c_gtk_sort_list_model_get_type;
   GtkSortListModel* function(GListModel* model, GtkSorter* sorter) c_gtk_sort_list_model_new;
   bool function(GtkSortListModel* self) c_gtk_sort_list_model_get_incremental;
   GListModel* function(GtkSortListModel* self) c_gtk_sort_list_model_get_model;
@@ -3440,13 +3441,13 @@ __gshared extern(C)
   void function(GtkSortListModel* self, GtkSorter* sorter) c_gtk_sort_list_model_set_sorter;
 
   // Sorter
-  GType function() c_gtk_sorter_get_type;
+  extern(C) GType function() c_gtk_sorter_get_type;
   void function(GtkSorter* self, GtkSorterChange change) c_gtk_sorter_changed;
   GtkOrdering function(GtkSorter* self, ObjectC* item1, ObjectC* item2) c_gtk_sorter_compare;
   GtkSorterOrder function(GtkSorter* self) c_gtk_sorter_get_order;
 
   // SpinButton
-  GType function() c_gtk_spin_button_get_type;
+  extern(C) GType function() c_gtk_spin_button_get_type;
   GtkWidget* function(GtkAdjustment* adjustment, double climbRate, uint digits) c_gtk_spin_button_new;
   GtkWidget* function(double min, double max, double step) c_gtk_spin_button_new_with_range;
   void function(GtkSpinButton* spinButton, GtkAdjustment* adjustment, double climbRate, uint digits) c_gtk_spin_button_configure;
@@ -3477,7 +3478,7 @@ __gshared extern(C)
   void function(GtkSpinButton* spinButton) c_gtk_spin_button_update;
 
   // Spinner
-  GType function() c_gtk_spinner_get_type;
+  extern(C) GType function() c_gtk_spinner_get_type;
   GtkWidget* function() c_gtk_spinner_new;
   bool function(GtkSpinner* spinner) c_gtk_spinner_get_spinning;
   void function(GtkSpinner* spinner, bool spinning) c_gtk_spinner_set_spinning;
@@ -3485,7 +3486,7 @@ __gshared extern(C)
   void function(GtkSpinner* spinner) c_gtk_spinner_stop;
 
   // Stack
-  GType function() c_gtk_stack_get_type;
+  extern(C) GType function() c_gtk_stack_get_type;
   GtkWidget* function() c_gtk_stack_new;
   GtkStackPage* function(GtkStack* stack, GtkWidget* child) c_gtk_stack_add_child;
   GtkStackPage* function(GtkStack* stack, GtkWidget* child, const(char)* name) c_gtk_stack_add_named;
@@ -3512,7 +3513,7 @@ __gshared extern(C)
   void function(GtkStack* stack, const(char)* name) c_gtk_stack_set_visible_child_name;
 
   // StackPage
-  GType function() c_gtk_stack_page_get_type;
+  extern(C) GType function() c_gtk_stack_page_get_type;
   GtkWidget* function(GtkStackPage* self) c_gtk_stack_page_get_child;
   const(char)* function(GtkStackPage* self) c_gtk_stack_page_get_icon_name;
   const(char)* function(GtkStackPage* self) c_gtk_stack_page_get_name;
@@ -3528,19 +3529,19 @@ __gshared extern(C)
   void function(GtkStackPage* self, bool visible) c_gtk_stack_page_set_visible;
 
   // StackSidebar
-  GType function() c_gtk_stack_sidebar_get_type;
+  extern(C) GType function() c_gtk_stack_sidebar_get_type;
   GtkWidget* function() c_gtk_stack_sidebar_new;
   GtkStack* function(GtkStackSidebar* self) c_gtk_stack_sidebar_get_stack;
   void function(GtkStackSidebar* self, GtkStack* stack) c_gtk_stack_sidebar_set_stack;
 
   // StackSwitcher
-  GType function() c_gtk_stack_switcher_get_type;
+  extern(C) GType function() c_gtk_stack_switcher_get_type;
   GtkWidget* function() c_gtk_stack_switcher_new;
   GtkStack* function(GtkStackSwitcher* switcher) c_gtk_stack_switcher_get_stack;
   void function(GtkStackSwitcher* switcher, GtkStack* stack) c_gtk_stack_switcher_set_stack;
 
   // Statusbar
-  GType function() c_gtk_statusbar_get_type;
+  extern(C) GType function() c_gtk_statusbar_get_type;
   GtkWidget* function() c_gtk_statusbar_new;
   uint function(GtkStatusbar* statusbar, const(char)* contextDescription) c_gtk_statusbar_get_context_id;
   void function(GtkStatusbar* statusbar, uint contextId) c_gtk_statusbar_pop;
@@ -3549,7 +3550,7 @@ __gshared extern(C)
   void function(GtkStatusbar* statusbar, uint contextId) c_gtk_statusbar_remove_all;
 
   // StringFilter
-  GType function() c_gtk_string_filter_get_type;
+  extern(C) GType function() c_gtk_string_filter_get_type;
   GtkStringFilter* function(GtkExpression* expression) c_gtk_string_filter_new;
   GtkExpression* function(GtkStringFilter* self) c_gtk_string_filter_get_expression;
   bool function(GtkStringFilter* self) c_gtk_string_filter_get_ignore_case;
@@ -3561,7 +3562,7 @@ __gshared extern(C)
   void function(GtkStringFilter* self, const(char)* search) c_gtk_string_filter_set_search;
 
   // StringList
-  GType function() c_gtk_string_list_get_type;
+  extern(C) GType function() c_gtk_string_list_get_type;
   GtkStringList* function(const(char*)* strings) c_gtk_string_list_new;
   void function(GtkStringList* self, const(char)* string_) c_gtk_string_list_append;
   const(char)* function(GtkStringList* self, uint position) c_gtk_string_list_get_string;
@@ -3570,12 +3571,12 @@ __gshared extern(C)
   void function(GtkStringList* self, char* string_) c_gtk_string_list_take;
 
   // StringObject
-  GType function() c_gtk_string_object_get_type;
+  extern(C) GType function() c_gtk_string_object_get_type;
   GtkStringObject* function(const(char)* string_) c_gtk_string_object_new;
   const(char)* function(GtkStringObject* self) c_gtk_string_object_get_string;
 
   // StringSorter
-  GType function() c_gtk_string_sorter_get_type;
+  extern(C) GType function() c_gtk_string_sorter_get_type;
   GtkStringSorter* function(GtkExpression* expression) c_gtk_string_sorter_new;
   GtkCollation function(GtkStringSorter* self) c_gtk_string_sorter_get_collation;
   GtkExpression* function(GtkStringSorter* self) c_gtk_string_sorter_get_expression;
@@ -3585,7 +3586,7 @@ __gshared extern(C)
   void function(GtkStringSorter* self, bool ignoreCase) c_gtk_string_sorter_set_ignore_case;
 
   // StyleContext
-  GType function() c_gtk_style_context_get_type;
+  extern(C) GType function() c_gtk_style_context_get_type;
   void function(GdkDisplay* display, GtkStyleProvider* provider, uint priority) c_gtk_style_context_add_provider_for_display;
   void function(GdkDisplay* display, GtkStyleProvider* provider) c_gtk_style_context_remove_provider_for_display;
   void function(GtkStyleContext* context, const(char)* className) c_gtk_style_context_add_class;
@@ -3609,10 +3610,10 @@ __gshared extern(C)
   char* function(GtkStyleContext* context, GtkStyleContextPrintFlags flags) c_gtk_style_context_to_string;
 
   // StyleProvider
-  GType function() c_gtk_style_provider_get_type;
+  extern(C) GType function() c_gtk_style_provider_get_type;
 
   // Switch
-  GType function() c_gtk_switch_get_type;
+  extern(C) GType function() c_gtk_switch_get_type;
   GtkWidget* function() c_gtk_switch_new;
   bool function(GtkSwitch* self) c_gtk_switch_get_active;
   bool function(GtkSwitch* self) c_gtk_switch_get_state;
@@ -3620,11 +3621,11 @@ __gshared extern(C)
   void function(GtkSwitch* self, bool state) c_gtk_switch_set_state;
 
   // SymbolicPaintable
-  GType function() c_gtk_symbolic_paintable_get_type;
+  extern(C) GType function() c_gtk_symbolic_paintable_get_type;
   void function(GtkSymbolicPaintable* paintable, GdkSnapshot* snapshot, double width, double height, const(GdkRGBA)* colors, size_t nColors) c_gtk_symbolic_paintable_snapshot_symbolic;
 
   // Text
-  GType function() c_gtk_text_get_type;
+  extern(C) GType function() c_gtk_text_get_type;
   GtkWidget* function() c_gtk_text_new;
   GtkWidget* function(GtkEntryBuffer* buffer) c_gtk_text_new_with_buffer;
   void function(GtkText* self, size_t position, graphene_rect_t* strong, graphene_rect_t* weak) c_gtk_text_compute_cursor_extents;
@@ -3663,7 +3664,7 @@ __gshared extern(C)
   void function(GtkText* self) c_gtk_text_unset_invisible_char;
 
   // TextBuffer
-  GType function() c_gtk_text_buffer_get_type;
+  extern(C) GType function() c_gtk_text_buffer_get_type;
   GtkTextBuffer* function(GtkTextTagTable* table) c_gtk_text_buffer_new;
   void function(GtkTextBuffer* buffer, GtkTextMark* mark, const(GtkTextIter)* where) c_gtk_text_buffer_add_mark;
   void function(GtkTextBuffer* buffer, GdkClipboard* clipboard) c_gtk_text_buffer_add_selection_clipboard;
@@ -3737,14 +3738,14 @@ __gshared extern(C)
   void function(GtkTextBuffer* buffer) c_gtk_text_buffer_undo;
 
   // TextChildAnchor
-  GType function() c_gtk_text_child_anchor_get_type;
+  extern(C) GType function() c_gtk_text_child_anchor_get_type;
   GtkTextChildAnchor* function() c_gtk_text_child_anchor_new;
   GtkTextChildAnchor* function(const(char)* character) c_gtk_text_child_anchor_new_with_replacement;
   bool function(GtkTextChildAnchor* anchor) c_gtk_text_child_anchor_get_deleted;
   GtkWidget** function(GtkTextChildAnchor* anchor, uint* outLen) c_gtk_text_child_anchor_get_widgets;
 
   // TextIter
-  GType function() c_gtk_text_iter_get_type;
+  extern(C) GType function() c_gtk_text_iter_get_type;
   void function(GtkTextIter* iter, const(GtkTextIter)* other) c_gtk_text_iter_assign;
   bool function(GtkTextIter* iter) c_gtk_text_iter_backward_char;
   bool function(GtkTextIter* iter, int count) c_gtk_text_iter_backward_chars;
@@ -3837,7 +3838,7 @@ __gshared extern(C)
   bool function(const(GtkTextIter)* iter, GtkTextTag* tag) c_gtk_text_iter_toggles_tag;
 
   // TextMark
-  GType function() c_gtk_text_mark_get_type;
+  extern(C) GType function() c_gtk_text_mark_get_type;
   GtkTextMark* function(const(char)* name, bool leftGravity) c_gtk_text_mark_new;
   GtkTextBuffer* function(GtkTextMark* mark) c_gtk_text_mark_get_buffer;
   bool function(GtkTextMark* mark) c_gtk_text_mark_get_deleted;
@@ -3847,14 +3848,14 @@ __gshared extern(C)
   void function(GtkTextMark* mark, bool setting) c_gtk_text_mark_set_visible;
 
   // TextTag
-  GType function() c_gtk_text_tag_get_type;
+  extern(C) GType function() c_gtk_text_tag_get_type;
   GtkTextTag* function(const(char)* name) c_gtk_text_tag_new;
   void function(GtkTextTag* tag, bool sizeChanged) c_gtk_text_tag_changed;
   int function(GtkTextTag* tag) c_gtk_text_tag_get_priority;
   void function(GtkTextTag* tag, int priority) c_gtk_text_tag_set_priority;
 
   // TextTagTable
-  GType function() c_gtk_text_tag_table_get_type;
+  extern(C) GType function() c_gtk_text_tag_table_get_type;
   GtkTextTagTable* function() c_gtk_text_tag_table_new;
   bool function(GtkTextTagTable* table, GtkTextTag* tag) c_gtk_text_tag_table_add;
   void function(GtkTextTagTable* table, GtkTextTagTableForeach func, void* data) c_gtk_text_tag_table_foreach;
@@ -3863,7 +3864,7 @@ __gshared extern(C)
   void function(GtkTextTagTable* table, GtkTextTag* tag) c_gtk_text_tag_table_remove;
 
   // TextView
-  GType function() c_gtk_text_view_get_type;
+  extern(C) GType function() c_gtk_text_view_get_type;
   GtkWidget* function() c_gtk_text_view_new;
   GtkWidget* function(GtkTextBuffer* buffer) c_gtk_text_view_new_with_buffer;
   void function(GtkTextView* textView, GtkWidget* child, GtkTextChildAnchor* anchor) c_gtk_text_view_add_child_at_anchor;
@@ -3939,7 +3940,7 @@ __gshared extern(C)
   void function(GtkTextView* textView, GtkTextWindowType win, int windowX, int windowY, int* bufferX, int* bufferY) c_gtk_text_view_window_to_buffer_coords;
 
   // ToggleButton
-  GType function() c_gtk_toggle_button_get_type;
+  extern(C) GType function() c_gtk_toggle_button_get_type;
   GtkWidget* function() c_gtk_toggle_button_new;
   GtkWidget* function(const(char)* label) c_gtk_toggle_button_new_with_label;
   GtkWidget* function(const(char)* label) c_gtk_toggle_button_new_with_mnemonic;
@@ -3949,7 +3950,7 @@ __gshared extern(C)
   void function(GtkToggleButton* toggleButton) c_gtk_toggle_button_toggled;
 
   // Tooltip
-  GType function() c_gtk_tooltip_get_type;
+  extern(C) GType function() c_gtk_tooltip_get_type;
   void function(GtkTooltip* tooltip, GtkWidget* customWidget) c_gtk_tooltip_set_custom;
   void function(GtkTooltip* tooltip, GdkPaintable* paintable) c_gtk_tooltip_set_icon;
   void function(GtkTooltip* tooltip, GIcon* gicon) c_gtk_tooltip_set_icon_from_gicon;
@@ -3959,18 +3960,18 @@ __gshared extern(C)
   void function(GtkTooltip* tooltip, const(GdkRectangle)* rect) c_gtk_tooltip_set_tip_area;
 
   // TreeDragDest
-  GType function() c_gtk_tree_drag_dest_get_type;
+  extern(C) GType function() c_gtk_tree_drag_dest_get_type;
   bool function(GtkTreeDragDest* dragDest, GtkTreePath* dest, const(GValue)* value) c_gtk_tree_drag_dest_drag_data_received;
   bool function(GtkTreeDragDest* dragDest, GtkTreePath* destPath, const(GValue)* value) c_gtk_tree_drag_dest_row_drop_possible;
 
   // TreeDragSource
-  GType function() c_gtk_tree_drag_source_get_type;
+  extern(C) GType function() c_gtk_tree_drag_source_get_type;
   bool function(GtkTreeDragSource* dragSource, GtkTreePath* path) c_gtk_tree_drag_source_drag_data_delete;
   GdkContentProvider* function(GtkTreeDragSource* dragSource, GtkTreePath* path) c_gtk_tree_drag_source_drag_data_get;
   bool function(GtkTreeDragSource* dragSource, GtkTreePath* path) c_gtk_tree_drag_source_row_draggable;
 
   // TreeExpander
-  GType function() c_gtk_tree_expander_get_type;
+  extern(C) GType function() c_gtk_tree_expander_get_type;
   GtkWidget* function() c_gtk_tree_expander_new;
   GtkWidget* function(GtkTreeExpander* self) c_gtk_tree_expander_get_child;
   bool function(GtkTreeExpander* self) c_gtk_tree_expander_get_hide_expander;
@@ -3985,12 +3986,12 @@ __gshared extern(C)
   void function(GtkTreeExpander* self, GtkTreeListRow* listRow) c_gtk_tree_expander_set_list_row;
 
   // TreeIter
-  GType function() c_gtk_tree_iter_get_type;
+  extern(C) GType function() c_gtk_tree_iter_get_type;
   GtkTreeIter* function(GtkTreeIter* iter) c_gtk_tree_iter_copy;
   void function(GtkTreeIter* iter) c_gtk_tree_iter_free;
 
   // TreeListModel
-  GType function() c_gtk_tree_list_model_get_type;
+  extern(C) GType function() c_gtk_tree_list_model_get_type;
   GtkTreeListModel* function(GListModel* root, bool passthrough, bool autoexpand, GtkTreeListModelCreateModelFunc createFunc, void* userData, GDestroyNotify userDestroy) c_gtk_tree_list_model_new;
   bool function(GtkTreeListModel* self) c_gtk_tree_list_model_get_autoexpand;
   GtkTreeListRow* function(GtkTreeListModel* self, uint position) c_gtk_tree_list_model_get_child_row;
@@ -4000,7 +4001,7 @@ __gshared extern(C)
   void function(GtkTreeListModel* self, bool autoexpand) c_gtk_tree_list_model_set_autoexpand;
 
   // TreeListRow
-  GType function() c_gtk_tree_list_row_get_type;
+  extern(C) GType function() c_gtk_tree_list_row_get_type;
   GtkTreeListRow* function(GtkTreeListRow* self, uint position) c_gtk_tree_list_row_get_child_row;
   GListModel* function(GtkTreeListRow* self) c_gtk_tree_list_row_get_children;
   uint function(GtkTreeListRow* self) c_gtk_tree_list_row_get_depth;
@@ -4012,13 +4013,13 @@ __gshared extern(C)
   void function(GtkTreeListRow* self, bool expanded) c_gtk_tree_list_row_set_expanded;
 
   // TreeListRowSorter
-  GType function() c_gtk_tree_list_row_sorter_get_type;
+  extern(C) GType function() c_gtk_tree_list_row_sorter_get_type;
   GtkTreeListRowSorter* function(GtkSorter* sorter) c_gtk_tree_list_row_sorter_new;
   GtkSorter* function(GtkTreeListRowSorter* self) c_gtk_tree_list_row_sorter_get_sorter;
   void function(GtkTreeListRowSorter* self, GtkSorter* sorter) c_gtk_tree_list_row_sorter_set_sorter;
 
   // TreeModel
-  GType function() c_gtk_tree_model_get_type;
+  extern(C) GType function() c_gtk_tree_model_get_type;
   GtkTreeModel* function(GtkTreeModel* childModel, GtkTreePath* root) c_gtk_tree_model_filter_new;
   void function(GtkTreeModel* model, GtkTreeModelForeachFunc func, void* userData) c_gtk_tree_model_foreach;
   void function(GtkTreeModel* treeModel, GtkTreeIter* iter,  ...) c_gtk_tree_model_get;
@@ -4049,7 +4050,7 @@ __gshared extern(C)
   void function(GtkTreeModel* treeModel, GtkTreeIter* iter) c_gtk_tree_model_unref_node;
 
   // TreeModelFilter
-  GType function() c_gtk_tree_model_filter_get_type;
+  extern(C) GType function() c_gtk_tree_model_filter_get_type;
   void function(GtkTreeModelFilter* filter) c_gtk_tree_model_filter_clear_cache;
   bool function(GtkTreeModelFilter* filter, GtkTreeIter* filterIter, GtkTreeIter* childIter) c_gtk_tree_model_filter_convert_child_iter_to_iter;
   GtkTreePath* function(GtkTreeModelFilter* filter, GtkTreePath* childPath) c_gtk_tree_model_filter_convert_child_path_to_path;
@@ -4062,7 +4063,7 @@ __gshared extern(C)
   void function(GtkTreeModelFilter* filter, GtkTreeModelFilterVisibleFunc func, void* data, GDestroyNotify destroy) c_gtk_tree_model_filter_set_visible_func;
 
   // TreeModelSort
-  GType function() c_gtk_tree_model_sort_get_type;
+  extern(C) GType function() c_gtk_tree_model_sort_get_type;
   GtkTreeModel* function(GtkTreeModel* childModel) c_gtk_tree_model_sort_new_with_model;
   void function(GtkTreeModelSort* treeModelSort) c_gtk_tree_model_sort_clear_cache;
   bool function(GtkTreeModelSort* treeModelSort, GtkTreeIter* sortIter, GtkTreeIter* childIter) c_gtk_tree_model_sort_convert_child_iter_to_iter;
@@ -4074,7 +4075,7 @@ __gshared extern(C)
   void function(GtkTreeModelSort* treeModelSort) c_gtk_tree_model_sort_reset_default_sort_func;
 
   // TreePath
-  GType function() c_gtk_tree_path_get_type;
+  extern(C) GType function() c_gtk_tree_path_get_type;
   GtkTreePath* function() c_gtk_tree_path_new;
   GtkTreePath* function() c_gtk_tree_path_new_first;
   GtkTreePath* function(int firstIndex,  ...) c_gtk_tree_path_new_from_indices;
@@ -4097,7 +4098,7 @@ __gshared extern(C)
   bool function(GtkTreePath* path) c_gtk_tree_path_up;
 
   // TreeRowReference
-  GType function() c_gtk_tree_row_reference_get_type;
+  extern(C) GType function() c_gtk_tree_row_reference_get_type;
   GtkTreeRowReference* function(GtkTreeModel* model, GtkTreePath* path) c_gtk_tree_row_reference_new;
   GtkTreeRowReference* function(ObjectC* proxy, GtkTreeModel* model, GtkTreePath* path) c_gtk_tree_row_reference_new_proxy;
   GtkTreeRowReference* function(GtkTreeRowReference* reference) c_gtk_tree_row_reference_copy;
@@ -4110,7 +4111,7 @@ __gshared extern(C)
   void function(ObjectC* proxy, GtkTreePath* path, GtkTreeIter* iter, int* newOrder) c_gtk_tree_row_reference_reordered;
 
   // TreeSelection
-  GType function() c_gtk_tree_selection_get_type;
+  extern(C) GType function() c_gtk_tree_selection_get_type;
   int function(GtkTreeSelection* selection) c_gtk_tree_selection_count_selected_rows;
   GtkSelectionMode function(GtkTreeSelection* selection) c_gtk_tree_selection_get_mode;
   GtkTreeSelectionFunc function(GtkTreeSelection* selection) c_gtk_tree_selection_get_select_function;
@@ -4133,7 +4134,7 @@ __gshared extern(C)
   void function(GtkTreeSelection* selection, GtkTreePath* startPath, GtkTreePath* endPath) c_gtk_tree_selection_unselect_range;
 
   // TreeSortable
-  GType function() c_gtk_tree_sortable_get_type;
+  extern(C) GType function() c_gtk_tree_sortable_get_type;
   bool function(GtkTreeSortable* sortable, int* sortColumnId, GtkSortType* order) c_gtk_tree_sortable_get_sort_column_id;
   bool function(GtkTreeSortable* sortable) c_gtk_tree_sortable_has_default_sort_func;
   void function(GtkTreeSortable* sortable, GtkTreeIterCompareFunc sortFunc, void* userData, GDestroyNotify destroy) c_gtk_tree_sortable_set_default_sort_func;
@@ -4142,7 +4143,7 @@ __gshared extern(C)
   void function(GtkTreeSortable* sortable) c_gtk_tree_sortable_sort_column_changed;
 
   // TreeStore
-  GType function() c_gtk_tree_store_get_type;
+  extern(C) GType function() c_gtk_tree_store_get_type;
   GtkTreeStore* function(int nColumns,  ...) c_gtk_tree_store_new;
   GtkTreeStore* function(int nColumns, GType* types) c_gtk_tree_store_newv;
   void function(GtkTreeStore* treeStore, GtkTreeIter* iter, GtkTreeIter* parent) c_gtk_tree_store_append;
@@ -4168,7 +4169,7 @@ __gshared extern(C)
   void function(GtkTreeStore* treeStore, GtkTreeIter* a, GtkTreeIter* b) c_gtk_tree_store_swap;
 
   // TreeView
-  GType function() c_gtk_tree_view_get_type;
+  extern(C) GType function() c_gtk_tree_view_get_type;
   GtkWidget* function() c_gtk_tree_view_new;
   GtkWidget* function(GtkTreeModel* model) c_gtk_tree_view_new_with_model;
   int function(GtkTreeView* treeView, GtkTreeViewColumn* column) c_gtk_tree_view_append_column;
@@ -4262,7 +4263,7 @@ __gshared extern(C)
   void function(GtkTreeView* treeView) c_gtk_tree_view_unset_rows_drag_source;
 
   // TreeViewColumn
-  GType function() c_gtk_tree_view_column_get_type;
+  extern(C) GType function() c_gtk_tree_view_column_get_type;
   GtkTreeViewColumn* function() c_gtk_tree_view_column_new;
   GtkTreeViewColumn* function(GtkCellArea* area) c_gtk_tree_view_column_new_with_area;
   GtkTreeViewColumn* function(const(char)* title, GtkCellRenderer* cell,  ...) c_gtk_tree_view_column_new_with_attributes;
@@ -4318,7 +4319,7 @@ __gshared extern(C)
   void function(GtkTreeViewColumn* treeColumn, GtkWidget* widget) c_gtk_tree_view_column_set_widget;
 
   // UriLauncher
-  GType function() c_gtk_uri_launcher_get_type;
+  extern(C) GType function() c_gtk_uri_launcher_get_type;
   GtkUriLauncher* function(const(char)* uri) c_gtk_uri_launcher_new;
   const(char)* function(GtkUriLauncher* self) c_gtk_uri_launcher_get_uri;
   void function(GtkUriLauncher* self, GtkWindow* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_uri_launcher_launch;
@@ -4326,7 +4327,7 @@ __gshared extern(C)
   void function(GtkUriLauncher* self, const(char)* uri) c_gtk_uri_launcher_set_uri;
 
   // Video
-  GType function() c_gtk_video_get_type;
+  extern(C) GType function() c_gtk_video_get_type;
   GtkWidget* function() c_gtk_video_new;
   GtkWidget* function(GFile* file) c_gtk_video_new_for_file;
   GtkWidget* function(const(char)* filename) c_gtk_video_new_for_filename;
@@ -4346,7 +4347,7 @@ __gshared extern(C)
   void function(GtkVideo* self, const(char)* resourcePath) c_gtk_video_set_resource;
 
   // Viewport
-  GType function() c_gtk_viewport_get_type;
+  extern(C) GType function() c_gtk_viewport_get_type;
   GtkWidget* function(GtkAdjustment* hadjustment, GtkAdjustment* vadjustment) c_gtk_viewport_new;
   GtkWidget* function(GtkViewport* viewport) c_gtk_viewport_get_child;
   bool function(GtkViewport* viewport) c_gtk_viewport_get_scroll_to_focus;
@@ -4355,11 +4356,11 @@ __gshared extern(C)
   void function(GtkViewport* viewport, bool scrollToFocus) c_gtk_viewport_set_scroll_to_focus;
 
   // VolumeButton
-  GType function() c_gtk_volume_button_get_type;
+  extern(C) GType function() c_gtk_volume_button_get_type;
   GtkWidget* function() c_gtk_volume_button_new;
 
   // Widget
-  GType function() c_gtk_widget_get_type;
+  extern(C) GType function() c_gtk_widget_get_type;
   GtkTextDirection function() c_gtk_widget_get_default_direction;
   void function(GtkTextDirection dir) c_gtk_widget_set_default_direction;
   void function(GtkWidget* widget, const(char)* actionName, bool enabled) c_gtk_widget_action_set_enabled;
@@ -4549,13 +4550,13 @@ __gshared extern(C)
   void function(GtkWidgetClass* widgetClass, GtkBuilderScope* scope_) c_gtk_widget_class_set_template_scope;
 
   // WidgetPaintable
-  GType function() c_gtk_widget_paintable_get_type;
+  extern(C) GType function() c_gtk_widget_paintable_get_type;
   GdkPaintable* function(GtkWidget* widget) c_gtk_widget_paintable_new;
   GtkWidget* function(GtkWidgetPaintable* self) c_gtk_widget_paintable_get_widget;
   void function(GtkWidgetPaintable* self, GtkWidget* widget) c_gtk_widget_paintable_set_widget;
 
   // Window
-  GType function() c_gtk_window_get_type;
+  extern(C) GType function() c_gtk_window_get_type;
   GtkWidget* function() c_gtk_window_new;
   const(char)* function() c_gtk_window_get_default_icon_name;
   GListModel* function() c_gtk_window_get_toplevels;
@@ -4620,7 +4621,7 @@ __gshared extern(C)
   void function(GtkWindow* window) c_gtk_window_unminimize;
 
   // WindowControls
-  GType function() c_gtk_window_controls_get_type;
+  extern(C) GType function() c_gtk_window_controls_get_type;
   GtkWidget* function(GtkPackType side) c_gtk_window_controls_new;
   const(char)* function(GtkWindowControls* self) c_gtk_window_controls_get_decoration_layout;
   bool function(GtkWindowControls* self) c_gtk_window_controls_get_empty;
@@ -4629,14 +4630,14 @@ __gshared extern(C)
   void function(GtkWindowControls* self, GtkPackType side) c_gtk_window_controls_set_side;
 
   // WindowGroup
-  GType function() c_gtk_window_group_get_type;
+  extern(C) GType function() c_gtk_window_group_get_type;
   GtkWindowGroup* function() c_gtk_window_group_new;
   void function(GtkWindowGroup* windowGroup, GtkWindow* window) c_gtk_window_group_add_window;
   GList* function(GtkWindowGroup* windowGroup) c_gtk_window_group_list_windows;
   void function(GtkWindowGroup* windowGroup, GtkWindow* window) c_gtk_window_group_remove_window;
 
   // WindowHandle
-  GType function() c_gtk_window_handle_get_type;
+  extern(C) GType function() c_gtk_window_handle_get_type;
   GtkWidget* function() c_gtk_window_handle_new;
   GtkWidget* function(GtkWindowHandle* self) c_gtk_window_handle_get_child;
   void function(GtkWindowHandle* self, GtkWidget* child) c_gtk_window_handle_set_child;
@@ -9272,4629 +9273,4629 @@ alias gtk_window_handle_set_child = c_gtk_window_handle_set_child;
 shared static this()
 {
   // ATContext
-  gidLink(gtk_at_context_get_type, "gtk_at_context_get_type", LIBS);
-  gidLink(gtk_at_context_create, "gtk_at_context_create", LIBS);
-  gidLink(gtk_at_context_get_accessible, "gtk_at_context_get_accessible", LIBS);
-  gidLink(gtk_at_context_get_accessible_role, "gtk_at_context_get_accessible_role", LIBS);
+  gidLink(cast(void**)&gtk_at_context_get_type, "gtk_at_context_get_type", LIBS);
+  gidLink(cast(void**)&gtk_at_context_create, "gtk_at_context_create", LIBS);
+  gidLink(cast(void**)&gtk_at_context_get_accessible, "gtk_at_context_get_accessible", LIBS);
+  gidLink(cast(void**)&gtk_at_context_get_accessible_role, "gtk_at_context_get_accessible_role", LIBS);
 
   // AboutDialog
-  gidLink(gtk_about_dialog_get_type, "gtk_about_dialog_get_type", LIBS);
-  gidLink(gtk_about_dialog_new, "gtk_about_dialog_new", LIBS);
-  gidLink(gtk_about_dialog_add_credit_section, "gtk_about_dialog_add_credit_section", LIBS);
-  gidLink(gtk_about_dialog_get_artists, "gtk_about_dialog_get_artists", LIBS);
-  gidLink(gtk_about_dialog_get_authors, "gtk_about_dialog_get_authors", LIBS);
-  gidLink(gtk_about_dialog_get_comments, "gtk_about_dialog_get_comments", LIBS);
-  gidLink(gtk_about_dialog_get_copyright, "gtk_about_dialog_get_copyright", LIBS);
-  gidLink(gtk_about_dialog_get_documenters, "gtk_about_dialog_get_documenters", LIBS);
-  gidLink(gtk_about_dialog_get_license, "gtk_about_dialog_get_license", LIBS);
-  gidLink(gtk_about_dialog_get_license_type, "gtk_about_dialog_get_license_type", LIBS);
-  gidLink(gtk_about_dialog_get_logo, "gtk_about_dialog_get_logo", LIBS);
-  gidLink(gtk_about_dialog_get_logo_icon_name, "gtk_about_dialog_get_logo_icon_name", LIBS);
-  gidLink(gtk_about_dialog_get_program_name, "gtk_about_dialog_get_program_name", LIBS);
-  gidLink(gtk_about_dialog_get_system_information, "gtk_about_dialog_get_system_information", LIBS);
-  gidLink(gtk_about_dialog_get_translator_credits, "gtk_about_dialog_get_translator_credits", LIBS);
-  gidLink(gtk_about_dialog_get_version, "gtk_about_dialog_get_version", LIBS);
-  gidLink(gtk_about_dialog_get_website, "gtk_about_dialog_get_website", LIBS);
-  gidLink(gtk_about_dialog_get_website_label, "gtk_about_dialog_get_website_label", LIBS);
-  gidLink(gtk_about_dialog_get_wrap_license, "gtk_about_dialog_get_wrap_license", LIBS);
-  gidLink(gtk_about_dialog_set_artists, "gtk_about_dialog_set_artists", LIBS);
-  gidLink(gtk_about_dialog_set_authors, "gtk_about_dialog_set_authors", LIBS);
-  gidLink(gtk_about_dialog_set_comments, "gtk_about_dialog_set_comments", LIBS);
-  gidLink(gtk_about_dialog_set_copyright, "gtk_about_dialog_set_copyright", LIBS);
-  gidLink(gtk_about_dialog_set_documenters, "gtk_about_dialog_set_documenters", LIBS);
-  gidLink(gtk_about_dialog_set_license, "gtk_about_dialog_set_license", LIBS);
-  gidLink(gtk_about_dialog_set_license_type, "gtk_about_dialog_set_license_type", LIBS);
-  gidLink(gtk_about_dialog_set_logo, "gtk_about_dialog_set_logo", LIBS);
-  gidLink(gtk_about_dialog_set_logo_icon_name, "gtk_about_dialog_set_logo_icon_name", LIBS);
-  gidLink(gtk_about_dialog_set_program_name, "gtk_about_dialog_set_program_name", LIBS);
-  gidLink(gtk_about_dialog_set_system_information, "gtk_about_dialog_set_system_information", LIBS);
-  gidLink(gtk_about_dialog_set_translator_credits, "gtk_about_dialog_set_translator_credits", LIBS);
-  gidLink(gtk_about_dialog_set_version, "gtk_about_dialog_set_version", LIBS);
-  gidLink(gtk_about_dialog_set_website, "gtk_about_dialog_set_website", LIBS);
-  gidLink(gtk_about_dialog_set_website_label, "gtk_about_dialog_set_website_label", LIBS);
-  gidLink(gtk_about_dialog_set_wrap_license, "gtk_about_dialog_set_wrap_license", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_type, "gtk_about_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_new, "gtk_about_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_add_credit_section, "gtk_about_dialog_add_credit_section", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_artists, "gtk_about_dialog_get_artists", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_authors, "gtk_about_dialog_get_authors", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_comments, "gtk_about_dialog_get_comments", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_copyright, "gtk_about_dialog_get_copyright", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_documenters, "gtk_about_dialog_get_documenters", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_license, "gtk_about_dialog_get_license", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_license_type, "gtk_about_dialog_get_license_type", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_logo, "gtk_about_dialog_get_logo", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_logo_icon_name, "gtk_about_dialog_get_logo_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_program_name, "gtk_about_dialog_get_program_name", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_system_information, "gtk_about_dialog_get_system_information", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_translator_credits, "gtk_about_dialog_get_translator_credits", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_version, "gtk_about_dialog_get_version", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_website, "gtk_about_dialog_get_website", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_website_label, "gtk_about_dialog_get_website_label", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_get_wrap_license, "gtk_about_dialog_get_wrap_license", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_artists, "gtk_about_dialog_set_artists", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_authors, "gtk_about_dialog_set_authors", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_comments, "gtk_about_dialog_set_comments", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_copyright, "gtk_about_dialog_set_copyright", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_documenters, "gtk_about_dialog_set_documenters", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_license, "gtk_about_dialog_set_license", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_license_type, "gtk_about_dialog_set_license_type", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_logo, "gtk_about_dialog_set_logo", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_logo_icon_name, "gtk_about_dialog_set_logo_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_program_name, "gtk_about_dialog_set_program_name", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_system_information, "gtk_about_dialog_set_system_information", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_translator_credits, "gtk_about_dialog_set_translator_credits", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_version, "gtk_about_dialog_set_version", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_website, "gtk_about_dialog_set_website", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_website_label, "gtk_about_dialog_set_website_label", LIBS);
+  gidLink(cast(void**)&gtk_about_dialog_set_wrap_license, "gtk_about_dialog_set_wrap_license", LIBS);
 
   // Accessible
-  gidLink(gtk_accessible_get_type, "gtk_accessible_get_type", LIBS);
-  gidLink(gtk_accessible_announce, "gtk_accessible_announce", LIBS);
-  gidLink(gtk_accessible_get_accessible_parent, "gtk_accessible_get_accessible_parent", LIBS);
-  gidLink(gtk_accessible_get_accessible_role, "gtk_accessible_get_accessible_role", LIBS);
-  gidLink(gtk_accessible_get_at_context, "gtk_accessible_get_at_context", LIBS);
-  gidLink(gtk_accessible_get_bounds, "gtk_accessible_get_bounds", LIBS);
-  gidLink(gtk_accessible_get_first_accessible_child, "gtk_accessible_get_first_accessible_child", LIBS);
-  gidLink(gtk_accessible_get_next_accessible_sibling, "gtk_accessible_get_next_accessible_sibling", LIBS);
-  gidLink(gtk_accessible_get_platform_state, "gtk_accessible_get_platform_state", LIBS);
-  gidLink(gtk_accessible_reset_property, "gtk_accessible_reset_property", LIBS);
-  gidLink(gtk_accessible_reset_relation, "gtk_accessible_reset_relation", LIBS);
-  gidLink(gtk_accessible_reset_state, "gtk_accessible_reset_state", LIBS);
-  gidLink(gtk_accessible_set_accessible_parent, "gtk_accessible_set_accessible_parent", LIBS);
-  gidLink(gtk_accessible_update_next_accessible_sibling, "gtk_accessible_update_next_accessible_sibling", LIBS);
-  gidLink(gtk_accessible_update_property, "gtk_accessible_update_property", LIBS);
-  gidLink(gtk_accessible_update_property_value, "gtk_accessible_update_property_value", LIBS);
-  gidLink(gtk_accessible_update_relation, "gtk_accessible_update_relation", LIBS);
-  gidLink(gtk_accessible_update_relation_value, "gtk_accessible_update_relation_value", LIBS);
-  gidLink(gtk_accessible_update_state, "gtk_accessible_update_state", LIBS);
-  gidLink(gtk_accessible_update_state_value, "gtk_accessible_update_state_value", LIBS);
+  gidLink(cast(void**)&gtk_accessible_get_type, "gtk_accessible_get_type", LIBS);
+  gidLink(cast(void**)&gtk_accessible_announce, "gtk_accessible_announce", LIBS);
+  gidLink(cast(void**)&gtk_accessible_get_accessible_parent, "gtk_accessible_get_accessible_parent", LIBS);
+  gidLink(cast(void**)&gtk_accessible_get_accessible_role, "gtk_accessible_get_accessible_role", LIBS);
+  gidLink(cast(void**)&gtk_accessible_get_at_context, "gtk_accessible_get_at_context", LIBS);
+  gidLink(cast(void**)&gtk_accessible_get_bounds, "gtk_accessible_get_bounds", LIBS);
+  gidLink(cast(void**)&gtk_accessible_get_first_accessible_child, "gtk_accessible_get_first_accessible_child", LIBS);
+  gidLink(cast(void**)&gtk_accessible_get_next_accessible_sibling, "gtk_accessible_get_next_accessible_sibling", LIBS);
+  gidLink(cast(void**)&gtk_accessible_get_platform_state, "gtk_accessible_get_platform_state", LIBS);
+  gidLink(cast(void**)&gtk_accessible_reset_property, "gtk_accessible_reset_property", LIBS);
+  gidLink(cast(void**)&gtk_accessible_reset_relation, "gtk_accessible_reset_relation", LIBS);
+  gidLink(cast(void**)&gtk_accessible_reset_state, "gtk_accessible_reset_state", LIBS);
+  gidLink(cast(void**)&gtk_accessible_set_accessible_parent, "gtk_accessible_set_accessible_parent", LIBS);
+  gidLink(cast(void**)&gtk_accessible_update_next_accessible_sibling, "gtk_accessible_update_next_accessible_sibling", LIBS);
+  gidLink(cast(void**)&gtk_accessible_update_property, "gtk_accessible_update_property", LIBS);
+  gidLink(cast(void**)&gtk_accessible_update_property_value, "gtk_accessible_update_property_value", LIBS);
+  gidLink(cast(void**)&gtk_accessible_update_relation, "gtk_accessible_update_relation", LIBS);
+  gidLink(cast(void**)&gtk_accessible_update_relation_value, "gtk_accessible_update_relation_value", LIBS);
+  gidLink(cast(void**)&gtk_accessible_update_state, "gtk_accessible_update_state", LIBS);
+  gidLink(cast(void**)&gtk_accessible_update_state_value, "gtk_accessible_update_state_value", LIBS);
 
   // AccessibleList
-  gidLink(gtk_accessible_list_get_type, "gtk_accessible_list_get_type", LIBS);
-  gidLink(gtk_accessible_list_new_from_array, "gtk_accessible_list_new_from_array", LIBS);
-  gidLink(gtk_accessible_list_new_from_list, "gtk_accessible_list_new_from_list", LIBS);
-  gidLink(gtk_accessible_list_get_objects, "gtk_accessible_list_get_objects", LIBS);
+  gidLink(cast(void**)&gtk_accessible_list_get_type, "gtk_accessible_list_get_type", LIBS);
+  gidLink(cast(void**)&gtk_accessible_list_new_from_array, "gtk_accessible_list_new_from_array", LIBS);
+  gidLink(cast(void**)&gtk_accessible_list_new_from_list, "gtk_accessible_list_new_from_list", LIBS);
+  gidLink(cast(void**)&gtk_accessible_list_get_objects, "gtk_accessible_list_get_objects", LIBS);
 
   // AccessibleRange
-  gidLink(gtk_accessible_range_get_type, "gtk_accessible_range_get_type", LIBS);
+  gidLink(cast(void**)&gtk_accessible_range_get_type, "gtk_accessible_range_get_type", LIBS);
 
   // AccessibleText
-  gidLink(gtk_accessible_text_get_type, "gtk_accessible_text_get_type", LIBS);
-  gidLink(gtk_accessible_text_update_caret_position, "gtk_accessible_text_update_caret_position", LIBS);
-  gidLink(gtk_accessible_text_update_contents, "gtk_accessible_text_update_contents", LIBS);
-  gidLink(gtk_accessible_text_update_selection_bound, "gtk_accessible_text_update_selection_bound", LIBS);
+  gidLink(cast(void**)&gtk_accessible_text_get_type, "gtk_accessible_text_get_type", LIBS);
+  gidLink(cast(void**)&gtk_accessible_text_update_caret_position, "gtk_accessible_text_update_caret_position", LIBS);
+  gidLink(cast(void**)&gtk_accessible_text_update_contents, "gtk_accessible_text_update_contents", LIBS);
+  gidLink(cast(void**)&gtk_accessible_text_update_selection_bound, "gtk_accessible_text_update_selection_bound", LIBS);
 
   // ActionBar
-  gidLink(gtk_action_bar_get_type, "gtk_action_bar_get_type", LIBS);
-  gidLink(gtk_action_bar_new, "gtk_action_bar_new", LIBS);
-  gidLink(gtk_action_bar_get_center_widget, "gtk_action_bar_get_center_widget", LIBS);
-  gidLink(gtk_action_bar_get_revealed, "gtk_action_bar_get_revealed", LIBS);
-  gidLink(gtk_action_bar_pack_end, "gtk_action_bar_pack_end", LIBS);
-  gidLink(gtk_action_bar_pack_start, "gtk_action_bar_pack_start", LIBS);
-  gidLink(gtk_action_bar_remove, "gtk_action_bar_remove", LIBS);
-  gidLink(gtk_action_bar_set_center_widget, "gtk_action_bar_set_center_widget", LIBS);
-  gidLink(gtk_action_bar_set_revealed, "gtk_action_bar_set_revealed", LIBS);
+  gidLink(cast(void**)&gtk_action_bar_get_type, "gtk_action_bar_get_type", LIBS);
+  gidLink(cast(void**)&gtk_action_bar_new, "gtk_action_bar_new", LIBS);
+  gidLink(cast(void**)&gtk_action_bar_get_center_widget, "gtk_action_bar_get_center_widget", LIBS);
+  gidLink(cast(void**)&gtk_action_bar_get_revealed, "gtk_action_bar_get_revealed", LIBS);
+  gidLink(cast(void**)&gtk_action_bar_pack_end, "gtk_action_bar_pack_end", LIBS);
+  gidLink(cast(void**)&gtk_action_bar_pack_start, "gtk_action_bar_pack_start", LIBS);
+  gidLink(cast(void**)&gtk_action_bar_remove, "gtk_action_bar_remove", LIBS);
+  gidLink(cast(void**)&gtk_action_bar_set_center_widget, "gtk_action_bar_set_center_widget", LIBS);
+  gidLink(cast(void**)&gtk_action_bar_set_revealed, "gtk_action_bar_set_revealed", LIBS);
 
   // Actionable
-  gidLink(gtk_actionable_get_type, "gtk_actionable_get_type", LIBS);
-  gidLink(gtk_actionable_get_action_name, "gtk_actionable_get_action_name", LIBS);
-  gidLink(gtk_actionable_get_action_target_value, "gtk_actionable_get_action_target_value", LIBS);
-  gidLink(gtk_actionable_set_action_name, "gtk_actionable_set_action_name", LIBS);
-  gidLink(gtk_actionable_set_action_target, "gtk_actionable_set_action_target", LIBS);
-  gidLink(gtk_actionable_set_action_target_value, "gtk_actionable_set_action_target_value", LIBS);
-  gidLink(gtk_actionable_set_detailed_action_name, "gtk_actionable_set_detailed_action_name", LIBS);
+  gidLink(cast(void**)&gtk_actionable_get_type, "gtk_actionable_get_type", LIBS);
+  gidLink(cast(void**)&gtk_actionable_get_action_name, "gtk_actionable_get_action_name", LIBS);
+  gidLink(cast(void**)&gtk_actionable_get_action_target_value, "gtk_actionable_get_action_target_value", LIBS);
+  gidLink(cast(void**)&gtk_actionable_set_action_name, "gtk_actionable_set_action_name", LIBS);
+  gidLink(cast(void**)&gtk_actionable_set_action_target, "gtk_actionable_set_action_target", LIBS);
+  gidLink(cast(void**)&gtk_actionable_set_action_target_value, "gtk_actionable_set_action_target_value", LIBS);
+  gidLink(cast(void**)&gtk_actionable_set_detailed_action_name, "gtk_actionable_set_detailed_action_name", LIBS);
 
   // ActivateAction
-  gidLink(gtk_activate_action_get_type, "gtk_activate_action_get_type", LIBS);
-  gidLink(gtk_activate_action_get, "gtk_activate_action_get", LIBS);
+  gidLink(cast(void**)&gtk_activate_action_get_type, "gtk_activate_action_get_type", LIBS);
+  gidLink(cast(void**)&gtk_activate_action_get, "gtk_activate_action_get", LIBS);
 
   // Adjustment
-  gidLink(gtk_adjustment_get_type, "gtk_adjustment_get_type", LIBS);
-  gidLink(gtk_adjustment_new, "gtk_adjustment_new", LIBS);
-  gidLink(gtk_adjustment_clamp_page, "gtk_adjustment_clamp_page", LIBS);
-  gidLink(gtk_adjustment_configure, "gtk_adjustment_configure", LIBS);
-  gidLink(gtk_adjustment_get_lower, "gtk_adjustment_get_lower", LIBS);
-  gidLink(gtk_adjustment_get_minimum_increment, "gtk_adjustment_get_minimum_increment", LIBS);
-  gidLink(gtk_adjustment_get_page_increment, "gtk_adjustment_get_page_increment", LIBS);
-  gidLink(gtk_adjustment_get_page_size, "gtk_adjustment_get_page_size", LIBS);
-  gidLink(gtk_adjustment_get_step_increment, "gtk_adjustment_get_step_increment", LIBS);
-  gidLink(gtk_adjustment_get_upper, "gtk_adjustment_get_upper", LIBS);
-  gidLink(gtk_adjustment_get_value, "gtk_adjustment_get_value", LIBS);
-  gidLink(gtk_adjustment_set_lower, "gtk_adjustment_set_lower", LIBS);
-  gidLink(gtk_adjustment_set_page_increment, "gtk_adjustment_set_page_increment", LIBS);
-  gidLink(gtk_adjustment_set_page_size, "gtk_adjustment_set_page_size", LIBS);
-  gidLink(gtk_adjustment_set_step_increment, "gtk_adjustment_set_step_increment", LIBS);
-  gidLink(gtk_adjustment_set_upper, "gtk_adjustment_set_upper", LIBS);
-  gidLink(gtk_adjustment_set_value, "gtk_adjustment_set_value", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_get_type, "gtk_adjustment_get_type", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_new, "gtk_adjustment_new", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_clamp_page, "gtk_adjustment_clamp_page", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_configure, "gtk_adjustment_configure", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_get_lower, "gtk_adjustment_get_lower", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_get_minimum_increment, "gtk_adjustment_get_minimum_increment", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_get_page_increment, "gtk_adjustment_get_page_increment", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_get_page_size, "gtk_adjustment_get_page_size", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_get_step_increment, "gtk_adjustment_get_step_increment", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_get_upper, "gtk_adjustment_get_upper", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_get_value, "gtk_adjustment_get_value", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_set_lower, "gtk_adjustment_set_lower", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_set_page_increment, "gtk_adjustment_set_page_increment", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_set_page_size, "gtk_adjustment_set_page_size", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_set_step_increment, "gtk_adjustment_set_step_increment", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_set_upper, "gtk_adjustment_set_upper", LIBS);
+  gidLink(cast(void**)&gtk_adjustment_set_value, "gtk_adjustment_set_value", LIBS);
 
   // AlertDialog
-  gidLink(gtk_alert_dialog_get_type, "gtk_alert_dialog_get_type", LIBS);
-  gidLink(gtk_alert_dialog_new, "gtk_alert_dialog_new", LIBS);
-  gidLink(gtk_alert_dialog_choose, "gtk_alert_dialog_choose", LIBS);
-  gidLink(gtk_alert_dialog_choose_finish, "gtk_alert_dialog_choose_finish", LIBS);
-  gidLink(gtk_alert_dialog_get_buttons, "gtk_alert_dialog_get_buttons", LIBS);
-  gidLink(gtk_alert_dialog_get_cancel_button, "gtk_alert_dialog_get_cancel_button", LIBS);
-  gidLink(gtk_alert_dialog_get_default_button, "gtk_alert_dialog_get_default_button", LIBS);
-  gidLink(gtk_alert_dialog_get_detail, "gtk_alert_dialog_get_detail", LIBS);
-  gidLink(gtk_alert_dialog_get_message, "gtk_alert_dialog_get_message", LIBS);
-  gidLink(gtk_alert_dialog_get_modal, "gtk_alert_dialog_get_modal", LIBS);
-  gidLink(gtk_alert_dialog_set_buttons, "gtk_alert_dialog_set_buttons", LIBS);
-  gidLink(gtk_alert_dialog_set_cancel_button, "gtk_alert_dialog_set_cancel_button", LIBS);
-  gidLink(gtk_alert_dialog_set_default_button, "gtk_alert_dialog_set_default_button", LIBS);
-  gidLink(gtk_alert_dialog_set_detail, "gtk_alert_dialog_set_detail", LIBS);
-  gidLink(gtk_alert_dialog_set_message, "gtk_alert_dialog_set_message", LIBS);
-  gidLink(gtk_alert_dialog_set_modal, "gtk_alert_dialog_set_modal", LIBS);
-  gidLink(gtk_alert_dialog_show, "gtk_alert_dialog_show", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_get_type, "gtk_alert_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_new, "gtk_alert_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_choose, "gtk_alert_dialog_choose", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_choose_finish, "gtk_alert_dialog_choose_finish", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_get_buttons, "gtk_alert_dialog_get_buttons", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_get_cancel_button, "gtk_alert_dialog_get_cancel_button", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_get_default_button, "gtk_alert_dialog_get_default_button", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_get_detail, "gtk_alert_dialog_get_detail", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_get_message, "gtk_alert_dialog_get_message", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_get_modal, "gtk_alert_dialog_get_modal", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_set_buttons, "gtk_alert_dialog_set_buttons", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_set_cancel_button, "gtk_alert_dialog_set_cancel_button", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_set_default_button, "gtk_alert_dialog_set_default_button", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_set_detail, "gtk_alert_dialog_set_detail", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_set_message, "gtk_alert_dialog_set_message", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_set_modal, "gtk_alert_dialog_set_modal", LIBS);
+  gidLink(cast(void**)&gtk_alert_dialog_show, "gtk_alert_dialog_show", LIBS);
 
   // AlternativeTrigger
-  gidLink(gtk_alternative_trigger_get_type, "gtk_alternative_trigger_get_type", LIBS);
-  gidLink(gtk_alternative_trigger_new, "gtk_alternative_trigger_new", LIBS);
-  gidLink(gtk_alternative_trigger_get_first, "gtk_alternative_trigger_get_first", LIBS);
-  gidLink(gtk_alternative_trigger_get_second, "gtk_alternative_trigger_get_second", LIBS);
+  gidLink(cast(void**)&gtk_alternative_trigger_get_type, "gtk_alternative_trigger_get_type", LIBS);
+  gidLink(cast(void**)&gtk_alternative_trigger_new, "gtk_alternative_trigger_new", LIBS);
+  gidLink(cast(void**)&gtk_alternative_trigger_get_first, "gtk_alternative_trigger_get_first", LIBS);
+  gidLink(cast(void**)&gtk_alternative_trigger_get_second, "gtk_alternative_trigger_get_second", LIBS);
 
   // AnyFilter
-  gidLink(gtk_any_filter_get_type, "gtk_any_filter_get_type", LIBS);
-  gidLink(gtk_any_filter_new, "gtk_any_filter_new", LIBS);
+  gidLink(cast(void**)&gtk_any_filter_get_type, "gtk_any_filter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_any_filter_new, "gtk_any_filter_new", LIBS);
 
   // AppChooser
-  gidLink(gtk_app_chooser_get_type, "gtk_app_chooser_get_type", LIBS);
-  gidLink(gtk_app_chooser_get_app_info, "gtk_app_chooser_get_app_info", LIBS);
-  gidLink(gtk_app_chooser_get_content_type, "gtk_app_chooser_get_content_type", LIBS);
-  gidLink(gtk_app_chooser_refresh, "gtk_app_chooser_refresh", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_get_type, "gtk_app_chooser_get_type", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_get_app_info, "gtk_app_chooser_get_app_info", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_get_content_type, "gtk_app_chooser_get_content_type", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_refresh, "gtk_app_chooser_refresh", LIBS);
 
   // AppChooserButton
-  gidLink(gtk_app_chooser_button_get_type, "gtk_app_chooser_button_get_type", LIBS);
-  gidLink(gtk_app_chooser_button_new, "gtk_app_chooser_button_new", LIBS);
-  gidLink(gtk_app_chooser_button_append_custom_item, "gtk_app_chooser_button_append_custom_item", LIBS);
-  gidLink(gtk_app_chooser_button_append_separator, "gtk_app_chooser_button_append_separator", LIBS);
-  gidLink(gtk_app_chooser_button_get_heading, "gtk_app_chooser_button_get_heading", LIBS);
-  gidLink(gtk_app_chooser_button_get_modal, "gtk_app_chooser_button_get_modal", LIBS);
-  gidLink(gtk_app_chooser_button_get_show_default_item, "gtk_app_chooser_button_get_show_default_item", LIBS);
-  gidLink(gtk_app_chooser_button_get_show_dialog_item, "gtk_app_chooser_button_get_show_dialog_item", LIBS);
-  gidLink(gtk_app_chooser_button_set_active_custom_item, "gtk_app_chooser_button_set_active_custom_item", LIBS);
-  gidLink(gtk_app_chooser_button_set_heading, "gtk_app_chooser_button_set_heading", LIBS);
-  gidLink(gtk_app_chooser_button_set_modal, "gtk_app_chooser_button_set_modal", LIBS);
-  gidLink(gtk_app_chooser_button_set_show_default_item, "gtk_app_chooser_button_set_show_default_item", LIBS);
-  gidLink(gtk_app_chooser_button_set_show_dialog_item, "gtk_app_chooser_button_set_show_dialog_item", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_get_type, "gtk_app_chooser_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_new, "gtk_app_chooser_button_new", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_append_custom_item, "gtk_app_chooser_button_append_custom_item", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_append_separator, "gtk_app_chooser_button_append_separator", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_get_heading, "gtk_app_chooser_button_get_heading", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_get_modal, "gtk_app_chooser_button_get_modal", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_get_show_default_item, "gtk_app_chooser_button_get_show_default_item", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_get_show_dialog_item, "gtk_app_chooser_button_get_show_dialog_item", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_set_active_custom_item, "gtk_app_chooser_button_set_active_custom_item", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_set_heading, "gtk_app_chooser_button_set_heading", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_set_modal, "gtk_app_chooser_button_set_modal", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_set_show_default_item, "gtk_app_chooser_button_set_show_default_item", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_button_set_show_dialog_item, "gtk_app_chooser_button_set_show_dialog_item", LIBS);
 
   // AppChooserDialog
-  gidLink(gtk_app_chooser_dialog_get_type, "gtk_app_chooser_dialog_get_type", LIBS);
-  gidLink(gtk_app_chooser_dialog_new, "gtk_app_chooser_dialog_new", LIBS);
-  gidLink(gtk_app_chooser_dialog_new_for_content_type, "gtk_app_chooser_dialog_new_for_content_type", LIBS);
-  gidLink(gtk_app_chooser_dialog_get_heading, "gtk_app_chooser_dialog_get_heading", LIBS);
-  gidLink(gtk_app_chooser_dialog_get_widget, "gtk_app_chooser_dialog_get_widget", LIBS);
-  gidLink(gtk_app_chooser_dialog_set_heading, "gtk_app_chooser_dialog_set_heading", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_dialog_get_type, "gtk_app_chooser_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_dialog_new, "gtk_app_chooser_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_dialog_new_for_content_type, "gtk_app_chooser_dialog_new_for_content_type", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_dialog_get_heading, "gtk_app_chooser_dialog_get_heading", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_dialog_get_widget, "gtk_app_chooser_dialog_get_widget", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_dialog_set_heading, "gtk_app_chooser_dialog_set_heading", LIBS);
 
   // AppChooserWidget
-  gidLink(gtk_app_chooser_widget_get_type, "gtk_app_chooser_widget_get_type", LIBS);
-  gidLink(gtk_app_chooser_widget_new, "gtk_app_chooser_widget_new", LIBS);
-  gidLink(gtk_app_chooser_widget_get_default_text, "gtk_app_chooser_widget_get_default_text", LIBS);
-  gidLink(gtk_app_chooser_widget_get_show_all, "gtk_app_chooser_widget_get_show_all", LIBS);
-  gidLink(gtk_app_chooser_widget_get_show_default, "gtk_app_chooser_widget_get_show_default", LIBS);
-  gidLink(gtk_app_chooser_widget_get_show_fallback, "gtk_app_chooser_widget_get_show_fallback", LIBS);
-  gidLink(gtk_app_chooser_widget_get_show_other, "gtk_app_chooser_widget_get_show_other", LIBS);
-  gidLink(gtk_app_chooser_widget_get_show_recommended, "gtk_app_chooser_widget_get_show_recommended", LIBS);
-  gidLink(gtk_app_chooser_widget_set_default_text, "gtk_app_chooser_widget_set_default_text", LIBS);
-  gidLink(gtk_app_chooser_widget_set_show_all, "gtk_app_chooser_widget_set_show_all", LIBS);
-  gidLink(gtk_app_chooser_widget_set_show_default, "gtk_app_chooser_widget_set_show_default", LIBS);
-  gidLink(gtk_app_chooser_widget_set_show_fallback, "gtk_app_chooser_widget_set_show_fallback", LIBS);
-  gidLink(gtk_app_chooser_widget_set_show_other, "gtk_app_chooser_widget_set_show_other", LIBS);
-  gidLink(gtk_app_chooser_widget_set_show_recommended, "gtk_app_chooser_widget_set_show_recommended", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_get_type, "gtk_app_chooser_widget_get_type", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_new, "gtk_app_chooser_widget_new", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_get_default_text, "gtk_app_chooser_widget_get_default_text", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_get_show_all, "gtk_app_chooser_widget_get_show_all", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_get_show_default, "gtk_app_chooser_widget_get_show_default", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_get_show_fallback, "gtk_app_chooser_widget_get_show_fallback", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_get_show_other, "gtk_app_chooser_widget_get_show_other", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_get_show_recommended, "gtk_app_chooser_widget_get_show_recommended", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_set_default_text, "gtk_app_chooser_widget_set_default_text", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_set_show_all, "gtk_app_chooser_widget_set_show_all", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_set_show_default, "gtk_app_chooser_widget_set_show_default", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_set_show_fallback, "gtk_app_chooser_widget_set_show_fallback", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_set_show_other, "gtk_app_chooser_widget_set_show_other", LIBS);
+  gidLink(cast(void**)&gtk_app_chooser_widget_set_show_recommended, "gtk_app_chooser_widget_set_show_recommended", LIBS);
 
   // Application
-  gidLink(gtk_application_get_type, "gtk_application_get_type", LIBS);
-  gidLink(gtk_application_new, "gtk_application_new", LIBS);
-  gidLink(gtk_application_add_window, "gtk_application_add_window", LIBS);
-  gidLink(gtk_application_get_accels_for_action, "gtk_application_get_accels_for_action", LIBS);
-  gidLink(gtk_application_get_actions_for_accel, "gtk_application_get_actions_for_accel", LIBS);
-  gidLink(gtk_application_get_active_window, "gtk_application_get_active_window", LIBS);
-  gidLink(gtk_application_get_menu_by_id, "gtk_application_get_menu_by_id", LIBS);
-  gidLink(gtk_application_get_menubar, "gtk_application_get_menubar", LIBS);
-  gidLink(gtk_application_get_window_by_id, "gtk_application_get_window_by_id", LIBS);
-  gidLink(gtk_application_get_windows, "gtk_application_get_windows", LIBS);
-  gidLink(gtk_application_inhibit, "gtk_application_inhibit", LIBS);
-  gidLink(gtk_application_list_action_descriptions, "gtk_application_list_action_descriptions", LIBS);
-  gidLink(gtk_application_remove_window, "gtk_application_remove_window", LIBS);
-  gidLink(gtk_application_set_accels_for_action, "gtk_application_set_accels_for_action", LIBS);
-  gidLink(gtk_application_set_menubar, "gtk_application_set_menubar", LIBS);
-  gidLink(gtk_application_uninhibit, "gtk_application_uninhibit", LIBS);
+  gidLink(cast(void**)&gtk_application_get_type, "gtk_application_get_type", LIBS);
+  gidLink(cast(void**)&gtk_application_new, "gtk_application_new", LIBS);
+  gidLink(cast(void**)&gtk_application_add_window, "gtk_application_add_window", LIBS);
+  gidLink(cast(void**)&gtk_application_get_accels_for_action, "gtk_application_get_accels_for_action", LIBS);
+  gidLink(cast(void**)&gtk_application_get_actions_for_accel, "gtk_application_get_actions_for_accel", LIBS);
+  gidLink(cast(void**)&gtk_application_get_active_window, "gtk_application_get_active_window", LIBS);
+  gidLink(cast(void**)&gtk_application_get_menu_by_id, "gtk_application_get_menu_by_id", LIBS);
+  gidLink(cast(void**)&gtk_application_get_menubar, "gtk_application_get_menubar", LIBS);
+  gidLink(cast(void**)&gtk_application_get_window_by_id, "gtk_application_get_window_by_id", LIBS);
+  gidLink(cast(void**)&gtk_application_get_windows, "gtk_application_get_windows", LIBS);
+  gidLink(cast(void**)&gtk_application_inhibit, "gtk_application_inhibit", LIBS);
+  gidLink(cast(void**)&gtk_application_list_action_descriptions, "gtk_application_list_action_descriptions", LIBS);
+  gidLink(cast(void**)&gtk_application_remove_window, "gtk_application_remove_window", LIBS);
+  gidLink(cast(void**)&gtk_application_set_accels_for_action, "gtk_application_set_accels_for_action", LIBS);
+  gidLink(cast(void**)&gtk_application_set_menubar, "gtk_application_set_menubar", LIBS);
+  gidLink(cast(void**)&gtk_application_uninhibit, "gtk_application_uninhibit", LIBS);
 
   // ApplicationWindow
-  gidLink(gtk_application_window_get_type, "gtk_application_window_get_type", LIBS);
-  gidLink(gtk_application_window_new, "gtk_application_window_new", LIBS);
-  gidLink(gtk_application_window_get_help_overlay, "gtk_application_window_get_help_overlay", LIBS);
-  gidLink(gtk_application_window_get_id, "gtk_application_window_get_id", LIBS);
-  gidLink(gtk_application_window_get_show_menubar, "gtk_application_window_get_show_menubar", LIBS);
-  gidLink(gtk_application_window_set_help_overlay, "gtk_application_window_set_help_overlay", LIBS);
-  gidLink(gtk_application_window_set_show_menubar, "gtk_application_window_set_show_menubar", LIBS);
+  gidLink(cast(void**)&gtk_application_window_get_type, "gtk_application_window_get_type", LIBS);
+  gidLink(cast(void**)&gtk_application_window_new, "gtk_application_window_new", LIBS);
+  gidLink(cast(void**)&gtk_application_window_get_help_overlay, "gtk_application_window_get_help_overlay", LIBS);
+  gidLink(cast(void**)&gtk_application_window_get_id, "gtk_application_window_get_id", LIBS);
+  gidLink(cast(void**)&gtk_application_window_get_show_menubar, "gtk_application_window_get_show_menubar", LIBS);
+  gidLink(cast(void**)&gtk_application_window_set_help_overlay, "gtk_application_window_set_help_overlay", LIBS);
+  gidLink(cast(void**)&gtk_application_window_set_show_menubar, "gtk_application_window_set_show_menubar", LIBS);
 
   // AspectFrame
-  gidLink(gtk_aspect_frame_get_type, "gtk_aspect_frame_get_type", LIBS);
-  gidLink(gtk_aspect_frame_new, "gtk_aspect_frame_new", LIBS);
-  gidLink(gtk_aspect_frame_get_child, "gtk_aspect_frame_get_child", LIBS);
-  gidLink(gtk_aspect_frame_get_obey_child, "gtk_aspect_frame_get_obey_child", LIBS);
-  gidLink(gtk_aspect_frame_get_ratio, "gtk_aspect_frame_get_ratio", LIBS);
-  gidLink(gtk_aspect_frame_get_xalign, "gtk_aspect_frame_get_xalign", LIBS);
-  gidLink(gtk_aspect_frame_get_yalign, "gtk_aspect_frame_get_yalign", LIBS);
-  gidLink(gtk_aspect_frame_set_child, "gtk_aspect_frame_set_child", LIBS);
-  gidLink(gtk_aspect_frame_set_obey_child, "gtk_aspect_frame_set_obey_child", LIBS);
-  gidLink(gtk_aspect_frame_set_ratio, "gtk_aspect_frame_set_ratio", LIBS);
-  gidLink(gtk_aspect_frame_set_xalign, "gtk_aspect_frame_set_xalign", LIBS);
-  gidLink(gtk_aspect_frame_set_yalign, "gtk_aspect_frame_set_yalign", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_get_type, "gtk_aspect_frame_get_type", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_new, "gtk_aspect_frame_new", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_get_child, "gtk_aspect_frame_get_child", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_get_obey_child, "gtk_aspect_frame_get_obey_child", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_get_ratio, "gtk_aspect_frame_get_ratio", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_get_xalign, "gtk_aspect_frame_get_xalign", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_get_yalign, "gtk_aspect_frame_get_yalign", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_set_child, "gtk_aspect_frame_set_child", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_set_obey_child, "gtk_aspect_frame_set_obey_child", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_set_ratio, "gtk_aspect_frame_set_ratio", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_set_xalign, "gtk_aspect_frame_set_xalign", LIBS);
+  gidLink(cast(void**)&gtk_aspect_frame_set_yalign, "gtk_aspect_frame_set_yalign", LIBS);
 
   // Assistant
-  gidLink(gtk_assistant_get_type, "gtk_assistant_get_type", LIBS);
-  gidLink(gtk_assistant_new, "gtk_assistant_new", LIBS);
-  gidLink(gtk_assistant_add_action_widget, "gtk_assistant_add_action_widget", LIBS);
-  gidLink(gtk_assistant_append_page, "gtk_assistant_append_page", LIBS);
-  gidLink(gtk_assistant_commit, "gtk_assistant_commit", LIBS);
-  gidLink(gtk_assistant_get_current_page, "gtk_assistant_get_current_page", LIBS);
-  gidLink(gtk_assistant_get_n_pages, "gtk_assistant_get_n_pages", LIBS);
-  gidLink(gtk_assistant_get_nth_page, "gtk_assistant_get_nth_page", LIBS);
-  gidLink(gtk_assistant_get_page, "gtk_assistant_get_page", LIBS);
-  gidLink(gtk_assistant_get_page_complete, "gtk_assistant_get_page_complete", LIBS);
-  gidLink(gtk_assistant_get_page_title, "gtk_assistant_get_page_title", LIBS);
-  gidLink(gtk_assistant_get_page_type, "gtk_assistant_get_page_type", LIBS);
-  gidLink(gtk_assistant_get_pages, "gtk_assistant_get_pages", LIBS);
-  gidLink(gtk_assistant_insert_page, "gtk_assistant_insert_page", LIBS);
-  gidLink(gtk_assistant_next_page, "gtk_assistant_next_page", LIBS);
-  gidLink(gtk_assistant_prepend_page, "gtk_assistant_prepend_page", LIBS);
-  gidLink(gtk_assistant_previous_page, "gtk_assistant_previous_page", LIBS);
-  gidLink(gtk_assistant_remove_action_widget, "gtk_assistant_remove_action_widget", LIBS);
-  gidLink(gtk_assistant_remove_page, "gtk_assistant_remove_page", LIBS);
-  gidLink(gtk_assistant_set_current_page, "gtk_assistant_set_current_page", LIBS);
-  gidLink(gtk_assistant_set_forward_page_func, "gtk_assistant_set_forward_page_func", LIBS);
-  gidLink(gtk_assistant_set_page_complete, "gtk_assistant_set_page_complete", LIBS);
-  gidLink(gtk_assistant_set_page_title, "gtk_assistant_set_page_title", LIBS);
-  gidLink(gtk_assistant_set_page_type, "gtk_assistant_set_page_type", LIBS);
-  gidLink(gtk_assistant_update_buttons_state, "gtk_assistant_update_buttons_state", LIBS);
+  gidLink(cast(void**)&gtk_assistant_get_type, "gtk_assistant_get_type", LIBS);
+  gidLink(cast(void**)&gtk_assistant_new, "gtk_assistant_new", LIBS);
+  gidLink(cast(void**)&gtk_assistant_add_action_widget, "gtk_assistant_add_action_widget", LIBS);
+  gidLink(cast(void**)&gtk_assistant_append_page, "gtk_assistant_append_page", LIBS);
+  gidLink(cast(void**)&gtk_assistant_commit, "gtk_assistant_commit", LIBS);
+  gidLink(cast(void**)&gtk_assistant_get_current_page, "gtk_assistant_get_current_page", LIBS);
+  gidLink(cast(void**)&gtk_assistant_get_n_pages, "gtk_assistant_get_n_pages", LIBS);
+  gidLink(cast(void**)&gtk_assistant_get_nth_page, "gtk_assistant_get_nth_page", LIBS);
+  gidLink(cast(void**)&gtk_assistant_get_page, "gtk_assistant_get_page", LIBS);
+  gidLink(cast(void**)&gtk_assistant_get_page_complete, "gtk_assistant_get_page_complete", LIBS);
+  gidLink(cast(void**)&gtk_assistant_get_page_title, "gtk_assistant_get_page_title", LIBS);
+  gidLink(cast(void**)&gtk_assistant_get_page_type, "gtk_assistant_get_page_type", LIBS);
+  gidLink(cast(void**)&gtk_assistant_get_pages, "gtk_assistant_get_pages", LIBS);
+  gidLink(cast(void**)&gtk_assistant_insert_page, "gtk_assistant_insert_page", LIBS);
+  gidLink(cast(void**)&gtk_assistant_next_page, "gtk_assistant_next_page", LIBS);
+  gidLink(cast(void**)&gtk_assistant_prepend_page, "gtk_assistant_prepend_page", LIBS);
+  gidLink(cast(void**)&gtk_assistant_previous_page, "gtk_assistant_previous_page", LIBS);
+  gidLink(cast(void**)&gtk_assistant_remove_action_widget, "gtk_assistant_remove_action_widget", LIBS);
+  gidLink(cast(void**)&gtk_assistant_remove_page, "gtk_assistant_remove_page", LIBS);
+  gidLink(cast(void**)&gtk_assistant_set_current_page, "gtk_assistant_set_current_page", LIBS);
+  gidLink(cast(void**)&gtk_assistant_set_forward_page_func, "gtk_assistant_set_forward_page_func", LIBS);
+  gidLink(cast(void**)&gtk_assistant_set_page_complete, "gtk_assistant_set_page_complete", LIBS);
+  gidLink(cast(void**)&gtk_assistant_set_page_title, "gtk_assistant_set_page_title", LIBS);
+  gidLink(cast(void**)&gtk_assistant_set_page_type, "gtk_assistant_set_page_type", LIBS);
+  gidLink(cast(void**)&gtk_assistant_update_buttons_state, "gtk_assistant_update_buttons_state", LIBS);
 
   // AssistantPage
-  gidLink(gtk_assistant_page_get_type, "gtk_assistant_page_get_type", LIBS);
-  gidLink(gtk_assistant_page_get_child, "gtk_assistant_page_get_child", LIBS);
+  gidLink(cast(void**)&gtk_assistant_page_get_type, "gtk_assistant_page_get_type", LIBS);
+  gidLink(cast(void**)&gtk_assistant_page_get_child, "gtk_assistant_page_get_child", LIBS);
 
   // BinLayout
-  gidLink(gtk_bin_layout_get_type, "gtk_bin_layout_get_type", LIBS);
-  gidLink(gtk_bin_layout_new, "gtk_bin_layout_new", LIBS);
+  gidLink(cast(void**)&gtk_bin_layout_get_type, "gtk_bin_layout_get_type", LIBS);
+  gidLink(cast(void**)&gtk_bin_layout_new, "gtk_bin_layout_new", LIBS);
 
   // Bitset
-  gidLink(gtk_bitset_get_type, "gtk_bitset_get_type", LIBS);
-  gidLink(gtk_bitset_new_empty, "gtk_bitset_new_empty", LIBS);
-  gidLink(gtk_bitset_new_range, "gtk_bitset_new_range", LIBS);
-  gidLink(gtk_bitset_add, "gtk_bitset_add", LIBS);
-  gidLink(gtk_bitset_add_range, "gtk_bitset_add_range", LIBS);
-  gidLink(gtk_bitset_add_range_closed, "gtk_bitset_add_range_closed", LIBS);
-  gidLink(gtk_bitset_add_rectangle, "gtk_bitset_add_rectangle", LIBS);
-  gidLink(gtk_bitset_contains, "gtk_bitset_contains", LIBS);
-  gidLink(gtk_bitset_copy, "gtk_bitset_copy", LIBS);
-  gidLink(gtk_bitset_difference, "gtk_bitset_difference", LIBS);
-  gidLink(gtk_bitset_equals, "gtk_bitset_equals", LIBS);
-  gidLink(gtk_bitset_get_maximum, "gtk_bitset_get_maximum", LIBS);
-  gidLink(gtk_bitset_get_minimum, "gtk_bitset_get_minimum", LIBS);
-  gidLink(gtk_bitset_get_nth, "gtk_bitset_get_nth", LIBS);
-  gidLink(gtk_bitset_get_size, "gtk_bitset_get_size", LIBS);
-  gidLink(gtk_bitset_get_size_in_range, "gtk_bitset_get_size_in_range", LIBS);
-  gidLink(gtk_bitset_intersect, "gtk_bitset_intersect", LIBS);
-  gidLink(gtk_bitset_is_empty, "gtk_bitset_is_empty", LIBS);
-  gidLink(gtk_bitset_ref, "gtk_bitset_ref", LIBS);
-  gidLink(gtk_bitset_remove, "gtk_bitset_remove", LIBS);
-  gidLink(gtk_bitset_remove_all, "gtk_bitset_remove_all", LIBS);
-  gidLink(gtk_bitset_remove_range, "gtk_bitset_remove_range", LIBS);
-  gidLink(gtk_bitset_remove_range_closed, "gtk_bitset_remove_range_closed", LIBS);
-  gidLink(gtk_bitset_remove_rectangle, "gtk_bitset_remove_rectangle", LIBS);
-  gidLink(gtk_bitset_shift_left, "gtk_bitset_shift_left", LIBS);
-  gidLink(gtk_bitset_shift_right, "gtk_bitset_shift_right", LIBS);
-  gidLink(gtk_bitset_splice, "gtk_bitset_splice", LIBS);
-  gidLink(gtk_bitset_subtract, "gtk_bitset_subtract", LIBS);
-  gidLink(gtk_bitset_union, "gtk_bitset_union", LIBS);
-  gidLink(gtk_bitset_unref, "gtk_bitset_unref", LIBS);
+  gidLink(cast(void**)&gtk_bitset_get_type, "gtk_bitset_get_type", LIBS);
+  gidLink(cast(void**)&gtk_bitset_new_empty, "gtk_bitset_new_empty", LIBS);
+  gidLink(cast(void**)&gtk_bitset_new_range, "gtk_bitset_new_range", LIBS);
+  gidLink(cast(void**)&gtk_bitset_add, "gtk_bitset_add", LIBS);
+  gidLink(cast(void**)&gtk_bitset_add_range, "gtk_bitset_add_range", LIBS);
+  gidLink(cast(void**)&gtk_bitset_add_range_closed, "gtk_bitset_add_range_closed", LIBS);
+  gidLink(cast(void**)&gtk_bitset_add_rectangle, "gtk_bitset_add_rectangle", LIBS);
+  gidLink(cast(void**)&gtk_bitset_contains, "gtk_bitset_contains", LIBS);
+  gidLink(cast(void**)&gtk_bitset_copy, "gtk_bitset_copy", LIBS);
+  gidLink(cast(void**)&gtk_bitset_difference, "gtk_bitset_difference", LIBS);
+  gidLink(cast(void**)&gtk_bitset_equals, "gtk_bitset_equals", LIBS);
+  gidLink(cast(void**)&gtk_bitset_get_maximum, "gtk_bitset_get_maximum", LIBS);
+  gidLink(cast(void**)&gtk_bitset_get_minimum, "gtk_bitset_get_minimum", LIBS);
+  gidLink(cast(void**)&gtk_bitset_get_nth, "gtk_bitset_get_nth", LIBS);
+  gidLink(cast(void**)&gtk_bitset_get_size, "gtk_bitset_get_size", LIBS);
+  gidLink(cast(void**)&gtk_bitset_get_size_in_range, "gtk_bitset_get_size_in_range", LIBS);
+  gidLink(cast(void**)&gtk_bitset_intersect, "gtk_bitset_intersect", LIBS);
+  gidLink(cast(void**)&gtk_bitset_is_empty, "gtk_bitset_is_empty", LIBS);
+  gidLink(cast(void**)&gtk_bitset_ref, "gtk_bitset_ref", LIBS);
+  gidLink(cast(void**)&gtk_bitset_remove, "gtk_bitset_remove", LIBS);
+  gidLink(cast(void**)&gtk_bitset_remove_all, "gtk_bitset_remove_all", LIBS);
+  gidLink(cast(void**)&gtk_bitset_remove_range, "gtk_bitset_remove_range", LIBS);
+  gidLink(cast(void**)&gtk_bitset_remove_range_closed, "gtk_bitset_remove_range_closed", LIBS);
+  gidLink(cast(void**)&gtk_bitset_remove_rectangle, "gtk_bitset_remove_rectangle", LIBS);
+  gidLink(cast(void**)&gtk_bitset_shift_left, "gtk_bitset_shift_left", LIBS);
+  gidLink(cast(void**)&gtk_bitset_shift_right, "gtk_bitset_shift_right", LIBS);
+  gidLink(cast(void**)&gtk_bitset_splice, "gtk_bitset_splice", LIBS);
+  gidLink(cast(void**)&gtk_bitset_subtract, "gtk_bitset_subtract", LIBS);
+  gidLink(cast(void**)&gtk_bitset_union, "gtk_bitset_union", LIBS);
+  gidLink(cast(void**)&gtk_bitset_unref, "gtk_bitset_unref", LIBS);
 
   // BitsetIter
-  gidLink(gtk_bitset_iter_get_type, "gtk_bitset_iter_get_type", LIBS);
-  gidLink(gtk_bitset_iter_get_value, "gtk_bitset_iter_get_value", LIBS);
-  gidLink(gtk_bitset_iter_is_valid, "gtk_bitset_iter_is_valid", LIBS);
-  gidLink(gtk_bitset_iter_next, "gtk_bitset_iter_next", LIBS);
-  gidLink(gtk_bitset_iter_previous, "gtk_bitset_iter_previous", LIBS);
-  gidLink(gtk_bitset_iter_init_at, "gtk_bitset_iter_init_at", LIBS);
-  gidLink(gtk_bitset_iter_init_first, "gtk_bitset_iter_init_first", LIBS);
-  gidLink(gtk_bitset_iter_init_last, "gtk_bitset_iter_init_last", LIBS);
+  gidLink(cast(void**)&gtk_bitset_iter_get_type, "gtk_bitset_iter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_bitset_iter_get_value, "gtk_bitset_iter_get_value", LIBS);
+  gidLink(cast(void**)&gtk_bitset_iter_is_valid, "gtk_bitset_iter_is_valid", LIBS);
+  gidLink(cast(void**)&gtk_bitset_iter_next, "gtk_bitset_iter_next", LIBS);
+  gidLink(cast(void**)&gtk_bitset_iter_previous, "gtk_bitset_iter_previous", LIBS);
+  gidLink(cast(void**)&gtk_bitset_iter_init_at, "gtk_bitset_iter_init_at", LIBS);
+  gidLink(cast(void**)&gtk_bitset_iter_init_first, "gtk_bitset_iter_init_first", LIBS);
+  gidLink(cast(void**)&gtk_bitset_iter_init_last, "gtk_bitset_iter_init_last", LIBS);
 
   // BookmarkList
-  gidLink(gtk_bookmark_list_get_type, "gtk_bookmark_list_get_type", LIBS);
-  gidLink(gtk_bookmark_list_new, "gtk_bookmark_list_new", LIBS);
-  gidLink(gtk_bookmark_list_get_attributes, "gtk_bookmark_list_get_attributes", LIBS);
-  gidLink(gtk_bookmark_list_get_filename, "gtk_bookmark_list_get_filename", LIBS);
-  gidLink(gtk_bookmark_list_get_io_priority, "gtk_bookmark_list_get_io_priority", LIBS);
-  gidLink(gtk_bookmark_list_is_loading, "gtk_bookmark_list_is_loading", LIBS);
-  gidLink(gtk_bookmark_list_set_attributes, "gtk_bookmark_list_set_attributes", LIBS);
-  gidLink(gtk_bookmark_list_set_io_priority, "gtk_bookmark_list_set_io_priority", LIBS);
+  gidLink(cast(void**)&gtk_bookmark_list_get_type, "gtk_bookmark_list_get_type", LIBS);
+  gidLink(cast(void**)&gtk_bookmark_list_new, "gtk_bookmark_list_new", LIBS);
+  gidLink(cast(void**)&gtk_bookmark_list_get_attributes, "gtk_bookmark_list_get_attributes", LIBS);
+  gidLink(cast(void**)&gtk_bookmark_list_get_filename, "gtk_bookmark_list_get_filename", LIBS);
+  gidLink(cast(void**)&gtk_bookmark_list_get_io_priority, "gtk_bookmark_list_get_io_priority", LIBS);
+  gidLink(cast(void**)&gtk_bookmark_list_is_loading, "gtk_bookmark_list_is_loading", LIBS);
+  gidLink(cast(void**)&gtk_bookmark_list_set_attributes, "gtk_bookmark_list_set_attributes", LIBS);
+  gidLink(cast(void**)&gtk_bookmark_list_set_io_priority, "gtk_bookmark_list_set_io_priority", LIBS);
 
   // BoolFilter
-  gidLink(gtk_bool_filter_get_type, "gtk_bool_filter_get_type", LIBS);
-  gidLink(gtk_bool_filter_new, "gtk_bool_filter_new", LIBS);
-  gidLink(gtk_bool_filter_get_expression, "gtk_bool_filter_get_expression", LIBS);
-  gidLink(gtk_bool_filter_get_invert, "gtk_bool_filter_get_invert", LIBS);
-  gidLink(gtk_bool_filter_set_expression, "gtk_bool_filter_set_expression", LIBS);
-  gidLink(gtk_bool_filter_set_invert, "gtk_bool_filter_set_invert", LIBS);
+  gidLink(cast(void**)&gtk_bool_filter_get_type, "gtk_bool_filter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_bool_filter_new, "gtk_bool_filter_new", LIBS);
+  gidLink(cast(void**)&gtk_bool_filter_get_expression, "gtk_bool_filter_get_expression", LIBS);
+  gidLink(cast(void**)&gtk_bool_filter_get_invert, "gtk_bool_filter_get_invert", LIBS);
+  gidLink(cast(void**)&gtk_bool_filter_set_expression, "gtk_bool_filter_set_expression", LIBS);
+  gidLink(cast(void**)&gtk_bool_filter_set_invert, "gtk_bool_filter_set_invert", LIBS);
 
   // Border
-  gidLink(gtk_border_get_type, "gtk_border_get_type", LIBS);
-  gidLink(gtk_border_new, "gtk_border_new", LIBS);
-  gidLink(gtk_border_copy, "gtk_border_copy", LIBS);
-  gidLink(gtk_border_free, "gtk_border_free", LIBS);
+  gidLink(cast(void**)&gtk_border_get_type, "gtk_border_get_type", LIBS);
+  gidLink(cast(void**)&gtk_border_new, "gtk_border_new", LIBS);
+  gidLink(cast(void**)&gtk_border_copy, "gtk_border_copy", LIBS);
+  gidLink(cast(void**)&gtk_border_free, "gtk_border_free", LIBS);
 
   // Box
-  gidLink(gtk_box_get_type, "gtk_box_get_type", LIBS);
-  gidLink(gtk_box_new, "gtk_box_new", LIBS);
-  gidLink(gtk_box_append, "gtk_box_append", LIBS);
-  gidLink(gtk_box_get_baseline_child, "gtk_box_get_baseline_child", LIBS);
-  gidLink(gtk_box_get_baseline_position, "gtk_box_get_baseline_position", LIBS);
-  gidLink(gtk_box_get_homogeneous, "gtk_box_get_homogeneous", LIBS);
-  gidLink(gtk_box_get_spacing, "gtk_box_get_spacing", LIBS);
-  gidLink(gtk_box_insert_child_after, "gtk_box_insert_child_after", LIBS);
-  gidLink(gtk_box_prepend, "gtk_box_prepend", LIBS);
-  gidLink(gtk_box_remove, "gtk_box_remove", LIBS);
-  gidLink(gtk_box_reorder_child_after, "gtk_box_reorder_child_after", LIBS);
-  gidLink(gtk_box_set_baseline_child, "gtk_box_set_baseline_child", LIBS);
-  gidLink(gtk_box_set_baseline_position, "gtk_box_set_baseline_position", LIBS);
-  gidLink(gtk_box_set_homogeneous, "gtk_box_set_homogeneous", LIBS);
-  gidLink(gtk_box_set_spacing, "gtk_box_set_spacing", LIBS);
+  gidLink(cast(void**)&gtk_box_get_type, "gtk_box_get_type", LIBS);
+  gidLink(cast(void**)&gtk_box_new, "gtk_box_new", LIBS);
+  gidLink(cast(void**)&gtk_box_append, "gtk_box_append", LIBS);
+  gidLink(cast(void**)&gtk_box_get_baseline_child, "gtk_box_get_baseline_child", LIBS);
+  gidLink(cast(void**)&gtk_box_get_baseline_position, "gtk_box_get_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_box_get_homogeneous, "gtk_box_get_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_box_get_spacing, "gtk_box_get_spacing", LIBS);
+  gidLink(cast(void**)&gtk_box_insert_child_after, "gtk_box_insert_child_after", LIBS);
+  gidLink(cast(void**)&gtk_box_prepend, "gtk_box_prepend", LIBS);
+  gidLink(cast(void**)&gtk_box_remove, "gtk_box_remove", LIBS);
+  gidLink(cast(void**)&gtk_box_reorder_child_after, "gtk_box_reorder_child_after", LIBS);
+  gidLink(cast(void**)&gtk_box_set_baseline_child, "gtk_box_set_baseline_child", LIBS);
+  gidLink(cast(void**)&gtk_box_set_baseline_position, "gtk_box_set_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_box_set_homogeneous, "gtk_box_set_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_box_set_spacing, "gtk_box_set_spacing", LIBS);
 
   // BoxLayout
-  gidLink(gtk_box_layout_get_type, "gtk_box_layout_get_type", LIBS);
-  gidLink(gtk_box_layout_new, "gtk_box_layout_new", LIBS);
-  gidLink(gtk_box_layout_get_baseline_child, "gtk_box_layout_get_baseline_child", LIBS);
-  gidLink(gtk_box_layout_get_baseline_position, "gtk_box_layout_get_baseline_position", LIBS);
-  gidLink(gtk_box_layout_get_homogeneous, "gtk_box_layout_get_homogeneous", LIBS);
-  gidLink(gtk_box_layout_get_spacing, "gtk_box_layout_get_spacing", LIBS);
-  gidLink(gtk_box_layout_set_baseline_child, "gtk_box_layout_set_baseline_child", LIBS);
-  gidLink(gtk_box_layout_set_baseline_position, "gtk_box_layout_set_baseline_position", LIBS);
-  gidLink(gtk_box_layout_set_homogeneous, "gtk_box_layout_set_homogeneous", LIBS);
-  gidLink(gtk_box_layout_set_spacing, "gtk_box_layout_set_spacing", LIBS);
+  gidLink(cast(void**)&gtk_box_layout_get_type, "gtk_box_layout_get_type", LIBS);
+  gidLink(cast(void**)&gtk_box_layout_new, "gtk_box_layout_new", LIBS);
+  gidLink(cast(void**)&gtk_box_layout_get_baseline_child, "gtk_box_layout_get_baseline_child", LIBS);
+  gidLink(cast(void**)&gtk_box_layout_get_baseline_position, "gtk_box_layout_get_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_box_layout_get_homogeneous, "gtk_box_layout_get_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_box_layout_get_spacing, "gtk_box_layout_get_spacing", LIBS);
+  gidLink(cast(void**)&gtk_box_layout_set_baseline_child, "gtk_box_layout_set_baseline_child", LIBS);
+  gidLink(cast(void**)&gtk_box_layout_set_baseline_position, "gtk_box_layout_set_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_box_layout_set_homogeneous, "gtk_box_layout_set_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_box_layout_set_spacing, "gtk_box_layout_set_spacing", LIBS);
 
   // Buildable
-  gidLink(gtk_buildable_get_type, "gtk_buildable_get_type", LIBS);
-  gidLink(gtk_buildable_get_buildable_id, "gtk_buildable_get_buildable_id", LIBS);
+  gidLink(cast(void**)&gtk_buildable_get_type, "gtk_buildable_get_type", LIBS);
+  gidLink(cast(void**)&gtk_buildable_get_buildable_id, "gtk_buildable_get_buildable_id", LIBS);
 
   // BuildableParseContext
-  gidLink(gtk_buildable_parse_context_get_element, "gtk_buildable_parse_context_get_element", LIBS);
-  gidLink(gtk_buildable_parse_context_get_element_stack, "gtk_buildable_parse_context_get_element_stack", LIBS);
-  gidLink(gtk_buildable_parse_context_get_position, "gtk_buildable_parse_context_get_position", LIBS);
-  gidLink(gtk_buildable_parse_context_pop, "gtk_buildable_parse_context_pop", LIBS);
-  gidLink(gtk_buildable_parse_context_push, "gtk_buildable_parse_context_push", LIBS);
+  gidLink(cast(void**)&gtk_buildable_parse_context_get_element, "gtk_buildable_parse_context_get_element", LIBS);
+  gidLink(cast(void**)&gtk_buildable_parse_context_get_element_stack, "gtk_buildable_parse_context_get_element_stack", LIBS);
+  gidLink(cast(void**)&gtk_buildable_parse_context_get_position, "gtk_buildable_parse_context_get_position", LIBS);
+  gidLink(cast(void**)&gtk_buildable_parse_context_pop, "gtk_buildable_parse_context_pop", LIBS);
+  gidLink(cast(void**)&gtk_buildable_parse_context_push, "gtk_buildable_parse_context_push", LIBS);
 
   // Builder
-  gidLink(gtk_builder_get_type, "gtk_builder_get_type", LIBS);
-  gidLink(gtk_builder_new, "gtk_builder_new", LIBS);
-  gidLink(gtk_builder_new_from_file, "gtk_builder_new_from_file", LIBS);
-  gidLink(gtk_builder_new_from_resource, "gtk_builder_new_from_resource", LIBS);
-  gidLink(gtk_builder_new_from_string, "gtk_builder_new_from_string", LIBS);
-  gidLink(gtk_builder_add_from_file, "gtk_builder_add_from_file", LIBS);
-  gidLink(gtk_builder_add_from_resource, "gtk_builder_add_from_resource", LIBS);
-  gidLink(gtk_builder_add_from_string, "gtk_builder_add_from_string", LIBS);
-  gidLink(gtk_builder_add_objects_from_file, "gtk_builder_add_objects_from_file", LIBS);
-  gidLink(gtk_builder_add_objects_from_resource, "gtk_builder_add_objects_from_resource", LIBS);
-  gidLink(gtk_builder_add_objects_from_string, "gtk_builder_add_objects_from_string", LIBS);
-  gidLink(gtk_builder_create_closure, "gtk_builder_create_closure", LIBS);
-  gidLink(gtk_builder_expose_object, "gtk_builder_expose_object", LIBS);
-  gidLink(gtk_builder_extend_with_template, "gtk_builder_extend_with_template", LIBS);
-  gidLink(gtk_builder_get_current_object, "gtk_builder_get_current_object", LIBS);
-  gidLink(gtk_builder_get_object, "gtk_builder_get_object", LIBS);
-  gidLink(gtk_builder_get_objects, "gtk_builder_get_objects", LIBS);
-  gidLink(gtk_builder_get_scope, "gtk_builder_get_scope", LIBS);
-  gidLink(gtk_builder_get_translation_domain, "gtk_builder_get_translation_domain", LIBS);
-  gidLink(gtk_builder_get_type_from_name, "gtk_builder_get_type_from_name", LIBS);
-  gidLink(gtk_builder_set_current_object, "gtk_builder_set_current_object", LIBS);
-  gidLink(gtk_builder_set_scope, "gtk_builder_set_scope", LIBS);
-  gidLink(gtk_builder_set_translation_domain, "gtk_builder_set_translation_domain", LIBS);
-  gidLink(gtk_builder_value_from_string, "gtk_builder_value_from_string", LIBS);
-  gidLink(gtk_builder_value_from_string_type, "gtk_builder_value_from_string_type", LIBS);
+  gidLink(cast(void**)&gtk_builder_get_type, "gtk_builder_get_type", LIBS);
+  gidLink(cast(void**)&gtk_builder_new, "gtk_builder_new", LIBS);
+  gidLink(cast(void**)&gtk_builder_new_from_file, "gtk_builder_new_from_file", LIBS);
+  gidLink(cast(void**)&gtk_builder_new_from_resource, "gtk_builder_new_from_resource", LIBS);
+  gidLink(cast(void**)&gtk_builder_new_from_string, "gtk_builder_new_from_string", LIBS);
+  gidLink(cast(void**)&gtk_builder_add_from_file, "gtk_builder_add_from_file", LIBS);
+  gidLink(cast(void**)&gtk_builder_add_from_resource, "gtk_builder_add_from_resource", LIBS);
+  gidLink(cast(void**)&gtk_builder_add_from_string, "gtk_builder_add_from_string", LIBS);
+  gidLink(cast(void**)&gtk_builder_add_objects_from_file, "gtk_builder_add_objects_from_file", LIBS);
+  gidLink(cast(void**)&gtk_builder_add_objects_from_resource, "gtk_builder_add_objects_from_resource", LIBS);
+  gidLink(cast(void**)&gtk_builder_add_objects_from_string, "gtk_builder_add_objects_from_string", LIBS);
+  gidLink(cast(void**)&gtk_builder_create_closure, "gtk_builder_create_closure", LIBS);
+  gidLink(cast(void**)&gtk_builder_expose_object, "gtk_builder_expose_object", LIBS);
+  gidLink(cast(void**)&gtk_builder_extend_with_template, "gtk_builder_extend_with_template", LIBS);
+  gidLink(cast(void**)&gtk_builder_get_current_object, "gtk_builder_get_current_object", LIBS);
+  gidLink(cast(void**)&gtk_builder_get_object, "gtk_builder_get_object", LIBS);
+  gidLink(cast(void**)&gtk_builder_get_objects, "gtk_builder_get_objects", LIBS);
+  gidLink(cast(void**)&gtk_builder_get_scope, "gtk_builder_get_scope", LIBS);
+  gidLink(cast(void**)&gtk_builder_get_translation_domain, "gtk_builder_get_translation_domain", LIBS);
+  gidLink(cast(void**)&gtk_builder_get_type_from_name, "gtk_builder_get_type_from_name", LIBS);
+  gidLink(cast(void**)&gtk_builder_set_current_object, "gtk_builder_set_current_object", LIBS);
+  gidLink(cast(void**)&gtk_builder_set_scope, "gtk_builder_set_scope", LIBS);
+  gidLink(cast(void**)&gtk_builder_set_translation_domain, "gtk_builder_set_translation_domain", LIBS);
+  gidLink(cast(void**)&gtk_builder_value_from_string, "gtk_builder_value_from_string", LIBS);
+  gidLink(cast(void**)&gtk_builder_value_from_string_type, "gtk_builder_value_from_string_type", LIBS);
 
   // BuilderCScope
-  gidLink(gtk_builder_cscope_get_type, "gtk_builder_cscope_get_type", LIBS);
-  gidLink(gtk_builder_cscope_new, "gtk_builder_cscope_new", LIBS);
-  gidLink(gtk_builder_cscope_add_callback_symbol, "gtk_builder_cscope_add_callback_symbol", LIBS);
-  gidLink(gtk_builder_cscope_add_callback_symbols, "gtk_builder_cscope_add_callback_symbols", LIBS);
-  gidLink(gtk_builder_cscope_lookup_callback_symbol, "gtk_builder_cscope_lookup_callback_symbol", LIBS);
+  gidLink(cast(void**)&gtk_builder_cscope_get_type, "gtk_builder_cscope_get_type", LIBS);
+  gidLink(cast(void**)&gtk_builder_cscope_new, "gtk_builder_cscope_new", LIBS);
+  gidLink(cast(void**)&gtk_builder_cscope_add_callback_symbol, "gtk_builder_cscope_add_callback_symbol", LIBS);
+  gidLink(cast(void**)&gtk_builder_cscope_add_callback_symbols, "gtk_builder_cscope_add_callback_symbols", LIBS);
+  gidLink(cast(void**)&gtk_builder_cscope_lookup_callback_symbol, "gtk_builder_cscope_lookup_callback_symbol", LIBS);
 
   // BuilderListItemFactory
-  gidLink(gtk_builder_list_item_factory_get_type, "gtk_builder_list_item_factory_get_type", LIBS);
-  gidLink(gtk_builder_list_item_factory_new_from_bytes, "gtk_builder_list_item_factory_new_from_bytes", LIBS);
-  gidLink(gtk_builder_list_item_factory_new_from_resource, "gtk_builder_list_item_factory_new_from_resource", LIBS);
-  gidLink(gtk_builder_list_item_factory_get_bytes, "gtk_builder_list_item_factory_get_bytes", LIBS);
-  gidLink(gtk_builder_list_item_factory_get_resource, "gtk_builder_list_item_factory_get_resource", LIBS);
-  gidLink(gtk_builder_list_item_factory_get_scope, "gtk_builder_list_item_factory_get_scope", LIBS);
+  gidLink(cast(void**)&gtk_builder_list_item_factory_get_type, "gtk_builder_list_item_factory_get_type", LIBS);
+  gidLink(cast(void**)&gtk_builder_list_item_factory_new_from_bytes, "gtk_builder_list_item_factory_new_from_bytes", LIBS);
+  gidLink(cast(void**)&gtk_builder_list_item_factory_new_from_resource, "gtk_builder_list_item_factory_new_from_resource", LIBS);
+  gidLink(cast(void**)&gtk_builder_list_item_factory_get_bytes, "gtk_builder_list_item_factory_get_bytes", LIBS);
+  gidLink(cast(void**)&gtk_builder_list_item_factory_get_resource, "gtk_builder_list_item_factory_get_resource", LIBS);
+  gidLink(cast(void**)&gtk_builder_list_item_factory_get_scope, "gtk_builder_list_item_factory_get_scope", LIBS);
 
   // BuilderScope
-  gidLink(gtk_builder_scope_get_type, "gtk_builder_scope_get_type", LIBS);
+  gidLink(cast(void**)&gtk_builder_scope_get_type, "gtk_builder_scope_get_type", LIBS);
 
   // Button
-  gidLink(gtk_button_get_type, "gtk_button_get_type", LIBS);
-  gidLink(gtk_button_new, "gtk_button_new", LIBS);
-  gidLink(gtk_button_new_from_icon_name, "gtk_button_new_from_icon_name", LIBS);
-  gidLink(gtk_button_new_with_label, "gtk_button_new_with_label", LIBS);
-  gidLink(gtk_button_new_with_mnemonic, "gtk_button_new_with_mnemonic", LIBS);
-  gidLink(gtk_button_get_can_shrink, "gtk_button_get_can_shrink", LIBS);
-  gidLink(gtk_button_get_child, "gtk_button_get_child", LIBS);
-  gidLink(gtk_button_get_has_frame, "gtk_button_get_has_frame", LIBS);
-  gidLink(gtk_button_get_icon_name, "gtk_button_get_icon_name", LIBS);
-  gidLink(gtk_button_get_label, "gtk_button_get_label", LIBS);
-  gidLink(gtk_button_get_use_underline, "gtk_button_get_use_underline", LIBS);
-  gidLink(gtk_button_set_can_shrink, "gtk_button_set_can_shrink", LIBS);
-  gidLink(gtk_button_set_child, "gtk_button_set_child", LIBS);
-  gidLink(gtk_button_set_has_frame, "gtk_button_set_has_frame", LIBS);
-  gidLink(gtk_button_set_icon_name, "gtk_button_set_icon_name", LIBS);
-  gidLink(gtk_button_set_label, "gtk_button_set_label", LIBS);
-  gidLink(gtk_button_set_use_underline, "gtk_button_set_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_button_get_type, "gtk_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_button_new, "gtk_button_new", LIBS);
+  gidLink(cast(void**)&gtk_button_new_from_icon_name, "gtk_button_new_from_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_button_new_with_label, "gtk_button_new_with_label", LIBS);
+  gidLink(cast(void**)&gtk_button_new_with_mnemonic, "gtk_button_new_with_mnemonic", LIBS);
+  gidLink(cast(void**)&gtk_button_get_can_shrink, "gtk_button_get_can_shrink", LIBS);
+  gidLink(cast(void**)&gtk_button_get_child, "gtk_button_get_child", LIBS);
+  gidLink(cast(void**)&gtk_button_get_has_frame, "gtk_button_get_has_frame", LIBS);
+  gidLink(cast(void**)&gtk_button_get_icon_name, "gtk_button_get_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_button_get_label, "gtk_button_get_label", LIBS);
+  gidLink(cast(void**)&gtk_button_get_use_underline, "gtk_button_get_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_button_set_can_shrink, "gtk_button_set_can_shrink", LIBS);
+  gidLink(cast(void**)&gtk_button_set_child, "gtk_button_set_child", LIBS);
+  gidLink(cast(void**)&gtk_button_set_has_frame, "gtk_button_set_has_frame", LIBS);
+  gidLink(cast(void**)&gtk_button_set_icon_name, "gtk_button_set_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_button_set_label, "gtk_button_set_label", LIBS);
+  gidLink(cast(void**)&gtk_button_set_use_underline, "gtk_button_set_use_underline", LIBS);
 
   // CClosureExpression
-  gidLink(gtk_cclosure_expression_get_type, "gtk_cclosure_expression_get_type", LIBS);
-  gidLink(gtk_cclosure_expression_new, "gtk_cclosure_expression_new", LIBS);
+  gidLink(cast(void**)&gtk_cclosure_expression_get_type, "gtk_cclosure_expression_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cclosure_expression_new, "gtk_cclosure_expression_new", LIBS);
 
   // Calendar
-  gidLink(gtk_calendar_get_type, "gtk_calendar_get_type", LIBS);
-  gidLink(gtk_calendar_new, "gtk_calendar_new", LIBS);
-  gidLink(gtk_calendar_clear_marks, "gtk_calendar_clear_marks", LIBS);
-  gidLink(gtk_calendar_get_date, "gtk_calendar_get_date", LIBS);
-  gidLink(gtk_calendar_get_day, "gtk_calendar_get_day", LIBS);
-  gidLink(gtk_calendar_get_day_is_marked, "gtk_calendar_get_day_is_marked", LIBS);
-  gidLink(gtk_calendar_get_month, "gtk_calendar_get_month", LIBS);
-  gidLink(gtk_calendar_get_show_day_names, "gtk_calendar_get_show_day_names", LIBS);
-  gidLink(gtk_calendar_get_show_heading, "gtk_calendar_get_show_heading", LIBS);
-  gidLink(gtk_calendar_get_show_week_numbers, "gtk_calendar_get_show_week_numbers", LIBS);
-  gidLink(gtk_calendar_get_year, "gtk_calendar_get_year", LIBS);
-  gidLink(gtk_calendar_mark_day, "gtk_calendar_mark_day", LIBS);
-  gidLink(gtk_calendar_select_day, "gtk_calendar_select_day", LIBS);
-  gidLink(gtk_calendar_set_day, "gtk_calendar_set_day", LIBS);
-  gidLink(gtk_calendar_set_month, "gtk_calendar_set_month", LIBS);
-  gidLink(gtk_calendar_set_show_day_names, "gtk_calendar_set_show_day_names", LIBS);
-  gidLink(gtk_calendar_set_show_heading, "gtk_calendar_set_show_heading", LIBS);
-  gidLink(gtk_calendar_set_show_week_numbers, "gtk_calendar_set_show_week_numbers", LIBS);
-  gidLink(gtk_calendar_set_year, "gtk_calendar_set_year", LIBS);
-  gidLink(gtk_calendar_unmark_day, "gtk_calendar_unmark_day", LIBS);
+  gidLink(cast(void**)&gtk_calendar_get_type, "gtk_calendar_get_type", LIBS);
+  gidLink(cast(void**)&gtk_calendar_new, "gtk_calendar_new", LIBS);
+  gidLink(cast(void**)&gtk_calendar_clear_marks, "gtk_calendar_clear_marks", LIBS);
+  gidLink(cast(void**)&gtk_calendar_get_date, "gtk_calendar_get_date", LIBS);
+  gidLink(cast(void**)&gtk_calendar_get_day, "gtk_calendar_get_day", LIBS);
+  gidLink(cast(void**)&gtk_calendar_get_day_is_marked, "gtk_calendar_get_day_is_marked", LIBS);
+  gidLink(cast(void**)&gtk_calendar_get_month, "gtk_calendar_get_month", LIBS);
+  gidLink(cast(void**)&gtk_calendar_get_show_day_names, "gtk_calendar_get_show_day_names", LIBS);
+  gidLink(cast(void**)&gtk_calendar_get_show_heading, "gtk_calendar_get_show_heading", LIBS);
+  gidLink(cast(void**)&gtk_calendar_get_show_week_numbers, "gtk_calendar_get_show_week_numbers", LIBS);
+  gidLink(cast(void**)&gtk_calendar_get_year, "gtk_calendar_get_year", LIBS);
+  gidLink(cast(void**)&gtk_calendar_mark_day, "gtk_calendar_mark_day", LIBS);
+  gidLink(cast(void**)&gtk_calendar_select_day, "gtk_calendar_select_day", LIBS);
+  gidLink(cast(void**)&gtk_calendar_set_day, "gtk_calendar_set_day", LIBS);
+  gidLink(cast(void**)&gtk_calendar_set_month, "gtk_calendar_set_month", LIBS);
+  gidLink(cast(void**)&gtk_calendar_set_show_day_names, "gtk_calendar_set_show_day_names", LIBS);
+  gidLink(cast(void**)&gtk_calendar_set_show_heading, "gtk_calendar_set_show_heading", LIBS);
+  gidLink(cast(void**)&gtk_calendar_set_show_week_numbers, "gtk_calendar_set_show_week_numbers", LIBS);
+  gidLink(cast(void**)&gtk_calendar_set_year, "gtk_calendar_set_year", LIBS);
+  gidLink(cast(void**)&gtk_calendar_unmark_day, "gtk_calendar_unmark_day", LIBS);
 
   // CallbackAction
-  gidLink(gtk_callback_action_get_type, "gtk_callback_action_get_type", LIBS);
-  gidLink(gtk_callback_action_new, "gtk_callback_action_new", LIBS);
+  gidLink(cast(void**)&gtk_callback_action_get_type, "gtk_callback_action_get_type", LIBS);
+  gidLink(cast(void**)&gtk_callback_action_new, "gtk_callback_action_new", LIBS);
 
   // CellArea
-  gidLink(gtk_cell_area_get_type, "gtk_cell_area_get_type", LIBS);
-  gidLink(gtk_cell_area_activate, "gtk_cell_area_activate", LIBS);
-  gidLink(gtk_cell_area_activate_cell, "gtk_cell_area_activate_cell", LIBS);
-  gidLink(gtk_cell_area_add, "gtk_cell_area_add", LIBS);
-  gidLink(gtk_cell_area_add_focus_sibling, "gtk_cell_area_add_focus_sibling", LIBS);
-  gidLink(gtk_cell_area_add_with_properties, "gtk_cell_area_add_with_properties", LIBS);
-  gidLink(gtk_cell_area_apply_attributes, "gtk_cell_area_apply_attributes", LIBS);
-  gidLink(gtk_cell_area_attribute_connect, "gtk_cell_area_attribute_connect", LIBS);
-  gidLink(gtk_cell_area_attribute_disconnect, "gtk_cell_area_attribute_disconnect", LIBS);
-  gidLink(gtk_cell_area_attribute_get_column, "gtk_cell_area_attribute_get_column", LIBS);
-  gidLink(gtk_cell_area_cell_get, "gtk_cell_area_cell_get", LIBS);
-  gidLink(gtk_cell_area_cell_get_property, "gtk_cell_area_cell_get_property", LIBS);
-  gidLink(gtk_cell_area_cell_get_valist, "gtk_cell_area_cell_get_valist", LIBS);
-  gidLink(gtk_cell_area_cell_set, "gtk_cell_area_cell_set", LIBS);
-  gidLink(gtk_cell_area_cell_set_property, "gtk_cell_area_cell_set_property", LIBS);
-  gidLink(gtk_cell_area_cell_set_valist, "gtk_cell_area_cell_set_valist", LIBS);
-  gidLink(gtk_cell_area_copy_context, "gtk_cell_area_copy_context", LIBS);
-  gidLink(gtk_cell_area_create_context, "gtk_cell_area_create_context", LIBS);
-  gidLink(gtk_cell_area_event, "gtk_cell_area_event", LIBS);
-  gidLink(gtk_cell_area_focus, "gtk_cell_area_focus", LIBS);
-  gidLink(gtk_cell_area_foreach, "gtk_cell_area_foreach", LIBS);
-  gidLink(gtk_cell_area_foreach_alloc, "gtk_cell_area_foreach_alloc", LIBS);
-  gidLink(gtk_cell_area_get_cell_allocation, "gtk_cell_area_get_cell_allocation", LIBS);
-  gidLink(gtk_cell_area_get_cell_at_position, "gtk_cell_area_get_cell_at_position", LIBS);
-  gidLink(gtk_cell_area_get_current_path_string, "gtk_cell_area_get_current_path_string", LIBS);
-  gidLink(gtk_cell_area_get_edit_widget, "gtk_cell_area_get_edit_widget", LIBS);
-  gidLink(gtk_cell_area_get_edited_cell, "gtk_cell_area_get_edited_cell", LIBS);
-  gidLink(gtk_cell_area_get_focus_cell, "gtk_cell_area_get_focus_cell", LIBS);
-  gidLink(gtk_cell_area_get_focus_from_sibling, "gtk_cell_area_get_focus_from_sibling", LIBS);
-  gidLink(gtk_cell_area_get_focus_siblings, "gtk_cell_area_get_focus_siblings", LIBS);
-  gidLink(gtk_cell_area_get_preferred_height, "gtk_cell_area_get_preferred_height", LIBS);
-  gidLink(gtk_cell_area_get_preferred_height_for_width, "gtk_cell_area_get_preferred_height_for_width", LIBS);
-  gidLink(gtk_cell_area_get_preferred_width, "gtk_cell_area_get_preferred_width", LIBS);
-  gidLink(gtk_cell_area_get_preferred_width_for_height, "gtk_cell_area_get_preferred_width_for_height", LIBS);
-  gidLink(gtk_cell_area_get_request_mode, "gtk_cell_area_get_request_mode", LIBS);
-  gidLink(gtk_cell_area_has_renderer, "gtk_cell_area_has_renderer", LIBS);
-  gidLink(gtk_cell_area_inner_cell_area, "gtk_cell_area_inner_cell_area", LIBS);
-  gidLink(gtk_cell_area_is_activatable, "gtk_cell_area_is_activatable", LIBS);
-  gidLink(gtk_cell_area_is_focus_sibling, "gtk_cell_area_is_focus_sibling", LIBS);
-  gidLink(gtk_cell_area_remove, "gtk_cell_area_remove", LIBS);
-  gidLink(gtk_cell_area_remove_focus_sibling, "gtk_cell_area_remove_focus_sibling", LIBS);
-  gidLink(gtk_cell_area_request_renderer, "gtk_cell_area_request_renderer", LIBS);
-  gidLink(gtk_cell_area_set_focus_cell, "gtk_cell_area_set_focus_cell", LIBS);
-  gidLink(gtk_cell_area_snapshot, "gtk_cell_area_snapshot", LIBS);
-  gidLink(gtk_cell_area_stop_editing, "gtk_cell_area_stop_editing", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_type, "gtk_cell_area_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_activate, "gtk_cell_area_activate", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_activate_cell, "gtk_cell_area_activate_cell", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_add, "gtk_cell_area_add", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_add_focus_sibling, "gtk_cell_area_add_focus_sibling", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_add_with_properties, "gtk_cell_area_add_with_properties", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_apply_attributes, "gtk_cell_area_apply_attributes", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_attribute_connect, "gtk_cell_area_attribute_connect", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_attribute_disconnect, "gtk_cell_area_attribute_disconnect", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_attribute_get_column, "gtk_cell_area_attribute_get_column", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_cell_get, "gtk_cell_area_cell_get", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_cell_get_property, "gtk_cell_area_cell_get_property", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_cell_get_valist, "gtk_cell_area_cell_get_valist", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_cell_set, "gtk_cell_area_cell_set", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_cell_set_property, "gtk_cell_area_cell_set_property", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_cell_set_valist, "gtk_cell_area_cell_set_valist", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_copy_context, "gtk_cell_area_copy_context", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_create_context, "gtk_cell_area_create_context", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_event, "gtk_cell_area_event", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_focus, "gtk_cell_area_focus", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_foreach, "gtk_cell_area_foreach", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_foreach_alloc, "gtk_cell_area_foreach_alloc", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_cell_allocation, "gtk_cell_area_get_cell_allocation", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_cell_at_position, "gtk_cell_area_get_cell_at_position", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_current_path_string, "gtk_cell_area_get_current_path_string", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_edit_widget, "gtk_cell_area_get_edit_widget", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_edited_cell, "gtk_cell_area_get_edited_cell", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_focus_cell, "gtk_cell_area_get_focus_cell", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_focus_from_sibling, "gtk_cell_area_get_focus_from_sibling", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_focus_siblings, "gtk_cell_area_get_focus_siblings", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_preferred_height, "gtk_cell_area_get_preferred_height", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_preferred_height_for_width, "gtk_cell_area_get_preferred_height_for_width", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_preferred_width, "gtk_cell_area_get_preferred_width", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_preferred_width_for_height, "gtk_cell_area_get_preferred_width_for_height", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_get_request_mode, "gtk_cell_area_get_request_mode", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_has_renderer, "gtk_cell_area_has_renderer", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_inner_cell_area, "gtk_cell_area_inner_cell_area", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_is_activatable, "gtk_cell_area_is_activatable", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_is_focus_sibling, "gtk_cell_area_is_focus_sibling", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_remove, "gtk_cell_area_remove", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_remove_focus_sibling, "gtk_cell_area_remove_focus_sibling", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_request_renderer, "gtk_cell_area_request_renderer", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_set_focus_cell, "gtk_cell_area_set_focus_cell", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_snapshot, "gtk_cell_area_snapshot", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_stop_editing, "gtk_cell_area_stop_editing", LIBS);
 
   // CellAreaBox
-  gidLink(gtk_cell_area_box_get_type, "gtk_cell_area_box_get_type", LIBS);
-  gidLink(gtk_cell_area_box_new, "gtk_cell_area_box_new", LIBS);
-  gidLink(gtk_cell_area_box_get_spacing, "gtk_cell_area_box_get_spacing", LIBS);
-  gidLink(gtk_cell_area_box_pack_end, "gtk_cell_area_box_pack_end", LIBS);
-  gidLink(gtk_cell_area_box_pack_start, "gtk_cell_area_box_pack_start", LIBS);
-  gidLink(gtk_cell_area_box_set_spacing, "gtk_cell_area_box_set_spacing", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_box_get_type, "gtk_cell_area_box_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_box_new, "gtk_cell_area_box_new", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_box_get_spacing, "gtk_cell_area_box_get_spacing", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_box_pack_end, "gtk_cell_area_box_pack_end", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_box_pack_start, "gtk_cell_area_box_pack_start", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_box_set_spacing, "gtk_cell_area_box_set_spacing", LIBS);
 
   // CellAreaClass
-  gidLink(gtk_cell_area_class_find_cell_property, "gtk_cell_area_class_find_cell_property", LIBS);
-  gidLink(gtk_cell_area_class_install_cell_property, "gtk_cell_area_class_install_cell_property", LIBS);
-  gidLink(gtk_cell_area_class_list_cell_properties, "gtk_cell_area_class_list_cell_properties", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_class_find_cell_property, "gtk_cell_area_class_find_cell_property", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_class_install_cell_property, "gtk_cell_area_class_install_cell_property", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_class_list_cell_properties, "gtk_cell_area_class_list_cell_properties", LIBS);
 
   // CellAreaContext
-  gidLink(gtk_cell_area_context_get_type, "gtk_cell_area_context_get_type", LIBS);
-  gidLink(gtk_cell_area_context_allocate, "gtk_cell_area_context_allocate", LIBS);
-  gidLink(gtk_cell_area_context_get_allocation, "gtk_cell_area_context_get_allocation", LIBS);
-  gidLink(gtk_cell_area_context_get_area, "gtk_cell_area_context_get_area", LIBS);
-  gidLink(gtk_cell_area_context_get_preferred_height, "gtk_cell_area_context_get_preferred_height", LIBS);
-  gidLink(gtk_cell_area_context_get_preferred_height_for_width, "gtk_cell_area_context_get_preferred_height_for_width", LIBS);
-  gidLink(gtk_cell_area_context_get_preferred_width, "gtk_cell_area_context_get_preferred_width", LIBS);
-  gidLink(gtk_cell_area_context_get_preferred_width_for_height, "gtk_cell_area_context_get_preferred_width_for_height", LIBS);
-  gidLink(gtk_cell_area_context_push_preferred_height, "gtk_cell_area_context_push_preferred_height", LIBS);
-  gidLink(gtk_cell_area_context_push_preferred_width, "gtk_cell_area_context_push_preferred_width", LIBS);
-  gidLink(gtk_cell_area_context_reset, "gtk_cell_area_context_reset", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_context_get_type, "gtk_cell_area_context_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_context_allocate, "gtk_cell_area_context_allocate", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_context_get_allocation, "gtk_cell_area_context_get_allocation", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_context_get_area, "gtk_cell_area_context_get_area", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_context_get_preferred_height, "gtk_cell_area_context_get_preferred_height", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_context_get_preferred_height_for_width, "gtk_cell_area_context_get_preferred_height_for_width", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_context_get_preferred_width, "gtk_cell_area_context_get_preferred_width", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_context_get_preferred_width_for_height, "gtk_cell_area_context_get_preferred_width_for_height", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_context_push_preferred_height, "gtk_cell_area_context_push_preferred_height", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_context_push_preferred_width, "gtk_cell_area_context_push_preferred_width", LIBS);
+  gidLink(cast(void**)&gtk_cell_area_context_reset, "gtk_cell_area_context_reset", LIBS);
 
   // CellEditable
-  gidLink(gtk_cell_editable_get_type, "gtk_cell_editable_get_type", LIBS);
-  gidLink(gtk_cell_editable_editing_done, "gtk_cell_editable_editing_done", LIBS);
-  gidLink(gtk_cell_editable_remove_widget, "gtk_cell_editable_remove_widget", LIBS);
-  gidLink(gtk_cell_editable_start_editing, "gtk_cell_editable_start_editing", LIBS);
+  gidLink(cast(void**)&gtk_cell_editable_get_type, "gtk_cell_editable_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_editable_editing_done, "gtk_cell_editable_editing_done", LIBS);
+  gidLink(cast(void**)&gtk_cell_editable_remove_widget, "gtk_cell_editable_remove_widget", LIBS);
+  gidLink(cast(void**)&gtk_cell_editable_start_editing, "gtk_cell_editable_start_editing", LIBS);
 
   // CellLayout
-  gidLink(gtk_cell_layout_get_type, "gtk_cell_layout_get_type", LIBS);
-  gidLink(gtk_cell_layout_add_attribute, "gtk_cell_layout_add_attribute", LIBS);
-  gidLink(gtk_cell_layout_clear, "gtk_cell_layout_clear", LIBS);
-  gidLink(gtk_cell_layout_clear_attributes, "gtk_cell_layout_clear_attributes", LIBS);
-  gidLink(gtk_cell_layout_get_area, "gtk_cell_layout_get_area", LIBS);
-  gidLink(gtk_cell_layout_get_cells, "gtk_cell_layout_get_cells", LIBS);
-  gidLink(gtk_cell_layout_pack_end, "gtk_cell_layout_pack_end", LIBS);
-  gidLink(gtk_cell_layout_pack_start, "gtk_cell_layout_pack_start", LIBS);
-  gidLink(gtk_cell_layout_reorder, "gtk_cell_layout_reorder", LIBS);
-  gidLink(gtk_cell_layout_set_attributes, "gtk_cell_layout_set_attributes", LIBS);
-  gidLink(gtk_cell_layout_set_cell_data_func, "gtk_cell_layout_set_cell_data_func", LIBS);
+  gidLink(cast(void**)&gtk_cell_layout_get_type, "gtk_cell_layout_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_layout_add_attribute, "gtk_cell_layout_add_attribute", LIBS);
+  gidLink(cast(void**)&gtk_cell_layout_clear, "gtk_cell_layout_clear", LIBS);
+  gidLink(cast(void**)&gtk_cell_layout_clear_attributes, "gtk_cell_layout_clear_attributes", LIBS);
+  gidLink(cast(void**)&gtk_cell_layout_get_area, "gtk_cell_layout_get_area", LIBS);
+  gidLink(cast(void**)&gtk_cell_layout_get_cells, "gtk_cell_layout_get_cells", LIBS);
+  gidLink(cast(void**)&gtk_cell_layout_pack_end, "gtk_cell_layout_pack_end", LIBS);
+  gidLink(cast(void**)&gtk_cell_layout_pack_start, "gtk_cell_layout_pack_start", LIBS);
+  gidLink(cast(void**)&gtk_cell_layout_reorder, "gtk_cell_layout_reorder", LIBS);
+  gidLink(cast(void**)&gtk_cell_layout_set_attributes, "gtk_cell_layout_set_attributes", LIBS);
+  gidLink(cast(void**)&gtk_cell_layout_set_cell_data_func, "gtk_cell_layout_set_cell_data_func", LIBS);
 
   // CellRenderer
-  gidLink(gtk_cell_renderer_get_type, "gtk_cell_renderer_get_type", LIBS);
-  gidLink(gtk_cell_renderer_activate, "gtk_cell_renderer_activate", LIBS);
-  gidLink(gtk_cell_renderer_get_aligned_area, "gtk_cell_renderer_get_aligned_area", LIBS);
-  gidLink(gtk_cell_renderer_get_alignment, "gtk_cell_renderer_get_alignment", LIBS);
-  gidLink(gtk_cell_renderer_get_fixed_size, "gtk_cell_renderer_get_fixed_size", LIBS);
-  gidLink(gtk_cell_renderer_get_is_expanded, "gtk_cell_renderer_get_is_expanded", LIBS);
-  gidLink(gtk_cell_renderer_get_is_expander, "gtk_cell_renderer_get_is_expander", LIBS);
-  gidLink(gtk_cell_renderer_get_padding, "gtk_cell_renderer_get_padding", LIBS);
-  gidLink(gtk_cell_renderer_get_preferred_height, "gtk_cell_renderer_get_preferred_height", LIBS);
-  gidLink(gtk_cell_renderer_get_preferred_height_for_width, "gtk_cell_renderer_get_preferred_height_for_width", LIBS);
-  gidLink(gtk_cell_renderer_get_preferred_size, "gtk_cell_renderer_get_preferred_size", LIBS);
-  gidLink(gtk_cell_renderer_get_preferred_width, "gtk_cell_renderer_get_preferred_width", LIBS);
-  gidLink(gtk_cell_renderer_get_preferred_width_for_height, "gtk_cell_renderer_get_preferred_width_for_height", LIBS);
-  gidLink(gtk_cell_renderer_get_request_mode, "gtk_cell_renderer_get_request_mode", LIBS);
-  gidLink(gtk_cell_renderer_get_sensitive, "gtk_cell_renderer_get_sensitive", LIBS);
-  gidLink(gtk_cell_renderer_get_state, "gtk_cell_renderer_get_state", LIBS);
-  gidLink(gtk_cell_renderer_get_visible, "gtk_cell_renderer_get_visible", LIBS);
-  gidLink(gtk_cell_renderer_is_activatable, "gtk_cell_renderer_is_activatable", LIBS);
-  gidLink(gtk_cell_renderer_set_alignment, "gtk_cell_renderer_set_alignment", LIBS);
-  gidLink(gtk_cell_renderer_set_fixed_size, "gtk_cell_renderer_set_fixed_size", LIBS);
-  gidLink(gtk_cell_renderer_set_is_expanded, "gtk_cell_renderer_set_is_expanded", LIBS);
-  gidLink(gtk_cell_renderer_set_is_expander, "gtk_cell_renderer_set_is_expander", LIBS);
-  gidLink(gtk_cell_renderer_set_padding, "gtk_cell_renderer_set_padding", LIBS);
-  gidLink(gtk_cell_renderer_set_sensitive, "gtk_cell_renderer_set_sensitive", LIBS);
-  gidLink(gtk_cell_renderer_set_visible, "gtk_cell_renderer_set_visible", LIBS);
-  gidLink(gtk_cell_renderer_snapshot, "gtk_cell_renderer_snapshot", LIBS);
-  gidLink(gtk_cell_renderer_start_editing, "gtk_cell_renderer_start_editing", LIBS);
-  gidLink(gtk_cell_renderer_stop_editing, "gtk_cell_renderer_stop_editing", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_type, "gtk_cell_renderer_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_activate, "gtk_cell_renderer_activate", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_aligned_area, "gtk_cell_renderer_get_aligned_area", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_alignment, "gtk_cell_renderer_get_alignment", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_fixed_size, "gtk_cell_renderer_get_fixed_size", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_is_expanded, "gtk_cell_renderer_get_is_expanded", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_is_expander, "gtk_cell_renderer_get_is_expander", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_padding, "gtk_cell_renderer_get_padding", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_preferred_height, "gtk_cell_renderer_get_preferred_height", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_preferred_height_for_width, "gtk_cell_renderer_get_preferred_height_for_width", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_preferred_size, "gtk_cell_renderer_get_preferred_size", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_preferred_width, "gtk_cell_renderer_get_preferred_width", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_preferred_width_for_height, "gtk_cell_renderer_get_preferred_width_for_height", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_request_mode, "gtk_cell_renderer_get_request_mode", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_sensitive, "gtk_cell_renderer_get_sensitive", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_state, "gtk_cell_renderer_get_state", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_get_visible, "gtk_cell_renderer_get_visible", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_is_activatable, "gtk_cell_renderer_is_activatable", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_set_alignment, "gtk_cell_renderer_set_alignment", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_set_fixed_size, "gtk_cell_renderer_set_fixed_size", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_set_is_expanded, "gtk_cell_renderer_set_is_expanded", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_set_is_expander, "gtk_cell_renderer_set_is_expander", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_set_padding, "gtk_cell_renderer_set_padding", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_set_sensitive, "gtk_cell_renderer_set_sensitive", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_set_visible, "gtk_cell_renderer_set_visible", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_snapshot, "gtk_cell_renderer_snapshot", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_start_editing, "gtk_cell_renderer_start_editing", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_stop_editing, "gtk_cell_renderer_stop_editing", LIBS);
 
   // CellRendererAccel
-  gidLink(gtk_cell_renderer_accel_get_type, "gtk_cell_renderer_accel_get_type", LIBS);
-  gidLink(gtk_cell_renderer_accel_new, "gtk_cell_renderer_accel_new", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_accel_get_type, "gtk_cell_renderer_accel_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_accel_new, "gtk_cell_renderer_accel_new", LIBS);
 
   // CellRendererCombo
-  gidLink(gtk_cell_renderer_combo_get_type, "gtk_cell_renderer_combo_get_type", LIBS);
-  gidLink(gtk_cell_renderer_combo_new, "gtk_cell_renderer_combo_new", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_combo_get_type, "gtk_cell_renderer_combo_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_combo_new, "gtk_cell_renderer_combo_new", LIBS);
 
   // CellRendererPixbuf
-  gidLink(gtk_cell_renderer_pixbuf_get_type, "gtk_cell_renderer_pixbuf_get_type", LIBS);
-  gidLink(gtk_cell_renderer_pixbuf_new, "gtk_cell_renderer_pixbuf_new", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_pixbuf_get_type, "gtk_cell_renderer_pixbuf_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_pixbuf_new, "gtk_cell_renderer_pixbuf_new", LIBS);
 
   // CellRendererProgress
-  gidLink(gtk_cell_renderer_progress_get_type, "gtk_cell_renderer_progress_get_type", LIBS);
-  gidLink(gtk_cell_renderer_progress_new, "gtk_cell_renderer_progress_new", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_progress_get_type, "gtk_cell_renderer_progress_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_progress_new, "gtk_cell_renderer_progress_new", LIBS);
 
   // CellRendererSpin
-  gidLink(gtk_cell_renderer_spin_get_type, "gtk_cell_renderer_spin_get_type", LIBS);
-  gidLink(gtk_cell_renderer_spin_new, "gtk_cell_renderer_spin_new", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_spin_get_type, "gtk_cell_renderer_spin_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_spin_new, "gtk_cell_renderer_spin_new", LIBS);
 
   // CellRendererSpinner
-  gidLink(gtk_cell_renderer_spinner_get_type, "gtk_cell_renderer_spinner_get_type", LIBS);
-  gidLink(gtk_cell_renderer_spinner_new, "gtk_cell_renderer_spinner_new", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_spinner_get_type, "gtk_cell_renderer_spinner_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_spinner_new, "gtk_cell_renderer_spinner_new", LIBS);
 
   // CellRendererText
-  gidLink(gtk_cell_renderer_text_get_type, "gtk_cell_renderer_text_get_type", LIBS);
-  gidLink(gtk_cell_renderer_text_new, "gtk_cell_renderer_text_new", LIBS);
-  gidLink(gtk_cell_renderer_text_set_fixed_height_from_font, "gtk_cell_renderer_text_set_fixed_height_from_font", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_text_get_type, "gtk_cell_renderer_text_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_text_new, "gtk_cell_renderer_text_new", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_text_set_fixed_height_from_font, "gtk_cell_renderer_text_set_fixed_height_from_font", LIBS);
 
   // CellRendererToggle
-  gidLink(gtk_cell_renderer_toggle_get_type, "gtk_cell_renderer_toggle_get_type", LIBS);
-  gidLink(gtk_cell_renderer_toggle_new, "gtk_cell_renderer_toggle_new", LIBS);
-  gidLink(gtk_cell_renderer_toggle_get_activatable, "gtk_cell_renderer_toggle_get_activatable", LIBS);
-  gidLink(gtk_cell_renderer_toggle_get_active, "gtk_cell_renderer_toggle_get_active", LIBS);
-  gidLink(gtk_cell_renderer_toggle_get_radio, "gtk_cell_renderer_toggle_get_radio", LIBS);
-  gidLink(gtk_cell_renderer_toggle_set_activatable, "gtk_cell_renderer_toggle_set_activatable", LIBS);
-  gidLink(gtk_cell_renderer_toggle_set_active, "gtk_cell_renderer_toggle_set_active", LIBS);
-  gidLink(gtk_cell_renderer_toggle_set_radio, "gtk_cell_renderer_toggle_set_radio", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_toggle_get_type, "gtk_cell_renderer_toggle_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_toggle_new, "gtk_cell_renderer_toggle_new", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_toggle_get_activatable, "gtk_cell_renderer_toggle_get_activatable", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_toggle_get_active, "gtk_cell_renderer_toggle_get_active", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_toggle_get_radio, "gtk_cell_renderer_toggle_get_radio", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_toggle_set_activatable, "gtk_cell_renderer_toggle_set_activatable", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_toggle_set_active, "gtk_cell_renderer_toggle_set_active", LIBS);
+  gidLink(cast(void**)&gtk_cell_renderer_toggle_set_radio, "gtk_cell_renderer_toggle_set_radio", LIBS);
 
   // CellView
-  gidLink(gtk_cell_view_get_type, "gtk_cell_view_get_type", LIBS);
-  gidLink(gtk_cell_view_new, "gtk_cell_view_new", LIBS);
-  gidLink(gtk_cell_view_new_with_context, "gtk_cell_view_new_with_context", LIBS);
-  gidLink(gtk_cell_view_new_with_markup, "gtk_cell_view_new_with_markup", LIBS);
-  gidLink(gtk_cell_view_new_with_text, "gtk_cell_view_new_with_text", LIBS);
-  gidLink(gtk_cell_view_new_with_texture, "gtk_cell_view_new_with_texture", LIBS);
-  gidLink(gtk_cell_view_get_displayed_row, "gtk_cell_view_get_displayed_row", LIBS);
-  gidLink(gtk_cell_view_get_draw_sensitive, "gtk_cell_view_get_draw_sensitive", LIBS);
-  gidLink(gtk_cell_view_get_fit_model, "gtk_cell_view_get_fit_model", LIBS);
-  gidLink(gtk_cell_view_get_model, "gtk_cell_view_get_model", LIBS);
-  gidLink(gtk_cell_view_set_displayed_row, "gtk_cell_view_set_displayed_row", LIBS);
-  gidLink(gtk_cell_view_set_draw_sensitive, "gtk_cell_view_set_draw_sensitive", LIBS);
-  gidLink(gtk_cell_view_set_fit_model, "gtk_cell_view_set_fit_model", LIBS);
-  gidLink(gtk_cell_view_set_model, "gtk_cell_view_set_model", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_get_type, "gtk_cell_view_get_type", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_new, "gtk_cell_view_new", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_new_with_context, "gtk_cell_view_new_with_context", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_new_with_markup, "gtk_cell_view_new_with_markup", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_new_with_text, "gtk_cell_view_new_with_text", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_new_with_texture, "gtk_cell_view_new_with_texture", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_get_displayed_row, "gtk_cell_view_get_displayed_row", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_get_draw_sensitive, "gtk_cell_view_get_draw_sensitive", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_get_fit_model, "gtk_cell_view_get_fit_model", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_get_model, "gtk_cell_view_get_model", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_set_displayed_row, "gtk_cell_view_set_displayed_row", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_set_draw_sensitive, "gtk_cell_view_set_draw_sensitive", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_set_fit_model, "gtk_cell_view_set_fit_model", LIBS);
+  gidLink(cast(void**)&gtk_cell_view_set_model, "gtk_cell_view_set_model", LIBS);
 
   // CenterBox
-  gidLink(gtk_center_box_get_type, "gtk_center_box_get_type", LIBS);
-  gidLink(gtk_center_box_new, "gtk_center_box_new", LIBS);
-  gidLink(gtk_center_box_get_baseline_position, "gtk_center_box_get_baseline_position", LIBS);
-  gidLink(gtk_center_box_get_center_widget, "gtk_center_box_get_center_widget", LIBS);
-  gidLink(gtk_center_box_get_end_widget, "gtk_center_box_get_end_widget", LIBS);
-  gidLink(gtk_center_box_get_shrink_center_last, "gtk_center_box_get_shrink_center_last", LIBS);
-  gidLink(gtk_center_box_get_start_widget, "gtk_center_box_get_start_widget", LIBS);
-  gidLink(gtk_center_box_set_baseline_position, "gtk_center_box_set_baseline_position", LIBS);
-  gidLink(gtk_center_box_set_center_widget, "gtk_center_box_set_center_widget", LIBS);
-  gidLink(gtk_center_box_set_end_widget, "gtk_center_box_set_end_widget", LIBS);
-  gidLink(gtk_center_box_set_shrink_center_last, "gtk_center_box_set_shrink_center_last", LIBS);
-  gidLink(gtk_center_box_set_start_widget, "gtk_center_box_set_start_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_box_get_type, "gtk_center_box_get_type", LIBS);
+  gidLink(cast(void**)&gtk_center_box_new, "gtk_center_box_new", LIBS);
+  gidLink(cast(void**)&gtk_center_box_get_baseline_position, "gtk_center_box_get_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_center_box_get_center_widget, "gtk_center_box_get_center_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_box_get_end_widget, "gtk_center_box_get_end_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_box_get_shrink_center_last, "gtk_center_box_get_shrink_center_last", LIBS);
+  gidLink(cast(void**)&gtk_center_box_get_start_widget, "gtk_center_box_get_start_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_box_set_baseline_position, "gtk_center_box_set_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_center_box_set_center_widget, "gtk_center_box_set_center_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_box_set_end_widget, "gtk_center_box_set_end_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_box_set_shrink_center_last, "gtk_center_box_set_shrink_center_last", LIBS);
+  gidLink(cast(void**)&gtk_center_box_set_start_widget, "gtk_center_box_set_start_widget", LIBS);
 
   // CenterLayout
-  gidLink(gtk_center_layout_get_type, "gtk_center_layout_get_type", LIBS);
-  gidLink(gtk_center_layout_new, "gtk_center_layout_new", LIBS);
-  gidLink(gtk_center_layout_get_baseline_position, "gtk_center_layout_get_baseline_position", LIBS);
-  gidLink(gtk_center_layout_get_center_widget, "gtk_center_layout_get_center_widget", LIBS);
-  gidLink(gtk_center_layout_get_end_widget, "gtk_center_layout_get_end_widget", LIBS);
-  gidLink(gtk_center_layout_get_orientation, "gtk_center_layout_get_orientation", LIBS);
-  gidLink(gtk_center_layout_get_shrink_center_last, "gtk_center_layout_get_shrink_center_last", LIBS);
-  gidLink(gtk_center_layout_get_start_widget, "gtk_center_layout_get_start_widget", LIBS);
-  gidLink(gtk_center_layout_set_baseline_position, "gtk_center_layout_set_baseline_position", LIBS);
-  gidLink(gtk_center_layout_set_center_widget, "gtk_center_layout_set_center_widget", LIBS);
-  gidLink(gtk_center_layout_set_end_widget, "gtk_center_layout_set_end_widget", LIBS);
-  gidLink(gtk_center_layout_set_orientation, "gtk_center_layout_set_orientation", LIBS);
-  gidLink(gtk_center_layout_set_shrink_center_last, "gtk_center_layout_set_shrink_center_last", LIBS);
-  gidLink(gtk_center_layout_set_start_widget, "gtk_center_layout_set_start_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_get_type, "gtk_center_layout_get_type", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_new, "gtk_center_layout_new", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_get_baseline_position, "gtk_center_layout_get_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_get_center_widget, "gtk_center_layout_get_center_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_get_end_widget, "gtk_center_layout_get_end_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_get_orientation, "gtk_center_layout_get_orientation", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_get_shrink_center_last, "gtk_center_layout_get_shrink_center_last", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_get_start_widget, "gtk_center_layout_get_start_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_set_baseline_position, "gtk_center_layout_set_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_set_center_widget, "gtk_center_layout_set_center_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_set_end_widget, "gtk_center_layout_set_end_widget", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_set_orientation, "gtk_center_layout_set_orientation", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_set_shrink_center_last, "gtk_center_layout_set_shrink_center_last", LIBS);
+  gidLink(cast(void**)&gtk_center_layout_set_start_widget, "gtk_center_layout_set_start_widget", LIBS);
 
   // CheckButton
-  gidLink(gtk_check_button_get_type, "gtk_check_button_get_type", LIBS);
-  gidLink(gtk_check_button_new, "gtk_check_button_new", LIBS);
-  gidLink(gtk_check_button_new_with_label, "gtk_check_button_new_with_label", LIBS);
-  gidLink(gtk_check_button_new_with_mnemonic, "gtk_check_button_new_with_mnemonic", LIBS);
-  gidLink(gtk_check_button_get_active, "gtk_check_button_get_active", LIBS);
-  gidLink(gtk_check_button_get_child, "gtk_check_button_get_child", LIBS);
-  gidLink(gtk_check_button_get_inconsistent, "gtk_check_button_get_inconsistent", LIBS);
-  gidLink(gtk_check_button_get_label, "gtk_check_button_get_label", LIBS);
-  gidLink(gtk_check_button_get_use_underline, "gtk_check_button_get_use_underline", LIBS);
-  gidLink(gtk_check_button_set_active, "gtk_check_button_set_active", LIBS);
-  gidLink(gtk_check_button_set_child, "gtk_check_button_set_child", LIBS);
-  gidLink(gtk_check_button_set_group, "gtk_check_button_set_group", LIBS);
-  gidLink(gtk_check_button_set_inconsistent, "gtk_check_button_set_inconsistent", LIBS);
-  gidLink(gtk_check_button_set_label, "gtk_check_button_set_label", LIBS);
-  gidLink(gtk_check_button_set_use_underline, "gtk_check_button_set_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_check_button_get_type, "gtk_check_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_check_button_new, "gtk_check_button_new", LIBS);
+  gidLink(cast(void**)&gtk_check_button_new_with_label, "gtk_check_button_new_with_label", LIBS);
+  gidLink(cast(void**)&gtk_check_button_new_with_mnemonic, "gtk_check_button_new_with_mnemonic", LIBS);
+  gidLink(cast(void**)&gtk_check_button_get_active, "gtk_check_button_get_active", LIBS);
+  gidLink(cast(void**)&gtk_check_button_get_child, "gtk_check_button_get_child", LIBS);
+  gidLink(cast(void**)&gtk_check_button_get_inconsistent, "gtk_check_button_get_inconsistent", LIBS);
+  gidLink(cast(void**)&gtk_check_button_get_label, "gtk_check_button_get_label", LIBS);
+  gidLink(cast(void**)&gtk_check_button_get_use_underline, "gtk_check_button_get_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_check_button_set_active, "gtk_check_button_set_active", LIBS);
+  gidLink(cast(void**)&gtk_check_button_set_child, "gtk_check_button_set_child", LIBS);
+  gidLink(cast(void**)&gtk_check_button_set_group, "gtk_check_button_set_group", LIBS);
+  gidLink(cast(void**)&gtk_check_button_set_inconsistent, "gtk_check_button_set_inconsistent", LIBS);
+  gidLink(cast(void**)&gtk_check_button_set_label, "gtk_check_button_set_label", LIBS);
+  gidLink(cast(void**)&gtk_check_button_set_use_underline, "gtk_check_button_set_use_underline", LIBS);
 
   // ClosureExpression
-  gidLink(gtk_closure_expression_get_type, "gtk_closure_expression_get_type", LIBS);
-  gidLink(gtk_closure_expression_new, "gtk_closure_expression_new", LIBS);
+  gidLink(cast(void**)&gtk_closure_expression_get_type, "gtk_closure_expression_get_type", LIBS);
+  gidLink(cast(void**)&gtk_closure_expression_new, "gtk_closure_expression_new", LIBS);
 
   // ColorButton
-  gidLink(gtk_color_button_get_type, "gtk_color_button_get_type", LIBS);
-  gidLink(gtk_color_button_new, "gtk_color_button_new", LIBS);
-  gidLink(gtk_color_button_new_with_rgba, "gtk_color_button_new_with_rgba", LIBS);
-  gidLink(gtk_color_button_get_modal, "gtk_color_button_get_modal", LIBS);
-  gidLink(gtk_color_button_get_title, "gtk_color_button_get_title", LIBS);
-  gidLink(gtk_color_button_set_modal, "gtk_color_button_set_modal", LIBS);
-  gidLink(gtk_color_button_set_title, "gtk_color_button_set_title", LIBS);
+  gidLink(cast(void**)&gtk_color_button_get_type, "gtk_color_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_color_button_new, "gtk_color_button_new", LIBS);
+  gidLink(cast(void**)&gtk_color_button_new_with_rgba, "gtk_color_button_new_with_rgba", LIBS);
+  gidLink(cast(void**)&gtk_color_button_get_modal, "gtk_color_button_get_modal", LIBS);
+  gidLink(cast(void**)&gtk_color_button_get_title, "gtk_color_button_get_title", LIBS);
+  gidLink(cast(void**)&gtk_color_button_set_modal, "gtk_color_button_set_modal", LIBS);
+  gidLink(cast(void**)&gtk_color_button_set_title, "gtk_color_button_set_title", LIBS);
 
   // ColorChooser
-  gidLink(gtk_color_chooser_get_type, "gtk_color_chooser_get_type", LIBS);
-  gidLink(gtk_color_chooser_add_palette, "gtk_color_chooser_add_palette", LIBS);
-  gidLink(gtk_color_chooser_get_rgba, "gtk_color_chooser_get_rgba", LIBS);
-  gidLink(gtk_color_chooser_get_use_alpha, "gtk_color_chooser_get_use_alpha", LIBS);
-  gidLink(gtk_color_chooser_set_rgba, "gtk_color_chooser_set_rgba", LIBS);
-  gidLink(gtk_color_chooser_set_use_alpha, "gtk_color_chooser_set_use_alpha", LIBS);
+  gidLink(cast(void**)&gtk_color_chooser_get_type, "gtk_color_chooser_get_type", LIBS);
+  gidLink(cast(void**)&gtk_color_chooser_add_palette, "gtk_color_chooser_add_palette", LIBS);
+  gidLink(cast(void**)&gtk_color_chooser_get_rgba, "gtk_color_chooser_get_rgba", LIBS);
+  gidLink(cast(void**)&gtk_color_chooser_get_use_alpha, "gtk_color_chooser_get_use_alpha", LIBS);
+  gidLink(cast(void**)&gtk_color_chooser_set_rgba, "gtk_color_chooser_set_rgba", LIBS);
+  gidLink(cast(void**)&gtk_color_chooser_set_use_alpha, "gtk_color_chooser_set_use_alpha", LIBS);
 
   // ColorChooserDialog
-  gidLink(gtk_color_chooser_dialog_get_type, "gtk_color_chooser_dialog_get_type", LIBS);
-  gidLink(gtk_color_chooser_dialog_new, "gtk_color_chooser_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_color_chooser_dialog_get_type, "gtk_color_chooser_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_color_chooser_dialog_new, "gtk_color_chooser_dialog_new", LIBS);
 
   // ColorChooserWidget
-  gidLink(gtk_color_chooser_widget_get_type, "gtk_color_chooser_widget_get_type", LIBS);
-  gidLink(gtk_color_chooser_widget_new, "gtk_color_chooser_widget_new", LIBS);
+  gidLink(cast(void**)&gtk_color_chooser_widget_get_type, "gtk_color_chooser_widget_get_type", LIBS);
+  gidLink(cast(void**)&gtk_color_chooser_widget_new, "gtk_color_chooser_widget_new", LIBS);
 
   // ColorDialog
-  gidLink(gtk_color_dialog_get_type, "gtk_color_dialog_get_type", LIBS);
-  gidLink(gtk_color_dialog_new, "gtk_color_dialog_new", LIBS);
-  gidLink(gtk_color_dialog_choose_rgba, "gtk_color_dialog_choose_rgba", LIBS);
-  gidLink(gtk_color_dialog_choose_rgba_finish, "gtk_color_dialog_choose_rgba_finish", LIBS);
-  gidLink(gtk_color_dialog_get_modal, "gtk_color_dialog_get_modal", LIBS);
-  gidLink(gtk_color_dialog_get_title, "gtk_color_dialog_get_title", LIBS);
-  gidLink(gtk_color_dialog_get_with_alpha, "gtk_color_dialog_get_with_alpha", LIBS);
-  gidLink(gtk_color_dialog_set_modal, "gtk_color_dialog_set_modal", LIBS);
-  gidLink(gtk_color_dialog_set_title, "gtk_color_dialog_set_title", LIBS);
-  gidLink(gtk_color_dialog_set_with_alpha, "gtk_color_dialog_set_with_alpha", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_get_type, "gtk_color_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_new, "gtk_color_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_choose_rgba, "gtk_color_dialog_choose_rgba", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_choose_rgba_finish, "gtk_color_dialog_choose_rgba_finish", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_get_modal, "gtk_color_dialog_get_modal", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_get_title, "gtk_color_dialog_get_title", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_get_with_alpha, "gtk_color_dialog_get_with_alpha", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_set_modal, "gtk_color_dialog_set_modal", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_set_title, "gtk_color_dialog_set_title", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_set_with_alpha, "gtk_color_dialog_set_with_alpha", LIBS);
 
   // ColorDialogButton
-  gidLink(gtk_color_dialog_button_get_type, "gtk_color_dialog_button_get_type", LIBS);
-  gidLink(gtk_color_dialog_button_new, "gtk_color_dialog_button_new", LIBS);
-  gidLink(gtk_color_dialog_button_get_dialog, "gtk_color_dialog_button_get_dialog", LIBS);
-  gidLink(gtk_color_dialog_button_get_rgba, "gtk_color_dialog_button_get_rgba", LIBS);
-  gidLink(gtk_color_dialog_button_set_dialog, "gtk_color_dialog_button_set_dialog", LIBS);
-  gidLink(gtk_color_dialog_button_set_rgba, "gtk_color_dialog_button_set_rgba", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_button_get_type, "gtk_color_dialog_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_button_new, "gtk_color_dialog_button_new", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_button_get_dialog, "gtk_color_dialog_button_get_dialog", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_button_get_rgba, "gtk_color_dialog_button_get_rgba", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_button_set_dialog, "gtk_color_dialog_button_set_dialog", LIBS);
+  gidLink(cast(void**)&gtk_color_dialog_button_set_rgba, "gtk_color_dialog_button_set_rgba", LIBS);
 
   // ColumnView
-  gidLink(gtk_column_view_get_type, "gtk_column_view_get_type", LIBS);
-  gidLink(gtk_column_view_new, "gtk_column_view_new", LIBS);
-  gidLink(gtk_column_view_append_column, "gtk_column_view_append_column", LIBS);
-  gidLink(gtk_column_view_get_columns, "gtk_column_view_get_columns", LIBS);
-  gidLink(gtk_column_view_get_enable_rubberband, "gtk_column_view_get_enable_rubberband", LIBS);
-  gidLink(gtk_column_view_get_header_factory, "gtk_column_view_get_header_factory", LIBS);
-  gidLink(gtk_column_view_get_model, "gtk_column_view_get_model", LIBS);
-  gidLink(gtk_column_view_get_reorderable, "gtk_column_view_get_reorderable", LIBS);
-  gidLink(gtk_column_view_get_row_factory, "gtk_column_view_get_row_factory", LIBS);
-  gidLink(gtk_column_view_get_show_column_separators, "gtk_column_view_get_show_column_separators", LIBS);
-  gidLink(gtk_column_view_get_show_row_separators, "gtk_column_view_get_show_row_separators", LIBS);
-  gidLink(gtk_column_view_get_single_click_activate, "gtk_column_view_get_single_click_activate", LIBS);
-  gidLink(gtk_column_view_get_sorter, "gtk_column_view_get_sorter", LIBS);
-  gidLink(gtk_column_view_get_tab_behavior, "gtk_column_view_get_tab_behavior", LIBS);
-  gidLink(gtk_column_view_insert_column, "gtk_column_view_insert_column", LIBS);
-  gidLink(gtk_column_view_remove_column, "gtk_column_view_remove_column", LIBS);
-  gidLink(gtk_column_view_scroll_to, "gtk_column_view_scroll_to", LIBS);
-  gidLink(gtk_column_view_set_enable_rubberband, "gtk_column_view_set_enable_rubberband", LIBS);
-  gidLink(gtk_column_view_set_header_factory, "gtk_column_view_set_header_factory", LIBS);
-  gidLink(gtk_column_view_set_model, "gtk_column_view_set_model", LIBS);
-  gidLink(gtk_column_view_set_reorderable, "gtk_column_view_set_reorderable", LIBS);
-  gidLink(gtk_column_view_set_row_factory, "gtk_column_view_set_row_factory", LIBS);
-  gidLink(gtk_column_view_set_show_column_separators, "gtk_column_view_set_show_column_separators", LIBS);
-  gidLink(gtk_column_view_set_show_row_separators, "gtk_column_view_set_show_row_separators", LIBS);
-  gidLink(gtk_column_view_set_single_click_activate, "gtk_column_view_set_single_click_activate", LIBS);
-  gidLink(gtk_column_view_set_tab_behavior, "gtk_column_view_set_tab_behavior", LIBS);
-  gidLink(gtk_column_view_sort_by_column, "gtk_column_view_sort_by_column", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_type, "gtk_column_view_get_type", LIBS);
+  gidLink(cast(void**)&gtk_column_view_new, "gtk_column_view_new", LIBS);
+  gidLink(cast(void**)&gtk_column_view_append_column, "gtk_column_view_append_column", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_columns, "gtk_column_view_get_columns", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_enable_rubberband, "gtk_column_view_get_enable_rubberband", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_header_factory, "gtk_column_view_get_header_factory", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_model, "gtk_column_view_get_model", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_reorderable, "gtk_column_view_get_reorderable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_row_factory, "gtk_column_view_get_row_factory", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_show_column_separators, "gtk_column_view_get_show_column_separators", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_show_row_separators, "gtk_column_view_get_show_row_separators", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_single_click_activate, "gtk_column_view_get_single_click_activate", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_sorter, "gtk_column_view_get_sorter", LIBS);
+  gidLink(cast(void**)&gtk_column_view_get_tab_behavior, "gtk_column_view_get_tab_behavior", LIBS);
+  gidLink(cast(void**)&gtk_column_view_insert_column, "gtk_column_view_insert_column", LIBS);
+  gidLink(cast(void**)&gtk_column_view_remove_column, "gtk_column_view_remove_column", LIBS);
+  gidLink(cast(void**)&gtk_column_view_scroll_to, "gtk_column_view_scroll_to", LIBS);
+  gidLink(cast(void**)&gtk_column_view_set_enable_rubberband, "gtk_column_view_set_enable_rubberband", LIBS);
+  gidLink(cast(void**)&gtk_column_view_set_header_factory, "gtk_column_view_set_header_factory", LIBS);
+  gidLink(cast(void**)&gtk_column_view_set_model, "gtk_column_view_set_model", LIBS);
+  gidLink(cast(void**)&gtk_column_view_set_reorderable, "gtk_column_view_set_reorderable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_set_row_factory, "gtk_column_view_set_row_factory", LIBS);
+  gidLink(cast(void**)&gtk_column_view_set_show_column_separators, "gtk_column_view_set_show_column_separators", LIBS);
+  gidLink(cast(void**)&gtk_column_view_set_show_row_separators, "gtk_column_view_set_show_row_separators", LIBS);
+  gidLink(cast(void**)&gtk_column_view_set_single_click_activate, "gtk_column_view_set_single_click_activate", LIBS);
+  gidLink(cast(void**)&gtk_column_view_set_tab_behavior, "gtk_column_view_set_tab_behavior", LIBS);
+  gidLink(cast(void**)&gtk_column_view_sort_by_column, "gtk_column_view_sort_by_column", LIBS);
 
   // ColumnViewCell
-  gidLink(gtk_column_view_cell_get_type, "gtk_column_view_cell_get_type", LIBS);
-  gidLink(gtk_column_view_cell_get_child, "gtk_column_view_cell_get_child", LIBS);
-  gidLink(gtk_column_view_cell_get_focusable, "gtk_column_view_cell_get_focusable", LIBS);
-  gidLink(gtk_column_view_cell_get_item, "gtk_column_view_cell_get_item", LIBS);
-  gidLink(gtk_column_view_cell_get_position, "gtk_column_view_cell_get_position", LIBS);
-  gidLink(gtk_column_view_cell_get_selected, "gtk_column_view_cell_get_selected", LIBS);
-  gidLink(gtk_column_view_cell_set_child, "gtk_column_view_cell_set_child", LIBS);
-  gidLink(gtk_column_view_cell_set_focusable, "gtk_column_view_cell_set_focusable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_cell_get_type, "gtk_column_view_cell_get_type", LIBS);
+  gidLink(cast(void**)&gtk_column_view_cell_get_child, "gtk_column_view_cell_get_child", LIBS);
+  gidLink(cast(void**)&gtk_column_view_cell_get_focusable, "gtk_column_view_cell_get_focusable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_cell_get_item, "gtk_column_view_cell_get_item", LIBS);
+  gidLink(cast(void**)&gtk_column_view_cell_get_position, "gtk_column_view_cell_get_position", LIBS);
+  gidLink(cast(void**)&gtk_column_view_cell_get_selected, "gtk_column_view_cell_get_selected", LIBS);
+  gidLink(cast(void**)&gtk_column_view_cell_set_child, "gtk_column_view_cell_set_child", LIBS);
+  gidLink(cast(void**)&gtk_column_view_cell_set_focusable, "gtk_column_view_cell_set_focusable", LIBS);
 
   // ColumnViewColumn
-  gidLink(gtk_column_view_column_get_type, "gtk_column_view_column_get_type", LIBS);
-  gidLink(gtk_column_view_column_new, "gtk_column_view_column_new", LIBS);
-  gidLink(gtk_column_view_column_get_column_view, "gtk_column_view_column_get_column_view", LIBS);
-  gidLink(gtk_column_view_column_get_expand, "gtk_column_view_column_get_expand", LIBS);
-  gidLink(gtk_column_view_column_get_factory, "gtk_column_view_column_get_factory", LIBS);
-  gidLink(gtk_column_view_column_get_fixed_width, "gtk_column_view_column_get_fixed_width", LIBS);
-  gidLink(gtk_column_view_column_get_header_menu, "gtk_column_view_column_get_header_menu", LIBS);
-  gidLink(gtk_column_view_column_get_id, "gtk_column_view_column_get_id", LIBS);
-  gidLink(gtk_column_view_column_get_resizable, "gtk_column_view_column_get_resizable", LIBS);
-  gidLink(gtk_column_view_column_get_sorter, "gtk_column_view_column_get_sorter", LIBS);
-  gidLink(gtk_column_view_column_get_title, "gtk_column_view_column_get_title", LIBS);
-  gidLink(gtk_column_view_column_get_visible, "gtk_column_view_column_get_visible", LIBS);
-  gidLink(gtk_column_view_column_set_expand, "gtk_column_view_column_set_expand", LIBS);
-  gidLink(gtk_column_view_column_set_factory, "gtk_column_view_column_set_factory", LIBS);
-  gidLink(gtk_column_view_column_set_fixed_width, "gtk_column_view_column_set_fixed_width", LIBS);
-  gidLink(gtk_column_view_column_set_header_menu, "gtk_column_view_column_set_header_menu", LIBS);
-  gidLink(gtk_column_view_column_set_id, "gtk_column_view_column_set_id", LIBS);
-  gidLink(gtk_column_view_column_set_resizable, "gtk_column_view_column_set_resizable", LIBS);
-  gidLink(gtk_column_view_column_set_sorter, "gtk_column_view_column_set_sorter", LIBS);
-  gidLink(gtk_column_view_column_set_title, "gtk_column_view_column_set_title", LIBS);
-  gidLink(gtk_column_view_column_set_visible, "gtk_column_view_column_set_visible", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_get_type, "gtk_column_view_column_get_type", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_new, "gtk_column_view_column_new", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_get_column_view, "gtk_column_view_column_get_column_view", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_get_expand, "gtk_column_view_column_get_expand", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_get_factory, "gtk_column_view_column_get_factory", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_get_fixed_width, "gtk_column_view_column_get_fixed_width", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_get_header_menu, "gtk_column_view_column_get_header_menu", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_get_id, "gtk_column_view_column_get_id", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_get_resizable, "gtk_column_view_column_get_resizable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_get_sorter, "gtk_column_view_column_get_sorter", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_get_title, "gtk_column_view_column_get_title", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_get_visible, "gtk_column_view_column_get_visible", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_set_expand, "gtk_column_view_column_set_expand", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_set_factory, "gtk_column_view_column_set_factory", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_set_fixed_width, "gtk_column_view_column_set_fixed_width", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_set_header_menu, "gtk_column_view_column_set_header_menu", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_set_id, "gtk_column_view_column_set_id", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_set_resizable, "gtk_column_view_column_set_resizable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_set_sorter, "gtk_column_view_column_set_sorter", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_set_title, "gtk_column_view_column_set_title", LIBS);
+  gidLink(cast(void**)&gtk_column_view_column_set_visible, "gtk_column_view_column_set_visible", LIBS);
 
   // ColumnViewRow
-  gidLink(gtk_column_view_row_get_type, "gtk_column_view_row_get_type", LIBS);
-  gidLink(gtk_column_view_row_get_accessible_description, "gtk_column_view_row_get_accessible_description", LIBS);
-  gidLink(gtk_column_view_row_get_accessible_label, "gtk_column_view_row_get_accessible_label", LIBS);
-  gidLink(gtk_column_view_row_get_activatable, "gtk_column_view_row_get_activatable", LIBS);
-  gidLink(gtk_column_view_row_get_focusable, "gtk_column_view_row_get_focusable", LIBS);
-  gidLink(gtk_column_view_row_get_item, "gtk_column_view_row_get_item", LIBS);
-  gidLink(gtk_column_view_row_get_position, "gtk_column_view_row_get_position", LIBS);
-  gidLink(gtk_column_view_row_get_selectable, "gtk_column_view_row_get_selectable", LIBS);
-  gidLink(gtk_column_view_row_get_selected, "gtk_column_view_row_get_selected", LIBS);
-  gidLink(gtk_column_view_row_set_accessible_description, "gtk_column_view_row_set_accessible_description", LIBS);
-  gidLink(gtk_column_view_row_set_accessible_label, "gtk_column_view_row_set_accessible_label", LIBS);
-  gidLink(gtk_column_view_row_set_activatable, "gtk_column_view_row_set_activatable", LIBS);
-  gidLink(gtk_column_view_row_set_focusable, "gtk_column_view_row_set_focusable", LIBS);
-  gidLink(gtk_column_view_row_set_selectable, "gtk_column_view_row_set_selectable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_get_type, "gtk_column_view_row_get_type", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_get_accessible_description, "gtk_column_view_row_get_accessible_description", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_get_accessible_label, "gtk_column_view_row_get_accessible_label", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_get_activatable, "gtk_column_view_row_get_activatable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_get_focusable, "gtk_column_view_row_get_focusable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_get_item, "gtk_column_view_row_get_item", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_get_position, "gtk_column_view_row_get_position", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_get_selectable, "gtk_column_view_row_get_selectable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_get_selected, "gtk_column_view_row_get_selected", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_set_accessible_description, "gtk_column_view_row_set_accessible_description", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_set_accessible_label, "gtk_column_view_row_set_accessible_label", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_set_activatable, "gtk_column_view_row_set_activatable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_set_focusable, "gtk_column_view_row_set_focusable", LIBS);
+  gidLink(cast(void**)&gtk_column_view_row_set_selectable, "gtk_column_view_row_set_selectable", LIBS);
 
   // ColumnViewSorter
-  gidLink(gtk_column_view_sorter_get_type, "gtk_column_view_sorter_get_type", LIBS);
-  gidLink(gtk_column_view_sorter_get_n_sort_columns, "gtk_column_view_sorter_get_n_sort_columns", LIBS);
-  gidLink(gtk_column_view_sorter_get_nth_sort_column, "gtk_column_view_sorter_get_nth_sort_column", LIBS);
-  gidLink(gtk_column_view_sorter_get_primary_sort_column, "gtk_column_view_sorter_get_primary_sort_column", LIBS);
-  gidLink(gtk_column_view_sorter_get_primary_sort_order, "gtk_column_view_sorter_get_primary_sort_order", LIBS);
+  gidLink(cast(void**)&gtk_column_view_sorter_get_type, "gtk_column_view_sorter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_column_view_sorter_get_n_sort_columns, "gtk_column_view_sorter_get_n_sort_columns", LIBS);
+  gidLink(cast(void**)&gtk_column_view_sorter_get_nth_sort_column, "gtk_column_view_sorter_get_nth_sort_column", LIBS);
+  gidLink(cast(void**)&gtk_column_view_sorter_get_primary_sort_column, "gtk_column_view_sorter_get_primary_sort_column", LIBS);
+  gidLink(cast(void**)&gtk_column_view_sorter_get_primary_sort_order, "gtk_column_view_sorter_get_primary_sort_order", LIBS);
 
   // ComboBox
-  gidLink(gtk_combo_box_get_type, "gtk_combo_box_get_type", LIBS);
-  gidLink(gtk_combo_box_new, "gtk_combo_box_new", LIBS);
-  gidLink(gtk_combo_box_new_with_entry, "gtk_combo_box_new_with_entry", LIBS);
-  gidLink(gtk_combo_box_new_with_model, "gtk_combo_box_new_with_model", LIBS);
-  gidLink(gtk_combo_box_new_with_model_and_entry, "gtk_combo_box_new_with_model_and_entry", LIBS);
-  gidLink(gtk_combo_box_get_active, "gtk_combo_box_get_active", LIBS);
-  gidLink(gtk_combo_box_get_active_id, "gtk_combo_box_get_active_id", LIBS);
-  gidLink(gtk_combo_box_get_active_iter, "gtk_combo_box_get_active_iter", LIBS);
-  gidLink(gtk_combo_box_get_button_sensitivity, "gtk_combo_box_get_button_sensitivity", LIBS);
-  gidLink(gtk_combo_box_get_child, "gtk_combo_box_get_child", LIBS);
-  gidLink(gtk_combo_box_get_entry_text_column, "gtk_combo_box_get_entry_text_column", LIBS);
-  gidLink(gtk_combo_box_get_has_entry, "gtk_combo_box_get_has_entry", LIBS);
-  gidLink(gtk_combo_box_get_id_column, "gtk_combo_box_get_id_column", LIBS);
-  gidLink(gtk_combo_box_get_model, "gtk_combo_box_get_model", LIBS);
-  gidLink(gtk_combo_box_get_popup_fixed_width, "gtk_combo_box_get_popup_fixed_width", LIBS);
-  gidLink(gtk_combo_box_get_row_separator_func, "gtk_combo_box_get_row_separator_func", LIBS);
-  gidLink(gtk_combo_box_popdown, "gtk_combo_box_popdown", LIBS);
-  gidLink(gtk_combo_box_popup, "gtk_combo_box_popup", LIBS);
-  gidLink(gtk_combo_box_popup_for_device, "gtk_combo_box_popup_for_device", LIBS);
-  gidLink(gtk_combo_box_set_active, "gtk_combo_box_set_active", LIBS);
-  gidLink(gtk_combo_box_set_active_id, "gtk_combo_box_set_active_id", LIBS);
-  gidLink(gtk_combo_box_set_active_iter, "gtk_combo_box_set_active_iter", LIBS);
-  gidLink(gtk_combo_box_set_button_sensitivity, "gtk_combo_box_set_button_sensitivity", LIBS);
-  gidLink(gtk_combo_box_set_child, "gtk_combo_box_set_child", LIBS);
-  gidLink(gtk_combo_box_set_entry_text_column, "gtk_combo_box_set_entry_text_column", LIBS);
-  gidLink(gtk_combo_box_set_id_column, "gtk_combo_box_set_id_column", LIBS);
-  gidLink(gtk_combo_box_set_model, "gtk_combo_box_set_model", LIBS);
-  gidLink(gtk_combo_box_set_popup_fixed_width, "gtk_combo_box_set_popup_fixed_width", LIBS);
-  gidLink(gtk_combo_box_set_row_separator_func, "gtk_combo_box_set_row_separator_func", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_type, "gtk_combo_box_get_type", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_new, "gtk_combo_box_new", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_new_with_entry, "gtk_combo_box_new_with_entry", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_new_with_model, "gtk_combo_box_new_with_model", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_new_with_model_and_entry, "gtk_combo_box_new_with_model_and_entry", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_active, "gtk_combo_box_get_active", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_active_id, "gtk_combo_box_get_active_id", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_active_iter, "gtk_combo_box_get_active_iter", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_button_sensitivity, "gtk_combo_box_get_button_sensitivity", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_child, "gtk_combo_box_get_child", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_entry_text_column, "gtk_combo_box_get_entry_text_column", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_has_entry, "gtk_combo_box_get_has_entry", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_id_column, "gtk_combo_box_get_id_column", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_model, "gtk_combo_box_get_model", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_popup_fixed_width, "gtk_combo_box_get_popup_fixed_width", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_get_row_separator_func, "gtk_combo_box_get_row_separator_func", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_popdown, "gtk_combo_box_popdown", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_popup, "gtk_combo_box_popup", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_popup_for_device, "gtk_combo_box_popup_for_device", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_set_active, "gtk_combo_box_set_active", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_set_active_id, "gtk_combo_box_set_active_id", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_set_active_iter, "gtk_combo_box_set_active_iter", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_set_button_sensitivity, "gtk_combo_box_set_button_sensitivity", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_set_child, "gtk_combo_box_set_child", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_set_entry_text_column, "gtk_combo_box_set_entry_text_column", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_set_id_column, "gtk_combo_box_set_id_column", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_set_model, "gtk_combo_box_set_model", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_set_popup_fixed_width, "gtk_combo_box_set_popup_fixed_width", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_set_row_separator_func, "gtk_combo_box_set_row_separator_func", LIBS);
 
   // ComboBoxText
-  gidLink(gtk_combo_box_text_get_type, "gtk_combo_box_text_get_type", LIBS);
-  gidLink(gtk_combo_box_text_new, "gtk_combo_box_text_new", LIBS);
-  gidLink(gtk_combo_box_text_new_with_entry, "gtk_combo_box_text_new_with_entry", LIBS);
-  gidLink(gtk_combo_box_text_append, "gtk_combo_box_text_append", LIBS);
-  gidLink(gtk_combo_box_text_append_text, "gtk_combo_box_text_append_text", LIBS);
-  gidLink(gtk_combo_box_text_get_active_text, "gtk_combo_box_text_get_active_text", LIBS);
-  gidLink(gtk_combo_box_text_insert, "gtk_combo_box_text_insert", LIBS);
-  gidLink(gtk_combo_box_text_insert_text, "gtk_combo_box_text_insert_text", LIBS);
-  gidLink(gtk_combo_box_text_prepend, "gtk_combo_box_text_prepend", LIBS);
-  gidLink(gtk_combo_box_text_prepend_text, "gtk_combo_box_text_prepend_text", LIBS);
-  gidLink(gtk_combo_box_text_remove, "gtk_combo_box_text_remove", LIBS);
-  gidLink(gtk_combo_box_text_remove_all, "gtk_combo_box_text_remove_all", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_get_type, "gtk_combo_box_text_get_type", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_new, "gtk_combo_box_text_new", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_new_with_entry, "gtk_combo_box_text_new_with_entry", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_append, "gtk_combo_box_text_append", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_append_text, "gtk_combo_box_text_append_text", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_get_active_text, "gtk_combo_box_text_get_active_text", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_insert, "gtk_combo_box_text_insert", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_insert_text, "gtk_combo_box_text_insert_text", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_prepend, "gtk_combo_box_text_prepend", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_prepend_text, "gtk_combo_box_text_prepend_text", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_remove, "gtk_combo_box_text_remove", LIBS);
+  gidLink(cast(void**)&gtk_combo_box_text_remove_all, "gtk_combo_box_text_remove_all", LIBS);
 
   // ConstantExpression
-  gidLink(gtk_constant_expression_get_type, "gtk_constant_expression_get_type", LIBS);
-  gidLink(gtk_constant_expression_new, "gtk_constant_expression_new", LIBS);
-  gidLink(gtk_constant_expression_new_for_value, "gtk_constant_expression_new_for_value", LIBS);
-  gidLink(gtk_constant_expression_get_value, "gtk_constant_expression_get_value", LIBS);
+  gidLink(cast(void**)&gtk_constant_expression_get_type, "gtk_constant_expression_get_type", LIBS);
+  gidLink(cast(void**)&gtk_constant_expression_new, "gtk_constant_expression_new", LIBS);
+  gidLink(cast(void**)&gtk_constant_expression_new_for_value, "gtk_constant_expression_new_for_value", LIBS);
+  gidLink(cast(void**)&gtk_constant_expression_get_value, "gtk_constant_expression_get_value", LIBS);
 
   // Constraint
-  gidLink(gtk_constraint_get_type, "gtk_constraint_get_type", LIBS);
-  gidLink(gtk_constraint_new, "gtk_constraint_new", LIBS);
-  gidLink(gtk_constraint_new_constant, "gtk_constraint_new_constant", LIBS);
-  gidLink(gtk_constraint_get_constant, "gtk_constraint_get_constant", LIBS);
-  gidLink(gtk_constraint_get_multiplier, "gtk_constraint_get_multiplier", LIBS);
-  gidLink(gtk_constraint_get_relation, "gtk_constraint_get_relation", LIBS);
-  gidLink(gtk_constraint_get_source, "gtk_constraint_get_source", LIBS);
-  gidLink(gtk_constraint_get_source_attribute, "gtk_constraint_get_source_attribute", LIBS);
-  gidLink(gtk_constraint_get_strength, "gtk_constraint_get_strength", LIBS);
-  gidLink(gtk_constraint_get_target, "gtk_constraint_get_target", LIBS);
-  gidLink(gtk_constraint_get_target_attribute, "gtk_constraint_get_target_attribute", LIBS);
-  gidLink(gtk_constraint_is_attached, "gtk_constraint_is_attached", LIBS);
-  gidLink(gtk_constraint_is_constant, "gtk_constraint_is_constant", LIBS);
-  gidLink(gtk_constraint_is_required, "gtk_constraint_is_required", LIBS);
+  gidLink(cast(void**)&gtk_constraint_get_type, "gtk_constraint_get_type", LIBS);
+  gidLink(cast(void**)&gtk_constraint_new, "gtk_constraint_new", LIBS);
+  gidLink(cast(void**)&gtk_constraint_new_constant, "gtk_constraint_new_constant", LIBS);
+  gidLink(cast(void**)&gtk_constraint_get_constant, "gtk_constraint_get_constant", LIBS);
+  gidLink(cast(void**)&gtk_constraint_get_multiplier, "gtk_constraint_get_multiplier", LIBS);
+  gidLink(cast(void**)&gtk_constraint_get_relation, "gtk_constraint_get_relation", LIBS);
+  gidLink(cast(void**)&gtk_constraint_get_source, "gtk_constraint_get_source", LIBS);
+  gidLink(cast(void**)&gtk_constraint_get_source_attribute, "gtk_constraint_get_source_attribute", LIBS);
+  gidLink(cast(void**)&gtk_constraint_get_strength, "gtk_constraint_get_strength", LIBS);
+  gidLink(cast(void**)&gtk_constraint_get_target, "gtk_constraint_get_target", LIBS);
+  gidLink(cast(void**)&gtk_constraint_get_target_attribute, "gtk_constraint_get_target_attribute", LIBS);
+  gidLink(cast(void**)&gtk_constraint_is_attached, "gtk_constraint_is_attached", LIBS);
+  gidLink(cast(void**)&gtk_constraint_is_constant, "gtk_constraint_is_constant", LIBS);
+  gidLink(cast(void**)&gtk_constraint_is_required, "gtk_constraint_is_required", LIBS);
 
   // ConstraintGuide
-  gidLink(gtk_constraint_guide_get_type, "gtk_constraint_guide_get_type", LIBS);
-  gidLink(gtk_constraint_guide_new, "gtk_constraint_guide_new", LIBS);
-  gidLink(gtk_constraint_guide_get_max_size, "gtk_constraint_guide_get_max_size", LIBS);
-  gidLink(gtk_constraint_guide_get_min_size, "gtk_constraint_guide_get_min_size", LIBS);
-  gidLink(gtk_constraint_guide_get_name, "gtk_constraint_guide_get_name", LIBS);
-  gidLink(gtk_constraint_guide_get_nat_size, "gtk_constraint_guide_get_nat_size", LIBS);
-  gidLink(gtk_constraint_guide_get_strength, "gtk_constraint_guide_get_strength", LIBS);
-  gidLink(gtk_constraint_guide_set_max_size, "gtk_constraint_guide_set_max_size", LIBS);
-  gidLink(gtk_constraint_guide_set_min_size, "gtk_constraint_guide_set_min_size", LIBS);
-  gidLink(gtk_constraint_guide_set_name, "gtk_constraint_guide_set_name", LIBS);
-  gidLink(gtk_constraint_guide_set_nat_size, "gtk_constraint_guide_set_nat_size", LIBS);
-  gidLink(gtk_constraint_guide_set_strength, "gtk_constraint_guide_set_strength", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_get_type, "gtk_constraint_guide_get_type", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_new, "gtk_constraint_guide_new", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_get_max_size, "gtk_constraint_guide_get_max_size", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_get_min_size, "gtk_constraint_guide_get_min_size", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_get_name, "gtk_constraint_guide_get_name", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_get_nat_size, "gtk_constraint_guide_get_nat_size", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_get_strength, "gtk_constraint_guide_get_strength", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_set_max_size, "gtk_constraint_guide_set_max_size", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_set_min_size, "gtk_constraint_guide_set_min_size", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_set_name, "gtk_constraint_guide_set_name", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_set_nat_size, "gtk_constraint_guide_set_nat_size", LIBS);
+  gidLink(cast(void**)&gtk_constraint_guide_set_strength, "gtk_constraint_guide_set_strength", LIBS);
 
   // ConstraintLayout
-  gidLink(gtk_constraint_layout_get_type, "gtk_constraint_layout_get_type", LIBS);
-  gidLink(gtk_constraint_layout_new, "gtk_constraint_layout_new", LIBS);
-  gidLink(gtk_constraint_layout_add_constraint, "gtk_constraint_layout_add_constraint", LIBS);
-  gidLink(gtk_constraint_layout_add_constraints_from_description, "gtk_constraint_layout_add_constraints_from_description", LIBS);
-  gidLink(gtk_constraint_layout_add_constraints_from_descriptionv, "gtk_constraint_layout_add_constraints_from_descriptionv", LIBS);
-  gidLink(gtk_constraint_layout_add_guide, "gtk_constraint_layout_add_guide", LIBS);
-  gidLink(gtk_constraint_layout_observe_constraints, "gtk_constraint_layout_observe_constraints", LIBS);
-  gidLink(gtk_constraint_layout_observe_guides, "gtk_constraint_layout_observe_guides", LIBS);
-  gidLink(gtk_constraint_layout_remove_all_constraints, "gtk_constraint_layout_remove_all_constraints", LIBS);
-  gidLink(gtk_constraint_layout_remove_constraint, "gtk_constraint_layout_remove_constraint", LIBS);
-  gidLink(gtk_constraint_layout_remove_guide, "gtk_constraint_layout_remove_guide", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_get_type, "gtk_constraint_layout_get_type", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_new, "gtk_constraint_layout_new", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_add_constraint, "gtk_constraint_layout_add_constraint", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_add_constraints_from_description, "gtk_constraint_layout_add_constraints_from_description", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_add_constraints_from_descriptionv, "gtk_constraint_layout_add_constraints_from_descriptionv", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_add_guide, "gtk_constraint_layout_add_guide", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_observe_constraints, "gtk_constraint_layout_observe_constraints", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_observe_guides, "gtk_constraint_layout_observe_guides", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_remove_all_constraints, "gtk_constraint_layout_remove_all_constraints", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_remove_constraint, "gtk_constraint_layout_remove_constraint", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_remove_guide, "gtk_constraint_layout_remove_guide", LIBS);
 
   // ConstraintLayoutChild
-  gidLink(gtk_constraint_layout_child_get_type, "gtk_constraint_layout_child_get_type", LIBS);
+  gidLink(cast(void**)&gtk_constraint_layout_child_get_type, "gtk_constraint_layout_child_get_type", LIBS);
 
   // ConstraintTarget
-  gidLink(gtk_constraint_target_get_type, "gtk_constraint_target_get_type", LIBS);
+  gidLink(cast(void**)&gtk_constraint_target_get_type, "gtk_constraint_target_get_type", LIBS);
 
   // CssProvider
-  gidLink(gtk_css_provider_get_type, "gtk_css_provider_get_type", LIBS);
-  gidLink(gtk_css_provider_new, "gtk_css_provider_new", LIBS);
-  gidLink(gtk_css_provider_load_from_bytes, "gtk_css_provider_load_from_bytes", LIBS);
-  gidLink(gtk_css_provider_load_from_data, "gtk_css_provider_load_from_data", LIBS);
-  gidLink(gtk_css_provider_load_from_file, "gtk_css_provider_load_from_file", LIBS);
-  gidLink(gtk_css_provider_load_from_path, "gtk_css_provider_load_from_path", LIBS);
-  gidLink(gtk_css_provider_load_from_resource, "gtk_css_provider_load_from_resource", LIBS);
-  gidLink(gtk_css_provider_load_from_string, "gtk_css_provider_load_from_string", LIBS);
-  gidLink(gtk_css_provider_load_named, "gtk_css_provider_load_named", LIBS);
-  gidLink(gtk_css_provider_to_string, "gtk_css_provider_to_string", LIBS);
+  gidLink(cast(void**)&gtk_css_provider_get_type, "gtk_css_provider_get_type", LIBS);
+  gidLink(cast(void**)&gtk_css_provider_new, "gtk_css_provider_new", LIBS);
+  gidLink(cast(void**)&gtk_css_provider_load_from_bytes, "gtk_css_provider_load_from_bytes", LIBS);
+  gidLink(cast(void**)&gtk_css_provider_load_from_data, "gtk_css_provider_load_from_data", LIBS);
+  gidLink(cast(void**)&gtk_css_provider_load_from_file, "gtk_css_provider_load_from_file", LIBS);
+  gidLink(cast(void**)&gtk_css_provider_load_from_path, "gtk_css_provider_load_from_path", LIBS);
+  gidLink(cast(void**)&gtk_css_provider_load_from_resource, "gtk_css_provider_load_from_resource", LIBS);
+  gidLink(cast(void**)&gtk_css_provider_load_from_string, "gtk_css_provider_load_from_string", LIBS);
+  gidLink(cast(void**)&gtk_css_provider_load_named, "gtk_css_provider_load_named", LIBS);
+  gidLink(cast(void**)&gtk_css_provider_to_string, "gtk_css_provider_to_string", LIBS);
 
   // CssSection
-  gidLink(gtk_css_section_get_type, "gtk_css_section_get_type", LIBS);
-  gidLink(gtk_css_section_new, "gtk_css_section_new", LIBS);
-  gidLink(gtk_css_section_get_end_location, "gtk_css_section_get_end_location", LIBS);
-  gidLink(gtk_css_section_get_file, "gtk_css_section_get_file", LIBS);
-  gidLink(gtk_css_section_get_parent, "gtk_css_section_get_parent", LIBS);
-  gidLink(gtk_css_section_get_start_location, "gtk_css_section_get_start_location", LIBS);
-  gidLink(gtk_css_section_print, "gtk_css_section_print", LIBS);
-  gidLink(gtk_css_section_ref, "gtk_css_section_ref", LIBS);
-  gidLink(gtk_css_section_to_string, "gtk_css_section_to_string", LIBS);
-  gidLink(gtk_css_section_unref, "gtk_css_section_unref", LIBS);
+  gidLink(cast(void**)&gtk_css_section_get_type, "gtk_css_section_get_type", LIBS);
+  gidLink(cast(void**)&gtk_css_section_new, "gtk_css_section_new", LIBS);
+  gidLink(cast(void**)&gtk_css_section_get_end_location, "gtk_css_section_get_end_location", LIBS);
+  gidLink(cast(void**)&gtk_css_section_get_file, "gtk_css_section_get_file", LIBS);
+  gidLink(cast(void**)&gtk_css_section_get_parent, "gtk_css_section_get_parent", LIBS);
+  gidLink(cast(void**)&gtk_css_section_get_start_location, "gtk_css_section_get_start_location", LIBS);
+  gidLink(cast(void**)&gtk_css_section_print, "gtk_css_section_print", LIBS);
+  gidLink(cast(void**)&gtk_css_section_ref, "gtk_css_section_ref", LIBS);
+  gidLink(cast(void**)&gtk_css_section_to_string, "gtk_css_section_to_string", LIBS);
+  gidLink(cast(void**)&gtk_css_section_unref, "gtk_css_section_unref", LIBS);
 
   // CustomFilter
-  gidLink(gtk_custom_filter_get_type, "gtk_custom_filter_get_type", LIBS);
-  gidLink(gtk_custom_filter_new, "gtk_custom_filter_new", LIBS);
-  gidLink(gtk_custom_filter_set_filter_func, "gtk_custom_filter_set_filter_func", LIBS);
+  gidLink(cast(void**)&gtk_custom_filter_get_type, "gtk_custom_filter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_custom_filter_new, "gtk_custom_filter_new", LIBS);
+  gidLink(cast(void**)&gtk_custom_filter_set_filter_func, "gtk_custom_filter_set_filter_func", LIBS);
 
   // CustomLayout
-  gidLink(gtk_custom_layout_get_type, "gtk_custom_layout_get_type", LIBS);
-  gidLink(gtk_custom_layout_new, "gtk_custom_layout_new", LIBS);
+  gidLink(cast(void**)&gtk_custom_layout_get_type, "gtk_custom_layout_get_type", LIBS);
+  gidLink(cast(void**)&gtk_custom_layout_new, "gtk_custom_layout_new", LIBS);
 
   // CustomSorter
-  gidLink(gtk_custom_sorter_get_type, "gtk_custom_sorter_get_type", LIBS);
-  gidLink(gtk_custom_sorter_new, "gtk_custom_sorter_new", LIBS);
-  gidLink(gtk_custom_sorter_set_sort_func, "gtk_custom_sorter_set_sort_func", LIBS);
+  gidLink(cast(void**)&gtk_custom_sorter_get_type, "gtk_custom_sorter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_custom_sorter_new, "gtk_custom_sorter_new", LIBS);
+  gidLink(cast(void**)&gtk_custom_sorter_set_sort_func, "gtk_custom_sorter_set_sort_func", LIBS);
 
   // Dialog
-  gidLink(gtk_dialog_get_type, "gtk_dialog_get_type", LIBS);
-  gidLink(gtk_dialog_new, "gtk_dialog_new", LIBS);
-  gidLink(gtk_dialog_new_with_buttons, "gtk_dialog_new_with_buttons", LIBS);
-  gidLink(gtk_dialog_add_action_widget, "gtk_dialog_add_action_widget", LIBS);
-  gidLink(gtk_dialog_add_button, "gtk_dialog_add_button", LIBS);
-  gidLink(gtk_dialog_add_buttons, "gtk_dialog_add_buttons", LIBS);
-  gidLink(gtk_dialog_get_content_area, "gtk_dialog_get_content_area", LIBS);
-  gidLink(gtk_dialog_get_header_bar, "gtk_dialog_get_header_bar", LIBS);
-  gidLink(gtk_dialog_get_response_for_widget, "gtk_dialog_get_response_for_widget", LIBS);
-  gidLink(gtk_dialog_get_widget_for_response, "gtk_dialog_get_widget_for_response", LIBS);
-  gidLink(gtk_dialog_response, "gtk_dialog_response", LIBS);
-  gidLink(gtk_dialog_set_default_response, "gtk_dialog_set_default_response", LIBS);
-  gidLink(gtk_dialog_set_response_sensitive, "gtk_dialog_set_response_sensitive", LIBS);
+  gidLink(cast(void**)&gtk_dialog_get_type, "gtk_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_dialog_new, "gtk_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_dialog_new_with_buttons, "gtk_dialog_new_with_buttons", LIBS);
+  gidLink(cast(void**)&gtk_dialog_add_action_widget, "gtk_dialog_add_action_widget", LIBS);
+  gidLink(cast(void**)&gtk_dialog_add_button, "gtk_dialog_add_button", LIBS);
+  gidLink(cast(void**)&gtk_dialog_add_buttons, "gtk_dialog_add_buttons", LIBS);
+  gidLink(cast(void**)&gtk_dialog_get_content_area, "gtk_dialog_get_content_area", LIBS);
+  gidLink(cast(void**)&gtk_dialog_get_header_bar, "gtk_dialog_get_header_bar", LIBS);
+  gidLink(cast(void**)&gtk_dialog_get_response_for_widget, "gtk_dialog_get_response_for_widget", LIBS);
+  gidLink(cast(void**)&gtk_dialog_get_widget_for_response, "gtk_dialog_get_widget_for_response", LIBS);
+  gidLink(cast(void**)&gtk_dialog_response, "gtk_dialog_response", LIBS);
+  gidLink(cast(void**)&gtk_dialog_set_default_response, "gtk_dialog_set_default_response", LIBS);
+  gidLink(cast(void**)&gtk_dialog_set_response_sensitive, "gtk_dialog_set_response_sensitive", LIBS);
 
   // DirectoryList
-  gidLink(gtk_directory_list_get_type, "gtk_directory_list_get_type", LIBS);
-  gidLink(gtk_directory_list_new, "gtk_directory_list_new", LIBS);
-  gidLink(gtk_directory_list_get_attributes, "gtk_directory_list_get_attributes", LIBS);
-  gidLink(gtk_directory_list_get_error, "gtk_directory_list_get_error", LIBS);
-  gidLink(gtk_directory_list_get_file, "gtk_directory_list_get_file", LIBS);
-  gidLink(gtk_directory_list_get_io_priority, "gtk_directory_list_get_io_priority", LIBS);
-  gidLink(gtk_directory_list_get_monitored, "gtk_directory_list_get_monitored", LIBS);
-  gidLink(gtk_directory_list_is_loading, "gtk_directory_list_is_loading", LIBS);
-  gidLink(gtk_directory_list_set_attributes, "gtk_directory_list_set_attributes", LIBS);
-  gidLink(gtk_directory_list_set_file, "gtk_directory_list_set_file", LIBS);
-  gidLink(gtk_directory_list_set_io_priority, "gtk_directory_list_set_io_priority", LIBS);
-  gidLink(gtk_directory_list_set_monitored, "gtk_directory_list_set_monitored", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_get_type, "gtk_directory_list_get_type", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_new, "gtk_directory_list_new", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_get_attributes, "gtk_directory_list_get_attributes", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_get_error, "gtk_directory_list_get_error", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_get_file, "gtk_directory_list_get_file", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_get_io_priority, "gtk_directory_list_get_io_priority", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_get_monitored, "gtk_directory_list_get_monitored", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_is_loading, "gtk_directory_list_is_loading", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_set_attributes, "gtk_directory_list_set_attributes", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_set_file, "gtk_directory_list_set_file", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_set_io_priority, "gtk_directory_list_set_io_priority", LIBS);
+  gidLink(cast(void**)&gtk_directory_list_set_monitored, "gtk_directory_list_set_monitored", LIBS);
 
   // DragIcon
-  gidLink(gtk_drag_icon_get_type, "gtk_drag_icon_get_type", LIBS);
-  gidLink(gtk_drag_icon_create_widget_for_value, "gtk_drag_icon_create_widget_for_value", LIBS);
-  gidLink(gtk_drag_icon_get_for_drag, "gtk_drag_icon_get_for_drag", LIBS);
-  gidLink(gtk_drag_icon_set_from_paintable, "gtk_drag_icon_set_from_paintable", LIBS);
-  gidLink(gtk_drag_icon_get_child, "gtk_drag_icon_get_child", LIBS);
-  gidLink(gtk_drag_icon_set_child, "gtk_drag_icon_set_child", LIBS);
+  gidLink(cast(void**)&gtk_drag_icon_get_type, "gtk_drag_icon_get_type", LIBS);
+  gidLink(cast(void**)&gtk_drag_icon_create_widget_for_value, "gtk_drag_icon_create_widget_for_value", LIBS);
+  gidLink(cast(void**)&gtk_drag_icon_get_for_drag, "gtk_drag_icon_get_for_drag", LIBS);
+  gidLink(cast(void**)&gtk_drag_icon_set_from_paintable, "gtk_drag_icon_set_from_paintable", LIBS);
+  gidLink(cast(void**)&gtk_drag_icon_get_child, "gtk_drag_icon_get_child", LIBS);
+  gidLink(cast(void**)&gtk_drag_icon_set_child, "gtk_drag_icon_set_child", LIBS);
 
   // DragSource
-  gidLink(gtk_drag_source_get_type, "gtk_drag_source_get_type", LIBS);
-  gidLink(gtk_drag_source_new, "gtk_drag_source_new", LIBS);
-  gidLink(gtk_drag_source_drag_cancel, "gtk_drag_source_drag_cancel", LIBS);
-  gidLink(gtk_drag_source_get_actions, "gtk_drag_source_get_actions", LIBS);
-  gidLink(gtk_drag_source_get_content, "gtk_drag_source_get_content", LIBS);
-  gidLink(gtk_drag_source_get_drag, "gtk_drag_source_get_drag", LIBS);
-  gidLink(gtk_drag_source_set_actions, "gtk_drag_source_set_actions", LIBS);
-  gidLink(gtk_drag_source_set_content, "gtk_drag_source_set_content", LIBS);
-  gidLink(gtk_drag_source_set_icon, "gtk_drag_source_set_icon", LIBS);
+  gidLink(cast(void**)&gtk_drag_source_get_type, "gtk_drag_source_get_type", LIBS);
+  gidLink(cast(void**)&gtk_drag_source_new, "gtk_drag_source_new", LIBS);
+  gidLink(cast(void**)&gtk_drag_source_drag_cancel, "gtk_drag_source_drag_cancel", LIBS);
+  gidLink(cast(void**)&gtk_drag_source_get_actions, "gtk_drag_source_get_actions", LIBS);
+  gidLink(cast(void**)&gtk_drag_source_get_content, "gtk_drag_source_get_content", LIBS);
+  gidLink(cast(void**)&gtk_drag_source_get_drag, "gtk_drag_source_get_drag", LIBS);
+  gidLink(cast(void**)&gtk_drag_source_set_actions, "gtk_drag_source_set_actions", LIBS);
+  gidLink(cast(void**)&gtk_drag_source_set_content, "gtk_drag_source_set_content", LIBS);
+  gidLink(cast(void**)&gtk_drag_source_set_icon, "gtk_drag_source_set_icon", LIBS);
 
   // DrawingArea
-  gidLink(gtk_drawing_area_get_type, "gtk_drawing_area_get_type", LIBS);
-  gidLink(gtk_drawing_area_new, "gtk_drawing_area_new", LIBS);
-  gidLink(gtk_drawing_area_get_content_height, "gtk_drawing_area_get_content_height", LIBS);
-  gidLink(gtk_drawing_area_get_content_width, "gtk_drawing_area_get_content_width", LIBS);
-  gidLink(gtk_drawing_area_set_content_height, "gtk_drawing_area_set_content_height", LIBS);
-  gidLink(gtk_drawing_area_set_content_width, "gtk_drawing_area_set_content_width", LIBS);
-  gidLink(gtk_drawing_area_set_draw_func, "gtk_drawing_area_set_draw_func", LIBS);
+  gidLink(cast(void**)&gtk_drawing_area_get_type, "gtk_drawing_area_get_type", LIBS);
+  gidLink(cast(void**)&gtk_drawing_area_new, "gtk_drawing_area_new", LIBS);
+  gidLink(cast(void**)&gtk_drawing_area_get_content_height, "gtk_drawing_area_get_content_height", LIBS);
+  gidLink(cast(void**)&gtk_drawing_area_get_content_width, "gtk_drawing_area_get_content_width", LIBS);
+  gidLink(cast(void**)&gtk_drawing_area_set_content_height, "gtk_drawing_area_set_content_height", LIBS);
+  gidLink(cast(void**)&gtk_drawing_area_set_content_width, "gtk_drawing_area_set_content_width", LIBS);
+  gidLink(cast(void**)&gtk_drawing_area_set_draw_func, "gtk_drawing_area_set_draw_func", LIBS);
 
   // DropControllerMotion
-  gidLink(gtk_drop_controller_motion_get_type, "gtk_drop_controller_motion_get_type", LIBS);
-  gidLink(gtk_drop_controller_motion_new, "gtk_drop_controller_motion_new", LIBS);
-  gidLink(gtk_drop_controller_motion_contains_pointer, "gtk_drop_controller_motion_contains_pointer", LIBS);
-  gidLink(gtk_drop_controller_motion_get_drop, "gtk_drop_controller_motion_get_drop", LIBS);
-  gidLink(gtk_drop_controller_motion_is_pointer, "gtk_drop_controller_motion_is_pointer", LIBS);
+  gidLink(cast(void**)&gtk_drop_controller_motion_get_type, "gtk_drop_controller_motion_get_type", LIBS);
+  gidLink(cast(void**)&gtk_drop_controller_motion_new, "gtk_drop_controller_motion_new", LIBS);
+  gidLink(cast(void**)&gtk_drop_controller_motion_contains_pointer, "gtk_drop_controller_motion_contains_pointer", LIBS);
+  gidLink(cast(void**)&gtk_drop_controller_motion_get_drop, "gtk_drop_controller_motion_get_drop", LIBS);
+  gidLink(cast(void**)&gtk_drop_controller_motion_is_pointer, "gtk_drop_controller_motion_is_pointer", LIBS);
 
   // DropDown
-  gidLink(gtk_drop_down_get_type, "gtk_drop_down_get_type", LIBS);
-  gidLink(gtk_drop_down_new, "gtk_drop_down_new", LIBS);
-  gidLink(gtk_drop_down_new_from_strings, "gtk_drop_down_new_from_strings", LIBS);
-  gidLink(gtk_drop_down_get_enable_search, "gtk_drop_down_get_enable_search", LIBS);
-  gidLink(gtk_drop_down_get_expression, "gtk_drop_down_get_expression", LIBS);
-  gidLink(gtk_drop_down_get_factory, "gtk_drop_down_get_factory", LIBS);
-  gidLink(gtk_drop_down_get_header_factory, "gtk_drop_down_get_header_factory", LIBS);
-  gidLink(gtk_drop_down_get_list_factory, "gtk_drop_down_get_list_factory", LIBS);
-  gidLink(gtk_drop_down_get_model, "gtk_drop_down_get_model", LIBS);
-  gidLink(gtk_drop_down_get_search_match_mode, "gtk_drop_down_get_search_match_mode", LIBS);
-  gidLink(gtk_drop_down_get_selected, "gtk_drop_down_get_selected", LIBS);
-  gidLink(gtk_drop_down_get_selected_item, "gtk_drop_down_get_selected_item", LIBS);
-  gidLink(gtk_drop_down_get_show_arrow, "gtk_drop_down_get_show_arrow", LIBS);
-  gidLink(gtk_drop_down_set_enable_search, "gtk_drop_down_set_enable_search", LIBS);
-  gidLink(gtk_drop_down_set_expression, "gtk_drop_down_set_expression", LIBS);
-  gidLink(gtk_drop_down_set_factory, "gtk_drop_down_set_factory", LIBS);
-  gidLink(gtk_drop_down_set_header_factory, "gtk_drop_down_set_header_factory", LIBS);
-  gidLink(gtk_drop_down_set_list_factory, "gtk_drop_down_set_list_factory", LIBS);
-  gidLink(gtk_drop_down_set_model, "gtk_drop_down_set_model", LIBS);
-  gidLink(gtk_drop_down_set_search_match_mode, "gtk_drop_down_set_search_match_mode", LIBS);
-  gidLink(gtk_drop_down_set_selected, "gtk_drop_down_set_selected", LIBS);
-  gidLink(gtk_drop_down_set_show_arrow, "gtk_drop_down_set_show_arrow", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_get_type, "gtk_drop_down_get_type", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_new, "gtk_drop_down_new", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_new_from_strings, "gtk_drop_down_new_from_strings", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_get_enable_search, "gtk_drop_down_get_enable_search", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_get_expression, "gtk_drop_down_get_expression", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_get_factory, "gtk_drop_down_get_factory", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_get_header_factory, "gtk_drop_down_get_header_factory", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_get_list_factory, "gtk_drop_down_get_list_factory", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_get_model, "gtk_drop_down_get_model", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_get_search_match_mode, "gtk_drop_down_get_search_match_mode", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_get_selected, "gtk_drop_down_get_selected", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_get_selected_item, "gtk_drop_down_get_selected_item", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_get_show_arrow, "gtk_drop_down_get_show_arrow", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_set_enable_search, "gtk_drop_down_set_enable_search", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_set_expression, "gtk_drop_down_set_expression", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_set_factory, "gtk_drop_down_set_factory", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_set_header_factory, "gtk_drop_down_set_header_factory", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_set_list_factory, "gtk_drop_down_set_list_factory", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_set_model, "gtk_drop_down_set_model", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_set_search_match_mode, "gtk_drop_down_set_search_match_mode", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_set_selected, "gtk_drop_down_set_selected", LIBS);
+  gidLink(cast(void**)&gtk_drop_down_set_show_arrow, "gtk_drop_down_set_show_arrow", LIBS);
 
   // DropTarget
-  gidLink(gtk_drop_target_get_type, "gtk_drop_target_get_type", LIBS);
-  gidLink(gtk_drop_target_new, "gtk_drop_target_new", LIBS);
-  gidLink(gtk_drop_target_get_actions, "gtk_drop_target_get_actions", LIBS);
-  gidLink(gtk_drop_target_get_current_drop, "gtk_drop_target_get_current_drop", LIBS);
-  gidLink(gtk_drop_target_get_drop, "gtk_drop_target_get_drop", LIBS);
-  gidLink(gtk_drop_target_get_formats, "gtk_drop_target_get_formats", LIBS);
-  gidLink(gtk_drop_target_get_gtypes, "gtk_drop_target_get_gtypes", LIBS);
-  gidLink(gtk_drop_target_get_preload, "gtk_drop_target_get_preload", LIBS);
-  gidLink(gtk_drop_target_get_value, "gtk_drop_target_get_value", LIBS);
-  gidLink(gtk_drop_target_reject, "gtk_drop_target_reject", LIBS);
-  gidLink(gtk_drop_target_set_actions, "gtk_drop_target_set_actions", LIBS);
-  gidLink(gtk_drop_target_set_gtypes, "gtk_drop_target_set_gtypes", LIBS);
-  gidLink(gtk_drop_target_set_preload, "gtk_drop_target_set_preload", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_get_type, "gtk_drop_target_get_type", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_new, "gtk_drop_target_new", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_get_actions, "gtk_drop_target_get_actions", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_get_current_drop, "gtk_drop_target_get_current_drop", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_get_drop, "gtk_drop_target_get_drop", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_get_formats, "gtk_drop_target_get_formats", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_get_gtypes, "gtk_drop_target_get_gtypes", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_get_preload, "gtk_drop_target_get_preload", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_get_value, "gtk_drop_target_get_value", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_reject, "gtk_drop_target_reject", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_set_actions, "gtk_drop_target_set_actions", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_set_gtypes, "gtk_drop_target_set_gtypes", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_set_preload, "gtk_drop_target_set_preload", LIBS);
 
   // DropTargetAsync
-  gidLink(gtk_drop_target_async_get_type, "gtk_drop_target_async_get_type", LIBS);
-  gidLink(gtk_drop_target_async_new, "gtk_drop_target_async_new", LIBS);
-  gidLink(gtk_drop_target_async_get_actions, "gtk_drop_target_async_get_actions", LIBS);
-  gidLink(gtk_drop_target_async_get_formats, "gtk_drop_target_async_get_formats", LIBS);
-  gidLink(gtk_drop_target_async_reject_drop, "gtk_drop_target_async_reject_drop", LIBS);
-  gidLink(gtk_drop_target_async_set_actions, "gtk_drop_target_async_set_actions", LIBS);
-  gidLink(gtk_drop_target_async_set_formats, "gtk_drop_target_async_set_formats", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_async_get_type, "gtk_drop_target_async_get_type", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_async_new, "gtk_drop_target_async_new", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_async_get_actions, "gtk_drop_target_async_get_actions", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_async_get_formats, "gtk_drop_target_async_get_formats", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_async_reject_drop, "gtk_drop_target_async_reject_drop", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_async_set_actions, "gtk_drop_target_async_set_actions", LIBS);
+  gidLink(cast(void**)&gtk_drop_target_async_set_formats, "gtk_drop_target_async_set_formats", LIBS);
 
   // Editable
-  gidLink(gtk_editable_get_type, "gtk_editable_get_type", LIBS);
-  gidLink(gtk_editable_delegate_get_property, "gtk_editable_delegate_get_property", LIBS);
-  gidLink(gtk_editable_delegate_set_property, "gtk_editable_delegate_set_property", LIBS);
-  gidLink(gtk_editable_install_properties, "gtk_editable_install_properties", LIBS);
-  gidLink(gtk_editable_delegate_get_accessible_platform_state, "gtk_editable_delegate_get_accessible_platform_state", LIBS);
-  gidLink(gtk_editable_delete_selection, "gtk_editable_delete_selection", LIBS);
-  gidLink(gtk_editable_delete_text, "gtk_editable_delete_text", LIBS);
-  gidLink(gtk_editable_finish_delegate, "gtk_editable_finish_delegate", LIBS);
-  gidLink(gtk_editable_get_alignment, "gtk_editable_get_alignment", LIBS);
-  gidLink(gtk_editable_get_chars, "gtk_editable_get_chars", LIBS);
-  gidLink(gtk_editable_get_delegate, "gtk_editable_get_delegate", LIBS);
-  gidLink(gtk_editable_get_editable, "gtk_editable_get_editable", LIBS);
-  gidLink(gtk_editable_get_enable_undo, "gtk_editable_get_enable_undo", LIBS);
-  gidLink(gtk_editable_get_max_width_chars, "gtk_editable_get_max_width_chars", LIBS);
-  gidLink(gtk_editable_get_position, "gtk_editable_get_position", LIBS);
-  gidLink(gtk_editable_get_selection_bounds, "gtk_editable_get_selection_bounds", LIBS);
-  gidLink(gtk_editable_get_text, "gtk_editable_get_text", LIBS);
-  gidLink(gtk_editable_get_width_chars, "gtk_editable_get_width_chars", LIBS);
-  gidLink(gtk_editable_init_delegate, "gtk_editable_init_delegate", LIBS);
-  gidLink(gtk_editable_insert_text, "gtk_editable_insert_text", LIBS);
-  gidLink(gtk_editable_select_region, "gtk_editable_select_region", LIBS);
-  gidLink(gtk_editable_set_alignment, "gtk_editable_set_alignment", LIBS);
-  gidLink(gtk_editable_set_editable, "gtk_editable_set_editable", LIBS);
-  gidLink(gtk_editable_set_enable_undo, "gtk_editable_set_enable_undo", LIBS);
-  gidLink(gtk_editable_set_max_width_chars, "gtk_editable_set_max_width_chars", LIBS);
-  gidLink(gtk_editable_set_position, "gtk_editable_set_position", LIBS);
-  gidLink(gtk_editable_set_text, "gtk_editable_set_text", LIBS);
-  gidLink(gtk_editable_set_width_chars, "gtk_editable_set_width_chars", LIBS);
+  gidLink(cast(void**)&gtk_editable_get_type, "gtk_editable_get_type", LIBS);
+  gidLink(cast(void**)&gtk_editable_delegate_get_property, "gtk_editable_delegate_get_property", LIBS);
+  gidLink(cast(void**)&gtk_editable_delegate_set_property, "gtk_editable_delegate_set_property", LIBS);
+  gidLink(cast(void**)&gtk_editable_install_properties, "gtk_editable_install_properties", LIBS);
+  gidLink(cast(void**)&gtk_editable_delegate_get_accessible_platform_state, "gtk_editable_delegate_get_accessible_platform_state", LIBS);
+  gidLink(cast(void**)&gtk_editable_delete_selection, "gtk_editable_delete_selection", LIBS);
+  gidLink(cast(void**)&gtk_editable_delete_text, "gtk_editable_delete_text", LIBS);
+  gidLink(cast(void**)&gtk_editable_finish_delegate, "gtk_editable_finish_delegate", LIBS);
+  gidLink(cast(void**)&gtk_editable_get_alignment, "gtk_editable_get_alignment", LIBS);
+  gidLink(cast(void**)&gtk_editable_get_chars, "gtk_editable_get_chars", LIBS);
+  gidLink(cast(void**)&gtk_editable_get_delegate, "gtk_editable_get_delegate", LIBS);
+  gidLink(cast(void**)&gtk_editable_get_editable, "gtk_editable_get_editable", LIBS);
+  gidLink(cast(void**)&gtk_editable_get_enable_undo, "gtk_editable_get_enable_undo", LIBS);
+  gidLink(cast(void**)&gtk_editable_get_max_width_chars, "gtk_editable_get_max_width_chars", LIBS);
+  gidLink(cast(void**)&gtk_editable_get_position, "gtk_editable_get_position", LIBS);
+  gidLink(cast(void**)&gtk_editable_get_selection_bounds, "gtk_editable_get_selection_bounds", LIBS);
+  gidLink(cast(void**)&gtk_editable_get_text, "gtk_editable_get_text", LIBS);
+  gidLink(cast(void**)&gtk_editable_get_width_chars, "gtk_editable_get_width_chars", LIBS);
+  gidLink(cast(void**)&gtk_editable_init_delegate, "gtk_editable_init_delegate", LIBS);
+  gidLink(cast(void**)&gtk_editable_insert_text, "gtk_editable_insert_text", LIBS);
+  gidLink(cast(void**)&gtk_editable_select_region, "gtk_editable_select_region", LIBS);
+  gidLink(cast(void**)&gtk_editable_set_alignment, "gtk_editable_set_alignment", LIBS);
+  gidLink(cast(void**)&gtk_editable_set_editable, "gtk_editable_set_editable", LIBS);
+  gidLink(cast(void**)&gtk_editable_set_enable_undo, "gtk_editable_set_enable_undo", LIBS);
+  gidLink(cast(void**)&gtk_editable_set_max_width_chars, "gtk_editable_set_max_width_chars", LIBS);
+  gidLink(cast(void**)&gtk_editable_set_position, "gtk_editable_set_position", LIBS);
+  gidLink(cast(void**)&gtk_editable_set_text, "gtk_editable_set_text", LIBS);
+  gidLink(cast(void**)&gtk_editable_set_width_chars, "gtk_editable_set_width_chars", LIBS);
 
   // EditableLabel
-  gidLink(gtk_editable_label_get_type, "gtk_editable_label_get_type", LIBS);
-  gidLink(gtk_editable_label_new, "gtk_editable_label_new", LIBS);
-  gidLink(gtk_editable_label_get_editing, "gtk_editable_label_get_editing", LIBS);
-  gidLink(gtk_editable_label_start_editing, "gtk_editable_label_start_editing", LIBS);
-  gidLink(gtk_editable_label_stop_editing, "gtk_editable_label_stop_editing", LIBS);
+  gidLink(cast(void**)&gtk_editable_label_get_type, "gtk_editable_label_get_type", LIBS);
+  gidLink(cast(void**)&gtk_editable_label_new, "gtk_editable_label_new", LIBS);
+  gidLink(cast(void**)&gtk_editable_label_get_editing, "gtk_editable_label_get_editing", LIBS);
+  gidLink(cast(void**)&gtk_editable_label_start_editing, "gtk_editable_label_start_editing", LIBS);
+  gidLink(cast(void**)&gtk_editable_label_stop_editing, "gtk_editable_label_stop_editing", LIBS);
 
   // EmojiChooser
-  gidLink(gtk_emoji_chooser_get_type, "gtk_emoji_chooser_get_type", LIBS);
-  gidLink(gtk_emoji_chooser_new, "gtk_emoji_chooser_new", LIBS);
+  gidLink(cast(void**)&gtk_emoji_chooser_get_type, "gtk_emoji_chooser_get_type", LIBS);
+  gidLink(cast(void**)&gtk_emoji_chooser_new, "gtk_emoji_chooser_new", LIBS);
 
   // Entry
-  gidLink(gtk_entry_get_type, "gtk_entry_get_type", LIBS);
-  gidLink(gtk_entry_new, "gtk_entry_new", LIBS);
-  gidLink(gtk_entry_new_with_buffer, "gtk_entry_new_with_buffer", LIBS);
-  gidLink(gtk_entry_get_activates_default, "gtk_entry_get_activates_default", LIBS);
-  gidLink(gtk_entry_get_alignment, "gtk_entry_get_alignment", LIBS);
-  gidLink(gtk_entry_get_attributes, "gtk_entry_get_attributes", LIBS);
-  gidLink(gtk_entry_get_buffer, "gtk_entry_get_buffer", LIBS);
-  gidLink(gtk_entry_get_completion, "gtk_entry_get_completion", LIBS);
-  gidLink(gtk_entry_get_current_icon_drag_source, "gtk_entry_get_current_icon_drag_source", LIBS);
-  gidLink(gtk_entry_get_extra_menu, "gtk_entry_get_extra_menu", LIBS);
-  gidLink(gtk_entry_get_has_frame, "gtk_entry_get_has_frame", LIBS);
-  gidLink(gtk_entry_get_icon_activatable, "gtk_entry_get_icon_activatable", LIBS);
-  gidLink(gtk_entry_get_icon_area, "gtk_entry_get_icon_area", LIBS);
-  gidLink(gtk_entry_get_icon_at_pos, "gtk_entry_get_icon_at_pos", LIBS);
-  gidLink(gtk_entry_get_icon_gicon, "gtk_entry_get_icon_gicon", LIBS);
-  gidLink(gtk_entry_get_icon_name, "gtk_entry_get_icon_name", LIBS);
-  gidLink(gtk_entry_get_icon_paintable, "gtk_entry_get_icon_paintable", LIBS);
-  gidLink(gtk_entry_get_icon_sensitive, "gtk_entry_get_icon_sensitive", LIBS);
-  gidLink(gtk_entry_get_icon_storage_type, "gtk_entry_get_icon_storage_type", LIBS);
-  gidLink(gtk_entry_get_icon_tooltip_markup, "gtk_entry_get_icon_tooltip_markup", LIBS);
-  gidLink(gtk_entry_get_icon_tooltip_text, "gtk_entry_get_icon_tooltip_text", LIBS);
-  gidLink(gtk_entry_get_input_hints, "gtk_entry_get_input_hints", LIBS);
-  gidLink(gtk_entry_get_input_purpose, "gtk_entry_get_input_purpose", LIBS);
-  gidLink(gtk_entry_get_invisible_char, "gtk_entry_get_invisible_char", LIBS);
-  gidLink(gtk_entry_get_max_length, "gtk_entry_get_max_length", LIBS);
-  gidLink(gtk_entry_get_overwrite_mode, "gtk_entry_get_overwrite_mode", LIBS);
-  gidLink(gtk_entry_get_placeholder_text, "gtk_entry_get_placeholder_text", LIBS);
-  gidLink(gtk_entry_get_progress_fraction, "gtk_entry_get_progress_fraction", LIBS);
-  gidLink(gtk_entry_get_progress_pulse_step, "gtk_entry_get_progress_pulse_step", LIBS);
-  gidLink(gtk_entry_get_tabs, "gtk_entry_get_tabs", LIBS);
-  gidLink(gtk_entry_get_text_length, "gtk_entry_get_text_length", LIBS);
-  gidLink(gtk_entry_get_visibility, "gtk_entry_get_visibility", LIBS);
-  gidLink(gtk_entry_grab_focus_without_selecting, "gtk_entry_grab_focus_without_selecting", LIBS);
-  gidLink(gtk_entry_progress_pulse, "gtk_entry_progress_pulse", LIBS);
-  gidLink(gtk_entry_reset_im_context, "gtk_entry_reset_im_context", LIBS);
-  gidLink(gtk_entry_set_activates_default, "gtk_entry_set_activates_default", LIBS);
-  gidLink(gtk_entry_set_alignment, "gtk_entry_set_alignment", LIBS);
-  gidLink(gtk_entry_set_attributes, "gtk_entry_set_attributes", LIBS);
-  gidLink(gtk_entry_set_buffer, "gtk_entry_set_buffer", LIBS);
-  gidLink(gtk_entry_set_completion, "gtk_entry_set_completion", LIBS);
-  gidLink(gtk_entry_set_extra_menu, "gtk_entry_set_extra_menu", LIBS);
-  gidLink(gtk_entry_set_has_frame, "gtk_entry_set_has_frame", LIBS);
-  gidLink(gtk_entry_set_icon_activatable, "gtk_entry_set_icon_activatable", LIBS);
-  gidLink(gtk_entry_set_icon_drag_source, "gtk_entry_set_icon_drag_source", LIBS);
-  gidLink(gtk_entry_set_icon_from_gicon, "gtk_entry_set_icon_from_gicon", LIBS);
-  gidLink(gtk_entry_set_icon_from_icon_name, "gtk_entry_set_icon_from_icon_name", LIBS);
-  gidLink(gtk_entry_set_icon_from_paintable, "gtk_entry_set_icon_from_paintable", LIBS);
-  gidLink(gtk_entry_set_icon_sensitive, "gtk_entry_set_icon_sensitive", LIBS);
-  gidLink(gtk_entry_set_icon_tooltip_markup, "gtk_entry_set_icon_tooltip_markup", LIBS);
-  gidLink(gtk_entry_set_icon_tooltip_text, "gtk_entry_set_icon_tooltip_text", LIBS);
-  gidLink(gtk_entry_set_input_hints, "gtk_entry_set_input_hints", LIBS);
-  gidLink(gtk_entry_set_input_purpose, "gtk_entry_set_input_purpose", LIBS);
-  gidLink(gtk_entry_set_invisible_char, "gtk_entry_set_invisible_char", LIBS);
-  gidLink(gtk_entry_set_max_length, "gtk_entry_set_max_length", LIBS);
-  gidLink(gtk_entry_set_overwrite_mode, "gtk_entry_set_overwrite_mode", LIBS);
-  gidLink(gtk_entry_set_placeholder_text, "gtk_entry_set_placeholder_text", LIBS);
-  gidLink(gtk_entry_set_progress_fraction, "gtk_entry_set_progress_fraction", LIBS);
-  gidLink(gtk_entry_set_progress_pulse_step, "gtk_entry_set_progress_pulse_step", LIBS);
-  gidLink(gtk_entry_set_tabs, "gtk_entry_set_tabs", LIBS);
-  gidLink(gtk_entry_set_visibility, "gtk_entry_set_visibility", LIBS);
-  gidLink(gtk_entry_unset_invisible_char, "gtk_entry_unset_invisible_char", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_type, "gtk_entry_get_type", LIBS);
+  gidLink(cast(void**)&gtk_entry_new, "gtk_entry_new", LIBS);
+  gidLink(cast(void**)&gtk_entry_new_with_buffer, "gtk_entry_new_with_buffer", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_activates_default, "gtk_entry_get_activates_default", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_alignment, "gtk_entry_get_alignment", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_attributes, "gtk_entry_get_attributes", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_buffer, "gtk_entry_get_buffer", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_completion, "gtk_entry_get_completion", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_current_icon_drag_source, "gtk_entry_get_current_icon_drag_source", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_extra_menu, "gtk_entry_get_extra_menu", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_has_frame, "gtk_entry_get_has_frame", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_icon_activatable, "gtk_entry_get_icon_activatable", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_icon_area, "gtk_entry_get_icon_area", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_icon_at_pos, "gtk_entry_get_icon_at_pos", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_icon_gicon, "gtk_entry_get_icon_gicon", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_icon_name, "gtk_entry_get_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_icon_paintable, "gtk_entry_get_icon_paintable", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_icon_sensitive, "gtk_entry_get_icon_sensitive", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_icon_storage_type, "gtk_entry_get_icon_storage_type", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_icon_tooltip_markup, "gtk_entry_get_icon_tooltip_markup", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_icon_tooltip_text, "gtk_entry_get_icon_tooltip_text", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_input_hints, "gtk_entry_get_input_hints", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_input_purpose, "gtk_entry_get_input_purpose", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_invisible_char, "gtk_entry_get_invisible_char", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_max_length, "gtk_entry_get_max_length", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_overwrite_mode, "gtk_entry_get_overwrite_mode", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_placeholder_text, "gtk_entry_get_placeholder_text", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_progress_fraction, "gtk_entry_get_progress_fraction", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_progress_pulse_step, "gtk_entry_get_progress_pulse_step", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_tabs, "gtk_entry_get_tabs", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_text_length, "gtk_entry_get_text_length", LIBS);
+  gidLink(cast(void**)&gtk_entry_get_visibility, "gtk_entry_get_visibility", LIBS);
+  gidLink(cast(void**)&gtk_entry_grab_focus_without_selecting, "gtk_entry_grab_focus_without_selecting", LIBS);
+  gidLink(cast(void**)&gtk_entry_progress_pulse, "gtk_entry_progress_pulse", LIBS);
+  gidLink(cast(void**)&gtk_entry_reset_im_context, "gtk_entry_reset_im_context", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_activates_default, "gtk_entry_set_activates_default", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_alignment, "gtk_entry_set_alignment", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_attributes, "gtk_entry_set_attributes", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_buffer, "gtk_entry_set_buffer", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_completion, "gtk_entry_set_completion", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_extra_menu, "gtk_entry_set_extra_menu", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_has_frame, "gtk_entry_set_has_frame", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_icon_activatable, "gtk_entry_set_icon_activatable", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_icon_drag_source, "gtk_entry_set_icon_drag_source", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_icon_from_gicon, "gtk_entry_set_icon_from_gicon", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_icon_from_icon_name, "gtk_entry_set_icon_from_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_icon_from_paintable, "gtk_entry_set_icon_from_paintable", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_icon_sensitive, "gtk_entry_set_icon_sensitive", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_icon_tooltip_markup, "gtk_entry_set_icon_tooltip_markup", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_icon_tooltip_text, "gtk_entry_set_icon_tooltip_text", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_input_hints, "gtk_entry_set_input_hints", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_input_purpose, "gtk_entry_set_input_purpose", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_invisible_char, "gtk_entry_set_invisible_char", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_max_length, "gtk_entry_set_max_length", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_overwrite_mode, "gtk_entry_set_overwrite_mode", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_placeholder_text, "gtk_entry_set_placeholder_text", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_progress_fraction, "gtk_entry_set_progress_fraction", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_progress_pulse_step, "gtk_entry_set_progress_pulse_step", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_tabs, "gtk_entry_set_tabs", LIBS);
+  gidLink(cast(void**)&gtk_entry_set_visibility, "gtk_entry_set_visibility", LIBS);
+  gidLink(cast(void**)&gtk_entry_unset_invisible_char, "gtk_entry_unset_invisible_char", LIBS);
 
   // EntryBuffer
-  gidLink(gtk_entry_buffer_get_type, "gtk_entry_buffer_get_type", LIBS);
-  gidLink(gtk_entry_buffer_new, "gtk_entry_buffer_new", LIBS);
-  gidLink(gtk_entry_buffer_delete_text, "gtk_entry_buffer_delete_text", LIBS);
-  gidLink(gtk_entry_buffer_emit_deleted_text, "gtk_entry_buffer_emit_deleted_text", LIBS);
-  gidLink(gtk_entry_buffer_emit_inserted_text, "gtk_entry_buffer_emit_inserted_text", LIBS);
-  gidLink(gtk_entry_buffer_get_bytes, "gtk_entry_buffer_get_bytes", LIBS);
-  gidLink(gtk_entry_buffer_get_length, "gtk_entry_buffer_get_length", LIBS);
-  gidLink(gtk_entry_buffer_get_max_length, "gtk_entry_buffer_get_max_length", LIBS);
-  gidLink(gtk_entry_buffer_get_text, "gtk_entry_buffer_get_text", LIBS);
-  gidLink(gtk_entry_buffer_insert_text, "gtk_entry_buffer_insert_text", LIBS);
-  gidLink(gtk_entry_buffer_set_max_length, "gtk_entry_buffer_set_max_length", LIBS);
-  gidLink(gtk_entry_buffer_set_text, "gtk_entry_buffer_set_text", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_get_type, "gtk_entry_buffer_get_type", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_new, "gtk_entry_buffer_new", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_delete_text, "gtk_entry_buffer_delete_text", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_emit_deleted_text, "gtk_entry_buffer_emit_deleted_text", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_emit_inserted_text, "gtk_entry_buffer_emit_inserted_text", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_get_bytes, "gtk_entry_buffer_get_bytes", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_get_length, "gtk_entry_buffer_get_length", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_get_max_length, "gtk_entry_buffer_get_max_length", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_get_text, "gtk_entry_buffer_get_text", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_insert_text, "gtk_entry_buffer_insert_text", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_set_max_length, "gtk_entry_buffer_set_max_length", LIBS);
+  gidLink(cast(void**)&gtk_entry_buffer_set_text, "gtk_entry_buffer_set_text", LIBS);
 
   // EntryCompletion
-  gidLink(gtk_entry_completion_get_type, "gtk_entry_completion_get_type", LIBS);
-  gidLink(gtk_entry_completion_new, "gtk_entry_completion_new", LIBS);
-  gidLink(gtk_entry_completion_new_with_area, "gtk_entry_completion_new_with_area", LIBS);
-  gidLink(gtk_entry_completion_complete, "gtk_entry_completion_complete", LIBS);
-  gidLink(gtk_entry_completion_compute_prefix, "gtk_entry_completion_compute_prefix", LIBS);
-  gidLink(gtk_entry_completion_get_completion_prefix, "gtk_entry_completion_get_completion_prefix", LIBS);
-  gidLink(gtk_entry_completion_get_entry, "gtk_entry_completion_get_entry", LIBS);
-  gidLink(gtk_entry_completion_get_inline_completion, "gtk_entry_completion_get_inline_completion", LIBS);
-  gidLink(gtk_entry_completion_get_inline_selection, "gtk_entry_completion_get_inline_selection", LIBS);
-  gidLink(gtk_entry_completion_get_minimum_key_length, "gtk_entry_completion_get_minimum_key_length", LIBS);
-  gidLink(gtk_entry_completion_get_model, "gtk_entry_completion_get_model", LIBS);
-  gidLink(gtk_entry_completion_get_popup_completion, "gtk_entry_completion_get_popup_completion", LIBS);
-  gidLink(gtk_entry_completion_get_popup_set_width, "gtk_entry_completion_get_popup_set_width", LIBS);
-  gidLink(gtk_entry_completion_get_popup_single_match, "gtk_entry_completion_get_popup_single_match", LIBS);
-  gidLink(gtk_entry_completion_get_text_column, "gtk_entry_completion_get_text_column", LIBS);
-  gidLink(gtk_entry_completion_insert_prefix, "gtk_entry_completion_insert_prefix", LIBS);
-  gidLink(gtk_entry_completion_set_inline_completion, "gtk_entry_completion_set_inline_completion", LIBS);
-  gidLink(gtk_entry_completion_set_inline_selection, "gtk_entry_completion_set_inline_selection", LIBS);
-  gidLink(gtk_entry_completion_set_match_func, "gtk_entry_completion_set_match_func", LIBS);
-  gidLink(gtk_entry_completion_set_minimum_key_length, "gtk_entry_completion_set_minimum_key_length", LIBS);
-  gidLink(gtk_entry_completion_set_model, "gtk_entry_completion_set_model", LIBS);
-  gidLink(gtk_entry_completion_set_popup_completion, "gtk_entry_completion_set_popup_completion", LIBS);
-  gidLink(gtk_entry_completion_set_popup_set_width, "gtk_entry_completion_set_popup_set_width", LIBS);
-  gidLink(gtk_entry_completion_set_popup_single_match, "gtk_entry_completion_set_popup_single_match", LIBS);
-  gidLink(gtk_entry_completion_set_text_column, "gtk_entry_completion_set_text_column", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_get_type, "gtk_entry_completion_get_type", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_new, "gtk_entry_completion_new", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_new_with_area, "gtk_entry_completion_new_with_area", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_complete, "gtk_entry_completion_complete", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_compute_prefix, "gtk_entry_completion_compute_prefix", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_get_completion_prefix, "gtk_entry_completion_get_completion_prefix", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_get_entry, "gtk_entry_completion_get_entry", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_get_inline_completion, "gtk_entry_completion_get_inline_completion", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_get_inline_selection, "gtk_entry_completion_get_inline_selection", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_get_minimum_key_length, "gtk_entry_completion_get_minimum_key_length", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_get_model, "gtk_entry_completion_get_model", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_get_popup_completion, "gtk_entry_completion_get_popup_completion", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_get_popup_set_width, "gtk_entry_completion_get_popup_set_width", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_get_popup_single_match, "gtk_entry_completion_get_popup_single_match", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_get_text_column, "gtk_entry_completion_get_text_column", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_insert_prefix, "gtk_entry_completion_insert_prefix", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_set_inline_completion, "gtk_entry_completion_set_inline_completion", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_set_inline_selection, "gtk_entry_completion_set_inline_selection", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_set_match_func, "gtk_entry_completion_set_match_func", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_set_minimum_key_length, "gtk_entry_completion_set_minimum_key_length", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_set_model, "gtk_entry_completion_set_model", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_set_popup_completion, "gtk_entry_completion_set_popup_completion", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_set_popup_set_width, "gtk_entry_completion_set_popup_set_width", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_set_popup_single_match, "gtk_entry_completion_set_popup_single_match", LIBS);
+  gidLink(cast(void**)&gtk_entry_completion_set_text_column, "gtk_entry_completion_set_text_column", LIBS);
 
   // EventController
-  gidLink(gtk_event_controller_get_type, "gtk_event_controller_get_type", LIBS);
-  gidLink(gtk_event_controller_get_current_event, "gtk_event_controller_get_current_event", LIBS);
-  gidLink(gtk_event_controller_get_current_event_device, "gtk_event_controller_get_current_event_device", LIBS);
-  gidLink(gtk_event_controller_get_current_event_state, "gtk_event_controller_get_current_event_state", LIBS);
-  gidLink(gtk_event_controller_get_current_event_time, "gtk_event_controller_get_current_event_time", LIBS);
-  gidLink(gtk_event_controller_get_name, "gtk_event_controller_get_name", LIBS);
-  gidLink(gtk_event_controller_get_propagation_limit, "gtk_event_controller_get_propagation_limit", LIBS);
-  gidLink(gtk_event_controller_get_propagation_phase, "gtk_event_controller_get_propagation_phase", LIBS);
-  gidLink(gtk_event_controller_get_widget, "gtk_event_controller_get_widget", LIBS);
-  gidLink(gtk_event_controller_reset, "gtk_event_controller_reset", LIBS);
-  gidLink(gtk_event_controller_set_name, "gtk_event_controller_set_name", LIBS);
-  gidLink(gtk_event_controller_set_propagation_limit, "gtk_event_controller_set_propagation_limit", LIBS);
-  gidLink(gtk_event_controller_set_propagation_phase, "gtk_event_controller_set_propagation_phase", LIBS);
-  gidLink(gtk_event_controller_set_static_name, "gtk_event_controller_set_static_name", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_get_type, "gtk_event_controller_get_type", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_get_current_event, "gtk_event_controller_get_current_event", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_get_current_event_device, "gtk_event_controller_get_current_event_device", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_get_current_event_state, "gtk_event_controller_get_current_event_state", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_get_current_event_time, "gtk_event_controller_get_current_event_time", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_get_name, "gtk_event_controller_get_name", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_get_propagation_limit, "gtk_event_controller_get_propagation_limit", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_get_propagation_phase, "gtk_event_controller_get_propagation_phase", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_get_widget, "gtk_event_controller_get_widget", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_reset, "gtk_event_controller_reset", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_set_name, "gtk_event_controller_set_name", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_set_propagation_limit, "gtk_event_controller_set_propagation_limit", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_set_propagation_phase, "gtk_event_controller_set_propagation_phase", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_set_static_name, "gtk_event_controller_set_static_name", LIBS);
 
   // EventControllerFocus
-  gidLink(gtk_event_controller_focus_get_type, "gtk_event_controller_focus_get_type", LIBS);
-  gidLink(gtk_event_controller_focus_new, "gtk_event_controller_focus_new", LIBS);
-  gidLink(gtk_event_controller_focus_contains_focus, "gtk_event_controller_focus_contains_focus", LIBS);
-  gidLink(gtk_event_controller_focus_is_focus, "gtk_event_controller_focus_is_focus", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_focus_get_type, "gtk_event_controller_focus_get_type", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_focus_new, "gtk_event_controller_focus_new", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_focus_contains_focus, "gtk_event_controller_focus_contains_focus", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_focus_is_focus, "gtk_event_controller_focus_is_focus", LIBS);
 
   // EventControllerKey
-  gidLink(gtk_event_controller_key_get_type, "gtk_event_controller_key_get_type", LIBS);
-  gidLink(gtk_event_controller_key_new, "gtk_event_controller_key_new", LIBS);
-  gidLink(gtk_event_controller_key_forward, "gtk_event_controller_key_forward", LIBS);
-  gidLink(gtk_event_controller_key_get_group, "gtk_event_controller_key_get_group", LIBS);
-  gidLink(gtk_event_controller_key_get_im_context, "gtk_event_controller_key_get_im_context", LIBS);
-  gidLink(gtk_event_controller_key_set_im_context, "gtk_event_controller_key_set_im_context", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_key_get_type, "gtk_event_controller_key_get_type", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_key_new, "gtk_event_controller_key_new", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_key_forward, "gtk_event_controller_key_forward", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_key_get_group, "gtk_event_controller_key_get_group", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_key_get_im_context, "gtk_event_controller_key_get_im_context", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_key_set_im_context, "gtk_event_controller_key_set_im_context", LIBS);
 
   // EventControllerLegacy
-  gidLink(gtk_event_controller_legacy_get_type, "gtk_event_controller_legacy_get_type", LIBS);
-  gidLink(gtk_event_controller_legacy_new, "gtk_event_controller_legacy_new", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_legacy_get_type, "gtk_event_controller_legacy_get_type", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_legacy_new, "gtk_event_controller_legacy_new", LIBS);
 
   // EventControllerMotion
-  gidLink(gtk_event_controller_motion_get_type, "gtk_event_controller_motion_get_type", LIBS);
-  gidLink(gtk_event_controller_motion_new, "gtk_event_controller_motion_new", LIBS);
-  gidLink(gtk_event_controller_motion_contains_pointer, "gtk_event_controller_motion_contains_pointer", LIBS);
-  gidLink(gtk_event_controller_motion_is_pointer, "gtk_event_controller_motion_is_pointer", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_motion_get_type, "gtk_event_controller_motion_get_type", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_motion_new, "gtk_event_controller_motion_new", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_motion_contains_pointer, "gtk_event_controller_motion_contains_pointer", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_motion_is_pointer, "gtk_event_controller_motion_is_pointer", LIBS);
 
   // EventControllerScroll
-  gidLink(gtk_event_controller_scroll_get_type, "gtk_event_controller_scroll_get_type", LIBS);
-  gidLink(gtk_event_controller_scroll_new, "gtk_event_controller_scroll_new", LIBS);
-  gidLink(gtk_event_controller_scroll_get_flags, "gtk_event_controller_scroll_get_flags", LIBS);
-  gidLink(gtk_event_controller_scroll_get_unit, "gtk_event_controller_scroll_get_unit", LIBS);
-  gidLink(gtk_event_controller_scroll_set_flags, "gtk_event_controller_scroll_set_flags", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_scroll_get_type, "gtk_event_controller_scroll_get_type", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_scroll_new, "gtk_event_controller_scroll_new", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_scroll_get_flags, "gtk_event_controller_scroll_get_flags", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_scroll_get_unit, "gtk_event_controller_scroll_get_unit", LIBS);
+  gidLink(cast(void**)&gtk_event_controller_scroll_set_flags, "gtk_event_controller_scroll_set_flags", LIBS);
 
   // EveryFilter
-  gidLink(gtk_every_filter_get_type, "gtk_every_filter_get_type", LIBS);
-  gidLink(gtk_every_filter_new, "gtk_every_filter_new", LIBS);
+  gidLink(cast(void**)&gtk_every_filter_get_type, "gtk_every_filter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_every_filter_new, "gtk_every_filter_new", LIBS);
 
   // Expander
-  gidLink(gtk_expander_get_type, "gtk_expander_get_type", LIBS);
-  gidLink(gtk_expander_new, "gtk_expander_new", LIBS);
-  gidLink(gtk_expander_new_with_mnemonic, "gtk_expander_new_with_mnemonic", LIBS);
-  gidLink(gtk_expander_get_child, "gtk_expander_get_child", LIBS);
-  gidLink(gtk_expander_get_expanded, "gtk_expander_get_expanded", LIBS);
-  gidLink(gtk_expander_get_label, "gtk_expander_get_label", LIBS);
-  gidLink(gtk_expander_get_label_widget, "gtk_expander_get_label_widget", LIBS);
-  gidLink(gtk_expander_get_resize_toplevel, "gtk_expander_get_resize_toplevel", LIBS);
-  gidLink(gtk_expander_get_use_markup, "gtk_expander_get_use_markup", LIBS);
-  gidLink(gtk_expander_get_use_underline, "gtk_expander_get_use_underline", LIBS);
-  gidLink(gtk_expander_set_child, "gtk_expander_set_child", LIBS);
-  gidLink(gtk_expander_set_expanded, "gtk_expander_set_expanded", LIBS);
-  gidLink(gtk_expander_set_label, "gtk_expander_set_label", LIBS);
-  gidLink(gtk_expander_set_label_widget, "gtk_expander_set_label_widget", LIBS);
-  gidLink(gtk_expander_set_resize_toplevel, "gtk_expander_set_resize_toplevel", LIBS);
-  gidLink(gtk_expander_set_use_markup, "gtk_expander_set_use_markup", LIBS);
-  gidLink(gtk_expander_set_use_underline, "gtk_expander_set_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_expander_get_type, "gtk_expander_get_type", LIBS);
+  gidLink(cast(void**)&gtk_expander_new, "gtk_expander_new", LIBS);
+  gidLink(cast(void**)&gtk_expander_new_with_mnemonic, "gtk_expander_new_with_mnemonic", LIBS);
+  gidLink(cast(void**)&gtk_expander_get_child, "gtk_expander_get_child", LIBS);
+  gidLink(cast(void**)&gtk_expander_get_expanded, "gtk_expander_get_expanded", LIBS);
+  gidLink(cast(void**)&gtk_expander_get_label, "gtk_expander_get_label", LIBS);
+  gidLink(cast(void**)&gtk_expander_get_label_widget, "gtk_expander_get_label_widget", LIBS);
+  gidLink(cast(void**)&gtk_expander_get_resize_toplevel, "gtk_expander_get_resize_toplevel", LIBS);
+  gidLink(cast(void**)&gtk_expander_get_use_markup, "gtk_expander_get_use_markup", LIBS);
+  gidLink(cast(void**)&gtk_expander_get_use_underline, "gtk_expander_get_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_expander_set_child, "gtk_expander_set_child", LIBS);
+  gidLink(cast(void**)&gtk_expander_set_expanded, "gtk_expander_set_expanded", LIBS);
+  gidLink(cast(void**)&gtk_expander_set_label, "gtk_expander_set_label", LIBS);
+  gidLink(cast(void**)&gtk_expander_set_label_widget, "gtk_expander_set_label_widget", LIBS);
+  gidLink(cast(void**)&gtk_expander_set_resize_toplevel, "gtk_expander_set_resize_toplevel", LIBS);
+  gidLink(cast(void**)&gtk_expander_set_use_markup, "gtk_expander_set_use_markup", LIBS);
+  gidLink(cast(void**)&gtk_expander_set_use_underline, "gtk_expander_set_use_underline", LIBS);
 
   // Expression
-  gidLink(gtk_expression_get_type, "gtk_expression_get_type", LIBS);
-  gidLink(gtk_expression_bind, "gtk_expression_bind", LIBS);
-  gidLink(gtk_expression_evaluate, "gtk_expression_evaluate", LIBS);
-  gidLink(gtk_expression_get_value_type, "gtk_expression_get_value_type", LIBS);
-  gidLink(gtk_expression_is_static, "gtk_expression_is_static", LIBS);
-  gidLink(gtk_expression_ref, "gtk_expression_ref", LIBS);
-  gidLink(gtk_expression_unref, "gtk_expression_unref", LIBS);
-  gidLink(gtk_expression_watch, "gtk_expression_watch", LIBS);
+  gidLink(cast(void**)&gtk_expression_get_type, "gtk_expression_get_type", LIBS);
+  gidLink(cast(void**)&gtk_expression_bind, "gtk_expression_bind", LIBS);
+  gidLink(cast(void**)&gtk_expression_evaluate, "gtk_expression_evaluate", LIBS);
+  gidLink(cast(void**)&gtk_expression_get_value_type, "gtk_expression_get_value_type", LIBS);
+  gidLink(cast(void**)&gtk_expression_is_static, "gtk_expression_is_static", LIBS);
+  gidLink(cast(void**)&gtk_expression_ref, "gtk_expression_ref", LIBS);
+  gidLink(cast(void**)&gtk_expression_unref, "gtk_expression_unref", LIBS);
+  gidLink(cast(void**)&gtk_expression_watch, "gtk_expression_watch", LIBS);
 
   // ExpressionWatch
-  gidLink(gtk_expression_watch_get_type, "gtk_expression_watch_get_type", LIBS);
-  gidLink(gtk_expression_watch_evaluate, "gtk_expression_watch_evaluate", LIBS);
-  gidLink(gtk_expression_watch_ref, "gtk_expression_watch_ref", LIBS);
-  gidLink(gtk_expression_watch_unref, "gtk_expression_watch_unref", LIBS);
-  gidLink(gtk_expression_watch_unwatch, "gtk_expression_watch_unwatch", LIBS);
+  gidLink(cast(void**)&gtk_expression_watch_get_type, "gtk_expression_watch_get_type", LIBS);
+  gidLink(cast(void**)&gtk_expression_watch_evaluate, "gtk_expression_watch_evaluate", LIBS);
+  gidLink(cast(void**)&gtk_expression_watch_ref, "gtk_expression_watch_ref", LIBS);
+  gidLink(cast(void**)&gtk_expression_watch_unref, "gtk_expression_watch_unref", LIBS);
+  gidLink(cast(void**)&gtk_expression_watch_unwatch, "gtk_expression_watch_unwatch", LIBS);
 
   // FileChooser
-  gidLink(gtk_file_chooser_get_type, "gtk_file_chooser_get_type", LIBS);
-  gidLink(gtk_file_chooser_add_choice, "gtk_file_chooser_add_choice", LIBS);
-  gidLink(gtk_file_chooser_add_filter, "gtk_file_chooser_add_filter", LIBS);
-  gidLink(gtk_file_chooser_add_shortcut_folder, "gtk_file_chooser_add_shortcut_folder", LIBS);
-  gidLink(gtk_file_chooser_get_action, "gtk_file_chooser_get_action", LIBS);
-  gidLink(gtk_file_chooser_get_choice, "gtk_file_chooser_get_choice", LIBS);
-  gidLink(gtk_file_chooser_get_create_folders, "gtk_file_chooser_get_create_folders", LIBS);
-  gidLink(gtk_file_chooser_get_current_folder, "gtk_file_chooser_get_current_folder", LIBS);
-  gidLink(gtk_file_chooser_get_current_name, "gtk_file_chooser_get_current_name", LIBS);
-  gidLink(gtk_file_chooser_get_file, "gtk_file_chooser_get_file", LIBS);
-  gidLink(gtk_file_chooser_get_files, "gtk_file_chooser_get_files", LIBS);
-  gidLink(gtk_file_chooser_get_filter, "gtk_file_chooser_get_filter", LIBS);
-  gidLink(gtk_file_chooser_get_filters, "gtk_file_chooser_get_filters", LIBS);
-  gidLink(gtk_file_chooser_get_select_multiple, "gtk_file_chooser_get_select_multiple", LIBS);
-  gidLink(gtk_file_chooser_get_shortcut_folders, "gtk_file_chooser_get_shortcut_folders", LIBS);
-  gidLink(gtk_file_chooser_remove_choice, "gtk_file_chooser_remove_choice", LIBS);
-  gidLink(gtk_file_chooser_remove_filter, "gtk_file_chooser_remove_filter", LIBS);
-  gidLink(gtk_file_chooser_remove_shortcut_folder, "gtk_file_chooser_remove_shortcut_folder", LIBS);
-  gidLink(gtk_file_chooser_set_action, "gtk_file_chooser_set_action", LIBS);
-  gidLink(gtk_file_chooser_set_choice, "gtk_file_chooser_set_choice", LIBS);
-  gidLink(gtk_file_chooser_set_create_folders, "gtk_file_chooser_set_create_folders", LIBS);
-  gidLink(gtk_file_chooser_set_current_folder, "gtk_file_chooser_set_current_folder", LIBS);
-  gidLink(gtk_file_chooser_set_current_name, "gtk_file_chooser_set_current_name", LIBS);
-  gidLink(gtk_file_chooser_set_file, "gtk_file_chooser_set_file", LIBS);
-  gidLink(gtk_file_chooser_set_filter, "gtk_file_chooser_set_filter", LIBS);
-  gidLink(gtk_file_chooser_set_select_multiple, "gtk_file_chooser_set_select_multiple", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_type, "gtk_file_chooser_get_type", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_add_choice, "gtk_file_chooser_add_choice", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_add_filter, "gtk_file_chooser_add_filter", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_add_shortcut_folder, "gtk_file_chooser_add_shortcut_folder", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_action, "gtk_file_chooser_get_action", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_choice, "gtk_file_chooser_get_choice", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_create_folders, "gtk_file_chooser_get_create_folders", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_current_folder, "gtk_file_chooser_get_current_folder", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_current_name, "gtk_file_chooser_get_current_name", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_file, "gtk_file_chooser_get_file", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_files, "gtk_file_chooser_get_files", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_filter, "gtk_file_chooser_get_filter", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_filters, "gtk_file_chooser_get_filters", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_select_multiple, "gtk_file_chooser_get_select_multiple", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_get_shortcut_folders, "gtk_file_chooser_get_shortcut_folders", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_remove_choice, "gtk_file_chooser_remove_choice", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_remove_filter, "gtk_file_chooser_remove_filter", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_remove_shortcut_folder, "gtk_file_chooser_remove_shortcut_folder", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_set_action, "gtk_file_chooser_set_action", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_set_choice, "gtk_file_chooser_set_choice", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_set_create_folders, "gtk_file_chooser_set_create_folders", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_set_current_folder, "gtk_file_chooser_set_current_folder", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_set_current_name, "gtk_file_chooser_set_current_name", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_set_file, "gtk_file_chooser_set_file", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_set_filter, "gtk_file_chooser_set_filter", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_set_select_multiple, "gtk_file_chooser_set_select_multiple", LIBS);
 
   // FileChooserDialog
-  gidLink(gtk_file_chooser_dialog_get_type, "gtk_file_chooser_dialog_get_type", LIBS);
-  gidLink(gtk_file_chooser_dialog_new, "gtk_file_chooser_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_dialog_get_type, "gtk_file_chooser_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_dialog_new, "gtk_file_chooser_dialog_new", LIBS);
 
   // FileChooserNative
-  gidLink(gtk_file_chooser_native_get_type, "gtk_file_chooser_native_get_type", LIBS);
-  gidLink(gtk_file_chooser_native_new, "gtk_file_chooser_native_new", LIBS);
-  gidLink(gtk_file_chooser_native_get_accept_label, "gtk_file_chooser_native_get_accept_label", LIBS);
-  gidLink(gtk_file_chooser_native_get_cancel_label, "gtk_file_chooser_native_get_cancel_label", LIBS);
-  gidLink(gtk_file_chooser_native_set_accept_label, "gtk_file_chooser_native_set_accept_label", LIBS);
-  gidLink(gtk_file_chooser_native_set_cancel_label, "gtk_file_chooser_native_set_cancel_label", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_native_get_type, "gtk_file_chooser_native_get_type", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_native_new, "gtk_file_chooser_native_new", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_native_get_accept_label, "gtk_file_chooser_native_get_accept_label", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_native_get_cancel_label, "gtk_file_chooser_native_get_cancel_label", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_native_set_accept_label, "gtk_file_chooser_native_set_accept_label", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_native_set_cancel_label, "gtk_file_chooser_native_set_cancel_label", LIBS);
 
   // FileChooserWidget
-  gidLink(gtk_file_chooser_widget_get_type, "gtk_file_chooser_widget_get_type", LIBS);
-  gidLink(gtk_file_chooser_widget_new, "gtk_file_chooser_widget_new", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_widget_get_type, "gtk_file_chooser_widget_get_type", LIBS);
+  gidLink(cast(void**)&gtk_file_chooser_widget_new, "gtk_file_chooser_widget_new", LIBS);
 
   // FileDialog
-  gidLink(gtk_file_dialog_get_type, "gtk_file_dialog_get_type", LIBS);
-  gidLink(gtk_file_dialog_new, "gtk_file_dialog_new", LIBS);
-  gidLink(gtk_file_dialog_get_accept_label, "gtk_file_dialog_get_accept_label", LIBS);
-  gidLink(gtk_file_dialog_get_default_filter, "gtk_file_dialog_get_default_filter", LIBS);
-  gidLink(gtk_file_dialog_get_filters, "gtk_file_dialog_get_filters", LIBS);
-  gidLink(gtk_file_dialog_get_initial_file, "gtk_file_dialog_get_initial_file", LIBS);
-  gidLink(gtk_file_dialog_get_initial_folder, "gtk_file_dialog_get_initial_folder", LIBS);
-  gidLink(gtk_file_dialog_get_initial_name, "gtk_file_dialog_get_initial_name", LIBS);
-  gidLink(gtk_file_dialog_get_modal, "gtk_file_dialog_get_modal", LIBS);
-  gidLink(gtk_file_dialog_get_title, "gtk_file_dialog_get_title", LIBS);
-  gidLink(gtk_file_dialog_open, "gtk_file_dialog_open", LIBS);
-  gidLink(gtk_file_dialog_open_finish, "gtk_file_dialog_open_finish", LIBS);
-  gidLink(gtk_file_dialog_open_multiple, "gtk_file_dialog_open_multiple", LIBS);
-  gidLink(gtk_file_dialog_open_multiple_finish, "gtk_file_dialog_open_multiple_finish", LIBS);
-  gidLink(gtk_file_dialog_save, "gtk_file_dialog_save", LIBS);
-  gidLink(gtk_file_dialog_save_finish, "gtk_file_dialog_save_finish", LIBS);
-  gidLink(gtk_file_dialog_select_folder, "gtk_file_dialog_select_folder", LIBS);
-  gidLink(gtk_file_dialog_select_folder_finish, "gtk_file_dialog_select_folder_finish", LIBS);
-  gidLink(gtk_file_dialog_select_multiple_folders, "gtk_file_dialog_select_multiple_folders", LIBS);
-  gidLink(gtk_file_dialog_select_multiple_folders_finish, "gtk_file_dialog_select_multiple_folders_finish", LIBS);
-  gidLink(gtk_file_dialog_set_accept_label, "gtk_file_dialog_set_accept_label", LIBS);
-  gidLink(gtk_file_dialog_set_default_filter, "gtk_file_dialog_set_default_filter", LIBS);
-  gidLink(gtk_file_dialog_set_filters, "gtk_file_dialog_set_filters", LIBS);
-  gidLink(gtk_file_dialog_set_initial_file, "gtk_file_dialog_set_initial_file", LIBS);
-  gidLink(gtk_file_dialog_set_initial_folder, "gtk_file_dialog_set_initial_folder", LIBS);
-  gidLink(gtk_file_dialog_set_initial_name, "gtk_file_dialog_set_initial_name", LIBS);
-  gidLink(gtk_file_dialog_set_modal, "gtk_file_dialog_set_modal", LIBS);
-  gidLink(gtk_file_dialog_set_title, "gtk_file_dialog_set_title", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_get_type, "gtk_file_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_new, "gtk_file_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_get_accept_label, "gtk_file_dialog_get_accept_label", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_get_default_filter, "gtk_file_dialog_get_default_filter", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_get_filters, "gtk_file_dialog_get_filters", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_get_initial_file, "gtk_file_dialog_get_initial_file", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_get_initial_folder, "gtk_file_dialog_get_initial_folder", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_get_initial_name, "gtk_file_dialog_get_initial_name", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_get_modal, "gtk_file_dialog_get_modal", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_get_title, "gtk_file_dialog_get_title", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_open, "gtk_file_dialog_open", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_open_finish, "gtk_file_dialog_open_finish", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_open_multiple, "gtk_file_dialog_open_multiple", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_open_multiple_finish, "gtk_file_dialog_open_multiple_finish", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_save, "gtk_file_dialog_save", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_save_finish, "gtk_file_dialog_save_finish", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_select_folder, "gtk_file_dialog_select_folder", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_select_folder_finish, "gtk_file_dialog_select_folder_finish", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_select_multiple_folders, "gtk_file_dialog_select_multiple_folders", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_select_multiple_folders_finish, "gtk_file_dialog_select_multiple_folders_finish", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_set_accept_label, "gtk_file_dialog_set_accept_label", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_set_default_filter, "gtk_file_dialog_set_default_filter", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_set_filters, "gtk_file_dialog_set_filters", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_set_initial_file, "gtk_file_dialog_set_initial_file", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_set_initial_folder, "gtk_file_dialog_set_initial_folder", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_set_initial_name, "gtk_file_dialog_set_initial_name", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_set_modal, "gtk_file_dialog_set_modal", LIBS);
+  gidLink(cast(void**)&gtk_file_dialog_set_title, "gtk_file_dialog_set_title", LIBS);
 
   // FileFilter
-  gidLink(gtk_file_filter_get_type, "gtk_file_filter_get_type", LIBS);
-  gidLink(gtk_file_filter_new, "gtk_file_filter_new", LIBS);
-  gidLink(gtk_file_filter_new_from_gvariant, "gtk_file_filter_new_from_gvariant", LIBS);
-  gidLink(gtk_file_filter_add_mime_type, "gtk_file_filter_add_mime_type", LIBS);
-  gidLink(gtk_file_filter_add_pattern, "gtk_file_filter_add_pattern", LIBS);
-  gidLink(gtk_file_filter_add_pixbuf_formats, "gtk_file_filter_add_pixbuf_formats", LIBS);
-  gidLink(gtk_file_filter_add_suffix, "gtk_file_filter_add_suffix", LIBS);
-  gidLink(gtk_file_filter_get_attributes, "gtk_file_filter_get_attributes", LIBS);
-  gidLink(gtk_file_filter_get_name, "gtk_file_filter_get_name", LIBS);
-  gidLink(gtk_file_filter_set_name, "gtk_file_filter_set_name", LIBS);
-  gidLink(gtk_file_filter_to_gvariant, "gtk_file_filter_to_gvariant", LIBS);
+  gidLink(cast(void**)&gtk_file_filter_get_type, "gtk_file_filter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_file_filter_new, "gtk_file_filter_new", LIBS);
+  gidLink(cast(void**)&gtk_file_filter_new_from_gvariant, "gtk_file_filter_new_from_gvariant", LIBS);
+  gidLink(cast(void**)&gtk_file_filter_add_mime_type, "gtk_file_filter_add_mime_type", LIBS);
+  gidLink(cast(void**)&gtk_file_filter_add_pattern, "gtk_file_filter_add_pattern", LIBS);
+  gidLink(cast(void**)&gtk_file_filter_add_pixbuf_formats, "gtk_file_filter_add_pixbuf_formats", LIBS);
+  gidLink(cast(void**)&gtk_file_filter_add_suffix, "gtk_file_filter_add_suffix", LIBS);
+  gidLink(cast(void**)&gtk_file_filter_get_attributes, "gtk_file_filter_get_attributes", LIBS);
+  gidLink(cast(void**)&gtk_file_filter_get_name, "gtk_file_filter_get_name", LIBS);
+  gidLink(cast(void**)&gtk_file_filter_set_name, "gtk_file_filter_set_name", LIBS);
+  gidLink(cast(void**)&gtk_file_filter_to_gvariant, "gtk_file_filter_to_gvariant", LIBS);
 
   // FileLauncher
-  gidLink(gtk_file_launcher_get_type, "gtk_file_launcher_get_type", LIBS);
-  gidLink(gtk_file_launcher_new, "gtk_file_launcher_new", LIBS);
-  gidLink(gtk_file_launcher_get_always_ask, "gtk_file_launcher_get_always_ask", LIBS);
-  gidLink(gtk_file_launcher_get_file, "gtk_file_launcher_get_file", LIBS);
-  gidLink(gtk_file_launcher_get_writable, "gtk_file_launcher_get_writable", LIBS);
-  gidLink(gtk_file_launcher_launch, "gtk_file_launcher_launch", LIBS);
-  gidLink(gtk_file_launcher_launch_finish, "gtk_file_launcher_launch_finish", LIBS);
-  gidLink(gtk_file_launcher_open_containing_folder, "gtk_file_launcher_open_containing_folder", LIBS);
-  gidLink(gtk_file_launcher_open_containing_folder_finish, "gtk_file_launcher_open_containing_folder_finish", LIBS);
-  gidLink(gtk_file_launcher_set_always_ask, "gtk_file_launcher_set_always_ask", LIBS);
-  gidLink(gtk_file_launcher_set_file, "gtk_file_launcher_set_file", LIBS);
-  gidLink(gtk_file_launcher_set_writable, "gtk_file_launcher_set_writable", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_get_type, "gtk_file_launcher_get_type", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_new, "gtk_file_launcher_new", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_get_always_ask, "gtk_file_launcher_get_always_ask", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_get_file, "gtk_file_launcher_get_file", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_get_writable, "gtk_file_launcher_get_writable", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_launch, "gtk_file_launcher_launch", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_launch_finish, "gtk_file_launcher_launch_finish", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_open_containing_folder, "gtk_file_launcher_open_containing_folder", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_open_containing_folder_finish, "gtk_file_launcher_open_containing_folder_finish", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_set_always_ask, "gtk_file_launcher_set_always_ask", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_set_file, "gtk_file_launcher_set_file", LIBS);
+  gidLink(cast(void**)&gtk_file_launcher_set_writable, "gtk_file_launcher_set_writable", LIBS);
 
   // Filter
-  gidLink(gtk_filter_get_type, "gtk_filter_get_type", LIBS);
-  gidLink(gtk_filter_changed, "gtk_filter_changed", LIBS);
-  gidLink(gtk_filter_get_strictness, "gtk_filter_get_strictness", LIBS);
-  gidLink(gtk_filter_match, "gtk_filter_match", LIBS);
+  gidLink(cast(void**)&gtk_filter_get_type, "gtk_filter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_filter_changed, "gtk_filter_changed", LIBS);
+  gidLink(cast(void**)&gtk_filter_get_strictness, "gtk_filter_get_strictness", LIBS);
+  gidLink(cast(void**)&gtk_filter_match, "gtk_filter_match", LIBS);
 
   // FilterListModel
-  gidLink(gtk_filter_list_model_get_type, "gtk_filter_list_model_get_type", LIBS);
-  gidLink(gtk_filter_list_model_new, "gtk_filter_list_model_new", LIBS);
-  gidLink(gtk_filter_list_model_get_filter, "gtk_filter_list_model_get_filter", LIBS);
-  gidLink(gtk_filter_list_model_get_incremental, "gtk_filter_list_model_get_incremental", LIBS);
-  gidLink(gtk_filter_list_model_get_model, "gtk_filter_list_model_get_model", LIBS);
-  gidLink(gtk_filter_list_model_get_pending, "gtk_filter_list_model_get_pending", LIBS);
-  gidLink(gtk_filter_list_model_set_filter, "gtk_filter_list_model_set_filter", LIBS);
-  gidLink(gtk_filter_list_model_set_incremental, "gtk_filter_list_model_set_incremental", LIBS);
-  gidLink(gtk_filter_list_model_set_model, "gtk_filter_list_model_set_model", LIBS);
+  gidLink(cast(void**)&gtk_filter_list_model_get_type, "gtk_filter_list_model_get_type", LIBS);
+  gidLink(cast(void**)&gtk_filter_list_model_new, "gtk_filter_list_model_new", LIBS);
+  gidLink(cast(void**)&gtk_filter_list_model_get_filter, "gtk_filter_list_model_get_filter", LIBS);
+  gidLink(cast(void**)&gtk_filter_list_model_get_incremental, "gtk_filter_list_model_get_incremental", LIBS);
+  gidLink(cast(void**)&gtk_filter_list_model_get_model, "gtk_filter_list_model_get_model", LIBS);
+  gidLink(cast(void**)&gtk_filter_list_model_get_pending, "gtk_filter_list_model_get_pending", LIBS);
+  gidLink(cast(void**)&gtk_filter_list_model_set_filter, "gtk_filter_list_model_set_filter", LIBS);
+  gidLink(cast(void**)&gtk_filter_list_model_set_incremental, "gtk_filter_list_model_set_incremental", LIBS);
+  gidLink(cast(void**)&gtk_filter_list_model_set_model, "gtk_filter_list_model_set_model", LIBS);
 
   // Fixed
-  gidLink(gtk_fixed_get_type, "gtk_fixed_get_type", LIBS);
-  gidLink(gtk_fixed_new, "gtk_fixed_new", LIBS);
-  gidLink(gtk_fixed_get_child_position, "gtk_fixed_get_child_position", LIBS);
-  gidLink(gtk_fixed_get_child_transform, "gtk_fixed_get_child_transform", LIBS);
-  gidLink(gtk_fixed_move, "gtk_fixed_move", LIBS);
-  gidLink(gtk_fixed_put, "gtk_fixed_put", LIBS);
-  gidLink(gtk_fixed_remove, "gtk_fixed_remove", LIBS);
-  gidLink(gtk_fixed_set_child_transform, "gtk_fixed_set_child_transform", LIBS);
+  gidLink(cast(void**)&gtk_fixed_get_type, "gtk_fixed_get_type", LIBS);
+  gidLink(cast(void**)&gtk_fixed_new, "gtk_fixed_new", LIBS);
+  gidLink(cast(void**)&gtk_fixed_get_child_position, "gtk_fixed_get_child_position", LIBS);
+  gidLink(cast(void**)&gtk_fixed_get_child_transform, "gtk_fixed_get_child_transform", LIBS);
+  gidLink(cast(void**)&gtk_fixed_move, "gtk_fixed_move", LIBS);
+  gidLink(cast(void**)&gtk_fixed_put, "gtk_fixed_put", LIBS);
+  gidLink(cast(void**)&gtk_fixed_remove, "gtk_fixed_remove", LIBS);
+  gidLink(cast(void**)&gtk_fixed_set_child_transform, "gtk_fixed_set_child_transform", LIBS);
 
   // FixedLayout
-  gidLink(gtk_fixed_layout_get_type, "gtk_fixed_layout_get_type", LIBS);
-  gidLink(gtk_fixed_layout_new, "gtk_fixed_layout_new", LIBS);
+  gidLink(cast(void**)&gtk_fixed_layout_get_type, "gtk_fixed_layout_get_type", LIBS);
+  gidLink(cast(void**)&gtk_fixed_layout_new, "gtk_fixed_layout_new", LIBS);
 
   // FixedLayoutChild
-  gidLink(gtk_fixed_layout_child_get_type, "gtk_fixed_layout_child_get_type", LIBS);
-  gidLink(gtk_fixed_layout_child_get_transform, "gtk_fixed_layout_child_get_transform", LIBS);
-  gidLink(gtk_fixed_layout_child_set_transform, "gtk_fixed_layout_child_set_transform", LIBS);
+  gidLink(cast(void**)&gtk_fixed_layout_child_get_type, "gtk_fixed_layout_child_get_type", LIBS);
+  gidLink(cast(void**)&gtk_fixed_layout_child_get_transform, "gtk_fixed_layout_child_get_transform", LIBS);
+  gidLink(cast(void**)&gtk_fixed_layout_child_set_transform, "gtk_fixed_layout_child_set_transform", LIBS);
 
   // FlattenListModel
-  gidLink(gtk_flatten_list_model_get_type, "gtk_flatten_list_model_get_type", LIBS);
-  gidLink(gtk_flatten_list_model_new, "gtk_flatten_list_model_new", LIBS);
-  gidLink(gtk_flatten_list_model_get_model, "gtk_flatten_list_model_get_model", LIBS);
-  gidLink(gtk_flatten_list_model_get_model_for_item, "gtk_flatten_list_model_get_model_for_item", LIBS);
-  gidLink(gtk_flatten_list_model_set_model, "gtk_flatten_list_model_set_model", LIBS);
+  gidLink(cast(void**)&gtk_flatten_list_model_get_type, "gtk_flatten_list_model_get_type", LIBS);
+  gidLink(cast(void**)&gtk_flatten_list_model_new, "gtk_flatten_list_model_new", LIBS);
+  gidLink(cast(void**)&gtk_flatten_list_model_get_model, "gtk_flatten_list_model_get_model", LIBS);
+  gidLink(cast(void**)&gtk_flatten_list_model_get_model_for_item, "gtk_flatten_list_model_get_model_for_item", LIBS);
+  gidLink(cast(void**)&gtk_flatten_list_model_set_model, "gtk_flatten_list_model_set_model", LIBS);
 
   // FlowBox
-  gidLink(gtk_flow_box_get_type, "gtk_flow_box_get_type", LIBS);
-  gidLink(gtk_flow_box_new, "gtk_flow_box_new", LIBS);
-  gidLink(gtk_flow_box_append, "gtk_flow_box_append", LIBS);
-  gidLink(gtk_flow_box_bind_model, "gtk_flow_box_bind_model", LIBS);
-  gidLink(gtk_flow_box_get_activate_on_single_click, "gtk_flow_box_get_activate_on_single_click", LIBS);
-  gidLink(gtk_flow_box_get_child_at_index, "gtk_flow_box_get_child_at_index", LIBS);
-  gidLink(gtk_flow_box_get_child_at_pos, "gtk_flow_box_get_child_at_pos", LIBS);
-  gidLink(gtk_flow_box_get_column_spacing, "gtk_flow_box_get_column_spacing", LIBS);
-  gidLink(gtk_flow_box_get_homogeneous, "gtk_flow_box_get_homogeneous", LIBS);
-  gidLink(gtk_flow_box_get_max_children_per_line, "gtk_flow_box_get_max_children_per_line", LIBS);
-  gidLink(gtk_flow_box_get_min_children_per_line, "gtk_flow_box_get_min_children_per_line", LIBS);
-  gidLink(gtk_flow_box_get_row_spacing, "gtk_flow_box_get_row_spacing", LIBS);
-  gidLink(gtk_flow_box_get_selected_children, "gtk_flow_box_get_selected_children", LIBS);
-  gidLink(gtk_flow_box_get_selection_mode, "gtk_flow_box_get_selection_mode", LIBS);
-  gidLink(gtk_flow_box_insert, "gtk_flow_box_insert", LIBS);
-  gidLink(gtk_flow_box_invalidate_filter, "gtk_flow_box_invalidate_filter", LIBS);
-  gidLink(gtk_flow_box_invalidate_sort, "gtk_flow_box_invalidate_sort", LIBS);
-  gidLink(gtk_flow_box_prepend, "gtk_flow_box_prepend", LIBS);
-  gidLink(gtk_flow_box_remove, "gtk_flow_box_remove", LIBS);
-  gidLink(gtk_flow_box_remove_all, "gtk_flow_box_remove_all", LIBS);
-  gidLink(gtk_flow_box_select_all, "gtk_flow_box_select_all", LIBS);
-  gidLink(gtk_flow_box_select_child, "gtk_flow_box_select_child", LIBS);
-  gidLink(gtk_flow_box_selected_foreach, "gtk_flow_box_selected_foreach", LIBS);
-  gidLink(gtk_flow_box_set_activate_on_single_click, "gtk_flow_box_set_activate_on_single_click", LIBS);
-  gidLink(gtk_flow_box_set_column_spacing, "gtk_flow_box_set_column_spacing", LIBS);
-  gidLink(gtk_flow_box_set_filter_func, "gtk_flow_box_set_filter_func", LIBS);
-  gidLink(gtk_flow_box_set_hadjustment, "gtk_flow_box_set_hadjustment", LIBS);
-  gidLink(gtk_flow_box_set_homogeneous, "gtk_flow_box_set_homogeneous", LIBS);
-  gidLink(gtk_flow_box_set_max_children_per_line, "gtk_flow_box_set_max_children_per_line", LIBS);
-  gidLink(gtk_flow_box_set_min_children_per_line, "gtk_flow_box_set_min_children_per_line", LIBS);
-  gidLink(gtk_flow_box_set_row_spacing, "gtk_flow_box_set_row_spacing", LIBS);
-  gidLink(gtk_flow_box_set_selection_mode, "gtk_flow_box_set_selection_mode", LIBS);
-  gidLink(gtk_flow_box_set_sort_func, "gtk_flow_box_set_sort_func", LIBS);
-  gidLink(gtk_flow_box_set_vadjustment, "gtk_flow_box_set_vadjustment", LIBS);
-  gidLink(gtk_flow_box_unselect_all, "gtk_flow_box_unselect_all", LIBS);
-  gidLink(gtk_flow_box_unselect_child, "gtk_flow_box_unselect_child", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_get_type, "gtk_flow_box_get_type", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_new, "gtk_flow_box_new", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_append, "gtk_flow_box_append", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_bind_model, "gtk_flow_box_bind_model", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_get_activate_on_single_click, "gtk_flow_box_get_activate_on_single_click", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_get_child_at_index, "gtk_flow_box_get_child_at_index", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_get_child_at_pos, "gtk_flow_box_get_child_at_pos", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_get_column_spacing, "gtk_flow_box_get_column_spacing", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_get_homogeneous, "gtk_flow_box_get_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_get_max_children_per_line, "gtk_flow_box_get_max_children_per_line", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_get_min_children_per_line, "gtk_flow_box_get_min_children_per_line", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_get_row_spacing, "gtk_flow_box_get_row_spacing", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_get_selected_children, "gtk_flow_box_get_selected_children", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_get_selection_mode, "gtk_flow_box_get_selection_mode", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_insert, "gtk_flow_box_insert", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_invalidate_filter, "gtk_flow_box_invalidate_filter", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_invalidate_sort, "gtk_flow_box_invalidate_sort", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_prepend, "gtk_flow_box_prepend", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_remove, "gtk_flow_box_remove", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_remove_all, "gtk_flow_box_remove_all", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_select_all, "gtk_flow_box_select_all", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_select_child, "gtk_flow_box_select_child", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_selected_foreach, "gtk_flow_box_selected_foreach", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_set_activate_on_single_click, "gtk_flow_box_set_activate_on_single_click", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_set_column_spacing, "gtk_flow_box_set_column_spacing", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_set_filter_func, "gtk_flow_box_set_filter_func", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_set_hadjustment, "gtk_flow_box_set_hadjustment", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_set_homogeneous, "gtk_flow_box_set_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_set_max_children_per_line, "gtk_flow_box_set_max_children_per_line", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_set_min_children_per_line, "gtk_flow_box_set_min_children_per_line", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_set_row_spacing, "gtk_flow_box_set_row_spacing", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_set_selection_mode, "gtk_flow_box_set_selection_mode", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_set_sort_func, "gtk_flow_box_set_sort_func", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_set_vadjustment, "gtk_flow_box_set_vadjustment", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_unselect_all, "gtk_flow_box_unselect_all", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_unselect_child, "gtk_flow_box_unselect_child", LIBS);
 
   // FlowBoxChild
-  gidLink(gtk_flow_box_child_get_type, "gtk_flow_box_child_get_type", LIBS);
-  gidLink(gtk_flow_box_child_new, "gtk_flow_box_child_new", LIBS);
-  gidLink(gtk_flow_box_child_changed, "gtk_flow_box_child_changed", LIBS);
-  gidLink(gtk_flow_box_child_get_child, "gtk_flow_box_child_get_child", LIBS);
-  gidLink(gtk_flow_box_child_get_index, "gtk_flow_box_child_get_index", LIBS);
-  gidLink(gtk_flow_box_child_is_selected, "gtk_flow_box_child_is_selected", LIBS);
-  gidLink(gtk_flow_box_child_set_child, "gtk_flow_box_child_set_child", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_child_get_type, "gtk_flow_box_child_get_type", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_child_new, "gtk_flow_box_child_new", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_child_changed, "gtk_flow_box_child_changed", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_child_get_child, "gtk_flow_box_child_get_child", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_child_get_index, "gtk_flow_box_child_get_index", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_child_is_selected, "gtk_flow_box_child_is_selected", LIBS);
+  gidLink(cast(void**)&gtk_flow_box_child_set_child, "gtk_flow_box_child_set_child", LIBS);
 
   // FontButton
-  gidLink(gtk_font_button_get_type, "gtk_font_button_get_type", LIBS);
-  gidLink(gtk_font_button_new, "gtk_font_button_new", LIBS);
-  gidLink(gtk_font_button_new_with_font, "gtk_font_button_new_with_font", LIBS);
-  gidLink(gtk_font_button_get_modal, "gtk_font_button_get_modal", LIBS);
-  gidLink(gtk_font_button_get_title, "gtk_font_button_get_title", LIBS);
-  gidLink(gtk_font_button_get_use_font, "gtk_font_button_get_use_font", LIBS);
-  gidLink(gtk_font_button_get_use_size, "gtk_font_button_get_use_size", LIBS);
-  gidLink(gtk_font_button_set_modal, "gtk_font_button_set_modal", LIBS);
-  gidLink(gtk_font_button_set_title, "gtk_font_button_set_title", LIBS);
-  gidLink(gtk_font_button_set_use_font, "gtk_font_button_set_use_font", LIBS);
-  gidLink(gtk_font_button_set_use_size, "gtk_font_button_set_use_size", LIBS);
+  gidLink(cast(void**)&gtk_font_button_get_type, "gtk_font_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_font_button_new, "gtk_font_button_new", LIBS);
+  gidLink(cast(void**)&gtk_font_button_new_with_font, "gtk_font_button_new_with_font", LIBS);
+  gidLink(cast(void**)&gtk_font_button_get_modal, "gtk_font_button_get_modal", LIBS);
+  gidLink(cast(void**)&gtk_font_button_get_title, "gtk_font_button_get_title", LIBS);
+  gidLink(cast(void**)&gtk_font_button_get_use_font, "gtk_font_button_get_use_font", LIBS);
+  gidLink(cast(void**)&gtk_font_button_get_use_size, "gtk_font_button_get_use_size", LIBS);
+  gidLink(cast(void**)&gtk_font_button_set_modal, "gtk_font_button_set_modal", LIBS);
+  gidLink(cast(void**)&gtk_font_button_set_title, "gtk_font_button_set_title", LIBS);
+  gidLink(cast(void**)&gtk_font_button_set_use_font, "gtk_font_button_set_use_font", LIBS);
+  gidLink(cast(void**)&gtk_font_button_set_use_size, "gtk_font_button_set_use_size", LIBS);
 
   // FontChooser
-  gidLink(gtk_font_chooser_get_type, "gtk_font_chooser_get_type", LIBS);
-  gidLink(gtk_font_chooser_get_font, "gtk_font_chooser_get_font", LIBS);
-  gidLink(gtk_font_chooser_get_font_desc, "gtk_font_chooser_get_font_desc", LIBS);
-  gidLink(gtk_font_chooser_get_font_face, "gtk_font_chooser_get_font_face", LIBS);
-  gidLink(gtk_font_chooser_get_font_family, "gtk_font_chooser_get_font_family", LIBS);
-  gidLink(gtk_font_chooser_get_font_features, "gtk_font_chooser_get_font_features", LIBS);
-  gidLink(gtk_font_chooser_get_font_map, "gtk_font_chooser_get_font_map", LIBS);
-  gidLink(gtk_font_chooser_get_font_size, "gtk_font_chooser_get_font_size", LIBS);
-  gidLink(gtk_font_chooser_get_language, "gtk_font_chooser_get_language", LIBS);
-  gidLink(gtk_font_chooser_get_level, "gtk_font_chooser_get_level", LIBS);
-  gidLink(gtk_font_chooser_get_preview_text, "gtk_font_chooser_get_preview_text", LIBS);
-  gidLink(gtk_font_chooser_get_show_preview_entry, "gtk_font_chooser_get_show_preview_entry", LIBS);
-  gidLink(gtk_font_chooser_set_filter_func, "gtk_font_chooser_set_filter_func", LIBS);
-  gidLink(gtk_font_chooser_set_font, "gtk_font_chooser_set_font", LIBS);
-  gidLink(gtk_font_chooser_set_font_desc, "gtk_font_chooser_set_font_desc", LIBS);
-  gidLink(gtk_font_chooser_set_font_map, "gtk_font_chooser_set_font_map", LIBS);
-  gidLink(gtk_font_chooser_set_language, "gtk_font_chooser_set_language", LIBS);
-  gidLink(gtk_font_chooser_set_level, "gtk_font_chooser_set_level", LIBS);
-  gidLink(gtk_font_chooser_set_preview_text, "gtk_font_chooser_set_preview_text", LIBS);
-  gidLink(gtk_font_chooser_set_show_preview_entry, "gtk_font_chooser_set_show_preview_entry", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_type, "gtk_font_chooser_get_type", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_font, "gtk_font_chooser_get_font", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_font_desc, "gtk_font_chooser_get_font_desc", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_font_face, "gtk_font_chooser_get_font_face", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_font_family, "gtk_font_chooser_get_font_family", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_font_features, "gtk_font_chooser_get_font_features", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_font_map, "gtk_font_chooser_get_font_map", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_font_size, "gtk_font_chooser_get_font_size", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_language, "gtk_font_chooser_get_language", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_level, "gtk_font_chooser_get_level", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_preview_text, "gtk_font_chooser_get_preview_text", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_get_show_preview_entry, "gtk_font_chooser_get_show_preview_entry", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_set_filter_func, "gtk_font_chooser_set_filter_func", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_set_font, "gtk_font_chooser_set_font", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_set_font_desc, "gtk_font_chooser_set_font_desc", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_set_font_map, "gtk_font_chooser_set_font_map", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_set_language, "gtk_font_chooser_set_language", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_set_level, "gtk_font_chooser_set_level", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_set_preview_text, "gtk_font_chooser_set_preview_text", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_set_show_preview_entry, "gtk_font_chooser_set_show_preview_entry", LIBS);
 
   // FontChooserDialog
-  gidLink(gtk_font_chooser_dialog_get_type, "gtk_font_chooser_dialog_get_type", LIBS);
-  gidLink(gtk_font_chooser_dialog_new, "gtk_font_chooser_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_dialog_get_type, "gtk_font_chooser_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_dialog_new, "gtk_font_chooser_dialog_new", LIBS);
 
   // FontChooserWidget
-  gidLink(gtk_font_chooser_widget_get_type, "gtk_font_chooser_widget_get_type", LIBS);
-  gidLink(gtk_font_chooser_widget_new, "gtk_font_chooser_widget_new", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_widget_get_type, "gtk_font_chooser_widget_get_type", LIBS);
+  gidLink(cast(void**)&gtk_font_chooser_widget_new, "gtk_font_chooser_widget_new", LIBS);
 
   // FontDialog
-  gidLink(gtk_font_dialog_get_type, "gtk_font_dialog_get_type", LIBS);
-  gidLink(gtk_font_dialog_new, "gtk_font_dialog_new", LIBS);
-  gidLink(gtk_font_dialog_choose_face, "gtk_font_dialog_choose_face", LIBS);
-  gidLink(gtk_font_dialog_choose_face_finish, "gtk_font_dialog_choose_face_finish", LIBS);
-  gidLink(gtk_font_dialog_choose_family, "gtk_font_dialog_choose_family", LIBS);
-  gidLink(gtk_font_dialog_choose_family_finish, "gtk_font_dialog_choose_family_finish", LIBS);
-  gidLink(gtk_font_dialog_choose_font, "gtk_font_dialog_choose_font", LIBS);
-  gidLink(gtk_font_dialog_choose_font_and_features, "gtk_font_dialog_choose_font_and_features", LIBS);
-  gidLink(gtk_font_dialog_choose_font_and_features_finish, "gtk_font_dialog_choose_font_and_features_finish", LIBS);
-  gidLink(gtk_font_dialog_choose_font_finish, "gtk_font_dialog_choose_font_finish", LIBS);
-  gidLink(gtk_font_dialog_get_filter, "gtk_font_dialog_get_filter", LIBS);
-  gidLink(gtk_font_dialog_get_font_map, "gtk_font_dialog_get_font_map", LIBS);
-  gidLink(gtk_font_dialog_get_language, "gtk_font_dialog_get_language", LIBS);
-  gidLink(gtk_font_dialog_get_modal, "gtk_font_dialog_get_modal", LIBS);
-  gidLink(gtk_font_dialog_get_title, "gtk_font_dialog_get_title", LIBS);
-  gidLink(gtk_font_dialog_set_filter, "gtk_font_dialog_set_filter", LIBS);
-  gidLink(gtk_font_dialog_set_font_map, "gtk_font_dialog_set_font_map", LIBS);
-  gidLink(gtk_font_dialog_set_language, "gtk_font_dialog_set_language", LIBS);
-  gidLink(gtk_font_dialog_set_modal, "gtk_font_dialog_set_modal", LIBS);
-  gidLink(gtk_font_dialog_set_title, "gtk_font_dialog_set_title", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_get_type, "gtk_font_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_new, "gtk_font_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_choose_face, "gtk_font_dialog_choose_face", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_choose_face_finish, "gtk_font_dialog_choose_face_finish", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_choose_family, "gtk_font_dialog_choose_family", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_choose_family_finish, "gtk_font_dialog_choose_family_finish", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_choose_font, "gtk_font_dialog_choose_font", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_choose_font_and_features, "gtk_font_dialog_choose_font_and_features", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_choose_font_and_features_finish, "gtk_font_dialog_choose_font_and_features_finish", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_choose_font_finish, "gtk_font_dialog_choose_font_finish", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_get_filter, "gtk_font_dialog_get_filter", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_get_font_map, "gtk_font_dialog_get_font_map", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_get_language, "gtk_font_dialog_get_language", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_get_modal, "gtk_font_dialog_get_modal", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_get_title, "gtk_font_dialog_get_title", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_set_filter, "gtk_font_dialog_set_filter", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_set_font_map, "gtk_font_dialog_set_font_map", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_set_language, "gtk_font_dialog_set_language", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_set_modal, "gtk_font_dialog_set_modal", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_set_title, "gtk_font_dialog_set_title", LIBS);
 
   // FontDialogButton
-  gidLink(gtk_font_dialog_button_get_type, "gtk_font_dialog_button_get_type", LIBS);
-  gidLink(gtk_font_dialog_button_new, "gtk_font_dialog_button_new", LIBS);
-  gidLink(gtk_font_dialog_button_get_dialog, "gtk_font_dialog_button_get_dialog", LIBS);
-  gidLink(gtk_font_dialog_button_get_font_desc, "gtk_font_dialog_button_get_font_desc", LIBS);
-  gidLink(gtk_font_dialog_button_get_font_features, "gtk_font_dialog_button_get_font_features", LIBS);
-  gidLink(gtk_font_dialog_button_get_language, "gtk_font_dialog_button_get_language", LIBS);
-  gidLink(gtk_font_dialog_button_get_level, "gtk_font_dialog_button_get_level", LIBS);
-  gidLink(gtk_font_dialog_button_get_use_font, "gtk_font_dialog_button_get_use_font", LIBS);
-  gidLink(gtk_font_dialog_button_get_use_size, "gtk_font_dialog_button_get_use_size", LIBS);
-  gidLink(gtk_font_dialog_button_set_dialog, "gtk_font_dialog_button_set_dialog", LIBS);
-  gidLink(gtk_font_dialog_button_set_font_desc, "gtk_font_dialog_button_set_font_desc", LIBS);
-  gidLink(gtk_font_dialog_button_set_font_features, "gtk_font_dialog_button_set_font_features", LIBS);
-  gidLink(gtk_font_dialog_button_set_language, "gtk_font_dialog_button_set_language", LIBS);
-  gidLink(gtk_font_dialog_button_set_level, "gtk_font_dialog_button_set_level", LIBS);
-  gidLink(gtk_font_dialog_button_set_use_font, "gtk_font_dialog_button_set_use_font", LIBS);
-  gidLink(gtk_font_dialog_button_set_use_size, "gtk_font_dialog_button_set_use_size", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_get_type, "gtk_font_dialog_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_new, "gtk_font_dialog_button_new", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_get_dialog, "gtk_font_dialog_button_get_dialog", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_get_font_desc, "gtk_font_dialog_button_get_font_desc", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_get_font_features, "gtk_font_dialog_button_get_font_features", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_get_language, "gtk_font_dialog_button_get_language", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_get_level, "gtk_font_dialog_button_get_level", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_get_use_font, "gtk_font_dialog_button_get_use_font", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_get_use_size, "gtk_font_dialog_button_get_use_size", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_set_dialog, "gtk_font_dialog_button_set_dialog", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_set_font_desc, "gtk_font_dialog_button_set_font_desc", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_set_font_features, "gtk_font_dialog_button_set_font_features", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_set_language, "gtk_font_dialog_button_set_language", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_set_level, "gtk_font_dialog_button_set_level", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_set_use_font, "gtk_font_dialog_button_set_use_font", LIBS);
+  gidLink(cast(void**)&gtk_font_dialog_button_set_use_size, "gtk_font_dialog_button_set_use_size", LIBS);
 
   // Frame
-  gidLink(gtk_frame_get_type, "gtk_frame_get_type", LIBS);
-  gidLink(gtk_frame_new, "gtk_frame_new", LIBS);
-  gidLink(gtk_frame_get_child, "gtk_frame_get_child", LIBS);
-  gidLink(gtk_frame_get_label, "gtk_frame_get_label", LIBS);
-  gidLink(gtk_frame_get_label_align, "gtk_frame_get_label_align", LIBS);
-  gidLink(gtk_frame_get_label_widget, "gtk_frame_get_label_widget", LIBS);
-  gidLink(gtk_frame_set_child, "gtk_frame_set_child", LIBS);
-  gidLink(gtk_frame_set_label, "gtk_frame_set_label", LIBS);
-  gidLink(gtk_frame_set_label_align, "gtk_frame_set_label_align", LIBS);
-  gidLink(gtk_frame_set_label_widget, "gtk_frame_set_label_widget", LIBS);
+  gidLink(cast(void**)&gtk_frame_get_type, "gtk_frame_get_type", LIBS);
+  gidLink(cast(void**)&gtk_frame_new, "gtk_frame_new", LIBS);
+  gidLink(cast(void**)&gtk_frame_get_child, "gtk_frame_get_child", LIBS);
+  gidLink(cast(void**)&gtk_frame_get_label, "gtk_frame_get_label", LIBS);
+  gidLink(cast(void**)&gtk_frame_get_label_align, "gtk_frame_get_label_align", LIBS);
+  gidLink(cast(void**)&gtk_frame_get_label_widget, "gtk_frame_get_label_widget", LIBS);
+  gidLink(cast(void**)&gtk_frame_set_child, "gtk_frame_set_child", LIBS);
+  gidLink(cast(void**)&gtk_frame_set_label, "gtk_frame_set_label", LIBS);
+  gidLink(cast(void**)&gtk_frame_set_label_align, "gtk_frame_set_label_align", LIBS);
+  gidLink(cast(void**)&gtk_frame_set_label_widget, "gtk_frame_set_label_widget", LIBS);
 
   // GLArea
-  gidLink(gtk_gl_area_get_type, "gtk_gl_area_get_type", LIBS);
-  gidLink(gtk_gl_area_new, "gtk_gl_area_new", LIBS);
-  gidLink(gtk_gl_area_attach_buffers, "gtk_gl_area_attach_buffers", LIBS);
-  gidLink(gtk_gl_area_get_allowed_apis, "gtk_gl_area_get_allowed_apis", LIBS);
-  gidLink(gtk_gl_area_get_api, "gtk_gl_area_get_api", LIBS);
-  gidLink(gtk_gl_area_get_auto_render, "gtk_gl_area_get_auto_render", LIBS);
-  gidLink(gtk_gl_area_get_context, "gtk_gl_area_get_context", LIBS);
-  gidLink(gtk_gl_area_get_error, "gtk_gl_area_get_error", LIBS);
-  gidLink(gtk_gl_area_get_has_depth_buffer, "gtk_gl_area_get_has_depth_buffer", LIBS);
-  gidLink(gtk_gl_area_get_has_stencil_buffer, "gtk_gl_area_get_has_stencil_buffer", LIBS);
-  gidLink(gtk_gl_area_get_required_version, "gtk_gl_area_get_required_version", LIBS);
-  gidLink(gtk_gl_area_get_use_es, "gtk_gl_area_get_use_es", LIBS);
-  gidLink(gtk_gl_area_make_current, "gtk_gl_area_make_current", LIBS);
-  gidLink(gtk_gl_area_queue_render, "gtk_gl_area_queue_render", LIBS);
-  gidLink(gtk_gl_area_set_allowed_apis, "gtk_gl_area_set_allowed_apis", LIBS);
-  gidLink(gtk_gl_area_set_auto_render, "gtk_gl_area_set_auto_render", LIBS);
-  gidLink(gtk_gl_area_set_error, "gtk_gl_area_set_error", LIBS);
-  gidLink(gtk_gl_area_set_has_depth_buffer, "gtk_gl_area_set_has_depth_buffer", LIBS);
-  gidLink(gtk_gl_area_set_has_stencil_buffer, "gtk_gl_area_set_has_stencil_buffer", LIBS);
-  gidLink(gtk_gl_area_set_required_version, "gtk_gl_area_set_required_version", LIBS);
-  gidLink(gtk_gl_area_set_use_es, "gtk_gl_area_set_use_es", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_get_type, "gtk_gl_area_get_type", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_new, "gtk_gl_area_new", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_attach_buffers, "gtk_gl_area_attach_buffers", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_get_allowed_apis, "gtk_gl_area_get_allowed_apis", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_get_api, "gtk_gl_area_get_api", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_get_auto_render, "gtk_gl_area_get_auto_render", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_get_context, "gtk_gl_area_get_context", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_get_error, "gtk_gl_area_get_error", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_get_has_depth_buffer, "gtk_gl_area_get_has_depth_buffer", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_get_has_stencil_buffer, "gtk_gl_area_get_has_stencil_buffer", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_get_required_version, "gtk_gl_area_get_required_version", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_get_use_es, "gtk_gl_area_get_use_es", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_make_current, "gtk_gl_area_make_current", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_queue_render, "gtk_gl_area_queue_render", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_set_allowed_apis, "gtk_gl_area_set_allowed_apis", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_set_auto_render, "gtk_gl_area_set_auto_render", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_set_error, "gtk_gl_area_set_error", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_set_has_depth_buffer, "gtk_gl_area_set_has_depth_buffer", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_set_has_stencil_buffer, "gtk_gl_area_set_has_stencil_buffer", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_set_required_version, "gtk_gl_area_set_required_version", LIBS);
+  gidLink(cast(void**)&gtk_gl_area_set_use_es, "gtk_gl_area_set_use_es", LIBS);
 
   // Gesture
-  gidLink(gtk_gesture_get_type, "gtk_gesture_get_type", LIBS);
-  gidLink(gtk_gesture_get_bounding_box, "gtk_gesture_get_bounding_box", LIBS);
-  gidLink(gtk_gesture_get_bounding_box_center, "gtk_gesture_get_bounding_box_center", LIBS);
-  gidLink(gtk_gesture_get_device, "gtk_gesture_get_device", LIBS);
-  gidLink(gtk_gesture_get_group, "gtk_gesture_get_group", LIBS);
-  gidLink(gtk_gesture_get_last_event, "gtk_gesture_get_last_event", LIBS);
-  gidLink(gtk_gesture_get_last_updated_sequence, "gtk_gesture_get_last_updated_sequence", LIBS);
-  gidLink(gtk_gesture_get_point, "gtk_gesture_get_point", LIBS);
-  gidLink(gtk_gesture_get_sequence_state, "gtk_gesture_get_sequence_state", LIBS);
-  gidLink(gtk_gesture_get_sequences, "gtk_gesture_get_sequences", LIBS);
-  gidLink(gtk_gesture_group, "gtk_gesture_group", LIBS);
-  gidLink(gtk_gesture_handles_sequence, "gtk_gesture_handles_sequence", LIBS);
-  gidLink(gtk_gesture_is_active, "gtk_gesture_is_active", LIBS);
-  gidLink(gtk_gesture_is_grouped_with, "gtk_gesture_is_grouped_with", LIBS);
-  gidLink(gtk_gesture_is_recognized, "gtk_gesture_is_recognized", LIBS);
-  gidLink(gtk_gesture_set_sequence_state, "gtk_gesture_set_sequence_state", LIBS);
-  gidLink(gtk_gesture_set_state, "gtk_gesture_set_state", LIBS);
-  gidLink(gtk_gesture_ungroup, "gtk_gesture_ungroup", LIBS);
+  gidLink(cast(void**)&gtk_gesture_get_type, "gtk_gesture_get_type", LIBS);
+  gidLink(cast(void**)&gtk_gesture_get_bounding_box, "gtk_gesture_get_bounding_box", LIBS);
+  gidLink(cast(void**)&gtk_gesture_get_bounding_box_center, "gtk_gesture_get_bounding_box_center", LIBS);
+  gidLink(cast(void**)&gtk_gesture_get_device, "gtk_gesture_get_device", LIBS);
+  gidLink(cast(void**)&gtk_gesture_get_group, "gtk_gesture_get_group", LIBS);
+  gidLink(cast(void**)&gtk_gesture_get_last_event, "gtk_gesture_get_last_event", LIBS);
+  gidLink(cast(void**)&gtk_gesture_get_last_updated_sequence, "gtk_gesture_get_last_updated_sequence", LIBS);
+  gidLink(cast(void**)&gtk_gesture_get_point, "gtk_gesture_get_point", LIBS);
+  gidLink(cast(void**)&gtk_gesture_get_sequence_state, "gtk_gesture_get_sequence_state", LIBS);
+  gidLink(cast(void**)&gtk_gesture_get_sequences, "gtk_gesture_get_sequences", LIBS);
+  gidLink(cast(void**)&gtk_gesture_group, "gtk_gesture_group", LIBS);
+  gidLink(cast(void**)&gtk_gesture_handles_sequence, "gtk_gesture_handles_sequence", LIBS);
+  gidLink(cast(void**)&gtk_gesture_is_active, "gtk_gesture_is_active", LIBS);
+  gidLink(cast(void**)&gtk_gesture_is_grouped_with, "gtk_gesture_is_grouped_with", LIBS);
+  gidLink(cast(void**)&gtk_gesture_is_recognized, "gtk_gesture_is_recognized", LIBS);
+  gidLink(cast(void**)&gtk_gesture_set_sequence_state, "gtk_gesture_set_sequence_state", LIBS);
+  gidLink(cast(void**)&gtk_gesture_set_state, "gtk_gesture_set_state", LIBS);
+  gidLink(cast(void**)&gtk_gesture_ungroup, "gtk_gesture_ungroup", LIBS);
 
   // GestureClick
-  gidLink(gtk_gesture_click_get_type, "gtk_gesture_click_get_type", LIBS);
-  gidLink(gtk_gesture_click_new, "gtk_gesture_click_new", LIBS);
+  gidLink(cast(void**)&gtk_gesture_click_get_type, "gtk_gesture_click_get_type", LIBS);
+  gidLink(cast(void**)&gtk_gesture_click_new, "gtk_gesture_click_new", LIBS);
 
   // GestureDrag
-  gidLink(gtk_gesture_drag_get_type, "gtk_gesture_drag_get_type", LIBS);
-  gidLink(gtk_gesture_drag_new, "gtk_gesture_drag_new", LIBS);
-  gidLink(gtk_gesture_drag_get_offset, "gtk_gesture_drag_get_offset", LIBS);
-  gidLink(gtk_gesture_drag_get_start_point, "gtk_gesture_drag_get_start_point", LIBS);
+  gidLink(cast(void**)&gtk_gesture_drag_get_type, "gtk_gesture_drag_get_type", LIBS);
+  gidLink(cast(void**)&gtk_gesture_drag_new, "gtk_gesture_drag_new", LIBS);
+  gidLink(cast(void**)&gtk_gesture_drag_get_offset, "gtk_gesture_drag_get_offset", LIBS);
+  gidLink(cast(void**)&gtk_gesture_drag_get_start_point, "gtk_gesture_drag_get_start_point", LIBS);
 
   // GestureLongPress
-  gidLink(gtk_gesture_long_press_get_type, "gtk_gesture_long_press_get_type", LIBS);
-  gidLink(gtk_gesture_long_press_new, "gtk_gesture_long_press_new", LIBS);
-  gidLink(gtk_gesture_long_press_get_delay_factor, "gtk_gesture_long_press_get_delay_factor", LIBS);
-  gidLink(gtk_gesture_long_press_set_delay_factor, "gtk_gesture_long_press_set_delay_factor", LIBS);
+  gidLink(cast(void**)&gtk_gesture_long_press_get_type, "gtk_gesture_long_press_get_type", LIBS);
+  gidLink(cast(void**)&gtk_gesture_long_press_new, "gtk_gesture_long_press_new", LIBS);
+  gidLink(cast(void**)&gtk_gesture_long_press_get_delay_factor, "gtk_gesture_long_press_get_delay_factor", LIBS);
+  gidLink(cast(void**)&gtk_gesture_long_press_set_delay_factor, "gtk_gesture_long_press_set_delay_factor", LIBS);
 
   // GesturePan
-  gidLink(gtk_gesture_pan_get_type, "gtk_gesture_pan_get_type", LIBS);
-  gidLink(gtk_gesture_pan_new, "gtk_gesture_pan_new", LIBS);
-  gidLink(gtk_gesture_pan_get_orientation, "gtk_gesture_pan_get_orientation", LIBS);
-  gidLink(gtk_gesture_pan_set_orientation, "gtk_gesture_pan_set_orientation", LIBS);
+  gidLink(cast(void**)&gtk_gesture_pan_get_type, "gtk_gesture_pan_get_type", LIBS);
+  gidLink(cast(void**)&gtk_gesture_pan_new, "gtk_gesture_pan_new", LIBS);
+  gidLink(cast(void**)&gtk_gesture_pan_get_orientation, "gtk_gesture_pan_get_orientation", LIBS);
+  gidLink(cast(void**)&gtk_gesture_pan_set_orientation, "gtk_gesture_pan_set_orientation", LIBS);
 
   // GestureRotate
-  gidLink(gtk_gesture_rotate_get_type, "gtk_gesture_rotate_get_type", LIBS);
-  gidLink(gtk_gesture_rotate_new, "gtk_gesture_rotate_new", LIBS);
-  gidLink(gtk_gesture_rotate_get_angle_delta, "gtk_gesture_rotate_get_angle_delta", LIBS);
+  gidLink(cast(void**)&gtk_gesture_rotate_get_type, "gtk_gesture_rotate_get_type", LIBS);
+  gidLink(cast(void**)&gtk_gesture_rotate_new, "gtk_gesture_rotate_new", LIBS);
+  gidLink(cast(void**)&gtk_gesture_rotate_get_angle_delta, "gtk_gesture_rotate_get_angle_delta", LIBS);
 
   // GestureSingle
-  gidLink(gtk_gesture_single_get_type, "gtk_gesture_single_get_type", LIBS);
-  gidLink(gtk_gesture_single_get_button, "gtk_gesture_single_get_button", LIBS);
-  gidLink(gtk_gesture_single_get_current_button, "gtk_gesture_single_get_current_button", LIBS);
-  gidLink(gtk_gesture_single_get_current_sequence, "gtk_gesture_single_get_current_sequence", LIBS);
-  gidLink(gtk_gesture_single_get_exclusive, "gtk_gesture_single_get_exclusive", LIBS);
-  gidLink(gtk_gesture_single_get_touch_only, "gtk_gesture_single_get_touch_only", LIBS);
-  gidLink(gtk_gesture_single_set_button, "gtk_gesture_single_set_button", LIBS);
-  gidLink(gtk_gesture_single_set_exclusive, "gtk_gesture_single_set_exclusive", LIBS);
-  gidLink(gtk_gesture_single_set_touch_only, "gtk_gesture_single_set_touch_only", LIBS);
+  gidLink(cast(void**)&gtk_gesture_single_get_type, "gtk_gesture_single_get_type", LIBS);
+  gidLink(cast(void**)&gtk_gesture_single_get_button, "gtk_gesture_single_get_button", LIBS);
+  gidLink(cast(void**)&gtk_gesture_single_get_current_button, "gtk_gesture_single_get_current_button", LIBS);
+  gidLink(cast(void**)&gtk_gesture_single_get_current_sequence, "gtk_gesture_single_get_current_sequence", LIBS);
+  gidLink(cast(void**)&gtk_gesture_single_get_exclusive, "gtk_gesture_single_get_exclusive", LIBS);
+  gidLink(cast(void**)&gtk_gesture_single_get_touch_only, "gtk_gesture_single_get_touch_only", LIBS);
+  gidLink(cast(void**)&gtk_gesture_single_set_button, "gtk_gesture_single_set_button", LIBS);
+  gidLink(cast(void**)&gtk_gesture_single_set_exclusive, "gtk_gesture_single_set_exclusive", LIBS);
+  gidLink(cast(void**)&gtk_gesture_single_set_touch_only, "gtk_gesture_single_set_touch_only", LIBS);
 
   // GestureStylus
-  gidLink(gtk_gesture_stylus_get_type, "gtk_gesture_stylus_get_type", LIBS);
-  gidLink(gtk_gesture_stylus_new, "gtk_gesture_stylus_new", LIBS);
-  gidLink(gtk_gesture_stylus_get_axes, "gtk_gesture_stylus_get_axes", LIBS);
-  gidLink(gtk_gesture_stylus_get_axis, "gtk_gesture_stylus_get_axis", LIBS);
-  gidLink(gtk_gesture_stylus_get_backlog, "gtk_gesture_stylus_get_backlog", LIBS);
-  gidLink(gtk_gesture_stylus_get_device_tool, "gtk_gesture_stylus_get_device_tool", LIBS);
-  gidLink(gtk_gesture_stylus_get_stylus_only, "gtk_gesture_stylus_get_stylus_only", LIBS);
-  gidLink(gtk_gesture_stylus_set_stylus_only, "gtk_gesture_stylus_set_stylus_only", LIBS);
+  gidLink(cast(void**)&gtk_gesture_stylus_get_type, "gtk_gesture_stylus_get_type", LIBS);
+  gidLink(cast(void**)&gtk_gesture_stylus_new, "gtk_gesture_stylus_new", LIBS);
+  gidLink(cast(void**)&gtk_gesture_stylus_get_axes, "gtk_gesture_stylus_get_axes", LIBS);
+  gidLink(cast(void**)&gtk_gesture_stylus_get_axis, "gtk_gesture_stylus_get_axis", LIBS);
+  gidLink(cast(void**)&gtk_gesture_stylus_get_backlog, "gtk_gesture_stylus_get_backlog", LIBS);
+  gidLink(cast(void**)&gtk_gesture_stylus_get_device_tool, "gtk_gesture_stylus_get_device_tool", LIBS);
+  gidLink(cast(void**)&gtk_gesture_stylus_get_stylus_only, "gtk_gesture_stylus_get_stylus_only", LIBS);
+  gidLink(cast(void**)&gtk_gesture_stylus_set_stylus_only, "gtk_gesture_stylus_set_stylus_only", LIBS);
 
   // GestureSwipe
-  gidLink(gtk_gesture_swipe_get_type, "gtk_gesture_swipe_get_type", LIBS);
-  gidLink(gtk_gesture_swipe_new, "gtk_gesture_swipe_new", LIBS);
-  gidLink(gtk_gesture_swipe_get_velocity, "gtk_gesture_swipe_get_velocity", LIBS);
+  gidLink(cast(void**)&gtk_gesture_swipe_get_type, "gtk_gesture_swipe_get_type", LIBS);
+  gidLink(cast(void**)&gtk_gesture_swipe_new, "gtk_gesture_swipe_new", LIBS);
+  gidLink(cast(void**)&gtk_gesture_swipe_get_velocity, "gtk_gesture_swipe_get_velocity", LIBS);
 
   // GestureZoom
-  gidLink(gtk_gesture_zoom_get_type, "gtk_gesture_zoom_get_type", LIBS);
-  gidLink(gtk_gesture_zoom_new, "gtk_gesture_zoom_new", LIBS);
-  gidLink(gtk_gesture_zoom_get_scale_delta, "gtk_gesture_zoom_get_scale_delta", LIBS);
+  gidLink(cast(void**)&gtk_gesture_zoom_get_type, "gtk_gesture_zoom_get_type", LIBS);
+  gidLink(cast(void**)&gtk_gesture_zoom_new, "gtk_gesture_zoom_new", LIBS);
+  gidLink(cast(void**)&gtk_gesture_zoom_get_scale_delta, "gtk_gesture_zoom_get_scale_delta", LIBS);
 
   // Global
-  gidLink(gtk_accelerator_get_default_mod_mask, "gtk_accelerator_get_default_mod_mask", LIBS);
-  gidLink(gtk_accelerator_get_label, "gtk_accelerator_get_label", LIBS);
-  gidLink(gtk_accelerator_get_label_with_keycode, "gtk_accelerator_get_label_with_keycode", LIBS);
-  gidLink(gtk_accelerator_name, "gtk_accelerator_name", LIBS);
-  gidLink(gtk_accelerator_name_with_keycode, "gtk_accelerator_name_with_keycode", LIBS);
-  gidLink(gtk_accelerator_parse, "gtk_accelerator_parse", LIBS);
-  gidLink(gtk_accelerator_parse_with_keycode, "gtk_accelerator_parse_with_keycode", LIBS);
-  gidLink(gtk_accelerator_valid, "gtk_accelerator_valid", LIBS);
-  gidLink(gtk_check_version, "gtk_check_version", LIBS);
-  gidLink(gtk_css_parser_error_quark, "gtk_css_parser_error_quark", LIBS);
-  gidLink(gtk_css_parser_warning_quark, "gtk_css_parser_warning_quark", LIBS);
-  gidLink(gtk_disable_setlocale, "gtk_disable_setlocale", LIBS);
-  gidLink(gtk_distribute_natural_allocation, "gtk_distribute_natural_allocation", LIBS);
-  gidLink(gtk_enumerate_printers, "gtk_enumerate_printers", LIBS);
-  gidLink(gtk_get_binary_age, "gtk_get_binary_age", LIBS);
-  gidLink(gtk_get_debug_flags, "gtk_get_debug_flags", LIBS);
-  gidLink(gtk_get_default_language, "gtk_get_default_language", LIBS);
-  gidLink(gtk_get_interface_age, "gtk_get_interface_age", LIBS);
-  gidLink(gtk_get_locale_direction, "gtk_get_locale_direction", LIBS);
-  gidLink(gtk_get_major_version, "gtk_get_major_version", LIBS);
-  gidLink(gtk_get_micro_version, "gtk_get_micro_version", LIBS);
-  gidLink(gtk_get_minor_version, "gtk_get_minor_version", LIBS);
-  gidLink(gtk_hsv_to_rgb, "gtk_hsv_to_rgb", LIBS);
-  gidLink(gtk_init, "gtk_init", LIBS);
-  gidLink(gtk_init_check, "gtk_init_check", LIBS);
-  gidLink(gtk_is_initialized, "gtk_is_initialized", LIBS);
-  gidLink(gtk_param_spec_expression, "gtk_param_spec_expression", LIBS);
-  gidLink(gtk_print_run_page_setup_dialog, "gtk_print_run_page_setup_dialog", LIBS);
-  gidLink(gtk_print_run_page_setup_dialog_async, "gtk_print_run_page_setup_dialog_async", LIBS);
-  gidLink(gtk_render_activity, "gtk_render_activity", LIBS);
-  gidLink(gtk_render_arrow, "gtk_render_arrow", LIBS);
-  gidLink(gtk_render_background, "gtk_render_background", LIBS);
-  gidLink(gtk_render_check, "gtk_render_check", LIBS);
-  gidLink(gtk_render_expander, "gtk_render_expander", LIBS);
-  gidLink(gtk_render_focus, "gtk_render_focus", LIBS);
-  gidLink(gtk_render_frame, "gtk_render_frame", LIBS);
-  gidLink(gtk_render_handle, "gtk_render_handle", LIBS);
-  gidLink(gtk_render_icon, "gtk_render_icon", LIBS);
-  gidLink(gtk_render_layout, "gtk_render_layout", LIBS);
-  gidLink(gtk_render_line, "gtk_render_line", LIBS);
-  gidLink(gtk_render_option, "gtk_render_option", LIBS);
-  gidLink(gtk_rgb_to_hsv, "gtk_rgb_to_hsv", LIBS);
-  gidLink(gtk_set_debug_flags, "gtk_set_debug_flags", LIBS);
-  gidLink(gtk_show_about_dialog, "gtk_show_about_dialog", LIBS);
-  gidLink(gtk_show_uri, "gtk_show_uri", LIBS);
-  gidLink(gtk_show_uri_full, "gtk_show_uri_full", LIBS);
-  gidLink(gtk_show_uri_full_finish, "gtk_show_uri_full_finish", LIBS);
-  gidLink(gtk_test_accessible_assertion_message_role, "gtk_test_accessible_assertion_message_role", LIBS);
-  gidLink(gtk_test_accessible_check_property, "gtk_test_accessible_check_property", LIBS);
-  gidLink(gtk_test_accessible_check_relation, "gtk_test_accessible_check_relation", LIBS);
-  gidLink(gtk_test_accessible_check_state, "gtk_test_accessible_check_state", LIBS);
-  gidLink(gtk_test_accessible_has_property, "gtk_test_accessible_has_property", LIBS);
-  gidLink(gtk_test_accessible_has_relation, "gtk_test_accessible_has_relation", LIBS);
-  gidLink(gtk_test_accessible_has_role, "gtk_test_accessible_has_role", LIBS);
-  gidLink(gtk_test_accessible_has_state, "gtk_test_accessible_has_state", LIBS);
-  gidLink(gtk_test_init, "gtk_test_init", LIBS);
-  gidLink(gtk_test_list_all_types, "gtk_test_list_all_types", LIBS);
-  gidLink(gtk_test_register_all_types, "gtk_test_register_all_types", LIBS);
-  gidLink(gtk_test_widget_wait_for_draw, "gtk_test_widget_wait_for_draw", LIBS);
-  gidLink(gtk_tree_create_row_drag_content, "gtk_tree_create_row_drag_content", LIBS);
-  gidLink(gtk_tree_get_row_drag_data, "gtk_tree_get_row_drag_data", LIBS);
-  gidLink(gtk_value_dup_expression, "gtk_value_dup_expression", LIBS);
-  gidLink(gtk_value_get_expression, "gtk_value_get_expression", LIBS);
-  gidLink(gtk_value_set_expression, "gtk_value_set_expression", LIBS);
-  gidLink(gtk_value_take_expression, "gtk_value_take_expression", LIBS);
+  gidLink(cast(void**)&gtk_accelerator_get_default_mod_mask, "gtk_accelerator_get_default_mod_mask", LIBS);
+  gidLink(cast(void**)&gtk_accelerator_get_label, "gtk_accelerator_get_label", LIBS);
+  gidLink(cast(void**)&gtk_accelerator_get_label_with_keycode, "gtk_accelerator_get_label_with_keycode", LIBS);
+  gidLink(cast(void**)&gtk_accelerator_name, "gtk_accelerator_name", LIBS);
+  gidLink(cast(void**)&gtk_accelerator_name_with_keycode, "gtk_accelerator_name_with_keycode", LIBS);
+  gidLink(cast(void**)&gtk_accelerator_parse, "gtk_accelerator_parse", LIBS);
+  gidLink(cast(void**)&gtk_accelerator_parse_with_keycode, "gtk_accelerator_parse_with_keycode", LIBS);
+  gidLink(cast(void**)&gtk_accelerator_valid, "gtk_accelerator_valid", LIBS);
+  gidLink(cast(void**)&gtk_check_version, "gtk_check_version", LIBS);
+  gidLink(cast(void**)&gtk_css_parser_error_quark, "gtk_css_parser_error_quark", LIBS);
+  gidLink(cast(void**)&gtk_css_parser_warning_quark, "gtk_css_parser_warning_quark", LIBS);
+  gidLink(cast(void**)&gtk_disable_setlocale, "gtk_disable_setlocale", LIBS);
+  gidLink(cast(void**)&gtk_distribute_natural_allocation, "gtk_distribute_natural_allocation", LIBS);
+  gidLink(cast(void**)&gtk_enumerate_printers, "gtk_enumerate_printers", LIBS);
+  gidLink(cast(void**)&gtk_get_binary_age, "gtk_get_binary_age", LIBS);
+  gidLink(cast(void**)&gtk_get_debug_flags, "gtk_get_debug_flags", LIBS);
+  gidLink(cast(void**)&gtk_get_default_language, "gtk_get_default_language", LIBS);
+  gidLink(cast(void**)&gtk_get_interface_age, "gtk_get_interface_age", LIBS);
+  gidLink(cast(void**)&gtk_get_locale_direction, "gtk_get_locale_direction", LIBS);
+  gidLink(cast(void**)&gtk_get_major_version, "gtk_get_major_version", LIBS);
+  gidLink(cast(void**)&gtk_get_micro_version, "gtk_get_micro_version", LIBS);
+  gidLink(cast(void**)&gtk_get_minor_version, "gtk_get_minor_version", LIBS);
+  gidLink(cast(void**)&gtk_hsv_to_rgb, "gtk_hsv_to_rgb", LIBS);
+  gidLink(cast(void**)&gtk_init, "gtk_init", LIBS);
+  gidLink(cast(void**)&gtk_init_check, "gtk_init_check", LIBS);
+  gidLink(cast(void**)&gtk_is_initialized, "gtk_is_initialized", LIBS);
+  gidLink(cast(void**)&gtk_param_spec_expression, "gtk_param_spec_expression", LIBS);
+  gidLink(cast(void**)&gtk_print_run_page_setup_dialog, "gtk_print_run_page_setup_dialog", LIBS);
+  gidLink(cast(void**)&gtk_print_run_page_setup_dialog_async, "gtk_print_run_page_setup_dialog_async", LIBS);
+  gidLink(cast(void**)&gtk_render_activity, "gtk_render_activity", LIBS);
+  gidLink(cast(void**)&gtk_render_arrow, "gtk_render_arrow", LIBS);
+  gidLink(cast(void**)&gtk_render_background, "gtk_render_background", LIBS);
+  gidLink(cast(void**)&gtk_render_check, "gtk_render_check", LIBS);
+  gidLink(cast(void**)&gtk_render_expander, "gtk_render_expander", LIBS);
+  gidLink(cast(void**)&gtk_render_focus, "gtk_render_focus", LIBS);
+  gidLink(cast(void**)&gtk_render_frame, "gtk_render_frame", LIBS);
+  gidLink(cast(void**)&gtk_render_handle, "gtk_render_handle", LIBS);
+  gidLink(cast(void**)&gtk_render_icon, "gtk_render_icon", LIBS);
+  gidLink(cast(void**)&gtk_render_layout, "gtk_render_layout", LIBS);
+  gidLink(cast(void**)&gtk_render_line, "gtk_render_line", LIBS);
+  gidLink(cast(void**)&gtk_render_option, "gtk_render_option", LIBS);
+  gidLink(cast(void**)&gtk_rgb_to_hsv, "gtk_rgb_to_hsv", LIBS);
+  gidLink(cast(void**)&gtk_set_debug_flags, "gtk_set_debug_flags", LIBS);
+  gidLink(cast(void**)&gtk_show_about_dialog, "gtk_show_about_dialog", LIBS);
+  gidLink(cast(void**)&gtk_show_uri, "gtk_show_uri", LIBS);
+  gidLink(cast(void**)&gtk_show_uri_full, "gtk_show_uri_full", LIBS);
+  gidLink(cast(void**)&gtk_show_uri_full_finish, "gtk_show_uri_full_finish", LIBS);
+  gidLink(cast(void**)&gtk_test_accessible_assertion_message_role, "gtk_test_accessible_assertion_message_role", LIBS);
+  gidLink(cast(void**)&gtk_test_accessible_check_property, "gtk_test_accessible_check_property", LIBS);
+  gidLink(cast(void**)&gtk_test_accessible_check_relation, "gtk_test_accessible_check_relation", LIBS);
+  gidLink(cast(void**)&gtk_test_accessible_check_state, "gtk_test_accessible_check_state", LIBS);
+  gidLink(cast(void**)&gtk_test_accessible_has_property, "gtk_test_accessible_has_property", LIBS);
+  gidLink(cast(void**)&gtk_test_accessible_has_relation, "gtk_test_accessible_has_relation", LIBS);
+  gidLink(cast(void**)&gtk_test_accessible_has_role, "gtk_test_accessible_has_role", LIBS);
+  gidLink(cast(void**)&gtk_test_accessible_has_state, "gtk_test_accessible_has_state", LIBS);
+  gidLink(cast(void**)&gtk_test_init, "gtk_test_init", LIBS);
+  gidLink(cast(void**)&gtk_test_list_all_types, "gtk_test_list_all_types", LIBS);
+  gidLink(cast(void**)&gtk_test_register_all_types, "gtk_test_register_all_types", LIBS);
+  gidLink(cast(void**)&gtk_test_widget_wait_for_draw, "gtk_test_widget_wait_for_draw", LIBS);
+  gidLink(cast(void**)&gtk_tree_create_row_drag_content, "gtk_tree_create_row_drag_content", LIBS);
+  gidLink(cast(void**)&gtk_tree_get_row_drag_data, "gtk_tree_get_row_drag_data", LIBS);
+  gidLink(cast(void**)&gtk_value_dup_expression, "gtk_value_dup_expression", LIBS);
+  gidLink(cast(void**)&gtk_value_get_expression, "gtk_value_get_expression", LIBS);
+  gidLink(cast(void**)&gtk_value_set_expression, "gtk_value_set_expression", LIBS);
+  gidLink(cast(void**)&gtk_value_take_expression, "gtk_value_take_expression", LIBS);
 
   // GraphicsOffload
-  gidLink(gtk_graphics_offload_get_type, "gtk_graphics_offload_get_type", LIBS);
-  gidLink(gtk_graphics_offload_new, "gtk_graphics_offload_new", LIBS);
-  gidLink(gtk_graphics_offload_get_child, "gtk_graphics_offload_get_child", LIBS);
-  gidLink(gtk_graphics_offload_get_enabled, "gtk_graphics_offload_get_enabled", LIBS);
-  gidLink(gtk_graphics_offload_set_child, "gtk_graphics_offload_set_child", LIBS);
-  gidLink(gtk_graphics_offload_set_enabled, "gtk_graphics_offload_set_enabled", LIBS);
+  gidLink(cast(void**)&gtk_graphics_offload_get_type, "gtk_graphics_offload_get_type", LIBS);
+  gidLink(cast(void**)&gtk_graphics_offload_new, "gtk_graphics_offload_new", LIBS);
+  gidLink(cast(void**)&gtk_graphics_offload_get_child, "gtk_graphics_offload_get_child", LIBS);
+  gidLink(cast(void**)&gtk_graphics_offload_get_enabled, "gtk_graphics_offload_get_enabled", LIBS);
+  gidLink(cast(void**)&gtk_graphics_offload_set_child, "gtk_graphics_offload_set_child", LIBS);
+  gidLink(cast(void**)&gtk_graphics_offload_set_enabled, "gtk_graphics_offload_set_enabled", LIBS);
 
   // Grid
-  gidLink(gtk_grid_get_type, "gtk_grid_get_type", LIBS);
-  gidLink(gtk_grid_new, "gtk_grid_new", LIBS);
-  gidLink(gtk_grid_attach, "gtk_grid_attach", LIBS);
-  gidLink(gtk_grid_attach_next_to, "gtk_grid_attach_next_to", LIBS);
-  gidLink(gtk_grid_get_baseline_row, "gtk_grid_get_baseline_row", LIBS);
-  gidLink(gtk_grid_get_child_at, "gtk_grid_get_child_at", LIBS);
-  gidLink(gtk_grid_get_column_homogeneous, "gtk_grid_get_column_homogeneous", LIBS);
-  gidLink(gtk_grid_get_column_spacing, "gtk_grid_get_column_spacing", LIBS);
-  gidLink(gtk_grid_get_row_baseline_position, "gtk_grid_get_row_baseline_position", LIBS);
-  gidLink(gtk_grid_get_row_homogeneous, "gtk_grid_get_row_homogeneous", LIBS);
-  gidLink(gtk_grid_get_row_spacing, "gtk_grid_get_row_spacing", LIBS);
-  gidLink(gtk_grid_insert_column, "gtk_grid_insert_column", LIBS);
-  gidLink(gtk_grid_insert_next_to, "gtk_grid_insert_next_to", LIBS);
-  gidLink(gtk_grid_insert_row, "gtk_grid_insert_row", LIBS);
-  gidLink(gtk_grid_query_child, "gtk_grid_query_child", LIBS);
-  gidLink(gtk_grid_remove, "gtk_grid_remove", LIBS);
-  gidLink(gtk_grid_remove_column, "gtk_grid_remove_column", LIBS);
-  gidLink(gtk_grid_remove_row, "gtk_grid_remove_row", LIBS);
-  gidLink(gtk_grid_set_baseline_row, "gtk_grid_set_baseline_row", LIBS);
-  gidLink(gtk_grid_set_column_homogeneous, "gtk_grid_set_column_homogeneous", LIBS);
-  gidLink(gtk_grid_set_column_spacing, "gtk_grid_set_column_spacing", LIBS);
-  gidLink(gtk_grid_set_row_baseline_position, "gtk_grid_set_row_baseline_position", LIBS);
-  gidLink(gtk_grid_set_row_homogeneous, "gtk_grid_set_row_homogeneous", LIBS);
-  gidLink(gtk_grid_set_row_spacing, "gtk_grid_set_row_spacing", LIBS);
+  gidLink(cast(void**)&gtk_grid_get_type, "gtk_grid_get_type", LIBS);
+  gidLink(cast(void**)&gtk_grid_new, "gtk_grid_new", LIBS);
+  gidLink(cast(void**)&gtk_grid_attach, "gtk_grid_attach", LIBS);
+  gidLink(cast(void**)&gtk_grid_attach_next_to, "gtk_grid_attach_next_to", LIBS);
+  gidLink(cast(void**)&gtk_grid_get_baseline_row, "gtk_grid_get_baseline_row", LIBS);
+  gidLink(cast(void**)&gtk_grid_get_child_at, "gtk_grid_get_child_at", LIBS);
+  gidLink(cast(void**)&gtk_grid_get_column_homogeneous, "gtk_grid_get_column_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_grid_get_column_spacing, "gtk_grid_get_column_spacing", LIBS);
+  gidLink(cast(void**)&gtk_grid_get_row_baseline_position, "gtk_grid_get_row_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_grid_get_row_homogeneous, "gtk_grid_get_row_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_grid_get_row_spacing, "gtk_grid_get_row_spacing", LIBS);
+  gidLink(cast(void**)&gtk_grid_insert_column, "gtk_grid_insert_column", LIBS);
+  gidLink(cast(void**)&gtk_grid_insert_next_to, "gtk_grid_insert_next_to", LIBS);
+  gidLink(cast(void**)&gtk_grid_insert_row, "gtk_grid_insert_row", LIBS);
+  gidLink(cast(void**)&gtk_grid_query_child, "gtk_grid_query_child", LIBS);
+  gidLink(cast(void**)&gtk_grid_remove, "gtk_grid_remove", LIBS);
+  gidLink(cast(void**)&gtk_grid_remove_column, "gtk_grid_remove_column", LIBS);
+  gidLink(cast(void**)&gtk_grid_remove_row, "gtk_grid_remove_row", LIBS);
+  gidLink(cast(void**)&gtk_grid_set_baseline_row, "gtk_grid_set_baseline_row", LIBS);
+  gidLink(cast(void**)&gtk_grid_set_column_homogeneous, "gtk_grid_set_column_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_grid_set_column_spacing, "gtk_grid_set_column_spacing", LIBS);
+  gidLink(cast(void**)&gtk_grid_set_row_baseline_position, "gtk_grid_set_row_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_grid_set_row_homogeneous, "gtk_grid_set_row_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_grid_set_row_spacing, "gtk_grid_set_row_spacing", LIBS);
 
   // GridLayout
-  gidLink(gtk_grid_layout_get_type, "gtk_grid_layout_get_type", LIBS);
-  gidLink(gtk_grid_layout_new, "gtk_grid_layout_new", LIBS);
-  gidLink(gtk_grid_layout_get_baseline_row, "gtk_grid_layout_get_baseline_row", LIBS);
-  gidLink(gtk_grid_layout_get_column_homogeneous, "gtk_grid_layout_get_column_homogeneous", LIBS);
-  gidLink(gtk_grid_layout_get_column_spacing, "gtk_grid_layout_get_column_spacing", LIBS);
-  gidLink(gtk_grid_layout_get_row_baseline_position, "gtk_grid_layout_get_row_baseline_position", LIBS);
-  gidLink(gtk_grid_layout_get_row_homogeneous, "gtk_grid_layout_get_row_homogeneous", LIBS);
-  gidLink(gtk_grid_layout_get_row_spacing, "gtk_grid_layout_get_row_spacing", LIBS);
-  gidLink(gtk_grid_layout_set_baseline_row, "gtk_grid_layout_set_baseline_row", LIBS);
-  gidLink(gtk_grid_layout_set_column_homogeneous, "gtk_grid_layout_set_column_homogeneous", LIBS);
-  gidLink(gtk_grid_layout_set_column_spacing, "gtk_grid_layout_set_column_spacing", LIBS);
-  gidLink(gtk_grid_layout_set_row_baseline_position, "gtk_grid_layout_set_row_baseline_position", LIBS);
-  gidLink(gtk_grid_layout_set_row_homogeneous, "gtk_grid_layout_set_row_homogeneous", LIBS);
-  gidLink(gtk_grid_layout_set_row_spacing, "gtk_grid_layout_set_row_spacing", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_get_type, "gtk_grid_layout_get_type", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_new, "gtk_grid_layout_new", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_get_baseline_row, "gtk_grid_layout_get_baseline_row", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_get_column_homogeneous, "gtk_grid_layout_get_column_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_get_column_spacing, "gtk_grid_layout_get_column_spacing", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_get_row_baseline_position, "gtk_grid_layout_get_row_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_get_row_homogeneous, "gtk_grid_layout_get_row_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_get_row_spacing, "gtk_grid_layout_get_row_spacing", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_set_baseline_row, "gtk_grid_layout_set_baseline_row", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_set_column_homogeneous, "gtk_grid_layout_set_column_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_set_column_spacing, "gtk_grid_layout_set_column_spacing", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_set_row_baseline_position, "gtk_grid_layout_set_row_baseline_position", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_set_row_homogeneous, "gtk_grid_layout_set_row_homogeneous", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_set_row_spacing, "gtk_grid_layout_set_row_spacing", LIBS);
 
   // GridLayoutChild
-  gidLink(gtk_grid_layout_child_get_type, "gtk_grid_layout_child_get_type", LIBS);
-  gidLink(gtk_grid_layout_child_get_column, "gtk_grid_layout_child_get_column", LIBS);
-  gidLink(gtk_grid_layout_child_get_column_span, "gtk_grid_layout_child_get_column_span", LIBS);
-  gidLink(gtk_grid_layout_child_get_row, "gtk_grid_layout_child_get_row", LIBS);
-  gidLink(gtk_grid_layout_child_get_row_span, "gtk_grid_layout_child_get_row_span", LIBS);
-  gidLink(gtk_grid_layout_child_set_column, "gtk_grid_layout_child_set_column", LIBS);
-  gidLink(gtk_grid_layout_child_set_column_span, "gtk_grid_layout_child_set_column_span", LIBS);
-  gidLink(gtk_grid_layout_child_set_row, "gtk_grid_layout_child_set_row", LIBS);
-  gidLink(gtk_grid_layout_child_set_row_span, "gtk_grid_layout_child_set_row_span", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_child_get_type, "gtk_grid_layout_child_get_type", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_child_get_column, "gtk_grid_layout_child_get_column", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_child_get_column_span, "gtk_grid_layout_child_get_column_span", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_child_get_row, "gtk_grid_layout_child_get_row", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_child_get_row_span, "gtk_grid_layout_child_get_row_span", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_child_set_column, "gtk_grid_layout_child_set_column", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_child_set_column_span, "gtk_grid_layout_child_set_column_span", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_child_set_row, "gtk_grid_layout_child_set_row", LIBS);
+  gidLink(cast(void**)&gtk_grid_layout_child_set_row_span, "gtk_grid_layout_child_set_row_span", LIBS);
 
   // GridView
-  gidLink(gtk_grid_view_get_type, "gtk_grid_view_get_type", LIBS);
-  gidLink(gtk_grid_view_new, "gtk_grid_view_new", LIBS);
-  gidLink(gtk_grid_view_get_enable_rubberband, "gtk_grid_view_get_enable_rubberband", LIBS);
-  gidLink(gtk_grid_view_get_factory, "gtk_grid_view_get_factory", LIBS);
-  gidLink(gtk_grid_view_get_max_columns, "gtk_grid_view_get_max_columns", LIBS);
-  gidLink(gtk_grid_view_get_min_columns, "gtk_grid_view_get_min_columns", LIBS);
-  gidLink(gtk_grid_view_get_model, "gtk_grid_view_get_model", LIBS);
-  gidLink(gtk_grid_view_get_single_click_activate, "gtk_grid_view_get_single_click_activate", LIBS);
-  gidLink(gtk_grid_view_get_tab_behavior, "gtk_grid_view_get_tab_behavior", LIBS);
-  gidLink(gtk_grid_view_scroll_to, "gtk_grid_view_scroll_to", LIBS);
-  gidLink(gtk_grid_view_set_enable_rubberband, "gtk_grid_view_set_enable_rubberband", LIBS);
-  gidLink(gtk_grid_view_set_factory, "gtk_grid_view_set_factory", LIBS);
-  gidLink(gtk_grid_view_set_max_columns, "gtk_grid_view_set_max_columns", LIBS);
-  gidLink(gtk_grid_view_set_min_columns, "gtk_grid_view_set_min_columns", LIBS);
-  gidLink(gtk_grid_view_set_model, "gtk_grid_view_set_model", LIBS);
-  gidLink(gtk_grid_view_set_single_click_activate, "gtk_grid_view_set_single_click_activate", LIBS);
-  gidLink(gtk_grid_view_set_tab_behavior, "gtk_grid_view_set_tab_behavior", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_get_type, "gtk_grid_view_get_type", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_new, "gtk_grid_view_new", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_get_enable_rubberband, "gtk_grid_view_get_enable_rubberband", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_get_factory, "gtk_grid_view_get_factory", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_get_max_columns, "gtk_grid_view_get_max_columns", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_get_min_columns, "gtk_grid_view_get_min_columns", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_get_model, "gtk_grid_view_get_model", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_get_single_click_activate, "gtk_grid_view_get_single_click_activate", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_get_tab_behavior, "gtk_grid_view_get_tab_behavior", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_scroll_to, "gtk_grid_view_scroll_to", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_set_enable_rubberband, "gtk_grid_view_set_enable_rubberband", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_set_factory, "gtk_grid_view_set_factory", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_set_max_columns, "gtk_grid_view_set_max_columns", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_set_min_columns, "gtk_grid_view_set_min_columns", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_set_model, "gtk_grid_view_set_model", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_set_single_click_activate, "gtk_grid_view_set_single_click_activate", LIBS);
+  gidLink(cast(void**)&gtk_grid_view_set_tab_behavior, "gtk_grid_view_set_tab_behavior", LIBS);
 
   // HeaderBar
-  gidLink(gtk_header_bar_get_type, "gtk_header_bar_get_type", LIBS);
-  gidLink(gtk_header_bar_new, "gtk_header_bar_new", LIBS);
-  gidLink(gtk_header_bar_get_decoration_layout, "gtk_header_bar_get_decoration_layout", LIBS);
-  gidLink(gtk_header_bar_get_show_title_buttons, "gtk_header_bar_get_show_title_buttons", LIBS);
-  gidLink(gtk_header_bar_get_title_widget, "gtk_header_bar_get_title_widget", LIBS);
-  gidLink(gtk_header_bar_pack_end, "gtk_header_bar_pack_end", LIBS);
-  gidLink(gtk_header_bar_pack_start, "gtk_header_bar_pack_start", LIBS);
-  gidLink(gtk_header_bar_remove, "gtk_header_bar_remove", LIBS);
-  gidLink(gtk_header_bar_set_decoration_layout, "gtk_header_bar_set_decoration_layout", LIBS);
-  gidLink(gtk_header_bar_set_show_title_buttons, "gtk_header_bar_set_show_title_buttons", LIBS);
-  gidLink(gtk_header_bar_set_title_widget, "gtk_header_bar_set_title_widget", LIBS);
+  gidLink(cast(void**)&gtk_header_bar_get_type, "gtk_header_bar_get_type", LIBS);
+  gidLink(cast(void**)&gtk_header_bar_new, "gtk_header_bar_new", LIBS);
+  gidLink(cast(void**)&gtk_header_bar_get_decoration_layout, "gtk_header_bar_get_decoration_layout", LIBS);
+  gidLink(cast(void**)&gtk_header_bar_get_show_title_buttons, "gtk_header_bar_get_show_title_buttons", LIBS);
+  gidLink(cast(void**)&gtk_header_bar_get_title_widget, "gtk_header_bar_get_title_widget", LIBS);
+  gidLink(cast(void**)&gtk_header_bar_pack_end, "gtk_header_bar_pack_end", LIBS);
+  gidLink(cast(void**)&gtk_header_bar_pack_start, "gtk_header_bar_pack_start", LIBS);
+  gidLink(cast(void**)&gtk_header_bar_remove, "gtk_header_bar_remove", LIBS);
+  gidLink(cast(void**)&gtk_header_bar_set_decoration_layout, "gtk_header_bar_set_decoration_layout", LIBS);
+  gidLink(cast(void**)&gtk_header_bar_set_show_title_buttons, "gtk_header_bar_set_show_title_buttons", LIBS);
+  gidLink(cast(void**)&gtk_header_bar_set_title_widget, "gtk_header_bar_set_title_widget", LIBS);
 
   // IMContext
-  gidLink(gtk_im_context_get_type, "gtk_im_context_get_type", LIBS);
-  gidLink(gtk_im_context_activate_osk, "gtk_im_context_activate_osk", LIBS);
-  gidLink(gtk_im_context_delete_surrounding, "gtk_im_context_delete_surrounding", LIBS);
-  gidLink(gtk_im_context_filter_key, "gtk_im_context_filter_key", LIBS);
-  gidLink(gtk_im_context_filter_keypress, "gtk_im_context_filter_keypress", LIBS);
-  gidLink(gtk_im_context_focus_in, "gtk_im_context_focus_in", LIBS);
-  gidLink(gtk_im_context_focus_out, "gtk_im_context_focus_out", LIBS);
-  gidLink(gtk_im_context_get_preedit_string, "gtk_im_context_get_preedit_string", LIBS);
-  gidLink(gtk_im_context_get_surrounding, "gtk_im_context_get_surrounding", LIBS);
-  gidLink(gtk_im_context_get_surrounding_with_selection, "gtk_im_context_get_surrounding_with_selection", LIBS);
-  gidLink(gtk_im_context_reset, "gtk_im_context_reset", LIBS);
-  gidLink(gtk_im_context_set_client_widget, "gtk_im_context_set_client_widget", LIBS);
-  gidLink(gtk_im_context_set_cursor_location, "gtk_im_context_set_cursor_location", LIBS);
-  gidLink(gtk_im_context_set_surrounding, "gtk_im_context_set_surrounding", LIBS);
-  gidLink(gtk_im_context_set_surrounding_with_selection, "gtk_im_context_set_surrounding_with_selection", LIBS);
-  gidLink(gtk_im_context_set_use_preedit, "gtk_im_context_set_use_preedit", LIBS);
+  gidLink(cast(void**)&gtk_im_context_get_type, "gtk_im_context_get_type", LIBS);
+  gidLink(cast(void**)&gtk_im_context_activate_osk, "gtk_im_context_activate_osk", LIBS);
+  gidLink(cast(void**)&gtk_im_context_delete_surrounding, "gtk_im_context_delete_surrounding", LIBS);
+  gidLink(cast(void**)&gtk_im_context_filter_key, "gtk_im_context_filter_key", LIBS);
+  gidLink(cast(void**)&gtk_im_context_filter_keypress, "gtk_im_context_filter_keypress", LIBS);
+  gidLink(cast(void**)&gtk_im_context_focus_in, "gtk_im_context_focus_in", LIBS);
+  gidLink(cast(void**)&gtk_im_context_focus_out, "gtk_im_context_focus_out", LIBS);
+  gidLink(cast(void**)&gtk_im_context_get_preedit_string, "gtk_im_context_get_preedit_string", LIBS);
+  gidLink(cast(void**)&gtk_im_context_get_surrounding, "gtk_im_context_get_surrounding", LIBS);
+  gidLink(cast(void**)&gtk_im_context_get_surrounding_with_selection, "gtk_im_context_get_surrounding_with_selection", LIBS);
+  gidLink(cast(void**)&gtk_im_context_reset, "gtk_im_context_reset", LIBS);
+  gidLink(cast(void**)&gtk_im_context_set_client_widget, "gtk_im_context_set_client_widget", LIBS);
+  gidLink(cast(void**)&gtk_im_context_set_cursor_location, "gtk_im_context_set_cursor_location", LIBS);
+  gidLink(cast(void**)&gtk_im_context_set_surrounding, "gtk_im_context_set_surrounding", LIBS);
+  gidLink(cast(void**)&gtk_im_context_set_surrounding_with_selection, "gtk_im_context_set_surrounding_with_selection", LIBS);
+  gidLink(cast(void**)&gtk_im_context_set_use_preedit, "gtk_im_context_set_use_preedit", LIBS);
 
   // IMContextSimple
-  gidLink(gtk_im_context_simple_get_type, "gtk_im_context_simple_get_type", LIBS);
-  gidLink(gtk_im_context_simple_new, "gtk_im_context_simple_new", LIBS);
-  gidLink(gtk_im_context_simple_add_compose_file, "gtk_im_context_simple_add_compose_file", LIBS);
-  gidLink(gtk_im_context_simple_add_table, "gtk_im_context_simple_add_table", LIBS);
+  gidLink(cast(void**)&gtk_im_context_simple_get_type, "gtk_im_context_simple_get_type", LIBS);
+  gidLink(cast(void**)&gtk_im_context_simple_new, "gtk_im_context_simple_new", LIBS);
+  gidLink(cast(void**)&gtk_im_context_simple_add_compose_file, "gtk_im_context_simple_add_compose_file", LIBS);
+  gidLink(cast(void**)&gtk_im_context_simple_add_table, "gtk_im_context_simple_add_table", LIBS);
 
   // IMMulticontext
-  gidLink(gtk_im_multicontext_get_type, "gtk_im_multicontext_get_type", LIBS);
-  gidLink(gtk_im_multicontext_new, "gtk_im_multicontext_new", LIBS);
-  gidLink(gtk_im_multicontext_get_context_id, "gtk_im_multicontext_get_context_id", LIBS);
-  gidLink(gtk_im_multicontext_set_context_id, "gtk_im_multicontext_set_context_id", LIBS);
+  gidLink(cast(void**)&gtk_im_multicontext_get_type, "gtk_im_multicontext_get_type", LIBS);
+  gidLink(cast(void**)&gtk_im_multicontext_new, "gtk_im_multicontext_new", LIBS);
+  gidLink(cast(void**)&gtk_im_multicontext_get_context_id, "gtk_im_multicontext_get_context_id", LIBS);
+  gidLink(cast(void**)&gtk_im_multicontext_set_context_id, "gtk_im_multicontext_set_context_id", LIBS);
 
   // IconPaintable
-  gidLink(gtk_icon_paintable_get_type, "gtk_icon_paintable_get_type", LIBS);
-  gidLink(gtk_icon_paintable_new_for_file, "gtk_icon_paintable_new_for_file", LIBS);
-  gidLink(gtk_icon_paintable_get_file, "gtk_icon_paintable_get_file", LIBS);
-  gidLink(gtk_icon_paintable_get_icon_name, "gtk_icon_paintable_get_icon_name", LIBS);
-  gidLink(gtk_icon_paintable_is_symbolic, "gtk_icon_paintable_is_symbolic", LIBS);
+  gidLink(cast(void**)&gtk_icon_paintable_get_type, "gtk_icon_paintable_get_type", LIBS);
+  gidLink(cast(void**)&gtk_icon_paintable_new_for_file, "gtk_icon_paintable_new_for_file", LIBS);
+  gidLink(cast(void**)&gtk_icon_paintable_get_file, "gtk_icon_paintable_get_file", LIBS);
+  gidLink(cast(void**)&gtk_icon_paintable_get_icon_name, "gtk_icon_paintable_get_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_icon_paintable_is_symbolic, "gtk_icon_paintable_is_symbolic", LIBS);
 
   // IconTheme
-  gidLink(gtk_icon_theme_get_type, "gtk_icon_theme_get_type", LIBS);
-  gidLink(gtk_icon_theme_new, "gtk_icon_theme_new", LIBS);
-  gidLink(gtk_icon_theme_get_for_display, "gtk_icon_theme_get_for_display", LIBS);
-  gidLink(gtk_icon_theme_add_resource_path, "gtk_icon_theme_add_resource_path", LIBS);
-  gidLink(gtk_icon_theme_add_search_path, "gtk_icon_theme_add_search_path", LIBS);
-  gidLink(gtk_icon_theme_get_display, "gtk_icon_theme_get_display", LIBS);
-  gidLink(gtk_icon_theme_get_icon_names, "gtk_icon_theme_get_icon_names", LIBS);
-  gidLink(gtk_icon_theme_get_icon_sizes, "gtk_icon_theme_get_icon_sizes", LIBS);
-  gidLink(gtk_icon_theme_get_resource_path, "gtk_icon_theme_get_resource_path", LIBS);
-  gidLink(gtk_icon_theme_get_search_path, "gtk_icon_theme_get_search_path", LIBS);
-  gidLink(gtk_icon_theme_get_theme_name, "gtk_icon_theme_get_theme_name", LIBS);
-  gidLink(gtk_icon_theme_has_gicon, "gtk_icon_theme_has_gicon", LIBS);
-  gidLink(gtk_icon_theme_has_icon, "gtk_icon_theme_has_icon", LIBS);
-  gidLink(gtk_icon_theme_lookup_by_gicon, "gtk_icon_theme_lookup_by_gicon", LIBS);
-  gidLink(gtk_icon_theme_lookup_icon, "gtk_icon_theme_lookup_icon", LIBS);
-  gidLink(gtk_icon_theme_set_resource_path, "gtk_icon_theme_set_resource_path", LIBS);
-  gidLink(gtk_icon_theme_set_search_path, "gtk_icon_theme_set_search_path", LIBS);
-  gidLink(gtk_icon_theme_set_theme_name, "gtk_icon_theme_set_theme_name", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_get_type, "gtk_icon_theme_get_type", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_new, "gtk_icon_theme_new", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_get_for_display, "gtk_icon_theme_get_for_display", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_add_resource_path, "gtk_icon_theme_add_resource_path", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_add_search_path, "gtk_icon_theme_add_search_path", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_get_display, "gtk_icon_theme_get_display", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_get_icon_names, "gtk_icon_theme_get_icon_names", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_get_icon_sizes, "gtk_icon_theme_get_icon_sizes", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_get_resource_path, "gtk_icon_theme_get_resource_path", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_get_search_path, "gtk_icon_theme_get_search_path", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_get_theme_name, "gtk_icon_theme_get_theme_name", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_has_gicon, "gtk_icon_theme_has_gicon", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_has_icon, "gtk_icon_theme_has_icon", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_lookup_by_gicon, "gtk_icon_theme_lookup_by_gicon", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_lookup_icon, "gtk_icon_theme_lookup_icon", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_set_resource_path, "gtk_icon_theme_set_resource_path", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_set_search_path, "gtk_icon_theme_set_search_path", LIBS);
+  gidLink(cast(void**)&gtk_icon_theme_set_theme_name, "gtk_icon_theme_set_theme_name", LIBS);
 
   // IconView
-  gidLink(gtk_icon_view_get_type, "gtk_icon_view_get_type", LIBS);
-  gidLink(gtk_icon_view_new, "gtk_icon_view_new", LIBS);
-  gidLink(gtk_icon_view_new_with_area, "gtk_icon_view_new_with_area", LIBS);
-  gidLink(gtk_icon_view_new_with_model, "gtk_icon_view_new_with_model", LIBS);
-  gidLink(gtk_icon_view_create_drag_icon, "gtk_icon_view_create_drag_icon", LIBS);
-  gidLink(gtk_icon_view_enable_model_drag_dest, "gtk_icon_view_enable_model_drag_dest", LIBS);
-  gidLink(gtk_icon_view_enable_model_drag_source, "gtk_icon_view_enable_model_drag_source", LIBS);
-  gidLink(gtk_icon_view_get_activate_on_single_click, "gtk_icon_view_get_activate_on_single_click", LIBS);
-  gidLink(gtk_icon_view_get_cell_rect, "gtk_icon_view_get_cell_rect", LIBS);
-  gidLink(gtk_icon_view_get_column_spacing, "gtk_icon_view_get_column_spacing", LIBS);
-  gidLink(gtk_icon_view_get_columns, "gtk_icon_view_get_columns", LIBS);
-  gidLink(gtk_icon_view_get_cursor, "gtk_icon_view_get_cursor", LIBS);
-  gidLink(gtk_icon_view_get_dest_item_at_pos, "gtk_icon_view_get_dest_item_at_pos", LIBS);
-  gidLink(gtk_icon_view_get_drag_dest_item, "gtk_icon_view_get_drag_dest_item", LIBS);
-  gidLink(gtk_icon_view_get_item_at_pos, "gtk_icon_view_get_item_at_pos", LIBS);
-  gidLink(gtk_icon_view_get_item_column, "gtk_icon_view_get_item_column", LIBS);
-  gidLink(gtk_icon_view_get_item_orientation, "gtk_icon_view_get_item_orientation", LIBS);
-  gidLink(gtk_icon_view_get_item_padding, "gtk_icon_view_get_item_padding", LIBS);
-  gidLink(gtk_icon_view_get_item_row, "gtk_icon_view_get_item_row", LIBS);
-  gidLink(gtk_icon_view_get_item_width, "gtk_icon_view_get_item_width", LIBS);
-  gidLink(gtk_icon_view_get_margin, "gtk_icon_view_get_margin", LIBS);
-  gidLink(gtk_icon_view_get_markup_column, "gtk_icon_view_get_markup_column", LIBS);
-  gidLink(gtk_icon_view_get_model, "gtk_icon_view_get_model", LIBS);
-  gidLink(gtk_icon_view_get_path_at_pos, "gtk_icon_view_get_path_at_pos", LIBS);
-  gidLink(gtk_icon_view_get_pixbuf_column, "gtk_icon_view_get_pixbuf_column", LIBS);
-  gidLink(gtk_icon_view_get_reorderable, "gtk_icon_view_get_reorderable", LIBS);
-  gidLink(gtk_icon_view_get_row_spacing, "gtk_icon_view_get_row_spacing", LIBS);
-  gidLink(gtk_icon_view_get_selected_items, "gtk_icon_view_get_selected_items", LIBS);
-  gidLink(gtk_icon_view_get_selection_mode, "gtk_icon_view_get_selection_mode", LIBS);
-  gidLink(gtk_icon_view_get_spacing, "gtk_icon_view_get_spacing", LIBS);
-  gidLink(gtk_icon_view_get_text_column, "gtk_icon_view_get_text_column", LIBS);
-  gidLink(gtk_icon_view_get_tooltip_column, "gtk_icon_view_get_tooltip_column", LIBS);
-  gidLink(gtk_icon_view_get_tooltip_context, "gtk_icon_view_get_tooltip_context", LIBS);
-  gidLink(gtk_icon_view_get_visible_range, "gtk_icon_view_get_visible_range", LIBS);
-  gidLink(gtk_icon_view_item_activated, "gtk_icon_view_item_activated", LIBS);
-  gidLink(gtk_icon_view_path_is_selected, "gtk_icon_view_path_is_selected", LIBS);
-  gidLink(gtk_icon_view_scroll_to_path, "gtk_icon_view_scroll_to_path", LIBS);
-  gidLink(gtk_icon_view_select_all, "gtk_icon_view_select_all", LIBS);
-  gidLink(gtk_icon_view_select_path, "gtk_icon_view_select_path", LIBS);
-  gidLink(gtk_icon_view_selected_foreach, "gtk_icon_view_selected_foreach", LIBS);
-  gidLink(gtk_icon_view_set_activate_on_single_click, "gtk_icon_view_set_activate_on_single_click", LIBS);
-  gidLink(gtk_icon_view_set_column_spacing, "gtk_icon_view_set_column_spacing", LIBS);
-  gidLink(gtk_icon_view_set_columns, "gtk_icon_view_set_columns", LIBS);
-  gidLink(gtk_icon_view_set_cursor, "gtk_icon_view_set_cursor", LIBS);
-  gidLink(gtk_icon_view_set_drag_dest_item, "gtk_icon_view_set_drag_dest_item", LIBS);
-  gidLink(gtk_icon_view_set_item_orientation, "gtk_icon_view_set_item_orientation", LIBS);
-  gidLink(gtk_icon_view_set_item_padding, "gtk_icon_view_set_item_padding", LIBS);
-  gidLink(gtk_icon_view_set_item_width, "gtk_icon_view_set_item_width", LIBS);
-  gidLink(gtk_icon_view_set_margin, "gtk_icon_view_set_margin", LIBS);
-  gidLink(gtk_icon_view_set_markup_column, "gtk_icon_view_set_markup_column", LIBS);
-  gidLink(gtk_icon_view_set_model, "gtk_icon_view_set_model", LIBS);
-  gidLink(gtk_icon_view_set_pixbuf_column, "gtk_icon_view_set_pixbuf_column", LIBS);
-  gidLink(gtk_icon_view_set_reorderable, "gtk_icon_view_set_reorderable", LIBS);
-  gidLink(gtk_icon_view_set_row_spacing, "gtk_icon_view_set_row_spacing", LIBS);
-  gidLink(gtk_icon_view_set_selection_mode, "gtk_icon_view_set_selection_mode", LIBS);
-  gidLink(gtk_icon_view_set_spacing, "gtk_icon_view_set_spacing", LIBS);
-  gidLink(gtk_icon_view_set_text_column, "gtk_icon_view_set_text_column", LIBS);
-  gidLink(gtk_icon_view_set_tooltip_cell, "gtk_icon_view_set_tooltip_cell", LIBS);
-  gidLink(gtk_icon_view_set_tooltip_column, "gtk_icon_view_set_tooltip_column", LIBS);
-  gidLink(gtk_icon_view_set_tooltip_item, "gtk_icon_view_set_tooltip_item", LIBS);
-  gidLink(gtk_icon_view_unselect_all, "gtk_icon_view_unselect_all", LIBS);
-  gidLink(gtk_icon_view_unselect_path, "gtk_icon_view_unselect_path", LIBS);
-  gidLink(gtk_icon_view_unset_model_drag_dest, "gtk_icon_view_unset_model_drag_dest", LIBS);
-  gidLink(gtk_icon_view_unset_model_drag_source, "gtk_icon_view_unset_model_drag_source", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_type, "gtk_icon_view_get_type", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_new, "gtk_icon_view_new", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_new_with_area, "gtk_icon_view_new_with_area", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_new_with_model, "gtk_icon_view_new_with_model", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_create_drag_icon, "gtk_icon_view_create_drag_icon", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_enable_model_drag_dest, "gtk_icon_view_enable_model_drag_dest", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_enable_model_drag_source, "gtk_icon_view_enable_model_drag_source", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_activate_on_single_click, "gtk_icon_view_get_activate_on_single_click", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_cell_rect, "gtk_icon_view_get_cell_rect", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_column_spacing, "gtk_icon_view_get_column_spacing", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_columns, "gtk_icon_view_get_columns", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_cursor, "gtk_icon_view_get_cursor", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_dest_item_at_pos, "gtk_icon_view_get_dest_item_at_pos", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_drag_dest_item, "gtk_icon_view_get_drag_dest_item", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_item_at_pos, "gtk_icon_view_get_item_at_pos", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_item_column, "gtk_icon_view_get_item_column", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_item_orientation, "gtk_icon_view_get_item_orientation", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_item_padding, "gtk_icon_view_get_item_padding", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_item_row, "gtk_icon_view_get_item_row", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_item_width, "gtk_icon_view_get_item_width", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_margin, "gtk_icon_view_get_margin", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_markup_column, "gtk_icon_view_get_markup_column", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_model, "gtk_icon_view_get_model", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_path_at_pos, "gtk_icon_view_get_path_at_pos", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_pixbuf_column, "gtk_icon_view_get_pixbuf_column", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_reorderable, "gtk_icon_view_get_reorderable", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_row_spacing, "gtk_icon_view_get_row_spacing", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_selected_items, "gtk_icon_view_get_selected_items", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_selection_mode, "gtk_icon_view_get_selection_mode", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_spacing, "gtk_icon_view_get_spacing", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_text_column, "gtk_icon_view_get_text_column", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_tooltip_column, "gtk_icon_view_get_tooltip_column", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_tooltip_context, "gtk_icon_view_get_tooltip_context", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_get_visible_range, "gtk_icon_view_get_visible_range", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_item_activated, "gtk_icon_view_item_activated", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_path_is_selected, "gtk_icon_view_path_is_selected", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_scroll_to_path, "gtk_icon_view_scroll_to_path", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_select_all, "gtk_icon_view_select_all", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_select_path, "gtk_icon_view_select_path", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_selected_foreach, "gtk_icon_view_selected_foreach", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_activate_on_single_click, "gtk_icon_view_set_activate_on_single_click", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_column_spacing, "gtk_icon_view_set_column_spacing", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_columns, "gtk_icon_view_set_columns", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_cursor, "gtk_icon_view_set_cursor", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_drag_dest_item, "gtk_icon_view_set_drag_dest_item", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_item_orientation, "gtk_icon_view_set_item_orientation", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_item_padding, "gtk_icon_view_set_item_padding", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_item_width, "gtk_icon_view_set_item_width", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_margin, "gtk_icon_view_set_margin", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_markup_column, "gtk_icon_view_set_markup_column", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_model, "gtk_icon_view_set_model", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_pixbuf_column, "gtk_icon_view_set_pixbuf_column", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_reorderable, "gtk_icon_view_set_reorderable", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_row_spacing, "gtk_icon_view_set_row_spacing", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_selection_mode, "gtk_icon_view_set_selection_mode", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_spacing, "gtk_icon_view_set_spacing", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_text_column, "gtk_icon_view_set_text_column", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_tooltip_cell, "gtk_icon_view_set_tooltip_cell", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_tooltip_column, "gtk_icon_view_set_tooltip_column", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_set_tooltip_item, "gtk_icon_view_set_tooltip_item", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_unselect_all, "gtk_icon_view_unselect_all", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_unselect_path, "gtk_icon_view_unselect_path", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_unset_model_drag_dest, "gtk_icon_view_unset_model_drag_dest", LIBS);
+  gidLink(cast(void**)&gtk_icon_view_unset_model_drag_source, "gtk_icon_view_unset_model_drag_source", LIBS);
 
   // Image
-  gidLink(gtk_image_get_type, "gtk_image_get_type", LIBS);
-  gidLink(gtk_image_new, "gtk_image_new", LIBS);
-  gidLink(gtk_image_new_from_file, "gtk_image_new_from_file", LIBS);
-  gidLink(gtk_image_new_from_gicon, "gtk_image_new_from_gicon", LIBS);
-  gidLink(gtk_image_new_from_icon_name, "gtk_image_new_from_icon_name", LIBS);
-  gidLink(gtk_image_new_from_paintable, "gtk_image_new_from_paintable", LIBS);
-  gidLink(gtk_image_new_from_pixbuf, "gtk_image_new_from_pixbuf", LIBS);
-  gidLink(gtk_image_new_from_resource, "gtk_image_new_from_resource", LIBS);
-  gidLink(gtk_image_clear, "gtk_image_clear", LIBS);
-  gidLink(gtk_image_get_gicon, "gtk_image_get_gicon", LIBS);
-  gidLink(gtk_image_get_icon_name, "gtk_image_get_icon_name", LIBS);
-  gidLink(gtk_image_get_icon_size, "gtk_image_get_icon_size", LIBS);
-  gidLink(gtk_image_get_paintable, "gtk_image_get_paintable", LIBS);
-  gidLink(gtk_image_get_pixel_size, "gtk_image_get_pixel_size", LIBS);
-  gidLink(gtk_image_get_storage_type, "gtk_image_get_storage_type", LIBS);
-  gidLink(gtk_image_set_from_file, "gtk_image_set_from_file", LIBS);
-  gidLink(gtk_image_set_from_gicon, "gtk_image_set_from_gicon", LIBS);
-  gidLink(gtk_image_set_from_icon_name, "gtk_image_set_from_icon_name", LIBS);
-  gidLink(gtk_image_set_from_paintable, "gtk_image_set_from_paintable", LIBS);
-  gidLink(gtk_image_set_from_pixbuf, "gtk_image_set_from_pixbuf", LIBS);
-  gidLink(gtk_image_set_from_resource, "gtk_image_set_from_resource", LIBS);
-  gidLink(gtk_image_set_icon_size, "gtk_image_set_icon_size", LIBS);
-  gidLink(gtk_image_set_pixel_size, "gtk_image_set_pixel_size", LIBS);
+  gidLink(cast(void**)&gtk_image_get_type, "gtk_image_get_type", LIBS);
+  gidLink(cast(void**)&gtk_image_new, "gtk_image_new", LIBS);
+  gidLink(cast(void**)&gtk_image_new_from_file, "gtk_image_new_from_file", LIBS);
+  gidLink(cast(void**)&gtk_image_new_from_gicon, "gtk_image_new_from_gicon", LIBS);
+  gidLink(cast(void**)&gtk_image_new_from_icon_name, "gtk_image_new_from_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_image_new_from_paintable, "gtk_image_new_from_paintable", LIBS);
+  gidLink(cast(void**)&gtk_image_new_from_pixbuf, "gtk_image_new_from_pixbuf", LIBS);
+  gidLink(cast(void**)&gtk_image_new_from_resource, "gtk_image_new_from_resource", LIBS);
+  gidLink(cast(void**)&gtk_image_clear, "gtk_image_clear", LIBS);
+  gidLink(cast(void**)&gtk_image_get_gicon, "gtk_image_get_gicon", LIBS);
+  gidLink(cast(void**)&gtk_image_get_icon_name, "gtk_image_get_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_image_get_icon_size, "gtk_image_get_icon_size", LIBS);
+  gidLink(cast(void**)&gtk_image_get_paintable, "gtk_image_get_paintable", LIBS);
+  gidLink(cast(void**)&gtk_image_get_pixel_size, "gtk_image_get_pixel_size", LIBS);
+  gidLink(cast(void**)&gtk_image_get_storage_type, "gtk_image_get_storage_type", LIBS);
+  gidLink(cast(void**)&gtk_image_set_from_file, "gtk_image_set_from_file", LIBS);
+  gidLink(cast(void**)&gtk_image_set_from_gicon, "gtk_image_set_from_gicon", LIBS);
+  gidLink(cast(void**)&gtk_image_set_from_icon_name, "gtk_image_set_from_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_image_set_from_paintable, "gtk_image_set_from_paintable", LIBS);
+  gidLink(cast(void**)&gtk_image_set_from_pixbuf, "gtk_image_set_from_pixbuf", LIBS);
+  gidLink(cast(void**)&gtk_image_set_from_resource, "gtk_image_set_from_resource", LIBS);
+  gidLink(cast(void**)&gtk_image_set_icon_size, "gtk_image_set_icon_size", LIBS);
+  gidLink(cast(void**)&gtk_image_set_pixel_size, "gtk_image_set_pixel_size", LIBS);
 
   // InfoBar
-  gidLink(gtk_info_bar_get_type, "gtk_info_bar_get_type", LIBS);
-  gidLink(gtk_info_bar_new, "gtk_info_bar_new", LIBS);
-  gidLink(gtk_info_bar_new_with_buttons, "gtk_info_bar_new_with_buttons", LIBS);
-  gidLink(gtk_info_bar_add_action_widget, "gtk_info_bar_add_action_widget", LIBS);
-  gidLink(gtk_info_bar_add_button, "gtk_info_bar_add_button", LIBS);
-  gidLink(gtk_info_bar_add_buttons, "gtk_info_bar_add_buttons", LIBS);
-  gidLink(gtk_info_bar_add_child, "gtk_info_bar_add_child", LIBS);
-  gidLink(gtk_info_bar_get_message_type, "gtk_info_bar_get_message_type", LIBS);
-  gidLink(gtk_info_bar_get_revealed, "gtk_info_bar_get_revealed", LIBS);
-  gidLink(gtk_info_bar_get_show_close_button, "gtk_info_bar_get_show_close_button", LIBS);
-  gidLink(gtk_info_bar_remove_action_widget, "gtk_info_bar_remove_action_widget", LIBS);
-  gidLink(gtk_info_bar_remove_child, "gtk_info_bar_remove_child", LIBS);
-  gidLink(gtk_info_bar_response, "gtk_info_bar_response", LIBS);
-  gidLink(gtk_info_bar_set_default_response, "gtk_info_bar_set_default_response", LIBS);
-  gidLink(gtk_info_bar_set_message_type, "gtk_info_bar_set_message_type", LIBS);
-  gidLink(gtk_info_bar_set_response_sensitive, "gtk_info_bar_set_response_sensitive", LIBS);
-  gidLink(gtk_info_bar_set_revealed, "gtk_info_bar_set_revealed", LIBS);
-  gidLink(gtk_info_bar_set_show_close_button, "gtk_info_bar_set_show_close_button", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_get_type, "gtk_info_bar_get_type", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_new, "gtk_info_bar_new", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_new_with_buttons, "gtk_info_bar_new_with_buttons", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_add_action_widget, "gtk_info_bar_add_action_widget", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_add_button, "gtk_info_bar_add_button", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_add_buttons, "gtk_info_bar_add_buttons", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_add_child, "gtk_info_bar_add_child", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_get_message_type, "gtk_info_bar_get_message_type", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_get_revealed, "gtk_info_bar_get_revealed", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_get_show_close_button, "gtk_info_bar_get_show_close_button", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_remove_action_widget, "gtk_info_bar_remove_action_widget", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_remove_child, "gtk_info_bar_remove_child", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_response, "gtk_info_bar_response", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_set_default_response, "gtk_info_bar_set_default_response", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_set_message_type, "gtk_info_bar_set_message_type", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_set_response_sensitive, "gtk_info_bar_set_response_sensitive", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_set_revealed, "gtk_info_bar_set_revealed", LIBS);
+  gidLink(cast(void**)&gtk_info_bar_set_show_close_button, "gtk_info_bar_set_show_close_button", LIBS);
 
   // Inscription
-  gidLink(gtk_inscription_get_type, "gtk_inscription_get_type", LIBS);
-  gidLink(gtk_inscription_new, "gtk_inscription_new", LIBS);
-  gidLink(gtk_inscription_get_attributes, "gtk_inscription_get_attributes", LIBS);
-  gidLink(gtk_inscription_get_min_chars, "gtk_inscription_get_min_chars", LIBS);
-  gidLink(gtk_inscription_get_min_lines, "gtk_inscription_get_min_lines", LIBS);
-  gidLink(gtk_inscription_get_nat_chars, "gtk_inscription_get_nat_chars", LIBS);
-  gidLink(gtk_inscription_get_nat_lines, "gtk_inscription_get_nat_lines", LIBS);
-  gidLink(gtk_inscription_get_text, "gtk_inscription_get_text", LIBS);
-  gidLink(gtk_inscription_get_text_overflow, "gtk_inscription_get_text_overflow", LIBS);
-  gidLink(gtk_inscription_get_wrap_mode, "gtk_inscription_get_wrap_mode", LIBS);
-  gidLink(gtk_inscription_get_xalign, "gtk_inscription_get_xalign", LIBS);
-  gidLink(gtk_inscription_get_yalign, "gtk_inscription_get_yalign", LIBS);
-  gidLink(gtk_inscription_set_attributes, "gtk_inscription_set_attributes", LIBS);
-  gidLink(gtk_inscription_set_markup, "gtk_inscription_set_markup", LIBS);
-  gidLink(gtk_inscription_set_min_chars, "gtk_inscription_set_min_chars", LIBS);
-  gidLink(gtk_inscription_set_min_lines, "gtk_inscription_set_min_lines", LIBS);
-  gidLink(gtk_inscription_set_nat_chars, "gtk_inscription_set_nat_chars", LIBS);
-  gidLink(gtk_inscription_set_nat_lines, "gtk_inscription_set_nat_lines", LIBS);
-  gidLink(gtk_inscription_set_text, "gtk_inscription_set_text", LIBS);
-  gidLink(gtk_inscription_set_text_overflow, "gtk_inscription_set_text_overflow", LIBS);
-  gidLink(gtk_inscription_set_wrap_mode, "gtk_inscription_set_wrap_mode", LIBS);
-  gidLink(gtk_inscription_set_xalign, "gtk_inscription_set_xalign", LIBS);
-  gidLink(gtk_inscription_set_yalign, "gtk_inscription_set_yalign", LIBS);
+  gidLink(cast(void**)&gtk_inscription_get_type, "gtk_inscription_get_type", LIBS);
+  gidLink(cast(void**)&gtk_inscription_new, "gtk_inscription_new", LIBS);
+  gidLink(cast(void**)&gtk_inscription_get_attributes, "gtk_inscription_get_attributes", LIBS);
+  gidLink(cast(void**)&gtk_inscription_get_min_chars, "gtk_inscription_get_min_chars", LIBS);
+  gidLink(cast(void**)&gtk_inscription_get_min_lines, "gtk_inscription_get_min_lines", LIBS);
+  gidLink(cast(void**)&gtk_inscription_get_nat_chars, "gtk_inscription_get_nat_chars", LIBS);
+  gidLink(cast(void**)&gtk_inscription_get_nat_lines, "gtk_inscription_get_nat_lines", LIBS);
+  gidLink(cast(void**)&gtk_inscription_get_text, "gtk_inscription_get_text", LIBS);
+  gidLink(cast(void**)&gtk_inscription_get_text_overflow, "gtk_inscription_get_text_overflow", LIBS);
+  gidLink(cast(void**)&gtk_inscription_get_wrap_mode, "gtk_inscription_get_wrap_mode", LIBS);
+  gidLink(cast(void**)&gtk_inscription_get_xalign, "gtk_inscription_get_xalign", LIBS);
+  gidLink(cast(void**)&gtk_inscription_get_yalign, "gtk_inscription_get_yalign", LIBS);
+  gidLink(cast(void**)&gtk_inscription_set_attributes, "gtk_inscription_set_attributes", LIBS);
+  gidLink(cast(void**)&gtk_inscription_set_markup, "gtk_inscription_set_markup", LIBS);
+  gidLink(cast(void**)&gtk_inscription_set_min_chars, "gtk_inscription_set_min_chars", LIBS);
+  gidLink(cast(void**)&gtk_inscription_set_min_lines, "gtk_inscription_set_min_lines", LIBS);
+  gidLink(cast(void**)&gtk_inscription_set_nat_chars, "gtk_inscription_set_nat_chars", LIBS);
+  gidLink(cast(void**)&gtk_inscription_set_nat_lines, "gtk_inscription_set_nat_lines", LIBS);
+  gidLink(cast(void**)&gtk_inscription_set_text, "gtk_inscription_set_text", LIBS);
+  gidLink(cast(void**)&gtk_inscription_set_text_overflow, "gtk_inscription_set_text_overflow", LIBS);
+  gidLink(cast(void**)&gtk_inscription_set_wrap_mode, "gtk_inscription_set_wrap_mode", LIBS);
+  gidLink(cast(void**)&gtk_inscription_set_xalign, "gtk_inscription_set_xalign", LIBS);
+  gidLink(cast(void**)&gtk_inscription_set_yalign, "gtk_inscription_set_yalign", LIBS);
 
   // KeyvalTrigger
-  gidLink(gtk_keyval_trigger_get_type, "gtk_keyval_trigger_get_type", LIBS);
-  gidLink(gtk_keyval_trigger_new, "gtk_keyval_trigger_new", LIBS);
-  gidLink(gtk_keyval_trigger_get_keyval, "gtk_keyval_trigger_get_keyval", LIBS);
-  gidLink(gtk_keyval_trigger_get_modifiers, "gtk_keyval_trigger_get_modifiers", LIBS);
+  gidLink(cast(void**)&gtk_keyval_trigger_get_type, "gtk_keyval_trigger_get_type", LIBS);
+  gidLink(cast(void**)&gtk_keyval_trigger_new, "gtk_keyval_trigger_new", LIBS);
+  gidLink(cast(void**)&gtk_keyval_trigger_get_keyval, "gtk_keyval_trigger_get_keyval", LIBS);
+  gidLink(cast(void**)&gtk_keyval_trigger_get_modifiers, "gtk_keyval_trigger_get_modifiers", LIBS);
 
   // Label
-  gidLink(gtk_label_get_type, "gtk_label_get_type", LIBS);
-  gidLink(gtk_label_new, "gtk_label_new", LIBS);
-  gidLink(gtk_label_new_with_mnemonic, "gtk_label_new_with_mnemonic", LIBS);
-  gidLink(gtk_label_get_attributes, "gtk_label_get_attributes", LIBS);
-  gidLink(gtk_label_get_current_uri, "gtk_label_get_current_uri", LIBS);
-  gidLink(gtk_label_get_ellipsize, "gtk_label_get_ellipsize", LIBS);
-  gidLink(gtk_label_get_extra_menu, "gtk_label_get_extra_menu", LIBS);
-  gidLink(gtk_label_get_justify, "gtk_label_get_justify", LIBS);
-  gidLink(gtk_label_get_label, "gtk_label_get_label", LIBS);
-  gidLink(gtk_label_get_layout, "gtk_label_get_layout", LIBS);
-  gidLink(gtk_label_get_layout_offsets, "gtk_label_get_layout_offsets", LIBS);
-  gidLink(gtk_label_get_lines, "gtk_label_get_lines", LIBS);
-  gidLink(gtk_label_get_max_width_chars, "gtk_label_get_max_width_chars", LIBS);
-  gidLink(gtk_label_get_mnemonic_keyval, "gtk_label_get_mnemonic_keyval", LIBS);
-  gidLink(gtk_label_get_mnemonic_widget, "gtk_label_get_mnemonic_widget", LIBS);
-  gidLink(gtk_label_get_natural_wrap_mode, "gtk_label_get_natural_wrap_mode", LIBS);
-  gidLink(gtk_label_get_selectable, "gtk_label_get_selectable", LIBS);
-  gidLink(gtk_label_get_selection_bounds, "gtk_label_get_selection_bounds", LIBS);
-  gidLink(gtk_label_get_single_line_mode, "gtk_label_get_single_line_mode", LIBS);
-  gidLink(gtk_label_get_tabs, "gtk_label_get_tabs", LIBS);
-  gidLink(gtk_label_get_text, "gtk_label_get_text", LIBS);
-  gidLink(gtk_label_get_use_markup, "gtk_label_get_use_markup", LIBS);
-  gidLink(gtk_label_get_use_underline, "gtk_label_get_use_underline", LIBS);
-  gidLink(gtk_label_get_width_chars, "gtk_label_get_width_chars", LIBS);
-  gidLink(gtk_label_get_wrap, "gtk_label_get_wrap", LIBS);
-  gidLink(gtk_label_get_wrap_mode, "gtk_label_get_wrap_mode", LIBS);
-  gidLink(gtk_label_get_xalign, "gtk_label_get_xalign", LIBS);
-  gidLink(gtk_label_get_yalign, "gtk_label_get_yalign", LIBS);
-  gidLink(gtk_label_select_region, "gtk_label_select_region", LIBS);
-  gidLink(gtk_label_set_attributes, "gtk_label_set_attributes", LIBS);
-  gidLink(gtk_label_set_ellipsize, "gtk_label_set_ellipsize", LIBS);
-  gidLink(gtk_label_set_extra_menu, "gtk_label_set_extra_menu", LIBS);
-  gidLink(gtk_label_set_justify, "gtk_label_set_justify", LIBS);
-  gidLink(gtk_label_set_label, "gtk_label_set_label", LIBS);
-  gidLink(gtk_label_set_lines, "gtk_label_set_lines", LIBS);
-  gidLink(gtk_label_set_markup, "gtk_label_set_markup", LIBS);
-  gidLink(gtk_label_set_markup_with_mnemonic, "gtk_label_set_markup_with_mnemonic", LIBS);
-  gidLink(gtk_label_set_max_width_chars, "gtk_label_set_max_width_chars", LIBS);
-  gidLink(gtk_label_set_mnemonic_widget, "gtk_label_set_mnemonic_widget", LIBS);
-  gidLink(gtk_label_set_natural_wrap_mode, "gtk_label_set_natural_wrap_mode", LIBS);
-  gidLink(gtk_label_set_selectable, "gtk_label_set_selectable", LIBS);
-  gidLink(gtk_label_set_single_line_mode, "gtk_label_set_single_line_mode", LIBS);
-  gidLink(gtk_label_set_tabs, "gtk_label_set_tabs", LIBS);
-  gidLink(gtk_label_set_text, "gtk_label_set_text", LIBS);
-  gidLink(gtk_label_set_text_with_mnemonic, "gtk_label_set_text_with_mnemonic", LIBS);
-  gidLink(gtk_label_set_use_markup, "gtk_label_set_use_markup", LIBS);
-  gidLink(gtk_label_set_use_underline, "gtk_label_set_use_underline", LIBS);
-  gidLink(gtk_label_set_width_chars, "gtk_label_set_width_chars", LIBS);
-  gidLink(gtk_label_set_wrap, "gtk_label_set_wrap", LIBS);
-  gidLink(gtk_label_set_wrap_mode, "gtk_label_set_wrap_mode", LIBS);
-  gidLink(gtk_label_set_xalign, "gtk_label_set_xalign", LIBS);
-  gidLink(gtk_label_set_yalign, "gtk_label_set_yalign", LIBS);
+  gidLink(cast(void**)&gtk_label_get_type, "gtk_label_get_type", LIBS);
+  gidLink(cast(void**)&gtk_label_new, "gtk_label_new", LIBS);
+  gidLink(cast(void**)&gtk_label_new_with_mnemonic, "gtk_label_new_with_mnemonic", LIBS);
+  gidLink(cast(void**)&gtk_label_get_attributes, "gtk_label_get_attributes", LIBS);
+  gidLink(cast(void**)&gtk_label_get_current_uri, "gtk_label_get_current_uri", LIBS);
+  gidLink(cast(void**)&gtk_label_get_ellipsize, "gtk_label_get_ellipsize", LIBS);
+  gidLink(cast(void**)&gtk_label_get_extra_menu, "gtk_label_get_extra_menu", LIBS);
+  gidLink(cast(void**)&gtk_label_get_justify, "gtk_label_get_justify", LIBS);
+  gidLink(cast(void**)&gtk_label_get_label, "gtk_label_get_label", LIBS);
+  gidLink(cast(void**)&gtk_label_get_layout, "gtk_label_get_layout", LIBS);
+  gidLink(cast(void**)&gtk_label_get_layout_offsets, "gtk_label_get_layout_offsets", LIBS);
+  gidLink(cast(void**)&gtk_label_get_lines, "gtk_label_get_lines", LIBS);
+  gidLink(cast(void**)&gtk_label_get_max_width_chars, "gtk_label_get_max_width_chars", LIBS);
+  gidLink(cast(void**)&gtk_label_get_mnemonic_keyval, "gtk_label_get_mnemonic_keyval", LIBS);
+  gidLink(cast(void**)&gtk_label_get_mnemonic_widget, "gtk_label_get_mnemonic_widget", LIBS);
+  gidLink(cast(void**)&gtk_label_get_natural_wrap_mode, "gtk_label_get_natural_wrap_mode", LIBS);
+  gidLink(cast(void**)&gtk_label_get_selectable, "gtk_label_get_selectable", LIBS);
+  gidLink(cast(void**)&gtk_label_get_selection_bounds, "gtk_label_get_selection_bounds", LIBS);
+  gidLink(cast(void**)&gtk_label_get_single_line_mode, "gtk_label_get_single_line_mode", LIBS);
+  gidLink(cast(void**)&gtk_label_get_tabs, "gtk_label_get_tabs", LIBS);
+  gidLink(cast(void**)&gtk_label_get_text, "gtk_label_get_text", LIBS);
+  gidLink(cast(void**)&gtk_label_get_use_markup, "gtk_label_get_use_markup", LIBS);
+  gidLink(cast(void**)&gtk_label_get_use_underline, "gtk_label_get_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_label_get_width_chars, "gtk_label_get_width_chars", LIBS);
+  gidLink(cast(void**)&gtk_label_get_wrap, "gtk_label_get_wrap", LIBS);
+  gidLink(cast(void**)&gtk_label_get_wrap_mode, "gtk_label_get_wrap_mode", LIBS);
+  gidLink(cast(void**)&gtk_label_get_xalign, "gtk_label_get_xalign", LIBS);
+  gidLink(cast(void**)&gtk_label_get_yalign, "gtk_label_get_yalign", LIBS);
+  gidLink(cast(void**)&gtk_label_select_region, "gtk_label_select_region", LIBS);
+  gidLink(cast(void**)&gtk_label_set_attributes, "gtk_label_set_attributes", LIBS);
+  gidLink(cast(void**)&gtk_label_set_ellipsize, "gtk_label_set_ellipsize", LIBS);
+  gidLink(cast(void**)&gtk_label_set_extra_menu, "gtk_label_set_extra_menu", LIBS);
+  gidLink(cast(void**)&gtk_label_set_justify, "gtk_label_set_justify", LIBS);
+  gidLink(cast(void**)&gtk_label_set_label, "gtk_label_set_label", LIBS);
+  gidLink(cast(void**)&gtk_label_set_lines, "gtk_label_set_lines", LIBS);
+  gidLink(cast(void**)&gtk_label_set_markup, "gtk_label_set_markup", LIBS);
+  gidLink(cast(void**)&gtk_label_set_markup_with_mnemonic, "gtk_label_set_markup_with_mnemonic", LIBS);
+  gidLink(cast(void**)&gtk_label_set_max_width_chars, "gtk_label_set_max_width_chars", LIBS);
+  gidLink(cast(void**)&gtk_label_set_mnemonic_widget, "gtk_label_set_mnemonic_widget", LIBS);
+  gidLink(cast(void**)&gtk_label_set_natural_wrap_mode, "gtk_label_set_natural_wrap_mode", LIBS);
+  gidLink(cast(void**)&gtk_label_set_selectable, "gtk_label_set_selectable", LIBS);
+  gidLink(cast(void**)&gtk_label_set_single_line_mode, "gtk_label_set_single_line_mode", LIBS);
+  gidLink(cast(void**)&gtk_label_set_tabs, "gtk_label_set_tabs", LIBS);
+  gidLink(cast(void**)&gtk_label_set_text, "gtk_label_set_text", LIBS);
+  gidLink(cast(void**)&gtk_label_set_text_with_mnemonic, "gtk_label_set_text_with_mnemonic", LIBS);
+  gidLink(cast(void**)&gtk_label_set_use_markup, "gtk_label_set_use_markup", LIBS);
+  gidLink(cast(void**)&gtk_label_set_use_underline, "gtk_label_set_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_label_set_width_chars, "gtk_label_set_width_chars", LIBS);
+  gidLink(cast(void**)&gtk_label_set_wrap, "gtk_label_set_wrap", LIBS);
+  gidLink(cast(void**)&gtk_label_set_wrap_mode, "gtk_label_set_wrap_mode", LIBS);
+  gidLink(cast(void**)&gtk_label_set_xalign, "gtk_label_set_xalign", LIBS);
+  gidLink(cast(void**)&gtk_label_set_yalign, "gtk_label_set_yalign", LIBS);
 
   // LayoutChild
-  gidLink(gtk_layout_child_get_type, "gtk_layout_child_get_type", LIBS);
-  gidLink(gtk_layout_child_get_child_widget, "gtk_layout_child_get_child_widget", LIBS);
-  gidLink(gtk_layout_child_get_layout_manager, "gtk_layout_child_get_layout_manager", LIBS);
+  gidLink(cast(void**)&gtk_layout_child_get_type, "gtk_layout_child_get_type", LIBS);
+  gidLink(cast(void**)&gtk_layout_child_get_child_widget, "gtk_layout_child_get_child_widget", LIBS);
+  gidLink(cast(void**)&gtk_layout_child_get_layout_manager, "gtk_layout_child_get_layout_manager", LIBS);
 
   // LayoutManager
-  gidLink(gtk_layout_manager_get_type, "gtk_layout_manager_get_type", LIBS);
-  gidLink(gtk_layout_manager_allocate, "gtk_layout_manager_allocate", LIBS);
-  gidLink(gtk_layout_manager_get_layout_child, "gtk_layout_manager_get_layout_child", LIBS);
-  gidLink(gtk_layout_manager_get_request_mode, "gtk_layout_manager_get_request_mode", LIBS);
-  gidLink(gtk_layout_manager_get_widget, "gtk_layout_manager_get_widget", LIBS);
-  gidLink(gtk_layout_manager_layout_changed, "gtk_layout_manager_layout_changed", LIBS);
-  gidLink(gtk_layout_manager_measure, "gtk_layout_manager_measure", LIBS);
+  gidLink(cast(void**)&gtk_layout_manager_get_type, "gtk_layout_manager_get_type", LIBS);
+  gidLink(cast(void**)&gtk_layout_manager_allocate, "gtk_layout_manager_allocate", LIBS);
+  gidLink(cast(void**)&gtk_layout_manager_get_layout_child, "gtk_layout_manager_get_layout_child", LIBS);
+  gidLink(cast(void**)&gtk_layout_manager_get_request_mode, "gtk_layout_manager_get_request_mode", LIBS);
+  gidLink(cast(void**)&gtk_layout_manager_get_widget, "gtk_layout_manager_get_widget", LIBS);
+  gidLink(cast(void**)&gtk_layout_manager_layout_changed, "gtk_layout_manager_layout_changed", LIBS);
+  gidLink(cast(void**)&gtk_layout_manager_measure, "gtk_layout_manager_measure", LIBS);
 
   // LevelBar
-  gidLink(gtk_level_bar_get_type, "gtk_level_bar_get_type", LIBS);
-  gidLink(gtk_level_bar_new, "gtk_level_bar_new", LIBS);
-  gidLink(gtk_level_bar_new_for_interval, "gtk_level_bar_new_for_interval", LIBS);
-  gidLink(gtk_level_bar_add_offset_value, "gtk_level_bar_add_offset_value", LIBS);
-  gidLink(gtk_level_bar_get_inverted, "gtk_level_bar_get_inverted", LIBS);
-  gidLink(gtk_level_bar_get_max_value, "gtk_level_bar_get_max_value", LIBS);
-  gidLink(gtk_level_bar_get_min_value, "gtk_level_bar_get_min_value", LIBS);
-  gidLink(gtk_level_bar_get_mode, "gtk_level_bar_get_mode", LIBS);
-  gidLink(gtk_level_bar_get_offset_value, "gtk_level_bar_get_offset_value", LIBS);
-  gidLink(gtk_level_bar_get_value, "gtk_level_bar_get_value", LIBS);
-  gidLink(gtk_level_bar_remove_offset_value, "gtk_level_bar_remove_offset_value", LIBS);
-  gidLink(gtk_level_bar_set_inverted, "gtk_level_bar_set_inverted", LIBS);
-  gidLink(gtk_level_bar_set_max_value, "gtk_level_bar_set_max_value", LIBS);
-  gidLink(gtk_level_bar_set_min_value, "gtk_level_bar_set_min_value", LIBS);
-  gidLink(gtk_level_bar_set_mode, "gtk_level_bar_set_mode", LIBS);
-  gidLink(gtk_level_bar_set_value, "gtk_level_bar_set_value", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_get_type, "gtk_level_bar_get_type", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_new, "gtk_level_bar_new", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_new_for_interval, "gtk_level_bar_new_for_interval", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_add_offset_value, "gtk_level_bar_add_offset_value", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_get_inverted, "gtk_level_bar_get_inverted", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_get_max_value, "gtk_level_bar_get_max_value", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_get_min_value, "gtk_level_bar_get_min_value", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_get_mode, "gtk_level_bar_get_mode", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_get_offset_value, "gtk_level_bar_get_offset_value", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_get_value, "gtk_level_bar_get_value", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_remove_offset_value, "gtk_level_bar_remove_offset_value", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_set_inverted, "gtk_level_bar_set_inverted", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_set_max_value, "gtk_level_bar_set_max_value", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_set_min_value, "gtk_level_bar_set_min_value", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_set_mode, "gtk_level_bar_set_mode", LIBS);
+  gidLink(cast(void**)&gtk_level_bar_set_value, "gtk_level_bar_set_value", LIBS);
 
   // LinkButton
-  gidLink(gtk_link_button_get_type, "gtk_link_button_get_type", LIBS);
-  gidLink(gtk_link_button_new, "gtk_link_button_new", LIBS);
-  gidLink(gtk_link_button_new_with_label, "gtk_link_button_new_with_label", LIBS);
-  gidLink(gtk_link_button_get_uri, "gtk_link_button_get_uri", LIBS);
-  gidLink(gtk_link_button_get_visited, "gtk_link_button_get_visited", LIBS);
-  gidLink(gtk_link_button_set_uri, "gtk_link_button_set_uri", LIBS);
-  gidLink(gtk_link_button_set_visited, "gtk_link_button_set_visited", LIBS);
+  gidLink(cast(void**)&gtk_link_button_get_type, "gtk_link_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_link_button_new, "gtk_link_button_new", LIBS);
+  gidLink(cast(void**)&gtk_link_button_new_with_label, "gtk_link_button_new_with_label", LIBS);
+  gidLink(cast(void**)&gtk_link_button_get_uri, "gtk_link_button_get_uri", LIBS);
+  gidLink(cast(void**)&gtk_link_button_get_visited, "gtk_link_button_get_visited", LIBS);
+  gidLink(cast(void**)&gtk_link_button_set_uri, "gtk_link_button_set_uri", LIBS);
+  gidLink(cast(void**)&gtk_link_button_set_visited, "gtk_link_button_set_visited", LIBS);
 
   // ListBase
-  gidLink(gtk_list_base_get_type, "gtk_list_base_get_type", LIBS);
+  gidLink(cast(void**)&gtk_list_base_get_type, "gtk_list_base_get_type", LIBS);
 
   // ListBox
-  gidLink(gtk_list_box_get_type, "gtk_list_box_get_type", LIBS);
-  gidLink(gtk_list_box_new, "gtk_list_box_new", LIBS);
-  gidLink(gtk_list_box_append, "gtk_list_box_append", LIBS);
-  gidLink(gtk_list_box_bind_model, "gtk_list_box_bind_model", LIBS);
-  gidLink(gtk_list_box_drag_highlight_row, "gtk_list_box_drag_highlight_row", LIBS);
-  gidLink(gtk_list_box_drag_unhighlight_row, "gtk_list_box_drag_unhighlight_row", LIBS);
-  gidLink(gtk_list_box_get_activate_on_single_click, "gtk_list_box_get_activate_on_single_click", LIBS);
-  gidLink(gtk_list_box_get_adjustment, "gtk_list_box_get_adjustment", LIBS);
-  gidLink(gtk_list_box_get_row_at_index, "gtk_list_box_get_row_at_index", LIBS);
-  gidLink(gtk_list_box_get_row_at_y, "gtk_list_box_get_row_at_y", LIBS);
-  gidLink(gtk_list_box_get_selected_row, "gtk_list_box_get_selected_row", LIBS);
-  gidLink(gtk_list_box_get_selected_rows, "gtk_list_box_get_selected_rows", LIBS);
-  gidLink(gtk_list_box_get_selection_mode, "gtk_list_box_get_selection_mode", LIBS);
-  gidLink(gtk_list_box_get_show_separators, "gtk_list_box_get_show_separators", LIBS);
-  gidLink(gtk_list_box_insert, "gtk_list_box_insert", LIBS);
-  gidLink(gtk_list_box_invalidate_filter, "gtk_list_box_invalidate_filter", LIBS);
-  gidLink(gtk_list_box_invalidate_headers, "gtk_list_box_invalidate_headers", LIBS);
-  gidLink(gtk_list_box_invalidate_sort, "gtk_list_box_invalidate_sort", LIBS);
-  gidLink(gtk_list_box_prepend, "gtk_list_box_prepend", LIBS);
-  gidLink(gtk_list_box_remove, "gtk_list_box_remove", LIBS);
-  gidLink(gtk_list_box_remove_all, "gtk_list_box_remove_all", LIBS);
-  gidLink(gtk_list_box_select_all, "gtk_list_box_select_all", LIBS);
-  gidLink(gtk_list_box_select_row, "gtk_list_box_select_row", LIBS);
-  gidLink(gtk_list_box_selected_foreach, "gtk_list_box_selected_foreach", LIBS);
-  gidLink(gtk_list_box_set_activate_on_single_click, "gtk_list_box_set_activate_on_single_click", LIBS);
-  gidLink(gtk_list_box_set_adjustment, "gtk_list_box_set_adjustment", LIBS);
-  gidLink(gtk_list_box_set_filter_func, "gtk_list_box_set_filter_func", LIBS);
-  gidLink(gtk_list_box_set_header_func, "gtk_list_box_set_header_func", LIBS);
-  gidLink(gtk_list_box_set_placeholder, "gtk_list_box_set_placeholder", LIBS);
-  gidLink(gtk_list_box_set_selection_mode, "gtk_list_box_set_selection_mode", LIBS);
-  gidLink(gtk_list_box_set_show_separators, "gtk_list_box_set_show_separators", LIBS);
-  gidLink(gtk_list_box_set_sort_func, "gtk_list_box_set_sort_func", LIBS);
-  gidLink(gtk_list_box_unselect_all, "gtk_list_box_unselect_all", LIBS);
-  gidLink(gtk_list_box_unselect_row, "gtk_list_box_unselect_row", LIBS);
+  gidLink(cast(void**)&gtk_list_box_get_type, "gtk_list_box_get_type", LIBS);
+  gidLink(cast(void**)&gtk_list_box_new, "gtk_list_box_new", LIBS);
+  gidLink(cast(void**)&gtk_list_box_append, "gtk_list_box_append", LIBS);
+  gidLink(cast(void**)&gtk_list_box_bind_model, "gtk_list_box_bind_model", LIBS);
+  gidLink(cast(void**)&gtk_list_box_drag_highlight_row, "gtk_list_box_drag_highlight_row", LIBS);
+  gidLink(cast(void**)&gtk_list_box_drag_unhighlight_row, "gtk_list_box_drag_unhighlight_row", LIBS);
+  gidLink(cast(void**)&gtk_list_box_get_activate_on_single_click, "gtk_list_box_get_activate_on_single_click", LIBS);
+  gidLink(cast(void**)&gtk_list_box_get_adjustment, "gtk_list_box_get_adjustment", LIBS);
+  gidLink(cast(void**)&gtk_list_box_get_row_at_index, "gtk_list_box_get_row_at_index", LIBS);
+  gidLink(cast(void**)&gtk_list_box_get_row_at_y, "gtk_list_box_get_row_at_y", LIBS);
+  gidLink(cast(void**)&gtk_list_box_get_selected_row, "gtk_list_box_get_selected_row", LIBS);
+  gidLink(cast(void**)&gtk_list_box_get_selected_rows, "gtk_list_box_get_selected_rows", LIBS);
+  gidLink(cast(void**)&gtk_list_box_get_selection_mode, "gtk_list_box_get_selection_mode", LIBS);
+  gidLink(cast(void**)&gtk_list_box_get_show_separators, "gtk_list_box_get_show_separators", LIBS);
+  gidLink(cast(void**)&gtk_list_box_insert, "gtk_list_box_insert", LIBS);
+  gidLink(cast(void**)&gtk_list_box_invalidate_filter, "gtk_list_box_invalidate_filter", LIBS);
+  gidLink(cast(void**)&gtk_list_box_invalidate_headers, "gtk_list_box_invalidate_headers", LIBS);
+  gidLink(cast(void**)&gtk_list_box_invalidate_sort, "gtk_list_box_invalidate_sort", LIBS);
+  gidLink(cast(void**)&gtk_list_box_prepend, "gtk_list_box_prepend", LIBS);
+  gidLink(cast(void**)&gtk_list_box_remove, "gtk_list_box_remove", LIBS);
+  gidLink(cast(void**)&gtk_list_box_remove_all, "gtk_list_box_remove_all", LIBS);
+  gidLink(cast(void**)&gtk_list_box_select_all, "gtk_list_box_select_all", LIBS);
+  gidLink(cast(void**)&gtk_list_box_select_row, "gtk_list_box_select_row", LIBS);
+  gidLink(cast(void**)&gtk_list_box_selected_foreach, "gtk_list_box_selected_foreach", LIBS);
+  gidLink(cast(void**)&gtk_list_box_set_activate_on_single_click, "gtk_list_box_set_activate_on_single_click", LIBS);
+  gidLink(cast(void**)&gtk_list_box_set_adjustment, "gtk_list_box_set_adjustment", LIBS);
+  gidLink(cast(void**)&gtk_list_box_set_filter_func, "gtk_list_box_set_filter_func", LIBS);
+  gidLink(cast(void**)&gtk_list_box_set_header_func, "gtk_list_box_set_header_func", LIBS);
+  gidLink(cast(void**)&gtk_list_box_set_placeholder, "gtk_list_box_set_placeholder", LIBS);
+  gidLink(cast(void**)&gtk_list_box_set_selection_mode, "gtk_list_box_set_selection_mode", LIBS);
+  gidLink(cast(void**)&gtk_list_box_set_show_separators, "gtk_list_box_set_show_separators", LIBS);
+  gidLink(cast(void**)&gtk_list_box_set_sort_func, "gtk_list_box_set_sort_func", LIBS);
+  gidLink(cast(void**)&gtk_list_box_unselect_all, "gtk_list_box_unselect_all", LIBS);
+  gidLink(cast(void**)&gtk_list_box_unselect_row, "gtk_list_box_unselect_row", LIBS);
 
   // ListBoxRow
-  gidLink(gtk_list_box_row_get_type, "gtk_list_box_row_get_type", LIBS);
-  gidLink(gtk_list_box_row_new, "gtk_list_box_row_new", LIBS);
-  gidLink(gtk_list_box_row_changed, "gtk_list_box_row_changed", LIBS);
-  gidLink(gtk_list_box_row_get_activatable, "gtk_list_box_row_get_activatable", LIBS);
-  gidLink(gtk_list_box_row_get_child, "gtk_list_box_row_get_child", LIBS);
-  gidLink(gtk_list_box_row_get_header, "gtk_list_box_row_get_header", LIBS);
-  gidLink(gtk_list_box_row_get_index, "gtk_list_box_row_get_index", LIBS);
-  gidLink(gtk_list_box_row_get_selectable, "gtk_list_box_row_get_selectable", LIBS);
-  gidLink(gtk_list_box_row_is_selected, "gtk_list_box_row_is_selected", LIBS);
-  gidLink(gtk_list_box_row_set_activatable, "gtk_list_box_row_set_activatable", LIBS);
-  gidLink(gtk_list_box_row_set_child, "gtk_list_box_row_set_child", LIBS);
-  gidLink(gtk_list_box_row_set_header, "gtk_list_box_row_set_header", LIBS);
-  gidLink(gtk_list_box_row_set_selectable, "gtk_list_box_row_set_selectable", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_get_type, "gtk_list_box_row_get_type", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_new, "gtk_list_box_row_new", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_changed, "gtk_list_box_row_changed", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_get_activatable, "gtk_list_box_row_get_activatable", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_get_child, "gtk_list_box_row_get_child", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_get_header, "gtk_list_box_row_get_header", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_get_index, "gtk_list_box_row_get_index", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_get_selectable, "gtk_list_box_row_get_selectable", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_is_selected, "gtk_list_box_row_is_selected", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_set_activatable, "gtk_list_box_row_set_activatable", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_set_child, "gtk_list_box_row_set_child", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_set_header, "gtk_list_box_row_set_header", LIBS);
+  gidLink(cast(void**)&gtk_list_box_row_set_selectable, "gtk_list_box_row_set_selectable", LIBS);
 
   // ListHeader
-  gidLink(gtk_list_header_get_type, "gtk_list_header_get_type", LIBS);
-  gidLink(gtk_list_header_get_child, "gtk_list_header_get_child", LIBS);
-  gidLink(gtk_list_header_get_end, "gtk_list_header_get_end", LIBS);
-  gidLink(gtk_list_header_get_item, "gtk_list_header_get_item", LIBS);
-  gidLink(gtk_list_header_get_n_items, "gtk_list_header_get_n_items", LIBS);
-  gidLink(gtk_list_header_get_start, "gtk_list_header_get_start", LIBS);
-  gidLink(gtk_list_header_set_child, "gtk_list_header_set_child", LIBS);
+  gidLink(cast(void**)&gtk_list_header_get_type, "gtk_list_header_get_type", LIBS);
+  gidLink(cast(void**)&gtk_list_header_get_child, "gtk_list_header_get_child", LIBS);
+  gidLink(cast(void**)&gtk_list_header_get_end, "gtk_list_header_get_end", LIBS);
+  gidLink(cast(void**)&gtk_list_header_get_item, "gtk_list_header_get_item", LIBS);
+  gidLink(cast(void**)&gtk_list_header_get_n_items, "gtk_list_header_get_n_items", LIBS);
+  gidLink(cast(void**)&gtk_list_header_get_start, "gtk_list_header_get_start", LIBS);
+  gidLink(cast(void**)&gtk_list_header_set_child, "gtk_list_header_set_child", LIBS);
 
   // ListItem
-  gidLink(gtk_list_item_get_type, "gtk_list_item_get_type", LIBS);
-  gidLink(gtk_list_item_get_accessible_description, "gtk_list_item_get_accessible_description", LIBS);
-  gidLink(gtk_list_item_get_accessible_label, "gtk_list_item_get_accessible_label", LIBS);
-  gidLink(gtk_list_item_get_activatable, "gtk_list_item_get_activatable", LIBS);
-  gidLink(gtk_list_item_get_child, "gtk_list_item_get_child", LIBS);
-  gidLink(gtk_list_item_get_focusable, "gtk_list_item_get_focusable", LIBS);
-  gidLink(gtk_list_item_get_item, "gtk_list_item_get_item", LIBS);
-  gidLink(gtk_list_item_get_position, "gtk_list_item_get_position", LIBS);
-  gidLink(gtk_list_item_get_selectable, "gtk_list_item_get_selectable", LIBS);
-  gidLink(gtk_list_item_get_selected, "gtk_list_item_get_selected", LIBS);
-  gidLink(gtk_list_item_set_accessible_description, "gtk_list_item_set_accessible_description", LIBS);
-  gidLink(gtk_list_item_set_accessible_label, "gtk_list_item_set_accessible_label", LIBS);
-  gidLink(gtk_list_item_set_activatable, "gtk_list_item_set_activatable", LIBS);
-  gidLink(gtk_list_item_set_child, "gtk_list_item_set_child", LIBS);
-  gidLink(gtk_list_item_set_focusable, "gtk_list_item_set_focusable", LIBS);
-  gidLink(gtk_list_item_set_selectable, "gtk_list_item_set_selectable", LIBS);
+  gidLink(cast(void**)&gtk_list_item_get_type, "gtk_list_item_get_type", LIBS);
+  gidLink(cast(void**)&gtk_list_item_get_accessible_description, "gtk_list_item_get_accessible_description", LIBS);
+  gidLink(cast(void**)&gtk_list_item_get_accessible_label, "gtk_list_item_get_accessible_label", LIBS);
+  gidLink(cast(void**)&gtk_list_item_get_activatable, "gtk_list_item_get_activatable", LIBS);
+  gidLink(cast(void**)&gtk_list_item_get_child, "gtk_list_item_get_child", LIBS);
+  gidLink(cast(void**)&gtk_list_item_get_focusable, "gtk_list_item_get_focusable", LIBS);
+  gidLink(cast(void**)&gtk_list_item_get_item, "gtk_list_item_get_item", LIBS);
+  gidLink(cast(void**)&gtk_list_item_get_position, "gtk_list_item_get_position", LIBS);
+  gidLink(cast(void**)&gtk_list_item_get_selectable, "gtk_list_item_get_selectable", LIBS);
+  gidLink(cast(void**)&gtk_list_item_get_selected, "gtk_list_item_get_selected", LIBS);
+  gidLink(cast(void**)&gtk_list_item_set_accessible_description, "gtk_list_item_set_accessible_description", LIBS);
+  gidLink(cast(void**)&gtk_list_item_set_accessible_label, "gtk_list_item_set_accessible_label", LIBS);
+  gidLink(cast(void**)&gtk_list_item_set_activatable, "gtk_list_item_set_activatable", LIBS);
+  gidLink(cast(void**)&gtk_list_item_set_child, "gtk_list_item_set_child", LIBS);
+  gidLink(cast(void**)&gtk_list_item_set_focusable, "gtk_list_item_set_focusable", LIBS);
+  gidLink(cast(void**)&gtk_list_item_set_selectable, "gtk_list_item_set_selectable", LIBS);
 
   // ListItemFactory
-  gidLink(gtk_list_item_factory_get_type, "gtk_list_item_factory_get_type", LIBS);
+  gidLink(cast(void**)&gtk_list_item_factory_get_type, "gtk_list_item_factory_get_type", LIBS);
 
   // ListStore
-  gidLink(gtk_list_store_get_type, "gtk_list_store_get_type", LIBS);
-  gidLink(gtk_list_store_new, "gtk_list_store_new", LIBS);
-  gidLink(gtk_list_store_newv, "gtk_list_store_newv", LIBS);
-  gidLink(gtk_list_store_append, "gtk_list_store_append", LIBS);
-  gidLink(gtk_list_store_clear, "gtk_list_store_clear", LIBS);
-  gidLink(gtk_list_store_insert, "gtk_list_store_insert", LIBS);
-  gidLink(gtk_list_store_insert_after, "gtk_list_store_insert_after", LIBS);
-  gidLink(gtk_list_store_insert_before, "gtk_list_store_insert_before", LIBS);
-  gidLink(gtk_list_store_insert_with_values, "gtk_list_store_insert_with_values", LIBS);
-  gidLink(gtk_list_store_insert_with_valuesv, "gtk_list_store_insert_with_valuesv", LIBS);
-  gidLink(gtk_list_store_iter_is_valid, "gtk_list_store_iter_is_valid", LIBS);
-  gidLink(gtk_list_store_move_after, "gtk_list_store_move_after", LIBS);
-  gidLink(gtk_list_store_move_before, "gtk_list_store_move_before", LIBS);
-  gidLink(gtk_list_store_prepend, "gtk_list_store_prepend", LIBS);
-  gidLink(gtk_list_store_remove, "gtk_list_store_remove", LIBS);
-  gidLink(gtk_list_store_reorder, "gtk_list_store_reorder", LIBS);
-  gidLink(gtk_list_store_set, "gtk_list_store_set", LIBS);
-  gidLink(gtk_list_store_set_column_types, "gtk_list_store_set_column_types", LIBS);
-  gidLink(gtk_list_store_set_valist, "gtk_list_store_set_valist", LIBS);
-  gidLink(gtk_list_store_set_value, "gtk_list_store_set_value", LIBS);
-  gidLink(gtk_list_store_set_valuesv, "gtk_list_store_set_valuesv", LIBS);
-  gidLink(gtk_list_store_swap, "gtk_list_store_swap", LIBS);
+  gidLink(cast(void**)&gtk_list_store_get_type, "gtk_list_store_get_type", LIBS);
+  gidLink(cast(void**)&gtk_list_store_new, "gtk_list_store_new", LIBS);
+  gidLink(cast(void**)&gtk_list_store_newv, "gtk_list_store_newv", LIBS);
+  gidLink(cast(void**)&gtk_list_store_append, "gtk_list_store_append", LIBS);
+  gidLink(cast(void**)&gtk_list_store_clear, "gtk_list_store_clear", LIBS);
+  gidLink(cast(void**)&gtk_list_store_insert, "gtk_list_store_insert", LIBS);
+  gidLink(cast(void**)&gtk_list_store_insert_after, "gtk_list_store_insert_after", LIBS);
+  gidLink(cast(void**)&gtk_list_store_insert_before, "gtk_list_store_insert_before", LIBS);
+  gidLink(cast(void**)&gtk_list_store_insert_with_values, "gtk_list_store_insert_with_values", LIBS);
+  gidLink(cast(void**)&gtk_list_store_insert_with_valuesv, "gtk_list_store_insert_with_valuesv", LIBS);
+  gidLink(cast(void**)&gtk_list_store_iter_is_valid, "gtk_list_store_iter_is_valid", LIBS);
+  gidLink(cast(void**)&gtk_list_store_move_after, "gtk_list_store_move_after", LIBS);
+  gidLink(cast(void**)&gtk_list_store_move_before, "gtk_list_store_move_before", LIBS);
+  gidLink(cast(void**)&gtk_list_store_prepend, "gtk_list_store_prepend", LIBS);
+  gidLink(cast(void**)&gtk_list_store_remove, "gtk_list_store_remove", LIBS);
+  gidLink(cast(void**)&gtk_list_store_reorder, "gtk_list_store_reorder", LIBS);
+  gidLink(cast(void**)&gtk_list_store_set, "gtk_list_store_set", LIBS);
+  gidLink(cast(void**)&gtk_list_store_set_column_types, "gtk_list_store_set_column_types", LIBS);
+  gidLink(cast(void**)&gtk_list_store_set_valist, "gtk_list_store_set_valist", LIBS);
+  gidLink(cast(void**)&gtk_list_store_set_value, "gtk_list_store_set_value", LIBS);
+  gidLink(cast(void**)&gtk_list_store_set_valuesv, "gtk_list_store_set_valuesv", LIBS);
+  gidLink(cast(void**)&gtk_list_store_swap, "gtk_list_store_swap", LIBS);
 
   // ListView
-  gidLink(gtk_list_view_get_type, "gtk_list_view_get_type", LIBS);
-  gidLink(gtk_list_view_new, "gtk_list_view_new", LIBS);
-  gidLink(gtk_list_view_get_enable_rubberband, "gtk_list_view_get_enable_rubberband", LIBS);
-  gidLink(gtk_list_view_get_factory, "gtk_list_view_get_factory", LIBS);
-  gidLink(gtk_list_view_get_header_factory, "gtk_list_view_get_header_factory", LIBS);
-  gidLink(gtk_list_view_get_model, "gtk_list_view_get_model", LIBS);
-  gidLink(gtk_list_view_get_show_separators, "gtk_list_view_get_show_separators", LIBS);
-  gidLink(gtk_list_view_get_single_click_activate, "gtk_list_view_get_single_click_activate", LIBS);
-  gidLink(gtk_list_view_get_tab_behavior, "gtk_list_view_get_tab_behavior", LIBS);
-  gidLink(gtk_list_view_scroll_to, "gtk_list_view_scroll_to", LIBS);
-  gidLink(gtk_list_view_set_enable_rubberband, "gtk_list_view_set_enable_rubberband", LIBS);
-  gidLink(gtk_list_view_set_factory, "gtk_list_view_set_factory", LIBS);
-  gidLink(gtk_list_view_set_header_factory, "gtk_list_view_set_header_factory", LIBS);
-  gidLink(gtk_list_view_set_model, "gtk_list_view_set_model", LIBS);
-  gidLink(gtk_list_view_set_show_separators, "gtk_list_view_set_show_separators", LIBS);
-  gidLink(gtk_list_view_set_single_click_activate, "gtk_list_view_set_single_click_activate", LIBS);
-  gidLink(gtk_list_view_set_tab_behavior, "gtk_list_view_set_tab_behavior", LIBS);
+  gidLink(cast(void**)&gtk_list_view_get_type, "gtk_list_view_get_type", LIBS);
+  gidLink(cast(void**)&gtk_list_view_new, "gtk_list_view_new", LIBS);
+  gidLink(cast(void**)&gtk_list_view_get_enable_rubberband, "gtk_list_view_get_enable_rubberband", LIBS);
+  gidLink(cast(void**)&gtk_list_view_get_factory, "gtk_list_view_get_factory", LIBS);
+  gidLink(cast(void**)&gtk_list_view_get_header_factory, "gtk_list_view_get_header_factory", LIBS);
+  gidLink(cast(void**)&gtk_list_view_get_model, "gtk_list_view_get_model", LIBS);
+  gidLink(cast(void**)&gtk_list_view_get_show_separators, "gtk_list_view_get_show_separators", LIBS);
+  gidLink(cast(void**)&gtk_list_view_get_single_click_activate, "gtk_list_view_get_single_click_activate", LIBS);
+  gidLink(cast(void**)&gtk_list_view_get_tab_behavior, "gtk_list_view_get_tab_behavior", LIBS);
+  gidLink(cast(void**)&gtk_list_view_scroll_to, "gtk_list_view_scroll_to", LIBS);
+  gidLink(cast(void**)&gtk_list_view_set_enable_rubberband, "gtk_list_view_set_enable_rubberband", LIBS);
+  gidLink(cast(void**)&gtk_list_view_set_factory, "gtk_list_view_set_factory", LIBS);
+  gidLink(cast(void**)&gtk_list_view_set_header_factory, "gtk_list_view_set_header_factory", LIBS);
+  gidLink(cast(void**)&gtk_list_view_set_model, "gtk_list_view_set_model", LIBS);
+  gidLink(cast(void**)&gtk_list_view_set_show_separators, "gtk_list_view_set_show_separators", LIBS);
+  gidLink(cast(void**)&gtk_list_view_set_single_click_activate, "gtk_list_view_set_single_click_activate", LIBS);
+  gidLink(cast(void**)&gtk_list_view_set_tab_behavior, "gtk_list_view_set_tab_behavior", LIBS);
 
   // LockButton
-  gidLink(gtk_lock_button_get_type, "gtk_lock_button_get_type", LIBS);
-  gidLink(gtk_lock_button_new, "gtk_lock_button_new", LIBS);
-  gidLink(gtk_lock_button_get_permission, "gtk_lock_button_get_permission", LIBS);
-  gidLink(gtk_lock_button_set_permission, "gtk_lock_button_set_permission", LIBS);
+  gidLink(cast(void**)&gtk_lock_button_get_type, "gtk_lock_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_lock_button_new, "gtk_lock_button_new", LIBS);
+  gidLink(cast(void**)&gtk_lock_button_get_permission, "gtk_lock_button_get_permission", LIBS);
+  gidLink(cast(void**)&gtk_lock_button_set_permission, "gtk_lock_button_set_permission", LIBS);
 
   // MapListModel
-  gidLink(gtk_map_list_model_get_type, "gtk_map_list_model_get_type", LIBS);
-  gidLink(gtk_map_list_model_new, "gtk_map_list_model_new", LIBS);
-  gidLink(gtk_map_list_model_get_model, "gtk_map_list_model_get_model", LIBS);
-  gidLink(gtk_map_list_model_has_map, "gtk_map_list_model_has_map", LIBS);
-  gidLink(gtk_map_list_model_set_map_func, "gtk_map_list_model_set_map_func", LIBS);
-  gidLink(gtk_map_list_model_set_model, "gtk_map_list_model_set_model", LIBS);
+  gidLink(cast(void**)&gtk_map_list_model_get_type, "gtk_map_list_model_get_type", LIBS);
+  gidLink(cast(void**)&gtk_map_list_model_new, "gtk_map_list_model_new", LIBS);
+  gidLink(cast(void**)&gtk_map_list_model_get_model, "gtk_map_list_model_get_model", LIBS);
+  gidLink(cast(void**)&gtk_map_list_model_has_map, "gtk_map_list_model_has_map", LIBS);
+  gidLink(cast(void**)&gtk_map_list_model_set_map_func, "gtk_map_list_model_set_map_func", LIBS);
+  gidLink(cast(void**)&gtk_map_list_model_set_model, "gtk_map_list_model_set_model", LIBS);
 
   // MediaControls
-  gidLink(gtk_media_controls_get_type, "gtk_media_controls_get_type", LIBS);
-  gidLink(gtk_media_controls_new, "gtk_media_controls_new", LIBS);
-  gidLink(gtk_media_controls_get_media_stream, "gtk_media_controls_get_media_stream", LIBS);
-  gidLink(gtk_media_controls_set_media_stream, "gtk_media_controls_set_media_stream", LIBS);
+  gidLink(cast(void**)&gtk_media_controls_get_type, "gtk_media_controls_get_type", LIBS);
+  gidLink(cast(void**)&gtk_media_controls_new, "gtk_media_controls_new", LIBS);
+  gidLink(cast(void**)&gtk_media_controls_get_media_stream, "gtk_media_controls_get_media_stream", LIBS);
+  gidLink(cast(void**)&gtk_media_controls_set_media_stream, "gtk_media_controls_set_media_stream", LIBS);
 
   // MediaFile
-  gidLink(gtk_media_file_get_type, "gtk_media_file_get_type", LIBS);
-  gidLink(gtk_media_file_new, "gtk_media_file_new", LIBS);
-  gidLink(gtk_media_file_new_for_file, "gtk_media_file_new_for_file", LIBS);
-  gidLink(gtk_media_file_new_for_filename, "gtk_media_file_new_for_filename", LIBS);
-  gidLink(gtk_media_file_new_for_input_stream, "gtk_media_file_new_for_input_stream", LIBS);
-  gidLink(gtk_media_file_new_for_resource, "gtk_media_file_new_for_resource", LIBS);
-  gidLink(gtk_media_file_clear, "gtk_media_file_clear", LIBS);
-  gidLink(gtk_media_file_get_file, "gtk_media_file_get_file", LIBS);
-  gidLink(gtk_media_file_get_input_stream, "gtk_media_file_get_input_stream", LIBS);
-  gidLink(gtk_media_file_set_file, "gtk_media_file_set_file", LIBS);
-  gidLink(gtk_media_file_set_filename, "gtk_media_file_set_filename", LIBS);
-  gidLink(gtk_media_file_set_input_stream, "gtk_media_file_set_input_stream", LIBS);
-  gidLink(gtk_media_file_set_resource, "gtk_media_file_set_resource", LIBS);
+  gidLink(cast(void**)&gtk_media_file_get_type, "gtk_media_file_get_type", LIBS);
+  gidLink(cast(void**)&gtk_media_file_new, "gtk_media_file_new", LIBS);
+  gidLink(cast(void**)&gtk_media_file_new_for_file, "gtk_media_file_new_for_file", LIBS);
+  gidLink(cast(void**)&gtk_media_file_new_for_filename, "gtk_media_file_new_for_filename", LIBS);
+  gidLink(cast(void**)&gtk_media_file_new_for_input_stream, "gtk_media_file_new_for_input_stream", LIBS);
+  gidLink(cast(void**)&gtk_media_file_new_for_resource, "gtk_media_file_new_for_resource", LIBS);
+  gidLink(cast(void**)&gtk_media_file_clear, "gtk_media_file_clear", LIBS);
+  gidLink(cast(void**)&gtk_media_file_get_file, "gtk_media_file_get_file", LIBS);
+  gidLink(cast(void**)&gtk_media_file_get_input_stream, "gtk_media_file_get_input_stream", LIBS);
+  gidLink(cast(void**)&gtk_media_file_set_file, "gtk_media_file_set_file", LIBS);
+  gidLink(cast(void**)&gtk_media_file_set_filename, "gtk_media_file_set_filename", LIBS);
+  gidLink(cast(void**)&gtk_media_file_set_input_stream, "gtk_media_file_set_input_stream", LIBS);
+  gidLink(cast(void**)&gtk_media_file_set_resource, "gtk_media_file_set_resource", LIBS);
 
   // MediaStream
-  gidLink(gtk_media_stream_get_type, "gtk_media_stream_get_type", LIBS);
-  gidLink(gtk_media_stream_ended, "gtk_media_stream_ended", LIBS);
-  gidLink(gtk_media_stream_error, "gtk_media_stream_error", LIBS);
-  gidLink(gtk_media_stream_error_valist, "gtk_media_stream_error_valist", LIBS);
-  gidLink(gtk_media_stream_gerror, "gtk_media_stream_gerror", LIBS);
-  gidLink(gtk_media_stream_get_duration, "gtk_media_stream_get_duration", LIBS);
-  gidLink(gtk_media_stream_get_ended, "gtk_media_stream_get_ended", LIBS);
-  gidLink(gtk_media_stream_get_error, "gtk_media_stream_get_error", LIBS);
-  gidLink(gtk_media_stream_get_loop, "gtk_media_stream_get_loop", LIBS);
-  gidLink(gtk_media_stream_get_muted, "gtk_media_stream_get_muted", LIBS);
-  gidLink(gtk_media_stream_get_playing, "gtk_media_stream_get_playing", LIBS);
-  gidLink(gtk_media_stream_get_timestamp, "gtk_media_stream_get_timestamp", LIBS);
-  gidLink(gtk_media_stream_get_volume, "gtk_media_stream_get_volume", LIBS);
-  gidLink(gtk_media_stream_has_audio, "gtk_media_stream_has_audio", LIBS);
-  gidLink(gtk_media_stream_has_video, "gtk_media_stream_has_video", LIBS);
-  gidLink(gtk_media_stream_is_prepared, "gtk_media_stream_is_prepared", LIBS);
-  gidLink(gtk_media_stream_is_seekable, "gtk_media_stream_is_seekable", LIBS);
-  gidLink(gtk_media_stream_is_seeking, "gtk_media_stream_is_seeking", LIBS);
-  gidLink(gtk_media_stream_pause, "gtk_media_stream_pause", LIBS);
-  gidLink(gtk_media_stream_play, "gtk_media_stream_play", LIBS);
-  gidLink(gtk_media_stream_prepared, "gtk_media_stream_prepared", LIBS);
-  gidLink(gtk_media_stream_realize, "gtk_media_stream_realize", LIBS);
-  gidLink(gtk_media_stream_seek, "gtk_media_stream_seek", LIBS);
-  gidLink(gtk_media_stream_seek_failed, "gtk_media_stream_seek_failed", LIBS);
-  gidLink(gtk_media_stream_seek_success, "gtk_media_stream_seek_success", LIBS);
-  gidLink(gtk_media_stream_set_loop, "gtk_media_stream_set_loop", LIBS);
-  gidLink(gtk_media_stream_set_muted, "gtk_media_stream_set_muted", LIBS);
-  gidLink(gtk_media_stream_set_playing, "gtk_media_stream_set_playing", LIBS);
-  gidLink(gtk_media_stream_set_volume, "gtk_media_stream_set_volume", LIBS);
-  gidLink(gtk_media_stream_stream_ended, "gtk_media_stream_stream_ended", LIBS);
-  gidLink(gtk_media_stream_stream_prepared, "gtk_media_stream_stream_prepared", LIBS);
-  gidLink(gtk_media_stream_stream_unprepared, "gtk_media_stream_stream_unprepared", LIBS);
-  gidLink(gtk_media_stream_unprepared, "gtk_media_stream_unprepared", LIBS);
-  gidLink(gtk_media_stream_unrealize, "gtk_media_stream_unrealize", LIBS);
-  gidLink(gtk_media_stream_update, "gtk_media_stream_update", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_get_type, "gtk_media_stream_get_type", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_ended, "gtk_media_stream_ended", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_error, "gtk_media_stream_error", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_error_valist, "gtk_media_stream_error_valist", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_gerror, "gtk_media_stream_gerror", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_get_duration, "gtk_media_stream_get_duration", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_get_ended, "gtk_media_stream_get_ended", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_get_error, "gtk_media_stream_get_error", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_get_loop, "gtk_media_stream_get_loop", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_get_muted, "gtk_media_stream_get_muted", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_get_playing, "gtk_media_stream_get_playing", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_get_timestamp, "gtk_media_stream_get_timestamp", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_get_volume, "gtk_media_stream_get_volume", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_has_audio, "gtk_media_stream_has_audio", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_has_video, "gtk_media_stream_has_video", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_is_prepared, "gtk_media_stream_is_prepared", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_is_seekable, "gtk_media_stream_is_seekable", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_is_seeking, "gtk_media_stream_is_seeking", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_pause, "gtk_media_stream_pause", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_play, "gtk_media_stream_play", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_prepared, "gtk_media_stream_prepared", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_realize, "gtk_media_stream_realize", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_seek, "gtk_media_stream_seek", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_seek_failed, "gtk_media_stream_seek_failed", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_seek_success, "gtk_media_stream_seek_success", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_set_loop, "gtk_media_stream_set_loop", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_set_muted, "gtk_media_stream_set_muted", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_set_playing, "gtk_media_stream_set_playing", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_set_volume, "gtk_media_stream_set_volume", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_stream_ended, "gtk_media_stream_stream_ended", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_stream_prepared, "gtk_media_stream_stream_prepared", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_stream_unprepared, "gtk_media_stream_stream_unprepared", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_unprepared, "gtk_media_stream_unprepared", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_unrealize, "gtk_media_stream_unrealize", LIBS);
+  gidLink(cast(void**)&gtk_media_stream_update, "gtk_media_stream_update", LIBS);
 
   // MenuButton
-  gidLink(gtk_menu_button_get_type, "gtk_menu_button_get_type", LIBS);
-  gidLink(gtk_menu_button_new, "gtk_menu_button_new", LIBS);
-  gidLink(gtk_menu_button_get_active, "gtk_menu_button_get_active", LIBS);
-  gidLink(gtk_menu_button_get_always_show_arrow, "gtk_menu_button_get_always_show_arrow", LIBS);
-  gidLink(gtk_menu_button_get_can_shrink, "gtk_menu_button_get_can_shrink", LIBS);
-  gidLink(gtk_menu_button_get_child, "gtk_menu_button_get_child", LIBS);
-  gidLink(gtk_menu_button_get_direction, "gtk_menu_button_get_direction", LIBS);
-  gidLink(gtk_menu_button_get_has_frame, "gtk_menu_button_get_has_frame", LIBS);
-  gidLink(gtk_menu_button_get_icon_name, "gtk_menu_button_get_icon_name", LIBS);
-  gidLink(gtk_menu_button_get_label, "gtk_menu_button_get_label", LIBS);
-  gidLink(gtk_menu_button_get_menu_model, "gtk_menu_button_get_menu_model", LIBS);
-  gidLink(gtk_menu_button_get_popover, "gtk_menu_button_get_popover", LIBS);
-  gidLink(gtk_menu_button_get_primary, "gtk_menu_button_get_primary", LIBS);
-  gidLink(gtk_menu_button_get_use_underline, "gtk_menu_button_get_use_underline", LIBS);
-  gidLink(gtk_menu_button_popdown, "gtk_menu_button_popdown", LIBS);
-  gidLink(gtk_menu_button_popup, "gtk_menu_button_popup", LIBS);
-  gidLink(gtk_menu_button_set_active, "gtk_menu_button_set_active", LIBS);
-  gidLink(gtk_menu_button_set_always_show_arrow, "gtk_menu_button_set_always_show_arrow", LIBS);
-  gidLink(gtk_menu_button_set_can_shrink, "gtk_menu_button_set_can_shrink", LIBS);
-  gidLink(gtk_menu_button_set_child, "gtk_menu_button_set_child", LIBS);
-  gidLink(gtk_menu_button_set_create_popup_func, "gtk_menu_button_set_create_popup_func", LIBS);
-  gidLink(gtk_menu_button_set_direction, "gtk_menu_button_set_direction", LIBS);
-  gidLink(gtk_menu_button_set_has_frame, "gtk_menu_button_set_has_frame", LIBS);
-  gidLink(gtk_menu_button_set_icon_name, "gtk_menu_button_set_icon_name", LIBS);
-  gidLink(gtk_menu_button_set_label, "gtk_menu_button_set_label", LIBS);
-  gidLink(gtk_menu_button_set_menu_model, "gtk_menu_button_set_menu_model", LIBS);
-  gidLink(gtk_menu_button_set_popover, "gtk_menu_button_set_popover", LIBS);
-  gidLink(gtk_menu_button_set_primary, "gtk_menu_button_set_primary", LIBS);
-  gidLink(gtk_menu_button_set_use_underline, "gtk_menu_button_set_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_type, "gtk_menu_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_new, "gtk_menu_button_new", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_active, "gtk_menu_button_get_active", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_always_show_arrow, "gtk_menu_button_get_always_show_arrow", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_can_shrink, "gtk_menu_button_get_can_shrink", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_child, "gtk_menu_button_get_child", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_direction, "gtk_menu_button_get_direction", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_has_frame, "gtk_menu_button_get_has_frame", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_icon_name, "gtk_menu_button_get_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_label, "gtk_menu_button_get_label", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_menu_model, "gtk_menu_button_get_menu_model", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_popover, "gtk_menu_button_get_popover", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_primary, "gtk_menu_button_get_primary", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_get_use_underline, "gtk_menu_button_get_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_popdown, "gtk_menu_button_popdown", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_popup, "gtk_menu_button_popup", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_active, "gtk_menu_button_set_active", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_always_show_arrow, "gtk_menu_button_set_always_show_arrow", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_can_shrink, "gtk_menu_button_set_can_shrink", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_child, "gtk_menu_button_set_child", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_create_popup_func, "gtk_menu_button_set_create_popup_func", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_direction, "gtk_menu_button_set_direction", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_has_frame, "gtk_menu_button_set_has_frame", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_icon_name, "gtk_menu_button_set_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_label, "gtk_menu_button_set_label", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_menu_model, "gtk_menu_button_set_menu_model", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_popover, "gtk_menu_button_set_popover", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_primary, "gtk_menu_button_set_primary", LIBS);
+  gidLink(cast(void**)&gtk_menu_button_set_use_underline, "gtk_menu_button_set_use_underline", LIBS);
 
   // MessageDialog
-  gidLink(gtk_message_dialog_get_type, "gtk_message_dialog_get_type", LIBS);
-  gidLink(gtk_message_dialog_new, "gtk_message_dialog_new", LIBS);
-  gidLink(gtk_message_dialog_new_with_markup, "gtk_message_dialog_new_with_markup", LIBS);
-  gidLink(gtk_message_dialog_format_secondary_markup, "gtk_message_dialog_format_secondary_markup", LIBS);
-  gidLink(gtk_message_dialog_format_secondary_text, "gtk_message_dialog_format_secondary_text", LIBS);
-  gidLink(gtk_message_dialog_get_message_area, "gtk_message_dialog_get_message_area", LIBS);
-  gidLink(gtk_message_dialog_set_markup, "gtk_message_dialog_set_markup", LIBS);
+  gidLink(cast(void**)&gtk_message_dialog_get_type, "gtk_message_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_message_dialog_new, "gtk_message_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_message_dialog_new_with_markup, "gtk_message_dialog_new_with_markup", LIBS);
+  gidLink(cast(void**)&gtk_message_dialog_format_secondary_markup, "gtk_message_dialog_format_secondary_markup", LIBS);
+  gidLink(cast(void**)&gtk_message_dialog_format_secondary_text, "gtk_message_dialog_format_secondary_text", LIBS);
+  gidLink(cast(void**)&gtk_message_dialog_get_message_area, "gtk_message_dialog_get_message_area", LIBS);
+  gidLink(cast(void**)&gtk_message_dialog_set_markup, "gtk_message_dialog_set_markup", LIBS);
 
   // MnemonicAction
-  gidLink(gtk_mnemonic_action_get_type, "gtk_mnemonic_action_get_type", LIBS);
-  gidLink(gtk_mnemonic_action_get, "gtk_mnemonic_action_get", LIBS);
+  gidLink(cast(void**)&gtk_mnemonic_action_get_type, "gtk_mnemonic_action_get_type", LIBS);
+  gidLink(cast(void**)&gtk_mnemonic_action_get, "gtk_mnemonic_action_get", LIBS);
 
   // MnemonicTrigger
-  gidLink(gtk_mnemonic_trigger_get_type, "gtk_mnemonic_trigger_get_type", LIBS);
-  gidLink(gtk_mnemonic_trigger_new, "gtk_mnemonic_trigger_new", LIBS);
-  gidLink(gtk_mnemonic_trigger_get_keyval, "gtk_mnemonic_trigger_get_keyval", LIBS);
+  gidLink(cast(void**)&gtk_mnemonic_trigger_get_type, "gtk_mnemonic_trigger_get_type", LIBS);
+  gidLink(cast(void**)&gtk_mnemonic_trigger_new, "gtk_mnemonic_trigger_new", LIBS);
+  gidLink(cast(void**)&gtk_mnemonic_trigger_get_keyval, "gtk_mnemonic_trigger_get_keyval", LIBS);
 
   // MountOperation
-  gidLink(gtk_mount_operation_get_type, "gtk_mount_operation_get_type", LIBS);
-  gidLink(gtk_mount_operation_new, "gtk_mount_operation_new", LIBS);
-  gidLink(gtk_mount_operation_get_display, "gtk_mount_operation_get_display", LIBS);
-  gidLink(gtk_mount_operation_get_parent, "gtk_mount_operation_get_parent", LIBS);
-  gidLink(gtk_mount_operation_is_showing, "gtk_mount_operation_is_showing", LIBS);
-  gidLink(gtk_mount_operation_set_display, "gtk_mount_operation_set_display", LIBS);
-  gidLink(gtk_mount_operation_set_parent, "gtk_mount_operation_set_parent", LIBS);
+  gidLink(cast(void**)&gtk_mount_operation_get_type, "gtk_mount_operation_get_type", LIBS);
+  gidLink(cast(void**)&gtk_mount_operation_new, "gtk_mount_operation_new", LIBS);
+  gidLink(cast(void**)&gtk_mount_operation_get_display, "gtk_mount_operation_get_display", LIBS);
+  gidLink(cast(void**)&gtk_mount_operation_get_parent, "gtk_mount_operation_get_parent", LIBS);
+  gidLink(cast(void**)&gtk_mount_operation_is_showing, "gtk_mount_operation_is_showing", LIBS);
+  gidLink(cast(void**)&gtk_mount_operation_set_display, "gtk_mount_operation_set_display", LIBS);
+  gidLink(cast(void**)&gtk_mount_operation_set_parent, "gtk_mount_operation_set_parent", LIBS);
 
   // MultiFilter
-  gidLink(gtk_multi_filter_get_type, "gtk_multi_filter_get_type", LIBS);
-  gidLink(gtk_multi_filter_append, "gtk_multi_filter_append", LIBS);
-  gidLink(gtk_multi_filter_remove, "gtk_multi_filter_remove", LIBS);
+  gidLink(cast(void**)&gtk_multi_filter_get_type, "gtk_multi_filter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_multi_filter_append, "gtk_multi_filter_append", LIBS);
+  gidLink(cast(void**)&gtk_multi_filter_remove, "gtk_multi_filter_remove", LIBS);
 
   // MultiSelection
-  gidLink(gtk_multi_selection_get_type, "gtk_multi_selection_get_type", LIBS);
-  gidLink(gtk_multi_selection_new, "gtk_multi_selection_new", LIBS);
-  gidLink(gtk_multi_selection_get_model, "gtk_multi_selection_get_model", LIBS);
-  gidLink(gtk_multi_selection_set_model, "gtk_multi_selection_set_model", LIBS);
+  gidLink(cast(void**)&gtk_multi_selection_get_type, "gtk_multi_selection_get_type", LIBS);
+  gidLink(cast(void**)&gtk_multi_selection_new, "gtk_multi_selection_new", LIBS);
+  gidLink(cast(void**)&gtk_multi_selection_get_model, "gtk_multi_selection_get_model", LIBS);
+  gidLink(cast(void**)&gtk_multi_selection_set_model, "gtk_multi_selection_set_model", LIBS);
 
   // MultiSorter
-  gidLink(gtk_multi_sorter_get_type, "gtk_multi_sorter_get_type", LIBS);
-  gidLink(gtk_multi_sorter_new, "gtk_multi_sorter_new", LIBS);
-  gidLink(gtk_multi_sorter_append, "gtk_multi_sorter_append", LIBS);
-  gidLink(gtk_multi_sorter_remove, "gtk_multi_sorter_remove", LIBS);
+  gidLink(cast(void**)&gtk_multi_sorter_get_type, "gtk_multi_sorter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_multi_sorter_new, "gtk_multi_sorter_new", LIBS);
+  gidLink(cast(void**)&gtk_multi_sorter_append, "gtk_multi_sorter_append", LIBS);
+  gidLink(cast(void**)&gtk_multi_sorter_remove, "gtk_multi_sorter_remove", LIBS);
 
   // NamedAction
-  gidLink(gtk_named_action_get_type, "gtk_named_action_get_type", LIBS);
-  gidLink(gtk_named_action_new, "gtk_named_action_new", LIBS);
-  gidLink(gtk_named_action_get_action_name, "gtk_named_action_get_action_name", LIBS);
+  gidLink(cast(void**)&gtk_named_action_get_type, "gtk_named_action_get_type", LIBS);
+  gidLink(cast(void**)&gtk_named_action_new, "gtk_named_action_new", LIBS);
+  gidLink(cast(void**)&gtk_named_action_get_action_name, "gtk_named_action_get_action_name", LIBS);
 
   // Native
-  gidLink(gtk_native_get_type, "gtk_native_get_type", LIBS);
-  gidLink(gtk_native_get_for_surface, "gtk_native_get_for_surface", LIBS);
-  gidLink(gtk_native_get_renderer, "gtk_native_get_renderer", LIBS);
-  gidLink(gtk_native_get_surface, "gtk_native_get_surface", LIBS);
-  gidLink(gtk_native_get_surface_transform, "gtk_native_get_surface_transform", LIBS);
-  gidLink(gtk_native_realize, "gtk_native_realize", LIBS);
-  gidLink(gtk_native_unrealize, "gtk_native_unrealize", LIBS);
+  gidLink(cast(void**)&gtk_native_get_type, "gtk_native_get_type", LIBS);
+  gidLink(cast(void**)&gtk_native_get_for_surface, "gtk_native_get_for_surface", LIBS);
+  gidLink(cast(void**)&gtk_native_get_renderer, "gtk_native_get_renderer", LIBS);
+  gidLink(cast(void**)&gtk_native_get_surface, "gtk_native_get_surface", LIBS);
+  gidLink(cast(void**)&gtk_native_get_surface_transform, "gtk_native_get_surface_transform", LIBS);
+  gidLink(cast(void**)&gtk_native_realize, "gtk_native_realize", LIBS);
+  gidLink(cast(void**)&gtk_native_unrealize, "gtk_native_unrealize", LIBS);
 
   // NativeDialog
-  gidLink(gtk_native_dialog_get_type, "gtk_native_dialog_get_type", LIBS);
-  gidLink(gtk_native_dialog_destroy, "gtk_native_dialog_destroy", LIBS);
-  gidLink(gtk_native_dialog_get_modal, "gtk_native_dialog_get_modal", LIBS);
-  gidLink(gtk_native_dialog_get_title, "gtk_native_dialog_get_title", LIBS);
-  gidLink(gtk_native_dialog_get_transient_for, "gtk_native_dialog_get_transient_for", LIBS);
-  gidLink(gtk_native_dialog_get_visible, "gtk_native_dialog_get_visible", LIBS);
-  gidLink(gtk_native_dialog_hide, "gtk_native_dialog_hide", LIBS);
-  gidLink(gtk_native_dialog_set_modal, "gtk_native_dialog_set_modal", LIBS);
-  gidLink(gtk_native_dialog_set_title, "gtk_native_dialog_set_title", LIBS);
-  gidLink(gtk_native_dialog_set_transient_for, "gtk_native_dialog_set_transient_for", LIBS);
-  gidLink(gtk_native_dialog_show, "gtk_native_dialog_show", LIBS);
+  gidLink(cast(void**)&gtk_native_dialog_get_type, "gtk_native_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_native_dialog_destroy, "gtk_native_dialog_destroy", LIBS);
+  gidLink(cast(void**)&gtk_native_dialog_get_modal, "gtk_native_dialog_get_modal", LIBS);
+  gidLink(cast(void**)&gtk_native_dialog_get_title, "gtk_native_dialog_get_title", LIBS);
+  gidLink(cast(void**)&gtk_native_dialog_get_transient_for, "gtk_native_dialog_get_transient_for", LIBS);
+  gidLink(cast(void**)&gtk_native_dialog_get_visible, "gtk_native_dialog_get_visible", LIBS);
+  gidLink(cast(void**)&gtk_native_dialog_hide, "gtk_native_dialog_hide", LIBS);
+  gidLink(cast(void**)&gtk_native_dialog_set_modal, "gtk_native_dialog_set_modal", LIBS);
+  gidLink(cast(void**)&gtk_native_dialog_set_title, "gtk_native_dialog_set_title", LIBS);
+  gidLink(cast(void**)&gtk_native_dialog_set_transient_for, "gtk_native_dialog_set_transient_for", LIBS);
+  gidLink(cast(void**)&gtk_native_dialog_show, "gtk_native_dialog_show", LIBS);
 
   // NeverTrigger
-  gidLink(gtk_never_trigger_get_type, "gtk_never_trigger_get_type", LIBS);
-  gidLink(gtk_never_trigger_get, "gtk_never_trigger_get", LIBS);
+  gidLink(cast(void**)&gtk_never_trigger_get_type, "gtk_never_trigger_get_type", LIBS);
+  gidLink(cast(void**)&gtk_never_trigger_get, "gtk_never_trigger_get", LIBS);
 
   // NoSelection
-  gidLink(gtk_no_selection_get_type, "gtk_no_selection_get_type", LIBS);
-  gidLink(gtk_no_selection_new, "gtk_no_selection_new", LIBS);
-  gidLink(gtk_no_selection_get_model, "gtk_no_selection_get_model", LIBS);
-  gidLink(gtk_no_selection_set_model, "gtk_no_selection_set_model", LIBS);
+  gidLink(cast(void**)&gtk_no_selection_get_type, "gtk_no_selection_get_type", LIBS);
+  gidLink(cast(void**)&gtk_no_selection_new, "gtk_no_selection_new", LIBS);
+  gidLink(cast(void**)&gtk_no_selection_get_model, "gtk_no_selection_get_model", LIBS);
+  gidLink(cast(void**)&gtk_no_selection_set_model, "gtk_no_selection_set_model", LIBS);
 
   // Notebook
-  gidLink(gtk_notebook_get_type, "gtk_notebook_get_type", LIBS);
-  gidLink(gtk_notebook_new, "gtk_notebook_new", LIBS);
-  gidLink(gtk_notebook_append_page, "gtk_notebook_append_page", LIBS);
-  gidLink(gtk_notebook_append_page_menu, "gtk_notebook_append_page_menu", LIBS);
-  gidLink(gtk_notebook_detach_tab, "gtk_notebook_detach_tab", LIBS);
-  gidLink(gtk_notebook_get_action_widget, "gtk_notebook_get_action_widget", LIBS);
-  gidLink(gtk_notebook_get_current_page, "gtk_notebook_get_current_page", LIBS);
-  gidLink(gtk_notebook_get_group_name, "gtk_notebook_get_group_name", LIBS);
-  gidLink(gtk_notebook_get_menu_label, "gtk_notebook_get_menu_label", LIBS);
-  gidLink(gtk_notebook_get_menu_label_text, "gtk_notebook_get_menu_label_text", LIBS);
-  gidLink(gtk_notebook_get_n_pages, "gtk_notebook_get_n_pages", LIBS);
-  gidLink(gtk_notebook_get_nth_page, "gtk_notebook_get_nth_page", LIBS);
-  gidLink(gtk_notebook_get_page, "gtk_notebook_get_page", LIBS);
-  gidLink(gtk_notebook_get_pages, "gtk_notebook_get_pages", LIBS);
-  gidLink(gtk_notebook_get_scrollable, "gtk_notebook_get_scrollable", LIBS);
-  gidLink(gtk_notebook_get_show_border, "gtk_notebook_get_show_border", LIBS);
-  gidLink(gtk_notebook_get_show_tabs, "gtk_notebook_get_show_tabs", LIBS);
-  gidLink(gtk_notebook_get_tab_detachable, "gtk_notebook_get_tab_detachable", LIBS);
-  gidLink(gtk_notebook_get_tab_label, "gtk_notebook_get_tab_label", LIBS);
-  gidLink(gtk_notebook_get_tab_label_text, "gtk_notebook_get_tab_label_text", LIBS);
-  gidLink(gtk_notebook_get_tab_pos, "gtk_notebook_get_tab_pos", LIBS);
-  gidLink(gtk_notebook_get_tab_reorderable, "gtk_notebook_get_tab_reorderable", LIBS);
-  gidLink(gtk_notebook_insert_page, "gtk_notebook_insert_page", LIBS);
-  gidLink(gtk_notebook_insert_page_menu, "gtk_notebook_insert_page_menu", LIBS);
-  gidLink(gtk_notebook_next_page, "gtk_notebook_next_page", LIBS);
-  gidLink(gtk_notebook_page_num, "gtk_notebook_page_num", LIBS);
-  gidLink(gtk_notebook_popup_disable, "gtk_notebook_popup_disable", LIBS);
-  gidLink(gtk_notebook_popup_enable, "gtk_notebook_popup_enable", LIBS);
-  gidLink(gtk_notebook_prepend_page, "gtk_notebook_prepend_page", LIBS);
-  gidLink(gtk_notebook_prepend_page_menu, "gtk_notebook_prepend_page_menu", LIBS);
-  gidLink(gtk_notebook_prev_page, "gtk_notebook_prev_page", LIBS);
-  gidLink(gtk_notebook_remove_page, "gtk_notebook_remove_page", LIBS);
-  gidLink(gtk_notebook_reorder_child, "gtk_notebook_reorder_child", LIBS);
-  gidLink(gtk_notebook_set_action_widget, "gtk_notebook_set_action_widget", LIBS);
-  gidLink(gtk_notebook_set_current_page, "gtk_notebook_set_current_page", LIBS);
-  gidLink(gtk_notebook_set_group_name, "gtk_notebook_set_group_name", LIBS);
-  gidLink(gtk_notebook_set_menu_label, "gtk_notebook_set_menu_label", LIBS);
-  gidLink(gtk_notebook_set_menu_label_text, "gtk_notebook_set_menu_label_text", LIBS);
-  gidLink(gtk_notebook_set_scrollable, "gtk_notebook_set_scrollable", LIBS);
-  gidLink(gtk_notebook_set_show_border, "gtk_notebook_set_show_border", LIBS);
-  gidLink(gtk_notebook_set_show_tabs, "gtk_notebook_set_show_tabs", LIBS);
-  gidLink(gtk_notebook_set_tab_detachable, "gtk_notebook_set_tab_detachable", LIBS);
-  gidLink(gtk_notebook_set_tab_label, "gtk_notebook_set_tab_label", LIBS);
-  gidLink(gtk_notebook_set_tab_label_text, "gtk_notebook_set_tab_label_text", LIBS);
-  gidLink(gtk_notebook_set_tab_pos, "gtk_notebook_set_tab_pos", LIBS);
-  gidLink(gtk_notebook_set_tab_reorderable, "gtk_notebook_set_tab_reorderable", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_type, "gtk_notebook_get_type", LIBS);
+  gidLink(cast(void**)&gtk_notebook_new, "gtk_notebook_new", LIBS);
+  gidLink(cast(void**)&gtk_notebook_append_page, "gtk_notebook_append_page", LIBS);
+  gidLink(cast(void**)&gtk_notebook_append_page_menu, "gtk_notebook_append_page_menu", LIBS);
+  gidLink(cast(void**)&gtk_notebook_detach_tab, "gtk_notebook_detach_tab", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_action_widget, "gtk_notebook_get_action_widget", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_current_page, "gtk_notebook_get_current_page", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_group_name, "gtk_notebook_get_group_name", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_menu_label, "gtk_notebook_get_menu_label", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_menu_label_text, "gtk_notebook_get_menu_label_text", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_n_pages, "gtk_notebook_get_n_pages", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_nth_page, "gtk_notebook_get_nth_page", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_page, "gtk_notebook_get_page", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_pages, "gtk_notebook_get_pages", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_scrollable, "gtk_notebook_get_scrollable", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_show_border, "gtk_notebook_get_show_border", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_show_tabs, "gtk_notebook_get_show_tabs", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_tab_detachable, "gtk_notebook_get_tab_detachable", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_tab_label, "gtk_notebook_get_tab_label", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_tab_label_text, "gtk_notebook_get_tab_label_text", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_tab_pos, "gtk_notebook_get_tab_pos", LIBS);
+  gidLink(cast(void**)&gtk_notebook_get_tab_reorderable, "gtk_notebook_get_tab_reorderable", LIBS);
+  gidLink(cast(void**)&gtk_notebook_insert_page, "gtk_notebook_insert_page", LIBS);
+  gidLink(cast(void**)&gtk_notebook_insert_page_menu, "gtk_notebook_insert_page_menu", LIBS);
+  gidLink(cast(void**)&gtk_notebook_next_page, "gtk_notebook_next_page", LIBS);
+  gidLink(cast(void**)&gtk_notebook_page_num, "gtk_notebook_page_num", LIBS);
+  gidLink(cast(void**)&gtk_notebook_popup_disable, "gtk_notebook_popup_disable", LIBS);
+  gidLink(cast(void**)&gtk_notebook_popup_enable, "gtk_notebook_popup_enable", LIBS);
+  gidLink(cast(void**)&gtk_notebook_prepend_page, "gtk_notebook_prepend_page", LIBS);
+  gidLink(cast(void**)&gtk_notebook_prepend_page_menu, "gtk_notebook_prepend_page_menu", LIBS);
+  gidLink(cast(void**)&gtk_notebook_prev_page, "gtk_notebook_prev_page", LIBS);
+  gidLink(cast(void**)&gtk_notebook_remove_page, "gtk_notebook_remove_page", LIBS);
+  gidLink(cast(void**)&gtk_notebook_reorder_child, "gtk_notebook_reorder_child", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_action_widget, "gtk_notebook_set_action_widget", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_current_page, "gtk_notebook_set_current_page", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_group_name, "gtk_notebook_set_group_name", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_menu_label, "gtk_notebook_set_menu_label", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_menu_label_text, "gtk_notebook_set_menu_label_text", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_scrollable, "gtk_notebook_set_scrollable", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_show_border, "gtk_notebook_set_show_border", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_show_tabs, "gtk_notebook_set_show_tabs", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_tab_detachable, "gtk_notebook_set_tab_detachable", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_tab_label, "gtk_notebook_set_tab_label", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_tab_label_text, "gtk_notebook_set_tab_label_text", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_tab_pos, "gtk_notebook_set_tab_pos", LIBS);
+  gidLink(cast(void**)&gtk_notebook_set_tab_reorderable, "gtk_notebook_set_tab_reorderable", LIBS);
 
   // NotebookPage
-  gidLink(gtk_notebook_page_get_type, "gtk_notebook_page_get_type", LIBS);
-  gidLink(gtk_notebook_page_get_child, "gtk_notebook_page_get_child", LIBS);
+  gidLink(cast(void**)&gtk_notebook_page_get_type, "gtk_notebook_page_get_type", LIBS);
+  gidLink(cast(void**)&gtk_notebook_page_get_child, "gtk_notebook_page_get_child", LIBS);
 
   // NothingAction
-  gidLink(gtk_nothing_action_get_type, "gtk_nothing_action_get_type", LIBS);
-  gidLink(gtk_nothing_action_get, "gtk_nothing_action_get", LIBS);
+  gidLink(cast(void**)&gtk_nothing_action_get_type, "gtk_nothing_action_get_type", LIBS);
+  gidLink(cast(void**)&gtk_nothing_action_get, "gtk_nothing_action_get", LIBS);
 
   // NumericSorter
-  gidLink(gtk_numeric_sorter_get_type, "gtk_numeric_sorter_get_type", LIBS);
-  gidLink(gtk_numeric_sorter_new, "gtk_numeric_sorter_new", LIBS);
-  gidLink(gtk_numeric_sorter_get_expression, "gtk_numeric_sorter_get_expression", LIBS);
-  gidLink(gtk_numeric_sorter_get_sort_order, "gtk_numeric_sorter_get_sort_order", LIBS);
-  gidLink(gtk_numeric_sorter_set_expression, "gtk_numeric_sorter_set_expression", LIBS);
-  gidLink(gtk_numeric_sorter_set_sort_order, "gtk_numeric_sorter_set_sort_order", LIBS);
+  gidLink(cast(void**)&gtk_numeric_sorter_get_type, "gtk_numeric_sorter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_numeric_sorter_new, "gtk_numeric_sorter_new", LIBS);
+  gidLink(cast(void**)&gtk_numeric_sorter_get_expression, "gtk_numeric_sorter_get_expression", LIBS);
+  gidLink(cast(void**)&gtk_numeric_sorter_get_sort_order, "gtk_numeric_sorter_get_sort_order", LIBS);
+  gidLink(cast(void**)&gtk_numeric_sorter_set_expression, "gtk_numeric_sorter_set_expression", LIBS);
+  gidLink(cast(void**)&gtk_numeric_sorter_set_sort_order, "gtk_numeric_sorter_set_sort_order", LIBS);
 
   // ObjectExpression
-  gidLink(gtk_object_expression_get_type, "gtk_object_expression_get_type", LIBS);
-  gidLink(gtk_object_expression_new, "gtk_object_expression_new", LIBS);
-  gidLink(gtk_object_expression_get_object, "gtk_object_expression_get_object", LIBS);
+  gidLink(cast(void**)&gtk_object_expression_get_type, "gtk_object_expression_get_type", LIBS);
+  gidLink(cast(void**)&gtk_object_expression_new, "gtk_object_expression_new", LIBS);
+  gidLink(cast(void**)&gtk_object_expression_get_object, "gtk_object_expression_get_object", LIBS);
 
   // Orientable
-  gidLink(gtk_orientable_get_type, "gtk_orientable_get_type", LIBS);
-  gidLink(gtk_orientable_get_orientation, "gtk_orientable_get_orientation", LIBS);
-  gidLink(gtk_orientable_set_orientation, "gtk_orientable_set_orientation", LIBS);
+  gidLink(cast(void**)&gtk_orientable_get_type, "gtk_orientable_get_type", LIBS);
+  gidLink(cast(void**)&gtk_orientable_get_orientation, "gtk_orientable_get_orientation", LIBS);
+  gidLink(cast(void**)&gtk_orientable_set_orientation, "gtk_orientable_set_orientation", LIBS);
 
   // Overlay
-  gidLink(gtk_overlay_get_type, "gtk_overlay_get_type", LIBS);
-  gidLink(gtk_overlay_new, "gtk_overlay_new", LIBS);
-  gidLink(gtk_overlay_add_overlay, "gtk_overlay_add_overlay", LIBS);
-  gidLink(gtk_overlay_get_child, "gtk_overlay_get_child", LIBS);
-  gidLink(gtk_overlay_get_clip_overlay, "gtk_overlay_get_clip_overlay", LIBS);
-  gidLink(gtk_overlay_get_measure_overlay, "gtk_overlay_get_measure_overlay", LIBS);
-  gidLink(gtk_overlay_remove_overlay, "gtk_overlay_remove_overlay", LIBS);
-  gidLink(gtk_overlay_set_child, "gtk_overlay_set_child", LIBS);
-  gidLink(gtk_overlay_set_clip_overlay, "gtk_overlay_set_clip_overlay", LIBS);
-  gidLink(gtk_overlay_set_measure_overlay, "gtk_overlay_set_measure_overlay", LIBS);
+  gidLink(cast(void**)&gtk_overlay_get_type, "gtk_overlay_get_type", LIBS);
+  gidLink(cast(void**)&gtk_overlay_new, "gtk_overlay_new", LIBS);
+  gidLink(cast(void**)&gtk_overlay_add_overlay, "gtk_overlay_add_overlay", LIBS);
+  gidLink(cast(void**)&gtk_overlay_get_child, "gtk_overlay_get_child", LIBS);
+  gidLink(cast(void**)&gtk_overlay_get_clip_overlay, "gtk_overlay_get_clip_overlay", LIBS);
+  gidLink(cast(void**)&gtk_overlay_get_measure_overlay, "gtk_overlay_get_measure_overlay", LIBS);
+  gidLink(cast(void**)&gtk_overlay_remove_overlay, "gtk_overlay_remove_overlay", LIBS);
+  gidLink(cast(void**)&gtk_overlay_set_child, "gtk_overlay_set_child", LIBS);
+  gidLink(cast(void**)&gtk_overlay_set_clip_overlay, "gtk_overlay_set_clip_overlay", LIBS);
+  gidLink(cast(void**)&gtk_overlay_set_measure_overlay, "gtk_overlay_set_measure_overlay", LIBS);
 
   // OverlayLayout
-  gidLink(gtk_overlay_layout_get_type, "gtk_overlay_layout_get_type", LIBS);
-  gidLink(gtk_overlay_layout_new, "gtk_overlay_layout_new", LIBS);
+  gidLink(cast(void**)&gtk_overlay_layout_get_type, "gtk_overlay_layout_get_type", LIBS);
+  gidLink(cast(void**)&gtk_overlay_layout_new, "gtk_overlay_layout_new", LIBS);
 
   // OverlayLayoutChild
-  gidLink(gtk_overlay_layout_child_get_type, "gtk_overlay_layout_child_get_type", LIBS);
-  gidLink(gtk_overlay_layout_child_get_clip_overlay, "gtk_overlay_layout_child_get_clip_overlay", LIBS);
-  gidLink(gtk_overlay_layout_child_get_measure, "gtk_overlay_layout_child_get_measure", LIBS);
-  gidLink(gtk_overlay_layout_child_set_clip_overlay, "gtk_overlay_layout_child_set_clip_overlay", LIBS);
-  gidLink(gtk_overlay_layout_child_set_measure, "gtk_overlay_layout_child_set_measure", LIBS);
+  gidLink(cast(void**)&gtk_overlay_layout_child_get_type, "gtk_overlay_layout_child_get_type", LIBS);
+  gidLink(cast(void**)&gtk_overlay_layout_child_get_clip_overlay, "gtk_overlay_layout_child_get_clip_overlay", LIBS);
+  gidLink(cast(void**)&gtk_overlay_layout_child_get_measure, "gtk_overlay_layout_child_get_measure", LIBS);
+  gidLink(cast(void**)&gtk_overlay_layout_child_set_clip_overlay, "gtk_overlay_layout_child_set_clip_overlay", LIBS);
+  gidLink(cast(void**)&gtk_overlay_layout_child_set_measure, "gtk_overlay_layout_child_set_measure", LIBS);
 
   // PadController
-  gidLink(gtk_pad_controller_get_type, "gtk_pad_controller_get_type", LIBS);
-  gidLink(gtk_pad_controller_new, "gtk_pad_controller_new", LIBS);
-  gidLink(gtk_pad_controller_set_action, "gtk_pad_controller_set_action", LIBS);
-  gidLink(gtk_pad_controller_set_action_entries, "gtk_pad_controller_set_action_entries", LIBS);
+  gidLink(cast(void**)&gtk_pad_controller_get_type, "gtk_pad_controller_get_type", LIBS);
+  gidLink(cast(void**)&gtk_pad_controller_new, "gtk_pad_controller_new", LIBS);
+  gidLink(cast(void**)&gtk_pad_controller_set_action, "gtk_pad_controller_set_action", LIBS);
+  gidLink(cast(void**)&gtk_pad_controller_set_action_entries, "gtk_pad_controller_set_action_entries", LIBS);
 
   // PageSetup
-  gidLink(gtk_page_setup_get_type, "gtk_page_setup_get_type", LIBS);
-  gidLink(gtk_page_setup_new, "gtk_page_setup_new", LIBS);
-  gidLink(gtk_page_setup_new_from_file, "gtk_page_setup_new_from_file", LIBS);
-  gidLink(gtk_page_setup_new_from_gvariant, "gtk_page_setup_new_from_gvariant", LIBS);
-  gidLink(gtk_page_setup_new_from_key_file, "gtk_page_setup_new_from_key_file", LIBS);
-  gidLink(gtk_page_setup_copy, "gtk_page_setup_copy", LIBS);
-  gidLink(gtk_page_setup_get_bottom_margin, "gtk_page_setup_get_bottom_margin", LIBS);
-  gidLink(gtk_page_setup_get_left_margin, "gtk_page_setup_get_left_margin", LIBS);
-  gidLink(gtk_page_setup_get_orientation, "gtk_page_setup_get_orientation", LIBS);
-  gidLink(gtk_page_setup_get_page_height, "gtk_page_setup_get_page_height", LIBS);
-  gidLink(gtk_page_setup_get_page_width, "gtk_page_setup_get_page_width", LIBS);
-  gidLink(gtk_page_setup_get_paper_height, "gtk_page_setup_get_paper_height", LIBS);
-  gidLink(gtk_page_setup_get_paper_size, "gtk_page_setup_get_paper_size", LIBS);
-  gidLink(gtk_page_setup_get_paper_width, "gtk_page_setup_get_paper_width", LIBS);
-  gidLink(gtk_page_setup_get_right_margin, "gtk_page_setup_get_right_margin", LIBS);
-  gidLink(gtk_page_setup_get_top_margin, "gtk_page_setup_get_top_margin", LIBS);
-  gidLink(gtk_page_setup_load_file, "gtk_page_setup_load_file", LIBS);
-  gidLink(gtk_page_setup_load_key_file, "gtk_page_setup_load_key_file", LIBS);
-  gidLink(gtk_page_setup_set_bottom_margin, "gtk_page_setup_set_bottom_margin", LIBS);
-  gidLink(gtk_page_setup_set_left_margin, "gtk_page_setup_set_left_margin", LIBS);
-  gidLink(gtk_page_setup_set_orientation, "gtk_page_setup_set_orientation", LIBS);
-  gidLink(gtk_page_setup_set_paper_size, "gtk_page_setup_set_paper_size", LIBS);
-  gidLink(gtk_page_setup_set_paper_size_and_default_margins, "gtk_page_setup_set_paper_size_and_default_margins", LIBS);
-  gidLink(gtk_page_setup_set_right_margin, "gtk_page_setup_set_right_margin", LIBS);
-  gidLink(gtk_page_setup_set_top_margin, "gtk_page_setup_set_top_margin", LIBS);
-  gidLink(gtk_page_setup_to_file, "gtk_page_setup_to_file", LIBS);
-  gidLink(gtk_page_setup_to_gvariant, "gtk_page_setup_to_gvariant", LIBS);
-  gidLink(gtk_page_setup_to_key_file, "gtk_page_setup_to_key_file", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_get_type, "gtk_page_setup_get_type", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_new, "gtk_page_setup_new", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_new_from_file, "gtk_page_setup_new_from_file", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_new_from_gvariant, "gtk_page_setup_new_from_gvariant", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_new_from_key_file, "gtk_page_setup_new_from_key_file", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_copy, "gtk_page_setup_copy", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_get_bottom_margin, "gtk_page_setup_get_bottom_margin", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_get_left_margin, "gtk_page_setup_get_left_margin", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_get_orientation, "gtk_page_setup_get_orientation", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_get_page_height, "gtk_page_setup_get_page_height", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_get_page_width, "gtk_page_setup_get_page_width", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_get_paper_height, "gtk_page_setup_get_paper_height", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_get_paper_size, "gtk_page_setup_get_paper_size", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_get_paper_width, "gtk_page_setup_get_paper_width", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_get_right_margin, "gtk_page_setup_get_right_margin", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_get_top_margin, "gtk_page_setup_get_top_margin", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_load_file, "gtk_page_setup_load_file", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_load_key_file, "gtk_page_setup_load_key_file", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_set_bottom_margin, "gtk_page_setup_set_bottom_margin", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_set_left_margin, "gtk_page_setup_set_left_margin", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_set_orientation, "gtk_page_setup_set_orientation", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_set_paper_size, "gtk_page_setup_set_paper_size", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_set_paper_size_and_default_margins, "gtk_page_setup_set_paper_size_and_default_margins", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_set_right_margin, "gtk_page_setup_set_right_margin", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_set_top_margin, "gtk_page_setup_set_top_margin", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_to_file, "gtk_page_setup_to_file", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_to_gvariant, "gtk_page_setup_to_gvariant", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_to_key_file, "gtk_page_setup_to_key_file", LIBS);
 
   // PageSetupUnixDialog
-  gidLink(gtk_page_setup_unix_dialog_get_type, "gtk_page_setup_unix_dialog_get_type", LIBS);
-  gidLink(gtk_page_setup_unix_dialog_new, "gtk_page_setup_unix_dialog_new", LIBS);
-  gidLink(gtk_page_setup_unix_dialog_get_page_setup, "gtk_page_setup_unix_dialog_get_page_setup", LIBS);
-  gidLink(gtk_page_setup_unix_dialog_get_print_settings, "gtk_page_setup_unix_dialog_get_print_settings", LIBS);
-  gidLink(gtk_page_setup_unix_dialog_set_page_setup, "gtk_page_setup_unix_dialog_set_page_setup", LIBS);
-  gidLink(gtk_page_setup_unix_dialog_set_print_settings, "gtk_page_setup_unix_dialog_set_print_settings", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_unix_dialog_get_type, "gtk_page_setup_unix_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_unix_dialog_new, "gtk_page_setup_unix_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_unix_dialog_get_page_setup, "gtk_page_setup_unix_dialog_get_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_unix_dialog_get_print_settings, "gtk_page_setup_unix_dialog_get_print_settings", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_unix_dialog_set_page_setup, "gtk_page_setup_unix_dialog_set_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_page_setup_unix_dialog_set_print_settings, "gtk_page_setup_unix_dialog_set_print_settings", LIBS);
 
   // Paned
-  gidLink(gtk_paned_get_type, "gtk_paned_get_type", LIBS);
-  gidLink(gtk_paned_new, "gtk_paned_new", LIBS);
-  gidLink(gtk_paned_get_end_child, "gtk_paned_get_end_child", LIBS);
-  gidLink(gtk_paned_get_position, "gtk_paned_get_position", LIBS);
-  gidLink(gtk_paned_get_resize_end_child, "gtk_paned_get_resize_end_child", LIBS);
-  gidLink(gtk_paned_get_resize_start_child, "gtk_paned_get_resize_start_child", LIBS);
-  gidLink(gtk_paned_get_shrink_end_child, "gtk_paned_get_shrink_end_child", LIBS);
-  gidLink(gtk_paned_get_shrink_start_child, "gtk_paned_get_shrink_start_child", LIBS);
-  gidLink(gtk_paned_get_start_child, "gtk_paned_get_start_child", LIBS);
-  gidLink(gtk_paned_get_wide_handle, "gtk_paned_get_wide_handle", LIBS);
-  gidLink(gtk_paned_set_end_child, "gtk_paned_set_end_child", LIBS);
-  gidLink(gtk_paned_set_position, "gtk_paned_set_position", LIBS);
-  gidLink(gtk_paned_set_resize_end_child, "gtk_paned_set_resize_end_child", LIBS);
-  gidLink(gtk_paned_set_resize_start_child, "gtk_paned_set_resize_start_child", LIBS);
-  gidLink(gtk_paned_set_shrink_end_child, "gtk_paned_set_shrink_end_child", LIBS);
-  gidLink(gtk_paned_set_shrink_start_child, "gtk_paned_set_shrink_start_child", LIBS);
-  gidLink(gtk_paned_set_start_child, "gtk_paned_set_start_child", LIBS);
-  gidLink(gtk_paned_set_wide_handle, "gtk_paned_set_wide_handle", LIBS);
+  gidLink(cast(void**)&gtk_paned_get_type, "gtk_paned_get_type", LIBS);
+  gidLink(cast(void**)&gtk_paned_new, "gtk_paned_new", LIBS);
+  gidLink(cast(void**)&gtk_paned_get_end_child, "gtk_paned_get_end_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_get_position, "gtk_paned_get_position", LIBS);
+  gidLink(cast(void**)&gtk_paned_get_resize_end_child, "gtk_paned_get_resize_end_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_get_resize_start_child, "gtk_paned_get_resize_start_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_get_shrink_end_child, "gtk_paned_get_shrink_end_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_get_shrink_start_child, "gtk_paned_get_shrink_start_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_get_start_child, "gtk_paned_get_start_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_get_wide_handle, "gtk_paned_get_wide_handle", LIBS);
+  gidLink(cast(void**)&gtk_paned_set_end_child, "gtk_paned_set_end_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_set_position, "gtk_paned_set_position", LIBS);
+  gidLink(cast(void**)&gtk_paned_set_resize_end_child, "gtk_paned_set_resize_end_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_set_resize_start_child, "gtk_paned_set_resize_start_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_set_shrink_end_child, "gtk_paned_set_shrink_end_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_set_shrink_start_child, "gtk_paned_set_shrink_start_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_set_start_child, "gtk_paned_set_start_child", LIBS);
+  gidLink(cast(void**)&gtk_paned_set_wide_handle, "gtk_paned_set_wide_handle", LIBS);
 
   // PaperSize
-  gidLink(gtk_paper_size_get_type, "gtk_paper_size_get_type", LIBS);
-  gidLink(gtk_paper_size_new, "gtk_paper_size_new", LIBS);
-  gidLink(gtk_paper_size_new_custom, "gtk_paper_size_new_custom", LIBS);
-  gidLink(gtk_paper_size_new_from_gvariant, "gtk_paper_size_new_from_gvariant", LIBS);
-  gidLink(gtk_paper_size_new_from_ipp, "gtk_paper_size_new_from_ipp", LIBS);
-  gidLink(gtk_paper_size_new_from_key_file, "gtk_paper_size_new_from_key_file", LIBS);
-  gidLink(gtk_paper_size_new_from_ppd, "gtk_paper_size_new_from_ppd", LIBS);
-  gidLink(gtk_paper_size_copy, "gtk_paper_size_copy", LIBS);
-  gidLink(gtk_paper_size_free, "gtk_paper_size_free", LIBS);
-  gidLink(gtk_paper_size_get_default_bottom_margin, "gtk_paper_size_get_default_bottom_margin", LIBS);
-  gidLink(gtk_paper_size_get_default_left_margin, "gtk_paper_size_get_default_left_margin", LIBS);
-  gidLink(gtk_paper_size_get_default_right_margin, "gtk_paper_size_get_default_right_margin", LIBS);
-  gidLink(gtk_paper_size_get_default_top_margin, "gtk_paper_size_get_default_top_margin", LIBS);
-  gidLink(gtk_paper_size_get_display_name, "gtk_paper_size_get_display_name", LIBS);
-  gidLink(gtk_paper_size_get_height, "gtk_paper_size_get_height", LIBS);
-  gidLink(gtk_paper_size_get_name, "gtk_paper_size_get_name", LIBS);
-  gidLink(gtk_paper_size_get_ppd_name, "gtk_paper_size_get_ppd_name", LIBS);
-  gidLink(gtk_paper_size_get_width, "gtk_paper_size_get_width", LIBS);
-  gidLink(gtk_paper_size_is_custom, "gtk_paper_size_is_custom", LIBS);
-  gidLink(gtk_paper_size_is_equal, "gtk_paper_size_is_equal", LIBS);
-  gidLink(gtk_paper_size_is_ipp, "gtk_paper_size_is_ipp", LIBS);
-  gidLink(gtk_paper_size_set_size, "gtk_paper_size_set_size", LIBS);
-  gidLink(gtk_paper_size_to_gvariant, "gtk_paper_size_to_gvariant", LIBS);
-  gidLink(gtk_paper_size_to_key_file, "gtk_paper_size_to_key_file", LIBS);
-  gidLink(gtk_paper_size_get_default, "gtk_paper_size_get_default", LIBS);
-  gidLink(gtk_paper_size_get_paper_sizes, "gtk_paper_size_get_paper_sizes", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_type, "gtk_paper_size_get_type", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_new, "gtk_paper_size_new", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_new_custom, "gtk_paper_size_new_custom", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_new_from_gvariant, "gtk_paper_size_new_from_gvariant", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_new_from_ipp, "gtk_paper_size_new_from_ipp", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_new_from_key_file, "gtk_paper_size_new_from_key_file", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_new_from_ppd, "gtk_paper_size_new_from_ppd", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_copy, "gtk_paper_size_copy", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_free, "gtk_paper_size_free", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_default_bottom_margin, "gtk_paper_size_get_default_bottom_margin", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_default_left_margin, "gtk_paper_size_get_default_left_margin", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_default_right_margin, "gtk_paper_size_get_default_right_margin", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_default_top_margin, "gtk_paper_size_get_default_top_margin", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_display_name, "gtk_paper_size_get_display_name", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_height, "gtk_paper_size_get_height", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_name, "gtk_paper_size_get_name", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_ppd_name, "gtk_paper_size_get_ppd_name", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_width, "gtk_paper_size_get_width", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_is_custom, "gtk_paper_size_is_custom", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_is_equal, "gtk_paper_size_is_equal", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_is_ipp, "gtk_paper_size_is_ipp", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_set_size, "gtk_paper_size_set_size", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_to_gvariant, "gtk_paper_size_to_gvariant", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_to_key_file, "gtk_paper_size_to_key_file", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_default, "gtk_paper_size_get_default", LIBS);
+  gidLink(cast(void**)&gtk_paper_size_get_paper_sizes, "gtk_paper_size_get_paper_sizes", LIBS);
 
   // ParamSpecExpression
-  gidLink(gtk_param_expression_get_type, "gtk_param_expression_get_type", LIBS);
+  gidLink(cast(void**)&gtk_param_expression_get_type, "gtk_param_expression_get_type", LIBS);
 
   // PasswordEntry
-  gidLink(gtk_password_entry_get_type, "gtk_password_entry_get_type", LIBS);
-  gidLink(gtk_password_entry_new, "gtk_password_entry_new", LIBS);
-  gidLink(gtk_password_entry_get_extra_menu, "gtk_password_entry_get_extra_menu", LIBS);
-  gidLink(gtk_password_entry_get_show_peek_icon, "gtk_password_entry_get_show_peek_icon", LIBS);
-  gidLink(gtk_password_entry_set_extra_menu, "gtk_password_entry_set_extra_menu", LIBS);
-  gidLink(gtk_password_entry_set_show_peek_icon, "gtk_password_entry_set_show_peek_icon", LIBS);
+  gidLink(cast(void**)&gtk_password_entry_get_type, "gtk_password_entry_get_type", LIBS);
+  gidLink(cast(void**)&gtk_password_entry_new, "gtk_password_entry_new", LIBS);
+  gidLink(cast(void**)&gtk_password_entry_get_extra_menu, "gtk_password_entry_get_extra_menu", LIBS);
+  gidLink(cast(void**)&gtk_password_entry_get_show_peek_icon, "gtk_password_entry_get_show_peek_icon", LIBS);
+  gidLink(cast(void**)&gtk_password_entry_set_extra_menu, "gtk_password_entry_set_extra_menu", LIBS);
+  gidLink(cast(void**)&gtk_password_entry_set_show_peek_icon, "gtk_password_entry_set_show_peek_icon", LIBS);
 
   // PasswordEntryBuffer
-  gidLink(gtk_password_entry_buffer_get_type, "gtk_password_entry_buffer_get_type", LIBS);
-  gidLink(gtk_password_entry_buffer_new, "gtk_password_entry_buffer_new", LIBS);
+  gidLink(cast(void**)&gtk_password_entry_buffer_get_type, "gtk_password_entry_buffer_get_type", LIBS);
+  gidLink(cast(void**)&gtk_password_entry_buffer_new, "gtk_password_entry_buffer_new", LIBS);
 
   // Picture
-  gidLink(gtk_picture_get_type, "gtk_picture_get_type", LIBS);
-  gidLink(gtk_picture_new, "gtk_picture_new", LIBS);
-  gidLink(gtk_picture_new_for_file, "gtk_picture_new_for_file", LIBS);
-  gidLink(gtk_picture_new_for_filename, "gtk_picture_new_for_filename", LIBS);
-  gidLink(gtk_picture_new_for_paintable, "gtk_picture_new_for_paintable", LIBS);
-  gidLink(gtk_picture_new_for_pixbuf, "gtk_picture_new_for_pixbuf", LIBS);
-  gidLink(gtk_picture_new_for_resource, "gtk_picture_new_for_resource", LIBS);
-  gidLink(gtk_picture_get_alternative_text, "gtk_picture_get_alternative_text", LIBS);
-  gidLink(gtk_picture_get_can_shrink, "gtk_picture_get_can_shrink", LIBS);
-  gidLink(gtk_picture_get_content_fit, "gtk_picture_get_content_fit", LIBS);
-  gidLink(gtk_picture_get_file, "gtk_picture_get_file", LIBS);
-  gidLink(gtk_picture_get_keep_aspect_ratio, "gtk_picture_get_keep_aspect_ratio", LIBS);
-  gidLink(gtk_picture_get_paintable, "gtk_picture_get_paintable", LIBS);
-  gidLink(gtk_picture_set_alternative_text, "gtk_picture_set_alternative_text", LIBS);
-  gidLink(gtk_picture_set_can_shrink, "gtk_picture_set_can_shrink", LIBS);
-  gidLink(gtk_picture_set_content_fit, "gtk_picture_set_content_fit", LIBS);
-  gidLink(gtk_picture_set_file, "gtk_picture_set_file", LIBS);
-  gidLink(gtk_picture_set_filename, "gtk_picture_set_filename", LIBS);
-  gidLink(gtk_picture_set_keep_aspect_ratio, "gtk_picture_set_keep_aspect_ratio", LIBS);
-  gidLink(gtk_picture_set_paintable, "gtk_picture_set_paintable", LIBS);
-  gidLink(gtk_picture_set_pixbuf, "gtk_picture_set_pixbuf", LIBS);
-  gidLink(gtk_picture_set_resource, "gtk_picture_set_resource", LIBS);
+  gidLink(cast(void**)&gtk_picture_get_type, "gtk_picture_get_type", LIBS);
+  gidLink(cast(void**)&gtk_picture_new, "gtk_picture_new", LIBS);
+  gidLink(cast(void**)&gtk_picture_new_for_file, "gtk_picture_new_for_file", LIBS);
+  gidLink(cast(void**)&gtk_picture_new_for_filename, "gtk_picture_new_for_filename", LIBS);
+  gidLink(cast(void**)&gtk_picture_new_for_paintable, "gtk_picture_new_for_paintable", LIBS);
+  gidLink(cast(void**)&gtk_picture_new_for_pixbuf, "gtk_picture_new_for_pixbuf", LIBS);
+  gidLink(cast(void**)&gtk_picture_new_for_resource, "gtk_picture_new_for_resource", LIBS);
+  gidLink(cast(void**)&gtk_picture_get_alternative_text, "gtk_picture_get_alternative_text", LIBS);
+  gidLink(cast(void**)&gtk_picture_get_can_shrink, "gtk_picture_get_can_shrink", LIBS);
+  gidLink(cast(void**)&gtk_picture_get_content_fit, "gtk_picture_get_content_fit", LIBS);
+  gidLink(cast(void**)&gtk_picture_get_file, "gtk_picture_get_file", LIBS);
+  gidLink(cast(void**)&gtk_picture_get_keep_aspect_ratio, "gtk_picture_get_keep_aspect_ratio", LIBS);
+  gidLink(cast(void**)&gtk_picture_get_paintable, "gtk_picture_get_paintable", LIBS);
+  gidLink(cast(void**)&gtk_picture_set_alternative_text, "gtk_picture_set_alternative_text", LIBS);
+  gidLink(cast(void**)&gtk_picture_set_can_shrink, "gtk_picture_set_can_shrink", LIBS);
+  gidLink(cast(void**)&gtk_picture_set_content_fit, "gtk_picture_set_content_fit", LIBS);
+  gidLink(cast(void**)&gtk_picture_set_file, "gtk_picture_set_file", LIBS);
+  gidLink(cast(void**)&gtk_picture_set_filename, "gtk_picture_set_filename", LIBS);
+  gidLink(cast(void**)&gtk_picture_set_keep_aspect_ratio, "gtk_picture_set_keep_aspect_ratio", LIBS);
+  gidLink(cast(void**)&gtk_picture_set_paintable, "gtk_picture_set_paintable", LIBS);
+  gidLink(cast(void**)&gtk_picture_set_pixbuf, "gtk_picture_set_pixbuf", LIBS);
+  gidLink(cast(void**)&gtk_picture_set_resource, "gtk_picture_set_resource", LIBS);
 
   // Popover
-  gidLink(gtk_popover_get_type, "gtk_popover_get_type", LIBS);
-  gidLink(gtk_popover_new, "gtk_popover_new", LIBS);
-  gidLink(gtk_popover_get_autohide, "gtk_popover_get_autohide", LIBS);
-  gidLink(gtk_popover_get_cascade_popdown, "gtk_popover_get_cascade_popdown", LIBS);
-  gidLink(gtk_popover_get_child, "gtk_popover_get_child", LIBS);
-  gidLink(gtk_popover_get_has_arrow, "gtk_popover_get_has_arrow", LIBS);
-  gidLink(gtk_popover_get_mnemonics_visible, "gtk_popover_get_mnemonics_visible", LIBS);
-  gidLink(gtk_popover_get_offset, "gtk_popover_get_offset", LIBS);
-  gidLink(gtk_popover_get_pointing_to, "gtk_popover_get_pointing_to", LIBS);
-  gidLink(gtk_popover_get_position, "gtk_popover_get_position", LIBS);
-  gidLink(gtk_popover_popdown, "gtk_popover_popdown", LIBS);
-  gidLink(gtk_popover_popup, "gtk_popover_popup", LIBS);
-  gidLink(gtk_popover_present, "gtk_popover_present", LIBS);
-  gidLink(gtk_popover_set_autohide, "gtk_popover_set_autohide", LIBS);
-  gidLink(gtk_popover_set_cascade_popdown, "gtk_popover_set_cascade_popdown", LIBS);
-  gidLink(gtk_popover_set_child, "gtk_popover_set_child", LIBS);
-  gidLink(gtk_popover_set_default_widget, "gtk_popover_set_default_widget", LIBS);
-  gidLink(gtk_popover_set_has_arrow, "gtk_popover_set_has_arrow", LIBS);
-  gidLink(gtk_popover_set_mnemonics_visible, "gtk_popover_set_mnemonics_visible", LIBS);
-  gidLink(gtk_popover_set_offset, "gtk_popover_set_offset", LIBS);
-  gidLink(gtk_popover_set_pointing_to, "gtk_popover_set_pointing_to", LIBS);
-  gidLink(gtk_popover_set_position, "gtk_popover_set_position", LIBS);
+  gidLink(cast(void**)&gtk_popover_get_type, "gtk_popover_get_type", LIBS);
+  gidLink(cast(void**)&gtk_popover_new, "gtk_popover_new", LIBS);
+  gidLink(cast(void**)&gtk_popover_get_autohide, "gtk_popover_get_autohide", LIBS);
+  gidLink(cast(void**)&gtk_popover_get_cascade_popdown, "gtk_popover_get_cascade_popdown", LIBS);
+  gidLink(cast(void**)&gtk_popover_get_child, "gtk_popover_get_child", LIBS);
+  gidLink(cast(void**)&gtk_popover_get_has_arrow, "gtk_popover_get_has_arrow", LIBS);
+  gidLink(cast(void**)&gtk_popover_get_mnemonics_visible, "gtk_popover_get_mnemonics_visible", LIBS);
+  gidLink(cast(void**)&gtk_popover_get_offset, "gtk_popover_get_offset", LIBS);
+  gidLink(cast(void**)&gtk_popover_get_pointing_to, "gtk_popover_get_pointing_to", LIBS);
+  gidLink(cast(void**)&gtk_popover_get_position, "gtk_popover_get_position", LIBS);
+  gidLink(cast(void**)&gtk_popover_popdown, "gtk_popover_popdown", LIBS);
+  gidLink(cast(void**)&gtk_popover_popup, "gtk_popover_popup", LIBS);
+  gidLink(cast(void**)&gtk_popover_present, "gtk_popover_present", LIBS);
+  gidLink(cast(void**)&gtk_popover_set_autohide, "gtk_popover_set_autohide", LIBS);
+  gidLink(cast(void**)&gtk_popover_set_cascade_popdown, "gtk_popover_set_cascade_popdown", LIBS);
+  gidLink(cast(void**)&gtk_popover_set_child, "gtk_popover_set_child", LIBS);
+  gidLink(cast(void**)&gtk_popover_set_default_widget, "gtk_popover_set_default_widget", LIBS);
+  gidLink(cast(void**)&gtk_popover_set_has_arrow, "gtk_popover_set_has_arrow", LIBS);
+  gidLink(cast(void**)&gtk_popover_set_mnemonics_visible, "gtk_popover_set_mnemonics_visible", LIBS);
+  gidLink(cast(void**)&gtk_popover_set_offset, "gtk_popover_set_offset", LIBS);
+  gidLink(cast(void**)&gtk_popover_set_pointing_to, "gtk_popover_set_pointing_to", LIBS);
+  gidLink(cast(void**)&gtk_popover_set_position, "gtk_popover_set_position", LIBS);
 
   // PopoverMenu
-  gidLink(gtk_popover_menu_get_type, "gtk_popover_menu_get_type", LIBS);
-  gidLink(gtk_popover_menu_new_from_model, "gtk_popover_menu_new_from_model", LIBS);
-  gidLink(gtk_popover_menu_new_from_model_full, "gtk_popover_menu_new_from_model_full", LIBS);
-  gidLink(gtk_popover_menu_add_child, "gtk_popover_menu_add_child", LIBS);
-  gidLink(gtk_popover_menu_get_flags, "gtk_popover_menu_get_flags", LIBS);
-  gidLink(gtk_popover_menu_get_menu_model, "gtk_popover_menu_get_menu_model", LIBS);
-  gidLink(gtk_popover_menu_remove_child, "gtk_popover_menu_remove_child", LIBS);
-  gidLink(gtk_popover_menu_set_flags, "gtk_popover_menu_set_flags", LIBS);
-  gidLink(gtk_popover_menu_set_menu_model, "gtk_popover_menu_set_menu_model", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_get_type, "gtk_popover_menu_get_type", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_new_from_model, "gtk_popover_menu_new_from_model", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_new_from_model_full, "gtk_popover_menu_new_from_model_full", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_add_child, "gtk_popover_menu_add_child", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_get_flags, "gtk_popover_menu_get_flags", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_get_menu_model, "gtk_popover_menu_get_menu_model", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_remove_child, "gtk_popover_menu_remove_child", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_set_flags, "gtk_popover_menu_set_flags", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_set_menu_model, "gtk_popover_menu_set_menu_model", LIBS);
 
   // PopoverMenuBar
-  gidLink(gtk_popover_menu_bar_get_type, "gtk_popover_menu_bar_get_type", LIBS);
-  gidLink(gtk_popover_menu_bar_new_from_model, "gtk_popover_menu_bar_new_from_model", LIBS);
-  gidLink(gtk_popover_menu_bar_add_child, "gtk_popover_menu_bar_add_child", LIBS);
-  gidLink(gtk_popover_menu_bar_get_menu_model, "gtk_popover_menu_bar_get_menu_model", LIBS);
-  gidLink(gtk_popover_menu_bar_remove_child, "gtk_popover_menu_bar_remove_child", LIBS);
-  gidLink(gtk_popover_menu_bar_set_menu_model, "gtk_popover_menu_bar_set_menu_model", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_bar_get_type, "gtk_popover_menu_bar_get_type", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_bar_new_from_model, "gtk_popover_menu_bar_new_from_model", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_bar_add_child, "gtk_popover_menu_bar_add_child", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_bar_get_menu_model, "gtk_popover_menu_bar_get_menu_model", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_bar_remove_child, "gtk_popover_menu_bar_remove_child", LIBS);
+  gidLink(cast(void**)&gtk_popover_menu_bar_set_menu_model, "gtk_popover_menu_bar_set_menu_model", LIBS);
 
   // PrintContext
-  gidLink(gtk_print_context_get_type, "gtk_print_context_get_type", LIBS);
-  gidLink(gtk_print_context_create_pango_context, "gtk_print_context_create_pango_context", LIBS);
-  gidLink(gtk_print_context_create_pango_layout, "gtk_print_context_create_pango_layout", LIBS);
-  gidLink(gtk_print_context_get_cairo_context, "gtk_print_context_get_cairo_context", LIBS);
-  gidLink(gtk_print_context_get_dpi_x, "gtk_print_context_get_dpi_x", LIBS);
-  gidLink(gtk_print_context_get_dpi_y, "gtk_print_context_get_dpi_y", LIBS);
-  gidLink(gtk_print_context_get_hard_margins, "gtk_print_context_get_hard_margins", LIBS);
-  gidLink(gtk_print_context_get_height, "gtk_print_context_get_height", LIBS);
-  gidLink(gtk_print_context_get_page_setup, "gtk_print_context_get_page_setup", LIBS);
-  gidLink(gtk_print_context_get_pango_fontmap, "gtk_print_context_get_pango_fontmap", LIBS);
-  gidLink(gtk_print_context_get_width, "gtk_print_context_get_width", LIBS);
-  gidLink(gtk_print_context_set_cairo_context, "gtk_print_context_set_cairo_context", LIBS);
+  gidLink(cast(void**)&gtk_print_context_get_type, "gtk_print_context_get_type", LIBS);
+  gidLink(cast(void**)&gtk_print_context_create_pango_context, "gtk_print_context_create_pango_context", LIBS);
+  gidLink(cast(void**)&gtk_print_context_create_pango_layout, "gtk_print_context_create_pango_layout", LIBS);
+  gidLink(cast(void**)&gtk_print_context_get_cairo_context, "gtk_print_context_get_cairo_context", LIBS);
+  gidLink(cast(void**)&gtk_print_context_get_dpi_x, "gtk_print_context_get_dpi_x", LIBS);
+  gidLink(cast(void**)&gtk_print_context_get_dpi_y, "gtk_print_context_get_dpi_y", LIBS);
+  gidLink(cast(void**)&gtk_print_context_get_hard_margins, "gtk_print_context_get_hard_margins", LIBS);
+  gidLink(cast(void**)&gtk_print_context_get_height, "gtk_print_context_get_height", LIBS);
+  gidLink(cast(void**)&gtk_print_context_get_page_setup, "gtk_print_context_get_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_context_get_pango_fontmap, "gtk_print_context_get_pango_fontmap", LIBS);
+  gidLink(cast(void**)&gtk_print_context_get_width, "gtk_print_context_get_width", LIBS);
+  gidLink(cast(void**)&gtk_print_context_set_cairo_context, "gtk_print_context_set_cairo_context", LIBS);
 
   // PrintDialog
-  gidLink(gtk_print_dialog_get_type, "gtk_print_dialog_get_type", LIBS);
-  gidLink(gtk_print_dialog_new, "gtk_print_dialog_new", LIBS);
-  gidLink(gtk_print_dialog_get_accept_label, "gtk_print_dialog_get_accept_label", LIBS);
-  gidLink(gtk_print_dialog_get_modal, "gtk_print_dialog_get_modal", LIBS);
-  gidLink(gtk_print_dialog_get_page_setup, "gtk_print_dialog_get_page_setup", LIBS);
-  gidLink(gtk_print_dialog_get_print_settings, "gtk_print_dialog_get_print_settings", LIBS);
-  gidLink(gtk_print_dialog_get_title, "gtk_print_dialog_get_title", LIBS);
-  gidLink(gtk_print_dialog_print, "gtk_print_dialog_print", LIBS);
-  gidLink(gtk_print_dialog_print_file, "gtk_print_dialog_print_file", LIBS);
-  gidLink(gtk_print_dialog_print_file_finish, "gtk_print_dialog_print_file_finish", LIBS);
-  gidLink(gtk_print_dialog_print_finish, "gtk_print_dialog_print_finish", LIBS);
-  gidLink(gtk_print_dialog_set_accept_label, "gtk_print_dialog_set_accept_label", LIBS);
-  gidLink(gtk_print_dialog_set_modal, "gtk_print_dialog_set_modal", LIBS);
-  gidLink(gtk_print_dialog_set_page_setup, "gtk_print_dialog_set_page_setup", LIBS);
-  gidLink(gtk_print_dialog_set_print_settings, "gtk_print_dialog_set_print_settings", LIBS);
-  gidLink(gtk_print_dialog_set_title, "gtk_print_dialog_set_title", LIBS);
-  gidLink(gtk_print_dialog_setup, "gtk_print_dialog_setup", LIBS);
-  gidLink(gtk_print_dialog_setup_finish, "gtk_print_dialog_setup_finish", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_get_type, "gtk_print_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_new, "gtk_print_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_get_accept_label, "gtk_print_dialog_get_accept_label", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_get_modal, "gtk_print_dialog_get_modal", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_get_page_setup, "gtk_print_dialog_get_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_get_print_settings, "gtk_print_dialog_get_print_settings", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_get_title, "gtk_print_dialog_get_title", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_print, "gtk_print_dialog_print", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_print_file, "gtk_print_dialog_print_file", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_print_file_finish, "gtk_print_dialog_print_file_finish", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_print_finish, "gtk_print_dialog_print_finish", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_set_accept_label, "gtk_print_dialog_set_accept_label", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_set_modal, "gtk_print_dialog_set_modal", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_set_page_setup, "gtk_print_dialog_set_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_set_print_settings, "gtk_print_dialog_set_print_settings", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_set_title, "gtk_print_dialog_set_title", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_setup, "gtk_print_dialog_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_dialog_setup_finish, "gtk_print_dialog_setup_finish", LIBS);
 
   // PrintJob
-  gidLink(gtk_print_job_get_type, "gtk_print_job_get_type", LIBS);
-  gidLink(gtk_print_job_new, "gtk_print_job_new", LIBS);
-  gidLink(gtk_print_job_get_collate, "gtk_print_job_get_collate", LIBS);
-  gidLink(gtk_print_job_get_n_up, "gtk_print_job_get_n_up", LIBS);
-  gidLink(gtk_print_job_get_n_up_layout, "gtk_print_job_get_n_up_layout", LIBS);
-  gidLink(gtk_print_job_get_num_copies, "gtk_print_job_get_num_copies", LIBS);
-  gidLink(gtk_print_job_get_page_ranges, "gtk_print_job_get_page_ranges", LIBS);
-  gidLink(gtk_print_job_get_page_set, "gtk_print_job_get_page_set", LIBS);
-  gidLink(gtk_print_job_get_pages, "gtk_print_job_get_pages", LIBS);
-  gidLink(gtk_print_job_get_printer, "gtk_print_job_get_printer", LIBS);
-  gidLink(gtk_print_job_get_reverse, "gtk_print_job_get_reverse", LIBS);
-  gidLink(gtk_print_job_get_rotate, "gtk_print_job_get_rotate", LIBS);
-  gidLink(gtk_print_job_get_scale, "gtk_print_job_get_scale", LIBS);
-  gidLink(gtk_print_job_get_settings, "gtk_print_job_get_settings", LIBS);
-  gidLink(gtk_print_job_get_status, "gtk_print_job_get_status", LIBS);
-  gidLink(gtk_print_job_get_surface, "gtk_print_job_get_surface", LIBS);
-  gidLink(gtk_print_job_get_title, "gtk_print_job_get_title", LIBS);
-  gidLink(gtk_print_job_get_track_print_status, "gtk_print_job_get_track_print_status", LIBS);
-  gidLink(gtk_print_job_send, "gtk_print_job_send", LIBS);
-  gidLink(gtk_print_job_set_collate, "gtk_print_job_set_collate", LIBS);
-  gidLink(gtk_print_job_set_n_up, "gtk_print_job_set_n_up", LIBS);
-  gidLink(gtk_print_job_set_n_up_layout, "gtk_print_job_set_n_up_layout", LIBS);
-  gidLink(gtk_print_job_set_num_copies, "gtk_print_job_set_num_copies", LIBS);
-  gidLink(gtk_print_job_set_page_ranges, "gtk_print_job_set_page_ranges", LIBS);
-  gidLink(gtk_print_job_set_page_set, "gtk_print_job_set_page_set", LIBS);
-  gidLink(gtk_print_job_set_pages, "gtk_print_job_set_pages", LIBS);
-  gidLink(gtk_print_job_set_reverse, "gtk_print_job_set_reverse", LIBS);
-  gidLink(gtk_print_job_set_rotate, "gtk_print_job_set_rotate", LIBS);
-  gidLink(gtk_print_job_set_scale, "gtk_print_job_set_scale", LIBS);
-  gidLink(gtk_print_job_set_source_fd, "gtk_print_job_set_source_fd", LIBS);
-  gidLink(gtk_print_job_set_source_file, "gtk_print_job_set_source_file", LIBS);
-  gidLink(gtk_print_job_set_track_print_status, "gtk_print_job_set_track_print_status", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_type, "gtk_print_job_get_type", LIBS);
+  gidLink(cast(void**)&gtk_print_job_new, "gtk_print_job_new", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_collate, "gtk_print_job_get_collate", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_n_up, "gtk_print_job_get_n_up", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_n_up_layout, "gtk_print_job_get_n_up_layout", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_num_copies, "gtk_print_job_get_num_copies", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_page_ranges, "gtk_print_job_get_page_ranges", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_page_set, "gtk_print_job_get_page_set", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_pages, "gtk_print_job_get_pages", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_printer, "gtk_print_job_get_printer", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_reverse, "gtk_print_job_get_reverse", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_rotate, "gtk_print_job_get_rotate", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_scale, "gtk_print_job_get_scale", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_settings, "gtk_print_job_get_settings", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_status, "gtk_print_job_get_status", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_surface, "gtk_print_job_get_surface", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_title, "gtk_print_job_get_title", LIBS);
+  gidLink(cast(void**)&gtk_print_job_get_track_print_status, "gtk_print_job_get_track_print_status", LIBS);
+  gidLink(cast(void**)&gtk_print_job_send, "gtk_print_job_send", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_collate, "gtk_print_job_set_collate", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_n_up, "gtk_print_job_set_n_up", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_n_up_layout, "gtk_print_job_set_n_up_layout", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_num_copies, "gtk_print_job_set_num_copies", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_page_ranges, "gtk_print_job_set_page_ranges", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_page_set, "gtk_print_job_set_page_set", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_pages, "gtk_print_job_set_pages", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_reverse, "gtk_print_job_set_reverse", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_rotate, "gtk_print_job_set_rotate", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_scale, "gtk_print_job_set_scale", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_source_fd, "gtk_print_job_set_source_fd", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_source_file, "gtk_print_job_set_source_file", LIBS);
+  gidLink(cast(void**)&gtk_print_job_set_track_print_status, "gtk_print_job_set_track_print_status", LIBS);
 
   // PrintOperation
-  gidLink(gtk_print_operation_get_type, "gtk_print_operation_get_type", LIBS);
-  gidLink(gtk_print_operation_new, "gtk_print_operation_new", LIBS);
-  gidLink(gtk_print_operation_cancel, "gtk_print_operation_cancel", LIBS);
-  gidLink(gtk_print_operation_draw_page_finish, "gtk_print_operation_draw_page_finish", LIBS);
-  gidLink(gtk_print_operation_get_default_page_setup, "gtk_print_operation_get_default_page_setup", LIBS);
-  gidLink(gtk_print_operation_get_embed_page_setup, "gtk_print_operation_get_embed_page_setup", LIBS);
-  gidLink(gtk_print_operation_get_error, "gtk_print_operation_get_error", LIBS);
-  gidLink(gtk_print_operation_get_has_selection, "gtk_print_operation_get_has_selection", LIBS);
-  gidLink(gtk_print_operation_get_n_pages_to_print, "gtk_print_operation_get_n_pages_to_print", LIBS);
-  gidLink(gtk_print_operation_get_print_settings, "gtk_print_operation_get_print_settings", LIBS);
-  gidLink(gtk_print_operation_get_status, "gtk_print_operation_get_status", LIBS);
-  gidLink(gtk_print_operation_get_status_string, "gtk_print_operation_get_status_string", LIBS);
-  gidLink(gtk_print_operation_get_support_selection, "gtk_print_operation_get_support_selection", LIBS);
-  gidLink(gtk_print_operation_is_finished, "gtk_print_operation_is_finished", LIBS);
-  gidLink(gtk_print_operation_run, "gtk_print_operation_run", LIBS);
-  gidLink(gtk_print_operation_set_allow_async, "gtk_print_operation_set_allow_async", LIBS);
-  gidLink(gtk_print_operation_set_current_page, "gtk_print_operation_set_current_page", LIBS);
-  gidLink(gtk_print_operation_set_custom_tab_label, "gtk_print_operation_set_custom_tab_label", LIBS);
-  gidLink(gtk_print_operation_set_default_page_setup, "gtk_print_operation_set_default_page_setup", LIBS);
-  gidLink(gtk_print_operation_set_defer_drawing, "gtk_print_operation_set_defer_drawing", LIBS);
-  gidLink(gtk_print_operation_set_embed_page_setup, "gtk_print_operation_set_embed_page_setup", LIBS);
-  gidLink(gtk_print_operation_set_export_filename, "gtk_print_operation_set_export_filename", LIBS);
-  gidLink(gtk_print_operation_set_has_selection, "gtk_print_operation_set_has_selection", LIBS);
-  gidLink(gtk_print_operation_set_job_name, "gtk_print_operation_set_job_name", LIBS);
-  gidLink(gtk_print_operation_set_n_pages, "gtk_print_operation_set_n_pages", LIBS);
-  gidLink(gtk_print_operation_set_print_settings, "gtk_print_operation_set_print_settings", LIBS);
-  gidLink(gtk_print_operation_set_show_progress, "gtk_print_operation_set_show_progress", LIBS);
-  gidLink(gtk_print_operation_set_support_selection, "gtk_print_operation_set_support_selection", LIBS);
-  gidLink(gtk_print_operation_set_track_print_status, "gtk_print_operation_set_track_print_status", LIBS);
-  gidLink(gtk_print_operation_set_unit, "gtk_print_operation_set_unit", LIBS);
-  gidLink(gtk_print_operation_set_use_full_page, "gtk_print_operation_set_use_full_page", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_get_type, "gtk_print_operation_get_type", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_new, "gtk_print_operation_new", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_cancel, "gtk_print_operation_cancel", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_draw_page_finish, "gtk_print_operation_draw_page_finish", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_get_default_page_setup, "gtk_print_operation_get_default_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_get_embed_page_setup, "gtk_print_operation_get_embed_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_get_error, "gtk_print_operation_get_error", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_get_has_selection, "gtk_print_operation_get_has_selection", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_get_n_pages_to_print, "gtk_print_operation_get_n_pages_to_print", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_get_print_settings, "gtk_print_operation_get_print_settings", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_get_status, "gtk_print_operation_get_status", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_get_status_string, "gtk_print_operation_get_status_string", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_get_support_selection, "gtk_print_operation_get_support_selection", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_is_finished, "gtk_print_operation_is_finished", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_run, "gtk_print_operation_run", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_allow_async, "gtk_print_operation_set_allow_async", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_current_page, "gtk_print_operation_set_current_page", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_custom_tab_label, "gtk_print_operation_set_custom_tab_label", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_default_page_setup, "gtk_print_operation_set_default_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_defer_drawing, "gtk_print_operation_set_defer_drawing", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_embed_page_setup, "gtk_print_operation_set_embed_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_export_filename, "gtk_print_operation_set_export_filename", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_has_selection, "gtk_print_operation_set_has_selection", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_job_name, "gtk_print_operation_set_job_name", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_n_pages, "gtk_print_operation_set_n_pages", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_print_settings, "gtk_print_operation_set_print_settings", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_show_progress, "gtk_print_operation_set_show_progress", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_support_selection, "gtk_print_operation_set_support_selection", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_track_print_status, "gtk_print_operation_set_track_print_status", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_unit, "gtk_print_operation_set_unit", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_set_use_full_page, "gtk_print_operation_set_use_full_page", LIBS);
 
   // PrintOperationPreview
-  gidLink(gtk_print_operation_preview_get_type, "gtk_print_operation_preview_get_type", LIBS);
-  gidLink(gtk_print_operation_preview_end_preview, "gtk_print_operation_preview_end_preview", LIBS);
-  gidLink(gtk_print_operation_preview_is_selected, "gtk_print_operation_preview_is_selected", LIBS);
-  gidLink(gtk_print_operation_preview_render_page, "gtk_print_operation_preview_render_page", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_preview_get_type, "gtk_print_operation_preview_get_type", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_preview_end_preview, "gtk_print_operation_preview_end_preview", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_preview_is_selected, "gtk_print_operation_preview_is_selected", LIBS);
+  gidLink(cast(void**)&gtk_print_operation_preview_render_page, "gtk_print_operation_preview_render_page", LIBS);
 
   // PrintSettings
-  gidLink(gtk_print_settings_get_type, "gtk_print_settings_get_type", LIBS);
-  gidLink(gtk_print_settings_new, "gtk_print_settings_new", LIBS);
-  gidLink(gtk_print_settings_new_from_file, "gtk_print_settings_new_from_file", LIBS);
-  gidLink(gtk_print_settings_new_from_gvariant, "gtk_print_settings_new_from_gvariant", LIBS);
-  gidLink(gtk_print_settings_new_from_key_file, "gtk_print_settings_new_from_key_file", LIBS);
-  gidLink(gtk_print_settings_copy, "gtk_print_settings_copy", LIBS);
-  gidLink(gtk_print_settings_foreach, "gtk_print_settings_foreach", LIBS);
-  gidLink(gtk_print_settings_get, "gtk_print_settings_get", LIBS);
-  gidLink(gtk_print_settings_get_bool, "gtk_print_settings_get_bool", LIBS);
-  gidLink(gtk_print_settings_get_collate, "gtk_print_settings_get_collate", LIBS);
-  gidLink(gtk_print_settings_get_default_source, "gtk_print_settings_get_default_source", LIBS);
-  gidLink(gtk_print_settings_get_dither, "gtk_print_settings_get_dither", LIBS);
-  gidLink(gtk_print_settings_get_double, "gtk_print_settings_get_double", LIBS);
-  gidLink(gtk_print_settings_get_double_with_default, "gtk_print_settings_get_double_with_default", LIBS);
-  gidLink(gtk_print_settings_get_duplex, "gtk_print_settings_get_duplex", LIBS);
-  gidLink(gtk_print_settings_get_finishings, "gtk_print_settings_get_finishings", LIBS);
-  gidLink(gtk_print_settings_get_int, "gtk_print_settings_get_int", LIBS);
-  gidLink(gtk_print_settings_get_int_with_default, "gtk_print_settings_get_int_with_default", LIBS);
-  gidLink(gtk_print_settings_get_length, "gtk_print_settings_get_length", LIBS);
-  gidLink(gtk_print_settings_get_media_type, "gtk_print_settings_get_media_type", LIBS);
-  gidLink(gtk_print_settings_get_n_copies, "gtk_print_settings_get_n_copies", LIBS);
-  gidLink(gtk_print_settings_get_number_up, "gtk_print_settings_get_number_up", LIBS);
-  gidLink(gtk_print_settings_get_number_up_layout, "gtk_print_settings_get_number_up_layout", LIBS);
-  gidLink(gtk_print_settings_get_orientation, "gtk_print_settings_get_orientation", LIBS);
-  gidLink(gtk_print_settings_get_output_bin, "gtk_print_settings_get_output_bin", LIBS);
-  gidLink(gtk_print_settings_get_page_ranges, "gtk_print_settings_get_page_ranges", LIBS);
-  gidLink(gtk_print_settings_get_page_set, "gtk_print_settings_get_page_set", LIBS);
-  gidLink(gtk_print_settings_get_paper_height, "gtk_print_settings_get_paper_height", LIBS);
-  gidLink(gtk_print_settings_get_paper_size, "gtk_print_settings_get_paper_size", LIBS);
-  gidLink(gtk_print_settings_get_paper_width, "gtk_print_settings_get_paper_width", LIBS);
-  gidLink(gtk_print_settings_get_print_pages, "gtk_print_settings_get_print_pages", LIBS);
-  gidLink(gtk_print_settings_get_printer, "gtk_print_settings_get_printer", LIBS);
-  gidLink(gtk_print_settings_get_printer_lpi, "gtk_print_settings_get_printer_lpi", LIBS);
-  gidLink(gtk_print_settings_get_quality, "gtk_print_settings_get_quality", LIBS);
-  gidLink(gtk_print_settings_get_resolution, "gtk_print_settings_get_resolution", LIBS);
-  gidLink(gtk_print_settings_get_resolution_x, "gtk_print_settings_get_resolution_x", LIBS);
-  gidLink(gtk_print_settings_get_resolution_y, "gtk_print_settings_get_resolution_y", LIBS);
-  gidLink(gtk_print_settings_get_reverse, "gtk_print_settings_get_reverse", LIBS);
-  gidLink(gtk_print_settings_get_scale, "gtk_print_settings_get_scale", LIBS);
-  gidLink(gtk_print_settings_get_use_color, "gtk_print_settings_get_use_color", LIBS);
-  gidLink(gtk_print_settings_has_key, "gtk_print_settings_has_key", LIBS);
-  gidLink(gtk_print_settings_load_file, "gtk_print_settings_load_file", LIBS);
-  gidLink(gtk_print_settings_load_key_file, "gtk_print_settings_load_key_file", LIBS);
-  gidLink(gtk_print_settings_set, "gtk_print_settings_set", LIBS);
-  gidLink(gtk_print_settings_set_bool, "gtk_print_settings_set_bool", LIBS);
-  gidLink(gtk_print_settings_set_collate, "gtk_print_settings_set_collate", LIBS);
-  gidLink(gtk_print_settings_set_default_source, "gtk_print_settings_set_default_source", LIBS);
-  gidLink(gtk_print_settings_set_dither, "gtk_print_settings_set_dither", LIBS);
-  gidLink(gtk_print_settings_set_double, "gtk_print_settings_set_double", LIBS);
-  gidLink(gtk_print_settings_set_duplex, "gtk_print_settings_set_duplex", LIBS);
-  gidLink(gtk_print_settings_set_finishings, "gtk_print_settings_set_finishings", LIBS);
-  gidLink(gtk_print_settings_set_int, "gtk_print_settings_set_int", LIBS);
-  gidLink(gtk_print_settings_set_length, "gtk_print_settings_set_length", LIBS);
-  gidLink(gtk_print_settings_set_media_type, "gtk_print_settings_set_media_type", LIBS);
-  gidLink(gtk_print_settings_set_n_copies, "gtk_print_settings_set_n_copies", LIBS);
-  gidLink(gtk_print_settings_set_number_up, "gtk_print_settings_set_number_up", LIBS);
-  gidLink(gtk_print_settings_set_number_up_layout, "gtk_print_settings_set_number_up_layout", LIBS);
-  gidLink(gtk_print_settings_set_orientation, "gtk_print_settings_set_orientation", LIBS);
-  gidLink(gtk_print_settings_set_output_bin, "gtk_print_settings_set_output_bin", LIBS);
-  gidLink(gtk_print_settings_set_page_ranges, "gtk_print_settings_set_page_ranges", LIBS);
-  gidLink(gtk_print_settings_set_page_set, "gtk_print_settings_set_page_set", LIBS);
-  gidLink(gtk_print_settings_set_paper_height, "gtk_print_settings_set_paper_height", LIBS);
-  gidLink(gtk_print_settings_set_paper_size, "gtk_print_settings_set_paper_size", LIBS);
-  gidLink(gtk_print_settings_set_paper_width, "gtk_print_settings_set_paper_width", LIBS);
-  gidLink(gtk_print_settings_set_print_pages, "gtk_print_settings_set_print_pages", LIBS);
-  gidLink(gtk_print_settings_set_printer, "gtk_print_settings_set_printer", LIBS);
-  gidLink(gtk_print_settings_set_printer_lpi, "gtk_print_settings_set_printer_lpi", LIBS);
-  gidLink(gtk_print_settings_set_quality, "gtk_print_settings_set_quality", LIBS);
-  gidLink(gtk_print_settings_set_resolution, "gtk_print_settings_set_resolution", LIBS);
-  gidLink(gtk_print_settings_set_resolution_xy, "gtk_print_settings_set_resolution_xy", LIBS);
-  gidLink(gtk_print_settings_set_reverse, "gtk_print_settings_set_reverse", LIBS);
-  gidLink(gtk_print_settings_set_scale, "gtk_print_settings_set_scale", LIBS);
-  gidLink(gtk_print_settings_set_use_color, "gtk_print_settings_set_use_color", LIBS);
-  gidLink(gtk_print_settings_to_file, "gtk_print_settings_to_file", LIBS);
-  gidLink(gtk_print_settings_to_gvariant, "gtk_print_settings_to_gvariant", LIBS);
-  gidLink(gtk_print_settings_to_key_file, "gtk_print_settings_to_key_file", LIBS);
-  gidLink(gtk_print_settings_unset, "gtk_print_settings_unset", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_type, "gtk_print_settings_get_type", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_new, "gtk_print_settings_new", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_new_from_file, "gtk_print_settings_new_from_file", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_new_from_gvariant, "gtk_print_settings_new_from_gvariant", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_new_from_key_file, "gtk_print_settings_new_from_key_file", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_copy, "gtk_print_settings_copy", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_foreach, "gtk_print_settings_foreach", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get, "gtk_print_settings_get", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_bool, "gtk_print_settings_get_bool", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_collate, "gtk_print_settings_get_collate", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_default_source, "gtk_print_settings_get_default_source", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_dither, "gtk_print_settings_get_dither", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_double, "gtk_print_settings_get_double", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_double_with_default, "gtk_print_settings_get_double_with_default", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_duplex, "gtk_print_settings_get_duplex", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_finishings, "gtk_print_settings_get_finishings", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_int, "gtk_print_settings_get_int", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_int_with_default, "gtk_print_settings_get_int_with_default", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_length, "gtk_print_settings_get_length", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_media_type, "gtk_print_settings_get_media_type", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_n_copies, "gtk_print_settings_get_n_copies", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_number_up, "gtk_print_settings_get_number_up", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_number_up_layout, "gtk_print_settings_get_number_up_layout", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_orientation, "gtk_print_settings_get_orientation", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_output_bin, "gtk_print_settings_get_output_bin", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_page_ranges, "gtk_print_settings_get_page_ranges", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_page_set, "gtk_print_settings_get_page_set", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_paper_height, "gtk_print_settings_get_paper_height", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_paper_size, "gtk_print_settings_get_paper_size", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_paper_width, "gtk_print_settings_get_paper_width", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_print_pages, "gtk_print_settings_get_print_pages", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_printer, "gtk_print_settings_get_printer", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_printer_lpi, "gtk_print_settings_get_printer_lpi", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_quality, "gtk_print_settings_get_quality", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_resolution, "gtk_print_settings_get_resolution", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_resolution_x, "gtk_print_settings_get_resolution_x", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_resolution_y, "gtk_print_settings_get_resolution_y", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_reverse, "gtk_print_settings_get_reverse", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_scale, "gtk_print_settings_get_scale", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_get_use_color, "gtk_print_settings_get_use_color", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_has_key, "gtk_print_settings_has_key", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_load_file, "gtk_print_settings_load_file", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_load_key_file, "gtk_print_settings_load_key_file", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set, "gtk_print_settings_set", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_bool, "gtk_print_settings_set_bool", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_collate, "gtk_print_settings_set_collate", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_default_source, "gtk_print_settings_set_default_source", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_dither, "gtk_print_settings_set_dither", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_double, "gtk_print_settings_set_double", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_duplex, "gtk_print_settings_set_duplex", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_finishings, "gtk_print_settings_set_finishings", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_int, "gtk_print_settings_set_int", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_length, "gtk_print_settings_set_length", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_media_type, "gtk_print_settings_set_media_type", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_n_copies, "gtk_print_settings_set_n_copies", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_number_up, "gtk_print_settings_set_number_up", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_number_up_layout, "gtk_print_settings_set_number_up_layout", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_orientation, "gtk_print_settings_set_orientation", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_output_bin, "gtk_print_settings_set_output_bin", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_page_ranges, "gtk_print_settings_set_page_ranges", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_page_set, "gtk_print_settings_set_page_set", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_paper_height, "gtk_print_settings_set_paper_height", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_paper_size, "gtk_print_settings_set_paper_size", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_paper_width, "gtk_print_settings_set_paper_width", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_print_pages, "gtk_print_settings_set_print_pages", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_printer, "gtk_print_settings_set_printer", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_printer_lpi, "gtk_print_settings_set_printer_lpi", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_quality, "gtk_print_settings_set_quality", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_resolution, "gtk_print_settings_set_resolution", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_resolution_xy, "gtk_print_settings_set_resolution_xy", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_reverse, "gtk_print_settings_set_reverse", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_scale, "gtk_print_settings_set_scale", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_set_use_color, "gtk_print_settings_set_use_color", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_to_file, "gtk_print_settings_to_file", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_to_gvariant, "gtk_print_settings_to_gvariant", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_to_key_file, "gtk_print_settings_to_key_file", LIBS);
+  gidLink(cast(void**)&gtk_print_settings_unset, "gtk_print_settings_unset", LIBS);
 
   // PrintSetup
-  gidLink(gtk_print_setup_get_type, "gtk_print_setup_get_type", LIBS);
-  gidLink(gtk_print_setup_get_page_setup, "gtk_print_setup_get_page_setup", LIBS);
-  gidLink(gtk_print_setup_get_print_settings, "gtk_print_setup_get_print_settings", LIBS);
-  gidLink(gtk_print_setup_ref, "gtk_print_setup_ref", LIBS);
-  gidLink(gtk_print_setup_unref, "gtk_print_setup_unref", LIBS);
+  gidLink(cast(void**)&gtk_print_setup_get_type, "gtk_print_setup_get_type", LIBS);
+  gidLink(cast(void**)&gtk_print_setup_get_page_setup, "gtk_print_setup_get_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_setup_get_print_settings, "gtk_print_setup_get_print_settings", LIBS);
+  gidLink(cast(void**)&gtk_print_setup_ref, "gtk_print_setup_ref", LIBS);
+  gidLink(cast(void**)&gtk_print_setup_unref, "gtk_print_setup_unref", LIBS);
 
   // PrintUnixDialog
-  gidLink(gtk_print_unix_dialog_get_type, "gtk_print_unix_dialog_get_type", LIBS);
-  gidLink(gtk_print_unix_dialog_new, "gtk_print_unix_dialog_new", LIBS);
-  gidLink(gtk_print_unix_dialog_add_custom_tab, "gtk_print_unix_dialog_add_custom_tab", LIBS);
-  gidLink(gtk_print_unix_dialog_get_current_page, "gtk_print_unix_dialog_get_current_page", LIBS);
-  gidLink(gtk_print_unix_dialog_get_embed_page_setup, "gtk_print_unix_dialog_get_embed_page_setup", LIBS);
-  gidLink(gtk_print_unix_dialog_get_has_selection, "gtk_print_unix_dialog_get_has_selection", LIBS);
-  gidLink(gtk_print_unix_dialog_get_manual_capabilities, "gtk_print_unix_dialog_get_manual_capabilities", LIBS);
-  gidLink(gtk_print_unix_dialog_get_page_setup, "gtk_print_unix_dialog_get_page_setup", LIBS);
-  gidLink(gtk_print_unix_dialog_get_page_setup_set, "gtk_print_unix_dialog_get_page_setup_set", LIBS);
-  gidLink(gtk_print_unix_dialog_get_selected_printer, "gtk_print_unix_dialog_get_selected_printer", LIBS);
-  gidLink(gtk_print_unix_dialog_get_settings, "gtk_print_unix_dialog_get_settings", LIBS);
-  gidLink(gtk_print_unix_dialog_get_support_selection, "gtk_print_unix_dialog_get_support_selection", LIBS);
-  gidLink(gtk_print_unix_dialog_set_current_page, "gtk_print_unix_dialog_set_current_page", LIBS);
-  gidLink(gtk_print_unix_dialog_set_embed_page_setup, "gtk_print_unix_dialog_set_embed_page_setup", LIBS);
-  gidLink(gtk_print_unix_dialog_set_has_selection, "gtk_print_unix_dialog_set_has_selection", LIBS);
-  gidLink(gtk_print_unix_dialog_set_manual_capabilities, "gtk_print_unix_dialog_set_manual_capabilities", LIBS);
-  gidLink(gtk_print_unix_dialog_set_page_setup, "gtk_print_unix_dialog_set_page_setup", LIBS);
-  gidLink(gtk_print_unix_dialog_set_settings, "gtk_print_unix_dialog_set_settings", LIBS);
-  gidLink(gtk_print_unix_dialog_set_support_selection, "gtk_print_unix_dialog_set_support_selection", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_get_type, "gtk_print_unix_dialog_get_type", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_new, "gtk_print_unix_dialog_new", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_add_custom_tab, "gtk_print_unix_dialog_add_custom_tab", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_get_current_page, "gtk_print_unix_dialog_get_current_page", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_get_embed_page_setup, "gtk_print_unix_dialog_get_embed_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_get_has_selection, "gtk_print_unix_dialog_get_has_selection", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_get_manual_capabilities, "gtk_print_unix_dialog_get_manual_capabilities", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_get_page_setup, "gtk_print_unix_dialog_get_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_get_page_setup_set, "gtk_print_unix_dialog_get_page_setup_set", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_get_selected_printer, "gtk_print_unix_dialog_get_selected_printer", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_get_settings, "gtk_print_unix_dialog_get_settings", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_get_support_selection, "gtk_print_unix_dialog_get_support_selection", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_set_current_page, "gtk_print_unix_dialog_set_current_page", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_set_embed_page_setup, "gtk_print_unix_dialog_set_embed_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_set_has_selection, "gtk_print_unix_dialog_set_has_selection", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_set_manual_capabilities, "gtk_print_unix_dialog_set_manual_capabilities", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_set_page_setup, "gtk_print_unix_dialog_set_page_setup", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_set_settings, "gtk_print_unix_dialog_set_settings", LIBS);
+  gidLink(cast(void**)&gtk_print_unix_dialog_set_support_selection, "gtk_print_unix_dialog_set_support_selection", LIBS);
 
   // Printer
-  gidLink(gtk_printer_get_type, "gtk_printer_get_type", LIBS);
-  gidLink(gtk_printer_new, "gtk_printer_new", LIBS);
-  gidLink(gtk_printer_accepts_pdf, "gtk_printer_accepts_pdf", LIBS);
-  gidLink(gtk_printer_accepts_ps, "gtk_printer_accepts_ps", LIBS);
-  gidLink(gtk_printer_compare, "gtk_printer_compare", LIBS);
-  gidLink(gtk_printer_get_backend, "gtk_printer_get_backend", LIBS);
-  gidLink(gtk_printer_get_capabilities, "gtk_printer_get_capabilities", LIBS);
-  gidLink(gtk_printer_get_default_page_size, "gtk_printer_get_default_page_size", LIBS);
-  gidLink(gtk_printer_get_description, "gtk_printer_get_description", LIBS);
-  gidLink(gtk_printer_get_hard_margins, "gtk_printer_get_hard_margins", LIBS);
-  gidLink(gtk_printer_get_hard_margins_for_paper_size, "gtk_printer_get_hard_margins_for_paper_size", LIBS);
-  gidLink(gtk_printer_get_icon_name, "gtk_printer_get_icon_name", LIBS);
-  gidLink(gtk_printer_get_job_count, "gtk_printer_get_job_count", LIBS);
-  gidLink(gtk_printer_get_location, "gtk_printer_get_location", LIBS);
-  gidLink(gtk_printer_get_name, "gtk_printer_get_name", LIBS);
-  gidLink(gtk_printer_get_state_message, "gtk_printer_get_state_message", LIBS);
-  gidLink(gtk_printer_has_details, "gtk_printer_has_details", LIBS);
-  gidLink(gtk_printer_is_accepting_jobs, "gtk_printer_is_accepting_jobs", LIBS);
-  gidLink(gtk_printer_is_active, "gtk_printer_is_active", LIBS);
-  gidLink(gtk_printer_is_default, "gtk_printer_is_default", LIBS);
-  gidLink(gtk_printer_is_paused, "gtk_printer_is_paused", LIBS);
-  gidLink(gtk_printer_is_virtual, "gtk_printer_is_virtual", LIBS);
-  gidLink(gtk_printer_list_papers, "gtk_printer_list_papers", LIBS);
-  gidLink(gtk_printer_request_details, "gtk_printer_request_details", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_type, "gtk_printer_get_type", LIBS);
+  gidLink(cast(void**)&gtk_printer_new, "gtk_printer_new", LIBS);
+  gidLink(cast(void**)&gtk_printer_accepts_pdf, "gtk_printer_accepts_pdf", LIBS);
+  gidLink(cast(void**)&gtk_printer_accepts_ps, "gtk_printer_accepts_ps", LIBS);
+  gidLink(cast(void**)&gtk_printer_compare, "gtk_printer_compare", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_backend, "gtk_printer_get_backend", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_capabilities, "gtk_printer_get_capabilities", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_default_page_size, "gtk_printer_get_default_page_size", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_description, "gtk_printer_get_description", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_hard_margins, "gtk_printer_get_hard_margins", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_hard_margins_for_paper_size, "gtk_printer_get_hard_margins_for_paper_size", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_icon_name, "gtk_printer_get_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_job_count, "gtk_printer_get_job_count", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_location, "gtk_printer_get_location", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_name, "gtk_printer_get_name", LIBS);
+  gidLink(cast(void**)&gtk_printer_get_state_message, "gtk_printer_get_state_message", LIBS);
+  gidLink(cast(void**)&gtk_printer_has_details, "gtk_printer_has_details", LIBS);
+  gidLink(cast(void**)&gtk_printer_is_accepting_jobs, "gtk_printer_is_accepting_jobs", LIBS);
+  gidLink(cast(void**)&gtk_printer_is_active, "gtk_printer_is_active", LIBS);
+  gidLink(cast(void**)&gtk_printer_is_default, "gtk_printer_is_default", LIBS);
+  gidLink(cast(void**)&gtk_printer_is_paused, "gtk_printer_is_paused", LIBS);
+  gidLink(cast(void**)&gtk_printer_is_virtual, "gtk_printer_is_virtual", LIBS);
+  gidLink(cast(void**)&gtk_printer_list_papers, "gtk_printer_list_papers", LIBS);
+  gidLink(cast(void**)&gtk_printer_request_details, "gtk_printer_request_details", LIBS);
 
   // ProgressBar
-  gidLink(gtk_progress_bar_get_type, "gtk_progress_bar_get_type", LIBS);
-  gidLink(gtk_progress_bar_new, "gtk_progress_bar_new", LIBS);
-  gidLink(gtk_progress_bar_get_ellipsize, "gtk_progress_bar_get_ellipsize", LIBS);
-  gidLink(gtk_progress_bar_get_fraction, "gtk_progress_bar_get_fraction", LIBS);
-  gidLink(gtk_progress_bar_get_inverted, "gtk_progress_bar_get_inverted", LIBS);
-  gidLink(gtk_progress_bar_get_pulse_step, "gtk_progress_bar_get_pulse_step", LIBS);
-  gidLink(gtk_progress_bar_get_show_text, "gtk_progress_bar_get_show_text", LIBS);
-  gidLink(gtk_progress_bar_get_text, "gtk_progress_bar_get_text", LIBS);
-  gidLink(gtk_progress_bar_pulse, "gtk_progress_bar_pulse", LIBS);
-  gidLink(gtk_progress_bar_set_ellipsize, "gtk_progress_bar_set_ellipsize", LIBS);
-  gidLink(gtk_progress_bar_set_fraction, "gtk_progress_bar_set_fraction", LIBS);
-  gidLink(gtk_progress_bar_set_inverted, "gtk_progress_bar_set_inverted", LIBS);
-  gidLink(gtk_progress_bar_set_pulse_step, "gtk_progress_bar_set_pulse_step", LIBS);
-  gidLink(gtk_progress_bar_set_show_text, "gtk_progress_bar_set_show_text", LIBS);
-  gidLink(gtk_progress_bar_set_text, "gtk_progress_bar_set_text", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_get_type, "gtk_progress_bar_get_type", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_new, "gtk_progress_bar_new", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_get_ellipsize, "gtk_progress_bar_get_ellipsize", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_get_fraction, "gtk_progress_bar_get_fraction", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_get_inverted, "gtk_progress_bar_get_inverted", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_get_pulse_step, "gtk_progress_bar_get_pulse_step", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_get_show_text, "gtk_progress_bar_get_show_text", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_get_text, "gtk_progress_bar_get_text", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_pulse, "gtk_progress_bar_pulse", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_set_ellipsize, "gtk_progress_bar_set_ellipsize", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_set_fraction, "gtk_progress_bar_set_fraction", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_set_inverted, "gtk_progress_bar_set_inverted", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_set_pulse_step, "gtk_progress_bar_set_pulse_step", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_set_show_text, "gtk_progress_bar_set_show_text", LIBS);
+  gidLink(cast(void**)&gtk_progress_bar_set_text, "gtk_progress_bar_set_text", LIBS);
 
   // PropertyExpression
-  gidLink(gtk_property_expression_get_type, "gtk_property_expression_get_type", LIBS);
-  gidLink(gtk_property_expression_new, "gtk_property_expression_new", LIBS);
-  gidLink(gtk_property_expression_new_for_pspec, "gtk_property_expression_new_for_pspec", LIBS);
-  gidLink(gtk_property_expression_get_expression, "gtk_property_expression_get_expression", LIBS);
-  gidLink(gtk_property_expression_get_pspec, "gtk_property_expression_get_pspec", LIBS);
+  gidLink(cast(void**)&gtk_property_expression_get_type, "gtk_property_expression_get_type", LIBS);
+  gidLink(cast(void**)&gtk_property_expression_new, "gtk_property_expression_new", LIBS);
+  gidLink(cast(void**)&gtk_property_expression_new_for_pspec, "gtk_property_expression_new_for_pspec", LIBS);
+  gidLink(cast(void**)&gtk_property_expression_get_expression, "gtk_property_expression_get_expression", LIBS);
+  gidLink(cast(void**)&gtk_property_expression_get_pspec, "gtk_property_expression_get_pspec", LIBS);
 
   // Range
-  gidLink(gtk_range_get_type, "gtk_range_get_type", LIBS);
-  gidLink(gtk_range_get_adjustment, "gtk_range_get_adjustment", LIBS);
-  gidLink(gtk_range_get_fill_level, "gtk_range_get_fill_level", LIBS);
-  gidLink(gtk_range_get_flippable, "gtk_range_get_flippable", LIBS);
-  gidLink(gtk_range_get_inverted, "gtk_range_get_inverted", LIBS);
-  gidLink(gtk_range_get_range_rect, "gtk_range_get_range_rect", LIBS);
-  gidLink(gtk_range_get_restrict_to_fill_level, "gtk_range_get_restrict_to_fill_level", LIBS);
-  gidLink(gtk_range_get_round_digits, "gtk_range_get_round_digits", LIBS);
-  gidLink(gtk_range_get_show_fill_level, "gtk_range_get_show_fill_level", LIBS);
-  gidLink(gtk_range_get_slider_range, "gtk_range_get_slider_range", LIBS);
-  gidLink(gtk_range_get_slider_size_fixed, "gtk_range_get_slider_size_fixed", LIBS);
-  gidLink(gtk_range_get_value, "gtk_range_get_value", LIBS);
-  gidLink(gtk_range_set_adjustment, "gtk_range_set_adjustment", LIBS);
-  gidLink(gtk_range_set_fill_level, "gtk_range_set_fill_level", LIBS);
-  gidLink(gtk_range_set_flippable, "gtk_range_set_flippable", LIBS);
-  gidLink(gtk_range_set_increments, "gtk_range_set_increments", LIBS);
-  gidLink(gtk_range_set_inverted, "gtk_range_set_inverted", LIBS);
-  gidLink(gtk_range_set_range, "gtk_range_set_range", LIBS);
-  gidLink(gtk_range_set_restrict_to_fill_level, "gtk_range_set_restrict_to_fill_level", LIBS);
-  gidLink(gtk_range_set_round_digits, "gtk_range_set_round_digits", LIBS);
-  gidLink(gtk_range_set_show_fill_level, "gtk_range_set_show_fill_level", LIBS);
-  gidLink(gtk_range_set_slider_size_fixed, "gtk_range_set_slider_size_fixed", LIBS);
-  gidLink(gtk_range_set_value, "gtk_range_set_value", LIBS);
+  gidLink(cast(void**)&gtk_range_get_type, "gtk_range_get_type", LIBS);
+  gidLink(cast(void**)&gtk_range_get_adjustment, "gtk_range_get_adjustment", LIBS);
+  gidLink(cast(void**)&gtk_range_get_fill_level, "gtk_range_get_fill_level", LIBS);
+  gidLink(cast(void**)&gtk_range_get_flippable, "gtk_range_get_flippable", LIBS);
+  gidLink(cast(void**)&gtk_range_get_inverted, "gtk_range_get_inverted", LIBS);
+  gidLink(cast(void**)&gtk_range_get_range_rect, "gtk_range_get_range_rect", LIBS);
+  gidLink(cast(void**)&gtk_range_get_restrict_to_fill_level, "gtk_range_get_restrict_to_fill_level", LIBS);
+  gidLink(cast(void**)&gtk_range_get_round_digits, "gtk_range_get_round_digits", LIBS);
+  gidLink(cast(void**)&gtk_range_get_show_fill_level, "gtk_range_get_show_fill_level", LIBS);
+  gidLink(cast(void**)&gtk_range_get_slider_range, "gtk_range_get_slider_range", LIBS);
+  gidLink(cast(void**)&gtk_range_get_slider_size_fixed, "gtk_range_get_slider_size_fixed", LIBS);
+  gidLink(cast(void**)&gtk_range_get_value, "gtk_range_get_value", LIBS);
+  gidLink(cast(void**)&gtk_range_set_adjustment, "gtk_range_set_adjustment", LIBS);
+  gidLink(cast(void**)&gtk_range_set_fill_level, "gtk_range_set_fill_level", LIBS);
+  gidLink(cast(void**)&gtk_range_set_flippable, "gtk_range_set_flippable", LIBS);
+  gidLink(cast(void**)&gtk_range_set_increments, "gtk_range_set_increments", LIBS);
+  gidLink(cast(void**)&gtk_range_set_inverted, "gtk_range_set_inverted", LIBS);
+  gidLink(cast(void**)&gtk_range_set_range, "gtk_range_set_range", LIBS);
+  gidLink(cast(void**)&gtk_range_set_restrict_to_fill_level, "gtk_range_set_restrict_to_fill_level", LIBS);
+  gidLink(cast(void**)&gtk_range_set_round_digits, "gtk_range_set_round_digits", LIBS);
+  gidLink(cast(void**)&gtk_range_set_show_fill_level, "gtk_range_set_show_fill_level", LIBS);
+  gidLink(cast(void**)&gtk_range_set_slider_size_fixed, "gtk_range_set_slider_size_fixed", LIBS);
+  gidLink(cast(void**)&gtk_range_set_value, "gtk_range_set_value", LIBS);
 
   // RecentInfo
-  gidLink(gtk_recent_info_get_type, "gtk_recent_info_get_type", LIBS);
-  gidLink(gtk_recent_info_create_app_info, "gtk_recent_info_create_app_info", LIBS);
-  gidLink(gtk_recent_info_exists, "gtk_recent_info_exists", LIBS);
-  gidLink(gtk_recent_info_get_added, "gtk_recent_info_get_added", LIBS);
-  gidLink(gtk_recent_info_get_age, "gtk_recent_info_get_age", LIBS);
-  gidLink(gtk_recent_info_get_application_info, "gtk_recent_info_get_application_info", LIBS);
-  gidLink(gtk_recent_info_get_applications, "gtk_recent_info_get_applications", LIBS);
-  gidLink(gtk_recent_info_get_description, "gtk_recent_info_get_description", LIBS);
-  gidLink(gtk_recent_info_get_display_name, "gtk_recent_info_get_display_name", LIBS);
-  gidLink(gtk_recent_info_get_gicon, "gtk_recent_info_get_gicon", LIBS);
-  gidLink(gtk_recent_info_get_groups, "gtk_recent_info_get_groups", LIBS);
-  gidLink(gtk_recent_info_get_mime_type, "gtk_recent_info_get_mime_type", LIBS);
-  gidLink(gtk_recent_info_get_modified, "gtk_recent_info_get_modified", LIBS);
-  gidLink(gtk_recent_info_get_private_hint, "gtk_recent_info_get_private_hint", LIBS);
-  gidLink(gtk_recent_info_get_short_name, "gtk_recent_info_get_short_name", LIBS);
-  gidLink(gtk_recent_info_get_uri, "gtk_recent_info_get_uri", LIBS);
-  gidLink(gtk_recent_info_get_uri_display, "gtk_recent_info_get_uri_display", LIBS);
-  gidLink(gtk_recent_info_get_visited, "gtk_recent_info_get_visited", LIBS);
-  gidLink(gtk_recent_info_has_application, "gtk_recent_info_has_application", LIBS);
-  gidLink(gtk_recent_info_has_group, "gtk_recent_info_has_group", LIBS);
-  gidLink(gtk_recent_info_is_local, "gtk_recent_info_is_local", LIBS);
-  gidLink(gtk_recent_info_last_application, "gtk_recent_info_last_application", LIBS);
-  gidLink(gtk_recent_info_match, "gtk_recent_info_match", LIBS);
-  gidLink(gtk_recent_info_ref, "gtk_recent_info_ref", LIBS);
-  gidLink(gtk_recent_info_unref, "gtk_recent_info_unref", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_type, "gtk_recent_info_get_type", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_create_app_info, "gtk_recent_info_create_app_info", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_exists, "gtk_recent_info_exists", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_added, "gtk_recent_info_get_added", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_age, "gtk_recent_info_get_age", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_application_info, "gtk_recent_info_get_application_info", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_applications, "gtk_recent_info_get_applications", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_description, "gtk_recent_info_get_description", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_display_name, "gtk_recent_info_get_display_name", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_gicon, "gtk_recent_info_get_gicon", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_groups, "gtk_recent_info_get_groups", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_mime_type, "gtk_recent_info_get_mime_type", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_modified, "gtk_recent_info_get_modified", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_private_hint, "gtk_recent_info_get_private_hint", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_short_name, "gtk_recent_info_get_short_name", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_uri, "gtk_recent_info_get_uri", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_uri_display, "gtk_recent_info_get_uri_display", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_get_visited, "gtk_recent_info_get_visited", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_has_application, "gtk_recent_info_has_application", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_has_group, "gtk_recent_info_has_group", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_is_local, "gtk_recent_info_is_local", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_last_application, "gtk_recent_info_last_application", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_match, "gtk_recent_info_match", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_ref, "gtk_recent_info_ref", LIBS);
+  gidLink(cast(void**)&gtk_recent_info_unref, "gtk_recent_info_unref", LIBS);
 
   // RecentManager
-  gidLink(gtk_recent_manager_get_type, "gtk_recent_manager_get_type", LIBS);
-  gidLink(gtk_recent_manager_new, "gtk_recent_manager_new", LIBS);
-  gidLink(gtk_recent_manager_get_default, "gtk_recent_manager_get_default", LIBS);
-  gidLink(gtk_recent_manager_add_full, "gtk_recent_manager_add_full", LIBS);
-  gidLink(gtk_recent_manager_add_item, "gtk_recent_manager_add_item", LIBS);
-  gidLink(gtk_recent_manager_get_items, "gtk_recent_manager_get_items", LIBS);
-  gidLink(gtk_recent_manager_has_item, "gtk_recent_manager_has_item", LIBS);
-  gidLink(gtk_recent_manager_lookup_item, "gtk_recent_manager_lookup_item", LIBS);
-  gidLink(gtk_recent_manager_move_item, "gtk_recent_manager_move_item", LIBS);
-  gidLink(gtk_recent_manager_purge_items, "gtk_recent_manager_purge_items", LIBS);
-  gidLink(gtk_recent_manager_remove_item, "gtk_recent_manager_remove_item", LIBS);
+  gidLink(cast(void**)&gtk_recent_manager_get_type, "gtk_recent_manager_get_type", LIBS);
+  gidLink(cast(void**)&gtk_recent_manager_new, "gtk_recent_manager_new", LIBS);
+  gidLink(cast(void**)&gtk_recent_manager_get_default, "gtk_recent_manager_get_default", LIBS);
+  gidLink(cast(void**)&gtk_recent_manager_add_full, "gtk_recent_manager_add_full", LIBS);
+  gidLink(cast(void**)&gtk_recent_manager_add_item, "gtk_recent_manager_add_item", LIBS);
+  gidLink(cast(void**)&gtk_recent_manager_get_items, "gtk_recent_manager_get_items", LIBS);
+  gidLink(cast(void**)&gtk_recent_manager_has_item, "gtk_recent_manager_has_item", LIBS);
+  gidLink(cast(void**)&gtk_recent_manager_lookup_item, "gtk_recent_manager_lookup_item", LIBS);
+  gidLink(cast(void**)&gtk_recent_manager_move_item, "gtk_recent_manager_move_item", LIBS);
+  gidLink(cast(void**)&gtk_recent_manager_purge_items, "gtk_recent_manager_purge_items", LIBS);
+  gidLink(cast(void**)&gtk_recent_manager_remove_item, "gtk_recent_manager_remove_item", LIBS);
 
   // Requisition
-  gidLink(gtk_requisition_get_type, "gtk_requisition_get_type", LIBS);
-  gidLink(gtk_requisition_new, "gtk_requisition_new", LIBS);
-  gidLink(gtk_requisition_copy, "gtk_requisition_copy", LIBS);
-  gidLink(gtk_requisition_free, "gtk_requisition_free", LIBS);
+  gidLink(cast(void**)&gtk_requisition_get_type, "gtk_requisition_get_type", LIBS);
+  gidLink(cast(void**)&gtk_requisition_new, "gtk_requisition_new", LIBS);
+  gidLink(cast(void**)&gtk_requisition_copy, "gtk_requisition_copy", LIBS);
+  gidLink(cast(void**)&gtk_requisition_free, "gtk_requisition_free", LIBS);
 
   // Revealer
-  gidLink(gtk_revealer_get_type, "gtk_revealer_get_type", LIBS);
-  gidLink(gtk_revealer_new, "gtk_revealer_new", LIBS);
-  gidLink(gtk_revealer_get_child, "gtk_revealer_get_child", LIBS);
-  gidLink(gtk_revealer_get_child_revealed, "gtk_revealer_get_child_revealed", LIBS);
-  gidLink(gtk_revealer_get_reveal_child, "gtk_revealer_get_reveal_child", LIBS);
-  gidLink(gtk_revealer_get_transition_duration, "gtk_revealer_get_transition_duration", LIBS);
-  gidLink(gtk_revealer_get_transition_type, "gtk_revealer_get_transition_type", LIBS);
-  gidLink(gtk_revealer_set_child, "gtk_revealer_set_child", LIBS);
-  gidLink(gtk_revealer_set_reveal_child, "gtk_revealer_set_reveal_child", LIBS);
-  gidLink(gtk_revealer_set_transition_duration, "gtk_revealer_set_transition_duration", LIBS);
-  gidLink(gtk_revealer_set_transition_type, "gtk_revealer_set_transition_type", LIBS);
+  gidLink(cast(void**)&gtk_revealer_get_type, "gtk_revealer_get_type", LIBS);
+  gidLink(cast(void**)&gtk_revealer_new, "gtk_revealer_new", LIBS);
+  gidLink(cast(void**)&gtk_revealer_get_child, "gtk_revealer_get_child", LIBS);
+  gidLink(cast(void**)&gtk_revealer_get_child_revealed, "gtk_revealer_get_child_revealed", LIBS);
+  gidLink(cast(void**)&gtk_revealer_get_reveal_child, "gtk_revealer_get_reveal_child", LIBS);
+  gidLink(cast(void**)&gtk_revealer_get_transition_duration, "gtk_revealer_get_transition_duration", LIBS);
+  gidLink(cast(void**)&gtk_revealer_get_transition_type, "gtk_revealer_get_transition_type", LIBS);
+  gidLink(cast(void**)&gtk_revealer_set_child, "gtk_revealer_set_child", LIBS);
+  gidLink(cast(void**)&gtk_revealer_set_reveal_child, "gtk_revealer_set_reveal_child", LIBS);
+  gidLink(cast(void**)&gtk_revealer_set_transition_duration, "gtk_revealer_set_transition_duration", LIBS);
+  gidLink(cast(void**)&gtk_revealer_set_transition_type, "gtk_revealer_set_transition_type", LIBS);
 
   // Root
-  gidLink(gtk_root_get_type, "gtk_root_get_type", LIBS);
-  gidLink(gtk_root_get_display, "gtk_root_get_display", LIBS);
-  gidLink(gtk_root_get_focus, "gtk_root_get_focus", LIBS);
-  gidLink(gtk_root_set_focus, "gtk_root_set_focus", LIBS);
+  gidLink(cast(void**)&gtk_root_get_type, "gtk_root_get_type", LIBS);
+  gidLink(cast(void**)&gtk_root_get_display, "gtk_root_get_display", LIBS);
+  gidLink(cast(void**)&gtk_root_get_focus, "gtk_root_get_focus", LIBS);
+  gidLink(cast(void**)&gtk_root_set_focus, "gtk_root_set_focus", LIBS);
 
   // Scale
-  gidLink(gtk_scale_get_type, "gtk_scale_get_type", LIBS);
-  gidLink(gtk_scale_new, "gtk_scale_new", LIBS);
-  gidLink(gtk_scale_new_with_range, "gtk_scale_new_with_range", LIBS);
-  gidLink(gtk_scale_add_mark, "gtk_scale_add_mark", LIBS);
-  gidLink(gtk_scale_clear_marks, "gtk_scale_clear_marks", LIBS);
-  gidLink(gtk_scale_get_digits, "gtk_scale_get_digits", LIBS);
-  gidLink(gtk_scale_get_draw_value, "gtk_scale_get_draw_value", LIBS);
-  gidLink(gtk_scale_get_has_origin, "gtk_scale_get_has_origin", LIBS);
-  gidLink(gtk_scale_get_layout, "gtk_scale_get_layout", LIBS);
-  gidLink(gtk_scale_get_layout_offsets, "gtk_scale_get_layout_offsets", LIBS);
-  gidLink(gtk_scale_get_value_pos, "gtk_scale_get_value_pos", LIBS);
-  gidLink(gtk_scale_set_digits, "gtk_scale_set_digits", LIBS);
-  gidLink(gtk_scale_set_draw_value, "gtk_scale_set_draw_value", LIBS);
-  gidLink(gtk_scale_set_format_value_func, "gtk_scale_set_format_value_func", LIBS);
-  gidLink(gtk_scale_set_has_origin, "gtk_scale_set_has_origin", LIBS);
-  gidLink(gtk_scale_set_value_pos, "gtk_scale_set_value_pos", LIBS);
+  gidLink(cast(void**)&gtk_scale_get_type, "gtk_scale_get_type", LIBS);
+  gidLink(cast(void**)&gtk_scale_new, "gtk_scale_new", LIBS);
+  gidLink(cast(void**)&gtk_scale_new_with_range, "gtk_scale_new_with_range", LIBS);
+  gidLink(cast(void**)&gtk_scale_add_mark, "gtk_scale_add_mark", LIBS);
+  gidLink(cast(void**)&gtk_scale_clear_marks, "gtk_scale_clear_marks", LIBS);
+  gidLink(cast(void**)&gtk_scale_get_digits, "gtk_scale_get_digits", LIBS);
+  gidLink(cast(void**)&gtk_scale_get_draw_value, "gtk_scale_get_draw_value", LIBS);
+  gidLink(cast(void**)&gtk_scale_get_has_origin, "gtk_scale_get_has_origin", LIBS);
+  gidLink(cast(void**)&gtk_scale_get_layout, "gtk_scale_get_layout", LIBS);
+  gidLink(cast(void**)&gtk_scale_get_layout_offsets, "gtk_scale_get_layout_offsets", LIBS);
+  gidLink(cast(void**)&gtk_scale_get_value_pos, "gtk_scale_get_value_pos", LIBS);
+  gidLink(cast(void**)&gtk_scale_set_digits, "gtk_scale_set_digits", LIBS);
+  gidLink(cast(void**)&gtk_scale_set_draw_value, "gtk_scale_set_draw_value", LIBS);
+  gidLink(cast(void**)&gtk_scale_set_format_value_func, "gtk_scale_set_format_value_func", LIBS);
+  gidLink(cast(void**)&gtk_scale_set_has_origin, "gtk_scale_set_has_origin", LIBS);
+  gidLink(cast(void**)&gtk_scale_set_value_pos, "gtk_scale_set_value_pos", LIBS);
 
   // ScaleButton
-  gidLink(gtk_scale_button_get_type, "gtk_scale_button_get_type", LIBS);
-  gidLink(gtk_scale_button_new, "gtk_scale_button_new", LIBS);
-  gidLink(gtk_scale_button_get_active, "gtk_scale_button_get_active", LIBS);
-  gidLink(gtk_scale_button_get_adjustment, "gtk_scale_button_get_adjustment", LIBS);
-  gidLink(gtk_scale_button_get_has_frame, "gtk_scale_button_get_has_frame", LIBS);
-  gidLink(gtk_scale_button_get_minus_button, "gtk_scale_button_get_minus_button", LIBS);
-  gidLink(gtk_scale_button_get_plus_button, "gtk_scale_button_get_plus_button", LIBS);
-  gidLink(gtk_scale_button_get_popup, "gtk_scale_button_get_popup", LIBS);
-  gidLink(gtk_scale_button_get_value, "gtk_scale_button_get_value", LIBS);
-  gidLink(gtk_scale_button_set_adjustment, "gtk_scale_button_set_adjustment", LIBS);
-  gidLink(gtk_scale_button_set_has_frame, "gtk_scale_button_set_has_frame", LIBS);
-  gidLink(gtk_scale_button_set_icons, "gtk_scale_button_set_icons", LIBS);
-  gidLink(gtk_scale_button_set_value, "gtk_scale_button_set_value", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_get_type, "gtk_scale_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_new, "gtk_scale_button_new", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_get_active, "gtk_scale_button_get_active", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_get_adjustment, "gtk_scale_button_get_adjustment", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_get_has_frame, "gtk_scale_button_get_has_frame", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_get_minus_button, "gtk_scale_button_get_minus_button", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_get_plus_button, "gtk_scale_button_get_plus_button", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_get_popup, "gtk_scale_button_get_popup", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_get_value, "gtk_scale_button_get_value", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_set_adjustment, "gtk_scale_button_set_adjustment", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_set_has_frame, "gtk_scale_button_set_has_frame", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_set_icons, "gtk_scale_button_set_icons", LIBS);
+  gidLink(cast(void**)&gtk_scale_button_set_value, "gtk_scale_button_set_value", LIBS);
 
   // ScrollInfo
-  gidLink(gtk_scroll_info_get_type, "gtk_scroll_info_get_type", LIBS);
-  gidLink(gtk_scroll_info_new, "gtk_scroll_info_new", LIBS);
-  gidLink(gtk_scroll_info_get_enable_horizontal, "gtk_scroll_info_get_enable_horizontal", LIBS);
-  gidLink(gtk_scroll_info_get_enable_vertical, "gtk_scroll_info_get_enable_vertical", LIBS);
-  gidLink(gtk_scroll_info_ref, "gtk_scroll_info_ref", LIBS);
-  gidLink(gtk_scroll_info_set_enable_horizontal, "gtk_scroll_info_set_enable_horizontal", LIBS);
-  gidLink(gtk_scroll_info_set_enable_vertical, "gtk_scroll_info_set_enable_vertical", LIBS);
-  gidLink(gtk_scroll_info_unref, "gtk_scroll_info_unref", LIBS);
+  gidLink(cast(void**)&gtk_scroll_info_get_type, "gtk_scroll_info_get_type", LIBS);
+  gidLink(cast(void**)&gtk_scroll_info_new, "gtk_scroll_info_new", LIBS);
+  gidLink(cast(void**)&gtk_scroll_info_get_enable_horizontal, "gtk_scroll_info_get_enable_horizontal", LIBS);
+  gidLink(cast(void**)&gtk_scroll_info_get_enable_vertical, "gtk_scroll_info_get_enable_vertical", LIBS);
+  gidLink(cast(void**)&gtk_scroll_info_ref, "gtk_scroll_info_ref", LIBS);
+  gidLink(cast(void**)&gtk_scroll_info_set_enable_horizontal, "gtk_scroll_info_set_enable_horizontal", LIBS);
+  gidLink(cast(void**)&gtk_scroll_info_set_enable_vertical, "gtk_scroll_info_set_enable_vertical", LIBS);
+  gidLink(cast(void**)&gtk_scroll_info_unref, "gtk_scroll_info_unref", LIBS);
 
   // Scrollable
-  gidLink(gtk_scrollable_get_type, "gtk_scrollable_get_type", LIBS);
-  gidLink(gtk_scrollable_get_border, "gtk_scrollable_get_border", LIBS);
-  gidLink(gtk_scrollable_get_hadjustment, "gtk_scrollable_get_hadjustment", LIBS);
-  gidLink(gtk_scrollable_get_hscroll_policy, "gtk_scrollable_get_hscroll_policy", LIBS);
-  gidLink(gtk_scrollable_get_vadjustment, "gtk_scrollable_get_vadjustment", LIBS);
-  gidLink(gtk_scrollable_get_vscroll_policy, "gtk_scrollable_get_vscroll_policy", LIBS);
-  gidLink(gtk_scrollable_set_hadjustment, "gtk_scrollable_set_hadjustment", LIBS);
-  gidLink(gtk_scrollable_set_hscroll_policy, "gtk_scrollable_set_hscroll_policy", LIBS);
-  gidLink(gtk_scrollable_set_vadjustment, "gtk_scrollable_set_vadjustment", LIBS);
-  gidLink(gtk_scrollable_set_vscroll_policy, "gtk_scrollable_set_vscroll_policy", LIBS);
+  gidLink(cast(void**)&gtk_scrollable_get_type, "gtk_scrollable_get_type", LIBS);
+  gidLink(cast(void**)&gtk_scrollable_get_border, "gtk_scrollable_get_border", LIBS);
+  gidLink(cast(void**)&gtk_scrollable_get_hadjustment, "gtk_scrollable_get_hadjustment", LIBS);
+  gidLink(cast(void**)&gtk_scrollable_get_hscroll_policy, "gtk_scrollable_get_hscroll_policy", LIBS);
+  gidLink(cast(void**)&gtk_scrollable_get_vadjustment, "gtk_scrollable_get_vadjustment", LIBS);
+  gidLink(cast(void**)&gtk_scrollable_get_vscroll_policy, "gtk_scrollable_get_vscroll_policy", LIBS);
+  gidLink(cast(void**)&gtk_scrollable_set_hadjustment, "gtk_scrollable_set_hadjustment", LIBS);
+  gidLink(cast(void**)&gtk_scrollable_set_hscroll_policy, "gtk_scrollable_set_hscroll_policy", LIBS);
+  gidLink(cast(void**)&gtk_scrollable_set_vadjustment, "gtk_scrollable_set_vadjustment", LIBS);
+  gidLink(cast(void**)&gtk_scrollable_set_vscroll_policy, "gtk_scrollable_set_vscroll_policy", LIBS);
 
   // Scrollbar
-  gidLink(gtk_scrollbar_get_type, "gtk_scrollbar_get_type", LIBS);
-  gidLink(gtk_scrollbar_new, "gtk_scrollbar_new", LIBS);
-  gidLink(gtk_scrollbar_get_adjustment, "gtk_scrollbar_get_adjustment", LIBS);
-  gidLink(gtk_scrollbar_set_adjustment, "gtk_scrollbar_set_adjustment", LIBS);
+  gidLink(cast(void**)&gtk_scrollbar_get_type, "gtk_scrollbar_get_type", LIBS);
+  gidLink(cast(void**)&gtk_scrollbar_new, "gtk_scrollbar_new", LIBS);
+  gidLink(cast(void**)&gtk_scrollbar_get_adjustment, "gtk_scrollbar_get_adjustment", LIBS);
+  gidLink(cast(void**)&gtk_scrollbar_set_adjustment, "gtk_scrollbar_set_adjustment", LIBS);
 
   // ScrolledWindow
-  gidLink(gtk_scrolled_window_get_type, "gtk_scrolled_window_get_type", LIBS);
-  gidLink(gtk_scrolled_window_new, "gtk_scrolled_window_new", LIBS);
-  gidLink(gtk_scrolled_window_get_child, "gtk_scrolled_window_get_child", LIBS);
-  gidLink(gtk_scrolled_window_get_hadjustment, "gtk_scrolled_window_get_hadjustment", LIBS);
-  gidLink(gtk_scrolled_window_get_has_frame, "gtk_scrolled_window_get_has_frame", LIBS);
-  gidLink(gtk_scrolled_window_get_hscrollbar, "gtk_scrolled_window_get_hscrollbar", LIBS);
-  gidLink(gtk_scrolled_window_get_kinetic_scrolling, "gtk_scrolled_window_get_kinetic_scrolling", LIBS);
-  gidLink(gtk_scrolled_window_get_max_content_height, "gtk_scrolled_window_get_max_content_height", LIBS);
-  gidLink(gtk_scrolled_window_get_max_content_width, "gtk_scrolled_window_get_max_content_width", LIBS);
-  gidLink(gtk_scrolled_window_get_min_content_height, "gtk_scrolled_window_get_min_content_height", LIBS);
-  gidLink(gtk_scrolled_window_get_min_content_width, "gtk_scrolled_window_get_min_content_width", LIBS);
-  gidLink(gtk_scrolled_window_get_overlay_scrolling, "gtk_scrolled_window_get_overlay_scrolling", LIBS);
-  gidLink(gtk_scrolled_window_get_placement, "gtk_scrolled_window_get_placement", LIBS);
-  gidLink(gtk_scrolled_window_get_policy, "gtk_scrolled_window_get_policy", LIBS);
-  gidLink(gtk_scrolled_window_get_propagate_natural_height, "gtk_scrolled_window_get_propagate_natural_height", LIBS);
-  gidLink(gtk_scrolled_window_get_propagate_natural_width, "gtk_scrolled_window_get_propagate_natural_width", LIBS);
-  gidLink(gtk_scrolled_window_get_vadjustment, "gtk_scrolled_window_get_vadjustment", LIBS);
-  gidLink(gtk_scrolled_window_get_vscrollbar, "gtk_scrolled_window_get_vscrollbar", LIBS);
-  gidLink(gtk_scrolled_window_set_child, "gtk_scrolled_window_set_child", LIBS);
-  gidLink(gtk_scrolled_window_set_hadjustment, "gtk_scrolled_window_set_hadjustment", LIBS);
-  gidLink(gtk_scrolled_window_set_has_frame, "gtk_scrolled_window_set_has_frame", LIBS);
-  gidLink(gtk_scrolled_window_set_kinetic_scrolling, "gtk_scrolled_window_set_kinetic_scrolling", LIBS);
-  gidLink(gtk_scrolled_window_set_max_content_height, "gtk_scrolled_window_set_max_content_height", LIBS);
-  gidLink(gtk_scrolled_window_set_max_content_width, "gtk_scrolled_window_set_max_content_width", LIBS);
-  gidLink(gtk_scrolled_window_set_min_content_height, "gtk_scrolled_window_set_min_content_height", LIBS);
-  gidLink(gtk_scrolled_window_set_min_content_width, "gtk_scrolled_window_set_min_content_width", LIBS);
-  gidLink(gtk_scrolled_window_set_overlay_scrolling, "gtk_scrolled_window_set_overlay_scrolling", LIBS);
-  gidLink(gtk_scrolled_window_set_placement, "gtk_scrolled_window_set_placement", LIBS);
-  gidLink(gtk_scrolled_window_set_policy, "gtk_scrolled_window_set_policy", LIBS);
-  gidLink(gtk_scrolled_window_set_propagate_natural_height, "gtk_scrolled_window_set_propagate_natural_height", LIBS);
-  gidLink(gtk_scrolled_window_set_propagate_natural_width, "gtk_scrolled_window_set_propagate_natural_width", LIBS);
-  gidLink(gtk_scrolled_window_set_vadjustment, "gtk_scrolled_window_set_vadjustment", LIBS);
-  gidLink(gtk_scrolled_window_unset_placement, "gtk_scrolled_window_unset_placement", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_type, "gtk_scrolled_window_get_type", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_new, "gtk_scrolled_window_new", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_child, "gtk_scrolled_window_get_child", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_hadjustment, "gtk_scrolled_window_get_hadjustment", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_has_frame, "gtk_scrolled_window_get_has_frame", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_hscrollbar, "gtk_scrolled_window_get_hscrollbar", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_kinetic_scrolling, "gtk_scrolled_window_get_kinetic_scrolling", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_max_content_height, "gtk_scrolled_window_get_max_content_height", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_max_content_width, "gtk_scrolled_window_get_max_content_width", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_min_content_height, "gtk_scrolled_window_get_min_content_height", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_min_content_width, "gtk_scrolled_window_get_min_content_width", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_overlay_scrolling, "gtk_scrolled_window_get_overlay_scrolling", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_placement, "gtk_scrolled_window_get_placement", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_policy, "gtk_scrolled_window_get_policy", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_propagate_natural_height, "gtk_scrolled_window_get_propagate_natural_height", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_propagate_natural_width, "gtk_scrolled_window_get_propagate_natural_width", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_vadjustment, "gtk_scrolled_window_get_vadjustment", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_get_vscrollbar, "gtk_scrolled_window_get_vscrollbar", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_child, "gtk_scrolled_window_set_child", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_hadjustment, "gtk_scrolled_window_set_hadjustment", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_has_frame, "gtk_scrolled_window_set_has_frame", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_kinetic_scrolling, "gtk_scrolled_window_set_kinetic_scrolling", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_max_content_height, "gtk_scrolled_window_set_max_content_height", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_max_content_width, "gtk_scrolled_window_set_max_content_width", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_min_content_height, "gtk_scrolled_window_set_min_content_height", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_min_content_width, "gtk_scrolled_window_set_min_content_width", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_overlay_scrolling, "gtk_scrolled_window_set_overlay_scrolling", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_placement, "gtk_scrolled_window_set_placement", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_policy, "gtk_scrolled_window_set_policy", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_propagate_natural_height, "gtk_scrolled_window_set_propagate_natural_height", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_propagate_natural_width, "gtk_scrolled_window_set_propagate_natural_width", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_set_vadjustment, "gtk_scrolled_window_set_vadjustment", LIBS);
+  gidLink(cast(void**)&gtk_scrolled_window_unset_placement, "gtk_scrolled_window_unset_placement", LIBS);
 
   // SearchBar
-  gidLink(gtk_search_bar_get_type, "gtk_search_bar_get_type", LIBS);
-  gidLink(gtk_search_bar_new, "gtk_search_bar_new", LIBS);
-  gidLink(gtk_search_bar_connect_entry, "gtk_search_bar_connect_entry", LIBS);
-  gidLink(gtk_search_bar_get_child, "gtk_search_bar_get_child", LIBS);
-  gidLink(gtk_search_bar_get_key_capture_widget, "gtk_search_bar_get_key_capture_widget", LIBS);
-  gidLink(gtk_search_bar_get_search_mode, "gtk_search_bar_get_search_mode", LIBS);
-  gidLink(gtk_search_bar_get_show_close_button, "gtk_search_bar_get_show_close_button", LIBS);
-  gidLink(gtk_search_bar_set_child, "gtk_search_bar_set_child", LIBS);
-  gidLink(gtk_search_bar_set_key_capture_widget, "gtk_search_bar_set_key_capture_widget", LIBS);
-  gidLink(gtk_search_bar_set_search_mode, "gtk_search_bar_set_search_mode", LIBS);
-  gidLink(gtk_search_bar_set_show_close_button, "gtk_search_bar_set_show_close_button", LIBS);
+  gidLink(cast(void**)&gtk_search_bar_get_type, "gtk_search_bar_get_type", LIBS);
+  gidLink(cast(void**)&gtk_search_bar_new, "gtk_search_bar_new", LIBS);
+  gidLink(cast(void**)&gtk_search_bar_connect_entry, "gtk_search_bar_connect_entry", LIBS);
+  gidLink(cast(void**)&gtk_search_bar_get_child, "gtk_search_bar_get_child", LIBS);
+  gidLink(cast(void**)&gtk_search_bar_get_key_capture_widget, "gtk_search_bar_get_key_capture_widget", LIBS);
+  gidLink(cast(void**)&gtk_search_bar_get_search_mode, "gtk_search_bar_get_search_mode", LIBS);
+  gidLink(cast(void**)&gtk_search_bar_get_show_close_button, "gtk_search_bar_get_show_close_button", LIBS);
+  gidLink(cast(void**)&gtk_search_bar_set_child, "gtk_search_bar_set_child", LIBS);
+  gidLink(cast(void**)&gtk_search_bar_set_key_capture_widget, "gtk_search_bar_set_key_capture_widget", LIBS);
+  gidLink(cast(void**)&gtk_search_bar_set_search_mode, "gtk_search_bar_set_search_mode", LIBS);
+  gidLink(cast(void**)&gtk_search_bar_set_show_close_button, "gtk_search_bar_set_show_close_button", LIBS);
 
   // SearchEntry
-  gidLink(gtk_search_entry_get_type, "gtk_search_entry_get_type", LIBS);
-  gidLink(gtk_search_entry_new, "gtk_search_entry_new", LIBS);
-  gidLink(gtk_search_entry_get_input_hints, "gtk_search_entry_get_input_hints", LIBS);
-  gidLink(gtk_search_entry_get_input_purpose, "gtk_search_entry_get_input_purpose", LIBS);
-  gidLink(gtk_search_entry_get_key_capture_widget, "gtk_search_entry_get_key_capture_widget", LIBS);
-  gidLink(gtk_search_entry_get_placeholder_text, "gtk_search_entry_get_placeholder_text", LIBS);
-  gidLink(gtk_search_entry_get_search_delay, "gtk_search_entry_get_search_delay", LIBS);
-  gidLink(gtk_search_entry_set_input_hints, "gtk_search_entry_set_input_hints", LIBS);
-  gidLink(gtk_search_entry_set_input_purpose, "gtk_search_entry_set_input_purpose", LIBS);
-  gidLink(gtk_search_entry_set_key_capture_widget, "gtk_search_entry_set_key_capture_widget", LIBS);
-  gidLink(gtk_search_entry_set_placeholder_text, "gtk_search_entry_set_placeholder_text", LIBS);
-  gidLink(gtk_search_entry_set_search_delay, "gtk_search_entry_set_search_delay", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_get_type, "gtk_search_entry_get_type", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_new, "gtk_search_entry_new", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_get_input_hints, "gtk_search_entry_get_input_hints", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_get_input_purpose, "gtk_search_entry_get_input_purpose", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_get_key_capture_widget, "gtk_search_entry_get_key_capture_widget", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_get_placeholder_text, "gtk_search_entry_get_placeholder_text", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_get_search_delay, "gtk_search_entry_get_search_delay", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_set_input_hints, "gtk_search_entry_set_input_hints", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_set_input_purpose, "gtk_search_entry_set_input_purpose", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_set_key_capture_widget, "gtk_search_entry_set_key_capture_widget", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_set_placeholder_text, "gtk_search_entry_set_placeholder_text", LIBS);
+  gidLink(cast(void**)&gtk_search_entry_set_search_delay, "gtk_search_entry_set_search_delay", LIBS);
 
   // SectionModel
-  gidLink(gtk_section_model_get_type, "gtk_section_model_get_type", LIBS);
-  gidLink(gtk_section_model_get_section, "gtk_section_model_get_section", LIBS);
-  gidLink(gtk_section_model_sections_changed, "gtk_section_model_sections_changed", LIBS);
+  gidLink(cast(void**)&gtk_section_model_get_type, "gtk_section_model_get_type", LIBS);
+  gidLink(cast(void**)&gtk_section_model_get_section, "gtk_section_model_get_section", LIBS);
+  gidLink(cast(void**)&gtk_section_model_sections_changed, "gtk_section_model_sections_changed", LIBS);
 
   // SelectionFilterModel
-  gidLink(gtk_selection_filter_model_get_type, "gtk_selection_filter_model_get_type", LIBS);
-  gidLink(gtk_selection_filter_model_new, "gtk_selection_filter_model_new", LIBS);
-  gidLink(gtk_selection_filter_model_get_model, "gtk_selection_filter_model_get_model", LIBS);
-  gidLink(gtk_selection_filter_model_set_model, "gtk_selection_filter_model_set_model", LIBS);
+  gidLink(cast(void**)&gtk_selection_filter_model_get_type, "gtk_selection_filter_model_get_type", LIBS);
+  gidLink(cast(void**)&gtk_selection_filter_model_new, "gtk_selection_filter_model_new", LIBS);
+  gidLink(cast(void**)&gtk_selection_filter_model_get_model, "gtk_selection_filter_model_get_model", LIBS);
+  gidLink(cast(void**)&gtk_selection_filter_model_set_model, "gtk_selection_filter_model_set_model", LIBS);
 
   // SelectionModel
-  gidLink(gtk_selection_model_get_type, "gtk_selection_model_get_type", LIBS);
-  gidLink(gtk_selection_model_get_selection, "gtk_selection_model_get_selection", LIBS);
-  gidLink(gtk_selection_model_get_selection_in_range, "gtk_selection_model_get_selection_in_range", LIBS);
-  gidLink(gtk_selection_model_is_selected, "gtk_selection_model_is_selected", LIBS);
-  gidLink(gtk_selection_model_select_all, "gtk_selection_model_select_all", LIBS);
-  gidLink(gtk_selection_model_select_item, "gtk_selection_model_select_item", LIBS);
-  gidLink(gtk_selection_model_select_range, "gtk_selection_model_select_range", LIBS);
-  gidLink(gtk_selection_model_selection_changed, "gtk_selection_model_selection_changed", LIBS);
-  gidLink(gtk_selection_model_set_selection, "gtk_selection_model_set_selection", LIBS);
-  gidLink(gtk_selection_model_unselect_all, "gtk_selection_model_unselect_all", LIBS);
-  gidLink(gtk_selection_model_unselect_item, "gtk_selection_model_unselect_item", LIBS);
-  gidLink(gtk_selection_model_unselect_range, "gtk_selection_model_unselect_range", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_get_type, "gtk_selection_model_get_type", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_get_selection, "gtk_selection_model_get_selection", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_get_selection_in_range, "gtk_selection_model_get_selection_in_range", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_is_selected, "gtk_selection_model_is_selected", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_select_all, "gtk_selection_model_select_all", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_select_item, "gtk_selection_model_select_item", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_select_range, "gtk_selection_model_select_range", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_selection_changed, "gtk_selection_model_selection_changed", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_set_selection, "gtk_selection_model_set_selection", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_unselect_all, "gtk_selection_model_unselect_all", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_unselect_item, "gtk_selection_model_unselect_item", LIBS);
+  gidLink(cast(void**)&gtk_selection_model_unselect_range, "gtk_selection_model_unselect_range", LIBS);
 
   // Separator
-  gidLink(gtk_separator_get_type, "gtk_separator_get_type", LIBS);
-  gidLink(gtk_separator_new, "gtk_separator_new", LIBS);
+  gidLink(cast(void**)&gtk_separator_get_type, "gtk_separator_get_type", LIBS);
+  gidLink(cast(void**)&gtk_separator_new, "gtk_separator_new", LIBS);
 
   // Settings
-  gidLink(gtk_settings_get_type, "gtk_settings_get_type", LIBS);
-  gidLink(gtk_settings_get_default, "gtk_settings_get_default", LIBS);
-  gidLink(gtk_settings_get_for_display, "gtk_settings_get_for_display", LIBS);
-  gidLink(gtk_settings_reset_property, "gtk_settings_reset_property", LIBS);
+  gidLink(cast(void**)&gtk_settings_get_type, "gtk_settings_get_type", LIBS);
+  gidLink(cast(void**)&gtk_settings_get_default, "gtk_settings_get_default", LIBS);
+  gidLink(cast(void**)&gtk_settings_get_for_display, "gtk_settings_get_for_display", LIBS);
+  gidLink(cast(void**)&gtk_settings_reset_property, "gtk_settings_reset_property", LIBS);
 
   // Shortcut
-  gidLink(gtk_shortcut_get_type, "gtk_shortcut_get_type", LIBS);
-  gidLink(gtk_shortcut_new, "gtk_shortcut_new", LIBS);
-  gidLink(gtk_shortcut_new_with_arguments, "gtk_shortcut_new_with_arguments", LIBS);
-  gidLink(gtk_shortcut_get_action, "gtk_shortcut_get_action", LIBS);
-  gidLink(gtk_shortcut_get_arguments, "gtk_shortcut_get_arguments", LIBS);
-  gidLink(gtk_shortcut_get_trigger, "gtk_shortcut_get_trigger", LIBS);
-  gidLink(gtk_shortcut_set_action, "gtk_shortcut_set_action", LIBS);
-  gidLink(gtk_shortcut_set_arguments, "gtk_shortcut_set_arguments", LIBS);
-  gidLink(gtk_shortcut_set_trigger, "gtk_shortcut_set_trigger", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_get_type, "gtk_shortcut_get_type", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_new, "gtk_shortcut_new", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_new_with_arguments, "gtk_shortcut_new_with_arguments", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_get_action, "gtk_shortcut_get_action", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_get_arguments, "gtk_shortcut_get_arguments", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_get_trigger, "gtk_shortcut_get_trigger", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_set_action, "gtk_shortcut_set_action", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_set_arguments, "gtk_shortcut_set_arguments", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_set_trigger, "gtk_shortcut_set_trigger", LIBS);
 
   // ShortcutAction
-  gidLink(gtk_shortcut_action_get_type, "gtk_shortcut_action_get_type", LIBS);
-  gidLink(gtk_shortcut_action_parse_string, "gtk_shortcut_action_parse_string", LIBS);
-  gidLink(gtk_shortcut_action_activate, "gtk_shortcut_action_activate", LIBS);
-  gidLink(gtk_shortcut_action_print, "gtk_shortcut_action_print", LIBS);
-  gidLink(gtk_shortcut_action_to_string, "gtk_shortcut_action_to_string", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_action_get_type, "gtk_shortcut_action_get_type", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_action_parse_string, "gtk_shortcut_action_parse_string", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_action_activate, "gtk_shortcut_action_activate", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_action_print, "gtk_shortcut_action_print", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_action_to_string, "gtk_shortcut_action_to_string", LIBS);
 
   // ShortcutController
-  gidLink(gtk_shortcut_controller_get_type, "gtk_shortcut_controller_get_type", LIBS);
-  gidLink(gtk_shortcut_controller_new, "gtk_shortcut_controller_new", LIBS);
-  gidLink(gtk_shortcut_controller_new_for_model, "gtk_shortcut_controller_new_for_model", LIBS);
-  gidLink(gtk_shortcut_controller_add_shortcut, "gtk_shortcut_controller_add_shortcut", LIBS);
-  gidLink(gtk_shortcut_controller_get_mnemonics_modifiers, "gtk_shortcut_controller_get_mnemonics_modifiers", LIBS);
-  gidLink(gtk_shortcut_controller_get_scope, "gtk_shortcut_controller_get_scope", LIBS);
-  gidLink(gtk_shortcut_controller_remove_shortcut, "gtk_shortcut_controller_remove_shortcut", LIBS);
-  gidLink(gtk_shortcut_controller_set_mnemonics_modifiers, "gtk_shortcut_controller_set_mnemonics_modifiers", LIBS);
-  gidLink(gtk_shortcut_controller_set_scope, "gtk_shortcut_controller_set_scope", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_controller_get_type, "gtk_shortcut_controller_get_type", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_controller_new, "gtk_shortcut_controller_new", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_controller_new_for_model, "gtk_shortcut_controller_new_for_model", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_controller_add_shortcut, "gtk_shortcut_controller_add_shortcut", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_controller_get_mnemonics_modifiers, "gtk_shortcut_controller_get_mnemonics_modifiers", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_controller_get_scope, "gtk_shortcut_controller_get_scope", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_controller_remove_shortcut, "gtk_shortcut_controller_remove_shortcut", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_controller_set_mnemonics_modifiers, "gtk_shortcut_controller_set_mnemonics_modifiers", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_controller_set_scope, "gtk_shortcut_controller_set_scope", LIBS);
 
   // ShortcutLabel
-  gidLink(gtk_shortcut_label_get_type, "gtk_shortcut_label_get_type", LIBS);
-  gidLink(gtk_shortcut_label_new, "gtk_shortcut_label_new", LIBS);
-  gidLink(gtk_shortcut_label_get_accelerator, "gtk_shortcut_label_get_accelerator", LIBS);
-  gidLink(gtk_shortcut_label_get_disabled_text, "gtk_shortcut_label_get_disabled_text", LIBS);
-  gidLink(gtk_shortcut_label_set_accelerator, "gtk_shortcut_label_set_accelerator", LIBS);
-  gidLink(gtk_shortcut_label_set_disabled_text, "gtk_shortcut_label_set_disabled_text", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_label_get_type, "gtk_shortcut_label_get_type", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_label_new, "gtk_shortcut_label_new", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_label_get_accelerator, "gtk_shortcut_label_get_accelerator", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_label_get_disabled_text, "gtk_shortcut_label_get_disabled_text", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_label_set_accelerator, "gtk_shortcut_label_set_accelerator", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_label_set_disabled_text, "gtk_shortcut_label_set_disabled_text", LIBS);
 
   // ShortcutManager
-  gidLink(gtk_shortcut_manager_get_type, "gtk_shortcut_manager_get_type", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_manager_get_type, "gtk_shortcut_manager_get_type", LIBS);
 
   // ShortcutTrigger
-  gidLink(gtk_shortcut_trigger_get_type, "gtk_shortcut_trigger_get_type", LIBS);
-  gidLink(gtk_shortcut_trigger_parse_string, "gtk_shortcut_trigger_parse_string", LIBS);
-  gidLink(gtk_shortcut_trigger_compare, "gtk_shortcut_trigger_compare", LIBS);
-  gidLink(gtk_shortcut_trigger_equal, "gtk_shortcut_trigger_equal", LIBS);
-  gidLink(gtk_shortcut_trigger_hash, "gtk_shortcut_trigger_hash", LIBS);
-  gidLink(gtk_shortcut_trigger_print, "gtk_shortcut_trigger_print", LIBS);
-  gidLink(gtk_shortcut_trigger_print_label, "gtk_shortcut_trigger_print_label", LIBS);
-  gidLink(gtk_shortcut_trigger_to_label, "gtk_shortcut_trigger_to_label", LIBS);
-  gidLink(gtk_shortcut_trigger_to_string, "gtk_shortcut_trigger_to_string", LIBS);
-  gidLink(gtk_shortcut_trigger_trigger, "gtk_shortcut_trigger_trigger", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_trigger_get_type, "gtk_shortcut_trigger_get_type", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_trigger_parse_string, "gtk_shortcut_trigger_parse_string", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_trigger_compare, "gtk_shortcut_trigger_compare", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_trigger_equal, "gtk_shortcut_trigger_equal", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_trigger_hash, "gtk_shortcut_trigger_hash", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_trigger_print, "gtk_shortcut_trigger_print", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_trigger_print_label, "gtk_shortcut_trigger_print_label", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_trigger_to_label, "gtk_shortcut_trigger_to_label", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_trigger_to_string, "gtk_shortcut_trigger_to_string", LIBS);
+  gidLink(cast(void**)&gtk_shortcut_trigger_trigger, "gtk_shortcut_trigger_trigger", LIBS);
 
   // ShortcutsGroup
-  gidLink(gtk_shortcuts_group_get_type, "gtk_shortcuts_group_get_type", LIBS);
-  gidLink(gtk_shortcuts_group_add_shortcut, "gtk_shortcuts_group_add_shortcut", LIBS);
+  gidLink(cast(void**)&gtk_shortcuts_group_get_type, "gtk_shortcuts_group_get_type", LIBS);
+  gidLink(cast(void**)&gtk_shortcuts_group_add_shortcut, "gtk_shortcuts_group_add_shortcut", LIBS);
 
   // ShortcutsSection
-  gidLink(gtk_shortcuts_section_get_type, "gtk_shortcuts_section_get_type", LIBS);
-  gidLink(gtk_shortcuts_section_add_group, "gtk_shortcuts_section_add_group", LIBS);
+  gidLink(cast(void**)&gtk_shortcuts_section_get_type, "gtk_shortcuts_section_get_type", LIBS);
+  gidLink(cast(void**)&gtk_shortcuts_section_add_group, "gtk_shortcuts_section_add_group", LIBS);
 
   // ShortcutsShortcut
-  gidLink(gtk_shortcuts_shortcut_get_type, "gtk_shortcuts_shortcut_get_type", LIBS);
+  gidLink(cast(void**)&gtk_shortcuts_shortcut_get_type, "gtk_shortcuts_shortcut_get_type", LIBS);
 
   // ShortcutsWindow
-  gidLink(gtk_shortcuts_window_get_type, "gtk_shortcuts_window_get_type", LIBS);
-  gidLink(gtk_shortcuts_window_add_section, "gtk_shortcuts_window_add_section", LIBS);
+  gidLink(cast(void**)&gtk_shortcuts_window_get_type, "gtk_shortcuts_window_get_type", LIBS);
+  gidLink(cast(void**)&gtk_shortcuts_window_add_section, "gtk_shortcuts_window_add_section", LIBS);
 
   // SignalAction
-  gidLink(gtk_signal_action_get_type, "gtk_signal_action_get_type", LIBS);
-  gidLink(gtk_signal_action_new, "gtk_signal_action_new", LIBS);
-  gidLink(gtk_signal_action_get_signal_name, "gtk_signal_action_get_signal_name", LIBS);
+  gidLink(cast(void**)&gtk_signal_action_get_type, "gtk_signal_action_get_type", LIBS);
+  gidLink(cast(void**)&gtk_signal_action_new, "gtk_signal_action_new", LIBS);
+  gidLink(cast(void**)&gtk_signal_action_get_signal_name, "gtk_signal_action_get_signal_name", LIBS);
 
   // SignalListItemFactory
-  gidLink(gtk_signal_list_item_factory_get_type, "gtk_signal_list_item_factory_get_type", LIBS);
-  gidLink(gtk_signal_list_item_factory_new, "gtk_signal_list_item_factory_new", LIBS);
+  gidLink(cast(void**)&gtk_signal_list_item_factory_get_type, "gtk_signal_list_item_factory_get_type", LIBS);
+  gidLink(cast(void**)&gtk_signal_list_item_factory_new, "gtk_signal_list_item_factory_new", LIBS);
 
   // SingleSelection
-  gidLink(gtk_single_selection_get_type, "gtk_single_selection_get_type", LIBS);
-  gidLink(gtk_single_selection_new, "gtk_single_selection_new", LIBS);
-  gidLink(gtk_single_selection_get_autoselect, "gtk_single_selection_get_autoselect", LIBS);
-  gidLink(gtk_single_selection_get_can_unselect, "gtk_single_selection_get_can_unselect", LIBS);
-  gidLink(gtk_single_selection_get_model, "gtk_single_selection_get_model", LIBS);
-  gidLink(gtk_single_selection_get_selected, "gtk_single_selection_get_selected", LIBS);
-  gidLink(gtk_single_selection_get_selected_item, "gtk_single_selection_get_selected_item", LIBS);
-  gidLink(gtk_single_selection_set_autoselect, "gtk_single_selection_set_autoselect", LIBS);
-  gidLink(gtk_single_selection_set_can_unselect, "gtk_single_selection_set_can_unselect", LIBS);
-  gidLink(gtk_single_selection_set_model, "gtk_single_selection_set_model", LIBS);
-  gidLink(gtk_single_selection_set_selected, "gtk_single_selection_set_selected", LIBS);
+  gidLink(cast(void**)&gtk_single_selection_get_type, "gtk_single_selection_get_type", LIBS);
+  gidLink(cast(void**)&gtk_single_selection_new, "gtk_single_selection_new", LIBS);
+  gidLink(cast(void**)&gtk_single_selection_get_autoselect, "gtk_single_selection_get_autoselect", LIBS);
+  gidLink(cast(void**)&gtk_single_selection_get_can_unselect, "gtk_single_selection_get_can_unselect", LIBS);
+  gidLink(cast(void**)&gtk_single_selection_get_model, "gtk_single_selection_get_model", LIBS);
+  gidLink(cast(void**)&gtk_single_selection_get_selected, "gtk_single_selection_get_selected", LIBS);
+  gidLink(cast(void**)&gtk_single_selection_get_selected_item, "gtk_single_selection_get_selected_item", LIBS);
+  gidLink(cast(void**)&gtk_single_selection_set_autoselect, "gtk_single_selection_set_autoselect", LIBS);
+  gidLink(cast(void**)&gtk_single_selection_set_can_unselect, "gtk_single_selection_set_can_unselect", LIBS);
+  gidLink(cast(void**)&gtk_single_selection_set_model, "gtk_single_selection_set_model", LIBS);
+  gidLink(cast(void**)&gtk_single_selection_set_selected, "gtk_single_selection_set_selected", LIBS);
 
   // SizeGroup
-  gidLink(gtk_size_group_get_type, "gtk_size_group_get_type", LIBS);
-  gidLink(gtk_size_group_new, "gtk_size_group_new", LIBS);
-  gidLink(gtk_size_group_add_widget, "gtk_size_group_add_widget", LIBS);
-  gidLink(gtk_size_group_get_mode, "gtk_size_group_get_mode", LIBS);
-  gidLink(gtk_size_group_get_widgets, "gtk_size_group_get_widgets", LIBS);
-  gidLink(gtk_size_group_remove_widget, "gtk_size_group_remove_widget", LIBS);
-  gidLink(gtk_size_group_set_mode, "gtk_size_group_set_mode", LIBS);
+  gidLink(cast(void**)&gtk_size_group_get_type, "gtk_size_group_get_type", LIBS);
+  gidLink(cast(void**)&gtk_size_group_new, "gtk_size_group_new", LIBS);
+  gidLink(cast(void**)&gtk_size_group_add_widget, "gtk_size_group_add_widget", LIBS);
+  gidLink(cast(void**)&gtk_size_group_get_mode, "gtk_size_group_get_mode", LIBS);
+  gidLink(cast(void**)&gtk_size_group_get_widgets, "gtk_size_group_get_widgets", LIBS);
+  gidLink(cast(void**)&gtk_size_group_remove_widget, "gtk_size_group_remove_widget", LIBS);
+  gidLink(cast(void**)&gtk_size_group_set_mode, "gtk_size_group_set_mode", LIBS);
 
   // SliceListModel
-  gidLink(gtk_slice_list_model_get_type, "gtk_slice_list_model_get_type", LIBS);
-  gidLink(gtk_slice_list_model_new, "gtk_slice_list_model_new", LIBS);
-  gidLink(gtk_slice_list_model_get_model, "gtk_slice_list_model_get_model", LIBS);
-  gidLink(gtk_slice_list_model_get_offset, "gtk_slice_list_model_get_offset", LIBS);
-  gidLink(gtk_slice_list_model_get_size, "gtk_slice_list_model_get_size", LIBS);
-  gidLink(gtk_slice_list_model_set_model, "gtk_slice_list_model_set_model", LIBS);
-  gidLink(gtk_slice_list_model_set_offset, "gtk_slice_list_model_set_offset", LIBS);
-  gidLink(gtk_slice_list_model_set_size, "gtk_slice_list_model_set_size", LIBS);
+  gidLink(cast(void**)&gtk_slice_list_model_get_type, "gtk_slice_list_model_get_type", LIBS);
+  gidLink(cast(void**)&gtk_slice_list_model_new, "gtk_slice_list_model_new", LIBS);
+  gidLink(cast(void**)&gtk_slice_list_model_get_model, "gtk_slice_list_model_get_model", LIBS);
+  gidLink(cast(void**)&gtk_slice_list_model_get_offset, "gtk_slice_list_model_get_offset", LIBS);
+  gidLink(cast(void**)&gtk_slice_list_model_get_size, "gtk_slice_list_model_get_size", LIBS);
+  gidLink(cast(void**)&gtk_slice_list_model_set_model, "gtk_slice_list_model_set_model", LIBS);
+  gidLink(cast(void**)&gtk_slice_list_model_set_offset, "gtk_slice_list_model_set_offset", LIBS);
+  gidLink(cast(void**)&gtk_slice_list_model_set_size, "gtk_slice_list_model_set_size", LIBS);
 
   // Snapshot
-  gidLink(gtk_snapshot_get_type, "gtk_snapshot_get_type", LIBS);
-  gidLink(gtk_snapshot_new, "gtk_snapshot_new", LIBS);
-  gidLink(gtk_snapshot_append_border, "gtk_snapshot_append_border", LIBS);
-  gidLink(gtk_snapshot_append_cairo, "gtk_snapshot_append_cairo", LIBS);
-  gidLink(gtk_snapshot_append_color, "gtk_snapshot_append_color", LIBS);
-  gidLink(gtk_snapshot_append_conic_gradient, "gtk_snapshot_append_conic_gradient", LIBS);
-  gidLink(gtk_snapshot_append_fill, "gtk_snapshot_append_fill", LIBS);
-  gidLink(gtk_snapshot_append_inset_shadow, "gtk_snapshot_append_inset_shadow", LIBS);
-  gidLink(gtk_snapshot_append_layout, "gtk_snapshot_append_layout", LIBS);
-  gidLink(gtk_snapshot_append_linear_gradient, "gtk_snapshot_append_linear_gradient", LIBS);
-  gidLink(gtk_snapshot_append_node, "gtk_snapshot_append_node", LIBS);
-  gidLink(gtk_snapshot_append_outset_shadow, "gtk_snapshot_append_outset_shadow", LIBS);
-  gidLink(gtk_snapshot_append_radial_gradient, "gtk_snapshot_append_radial_gradient", LIBS);
-  gidLink(gtk_snapshot_append_repeating_linear_gradient, "gtk_snapshot_append_repeating_linear_gradient", LIBS);
-  gidLink(gtk_snapshot_append_repeating_radial_gradient, "gtk_snapshot_append_repeating_radial_gradient", LIBS);
-  gidLink(gtk_snapshot_append_scaled_texture, "gtk_snapshot_append_scaled_texture", LIBS);
-  gidLink(gtk_snapshot_append_stroke, "gtk_snapshot_append_stroke", LIBS);
-  gidLink(gtk_snapshot_append_texture, "gtk_snapshot_append_texture", LIBS);
-  gidLink(gtk_snapshot_free_to_node, "gtk_snapshot_free_to_node", LIBS);
-  gidLink(gtk_snapshot_free_to_paintable, "gtk_snapshot_free_to_paintable", LIBS);
-  gidLink(gtk_snapshot_gl_shader_pop_texture, "gtk_snapshot_gl_shader_pop_texture", LIBS);
-  gidLink(gtk_snapshot_perspective, "gtk_snapshot_perspective", LIBS);
-  gidLink(gtk_snapshot_pop, "gtk_snapshot_pop", LIBS);
-  gidLink(gtk_snapshot_push_blend, "gtk_snapshot_push_blend", LIBS);
-  gidLink(gtk_snapshot_push_blur, "gtk_snapshot_push_blur", LIBS);
-  gidLink(gtk_snapshot_push_clip, "gtk_snapshot_push_clip", LIBS);
-  gidLink(gtk_snapshot_push_color_matrix, "gtk_snapshot_push_color_matrix", LIBS);
-  gidLink(gtk_snapshot_push_cross_fade, "gtk_snapshot_push_cross_fade", LIBS);
-  gidLink(gtk_snapshot_push_debug, "gtk_snapshot_push_debug", LIBS);
-  gidLink(gtk_snapshot_push_fill, "gtk_snapshot_push_fill", LIBS);
-  gidLink(gtk_snapshot_push_gl_shader, "gtk_snapshot_push_gl_shader", LIBS);
-  gidLink(gtk_snapshot_push_mask, "gtk_snapshot_push_mask", LIBS);
-  gidLink(gtk_snapshot_push_opacity, "gtk_snapshot_push_opacity", LIBS);
-  gidLink(gtk_snapshot_push_repeat, "gtk_snapshot_push_repeat", LIBS);
-  gidLink(gtk_snapshot_push_rounded_clip, "gtk_snapshot_push_rounded_clip", LIBS);
-  gidLink(gtk_snapshot_push_shadow, "gtk_snapshot_push_shadow", LIBS);
-  gidLink(gtk_snapshot_push_stroke, "gtk_snapshot_push_stroke", LIBS);
-  gidLink(gtk_snapshot_render_background, "gtk_snapshot_render_background", LIBS);
-  gidLink(gtk_snapshot_render_focus, "gtk_snapshot_render_focus", LIBS);
-  gidLink(gtk_snapshot_render_frame, "gtk_snapshot_render_frame", LIBS);
-  gidLink(gtk_snapshot_render_insertion_cursor, "gtk_snapshot_render_insertion_cursor", LIBS);
-  gidLink(gtk_snapshot_render_layout, "gtk_snapshot_render_layout", LIBS);
-  gidLink(gtk_snapshot_restore, "gtk_snapshot_restore", LIBS);
-  gidLink(gtk_snapshot_rotate, "gtk_snapshot_rotate", LIBS);
-  gidLink(gtk_snapshot_rotate_3d, "gtk_snapshot_rotate_3d", LIBS);
-  gidLink(gtk_snapshot_save, "gtk_snapshot_save", LIBS);
-  gidLink(gtk_snapshot_scale, "gtk_snapshot_scale", LIBS);
-  gidLink(gtk_snapshot_scale_3d, "gtk_snapshot_scale_3d", LIBS);
-  gidLink(gtk_snapshot_to_node, "gtk_snapshot_to_node", LIBS);
-  gidLink(gtk_snapshot_to_paintable, "gtk_snapshot_to_paintable", LIBS);
-  gidLink(gtk_snapshot_transform, "gtk_snapshot_transform", LIBS);
-  gidLink(gtk_snapshot_transform_matrix, "gtk_snapshot_transform_matrix", LIBS);
-  gidLink(gtk_snapshot_translate, "gtk_snapshot_translate", LIBS);
-  gidLink(gtk_snapshot_translate_3d, "gtk_snapshot_translate_3d", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_get_type, "gtk_snapshot_get_type", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_new, "gtk_snapshot_new", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_border, "gtk_snapshot_append_border", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_cairo, "gtk_snapshot_append_cairo", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_color, "gtk_snapshot_append_color", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_conic_gradient, "gtk_snapshot_append_conic_gradient", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_fill, "gtk_snapshot_append_fill", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_inset_shadow, "gtk_snapshot_append_inset_shadow", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_layout, "gtk_snapshot_append_layout", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_linear_gradient, "gtk_snapshot_append_linear_gradient", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_node, "gtk_snapshot_append_node", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_outset_shadow, "gtk_snapshot_append_outset_shadow", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_radial_gradient, "gtk_snapshot_append_radial_gradient", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_repeating_linear_gradient, "gtk_snapshot_append_repeating_linear_gradient", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_repeating_radial_gradient, "gtk_snapshot_append_repeating_radial_gradient", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_scaled_texture, "gtk_snapshot_append_scaled_texture", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_stroke, "gtk_snapshot_append_stroke", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_append_texture, "gtk_snapshot_append_texture", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_free_to_node, "gtk_snapshot_free_to_node", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_free_to_paintable, "gtk_snapshot_free_to_paintable", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_gl_shader_pop_texture, "gtk_snapshot_gl_shader_pop_texture", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_perspective, "gtk_snapshot_perspective", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_pop, "gtk_snapshot_pop", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_blend, "gtk_snapshot_push_blend", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_blur, "gtk_snapshot_push_blur", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_clip, "gtk_snapshot_push_clip", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_color_matrix, "gtk_snapshot_push_color_matrix", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_cross_fade, "gtk_snapshot_push_cross_fade", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_debug, "gtk_snapshot_push_debug", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_fill, "gtk_snapshot_push_fill", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_gl_shader, "gtk_snapshot_push_gl_shader", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_mask, "gtk_snapshot_push_mask", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_opacity, "gtk_snapshot_push_opacity", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_repeat, "gtk_snapshot_push_repeat", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_rounded_clip, "gtk_snapshot_push_rounded_clip", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_shadow, "gtk_snapshot_push_shadow", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_push_stroke, "gtk_snapshot_push_stroke", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_render_background, "gtk_snapshot_render_background", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_render_focus, "gtk_snapshot_render_focus", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_render_frame, "gtk_snapshot_render_frame", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_render_insertion_cursor, "gtk_snapshot_render_insertion_cursor", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_render_layout, "gtk_snapshot_render_layout", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_restore, "gtk_snapshot_restore", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_rotate, "gtk_snapshot_rotate", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_rotate_3d, "gtk_snapshot_rotate_3d", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_save, "gtk_snapshot_save", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_scale, "gtk_snapshot_scale", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_scale_3d, "gtk_snapshot_scale_3d", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_to_node, "gtk_snapshot_to_node", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_to_paintable, "gtk_snapshot_to_paintable", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_transform, "gtk_snapshot_transform", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_transform_matrix, "gtk_snapshot_transform_matrix", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_translate, "gtk_snapshot_translate", LIBS);
+  gidLink(cast(void**)&gtk_snapshot_translate_3d, "gtk_snapshot_translate_3d", LIBS);
 
   // SortListModel
-  gidLink(gtk_sort_list_model_get_type, "gtk_sort_list_model_get_type", LIBS);
-  gidLink(gtk_sort_list_model_new, "gtk_sort_list_model_new", LIBS);
-  gidLink(gtk_sort_list_model_get_incremental, "gtk_sort_list_model_get_incremental", LIBS);
-  gidLink(gtk_sort_list_model_get_model, "gtk_sort_list_model_get_model", LIBS);
-  gidLink(gtk_sort_list_model_get_pending, "gtk_sort_list_model_get_pending", LIBS);
-  gidLink(gtk_sort_list_model_get_section_sorter, "gtk_sort_list_model_get_section_sorter", LIBS);
-  gidLink(gtk_sort_list_model_get_sorter, "gtk_sort_list_model_get_sorter", LIBS);
-  gidLink(gtk_sort_list_model_set_incremental, "gtk_sort_list_model_set_incremental", LIBS);
-  gidLink(gtk_sort_list_model_set_model, "gtk_sort_list_model_set_model", LIBS);
-  gidLink(gtk_sort_list_model_set_section_sorter, "gtk_sort_list_model_set_section_sorter", LIBS);
-  gidLink(gtk_sort_list_model_set_sorter, "gtk_sort_list_model_set_sorter", LIBS);
+  gidLink(cast(void**)&gtk_sort_list_model_get_type, "gtk_sort_list_model_get_type", LIBS);
+  gidLink(cast(void**)&gtk_sort_list_model_new, "gtk_sort_list_model_new", LIBS);
+  gidLink(cast(void**)&gtk_sort_list_model_get_incremental, "gtk_sort_list_model_get_incremental", LIBS);
+  gidLink(cast(void**)&gtk_sort_list_model_get_model, "gtk_sort_list_model_get_model", LIBS);
+  gidLink(cast(void**)&gtk_sort_list_model_get_pending, "gtk_sort_list_model_get_pending", LIBS);
+  gidLink(cast(void**)&gtk_sort_list_model_get_section_sorter, "gtk_sort_list_model_get_section_sorter", LIBS);
+  gidLink(cast(void**)&gtk_sort_list_model_get_sorter, "gtk_sort_list_model_get_sorter", LIBS);
+  gidLink(cast(void**)&gtk_sort_list_model_set_incremental, "gtk_sort_list_model_set_incremental", LIBS);
+  gidLink(cast(void**)&gtk_sort_list_model_set_model, "gtk_sort_list_model_set_model", LIBS);
+  gidLink(cast(void**)&gtk_sort_list_model_set_section_sorter, "gtk_sort_list_model_set_section_sorter", LIBS);
+  gidLink(cast(void**)&gtk_sort_list_model_set_sorter, "gtk_sort_list_model_set_sorter", LIBS);
 
   // Sorter
-  gidLink(gtk_sorter_get_type, "gtk_sorter_get_type", LIBS);
-  gidLink(gtk_sorter_changed, "gtk_sorter_changed", LIBS);
-  gidLink(gtk_sorter_compare, "gtk_sorter_compare", LIBS);
-  gidLink(gtk_sorter_get_order, "gtk_sorter_get_order", LIBS);
+  gidLink(cast(void**)&gtk_sorter_get_type, "gtk_sorter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_sorter_changed, "gtk_sorter_changed", LIBS);
+  gidLink(cast(void**)&gtk_sorter_compare, "gtk_sorter_compare", LIBS);
+  gidLink(cast(void**)&gtk_sorter_get_order, "gtk_sorter_get_order", LIBS);
 
   // SpinButton
-  gidLink(gtk_spin_button_get_type, "gtk_spin_button_get_type", LIBS);
-  gidLink(gtk_spin_button_new, "gtk_spin_button_new", LIBS);
-  gidLink(gtk_spin_button_new_with_range, "gtk_spin_button_new_with_range", LIBS);
-  gidLink(gtk_spin_button_configure, "gtk_spin_button_configure", LIBS);
-  gidLink(gtk_spin_button_get_activates_default, "gtk_spin_button_get_activates_default", LIBS);
-  gidLink(gtk_spin_button_get_adjustment, "gtk_spin_button_get_adjustment", LIBS);
-  gidLink(gtk_spin_button_get_climb_rate, "gtk_spin_button_get_climb_rate", LIBS);
-  gidLink(gtk_spin_button_get_digits, "gtk_spin_button_get_digits", LIBS);
-  gidLink(gtk_spin_button_get_increments, "gtk_spin_button_get_increments", LIBS);
-  gidLink(gtk_spin_button_get_numeric, "gtk_spin_button_get_numeric", LIBS);
-  gidLink(gtk_spin_button_get_range, "gtk_spin_button_get_range", LIBS);
-  gidLink(gtk_spin_button_get_snap_to_ticks, "gtk_spin_button_get_snap_to_ticks", LIBS);
-  gidLink(gtk_spin_button_get_update_policy, "gtk_spin_button_get_update_policy", LIBS);
-  gidLink(gtk_spin_button_get_value, "gtk_spin_button_get_value", LIBS);
-  gidLink(gtk_spin_button_get_value_as_int, "gtk_spin_button_get_value_as_int", LIBS);
-  gidLink(gtk_spin_button_get_wrap, "gtk_spin_button_get_wrap", LIBS);
-  gidLink(gtk_spin_button_set_activates_default, "gtk_spin_button_set_activates_default", LIBS);
-  gidLink(gtk_spin_button_set_adjustment, "gtk_spin_button_set_adjustment", LIBS);
-  gidLink(gtk_spin_button_set_climb_rate, "gtk_spin_button_set_climb_rate", LIBS);
-  gidLink(gtk_spin_button_set_digits, "gtk_spin_button_set_digits", LIBS);
-  gidLink(gtk_spin_button_set_increments, "gtk_spin_button_set_increments", LIBS);
-  gidLink(gtk_spin_button_set_numeric, "gtk_spin_button_set_numeric", LIBS);
-  gidLink(gtk_spin_button_set_range, "gtk_spin_button_set_range", LIBS);
-  gidLink(gtk_spin_button_set_snap_to_ticks, "gtk_spin_button_set_snap_to_ticks", LIBS);
-  gidLink(gtk_spin_button_set_update_policy, "gtk_spin_button_set_update_policy", LIBS);
-  gidLink(gtk_spin_button_set_value, "gtk_spin_button_set_value", LIBS);
-  gidLink(gtk_spin_button_set_wrap, "gtk_spin_button_set_wrap", LIBS);
-  gidLink(gtk_spin_button_spin, "gtk_spin_button_spin", LIBS);
-  gidLink(gtk_spin_button_update, "gtk_spin_button_update", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_type, "gtk_spin_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_new, "gtk_spin_button_new", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_new_with_range, "gtk_spin_button_new_with_range", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_configure, "gtk_spin_button_configure", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_activates_default, "gtk_spin_button_get_activates_default", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_adjustment, "gtk_spin_button_get_adjustment", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_climb_rate, "gtk_spin_button_get_climb_rate", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_digits, "gtk_spin_button_get_digits", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_increments, "gtk_spin_button_get_increments", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_numeric, "gtk_spin_button_get_numeric", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_range, "gtk_spin_button_get_range", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_snap_to_ticks, "gtk_spin_button_get_snap_to_ticks", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_update_policy, "gtk_spin_button_get_update_policy", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_value, "gtk_spin_button_get_value", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_value_as_int, "gtk_spin_button_get_value_as_int", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_get_wrap, "gtk_spin_button_get_wrap", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_set_activates_default, "gtk_spin_button_set_activates_default", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_set_adjustment, "gtk_spin_button_set_adjustment", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_set_climb_rate, "gtk_spin_button_set_climb_rate", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_set_digits, "gtk_spin_button_set_digits", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_set_increments, "gtk_spin_button_set_increments", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_set_numeric, "gtk_spin_button_set_numeric", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_set_range, "gtk_spin_button_set_range", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_set_snap_to_ticks, "gtk_spin_button_set_snap_to_ticks", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_set_update_policy, "gtk_spin_button_set_update_policy", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_set_value, "gtk_spin_button_set_value", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_set_wrap, "gtk_spin_button_set_wrap", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_spin, "gtk_spin_button_spin", LIBS);
+  gidLink(cast(void**)&gtk_spin_button_update, "gtk_spin_button_update", LIBS);
 
   // Spinner
-  gidLink(gtk_spinner_get_type, "gtk_spinner_get_type", LIBS);
-  gidLink(gtk_spinner_new, "gtk_spinner_new", LIBS);
-  gidLink(gtk_spinner_get_spinning, "gtk_spinner_get_spinning", LIBS);
-  gidLink(gtk_spinner_set_spinning, "gtk_spinner_set_spinning", LIBS);
-  gidLink(gtk_spinner_start, "gtk_spinner_start", LIBS);
-  gidLink(gtk_spinner_stop, "gtk_spinner_stop", LIBS);
+  gidLink(cast(void**)&gtk_spinner_get_type, "gtk_spinner_get_type", LIBS);
+  gidLink(cast(void**)&gtk_spinner_new, "gtk_spinner_new", LIBS);
+  gidLink(cast(void**)&gtk_spinner_get_spinning, "gtk_spinner_get_spinning", LIBS);
+  gidLink(cast(void**)&gtk_spinner_set_spinning, "gtk_spinner_set_spinning", LIBS);
+  gidLink(cast(void**)&gtk_spinner_start, "gtk_spinner_start", LIBS);
+  gidLink(cast(void**)&gtk_spinner_stop, "gtk_spinner_stop", LIBS);
 
   // Stack
-  gidLink(gtk_stack_get_type, "gtk_stack_get_type", LIBS);
-  gidLink(gtk_stack_new, "gtk_stack_new", LIBS);
-  gidLink(gtk_stack_add_child, "gtk_stack_add_child", LIBS);
-  gidLink(gtk_stack_add_named, "gtk_stack_add_named", LIBS);
-  gidLink(gtk_stack_add_titled, "gtk_stack_add_titled", LIBS);
-  gidLink(gtk_stack_get_child_by_name, "gtk_stack_get_child_by_name", LIBS);
-  gidLink(gtk_stack_get_hhomogeneous, "gtk_stack_get_hhomogeneous", LIBS);
-  gidLink(gtk_stack_get_interpolate_size, "gtk_stack_get_interpolate_size", LIBS);
-  gidLink(gtk_stack_get_page, "gtk_stack_get_page", LIBS);
-  gidLink(gtk_stack_get_pages, "gtk_stack_get_pages", LIBS);
-  gidLink(gtk_stack_get_transition_duration, "gtk_stack_get_transition_duration", LIBS);
-  gidLink(gtk_stack_get_transition_running, "gtk_stack_get_transition_running", LIBS);
-  gidLink(gtk_stack_get_transition_type, "gtk_stack_get_transition_type", LIBS);
-  gidLink(gtk_stack_get_vhomogeneous, "gtk_stack_get_vhomogeneous", LIBS);
-  gidLink(gtk_stack_get_visible_child, "gtk_stack_get_visible_child", LIBS);
-  gidLink(gtk_stack_get_visible_child_name, "gtk_stack_get_visible_child_name", LIBS);
-  gidLink(gtk_stack_remove, "gtk_stack_remove", LIBS);
-  gidLink(gtk_stack_set_hhomogeneous, "gtk_stack_set_hhomogeneous", LIBS);
-  gidLink(gtk_stack_set_interpolate_size, "gtk_stack_set_interpolate_size", LIBS);
-  gidLink(gtk_stack_set_transition_duration, "gtk_stack_set_transition_duration", LIBS);
-  gidLink(gtk_stack_set_transition_type, "gtk_stack_set_transition_type", LIBS);
-  gidLink(gtk_stack_set_vhomogeneous, "gtk_stack_set_vhomogeneous", LIBS);
-  gidLink(gtk_stack_set_visible_child, "gtk_stack_set_visible_child", LIBS);
-  gidLink(gtk_stack_set_visible_child_full, "gtk_stack_set_visible_child_full", LIBS);
-  gidLink(gtk_stack_set_visible_child_name, "gtk_stack_set_visible_child_name", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_type, "gtk_stack_get_type", LIBS);
+  gidLink(cast(void**)&gtk_stack_new, "gtk_stack_new", LIBS);
+  gidLink(cast(void**)&gtk_stack_add_child, "gtk_stack_add_child", LIBS);
+  gidLink(cast(void**)&gtk_stack_add_named, "gtk_stack_add_named", LIBS);
+  gidLink(cast(void**)&gtk_stack_add_titled, "gtk_stack_add_titled", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_child_by_name, "gtk_stack_get_child_by_name", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_hhomogeneous, "gtk_stack_get_hhomogeneous", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_interpolate_size, "gtk_stack_get_interpolate_size", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_page, "gtk_stack_get_page", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_pages, "gtk_stack_get_pages", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_transition_duration, "gtk_stack_get_transition_duration", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_transition_running, "gtk_stack_get_transition_running", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_transition_type, "gtk_stack_get_transition_type", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_vhomogeneous, "gtk_stack_get_vhomogeneous", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_visible_child, "gtk_stack_get_visible_child", LIBS);
+  gidLink(cast(void**)&gtk_stack_get_visible_child_name, "gtk_stack_get_visible_child_name", LIBS);
+  gidLink(cast(void**)&gtk_stack_remove, "gtk_stack_remove", LIBS);
+  gidLink(cast(void**)&gtk_stack_set_hhomogeneous, "gtk_stack_set_hhomogeneous", LIBS);
+  gidLink(cast(void**)&gtk_stack_set_interpolate_size, "gtk_stack_set_interpolate_size", LIBS);
+  gidLink(cast(void**)&gtk_stack_set_transition_duration, "gtk_stack_set_transition_duration", LIBS);
+  gidLink(cast(void**)&gtk_stack_set_transition_type, "gtk_stack_set_transition_type", LIBS);
+  gidLink(cast(void**)&gtk_stack_set_vhomogeneous, "gtk_stack_set_vhomogeneous", LIBS);
+  gidLink(cast(void**)&gtk_stack_set_visible_child, "gtk_stack_set_visible_child", LIBS);
+  gidLink(cast(void**)&gtk_stack_set_visible_child_full, "gtk_stack_set_visible_child_full", LIBS);
+  gidLink(cast(void**)&gtk_stack_set_visible_child_name, "gtk_stack_set_visible_child_name", LIBS);
 
   // StackPage
-  gidLink(gtk_stack_page_get_type, "gtk_stack_page_get_type", LIBS);
-  gidLink(gtk_stack_page_get_child, "gtk_stack_page_get_child", LIBS);
-  gidLink(gtk_stack_page_get_icon_name, "gtk_stack_page_get_icon_name", LIBS);
-  gidLink(gtk_stack_page_get_name, "gtk_stack_page_get_name", LIBS);
-  gidLink(gtk_stack_page_get_needs_attention, "gtk_stack_page_get_needs_attention", LIBS);
-  gidLink(gtk_stack_page_get_title, "gtk_stack_page_get_title", LIBS);
-  gidLink(gtk_stack_page_get_use_underline, "gtk_stack_page_get_use_underline", LIBS);
-  gidLink(gtk_stack_page_get_visible, "gtk_stack_page_get_visible", LIBS);
-  gidLink(gtk_stack_page_set_icon_name, "gtk_stack_page_set_icon_name", LIBS);
-  gidLink(gtk_stack_page_set_name, "gtk_stack_page_set_name", LIBS);
-  gidLink(gtk_stack_page_set_needs_attention, "gtk_stack_page_set_needs_attention", LIBS);
-  gidLink(gtk_stack_page_set_title, "gtk_stack_page_set_title", LIBS);
-  gidLink(gtk_stack_page_set_use_underline, "gtk_stack_page_set_use_underline", LIBS);
-  gidLink(gtk_stack_page_set_visible, "gtk_stack_page_set_visible", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_get_type, "gtk_stack_page_get_type", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_get_child, "gtk_stack_page_get_child", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_get_icon_name, "gtk_stack_page_get_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_get_name, "gtk_stack_page_get_name", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_get_needs_attention, "gtk_stack_page_get_needs_attention", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_get_title, "gtk_stack_page_get_title", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_get_use_underline, "gtk_stack_page_get_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_get_visible, "gtk_stack_page_get_visible", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_set_icon_name, "gtk_stack_page_set_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_set_name, "gtk_stack_page_set_name", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_set_needs_attention, "gtk_stack_page_set_needs_attention", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_set_title, "gtk_stack_page_set_title", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_set_use_underline, "gtk_stack_page_set_use_underline", LIBS);
+  gidLink(cast(void**)&gtk_stack_page_set_visible, "gtk_stack_page_set_visible", LIBS);
 
   // StackSidebar
-  gidLink(gtk_stack_sidebar_get_type, "gtk_stack_sidebar_get_type", LIBS);
-  gidLink(gtk_stack_sidebar_new, "gtk_stack_sidebar_new", LIBS);
-  gidLink(gtk_stack_sidebar_get_stack, "gtk_stack_sidebar_get_stack", LIBS);
-  gidLink(gtk_stack_sidebar_set_stack, "gtk_stack_sidebar_set_stack", LIBS);
+  gidLink(cast(void**)&gtk_stack_sidebar_get_type, "gtk_stack_sidebar_get_type", LIBS);
+  gidLink(cast(void**)&gtk_stack_sidebar_new, "gtk_stack_sidebar_new", LIBS);
+  gidLink(cast(void**)&gtk_stack_sidebar_get_stack, "gtk_stack_sidebar_get_stack", LIBS);
+  gidLink(cast(void**)&gtk_stack_sidebar_set_stack, "gtk_stack_sidebar_set_stack", LIBS);
 
   // StackSwitcher
-  gidLink(gtk_stack_switcher_get_type, "gtk_stack_switcher_get_type", LIBS);
-  gidLink(gtk_stack_switcher_new, "gtk_stack_switcher_new", LIBS);
-  gidLink(gtk_stack_switcher_get_stack, "gtk_stack_switcher_get_stack", LIBS);
-  gidLink(gtk_stack_switcher_set_stack, "gtk_stack_switcher_set_stack", LIBS);
+  gidLink(cast(void**)&gtk_stack_switcher_get_type, "gtk_stack_switcher_get_type", LIBS);
+  gidLink(cast(void**)&gtk_stack_switcher_new, "gtk_stack_switcher_new", LIBS);
+  gidLink(cast(void**)&gtk_stack_switcher_get_stack, "gtk_stack_switcher_get_stack", LIBS);
+  gidLink(cast(void**)&gtk_stack_switcher_set_stack, "gtk_stack_switcher_set_stack", LIBS);
 
   // Statusbar
-  gidLink(gtk_statusbar_get_type, "gtk_statusbar_get_type", LIBS);
-  gidLink(gtk_statusbar_new, "gtk_statusbar_new", LIBS);
-  gidLink(gtk_statusbar_get_context_id, "gtk_statusbar_get_context_id", LIBS);
-  gidLink(gtk_statusbar_pop, "gtk_statusbar_pop", LIBS);
-  gidLink(gtk_statusbar_push, "gtk_statusbar_push", LIBS);
-  gidLink(gtk_statusbar_remove, "gtk_statusbar_remove", LIBS);
-  gidLink(gtk_statusbar_remove_all, "gtk_statusbar_remove_all", LIBS);
+  gidLink(cast(void**)&gtk_statusbar_get_type, "gtk_statusbar_get_type", LIBS);
+  gidLink(cast(void**)&gtk_statusbar_new, "gtk_statusbar_new", LIBS);
+  gidLink(cast(void**)&gtk_statusbar_get_context_id, "gtk_statusbar_get_context_id", LIBS);
+  gidLink(cast(void**)&gtk_statusbar_pop, "gtk_statusbar_pop", LIBS);
+  gidLink(cast(void**)&gtk_statusbar_push, "gtk_statusbar_push", LIBS);
+  gidLink(cast(void**)&gtk_statusbar_remove, "gtk_statusbar_remove", LIBS);
+  gidLink(cast(void**)&gtk_statusbar_remove_all, "gtk_statusbar_remove_all", LIBS);
 
   // StringFilter
-  gidLink(gtk_string_filter_get_type, "gtk_string_filter_get_type", LIBS);
-  gidLink(gtk_string_filter_new, "gtk_string_filter_new", LIBS);
-  gidLink(gtk_string_filter_get_expression, "gtk_string_filter_get_expression", LIBS);
-  gidLink(gtk_string_filter_get_ignore_case, "gtk_string_filter_get_ignore_case", LIBS);
-  gidLink(gtk_string_filter_get_match_mode, "gtk_string_filter_get_match_mode", LIBS);
-  gidLink(gtk_string_filter_get_search, "gtk_string_filter_get_search", LIBS);
-  gidLink(gtk_string_filter_set_expression, "gtk_string_filter_set_expression", LIBS);
-  gidLink(gtk_string_filter_set_ignore_case, "gtk_string_filter_set_ignore_case", LIBS);
-  gidLink(gtk_string_filter_set_match_mode, "gtk_string_filter_set_match_mode", LIBS);
-  gidLink(gtk_string_filter_set_search, "gtk_string_filter_set_search", LIBS);
+  gidLink(cast(void**)&gtk_string_filter_get_type, "gtk_string_filter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_string_filter_new, "gtk_string_filter_new", LIBS);
+  gidLink(cast(void**)&gtk_string_filter_get_expression, "gtk_string_filter_get_expression", LIBS);
+  gidLink(cast(void**)&gtk_string_filter_get_ignore_case, "gtk_string_filter_get_ignore_case", LIBS);
+  gidLink(cast(void**)&gtk_string_filter_get_match_mode, "gtk_string_filter_get_match_mode", LIBS);
+  gidLink(cast(void**)&gtk_string_filter_get_search, "gtk_string_filter_get_search", LIBS);
+  gidLink(cast(void**)&gtk_string_filter_set_expression, "gtk_string_filter_set_expression", LIBS);
+  gidLink(cast(void**)&gtk_string_filter_set_ignore_case, "gtk_string_filter_set_ignore_case", LIBS);
+  gidLink(cast(void**)&gtk_string_filter_set_match_mode, "gtk_string_filter_set_match_mode", LIBS);
+  gidLink(cast(void**)&gtk_string_filter_set_search, "gtk_string_filter_set_search", LIBS);
 
   // StringList
-  gidLink(gtk_string_list_get_type, "gtk_string_list_get_type", LIBS);
-  gidLink(gtk_string_list_new, "gtk_string_list_new", LIBS);
-  gidLink(gtk_string_list_append, "gtk_string_list_append", LIBS);
-  gidLink(gtk_string_list_get_string, "gtk_string_list_get_string", LIBS);
-  gidLink(gtk_string_list_remove, "gtk_string_list_remove", LIBS);
-  gidLink(gtk_string_list_splice, "gtk_string_list_splice", LIBS);
-  gidLink(gtk_string_list_take, "gtk_string_list_take", LIBS);
+  gidLink(cast(void**)&gtk_string_list_get_type, "gtk_string_list_get_type", LIBS);
+  gidLink(cast(void**)&gtk_string_list_new, "gtk_string_list_new", LIBS);
+  gidLink(cast(void**)&gtk_string_list_append, "gtk_string_list_append", LIBS);
+  gidLink(cast(void**)&gtk_string_list_get_string, "gtk_string_list_get_string", LIBS);
+  gidLink(cast(void**)&gtk_string_list_remove, "gtk_string_list_remove", LIBS);
+  gidLink(cast(void**)&gtk_string_list_splice, "gtk_string_list_splice", LIBS);
+  gidLink(cast(void**)&gtk_string_list_take, "gtk_string_list_take", LIBS);
 
   // StringObject
-  gidLink(gtk_string_object_get_type, "gtk_string_object_get_type", LIBS);
-  gidLink(gtk_string_object_new, "gtk_string_object_new", LIBS);
-  gidLink(gtk_string_object_get_string, "gtk_string_object_get_string", LIBS);
+  gidLink(cast(void**)&gtk_string_object_get_type, "gtk_string_object_get_type", LIBS);
+  gidLink(cast(void**)&gtk_string_object_new, "gtk_string_object_new", LIBS);
+  gidLink(cast(void**)&gtk_string_object_get_string, "gtk_string_object_get_string", LIBS);
 
   // StringSorter
-  gidLink(gtk_string_sorter_get_type, "gtk_string_sorter_get_type", LIBS);
-  gidLink(gtk_string_sorter_new, "gtk_string_sorter_new", LIBS);
-  gidLink(gtk_string_sorter_get_collation, "gtk_string_sorter_get_collation", LIBS);
-  gidLink(gtk_string_sorter_get_expression, "gtk_string_sorter_get_expression", LIBS);
-  gidLink(gtk_string_sorter_get_ignore_case, "gtk_string_sorter_get_ignore_case", LIBS);
-  gidLink(gtk_string_sorter_set_collation, "gtk_string_sorter_set_collation", LIBS);
-  gidLink(gtk_string_sorter_set_expression, "gtk_string_sorter_set_expression", LIBS);
-  gidLink(gtk_string_sorter_set_ignore_case, "gtk_string_sorter_set_ignore_case", LIBS);
+  gidLink(cast(void**)&gtk_string_sorter_get_type, "gtk_string_sorter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_string_sorter_new, "gtk_string_sorter_new", LIBS);
+  gidLink(cast(void**)&gtk_string_sorter_get_collation, "gtk_string_sorter_get_collation", LIBS);
+  gidLink(cast(void**)&gtk_string_sorter_get_expression, "gtk_string_sorter_get_expression", LIBS);
+  gidLink(cast(void**)&gtk_string_sorter_get_ignore_case, "gtk_string_sorter_get_ignore_case", LIBS);
+  gidLink(cast(void**)&gtk_string_sorter_set_collation, "gtk_string_sorter_set_collation", LIBS);
+  gidLink(cast(void**)&gtk_string_sorter_set_expression, "gtk_string_sorter_set_expression", LIBS);
+  gidLink(cast(void**)&gtk_string_sorter_set_ignore_case, "gtk_string_sorter_set_ignore_case", LIBS);
 
   // StyleContext
-  gidLink(gtk_style_context_get_type, "gtk_style_context_get_type", LIBS);
-  gidLink(gtk_style_context_add_provider_for_display, "gtk_style_context_add_provider_for_display", LIBS);
-  gidLink(gtk_style_context_remove_provider_for_display, "gtk_style_context_remove_provider_for_display", LIBS);
-  gidLink(gtk_style_context_add_class, "gtk_style_context_add_class", LIBS);
-  gidLink(gtk_style_context_add_provider, "gtk_style_context_add_provider", LIBS);
-  gidLink(gtk_style_context_get_border, "gtk_style_context_get_border", LIBS);
-  gidLink(gtk_style_context_get_color, "gtk_style_context_get_color", LIBS);
-  gidLink(gtk_style_context_get_display, "gtk_style_context_get_display", LIBS);
-  gidLink(gtk_style_context_get_margin, "gtk_style_context_get_margin", LIBS);
-  gidLink(gtk_style_context_get_padding, "gtk_style_context_get_padding", LIBS);
-  gidLink(gtk_style_context_get_scale, "gtk_style_context_get_scale", LIBS);
-  gidLink(gtk_style_context_get_state, "gtk_style_context_get_state", LIBS);
-  gidLink(gtk_style_context_has_class, "gtk_style_context_has_class", LIBS);
-  gidLink(gtk_style_context_lookup_color, "gtk_style_context_lookup_color", LIBS);
-  gidLink(gtk_style_context_remove_class, "gtk_style_context_remove_class", LIBS);
-  gidLink(gtk_style_context_remove_provider, "gtk_style_context_remove_provider", LIBS);
-  gidLink(gtk_style_context_restore, "gtk_style_context_restore", LIBS);
-  gidLink(gtk_style_context_save, "gtk_style_context_save", LIBS);
-  gidLink(gtk_style_context_set_display, "gtk_style_context_set_display", LIBS);
-  gidLink(gtk_style_context_set_scale, "gtk_style_context_set_scale", LIBS);
-  gidLink(gtk_style_context_set_state, "gtk_style_context_set_state", LIBS);
-  gidLink(gtk_style_context_to_string, "gtk_style_context_to_string", LIBS);
+  gidLink(cast(void**)&gtk_style_context_get_type, "gtk_style_context_get_type", LIBS);
+  gidLink(cast(void**)&gtk_style_context_add_provider_for_display, "gtk_style_context_add_provider_for_display", LIBS);
+  gidLink(cast(void**)&gtk_style_context_remove_provider_for_display, "gtk_style_context_remove_provider_for_display", LIBS);
+  gidLink(cast(void**)&gtk_style_context_add_class, "gtk_style_context_add_class", LIBS);
+  gidLink(cast(void**)&gtk_style_context_add_provider, "gtk_style_context_add_provider", LIBS);
+  gidLink(cast(void**)&gtk_style_context_get_border, "gtk_style_context_get_border", LIBS);
+  gidLink(cast(void**)&gtk_style_context_get_color, "gtk_style_context_get_color", LIBS);
+  gidLink(cast(void**)&gtk_style_context_get_display, "gtk_style_context_get_display", LIBS);
+  gidLink(cast(void**)&gtk_style_context_get_margin, "gtk_style_context_get_margin", LIBS);
+  gidLink(cast(void**)&gtk_style_context_get_padding, "gtk_style_context_get_padding", LIBS);
+  gidLink(cast(void**)&gtk_style_context_get_scale, "gtk_style_context_get_scale", LIBS);
+  gidLink(cast(void**)&gtk_style_context_get_state, "gtk_style_context_get_state", LIBS);
+  gidLink(cast(void**)&gtk_style_context_has_class, "gtk_style_context_has_class", LIBS);
+  gidLink(cast(void**)&gtk_style_context_lookup_color, "gtk_style_context_lookup_color", LIBS);
+  gidLink(cast(void**)&gtk_style_context_remove_class, "gtk_style_context_remove_class", LIBS);
+  gidLink(cast(void**)&gtk_style_context_remove_provider, "gtk_style_context_remove_provider", LIBS);
+  gidLink(cast(void**)&gtk_style_context_restore, "gtk_style_context_restore", LIBS);
+  gidLink(cast(void**)&gtk_style_context_save, "gtk_style_context_save", LIBS);
+  gidLink(cast(void**)&gtk_style_context_set_display, "gtk_style_context_set_display", LIBS);
+  gidLink(cast(void**)&gtk_style_context_set_scale, "gtk_style_context_set_scale", LIBS);
+  gidLink(cast(void**)&gtk_style_context_set_state, "gtk_style_context_set_state", LIBS);
+  gidLink(cast(void**)&gtk_style_context_to_string, "gtk_style_context_to_string", LIBS);
 
   // StyleProvider
-  gidLink(gtk_style_provider_get_type, "gtk_style_provider_get_type", LIBS);
+  gidLink(cast(void**)&gtk_style_provider_get_type, "gtk_style_provider_get_type", LIBS);
 
   // Switch
-  gidLink(gtk_switch_get_type, "gtk_switch_get_type", LIBS);
-  gidLink(gtk_switch_new, "gtk_switch_new", LIBS);
-  gidLink(gtk_switch_get_active, "gtk_switch_get_active", LIBS);
-  gidLink(gtk_switch_get_state, "gtk_switch_get_state", LIBS);
-  gidLink(gtk_switch_set_active, "gtk_switch_set_active", LIBS);
-  gidLink(gtk_switch_set_state, "gtk_switch_set_state", LIBS);
+  gidLink(cast(void**)&gtk_switch_get_type, "gtk_switch_get_type", LIBS);
+  gidLink(cast(void**)&gtk_switch_new, "gtk_switch_new", LIBS);
+  gidLink(cast(void**)&gtk_switch_get_active, "gtk_switch_get_active", LIBS);
+  gidLink(cast(void**)&gtk_switch_get_state, "gtk_switch_get_state", LIBS);
+  gidLink(cast(void**)&gtk_switch_set_active, "gtk_switch_set_active", LIBS);
+  gidLink(cast(void**)&gtk_switch_set_state, "gtk_switch_set_state", LIBS);
 
   // SymbolicPaintable
-  gidLink(gtk_symbolic_paintable_get_type, "gtk_symbolic_paintable_get_type", LIBS);
-  gidLink(gtk_symbolic_paintable_snapshot_symbolic, "gtk_symbolic_paintable_snapshot_symbolic", LIBS);
+  gidLink(cast(void**)&gtk_symbolic_paintable_get_type, "gtk_symbolic_paintable_get_type", LIBS);
+  gidLink(cast(void**)&gtk_symbolic_paintable_snapshot_symbolic, "gtk_symbolic_paintable_snapshot_symbolic", LIBS);
 
   // Text
-  gidLink(gtk_text_get_type, "gtk_text_get_type", LIBS);
-  gidLink(gtk_text_new, "gtk_text_new", LIBS);
-  gidLink(gtk_text_new_with_buffer, "gtk_text_new_with_buffer", LIBS);
-  gidLink(gtk_text_compute_cursor_extents, "gtk_text_compute_cursor_extents", LIBS);
-  gidLink(gtk_text_get_activates_default, "gtk_text_get_activates_default", LIBS);
-  gidLink(gtk_text_get_attributes, "gtk_text_get_attributes", LIBS);
-  gidLink(gtk_text_get_buffer, "gtk_text_get_buffer", LIBS);
-  gidLink(gtk_text_get_enable_emoji_completion, "gtk_text_get_enable_emoji_completion", LIBS);
-  gidLink(gtk_text_get_extra_menu, "gtk_text_get_extra_menu", LIBS);
-  gidLink(gtk_text_get_input_hints, "gtk_text_get_input_hints", LIBS);
-  gidLink(gtk_text_get_input_purpose, "gtk_text_get_input_purpose", LIBS);
-  gidLink(gtk_text_get_invisible_char, "gtk_text_get_invisible_char", LIBS);
-  gidLink(gtk_text_get_max_length, "gtk_text_get_max_length", LIBS);
-  gidLink(gtk_text_get_overwrite_mode, "gtk_text_get_overwrite_mode", LIBS);
-  gidLink(gtk_text_get_placeholder_text, "gtk_text_get_placeholder_text", LIBS);
-  gidLink(gtk_text_get_propagate_text_width, "gtk_text_get_propagate_text_width", LIBS);
-  gidLink(gtk_text_get_tabs, "gtk_text_get_tabs", LIBS);
-  gidLink(gtk_text_get_text_length, "gtk_text_get_text_length", LIBS);
-  gidLink(gtk_text_get_truncate_multiline, "gtk_text_get_truncate_multiline", LIBS);
-  gidLink(gtk_text_get_visibility, "gtk_text_get_visibility", LIBS);
-  gidLink(gtk_text_grab_focus_without_selecting, "gtk_text_grab_focus_without_selecting", LIBS);
-  gidLink(gtk_text_set_activates_default, "gtk_text_set_activates_default", LIBS);
-  gidLink(gtk_text_set_attributes, "gtk_text_set_attributes", LIBS);
-  gidLink(gtk_text_set_buffer, "gtk_text_set_buffer", LIBS);
-  gidLink(gtk_text_set_enable_emoji_completion, "gtk_text_set_enable_emoji_completion", LIBS);
-  gidLink(gtk_text_set_extra_menu, "gtk_text_set_extra_menu", LIBS);
-  gidLink(gtk_text_set_input_hints, "gtk_text_set_input_hints", LIBS);
-  gidLink(gtk_text_set_input_purpose, "gtk_text_set_input_purpose", LIBS);
-  gidLink(gtk_text_set_invisible_char, "gtk_text_set_invisible_char", LIBS);
-  gidLink(gtk_text_set_max_length, "gtk_text_set_max_length", LIBS);
-  gidLink(gtk_text_set_overwrite_mode, "gtk_text_set_overwrite_mode", LIBS);
-  gidLink(gtk_text_set_placeholder_text, "gtk_text_set_placeholder_text", LIBS);
-  gidLink(gtk_text_set_propagate_text_width, "gtk_text_set_propagate_text_width", LIBS);
-  gidLink(gtk_text_set_tabs, "gtk_text_set_tabs", LIBS);
-  gidLink(gtk_text_set_truncate_multiline, "gtk_text_set_truncate_multiline", LIBS);
-  gidLink(gtk_text_set_visibility, "gtk_text_set_visibility", LIBS);
-  gidLink(gtk_text_unset_invisible_char, "gtk_text_unset_invisible_char", LIBS);
+  gidLink(cast(void**)&gtk_text_get_type, "gtk_text_get_type", LIBS);
+  gidLink(cast(void**)&gtk_text_new, "gtk_text_new", LIBS);
+  gidLink(cast(void**)&gtk_text_new_with_buffer, "gtk_text_new_with_buffer", LIBS);
+  gidLink(cast(void**)&gtk_text_compute_cursor_extents, "gtk_text_compute_cursor_extents", LIBS);
+  gidLink(cast(void**)&gtk_text_get_activates_default, "gtk_text_get_activates_default", LIBS);
+  gidLink(cast(void**)&gtk_text_get_attributes, "gtk_text_get_attributes", LIBS);
+  gidLink(cast(void**)&gtk_text_get_buffer, "gtk_text_get_buffer", LIBS);
+  gidLink(cast(void**)&gtk_text_get_enable_emoji_completion, "gtk_text_get_enable_emoji_completion", LIBS);
+  gidLink(cast(void**)&gtk_text_get_extra_menu, "gtk_text_get_extra_menu", LIBS);
+  gidLink(cast(void**)&gtk_text_get_input_hints, "gtk_text_get_input_hints", LIBS);
+  gidLink(cast(void**)&gtk_text_get_input_purpose, "gtk_text_get_input_purpose", LIBS);
+  gidLink(cast(void**)&gtk_text_get_invisible_char, "gtk_text_get_invisible_char", LIBS);
+  gidLink(cast(void**)&gtk_text_get_max_length, "gtk_text_get_max_length", LIBS);
+  gidLink(cast(void**)&gtk_text_get_overwrite_mode, "gtk_text_get_overwrite_mode", LIBS);
+  gidLink(cast(void**)&gtk_text_get_placeholder_text, "gtk_text_get_placeholder_text", LIBS);
+  gidLink(cast(void**)&gtk_text_get_propagate_text_width, "gtk_text_get_propagate_text_width", LIBS);
+  gidLink(cast(void**)&gtk_text_get_tabs, "gtk_text_get_tabs", LIBS);
+  gidLink(cast(void**)&gtk_text_get_text_length, "gtk_text_get_text_length", LIBS);
+  gidLink(cast(void**)&gtk_text_get_truncate_multiline, "gtk_text_get_truncate_multiline", LIBS);
+  gidLink(cast(void**)&gtk_text_get_visibility, "gtk_text_get_visibility", LIBS);
+  gidLink(cast(void**)&gtk_text_grab_focus_without_selecting, "gtk_text_grab_focus_without_selecting", LIBS);
+  gidLink(cast(void**)&gtk_text_set_activates_default, "gtk_text_set_activates_default", LIBS);
+  gidLink(cast(void**)&gtk_text_set_attributes, "gtk_text_set_attributes", LIBS);
+  gidLink(cast(void**)&gtk_text_set_buffer, "gtk_text_set_buffer", LIBS);
+  gidLink(cast(void**)&gtk_text_set_enable_emoji_completion, "gtk_text_set_enable_emoji_completion", LIBS);
+  gidLink(cast(void**)&gtk_text_set_extra_menu, "gtk_text_set_extra_menu", LIBS);
+  gidLink(cast(void**)&gtk_text_set_input_hints, "gtk_text_set_input_hints", LIBS);
+  gidLink(cast(void**)&gtk_text_set_input_purpose, "gtk_text_set_input_purpose", LIBS);
+  gidLink(cast(void**)&gtk_text_set_invisible_char, "gtk_text_set_invisible_char", LIBS);
+  gidLink(cast(void**)&gtk_text_set_max_length, "gtk_text_set_max_length", LIBS);
+  gidLink(cast(void**)&gtk_text_set_overwrite_mode, "gtk_text_set_overwrite_mode", LIBS);
+  gidLink(cast(void**)&gtk_text_set_placeholder_text, "gtk_text_set_placeholder_text", LIBS);
+  gidLink(cast(void**)&gtk_text_set_propagate_text_width, "gtk_text_set_propagate_text_width", LIBS);
+  gidLink(cast(void**)&gtk_text_set_tabs, "gtk_text_set_tabs", LIBS);
+  gidLink(cast(void**)&gtk_text_set_truncate_multiline, "gtk_text_set_truncate_multiline", LIBS);
+  gidLink(cast(void**)&gtk_text_set_visibility, "gtk_text_set_visibility", LIBS);
+  gidLink(cast(void**)&gtk_text_unset_invisible_char, "gtk_text_unset_invisible_char", LIBS);
 
   // TextBuffer
-  gidLink(gtk_text_buffer_get_type, "gtk_text_buffer_get_type", LIBS);
-  gidLink(gtk_text_buffer_new, "gtk_text_buffer_new", LIBS);
-  gidLink(gtk_text_buffer_add_mark, "gtk_text_buffer_add_mark", LIBS);
-  gidLink(gtk_text_buffer_add_selection_clipboard, "gtk_text_buffer_add_selection_clipboard", LIBS);
-  gidLink(gtk_text_buffer_apply_tag, "gtk_text_buffer_apply_tag", LIBS);
-  gidLink(gtk_text_buffer_apply_tag_by_name, "gtk_text_buffer_apply_tag_by_name", LIBS);
-  gidLink(gtk_text_buffer_backspace, "gtk_text_buffer_backspace", LIBS);
-  gidLink(gtk_text_buffer_begin_irreversible_action, "gtk_text_buffer_begin_irreversible_action", LIBS);
-  gidLink(gtk_text_buffer_begin_user_action, "gtk_text_buffer_begin_user_action", LIBS);
-  gidLink(gtk_text_buffer_copy_clipboard, "gtk_text_buffer_copy_clipboard", LIBS);
-  gidLink(gtk_text_buffer_create_child_anchor, "gtk_text_buffer_create_child_anchor", LIBS);
-  gidLink(gtk_text_buffer_create_mark, "gtk_text_buffer_create_mark", LIBS);
-  gidLink(gtk_text_buffer_create_tag, "gtk_text_buffer_create_tag", LIBS);
-  gidLink(gtk_text_buffer_cut_clipboard, "gtk_text_buffer_cut_clipboard", LIBS);
-  gidLink(gtk_text_buffer_delete, "gtk_text_buffer_delete", LIBS);
-  gidLink(gtk_text_buffer_delete_interactive, "gtk_text_buffer_delete_interactive", LIBS);
-  gidLink(gtk_text_buffer_delete_mark, "gtk_text_buffer_delete_mark", LIBS);
-  gidLink(gtk_text_buffer_delete_mark_by_name, "gtk_text_buffer_delete_mark_by_name", LIBS);
-  gidLink(gtk_text_buffer_delete_selection, "gtk_text_buffer_delete_selection", LIBS);
-  gidLink(gtk_text_buffer_end_irreversible_action, "gtk_text_buffer_end_irreversible_action", LIBS);
-  gidLink(gtk_text_buffer_end_user_action, "gtk_text_buffer_end_user_action", LIBS);
-  gidLink(gtk_text_buffer_get_bounds, "gtk_text_buffer_get_bounds", LIBS);
-  gidLink(gtk_text_buffer_get_can_redo, "gtk_text_buffer_get_can_redo", LIBS);
-  gidLink(gtk_text_buffer_get_can_undo, "gtk_text_buffer_get_can_undo", LIBS);
-  gidLink(gtk_text_buffer_get_char_count, "gtk_text_buffer_get_char_count", LIBS);
-  gidLink(gtk_text_buffer_get_enable_undo, "gtk_text_buffer_get_enable_undo", LIBS);
-  gidLink(gtk_text_buffer_get_end_iter, "gtk_text_buffer_get_end_iter", LIBS);
-  gidLink(gtk_text_buffer_get_has_selection, "gtk_text_buffer_get_has_selection", LIBS);
-  gidLink(gtk_text_buffer_get_insert, "gtk_text_buffer_get_insert", LIBS);
-  gidLink(gtk_text_buffer_get_iter_at_child_anchor, "gtk_text_buffer_get_iter_at_child_anchor", LIBS);
-  gidLink(gtk_text_buffer_get_iter_at_line, "gtk_text_buffer_get_iter_at_line", LIBS);
-  gidLink(gtk_text_buffer_get_iter_at_line_index, "gtk_text_buffer_get_iter_at_line_index", LIBS);
-  gidLink(gtk_text_buffer_get_iter_at_line_offset, "gtk_text_buffer_get_iter_at_line_offset", LIBS);
-  gidLink(gtk_text_buffer_get_iter_at_mark, "gtk_text_buffer_get_iter_at_mark", LIBS);
-  gidLink(gtk_text_buffer_get_iter_at_offset, "gtk_text_buffer_get_iter_at_offset", LIBS);
-  gidLink(gtk_text_buffer_get_line_count, "gtk_text_buffer_get_line_count", LIBS);
-  gidLink(gtk_text_buffer_get_mark, "gtk_text_buffer_get_mark", LIBS);
-  gidLink(gtk_text_buffer_get_max_undo_levels, "gtk_text_buffer_get_max_undo_levels", LIBS);
-  gidLink(gtk_text_buffer_get_modified, "gtk_text_buffer_get_modified", LIBS);
-  gidLink(gtk_text_buffer_get_selection_bound, "gtk_text_buffer_get_selection_bound", LIBS);
-  gidLink(gtk_text_buffer_get_selection_bounds, "gtk_text_buffer_get_selection_bounds", LIBS);
-  gidLink(gtk_text_buffer_get_selection_content, "gtk_text_buffer_get_selection_content", LIBS);
-  gidLink(gtk_text_buffer_get_slice, "gtk_text_buffer_get_slice", LIBS);
-  gidLink(gtk_text_buffer_get_start_iter, "gtk_text_buffer_get_start_iter", LIBS);
-  gidLink(gtk_text_buffer_get_tag_table, "gtk_text_buffer_get_tag_table", LIBS);
-  gidLink(gtk_text_buffer_get_text, "gtk_text_buffer_get_text", LIBS);
-  gidLink(gtk_text_buffer_insert, "gtk_text_buffer_insert", LIBS);
-  gidLink(gtk_text_buffer_insert_at_cursor, "gtk_text_buffer_insert_at_cursor", LIBS);
-  gidLink(gtk_text_buffer_insert_child_anchor, "gtk_text_buffer_insert_child_anchor", LIBS);
-  gidLink(gtk_text_buffer_insert_interactive, "gtk_text_buffer_insert_interactive", LIBS);
-  gidLink(gtk_text_buffer_insert_interactive_at_cursor, "gtk_text_buffer_insert_interactive_at_cursor", LIBS);
-  gidLink(gtk_text_buffer_insert_markup, "gtk_text_buffer_insert_markup", LIBS);
-  gidLink(gtk_text_buffer_insert_paintable, "gtk_text_buffer_insert_paintable", LIBS);
-  gidLink(gtk_text_buffer_insert_range, "gtk_text_buffer_insert_range", LIBS);
-  gidLink(gtk_text_buffer_insert_range_interactive, "gtk_text_buffer_insert_range_interactive", LIBS);
-  gidLink(gtk_text_buffer_insert_with_tags, "gtk_text_buffer_insert_with_tags", LIBS);
-  gidLink(gtk_text_buffer_insert_with_tags_by_name, "gtk_text_buffer_insert_with_tags_by_name", LIBS);
-  gidLink(gtk_text_buffer_move_mark, "gtk_text_buffer_move_mark", LIBS);
-  gidLink(gtk_text_buffer_move_mark_by_name, "gtk_text_buffer_move_mark_by_name", LIBS);
-  gidLink(gtk_text_buffer_paste_clipboard, "gtk_text_buffer_paste_clipboard", LIBS);
-  gidLink(gtk_text_buffer_place_cursor, "gtk_text_buffer_place_cursor", LIBS);
-  gidLink(gtk_text_buffer_redo, "gtk_text_buffer_redo", LIBS);
-  gidLink(gtk_text_buffer_remove_all_tags, "gtk_text_buffer_remove_all_tags", LIBS);
-  gidLink(gtk_text_buffer_remove_selection_clipboard, "gtk_text_buffer_remove_selection_clipboard", LIBS);
-  gidLink(gtk_text_buffer_remove_tag, "gtk_text_buffer_remove_tag", LIBS);
-  gidLink(gtk_text_buffer_remove_tag_by_name, "gtk_text_buffer_remove_tag_by_name", LIBS);
-  gidLink(gtk_text_buffer_select_range, "gtk_text_buffer_select_range", LIBS);
-  gidLink(gtk_text_buffer_set_enable_undo, "gtk_text_buffer_set_enable_undo", LIBS);
-  gidLink(gtk_text_buffer_set_max_undo_levels, "gtk_text_buffer_set_max_undo_levels", LIBS);
-  gidLink(gtk_text_buffer_set_modified, "gtk_text_buffer_set_modified", LIBS);
-  gidLink(gtk_text_buffer_set_text, "gtk_text_buffer_set_text", LIBS);
-  gidLink(gtk_text_buffer_undo, "gtk_text_buffer_undo", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_type, "gtk_text_buffer_get_type", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_new, "gtk_text_buffer_new", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_add_mark, "gtk_text_buffer_add_mark", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_add_selection_clipboard, "gtk_text_buffer_add_selection_clipboard", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_apply_tag, "gtk_text_buffer_apply_tag", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_apply_tag_by_name, "gtk_text_buffer_apply_tag_by_name", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_backspace, "gtk_text_buffer_backspace", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_begin_irreversible_action, "gtk_text_buffer_begin_irreversible_action", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_begin_user_action, "gtk_text_buffer_begin_user_action", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_copy_clipboard, "gtk_text_buffer_copy_clipboard", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_create_child_anchor, "gtk_text_buffer_create_child_anchor", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_create_mark, "gtk_text_buffer_create_mark", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_create_tag, "gtk_text_buffer_create_tag", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_cut_clipboard, "gtk_text_buffer_cut_clipboard", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_delete, "gtk_text_buffer_delete", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_delete_interactive, "gtk_text_buffer_delete_interactive", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_delete_mark, "gtk_text_buffer_delete_mark", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_delete_mark_by_name, "gtk_text_buffer_delete_mark_by_name", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_delete_selection, "gtk_text_buffer_delete_selection", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_end_irreversible_action, "gtk_text_buffer_end_irreversible_action", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_end_user_action, "gtk_text_buffer_end_user_action", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_bounds, "gtk_text_buffer_get_bounds", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_can_redo, "gtk_text_buffer_get_can_redo", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_can_undo, "gtk_text_buffer_get_can_undo", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_char_count, "gtk_text_buffer_get_char_count", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_enable_undo, "gtk_text_buffer_get_enable_undo", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_end_iter, "gtk_text_buffer_get_end_iter", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_has_selection, "gtk_text_buffer_get_has_selection", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_insert, "gtk_text_buffer_get_insert", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_iter_at_child_anchor, "gtk_text_buffer_get_iter_at_child_anchor", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_iter_at_line, "gtk_text_buffer_get_iter_at_line", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_iter_at_line_index, "gtk_text_buffer_get_iter_at_line_index", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_iter_at_line_offset, "gtk_text_buffer_get_iter_at_line_offset", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_iter_at_mark, "gtk_text_buffer_get_iter_at_mark", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_iter_at_offset, "gtk_text_buffer_get_iter_at_offset", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_line_count, "gtk_text_buffer_get_line_count", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_mark, "gtk_text_buffer_get_mark", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_max_undo_levels, "gtk_text_buffer_get_max_undo_levels", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_modified, "gtk_text_buffer_get_modified", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_selection_bound, "gtk_text_buffer_get_selection_bound", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_selection_bounds, "gtk_text_buffer_get_selection_bounds", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_selection_content, "gtk_text_buffer_get_selection_content", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_slice, "gtk_text_buffer_get_slice", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_start_iter, "gtk_text_buffer_get_start_iter", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_tag_table, "gtk_text_buffer_get_tag_table", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_get_text, "gtk_text_buffer_get_text", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_insert, "gtk_text_buffer_insert", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_insert_at_cursor, "gtk_text_buffer_insert_at_cursor", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_insert_child_anchor, "gtk_text_buffer_insert_child_anchor", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_insert_interactive, "gtk_text_buffer_insert_interactive", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_insert_interactive_at_cursor, "gtk_text_buffer_insert_interactive_at_cursor", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_insert_markup, "gtk_text_buffer_insert_markup", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_insert_paintable, "gtk_text_buffer_insert_paintable", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_insert_range, "gtk_text_buffer_insert_range", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_insert_range_interactive, "gtk_text_buffer_insert_range_interactive", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_insert_with_tags, "gtk_text_buffer_insert_with_tags", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_insert_with_tags_by_name, "gtk_text_buffer_insert_with_tags_by_name", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_move_mark, "gtk_text_buffer_move_mark", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_move_mark_by_name, "gtk_text_buffer_move_mark_by_name", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_paste_clipboard, "gtk_text_buffer_paste_clipboard", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_place_cursor, "gtk_text_buffer_place_cursor", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_redo, "gtk_text_buffer_redo", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_remove_all_tags, "gtk_text_buffer_remove_all_tags", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_remove_selection_clipboard, "gtk_text_buffer_remove_selection_clipboard", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_remove_tag, "gtk_text_buffer_remove_tag", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_remove_tag_by_name, "gtk_text_buffer_remove_tag_by_name", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_select_range, "gtk_text_buffer_select_range", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_set_enable_undo, "gtk_text_buffer_set_enable_undo", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_set_max_undo_levels, "gtk_text_buffer_set_max_undo_levels", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_set_modified, "gtk_text_buffer_set_modified", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_set_text, "gtk_text_buffer_set_text", LIBS);
+  gidLink(cast(void**)&gtk_text_buffer_undo, "gtk_text_buffer_undo", LIBS);
 
   // TextChildAnchor
-  gidLink(gtk_text_child_anchor_get_type, "gtk_text_child_anchor_get_type", LIBS);
-  gidLink(gtk_text_child_anchor_new, "gtk_text_child_anchor_new", LIBS);
-  gidLink(gtk_text_child_anchor_new_with_replacement, "gtk_text_child_anchor_new_with_replacement", LIBS);
-  gidLink(gtk_text_child_anchor_get_deleted, "gtk_text_child_anchor_get_deleted", LIBS);
-  gidLink(gtk_text_child_anchor_get_widgets, "gtk_text_child_anchor_get_widgets", LIBS);
+  gidLink(cast(void**)&gtk_text_child_anchor_get_type, "gtk_text_child_anchor_get_type", LIBS);
+  gidLink(cast(void**)&gtk_text_child_anchor_new, "gtk_text_child_anchor_new", LIBS);
+  gidLink(cast(void**)&gtk_text_child_anchor_new_with_replacement, "gtk_text_child_anchor_new_with_replacement", LIBS);
+  gidLink(cast(void**)&gtk_text_child_anchor_get_deleted, "gtk_text_child_anchor_get_deleted", LIBS);
+  gidLink(cast(void**)&gtk_text_child_anchor_get_widgets, "gtk_text_child_anchor_get_widgets", LIBS);
 
   // TextIter
-  gidLink(gtk_text_iter_get_type, "gtk_text_iter_get_type", LIBS);
-  gidLink(gtk_text_iter_assign, "gtk_text_iter_assign", LIBS);
-  gidLink(gtk_text_iter_backward_char, "gtk_text_iter_backward_char", LIBS);
-  gidLink(gtk_text_iter_backward_chars, "gtk_text_iter_backward_chars", LIBS);
-  gidLink(gtk_text_iter_backward_cursor_position, "gtk_text_iter_backward_cursor_position", LIBS);
-  gidLink(gtk_text_iter_backward_cursor_positions, "gtk_text_iter_backward_cursor_positions", LIBS);
-  gidLink(gtk_text_iter_backward_find_char, "gtk_text_iter_backward_find_char", LIBS);
-  gidLink(gtk_text_iter_backward_line, "gtk_text_iter_backward_line", LIBS);
-  gidLink(gtk_text_iter_backward_lines, "gtk_text_iter_backward_lines", LIBS);
-  gidLink(gtk_text_iter_backward_search, "gtk_text_iter_backward_search", LIBS);
-  gidLink(gtk_text_iter_backward_sentence_start, "gtk_text_iter_backward_sentence_start", LIBS);
-  gidLink(gtk_text_iter_backward_sentence_starts, "gtk_text_iter_backward_sentence_starts", LIBS);
-  gidLink(gtk_text_iter_backward_to_tag_toggle, "gtk_text_iter_backward_to_tag_toggle", LIBS);
-  gidLink(gtk_text_iter_backward_visible_cursor_position, "gtk_text_iter_backward_visible_cursor_position", LIBS);
-  gidLink(gtk_text_iter_backward_visible_cursor_positions, "gtk_text_iter_backward_visible_cursor_positions", LIBS);
-  gidLink(gtk_text_iter_backward_visible_line, "gtk_text_iter_backward_visible_line", LIBS);
-  gidLink(gtk_text_iter_backward_visible_lines, "gtk_text_iter_backward_visible_lines", LIBS);
-  gidLink(gtk_text_iter_backward_visible_word_start, "gtk_text_iter_backward_visible_word_start", LIBS);
-  gidLink(gtk_text_iter_backward_visible_word_starts, "gtk_text_iter_backward_visible_word_starts", LIBS);
-  gidLink(gtk_text_iter_backward_word_start, "gtk_text_iter_backward_word_start", LIBS);
-  gidLink(gtk_text_iter_backward_word_starts, "gtk_text_iter_backward_word_starts", LIBS);
-  gidLink(gtk_text_iter_can_insert, "gtk_text_iter_can_insert", LIBS);
-  gidLink(gtk_text_iter_compare, "gtk_text_iter_compare", LIBS);
-  gidLink(gtk_text_iter_copy, "gtk_text_iter_copy", LIBS);
-  gidLink(gtk_text_iter_editable, "gtk_text_iter_editable", LIBS);
-  gidLink(gtk_text_iter_ends_line, "gtk_text_iter_ends_line", LIBS);
-  gidLink(gtk_text_iter_ends_sentence, "gtk_text_iter_ends_sentence", LIBS);
-  gidLink(gtk_text_iter_ends_tag, "gtk_text_iter_ends_tag", LIBS);
-  gidLink(gtk_text_iter_ends_word, "gtk_text_iter_ends_word", LIBS);
-  gidLink(gtk_text_iter_equal, "gtk_text_iter_equal", LIBS);
-  gidLink(gtk_text_iter_forward_char, "gtk_text_iter_forward_char", LIBS);
-  gidLink(gtk_text_iter_forward_chars, "gtk_text_iter_forward_chars", LIBS);
-  gidLink(gtk_text_iter_forward_cursor_position, "gtk_text_iter_forward_cursor_position", LIBS);
-  gidLink(gtk_text_iter_forward_cursor_positions, "gtk_text_iter_forward_cursor_positions", LIBS);
-  gidLink(gtk_text_iter_forward_find_char, "gtk_text_iter_forward_find_char", LIBS);
-  gidLink(gtk_text_iter_forward_line, "gtk_text_iter_forward_line", LIBS);
-  gidLink(gtk_text_iter_forward_lines, "gtk_text_iter_forward_lines", LIBS);
-  gidLink(gtk_text_iter_forward_search, "gtk_text_iter_forward_search", LIBS);
-  gidLink(gtk_text_iter_forward_sentence_end, "gtk_text_iter_forward_sentence_end", LIBS);
-  gidLink(gtk_text_iter_forward_sentence_ends, "gtk_text_iter_forward_sentence_ends", LIBS);
-  gidLink(gtk_text_iter_forward_to_end, "gtk_text_iter_forward_to_end", LIBS);
-  gidLink(gtk_text_iter_forward_to_line_end, "gtk_text_iter_forward_to_line_end", LIBS);
-  gidLink(gtk_text_iter_forward_to_tag_toggle, "gtk_text_iter_forward_to_tag_toggle", LIBS);
-  gidLink(gtk_text_iter_forward_visible_cursor_position, "gtk_text_iter_forward_visible_cursor_position", LIBS);
-  gidLink(gtk_text_iter_forward_visible_cursor_positions, "gtk_text_iter_forward_visible_cursor_positions", LIBS);
-  gidLink(gtk_text_iter_forward_visible_line, "gtk_text_iter_forward_visible_line", LIBS);
-  gidLink(gtk_text_iter_forward_visible_lines, "gtk_text_iter_forward_visible_lines", LIBS);
-  gidLink(gtk_text_iter_forward_visible_word_end, "gtk_text_iter_forward_visible_word_end", LIBS);
-  gidLink(gtk_text_iter_forward_visible_word_ends, "gtk_text_iter_forward_visible_word_ends", LIBS);
-  gidLink(gtk_text_iter_forward_word_end, "gtk_text_iter_forward_word_end", LIBS);
-  gidLink(gtk_text_iter_forward_word_ends, "gtk_text_iter_forward_word_ends", LIBS);
-  gidLink(gtk_text_iter_free, "gtk_text_iter_free", LIBS);
-  gidLink(gtk_text_iter_get_buffer, "gtk_text_iter_get_buffer", LIBS);
-  gidLink(gtk_text_iter_get_bytes_in_line, "gtk_text_iter_get_bytes_in_line", LIBS);
-  gidLink(gtk_text_iter_get_char, "gtk_text_iter_get_char", LIBS);
-  gidLink(gtk_text_iter_get_chars_in_line, "gtk_text_iter_get_chars_in_line", LIBS);
-  gidLink(gtk_text_iter_get_child_anchor, "gtk_text_iter_get_child_anchor", LIBS);
-  gidLink(gtk_text_iter_get_language, "gtk_text_iter_get_language", LIBS);
-  gidLink(gtk_text_iter_get_line, "gtk_text_iter_get_line", LIBS);
-  gidLink(gtk_text_iter_get_line_index, "gtk_text_iter_get_line_index", LIBS);
-  gidLink(gtk_text_iter_get_line_offset, "gtk_text_iter_get_line_offset", LIBS);
-  gidLink(gtk_text_iter_get_marks, "gtk_text_iter_get_marks", LIBS);
-  gidLink(gtk_text_iter_get_offset, "gtk_text_iter_get_offset", LIBS);
-  gidLink(gtk_text_iter_get_paintable, "gtk_text_iter_get_paintable", LIBS);
-  gidLink(gtk_text_iter_get_slice, "gtk_text_iter_get_slice", LIBS);
-  gidLink(gtk_text_iter_get_tags, "gtk_text_iter_get_tags", LIBS);
-  gidLink(gtk_text_iter_get_text, "gtk_text_iter_get_text", LIBS);
-  gidLink(gtk_text_iter_get_toggled_tags, "gtk_text_iter_get_toggled_tags", LIBS);
-  gidLink(gtk_text_iter_get_visible_line_index, "gtk_text_iter_get_visible_line_index", LIBS);
-  gidLink(gtk_text_iter_get_visible_line_offset, "gtk_text_iter_get_visible_line_offset", LIBS);
-  gidLink(gtk_text_iter_get_visible_slice, "gtk_text_iter_get_visible_slice", LIBS);
-  gidLink(gtk_text_iter_get_visible_text, "gtk_text_iter_get_visible_text", LIBS);
-  gidLink(gtk_text_iter_has_tag, "gtk_text_iter_has_tag", LIBS);
-  gidLink(gtk_text_iter_in_range, "gtk_text_iter_in_range", LIBS);
-  gidLink(gtk_text_iter_inside_sentence, "gtk_text_iter_inside_sentence", LIBS);
-  gidLink(gtk_text_iter_inside_word, "gtk_text_iter_inside_word", LIBS);
-  gidLink(gtk_text_iter_is_cursor_position, "gtk_text_iter_is_cursor_position", LIBS);
-  gidLink(gtk_text_iter_is_end, "gtk_text_iter_is_end", LIBS);
-  gidLink(gtk_text_iter_is_start, "gtk_text_iter_is_start", LIBS);
-  gidLink(gtk_text_iter_order, "gtk_text_iter_order", LIBS);
-  gidLink(gtk_text_iter_set_line, "gtk_text_iter_set_line", LIBS);
-  gidLink(gtk_text_iter_set_line_index, "gtk_text_iter_set_line_index", LIBS);
-  gidLink(gtk_text_iter_set_line_offset, "gtk_text_iter_set_line_offset", LIBS);
-  gidLink(gtk_text_iter_set_offset, "gtk_text_iter_set_offset", LIBS);
-  gidLink(gtk_text_iter_set_visible_line_index, "gtk_text_iter_set_visible_line_index", LIBS);
-  gidLink(gtk_text_iter_set_visible_line_offset, "gtk_text_iter_set_visible_line_offset", LIBS);
-  gidLink(gtk_text_iter_starts_line, "gtk_text_iter_starts_line", LIBS);
-  gidLink(gtk_text_iter_starts_sentence, "gtk_text_iter_starts_sentence", LIBS);
-  gidLink(gtk_text_iter_starts_tag, "gtk_text_iter_starts_tag", LIBS);
-  gidLink(gtk_text_iter_starts_word, "gtk_text_iter_starts_word", LIBS);
-  gidLink(gtk_text_iter_toggles_tag, "gtk_text_iter_toggles_tag", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_type, "gtk_text_iter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_assign, "gtk_text_iter_assign", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_char, "gtk_text_iter_backward_char", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_chars, "gtk_text_iter_backward_chars", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_cursor_position, "gtk_text_iter_backward_cursor_position", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_cursor_positions, "gtk_text_iter_backward_cursor_positions", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_find_char, "gtk_text_iter_backward_find_char", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_line, "gtk_text_iter_backward_line", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_lines, "gtk_text_iter_backward_lines", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_search, "gtk_text_iter_backward_search", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_sentence_start, "gtk_text_iter_backward_sentence_start", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_sentence_starts, "gtk_text_iter_backward_sentence_starts", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_to_tag_toggle, "gtk_text_iter_backward_to_tag_toggle", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_visible_cursor_position, "gtk_text_iter_backward_visible_cursor_position", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_visible_cursor_positions, "gtk_text_iter_backward_visible_cursor_positions", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_visible_line, "gtk_text_iter_backward_visible_line", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_visible_lines, "gtk_text_iter_backward_visible_lines", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_visible_word_start, "gtk_text_iter_backward_visible_word_start", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_visible_word_starts, "gtk_text_iter_backward_visible_word_starts", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_word_start, "gtk_text_iter_backward_word_start", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_backward_word_starts, "gtk_text_iter_backward_word_starts", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_can_insert, "gtk_text_iter_can_insert", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_compare, "gtk_text_iter_compare", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_copy, "gtk_text_iter_copy", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_editable, "gtk_text_iter_editable", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_ends_line, "gtk_text_iter_ends_line", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_ends_sentence, "gtk_text_iter_ends_sentence", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_ends_tag, "gtk_text_iter_ends_tag", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_ends_word, "gtk_text_iter_ends_word", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_equal, "gtk_text_iter_equal", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_char, "gtk_text_iter_forward_char", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_chars, "gtk_text_iter_forward_chars", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_cursor_position, "gtk_text_iter_forward_cursor_position", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_cursor_positions, "gtk_text_iter_forward_cursor_positions", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_find_char, "gtk_text_iter_forward_find_char", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_line, "gtk_text_iter_forward_line", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_lines, "gtk_text_iter_forward_lines", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_search, "gtk_text_iter_forward_search", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_sentence_end, "gtk_text_iter_forward_sentence_end", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_sentence_ends, "gtk_text_iter_forward_sentence_ends", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_to_end, "gtk_text_iter_forward_to_end", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_to_line_end, "gtk_text_iter_forward_to_line_end", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_to_tag_toggle, "gtk_text_iter_forward_to_tag_toggle", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_visible_cursor_position, "gtk_text_iter_forward_visible_cursor_position", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_visible_cursor_positions, "gtk_text_iter_forward_visible_cursor_positions", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_visible_line, "gtk_text_iter_forward_visible_line", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_visible_lines, "gtk_text_iter_forward_visible_lines", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_visible_word_end, "gtk_text_iter_forward_visible_word_end", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_visible_word_ends, "gtk_text_iter_forward_visible_word_ends", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_word_end, "gtk_text_iter_forward_word_end", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_forward_word_ends, "gtk_text_iter_forward_word_ends", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_free, "gtk_text_iter_free", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_buffer, "gtk_text_iter_get_buffer", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_bytes_in_line, "gtk_text_iter_get_bytes_in_line", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_char, "gtk_text_iter_get_char", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_chars_in_line, "gtk_text_iter_get_chars_in_line", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_child_anchor, "gtk_text_iter_get_child_anchor", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_language, "gtk_text_iter_get_language", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_line, "gtk_text_iter_get_line", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_line_index, "gtk_text_iter_get_line_index", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_line_offset, "gtk_text_iter_get_line_offset", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_marks, "gtk_text_iter_get_marks", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_offset, "gtk_text_iter_get_offset", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_paintable, "gtk_text_iter_get_paintable", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_slice, "gtk_text_iter_get_slice", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_tags, "gtk_text_iter_get_tags", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_text, "gtk_text_iter_get_text", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_toggled_tags, "gtk_text_iter_get_toggled_tags", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_visible_line_index, "gtk_text_iter_get_visible_line_index", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_visible_line_offset, "gtk_text_iter_get_visible_line_offset", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_visible_slice, "gtk_text_iter_get_visible_slice", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_get_visible_text, "gtk_text_iter_get_visible_text", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_has_tag, "gtk_text_iter_has_tag", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_in_range, "gtk_text_iter_in_range", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_inside_sentence, "gtk_text_iter_inside_sentence", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_inside_word, "gtk_text_iter_inside_word", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_is_cursor_position, "gtk_text_iter_is_cursor_position", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_is_end, "gtk_text_iter_is_end", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_is_start, "gtk_text_iter_is_start", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_order, "gtk_text_iter_order", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_set_line, "gtk_text_iter_set_line", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_set_line_index, "gtk_text_iter_set_line_index", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_set_line_offset, "gtk_text_iter_set_line_offset", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_set_offset, "gtk_text_iter_set_offset", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_set_visible_line_index, "gtk_text_iter_set_visible_line_index", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_set_visible_line_offset, "gtk_text_iter_set_visible_line_offset", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_starts_line, "gtk_text_iter_starts_line", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_starts_sentence, "gtk_text_iter_starts_sentence", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_starts_tag, "gtk_text_iter_starts_tag", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_starts_word, "gtk_text_iter_starts_word", LIBS);
+  gidLink(cast(void**)&gtk_text_iter_toggles_tag, "gtk_text_iter_toggles_tag", LIBS);
 
   // TextMark
-  gidLink(gtk_text_mark_get_type, "gtk_text_mark_get_type", LIBS);
-  gidLink(gtk_text_mark_new, "gtk_text_mark_new", LIBS);
-  gidLink(gtk_text_mark_get_buffer, "gtk_text_mark_get_buffer", LIBS);
-  gidLink(gtk_text_mark_get_deleted, "gtk_text_mark_get_deleted", LIBS);
-  gidLink(gtk_text_mark_get_left_gravity, "gtk_text_mark_get_left_gravity", LIBS);
-  gidLink(gtk_text_mark_get_name, "gtk_text_mark_get_name", LIBS);
-  gidLink(gtk_text_mark_get_visible, "gtk_text_mark_get_visible", LIBS);
-  gidLink(gtk_text_mark_set_visible, "gtk_text_mark_set_visible", LIBS);
+  gidLink(cast(void**)&gtk_text_mark_get_type, "gtk_text_mark_get_type", LIBS);
+  gidLink(cast(void**)&gtk_text_mark_new, "gtk_text_mark_new", LIBS);
+  gidLink(cast(void**)&gtk_text_mark_get_buffer, "gtk_text_mark_get_buffer", LIBS);
+  gidLink(cast(void**)&gtk_text_mark_get_deleted, "gtk_text_mark_get_deleted", LIBS);
+  gidLink(cast(void**)&gtk_text_mark_get_left_gravity, "gtk_text_mark_get_left_gravity", LIBS);
+  gidLink(cast(void**)&gtk_text_mark_get_name, "gtk_text_mark_get_name", LIBS);
+  gidLink(cast(void**)&gtk_text_mark_get_visible, "gtk_text_mark_get_visible", LIBS);
+  gidLink(cast(void**)&gtk_text_mark_set_visible, "gtk_text_mark_set_visible", LIBS);
 
   // TextTag
-  gidLink(gtk_text_tag_get_type, "gtk_text_tag_get_type", LIBS);
-  gidLink(gtk_text_tag_new, "gtk_text_tag_new", LIBS);
-  gidLink(gtk_text_tag_changed, "gtk_text_tag_changed", LIBS);
-  gidLink(gtk_text_tag_get_priority, "gtk_text_tag_get_priority", LIBS);
-  gidLink(gtk_text_tag_set_priority, "gtk_text_tag_set_priority", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_get_type, "gtk_text_tag_get_type", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_new, "gtk_text_tag_new", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_changed, "gtk_text_tag_changed", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_get_priority, "gtk_text_tag_get_priority", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_set_priority, "gtk_text_tag_set_priority", LIBS);
 
   // TextTagTable
-  gidLink(gtk_text_tag_table_get_type, "gtk_text_tag_table_get_type", LIBS);
-  gidLink(gtk_text_tag_table_new, "gtk_text_tag_table_new", LIBS);
-  gidLink(gtk_text_tag_table_add, "gtk_text_tag_table_add", LIBS);
-  gidLink(gtk_text_tag_table_foreach, "gtk_text_tag_table_foreach", LIBS);
-  gidLink(gtk_text_tag_table_get_size, "gtk_text_tag_table_get_size", LIBS);
-  gidLink(gtk_text_tag_table_lookup, "gtk_text_tag_table_lookup", LIBS);
-  gidLink(gtk_text_tag_table_remove, "gtk_text_tag_table_remove", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_table_get_type, "gtk_text_tag_table_get_type", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_table_new, "gtk_text_tag_table_new", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_table_add, "gtk_text_tag_table_add", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_table_foreach, "gtk_text_tag_table_foreach", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_table_get_size, "gtk_text_tag_table_get_size", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_table_lookup, "gtk_text_tag_table_lookup", LIBS);
+  gidLink(cast(void**)&gtk_text_tag_table_remove, "gtk_text_tag_table_remove", LIBS);
 
   // TextView
-  gidLink(gtk_text_view_get_type, "gtk_text_view_get_type", LIBS);
-  gidLink(gtk_text_view_new, "gtk_text_view_new", LIBS);
-  gidLink(gtk_text_view_new_with_buffer, "gtk_text_view_new_with_buffer", LIBS);
-  gidLink(gtk_text_view_add_child_at_anchor, "gtk_text_view_add_child_at_anchor", LIBS);
-  gidLink(gtk_text_view_add_overlay, "gtk_text_view_add_overlay", LIBS);
-  gidLink(gtk_text_view_backward_display_line, "gtk_text_view_backward_display_line", LIBS);
-  gidLink(gtk_text_view_backward_display_line_start, "gtk_text_view_backward_display_line_start", LIBS);
-  gidLink(gtk_text_view_buffer_to_window_coords, "gtk_text_view_buffer_to_window_coords", LIBS);
-  gidLink(gtk_text_view_forward_display_line, "gtk_text_view_forward_display_line", LIBS);
-  gidLink(gtk_text_view_forward_display_line_end, "gtk_text_view_forward_display_line_end", LIBS);
-  gidLink(gtk_text_view_get_accepts_tab, "gtk_text_view_get_accepts_tab", LIBS);
-  gidLink(gtk_text_view_get_bottom_margin, "gtk_text_view_get_bottom_margin", LIBS);
-  gidLink(gtk_text_view_get_buffer, "gtk_text_view_get_buffer", LIBS);
-  gidLink(gtk_text_view_get_cursor_locations, "gtk_text_view_get_cursor_locations", LIBS);
-  gidLink(gtk_text_view_get_cursor_visible, "gtk_text_view_get_cursor_visible", LIBS);
-  gidLink(gtk_text_view_get_editable, "gtk_text_view_get_editable", LIBS);
-  gidLink(gtk_text_view_get_extra_menu, "gtk_text_view_get_extra_menu", LIBS);
-  gidLink(gtk_text_view_get_gutter, "gtk_text_view_get_gutter", LIBS);
-  gidLink(gtk_text_view_get_indent, "gtk_text_view_get_indent", LIBS);
-  gidLink(gtk_text_view_get_input_hints, "gtk_text_view_get_input_hints", LIBS);
-  gidLink(gtk_text_view_get_input_purpose, "gtk_text_view_get_input_purpose", LIBS);
-  gidLink(gtk_text_view_get_iter_at_location, "gtk_text_view_get_iter_at_location", LIBS);
-  gidLink(gtk_text_view_get_iter_at_position, "gtk_text_view_get_iter_at_position", LIBS);
-  gidLink(gtk_text_view_get_iter_location, "gtk_text_view_get_iter_location", LIBS);
-  gidLink(gtk_text_view_get_justification, "gtk_text_view_get_justification", LIBS);
-  gidLink(gtk_text_view_get_left_margin, "gtk_text_view_get_left_margin", LIBS);
-  gidLink(gtk_text_view_get_line_at_y, "gtk_text_view_get_line_at_y", LIBS);
-  gidLink(gtk_text_view_get_line_yrange, "gtk_text_view_get_line_yrange", LIBS);
-  gidLink(gtk_text_view_get_ltr_context, "gtk_text_view_get_ltr_context", LIBS);
-  gidLink(gtk_text_view_get_monospace, "gtk_text_view_get_monospace", LIBS);
-  gidLink(gtk_text_view_get_overwrite, "gtk_text_view_get_overwrite", LIBS);
-  gidLink(gtk_text_view_get_pixels_above_lines, "gtk_text_view_get_pixels_above_lines", LIBS);
-  gidLink(gtk_text_view_get_pixels_below_lines, "gtk_text_view_get_pixels_below_lines", LIBS);
-  gidLink(gtk_text_view_get_pixels_inside_wrap, "gtk_text_view_get_pixels_inside_wrap", LIBS);
-  gidLink(gtk_text_view_get_right_margin, "gtk_text_view_get_right_margin", LIBS);
-  gidLink(gtk_text_view_get_rtl_context, "gtk_text_view_get_rtl_context", LIBS);
-  gidLink(gtk_text_view_get_tabs, "gtk_text_view_get_tabs", LIBS);
-  gidLink(gtk_text_view_get_top_margin, "gtk_text_view_get_top_margin", LIBS);
-  gidLink(gtk_text_view_get_visible_rect, "gtk_text_view_get_visible_rect", LIBS);
-  gidLink(gtk_text_view_get_wrap_mode, "gtk_text_view_get_wrap_mode", LIBS);
-  gidLink(gtk_text_view_im_context_filter_keypress, "gtk_text_view_im_context_filter_keypress", LIBS);
-  gidLink(gtk_text_view_move_mark_onscreen, "gtk_text_view_move_mark_onscreen", LIBS);
-  gidLink(gtk_text_view_move_overlay, "gtk_text_view_move_overlay", LIBS);
-  gidLink(gtk_text_view_move_visually, "gtk_text_view_move_visually", LIBS);
-  gidLink(gtk_text_view_place_cursor_onscreen, "gtk_text_view_place_cursor_onscreen", LIBS);
-  gidLink(gtk_text_view_remove, "gtk_text_view_remove", LIBS);
-  gidLink(gtk_text_view_reset_cursor_blink, "gtk_text_view_reset_cursor_blink", LIBS);
-  gidLink(gtk_text_view_reset_im_context, "gtk_text_view_reset_im_context", LIBS);
-  gidLink(gtk_text_view_scroll_mark_onscreen, "gtk_text_view_scroll_mark_onscreen", LIBS);
-  gidLink(gtk_text_view_scroll_to_iter, "gtk_text_view_scroll_to_iter", LIBS);
-  gidLink(gtk_text_view_scroll_to_mark, "gtk_text_view_scroll_to_mark", LIBS);
-  gidLink(gtk_text_view_set_accepts_tab, "gtk_text_view_set_accepts_tab", LIBS);
-  gidLink(gtk_text_view_set_bottom_margin, "gtk_text_view_set_bottom_margin", LIBS);
-  gidLink(gtk_text_view_set_buffer, "gtk_text_view_set_buffer", LIBS);
-  gidLink(gtk_text_view_set_cursor_visible, "gtk_text_view_set_cursor_visible", LIBS);
-  gidLink(gtk_text_view_set_editable, "gtk_text_view_set_editable", LIBS);
-  gidLink(gtk_text_view_set_extra_menu, "gtk_text_view_set_extra_menu", LIBS);
-  gidLink(gtk_text_view_set_gutter, "gtk_text_view_set_gutter", LIBS);
-  gidLink(gtk_text_view_set_indent, "gtk_text_view_set_indent", LIBS);
-  gidLink(gtk_text_view_set_input_hints, "gtk_text_view_set_input_hints", LIBS);
-  gidLink(gtk_text_view_set_input_purpose, "gtk_text_view_set_input_purpose", LIBS);
-  gidLink(gtk_text_view_set_justification, "gtk_text_view_set_justification", LIBS);
-  gidLink(gtk_text_view_set_left_margin, "gtk_text_view_set_left_margin", LIBS);
-  gidLink(gtk_text_view_set_monospace, "gtk_text_view_set_monospace", LIBS);
-  gidLink(gtk_text_view_set_overwrite, "gtk_text_view_set_overwrite", LIBS);
-  gidLink(gtk_text_view_set_pixels_above_lines, "gtk_text_view_set_pixels_above_lines", LIBS);
-  gidLink(gtk_text_view_set_pixels_below_lines, "gtk_text_view_set_pixels_below_lines", LIBS);
-  gidLink(gtk_text_view_set_pixels_inside_wrap, "gtk_text_view_set_pixels_inside_wrap", LIBS);
-  gidLink(gtk_text_view_set_right_margin, "gtk_text_view_set_right_margin", LIBS);
-  gidLink(gtk_text_view_set_tabs, "gtk_text_view_set_tabs", LIBS);
-  gidLink(gtk_text_view_set_top_margin, "gtk_text_view_set_top_margin", LIBS);
-  gidLink(gtk_text_view_set_wrap_mode, "gtk_text_view_set_wrap_mode", LIBS);
-  gidLink(gtk_text_view_starts_display_line, "gtk_text_view_starts_display_line", LIBS);
-  gidLink(gtk_text_view_window_to_buffer_coords, "gtk_text_view_window_to_buffer_coords", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_type, "gtk_text_view_get_type", LIBS);
+  gidLink(cast(void**)&gtk_text_view_new, "gtk_text_view_new", LIBS);
+  gidLink(cast(void**)&gtk_text_view_new_with_buffer, "gtk_text_view_new_with_buffer", LIBS);
+  gidLink(cast(void**)&gtk_text_view_add_child_at_anchor, "gtk_text_view_add_child_at_anchor", LIBS);
+  gidLink(cast(void**)&gtk_text_view_add_overlay, "gtk_text_view_add_overlay", LIBS);
+  gidLink(cast(void**)&gtk_text_view_backward_display_line, "gtk_text_view_backward_display_line", LIBS);
+  gidLink(cast(void**)&gtk_text_view_backward_display_line_start, "gtk_text_view_backward_display_line_start", LIBS);
+  gidLink(cast(void**)&gtk_text_view_buffer_to_window_coords, "gtk_text_view_buffer_to_window_coords", LIBS);
+  gidLink(cast(void**)&gtk_text_view_forward_display_line, "gtk_text_view_forward_display_line", LIBS);
+  gidLink(cast(void**)&gtk_text_view_forward_display_line_end, "gtk_text_view_forward_display_line_end", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_accepts_tab, "gtk_text_view_get_accepts_tab", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_bottom_margin, "gtk_text_view_get_bottom_margin", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_buffer, "gtk_text_view_get_buffer", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_cursor_locations, "gtk_text_view_get_cursor_locations", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_cursor_visible, "gtk_text_view_get_cursor_visible", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_editable, "gtk_text_view_get_editable", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_extra_menu, "gtk_text_view_get_extra_menu", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_gutter, "gtk_text_view_get_gutter", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_indent, "gtk_text_view_get_indent", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_input_hints, "gtk_text_view_get_input_hints", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_input_purpose, "gtk_text_view_get_input_purpose", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_iter_at_location, "gtk_text_view_get_iter_at_location", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_iter_at_position, "gtk_text_view_get_iter_at_position", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_iter_location, "gtk_text_view_get_iter_location", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_justification, "gtk_text_view_get_justification", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_left_margin, "gtk_text_view_get_left_margin", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_line_at_y, "gtk_text_view_get_line_at_y", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_line_yrange, "gtk_text_view_get_line_yrange", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_ltr_context, "gtk_text_view_get_ltr_context", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_monospace, "gtk_text_view_get_monospace", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_overwrite, "gtk_text_view_get_overwrite", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_pixels_above_lines, "gtk_text_view_get_pixels_above_lines", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_pixels_below_lines, "gtk_text_view_get_pixels_below_lines", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_pixels_inside_wrap, "gtk_text_view_get_pixels_inside_wrap", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_right_margin, "gtk_text_view_get_right_margin", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_rtl_context, "gtk_text_view_get_rtl_context", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_tabs, "gtk_text_view_get_tabs", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_top_margin, "gtk_text_view_get_top_margin", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_visible_rect, "gtk_text_view_get_visible_rect", LIBS);
+  gidLink(cast(void**)&gtk_text_view_get_wrap_mode, "gtk_text_view_get_wrap_mode", LIBS);
+  gidLink(cast(void**)&gtk_text_view_im_context_filter_keypress, "gtk_text_view_im_context_filter_keypress", LIBS);
+  gidLink(cast(void**)&gtk_text_view_move_mark_onscreen, "gtk_text_view_move_mark_onscreen", LIBS);
+  gidLink(cast(void**)&gtk_text_view_move_overlay, "gtk_text_view_move_overlay", LIBS);
+  gidLink(cast(void**)&gtk_text_view_move_visually, "gtk_text_view_move_visually", LIBS);
+  gidLink(cast(void**)&gtk_text_view_place_cursor_onscreen, "gtk_text_view_place_cursor_onscreen", LIBS);
+  gidLink(cast(void**)&gtk_text_view_remove, "gtk_text_view_remove", LIBS);
+  gidLink(cast(void**)&gtk_text_view_reset_cursor_blink, "gtk_text_view_reset_cursor_blink", LIBS);
+  gidLink(cast(void**)&gtk_text_view_reset_im_context, "gtk_text_view_reset_im_context", LIBS);
+  gidLink(cast(void**)&gtk_text_view_scroll_mark_onscreen, "gtk_text_view_scroll_mark_onscreen", LIBS);
+  gidLink(cast(void**)&gtk_text_view_scroll_to_iter, "gtk_text_view_scroll_to_iter", LIBS);
+  gidLink(cast(void**)&gtk_text_view_scroll_to_mark, "gtk_text_view_scroll_to_mark", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_accepts_tab, "gtk_text_view_set_accepts_tab", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_bottom_margin, "gtk_text_view_set_bottom_margin", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_buffer, "gtk_text_view_set_buffer", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_cursor_visible, "gtk_text_view_set_cursor_visible", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_editable, "gtk_text_view_set_editable", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_extra_menu, "gtk_text_view_set_extra_menu", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_gutter, "gtk_text_view_set_gutter", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_indent, "gtk_text_view_set_indent", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_input_hints, "gtk_text_view_set_input_hints", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_input_purpose, "gtk_text_view_set_input_purpose", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_justification, "gtk_text_view_set_justification", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_left_margin, "gtk_text_view_set_left_margin", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_monospace, "gtk_text_view_set_monospace", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_overwrite, "gtk_text_view_set_overwrite", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_pixels_above_lines, "gtk_text_view_set_pixels_above_lines", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_pixels_below_lines, "gtk_text_view_set_pixels_below_lines", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_pixels_inside_wrap, "gtk_text_view_set_pixels_inside_wrap", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_right_margin, "gtk_text_view_set_right_margin", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_tabs, "gtk_text_view_set_tabs", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_top_margin, "gtk_text_view_set_top_margin", LIBS);
+  gidLink(cast(void**)&gtk_text_view_set_wrap_mode, "gtk_text_view_set_wrap_mode", LIBS);
+  gidLink(cast(void**)&gtk_text_view_starts_display_line, "gtk_text_view_starts_display_line", LIBS);
+  gidLink(cast(void**)&gtk_text_view_window_to_buffer_coords, "gtk_text_view_window_to_buffer_coords", LIBS);
 
   // ToggleButton
-  gidLink(gtk_toggle_button_get_type, "gtk_toggle_button_get_type", LIBS);
-  gidLink(gtk_toggle_button_new, "gtk_toggle_button_new", LIBS);
-  gidLink(gtk_toggle_button_new_with_label, "gtk_toggle_button_new_with_label", LIBS);
-  gidLink(gtk_toggle_button_new_with_mnemonic, "gtk_toggle_button_new_with_mnemonic", LIBS);
-  gidLink(gtk_toggle_button_get_active, "gtk_toggle_button_get_active", LIBS);
-  gidLink(gtk_toggle_button_set_active, "gtk_toggle_button_set_active", LIBS);
-  gidLink(gtk_toggle_button_set_group, "gtk_toggle_button_set_group", LIBS);
-  gidLink(gtk_toggle_button_toggled, "gtk_toggle_button_toggled", LIBS);
+  gidLink(cast(void**)&gtk_toggle_button_get_type, "gtk_toggle_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_toggle_button_new, "gtk_toggle_button_new", LIBS);
+  gidLink(cast(void**)&gtk_toggle_button_new_with_label, "gtk_toggle_button_new_with_label", LIBS);
+  gidLink(cast(void**)&gtk_toggle_button_new_with_mnemonic, "gtk_toggle_button_new_with_mnemonic", LIBS);
+  gidLink(cast(void**)&gtk_toggle_button_get_active, "gtk_toggle_button_get_active", LIBS);
+  gidLink(cast(void**)&gtk_toggle_button_set_active, "gtk_toggle_button_set_active", LIBS);
+  gidLink(cast(void**)&gtk_toggle_button_set_group, "gtk_toggle_button_set_group", LIBS);
+  gidLink(cast(void**)&gtk_toggle_button_toggled, "gtk_toggle_button_toggled", LIBS);
 
   // Tooltip
-  gidLink(gtk_tooltip_get_type, "gtk_tooltip_get_type", LIBS);
-  gidLink(gtk_tooltip_set_custom, "gtk_tooltip_set_custom", LIBS);
-  gidLink(gtk_tooltip_set_icon, "gtk_tooltip_set_icon", LIBS);
-  gidLink(gtk_tooltip_set_icon_from_gicon, "gtk_tooltip_set_icon_from_gicon", LIBS);
-  gidLink(gtk_tooltip_set_icon_from_icon_name, "gtk_tooltip_set_icon_from_icon_name", LIBS);
-  gidLink(gtk_tooltip_set_markup, "gtk_tooltip_set_markup", LIBS);
-  gidLink(gtk_tooltip_set_text, "gtk_tooltip_set_text", LIBS);
-  gidLink(gtk_tooltip_set_tip_area, "gtk_tooltip_set_tip_area", LIBS);
+  gidLink(cast(void**)&gtk_tooltip_get_type, "gtk_tooltip_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tooltip_set_custom, "gtk_tooltip_set_custom", LIBS);
+  gidLink(cast(void**)&gtk_tooltip_set_icon, "gtk_tooltip_set_icon", LIBS);
+  gidLink(cast(void**)&gtk_tooltip_set_icon_from_gicon, "gtk_tooltip_set_icon_from_gicon", LIBS);
+  gidLink(cast(void**)&gtk_tooltip_set_icon_from_icon_name, "gtk_tooltip_set_icon_from_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_tooltip_set_markup, "gtk_tooltip_set_markup", LIBS);
+  gidLink(cast(void**)&gtk_tooltip_set_text, "gtk_tooltip_set_text", LIBS);
+  gidLink(cast(void**)&gtk_tooltip_set_tip_area, "gtk_tooltip_set_tip_area", LIBS);
 
   // TreeDragDest
-  gidLink(gtk_tree_drag_dest_get_type, "gtk_tree_drag_dest_get_type", LIBS);
-  gidLink(gtk_tree_drag_dest_drag_data_received, "gtk_tree_drag_dest_drag_data_received", LIBS);
-  gidLink(gtk_tree_drag_dest_row_drop_possible, "gtk_tree_drag_dest_row_drop_possible", LIBS);
+  gidLink(cast(void**)&gtk_tree_drag_dest_get_type, "gtk_tree_drag_dest_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_drag_dest_drag_data_received, "gtk_tree_drag_dest_drag_data_received", LIBS);
+  gidLink(cast(void**)&gtk_tree_drag_dest_row_drop_possible, "gtk_tree_drag_dest_row_drop_possible", LIBS);
 
   // TreeDragSource
-  gidLink(gtk_tree_drag_source_get_type, "gtk_tree_drag_source_get_type", LIBS);
-  gidLink(gtk_tree_drag_source_drag_data_delete, "gtk_tree_drag_source_drag_data_delete", LIBS);
-  gidLink(gtk_tree_drag_source_drag_data_get, "gtk_tree_drag_source_drag_data_get", LIBS);
-  gidLink(gtk_tree_drag_source_row_draggable, "gtk_tree_drag_source_row_draggable", LIBS);
+  gidLink(cast(void**)&gtk_tree_drag_source_get_type, "gtk_tree_drag_source_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_drag_source_drag_data_delete, "gtk_tree_drag_source_drag_data_delete", LIBS);
+  gidLink(cast(void**)&gtk_tree_drag_source_drag_data_get, "gtk_tree_drag_source_drag_data_get", LIBS);
+  gidLink(cast(void**)&gtk_tree_drag_source_row_draggable, "gtk_tree_drag_source_row_draggable", LIBS);
 
   // TreeExpander
-  gidLink(gtk_tree_expander_get_type, "gtk_tree_expander_get_type", LIBS);
-  gidLink(gtk_tree_expander_new, "gtk_tree_expander_new", LIBS);
-  gidLink(gtk_tree_expander_get_child, "gtk_tree_expander_get_child", LIBS);
-  gidLink(gtk_tree_expander_get_hide_expander, "gtk_tree_expander_get_hide_expander", LIBS);
-  gidLink(gtk_tree_expander_get_indent_for_depth, "gtk_tree_expander_get_indent_for_depth", LIBS);
-  gidLink(gtk_tree_expander_get_indent_for_icon, "gtk_tree_expander_get_indent_for_icon", LIBS);
-  gidLink(gtk_tree_expander_get_item, "gtk_tree_expander_get_item", LIBS);
-  gidLink(gtk_tree_expander_get_list_row, "gtk_tree_expander_get_list_row", LIBS);
-  gidLink(gtk_tree_expander_set_child, "gtk_tree_expander_set_child", LIBS);
-  gidLink(gtk_tree_expander_set_hide_expander, "gtk_tree_expander_set_hide_expander", LIBS);
-  gidLink(gtk_tree_expander_set_indent_for_depth, "gtk_tree_expander_set_indent_for_depth", LIBS);
-  gidLink(gtk_tree_expander_set_indent_for_icon, "gtk_tree_expander_set_indent_for_icon", LIBS);
-  gidLink(gtk_tree_expander_set_list_row, "gtk_tree_expander_set_list_row", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_get_type, "gtk_tree_expander_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_new, "gtk_tree_expander_new", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_get_child, "gtk_tree_expander_get_child", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_get_hide_expander, "gtk_tree_expander_get_hide_expander", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_get_indent_for_depth, "gtk_tree_expander_get_indent_for_depth", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_get_indent_for_icon, "gtk_tree_expander_get_indent_for_icon", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_get_item, "gtk_tree_expander_get_item", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_get_list_row, "gtk_tree_expander_get_list_row", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_set_child, "gtk_tree_expander_set_child", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_set_hide_expander, "gtk_tree_expander_set_hide_expander", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_set_indent_for_depth, "gtk_tree_expander_set_indent_for_depth", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_set_indent_for_icon, "gtk_tree_expander_set_indent_for_icon", LIBS);
+  gidLink(cast(void**)&gtk_tree_expander_set_list_row, "gtk_tree_expander_set_list_row", LIBS);
 
   // TreeIter
-  gidLink(gtk_tree_iter_get_type, "gtk_tree_iter_get_type", LIBS);
-  gidLink(gtk_tree_iter_copy, "gtk_tree_iter_copy", LIBS);
-  gidLink(gtk_tree_iter_free, "gtk_tree_iter_free", LIBS);
+  gidLink(cast(void**)&gtk_tree_iter_get_type, "gtk_tree_iter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_iter_copy, "gtk_tree_iter_copy", LIBS);
+  gidLink(cast(void**)&gtk_tree_iter_free, "gtk_tree_iter_free", LIBS);
 
   // TreeListModel
-  gidLink(gtk_tree_list_model_get_type, "gtk_tree_list_model_get_type", LIBS);
-  gidLink(gtk_tree_list_model_new, "gtk_tree_list_model_new", LIBS);
-  gidLink(gtk_tree_list_model_get_autoexpand, "gtk_tree_list_model_get_autoexpand", LIBS);
-  gidLink(gtk_tree_list_model_get_child_row, "gtk_tree_list_model_get_child_row", LIBS);
-  gidLink(gtk_tree_list_model_get_model, "gtk_tree_list_model_get_model", LIBS);
-  gidLink(gtk_tree_list_model_get_passthrough, "gtk_tree_list_model_get_passthrough", LIBS);
-  gidLink(gtk_tree_list_model_get_row, "gtk_tree_list_model_get_row", LIBS);
-  gidLink(gtk_tree_list_model_set_autoexpand, "gtk_tree_list_model_set_autoexpand", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_model_get_type, "gtk_tree_list_model_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_model_new, "gtk_tree_list_model_new", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_model_get_autoexpand, "gtk_tree_list_model_get_autoexpand", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_model_get_child_row, "gtk_tree_list_model_get_child_row", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_model_get_model, "gtk_tree_list_model_get_model", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_model_get_passthrough, "gtk_tree_list_model_get_passthrough", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_model_get_row, "gtk_tree_list_model_get_row", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_model_set_autoexpand, "gtk_tree_list_model_set_autoexpand", LIBS);
 
   // TreeListRow
-  gidLink(gtk_tree_list_row_get_type, "gtk_tree_list_row_get_type", LIBS);
-  gidLink(gtk_tree_list_row_get_child_row, "gtk_tree_list_row_get_child_row", LIBS);
-  gidLink(gtk_tree_list_row_get_children, "gtk_tree_list_row_get_children", LIBS);
-  gidLink(gtk_tree_list_row_get_depth, "gtk_tree_list_row_get_depth", LIBS);
-  gidLink(gtk_tree_list_row_get_expanded, "gtk_tree_list_row_get_expanded", LIBS);
-  gidLink(gtk_tree_list_row_get_item, "gtk_tree_list_row_get_item", LIBS);
-  gidLink(gtk_tree_list_row_get_parent, "gtk_tree_list_row_get_parent", LIBS);
-  gidLink(gtk_tree_list_row_get_position, "gtk_tree_list_row_get_position", LIBS);
-  gidLink(gtk_tree_list_row_is_expandable, "gtk_tree_list_row_is_expandable", LIBS);
-  gidLink(gtk_tree_list_row_set_expanded, "gtk_tree_list_row_set_expanded", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_get_type, "gtk_tree_list_row_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_get_child_row, "gtk_tree_list_row_get_child_row", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_get_children, "gtk_tree_list_row_get_children", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_get_depth, "gtk_tree_list_row_get_depth", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_get_expanded, "gtk_tree_list_row_get_expanded", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_get_item, "gtk_tree_list_row_get_item", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_get_parent, "gtk_tree_list_row_get_parent", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_get_position, "gtk_tree_list_row_get_position", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_is_expandable, "gtk_tree_list_row_is_expandable", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_set_expanded, "gtk_tree_list_row_set_expanded", LIBS);
 
   // TreeListRowSorter
-  gidLink(gtk_tree_list_row_sorter_get_type, "gtk_tree_list_row_sorter_get_type", LIBS);
-  gidLink(gtk_tree_list_row_sorter_new, "gtk_tree_list_row_sorter_new", LIBS);
-  gidLink(gtk_tree_list_row_sorter_get_sorter, "gtk_tree_list_row_sorter_get_sorter", LIBS);
-  gidLink(gtk_tree_list_row_sorter_set_sorter, "gtk_tree_list_row_sorter_set_sorter", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_sorter_get_type, "gtk_tree_list_row_sorter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_sorter_new, "gtk_tree_list_row_sorter_new", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_sorter_get_sorter, "gtk_tree_list_row_sorter_get_sorter", LIBS);
+  gidLink(cast(void**)&gtk_tree_list_row_sorter_set_sorter, "gtk_tree_list_row_sorter_set_sorter", LIBS);
 
   // TreeModel
-  gidLink(gtk_tree_model_get_type, "gtk_tree_model_get_type", LIBS);
-  gidLink(gtk_tree_model_filter_new, "gtk_tree_model_filter_new", LIBS);
-  gidLink(gtk_tree_model_foreach, "gtk_tree_model_foreach", LIBS);
-  gidLink(gtk_tree_model_get, "gtk_tree_model_get", LIBS);
-  gidLink(gtk_tree_model_get_column_type, "gtk_tree_model_get_column_type", LIBS);
-  gidLink(gtk_tree_model_get_flags, "gtk_tree_model_get_flags", LIBS);
-  gidLink(gtk_tree_model_get_iter, "gtk_tree_model_get_iter", LIBS);
-  gidLink(gtk_tree_model_get_iter_first, "gtk_tree_model_get_iter_first", LIBS);
-  gidLink(gtk_tree_model_get_iter_from_string, "gtk_tree_model_get_iter_from_string", LIBS);
-  gidLink(gtk_tree_model_get_n_columns, "gtk_tree_model_get_n_columns", LIBS);
-  gidLink(gtk_tree_model_get_path, "gtk_tree_model_get_path", LIBS);
-  gidLink(gtk_tree_model_get_string_from_iter, "gtk_tree_model_get_string_from_iter", LIBS);
-  gidLink(gtk_tree_model_get_valist, "gtk_tree_model_get_valist", LIBS);
-  gidLink(gtk_tree_model_get_value, "gtk_tree_model_get_value", LIBS);
-  gidLink(gtk_tree_model_iter_children, "gtk_tree_model_iter_children", LIBS);
-  gidLink(gtk_tree_model_iter_has_child, "gtk_tree_model_iter_has_child", LIBS);
-  gidLink(gtk_tree_model_iter_n_children, "gtk_tree_model_iter_n_children", LIBS);
-  gidLink(gtk_tree_model_iter_next, "gtk_tree_model_iter_next", LIBS);
-  gidLink(gtk_tree_model_iter_nth_child, "gtk_tree_model_iter_nth_child", LIBS);
-  gidLink(gtk_tree_model_iter_parent, "gtk_tree_model_iter_parent", LIBS);
-  gidLink(gtk_tree_model_iter_previous, "gtk_tree_model_iter_previous", LIBS);
-  gidLink(gtk_tree_model_ref_node, "gtk_tree_model_ref_node", LIBS);
-  gidLink(gtk_tree_model_row_changed, "gtk_tree_model_row_changed", LIBS);
-  gidLink(gtk_tree_model_row_deleted, "gtk_tree_model_row_deleted", LIBS);
-  gidLink(gtk_tree_model_row_has_child_toggled, "gtk_tree_model_row_has_child_toggled", LIBS);
-  gidLink(gtk_tree_model_row_inserted, "gtk_tree_model_row_inserted", LIBS);
-  gidLink(gtk_tree_model_rows_reordered, "gtk_tree_model_rows_reordered", LIBS);
-  gidLink(gtk_tree_model_rows_reordered_with_length, "gtk_tree_model_rows_reordered_with_length", LIBS);
-  gidLink(gtk_tree_model_unref_node, "gtk_tree_model_unref_node", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get_type, "gtk_tree_model_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_new, "gtk_tree_model_filter_new", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_foreach, "gtk_tree_model_foreach", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get, "gtk_tree_model_get", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get_column_type, "gtk_tree_model_get_column_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get_flags, "gtk_tree_model_get_flags", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get_iter, "gtk_tree_model_get_iter", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get_iter_first, "gtk_tree_model_get_iter_first", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get_iter_from_string, "gtk_tree_model_get_iter_from_string", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get_n_columns, "gtk_tree_model_get_n_columns", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get_path, "gtk_tree_model_get_path", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get_string_from_iter, "gtk_tree_model_get_string_from_iter", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get_valist, "gtk_tree_model_get_valist", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_get_value, "gtk_tree_model_get_value", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_iter_children, "gtk_tree_model_iter_children", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_iter_has_child, "gtk_tree_model_iter_has_child", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_iter_n_children, "gtk_tree_model_iter_n_children", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_iter_next, "gtk_tree_model_iter_next", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_iter_nth_child, "gtk_tree_model_iter_nth_child", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_iter_parent, "gtk_tree_model_iter_parent", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_iter_previous, "gtk_tree_model_iter_previous", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_ref_node, "gtk_tree_model_ref_node", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_row_changed, "gtk_tree_model_row_changed", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_row_deleted, "gtk_tree_model_row_deleted", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_row_has_child_toggled, "gtk_tree_model_row_has_child_toggled", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_row_inserted, "gtk_tree_model_row_inserted", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_rows_reordered, "gtk_tree_model_rows_reordered", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_rows_reordered_with_length, "gtk_tree_model_rows_reordered_with_length", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_unref_node, "gtk_tree_model_unref_node", LIBS);
 
   // TreeModelFilter
-  gidLink(gtk_tree_model_filter_get_type, "gtk_tree_model_filter_get_type", LIBS);
-  gidLink(gtk_tree_model_filter_clear_cache, "gtk_tree_model_filter_clear_cache", LIBS);
-  gidLink(gtk_tree_model_filter_convert_child_iter_to_iter, "gtk_tree_model_filter_convert_child_iter_to_iter", LIBS);
-  gidLink(gtk_tree_model_filter_convert_child_path_to_path, "gtk_tree_model_filter_convert_child_path_to_path", LIBS);
-  gidLink(gtk_tree_model_filter_convert_iter_to_child_iter, "gtk_tree_model_filter_convert_iter_to_child_iter", LIBS);
-  gidLink(gtk_tree_model_filter_convert_path_to_child_path, "gtk_tree_model_filter_convert_path_to_child_path", LIBS);
-  gidLink(gtk_tree_model_filter_get_model, "gtk_tree_model_filter_get_model", LIBS);
-  gidLink(gtk_tree_model_filter_refilter, "gtk_tree_model_filter_refilter", LIBS);
-  gidLink(gtk_tree_model_filter_set_modify_func, "gtk_tree_model_filter_set_modify_func", LIBS);
-  gidLink(gtk_tree_model_filter_set_visible_column, "gtk_tree_model_filter_set_visible_column", LIBS);
-  gidLink(gtk_tree_model_filter_set_visible_func, "gtk_tree_model_filter_set_visible_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_get_type, "gtk_tree_model_filter_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_clear_cache, "gtk_tree_model_filter_clear_cache", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_convert_child_iter_to_iter, "gtk_tree_model_filter_convert_child_iter_to_iter", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_convert_child_path_to_path, "gtk_tree_model_filter_convert_child_path_to_path", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_convert_iter_to_child_iter, "gtk_tree_model_filter_convert_iter_to_child_iter", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_convert_path_to_child_path, "gtk_tree_model_filter_convert_path_to_child_path", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_get_model, "gtk_tree_model_filter_get_model", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_refilter, "gtk_tree_model_filter_refilter", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_set_modify_func, "gtk_tree_model_filter_set_modify_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_set_visible_column, "gtk_tree_model_filter_set_visible_column", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_filter_set_visible_func, "gtk_tree_model_filter_set_visible_func", LIBS);
 
   // TreeModelSort
-  gidLink(gtk_tree_model_sort_get_type, "gtk_tree_model_sort_get_type", LIBS);
-  gidLink(gtk_tree_model_sort_new_with_model, "gtk_tree_model_sort_new_with_model", LIBS);
-  gidLink(gtk_tree_model_sort_clear_cache, "gtk_tree_model_sort_clear_cache", LIBS);
-  gidLink(gtk_tree_model_sort_convert_child_iter_to_iter, "gtk_tree_model_sort_convert_child_iter_to_iter", LIBS);
-  gidLink(gtk_tree_model_sort_convert_child_path_to_path, "gtk_tree_model_sort_convert_child_path_to_path", LIBS);
-  gidLink(gtk_tree_model_sort_convert_iter_to_child_iter, "gtk_tree_model_sort_convert_iter_to_child_iter", LIBS);
-  gidLink(gtk_tree_model_sort_convert_path_to_child_path, "gtk_tree_model_sort_convert_path_to_child_path", LIBS);
-  gidLink(gtk_tree_model_sort_get_model, "gtk_tree_model_sort_get_model", LIBS);
-  gidLink(gtk_tree_model_sort_iter_is_valid, "gtk_tree_model_sort_iter_is_valid", LIBS);
-  gidLink(gtk_tree_model_sort_reset_default_sort_func, "gtk_tree_model_sort_reset_default_sort_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_sort_get_type, "gtk_tree_model_sort_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_sort_new_with_model, "gtk_tree_model_sort_new_with_model", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_sort_clear_cache, "gtk_tree_model_sort_clear_cache", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_sort_convert_child_iter_to_iter, "gtk_tree_model_sort_convert_child_iter_to_iter", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_sort_convert_child_path_to_path, "gtk_tree_model_sort_convert_child_path_to_path", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_sort_convert_iter_to_child_iter, "gtk_tree_model_sort_convert_iter_to_child_iter", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_sort_convert_path_to_child_path, "gtk_tree_model_sort_convert_path_to_child_path", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_sort_get_model, "gtk_tree_model_sort_get_model", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_sort_iter_is_valid, "gtk_tree_model_sort_iter_is_valid", LIBS);
+  gidLink(cast(void**)&gtk_tree_model_sort_reset_default_sort_func, "gtk_tree_model_sort_reset_default_sort_func", LIBS);
 
   // TreePath
-  gidLink(gtk_tree_path_get_type, "gtk_tree_path_get_type", LIBS);
-  gidLink(gtk_tree_path_new, "gtk_tree_path_new", LIBS);
-  gidLink(gtk_tree_path_new_first, "gtk_tree_path_new_first", LIBS);
-  gidLink(gtk_tree_path_new_from_indices, "gtk_tree_path_new_from_indices", LIBS);
-  gidLink(gtk_tree_path_new_from_indicesv, "gtk_tree_path_new_from_indicesv", LIBS);
-  gidLink(gtk_tree_path_new_from_string, "gtk_tree_path_new_from_string", LIBS);
-  gidLink(gtk_tree_path_append_index, "gtk_tree_path_append_index", LIBS);
-  gidLink(gtk_tree_path_compare, "gtk_tree_path_compare", LIBS);
-  gidLink(gtk_tree_path_copy, "gtk_tree_path_copy", LIBS);
-  gidLink(gtk_tree_path_down, "gtk_tree_path_down", LIBS);
-  gidLink(gtk_tree_path_free, "gtk_tree_path_free", LIBS);
-  gidLink(gtk_tree_path_get_depth, "gtk_tree_path_get_depth", LIBS);
-  gidLink(gtk_tree_path_get_indices, "gtk_tree_path_get_indices", LIBS);
-  gidLink(gtk_tree_path_get_indices_with_depth, "gtk_tree_path_get_indices_with_depth", LIBS);
-  gidLink(gtk_tree_path_is_ancestor, "gtk_tree_path_is_ancestor", LIBS);
-  gidLink(gtk_tree_path_is_descendant, "gtk_tree_path_is_descendant", LIBS);
-  gidLink(gtk_tree_path_next, "gtk_tree_path_next", LIBS);
-  gidLink(gtk_tree_path_prepend_index, "gtk_tree_path_prepend_index", LIBS);
-  gidLink(gtk_tree_path_prev, "gtk_tree_path_prev", LIBS);
-  gidLink(gtk_tree_path_to_string, "gtk_tree_path_to_string", LIBS);
-  gidLink(gtk_tree_path_up, "gtk_tree_path_up", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_get_type, "gtk_tree_path_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_new, "gtk_tree_path_new", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_new_first, "gtk_tree_path_new_first", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_new_from_indices, "gtk_tree_path_new_from_indices", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_new_from_indicesv, "gtk_tree_path_new_from_indicesv", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_new_from_string, "gtk_tree_path_new_from_string", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_append_index, "gtk_tree_path_append_index", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_compare, "gtk_tree_path_compare", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_copy, "gtk_tree_path_copy", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_down, "gtk_tree_path_down", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_free, "gtk_tree_path_free", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_get_depth, "gtk_tree_path_get_depth", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_get_indices, "gtk_tree_path_get_indices", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_get_indices_with_depth, "gtk_tree_path_get_indices_with_depth", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_is_ancestor, "gtk_tree_path_is_ancestor", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_is_descendant, "gtk_tree_path_is_descendant", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_next, "gtk_tree_path_next", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_prepend_index, "gtk_tree_path_prepend_index", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_prev, "gtk_tree_path_prev", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_to_string, "gtk_tree_path_to_string", LIBS);
+  gidLink(cast(void**)&gtk_tree_path_up, "gtk_tree_path_up", LIBS);
 
   // TreeRowReference
-  gidLink(gtk_tree_row_reference_get_type, "gtk_tree_row_reference_get_type", LIBS);
-  gidLink(gtk_tree_row_reference_new, "gtk_tree_row_reference_new", LIBS);
-  gidLink(gtk_tree_row_reference_new_proxy, "gtk_tree_row_reference_new_proxy", LIBS);
-  gidLink(gtk_tree_row_reference_copy, "gtk_tree_row_reference_copy", LIBS);
-  gidLink(gtk_tree_row_reference_free, "gtk_tree_row_reference_free", LIBS);
-  gidLink(gtk_tree_row_reference_get_model, "gtk_tree_row_reference_get_model", LIBS);
-  gidLink(gtk_tree_row_reference_get_path, "gtk_tree_row_reference_get_path", LIBS);
-  gidLink(gtk_tree_row_reference_valid, "gtk_tree_row_reference_valid", LIBS);
-  gidLink(gtk_tree_row_reference_deleted, "gtk_tree_row_reference_deleted", LIBS);
-  gidLink(gtk_tree_row_reference_inserted, "gtk_tree_row_reference_inserted", LIBS);
-  gidLink(gtk_tree_row_reference_reordered, "gtk_tree_row_reference_reordered", LIBS);
+  gidLink(cast(void**)&gtk_tree_row_reference_get_type, "gtk_tree_row_reference_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_row_reference_new, "gtk_tree_row_reference_new", LIBS);
+  gidLink(cast(void**)&gtk_tree_row_reference_new_proxy, "gtk_tree_row_reference_new_proxy", LIBS);
+  gidLink(cast(void**)&gtk_tree_row_reference_copy, "gtk_tree_row_reference_copy", LIBS);
+  gidLink(cast(void**)&gtk_tree_row_reference_free, "gtk_tree_row_reference_free", LIBS);
+  gidLink(cast(void**)&gtk_tree_row_reference_get_model, "gtk_tree_row_reference_get_model", LIBS);
+  gidLink(cast(void**)&gtk_tree_row_reference_get_path, "gtk_tree_row_reference_get_path", LIBS);
+  gidLink(cast(void**)&gtk_tree_row_reference_valid, "gtk_tree_row_reference_valid", LIBS);
+  gidLink(cast(void**)&gtk_tree_row_reference_deleted, "gtk_tree_row_reference_deleted", LIBS);
+  gidLink(cast(void**)&gtk_tree_row_reference_inserted, "gtk_tree_row_reference_inserted", LIBS);
+  gidLink(cast(void**)&gtk_tree_row_reference_reordered, "gtk_tree_row_reference_reordered", LIBS);
 
   // TreeSelection
-  gidLink(gtk_tree_selection_get_type, "gtk_tree_selection_get_type", LIBS);
-  gidLink(gtk_tree_selection_count_selected_rows, "gtk_tree_selection_count_selected_rows", LIBS);
-  gidLink(gtk_tree_selection_get_mode, "gtk_tree_selection_get_mode", LIBS);
-  gidLink(gtk_tree_selection_get_select_function, "gtk_tree_selection_get_select_function", LIBS);
-  gidLink(gtk_tree_selection_get_selected, "gtk_tree_selection_get_selected", LIBS);
-  gidLink(gtk_tree_selection_get_selected_rows, "gtk_tree_selection_get_selected_rows", LIBS);
-  gidLink(gtk_tree_selection_get_tree_view, "gtk_tree_selection_get_tree_view", LIBS);
-  gidLink(gtk_tree_selection_get_user_data, "gtk_tree_selection_get_user_data", LIBS);
-  gidLink(gtk_tree_selection_iter_is_selected, "gtk_tree_selection_iter_is_selected", LIBS);
-  gidLink(gtk_tree_selection_path_is_selected, "gtk_tree_selection_path_is_selected", LIBS);
-  gidLink(gtk_tree_selection_select_all, "gtk_tree_selection_select_all", LIBS);
-  gidLink(gtk_tree_selection_select_iter, "gtk_tree_selection_select_iter", LIBS);
-  gidLink(gtk_tree_selection_select_path, "gtk_tree_selection_select_path", LIBS);
-  gidLink(gtk_tree_selection_select_range, "gtk_tree_selection_select_range", LIBS);
-  gidLink(gtk_tree_selection_selected_foreach, "gtk_tree_selection_selected_foreach", LIBS);
-  gidLink(gtk_tree_selection_set_mode, "gtk_tree_selection_set_mode", LIBS);
-  gidLink(gtk_tree_selection_set_select_function, "gtk_tree_selection_set_select_function", LIBS);
-  gidLink(gtk_tree_selection_unselect_all, "gtk_tree_selection_unselect_all", LIBS);
-  gidLink(gtk_tree_selection_unselect_iter, "gtk_tree_selection_unselect_iter", LIBS);
-  gidLink(gtk_tree_selection_unselect_path, "gtk_tree_selection_unselect_path", LIBS);
-  gidLink(gtk_tree_selection_unselect_range, "gtk_tree_selection_unselect_range", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_get_type, "gtk_tree_selection_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_count_selected_rows, "gtk_tree_selection_count_selected_rows", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_get_mode, "gtk_tree_selection_get_mode", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_get_select_function, "gtk_tree_selection_get_select_function", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_get_selected, "gtk_tree_selection_get_selected", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_get_selected_rows, "gtk_tree_selection_get_selected_rows", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_get_tree_view, "gtk_tree_selection_get_tree_view", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_get_user_data, "gtk_tree_selection_get_user_data", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_iter_is_selected, "gtk_tree_selection_iter_is_selected", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_path_is_selected, "gtk_tree_selection_path_is_selected", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_select_all, "gtk_tree_selection_select_all", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_select_iter, "gtk_tree_selection_select_iter", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_select_path, "gtk_tree_selection_select_path", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_select_range, "gtk_tree_selection_select_range", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_selected_foreach, "gtk_tree_selection_selected_foreach", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_set_mode, "gtk_tree_selection_set_mode", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_set_select_function, "gtk_tree_selection_set_select_function", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_unselect_all, "gtk_tree_selection_unselect_all", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_unselect_iter, "gtk_tree_selection_unselect_iter", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_unselect_path, "gtk_tree_selection_unselect_path", LIBS);
+  gidLink(cast(void**)&gtk_tree_selection_unselect_range, "gtk_tree_selection_unselect_range", LIBS);
 
   // TreeSortable
-  gidLink(gtk_tree_sortable_get_type, "gtk_tree_sortable_get_type", LIBS);
-  gidLink(gtk_tree_sortable_get_sort_column_id, "gtk_tree_sortable_get_sort_column_id", LIBS);
-  gidLink(gtk_tree_sortable_has_default_sort_func, "gtk_tree_sortable_has_default_sort_func", LIBS);
-  gidLink(gtk_tree_sortable_set_default_sort_func, "gtk_tree_sortable_set_default_sort_func", LIBS);
-  gidLink(gtk_tree_sortable_set_sort_column_id, "gtk_tree_sortable_set_sort_column_id", LIBS);
-  gidLink(gtk_tree_sortable_set_sort_func, "gtk_tree_sortable_set_sort_func", LIBS);
-  gidLink(gtk_tree_sortable_sort_column_changed, "gtk_tree_sortable_sort_column_changed", LIBS);
+  gidLink(cast(void**)&gtk_tree_sortable_get_type, "gtk_tree_sortable_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_sortable_get_sort_column_id, "gtk_tree_sortable_get_sort_column_id", LIBS);
+  gidLink(cast(void**)&gtk_tree_sortable_has_default_sort_func, "gtk_tree_sortable_has_default_sort_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_sortable_set_default_sort_func, "gtk_tree_sortable_set_default_sort_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_sortable_set_sort_column_id, "gtk_tree_sortable_set_sort_column_id", LIBS);
+  gidLink(cast(void**)&gtk_tree_sortable_set_sort_func, "gtk_tree_sortable_set_sort_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_sortable_sort_column_changed, "gtk_tree_sortable_sort_column_changed", LIBS);
 
   // TreeStore
-  gidLink(gtk_tree_store_get_type, "gtk_tree_store_get_type", LIBS);
-  gidLink(gtk_tree_store_new, "gtk_tree_store_new", LIBS);
-  gidLink(gtk_tree_store_newv, "gtk_tree_store_newv", LIBS);
-  gidLink(gtk_tree_store_append, "gtk_tree_store_append", LIBS);
-  gidLink(gtk_tree_store_clear, "gtk_tree_store_clear", LIBS);
-  gidLink(gtk_tree_store_insert, "gtk_tree_store_insert", LIBS);
-  gidLink(gtk_tree_store_insert_after, "gtk_tree_store_insert_after", LIBS);
-  gidLink(gtk_tree_store_insert_before, "gtk_tree_store_insert_before", LIBS);
-  gidLink(gtk_tree_store_insert_with_values, "gtk_tree_store_insert_with_values", LIBS);
-  gidLink(gtk_tree_store_insert_with_valuesv, "gtk_tree_store_insert_with_valuesv", LIBS);
-  gidLink(gtk_tree_store_is_ancestor, "gtk_tree_store_is_ancestor", LIBS);
-  gidLink(gtk_tree_store_iter_depth, "gtk_tree_store_iter_depth", LIBS);
-  gidLink(gtk_tree_store_iter_is_valid, "gtk_tree_store_iter_is_valid", LIBS);
-  gidLink(gtk_tree_store_move_after, "gtk_tree_store_move_after", LIBS);
-  gidLink(gtk_tree_store_move_before, "gtk_tree_store_move_before", LIBS);
-  gidLink(gtk_tree_store_prepend, "gtk_tree_store_prepend", LIBS);
-  gidLink(gtk_tree_store_remove, "gtk_tree_store_remove", LIBS);
-  gidLink(gtk_tree_store_reorder, "gtk_tree_store_reorder", LIBS);
-  gidLink(gtk_tree_store_set, "gtk_tree_store_set", LIBS);
-  gidLink(gtk_tree_store_set_column_types, "gtk_tree_store_set_column_types", LIBS);
-  gidLink(gtk_tree_store_set_valist, "gtk_tree_store_set_valist", LIBS);
-  gidLink(gtk_tree_store_set_value, "gtk_tree_store_set_value", LIBS);
-  gidLink(gtk_tree_store_set_valuesv, "gtk_tree_store_set_valuesv", LIBS);
-  gidLink(gtk_tree_store_swap, "gtk_tree_store_swap", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_get_type, "gtk_tree_store_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_new, "gtk_tree_store_new", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_newv, "gtk_tree_store_newv", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_append, "gtk_tree_store_append", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_clear, "gtk_tree_store_clear", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_insert, "gtk_tree_store_insert", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_insert_after, "gtk_tree_store_insert_after", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_insert_before, "gtk_tree_store_insert_before", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_insert_with_values, "gtk_tree_store_insert_with_values", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_insert_with_valuesv, "gtk_tree_store_insert_with_valuesv", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_is_ancestor, "gtk_tree_store_is_ancestor", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_iter_depth, "gtk_tree_store_iter_depth", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_iter_is_valid, "gtk_tree_store_iter_is_valid", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_move_after, "gtk_tree_store_move_after", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_move_before, "gtk_tree_store_move_before", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_prepend, "gtk_tree_store_prepend", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_remove, "gtk_tree_store_remove", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_reorder, "gtk_tree_store_reorder", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_set, "gtk_tree_store_set", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_set_column_types, "gtk_tree_store_set_column_types", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_set_valist, "gtk_tree_store_set_valist", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_set_value, "gtk_tree_store_set_value", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_set_valuesv, "gtk_tree_store_set_valuesv", LIBS);
+  gidLink(cast(void**)&gtk_tree_store_swap, "gtk_tree_store_swap", LIBS);
 
   // TreeView
-  gidLink(gtk_tree_view_get_type, "gtk_tree_view_get_type", LIBS);
-  gidLink(gtk_tree_view_new, "gtk_tree_view_new", LIBS);
-  gidLink(gtk_tree_view_new_with_model, "gtk_tree_view_new_with_model", LIBS);
-  gidLink(gtk_tree_view_append_column, "gtk_tree_view_append_column", LIBS);
-  gidLink(gtk_tree_view_collapse_all, "gtk_tree_view_collapse_all", LIBS);
-  gidLink(gtk_tree_view_collapse_row, "gtk_tree_view_collapse_row", LIBS);
-  gidLink(gtk_tree_view_columns_autosize, "gtk_tree_view_columns_autosize", LIBS);
-  gidLink(gtk_tree_view_convert_bin_window_to_tree_coords, "gtk_tree_view_convert_bin_window_to_tree_coords", LIBS);
-  gidLink(gtk_tree_view_convert_bin_window_to_widget_coords, "gtk_tree_view_convert_bin_window_to_widget_coords", LIBS);
-  gidLink(gtk_tree_view_convert_tree_to_bin_window_coords, "gtk_tree_view_convert_tree_to_bin_window_coords", LIBS);
-  gidLink(gtk_tree_view_convert_tree_to_widget_coords, "gtk_tree_view_convert_tree_to_widget_coords", LIBS);
-  gidLink(gtk_tree_view_convert_widget_to_bin_window_coords, "gtk_tree_view_convert_widget_to_bin_window_coords", LIBS);
-  gidLink(gtk_tree_view_convert_widget_to_tree_coords, "gtk_tree_view_convert_widget_to_tree_coords", LIBS);
-  gidLink(gtk_tree_view_create_row_drag_icon, "gtk_tree_view_create_row_drag_icon", LIBS);
-  gidLink(gtk_tree_view_enable_model_drag_dest, "gtk_tree_view_enable_model_drag_dest", LIBS);
-  gidLink(gtk_tree_view_enable_model_drag_source, "gtk_tree_view_enable_model_drag_source", LIBS);
-  gidLink(gtk_tree_view_expand_all, "gtk_tree_view_expand_all", LIBS);
-  gidLink(gtk_tree_view_expand_row, "gtk_tree_view_expand_row", LIBS);
-  gidLink(gtk_tree_view_expand_to_path, "gtk_tree_view_expand_to_path", LIBS);
-  gidLink(gtk_tree_view_get_activate_on_single_click, "gtk_tree_view_get_activate_on_single_click", LIBS);
-  gidLink(gtk_tree_view_get_background_area, "gtk_tree_view_get_background_area", LIBS);
-  gidLink(gtk_tree_view_get_cell_area, "gtk_tree_view_get_cell_area", LIBS);
-  gidLink(gtk_tree_view_get_column, "gtk_tree_view_get_column", LIBS);
-  gidLink(gtk_tree_view_get_columns, "gtk_tree_view_get_columns", LIBS);
-  gidLink(gtk_tree_view_get_cursor, "gtk_tree_view_get_cursor", LIBS);
-  gidLink(gtk_tree_view_get_dest_row_at_pos, "gtk_tree_view_get_dest_row_at_pos", LIBS);
-  gidLink(gtk_tree_view_get_drag_dest_row, "gtk_tree_view_get_drag_dest_row", LIBS);
-  gidLink(gtk_tree_view_get_enable_search, "gtk_tree_view_get_enable_search", LIBS);
-  gidLink(gtk_tree_view_get_enable_tree_lines, "gtk_tree_view_get_enable_tree_lines", LIBS);
-  gidLink(gtk_tree_view_get_expander_column, "gtk_tree_view_get_expander_column", LIBS);
-  gidLink(gtk_tree_view_get_fixed_height_mode, "gtk_tree_view_get_fixed_height_mode", LIBS);
-  gidLink(gtk_tree_view_get_grid_lines, "gtk_tree_view_get_grid_lines", LIBS);
-  gidLink(gtk_tree_view_get_headers_clickable, "gtk_tree_view_get_headers_clickable", LIBS);
-  gidLink(gtk_tree_view_get_headers_visible, "gtk_tree_view_get_headers_visible", LIBS);
-  gidLink(gtk_tree_view_get_hover_expand, "gtk_tree_view_get_hover_expand", LIBS);
-  gidLink(gtk_tree_view_get_hover_selection, "gtk_tree_view_get_hover_selection", LIBS);
-  gidLink(gtk_tree_view_get_level_indentation, "gtk_tree_view_get_level_indentation", LIBS);
-  gidLink(gtk_tree_view_get_model, "gtk_tree_view_get_model", LIBS);
-  gidLink(gtk_tree_view_get_n_columns, "gtk_tree_view_get_n_columns", LIBS);
-  gidLink(gtk_tree_view_get_path_at_pos, "gtk_tree_view_get_path_at_pos", LIBS);
-  gidLink(gtk_tree_view_get_reorderable, "gtk_tree_view_get_reorderable", LIBS);
-  gidLink(gtk_tree_view_get_row_separator_func, "gtk_tree_view_get_row_separator_func", LIBS);
-  gidLink(gtk_tree_view_get_rubber_banding, "gtk_tree_view_get_rubber_banding", LIBS);
-  gidLink(gtk_tree_view_get_search_column, "gtk_tree_view_get_search_column", LIBS);
-  gidLink(gtk_tree_view_get_search_entry, "gtk_tree_view_get_search_entry", LIBS);
-  gidLink(gtk_tree_view_get_search_equal_func, "gtk_tree_view_get_search_equal_func", LIBS);
-  gidLink(gtk_tree_view_get_selection, "gtk_tree_view_get_selection", LIBS);
-  gidLink(gtk_tree_view_get_show_expanders, "gtk_tree_view_get_show_expanders", LIBS);
-  gidLink(gtk_tree_view_get_tooltip_column, "gtk_tree_view_get_tooltip_column", LIBS);
-  gidLink(gtk_tree_view_get_tooltip_context, "gtk_tree_view_get_tooltip_context", LIBS);
-  gidLink(gtk_tree_view_get_visible_range, "gtk_tree_view_get_visible_range", LIBS);
-  gidLink(gtk_tree_view_get_visible_rect, "gtk_tree_view_get_visible_rect", LIBS);
-  gidLink(gtk_tree_view_insert_column, "gtk_tree_view_insert_column", LIBS);
-  gidLink(gtk_tree_view_insert_column_with_attributes, "gtk_tree_view_insert_column_with_attributes", LIBS);
-  gidLink(gtk_tree_view_insert_column_with_data_func, "gtk_tree_view_insert_column_with_data_func", LIBS);
-  gidLink(gtk_tree_view_is_blank_at_pos, "gtk_tree_view_is_blank_at_pos", LIBS);
-  gidLink(gtk_tree_view_is_rubber_banding_active, "gtk_tree_view_is_rubber_banding_active", LIBS);
-  gidLink(gtk_tree_view_map_expanded_rows, "gtk_tree_view_map_expanded_rows", LIBS);
-  gidLink(gtk_tree_view_move_column_after, "gtk_tree_view_move_column_after", LIBS);
-  gidLink(gtk_tree_view_remove_column, "gtk_tree_view_remove_column", LIBS);
-  gidLink(gtk_tree_view_row_activated, "gtk_tree_view_row_activated", LIBS);
-  gidLink(gtk_tree_view_row_expanded, "gtk_tree_view_row_expanded", LIBS);
-  gidLink(gtk_tree_view_scroll_to_cell, "gtk_tree_view_scroll_to_cell", LIBS);
-  gidLink(gtk_tree_view_scroll_to_point, "gtk_tree_view_scroll_to_point", LIBS);
-  gidLink(gtk_tree_view_set_activate_on_single_click, "gtk_tree_view_set_activate_on_single_click", LIBS);
-  gidLink(gtk_tree_view_set_column_drag_function, "gtk_tree_view_set_column_drag_function", LIBS);
-  gidLink(gtk_tree_view_set_cursor, "gtk_tree_view_set_cursor", LIBS);
-  gidLink(gtk_tree_view_set_cursor_on_cell, "gtk_tree_view_set_cursor_on_cell", LIBS);
-  gidLink(gtk_tree_view_set_drag_dest_row, "gtk_tree_view_set_drag_dest_row", LIBS);
-  gidLink(gtk_tree_view_set_enable_search, "gtk_tree_view_set_enable_search", LIBS);
-  gidLink(gtk_tree_view_set_enable_tree_lines, "gtk_tree_view_set_enable_tree_lines", LIBS);
-  gidLink(gtk_tree_view_set_expander_column, "gtk_tree_view_set_expander_column", LIBS);
-  gidLink(gtk_tree_view_set_fixed_height_mode, "gtk_tree_view_set_fixed_height_mode", LIBS);
-  gidLink(gtk_tree_view_set_grid_lines, "gtk_tree_view_set_grid_lines", LIBS);
-  gidLink(gtk_tree_view_set_headers_clickable, "gtk_tree_view_set_headers_clickable", LIBS);
-  gidLink(gtk_tree_view_set_headers_visible, "gtk_tree_view_set_headers_visible", LIBS);
-  gidLink(gtk_tree_view_set_hover_expand, "gtk_tree_view_set_hover_expand", LIBS);
-  gidLink(gtk_tree_view_set_hover_selection, "gtk_tree_view_set_hover_selection", LIBS);
-  gidLink(gtk_tree_view_set_level_indentation, "gtk_tree_view_set_level_indentation", LIBS);
-  gidLink(gtk_tree_view_set_model, "gtk_tree_view_set_model", LIBS);
-  gidLink(gtk_tree_view_set_reorderable, "gtk_tree_view_set_reorderable", LIBS);
-  gidLink(gtk_tree_view_set_row_separator_func, "gtk_tree_view_set_row_separator_func", LIBS);
-  gidLink(gtk_tree_view_set_rubber_banding, "gtk_tree_view_set_rubber_banding", LIBS);
-  gidLink(gtk_tree_view_set_search_column, "gtk_tree_view_set_search_column", LIBS);
-  gidLink(gtk_tree_view_set_search_entry, "gtk_tree_view_set_search_entry", LIBS);
-  gidLink(gtk_tree_view_set_search_equal_func, "gtk_tree_view_set_search_equal_func", LIBS);
-  gidLink(gtk_tree_view_set_show_expanders, "gtk_tree_view_set_show_expanders", LIBS);
-  gidLink(gtk_tree_view_set_tooltip_cell, "gtk_tree_view_set_tooltip_cell", LIBS);
-  gidLink(gtk_tree_view_set_tooltip_column, "gtk_tree_view_set_tooltip_column", LIBS);
-  gidLink(gtk_tree_view_set_tooltip_row, "gtk_tree_view_set_tooltip_row", LIBS);
-  gidLink(gtk_tree_view_unset_rows_drag_dest, "gtk_tree_view_unset_rows_drag_dest", LIBS);
-  gidLink(gtk_tree_view_unset_rows_drag_source, "gtk_tree_view_unset_rows_drag_source", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_type, "gtk_tree_view_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_new, "gtk_tree_view_new", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_new_with_model, "gtk_tree_view_new_with_model", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_append_column, "gtk_tree_view_append_column", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_collapse_all, "gtk_tree_view_collapse_all", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_collapse_row, "gtk_tree_view_collapse_row", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_columns_autosize, "gtk_tree_view_columns_autosize", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_convert_bin_window_to_tree_coords, "gtk_tree_view_convert_bin_window_to_tree_coords", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_convert_bin_window_to_widget_coords, "gtk_tree_view_convert_bin_window_to_widget_coords", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_convert_tree_to_bin_window_coords, "gtk_tree_view_convert_tree_to_bin_window_coords", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_convert_tree_to_widget_coords, "gtk_tree_view_convert_tree_to_widget_coords", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_convert_widget_to_bin_window_coords, "gtk_tree_view_convert_widget_to_bin_window_coords", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_convert_widget_to_tree_coords, "gtk_tree_view_convert_widget_to_tree_coords", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_create_row_drag_icon, "gtk_tree_view_create_row_drag_icon", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_enable_model_drag_dest, "gtk_tree_view_enable_model_drag_dest", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_enable_model_drag_source, "gtk_tree_view_enable_model_drag_source", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_expand_all, "gtk_tree_view_expand_all", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_expand_row, "gtk_tree_view_expand_row", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_expand_to_path, "gtk_tree_view_expand_to_path", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_activate_on_single_click, "gtk_tree_view_get_activate_on_single_click", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_background_area, "gtk_tree_view_get_background_area", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_cell_area, "gtk_tree_view_get_cell_area", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_column, "gtk_tree_view_get_column", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_columns, "gtk_tree_view_get_columns", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_cursor, "gtk_tree_view_get_cursor", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_dest_row_at_pos, "gtk_tree_view_get_dest_row_at_pos", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_drag_dest_row, "gtk_tree_view_get_drag_dest_row", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_enable_search, "gtk_tree_view_get_enable_search", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_enable_tree_lines, "gtk_tree_view_get_enable_tree_lines", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_expander_column, "gtk_tree_view_get_expander_column", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_fixed_height_mode, "gtk_tree_view_get_fixed_height_mode", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_grid_lines, "gtk_tree_view_get_grid_lines", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_headers_clickable, "gtk_tree_view_get_headers_clickable", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_headers_visible, "gtk_tree_view_get_headers_visible", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_hover_expand, "gtk_tree_view_get_hover_expand", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_hover_selection, "gtk_tree_view_get_hover_selection", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_level_indentation, "gtk_tree_view_get_level_indentation", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_model, "gtk_tree_view_get_model", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_n_columns, "gtk_tree_view_get_n_columns", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_path_at_pos, "gtk_tree_view_get_path_at_pos", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_reorderable, "gtk_tree_view_get_reorderable", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_row_separator_func, "gtk_tree_view_get_row_separator_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_rubber_banding, "gtk_tree_view_get_rubber_banding", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_search_column, "gtk_tree_view_get_search_column", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_search_entry, "gtk_tree_view_get_search_entry", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_search_equal_func, "gtk_tree_view_get_search_equal_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_selection, "gtk_tree_view_get_selection", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_show_expanders, "gtk_tree_view_get_show_expanders", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_tooltip_column, "gtk_tree_view_get_tooltip_column", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_tooltip_context, "gtk_tree_view_get_tooltip_context", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_visible_range, "gtk_tree_view_get_visible_range", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_get_visible_rect, "gtk_tree_view_get_visible_rect", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_insert_column, "gtk_tree_view_insert_column", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_insert_column_with_attributes, "gtk_tree_view_insert_column_with_attributes", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_insert_column_with_data_func, "gtk_tree_view_insert_column_with_data_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_is_blank_at_pos, "gtk_tree_view_is_blank_at_pos", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_is_rubber_banding_active, "gtk_tree_view_is_rubber_banding_active", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_map_expanded_rows, "gtk_tree_view_map_expanded_rows", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_move_column_after, "gtk_tree_view_move_column_after", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_remove_column, "gtk_tree_view_remove_column", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_row_activated, "gtk_tree_view_row_activated", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_row_expanded, "gtk_tree_view_row_expanded", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_scroll_to_cell, "gtk_tree_view_scroll_to_cell", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_scroll_to_point, "gtk_tree_view_scroll_to_point", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_activate_on_single_click, "gtk_tree_view_set_activate_on_single_click", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_column_drag_function, "gtk_tree_view_set_column_drag_function", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_cursor, "gtk_tree_view_set_cursor", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_cursor_on_cell, "gtk_tree_view_set_cursor_on_cell", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_drag_dest_row, "gtk_tree_view_set_drag_dest_row", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_enable_search, "gtk_tree_view_set_enable_search", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_enable_tree_lines, "gtk_tree_view_set_enable_tree_lines", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_expander_column, "gtk_tree_view_set_expander_column", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_fixed_height_mode, "gtk_tree_view_set_fixed_height_mode", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_grid_lines, "gtk_tree_view_set_grid_lines", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_headers_clickable, "gtk_tree_view_set_headers_clickable", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_headers_visible, "gtk_tree_view_set_headers_visible", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_hover_expand, "gtk_tree_view_set_hover_expand", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_hover_selection, "gtk_tree_view_set_hover_selection", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_level_indentation, "gtk_tree_view_set_level_indentation", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_model, "gtk_tree_view_set_model", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_reorderable, "gtk_tree_view_set_reorderable", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_row_separator_func, "gtk_tree_view_set_row_separator_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_rubber_banding, "gtk_tree_view_set_rubber_banding", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_search_column, "gtk_tree_view_set_search_column", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_search_entry, "gtk_tree_view_set_search_entry", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_search_equal_func, "gtk_tree_view_set_search_equal_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_show_expanders, "gtk_tree_view_set_show_expanders", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_tooltip_cell, "gtk_tree_view_set_tooltip_cell", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_tooltip_column, "gtk_tree_view_set_tooltip_column", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_set_tooltip_row, "gtk_tree_view_set_tooltip_row", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_unset_rows_drag_dest, "gtk_tree_view_unset_rows_drag_dest", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_unset_rows_drag_source, "gtk_tree_view_unset_rows_drag_source", LIBS);
 
   // TreeViewColumn
-  gidLink(gtk_tree_view_column_get_type, "gtk_tree_view_column_get_type", LIBS);
-  gidLink(gtk_tree_view_column_new, "gtk_tree_view_column_new", LIBS);
-  gidLink(gtk_tree_view_column_new_with_area, "gtk_tree_view_column_new_with_area", LIBS);
-  gidLink(gtk_tree_view_column_new_with_attributes, "gtk_tree_view_column_new_with_attributes", LIBS);
-  gidLink(gtk_tree_view_column_add_attribute, "gtk_tree_view_column_add_attribute", LIBS);
-  gidLink(gtk_tree_view_column_cell_get_position, "gtk_tree_view_column_cell_get_position", LIBS);
-  gidLink(gtk_tree_view_column_cell_get_size, "gtk_tree_view_column_cell_get_size", LIBS);
-  gidLink(gtk_tree_view_column_cell_is_visible, "gtk_tree_view_column_cell_is_visible", LIBS);
-  gidLink(gtk_tree_view_column_cell_set_cell_data, "gtk_tree_view_column_cell_set_cell_data", LIBS);
-  gidLink(gtk_tree_view_column_clear, "gtk_tree_view_column_clear", LIBS);
-  gidLink(gtk_tree_view_column_clear_attributes, "gtk_tree_view_column_clear_attributes", LIBS);
-  gidLink(gtk_tree_view_column_clicked, "gtk_tree_view_column_clicked", LIBS);
-  gidLink(gtk_tree_view_column_focus_cell, "gtk_tree_view_column_focus_cell", LIBS);
-  gidLink(gtk_tree_view_column_get_alignment, "gtk_tree_view_column_get_alignment", LIBS);
-  gidLink(gtk_tree_view_column_get_button, "gtk_tree_view_column_get_button", LIBS);
-  gidLink(gtk_tree_view_column_get_clickable, "gtk_tree_view_column_get_clickable", LIBS);
-  gidLink(gtk_tree_view_column_get_expand, "gtk_tree_view_column_get_expand", LIBS);
-  gidLink(gtk_tree_view_column_get_fixed_width, "gtk_tree_view_column_get_fixed_width", LIBS);
-  gidLink(gtk_tree_view_column_get_max_width, "gtk_tree_view_column_get_max_width", LIBS);
-  gidLink(gtk_tree_view_column_get_min_width, "gtk_tree_view_column_get_min_width", LIBS);
-  gidLink(gtk_tree_view_column_get_reorderable, "gtk_tree_view_column_get_reorderable", LIBS);
-  gidLink(gtk_tree_view_column_get_resizable, "gtk_tree_view_column_get_resizable", LIBS);
-  gidLink(gtk_tree_view_column_get_sizing, "gtk_tree_view_column_get_sizing", LIBS);
-  gidLink(gtk_tree_view_column_get_sort_column_id, "gtk_tree_view_column_get_sort_column_id", LIBS);
-  gidLink(gtk_tree_view_column_get_sort_indicator, "gtk_tree_view_column_get_sort_indicator", LIBS);
-  gidLink(gtk_tree_view_column_get_sort_order, "gtk_tree_view_column_get_sort_order", LIBS);
-  gidLink(gtk_tree_view_column_get_spacing, "gtk_tree_view_column_get_spacing", LIBS);
-  gidLink(gtk_tree_view_column_get_title, "gtk_tree_view_column_get_title", LIBS);
-  gidLink(gtk_tree_view_column_get_tree_view, "gtk_tree_view_column_get_tree_view", LIBS);
-  gidLink(gtk_tree_view_column_get_visible, "gtk_tree_view_column_get_visible", LIBS);
-  gidLink(gtk_tree_view_column_get_widget, "gtk_tree_view_column_get_widget", LIBS);
-  gidLink(gtk_tree_view_column_get_width, "gtk_tree_view_column_get_width", LIBS);
-  gidLink(gtk_tree_view_column_get_x_offset, "gtk_tree_view_column_get_x_offset", LIBS);
-  gidLink(gtk_tree_view_column_pack_end, "gtk_tree_view_column_pack_end", LIBS);
-  gidLink(gtk_tree_view_column_pack_start, "gtk_tree_view_column_pack_start", LIBS);
-  gidLink(gtk_tree_view_column_queue_resize, "gtk_tree_view_column_queue_resize", LIBS);
-  gidLink(gtk_tree_view_column_set_alignment, "gtk_tree_view_column_set_alignment", LIBS);
-  gidLink(gtk_tree_view_column_set_attributes, "gtk_tree_view_column_set_attributes", LIBS);
-  gidLink(gtk_tree_view_column_set_cell_data_func, "gtk_tree_view_column_set_cell_data_func", LIBS);
-  gidLink(gtk_tree_view_column_set_clickable, "gtk_tree_view_column_set_clickable", LIBS);
-  gidLink(gtk_tree_view_column_set_expand, "gtk_tree_view_column_set_expand", LIBS);
-  gidLink(gtk_tree_view_column_set_fixed_width, "gtk_tree_view_column_set_fixed_width", LIBS);
-  gidLink(gtk_tree_view_column_set_max_width, "gtk_tree_view_column_set_max_width", LIBS);
-  gidLink(gtk_tree_view_column_set_min_width, "gtk_tree_view_column_set_min_width", LIBS);
-  gidLink(gtk_tree_view_column_set_reorderable, "gtk_tree_view_column_set_reorderable", LIBS);
-  gidLink(gtk_tree_view_column_set_resizable, "gtk_tree_view_column_set_resizable", LIBS);
-  gidLink(gtk_tree_view_column_set_sizing, "gtk_tree_view_column_set_sizing", LIBS);
-  gidLink(gtk_tree_view_column_set_sort_column_id, "gtk_tree_view_column_set_sort_column_id", LIBS);
-  gidLink(gtk_tree_view_column_set_sort_indicator, "gtk_tree_view_column_set_sort_indicator", LIBS);
-  gidLink(gtk_tree_view_column_set_sort_order, "gtk_tree_view_column_set_sort_order", LIBS);
-  gidLink(gtk_tree_view_column_set_spacing, "gtk_tree_view_column_set_spacing", LIBS);
-  gidLink(gtk_tree_view_column_set_title, "gtk_tree_view_column_set_title", LIBS);
-  gidLink(gtk_tree_view_column_set_visible, "gtk_tree_view_column_set_visible", LIBS);
-  gidLink(gtk_tree_view_column_set_widget, "gtk_tree_view_column_set_widget", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_type, "gtk_tree_view_column_get_type", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_new, "gtk_tree_view_column_new", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_new_with_area, "gtk_tree_view_column_new_with_area", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_new_with_attributes, "gtk_tree_view_column_new_with_attributes", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_add_attribute, "gtk_tree_view_column_add_attribute", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_cell_get_position, "gtk_tree_view_column_cell_get_position", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_cell_get_size, "gtk_tree_view_column_cell_get_size", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_cell_is_visible, "gtk_tree_view_column_cell_is_visible", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_cell_set_cell_data, "gtk_tree_view_column_cell_set_cell_data", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_clear, "gtk_tree_view_column_clear", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_clear_attributes, "gtk_tree_view_column_clear_attributes", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_clicked, "gtk_tree_view_column_clicked", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_focus_cell, "gtk_tree_view_column_focus_cell", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_alignment, "gtk_tree_view_column_get_alignment", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_button, "gtk_tree_view_column_get_button", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_clickable, "gtk_tree_view_column_get_clickable", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_expand, "gtk_tree_view_column_get_expand", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_fixed_width, "gtk_tree_view_column_get_fixed_width", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_max_width, "gtk_tree_view_column_get_max_width", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_min_width, "gtk_tree_view_column_get_min_width", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_reorderable, "gtk_tree_view_column_get_reorderable", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_resizable, "gtk_tree_view_column_get_resizable", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_sizing, "gtk_tree_view_column_get_sizing", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_sort_column_id, "gtk_tree_view_column_get_sort_column_id", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_sort_indicator, "gtk_tree_view_column_get_sort_indicator", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_sort_order, "gtk_tree_view_column_get_sort_order", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_spacing, "gtk_tree_view_column_get_spacing", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_title, "gtk_tree_view_column_get_title", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_tree_view, "gtk_tree_view_column_get_tree_view", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_visible, "gtk_tree_view_column_get_visible", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_widget, "gtk_tree_view_column_get_widget", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_width, "gtk_tree_view_column_get_width", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_get_x_offset, "gtk_tree_view_column_get_x_offset", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_pack_end, "gtk_tree_view_column_pack_end", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_pack_start, "gtk_tree_view_column_pack_start", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_queue_resize, "gtk_tree_view_column_queue_resize", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_alignment, "gtk_tree_view_column_set_alignment", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_attributes, "gtk_tree_view_column_set_attributes", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_cell_data_func, "gtk_tree_view_column_set_cell_data_func", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_clickable, "gtk_tree_view_column_set_clickable", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_expand, "gtk_tree_view_column_set_expand", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_fixed_width, "gtk_tree_view_column_set_fixed_width", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_max_width, "gtk_tree_view_column_set_max_width", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_min_width, "gtk_tree_view_column_set_min_width", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_reorderable, "gtk_tree_view_column_set_reorderable", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_resizable, "gtk_tree_view_column_set_resizable", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_sizing, "gtk_tree_view_column_set_sizing", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_sort_column_id, "gtk_tree_view_column_set_sort_column_id", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_sort_indicator, "gtk_tree_view_column_set_sort_indicator", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_sort_order, "gtk_tree_view_column_set_sort_order", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_spacing, "gtk_tree_view_column_set_spacing", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_title, "gtk_tree_view_column_set_title", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_visible, "gtk_tree_view_column_set_visible", LIBS);
+  gidLink(cast(void**)&gtk_tree_view_column_set_widget, "gtk_tree_view_column_set_widget", LIBS);
 
   // UriLauncher
-  gidLink(gtk_uri_launcher_get_type, "gtk_uri_launcher_get_type", LIBS);
-  gidLink(gtk_uri_launcher_new, "gtk_uri_launcher_new", LIBS);
-  gidLink(gtk_uri_launcher_get_uri, "gtk_uri_launcher_get_uri", LIBS);
-  gidLink(gtk_uri_launcher_launch, "gtk_uri_launcher_launch", LIBS);
-  gidLink(gtk_uri_launcher_launch_finish, "gtk_uri_launcher_launch_finish", LIBS);
-  gidLink(gtk_uri_launcher_set_uri, "gtk_uri_launcher_set_uri", LIBS);
+  gidLink(cast(void**)&gtk_uri_launcher_get_type, "gtk_uri_launcher_get_type", LIBS);
+  gidLink(cast(void**)&gtk_uri_launcher_new, "gtk_uri_launcher_new", LIBS);
+  gidLink(cast(void**)&gtk_uri_launcher_get_uri, "gtk_uri_launcher_get_uri", LIBS);
+  gidLink(cast(void**)&gtk_uri_launcher_launch, "gtk_uri_launcher_launch", LIBS);
+  gidLink(cast(void**)&gtk_uri_launcher_launch_finish, "gtk_uri_launcher_launch_finish", LIBS);
+  gidLink(cast(void**)&gtk_uri_launcher_set_uri, "gtk_uri_launcher_set_uri", LIBS);
 
   // Video
-  gidLink(gtk_video_get_type, "gtk_video_get_type", LIBS);
-  gidLink(gtk_video_new, "gtk_video_new", LIBS);
-  gidLink(gtk_video_new_for_file, "gtk_video_new_for_file", LIBS);
-  gidLink(gtk_video_new_for_filename, "gtk_video_new_for_filename", LIBS);
-  gidLink(gtk_video_new_for_media_stream, "gtk_video_new_for_media_stream", LIBS);
-  gidLink(gtk_video_new_for_resource, "gtk_video_new_for_resource", LIBS);
-  gidLink(gtk_video_get_autoplay, "gtk_video_get_autoplay", LIBS);
-  gidLink(gtk_video_get_file, "gtk_video_get_file", LIBS);
-  gidLink(gtk_video_get_graphics_offload, "gtk_video_get_graphics_offload", LIBS);
-  gidLink(gtk_video_get_loop, "gtk_video_get_loop", LIBS);
-  gidLink(gtk_video_get_media_stream, "gtk_video_get_media_stream", LIBS);
-  gidLink(gtk_video_set_autoplay, "gtk_video_set_autoplay", LIBS);
-  gidLink(gtk_video_set_file, "gtk_video_set_file", LIBS);
-  gidLink(gtk_video_set_filename, "gtk_video_set_filename", LIBS);
-  gidLink(gtk_video_set_graphics_offload, "gtk_video_set_graphics_offload", LIBS);
-  gidLink(gtk_video_set_loop, "gtk_video_set_loop", LIBS);
-  gidLink(gtk_video_set_media_stream, "gtk_video_set_media_stream", LIBS);
-  gidLink(gtk_video_set_resource, "gtk_video_set_resource", LIBS);
+  gidLink(cast(void**)&gtk_video_get_type, "gtk_video_get_type", LIBS);
+  gidLink(cast(void**)&gtk_video_new, "gtk_video_new", LIBS);
+  gidLink(cast(void**)&gtk_video_new_for_file, "gtk_video_new_for_file", LIBS);
+  gidLink(cast(void**)&gtk_video_new_for_filename, "gtk_video_new_for_filename", LIBS);
+  gidLink(cast(void**)&gtk_video_new_for_media_stream, "gtk_video_new_for_media_stream", LIBS);
+  gidLink(cast(void**)&gtk_video_new_for_resource, "gtk_video_new_for_resource", LIBS);
+  gidLink(cast(void**)&gtk_video_get_autoplay, "gtk_video_get_autoplay", LIBS);
+  gidLink(cast(void**)&gtk_video_get_file, "gtk_video_get_file", LIBS);
+  gidLink(cast(void**)&gtk_video_get_graphics_offload, "gtk_video_get_graphics_offload", LIBS);
+  gidLink(cast(void**)&gtk_video_get_loop, "gtk_video_get_loop", LIBS);
+  gidLink(cast(void**)&gtk_video_get_media_stream, "gtk_video_get_media_stream", LIBS);
+  gidLink(cast(void**)&gtk_video_set_autoplay, "gtk_video_set_autoplay", LIBS);
+  gidLink(cast(void**)&gtk_video_set_file, "gtk_video_set_file", LIBS);
+  gidLink(cast(void**)&gtk_video_set_filename, "gtk_video_set_filename", LIBS);
+  gidLink(cast(void**)&gtk_video_set_graphics_offload, "gtk_video_set_graphics_offload", LIBS);
+  gidLink(cast(void**)&gtk_video_set_loop, "gtk_video_set_loop", LIBS);
+  gidLink(cast(void**)&gtk_video_set_media_stream, "gtk_video_set_media_stream", LIBS);
+  gidLink(cast(void**)&gtk_video_set_resource, "gtk_video_set_resource", LIBS);
 
   // Viewport
-  gidLink(gtk_viewport_get_type, "gtk_viewport_get_type", LIBS);
-  gidLink(gtk_viewport_new, "gtk_viewport_new", LIBS);
-  gidLink(gtk_viewport_get_child, "gtk_viewport_get_child", LIBS);
-  gidLink(gtk_viewport_get_scroll_to_focus, "gtk_viewport_get_scroll_to_focus", LIBS);
-  gidLink(gtk_viewport_scroll_to, "gtk_viewport_scroll_to", LIBS);
-  gidLink(gtk_viewport_set_child, "gtk_viewport_set_child", LIBS);
-  gidLink(gtk_viewport_set_scroll_to_focus, "gtk_viewport_set_scroll_to_focus", LIBS);
+  gidLink(cast(void**)&gtk_viewport_get_type, "gtk_viewport_get_type", LIBS);
+  gidLink(cast(void**)&gtk_viewport_new, "gtk_viewport_new", LIBS);
+  gidLink(cast(void**)&gtk_viewport_get_child, "gtk_viewport_get_child", LIBS);
+  gidLink(cast(void**)&gtk_viewport_get_scroll_to_focus, "gtk_viewport_get_scroll_to_focus", LIBS);
+  gidLink(cast(void**)&gtk_viewport_scroll_to, "gtk_viewport_scroll_to", LIBS);
+  gidLink(cast(void**)&gtk_viewport_set_child, "gtk_viewport_set_child", LIBS);
+  gidLink(cast(void**)&gtk_viewport_set_scroll_to_focus, "gtk_viewport_set_scroll_to_focus", LIBS);
 
   // VolumeButton
-  gidLink(gtk_volume_button_get_type, "gtk_volume_button_get_type", LIBS);
-  gidLink(gtk_volume_button_new, "gtk_volume_button_new", LIBS);
+  gidLink(cast(void**)&gtk_volume_button_get_type, "gtk_volume_button_get_type", LIBS);
+  gidLink(cast(void**)&gtk_volume_button_new, "gtk_volume_button_new", LIBS);
 
   // Widget
-  gidLink(gtk_widget_get_type, "gtk_widget_get_type", LIBS);
-  gidLink(gtk_widget_get_default_direction, "gtk_widget_get_default_direction", LIBS);
-  gidLink(gtk_widget_set_default_direction, "gtk_widget_set_default_direction", LIBS);
-  gidLink(gtk_widget_action_set_enabled, "gtk_widget_action_set_enabled", LIBS);
-  gidLink(gtk_widget_activate, "gtk_widget_activate", LIBS);
-  gidLink(gtk_widget_activate_action, "gtk_widget_activate_action", LIBS);
-  gidLink(gtk_widget_activate_action_variant, "gtk_widget_activate_action_variant", LIBS);
-  gidLink(gtk_widget_activate_default, "gtk_widget_activate_default", LIBS);
-  gidLink(gtk_widget_add_controller, "gtk_widget_add_controller", LIBS);
-  gidLink(gtk_widget_add_css_class, "gtk_widget_add_css_class", LIBS);
-  gidLink(gtk_widget_add_mnemonic_label, "gtk_widget_add_mnemonic_label", LIBS);
-  gidLink(gtk_widget_add_tick_callback, "gtk_widget_add_tick_callback", LIBS);
-  gidLink(gtk_widget_allocate, "gtk_widget_allocate", LIBS);
-  gidLink(gtk_widget_child_focus, "gtk_widget_child_focus", LIBS);
-  gidLink(gtk_widget_compute_bounds, "gtk_widget_compute_bounds", LIBS);
-  gidLink(gtk_widget_compute_expand, "gtk_widget_compute_expand", LIBS);
-  gidLink(gtk_widget_compute_point, "gtk_widget_compute_point", LIBS);
-  gidLink(gtk_widget_compute_transform, "gtk_widget_compute_transform", LIBS);
-  gidLink(gtk_widget_contains, "gtk_widget_contains", LIBS);
-  gidLink(gtk_widget_create_pango_context, "gtk_widget_create_pango_context", LIBS);
-  gidLink(gtk_widget_create_pango_layout, "gtk_widget_create_pango_layout", LIBS);
-  gidLink(gtk_widget_dispose_template, "gtk_widget_dispose_template", LIBS);
-  gidLink(gtk_drag_check_threshold, "gtk_drag_check_threshold", LIBS);
-  gidLink(gtk_widget_error_bell, "gtk_widget_error_bell", LIBS);
-  gidLink(gtk_widget_get_allocated_baseline, "gtk_widget_get_allocated_baseline", LIBS);
-  gidLink(gtk_widget_get_allocated_height, "gtk_widget_get_allocated_height", LIBS);
-  gidLink(gtk_widget_get_allocated_width, "gtk_widget_get_allocated_width", LIBS);
-  gidLink(gtk_widget_get_allocation, "gtk_widget_get_allocation", LIBS);
-  gidLink(gtk_widget_get_ancestor, "gtk_widget_get_ancestor", LIBS);
-  gidLink(gtk_widget_get_baseline, "gtk_widget_get_baseline", LIBS);
-  gidLink(gtk_widget_get_can_focus, "gtk_widget_get_can_focus", LIBS);
-  gidLink(gtk_widget_get_can_target, "gtk_widget_get_can_target", LIBS);
-  gidLink(gtk_widget_get_child_visible, "gtk_widget_get_child_visible", LIBS);
-  gidLink(gtk_widget_get_clipboard, "gtk_widget_get_clipboard", LIBS);
-  gidLink(gtk_widget_get_color, "gtk_widget_get_color", LIBS);
-  gidLink(gtk_widget_get_css_classes, "gtk_widget_get_css_classes", LIBS);
-  gidLink(gtk_widget_get_css_name, "gtk_widget_get_css_name", LIBS);
-  gidLink(gtk_widget_get_cursor, "gtk_widget_get_cursor", LIBS);
-  gidLink(gtk_widget_get_direction, "gtk_widget_get_direction", LIBS);
-  gidLink(gtk_widget_get_display, "gtk_widget_get_display", LIBS);
-  gidLink(gtk_widget_get_first_child, "gtk_widget_get_first_child", LIBS);
-  gidLink(gtk_widget_get_focus_child, "gtk_widget_get_focus_child", LIBS);
-  gidLink(gtk_widget_get_focus_on_click, "gtk_widget_get_focus_on_click", LIBS);
-  gidLink(gtk_widget_get_focusable, "gtk_widget_get_focusable", LIBS);
-  gidLink(gtk_widget_get_font_map, "gtk_widget_get_font_map", LIBS);
-  gidLink(gtk_widget_get_font_options, "gtk_widget_get_font_options", LIBS);
-  gidLink(gtk_widget_get_frame_clock, "gtk_widget_get_frame_clock", LIBS);
-  gidLink(gtk_widget_get_halign, "gtk_widget_get_halign", LIBS);
-  gidLink(gtk_widget_get_has_tooltip, "gtk_widget_get_has_tooltip", LIBS);
-  gidLink(gtk_widget_get_height, "gtk_widget_get_height", LIBS);
-  gidLink(gtk_widget_get_hexpand, "gtk_widget_get_hexpand", LIBS);
-  gidLink(gtk_widget_get_hexpand_set, "gtk_widget_get_hexpand_set", LIBS);
-  gidLink(gtk_widget_get_last_child, "gtk_widget_get_last_child", LIBS);
-  gidLink(gtk_widget_get_layout_manager, "gtk_widget_get_layout_manager", LIBS);
-  gidLink(gtk_widget_get_mapped, "gtk_widget_get_mapped", LIBS);
-  gidLink(gtk_widget_get_margin_bottom, "gtk_widget_get_margin_bottom", LIBS);
-  gidLink(gtk_widget_get_margin_end, "gtk_widget_get_margin_end", LIBS);
-  gidLink(gtk_widget_get_margin_start, "gtk_widget_get_margin_start", LIBS);
-  gidLink(gtk_widget_get_margin_top, "gtk_widget_get_margin_top", LIBS);
-  gidLink(gtk_widget_get_name, "gtk_widget_get_name", LIBS);
-  gidLink(gtk_widget_get_native, "gtk_widget_get_native", LIBS);
-  gidLink(gtk_widget_get_next_sibling, "gtk_widget_get_next_sibling", LIBS);
-  gidLink(gtk_widget_get_opacity, "gtk_widget_get_opacity", LIBS);
-  gidLink(gtk_widget_get_overflow, "gtk_widget_get_overflow", LIBS);
-  gidLink(gtk_widget_get_pango_context, "gtk_widget_get_pango_context", LIBS);
-  gidLink(gtk_widget_get_parent, "gtk_widget_get_parent", LIBS);
-  gidLink(gtk_widget_get_preferred_size, "gtk_widget_get_preferred_size", LIBS);
-  gidLink(gtk_widget_get_prev_sibling, "gtk_widget_get_prev_sibling", LIBS);
-  gidLink(gtk_widget_get_primary_clipboard, "gtk_widget_get_primary_clipboard", LIBS);
-  gidLink(gtk_widget_get_realized, "gtk_widget_get_realized", LIBS);
-  gidLink(gtk_widget_get_receives_default, "gtk_widget_get_receives_default", LIBS);
-  gidLink(gtk_widget_get_request_mode, "gtk_widget_get_request_mode", LIBS);
-  gidLink(gtk_widget_get_root, "gtk_widget_get_root", LIBS);
-  gidLink(gtk_widget_get_scale_factor, "gtk_widget_get_scale_factor", LIBS);
-  gidLink(gtk_widget_get_sensitive, "gtk_widget_get_sensitive", LIBS);
-  gidLink(gtk_widget_get_settings, "gtk_widget_get_settings", LIBS);
-  gidLink(gtk_widget_get_size, "gtk_widget_get_size", LIBS);
-  gidLink(gtk_widget_get_size_request, "gtk_widget_get_size_request", LIBS);
-  gidLink(gtk_widget_get_state_flags, "gtk_widget_get_state_flags", LIBS);
-  gidLink(gtk_widget_get_style_context, "gtk_widget_get_style_context", LIBS);
-  gidLink(gtk_widget_get_template_child, "gtk_widget_get_template_child", LIBS);
-  gidLink(gtk_widget_get_tooltip_markup, "gtk_widget_get_tooltip_markup", LIBS);
-  gidLink(gtk_widget_get_tooltip_text, "gtk_widget_get_tooltip_text", LIBS);
-  gidLink(gtk_widget_get_valign, "gtk_widget_get_valign", LIBS);
-  gidLink(gtk_widget_get_vexpand, "gtk_widget_get_vexpand", LIBS);
-  gidLink(gtk_widget_get_vexpand_set, "gtk_widget_get_vexpand_set", LIBS);
-  gidLink(gtk_widget_get_visible, "gtk_widget_get_visible", LIBS);
-  gidLink(gtk_widget_get_width, "gtk_widget_get_width", LIBS);
-  gidLink(gtk_widget_grab_focus, "gtk_widget_grab_focus", LIBS);
-  gidLink(gtk_widget_has_css_class, "gtk_widget_has_css_class", LIBS);
-  gidLink(gtk_widget_has_default, "gtk_widget_has_default", LIBS);
-  gidLink(gtk_widget_has_focus, "gtk_widget_has_focus", LIBS);
-  gidLink(gtk_widget_has_visible_focus, "gtk_widget_has_visible_focus", LIBS);
-  gidLink(gtk_widget_hide, "gtk_widget_hide", LIBS);
-  gidLink(gtk_widget_in_destruction, "gtk_widget_in_destruction", LIBS);
-  gidLink(gtk_widget_init_template, "gtk_widget_init_template", LIBS);
-  gidLink(gtk_widget_insert_action_group, "gtk_widget_insert_action_group", LIBS);
-  gidLink(gtk_widget_insert_after, "gtk_widget_insert_after", LIBS);
-  gidLink(gtk_widget_insert_before, "gtk_widget_insert_before", LIBS);
-  gidLink(gtk_widget_is_ancestor, "gtk_widget_is_ancestor", LIBS);
-  gidLink(gtk_widget_is_drawable, "gtk_widget_is_drawable", LIBS);
-  gidLink(gtk_widget_is_focus, "gtk_widget_is_focus", LIBS);
-  gidLink(gtk_widget_is_sensitive, "gtk_widget_is_sensitive", LIBS);
-  gidLink(gtk_widget_is_visible, "gtk_widget_is_visible", LIBS);
-  gidLink(gtk_widget_keynav_failed, "gtk_widget_keynav_failed", LIBS);
-  gidLink(gtk_widget_list_mnemonic_labels, "gtk_widget_list_mnemonic_labels", LIBS);
-  gidLink(gtk_widget_map, "gtk_widget_map", LIBS);
-  gidLink(gtk_widget_measure, "gtk_widget_measure", LIBS);
-  gidLink(gtk_widget_mnemonic_activate, "gtk_widget_mnemonic_activate", LIBS);
-  gidLink(gtk_widget_observe_children, "gtk_widget_observe_children", LIBS);
-  gidLink(gtk_widget_observe_controllers, "gtk_widget_observe_controllers", LIBS);
-  gidLink(gtk_widget_pick, "gtk_widget_pick", LIBS);
-  gidLink(gtk_widget_queue_allocate, "gtk_widget_queue_allocate", LIBS);
-  gidLink(gtk_widget_queue_draw, "gtk_widget_queue_draw", LIBS);
-  gidLink(gtk_widget_queue_resize, "gtk_widget_queue_resize", LIBS);
-  gidLink(gtk_widget_realize, "gtk_widget_realize", LIBS);
-  gidLink(gtk_widget_remove_controller, "gtk_widget_remove_controller", LIBS);
-  gidLink(gtk_widget_remove_css_class, "gtk_widget_remove_css_class", LIBS);
-  gidLink(gtk_widget_remove_mnemonic_label, "gtk_widget_remove_mnemonic_label", LIBS);
-  gidLink(gtk_widget_remove_tick_callback, "gtk_widget_remove_tick_callback", LIBS);
-  gidLink(gtk_widget_set_can_focus, "gtk_widget_set_can_focus", LIBS);
-  gidLink(gtk_widget_set_can_target, "gtk_widget_set_can_target", LIBS);
-  gidLink(gtk_widget_set_child_visible, "gtk_widget_set_child_visible", LIBS);
-  gidLink(gtk_widget_set_css_classes, "gtk_widget_set_css_classes", LIBS);
-  gidLink(gtk_widget_set_cursor, "gtk_widget_set_cursor", LIBS);
-  gidLink(gtk_widget_set_cursor_from_name, "gtk_widget_set_cursor_from_name", LIBS);
-  gidLink(gtk_widget_set_direction, "gtk_widget_set_direction", LIBS);
-  gidLink(gtk_widget_set_focus_child, "gtk_widget_set_focus_child", LIBS);
-  gidLink(gtk_widget_set_focus_on_click, "gtk_widget_set_focus_on_click", LIBS);
-  gidLink(gtk_widget_set_focusable, "gtk_widget_set_focusable", LIBS);
-  gidLink(gtk_widget_set_font_map, "gtk_widget_set_font_map", LIBS);
-  gidLink(gtk_widget_set_font_options, "gtk_widget_set_font_options", LIBS);
-  gidLink(gtk_widget_set_halign, "gtk_widget_set_halign", LIBS);
-  gidLink(gtk_widget_set_has_tooltip, "gtk_widget_set_has_tooltip", LIBS);
-  gidLink(gtk_widget_set_hexpand, "gtk_widget_set_hexpand", LIBS);
-  gidLink(gtk_widget_set_hexpand_set, "gtk_widget_set_hexpand_set", LIBS);
-  gidLink(gtk_widget_set_layout_manager, "gtk_widget_set_layout_manager", LIBS);
-  gidLink(gtk_widget_set_margin_bottom, "gtk_widget_set_margin_bottom", LIBS);
-  gidLink(gtk_widget_set_margin_end, "gtk_widget_set_margin_end", LIBS);
-  gidLink(gtk_widget_set_margin_start, "gtk_widget_set_margin_start", LIBS);
-  gidLink(gtk_widget_set_margin_top, "gtk_widget_set_margin_top", LIBS);
-  gidLink(gtk_widget_set_name, "gtk_widget_set_name", LIBS);
-  gidLink(gtk_widget_set_opacity, "gtk_widget_set_opacity", LIBS);
-  gidLink(gtk_widget_set_overflow, "gtk_widget_set_overflow", LIBS);
-  gidLink(gtk_widget_set_parent, "gtk_widget_set_parent", LIBS);
-  gidLink(gtk_widget_set_receives_default, "gtk_widget_set_receives_default", LIBS);
-  gidLink(gtk_widget_set_sensitive, "gtk_widget_set_sensitive", LIBS);
-  gidLink(gtk_widget_set_size_request, "gtk_widget_set_size_request", LIBS);
-  gidLink(gtk_widget_set_state_flags, "gtk_widget_set_state_flags", LIBS);
-  gidLink(gtk_widget_set_tooltip_markup, "gtk_widget_set_tooltip_markup", LIBS);
-  gidLink(gtk_widget_set_tooltip_text, "gtk_widget_set_tooltip_text", LIBS);
-  gidLink(gtk_widget_set_valign, "gtk_widget_set_valign", LIBS);
-  gidLink(gtk_widget_set_vexpand, "gtk_widget_set_vexpand", LIBS);
-  gidLink(gtk_widget_set_vexpand_set, "gtk_widget_set_vexpand_set", LIBS);
-  gidLink(gtk_widget_set_visible, "gtk_widget_set_visible", LIBS);
-  gidLink(gtk_widget_should_layout, "gtk_widget_should_layout", LIBS);
-  gidLink(gtk_widget_show, "gtk_widget_show", LIBS);
-  gidLink(gtk_widget_size_allocate, "gtk_widget_size_allocate", LIBS);
-  gidLink(gtk_widget_snapshot_child, "gtk_widget_snapshot_child", LIBS);
-  gidLink(gtk_widget_translate_coordinates, "gtk_widget_translate_coordinates", LIBS);
-  gidLink(gtk_widget_trigger_tooltip_query, "gtk_widget_trigger_tooltip_query", LIBS);
-  gidLink(gtk_widget_unmap, "gtk_widget_unmap", LIBS);
-  gidLink(gtk_widget_unparent, "gtk_widget_unparent", LIBS);
-  gidLink(gtk_widget_unrealize, "gtk_widget_unrealize", LIBS);
-  gidLink(gtk_widget_unset_state_flags, "gtk_widget_unset_state_flags", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_type, "gtk_widget_get_type", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_default_direction, "gtk_widget_get_default_direction", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_default_direction, "gtk_widget_set_default_direction", LIBS);
+  gidLink(cast(void**)&gtk_widget_action_set_enabled, "gtk_widget_action_set_enabled", LIBS);
+  gidLink(cast(void**)&gtk_widget_activate, "gtk_widget_activate", LIBS);
+  gidLink(cast(void**)&gtk_widget_activate_action, "gtk_widget_activate_action", LIBS);
+  gidLink(cast(void**)&gtk_widget_activate_action_variant, "gtk_widget_activate_action_variant", LIBS);
+  gidLink(cast(void**)&gtk_widget_activate_default, "gtk_widget_activate_default", LIBS);
+  gidLink(cast(void**)&gtk_widget_add_controller, "gtk_widget_add_controller", LIBS);
+  gidLink(cast(void**)&gtk_widget_add_css_class, "gtk_widget_add_css_class", LIBS);
+  gidLink(cast(void**)&gtk_widget_add_mnemonic_label, "gtk_widget_add_mnemonic_label", LIBS);
+  gidLink(cast(void**)&gtk_widget_add_tick_callback, "gtk_widget_add_tick_callback", LIBS);
+  gidLink(cast(void**)&gtk_widget_allocate, "gtk_widget_allocate", LIBS);
+  gidLink(cast(void**)&gtk_widget_child_focus, "gtk_widget_child_focus", LIBS);
+  gidLink(cast(void**)&gtk_widget_compute_bounds, "gtk_widget_compute_bounds", LIBS);
+  gidLink(cast(void**)&gtk_widget_compute_expand, "gtk_widget_compute_expand", LIBS);
+  gidLink(cast(void**)&gtk_widget_compute_point, "gtk_widget_compute_point", LIBS);
+  gidLink(cast(void**)&gtk_widget_compute_transform, "gtk_widget_compute_transform", LIBS);
+  gidLink(cast(void**)&gtk_widget_contains, "gtk_widget_contains", LIBS);
+  gidLink(cast(void**)&gtk_widget_create_pango_context, "gtk_widget_create_pango_context", LIBS);
+  gidLink(cast(void**)&gtk_widget_create_pango_layout, "gtk_widget_create_pango_layout", LIBS);
+  gidLink(cast(void**)&gtk_widget_dispose_template, "gtk_widget_dispose_template", LIBS);
+  gidLink(cast(void**)&gtk_drag_check_threshold, "gtk_drag_check_threshold", LIBS);
+  gidLink(cast(void**)&gtk_widget_error_bell, "gtk_widget_error_bell", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_allocated_baseline, "gtk_widget_get_allocated_baseline", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_allocated_height, "gtk_widget_get_allocated_height", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_allocated_width, "gtk_widget_get_allocated_width", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_allocation, "gtk_widget_get_allocation", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_ancestor, "gtk_widget_get_ancestor", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_baseline, "gtk_widget_get_baseline", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_can_focus, "gtk_widget_get_can_focus", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_can_target, "gtk_widget_get_can_target", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_child_visible, "gtk_widget_get_child_visible", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_clipboard, "gtk_widget_get_clipboard", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_color, "gtk_widget_get_color", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_css_classes, "gtk_widget_get_css_classes", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_css_name, "gtk_widget_get_css_name", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_cursor, "gtk_widget_get_cursor", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_direction, "gtk_widget_get_direction", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_display, "gtk_widget_get_display", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_first_child, "gtk_widget_get_first_child", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_focus_child, "gtk_widget_get_focus_child", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_focus_on_click, "gtk_widget_get_focus_on_click", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_focusable, "gtk_widget_get_focusable", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_font_map, "gtk_widget_get_font_map", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_font_options, "gtk_widget_get_font_options", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_frame_clock, "gtk_widget_get_frame_clock", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_halign, "gtk_widget_get_halign", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_has_tooltip, "gtk_widget_get_has_tooltip", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_height, "gtk_widget_get_height", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_hexpand, "gtk_widget_get_hexpand", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_hexpand_set, "gtk_widget_get_hexpand_set", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_last_child, "gtk_widget_get_last_child", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_layout_manager, "gtk_widget_get_layout_manager", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_mapped, "gtk_widget_get_mapped", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_margin_bottom, "gtk_widget_get_margin_bottom", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_margin_end, "gtk_widget_get_margin_end", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_margin_start, "gtk_widget_get_margin_start", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_margin_top, "gtk_widget_get_margin_top", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_name, "gtk_widget_get_name", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_native, "gtk_widget_get_native", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_next_sibling, "gtk_widget_get_next_sibling", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_opacity, "gtk_widget_get_opacity", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_overflow, "gtk_widget_get_overflow", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_pango_context, "gtk_widget_get_pango_context", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_parent, "gtk_widget_get_parent", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_preferred_size, "gtk_widget_get_preferred_size", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_prev_sibling, "gtk_widget_get_prev_sibling", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_primary_clipboard, "gtk_widget_get_primary_clipboard", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_realized, "gtk_widget_get_realized", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_receives_default, "gtk_widget_get_receives_default", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_request_mode, "gtk_widget_get_request_mode", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_root, "gtk_widget_get_root", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_scale_factor, "gtk_widget_get_scale_factor", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_sensitive, "gtk_widget_get_sensitive", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_settings, "gtk_widget_get_settings", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_size, "gtk_widget_get_size", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_size_request, "gtk_widget_get_size_request", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_state_flags, "gtk_widget_get_state_flags", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_style_context, "gtk_widget_get_style_context", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_template_child, "gtk_widget_get_template_child", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_tooltip_markup, "gtk_widget_get_tooltip_markup", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_tooltip_text, "gtk_widget_get_tooltip_text", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_valign, "gtk_widget_get_valign", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_vexpand, "gtk_widget_get_vexpand", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_vexpand_set, "gtk_widget_get_vexpand_set", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_visible, "gtk_widget_get_visible", LIBS);
+  gidLink(cast(void**)&gtk_widget_get_width, "gtk_widget_get_width", LIBS);
+  gidLink(cast(void**)&gtk_widget_grab_focus, "gtk_widget_grab_focus", LIBS);
+  gidLink(cast(void**)&gtk_widget_has_css_class, "gtk_widget_has_css_class", LIBS);
+  gidLink(cast(void**)&gtk_widget_has_default, "gtk_widget_has_default", LIBS);
+  gidLink(cast(void**)&gtk_widget_has_focus, "gtk_widget_has_focus", LIBS);
+  gidLink(cast(void**)&gtk_widget_has_visible_focus, "gtk_widget_has_visible_focus", LIBS);
+  gidLink(cast(void**)&gtk_widget_hide, "gtk_widget_hide", LIBS);
+  gidLink(cast(void**)&gtk_widget_in_destruction, "gtk_widget_in_destruction", LIBS);
+  gidLink(cast(void**)&gtk_widget_init_template, "gtk_widget_init_template", LIBS);
+  gidLink(cast(void**)&gtk_widget_insert_action_group, "gtk_widget_insert_action_group", LIBS);
+  gidLink(cast(void**)&gtk_widget_insert_after, "gtk_widget_insert_after", LIBS);
+  gidLink(cast(void**)&gtk_widget_insert_before, "gtk_widget_insert_before", LIBS);
+  gidLink(cast(void**)&gtk_widget_is_ancestor, "gtk_widget_is_ancestor", LIBS);
+  gidLink(cast(void**)&gtk_widget_is_drawable, "gtk_widget_is_drawable", LIBS);
+  gidLink(cast(void**)&gtk_widget_is_focus, "gtk_widget_is_focus", LIBS);
+  gidLink(cast(void**)&gtk_widget_is_sensitive, "gtk_widget_is_sensitive", LIBS);
+  gidLink(cast(void**)&gtk_widget_is_visible, "gtk_widget_is_visible", LIBS);
+  gidLink(cast(void**)&gtk_widget_keynav_failed, "gtk_widget_keynav_failed", LIBS);
+  gidLink(cast(void**)&gtk_widget_list_mnemonic_labels, "gtk_widget_list_mnemonic_labels", LIBS);
+  gidLink(cast(void**)&gtk_widget_map, "gtk_widget_map", LIBS);
+  gidLink(cast(void**)&gtk_widget_measure, "gtk_widget_measure", LIBS);
+  gidLink(cast(void**)&gtk_widget_mnemonic_activate, "gtk_widget_mnemonic_activate", LIBS);
+  gidLink(cast(void**)&gtk_widget_observe_children, "gtk_widget_observe_children", LIBS);
+  gidLink(cast(void**)&gtk_widget_observe_controllers, "gtk_widget_observe_controllers", LIBS);
+  gidLink(cast(void**)&gtk_widget_pick, "gtk_widget_pick", LIBS);
+  gidLink(cast(void**)&gtk_widget_queue_allocate, "gtk_widget_queue_allocate", LIBS);
+  gidLink(cast(void**)&gtk_widget_queue_draw, "gtk_widget_queue_draw", LIBS);
+  gidLink(cast(void**)&gtk_widget_queue_resize, "gtk_widget_queue_resize", LIBS);
+  gidLink(cast(void**)&gtk_widget_realize, "gtk_widget_realize", LIBS);
+  gidLink(cast(void**)&gtk_widget_remove_controller, "gtk_widget_remove_controller", LIBS);
+  gidLink(cast(void**)&gtk_widget_remove_css_class, "gtk_widget_remove_css_class", LIBS);
+  gidLink(cast(void**)&gtk_widget_remove_mnemonic_label, "gtk_widget_remove_mnemonic_label", LIBS);
+  gidLink(cast(void**)&gtk_widget_remove_tick_callback, "gtk_widget_remove_tick_callback", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_can_focus, "gtk_widget_set_can_focus", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_can_target, "gtk_widget_set_can_target", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_child_visible, "gtk_widget_set_child_visible", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_css_classes, "gtk_widget_set_css_classes", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_cursor, "gtk_widget_set_cursor", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_cursor_from_name, "gtk_widget_set_cursor_from_name", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_direction, "gtk_widget_set_direction", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_focus_child, "gtk_widget_set_focus_child", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_focus_on_click, "gtk_widget_set_focus_on_click", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_focusable, "gtk_widget_set_focusable", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_font_map, "gtk_widget_set_font_map", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_font_options, "gtk_widget_set_font_options", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_halign, "gtk_widget_set_halign", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_has_tooltip, "gtk_widget_set_has_tooltip", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_hexpand, "gtk_widget_set_hexpand", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_hexpand_set, "gtk_widget_set_hexpand_set", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_layout_manager, "gtk_widget_set_layout_manager", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_margin_bottom, "gtk_widget_set_margin_bottom", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_margin_end, "gtk_widget_set_margin_end", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_margin_start, "gtk_widget_set_margin_start", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_margin_top, "gtk_widget_set_margin_top", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_name, "gtk_widget_set_name", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_opacity, "gtk_widget_set_opacity", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_overflow, "gtk_widget_set_overflow", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_parent, "gtk_widget_set_parent", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_receives_default, "gtk_widget_set_receives_default", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_sensitive, "gtk_widget_set_sensitive", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_size_request, "gtk_widget_set_size_request", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_state_flags, "gtk_widget_set_state_flags", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_tooltip_markup, "gtk_widget_set_tooltip_markup", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_tooltip_text, "gtk_widget_set_tooltip_text", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_valign, "gtk_widget_set_valign", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_vexpand, "gtk_widget_set_vexpand", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_vexpand_set, "gtk_widget_set_vexpand_set", LIBS);
+  gidLink(cast(void**)&gtk_widget_set_visible, "gtk_widget_set_visible", LIBS);
+  gidLink(cast(void**)&gtk_widget_should_layout, "gtk_widget_should_layout", LIBS);
+  gidLink(cast(void**)&gtk_widget_show, "gtk_widget_show", LIBS);
+  gidLink(cast(void**)&gtk_widget_size_allocate, "gtk_widget_size_allocate", LIBS);
+  gidLink(cast(void**)&gtk_widget_snapshot_child, "gtk_widget_snapshot_child", LIBS);
+  gidLink(cast(void**)&gtk_widget_translate_coordinates, "gtk_widget_translate_coordinates", LIBS);
+  gidLink(cast(void**)&gtk_widget_trigger_tooltip_query, "gtk_widget_trigger_tooltip_query", LIBS);
+  gidLink(cast(void**)&gtk_widget_unmap, "gtk_widget_unmap", LIBS);
+  gidLink(cast(void**)&gtk_widget_unparent, "gtk_widget_unparent", LIBS);
+  gidLink(cast(void**)&gtk_widget_unrealize, "gtk_widget_unrealize", LIBS);
+  gidLink(cast(void**)&gtk_widget_unset_state_flags, "gtk_widget_unset_state_flags", LIBS);
 
   // WidgetClass
-  gidLink(gtk_widget_class_add_binding, "gtk_widget_class_add_binding", LIBS);
-  gidLink(gtk_widget_class_add_binding_action, "gtk_widget_class_add_binding_action", LIBS);
-  gidLink(gtk_widget_class_add_binding_signal, "gtk_widget_class_add_binding_signal", LIBS);
-  gidLink(gtk_widget_class_add_shortcut, "gtk_widget_class_add_shortcut", LIBS);
-  gidLink(gtk_widget_class_bind_template_callback_full, "gtk_widget_class_bind_template_callback_full", LIBS);
-  gidLink(gtk_widget_class_bind_template_child_full, "gtk_widget_class_bind_template_child_full", LIBS);
-  gidLink(gtk_widget_class_get_accessible_role, "gtk_widget_class_get_accessible_role", LIBS);
-  gidLink(gtk_widget_class_get_activate_signal, "gtk_widget_class_get_activate_signal", LIBS);
-  gidLink(gtk_widget_class_get_css_name, "gtk_widget_class_get_css_name", LIBS);
-  gidLink(gtk_widget_class_get_layout_manager_type, "gtk_widget_class_get_layout_manager_type", LIBS);
-  gidLink(gtk_widget_class_install_action, "gtk_widget_class_install_action", LIBS);
-  gidLink(gtk_widget_class_install_property_action, "gtk_widget_class_install_property_action", LIBS);
-  gidLink(gtk_widget_class_query_action, "gtk_widget_class_query_action", LIBS);
-  gidLink(gtk_widget_class_set_accessible_role, "gtk_widget_class_set_accessible_role", LIBS);
-  gidLink(gtk_widget_class_set_activate_signal, "gtk_widget_class_set_activate_signal", LIBS);
-  gidLink(gtk_widget_class_set_activate_signal_from_name, "gtk_widget_class_set_activate_signal_from_name", LIBS);
-  gidLink(gtk_widget_class_set_css_name, "gtk_widget_class_set_css_name", LIBS);
-  gidLink(gtk_widget_class_set_layout_manager_type, "gtk_widget_class_set_layout_manager_type", LIBS);
-  gidLink(gtk_widget_class_set_template, "gtk_widget_class_set_template", LIBS);
-  gidLink(gtk_widget_class_set_template_from_resource, "gtk_widget_class_set_template_from_resource", LIBS);
-  gidLink(gtk_widget_class_set_template_scope, "gtk_widget_class_set_template_scope", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_add_binding, "gtk_widget_class_add_binding", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_add_binding_action, "gtk_widget_class_add_binding_action", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_add_binding_signal, "gtk_widget_class_add_binding_signal", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_add_shortcut, "gtk_widget_class_add_shortcut", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_bind_template_callback_full, "gtk_widget_class_bind_template_callback_full", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_bind_template_child_full, "gtk_widget_class_bind_template_child_full", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_get_accessible_role, "gtk_widget_class_get_accessible_role", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_get_activate_signal, "gtk_widget_class_get_activate_signal", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_get_css_name, "gtk_widget_class_get_css_name", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_get_layout_manager_type, "gtk_widget_class_get_layout_manager_type", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_install_action, "gtk_widget_class_install_action", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_install_property_action, "gtk_widget_class_install_property_action", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_query_action, "gtk_widget_class_query_action", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_set_accessible_role, "gtk_widget_class_set_accessible_role", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_set_activate_signal, "gtk_widget_class_set_activate_signal", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_set_activate_signal_from_name, "gtk_widget_class_set_activate_signal_from_name", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_set_css_name, "gtk_widget_class_set_css_name", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_set_layout_manager_type, "gtk_widget_class_set_layout_manager_type", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_set_template, "gtk_widget_class_set_template", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_set_template_from_resource, "gtk_widget_class_set_template_from_resource", LIBS);
+  gidLink(cast(void**)&gtk_widget_class_set_template_scope, "gtk_widget_class_set_template_scope", LIBS);
 
   // WidgetPaintable
-  gidLink(gtk_widget_paintable_get_type, "gtk_widget_paintable_get_type", LIBS);
-  gidLink(gtk_widget_paintable_new, "gtk_widget_paintable_new", LIBS);
-  gidLink(gtk_widget_paintable_get_widget, "gtk_widget_paintable_get_widget", LIBS);
-  gidLink(gtk_widget_paintable_set_widget, "gtk_widget_paintable_set_widget", LIBS);
+  gidLink(cast(void**)&gtk_widget_paintable_get_type, "gtk_widget_paintable_get_type", LIBS);
+  gidLink(cast(void**)&gtk_widget_paintable_new, "gtk_widget_paintable_new", LIBS);
+  gidLink(cast(void**)&gtk_widget_paintable_get_widget, "gtk_widget_paintable_get_widget", LIBS);
+  gidLink(cast(void**)&gtk_widget_paintable_set_widget, "gtk_widget_paintable_set_widget", LIBS);
 
   // Window
-  gidLink(gtk_window_get_type, "gtk_window_get_type", LIBS);
-  gidLink(gtk_window_new, "gtk_window_new", LIBS);
-  gidLink(gtk_window_get_default_icon_name, "gtk_window_get_default_icon_name", LIBS);
-  gidLink(gtk_window_get_toplevels, "gtk_window_get_toplevels", LIBS);
-  gidLink(gtk_window_list_toplevels, "gtk_window_list_toplevels", LIBS);
-  gidLink(gtk_window_set_auto_startup_notification, "gtk_window_set_auto_startup_notification", LIBS);
-  gidLink(gtk_window_set_default_icon_name, "gtk_window_set_default_icon_name", LIBS);
-  gidLink(gtk_window_set_interactive_debugging, "gtk_window_set_interactive_debugging", LIBS);
-  gidLink(gtk_window_close, "gtk_window_close", LIBS);
-  gidLink(gtk_window_destroy, "gtk_window_destroy", LIBS);
-  gidLink(gtk_window_fullscreen, "gtk_window_fullscreen", LIBS);
-  gidLink(gtk_window_fullscreen_on_monitor, "gtk_window_fullscreen_on_monitor", LIBS);
-  gidLink(gtk_window_get_application, "gtk_window_get_application", LIBS);
-  gidLink(gtk_window_get_child, "gtk_window_get_child", LIBS);
-  gidLink(gtk_window_get_decorated, "gtk_window_get_decorated", LIBS);
-  gidLink(gtk_window_get_default_size, "gtk_window_get_default_size", LIBS);
-  gidLink(gtk_window_get_default_widget, "gtk_window_get_default_widget", LIBS);
-  gidLink(gtk_window_get_deletable, "gtk_window_get_deletable", LIBS);
-  gidLink(gtk_window_get_destroy_with_parent, "gtk_window_get_destroy_with_parent", LIBS);
-  gidLink(gtk_window_get_focus, "gtk_window_get_focus", LIBS);
-  gidLink(gtk_window_get_focus_visible, "gtk_window_get_focus_visible", LIBS);
-  gidLink(gtk_window_get_group, "gtk_window_get_group", LIBS);
-  gidLink(gtk_window_get_handle_menubar_accel, "gtk_window_get_handle_menubar_accel", LIBS);
-  gidLink(gtk_window_get_hide_on_close, "gtk_window_get_hide_on_close", LIBS);
-  gidLink(gtk_window_get_icon_name, "gtk_window_get_icon_name", LIBS);
-  gidLink(gtk_window_get_mnemonics_visible, "gtk_window_get_mnemonics_visible", LIBS);
-  gidLink(gtk_window_get_modal, "gtk_window_get_modal", LIBS);
-  gidLink(gtk_window_get_resizable, "gtk_window_get_resizable", LIBS);
-  gidLink(gtk_window_get_title, "gtk_window_get_title", LIBS);
-  gidLink(gtk_window_get_titlebar, "gtk_window_get_titlebar", LIBS);
-  gidLink(gtk_window_get_transient_for, "gtk_window_get_transient_for", LIBS);
-  gidLink(gtk_window_has_group, "gtk_window_has_group", LIBS);
-  gidLink(gtk_window_is_active, "gtk_window_is_active", LIBS);
-  gidLink(gtk_window_is_fullscreen, "gtk_window_is_fullscreen", LIBS);
-  gidLink(gtk_window_is_maximized, "gtk_window_is_maximized", LIBS);
-  gidLink(gtk_window_is_suspended, "gtk_window_is_suspended", LIBS);
-  gidLink(gtk_window_maximize, "gtk_window_maximize", LIBS);
-  gidLink(gtk_window_minimize, "gtk_window_minimize", LIBS);
-  gidLink(gtk_window_present, "gtk_window_present", LIBS);
-  gidLink(gtk_window_present_with_time, "gtk_window_present_with_time", LIBS);
-  gidLink(gtk_window_set_application, "gtk_window_set_application", LIBS);
-  gidLink(gtk_window_set_child, "gtk_window_set_child", LIBS);
-  gidLink(gtk_window_set_decorated, "gtk_window_set_decorated", LIBS);
-  gidLink(gtk_window_set_default_size, "gtk_window_set_default_size", LIBS);
-  gidLink(gtk_window_set_default_widget, "gtk_window_set_default_widget", LIBS);
-  gidLink(gtk_window_set_deletable, "gtk_window_set_deletable", LIBS);
-  gidLink(gtk_window_set_destroy_with_parent, "gtk_window_set_destroy_with_parent", LIBS);
-  gidLink(gtk_window_set_display, "gtk_window_set_display", LIBS);
-  gidLink(gtk_window_set_focus, "gtk_window_set_focus", LIBS);
-  gidLink(gtk_window_set_focus_visible, "gtk_window_set_focus_visible", LIBS);
-  gidLink(gtk_window_set_handle_menubar_accel, "gtk_window_set_handle_menubar_accel", LIBS);
-  gidLink(gtk_window_set_hide_on_close, "gtk_window_set_hide_on_close", LIBS);
-  gidLink(gtk_window_set_icon_name, "gtk_window_set_icon_name", LIBS);
-  gidLink(gtk_window_set_mnemonics_visible, "gtk_window_set_mnemonics_visible", LIBS);
-  gidLink(gtk_window_set_modal, "gtk_window_set_modal", LIBS);
-  gidLink(gtk_window_set_resizable, "gtk_window_set_resizable", LIBS);
-  gidLink(gtk_window_set_startup_id, "gtk_window_set_startup_id", LIBS);
-  gidLink(gtk_window_set_title, "gtk_window_set_title", LIBS);
-  gidLink(gtk_window_set_titlebar, "gtk_window_set_titlebar", LIBS);
-  gidLink(gtk_window_set_transient_for, "gtk_window_set_transient_for", LIBS);
-  gidLink(gtk_window_unfullscreen, "gtk_window_unfullscreen", LIBS);
-  gidLink(gtk_window_unmaximize, "gtk_window_unmaximize", LIBS);
-  gidLink(gtk_window_unminimize, "gtk_window_unminimize", LIBS);
+  gidLink(cast(void**)&gtk_window_get_type, "gtk_window_get_type", LIBS);
+  gidLink(cast(void**)&gtk_window_new, "gtk_window_new", LIBS);
+  gidLink(cast(void**)&gtk_window_get_default_icon_name, "gtk_window_get_default_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_window_get_toplevels, "gtk_window_get_toplevels", LIBS);
+  gidLink(cast(void**)&gtk_window_list_toplevels, "gtk_window_list_toplevels", LIBS);
+  gidLink(cast(void**)&gtk_window_set_auto_startup_notification, "gtk_window_set_auto_startup_notification", LIBS);
+  gidLink(cast(void**)&gtk_window_set_default_icon_name, "gtk_window_set_default_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_window_set_interactive_debugging, "gtk_window_set_interactive_debugging", LIBS);
+  gidLink(cast(void**)&gtk_window_close, "gtk_window_close", LIBS);
+  gidLink(cast(void**)&gtk_window_destroy, "gtk_window_destroy", LIBS);
+  gidLink(cast(void**)&gtk_window_fullscreen, "gtk_window_fullscreen", LIBS);
+  gidLink(cast(void**)&gtk_window_fullscreen_on_monitor, "gtk_window_fullscreen_on_monitor", LIBS);
+  gidLink(cast(void**)&gtk_window_get_application, "gtk_window_get_application", LIBS);
+  gidLink(cast(void**)&gtk_window_get_child, "gtk_window_get_child", LIBS);
+  gidLink(cast(void**)&gtk_window_get_decorated, "gtk_window_get_decorated", LIBS);
+  gidLink(cast(void**)&gtk_window_get_default_size, "gtk_window_get_default_size", LIBS);
+  gidLink(cast(void**)&gtk_window_get_default_widget, "gtk_window_get_default_widget", LIBS);
+  gidLink(cast(void**)&gtk_window_get_deletable, "gtk_window_get_deletable", LIBS);
+  gidLink(cast(void**)&gtk_window_get_destroy_with_parent, "gtk_window_get_destroy_with_parent", LIBS);
+  gidLink(cast(void**)&gtk_window_get_focus, "gtk_window_get_focus", LIBS);
+  gidLink(cast(void**)&gtk_window_get_focus_visible, "gtk_window_get_focus_visible", LIBS);
+  gidLink(cast(void**)&gtk_window_get_group, "gtk_window_get_group", LIBS);
+  gidLink(cast(void**)&gtk_window_get_handle_menubar_accel, "gtk_window_get_handle_menubar_accel", LIBS);
+  gidLink(cast(void**)&gtk_window_get_hide_on_close, "gtk_window_get_hide_on_close", LIBS);
+  gidLink(cast(void**)&gtk_window_get_icon_name, "gtk_window_get_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_window_get_mnemonics_visible, "gtk_window_get_mnemonics_visible", LIBS);
+  gidLink(cast(void**)&gtk_window_get_modal, "gtk_window_get_modal", LIBS);
+  gidLink(cast(void**)&gtk_window_get_resizable, "gtk_window_get_resizable", LIBS);
+  gidLink(cast(void**)&gtk_window_get_title, "gtk_window_get_title", LIBS);
+  gidLink(cast(void**)&gtk_window_get_titlebar, "gtk_window_get_titlebar", LIBS);
+  gidLink(cast(void**)&gtk_window_get_transient_for, "gtk_window_get_transient_for", LIBS);
+  gidLink(cast(void**)&gtk_window_has_group, "gtk_window_has_group", LIBS);
+  gidLink(cast(void**)&gtk_window_is_active, "gtk_window_is_active", LIBS);
+  gidLink(cast(void**)&gtk_window_is_fullscreen, "gtk_window_is_fullscreen", LIBS);
+  gidLink(cast(void**)&gtk_window_is_maximized, "gtk_window_is_maximized", LIBS);
+  gidLink(cast(void**)&gtk_window_is_suspended, "gtk_window_is_suspended", LIBS);
+  gidLink(cast(void**)&gtk_window_maximize, "gtk_window_maximize", LIBS);
+  gidLink(cast(void**)&gtk_window_minimize, "gtk_window_minimize", LIBS);
+  gidLink(cast(void**)&gtk_window_present, "gtk_window_present", LIBS);
+  gidLink(cast(void**)&gtk_window_present_with_time, "gtk_window_present_with_time", LIBS);
+  gidLink(cast(void**)&gtk_window_set_application, "gtk_window_set_application", LIBS);
+  gidLink(cast(void**)&gtk_window_set_child, "gtk_window_set_child", LIBS);
+  gidLink(cast(void**)&gtk_window_set_decorated, "gtk_window_set_decorated", LIBS);
+  gidLink(cast(void**)&gtk_window_set_default_size, "gtk_window_set_default_size", LIBS);
+  gidLink(cast(void**)&gtk_window_set_default_widget, "gtk_window_set_default_widget", LIBS);
+  gidLink(cast(void**)&gtk_window_set_deletable, "gtk_window_set_deletable", LIBS);
+  gidLink(cast(void**)&gtk_window_set_destroy_with_parent, "gtk_window_set_destroy_with_parent", LIBS);
+  gidLink(cast(void**)&gtk_window_set_display, "gtk_window_set_display", LIBS);
+  gidLink(cast(void**)&gtk_window_set_focus, "gtk_window_set_focus", LIBS);
+  gidLink(cast(void**)&gtk_window_set_focus_visible, "gtk_window_set_focus_visible", LIBS);
+  gidLink(cast(void**)&gtk_window_set_handle_menubar_accel, "gtk_window_set_handle_menubar_accel", LIBS);
+  gidLink(cast(void**)&gtk_window_set_hide_on_close, "gtk_window_set_hide_on_close", LIBS);
+  gidLink(cast(void**)&gtk_window_set_icon_name, "gtk_window_set_icon_name", LIBS);
+  gidLink(cast(void**)&gtk_window_set_mnemonics_visible, "gtk_window_set_mnemonics_visible", LIBS);
+  gidLink(cast(void**)&gtk_window_set_modal, "gtk_window_set_modal", LIBS);
+  gidLink(cast(void**)&gtk_window_set_resizable, "gtk_window_set_resizable", LIBS);
+  gidLink(cast(void**)&gtk_window_set_startup_id, "gtk_window_set_startup_id", LIBS);
+  gidLink(cast(void**)&gtk_window_set_title, "gtk_window_set_title", LIBS);
+  gidLink(cast(void**)&gtk_window_set_titlebar, "gtk_window_set_titlebar", LIBS);
+  gidLink(cast(void**)&gtk_window_set_transient_for, "gtk_window_set_transient_for", LIBS);
+  gidLink(cast(void**)&gtk_window_unfullscreen, "gtk_window_unfullscreen", LIBS);
+  gidLink(cast(void**)&gtk_window_unmaximize, "gtk_window_unmaximize", LIBS);
+  gidLink(cast(void**)&gtk_window_unminimize, "gtk_window_unminimize", LIBS);
 
   // WindowControls
-  gidLink(gtk_window_controls_get_type, "gtk_window_controls_get_type", LIBS);
-  gidLink(gtk_window_controls_new, "gtk_window_controls_new", LIBS);
-  gidLink(gtk_window_controls_get_decoration_layout, "gtk_window_controls_get_decoration_layout", LIBS);
-  gidLink(gtk_window_controls_get_empty, "gtk_window_controls_get_empty", LIBS);
-  gidLink(gtk_window_controls_get_side, "gtk_window_controls_get_side", LIBS);
-  gidLink(gtk_window_controls_set_decoration_layout, "gtk_window_controls_set_decoration_layout", LIBS);
-  gidLink(gtk_window_controls_set_side, "gtk_window_controls_set_side", LIBS);
+  gidLink(cast(void**)&gtk_window_controls_get_type, "gtk_window_controls_get_type", LIBS);
+  gidLink(cast(void**)&gtk_window_controls_new, "gtk_window_controls_new", LIBS);
+  gidLink(cast(void**)&gtk_window_controls_get_decoration_layout, "gtk_window_controls_get_decoration_layout", LIBS);
+  gidLink(cast(void**)&gtk_window_controls_get_empty, "gtk_window_controls_get_empty", LIBS);
+  gidLink(cast(void**)&gtk_window_controls_get_side, "gtk_window_controls_get_side", LIBS);
+  gidLink(cast(void**)&gtk_window_controls_set_decoration_layout, "gtk_window_controls_set_decoration_layout", LIBS);
+  gidLink(cast(void**)&gtk_window_controls_set_side, "gtk_window_controls_set_side", LIBS);
 
   // WindowGroup
-  gidLink(gtk_window_group_get_type, "gtk_window_group_get_type", LIBS);
-  gidLink(gtk_window_group_new, "gtk_window_group_new", LIBS);
-  gidLink(gtk_window_group_add_window, "gtk_window_group_add_window", LIBS);
-  gidLink(gtk_window_group_list_windows, "gtk_window_group_list_windows", LIBS);
-  gidLink(gtk_window_group_remove_window, "gtk_window_group_remove_window", LIBS);
+  gidLink(cast(void**)&gtk_window_group_get_type, "gtk_window_group_get_type", LIBS);
+  gidLink(cast(void**)&gtk_window_group_new, "gtk_window_group_new", LIBS);
+  gidLink(cast(void**)&gtk_window_group_add_window, "gtk_window_group_add_window", LIBS);
+  gidLink(cast(void**)&gtk_window_group_list_windows, "gtk_window_group_list_windows", LIBS);
+  gidLink(cast(void**)&gtk_window_group_remove_window, "gtk_window_group_remove_window", LIBS);
 
   // WindowHandle
-  gidLink(gtk_window_handle_get_type, "gtk_window_handle_get_type", LIBS);
-  gidLink(gtk_window_handle_new, "gtk_window_handle_new", LIBS);
-  gidLink(gtk_window_handle_get_child, "gtk_window_handle_get_child", LIBS);
-  gidLink(gtk_window_handle_set_child, "gtk_window_handle_set_child", LIBS);
+  gidLink(cast(void**)&gtk_window_handle_get_type, "gtk_window_handle_get_type", LIBS);
+  gidLink(cast(void**)&gtk_window_handle_new, "gtk_window_handle_new", LIBS);
+  gidLink(cast(void**)&gtk_window_handle_get_child, "gtk_window_handle_get_child", LIBS);
+  gidLink(cast(void**)&gtk_window_handle_set_child, "gtk_window_handle_set_child", LIBS);
 }

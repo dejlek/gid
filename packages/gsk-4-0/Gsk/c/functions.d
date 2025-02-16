@@ -1,5 +1,6 @@
 module Gsk.c.functions;
 
+public import Gid.basictypes;
 import Gid.loader;
 import Gsk.c.types;
 public import Gdk.c.types;
@@ -15,59 +16,59 @@ else
 __gshared extern(C)
 {
   // BlendNode
-  GType function() c_gsk_blend_node_get_type;
+  extern(C) GType function() c_gsk_blend_node_get_type;
   GskRenderNode* function(GskRenderNode* bottom, GskRenderNode* top, GskBlendMode blendMode) c_gsk_blend_node_new;
   GskBlendMode function(const(GskRenderNode)* node) c_gsk_blend_node_get_blend_mode;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_blend_node_get_bottom_child;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_blend_node_get_top_child;
 
   // BlurNode
-  GType function() c_gsk_blur_node_get_type;
+  extern(C) GType function() c_gsk_blur_node_get_type;
   GskRenderNode* function(GskRenderNode* child, float radius) c_gsk_blur_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_blur_node_get_child;
   float function(const(GskRenderNode)* node) c_gsk_blur_node_get_radius;
 
   // BorderNode
-  GType function() c_gsk_border_node_get_type;
+  extern(C) GType function() c_gsk_border_node_get_type;
   GskRenderNode* function(const(GskRoundedRect)* outline, const(float)* borderWidth, const(GdkRGBA)* borderColor) c_gsk_border_node_new;
   const(GdkRGBA)* function(const(GskRenderNode)* node) c_gsk_border_node_get_colors;
   const(GskRoundedRect)* function(const(GskRenderNode)* node) c_gsk_border_node_get_outline;
   const(float)* function(const(GskRenderNode)* node) c_gsk_border_node_get_widths;
 
   // BroadwayRenderer
-  GType function() c_gsk_broadway_renderer_get_type;
+  extern(C) GType function() c_gsk_broadway_renderer_get_type;
   GskRenderer* function() c_gsk_broadway_renderer_new;
 
   // CairoNode
-  GType function() c_gsk_cairo_node_get_type;
+  extern(C) GType function() c_gsk_cairo_node_get_type;
   GskRenderNode* function(const(graphene_rect_t)* bounds) c_gsk_cairo_node_new;
   cairo_t* function(GskRenderNode* node) c_gsk_cairo_node_get_draw_context;
   cairo_surface_t* function(GskRenderNode* node) c_gsk_cairo_node_get_surface;
 
   // CairoRenderer
-  GType function() c_gsk_cairo_renderer_get_type;
+  extern(C) GType function() c_gsk_cairo_renderer_get_type;
   GskRenderer* function() c_gsk_cairo_renderer_new;
 
   // ClipNode
-  GType function() c_gsk_clip_node_get_type;
+  extern(C) GType function() c_gsk_clip_node_get_type;
   GskRenderNode* function(GskRenderNode* child, const(graphene_rect_t)* clip) c_gsk_clip_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_clip_node_get_child;
   const(graphene_rect_t)* function(const(GskRenderNode)* node) c_gsk_clip_node_get_clip;
 
   // ColorMatrixNode
-  GType function() c_gsk_color_matrix_node_get_type;
+  extern(C) GType function() c_gsk_color_matrix_node_get_type;
   GskRenderNode* function(GskRenderNode* child, const(graphene_matrix_t)* colorMatrix, const(graphene_vec4_t)* colorOffset) c_gsk_color_matrix_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_color_matrix_node_get_child;
   const(graphene_matrix_t)* function(const(GskRenderNode)* node) c_gsk_color_matrix_node_get_color_matrix;
   const(graphene_vec4_t)* function(const(GskRenderNode)* node) c_gsk_color_matrix_node_get_color_offset;
 
   // ColorNode
-  GType function() c_gsk_color_node_get_type;
+  extern(C) GType function() c_gsk_color_node_get_type;
   GskRenderNode* function(const(GdkRGBA)* rgba, const(graphene_rect_t)* bounds) c_gsk_color_node_new;
   const(GdkRGBA)* function(const(GskRenderNode)* node) c_gsk_color_node_get_color;
 
   // ConicGradientNode
-  GType function() c_gsk_conic_gradient_node_get_type;
+  extern(C) GType function() c_gsk_conic_gradient_node_get_type;
   GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* center, float rotation, const(GskColorStop)* colorStops, size_t nColorStops) c_gsk_conic_gradient_node_new;
   float function(const(GskRenderNode)* node) c_gsk_conic_gradient_node_get_angle;
   const(graphene_point_t)* function(const(GskRenderNode)* node) c_gsk_conic_gradient_node_get_center;
@@ -76,37 +77,37 @@ __gshared extern(C)
   float function(const(GskRenderNode)* node) c_gsk_conic_gradient_node_get_rotation;
 
   // ContainerNode
-  GType function() c_gsk_container_node_get_type;
+  extern(C) GType function() c_gsk_container_node_get_type;
   GskRenderNode* function(GskRenderNode** children, uint nChildren) c_gsk_container_node_new;
   GskRenderNode* function(const(GskRenderNode)* node, uint idx) c_gsk_container_node_get_child;
   uint function(const(GskRenderNode)* node) c_gsk_container_node_get_n_children;
 
   // CrossFadeNode
-  GType function() c_gsk_cross_fade_node_get_type;
+  extern(C) GType function() c_gsk_cross_fade_node_get_type;
   GskRenderNode* function(GskRenderNode* start, GskRenderNode* end, float progress) c_gsk_cross_fade_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_cross_fade_node_get_end_child;
   float function(const(GskRenderNode)* node) c_gsk_cross_fade_node_get_progress;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_cross_fade_node_get_start_child;
 
   // DebugNode
-  GType function() c_gsk_debug_node_get_type;
+  extern(C) GType function() c_gsk_debug_node_get_type;
   GskRenderNode* function(GskRenderNode* child, char* message) c_gsk_debug_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_debug_node_get_child;
   const(char)* function(const(GskRenderNode)* node) c_gsk_debug_node_get_message;
 
   // FillNode
-  GType function() c_gsk_fill_node_get_type;
+  extern(C) GType function() c_gsk_fill_node_get_type;
   GskRenderNode* function(GskRenderNode* child, GskPath* path, GskFillRule fillRule) c_gsk_fill_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_fill_node_get_child;
   GskFillRule function(const(GskRenderNode)* node) c_gsk_fill_node_get_fill_rule;
   GskPath* function(const(GskRenderNode)* node) c_gsk_fill_node_get_path;
 
   // GLRenderer
-  GType function() c_gsk_gl_renderer_get_type;
+  extern(C) GType function() c_gsk_gl_renderer_get_type;
   GskRenderer* function() c_gsk_gl_renderer_new;
 
   // GLShader
-  GType function() c_gsk_gl_shader_get_type;
+  extern(C) GType function() c_gsk_gl_shader_get_type;
   GskGLShader* function(GBytes* sourcecode) c_gsk_gl_shader_new_from_bytes;
   GskGLShader* function(const(char)* resourcePath) c_gsk_gl_shader_new_from_resource;
   bool function(GskGLShader* shader, GskRenderer* renderer, GError** _err) c_gsk_gl_shader_compile;
@@ -130,7 +131,7 @@ __gshared extern(C)
   GskGLUniformType function(GskGLShader* shader, int idx) c_gsk_gl_shader_get_uniform_type;
 
   // GLShaderNode
-  GType function() c_gsk_gl_shader_node_get_type;
+  extern(C) GType function() c_gsk_gl_shader_node_get_type;
   GskRenderNode* function(GskGLShader* shader, const(graphene_rect_t)* bounds, GBytes* args, GskRenderNode** children, uint nChildren) c_gsk_gl_shader_node_new;
   GBytes* function(const(GskRenderNode)* node) c_gsk_gl_shader_node_get_args;
   GskRenderNode* function(const(GskRenderNode)* node, uint idx) c_gsk_gl_shader_node_get_child;
@@ -144,7 +145,7 @@ __gshared extern(C)
   void function(GValue* value, GskRenderNode* node) c_gsk_value_take_render_node;
 
   // InsetShadowNode
-  GType function() c_gsk_inset_shadow_node_get_type;
+  extern(C) GType function() c_gsk_inset_shadow_node_get_type;
   GskRenderNode* function(const(GskRoundedRect)* outline, const(GdkRGBA)* color, float dx, float dy, float spread, float blurRadius) c_gsk_inset_shadow_node_new;
   float function(const(GskRenderNode)* node) c_gsk_inset_shadow_node_get_blur_radius;
   const(GdkRGBA)* function(const(GskRenderNode)* node) c_gsk_inset_shadow_node_get_color;
@@ -154,7 +155,7 @@ __gshared extern(C)
   float function(const(GskRenderNode)* node) c_gsk_inset_shadow_node_get_spread;
 
   // LinearGradientNode
-  GType function() c_gsk_linear_gradient_node_get_type;
+  extern(C) GType function() c_gsk_linear_gradient_node_get_type;
   GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* start, const(graphene_point_t)* end, const(GskColorStop)* colorStops, size_t nColorStops) c_gsk_linear_gradient_node_new;
   const(GskColorStop)* function(const(GskRenderNode)* node, size_t* nStops) c_gsk_linear_gradient_node_get_color_stops;
   const(graphene_point_t)* function(const(GskRenderNode)* node) c_gsk_linear_gradient_node_get_end;
@@ -162,24 +163,24 @@ __gshared extern(C)
   const(graphene_point_t)* function(const(GskRenderNode)* node) c_gsk_linear_gradient_node_get_start;
 
   // MaskNode
-  GType function() c_gsk_mask_node_get_type;
+  extern(C) GType function() c_gsk_mask_node_get_type;
   GskRenderNode* function(GskRenderNode* source, GskRenderNode* mask, GskMaskMode maskMode) c_gsk_mask_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_mask_node_get_mask;
   GskMaskMode function(const(GskRenderNode)* node) c_gsk_mask_node_get_mask_mode;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_mask_node_get_source;
 
   // NglRenderer
-  GType function() c_gsk_ngl_renderer_get_type;
+  extern(C) GType function() c_gsk_ngl_renderer_get_type;
   GskRenderer* function() c_gsk_ngl_renderer_new;
 
   // OpacityNode
-  GType function() c_gsk_opacity_node_get_type;
+  extern(C) GType function() c_gsk_opacity_node_get_type;
   GskRenderNode* function(GskRenderNode* child, float opacity) c_gsk_opacity_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_opacity_node_get_child;
   float function(const(GskRenderNode)* node) c_gsk_opacity_node_get_opacity;
 
   // OutsetShadowNode
-  GType function() c_gsk_outset_shadow_node_get_type;
+  extern(C) GType function() c_gsk_outset_shadow_node_get_type;
   GskRenderNode* function(const(GskRoundedRect)* outline, const(GdkRGBA)* color, float dx, float dy, float spread, float blurRadius) c_gsk_outset_shadow_node_new;
   float function(const(GskRenderNode)* node) c_gsk_outset_shadow_node_get_blur_radius;
   const(GdkRGBA)* function(const(GskRenderNode)* node) c_gsk_outset_shadow_node_get_color;
@@ -189,7 +190,7 @@ __gshared extern(C)
   float function(const(GskRenderNode)* node) c_gsk_outset_shadow_node_get_spread;
 
   // Path
-  GType function() c_gsk_path_get_type;
+  extern(C) GType function() c_gsk_path_get_type;
   bool function(GskPath* self, GskPathForeachFlags flags, GskPathForeachFunc func, void* userData) c_gsk_path_foreach;
   bool function(GskPath* self, graphene_rect_t* bounds) c_gsk_path_get_bounds;
   bool function(GskPath* self, const(graphene_point_t)* point, float threshold, GskPathPoint* result, float* distance) c_gsk_path_get_closest_point;
@@ -207,7 +208,7 @@ __gshared extern(C)
   GskPath* function(const(char)* string_) c_gsk_path_parse;
 
   // PathBuilder
-  GType function() c_gsk_path_builder_get_type;
+  extern(C) GType function() c_gsk_path_builder_get_type;
   GskPathBuilder* function() c_gsk_path_builder_new;
   void function(GskPathBuilder* self, const(cairo_path_t)* path) c_gsk_path_builder_add_cairo_path;
   void function(GskPathBuilder* self, const(graphene_point_t)* center, float radius) c_gsk_path_builder_add_circle;
@@ -241,7 +242,7 @@ __gshared extern(C)
   void function(GskPathBuilder* self) c_gsk_path_builder_unref;
 
   // PathMeasure
-  GType function() c_gsk_path_measure_get_type;
+  extern(C) GType function() c_gsk_path_measure_get_type;
   GskPathMeasure* function(GskPath* path) c_gsk_path_measure_new;
   GskPathMeasure* function(GskPath* path, float tolerance) c_gsk_path_measure_new_with_tolerance;
   float function(GskPathMeasure* self) c_gsk_path_measure_get_length;
@@ -252,7 +253,7 @@ __gshared extern(C)
   void function(GskPathMeasure* self) c_gsk_path_measure_unref;
 
   // PathPoint
-  GType function() c_gsk_path_point_get_type;
+  extern(C) GType function() c_gsk_path_point_get_type;
   int function(const(GskPathPoint)* point1, const(GskPathPoint)* point2) c_gsk_path_point_compare;
   GskPathPoint* function(GskPathPoint* point) c_gsk_path_point_copy;
   bool function(const(GskPathPoint)* point1, const(GskPathPoint)* point2) c_gsk_path_point_equal;
@@ -264,7 +265,7 @@ __gshared extern(C)
   void function(const(GskPathPoint)* point, GskPath* path, GskPathDirection direction, graphene_vec2_t* tangent) c_gsk_path_point_get_tangent;
 
   // RadialGradientNode
-  GType function() c_gsk_radial_gradient_node_get_type;
+  extern(C) GType function() c_gsk_radial_gradient_node_get_type;
   GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* center, float hradius, float vradius, float start, float end, const(GskColorStop)* colorStops, size_t nColorStops) c_gsk_radial_gradient_node_new;
   const(graphene_point_t)* function(const(GskRenderNode)* node) c_gsk_radial_gradient_node_get_center;
   const(GskColorStop)* function(const(GskRenderNode)* node, size_t* nStops) c_gsk_radial_gradient_node_get_color_stops;
@@ -275,7 +276,7 @@ __gshared extern(C)
   float function(const(GskRenderNode)* node) c_gsk_radial_gradient_node_get_vradius;
 
   // RenderNode
-  GType function() c_gsk_render_node_get_type;
+  extern(C) GType function() c_gsk_render_node_get_type;
   GskRenderNode* function(GBytes* bytes, GskParseErrorFunc errorFunc, void* userData) c_gsk_render_node_deserialize;
   void function(GskRenderNode* node, cairo_t* cr) c_gsk_render_node_draw;
   void function(GskRenderNode* node, graphene_rect_t* bounds) c_gsk_render_node_get_bounds;
@@ -286,7 +287,7 @@ __gshared extern(C)
   bool function(GskRenderNode* node, const(char)* filename, GError** _err) c_gsk_render_node_write_to_file;
 
   // Renderer
-  GType function() c_gsk_renderer_get_type;
+  extern(C) GType function() c_gsk_renderer_get_type;
   GskRenderer* function(GdkSurface* surface) c_gsk_renderer_new_for_surface;
   GdkSurface* function(GskRenderer* renderer) c_gsk_renderer_get_surface;
   bool function(GskRenderer* renderer) c_gsk_renderer_is_realized;
@@ -297,21 +298,21 @@ __gshared extern(C)
   void function(GskRenderer* renderer) c_gsk_renderer_unrealize;
 
   // RepeatNode
-  GType function() c_gsk_repeat_node_get_type;
+  extern(C) GType function() c_gsk_repeat_node_get_type;
   GskRenderNode* function(const(graphene_rect_t)* bounds, GskRenderNode* child, const(graphene_rect_t)* childBounds) c_gsk_repeat_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_repeat_node_get_child;
   const(graphene_rect_t)* function(const(GskRenderNode)* node) c_gsk_repeat_node_get_child_bounds;
 
   // RepeatingLinearGradientNode
-  GType function() c_gsk_repeating_linear_gradient_node_get_type;
+  extern(C) GType function() c_gsk_repeating_linear_gradient_node_get_type;
   GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* start, const(graphene_point_t)* end, const(GskColorStop)* colorStops, size_t nColorStops) c_gsk_repeating_linear_gradient_node_new;
 
   // RepeatingRadialGradientNode
-  GType function() c_gsk_repeating_radial_gradient_node_get_type;
+  extern(C) GType function() c_gsk_repeating_radial_gradient_node_get_type;
   GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* center, float hradius, float vradius, float start, float end, const(GskColorStop)* colorStops, size_t nColorStops) c_gsk_repeating_radial_gradient_node_new;
 
   // RoundedClipNode
-  GType function() c_gsk_rounded_clip_node_get_type;
+  extern(C) GType function() c_gsk_rounded_clip_node_get_type;
   GskRenderNode* function(GskRenderNode* child, const(GskRoundedRect)* clip) c_gsk_rounded_clip_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_rounded_clip_node_get_child;
   const(GskRoundedRect)* function(const(GskRenderNode)* node) c_gsk_rounded_clip_node_get_clip;
@@ -329,7 +330,7 @@ __gshared extern(C)
   GskRoundedRect* function(GskRoundedRect* self, float top, float right, float bottom, float left) c_gsk_rounded_rect_shrink;
 
   // ShaderArgsBuilder
-  GType function() c_gsk_shader_args_builder_get_type;
+  extern(C) GType function() c_gsk_shader_args_builder_get_type;
   GskShaderArgsBuilder* function(GskGLShader* shader, GBytes* initialValues) c_gsk_shader_args_builder_new;
   GBytes* function(GskShaderArgsBuilder* builder) c_gsk_shader_args_builder_free_to_args;
   GskShaderArgsBuilder* function(GskShaderArgsBuilder* builder) c_gsk_shader_args_builder_ref;
@@ -344,14 +345,14 @@ __gshared extern(C)
   void function(GskShaderArgsBuilder* builder) c_gsk_shader_args_builder_unref;
 
   // ShadowNode
-  GType function() c_gsk_shadow_node_get_type;
+  extern(C) GType function() c_gsk_shadow_node_get_type;
   GskRenderNode* function(GskRenderNode* child, const(GskShadow)* shadows, size_t nShadows) c_gsk_shadow_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_shadow_node_get_child;
   size_t function(const(GskRenderNode)* node) c_gsk_shadow_node_get_n_shadows;
   const(GskShadow)* function(const(GskRenderNode)* node, size_t i) c_gsk_shadow_node_get_shadow;
 
   // Stroke
-  GType function() c_gsk_stroke_get_type;
+  extern(C) GType function() c_gsk_stroke_get_type;
   GskStroke* function(float lineWidth) c_gsk_stroke_new;
   GskStroke* function(const(GskStroke)* other) c_gsk_stroke_copy;
   void function(GskStroke* self) c_gsk_stroke_free;
@@ -371,20 +372,20 @@ __gshared extern(C)
   bool function(const(void)* stroke1, const(void)* stroke2) c_gsk_stroke_equal;
 
   // StrokeNode
-  GType function() c_gsk_stroke_node_get_type;
+  extern(C) GType function() c_gsk_stroke_node_get_type;
   GskRenderNode* function(GskRenderNode* child, GskPath* path, const(GskStroke)* stroke) c_gsk_stroke_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_stroke_node_get_child;
   GskPath* function(const(GskRenderNode)* node) c_gsk_stroke_node_get_path;
   const(GskStroke)* function(const(GskRenderNode)* node) c_gsk_stroke_node_get_stroke;
 
   // SubsurfaceNode
-  GType function() c_gsk_subsurface_node_get_type;
+  extern(C) GType function() c_gsk_subsurface_node_get_type;
   GskRenderNode* function(GskRenderNode* child, void* subsurface) c_gsk_subsurface_node_new;
   void* function(const(GskRenderNode)* node) c_gsk_subsurface_node_get_subsurface;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_subsurface_node_get_child;
 
   // TextNode
-  GType function() c_gsk_text_node_get_type;
+  extern(C) GType function() c_gsk_text_node_get_type;
   GskRenderNode* function(PangoFont* font, PangoGlyphString* glyphs, const(GdkRGBA)* color, const(graphene_point_t)* offset) c_gsk_text_node_new;
   const(GdkRGBA)* function(const(GskRenderNode)* node) c_gsk_text_node_get_color;
   PangoFont* function(const(GskRenderNode)* node) c_gsk_text_node_get_font;
@@ -394,18 +395,18 @@ __gshared extern(C)
   bool function(const(GskRenderNode)* node) c_gsk_text_node_has_color_glyphs;
 
   // TextureNode
-  GType function() c_gsk_texture_node_get_type;
+  extern(C) GType function() c_gsk_texture_node_get_type;
   GskRenderNode* function(GdkTexture* texture, const(graphene_rect_t)* bounds) c_gsk_texture_node_new;
   GdkTexture* function(const(GskRenderNode)* node) c_gsk_texture_node_get_texture;
 
   // TextureScaleNode
-  GType function() c_gsk_texture_scale_node_get_type;
+  extern(C) GType function() c_gsk_texture_scale_node_get_type;
   GskRenderNode* function(GdkTexture* texture, const(graphene_rect_t)* bounds, GskScalingFilter filter) c_gsk_texture_scale_node_new;
   GskScalingFilter function(const(GskRenderNode)* node) c_gsk_texture_scale_node_get_filter;
   GdkTexture* function(const(GskRenderNode)* node) c_gsk_texture_scale_node_get_texture;
 
   // Transform
-  GType function() c_gsk_transform_get_type;
+  extern(C) GType function() c_gsk_transform_get_type;
   GskTransform* function() c_gsk_transform_new;
   bool function(GskTransform* first, GskTransform* second) c_gsk_transform_equal;
   GskTransformCategory function(GskTransform* self) c_gsk_transform_get_category;
@@ -434,13 +435,13 @@ __gshared extern(C)
   bool function(const(char)* string_, GskTransform** outTransform) c_gsk_transform_parse;
 
   // TransformNode
-  GType function() c_gsk_transform_node_get_type;
+  extern(C) GType function() c_gsk_transform_node_get_type;
   GskRenderNode* function(GskRenderNode* child, GskTransform* transform) c_gsk_transform_node_new;
   GskRenderNode* function(const(GskRenderNode)* node) c_gsk_transform_node_get_child;
   GskTransform* function(const(GskRenderNode)* node) c_gsk_transform_node_get_transform;
 
   // VulkanRenderer
-  GType function() c_gsk_vulkan_renderer_get_type;
+  extern(C) GType function() c_gsk_vulkan_renderer_get_type;
   GskRenderer* function() c_gsk_vulkan_renderer_new;
 }
 
@@ -876,431 +877,431 @@ alias gsk_vulkan_renderer_new = c_gsk_vulkan_renderer_new;
 shared static this()
 {
   // BlendNode
-  gidLink(gsk_blend_node_get_type, "gsk_blend_node_get_type", LIBS);
-  gidLink(gsk_blend_node_new, "gsk_blend_node_new", LIBS);
-  gidLink(gsk_blend_node_get_blend_mode, "gsk_blend_node_get_blend_mode", LIBS);
-  gidLink(gsk_blend_node_get_bottom_child, "gsk_blend_node_get_bottom_child", LIBS);
-  gidLink(gsk_blend_node_get_top_child, "gsk_blend_node_get_top_child", LIBS);
+  gidLink(cast(void**)&gsk_blend_node_get_type, "gsk_blend_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_blend_node_new, "gsk_blend_node_new", LIBS);
+  gidLink(cast(void**)&gsk_blend_node_get_blend_mode, "gsk_blend_node_get_blend_mode", LIBS);
+  gidLink(cast(void**)&gsk_blend_node_get_bottom_child, "gsk_blend_node_get_bottom_child", LIBS);
+  gidLink(cast(void**)&gsk_blend_node_get_top_child, "gsk_blend_node_get_top_child", LIBS);
 
   // BlurNode
-  gidLink(gsk_blur_node_get_type, "gsk_blur_node_get_type", LIBS);
-  gidLink(gsk_blur_node_new, "gsk_blur_node_new", LIBS);
-  gidLink(gsk_blur_node_get_child, "gsk_blur_node_get_child", LIBS);
-  gidLink(gsk_blur_node_get_radius, "gsk_blur_node_get_radius", LIBS);
+  gidLink(cast(void**)&gsk_blur_node_get_type, "gsk_blur_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_blur_node_new, "gsk_blur_node_new", LIBS);
+  gidLink(cast(void**)&gsk_blur_node_get_child, "gsk_blur_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_blur_node_get_radius, "gsk_blur_node_get_radius", LIBS);
 
   // BorderNode
-  gidLink(gsk_border_node_get_type, "gsk_border_node_get_type", LIBS);
-  gidLink(gsk_border_node_new, "gsk_border_node_new", LIBS);
-  gidLink(gsk_border_node_get_colors, "gsk_border_node_get_colors", LIBS);
-  gidLink(gsk_border_node_get_outline, "gsk_border_node_get_outline", LIBS);
-  gidLink(gsk_border_node_get_widths, "gsk_border_node_get_widths", LIBS);
+  gidLink(cast(void**)&gsk_border_node_get_type, "gsk_border_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_border_node_new, "gsk_border_node_new", LIBS);
+  gidLink(cast(void**)&gsk_border_node_get_colors, "gsk_border_node_get_colors", LIBS);
+  gidLink(cast(void**)&gsk_border_node_get_outline, "gsk_border_node_get_outline", LIBS);
+  gidLink(cast(void**)&gsk_border_node_get_widths, "gsk_border_node_get_widths", LIBS);
 
   // BroadwayRenderer
-  gidLink(gsk_broadway_renderer_get_type, "gsk_broadway_renderer_get_type", LIBS);
-  gidLink(gsk_broadway_renderer_new, "gsk_broadway_renderer_new", LIBS);
+  gidLink(cast(void**)&gsk_broadway_renderer_get_type, "gsk_broadway_renderer_get_type", LIBS);
+  gidLink(cast(void**)&gsk_broadway_renderer_new, "gsk_broadway_renderer_new", LIBS);
 
   // CairoNode
-  gidLink(gsk_cairo_node_get_type, "gsk_cairo_node_get_type", LIBS);
-  gidLink(gsk_cairo_node_new, "gsk_cairo_node_new", LIBS);
-  gidLink(gsk_cairo_node_get_draw_context, "gsk_cairo_node_get_draw_context", LIBS);
-  gidLink(gsk_cairo_node_get_surface, "gsk_cairo_node_get_surface", LIBS);
+  gidLink(cast(void**)&gsk_cairo_node_get_type, "gsk_cairo_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_cairo_node_new, "gsk_cairo_node_new", LIBS);
+  gidLink(cast(void**)&gsk_cairo_node_get_draw_context, "gsk_cairo_node_get_draw_context", LIBS);
+  gidLink(cast(void**)&gsk_cairo_node_get_surface, "gsk_cairo_node_get_surface", LIBS);
 
   // CairoRenderer
-  gidLink(gsk_cairo_renderer_get_type, "gsk_cairo_renderer_get_type", LIBS);
-  gidLink(gsk_cairo_renderer_new, "gsk_cairo_renderer_new", LIBS);
+  gidLink(cast(void**)&gsk_cairo_renderer_get_type, "gsk_cairo_renderer_get_type", LIBS);
+  gidLink(cast(void**)&gsk_cairo_renderer_new, "gsk_cairo_renderer_new", LIBS);
 
   // ClipNode
-  gidLink(gsk_clip_node_get_type, "gsk_clip_node_get_type", LIBS);
-  gidLink(gsk_clip_node_new, "gsk_clip_node_new", LIBS);
-  gidLink(gsk_clip_node_get_child, "gsk_clip_node_get_child", LIBS);
-  gidLink(gsk_clip_node_get_clip, "gsk_clip_node_get_clip", LIBS);
+  gidLink(cast(void**)&gsk_clip_node_get_type, "gsk_clip_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_clip_node_new, "gsk_clip_node_new", LIBS);
+  gidLink(cast(void**)&gsk_clip_node_get_child, "gsk_clip_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_clip_node_get_clip, "gsk_clip_node_get_clip", LIBS);
 
   // ColorMatrixNode
-  gidLink(gsk_color_matrix_node_get_type, "gsk_color_matrix_node_get_type", LIBS);
-  gidLink(gsk_color_matrix_node_new, "gsk_color_matrix_node_new", LIBS);
-  gidLink(gsk_color_matrix_node_get_child, "gsk_color_matrix_node_get_child", LIBS);
-  gidLink(gsk_color_matrix_node_get_color_matrix, "gsk_color_matrix_node_get_color_matrix", LIBS);
-  gidLink(gsk_color_matrix_node_get_color_offset, "gsk_color_matrix_node_get_color_offset", LIBS);
+  gidLink(cast(void**)&gsk_color_matrix_node_get_type, "gsk_color_matrix_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_color_matrix_node_new, "gsk_color_matrix_node_new", LIBS);
+  gidLink(cast(void**)&gsk_color_matrix_node_get_child, "gsk_color_matrix_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_color_matrix_node_get_color_matrix, "gsk_color_matrix_node_get_color_matrix", LIBS);
+  gidLink(cast(void**)&gsk_color_matrix_node_get_color_offset, "gsk_color_matrix_node_get_color_offset", LIBS);
 
   // ColorNode
-  gidLink(gsk_color_node_get_type, "gsk_color_node_get_type", LIBS);
-  gidLink(gsk_color_node_new, "gsk_color_node_new", LIBS);
-  gidLink(gsk_color_node_get_color, "gsk_color_node_get_color", LIBS);
+  gidLink(cast(void**)&gsk_color_node_get_type, "gsk_color_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_color_node_new, "gsk_color_node_new", LIBS);
+  gidLink(cast(void**)&gsk_color_node_get_color, "gsk_color_node_get_color", LIBS);
 
   // ConicGradientNode
-  gidLink(gsk_conic_gradient_node_get_type, "gsk_conic_gradient_node_get_type", LIBS);
-  gidLink(gsk_conic_gradient_node_new, "gsk_conic_gradient_node_new", LIBS);
-  gidLink(gsk_conic_gradient_node_get_angle, "gsk_conic_gradient_node_get_angle", LIBS);
-  gidLink(gsk_conic_gradient_node_get_center, "gsk_conic_gradient_node_get_center", LIBS);
-  gidLink(gsk_conic_gradient_node_get_color_stops, "gsk_conic_gradient_node_get_color_stops", LIBS);
-  gidLink(gsk_conic_gradient_node_get_n_color_stops, "gsk_conic_gradient_node_get_n_color_stops", LIBS);
-  gidLink(gsk_conic_gradient_node_get_rotation, "gsk_conic_gradient_node_get_rotation", LIBS);
+  gidLink(cast(void**)&gsk_conic_gradient_node_get_type, "gsk_conic_gradient_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_conic_gradient_node_new, "gsk_conic_gradient_node_new", LIBS);
+  gidLink(cast(void**)&gsk_conic_gradient_node_get_angle, "gsk_conic_gradient_node_get_angle", LIBS);
+  gidLink(cast(void**)&gsk_conic_gradient_node_get_center, "gsk_conic_gradient_node_get_center", LIBS);
+  gidLink(cast(void**)&gsk_conic_gradient_node_get_color_stops, "gsk_conic_gradient_node_get_color_stops", LIBS);
+  gidLink(cast(void**)&gsk_conic_gradient_node_get_n_color_stops, "gsk_conic_gradient_node_get_n_color_stops", LIBS);
+  gidLink(cast(void**)&gsk_conic_gradient_node_get_rotation, "gsk_conic_gradient_node_get_rotation", LIBS);
 
   // ContainerNode
-  gidLink(gsk_container_node_get_type, "gsk_container_node_get_type", LIBS);
-  gidLink(gsk_container_node_new, "gsk_container_node_new", LIBS);
-  gidLink(gsk_container_node_get_child, "gsk_container_node_get_child", LIBS);
-  gidLink(gsk_container_node_get_n_children, "gsk_container_node_get_n_children", LIBS);
+  gidLink(cast(void**)&gsk_container_node_get_type, "gsk_container_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_container_node_new, "gsk_container_node_new", LIBS);
+  gidLink(cast(void**)&gsk_container_node_get_child, "gsk_container_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_container_node_get_n_children, "gsk_container_node_get_n_children", LIBS);
 
   // CrossFadeNode
-  gidLink(gsk_cross_fade_node_get_type, "gsk_cross_fade_node_get_type", LIBS);
-  gidLink(gsk_cross_fade_node_new, "gsk_cross_fade_node_new", LIBS);
-  gidLink(gsk_cross_fade_node_get_end_child, "gsk_cross_fade_node_get_end_child", LIBS);
-  gidLink(gsk_cross_fade_node_get_progress, "gsk_cross_fade_node_get_progress", LIBS);
-  gidLink(gsk_cross_fade_node_get_start_child, "gsk_cross_fade_node_get_start_child", LIBS);
+  gidLink(cast(void**)&gsk_cross_fade_node_get_type, "gsk_cross_fade_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_cross_fade_node_new, "gsk_cross_fade_node_new", LIBS);
+  gidLink(cast(void**)&gsk_cross_fade_node_get_end_child, "gsk_cross_fade_node_get_end_child", LIBS);
+  gidLink(cast(void**)&gsk_cross_fade_node_get_progress, "gsk_cross_fade_node_get_progress", LIBS);
+  gidLink(cast(void**)&gsk_cross_fade_node_get_start_child, "gsk_cross_fade_node_get_start_child", LIBS);
 
   // DebugNode
-  gidLink(gsk_debug_node_get_type, "gsk_debug_node_get_type", LIBS);
-  gidLink(gsk_debug_node_new, "gsk_debug_node_new", LIBS);
-  gidLink(gsk_debug_node_get_child, "gsk_debug_node_get_child", LIBS);
-  gidLink(gsk_debug_node_get_message, "gsk_debug_node_get_message", LIBS);
+  gidLink(cast(void**)&gsk_debug_node_get_type, "gsk_debug_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_debug_node_new, "gsk_debug_node_new", LIBS);
+  gidLink(cast(void**)&gsk_debug_node_get_child, "gsk_debug_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_debug_node_get_message, "gsk_debug_node_get_message", LIBS);
 
   // FillNode
-  gidLink(gsk_fill_node_get_type, "gsk_fill_node_get_type", LIBS);
-  gidLink(gsk_fill_node_new, "gsk_fill_node_new", LIBS);
-  gidLink(gsk_fill_node_get_child, "gsk_fill_node_get_child", LIBS);
-  gidLink(gsk_fill_node_get_fill_rule, "gsk_fill_node_get_fill_rule", LIBS);
-  gidLink(gsk_fill_node_get_path, "gsk_fill_node_get_path", LIBS);
+  gidLink(cast(void**)&gsk_fill_node_get_type, "gsk_fill_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_fill_node_new, "gsk_fill_node_new", LIBS);
+  gidLink(cast(void**)&gsk_fill_node_get_child, "gsk_fill_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_fill_node_get_fill_rule, "gsk_fill_node_get_fill_rule", LIBS);
+  gidLink(cast(void**)&gsk_fill_node_get_path, "gsk_fill_node_get_path", LIBS);
 
   // GLRenderer
-  gidLink(gsk_gl_renderer_get_type, "gsk_gl_renderer_get_type", LIBS);
-  gidLink(gsk_gl_renderer_new, "gsk_gl_renderer_new", LIBS);
+  gidLink(cast(void**)&gsk_gl_renderer_get_type, "gsk_gl_renderer_get_type", LIBS);
+  gidLink(cast(void**)&gsk_gl_renderer_new, "gsk_gl_renderer_new", LIBS);
 
   // GLShader
-  gidLink(gsk_gl_shader_get_type, "gsk_gl_shader_get_type", LIBS);
-  gidLink(gsk_gl_shader_new_from_bytes, "gsk_gl_shader_new_from_bytes", LIBS);
-  gidLink(gsk_gl_shader_new_from_resource, "gsk_gl_shader_new_from_resource", LIBS);
-  gidLink(gsk_gl_shader_compile, "gsk_gl_shader_compile", LIBS);
-  gidLink(gsk_gl_shader_find_uniform_by_name, "gsk_gl_shader_find_uniform_by_name", LIBS);
-  gidLink(gsk_gl_shader_format_args, "gsk_gl_shader_format_args", LIBS);
-  gidLink(gsk_gl_shader_format_args_va, "gsk_gl_shader_format_args_va", LIBS);
-  gidLink(gsk_gl_shader_get_arg_bool, "gsk_gl_shader_get_arg_bool", LIBS);
-  gidLink(gsk_gl_shader_get_arg_float, "gsk_gl_shader_get_arg_float", LIBS);
-  gidLink(gsk_gl_shader_get_arg_int, "gsk_gl_shader_get_arg_int", LIBS);
-  gidLink(gsk_gl_shader_get_arg_uint, "gsk_gl_shader_get_arg_uint", LIBS);
-  gidLink(gsk_gl_shader_get_arg_vec2, "gsk_gl_shader_get_arg_vec2", LIBS);
-  gidLink(gsk_gl_shader_get_arg_vec3, "gsk_gl_shader_get_arg_vec3", LIBS);
-  gidLink(gsk_gl_shader_get_arg_vec4, "gsk_gl_shader_get_arg_vec4", LIBS);
-  gidLink(gsk_gl_shader_get_args_size, "gsk_gl_shader_get_args_size", LIBS);
-  gidLink(gsk_gl_shader_get_n_textures, "gsk_gl_shader_get_n_textures", LIBS);
-  gidLink(gsk_gl_shader_get_n_uniforms, "gsk_gl_shader_get_n_uniforms", LIBS);
-  gidLink(gsk_gl_shader_get_resource, "gsk_gl_shader_get_resource", LIBS);
-  gidLink(gsk_gl_shader_get_source, "gsk_gl_shader_get_source", LIBS);
-  gidLink(gsk_gl_shader_get_uniform_name, "gsk_gl_shader_get_uniform_name", LIBS);
-  gidLink(gsk_gl_shader_get_uniform_offset, "gsk_gl_shader_get_uniform_offset", LIBS);
-  gidLink(gsk_gl_shader_get_uniform_type, "gsk_gl_shader_get_uniform_type", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_type, "gsk_gl_shader_get_type", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_new_from_bytes, "gsk_gl_shader_new_from_bytes", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_new_from_resource, "gsk_gl_shader_new_from_resource", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_compile, "gsk_gl_shader_compile", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_find_uniform_by_name, "gsk_gl_shader_find_uniform_by_name", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_format_args, "gsk_gl_shader_format_args", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_format_args_va, "gsk_gl_shader_format_args_va", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_arg_bool, "gsk_gl_shader_get_arg_bool", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_arg_float, "gsk_gl_shader_get_arg_float", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_arg_int, "gsk_gl_shader_get_arg_int", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_arg_uint, "gsk_gl_shader_get_arg_uint", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_arg_vec2, "gsk_gl_shader_get_arg_vec2", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_arg_vec3, "gsk_gl_shader_get_arg_vec3", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_arg_vec4, "gsk_gl_shader_get_arg_vec4", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_args_size, "gsk_gl_shader_get_args_size", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_n_textures, "gsk_gl_shader_get_n_textures", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_n_uniforms, "gsk_gl_shader_get_n_uniforms", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_resource, "gsk_gl_shader_get_resource", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_source, "gsk_gl_shader_get_source", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_uniform_name, "gsk_gl_shader_get_uniform_name", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_uniform_offset, "gsk_gl_shader_get_uniform_offset", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_get_uniform_type, "gsk_gl_shader_get_uniform_type", LIBS);
 
   // GLShaderNode
-  gidLink(gsk_gl_shader_node_get_type, "gsk_gl_shader_node_get_type", LIBS);
-  gidLink(gsk_gl_shader_node_new, "gsk_gl_shader_node_new", LIBS);
-  gidLink(gsk_gl_shader_node_get_args, "gsk_gl_shader_node_get_args", LIBS);
-  gidLink(gsk_gl_shader_node_get_child, "gsk_gl_shader_node_get_child", LIBS);
-  gidLink(gsk_gl_shader_node_get_n_children, "gsk_gl_shader_node_get_n_children", LIBS);
-  gidLink(gsk_gl_shader_node_get_shader, "gsk_gl_shader_node_get_shader", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_node_get_type, "gsk_gl_shader_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_node_new, "gsk_gl_shader_node_new", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_node_get_args, "gsk_gl_shader_node_get_args", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_node_get_child, "gsk_gl_shader_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_node_get_n_children, "gsk_gl_shader_node_get_n_children", LIBS);
+  gidLink(cast(void**)&gsk_gl_shader_node_get_shader, "gsk_gl_shader_node_get_shader", LIBS);
 
   // Global
-  gidLink(gsk_value_dup_render_node, "gsk_value_dup_render_node", LIBS);
-  gidLink(gsk_value_get_render_node, "gsk_value_get_render_node", LIBS);
-  gidLink(gsk_value_set_render_node, "gsk_value_set_render_node", LIBS);
-  gidLink(gsk_value_take_render_node, "gsk_value_take_render_node", LIBS);
+  gidLink(cast(void**)&gsk_value_dup_render_node, "gsk_value_dup_render_node", LIBS);
+  gidLink(cast(void**)&gsk_value_get_render_node, "gsk_value_get_render_node", LIBS);
+  gidLink(cast(void**)&gsk_value_set_render_node, "gsk_value_set_render_node", LIBS);
+  gidLink(cast(void**)&gsk_value_take_render_node, "gsk_value_take_render_node", LIBS);
 
   // InsetShadowNode
-  gidLink(gsk_inset_shadow_node_get_type, "gsk_inset_shadow_node_get_type", LIBS);
-  gidLink(gsk_inset_shadow_node_new, "gsk_inset_shadow_node_new", LIBS);
-  gidLink(gsk_inset_shadow_node_get_blur_radius, "gsk_inset_shadow_node_get_blur_radius", LIBS);
-  gidLink(gsk_inset_shadow_node_get_color, "gsk_inset_shadow_node_get_color", LIBS);
-  gidLink(gsk_inset_shadow_node_get_dx, "gsk_inset_shadow_node_get_dx", LIBS);
-  gidLink(gsk_inset_shadow_node_get_dy, "gsk_inset_shadow_node_get_dy", LIBS);
-  gidLink(gsk_inset_shadow_node_get_outline, "gsk_inset_shadow_node_get_outline", LIBS);
-  gidLink(gsk_inset_shadow_node_get_spread, "gsk_inset_shadow_node_get_spread", LIBS);
+  gidLink(cast(void**)&gsk_inset_shadow_node_get_type, "gsk_inset_shadow_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_inset_shadow_node_new, "gsk_inset_shadow_node_new", LIBS);
+  gidLink(cast(void**)&gsk_inset_shadow_node_get_blur_radius, "gsk_inset_shadow_node_get_blur_radius", LIBS);
+  gidLink(cast(void**)&gsk_inset_shadow_node_get_color, "gsk_inset_shadow_node_get_color", LIBS);
+  gidLink(cast(void**)&gsk_inset_shadow_node_get_dx, "gsk_inset_shadow_node_get_dx", LIBS);
+  gidLink(cast(void**)&gsk_inset_shadow_node_get_dy, "gsk_inset_shadow_node_get_dy", LIBS);
+  gidLink(cast(void**)&gsk_inset_shadow_node_get_outline, "gsk_inset_shadow_node_get_outline", LIBS);
+  gidLink(cast(void**)&gsk_inset_shadow_node_get_spread, "gsk_inset_shadow_node_get_spread", LIBS);
 
   // LinearGradientNode
-  gidLink(gsk_linear_gradient_node_get_type, "gsk_linear_gradient_node_get_type", LIBS);
-  gidLink(gsk_linear_gradient_node_new, "gsk_linear_gradient_node_new", LIBS);
-  gidLink(gsk_linear_gradient_node_get_color_stops, "gsk_linear_gradient_node_get_color_stops", LIBS);
-  gidLink(gsk_linear_gradient_node_get_end, "gsk_linear_gradient_node_get_end", LIBS);
-  gidLink(gsk_linear_gradient_node_get_n_color_stops, "gsk_linear_gradient_node_get_n_color_stops", LIBS);
-  gidLink(gsk_linear_gradient_node_get_start, "gsk_linear_gradient_node_get_start", LIBS);
+  gidLink(cast(void**)&gsk_linear_gradient_node_get_type, "gsk_linear_gradient_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_linear_gradient_node_new, "gsk_linear_gradient_node_new", LIBS);
+  gidLink(cast(void**)&gsk_linear_gradient_node_get_color_stops, "gsk_linear_gradient_node_get_color_stops", LIBS);
+  gidLink(cast(void**)&gsk_linear_gradient_node_get_end, "gsk_linear_gradient_node_get_end", LIBS);
+  gidLink(cast(void**)&gsk_linear_gradient_node_get_n_color_stops, "gsk_linear_gradient_node_get_n_color_stops", LIBS);
+  gidLink(cast(void**)&gsk_linear_gradient_node_get_start, "gsk_linear_gradient_node_get_start", LIBS);
 
   // MaskNode
-  gidLink(gsk_mask_node_get_type, "gsk_mask_node_get_type", LIBS);
-  gidLink(gsk_mask_node_new, "gsk_mask_node_new", LIBS);
-  gidLink(gsk_mask_node_get_mask, "gsk_mask_node_get_mask", LIBS);
-  gidLink(gsk_mask_node_get_mask_mode, "gsk_mask_node_get_mask_mode", LIBS);
-  gidLink(gsk_mask_node_get_source, "gsk_mask_node_get_source", LIBS);
+  gidLink(cast(void**)&gsk_mask_node_get_type, "gsk_mask_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_mask_node_new, "gsk_mask_node_new", LIBS);
+  gidLink(cast(void**)&gsk_mask_node_get_mask, "gsk_mask_node_get_mask", LIBS);
+  gidLink(cast(void**)&gsk_mask_node_get_mask_mode, "gsk_mask_node_get_mask_mode", LIBS);
+  gidLink(cast(void**)&gsk_mask_node_get_source, "gsk_mask_node_get_source", LIBS);
 
   // NglRenderer
-  gidLink(gsk_ngl_renderer_get_type, "gsk_ngl_renderer_get_type", LIBS);
-  gidLink(gsk_ngl_renderer_new, "gsk_ngl_renderer_new", LIBS);
+  gidLink(cast(void**)&gsk_ngl_renderer_get_type, "gsk_ngl_renderer_get_type", LIBS);
+  gidLink(cast(void**)&gsk_ngl_renderer_new, "gsk_ngl_renderer_new", LIBS);
 
   // OpacityNode
-  gidLink(gsk_opacity_node_get_type, "gsk_opacity_node_get_type", LIBS);
-  gidLink(gsk_opacity_node_new, "gsk_opacity_node_new", LIBS);
-  gidLink(gsk_opacity_node_get_child, "gsk_opacity_node_get_child", LIBS);
-  gidLink(gsk_opacity_node_get_opacity, "gsk_opacity_node_get_opacity", LIBS);
+  gidLink(cast(void**)&gsk_opacity_node_get_type, "gsk_opacity_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_opacity_node_new, "gsk_opacity_node_new", LIBS);
+  gidLink(cast(void**)&gsk_opacity_node_get_child, "gsk_opacity_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_opacity_node_get_opacity, "gsk_opacity_node_get_opacity", LIBS);
 
   // OutsetShadowNode
-  gidLink(gsk_outset_shadow_node_get_type, "gsk_outset_shadow_node_get_type", LIBS);
-  gidLink(gsk_outset_shadow_node_new, "gsk_outset_shadow_node_new", LIBS);
-  gidLink(gsk_outset_shadow_node_get_blur_radius, "gsk_outset_shadow_node_get_blur_radius", LIBS);
-  gidLink(gsk_outset_shadow_node_get_color, "gsk_outset_shadow_node_get_color", LIBS);
-  gidLink(gsk_outset_shadow_node_get_dx, "gsk_outset_shadow_node_get_dx", LIBS);
-  gidLink(gsk_outset_shadow_node_get_dy, "gsk_outset_shadow_node_get_dy", LIBS);
-  gidLink(gsk_outset_shadow_node_get_outline, "gsk_outset_shadow_node_get_outline", LIBS);
-  gidLink(gsk_outset_shadow_node_get_spread, "gsk_outset_shadow_node_get_spread", LIBS);
+  gidLink(cast(void**)&gsk_outset_shadow_node_get_type, "gsk_outset_shadow_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_outset_shadow_node_new, "gsk_outset_shadow_node_new", LIBS);
+  gidLink(cast(void**)&gsk_outset_shadow_node_get_blur_radius, "gsk_outset_shadow_node_get_blur_radius", LIBS);
+  gidLink(cast(void**)&gsk_outset_shadow_node_get_color, "gsk_outset_shadow_node_get_color", LIBS);
+  gidLink(cast(void**)&gsk_outset_shadow_node_get_dx, "gsk_outset_shadow_node_get_dx", LIBS);
+  gidLink(cast(void**)&gsk_outset_shadow_node_get_dy, "gsk_outset_shadow_node_get_dy", LIBS);
+  gidLink(cast(void**)&gsk_outset_shadow_node_get_outline, "gsk_outset_shadow_node_get_outline", LIBS);
+  gidLink(cast(void**)&gsk_outset_shadow_node_get_spread, "gsk_outset_shadow_node_get_spread", LIBS);
 
   // Path
-  gidLink(gsk_path_get_type, "gsk_path_get_type", LIBS);
-  gidLink(gsk_path_foreach, "gsk_path_foreach", LIBS);
-  gidLink(gsk_path_get_bounds, "gsk_path_get_bounds", LIBS);
-  gidLink(gsk_path_get_closest_point, "gsk_path_get_closest_point", LIBS);
-  gidLink(gsk_path_get_end_point, "gsk_path_get_end_point", LIBS);
-  gidLink(gsk_path_get_start_point, "gsk_path_get_start_point", LIBS);
-  gidLink(gsk_path_get_stroke_bounds, "gsk_path_get_stroke_bounds", LIBS);
-  gidLink(gsk_path_in_fill, "gsk_path_in_fill", LIBS);
-  gidLink(gsk_path_is_closed, "gsk_path_is_closed", LIBS);
-  gidLink(gsk_path_is_empty, "gsk_path_is_empty", LIBS);
-  gidLink(gsk_path_print, "gsk_path_print", LIBS);
-  gidLink(gsk_path_ref, "gsk_path_ref", LIBS);
-  gidLink(gsk_path_to_cairo, "gsk_path_to_cairo", LIBS);
-  gidLink(gsk_path_to_string, "gsk_path_to_string", LIBS);
-  gidLink(gsk_path_unref, "gsk_path_unref", LIBS);
-  gidLink(gsk_path_parse, "gsk_path_parse", LIBS);
+  gidLink(cast(void**)&gsk_path_get_type, "gsk_path_get_type", LIBS);
+  gidLink(cast(void**)&gsk_path_foreach, "gsk_path_foreach", LIBS);
+  gidLink(cast(void**)&gsk_path_get_bounds, "gsk_path_get_bounds", LIBS);
+  gidLink(cast(void**)&gsk_path_get_closest_point, "gsk_path_get_closest_point", LIBS);
+  gidLink(cast(void**)&gsk_path_get_end_point, "gsk_path_get_end_point", LIBS);
+  gidLink(cast(void**)&gsk_path_get_start_point, "gsk_path_get_start_point", LIBS);
+  gidLink(cast(void**)&gsk_path_get_stroke_bounds, "gsk_path_get_stroke_bounds", LIBS);
+  gidLink(cast(void**)&gsk_path_in_fill, "gsk_path_in_fill", LIBS);
+  gidLink(cast(void**)&gsk_path_is_closed, "gsk_path_is_closed", LIBS);
+  gidLink(cast(void**)&gsk_path_is_empty, "gsk_path_is_empty", LIBS);
+  gidLink(cast(void**)&gsk_path_print, "gsk_path_print", LIBS);
+  gidLink(cast(void**)&gsk_path_ref, "gsk_path_ref", LIBS);
+  gidLink(cast(void**)&gsk_path_to_cairo, "gsk_path_to_cairo", LIBS);
+  gidLink(cast(void**)&gsk_path_to_string, "gsk_path_to_string", LIBS);
+  gidLink(cast(void**)&gsk_path_unref, "gsk_path_unref", LIBS);
+  gidLink(cast(void**)&gsk_path_parse, "gsk_path_parse", LIBS);
 
   // PathBuilder
-  gidLink(gsk_path_builder_get_type, "gsk_path_builder_get_type", LIBS);
-  gidLink(gsk_path_builder_new, "gsk_path_builder_new", LIBS);
-  gidLink(gsk_path_builder_add_cairo_path, "gsk_path_builder_add_cairo_path", LIBS);
-  gidLink(gsk_path_builder_add_circle, "gsk_path_builder_add_circle", LIBS);
-  gidLink(gsk_path_builder_add_layout, "gsk_path_builder_add_layout", LIBS);
-  gidLink(gsk_path_builder_add_path, "gsk_path_builder_add_path", LIBS);
-  gidLink(gsk_path_builder_add_rect, "gsk_path_builder_add_rect", LIBS);
-  gidLink(gsk_path_builder_add_reverse_path, "gsk_path_builder_add_reverse_path", LIBS);
-  gidLink(gsk_path_builder_add_rounded_rect, "gsk_path_builder_add_rounded_rect", LIBS);
-  gidLink(gsk_path_builder_add_segment, "gsk_path_builder_add_segment", LIBS);
-  gidLink(gsk_path_builder_arc_to, "gsk_path_builder_arc_to", LIBS);
-  gidLink(gsk_path_builder_close, "gsk_path_builder_close", LIBS);
-  gidLink(gsk_path_builder_conic_to, "gsk_path_builder_conic_to", LIBS);
-  gidLink(gsk_path_builder_cubic_to, "gsk_path_builder_cubic_to", LIBS);
-  gidLink(gsk_path_builder_free_to_path, "gsk_path_builder_free_to_path", LIBS);
-  gidLink(gsk_path_builder_get_current_point, "gsk_path_builder_get_current_point", LIBS);
-  gidLink(gsk_path_builder_html_arc_to, "gsk_path_builder_html_arc_to", LIBS);
-  gidLink(gsk_path_builder_line_to, "gsk_path_builder_line_to", LIBS);
-  gidLink(gsk_path_builder_move_to, "gsk_path_builder_move_to", LIBS);
-  gidLink(gsk_path_builder_quad_to, "gsk_path_builder_quad_to", LIBS);
-  gidLink(gsk_path_builder_ref, "gsk_path_builder_ref", LIBS);
-  gidLink(gsk_path_builder_rel_arc_to, "gsk_path_builder_rel_arc_to", LIBS);
-  gidLink(gsk_path_builder_rel_conic_to, "gsk_path_builder_rel_conic_to", LIBS);
-  gidLink(gsk_path_builder_rel_cubic_to, "gsk_path_builder_rel_cubic_to", LIBS);
-  gidLink(gsk_path_builder_rel_html_arc_to, "gsk_path_builder_rel_html_arc_to", LIBS);
-  gidLink(gsk_path_builder_rel_line_to, "gsk_path_builder_rel_line_to", LIBS);
-  gidLink(gsk_path_builder_rel_move_to, "gsk_path_builder_rel_move_to", LIBS);
-  gidLink(gsk_path_builder_rel_quad_to, "gsk_path_builder_rel_quad_to", LIBS);
-  gidLink(gsk_path_builder_rel_svg_arc_to, "gsk_path_builder_rel_svg_arc_to", LIBS);
-  gidLink(gsk_path_builder_svg_arc_to, "gsk_path_builder_svg_arc_to", LIBS);
-  gidLink(gsk_path_builder_to_path, "gsk_path_builder_to_path", LIBS);
-  gidLink(gsk_path_builder_unref, "gsk_path_builder_unref", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_get_type, "gsk_path_builder_get_type", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_new, "gsk_path_builder_new", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_add_cairo_path, "gsk_path_builder_add_cairo_path", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_add_circle, "gsk_path_builder_add_circle", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_add_layout, "gsk_path_builder_add_layout", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_add_path, "gsk_path_builder_add_path", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_add_rect, "gsk_path_builder_add_rect", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_add_reverse_path, "gsk_path_builder_add_reverse_path", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_add_rounded_rect, "gsk_path_builder_add_rounded_rect", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_add_segment, "gsk_path_builder_add_segment", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_arc_to, "gsk_path_builder_arc_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_close, "gsk_path_builder_close", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_conic_to, "gsk_path_builder_conic_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_cubic_to, "gsk_path_builder_cubic_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_free_to_path, "gsk_path_builder_free_to_path", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_get_current_point, "gsk_path_builder_get_current_point", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_html_arc_to, "gsk_path_builder_html_arc_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_line_to, "gsk_path_builder_line_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_move_to, "gsk_path_builder_move_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_quad_to, "gsk_path_builder_quad_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_ref, "gsk_path_builder_ref", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_rel_arc_to, "gsk_path_builder_rel_arc_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_rel_conic_to, "gsk_path_builder_rel_conic_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_rel_cubic_to, "gsk_path_builder_rel_cubic_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_rel_html_arc_to, "gsk_path_builder_rel_html_arc_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_rel_line_to, "gsk_path_builder_rel_line_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_rel_move_to, "gsk_path_builder_rel_move_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_rel_quad_to, "gsk_path_builder_rel_quad_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_rel_svg_arc_to, "gsk_path_builder_rel_svg_arc_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_svg_arc_to, "gsk_path_builder_svg_arc_to", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_to_path, "gsk_path_builder_to_path", LIBS);
+  gidLink(cast(void**)&gsk_path_builder_unref, "gsk_path_builder_unref", LIBS);
 
   // PathMeasure
-  gidLink(gsk_path_measure_get_type, "gsk_path_measure_get_type", LIBS);
-  gidLink(gsk_path_measure_new, "gsk_path_measure_new", LIBS);
-  gidLink(gsk_path_measure_new_with_tolerance, "gsk_path_measure_new_with_tolerance", LIBS);
-  gidLink(gsk_path_measure_get_length, "gsk_path_measure_get_length", LIBS);
-  gidLink(gsk_path_measure_get_path, "gsk_path_measure_get_path", LIBS);
-  gidLink(gsk_path_measure_get_point, "gsk_path_measure_get_point", LIBS);
-  gidLink(gsk_path_measure_get_tolerance, "gsk_path_measure_get_tolerance", LIBS);
-  gidLink(gsk_path_measure_ref, "gsk_path_measure_ref", LIBS);
-  gidLink(gsk_path_measure_unref, "gsk_path_measure_unref", LIBS);
+  gidLink(cast(void**)&gsk_path_measure_get_type, "gsk_path_measure_get_type", LIBS);
+  gidLink(cast(void**)&gsk_path_measure_new, "gsk_path_measure_new", LIBS);
+  gidLink(cast(void**)&gsk_path_measure_new_with_tolerance, "gsk_path_measure_new_with_tolerance", LIBS);
+  gidLink(cast(void**)&gsk_path_measure_get_length, "gsk_path_measure_get_length", LIBS);
+  gidLink(cast(void**)&gsk_path_measure_get_path, "gsk_path_measure_get_path", LIBS);
+  gidLink(cast(void**)&gsk_path_measure_get_point, "gsk_path_measure_get_point", LIBS);
+  gidLink(cast(void**)&gsk_path_measure_get_tolerance, "gsk_path_measure_get_tolerance", LIBS);
+  gidLink(cast(void**)&gsk_path_measure_ref, "gsk_path_measure_ref", LIBS);
+  gidLink(cast(void**)&gsk_path_measure_unref, "gsk_path_measure_unref", LIBS);
 
   // PathPoint
-  gidLink(gsk_path_point_get_type, "gsk_path_point_get_type", LIBS);
-  gidLink(gsk_path_point_compare, "gsk_path_point_compare", LIBS);
-  gidLink(gsk_path_point_copy, "gsk_path_point_copy", LIBS);
-  gidLink(gsk_path_point_equal, "gsk_path_point_equal", LIBS);
-  gidLink(gsk_path_point_free, "gsk_path_point_free", LIBS);
-  gidLink(gsk_path_point_get_curvature, "gsk_path_point_get_curvature", LIBS);
-  gidLink(gsk_path_point_get_distance, "gsk_path_point_get_distance", LIBS);
-  gidLink(gsk_path_point_get_position, "gsk_path_point_get_position", LIBS);
-  gidLink(gsk_path_point_get_rotation, "gsk_path_point_get_rotation", LIBS);
-  gidLink(gsk_path_point_get_tangent, "gsk_path_point_get_tangent", LIBS);
+  gidLink(cast(void**)&gsk_path_point_get_type, "gsk_path_point_get_type", LIBS);
+  gidLink(cast(void**)&gsk_path_point_compare, "gsk_path_point_compare", LIBS);
+  gidLink(cast(void**)&gsk_path_point_copy, "gsk_path_point_copy", LIBS);
+  gidLink(cast(void**)&gsk_path_point_equal, "gsk_path_point_equal", LIBS);
+  gidLink(cast(void**)&gsk_path_point_free, "gsk_path_point_free", LIBS);
+  gidLink(cast(void**)&gsk_path_point_get_curvature, "gsk_path_point_get_curvature", LIBS);
+  gidLink(cast(void**)&gsk_path_point_get_distance, "gsk_path_point_get_distance", LIBS);
+  gidLink(cast(void**)&gsk_path_point_get_position, "gsk_path_point_get_position", LIBS);
+  gidLink(cast(void**)&gsk_path_point_get_rotation, "gsk_path_point_get_rotation", LIBS);
+  gidLink(cast(void**)&gsk_path_point_get_tangent, "gsk_path_point_get_tangent", LIBS);
 
   // RadialGradientNode
-  gidLink(gsk_radial_gradient_node_get_type, "gsk_radial_gradient_node_get_type", LIBS);
-  gidLink(gsk_radial_gradient_node_new, "gsk_radial_gradient_node_new", LIBS);
-  gidLink(gsk_radial_gradient_node_get_center, "gsk_radial_gradient_node_get_center", LIBS);
-  gidLink(gsk_radial_gradient_node_get_color_stops, "gsk_radial_gradient_node_get_color_stops", LIBS);
-  gidLink(gsk_radial_gradient_node_get_end, "gsk_radial_gradient_node_get_end", LIBS);
-  gidLink(gsk_radial_gradient_node_get_hradius, "gsk_radial_gradient_node_get_hradius", LIBS);
-  gidLink(gsk_radial_gradient_node_get_n_color_stops, "gsk_radial_gradient_node_get_n_color_stops", LIBS);
-  gidLink(gsk_radial_gradient_node_get_start, "gsk_radial_gradient_node_get_start", LIBS);
-  gidLink(gsk_radial_gradient_node_get_vradius, "gsk_radial_gradient_node_get_vradius", LIBS);
+  gidLink(cast(void**)&gsk_radial_gradient_node_get_type, "gsk_radial_gradient_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_radial_gradient_node_new, "gsk_radial_gradient_node_new", LIBS);
+  gidLink(cast(void**)&gsk_radial_gradient_node_get_center, "gsk_radial_gradient_node_get_center", LIBS);
+  gidLink(cast(void**)&gsk_radial_gradient_node_get_color_stops, "gsk_radial_gradient_node_get_color_stops", LIBS);
+  gidLink(cast(void**)&gsk_radial_gradient_node_get_end, "gsk_radial_gradient_node_get_end", LIBS);
+  gidLink(cast(void**)&gsk_radial_gradient_node_get_hradius, "gsk_radial_gradient_node_get_hradius", LIBS);
+  gidLink(cast(void**)&gsk_radial_gradient_node_get_n_color_stops, "gsk_radial_gradient_node_get_n_color_stops", LIBS);
+  gidLink(cast(void**)&gsk_radial_gradient_node_get_start, "gsk_radial_gradient_node_get_start", LIBS);
+  gidLink(cast(void**)&gsk_radial_gradient_node_get_vradius, "gsk_radial_gradient_node_get_vradius", LIBS);
 
   // RenderNode
-  gidLink(gsk_render_node_get_type, "gsk_render_node_get_type", LIBS);
-  gidLink(gsk_render_node_deserialize, "gsk_render_node_deserialize", LIBS);
-  gidLink(gsk_render_node_draw, "gsk_render_node_draw", LIBS);
-  gidLink(gsk_render_node_get_bounds, "gsk_render_node_get_bounds", LIBS);
-  gidLink(gsk_render_node_get_node_type, "gsk_render_node_get_node_type", LIBS);
-  gidLink(gsk_render_node_ref, "gsk_render_node_ref", LIBS);
-  gidLink(gsk_render_node_serialize, "gsk_render_node_serialize", LIBS);
-  gidLink(gsk_render_node_unref, "gsk_render_node_unref", LIBS);
-  gidLink(gsk_render_node_write_to_file, "gsk_render_node_write_to_file", LIBS);
+  gidLink(cast(void**)&gsk_render_node_get_type, "gsk_render_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_render_node_deserialize, "gsk_render_node_deserialize", LIBS);
+  gidLink(cast(void**)&gsk_render_node_draw, "gsk_render_node_draw", LIBS);
+  gidLink(cast(void**)&gsk_render_node_get_bounds, "gsk_render_node_get_bounds", LIBS);
+  gidLink(cast(void**)&gsk_render_node_get_node_type, "gsk_render_node_get_node_type", LIBS);
+  gidLink(cast(void**)&gsk_render_node_ref, "gsk_render_node_ref", LIBS);
+  gidLink(cast(void**)&gsk_render_node_serialize, "gsk_render_node_serialize", LIBS);
+  gidLink(cast(void**)&gsk_render_node_unref, "gsk_render_node_unref", LIBS);
+  gidLink(cast(void**)&gsk_render_node_write_to_file, "gsk_render_node_write_to_file", LIBS);
 
   // Renderer
-  gidLink(gsk_renderer_get_type, "gsk_renderer_get_type", LIBS);
-  gidLink(gsk_renderer_new_for_surface, "gsk_renderer_new_for_surface", LIBS);
-  gidLink(gsk_renderer_get_surface, "gsk_renderer_get_surface", LIBS);
-  gidLink(gsk_renderer_is_realized, "gsk_renderer_is_realized", LIBS);
-  gidLink(gsk_renderer_realize, "gsk_renderer_realize", LIBS);
-  gidLink(gsk_renderer_realize_for_display, "gsk_renderer_realize_for_display", LIBS);
-  gidLink(gsk_renderer_render, "gsk_renderer_render", LIBS);
-  gidLink(gsk_renderer_render_texture, "gsk_renderer_render_texture", LIBS);
-  gidLink(gsk_renderer_unrealize, "gsk_renderer_unrealize", LIBS);
+  gidLink(cast(void**)&gsk_renderer_get_type, "gsk_renderer_get_type", LIBS);
+  gidLink(cast(void**)&gsk_renderer_new_for_surface, "gsk_renderer_new_for_surface", LIBS);
+  gidLink(cast(void**)&gsk_renderer_get_surface, "gsk_renderer_get_surface", LIBS);
+  gidLink(cast(void**)&gsk_renderer_is_realized, "gsk_renderer_is_realized", LIBS);
+  gidLink(cast(void**)&gsk_renderer_realize, "gsk_renderer_realize", LIBS);
+  gidLink(cast(void**)&gsk_renderer_realize_for_display, "gsk_renderer_realize_for_display", LIBS);
+  gidLink(cast(void**)&gsk_renderer_render, "gsk_renderer_render", LIBS);
+  gidLink(cast(void**)&gsk_renderer_render_texture, "gsk_renderer_render_texture", LIBS);
+  gidLink(cast(void**)&gsk_renderer_unrealize, "gsk_renderer_unrealize", LIBS);
 
   // RepeatNode
-  gidLink(gsk_repeat_node_get_type, "gsk_repeat_node_get_type", LIBS);
-  gidLink(gsk_repeat_node_new, "gsk_repeat_node_new", LIBS);
-  gidLink(gsk_repeat_node_get_child, "gsk_repeat_node_get_child", LIBS);
-  gidLink(gsk_repeat_node_get_child_bounds, "gsk_repeat_node_get_child_bounds", LIBS);
+  gidLink(cast(void**)&gsk_repeat_node_get_type, "gsk_repeat_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_repeat_node_new, "gsk_repeat_node_new", LIBS);
+  gidLink(cast(void**)&gsk_repeat_node_get_child, "gsk_repeat_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_repeat_node_get_child_bounds, "gsk_repeat_node_get_child_bounds", LIBS);
 
   // RepeatingLinearGradientNode
-  gidLink(gsk_repeating_linear_gradient_node_get_type, "gsk_repeating_linear_gradient_node_get_type", LIBS);
-  gidLink(gsk_repeating_linear_gradient_node_new, "gsk_repeating_linear_gradient_node_new", LIBS);
+  gidLink(cast(void**)&gsk_repeating_linear_gradient_node_get_type, "gsk_repeating_linear_gradient_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_repeating_linear_gradient_node_new, "gsk_repeating_linear_gradient_node_new", LIBS);
 
   // RepeatingRadialGradientNode
-  gidLink(gsk_repeating_radial_gradient_node_get_type, "gsk_repeating_radial_gradient_node_get_type", LIBS);
-  gidLink(gsk_repeating_radial_gradient_node_new, "gsk_repeating_radial_gradient_node_new", LIBS);
+  gidLink(cast(void**)&gsk_repeating_radial_gradient_node_get_type, "gsk_repeating_radial_gradient_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_repeating_radial_gradient_node_new, "gsk_repeating_radial_gradient_node_new", LIBS);
 
   // RoundedClipNode
-  gidLink(gsk_rounded_clip_node_get_type, "gsk_rounded_clip_node_get_type", LIBS);
-  gidLink(gsk_rounded_clip_node_new, "gsk_rounded_clip_node_new", LIBS);
-  gidLink(gsk_rounded_clip_node_get_child, "gsk_rounded_clip_node_get_child", LIBS);
-  gidLink(gsk_rounded_clip_node_get_clip, "gsk_rounded_clip_node_get_clip", LIBS);
+  gidLink(cast(void**)&gsk_rounded_clip_node_get_type, "gsk_rounded_clip_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_rounded_clip_node_new, "gsk_rounded_clip_node_new", LIBS);
+  gidLink(cast(void**)&gsk_rounded_clip_node_get_child, "gsk_rounded_clip_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_rounded_clip_node_get_clip, "gsk_rounded_clip_node_get_clip", LIBS);
 
   // RoundedRect
-  gidLink(gsk_rounded_rect_contains_point, "gsk_rounded_rect_contains_point", LIBS);
-  gidLink(gsk_rounded_rect_contains_rect, "gsk_rounded_rect_contains_rect", LIBS);
-  gidLink(gsk_rounded_rect_init, "gsk_rounded_rect_init", LIBS);
-  gidLink(gsk_rounded_rect_init_copy, "gsk_rounded_rect_init_copy", LIBS);
-  gidLink(gsk_rounded_rect_init_from_rect, "gsk_rounded_rect_init_from_rect", LIBS);
-  gidLink(gsk_rounded_rect_intersects_rect, "gsk_rounded_rect_intersects_rect", LIBS);
-  gidLink(gsk_rounded_rect_is_rectilinear, "gsk_rounded_rect_is_rectilinear", LIBS);
-  gidLink(gsk_rounded_rect_normalize, "gsk_rounded_rect_normalize", LIBS);
-  gidLink(gsk_rounded_rect_offset, "gsk_rounded_rect_offset", LIBS);
-  gidLink(gsk_rounded_rect_shrink, "gsk_rounded_rect_shrink", LIBS);
+  gidLink(cast(void**)&gsk_rounded_rect_contains_point, "gsk_rounded_rect_contains_point", LIBS);
+  gidLink(cast(void**)&gsk_rounded_rect_contains_rect, "gsk_rounded_rect_contains_rect", LIBS);
+  gidLink(cast(void**)&gsk_rounded_rect_init, "gsk_rounded_rect_init", LIBS);
+  gidLink(cast(void**)&gsk_rounded_rect_init_copy, "gsk_rounded_rect_init_copy", LIBS);
+  gidLink(cast(void**)&gsk_rounded_rect_init_from_rect, "gsk_rounded_rect_init_from_rect", LIBS);
+  gidLink(cast(void**)&gsk_rounded_rect_intersects_rect, "gsk_rounded_rect_intersects_rect", LIBS);
+  gidLink(cast(void**)&gsk_rounded_rect_is_rectilinear, "gsk_rounded_rect_is_rectilinear", LIBS);
+  gidLink(cast(void**)&gsk_rounded_rect_normalize, "gsk_rounded_rect_normalize", LIBS);
+  gidLink(cast(void**)&gsk_rounded_rect_offset, "gsk_rounded_rect_offset", LIBS);
+  gidLink(cast(void**)&gsk_rounded_rect_shrink, "gsk_rounded_rect_shrink", LIBS);
 
   // ShaderArgsBuilder
-  gidLink(gsk_shader_args_builder_get_type, "gsk_shader_args_builder_get_type", LIBS);
-  gidLink(gsk_shader_args_builder_new, "gsk_shader_args_builder_new", LIBS);
-  gidLink(gsk_shader_args_builder_free_to_args, "gsk_shader_args_builder_free_to_args", LIBS);
-  gidLink(gsk_shader_args_builder_ref, "gsk_shader_args_builder_ref", LIBS);
-  gidLink(gsk_shader_args_builder_set_bool, "gsk_shader_args_builder_set_bool", LIBS);
-  gidLink(gsk_shader_args_builder_set_float, "gsk_shader_args_builder_set_float", LIBS);
-  gidLink(gsk_shader_args_builder_set_int, "gsk_shader_args_builder_set_int", LIBS);
-  gidLink(gsk_shader_args_builder_set_uint, "gsk_shader_args_builder_set_uint", LIBS);
-  gidLink(gsk_shader_args_builder_set_vec2, "gsk_shader_args_builder_set_vec2", LIBS);
-  gidLink(gsk_shader_args_builder_set_vec3, "gsk_shader_args_builder_set_vec3", LIBS);
-  gidLink(gsk_shader_args_builder_set_vec4, "gsk_shader_args_builder_set_vec4", LIBS);
-  gidLink(gsk_shader_args_builder_to_args, "gsk_shader_args_builder_to_args", LIBS);
-  gidLink(gsk_shader_args_builder_unref, "gsk_shader_args_builder_unref", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_get_type, "gsk_shader_args_builder_get_type", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_new, "gsk_shader_args_builder_new", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_free_to_args, "gsk_shader_args_builder_free_to_args", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_ref, "gsk_shader_args_builder_ref", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_set_bool, "gsk_shader_args_builder_set_bool", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_set_float, "gsk_shader_args_builder_set_float", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_set_int, "gsk_shader_args_builder_set_int", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_set_uint, "gsk_shader_args_builder_set_uint", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_set_vec2, "gsk_shader_args_builder_set_vec2", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_set_vec3, "gsk_shader_args_builder_set_vec3", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_set_vec4, "gsk_shader_args_builder_set_vec4", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_to_args, "gsk_shader_args_builder_to_args", LIBS);
+  gidLink(cast(void**)&gsk_shader_args_builder_unref, "gsk_shader_args_builder_unref", LIBS);
 
   // ShadowNode
-  gidLink(gsk_shadow_node_get_type, "gsk_shadow_node_get_type", LIBS);
-  gidLink(gsk_shadow_node_new, "gsk_shadow_node_new", LIBS);
-  gidLink(gsk_shadow_node_get_child, "gsk_shadow_node_get_child", LIBS);
-  gidLink(gsk_shadow_node_get_n_shadows, "gsk_shadow_node_get_n_shadows", LIBS);
-  gidLink(gsk_shadow_node_get_shadow, "gsk_shadow_node_get_shadow", LIBS);
+  gidLink(cast(void**)&gsk_shadow_node_get_type, "gsk_shadow_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_shadow_node_new, "gsk_shadow_node_new", LIBS);
+  gidLink(cast(void**)&gsk_shadow_node_get_child, "gsk_shadow_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_shadow_node_get_n_shadows, "gsk_shadow_node_get_n_shadows", LIBS);
+  gidLink(cast(void**)&gsk_shadow_node_get_shadow, "gsk_shadow_node_get_shadow", LIBS);
 
   // Stroke
-  gidLink(gsk_stroke_get_type, "gsk_stroke_get_type", LIBS);
-  gidLink(gsk_stroke_new, "gsk_stroke_new", LIBS);
-  gidLink(gsk_stroke_copy, "gsk_stroke_copy", LIBS);
-  gidLink(gsk_stroke_free, "gsk_stroke_free", LIBS);
-  gidLink(gsk_stroke_get_dash, "gsk_stroke_get_dash", LIBS);
-  gidLink(gsk_stroke_get_dash_offset, "gsk_stroke_get_dash_offset", LIBS);
-  gidLink(gsk_stroke_get_line_cap, "gsk_stroke_get_line_cap", LIBS);
-  gidLink(gsk_stroke_get_line_join, "gsk_stroke_get_line_join", LIBS);
-  gidLink(gsk_stroke_get_line_width, "gsk_stroke_get_line_width", LIBS);
-  gidLink(gsk_stroke_get_miter_limit, "gsk_stroke_get_miter_limit", LIBS);
-  gidLink(gsk_stroke_set_dash, "gsk_stroke_set_dash", LIBS);
-  gidLink(gsk_stroke_set_dash_offset, "gsk_stroke_set_dash_offset", LIBS);
-  gidLink(gsk_stroke_set_line_cap, "gsk_stroke_set_line_cap", LIBS);
-  gidLink(gsk_stroke_set_line_join, "gsk_stroke_set_line_join", LIBS);
-  gidLink(gsk_stroke_set_line_width, "gsk_stroke_set_line_width", LIBS);
-  gidLink(gsk_stroke_set_miter_limit, "gsk_stroke_set_miter_limit", LIBS);
-  gidLink(gsk_stroke_to_cairo, "gsk_stroke_to_cairo", LIBS);
-  gidLink(gsk_stroke_equal, "gsk_stroke_equal", LIBS);
+  gidLink(cast(void**)&gsk_stroke_get_type, "gsk_stroke_get_type", LIBS);
+  gidLink(cast(void**)&gsk_stroke_new, "gsk_stroke_new", LIBS);
+  gidLink(cast(void**)&gsk_stroke_copy, "gsk_stroke_copy", LIBS);
+  gidLink(cast(void**)&gsk_stroke_free, "gsk_stroke_free", LIBS);
+  gidLink(cast(void**)&gsk_stroke_get_dash, "gsk_stroke_get_dash", LIBS);
+  gidLink(cast(void**)&gsk_stroke_get_dash_offset, "gsk_stroke_get_dash_offset", LIBS);
+  gidLink(cast(void**)&gsk_stroke_get_line_cap, "gsk_stroke_get_line_cap", LIBS);
+  gidLink(cast(void**)&gsk_stroke_get_line_join, "gsk_stroke_get_line_join", LIBS);
+  gidLink(cast(void**)&gsk_stroke_get_line_width, "gsk_stroke_get_line_width", LIBS);
+  gidLink(cast(void**)&gsk_stroke_get_miter_limit, "gsk_stroke_get_miter_limit", LIBS);
+  gidLink(cast(void**)&gsk_stroke_set_dash, "gsk_stroke_set_dash", LIBS);
+  gidLink(cast(void**)&gsk_stroke_set_dash_offset, "gsk_stroke_set_dash_offset", LIBS);
+  gidLink(cast(void**)&gsk_stroke_set_line_cap, "gsk_stroke_set_line_cap", LIBS);
+  gidLink(cast(void**)&gsk_stroke_set_line_join, "gsk_stroke_set_line_join", LIBS);
+  gidLink(cast(void**)&gsk_stroke_set_line_width, "gsk_stroke_set_line_width", LIBS);
+  gidLink(cast(void**)&gsk_stroke_set_miter_limit, "gsk_stroke_set_miter_limit", LIBS);
+  gidLink(cast(void**)&gsk_stroke_to_cairo, "gsk_stroke_to_cairo", LIBS);
+  gidLink(cast(void**)&gsk_stroke_equal, "gsk_stroke_equal", LIBS);
 
   // StrokeNode
-  gidLink(gsk_stroke_node_get_type, "gsk_stroke_node_get_type", LIBS);
-  gidLink(gsk_stroke_node_new, "gsk_stroke_node_new", LIBS);
-  gidLink(gsk_stroke_node_get_child, "gsk_stroke_node_get_child", LIBS);
-  gidLink(gsk_stroke_node_get_path, "gsk_stroke_node_get_path", LIBS);
-  gidLink(gsk_stroke_node_get_stroke, "gsk_stroke_node_get_stroke", LIBS);
+  gidLink(cast(void**)&gsk_stroke_node_get_type, "gsk_stroke_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_stroke_node_new, "gsk_stroke_node_new", LIBS);
+  gidLink(cast(void**)&gsk_stroke_node_get_child, "gsk_stroke_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_stroke_node_get_path, "gsk_stroke_node_get_path", LIBS);
+  gidLink(cast(void**)&gsk_stroke_node_get_stroke, "gsk_stroke_node_get_stroke", LIBS);
 
   // SubsurfaceNode
-  gidLink(gsk_subsurface_node_get_type, "gsk_subsurface_node_get_type", LIBS);
-  gidLink(gsk_subsurface_node_new, "gsk_subsurface_node_new", LIBS);
-  gidLink(gsk_subsurface_node_get_subsurface, "gsk_subsurface_node_get_subsurface", LIBS);
-  gidLink(gsk_subsurface_node_get_child, "gsk_subsurface_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_subsurface_node_get_type, "gsk_subsurface_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_subsurface_node_new, "gsk_subsurface_node_new", LIBS);
+  gidLink(cast(void**)&gsk_subsurface_node_get_subsurface, "gsk_subsurface_node_get_subsurface", LIBS);
+  gidLink(cast(void**)&gsk_subsurface_node_get_child, "gsk_subsurface_node_get_child", LIBS);
 
   // TextNode
-  gidLink(gsk_text_node_get_type, "gsk_text_node_get_type", LIBS);
-  gidLink(gsk_text_node_new, "gsk_text_node_new", LIBS);
-  gidLink(gsk_text_node_get_color, "gsk_text_node_get_color", LIBS);
-  gidLink(gsk_text_node_get_font, "gsk_text_node_get_font", LIBS);
-  gidLink(gsk_text_node_get_glyphs, "gsk_text_node_get_glyphs", LIBS);
-  gidLink(gsk_text_node_get_num_glyphs, "gsk_text_node_get_num_glyphs", LIBS);
-  gidLink(gsk_text_node_get_offset, "gsk_text_node_get_offset", LIBS);
-  gidLink(gsk_text_node_has_color_glyphs, "gsk_text_node_has_color_glyphs", LIBS);
+  gidLink(cast(void**)&gsk_text_node_get_type, "gsk_text_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_text_node_new, "gsk_text_node_new", LIBS);
+  gidLink(cast(void**)&gsk_text_node_get_color, "gsk_text_node_get_color", LIBS);
+  gidLink(cast(void**)&gsk_text_node_get_font, "gsk_text_node_get_font", LIBS);
+  gidLink(cast(void**)&gsk_text_node_get_glyphs, "gsk_text_node_get_glyphs", LIBS);
+  gidLink(cast(void**)&gsk_text_node_get_num_glyphs, "gsk_text_node_get_num_glyphs", LIBS);
+  gidLink(cast(void**)&gsk_text_node_get_offset, "gsk_text_node_get_offset", LIBS);
+  gidLink(cast(void**)&gsk_text_node_has_color_glyphs, "gsk_text_node_has_color_glyphs", LIBS);
 
   // TextureNode
-  gidLink(gsk_texture_node_get_type, "gsk_texture_node_get_type", LIBS);
-  gidLink(gsk_texture_node_new, "gsk_texture_node_new", LIBS);
-  gidLink(gsk_texture_node_get_texture, "gsk_texture_node_get_texture", LIBS);
+  gidLink(cast(void**)&gsk_texture_node_get_type, "gsk_texture_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_texture_node_new, "gsk_texture_node_new", LIBS);
+  gidLink(cast(void**)&gsk_texture_node_get_texture, "gsk_texture_node_get_texture", LIBS);
 
   // TextureScaleNode
-  gidLink(gsk_texture_scale_node_get_type, "gsk_texture_scale_node_get_type", LIBS);
-  gidLink(gsk_texture_scale_node_new, "gsk_texture_scale_node_new", LIBS);
-  gidLink(gsk_texture_scale_node_get_filter, "gsk_texture_scale_node_get_filter", LIBS);
-  gidLink(gsk_texture_scale_node_get_texture, "gsk_texture_scale_node_get_texture", LIBS);
+  gidLink(cast(void**)&gsk_texture_scale_node_get_type, "gsk_texture_scale_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_texture_scale_node_new, "gsk_texture_scale_node_new", LIBS);
+  gidLink(cast(void**)&gsk_texture_scale_node_get_filter, "gsk_texture_scale_node_get_filter", LIBS);
+  gidLink(cast(void**)&gsk_texture_scale_node_get_texture, "gsk_texture_scale_node_get_texture", LIBS);
 
   // Transform
-  gidLink(gsk_transform_get_type, "gsk_transform_get_type", LIBS);
-  gidLink(gsk_transform_new, "gsk_transform_new", LIBS);
-  gidLink(gsk_transform_equal, "gsk_transform_equal", LIBS);
-  gidLink(gsk_transform_get_category, "gsk_transform_get_category", LIBS);
-  gidLink(gsk_transform_invert, "gsk_transform_invert", LIBS);
-  gidLink(gsk_transform_matrix, "gsk_transform_matrix", LIBS);
-  gidLink(gsk_transform_perspective, "gsk_transform_perspective", LIBS);
-  gidLink(gsk_transform_print, "gsk_transform_print", LIBS);
-  gidLink(gsk_transform_ref, "gsk_transform_ref", LIBS);
-  gidLink(gsk_transform_rotate, "gsk_transform_rotate", LIBS);
-  gidLink(gsk_transform_rotate_3d, "gsk_transform_rotate_3d", LIBS);
-  gidLink(gsk_transform_scale, "gsk_transform_scale", LIBS);
-  gidLink(gsk_transform_scale_3d, "gsk_transform_scale_3d", LIBS);
-  gidLink(gsk_transform_skew, "gsk_transform_skew", LIBS);
-  gidLink(gsk_transform_to_2d, "gsk_transform_to_2d", LIBS);
-  gidLink(gsk_transform_to_2d_components, "gsk_transform_to_2d_components", LIBS);
-  gidLink(gsk_transform_to_affine, "gsk_transform_to_affine", LIBS);
-  gidLink(gsk_transform_to_matrix, "gsk_transform_to_matrix", LIBS);
-  gidLink(gsk_transform_to_string, "gsk_transform_to_string", LIBS);
-  gidLink(gsk_transform_to_translate, "gsk_transform_to_translate", LIBS);
-  gidLink(gsk_transform_transform, "gsk_transform_transform", LIBS);
-  gidLink(gsk_transform_transform_bounds, "gsk_transform_transform_bounds", LIBS);
-  gidLink(gsk_transform_transform_point, "gsk_transform_transform_point", LIBS);
-  gidLink(gsk_transform_translate, "gsk_transform_translate", LIBS);
-  gidLink(gsk_transform_translate_3d, "gsk_transform_translate_3d", LIBS);
-  gidLink(gsk_transform_unref, "gsk_transform_unref", LIBS);
-  gidLink(gsk_transform_parse, "gsk_transform_parse", LIBS);
+  gidLink(cast(void**)&gsk_transform_get_type, "gsk_transform_get_type", LIBS);
+  gidLink(cast(void**)&gsk_transform_new, "gsk_transform_new", LIBS);
+  gidLink(cast(void**)&gsk_transform_equal, "gsk_transform_equal", LIBS);
+  gidLink(cast(void**)&gsk_transform_get_category, "gsk_transform_get_category", LIBS);
+  gidLink(cast(void**)&gsk_transform_invert, "gsk_transform_invert", LIBS);
+  gidLink(cast(void**)&gsk_transform_matrix, "gsk_transform_matrix", LIBS);
+  gidLink(cast(void**)&gsk_transform_perspective, "gsk_transform_perspective", LIBS);
+  gidLink(cast(void**)&gsk_transform_print, "gsk_transform_print", LIBS);
+  gidLink(cast(void**)&gsk_transform_ref, "gsk_transform_ref", LIBS);
+  gidLink(cast(void**)&gsk_transform_rotate, "gsk_transform_rotate", LIBS);
+  gidLink(cast(void**)&gsk_transform_rotate_3d, "gsk_transform_rotate_3d", LIBS);
+  gidLink(cast(void**)&gsk_transform_scale, "gsk_transform_scale", LIBS);
+  gidLink(cast(void**)&gsk_transform_scale_3d, "gsk_transform_scale_3d", LIBS);
+  gidLink(cast(void**)&gsk_transform_skew, "gsk_transform_skew", LIBS);
+  gidLink(cast(void**)&gsk_transform_to_2d, "gsk_transform_to_2d", LIBS);
+  gidLink(cast(void**)&gsk_transform_to_2d_components, "gsk_transform_to_2d_components", LIBS);
+  gidLink(cast(void**)&gsk_transform_to_affine, "gsk_transform_to_affine", LIBS);
+  gidLink(cast(void**)&gsk_transform_to_matrix, "gsk_transform_to_matrix", LIBS);
+  gidLink(cast(void**)&gsk_transform_to_string, "gsk_transform_to_string", LIBS);
+  gidLink(cast(void**)&gsk_transform_to_translate, "gsk_transform_to_translate", LIBS);
+  gidLink(cast(void**)&gsk_transform_transform, "gsk_transform_transform", LIBS);
+  gidLink(cast(void**)&gsk_transform_transform_bounds, "gsk_transform_transform_bounds", LIBS);
+  gidLink(cast(void**)&gsk_transform_transform_point, "gsk_transform_transform_point", LIBS);
+  gidLink(cast(void**)&gsk_transform_translate, "gsk_transform_translate", LIBS);
+  gidLink(cast(void**)&gsk_transform_translate_3d, "gsk_transform_translate_3d", LIBS);
+  gidLink(cast(void**)&gsk_transform_unref, "gsk_transform_unref", LIBS);
+  gidLink(cast(void**)&gsk_transform_parse, "gsk_transform_parse", LIBS);
 
   // TransformNode
-  gidLink(gsk_transform_node_get_type, "gsk_transform_node_get_type", LIBS);
-  gidLink(gsk_transform_node_new, "gsk_transform_node_new", LIBS);
-  gidLink(gsk_transform_node_get_child, "gsk_transform_node_get_child", LIBS);
-  gidLink(gsk_transform_node_get_transform, "gsk_transform_node_get_transform", LIBS);
+  gidLink(cast(void**)&gsk_transform_node_get_type, "gsk_transform_node_get_type", LIBS);
+  gidLink(cast(void**)&gsk_transform_node_new, "gsk_transform_node_new", LIBS);
+  gidLink(cast(void**)&gsk_transform_node_get_child, "gsk_transform_node_get_child", LIBS);
+  gidLink(cast(void**)&gsk_transform_node_get_transform, "gsk_transform_node_get_transform", LIBS);
 
   // VulkanRenderer
-  gidLink(gsk_vulkan_renderer_get_type, "gsk_vulkan_renderer_get_type", LIBS);
-  gidLink(gsk_vulkan_renderer_new, "gsk_vulkan_renderer_new", LIBS);
+  gidLink(cast(void**)&gsk_vulkan_renderer_get_type, "gsk_vulkan_renderer_get_type", LIBS);
+  gidLink(cast(void**)&gsk_vulkan_renderer_new, "gsk_vulkan_renderer_new", LIBS);
 }

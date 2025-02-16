@@ -14,7 +14,8 @@ interface DragSurface
 
   static GType getType()
   {
-    return gdk_drag_surface_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_drag_surface_get_type != &gidSymbolNotFound ? gdk_drag_surface_get_type() : cast(GType)0;
   }
 
   /**

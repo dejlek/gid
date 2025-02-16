@@ -84,7 +84,8 @@ class ComboBox : Widget, CellEditable, CellLayout
 
   static GType getType()
   {
-    return gtk_combo_box_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_combo_box_get_type != &gidSymbolNotFound ? gtk_combo_box_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

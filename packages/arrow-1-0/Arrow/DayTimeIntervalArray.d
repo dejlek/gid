@@ -19,7 +19,8 @@ class DayTimeIntervalArray : PrimitiveArray
 
   static GType getType()
   {
-    return garrow_day_time_interval_array_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_day_time_interval_array_get_type != &gidSymbolNotFound ? garrow_day_time_interval_array_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

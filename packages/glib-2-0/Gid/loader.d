@@ -1,14 +1,23 @@
 module Gid.loader;
 
-import Gid.Types;
-import Gid.c.functions;
-import Gid.c.types;
-import Gid.gid;
 
-
-import std.path : buildPath;
+import std.file : exists;
+import std.path : buildNormalizedPath, buildPath;
 import std.process : environment;
 import std.string : fromStringz, toStringz;
+
+debug
+{
+  import std.stdio : writeln;
+
+  private immutable bool gidLoaderDebug; // Set by GID_LOADER_DEBUG=1 to enable loader debugging
+
+  shared static this()
+  {
+    import std.process : environment;
+    gidLoaderDebug = environment.get("GID_LOADER_DEBUG", "0") == "1";
+  }
+}
 
 version(Windows)
 {
@@ -17,12 +26,13 @@ version(Windows)
   import core.sys.windows.winnt : LANG_NEUTRAL, IMAGE_FILE_MACHINE_AMD64, IMAGE_FILE_MACHINE_I386;
   import std.algorithm : splitter;
 
+  private bool dllPathSet;
+  private void*[string] dllHandles;
+
   extern(Windows) int SetDllDirectoryA(const(char)* path);
 
-  void gidLink(T)(ref T funcPtr, string symbol, immutable(string[]) libs)
+  void gidLink(void** funcPtr, string symbol, immutable(string[]) libs)
   {
-    static bool dllPathSet;
-
     if (!dllPathSet && libs.length > 0)
     {
       outer: foreach (lib; libs[0].splitter(";"))
@@ -33,32 +43,57 @@ version(Windows)
 
           if (exists(dllPath) && checkArchitecture(dllPath))
           {
-            SetDllDirectoryA(toStringz(dllPath));
+            debug
+            {
+              if (gidLoaderDebug)
+                writeln("Found giD DLL path: ", path);
+            }
+
+            SetDllDirectoryA(toStringz(path));
             dllPathSet = true;
             break outer;
           }
         }
       }
+
+      if (!dllPathSet)
+        throw new Exception("Failed to find giD DLL library path");
     }
 
     foreach (libVariations; libs) // Loop on each library
     {
-      foreach (lib; libVariations.splitter(";")) // Loop on library name variations (separated by ';' - windows only)
+      auto handle = dllHandles.get(libVariations, null);
+
+      if (!handle)
       {
-        if (auto handle = LoadLibraryA(cast(char*)toStringz(lib)))
+        foreach (lib; libVariations.splitter(";")) // Loop on library name variations (separated by ';' - windows only)
         {
-          if (auto symPtr = GetProcAddress(handle, cast(char*)toStringz(symbol)))
+          handle = LoadLibraryA(cast(char*)toStringz(lib));
+          if (handle)
           {
-            funcPtr = cast(T)symPtr;
-            return;
+            dllHandles[libVariations] = handle;
+            break;
           }
         }
-        else
-          throw new Error("Failed to load library '" ~ lib ~ "': " ~ getErrorMessage);
+
+        if (!handle)
+          throw new Exception("Failed to load library " ~ libVariations);
+      }
+
+      if (auto symPtr = GetProcAddress(handle, cast(char*)toStringz(symbol)))
+      {
+         *funcPtr = symPtr;
+        return;
       }
     }
 
-    funcPtr = cast(T)&symbolNotFound;
+     *funcPtr = &gidSymbolNotFound;
+
+    debug
+    {
+      if (gidLoaderDebug)
+        writeln("Symbol not found: " ~ symbol);
+    }
   }
 
   private string getErrorMessage()
@@ -102,7 +137,7 @@ else // Linux or OSX
 {
   import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
 
-  void gidLink(T)(ref T funcPtr, string symbol, immutable(string[]) libs)
+  void gidLink(void** funcPtr, string symbol, immutable(string[]) libs)
   {
     foreach (lib; libs)
     {
@@ -112,7 +147,7 @@ else // Linux or OSX
       {
         if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
         {
-          funcPtr = cast(T)symPtr;
+           *funcPtr = symPtr;
           return;
         }
       }
@@ -120,7 +155,13 @@ else // Linux or OSX
         throw new Error("Failed to load library '" ~ lib ~ "': " ~ dlerror().fromStringz.idup);
     }
 
-    funcPtr = cast(T)&symbolNotFound;
+     *funcPtr = &gidSymbolNotFound;
+
+    debug
+    {
+      if (gidLoaderDebug)
+        writeln("Symbol not found: ", symbol);
+    }
   }
 
   version(OSX)
@@ -142,12 +183,18 @@ else // Linux or OSX
         }
       }
 
+      debug
+      {
+        if (gidLoaderDebug)
+          writeln("Found giD DLL path: ", path);
+      }
+
       return path;
     }
   }
 }
 
-private void symbolNotFound()
+void gidSymbolNotFound()
 {
   throw new Error("Attempted to execute a dynamic library function which was not found");
 }

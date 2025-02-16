@@ -31,7 +31,8 @@ class ColumnViewColumn : ObjectG
 
   static GType getType()
   {
-    return gtk_column_view_column_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_column_view_column_get_type != &gidSymbolNotFound ? gtk_column_view_column_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

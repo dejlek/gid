@@ -79,10 +79,10 @@ class Timer
    * Returns: seconds elapsed as a floating point value, including any
    *   fractional part.
    */
-  double elapsed(out ulong microseconds)
+  double elapsed(out gulong microseconds)
   {
     double _retval;
-    _retval = g_timer_elapsed(cast(GTimer*)cPtr, cast(ulong*)&microseconds);
+    _retval = g_timer_elapsed(cast(GTimer*)cPtr, cast(gulong*)&microseconds);
     return _retval;
   }
 

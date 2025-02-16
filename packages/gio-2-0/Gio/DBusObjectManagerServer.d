@@ -40,7 +40,8 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
 
   static GType getType()
   {
-    return g_dbus_object_manager_server_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_dbus_object_manager_server_get_type != &gidSymbolNotFound ? g_dbus_object_manager_server_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

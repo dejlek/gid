@@ -24,7 +24,8 @@ interface PollableInputStream
 
   static GType getType()
   {
-    return g_pollable_input_stream_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_pollable_input_stream_get_type != &gidSymbolNotFound ? g_pollable_input_stream_get_type() : cast(GType)0;
   }
 
   /**

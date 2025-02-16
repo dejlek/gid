@@ -55,7 +55,8 @@ interface Paintable
 
   static GType getType()
   {
-    return gdk_paintable_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_paintable_get_type != &gidSymbolNotFound ? gdk_paintable_get_type() : cast(GType)0;
   }
 
   /**

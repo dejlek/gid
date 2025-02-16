@@ -17,7 +17,8 @@ class UnionArrayBuilder : ArrayBuilder
 
   static GType getType()
   {
-    return garrow_union_array_builder_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_union_array_builder_get_type != &gidSymbolNotFound ? garrow_union_array_builder_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

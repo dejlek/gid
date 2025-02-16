@@ -1261,7 +1261,7 @@ void bitLock(ref int address, int lockBit)
  * Returns: the index of the first bit set which is higher than nth_bit, or -1
  *   if no higher bits are set
  */
-int bitNthLsf(ulong mask, int nthBit)
+int bitNthLsf(gulong mask, int nthBit)
 {
   int _retval;
   _retval = g_bit_nth_lsf(mask, nthBit);
@@ -1280,7 +1280,7 @@ int bitNthLsf(ulong mask, int nthBit)
  * Returns: the index of the first bit set which is lower than nth_bit, or -1
  *   if no lower bits are set
  */
-int bitNthMsf(ulong mask, int nthBit)
+int bitNthMsf(gulong mask, int nthBit)
 {
   int _retval;
   _retval = g_bit_nth_msf(mask, nthBit);
@@ -1294,7 +1294,7 @@ int bitNthMsf(ulong mask, int nthBit)
  *   number = a #guint
  * Returns: the number of bits used to hold number
  */
-uint bitStorage(ulong number)
+uint bitStorage(gulong number)
 {
   uint _retval;
   _retval = g_bit_storage(number);
@@ -2112,7 +2112,7 @@ uint directHash(const(void)* v)
  *   n = the quantity for which translation is needed
  * Returns: The translated string
  */
-string dngettext(string domain, string msgid, string msgidPlural, ulong n)
+string dngettext(string domain, string msgid, string msgidPlural, gulong n)
 {
   const(char)* _cretval;
   const(char)* _domain = domain.toCString(No.Alloc);
@@ -8906,16 +8906,16 @@ void* tryReallocN(void* mem, size_t nBlocks, size_t nBlockBytes)
  *   This value must be freed with [GLib.Global.gfree]. If an error occurs,
  *   %NULL will be returned and error set.
  */
-ushort[] ucs4ToUtf16(dchar[] str, out long itemsRead, out long itemsWritten)
+ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
 {
   ushort* _cretval;
-  long _len;
+  glong _len;
   if (str)
-    _len = cast(long)str.length;
+    _len = cast(glong)str.length;
 
   auto _str = cast(const(dchar)*)str.ptr;
   GError *_err;
-  _cretval = g_ucs4_to_utf16(_str, _len, cast(long*)&itemsRead, cast(long*)&itemsWritten, &_err);
+  _cretval = g_ucs4_to_utf16(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
     throw new ErrorG(_err);
   ushort[] _retval;
@@ -8945,16 +8945,16 @@ ushort[] ucs4ToUtf16(dchar[] str, out long itemsRead, out long itemsWritten)
  *   %NULL will be returned and error set. In that case, items_read
  *   will be set to the position of the first invalid input character.
  */
-string ucs4ToUtf8(dchar[] str, out long itemsRead, out long itemsWritten)
+string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
 {
   char* _cretval;
-  long _len;
+  glong _len;
   if (str)
-    _len = cast(long)str.length;
+    _len = cast(glong)str.length;
 
   auto _str = cast(const(dchar)*)str.ptr;
   GError *_err;
-  _cretval = g_ucs4_to_utf8(_str, _len, cast(long*)&itemsRead, cast(long*)&itemsWritten, &_err);
+  _cretval = g_ucs4_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
     throw new ErrorG(_err);
   string _retval = _cretval.fromCString(Yes.Free);
@@ -9792,7 +9792,7 @@ void unsetenv(string variable)
  * Params:
  *   microseconds = number of microseconds to pause
  */
-void usleep(ulong microseconds)
+void usleep(gulong microseconds)
 {
   g_usleep(microseconds);
 }
@@ -9810,17 +9810,17 @@ void usleep(ulong microseconds)
  *   This value must be freed with [GLib.Global.gfree]. If an error occurs,
  *   %NULL will be returned and error set.
  */
-dchar[] utf16ToUcs4(ushort[] str, out long itemsRead)
+dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
 {
   dchar* _cretval;
-  long _cretlength;
-  long _len;
+  glong _cretlength;
+  glong _len;
   if (str)
-    _len = cast(long)str.length;
+    _len = cast(glong)str.length;
 
   auto _str = cast(const(ushort)*)str.ptr;
   GError *_err;
-  _cretval = g_utf16_to_ucs4(_str, _len, cast(long*)&itemsRead, &_cretlength, &_err);
+  _cretval = g_utf16_to_ucs4(_str, _len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
     throw new ErrorG(_err);
   dchar[] _retval;
@@ -9858,16 +9858,16 @@ dchar[] utf16ToUcs4(ushort[] str, out long itemsRead)
  *   This value must be freed with [GLib.Global.gfree]. If an error occurs,
  *   %NULL will be returned and error set.
  */
-string utf16ToUtf8(ushort[] str, out long itemsRead, out long itemsWritten)
+string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
 {
   char* _cretval;
-  long _len;
+  glong _len;
   if (str)
-    _len = cast(long)str.length;
+    _len = cast(glong)str.length;
 
   auto _str = cast(const(ushort)*)str.ptr;
   GError *_err;
-  _cretval = g_utf16_to_utf8(_str, _len, cast(long*)&itemsRead, cast(long*)&itemsWritten, &_err);
+  _cretval = g_utf16_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
     throw new ErrorG(_err);
   string _retval = _cretval.fromCString(Yes.Free);
@@ -10146,7 +10146,7 @@ string utf8Normalize(string str, ptrdiff_t len, NormalizeMode mode)
  *   offset = a character offset within str
  * Returns: the resulting pointer
  */
-string utf8OffsetToPointer(string str, long offset)
+string utf8OffsetToPointer(string str, glong offset)
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -10165,9 +10165,9 @@ string utf8OffsetToPointer(string str, long offset)
  *   pos = a pointer to a position within str
  * Returns: the resulting character offset
  */
-long utf8PointerToOffset(string str, string pos)
+glong utf8PointerToOffset(string str, string pos)
 {
-  long _retval;
+  glong _retval;
   const(char)* _str = str.toCString(No.Alloc);
   const(char)* _pos = pos.toCString(No.Alloc);
   _retval = g_utf8_pointer_to_offset(_str, _pos);
@@ -10247,9 +10247,9 @@ string utf8Strdown(string str, ptrdiff_t len)
  *     bytes are examined
  * Returns: the length of the string in characters
  */
-long utf8Strlen(string p, ptrdiff_t max)
+glong utf8Strlen(string p, ptrdiff_t max)
 {
-  long _retval;
+  glong _retval;
   const(char)* _p = p.toCString(No.Alloc);
   _retval = g_utf8_strlen(_p, max);
   return _retval;
@@ -10360,7 +10360,7 @@ string utf8Strup(string str, ptrdiff_t len)
  * Returns: a newly allocated copy of the requested
  *   substring. Free with [GLib.Global.gfree] when no longer needed.
  */
-string utf8Substring(string str, long startPos, long endPos)
+string utf8Substring(string str, glong startPos, glong endPos)
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -10387,13 +10387,13 @@ string utf8Substring(string str, long startPos, long endPos)
  *   This value must be freed with [GLib.Global.gfree]. If an error occurs,
  *   %NULL will be returned and error set.
  */
-dchar[] utf8ToUcs4(string str, long len, out long itemsRead)
+dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
 {
   dchar* _cretval;
-  long _cretlength;
+  glong _cretlength;
   const(char)* _str = str.toCString(No.Alloc);
   GError *_err;
-  _cretval = g_utf8_to_ucs4(_str, len, cast(long*)&itemsRead, &_cretlength, &_err);
+  _cretval = g_utf8_to_ucs4(_str, len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
     throw new ErrorG(_err);
   dchar[] _retval;
@@ -10419,10 +10419,10 @@ dchar[] utf8ToUcs4(string str, long len, out long itemsRead)
 dchar[] utf8ToUcs4Fast(string str)
 {
   dchar* _cretval;
-  long _cretlength;
-  long _len;
+  glong _cretlength;
+  glong _len;
   if (str)
-    _len = cast(long)str.length;
+    _len = cast(glong)str.length;
 
   auto _str = cast(const(char)*)(str ~ char.init).ptr;
   _cretval = g_utf8_to_ucs4_fast(_str, _len, &_cretlength);
@@ -10450,13 +10450,13 @@ dchar[] utf8ToUcs4Fast(string str)
  *   This value must be freed with [GLib.Global.gfree]. If an error occurs,
  *   %NULL will be returned and error set.
  */
-ushort[] utf8ToUtf16(string str, long len, out long itemsRead)
+ushort[] utf8ToUtf16(string str, glong len, out glong itemsRead)
 {
   ushort* _cretval;
-  long _cretlength;
+  glong _cretlength;
   const(char)* _str = str.toCString(No.Alloc);
   GError *_err;
-  _cretval = g_utf8_to_utf16(_str, len, cast(long*)&itemsRead, &_cretlength, &_err);
+  _cretval = g_utf8_to_utf16(_str, len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
     throw new ErrorG(_err);
   ushort[] _retval;

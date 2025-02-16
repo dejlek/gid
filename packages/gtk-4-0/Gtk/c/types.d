@@ -1,5 +1,6 @@
 module Gtk.c.types;
 
+public import Gid.basictypes;
 public import Gdk.c.types;
 public import Gsk.c.types;
 

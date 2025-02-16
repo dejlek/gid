@@ -165,10 +165,10 @@
 //!subtype utf8 string
 //!subtype va_list void*
 
-//# FIXME - Need to use int/uint on Windows
-//!subtype glong long
-//!subtype gulong ulong
-//!subtype "unsigned long" ulong
+//# These are defined to different sizes depending on the platform
+//!subtype "glong" glong
+//!subtype "gulong" gulong
+//!subtype "unsigned long" gulong
 
 //# GType is used for D type when it should be Type
 //!subdtype GType GObject.GType

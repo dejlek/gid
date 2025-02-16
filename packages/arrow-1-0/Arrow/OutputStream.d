@@ -24,7 +24,8 @@ class OutputStream : ObjectG, File, Writable
 
   static GType getType()
   {
-    return garrow_output_stream_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_output_stream_get_type != &gidSymbolNotFound ? garrow_output_stream_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

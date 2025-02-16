@@ -22,7 +22,8 @@ class ArrowFileReader : ObjectG
 
   static GType getType()
   {
-    return gparquet_arrow_file_reader_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gparquet_arrow_file_reader_get_type != &gidSymbolNotFound ? gparquet_arrow_file_reader_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

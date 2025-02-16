@@ -36,7 +36,8 @@ class Separator : Widget, Orientable
 
   static GType getType()
   {
-    return gtk_separator_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_separator_get_type != &gidSymbolNotFound ? gtk_separator_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

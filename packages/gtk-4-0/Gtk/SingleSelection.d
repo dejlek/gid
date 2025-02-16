@@ -30,7 +30,8 @@ class SingleSelection : ObjectG, ListModel, SectionModel, SelectionModel
 
   static GType getType()
   {
-    return gtk_single_selection_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_single_selection_get_type != &gidSymbolNotFound ? gtk_single_selection_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -1,5 +1,6 @@
 module Arrow.c.types;
 
+public import Gid.basictypes;
 public import GObject.c.types;
 public import Gio.c.types;
 

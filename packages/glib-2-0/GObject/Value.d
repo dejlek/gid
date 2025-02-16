@@ -10,7 +10,6 @@ import GObject.c.functions;
 import GObject.c.types;
 import Gid.gid;
 
-
 import std.traits : isPointer;
 
 import GObject.ObjectG;
@@ -46,7 +45,8 @@ class Value : Boxed
 
   static GType getType()
   {
-    return g_value_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_value_get_type != &gidSymbolNotFound ? g_value_get_type() : cast(GType)0;
   }
 
   override @property GType gType()
@@ -281,9 +281,9 @@ class Value : Boxed
    * Get the contents of a %G_TYPE_LONG #GValue.
    * Returns: long integer contents of value
    */
-  long getLong()
+  glong getLong()
   {
-    long _retval;
+    glong _retval;
     _retval = g_value_get_long(cast(GValue*)cPtr);
     return _retval;
   }
@@ -383,9 +383,9 @@ class Value : Boxed
    * Get the contents of a %G_TYPE_ULONG #GValue.
    * Returns: unsigned long integer contents of value
    */
-  ulong getUlong()
+  gulong getUlong()
   {
-    ulong _retval;
+    gulong _retval;
     _retval = g_value_get_ulong(cast(GValue*)cPtr);
     return _retval;
   }
@@ -600,7 +600,7 @@ class Value : Boxed
    * Params:
    *   vLong = long integer value to be set
    */
-  void setLong(long vLong)
+  void setLong(glong vLong)
   {
     g_value_set_long(cast(GValue*)cPtr, vLong);
   }
@@ -739,7 +739,7 @@ class Value : Boxed
    * Params:
    *   vUlong = unsigned long integer value to be set
    */
-  void setUlong(ulong vUlong)
+  void setUlong(gulong vUlong)
   {
     g_value_set_ulong(cast(GValue*)cPtr, vUlong);
   }

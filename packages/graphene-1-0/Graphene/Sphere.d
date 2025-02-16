@@ -32,7 +32,8 @@ class Sphere : Boxed
 
   static GType getType()
   {
-    return graphene_sphere_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())graphene_sphere_get_type != &gidSymbolNotFound ? graphene_sphere_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -22,7 +22,8 @@ class GIOInputStream : SeekableInputStream
 
   static GType getType()
   {
-    return garrow_gio_input_stream_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_gio_input_stream_get_type != &gidSymbolNotFound ? garrow_gio_input_stream_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

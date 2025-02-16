@@ -1,5 +1,6 @@
 module GdkPixbuf.c.types;
 
+public import Gid.basictypes;
 public import GModule.c.types;
 public import Gio.c.types;
 

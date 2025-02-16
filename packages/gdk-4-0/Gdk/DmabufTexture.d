@@ -28,7 +28,8 @@ class DmabufTexture : Texture
 
   static GType getType()
   {
-    return gdk_dmabuf_texture_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_dmabuf_texture_get_type != &gidSymbolNotFound ? gdk_dmabuf_texture_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

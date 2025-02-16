@@ -96,9 +96,9 @@ void boxedFree(GType boxedType, void* boxed)
  *   instance = The instance to remove the signal handler from.
  *     This pointer may be %NULL or invalid, if the handler ID is zero.
  */
-void clearSignalHandler(ref ulong handlerIdPtr, ObjectG instance)
+void clearSignalHandler(ref gulong handlerIdPtr, ObjectG instance)
 {
-  g_clear_signal_handler(cast(ulong*)&handlerIdPtr, instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
+  g_clear_signal_handler(cast(gulong*)&handlerIdPtr, instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
 }
 
 /**
@@ -591,7 +591,7 @@ ParamSpec paramSpecInt64(string name, string nick, string blurb, long minimum, l
  *   flags = flags for the property specified
  * Returns: a newly created parameter specification
  */
-ParamSpec paramSpecLong(string name, string nick, string blurb, long minimum, long maximum, long defaultValue, ParamFlags flags)
+ParamSpec paramSpecLong(string name, string nick, string blurb, glong minimum, glong maximum, glong defaultValue, ParamFlags flags)
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -780,7 +780,7 @@ ParamSpec paramSpecUint64(string name, string nick, string blurb, ulong minimum,
  *   flags = flags for the property specified
  * Returns: a newly created parameter specification
  */
-ParamSpec paramSpecUlong(string name, string nick, string blurb, ulong minimum, ulong maximum, ulong defaultValue, ParamFlags flags)
+ParamSpec paramSpecUlong(string name, string nick, string blurb, gulong minimum, gulong maximum, gulong defaultValue, ParamFlags flags)
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -1032,7 +1032,7 @@ bool signalAccumulatorTrueHandled(SignalInvocationHint ihint, Value returnAccu, 
  *   hookFunc = a #GSignalEmissionHook function.
  * Returns: the hook id, for later use with [GObject.Global.signalRemoveEmissionHook].
  */
-ulong signalAddEmissionHook(uint signalId, Quark detail, SignalEmissionHook hookFunc)
+gulong signalAddEmissionHook(uint signalId, Quark detail, SignalEmissionHook hookFunc)
 {
   extern(C) bool _hookFuncCallback(GSignalInvocationHint* ihint, uint nParamValues, const(GValue)* paramValues, void* data)
   {
@@ -1046,7 +1046,7 @@ ulong signalAddEmissionHook(uint signalId, Quark detail, SignalEmissionHook hook
     return _retval;
   }
 
-  ulong _retval;
+  gulong _retval;
   auto _hookFunc = freezeDelegate(cast(void*)&hookFunc);
   _retval = g_signal_add_emission_hook(signalId, detail, &_hookFuncCallback, _hookFunc, &thawDelegate);
   return _retval;
@@ -1066,9 +1066,9 @@ ulong signalAddEmissionHook(uint signalId, Quark detail, SignalEmissionHook hook
  *     default handler of the signal.
  * Returns: the handler ID $(LPAREN)always greater than 0$(RPAREN)
  */
-ulong signalConnectClosure(ObjectG instance, string detailedSignal, Closure closure, bool after)
+gulong signalConnectClosure(ObjectG instance, string detailedSignal, Closure closure, bool after)
 {
-  ulong _retval;
+  gulong _retval;
   const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
   _retval = g_signal_connect_closure(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, _detailedSignal, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, after);
   return _retval;
@@ -1089,9 +1089,9 @@ ulong signalConnectClosure(ObjectG instance, string detailedSignal, Closure clos
  *     default handler of the signal.
  * Returns: the handler ID $(LPAREN)always greater than 0$(RPAREN)
  */
-ulong signalConnectClosureById(ObjectG instance, uint signalId, Quark detail, Closure closure, bool after)
+gulong signalConnectClosureById(ObjectG instance, uint signalId, Quark detail, Closure closure, bool after)
 {
-  ulong _retval;
+  gulong _retval;
   _retval = g_signal_connect_closure_by_id(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, after);
   return _retval;
 }
@@ -1125,7 +1125,7 @@ SignalInvocationHint signalGetInvocationHint(ObjectG instance)
  *   instance = The instance to block the signal handler of.
  *   handlerId = Handler id of the handler to be blocked.
  */
-void signalHandlerBlock(ObjectG instance, ulong handlerId)
+void signalHandlerBlock(ObjectG instance, gulong handlerId)
 {
   g_signal_handler_block(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
 }
@@ -1140,7 +1140,7 @@ void signalHandlerBlock(ObjectG instance, ulong handlerId)
  *   instance = The instance to remove the signal handler from.
  *   handlerId = Handler id of the handler to be disconnected.
  */
-void signalHandlerDisconnect(ObjectG instance, ulong handlerId)
+void signalHandlerDisconnect(ObjectG instance, gulong handlerId)
 {
   g_signal_handler_disconnect(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
 }
@@ -1161,9 +1161,9 @@ void signalHandlerDisconnect(ObjectG instance, ulong handlerId)
  *   func = The C closure callback of the handler $(LPAREN)useless for non-C closures$(RPAREN).
  * Returns: A valid non-0 signal handler id for a successful match.
  */
-ulong signalHandlerFind(ObjectG instance, SignalMatchType mask, uint signalId, Quark detail, Closure closure, void* func)
+gulong signalHandlerFind(ObjectG instance, SignalMatchType mask, uint signalId, Quark detail, Closure closure, void* func)
 {
-  ulong _retval;
+  gulong _retval;
   _retval = g_signal_handler_find(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
   return _retval;
 }
@@ -1175,7 +1175,7 @@ ulong signalHandlerFind(ObjectG instance, SignalMatchType mask, uint signalId, Q
  *   handlerId = the handler ID.
  * Returns: whether handler_id identifies a handler connected to instance.
  */
-bool signalHandlerIsConnected(ObjectG instance, ulong handlerId)
+bool signalHandlerIsConnected(ObjectG instance, gulong handlerId)
 {
   bool _retval;
   _retval = g_signal_handler_is_connected(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
@@ -1199,7 +1199,7 @@ bool signalHandlerIsConnected(ObjectG instance, ulong handlerId)
  *   instance = The instance to unblock the signal handler of.
  *   handlerId = Handler id of the handler to be unblocked.
  */
-void signalHandlerUnblock(ObjectG instance, ulong handlerId)
+void signalHandlerUnblock(ObjectG instance, gulong handlerId)
 {
   g_signal_handler_unblock(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
 }
@@ -1529,7 +1529,7 @@ void signalQuery(uint signalId, out SignalQuery query)
  *   hookId = the id of the emission hook, as returned by
  *     [GObject.Global.signalAddEmissionHook]
  */
-void signalRemoveEmissionHook(uint signalId, ulong hookId)
+void signalRemoveEmissionHook(uint signalId, gulong hookId)
 {
   g_signal_remove_emission_hook(signalId, hookId);
 }

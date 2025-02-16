@@ -53,7 +53,8 @@ class PageSetup : ObjectG
 
   static GType getType()
   {
-    return gtk_page_setup_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_page_setup_get_type != &gidSymbolNotFound ? gtk_page_setup_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

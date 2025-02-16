@@ -52,7 +52,8 @@ interface FileChooser
 
   static GType getType()
   {
-    return gtk_file_chooser_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_file_chooser_get_type != &gidSymbolNotFound ? gtk_file_chooser_get_type() : cast(GType)0;
   }
 
   /**

@@ -1,5 +1,6 @@
 module ArrowDataset.c.functions;
 
+public import Gid.basictypes;
 import Gid.loader;
 import ArrowDataset.c.types;
 public import Arrow.c.types;
@@ -14,37 +15,37 @@ else
 __gshared extern(C)
 {
   // CSVFileFormat
-  GType function() c_gadataset_csv_file_format_get_type;
+  extern(C) GType function() c_gadataset_csv_file_format_get_type;
   GADatasetCSVFileFormat* function() c_gadataset_csv_file_format_new;
 
   // Dataset
-  GType function() c_gadataset_dataset_get_type;
+  extern(C) GType function() c_gadataset_dataset_get_type;
   GADatasetScannerBuilder* function(GADatasetDataset* dataset, GError** _err) c_gadataset_dataset_begin_scan;
   char* function(GADatasetDataset* dataset) c_gadataset_dataset_get_type_name;
   GArrowRecordBatchReader* function(GADatasetDataset* dataset, GError** _err) c_gadataset_dataset_to_record_batch_reader;
   GArrowTable* function(GADatasetDataset* dataset, GError** _err) c_gadataset_dataset_to_table;
 
   // DatasetFactory
-  GType function() c_gadataset_dataset_factory_get_type;
+  extern(C) GType function() c_gadataset_dataset_factory_get_type;
   GADatasetDataset* function(GADatasetDatasetFactory* factory, GADatasetFinishOptions* options, GError** _err) c_gadataset_dataset_factory_finish;
 
   // DirectoryPartitioning
-  GType function() c_gadataset_directory_partitioning_get_type;
+  extern(C) GType function() c_gadataset_directory_partitioning_get_type;
   GADatasetDirectoryPartitioning* function(GArrowSchema* schema, GList* dictionaries, GADatasetKeyValuePartitioningOptions* options, GError** _err) c_gadataset_directory_partitioning_new;
 
   // FileFormat
-  GType function() c_gadataset_file_format_get_type;
+  extern(C) GType function() c_gadataset_file_format_get_type;
   bool function(GADatasetFileFormat* format, GADatasetFileFormat* otherFormat) c_gadataset_file_format_equal;
   GADatasetFileWriteOptions* function(GADatasetFileFormat* format) c_gadataset_file_format_get_default_write_options;
   char* function(GADatasetFileFormat* format) c_gadataset_file_format_get_type_name;
   GADatasetFileWriter* function(GADatasetFileFormat* format, GArrowOutputStream* destination, GArrowFileSystem* fileSystem, const(char)* path, GArrowSchema* schema, GADatasetFileWriteOptions* options, GError** _err) c_gadataset_file_format_open_writer;
 
   // FileSystemDataset
-  GType function() c_gadataset_file_system_dataset_get_type;
+  extern(C) GType function() c_gadataset_file_system_dataset_get_type;
   bool function(GADatasetScanner* scanner, GADatasetFileSystemDatasetWriteOptions* options, GError** _err) c_gadataset_file_system_dataset_write_scanner;
 
   // FileSystemDatasetFactory
-  GType function() c_gadataset_file_system_dataset_factory_get_type;
+  extern(C) GType function() c_gadataset_file_system_dataset_factory_get_type;
   GADatasetFileSystemDatasetFactory* function(GADatasetFileFormat* fileFormat) c_gadataset_file_system_dataset_factory_new;
   bool function(GADatasetFileSystemDatasetFactory* factory, const(char)* path, GError** _err) c_gadataset_file_system_dataset_factory_add_path;
   GADatasetFileSystemDataset* function(GADatasetFileSystemDatasetFactory* factory, GADatasetFinishOptions* options, GError** _err) c_gadataset_file_system_dataset_factory_finish;
@@ -52,69 +53,69 @@ __gshared extern(C)
   bool function(GADatasetFileSystemDatasetFactory* factory, const(char)* uri, GError** _err) c_gadataset_file_system_dataset_factory_set_file_system_uri;
 
   // FileSystemDatasetWriteOptions
-  GType function() c_gadataset_file_system_dataset_write_options_get_type;
+  extern(C) GType function() c_gadataset_file_system_dataset_write_options_get_type;
   GADatasetFileSystemDatasetWriteOptions* function() c_gadataset_file_system_dataset_write_options_new;
 
   // FileWriteOptions
-  GType function() c_gadataset_file_write_options_get_type;
+  extern(C) GType function() c_gadataset_file_write_options_get_type;
 
   // FileWriter
-  GType function() c_gadataset_file_writer_get_type;
+  extern(C) GType function() c_gadataset_file_writer_get_type;
   bool function(GADatasetFileWriter* writer, GError** _err) c_gadataset_file_writer_finish;
   bool function(GADatasetFileWriter* writer, GArrowRecordBatch* recordBatch, GError** _err) c_gadataset_file_writer_write_record_batch;
   bool function(GADatasetFileWriter* writer, GArrowRecordBatchReader* reader, GError** _err) c_gadataset_file_writer_write_record_batch_reader;
 
   // FinishOptions
-  GType function() c_gadataset_finish_options_get_type;
+  extern(C) GType function() c_gadataset_finish_options_get_type;
   GADatasetFinishOptions* function() c_gadataset_finish_options_new;
 
   // Fragment
-  GType function() c_gadataset_fragment_get_type;
+  extern(C) GType function() c_gadataset_fragment_get_type;
 
   // HivePartitioning
-  GType function() c_gadataset_hive_partitioning_get_type;
+  extern(C) GType function() c_gadataset_hive_partitioning_get_type;
   GADatasetHivePartitioning* function(GArrowSchema* schema, GList* dictionaries, GADatasetHivePartitioningOptions* options, GError** _err) c_gadataset_hive_partitioning_new;
   char* function(GADatasetHivePartitioning* partitioning) c_gadataset_hive_partitioning_get_null_fallback;
 
   // HivePartitioningOptions
-  GType function() c_gadataset_hive_partitioning_options_get_type;
+  extern(C) GType function() c_gadataset_hive_partitioning_options_get_type;
   GADatasetHivePartitioningOptions* function() c_gadataset_hive_partitioning_options_new;
 
   // IPCFileFormat
-  GType function() c_gadataset_ipc_file_format_get_type;
+  extern(C) GType function() c_gadataset_ipc_file_format_get_type;
   GADatasetIPCFileFormat* function() c_gadataset_ipc_file_format_new;
 
   // InMemoryFragment
-  GType function() c_gadataset_in_memory_fragment_get_type;
+  extern(C) GType function() c_gadataset_in_memory_fragment_get_type;
   GADatasetInMemoryFragment* function(GArrowSchema* schema, GArrowRecordBatch** recordBatches, size_t nRecordBatches) c_gadataset_in_memory_fragment_new;
 
   // KeyValuePartitioning
-  GType function() c_gadataset_key_value_partitioning_get_type;
+  extern(C) GType function() c_gadataset_key_value_partitioning_get_type;
 
   // KeyValuePartitioningOptions
-  GType function() c_gadataset_key_value_partitioning_options_get_type;
+  extern(C) GType function() c_gadataset_key_value_partitioning_options_get_type;
   GADatasetKeyValuePartitioningOptions* function() c_gadataset_key_value_partitioning_options_new;
 
   // ParquetFileFormat
-  GType function() c_gadataset_parquet_file_format_get_type;
+  extern(C) GType function() c_gadataset_parquet_file_format_get_type;
   GADatasetParquetFileFormat* function() c_gadataset_parquet_file_format_new;
 
   // Partitioning
-  GType function() c_gadataset_partitioning_get_type;
+  extern(C) GType function() c_gadataset_partitioning_get_type;
   GADatasetPartitioning* function() c_gadataset_partitioning_create_default;
   char* function(GADatasetPartitioning* partitioning) c_gadataset_partitioning_get_type_name;
 
   // PartitioningFactoryOptions
-  GType function() c_gadataset_partitioning_factory_options_get_type;
+  extern(C) GType function() c_gadataset_partitioning_factory_options_get_type;
   GADatasetPartitioningFactoryOptions* function() c_gadataset_partitioning_factory_options_new;
 
   // Scanner
-  GType function() c_gadataset_scanner_get_type;
+  extern(C) GType function() c_gadataset_scanner_get_type;
   GArrowRecordBatchReader* function(GADatasetScanner* scanner, GError** _err) c_gadataset_scanner_to_record_batch_reader;
   GArrowTable* function(GADatasetScanner* scanner, GError** _err) c_gadataset_scanner_to_table;
 
   // ScannerBuilder
-  GType function() c_gadataset_scanner_builder_get_type;
+  extern(C) GType function() c_gadataset_scanner_builder_get_type;
   GADatasetScannerBuilder* function(GADatasetDataset* dataset, GError** _err) c_gadataset_scanner_builder_new;
   GADatasetScannerBuilder* function(GArrowRecordBatchReader* reader) c_gadataset_scanner_builder_new_record_batch_reader;
   GADatasetScanner* function(GADatasetScannerBuilder* builder, GError** _err) c_gadataset_scanner_builder_finish;
@@ -231,109 +232,109 @@ alias gadataset_scanner_builder_set_filter = c_gadataset_scanner_builder_set_fil
 shared static this()
 {
   // CSVFileFormat
-  gidLink(gadataset_csv_file_format_get_type, "gadataset_csv_file_format_get_type", LIBS);
-  gidLink(gadataset_csv_file_format_new, "gadataset_csv_file_format_new", LIBS);
+  gidLink(cast(void**)&gadataset_csv_file_format_get_type, "gadataset_csv_file_format_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_csv_file_format_new, "gadataset_csv_file_format_new", LIBS);
 
   // Dataset
-  gidLink(gadataset_dataset_get_type, "gadataset_dataset_get_type", LIBS);
-  gidLink(gadataset_dataset_begin_scan, "gadataset_dataset_begin_scan", LIBS);
-  gidLink(gadataset_dataset_get_type_name, "gadataset_dataset_get_type_name", LIBS);
-  gidLink(gadataset_dataset_to_record_batch_reader, "gadataset_dataset_to_record_batch_reader", LIBS);
-  gidLink(gadataset_dataset_to_table, "gadataset_dataset_to_table", LIBS);
+  gidLink(cast(void**)&gadataset_dataset_get_type, "gadataset_dataset_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_dataset_begin_scan, "gadataset_dataset_begin_scan", LIBS);
+  gidLink(cast(void**)&gadataset_dataset_get_type_name, "gadataset_dataset_get_type_name", LIBS);
+  gidLink(cast(void**)&gadataset_dataset_to_record_batch_reader, "gadataset_dataset_to_record_batch_reader", LIBS);
+  gidLink(cast(void**)&gadataset_dataset_to_table, "gadataset_dataset_to_table", LIBS);
 
   // DatasetFactory
-  gidLink(gadataset_dataset_factory_get_type, "gadataset_dataset_factory_get_type", LIBS);
-  gidLink(gadataset_dataset_factory_finish, "gadataset_dataset_factory_finish", LIBS);
+  gidLink(cast(void**)&gadataset_dataset_factory_get_type, "gadataset_dataset_factory_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_dataset_factory_finish, "gadataset_dataset_factory_finish", LIBS);
 
   // DirectoryPartitioning
-  gidLink(gadataset_directory_partitioning_get_type, "gadataset_directory_partitioning_get_type", LIBS);
-  gidLink(gadataset_directory_partitioning_new, "gadataset_directory_partitioning_new", LIBS);
+  gidLink(cast(void**)&gadataset_directory_partitioning_get_type, "gadataset_directory_partitioning_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_directory_partitioning_new, "gadataset_directory_partitioning_new", LIBS);
 
   // FileFormat
-  gidLink(gadataset_file_format_get_type, "gadataset_file_format_get_type", LIBS);
-  gidLink(gadataset_file_format_equal, "gadataset_file_format_equal", LIBS);
-  gidLink(gadataset_file_format_get_default_write_options, "gadataset_file_format_get_default_write_options", LIBS);
-  gidLink(gadataset_file_format_get_type_name, "gadataset_file_format_get_type_name", LIBS);
-  gidLink(gadataset_file_format_open_writer, "gadataset_file_format_open_writer", LIBS);
+  gidLink(cast(void**)&gadataset_file_format_get_type, "gadataset_file_format_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_file_format_equal, "gadataset_file_format_equal", LIBS);
+  gidLink(cast(void**)&gadataset_file_format_get_default_write_options, "gadataset_file_format_get_default_write_options", LIBS);
+  gidLink(cast(void**)&gadataset_file_format_get_type_name, "gadataset_file_format_get_type_name", LIBS);
+  gidLink(cast(void**)&gadataset_file_format_open_writer, "gadataset_file_format_open_writer", LIBS);
 
   // FileSystemDataset
-  gidLink(gadataset_file_system_dataset_get_type, "gadataset_file_system_dataset_get_type", LIBS);
-  gidLink(gadataset_file_system_dataset_write_scanner, "gadataset_file_system_dataset_write_scanner", LIBS);
+  gidLink(cast(void**)&gadataset_file_system_dataset_get_type, "gadataset_file_system_dataset_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_file_system_dataset_write_scanner, "gadataset_file_system_dataset_write_scanner", LIBS);
 
   // FileSystemDatasetFactory
-  gidLink(gadataset_file_system_dataset_factory_get_type, "gadataset_file_system_dataset_factory_get_type", LIBS);
-  gidLink(gadataset_file_system_dataset_factory_new, "gadataset_file_system_dataset_factory_new", LIBS);
-  gidLink(gadataset_file_system_dataset_factory_add_path, "gadataset_file_system_dataset_factory_add_path", LIBS);
-  gidLink(gadataset_file_system_dataset_factory_finish, "gadataset_file_system_dataset_factory_finish", LIBS);
-  gidLink(gadataset_file_system_dataset_factory_set_file_system, "gadataset_file_system_dataset_factory_set_file_system", LIBS);
-  gidLink(gadataset_file_system_dataset_factory_set_file_system_uri, "gadataset_file_system_dataset_factory_set_file_system_uri", LIBS);
+  gidLink(cast(void**)&gadataset_file_system_dataset_factory_get_type, "gadataset_file_system_dataset_factory_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_file_system_dataset_factory_new, "gadataset_file_system_dataset_factory_new", LIBS);
+  gidLink(cast(void**)&gadataset_file_system_dataset_factory_add_path, "gadataset_file_system_dataset_factory_add_path", LIBS);
+  gidLink(cast(void**)&gadataset_file_system_dataset_factory_finish, "gadataset_file_system_dataset_factory_finish", LIBS);
+  gidLink(cast(void**)&gadataset_file_system_dataset_factory_set_file_system, "gadataset_file_system_dataset_factory_set_file_system", LIBS);
+  gidLink(cast(void**)&gadataset_file_system_dataset_factory_set_file_system_uri, "gadataset_file_system_dataset_factory_set_file_system_uri", LIBS);
 
   // FileSystemDatasetWriteOptions
-  gidLink(gadataset_file_system_dataset_write_options_get_type, "gadataset_file_system_dataset_write_options_get_type", LIBS);
-  gidLink(gadataset_file_system_dataset_write_options_new, "gadataset_file_system_dataset_write_options_new", LIBS);
+  gidLink(cast(void**)&gadataset_file_system_dataset_write_options_get_type, "gadataset_file_system_dataset_write_options_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_file_system_dataset_write_options_new, "gadataset_file_system_dataset_write_options_new", LIBS);
 
   // FileWriteOptions
-  gidLink(gadataset_file_write_options_get_type, "gadataset_file_write_options_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_file_write_options_get_type, "gadataset_file_write_options_get_type", LIBS);
 
   // FileWriter
-  gidLink(gadataset_file_writer_get_type, "gadataset_file_writer_get_type", LIBS);
-  gidLink(gadataset_file_writer_finish, "gadataset_file_writer_finish", LIBS);
-  gidLink(gadataset_file_writer_write_record_batch, "gadataset_file_writer_write_record_batch", LIBS);
-  gidLink(gadataset_file_writer_write_record_batch_reader, "gadataset_file_writer_write_record_batch_reader", LIBS);
+  gidLink(cast(void**)&gadataset_file_writer_get_type, "gadataset_file_writer_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_file_writer_finish, "gadataset_file_writer_finish", LIBS);
+  gidLink(cast(void**)&gadataset_file_writer_write_record_batch, "gadataset_file_writer_write_record_batch", LIBS);
+  gidLink(cast(void**)&gadataset_file_writer_write_record_batch_reader, "gadataset_file_writer_write_record_batch_reader", LIBS);
 
   // FinishOptions
-  gidLink(gadataset_finish_options_get_type, "gadataset_finish_options_get_type", LIBS);
-  gidLink(gadataset_finish_options_new, "gadataset_finish_options_new", LIBS);
+  gidLink(cast(void**)&gadataset_finish_options_get_type, "gadataset_finish_options_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_finish_options_new, "gadataset_finish_options_new", LIBS);
 
   // Fragment
-  gidLink(gadataset_fragment_get_type, "gadataset_fragment_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_fragment_get_type, "gadataset_fragment_get_type", LIBS);
 
   // HivePartitioning
-  gidLink(gadataset_hive_partitioning_get_type, "gadataset_hive_partitioning_get_type", LIBS);
-  gidLink(gadataset_hive_partitioning_new, "gadataset_hive_partitioning_new", LIBS);
-  gidLink(gadataset_hive_partitioning_get_null_fallback, "gadataset_hive_partitioning_get_null_fallback", LIBS);
+  gidLink(cast(void**)&gadataset_hive_partitioning_get_type, "gadataset_hive_partitioning_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_hive_partitioning_new, "gadataset_hive_partitioning_new", LIBS);
+  gidLink(cast(void**)&gadataset_hive_partitioning_get_null_fallback, "gadataset_hive_partitioning_get_null_fallback", LIBS);
 
   // HivePartitioningOptions
-  gidLink(gadataset_hive_partitioning_options_get_type, "gadataset_hive_partitioning_options_get_type", LIBS);
-  gidLink(gadataset_hive_partitioning_options_new, "gadataset_hive_partitioning_options_new", LIBS);
+  gidLink(cast(void**)&gadataset_hive_partitioning_options_get_type, "gadataset_hive_partitioning_options_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_hive_partitioning_options_new, "gadataset_hive_partitioning_options_new", LIBS);
 
   // IPCFileFormat
-  gidLink(gadataset_ipc_file_format_get_type, "gadataset_ipc_file_format_get_type", LIBS);
-  gidLink(gadataset_ipc_file_format_new, "gadataset_ipc_file_format_new", LIBS);
+  gidLink(cast(void**)&gadataset_ipc_file_format_get_type, "gadataset_ipc_file_format_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_ipc_file_format_new, "gadataset_ipc_file_format_new", LIBS);
 
   // InMemoryFragment
-  gidLink(gadataset_in_memory_fragment_get_type, "gadataset_in_memory_fragment_get_type", LIBS);
-  gidLink(gadataset_in_memory_fragment_new, "gadataset_in_memory_fragment_new", LIBS);
+  gidLink(cast(void**)&gadataset_in_memory_fragment_get_type, "gadataset_in_memory_fragment_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_in_memory_fragment_new, "gadataset_in_memory_fragment_new", LIBS);
 
   // KeyValuePartitioning
-  gidLink(gadataset_key_value_partitioning_get_type, "gadataset_key_value_partitioning_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_key_value_partitioning_get_type, "gadataset_key_value_partitioning_get_type", LIBS);
 
   // KeyValuePartitioningOptions
-  gidLink(gadataset_key_value_partitioning_options_get_type, "gadataset_key_value_partitioning_options_get_type", LIBS);
-  gidLink(gadataset_key_value_partitioning_options_new, "gadataset_key_value_partitioning_options_new", LIBS);
+  gidLink(cast(void**)&gadataset_key_value_partitioning_options_get_type, "gadataset_key_value_partitioning_options_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_key_value_partitioning_options_new, "gadataset_key_value_partitioning_options_new", LIBS);
 
   // ParquetFileFormat
-  gidLink(gadataset_parquet_file_format_get_type, "gadataset_parquet_file_format_get_type", LIBS);
-  gidLink(gadataset_parquet_file_format_new, "gadataset_parquet_file_format_new", LIBS);
+  gidLink(cast(void**)&gadataset_parquet_file_format_get_type, "gadataset_parquet_file_format_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_parquet_file_format_new, "gadataset_parquet_file_format_new", LIBS);
 
   // Partitioning
-  gidLink(gadataset_partitioning_get_type, "gadataset_partitioning_get_type", LIBS);
-  gidLink(gadataset_partitioning_create_default, "gadataset_partitioning_create_default", LIBS);
-  gidLink(gadataset_partitioning_get_type_name, "gadataset_partitioning_get_type_name", LIBS);
+  gidLink(cast(void**)&gadataset_partitioning_get_type, "gadataset_partitioning_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_partitioning_create_default, "gadataset_partitioning_create_default", LIBS);
+  gidLink(cast(void**)&gadataset_partitioning_get_type_name, "gadataset_partitioning_get_type_name", LIBS);
 
   // PartitioningFactoryOptions
-  gidLink(gadataset_partitioning_factory_options_get_type, "gadataset_partitioning_factory_options_get_type", LIBS);
-  gidLink(gadataset_partitioning_factory_options_new, "gadataset_partitioning_factory_options_new", LIBS);
+  gidLink(cast(void**)&gadataset_partitioning_factory_options_get_type, "gadataset_partitioning_factory_options_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_partitioning_factory_options_new, "gadataset_partitioning_factory_options_new", LIBS);
 
   // Scanner
-  gidLink(gadataset_scanner_get_type, "gadataset_scanner_get_type", LIBS);
-  gidLink(gadataset_scanner_to_record_batch_reader, "gadataset_scanner_to_record_batch_reader", LIBS);
-  gidLink(gadataset_scanner_to_table, "gadataset_scanner_to_table", LIBS);
+  gidLink(cast(void**)&gadataset_scanner_get_type, "gadataset_scanner_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_scanner_to_record_batch_reader, "gadataset_scanner_to_record_batch_reader", LIBS);
+  gidLink(cast(void**)&gadataset_scanner_to_table, "gadataset_scanner_to_table", LIBS);
 
   // ScannerBuilder
-  gidLink(gadataset_scanner_builder_get_type, "gadataset_scanner_builder_get_type", LIBS);
-  gidLink(gadataset_scanner_builder_new, "gadataset_scanner_builder_new", LIBS);
-  gidLink(gadataset_scanner_builder_new_record_batch_reader, "gadataset_scanner_builder_new_record_batch_reader", LIBS);
-  gidLink(gadataset_scanner_builder_finish, "gadataset_scanner_builder_finish", LIBS);
-  gidLink(gadataset_scanner_builder_set_filter, "gadataset_scanner_builder_set_filter", LIBS);
+  gidLink(cast(void**)&gadataset_scanner_builder_get_type, "gadataset_scanner_builder_get_type", LIBS);
+  gidLink(cast(void**)&gadataset_scanner_builder_new, "gadataset_scanner_builder_new", LIBS);
+  gidLink(cast(void**)&gadataset_scanner_builder_new_record_batch_reader, "gadataset_scanner_builder_new_record_batch_reader", LIBS);
+  gidLink(cast(void**)&gadataset_scanner_builder_finish, "gadataset_scanner_builder_finish", LIBS);
+  gidLink(cast(void**)&gadataset_scanner_builder_set_filter, "gadataset_scanner_builder_set_filter", LIBS);
 }

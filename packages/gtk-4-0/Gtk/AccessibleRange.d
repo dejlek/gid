@@ -29,6 +29,7 @@ interface AccessibleRange
 
   static GType getType()
   {
-    return gtk_accessible_range_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_accessible_range_get_type != &gidSymbolNotFound ? gtk_accessible_range_get_type() : cast(GType)0;
   }
 }

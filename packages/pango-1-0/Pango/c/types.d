@@ -1,5 +1,6 @@
 module Pango.c.types;
 
+public import Gid.basictypes;
 public import GObject.c.types;
 public import Gio.c.types;
 public import HarfBuzz.c.types;

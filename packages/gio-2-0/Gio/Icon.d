@@ -40,7 +40,8 @@ interface Icon
 
   static GType getType()
   {
-    return g_icon_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_icon_get_type != &gidSymbolNotFound ? g_icon_get_type() : cast(GType)0;
   }
 
   /**

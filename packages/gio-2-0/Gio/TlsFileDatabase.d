@@ -18,7 +18,8 @@ interface TlsFileDatabase
 
   static GType getType()
   {
-    return g_tls_file_database_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_tls_file_database_get_type != &gidSymbolNotFound ? g_tls_file_database_get_type() : cast(GType)0;
   }
 
   /**

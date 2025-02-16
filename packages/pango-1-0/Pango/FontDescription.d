@@ -28,7 +28,8 @@ class FontDescription : Boxed
 
   static GType getType()
   {
-    return pango_font_description_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())pango_font_description_get_type != &gidSymbolNotFound ? pango_font_description_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

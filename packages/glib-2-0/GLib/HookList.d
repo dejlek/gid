@@ -29,12 +29,12 @@ class HookList
     return cast(void*)&cInstance;
   }
 
-  @property ulong seqId()
+  @property gulong seqId()
   {
     return (cast(GHookList*)cPtr).seqId;
   }
 
-  @property void seqId(ulong propval)
+  @property void seqId(gulong propval)
   {
     (cast(GHookList*)cPtr).seqId = propval;
   }

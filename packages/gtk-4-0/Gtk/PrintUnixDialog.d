@@ -81,7 +81,8 @@ class PrintUnixDialog : Dialog
 
   static GType getType()
   {
-    return gtk_print_unix_dialog_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_print_unix_dialog_get_type != &gidSymbolNotFound ? gtk_print_unix_dialog_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

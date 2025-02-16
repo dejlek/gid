@@ -29,7 +29,8 @@ class ConstraintGuide : ObjectG, ConstraintTarget
 
   static GType getType()
   {
-    return gtk_constraint_guide_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_constraint_guide_get_type != &gidSymbolNotFound ? gtk_constraint_guide_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

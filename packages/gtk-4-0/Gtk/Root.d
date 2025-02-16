@@ -25,7 +25,8 @@ interface Root
 
   static GType getType()
   {
-    return gtk_root_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_root_get_type != &gidSymbolNotFound ? gtk_root_get_type() : cast(GType)0;
   }
 
   /**

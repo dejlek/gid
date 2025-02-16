@@ -1,5 +1,6 @@
 module PangoCairo.c.functions;
 
+public import Gid.basictypes;
 import Gid.loader;
 import PangoCairo.c.types;
 public import GObject.c.types;
@@ -16,11 +17,11 @@ else
 __gshared extern(C)
 {
   // Font
-  GType function() c_pango_cairo_font_get_type;
+  extern(C) GType function() c_pango_cairo_font_get_type;
   cairo_scaled_font_t* function(PangoCairoFont* font) c_pango_cairo_font_get_scaled_font;
 
   // FontMap
-  GType function() c_pango_cairo_font_map_get_type;
+  extern(C) GType function() c_pango_cairo_font_map_get_type;
   PangoFontMap* function() c_pango_cairo_font_map_get_default;
   PangoFontMap* function() c_pango_cairo_font_map_new;
   PangoFontMap* function(cairo_font_type_t fonttype) c_pango_cairo_font_map_new_for_font_type;
@@ -91,38 +92,38 @@ alias pango_cairo_update_layout = c_pango_cairo_update_layout;
 shared static this()
 {
   // Font
-  gidLink(pango_cairo_font_get_type, "pango_cairo_font_get_type", LIBS);
-  gidLink(pango_cairo_font_get_scaled_font, "pango_cairo_font_get_scaled_font", LIBS);
+  gidLink(cast(void**)&pango_cairo_font_get_type, "pango_cairo_font_get_type", LIBS);
+  gidLink(cast(void**)&pango_cairo_font_get_scaled_font, "pango_cairo_font_get_scaled_font", LIBS);
 
   // FontMap
-  gidLink(pango_cairo_font_map_get_type, "pango_cairo_font_map_get_type", LIBS);
-  gidLink(pango_cairo_font_map_get_default, "pango_cairo_font_map_get_default", LIBS);
-  gidLink(pango_cairo_font_map_new, "pango_cairo_font_map_new", LIBS);
-  gidLink(pango_cairo_font_map_new_for_font_type, "pango_cairo_font_map_new_for_font_type", LIBS);
-  gidLink(pango_cairo_font_map_create_context, "pango_cairo_font_map_create_context", LIBS);
-  gidLink(pango_cairo_font_map_get_font_type, "pango_cairo_font_map_get_font_type", LIBS);
-  gidLink(pango_cairo_font_map_get_resolution, "pango_cairo_font_map_get_resolution", LIBS);
-  gidLink(pango_cairo_font_map_set_default, "pango_cairo_font_map_set_default", LIBS);
-  gidLink(pango_cairo_font_map_set_resolution, "pango_cairo_font_map_set_resolution", LIBS);
+  gidLink(cast(void**)&pango_cairo_font_map_get_type, "pango_cairo_font_map_get_type", LIBS);
+  gidLink(cast(void**)&pango_cairo_font_map_get_default, "pango_cairo_font_map_get_default", LIBS);
+  gidLink(cast(void**)&pango_cairo_font_map_new, "pango_cairo_font_map_new", LIBS);
+  gidLink(cast(void**)&pango_cairo_font_map_new_for_font_type, "pango_cairo_font_map_new_for_font_type", LIBS);
+  gidLink(cast(void**)&pango_cairo_font_map_create_context, "pango_cairo_font_map_create_context", LIBS);
+  gidLink(cast(void**)&pango_cairo_font_map_get_font_type, "pango_cairo_font_map_get_font_type", LIBS);
+  gidLink(cast(void**)&pango_cairo_font_map_get_resolution, "pango_cairo_font_map_get_resolution", LIBS);
+  gidLink(cast(void**)&pango_cairo_font_map_set_default, "pango_cairo_font_map_set_default", LIBS);
+  gidLink(cast(void**)&pango_cairo_font_map_set_resolution, "pango_cairo_font_map_set_resolution", LIBS);
 
   // Global
-  gidLink(pango_cairo_context_get_font_options, "pango_cairo_context_get_font_options", LIBS);
-  gidLink(pango_cairo_context_get_resolution, "pango_cairo_context_get_resolution", LIBS);
-  gidLink(pango_cairo_context_get_shape_renderer, "pango_cairo_context_get_shape_renderer", LIBS);
-  gidLink(pango_cairo_context_set_font_options, "pango_cairo_context_set_font_options", LIBS);
-  gidLink(pango_cairo_context_set_resolution, "pango_cairo_context_set_resolution", LIBS);
-  gidLink(pango_cairo_context_set_shape_renderer, "pango_cairo_context_set_shape_renderer", LIBS);
-  gidLink(pango_cairo_create_context, "pango_cairo_create_context", LIBS);
-  gidLink(pango_cairo_create_layout, "pango_cairo_create_layout", LIBS);
-  gidLink(pango_cairo_error_underline_path, "pango_cairo_error_underline_path", LIBS);
-  gidLink(pango_cairo_glyph_string_path, "pango_cairo_glyph_string_path", LIBS);
-  gidLink(pango_cairo_layout_line_path, "pango_cairo_layout_line_path", LIBS);
-  gidLink(pango_cairo_layout_path, "pango_cairo_layout_path", LIBS);
-  gidLink(pango_cairo_show_error_underline, "pango_cairo_show_error_underline", LIBS);
-  gidLink(pango_cairo_show_glyph_item, "pango_cairo_show_glyph_item", LIBS);
-  gidLink(pango_cairo_show_glyph_string, "pango_cairo_show_glyph_string", LIBS);
-  gidLink(pango_cairo_show_layout, "pango_cairo_show_layout", LIBS);
-  gidLink(pango_cairo_show_layout_line, "pango_cairo_show_layout_line", LIBS);
-  gidLink(pango_cairo_update_context, "pango_cairo_update_context", LIBS);
-  gidLink(pango_cairo_update_layout, "pango_cairo_update_layout", LIBS);
+  gidLink(cast(void**)&pango_cairo_context_get_font_options, "pango_cairo_context_get_font_options", LIBS);
+  gidLink(cast(void**)&pango_cairo_context_get_resolution, "pango_cairo_context_get_resolution", LIBS);
+  gidLink(cast(void**)&pango_cairo_context_get_shape_renderer, "pango_cairo_context_get_shape_renderer", LIBS);
+  gidLink(cast(void**)&pango_cairo_context_set_font_options, "pango_cairo_context_set_font_options", LIBS);
+  gidLink(cast(void**)&pango_cairo_context_set_resolution, "pango_cairo_context_set_resolution", LIBS);
+  gidLink(cast(void**)&pango_cairo_context_set_shape_renderer, "pango_cairo_context_set_shape_renderer", LIBS);
+  gidLink(cast(void**)&pango_cairo_create_context, "pango_cairo_create_context", LIBS);
+  gidLink(cast(void**)&pango_cairo_create_layout, "pango_cairo_create_layout", LIBS);
+  gidLink(cast(void**)&pango_cairo_error_underline_path, "pango_cairo_error_underline_path", LIBS);
+  gidLink(cast(void**)&pango_cairo_glyph_string_path, "pango_cairo_glyph_string_path", LIBS);
+  gidLink(cast(void**)&pango_cairo_layout_line_path, "pango_cairo_layout_line_path", LIBS);
+  gidLink(cast(void**)&pango_cairo_layout_path, "pango_cairo_layout_path", LIBS);
+  gidLink(cast(void**)&pango_cairo_show_error_underline, "pango_cairo_show_error_underline", LIBS);
+  gidLink(cast(void**)&pango_cairo_show_glyph_item, "pango_cairo_show_glyph_item", LIBS);
+  gidLink(cast(void**)&pango_cairo_show_glyph_string, "pango_cairo_show_glyph_string", LIBS);
+  gidLink(cast(void**)&pango_cairo_show_layout, "pango_cairo_show_layout", LIBS);
+  gidLink(cast(void**)&pango_cairo_show_layout_line, "pango_cairo_show_layout_line", LIBS);
+  gidLink(cast(void**)&pango_cairo_update_context, "pango_cairo_update_context", LIBS);
+  gidLink(cast(void**)&pango_cairo_update_layout, "pango_cairo_update_layout", LIBS);
 }

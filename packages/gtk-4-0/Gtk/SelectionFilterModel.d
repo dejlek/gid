@@ -24,7 +24,8 @@ class SelectionFilterModel : ObjectG, ListModel
 
   static GType getType()
   {
-    return gtk_selection_filter_model_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_selection_filter_model_get_type != &gidSymbolNotFound ? gtk_selection_filter_model_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

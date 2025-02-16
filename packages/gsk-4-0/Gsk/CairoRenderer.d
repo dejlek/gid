@@ -21,7 +21,8 @@ class CairoRenderer : Renderer
 
   static GType getType()
   {
-    return gsk_cairo_renderer_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gsk_cairo_renderer_get_type != &gidSymbolNotFound ? gsk_cairo_renderer_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -41,7 +41,8 @@ class Rect : Boxed
 
   static GType getType()
   {
-    return graphene_rect_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())graphene_rect_get_type != &gidSymbolNotFound ? graphene_rect_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -49,12 +49,12 @@ class Hook
     (cast(GHook*)cPtr).refCount = propval;
   }
 
-  @property ulong hookId()
+  @property gulong hookId()
   {
     return (cast(GHook*)cPtr).hookId;
   }
 
-  @property void hookId(ulong propval)
+  @property void hookId(gulong propval)
   {
     (cast(GHook*)cPtr).hookId = propval;
   }
@@ -100,7 +100,7 @@ class Hook
    *   hookId = a hook ID
    * Returns: %TRUE if the #GHook was found in the #GHookList and destroyed
    */
-  static bool destroy(HookList hookList, ulong hookId)
+  static bool destroy(HookList hookList, gulong hookId)
   {
     bool _retval;
     _retval = g_hook_destroy(hookList ? cast(GHookList*)hookList.cPtr : null, hookId);

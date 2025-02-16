@@ -27,7 +27,8 @@ interface DevicePad
 
   static GType getType()
   {
-    return gdk_device_pad_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_device_pad_get_type != &gidSymbolNotFound ? gdk_device_pad_get_type() : cast(GType)0;
   }
 
   /**

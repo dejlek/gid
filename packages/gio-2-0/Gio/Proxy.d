@@ -26,7 +26,8 @@ interface Proxy
 
   static GType getType()
   {
-    return g_proxy_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_proxy_get_type != &gidSymbolNotFound ? g_proxy_get_type() : cast(GType)0;
   }
 
   /**

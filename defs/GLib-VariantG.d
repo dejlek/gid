@@ -1,6 +1,3 @@
-//!generate init
-//!generate funcs
-
 import GLib.VariantBuilder;
 import GLib.VariantType;
 

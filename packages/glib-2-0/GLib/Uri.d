@@ -153,7 +153,8 @@ class Uri : Boxed
 
   static GType getType()
   {
-    return g_uri_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_uri_get_type != &gidSymbolNotFound ? g_uri_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

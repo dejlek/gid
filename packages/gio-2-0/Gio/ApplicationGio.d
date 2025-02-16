@@ -136,7 +136,8 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
 
   static GType getType()
   {
-    return g_application_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_application_get_type != &gidSymbolNotFound ? g_application_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

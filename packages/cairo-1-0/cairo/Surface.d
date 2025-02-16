@@ -44,7 +44,8 @@ class Surface : Boxed
 
   static GType getType()
   {
-    return cairo_gobject_surface_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())cairo_gobject_surface_get_type != &gidSymbolNotFound ? cairo_gobject_surface_get_type() : cast(GType)0;
   }
 
   override @property GType gType()
@@ -304,7 +305,7 @@ class Surface : Boxed
   void getMimeData(string mimeType, out ubyte[] data)
   {
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
-    ulong _length;
+    gulong _length;
     const(ubyte)* _data;
     cairo_surface_get_mime_data(cast(cairo_surface_t*)cPtr, _mimeType, &_data, &_length);
     data.length = _length;
@@ -574,9 +575,9 @@ class Surface : Boxed
 
     cairo_status_t _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
-    ulong _length;
+    gulong _length;
     if (data)
-      _length = cast(ulong)data.length;
+      _length = cast(gulong)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
     auto _destroy = freezeDelegate(cast(void*)&destroy);

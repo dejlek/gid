@@ -25,7 +25,8 @@ class Rand : Boxed
 
   static GType getType()
   {
-    return g_rand_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_rand_get_type != &gidSymbolNotFound ? g_rand_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

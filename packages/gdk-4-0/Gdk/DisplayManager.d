@@ -56,7 +56,8 @@ class DisplayManager : ObjectG
 
   static GType getType()
   {
-    return gdk_display_manager_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_display_manager_get_type != &gidSymbolNotFound ? gdk_display_manager_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

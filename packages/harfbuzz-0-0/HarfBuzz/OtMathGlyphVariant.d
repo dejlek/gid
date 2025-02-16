@@ -29,7 +29,8 @@ class OtMathGlyphVariant : Boxed
 
   static GType getType()
   {
-    return hb_gobject_ot_math_glyph_variant_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())hb_gobject_ot_math_glyph_variant_get_type != &gidSymbolNotFound ? hb_gobject_ot_math_glyph_variant_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

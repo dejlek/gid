@@ -16,7 +16,8 @@ class Partitioning : ObjectG
 
   static GType getType()
   {
-    return gadataset_partitioning_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gadataset_partitioning_get_type != &gidSymbolNotFound ? gadataset_partitioning_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

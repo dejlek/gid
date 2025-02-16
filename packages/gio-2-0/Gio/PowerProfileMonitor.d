@@ -33,7 +33,8 @@ interface PowerProfileMonitor
 
   static GType getType()
   {
-    return g_power_profile_monitor_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_power_profile_monitor_get_type != &gidSymbolNotFound ? g_power_profile_monitor_get_type() : cast(GType)0;
   }
 
   /**

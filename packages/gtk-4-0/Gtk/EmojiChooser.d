@@ -52,7 +52,8 @@ class EmojiChooser : Popover
 
   static GType getType()
   {
-    return gtk_emoji_chooser_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_emoji_chooser_get_type != &gidSymbolNotFound ? gtk_emoji_chooser_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

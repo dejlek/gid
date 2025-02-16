@@ -37,7 +37,8 @@ interface Scrollable
 
   static GType getType()
   {
-    return gtk_scrollable_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_scrollable_get_type != &gidSymbolNotFound ? gtk_scrollable_get_type() : cast(GType)0;
   }
 
   /**

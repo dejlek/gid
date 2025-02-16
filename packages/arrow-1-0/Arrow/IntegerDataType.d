@@ -16,7 +16,8 @@ class IntegerDataType : NumericDataType
 
   static GType getType()
   {
-    return garrow_integer_data_type_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_integer_data_type_get_type != &gidSymbolNotFound ? garrow_integer_data_type_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

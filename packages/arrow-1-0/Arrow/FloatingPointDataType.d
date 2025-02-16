@@ -16,7 +16,8 @@ class FloatingPointDataType : NumericDataType
 
   static GType getType()
   {
-    return garrow_floating_point_data_type_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_floating_point_data_type_get_type != &gidSymbolNotFound ? garrow_floating_point_data_type_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

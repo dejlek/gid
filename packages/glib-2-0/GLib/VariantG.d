@@ -8,7 +8,6 @@ import GLib.c.functions;
 import GLib.c.types;
 import Gid.gid;
 
-
 import GLib.VariantBuilder;
 import GLib.VariantType;
 

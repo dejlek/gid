@@ -36,7 +36,8 @@ class RGBA : Boxed
 
   static GType getType()
   {
-    return gdk_rgba_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_rgba_get_type != &gidSymbolNotFound ? gdk_rgba_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

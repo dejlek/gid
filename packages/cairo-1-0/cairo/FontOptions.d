@@ -37,7 +37,8 @@ class FontOptions : Boxed
 
   static GType getType()
   {
-    return cairo_gobject_font_options_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())cairo_gobject_font_options_get_type != &gidSymbolNotFound ? cairo_gobject_font_options_get_type() : cast(GType)0;
   }
 
   override @property GType gType()
@@ -198,9 +199,9 @@ class FontOptions : Boxed
    *   The return value can be cast to a 32-bit type if a
    *   32-bit hash value is needed.
    */
-  ulong hash()
+  gulong hash()
   {
-    ulong _retval;
+    gulong _retval;
     _retval = cairo_font_options_hash(cast(cairo_font_options_t*)cPtr);
     return _retval;
   }

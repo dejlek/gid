@@ -42,7 +42,8 @@ class Matrix : Boxed
 
   static GType getType()
   {
-    return graphene_matrix_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())graphene_matrix_get_type != &gidSymbolNotFound ? graphene_matrix_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

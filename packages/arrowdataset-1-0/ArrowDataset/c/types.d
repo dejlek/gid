@@ -1,5 +1,6 @@
 module ArrowDataset.c.types;
 
+public import Gid.basictypes;
 public import Arrow.c.types;
 
 /**

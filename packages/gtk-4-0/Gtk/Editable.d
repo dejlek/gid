@@ -122,7 +122,8 @@ interface Editable
 
   static GType getType()
   {
-    return gtk_editable_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_editable_get_type != &gidSymbolNotFound ? gtk_editable_get_type() : cast(GType)0;
   }
 
   /**

@@ -25,7 +25,8 @@ class EventSequence : Boxed
 
   static GType getType()
   {
-    return gdk_event_sequence_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_event_sequence_get_type != &gidSymbolNotFound ? gdk_event_sequence_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

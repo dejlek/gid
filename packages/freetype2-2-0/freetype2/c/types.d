@@ -1,5 +1,6 @@
 module freetype2.c.types;
 
+public import Gid.basictypes;
 public import GLib.c.types;
 
 struct FT_Bitmap;

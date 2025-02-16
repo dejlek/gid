@@ -25,7 +25,8 @@ class ListStore : ObjectG, ListModel
 
   static GType getType()
   {
-    return g_list_store_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_list_store_get_type != &gidSymbolNotFound ? g_list_store_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

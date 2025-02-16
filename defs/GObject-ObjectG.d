@@ -1,4 +1,5 @@
-//!generate funcs
+//!inhibit init
+
 import core.atomic;
 import std.conv : to;
 public import std.typecons : Flag, No, Yes;

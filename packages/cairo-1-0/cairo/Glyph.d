@@ -41,7 +41,8 @@ class Glyph : Boxed
 
   static GType getType()
   {
-    return cairo_gobject_glyph_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())cairo_gobject_glyph_get_type != &gidSymbolNotFound ? cairo_gobject_glyph_get_type() : cast(GType)0;
   }
 
   override @property GType gType()
@@ -49,12 +50,12 @@ class Glyph : Boxed
     return getType();
   }
 
-  @property ulong index()
+  @property gulong index()
   {
     return (cast(cairo_glyph_t*)cPtr).index;
   }
 
-  @property void index(ulong propval)
+  @property void index(gulong propval)
   {
     (cast(cairo_glyph_t*)cPtr).index = propval;
   }

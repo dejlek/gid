@@ -1,4 +1,5 @@
 //!kind ErrorG Wrap
+//!inhibit init funcs
 
 import GLib.Types;
 

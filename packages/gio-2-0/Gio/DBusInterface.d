@@ -21,7 +21,8 @@ interface DBusInterface
 
   static GType getType()
   {
-    return g_dbus_interface_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_dbus_interface_get_type != &gidSymbolNotFound ? g_dbus_interface_get_type() : cast(GType)0;
   }
 
   /**

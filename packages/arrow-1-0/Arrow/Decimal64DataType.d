@@ -17,7 +17,8 @@ class Decimal64DataType : DecimalDataType
 
   static GType getType()
   {
-    return garrow_decimal64_data_type_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_decimal64_data_type_get_type != &gidSymbolNotFound ? garrow_decimal64_data_type_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

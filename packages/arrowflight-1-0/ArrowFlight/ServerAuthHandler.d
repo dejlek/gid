@@ -16,7 +16,8 @@ class ServerAuthHandler : ObjectG
 
   static GType getType()
   {
-    return gaflight_server_auth_handler_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())gaflight_server_auth_handler_get_type != &gidSymbolNotFound ? gaflight_server_auth_handler_get_type() : cast(GType)0;
   }
 
   override @property GType gType()

@@ -70,7 +70,8 @@ interface ListModel
 
   static GType getType()
   {
-    return g_list_model_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_list_model_get_type != &gidSymbolNotFound ? g_list_model_get_type() : cast(GType)0;
   }
 
   /**

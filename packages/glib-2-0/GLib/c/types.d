@@ -1,5 +1,7 @@
 module GLib.c.types;
 
+public import Gid.basictypes;
+
 /**
  * Integer representing a day of the month; between 1 and 31.
  * The %G_DATE_BAD_DAY value represents an invalid day of the month.
@@ -5023,7 +5025,7 @@ struct GHook
   /**
    * the id of this hook, which is unique within its list
    */
-  ulong hookId;
+  gulong hookId;
 
   /**
    * flags which are set for this hook. See #GHookFlagMask for
@@ -5052,7 +5054,7 @@ struct GHookList
   /**
    * the next free #GHook id
    */
-  ulong seqId;
+  gulong seqId;
 
   /**
    * the size of the #GHookList elements, in bytes
@@ -6785,7 +6787,7 @@ struct GThreadFunctions
   /**
    * virtual function pointer for [GLib.Thread.create]
    */
-  extern(C) void function(GThreadFunc func, void* data, ulong stackSize, bool joinable, bool bound, GThreadPriority priority, void* thread, GError** _err) threadCreate;
+  extern(C) void function(GThreadFunc func, void* data, gulong stackSize, bool joinable, bool bound, GThreadPriority priority, void* thread, GError** _err) threadCreate;
 
   /**
    * virtual function pointer for [GLib.Thread.yield]
@@ -6877,12 +6879,12 @@ struct GTimeVal
   /**
    * seconds
    */
-  long tvSec;
+  glong tvSec;
 
   /**
    * microseconds
    */
-  long tvUsec;
+  glong tvUsec;
 }
 
 /**
@@ -6936,17 +6938,17 @@ union GTokenValue
   /**
    * token binary integer value
    */
-  ulong vBinary;
+  gulong vBinary;
 
   /**
    * octal integer value
    */
-  ulong vOctal;
+  gulong vOctal;
 
   /**
    * integer value
    */
-  ulong vInt;
+  gulong vInt;
 
   /**
    * 64-bit integer value
@@ -6961,7 +6963,7 @@ union GTokenValue
   /**
    * hex integer value
    */
-  ulong vHex;
+  gulong vHex;
 
   /**
    * string value

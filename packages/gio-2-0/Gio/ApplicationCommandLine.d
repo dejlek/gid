@@ -155,7 +155,8 @@ class ApplicationCommandLine : ObjectG
 
   static GType getType()
   {
-    return g_application_command_line_get_type();
+    import Gid.loader : gidSymbolNotFound;
+    return cast(void function())g_application_command_line_get_type != &gidSymbolNotFound ? g_application_command_line_get_type() : cast(GType)0;
   }
 
   override @property GType gType()
