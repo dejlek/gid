@@ -410,7 +410,7 @@ class ScrolledWindow : Widget
    * for the scrolled window.
    * The default is %GTK_CORNER_TOP_LEFT, meaning the child is
    * in the top left, with the scrollbars underneath and to the right.
-   * Other values in [Gtk] are %GTK_CORNER_TOP_RIGHT,
+   * Other values in [Gtk.CornerType] are %GTK_CORNER_TOP_RIGHT,
    * %GTK_CORNER_BOTTOM_LEFT, and %GTK_CORNER_BOTTOM_RIGHT.
    * See also [Gtk.ScrolledWindow.getPlacement] and
    * [Gtk.ScrolledWindow.unsetPlacement].
@@ -425,7 +425,7 @@ class ScrolledWindow : Widget
   /**
    * Sets the scrollbar policy for the horizontal and vertical scrollbars.
    * The policy determines when the scrollbar should appear; it is a value
-   * from the [Gtk] enumeration. If %GTK_POLICY_ALWAYS, the
+   * from the [Gtk.PolicyType] enumeration. If %GTK_POLICY_ALWAYS, the
    * scrollbar is always present; if %GTK_POLICY_NEVER, the scrollbar is
    * never present; if %GTK_POLICY_AUTOMATIC, the scrollbar is present only
    * if needed $(LPAREN)that is, if the slider part of the bar would be smaller

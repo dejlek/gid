@@ -130,8 +130,7 @@ int formatStrideForWidth(Format format, int width)
  */
 void* getUserData(Context cr, UserDataKey key)
 {
-  void* _retval;
-  _retval = cairo_get_user_data(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, &key);
+  auto _retval = cairo_get_user_data(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, &key);
   return _retval;
 }
 
@@ -247,6 +246,25 @@ Surface imageSurfaceCreateFromPngStream(ReadFunc readFunc)
   auto _readFunc = cast(void*)&readFunc;
   _cretval = cairo_image_surface_create_from_png_stream(&_readFuncCallback, _readFunc);
   auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  return _retval;
+}
+
+/**
+ * Get a pointer to the data of the image surface, for direct
+ * inspection or modification.
+ * A call to [cairo.Surface.flush] is required before accessing the
+ * pixel data to ensure that all pending drawing operations are
+ * finished. A call to [cairo.Surface.markDirty] is required after
+ * the data is modified.
+ * Params:
+ *   surface = a #cairo_image_surface_t
+ * Returns: a pointer to the image data of this surface or %NULL
+ *   if surface is not an image surface, or if [cairo.Surface.finish]
+ *   has been called.
+ */
+ubyte* imageSurfaceGetData(Surface surface)
+{
+  auto _retval = cairo_image_surface_get_data(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1382,8 +1400,7 @@ void psSurfaceSetSize(Surface surface, double widthInPoints, double heightInPoin
  */
 void* rasterSourcePatternGetCallbackData(Pattern pattern)
 {
-  void* _retval;
-  _retval = cairo_raster_source_pattern_get_callback_data(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
+  auto _retval = cairo_raster_source_pattern_get_callback_data(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
   return _retval;
 }
 

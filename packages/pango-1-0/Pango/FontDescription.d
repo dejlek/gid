@@ -408,7 +408,7 @@ class FontDescription : Boxed
 
   /**
    * Sets the stretch field of a font description.
-   * The [Pango] field specifies how narrow or
+   * The [Pango.Stretch] field specifies how narrow or
    * wide the font should be.
    * Params:
    *   stretch = the stretch for the font description
@@ -420,7 +420,7 @@ class FontDescription : Boxed
 
   /**
    * Sets the style field of a `PangoFontDescription`.
-   * The [Pango] enumeration describes whether the font is
+   * The [Pango.Style] enumeration describes whether the font is
    * slanted and the manner in which it is slanted; it can be either
    * %PANGO_STYLE_NORMAL, %PANGO_STYLE_ITALIC, or %PANGO_STYLE_OBLIQUE.
    * Most fonts will either have a italic style or an oblique style,
@@ -437,7 +437,7 @@ class FontDescription : Boxed
 
   /**
    * Sets the variant field of a font description.
-   * The [Pango] can either be %PANGO_VARIANT_NORMAL
+   * The [Pango.Variant] can either be %PANGO_VARIANT_NORMAL
    * or %PANGO_VARIANT_SMALL_CAPS.
    * Params:
    *   variant = the variant type for the font description.
@@ -489,7 +489,7 @@ class FontDescription : Boxed
    * Sets the weight field of a font description.
    * The weight field
    * specifies how bold or light the font should be. In addition
-   * to the values of the [Pango] enumeration, other
+   * to the values of the [Pango.Weight] enumeration, other
    * intermediate numeric values are possible.
    * Params:
    *   weight = the weight for the font description.

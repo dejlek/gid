@@ -1142,8 +1142,7 @@ class VariantG
    */
   const(void)* getData()
   {
-    const(void)* _retval;
-    _retval = g_variant_get_data(cast(VariantC*)cPtr);
+    auto _retval = g_variant_get_data(cast(VariantC*)cPtr);
     return _retval;
   }
 

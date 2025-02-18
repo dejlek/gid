@@ -809,10 +809,9 @@ class Settings : ObjectG
       return _retval;
     }
 
-    void* _retval;
     const(char)* _key = key.toCString(No.Alloc);
     auto _mapping = cast(void*)&mapping;
-    _retval = g_settings_get_mapped(cast(GSettings*)cPtr, _key, &_mappingCallback, _mapping);
+    auto _retval = g_settings_get_mapped(cast(GSettings*)cPtr, _key, &_mappingCallback, _mapping);
     return _retval;
   }
 

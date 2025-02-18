@@ -75,3 +75,5 @@
 //!set function[ot_layout_table_find_feature_variations].parameters.parameter[coords].type '<array length="3" zero-terminated="0" c:type="const int *"><type name="int" c:type="int"/></array>'
 //!set function[ot_layout_table_select_script].parameters.parameter[script_tags].type '<array length="2" zero-terminated="0" c:type="const hb_tag_t *"><type name="tag_t" c:type="hb_tag_t"/></array>'
 //!set function[ot_var_normalize_coords].parameters.parameter[design_coords].type '<array length="1" zero-terminated="0" c:type="const float *"><type name="float" c:type="float"/></array>'
+//!set function[font_get_var_coords_design].return-value.type '<array length="1" zero-terminated="0" c:type="const float *"><type name="float" c:type="float"/></array>'
+//!set function[font_get_var_coords_normalized].return-value.type '<array length="1" zero-terminated="0" c:type="const int *"><type name="int" c:type="int"/></array>'

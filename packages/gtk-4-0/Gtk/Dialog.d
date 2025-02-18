@@ -47,7 +47,7 @@ import Gtk.c.types;
  * [Gtk.Dialog.response] signal with a response ID that you specified.
  * GTK will never assign a meaning to positive response IDs; these are
  * entirely user-defined. But for convenience, you can use the response
- * IDs in the [Gtk] enumeration $(LPAREN)these all have values
+ * IDs in the [Gtk.ResponseType] enumeration $(LPAREN)these all have values
  * less than zero$(RPAREN). If a dialog receives a delete event, the
  * [Gtk.Dialog.response] signal will be emitted with the
  * %GTK_RESPONSE_DELETE_EVENT response ID.

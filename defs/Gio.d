@@ -18,10 +18,8 @@
 //!set interface[ActionGroup].method[list_actions].return-value.array[][zero-terminated] 1
 //!set record[ActionGroupInterface].field[list_actions].callback[list_actions].return-value.array[][zero-terminated] 1
 //!set interface[AppInfo].method[get_supported_types].return-value.array[][zero-terminated] 1
-//!set record[AppInfoIface].field[get_supported_types].callback[get_supported_types].return-value.array[][zero-terminated] 1
 //!set class[AppLaunchContext].method[get_environment].return-value.array[][zero-terminated] 1
 //!set class[Application].method[add_main_option_entries].parameters.parameter[entries].array[][zero-terminated] 1
-//!set record[ApplicationClass].field[local_command_line].callback[local_command_line].parameters.parameter[arguments].array[][zero-terminated] 1
 //!set class[ApplicationCommandLine].method[get_environ].return-value.array[][zero-terminated] 1
 //!set record[DBusAnnotationInfo].function[lookup].parameters.parameter[annotations].array[][zero-terminated] 1
 //!set class[DBusMessage].method[get_header_fields].return-value.array[][zero-terminated] 1
@@ -33,7 +31,6 @@
 //!set class[DesktopAppInfo].method[get_keywords].return-value.array[][zero-terminated] 1
 //!set class[DesktopAppInfo].method[list_actions].return-value.array[][zero-terminated] 1
 //!set interface[Drive].method[enumerate_identifiers].return-value.array[][zero-terminated] 1
-//!set record[DriveIface].field[enumerate_identifiers].callback[enumerate_identifiers].return-value.array[][zero-terminated] 1
 //!set interface[DtlsConnection].method[set_advertised_protocols].parameters.parameter[protocols].array[][zero-terminated] 1
 //!set record[DtlsConnectionInterface].field[set_advertised_protocols].callback[set_advertised_protocols].parameters.parameter[protocols].array[][zero-terminated] 1
 //!set interface[File].function[new_build_filenamev].parameters.parameter[args].array[][zero-terminated] 1
@@ -45,12 +42,8 @@
 //!set class[InetAddress].constructor[new_from_bytes].parameters.parameter[bytes].array[][zero-terminated] 1
 //!set interface[Mount].method[guess_content_type_finish].return-value.array[][zero-terminated] 1
 //!set interface[Mount].method[guess_content_type_sync].return-value.array[][zero-terminated] 1
-//!set record[MountIface].field[guess_content_type_finish].callback[guess_content_type_finish].return-value.array[][zero-terminated] 1
-//!set record[MountIface].field[guess_content_type_sync].callback[guess_content_type_sync].return-value.array[][zero-terminated] 1
 //!set class[MountOperation].glib:signal[ask-question].parameters.parameter[choices].array[][zero-terminated] 1
 //!set class[MountOperation].glib:signal[show-processes].parameters.parameter[choices].array[][zero-terminated] 1
-//!set record[MountOperationClass].field[ask_question].callback[ask_question].parameters.parameter[choices].array[][zero-terminated] 1
-//!set record[MountOperationClass].field[show_processes].callback[show_processes].parameters.parameter[choices].array[][zero-terminated] 1
 //!set interface[ProxyResolver].method[lookup].return-value.array[][zero-terminated] 1
 //!set interface[ProxyResolver].method[lookup_finish].return-value.array[][zero-terminated] 1
 //!set record[ProxyResolverInterface].field[lookup].callback[lookup].return-value.array[][zero-terminated] 1
@@ -77,9 +70,7 @@
 //!set class[ThemedIcon].method[get_names].return-value.array[][zero-terminated] 1
 //!set class[TlsConnection].method[set_advertised_protocols].parameters.parameter[protocols].array[][zero-terminated] 1
 //!set class[Vfs].method[get_supported_uri_schemes].return-value.array[][zero-terminated] 1
-//!set record[VfsClass].field[get_supported_uri_schemes].callback[get_supported_uri_schemes].return-value.array[][zero-terminated] 1
 //!set interface[Volume].method[enumerate_identifiers].return-value.array[][zero-terminated] 1
-//!set record[VolumeIface].field[enumerate_identifiers].callback[enumerate_identifiers].return-value.array[][zero-terminated] 1
 //!set function[content_type_get_mime_dirs].return-value.array[][zero-terminated] 1
 //!set function[content_type_guess_for_tree].return-value.array[][zero-terminated] 1
 //!set function[content_type_set_mime_dirs].parameters.parameter[dirs].array[][zero-terminated] 1

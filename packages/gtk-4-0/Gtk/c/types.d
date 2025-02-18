@@ -4956,9 +4956,9 @@ struct GtkAboutDialog;
  * `GtkAccessible` is an interface for describing UI elements for
  * Assistive Technologies.
  * Every accessible implementation has:
- * - a “role”, represented by a value of the [Gtk] enumeration
- * - an “attribute”, represented by a set of [Gtk],
- * [Gtk] and [Gtk] values
+ * - a “role”, represented by a value of the [Gtk.AccessibleRole] enumeration
+ * - an “attribute”, represented by a set of [Gtk.AccessibleState],
+ * [Gtk.AccessibleProperty] and [Gtk.AccessibleRelation] values
  * The role cannot be changed after instantiating a `GtkAccessible`
  * implementation.
  * The attributes are updated every time a UI element's state changes in
@@ -5506,7 +5506,7 @@ struct GtkAspectFrame;
  * through the pages, and controls the page flow to collect the data needed
  * for the operation.
  * `GtkAssistant` handles which buttons to show and to make sensitive based
- * on page sequence knowledge and the [Gtk] of each
+ * on page sequence knowledge and the [Gtk.AssistantPageType] of each
  * page in addition to state information like the *completed* and *committed*
  * page statuses.
  * If you have a case that doesn’t quite fit in `GtkAssistant`s way of
@@ -6515,7 +6515,7 @@ struct GtkCallbackActionClass;
  * responsible for knowing where `GtkTreeModel` rows are rendered inside
  * the widget, so at vfunc@Gtk.Widget.focus time the layouting widget
  * should use the `GtkCellArea` methods to navigate focus inside the area
- * and then observe the [Gtk] to pass the focus to adjacent
+ * and then observe the [Gtk.DirectionType] to pass the focus to adjacent
  * rows and areas.
  * A basic example of how the vfunc@Gtk.Widget.focus virtual method
  * should be implemented:
@@ -8086,7 +8086,7 @@ struct GtkCustomSorterClass
  * [Gtk.Dialog.response] signal with a response ID that you specified.
  * GTK will never assign a meaning to positive response IDs; these are
  * entirely user-defined. But for convenience, you can use the response
- * IDs in the [Gtk] enumeration $(LPAREN)these all have values
+ * IDs in the [Gtk.ResponseType] enumeration $(LPAREN)these all have values
  * less than zero$(RPAREN). If a dialog receives a delete event, the
  * [Gtk.Dialog.response] signal will be emitted with the
  * %GTK_RESPONSE_DELETE_EVENT response ID.
@@ -9376,9 +9376,9 @@ struct GtkFileChooser;
  * NULL$(RPAREN);
  * ```
  * This will create buttons for “Cancel” and “Open” that use predefined
- * response identifiers from [Gtk].  For most dialog
+ * response identifiers from [Gtk.ResponseType].  For most dialog
  * boxes you can use your own custom response codes rather than the
- * ones in [Gtk], but `GtkFileChooserDialog` assumes that
+ * ones in [Gtk.ResponseType], but `GtkFileChooserDialog` assumes that
  * its “accept”-type action, e.g. an “Open” or “Save” button,
  * will have one of the following response codes:
  * - %GTK_RESPONSE_ACCEPT
@@ -12633,7 +12633,7 @@ struct GtkPasswordEntryClass;
  * if you want to display a fixed-size image, such as an icon.
  * ## Sizing the paintable
  * You can influence how the paintable is displayed inside the `GtkPicture`
- * by changing property@Gtk.Picture:content-fit. See [Gtk]
+ * by changing property@Gtk.Picture:content-fit. See [Gtk.ContentFit]
  * for details. property@Gtk.Picture:can-shrink can be unset to make sure
  * that paintables are never made smaller than their ideal size - but
  * be careful if you do not know the size of the paintable in use $(LPAREN)like
@@ -16432,7 +16432,7 @@ struct GtkVolumeButton
  * The geometry management system will query a widget hierarchy in
  * only one orientation at a time. When widgets are initially queried
  * for their minimum sizes it is generally done in two initial passes
- * in the [Gtk] chosen by the toplevel.
+ * in the [Gtk.SizeRequestMode] chosen by the toplevel.
  * For example, when queried in the normal %GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH mode:
  * First, the default minimum and natural width for each widget
  * in the interface will be computed using [Gtk.Widget.measure] with an

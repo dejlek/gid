@@ -93,8 +93,7 @@ class BuildableParseContext
    */
   void* pop()
   {
-    void* _retval;
-    _retval = gtk_buildable_parse_context_pop(cast(GtkBuildableParseContext*)cPtr);
+    auto _retval = gtk_buildable_parse_context_pop(cast(GtkBuildableParseContext*)cPtr);
     return _retval;
   }
 

@@ -2212,7 +2212,7 @@ struct GdkPaintableInterface
   extern(C) GdkPaintable* function(GdkPaintable* paintable) getCurrentImage;
 
   /**
-   * Get the flags for this instance. See [Gdk]
+   * Get the flags for this instance. See [Gdk.PaintableFlags]
    * for details.
    */
   extern(C) GdkPaintableFlags function(GdkPaintable* paintable) getFlags;
@@ -2422,9 +2422,9 @@ struct GdkTextureDownloader;
 /**
  * A `GdkTimeCoord` stores a single event in a motion history.
  * To check whether an axis is present, check whether the corresponding
- * flag from the [Gdk] enumeration is set in the @flags
+ * flag from the [Gdk.AxisFlags] enumeration is set in the @flags
  * To access individual axis values, use the values of the values of
- * the [Gdk] enumerations as indices.
+ * the [Gdk.AxisUse] enumerations as indices.
  */
 struct GdkTimeCoord
 {
@@ -2434,12 +2434,12 @@ struct GdkTimeCoord
   uint time;
 
   /**
-   * Flags indicating what axes are present, see [Gdk]
+   * Flags indicating what axes are present, see [Gdk.AxisFlags]
    */
   GdkAxisFlags flags;
 
   /**
-   * axis values, indexed by [Gdk]
+   * axis values, indexed by [Gdk.AxisUse]
    */
   double[12] axes;
 }

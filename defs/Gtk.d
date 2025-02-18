@@ -43,6 +43,14 @@
 //!set class[StringList].method[splice].parameters.parameter[additions].array[][zero-terminated] 1
 //!set class[Widget].method[get_css_classes].return-value.array[][zero-terminated] 1
 //!set class[Widget].method[set_css_classes].parameters.parameter[classes].array[][zero-terminated] 1
+//!set record[AccessibleTextInterface].field[get_attributes].callback[get_attributes].parameters.parameter[attribute_names].array[][zero-terminated] 1
+//!set record[AccessibleTextInterface].field[get_attributes].callback[get_attributes].parameters.parameter[attribute_values].array[][zero-terminated] 1
+//!set record[AccessibleTextInterface].field[get_default_attributes].callback[get_default_attributes].parameters.parameter[attribute_names].array[][zero-terminated] 1
+//!set record[AccessibleTextInterface].field[get_default_attributes].callback[get_default_attributes].parameters.parameter[attribute_values].array[][zero-terminated] 1
+
+//# axes param takes a GDK_AXIS_IGNORE terminated array (0 value) and expects the out values[] array to be the same size (use length of axes array)
+//!set class[GestureStylus].method[get_axes].parameters.parameter[axes].array[][zero-terminated] 1
+//!set class[GestureStylus].method[get_axes].parameters.parameter[values].array[][length] 0
 
 //# Change Builder.new_from_string to take an array of characters with a length, to remove the length and optimize
 //!set class[Builder].constructor[new_from_string].parameters.parameter[string].type '<array length="1" c:type="gchar*"><type name="char" c:type="char"/></array>'

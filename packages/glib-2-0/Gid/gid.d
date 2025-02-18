@@ -288,7 +288,7 @@ ubyte[] gBytesToD(GidOwnership ownership = GidOwnership.None)(GBytes* gBytes)
  *   gArray = The GArray instance
  * Returns: D array of the given type
  */
-T[] gArrayToD(T, GidOwnership ownership = GidOwnership.None)(GArray* gArray)
+T[] gArrayGToD(T, GidOwnership ownership = GidOwnership.None)(GArray* gArray)
 if (containerTypeIsSupported!T)
 {
   T[] a;
@@ -479,7 +479,7 @@ GBytes* gBytesFromD(ubyte[] a)
  *   a = The D array
  * Returns: New GArray which should be freed with containerFree!() template (if ownership not taken by C code)
  */
-GArray* gArrayFromD(T, bool zeroTerminated = false)(T[] a)
+GArray* gArrayGFromD(T, bool zeroTerminated = false)(T[] a)
 if (containerTypeIsSupported!T)
 {
   auto gArray = g_array_sized_new(zeroTerminated, false, containerTypeSize!T, cast(uint)a.length);
@@ -625,7 +625,7 @@ if ((is(K == string) || is(K == const(void)*))
  */
 bool isTypeBoxedOrReffed(T)()
 {
-  return __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c.cPtr();});
+  return __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c.cPtr(Yes.Dup);});
 }
 
 /**

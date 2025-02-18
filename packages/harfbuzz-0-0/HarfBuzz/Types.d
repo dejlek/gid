@@ -69,12 +69,12 @@ alias UnicodeGeneralCategory = hb_unicode_general_category_t;
 alias AatLayoutFeatureSelectorInfo = hb_aat_layout_feature_selector_info_t;
 alias FontExtents = hb_font_extents_t;
 alias GlyphExtents = hb_glyph_extents_t;
-alias Language = hb_language_t;
 alias OtColorLayer = hb_ot_color_layer_t;
 alias OtMathKernEntry = hb_ot_math_kern_entry_t;
 alias OtVarAxis = hb_ot_var_axis_t;
 alias VarInt = hb_var_int_t;
 alias VarNum = hb_var_num_t;
+alias language_t = hb_language_t;
 
 // Callbacks
 alias BufferMessageFunc = Bool delegate(Buffer buffer, Font font, string message);

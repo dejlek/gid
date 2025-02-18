@@ -134,9 +134,9 @@ import Gtk.c.types;
  * NULL$(RPAREN);
  * ```
  * This will create buttons for “Cancel” and “Open” that use predefined
- * response identifiers from [Gtk].  For most dialog
+ * response identifiers from [Gtk.ResponseType].  For most dialog
  * boxes you can use your own custom response codes rather than the
- * ones in [Gtk], but `GtkFileChooserDialog` assumes that
+ * ones in [Gtk.ResponseType], but `GtkFileChooserDialog` assumes that
  * its “accept”-type action, e.g. an “Open” or “Save” button,
  * will have one of the following response codes:
  * - %GTK_RESPONSE_ACCEPT

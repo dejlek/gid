@@ -48,7 +48,7 @@ class Filter : ObjectG
    * of the filter should then check items again via
    * [Gtk.Filter.match].
    * Depending on the change parameter, not all items need to
-   * be changed, but only some. Refer to the [Gtk]
+   * be changed, but only some. Refer to the [Gtk.FilterChange]
    * documentation for details.
    * This function is intended for implementers of `GtkFilter`
    * subclasses and should not be called from other functions.
@@ -97,7 +97,7 @@ class Filter : ObjectG
    * [Gtk.Filter.match].
    * `GtkFilterListModel` handles this signal automatically.
    * Depending on the change parameter, not all items need
-   * to be checked, but only some. Refer to the [Gtk]
+   * to be checked, but only some. Refer to the [Gtk.FilterChange]
    * documentation for details.
    * Params
    *   change = how the filter changed

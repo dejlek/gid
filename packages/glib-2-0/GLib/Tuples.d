@@ -69,8 +69,7 @@ class Tuples
    */
   void* index(int index, int field)
   {
-    void* _retval;
-    _retval = g_tuples_index(cast(GTuples*)cPtr, index, field);
+    auto _retval = g_tuples_index(cast(GTuples*)cPtr, index, field);
     return _retval;
   }
 }

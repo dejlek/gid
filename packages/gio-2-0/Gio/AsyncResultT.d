@@ -101,8 +101,7 @@ template AsyncResultT()
    */
   override void* getUserData()
   {
-    void* _retval;
-    _retval = g_async_result_get_user_data(cast(GAsyncResult*)cPtr);
+    auto _retval = g_async_result_get_user_data(cast(GAsyncResult*)cPtr);
     return _retval;
   }
 

@@ -72,7 +72,7 @@ import cairo.FontOptions;
  * The geometry management system will query a widget hierarchy in
  * only one orientation at a time. When widgets are initially queried
  * for their minimum sizes it is generally done in two initial passes
- * in the [Gtk] chosen by the toplevel.
+ * in the [Gtk.SizeRequestMode] chosen by the toplevel.
  * For example, when queried in the normal %GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH mode:
  * First, the default minimum and natural width for each widget
  * in the interface will be computed using [Gtk.Widget.measure] with an
@@ -1628,7 +1628,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * state will be returned, that is, also based on parent insensitivity,
    * even if widget itself is sensitive.
    * Also note that if you are looking for a way to obtain the
-   * [Gtk] to pass to a [Gtk.StyleContext]
+   * [Gtk.StateFlags] to pass to a [Gtk.StyleContext]
    * method, you should look at [Gtk.StyleContext.getState].
    * Returns: The state flags for widget
    */
@@ -2694,7 +2694,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Sets how widget treats content that is drawn outside the
    * widget's content area.
-   * See the definition of [Gtk] for details.
+   * See the definition of [Gtk.Overflow] for details.
    * This setting is provided for widget implementations and
    * should not be used by application code.
    * The default value is %GTK_OVERFLOW_VISIBLE.

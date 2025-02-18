@@ -1096,6 +1096,18 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   }
 
   /**
+   * Provides a read-only pointer to the raw pixel data.
+   * This function allows skipping the implicit copy that must be made
+   * if [GdkPixbuf.Pixbuf.getPixels] is called on a read-only pixbuf.
+   * Returns: a read-only pointer to the raw pixel data
+   */
+  const(ubyte)* readPixels()
+  {
+    auto _retval = gdk_pixbuf_read_pixels(cast(PixbufC*)cPtr);
+    return _retval;
+  }
+
+  /**
    * Removes the key/value pair option attached to a `GdkPixbuf`.
    * Params:
    *   key = a nul-terminated string representing the key to remove.

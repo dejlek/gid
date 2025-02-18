@@ -9,7 +9,6 @@ import Gsk.Types;
 import Gsk.c.functions;
 import Gsk.c.types;
 import Pango.Font;
-import Pango.GlyphInfo;
 import Pango.GlyphString;
 
 /**
@@ -65,26 +64,6 @@ class TextNode : RenderNode
     PangoFont* _cretval;
     _cretval = gsk_text_node_get_font(cast(GskRenderNode*)cPtr);
     auto _retval = ObjectG.getDObject!Font(cast(PangoFont*)_cretval, No.Take);
-    return _retval;
-  }
-
-  /**
-   * Retrieves the glyph information in the node.
-   * Returns: the glyph information
-   */
-  GlyphInfo[] getGlyphs()
-  {
-    const(PangoGlyphInfo)* _cretval;
-    uint _cretlength;
-    _cretval = gsk_text_node_get_glyphs(cast(GskRenderNode*)cPtr, &_cretlength);
-    GlyphInfo[] _retval;
-
-    if (_cretval)
-    {
-      _retval = new GlyphInfo[_cretlength];
-      foreach (i; 0 .. _cretlength)
-        _retval[i] = new GlyphInfo(cast(void*)&_cretval[i], No.Take);
-    }
     return _retval;
   }
 

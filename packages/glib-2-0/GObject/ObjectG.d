@@ -5,7 +5,6 @@ import GObject.Binding;
 import GObject.Closure;
 import GObject.DClosure;
 import GObject.ParamSpec;
-import GObject.Parameter;
 import GObject.TypeInterface;
 import GObject.Types;
 import GObject.Value;
@@ -379,35 +378,6 @@ class ObjectG
     return retval;
   }
 
-  /**
-   * Creates a new instance of a #GObject subtype and sets its properties.
-   * Construction parameters $(LPAREN)see %G_PARAM_CONSTRUCT, %G_PARAM_CONSTRUCT_ONLY$(RPAREN)
-   * which are not explicitly specified are set to their default values.
-   * Params:
-   *   objectType = the type id of the #GObject subtype to instantiate
-   *   parameters = an array of #GParameter
-   * Returns: a new instance of
-   *   object_type
-
-   * Deprecated: Use [GObject.ObjectG.newWithProperties] instead.
-   *   deprecated. See #GParameter for more information.
-   */
-  static ObjectG newv(GType objectType, Parameter[] parameters)
-  {
-    ObjectC* _cretval;
-    uint _nParameters;
-    if (parameters)
-      _nParameters = cast(uint)parameters.length;
-
-    GParameter[] _tmpparameters;
-    foreach (obj; parameters)
-      _tmpparameters ~= obj.cInstance;
-    GParameter* _parameters = _tmpparameters.ptr;
-    _cretval = g_object_newv(objectType, _nParameters, _parameters);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
-    return _retval;
-  }
-
   static size_t compatControl(size_t what, void* data)
   {
     size_t _retval;
@@ -603,9 +573,8 @@ class ObjectG
    */
   void* getData(string key)
   {
-    void* _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = g_object_get_data(cast(ObjectC*)cPtr, _key);
+    auto _retval = g_object_get_data(cast(ObjectC*)cPtr, _key);
     return _retval;
   }
 
@@ -641,8 +610,7 @@ class ObjectG
    */
   void* getQdata(Quark quark)
   {
-    void* _retval;
-    _retval = g_object_get_qdata(cast(ObjectC*)cPtr, quark);
+    auto _retval = g_object_get_qdata(cast(ObjectC*)cPtr, quark);
     return _retval;
   }
 
@@ -815,9 +783,8 @@ class ObjectG
    */
   void* stealData(string key)
   {
-    void* _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = g_object_steal_data(cast(ObjectC*)cPtr, _key);
+    auto _retval = g_object_steal_data(cast(ObjectC*)cPtr, _key);
     return _retval;
   }
 
@@ -861,8 +828,7 @@ class ObjectG
    */
   void* stealQdata(Quark quark)
   {
-    void* _retval;
-    _retval = g_object_steal_qdata(cast(ObjectC*)cPtr, quark);
+    auto _retval = g_object_steal_qdata(cast(ObjectC*)cPtr, quark);
     return _retval;
   }
 

@@ -64,8 +64,7 @@ class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
    */
   void* getData()
   {
-    void* _retval;
-    _retval = g_memory_output_stream_get_data(cast(GMemoryOutputStream*)cPtr);
+    auto _retval = g_memory_output_stream_get_data(cast(GMemoryOutputStream*)cPtr);
     return _retval;
   }
 
@@ -129,8 +128,7 @@ class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
    */
   void* stealData()
   {
-    void* _retval;
-    _retval = g_memory_output_stream_steal_data(cast(GMemoryOutputStream*)cPtr);
+    auto _retval = g_memory_output_stream_steal_data(cast(GMemoryOutputStream*)cPtr);
     return _retval;
   }
 }

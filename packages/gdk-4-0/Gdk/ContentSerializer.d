@@ -114,8 +114,7 @@ class ContentSerializer : ObjectG, AsyncResult
    */
   void* getTaskData()
   {
-    void* _retval;
-    _retval = gdk_content_serializer_get_task_data(cast(GdkContentSerializer*)cPtr);
+    auto _retval = gdk_content_serializer_get_task_data(cast(GdkContentSerializer*)cPtr);
     return _retval;
   }
 
@@ -125,8 +124,7 @@ class ContentSerializer : ObjectG, AsyncResult
    */
   void* getUserData()
   {
-    void* _retval;
-    _retval = gdk_content_serializer_get_user_data(cast(GdkContentSerializer*)cPtr);
+    auto _retval = gdk_content_serializer_get_user_data(cast(GdkContentSerializer*)cPtr);
     return _retval;
   }
 

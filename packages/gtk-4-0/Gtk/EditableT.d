@@ -2,7 +2,6 @@ module Gtk.EditableT;
 
 public import Gtk.EditableIfaceProxy;
 public import GObject.DClosure;
-public import GObject.ObjectClass;
 public import GObject.ObjectG;
 public import GObject.ParamSpec;
 public import GObject.Value;
@@ -119,7 +118,6 @@ public import Gtk.c.types;
  */
 template EditableT()
 {
-
 
 
 

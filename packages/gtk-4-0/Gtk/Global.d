@@ -139,7 +139,7 @@ string acceleratorNameWithKeycode(Display display, uint acceleratorKey, uint key
  * the name is not the symbol, but the lowercase name, e.g. one would use
  * “`<Ctrl>minus`” instead of “`<Ctrl>-`”.
  * Modifiers are enclosed in angular brackets `<>`, and match the
- * [Gdk] mask:
+ * [Gdk.ModifierType] mask:
  * - `<Shift>` for `GDK_SHIFT_MASK`
  * - `<Ctrl>` for `GDK_CONTROL_MASK`
  * - `<Alt>` for `GDK_ALT_MASK`

@@ -7134,7 +7134,7 @@ struct GUnixPipe
  * parts, and return the parts; the difference between the two is that
  * [GLib.Uri.split] treats the ‘userinfo’ component of the URI as a
  * single element, while [GLib.Uri.splitWithUser] can $(LPAREN)depending on the
- * [GLib] you pass$(RPAREN) treat it as containing a username, password,
+ * [GLib.UriFlags] you pass$(RPAREN) treat it as containing a username, password,
  * and authentication parameters. Alternatively, [GLib.Uri.splitNetwork]
  * can be used when you are only interested in the components that are
  * needed to initiate a network connection to the service $(LPAREN)scheme,
@@ -7147,7 +7147,7 @@ struct GUnixPipe
  * [GLib.Uri.resolveRelative] takes two strings and returns a string,
  * and [GLib.Uri.parseRelative] takes a `GUri` and a string and returns a
  * `GUri`.
- * All of the parsing functions take a [GLib] argument describing
+ * All of the parsing functions take a [GLib.UriFlags] argument describing
  * exactly how to parse the URI; see the documentation for that type
  * for more details on the specific flags that you can pass. If you
  * need to choose different flags based on the type of URI, you can
@@ -7163,7 +7163,7 @@ struct GUnixPipe
  * Similarly, [GLib.Uri.build] and [GLib.Uri.buildWithUser] can be
  * used to construct a `GUri` from a set of component strings.
  * As with the parsing functions, the building functions take a
- * [GLib] argument. In particular, it is important to keep in mind
+ * [GLib.UriFlags] argument. In particular, it is important to keep in mind
  * whether the URI components you are using are already `%`-encoded. If so,
  * you must pass the `G_URI_FLAGS_ENCODED` flag.
  * ## `file://` URIs
@@ -7177,7 +7177,7 @@ struct GUnixPipe
  * Note that there is no `g_uri_equal $(LPAREN)$(RPAREN)` function, because comparing
  * URIs usefully requires scheme-specific knowledge that `GUri` does
  * not have. `GUri` can help with normalization if you use the various
- * encoded [GLib] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
+ * encoded [GLib.UriFlags] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
  * however it is not comprehensive.
  * For example, `data:,foo` and `data:;base64,Zm9v` resolve to the same
  * thing according to the `data:` URI specification which GLib does not

@@ -49,8 +49,7 @@ class Private
    */
   void* get()
   {
-    void* _retval;
-    _retval = g_private_get(cast(GPrivate*)cPtr);
+    auto _retval = g_private_get(cast(GPrivate*)cPtr);
     return _retval;
   }
 

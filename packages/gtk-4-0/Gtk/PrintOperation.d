@@ -939,7 +939,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
 
   /**
    * Emitted at between the various phases of the print operation.
-   * See [Gtk] for the phases that are being discriminated.
+   * See [Gtk.PrintStatus] for the phases that are being discriminated.
    * Use [Gtk.PrintOperation.getStatus] to find out the current
    * status.
    *   printOperation = the instance the signal is connected to

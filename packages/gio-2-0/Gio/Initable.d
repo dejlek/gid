@@ -2,9 +2,6 @@ module Gio.Initable;
 
 public import Gio.InitableIfaceProxy;
 import GLib.ErrorG;
-import GObject.ObjectG;
-import GObject.Parameter;
-import GObject.Types;
 import Gid.gid;
 import Gio.Cancellable;
 import Gio.Types;
@@ -41,40 +38,6 @@ interface Initable
   {
     import Gid.loader : gidSymbolNotFound;
     return cast(void function())g_initable_get_type != &gidSymbolNotFound ? g_initable_get_type() : cast(GType)0;
-  }
-
-  /**
-   * Helper function for constructing #GInitable object. This is
-   * similar to [GObject.ObjectG.newv] but also initializes the object
-   * and returns %NULL, setting an error on failure.
-   * Params:
-   *   objectType = a #GType supporting #GInitable.
-   *   parameters = the parameters to use to construct the object
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   * Returns: a newly allocated
-   *   #GObject, or %NULL on error
-
-   * Deprecated: Use [GObject.ObjectG.newWithProperties] and
-   *   [Gio.Initable.init_] instead. See #GParameter for more information.
-   */
-  static ObjectG newv(GType objectType, Parameter[] parameters, Cancellable cancellable)
-  {
-    ObjectC* _cretval;
-    uint _nParameters;
-    if (parameters)
-      _nParameters = cast(uint)parameters.length;
-
-    GParameter[] _tmpparameters;
-    foreach (obj; parameters)
-      _tmpparameters ~= obj.cInstance;
-    GParameter* _parameters = _tmpparameters.ptr;
-
-    GError *_err;
-    _cretval = g_initable_newv(objectType, _nParameters, _parameters, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
-    if (_err)
-      throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
-    return _retval;
   }
 
   /**

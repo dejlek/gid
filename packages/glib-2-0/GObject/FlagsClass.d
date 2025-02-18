@@ -1,7 +1,6 @@
 module GObject.FlagsClass;
 
 import GObject.FlagsValue;
-import GObject.TypeClass;
 import GObject.Types;
 import GObject.c.functions;
 import GObject.c.types;
@@ -29,11 +28,6 @@ class FlagsClass
   void* cPtr()
   {
     return cast(void*)&cInstance;
-  }
-
-  @property TypeClass gTypeClass()
-  {
-    return new TypeClass(cast(GTypeClass*)&(cast(GFlagsClass*)cPtr).gTypeClass);
   }
 
   @property uint mask()

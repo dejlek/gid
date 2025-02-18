@@ -60,12 +60,12 @@ class SegmentProperties : Boxed
     (cast(hb_segment_properties_t*)cPtr).script = cast(hb_script_t)propval;
   }
 
-  @property Language language()
+  @property language_t language()
   {
     return (cast(hb_segment_properties_t*)cPtr).language;
   }
 
-  @property void language(Language propval)
+  @property void language(language_t propval)
   {
     (cast(hb_segment_properties_t*)cPtr).language = propval;
   }

@@ -680,8 +680,7 @@ class Task : ObjectG, AsyncResult
    */
   void* getSourceTag()
   {
-    void* _retval;
-    _retval = g_task_get_source_tag(cast(GTask*)cPtr);
+    auto _retval = g_task_get_source_tag(cast(GTask*)cPtr);
     return _retval;
   }
 
@@ -691,8 +690,7 @@ class Task : ObjectG, AsyncResult
    */
   void* getTaskData()
   {
-    void* _retval;
-    _retval = g_task_get_task_data(cast(GTask*)cPtr);
+    auto _retval = g_task_get_task_data(cast(GTask*)cPtr);
     return _retval;
   }
 
@@ -754,9 +752,8 @@ class Task : ObjectG, AsyncResult
    */
   void* propagatePointer()
   {
-    void* _retval;
     GError *_err;
-    _retval = g_task_propagate_pointer(cast(GTask*)cPtr, &_err);
+    auto _retval = g_task_propagate_pointer(cast(GTask*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

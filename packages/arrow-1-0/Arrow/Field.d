@@ -64,9 +64,8 @@ class Field : ObjectG
 
   void* export_()
   {
-    void* _retval;
     GError *_err;
-    _retval = garrow_field_export(cast(GArrowField*)cPtr, &_err);
+    auto _retval = garrow_field_export(cast(GArrowField*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

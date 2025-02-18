@@ -46,9 +46,8 @@ class DataType : ObjectG
 
   void* export_()
   {
-    void* _retval;
     GError *_err;
-    _retval = garrow_data_type_export(cast(GArrowDataType*)cPtr, &_err);
+    auto _retval = garrow_data_type_export(cast(GArrowDataType*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

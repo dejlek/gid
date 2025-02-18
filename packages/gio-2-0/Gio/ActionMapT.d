@@ -4,7 +4,6 @@ public import Gio.ActionMapIfaceProxy;
 public import GObject.ObjectG;
 public import Gid.gid;
 public import Gio.Action;
-public import Gio.ActionEntry;
 public import Gio.ActionT;
 public import Gio.Types;
 public import Gio.c.functions;
@@ -38,56 +37,6 @@ template ActionMapT()
   }
 
   /**
-   * A convenience function for creating multiple #GSimpleAction instances
-   * and adding them to a #GActionMap.
-   * Each action is constructed as per one #GActionEntry.
-   * |[<!-- language\="C" -->
-   * static void
-   * activate_quit $(LPAREN)GSimpleAction *simple,
-   * GVariant      *parameter,
-   * gpointer       user_data$(RPAREN)
-   * {
-   * exit $(LPAREN)0$(RPAREN);
-   * }
-   * static void
-   * activate_print_string $(LPAREN)GSimpleAction *simple,
-   * GVariant      *parameter,
-   * gpointer       user_data$(RPAREN)
-   * {
-   * g_print $(LPAREN)"%s\n", g_variant_get_string $(LPAREN)parameter, NULL$(RPAREN)$(RPAREN);
-   * }
-   * static GActionGroup *
-   * create_action_group $(LPAREN)void$(RPAREN)
-   * {
-   * const GActionEntry entries[] \= {
-   * { "quit",         activate_quit              },
-   * { "print-string", activate_print_string, "s" }
-   * };
-   * GSimpleActionGroup *group;
-   * group \= g_simple_action_group_new $(LPAREN)$(RPAREN);
-   * g_action_map_add_action_entries $(LPAREN)G_ACTION_MAP $(LPAREN)group$(RPAREN), entries, G_N_ELEMENTS $(LPAREN)entries$(RPAREN), NULL$(RPAREN);
-   * return G_ACTION_GROUP $(LPAREN)group$(RPAREN);
-   * }
-   * ]|
-   * Params:
-   *   entries = a pointer to
-   *     the first item in an array of #GActionEntry structs
-   *   userData = the user data for signal connections
-   */
-  override void addActionEntries(ActionEntry[] entries, void* userData)
-  {
-    int _nEntries;
-    if (entries)
-      _nEntries = cast(int)entries.length;
-
-    GActionEntry[] _tmpentries;
-    foreach (obj; entries)
-      _tmpentries ~= obj.cInstance;
-    const(GActionEntry)* _entries = _tmpentries.ptr;
-    g_action_map_add_action_entries(cast(GActionMap*)cPtr, _entries, _nEntries, userData);
-  }
-
-  /**
    * Looks up the action with the name action_name in action_map.
    * If no such action exists, returns %NULL.
    * Params:
@@ -113,41 +62,5 @@ template ActionMapT()
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_map_remove_action(cast(GActionMap*)cPtr, _actionName);
-  }
-
-  /**
-   * Remove actions from a #GActionMap. This is meant as the reverse of
-   * [Gio.ActionMap.addActionEntries].
-   * |[<!-- language\="C" -->
-   * static const GActionEntry entries[] \= {
-   * { "quit",         activate_quit              },
-   * { "print-string", activate_print_string, "s" }
-   * };
-   * void
-   * add_actions $(LPAREN)GActionMap *map$(RPAREN)
-   * {
-   * g_action_map_add_action_entries $(LPAREN)map, entries, G_N_ELEMENTS $(LPAREN)entries$(RPAREN), NULL$(RPAREN);
-   * }
-   * void
-   * remove_actions $(LPAREN)GActionMap *map$(RPAREN)
-   * {
-   * g_action_map_remove_action_entries $(LPAREN)map, entries, G_N_ELEMENTS $(LPAREN)entries$(RPAREN)$(RPAREN);
-   * }
-   * ]|
-   * Params:
-   *   entries = a pointer to
-   *     the first item in an array of #GActionEntry structs
-   */
-  override void removeActionEntries(ActionEntry[] entries)
-  {
-    int _nEntries;
-    if (entries)
-      _nEntries = cast(int)entries.length;
-
-    GActionEntry[] _tmpentries;
-    foreach (obj; entries)
-      _tmpentries ~= obj.cInstance;
-    const(GActionEntry)* _entries = _tmpentries.ptr;
-    g_action_map_remove_action_entries(cast(GActionMap*)cPtr, _entries, _nEntries);
   }
 }

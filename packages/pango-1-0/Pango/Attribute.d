@@ -53,16 +53,6 @@ class Attribute : Boxed
     return getType();
   }
 
-  @property AttrClass klass()
-  {
-    return *(cast(PangoAttribute*)cPtr).klass;
-  }
-
-  @property void klass(AttrClass propval)
-  {
-    (cast(PangoAttribute*)cPtr).klass = &propval;
-  }
-
   @property uint startIndex()
   {
     return (cast(PangoAttribute*)cPtr).startIndex;
@@ -245,18 +235,5 @@ class Attribute : Boxed
     bool _retval;
     _retval = pango_attribute_equal(cast(PangoAttribute*)cPtr, attr2 ? cast(PangoAttribute*)attr2.cPtr(No.Dup) : null);
     return _retval;
-  }
-
-  /**
-   * Initializes attr's klass to klass, it's start_index to
-   * %PANGO_ATTR_INDEX_FROM_TEXT_BEGINNING and end_index to
-   * %PANGO_ATTR_INDEX_TO_TEXT_END such that the attribute applies
-   * to the entire text by default.
-   * Params:
-   *   klass = a `PangoAttrClass`
-   */
-  void init_(AttrClass klass)
-  {
-    pango_attribute_init(cast(PangoAttribute*)cPtr, &klass);
   }
 }

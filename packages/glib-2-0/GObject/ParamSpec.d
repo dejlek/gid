@@ -135,8 +135,7 @@ class ParamSpec
    */
   void* getQdata(Quark quark)
   {
-    void* _retval;
-    _retval = g_param_spec_get_qdata(cast(GParamSpec*)cPtr, quark);
+    auto _retval = g_param_spec_get_qdata(cast(GParamSpec*)cPtr, quark);
     return _retval;
   }
 
@@ -200,8 +199,7 @@ class ParamSpec
    */
   void* stealQdata(Quark quark)
   {
-    void* _retval;
-    _retval = g_param_spec_steal_qdata(cast(GParamSpec*)cPtr, quark);
+    auto _retval = g_param_spec_steal_qdata(cast(GParamSpec*)cPtr, quark);
     return _retval;
   }
 }

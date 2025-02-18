@@ -27,15 +27,13 @@ class MemChunk
 
   void* alloc()
   {
-    void* _retval;
-    _retval = g_mem_chunk_alloc(cast(GMemChunk*)cPtr);
+    auto _retval = g_mem_chunk_alloc(cast(GMemChunk*)cPtr);
     return _retval;
   }
 
   void* alloc0()
   {
-    void* _retval;
-    _retval = g_mem_chunk_alloc0(cast(GMemChunk*)cPtr);
+    auto _retval = g_mem_chunk_alloc0(cast(GMemChunk*)cPtr);
     return _retval;
   }
 

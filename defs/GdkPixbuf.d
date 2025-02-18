@@ -24,5 +24,3 @@
 //# Set basic parameters to out
 //!set callback[PixbufModuleSizeFunc].parameters.parameter[width][direction] out
 //!set callback[PixbufModuleSizeFunc].parameters.parameter[height][direction] out
-//!set record[PixbufAnimationClass].field[get_size].callback[get_size].parameters.parameter[width][direction] out
-//!set record[PixbufAnimationClass].field[get_size].callback[get_size].parameters.parameter[height][direction] out

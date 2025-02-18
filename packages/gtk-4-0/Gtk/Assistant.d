@@ -31,7 +31,7 @@ import Gtk.c.types;
  * through the pages, and controls the page flow to collect the data needed
  * for the operation.
  * `GtkAssistant` handles which buttons to show and to make sensitive based
- * on page sequence knowledge and the [Gtk] of each
+ * on page sequence knowledge and the [Gtk.AssistantPageType] of each
  * page in addition to state information like the *completed* and *committed*
  * page statuses.
  * If you have a case that doesn’t quite fit in `GtkAssistant`s way of

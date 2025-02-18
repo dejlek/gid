@@ -50,7 +50,7 @@ class Sorter : ObjectG
    * [Gtk.Sorter.compare].
    * Depending on the change parameter, it may be possible to
    * update the sort order without a full resorting. Refer to
-   * the [Gtk] documentation for details.
+   * the [Gtk.SorterChange] documentation for details.
    * This function is intended for implementers of `GtkSorter`
    * subclasses and should not be called from other functions.
    * Params:
@@ -88,7 +88,7 @@ class Sorter : ObjectG
 
   /**
    * Gets the order that self conforms to.
-   * See [Gtk] for details
+   * See [Gtk.SorterOrder] for details
    * of the possible return values.
    * This function is intended to allow optimizations.
    * Returns: The order
@@ -108,7 +108,7 @@ class Sorter : ObjectG
    * [Gtk.SortListModel] handles this signal automatically.
    * Depending on the change parameter, it may be possible to update
    * the sort order without a full resorting. Refer to the
-   * [Gtk] documentation for details.
+   * [Gtk.SorterChange] documentation for details.
    * Params
    *   change = how the sorter changed
    *   sorter = the instance the signal is connected to

@@ -92,8 +92,7 @@ class AsyncQueue
    */
   void* pop()
   {
-    void* _retval;
-    _retval = g_async_queue_pop(cast(GAsyncQueue*)cPtr);
+    auto _retval = g_async_queue_pop(cast(GAsyncQueue*)cPtr);
     return _retval;
   }
 
@@ -105,8 +104,7 @@ class AsyncQueue
    */
   void* popUnlocked()
   {
-    void* _retval;
-    _retval = g_async_queue_pop_unlocked(cast(GAsyncQueue*)cPtr);
+    auto _retval = g_async_queue_pop_unlocked(cast(GAsyncQueue*)cPtr);
     return _retval;
   }
 
@@ -330,8 +328,7 @@ class AsyncQueue
    */
   void* timedPop(TimeVal endTime)
   {
-    void* _retval;
-    _retval = g_async_queue_timed_pop(cast(GAsyncQueue*)cPtr, endTime ? cast(GTimeVal*)endTime.cPtr : null);
+    auto _retval = g_async_queue_timed_pop(cast(GAsyncQueue*)cPtr, endTime ? cast(GTimeVal*)endTime.cPtr : null);
     return _retval;
   }
 
@@ -351,8 +348,7 @@ class AsyncQueue
    */
   void* timedPopUnlocked(TimeVal endTime)
   {
-    void* _retval;
-    _retval = g_async_queue_timed_pop_unlocked(cast(GAsyncQueue*)cPtr, endTime ? cast(GTimeVal*)endTime.cPtr : null);
+    auto _retval = g_async_queue_timed_pop_unlocked(cast(GAsyncQueue*)cPtr, endTime ? cast(GTimeVal*)endTime.cPtr : null);
     return _retval;
   }
 
@@ -367,8 +363,7 @@ class AsyncQueue
    */
   void* timeoutPop(ulong timeout)
   {
-    void* _retval;
-    _retval = g_async_queue_timeout_pop(cast(GAsyncQueue*)cPtr, timeout);
+    auto _retval = g_async_queue_timeout_pop(cast(GAsyncQueue*)cPtr, timeout);
     return _retval;
   }
 
@@ -384,8 +379,7 @@ class AsyncQueue
    */
   void* timeoutPopUnlocked(ulong timeout)
   {
-    void* _retval;
-    _retval = g_async_queue_timeout_pop_unlocked(cast(GAsyncQueue*)cPtr, timeout);
+    auto _retval = g_async_queue_timeout_pop_unlocked(cast(GAsyncQueue*)cPtr, timeout);
     return _retval;
   }
 
@@ -397,8 +391,7 @@ class AsyncQueue
    */
   void* tryPop()
   {
-    void* _retval;
-    _retval = g_async_queue_try_pop(cast(GAsyncQueue*)cPtr);
+    auto _retval = g_async_queue_try_pop(cast(GAsyncQueue*)cPtr);
     return _retval;
   }
 
@@ -411,8 +404,7 @@ class AsyncQueue
    */
   void* tryPopUnlocked()
   {
-    void* _retval;
-    _retval = g_async_queue_try_pop_unlocked(cast(GAsyncQueue*)cPtr);
+    auto _retval = g_async_queue_try_pop_unlocked(cast(GAsyncQueue*)cPtr);
     return _retval;
   }
 

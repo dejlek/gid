@@ -30,8 +30,7 @@ class TypeInstance
 
   void* getPrivate(GType privateType)
   {
-    void* _retval;
-    _retval = g_type_instance_get_private(cast(GTypeInstance*)cPtr, privateType);
+    auto _retval = g_type_instance_get_private(cast(GTypeInstance*)cPtr, privateType);
     return _retval;
   }
 }

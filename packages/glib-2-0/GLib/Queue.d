@@ -188,8 +188,7 @@ class Queue
    */
   void* peekHead()
   {
-    void* _retval;
-    _retval = g_queue_peek_head(cast(GQueue*)cPtr);
+    auto _retval = g_queue_peek_head(cast(GQueue*)cPtr);
     return _retval;
   }
 
@@ -202,8 +201,7 @@ class Queue
    */
   void* peekNth(uint n)
   {
-    void* _retval;
-    _retval = g_queue_peek_nth(cast(GQueue*)cPtr, n);
+    auto _retval = g_queue_peek_nth(cast(GQueue*)cPtr, n);
     return _retval;
   }
 
@@ -214,8 +212,7 @@ class Queue
    */
   void* peekTail()
   {
-    void* _retval;
-    _retval = g_queue_peek_tail(cast(GQueue*)cPtr);
+    auto _retval = g_queue_peek_tail(cast(GQueue*)cPtr);
     return _retval;
   }
 
@@ -226,8 +223,7 @@ class Queue
    */
   void* popHead()
   {
-    void* _retval;
-    _retval = g_queue_pop_head(cast(GQueue*)cPtr);
+    auto _retval = g_queue_pop_head(cast(GQueue*)cPtr);
     return _retval;
   }
 
@@ -239,8 +235,7 @@ class Queue
    */
   void* popNth(uint n)
   {
-    void* _retval;
-    _retval = g_queue_pop_nth(cast(GQueue*)cPtr, n);
+    auto _retval = g_queue_pop_nth(cast(GQueue*)cPtr, n);
     return _retval;
   }
 
@@ -251,8 +246,7 @@ class Queue
    */
   void* popTail()
   {
-    void* _retval;
-    _retval = g_queue_pop_tail(cast(GQueue*)cPtr);
+    auto _retval = g_queue_pop_tail(cast(GQueue*)cPtr);
     return _retval;
   }
 

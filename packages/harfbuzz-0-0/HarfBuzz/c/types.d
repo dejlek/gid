@@ -4690,14 +4690,6 @@ struct hb_glyph_position_t
 struct hb_face_t;
 
 /**
- * Data type for languages. Each #hb_language_t corresponds to a BCP 47
- * language tag.
- */
-alias hb_language_t = hb_language_t_st*;
-
-struct hb_language_t_st;
-
-/**
  * Data type for holding integer-to-integer hash maps.
  */
 struct hb_map_t;
@@ -5015,6 +5007,14 @@ struct hb_variation_t
    */
   float value;
 }
+
+/**
+ * Data type for languages. Each #hb_language_t corresponds to a BCP 47
+ * language tag.
+ */
+alias hb_language_t = hb_language_t_st*;
+
+struct hb_language_t_st;
 
 alias extern(C) hb_bool_t function(hb_buffer_t* buffer, hb_font_t* font, const(char)* message, void* userData) hb_buffer_message_func_t;
 

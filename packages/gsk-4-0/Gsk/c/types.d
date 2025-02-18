@@ -762,7 +762,7 @@ struct GskDebugNode;
 
 /**
  * A render node filling the area given by [Gsk.Path]
- * and [Gsk] with the child node.
+ * and [Gsk.FillRule] with the child node.
  */
 struct GskFillNode;
 

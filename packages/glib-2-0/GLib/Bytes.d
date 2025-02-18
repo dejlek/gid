@@ -155,8 +155,7 @@ class Bytes : Boxed
    */
   const(void)* getRegion(size_t elementSize, size_t offset, size_t nElements)
   {
-    const(void)* _retval;
-    _retval = g_bytes_get_region(cast(GBytes*)cPtr, elementSize, offset, nElements);
+    auto _retval = g_bytes_get_region(cast(GBytes*)cPtr, elementSize, offset, nElements);
     return _retval;
   }
 

@@ -27,7 +27,7 @@ public import Gio.c.types;
  * should be profiled for your application. `malloc_trim$(LPAREN)$(RPAREN)`, for example, may
  * make future heap allocations slower $(LPAREN)due to releasing cached heap pages back
  * to the kernel$(RPAREN).
- * See [Gio] for details on the various warning
+ * See [Gio.MemoryMonitorWarningLevel] for details on the various warning
  * levels.
  * ```c
  * static void

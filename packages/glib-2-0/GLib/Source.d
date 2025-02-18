@@ -117,8 +117,7 @@ class Source : Boxed
    */
   void* addUnixFd(int fd, IOCondition events)
   {
-    void* _retval;
-    _retval = g_source_add_unix_fd(cast(GSource*)cPtr, fd, events);
+    auto _retval = g_source_add_unix_fd(cast(GSource*)cPtr, fd, events);
     return _retval;
   }
 

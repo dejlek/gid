@@ -6,7 +6,6 @@ import Gid.gid;
 import Gio.ActionGroup;
 import Gio.ActionGroupT;
 import Gtk.EventController;
-import Gtk.PadActionEntry;
 import Gtk.Types;
 import Gtk.c.functions;
 import Gtk.c.types;
@@ -115,25 +114,5 @@ class PadController : EventController
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _actionName = actionName.toCString(No.Alloc);
     gtk_pad_controller_set_action(cast(GtkPadController*)cPtr, type, index, mode, _label, _actionName);
-  }
-
-  /**
-   * A convenience function to add a group of action entries on
-   * controller.
-   * See [Gtk.PadActionEntry] and [Gtk.PadController.setAction].
-   * Params:
-   *   entries = the action entries to set on controller
-   */
-  void setActionEntries(PadActionEntry[] entries)
-  {
-    int _nEntries;
-    if (entries)
-      _nEntries = cast(int)entries.length;
-
-    GtkPadActionEntry[] _tmpentries;
-    foreach (obj; entries)
-      _tmpentries ~= obj.cInstance;
-    const(GtkPadActionEntry)* _entries = _tmpentries.ptr;
-    gtk_pad_controller_set_action_entries(cast(GtkPadController*)cPtr, _entries, _nEntries);
   }
 }

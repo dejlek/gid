@@ -296,8 +296,7 @@ class Pattern : Boxed
    */
   void* getUserData(UserDataKey key)
   {
-    void* _retval;
-    _retval = cairo_pattern_get_user_data(cast(cairo_pattern_t*)cPtr, &key);
+    auto _retval = cairo_pattern_get_user_data(cast(cairo_pattern_t*)cPtr, &key);
     return _retval;
   }
 

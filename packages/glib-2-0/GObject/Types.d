@@ -4,9 +4,7 @@ import GObject.Binding;
 import GObject.Closure;
 import GObject.ObjectG;
 import GObject.ParamSpec;
-import GObject.TypeClass;
 import GObject.TypeInfoG;
-import GObject.TypeInstance;
 import GObject.TypeInterface;
 import GObject.TypePlugin;
 import GObject.TypePluginT;
@@ -40,17 +38,12 @@ alias TypeCValue = GTypeCValue;
 alias TypeFundamentalInfo = GTypeFundamentalInfo;
 
 // Callbacks
-alias BaseFinalizeFunc = void delegate(TypeClass gClass);
-alias BaseInitFunc = void delegate(TypeClass gClass);
 alias BindingTransformFunc = bool delegate(Binding binding, Value fromValue, Value toValue);
 alias BoxedCopyFunc = void* delegate(void* boxed);
 alias BoxedFreeFunc = void delegate(void* boxed);
 alias Callback = void delegate();
-alias ClassFinalizeFunc = void delegate(TypeClass gClass);
-alias ClassInitFunc = void delegate(TypeClass gClass);
 alias ClosureMarshal = void delegate(Closure closure, Value returnValue, Value[] paramValues, void* invocationHint);
 alias ClosureNotify = void delegate(Closure closure);
-alias InstanceInitFunc = void delegate(TypeInstance instance, TypeClass gClass);
 alias InterfaceFinalizeFunc = void delegate(TypeInterface gIface);
 alias InterfaceInitFunc = void delegate(TypeInterface gIface);
 alias ObjectFinalizeFunc = void delegate(ObjectG object);
@@ -59,7 +52,6 @@ alias ObjectSetPropertyFunc = void delegate(ObjectG object, uint propertyId, Val
 alias SignalAccumulator = bool delegate(SignalInvocationHint ihint, Value returnAccu, Value handlerReturn);
 alias SignalEmissionHook = bool delegate(SignalInvocationHint ihint, Value[] paramValues);
 alias ToggleNotify = void delegate(ObjectG object, bool isLastRef);
-alias TypeClassCacheFunc = bool delegate(TypeClass gClass);
 alias TypeInterfaceCheckFunc = void delegate(TypeInterface gIface);
 alias TypePluginCompleteInterfaceInfo = void delegate(TypePlugin plugin, GType instanceType, GType interfaceType, InterfaceInfo info);
 alias TypePluginCompleteTypeInfo = void delegate(TypePlugin plugin, GType gType, TypeInfoG info, TypeValueTable valueTable);

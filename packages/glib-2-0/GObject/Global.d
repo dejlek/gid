@@ -12,7 +12,6 @@ import GObject.FlagsValue;
 import GObject.ObjectG;
 import GObject.ParamSpec;
 import GObject.SignalQuery;
-import GObject.TypeClass;
 import GObject.TypeInfoG;
 import GObject.TypeInstance;
 import GObject.TypeInterface;
@@ -68,8 +67,7 @@ void setDummyCallback(Source source)
  */
 void* boxedCopy(GType boxedType, const(void)* srcBoxed)
 {
-  void* _retval;
-  _retval = g_boxed_copy(boxedType, srcBoxed);
+  auto _retval = g_boxed_copy(boxedType, srcBoxed);
   return _retval;
 }
 
@@ -1654,13 +1652,6 @@ void typeAddInterfaceStatic(GType instanceType, GType interfaceType, InterfaceIn
   g_type_add_interface_static(instanceType, interfaceType, &info);
 }
 
-bool typeCheckClassIsA(TypeClass gClass, GType isAType)
-{
-  bool _retval;
-  _retval = g_type_check_class_is_a(gClass ? cast(GTypeClass*)gClass.cPtr : null, isAType);
-  return _retval;
-}
-
 /**
  * Private helper function to aid implementation of the
  * G_TYPE_CHECK_INSTANCE$(LPAREN)$(RPAREN) macro.
@@ -1926,8 +1917,7 @@ TypePlugin typeGetPlugin(GType type)
  */
 void* typeGetQdata(GType type, Quark quark)
 {
-  void* _retval;
-  _retval = g_type_get_qdata(type, quark);
+  auto _retval = g_type_get_qdata(type, quark);
   return _retval;
 }
 
@@ -2028,14 +2018,6 @@ string typeName(GType type)
 {
   const(char)* _cretval;
   _cretval = g_type_name(type);
-  string _retval = _cretval.fromCString(No.Free);
-  return _retval;
-}
-
-string typeNameFromClass(TypeClass gClass)
-{
-  const(char)* _cretval;
-  _cretval = g_type_name_from_class(gClass ? cast(GTypeClass*)gClass.cPtr : null);
   string _retval = _cretval.fromCString(No.Free);
   return _retval;
 }

@@ -34,8 +34,7 @@ class TreeNode
    */
   void* key()
   {
-    void* _retval;
-    _retval = g_tree_node_key(cast(GTreeNode*)cPtr);
+    auto _retval = g_tree_node_key(cast(GTreeNode*)cPtr);
     return _retval;
   }
 
@@ -71,8 +70,7 @@ class TreeNode
    */
   void* value()
   {
-    void* _retval;
-    _retval = g_tree_node_value(cast(GTreeNode*)cPtr);
+    auto _retval = g_tree_node_value(cast(GTreeNode*)cPtr);
     return _retval;
   }
 }

@@ -430,8 +430,7 @@ class Sequence
    */
   static void* get(SequenceIter iter)
   {
-    void* _retval;
-    _retval = g_sequence_get(iter ? cast(GSequenceIter*)iter.cPtr : null);
+    auto _retval = g_sequence_get(iter ? cast(GSequenceIter*)iter.cPtr : null);
     return _retval;
   }
 

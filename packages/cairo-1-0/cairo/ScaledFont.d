@@ -144,8 +144,7 @@ class ScaledFont : Boxed
    */
   void* getUserData(UserDataKey key)
   {
-    void* _retval;
-    _retval = cairo_scaled_font_get_user_data(cast(cairo_scaled_font_t*)cPtr, &key);
+    auto _retval = cairo_scaled_font_get_user_data(cast(cairo_scaled_font_t*)cPtr, &key);
     return _retval;
   }
 

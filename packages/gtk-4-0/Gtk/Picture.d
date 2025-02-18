@@ -41,7 +41,7 @@ import Gtk.c.types;
  * if you want to display a fixed-size image, such as an icon.
  * ## Sizing the paintable
  * You can influence how the paintable is displayed inside the `GtkPicture`
- * by changing property@Gtk.Picture:content-fit. See [Gtk]
+ * by changing property@Gtk.Picture:content-fit. See [Gtk.ContentFit]
  * for details. property@Gtk.Picture:can-shrink can be unset to make sure
  * that paintables are never made smaller than their ideal size - but
  * be careful if you do not know the size of the paintable in use $(LPAREN)like
@@ -199,7 +199,7 @@ class Picture : Widget
 
   /**
    * Returns the fit mode for the content of the `GtkPicture`.
-   * See [Gtk] for details.
+   * See [Gtk.ContentFit] for details.
    * Returns: the content fit mode
    */
   ContentFit getContentFit()
@@ -283,7 +283,7 @@ class Picture : Widget
 
   /**
    * Sets how the content should be resized to fit the `GtkPicture`.
-   * See [Gtk] for details.
+   * See [Gtk.ContentFit] for details.
    * Params:
    *   contentFit = the content fit mode
    */

@@ -8,7 +8,7 @@ import Pango.c.types;
 
 /**
  * A `PangoCoverage` structure is a map from Unicode characters
- * to [Pango] values.
+ * to [Pango.CoverageLevel] values.
  * It is often necessary in Pango to determine if a particular
  * font can represent a particular character, and also how well
  * it can represent that character. The `PangoCoverage` is a data

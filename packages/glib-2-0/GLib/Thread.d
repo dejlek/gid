@@ -139,8 +139,7 @@ class Thread : Boxed
    */
   void* join()
   {
-    void* _retval;
-    _retval = g_thread_join(cast(GThread*)cPtr);
+    auto _retval = g_thread_join(cast(GThread*)cPtr);
     return _retval;
   }
 

@@ -44,12 +44,8 @@ alias Weight = PangoWeight;
 alias WrapMode = PangoWrapMode;
 
 // Structs
-alias AttrClass = PangoAttrClass;
-alias ContextClass = PangoContextClass*;
-alias FontsetSimpleClass = PangoFontsetSimpleClass*;
 alias GlyphGeometry = PangoGlyphGeometry;
 alias GlyphVisAttr = PangoGlyphVisAttr;
-alias LayoutClass = PangoLayoutClass*;
 alias LogAttr = PangoLogAttr;
 alias Rectangle = PangoRectangle;
 alias RendererPrivate = PangoRendererPrivate*;

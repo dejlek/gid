@@ -123,8 +123,7 @@ class MarkupParseContext : Boxed
    */
   void* getUserData()
   {
-    void* _retval;
-    _retval = g_markup_parse_context_get_user_data(cast(GMarkupParseContext*)cPtr);
+    auto _retval = g_markup_parse_context_get_user_data(cast(GMarkupParseContext*)cPtr);
     return _retval;
   }
 
@@ -170,8 +169,7 @@ class MarkupParseContext : Boxed
    */
   void* pop()
   {
-    void* _retval;
-    _retval = g_markup_parse_context_pop(cast(GMarkupParseContext*)cPtr);
+    auto _retval = g_markup_parse_context_pop(cast(GMarkupParseContext*)cPtr);
     return _retval;
   }
 

@@ -217,7 +217,7 @@ class AboutDialog : Window
 
   /**
    * Retrieves the license type.
-   * Returns: a [Gtk] value
+   * Returns: a [Gtk.License] value
    */
   License getLicenseType()
   {

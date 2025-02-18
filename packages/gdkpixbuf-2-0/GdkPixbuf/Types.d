@@ -18,9 +18,6 @@ alias PixbufError = GdkPixbufError;
 alias PixbufFormatFlags = GdkPixbufFormatFlags;
 alias PixbufRotation = GdkPixbufRotation;
 
-// Structs
-alias PixbufSimpleAnimClass = GdkPixbufSimpleAnimClass*;
-
 // Callbacks
 alias PixbufModuleFillInfoFunc = void delegate(PixbufFormat info);
 alias PixbufModuleFillVtableFunc = void delegate(PixbufModule module_);

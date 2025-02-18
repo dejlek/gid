@@ -15,12 +15,10 @@ import Graphene.Rect;
 import Graphene.Size;
 import Graphene.Vec3;
 import Graphene.Vec4;
-import Gsk.ColorStop;
 import Gsk.GLShader;
 import Gsk.Path;
 import Gsk.RenderNode;
 import Gsk.RoundedRect;
-import Gsk.Shadow;
 import Gsk.Stroke;
 import Gsk.Transform;
 import Gsk.Types;
@@ -127,28 +125,6 @@ class Snapshot : DGdkSnapshot
   }
 
   /**
-   * Appends a conic gradient node with the given stops to snapshot.
-   * Params:
-   *   bounds = the rectangle to render the gradient into
-   *   center = the center point of the conic gradient
-   *   rotation = the clockwise rotation in degrees of the starting angle.
-   *     0 means the starting angle is the top.
-   *   stops = the color stops defining the gradient
-   */
-  void appendConicGradient(Rect bounds, Point center, float rotation, ColorStop[] stops)
-  {
-    size_t _nStops;
-    if (stops)
-      _nStops = cast(size_t)stops.length;
-
-    GskColorStop[] _tmpstops;
-    foreach (obj; stops)
-      _tmpstops ~= obj.cInstance;
-    const(GskColorStop)* _stops = _tmpstops.ptr;
-    gtk_snapshot_append_conic_gradient(cast(GtkSnapshot*)cPtr, bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, center ? cast(graphene_point_t*)center.cPtr(No.Dup) : null, rotation, _stops, _nStops);
-  }
-
-  /**
    * A convenience method to fill a path with a color.
    * See [Gtk.Snapshot.pushFill] if you need
    * to fill a path with more complex content than
@@ -184,27 +160,6 @@ class Snapshot : DGdkSnapshot
   }
 
   /**
-   * Appends a linear gradient node with the given stops to snapshot.
-   * Params:
-   *   bounds = the rectangle to render the linear gradient into
-   *   startPoint = the point at which the linear gradient will begin
-   *   endPoint = the point at which the linear gradient will finish
-   *   stops = the color stops defining the gradient
-   */
-  void appendLinearGradient(Rect bounds, Point startPoint, Point endPoint, ColorStop[] stops)
-  {
-    size_t _nStops;
-    if (stops)
-      _nStops = cast(size_t)stops.length;
-
-    GskColorStop[] _tmpstops;
-    foreach (obj; stops)
-      _tmpstops ~= obj.cInstance;
-    const(GskColorStop)* _stops = _tmpstops.ptr;
-    gtk_snapshot_append_linear_gradient(cast(GtkSnapshot*)cPtr, bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, startPoint ? cast(graphene_point_t*)startPoint.cPtr(No.Dup) : null, endPoint ? cast(graphene_point_t*)endPoint.cPtr(No.Dup) : null, _stops, _nStops);
-  }
-
-  /**
    * Appends node to the current render node of snapshot,
    * without changing the current node.
    * If snapshot does not have a current node yet, node
@@ -230,75 +185,6 @@ class Snapshot : DGdkSnapshot
   void appendOutsetShadow(RoundedRect outline, RGBA color, float dx, float dy, float spread, float blurRadius)
   {
     gtk_snapshot_append_outset_shadow(cast(GtkSnapshot*)cPtr, outline ? cast(GskRoundedRect*)outline.cPtr : null, color ? cast(GdkRGBA*)color.cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
-  }
-
-  /**
-   * Appends a radial gradient node with the given stops to snapshot.
-   * Params:
-   *   bounds = the rectangle to render the readial gradient into
-   *   center = the center point for the radial gradient
-   *   hradius = the horizontal radius
-   *   vradius = the vertical radius
-   *   start = the start position $(LPAREN)on the horizontal axis$(RPAREN)
-   *   end = the end position $(LPAREN)on the horizontal axis$(RPAREN)
-   *   stops = the color stops defining the gradient
-   */
-  void appendRadialGradient(Rect bounds, Point center, float hradius, float vradius, float start, float end, ColorStop[] stops)
-  {
-    size_t _nStops;
-    if (stops)
-      _nStops = cast(size_t)stops.length;
-
-    GskColorStop[] _tmpstops;
-    foreach (obj; stops)
-      _tmpstops ~= obj.cInstance;
-    const(GskColorStop)* _stops = _tmpstops.ptr;
-    gtk_snapshot_append_radial_gradient(cast(GtkSnapshot*)cPtr, bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, center ? cast(graphene_point_t*)center.cPtr(No.Dup) : null, hradius, vradius, start, end, _stops, _nStops);
-  }
-
-  /**
-   * Appends a repeating linear gradient node with the given stops to snapshot.
-   * Params:
-   *   bounds = the rectangle to render the linear gradient into
-   *   startPoint = the point at which the linear gradient will begin
-   *   endPoint = the point at which the linear gradient will finish
-   *   stops = the color stops defining the gradient
-   */
-  void appendRepeatingLinearGradient(Rect bounds, Point startPoint, Point endPoint, ColorStop[] stops)
-  {
-    size_t _nStops;
-    if (stops)
-      _nStops = cast(size_t)stops.length;
-
-    GskColorStop[] _tmpstops;
-    foreach (obj; stops)
-      _tmpstops ~= obj.cInstance;
-    const(GskColorStop)* _stops = _tmpstops.ptr;
-    gtk_snapshot_append_repeating_linear_gradient(cast(GtkSnapshot*)cPtr, bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, startPoint ? cast(graphene_point_t*)startPoint.cPtr(No.Dup) : null, endPoint ? cast(graphene_point_t*)endPoint.cPtr(No.Dup) : null, _stops, _nStops);
-  }
-
-  /**
-   * Appends a repeating radial gradient node with the given stops to snapshot.
-   * Params:
-   *   bounds = the rectangle to render the readial gradient into
-   *   center = the center point for the radial gradient
-   *   hradius = the horizontal radius
-   *   vradius = the vertical radius
-   *   start = the start position $(LPAREN)on the horizontal axis$(RPAREN)
-   *   end = the end position $(LPAREN)on the horizontal axis$(RPAREN)
-   *   stops = the color stops defining the gradient
-   */
-  void appendRepeatingRadialGradient(Rect bounds, Point center, float hradius, float vradius, float start, float end, ColorStop[] stops)
-  {
-    size_t _nStops;
-    if (stops)
-      _nStops = cast(size_t)stops.length;
-
-    GskColorStop[] _tmpstops;
-    foreach (obj; stops)
-      _tmpstops ~= obj.cInstance;
-    const(GskColorStop)* _stops = _tmpstops.ptr;
-    gtk_snapshot_append_repeating_radial_gradient(cast(GtkSnapshot*)cPtr, bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, center ? cast(graphene_point_t*)center.cPtr(No.Dup) : null, hradius, vradius, start, end, _stops, _nStops);
   }
 
   /**
@@ -551,25 +437,6 @@ class Snapshot : DGdkSnapshot
   void pushRoundedClip(RoundedRect bounds)
   {
     gtk_snapshot_push_rounded_clip(cast(GtkSnapshot*)cPtr, bounds ? cast(GskRoundedRect*)bounds.cPtr : null);
-  }
-
-  /**
-   * Applies a shadow to an image.
-   * The image is recorded until the next call to [Gtk.Snapshot.pop].
-   * Params:
-   *   shadow = the first shadow specification
-   */
-  void pushShadow(Shadow[] shadow)
-  {
-    size_t _nShadows;
-    if (shadow)
-      _nShadows = cast(size_t)shadow.length;
-
-    GskShadow[] _tmpshadow;
-    foreach (obj; shadow)
-      _tmpshadow ~= obj.cInstance;
-    const(GskShadow)* _shadow = _tmpshadow.ptr;
-    gtk_snapshot_push_shadow(cast(GtkSnapshot*)cPtr, _shadow, _nShadows);
   }
 
   /**

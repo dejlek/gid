@@ -64,7 +64,7 @@ class Path : Boxed
    * - When the flags disallow certain operations, it provides
    * an approximation of the path using just the allowed operations.
    * Params:
-   *   flags = flags to pass to the foreach function. See [Gsk]
+   *   flags = flags to pass to the foreach function. See [Gsk.PathForeachFlags]
    *     for details about flags
    *   func = the function to call for operations
    * Returns: `FALSE` if func returned FALSE`, `TRUE` otherwise.

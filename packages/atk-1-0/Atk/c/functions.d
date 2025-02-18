@@ -1,0 +1,1033 @@
+module Atk.c.functions;
+
+public import Gid.basictypes;
+import Gid.loader;
+import Atk.c.types;
+public import GObject.c.types;
+
+version(Windows)
+  private immutable LIBS = ["libatk-1.0-0.dll;atk-1.0-0.dll;atk-1.dll"];
+else version(OSX)
+  private immutable LIBS = ["libatk-1.0.0.dylib"];
+else
+  private immutable LIBS = ["libatk-1.0.so.0"];
+
+__gshared extern(C)
+{
+  // Action
+  extern(C) GType function() c_atk_action_get_type;
+  bool function(AtkAction* action, int i) c_atk_action_do_action;
+  const(char)* function(AtkAction* action, int i) c_atk_action_get_description;
+  const(char)* function(AtkAction* action, int i) c_atk_action_get_keybinding;
+  const(char)* function(AtkAction* action, int i) c_atk_action_get_localized_name;
+  int function(AtkAction* action) c_atk_action_get_n_actions;
+  const(char)* function(AtkAction* action, int i) c_atk_action_get_name;
+  bool function(AtkAction* action, int i, const(char)* desc) c_atk_action_set_description;
+
+  // Attribute
+  void function(AtkAttributeSet* attribSet) c_atk_attribute_set_free;
+
+  // Component
+  extern(C) GType function() c_atk_component_get_type;
+  uint function(AtkComponent* component, AtkFocusHandler handler) c_atk_component_add_focus_handler;
+  bool function(AtkComponent* component, int x, int y, AtkCoordType coordType) c_atk_component_contains;
+  double function(AtkComponent* component) c_atk_component_get_alpha;
+  void function(AtkComponent* component, int* x, int* y, int* width, int* height, AtkCoordType coordType) c_atk_component_get_extents;
+  AtkLayer function(AtkComponent* component) c_atk_component_get_layer;
+  int function(AtkComponent* component) c_atk_component_get_mdi_zorder;
+  void function(AtkComponent* component, int* x, int* y, AtkCoordType coordType) c_atk_component_get_position;
+  void function(AtkComponent* component, int* width, int* height) c_atk_component_get_size;
+  bool function(AtkComponent* component) c_atk_component_grab_focus;
+  AtkObject* function(AtkComponent* component, int x, int y, AtkCoordType coordType) c_atk_component_ref_accessible_at_point;
+  void function(AtkComponent* component, uint handlerId) c_atk_component_remove_focus_handler;
+  bool function(AtkComponent* component, AtkScrollType type) c_atk_component_scroll_to;
+  bool function(AtkComponent* component, AtkCoordType coords, int x, int y) c_atk_component_scroll_to_point;
+  bool function(AtkComponent* component, int x, int y, int width, int height, AtkCoordType coordType) c_atk_component_set_extents;
+  bool function(AtkComponent* component, int x, int y, AtkCoordType coordType) c_atk_component_set_position;
+  bool function(AtkComponent* component, int width, int height) c_atk_component_set_size;
+
+  // Document
+  extern(C) GType function() c_atk_document_get_type;
+  const(char)* function(AtkDocument* document, const(char)* attributeName) c_atk_document_get_attribute_value;
+  AtkAttributeSet* function(AtkDocument* document) c_atk_document_get_attributes;
+  int function(AtkDocument* document) c_atk_document_get_current_page_number;
+  void* function(AtkDocument* document) c_atk_document_get_document;
+  const(char)* function(AtkDocument* document) c_atk_document_get_document_type;
+  const(char)* function(AtkDocument* document) c_atk_document_get_locale;
+  int function(AtkDocument* document) c_atk_document_get_page_count;
+  GArray* function(AtkDocument* document) c_atk_document_get_text_selections;
+  bool function(AtkDocument* document, const(char)* attributeName, const(char)* attributeValue) c_atk_document_set_attribute_value;
+  bool function(AtkDocument* document, GArray* selections) c_atk_document_set_text_selections;
+
+  // EditableText
+  extern(C) GType function() c_atk_editable_text_get_type;
+  void function(AtkEditableText* text, int startPos, int endPos) c_atk_editable_text_copy_text;
+  void function(AtkEditableText* text, int startPos, int endPos) c_atk_editable_text_cut_text;
+  void function(AtkEditableText* text, int startPos, int endPos) c_atk_editable_text_delete_text;
+  void function(AtkEditableText* text, const(char)* string_, int length, int* position) c_atk_editable_text_insert_text;
+  void function(AtkEditableText* text, int position) c_atk_editable_text_paste_text;
+  bool function(AtkEditableText* text, AtkAttributeSet* attribSet, int startOffset, int endOffset) c_atk_editable_text_set_run_attributes;
+  void function(AtkEditableText* text, const(char)* string_) c_atk_editable_text_set_text_contents;
+
+  // GObjectAccessible
+  extern(C) GType function() c_atk_gobject_accessible_get_type;
+  AtkObject* function(ObjectC* obj) c_atk_gobject_accessible_for_object;
+  ObjectC* function(AtkGObjectAccessible* obj) c_atk_gobject_accessible_get_object;
+
+  // Global
+  uint function(AtkEventListener focusTracker) c_atk_add_focus_tracker;
+  uint function(GSignalEmissionHook listener, const(char)* eventType) c_atk_add_global_event_listener;
+  uint function(AtkKeySnoopFunc listener, void* data) c_atk_add_key_event_listener;
+  void function(AtkEventListenerInit init_) c_atk_focus_tracker_init;
+  void function(AtkObject* object) c_atk_focus_tracker_notify;
+  uint function() c_atk_get_binary_age;
+  AtkRegistry* function() c_atk_get_default_registry;
+  AtkObject* function() c_atk_get_focus_object;
+  uint function() c_atk_get_interface_age;
+  uint function() c_atk_get_major_version;
+  uint function() c_atk_get_micro_version;
+  uint function() c_atk_get_minor_version;
+  AtkObject* function() c_atk_get_root;
+  const(char)* function() c_atk_get_toolkit_name;
+  const(char)* function() c_atk_get_toolkit_version;
+  const(char)* function() c_atk_get_version;
+  void function(uint trackerId) c_atk_remove_focus_tracker;
+  void function(uint listenerId) c_atk_remove_global_event_listener;
+  void function(uint listenerId) c_atk_remove_key_event_listener;
+
+  // Hyperlink
+  extern(C) GType function() c_atk_hyperlink_get_type;
+  int function(AtkHyperlink* link) c_atk_hyperlink_get_end_index;
+  int function(AtkHyperlink* link) c_atk_hyperlink_get_n_anchors;
+  AtkObject* function(AtkHyperlink* link, int i) c_atk_hyperlink_get_object;
+  int function(AtkHyperlink* link) c_atk_hyperlink_get_start_index;
+  char* function(AtkHyperlink* link, int i) c_atk_hyperlink_get_uri;
+  bool function(AtkHyperlink* link) c_atk_hyperlink_is_inline;
+  bool function(AtkHyperlink* link) c_atk_hyperlink_is_selected_link;
+  bool function(AtkHyperlink* link) c_atk_hyperlink_is_valid;
+
+  // HyperlinkImpl
+  extern(C) GType function() c_atk_hyperlink_impl_get_type;
+  AtkHyperlink* function(AtkHyperlinkImpl* impl) c_atk_hyperlink_impl_get_hyperlink;
+
+  // Hypertext
+  extern(C) GType function() c_atk_hypertext_get_type;
+  AtkHyperlink* function(AtkHypertext* hypertext, int linkIndex) c_atk_hypertext_get_link;
+  int function(AtkHypertext* hypertext, int charIndex) c_atk_hypertext_get_link_index;
+  int function(AtkHypertext* hypertext) c_atk_hypertext_get_n_links;
+
+  // Image
+  extern(C) GType function() c_atk_image_get_type;
+  const(char)* function(AtkImage* image) c_atk_image_get_image_description;
+  const(char)* function(AtkImage* image) c_atk_image_get_image_locale;
+  void function(AtkImage* image, int* x, int* y, AtkCoordType coordType) c_atk_image_get_image_position;
+  void function(AtkImage* image, int* width, int* height) c_atk_image_get_image_size;
+  bool function(AtkImage* image, const(char)* description) c_atk_image_set_image_description;
+
+  // Implementor
+  AtkObject* function(AtkImplementor* implementor) c_atk_implementor_ref_accessible;
+
+  // ImplementorIface
+  extern(C) GType function() c_atk_implementor_get_type;
+
+  // Misc
+  extern(C) GType function() c_atk_misc_get_type;
+  const(AtkMisc)* function() c_atk_misc_get_instance;
+  void function(AtkMisc* misc) c_atk_misc_threads_enter;
+  void function(AtkMisc* misc) c_atk_misc_threads_leave;
+
+  // NoOpObject
+  extern(C) GType function() c_atk_no_op_object_get_type;
+  AtkObject* function(ObjectC* obj) c_atk_no_op_object_new;
+
+  // NoOpObjectFactory
+  extern(C) GType function() c_atk_no_op_object_factory_get_type;
+  AtkObjectFactory* function() c_atk_no_op_object_factory_new;
+
+  // ObjectAtk
+  extern(C) GType function() c_atk_object_get_type;
+  bool function(AtkObject* object, AtkRelationType relationship, AtkObject* target) c_atk_object_add_relationship;
+  uint function(AtkObject* accessible, AtkPropertyChangeHandler* handler) c_atk_object_connect_property_change_handler;
+  const(char)* function(AtkObject* accessible) c_atk_object_get_accessible_id;
+  AtkAttributeSet* function(AtkObject* accessible) c_atk_object_get_attributes;
+  const(char)* function(AtkObject* accessible) c_atk_object_get_description;
+  const(char)* function(AtkObject* accessible) c_atk_object_get_help_text;
+  int function(AtkObject* accessible) c_atk_object_get_index_in_parent;
+  AtkLayer function(AtkObject* accessible) c_atk_object_get_layer;
+  int function(AtkObject* accessible) c_atk_object_get_mdi_zorder;
+  int function(AtkObject* accessible) c_atk_object_get_n_accessible_children;
+  const(char)* function(AtkObject* accessible) c_atk_object_get_name;
+  const(char)* function(AtkObject* accessible) c_atk_object_get_object_locale;
+  AtkObject* function(AtkObject* accessible) c_atk_object_get_parent;
+  AtkRole function(AtkObject* accessible) c_atk_object_get_role;
+  void function(AtkObject* accessible, void* data) c_atk_object_initialize;
+  void function(AtkObject* accessible, AtkState state, bool value) c_atk_object_notify_state_change;
+  AtkObject* function(AtkObject* accessible) c_atk_object_peek_parent;
+  AtkObject* function(AtkObject* accessible, int i) c_atk_object_ref_accessible_child;
+  AtkRelationSet* function(AtkObject* accessible) c_atk_object_ref_relation_set;
+  AtkStateSet* function(AtkObject* accessible) c_atk_object_ref_state_set;
+  void function(AtkObject* accessible, uint handlerId) c_atk_object_remove_property_change_handler;
+  bool function(AtkObject* object, AtkRelationType relationship, AtkObject* target) c_atk_object_remove_relationship;
+  void function(AtkObject* accessible, const(char)* id) c_atk_object_set_accessible_id;
+  void function(AtkObject* accessible, const(char)* description) c_atk_object_set_description;
+  void function(AtkObject* accessible, const(char)* helpText) c_atk_object_set_help_text;
+  void function(AtkObject* accessible, const(char)* name) c_atk_object_set_name;
+  void function(AtkObject* accessible, AtkObject* parent) c_atk_object_set_parent;
+  void function(AtkObject* accessible, AtkRole role) c_atk_object_set_role;
+
+  // ObjectFactory
+  extern(C) GType function() c_atk_object_factory_get_type;
+  AtkObject* function(AtkObjectFactory* factory, ObjectC* obj) c_atk_object_factory_create_accessible;
+  GType function(AtkObjectFactory* factory) c_atk_object_factory_get_accessible_type;
+  void function(AtkObjectFactory* factory) c_atk_object_factory_invalidate;
+
+  // Plug
+  extern(C) GType function() c_atk_plug_get_type;
+  AtkObject* function() c_atk_plug_new;
+  char* function(AtkPlug* plug) c_atk_plug_get_id;
+  void function(AtkPlug* plug, AtkObject* child) c_atk_plug_set_child;
+
+  // Range
+  extern(C) GType function() c_atk_range_get_type;
+  AtkRange* function(double lowerLimit, double upperLimit, const(char)* description) c_atk_range_new;
+  AtkRange* function(AtkRange* src) c_atk_range_copy;
+  void function(AtkRange* range) c_atk_range_free;
+  const(char)* function(AtkRange* range) c_atk_range_get_description;
+  double function(AtkRange* range) c_atk_range_get_lower_limit;
+  double function(AtkRange* range) c_atk_range_get_upper_limit;
+
+  // Rectangle
+  extern(C) GType function() c_atk_rectangle_get_type;
+
+  // Registry
+  extern(C) GType function() c_atk_registry_get_type;
+  AtkObjectFactory* function(AtkRegistry* registry, GType type) c_atk_registry_get_factory;
+  GType function(AtkRegistry* registry, GType type) c_atk_registry_get_factory_type;
+  void function(AtkRegistry* registry, GType type, GType factoryType) c_atk_registry_set_factory_type;
+
+  // Relation
+  extern(C) GType function() c_atk_relation_get_type;
+  AtkRelation* function(AtkObject** targets, int nTargets, AtkRelationType relationship) c_atk_relation_new;
+  void function(AtkRelation* relation, AtkObject* target) c_atk_relation_add_target;
+  AtkRelationType function(AtkRelation* relation) c_atk_relation_get_relation_type;
+  GPtrArray* function(AtkRelation* relation) c_atk_relation_get_target;
+  bool function(AtkRelation* relation, AtkObject* target) c_atk_relation_remove_target;
+
+  // RelationSet
+  extern(C) GType function() c_atk_relation_set_get_type;
+  AtkRelationSet* function() c_atk_relation_set_new;
+  void function(AtkRelationSet* set, AtkRelation* relation) c_atk_relation_set_add;
+  void function(AtkRelationSet* set, AtkRelationType relationship, AtkObject* target) c_atk_relation_set_add_relation_by_type;
+  bool function(AtkRelationSet* set, AtkRelationType relationship) c_atk_relation_set_contains;
+  bool function(AtkRelationSet* set, AtkRelationType relationship, AtkObject* target) c_atk_relation_set_contains_target;
+  int function(AtkRelationSet* set) c_atk_relation_set_get_n_relations;
+  AtkRelation* function(AtkRelationSet* set, int i) c_atk_relation_set_get_relation;
+  AtkRelation* function(AtkRelationSet* set, AtkRelationType relationship) c_atk_relation_set_get_relation_by_type;
+  void function(AtkRelationSet* set, AtkRelation* relation) c_atk_relation_set_remove;
+
+  // Selection
+  extern(C) GType function() c_atk_selection_get_type;
+  bool function(AtkSelection* selection, int i) c_atk_selection_add_selection;
+  bool function(AtkSelection* selection) c_atk_selection_clear_selection;
+  int function(AtkSelection* selection) c_atk_selection_get_selection_count;
+  bool function(AtkSelection* selection, int i) c_atk_selection_is_child_selected;
+  AtkObject* function(AtkSelection* selection, int i) c_atk_selection_ref_selection;
+  bool function(AtkSelection* selection, int i) c_atk_selection_remove_selection;
+  bool function(AtkSelection* selection) c_atk_selection_select_all_selection;
+
+  // Socket
+  extern(C) GType function() c_atk_socket_get_type;
+  AtkObject* function() c_atk_socket_new;
+  void function(AtkSocket* obj, const(char)* plugId) c_atk_socket_embed;
+  bool function(AtkSocket* obj) c_atk_socket_is_occupied;
+
+  // StateSet
+  extern(C) GType function() c_atk_state_set_get_type;
+  AtkStateSet* function() c_atk_state_set_new;
+  bool function(AtkStateSet* set, AtkStateType type) c_atk_state_set_add_state;
+  void function(AtkStateSet* set, AtkStateType* types, int nTypes) c_atk_state_set_add_states;
+  AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) c_atk_state_set_and_sets;
+  void function(AtkStateSet* set) c_atk_state_set_clear_states;
+  bool function(AtkStateSet* set, AtkStateType type) c_atk_state_set_contains_state;
+  bool function(AtkStateSet* set, AtkStateType* types, int nTypes) c_atk_state_set_contains_states;
+  bool function(AtkStateSet* set) c_atk_state_set_is_empty;
+  AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) c_atk_state_set_or_sets;
+  bool function(AtkStateSet* set, AtkStateType type) c_atk_state_set_remove_state;
+  AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) c_atk_state_set_xor_sets;
+
+  // StreamableContent
+  extern(C) GType function() c_atk_streamable_content_get_type;
+  const(char)* function(AtkStreamableContent* streamable, int i) c_atk_streamable_content_get_mime_type;
+  int function(AtkStreamableContent* streamable) c_atk_streamable_content_get_n_mime_types;
+  GIOChannel* function(AtkStreamableContent* streamable, const(char)* mimeType) c_atk_streamable_content_get_stream;
+  const(char)* function(AtkStreamableContent* streamable, const(char)* mimeType) c_atk_streamable_content_get_uri;
+
+  // Table
+  extern(C) GType function() c_atk_table_get_type;
+  bool function(AtkTable* table, int column) c_atk_table_add_column_selection;
+  bool function(AtkTable* table, int row) c_atk_table_add_row_selection;
+  AtkObject* function(AtkTable* table) c_atk_table_get_caption;
+  int function(AtkTable* table, int index) c_atk_table_get_column_at_index;
+  const(char)* function(AtkTable* table, int column) c_atk_table_get_column_description;
+  int function(AtkTable* table, int row, int column) c_atk_table_get_column_extent_at;
+  AtkObject* function(AtkTable* table, int column) c_atk_table_get_column_header;
+  int function(AtkTable* table, int row, int column) c_atk_table_get_index_at;
+  int function(AtkTable* table) c_atk_table_get_n_columns;
+  int function(AtkTable* table) c_atk_table_get_n_rows;
+  int function(AtkTable* table, int index) c_atk_table_get_row_at_index;
+  const(char)* function(AtkTable* table, int row) c_atk_table_get_row_description;
+  int function(AtkTable* table, int row, int column) c_atk_table_get_row_extent_at;
+  AtkObject* function(AtkTable* table, int row) c_atk_table_get_row_header;
+  int function(AtkTable* table, int** selected) c_atk_table_get_selected_columns;
+  int function(AtkTable* table, int** selected) c_atk_table_get_selected_rows;
+  AtkObject* function(AtkTable* table) c_atk_table_get_summary;
+  bool function(AtkTable* table, int column) c_atk_table_is_column_selected;
+  bool function(AtkTable* table, int row) c_atk_table_is_row_selected;
+  bool function(AtkTable* table, int row, int column) c_atk_table_is_selected;
+  AtkObject* function(AtkTable* table, int row, int column) c_atk_table_ref_at;
+  bool function(AtkTable* table, int column) c_atk_table_remove_column_selection;
+  bool function(AtkTable* table, int row) c_atk_table_remove_row_selection;
+  void function(AtkTable* table, AtkObject* caption) c_atk_table_set_caption;
+  void function(AtkTable* table, int column, const(char)* description) c_atk_table_set_column_description;
+  void function(AtkTable* table, int column, AtkObject* header) c_atk_table_set_column_header;
+  void function(AtkTable* table, int row, const(char)* description) c_atk_table_set_row_description;
+  void function(AtkTable* table, int row, AtkObject* header) c_atk_table_set_row_header;
+  void function(AtkTable* table, AtkObject* accessible) c_atk_table_set_summary;
+
+  // TableCell
+  extern(C) GType function() c_atk_table_cell_get_type;
+  GPtrArray* function(AtkTableCell* cell) c_atk_table_cell_get_column_header_cells;
+  int function(AtkTableCell* cell) c_atk_table_cell_get_column_span;
+  bool function(AtkTableCell* cell, int* row, int* column) c_atk_table_cell_get_position;
+  bool function(AtkTableCell* cell, int* row, int* column, int* rowSpan, int* columnSpan) c_atk_table_cell_get_row_column_span;
+  GPtrArray* function(AtkTableCell* cell) c_atk_table_cell_get_row_header_cells;
+  int function(AtkTableCell* cell) c_atk_table_cell_get_row_span;
+  AtkObject* function(AtkTableCell* cell) c_atk_table_cell_get_table;
+
+  // Text
+  extern(C) GType function() c_atk_text_get_type;
+  void function(AtkTextRange** ranges) c_atk_text_free_ranges;
+  bool function(AtkText* text, int startOffset, int endOffset) c_atk_text_add_selection;
+  AtkTextRange** function(AtkText* text, AtkTextRectangle* rect, AtkCoordType coordType, AtkTextClipType xClipType, AtkTextClipType yClipType) c_atk_text_get_bounded_ranges;
+  int function(AtkText* text) c_atk_text_get_caret_offset;
+  dchar function(AtkText* text, int offset) c_atk_text_get_character_at_offset;
+  int function(AtkText* text) c_atk_text_get_character_count;
+  void function(AtkText* text, int offset, int* x, int* y, int* width, int* height, AtkCoordType coords) c_atk_text_get_character_extents;
+  AtkAttributeSet* function(AtkText* text) c_atk_text_get_default_attributes;
+  int function(AtkText* text) c_atk_text_get_n_selections;
+  int function(AtkText* text, int x, int y, AtkCoordType coords) c_atk_text_get_offset_at_point;
+  void function(AtkText* text, int startOffset, int endOffset, AtkCoordType coordType, AtkTextRectangle* rect) c_atk_text_get_range_extents;
+  AtkAttributeSet* function(AtkText* text, int offset, int* startOffset, int* endOffset) c_atk_text_get_run_attributes;
+  char* function(AtkText* text, int selectionNum, int* startOffset, int* endOffset) c_atk_text_get_selection;
+  char* function(AtkText* text, int offset, AtkTextGranularity granularity, int* startOffset, int* endOffset) c_atk_text_get_string_at_offset;
+  char* function(AtkText* text, int startOffset, int endOffset) c_atk_text_get_text;
+  char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) c_atk_text_get_text_after_offset;
+  char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) c_atk_text_get_text_at_offset;
+  char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) c_atk_text_get_text_before_offset;
+  bool function(AtkText* text, int selectionNum) c_atk_text_remove_selection;
+  bool function(AtkText* text, int startOffset, int endOffset, AtkScrollType type) c_atk_text_scroll_substring_to;
+  bool function(AtkText* text, int startOffset, int endOffset, AtkCoordType coords, int x, int y) c_atk_text_scroll_substring_to_point;
+  bool function(AtkText* text, int offset) c_atk_text_set_caret_offset;
+  bool function(AtkText* text, int selectionNum, int startOffset, int endOffset) c_atk_text_set_selection;
+
+  // TextRange
+  extern(C) GType function() c_atk_text_range_get_type;
+
+  // Util
+  extern(C) GType function() c_atk_util_get_type;
+
+  // ValueAtk
+  extern(C) GType function() c_atk_value_get_type;
+  void function(AtkValue* obj, GValue* value) c_atk_value_get_current_value;
+  double function(AtkValue* obj) c_atk_value_get_increment;
+  void function(AtkValue* obj, GValue* value) c_atk_value_get_maximum_value;
+  void function(AtkValue* obj, GValue* value) c_atk_value_get_minimum_increment;
+  void function(AtkValue* obj, GValue* value) c_atk_value_get_minimum_value;
+  AtkRange* function(AtkValue* obj) c_atk_value_get_range;
+  GSList* function(AtkValue* obj) c_atk_value_get_sub_ranges;
+  void function(AtkValue* obj, double* value, char** text) c_atk_value_get_value_and_text;
+  bool function(AtkValue* obj, const(GValue)* value) c_atk_value_set_current_value;
+  void function(AtkValue* obj, double newValue) c_atk_value_set_value;
+
+  // Window
+  extern(C) GType function() c_atk_window_get_type;
+}
+
+// Action
+alias atk_action_get_type = c_atk_action_get_type;
+alias atk_action_do_action = c_atk_action_do_action;
+alias atk_action_get_description = c_atk_action_get_description;
+alias atk_action_get_keybinding = c_atk_action_get_keybinding;
+alias atk_action_get_localized_name = c_atk_action_get_localized_name;
+alias atk_action_get_n_actions = c_atk_action_get_n_actions;
+alias atk_action_get_name = c_atk_action_get_name;
+alias atk_action_set_description = c_atk_action_set_description;
+
+// Attribute
+alias atk_attribute_set_free = c_atk_attribute_set_free;
+
+// Component
+alias atk_component_get_type = c_atk_component_get_type;
+alias atk_component_add_focus_handler = c_atk_component_add_focus_handler;
+alias atk_component_contains = c_atk_component_contains;
+alias atk_component_get_alpha = c_atk_component_get_alpha;
+alias atk_component_get_extents = c_atk_component_get_extents;
+alias atk_component_get_layer = c_atk_component_get_layer;
+alias atk_component_get_mdi_zorder = c_atk_component_get_mdi_zorder;
+alias atk_component_get_position = c_atk_component_get_position;
+alias atk_component_get_size = c_atk_component_get_size;
+alias atk_component_grab_focus = c_atk_component_grab_focus;
+alias atk_component_ref_accessible_at_point = c_atk_component_ref_accessible_at_point;
+alias atk_component_remove_focus_handler = c_atk_component_remove_focus_handler;
+alias atk_component_scroll_to = c_atk_component_scroll_to;
+alias atk_component_scroll_to_point = c_atk_component_scroll_to_point;
+alias atk_component_set_extents = c_atk_component_set_extents;
+alias atk_component_set_position = c_atk_component_set_position;
+alias atk_component_set_size = c_atk_component_set_size;
+
+// Document
+alias atk_document_get_type = c_atk_document_get_type;
+alias atk_document_get_attribute_value = c_atk_document_get_attribute_value;
+alias atk_document_get_attributes = c_atk_document_get_attributes;
+alias atk_document_get_current_page_number = c_atk_document_get_current_page_number;
+alias atk_document_get_document = c_atk_document_get_document;
+alias atk_document_get_document_type = c_atk_document_get_document_type;
+alias atk_document_get_locale = c_atk_document_get_locale;
+alias atk_document_get_page_count = c_atk_document_get_page_count;
+alias atk_document_get_text_selections = c_atk_document_get_text_selections;
+alias atk_document_set_attribute_value = c_atk_document_set_attribute_value;
+alias atk_document_set_text_selections = c_atk_document_set_text_selections;
+
+// EditableText
+alias atk_editable_text_get_type = c_atk_editable_text_get_type;
+alias atk_editable_text_copy_text = c_atk_editable_text_copy_text;
+alias atk_editable_text_cut_text = c_atk_editable_text_cut_text;
+alias atk_editable_text_delete_text = c_atk_editable_text_delete_text;
+alias atk_editable_text_insert_text = c_atk_editable_text_insert_text;
+alias atk_editable_text_paste_text = c_atk_editable_text_paste_text;
+alias atk_editable_text_set_run_attributes = c_atk_editable_text_set_run_attributes;
+alias atk_editable_text_set_text_contents = c_atk_editable_text_set_text_contents;
+
+// GObjectAccessible
+alias atk_gobject_accessible_get_type = c_atk_gobject_accessible_get_type;
+alias atk_gobject_accessible_for_object = c_atk_gobject_accessible_for_object;
+alias atk_gobject_accessible_get_object = c_atk_gobject_accessible_get_object;
+
+// Global
+alias atk_add_focus_tracker = c_atk_add_focus_tracker;
+alias atk_add_global_event_listener = c_atk_add_global_event_listener;
+alias atk_add_key_event_listener = c_atk_add_key_event_listener;
+alias atk_focus_tracker_init = c_atk_focus_tracker_init;
+alias atk_focus_tracker_notify = c_atk_focus_tracker_notify;
+alias atk_get_binary_age = c_atk_get_binary_age;
+alias atk_get_default_registry = c_atk_get_default_registry;
+alias atk_get_focus_object = c_atk_get_focus_object;
+alias atk_get_interface_age = c_atk_get_interface_age;
+alias atk_get_major_version = c_atk_get_major_version;
+alias atk_get_micro_version = c_atk_get_micro_version;
+alias atk_get_minor_version = c_atk_get_minor_version;
+alias atk_get_root = c_atk_get_root;
+alias atk_get_toolkit_name = c_atk_get_toolkit_name;
+alias atk_get_toolkit_version = c_atk_get_toolkit_version;
+alias atk_get_version = c_atk_get_version;
+alias atk_remove_focus_tracker = c_atk_remove_focus_tracker;
+alias atk_remove_global_event_listener = c_atk_remove_global_event_listener;
+alias atk_remove_key_event_listener = c_atk_remove_key_event_listener;
+
+// Hyperlink
+alias atk_hyperlink_get_type = c_atk_hyperlink_get_type;
+alias atk_hyperlink_get_end_index = c_atk_hyperlink_get_end_index;
+alias atk_hyperlink_get_n_anchors = c_atk_hyperlink_get_n_anchors;
+alias atk_hyperlink_get_object = c_atk_hyperlink_get_object;
+alias atk_hyperlink_get_start_index = c_atk_hyperlink_get_start_index;
+alias atk_hyperlink_get_uri = c_atk_hyperlink_get_uri;
+alias atk_hyperlink_is_inline = c_atk_hyperlink_is_inline;
+alias atk_hyperlink_is_selected_link = c_atk_hyperlink_is_selected_link;
+alias atk_hyperlink_is_valid = c_atk_hyperlink_is_valid;
+
+// HyperlinkImpl
+alias atk_hyperlink_impl_get_type = c_atk_hyperlink_impl_get_type;
+alias atk_hyperlink_impl_get_hyperlink = c_atk_hyperlink_impl_get_hyperlink;
+
+// Hypertext
+alias atk_hypertext_get_type = c_atk_hypertext_get_type;
+alias atk_hypertext_get_link = c_atk_hypertext_get_link;
+alias atk_hypertext_get_link_index = c_atk_hypertext_get_link_index;
+alias atk_hypertext_get_n_links = c_atk_hypertext_get_n_links;
+
+// Image
+alias atk_image_get_type = c_atk_image_get_type;
+alias atk_image_get_image_description = c_atk_image_get_image_description;
+alias atk_image_get_image_locale = c_atk_image_get_image_locale;
+alias atk_image_get_image_position = c_atk_image_get_image_position;
+alias atk_image_get_image_size = c_atk_image_get_image_size;
+alias atk_image_set_image_description = c_atk_image_set_image_description;
+
+// Implementor
+alias atk_implementor_ref_accessible = c_atk_implementor_ref_accessible;
+
+// ImplementorIface
+alias atk_implementor_get_type = c_atk_implementor_get_type;
+
+// Misc
+alias atk_misc_get_type = c_atk_misc_get_type;
+alias atk_misc_get_instance = c_atk_misc_get_instance;
+alias atk_misc_threads_enter = c_atk_misc_threads_enter;
+alias atk_misc_threads_leave = c_atk_misc_threads_leave;
+
+// NoOpObject
+alias atk_no_op_object_get_type = c_atk_no_op_object_get_type;
+alias atk_no_op_object_new = c_atk_no_op_object_new;
+
+// NoOpObjectFactory
+alias atk_no_op_object_factory_get_type = c_atk_no_op_object_factory_get_type;
+alias atk_no_op_object_factory_new = c_atk_no_op_object_factory_new;
+
+// ObjectAtk
+alias atk_object_get_type = c_atk_object_get_type;
+alias atk_object_add_relationship = c_atk_object_add_relationship;
+alias atk_object_connect_property_change_handler = c_atk_object_connect_property_change_handler;
+alias atk_object_get_accessible_id = c_atk_object_get_accessible_id;
+alias atk_object_get_attributes = c_atk_object_get_attributes;
+alias atk_object_get_description = c_atk_object_get_description;
+alias atk_object_get_help_text = c_atk_object_get_help_text;
+alias atk_object_get_index_in_parent = c_atk_object_get_index_in_parent;
+alias atk_object_get_layer = c_atk_object_get_layer;
+alias atk_object_get_mdi_zorder = c_atk_object_get_mdi_zorder;
+alias atk_object_get_n_accessible_children = c_atk_object_get_n_accessible_children;
+alias atk_object_get_name = c_atk_object_get_name;
+alias atk_object_get_object_locale = c_atk_object_get_object_locale;
+alias atk_object_get_parent = c_atk_object_get_parent;
+alias atk_object_get_role = c_atk_object_get_role;
+alias atk_object_initialize = c_atk_object_initialize;
+alias atk_object_notify_state_change = c_atk_object_notify_state_change;
+alias atk_object_peek_parent = c_atk_object_peek_parent;
+alias atk_object_ref_accessible_child = c_atk_object_ref_accessible_child;
+alias atk_object_ref_relation_set = c_atk_object_ref_relation_set;
+alias atk_object_ref_state_set = c_atk_object_ref_state_set;
+alias atk_object_remove_property_change_handler = c_atk_object_remove_property_change_handler;
+alias atk_object_remove_relationship = c_atk_object_remove_relationship;
+alias atk_object_set_accessible_id = c_atk_object_set_accessible_id;
+alias atk_object_set_description = c_atk_object_set_description;
+alias atk_object_set_help_text = c_atk_object_set_help_text;
+alias atk_object_set_name = c_atk_object_set_name;
+alias atk_object_set_parent = c_atk_object_set_parent;
+alias atk_object_set_role = c_atk_object_set_role;
+
+// ObjectFactory
+alias atk_object_factory_get_type = c_atk_object_factory_get_type;
+alias atk_object_factory_create_accessible = c_atk_object_factory_create_accessible;
+alias atk_object_factory_get_accessible_type = c_atk_object_factory_get_accessible_type;
+alias atk_object_factory_invalidate = c_atk_object_factory_invalidate;
+
+// Plug
+alias atk_plug_get_type = c_atk_plug_get_type;
+alias atk_plug_new = c_atk_plug_new;
+alias atk_plug_get_id = c_atk_plug_get_id;
+alias atk_plug_set_child = c_atk_plug_set_child;
+
+// Range
+alias atk_range_get_type = c_atk_range_get_type;
+alias atk_range_new = c_atk_range_new;
+alias atk_range_copy = c_atk_range_copy;
+alias atk_range_free = c_atk_range_free;
+alias atk_range_get_description = c_atk_range_get_description;
+alias atk_range_get_lower_limit = c_atk_range_get_lower_limit;
+alias atk_range_get_upper_limit = c_atk_range_get_upper_limit;
+
+// Rectangle
+alias atk_rectangle_get_type = c_atk_rectangle_get_type;
+
+// Registry
+alias atk_registry_get_type = c_atk_registry_get_type;
+alias atk_registry_get_factory = c_atk_registry_get_factory;
+alias atk_registry_get_factory_type = c_atk_registry_get_factory_type;
+alias atk_registry_set_factory_type = c_atk_registry_set_factory_type;
+
+// Relation
+alias atk_relation_get_type = c_atk_relation_get_type;
+alias atk_relation_new = c_atk_relation_new;
+alias atk_relation_add_target = c_atk_relation_add_target;
+alias atk_relation_get_relation_type = c_atk_relation_get_relation_type;
+alias atk_relation_get_target = c_atk_relation_get_target;
+alias atk_relation_remove_target = c_atk_relation_remove_target;
+
+// RelationSet
+alias atk_relation_set_get_type = c_atk_relation_set_get_type;
+alias atk_relation_set_new = c_atk_relation_set_new;
+alias atk_relation_set_add = c_atk_relation_set_add;
+alias atk_relation_set_add_relation_by_type = c_atk_relation_set_add_relation_by_type;
+alias atk_relation_set_contains = c_atk_relation_set_contains;
+alias atk_relation_set_contains_target = c_atk_relation_set_contains_target;
+alias atk_relation_set_get_n_relations = c_atk_relation_set_get_n_relations;
+alias atk_relation_set_get_relation = c_atk_relation_set_get_relation;
+alias atk_relation_set_get_relation_by_type = c_atk_relation_set_get_relation_by_type;
+alias atk_relation_set_remove = c_atk_relation_set_remove;
+
+// Selection
+alias atk_selection_get_type = c_atk_selection_get_type;
+alias atk_selection_add_selection = c_atk_selection_add_selection;
+alias atk_selection_clear_selection = c_atk_selection_clear_selection;
+alias atk_selection_get_selection_count = c_atk_selection_get_selection_count;
+alias atk_selection_is_child_selected = c_atk_selection_is_child_selected;
+alias atk_selection_ref_selection = c_atk_selection_ref_selection;
+alias atk_selection_remove_selection = c_atk_selection_remove_selection;
+alias atk_selection_select_all_selection = c_atk_selection_select_all_selection;
+
+// Socket
+alias atk_socket_get_type = c_atk_socket_get_type;
+alias atk_socket_new = c_atk_socket_new;
+alias atk_socket_embed = c_atk_socket_embed;
+alias atk_socket_is_occupied = c_atk_socket_is_occupied;
+
+// StateSet
+alias atk_state_set_get_type = c_atk_state_set_get_type;
+alias atk_state_set_new = c_atk_state_set_new;
+alias atk_state_set_add_state = c_atk_state_set_add_state;
+alias atk_state_set_add_states = c_atk_state_set_add_states;
+alias atk_state_set_and_sets = c_atk_state_set_and_sets;
+alias atk_state_set_clear_states = c_atk_state_set_clear_states;
+alias atk_state_set_contains_state = c_atk_state_set_contains_state;
+alias atk_state_set_contains_states = c_atk_state_set_contains_states;
+alias atk_state_set_is_empty = c_atk_state_set_is_empty;
+alias atk_state_set_or_sets = c_atk_state_set_or_sets;
+alias atk_state_set_remove_state = c_atk_state_set_remove_state;
+alias atk_state_set_xor_sets = c_atk_state_set_xor_sets;
+
+// StreamableContent
+alias atk_streamable_content_get_type = c_atk_streamable_content_get_type;
+alias atk_streamable_content_get_mime_type = c_atk_streamable_content_get_mime_type;
+alias atk_streamable_content_get_n_mime_types = c_atk_streamable_content_get_n_mime_types;
+alias atk_streamable_content_get_stream = c_atk_streamable_content_get_stream;
+alias atk_streamable_content_get_uri = c_atk_streamable_content_get_uri;
+
+// Table
+alias atk_table_get_type = c_atk_table_get_type;
+alias atk_table_add_column_selection = c_atk_table_add_column_selection;
+alias atk_table_add_row_selection = c_atk_table_add_row_selection;
+alias atk_table_get_caption = c_atk_table_get_caption;
+alias atk_table_get_column_at_index = c_atk_table_get_column_at_index;
+alias atk_table_get_column_description = c_atk_table_get_column_description;
+alias atk_table_get_column_extent_at = c_atk_table_get_column_extent_at;
+alias atk_table_get_column_header = c_atk_table_get_column_header;
+alias atk_table_get_index_at = c_atk_table_get_index_at;
+alias atk_table_get_n_columns = c_atk_table_get_n_columns;
+alias atk_table_get_n_rows = c_atk_table_get_n_rows;
+alias atk_table_get_row_at_index = c_atk_table_get_row_at_index;
+alias atk_table_get_row_description = c_atk_table_get_row_description;
+alias atk_table_get_row_extent_at = c_atk_table_get_row_extent_at;
+alias atk_table_get_row_header = c_atk_table_get_row_header;
+alias atk_table_get_selected_columns = c_atk_table_get_selected_columns;
+alias atk_table_get_selected_rows = c_atk_table_get_selected_rows;
+alias atk_table_get_summary = c_atk_table_get_summary;
+alias atk_table_is_column_selected = c_atk_table_is_column_selected;
+alias atk_table_is_row_selected = c_atk_table_is_row_selected;
+alias atk_table_is_selected = c_atk_table_is_selected;
+alias atk_table_ref_at = c_atk_table_ref_at;
+alias atk_table_remove_column_selection = c_atk_table_remove_column_selection;
+alias atk_table_remove_row_selection = c_atk_table_remove_row_selection;
+alias atk_table_set_caption = c_atk_table_set_caption;
+alias atk_table_set_column_description = c_atk_table_set_column_description;
+alias atk_table_set_column_header = c_atk_table_set_column_header;
+alias atk_table_set_row_description = c_atk_table_set_row_description;
+alias atk_table_set_row_header = c_atk_table_set_row_header;
+alias atk_table_set_summary = c_atk_table_set_summary;
+
+// TableCell
+alias atk_table_cell_get_type = c_atk_table_cell_get_type;
+alias atk_table_cell_get_column_header_cells = c_atk_table_cell_get_column_header_cells;
+alias atk_table_cell_get_column_span = c_atk_table_cell_get_column_span;
+alias atk_table_cell_get_position = c_atk_table_cell_get_position;
+alias atk_table_cell_get_row_column_span = c_atk_table_cell_get_row_column_span;
+alias atk_table_cell_get_row_header_cells = c_atk_table_cell_get_row_header_cells;
+alias atk_table_cell_get_row_span = c_atk_table_cell_get_row_span;
+alias atk_table_cell_get_table = c_atk_table_cell_get_table;
+
+// Text
+alias atk_text_get_type = c_atk_text_get_type;
+alias atk_text_free_ranges = c_atk_text_free_ranges;
+alias atk_text_add_selection = c_atk_text_add_selection;
+alias atk_text_get_bounded_ranges = c_atk_text_get_bounded_ranges;
+alias atk_text_get_caret_offset = c_atk_text_get_caret_offset;
+alias atk_text_get_character_at_offset = c_atk_text_get_character_at_offset;
+alias atk_text_get_character_count = c_atk_text_get_character_count;
+alias atk_text_get_character_extents = c_atk_text_get_character_extents;
+alias atk_text_get_default_attributes = c_atk_text_get_default_attributes;
+alias atk_text_get_n_selections = c_atk_text_get_n_selections;
+alias atk_text_get_offset_at_point = c_atk_text_get_offset_at_point;
+alias atk_text_get_range_extents = c_atk_text_get_range_extents;
+alias atk_text_get_run_attributes = c_atk_text_get_run_attributes;
+alias atk_text_get_selection = c_atk_text_get_selection;
+alias atk_text_get_string_at_offset = c_atk_text_get_string_at_offset;
+alias atk_text_get_text = c_atk_text_get_text;
+alias atk_text_get_text_after_offset = c_atk_text_get_text_after_offset;
+alias atk_text_get_text_at_offset = c_atk_text_get_text_at_offset;
+alias atk_text_get_text_before_offset = c_atk_text_get_text_before_offset;
+alias atk_text_remove_selection = c_atk_text_remove_selection;
+alias atk_text_scroll_substring_to = c_atk_text_scroll_substring_to;
+alias atk_text_scroll_substring_to_point = c_atk_text_scroll_substring_to_point;
+alias atk_text_set_caret_offset = c_atk_text_set_caret_offset;
+alias atk_text_set_selection = c_atk_text_set_selection;
+
+// TextRange
+alias atk_text_range_get_type = c_atk_text_range_get_type;
+
+// Util
+alias atk_util_get_type = c_atk_util_get_type;
+
+// ValueAtk
+alias atk_value_get_type = c_atk_value_get_type;
+alias atk_value_get_current_value = c_atk_value_get_current_value;
+alias atk_value_get_increment = c_atk_value_get_increment;
+alias atk_value_get_maximum_value = c_atk_value_get_maximum_value;
+alias atk_value_get_minimum_increment = c_atk_value_get_minimum_increment;
+alias atk_value_get_minimum_value = c_atk_value_get_minimum_value;
+alias atk_value_get_range = c_atk_value_get_range;
+alias atk_value_get_sub_ranges = c_atk_value_get_sub_ranges;
+alias atk_value_get_value_and_text = c_atk_value_get_value_and_text;
+alias atk_value_set_current_value = c_atk_value_set_current_value;
+alias atk_value_set_value = c_atk_value_set_value;
+
+// Window
+alias atk_window_get_type = c_atk_window_get_type;
+
+shared static this()
+{
+  // Action
+  gidLink(cast(void**)&atk_action_get_type, "atk_action_get_type", LIBS);
+  gidLink(cast(void**)&atk_action_do_action, "atk_action_do_action", LIBS);
+  gidLink(cast(void**)&atk_action_get_description, "atk_action_get_description", LIBS);
+  gidLink(cast(void**)&atk_action_get_keybinding, "atk_action_get_keybinding", LIBS);
+  gidLink(cast(void**)&atk_action_get_localized_name, "atk_action_get_localized_name", LIBS);
+  gidLink(cast(void**)&atk_action_get_n_actions, "atk_action_get_n_actions", LIBS);
+  gidLink(cast(void**)&atk_action_get_name, "atk_action_get_name", LIBS);
+  gidLink(cast(void**)&atk_action_set_description, "atk_action_set_description", LIBS);
+
+  // Attribute
+  gidLink(cast(void**)&atk_attribute_set_free, "atk_attribute_set_free", LIBS);
+
+  // Component
+  gidLink(cast(void**)&atk_component_get_type, "atk_component_get_type", LIBS);
+  gidLink(cast(void**)&atk_component_add_focus_handler, "atk_component_add_focus_handler", LIBS);
+  gidLink(cast(void**)&atk_component_contains, "atk_component_contains", LIBS);
+  gidLink(cast(void**)&atk_component_get_alpha, "atk_component_get_alpha", LIBS);
+  gidLink(cast(void**)&atk_component_get_extents, "atk_component_get_extents", LIBS);
+  gidLink(cast(void**)&atk_component_get_layer, "atk_component_get_layer", LIBS);
+  gidLink(cast(void**)&atk_component_get_mdi_zorder, "atk_component_get_mdi_zorder", LIBS);
+  gidLink(cast(void**)&atk_component_get_position, "atk_component_get_position", LIBS);
+  gidLink(cast(void**)&atk_component_get_size, "atk_component_get_size", LIBS);
+  gidLink(cast(void**)&atk_component_grab_focus, "atk_component_grab_focus", LIBS);
+  gidLink(cast(void**)&atk_component_ref_accessible_at_point, "atk_component_ref_accessible_at_point", LIBS);
+  gidLink(cast(void**)&atk_component_remove_focus_handler, "atk_component_remove_focus_handler", LIBS);
+  gidLink(cast(void**)&atk_component_scroll_to, "atk_component_scroll_to", LIBS);
+  gidLink(cast(void**)&atk_component_scroll_to_point, "atk_component_scroll_to_point", LIBS);
+  gidLink(cast(void**)&atk_component_set_extents, "atk_component_set_extents", LIBS);
+  gidLink(cast(void**)&atk_component_set_position, "atk_component_set_position", LIBS);
+  gidLink(cast(void**)&atk_component_set_size, "atk_component_set_size", LIBS);
+
+  // Document
+  gidLink(cast(void**)&atk_document_get_type, "atk_document_get_type", LIBS);
+  gidLink(cast(void**)&atk_document_get_attribute_value, "atk_document_get_attribute_value", LIBS);
+  gidLink(cast(void**)&atk_document_get_attributes, "atk_document_get_attributes", LIBS);
+  gidLink(cast(void**)&atk_document_get_current_page_number, "atk_document_get_current_page_number", LIBS);
+  gidLink(cast(void**)&atk_document_get_document, "atk_document_get_document", LIBS);
+  gidLink(cast(void**)&atk_document_get_document_type, "atk_document_get_document_type", LIBS);
+  gidLink(cast(void**)&atk_document_get_locale, "atk_document_get_locale", LIBS);
+  gidLink(cast(void**)&atk_document_get_page_count, "atk_document_get_page_count", LIBS);
+  gidLink(cast(void**)&atk_document_get_text_selections, "atk_document_get_text_selections", LIBS);
+  gidLink(cast(void**)&atk_document_set_attribute_value, "atk_document_set_attribute_value", LIBS);
+  gidLink(cast(void**)&atk_document_set_text_selections, "atk_document_set_text_selections", LIBS);
+
+  // EditableText
+  gidLink(cast(void**)&atk_editable_text_get_type, "atk_editable_text_get_type", LIBS);
+  gidLink(cast(void**)&atk_editable_text_copy_text, "atk_editable_text_copy_text", LIBS);
+  gidLink(cast(void**)&atk_editable_text_cut_text, "atk_editable_text_cut_text", LIBS);
+  gidLink(cast(void**)&atk_editable_text_delete_text, "atk_editable_text_delete_text", LIBS);
+  gidLink(cast(void**)&atk_editable_text_insert_text, "atk_editable_text_insert_text", LIBS);
+  gidLink(cast(void**)&atk_editable_text_paste_text, "atk_editable_text_paste_text", LIBS);
+  gidLink(cast(void**)&atk_editable_text_set_run_attributes, "atk_editable_text_set_run_attributes", LIBS);
+  gidLink(cast(void**)&atk_editable_text_set_text_contents, "atk_editable_text_set_text_contents", LIBS);
+
+  // GObjectAccessible
+  gidLink(cast(void**)&atk_gobject_accessible_get_type, "atk_gobject_accessible_get_type", LIBS);
+  gidLink(cast(void**)&atk_gobject_accessible_for_object, "atk_gobject_accessible_for_object", LIBS);
+  gidLink(cast(void**)&atk_gobject_accessible_get_object, "atk_gobject_accessible_get_object", LIBS);
+
+  // Global
+  gidLink(cast(void**)&atk_add_focus_tracker, "atk_add_focus_tracker", LIBS);
+  gidLink(cast(void**)&atk_add_global_event_listener, "atk_add_global_event_listener", LIBS);
+  gidLink(cast(void**)&atk_add_key_event_listener, "atk_add_key_event_listener", LIBS);
+  gidLink(cast(void**)&atk_focus_tracker_init, "atk_focus_tracker_init", LIBS);
+  gidLink(cast(void**)&atk_focus_tracker_notify, "atk_focus_tracker_notify", LIBS);
+  gidLink(cast(void**)&atk_get_binary_age, "atk_get_binary_age", LIBS);
+  gidLink(cast(void**)&atk_get_default_registry, "atk_get_default_registry", LIBS);
+  gidLink(cast(void**)&atk_get_focus_object, "atk_get_focus_object", LIBS);
+  gidLink(cast(void**)&atk_get_interface_age, "atk_get_interface_age", LIBS);
+  gidLink(cast(void**)&atk_get_major_version, "atk_get_major_version", LIBS);
+  gidLink(cast(void**)&atk_get_micro_version, "atk_get_micro_version", LIBS);
+  gidLink(cast(void**)&atk_get_minor_version, "atk_get_minor_version", LIBS);
+  gidLink(cast(void**)&atk_get_root, "atk_get_root", LIBS);
+  gidLink(cast(void**)&atk_get_toolkit_name, "atk_get_toolkit_name", LIBS);
+  gidLink(cast(void**)&atk_get_toolkit_version, "atk_get_toolkit_version", LIBS);
+  gidLink(cast(void**)&atk_get_version, "atk_get_version", LIBS);
+  gidLink(cast(void**)&atk_remove_focus_tracker, "atk_remove_focus_tracker", LIBS);
+  gidLink(cast(void**)&atk_remove_global_event_listener, "atk_remove_global_event_listener", LIBS);
+  gidLink(cast(void**)&atk_remove_key_event_listener, "atk_remove_key_event_listener", LIBS);
+
+  // Hyperlink
+  gidLink(cast(void**)&atk_hyperlink_get_type, "atk_hyperlink_get_type", LIBS);
+  gidLink(cast(void**)&atk_hyperlink_get_end_index, "atk_hyperlink_get_end_index", LIBS);
+  gidLink(cast(void**)&atk_hyperlink_get_n_anchors, "atk_hyperlink_get_n_anchors", LIBS);
+  gidLink(cast(void**)&atk_hyperlink_get_object, "atk_hyperlink_get_object", LIBS);
+  gidLink(cast(void**)&atk_hyperlink_get_start_index, "atk_hyperlink_get_start_index", LIBS);
+  gidLink(cast(void**)&atk_hyperlink_get_uri, "atk_hyperlink_get_uri", LIBS);
+  gidLink(cast(void**)&atk_hyperlink_is_inline, "atk_hyperlink_is_inline", LIBS);
+  gidLink(cast(void**)&atk_hyperlink_is_selected_link, "atk_hyperlink_is_selected_link", LIBS);
+  gidLink(cast(void**)&atk_hyperlink_is_valid, "atk_hyperlink_is_valid", LIBS);
+
+  // HyperlinkImpl
+  gidLink(cast(void**)&atk_hyperlink_impl_get_type, "atk_hyperlink_impl_get_type", LIBS);
+  gidLink(cast(void**)&atk_hyperlink_impl_get_hyperlink, "atk_hyperlink_impl_get_hyperlink", LIBS);
+
+  // Hypertext
+  gidLink(cast(void**)&atk_hypertext_get_type, "atk_hypertext_get_type", LIBS);
+  gidLink(cast(void**)&atk_hypertext_get_link, "atk_hypertext_get_link", LIBS);
+  gidLink(cast(void**)&atk_hypertext_get_link_index, "atk_hypertext_get_link_index", LIBS);
+  gidLink(cast(void**)&atk_hypertext_get_n_links, "atk_hypertext_get_n_links", LIBS);
+
+  // Image
+  gidLink(cast(void**)&atk_image_get_type, "atk_image_get_type", LIBS);
+  gidLink(cast(void**)&atk_image_get_image_description, "atk_image_get_image_description", LIBS);
+  gidLink(cast(void**)&atk_image_get_image_locale, "atk_image_get_image_locale", LIBS);
+  gidLink(cast(void**)&atk_image_get_image_position, "atk_image_get_image_position", LIBS);
+  gidLink(cast(void**)&atk_image_get_image_size, "atk_image_get_image_size", LIBS);
+  gidLink(cast(void**)&atk_image_set_image_description, "atk_image_set_image_description", LIBS);
+
+  // Implementor
+  gidLink(cast(void**)&atk_implementor_ref_accessible, "atk_implementor_ref_accessible", LIBS);
+
+  // ImplementorIface
+  gidLink(cast(void**)&atk_implementor_get_type, "atk_implementor_get_type", LIBS);
+
+  // Misc
+  gidLink(cast(void**)&atk_misc_get_type, "atk_misc_get_type", LIBS);
+  gidLink(cast(void**)&atk_misc_get_instance, "atk_misc_get_instance", LIBS);
+  gidLink(cast(void**)&atk_misc_threads_enter, "atk_misc_threads_enter", LIBS);
+  gidLink(cast(void**)&atk_misc_threads_leave, "atk_misc_threads_leave", LIBS);
+
+  // NoOpObject
+  gidLink(cast(void**)&atk_no_op_object_get_type, "atk_no_op_object_get_type", LIBS);
+  gidLink(cast(void**)&atk_no_op_object_new, "atk_no_op_object_new", LIBS);
+
+  // NoOpObjectFactory
+  gidLink(cast(void**)&atk_no_op_object_factory_get_type, "atk_no_op_object_factory_get_type", LIBS);
+  gidLink(cast(void**)&atk_no_op_object_factory_new, "atk_no_op_object_factory_new", LIBS);
+
+  // ObjectAtk
+  gidLink(cast(void**)&atk_object_get_type, "atk_object_get_type", LIBS);
+  gidLink(cast(void**)&atk_object_add_relationship, "atk_object_add_relationship", LIBS);
+  gidLink(cast(void**)&atk_object_connect_property_change_handler, "atk_object_connect_property_change_handler", LIBS);
+  gidLink(cast(void**)&atk_object_get_accessible_id, "atk_object_get_accessible_id", LIBS);
+  gidLink(cast(void**)&atk_object_get_attributes, "atk_object_get_attributes", LIBS);
+  gidLink(cast(void**)&atk_object_get_description, "atk_object_get_description", LIBS);
+  gidLink(cast(void**)&atk_object_get_help_text, "atk_object_get_help_text", LIBS);
+  gidLink(cast(void**)&atk_object_get_index_in_parent, "atk_object_get_index_in_parent", LIBS);
+  gidLink(cast(void**)&atk_object_get_layer, "atk_object_get_layer", LIBS);
+  gidLink(cast(void**)&atk_object_get_mdi_zorder, "atk_object_get_mdi_zorder", LIBS);
+  gidLink(cast(void**)&atk_object_get_n_accessible_children, "atk_object_get_n_accessible_children", LIBS);
+  gidLink(cast(void**)&atk_object_get_name, "atk_object_get_name", LIBS);
+  gidLink(cast(void**)&atk_object_get_object_locale, "atk_object_get_object_locale", LIBS);
+  gidLink(cast(void**)&atk_object_get_parent, "atk_object_get_parent", LIBS);
+  gidLink(cast(void**)&atk_object_get_role, "atk_object_get_role", LIBS);
+  gidLink(cast(void**)&atk_object_initialize, "atk_object_initialize", LIBS);
+  gidLink(cast(void**)&atk_object_notify_state_change, "atk_object_notify_state_change", LIBS);
+  gidLink(cast(void**)&atk_object_peek_parent, "atk_object_peek_parent", LIBS);
+  gidLink(cast(void**)&atk_object_ref_accessible_child, "atk_object_ref_accessible_child", LIBS);
+  gidLink(cast(void**)&atk_object_ref_relation_set, "atk_object_ref_relation_set", LIBS);
+  gidLink(cast(void**)&atk_object_ref_state_set, "atk_object_ref_state_set", LIBS);
+  gidLink(cast(void**)&atk_object_remove_property_change_handler, "atk_object_remove_property_change_handler", LIBS);
+  gidLink(cast(void**)&atk_object_remove_relationship, "atk_object_remove_relationship", LIBS);
+  gidLink(cast(void**)&atk_object_set_accessible_id, "atk_object_set_accessible_id", LIBS);
+  gidLink(cast(void**)&atk_object_set_description, "atk_object_set_description", LIBS);
+  gidLink(cast(void**)&atk_object_set_help_text, "atk_object_set_help_text", LIBS);
+  gidLink(cast(void**)&atk_object_set_name, "atk_object_set_name", LIBS);
+  gidLink(cast(void**)&atk_object_set_parent, "atk_object_set_parent", LIBS);
+  gidLink(cast(void**)&atk_object_set_role, "atk_object_set_role", LIBS);
+
+  // ObjectFactory
+  gidLink(cast(void**)&atk_object_factory_get_type, "atk_object_factory_get_type", LIBS);
+  gidLink(cast(void**)&atk_object_factory_create_accessible, "atk_object_factory_create_accessible", LIBS);
+  gidLink(cast(void**)&atk_object_factory_get_accessible_type, "atk_object_factory_get_accessible_type", LIBS);
+  gidLink(cast(void**)&atk_object_factory_invalidate, "atk_object_factory_invalidate", LIBS);
+
+  // Plug
+  gidLink(cast(void**)&atk_plug_get_type, "atk_plug_get_type", LIBS);
+  gidLink(cast(void**)&atk_plug_new, "atk_plug_new", LIBS);
+  gidLink(cast(void**)&atk_plug_get_id, "atk_plug_get_id", LIBS);
+  gidLink(cast(void**)&atk_plug_set_child, "atk_plug_set_child", LIBS);
+
+  // Range
+  gidLink(cast(void**)&atk_range_get_type, "atk_range_get_type", LIBS);
+  gidLink(cast(void**)&atk_range_new, "atk_range_new", LIBS);
+  gidLink(cast(void**)&atk_range_copy, "atk_range_copy", LIBS);
+  gidLink(cast(void**)&atk_range_free, "atk_range_free", LIBS);
+  gidLink(cast(void**)&atk_range_get_description, "atk_range_get_description", LIBS);
+  gidLink(cast(void**)&atk_range_get_lower_limit, "atk_range_get_lower_limit", LIBS);
+  gidLink(cast(void**)&atk_range_get_upper_limit, "atk_range_get_upper_limit", LIBS);
+
+  // Rectangle
+  gidLink(cast(void**)&atk_rectangle_get_type, "atk_rectangle_get_type", LIBS);
+
+  // Registry
+  gidLink(cast(void**)&atk_registry_get_type, "atk_registry_get_type", LIBS);
+  gidLink(cast(void**)&atk_registry_get_factory, "atk_registry_get_factory", LIBS);
+  gidLink(cast(void**)&atk_registry_get_factory_type, "atk_registry_get_factory_type", LIBS);
+  gidLink(cast(void**)&atk_registry_set_factory_type, "atk_registry_set_factory_type", LIBS);
+
+  // Relation
+  gidLink(cast(void**)&atk_relation_get_type, "atk_relation_get_type", LIBS);
+  gidLink(cast(void**)&atk_relation_new, "atk_relation_new", LIBS);
+  gidLink(cast(void**)&atk_relation_add_target, "atk_relation_add_target", LIBS);
+  gidLink(cast(void**)&atk_relation_get_relation_type, "atk_relation_get_relation_type", LIBS);
+  gidLink(cast(void**)&atk_relation_get_target, "atk_relation_get_target", LIBS);
+  gidLink(cast(void**)&atk_relation_remove_target, "atk_relation_remove_target", LIBS);
+
+  // RelationSet
+  gidLink(cast(void**)&atk_relation_set_get_type, "atk_relation_set_get_type", LIBS);
+  gidLink(cast(void**)&atk_relation_set_new, "atk_relation_set_new", LIBS);
+  gidLink(cast(void**)&atk_relation_set_add, "atk_relation_set_add", LIBS);
+  gidLink(cast(void**)&atk_relation_set_add_relation_by_type, "atk_relation_set_add_relation_by_type", LIBS);
+  gidLink(cast(void**)&atk_relation_set_contains, "atk_relation_set_contains", LIBS);
+  gidLink(cast(void**)&atk_relation_set_contains_target, "atk_relation_set_contains_target", LIBS);
+  gidLink(cast(void**)&atk_relation_set_get_n_relations, "atk_relation_set_get_n_relations", LIBS);
+  gidLink(cast(void**)&atk_relation_set_get_relation, "atk_relation_set_get_relation", LIBS);
+  gidLink(cast(void**)&atk_relation_set_get_relation_by_type, "atk_relation_set_get_relation_by_type", LIBS);
+  gidLink(cast(void**)&atk_relation_set_remove, "atk_relation_set_remove", LIBS);
+
+  // Selection
+  gidLink(cast(void**)&atk_selection_get_type, "atk_selection_get_type", LIBS);
+  gidLink(cast(void**)&atk_selection_add_selection, "atk_selection_add_selection", LIBS);
+  gidLink(cast(void**)&atk_selection_clear_selection, "atk_selection_clear_selection", LIBS);
+  gidLink(cast(void**)&atk_selection_get_selection_count, "atk_selection_get_selection_count", LIBS);
+  gidLink(cast(void**)&atk_selection_is_child_selected, "atk_selection_is_child_selected", LIBS);
+  gidLink(cast(void**)&atk_selection_ref_selection, "atk_selection_ref_selection", LIBS);
+  gidLink(cast(void**)&atk_selection_remove_selection, "atk_selection_remove_selection", LIBS);
+  gidLink(cast(void**)&atk_selection_select_all_selection, "atk_selection_select_all_selection", LIBS);
+
+  // Socket
+  gidLink(cast(void**)&atk_socket_get_type, "atk_socket_get_type", LIBS);
+  gidLink(cast(void**)&atk_socket_new, "atk_socket_new", LIBS);
+  gidLink(cast(void**)&atk_socket_embed, "atk_socket_embed", LIBS);
+  gidLink(cast(void**)&atk_socket_is_occupied, "atk_socket_is_occupied", LIBS);
+
+  // StateSet
+  gidLink(cast(void**)&atk_state_set_get_type, "atk_state_set_get_type", LIBS);
+  gidLink(cast(void**)&atk_state_set_new, "atk_state_set_new", LIBS);
+  gidLink(cast(void**)&atk_state_set_add_state, "atk_state_set_add_state", LIBS);
+  gidLink(cast(void**)&atk_state_set_add_states, "atk_state_set_add_states", LIBS);
+  gidLink(cast(void**)&atk_state_set_and_sets, "atk_state_set_and_sets", LIBS);
+  gidLink(cast(void**)&atk_state_set_clear_states, "atk_state_set_clear_states", LIBS);
+  gidLink(cast(void**)&atk_state_set_contains_state, "atk_state_set_contains_state", LIBS);
+  gidLink(cast(void**)&atk_state_set_contains_states, "atk_state_set_contains_states", LIBS);
+  gidLink(cast(void**)&atk_state_set_is_empty, "atk_state_set_is_empty", LIBS);
+  gidLink(cast(void**)&atk_state_set_or_sets, "atk_state_set_or_sets", LIBS);
+  gidLink(cast(void**)&atk_state_set_remove_state, "atk_state_set_remove_state", LIBS);
+  gidLink(cast(void**)&atk_state_set_xor_sets, "atk_state_set_xor_sets", LIBS);
+
+  // StreamableContent
+  gidLink(cast(void**)&atk_streamable_content_get_type, "atk_streamable_content_get_type", LIBS);
+  gidLink(cast(void**)&atk_streamable_content_get_mime_type, "atk_streamable_content_get_mime_type", LIBS);
+  gidLink(cast(void**)&atk_streamable_content_get_n_mime_types, "atk_streamable_content_get_n_mime_types", LIBS);
+  gidLink(cast(void**)&atk_streamable_content_get_stream, "atk_streamable_content_get_stream", LIBS);
+  gidLink(cast(void**)&atk_streamable_content_get_uri, "atk_streamable_content_get_uri", LIBS);
+
+  // Table
+  gidLink(cast(void**)&atk_table_get_type, "atk_table_get_type", LIBS);
+  gidLink(cast(void**)&atk_table_add_column_selection, "atk_table_add_column_selection", LIBS);
+  gidLink(cast(void**)&atk_table_add_row_selection, "atk_table_add_row_selection", LIBS);
+  gidLink(cast(void**)&atk_table_get_caption, "atk_table_get_caption", LIBS);
+  gidLink(cast(void**)&atk_table_get_column_at_index, "atk_table_get_column_at_index", LIBS);
+  gidLink(cast(void**)&atk_table_get_column_description, "atk_table_get_column_description", LIBS);
+  gidLink(cast(void**)&atk_table_get_column_extent_at, "atk_table_get_column_extent_at", LIBS);
+  gidLink(cast(void**)&atk_table_get_column_header, "atk_table_get_column_header", LIBS);
+  gidLink(cast(void**)&atk_table_get_index_at, "atk_table_get_index_at", LIBS);
+  gidLink(cast(void**)&atk_table_get_n_columns, "atk_table_get_n_columns", LIBS);
+  gidLink(cast(void**)&atk_table_get_n_rows, "atk_table_get_n_rows", LIBS);
+  gidLink(cast(void**)&atk_table_get_row_at_index, "atk_table_get_row_at_index", LIBS);
+  gidLink(cast(void**)&atk_table_get_row_description, "atk_table_get_row_description", LIBS);
+  gidLink(cast(void**)&atk_table_get_row_extent_at, "atk_table_get_row_extent_at", LIBS);
+  gidLink(cast(void**)&atk_table_get_row_header, "atk_table_get_row_header", LIBS);
+  gidLink(cast(void**)&atk_table_get_selected_columns, "atk_table_get_selected_columns", LIBS);
+  gidLink(cast(void**)&atk_table_get_selected_rows, "atk_table_get_selected_rows", LIBS);
+  gidLink(cast(void**)&atk_table_get_summary, "atk_table_get_summary", LIBS);
+  gidLink(cast(void**)&atk_table_is_column_selected, "atk_table_is_column_selected", LIBS);
+  gidLink(cast(void**)&atk_table_is_row_selected, "atk_table_is_row_selected", LIBS);
+  gidLink(cast(void**)&atk_table_is_selected, "atk_table_is_selected", LIBS);
+  gidLink(cast(void**)&atk_table_ref_at, "atk_table_ref_at", LIBS);
+  gidLink(cast(void**)&atk_table_remove_column_selection, "atk_table_remove_column_selection", LIBS);
+  gidLink(cast(void**)&atk_table_remove_row_selection, "atk_table_remove_row_selection", LIBS);
+  gidLink(cast(void**)&atk_table_set_caption, "atk_table_set_caption", LIBS);
+  gidLink(cast(void**)&atk_table_set_column_description, "atk_table_set_column_description", LIBS);
+  gidLink(cast(void**)&atk_table_set_column_header, "atk_table_set_column_header", LIBS);
+  gidLink(cast(void**)&atk_table_set_row_description, "atk_table_set_row_description", LIBS);
+  gidLink(cast(void**)&atk_table_set_row_header, "atk_table_set_row_header", LIBS);
+  gidLink(cast(void**)&atk_table_set_summary, "atk_table_set_summary", LIBS);
+
+  // TableCell
+  gidLink(cast(void**)&atk_table_cell_get_type, "atk_table_cell_get_type", LIBS);
+  gidLink(cast(void**)&atk_table_cell_get_column_header_cells, "atk_table_cell_get_column_header_cells", LIBS);
+  gidLink(cast(void**)&atk_table_cell_get_column_span, "atk_table_cell_get_column_span", LIBS);
+  gidLink(cast(void**)&atk_table_cell_get_position, "atk_table_cell_get_position", LIBS);
+  gidLink(cast(void**)&atk_table_cell_get_row_column_span, "atk_table_cell_get_row_column_span", LIBS);
+  gidLink(cast(void**)&atk_table_cell_get_row_header_cells, "atk_table_cell_get_row_header_cells", LIBS);
+  gidLink(cast(void**)&atk_table_cell_get_row_span, "atk_table_cell_get_row_span", LIBS);
+  gidLink(cast(void**)&atk_table_cell_get_table, "atk_table_cell_get_table", LIBS);
+
+  // Text
+  gidLink(cast(void**)&atk_text_get_type, "atk_text_get_type", LIBS);
+  gidLink(cast(void**)&atk_text_free_ranges, "atk_text_free_ranges", LIBS);
+  gidLink(cast(void**)&atk_text_add_selection, "atk_text_add_selection", LIBS);
+  gidLink(cast(void**)&atk_text_get_bounded_ranges, "atk_text_get_bounded_ranges", LIBS);
+  gidLink(cast(void**)&atk_text_get_caret_offset, "atk_text_get_caret_offset", LIBS);
+  gidLink(cast(void**)&atk_text_get_character_at_offset, "atk_text_get_character_at_offset", LIBS);
+  gidLink(cast(void**)&atk_text_get_character_count, "atk_text_get_character_count", LIBS);
+  gidLink(cast(void**)&atk_text_get_character_extents, "atk_text_get_character_extents", LIBS);
+  gidLink(cast(void**)&atk_text_get_default_attributes, "atk_text_get_default_attributes", LIBS);
+  gidLink(cast(void**)&atk_text_get_n_selections, "atk_text_get_n_selections", LIBS);
+  gidLink(cast(void**)&atk_text_get_offset_at_point, "atk_text_get_offset_at_point", LIBS);
+  gidLink(cast(void**)&atk_text_get_range_extents, "atk_text_get_range_extents", LIBS);
+  gidLink(cast(void**)&atk_text_get_run_attributes, "atk_text_get_run_attributes", LIBS);
+  gidLink(cast(void**)&atk_text_get_selection, "atk_text_get_selection", LIBS);
+  gidLink(cast(void**)&atk_text_get_string_at_offset, "atk_text_get_string_at_offset", LIBS);
+  gidLink(cast(void**)&atk_text_get_text, "atk_text_get_text", LIBS);
+  gidLink(cast(void**)&atk_text_get_text_after_offset, "atk_text_get_text_after_offset", LIBS);
+  gidLink(cast(void**)&atk_text_get_text_at_offset, "atk_text_get_text_at_offset", LIBS);
+  gidLink(cast(void**)&atk_text_get_text_before_offset, "atk_text_get_text_before_offset", LIBS);
+  gidLink(cast(void**)&atk_text_remove_selection, "atk_text_remove_selection", LIBS);
+  gidLink(cast(void**)&atk_text_scroll_substring_to, "atk_text_scroll_substring_to", LIBS);
+  gidLink(cast(void**)&atk_text_scroll_substring_to_point, "atk_text_scroll_substring_to_point", LIBS);
+  gidLink(cast(void**)&atk_text_set_caret_offset, "atk_text_set_caret_offset", LIBS);
+  gidLink(cast(void**)&atk_text_set_selection, "atk_text_set_selection", LIBS);
+
+  // TextRange
+  gidLink(cast(void**)&atk_text_range_get_type, "atk_text_range_get_type", LIBS);
+
+  // Util
+  gidLink(cast(void**)&atk_util_get_type, "atk_util_get_type", LIBS);
+
+  // ValueAtk
+  gidLink(cast(void**)&atk_value_get_type, "atk_value_get_type", LIBS);
+  gidLink(cast(void**)&atk_value_get_current_value, "atk_value_get_current_value", LIBS);
+  gidLink(cast(void**)&atk_value_get_increment, "atk_value_get_increment", LIBS);
+  gidLink(cast(void**)&atk_value_get_maximum_value, "atk_value_get_maximum_value", LIBS);
+  gidLink(cast(void**)&atk_value_get_minimum_increment, "atk_value_get_minimum_increment", LIBS);
+  gidLink(cast(void**)&atk_value_get_minimum_value, "atk_value_get_minimum_value", LIBS);
+  gidLink(cast(void**)&atk_value_get_range, "atk_value_get_range", LIBS);
+  gidLink(cast(void**)&atk_value_get_sub_ranges, "atk_value_get_sub_ranges", LIBS);
+  gidLink(cast(void**)&atk_value_get_value_and_text, "atk_value_get_value_and_text", LIBS);
+  gidLink(cast(void**)&atk_value_set_current_value, "atk_value_set_current_value", LIBS);
+  gidLink(cast(void**)&atk_value_set_value, "atk_value_set_value", LIBS);
+
+  // Window
+  gidLink(cast(void**)&atk_window_get_type, "atk_window_get_type", LIBS);
+}

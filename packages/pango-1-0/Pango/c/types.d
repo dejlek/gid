@@ -611,7 +611,7 @@ enum PangoFontScale
  * `PangoGravity`; for example, %PANGO_GRAVITY_AUTO only can be passed to
  * [Pango.Context.setBaseGravity] and can only be returned by
  * [Pango.Context.getBaseGravity].
- * See also: [Pango]
+ * See also: [Pango.GravityHint]
  */
 enum PangoGravity
 {
@@ -645,7 +645,7 @@ enum PangoGravity
  * `PangoGravityHint` defines how horizontal scripts should behave in a
  * vertical context.
  * That is, English excerpts in a vertical paragraph for example.
- * See also [Pango]
+ * See also [Pango.Gravity]
  */
 enum PangoGravityHint
 {
@@ -790,7 +790,7 @@ enum PangoRenderPart
  * [Unicode Standard Annex 24: Script names](http://www.unicode.org/reports/tr24/)
  * Note that this enumeration is deprecated and will not be updated to include values
  * in newer versions of the Unicode standard. Applications should use the
- * [GLib] enumeration instead,
+ * [GLib.UnicodeScript] enumeration instead,
  * whose values are interchangeable with `PangoScript`.
  */
 enum PangoScript
@@ -2114,7 +2114,7 @@ struct PangoContextClass;
 
 /**
  * A `PangoCoverage` structure is a map from Unicode characters
- * to [Pango] values.
+ * to [Pango.CoverageLevel] values.
  * It is often necessary in Pango to determine if a particular
  * font can represent a particular character, and also how well
  * it can represent that character. The `PangoCoverage` is a data

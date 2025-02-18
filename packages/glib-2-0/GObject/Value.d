@@ -180,8 +180,7 @@ class Value : Boxed
    */
   void* getBoxed()
   {
-    void* _retval;
-    _retval = g_value_get_boxed(cast(GValue*)cPtr);
+    auto _retval = g_value_get_boxed(cast(GValue*)cPtr);
     return _retval;
   }
 
@@ -318,8 +317,7 @@ class Value : Boxed
    */
   void* getPointer()
   {
-    void* _retval;
-    _retval = g_value_get_pointer(cast(GValue*)cPtr);
+    auto _retval = g_value_get_pointer(cast(GValue*)cPtr);
     return _retval;
   }
 
@@ -439,8 +437,7 @@ class Value : Boxed
    */
   void* peekPointer()
   {
-    void* _retval;
-    _retval = g_value_peek_pointer(cast(GValue*)cPtr);
+    auto _retval = g_value_peek_pointer(cast(GValue*)cPtr);
     return _retval;
   }
 

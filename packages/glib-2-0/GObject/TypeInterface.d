@@ -1,7 +1,6 @@
 module GObject.TypeInterface;
 
 import GObject.ObjectG;
-import GObject.TypeClass;
 import GObject.TypePlugin;
 import GObject.TypePluginT;
 import GObject.Types;
@@ -98,24 +97,6 @@ class TypeInterface
   {
     GType _retval;
     _retval = g_type_interface_instantiatable_prerequisite(interfaceType);
-    return _retval;
-  }
-
-  /**
-   * Returns the #GTypeInterface structure of an interface to which the
-   * passed in class conforms.
-   * Params:
-   *   instanceClass = a #GTypeClass structure
-   *   ifaceType = an interface ID which this class conforms to
-   * Returns: the #GTypeInterface
-   *   structure of iface_type if implemented by instance_class, %NULL
-   *   otherwise
-   */
-  static TypeInterface peek(TypeClass instanceClass, GType ifaceType)
-  {
-    GTypeInterface* _cretval;
-    _cretval = g_type_interface_peek(instanceClass ? cast(GTypeClass*)instanceClass.cPtr : null, ifaceType);
-    auto _retval = _cretval ? new TypeInterface(cast(GTypeInterface*)_cretval) : null;
     return _retval;
   }
 

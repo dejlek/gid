@@ -113,8 +113,7 @@ class ContentDeserializer : ObjectG, AsyncResult
    */
   void* getTaskData()
   {
-    void* _retval;
-    _retval = gdk_content_deserializer_get_task_data(cast(GdkContentDeserializer*)cPtr);
+    auto _retval = gdk_content_deserializer_get_task_data(cast(GdkContentDeserializer*)cPtr);
     return _retval;
   }
 
@@ -124,8 +123,7 @@ class ContentDeserializer : ObjectG, AsyncResult
    */
   void* getUserData()
   {
-    void* _retval;
-    _retval = gdk_content_deserializer_get_user_data(cast(GdkContentDeserializer*)cPtr);
+    auto _retval = gdk_content_deserializer_get_user_data(cast(GdkContentDeserializer*)cPtr);
     return _retval;
   }
 

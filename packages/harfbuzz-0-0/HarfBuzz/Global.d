@@ -18,7 +18,6 @@ import HarfBuzz.HBFace;
 import HarfBuzz.Map;
 import HarfBuzz.OtMathGlyphPart;
 import HarfBuzz.OtMathGlyphVariant;
-import HarfBuzz.OtNameEntry;
 import HarfBuzz.OtVarAxisInfo;
 import HarfBuzz.PaintFuncs;
 import HarfBuzz.SegmentProperties;
@@ -708,7 +707,7 @@ Codepoint bufferGetInvisibleGlyph(Buffer buffer)
  *   buffer = An #hb_buffer_t
  * Returns: The #hb_language_t of the buffer. Must not be freed by the caller.
  */
-Language bufferGetLanguage(Buffer buffer)
+language_t bufferGetLanguage(Buffer buffer)
 {
   auto _retval = hb_buffer_get_language(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   return _retval;
@@ -1067,7 +1066,7 @@ void bufferSetInvisibleGlyph(Buffer buffer, Codepoint invisible)
  *   buffer = An #hb_buffer_t
  *   language = An hb_language_t to set
  */
-void bufferSetLanguage(Buffer buffer, Language language)
+void bufferSetLanguage(Buffer buffer, language_t language)
 {
   hb_buffer_set_language(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, language);
 }
@@ -2818,6 +2817,57 @@ Bool fontGetVExtents(Font font, out FontExtents extents)
 }
 
 /**
+ * Fetches the list of variation coordinates $(LPAREN)in design-space units$(RPAREN) currently
+ * set on a font.
+ * Note that this returned array may only contain values for some
+ * $(LPAREN)or none$(RPAREN) of the axes; omitted axes effectively have their default
+ * values.
+ * Return value is valid as long as variation coordinates of the font
+ * are not modified.
+ * Params:
+ *   font = #hb_font_t to work upon
+ * Returns: coordinates array
+ */
+float[] fontGetVarCoordsDesign(Font font)
+{
+  const(float)* _cretval;
+  uint _cretlength;
+  _cretval = hb_font_get_var_coords_design(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, &_cretlength);
+  float[] _retval;
+
+  if (_cretval)
+  {
+    _retval = cast(float[] )_cretval[0 .. _cretlength];
+  }
+  return _retval;
+}
+
+/**
+ * Fetches the list of normalized variation coordinates currently
+ * set on a font.
+ * Note that this returned array may only contain values for some
+ * $(LPAREN)or none$(RPAREN) of the axes; omitted axes effectively have zero values.
+ * Return value is valid as long as variation coordinates of the font
+ * are not modified.
+ * Params:
+ *   font = #hb_font_t to work upon
+ * Returns: coordinates array
+ */
+int[] fontGetVarCoordsNormalized(Font font)
+{
+  const(int)* _cretval;
+  uint _cretlength;
+  _cretval = hb_font_get_var_coords_normalized(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, &_cretlength);
+  int[] _retval;
+
+  if (_cretval)
+  {
+    _retval = cast(int[] )_cretval[0 .. _cretlength];
+  }
+  return _retval;
+}
+
+/**
  * Returns the currently-set named-instance index of the font.
  * Params:
  *   font = a font.
@@ -3106,28 +3156,6 @@ void fontSetVariation(Font font, Tag tag, float value)
 }
 
 /**
- * Applies a list of font-variation settings to a font.
- * Note that this overrides all existing variations set on font.
- * Axes not included in variations will be effectively set to their
- * default values.
- * Params:
- *   font = #hb_font_t to work upon
- *   variations = Array of variation settings to apply
- */
-void fontSetVariations(Font font, Variation[] variations)
-{
-  uint _variationsLength;
-  if (variations)
-    _variationsLength = cast(uint)variations.length;
-
-  hb_variation_t[] _tmpvariations;
-  foreach (obj; variations)
-    _tmpvariations ~= obj.cInstance;
-  const(hb_variation_t)* _variations = _tmpvariations.ptr;
-  hb_font_set_variations(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, _variations, _variationsLength);
-}
-
-/**
  * Subtracts the origin coordinates from an $(LPAREN)X,Y$(RPAREN) point coordinate,
  * in the specified glyph ID in the specified font.
  * Calls the appropriate direction-specific variant $(LPAREN)horizontal
@@ -3380,7 +3408,7 @@ GlyphFlags glyphInfoGetGlyphFlags(GlyphInfo info)
  *     a BCP 47 language tag
  * Returns: The #hb_language_t corresponding to the BCP 47 language tag.
  */
-Language languageFromString(ubyte[] str)
+language_t languageFromString(ubyte[] str)
 {
   int _len;
   if (str)
@@ -3402,7 +3430,7 @@ Language languageFromString(ubyte[] str)
  * Returns: The default language of the locale as
  *   an #hb_language_t
  */
-Language languageGetDefault()
+language_t languageGetDefault()
 {
   auto _retval = hb_language_get_default();
   return _retval;
@@ -3417,7 +3445,7 @@ Language languageGetDefault()
  *   specific = Another #hb_language_t
  * Returns: `true` if languages match, `false` otherwise.
  */
-Bool languageMatches(Language language, Language specific)
+Bool languageMatches(language_t language, language_t specific)
 {
   Bool _retval;
   _retval = hb_language_matches(language, specific);
@@ -3431,7 +3459,7 @@ Bool languageMatches(Language language, Language specific)
  * Returns: A `NULL`-terminated string representing the language. Must not be freed by
  *   the caller.
  */
-string languageToString(Language language)
+string languageToString(language_t language)
 {
   const(char)* _cretval;
   _cretval = hb_language_to_string(language);
@@ -4028,7 +4056,7 @@ Bool otLayoutGetBaseline(Font font, OtLayoutBaselineTag baselineTag, Direction d
  *   coord = baseline value if found.
  * Returns: `true` if found baseline value in the font.
  */
-Bool otLayoutGetBaseline2(Font font, OtLayoutBaselineTag baselineTag, Direction direction, Script script, Language language, out Position coord)
+Bool otLayoutGetBaseline2(Font font, OtLayoutBaselineTag baselineTag, Direction direction, Script script, language_t language, out Position coord)
 {
   Bool _retval;
   _retval = hb_ot_layout_get_baseline2(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
@@ -4064,7 +4092,7 @@ void otLayoutGetBaselineWithFallback(Font font, OtLayoutBaselineTag baselineTag,
  *   language = language, currently unused.
  *   coord = baseline value if found.
  */
-void otLayoutGetBaselineWithFallback2(Font font, OtLayoutBaselineTag baselineTag, Direction direction, Script script, Language language, out Position coord)
+void otLayoutGetBaselineWithFallback2(Font font, OtLayoutBaselineTag baselineTag, Direction direction, Script script, language_t language, out Position coord)
 {
   hb_ot_layout_get_baseline_with_fallback2(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
 }
@@ -4110,7 +4138,7 @@ Bool otLayoutGetFontExtents(Font font, Direction direction, Tag scriptTag, Tag l
  *   extents = font extents if found.
  * Returns: `true` if found script/language-specific font extents.
  */
-Bool otLayoutGetFontExtents2(Font font, Direction direction, Script script, Language language, out FontExtents extents)
+Bool otLayoutGetFontExtents2(Font font, Direction direction, Script script, language_t language, out FontExtents extents)
 {
   Bool _retval;
   _retval = hb_ot_layout_get_font_extents2(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, direction, script, language, &extents);
@@ -4901,30 +4929,6 @@ Position otMetricsGetYVariation(Font font, OtMetricsTag metricsTag)
 }
 
 /**
- * Enumerates all available name IDs and language combinations. Returned
- * array is owned by the face and should not be modified.  It can be
- * used as long as face is alive.
- * Params:
- *   face = font face.
- * Returns: Array of available name entries.
- */
-OtNameEntry[] otNameListNames(HBFace face)
-{
-  const(hb_ot_name_entry_t)* _cretval;
-  uint _cretlength;
-  _cretval = hb_ot_name_list_names(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, &_cretlength);
-  OtNameEntry[] _retval;
-
-  if (_cretval)
-  {
-    _retval = new OtNameEntry[_cretlength];
-    foreach (i; 0 .. _cretlength)
-      _retval[i] = new OtNameEntry(cast(void*)&_cretval[i], No.Take);
-  }
-  return _retval;
-}
-
-/**
  * Converts an #hb_language_t to an #hb_tag_t.
  * Params:
  *   language = an #hb_language_t to convert.
@@ -4932,7 +4936,7 @@ OtNameEntry[] otNameListNames(HBFace face)
 
  * Deprecated: use [HarfBuzz.Global.otTagsFromScriptAndLanguage] instead
  */
-Tag otTagFromLanguage(Language language)
+Tag otTagFromLanguage(language_t language)
 {
   Tag _retval;
   _retval = hb_ot_tag_from_language(language);
@@ -4945,7 +4949,7 @@ Tag otTagFromLanguage(Language language)
  *   tag = an language tag
  * Returns: The #hb_language_t corresponding to tag.
  */
-Language otTagToLanguage(Tag tag)
+language_t otTagToLanguage(Tag tag)
 {
   auto _retval = hb_ot_tag_to_language(tag);
   return _retval;
@@ -4993,7 +4997,7 @@ void otTagsFromScript(Script script, out Tag scriptTag1, out Tag scriptTag2)
  *   languageTags = array of size at least language_count to store
  *     the language tag results
  */
-void otTagsFromScriptAndLanguage(Script script, Language language, ref uint scriptCount, out Tag scriptTags, ref uint languageCount, out Tag languageTags)
+void otTagsFromScriptAndLanguage(Script script, language_t language, ref uint scriptCount, out Tag scriptTags, ref uint languageCount, out Tag languageTags)
 {
   hb_ot_tags_from_script_and_language(script, language, cast(uint*)&scriptCount, cast(hb_tag_t*)&scriptTags, cast(uint*)&languageCount, cast(hb_tag_t*)&languageTags);
 }
@@ -5008,7 +5012,7 @@ void otTagsFromScriptAndLanguage(Script script, Language language, ref uint scri
  *   language = the #hb_language_t corresponding to script_tag and
  *     language_tag.
  */
-void otTagsToScriptAndLanguage(Tag scriptTag, Tag languageTag, out Script script, out Language language)
+void otTagsToScriptAndLanguage(Tag scriptTag, Tag languageTag, out Script script, out language_t language)
 {
   hb_ot_tags_to_script_and_language(scriptTag, languageTag, &script, &language);
 }

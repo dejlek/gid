@@ -3,7 +3,6 @@ module Gio.SimpleActionGroup;
 import GObject.ObjectG;
 import Gid.gid;
 import Gio.Action;
-import Gio.ActionEntry;
 import Gio.ActionGroup;
 import Gio.ActionGroupT;
 import Gio.ActionMap;
@@ -49,29 +48,6 @@ class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
     GSimpleActionGroup* _cretval;
     _cretval = g_simple_action_group_new();
     this(_cretval, Yes.Take);
-  }
-
-  /**
-   * A convenience function for creating multiple #GSimpleAction instances
-   * and adding them to the action group.
-   * Params:
-   *   entries = a pointer to the first item in
-   *     an array of #GActionEntry structs
-   *   userData = the user data for signal connections
-
-   * Deprecated: Use [Gio.ActionMap.addActionEntries]
-   */
-  void addEntries(ActionEntry[] entries, void* userData)
-  {
-    int _nEntries;
-    if (entries)
-      _nEntries = cast(int)entries.length;
-
-    GActionEntry[] _tmpentries;
-    foreach (obj; entries)
-      _tmpentries ~= obj.cInstance;
-    const(GActionEntry)* _entries = _tmpentries.ptr;
-    g_simple_action_group_add_entries(cast(GSimpleActionGroup*)cPtr, _entries, _nEntries, userData);
   }
 
   /**

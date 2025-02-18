@@ -91,7 +91,7 @@ class Stroke : Boxed
 
   /**
    * Gets the line cap used.
-   * See [Gsk] for details.
+   * See [Gsk.LineCap] for details.
    * Returns: The line cap
    */
   LineCap getLineCap()
@@ -104,7 +104,7 @@ class Stroke : Boxed
 
   /**
    * Gets the line join used.
-   * See [Gsk] for details.
+   * See [Gsk.LineJoin] for details.
    * Returns: The line join
    */
   LineJoin getLineJoin()
@@ -183,7 +183,7 @@ class Stroke : Boxed
 
   /**
    * Sets the line cap to be used when stroking.
-   * See [Gsk] for details.
+   * See [Gsk.LineCap] for details.
    * Params:
    *   lineCap = the `GskLineCap`
    */
@@ -194,7 +194,7 @@ class Stroke : Boxed
 
   /**
    * Sets the line join to be used when stroking.
-   * See [Gsk] for details.
+   * See [Gsk.LineJoin] for details.
    * Params:
    *   lineJoin = The line join to use
    */

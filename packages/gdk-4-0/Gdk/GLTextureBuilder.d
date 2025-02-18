@@ -150,8 +150,7 @@ class GLTextureBuilder : ObjectG
    */
   void* getSync()
   {
-    void* _retval;
-    _retval = gdk_gl_texture_builder_get_sync(cast(GdkGLTextureBuilder*)cPtr);
+    auto _retval = gdk_gl_texture_builder_get_sync(cast(GdkGLTextureBuilder*)cPtr);
     return _retval;
   }
 

@@ -1,7 +1,6 @@
 module GObject.EnumClass;
 
 import GObject.EnumValue;
-import GObject.TypeClass;
 import GObject.Types;
 import GObject.c.functions;
 import GObject.c.types;
@@ -29,11 +28,6 @@ class EnumClass
   void* cPtr()
   {
     return cast(void*)&cInstance;
-  }
-
-  @property TypeClass gTypeClass()
-  {
-    return new TypeClass(cast(GTypeClass*)&(cast(GEnumClass*)cPtr).gTypeClass);
   }
 
   @property int minimum()

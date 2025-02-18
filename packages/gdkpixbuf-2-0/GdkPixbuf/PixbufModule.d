@@ -117,16 +117,6 @@ class PixbufModule
     (cast(GdkPixbufModule*)cPtr).loadXpmData = propval;
   }
 
-  @property GdkPixbufModuleBeginLoadFunc beginLoad()
-  {
-    return (cast(GdkPixbufModule*)cPtr).beginLoad;
-  }
-
-  @property void beginLoad(GdkPixbufModuleBeginLoadFunc propval)
-  {
-    (cast(GdkPixbufModule*)cPtr).beginLoad = propval;
-  }
-
   @property GdkPixbufModuleStopLoadFunc stopLoad()
   {
     return (cast(GdkPixbufModule*)cPtr).stopLoad;
@@ -165,16 +155,6 @@ class PixbufModule
   @property void save(GdkPixbufModuleSaveFunc propval)
   {
     (cast(GdkPixbufModule*)cPtr).save = propval;
-  }
-
-  @property GdkPixbufModuleSaveCallbackFunc saveToCallback()
-  {
-    return (cast(GdkPixbufModule*)cPtr).saveToCallback;
-  }
-
-  @property void saveToCallback(GdkPixbufModuleSaveCallbackFunc propval)
-  {
-    (cast(GdkPixbufModule*)cPtr).saveToCallback = propval;
   }
 
   @property GdkPixbufModuleSaveOptionSupportedFunc isSaveOptionSupported()

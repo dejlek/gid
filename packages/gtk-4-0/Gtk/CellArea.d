@@ -210,7 +210,7 @@ import Gtk.c.types;
  * responsible for knowing where `GtkTreeModel` rows are rendered inside
  * the widget, so at vfunc@Gtk.Widget.focus time the layouting widget
  * should use the `GtkCellArea` methods to navigate focus inside the area
- * and then observe the [Gtk] to pass the focus to adjacent
+ * and then observe the [Gtk.DirectionType] to pass the focus to adjacent
  * rows and areas.
  * A basic example of how the vfunc@Gtk.Widget.focus virtual method
  * should be implemented:

@@ -42,20 +42,10 @@ alias VulkanError = GdkVulkanError;
 
 // Structs
 alias DevicePadInterface = GdkDevicePadInterface*;
-alias DmabufTextureBuilderClass = GdkDmabufTextureBuilderClass*;
-alias DmabufTextureClass = GdkDmabufTextureClass*;
 alias DragSurfaceInterface = GdkDragSurfaceInterface*;
-alias FrameClockClass = GdkFrameClockClass*;
 alias FrameClockPrivate = GdkFrameClockPrivate*;
-alias GLTextureBuilderClass = GdkGLTextureBuilderClass*;
-alias GLTextureClass = GdkGLTextureClass*;
 alias KeymapKey = GdkKeymapKey;
-alias MemoryTextureClass = GdkMemoryTextureClass*;
-alias MonitorClass = GdkMonitorClass*;
 alias PopupInterface = GdkPopupInterface*;
-alias SnapshotClass = GdkSnapshotClass*;
-alias SurfaceClass = GdkSurfaceClass*;
-alias TextureClass = GdkTextureClass*;
 alias TimeCoord = GdkTimeCoord;
 alias ToplevelInterface = GdkToplevelInterface*;
 

@@ -182,3 +182,7 @@
 
 //# Remove glib:get-type "intern"
 //!del '*class[glib:get-type=intern][glib:get-type]'
+
+//# Disable all Class and Iface records
+//!set *record[*Class][ignore] 1
+//!set *record[*Iface][ignore] 1

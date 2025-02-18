@@ -122,8 +122,7 @@ class Device : Boxed
    */
   void* getUserData(UserDataKey key)
   {
-    void* _retval;
-    _retval = cairo_device_get_user_data(cast(cairo_device_t*)cPtr, &key);
+    auto _retval = cairo_device_get_user_data(cast(cairo_device_t*)cPtr, &key);
     return _retval;
   }
 

@@ -2,7 +2,6 @@ module Gtk.Editable;
 
 public import Gtk.EditableIfaceProxy;
 import GObject.DClosure;
-import GObject.ObjectClass;
 import GObject.ObjectG;
 import GObject.ParamSpec;
 import GObject.Value;
@@ -161,31 +160,6 @@ interface Editable
   {
     bool _retval;
     _retval = gtk_editable_delegate_set_property(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, propId, value ? cast(GValue*)value.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
-    return _retval;
-  }
-
-  /**
-   * Overrides the `GtkEditable` properties for class.
-   * This is a helper function that should be called in class_init,
-   * after installing your own properties.
-   * Note that your class must have "text", "cursor-position",
-   * "selection-bound", "editable", "width-chars", "max-width-chars",
-   * "xalign" and "enable-undo" properties for this function to work.
-   * To handle the properties in your set_property and get_property
-   * functions, you can either use [Gtk.Editable.delegateSetProperty]
-   * and [Gtk.Editable.delegateGetProperty] $(LPAREN)if you are using
-   * a delegate$(RPAREN), or remember the first_prop offset and add it to the
-   * values in the [Gtk] enumeration to get the
-   * property IDs for these properties.
-   * Params:
-   *   objectClass = a `GObjectClass`
-   *   firstProp = property ID to use for the first property
-   * Returns: the number of properties that were installed
-   */
-  static uint installProperties(ObjectClass objectClass, uint firstProp)
-  {
-    uint _retval;
-    _retval = gtk_editable_install_properties(objectClass ? cast(GObjectClass*)objectClass.cPtr : null, firstProp);
     return _retval;
   }
 

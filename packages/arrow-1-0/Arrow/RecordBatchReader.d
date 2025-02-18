@@ -54,9 +54,8 @@ class RecordBatchReader : ObjectG
 
   void* export_()
   {
-    void* _retval;
     GError *_err;
-    _retval = garrow_record_batch_reader_export(cast(GArrowRecordBatchReader*)cPtr, &_err);
+    auto _retval = garrow_record_batch_reader_export(cast(GArrowRecordBatchReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

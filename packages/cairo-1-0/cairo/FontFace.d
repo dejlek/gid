@@ -67,8 +67,7 @@ class FontFace : Boxed
    */
   void* getUserData(UserDataKey key)
   {
-    void* _retval;
-    _retval = cairo_font_face_get_user_data(cast(cairo_font_face_t*)cPtr, &key);
+    auto _retval = cairo_font_face_get_user_data(cast(cairo_font_face_t*)cPtr, &key);
     return _retval;
   }
 

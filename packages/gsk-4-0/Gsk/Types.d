@@ -24,12 +24,7 @@ alias SerializationError = GskSerializationError;
 alias TransformCategory = GskTransformCategory;
 
 // Structs
-alias BroadwayRendererClass = GskBroadwayRendererClass*;
-alias CairoRendererClass = GskCairoRendererClass*;
-alias GLRendererClass = GskGLRendererClass*;
 alias ParseLocation = GskParseLocation;
-alias RendererClass = GskRendererClass*;
-alias VulkanRendererClass = GskVulkanRendererClass*;
 
 // Callbacks
 alias ParseErrorFunc = void delegate(ParseLocation start, ParseLocation end, ErrorG error);

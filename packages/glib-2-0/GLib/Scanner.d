@@ -279,9 +279,8 @@ class Scanner
    */
   void* lookupSymbol(string symbol)
   {
-    void* _retval;
     const(char)* _symbol = symbol.toCString(No.Alloc);
-    _retval = g_scanner_lookup_symbol(cast(GScanner*)cPtr, _symbol);
+    auto _retval = g_scanner_lookup_symbol(cast(GScanner*)cPtr, _symbol);
     return _retval;
   }
 
@@ -352,9 +351,8 @@ class Scanner
    */
   void* scopeLookupSymbol(uint scopeId, string symbol)
   {
-    void* _retval;
     const(char)* _symbol = symbol.toCString(No.Alloc);
-    _retval = g_scanner_scope_lookup_symbol(cast(GScanner*)cPtr, scopeId, _symbol);
+    auto _retval = g_scanner_scope_lookup_symbol(cast(GScanner*)cPtr, scopeId, _symbol);
     return _retval;
   }
 

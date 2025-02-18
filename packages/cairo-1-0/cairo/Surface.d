@@ -336,8 +336,7 @@ class Surface : Boxed
    */
   void* getUserData(UserDataKey key)
   {
-    void* _retval;
-    _retval = cairo_surface_get_user_data(cast(cairo_surface_t*)cPtr, &key);
+    auto _retval = cairo_surface_get_user_data(cast(cairo_surface_t*)cPtr, &key);
     return _retval;
   }
 

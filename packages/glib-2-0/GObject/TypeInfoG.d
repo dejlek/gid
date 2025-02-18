@@ -46,46 +46,6 @@ class TypeInfoG
     (cast(GTypeInfo*)cPtr).classSize = propval;
   }
 
-  @property GBaseInitFunc baseInit()
-  {
-    return (cast(GTypeInfo*)cPtr).baseInit;
-  }
-
-  @property void baseInit(GBaseInitFunc propval)
-  {
-    (cast(GTypeInfo*)cPtr).baseInit = propval;
-  }
-
-  @property GBaseFinalizeFunc baseFinalize()
-  {
-    return (cast(GTypeInfo*)cPtr).baseFinalize;
-  }
-
-  @property void baseFinalize(GBaseFinalizeFunc propval)
-  {
-    (cast(GTypeInfo*)cPtr).baseFinalize = propval;
-  }
-
-  @property GClassInitFunc classInit()
-  {
-    return (cast(GTypeInfo*)cPtr).classInit;
-  }
-
-  @property void classInit(GClassInitFunc propval)
-  {
-    (cast(GTypeInfo*)cPtr).classInit = propval;
-  }
-
-  @property GClassFinalizeFunc classFinalize()
-  {
-    return (cast(GTypeInfo*)cPtr).classFinalize;
-  }
-
-  @property void classFinalize(GClassFinalizeFunc propval)
-  {
-    (cast(GTypeInfo*)cPtr).classFinalize = propval;
-  }
-
   @property ushort instanceSize()
   {
     return (cast(GTypeInfo*)cPtr).instanceSize;
@@ -104,16 +64,6 @@ class TypeInfoG
   @property void nPreallocs(ushort propval)
   {
     (cast(GTypeInfo*)cPtr).nPreallocs = propval;
-  }
-
-  @property GInstanceInitFunc instanceInit()
-  {
-    return (cast(GTypeInfo*)cPtr).instanceInit;
-  }
-
-  @property void instanceInit(GInstanceInitFunc propval)
-  {
-    (cast(GTypeInfo*)cPtr).instanceInit = propval;
   }
 
   @property TypeValueTable valueTable()

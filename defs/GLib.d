@@ -1,13 +1,13 @@
 //!repo GLib-2.0
 
 //# Disable binding of container types
-//!set record[Array][disable] 1
-//!set record[ByteArray][disable] 1
-//!set record[PtrArray][disable] 1
-//!set record[List][disable] 1
-//!set record[SList][disable] 1
-//!set record[HashTable][disable] 1
-//!set record[HashTableIter][disable] 1
+//!set record[Array][ignore] 1
+//!set record[ByteArray][ignore] 1
+//!set record[PtrArray][ignore] 1
+//!set record[List][ignore] 1
+//!set record[SList][ignore] 1
+//!set record[HashTable][ignore] 1
+//!set record[HashTableIter][ignore] 1
 
 //# Change Variant to VariantG so as not to conflict with std.variant
 //!subdtype Variant VariantG
@@ -30,14 +30,14 @@
 //!set record[Variant].function[parse][introspectable] 0
 
 //# Disable problematic functions (memory allocation issues)
-//!set record[Bytes].constructor[new_take][disable] 1
-//!set function[base64_decode_inplace][disable] 1
+//!set record[Bytes].constructor[new_take][ignore] 1
+//!set function[base64_decode_inplace][ignore] 1
 
-//# Disable functions which don't have proper closures (solutions may be possible)
-//!set function[atexit][unsupported] 1
-//!set function[test_add_func][unsupported] 1
-//!set function[test_queue_destroy][unsupported] 1
-//!set record[Tree].constructor[new_full][unsupported] 1
+//# Ignore functions which don't have proper closures (solutions may be possible)
+//!set function[atexit][ignore] 1
+//!set function[test_add_func][ignore] 1
+//!set function[test_queue_destroy][ignore] 1
+//!set record[Tree].constructor[new_full][ignore] 1
 
 //# Error conflicts with the base D Error type, rename to ErrorG
 //!subtype Error ErrorG
@@ -50,20 +50,21 @@
 
 //# Fix Dir by specifying g_dir_close as the free function and g_dir_open as the constructor
 //!set record[Dir][free-function] g_dir_close
-//!set record[Dir].method[close][disable] 1
+//!set record[Dir].method[close][ignore] 1
 
 //# Disable binding of unuseful and problematic structures
-//!set record[TrashStack][disable] 1
+//!set record[Completion][ignore] 1
+//!set record[TrashStack][ignore] 1
 
 //# Disable Queue fields
-//!set record[Queue].field[head][disable] 1
-//!set record[Queue].field[tail][disable] 1
+//!set record[Queue].field[head][ignore] 1
+//!set record[Queue].field[tail][ignore] 1
 
 //# Disable TestLogMsg fields
-//!set record[TestLogMsg].*field[][disable] 1
+//!set record[TestLogMsg].*field[][ignore] 1
 
 //# Disable datalist functions
-//!set *function[datalist_*][disable] 1
+//!set *function[datalist_*][ignore] 1
 
 //# Remove problematic type
 //!del union[DoubleIEEE754]
@@ -172,7 +173,7 @@
 //!set class[Variant][glib:unref-func] g_variant_unref
 
 //# Disable deprecated g_variant_parser_get_error_quark since it confuses the exception generator
-//!set class[Variant].function[parser_get_error_quark][disable] 1
+//!set class[Variant].function[parser_get_error_quark][ignore] 1
 
 //# Add ref/unref functions to VariantBuilder
 //!set record[VariantBuilder][glib:ref-func] g_variant_builder_ref
@@ -280,7 +281,7 @@
 //!set class[Variant].method[get_string].return-value.type '<array length="0" c:type="gchar*"><type name="char" c:type="char"/></array>'
 
 //# g_markup_parse_context_new() has unnecessary closure and destroy notify, override the new() method
-//!set record[MarkupParseContext].constructor[new][disable] 1
+//!set record[MarkupParseContext].constructor[new][ignore] 1
 //!class MarkupParseContext
 
   this(ref MarkupParser parser, MarkupParseFlags flags)
@@ -292,7 +293,7 @@
   }
 
 //# g_option_group_new() has unnecessary closure and destroy notify, override the new() method
-//!set record[OptionGroup].constructor[new][disable] 1
+//!set record[OptionGroup].constructor[new][ignore] 1
 //!class OptionGroup
 
   this(string name, string description, string helpDescription)

@@ -13,9 +13,9 @@ import Gtk.c.types;
  * `GtkAccessible` is an interface for describing UI elements for
  * Assistive Technologies.
  * Every accessible implementation has:
- * - a “role”, represented by a value of the [Gtk] enumeration
- * - an “attribute”, represented by a set of [Gtk],
- * [Gtk] and [Gtk] values
+ * - a “role”, represented by a value of the [Gtk.AccessibleRole] enumeration
+ * - an “attribute”, represented by a set of [Gtk.AccessibleState],
+ * [Gtk.AccessibleProperty] and [Gtk.AccessibleRelation] values
  * The role cannot be changed after instantiating a `GtkAccessible`
  * implementation.
  * The attributes are updated every time a UI element's state changes in

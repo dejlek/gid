@@ -2,9 +2,6 @@ module Gio.InitableT;
 
 public import Gio.InitableIfaceProxy;
 public import GLib.ErrorG;
-public import GObject.ObjectG;
-public import GObject.Parameter;
-public import GObject.Types;
 public import Gid.gid;
 public import Gio.Cancellable;
 public import Gio.Types;
@@ -36,7 +33,6 @@ public import Gio.c.types;
  */
 template InitableT()
 {
-
 
   /**
    * Initializes the object implementing the interface.

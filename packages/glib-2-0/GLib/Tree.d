@@ -165,8 +165,7 @@ class Tree : Boxed
    */
   void* lookup(const(void)* key)
   {
-    void* _retval;
-    _retval = g_tree_lookup(cast(GTree*)cPtr, key);
+    auto _retval = g_tree_lookup(cast(GTree*)cPtr, key);
     return _retval;
   }
 

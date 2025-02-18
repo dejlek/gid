@@ -1,10 +1,8 @@
 module GLib.Global;
 
 import GLib.Bytes;
-import GLib.DebugKey;
 import GLib.ErrorG;
 import GLib.IOChannel;
-import GLib.LogField;
 import GLib.Source;
 import GLib.TestSuite;
 import GLib.TimeVal;
@@ -61,8 +59,7 @@ int access(string filename, int mode)
  */
 void* alignedAlloc(size_t nBlocks, size_t nBlockBytes, size_t alignment)
 {
-  void* _retval;
-  _retval = g_aligned_alloc(nBlocks, nBlockBytes, alignment);
+  auto _retval = g_aligned_alloc(nBlocks, nBlockBytes, alignment);
   return _retval;
 }
 
@@ -78,8 +75,7 @@ void* alignedAlloc(size_t nBlocks, size_t nBlockBytes, size_t alignment)
  */
 void* alignedAlloc0(size_t nBlocks, size_t nBlockBytes, size_t alignment)
 {
-  void* _retval;
-  _retval = g_aligned_alloc0(nBlocks, nBlockBytes, alignment);
+  auto _retval = g_aligned_alloc0(nBlocks, nBlockBytes, alignment);
   return _retval;
 }
 
@@ -912,8 +908,7 @@ bool atomicPointerCompareAndExchangeFull(void* atomic, void* oldval, void* newva
  */
 void* atomicPointerExchange(void* atomic, void* newval)
 {
-  void* _retval;
-  _retval = g_atomic_pointer_exchange(atomic, newval);
+  auto _retval = g_atomic_pointer_exchange(atomic, newval);
   return _retval;
 }
 
@@ -929,8 +924,7 @@ void* atomicPointerExchange(void* atomic, void* newval)
  */
 void* atomicPointerGet(void* atomic)
 {
-  void* _retval;
-  _retval = g_atomic_pointer_get(atomic);
+  auto _retval = g_atomic_pointer_get(atomic);
   return _retval;
 }
 
@@ -1004,8 +998,7 @@ size_t atomicPointerXor(void* atomic, size_t val)
  */
 void* atomicRcBoxAcquire(void* memBlock)
 {
-  void* _retval;
-  _retval = g_atomic_rc_box_acquire(memBlock);
+  auto _retval = g_atomic_rc_box_acquire(memBlock);
   return _retval;
 }
 
@@ -1022,8 +1015,7 @@ void* atomicRcBoxAcquire(void* memBlock)
  */
 void* atomicRcBoxAlloc(size_t blockSize)
 {
-  void* _retval;
-  _retval = g_atomic_rc_box_alloc(blockSize);
+  auto _retval = g_atomic_rc_box_alloc(blockSize);
   return _retval;
 }
 
@@ -1041,8 +1033,7 @@ void* atomicRcBoxAlloc(size_t blockSize)
  */
 void* atomicRcBoxAlloc0(size_t blockSize)
 {
-  void* _retval;
-  _retval = g_atomic_rc_box_alloc0(blockSize);
+  auto _retval = g_atomic_rc_box_alloc0(blockSize);
   return _retval;
 }
 
@@ -1058,8 +1049,7 @@ void* atomicRcBoxAlloc0(size_t blockSize)
  */
 void* atomicRcBoxDup(size_t blockSize, const(void)* memBlock)
 {
-  void* _retval;
-  _retval = g_atomic_rc_box_dup(blockSize, memBlock);
+  auto _retval = g_atomic_rc_box_dup(blockSize, memBlock);
   return _retval;
 }
 
@@ -1993,8 +1983,7 @@ void datasetForeach(const(void)* datasetLocation, DataForeachFunc func)
  */
 void* datasetIdGetData(const(void)* datasetLocation, Quark keyId)
 {
-  void* _retval;
-  _retval = g_dataset_id_get_data(datasetLocation, keyId);
+  auto _retval = g_dataset_id_get_data(datasetLocation, keyId);
   return _retval;
 }
 
@@ -2800,10 +2789,9 @@ string findProgramInPath(string program)
  */
 void* fopen(string filename, string mode)
 {
-  void* _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
   const(char)* _mode = mode.toCString(No.Alloc);
-  _retval = g_fopen(_filename, _mode);
+  auto _retval = g_fopen(_filename, _mode);
   return _retval;
 }
 
@@ -2924,10 +2912,9 @@ void freeSized(void* mem, size_t size)
  */
 void* freopen(string filename, string mode, void* stream)
 {
-  void* _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
   const(char)* _mode = mode.toCString(No.Alloc);
-  _retval = g_freopen(_filename, _mode, stream);
+  auto _retval = g_freopen(_filename, _mode, stream);
   return _retval;
 }
 
@@ -4314,67 +4301,6 @@ uint logSetHandler(string logDomain, LogLevelFlags logLevels, LogFunc logFunc)
 }
 
 /**
- * Set a writer function which will be called to format and write out each log
- * message.
- * Each program should set a writer function, or the default writer
- * $(LPAREN)funcGLib.log_writer_default$(RPAREN) will be used.
- * Libraries **must not** call this function — only programs are allowed to
- * install a writer function, as there must be a single, central point where
- * log messages are formatted and outputted.
- * There can only be one writer function. It is an error to set more than one.
- * Params:
- *   func = log writer function, which must not be `NULL`
- */
-void logSetWriterFunc(LogWriterFunc func)
-{
-  extern(C) GLogWriterOutput _funcCallback(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData)
-  {
-    LogWriterOutput _dretval;
-    auto _dlg = cast(LogWriterFunc*)userData;
-    LogField[] _fields;
-    _fields.length = nFields;
-    foreach (i; 0 .. nFields)
-      _fields[i] = new LogField(cast(GLogField*)&fields[i], No.Take);
-
-    _dretval = (*_dlg)(logLevel, _fields);
-    auto _retval = cast(GLogWriterOutput)_dretval;
-
-    return _retval;
-  }
-
-  auto _func = freezeDelegate(cast(void*)&func);
-  g_log_set_writer_func(&_funcCallback, _func, &thawDelegate);
-}
-
-/**
- * Log a message with structured data.
- * The message will be passed through to the log writer set by the application
- * using funcGLib.log_set_writer_func. If the
- * message is fatal $(LPAREN)i.e. its log level is flagsGLib.LogLevelFlags.LEVEL_ERROR$(RPAREN), the program will
- * be aborted at the end of this function.
- * See funcGLib.log_structured for more documentation.
- * This assumes that log_level is already present in fields $(LPAREN)typically as the
- * `PRIORITY` field$(RPAREN).
- * Params:
- *   logLevel = log level, either from [GLib], or a user-defined
- *     level
- *   fields = key–value pairs of structured data to add
- *     to the log message
- */
-void logStructuredArray(LogLevelFlags logLevel, LogField[] fields)
-{
-  size_t _nFields;
-  if (fields)
-    _nFields = cast(size_t)fields.length;
-
-  GLogField[] _tmpfields;
-  foreach (obj; fields)
-    _tmpfields ~= obj.cInstance;
-  const(GLogField)* _fields = _tmpfields.ptr;
-  g_log_structured_array(logLevel, _fields, _nFields);
-}
-
-/**
  * Log a message with structured data, accepting the data within a [GLib.VariantG].
  * This version is especially useful for use in other languages, via introspection.
  * The only mandatory item in the fields dictionary is the `"MESSAGE"` which must
@@ -4388,7 +4314,7 @@ void logStructuredArray(LogLevelFlags logLevel, LogField[] fields)
  * For more details on its usage and about the parameters, see funcGLib.log_structured.
  * Params:
  *   logDomain = log domain, usually `G_LOG_DOMAIN`
- *   logLevel = log level, either from [GLib], or a user-defined
+ *   logLevel = log level, either from [GLib.LogLevelFlags], or a user-defined
  *     level
  *   fields = a dictionary $(LPAREN)[GLib.VariantG] of the type `G_VARIANT_TYPE_VARDICT`$(RPAREN)
  *     containing the key-value pairs of message data.
@@ -4397,48 +4323,6 @@ void logVariant(string logDomain, LogLevelFlags logLevel, VariantG fields)
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   g_log_variant(_logDomain, logLevel, fields ? cast(VariantC*)fields.cPtr(No.Dup) : null);
-}
-
-/**
- * Format a structured log message and output it to the default log destination
- * for the platform.
- * On Linux, this is typically the systemd journal, falling
- * back to `stdout` or `stderr` if running from the terminal or if output is
- * being redirected to a file.
- * Support for other platform-specific logging mechanisms may be added in
- * future. Distributors of GLib may modify this function to impose their own
- * $(LPAREN)documented$(RPAREN) platform-specific log writing policies.
- * This is suitable for use as a [GLib.LogWriterFunc], and is the default writer used
- * if no other is set using funcGLib.log_set_writer_func.
- * As with funcGLib.log_default_handler, this function drops debug and informational
- * messages unless their log domain $(LPAREN)or `all`$(RPAREN) is listed in the space-separated
- * `G_MESSAGES_DEBUG` environment variable, or set at runtime by funcGLib.log_writer_default_set_debug_domains.
- * funcGLib.log_writer_default uses the mask set by funcGLib.log_set_always_fatal to
- * determine which messages are fatal. When using a custom writer function instead it is
- * up to the writer function to determine which log messages are fatal.
- * Params:
- *   logLevel = log level, either from [GLib], or a user-defined
- *     level
- *   fields = key–value pairs of structured data forming
- *     the log message
- *   userData = user data passed to funcGLib.log_set_writer_func
- * Returns: enumGLib.LogWriterOutput.HANDLED on success,
- *   enumGLib.LogWriterOutput.UNHANDLED otherwise
- */
-LogWriterOutput logWriterDefault(LogLevelFlags logLevel, LogField[] fields, void* userData)
-{
-  GLogWriterOutput _cretval;
-  size_t _nFields;
-  if (fields)
-    _nFields = cast(size_t)fields.length;
-
-  GLogField[] _tmpfields;
-  foreach (obj; fields)
-    _tmpfields ~= obj.cInstance;
-  const(GLogField)* _fields = _tmpfields.ptr;
-  _cretval = g_log_writer_default(logLevel, _fields, _nFields, userData);
-  LogWriterOutput _retval = cast(LogWriterOutput)_cretval;
-  return _retval;
 }
 
 /**
@@ -4503,7 +4387,7 @@ void logWriterDefaultSetUseStderr(bool useStderr)
  * }
  * ```
  * Params:
- *   logLevel = log level, either from [GLib], or a user-defined
+ *   logLevel = log level, either from [GLib.LogLevelFlags], or a user-defined
  *     level
  *   logDomain = log domain
  * Returns: `TRUE` if the log message would be dropped by GLib’s
@@ -4514,43 +4398,6 @@ bool logWriterDefaultWouldDrop(LogLevelFlags logLevel, string logDomain)
   bool _retval;
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   _retval = g_log_writer_default_would_drop(logLevel, _logDomain);
-  return _retval;
-}
-
-/**
- * Format a structured log message as a string suitable for outputting to the
- * terminal $(LPAREN)or elsewhere$(RPAREN).
- * This will include the values of all fields it knows
- * how to interpret, which includes `MESSAGE` and `GLIB_DOMAIN` $(LPAREN)see the
- * documentation for funcGLib.log_structured$(RPAREN). It does not include values from
- * unknown fields.
- * The returned string does **not** have a trailing new-line character. It is
- * encoded in the character set of the current locale, which is not necessarily
- * UTF-8.
- * Params:
- *   logLevel = log level, either from [GLib], or a user-defined
- *     level
- *   fields = key–value pairs of structured data forming
- *     the log message
- *   useColor = `TRUE` to use
- *     [ANSI color escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
- *     when formatting the message, `FALSE` to not
- * Returns: string containing the formatted log message, in
- *   the character set of the current locale
- */
-string logWriterFormatFields(LogLevelFlags logLevel, LogField[] fields, bool useColor)
-{
-  char* _cretval;
-  size_t _nFields;
-  if (fields)
-    _nFields = cast(size_t)fields.length;
-
-  GLogField[] _tmpfields;
-  foreach (obj; fields)
-    _tmpfields ~= obj.cInstance;
-  const(GLogField)* _fields = _tmpfields.ptr;
-  _cretval = g_log_writer_format_fields(logLevel, _fields, _nFields, useColor);
-  string _retval = _cretval.fromCString(Yes.Free);
   return _retval;
 }
 
@@ -4575,78 +4422,6 @@ bool logWriterIsJournald(int outputFd)
 }
 
 /**
- * Format a structured log message and send it to the systemd journal as a set
- * of key–value pairs.
- * All fields are sent to the journal, but if a field has
- * length zero $(LPAREN)indicating program-specific data$(RPAREN) then only its key will be
- * sent.
- * This is suitable for use as a [GLib.LogWriterFunc].
- * If GLib has been compiled without systemd support, this function is still
- * defined, but will always return enumGLib.LogWriterOutput.UNHANDLED.
- * Params:
- *   logLevel = log level, either from [GLib], or a user-defined
- *     level
- *   fields = key–value pairs of structured data forming
- *     the log message
- *   userData = user data passed to funcGLib.log_set_writer_func
- * Returns: enumGLib.LogWriterOutput.HANDLED on success, enumGLib.LogWriterOutput.UNHANDLED otherwise
- */
-LogWriterOutput logWriterJournald(LogLevelFlags logLevel, LogField[] fields, void* userData)
-{
-  GLogWriterOutput _cretval;
-  size_t _nFields;
-  if (fields)
-    _nFields = cast(size_t)fields.length;
-
-  GLogField[] _tmpfields;
-  foreach (obj; fields)
-    _tmpfields ~= obj.cInstance;
-  const(GLogField)* _fields = _tmpfields.ptr;
-  _cretval = g_log_writer_journald(logLevel, _fields, _nFields, userData);
-  LogWriterOutput _retval = cast(LogWriterOutput)_cretval;
-  return _retval;
-}
-
-/**
- * Format a structured log message and print it to either `stdout` or `stderr`,
- * depending on its log level.
- * flagsGLib.LogLevelFlags.LEVEL_INFO and flagsGLib.LogLevelFlags.LEVEL_DEBUG messages
- * are sent to `stdout`, or to `stderr` if requested by
- * funcGLib.log_writer_default_set_use_stderr;
- * all other log levels are sent to `stderr`. Only fields
- * which are understood by this function are included in the formatted string
- * which is printed.
- * If the output stream supports
- * [ANSI color escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code),
- * they will be used in the output.
- * A trailing new-line character is added to the log message when it is printed.
- * This is suitable for use as a [GLib.LogWriterFunc].
- * Params:
- *   logLevel = log level, either from [GLib], or a user-defined
- *     level
- *   fields = key–value pairs of structured data forming
- *     the log message
- *   userData = user data passed to funcGLib.log_set_writer_func
- * Returns: enumGLib.LogWriterOutput.HANDLED on success,
- *   enumGLib.LogWriterOutput.UNHANDLED otherwise
- */
-LogWriterOutput logWriterStandardStreams(LogLevelFlags logLevel, LogField[] fields, void* userData)
-{
-  GLogWriterOutput _cretval;
-  size_t _nFields;
-  if (fields)
-    _nFields = cast(size_t)fields.length;
-
-  GLogField[] _tmpfields;
-  foreach (obj; fields)
-    _tmpfields ~= obj.cInstance;
-  const(GLogField)* _fields = _tmpfields.ptr;
-  _cretval = g_log_writer_standard_streams(logLevel, _fields, _nFields, userData);
-  LogWriterOutput _retval = cast(LogWriterOutput)_cretval;
-  return _retval;
-}
-
-/**
  * Check whether the given output_fd file descriptor supports
  * [ANSI color escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
  * If so, they can safely be used when formatting log messages.
@@ -4658,40 +4433,6 @@ bool logWriterSupportsColor(int outputFd)
 {
   bool _retval;
   _retval = g_log_writer_supports_color(outputFd);
-  return _retval;
-}
-
-/**
- * Format a structured log message and send it to the syslog daemon. Only fields
- * which are understood by this function are included in the formatted string
- * which is printed.
- * Log facility will be defined via the SYSLOG_FACILITY field and accepts the following
- * values: "auth", "daemon", and "user". If SYSLOG_FACILITY is not specified, LOG_USER
- * facility will be used.
- * This is suitable for use as a [GLib.LogWriterFunc].
- * If syslog is not supported, this function is still defined, but will always
- * return enumGLib.LogWriterOutput.UNHANDLED.
- * Params:
- *   logLevel = log level, either from [GLib], or a user-defined
- *     level
- *   fields = key–value pairs of structured data forming
- *     the log message
- *   userData = user data passed to funcGLib.log_set_writer_func
- * Returns: enumGLib.LogWriterOutput.HANDLED on success, enumGLib.LogWriterOutput.UNHANDLED otherwise
- */
-LogWriterOutput logWriterSyslog(LogLevelFlags logLevel, LogField[] fields, void* userData)
-{
-  GLogWriterOutput _cretval;
-  size_t _nFields;
-  if (fields)
-    _nFields = cast(size_t)fields.length;
-
-  GLogField[] _tmpfields;
-  foreach (obj; fields)
-    _tmpfields ~= obj.cInstance;
-  const(GLogField)* _fields = _tmpfields.ptr;
-  _cretval = g_log_writer_syslog(logLevel, _fields, _nFields, userData);
-  LogWriterOutput _retval = cast(LogWriterOutput)_cretval;
   return _retval;
 }
 
@@ -4838,8 +4579,7 @@ int mainDepth()
  */
 void* gmalloc(size_t nBytes)
 {
-  void* _retval;
-  _retval = g_malloc(nBytes);
+  auto _retval = g_malloc(nBytes);
   return _retval;
 }
 
@@ -4854,8 +4594,7 @@ void* gmalloc(size_t nBytes)
  */
 void* malloc0(size_t nBytes)
 {
-  void* _retval;
-  _retval = g_malloc0(nBytes);
+  auto _retval = g_malloc0(nBytes);
   return _retval;
 }
 
@@ -4871,8 +4610,7 @@ void* malloc0(size_t nBytes)
  */
 void* malloc0N(size_t nBlocks, size_t nBlockBytes)
 {
-  void* _retval;
-  _retval = g_malloc0_n(nBlocks, nBlockBytes);
+  auto _retval = g_malloc0_n(nBlocks, nBlockBytes);
   return _retval;
 }
 
@@ -4888,8 +4626,7 @@ void* malloc0N(size_t nBlocks, size_t nBlockBytes)
  */
 void* mallocN(size_t nBlocks, size_t nBlockBytes)
 {
-  void* _retval;
-  _retval = g_malloc_n(nBlocks, nBlockBytes);
+  auto _retval = g_malloc_n(nBlocks, nBlockBytes);
   return _retval;
 }
 
@@ -4987,8 +4724,7 @@ void memSetVtable(MemVTable vtable)
  */
 void* memdup(const(void)* mem, uint byteSize)
 {
-  void* _retval;
-  _retval = g_memdup(mem, byteSize);
+  auto _retval = g_memdup(mem, byteSize);
   return _retval;
 }
 
@@ -5004,8 +4740,7 @@ void* memdup(const(void)* mem, uint byteSize)
  */
 void* memdup2(const(void)* mem, size_t byteSize)
 {
-  void* _retval;
-  _retval = g_memdup2(mem, byteSize);
+  auto _retval = g_memdup2(mem, byteSize);
   return _retval;
 }
 
@@ -5176,40 +4911,6 @@ Quark optionErrorQuark()
 }
 
 /**
- * Parses a string containing debugging options
- * into a %guint containing bit flags. This is used
- * within GDK and GTK to parse the debug options passed on the
- * command line or through environment variables.
- * If string is equal to "all", all flags are set. Any flags
- * specified along with "all" in string are inverted; thus,
- * "all,foo,bar" or "foo,bar,all" sets all flags except those
- * corresponding to "foo" and "bar".
- * If string is equal to "help", all the available keys in keys
- * are printed out to standard error.
- * Params:
- *   string_ = a list of debug options separated by colons, spaces, or
- *     commas, or %NULL.
- *   keys = pointer to an array of #GDebugKey which associate
- *     strings with bit flags.
- * Returns: the combined set of bit flags.
- */
-uint parseDebugString(string string_, DebugKey[] keys)
-{
-  uint _retval;
-  const(char)* _string_ = string_.toCString(No.Alloc);
-  uint _nkeys;
-  if (keys)
-    _nkeys = cast(uint)keys.length;
-
-  GDebugKey[] _tmpkeys;
-  foreach (obj; keys)
-    _tmpkeys ~= obj.cInstance;
-  const(GDebugKey)* _keys = _tmpkeys.ptr;
-  _retval = g_parse_debug_string(_string_, _keys, _nkeys);
-  return _retval;
-}
-
-/**
  * Gets the last component of the filename.
  * If file_name ends with a directory separator it gets the component
  * before the last slash. If file_name consists only of directory
@@ -5372,8 +5073,7 @@ void pointerBitLockAndGet(void* address, uint lockBit, out size_t outPtr)
  */
 void* pointerBitLockMaskPtr(void* ptr, uint lockBit, bool set, size_t preserveMask, void* preservePtr)
 {
-  void* _retval;
-  _retval = g_pointer_bit_lock_mask_ptr(ptr, lockBit, set, preserveMask, preservePtr);
+  auto _retval = g_pointer_bit_lock_mask_ptr(ptr, lockBit, set, preserveMask, preservePtr);
   return _retval;
 }
 
@@ -5659,8 +5359,7 @@ void randomSetSeed(uint seed)
  */
 void* rcBoxAcquire(void* memBlock)
 {
-  void* _retval;
-  _retval = g_rc_box_acquire(memBlock);
+  auto _retval = g_rc_box_acquire(memBlock);
   return _retval;
 }
 
@@ -5677,8 +5376,7 @@ void* rcBoxAcquire(void* memBlock)
  */
 void* rcBoxAlloc(size_t blockSize)
 {
-  void* _retval;
-  _retval = g_rc_box_alloc(blockSize);
+  auto _retval = g_rc_box_alloc(blockSize);
   return _retval;
 }
 
@@ -5696,8 +5394,7 @@ void* rcBoxAlloc(size_t blockSize)
  */
 void* rcBoxAlloc0(size_t blockSize)
 {
-  void* _retval;
-  _retval = g_rc_box_alloc0(blockSize);
+  auto _retval = g_rc_box_alloc0(blockSize);
   return _retval;
 }
 
@@ -5713,8 +5410,7 @@ void* rcBoxAlloc0(size_t blockSize)
  */
 void* rcBoxDup(size_t blockSize, const(void)* memBlock)
 {
-  void* _retval;
-  _retval = g_rc_box_dup(blockSize, memBlock);
+  auto _retval = g_rc_box_dup(blockSize, memBlock);
   return _retval;
 }
 
@@ -5778,8 +5474,7 @@ void rcBoxReleaseFull(void* memBlock, DestroyNotify clearFunc)
  */
 void* realloc(void* mem, size_t nBytes)
 {
-  void* _retval;
-  _retval = g_realloc(mem, nBytes);
+  auto _retval = g_realloc(mem, nBytes);
   return _retval;
 }
 
@@ -5796,8 +5491,7 @@ void* realloc(void* mem, size_t nBytes)
  */
 void* reallocN(void* mem, size_t nBlocks, size_t nBlockBytes)
 {
-  void* _retval;
-  _retval = g_realloc_n(mem, nBlocks, nBlockBytes);
+  auto _retval = g_realloc_n(mem, nBlocks, nBlockBytes);
   return _retval;
 }
 
@@ -6239,8 +5933,7 @@ string shellUnquote(string quotedString)
  */
 void* sliceAlloc(size_t blockSize)
 {
-  void* _retval;
-  _retval = g_slice_alloc(blockSize);
+  auto _retval = g_slice_alloc(blockSize);
   return _retval;
 }
 
@@ -6256,8 +5949,7 @@ void* sliceAlloc(size_t blockSize)
  */
 void* sliceAlloc0(size_t blockSize)
 {
-  void* _retval;
-  _retval = g_slice_alloc0(blockSize);
+  auto _retval = g_slice_alloc0(blockSize);
   return _retval;
 }
 
@@ -6275,8 +5967,7 @@ void* sliceAlloc0(size_t blockSize)
  */
 void* sliceCopy(size_t blockSize, const(void)* memBlock)
 {
-  void* _retval;
-  _retval = g_slice_copy(blockSize, memBlock);
+  auto _retval = g_slice_copy(blockSize, memBlock);
   return _retval;
 }
 
@@ -8809,8 +8500,7 @@ Source timeoutSourceNewSeconds(uint interval)
  */
 void* tryMalloc(size_t nBytes)
 {
-  void* _retval;
-  _retval = g_try_malloc(nBytes);
+  auto _retval = g_try_malloc(nBytes);
   return _retval;
 }
 
@@ -8823,8 +8513,7 @@ void* tryMalloc(size_t nBytes)
  */
 void* tryMalloc0(size_t nBytes)
 {
-  void* _retval;
-  _retval = g_try_malloc0(nBytes);
+  auto _retval = g_try_malloc0(nBytes);
   return _retval;
 }
 
@@ -8838,8 +8527,7 @@ void* tryMalloc0(size_t nBytes)
  */
 void* tryMalloc0N(size_t nBlocks, size_t nBlockBytes)
 {
-  void* _retval;
-  _retval = g_try_malloc0_n(nBlocks, nBlockBytes);
+  auto _retval = g_try_malloc0_n(nBlocks, nBlockBytes);
   return _retval;
 }
 
@@ -8853,8 +8541,7 @@ void* tryMalloc0N(size_t nBlocks, size_t nBlockBytes)
  */
 void* tryMallocN(size_t nBlocks, size_t nBlockBytes)
 {
-  void* _retval;
-  _retval = g_try_malloc_n(nBlocks, nBlockBytes);
+  auto _retval = g_try_malloc_n(nBlocks, nBlockBytes);
   return _retval;
 }
 
@@ -8870,8 +8557,7 @@ void* tryMallocN(size_t nBlocks, size_t nBlockBytes)
  */
 void* tryRealloc(void* mem, size_t nBytes)
 {
-  void* _retval;
-  _retval = g_try_realloc(mem, nBytes);
+  auto _retval = g_try_realloc(mem, nBytes);
   return _retval;
 }
 
@@ -8886,8 +8572,7 @@ void* tryRealloc(void* mem, size_t nBytes)
  */
 void* tryReallocN(void* mem, size_t nBlocks, size_t nBlockBytes)
 {
-  void* _retval;
-  _retval = g_try_realloc_n(mem, nBlocks, nBlockBytes);
+  auto _retval = g_try_realloc_n(mem, nBlocks, nBlockBytes);
   return _retval;
 }
 
@@ -9616,10 +9301,9 @@ Source unixFdSourceNew(int fd, IOCondition condition)
  */
 void* unixGetPasswdEntry(string userName)
 {
-  void* _retval;
   const(char)* _userName = userName.toCString(No.Alloc);
   GError *_err;
-  _retval = g_unix_get_passwd_entry(_userName, &_err);
+  auto _retval = g_unix_get_passwd_entry(_userName, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;

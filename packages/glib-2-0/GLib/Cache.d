@@ -64,8 +64,7 @@ class Cache
    */
   void* insert(void* key)
   {
-    void* _retval;
-    _retval = g_cache_insert(cast(GCache*)cPtr, key);
+    auto _retval = g_cache_insert(cast(GCache*)cPtr, key);
     return _retval;
   }
 

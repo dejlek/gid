@@ -1630,7 +1630,7 @@ struct GArrowExtensionDataTypeClass
    * It must returns a serialized #GArrowDataType from the given
    * `serialized_data`.
    */
-  extern(C) GArrowDataType* function(GArrowExtensionDataType* dataType, GArrowDataType* storageDataType, GBytes* serializedData) deserialize;
+  extern(C) GArrowDataType* function(GArrowExtensionDataType* dataType, GArrowDataType* storageDataType, GBytes* serializedData, GError** _err) deserialize;
 
   /**
    * It must returns a serialized data of this extension data type

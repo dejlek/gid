@@ -5240,7 +5240,7 @@ struct GDBusPropertyInfo
  * By default, `GDBusProxy` will cache all properties $(LPAREN)and listen to
  * changes$(RPAREN) of the remote object, and proxy all signals that get
  * emitted. This behaviour can be changed by passing suitable
- * [Gio] when the proxy is created. If the proxy is for a
+ * [Gio.DBusProxyFlags] when the proxy is created. If the proxy is for a
  * well-known name, the property cache is flushed when the name owner
  * vanishes and reloaded when a name owner appears.
  * The unique name owner of the proxy’s name is tracked and can be read from
@@ -7765,7 +7765,7 @@ struct GMemoryInputStreamPrivate;
  * should be profiled for your application. `malloc_trim$(LPAREN)$(RPAREN)`, for example, may
  * make future heap allocations slower $(LPAREN)due to releasing cached heap pages back
  * to the kernel$(RPAREN).
- * See [Gio] for details on the various warning
+ * See [Gio.MemoryMonitorWarningLevel] for details on the various warning
  * levels.
  * ```c
  * static void

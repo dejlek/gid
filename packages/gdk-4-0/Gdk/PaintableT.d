@@ -99,7 +99,7 @@ template PaintableT()
   /**
    * Get flags for the paintable.
    * This is oftentimes useful for optimizations.
-   * See [Gdk] for the flags and what they mean.
+   * See [Gdk.PaintableFlags] for the flags and what they mean.
    * Returns: The `GdkPaintableFlags` for this paintable
    */
   override PaintableFlags getFlags()
