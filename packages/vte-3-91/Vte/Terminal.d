@@ -1557,6 +1557,60 @@ class Terminal : Widget, Scrollable
   }
 
   /**
+   * A convenience function that wraps creating the #VtePty and spawning
+   * the child process on it. Like [Vte.Terminal.spawnWithFdsAsync],
+   * except that this function does not allow passing file descriptors to
+   * the child process. See [Vte.Terminal.spawnWithFdsAsync] for more
+   * information.
+   * Params:
+   *   ptyFlags = flags from #VtePtyFlags
+   *   workingDirectory = the name of a directory the command should start
+   *     in, or %NULL to use the current working directory
+   *   argv = child's argument vector
+   *   envv = a list of environment
+   *     variables to be added to the environment before starting the process, or %NULL
+   *   spawnFlags = flags from #GSpawnFlags
+   *   childSetup = an extra child setup function to run in the child just before exec$(LPAREN)$(RPAREN), or %NULL
+   *   timeout = a timeout value in ms, -1 for the default timeout, or G_MAXINT to wait indefinitely
+   *   cancellable = a #GCancellable, or %NULL
+   *   callback = a #VteTerminalSpawnAsyncCallback, or %NULL
+   */
+  void spawnAsync(PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, SpawnFlags spawnFlags, SpawnChildSetupFunc childSetup, int timeout, Cancellable cancellable, TerminalSpawnAsyncCallback callback)
+  {
+    extern(C) void _childSetupCallback(void* data)
+    {
+      auto _dlg = cast(SpawnChildSetupFunc*)data;
+
+      (*_dlg)();
+    }
+
+    extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
+    {
+      ptrThawGC(userData);
+      auto _dlg = cast(TerminalSpawnAsyncCallback*)userData;
+
+      (*_dlg)(ObjectG.getDObject!Terminal(cast(void*)terminal, No.Take), pid, error ? new ErrorG(cast(void*)error, No.Take) : null);
+    }
+
+    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    char*[] _tmpargv;
+    foreach (s; argv)
+      _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= null;
+    char** _argv = _tmpargv.ptr;
+
+    char*[] _tmpenvv;
+    foreach (s; envv)
+      _tmpenvv ~= s.toCString(No.Alloc);
+    _tmpenvv ~= null;
+    char** _envv = _tmpenvv.ptr;
+
+    auto _childSetup = freezeDelegate(cast(void*)&childSetup);
+    auto _callback = freezeDelegate(cast(void*)&callback);
+    vte_terminal_spawn_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, &_childSetupCallback, _childSetup, &thawDelegate, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+  }
+
+  /**
    * Starts the specified command under a newly-allocated controlling
    * pseudo-terminal.  The argv and envv lists should be %NULL-terminated.
    * The "TERM" environment variable is automatically set to a default value,
@@ -1619,6 +1673,103 @@ class Terminal : Widget, Scrollable
     if (_err)
       throw new ErrorG(_err);
     return _retval;
+  }
+
+  /**
+   * A convenience function that wraps creating the #VtePty and spawning
+   * the child process on it. See [Vte.Pty.newSync], [Vte.Pty.spawnWithFdsAsync],
+   * and [Vte.Pty.spawnFinish] for more information.
+   * When the operation is finished successfully, callback will be called
+   * with the child #GPid, and a %NULL #GError. The child PID will already be
+   * watched via [Vte.Terminal.watchChild].
+   * When the operation fails, callback will be called with a -1 #GPid,
+   * and a non-%NULL #GError containing the error information.
+   * Note that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
+   * and %G_SPAWN_CHILD_INHERITS_STDIN are not supported in spawn_flags, since
+   * stdin, stdout and stderr of the child process will always be connected to
+   * the PTY.
+   * If fds is not %NULL, the child process will map the file descriptors from
+   * fds according to map_fds; n_map_fds must be less or equal to n_fds.
+   * This function will take ownership of the file descriptors in fds;
+   * you must not use or close them after this call.
+   * Note that all  open file descriptors apart from those mapped as above
+   * will be closed in the child. $(LPAREN)If you want to keep some other file descriptor
+   * open for use in the child process, you need to use a child setup function
+   * that unsets the FD_CLOEXEC flag on that file descriptor manually.$(RPAREN)
+   * Beginning with 0.60, and on linux only, and unless %VTE_SPAWN_NO_SYSTEMD_SCOPE is
+   * passed in spawn_flags, the newly created child process will be moved to its own
+   * systemd user scope; and if %VTE_SPAWN_REQUIRE_SYSTEMD_SCOPE is passed, and creation
+   * of the systemd user scope fails, the whole spawn will fail.
+   * You can override the options used for the systemd user scope by
+   * providing a systemd override file for 'vte-spawn-.scope' unit. See man:systemd.unit$(LPAREN)5$(RPAREN)
+   * for further information.
+   * Note that if terminal has been destroyed before the operation is called,
+   * callback will be called with a %NULL terminal; you must not do anything
+   * in the callback besides freeing any resources associated with user_data,
+   * but taking care not to access the now-destroyed #VteTerminal. Note that
+   * in this case, if spawning was successful, the child process will be aborted
+   * automatically.
+   * Beginning with 0.52, sets PWD to working_directory in order to preserve symlink components.
+   * The caller should also make sure that symlinks were preserved while constructing the value of working_directory,
+   * e.g. by using [Vte.Terminal.getCurrentDirectoryUri], [GLib.Global.getCurrentDir] or get_current_dir_name().
+   * Params:
+   *   ptyFlags = flags from #VtePtyFlags
+   *   workingDirectory = the name of a directory the command should start
+   *     in, or %NULL to use the current working directory
+   *   argv = child's argument vector
+   *   envv = a list of environment
+   *     variables to be added to the environment before starting the process, or %NULL
+   *   fds = an array of file descriptors, or %NULL
+   *   mapFds = an array of integers, or %NULL
+   *   spawnFlags = flags from #GSpawnFlags
+   *   childSetup = an extra child setup function to run in the child just before exec$(LPAREN)$(RPAREN), or %NULL
+   *   timeout = a timeout value in ms, -1 for the default timeout, or G_MAXINT to wait indefinitely
+   *   cancellable = a #GCancellable, or %NULL
+   *   callback = a #VteTerminalSpawnAsyncCallback, or %NULL
+   */
+  void spawnWithFdsAsync(PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, SpawnFlags spawnFlags, SpawnChildSetupFunc childSetup, int timeout, Cancellable cancellable, TerminalSpawnAsyncCallback callback)
+  {
+    extern(C) void _childSetupCallback(void* data)
+    {
+      auto _dlg = cast(SpawnChildSetupFunc*)data;
+
+      (*_dlg)();
+    }
+
+    extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
+    {
+      ptrThawGC(userData);
+      auto _dlg = cast(TerminalSpawnAsyncCallback*)userData;
+
+      (*_dlg)(ObjectG.getDObject!Terminal(cast(void*)terminal, No.Take), pid, error ? new ErrorG(cast(void*)error, No.Take) : null);
+    }
+
+    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    const(char)*[] _tmpargv;
+    foreach (s; argv)
+      _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= null;
+    const(char*)* _argv = _tmpargv.ptr;
+
+    const(char)*[] _tmpenvv;
+    foreach (s; envv)
+      _tmpenvv ~= s.toCString(No.Alloc);
+    _tmpenvv ~= null;
+    const(char*)* _envv = _tmpenvv.ptr;
+
+    int _nFds;
+    if (fds)
+      _nFds = cast(int)fds.length;
+
+    auto _fds = cast(const(int)*)fds.ptr;
+    int _nMapFds;
+    if (mapFds)
+      _nMapFds = cast(int)mapFds.length;
+
+    auto _mapFds = cast(const(int)*)mapFds.ptr;
+    auto _childSetup = freezeDelegate(cast(void*)&childSetup);
+    auto _callback = freezeDelegate(cast(void*)&callback);
+    vte_terminal_spawn_with_fds_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, &_childSetupCallback, _childSetup, &thawDelegate, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 
   /**

@@ -9,6 +9,7 @@ import Gio.AsyncResultT;
 import Gio.Cancellable;
 import Gio.Initable;
 import Gio.InitableT;
+import Gio.Types;
 import Vte.Types;
 import Vte.c.functions;
 import Vte.c.types;
@@ -167,6 +168,57 @@ class Pty : ObjectG, Initable
     return _retval;
   }
 
+  /**
+   * Like [Vte.Pty.spawnWithFdsAsync], except that this function does not
+   * allow passing file descriptors to the child process. See [Vte.Pty.spawnWithFdsAsync]
+   * for more information.
+   * Params:
+   *   workingDirectory = the name of a directory the command should start
+   *     in, or %NULL to use the current working directory
+   *   argv = child's argument vector
+   *   envv = a list of environment
+   *     variables to be added to the environment before starting the process, or %NULL
+   *   spawnFlags = flags from #GSpawnFlags
+   *   childSetup = an extra child setup function to run in the child just before exec$(LPAREN)$(RPAREN), or %NULL
+   *   timeout = a timeout value in ms, -1 for the default timeout, or G_MAXINT to wait indefinitely
+   *   cancellable = a #GCancellable, or %NULL
+   *   callback = a #GAsyncReadyCallback, or %NULL
+   */
+  void spawnAsync(string workingDirectory, string[] argv, string[] envv, SpawnFlags spawnFlags, SpawnChildSetupFunc childSetup, int timeout, Cancellable cancellable, AsyncReadyCallback callback)
+  {
+    extern(C) void _childSetupCallback(void* data)
+    {
+      auto _dlg = cast(SpawnChildSetupFunc*)data;
+
+      (*_dlg)();
+    }
+
+    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(AsyncReadyCallback*)data;
+
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+    }
+
+    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    char*[] _tmpargv;
+    foreach (s; argv)
+      _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= null;
+    char** _argv = _tmpargv.ptr;
+
+    char*[] _tmpenvv;
+    foreach (s; envv)
+      _tmpenvv ~= s.toCString(No.Alloc);
+    _tmpenvv ~= null;
+    char** _envv = _tmpenvv.ptr;
+
+    auto _childSetup = freezeDelegate(cast(void*)&childSetup);
+    auto _callback = freezeDelegate(cast(void*)&callback);
+    vte_pty_spawn_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, spawnFlags, &_childSetupCallback, _childSetup, &thawDelegate, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+  }
+
   bool spawnFinish(AsyncResult result, out Pid childPid)
   {
     bool _retval;
@@ -175,5 +227,92 @@ class Pty : ObjectG, Initable
     if (_err)
       throw new ErrorG(_err);
     return _retval;
+  }
+
+  /**
+   * Starts the specified command under the pseudo-terminal pty.
+   * The argv and envv lists should be %NULL-terminated.
+   * The "TERM" environment variable is automatically set to a default value,
+   * but can be overridden from envv.
+   * pty_flags controls logging the session to the specified system log files.
+   * Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
+   * and %G_SPAWN_CHILD_INHERITS_STDIN are not supported in spawn_flags, since
+   * stdin, stdout and stderr of the child process will always be connected to
+   * the PTY. Also %G_SPAWN_LEAVE_DESCRIPTORS_OPEN is not supported; and
+   * %G_SPAWN_DO_NOT_REAP_CHILD will always be added to spawn_flags.
+   * If fds is not %NULL, the child process will map the file descriptors from
+   * fds according to map_fds; n_map_fds must be less or equal to n_fds.
+   * This function will take ownership of the file descriptors in fds;
+   * you must not use or close them after this call. All file descriptors in fds
+   * must have the FD_CLOEXEC flag set on them; it will be unset in the child process
+   * before calling man:execve$(LPAREN)2$(RPAREN). Note also that no file descriptor may be mapped
+   * to stdin, stdout, or stderr $(LPAREN)file descriptors 0, 1, or 2$(RPAREN), since these will be
+   * assigned to the PTY. All open file descriptors apart from those mapped as above
+   * will be closed when execve$(LPAREN)$(RPAREN) is called.
+   * Beginning with 0.60, and on linux only, and unless %VTE_SPAWN_NO_SYSTEMD_SCOPE is
+   * passed in spawn_flags, the newly created child process will be moved to its own
+   * systemd user scope; and if %VTE_SPAWN_REQUIRE_SYSTEMD_SCOPE is passed, and creation
+   * of the systemd user scope fails, the whole spawn will fail.
+   * You can override the options used for the systemd user scope by
+   * providing a systemd override file for 'vte-spawn-.scope' unit. See man:systemd.unit$(LPAREN)5$(RPAREN)
+   * for further information.
+   * See vte_pty_new$(LPAREN)$(RPAREN), and [Vte.Terminal.watchChild] for more information.
+   * Params:
+   *   workingDirectory = the name of a directory the command should start
+   *     in, or %NULL to use the current working directory
+   *   argv = child's argument vector
+   *   envv = a list of environment
+   *     variables to be added to the environment before starting the process, or %NULL
+   *   fds = an array of file descriptors, or %NULL
+   *   mapFds = an array of integers, or %NULL
+   *   spawnFlags = flags from #GSpawnFlags
+   *   childSetup = an extra child setup function to run in the child just before exec$(LPAREN)$(RPAREN), or %NULL
+   *   timeout = a timeout value in ms, -1 for the default timeout, or G_MAXINT to wait indefinitely
+   *   cancellable = a #GCancellable, or %NULL
+   *   callback = a #GAsyncReadyCallback, or %NULL
+   */
+  void spawnWithFdsAsync(string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, SpawnFlags spawnFlags, SpawnChildSetupFunc childSetup, int timeout, Cancellable cancellable, AsyncReadyCallback callback)
+  {
+    extern(C) void _childSetupCallback(void* data)
+    {
+      auto _dlg = cast(SpawnChildSetupFunc*)data;
+
+      (*_dlg)();
+    }
+
+    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(AsyncReadyCallback*)data;
+
+      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+    }
+
+    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    const(char)*[] _tmpargv;
+    foreach (s; argv)
+      _tmpargv ~= s.toCString(No.Alloc);
+    _tmpargv ~= null;
+    const(char*)* _argv = _tmpargv.ptr;
+
+    const(char)*[] _tmpenvv;
+    foreach (s; envv)
+      _tmpenvv ~= s.toCString(No.Alloc);
+    _tmpenvv ~= null;
+    const(char*)* _envv = _tmpenvv.ptr;
+
+    int _nFds;
+    if (fds)
+      _nFds = cast(int)fds.length;
+
+    auto _fds = cast(const(int)*)fds.ptr;
+    int _nMapFds;
+    if (mapFds)
+      _nMapFds = cast(int)mapFds.length;
+
+    auto _mapFds = cast(const(int)*)mapFds.ptr;
+    auto _childSetup = freezeDelegate(cast(void*)&childSetup);
+    auto _callback = freezeDelegate(cast(void*)&callback);
+    vte_pty_spawn_with_fds_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, &_childSetupCallback, _childSetup, &thawDelegate, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
   }
 }
