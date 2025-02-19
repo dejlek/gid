@@ -2,7 +2,8 @@ all: binding packages
 
 .PHONY: binding
 binding:
-	gidgen --defs defs --gir-path gir --pkg-path . --subpkg-path packages --report --report-file report.txt
+	rm -Rf packages/vte*
+	gidgen --defs defs --gir-path gir --pkg-path . --subpkg-path packages --report --report-file report.txt --suggest
 
 .PHONY: packages
 packages:
