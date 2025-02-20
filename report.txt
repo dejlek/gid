@@ -11,7 +11,7 @@ Atk          |   40    0    0   100 |  220   27    7  96.9 |   41    0    0   10
 GLib         |   85    0    0   100 | 1350  610   14  99.0 |    0    0    0   100 |  215   16   33  86.7 |
 GModule      |    3    0    0   100 |    8    6    0   100 |    0    0    0   100 |    0    0    0   100 |
 GObject      |   59    1    0   100 |  302  158    7  97.7 |    3    0    0   100 |  226    8   15  93.8 |
-Gdk          |   69    0    0   100 |  478   34    5  99.0 |   33    0    2  94.3 |   32    0    1  97.0 |
+Gdk          |   69    0    0   100 |  478   34    5  99.0 |   35    0    0   100 |   32    0    1  97.0 |
 GdkPixbuf    |   12    0    0   100 |   96   12    1  99.0 |    4    0    0   100 |   40    4    4  90.9 |
 Gid          |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 Gio          |  266    2    0   100 | 1728  162   18  99.0 |   80    0    1  98.8 |  895  195   22  97.6 |
@@ -22,7 +22,7 @@ HarfBuzz     |   35    0    0   100 |  407   52   42  90.6 |    0    0    0   10
 Pango        |   44    0    0   100 |  387   44   13  96.8 |    0    0    0   100 |  162   11    8  95.3 |
 PangoCairo   |    4    0    0   100 |   26    5    0   100 |    0    0    0   100 |    0    0    0   100 |
 Parquet      |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |   28    0    0   100 |
-Vte          |    8    0    0   100 |  157    6    3  98.1 |   27    0    1  96.4 |   36    0    0   100 |
+Vte          |    8    0    0   100 |  157    9    0   100 |   28    0    0   100 |   36    0    0   100 |
 cairo        |   20    0    1  95.2 |  328   56    2  99.4 |    0    0    0   100 |   38    0    1  97.4 |
 freetype2    |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 
@@ -165,20 +165,14 @@ Pango.GlyphItem.get_logical_widths
 Pango.GlyphItem.letter_space
 Pango.GlyphString.get_logical_widths
 Pango.TabArray.get_tabs
-Vte.Terminal.get_text
-Vte.Terminal.get_text_include_trailing_spaces
-Vte.Terminal.get_text_range
 cairo.Global.image_surface_create_for_data
 cairo.ScaledFont.text_to_glyphs
 
 [Unsupported Signals]
-Gdk.DragSurface.compute-size
-Gdk.Toplevel.compute-size
 Gio.MountOperation.show-processes
 Gtk.Editable.insert-text
 Gtk.Overlay.get-child-position
 Gtk.SpinButton.input
-Vte.Terminal.setup-context-menu
 
 [Unsupported Fields]
 Atk.Registry.factory_type_registry

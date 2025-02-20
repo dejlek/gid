@@ -21,6 +21,7 @@ import Gtk.Scrollable;
 import Gtk.ScrollableT;
 import Gtk.Widget;
 import Pango.FontDescription;
+import Vte.EventContext;
 import Vte.Pty;
 import Vte.Regex;
 import Vte.Types;
@@ -2614,6 +2615,47 @@ class Terminal : Widget, Scrollable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("selection-changed", closure, after);
+  }
+
+  /**
+   * Emitted with non-%NULL context before terminal shows a context menu.
+   * The handler may set either a menu model using
+   * [Vte.Terminal.setContextMenuModel], or a menu using
+   * [Vte.Terminal.setContextMenu], which will then be used as context
+   * menu.
+   * If neither a menu model nor a menu are set, a context menu
+   * will not be shown.
+   * Note that context is only valid during the signal emission; you may
+   * not retain it to call methods on it afterwards.
+   * Also emitted with %NULL context after the context menu has been dismissed.
+   * Params
+   *   context = the context
+   *   terminal = the instance the signal is connected to
+   */
+  alias SetupContextMenuCallbackDlg = void delegate(EventContext context, Terminal terminal);
+  alias SetupContextMenuCallbackFunc = void function(EventContext context, Terminal terminal);
+
+  /**
+   * Connect to SetupContextMenu signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectSetupContextMenu(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : SetupContextMenuCallbackDlg) || is(T : SetupContextMenuCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto terminal = getVal!Terminal(_paramVals);
+      auto context = getVal!EventContext(&_paramVals[1]);
+      _dClosure.dlg(context, terminal);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("setup-context-menu", closure, after);
   }
 
   /**
