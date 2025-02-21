@@ -1584,6 +1584,7 @@ class Terminal : Widget, Scrollable
 
       (*_dlg)();
     }
+    auto _childSetupCB = (childSetup is null) ? null : &_childSetupCallback;
 
     extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
     {
@@ -1592,6 +1593,7 @@ class Terminal : Widget, Scrollable
 
       (*_dlg)(ObjectG.getDObject!Terminal(cast(void*)terminal, No.Take), pid, error ? new ErrorG(cast(void*)error, No.Take) : null);
     }
+    auto _callbackCB = (callback is null) ? null : &_callbackCallback;
 
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     char*[] _tmpargv;
@@ -1606,9 +1608,10 @@ class Terminal : Widget, Scrollable
     _tmpenvv ~= null;
     char** _envv = _tmpenvv.ptr;
 
-    auto _childSetup = freezeDelegate(cast(void*)&childSetup);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    vte_terminal_spawn_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, &_childSetupCallback, _childSetup, &thawDelegate, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _childSetup = (childSetup is null) ? null : freezeDelegate(cast(void*)&childSetup);
+    GDestroyNotify _childSetupDestroyCB = (childSetup is null) ? null : &thawDelegate;
+    auto _callback = (callback is null) ? null : freezeDelegate(cast(void*)&callback);
+    vte_terminal_spawn_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1653,6 +1656,7 @@ class Terminal : Widget, Scrollable
 
       (*_dlg)();
     }
+    auto _childSetupCB = (childSetup is null) ? null : &_childSetupCallback;
 
     bool _retval;
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
@@ -1668,9 +1672,9 @@ class Terminal : Widget, Scrollable
     _tmpenvv ~= null;
     char** _envv = _tmpenvv.ptr;
 
-    auto _childSetup = cast(void*)&childSetup;
+    auto _childSetup = (childSetup is null) ? null : cast(void*)&(childSetup);
     GError *_err;
-    _retval = vte_terminal_spawn_sync(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, &_childSetupCallback, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = vte_terminal_spawn_sync(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1736,6 +1740,7 @@ class Terminal : Widget, Scrollable
 
       (*_dlg)();
     }
+    auto _childSetupCB = (childSetup is null) ? null : &_childSetupCallback;
 
     extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
     {
@@ -1744,6 +1749,7 @@ class Terminal : Widget, Scrollable
 
       (*_dlg)(ObjectG.getDObject!Terminal(cast(void*)terminal, No.Take), pid, error ? new ErrorG(cast(void*)error, No.Take) : null);
     }
+    auto _callbackCB = (callback is null) ? null : &_callbackCallback;
 
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     const(char)*[] _tmpargv;
@@ -1768,9 +1774,10 @@ class Terminal : Widget, Scrollable
       _nMapFds = cast(int)mapFds.length;
 
     auto _mapFds = cast(const(int)*)mapFds.ptr;
-    auto _childSetup = freezeDelegate(cast(void*)&childSetup);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    vte_terminal_spawn_with_fds_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, &_childSetupCallback, _childSetup, &thawDelegate, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _childSetup = (childSetup is null) ? null : freezeDelegate(cast(void*)&childSetup);
+    GDestroyNotify _childSetupDestroyCB = (childSetup is null) ? null : &thawDelegate;
+    auto _callback = (callback is null) ? null : freezeDelegate(cast(void*)&callback);
+    vte_terminal_spawn_with_fds_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
