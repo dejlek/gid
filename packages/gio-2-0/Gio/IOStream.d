@@ -163,9 +163,10 @@ class IOStream : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_io_stream_close_async(cast(GIOStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_io_stream_close_async(cast(GIOStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -274,8 +275,9 @@ class IOStream : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_io_stream_splice_async(cast(GIOStream*)cPtr, stream2 ? cast(GIOStream*)stream2.cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_io_stream_splice_async(cast(GIOStream*)cPtr, stream2 ? cast(GIOStream*)stream2.cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 }

@@ -521,9 +521,11 @@ class ComboBox : Widget, CellEditable, CellLayout
       bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = freezeDelegate(cast(void*)&func);
-    gtk_combo_box_set_row_separator_func(cast(GtkComboBox*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_combo_box_set_row_separator_func(cast(GtkComboBox*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**

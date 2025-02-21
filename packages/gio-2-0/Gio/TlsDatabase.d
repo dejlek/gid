@@ -112,10 +112,11 @@ class TlsDatabase : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _handle = handle.toCString(No.Alloc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_tls_database_lookup_certificate_for_handle_async(cast(GTlsDatabase*)cPtr, _handle, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_tls_database_lookup_certificate_for_handle_async(cast(GTlsDatabase*)cPtr, _handle, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -196,9 +197,10 @@ class TlsDatabase : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_tls_database_lookup_certificate_issuer_async(cast(GTlsDatabase*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_tls_database_lookup_certificate_issuer_async(cast(GTlsDatabase*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -267,11 +269,12 @@ class TlsDatabase : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _issuerRawDn = gByteArrayFromD(issuerRawDn);
     scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_issuerRawDn);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_tls_database_lookup_certificates_issued_by_async(cast(GTlsDatabase*)cPtr, _issuerRawDn, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_tls_database_lookup_certificates_issued_by_async(cast(GTlsDatabase*)cPtr, _issuerRawDn, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -388,10 +391,11 @@ class TlsDatabase : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _purpose = purpose.toCString(No.Alloc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_tls_database_verify_chain_async(cast(GTlsDatabase*)cPtr, chain ? cast(GTlsCertificate*)chain.cPtr(No.Dup) : null, _purpose, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_tls_database_verify_chain_async(cast(GTlsDatabase*)cPtr, chain ? cast(GTlsCertificate*)chain.cPtr(No.Dup) : null, _purpose, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**

@@ -48,10 +48,12 @@ class CustomFilter : Filter
       bool _retval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, No.Take));
       return _retval;
     }
+    auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;
 
     GtkCustomFilter* _cretval;
-    auto _matchFunc = freezeDelegate(cast(void*)&matchFunc);
-    _cretval = gtk_custom_filter_new(&_matchFuncCallback, _matchFunc, &thawDelegate);
+    auto _matchFunc = matchFunc ? freezeDelegate(cast(void*)&matchFunc) : null;
+    GDestroyNotify _matchFuncDestroyCB = matchFunc ? &thawDelegate : null;
+    _cretval = gtk_custom_filter_new(_matchFuncCB, _matchFunc, _matchFuncDestroyCB);
     this(_cretval, Yes.Take);
   }
 
@@ -74,8 +76,10 @@ class CustomFilter : Filter
       bool _retval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, No.Take));
       return _retval;
     }
+    auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;
 
-    auto _matchFunc = freezeDelegate(cast(void*)&matchFunc);
-    gtk_custom_filter_set_filter_func(cast(GtkCustomFilter*)cPtr, &_matchFuncCallback, _matchFunc, &thawDelegate);
+    auto _matchFunc = matchFunc ? freezeDelegate(cast(void*)&matchFunc) : null;
+    GDestroyNotify _matchFuncDestroyCB = matchFunc ? &thawDelegate : null;
+    gtk_custom_filter_set_filter_func(cast(GtkCustomFilter*)cPtr, _matchFuncCB, _matchFunc, _matchFuncDestroyCB);
   }
 }

@@ -304,9 +304,11 @@ class Scale : Range
 
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = freezeDelegate(cast(void*)&func);
-    gtk_scale_set_format_value_func(cast(GtkScale*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_scale_set_format_value_func(cast(GtkScale*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**

@@ -56,10 +56,12 @@ class TreeListModel : ObjectG, ListModel
 
       return _retval;
     }
+    auto _createFuncCB = createFunc ? &_createFuncCallback : null;
 
     GtkTreeListModel* _cretval;
-    auto _createFunc = freezeDelegate(cast(void*)&createFunc);
-    _cretval = gtk_tree_list_model_new(root ? cast(GListModel*)(cast(ObjectG)root).cPtr(Yes.Dup) : null, passthrough, autoexpand, &_createFuncCallback, _createFunc, &thawDelegate);
+    auto _createFunc = createFunc ? freezeDelegate(cast(void*)&createFunc) : null;
+    GDestroyNotify _createFuncDestroyCB = createFunc ? &thawDelegate : null;
+    _cretval = gtk_tree_list_model_new(root ? cast(GListModel*)(cast(ObjectG)root).cPtr(Yes.Dup) : null, passthrough, autoexpand, _createFuncCB, _createFunc, _createFuncDestroyCB);
     this(_cretval, Yes.Take);
   }
 

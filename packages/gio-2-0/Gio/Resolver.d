@@ -118,9 +118,10 @@ class Resolver : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_resolver_lookup_by_address_async(cast(GResolver*)cPtr, address ? cast(GInetAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_resolver_lookup_by_address_async(cast(GResolver*)cPtr, address ? cast(GInetAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -204,10 +205,11 @@ class Resolver : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _hostname = hostname.toCString(No.Alloc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_resolver_lookup_by_name_async(cast(GResolver*)cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_resolver_lookup_by_name_async(cast(GResolver*)cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -278,10 +280,11 @@ class Resolver : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _hostname = hostname.toCString(No.Alloc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_resolver_lookup_by_name_with_flags_async(cast(GResolver*)cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_resolver_lookup_by_name_with_flags_async(cast(GResolver*)cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -357,10 +360,11 @@ class Resolver : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _rrname = rrname.toCString(No.Alloc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_resolver_lookup_records_async(cast(GResolver*)cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_resolver_lookup_records_async(cast(GResolver*)cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -453,12 +457,13 @@ class Resolver : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _service = service.toCString(No.Alloc);
     const(char)* _protocol = protocol.toCString(No.Alloc);
     const(char)* _domain = domain.toCString(No.Alloc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_resolver_lookup_service_async(cast(GResolver*)cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_resolver_lookup_service_async(cast(GResolver*)cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**

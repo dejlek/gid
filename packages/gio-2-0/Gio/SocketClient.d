@@ -146,9 +146,10 @@ class SocketClient : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_socket_client_connect_async(cast(GSocketClient*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_socket_client_connect_async(cast(GSocketClient*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -230,10 +231,11 @@ class SocketClient : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _hostAndPort = hostAndPort.toCString(No.Alloc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_socket_client_connect_to_host_async(cast(GSocketClient*)cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_socket_client_connect_to_host_async(cast(GSocketClient*)cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -302,11 +304,12 @@ class SocketClient : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _domain = domain.toCString(No.Alloc);
     const(char)* _service = service.toCString(No.Alloc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_socket_client_connect_to_service_async(cast(GSocketClient*)cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_socket_client_connect_to_service_async(cast(GSocketClient*)cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -381,10 +384,11 @@ class SocketClient : ObjectG
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _uri = uri.toCString(No.Alloc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_socket_client_connect_to_uri_async(cast(GSocketClient*)cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_socket_client_connect_to_uri_async(cast(GSocketClient*)cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**

@@ -78,10 +78,11 @@ class Path : Boxed
       bool _retval = (*_dlg)(op, pts ? new Point(cast(void*)pts, No.Take) : null, nPts, weight);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
-    auto _func = cast(void*)&func;
-    _retval = gsk_path_foreach(cast(GskPath*)cPtr, flags, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    _retval = gsk_path_foreach(cast(GskPath*)cPtr, flags, _funcCB, _func);
     return _retval;
   }
 

@@ -223,14 +223,16 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
        *value = *cast(GValue*)_value.cPtr;
 
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
     int _nColumns;
     if (types)
       _nColumns = cast(int)types.length;
 
     auto _types = cast(GType*)types.ptr;
-    auto _func = freezeDelegate(cast(void*)&func);
-    gtk_tree_model_filter_set_modify_func(cast(GtkTreeModelFilter*)cPtr, _nColumns, _types, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_tree_model_filter_set_modify_func(cast(GtkTreeModelFilter*)cPtr, _nColumns, _types, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -291,8 +293,10 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
       bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = freezeDelegate(cast(void*)&func);
-    gtk_tree_model_filter_set_visible_func(cast(GtkTreeModelFilter*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_tree_model_filter_set_visible_func(cast(GtkTreeModelFilter*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 }

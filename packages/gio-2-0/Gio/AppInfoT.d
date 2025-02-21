@@ -378,11 +378,12 @@ template AppInfoT()
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _uris = gListFromD!(string)(uris);
     scope(exit) containerFree!(GList*, string, GidOwnership.None)(_uris);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_app_info_launch_uris_async(cast(GAppInfo*)cPtr, _uris, context ? cast(GAppLaunchContext*)context.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_app_info_launch_uris_async(cast(GAppInfo*)cPtr, _uris, context ? cast(GAppLaunchContext*)context.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**

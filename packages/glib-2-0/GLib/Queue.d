@@ -67,7 +67,8 @@ class Queue
 
       (*_dlg)();
     }
-    g_queue_clear_full(cast(GQueue*)cPtr, &_freeFuncCallback);
+    auto _freeFuncCB = freeFunc ? &_freeFuncCallback : null;
+    g_queue_clear_full(cast(GQueue*)cPtr, _freeFuncCB);
   }
 
   /**
@@ -86,9 +87,10 @@ class Queue
 
       (*_dlg)(data);
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    g_queue_foreach(cast(GQueue*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    g_queue_foreach(cast(GQueue*)cPtr, _funcCB, _func);
   }
 
   /**
@@ -107,7 +109,8 @@ class Queue
 
       (*_dlg)();
     }
-    g_queue_free_full(cast(GQueue*)cPtr, &_freeFuncCallback);
+    auto _freeFuncCB = freeFunc ? &_freeFuncCallback : null;
+    g_queue_free_full(cast(GQueue*)cPtr, _freeFuncCB);
   }
 
   /**
@@ -165,9 +168,10 @@ class Queue
       int _retval = (*_dlg)(a, b);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    g_queue_insert_sorted(cast(GQueue*)cPtr, data, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    g_queue_insert_sorted(cast(GQueue*)cPtr, data, _funcCB, _func);
   }
 
   /**
@@ -334,8 +338,9 @@ class Queue
       int _retval = (*_dlg)(a, b);
       return _retval;
     }
+    auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
 
-    auto _compareFunc = cast(void*)&compareFunc;
-    g_queue_sort(cast(GQueue*)cPtr, &_compareFuncCallback, _compareFunc);
+    auto _compareFunc = compareFunc ? cast(void*)&(compareFunc) : null;
+    g_queue_sort(cast(GQueue*)cPtr, _compareFuncCB, _compareFunc);
   }
 }

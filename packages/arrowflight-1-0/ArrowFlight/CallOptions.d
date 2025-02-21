@@ -68,8 +68,9 @@ class CallOptions : ObjectG
 
       (*_dlg)(_name, _value);
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    gaflight_call_options_foreach_header(cast(GAFlightCallOptions*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    gaflight_call_options_foreach_header(cast(GAFlightCallOptions*)cPtr, _funcCB, _func);
   }
 }

@@ -1043,10 +1043,12 @@ gulong signalAddEmissionHook(uint signalId, Quark detail, SignalEmissionHook hoo
     bool _retval = (*_dlg)(*ihint, _paramValues);
     return _retval;
   }
+  auto _hookFuncCB = hookFunc ? &_hookFuncCallback : null;
 
   gulong _retval;
-  auto _hookFunc = freezeDelegate(cast(void*)&hookFunc);
-  _retval = g_signal_add_emission_hook(signalId, detail, &_hookFuncCallback, _hookFunc, &thawDelegate);
+  auto _hookFunc = hookFunc ? freezeDelegate(cast(void*)&hookFunc) : null;
+  GDestroyNotify _hookFuncDestroyCB = hookFunc ? &thawDelegate : null;
+  _retval = g_signal_add_emission_hook(signalId, detail, _hookFuncCB, _hookFunc, _hookFuncDestroyCB);
   return _retval;
 }
 
@@ -1440,6 +1442,7 @@ uint signalNewv(string signalName, GType itype, SignalFlags signalFlags, Closure
     bool _retval = (*_dlg)(*ihint, returnAccu ? new Value(cast(void*)returnAccu, No.Take) : null, handlerReturn ? new Value(cast(void*)handlerReturn, No.Take) : null);
     return _retval;
   }
+  auto _accumulatorCB = accumulator ? &_accumulatorCallback : null;
 
   extern(C) void _cMarshallerCallback(GClosure* closure, GValue* returnValue, uint nParamValues, const(GValue)* paramValues, void* invocationHint, void* marshalData)
   {
@@ -1451,16 +1454,17 @@ uint signalNewv(string signalName, GType itype, SignalFlags signalFlags, Closure
 
     (*_dlg)(closure ? new Closure(cast(void*)closure, No.Take) : null, returnValue ? new Value(cast(void*)returnValue, No.Take) : null, _paramValues, invocationHint);
   }
+  auto _cMarshallerCB = cMarshaller ? &_cMarshallerCallback : null;
 
   uint _retval;
   const(char)* _signalName = signalName.toCString(No.Alloc);
-  auto _accumulator = freezeDelegate(cast(void*)&accumulator);
+  auto _accumulator = accumulator ? freezeDelegate(cast(void*)&accumulator) : null;
   uint _nParams;
   if (paramTypes)
     _nParams = cast(uint)paramTypes.length;
 
   auto _paramTypes = cast(GType*)paramTypes.ptr;
-  _retval = g_signal_newv(_signalName, itype, signalFlags, classClosure ? cast(GClosure*)classClosure.cPtr(No.Dup) : null, &_accumulatorCallback, _accumulator, &_cMarshallerCallback, returnType, _nParams, _paramTypes);
+  _retval = g_signal_newv(_signalName, itype, signalFlags, classClosure ? cast(GClosure*)classClosure.cPtr(No.Dup) : null, _accumulatorCB, _accumulator, _cMarshallerCB, returnType, _nParams, _paramTypes);
   return _retval;
 }
 

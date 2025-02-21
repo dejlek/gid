@@ -335,9 +335,10 @@ class Scanner
 
       (*_dlg)(key, value);
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    g_scanner_scope_foreach_symbol(cast(GScanner*)cPtr, scopeId, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    g_scanner_scope_foreach_symbol(cast(GScanner*)cPtr, scopeId, _funcCB, _func);
   }
 
   /**

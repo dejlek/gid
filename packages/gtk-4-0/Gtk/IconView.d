@@ -715,9 +715,10 @@ class IconView : Widget, CellLayout, Scrollable
 
       (*_dlg)(ObjectG.getDObject!IconView(cast(void*)iconView, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null);
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    gtk_icon_view_selected_foreach(cast(GtkIconView*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    gtk_icon_view_selected_foreach(cast(GtkIconView*)cPtr, _funcCB, _func);
   }
 
   /**

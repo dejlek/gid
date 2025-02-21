@@ -512,6 +512,7 @@ class Regex : Boxed
       bool _retval = (*_dlg)(matchInfo ? new MatchInfo(cast(void*)matchInfo, No.Take) : null, result ? new String(cast(void*)result, No.Take) : null);
       return _retval;
     }
+    auto _evalCB = eval ? &_evalCallback : null;
 
     char* _cretval;
     ptrdiff_t _stringLen;
@@ -519,9 +520,9 @@ class Regex : Boxed
       _stringLen = cast(ptrdiff_t)string_.length;
 
     auto _string_ = cast(const(char)*)string_.ptr;
-    auto _eval = cast(void*)&eval;
+    auto _eval = eval ? cast(void*)&(eval) : null;
     GError *_err;
-    _cretval = g_regex_replace_eval(cast(GRegex*)cPtr, _string_, _stringLen, startPosition, matchOptions, &_evalCallback, _eval, &_err);
+    _cretval = g_regex_replace_eval(cast(GRegex*)cPtr, _string_, _stringLen, startPosition, matchOptions, _evalCB, _eval, &_err);
     if (_err)
       throw new RegexException(_err);
     string _retval = _cretval.fromCString(Yes.Free);

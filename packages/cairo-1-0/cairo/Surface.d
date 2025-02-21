@@ -450,10 +450,11 @@ class Surface : Boxed
 
       return _retval;
     }
+    auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
 
     cairo_status_t _cretval;
-    auto _writeFunc = cast(void*)&writeFunc;
-    _cretval = cairo_surface_observer_print(cast(cairo_surface_t*)cPtr, &_writeFuncCallback, _writeFunc);
+    auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
+    _cretval = cairo_surface_observer_print(cast(cairo_surface_t*)cPtr, _writeFuncCB, _writeFunc);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }
@@ -571,6 +572,7 @@ class Surface : Boxed
 
       (*_dlg)();
     }
+    auto _destroyCB = destroy ? &_destroyCallback : null;
 
     cairo_status_t _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -579,8 +581,8 @@ class Surface : Boxed
       _length = cast(gulong)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    auto _destroy = freezeDelegate(cast(void*)&destroy);
-    _cretval = cairo_surface_set_mime_data(cast(cairo_surface_t*)cPtr, _mimeType, _data, _length, &_destroyCallback, _destroy);
+    auto _destroy = destroy ? freezeDelegate(cast(void*)&destroy) : null;
+    _cretval = cairo_surface_set_mime_data(cast(cairo_surface_t*)cPtr, _mimeType, _data, _length, _destroyCB, _destroy);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }
@@ -690,10 +692,11 @@ class Surface : Boxed
 
       return _retval;
     }
+    auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
 
     cairo_status_t _cretval;
-    auto _writeFunc = cast(void*)&writeFunc;
-    _cretval = cairo_surface_write_to_png_stream(cast(cairo_surface_t*)cPtr, &_writeFuncCallback, _writeFunc);
+    auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
+    _cretval = cairo_surface_write_to_png_stream(cast(cairo_surface_t*)cPtr, _writeFuncCB, _writeFunc);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }

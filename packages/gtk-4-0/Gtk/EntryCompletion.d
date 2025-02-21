@@ -334,9 +334,11 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
       bool _retval = (*_dlg)(ObjectG.getDObject!EntryCompletion(cast(void*)completion, No.Take), _key, iter ? new TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = freezeDelegate(cast(void*)&func);
-    gtk_entry_completion_set_match_func(cast(GtkEntryCompletion*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_entry_completion_set_match_func(cast(GtkEntryCompletion*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**

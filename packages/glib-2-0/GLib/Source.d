@@ -453,9 +453,11 @@ class Source : Boxed
       bool _retval = (*_dlg)();
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = freezeDelegate(cast(void*)&func);
-    g_source_set_callback(cast(GSource*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    g_source_set_callback(cast(GSource*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**

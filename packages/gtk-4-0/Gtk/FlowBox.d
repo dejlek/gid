@@ -130,9 +130,11 @@ class FlowBox : Widget, Orientable
 
       return _retval;
     }
+    auto _createWidgetFuncCB = createWidgetFunc ? &_createWidgetFuncCallback : null;
 
-    auto _createWidgetFunc = freezeDelegate(cast(void*)&createWidgetFunc);
-    gtk_flow_box_bind_model(cast(GtkFlowBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, &_createWidgetFuncCallback, _createWidgetFunc, &thawDelegate);
+    auto _createWidgetFunc = createWidgetFunc ? freezeDelegate(cast(void*)&createWidgetFunc) : null;
+    GDestroyNotify _createWidgetFuncDestroyCB = createWidgetFunc ? &thawDelegate : null;
+    gtk_flow_box_bind_model(cast(GtkFlowBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
   }
 
   /**
@@ -366,9 +368,10 @@ class FlowBox : Widget, Orientable
 
       (*_dlg)(ObjectG.getDObject!FlowBox(cast(void*)box, No.Take), ObjectG.getDObject!FlowBoxChild(cast(void*)child, No.Take));
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    gtk_flow_box_selected_foreach(cast(GtkFlowBox*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    gtk_flow_box_selected_foreach(cast(GtkFlowBox*)cPtr, _funcCB, _func);
   }
 
   /**
@@ -416,9 +419,11 @@ class FlowBox : Widget, Orientable
       bool _retval = (*_dlg)(ObjectG.getDObject!FlowBoxChild(cast(void*)child, No.Take));
       return _retval;
     }
+    auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;
 
-    auto _filterFunc = freezeDelegate(cast(void*)&filterFunc);
-    gtk_flow_box_set_filter_func(cast(GtkFlowBox*)cPtr, &_filterFuncCallback, _filterFunc, &thawDelegate);
+    auto _filterFunc = filterFunc ? freezeDelegate(cast(void*)&filterFunc) : null;
+    GDestroyNotify _filterFuncDestroyCB = filterFunc ? &thawDelegate : null;
+    gtk_flow_box_set_filter_func(cast(GtkFlowBox*)cPtr, _filterFuncCB, _filterFunc, _filterFuncDestroyCB);
   }
 
   /**
@@ -519,9 +524,11 @@ class FlowBox : Widget, Orientable
       int _retval = (*_dlg)(ObjectG.getDObject!FlowBoxChild(cast(void*)child1, No.Take), ObjectG.getDObject!FlowBoxChild(cast(void*)child2, No.Take));
       return _retval;
     }
+    auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
 
-    auto _sortFunc = freezeDelegate(cast(void*)&sortFunc);
-    gtk_flow_box_set_sort_func(cast(GtkFlowBox*)cPtr, &_sortFuncCallback, _sortFunc, &thawDelegate);
+    auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
+    GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
+    gtk_flow_box_set_sort_func(cast(GtkFlowBox*)cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
   }
 
   /**

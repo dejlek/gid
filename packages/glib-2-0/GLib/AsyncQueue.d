@@ -167,9 +167,10 @@ class AsyncQueue
       int _retval = (*_dlg)(a, b);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    g_async_queue_push_sorted(cast(GAsyncQueue*)cPtr, data, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    g_async_queue_push_sorted(cast(GAsyncQueue*)cPtr, data, _funcCB, _func);
   }
 
   /**
@@ -197,9 +198,10 @@ class AsyncQueue
       int _retval = (*_dlg)(a, b);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    g_async_queue_push_sorted_unlocked(cast(GAsyncQueue*)cPtr, data, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    g_async_queue_push_sorted_unlocked(cast(GAsyncQueue*)cPtr, data, _funcCB, _func);
   }
 
   /**
@@ -283,9 +285,10 @@ class AsyncQueue
       int _retval = (*_dlg)(a, b);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    g_async_queue_sort(cast(GAsyncQueue*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    g_async_queue_sort(cast(GAsyncQueue*)cPtr, _funcCB, _func);
   }
 
   /**
@@ -308,9 +311,10 @@ class AsyncQueue
       int _retval = (*_dlg)(a, b);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    g_async_queue_sort_unlocked(cast(GAsyncQueue*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    g_async_queue_sort_unlocked(cast(GAsyncQueue*)cPtr, _funcCB, _func);
   }
 
   /**

@@ -75,10 +75,12 @@ class MapListModel : ObjectG, ListModel, SectionModel
 
       return _retval;
     }
+    auto _mapFuncCB = mapFunc ? &_mapFuncCallback : null;
 
     GtkMapListModel* _cretval;
-    auto _mapFunc = freezeDelegate(cast(void*)&mapFunc);
-    _cretval = gtk_map_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, &_mapFuncCallback, _mapFunc, &thawDelegate);
+    auto _mapFunc = mapFunc ? freezeDelegate(cast(void*)&mapFunc) : null;
+    GDestroyNotify _mapFuncDestroyCB = mapFunc ? &thawDelegate : null;
+    _cretval = gtk_map_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, _mapFuncCB, _mapFunc, _mapFuncDestroyCB);
     this(_cretval, Yes.Take);
   }
 
@@ -129,9 +131,11 @@ class MapListModel : ObjectG, ListModel, SectionModel
 
       return _retval;
     }
+    auto _mapFuncCB = mapFunc ? &_mapFuncCallback : null;
 
-    auto _mapFunc = freezeDelegate(cast(void*)&mapFunc);
-    gtk_map_list_model_set_map_func(cast(GtkMapListModel*)cPtr, &_mapFuncCallback, _mapFunc, &thawDelegate);
+    auto _mapFunc = mapFunc ? freezeDelegate(cast(void*)&mapFunc) : null;
+    GDestroyNotify _mapFuncDestroyCB = mapFunc ? &thawDelegate : null;
+    gtk_map_list_model_set_map_func(cast(GtkMapListModel*)cPtr, _mapFuncCB, _mapFunc, _mapFuncDestroyCB);
   }
 
   /**

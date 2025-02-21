@@ -159,9 +159,10 @@ class Hook
       int _retval = _static_func(newHook ? new Hook(cast(void*)newHook, No.Take) : null, sibling ? new Hook(cast(void*)sibling, No.Take) : null);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
     _static_func = func;
-    g_hook_insert_sorted(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null, &_funcCallback);
+    g_hook_insert_sorted(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null, _funcCB);
     _static_func = null;
   }
 

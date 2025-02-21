@@ -1095,7 +1095,8 @@ void atomicRcBoxReleaseFull(void* memBlock, DestroyNotify clearFunc)
 
     (*_dlg)();
   }
-  g_atomic_rc_box_release_full(memBlock, &_clearFuncCallback);
+  auto _clearFuncCB = clearFunc ? &_clearFuncCallback : null;
+  g_atomic_rc_box_release_full(memBlock, _clearFuncCB);
 }
 
 /**
@@ -1499,10 +1500,12 @@ uint childWatchAdd(int priority, Pid pid, ChildWatchFunc function_)
 
     (*_dlg)(pid, waitStatus);
   }
+  auto _function_CB = function_ ? &_function_Callback : null;
 
   uint _retval;
-  auto _function_ = freezeDelegate(cast(void*)&function_);
-  _retval = g_child_watch_add_full(priority, pid, &_function_Callback, _function_, &thawDelegate);
+  auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
+  GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
+  _retval = g_child_watch_add_full(priority, pid, _function_CB, _function_, _function_DestroyCB);
   return _retval;
 }
 
@@ -1968,9 +1971,10 @@ void datasetForeach(const(void)* datasetLocation, DataForeachFunc func)
 
     (*_dlg)(keyId, data);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = cast(void*)&func;
-  g_dataset_foreach(datasetLocation, &_funcCallback, _func);
+  auto _func = func ? cast(void*)&(func) : null;
+  g_dataset_foreach(datasetLocation, _funcCB, _func);
 }
 
 /**
@@ -3812,10 +3816,12 @@ uint idleAdd(int priority, SourceFunc function_)
     bool _retval = (*_dlg)();
     return _retval;
   }
+  auto _function_CB = function_ ? &_function_Callback : null;
 
   uint _retval;
-  auto _function_ = freezeDelegate(cast(void*)&function_);
-  _retval = g_idle_add_full(priority, &_function_Callback, _function_, &thawDelegate);
+  auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
+  GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
+  _retval = g_idle_add_full(priority, _function_CB, _function_, _function_DestroyCB);
   return _retval;
 }
 
@@ -3985,10 +3991,12 @@ uint ioAddWatch(IOChannel channel, int priority, IOCondition condition, IOFunc f
     bool _retval = (*_dlg)(source ? new IOChannel(cast(void*)source, No.Take) : null, condition);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
   uint _retval;
-  auto _func = freezeDelegate(cast(void*)&func);
-  _retval = g_io_add_watch_full(channel ? cast(GIOChannel*)channel.cPtr(No.Dup) : null, priority, condition, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  _retval = g_io_add_watch_full(channel ? cast(GIOChannel*)channel.cPtr(No.Dup) : null, priority, condition, _funcCB, _func, _funcDestroyCB);
   return _retval;
 }
 
@@ -4292,11 +4300,13 @@ uint logSetHandler(string logDomain, LogLevelFlags logLevels, LogFunc logFunc)
 
     (*_dlg)(_logDomain, logLevel, _message);
   }
+  auto _logFuncCB = logFunc ? &_logFuncCallback : null;
 
   uint _retval;
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
-  auto _logFunc = freezeDelegate(cast(void*)&logFunc);
-  _retval = g_log_set_handler_full(_logDomain, logLevels, &_logFuncCallback, _logFunc, &thawDelegate);
+  auto _logFunc = logFunc ? freezeDelegate(cast(void*)&logFunc) : null;
+  GDestroyNotify _logFuncDestroyCB = logFunc ? &thawDelegate : null;
+  _retval = g_log_set_handler_full(_logDomain, logLevels, _logFuncCB, _logFunc, _logFuncDestroyCB);
   return _retval;
 }
 
@@ -5201,9 +5211,10 @@ void qsortWithData(const(void)* pbase, int totalElems, size_t size, CompareDataF
     int _retval = (*_dlg)(a, b);
     return _retval;
   }
+  auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
 
-  auto _compareFunc = cast(void*)&compareFunc;
-  g_qsort_with_data(pbase, totalElems, size, &_compareFuncCallback, _compareFunc);
+  auto _compareFunc = compareFunc ? cast(void*)&(compareFunc) : null;
+  g_qsort_with_data(pbase, totalElems, size, _compareFuncCB, _compareFunc);
 }
 
 /**
@@ -5456,7 +5467,8 @@ void rcBoxReleaseFull(void* memBlock, DestroyNotify clearFunc)
 
     (*_dlg)();
   }
-  g_rc_box_release_full(memBlock, &_clearFuncCallback);
+  auto _clearFuncCB = clearFunc ? &_clearFuncCallback : null;
+  g_rc_box_release_full(memBlock, _clearFuncCB);
 }
 
 /**
@@ -6088,6 +6100,7 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, SpawnFlag
 
     (*_dlg)();
   }
+  auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
@@ -6103,9 +6116,9 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, SpawnFlag
   _tmpenvp ~= null;
   char** _envp = _tmpenvp.ptr;
 
-  auto _childSetup = freezeDelegate(cast(void*)&childSetup);
+  auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
   GError *_err;
-  _retval = g_spawn_async(_workingDirectory, _argv, _envp, flags, &_childSetupCallback, _childSetup, cast(GPid*)&childPid, &_err);
+  _retval = g_spawn_async(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;
@@ -6138,6 +6151,7 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, Sp
 
     (*_dlg)();
   }
+  auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
@@ -6153,9 +6167,9 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, Sp
   _tmpenvp ~= null;
   char** _envp = _tmpenvp.ptr;
 
-  auto _childSetup = freezeDelegate(cast(void*)&childSetup);
+  auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
   GError *_err;
-  _retval = g_spawn_async_with_fds(_workingDirectory, _argv, _envp, flags, &_childSetupCallback, _childSetup, cast(GPid*)&childPid, stdinFd, stdoutFd, stderrFd, &_err);
+  _retval = g_spawn_async_with_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, stdinFd, stdoutFd, stderrFd, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;
@@ -6189,6 +6203,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
 
     (*_dlg)();
   }
+  auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
@@ -6204,9 +6219,9 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
   _tmpenvp ~= null;
   char** _envp = _tmpenvp.ptr;
 
-  auto _childSetup = freezeDelegate(cast(void*)&childSetup);
+  auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
   GError *_err;
-  _retval = g_spawn_async_with_pipes(_workingDirectory, _argv, _envp, flags, &_childSetupCallback, _childSetup, cast(GPid*)&childPid, cast(int*)&standardInput, cast(int*)&standardOutput, cast(int*)&standardError, &_err);
+  _retval = g_spawn_async_with_pipes(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cast(int*)&standardInput, cast(int*)&standardOutput, cast(int*)&standardError, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;
@@ -6410,6 +6425,7 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
 
     (*_dlg)();
   }
+  auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
@@ -6425,7 +6441,7 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
   _tmpenvp ~= null;
   const(char*)* _envp = _tmpenvp.ptr;
 
-  auto _childSetup = freezeDelegate(cast(void*)&childSetup);
+  auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
   size_t _nFds;
   if (sourceFds)
     _nFds = cast(size_t)sourceFds.length;
@@ -6436,7 +6452,7 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
 
   auto _targetFds = cast(const(int)*)targetFds.ptr;
   GError *_err;
-  _retval = g_spawn_async_with_pipes_and_fds(_workingDirectory, _argv, _envp, flags, &_childSetupCallback, _childSetup, stdinFd, stdoutFd, stderrFd, _sourceFds, _targetFds, _nFds, cast(GPid*)&childPidOut, cast(int*)&stdinPipeOut, cast(int*)&stdoutPipeOut, cast(int*)&stderrPipeOut, &_err);
+  _retval = g_spawn_async_with_pipes_and_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, stdinFd, stdoutFd, stderrFd, _sourceFds, _targetFds, _nFds, cast(GPid*)&childPidOut, cast(int*)&stdinPipeOut, cast(int*)&stdoutPipeOut, cast(int*)&stderrPipeOut, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;
@@ -6651,6 +6667,7 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, SpawnFlags
 
     (*_dlg)();
   }
+  auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
   bool _retval;
   const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
@@ -6666,11 +6683,11 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, SpawnFlags
   _tmpenvp ~= null;
   char** _envp = _tmpenvp.ptr;
 
-  auto _childSetup = cast(void*)&childSetup;
+  auto _childSetup = childSetup ? cast(void*)&(childSetup) : null;
   char* _standardOutput;
   char* _standardError;
   GError *_err;
-  _retval = g_spawn_sync(_workingDirectory, _argv, _envp, flags, &_childSetupCallback, _childSetup, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
+  _retval = g_spawn_sync(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, &_standardOutput, &_standardError, cast(int*)&waitStatus, &_err);
   if (_err)
     throw new ErrorG(_err);
   standardOutput = _standardOutput.fromCString(Yes.Free);
@@ -7729,9 +7746,10 @@ void testAddDataFunc(string testpath, const(void)* testData, TestDataFunc testFu
 
     (*_dlg)();
   }
+  auto _testFuncCB = testFunc ? &_testFuncCallback : null;
 
   const(char)* _testpath = testpath.toCString(No.Alloc);
-  g_test_add_data_func(_testpath, testData, &_testFuncCallback);
+  g_test_add_data_func(_testpath, testData, _testFuncCB);
 }
 
 void testAssertExpectedMessagesInternal(string domain, string file, int line, string func)
@@ -8390,10 +8408,12 @@ uint timeoutAdd(int priority, uint interval, SourceFunc function_)
     bool _retval = (*_dlg)();
     return _retval;
   }
+  auto _function_CB = function_ ? &_function_Callback : null;
 
   uint _retval;
-  auto _function_ = freezeDelegate(cast(void*)&function_);
-  _retval = g_timeout_add_full(priority, interval, &_function_Callback, _function_, &thawDelegate);
+  auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
+  GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
+  _retval = g_timeout_add_full(priority, interval, _function_CB, _function_, _function_DestroyCB);
   return _retval;
 }
 
@@ -8444,10 +8464,12 @@ uint timeoutAddSeconds(int priority, uint interval, SourceFunc function_)
     bool _retval = (*_dlg)();
     return _retval;
   }
+  auto _function_CB = function_ ? &_function_Callback : null;
 
   uint _retval;
-  auto _function_ = freezeDelegate(cast(void*)&function_);
-  _retval = g_timeout_add_seconds_full(priority, interval, &_function_Callback, _function_, &thawDelegate);
+  auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
+  GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
+  _retval = g_timeout_add_seconds_full(priority, interval, _function_CB, _function_, _function_DestroyCB);
   return _retval;
 }
 
@@ -9259,10 +9281,12 @@ uint unixFdAddFull(int priority, int fd, IOCondition condition, UnixFDSourceFunc
     bool _retval = (*_dlg)(fd, condition);
     return _retval;
   }
+  auto _function_CB = function_ ? &_function_Callback : null;
 
   uint _retval;
-  auto _function_ = freezeDelegate(cast(void*)&function_);
-  _retval = g_unix_fd_add_full(priority, fd, condition, &_function_Callback, _function_, &thawDelegate);
+  auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
+  GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
+  _retval = g_unix_fd_add_full(priority, fd, condition, _function_CB, _function_, _function_DestroyCB);
   return _retval;
 }
 
@@ -9381,10 +9405,12 @@ uint unixSignalAdd(int priority, int signum, SourceFunc handler)
     bool _retval = (*_dlg)();
     return _retval;
   }
+  auto _handlerCB = handler ? &_handlerCallback : null;
 
   uint _retval;
-  auto _handler = freezeDelegate(cast(void*)&handler);
-  _retval = g_unix_signal_add_full(priority, signum, &_handlerCallback, _handler, &thawDelegate);
+  auto _handler = handler ? freezeDelegate(cast(void*)&handler) : null;
+  GDestroyNotify _handlerDestroyCB = handler ? &thawDelegate : null;
+  _retval = g_unix_signal_add_full(priority, signum, _handlerCB, _handler, _handlerDestroyCB);
   return _retval;
 }
 

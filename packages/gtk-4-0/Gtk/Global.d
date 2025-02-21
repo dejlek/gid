@@ -328,9 +328,11 @@ void enumeratePrinters(PrinterFunc func, bool wait)
     bool _retval = (*_dlg)(ObjectG.getDObject!Printer(cast(void*)printer, No.Take));
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  gtk_enumerate_printers(&_funcCallback, _func, &thawDelegate, wait);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  gtk_enumerate_printers(_funcCB, _func, _funcDestroyCB, wait);
 }
 
 /**
@@ -604,9 +606,10 @@ void printRunPageSetupDialogAsync(Window parent, PageSetup pageSetup, PrintSetti
 
     (*_dlg)(ObjectG.getDObject!PageSetup(cast(void*)pageSetup, No.Take));
   }
+  auto _doneCbCB = doneCb ? &_doneCbCallback : null;
 
-  auto _doneCb = freezeDelegate(cast(void*)&doneCb);
-  gtk_print_run_page_setup_dialog_async(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null, &_doneCbCallback, _doneCb);
+  auto _doneCb = doneCb ? freezeDelegate(cast(void*)&doneCb) : null;
+  gtk_print_run_page_setup_dialog_async(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null, _doneCbCB, _doneCb);
 }
 
 /**
@@ -888,10 +891,11 @@ void showUriFull(Window parent, string uri, uint timestamp, Cancellable cancella
 
     (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
   }
+  auto _callbackCB = callback ? &_callbackCallback : null;
 
   const(char)* _uri = uri.toCString(No.Alloc);
-  auto _callback = freezeDelegate(cast(void*)&callback);
-  gtk_show_uri_full(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, _uri, timestamp, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  gtk_show_uri_full(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, _uri, timestamp, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
 }
 
 /**

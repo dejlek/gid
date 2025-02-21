@@ -518,10 +518,11 @@ class Task : ObjectG, AsyncResult
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     GTask* _cretval;
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    _cretval = g_task_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _cretval = g_task_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
     this(_cretval, Yes.Take);
   }
 
@@ -567,9 +568,10 @@ class Task : ObjectG, AsyncResult
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_task_report_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_callbackCallback, _callback, sourceTag, error ? cast(GError*)error.cPtr : null);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_task_report_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, sourceTag, error ? cast(GError*)error.cPtr : null);
   }
 
   /**
@@ -889,7 +891,8 @@ class Task : ObjectG, AsyncResult
 
       (*_dlg)();
     }
-    g_task_return_pointer(cast(GTask*)cPtr, result, &_resultDestroyCallback);
+    auto _resultDestroyCB = resultDestroy ? &_resultDestroyCallback : null;
+    g_task_return_pointer(cast(GTask*)cPtr, result, _resultDestroyCB);
   }
 
   /**
@@ -936,7 +939,8 @@ class Task : ObjectG, AsyncResult
 
       (*_dlg)(ObjectG.getDObject!Task(cast(void*)task, No.Take), ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!Cancellable(cast(void*)cancellable, No.Take));
     }
-    g_task_run_in_thread(cast(GTask*)cPtr, &_taskFuncCallback);
+    auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
+    g_task_run_in_thread(cast(GTask*)cPtr, _taskFuncCB);
   }
 
   /**
@@ -965,7 +969,8 @@ class Task : ObjectG, AsyncResult
 
       (*_dlg)(ObjectG.getDObject!Task(cast(void*)task, No.Take), ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!Cancellable(cast(void*)cancellable, No.Take));
     }
-    g_task_run_in_thread_sync(cast(GTask*)cPtr, &_taskFuncCallback);
+    auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
+    g_task_run_in_thread_sync(cast(GTask*)cPtr, _taskFuncCB);
   }
 
   /**
@@ -1108,6 +1113,7 @@ class Task : ObjectG, AsyncResult
 
       (*_dlg)();
     }
-    g_task_set_task_data(cast(GTask*)cPtr, taskData, &_taskDataDestroyCallback);
+    auto _taskDataDestroyCB = taskDataDestroy ? &_taskDataDestroyCallback : null;
+    g_task_set_task_data(cast(GTask*)cPtr, taskData, _taskDataDestroyCB);
   }
 }

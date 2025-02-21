@@ -182,6 +182,7 @@ class Vfs : ObjectG
 
       return _retval;
     }
+    auto _uriFuncCB = uriFunc ? &_uriFuncCallback : null;
 
     extern(C) GFile* _parseNameFuncCallback(GVfs* vfs, const(char)* identifier, void* userData)
     {
@@ -194,12 +195,15 @@ class Vfs : ObjectG
 
       return _retval;
     }
+    auto _parseNameFuncCB = parseNameFunc ? &_parseNameFuncCallback : null;
 
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    auto _uriFunc = freezeDelegate(cast(void*)&uriFunc);
-    auto _parseNameFunc = freezeDelegate(cast(void*)&parseNameFunc);
-    _retval = g_vfs_register_uri_scheme(cast(GVfs*)cPtr, _scheme, &_uriFuncCallback, _uriFunc, &thawDelegate, &_parseNameFuncCallback, _parseNameFunc, &thawDelegate);
+    auto _uriFunc = uriFunc ? freezeDelegate(cast(void*)&uriFunc) : null;
+    GDestroyNotify _uriFuncDestroyCB = uriFunc ? &thawDelegate : null;
+    auto _parseNameFunc = parseNameFunc ? freezeDelegate(cast(void*)&parseNameFunc) : null;
+    GDestroyNotify _parseNameFuncDestroyCB = parseNameFunc ? &thawDelegate : null;
+    _retval = g_vfs_register_uri_scheme(cast(GVfs*)cPtr, _scheme, _uriFuncCB, _uriFunc, _uriFuncDestroyCB, _parseNameFuncCB, _parseNameFunc, _parseNameFuncDestroyCB);
     return _retval;
   }
 

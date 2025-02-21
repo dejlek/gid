@@ -184,9 +184,11 @@ class DrawingArea : Widget
 
       (*_dlg)(ObjectG.getDObject!DrawingArea(cast(void*)drawingArea, No.Take), cr ? new Context(cast(void*)cr, No.Take) : null, width, height);
     }
+    auto _drawFuncCB = drawFunc ? &_drawFuncCallback : null;
 
-    auto _drawFunc = freezeDelegate(cast(void*)&drawFunc);
-    gtk_drawing_area_set_draw_func(cast(GtkDrawingArea*)cPtr, &_drawFuncCallback, _drawFunc, &thawDelegate);
+    auto _drawFunc = drawFunc ? freezeDelegate(cast(void*)&drawFunc) : null;
+    GDestroyNotify _drawFuncDestroyCB = drawFunc ? &thawDelegate : null;
+    gtk_drawing_area_set_draw_func(cast(GtkDrawingArea*)cPtr, _drawFuncCB, _drawFunc, _drawFuncDestroyCB);
   }
 
   /**

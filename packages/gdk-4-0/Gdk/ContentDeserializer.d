@@ -173,6 +173,7 @@ class ContentDeserializer : ObjectG, AsyncResult
 
       (*_dlg)();
     }
-    gdk_content_deserializer_set_task_data(cast(GdkContentDeserializer*)cPtr, data, &_notifyCallback);
+    auto _notifyCB = notify ? &_notifyCallback : null;
+    gdk_content_deserializer_set_task_data(cast(GdkContentDeserializer*)cPtr, data, _notifyCB);
   }
 }

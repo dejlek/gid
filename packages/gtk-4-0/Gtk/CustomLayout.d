@@ -61,6 +61,7 @@ class CustomLayout : LayoutManager
 
       return _retval;
     }
+    auto _requestModeCB = requestMode ? &_requestModeCallback : null;
 
     _static_requestMode = requestMode;
     static CustomMeasureFunc _static_measure;
@@ -69,6 +70,7 @@ class CustomLayout : LayoutManager
     {
       _static_measure(ObjectG.getDObject!Widget(cast(void*)widget, No.Take), orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
     }
+    auto _measureCB = measure ? &_measureCallback : null;
 
     _static_measure = measure;
     static CustomAllocateFunc _static_allocate;
@@ -77,10 +79,11 @@ class CustomLayout : LayoutManager
     {
       _static_allocate(ObjectG.getDObject!Widget(cast(void*)widget, No.Take), width, height, baseline);
     }
+    auto _allocateCB = allocate ? &_allocateCallback : null;
 
     _static_allocate = allocate;
     GtkLayoutManager* _cretval;
-    _cretval = gtk_custom_layout_new(&_requestModeCallback, &_measureCallback, &_allocateCallback);
+    _cretval = gtk_custom_layout_new(_requestModeCB, _measureCB, _allocateCB);
     _static_requestMode = null;
     _static_measure = null;
     _static_allocate = null;

@@ -334,9 +334,11 @@ class MenuButton : Widget
 
       (*_dlg)(ObjectG.getDObject!MenuButton(cast(void*)menuButton, No.Take));
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = freezeDelegate(cast(void*)&func);
-    gtk_menu_button_set_create_popup_func(cast(GtkMenuButton*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_menu_button_set_create_popup_func(cast(GtkMenuButton*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   alias setDirection = Widget.setDirection;

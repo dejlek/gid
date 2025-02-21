@@ -97,9 +97,11 @@ void contextSetShapeRenderer(Context context, ShapeRendererFunc func)
 
     (*_dlg)(cr ? new DcairoContext(cast(void*)cr, No.Take) : null, attr ? new AttrShape(cast(void*)attr, No.Take) : null, doPath);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  pango_cairo_context_set_shape_renderer(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  pango_cairo_context_set_shape_renderer(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**

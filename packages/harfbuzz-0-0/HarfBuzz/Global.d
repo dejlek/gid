@@ -1102,9 +1102,11 @@ void bufferSetMessageFunc(Buffer buffer, BufferMessageFunc func)
     hb_bool_t _retval = (*_dlg)(buffer ? new Buffer(cast(void*)buffer, No.Take) : null, font ? new Font(cast(void*)font, No.Take) : null, _message);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_buffer_set_message_func(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_buffer_set_message_func(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1397,9 +1399,11 @@ void drawFuncsSetClosePathFunc(DrawFuncs dfuncs, DrawClosePathFunc func)
 
     (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new DrawState(cast(void*)st, No.Take) : null);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_draw_funcs_set_close_path_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_draw_funcs_set_close_path_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1416,9 +1420,11 @@ void drawFuncsSetCubicToFunc(DrawFuncs dfuncs, DrawCubicToFunc func)
 
     (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new DrawState(cast(void*)st, No.Take) : null, control1X, control1Y, control2X, control2Y, toX, toY);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_draw_funcs_set_cubic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_draw_funcs_set_cubic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1435,9 +1441,11 @@ void drawFuncsSetLineToFunc(DrawFuncs dfuncs, DrawLineToFunc func)
 
     (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new DrawState(cast(void*)st, No.Take) : null, toX, toY);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_draw_funcs_set_line_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_draw_funcs_set_line_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1454,9 +1462,11 @@ void drawFuncsSetMoveToFunc(DrawFuncs dfuncs, DrawMoveToFunc func)
 
     (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new DrawState(cast(void*)st, No.Take) : null, toX, toY);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_draw_funcs_set_move_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_draw_funcs_set_move_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1473,9 +1483,11 @@ void drawFuncsSetQuadraticToFunc(DrawFuncs dfuncs, DrawQuadraticToFunc func)
 
     (*_dlg)(dfuncs ? new DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new DrawState(cast(void*)st, No.Take) : null, controlX, controlY, toX, toY);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_draw_funcs_set_quadratic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_draw_funcs_set_quadratic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1628,10 +1640,12 @@ HBFace faceCreateForTables(ReferenceTableFunc referenceTableFunc)
 
     return _retval;
   }
+  auto _referenceTableFuncCB = referenceTableFunc ? &_referenceTableFuncCallback : null;
 
   hb_face_t* _cretval;
-  auto _referenceTableFunc = freezeDelegate(cast(void*)&referenceTableFunc);
-  _cretval = hb_face_create_for_tables(&_referenceTableFuncCallback, _referenceTableFunc, &thawDelegate);
+  auto _referenceTableFunc = referenceTableFunc ? freezeDelegate(cast(void*)&referenceTableFunc) : null;
+  GDestroyNotify _referenceTableFuncDestroyCB = referenceTableFunc ? &thawDelegate : null;
+  _cretval = hb_face_create_for_tables(_referenceTableFuncCB, _referenceTableFunc, _referenceTableFuncDestroyCB);
   auto _retval = _cretval ? new HBFace(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1995,9 +2009,11 @@ void fontFuncsSetDrawGlyphFunc(FontFuncs ffuncs, FontDrawGlyphFunc func)
 
     (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_draw_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_draw_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2015,9 +2031,11 @@ void fontFuncsSetFontHExtentsFunc(FontFuncs ffuncs, FontGetFontHExtentsFunc func
     hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, *extents);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_font_h_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_font_h_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2035,9 +2053,11 @@ void fontFuncsSetFontVExtentsFunc(FontFuncs ffuncs, FontGetFontVExtentsFunc func
     hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, *extents);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_font_v_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_font_v_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2055,9 +2075,11 @@ void fontFuncsSetGlyphContourPointFunc(FontFuncs ffuncs, FontGetGlyphContourPoin
     hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, pointIndex, *x, *y);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_contour_point_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_contour_point_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2075,9 +2097,11 @@ void fontFuncsSetGlyphExtentsFunc(FontFuncs ffuncs, FontGetGlyphExtentsFunc func
     hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, *extents);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2098,9 +2122,11 @@ void fontFuncsSetGlyphFromNameFunc(FontFuncs ffuncs, FontGetGlyphFromNameFunc fu
     hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, _name, *glyph);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_from_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_from_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2119,9 +2145,11 @@ void fontFuncsSetGlyphFunc(FontFuncs ffuncs, FontGetGlyphFunc func)
     hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2139,9 +2167,11 @@ void fontFuncsSetGlyphHAdvanceFunc(FontFuncs ffuncs, FontGetGlyphHAdvanceFunc fu
     hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_h_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_h_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2159,9 +2189,11 @@ void fontFuncsSetGlyphHKerningFunc(FontFuncs ffuncs, FontGetGlyphHKerningFunc fu
     hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_h_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_h_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2179,9 +2211,11 @@ void fontFuncsSetGlyphHOriginFunc(FontFuncs ffuncs, FontGetGlyphHOriginFunc func
     hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_h_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_h_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2203,9 +2237,11 @@ void fontFuncsSetGlyphNameFunc(FontFuncs ffuncs, FontGetGlyphNameFunc func)
 
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2225,9 +2261,11 @@ void fontFuncsSetGlyphShapeFunc(FontFuncs ffuncs, FontGetGlyphShapeFunc func)
 
     (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_shape_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_shape_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2245,9 +2283,11 @@ void fontFuncsSetGlyphVAdvanceFunc(FontFuncs ffuncs, FontGetGlyphVAdvanceFunc fu
     hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_v_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_v_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2265,9 +2305,11 @@ void fontFuncsSetGlyphVKerningFunc(FontFuncs ffuncs, FontGetGlyphVKerningFunc fu
     hb_position_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_v_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_v_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2285,9 +2327,11 @@ void fontFuncsSetGlyphVOriginFunc(FontFuncs ffuncs, FontGetGlyphVOriginFunc func
     hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_glyph_v_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_glyph_v_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2305,9 +2349,11 @@ void fontFuncsSetNominalGlyphFunc(FontFuncs ffuncs, FontGetNominalGlyphFunc func
     hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, unicode, *glyph);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_nominal_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_nominal_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2324,9 +2370,11 @@ void fontFuncsSetPaintGlyphFunc(FontFuncs ffuncs, FontPaintGlyphFunc func)
 
     (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, glyph, paintFuncs ? new PaintFuncs(cast(void*)paintFuncs, No.Take) : null, paintData, paletteIndex, foreground);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_paint_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_paint_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2344,9 +2392,11 @@ void fontFuncsSetVariationGlyphFunc(FontFuncs ffuncs, FontGetVariationGlyphFunc 
     hb_bool_t _retval = (*_dlg)(font ? new Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_font_funcs_set_variation_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_font_funcs_set_variation_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5297,9 +5347,11 @@ void paintFuncsSetColorFunc(PaintFuncs funcs, PaintColorFunc func)
 
     (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, isForeground, color);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5317,9 +5369,11 @@ void paintFuncsSetColorGlyphFunc(PaintFuncs funcs, PaintColorGlyphFunc func)
     hb_bool_t _retval = (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new Font(cast(void*)font, No.Take) : null);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_color_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_color_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5337,9 +5391,11 @@ void paintFuncsSetCustomPaletteColorFunc(PaintFuncs funcs, PaintCustomPaletteCol
     hb_bool_t _retval = (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorIndex, *color);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_custom_palette_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_custom_palette_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5357,9 +5413,11 @@ void paintFuncsSetImageFunc(PaintFuncs funcs, PaintImageFunc func)
     hb_bool_t _retval = (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, image ? new Blob(cast(void*)image, No.Take) : null, width, height, format, slant, *extents);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_image_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_image_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5376,9 +5434,11 @@ void paintFuncsSetLinearGradientFunc(PaintFuncs funcs, PaintLinearGradientFunc f
 
     (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, x1, y1, x2, y2);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_linear_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_linear_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5395,9 +5455,11 @@ void paintFuncsSetPopClipFunc(PaintFuncs funcs, PaintPopClipFunc func)
 
     (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_pop_clip_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_pop_clip_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5414,9 +5476,11 @@ void paintFuncsSetPopGroupFunc(PaintFuncs funcs, PaintPopGroupFunc func)
 
     (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, mode);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_pop_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_pop_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5433,9 +5497,11 @@ void paintFuncsSetPopTransformFunc(PaintFuncs funcs, PaintPopTransformFunc func)
 
     (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_pop_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_pop_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5452,9 +5518,11 @@ void paintFuncsSetPushClipGlyphFunc(PaintFuncs funcs, PaintPushClipGlyphFunc fun
 
     (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new Font(cast(void*)font, No.Take) : null);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_push_clip_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_push_clip_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5471,9 +5539,11 @@ void paintFuncsSetPushClipRectangleFunc(PaintFuncs funcs, PaintPushClipRectangle
 
     (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xmin, ymin, xmax, ymax);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_push_clip_rectangle_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_push_clip_rectangle_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5490,9 +5560,11 @@ void paintFuncsSetPushGroupFunc(PaintFuncs funcs, PaintPushGroupFunc func)
 
     (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_push_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_push_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5509,9 +5581,11 @@ void paintFuncsSetPushTransformFunc(PaintFuncs funcs, PaintPushTransformFunc fun
 
     (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xx, yx, xy, yy, dx, dy);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_push_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_push_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5528,9 +5602,11 @@ void paintFuncsSetRadialGradientFunc(PaintFuncs funcs, PaintRadialGradientFunc f
 
     (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, r0, x1, y1, r1);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_radial_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_radial_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5547,9 +5623,11 @@ void paintFuncsSetSweepGradientFunc(PaintFuncs funcs, PaintSweepGradientFunc fun
 
     (*_dlg)(funcs ? new PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, startAngle, endAngle);
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_paint_funcs_set_sweep_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_paint_funcs_set_sweep_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -6768,9 +6846,11 @@ void unicodeFuncsSetCombiningClassFunc(UnicodeFuncs ufuncs, UnicodeCombiningClas
 
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_combining_class_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_unicode_funcs_set_combining_class_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -6788,9 +6868,11 @@ void unicodeFuncsSetComposeFunc(UnicodeFuncs ufuncs, UnicodeComposeFunc func)
     hb_bool_t _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, a, b, *ab);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_compose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_unicode_funcs_set_compose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -6808,9 +6890,11 @@ void unicodeFuncsSetDecomposeFunc(UnicodeFuncs ufuncs, UnicodeDecomposeFunc func
     hb_bool_t _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, ab, *a, *b);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_decompose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_unicode_funcs_set_decompose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -6828,9 +6912,11 @@ void unicodeFuncsSetEastasianWidthFunc(UnicodeFuncs ufuncs, UnicodeEastasianWidt
     uint _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_eastasian_width_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_unicode_funcs_set_eastasian_width_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -6851,9 +6937,11 @@ void unicodeFuncsSetGeneralCategoryFunc(UnicodeFuncs ufuncs, UnicodeGeneralCateg
 
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_general_category_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_unicode_funcs_set_general_category_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -6871,9 +6959,11 @@ void unicodeFuncsSetMirroringFunc(UnicodeFuncs ufuncs, UnicodeMirroringFunc func
     hb_codepoint_t _retval = (*_dlg)(ufuncs ? new UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_mirroring_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_unicode_funcs_set_mirroring_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -6894,9 +6984,11 @@ void unicodeFuncsSetScriptFunc(UnicodeFuncs ufuncs, UnicodeScriptFunc func)
 
     return _retval;
   }
+  auto _funcCB = func ? &_funcCallback : null;
 
-  auto _func = freezeDelegate(cast(void*)&func);
-  hb_unicode_funcs_set_script_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+  auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+  GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+  hb_unicode_funcs_set_script_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**

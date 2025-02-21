@@ -215,9 +215,10 @@ template TreeModelT()
       bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null, iter ? new TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    gtk_tree_model_foreach(cast(GtkTreeModel*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    gtk_tree_model_foreach(cast(GtkTreeModel*)cPtr, _funcCB, _func);
   }
 
   /**

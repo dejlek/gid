@@ -50,9 +50,10 @@ class Fontset : ObjectG
       bool _retval = (*_dlg)(ObjectG.getDObject!Fontset(cast(void*)fontset, No.Take), ObjectG.getDObject!Font(cast(void*)font, No.Take));
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    pango_fontset_foreach(cast(PangoFontset*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    pango_fontset_foreach(cast(PangoFontset*)cPtr, _funcCB, _func);
   }
 
   /**

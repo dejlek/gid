@@ -975,11 +975,13 @@ class TreeView : Widget, Scrollable
 
       (*_dlg)(ObjectG.getDObject!TreeViewColumn(cast(void*)treeColumn, No.Take), ObjectG.getDObject!CellRenderer(cast(void*)cell, No.Take), ObjectG.getDObject!TreeModel(cast(void*)treeModel, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
     int _retval;
     const(char)* _title = title.toCString(No.Alloc);
-    auto _func = freezeDelegate(cast(void*)&func);
-    _retval = gtk_tree_view_insert_column_with_data_func(cast(GtkTreeView*)cPtr, position, _title, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    _retval = gtk_tree_view_insert_column_with_data_func(cast(GtkTreeView*)cPtr, position, _title, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
     return _retval;
   }
 
@@ -1055,9 +1057,10 @@ class TreeView : Widget, Scrollable
 
       (*_dlg)(ObjectG.getDObject!TreeView(cast(void*)treeView, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null);
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    gtk_tree_view_map_expanded_rows(cast(GtkTreeView*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    gtk_tree_view_map_expanded_rows(cast(GtkTreeView*)cPtr, _funcCB, _func);
   }
 
   /**
@@ -1201,9 +1204,11 @@ class TreeView : Widget, Scrollable
       bool _retval = (*_dlg)(ObjectG.getDObject!TreeView(cast(void*)treeView, No.Take), ObjectG.getDObject!TreeViewColumn(cast(void*)column, No.Take), ObjectG.getDObject!TreeViewColumn(cast(void*)prevColumn, No.Take), ObjectG.getDObject!TreeViewColumn(cast(void*)nextColumn, No.Take));
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = freezeDelegate(cast(void*)&func);
-    gtk_tree_view_set_column_drag_function(cast(GtkTreeView*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_tree_view_set_column_drag_function(cast(GtkTreeView*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   alias setCursor = Widget.setCursor;
@@ -1470,9 +1475,11 @@ class TreeView : Widget, Scrollable
       bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = freezeDelegate(cast(void*)&func);
-    gtk_tree_view_set_row_separator_func(cast(GtkTreeView*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_tree_view_set_row_separator_func(cast(GtkTreeView*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -1542,9 +1549,11 @@ class TreeView : Widget, Scrollable
       bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), column, _key, iter ? new TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
+    auto _searchEqualFuncCB = searchEqualFunc ? &_searchEqualFuncCallback : null;
 
-    auto _searchEqualFunc = freezeDelegate(cast(void*)&searchEqualFunc);
-    gtk_tree_view_set_search_equal_func(cast(GtkTreeView*)cPtr, &_searchEqualFuncCallback, _searchEqualFunc, &thawDelegate);
+    auto _searchEqualFunc = searchEqualFunc ? freezeDelegate(cast(void*)&searchEqualFunc) : null;
+    GDestroyNotify _searchEqualFuncDestroyCB = searchEqualFunc ? &thawDelegate : null;
+    gtk_tree_view_set_search_equal_func(cast(GtkTreeView*)cPtr, _searchEqualFuncCB, _searchEqualFunc, _searchEqualFuncDestroyCB);
   }
 
   /**

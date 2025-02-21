@@ -1584,7 +1584,7 @@ class Terminal : Widget, Scrollable
 
       (*_dlg)();
     }
-    auto _childSetupCB = (childSetup is null) ? null : &_childSetupCallback;
+    auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
     extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
     {
@@ -1593,7 +1593,7 @@ class Terminal : Widget, Scrollable
 
       (*_dlg)(ObjectG.getDObject!Terminal(cast(void*)terminal, No.Take), pid, error ? new ErrorG(cast(void*)error, No.Take) : null);
     }
-    auto _callbackCB = (callback is null) ? null : &_callbackCallback;
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     char*[] _tmpargv;
@@ -1608,9 +1608,9 @@ class Terminal : Widget, Scrollable
     _tmpenvv ~= null;
     char** _envv = _tmpenvv.ptr;
 
-    auto _childSetup = (childSetup is null) ? null : freezeDelegate(cast(void*)&childSetup);
-    GDestroyNotify _childSetupDestroyCB = (childSetup is null) ? null : &thawDelegate;
-    auto _callback = (callback is null) ? null : freezeDelegate(cast(void*)&callback);
+    auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
+    GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     vte_terminal_spawn_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
@@ -1656,7 +1656,7 @@ class Terminal : Widget, Scrollable
 
       (*_dlg)();
     }
-    auto _childSetupCB = (childSetup is null) ? null : &_childSetupCallback;
+    auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
     bool _retval;
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
@@ -1672,7 +1672,7 @@ class Terminal : Widget, Scrollable
     _tmpenvv ~= null;
     char** _envv = _tmpenvv.ptr;
 
-    auto _childSetup = (childSetup is null) ? null : cast(void*)&(childSetup);
+    auto _childSetup = childSetup ? cast(void*)&(childSetup) : null;
     GError *_err;
     _retval = vte_terminal_spawn_sync(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1740,7 +1740,7 @@ class Terminal : Widget, Scrollable
 
       (*_dlg)();
     }
-    auto _childSetupCB = (childSetup is null) ? null : &_childSetupCallback;
+    auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
     extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
     {
@@ -1749,7 +1749,7 @@ class Terminal : Widget, Scrollable
 
       (*_dlg)(ObjectG.getDObject!Terminal(cast(void*)terminal, No.Take), pid, error ? new ErrorG(cast(void*)error, No.Take) : null);
     }
-    auto _callbackCB = (callback is null) ? null : &_callbackCallback;
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     const(char)*[] _tmpargv;
@@ -1774,9 +1774,9 @@ class Terminal : Widget, Scrollable
       _nMapFds = cast(int)mapFds.length;
 
     auto _mapFds = cast(const(int)*)mapFds.ptr;
-    auto _childSetup = (childSetup is null) ? null : freezeDelegate(cast(void*)&childSetup);
-    GDestroyNotify _childSetupDestroyCB = (childSetup is null) ? null : &thawDelegate;
-    auto _callback = (callback is null) ? null : freezeDelegate(cast(void*)&callback);
+    auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
+    GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     vte_terminal_spawn_with_fds_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 

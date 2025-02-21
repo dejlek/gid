@@ -135,9 +135,10 @@ class HookList
 
       (*_dlg)(hook ? new Hook(cast(void*)hook, No.Take) : null);
     }
+    auto _marshallerCB = marshaller ? &_marshallerCallback : null;
 
-    auto _marshaller = cast(void*)&marshaller;
-    g_hook_list_marshal(cast(GHookList*)cPtr, mayRecurse, &_marshallerCallback, _marshaller);
+    auto _marshaller = marshaller ? cast(void*)&(marshaller) : null;
+    g_hook_list_marshal(cast(GHookList*)cPtr, mayRecurse, _marshallerCB, _marshaller);
   }
 
   /**
@@ -158,8 +159,9 @@ class HookList
       bool _retval = (*_dlg)(hook ? new Hook(cast(void*)hook, No.Take) : null);
       return _retval;
     }
+    auto _marshallerCB = marshaller ? &_marshallerCallback : null;
 
-    auto _marshaller = cast(void*)&marshaller;
-    g_hook_list_marshal_check(cast(GHookList*)cPtr, mayRecurse, &_marshallerCallback, _marshaller);
+    auto _marshaller = marshaller ? cast(void*)&(marshaller) : null;
+    g_hook_list_marshal_check(cast(GHookList*)cPtr, mayRecurse, _marshallerCB, _marshaller);
   }
 }

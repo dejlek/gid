@@ -245,9 +245,10 @@ class TreeSelection : ObjectG
 
       (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null, iter ? new TreeIter(cast(void*)iter, No.Take) : null);
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    gtk_tree_selection_selected_foreach(cast(GtkTreeSelection*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    gtk_tree_selection_selected_foreach(cast(GtkTreeSelection*)cPtr, _funcCB, _func);
   }
 
   /**
@@ -284,9 +285,11 @@ class TreeSelection : ObjectG
       bool _retval = (*_dlg)(ObjectG.getDObject!TreeSelection(cast(void*)selection, No.Take), ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null, pathCurrentlySelected);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = freezeDelegate(cast(void*)&func);
-    gtk_tree_selection_set_select_function(cast(GtkTreeSelection*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_tree_selection_set_select_function(cast(GtkTreeSelection*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**

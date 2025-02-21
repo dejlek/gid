@@ -174,6 +174,7 @@ class ContentSerializer : ObjectG, AsyncResult
 
       (*_dlg)();
     }
-    gdk_content_serializer_set_task_data(cast(GdkContentSerializer*)cPtr, data, &_notifyCallback);
+    auto _notifyCB = notify ? &_notifyCallback : null;
+    gdk_content_serializer_set_task_data(cast(GdkContentSerializer*)cPtr, data, _notifyCB);
   }
 }

@@ -75,9 +75,11 @@ template TreeSortableT()
       int _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), a ? new TreeIter(cast(void*)a, No.Take) : null, b ? new TreeIter(cast(void*)b, No.Take) : null);
       return _retval;
     }
+    auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
 
-    auto _sortFunc = freezeDelegate(cast(void*)&sortFunc);
-    gtk_tree_sortable_set_default_sort_func(cast(GtkTreeSortable*)cPtr, &_sortFuncCallback, _sortFunc, &thawDelegate);
+    auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
+    GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
+    gtk_tree_sortable_set_default_sort_func(cast(GtkTreeSortable*)cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
   }
 
   /**
@@ -114,9 +116,11 @@ template TreeSortableT()
       int _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), a ? new TreeIter(cast(void*)a, No.Take) : null, b ? new TreeIter(cast(void*)b, No.Take) : null);
       return _retval;
     }
+    auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
 
-    auto _sortFunc = freezeDelegate(cast(void*)&sortFunc);
-    gtk_tree_sortable_set_sort_func(cast(GtkTreeSortable*)cPtr, sortColumnId, &_sortFuncCallback, _sortFunc, &thawDelegate);
+    auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
+    GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
+    gtk_tree_sortable_set_sort_func(cast(GtkTreeSortable*)cPtr, sortColumnId, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
   }
 
   /**

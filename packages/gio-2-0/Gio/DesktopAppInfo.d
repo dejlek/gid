@@ -423,6 +423,7 @@ class DesktopAppInfo : ObjectG, AppInfo
 
       (*_dlg)();
     }
+    auto _userSetupCB = userSetup ? &_userSetupCallback : null;
 
     extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData)
     {
@@ -430,14 +431,15 @@ class DesktopAppInfo : ObjectG, AppInfo
 
       (*_dlg)(ObjectG.getDObject!DesktopAppInfo(cast(void*)appinfo, No.Take), pid);
     }
+    auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
 
     bool _retval;
     auto _uris = gListFromD!(string)(uris);
     scope(exit) containerFree!(GList*, string, GidOwnership.None)(_uris);
-    auto _userSetup = freezeDelegate(cast(void*)&userSetup);
-    auto _pidCallback = cast(void*)&pidCallback;
+    auto _userSetup = userSetup ? freezeDelegate(cast(void*)&userSetup) : null;
+    auto _pidCallback = pidCallback ? cast(void*)&(pidCallback) : null;
     GError *_err;
-    _retval = g_desktop_app_info_launch_uris_as_manager(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null, spawnFlags, &_userSetupCallback, _userSetup, &_pidCallbackCallback, _pidCallback, &_err);
+    _retval = g_desktop_app_info_launch_uris_as_manager(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -470,6 +472,7 @@ class DesktopAppInfo : ObjectG, AppInfo
 
       (*_dlg)();
     }
+    auto _userSetupCB = userSetup ? &_userSetupCallback : null;
 
     extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData)
     {
@@ -477,14 +480,15 @@ class DesktopAppInfo : ObjectG, AppInfo
 
       (*_dlg)(ObjectG.getDObject!DesktopAppInfo(cast(void*)appinfo, No.Take), pid);
     }
+    auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
 
     bool _retval;
     auto _uris = gListFromD!(string)(uris);
     scope(exit) containerFree!(GList*, string, GidOwnership.None)(_uris);
-    auto _userSetup = freezeDelegate(cast(void*)&userSetup);
-    auto _pidCallback = cast(void*)&pidCallback;
+    auto _userSetup = userSetup ? freezeDelegate(cast(void*)&userSetup) : null;
+    auto _pidCallback = pidCallback ? cast(void*)&(pidCallback) : null;
     GError *_err;
-    _retval = g_desktop_app_info_launch_uris_as_manager_with_fds(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null, spawnFlags, &_userSetupCallback, _userSetup, &_pidCallbackCallback, _pidCallback, stdinFd, stdoutFd, stderrFd, &_err);
+    _retval = g_desktop_app_info_launch_uris_as_manager_with_fds(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, stdinFd, stdoutFd, stderrFd, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

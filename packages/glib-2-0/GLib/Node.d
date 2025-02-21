@@ -95,9 +95,10 @@ class Node
 
       (*_dlg)(node ? new Node(cast(void*)node, No.Take) : null);
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    g_node_children_foreach(cast(GNode*)cPtr, flags, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    g_node_children_foreach(cast(GNode*)cPtr, flags, _funcCB, _func);
   }
 
   /**
@@ -210,9 +211,10 @@ class Node
       bool _retval = (*_dlg)(node ? new Node(cast(void*)node, No.Take) : null);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    g_node_traverse(cast(GNode*)cPtr, order, flags, maxDepth, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    g_node_traverse(cast(GNode*)cPtr, order, flags, maxDepth, _funcCB, _func);
   }
 
   /**

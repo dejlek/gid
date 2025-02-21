@@ -129,10 +129,11 @@ class AttrList : Boxed
       bool _retval = (*_dlg)(attribute ? new Attribute(cast(void*)attribute, No.Take) : null);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
     PangoAttrList* _cretval;
-    auto _func = cast(void*)&func;
-    _cretval = pango_attr_list_filter(cast(PangoAttrList*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    _cretval = pango_attr_list_filter(cast(PangoAttrList*)cPtr, _funcCB, _func);
     auto _retval = _cretval ? new AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

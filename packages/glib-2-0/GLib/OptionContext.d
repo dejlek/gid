@@ -287,9 +287,11 @@ class OptionContext
 
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = freezeDelegate(cast(void*)&func);
-    g_option_context_set_translate_func(cast(GOptionContext*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    g_option_context_set_translate_func(cast(GOptionContext*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**

@@ -167,13 +167,14 @@ class TlsPassword : ObjectG
 
       (*_dlg)();
     }
+    auto _destroyCB = destroy ? &_destroyCallback : null;
 
     ptrdiff_t _length;
     if (value)
       _length = cast(ptrdiff_t)value.length;
 
     auto _value = cast(ubyte*)value.ptr;
-    g_tls_password_set_value_full(cast(GTlsPassword*)cPtr, _value, _length, &_destroyCallback);
+    g_tls_password_set_value_full(cast(GTlsPassword*)cPtr, _value, _length, _destroyCB);
   }
 
   /**

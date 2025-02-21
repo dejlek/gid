@@ -131,9 +131,11 @@ class ListBox : Widget
 
       return _retval;
     }
+    auto _createWidgetFuncCB = createWidgetFunc ? &_createWidgetFuncCallback : null;
 
-    auto _createWidgetFunc = freezeDelegate(cast(void*)&createWidgetFunc);
-    gtk_list_box_bind_model(cast(GtkListBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, &_createWidgetFuncCallback, _createWidgetFunc, &thawDelegate);
+    auto _createWidgetFunc = createWidgetFunc ? freezeDelegate(cast(void*)&createWidgetFunc) : null;
+    GDestroyNotify _createWidgetFuncDestroyCB = createWidgetFunc ? &thawDelegate : null;
+    gtk_list_box_bind_model(cast(GtkListBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
   }
 
   /**
@@ -380,9 +382,10 @@ class ListBox : Widget
 
       (*_dlg)(ObjectG.getDObject!ListBox(cast(void*)box, No.Take), ObjectG.getDObject!ListBoxRow(cast(void*)row, No.Take));
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    gtk_list_box_selected_foreach(cast(GtkListBox*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    gtk_list_box_selected_foreach(cast(GtkListBox*)cPtr, _funcCB, _func);
   }
 
   /**
@@ -436,9 +439,11 @@ class ListBox : Widget
       bool _retval = (*_dlg)(ObjectG.getDObject!ListBoxRow(cast(void*)row, No.Take));
       return _retval;
     }
+    auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;
 
-    auto _filterFunc = freezeDelegate(cast(void*)&filterFunc);
-    gtk_list_box_set_filter_func(cast(GtkListBox*)cPtr, &_filterFuncCallback, _filterFunc, &thawDelegate);
+    auto _filterFunc = filterFunc ? freezeDelegate(cast(void*)&filterFunc) : null;
+    GDestroyNotify _filterFuncDestroyCB = filterFunc ? &thawDelegate : null;
+    gtk_list_box_set_filter_func(cast(GtkListBox*)cPtr, _filterFuncCB, _filterFunc, _filterFuncDestroyCB);
   }
 
   /**
@@ -473,9 +478,11 @@ class ListBox : Widget
 
       (*_dlg)(ObjectG.getDObject!ListBoxRow(cast(void*)row, No.Take), ObjectG.getDObject!ListBoxRow(cast(void*)before, No.Take));
     }
+    auto _updateHeaderCB = updateHeader ? &_updateHeaderCallback : null;
 
-    auto _updateHeader = freezeDelegate(cast(void*)&updateHeader);
-    gtk_list_box_set_header_func(cast(GtkListBox*)cPtr, &_updateHeaderCallback, _updateHeader, &thawDelegate);
+    auto _updateHeader = updateHeader ? freezeDelegate(cast(void*)&updateHeader) : null;
+    GDestroyNotify _updateHeaderDestroyCB = updateHeader ? &thawDelegate : null;
+    gtk_list_box_set_header_func(cast(GtkListBox*)cPtr, _updateHeaderCB, _updateHeader, _updateHeaderDestroyCB);
   }
 
   /**
@@ -532,9 +539,11 @@ class ListBox : Widget
       int _retval = (*_dlg)(ObjectG.getDObject!ListBoxRow(cast(void*)row1, No.Take), ObjectG.getDObject!ListBoxRow(cast(void*)row2, No.Take));
       return _retval;
     }
+    auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
 
-    auto _sortFunc = freezeDelegate(cast(void*)&sortFunc);
-    gtk_list_box_set_sort_func(cast(GtkListBox*)cPtr, &_sortFuncCallback, _sortFunc, &thawDelegate);
+    auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
+    GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
+    gtk_list_box_set_sort_func(cast(GtkListBox*)cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
   }
 
   /**

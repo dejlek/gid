@@ -202,10 +202,11 @@ class Device : Boxed
 
       return _retval;
     }
+    auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
 
     cairo_status_t _cretval;
-    auto _writeFunc = cast(void*)&writeFunc;
-    _cretval = cairo_device_observer_print(cast(cairo_device_t*)cPtr, &_writeFuncCallback, _writeFunc);
+    auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
+    _cretval = cairo_device_observer_print(cast(cairo_device_t*)cPtr, _writeFuncCB, _writeFunc);
     Status _retval = cast(Status)_cretval;
     return _retval;
   }

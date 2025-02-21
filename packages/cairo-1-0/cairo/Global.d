@@ -241,10 +241,11 @@ Surface imageSurfaceCreateFromPngStream(ReadFunc readFunc)
 
     return _retval;
   }
+  auto _readFuncCB = readFunc ? &_readFuncCallback : null;
 
   cairo_surface_t* _cretval;
-  auto _readFunc = cast(void*)&readFunc;
-  _cretval = cairo_image_surface_create_from_png_stream(&_readFuncCallback, _readFunc);
+  auto _readFunc = readFunc ? cast(void*)&(readFunc) : null;
+  _cretval = cairo_image_surface_create_from_png_stream(_readFuncCB, _readFunc);
   auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -984,10 +985,11 @@ Surface pdfSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, dou
 
     return _retval;
   }
+  auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
 
   cairo_surface_t* _cretval;
-  auto _writeFunc = cast(void*)&writeFunc;
-  _cretval = cairo_pdf_surface_create_for_stream(&_writeFuncCallback, _writeFunc, widthInPoints, heightInPoints);
+  auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
+  _cretval = cairo_pdf_surface_create_for_stream(_writeFuncCB, _writeFunc, widthInPoints, heightInPoints);
   auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1209,10 +1211,11 @@ Surface psSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, doub
 
     return _retval;
   }
+  auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
 
   cairo_surface_t* _cretval;
-  auto _writeFunc = cast(void*)&writeFunc;
-  _cretval = cairo_ps_surface_create_for_stream(&_writeFuncCallback, _writeFunc, widthInPoints, heightInPoints);
+  auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
+  _cretval = cairo_ps_surface_create_for_stream(_writeFuncCB, _writeFunc, widthInPoints, heightInPoints);
   auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1597,10 +1600,11 @@ Device scriptCreateForStream(WriteFunc writeFunc)
 
     return _retval;
   }
+  auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
 
   cairo_device_t* _cretval;
-  auto _writeFunc = cast(void*)&writeFunc;
-  _cretval = cairo_script_create_for_stream(&_writeFuncCallback, _writeFunc);
+  auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
+  _cretval = cairo_script_create_for_stream(_writeFuncCB, _writeFunc);
   auto _retval = _cretval ? new Device(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1806,10 +1810,11 @@ Surface svgSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, dou
 
     return _retval;
   }
+  auto _writeFuncCB = writeFunc ? &_writeFuncCallback : null;
 
   cairo_surface_t* _cretval;
-  auto _writeFunc = cast(void*)&writeFunc;
-  _cretval = cairo_svg_surface_create_for_stream(&_writeFuncCallback, _writeFunc, widthInPoints, heightInPoints);
+  auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
+  _cretval = cairo_svg_surface_create_for_stream(_writeFuncCB, _writeFunc, widthInPoints, heightInPoints);
   auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }

@@ -564,10 +564,12 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
       bool _retval = (*_dlg)(ObjectG.getDObject!Widget(cast(void*)widget, No.Take), ObjectG.getDObject!FrameClock(cast(void*)frameClock, No.Take));
       return _retval;
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     uint _retval;
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    _retval = gtk_widget_add_tick_callback(cast(GtkWidget*)cPtr, &_callbackCallback, _callback, &thawDelegate);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    _retval = gtk_widget_add_tick_callback(cast(GtkWidget*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
     return _retval;
   }
 

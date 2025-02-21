@@ -40,8 +40,9 @@ class ServerCallContext : ObjectG
 
       (*_dlg)(_name, _value);
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    gaflight_server_call_context_foreach_incoming_header(cast(GAFlightServerCallContext*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    gaflight_server_call_context_foreach_incoming_header(cast(GAFlightServerCallContext*)cPtr, _funcCB, _func);
   }
 }

@@ -207,10 +207,11 @@ class ValueArray : Boxed
       int _retval = (*_dlg)(a, b);
       return _retval;
     }
+    auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
 
     GValueArray* _cretval;
-    auto _compareFunc = cast(void*)&compareFunc;
-    _cretval = g_value_array_sort_with_data(cast(GValueArray*)cPtr, &_compareFuncCallback, _compareFunc);
+    auto _compareFunc = compareFunc ? cast(void*)&(compareFunc) : null;
+    _cretval = g_value_array_sort_with_data(cast(GValueArray*)cPtr, _compareFuncCB, _compareFunc);
     auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

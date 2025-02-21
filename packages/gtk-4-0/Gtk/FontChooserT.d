@@ -233,9 +233,11 @@ template FontChooserT()
       bool _retval = (*_dlg)(ObjectG.getDObject!FontFamily(cast(void*)family, No.Take), ObjectG.getDObject!FontFace(cast(void*)face, No.Take));
       return _retval;
     }
+    auto _filterCB = filter ? &_filterCallback : null;
 
-    auto _filter = freezeDelegate(cast(void*)&filter);
-    gtk_font_chooser_set_filter_func(cast(GtkFontChooser*)cPtr, &_filterCallback, _filter, &thawDelegate);
+    auto _filter = filter ? freezeDelegate(cast(void*)&filter) : null;
+    GDestroyNotify _filterDestroyCB = filter ? &thawDelegate : null;
+    gtk_font_chooser_set_filter_func(cast(GtkFontChooser*)cPtr, _filterCB, _filter, _filterDestroyCB);
   }
 
   /**

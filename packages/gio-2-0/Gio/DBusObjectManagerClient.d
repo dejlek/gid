@@ -184,13 +184,15 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
       GType _retval = (*_dlg)(ObjectG.getDObject!DBusObjectManagerClient(cast(void*)manager, No.Take), _objectPath, _interfaceName);
       return _retval;
     }
+    auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
 
     GDBusObjectManager* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    auto _getProxyTypeFunc = freezeDelegate(cast(void*)&getProxyTypeFunc);
+    auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
+    GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
     GError *_err;
-    _cretval = g_dbus_object_manager_client_new_for_bus_sync(busType, flags, _name, _objectPath, &_getProxyTypeFuncCallback, _getProxyTypeFunc, &thawDelegate, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_dbus_object_manager_client_new_for_bus_sync(busType, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = ObjectG.getDObject!DBusObjectManagerClient(cast(GDBusObjectManager*)_cretval, Yes.Take);
@@ -224,13 +226,15 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
       GType _retval = (*_dlg)(ObjectG.getDObject!DBusObjectManagerClient(cast(void*)manager, No.Take), _objectPath, _interfaceName);
       return _retval;
     }
+    auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
 
     GDBusObjectManager* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    auto _getProxyTypeFunc = freezeDelegate(cast(void*)&getProxyTypeFunc);
+    auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
+    GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
     GError *_err;
-    _cretval = g_dbus_object_manager_client_new_sync(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, flags, _name, _objectPath, &_getProxyTypeFuncCallback, _getProxyTypeFunc, &thawDelegate, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_dbus_object_manager_client_new_sync(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = ObjectG.getDObject!DBusObjectManagerClient(cast(GDBusObjectManager*)_cretval, Yes.Take);
@@ -265,6 +269,7 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
       GType _retval = (*_dlg)(ObjectG.getDObject!DBusObjectManagerClient(cast(void*)manager, No.Take), _objectPath, _interfaceName);
       return _retval;
     }
+    auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
 
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -273,12 +278,14 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    auto _getProxyTypeFunc = freezeDelegate(cast(void*)&getProxyTypeFunc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_dbus_object_manager_client_new(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, flags, _name, _objectPath, &_getProxyTypeFuncCallback, _getProxyTypeFunc, &thawDelegate, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
+    GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_dbus_object_manager_client_new(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -310,6 +317,7 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
       GType _retval = (*_dlg)(ObjectG.getDObject!DBusObjectManagerClient(cast(void*)manager, No.Take), _objectPath, _interfaceName);
       return _retval;
     }
+    auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
 
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -318,12 +326,14 @@ class DBusObjectManagerClient : ObjectG, AsyncInitable, DBusObjectManager, Inita
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    auto _getProxyTypeFunc = freezeDelegate(cast(void*)&getProxyTypeFunc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    g_dbus_object_manager_client_new_for_bus(busType, flags, _name, _objectPath, &_getProxyTypeFuncCallback, _getProxyTypeFunc, &thawDelegate, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
+    GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_dbus_object_manager_client_new_for_bus(busType, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**

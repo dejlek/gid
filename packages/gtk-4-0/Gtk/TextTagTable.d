@@ -93,9 +93,10 @@ class TextTagTable : ObjectG, Buildable
 
       (*_dlg)(ObjectG.getDObject!TextTag(cast(void*)tag, No.Take));
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    gtk_text_tag_table_foreach(cast(GtkTextTagTable*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    gtk_text_tag_table_foreach(cast(GtkTextTagTable*)cPtr, _funcCB, _func);
   }
 
   /**

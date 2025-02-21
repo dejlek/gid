@@ -260,10 +260,12 @@ class Expression
 
       (*_dlg)();
     }
+    auto _notifyCB = notify ? &_notifyCallback : null;
 
     GtkExpressionWatch* _cretval;
-    auto _notify = freezeDelegate(cast(void*)&notify);
-    _cretval = gtk_expression_watch(cast(GtkExpression*)cPtr, this_ ? cast(ObjectC*)this_.cPtr(No.Dup) : null, &_notifyCallback, _notify, &thawDelegate);
+    auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
+    GDestroyNotify _notifyDestroyCB = notify ? &thawDelegate : null;
+    _cretval = gtk_expression_watch(cast(GtkExpression*)cPtr, this_ ? cast(ObjectC*)this_.cPtr(No.Dup) : null, _notifyCB, _notify, _notifyDestroyCB);
     auto _retval = _cretval ? new ExpressionWatch(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

@@ -53,9 +53,10 @@ void busGet(BusType busType, Cancellable cancellable, AsyncReadyCallback callbac
 
     (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
   }
+  auto _callbackCB = callback ? &_callbackCallback : null;
 
-  auto _callback = freezeDelegate(cast(void*)&callback);
-  g_bus_get(busType, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  g_bus_get(busType, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
 }
 
 /**
@@ -628,10 +629,11 @@ void dbusAddressGetStream(string address, Cancellable cancellable, AsyncReadyCal
 
     (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
   }
+  auto _callbackCB = callback ? &_callbackCallback : null;
 
   const(char)* _address = address.toCString(No.Alloc);
-  auto _callback = freezeDelegate(cast(void*)&callback);
-  g_dbus_address_get_stream(_address, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  g_dbus_address_get_stream(_address, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
 }
 
 /**
@@ -1145,9 +1147,11 @@ void ioSchedulerPushJob(IOSchedulerJobFunc jobFunc, int ioPriority, Cancellable 
     bool _retval = (*_dlg)(job ? new IOSchedulerJob(cast(void*)job, No.Take) : null, ObjectG.getDObject!Cancellable(cast(void*)cancellable, No.Take));
     return _retval;
   }
+  auto _jobFuncCB = jobFunc ? &_jobFuncCallback : null;
 
-  auto _jobFunc = freezeDelegate(cast(void*)&jobFunc);
-  g_io_scheduler_push_job(&_jobFuncCallback, _jobFunc, &thawDelegate, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
+  auto _jobFunc = jobFunc ? freezeDelegate(cast(void*)&jobFunc) : null;
+  GDestroyNotify _jobFuncDestroyCB = jobFunc ? &thawDelegate : null;
+  g_io_scheduler_push_job(_jobFuncCB, _jobFunc, _jobFuncDestroyCB, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1544,9 +1548,10 @@ void simpleAsyncReportGerrorInIdle(ObjectG object, AsyncReadyCallback callback, 
 
     (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
   }
+  auto _callbackCB = callback ? &_callbackCallback : null;
 
-  auto _callback = freezeDelegate(cast(void*)&callback);
-  g_simple_async_report_gerror_in_idle(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, &_callbackCallback, _callback, error ? cast(GError*)error.cPtr : null);
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  g_simple_async_report_gerror_in_idle(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(GError*)error.cPtr : null);
 }
 
 /**

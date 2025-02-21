@@ -550,9 +550,10 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
       bool _retval = (*_dlg)(ObjectG.getDObject!CellRenderer(cast(void*)renderer, No.Take));
       return _retval;
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _callback = cast(void*)&callback;
-    gtk_cell_area_foreach(cast(GtkCellArea*)cPtr, &_callbackCallback, _callback);
+    auto _callback = callback ? cast(void*)&(callback) : null;
+    gtk_cell_area_foreach(cast(GtkCellArea*)cPtr, _callbackCB, _callback);
   }
 
   /**
@@ -574,9 +575,10 @@ class CellArea : InitiallyUnowned, Buildable, CellLayout
       bool _retval = (*_dlg)(ObjectG.getDObject!CellRenderer(cast(void*)renderer, No.Take), cellArea ? new Rectangle(cast(void*)cellArea, No.Take) : null, cellBackground ? new Rectangle(cast(void*)cellBackground, No.Take) : null);
       return _retval;
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _callback = cast(void*)&callback;
-    gtk_cell_area_foreach_alloc(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? cast(void*)&(callback) : null;
+    gtk_cell_area_foreach_alloc(cast(GtkCellArea*)cPtr, context ? cast(GtkCellAreaContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**

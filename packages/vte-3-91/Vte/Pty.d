@@ -192,7 +192,7 @@ class Pty : ObjectG, Initable
 
       (*_dlg)();
     }
-    auto _childSetupCB = (childSetup is null) ? null : &_childSetupCallback;
+    auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -201,7 +201,7 @@ class Pty : ObjectG, Initable
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
-    auto _callbackCB = (callback is null) ? null : &_callbackCallback;
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     char*[] _tmpargv;
@@ -216,9 +216,9 @@ class Pty : ObjectG, Initable
     _tmpenvv ~= null;
     char** _envv = _tmpenvv.ptr;
 
-    auto _childSetup = (childSetup is null) ? null : freezeDelegate(cast(void*)&childSetup);
-    GDestroyNotify _childSetupDestroyCB = (childSetup is null) ? null : &thawDelegate;
-    auto _callback = (callback is null) ? null : freezeDelegate(cast(void*)&callback);
+    auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
+    GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     vte_pty_spawn_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
@@ -282,7 +282,7 @@ class Pty : ObjectG, Initable
 
       (*_dlg)();
     }
-    auto _childSetupCB = (childSetup is null) ? null : &_childSetupCallback;
+    auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -291,7 +291,7 @@ class Pty : ObjectG, Initable
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
-    auto _callbackCB = (callback is null) ? null : &_callbackCallback;
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     const(char)*[] _tmpargv;
@@ -316,9 +316,9 @@ class Pty : ObjectG, Initable
       _nMapFds = cast(int)mapFds.length;
 
     auto _mapFds = cast(const(int)*)mapFds.ptr;
-    auto _childSetup = (childSetup is null) ? null : freezeDelegate(cast(void*)&childSetup);
-    GDestroyNotify _childSetupDestroyCB = (childSetup is null) ? null : &thawDelegate;
-    auto _callback = (callback is null) ? null : freezeDelegate(cast(void*)&callback);
+    auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
+    GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     vte_pty_spawn_with_fds_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 }

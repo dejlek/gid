@@ -138,10 +138,11 @@ class TextIter : Boxed
       bool _retval = (*_dlg)(ch);
       return _retval;
     }
+    auto _predCB = pred ? &_predCallback : null;
 
     bool _retval;
-    auto _pred = cast(void*)&pred;
-    _retval = gtk_text_iter_backward_find_char(cast(GtkTextIter*)cPtr, &_predCallback, _pred, limit ? cast(GtkTextIter*)limit.cPtr(No.Dup) : null);
+    auto _pred = pred ? cast(void*)&(pred) : null;
+    _retval = gtk_text_iter_backward_find_char(cast(GtkTextIter*)cPtr, _predCB, _pred, limit ? cast(GtkTextIter*)limit.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -623,10 +624,11 @@ class TextIter : Boxed
       bool _retval = (*_dlg)(ch);
       return _retval;
     }
+    auto _predCB = pred ? &_predCallback : null;
 
     bool _retval;
-    auto _pred = cast(void*)&pred;
-    _retval = gtk_text_iter_forward_find_char(cast(GtkTextIter*)cPtr, &_predCallback, _pred, limit ? cast(GtkTextIter*)limit.cPtr(No.Dup) : null);
+    auto _pred = pred ? cast(void*)&(pred) : null;
+    _retval = gtk_text_iter_forward_find_char(cast(GtkTextIter*)cPtr, _predCB, _pred, limit ? cast(GtkTextIter*)limit.cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -270,9 +270,11 @@ class PrintJob : ObjectG
 
       (*_dlg)(ObjectG.getDObject!PrintJob(cast(void*)printJob, No.Take), error ? new ErrorG(cast(void*)error, No.Take) : null);
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    gtk_print_job_send(cast(GtkPrintJob*)cPtr, &_callbackCallback, _callback, &thawDelegate);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    gtk_print_job_send(cast(GtkPrintJob*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
   }
 
   /**

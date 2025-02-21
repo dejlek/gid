@@ -64,9 +64,10 @@ class GLTexture : Texture
 
       (*_dlg)();
     }
+    auto _destroyCB = destroy ? &_destroyCallback : null;
 
     GdkTexture* _cretval;
-    _cretval = gdk_gl_texture_new(context ? cast(GdkGLContext*)context.cPtr(No.Dup) : null, id, width, height, &_destroyCallback, data);
+    _cretval = gdk_gl_texture_new(context ? cast(GdkGLContext*)context.cPtr(No.Dup) : null, id, width, height, _destroyCB, data);
     this(_cretval, Yes.Take);
   }
 

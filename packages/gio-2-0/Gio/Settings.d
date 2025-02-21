@@ -808,10 +808,11 @@ class Settings : ObjectG
       bool _retval = (*_dlg)(value ? new VariantG(cast(void*)value, No.Take) : null, *result);
       return _retval;
     }
+    auto _mappingCB = mapping ? &_mappingCallback : null;
 
     const(char)* _key = key.toCString(No.Alloc);
-    auto _mapping = cast(void*)&mapping;
-    auto _retval = g_settings_get_mapped(cast(GSettings*)cPtr, _key, &_mappingCallback, _mapping);
+    auto _mapping = mapping ? cast(void*)&(mapping) : null;
+    auto _retval = g_settings_get_mapped(cast(GSettings*)cPtr, _key, _mappingCB, _mapping);
     return _retval;
   }
 

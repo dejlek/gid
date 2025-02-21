@@ -217,9 +217,11 @@ class MainContext : Boxed
       bool _retval = (*_dlg)();
       return _retval;
     }
+    auto _function_CB = function_ ? &_function_Callback : null;
 
-    auto _function_ = freezeDelegate(cast(void*)&function_);
-    g_main_context_invoke_full(cast(GMainContext*)cPtr, priority, &_function_Callback, _function_, &thawDelegate);
+    auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
+    GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
+    g_main_context_invoke_full(cast(GMainContext*)cPtr, priority, _function_CB, _function_, _function_DestroyCB);
   }
 
   /**

@@ -70,9 +70,10 @@ class Tree : Boxed
       bool _retval = (*_dlg)(key, value);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    g_tree_foreach(cast(GTree*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    g_tree_foreach(cast(GTree*)cPtr, _funcCB, _func);
   }
 
   /**
@@ -96,9 +97,10 @@ class Tree : Boxed
       bool _retval = (*_dlg)(node ? new TreeNode(cast(void*)node, No.Take) : null);
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = cast(void*)&func;
-    g_tree_foreach_node(cast(GTree*)cPtr, &_funcCallback, _func);
+    auto _func = func ? cast(void*)&(func) : null;
+    g_tree_foreach_node(cast(GTree*)cPtr, _funcCB, _func);
   }
 
   /**
@@ -368,9 +370,10 @@ class Tree : Boxed
       bool _retval = (*_dlg)(key, value);
       return _retval;
     }
+    auto _traverseFuncCB = traverseFunc ? &_traverseFuncCallback : null;
 
-    auto _traverseFunc = cast(void*)&traverseFunc;
-    g_tree_traverse(cast(GTree*)cPtr, &_traverseFuncCallback, traverseType, _traverseFunc);
+    auto _traverseFunc = traverseFunc ? cast(void*)&(traverseFunc) : null;
+    g_tree_traverse(cast(GTree*)cPtr, _traverseFuncCB, traverseType, _traverseFunc);
   }
 
   /**

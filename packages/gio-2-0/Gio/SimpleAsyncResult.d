@@ -201,10 +201,11 @@ class SimpleAsyncResult : ObjectG, AsyncResult
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     GSimpleAsyncResult* _cretval;
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    _cretval = g_simple_async_result_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_callbackCallback, _callback, sourceTag);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _cretval = g_simple_async_result_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, sourceTag);
     this(_cretval, Yes.Take);
   }
 
@@ -227,10 +228,11 @@ class SimpleAsyncResult : ObjectG, AsyncResult
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     GSimpleAsyncResult* _cretval;
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_callbackCallback, _callback, error ? cast(GError*)error.cPtr : null);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(GError*)error.cPtr : null);
     auto _retval = ObjectG.getDObject!SimpleAsyncResult(cast(GSimpleAsyncResult*)_cretval, Yes.Take);
     return _retval;
   }

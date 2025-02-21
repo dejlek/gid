@@ -77,9 +77,10 @@ class GLTextureBuilder : ObjectG
 
       (*_dlg)();
     }
+    auto _destroyCB = destroy ? &_destroyCallback : null;
 
     GdkTexture* _cretval;
-    _cretval = gdk_gl_texture_builder_build(cast(GdkGLTextureBuilder*)cPtr, &_destroyCallback, data);
+    _cretval = gdk_gl_texture_builder_build(cast(GdkGLTextureBuilder*)cPtr, _destroyCB, data);
     auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }

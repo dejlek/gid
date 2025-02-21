@@ -378,9 +378,11 @@ class Assistant : Window
       int _retval = (*_dlg)(currentPage);
       return _retval;
     }
+    auto _pageFuncCB = pageFunc ? &_pageFuncCallback : null;
 
-    auto _pageFunc = freezeDelegate(cast(void*)&pageFunc);
-    gtk_assistant_set_forward_page_func(cast(GtkAssistant*)cPtr, &_pageFuncCallback, _pageFunc, &thawDelegate);
+    auto _pageFunc = pageFunc ? freezeDelegate(cast(void*)&pageFunc) : null;
+    GDestroyNotify _pageFuncDestroyCB = pageFunc ? &thawDelegate : null;
+    gtk_assistant_set_forward_page_func(cast(GtkAssistant*)cPtr, _pageFuncCB, _pageFunc, _pageFuncDestroyCB);
   }
 
   /**

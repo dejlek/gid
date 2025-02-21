@@ -51,10 +51,12 @@ class IOSchedulerJob
       bool _retval = (*_dlg)();
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
-    auto _func = freezeDelegate(cast(void*)&func);
-    _retval = g_io_scheduler_job_send_to_mainloop(cast(GIOSchedulerJob*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    _retval = g_io_scheduler_job_send_to_mainloop(cast(GIOSchedulerJob*)cPtr, _funcCB, _func, _funcDestroyCB);
     return _retval;
   }
 
@@ -81,8 +83,10 @@ class IOSchedulerJob
       bool _retval = (*_dlg)();
       return _retval;
     }
+    auto _funcCB = func ? &_funcCallback : null;
 
-    auto _func = freezeDelegate(cast(void*)&func);
-    g_io_scheduler_job_send_to_mainloop_async(cast(GIOSchedulerJob*)cPtr, &_funcCallback, _func, &thawDelegate);
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    g_io_scheduler_job_send_to_mainloop_async(cast(GIOSchedulerJob*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 }

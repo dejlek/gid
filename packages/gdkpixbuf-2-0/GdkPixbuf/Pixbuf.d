@@ -548,10 +548,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _filename = filename.toCString(No.Alloc);
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_pixbuf_get_file_info_async(_filename, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gdk_pixbuf_get_file_info_async(_filename, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -637,9 +638,10 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_pixbuf_new_from_stream_async(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gdk_pixbuf_new_from_stream_async(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -665,9 +667,10 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_pixbuf_new_from_stream_at_scale_async(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, width, height, preserveAspectRatio, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gdk_pixbuf_new_from_stream_at_scale_async(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, width, height, preserveAspectRatio, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1227,9 +1230,10 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
       return _retval;
     }
+    auto _saveFuncCB = saveFunc ? &_saveFuncCallback : null;
 
     bool _retval;
-    auto _saveFunc = cast(void*)&saveFunc;
+    auto _saveFunc = saveFunc ? cast(void*)&(saveFunc) : null;
     const(char)* _type = type.toCString(No.Alloc);
     char*[] _tmpoptionKeys;
     foreach (s; optionKeys)
@@ -1244,7 +1248,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     char** _optionValues = _tmpoptionValues.ptr;
 
     GError *_err;
-    _retval = gdk_pixbuf_save_to_callbackv(cast(PixbufC*)cPtr, &_saveFuncCallback, _saveFunc, _type, _optionKeys, _optionValues, &_err);
+    _retval = gdk_pixbuf_save_to_callbackv(cast(PixbufC*)cPtr, _saveFuncCB, _saveFunc, _type, _optionKeys, _optionValues, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1311,6 +1315,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
       (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _type = type.toCString(No.Alloc);
     char*[] _tmpoptionKeys;
@@ -1325,8 +1330,8 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     _tmpoptionValues ~= null;
     char** _optionValues = _tmpoptionValues.ptr;
 
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    gdk_pixbuf_save_to_streamv_async(cast(PixbufC*)cPtr, stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, _type, _optionKeys, _optionValues, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_callbackCallback, _callback);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gdk_pixbuf_save_to_streamv_async(cast(PixbufC*)cPtr, stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, _type, _optionKeys, _optionValues, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**

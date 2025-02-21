@@ -112,10 +112,11 @@ class DmabufTextureBuilder : ObjectG
 
       (*_dlg)();
     }
+    auto _destroyCB = destroy ? &_destroyCallback : null;
 
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = gdk_dmabuf_texture_builder_build(cast(GdkDmabufTextureBuilder*)cPtr, &_destroyCallback, data, &_err);
+    _cretval = gdk_dmabuf_texture_builder_build(cast(GdkDmabufTextureBuilder*)cPtr, _destroyCB, data, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);

@@ -47,10 +47,12 @@ class CallbackAction : ShortcutAction
       bool _retval = (*_dlg)(ObjectG.getDObject!Widget(cast(void*)widget, No.Take), args ? new VariantG(cast(void*)args, No.Take) : null);
       return _retval;
     }
+    auto _callbackCB = callback ? &_callbackCallback : null;
 
     GtkShortcutAction* _cretval;
-    auto _callback = freezeDelegate(cast(void*)&callback);
-    _cretval = gtk_callback_action_new(&_callbackCallback, _callback, &thawDelegate);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    _cretval = gtk_callback_action_new(_callbackCB, _callback, _callbackDestroyCB);
     this(_cretval, Yes.Take);
   }
 }

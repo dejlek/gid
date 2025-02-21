@@ -66,10 +66,11 @@ class RenderNode
 
       (*_dlg)(*start, *end, error ? new ErrorG(cast(void*)error, No.Take) : null);
     }
+    auto _errorFuncCB = errorFunc ? &_errorFuncCallback : null;
 
     GskRenderNode* _cretval;
-    auto _errorFunc = cast(void*)&errorFunc;
-    _cretval = gsk_render_node_deserialize(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, &_errorFuncCallback, _errorFunc);
+    auto _errorFunc = errorFunc ? cast(void*)&(errorFunc) : null;
+    _cretval = gsk_render_node_deserialize(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, _errorFuncCB, _errorFunc);
     auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, Yes.Take) : null;
     return _retval;
   }
