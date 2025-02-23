@@ -6,7 +6,7 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["PangoCairo"],
+  "sourcePaths": ["pangocairo"],
   "dependencies": {
     "gid:cairo-1-0": "*",
     "gid:glib-2-0": "*",

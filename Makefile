@@ -12,4 +12,4 @@ packages:
 clean:
 	dub clean
 	find packages -name "*.d" -exec rm {} \;
-	find . -name "*.so" -exec rm {} \;
+	find . -name "*.so" -o -name "*.a" -exec rm {} \;

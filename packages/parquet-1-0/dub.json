@@ -6,7 +6,7 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["Parquet"],
+  "sourcePaths": ["parquet"],
   "dependencies": {
     "gid:arrow-1-0": "*"
   }

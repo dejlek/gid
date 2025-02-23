@@ -6,7 +6,7 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["HarfBuzz"],
+  "sourcePaths": ["harfbuzz"],
   "dependencies": {
     "gid:freetype2-2-0": "*",
     "gid:glib-2-0": "*"

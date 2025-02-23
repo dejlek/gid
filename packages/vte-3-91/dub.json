@@ -6,7 +6,7 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["Vte"],
+  "sourcePaths": ["vte"],
   "dependencies": {
     "gid:cairo-1-0": "*",
     "gid:gdk-4-0": "*",

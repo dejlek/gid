@@ -1,7 +1,7 @@
 import std.traits : isPointer;
 
-import GObject.ObjectG;
-import GObject.Types;
+import gobject.object;
+import gobject.types;
 
 class Value : Boxed
 {

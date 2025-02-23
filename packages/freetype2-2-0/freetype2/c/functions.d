@@ -1,9 +1,9 @@
 module freetype2.c.functions;
 
-public import Gid.basictypes;
-import Gid.loader;
+public import gid.basictypes;
+import gid.loader;
 import freetype2.c.types;
-public import GLib.c.types;
+public import glib.c.types;
 
 version(Windows)
   private immutable LIBS = [];

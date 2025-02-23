@@ -1,0 +1,120 @@
+module gtk.cell_renderer_accel;
+
+import gdk.types;
+import gid.gid;
+import gobject.dclosure;
+import gtk.c.functions;
+import gtk.c.types;
+import gtk.cell_renderer_text;
+import gtk.types;
+
+/**
+ * Renders a keyboard accelerator in a cell
+ * `GtkCellRendererAccel` displays a keyboard accelerator $(LPAREN)i.e. a key
+ * combination like `Control + a`$(RPAREN). If the cell renderer is editable,
+ * the accelerator can be changed by simply typing the new combination.
+
+ * Deprecated: Applications editing keyboard accelerators should
+ *   provide their own implementation according to platform design
+ *   guidelines
+ */
+class CellRendererAccel : CellRendererText
+{
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  static GType getType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_cell_renderer_accel_get_type != &gidSymbolNotFound ? gtk_cell_renderer_accel_get_type() : cast(GType)0;
+  }
+
+  override @property GType gType()
+  {
+    return getType();
+  }
+
+  /**
+   * Creates a new `GtkCellRendererAccel`.
+   * Returns: the new cell renderer
+   */
+  this()
+  {
+    GtkCellRenderer* _cretval;
+    _cretval = gtk_cell_renderer_accel_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+   * Gets emitted when the user has removed the accelerator.
+   * Params
+   *   pathString = the path identifying the row of the edited cell
+   *   cellRendererAccel = the instance the signal is connected to
+   */
+  alias AccelClearedCallbackDlg = void delegate(string pathString, CellRendererAccel cellRendererAccel);
+  alias AccelClearedCallbackFunc = void function(string pathString, CellRendererAccel cellRendererAccel);
+
+  /**
+   * Connect to AccelCleared signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectAccelCleared(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : AccelClearedCallbackDlg) || is(T : AccelClearedCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto cellRendererAccel = getVal!CellRendererAccel(_paramVals);
+      auto pathString = getVal!string(&_paramVals[1]);
+      _dClosure.dlg(pathString, cellRendererAccel);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("accel-cleared", closure, after);
+  }
+
+  /**
+   * Gets emitted when the user has selected a new accelerator.
+   * Params
+   *   pathString = the path identifying the row of the edited cell
+   *   accelKey = the new accelerator keyval
+   *   accelMods = the new accelerator modifier mask
+   *   hardwareKeycode = the keycode of the new accelerator
+   *   cellRendererAccel = the instance the signal is connected to
+   */
+  alias AccelEditedCallbackDlg = void delegate(string pathString, uint accelKey, ModifierType accelMods, uint hardwareKeycode, CellRendererAccel cellRendererAccel);
+  alias AccelEditedCallbackFunc = void function(string pathString, uint accelKey, ModifierType accelMods, uint hardwareKeycode, CellRendererAccel cellRendererAccel);
+
+  /**
+   * Connect to AccelEdited signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectAccelEdited(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : AccelEditedCallbackDlg) || is(T : AccelEditedCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 5, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto cellRendererAccel = getVal!CellRendererAccel(_paramVals);
+      auto pathString = getVal!string(&_paramVals[1]);
+      auto accelKey = getVal!uint(&_paramVals[2]);
+      auto accelMods = getVal!ModifierType(&_paramVals[3]);
+      auto hardwareKeycode = getVal!uint(&_paramVals[4]);
+      _dClosure.dlg(pathString, accelKey, accelMods, hardwareKeycode, cellRendererAccel);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("accel-edited", closure, after);
+  }
+}

@@ -1,7 +1,7 @@
 module cairo.c.types;
 
-public import Gid.basictypes;
-public import GObject.c.types;
+public import gid.basictypes;
+public import gobject.c.types;
 public import freetype2.c.types;
 
 /**

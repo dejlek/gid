@@ -6,7 +6,7 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["Atk"],
+  "sourcePaths": ["atk"],
   "dependencies": {
     "gid:glib-2-0": "*"
   }

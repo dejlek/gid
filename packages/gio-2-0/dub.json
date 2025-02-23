@@ -6,7 +6,7 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["Gio"],
+  "sourcePaths": ["gio"],
   "dependencies": {
     "gid:glib-2-0": "*",
     "gid:gmodule-2-0": "*"
