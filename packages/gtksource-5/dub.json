@@ -6,7 +6,7 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["GtkSource"],
+  "sourcePaths": ["gtksource"],
   "dependencies": {
     "gid:gtk-4-0": "*"
   }
