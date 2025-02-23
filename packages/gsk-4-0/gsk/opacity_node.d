@@ -1,0 +1,60 @@
+module gsk.opacity_node;
+
+import gid.gid;
+import gsk.c.functions;
+import gsk.c.types;
+import gsk.render_node;
+import gsk.types;
+
+/**
+ * A render node controlling the opacity of its single child node.
+ */
+class OpacityNode : RenderNode
+{
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    if (!ptr)
+      throw new GidConstructException("Null instance pointer for Gsk.OpacityNode");
+
+    super(cast(GskRenderNode*)ptr, take);
+  }
+
+  /**
+   * Creates a `GskRenderNode` that will drawn the child with reduced
+   * opacity.
+   * Params:
+   *   child = The node to draw
+   *   opacity = The opacity to apply
+   * Returns: A new `GskRenderNode`
+   */
+  this(RenderNode child, float opacity)
+  {
+    GskRenderNode* _cretval;
+    _cretval = gsk_opacity_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, opacity);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+   * Gets the child node that is getting opacityed by the given node.
+   * Returns: The child that is getting opacityed
+   */
+  RenderNode getChild()
+  {
+    GskRenderNode* _cretval;
+    _cretval = gsk_opacity_node_get_child(cast(GskRenderNode*)cPtr);
+    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+   * Gets the transparency factor for an opacity node.
+   * Returns: the opacity factor
+   */
+  float getOpacity()
+  {
+    float _retval;
+    _retval = gsk_opacity_node_get_opacity(cast(GskRenderNode*)cPtr);
+    return _retval;
+  }
+}

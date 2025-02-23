@@ -4,10 +4,10 @@ import core.atomic;
 import std.conv : to;
 public import std.typecons : Flag, No, Yes;
 
-import GLib.Types;
-import GLib.c.functions;
-import GObject.DClosure;
-import GObject.Value;
+import glib.types;
+import glib.c.functions;
+import gobject.dclosure;
+import gobject.value;
 
 debug
 {

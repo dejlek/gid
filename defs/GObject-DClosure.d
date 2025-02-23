@@ -1,8 +1,8 @@
 //!kind DClosure Opaque
 //!inhibit init funcs
 
-import GObject.Closure;
-public import GObject.Value;
+import gobject.closure;
+public import gobject.value;
 
 /**
  * Closure used for D delegates.

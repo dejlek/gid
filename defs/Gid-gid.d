@@ -9,11 +9,11 @@ import std.string : toStringz;
 import std.traits : hasMember, isScalarType;
 public import std.typecons : Flag, No, Yes;
 
-import GLib.c.functions;
-import GLib.c.types;
-import GObject.Boxed;
-import GObject.ObjectG;
-import GObject.c.functions;
+import glib.c.functions;
+import glib.c.types;
+import gobject.boxed;
+import gobject.object;
+import gobject.c.functions;
 
 /// Container ownership
 enum GidOwnership

@@ -6,7 +6,7 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["Gsk"],
+  "sourcePaths": ["gsk"],
   "dependencies": {
     "gid:gdk-4-0": "*",
     "gid:graphene-1-0": "*"

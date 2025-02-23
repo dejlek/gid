@@ -1,7 +1,7 @@
 //!kind ErrorG Wrap
 //!inhibit init funcs
 
-import GLib.Types;
+import glib.types;
 
 class ErrorG : Exception
 {

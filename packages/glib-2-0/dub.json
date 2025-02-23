@@ -6,5 +6,5 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["GLib", "GObject", "Gid"]
+  "sourcePaths": ["glib", "gobject", "gid"]
 }

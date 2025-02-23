@@ -69,7 +69,7 @@
 //!class CustomSorter
 //!set class[CustomSorter].constructor[new][disable] 1
 //!set class[CustomSorter].method[set_sort_func][disable] 1
-  import GObject.ObjectG;
+  import gobject.object;
 
   // Define a sort delegate that takes ObjectG objects, instead of the CompareDataFunc which is passed raw ObjectC pointers
   alias CustomSortDelegate = int delegate(ObjectG aObj, ObjectG bObj);

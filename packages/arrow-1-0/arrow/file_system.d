@@ -1,0 +1,352 @@
+module arrow.file_system;
+
+import arrow.c.functions;
+import arrow.c.types;
+import arrow.file_info;
+import arrow.file_selector;
+import arrow.input_stream;
+import arrow.output_stream;
+import arrow.seekable_input_stream;
+import arrow.types;
+import gid.gid;
+import glib.error;
+import gobject.object;
+
+class FileSystem : ObjectG
+{
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  static GType getType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())garrow_file_system_get_type != &gidSymbolNotFound ? garrow_file_system_get_type() : cast(GType)0;
+  }
+
+  override @property GType gType()
+  {
+    return getType();
+  }
+
+  /**
+   * This is a factory function to create a specific #GArrowFileSystem
+   * object.
+   * Params:
+   *   uri = An URI to specify file system with options. If you only have an
+   *     absolute path, [GLib.Global.filenameToUri] will help you.
+   * Returns: The newly created file system
+   *   that is an object of a subclass of #GArrowFileSystem.
+   */
+  static FileSystem create(string uri)
+  {
+    GArrowFileSystem* _cretval;
+    const(char)* _uri = uri.toCString(No.Alloc);
+    GError *_err;
+    _cretval = garrow_file_system_create(_uri, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    auto _retval = ObjectG.getDObject!FileSystem(cast(GArrowFileSystem*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+   * Copy a file.
+   * If the destination exists and is a directory, an error is returned.
+   * Otherwise, it is replaced.
+   * Params:
+   *   src = The path of the source file.
+   *   dest = The path of the destination.
+   * Returns: %TRUE on success, %FALSE if there was an error.
+   */
+  bool copyFile(string src, string dest)
+  {
+    bool _retval;
+    const(char)* _src = src.toCString(No.Alloc);
+    const(char)* _dest = dest.toCString(No.Alloc);
+    GError *_err;
+    _retval = garrow_file_system_copy_file(cast(GArrowFileSystem*)cPtr, _src, _dest, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
+  }
+
+  /**
+   * Create a directory and subdirectories.
+   * This function succeeds if the directory already exists.
+   * Params:
+   *   path = The paths of the directory.
+   *   recursive = Whether creating directory recursively or not.
+   * Returns: %TRUE on success, %FALSE if there was an error.
+   */
+  bool createDir(string path, bool recursive)
+  {
+    bool _retval;
+    const(char)* _path = path.toCString(No.Alloc);
+    GError *_err;
+    _retval = garrow_file_system_create_dir(cast(GArrowFileSystem*)cPtr, _path, recursive, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
+  }
+
+  /**
+   * Delete a directory and its contents, recursively.
+   * Params:
+   *   path = The paths of the directory.
+   * Returns: %TRUE on success, %FALSE if there was an error.
+   */
+  bool deleteDir(string path)
+  {
+    bool _retval;
+    const(char)* _path = path.toCString(No.Alloc);
+    GError *_err;
+    _retval = garrow_file_system_delete_dir(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
+  }
+
+  /**
+   * Delete a directory's contents, recursively. Like
+   * [Arrow.FileSystem.deleteDir], but doesn't delete the directory
+   * itself. Passing an empty path $(LPAREN)`""`$(RPAREN) will wipe the entire file
+   * system tree.
+   * Params:
+   *   path = The paths of the directory.
+   * Returns: %TRUE on success, %FALSE if there was an error.
+   */
+  bool deleteDirContents(string path)
+  {
+    bool _retval;
+    const(char)* _path = path.toCString(No.Alloc);
+    GError *_err;
+    _retval = garrow_file_system_delete_dir_contents(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
+  }
+
+  /**
+   * Delete a file.
+   * Params:
+   *   path = The paths of the file to be delete.
+   * Returns: %TRUE on success, %FALSE if there was an error.
+   */
+  bool deleteFile(string path)
+  {
+    bool _retval;
+    const(char)* _path = path.toCString(No.Alloc);
+    GError *_err;
+    _retval = garrow_file_system_delete_file(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
+  }
+
+  /**
+   * Delete many files.
+   * Params:
+   *   paths = The paths of the files to be delete.
+   * Returns: %TRUE on success, %FALSE if there was an error.
+   */
+  bool deleteFiles(string[] paths)
+  {
+    bool _retval;
+    size_t _nPaths;
+    if (paths)
+      _nPaths = cast(size_t)paths.length;
+
+    char*[] _tmppaths;
+    foreach (s; paths)
+      _tmppaths ~= s.toCString(No.Alloc);
+    const(char*)* _paths = _tmppaths.ptr;
+
+    GError *_err;
+    _retval = garrow_file_system_delete_files(cast(GArrowFileSystem*)cPtr, _paths, _nPaths, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
+  }
+
+  /**
+   * Get information for the given target.
+   * Any symlink is automatically dereferenced, recursively.
+   * A non-existing or unreachable file returns an OK status and has
+   * a #GArrowFileType of value %GARROW_FILE_TYPE_NOT_FOUND.
+   * An error status indicates a truly exceptional condition
+   * $(LPAREN)low-level I/O error, etc.$(RPAREN).
+   * Params:
+   *   path = The path of the target.
+   * Returns: A #GArrowFileInfo.
+   */
+  FileInfo getFileInfo(string path)
+  {
+    GArrowFileInfo* _cretval;
+    const(char)* _path = path.toCString(No.Alloc);
+    GError *_err;
+    _cretval = garrow_file_system_get_file_info(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    auto _retval = ObjectG.getDObject!FileInfo(cast(GArrowFileInfo*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+   * Get information same as [Arrow.FileSystem.getFileInfo]
+   * for the given many targets at once.
+   * Params:
+   *   paths = The paths of the targets.
+   * Returns: A list of #GArrowFileInfo.
+   */
+  FileInfo[] getFileInfosPaths(string[] paths)
+  {
+    GList* _cretval;
+    size_t _nPaths;
+    if (paths)
+      _nPaths = cast(size_t)paths.length;
+
+    char*[] _tmppaths;
+    foreach (s; paths)
+      _tmppaths ~= s.toCString(No.Alloc);
+    const(char*)* _paths = _tmppaths.ptr;
+
+    GError *_err;
+    _cretval = garrow_file_system_get_file_infos_paths(cast(GArrowFileSystem*)cPtr, _paths, _nPaths, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    auto _retval = gListToD!(FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+   * Get information same as [Arrow.FileSystem.getFileInfo]
+   * according to a selector.
+   * The selector's base directory will not be part of the results,
+   * even if it exists.
+   * Params:
+   *   fileSelector = A #GArrowFileSelector.
+   * Returns: A list of #GArrowFileInfo.
+   */
+  FileInfo[] getFileInfosSelector(FileSelector fileSelector)
+  {
+    GList* _cretval;
+    GError *_err;
+    _cretval = garrow_file_system_get_file_infos_selector(cast(GArrowFileSystem*)cPtr, fileSelector ? cast(GArrowFileSelector*)fileSelector.cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    auto _retval = gListToD!(FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  string getTypeName()
+  {
+    char* _cretval;
+    _cretval = garrow_file_system_get_type_name(cast(GArrowFileSystem*)cPtr);
+    string _retval = _cretval.fromCString(Yes.Free);
+    return _retval;
+  }
+
+  /**
+   * Move / rename a file or a directory.
+   * If the destination exists:
+   * - if it is a non-empty directory, an error is returned
+   * - otherwise, if it has the same type as the source, it is replaced
+   * - otherwise, behavior is unspecified $(LPAREN)implementation-dependent$(RPAREN).
+   * Params:
+   *   src = The path of the source file.
+   *   dest = The path of the destination.
+   * Returns: %TRUE on success, %FALSE if there was an error.
+   */
+  bool move(string src, string dest)
+  {
+    bool _retval;
+    const(char)* _src = src.toCString(No.Alloc);
+    const(char)* _dest = dest.toCString(No.Alloc);
+    GError *_err;
+    _retval = garrow_file_system_move(cast(GArrowFileSystem*)cPtr, _src, _dest, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    return _retval;
+  }
+
+  /**
+   * Open an output stream for appending.
+   * If the target doesn't exist, a new empty file is created.
+   * Params:
+   *   path = The path of the output stream.
+   * Returns: A newly created #GArrowOutputStream
+   *   for appending.
+   */
+  OutputStream openAppendStream(string path)
+  {
+    GArrowOutputStream* _cretval;
+    const(char)* _path = path.toCString(No.Alloc);
+    GError *_err;
+    _cretval = garrow_file_system_open_append_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    auto _retval = ObjectG.getDObject!OutputStream(cast(GArrowOutputStream*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+   * Open an input file for random access reading.
+   * Params:
+   *   path = The path of the input file.
+   * Returns: A newly created
+   *   #GArrowSeekableInputStream.
+   */
+  SeekableInputStream openInputFile(string path)
+  {
+    GArrowSeekableInputStream* _cretval;
+    const(char)* _path = path.toCString(No.Alloc);
+    GError *_err;
+    _cretval = garrow_file_system_open_input_file(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    auto _retval = ObjectG.getDObject!SeekableInputStream(cast(GArrowSeekableInputStream*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+   * Open an input stream for sequential reading.
+   * Params:
+   *   path = The path of the input stream.
+   * Returns: A newly created
+   *   #GArrowInputStream.
+   */
+  InputStream openInputStream(string path)
+  {
+    GArrowInputStream* _cretval;
+    const(char)* _path = path.toCString(No.Alloc);
+    GError *_err;
+    _cretval = garrow_file_system_open_input_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    auto _retval = ObjectG.getDObject!InputStream(cast(GArrowInputStream*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+   * Open an output stream for sequential writing.
+   * If the target already exists, the existing data is truncated.
+   * Params:
+   *   path = The path of the output stream.
+   * Returns: A newly created
+   *   #GArrowOutputStream.
+   */
+  OutputStream openOutputStream(string path)
+  {
+    GArrowOutputStream* _cretval;
+    const(char)* _path = path.toCString(No.Alloc);
+    GError *_err;
+    _cretval = garrow_file_system_open_output_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    if (_err)
+      throw new ErrorG(_err);
+    auto _retval = ObjectG.getDObject!OutputStream(cast(GArrowOutputStream*)_cretval, Yes.Take);
+    return _retval;
+  }
+}

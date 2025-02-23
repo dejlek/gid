@@ -6,7 +6,7 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["ArrowFlight"],
+  "sourcePaths": ["arrowflight"],
   "dependencies": {
     "gid:arrow-1-0": "*"
   }

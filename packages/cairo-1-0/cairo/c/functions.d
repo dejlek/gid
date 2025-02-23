@@ -1,9 +1,9 @@
 module cairo.c.functions;
 
-public import Gid.basictypes;
-import Gid.loader;
+public import gid.basictypes;
+import gid.loader;
 import cairo.c.types;
-public import GObject.c.types;
+public import gobject.c.types;
 public import freetype2.c.types;
 
 version(Windows)

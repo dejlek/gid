@@ -6,7 +6,7 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["ArrowDataset"],
+  "sourcePaths": ["arrowdataset"],
   "dependencies": {
     "gid:arrow-1-0": "*"
   }

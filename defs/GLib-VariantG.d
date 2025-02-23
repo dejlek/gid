@@ -1,5 +1,5 @@
-import GLib.VariantBuilder;
-import GLib.VariantType;
+import glib.variant_builder;
+import glib.variant_type;
 
 import std.conv : to;
 import std.traits : isSomeString;

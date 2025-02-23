@@ -6,7 +6,7 @@
   "license": "MIT",
   "targetType": "library",
   "importPaths": [".", ".."],
-  "sourcePaths": ["Gdk"],
+  "sourcePaths": ["gdk"],
   "dependencies": {
     "gid:cairo-1-0": "*",
     "gid:gdkpixbuf-2-0": "*",
