@@ -11,7 +11,7 @@
 //# Reason: InOut arguments of type 'Boxed' not supported (GtkSource.Buffer.iterBackwardToContextClassToggle)
 //!set class[Buffer].method[iter_backward_to_context_class_toggle][disable] 1
 
-//# InOut arguments of type 'Boxed' not supported (GtkSource.Buffer.iterForwardToContextClassToggle)
+//# Reason: InOut arguments of type 'Boxed' not supported (GtkSource.Buffer.iterForwardToContextClassToggle)
 //!set class[Buffer].method[iter_forward_to_context_class_toggle][disable] 1
 
 //# Reason: InOut arguments of type 'Boxed' not supported (GtkSource.Indenter.indent)
