@@ -7,9 +7,9 @@ The intention of this project is to create high quality D language (AKA Dlang) b
 The D language bindings hosted in this repository were generated with [gidgen](https://github.com/Kymorphia/gidgen/).
 This utility takes XML GObject Introspection Repository (GIR) files and generates D binding packages which can be used with [dub](https://dub.pm/).
 
-The **giD Package Repository** is currently focused primarily on [Gtk4](https://gtk.org/) and its dependencies for developing GUI applications in D.
-In the future it will be expanded to include additional libraries according to interest,
-potentially any of those listed in the Python [PyGObject API Reference](https://lazka.github.io/pgi-docs/).
+This package repository currently contains bindings for Gtk4, Vte terminal library, GtkSource code viewer widget, Apache Arrow, and more.
+Additional useful libraries with GObject Introspection interfaces will be added based on interest.
+Potentially any of those listed in the Python [PyGObject API Reference](https://lazka.github.io/pgi-docs/) for example.
 
 
 ## Quickstart
@@ -36,41 +36,51 @@ with some added understanding of the D binding differences, and the D binding so
 
 ### C API Library Reference
 
+ * [Arrow](https://arrow.apache.org/docs/c_glib/arrow-glib/index.html)
+ * [ArrowDataset](https://arrow.apache.org/docs/c_glib/arrow-dataset-glib/index.html)
+ * [ArrowFlight](https://arrow.apache.org/docs/c_glib/arrow-flight-glib/index.html)
  * [Atk](https://docs.gtk.org/atk/)
- * [Gtk4](https://docs.gtk.org/gtk4/)
+ * [Cairo](https://www.cairographics.org/manual/)
  * [Gdk4](https://docs.gtk.org/gdk4/)
  * [GdkPixbuf](https://docs.gtk.org/gdk-pixbuf/)
- * [Gsk](https://docs.gtk.org/gsk4/)
- * [Pango](https://docs.gtk.org/Pango/)
- * [Cairo](https://www.cairographics.org/manual/)
- * [GObject](https://docs.gtk.org/gobject/)
- * [GLib](https://docs.gtk.org/glib/)
  * [Gio](https://docs.gtk.org/gio/)
+ * [GLib](https://docs.gtk.org/glib/)
+ * [GObject](https://docs.gtk.org/gobject/)
+ * [Gsk](https://docs.gtk.org/gsk4/)
+ * [Gtk4](https://docs.gtk.org/gtk4/)
+ * [GtkSource5](https://gnome.pages.gitlab.gnome.org/gtksourceview/gtksourceview5/)
+ * [Pango](https://docs.gtk.org/Pango/)
+ * [Parquet](https://arrow.apache.org/docs/c_glib/parquet-glib/index.html)
+ * [Vte3.91](https://gnome.pages.gitlab.gnome.org/vte/gtk4/)
 
 
 ## Dub Packages
 
-Each library has its own binding dub sub-package, within the `gid` package, each with a single namespace.
-One notable exception is that the **glib** package contains GLib, GObject, and the Gid namespaces.
+Each library has its own binding dub sub-package, within the `gid` package, each with a single source directory (namespace).
+One notable exception is that the **glib** package contains glib, gobject, and the gid directory namespaces.
 This was done to resolve interdependencies between these modules.
 
 Sub-packages are named using the lowercase name of their GIR `namespace` followed by a dash and the namespace `version` with any dots replaced by dashes.
-For example, the Gtk library uses `Gtk` as the namespace and the version is `4.0` regardless of the library minor/micro version it was generated from.
-This results in the full dub package name `gid:gtk-4-0` with the namespace Gtk.
+For example, the Gtk library uses `Gtk` as the GIR namespace and the version is `4.0` regardless of the library minor/micro version it was generated from.
+This results in the full dub package name `gid:gtk-4-0` with the package directory namespace `gtk`.
 
 
 ## Module Names
 
-Each library consists of several modules. Each object and wrapped structure type gets its own D module with the name of the type.
+Each library consists of several modules. Each object and wrapped structure type gets its own D module with the name of the type in **snake_case**.
+Underscores are inserted in the snake case name only when transitioning from a lowercase letter to an uppercase letter.
+For example: the **GLArea** class will be written to a module named **gtk.glarea**, because there are no transitions from lowercase to uppercase.
+Another example would be the class **SpinButton** which would be written to a module named **gtk.spin_button**.
+
 Interfaces result in 3 modules being written which is described further in the [Interfaces](#interfaces) section.
 
 Additionally there are the following built-in modules for each package:
 
- * **Namespace.c.functions** - Contains all the C function pointers which are dynamically loaded at runtime.
+ * **namespace.c.functions** - Contains all the C function pointers which are dynamically loaded at runtime.
    These pointers have the same name as the C API functions, for example `g_object_ref`, and can be called like any other C function.
- * **Namespace.c.types** - Contains all C API types, including: enums, flags, structs, unions, and function callback types.
- * **Namespace.Global** - Contains package global functions which aren't associated with a class or structure instance.
- * **Namespace.Types** - Contains D types for the package, including: aliases, enums, flags, structs, delegates, and constants.
+ * **namespace.c.types** - Contains all C API types, including: enums, flags, structs, unions, and function callback types.
+ * **namespace.global** - Contains package global functions which aren't associated with a class or structure instance.
+ * **namespace.types** - Contains D types for the package, including: aliases, enums, flags, structs, delegates, and constants.
    Many D types are simply aliases to the underlying C types with a different D symbol name.
 
 
@@ -80,24 +90,27 @@ Here are some general rules about symbol renaming:
 
  * Symbols which are **CamelCase** are generally retained as is, this includes: object types, interfaces,
    structure/union types, enum/flag types, and module namespace names.
- * Many other symbols use **snake_case**, including: functions, method names, and argument names.
-   These symbols are renamed to **camelCase**.  `get_value()` for example becomes `getValue()`.
- * Enum and flag values use **SNAKE_CASE** which is converted to **CamelCase**.
+ * Many other symbols that use **snake_case** in the GIR API definition, including: functions, method names, and argument names
+   are renamed to **camelCase**.  `get_value()` for example becomes `getValue()`.
+ * Enum and flag values use **SNAKE_CASE** which is converted to **TitleCase**.
    For example, GTK_ALIGN_BASELINE_FILL becomes Align.BaselineFill.
  * Other standalone constants (not enums or flags) generally use **SNAKE_CASE** and are used as is,
    after removing the module prefix. `GTK_INPUT_ERROR` for example becomes just `INPUT_ERROR`.
  * Any reserved words have an underscore appended to them.
-   For example a function argument named `version` is a reserved D word and would therefore become `version_`.
- * Signal names are in **kebab-case** and are converted to signal **connectKebabCase** templates.
+   For example a function argument named `version` is a reserved D word and would therefore become `version_`. This also applies to module names,
+   for example **Gtk.Switch** is written to the module **gtk.switch_**.
+ * Signal names are in **kebab-case** in GIR API definitions and are converted to signal **connectKebabCase** method templates.
 
 
 ### Specific Symbol Renames
 
 | GLib C Type      | D Type            |
 |------------------|-------------------|
-| GVariant         | VariantG          |
-| GObject          | ObjectG           |
+| AtkObject        | ObjectAtk         |
+| AtkValue         | ValueAtk          |
 | GioApplication   | ApplicationGio    |
+| GObject          | ObjectG           |
+| GVariant         | VariantG          |
 
 These renames were done to avoid conflicts with built in D types and between modules (like Gtk.Application and Gio.Application).
 
@@ -134,9 +147,9 @@ The following table is a map of how GLib basic scalar types are changed from C t
 | void             | FILE, none, passwd, tm                                           |
 | void*            | gpointer, va_list                                                |
 
-**NOTE:** Currently `glong`, `gulong`, and `unsigned long` use the D type `long` and `ulong`.
-However, this wont work right on Windows systems where these C types are 32 bit, not 64 bit as defined in D.
-This will be fixed when giD Windows support is implemented.
+**NOTE:** The **glong**, **gulong**, and **unsigned long** types use versioned aliases depending on the platform.
+On Windows these values correspond to the 32 bit D types **int** and **uint** even on 64 bit systems.
+On other platforms these values are the 64 bit D types **long** and **ulong**.
 
 
 ## Strings
@@ -223,9 +236,9 @@ The `after` argument can be set to `Yes.After` to execute the signal callback af
 
 ## Interfaces
 
-Interfaces result in 3 modules being written in the form of: Interface, InterfaceT, and InterfaceIfaceProxy.
-Where **Interface** is the interface type name.
-For example, the Gio.File interface would have `File`, `FileT`, and `FileIfaceProxy` modules.
+Interfaces result in 3 modules being written in the form of: interface, interface_mixin, and interface_iface_proxy.
+Where **interface** is the interface type name in **snake_case**.
+For example, the Gio.File interface would have **file**, **file_mixin**, and **file_iface_proxy** modules.
 The first one defines the interface and static methods,
 the second defines a mixin template that contains method implementations which is mixed into objects implementing the interface,
 and the third defines an interface proxy wrapper object that is used when a C GObject with an unknown type is cast as the interface.
@@ -238,16 +251,6 @@ GBoxed types are wrapped with an object derived from the abstract `GObject.Boxed
 
 ### Built-in Boxed Methods
 
- ```D
- this(void* boxPtr, bool owned)
- ```
-For wrapping a C boxed pointer `boxPtr`. The `owned` argument indicates if the ownership of the boxed type should be taken, it is copied otherwise.
-
-```D
-this(Boxed boxed)
-```
-For creating a copy of a D Boxed object. The underlying C boxed value is copied.
-
 ```D
 @property GType gType()
 ```
@@ -256,13 +259,24 @@ Gets the GLib C GType of a boxed type. The static `getType` method can also be u
 ```D
 void* copy_()
 ```
-Creates a copy of the underlying C boxed type, which should be freed with `boxedFree` if ownership isn't taken by C code.
+Usually only used internally. Creates a copy of the underlying C boxed type, which should be freed with `boxedFree` if ownership isn't taken by C code.
 The `boxedCopy` static method can also be used to copy an arbitrary C boxed value (without a D object instance).
 
 ```D
 static void boxedFree(T)(void* cBoxed)
 ```
-A static method used to free a C boxed type value.
+Usually only used internally. A static method used to free a C boxed type value.
+
+ ```D
+ this(void* boxPtr, bool owned)
+ ```
+Usually only used internally.  or wrapping a C boxed pointer `boxPtr`.
+The `owned` argument indicates if the ownership of the boxed type should be taken, it is copied otherwise.
+
+```D
+this(Boxed boxed)
+```
+Usually only used internally. For creating a copy of a D Boxed object. The underlying C boxed value is copied.
 
 
 ## Simple Structures and Unions
@@ -334,31 +348,6 @@ and the giD binding uses VariantG in order to not conflict with it.
 ### Built-in VariantG Methods
 
 ```D
-this(void* ptr, bool ownedRef = false)
-```
-For wrapping a GVariant into a VariantG object. `ownedRef` can be set to true to take ownership of the GVariant instance (defaults to false).
-
-```D
-void* cPtr(bool addRef = false)
-```
-For getting the GVariant C instance from a VariantG object. `addRef` can be set to true to add a reference (defaults to false).
-
-```D
-override bool opEquals(Object other)
-```
-Equivalency operator overload to be able to compare VariantG objects.
-
-```D
-override int opCmp(Object other)
-```
-Comparison operator overload to be able to compare and sort VariantG objects.
-
-```D
-override string toString()
-```
-For rendering a VariantG as a string.
-
-```D
 static VariantG create(T)(T val)
 ```
 For creating a VariantG from a single statically typed D value.
@@ -377,6 +366,33 @@ Get a single value from a VariantG as a static D type. The type must match the V
 auto get(T...)()
 ```
 Get multiple values from a VariantG as static D types. The types must match the VariantG value types.
+
+```D
+override bool opEquals(Object other)
+```
+Equivalency operator overload to be able to compare VariantG objects.
+
+```D
+override int opCmp(Object other)
+```
+Comparison operator overload to be able to compare and sort VariantG objects.
+
+```D
+override string toString()
+```
+For rendering a VariantG as a string.
+
+```D
+this(void* ptr, bool ownedRef = false)
+```
+Usually only used internally. For wrapping a GVariant into a VariantG object.
+`ownedRef` can be set to true to take ownership of the GVariant instance (defaults to false).
+
+```D
+void* cPtr(bool addRef = false)
+```
+Usually only used internally. For getting the GVariant C instance from a VariantG object.
+`addRef` can be set to true to add a reference (defaults to false).
 
 
 ## VariantType
@@ -407,7 +423,3 @@ C callback functions are translated to D delegates.
 The use of delegates makes `void* data` values, which are typically passed to C callbacks for user defined data, unnecessary.
 This is because any variables can be accessed within the context where the delegate was declared.
 Additionally destroy callbacks for data are also unnecessary and are managed automatically by the giD bindings.
-
-**NOTE:** A current limitation is that there aren't bindings for using functions instead of delegates.
-This means that callbacks must be delegates and within an Object or other context.
-Signal connect handlers do have support for functions though, so this only affects other function/method bindings which have callbacks.
