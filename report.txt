@@ -18,6 +18,7 @@ Gio          |  266    2    0   100 | 1728  162   18  99.0 |   80    0    1  98.
 Graphene     |   21    0    0   100 |  367   43    0   100 |    0    0    0   100 |   40    0    0   100 |
 Gsk          |   51    0    0   100 |  256   24   14  94.8 |    0    0    0   100 |   13    0    2  86.7 |
 Gtk          |  355    0    0   100 | 3589  115   14  99.6 |  342    1    3  99.1 |  605   95    5  99.2 |
+GtkSource    |   54    0    0   100 |  417   16   23  94.8 |   29    0    1  96.7 |   93   20    1  98.9 |
 HarfBuzz     |   35    0    0   100 |  407   52   42  90.6 |    0    0    0   100 |   71   28   11  86.6 |
 Pango        |   44    0    0   100 |  387   44   13  96.8 |    0    0    0   100 |  162   11    8  95.3 |
 PangoCairo   |    4    0    0   100 |   26    5    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -110,6 +111,29 @@ Gtk.Snapshot.append_repeating_radial_gradient
 Gtk.Snapshot.push_shadow
 Gtk.Widget.get_allocation
 Gtk.Widget.size_allocate
+GtkSource.Buffer.get_context_classes_at_iter
+GtkSource.Language.get_globs
+GtkSource.Language.get_mime_types
+GtkSource.Language.get_style_ids
+GtkSource.LanguageManager.get_language_ids
+GtkSource.LanguageManager.get_search_path
+GtkSource.LanguageManager.set_search_path
+GtkSource.Map.new
+GtkSource.SnippetManager.get_search_path
+GtkSource.SnippetManager.list_groups
+GtkSource.SnippetManager.set_search_path
+GtkSource.StyleScheme.get_authors
+GtkSource.StyleSchemeChooserButton.new
+GtkSource.StyleSchemeChooserWidget.new
+GtkSource.StyleSchemeManager.get_scheme_ids
+GtkSource.StyleSchemeManager.get_search_path
+GtkSource.StyleSchemeManager.set_search_path
+GtkSource.StyleSchemePreview.new
+GtkSource.Tag.new
+GtkSource.View.new
+GtkSource.View.new_with_buffer
+GtkSource.View.get_mark_attributes
+GtkSource.VimIMContext.new
 HarfBuzz.Global.buffer_serialize
 HarfBuzz.Global.buffer_serialize_glyphs
 HarfBuzz.Global.buffer_serialize_unicode
@@ -173,6 +197,7 @@ Gio.MountOperation.show-processes
 Gtk.Editable.insert-text
 Gtk.Overlay.get-child-position
 Gtk.SpinButton.input
+GtkSource.View.push-snippet
 
 [Unsupported Fields]
 Atk.Registry.factory_type_registry
@@ -261,6 +286,7 @@ Gtk.RequestedSize.data
 Gtk.TreeIter.user_data
 Gtk.TreeIter.user_data2
 Gtk.TreeIter.user_data3
+GtkSource.CompletionProviderInterface.populate
 HarfBuzz.ColorLine.data
 HarfBuzz.ColorLine.get_color_stops_user_data
 HarfBuzz.ColorLine.get_extend_user_data
