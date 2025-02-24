@@ -1,4 +1,4 @@
-//!repo Gio-2.0
+//!gir Gio-2.0
 
 //# Rename Application to ApplicationGio to avoid conflicts with Gtk.Application
 //!subdtype Application ApplicationGio

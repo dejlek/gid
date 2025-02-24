@@ -1,0 +1,17 @@
+{
+  "name": "gdk4",
+  "description": "Gdk library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["gdk"],
+  "dependencies": {
+    "gid:cairo1": "*",
+    "gid:gdkpixbuf2": "*",
+    "gid:gio2": "*",
+    "gid:pango1": "*",
+    "gid:pangocairo1": "*"
+  }
+}

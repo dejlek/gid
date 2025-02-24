@@ -1,4 +1,7 @@
-//!repo Vte-3.91
+//!gir Vte-3.91
+
+//# Change package name to just vte3 rather than vte3-91
+//!info name vte3
 
 //!subdtype Align AlignVte
 

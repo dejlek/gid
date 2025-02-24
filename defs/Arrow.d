@@ -1,1 +1,1 @@
-//!repo Arrow-1.0
+//!gir Arrow-1.0

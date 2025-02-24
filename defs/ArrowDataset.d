@@ -1,1 +1,1 @@
-//!repo ArrowDataset-1.0
+//!gir ArrowDataset-1.0

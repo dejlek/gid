@@ -1,1 +1,1 @@
-//!repo Parquet-1.0
+//!gir Parquet-1.0

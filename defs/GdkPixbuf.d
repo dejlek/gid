@@ -1,4 +1,4 @@
-//!repo GdkPixbuf-2.0
+//!gir GdkPixbuf-2.0
 //!subctype GdkPixbuf PixbufC
 
 //# Set basic parameters to out

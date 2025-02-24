@@ -1,1 +1,1 @@
-//!repo PangoCairo-1.0
+//!gir PangoCairo-1.0

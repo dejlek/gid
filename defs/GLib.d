@@ -1,4 +1,4 @@
-//!repo GLib-2.0
+//!gir GLib-2.0
 
 //# Disable binding of container types
 //!set record[Array][ignore] 1

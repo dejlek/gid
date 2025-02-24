@@ -1,4 +1,4 @@
-//!repo cairo-1.0
+//!gir cairo-1.0
 
 //# Add libcairo.so.2 to shared library list
 //!set repository.namespace[cairo][shared-library] libcairo-gobject.so.2,libcairo.so.2

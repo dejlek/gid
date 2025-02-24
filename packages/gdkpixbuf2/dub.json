@@ -1,0 +1,14 @@
+{
+  "name": "gdkpixbuf2",
+  "description": "GdkPixbuf library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["gdkpixbuf"],
+  "dependencies": {
+    "gid:gio2": "*",
+    "gid:gmodule2": "*"
+  }
+}

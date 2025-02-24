@@ -1,4 +1,4 @@
-//!repo GObject-2.0
+//!gir GObject-2.0
 
 //# Merge GObject into GLib package to simplify interdependencies
 //!merge GLib

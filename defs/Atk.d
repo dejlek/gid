@@ -1,4 +1,4 @@
-//!repo Atk-1.0
+//!gir Atk-1.0
 
 //!subdtype Object ObjectAtk
 //!subdtype Value ValueAtk

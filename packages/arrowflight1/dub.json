@@ -1,0 +1,13 @@
+{
+  "name": "arrowflight1",
+  "description": "ArrowFlight library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["arrowflight"],
+  "dependencies": {
+    "gid:arrow1": "*"
+  }
+}

@@ -1,1 +1,1 @@
-//!repo ArrowFlight-1.0
+//!gir ArrowFlight-1.0

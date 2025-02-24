@@ -1,4 +1,4 @@
-//!repo HarfBuzz-0.0
+//!gir HarfBuzz-0.0
 
 //!subtype face_t HBFace
 

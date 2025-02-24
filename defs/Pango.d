@@ -1,4 +1,4 @@
-//!repo Pango-1.0
+//!gir Pango-1.0
 
 //# Pango.Language conflicts with Cairo.Language
 //!subtype Language PgLanguage

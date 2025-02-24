@@ -1,0 +1,13 @@
+{
+  "name": "parquet1",
+  "description": "Parquet library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["parquet"],
+  "dependencies": {
+    "gid:arrow1": "*"
+  }
+}

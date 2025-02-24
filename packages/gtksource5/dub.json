@@ -1,0 +1,13 @@
+{
+  "name": "gtksource5",
+  "description": "GtkSource library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["gtksource"],
+  "dependencies": {
+    "gid:gtk4": "*"
+  }
+}
