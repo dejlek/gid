@@ -51,6 +51,30 @@ class SnippetManager : ObjectG
   }
 
   /**
+   * Gets the list directories where self looks for snippet files.
+   * Returns: %NULL-terminated array
+   *   containing a list of snippet files directories.
+   *   The array is owned by lm and must not be modified.
+   */
+  string[] getSearchPath()
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_snippet_manager_get_search_path(cast(GtkSourceSnippetManager*)cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
    * Queries the known snippets for the first matching group, language_id,
    * and/or trigger.
    * If group or language_id are %NULL, they will be ignored.
@@ -87,6 +111,30 @@ class SnippetManager : ObjectG
   }
 
   /**
+   * List all the known groups within the snippet manager.
+   * The result should be freed with [GLib.Global.gfree], and the individual strings are
+   * owned by self and should never be freed by the caller.
+   * Returns: An array of strings which should be freed with [GLib.Global.gfree].
+   */
+  string[] listGroups()
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_snippet_manager_list_groups(cast(GtkSourceSnippetManager*)cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
    * Queries the known snippets for those matching group, language_id, and/or
    * trigger_prefix.
    * If any of these are %NULL, they will be ignored when filtering the available snippets.
@@ -109,5 +157,27 @@ class SnippetManager : ObjectG
     _cretval = gtk_source_snippet_manager_list_matching(cast(GtkSourceSnippetManager*)cPtr, _group, _languageId, _triggerPrefix);
     auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
+  }
+
+  /**
+   * Sets the list of directories in which the `GtkSourceSnippetManager` looks for
+   * snippet files.
+   * If dirs is %NULL, the search path is reset to default.
+   * At the moment this function can be called only before the
+   * snippet files are loaded for the first time. In practice
+   * to set a custom search path for a `GtkSourceSnippetManager`,
+   * you have to call this function right after creating it.
+   * Params:
+   *   dirs = a %NULL-terminated array of
+   *     strings or %NULL.
+   */
+  void setSearchPath(string[] dirs)
+  {
+    char*[] _tmpdirs;
+    foreach (s; dirs)
+      _tmpdirs ~= s.toCString(No.Alloc);
+    _tmpdirs ~= null;
+    const(char*)* _dirs = _tmpdirs.ptr;
+    gtk_source_snippet_manager_set_search_path(cast(GtkSourceSnippetManager*)cPtr, _dirs);
   }
 }

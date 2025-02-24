@@ -17,6 +17,7 @@ import gtk.scrollable_mixin;
 import gtk.text_iter;
 import gtk.text_view;
 import gtk.types;
+import gtk.widget;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.completion;

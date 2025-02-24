@@ -38,6 +38,24 @@ class StyleScheme : ObjectG
     return getType();
   }
 
+  string[] getAuthors()
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_style_scheme_get_authors(cast(GtkSourceStyleScheme*)cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(No.Free);
+    }
+    return _retval;
+  }
+
   string getDescription()
   {
     const(char)* _cretval;

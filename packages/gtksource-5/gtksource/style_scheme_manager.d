@@ -95,6 +95,56 @@ class StyleSchemeManager : ObjectG
   }
 
   /**
+   * Returns the ids of the available style schemes.
+   * Returns: a %NULL-terminated array of strings containing the ids of the available
+   *   style schemes or %NULL if no style scheme is available.
+   *   The array is sorted alphabetically according to the scheme name.
+   *   The array is owned by the manager and must not be modified.
+   */
+  string[] getSchemeIds()
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_style_scheme_manager_get_scheme_ids(cast(GtkSourceStyleSchemeManager*)cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
+   * Returns the current search path for the manager.
+   * See [GtkSource.StyleSchemeManager.setSearchPath] for details.
+   * Returns: a %NULL-terminated array
+   *   of string containing the search path.
+   *   The array is owned by the manager and must not be modified.
+   */
+  string[] getSearchPath()
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_style_scheme_manager_get_search_path(cast(GtkSourceStyleSchemeManager*)cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
    * Prepends path to the list of directories where the manager looks
    * for style scheme files.
    * See [GtkSource.StyleSchemeManager.setSearchPath] for details.
@@ -105,5 +155,23 @@ class StyleSchemeManager : ObjectG
   {
     const(char)* _path = path.toCString(No.Alloc);
     gtk_source_style_scheme_manager_prepend_search_path(cast(GtkSourceStyleSchemeManager*)cPtr, _path);
+  }
+
+  /**
+   * Sets the list of directories where the manager looks for
+   * style scheme files.
+   * If path is %NULL, the search path is reset to default.
+   * Params:
+   *   path = a %NULL-terminated array of
+   *     strings or %NULL.
+   */
+  void setSearchPath(string[] path)
+  {
+    char*[] _tmppath;
+    foreach (s; path)
+      _tmppath ~= s.toCString(No.Alloc);
+    _tmppath ~= null;
+    const(char*)* _path = _tmppath.ptr;
+    gtk_source_style_scheme_manager_set_search_path(cast(GtkSourceStyleSchemeManager*)cPtr, _path);
   }
 }

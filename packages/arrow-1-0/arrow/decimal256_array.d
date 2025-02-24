@@ -6,6 +6,7 @@ import arrow.decimal256;
 import arrow.fixed_size_binary_array;
 import arrow.types;
 import gid.gid;
+import glib.bytes;
 import gobject.object;
 
 class Decimal256Array : FixedSizeBinaryArray

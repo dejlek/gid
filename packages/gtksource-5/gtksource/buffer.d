@@ -115,6 +115,24 @@ class Buffer : TextBuffer
   }
 
   /**
+   * Moves `iter` to the position of the previous classMark of the given
+   * category.
+   * Returns %TRUE if `iter` was moved. If `category` is NULL, the
+   * previous source mark can be of any category.
+   * Params:
+   *   iter = an iterator.
+   *   category = category to search for, or %NULL
+   * Returns: whether `iter` was moved.
+   */
+  bool backwardIterToSourceMark(TextIter iter, string category)
+  {
+    bool _retval;
+    const(char)* _category = category.toCString(No.Alloc);
+    _retval = gtk_source_buffer_backward_iter_to_source_mark(cast(GtkSourceBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _category);
+    return _retval;
+  }
+
+  /**
    * Changes the case of the text between the specified iterators.
    * Since 5.4, this function will update the position of `start` and
    * `end` to surround the modified text.
@@ -169,6 +187,51 @@ class Buffer : TextBuffer
   void ensureHighlight(TextIter start, TextIter end)
   {
     gtk_source_buffer_ensure_highlight(cast(GtkSourceBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+  }
+
+  /**
+   * Moves `iter` to the position of the next classMark of the given
+   * `category`.
+   * Returns %TRUE if `iter` was moved. If `category` is NULL, the
+   * next source mark can be of any category.
+   * Params:
+   *   iter = an iterator.
+   *   category = category to search for, or %NULL
+   * Returns: whether `iter` was moved.
+   */
+  bool forwardIterToSourceMark(TextIter iter, string category)
+  {
+    bool _retval;
+    const(char)* _category = category.toCString(No.Alloc);
+    _retval = gtk_source_buffer_forward_iter_to_source_mark(cast(GtkSourceBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _category);
+    return _retval;
+  }
+
+  /**
+   * Get all defined context classes at iter.
+   * See the classBuffer description for the list of default context classes.
+   * Params:
+   *   iter = a #GtkTextIter.
+   * Returns: a new %NULL
+   *   terminated array of context class names.
+   *   Use [GLib.Global.strfreev] to free the array if it is no longer needed.
+   */
+  string[] getContextClassesAtIter(TextIter iter)
+  {
+    char** _cretval;
+    _cretval = gtk_source_buffer_get_context_classes_at_iter(cast(GtkSourceBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
+    }
+    return _retval;
   }
 
   /**
@@ -271,6 +334,46 @@ class Buffer : TextBuffer
     GtkSourceStyleScheme* _cretval;
     _cretval = gtk_source_buffer_get_style_scheme(cast(GtkSourceBuffer*)cPtr);
     auto _retval = ObjectG.getDObject!StyleScheme(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Moves backward to the next toggle $(LPAREN)on or off$(RPAREN) of the context class.
+   * If no matching context class toggles are found, returns %FALSE, otherwise %TRUE.
+   * Does not return toggles located at iter, only toggles after iter. Sets
+   * iter to the location of the toggle, or to the end of the buffer if no
+   * toggle is found.
+   * See the classBuffer description for the list of default context classes.
+   * Params:
+   *   iter = a #GtkTextIter.
+   *   contextClass = the context class.
+   * Returns: whether we found a context class toggle before iter
+   */
+  bool iterBackwardToContextClassToggle(TextIter iter, string contextClass)
+  {
+    bool _retval;
+    const(char)* _contextClass = contextClass.toCString(No.Alloc);
+    _retval = gtk_source_buffer_iter_backward_to_context_class_toggle(cast(GtkSourceBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _contextClass);
+    return _retval;
+  }
+
+  /**
+   * Moves forward to the next toggle $(LPAREN)on or off$(RPAREN) of the context class.
+   * If no matching context class toggles are found, returns %FALSE, otherwise %TRUE.
+   * Does not return toggles located at iter, only toggles after iter. Sets
+   * iter to the location of the toggle, or to the end of the buffer if no
+   * toggle is found.
+   * See the classBuffer description for the list of default context classes.
+   * Params:
+   *   iter = a #GtkTextIter.
+   *   contextClass = the context class.
+   * Returns: whether we found a context class toggle after iter
+   */
+  bool iterForwardToContextClassToggle(TextIter iter, string contextClass)
+  {
+    bool _retval;
+    const(char)* _contextClass = contextClass.toCString(No.Alloc);
+    _retval = gtk_source_buffer_iter_forward_to_context_class_toggle(cast(GtkSourceBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _contextClass);
     return _retval;
   }
 

@@ -33,6 +33,32 @@ class Language : ObjectG
   }
 
   /**
+   * Returns the globs associated to this language.
+   * This is just an utility wrapper around [GtkSource.Language.getMetadata] to
+   * retrieve the "globs" metadata property and split it into an array.
+   * Returns: a newly-allocated %NULL terminated array containing the globs or %NULL
+   *   if no globs are found.
+   *   The returned array must be freed with [GLib.Global.strfreev].
+   */
+  string[] getGlobs()
+  {
+    char** _cretval;
+    _cretval = gtk_source_language_get_globs(cast(GtkSourceLanguage*)cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
+    }
+    return _retval;
+  }
+
+  /**
    * Returns whether the language should be hidden from the user.
    * Returns: %TRUE if the language should be hidden, %FALSE otherwise.
    */
@@ -63,6 +89,33 @@ class Language : ObjectG
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_source_language_get_metadata(cast(GtkSourceLanguage*)cPtr, _name);
     string _retval = _cretval.fromCString(No.Free);
+    return _retval;
+  }
+
+  /**
+   * Returns the mime types associated to this language.
+   * This is just an utility wrapper around [GtkSource.Language.getMetadata] to
+   * retrieve the "mimetypes" metadata property and split it into an
+   * array.
+   * Returns: a newly-allocated %NULL terminated array containing the mime types
+   *   or %NULL if no mime types are found.
+   *   The returned array must be freed with [GLib.Global.strfreev].
+   */
+  string[] getMimeTypes()
+  {
+    char** _cretval;
+    _cretval = gtk_source_language_get_mime_types(cast(GtkSourceLanguage*)cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
+    }
     return _retval;
   }
 
@@ -112,6 +165,30 @@ class Language : ObjectG
     const(char)* _styleId = styleId.toCString(No.Alloc);
     _cretval = gtk_source_language_get_style_fallback(cast(GtkSourceLanguage*)cPtr, _styleId);
     string _retval = _cretval.fromCString(No.Free);
+    return _retval;
+  }
+
+  /**
+   * Returns the ids of the styles defined by this language.
+   * Returns: a newly-allocated %NULL terminated array containing ids of the
+   *   styles defined by this language or %NULL if no style is defined.
+   *   The returned array must be freed with [GLib.Global.strfreev].
+   */
+  string[] getStyleIds()
+  {
+    char** _cretval;
+    _cretval = gtk_source_language_get_style_ids(cast(GtkSourceLanguage*)cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
+    }
     return _retval;
   }
 

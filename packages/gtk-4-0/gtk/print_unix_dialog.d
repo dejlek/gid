@@ -18,6 +18,7 @@ import gtk.print_settings;
 import gtk.printer;
 import gtk.root;
 import gtk.root_mixin;
+import gtk.settings;
 import gtk.shortcut_manager;
 import gtk.shortcut_manager_mixin;
 import gtk.types;

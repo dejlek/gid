@@ -7,7 +7,6 @@
 //!set callback[font_get_nominal_glyphs_func_t][introspectable] 0 
 
 //# Set arrays to be zero-terminated=1
-//!set function[buffer_serialize_list_formats].return-value.array[][zero-terminated] 1
 //!set function[face_builder_sort_tables].parameters.parameter[tags].array[][zero-terminated] 1
 //!set function[ot_layout_collect_features].parameters.parameter[scripts].array[][zero-terminated] 1
 //!set function[ot_layout_collect_features].parameters.parameter[languages].array[][zero-terminated] 1
@@ -15,13 +14,6 @@
 //!set function[ot_layout_collect_lookups].parameters.parameter[scripts].array[][zero-terminated] 1
 //!set function[ot_layout_collect_lookups].parameters.parameter[languages].array[][zero-terminated] 1
 //!set function[ot_layout_collect_lookups].parameters.parameter[features].array[][zero-terminated] 1
-//!set function[shape_full].parameters.parameter[shaper_list].array[][zero-terminated] 1
-//!set function[shape_justify].parameters.parameter[shaper_list].array[][zero-terminated] 1
-//!set function[shape_list_shapers].return-value.array[][zero-terminated] 1
-//!set function[shape_plan_create].parameters.parameter[shaper_list].array[][zero-terminated] 1
-//!set function[shape_plan_create2].parameters.parameter[shaper_list].array[][zero-terminated] 1
-//!set function[shape_plan_create_cached].parameters.parameter[shaper_list].array[][zero-terminated] 1
-//!set function[shape_plan_create_cached2].parameters.parameter[shaper_list].array[][zero-terminated] 1
 
 //# Set array length parameters to be inout
 //!set function[aat_layout_feature_type_get_selector_infos].parameters.parameter[selector_count][direction] inout

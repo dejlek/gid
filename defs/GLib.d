@@ -88,56 +88,8 @@
 //!set record[VariantDict][opaque] 1
 
 //# These arrays should have zero-terminated set
-//!set function[build_filenamev].parameters.parameter[args].array[][zero-terminated] 1
-//!set function[build_pathv].parameters.parameter[args].array[][zero-terminated] 1
-//!set function[environ_getenv].parameters.parameter[envp].array[][zero-terminated] 1
-//!set function[environ_setenv].parameters.parameter[envp].array[][zero-terminated] 1
-//!set function[environ_setenv].return-value.array[][zero-terminated] 1
-//!set function[environ_unsetenv].parameters.parameter[envp].array[][zero-terminated] 1
-//!set function[environ_unsetenv].return-value.array[][zero-terminated] 1
-//!set function[get_environ].return-value.array[][zero-terminated] 1
-//!set function[get_filename_charsets].parameters.parameter[filename_charsets].array[][zero-terminated] 1
-//!set function[get_language_names].return-value.array[][zero-terminated] 1
-//!set function[get_language_names_with_category].return-value.array[][zero-terminated] 1
-//!set function[get_locale_variants].return-value.array[][zero-terminated] 1
-//!set function[get_system_config_dirs].return-value.array[][zero-terminated] 1
-//!set function[get_system_data_dirs].return-value.array[][zero-terminated] 1
-//!set function[listenv].return-value.array[][zero-terminated] 1
-//!set function[spawn_async].parameters.parameter[argv].array[][zero-terminated] 1
-//!set function[spawn_async].parameters.parameter[envp].array[][zero-terminated] 1
-//!set function[spawn_async_with_fds].parameters.parameter[argv].array[][zero-terminated] 1
-//!set function[spawn_async_with_fds].parameters.parameter[envp].array[][zero-terminated] 1
-//!set function[spawn_async_with_pipes_and_fds].parameters.parameter[argv].array[][zero-terminated] 1
-//!set function[spawn_async_with_pipes_and_fds].parameters.parameter[envp].array[][zero-terminated] 1
-//!set function[spawn_async_with_pipes].parameters.parameter[argv].array[][zero-terminated] 1
-//!set function[spawn_async_with_pipes].parameters.parameter[envp].array[][zero-terminated] 1
-//!set function[spawn_sync].parameters.parameter[argv].array[][zero-terminated] 1
-//!set function[spawn_sync].parameters.parameter[envp].array[][zero-terminated] 1
-//!set function[strdupv].parameters.parameter[str_array].array[][zero-terminated] 1
-//!set function[strdupv].return-value.array[][zero-terminated] 1
-//!set function[strjoinv].parameters.parameter[str_array].array[][zero-terminated] 1
-//!set function[strsplit].return-value.array[][zero-terminated] 1
-//!set function[strsplit_set].return-value.array[][zero-terminated] 1
-//!set function[str_tokenize_and_fold].return-value.array[][zero-terminated] 1
-//!set function[str_tokenize_and_fold].parameters.parameter[ascii_alternates].array[][zero-terminated] 1
-//!set function[strv_contains].parameters.parameter[strv].array[][zero-terminated] 1
-//!set function[strv_equal].parameters.parameter[strv1].array[][zero-terminated] 1
-//!set function[strv_equal].parameters.parameter[strv2].array[][zero-terminated] 1
-//!set function[strv_length].parameters.parameter[str_array].array[][zero-terminated] 1
-//!set function[test_trap_subprocess_with_envp].parameters.parameter[envp].array[][zero-terminated] 1
-//!set record[KeyFile].method[get_groups].return-value.array[][zero-terminated] 1
-//!set record[KeyFile].method[get_keys].return-value.array[][zero-terminated] 1
-//!set record[KeyFile].method[load_from_dirs].parameters.parameter[search_dirs].array[][zero-terminated] 1
-//!set record[MatchInfo].method[fetch_all].return-value.array[][zero-terminated] 1
 //!set record[OptionContext].method[add_main_entries].parameters.parameter[entries].array[][zero-terminated] 1
-//!set record[OptionContext].method[parse_strv].parameters.parameter[arguments].array[][zero-terminated] 1
 //!set record[OptionGroup].method[add_entries].parameters.parameter[entries].array[][zero-terminated] 1
-//!set record[StrvBuilder].method[addv].parameters.parameter[value].array[][zero-terminated] 1
-//!set record[StrvBuilder].method[end].return-value.array[][zero-terminated] 1
-//!set record[Uri].function[list_extract_uris].return-value.array[][zero-terminated] 1
-//!set record[Regex].method[split].return-value.array[][zero-terminated] 1
-//!set record[Regex].method[split_full].return-value.array[][zero-terminated] 1
-//!set record[Regex].function[split_simple].return-value.array[][zero-terminated] 1
 
 //# Change arrays of chars to strings
 //!set function[spawn_command_line_sync].parameters.parameter[standard_error].array '<type name="utf8" c:type="char**"/>'
@@ -228,11 +180,6 @@
 //!set function[log_writer_default_set_debug_domains].parameters.parameter[domains].type '<array zero-terminated="1" c:type="const char* const*"><type name="utf8" c:type="const char*"/></array>'
 //!set function[slice_get_config_state].return-value.type '<array length="2" zero-terminated="0" c:type="const gint64*"><type name="gint64" c:type="gint64"/></array>'
 //!set function[slice_get_config_state].parameters.parameter[n_values][direction] out
-//!set function[strjoinv].parameters.parameter[str_array][zero-terminated] 1
-//!set function[strv_contains].parameters.parameter[strv][zero-terminated] 1
-//!set function[strv_equal].parameters.parameter[strv1][zero-terminated] 1
-//!set function[strv_equal].parameters.parameter[strv2][zero-terminated] 1
-//!set function[strv_length].parameters.parameter[str_array][zero-terminated] 1
 //!set function[ucs4_to_utf16].return-value.type '<array zero-terminated="1" c:type="gunichar2*"><type name="guint16" c:type="gunichar2"/></array>'
 //!set function[unicode_canonical_decomposition].return-value.type '<array length="1" zero-terminated="0" c:type="gunichar*"><type name="gunichar" c:type="gunichar"/></array>'
 //!set function[unicode_canonical_decomposition].parameters.parameter[result_len][direction] out

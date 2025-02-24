@@ -36,6 +36,29 @@ template IndenterT()
 {
 
   /**
+   * This function should be implemented to alter the indentation of text
+   * within the view.
+   * view is provided so that the indenter may retrieve settings such as indentation and tab widths.
+   * iter is the location where the indentation was requested. This typically
+   * is after having just inserted a newline $(LPAREN)\n$(RPAREN) character but can be other
+   * situations such as a manually requested indentation or reformatting.
+   * See ifaceIndenter.is_trigger for how to trigger indentation on
+   * various characters inserted into the buffer.
+   * The implementor of this function is expected to keep iter valid across
+   * calls to the function and should contain the location of the insert mark
+   * after calling this function.
+   * The default implementation for this virtual function will copy the
+   * indentation of the previous line.
+   * Params:
+   *   view = a #GtkSourceView
+   *   iter = the location of the indentation request
+   */
+  override void indent(View view, TextIter iter)
+  {
+    gtk_source_indenter_indent(cast(GtkSourceIndenter*)cPtr, view ? cast(GtkSourceView*)view.cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+  }
+
+  /**
    * This function is used to determine if a key pressed should cause the
    * indenter to automatically indent.
    * The default implementation of this virtual method will check to see

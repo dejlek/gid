@@ -5,7 +5,6 @@ import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import glib.tree;
-import glib.variant;
 import gobject.object;
 
 /**
@@ -46,51 +45,6 @@ class SettingsBackend : ObjectG
   override @property GType gType()
   {
     return getType();
-  }
-
-  /**
-   * Calculate the longest common prefix of all keys in a tree and write
-   * out an array of the key names relative to that prefix and,
-   * optionally, the value to store at each of those keys.
-   * You must free the value returned in path, keys and values using
-   * [GLib.Global.gfree].  You should not attempt to free or unref the contents of
-   * keys or values.
-   * Params:
-   *   tree = a #GTree containing the changes
-   *   path = the location to save the path
-   *   keys = the
-   *     location to save the relative keys
-   *   values = the location to save the values, or %NULL
-   */
-  static void flattenTree(Tree tree, out string path, out string[] keys, out VariantG[] values)
-  {
-    char* _path;
-    const(char*)* _keys;
-    VariantC** _values;
-    g_settings_backend_flatten_tree(tree ? cast(GTree*)tree.cPtr(No.Dup) : null, &_path, &_keys, &_values);
-    path = _path.fromCString(Yes.Free);
-    uint _lenkeys;
-    if (_keys)
-    {
-      for (; _keys[_lenkeys] !is null; _lenkeys++)
-      {
-      }
-    }
-    keys.length = _lenkeys;
-    foreach (i; 0 .. _lenkeys)
-      keys[i] = _keys[i].fromCString(No.Free);
-    safeFree(cast(void*)_keys);
-    uint _lenvalues;
-    if (_values)
-    {
-      for (; _values[_lenvalues] !is null; _lenvalues++)
-      {
-      }
-    }
-    values.length = _lenvalues;
-    foreach (i; 0 .. _lenvalues)
-      values[i] = new VariantG(cast(void*)_values[i], No.Take);
-    safeFree(cast(void*)_values);
   }
 
   /**

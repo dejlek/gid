@@ -11,7 +11,6 @@
 
 //# Set arrays to be zero-terminated=1
 //!set class[Font].method[get_languages].return-value.array[][zero-terminated] 1
-//!set function[split_file_list].return-value.array[][zero-terminated] 1
 //!set record[Language].function[get_preferred].return-value.array[][zero-terminated] 1
 
 //# Use array of characters with a length, to remove the length and optimize

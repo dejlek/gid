@@ -94,6 +94,55 @@ class LanguageManager : ObjectG
   }
 
   /**
+   * Returns the ids of the available languages.
+   * Returns: a %NULL-terminated array of strings containing the ids of the available
+   *   languages or %NULL if no language is available.
+   *   The array is sorted alphabetically according to the language name.
+   *   The array is owned by lm and must not be modified.
+   */
+  string[] getLanguageIds()
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_language_manager_get_language_ids(cast(GtkSourceLanguageManager*)cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
+   * Gets the list directories where lm looks for language files.
+   * Returns: %NULL-terminated array
+   *   containing a list of language files directories.
+   *   The array is owned by lm and must not be modified.
+   */
+  string[] getSearchPath()
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_language_manager_get_search_path(cast(GtkSourceLanguageManager*)cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
    * Picks a classLanguage for given file name and content type,
    * according to the information in lang files.
    * Either filename or content_type may be %NULL. This function can be used as follows:
@@ -151,5 +200,30 @@ class LanguageManager : ObjectG
   {
     const(char)* _path = path.toCString(No.Alloc);
     gtk_source_language_manager_prepend_search_path(cast(GtkSourceLanguageManager*)cPtr, _path);
+  }
+
+  /**
+   * Sets the list of directories where the lm looks for
+   * language files.
+   * If dirs is %NULL, the search path is reset to default.
+   * At the moment this function can be called only before the
+   * language files are loaded for the first time. In practice
+   * to set a custom search path for a `GtkSourceLanguageManager`,
+   * you have to call this function right after creating it.
+   * Since GtkSourceView 5.4 this function will allow you to provide
+   * paths in the form of "resource:///" URIs to embedded `GResource`s.
+   * They must contain the path of a directory within the `GResource`.
+   * Params:
+   *   dirs = a %NULL-terminated array of
+   *     strings or %NULL.
+   */
+  void setSearchPath(string[] dirs)
+  {
+    char*[] _tmpdirs;
+    foreach (s; dirs)
+      _tmpdirs ~= s.toCString(No.Alloc);
+    _tmpdirs ~= null;
+    const(char*)* _dirs = _tmpdirs.ptr;
+    gtk_source_language_manager_set_search_path(cast(GtkSourceLanguageManager*)cPtr, _dirs);
   }
 }

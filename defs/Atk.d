@@ -11,7 +11,6 @@
 
 //# Set arrays to zero terminated
 //!set interface[Text].method[get_bounded_ranges].return-value.array[][zero-terminated] 1
-//!set record[TextIface].field[get_bounded_ranges].callback[get_bounded_ranges].return-value.array[][zero-terminated] 1
 
 //# Set parameters to inout
 //!set interface[EditableText].method[insert_text].parameters.parameter[position][direction] inout

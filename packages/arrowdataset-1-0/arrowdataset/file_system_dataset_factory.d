@@ -3,6 +3,7 @@ module arrowdataset.file_system_dataset_factory;
 import arrow.file_system;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
+import arrowdataset.dataset;
 import arrowdataset.dataset_factory;
 import arrowdataset.file_format;
 import arrowdataset.file_system_dataset;

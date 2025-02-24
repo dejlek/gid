@@ -7,6 +7,7 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
+import gtk.widget;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.gutter_renderer;
@@ -45,6 +46,24 @@ class GutterRendererText : GutterRenderer
     GtkSourceGutterRenderer* _cretval;
     _cretval = gtk_source_gutter_renderer_text_new();
     this(_cretval, Yes.Take);
+  }
+
+  alias measure = Widget.measure;
+
+  /**
+   * Measures the text provided using the pango layout used by the
+   * #GtkSourceGutterRendererText.
+   * Params:
+   *   text = the text to measure.
+   *   width = location to store the width of the text in pixels,
+   *     or %NULL.
+   *   height = location to store the height of the text in
+   *     pixels, or %NULL.
+   */
+  void measure(string text, out int width, out int height)
+  {
+    const(char)* _text = text.toCString(No.Alloc);
+    gtk_source_gutter_renderer_text_measure(cast(GtkSourceGutterRendererText*)cPtr, _text, cast(int*)&width, cast(int*)&height);
   }
 
   /**
