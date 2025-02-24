@@ -18,6 +18,7 @@ import gtk.text_iter;
 import gtk.text_view;
 import gtk.types;
 import gtk.widget;
+import gtksource.buffer;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.completion;
@@ -96,6 +97,37 @@ class View : TextView
   override @property GType gType()
   {
     return getType();
+  }
+
+  /**
+   * Creates a new `GtkSourceView`.
+   * By default, an empty classBuffer will be lazily created and can be
+   * retrieved with [Gtk.TextView.getBuffer].
+   * If you want to specify your own buffer, either override the
+   * vfuncGtk.TextView.create_buffer factory method, or use
+   * [GtkSource.View.newWithBuffer].
+   * Returns: a new #GtkSourceView.
+   */
+  this()
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_source_view_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+   * Creates a new #GtkSourceView widget displaying the buffer buffer.
+   * One buffer can be shared among many widgets.
+   * Params:
+   *   buffer = a #GtkSourceBuffer.
+   * Returns: a new #GtkSourceView.
+   */
+  static View newWithBuffer(Buffer buffer)
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_source_view_new_with_buffer(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!View(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
   }
 
   /**
@@ -236,6 +268,23 @@ class View : TextView
   {
     bool _retval;
     _retval = gtk_source_view_get_insert_spaces_instead_of_tabs(cast(GtkSourceView*)cPtr);
+    return _retval;
+  }
+
+  /**
+   * Gets attributes and priority for the category.
+   * Params:
+   *   category = the category.
+   *   priority = place where priority of the category will be stored.
+   * Returns: #GtkSourceMarkAttributes for the category.
+   *   The object belongs to view, so it must not be unreffed.
+   */
+  MarkAttributes getMarkAttributes(string category, out int priority)
+  {
+    GtkSourceMarkAttributes* _cretval;
+    const(char)* _category = category.toCString(No.Alloc);
+    _cretval = gtk_source_view_get_mark_attributes(cast(GtkSourceView*)cPtr, _category, cast(int*)&priority);
+    auto _retval = ObjectG.getDObject!MarkAttributes(cast(GtkSourceMarkAttributes*)_cretval, No.Take);
     return _retval;
   }
 

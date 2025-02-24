@@ -45,6 +45,20 @@ class StyleSchemePreview : Widget, Actionable
   mixin ActionableT!();
 
   /**
+   * Creates a new #GtkSourceStyleSchemePreview to preview the style scheme
+   * provided in scheme.
+   * Params:
+   *   scheme = a #GtkSourceStyleScheme
+   * Returns: a #GtkWidget
+   */
+  this(StyleScheme scheme)
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_source_style_scheme_preview_new(scheme ? cast(GtkSourceStyleScheme*)scheme.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
+  }
+
+  /**
    * Gets the #GtkSourceStyleScheme previewed by the widget.
    * Returns: a #GtkSourceStyleScheme
    */

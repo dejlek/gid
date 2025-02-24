@@ -44,4 +44,15 @@ class StyleSchemeChooserWidget : Widget, StyleSchemeChooser
   }
 
   mixin StyleSchemeChooserT!();
+
+  /**
+   * Creates a new #GtkSourceStyleSchemeChooserWidget.
+   * Returns: a new  #GtkSourceStyleSchemeChooserWidget.
+   */
+  this()
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_source_style_scheme_chooser_widget_new();
+    this(_cretval, No.Take);
+  }
 }

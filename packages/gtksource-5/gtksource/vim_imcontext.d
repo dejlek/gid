@@ -66,6 +66,13 @@ class VimIMContext : IMContext
     return getType();
   }
 
+  this()
+  {
+    GtkIMContext* _cretval;
+    _cretval = gtk_source_vim_im_context_new();
+    this(_cretval, Yes.Take);
+  }
+
   /**
    * Executes command as if it was typed into the command bar by the
    * user except that this does not emit the

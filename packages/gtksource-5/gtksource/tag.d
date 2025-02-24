@@ -31,4 +31,21 @@ class Tag : TextTag
   {
     return getType();
   }
+
+  /**
+   * Creates a `GtkSourceTag`.
+   * Configure the tag using object arguments, i.e. using [GObject.ObjectG.set].
+   * For usual cases, [GtkSource.Buffer.createSourceTag] is more convenient to
+   * use.
+   * Params:
+   *   name = tag name, or %NULL.
+   * Returns: a new `GtkSourceTag`.
+   */
+  this(string name)
+  {
+    GtkTextTag* _cretval;
+    const(char)* _name = name.toCString(No.Alloc);
+    _cretval = gtk_source_tag_new(_name);
+    this(_cretval, Yes.Take);
+  }
 }

@@ -57,6 +57,17 @@ class Map : View
   }
 
   /**
+   * Creates a new `GtkSourceMap`.
+   * Returns: a new #GtkSourceMap.
+   */
+  this()
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_source_map_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
    * Gets the propertyMap:view property, which is the view this widget is mapping.
    * Returns: a #GtkSourceView or %NULL.
    */

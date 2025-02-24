@@ -45,4 +45,15 @@ class StyleSchemeChooserButton : Button, StyleSchemeChooser
   }
 
   mixin StyleSchemeChooserT!();
+
+  /**
+   * Creates a new #GtkSourceStyleSchemeChooserButton.
+   * Returns: a new #GtkSourceStyleSchemeChooserButton.
+   */
+  this()
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_source_style_scheme_chooser_button_new();
+    this(_cretval, No.Take);
+  }
 }
