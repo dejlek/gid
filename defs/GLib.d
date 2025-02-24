@@ -8,6 +8,7 @@
 //!set record[SList][ignore] 1
 //!set record[HashTable][ignore] 1
 //!set record[HashTableIter][ignore] 1
+//!set record[Tree][ignore] 1
 
 //# Change Variant to VariantG so as not to conflict with std.variant
 //!subdtype Variant VariantG
@@ -33,11 +34,10 @@
 //!set record[Bytes].constructor[new_take][ignore] 1
 //!set function[base64_decode_inplace][ignore] 1
 
-//# Ignore functions which don't have proper closures (solutions may be possible)
+//# Ignore functions which don't have proper closures
 //!set function[atexit][ignore] 1
 //!set function[test_add_func][ignore] 1
 //!set function[test_queue_destroy][ignore] 1
-//!set record[Tree].constructor[new_full][ignore] 1
 
 //# Error conflicts with the base D Error type, rename to ErrorG
 //!subtype Error ErrorG
@@ -52,9 +52,18 @@
 //!set record[Dir][free-function] g_dir_close
 //!set record[Dir].method[close][ignore] 1
 
-//# Disable binding of unuseful and problematic structures
+//# Disable binding of unuseful API
 //!set record[Completion][ignore] 1
 //!set record[TrashStack][ignore] 1
+//!set record[LogField][ignore] 1
+//!set callback[LogWriterFunc][ignore] 1
+//!set function[log_set_writer_func][ignore] 1
+//!set function[log_structured_array][ignore] 1
+//!set function[log_writer_default][ignore] 1
+//!set function[log_writer_format_fields][ignore] 1
+//!set function[log_writer_journald][ignore] 1
+//!set function[log_writer_standard_streams][ignore] 1
+//!set function[log_writer_syslog][ignore] 1
 
 //# Disable Queue fields
 //!set record[Queue].field[head][ignore] 1

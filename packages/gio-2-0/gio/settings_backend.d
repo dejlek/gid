@@ -4,7 +4,6 @@ import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
-import glib.tree;
 import gobject.object;
 
 /**
@@ -91,19 +90,6 @@ class SettingsBackend : ObjectG
   {
     const(char)* _key = key.toCString(No.Alloc);
     g_settings_backend_changed(cast(GSettingsBackend*)cPtr, _key, originTag);
-  }
-
-  /**
-   * This call is a convenience wrapper.  It gets the list of changes from
-   * tree, computes the longest common prefix and calls
-   * [Gio.SettingsBackend.changed].
-   * Params:
-   *   tree = a #GTree containing the changes
-   *   originTag = the origin tag
-   */
-  void changedTree(Tree tree, void* originTag)
-  {
-    g_settings_backend_changed_tree(cast(GSettingsBackend*)cPtr, tree ? cast(GTree*)tree.cPtr(No.Dup) : null, originTag);
   }
 
   /**

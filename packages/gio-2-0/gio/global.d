@@ -12,7 +12,6 @@ import gio.file_mixin;
 import gio.icon;
 import gio.icon_mixin;
 import gio.input_stream;
-import gio.iomodule;
 import gio.iomodule_scope;
 import gio.ioscheduler_job;
 import gio.iostream;
@@ -1016,55 +1015,6 @@ Quark ioErrorQuark()
 {
   Quark _retval;
   _retval = g_io_error_quark();
-  return _retval;
-}
-
-/**
- * Loads all the modules in the specified directory.
- * If don't require all modules to be initialized $(LPAREN)and thus registering
- * all gtypes$(RPAREN) then you can use [Gio.Global.ioModulesScanAllInDirectory]
- * which allows delayed/lazy loading of modules.
- * Params:
- *   dirname = pathname for a directory containing modules
- *     to load.
- * Returns: a list of #GIOModules loaded
- *   from the directory,
- *   All the modules are loaded into memory, if you want to
- *   unload them $(LPAREN)enabling on-demand loading$(RPAREN) you must call
- *   [GObject.TypeModule.unuse] on all the modules. Free the list
- *   with [GLib.List.free].
- */
-IOModule[] ioModulesLoadAllInDirectory(string dirname)
-{
-  GList* _cretval;
-  const(char)* _dirname = dirname.toCString(No.Alloc);
-  _cretval = g_io_modules_load_all_in_directory(_dirname);
-  auto _retval = gListToD!(IOModule, GidOwnership.Full)(cast(GList*)_cretval);
-  return _retval;
-}
-
-/**
- * Loads all the modules in the specified directory.
- * If don't require all modules to be initialized $(LPAREN)and thus registering
- * all gtypes$(RPAREN) then you can use [Gio.Global.ioModulesScanAllInDirectory]
- * which allows delayed/lazy loading of modules.
- * Params:
- *   dirname = pathname for a directory containing modules
- *     to load.
- *   scope_ = a scope to use when scanning the modules.
- * Returns: a list of #GIOModules loaded
- *   from the directory,
- *   All the modules are loaded into memory, if you want to
- *   unload them $(LPAREN)enabling on-demand loading$(RPAREN) you must call
- *   [GObject.TypeModule.unuse] on all the modules. Free the list
- *   with [GLib.List.free].
- */
-IOModule[] ioModulesLoadAllInDirectoryWithScope(string dirname, IOModuleScope scope_)
-{
-  GList* _cretval;
-  const(char)* _dirname = dirname.toCString(No.Alloc);
-  _cretval = g_io_modules_load_all_in_directory_with_scope(_dirname, scope_ ? cast(GIOModuleScope*)scope_.cPtr : null);
-  auto _retval = gListToD!(IOModule, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }
 

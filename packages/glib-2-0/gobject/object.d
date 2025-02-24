@@ -8,7 +8,6 @@ import gobject.c.types;
 import gobject.closure;
 import gobject.dclosure;
 import gobject.param_spec;
-import gobject.type_interface;
 import gobject.types;
 import gobject.value;
 
@@ -386,85 +385,6 @@ class ObjectG
   }
 
   /**
-   * Find the #GParamSpec with the given name for an
-   * interface. Generally, the interface vtable passed in as g_iface
-   * will be the default vtable from [GObject.Global.typeDefaultInterfaceRef], or,
-   * if you know the interface has already been loaded,
-   * [GObject.Global.typeDefaultInterfacePeek].
-   * Params:
-   *   gIface = any interface vtable for the
-   *     interface, or the default vtable for the interface
-   *   propertyName = name of a property to look up.
-   * Returns: the #GParamSpec for the property of the
-   *   interface with the name property_name, or %NULL if no
-   *   such property exists.
-   */
-  static ParamSpec interfaceFindProperty(TypeInterface gIface, string propertyName)
-  {
-    GParamSpec* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = g_object_interface_find_property(gIface ? cast(GTypeInterface*)gIface.cPtr : null, _propertyName);
-    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
-    return _retval;
-  }
-
-  /**
-   * Add a property to an interface; this is only useful for interfaces
-   * that are added to GObject-derived types. Adding a property to an
-   * interface forces all objects classes with that interface to have a
-   * compatible property. The compatible property could be a newly
-   * created #GParamSpec, but normally
-   * [GObject.ObjectClass.overrideProperty] will be used so that the object
-   * class only needs to provide an implementation and inherits the
-   * property description, default value, bounds, and so forth from the
-   * interface property.
-   * This function is meant to be called from the interface's default
-   * vtable initialization function $(LPAREN)the class_init member of
-   * #GTypeInfo.$(RPAREN) It must not be called after after class_init has
-   * been called for any object types implementing this interface.
-   * If pspec is a floating reference, it will be consumed.
-   * Params:
-   *   gIface = any interface vtable for the
-   *     interface, or the default
-   *     vtable for the interface.
-   *   pspec = the #GParamSpec for the new property
-   */
-  static void interfaceInstallProperty(TypeInterface gIface, ParamSpec pspec)
-  {
-    g_object_interface_install_property(gIface ? cast(GTypeInterface*)gIface.cPtr : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
-  }
-
-  /**
-   * Lists the properties of an interface.Generally, the interface
-   * vtable passed in as g_iface will be the default vtable from
-   * [GObject.Global.typeDefaultInterfaceRef], or, if you know the interface has
-   * already been loaded, [GObject.Global.typeDefaultInterfacePeek].
-   * Params:
-   *   gIface = any interface vtable for the
-   *     interface, or the default vtable for the interface
-   * Returns: a
-   *   pointer to an array of pointers to #GParamSpec
-   *   structures. The paramspecs are owned by GLib, but the
-   *   array should be freed with [GLib.DGLibGlobal.gfree] when you are done with
-   *   it.
-   */
-  static ParamSpec[] interfaceListProperties(TypeInterface gIface)
-  {
-    GParamSpec** _cretval;
-    uint _cretlength;
-    _cretval = g_object_interface_list_properties(gIface ? cast(GTypeInterface*)gIface.cPtr : null, &_cretlength);
-    ParamSpec[] _retval;
-
-    if (_cretval)
-    {
-      _retval = new ParamSpec[_cretlength];
-      foreach (i; 0 .. _cretlength)
-        _retval[i] = new ParamSpec(cast(void*)_cretval[i], No.Take);
-    }
-    return _retval;
-  }
-
-  /**
    * Creates a binding between source_property on source and target_property
    * on target.
    * Whenever the source_property is changed the target_property is
@@ -747,7 +667,7 @@ class ObjectG
    * strings to pointers.  This function lets you set an association.
    * If the object already had an association with that name,
    * the old association will be destroyed.
-   * Internally, the key is converted to a #GQuark using [GLib.DGLibGlobal.quarkFromString].
+   * Internally, the key is converted to a #GQuark using [GLib.Global.quarkFromString].
    * This means a copy of key is kept permanently $(LPAREN)even after object has been
    * finalized$(RPAREN) — so it is recommended to only use a small, bounded set of values
    * for key in your program, to avoid the #GQuark storage growing unbounded.

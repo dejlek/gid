@@ -6,9 +6,6 @@ import arrowflight.types;
 import gid.gid;
 
 
-// Structs
-alias ServableInterface = GAFlightServableInterface*;
-
 // Callbacks
 alias HeaderFunc = void delegate(string name, string value);
 

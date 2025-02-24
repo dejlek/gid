@@ -15,11 +15,7 @@ import gobject.flags_value;
 import gobject.object;
 import gobject.param_spec;
 import gobject.signal_query;
-import gobject.type_info;
 import gobject.type_instance;
-import gobject.type_interface;
-import gobject.type_plugin;
-import gobject.type_plugin_mixin;
 import gobject.type_query;
 import gobject.types;
 import gobject.value;
@@ -97,39 +93,6 @@ void boxedFree(GType boxedType, void* boxed)
 void clearSignalHandler(ref gulong handlerIdPtr, ObjectG instance)
 {
   g_clear_signal_handler(cast(gulong*)&handlerIdPtr, instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
-}
-
-/**
- * This function is meant to be called from the `complete_type_info`
- * function of a #GTypePlugin implementation, as in the following
- * example:
- * |[<!-- language\="C" -->
- * static void
- * my_enum_complete_type_info $(LPAREN)GTypePlugin     *plugin,
- * GType            g_type,
- * GTypeInfo       *info,
- * GTypeValueTable *value_table$(RPAREN)
- * {
- * static const GEnumValue values[] \= {
- * { MY_ENUM_FOO, "MY_ENUM_FOO", "foo" },
- * { MY_ENUM_BAR, "MY_ENUM_BAR", "bar" },
- * { 0, NULL, NULL }
- * };
- * g_enum_complete_type_info $(LPAREN)type, info, values$(RPAREN);
- * }
- * ]|
- * Params:
- *   gEnumType = the type identifier of the type being completed
- *   info = the #GTypeInfo struct to be filled in
- *   constValues = An array of #GEnumValue structs for the possible
- *     enumeration values. The array is terminated by a struct with all
- *     members being 0.
- */
-void enumCompleteTypeInfo(GType gEnumType, out TypeInfoG info, EnumValue constValues)
-{
-  GTypeInfo _info;
-  g_enum_complete_type_info(gEnumType, &_info, constValues ? cast(GEnumValue*)constValues.cPtr : null);
-  info = new TypeInfoG(cast(void*)&_info);
 }
 
 /**
@@ -220,24 +183,6 @@ string enumToString(GType gEnumType, int value)
   _cretval = g_enum_to_string(gEnumType, value);
   string _retval = _cretval.fromCString(Yes.Free);
   return _retval;
-}
-
-/**
- * This function is meant to be called from the complete_type_info$(LPAREN)$(RPAREN)
- * function of a #GTypePlugin implementation, see the example for
- * [GObject.Global.enumCompleteTypeInfo] above.
- * Params:
- *   gFlagsType = the type identifier of the type being completed
- *   info = the #GTypeInfo struct to be filled in
- *   constValues = An array of #GFlagsValue structs for the possible
- *     enumeration values. The array is terminated by a struct with all
- *     members being 0.
- */
-void flagsCompleteTypeInfo(GType gFlagsType, out TypeInfoG info, FlagsValue constValues)
-{
-  GTypeInfo _info;
-  g_flags_complete_type_info(gFlagsType, &_info, constValues ? cast(GFlagsValue*)constValues.cPtr : null);
-  info = new TypeInfoG(cast(void*)&_info);
 }
 
 /**
@@ -1628,35 +1573,6 @@ int typeAddInstancePrivate(GType classType, size_t privateSize)
 }
 
 /**
- * Adds interface_type to the dynamic instance_type. The information
- * contained in the #GTypePlugin structure pointed to by plugin
- * is used to manage the relationship.
- * Params:
- *   instanceType = #GType value of an instantiatable type
- *   interfaceType = #GType value of an interface type
- *   plugin = #GTypePlugin structure to retrieve the #GInterfaceInfo from
- */
-void typeAddInterfaceDynamic(GType instanceType, GType interfaceType, TypePlugin plugin)
-{
-  g_type_add_interface_dynamic(instanceType, interfaceType, plugin ? cast(GTypePlugin*)(cast(ObjectG)plugin).cPtr(No.Dup) : null);
-}
-
-/**
- * Adds interface_type to the static instance_type.
- * The information contained in the #GInterfaceInfo structure
- * pointed to by info is used to manage the relationship.
- * Params:
- *   instanceType = #GType value of an instantiatable type
- *   interfaceType = #GType value of an interface type
- *   info = #GInterfaceInfo structure for this
- *     $(LPAREN)instance_type, interface_type$(RPAREN) combination
- */
-void typeAddInterfaceStatic(GType instanceType, GType interfaceType, InterfaceInfo info)
-{
-  g_type_add_interface_static(instanceType, interfaceType, &info);
-}
-
-/**
  * Private helper function to aid implementation of the
  * G_TYPE_CHECK_INSTANCE$(LPAREN)$(RPAREN) macro.
  * Params:
@@ -1725,62 +1641,6 @@ GType[] typeChildren(GType type)
     _retval = cast(GType[] )_cretval[0 .. _cretlength];
   }
   return _retval;
-}
-
-/**
- * If the interface type g_type is currently in use, returns its
- * default interface vtable.
- * Params:
- *   gType = an interface type
- * Returns: the default
- *   vtable for the interface, or %NULL if the type is not currently
- *   in use
- */
-TypeInterface typeDefaultInterfacePeek(GType gType)
-{
-  GTypeInterface* _cretval;
-  _cretval = g_type_default_interface_peek(gType);
-  auto _retval = _cretval ? new TypeInterface(cast(GTypeInterface*)_cretval) : null;
-  return _retval;
-}
-
-/**
- * Increments the reference count for the interface type g_type,
- * and returns the default interface vtable for the type.
- * If the type is not currently in use, then the default vtable
- * for the type will be created and initialized by calling
- * the base interface init and default vtable init functions for
- * the type $(LPAREN)the base_init and class_init members of #GTypeInfo$(RPAREN).
- * Calling [GObject.Global.typeDefaultInterfaceRef] is useful when you
- * want to make sure that signals and properties for an interface
- * have been installed.
- * Params:
- *   gType = an interface type
- * Returns: the default
- *   vtable for the interface; call [GObject.Global.typeDefaultInterfaceUnref]
- *   when you are done using the interface.
- */
-TypeInterface typeDefaultInterfaceRef(GType gType)
-{
-  GTypeInterface* _cretval;
-  _cretval = g_type_default_interface_ref(gType);
-  auto _retval = _cretval ? new TypeInterface(cast(GTypeInterface*)_cretval) : null;
-  return _retval;
-}
-
-/**
- * Decrements the reference count for the type corresponding to the
- * interface default vtable g_iface. If the type is dynamic, then
- * when no one is using the interface and all references have
- * been released, the finalize function for the interface's default
- * vtable $(LPAREN)the class_finalize member of #GTypeInfo$(RPAREN) will be called.
- * Params:
- *   gIface = the default vtable
- *     structure for an interface, as returned by [GObject.Global.typeDefaultInterfaceRef]
- */
-void typeDefaultInterfaceUnref(TypeInterface gIface)
-{
-  g_type_default_interface_unref(gIface ? cast(GTypeInterface*)gIface.cPtr : null);
 }
 
 /**
@@ -1890,21 +1750,6 @@ int typeGetInstanceCount(GType type)
 {
   int _retval;
   _retval = g_type_get_instance_count(type);
-  return _retval;
-}
-
-/**
- * Returns the #GTypePlugin structure for type.
- * Params:
- *   type = #GType to retrieve the plugin for
- * Returns: the corresponding plugin
- *   if type is a dynamic type, %NULL otherwise
- */
-TypePlugin typeGetPlugin(GType type)
-{
-  GTypePlugin* _cretval;
-  _cretval = g_type_get_plugin(type);
-  auto _retval = ObjectG.getDObject!TypePlugin(cast(GTypePlugin*)_cretval, No.Take);
   return _retval;
 }
 
@@ -2100,72 +1945,6 @@ void typeQuery(GType type, out TypeQuery query)
   GTypeQuery _query;
   g_type_query(type, &_query);
   query = new TypeQuery(cast(void*)&_query);
-}
-
-/**
- * Registers type_name as the name of a new dynamic type derived from
- * parent_type.  The type system uses the information contained in the
- * #GTypePlugin structure pointed to by plugin to manage the type and its
- * instances $(LPAREN)if not abstract$(RPAREN).  The value of flags determines the nature
- * $(LPAREN)e.g. abstract or not$(RPAREN) of the type.
- * Params:
- *   parentType = type from which this type will be derived
- *   typeName = 0-terminated string used as the name of the new type
- *   plugin = #GTypePlugin structure to retrieve the #GTypeInfo from
- *   flags = bitwise combination of #GTypeFlags values
- * Returns: the new type identifier or %G_TYPE_INVALID if registration failed
- */
-GType typeRegisterDynamic(GType parentType, string typeName, TypePlugin plugin, TypeFlags flags)
-{
-  GType _retval;
-  const(char)* _typeName = typeName.toCString(No.Alloc);
-  _retval = g_type_register_dynamic(parentType, _typeName, plugin ? cast(GTypePlugin*)(cast(ObjectG)plugin).cPtr(No.Dup) : null, flags);
-  return _retval;
-}
-
-/**
- * Registers type_id as the predefined identifier and type_name as the
- * name of a fundamental type. If type_id is already registered, or a
- * type named type_name is already registered, the behaviour is undefined.
- * The type system uses the information contained in the #GTypeInfo structure
- * pointed to by info and the #GTypeFundamentalInfo structure pointed to by
- * finfo to manage the type and its instances. The value of flags determines
- * additional characteristics of the fundamental type.
- * Params:
- *   typeId = a predefined type identifier
- *   typeName = 0-terminated string used as the name of the new type
- *   info = #GTypeInfo structure for this type
- *   finfo = #GTypeFundamentalInfo structure for this type
- *   flags = bitwise combination of #GTypeFlags values
- * Returns: the predefined type identifier
- */
-GType typeRegisterFundamental(GType typeId, string typeName, TypeInfoG info, TypeFundamentalInfo finfo, TypeFlags flags)
-{
-  GType _retval;
-  const(char)* _typeName = typeName.toCString(No.Alloc);
-  _retval = g_type_register_fundamental(typeId, _typeName, info ? cast(GTypeInfo*)info.cPtr : null, &finfo, flags);
-  return _retval;
-}
-
-/**
- * Registers type_name as the name of a new static type derived from
- * parent_type. The type system uses the information contained in the
- * #GTypeInfo structure pointed to by info to manage the type and its
- * instances $(LPAREN)if not abstract$(RPAREN). The value of flags determines the nature
- * $(LPAREN)e.g. abstract or not$(RPAREN) of the type.
- * Params:
- *   parentType = type from which this type will be derived
- *   typeName = 0-terminated string used as the name of the new type
- *   info = #GTypeInfo structure for this type
- *   flags = bitwise combination of #GTypeFlags values
- * Returns: the new type identifier
- */
-GType typeRegisterStatic(GType parentType, string typeName, TypeInfoG info, TypeFlags flags)
-{
-  GType _retval;
-  const(char)* _typeName = typeName.toCString(No.Alloc);
-  _retval = g_type_register_static(parentType, _typeName, info ? cast(GTypeInfo*)info.cPtr : null, flags);
-  return _retval;
 }
 
 /**

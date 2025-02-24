@@ -4,26 +4,26 @@
 [Summary]
 Package      |       Structs        |        Funcs         |       Signals        |        Fields        |
              |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |
-Arrow        |  300    0    0   100 |  972   54    0   100 |    0    0    0   100 |  588    0    0   100 |
+Arrow        |  296    0    0   100 |  972   54    0   100 |    0    0    0   100 |  588    0    0   100 |
 ArrowDataset |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |   46    0    0   100 |
-ArrowFlight  |   33    0    0   100 |   61    0    0   100 |    0    0    0   100 |   64    0    0   100 |
-Atk          |   40    0    0   100 |  220   27    7  96.9 |   41    0    0   100 |  282    0    4  98.6 |
-GLib         |   85    0    0   100 | 1350  610   14  99.0 |    0    0    0   100 |  215   16   33  86.7 |
+ArrowFlight  |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |   64    0    0   100 |
+Atk          |   40    0    0   100 |  220   25    7  96.9 |   41    0    0   100 |  282    0    4  98.6 |
+GLib         |   83    0    0   100 | 1353  610    5  99.6 |    0    0    0   100 |  216   16   32  87.1 |
 GModule      |    3    0    0   100 |    8    6    0   100 |    0    0    0   100 |    0    0    0   100 |
-GObject      |   59    1    0   100 |  302  158    7  97.7 |    3    0    0   100 |  226    8   15  93.8 |
-Gdk          |   69    0    0   100 |  478   34    5  99.0 |   35    0    0   100 |   32    0    1  97.0 |
+GObject      |   54    0    0   100 |  291  156    1  99.7 |    3    0    0   100 |  235    7    6  97.5 |
+Gdk          |   64    0    0   100 |  478   34    5  99.0 |   35    0    0   100 |   32    0    1  97.0 |
 GdkPixbuf    |   12    0    0   100 |   96   12    1  99.0 |    4    0    0   100 |   40    4    4  90.9 |
 Gid          |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-Gio          |  266    2    0   100 | 1727  162   19  98.9 |   80    0    1  98.8 |  895  195   22  97.6 |
+Gio          |  244    0    0   100 | 1724  158   18  99.0 |   80    0    1  98.8 |  895  195   22  97.6 |
 Graphene     |   21    0    0   100 |  367   43    0   100 |    0    0    0   100 |   40    0    0   100 |
 Gsk          |   51    0    0   100 |  256   24   14  94.8 |    0    0    0   100 |   13    0    2  86.7 |
-Gtk          |  355    0    0   100 | 3588  115   15  99.6 |  342    1    3  99.1 |  605   95    5  99.2 |
-GtkSource    |   54    0    0   100 |  437   10    9  98.0 |   29    0    1  96.7 |   93   20    1  98.9 |
+Gtk          |  340    0    0   100 | 3588  113   15  99.6 |  342    1    3  99.1 |  605   95    5  99.2 |
+GtkSource    |   49    0    0   100 |  437   10    9  98.0 |   29    0    1  96.7 |   94   20    0   100 |
 HarfBuzz     |   35    0    0   100 |  407   52   42  90.6 |    0    0    0   100 |   71   28   11  86.6 |
-Pango        |   44    0    0   100 |  387   44   13  96.8 |    0    0    0   100 |  162   11    8  95.3 |
+Pango        |   44    0    0   100 |  387   43   13  96.8 |    0    0    0   100 |  162   11    8  95.3 |
 PangoCairo   |    4    0    0   100 |   26    5    0   100 |    0    0    0   100 |    0    0    0   100 |
 Parquet      |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |   28    0    0   100 |
-Vte          |    8    0    0   100 |  157    9    0   100 |   28    0    0   100 |   36    0    0   100 |
+Vte          |    8    0    0   100 |  157    6    0   100 |   28    0    0   100 |   36    0    0   100 |
 cairo        |   20    0    1  95.2 |  328   56    2  99.4 |    0    0    0   100 |   38    0    1  97.4 |
 freetype2    |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 
@@ -40,25 +40,10 @@ Atk.Text.get_default_attributes
 Atk.Text.get_run_attributes
 GLib.Global.environ_setenv
 GLib.Global.environ_unsetenv
-GLib.Global.log_set_writer_func
-GLib.Global.log_structured_array
-GLib.Global.log_writer_default
-GLib.Global.log_writer_format_fields
-GLib.Global.log_writer_journald
-GLib.Global.log_writer_standard_streams
-GLib.Global.log_writer_syslog
 GLib.Global.parse_debug_string
 GLib.OptionContext.parse
 GLib.OptionContext.parse_strv
-GLib.Tree.search
-GLib.Tree.search_node
-GObject.Global.boxed_type_register_static
-GObject.Global.signal_override_class_handler
-GObject.Global.signal_set_va_marshaller
-GObject.Global.type_check_class_is_a
-GObject.Global.type_name_from_class
 GObject.ObjectG.newv
-GObject.TypeInterface.peek
 Gdk.ContentProvider.new_union
 Gdk.Global.content_register_deserializer
 Gdk.Global.content_register_serializer
@@ -78,7 +63,6 @@ Gio.DtlsConnection.get_channel_binding_data
 Gio.Initable.newv
 Gio.MemoryInputStream.new_from_data
 Gio.MemoryInputStream.add_data
-Gio.SettingsBackend.flatten_tree
 Gio.SimpleActionGroup.add_entries
 Gio.Socket.receive_messages
 Gio.Socket.send_messages
@@ -212,7 +196,6 @@ GLib.IOChannel.close_on_unref
 GLib.IOChannel.is_readable
 GLib.IOChannel.is_writeable
 GLib.IOChannel.is_seekable
-GLib.LogField.value
 GLib.Node.data
 GLib.Once.retval
 GLib.OptionEntry.arg_data
@@ -229,17 +212,8 @@ GObject.CClosure.callback
 GObject.ClosureNotifyData.data
 GObject.EnumClass.g_type_class
 GObject.FlagsClass.g_type_class
-GObject.InterfaceInfo.interface_data
 GObject.SignalQuery.param_types
 GObject.TypeCValue.v_pointer
-GObject.TypeInfoG.base_init
-GObject.TypeInfoG.base_finalize
-GObject.TypeInfoG.class_init
-GObject.TypeInfoG.class_finalize
-GObject.TypeInfoG.class_data
-GObject.TypeInfoG.instance_init
-GObject.TypeModule.type_infos
-GObject.TypeModule.interface_infos
 Gdk.TimeCoord.axes
 GdkPixbuf.PixbufFormat.mime_types
 GdkPixbuf.PixbufFormat.extensions
@@ -274,7 +248,6 @@ Gtk.RequestedSize.data
 Gtk.TreeIter.user_data
 Gtk.TreeIter.user_data2
 Gtk.TreeIter.user_data3
-GtkSource.CompletionProviderInterface.populate
 HarfBuzz.ColorLine.data
 HarfBuzz.ColorLine.get_color_stops_user_data
 HarfBuzz.ColorLine.get_extend_user_data

@@ -6,8 +6,8 @@
 //# Rename Text.remove_selection which conflicts with Selection.remove_selection which are both implemented by NoOpObject
 //!set interface[Text].method[remove_selection][name] text_remove_selection
 
-//!set interface[Text].function[free_ranges][disable] 1
-//!set record[Attribute].function[set_free][disable] 1
+//!set interface[Text].function[free_ranges][ignore] 1
+//!set record[Attribute].function[set_free][ignore] 1
 
 //# Set arrays to zero terminated
 //!set interface[Text].method[get_bounded_ranges].return-value.array[][zero-terminated] 1

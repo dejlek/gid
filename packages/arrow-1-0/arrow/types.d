@@ -30,12 +30,6 @@ alias TimeUnit = GArrowTimeUnit;
 alias Type = GArrowType;
 alias UTF8NormalizeForm = GArrowUTF8NormalizeForm;
 
-// Structs
-alias FileInterface = GArrowFileInterface*;
-alias ReadableInterface = GArrowReadableInterface*;
-alias WritableFileInterface = GArrowWritableFileInterface*;
-alias WritableInterface = GArrowWritableInterface*;
-
 /**
  * The major version.
  */

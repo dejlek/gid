@@ -186,3 +186,4 @@
 //# Disable all Class and Iface records
 //!set *record[*Class][ignore] 1
 //!set *record[*Iface][ignore] 1
+//!set *record[*Interface][ignore] 1

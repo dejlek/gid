@@ -29,8 +29,8 @@
 //!set class[IMContext].method[set_surrounding_with_selection].parameters.parameter[text].type '<array length="1" c:type="const gchar*"><type name="char" c:type="char"/></array>'
 
 //!class CustomSorter
-//!set class[CustomSorter].constructor[new][disable] 1
-//!set class[CustomSorter].method[set_sort_func][disable] 1
+//!set class[CustomSorter].constructor[new][ignore] 1
+//!set class[CustomSorter].method[set_sort_func][ignore] 1
   import gobject.object;
 
   // Define a sort delegate that takes ObjectG objects, instead of the CompareDataFunc which is passed raw ObjectC pointers

@@ -13,13 +13,35 @@
 //# Remove duplicate IOCondition definition
 //!del bitfield[IOCondition]
 
-//# Disable TypePlugin.use() and unuse() since they conflict with IOModule
-//!set interface[TypePlugin].method[use][disable] 1
-//!set interface[TypePlugin].method[unuse][disable] 1
+//# Ignore some API items which aren't useful for D binding
+//!set class[TypeModule][ignore] 1
+//!set interface[TypePlugin][ignore] 1
+//!set record[TypeInterface][ignore] 1
+//!set record[TypeInfo][ignore] 1
+//!set record[InterfaceInfo][ignore] 1
+//!set function[enum_complete_type_info][ignore] 1
+//!set function[flags_complete_type_info][ignore] 1
+//!set function[type_add_interface_dynamic][ignore] 1
+//!set function[type_get_plugin][ignore] 1
+//!set function[type_register_dynamic][ignore] 1
+//!set function[type_register_fundamental][ignore] 1
+//!set function[type_register_static][ignore] 1
+//!set function[type_default_interface_peek][ignore] 1
+//!set function[type_default_interface_ref][ignore] 1
+//!set function[type_default_interface_unref][ignore] 1
+//!set function[type_add_interface_static][ignore] 1
+//!set class[Object].function[interface_find_property][ignore] 1
+//!set class[Object].function[interface_install_property][ignore] 1
+//!set class[Object].function[interface_list_properties][ignore] 1
+//!set function[boxed_type_register_static][ignore] 1
+//!set function[signal_override_class_handler][ignore] 1
+//!set function[signal_set_va_marshaller][ignore] 1
+//!set function[type_check_class_is_a][ignore] 1
+//!set function[type_name_from_class][ignore] 1
 
 //# Add c:type for the _Value__data__union used within GValue
 //!set union[_Value__data__union][c:type] _Value__data__union
-//!set union[_Value__data__union][disable] 1
+//!set union[_Value__data__union][ignore] 1
 //!set record[Value].field[data].array.type[_Value__data__union][c:type] _Value__data__union
 //!set record[Value].field[data][private] 1
 
@@ -27,12 +49,11 @@
 //!del function[variant_get_gtype]
 
 //# Disable WeakRef priv union field
-//!set record[WeakRef].union[priv][disable] 1
+//!set record[WeakRef].union[priv][ignore] 1
 
 //# Rename Object and TypeInfo which conflict with the base D Object type
 //!subctype GObject ObjectC
 //!subdtype Object ObjectG
-//!subdtype TypeInfo TypeInfoG
 //!subdtype Type GType
 
 //# Set ref/unref of ParamSpec

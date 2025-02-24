@@ -3,8 +3,14 @@
 //# Rename Application to ApplicationGio to avoid conflicts with Gtk.Application
 //!subdtype Application ApplicationGio
 
-//!set record[IOExtension][disable] 1
-//!set record[IOExtensionPoint][disable] 1
+//# Ignore APIs which aren't useful to D binding
+//!set record[IOExtension][ignore] 1
+//!set record[IOExtensionPoint][ignore] 1
+//!set class[IOModule][ignore] 1
+//!set class[SettingsBackend].function[flatten_tree][ignore] 1
+//!set class[SettingsBackend].method[changed_tree][ignore] 1
+//!set function[io_modules_load_all_in_directory][ignore] 1
+//!set function[io_modules_load_all_in_directory_with_scope][ignore] 1
 
 //# DataInputStream.read_byte() conflicts with parent BufferedInputStream.read_byte()
 //!set class[DataInputStream].method[read_byte][name] read_byte_data
@@ -68,12 +74,12 @@
   }
 
 //# Disable ListStore.findWithEqualFuncFull with unnecessary additional user_data
-//!set class[ListStore].method[find_with_equal_func_full][disable] 1
+//!set class[ListStore].method[find_with_equal_func_full][ignore] 1
 
 //# Override to use delegates with ObjectG arguments
-//!set class[ListStore].method[find_with_equal_func][disable] 1
-//!set class[ListStore].method[insert_sorted][disable] 1
-//!set class[ListStore].method[sort][disable] 1
+//!set class[ListStore].method[find_with_equal_func][ignore] 1
+//!set class[ListStore].method[insert_sorted][ignore] 1
+//!set class[ListStore].method[sort][ignore] 1
 //!class ListStore
 
   //# Override findWithEqualFunc to handle ObjectG parameters instead of ObjectC pointers

@@ -42,13 +42,9 @@ alias TouchpadGesturePhase = GdkTouchpadGesturePhase;
 alias VulkanError = GdkVulkanError;
 
 // Structs
-alias DevicePadInterface = GdkDevicePadInterface*;
-alias DragSurfaceInterface = GdkDragSurfaceInterface*;
 alias FrameClockPrivate = GdkFrameClockPrivate*;
 alias KeymapKey = GdkKeymapKey;
-alias PopupInterface = GdkPopupInterface*;
 alias TimeCoord = GdkTimeCoord;
-alias ToplevelInterface = GdkToplevelInterface*;
 
 // Callbacks
 alias ContentDeserializeFunc = void delegate(ContentDeserializer deserializer);
