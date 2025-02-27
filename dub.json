@@ -25,6 +25,7 @@
     ":pango1": "*",
     ":pangocairo1": "*",
     ":parquet1": "*",
+    ":rsvg2": "*",
     ":vte3": "*"
   },
   "subPackages": [
@@ -47,6 +48,7 @@
     "packages/pango1/",
     "packages/pangocairo1/",
     "packages/parquet1/",
+    "packages/rsvg2/",
     "packages/vte3/"
   ]
 }

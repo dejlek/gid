@@ -1,0 +1,16 @@
+{
+  "name": "rsvg2",
+  "description": "Rsvg library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["rsvg"],
+  "dependencies": {
+    "gid:cairo1": "*",
+    "gid:gdkpixbuf2": "*",
+    "gid:gio2": "*",
+    "gid:glib2": "*"
+  }
+}

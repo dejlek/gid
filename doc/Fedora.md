@@ -38,3 +38,18 @@ sudo dnf install vte291-gtk4-devel
 
 The command above will bring the `/usr/share/gir-1.0/Vte-3.91.gir` GIR file.
 Quite confusing, but that is how it is on Fedora 40.
+
+# RSvg
+
+Librsvg is a library to render SVG files using cairo as a rendering engine. For example, you can 
+render SVG to in-memory RGBA surfaces, or to PDF streams.
+
+Trivia: rsvg stands for "Resplendent SVG".
+
+Website: https://wiki.gnome.org/Projects/LibRsvg
+
+In order to use gid:rsvg2 you need the following:
+
+```
+sudo dnf install librsvg2-devel
+```
