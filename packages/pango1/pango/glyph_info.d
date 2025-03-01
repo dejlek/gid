@@ -1,6 +1,6 @@
 module pango.glyph_info;
 
-import gid.gid;
+import gid.global;
 import pango.c.functions;
 import pango.c.types;
 import pango.types;

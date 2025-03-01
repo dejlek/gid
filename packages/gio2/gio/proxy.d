@@ -1,7 +1,7 @@
 module gio.proxy;
 
 public import gio.proxy_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -19,7 +19,7 @@ import gobject.object;
  * The extensions are named after their proxy protocol name. As an
  * example, a SOCKS5 proxy implementation can be retrieved with the
  * name `socks5` using the function
- * [Gio.IOExtensionPoint.getExtensionByName].
+ * [gio.ioextension_point.IOExtensionPoint.getExtensionByName].
  */
 interface Proxy
 {
@@ -63,7 +63,7 @@ interface Proxy
   IOStream connect(IOStream connection, ProxyAddress proxyAddress, Cancellable cancellable);
 
   /**
-   * Asynchronous version of [Gio.Proxy.connect].
+   * Asynchronous version of [gio.proxy.Proxy.connect].
    * Params:
    *   connection = a #GIOStream
    *   proxyAddress = a #GProxyAddress
@@ -73,7 +73,7 @@ interface Proxy
   void connectAsync(IOStream connection, ProxyAddress proxyAddress, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * See [Gio.Proxy.connect].
+   * See [gio.proxy.Proxy.connect].
    * Params:
    *   result = a #GAsyncResult
    * Returns: a #GIOStream.
@@ -87,7 +87,7 @@ interface Proxy
    * implementing such a protocol. When %FALSE is returned, the caller
    * should resolve the destination hostname first, and then pass a
    * #GProxyAddress containing the stringified IP address to
-   * [Gio.Proxy.connect] or [Gio.Proxy.connectAsync].
+   * [gio.proxy.Proxy.connect] or [gio.proxy.Proxy.connectAsync].
    * Returns: %TRUE if hostname resolution is supported.
    */
   bool supportsHostname();

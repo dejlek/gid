@@ -1,7 +1,7 @@
 module gtk.section_model_mixin;
 
 public import gtk.section_model_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -16,7 +16,7 @@ public import gtk.types;
  * of a model they are wrapping.
  * When the section groupings of a model change, the model will emit the
  * signal@Gtk.SectionModel::sections-changed signal by calling the
- * [Gtk.SectionModel.sectionsChanged] function. All sections in the given range
+ * [gtk.section_model.SectionModel.sectionsChanged] function. All sections in the given range
  * then need to be queried again.
  * The signal@Gio.ListModel::items-changed signal has the same effect, all sections in
  * that range are invalidated, too.

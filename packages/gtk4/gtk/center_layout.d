@@ -1,6 +1,6 @@
 module gtk.center_layout;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;

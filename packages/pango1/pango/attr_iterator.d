@@ -1,6 +1,6 @@
 module pango.attr_iterator;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.attribute;
 import pango.c.functions;
@@ -11,9 +11,9 @@ import pango.types;
 
 /**
  * A `PangoAttrIterator` is used to iterate through a `PangoAttrList`.
- * A new iterator is created with [Pango.AttrList.getIterator].
+ * A new iterator is created with [pango.attr_list.AttrList.getIterator].
  * Once the iterator is created, it can be advanced through the style
- * changes in the text using [Pango.AttrIterator.next]. At each
+ * changes in the text using [pango.attr_iterator.AttrIterator.next]. At each
  * style change, the range of the current style segment and the attributes
  * currently in effect can be queried.
  */
@@ -45,7 +45,7 @@ class AttrIterator : Boxed
    * Copy a `PangoAttrIterator`.
    * Returns: the newly allocated
    *   `PangoAttrIterator`, which should be freed with
-   *   [Pango.AttrIterator.destroy]
+   *   [pango.attr_iterator.AttrIterator.destroy]
    */
   AttrIterator copy()
   {
@@ -87,8 +87,8 @@ class AttrIterator : Boxed
    * Gets a list of all attributes at the current position of the
    * iterator.
    * Returns: a list of all attributes for the current range. To free
-   *   this value, call [Pango.Attribute.destroy] on each
-   *   value and [GLib.SList.free] on the list.
+   *   this value, call [pango.attribute.Attribute.destroy] on each
+   *   value and [glib.slist.SList.free] on the list.
    */
   Attribute[] getAttrs()
   {
@@ -104,7 +104,7 @@ class AttrIterator : Boxed
    * Params:
    *   desc = a `PangoFontDescription` to fill in with the current
    *     values. The family name in this structure will be set using
-   *     [Pango.FontDescription.setFamilyStatic] using
+   *     [pango.font_description.FontDescription.setFamilyStatic] using
    *     values from an attribute in the `PangoAttrList` associated
    *     with the iterator, so if you plan to keep it around, you
    *     must call:
@@ -115,7 +115,7 @@ class AttrIterator : Boxed
    *     at the the current position; only the highest priority
    *     value of each attribute will be added to this list. In
    *     order to free this value, you must call
-   *     [Pango.Attribute.destroy] on each member.
+   *     [pango.attribute.Attribute.destroy] on each member.
    */
   void getFont(FontDescription desc, out PgLanguage language, out Attribute[] extraAttrs)
   {

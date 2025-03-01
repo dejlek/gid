@@ -1,6 +1,6 @@
 module gtk.slice_list_model;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -69,7 +69,7 @@ class SliceListModel : ObjectG, ListModel, SectionModel
   }
 
   /**
-   * Gets the offset set via [Gtk.SliceListModel.setOffset].
+   * Gets the offset set via [gtk.slice_list_model.SliceListModel.setOffset].
    * Returns: The offset
    */
   uint getOffset()
@@ -80,7 +80,7 @@ class SliceListModel : ObjectG, ListModel, SectionModel
   }
 
   /**
-   * Gets the size set via [Gtk.SliceListModel.setSize].
+   * Gets the size set via [gtk.slice_list_model.SliceListModel.setSize].
    * Returns: The size
    */
   uint getSize()

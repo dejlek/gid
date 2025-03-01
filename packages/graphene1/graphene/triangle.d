@@ -1,6 +1,6 @@
 module graphene.triangle;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.box;
 import graphene.c.functions;
@@ -47,7 +47,7 @@ class Triangle : Boxed
    * Allocates a new #graphene_triangle_t.
    * The contents of the returned structure are undefined.
    * Returns: the newly allocated #graphene_triangle_t
-   *   structure. Use [Graphene.Triangle.free] to free the resources
+   *   structure. Use [graphene.triangle.Triangle.free] to free the resources
    *   allocated by this function
    */
   static Triangle alloc()
@@ -203,7 +203,7 @@ class Triangle : Boxed
    * The UV coordinates will be placed in the res vector:
    * - `res.x \= u`
    * - `res.y \= v`
-   * See also: [Graphene.Triangle.getBarycoords]
+   * See also: [graphene.triangle.Triangle.getBarycoords]
    * Params:
    *   p = a #graphene_point3d_t
    *   uvA = the UV coordinates of the first point

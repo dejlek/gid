@@ -1,6 +1,6 @@
 module gtk.application_window;
 
-import gid.gid;
+import gid.global;
 import gio.action_group;
 import gio.action_group_mixin;
 import gio.action_map;
@@ -31,14 +31,14 @@ import gtk.window;
  * Notably, `GtkApplicationWindow` can handle an application menubar.
  * This class implements the `GActionGroup` and `GActionMap` interfaces,
  * to let you add window-specific actions that will be exported by the
- * associated [Gtk.Application], together with its application-wide
+ * associated [gtk.application.Application], together with its application-wide
  * actions. Window-specific actions are prefixed with the “win.”
  * prefix and application-wide actions are prefixed with the “app.”
  * prefix. Actions must be addressed with the prefixed name when
  * referring to them from a `GMenuModel`.
  * Note that widgets that are placed inside a `GtkApplicationWindow`
  * can also activate these actions, if they implement the
- * [Gtk.Actionable] interface.
+ * [gtk.actionable.Actionable] interface.
  * The settings property@Gtk.Settings:gtk-shell-shows-app-menu and
  * property@Gtk.Settings:gtk-shell-shows-menubar tell GTK whether the
  * desktop environment is showing the application menu and menubar
@@ -52,12 +52,12 @@ import gtk.window;
  * desktop environment does not display the application menu, then
  * it will automatically be included in the menubar or in the windows
  * client-side decorations.
- * See [Gtk.PopoverMenu] for information about the XML language
+ * See [gtk.popover_menu.PopoverMenu] for information about the XML language
  * used by `GtkBuilder` for menu models.
- * See also: [Gtk.Application.setMenubar].
+ * See also: [gtk.application.Application.setMenubar].
  * ## A GtkApplicationWindow with a menubar
  * The code sample below shows how to set up a `GtkApplicationWindow`
- * with a menu bar defined on the [Gtk.Application]:
+ * with a menu bar defined on the [gtk.application.Application]:
  * ```c
  * GtkApplication *app \= gtk_application_new $(LPAREN)"org.gtk.test", 0$(RPAREN);
  * GtkBuilder *builder \= gtk_builder_new_from_string $(LPAREN)
@@ -123,7 +123,7 @@ class ApplicationWindow : Window, ActionGroup, ActionMap
 
   /**
    * Gets the `GtkShortcutsWindow` that is associated with window.
-   * See [Gtk.ApplicationWindow.setHelpOverlay].
+   * See [gtk.application_window.ApplicationWindow.setHelpOverlay].
    * Returns: the help overlay associated
    *   with window
    */

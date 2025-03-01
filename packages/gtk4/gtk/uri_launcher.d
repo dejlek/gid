@@ -1,6 +1,6 @@
 module gtk.uri_launcher;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -18,10 +18,10 @@ import gtk.window;
  * Depending on system configuration, user preferences and available APIs, this
  * may or may not show an app chooser dialog or launch the default application
  * right away.
- * The operation is started with the [Gtk.UriLauncher.launch] function.
+ * The operation is started with the [gtk.uri_launcher.UriLauncher.launch] function.
  * This API follows the GIO async pattern, and the result can be obtained by
- * calling [Gtk.UriLauncher.launchFinish].
- * To launch a file, use [Gtk.FileLauncher].
+ * calling [gtk.uri_launcher.UriLauncher.launchFinish].
+ * To launch a file, use [gtk.file_launcher.FileLauncher].
  */
 class UriLauncher : ObjectG
 {
@@ -72,7 +72,7 @@ class UriLauncher : ObjectG
    * Launch an application to open the uri.
    * This may present an app chooser dialog to the user.
    * The callback will be called when the operation is completed.
-   * It should call [Gtk.UriLauncher.launchFinish] to obtain
+   * It should call [gtk.uri_launcher.UriLauncher.launchFinish] to obtain
    * the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -95,7 +95,7 @@ class UriLauncher : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.UriLauncher.launch] call and
+   * Finishes the [gtk.uri_launcher.UriLauncher.launch] call and
    * returns the result.
    * Params:
    *   result = a `GAsyncResult`

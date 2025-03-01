@@ -1,6 +1,6 @@
 module gtk.application;
 
-import gid.gid;
+import gid.global;
 import gio.action_group;
 import gio.action_group_mixin;
 import gio.action_map;
@@ -25,30 +25,30 @@ import gtk.window;
  * desktop shell integration by exporting actions and menus and manages a
  * list of toplevel windows whose life-cycle is automatically tied to the
  * life-cycle of your application.
- * While `GtkApplication` works fine with plain [Gtk.Window]s, it is
- * recommended to use it together with [Gtk.ApplicationWindow].
+ * While `GtkApplication` works fine with plain [gtk.window.Window]s, it is
+ * recommended to use it together with [gtk.application_window.ApplicationWindow].
  * ## Automatic resources
  * `GtkApplication` will automatically load menus from the `GtkBuilder`
  * resource located at "gtk/menus.ui", relative to the application's
- * resource base path $(LPAREN)see [Gio.ApplicationGio.setResourceBasePath]$(RPAREN).
+ * resource base path $(LPAREN)see [gio.application.ApplicationGio.setResourceBasePath]$(RPAREN).
  * The menu with the ID "menubar" is taken as the application's
  * menubar. Additional menus $(LPAREN)most interesting submenus$(RPAREN) can be named
- * and accessed via [Gtk.Application.getMenuById] which allows for
+ * and accessed via [gtk.application.Application.getMenuById] which allows for
  * dynamic population of a part of the menu structure.
  * Note that automatic resource loading uses the resource base path
  * that is set at construction time and will not work if the resource
  * base path is changed at a later time.
  * It is also possible to provide the menubar manually using
- * [Gtk.Application.setMenubar].
+ * [gtk.application.Application.setMenubar].
  * `GtkApplication` will also automatically setup an icon search path for
  * the default icon theme by appending "icons" to the resource base
  * path. This allows your application to easily store its icons as
- * resources. See [Gtk.IconTheme.addResourcePath] for more
+ * resources. See [gtk.icon_theme.IconTheme.addResourcePath] for more
  * information.
  * If there is a resource located at `gtk/help-overlay.ui` which
- * defines a [Gtk.ShortcutsWindow] with ID `help_overlay` then
+ * defines a [gtk.shortcuts_window.ShortcutsWindow] with ID `help_overlay` then
  * `GtkApplication` associates an instance of this shortcuts window with
- * each [Gtk.ApplicationWindow] and sets up the keyboard accelerator
+ * each [gtk.application_window.ApplicationWindow] and sets up the keyboard accelerator
  * <kbd>Control</kbd>+<kbd>?</kbd> to open it. To create a menu item that
  * displays the shortcuts window, associate the item with the action
  * `win.show-help-overlay`.
@@ -60,7 +60,7 @@ import gtk.window;
  * property$(RPAREN) and offers various functionality related to the session
  * life-cycle.
  * An application can block various ways to end the session with
- * the [Gtk.Application.inhibit] function. Typical use cases for
+ * the [gtk.application.Application.inhibit] function. Typical use cases for
  * this kind of inhibiting are long-running, uninterruptible operations,
  * such as burning a CD or performing a disk backup. The session
  * manager may not honor the inhibitor, but it can be expected to
@@ -100,7 +100,7 @@ class Application : ApplicationGio
    * API.
    * Note that commandline arguments are not passed to funcGtk.init.
    * If `application_id` is not %NULL, then it must be valid. See
-   * `[Gio.ApplicationGio.idIsValid]`.
+   * `[gio.application.ApplicationGio.idIsValid]`.
    * If no application ID is given then some features $(LPAREN)most notably application
    * uniqueness$(RPAREN) will be disabled.
    * Params:
@@ -121,11 +121,11 @@ class Application : ApplicationGio
    * This call can only happen after the `application` has started;
    * typically, you should add new application windows in response
    * to the emission of the `GApplication::activate` signal.
-   * This call is equivalent to setting the [Gtk.Window.application]
+   * This call is equivalent to setting the [gtk.window.Window.Application]
    * property of `window` to `application`.
    * Normally, the connection between the application and the window
    * will remain until the window is destroyed, but you can explicitly
-   * remove it with [Gtk.Application.removeWindow].
+   * remove it with [gtk.application.Application.removeWindow].
    * GTK will keep the `application` running as long as it has
    * any windows.
    * Params:
@@ -235,7 +235,7 @@ class Application : ApplicationGio
 
   /**
    * Returns the menu model that has been set with
-   * [Gtk.Application.setMenubar].
+   * [gtk.application.Application.setMenubar].
    * Returns: the menubar for windows of `application`
    */
   MenuModel getMenubar()
@@ -247,9 +247,9 @@ class Application : ApplicationGio
   }
 
   /**
-   * Returns the [Gtk.ApplicationWindow] with the given ID.
+   * Returns the [gtk.application_window.ApplicationWindow] with the given ID.
    * The ID of a `GtkApplicationWindow` can be retrieved with
-   * [Gtk.ApplicationWindow.getId].
+   * [gtk.application_window.ApplicationWindow.getId].
    * Params:
    *   id = an identifier number
    * Returns: the window for the given `id`
@@ -263,7 +263,7 @@ class Application : ApplicationGio
   }
 
   /**
-   * Gets a list of the [Gtk.Window] instances associated with `application`.
+   * Gets a list of the [gtk.window.Window] instances associated with `application`.
    * The list is sorted by most recently focused window, such that the first
    * element is the currently focused window. $(LPAREN)Useful for choosing a parent
    * for a transient window.$(RPAREN)
@@ -290,7 +290,7 @@ class Application : ApplicationGio
    * that should not be interrupted, such as creating a CD or DVD. The
    * types of actions that may be blocked are specified by the `flags`
    * parameter. When the application completes the operation it should
-   * call [Gtk.Application.uninhibit] to remove the inhibitor. Note
+   * call [gtk.application.Application.uninhibit] to remove the inhibitor. Note
    * that an application can have multiple inhibitors, and all of them must
    * be individually removed. Inhibitors are also cleared when the
    * application exits.
@@ -306,7 +306,7 @@ class Application : ApplicationGio
    *   reason = a short, human-readable string that explains
    *     why these operations are inhibited
    * Returns: A non-zero cookie that is used to uniquely identify this
-   *   request. It should be used as an argument to [Gtk.Application.uninhibit]
+   *   request. It should be used as an argument to [gtk.application.Application.uninhibit]
    *   in order to remove the request. If the platform does not support
    *   inhibiting or the request failed for some reason, 0 is returned.
    */
@@ -320,7 +320,7 @@ class Application : ApplicationGio
 
   /**
    * Lists the detailed action names which have associated accelerators.
-   * See [Gtk.Application.setAccelsForAction].
+   * See [gtk.application.Application.setAccelsForAction].
    * Returns: the detailed action names
    */
   string[] listActionDescriptions()
@@ -344,7 +344,7 @@ class Application : ApplicationGio
   /**
    * Remove a window from `application`.
    * If `window` belongs to `application` then this call is equivalent to
-   * setting the [Gtk.Window.application] property of `window` to
+   * setting the [gtk.window.Window.Application] property of `window` to
    * `NULL`.
    * The application may stop running as a result of a call to this
    * function, if `window` was the last window of the `application`.
@@ -363,8 +363,8 @@ class Application : ApplicationGio
    * displayed in the UI.
    * To remove all accelerators for an action, use an empty, zero-terminated
    * array for `accels`.
-   * For the `detailed_action_name`, see `[Gio.Action.parseDetailedName]` and
-   * `[Gio.Action.printDetailedName]`.
+   * For the `detailed_action_name`, see `[gio.action.Action.parseDetailedName]` and
+   * `[gio.action.Action.printDetailedName]`.
    * Params:
    *   detailedActionName = a detailed action name, specifying an action
    *     and target to associate accelerators with
@@ -407,10 +407,10 @@ class Application : ApplicationGio
 
   /**
    * Removes an inhibitor that has been previously established.
-   * See [Gtk.Application.inhibit].
+   * See [gtk.application.Application.inhibit].
    * Inhibitors are also cleared when the application exits.
    * Params:
-   *   cookie = a cookie that was returned by [Gtk.Application.inhibit]
+   *   cookie = a cookie that was returned by [gtk.application.Application.inhibit]
    */
   void uninhibit(uint cookie)
   {
@@ -421,7 +421,7 @@ class Application : ApplicationGio
    * Emitted when the session manager is about to end the session.
    * This signal is only emitted if propertyGtk.Application:register-session
    * is `TRUE`. Applications can connect to this signal and call
-   * [Gtk.Application.inhibit] with `GTK_APPLICATION_INHIBIT_LOGOUT`
+   * [gtk.application.Application.inhibit] with `GTK_APPLICATION_INHIBIT_LOGOUT`
    * to delay the end of the session until state has been saved.
    *   application = the instance the signal is connected to
    */
@@ -451,10 +451,10 @@ class Application : ApplicationGio
   }
 
   /**
-   * Emitted when a [Gtk.Window] is added to `application` through
-   * [Gtk.Application.addWindow].
+   * Emitted when a [gtk.window.Window] is added to `application` through
+   * [gtk.application.Application.addWindow].
    * Params
-   *   window = the newly-added [Gtk.Window]
+   *   window = the newly-added [gtk.window.Window]
    *   application = the instance the signal is connected to
    */
   alias WindowAddedCallbackDlg = void delegate(Window window, Application application);
@@ -484,11 +484,11 @@ class Application : ApplicationGio
   }
 
   /**
-   * Emitted when a [Gtk.Window] is removed from `application`.
+   * Emitted when a [gtk.window.Window] is removed from `application`.
    * This can happen as a side-effect of the window being destroyed
-   * or explicitly through [Gtk.Application.removeWindow].
+   * or explicitly through [gtk.application.Application.removeWindow].
    * Params
-   *   window = the [Gtk.Window] that is being removed
+   *   window = the [gtk.window.Window] that is being removed
    *   application = the instance the signal is connected to
    */
   alias WindowRemovedCallbackDlg = void delegate(Window window, Application application);

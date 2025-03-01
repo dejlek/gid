@@ -1,6 +1,6 @@
 module gtk.level_bar;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -23,8 +23,8 @@ import gtk.widget;
  * Typical use cases are displaying the strength of a password, or
  * showing the charge level of a battery.
  * ![An example GtkLevelBar](levelbar.png)
- * Use [Gtk.LevelBar.setValue] to set the current value, and
- * [Gtk.LevelBar.addOffsetValue] to set the value offsets at which
+ * Use [gtk.level_bar.LevelBar.setValue] to set the current value, and
+ * [gtk.level_bar.LevelBar.addOffsetValue] to set the value offsets at which
  * the bar will be considered in a different state. GTK will add a few
  * offsets by default on the level bar: %GTK_LEVEL_BAR_OFFSET_LOW,
  * %GTK_LEVEL_BAR_OFFSET_HIGH and %GTK_LEVEL_BAR_OFFSET_FULL, with
@@ -59,8 +59,8 @@ import gtk.widget;
  * }
  * ```
  * The default interval of values is between zero and one, but it’s possible
- * to modify the interval using [Gtk.LevelBar.setMinValue] and
- * [Gtk.LevelBar.setMaxValue]. The value will be always drawn in
+ * to modify the interval using [gtk.level_bar.LevelBar.setMinValue] and
+ * [gtk.level_bar.LevelBar.setMaxValue]. The value will be always drawn in
  * proportion to the admissible interval, i.e. a value of 15 with a specified
  * interval between 10 and 20 is equivalent to a value of 0.5 with an interval
  * between 0 and 1. When %GTK_LEVEL_BAR_MODE_DISCRETE is used, the bar level
@@ -236,7 +236,7 @@ class LevelBar : Widget, AccessibleRange, Orientable
   /**
    * Removes an offset marker from a `GtkLevelBar`.
    * The marker must have been previously added with
-   * [Gtk.LevelBar.addOffsetValue].
+   * [gtk.level_bar.LevelBar.addOffsetValue].
    * Params:
    *   name = the name of an offset in the bar
    */
@@ -303,7 +303,7 @@ class LevelBar : Widget, AccessibleRange, Orientable
 
   /**
    * Emitted when an offset specified on the bar changes value.
-   * This typically is the result of a [Gtk.LevelBar.addOffsetValue]
+   * This typically is the result of a [gtk.level_bar.LevelBar.addOffsetValue]
    * call.
    * The signal supports detailed connections; you can connect to the
    * detailed signal "changed::x" in order to only receive callbacks when

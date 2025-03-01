@@ -4,15 +4,15 @@ import cairo.c.functions;
 import cairo.c.types;
 import cairo.rectangle_int;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
  * A #cairo_region_t represents a set of integer-aligned rectangles.
- * It allows set-theoretical operations like [cairo.Region.union_] and
- * [cairo.Region.intersect] to be performed on them.
+ * It allows set-theoretical operations like [cairo.region.Region.union_] and
+ * [cairo.region.Region.intersect] to be performed on them.
  * Memory management of #cairo_region_t is done with
- * [cairo.Region.reference] and [cairo.Region.destroy].
+ * [cairo.region.Region.reference] and [cairo.region.Region.destroy].
  */
 class Region : Boxed
 {
@@ -72,10 +72,10 @@ class Region : Boxed
   /**
    * Allocates a new region object copying the area from original.
    * Returns: A newly allocated #cairo_region_t. Free with
-   *   [cairo.Region.destroy]. This function always returns a
+   *   [cairo.region.Region.destroy]. This function always returns a
    *   valid pointer; if memory cannot be allocated, then a special
    *   error object is returned where all operations on the object do nothing.
-   *   You can check for this with [cairo.Region.status].
+   *   You can check for this with [cairo.region.Region.status].
    */
   Region copy()
   {

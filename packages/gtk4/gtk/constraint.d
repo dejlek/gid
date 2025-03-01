@@ -1,6 +1,6 @@
 module gtk.constraint;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -16,7 +16,7 @@ import gtk.types;
  * target.target_attr \= source.source_attr × multiplier + constant
  * ```
  * Each `GtkConstraint` is part of a system that will be solved by a
- * [Gtk.ConstraintLayout] in order to allocate and position each
+ * [gtk.constraint_layout.ConstraintLayout] in order to allocate and position each
  * child widget or guide.
  * The source and target, as well as their attributes, of a `GtkConstraint`
  * instance are immutable after creation.
@@ -116,10 +116,10 @@ class Constraint : ObjectG
   }
 
   /**
-   * Retrieves the [Gtk.ConstraintTarget] used as the source for the
+   * Retrieves the [gtk.constraint_target.ConstraintTarget] used as the source for the
    * constraint.
    * If the source is set to `NULL` at creation, the constraint will use
-   * the widget using the [Gtk.ConstraintLayout] as the source.
+   * the widget using the [gtk.constraint_layout.ConstraintLayout] as the source.
    * Returns: the source of the constraint
    */
   ConstraintTarget getSource()
@@ -154,10 +154,10 @@ class Constraint : ObjectG
   }
 
   /**
-   * Retrieves the [Gtk.ConstraintTarget] used as the target for
+   * Retrieves the [gtk.constraint_target.ConstraintTarget] used as the target for
    * the constraint.
    * If the targe is set to `NULL` at creation, the constraint will use
-   * the widget using the [Gtk.ConstraintLayout] as the target.
+   * the widget using the [gtk.constraint_layout.ConstraintLayout] as the target.
    * Returns: a `GtkConstraintTarget`
    */
   ConstraintTarget getTarget()
@@ -181,7 +181,7 @@ class Constraint : ObjectG
   }
 
   /**
-   * Checks whether the constraint is attached to a [Gtk.ConstraintLayout],
+   * Checks whether the constraint is attached to a [gtk.constraint_layout.ConstraintLayout],
    * and it is contributing to the layout.
    * Returns: `TRUE` if the constraint is attached
    */
@@ -194,7 +194,7 @@ class Constraint : ObjectG
 
   /**
    * Checks whether the constraint describes a relation between an attribute
-   * on the [Gtk.Constraint.target] and a constant value.
+   * on the [gtk.constraint.Constraint.ConstraintTarget] and a constant value.
    * Returns: `TRUE` if the constraint is a constant relation
    */
   bool isConstant()

@@ -1,6 +1,6 @@
 module graphene.quad;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;

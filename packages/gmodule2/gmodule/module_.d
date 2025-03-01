@@ -1,6 +1,6 @@
 module gmodule.module_;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import glib.types;
 import gmodule.c.functions;
@@ -45,7 +45,7 @@ class Module
 
   /**
    * Ensures that a module will never be unloaded.
-   * Any future [GModule.Module.close] calls on the module will be ignored.
+   * Any future [gmodule.module_.Module.close] calls on the module will be ignored.
    */
   void makeResident()
   {
@@ -89,7 +89,7 @@ class Module
    * It can be %NULL or an empty string to indicate that the module is in a
    * standard platform-specific directory, though this is not recommended
    * since the wrong module may be found.
-   * For example, calling [GModule.Module.buildPath] on a Linux system with a
+   * For example, calling [gmodule.module_.Module.buildPath] on a Linux system with a
    * directory of `/lib` and a module_name of "mylibrary" will return
    * `/lib/libmylibrary.so`. On a Windows system, using `\Windows` as the
    * directory it will return `\Windows\mylibrary.dll`.
@@ -101,7 +101,7 @@ class Module
    * Returns: the complete path of the module, including the standard library
    *   prefix and suffix. This should be freed when no longer needed
 
-   * Deprecated: Use [GModule.Module.open] instead with module_name as the
+   * Deprecated: Use [gmodule.module_.Module.open] instead with module_name as the
    *   basename of the file_name argument. See %G_MODULE_SUFFIX for why.
    */
   static string buildPath(string directory, string moduleName)

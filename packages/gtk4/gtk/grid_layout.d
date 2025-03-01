@@ -1,6 +1,6 @@
 module gtk.grid_layout;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -12,7 +12,7 @@ import gtk.types;
  * Children have an "attach point" defined by the horizontal and vertical
  * index of the cell they occupy; children can span multiple rows or columns.
  * The layout properties for setting the attach points and spans are set
- * using the [Gtk.GridLayoutChild] associated to each child widget.
+ * using the [gtk.grid_layout_child.GridLayoutChild] associated to each child widget.
  * The behaviour of `GtkGridLayout` when several children occupy the same
  * grid cell is undefined.
  * `GtkGridLayout` can be used like a `GtkBoxLayout` if all children are
@@ -50,7 +50,7 @@ class GridLayout : LayoutManager
   }
 
   /**
-   * Retrieves the row set with [Gtk.GridLayout.setBaselineRow].
+   * Retrieves the row set with [gtk.grid_layout.GridLayout.setBaselineRow].
    * Returns: the global baseline row
    */
   int getBaselineRow()
@@ -72,7 +72,7 @@ class GridLayout : LayoutManager
   }
 
   /**
-   * Retrieves the spacing set with [Gtk.GridLayout.setColumnSpacing].
+   * Retrieves the spacing set with [gtk.grid_layout.GridLayout.setColumnSpacing].
    * Returns: the spacing between consecutive columns
    */
   uint getColumnSpacing()
@@ -85,7 +85,7 @@ class GridLayout : LayoutManager
   /**
    * Returns the baseline position of row.
    * If no value has been set with
-   * [Gtk.GridLayout.setRowBaselinePosition],
+   * [gtk.grid_layout.GridLayout.setRowBaselinePosition],
    * the default value of %GTK_BASELINE_POSITION_CENTER
    * is returned.
    * Params:
@@ -112,7 +112,7 @@ class GridLayout : LayoutManager
   }
 
   /**
-   * Retrieves the spacing set with [Gtk.GridLayout.setRowSpacing].
+   * Retrieves the spacing set with [gtk.grid_layout.GridLayout.setRowSpacing].
    * Returns: the spacing between consecutive rows
    */
   uint getRowSpacing()

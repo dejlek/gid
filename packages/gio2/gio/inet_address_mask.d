@@ -1,6 +1,6 @@
 module gio.inet_address_mask;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.inet_address;

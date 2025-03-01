@@ -1,6 +1,6 @@
 module gsk.transform;
 
-import gid.gid;
+import gid.global;
 import glib.string_;
 import gobject.boxed;
 import graphene.matrix;
@@ -132,7 +132,7 @@ class Transform : Boxed
    * Converts self into a human-readable string representation suitable
    * for printing.
    * The result of this function can later be parsed with
-   * [Gsk.Transform.parse].
+   * [gsk.transform.Transform.parse].
    * Params:
    *   string_ = The string to print into
    */
@@ -158,7 +158,7 @@ class Transform : Boxed
 
   /**
    * Rotates next angle degrees around axis.
-   * For a rotation in 2D space, use [Gsk.Transform.rotate]
+   * For a rotation in 2D space, use [gsk.transform.Transform.rotate]
    * Params:
    *   angle = the rotation angle, in degrees $(LPAREN)clockwise$(RPAREN)
    *   axis = The rotation axis
@@ -174,7 +174,7 @@ class Transform : Boxed
 
   /**
    * Scales next in 2-dimensional space by the given factors.
-   * Use [Gsk.Transform.scale3d] to scale in all 3 dimensions.
+   * Use [gsk.transform.Transform.scale3d] to scale in all 3 dimensions.
    * Params:
    *   factorX = scaling factor on the X axis
    *   factorY = scaling factor on the Y axis
@@ -222,7 +222,7 @@ class Transform : Boxed
   /**
    * Converts a `GskTransform` to a 2D transformation matrix.
    * self must be a 2D transformation. If you are not
-   * sure, use [Gsk.Transform.getCategory] >\=
+   * sure, use [gsk.transform.Transform.getCategory] >\=
    * %GSK_TRANSFORM_CATEGORY_2D to check.
    * The returned values have the following layout:
    * ```
@@ -258,7 +258,7 @@ class Transform : Boxed
    * scale_x, scale_y$(RPAREN),
    * skew_x, skew_y$(RPAREN)
    * self must be a 2D transformation. If you are not sure, use
-   * [Gsk.Transform.getCategory] >\= %GSK_TRANSFORM_CATEGORY_2D
+   * [gsk.transform.Transform.getCategory] >\= %GSK_TRANSFORM_CATEGORY_2D
    * to check.
    * Params:
    *   outSkewX = return location for the skew factor
@@ -289,7 +289,7 @@ class Transform : Boxed
    * sx, sy$(RPAREN)
    * self must be a 2D affine transformation. If you are not
    * sure, use
-   * [Gsk.Transform.getCategory] >\= %GSK_TRANSFORM_CATEGORY_2D_AFFINE
+   * [gsk.transform.Transform.getCategory] >\= %GSK_TRANSFORM_CATEGORY_2D_AFFINE
    * to check.
    * Params:
    *   outScaleX = return location for the scale
@@ -321,8 +321,8 @@ class Transform : Boxed
 
   /**
    * Converts a matrix into a string that is suitable for printing.
-   * The resulting string can be parsed with [Gsk.Transform.parse].
-   * This is a wrapper around [Gsk.Transform.print].
+   * The resulting string can be parsed with [gsk.transform.Transform.parse].
+   * This is a wrapper around [gsk.transform.Transform.print].
    * Returns: A new string for self
    */
   string toString_()
@@ -337,7 +337,7 @@ class Transform : Boxed
    * Converts a `GskTransform` to a translation operation.
    * self must be a 2D transformation. If you are not
    * sure, use
-   * [Gsk.Transform.getCategory] >\= %GSK_TRANSFORM_CATEGORY_2D_TRANSLATE
+   * [gsk.transform.Transform.getCategory] >\= %GSK_TRANSFORM_CATEGORY_2D_TRANSLATE
    * to check.
    * Params:
    *   outDx = return location for the translation
@@ -424,7 +424,7 @@ class Transform : Boxed
   /**
    * Parses the given string into a transform and puts it in
    * out_transform.
-   * Strings printed via [Gsk.Transform.toString_]
+   * Strings printed via [gsk.transform.Transform.toString_]
    * can be read in again successfully using this function.
    * If string does not describe a valid transform, %FALSE is
    * returned and %NULL is put in out_transform.

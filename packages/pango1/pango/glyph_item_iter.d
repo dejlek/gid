@@ -1,6 +1,6 @@
 module pango.glyph_item_iter;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -16,11 +16,11 @@ import pango.types;
  * then @start_glyph decreases as the iterator moves forward.  Moreover,
  * in right-to-left cases, @start_glyph is greater than @end_glyph.
  * An iterator should be initialized using either
- * [Pango.GlyphItemIter.initStart] or
- * [Pango.GlyphItemIter.initEnd], for forward and backward iteration
+ * [pango.glyph_item_iter.GlyphItemIter.initStart] or
+ * [pango.glyph_item_iter.GlyphItemIter.initEnd], for forward and backward iteration
  * respectively, and walked over using any desired mixture of
- * [Pango.GlyphItemIter.nextCluster] and
- * [Pango.GlyphItemIter.prevCluster].
+ * [pango.glyph_item_iter.GlyphItemIter.nextCluster] and
+ * [pango.glyph_item_iter.GlyphItemIter.prevCluster].
  * A common idiom for doing a forward iteration over the clusters is:
  * ```
  * PangoGlyphItemIter cluster_iter;

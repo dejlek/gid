@@ -1,6 +1,6 @@
 module gtk.selection_filter_model;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;

@@ -1,12 +1,12 @@
 module gtk.recent_data;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
 /**
- * Meta-data to be passed to [Gtk.RecentManager.addFull] when
+ * Meta-data to be passed to [gtk.recent_manager.RecentManager.addFull] when
  * registering a recently used resource.
  */
 class RecentData

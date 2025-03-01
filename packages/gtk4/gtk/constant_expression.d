@@ -1,6 +1,6 @@
 module gtk.constant_expression;
 
-import gid.gid;
+import gid.global;
 import gobject.value;
 import gtk.c.functions;
 import gtk.c.types;

@@ -1,6 +1,6 @@
 module gtk.graphics_offload;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -23,12 +23,12 @@ import gtk.widget;
  * video content.
  * You should consider using graphics offload for your main widget if it shows
  * frequently changing content $(LPAREN)such as a video, or a VM display$(RPAREN) and you provide
- * the content in the form of dmabuf textures $(LPAREN)see [Gdk.DmabufTextureBuilder]$(RPAREN),
+ * the content in the form of dmabuf textures $(LPAREN)see [gdk.dmabuf_texture_builder.DmabufTextureBuilder]$(RPAREN),
  * in particular if it may be fullscreen.
  * Numerous factors can prohibit graphics offload:
  * - Unsupported platforms. Currently, graphics offload only works on Linux with Wayland.
  * - Clipping, such as rounded corners that cause the video content to not be rectangular
- * - Unsupported dmabuf formats $(LPAREN)see [Gdk.Display.getDmabufFormats]$(RPAREN)
+ * - Unsupported dmabuf formats $(LPAREN)see [gdk.display.Display.getDmabufFormats]$(RPAREN)
  * - Translucent video content $(LPAREN)content with an alpha channel, even if it isn't used$(RPAREN)
  * - Transforms that are more complex than translations and scales
  * - Filters such as opacity, grayscale or similar

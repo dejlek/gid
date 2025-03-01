@@ -1,6 +1,6 @@
 module harfbuzz.user_data_key;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;

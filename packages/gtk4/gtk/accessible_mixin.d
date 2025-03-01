@@ -1,7 +1,7 @@
 module gtk.accessible_mixin;
 
 public import gtk.accessible_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gobject.object;
 public import gobject.value;
 public import gtk.atcontext;
@@ -13,15 +13,15 @@ public import gtk.types;
  * `GtkAccessible` is an interface for describing UI elements for
  * Assistive Technologies.
  * Every accessible implementation has:
- * - a “role”, represented by a value of the [Gtk.AccessibleRole] enumeration
- * - an “attribute”, represented by a set of [Gtk.AccessibleState],
- * [Gtk.AccessibleProperty] and [Gtk.AccessibleRelation] values
+ * - a “role”, represented by a value of the [gtk.AccessibleRole] enumeration
+ * - an “attribute”, represented by a set of [gtk.AccessibleState],
+ * [gtk.AccessibleProperty] and [gtk.AccessibleRelation] values
  * The role cannot be changed after instantiating a `GtkAccessible`
  * implementation.
  * The attributes are updated every time a UI element's state changes in
  * a way that should be reflected by assistive technologies. For instance,
  * if a `GtkWidget` visibility changes, the %GTK_ACCESSIBLE_STATE_HIDDEN
- * state will also change to reflect the [Gtk.Widget.visible] property.
+ * state will also change to reflect the [gtk.widget.Widget.gboolean] property.
  * Every accessible implementation is part of a tree of accessible objects.
  * Normally, this tree corresponds to the widget tree, but can be customized
  * by reimplementing the vfunc@Gtk.Accessible.get_accessible_parent,
@@ -32,8 +32,8 @@ public import gtk.types;
  * Also note that when an accessible object does not correspond to a widget,
  * and it has children, whose implementation you don't control,
  * it is necessary to ensure the correct shape of the a11y tree
- * by calling [Gtk.Accessible.setAccessibleParent] and
- * updating the sibling by [Gtk.Accessible.updateNextAccessibleSibling].
+ * by calling [gtk.accessible.Accessible.setAccessibleParent] and
+ * updating the sibling by [gtk.accessible.Accessible.updateNextAccessibleSibling].
  */
 template AccessibleT()
 {

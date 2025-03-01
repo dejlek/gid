@@ -3,7 +3,7 @@ module gdk.rectangle;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
@@ -12,8 +12,8 @@ import gobject.boxed;
  * `cairo_region_t` data type, these are the central types for representing
  * sets of pixels.
  * The intersection of two rectangles can be computed with
- * [Gdk.Rectangle.intersect]; to find the union of two rectangles use
- * [Gdk.Rectangle.union_].
+ * [gdk.rectangle.Rectangle.intersect]; to find the union of two rectangles use
+ * [gdk.rectangle.Rectangle.union_].
  * The `cairo_region_t` type provided by Cairo is usually used for managing
  * non-rectangular clipping of graphical operations.
  * The Graphene library has a number of other data types for regions and

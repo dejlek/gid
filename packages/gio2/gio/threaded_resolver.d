@@ -1,6 +1,6 @@
 module gio.threaded_resolver;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.resolver;

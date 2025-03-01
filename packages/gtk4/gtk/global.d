@@ -5,7 +5,7 @@ import gdk.content_provider;
 import gdk.display;
 import gdk.texture;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -91,7 +91,7 @@ string acceleratorGetLabelWithKeycode(Display display, uint acceleratorKey, uint
 
 /**
  * Converts an accelerator keyval and modifier mask into a string
- * parseable by [Gtk.Global.acceleratorParse].
+ * parseable by [gtk.global.acceleratorParse].
  * For example, if you pass in %GDK_KEY_q and %GDK_CONTROL_MASK,
  * this function returns `<Control>q`.
  * If you need to display accelerators in the user interface,
@@ -111,7 +111,7 @@ string acceleratorName(uint acceleratorKey, ModifierType acceleratorMods)
 
 /**
  * Converts an accelerator keyval and modifier mask
- * into a string parseable by [Gtk.Global.acceleratorParseWithKeycode].
+ * into a string parseable by [gtk.global.acceleratorParseWithKeycode].
  * This is similar to funcGtk.accelerator_name but handling keycodes.
  * This is only useful for system-level components, applications
  * should use funcGtk.accelerator_name instead.
@@ -139,7 +139,7 @@ string acceleratorNameWithKeycode(Display display, uint acceleratorKey, uint key
  * the name is not the symbol, but the lowercase name, e.g. one would use
  * “`<Ctrl>minus`” instead of “`<Ctrl>-`”.
  * Modifiers are enclosed in angular brackets `<>`, and match the
- * [Gdk.ModifierType] mask:
+ * [gdk.ModifierType] mask:
  * - `<Shift>` for `GDK_SHIFT_MASK`
  * - `<Ctrl>` for `GDK_CONTROL_MASK`
  * - `<Alt>` for `GDK_ALT_MASK`
@@ -169,7 +169,7 @@ bool acceleratorParse(string accelerator, out uint acceleratorKey, out ModifierT
  * well. This is only useful for system-level components, applications should
  * use funcGtk.accelerator_parse instead.
  * If accelerator_codes is given and the result stored in it is non-%NULL,
- * the result must be freed with [GLib.Global.gfree].
+ * the result must be freed with [glib.global.gfree].
  * If a keycode is present in the accelerator and no accelerator_codes
  * is given, the parse will fail.
  * If the parse fails, accelerator_key, accelerator_mods and
@@ -239,7 +239,7 @@ bool acceleratorValid(uint keyval, ModifierType modifiers)
  * into an incompatible version of GTK. However, such a
  * check isn’t completely reliable, since the module may be
  * linked against an old version of GTK and calling the
- * old version of [Gtk.Global.checkVersion], but still get loaded
+ * old version of [gtk.global.checkVersion], but still get loaded
  * into an application using a newer version of GTK.
  * Params:
  *   requiredMajor = the required major version
@@ -369,7 +369,7 @@ DebugFlags getDebugFlags()
  * The default language is derived from the current
  * locale. It determines, for example, whether GTK uses
  * the right-to-left or left-to-right text direction.
- * This function is equivalent to [Pango.PgLanguage.getDefault].
+ * This function is equivalent to [pango.language.PgLanguage.getDefault].
  * See that function for details.
  * Returns: the default language
  */
@@ -400,8 +400,8 @@ uint getInterfaceAge()
  * setlocale$(LPAREN)$(RPAREN) and will default to setting the %GTK_TEXT_DIR_LTR
  * direction otherwise. %GTK_TEXT_DIR_NONE will never be returned.
  * GTK sets the default text direction according to the locale
- * during [Gtk.Global.init_], and you should normally use
- * [Gtk.Widget.getDirection] or [Gtk.Widget.getDefaultDirection]
+ * during [gtk.global.init_], and you should normally use
+ * [gtk.widget.Widget.getDirection] or [gtk.widget.Widget.getDefaultDirection]
  * to obtain the current direction.
  * This function is only needed rare cases when the locale is
  * changed after GTK has already been initialized. In this case,
@@ -505,7 +505,7 @@ void hsvToRgb(float h, float s, float v, out float r, out float g, out float b)
  * GTK calls `signal $(LPAREN)SIGPIPE, SIG_IGN$(RPAREN)` during initialization, to ignore
  * SIGPIPE signals, since these are almost never wanted in graphical
  * applications. If you do need to handle SIGPIPE for some reason, reset
- * the handler after [Gtk.Global.init_], but notice that other libraries $(LPAREN)e.g.
+ * the handler after [gtk.global.init_], but notice that other libraries $(LPAREN)e.g.
  * libdbus or gvfs$(RPAREN) might do similar things.
  */
 void init_()
@@ -514,7 +514,7 @@ void init_()
 }
 
 /**
- * This function does the same work as [Gtk.Global.init_] with only a single
+ * This function does the same work as [gtk.global.init_] with only a single
  * change: It does not terminate the program if the windowing system
  * can’t be initialized. Instead it returns %FALSE on failure.
  * This way the application can fall back to some other means of
@@ -544,7 +544,7 @@ bool isInitialized()
 
 /**
  * Creates a new `GParamSpec` instance for a property holding a `GtkExpression`.
- * See `[GObject.ParamSpec.internal]` for details on the property strings.
+ * See `[gobject.param_spec.ParamSpec.internal]` for details on the property strings.
  * Params:
  *   name = canonical name of the property
  *   nick = a user-readable name for the property
@@ -569,7 +569,7 @@ ParamSpec paramSpecExpression(string name, string nick, string blurb, ParamFlags
  * is identical to the passed in page_setup, otherwise it contains the
  * modifications done in the dialog.
  * Note that this function may use a recursive mainloop to show the page
- * setup dialog. See [Gtk.Global.printRunPageSetupDialogAsync] if this is
+ * setup dialog. See [gtk.global.printRunPageSetupDialogAsync] if this is
  * a problem.
  * Params:
  *   parent = transient parent
@@ -587,7 +587,7 @@ PageSetup printRunPageSetupDialog(Window parent, PageSetup pageSetup, PrintSetti
 
 /**
  * Runs a page setup dialog, letting the user modify the values from page_setup.
- * In contrast to [Gtk.Global.printRunPageSetupDialog], this function  returns after
+ * In contrast to [gtk.global.printRunPageSetupDialog], this function  returns after
  * showing the page setup dialog on platforms that support this, and calls done_cb
  * from a signal handler for the ::response signal of the dialog.
  * Params:
@@ -856,8 +856,8 @@ void setDebugFlags(DebugFlags flags)
  *   uri = the uri to show
  *   timestamp = timestamp from the event that triggered this call, or %GDK_CURRENT_TIME
 
- * Deprecated: Use [Gtk.FileLauncher.launch] or
- *   [Gtk.UriLauncher.launch] instead
+ * Deprecated: Use [gtk.file_launcher.FileLauncher.launch] or
+ *   [gtk.uri_launcher.UriLauncher.launch] instead
  */
 void showUri(Window parent, string uri, uint timestamp)
 {
@@ -869,7 +869,7 @@ void showUri(Window parent, string uri, uint timestamp)
  * This function launches the default application for showing
  * a given uri.
  * The callback will be called when the launch is completed.
- * It should call [Gtk.Global.showUriFullFinish] to obtain the result.
+ * It should call [gtk.global.showUriFullFinish] to obtain the result.
  * This is the recommended call to be used as it passes information
  * necessary for sandbox helpers to parent their dialogs properly.
  * Params:
@@ -879,8 +879,8 @@ void showUri(Window parent, string uri, uint timestamp)
  *   cancellable = a `GCancellable` to cancel the launch
  *   callback = a callback to call when the action is complete
 
- * Deprecated: Use [Gtk.FileLauncher.launch] or
- *   [Gtk.UriLauncher.launch] instead
+ * Deprecated: Use [gtk.file_launcher.FileLauncher.launch] or
+ *   [gtk.uri_launcher.UriLauncher.launch] instead
  */
 void showUriFull(Window parent, string uri, uint timestamp, Cancellable cancellable, AsyncReadyCallback callback)
 {
@@ -899,16 +899,16 @@ void showUriFull(Window parent, string uri, uint timestamp, Cancellable cancella
 }
 
 /**
- * Finishes the [Gtk.Global.showUri] call and returns the result
+ * Finishes the [gtk.global.showUri] call and returns the result
  * of the operation.
  * Params:
- *   parent = the `GtkWindow` passed to [Gtk.Global.showUri]
+ *   parent = the `GtkWindow` passed to [gtk.global.showUri]
  *   result = `GAsyncResult` that was passed to callback
  * Returns: %TRUE if the URI was shown successfully.
  *   Otherwise, %FALSE is returned and error is set
 
- * Deprecated: Use [Gtk.FileLauncher.launchFinish] or
- *   [Gtk.UriLauncher.launchFinish] instead
+ * Deprecated: Use [gtk.file_launcher.FileLauncher.launchFinish] or
+ *   [gtk.uri_launcher.UriLauncher.launchFinish] instead
  */
 bool showUriFullFinish(Window parent, AsyncResult result)
 {
@@ -988,7 +988,7 @@ bool testAccessibleHasState(Accessible accessible, AccessibleState state)
 
 /**
  * Return the type ids that have been registered after
- * calling [Gtk.Global.testRegisterAllTypes].
+ * calling [gtk.global.testRegisterAllTypes].
  * Returns: 0-terminated array of type ids
  */
 GType[] testListAllTypes()
@@ -1008,7 +1008,7 @@ GType[] testListAllTypes()
 /**
  * Force registration of all core GTK object types.
  * This allows to refer to any of those object types via
- * [GObject.Global.typeFromName] after calling this function.
+ * [gobject.global.typeFromName] after calling this function.
  */
 void testRegisterAllTypes()
 {
@@ -1050,7 +1050,7 @@ ContentProvider treeCreateRowDragContent(TreeModel treeModel, TreePath path)
 /**
  * Obtains a tree_model and path from value of target type
  * %GTK_TYPE_TREE_ROW_DATA.
- * The returned path must be freed with [Gtk.TreePath.free].
+ * The returned path must be freed with [gtk.tree_path.TreePath.free].
  * Params:
  *   value = a `GValue`
  *   treeModel = a `GtkTreeModel`

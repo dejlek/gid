@@ -166,7 +166,7 @@ enum GdkPixbufFormatFlags : uint
 }
 
 /**
- * The possible rotations which can be passed to [GdkPixbuf.Pixbuf.rotateSimple].
+ * The possible rotations which can be passed to [gdkpixbuf.pixbuf.Pixbuf.rotateSimple].
  * To make them easier to use, their numerical values are the actual degrees.
  */
 enum GdkPixbufRotation
@@ -200,8 +200,8 @@ enum GdkPixbufRotation
  * and the start of the next$(RPAREN).
  * ## Creating new `GdkPixbuf`
  * The most basic way to create a pixbuf is to wrap an existing pixel
- * buffer with a [GdkPixbuf.Pixbuf] instance. You can use the
- * [GdkPixbuf.Pixbuf.newFromData] function to do this.
+ * buffer with a [gdkpixbuf.pixbuf.Pixbuf] instance. You can use the
+ * [gdkpixbuf.pixbuf.Pixbuf.newFromData] function to do this.
  * Every time you create a new `GdkPixbuf` instance for some data, you
  * will need to specify the destroy notification function that will be
  * called when the data buffer needs to be freed; this will happen when
@@ -209,15 +209,15 @@ enum GdkPixbufRotation
  * you have a chunk of static data compiled into your application, you
  * can pass in `NULL` as the destroy notification function so that the
  * data will not be freed.
- * The [GdkPixbuf.Pixbuf.new_] constructor function can be used
+ * The [gdkpixbuf.pixbuf.Pixbuf.new_] constructor function can be used
  * as a convenience to create a pixbuf with an empty buffer; this is
  * equivalent to allocating a data buffer using `malloc$(LPAREN)$(RPAREN)` and then
- * wrapping it with `[GdkPixbuf.Pixbuf.newFromData]`. The `[GdkPixbuf.Pixbuf.new_]`
+ * wrapping it with `[gdkpixbuf.pixbuf.Pixbuf.newFromData]`. The `[gdkpixbuf.pixbuf.Pixbuf.new_]`
  * function will compute an optimal rowstride so that rendering can be
  * performed with an efficient algorithm.
- * As a special case, you can use the [GdkPixbuf.Pixbuf.newFromXpmData]
+ * As a special case, you can use the [gdkpixbuf.pixbuf.Pixbuf.newFromXpmData]
  * function to create a pixbuf from inline XPM image data.
- * You can also copy an existing pixbuf with the [GdkPixbuf.Pixbuf.copy]
+ * You can also copy an existing pixbuf with the [gdkpixbuf.pixbuf.Pixbuf.copy]
  * function. This is not the same as just acquiring a reference to
  * the old pixbuf instance: the copy function will actually duplicate
  * the pixel data in memory and create a new class@Pixbuf instance
@@ -226,9 +226,9 @@ enum GdkPixbufRotation
  * `GdkPixbuf` structures are reference counted. This means that an
  * application can share a single pixbuf among many parts of the
  * code. When a piece of the program needs to use a pixbuf, it should
- * acquire a reference to it by calling `[GObject.ObjectG.ref_]`; when it no
+ * acquire a reference to it by calling `[gobject.object.ObjectG.ref_]`; when it no
  * longer needs the pixbuf, it should release the reference it acquired
- * by calling `[GObject.ObjectG.unref]`. The resources associated with a
+ * by calling `[gobject.object.ObjectG.unref]`. The resources associated with a
  * `GdkPixbuf` will be freed when its reference count drops to zero.
  * Newly-created `GdkPixbuf` instances start with a reference count
  * of one.
@@ -237,13 +237,13 @@ enum GdkPixbufRotation
  * packed format. Rows in the image are stored top to bottom, and
  * in each row pixels are stored from left to right.
  * There may be padding at the end of a row.
- * The "rowstride" value of a pixbuf, as returned by [GdkPixbuf.Pixbuf.getRowstride],
+ * The "rowstride" value of a pixbuf, as returned by [gdkpixbuf.pixbuf.Pixbuf.getRowstride],
  * indicates the number of bytes between rows.
  * **NOTE**: If you are copying raw pixbuf data with `memcpy$(LPAREN)$(RPAREN)` note that the
  * last row in the pixbuf may not be as wide as the full rowstride, but rather
  * just as wide as the pixel data needs to be; that is: it is unsafe to do
  * `memcpy $(LPAREN)dest, pixels, rowstride * height$(RPAREN)` to copy a whole pixbuf. Use
- * [GdkPixbuf.Pixbuf.copy] instead, or compute the width in bytes of the
+ * [gdkpixbuf.pixbuf.Pixbuf.copy] instead, or compute the width in bytes of the
  * last row as:
  * ```c
  * last_row \= width * $(LPAREN)$(LPAREN)n_channels * bits_per_sample + 7$(RPAREN) / 8$(RPAREN);
@@ -290,7 +290,7 @@ enum GdkPixbufRotation
  * an image from a file in synchronous and asynchronous fashion.
  * For GUI applications, it is recommended to use the asynchronous
  * stream API to avoid blocking the control flow of the application.
- * Additionally, `GdkPixbuf` provides the [GdkPixbuf.PixbufLoader]
+ * Additionally, `GdkPixbuf` provides the [gdkpixbuf.pixbuf_loader.PixbufLoader]
  * API for progressive image loading.
  * ## Saving images
  * The `GdkPixbuf` class provides methods for saving image data in
@@ -458,25 +458,25 @@ struct GdkPixbufFormat
  * process of loading an image, by letting them send the image data
  * directly to the loader instead of having the loader read the data
  * from a file. Applications can use this functionality instead of
- * `[GdkPixbuf.Pixbuf.newFromFile]` or `[GdkPixbuf.PixbufAnimation.newFromFile]`
+ * `[gdkpixbuf.pixbuf.Pixbuf.newFromFile]` or `[gdkpixbuf.pixbuf_animation.PixbufAnimation.newFromFile]`
  * when they need to parse image data in small chunks. For example,
  * it should be used when reading an image from a $(LPAREN)potentially$(RPAREN) slow
  * network connection, or when loading an extremely large file.
  * To use `GdkPixbufLoader` to load an image, create a new instance,
- * and call [GdkPixbuf.PixbufLoader.write] to send the data
- * to it. When done, [GdkPixbuf.PixbufLoader.close] should be
+ * and call [gdkpixbuf.pixbuf_loader.PixbufLoader.write] to send the data
+ * to it. When done, [gdkpixbuf.pixbuf_loader.PixbufLoader.close] should be
  * called to end the stream and finalize everything.
  * The loader will emit three important signals throughout the process:
  * - signal@GdkPixbuf.PixbufLoader::size-prepared will be emitted as
  * soon as the image has enough information to determine the size of
  * the image to be used. If you want to scale the image while loading
- * it, you can call [GdkPixbuf.PixbufLoader.setSize] in
+ * it, you can call [gdkpixbuf.pixbuf_loader.PixbufLoader.setSize] in
  * response to this signal.
  * - signal@GdkPixbuf.PixbufLoader::area-prepared will be emitted as
  * soon as the pixbuf of the desired has been allocated. You can obtain
- * the `GdkPixbuf` instance by calling [GdkPixbuf.PixbufLoader.getPixbuf].
+ * the `GdkPixbuf` instance by calling [gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf].
  * If you want to use it, simply acquire a reference to it. You can
- * also call `[GdkPixbuf.PixbufLoader.getPixbuf]` later to get the same
+ * also call `[gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf]` later to get the same
  * pixbuf.
  * - signal@GdkPixbuf.PixbufLoader::area-updated will be emitted every
  * time a region is updated. This way you can update a partially
@@ -487,10 +487,10 @@ struct GdkPixbufFormat
  * ## Loading an animation
  * Loading an animation is almost as easy as loading an image. Once the
  * first signal@GdkPixbuf.PixbufLoader::area-prepared signal has been
- * emitted, you can call [GdkPixbuf.PixbufLoader.getAnimation] to
- * get the [GdkPixbuf.PixbufAnimation] instance, and then call
- * and [GdkPixbuf.PixbufAnimation.getIter] to get a
- * [GdkPixbuf.PixbufAnimationIter] to retrieve the pixbuf for the
+ * emitted, you can call [gdkpixbuf.pixbuf_loader.PixbufLoader.getAnimation] to
+ * get the [gdkpixbuf.pixbuf_animation.PixbufAnimation] instance, and then call
+ * and [gdkpixbuf.pixbuf_animation.PixbufAnimation.getIter] to get a
+ * [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter] to retrieve the pixbuf for the
  * desired time stamp.
  */
 struct GdkPixbufLoader

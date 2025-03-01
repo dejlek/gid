@@ -1,6 +1,6 @@
 module glib.iochannel;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -11,35 +11,35 @@ import gobject.boxed;
 /**
  * The `GIOChannel` data type aims to provide a portable method for
  * using file descriptors, pipes, and sockets, and integrating them
- * into the main event loop $(LPAREN)see [GLib.MainContext]$(RPAREN). Currently,
+ * into the main event loop $(LPAREN)see [glib.main_context.MainContext]$(RPAREN). Currently,
  * full support is available on UNIX platforms; support for Windows
  * is only partially complete.
  * To create a new `GIOChannel` on UNIX systems use
- * [GLib.IOChannel.unixNew]. This works for plain file descriptors,
+ * [glib.iochannel.IOChannel.unixNew]. This works for plain file descriptors,
  * pipes and sockets. Alternatively, a channel can be created for a
- * file in a system independent manner using [GLib.IOChannel.newFile].
+ * file in a system independent manner using [glib.iochannel.IOChannel.newFile].
  * Once a `GIOChannel` has been created, it can be used in a generic
- * manner with the functions [GLib.IOChannel.readChars],
- * [GLib.IOChannel.writeChars], [GLib.IOChannel.seekPosition],
- * and [GLib.IOChannel.shutdown].
+ * manner with the functions [glib.iochannel.IOChannel.readChars],
+ * [glib.iochannel.IOChannel.writeChars], [glib.iochannel.IOChannel.seekPosition],
+ * and [glib.iochannel.IOChannel.shutdown].
  * To add a `GIOChannel` to the main event loop, use func@GLib.io_add_watch or
  * func@GLib.io_add_watch_full. Here you specify which events you are
  * interested in on the `GIOChannel`, and provide a function to be called
  * whenever these events occur.
  * `GIOChannel` instances are created with an initial reference count of 1.
- * [GLib.IOChannel.ref_] and [GLib.IOChannel.unref] can be used to
+ * [glib.iochannel.IOChannel.ref_] and [glib.iochannel.IOChannel.unref] can be used to
  * increment or decrement the reference count respectively. When the
  * reference count falls to 0, the `GIOChannel` is freed. $(LPAREN)Though it
  * isn’t closed automatically, unless it was created using
- * [GLib.IOChannel.newFile].$(RPAREN) Using func@GLib.io_add_watch or
+ * [glib.iochannel.IOChannel.newFile].$(RPAREN) Using func@GLib.io_add_watch or
  * func@GLib.io_add_watch_full increments a channel’s reference count.
- * The new functions [GLib.IOChannel.readChars],
- * [GLib.IOChannel.readLine], [GLib.IOChannel.readLineString],
- * [GLib.IOChannel.readToEnd], [GLib.IOChannel.writeChars],
- * [GLib.IOChannel.seekPosition], and [GLib.IOChannel.flush]
+ * The new functions [glib.iochannel.IOChannel.readChars],
+ * [glib.iochannel.IOChannel.readLine], [glib.iochannel.IOChannel.readLineString],
+ * [glib.iochannel.IOChannel.readToEnd], [glib.iochannel.IOChannel.writeChars],
+ * [glib.iochannel.IOChannel.seekPosition], and [glib.iochannel.IOChannel.flush]
  * should not be mixed with the deprecated functions
- * [GLib.IOChannel.read], [GLib.IOChannel.write], and
- * [GLib.IOChannel.seek] on the same channel.
+ * [glib.iochannel.IOChannel.read], [glib.iochannel.IOChannel.write], and
+ * [glib.iochannel.IOChannel.seek] on the same channel.
  */
 class IOChannel : Boxed
 {
@@ -68,7 +68,7 @@ class IOChannel : Boxed
   /**
    * Open a file filename as a #GIOChannel using mode mode. This
    * channel will be closed when the last reference to it is dropped,
-   * so there is no need to call [GLib.IOChannel.close] $(LPAREN)though doing
+   * so there is no need to call [glib.iochannel.IOChannel.close] $(LPAREN)though doing
    * so will not cause problems, as long as no attempt is made to
    * access the channel after it is closed$(RPAREN).
    * Params:
@@ -97,11 +97,11 @@ class IOChannel : Boxed
    * The default encoding for #GIOChannel is UTF-8. If your application
    * is reading output from a command using via pipe, you may need to set
    * the encoding to the encoding of the current locale $(LPAREN)see
-   * [GLib.Global.getCharset]$(RPAREN) with the [GLib.IOChannel.setEncoding] function.
+   * [glib.global.getCharset]$(RPAREN) with the [glib.iochannel.IOChannel.setEncoding] function.
    * By default, the fd passed will not be closed when the final reference
    * to the #GIOChannel data structure is dropped.
    * If you want to read raw binary data without interpretation, then
-   * call the [GLib.IOChannel.setEncoding] function with %NULL for the
+   * call the [glib.iochannel.IOChannel.setEncoding] function with %NULL for the
    * encoding argument.
    * This function is available in GLib on Windows, too, but you should
    * avoid using it on Windows. The domain of file descriptors and
@@ -124,9 +124,9 @@ class IOChannel : Boxed
   /**
    * Close an IO channel. Any pending data to be written will be
    * flushed, ignoring errors. The channel will not be freed until the
-   * last reference is dropped using [GLib.IOChannel.unref].
+   * last reference is dropped using [glib.iochannel.IOChannel.unref].
 
-   * Deprecated: Use [GLib.IOChannel.shutdown] instead.
+   * Deprecated: Use [glib.iochannel.IOChannel.shutdown] instead.
    */
   void close()
   {
@@ -222,7 +222,7 @@ class IOChannel : Boxed
    * are cached for internal use by the channel when it is created.
    * If they should change at some later point $(LPAREN)e.g. partial shutdown
    * of a socket with the UNIX shutdown$(LPAREN)$(RPAREN) function$(RPAREN), the user
-   * should immediately call [GLib.IOChannel.getFlags] to update
+   * should immediately call [glib.iochannel.IOChannel.getFlags] to update
    * the internal values of these flags.
    * Returns: the flags which are set on the channel
    */
@@ -270,7 +270,7 @@ class IOChannel : Boxed
    *   bytesRead = returns the number of bytes actually read
    * Returns: %G_IO_ERROR_NONE if the operation was successful.
 
-   * Deprecated: Use [GLib.IOChannel.readChars] instead.
+   * Deprecated: Use [glib.iochannel.IOChannel.readChars] instead.
    */
   IOError read(ref ubyte[] buf, out size_t bytesRead)
   {
@@ -282,7 +282,7 @@ class IOChannel : Boxed
   }
 
   /**
-   * Replacement for [GLib.IOChannel.read] with the new API.
+   * Replacement for [glib.iochannel.IOChannel.read] with the new API.
    * Params:
    *   buf = a buffer to read data into
    *   bytesRead = The number of bytes read. This may be
@@ -310,7 +310,7 @@ class IOChannel : Boxed
    * is %G_IO_STATUS_NORMAL.
    * Params:
    *   strReturn = The line read from the #GIOChannel, including the
-   *     line terminator. This data should be freed with [GLib.Global.gfree]
+   *     line terminator. This data should be freed with [glib.global.gfree]
    *     when no longer needed. This is a nul-terminated string.
    *     If a length of zero is returned, this will be %NULL instead.
    *   length = location to store length of the read data, or %NULL
@@ -355,7 +355,7 @@ class IOChannel : Boxed
    * Params:
    *   strReturn = Location to
    *     store a pointer to a string holding the remaining data in the
-   *     #GIOChannel. This data should be freed with [GLib.Global.gfree] when no
+   *     #GIOChannel. This data should be freed with [glib.global.gfree] when no
    *     longer needed. This data is terminated by an extra nul
    *     character, but there may be other nuls in the intervening data.
    * Returns: %G_IO_STATUS_NORMAL on success.
@@ -406,7 +406,7 @@ class IOChannel : Boxed
    *     $(LPAREN)the end of the file$(RPAREN)
    * Returns: %G_IO_ERROR_NONE if the operation was successful.
 
-   * Deprecated: Use [GLib.IOChannel.seekPosition] instead.
+   * Deprecated: Use [glib.iochannel.IOChannel.seekPosition] instead.
    */
   IOError seek(long offset, SeekType type)
   {
@@ -417,7 +417,7 @@ class IOChannel : Boxed
   }
 
   /**
-   * Replacement for [GLib.IOChannel.seek] with the new API.
+   * Replacement for [glib.iochannel.IOChannel.seek] with the new API.
    * Params:
    *   offset = The offset in bytes from the position specified by type
    *   type = a #GSeekType. The type %G_SEEK_CUR is only allowed in those
@@ -497,21 +497,21 @@ class IOChannel : Boxed
    * - The channel was just created, and has not been written to or read from yet.
    * - The channel is write-only.
    * - The channel is a file, and the file pointer was just repositioned
-   * by a call to [GLib.IOChannel.seekPosition]. $(LPAREN)This flushes all the
+   * by a call to [glib.iochannel.IOChannel.seekPosition]. $(LPAREN)This flushes all the
    * internal buffers.$(RPAREN)
    * - The current encoding is %NULL or UTF-8.
    * - One of the $(LPAREN)new API$(RPAREN) read functions has just returned %G_IO_STATUS_EOF
-   * $(LPAREN)or, in the case of [GLib.IOChannel.readToEnd], %G_IO_STATUS_NORMAL$(RPAREN).
-   * -  One of the functions [GLib.IOChannel.readChars] or
-   * [GLib.IOChannel.readUnichar] has returned %G_IO_STATUS_AGAIN or
+   * $(LPAREN)or, in the case of [glib.iochannel.IOChannel.readToEnd], %G_IO_STATUS_NORMAL$(RPAREN).
+   * -  One of the functions [glib.iochannel.IOChannel.readChars] or
+   * [glib.iochannel.IOChannel.readUnichar] has returned %G_IO_STATUS_AGAIN or
    * %G_IO_STATUS_ERROR. This may be useful in the case of
    * %G_CONVERT_ERROR_ILLEGAL_SEQUENCE.
-   * Returning one of these statuses from [GLib.IOChannel.readLine],
-   * [GLib.IOChannel.readLineString], or [GLib.IOChannel.readToEnd]
+   * Returning one of these statuses from [glib.iochannel.IOChannel.readLine],
+   * [glib.iochannel.IOChannel.readLineString], or [glib.iochannel.IOChannel.readToEnd]
    * does not guarantee that the encoding can be changed.
    * Channels which do not meet one of the above conditions cannot call
-   * [GLib.IOChannel.seekPosition] with an offset of %G_SEEK_CUR, and, if
-   * they are "seekable", cannot call [GLib.IOChannel.writeChars] after
+   * [glib.iochannel.IOChannel.seekPosition] with an offset of %G_SEEK_CUR, and, if
+   * they are "seekable", cannot call [glib.iochannel.IOChannel.writeChars] after
    * calling one of the API "read" functions.
    * Params:
    *   encoding = the encoding type
@@ -568,7 +568,7 @@ class IOChannel : Boxed
   /**
    * Close an IO channel. Any pending data to be written will be
    * flushed if flush is %TRUE. The channel will not be freed until the
-   * last reference is dropped using [GLib.IOChannel.unref].
+   * last reference is dropped using [glib.iochannel.IOChannel.unref].
    * Params:
    *   flush = if %TRUE, flush pending
    * Returns: the status of the operation.
@@ -605,7 +605,7 @@ class IOChannel : Boxed
    *   bytesWritten = the number of bytes actually written
    * Returns: %G_IO_ERROR_NONE if the operation was successful.
 
-   * Deprecated: Use [GLib.IOChannel.writeChars] instead.
+   * Deprecated: Use [glib.iochannel.IOChannel.writeChars] instead.
    */
   IOError write(string buf, size_t count, out size_t bytesWritten)
   {
@@ -617,7 +617,7 @@ class IOChannel : Boxed
   }
 
   /**
-   * Replacement for [GLib.IOChannel.write] with the new API.
+   * Replacement for [glib.iochannel.IOChannel.write] with the new API.
    * On seekable channels with encodings other than %NULL or UTF-8, generic
    * mixing of reading and writing is not allowed. A call to g_io_channel_write_chars $(LPAREN)$(RPAREN)
    * may only be made on a channel from which data has been read in the

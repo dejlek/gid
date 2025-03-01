@@ -1,6 +1,6 @@
 module gio.output_stream;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -14,12 +14,12 @@ import gobject.object;
 
 /**
  * `GOutputStream` is a base class for implementing streaming output.
- * It has functions to write to a stream $(LPAREN)[Gio.OutputStream.write]$(RPAREN),
- * to close a stream $(LPAREN)[Gio.OutputStream.close]$(RPAREN) and to flush pending
- * writes $(LPAREN)[Gio.OutputStream.flush]$(RPAREN).
+ * It has functions to write to a stream $(LPAREN)[gio.output_stream.OutputStream.write]$(RPAREN),
+ * to close a stream $(LPAREN)[gio.output_stream.OutputStream.close]$(RPAREN) and to flush pending
+ * writes $(LPAREN)[gio.output_stream.OutputStream.flush]$(RPAREN).
  * To copy the content of an input stream to an output stream without
- * manually handling the reads and writes, use [Gio.OutputStream.splice].
- * See the documentation for [Gio.IOStream] for details of thread safety
+ * manually handling the reads and writes, use [gio.output_stream.OutputStream.splice].
+ * See the documentation for [gio.iostream.IOStream] for details of thread safety
  * of streaming APIs.
  * All of these functions have async variants too.
  * All classes derived from `GOutputStream` *should* implement synchronous
@@ -94,9 +94,9 @@ class OutputStream : ObjectG
   /**
    * Requests an asynchronous close of the stream, releasing resources
    * related to it. When the operation is finished callback will be
-   * called. You can then call [Gio.OutputStream.closeFinish] to get
+   * called. You can then call [gio.output_stream.OutputStream.closeFinish] to get
    * the result of the operation.
-   * For behaviour details see [Gio.OutputStream.close].
+   * For behaviour details see [gio.output_stream.OutputStream.close].
    * The asynchronous methods have a default fallback that uses threads
    * to implement asynchronicity, so they are optional for inheriting
    * classes. However, if you override one you must override all.
@@ -162,9 +162,9 @@ class OutputStream : ObjectG
   /**
    * Forces an asynchronous write of all user-space buffered data for
    * the given stream.
-   * For behaviour details see [Gio.OutputStream.flush].
+   * For behaviour details see [gio.output_stream.OutputStream.flush].
    * When the operation is finished callback will be
-   * called. You can then call [Gio.OutputStream.flushFinish] to get the
+   * called. You can then call [gio.output_stream.OutputStream.flushFinish] to get the
    * result of the operation.
    * Params:
    *   ioPriority = the io priority of the request.
@@ -280,10 +280,10 @@ class OutputStream : ObjectG
   /**
    * Splices a stream asynchronously.
    * When the operation is finished callback will be called.
-   * You can then call [Gio.OutputStream.spliceFinish] to get the
+   * You can then call [gio.output_stream.OutputStream.spliceFinish] to get the
    * result of the operation.
    * For the synchronous, blocking version of this function, see
-   * [Gio.OutputStream.splice].
+   * [gio.output_stream.OutputStream.splice].
    * Params:
    *   source = a #GInputStream.
    *   flags = a set of #GOutputStreamSpliceFlags.
@@ -366,7 +366,7 @@ class OutputStream : ObjectG
   /**
    * Tries to write count bytes from buffer into the stream. Will block
    * during the operation.
-   * This function is similar to [Gio.OutputStream.write], except it tries to
+   * This function is similar to [gio.output_stream.OutputStream.write], except it tries to
    * write as many bytes as requested, only stopping on an error.
    * On a successful write of count bytes, %TRUE is returned, and bytes_written
    * is set to count.
@@ -378,7 +378,7 @@ class OutputStream : ObjectG
    * successfully written before the error was encountered.  This
    * functionality is only available from C.  If you need it from another
    * language then you must write your own loop around
-   * [Gio.OutputStream.write].
+   * [gio.output_stream.OutputStream.write].
    * Params:
    *   buffer = the buffer containing the data to write.
    *   bytesWritten = location to store the number of bytes that was
@@ -404,10 +404,10 @@ class OutputStream : ObjectG
   /**
    * Request an asynchronous write of count bytes from buffer into
    * the stream. When the operation is finished callback will be called.
-   * You can then call [Gio.OutputStream.writeAllFinish] to get the result of the
+   * You can then call [gio.output_stream.OutputStream.writeAllFinish] to get the result of the
    * operation.
-   * This is the asynchronous version of [Gio.OutputStream.writeAll].
-   * Call [Gio.OutputStream.writeAllFinish] to collect the result.
+   * This is the asynchronous version of [gio.output_stream.OutputStream.writeAll].
+   * Call [gio.output_stream.OutputStream.writeAllFinish] to collect the result.
    * Any outstanding I/O request with higher priority $(LPAREN)lower numerical
    * value$(RPAREN) will be executed before an outstanding request with lower
    * priority. Default priority is %G_PRIORITY_DEFAULT.
@@ -442,14 +442,14 @@ class OutputStream : ObjectG
 
   /**
    * Finishes an asynchronous stream write operation started with
-   * [Gio.OutputStream.writeAllAsync].
+   * [gio.output_stream.OutputStream.writeAllAsync].
    * As a special exception to the normal conventions for functions that
    * use #GError, if this function returns %FALSE $(LPAREN)and sets error$(RPAREN) then
    * bytes_written will be set to the number of bytes that were
    * successfully written before the error was encountered.  This
    * functionality is only available from C.  If you need it from another
    * language then you must write your own loop around
-   * [Gio.OutputStream.writeAsync].
+   * [gio.output_stream.OutputStream.writeAsync].
    * Params:
    *   result = a #GAsyncResult
    *   bytesWritten = location to store the number of bytes that was written to the stream
@@ -468,7 +468,7 @@ class OutputStream : ObjectG
   /**
    * Request an asynchronous write of count bytes from buffer into
    * the stream. When the operation is finished callback will be called.
-   * You can then call [Gio.OutputStream.writeFinish] to get the result of the
+   * You can then call [gio.output_stream.OutputStream.writeFinish] to get the result of the
    * operation.
    * During an async request no other sync and async calls are allowed,
    * and will result in %G_IO_ERROR_PENDING errors.
@@ -488,9 +488,9 @@ class OutputStream : ObjectG
    * to implement asynchronicity, so they are optional for inheriting
    * classes. However, if you override one you must override all.
    * For the synchronous, blocking version of this function, see
-   * [Gio.OutputStream.write].
+   * [gio.output_stream.OutputStream.write].
    * Note that no copy of buffer will be made, so it must stay valid
-   * until callback is called. See [Gio.OutputStream.writeBytesAsync]
+   * until callback is called. See [gio.output_stream.OutputStream.writeBytesAsync]
    * for a #GBytes version that will automatically hold a reference to
    * the contents $(LPAREN)without copying$(RPAREN) for the duration of the call.
    * Params:
@@ -521,14 +521,14 @@ class OutputStream : ObjectG
   }
 
   /**
-   * A wrapper function for [Gio.OutputStream.write] which takes a
+   * A wrapper function for [gio.output_stream.OutputStream.write] which takes a
    * #GBytes as input.  This can be more convenient for use by language
    * bindings or in other cases where the refcounted nature of #GBytes
    * is helpful over a bare pointer interface.
    * However, note that this function may still perform partial writes,
-   * just like [Gio.OutputStream.write].  If that occurs, to continue
+   * just like [gio.output_stream.OutputStream.write].  If that occurs, to continue
    * writing, you will need to create a new #GBytes containing just the
-   * remaining bytes, using [GLib.Bytes.newFromBytes]. Passing the same
+   * remaining bytes, using [glib.bytes.Bytes.newFromBytes]. Passing the same
    * #GBytes instance multiple times potentially can result in duplicated
    * data in the output stream.
    * Params:
@@ -547,17 +547,17 @@ class OutputStream : ObjectG
   }
 
   /**
-   * This function is similar to [Gio.OutputStream.writeAsync], but
+   * This function is similar to [gio.output_stream.OutputStream.writeAsync], but
    * takes a #GBytes as input.  Due to the refcounted nature of #GBytes,
    * this allows the stream to avoid taking a copy of the data.
    * However, note that this function may still perform partial writes,
-   * just like [Gio.OutputStream.writeAsync]. If that occurs, to continue
+   * just like [gio.output_stream.OutputStream.writeAsync]. If that occurs, to continue
    * writing, you will need to create a new #GBytes containing just the
-   * remaining bytes, using [GLib.Bytes.newFromBytes]. Passing the same
+   * remaining bytes, using [glib.bytes.Bytes.newFromBytes]. Passing the same
    * #GBytes instance multiple times potentially can result in duplicated
    * data in the output stream.
    * For the synchronous, blocking version of this function, see
-   * [Gio.OutputStream.writeBytes].
+   * [gio.output_stream.OutputStream.writeBytes].
    * Params:
    *   bytes = The bytes to write
    *   ioPriority = the io priority of the request.
@@ -628,7 +628,7 @@ class OutputStream : ObjectG
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
    * operation was partially finished when the operation was cancelled the
    * partial result will be returned, without an error.
-   * Some implementations of [Gio.OutputStream.writev] may have limitations on the
+   * Some implementations of [gio.output_stream.OutputStream.writev] may have limitations on the
    * aggregate buffer size, and will return %G_IO_ERROR_INVALID_ARGUMENT if these
    * are exceeded. For example, when writing to a local file on UNIX platforms,
    * the aggregate buffer size must not exceed %G_MAXSSIZE bytes.
@@ -657,7 +657,7 @@ class OutputStream : ObjectG
   /**
    * Tries to write the bytes contained in the n_vectors vectors into the
    * stream. Will block during the operation.
-   * This function is similar to [Gio.OutputStream.writev], except it tries to
+   * This function is similar to [gio.output_stream.OutputStream.writev], except it tries to
    * write as many bytes as requested, only stopping on an error.
    * On a successful write of all n_vectors vectors, %TRUE is returned, and
    * bytes_written is set to the sum of all the sizes of vectors.
@@ -669,7 +669,7 @@ class OutputStream : ObjectG
    * successfully written before the error was encountered.  This
    * functionality is only available from C. If you need it from another
    * language then you must write your own loop around
-   * [Gio.OutputStream.write].
+   * [gio.output_stream.OutputStream.write].
    * The content of the individual elements of vectors might be changed by this
    * function.
    * Params:
@@ -697,10 +697,10 @@ class OutputStream : ObjectG
   /**
    * Request an asynchronous write of the bytes contained in the n_vectors vectors into
    * the stream. When the operation is finished callback will be called.
-   * You can then call [Gio.OutputStream.writevAllFinish] to get the result of the
+   * You can then call [gio.output_stream.OutputStream.writevAllFinish] to get the result of the
    * operation.
-   * This is the asynchronous version of [Gio.OutputStream.writevAll].
-   * Call [Gio.OutputStream.writevAllFinish] to collect the result.
+   * This is the asynchronous version of [gio.output_stream.OutputStream.writevAll].
+   * Call [gio.output_stream.OutputStream.writevAllFinish] to collect the result.
    * Any outstanding I/O request with higher priority $(LPAREN)lower numerical
    * value$(RPAREN) will be executed before an outstanding request with lower
    * priority. Default priority is %G_PRIORITY_DEFAULT.
@@ -736,14 +736,14 @@ class OutputStream : ObjectG
 
   /**
    * Finishes an asynchronous stream write operation started with
-   * [Gio.OutputStream.writevAllAsync].
+   * [gio.output_stream.OutputStream.writevAllAsync].
    * As a special exception to the normal conventions for functions that
    * use #GError, if this function returns %FALSE $(LPAREN)and sets error$(RPAREN) then
    * bytes_written will be set to the number of bytes that were
    * successfully written before the error was encountered.  This
    * functionality is only available from C.  If you need it from another
    * language then you must write your own loop around
-   * [Gio.OutputStream.writevAsync].
+   * [gio.output_stream.OutputStream.writevAsync].
    * Params:
    *   result = a #GAsyncResult
    *   bytesWritten = location to store the number of bytes that were written to the stream
@@ -762,7 +762,7 @@ class OutputStream : ObjectG
   /**
    * Request an asynchronous write of the bytes contained in n_vectors vectors into
    * the stream. When the operation is finished callback will be called.
-   * You can then call [Gio.OutputStream.writevFinish] to get the result of the
+   * You can then call [gio.output_stream.OutputStream.writevFinish] to get the result of the
    * operation.
    * During an async request no other sync and async calls are allowed,
    * and will result in %G_IO_ERROR_PENDING errors.
@@ -780,7 +780,7 @@ class OutputStream : ObjectG
    * to implement asynchronicity, so they are optional for inheriting
    * classes. However, if you override one you must override all.
    * For the synchronous, blocking version of this function, see
-   * [Gio.OutputStream.writev].
+   * [gio.output_stream.OutputStream.writev].
    * Note that no copy of vectors will be made, so it must stay valid
    * until callback is called.
    * Params:

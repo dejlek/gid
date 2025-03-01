@@ -1,6 +1,6 @@
 module gio.app_info_monitor;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -11,23 +11,23 @@ import gobject.object;
  * `GAppInfoMonitor` monitors application information for changes.
  * `GAppInfoMonitor` is a very simple object used for monitoring the app
  * info database for changes $(LPAREN)newly installed or removed applications$(RPAREN).
- * Call [Gio.AppInfoMonitor.get] to get a `GAppInfoMonitor` and connect
- * to the [Gio.AppInfoMonitor.changed] signal. The signal will be emitted once when
+ * Call [gio.app_info_monitor.AppInfoMonitor.get] to get a `GAppInfoMonitor` and connect
+ * to the [gio.app_info_monitor.AppInfoMonitor.changed] signal. The signal will be emitted once when
  * the app info database changes, and will not be emitted again until after the
- * next call to [Gio.AppInfo.getAll] or another `g_app_info_*()` function.
+ * next call to [gio.app_info.AppInfo.getAll] or another `g_app_info_*()` function.
  * This is because monitoring the app info database for changes is expensive.
- * The following functions will re-arm the [Gio.AppInfoMonitor.changed]
+ * The following functions will re-arm the [gio.app_info_monitor.AppInfoMonitor.changed]
  * signal so it can be emitted again:
- * - [Gio.AppInfo.getAll]
- * - [Gio.AppInfo.getAllForType]
- * - [Gio.AppInfo.getDefaultForType]
- * - [Gio.AppInfo.getFallbackForType]
- * - [Gio.AppInfo.getRecommendedForType]
- * - [`[Gio.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
- * - [`[Gio.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
- * - [`[Gio.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
- * - [`[Gio.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
- * - [`[Gio.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
+ * - [gio.app_info.AppInfo.getAll]
+ * - [gio.app_info.AppInfo.getAllForType]
+ * - [gio.app_info.AppInfo.getDefaultForType]
+ * - [gio.app_info.AppInfo.getFallbackForType]
+ * - [gio.app_info.AppInfo.getRecommendedForType]
+ * - [`[gio.desktop_app_info.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
+ * - [`[gio.desktop_app_info.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
+ * - [`[gio.desktop_app_info.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
+ * - [`[gio.desktop_app_info.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
+ * - [`[gio.desktop_app_info.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
  * The latter functions are available if using
  * [`GDesktopAppInfo`](../gio-unix/class.DesktopAppInfo.html) from
  * `gio-unix-2.0.pc` $(LPAREN)GIR namespace `GioUnix-2.0`$(RPAREN).
@@ -66,11 +66,11 @@ class AppInfoMonitor : ObjectG
    * context.
    * The #GAppInfoMonitor will emit a "changed" signal in the
    * thread-default main context whenever the list of installed
-   * applications $(LPAREN)as reported by [Gio.AppInfo.getAll]$(RPAREN) may have changed.
+   * applications $(LPAREN)as reported by [gio.app_info.AppInfo.getAll]$(RPAREN) may have changed.
    * The #GAppInfoMonitor::changed signal will only be emitted once until
-   * [Gio.AppInfo.getAll] $(LPAREN)$(RPAREN)(or another `g_app_info_*` function) is called. Doing
+   * [gio.app_info.AppInfo.getAll] $(LPAREN)$(RPAREN)(or another `g_app_info_*` function) is called. Doing
    * so will re-arm the signal ready to notify about the next change.
-   * You must only call [GObject.ObjectG.unref] on the return value from under
+   * You must only call [gobject.object.ObjectG.unref] on the return value from under
    * the same main context as you created it.
    * Returns: a reference to a #GAppInfoMonitor
    */

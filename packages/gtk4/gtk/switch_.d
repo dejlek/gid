@@ -1,6 +1,6 @@
 module gtk.switch_;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -22,9 +22,9 @@ import gtk.widget;
  * empty area, or by dragging the handle.
  * `GtkSwitch` can also handle situations where the underlying state
  * changes with a delay. In this case, the slider position indicates
- * the user's recent change $(LPAREN)as indicated by the [Gtk.Switch.active]
+ * the user's recent change $(LPAREN)as indicated by the [gtk.switch_.Switch.gboolean]
  * property$(RPAREN), and the color indicates whether the underlying state $(LPAREN)represented
- * by the [Gtk.Switch.state] property$(RPAREN) has been updated yet.
+ * by the [gtk.switch_.Switch.gboolean] property$(RPAREN) has been updated yet.
  * ![GtkSwitch with delayed state change](switch-state.png)
  * See signal@Gtk.Switch::state-set for details.
  * # CSS nodes
@@ -120,7 +120,7 @@ class Switch : Widget, Actionable
   /**
    * Emitted to animate the switch.
    * Applications should never connect to this signal,
-   * but use the [Gtk.Switch.active] property.
+   * but use the [gtk.switch_.Switch.gboolean] property.
    *   switch_ = the instance the signal is connected to
    */
   alias ActivateCallbackDlg = void delegate(Switch switch_);
@@ -152,14 +152,14 @@ class Switch : Widget, Actionable
    * Emitted to change the underlying state.
    * The ::state-set signal is emitted when the user changes the switch
    * position. The default handler keeps the state in sync with the
-   * [Gtk.Switch.active] property.
+   * [gtk.switch_.Switch.gboolean] property.
    * To implement delayed state change, applications can connect to this
    * signal, initiate the change of the underlying state, and call
-   * [Gtk.Switch.setState] when the underlying state change is
+   * [gtk.switch_.Switch.setState] when the underlying state change is
    * complete. The signal handler should return %TRUE to prevent the
    * default handler from running.
    * Visually, the underlying state is represented by the trough color of
-   * the switch, while the [Gtk.Switch.active] property is
+   * the switch, while the [gtk.switch_.Switch.gboolean] property is
    * represented by the position of the switch.
    * Params
    *   state = the new state of the switch

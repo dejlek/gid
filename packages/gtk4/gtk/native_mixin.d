@@ -2,7 +2,7 @@ module gtk.native_mixin;
 
 public import gtk.native_iface_proxy;
 public import gdk.surface;
-public import gid.gid;
+public import gid.global;
 public import gobject.object;
 public import gsk.renderer;
 public import gtk.c.functions;
@@ -14,13 +14,13 @@ public import gtk.types;
  * their own `GdkSurface`.
  * The obvious example of a `GtkNative` is `GtkWindow`.
  * Every widget that is not itself a `GtkNative` is contained in one,
- * and you can get it with [Gtk.Widget.getNative].
- * To get the surface of a `GtkNative`, use [Gtk.Native.getSurface].
+ * and you can get it with [gtk.widget.Widget.getNative].
+ * To get the surface of a `GtkNative`, use [gtk.native.Native.getSurface].
  * It is also possible to find the `GtkNative` to which a surface
- * belongs, with [Gtk.Native.getForSurface].
- * In addition to a [Gdk.Surface], a `GtkNative` also provides
- * a [Gsk.Renderer] for rendering on that surface. To get the
- * renderer, use [Gtk.Native.getRenderer].
+ * belongs, with [gtk.native.Native.getForSurface].
+ * In addition to a [gdk.surface.Surface], a `GtkNative` also provides
+ * a [gsk.renderer.Renderer] for rendering on that surface. To get the
+ * renderer, use [gtk.native.Native.getRenderer].
  */
 template NativeT()
 {

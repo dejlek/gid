@@ -1,6 +1,6 @@
 module gtk.bitset_iter;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gtk.bitset;
 import gtk.c.functions;
@@ -11,8 +11,8 @@ import gtk.types;
  * An opaque, stack-allocated struct for iterating
  * over the elements of a `GtkBitset`.
  * Before a `GtkBitsetIter` can be used, it needs to be initialized with
- * [Gtk.BitsetIter.initFirst], [Gtk.BitsetIter.initLast]
- * or [Gtk.BitsetIter.initAt].
+ * [gtk.bitset_iter.BitsetIter.initFirst], [gtk.bitset_iter.BitsetIter.initLast]
+ * or [gtk.bitset_iter.BitsetIter.initAt].
  */
 class BitsetIter : Boxed
 {
@@ -45,7 +45,7 @@ class BitsetIter : Boxed
 
   /**
    * Gets the current value that iter points to.
-   * If iter is not valid and [Gtk.BitsetIter.isValid]
+   * If iter is not valid and [gtk.bitset_iter.BitsetIter.isValid]
    * returns %FALSE, this function returns 0.
    * Returns: The current value pointer to by iter
    */

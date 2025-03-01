@@ -1,6 +1,6 @@
 module gtk.popover_menu;
 
-import gid.gid;
+import gid.global;
 import gio.menu_model;
 import gobject.object;
 import gtk.accessible;
@@ -26,11 +26,11 @@ import gtk.widget;
  * `GtkPopoverMenu` treats its children like menus and allows switching
  * between them. It can open submenus as traditional, nested submenus,
  * or in a more touch-friendly sliding fashion.
- * The property [Gtk.PopoverMenu.flags] controls this appearance.
+ * The property [gtk.popover_menu.PopoverMenu.PopoverMenuFlags] controls this appearance.
  * `GtkPopoverMenu` is meant to be used primarily with menu models,
- * using [Gtk.PopoverMenu.newFromModel]. If you need to put
+ * using [gtk.popover_menu.PopoverMenu.newFromModel]. If you need to put
  * other widgets such as a `GtkSpinButton` or a `GtkSwitch` into a popover,
- * you can use [Gtk.PopoverMenu.addChild].
+ * you can use [gtk.popover_menu.PopoverMenu.addChild].
  * For more dialog-like behavior, use a plain `GtkPopover`.
  * ## Menu models
  * The XML format understood by `GtkBuilder` for `GMenuModel` consists
@@ -74,9 +74,9 @@ import gtk.widget;
  * whether a submenu is open
  * - "hidden-when": a string used to determine when the item will be hidden.
  * Possible values include "action-disabled", "action-missing", "macos-menubar".
- * This is mainly useful for exported menus, see [Gtk.Application.setMenubar].
+ * This is mainly useful for exported menus, see [gtk.application.Application.setMenubar].
  * - "custom": a string used to match against the ID of a custom child added with
- * [Gtk.PopoverMenu.addChild], [Gtk.PopoverMenuBar.addChild],
+ * [gtk.popover_menu.PopoverMenu.addChild], [gtk.popover_menu_bar.PopoverMenuBar.addChild],
  * or in the ui file with `<child type\="ID">`.
  * The following attributes are used when constructing sections:
  * - "label": a user-visible string to use as section heading
@@ -91,9 +91,9 @@ import gtk.widget;
  * - "label": a user-visible string to display
  * - "icon": icon name to display
  * Menu items will also show accelerators, which are usually associated
- * with actions via [Gtk.Application.setAccelsForAction],
- * [Gtk.WidgetClass.addBindingAction] or
- * [Gtk.ShortcutController.addShortcut].
+ * with actions via [gtk.application.Application.setAccelsForAction],
+ * [gtk.widget_class.WidgetClass.addBindingAction] or
+ * [gtk.shortcut_controller.ShortcutController.addShortcut].
  * # CSS Nodes
  * `GtkPopoverMenu` is just a subclass of `GtkPopover` that adds custom content
  * to it, therefore it has the same CSS nodes. It is one of the cases that add
@@ -136,10 +136,10 @@ class PopoverMenu : Popover
    * `GtkApplicationWindow` to which the popover belongs - typically
    * by means of being attached to a widget that is contained within
    * the `GtkApplicationWindow`s widget hierarchy.
-   * Actions can also be added using [Gtk.Widget.insertActionGroup]
+   * Actions can also be added using [gtk.widget.Widget.insertActionGroup]
    * on the menus attach widget or on any of its parent widgets.
    * This function creates menus with sliding submenus.
-   * See [Gtk.PopoverMenu.newFromModelFull] for a way
+   * See [gtk.popover_menu.PopoverMenu.newFromModelFull] for a way
    * to control this.
    * Params:
    *   model = a `GMenuModel`
@@ -158,7 +158,7 @@ class PopoverMenu : Popover
    * The created buttons are connected to actions found in the
    * action groups that are accessible from the parent widget.
    * This includes the `GtkApplicationWindow` to which the popover
-   * belongs. Actions can also be added using [Gtk.Widget.insertActionGroup]
+   * belongs. Actions can also be added using [gtk.widget.Widget.insertActionGroup]
    * on the parent widget or on any of its parent widgets.
    * Params:
    *   model = a `GMenuModel`
@@ -216,7 +216,7 @@ class PopoverMenu : Popover
 
   /**
    * Removes a widget that has previously been added with
-   * [Gtk.PopoverMenu.addChild]
+   * [gtk.popover_menu.PopoverMenu.addChild]
    * Params:
    *   child = the `GtkWidget` to remove
    * Returns: %TRUE if the widget was removed

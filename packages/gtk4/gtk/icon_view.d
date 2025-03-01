@@ -5,7 +5,7 @@ import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.rectangle;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -34,8 +34,8 @@ import gtk.widget;
  * `GtkIconView` is a widget which displays data in a grid of icons.
  * `GtkIconView` provides an alternative view on a `GtkTreeModel`.
  * It displays the model as a grid of icons with labels. Like
- * [Gtk.TreeView], it allows to select one or multiple items
- * $(LPAREN)depending on the selection mode, see [Gtk.IconView.setSelectionMode]$(RPAREN).
+ * [gtk.tree_view.TreeView], it allows to select one or multiple items
+ * $(LPAREN)depending on the selection mode, see [gtk.icon_view.IconView.setSelectionMode]$(RPAREN).
  * In addition to selection with the arrow keys, `GtkIconView` supports
  * rubberband selection, which is controlled by dragging the pointer.
  * Note that if the tree model is backed by an actual tree store $(LPAREN)as
@@ -50,7 +50,7 @@ import gtk.widget;
  * `GtkIconView` has a single CSS node with name iconview and style class .view.
  * For rubberband selection, a subnode with name rubberband is used.
 
- * Deprecated: Use [Gtk.GridView] instead
+ * Deprecated: Use [gtk.grid_view.GridView] instead
  */
 class IconView : Widget, CellLayout, Scrollable
 {
@@ -78,7 +78,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Creates a new `GtkIconView` widget
    * Returns: A newly created `GtkIconView` widget
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   this()
   {
@@ -94,7 +94,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   area = the `GtkCellArea` to use to layout cells
    * Returns: A newly created `GtkIconView` widget
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   static IconView newWithArea(CellArea area)
   {
@@ -110,7 +110,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   model = The model.
    * Returns: A newly created `GtkIconView` widget.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   static IconView newWithModel(TreeModel model)
   {
@@ -127,7 +127,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   path = a `GtkTreePath` in icon_view
    * Returns: a newly-allocated `GdkPaintable` of the drag icon.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   Paintable createDragIcon(TreePath path)
   {
@@ -145,7 +145,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   actions = the bitmask of possible actions for a drag to this
    *     widget
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void enableModelDragDest(ContentFormats formats, DragAction actions)
   {
@@ -161,7 +161,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   actions = the bitmask of possible actions for a drag from this
    *     widget
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void enableModelDragSource(ModifierType startButtonMask, ContentFormats formats, DragAction actions)
   {
@@ -169,10 +169,10 @@ class IconView : Widget, CellLayout, Scrollable
   }
 
   /**
-   * Gets the setting set by [Gtk.IconView.setActivateOnSingleClick].
+   * Gets the setting set by [gtk.icon_view.IconView.setActivateOnSingleClick].
    * Returns: %TRUE if item-activated will be emitted on a single click
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   bool getActivateOnSingleClick()
   {
@@ -191,7 +191,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   rect = rectangle to fill with cell rect
    * Returns: %FALSE if there is no such item, %TRUE otherwise
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   bool getCellRect(TreePath path, CellRenderer cell, out Rectangle rect)
   {
@@ -206,7 +206,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns the value of the ::column-spacing property.
    * Returns: the space between columns
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getColumnSpacing()
   {
@@ -219,7 +219,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns the value of the ::columns property.
    * Returns: the number of columns, or -1
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getColumns()
   {
@@ -234,7 +234,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Fills in path and cell with the current cursor path and cell.
    * If the cursor isn’t currently set, then *path will be %NULL.
    * If no cell currently has focus, then *cell will be %NULL.
-   * The returned `GtkTreePath` must be freed with [Gtk.TreePath.free].
+   * The returned `GtkTreePath` must be freed with [gtk.tree_path.TreePath.free].
    * Params:
    *   path = Return location for the current
    *     cursor path
@@ -242,7 +242,7 @@ class IconView : Widget, CellLayout, Scrollable
    *     focus cell
    * Returns: %TRUE if the cursor is set.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   bool getCursor(out TreePath path, out CellRenderer cell)
   {
@@ -264,7 +264,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   pos = Return location for the drop position
    * Returns: whether there is an item at the given position.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   bool getDestItemAtPos(int dragX, int dragY, out TreePath path, out IconViewDropPosition pos)
   {
@@ -282,7 +282,7 @@ class IconView : Widget, CellLayout, Scrollable
    *     the highlighted item
    *   pos = Return location for the drop position
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void getDragDestItem(out TreePath path, out IconViewDropPosition pos)
   {
@@ -301,7 +301,7 @@ class IconView : Widget, CellLayout, Scrollable
    *     responsible for the cell at $(LPAREN)x, y$(RPAREN)
    * Returns: %TRUE if an item exists at the specified position
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   bool getItemAtPos(int x, int y, out TreePath path, out CellRenderer cell)
   {
@@ -321,7 +321,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   path = the `GtkTreePath` of the item
    * Returns: The column in which the item is displayed
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getItemColumn(TreePath path)
   {
@@ -335,7 +335,7 @@ class IconView : Widget, CellLayout, Scrollable
    * whether the labels are drawn beside the icons instead of below.
    * Returns: the relative position of texts and icons
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   Orientation getItemOrientation()
   {
@@ -349,7 +349,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns the value of the ::item-padding property.
    * Returns: the padding around items
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getItemPadding()
   {
@@ -365,7 +365,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   path = the `GtkTreePath` of the item
    * Returns: The row in which the item is displayed
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getItemRow(TreePath path)
   {
@@ -378,7 +378,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns the value of the ::item-width property.
    * Returns: the width of a single item, or -1
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getItemWidth()
   {
@@ -391,7 +391,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns the value of the ::margin property.
    * Returns: the space at the borders
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getMargin()
   {
@@ -404,7 +404,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns the column with markup text for icon_view.
    * Returns: the markup column, or -1 if it’s unset.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getMarkupColumn()
   {
@@ -418,7 +418,7 @@ class IconView : Widget, CellLayout, Scrollable
    * model is unset.
    * Returns: The currently used `GtkTreeModel`
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   TreeModel getModel()
   {
@@ -436,7 +436,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns: The `GtkTreePath` corresponding
    *   to the icon or %NULL if no icon exists at that position.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   TreePath getPathAtPos(int x, int y)
   {
@@ -450,7 +450,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns the column with pixbufs for icon_view.
    * Returns: the pixbuf column, or -1 if it’s unset.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getPixbufColumn()
   {
@@ -461,10 +461,10 @@ class IconView : Widget, CellLayout, Scrollable
 
   /**
    * Retrieves whether the user can reorder the list via drag-and-drop.
-   * See [Gtk.IconView.setReorderable].
+   * See [gtk.icon_view.IconView.setReorderable].
    * Returns: %TRUE if the list can be reordered.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   bool getReorderable()
   {
@@ -477,7 +477,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns the value of the ::row-spacing property.
    * Returns: the space between rows
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getRowSpacing()
   {
@@ -490,7 +490,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Creates a list of paths of all selected items. Additionally, if you are
    * planning on modifying the model after calling this function, you may
    * want to convert the returned list into a list of `GtkTreeRowReferences`.
-   * To do this, you can use [Gtk.TreeRowReference.new_].
+   * To do this, you can use [gtk.tree_row_reference.TreeRowReference.new_].
    * To free the return value, use `g_list_free_full`:
    * |[<!-- language\="C" -->
    * GtkWidget *icon_view \= gtk_icon_view_new $(LPAREN)$(RPAREN);
@@ -501,7 +501,7 @@ class IconView : Widget, CellLayout, Scrollable
    * ]|
    * Returns: A `GList` containing a `GtkTreePath` for each selected row.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   TreePath[] getSelectedItems()
   {
@@ -515,7 +515,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Gets the selection mode of the icon_view.
    * Returns: the current selection mode
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   SelectionMode getSelectionMode()
   {
@@ -529,7 +529,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns the value of the ::spacing property.
    * Returns: the space between cells
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getSpacing()
   {
@@ -542,7 +542,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns the column with text for icon_view.
    * Returns: the text column, or -1 if it’s unset.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getTextColumn()
   {
@@ -557,7 +557,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Returns: the index of the tooltip column that is currently being
    *   used, or -1 if this is disabled.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   int getTooltipColumn()
   {
@@ -585,7 +585,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   iter = a pointer to receive a `GtkTreeIter`
    * Returns: whether or not the given tooltip context points to an item
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   bool getTooltipContext(int x, int y, bool keyboardTip, out TreeModel model, out TreePath path, out TreeIter iter)
   {
@@ -603,13 +603,13 @@ class IconView : Widget, CellLayout, Scrollable
   /**
    * Sets start_path and end_path to be the first and last visible path.
    * Note that there may be invisible paths in between.
-   * Both paths should be freed with [Gtk.TreePath.free] after use.
+   * Both paths should be freed with [gtk.tree_path.TreePath.free] after use.
    * Params:
    *   startPath = Return location for start of region
    *   endPath = Return location for end of region
    * Returns: %TRUE, if valid paths were placed in start_path and end_path
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   bool getVisibleRange(out TreePath startPath, out TreePath endPath)
   {
@@ -627,7 +627,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   path = The `GtkTreePath` to be activated
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void itemActivated(TreePath path)
   {
@@ -641,7 +641,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   path = A `GtkTreePath` to check selection on.
    * Returns: %TRUE if path is selected.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   bool pathIsSelected(TreePath path)
   {
@@ -669,7 +669,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   rowAlign = The vertical alignment of the item specified by path.
    *   colAlign = The horizontal alignment of the item specified by path.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void scrollToPath(TreePath path, bool useAlign, float rowAlign, float colAlign)
   {
@@ -680,7 +680,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Selects all the icons. icon_view must has its selection mode set
    * to %GTK_SELECTION_MULTIPLE.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void selectAll()
   {
@@ -692,7 +692,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   path = The `GtkTreePath` to be selected.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void selectPath(TreePath path)
   {
@@ -705,7 +705,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   func = The function to call for each selected icon.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void selectedForeach(IconViewForeachFunc func)
   {
@@ -727,7 +727,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   single = %TRUE to emit item-activated on a single click
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setActivateOnSingleClick(bool single)
   {
@@ -740,7 +740,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   columnSpacing = the column spacing
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setColumnSpacing(int columnSpacing)
   {
@@ -755,7 +755,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   columns = the number of columns
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setColumns(int columns)
   {
@@ -778,7 +778,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   cell = One of the cell renderers of icon_view
    *   startEditing = %TRUE if the specified cell should start being edited.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setCursor(TreePath path, CellRenderer cell, bool startEditing)
   {
@@ -791,7 +791,7 @@ class IconView : Widget, CellLayout, Scrollable
    *   path = The path of the item to highlight
    *   pos = Specifies where to drop, relative to the item
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setDragDestItem(TreePath path, IconViewDropPosition pos)
   {
@@ -804,7 +804,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   orientation = the relative position of texts and icons
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setItemOrientation(Orientation orientation)
   {
@@ -817,7 +817,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   itemPadding = the item padding
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setItemPadding(int itemPadding)
   {
@@ -831,7 +831,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   itemWidth = the width for each item
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setItemWidth(int itemWidth)
   {
@@ -845,7 +845,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   margin = the margin
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setMargin(int margin)
   {
@@ -856,11 +856,11 @@ class IconView : Widget, CellLayout, Scrollable
    * Sets the column with markup information for icon_view to be
    * column. The markup column must be of type `G_TYPE_STRING`.
    * If the markup column is set to something, it overrides
-   * the text column set by [Gtk.IconView.setTextColumn].
+   * the text column set by [gtk.icon_view.IconView.setTextColumn].
    * Params:
    *   column = A column in the currently used model, or -1 to display no text
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setMarkupColumn(int column)
   {
@@ -875,7 +875,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   model = The model.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setModel(TreeModel model)
   {
@@ -888,7 +888,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   column = A column in the currently used model, or -1 to disable
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setPixbufColumn(int column)
   {
@@ -910,7 +910,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   reorderable = %TRUE, if the list of items can be reordered.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setReorderable(bool reorderable)
   {
@@ -923,7 +923,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   rowSpacing = the row spacing
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setRowSpacing(int rowSpacing)
   {
@@ -935,7 +935,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   mode = The selection mode
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setSelectionMode(SelectionMode mode)
   {
@@ -949,7 +949,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   spacing = the spacing
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setSpacing(int spacing)
   {
@@ -962,7 +962,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   column = A column in the currently used model, or -1 to display no text
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setTextColumn(int column)
   {
@@ -971,14 +971,14 @@ class IconView : Widget, CellLayout, Scrollable
 
   /**
    * Sets the tip area of tooltip to the area which cell occupies in
-   * the item pointed to by path. See also [Gtk.Tooltip.setTipArea].
-   * See also [Gtk.IconView.setTooltipColumn] for a simpler alternative.
+   * the item pointed to by path. See also [gtk.tooltip.Tooltip.setTipArea].
+   * See also [gtk.icon_view.IconView.setTooltipColumn] for a simpler alternative.
    * Params:
    *   tooltip = a `GtkTooltip`
    *   path = a `GtkTreePath`
    *   cell = a `GtkCellRenderer`
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setTooltipCell(Tooltip tooltip, TreePath path, CellRenderer cell)
   {
@@ -992,12 +992,12 @@ class IconView : Widget, CellLayout, Scrollable
    * containing the tooltip texts, or -1 to disable this feature.
    * When enabled, `GtkWidget:has-tooltip` will be set to %TRUE and
    * icon_view will connect a `GtkWidget::query-tooltip` signal handler.
-   * Note that the signal handler sets the text with [Gtk.Tooltip.setMarkup],
+   * Note that the signal handler sets the text with [gtk.tooltip.Tooltip.setMarkup],
    * so &, <, etc have to be escaped in the text.
    * Params:
    *   column = an integer, which is a valid column number for icon_view’s model
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setTooltipColumn(int column)
   {
@@ -1006,13 +1006,13 @@ class IconView : Widget, CellLayout, Scrollable
 
   /**
    * Sets the tip area of tooltip to be the area covered by the item at path.
-   * See also [Gtk.IconView.setTooltipColumn] for a simpler alternative.
-   * See also [Gtk.Tooltip.setTipArea].
+   * See also [gtk.icon_view.IconView.setTooltipColumn] for a simpler alternative.
+   * See also [gtk.tooltip.Tooltip.setTipArea].
    * Params:
    *   tooltip = a `GtkTooltip`
    *   path = a `GtkTreePath`
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void setTooltipItem(Tooltip tooltip, TreePath path)
   {
@@ -1022,7 +1022,7 @@ class IconView : Widget, CellLayout, Scrollable
   /**
    * Unselects all the icons.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void unselectAll()
   {
@@ -1034,7 +1034,7 @@ class IconView : Widget, CellLayout, Scrollable
    * Params:
    *   path = The `GtkTreePath` to be unselected.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void unselectPath(TreePath path)
   {
@@ -1042,10 +1042,10 @@ class IconView : Widget, CellLayout, Scrollable
   }
 
   /**
-   * Undoes the effect of [Gtk.IconView.enableModelDragDest]. Calling this
+   * Undoes the effect of [gtk.icon_view.IconView.enableModelDragDest]. Calling this
    * method sets `GtkIconView`:reorderable to %FALSE.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void unsetModelDragDest()
   {
@@ -1053,10 +1053,10 @@ class IconView : Widget, CellLayout, Scrollable
   }
 
   /**
-   * Undoes the effect of [Gtk.IconView.enableModelDragSource]. Calling this
+   * Undoes the effect of [gtk.icon_view.IconView.enableModelDragSource]. Calling this
    * method sets `GtkIconView`:reorderable to %FALSE.
 
-   * Deprecated: Use [Gtk.GridView] instead
+   * Deprecated: Use [gtk.grid_view.GridView] instead
    */
   void unsetModelDragSource()
   {
@@ -1064,11 +1064,11 @@ class IconView : Widget, CellLayout, Scrollable
   }
 
   /**
-   * A [keybinding signal][Gtk.SignalAction]
+   * A [keybinding signal][gtk.signal_action.SignalAction]
    * which gets emitted when the user activates the currently
    * focused item.
    * Applications should not connect to it, but may emit it with
-   * [GObject.Global.signalEmitByName] if they need to control activation
+   * [gobject.global.signalEmitByName] if they need to control activation
    * programmatically.
    * The default bindings for this signal are Space, Return and Enter.
    *   iconView = the instance the signal is connected to
@@ -1103,7 +1103,7 @@ class IconView : Widget, CellLayout, Scrollable
 
   /**
    * The ::item-activated signal is emitted when the method
-   * [Gtk.IconView.itemActivated] is called, when the user double
+   * [gtk.icon_view.IconView.itemActivated] is called, when the user double
    * clicks an item with the "activate-on-single-click" property set
    * to %FALSE, or when the user single clicks an item when the
    * "activate-on-single-click" property set to %TRUE. It is also
@@ -1141,10 +1141,10 @@ class IconView : Widget, CellLayout, Scrollable
 
   /**
    * The ::move-cursor signal is a
-   * [keybinding signal][Gtk.SignalAction]
+   * [keybinding signal][gtk.signal_action.SignalAction]
    * which gets emitted when the user initiates a cursor movement.
    * Applications should not connect to it, but may emit it with
-   * [GObject.Global.signalEmitByName] if they need to control the cursor
+   * [gobject.global.signalEmitByName] if they need to control the cursor
    * programmatically.
    * The default bindings for this signal include
    * - Arrow keys which move by individual steps
@@ -1192,10 +1192,10 @@ class IconView : Widget, CellLayout, Scrollable
   }
 
   /**
-   * A [keybinding signal][Gtk.SignalAction]
+   * A [keybinding signal][gtk.signal_action.SignalAction]
    * which gets emitted when the user selects all items.
    * Applications should not connect to it, but may emit it with
-   * [GObject.Global.signalEmitByName] if they need to control selection
+   * [gobject.global.signalEmitByName] if they need to control selection
    * programmatically.
    * The default binding for this signal is Ctrl-a.
    *   iconView = the instance the signal is connected to
@@ -1226,11 +1226,11 @@ class IconView : Widget, CellLayout, Scrollable
   }
 
   /**
-   * A [keybinding signal][Gtk.SignalAction]
+   * A [keybinding signal][gtk.signal_action.SignalAction]
    * which gets emitted when the user selects the item that is currently
    * focused.
    * Applications should not connect to it, but may emit it with
-   * [GObject.Global.signalEmitByName] if they need to control selection
+   * [gobject.global.signalEmitByName] if they need to control selection
    * programmatically.
    * There is no default binding for this signal.
    *   iconView = the instance the signal is connected to
@@ -1291,12 +1291,12 @@ class IconView : Widget, CellLayout, Scrollable
   }
 
   /**
-   * A [keybinding signal][Gtk.SignalAction]
+   * A [keybinding signal][gtk.signal_action.SignalAction]
    * which gets emitted when the user toggles whether the currently
    * focused item is selected or not. The exact effect of this
    * depend on the selection mode.
    * Applications should not connect to it, but may emit it with
-   * [GObject.Global.signalEmitByName] if they need to control selection
+   * [gobject.global.signalEmitByName] if they need to control selection
    * programmatically.
    * There is no default binding for this signal is Ctrl-Space.
    *   iconView = the instance the signal is connected to
@@ -1327,10 +1327,10 @@ class IconView : Widget, CellLayout, Scrollable
   }
 
   /**
-   * A [keybinding signal][Gtk.SignalAction]
+   * A [keybinding signal][gtk.signal_action.SignalAction]
    * which gets emitted when the user unselects all items.
    * Applications should not connect to it, but may emit it with
-   * [GObject.Global.signalEmitByName] if they need to control selection
+   * [gobject.global.signalEmitByName] if they need to control selection
    * programmatically.
    * The default binding for this signal is Ctrl-Shift-a.
    *   iconView = the instance the signal is connected to

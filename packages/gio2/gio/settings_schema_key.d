@@ -1,6 +1,6 @@
 module gio.settings_schema_key;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -111,7 +111,7 @@ class SettingsSchemaKey : Boxed
    * should already know what is permitted by their own schema.  The
    * format may change in any way in the future -- but particularly, new
    * forms may be added to the possibilities described above.
-   * You should free the returned value with [GLib.VariantG.unref] when it is
+   * You should free the returned value with [glib.variant.VariantG.unref] when it is
    * no longer needed.
    * Returns: a #GVariant describing the range
    */

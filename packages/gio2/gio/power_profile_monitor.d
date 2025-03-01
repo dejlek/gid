@@ -1,7 +1,7 @@
 module gio.power_profile_monitor;
 
 public import gio.power_profile_monitor_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -24,7 +24,7 @@ import gobject.object;
  * monitor the battery discharge rate, `powertop` to check on the background activity
  * or activity at all$(RPAREN), `sysprof` to inspect CPU usage, and `intel_gpu_time` to
  * profile GPU usage.
- * Don’t forget to disconnect the [GObject.ObjectG.notify] signal for
+ * Don’t forget to disconnect the [gobject.object.ObjectG.notify] signal for
  * property@Gio.PowerProfileMonitor:power-saver-enabled, and unref the
  * `GPowerProfileMonitor` itself when exiting.
  */

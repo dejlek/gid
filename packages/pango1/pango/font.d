@@ -1,6 +1,6 @@
 module pango.font;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.error;
 import gobject.object;
@@ -40,7 +40,7 @@ class Font : ObjectG
   }
 
   /**
-   * Loads data previously created via [Pango.Font.serialize].
+   * Loads data previously created via [pango.font.Font.serialize].
    * For a discussion of the supported format, see that function.
    * Note: to verify that the returned font is identical to
    * the one that was serialized, you can compare bytes to the
@@ -63,7 +63,7 @@ class Font : ObjectG
 
   /**
    * Returns a description of the font, with font size set in points.
-   * Use [Pango.Font.describeWithAbsoluteSize] if you want
+   * Use [pango.font.Font.describeWithAbsoluteSize] if you want
    * the font size in device units.
    * Returns: a newly-allocated `PangoFontDescription` object.
    */
@@ -78,7 +78,7 @@ class Font : ObjectG
   /**
    * Returns a description of the font, with absolute font size set
    * in device units.
-   * Use [Pango.Font.describe] if you want the font size in points.
+   * Use [pango.font.Font.describe] if you want the font size in points.
    * Returns: a newly-allocated `PangoFontDescription` object.
    */
   FontDescription describeWithAbsoluteSize()
@@ -217,7 +217,7 @@ class Font : ObjectG
    *     to get the metrics for, or %NULL to indicate to get the metrics for
    *     the entire font.
    * Returns: a `PangoFontMetrics` object. The caller must call
-   *   [Pango.FontMetrics.unref] when finished using the object.
+   *   [pango.font_metrics.FontMetrics.unref] when finished using the object.
    */
   FontMetrics getMetrics(PgLanguage language)
   {
@@ -246,7 +246,7 @@ class Font : ObjectG
    * versions of Pango.
    * The intended use of this function is testing, benchmarking and debugging.
    * The format is not meant as a permanent storage format.
-   * To recreate a font from its serialized form, use [Pango.Font.deserialize].
+   * To recreate a font from its serialized form, use [pango.font.Font.deserialize].
    * Returns: a `GBytes` containing the serialized form of font
    */
   Bytes serialize()

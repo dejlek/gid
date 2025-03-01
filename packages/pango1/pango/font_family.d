@@ -1,6 +1,6 @@
 module pango.font_family;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -77,11 +77,11 @@ class FontFamily : ObjectG, ListModel
    * mean that the advance width of all characters are the same, but
    * this categorization also includes Asian fonts which include
    * double-width characters: characters that occupy two grid cells.
-   * [GLib.Global.unicharIswide] returns a result that indicates whether a
+   * [glib.global.unicharIswide] returns a result that indicates whether a
    * character is typically double-width in a monospace font.
    * The best way to find out the grid-cell size is to call
-   * [Pango.FontMetrics.getApproximateDigitWidth], since the
-   * results of [Pango.FontMetrics.getApproximateCharWidth] may
+   * [pango.font_metrics.FontMetrics.getApproximateDigitWidth], since the
+   * results of [pango.font_metrics.FontMetrics.getApproximateCharWidth] may
    * be affected by double-width characters.
    * Returns: %TRUE if the family is monospace.
    */
@@ -96,7 +96,7 @@ class FontFamily : ObjectG, ListModel
    * A variable font is a font which has axes that can be modified to
    * produce different faces.
    * Such axes are also known as _variations_; see
-   * [Pango.FontDescription.setVariations] for more information.
+   * [pango.font_description.FontDescription.setVariations] for more information.
    * Returns: %TRUE if the family is variable
    */
   bool isVariable()
@@ -112,11 +112,11 @@ class FontFamily : ObjectG, ListModel
    * width and other aspects.
    * Note that the returned faces are not in any particular order, and
    * multiple faces may have the same name or characteristics.
-   * `PangoFontFamily` also implemented the [Gio.ListModel] interface
+   * `PangoFontFamily` also implemented the [gio.list_model.ListModel] interface
    * for enumerating faces.
    * Params:
    *   faces = location to store an array of pointers to `PangoFontFace` objects,
-   *     or %NULL. This array should be freed with [GLib.Global.gfree] when it is no
+   *     or %NULL. This array should be freed with [glib.global.gfree] when it is no
    *     longer needed.
    */
   void listFaces(out FontFace[] faces)

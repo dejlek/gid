@@ -1,7 +1,7 @@
 module gio.memory_monitor;
 
 public import gio.memory_monitor_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -27,7 +27,7 @@ import gobject.object;
  * should be profiled for your application. `malloc_trim$(LPAREN)$(RPAREN)`, for example, may
  * make future heap allocations slower $(LPAREN)due to releasing cached heap pages back
  * to the kernel$(RPAREN).
- * See [Gio.MemoryMonitorWarningLevel] for details on the various warning
+ * See [gio.MemoryMonitorWarningLevel] for details on the various warning
  * levels.
  * ```c
  * static void

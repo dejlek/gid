@@ -1,6 +1,6 @@
 module Gio.global;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -35,8 +35,8 @@ import gobject.value;
 /**
  * Asynchronously connects to the message bus specified by bus_type.
  * When the operation is finished, callback will be invoked. You can
- * then call [Gio.Global.busGetFinish] to get the result of the operation.
- * This is an asynchronous failable function. See [Gio.Global.busGetSync] for
+ * then call [gio.global.busGetFinish] to get the result of the operation.
+ * This is an asynchronous failable function. See [gio.global.busGetSync] for
  * the synchronous version.
  * Params:
  *   busType = a #GBusType
@@ -59,21 +59,21 @@ void busGet(BusType busType, Cancellable cancellable, AsyncReadyCallback callbac
 }
 
 /**
- * Finishes an operation started with [Gio.Global.busGet].
+ * Finishes an operation started with [gio.global.busGet].
  * The returned object is a singleton, that is, shared with other
- * callers of [Gio.Global.busGet] and [Gio.Global.busGetSync] for bus_type. In the
+ * callers of [gio.global.busGet] and [gio.global.busGetSync] for bus_type. In the
  * event that you need a private message bus connection, use
- * [Gio.Global.dbusAddressGetForBusSync] and
- * [Gio.DBusConnection.newForAddress] with
+ * [gio.global.dbusAddressGetForBusSync] and
+ * [gio.dbus_connection.DBusConnection.newForAddress] with
  * G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT and
  * G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION flags.
  * Note that the returned #GDBusConnection object will $(LPAREN)usually$(RPAREN) have
  * the #GDBusConnection:exit-on-close property set to %TRUE.
  * Params:
  *   res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed
- *     to [Gio.Global.busGet]
+ *     to [gio.global.busGet]
  * Returns: a #GDBusConnection or %NULL if error is set.
- *   Free with [GObject.ObjectG.unref].
+ *   Free with [gobject.object.ObjectG.unref].
  */
 DBusConnection busGetFinish(AsyncResult res)
 {
@@ -91,13 +91,13 @@ DBusConnection busGetFinish(AsyncResult res)
  * Note that the returned object may shared with other callers,
  * e.g. if two separate parts of a process calls this function with
  * the same bus_type, they will share the same object.
- * This is a synchronous failable function. See [Gio.Global.busGet] and
- * [Gio.Global.busGetFinish] for the asynchronous version.
+ * This is a synchronous failable function. See [gio.global.busGet] and
+ * [gio.global.busGetFinish] for the asynchronous version.
  * The returned object is a singleton, that is, shared with other
- * callers of [Gio.Global.busGet] and [Gio.Global.busGetSync] for bus_type. In the
+ * callers of [gio.global.busGet] and [gio.global.busGetSync] for bus_type. In the
  * event that you need a private message bus connection, use
- * [Gio.Global.dbusAddressGetForBusSync] and
- * [Gio.DBusConnection.newForAddress] with
+ * [gio.global.dbusAddressGetForBusSync] and
+ * [gio.dbus_connection.DBusConnection.newForAddress] with
  * G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT and
  * G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION flags.
  * Note that the returned #GDBusConnection object will $(LPAREN)usually$(RPAREN) have
@@ -106,7 +106,7 @@ DBusConnection busGetFinish(AsyncResult res)
  *   busType = a #GBusType
  *   cancellable = a #GCancellable or %NULL
  * Returns: a #GDBusConnection or %NULL if error is set.
- *   Free with [GObject.ObjectG.unref].
+ *   Free with [gobject.object.ObjectG.unref].
  */
 DBusConnection busGetSync(BusType busType, Cancellable cancellable)
 {
@@ -120,7 +120,7 @@ DBusConnection busGetSync(BusType busType, Cancellable cancellable)
 }
 
 /**
- * Version of [Gio.Global.busOwnNameOnConnection] using closures instead of
+ * Version of [gio.global.busOwnNameOnConnection] using closures instead of
  * callbacks for easier binding in other languages.
  * Params:
  *   connection = a #GDBusConnection
@@ -131,7 +131,7 @@ DBusConnection busGetSync(BusType busType, Cancellable cancellable)
  *   nameLostClosure = #GClosure to invoke when name is lost
  *     or %NULL
  * Returns: an identifier $(LPAREN)never 0$(RPAREN) that can be used with
- *   [Gio.Global.busUnownName] to stop owning the name.
+ *   [gio.global.busUnownName] to stop owning the name.
  */
 uint busOwnNameOnConnection(DBusConnection connection, string name, BusNameOwnerFlags flags, Closure nameAcquiredClosure, Closure nameLostClosure)
 {
@@ -142,7 +142,7 @@ uint busOwnNameOnConnection(DBusConnection connection, string name, BusNameOwner
 }
 
 /**
- * Version of [Gio.Global.busOwnName] using closures instead of callbacks for
+ * Version of [gio.global.busOwnName] using closures instead of callbacks for
  * easier binding in other languages.
  * Params:
  *   busType = the type of bus to own a name on
@@ -155,7 +155,7 @@ uint busOwnNameOnConnection(DBusConnection connection, string name, BusNameOwner
  *   nameLostClosure = #GClosure to invoke when name is lost or
  *     %NULL
  * Returns: an identifier $(LPAREN)never 0$(RPAREN) that can be used with
- *   [Gio.Global.busUnownName] to stop owning the name.
+ *   [gio.global.busUnownName] to stop owning the name.
  */
 uint busOwnName(BusType busType, string name, BusNameOwnerFlags flags, Closure busAcquiredClosure, Closure nameAcquiredClosure, Closure nameLostClosure)
 {
@@ -170,11 +170,11 @@ uint busOwnName(BusType busType, string name, BusNameOwnerFlags flags, Closure b
  * Note that there may still be D-Bus traffic to process $(LPAREN)relating to owning
  * and unowning the name$(RPAREN) in the current thread-default #GMainContext after
  * this function has returned. You should continue to iterate the #GMainContext
- * until the #GDestroyNotify function passed to [Gio.Global.busOwnName] is called, in
+ * until the #GDestroyNotify function passed to [gio.global.busOwnName] is called, in
  * order to avoid memory leaks through callbacks queued on the #GMainContext
  * after it’s stopped being iterated.
  * Params:
- *   ownerId = an identifier obtained from [Gio.Global.busOwnName]
+ *   ownerId = an identifier obtained from [gio.global.busOwnName]
  */
 void busUnownName(uint ownerId)
 {
@@ -186,11 +186,11 @@ void busUnownName(uint ownerId)
  * Note that there may still be D-Bus traffic to process $(LPAREN)relating to watching
  * and unwatching the name$(RPAREN) in the current thread-default #GMainContext after
  * this function has returned. You should continue to iterate the #GMainContext
- * until the #GDestroyNotify function passed to [Gio.Global.busWatchName] is called, in
+ * until the #GDestroyNotify function passed to [gio.global.busWatchName] is called, in
  * order to avoid memory leaks through callbacks queued on the #GMainContext
  * after it’s stopped being iterated.
  * Params:
- *   watcherId = An identifier obtained from [Gio.Global.busWatchName]
+ *   watcherId = An identifier obtained from [gio.global.busWatchName]
  */
 void busUnwatchName(uint watcherId)
 {
@@ -198,7 +198,7 @@ void busUnwatchName(uint watcherId)
 }
 
 /**
- * Version of [Gio.Global.busWatchNameOnConnection] using closures instead of callbacks for
+ * Version of [gio.global.busWatchNameOnConnection] using closures instead of callbacks for
  * easier binding in other languages.
  * Params:
  *   connection = A #GDBusConnection.
@@ -209,7 +209,7 @@ void busUnwatchName(uint watcherId)
  *   nameVanishedClosure = #GClosure to invoke when name is known
  *     to not exist or %NULL.
  * Returns: An identifier $(LPAREN)never 0$(RPAREN) that can be used with
- *   [Gio.Global.busUnwatchName] to stop watching the name.
+ *   [gio.global.busUnwatchName] to stop watching the name.
  */
 uint busWatchNameOnConnection(DBusConnection connection, string name, BusNameWatcherFlags flags, Closure nameAppearedClosure, Closure nameVanishedClosure)
 {
@@ -220,7 +220,7 @@ uint busWatchNameOnConnection(DBusConnection connection, string name, BusNameWat
 }
 
 /**
- * Version of [Gio.Global.busWatchName] using closures instead of callbacks for
+ * Version of [gio.global.busWatchName] using closures instead of callbacks for
  * easier binding in other languages.
  * Params:
  *   busType = The type of bus to watch a name on.
@@ -231,7 +231,7 @@ uint busWatchNameOnConnection(DBusConnection connection, string name, BusNameWat
  *   nameVanishedClosure = #GClosure to invoke when name is known
  *     to not exist or %NULL.
  * Returns: An identifier $(LPAREN)never 0$(RPAREN) that can be used with
- *   [Gio.Global.busUnwatchName] to stop watching the name.
+ *   [gio.global.busUnwatchName] to stop watching the name.
  */
 uint busWatchName(BusType busType, string name, BusNameWatcherFlags flags, Closure nameAppearedClosure, Closure nameVanishedClosure)
 {
@@ -279,7 +279,7 @@ bool contentTypeEquals(string type1, string type2)
  * Params:
  *   mimeType = a mime type string
  * Returns: Newly allocated string with content type or
- *   %NULL. Free with [GLib.Global.gfree]
+ *   %NULL. Free with [glib.global.gfree]
  */
 string contentTypeFromMimeType(string mimeType)
 {
@@ -295,7 +295,7 @@ string contentTypeFromMimeType(string mimeType)
  * Params:
  *   type = a content type string
  * Returns: a short description of the content type type. Free the
- *   returned string with [GLib.Global.gfree]
+ *   returned string with [glib.global.gfree]
  */
 string contentTypeGetDescription(string type)
 {
@@ -314,7 +314,7 @@ string contentTypeGetDescription(string type)
  * Params:
  *   type = a content type string
  * Returns: the registered generic icon name for the given type,
- *   or %NULL if unknown. Free with [GLib.Global.gfree]
+ *   or %NULL if unknown. Free with [glib.global.gfree]
  */
 string contentTypeGetGenericIconName(string type)
 {
@@ -330,7 +330,7 @@ string contentTypeGetGenericIconName(string type)
  * Params:
  *   type = a content type string
  * Returns: #GIcon corresponding to the content type. Free the returned
- *   object with [GObject.ObjectG.unref]
+ *   object with [gobject.object.ObjectG.unref]
  */
 Icon contentTypeGetIcon(string type)
 {
@@ -343,7 +343,7 @@ Icon contentTypeGetIcon(string type)
 
 /**
  * Get the list of directories which MIME data is loaded from. See
- * [Gio.Global.contentTypeSetMimeDirs] for details.
+ * [gio.global.contentTypeSetMimeDirs] for details.
  * Returns: %NULL-terminated list of
  *   directories to load MIME data from, including any `mime/` subdirectory,
  *   and with the first directory to try listed first
@@ -371,7 +371,7 @@ string[] contentTypeGetMimeDirs()
  * Params:
  *   type = a content type string
  * Returns: the registered mime type for the
- *   given type, or %NULL if unknown; free with [GLib.Global.gfree].
+ *   given type, or %NULL if unknown; free with [glib.global.gfree].
  */
 string contentTypeGetMimeType(string type)
 {
@@ -387,7 +387,7 @@ string contentTypeGetMimeType(string type)
  * Params:
  *   type = a content type string
  * Returns: symbolic #GIcon corresponding to the content type.
- *   Free the returned object with [GObject.ObjectG.unref]
+ *   Free the returned object with [gobject.object.ObjectG.unref]
  */
 Icon contentTypeGetSymbolicIcon(string type)
 {
@@ -409,7 +409,7 @@ Icon contentTypeGetSymbolicIcon(string type)
  *   resultUncertain = return location for the certainty
  *     of the result, or %NULL
  * Returns: a string indicating a guessed content type for the
- *   given data. Free with [GLib.Global.gfree]
+ *   given data. Free with [glib.global.gfree]
  */
 string contentTypeGuess(string filename, ubyte[] data, out bool resultUncertain)
 {
@@ -435,11 +435,11 @@ string contentTypeGuess(string filename, ubyte[] data, out bool resultUncertain)
  * [shared-mime-info](http://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec)
  * specification for more on x-content types.
  * This function is useful in the implementation of
- * [Gio.Mount.guessContentType].
+ * [gio.mount.Mount.guessContentType].
  * Params:
  *   root = the root of the tree to guess a type for
  * Returns: an %NULL-terminated
- *   array of zero or more content types. Free with [GLib.Global.strfreev]
+ *   array of zero or more content types. Free with [glib.global.strfreev]
  */
 string[] contentTypeGuessForTree(File root)
 {
@@ -478,7 +478,7 @@ bool contentTypeIsA(string type, string supertype)
 
 /**
  * Determines if type is a subset of mime_type.
- * Convenience wrapper around [Gio.Global.contentTypeIsA].
+ * Convenience wrapper around [gio.global.contentTypeIsA].
  * Params:
  *   type = a content type string
  *   mimeType = a mime type string
@@ -520,7 +520,7 @@ bool contentTypeIsUnknown(string type)
  * information stored in the MIME database, in order to control the data.
  * Typically, in case your tests use %G_TEST_OPTION_ISOLATE_DIRS, but they
  * depend on the system’s MIME database, you should call this function
- * with dirs set to %NULL before calling [GLib.Global.testInit], for instance:
+ * with dirs set to %NULL before calling [glib.global.testInit], for instance:
  * |[<!-- language\="C" -->
  * // Load MIME data from the system
  * g_content_type_set_mime_dirs $(LPAREN)NULL$(RPAREN);
@@ -610,10 +610,10 @@ string dbusAddressGetForBusSync(BusType busType, Cancellable cancellable)
  * of the D-Bus authentication conversation. address must be in the
  * [D-Bus address format](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
  * When the operation is finished, callback will be invoked. You can
- * then call [Gio.Global.dbusAddressGetStreamFinish] to get the result of
+ * then call [gio.global.dbusAddressGetStreamFinish] to get the result of
  * the operation.
  * This is an asynchronous failable function. See
- * [Gio.Global.dbusAddressGetStreamSync] for the synchronous version.
+ * [gio.global.dbusAddressGetStreamSync] for the synchronous version.
  * Params:
  *   address = A valid D-Bus address.
  *   cancellable = A #GCancellable or %NULL.
@@ -636,11 +636,11 @@ void dbusAddressGetStream(string address, Cancellable cancellable, AsyncReadyCal
 }
 
 /**
- * Finishes an operation started with [Gio.Global.dbusAddressGetStream].
+ * Finishes an operation started with [gio.global.dbusAddressGetStream].
  * A server is not required to set a GUID, so out_guid may be set to %NULL
  * even on success.
  * Params:
- *   res = A #GAsyncResult obtained from the GAsyncReadyCallback passed to [Gio.Global.dbusAddressGetStream].
+ *   res = A #GAsyncResult obtained from the GAsyncReadyCallback passed to [gio.global.dbusAddressGetStream].
  *   outGuid = %NULL or return location to store the GUID extracted from address, if any.
  * Returns: A #GIOStream or %NULL if error is set.
  */
@@ -665,7 +665,7 @@ IOStream dbusAddressGetStreamFinish(AsyncResult res, out string outGuid)
  * A server is not required to set a GUID, so out_guid may be set to %NULL
  * even on success.
  * This is a synchronous failable function. See
- * [Gio.Global.dbusAddressGetStream] for the asynchronous version.
+ * [gio.global.dbusAddressGetStream] for the asynchronous version.
  * Params:
  *   address = A valid D-Bus address.
  *   outGuid = %NULL or return location to store the GUID extracted from address, if any.
@@ -687,10 +687,10 @@ IOStream dbusAddressGetStreamSync(string address, out string outGuid, Cancellabl
 }
 
 /**
- * This is a language binding friendly version of [Gio.Global.dbusEscapeObjectPathBytestring].
+ * This is a language binding friendly version of [gio.global.dbusEscapeObjectPathBytestring].
  * Params:
  *   s = the string to escape
- * Returns: an escaped version of s. Free with [GLib.Global.gfree].
+ * Returns: an escaped version of s. Free with [glib.global.gfree].
  */
 string dbusEscapeObjectPath(string s)
 {
@@ -714,10 +714,10 @@ string dbusEscapeObjectPath(string s)
  * is far from being a valid object path component.
  * Other escaping algorithms are also valid to use with
  * D-Bus object paths.
- * This can be reversed with [Gio.Global.dbusUnescapeObjectPath].
+ * This can be reversed with [gio.global.dbusUnescapeObjectPath].
  * Params:
  *   bytes = the string of bytes to escape
- * Returns: an escaped version of bytes. Free with [GLib.Global.gfree].
+ * Returns: an escaped version of bytes. Free with [glib.global.gfree].
  */
 string dbusEscapeObjectPathBytestring(ubyte[] bytes)
 {
@@ -730,7 +730,7 @@ string dbusEscapeObjectPathBytestring(ubyte[] bytes)
 
 /**
  * Generate a D-Bus GUID that can be used with
- * e.g. [Gio.DBusConnection.new_].
+ * e.g. [gio.dbus_connection.DBusConnection.new_].
  * See the
  * [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#uuids)
  * regarding what strings are valid D-Bus GUIDs. The specification refers to
@@ -738,7 +738,7 @@ string dbusEscapeObjectPathBytestring(ubyte[] bytes)
  * ‘GUIDs’. The terms are interchangeable.
  * Note that D-Bus GUIDs do not follow
  * [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).
- * Returns: A valid D-Bus GUID. Free with [GLib.Global.gfree].
+ * Returns: A valid D-Bus GUID. Free with [glib.global.gfree].
  */
 string dbusGenerateGuid()
 {
@@ -770,14 +770,14 @@ string dbusGenerateGuid()
  * %NULL, the empty #GVariant instance $(LPAREN)never %NULL$(RPAREN) for type is
  * returned $(LPAREN)e.g. 0 for scalar types, the empty string for string types,
  * '/' for object path types, the empty array for any array type and so on$(RPAREN).
- * See the [Gio.Global.dbusGvariantToGvalue] function for how to convert a
+ * See the [gio.global.dbusGvariantToGvalue] function for how to convert a
  * #GVariant to a #GValue.
  * Params:
  *   gvalue = A #GValue to convert to a #GVariant
  *   type = A #GVariantType
  * Returns: A #GVariant $(LPAREN)never floating$(RPAREN) of
  *   #GVariantType type holding the data from gvalue or an empty #GVariant
- *   in case of failure. Free with [GLib.VariantG.unref].
+ *   in case of failure. Free with [glib.variant.VariantG.unref].
  */
 VariantG dbusGvalueToGvariant(Value gvalue, VariantType type)
 {
@@ -789,7 +789,7 @@ VariantG dbusGvalueToGvariant(Value gvalue, VariantType type)
 
 /**
  * Converts a #GVariant to a #GValue. If value is floating, it is consumed.
- * The rules specified in the [Gio.Global.dbusGvalueToGvariant] function are
+ * The rules specified in the [gio.global.dbusGvalueToGvariant] function are
  * used - this function is essentially its reverse form. So, a #GVariant
  * containing any basic or string array type will be converted to a #GValue
  * containing a basic value or string array. Any other #GVariant $(LPAREN)handle,
@@ -812,7 +812,7 @@ void dbusGvariantToGvalue(VariantG value, out Value outGvalue)
  * Checks if string is a
  * [D-Bus address](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
  * This doesn't check if string is actually supported by #GDBusServer
- * or #GDBusConnection - use [Gio.Global.dbusIsSupportedAddress] to do more
+ * or #GDBusConnection - use [gio.global.dbusIsSupportedAddress] to do more
  * checks.
  * Params:
  *   string_ = A string.
@@ -828,7 +828,7 @@ bool dbusIsAddress(string string_)
 
 /**
  * Check whether string is a valid D-Bus error name.
- * This function returns the same result as [Gio.Global.dbusIsInterfaceName],
+ * This function returns the same result as [gio.global.dbusIsInterfaceName],
  * because D-Bus error names are defined to have exactly the
  * same syntax as interface names.
  * Params:
@@ -845,7 +845,7 @@ bool dbusIsErrorName(string string_)
 
 /**
  * Checks if string is a D-Bus GUID.
- * See the documentation for [Gio.Global.dbusGenerateGuid] for more information about
+ * See the documentation for [gio.global.dbusGenerateGuid] for more information about
  * the format of a GUID.
  * Params:
  *   string_ = The string to check.
@@ -902,7 +902,7 @@ bool dbusIsName(string string_)
 }
 
 /**
- * Like [Gio.Global.dbusIsAddress] but also checks if the library supports the
+ * Like [gio.global.dbusIsAddress] but also checks if the library supports the
  * transports in string and that key/value pairs for each transport
  * are valid. See the specification of the
  * [D-Bus address format](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
@@ -938,8 +938,8 @@ bool dbusIsUniqueName(string string_)
 
 /**
  * Unescapes an string that was previously escaped with
- * [Gio.Global.dbusEscapeObjectPath]. If the string is in a format that could
- * not have been returned by [Gio.Global.dbusEscapeObjectPath], this function
+ * [gio.global.dbusEscapeObjectPath]. If the string is in a format that could
+ * not have been returned by [gio.global.dbusEscapeObjectPath], this function
  * returns %NULL.
  * Encoding alphanumeric characters which do not need to be
  * encoded is not allowed $(LPAREN)e.g `_63` is not valid, the string
@@ -948,7 +948,7 @@ bool dbusIsUniqueName(string string_)
  *   s = the string to unescape
  * Returns: an
  *   unescaped version of s, or %NULL if s is not a string returned
- *   from [Gio.Global.dbusEscapeObjectPath]. Free with [GLib.Global.gfree].
+ *   from [gio.global.dbusEscapeObjectPath]. Free with [glib.global.gfree].
  */
 ubyte[] dbusUnescapeObjectPath(string s)
 {
@@ -1024,10 +1024,10 @@ Quark ioErrorQuark()
  * This may not actually load and initialize all the types in each
  * module, some modules may be lazily loaded and initialized when
  * an extension point it implements is used with e.g.
- * [Gio.IOExtensionPoint.getExtensions] or
- * [Gio.IOExtensionPoint.getExtensionByName].
+ * [gio.ioextension_point.IOExtensionPoint.getExtensions] or
+ * [gio.ioextension_point.IOExtensionPoint.getExtensionByName].
  * If you need to guarantee that all types are loaded in all the modules,
- * use [Gio.Global.ioModulesLoadAllInDirectory].
+ * use [gio.global.ioModulesLoadAllInDirectory].
  * Params:
  *   dirname = pathname for a directory containing modules
  *     to scan.
@@ -1044,10 +1044,10 @@ void ioModulesScanAllInDirectory(string dirname)
  * This may not actually load and initialize all the types in each
  * module, some modules may be lazily loaded and initialized when
  * an extension point it implements is used with e.g.
- * [Gio.IOExtensionPoint.getExtensions] or
- * [Gio.IOExtensionPoint.getExtensionByName].
+ * [gio.ioextension_point.IOExtensionPoint.getExtensions] or
+ * [gio.ioextension_point.IOExtensionPoint.getExtensionByName].
  * If you need to guarantee that all types are loaded in all the modules,
- * use [Gio.Global.ioModulesLoadAllInDirectory].
+ * use [gio.global.ioModulesLoadAllInDirectory].
  * Params:
  *   dirname = pathname for a directory containing modules
  *     to scan.
@@ -1062,7 +1062,7 @@ void ioModulesScanAllInDirectoryWithScope(string dirname, IOModuleScope scope_)
 /**
  * Cancels all cancellable I/O jobs.
  * A job is cancellable if a #GCancellable was passed into
- * [Gio.Global.ioSchedulerPushJob].
+ * [gio.global.ioSchedulerPushJob].
 
  * Deprecated: You should never call this function, since you don't
  *   know how other libraries in your program might be making use of
@@ -1078,15 +1078,15 @@ void ioSchedulerCancelAllJobs()
  * notify will be called on user_data after job_func has returned,
  * regardless whether the job was cancelled or has run to completion.
  * If cancellable is not %NULL, it can be used to cancel the I/O job
- * by calling [Gio.Cancellable.cancel] or by calling
- * [Gio.Global.ioSchedulerCancelAllJobs].
+ * by calling [gio.cancellable.Cancellable.cancel] or by calling
+ * [gio.global.ioSchedulerCancelAllJobs].
  * Params:
  *   jobFunc = a #GIOSchedulerJobFunc.
  *   ioPriority = the [I/O priority][io-priority]
  *     of the request.
  *   cancellable = optional #GCancellable object, %NULL to ignore.
 
- * Deprecated: use #GThreadPool or [Gio.Task.runInThread]
+ * Deprecated: use #GThreadPool or [gio.task.Task.runInThread]
  */
 void ioSchedulerPushJob(IOSchedulerJobFunc jobFunc, int ioPriority, Cancellable cancellable)
 {
@@ -1206,7 +1206,7 @@ SettingsBackend nullSettingsBackendNew()
  * Utility method for #GPollableInputStream and #GPollableOutputStream
  * implementations. Creates a new #GSource that expects a callback of
  * type #GPollableSourceFunc. The new source does not actually do
- * anything on its own; use [GLib.Source.addChildSource] to add other
+ * anything on its own; use [glib.source.Source.addChildSource] to add other
  * sources to it to cause it to trigger.
  * Params:
  *   pollableStream = the stream associated with the new source
@@ -1223,7 +1223,7 @@ Source pollableSourceNew(ObjectG pollableStream)
 /**
  * Utility method for #GPollableInputStream and #GPollableOutputStream
  * implementations. Creates a new #GSource, as with
- * [Gio.Global.pollableSourceNew], but also attaching child_source $(LPAREN)with a
+ * [gio.global.pollableSourceNew], but also attaching child_source $(LPAREN)with a
  * dummy callback$(RPAREN), and cancellable, if they are non-%NULL.
  * Params:
  *   pollableStream = the stream associated with the
@@ -1241,12 +1241,12 @@ Source pollableSourceNewFull(ObjectG pollableStream, Source childSource, Cancell
 }
 
 /**
- * Tries to read from stream, as with [Gio.InputStream.read] $(LPAREN)if
- * blocking is %TRUE$(RPAREN) or [Gio.PollableInputStream.readNonblocking]
+ * Tries to read from stream, as with [gio.input_stream.InputStream.read] $(LPAREN)if
+ * blocking is %TRUE$(RPAREN) or [gio.pollable_input_stream.PollableInputStream.readNonblocking]
  * $(LPAREN)if blocking is %FALSE$(RPAREN). This can be used to more easily share
  * code between blocking and non-blocking implementations of a method.
  * If blocking is %FALSE, then stream must be a
- * #GPollableInputStream for which [Gio.PollableInputStream.canPoll]
+ * #GPollableInputStream for which [gio.pollable_input_stream.PollableInputStream.canPoll]
  * returns %TRUE, or else the behavior is undefined. If blocking is
  * %TRUE, then stream does not need to be a #GPollableInputStream.
  * Params:
@@ -1273,13 +1273,13 @@ ptrdiff_t pollableStreamRead(InputStream stream, ubyte[] buffer, bool blocking, 
 }
 
 /**
- * Tries to write to stream, as with [Gio.OutputStream.write] $(LPAREN)if
- * blocking is %TRUE$(RPAREN) or [Gio.PollableOutputStream.writeNonblocking]
+ * Tries to write to stream, as with [gio.output_stream.OutputStream.write] $(LPAREN)if
+ * blocking is %TRUE$(RPAREN) or [gio.pollable_output_stream.PollableOutputStream.writeNonblocking]
  * $(LPAREN)if blocking is %FALSE$(RPAREN). This can be used to more easily share
  * code between blocking and non-blocking implementations of a method.
  * If blocking is %FALSE, then stream must be a
  * #GPollableOutputStream for which
- * [Gio.PollableOutputStream.canPoll] returns %TRUE or else the
+ * [gio.pollable_output_stream.PollableOutputStream.canPoll] returns %TRUE or else the
  * behavior is undefined. If blocking is %TRUE, then stream does not
  * need to be a #GPollableOutputStream.
  * Params:
@@ -1307,8 +1307,8 @@ ptrdiff_t pollableStreamWrite(OutputStream stream, ubyte[] buffer, bool blocking
 
 /**
  * Tries to write count bytes to stream, as with
- * [Gio.OutputStream.writeAll], but using [Gio.Global.pollableStreamWrite]
- * rather than [Gio.OutputStream.write].
+ * [gio.output_stream.OutputStream.writeAll], but using [gio.global.pollableStreamWrite]
+ * rather than [gio.output_stream.OutputStream.write].
  * On a successful write of count bytes, %TRUE is returned, and
  * bytes_written is set to count.
  * If there is an error during the operation $(LPAREN)including
@@ -1316,9 +1316,9 @@ ptrdiff_t pollableStreamWrite(OutputStream stream, ubyte[] buffer, bool blocking
  * returned and error is set to indicate the error status,
  * bytes_written is updated to contain the number of bytes written
  * into the stream before the error occurred.
- * As with [Gio.Global.pollableStreamWrite], if blocking is %FALSE, then
+ * As with [gio.global.pollableStreamWrite], if blocking is %FALSE, then
  * stream must be a #GPollableOutputStream for which
- * [Gio.PollableOutputStream.canPoll] returns %TRUE or else the
+ * [gio.pollable_output_stream.PollableOutputStream.canPoll] returns %TRUE or else the
  * behavior is undefined. If blocking is %TRUE, then stream does not
  * need to be a #GPollableOutputStream.
  * Params:
@@ -1350,7 +1350,7 @@ bool pollableStreamWriteAll(OutputStream stream, ubyte[] buffer, bool blocking, 
  * Returns all the names of children at the specified path in the set of
  * globally registered resources.
  * The return result is a %NULL terminated list of strings which should
- * be released with [GLib.Global.strfreev].
+ * be released with [glib.global.strfreev].
  * lookup_flags controls the behaviour of the lookup.
  * Params:
  *   path = A pathname inside the resource
@@ -1419,7 +1419,7 @@ bool resourcesGetInfo(string path, ResourceLookupFlags lookupFlags, out size_t s
  *   path = A pathname inside the resource
  *   lookupFlags = A #GResourceLookupFlags
  * Returns: #GBytes or %NULL on error.
- *   Free the returned object with [GLib.Bytes.unref]
+ *   Free the returned object with [glib.bytes.Bytes.unref]
  */
 Bytes resourcesLookupData(string path, ResourceLookupFlags lookupFlags)
 {
@@ -1442,7 +1442,7 @@ Bytes resourcesLookupData(string path, ResourceLookupFlags lookupFlags)
  *   path = A pathname inside the resource
  *   lookupFlags = A #GResourceLookupFlags
  * Returns: #GInputStream or %NULL on error.
- *   Free the returned object with [GObject.ObjectG.unref]
+ *   Free the returned object with [gobject.object.ObjectG.unref]
  */
 InputStream resourcesOpenStream(string path, ResourceLookupFlags lookupFlags)
 {
@@ -1459,7 +1459,7 @@ InputStream resourcesOpenStream(string path, ResourceLookupFlags lookupFlags)
 /**
  * Registers the resource with the process-global set of resources.
  * Once a resource is registered the files in it can be accessed
- * with the global resource lookup functions like [Gio.Global.resourcesLookupData].
+ * with the global resource lookup functions like [gio.global.resourcesLookupData].
  * Params:
  *   resource = A #GResource
  */
@@ -1480,14 +1480,14 @@ void resourcesUnregister(Resource resource)
 
 /**
  * Reports an error in an idle function. Similar to
- * [Gio.Global.simpleAsyncReportErrorInIdle], but takes a #GError rather
+ * [gio.global.simpleAsyncReportErrorInIdle], but takes a #GError rather
  * than building a new one.
  * Params:
  *   object = a #GObject, or %NULL
  *   callback = a #GAsyncReadyCallback.
  *   error = the #GError to report
 
- * Deprecated: Use [Gio.Task.reportError].
+ * Deprecated: Use [gio.task.Task.reportError].
  */
 void simpleAsyncReportGerrorInIdle(ObjectG object, AsyncReadyCallback callback, ErrorG error)
 {
@@ -1564,7 +1564,7 @@ bool unixIsSystemFsType(string fsType)
 /**
  * Gets a #GUnixMountEntry for a given mount path. If time_read
  * is set, it will be filled with a unix timestamp for checking
- * if the mounts have changed since with [Gio.Global.unixMountsChangedSince].
+ * if the mounts have changed since with [gio.global.unixMountsChangedSince].
  * If more mounts have the same mount path, the last matching mount
  * is returned.
  * This will return %NULL if there is no mount point at mount_path.
@@ -1614,7 +1614,7 @@ UnixMountEntry unixMountCopy(UnixMountEntry mountEntry)
 /**
  * Gets a #GUnixMountEntry for a given file path. If time_read
  * is set, it will be filled with a unix timestamp for checking
- * if the mounts have changed since with [Gio.Global.unixMountsChangedSince].
+ * if the mounts have changed since with [gio.global.unixMountsChangedSince].
  * If more mounts have the same mount path, the last matching mount
  * is returned.
  * This will return %NULL if looking up the mount entry fails, if
@@ -1688,7 +1688,7 @@ string unixMountGetMountPath(UnixMountEntry mountEntry)
 /**
  * Gets a comma-separated list of mount options for the unix mount. For example,
  * `rw,relatime,seclabel,data\=ordered`.
- * This is similar to [Gio.UnixMountPoint.getOptions], but it takes
+ * This is similar to [gio.unix_mount_point.UnixMountPoint.getOptions], but it takes
  * a #GUnixMountEntry as an argument.
  * Params:
  *   mountEntry = a #GUnixMountEntry.
@@ -1754,7 +1754,7 @@ Icon unixMountGuessIcon(UnixMountEntry mountEntry)
  * Params:
  *   mountEntry = a #GUnixMountEntry
  * Returns: A newly allocated string that must
- *   be freed with [GLib.Global.gfree]
+ *   be freed with [glib.global.gfree]
  */
 string unixMountGuessName(UnixMountEntry mountEntry)
 {
@@ -1806,8 +1806,8 @@ bool unixMountIsReadonly(UnixMountEntry mountEntry)
 
 /**
  * Checks if a Unix mount is a system mount. This is the Boolean OR of
- * [Gio.Global.unixIsSystemFsType], [Gio.Global.unixIsSystemDevicePath] and
- * [Gio.Global.unixIsMountPathSystemInternal] on mount_entry’s properties.
+ * [gio.global.unixIsSystemFsType], [gio.global.unixIsSystemDevicePath] and
+ * [gio.global.unixIsMountPathSystemInternal] on mount_entry’s properties.
  * The definition of what a ‘system’ mount entry is may change over time as new
  * file system types and device paths are ignored.
  * Params:
@@ -1838,7 +1838,7 @@ bool unixMountPointsChangedSince(ulong time)
  * Gets a #GList of #GUnixMountPoint containing the unix mount points.
  * If time_read is set, it will be filled with the mount timestamp,
  * allowing for checking if the mounts have changed with
- * [Gio.Global.unixMountPointsChangedSince].
+ * [gio.global.unixMountPointsChangedSince].
  * Params:
  *   timeRead = guint64 to contain a timestamp.
  * Returns: a #GList of the UNIX mountpoints.
@@ -1868,7 +1868,7 @@ bool unixMountsChangedSince(ulong time)
  * Gets a #GList of #GUnixMountEntry containing the unix mounts.
  * If time_read is set, it will be filled with the mount
  * timestamp, allowing for checking if the mounts have changed
- * with [Gio.Global.unixMountsChangedSince].
+ * with [gio.global.unixMountsChangedSince].
  * Params:
  *   timeRead = guint64 to contain a timestamp, or %NULL
  * Returns: a #GList of the UNIX mounts.

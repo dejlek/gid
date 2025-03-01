@@ -1,6 +1,6 @@
 module gsk.broadway_renderer;
 
-import gid.gid;
+import gid.global;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.renderer;
@@ -29,7 +29,7 @@ class BroadwayRenderer : Renderer
    * Creates a new Broadway renderer.
    * The Broadway renderer is the default renderer for the broadway backend.
    * It will only work with broadway surfaces, otherwise it will fail the
-   * call to [Gsk.Renderer.realize].
+   * call to [gsk.renderer.Renderer.realize].
    * This function is only available when GTK was compiled with Broadway
    * support.
    * Returns: a new Broadway renderer.

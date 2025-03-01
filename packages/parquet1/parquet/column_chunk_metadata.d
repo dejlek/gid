@@ -1,6 +1,6 @@
 module parquet.column_chunk_metadata;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;

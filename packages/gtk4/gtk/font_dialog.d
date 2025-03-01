@@ -1,6 +1,6 @@
 module gtk.font_dialog;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -23,11 +23,11 @@ import pango.language;
  * are needed to present a font chooser dialog to the
  * user, such as a title for the dialog and whether it
  * should be modal.
- * The dialog is shown with the [Gtk.FontDialog.chooseFont]
+ * The dialog is shown with the [gtk.font_dialog.FontDialog.chooseFont]
  * function or its variants. This API follows the GIO async pattern,
  * and the result can be obtained by calling the corresponding
- * finish function, such as [Gtk.FontDialog.chooseFontFinish].
- * See [Gtk.FontDialogButton] for a convenient control
+ * finish function, such as [gtk.font_dialog.FontDialog.chooseFontFinish].
+ * See [gtk.font_dialog_button.FontDialogButton] for a convenient control
  * that uses `GtkFontDialog` and presents the results.
  */
 class FontDialog : ObjectG
@@ -65,7 +65,7 @@ class FontDialog : ObjectG
    * presenting a dialog to the user for selecting a font face
    * $(LPAREN)i.e. a font family and style, but not a specific font size$(RPAREN).
    * The callback will be called when the dialog is dismissed.
-   * It should call [Gtk.FontDialog.chooseFaceFinish]
+   * It should call [gtk.font_dialog.FontDialog.chooseFaceFinish]
    * to obtain the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -89,7 +89,7 @@ class FontDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.FontDialog.chooseFace] call
+   * Finishes the [gtk.font_dialog.FontDialog.chooseFace] call
    * and returns the resulting font face.
    * Params:
    *   result = a `GAsyncResult`
@@ -110,7 +110,7 @@ class FontDialog : ObjectG
    * This function initiates a font selection operation by
    * presenting a dialog to the user for selecting a font family.
    * The callback will be called when the dialog is dismissed.
-   * It should call [Gtk.FontDialog.chooseFamilyFinish]
+   * It should call [gtk.font_dialog.FontDialog.chooseFamilyFinish]
    * to obtain the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -134,11 +134,11 @@ class FontDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.FontDialog.chooseFamily] call
+   * Finishes the [gtk.font_dialog.FontDialog.chooseFamily] call
    * and returns the resulting family.
    * This function never returns an error. If the operation is
    * not finished successfully, the value passed as initial_value
-   * to [Gtk.FontDialog.chooseFamily] is returned.
+   * to [gtk.font_dialog.FontDialog.chooseFamily] is returned.
    * Params:
    *   result = a `GAsyncResult`
    * Returns: the selected family
@@ -158,10 +158,10 @@ class FontDialog : ObjectG
    * This function initiates a font selection operation by
    * presenting a dialog to the user for selecting a font.
    * The callback will be called when the dialog is dismissed.
-   * It should call [Gtk.FontDialog.chooseFontFinish]
+   * It should call [gtk.font_dialog.FontDialog.chooseFontFinish]
    * to obtain the result.
    * If you want to let the user select font features as well,
-   * use [Gtk.FontDialog.chooseFontAndFeatures] instead.
+   * use [gtk.font_dialog.FontDialog.chooseFontAndFeatures] instead.
    * Params:
    *   parent = the parent `GtkWindow`
    *   initialValue = the font to select initially
@@ -190,7 +190,7 @@ class FontDialog : ObjectG
    * Font features affect how the font is rendered, for example
    * enabling glyph variants or ligatures.
    * The callback will be called when the dialog is dismissed.
-   * It should call [Gtk.FontDialog.chooseFontAndFeaturesFinish]
+   * It should call [gtk.font_dialog.FontDialog.chooseFontAndFeaturesFinish]
    * to obtain the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -214,7 +214,7 @@ class FontDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.FontDialog.chooseFontAndFeatures]
+   * Finishes the [gtk.font_dialog.FontDialog.chooseFontAndFeatures]
    * call and returns the resulting font description and font features.
    * Params:
    *   result = a `GAsyncResult`
@@ -241,7 +241,7 @@ class FontDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.FontDialog.chooseFont] call
+   * Finishes the [gtk.font_dialog.FontDialog.chooseFont] call
    * and returns the resulting font description.
    * Params:
    *   result = a `GAsyncResult`

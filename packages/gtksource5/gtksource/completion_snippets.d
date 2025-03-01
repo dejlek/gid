@@ -1,6 +1,6 @@
 module gtksource.completion_snippets;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;

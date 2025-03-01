@@ -1,6 +1,6 @@
 module gtk.numeric_sorter;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -10,7 +10,7 @@ import gtk.types;
 /**
  * `GtkNumericSorter` is a `GtkSorter` that compares numbers.
  * To obtain the numbers to compare, this sorter evaluates a
- * [Gtk.Expression].
+ * [gtk.expression.Expression].
  */
 class NumericSorter : Sorter
 {
@@ -34,7 +34,7 @@ class NumericSorter : Sorter
   /**
    * Creates a new numeric sorter using the given expression.
    * Smaller numbers will be sorted first. You can call
-   * [Gtk.NumericSorter.setSortOrder] to change this.
+   * [gtk.numeric_sorter.NumericSorter.setSortOrder] to change this.
    * Params:
    *   expression = The expression to evaluate
    * Returns: a new `GtkNumericSorter`

@@ -1,6 +1,6 @@
 module harfbuzz.segment_properties;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -8,8 +8,8 @@ import harfbuzz.types;
 
 /**
  * The structure that holds various text properties of an #hb_buffer_t. Can be
- * set and retrieved using [HarfBuzz.Global.bufferSetSegmentProperties] and
- * [HarfBuzz.Global.bufferGetSegmentProperties], respectively.
+ * set and retrieved using [harfbuzz.global.bufferSetSegmentProperties] and
+ * [harfbuzz.global.bufferGetSegmentProperties], respectively.
  */
 class SegmentProperties : Boxed
 {

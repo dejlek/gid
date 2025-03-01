@@ -1,6 +1,6 @@
 module GLib.global;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
@@ -42,14 +42,14 @@ int access(string filename, int mode)
 }
 
 /**
- * This function is similar to [GLib.Global.gmalloc], allocating (n_blocks * n_block_bytes)
+ * This function is similar to [glib.global.gmalloc], allocating (n_blocks * n_block_bytes)
  * bytes, but care is taken to align the allocated memory to with the given
  * alignment value. Additionally, it will detect possible overflow during
  * multiplication.
  * If the allocation fails $(LPAREN)because the system is out of memory$(RPAREN),
  * the program is terminated.
  * Aligned memory allocations returned by this function can only be
- * freed using [GLib.Global.alignedFreeSized] or [GLib.Global.alignedFree].
+ * freed using [glib.global.alignedFreeSized] or [glib.global.alignedFree].
  * Params:
  *   nBlocks = the number of blocks to allocate
  *   nBlockBytes = the size of each block in bytes
@@ -64,7 +64,7 @@ void* alignedAlloc(size_t nBlocks, size_t nBlockBytes, size_t alignment)
 }
 
 /**
- * This function is similar to [GLib.Global.alignedAlloc], but it will
+ * This function is similar to [glib.global.alignedAlloc], but it will
  * also clear the allocated memory before returning it.
  * Params:
  *   nBlocks = the number of blocks to allocate
@@ -80,7 +80,7 @@ void* alignedAlloc0(size_t nBlocks, size_t nBlockBytes, size_t alignment)
 }
 
 /**
- * Frees the memory allocated by [GLib.Global.alignedAlloc].
+ * Frees the memory allocated by [glib.global.alignedAlloc].
  * Params:
  *   mem = the memory to deallocate
  */
@@ -96,7 +96,7 @@ void alignedFree(void* mem)
  * It is an error if size doesn’t match the size, or alignment doesn’t match
  * the alignment, passed when mem was allocated. size and alignment are
  * passed to this function to allow optimizations in the allocator. If you
- * don’t know either of them, use [GLib.Global.alignedFree] instead.
+ * don’t know either of them, use [glib.global.alignedFree] instead.
  * Params:
  *   mem = the memory to free
  *   alignment = alignment of mem
@@ -131,7 +131,7 @@ int asciiDigitValue(char c)
  * the string back using funcGLib.ascii_strtod gives the same machine-number
  * $(LPAREN)on machines with IEEE compatible 64bit doubles$(RPAREN). It is
  * guaranteed that the size of the resulting string will never
- * be larger than [GLib.ASCII_DTOSTR_BUF_SIZE] bytes, including the terminating
+ * be larger than [glib.int] bytes, including the terminating
  * nul character, which is always added.
  * Params:
  *   buffer = a buffer to place the resulting string in
@@ -370,8 +370,8 @@ double asciiStrtod(string nptr, out string endptr)
  * files or other non-user input that should be locale independent.
  * To handle input from the user you should normally use the
  * locale-sensitive system `strtoll$(LPAREN)$(RPAREN)` function.
- * If the correct value would cause overflow, [GLib.MAXINT64] or
- * [GLib.MININT64] is returned, and `ERANGE` is stored in `errno`.
+ * If the correct value would cause overflow, [glib.long] or
+ * [glib.long] is returned, and `ERANGE` is stored in `errno`.
  * If the base is outside the valid range, zero is returned, and
  * `EINVAL` is stored in `errno`. If the
  * string conversion fails, zero is returned, and endptr returns nptr
@@ -407,7 +407,7 @@ long asciiStrtoll(string nptr, out string endptr, uint base)
  * files or other non-user input that should be locale independent.
  * To handle input from the user you should normally use the
  * locale-sensitive system `strtoull$(LPAREN)$(RPAREN)` function.
- * If the correct value would cause overflow, [GLib.MAXUINT64]
+ * If the correct value would cause overflow, [glib.ulong]
  * is returned, and `ERANGE` is stored in `errno`.
  * If the base is outside the valid range, zero is returned, and
  * `EINVAL` is stored in `errno`.
@@ -585,7 +585,7 @@ void assertionMessageError(string domain, string file, int line, string func, st
  * `{ tmp \= *atomic; *atomic +\= val; return tmp; }`.
  * This call acts as a full compiler and hardware memory barrier.
  * Before version 2.30, this function did not return a value
- * $(LPAREN)but [GLib.Global.atomicIntExchangeAndAdd] did, and had the same meaning$(RPAREN).
+ * $(LPAREN)but [glib.global.atomicIntExchangeAndAdd] did, and had the same meaning$(RPAREN).
  * While atomic has a `volatile` qualifier, this is a historical artifact and
  * the pointer passed to it should not be `volatile`.
  * Params:
@@ -650,7 +650,7 @@ bool atomicIntCompareAndExchange(ref int atomic, int oldval, int newval)
  * Think of this operation as an atomic version of
  * `{ *preval \= *atomic; if $(LPAREN)*atomic \=\= oldval$(RPAREN) { *atomic \= newval; return TRUE; } else return FALSE; }`.
  * This call acts as a full compiler and hardware memory barrier.
- * See also [GLib.Global.atomicIntCompareAndExchange]
+ * See also [glib.global.atomicIntCompareAndExchange]
  * Params:
  *   atomic = a pointer to a #gint or #guint
  *   oldval = the value to compare with
@@ -702,7 +702,7 @@ int atomicIntExchange(ref int atomic, int newval)
 }
 
 /**
- * This function existed before [GLib.Global.atomicIntAdd] returned the prior
+ * This function existed before [glib.global.atomicIntAdd] returned the prior
  * value of the integer $(LPAREN)which it now does$(RPAREN).  It is retained only for
  * compatibility reasons.  Don't use this function in new code.
  * Params:
@@ -710,7 +710,7 @@ int atomicIntExchange(ref int atomic, int newval)
  *   val = the value to add
  * Returns: the value of atomic before the add, signed
 
- * Deprecated: Use [GLib.Global.atomicIntAdd] instead.
+ * Deprecated: Use [glib.global.atomicIntAdd] instead.
  */
 int atomicIntExchangeAndAdd(ref int atomic, int val)
 {
@@ -880,7 +880,7 @@ bool atomicPointerCompareAndExchange(void* atomic, void* oldval, void* newval)
  * Think of this operation as an atomic version of
  * `{ *preval \= *atomic; if $(LPAREN)*atomic \=\= oldval$(RPAREN) { *atomic \= newval; return TRUE; } else return FALSE; }`.
  * This call acts as a full compiler and hardware memory barrier.
- * See also [GLib.Global.atomicPointerCompareAndExchange]
+ * See also [glib.global.atomicPointerCompareAndExchange]
  * Params:
  *   atomic = a pointer to a #gpointer-sized value
  *   oldval = the value to compare with
@@ -1118,7 +1118,7 @@ bool atomicRefCountCompare(ref int arc, int val)
  * Atomically decreases the reference count.
  * If %TRUE is returned, the reference count reached 0. After this point, arc
  * is an undefined state and must be reinitialized with
- * [GLib.Global.atomicRefCountInit] to be used again.
+ * [glib.global.atomicRefCountInit] to be used again.
  * Params:
  *   arc = the address of an atomic reference count variable
  * Returns: %TRUE if the reference count reached 0, and %FALSE otherwise
@@ -1158,7 +1158,7 @@ void atomicRefCountInit(ref int arc)
  *   text = zero-terminated string with base64 text to decode
  * Returns: newly allocated buffer containing the binary data
  *   that text represents. The returned buffer must
- *   be freed with [GLib.Global.gfree].
+ *   be freed with [glib.global.gfree].
  */
 ubyte[] base64Decode(string text)
 {
@@ -1182,7 +1182,7 @@ ubyte[] base64Decode(string text)
  *   data = the binary data to encode
  * Returns: a newly allocated, zero-terminated Base-64
  *   encoded string representing data. The returned string must
- *   be freed with [GLib.Global.gfree].
+ *   be freed with [glib.global.gfree].
  */
 string base64Encode(ubyte[] data)
 {
@@ -1206,8 +1206,8 @@ string base64Encode(ubyte[] data)
  * Returns: the name of the file without any leading
  *   directory components
 
- * Deprecated: Use [GLib.Global.pathGetBasename] instead, but notice
- *   that [GLib.Global.pathGetBasename] allocates new memory for the
+ * Deprecated: Use [glib.global.pathGetBasename] instead, but notice
+ *   that [glib.global.pathGetBasename] allocates new memory for the
  *   returned string, unlike this function which returns a pointer
  *   into the argument.
  */
@@ -1222,7 +1222,7 @@ string basename(string fileName)
 
 /**
  * Sets the indicated lock_bit in address.  If the bit is already
- * set, this call will block until [GLib.Global.bitUnlock] unsets the
+ * set, this call will block until [glib.global.bitUnlock] unsets the
  * corresponding bit.
  * Attempting to lock on two different bits within the same integer is
  * not supported and will very probably cause deadlocks.
@@ -1317,7 +1317,7 @@ bool bitTrylock(ref int address, int lockBit)
 
 /**
  * Clears the indicated lock_bit in address.  If another thread is
- * currently blocked in [GLib.Global.bitLock] on this same bit then it will be
+ * currently blocked in [glib.global.bitLock] on this same bit then it will be
  * woken up.
  * This function accesses address atomically.  All other accesses to
  * address must be atomic in order for this function to work
@@ -1340,7 +1340,7 @@ void blowChunks()
 /**
  * Creates a filename from a vector of elements using the correct
  * separator for the current platform.
- * This function behaves exactly like [GLib.Global.buildFilename], but takes the path
+ * This function behaves exactly like [glib.global.buildFilename], but takes the path
  * elements as a string array, instead of varargs. This function is mainly
  * meant for language bindings.
  * If you are building a path programmatically you may want to use
@@ -1364,7 +1364,7 @@ string buildFilenamev(string[] args)
 }
 
 /**
- * Behaves exactly like [GLib.Global.buildPath], but takes the path elements
+ * Behaves exactly like [glib.global.buildPath], but takes the path elements
  * as a string array, instead of variadic arguments.
  * This function is mainly meant for language bindings.
  * Params:
@@ -1372,7 +1372,7 @@ string buildFilenamev(string[] args)
  *   args = %NULL-terminated
  *     array of strings containing the path elements.
  * Returns: a newly-allocated string that
- *   must be freed with [GLib.Global.gfree].
+ *   must be freed with [glib.global.gfree].
  */
 string buildPathv(string separator, string[] args)
 {
@@ -1395,7 +1395,7 @@ string buildPathv(string separator, string[] args)
  * If filename is an absolute path, relative_to is ignored. Otherwise,
  * relative_to will be prepended to filename to make it absolute. relative_to
  * must be an absolute path, or %NULL. If relative_to is %NULL, it'll fallback
- * to [GLib.Global.getCurrentDir].
+ * to [glib.global.getCurrentDir].
  * This function never fails, and will canonicalize file paths even if they don't
  * exist.
  * No file system I/O is done.
@@ -1467,22 +1467,22 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro)
 /**
  * Sets a function to be called when the child indicated by pid
  * exits, at the priority priority.
- * If you obtain pid from [GLib.Global.spawnAsync] or [GLib.Global.spawnAsyncWithPipes]
+ * If you obtain pid from [glib.global.spawnAsync] or [glib.global.spawnAsyncWithPipes]
  * you will need to pass %G_SPAWN_DO_NOT_REAP_CHILD as flag to
  * the spawn function for the child watching to work.
- * In many programs, you will want to call [GLib.Global.spawnCheckWaitStatus]
+ * In many programs, you will want to call [glib.global.spawnCheckWaitStatus]
  * in the callback to determine whether or not the child exited
  * successfully.
  * Also, note that on platforms where #GPid must be explicitly closed
- * $(LPAREN)see [GLib.Global.spawnClosePid]$(RPAREN) pid must not be closed while the source
- * is still active.  Typically, you should invoke [GLib.Global.spawnClosePid]
+ * $(LPAREN)see [glib.global.spawnClosePid]$(RPAREN) pid must not be closed while the source
+ * is still active.  Typically, you should invoke [glib.global.spawnClosePid]
  * in the callback function for the source.
  * GLib supports only a single callback per process id.
  * On POSIX platforms, the same restrictions mentioned for
- * [GLib.Global.childWatchSourceNew] apply to this function.
+ * [glib.global.childWatchSourceNew] apply to this function.
  * This internally creates a main loop source using
- * [GLib.Global.childWatchSourceNew] and attaches it to the main loop context
- * using [GLib.Source.attach]. You can do these steps manually if you
+ * [glib.global.childWatchSourceNew] and attaches it to the main loop context
+ * using [glib.source.Source.attach]. You can do these steps manually if you
  * need greater control.
  * Params:
  *   priority = the priority of the idle source. Typically this will be in the
@@ -1512,14 +1512,14 @@ uint childWatchAdd(int priority, Pid pid, ChildWatchFunc function_)
 /**
  * Creates a new child_watch source.
  * The source will not initially be associated with any #GMainContext
- * and must be added to one with [GLib.Source.attach] before it will be
+ * and must be added to one with [glib.source.Source.attach] before it will be
  * executed.
  * Note that child watch sources can only be used in conjunction with
  * `g_spawn...` when the %G_SPAWN_DO_NOT_REAP_CHILD flag is used.
  * Note that on platforms where #GPid must be explicitly closed
- * $(LPAREN)see [GLib.Global.spawnClosePid]$(RPAREN) pid must not be closed while the
+ * $(LPAREN)see [glib.global.spawnClosePid]$(RPAREN) pid must not be closed while the
  * source is still active. Typically, you will want to call
- * [GLib.Global.spawnClosePid] in the callback function for the source.
+ * [glib.global.spawnClosePid] in the callback function for the source.
  * On POSIX platforms, the following restrictions apply to this API
  * due to limitations in POSIX process interfaces:
  * * pid must be a child of this process
@@ -1581,7 +1581,7 @@ int chmod(string filename, int mode)
 
 /**
  * If err or *err is %NULL, does nothing. Otherwise,
- * calls [GLib.ErrorG.free] on *err and sets *err to %NULL.
+ * calls [glib.error.ErrorG.free] on *err and sets *err to %NULL.
  */
 void clearError()
 {
@@ -1629,7 +1629,7 @@ bool close(int fd)
  * Equivalently, it is the same as BSD `closefrom $(LPAREN)lowfd$(RPAREN)`, but portable,
  * and async-signal-safe on all OSs.
  * This function is async-signal safe, making it safe to call from a
- * signal handler or a [GLib.SpawnChildSetupFunc], as long as lowfd is
+ * signal handler or a [glib.SpawnChildSetupFunc], as long as lowfd is
  * non-negative.
  * See [`signal$(LPAREN)7$(RPAREN)`]$(LPAREN)$(RPAREN)(man:signal7) and
  * [`signal-safety$(LPAREN)7$(RPAREN)`]$(LPAREN)$(RPAREN)(man:signal-safety7) for more details.
@@ -1646,15 +1646,15 @@ int closefrom(int lowfd)
 
 /**
  * Computes the checksum for a binary data. This is a
- * convenience wrapper for [GLib.Checksum.new_], [GLib.Checksum.getString]
- * and [GLib.Checksum.free].
+ * convenience wrapper for [glib.checksum.Checksum.new_], [glib.checksum.Checksum.getString]
+ * and [glib.checksum.Checksum.free].
  * The hexadecimal string returned will be in lower case.
  * Params:
  *   checksumType = a #GChecksumType
  *   data = binary blob to compute the digest of
  * Returns: the digest of the binary data as a
- *   string in hexadecimal, or %NULL if [GLib.Checksum.new_] fails for
- *   checksum_type. The returned string should be freed with [GLib.Global.gfree] when
+ *   string in hexadecimal, or %NULL if [glib.checksum.Checksum.new_] fails for
+ *   checksum_type. The returned string should be freed with [glib.global.gfree] when
  *   done using it.
  */
 string computeChecksumForBytes(ChecksumType checksumType, Bytes data)
@@ -1667,15 +1667,15 @@ string computeChecksumForBytes(ChecksumType checksumType, Bytes data)
 
 /**
  * Computes the checksum for a binary data of length. This is a
- * convenience wrapper for [GLib.Checksum.new_], [GLib.Checksum.getString]
- * and [GLib.Checksum.free].
+ * convenience wrapper for [glib.checksum.Checksum.new_], [glib.checksum.Checksum.getString]
+ * and [glib.checksum.Checksum.free].
  * The hexadecimal string returned will be in lower case.
  * Params:
  *   checksumType = a #GChecksumType
  *   data = binary blob to compute the digest of
  * Returns: the digest of the binary data as a
- *   string in hexadecimal, or %NULL if [GLib.Checksum.new_] fails for
- *   checksum_type. The returned string should be freed with [GLib.Global.gfree] when
+ *   string in hexadecimal, or %NULL if [glib.checksum.Checksum.new_] fails for
+ *   checksum_type. The returned string should be freed with [glib.global.gfree] when
  *   done using it.
  */
 string computeChecksumForData(ChecksumType checksumType, ubyte[] data)
@@ -1699,8 +1699,8 @@ string computeChecksumForData(ChecksumType checksumType, ubyte[] data)
  *   str = the string to compute the checksum of
  *   length = the length of the string, or -1 if the string is null-terminated.
  * Returns: the checksum as a hexadecimal string,
- *   or %NULL if [GLib.Checksum.new_] fails for checksum_type. The returned string
- *   should be freed with [GLib.Global.gfree] when done using it.
+ *   or %NULL if [glib.checksum.Checksum.new_] fails for checksum_type. The returned string
+ *   should be freed with [glib.global.gfree] when done using it.
  */
 string computeChecksumForString(ChecksumType checksumType, string str, ptrdiff_t length)
 {
@@ -1713,15 +1713,15 @@ string computeChecksumForString(ChecksumType checksumType, string str, ptrdiff_t
 
 /**
  * Computes the HMAC for a binary data. This is a
- * convenience wrapper for [GLib.Hmac.new_], [GLib.Hmac.getString]
- * and [GLib.Hmac.unref].
+ * convenience wrapper for [glib.hmac.Hmac.new_], [glib.hmac.Hmac.getString]
+ * and [glib.hmac.Hmac.unref].
  * The hexadecimal string returned will be in lower case.
  * Params:
  *   digestType = a #GChecksumType to use for the HMAC
  *   key = the key to use in the HMAC
  *   data = binary blob to compute the HMAC of
  * Returns: the HMAC of the binary data as a string in hexadecimal.
- *   The returned string should be freed with [GLib.Global.gfree] when done using it.
+ *   The returned string should be freed with [glib.global.gfree] when done using it.
  */
 string computeHmacForBytes(ChecksumType digestType, Bytes key, Bytes data)
 {
@@ -1733,15 +1733,15 @@ string computeHmacForBytes(ChecksumType digestType, Bytes key, Bytes data)
 
 /**
  * Computes the HMAC for a binary data of length. This is a
- * convenience wrapper for [GLib.Hmac.new_], [GLib.Hmac.getString]
- * and [GLib.Hmac.unref].
+ * convenience wrapper for [glib.hmac.Hmac.new_], [glib.hmac.Hmac.getString]
+ * and [glib.hmac.Hmac.unref].
  * The hexadecimal string returned will be in lower case.
  * Params:
  *   digestType = a #GChecksumType to use for the HMAC
  *   key = the key to use in the HMAC
  *   data = binary blob to compute the HMAC of
  * Returns: the HMAC of the binary data as a string in hexadecimal.
- *   The returned string should be freed with [GLib.Global.gfree] when done using it.
+ *   The returned string should be freed with [glib.global.gfree] when done using it.
  */
 string computeHmacForData(ChecksumType digestType, ubyte[] key, ubyte[] data)
 {
@@ -1770,7 +1770,7 @@ string computeHmacForData(ChecksumType digestType, ubyte[] key, ubyte[] data)
  *   str = the string to compute the HMAC for
  *   length = the length of the string, or -1 if the string is nul-terminated
  * Returns: the HMAC as a hexadecimal string.
- *   The returned string should be freed with [GLib.Global.gfree]
+ *   The returned string should be freed with [glib.global.gfree]
  *   when done using it.
  */
 string computeHmacForString(ChecksumType digestType, ubyte[] key, string str, ptrdiff_t length)
@@ -1789,17 +1789,17 @@ string computeHmacForString(ChecksumType digestType, ubyte[] key, string str, pt
 
 /**
  * Converts a string from one character set to another.
- * Note that you should use [GLib.Global.iconv] for streaming conversions.
+ * Note that you should use [glib.global.iconv] for streaming conversions.
  * Despite the fact that bytes_read can return information about partial
  * characters, the g_convert_... functions are not generally suitable
  * for streaming. If the underlying converter maintains internal state,
- * then this won't be preserved across successive calls to [GLib.Global.convert],
- * [GLib.Global.convertWithIconv] or [GLib.Global.convertWithFallback]. $(LPAREN)An example of
+ * then this won't be preserved across successive calls to [glib.global.convert],
+ * [glib.global.convertWithIconv] or [glib.global.convertWithFallback]. $(LPAREN)An example of
  * this is the GNU C converter for CP1255 which does not emit a base
  * character until it knows that the next character is not a mark that
  * could combine with the base character.$(RPAREN)
  * Using extensions such as "//TRANSLIT" may not work $(LPAREN)or may not work
- * well$(RPAREN) on many platforms.  Consider using [GLib.Global.strToAscii] instead.
+ * well$(RPAREN) on many platforms.  Consider using [glib.global.strToAscii] instead.
  * Params:
  *   str = the string to convert.
  *   toCodeset = name of character set into which to convert str
@@ -1813,7 +1813,7 @@ string computeHmacForString(ChecksumType digestType, ubyte[] key, string str, pt
  *     stored will be the byte offset after the last valid
  *     input sequence.
  * Returns: If the conversion was successful, a newly allocated buffer
- *   containing the converted string, which must be freed with [GLib.Global.gfree].
+ *   containing the converted string, which must be freed with [glib.global.gfree].
  *   Otherwise %NULL and error will be set.
  */
 ubyte[] convert(ubyte[] str, string toCodeset, string fromCodeset, out size_t bytesRead)
@@ -1855,12 +1855,12 @@ Quark convertErrorQuark()
  * systems may do an approximate conversion from from_codeset
  * to to_codeset in their iconv$(LPAREN)$(RPAREN) functions,
  * in which case GLib will simply return that approximate conversion.
- * Note that you should use [GLib.Global.iconv] for streaming conversions.
+ * Note that you should use [glib.global.iconv] for streaming conversions.
  * Despite the fact that bytes_read can return information about partial
  * characters, the g_convert_... functions are not generally suitable
  * for streaming. If the underlying converter maintains internal state,
- * then this won't be preserved across successive calls to [GLib.Global.convert],
- * [GLib.Global.convertWithIconv] or [GLib.Global.convertWithFallback]. $(LPAREN)An example of
+ * then this won't be preserved across successive calls to [glib.global.convert],
+ * [glib.global.convertWithIconv] or [glib.global.convertWithFallback]. $(LPAREN)An example of
  * this is the GNU C converter for CP1255 which does not emit a base
  * character until it knows that the next character is not a mark that
  * could combine with the base character.$(RPAREN)
@@ -1879,7 +1879,7 @@ Quark convertErrorQuark()
  *     less than len if there were partial characters
  *     at the end of the input.
  * Returns: If the conversion was successful, a newly allocated buffer
- *   containing the converted string, which must be freed with [GLib.Global.gfree].
+ *   containing the converted string, which must be freed with [glib.global.gfree].
  *   Otherwise %NULL and error will be set.
  */
 ubyte[] convertWithFallback(ubyte[] str, string toCodeset, string fromCodeset, string fallback, out size_t bytesRead)
@@ -1957,7 +1957,7 @@ void datasetDestroy(const(void)* datasetLocation)
  * So unless dataset_location can be protected from any modifications
  * during invocation of this function, it should not be called.
  * func can make changes to the dataset, but the iteration will not
- * reflect changes made during the [GLib.Global.datasetForeach] call, other
+ * reflect changes made during the [glib.global.datasetForeach] call, other
  * than skipping over elements that are removed.
  * Params:
  *   datasetLocation = the location identifying the dataset.
@@ -1992,8 +1992,8 @@ void* datasetIdGetData(const(void)* datasetLocation, Quark keyId)
 }
 
 /**
- * This is a variant of [GLib.Global.dgettext] that allows specifying a locale
- * category instead of always using `LC_MESSAGES`. See [GLib.Global.dgettext] for
+ * This is a variant of [glib.global.dgettext] that allows specifying a locale
+ * category instead of always using `LC_MESSAGES`. See [glib.global.dgettext] for
  * more information about how this functions differs from calling
  * dcgettext$(LPAREN)$(RPAREN) directly.
  * Params:
@@ -2023,7 +2023,7 @@ string dcgettext(string domain, string msgid, int category)
  * the current locale.  This results in a consistent English-only
  * interface instead of one having partial translations.  For this
  * feature to work, the call to textdomain$(LPAREN)$(RPAREN) and setlocale$(LPAREN)$(RPAREN) should
- * precede any [GLib.Global.dgettext] invocations.  For GTK, it means calling
+ * precede any [glib.global.dgettext] invocations.  For GTK, it means calling
  * textdomain$(LPAREN)$(RPAREN) before gtk_init or its variants.
  * This function disables translations if and only if upon its first
  * call all the following conditions hold:
@@ -2056,7 +2056,7 @@ string dgettext(string domain, string msgid)
 
 /**
  * Compares two #gpointer arguments and returns %TRUE if they are equal.
- * It can be passed to [GLib.HashTable.new_] as the key_equal_func
+ * It can be passed to [glib.hash_table.HashTable.new_] as the key_equal_func
  * parameter, when using opaque pointers compared by pointer value as
  * keys in a #GHashTable.
  * This equality function is also appropriate for keys that are integers
@@ -2075,7 +2075,7 @@ bool directEqual(const(void)* v1, const(void)* v2)
 
 /**
  * Converts a gpointer to a hash value.
- * It can be passed to [GLib.HashTable.new_] as the hash_func parameter,
+ * It can be passed to [glib.hash_table.HashTable.new_] as the hash_func parameter,
  * when using opaque pointers compared by pointer value as keys in a
  * #GHashTable.
  * This hash function is also appropriate for keys that are integers
@@ -2095,7 +2095,7 @@ uint directHash(const(void)* v)
  * This function is a wrapper of dngettext$(LPAREN)$(RPAREN) which does not translate
  * the message if the default domain as set with textdomain$(LPAREN)$(RPAREN) has no
  * translations for the current locale.
- * See [GLib.Global.dgettext] for details of how this differs from dngettext()
+ * See [glib.global.dgettext] for details of how this differs from dngettext()
  * proper.
  * Params:
  *   domain = the translation domain to use, or %NULL to use
@@ -2119,7 +2119,7 @@ string dngettext(string domain, string msgid, string msgidPlural, gulong n)
 /**
  * Compares the two #gdouble values being pointed to and returns
  * %TRUE if they are equal.
- * It can be passed to [GLib.HashTable.new_] as the key_equal_func
+ * It can be passed to [glib.hash_table.HashTable.new_] as the key_equal_func
  * parameter, when using non-%NULL pointers to doubles as keys in a
  * #GHashTable.
  * Params:
@@ -2136,8 +2136,8 @@ bool doubleEqual(const(void)* v1, const(void)* v2)
 
 /**
  * Converts a pointer to a #gdouble to a hash value.
- * It can be passed to [GLib.HashTable.new_] as the hash_func parameter,
- * It can be passed to [GLib.HashTable.new_] as the hash_func parameter,
+ * It can be passed to [glib.hash_table.HashTable.new_] as the hash_func parameter,
+ * It can be passed to [glib.hash_table.HashTable.new_] as the hash_func parameter,
  * when using non-%NULL pointers to doubles as keys in a #GHashTable.
  * Params:
  *   v = a pointer to a #gdouble key
@@ -2151,14 +2151,14 @@ uint doubleHash(const(void)* v)
 }
 
 /**
- * This function is a variant of [GLib.Global.dgettext] which supports
+ * This function is a variant of [glib.global.dgettext] which supports
  * a disambiguating message context. GNU gettext uses the
  * '\004' character to separate the message context and
  * message id in msgctxtid.
  * If 0 is passed as msgidoffset, this function will fall back to
  * trying to use the deprecated convention of using "|" as a separation
  * character.
- * This uses [GLib.Global.dgettext] internally. See that functions for differences
+ * This uses [glib.global.dgettext] internally. See that functions for differences
  * with dgettext$(LPAREN)$(RPAREN) proper.
  * Applications should normally not use this function directly,
  * but use the C_$(LPAREN)$(RPAREN) macro for translations with context.
@@ -2181,11 +2181,11 @@ string dpgettext(string domain, string msgctxtid, size_t msgidoffset)
 }
 
 /**
- * This function is a variant of [GLib.Global.dgettext] which supports
+ * This function is a variant of [glib.global.dgettext] which supports
  * a disambiguating message context. GNU gettext uses the
  * '\004' character to separate the message context and
  * message id in msgctxtid.
- * This uses [GLib.Global.dgettext] internally. See that functions for differences
+ * This uses [glib.global.dgettext] internally. See that functions for differences
  * with dgettext$(LPAREN)$(RPAREN) proper.
  * This function differs from C_$(LPAREN)$(RPAREN) in that it is not a macro and
  * thus you may use non-string-literals as context and msgid arguments.
@@ -2211,7 +2211,7 @@ string dpgettext2(string domain, string context, string msgid)
  * Returns the value of the environment variable variable in the
  * provided list envp.
  * Params:
- *   envp = an environment list $(LPAREN)eg, as returned from [GLib.Global.getEnviron]$(RPAREN), or %NULL
+ *   envp = an environment list $(LPAREN)eg, as returned from [glib.global.getEnviron]$(RPAREN), or %NULL
  *     for an empty environment list
  *   variable = the environment variable to get
  * Returns: the value of the environment variable, or %NULL if
@@ -2242,7 +2242,7 @@ string environGetenv(string[] envp, string variable)
  * This is the same as Linux `close_range $(LPAREN)lowfd, ~0U, CLOSE_RANGE_CLOEXEC$(RPAREN)`,
  * but portable to other OSs and to older versions of Linux.
  * This function is async-signal safe, making it safe to call from a
- * signal handler or a [GLib.SpawnChildSetupFunc], as long as lowfd is
+ * signal handler or a [glib.SpawnChildSetupFunc], as long as lowfd is
  * non-negative.
  * See [`signal$(LPAREN)7$(RPAREN)`]$(LPAREN)$(RPAREN)(man:signal7) and
  * [`signal-safety$(LPAREN)7$(RPAREN)`]$(LPAREN)$(RPAREN)(man:signal-safety7) for more details.
@@ -2264,7 +2264,7 @@ int fdwalkSetCloexec(int lowfd)
  * assume that all #GFileError values will exist.
  * Normally a #GFileError value goes into a #GError returned
  * from a function that manipulates files. So you would use
- * [GLib.Global.fileErrorFromErrno] when constructing a #GError.
+ * [glib.global.fileErrorFromErrno] when constructing a #GError.
  * Params:
  *   errNo = an "errno" value
  * Returns: #GFileError corresponding to the given err_no
@@ -2296,7 +2296,7 @@ Quark fileErrorQuark()
  * contents is set to %NULL and length is set to zero.
  * Params:
  *   filename = name of a file to read contents from, in the GLib file name encoding
- *   contents = location to store an allocated string, use [GLib.Global.gfree] to free
+ *   contents = location to store an allocated string, use [glib.global.gfree] to free
  *     the returned string
  * Returns: %TRUE on success, %FALSE if an error occurred
  */
@@ -2318,21 +2318,21 @@ bool fileGetContents(string filename, out ubyte[] contents)
 
 /**
  * Opens a file for writing in the preferred directory for temporary
- * files $(LPAREN)as returned by [GLib.Global.getTmpDir]$(RPAREN).
+ * files $(LPAREN)as returned by [glib.global.getTmpDir]$(RPAREN).
  * tmpl should be a string in the GLib file name encoding containing
- * a sequence of six 'X' characters, as the parameter to [GLib.Global.mkstemp].
+ * a sequence of six 'X' characters, as the parameter to [glib.global.mkstemp].
  * However, unlike these functions, the template should only be a
  * basename, no directory components are allowed. If template is
  * %NULL, a default template is used.
- * Note that in contrast to [GLib.Global.mkstemp] $(LPAREN)$(RPAREN)(and mkstemp) tmpl is not
+ * Note that in contrast to [glib.global.mkstemp] $(LPAREN)$(RPAREN)(and mkstemp) tmpl is not
  * modified, and might thus be a read-only literal string.
  * Upon success, and if name_used is non-%NULL, the actual name used
- * is returned in name_used. This string should be freed with [GLib.Global.gfree]
+ * is returned in name_used. This string should be freed with [glib.global.gfree]
  * when not needed any longer. The returned name is in the GLib file
  * name encoding.
  * Params:
  *   tmpl = Template for file name, as in
- *     [GLib.Global.mkstemp], basename only, or %NULL for a default template
+ *     [glib.global.mkstemp], basename only, or %NULL for a default template
  *   nameUsed = location to store actual name used,
  *     or %NULL
  * Returns: A file handle $(LPAREN)as from open$(LPAREN)$(RPAREN)$(RPAREN) to the file opened for
@@ -2357,8 +2357,8 @@ int fileOpenTmp(string tmpl, out string nameUsed)
  * Reads the contents of the symbolic link filename like the POSIX
  * `readlink$(LPAREN)$(RPAREN)` function.
  * The returned string is in the encoding used for filenames. Use
- * [GLib.Global.filenameToUtf8] to convert it to UTF-8.
- * The returned string may also be a relative path. Use [GLib.Global.buildFilename]
+ * [glib.global.filenameToUtf8] to convert it to UTF-8.
+ * The returned string may also be a relative path. Use [glib.global.buildFilename]
  * to convert it to an absolute path:
  * |[<!-- language\="C" -->
  * g_autoptr$(LPAREN)GError$(RPAREN) local_error \= NULL;
@@ -2391,7 +2391,7 @@ string fileReadLink(string filename)
 
 /**
  * Writes all of contents to a file named filename. This is a convenience
- * wrapper around calling [GLib.Global.fileSetContentsFull] with `flags` set to
+ * wrapper around calling [glib.global.fileSetContentsFull] with `flags` set to
  * `G_FILE_SET_CONTENTS_CONSISTENT | G_FILE_SET_CONTENTS_ONLY_EXISTING` and
  * `mode` set to `0666`.
  * Params:
@@ -2491,11 +2491,11 @@ bool fileSetContentsFull(string filename, ubyte[] contents, FileSetContentsFlags
  * the current set of available tests, there's no point passing in
  * more than one test at a time.
  * Apart from %G_FILE_TEST_IS_SYMLINK all tests follow symbolic links,
- * so for a symbolic link to a regular file [GLib.Global.fileTest] will return
+ * so for a symbolic link to a regular file [glib.global.fileTest] will return
  * %TRUE for both %G_FILE_TEST_IS_SYMLINK and %G_FILE_TEST_IS_REGULAR.
- * Note, that for a dangling symbolic link [GLib.Global.fileTest] will return
+ * Note, that for a dangling symbolic link [glib.global.fileTest] will return
  * %TRUE for %G_FILE_TEST_IS_SYMLINK and %FALSE for all other flags.
- * You should never use [GLib.Global.fileTest] to test whether it is safe
+ * You should never use [glib.global.fileTest] to test whether it is safe
  * to perform an operation, because there is always the possibility
  * of the condition changing before you actually perform the operation,
  * see [TOCTOU](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use).
@@ -2561,7 +2561,7 @@ bool fileTest(string filename, FileTest test)
  * encoding.
  * You must pass the whole absolute pathname to this functions so that
  * translation of well known locations can be done.
- * This function is preferred over [GLib.Global.filenameDisplayName] if you know the
+ * This function is preferred over [glib.global.filenameDisplayName] if you know the
  * whole path, as it allows translation.
  * Params:
  *   filename = an absolute pathname in the
@@ -2582,7 +2582,7 @@ string filenameDisplayBasename(string filename)
  * Converts a filename into a valid UTF-8 string. The conversion is
  * not necessarily reversible, so you should keep the original around
  * and use the return value of this function only for display purposes.
- * Unlike [GLib.Global.filenameToUtf8], the result is guaranteed to be non-%NULL
+ * Unlike [glib.global.filenameToUtf8], the result is guaranteed to be non-%NULL
  * even if the filename actually isn't in the GLib file name encoding.
  * If GLib cannot make sense of the encoding of filename, as a last resort it
  * replaces unknown characters with U+FFFD, the Unicode replacement character.
@@ -2590,7 +2590,7 @@ string filenameDisplayBasename(string filename)
  * "\357\277\275" in octal notation$(RPAREN) to find out if filename was in an invalid
  * encoding.
  * If you know the whole pathname of the file you should use
- * [GLib.Global.filenameDisplayBasename], since that allows location-based
+ * [glib.global.filenameDisplayBasename], since that allows location-based
  * translation of filenames.
  * Params:
  *   filename = a pathname hopefully in the
@@ -2708,7 +2708,7 @@ string filenameToUri(string filename, string hostname)
  * in error %G_CONVERT_ERROR_ILLEGAL_SEQUENCE.
  * If the source encoding is not UTF-8 and the conversion output contains a
  * nul character, the error %G_CONVERT_ERROR_EMBEDDED_NUL is set and the
- * function returns %NULL. Use [GLib.Global.convert] to produce output that
+ * function returns %NULL. Use [glib.global.convert] to produce output that
  * may contain embedded nul characters.
  * Params:
  *   opsysstring = a string in the encoding for filenames
@@ -2782,7 +2782,7 @@ string findProgramInPath(string program)
  * See your C library manual for more details about `fopen$(LPAREN)$(RPAREN)`.
  * As `close$(LPAREN)$(RPAREN)` and `fclose$(LPAREN)$(RPAREN)` are part of the C library, this implies that it is
  * currently impossible to close a file if the application C library and the C library
- * used by GLib are different. Convenience functions like [GLib.Global.fileSetContentsFull]
+ * used by GLib are different. Convenience functions like [glib.global.fileSetContentsFull]
  * avoid this problem.
  * Params:
  *   filename = a pathname in the GLib file name encoding
@@ -2807,8 +2807,8 @@ void* fopen(string filename, string mode)
  * is UTF-8, and may use a non-breaking space to separate the number and units,
  * to ensure they aren’t separated when line wrapped.
  * The prefix units base is 1000 $(LPAREN)i.e. 1 kB is 1000 bytes$(RPAREN).
- * This string should be freed with [GLib.Global.gfree] when not needed any longer.
- * See [GLib.Global.formatSizeFull] for more options about how the size might be
+ * This string should be freed with [glib.global.gfree] when not needed any longer.
+ * See [glib.global.formatSizeFull] for more options about how the size might be
  * formatted.
  * Params:
  *   size = a size in bytes
@@ -2830,14 +2830,14 @@ string formatSize(ulong size)
  * E.g. the file size 3292528 bytes will be converted into the
  * string "3.1 MB".
  * The prefix units base is 1024 $(LPAREN)i.e. 1 KB is 1024 bytes$(RPAREN).
- * This string should be freed with [GLib.Global.gfree] when not needed any longer.
+ * This string should be freed with [glib.global.gfree] when not needed any longer.
  * Params:
  *   size = a size in bytes
  * Returns: a newly-allocated formatted string
  *   containing a human readable file size
 
  * Deprecated: This function is broken due to its use of SI
- *   suffixes to denote IEC units. Use [GLib.Global.formatSize] instead.
+ *   suffixes to denote IEC units. Use [glib.global.formatSize] instead.
  */
 string formatSizeForDisplay(long size)
 {
@@ -2849,7 +2849,7 @@ string formatSizeForDisplay(long size)
 
 /**
  * Formats a size.
- * This function is similar to [GLib.Global.formatSize] but allows for flags
+ * This function is similar to [glib.global.formatSize] but allows for flags
  * that modify the output. See #GFormatSizeFlags.
  * Params:
  *   size = a size in bytes
@@ -2867,7 +2867,7 @@ string formatSizeFull(ulong size, FormatSizeFlags flags)
 
 /**
  * Frees the memory pointed to by mem.
- * If you know the allocated size of mem, calling [GLib.Global.freeSized] may be faster,
+ * If you know the allocated size of mem, calling [glib.global.freeSized] may be faster,
  * depending on the libc implementation in use.
  * Starting from GLib 2.78, this may happen automatically in case a GCC
  * compatible compiler is used with some optimization level and the allocated
@@ -2889,9 +2889,9 @@ void gfree(void* mem)
  * If mem is %NULL this is a no-op $(LPAREN)and size is ignored$(RPAREN).
  * It is an error if size doesn’t match the size passed when mem was
  * allocated. size is passed to this function to allow optimizations in the
- * allocator. If you don’t know the allocation size, use [GLib.Global.gfree] instead.
+ * allocator. If you don’t know the allocation size, use [glib.global.gfree] instead.
  * In case a GCC compatible compiler is used, this function may be used
- * automatically via [GLib.Global.gfree] if the allocated size is known at compile time,
+ * automatically via [glib.global.gfree] if the allocated size is known at compile time,
  * since GLib 2.78.
  * Params:
  *   mem = the memory to free
@@ -2943,11 +2943,11 @@ int fsync(int fd)
 
 /**
  * Gets a human-readable name for the application, as set by
- * [GLib.Global.setApplicationName]. This name should be localized if
+ * [glib.global.setApplicationName]. This name should be localized if
  * possible, and is intended for display to the user.  Contrast with
- * [GLib.Global.getPrgname], which gets a non-localized name. If
- * [GLib.Global.setApplicationName] has not been called, returns the result of
- * [GLib.Global.getPrgname] []$(LPAREN)which may be %NULL if GLib.Global.setPrgname has also not
+ * [glib.global.getPrgname], which gets a non-localized name. If
+ * [glib.global.setApplicationName] has not been called, returns the result of
+ * [glib.global.getPrgname] []$(LPAREN)which may be %NULL if glib.global.setPrgname has also not
  * been called$(RPAREN).
  * Returns: human-readable application
  *   name. May return %NULL
@@ -2962,9 +2962,9 @@ string getApplicationName()
 
 /**
  * Obtains the character set for the [current locale][setlocale]; you
- * might use this character set as an argument to [GLib.Global.convert], to convert
+ * might use this character set as an argument to [glib.global.convert], to convert
  * from the current locale's encoding to some other encoding. $(LPAREN)Frequently
- * [GLib.Global.localeToUtf8] and [GLib.Global.localeFromUtf8] are nice shortcuts, though.$(RPAREN)
+ * [glib.global.localeToUtf8] and [glib.global.localeFromUtf8] are nice shortcuts, though.$(RPAREN)
  * On Windows the character set returned by this function is the
  * so-called system default ANSI code-page. That is the character set
  * used by the "narrow" versions of C library and Win32 functions that
@@ -2975,7 +2975,7 @@ string getApplicationName()
  * and `CHARSET` are queried in order. nl_langinfo$(LPAREN)$(RPAREN) returns the C locale if
  * no locale has been loaded by setlocale$(LPAREN)$(RPAREN).
  * The return value is %TRUE if the locale's encoding is UTF-8, in that
- * case you can perhaps avoid calling [GLib.Global.convert].
+ * case you can perhaps avoid calling [glib.global.convert].
  * The string returned in charset is not allocated, and should not be
  * freed.
  * Params:
@@ -2995,7 +2995,7 @@ bool getCharset(out string charset)
 /**
  * Gets the character set for the current locale.
  * Returns: a newly allocated string containing the name
- *   of the character set. This string must be freed with [GLib.Global.gfree].
+ *   of the character set. This string must be freed with [glib.global.gfree].
  */
 string getCodeset()
 {
@@ -3008,7 +3008,7 @@ string getCodeset()
 /**
  * Obtains the character set used by the console attached to the process,
  * which is suitable for printing output to the terminal.
- * Usually this matches the result returned by [GLib.Global.getCharset], but in
+ * Usually this matches the result returned by [glib.global.getCharset], but in
  * environments where the locale's character set does not match the encoding
  * of the console this function tries to guess a more suitable value instead.
  * On Windows the character set returned by this function is the
@@ -3016,7 +3016,7 @@ string getCodeset()
  * If the codepage can't be determined $(LPAREN)for example because there is no
  * console attached$(RPAREN) UTF-8 is assumed.
  * The return value is %TRUE if the locale's encoding is UTF-8, in that
- * case you can perhaps avoid calling [GLib.Global.convert].
+ * case you can perhaps avoid calling [glib.global.convert].
  * The string returned in charset is not allocated, and should not be
  * freed.
  * Params:
@@ -3054,11 +3054,11 @@ string getCurrentDir()
 
 /**
  * Equivalent to the UNIX gettimeofday$(LPAREN)$(RPAREN) function, but portable.
- * You may find [GLib.Global.getRealTime] to be more convenient.
+ * You may find [glib.global.getRealTime] to be more convenient.
  * Params:
  *   result = #GTimeVal structure in which to store current time.
 
- * Deprecated: #GTimeVal is not year-2038-safe. Use [GLib.Global.getRealTime]
+ * Deprecated: #GTimeVal is not year-2038-safe. Use [glib.global.getRealTime]
  *   instead.
  */
 void getCurrentTime(TimeVal result)
@@ -3073,7 +3073,7 @@ void getCurrentTime(TimeVal result)
  * This is equivalent to direct access to the 'environ' global variable,
  * except portable.
  * The return value is freshly allocated and it should be freed with
- * [GLib.Global.strfreev] when it is no longer needed.
+ * [glib.global.strfreev] when it is no longer needed.
  * Returns: the list of environment variables
  */
 string[] getEnviron()
@@ -3098,7 +3098,7 @@ string[] getEnviron()
  * Determines the preferred character sets used for filenames.
  * The first character set from the charsets is the filename encoding, the
  * subsequent character sets are used when trying to generate a displayable
- * representation of a filename, see [GLib.Global.filenameDisplayName].
+ * representation of a filename, see [glib.global.filenameDisplayName].
  * On Unix, the character sets are determined by consulting the
  * environment variables `G_FILENAME_ENCODING` and `G_BROKEN_FILENAMES`.
  * On Windows, the character set used in the GLib API is always UTF-8
@@ -3226,7 +3226,7 @@ string[] getLanguageNames()
  * This function consults the environment variables `LANGUAGE`, `LC_ALL`,
  * category_name, and `LANG` to find the list of locales specified by the
  * user.
- * [GLib.Global.getLanguageNames] returns g_get_language_names_with_category("LC_MESSAGES").
+ * [glib.global.getLanguageNames] returns g_get_language_names_with_category("LC_MESSAGES").
  * Params:
  *   categoryName = a locale category name
  * Returns: a %NULL-terminated array of strings owned by
@@ -3264,12 +3264,12 @@ string[] getLanguageNamesWithCategory(string categoryName)
  * is `en_GB.UTF-8euro`, `en_GB.UTF-8`, `en_GBeuro`, `en_GB`, `en.UTF-8euro`,
  * `en.UTF-8`, `eneuro`, `en`.
  * If you need the list of variants for the current locale,
- * use [GLib.Global.getLanguageNames].
+ * use [glib.global.getLanguageNames].
  * Params:
  *   locale = a locale identifier
  * Returns: a newly
  *   allocated array of newly allocated strings with the locale variants. Free with
- *   [GLib.Global.strfreev].
+ *   [glib.global.strfreev].
  */
 string[] getLocaleVariants(string locale)
 {
@@ -3311,7 +3311,7 @@ long getMonotonicTime()
 /**
  * Determine the approximate number of threads that the system will
  * schedule simultaneously for this process.  This is intended to be
- * used as a parameter to [GLib.ThreadPool.new_] for CPU bound tasks and
+ * used as a parameter to [glib.thread_pool.ThreadPool.new_] for CPU bound tasks and
  * similar cases.
  * Returns: Number of schedulable threads, always greater than 0
  */
@@ -3346,10 +3346,10 @@ string getOsInfo(string keyName)
 
 /**
  * Gets the name of the program. This name should not be localized,
- * in contrast to [GLib.Global.getApplicationName].
+ * in contrast to [glib.global.getApplicationName].
  * If you are using #GApplication the program name is set in
- * [Gio.ApplicationGio.run]. In case of GDK or GTK it is set in
- * gdk_init$(LPAREN)$(RPAREN), which is called by [Gtk.Global.init_] and the
+ * [gio.application.ApplicationGio.run]. In case of GDK or GTK it is set in
+ * gdk_init$(LPAREN)$(RPAREN), which is called by [gtk.global.init_] and the
  * #GtkApplication::startup handler. The program name is found by
  * taking the last component of argv[0].
  * Returns: the name of the program,
@@ -3382,11 +3382,11 @@ string getRealName()
 
 /**
  * Queries the system wall-clock time.
- * This call is functionally equivalent to [GLib.Global.getCurrentTime] except
+ * This call is functionally equivalent to [glib.global.getCurrentTime] except
  * that the return value is often more convenient than dealing with a
  * #GTimeVal.
  * You should only use this call if you are actually interested in the real
- * wall-clock time.  [GLib.Global.getMonotonicTime] is probably more useful for
+ * wall-clock time.  [glib.global.getMonotonicTime] is probably more useful for
  * measuring intervals.
  * Returns: the number of microseconds since January 1, 1970 UTC.
  */
@@ -3544,7 +3544,7 @@ string getUserCacheDir()
  * to roaming$(RPAREN) application data is used instead. See the
  * [documentation for `FOLDERID_LocalAppData`](https://docs.microsoft.com/en-us/windows/win32/shell/knownfolderid).
  * Note that in this case on Windows it will be  the same
- * as what [GLib.Global.getUserDataDir] returns.
+ * as what [glib.global.getUserDataDir] returns.
  * The return value is cached and modifying it at runtime is not supported, as
  * it’s not thread-safe to modify environment variables at runtime.
  * Returns: a string owned by GLib that
@@ -3570,7 +3570,7 @@ string getUserConfigDir()
  * opposed to roaming$(RPAREN) application data is used instead. See the
  * [documentation for `FOLDERID_LocalAppData`](https://docs.microsoft.com/en-us/windows/win32/shell/knownfolderid).
  * Note that in this case on Windows it will be the same
- * as what [GLib.Global.getUserConfigDir] returns.
+ * as what [glib.global.getUserConfigDir] returns.
  * The return value is cached and modifying it at runtime is not supported, as
  * it’s not thread-safe to modify environment variables at runtime.
  * Returns: a string owned by GLib that must
@@ -3608,7 +3608,7 @@ string getUserName()
  * This is the directory
  * specified in the `XDG_RUNTIME_DIR` environment variable.
  * In the case that this variable is not set, we return the value of
- * [GLib.Global.getUserCacheDir], after verifying that it exists.
+ * [glib.global.getUserCacheDir], after verifying that it exists.
  * The return value is cached and modifying it at runtime is not supported, as
  * it’s not thread-safe to modify environment variables at runtime.
  * Returns: a string owned by GLib that must not be
@@ -3657,7 +3657,7 @@ string getUserSpecialDir(UserDirectory directory)
  * to roaming$(RPAREN) application data is used instead. See the
  * [documentation for `FOLDERID_LocalAppData`](https://docs.microsoft.com/en-us/windows/win32/shell/knownfolderid).
  * Note that in this case on Windows it will be the same
- * as what [GLib.Global.getUserDataDir] returns.
+ * as what [glib.global.getUserDataDir] returns.
  * The return value is cached and modifying it at runtime is not supported, as
  * it’s not thread-safe to modify environment variables at runtime.
  * Returns: a string owned by GLib that
@@ -3682,8 +3682,8 @@ string getUserStateDir()
  *   variable = the environment variable to get
  * Returns: the value of the environment variable, or %NULL if
  *   the environment variable is not found. The returned string
- *   may be overwritten by the next call to [GLib.Global.getenv], [GLib.Global.setenv]
- *   or [GLib.Global.unsetenv].
+ *   may be overwritten by the next call to [glib.global.getenv], [glib.global.setenv]
+ *   or [glib.global.unsetenv].
  */
 string getenv(string variable)
 {
@@ -3697,11 +3697,11 @@ string getenv(string variable)
 /**
  * Tests if hostname contains segments with an ASCII-compatible
  * encoding of an Internationalized Domain Name. If this returns
- * %TRUE, you should decode the hostname with [GLib.Global.hostnameToUnicode]
+ * %TRUE, you should decode the hostname with [glib.global.hostnameToUnicode]
  * before displaying it to the user.
  * Note that a hostname might contain a mix of encoded and unencoded
- * segments, and so it is possible for [GLib.Global.hostnameIsNonAscii] and
- * [GLib.Global.hostnameIsAsciiEncoded] to both return %TRUE for a name.
+ * segments, and so it is possible for [glib.global.hostnameIsNonAscii] and
+ * [glib.global.hostnameIsAsciiEncoded] to both return %TRUE for a name.
  * Params:
  *   hostname = a hostname
  * Returns: %TRUE if hostname contains any ASCII-encoded
@@ -3733,11 +3733,11 @@ bool hostnameIsIpAddress(string hostname)
 
 /**
  * Tests if hostname contains Unicode characters. If this returns
- * %TRUE, you need to encode the hostname with [GLib.Global.hostnameToAscii]
+ * %TRUE, you need to encode the hostname with [glib.global.hostnameToAscii]
  * before using it in non-IDN-aware contexts.
  * Note that a hostname might contain a mix of encoded and unencoded
- * segments, and so it is possible for [GLib.Global.hostnameIsNonAscii] and
- * [GLib.Global.hostnameIsAsciiEncoded] to both return %TRUE for a name.
+ * segments, and so it is possible for [glib.global.hostnameIsNonAscii] and
+ * [glib.global.hostnameIsAsciiEncoded] to both return %TRUE for a name.
  * Params:
  *   hostname = a hostname
  * Returns: %TRUE if hostname contains any non-ASCII characters
@@ -3796,8 +3796,8 @@ string hostnameToUnicode(string hostname)
  * removed from the list of event sources and will not be called again.
  * See [memory management of sources][mainloop-memory-management] for details
  * on how to handle the return value and memory management of data.
- * This internally creates a main loop source using [GLib.Global.idleSourceNew]
- * and attaches it to the global #GMainContext using [GLib.Source.attach], so
+ * This internally creates a main loop source using [glib.global.idleSourceNew]
+ * and attaches it to the global #GMainContext using [glib.source.Source.attach], so
  * the callback will be invoked in whichever thread is running that main
  * context. You can do these steps manually if you need greater control or to
  * use a custom main context.
@@ -3841,7 +3841,7 @@ bool idleRemoveByData(void* data)
 /**
  * Creates a new idle source.
  * The source will not initially be associated with any #GMainContext
- * and must be added to one with [GLib.Source.attach] before it will be
+ * and must be added to one with [glib.source.Source.attach] before it will be
  * executed. Note that the default priority for idle sources is
  * %G_PRIORITY_DEFAULT_IDLE, as compared to other sources which
  * have a default priority of %G_PRIORITY_DEFAULT.
@@ -3858,7 +3858,7 @@ Source idleSourceNew()
 /**
  * Compares the two #gint64 values being pointed to and returns
  * %TRUE if they are equal.
- * It can be passed to [GLib.HashTable.new_] as the key_equal_func
+ * It can be passed to [glib.hash_table.HashTable.new_] as the key_equal_func
  * parameter, when using non-%NULL pointers to 64-bit integers as keys in a
  * #GHashTable.
  * Params:
@@ -3875,7 +3875,7 @@ bool int64Equal(const(void)* v1, const(void)* v2)
 
 /**
  * Converts a pointer to a #gint64 to a hash value.
- * It can be passed to [GLib.HashTable.new_] as the hash_func parameter,
+ * It can be passed to [glib.hash_table.HashTable.new_] as the hash_func parameter,
  * when using non-%NULL pointers to 64-bit integer values as keys in a
  * #GHashTable.
  * Params:
@@ -3892,12 +3892,12 @@ uint int64Hash(const(void)* v)
 /**
  * Compares the two #gint values being pointed to and returns
  * %TRUE if they are equal.
- * It can be passed to [GLib.HashTable.new_] as the key_equal_func
+ * It can be passed to [glib.hash_table.HashTable.new_] as the key_equal_func
  * parameter, when using non-%NULL pointers to integers as keys in a
  * #GHashTable.
  * Note that this function acts on pointers to #gint, not on #gint
  * directly: if your hash table's keys are of the form
- * `GINT_TO_POINTER $(LPAREN)n$(RPAREN)`, use [GLib.Global.directEqual] instead.
+ * `GINT_TO_POINTER $(LPAREN)n$(RPAREN)`, use [glib.global.directEqual] instead.
  * Params:
  *   v1 = a pointer to a #gint key
  *   v2 = a pointer to a #gint key to compare with v1
@@ -3912,11 +3912,11 @@ bool intEqual(const(void)* v1, const(void)* v2)
 
 /**
  * Converts a pointer to a #gint to a hash value.
- * It can be passed to [GLib.HashTable.new_] as the hash_func parameter,
+ * It can be passed to [glib.hash_table.HashTable.new_] as the hash_func parameter,
  * when using non-%NULL pointers to integer values as keys in a #GHashTable.
  * Note that this function acts on pointers to #gint, not on #gint
  * directly: if your hash table's keys are of the form
- * `GINT_TO_POINTER $(LPAREN)n$(RPAREN)`, use [GLib.Global.directHash] instead.
+ * `GINT_TO_POINTER $(LPAREN)n$(RPAREN)`, use [glib.global.directHash] instead.
  * Params:
  *   v = a pointer to a #gint key
  * Returns: a hash value corresponding to the key.
@@ -3931,7 +3931,7 @@ uint intHash(const(void)* v)
 /**
  * Returns a canonical representation for string. Interned strings
  * can be compared for equality by comparing the pointers, instead of
- * using strcmp$(LPAREN)$(RPAREN). [GLib.Global.internStaticString] does not copy the string,
+ * using strcmp$(LPAREN)$(RPAREN). [glib.global.internStaticString] does not copy the string,
  * therefore string must not be freed or modified.
  * This function must not be used before library constructors have finished
  * running. In particular, this means it cannot be used to initialize global
@@ -3972,8 +3972,8 @@ string internString(string string_)
 /**
  * Adds the #GIOChannel into the default main loop context
  * with the given priority.
- * This internally creates a main loop source using [GLib.Global.ioCreateWatch]
- * and attaches it to the main loop context with [GLib.Source.attach].
+ * This internally creates a main loop source using [glib.global.ioCreateWatch]
+ * and attaches it to the main loop context with [glib.source.Source.attach].
  * You can do these steps manually if you need greater control.
  * Params:
  *   channel = a #GIOChannel
@@ -4005,8 +4005,8 @@ uint ioAddWatch(IOChannel channel, int priority, IOCondition condition, IOFunc f
  * given channel. For example, if condition is %G_IO_IN, the source will
  * be dispatched when there's data available for reading.
  * The callback function invoked by the #GSource should be added with
- * [GLib.Source.setCallback], but it has type #GIOFunc (not #GSourceFunc).
- * [GLib.Global.ioAddWatch] is a simpler interface to this same functionality, for
+ * [glib.source.Source.setCallback], but it has type #GIOFunc (not #GSourceFunc).
+ * [glib.global.ioAddWatch] is a simpler interface to this same functionality, for
  * the case where you want to add the source to the default main loop context
  * at the default priority.
  * On Windows, polling a #GSource created to watch a channel for a socket
@@ -4028,13 +4028,13 @@ Source ioCreateWatch(IOChannel channel, IOCondition condition)
 /**
  * Gets the names of all variables set in the environment.
  * Programs that want to be portable to Windows should typically use
- * this function and [GLib.Global.getenv] instead of using the environ array
+ * this function and [glib.global.getenv] instead of using the environ array
  * from the C library directly. On Windows, the strings in the environ
  * array are in system codepage encoding, while in most of the typical
  * use cases for environment variables in GLib-using programs you want
- * the UTF-8 encoding that this function and [GLib.Global.getenv] provide.
+ * the UTF-8 encoding that this function and [glib.global.getenv] provide.
  * Returns: a %NULL-terminated list of strings which must be freed with
- *   [GLib.Global.strfreev].
+ *   [glib.global.strfreev].
  */
 string[] listenv()
 {
@@ -4061,7 +4061,7 @@ string[] listenv()
  * the system codepage.
  * The input string shall not contain nul characters even if the len
  * argument is positive. A nul character found inside the string will result
- * in error %G_CONVERT_ERROR_ILLEGAL_SEQUENCE. Use [GLib.Global.convert] to convert
+ * in error %G_CONVERT_ERROR_ILLEGAL_SEQUENCE. Use [glib.global.convert] to convert
  * input that may contain embedded nul characters.
  * Params:
  *   utf8string = a UTF-8 encoded string
@@ -4105,7 +4105,7 @@ ubyte[] localeFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead)
  * function returns %NULL.
  * If the source encoding is UTF-8, an embedded nul character is treated with
  * the %G_CONVERT_ERROR_ILLEGAL_SEQUENCE error for backward compatibility with
- * earlier versions of this library. Use [GLib.Global.convert] to produce output that
+ * earlier versions of this library. Use [glib.global.convert] to produce output that
  * may contain embedded nul characters.
  * Params:
  *   opsysstring = a string in the
@@ -4180,7 +4180,7 @@ void logDefaultHandler(string logDomain, LogLevelFlags logLevel, string message,
 /**
  * Return whether debug output from the GLib logging system is enabled.
  * Note that this should not be used to conditionalise calls to funcGLib.debug or
- * other logging functions; it should only be used from [GLib.LogWriterFunc]
+ * other logging functions; it should only be used from [glib.LogWriterFunc]
  * implementations.
  * Note also that the value of this does not depend on `G_MESSAGES_DEBUG`, nor
  * funcGLib.log_writer_default_set_debug_domains; see the docs for funcGLib.log_set_debug_enabled.
@@ -4311,7 +4311,7 @@ uint logSetHandler(string logDomain, LogLevelFlags logLevels, LogFunc logFunc)
 }
 
 /**
- * Log a message with structured data, accepting the data within a [GLib.VariantG].
+ * Log a message with structured data, accepting the data within a [glib.variant.VariantG].
  * This version is especially useful for use in other languages, via introspection.
  * The only mandatory item in the fields dictionary is the `"MESSAGE"` which must
  * contain the text shown to the user.
@@ -4320,13 +4320,13 @@ uint logSetHandler(string logDomain, LogLevelFlags logLevels, LogFunc logFunc)
  * supported. In this case the message is handled as binary and will be forwarded
  * to the log writer as such. The size of the array should not be higher than
  * `G_MAXSSIZE`. Otherwise it will be truncated to this size. For other types
- * [GLib.VariantG.print] will be used to convert the value into a string.
+ * [glib.variant.VariantG.print] will be used to convert the value into a string.
  * For more details on its usage and about the parameters, see funcGLib.log_structured.
  * Params:
  *   logDomain = log domain, usually `G_LOG_DOMAIN`
- *   logLevel = log level, either from [GLib.LogLevelFlags], or a user-defined
+ *   logLevel = log level, either from [glib.LogLevelFlags], or a user-defined
  *     level
- *   fields = a dictionary $(LPAREN)[GLib.VariantG] of the type `G_VARIANT_TYPE_VARDICT`$(RPAREN)
+ *   fields = a dictionary $(LPAREN)[glib.variant.VariantG] of the type `G_VARIANT_TYPE_VARDICT`$(RPAREN)
  *     containing the key-value pairs of message data.
  */
 void logVariant(string logDomain, LogLevelFlags logLevel, VariantG fields)
@@ -4397,7 +4397,7 @@ void logWriterDefaultSetUseStderr(bool useStderr)
  * }
  * ```
  * Params:
- *   logLevel = log level, either from [GLib.LogLevelFlags], or a user-defined
+ *   logLevel = log level, either from [glib.LogLevelFlags], or a user-defined
  *     level
  *   logDomain = log domain
  * Returns: `TRUE` if the log message would be dropped by GLib’s
@@ -4450,8 +4450,8 @@ bool logWriterSupportsColor(int outputFd)
  * A wrapper for the POSIX lstat$(LPAREN)$(RPAREN) function. The lstat$(LPAREN)$(RPAREN) function is
  * like stat$(LPAREN)$(RPAREN) except that in the case of symbolic links, it returns
  * information about the symbolic link itself and not the file that it
- * refers to. If the system does not support symbolic links [GLib.Global.lstat]
- * is identical to [GLib.Global.stat].
+ * refers to. If the system does not support symbolic links [glib.global.lstat]
+ * is identical to [glib.global.stat].
  * See your C library manual for more details about lstat$(LPAREN)$(RPAREN).
  * Params:
  *   filename = a pathname in the GLib file name encoding
@@ -4483,11 +4483,11 @@ Source mainCurrentSource()
 
 /**
  * Returns the depth of the stack of calls to
- * [GLib.MainContext.dispatch] on any #GMainContext in the current thread.
+ * [glib.main_context.MainContext.dispatch] on any #GMainContext in the current thread.
  * That is, when called from the toplevel, it gives 0. When
- * called from within a callback from [GLib.MainContext.iteration]
- * $(LPAREN)or [GLib.MainLoop.run], etc.$(RPAREN) it returns 1. When called from within
- * a callback to a recursive call to [GLib.MainContext.iteration],
+ * called from within a callback from [glib.main_context.MainContext.iteration]
+ * $(LPAREN)or [glib.main_loop.MainLoop.run], etc.$(RPAREN) it returns 1. When called from within
+ * a callback to a recursive call to [glib.main_context.MainContext.iteration],
  * it returns 2. And so forth.
  * This function is useful in a situation like the following:
  * Imagine an extremely simple "garbage collected" system.
@@ -4521,7 +4521,7 @@ Source mainCurrentSource()
  * control the main loop. You might think you can simply use an idle
  * function to make the call to free_allocated_memory$(LPAREN)$(RPAREN), but that
  * doesn't work, since the idle function could be called from a
- * recursive callback. This can be fixed by using [GLib.Global.mainDepth]
+ * recursive callback. This can be fixed by using [glib.global.mainDepth]
  * |[<!-- language\="C" -->
  * gpointer
  * allocate_memory $(LPAREN)gsize size$(RPAREN)
@@ -4551,18 +4551,18 @@ Source mainCurrentSource()
  * }
  * }
  * ]|
- * There is a temptation to use [GLib.Global.mainDepth] to solve
+ * There is a temptation to use [glib.global.mainDepth] to solve
  * problems with reentrancy. For instance, while waiting for data
  * to be received from the network in response to a menu item,
  * the menu item might be selected again. It might seem that
  * one could make the menu item's callback return immediately
- * and do nothing if [GLib.Global.mainDepth] returns a value greater than 1.
+ * and do nothing if [glib.global.mainDepth] returns a value greater than 1.
  * However, this should be avoided since the user then sees selecting
  * the menu item do nothing. Furthermore, you'll find yourself adding
  * these checks all over your code, since there are doubtless many,
  * many things that the user could do. Instead, you can use the
  * following techniques:
- * 1. Use [Gtk.Widget.setSensitive] or modal dialogs to prevent
+ * 1. Use [gtk.widget.Widget.setSensitive] or modal dialogs to prevent
  * the user from interacting with elements while the main
  * loop is recursing.
  * 2. Avoid main loop recursion in situations where you can't handle
@@ -4609,7 +4609,7 @@ void* malloc0(size_t nBytes)
 }
 
 /**
- * This function is similar to [GLib.Global.malloc0], allocating (n_blocks * n_block_bytes) bytes,
+ * This function is similar to [glib.global.malloc0], allocating (n_blocks * n_block_bytes) bytes,
  * but care is taken to detect possible overflow during multiplication.
  * If the allocation fails $(LPAREN)because the system is out of memory$(RPAREN),
  * the program is terminated.
@@ -4625,7 +4625,7 @@ void* malloc0N(size_t nBlocks, size_t nBlockBytes)
 }
 
 /**
- * This function is similar to [GLib.Global.gmalloc], allocating (n_blocks * n_block_bytes) bytes,
+ * This function is similar to [glib.global.gmalloc], allocating (n_blocks * n_block_bytes) bytes,
  * but care is taken to detect possible overflow during multiplication.
  * If the allocation fails $(LPAREN)because the system is out of memory$(RPAREN),
  * the program is terminated.
@@ -4675,12 +4675,12 @@ string markupEscapeText(string text, ptrdiff_t length)
 }
 
 /**
- * Checks whether the allocator used by [GLib.Global.gmalloc] is the system's
+ * Checks whether the allocator used by [glib.global.gmalloc] is the system's
  * malloc implementation. If it returns %TRUE memory allocated with
- * malloc$(LPAREN)$(RPAREN) can be used interchangeably with memory allocated using [GLib.Global.gmalloc].
+ * malloc$(LPAREN)$(RPAREN) can be used interchangeably with memory allocated using [glib.global.gmalloc].
  * This function is useful for avoiding an extra copy of allocated memory returned
  * by a non-GLib-based API.
- * Returns: if %TRUE, malloc$(LPAREN)$(RPAREN) and [GLib.Global.gmalloc] can be mixed.
+ * Returns: if %TRUE, malloc$(LPAREN)$(RPAREN) and [glib.global.gmalloc] can be mixed.
 
  * Deprecated: GLib always uses the system malloc, so this function always
  *   returns %TRUE.
@@ -4813,7 +4813,7 @@ Quark numberParserErrorQuark()
  * `[E]xit, [H]alt, show [S]tack trace or [P]roceed`.
  * This function is intended to be used for debugging use only.
  * The following example shows how it can be used together with
- * the [GLib.Global.log] functions.
+ * the [glib.global.log] functions.
  * |[<!-- language\="C" -->
  * #include <glib.h>
  * static void
@@ -4838,19 +4838,19 @@ Quark numberParserErrorQuark()
  * ]|
  * If "[E]xit" is selected, the application terminates with a call
  * to _exit$(LPAREN)0$(RPAREN).
- * If "[S]tack" trace is selected, [GLib.Global.onErrorStackTrace] is called.
+ * If "[S]tack" trace is selected, [glib.global.onErrorStackTrace] is called.
  * This invokes gdb, which attaches to the current process and shows
  * a stack trace. The prompt is then shown again.
  * If "[P]roceed" is selected, the function returns.
  * This function may cause different actions on non-UNIX platforms.
  * On Windows consider using the `G_DEBUGGER` environment
  * variable $(LPAREN)see [Running GLib Applications](glib-running.html)$(RPAREN) and
- * calling [GLib.Global.onErrorStackTrace] instead.
+ * calling [glib.global.onErrorStackTrace] instead.
  * Params:
  *   prgName = the program name, needed by gdb for the "[S]tack trace"
- *     option. If prg_name is %NULL, [GLib.Global.getPrgname] is called to get
+ *     option. If prg_name is %NULL, [glib.global.getPrgname] is called to get
  *     the program name $(LPAREN)which will work correctly if gdk_init$(LPAREN)$(RPAREN) or
- *     [Gtk.Global.init_] has been called$(RPAREN)
+ *     [gtk.global.init_] has been called$(RPAREN)
  */
 void onErrorQuery(string prgName)
 {
@@ -4860,13 +4860,13 @@ void onErrorQuery(string prgName)
 
 /**
  * Invokes gdb, which attaches to the current process and shows a
- * stack trace. Called by [GLib.Global.onErrorQuery] when the "[S]tack trace"
+ * stack trace. Called by [glib.global.onErrorQuery] when the "[S]tack trace"
  * option is selected. You can get the current process's program name
- * with [GLib.Global.getPrgname], assuming that you have called [Gtk.Global.init_] or
+ * with [glib.global.getPrgname], assuming that you have called [gtk.global.init_] or
  * gdk_init$(LPAREN)$(RPAREN).
  * This function may cause different actions on non-UNIX platforms.
  * When running on Windows, this function is *not* called by
- * [GLib.Global.onErrorQuery]. If called directly, it will raise an
+ * [glib.global.onErrorQuery]. If called directly, it will raise an
  * exception, which will crash the program. If the `G_DEBUGGER` environment
  * variable is set, a debugger will be invoked to attach and
  * handle that exception $(LPAREN)see [Running GLib Applications](glib-running.html)$(RPAREN).
@@ -4977,7 +4977,7 @@ string pathGetDirname(string fileName)
  * File names relative the current directory on some specific drive,
  * such as "D:foo/bar", are not interpreted as absolute by this
  * function, but they obviously are not relative to the normal current
- * directory as returned by getcwd$(LPAREN)$(RPAREN) or [GLib.Global.getCurrentDir]
+ * directory as returned by getcwd$(LPAREN)$(RPAREN) or [glib.global.getCurrentDir]
  * either. Such paths should be avoided, or need to be handled using
  * Windows-specific code.
  * Params:
@@ -5013,8 +5013,8 @@ string pathSkipRoot(string fileName)
 /**
  * Matches a string against a pattern given as a string. If this
  * function is to be called in a loop, it's more efficient to compile
- * the pattern once with [GLib.PatternSpec.new_] and call
- * [GLib.Global.patternMatchString] repeatedly.
+ * the pattern once with [glib.pattern_spec.PatternSpec.new_] and call
+ * [glib.global.patternMatchString] repeatedly.
  * Params:
  *   pattern = the UTF-8 encoded pattern
  *   string_ = the UTF-8 encoded string to match
@@ -5056,7 +5056,7 @@ void pointerBitLock(void* address, int lockBit)
  *   outPtr = returns the set pointer atomically.
  *     This is the value after setting the lock, it thus always has the
  *     lock bit set, while previously address had the lockbit unset.
- *     You may also use [GLib.Global.pointerBitLockMaskPtr] to clear the lock bit.
+ *     You may also use [glib.global.pointerBitLockMaskPtr] to clear the lock bit.
  */
 void pointerBitLockAndGet(void* address, uint lockBit, out size_t outPtr)
 {
@@ -5064,7 +5064,7 @@ void pointerBitLockAndGet(void* address, uint lockBit, out size_t outPtr)
 }
 
 /**
- * This mangles ptr as [GLib.Global.pointerBitLock] and [GLib.Global.pointerBitUnlock]
+ * This mangles ptr as [glib.global.pointerBitLock] and [glib.global.pointerBitUnlock]
  * do.
  * Params:
  *   ptr = the pointer to mask
@@ -5088,7 +5088,7 @@ void* pointerBitLockMaskPtr(void* ptr, uint lockBit, bool set, size_t preserveMa
 }
 
 /**
- * This is equivalent to [GLib.Global.bitTrylock], but working on pointers $(LPAREN)or
+ * This is equivalent to [glib.global.bitTrylock], but working on pointers $(LPAREN)or
  * other pointer-sized values$(RPAREN).
  * For portability reasons, you may only lock on the bottom 32 bits of
  * the pointer.
@@ -5123,7 +5123,7 @@ void pointerBitUnlock(void* address, int lockBit)
 }
 
 /**
- * This is equivalent to [GLib.Global.pointerBitUnlock] and atomically setting
+ * This is equivalent to [glib.global.pointerBitUnlock] and atomically setting
  * the pointer value.
  * Note that the lock bit will be cleared from the pointer. If the unlocked
  * pointer that was set is not identical to ptr, an assertion fails. In other
@@ -5156,7 +5156,7 @@ void pointerBitUnlockAndSet(void* address, uint lockBit, void* ptr, size_t prese
  * occurred.
  * On POSIX systems, the file descriptors in fds can be any sort of
  * file descriptor, but the situation is much more complicated on
- * Windows. If you need to use [GLib.Global.poll] in code that has to run on
+ * Windows. If you need to use [glib.global.poll] in code that has to run on
  * Windows, the easiest solution is to construct all of your
  * #GPollFDs with g_io_channel_win32_make_pollfd$(LPAREN)$(RPAREN).
  * Params:
@@ -5221,7 +5221,7 @@ void qsortWithData(const(void)* pbase, int totalElems, size_t size, CompareDataF
  * Gets the #GQuark identifying the given $(LPAREN)static$(RPAREN) string. If the
  * string does not currently have an associated #GQuark, a new #GQuark
  * is created, linked to the given string.
- * Note that this function is identical to [GLib.Global.quarkFromString] except
+ * Note that this function is identical to [glib.global.quarkFromString] except
  * that if a new #GQuark is created the string itself is used rather
  * than a copy. This saves memory, but can only be used if the string
  * will continue to exist until the program terminates. It can be used
@@ -5281,7 +5281,7 @@ string quarkToString(Quark quark)
  * Gets the #GQuark associated with the given string, or 0 if string is
  * %NULL or it has no associated #GQuark.
  * If you want the GQuark to be created if it doesn't already exist,
- * use [GLib.Global.quarkFromString] or [GLib.Global.quarkFromStaticString].
+ * use [glib.global.quarkFromString] or [glib.global.quarkFromStaticString].
  * This function must not be used before library constructors have finished
  * running.
  * Params:
@@ -5491,7 +5491,7 @@ void* realloc(void* mem, size_t nBytes)
 }
 
 /**
- * This function is similar to [GLib.Global.realloc], allocating (n_blocks * n_block_bytes) bytes,
+ * This function is similar to [glib.global.realloc], allocating (n_blocks * n_block_bytes) bytes,
  * but care is taken to detect possible overflow during multiplication.
  * If the allocation fails $(LPAREN)because the system is out of memory$(RPAREN),
  * the program is terminated.
@@ -5526,7 +5526,7 @@ bool refCountCompare(ref int rc, int val)
  * Decreases the reference count.
  * If %TRUE is returned, the reference count reached 0. After this point, rc
  * is an undefined state and must be reinitialized with
- * [GLib.Global.refCountInit] to be used again.
+ * [glib.global.refCountInit] to be used again.
  * Params:
  *   rc = the address of a reference count variable
  * Returns: %TRUE if the reference count reached 0, and %FALSE otherwise
@@ -5655,11 +5655,11 @@ void refStringRelease(string str)
 }
 
 /**
- * Resets the cache used for [GLib.Global.getUserSpecialDir], so
+ * Resets the cache used for [glib.global.getUserSpecialDir], so
  * that the latest on-disk version is used. Call this only
  * if you just changed the data on disk yourself.
  * Due to thread safety issues this may cause leaking of strings
- * that were previously returned from [GLib.Global.getUserSpecialDir]
+ * that were previously returned from [glib.global.getUserSpecialDir]
  * that can't be freed. We ensure to only leak the data for
  * the directories that actually changed value though.
  */
@@ -5740,9 +5740,9 @@ int rmdir(string filename)
 /**
  * Sets a human-readable name for the application. This name should be
  * localized if possible, and is intended for display to the user.
- * Contrast with [GLib.Global.setPrgname], which sets a non-localized name.
- * [GLib.Global.setPrgname] will be called automatically by [Gtk.Global.init_],
- * but [GLib.Global.setApplicationName] will not.
+ * Contrast with [glib.global.setPrgname], which sets a non-localized name.
+ * [glib.global.setPrgname] will be called automatically by [gtk.global.init_],
+ * but [glib.global.setApplicationName] will not.
  * Note that for thread safety reasons, this function can only
  * be called once.
  * The application name will be used in contexts such as error messages,
@@ -5759,7 +5759,7 @@ void setApplicationName(string applicationName)
 /**
  * Does nothing if err is %NULL; if err is non-%NULL, then *err
  * must be %NULL. A new #GError is created and assigned to *err.
- * Unlike [GLib.Global.setError], message is not a printf()-style format string.
+ * Unlike [glib.global.setError], message is not a printf()-style format string.
  * Use this function if message contains text you don't have control over,
  * that could include printf$(LPAREN)$(RPAREN) escape sequences.
  * Params:
@@ -5778,10 +5778,10 @@ void setErrorLiteral(out ErrorG err, Quark domain, int code, string message)
 
 /**
  * Sets the name of the program. This name should not be localized,
- * in contrast to [GLib.Global.setApplicationName].
+ * in contrast to [glib.global.setApplicationName].
  * If you are using #GApplication the program name is set in
- * [Gio.ApplicationGio.run]. In case of GDK or GTK it is set in
- * gdk_init$(LPAREN)$(RPAREN), which is called by [Gtk.Global.init_] and the
+ * [gio.application.ApplicationGio.run]. In case of GDK or GTK it is set in
+ * gdk_init$(LPAREN)$(RPAREN), which is called by [gtk.global.init_] and the
  * #GtkApplication::startup handler. The program name is found by
  * taking the last component of argv[0].
  * Since GLib 2.72, this function can be called multiple times
@@ -5804,15 +5804,15 @@ void setPrgname(string prgname)
  * used for the previous variables and its value isn't reclaimed.
  * You should be mindful of the fact that environment variable handling
  * in UNIX is not thread-safe, and your program may crash if one thread
- * calls [GLib.Global.setenv] while another thread is calling getenv(). $(LPAREN)And note
+ * calls [glib.global.setenv] while another thread is calling getenv(). $(LPAREN)And note
  * that many functions, such as gettext$(LPAREN)$(RPAREN), call getenv$(LPAREN)$(RPAREN) internally.$(RPAREN)
  * This function is only safe to use at the very start of your program,
  * before creating any other threads $(LPAREN)or creating objects that create
  * worker threads of their own$(RPAREN).
  * If you need to set up the environment for a child process, you can
- * use [GLib.Global.getEnviron] to get an environment array, modify that with
- * [GLib.Global.environSetenv] and [GLib.Global.environUnsetenv], and then pass that
- * array directly to execvpe$(LPAREN)$(RPAREN), [GLib.Global.spawnAsync], or the like.
+ * use [glib.global.getEnviron] to get an environment array, modify that with
+ * [glib.global.environSetenv] and [glib.global.environUnsetenv], and then pass that
+ * array directly to execvpe$(LPAREN)$(RPAREN), [glib.global.spawnAsync], or the like.
  * Params:
  *   variable = the environment variable to set, must not
  *     contain '\='.
@@ -5850,7 +5850,7 @@ Quark shellErrorQuark()
  * only whitespace$(RPAREN), %G_SHELL_ERROR_EMPTY_STRING will be returned. It’s
  * guaranteed that argvp will be a non-empty array if this function returns
  * successfully.
- * Free the returned vector with [GLib.Global.strfreev].
+ * Free the returned vector with [glib.global.strfreev].
  * Params:
  *   commandLine = command line to parse
  *   argvp = return location for array of args
@@ -5878,7 +5878,7 @@ bool shellParseArgv(string commandLine, out string[] argvp)
  * quoted string to mean unquoted_string.
  * If you pass a filename to the shell, for example, you should first
  * quote it with this function.
- * The return value must be freed with [GLib.Global.gfree].
+ * The return value must be freed with [glib.global.gfree].
  * The quoting style used is undefined $(LPAREN)single or double quotes may be
  * used$(RPAREN).
  * Params:
@@ -5902,13 +5902,13 @@ string shellQuote(string unquotedString)
  * result a real shell would produce $(LPAREN)the variables, backticks, etc.
  * will be passed through literally instead of being expanded$(RPAREN).
  * This function is guaranteed to succeed if applied to the result of
- * [GLib.Global.shellQuote]. If it fails, it returns %NULL and sets the
+ * [glib.global.shellQuote]. If it fails, it returns %NULL and sets the
  * error.
  * The quoted_string need not actually contain quoted or escaped text;
- * [GLib.Global.shellUnquote] simply goes through the string and unquotes/unescapes
+ * [glib.global.shellUnquote] simply goes through the string and unquotes/unescapes
  * anything that the shell would. Both single and double quotes are
  * handled, as are escapes including escaped newlines.
- * The return value must be freed with [GLib.Global.gfree].
+ * The return value must be freed with [glib.global.gfree].
  * Possible errors are in the %G_SHELL_ERROR domain.
  * Shell quoting rules are a bit strange. Single quotes preserve the
  * literal string exactly. escape sequences are not allowed; not even
@@ -5950,7 +5950,7 @@ void* sliceAlloc(size_t blockSize)
 }
 
 /**
- * Allocates a block of memory via [GLib.Global.sliceAlloc] and initializes
+ * Allocates a block of memory via [glib.global.sliceAlloc] and initializes
  * the returned memory to 0.
  * Since GLib 2.76 this always uses the system malloc$(LPAREN)$(RPAREN) implementation
  * internally.
@@ -5985,8 +5985,8 @@ void* sliceCopy(size_t blockSize, const(void)* memBlock)
 
 /**
  * Frees a block of memory.
- * The memory must have been allocated via [GLib.Global.sliceAlloc] or
- * [GLib.Global.sliceAlloc0] and the block_size has to match the size
+ * The memory must have been allocated via [glib.global.sliceAlloc] or
+ * [glib.global.sliceAlloc0] and the block_size has to match the size
  * specified upon allocation. Note that the exact release behaviour
  * can be changed with the [`G_DEBUG\=gc-friendly`][G_DEBUG] environment
  * variable.
@@ -6005,7 +6005,7 @@ void sliceFree1(size_t blockSize, void* memBlock)
 /**
  * Frees a linked list of memory blocks of structure type type.
  * The memory blocks must be equal-sized, allocated via
- * [GLib.Global.sliceAlloc] or [GLib.Global.sliceAlloc0] and linked together by a
+ * [glib.global.sliceAlloc] or [glib.global.sliceAlloc0] and linked together by a
  * next pointer $(LPAREN)similar to #GSList$(RPAREN). The offset of the next
  * field in each block is passed as third argument.
  * Note that the exact release behaviour can be changed with the
@@ -6069,9 +6069,9 @@ uint spacedPrimesClosest(uint num)
 
 /**
  * Executes a child program asynchronously.
- * See [GLib.Global.spawnAsyncWithPipes] for a full description; this function
- * simply calls the [GLib.Global.spawnAsyncWithPipes] without any pipes.
- * You should call [GLib.Global.spawnClosePid] on the returned child process
+ * See [glib.global.spawnAsyncWithPipes] for a full description; this function
+ * simply calls the [glib.global.spawnAsyncWithPipes] without any pipes.
+ * You should call [glib.global.spawnClosePid] on the returned child process
  * reference when you don't need it any more.
  * If you are writing a GTK application, and the program you are spawning is a
  * graphical application too, then to ensure that the spawned program opens its
@@ -6126,7 +6126,7 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, SpawnFlag
 
 /**
  * Executes a child program asynchronously.
- * Identical to [GLib.Global.spawnAsyncWithPipesAndFds] but with `n_fds` set to zero,
+ * Identical to [glib.global.spawnAsyncWithPipesAndFds] but with `n_fds` set to zero,
  * so no FD assignments are used.
  * Params:
  *   workingDirectory = child's current working directory, or %NULL to inherit parent's, in the GLib file name encoding
@@ -6176,7 +6176,7 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, Sp
 }
 
 /**
- * Identical to [GLib.Global.spawnAsyncWithPipesAndFds] but with `n_fds` set to zero,
+ * Identical to [glib.global.spawnAsyncWithPipesAndFds] but with `n_fds` set to zero,
  * so no FD assignments are used.
  * Params:
  *   workingDirectory = child's current working
@@ -6259,7 +6259,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
  * g_win32_get_command_line$(LPAREN)$(RPAREN) to get arguments in UTF-8.
  * On Windows the low-level child process creation API `CreateProcess$(LPAREN)$(RPAREN)`
  * doesn't use argument vectors, but a command line. The C runtime
- * library's `spawn*$(LPAREN)$(RPAREN)` family of functions $(LPAREN)which [GLib.Global.spawnAsyncWithPipes]
+ * library's `spawn*$(LPAREN)$(RPAREN)` family of functions $(LPAREN)which [glib.global.spawnAsyncWithPipes]
  * eventually calls$(RPAREN) paste the argument vector elements together into
  * a command line, and the C runtime startup code does a corresponding
  * reconstruction of an argument vector from the command line, to be
@@ -6268,7 +6268,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
  * don't do any quoting or escaping, but on the other hand the startup
  * code does do unquoting and unescaping in order to enable receiving
  * arguments with embedded spaces or double quotes. To work around this
- * asymmetry, [GLib.Global.spawnAsyncWithPipes] will do quoting and escaping on
+ * asymmetry, [glib.global.spawnAsyncWithPipes] will do quoting and escaping on
  * argument vector elements that need it before calling the C runtime
  * `spawn$(LPAREN)$(RPAREN)` function.
  * The returned child_pid on Windows is a handle to the child
@@ -6280,14 +6280,14 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
  * flags should be the bitwise OR of any flags you want to affect the
  * function's behaviour. The %G_SPAWN_DO_NOT_REAP_CHILD means that the
  * child will not automatically be reaped; you must use a child watch
- * $(LPAREN)[GLib.Global.childWatchAdd]$(RPAREN) to be notified about the death of the child process,
+ * $(LPAREN)[glib.global.childWatchAdd]$(RPAREN) to be notified about the death of the child process,
  * otherwise it will stay around as a zombie process until this process exits.
- * Eventually you must call [GLib.Global.spawnClosePid] on the child_pid, in order to
+ * Eventually you must call [glib.global.spawnClosePid] on the child_pid, in order to
  * free resources which may be associated with the child process. $(LPAREN)On Unix,
  * using a child watch is equivalent to calling waitpid$(LPAREN)$(RPAREN) or handling
- * the `SIGCHLD` signal manually. On Windows, calling [GLib.Global.spawnClosePid]
+ * the `SIGCHLD` signal manually. On Windows, calling [glib.global.spawnClosePid]
  * is equivalent to calling `CloseHandle$(LPAREN)$(RPAREN)` on the process handle returned
- * in child_pid$(RPAREN). See [GLib.Global.childWatchAdd].
+ * in child_pid$(RPAREN). See [glib.global.childWatchAdd].
  * Open UNIX file descriptors marked as `FD_CLOEXEC` will be automatically
  * closed in the child process. %G_SPAWN_LEAVE_DESCRIPTORS_OPEN means that
  * other open file descriptors will be inherited by the child; otherwise all
@@ -6327,7 +6327,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
  * source_fds is supported on Windows since 2.72.
  * %G_SPAWN_FILE_AND_ARGV_ZERO means that the first element of argv is
  * the file to execute, while the remaining elements are the actual
- * argument vector to pass to the file. Normally [GLib.Global.spawnAsyncWithPipes]
+ * argument vector to pass to the file. Normally [glib.global.spawnAsyncWithPipes]
  * uses argv[0] as the file to execute, and passes all of argv to the child.
  * child_setup and user_data are a function and user data. On POSIX
  * platforms, the function is called in the child after GLib has
@@ -6342,18 +6342,18 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
  * could be used for on Windows so it is ignored and not called.
  * If non-%NULL, child_pid will on Unix be filled with the child's
  * process ID. You can use the process ID to send signals to the child,
- * or to use [GLib.Global.childWatchAdd] $(LPAREN)$(RPAREN)(or `waitpid`) if you specified the
+ * or to use [glib.global.childWatchAdd] $(LPAREN)$(RPAREN)(or `waitpid`) if you specified the
  * %G_SPAWN_DO_NOT_REAP_CHILD flag. On Windows, child_pid will be
  * filled with a handle to the child process only if you specified the
  * %G_SPAWN_DO_NOT_REAP_CHILD flag. You can then access the child
  * process using the Win32 API, for example wait for its termination
  * with the `WaitFor*$(LPAREN)$(RPAREN)` functions, or examine its exit code with
  * `GetExitCodeProcess$(LPAREN)$(RPAREN)`. You should close the handle with `CloseHandle$(LPAREN)$(RPAREN)`
- * or [GLib.Global.spawnClosePid] when you no longer need it.
+ * or [glib.global.spawnClosePid] when you no longer need it.
  * If non-%NULL, the stdin_pipe_out, stdout_pipe_out, stderr_pipe_out
  * locations will be filled with file descriptors for writing to the child's
  * standard input or reading from its standard output or standard error.
- * The caller of [GLib.Global.spawnAsyncWithPipes] must close these file descriptors
+ * The caller of [glib.global.spawnAsyncWithPipes] must close these file descriptors
  * when they are no longer in use. If these parameters are %NULL, the
  * corresponding pipe won't be created.
  * If stdin_pipe_out is %NULL, the child's standard input is attached to
@@ -6373,7 +6373,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
  * If an error occurs, child_pid, stdin_pipe_out, stdout_pipe_out,
  * and stderr_pipe_out will not be filled with valid values.
  * If child_pid is not %NULL and an error does not occur then the returned
- * process reference must be closed using [GLib.Global.spawnClosePid].
+ * process reference must be closed using [glib.global.spawnClosePid].
  * On modern UNIX platforms, GLib can use an efficient process launching
  * codepath driven internally by `posix_spawn$(LPAREN)$(RPAREN)`. This has the advantage of
  * avoiding the fork-time performance costs of cloning the parent process
@@ -6459,19 +6459,19 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
 }
 
 /**
- * An old name for [GLib.Global.spawnCheckWaitStatus], deprecated because its
+ * An old name for [glib.global.spawnCheckWaitStatus], deprecated because its
  * name is misleading.
  * Despite the name of the function, wait_status must be the wait status
- * as returned by [GLib.Global.spawnSync], [Gio.Subprocess.getStatus], `waitpid()`,
+ * as returned by [glib.global.spawnSync], [gio.subprocess.Subprocess.getStatus], `waitpid()`,
  * etc. On Unix platforms, it is incorrect for it to be the exit status
- * as passed to `exit$(LPAREN)$(RPAREN)` or returned by [Gio.Subprocess.getExitStatus] or
+ * as passed to `exit$(LPAREN)$(RPAREN)` or returned by [gio.subprocess.Subprocess.getExitStatus] or
  * `WEXITSTATUS$(LPAREN)$(RPAREN)`.
  * Params:
- *   waitStatus = A status as returned from [GLib.Global.spawnSync]
+ *   waitStatus = A status as returned from [glib.global.spawnSync]
  * Returns: %TRUE if child exited successfully, %FALSE otherwise $(LPAREN)and
  *   error will be set$(RPAREN)
 
- * Deprecated: Use [GLib.Global.spawnCheckWaitStatus] instead, and check whether your code is conflating wait and exit statuses.
+ * Deprecated: Use [glib.global.spawnCheckWaitStatus] instead, and check whether your code is conflating wait and exit statuses.
  */
 bool spawnCheckExitStatus(int waitStatus)
 {
@@ -6486,7 +6486,7 @@ bool spawnCheckExitStatus(int waitStatus)
 /**
  * Set error if wait_status indicates the child exited abnormally
  * $(LPAREN)e.g. with a nonzero exit code, or via a fatal signal$(RPAREN).
- * The [GLib.Global.spawnSync] and [GLib.Global.childWatchAdd] family of APIs return the
+ * The [glib.global.spawnSync] and [glib.global.childWatchAdd] family of APIs return the
  * status of subprocesses encoded in a platform-specific way.
  * On Unix, this is guaranteed to be in the same format waitpid$(LPAREN)$(RPAREN) returns,
  * and on Windows it is guaranteed to be the result of GetExitCodeProcess$(LPAREN)$(RPAREN).
@@ -6513,10 +6513,10 @@ bool spawnCheckExitStatus(int waitStatus)
  * WIFEXITED$(LPAREN)$(RPAREN) and WEXITSTATUS$(LPAREN)$(RPAREN) on wait_status directly. Do not attempt
  * to scan or parse the error message string; it may be translated and/or
  * change in future versions of GLib.
- * Prior to version 2.70, [GLib.Global.spawnCheckExitStatus] provides the same
+ * Prior to version 2.70, [glib.global.spawnCheckExitStatus] provides the same
  * functionality, although under a misleading name.
  * Params:
- *   waitStatus = A platform-specific wait status as returned from [GLib.Global.spawnSync]
+ *   waitStatus = A platform-specific wait status as returned from [glib.global.spawnSync]
  * Returns: %TRUE if child exited successfully, %FALSE otherwise $(LPAREN)and
  *   error will be set$(RPAREN)
  */
@@ -6532,7 +6532,7 @@ bool spawnCheckWaitStatus(int waitStatus)
 
 /**
  * On some platforms, notably Windows, the #GPid type represents a resource
- * which must be closed to prevent resource leaking. [GLib.Global.spawnClosePid]
+ * which must be closed to prevent resource leaking. [glib.global.spawnClosePid]
  * is provided for this purpose. It should be used on all platforms, even
  * though it doesn't do anything under UNIX.
  * Params:
@@ -6544,14 +6544,14 @@ void spawnClosePid(Pid pid)
 }
 
 /**
- * A simple version of [GLib.Global.spawnAsync] that parses a command line with
- * [GLib.Global.shellParseArgv] and passes it to [GLib.Global.spawnAsync].
- * Runs a command line in the background. Unlike [GLib.Global.spawnAsync], the
+ * A simple version of [glib.global.spawnAsync] that parses a command line with
+ * [glib.global.shellParseArgv] and passes it to [glib.global.spawnAsync].
+ * Runs a command line in the background. Unlike [glib.global.spawnAsync], the
  * %G_SPAWN_SEARCH_PATH flag is enabled, other flags are not. Note
  * that %G_SPAWN_SEARCH_PATH can have security implications, so
- * consider using [GLib.Global.spawnAsync] directly if appropriate. Possible
- * errors are those from [GLib.Global.shellParseArgv] and [GLib.Global.spawnAsync].
- * The same concerns on Windows apply as for [GLib.Global.spawnCommandLineSync].
+ * consider using [glib.global.spawnAsync] directly if appropriate. Possible
+ * errors are those from [glib.global.shellParseArgv] and [glib.global.spawnAsync].
+ * The same concerns on Windows apply as for [glib.global.spawnCommandLineSync].
  * Params:
  *   commandLine = a command line
  * Returns: %TRUE on success, %FALSE if error is set
@@ -6568,21 +6568,21 @@ bool spawnCommandLineAsync(string commandLine)
 }
 
 /**
- * A simple version of [GLib.Global.spawnSync] with little-used parameters
+ * A simple version of [glib.global.spawnSync] with little-used parameters
  * removed, taking a command line instead of an argument vector.
- * See [GLib.Global.spawnSync] for full details.
- * The command_line argument will be parsed by [GLib.Global.shellParseArgv].
- * Unlike [GLib.Global.spawnSync], the %G_SPAWN_SEARCH_PATH flag is enabled.
+ * See [glib.global.spawnSync] for full details.
+ * The command_line argument will be parsed by [glib.global.shellParseArgv].
+ * Unlike [glib.global.spawnSync], the %G_SPAWN_SEARCH_PATH flag is enabled.
  * Note that %G_SPAWN_SEARCH_PATH can have security implications, so
- * consider using [GLib.Global.spawnSync] directly if appropriate.
- * Possible errors are those from [GLib.Global.spawnSync] and those
- * from [GLib.Global.shellParseArgv].
+ * consider using [glib.global.spawnSync] directly if appropriate.
+ * Possible errors are those from [glib.global.spawnSync] and those
+ * from [glib.global.shellParseArgv].
  * If wait_status is non-%NULL, the platform-specific status of
  * the child is stored there; see the documentation of
- * [GLib.Global.spawnCheckWaitStatus] for how to use and interpret this.
+ * [glib.global.spawnCheckWaitStatus] for how to use and interpret this.
  * On Unix platforms, note that it is usually not equal
  * to the integer passed to `exit$(LPAREN)$(RPAREN)` or returned from `main$(LPAREN)$(RPAREN)`.
- * On Windows, please note the implications of [GLib.Global.shellParseArgv]
+ * On Windows, please note the implications of [glib.global.shellParseArgv]
  * parsing command_line. Parsing is done according to Unix shell rules, not
  * Windows command interpreter rules.
  * Space is a separator, and backslashes are
@@ -6635,15 +6635,15 @@ Quark spawnExitErrorQuark()
  * passing %NULL for standard_output and standard_error.
  * If wait_status is non-%NULL, the platform-specific status of
  * the child is stored there; see the documentation of
- * [GLib.Global.spawnCheckWaitStatus] for how to use and interpret this.
+ * [glib.global.spawnCheckWaitStatus] for how to use and interpret this.
  * On Unix platforms, note that it is usually not equal
  * to the integer passed to `exit$(LPAREN)$(RPAREN)` or returned from `main$(LPAREN)$(RPAREN)`.
  * Note that it is invalid to pass %G_SPAWN_DO_NOT_REAP_CHILD in
  * flags, and on POSIX platforms, the same restrictions as for
- * [GLib.Global.childWatchSourceNew] apply.
+ * [glib.global.childWatchSourceNew] apply.
  * If an error occurs, no data is returned in standard_output,
  * standard_error, or wait_status.
- * This function calls [GLib.Global.spawnAsyncWithPipes] internally; see that
+ * This function calls [glib.global.spawnAsyncWithPipes] internally; see that
  * function for full details on the other parameters and details on
  * how these functions work on Windows.
  * Params:
@@ -6751,12 +6751,12 @@ string stpcpy(string dest, string src)
 
 /**
  * Compares two strings for byte-by-byte equality and returns %TRUE
- * if they are equal. It can be passed to [GLib.HashTable.new_] as the
+ * if they are equal. It can be passed to [glib.hash_table.HashTable.new_] as the
  * key_equal_func parameter, when using non-%NULL strings as keys in a
  * #GHashTable.
  * This function is typically used for hash table comparisons, but can be used
  * for general purpose comparisons of non-%NULL strings. For a %NULL-safe string
- * comparison function, see [GLib.Global.strcmp0].
+ * comparison function, see [glib.global.strcmp0].
  * Params:
  *   v1 = a key
  *   v2 = a key to compare with v1
@@ -6808,7 +6808,7 @@ bool strHasSuffix(string str, string suffix)
  * bit unsigned hash value starts at 5381 and for each byte 'c' in
  * the string, is updated: `hash \= hash * 33 + c`. This function
  * uses the signed value of each byte.
- * It can be passed to [GLib.HashTable.new_] as the hash_func parameter,
+ * It can be passed to [glib.hash_table.HashTable.new_] as the hash_func parameter,
  * when using non-%NULL strings as keys in a #GHashTable.
  * Note that this function may not be a perfect fit for all use cases.
  * For example, it produces some hash collisions with strings as short
@@ -6849,9 +6849,9 @@ bool strIsAscii(string str)
  * A hit occurs when each folded token in search_term is a prefix of a
  * folded token from potential_hit.
  * Depending on how you're performing the search, it will typically be
- * faster to call `[GLib.Global.strTokenizeAndFold]` on each string in
+ * faster to call `[glib.global.strTokenizeAndFold]` on each string in
  * your corpus and build an index on the returned folded tokens, then
- * call `[GLib.Global.strTokenizeAndFold]` on the search term and
+ * call `[glib.global.strTokenizeAndFold]` on the search term and
  * perform lookups into that index.
  * As some examples, searching for ‘fred’ would match the potential hit
  * ‘Smith, Fred’ and also ‘Frédéric’.  Searching for ‘Fréd’ would match
@@ -7099,7 +7099,7 @@ string strcompress(string source)
  * Params:
  *   string_ = the string to convert
  *   delimiters = a string containing the current delimiters, or
- *     `NULL` to use the standard delimiters defined in [GLib.STR_DELIMITERS]
+ *     `NULL` to use the standard delimiters defined in [glib.string]
  *   newDelimiter = the new delimiter character
  * Returns: the modified string
  */
@@ -7150,7 +7150,7 @@ string strdup(string str)
 /**
  * Copies an array of strings. The copy is a deep copy; each string is also
  * copied.
- * If called on a `NULL` value, `[GLib.Global.strdupv]` simply returns `NULL`.
+ * If called on a `NULL` value, `[glib.global.strdupv]` simply returns `NULL`.
  * Params:
  *   strArray = an array of strings to copy
  * Returns: a
@@ -7346,12 +7346,12 @@ size_t strlcpy(string dest, string src, size_t destSize)
  * Returns: 0 if the strings match, a negative value if s1 < s2,
  *   or a positive value if s1 > s2
 
- * Deprecated: The problem with `[GLib.Global.strncasecmp]` is that it does
+ * Deprecated: The problem with `[glib.global.strncasecmp]` is that it does
  *   the comparison by calling `toupper$(LPAREN)$(RPAREN)`/`tolower$(LPAREN)$(RPAREN)`. These functions
  *   are locale-specific and operate on single bytes. However, it is
  *   impossible to handle things correctly from an internationalization
  *   standpoint by operating on bytes, since characters may be multibyte.
- *   Thus `[GLib.Global.strncasecmp]` is broken if your string is guaranteed to be
+ *   Thus `[glib.global.strncasecmp]` is broken if your string is guaranteed to be
  *   ASCII, since it is locale-sensitive, and it's broken if your string
  *   is localized, since it doesn't work on many encodings at all,
  *   including UTF-8, EUC-JP, etc.
@@ -7409,7 +7409,7 @@ string strnfill(size_t length, char fillChar)
 /**
  * Reverses all of the bytes in a string. For example,
  * `g_strreverse $(LPAREN)"abcdef"$(RPAREN)` will result in "fedcba".
- * Note that `[GLib.Global.strreverse]` doesn't work on UTF-8 strings
+ * Note that `[glib.global.strreverse]` doesn't work on UTF-8 strings
  * containing multibyte characters. For that purpose, use
  * funcGLib.utf8_strreverse.
  * Params:
@@ -7493,7 +7493,7 @@ string strsignal(int signum)
  * special case is that being able to represent an empty array is typically
  * more useful than consistent handling of empty elements. If you do need
  * to represent empty elements, you'll need to check for the empty string
- * before calling `[GLib.Global.strsplit]`.
+ * before calling `[glib.global.strsplit]`.
  * Params:
  *   string_ = a string to split
  *   delimiter = a string which specifies the places at which to split
@@ -7538,7 +7538,7 @@ string[] strsplit(string string_, string delimiter, int maxTokens)
  * special case is that being able to represent an empty array is typically
  * more useful than consistent handling of empty elements. If you do need
  * to represent empty elements, you'll need to check for the empty string
- * before calling `[GLib.Global.strsplitSet]`.
+ * before calling `[glib.global.strsplitSet]`.
  * Note that this function works on bytes not characters, so it can't be used
  * to delimit UTF-8 strings for anything but ASCII characters.
  * Params:
@@ -7721,14 +7721,14 @@ uint strvLength(string[] strArray)
 }
 
 /**
- * Create a new test case, similar to [GLib.Global.testCreateCase]. However
+ * Create a new test case, similar to [glib.global.testCreateCase]. However
  * the test is assumed to use no fixture, and test suites are automatically
  * created on the fly and added to the root fixture, based on the
  * slash-separated portions of testpath. The test_data argument
  * will be passed as first argument to test_func.
  * If testpath includes the component "subprocess" anywhere in it,
  * the test will be skipped by default, and only run if explicitly
- * required via the `-p` command-line option or [GLib.Global.testTrapSubprocess].
+ * required via the `-p` command-line option or [glib.global.testTrapSubprocess].
  * No component of testpath may start with a dot $(LPAREN)`.`$(RPAREN) if the
  * %G_TEST_OPTION_ISOLATE_DIRS option is being used; and it is recommended to
  * do so even if it isn’t.
@@ -7763,10 +7763,10 @@ void testAssertExpectedMessagesInternal(string domain, string file, int line, st
 /**
  * This function adds a message to test reports that
  * associates a bug URI with a test case.
- * Bug URIs are constructed from a base URI set with [GLib.Global.testBugBase]
- * and bug_uri_snippet. If [GLib.Global.testBugBase] has not been called, it is
+ * Bug URIs are constructed from a base URI set with [glib.global.testBugBase]
+ * and bug_uri_snippet. If [glib.global.testBugBase] has not been called, it is
  * assumed to be the empty string, so a full URI can be provided to
- * [GLib.Global.testBug] instead.
+ * [glib.global.testBug] instead.
  * Since GLib 2.70, the base URI is not prepended to bug_uri_snippet if it
  * is already a valid URI.
  * Params:
@@ -7783,7 +7783,7 @@ void testBug(string bugUriSnippet)
 /**
  * Specify the base URI for bug reports.
  * The base URI is used to construct bug report messages for
- * [GLib.Global.testMessage] when [GLib.Global.testBug] is called.
+ * [glib.global.testMessage] when [glib.global.testBug] is called.
  * Calling this function outside of a test case sets the
  * default base URI for all test cases. Calling it from within
  * a test case changes the base URI for the scope of the test
@@ -7791,8 +7791,8 @@ void testBug(string bugUriSnippet)
  * Bug URIs are constructed by appending a bug specific URI
  * portion to uri_pattern, or by replacing the special string
  * `%s` within uri_pattern if that is present.
- * If [GLib.Global.testBugBase] is not called, bug URIs are formed solely
- * from the value provided by [GLib.Global.testBug].
+ * If [glib.global.testBugBase] is not called, bug URIs are formed solely
+ * from the value provided by [glib.global.testBug].
  * Params:
  *   uriPattern = the base pattern for bug URIs
  */
@@ -7828,7 +7828,7 @@ void testDisableCrashReporting()
  * the same order as the calls to funcGLib.test_expect_message.$(RPAREN)
  * For example:
  * ```c
- * // [GLib.MainContext.pushThreadDefault] should fail if the
+ * // [glib.main_context.MainContext.pushThreadDefault] should fail if the
  * // context is already owned by another thread.
  * g_test_expect_message $(LPAREN)G_LOG_DOMAIN,
  * G_LOG_LEVEL_CRITICAL,
@@ -7844,7 +7844,7 @@ void testDisableCrashReporting()
  * Params:
  *   logDomain = the log domain of the message
  *   logLevel = the log level of the message
- *   pattern = a glob-style pattern $(LPAREN)see [GLib.PatternSpec]$(RPAREN)
+ *   pattern = a glob-style pattern $(LPAREN)see [glib.pattern_spec.PatternSpec]$(RPAREN)
  */
 void testExpectMessage(string logDomain, LogLevelFlags logLevel, string pattern)
 {
@@ -7864,10 +7864,10 @@ void testExpectMessage(string logDomain, LogLevelFlags logLevel, string pattern)
  * produce additional diagnostic messages or even continue running
  * the test.
  * If not called from inside a test, this function does nothing.
- * Note that unlike [GLib.Global.testSkip] and [GLib.Global.testIncomplete], this
+ * Note that unlike [glib.global.testSkip] and [glib.global.testIncomplete], this
  * function does not log a message alongside the test failure.
  * If details of the test failure are available, either log them with
- * [GLib.Global.testMessage] before [GLib.Global.testFail], or use [GLib.Global.testFailPrintf]
+ * [glib.global.testMessage] before [glib.global.testFail], or use [glib.global.testFailPrintf]
  * instead.
  */
 void testFail()
@@ -7877,8 +7877,8 @@ void testFail()
 
 /**
  * Returns whether a test has already failed. This will
- * be the case when [GLib.Global.testFail], [GLib.Global.testIncomplete]
- * or [GLib.Global.testSkip] have been called, but also if an
+ * be the case when [glib.global.testFail], [glib.global.testIncomplete]
+ * or [glib.global.testSkip] have been called, but also if an
  * assertion has failed.
  * This can be useful to return early from a test if
  * continuing after a failed assertion might be harmful.
@@ -7953,9 +7953,9 @@ string testLogTypeName(TestLogType logType)
 }
 
 /**
- * Enqueue a pointer to be released with [GLib.Global.gfree] during the next
- * teardown phase. This is equivalent to calling [GLib.Global.testQueueDestroy]
- * with a destroy callback of [GLib.Global.gfree].
+ * Enqueue a pointer to be released with [glib.global.gfree] during the next
+ * teardown phase. This is equivalent to calling [glib.global.testQueueDestroy]
+ * with a destroy callback of [glib.global.gfree].
  * Params:
  *   gfreePointer = the pointer to be stored.
  */
@@ -7966,7 +7966,7 @@ void testQueueFree(void* gfreePointer)
 
 /**
  * Get a reproducible random floating point number,
- * see [GLib.Global.testRandInt] for details on test case random numbers.
+ * see [glib.global.testRandInt] for details on test case random numbers.
  * Returns: a random number from the seeded random number generator.
  */
 double testRandDouble()
@@ -7978,7 +7978,7 @@ double testRandDouble()
 
 /**
  * Get a reproducible random floating pointer number out of a specified range,
- * see [GLib.Global.testRandInt] for details on test case random numbers.
+ * see [glib.global.testRandInt] for details on test case random numbers.
  * Params:
  *   rangeStart = the minimum value returned by this function
  *   rangeEnd = the minimum value not returned by this function
@@ -8010,7 +8010,7 @@ int testRandInt()
 
 /**
  * Get a reproducible random integer number out of a specified range,
- * see [GLib.Global.testRandInt] for details on test case random numbers.
+ * see [glib.global.testRandInt] for details on test case random numbers.
  * Params:
  *   begin = the minimum value returned by this function
  *   end = the smallest value not to be returned by this function
@@ -8025,10 +8025,10 @@ int testRandIntRange(int begin, int end)
 
 /**
  * Runs all tests under the toplevel suite which can be retrieved
- * with [GLib.Global.testGetRoot]. Similar to [GLib.Global.testRunSuite], the test
+ * with [glib.global.testGetRoot]. Similar to [glib.global.testRunSuite], the test
  * cases to be run are filtered according to test path arguments
- * $(LPAREN)`-p testpath` and `-s testpath`$(RPAREN) as parsed by [GLib.Global.testInit].
- * [GLib.Global.testRunSuite] or [GLib.Global.testRun] may only be called once in a
+ * $(LPAREN)`-p testpath` and `-s testpath`$(RPAREN) as parsed by [glib.global.testInit].
+ * [glib.global.testRunSuite] or [glib.global.testRun] may only be called once in a
  * program.
  * In general, the tests and sub-suites within each suite are run in
  * the order in which they are defined. However, note that prior to
@@ -8036,7 +8036,7 @@ int testRandIntRange(int begin, int end)
  * functions which caused them to create multiple suites with the same
  * name, meaning that if you created tests "/foo/simple",
  * "/bar/simple", and "/foo/using-bar" in that order, they would get
- * run in that order $(LPAREN)since [GLib.Global.testRun] would run the first "/foo"
+ * run in that order $(LPAREN)since [glib.global.testRun] would run the first "/foo"
  * suite, then the "/bar" suite, then the second "/foo" suite$(RPAREN). As of
  * 2.36, this bug is fixed, and adding the tests in that order would
  * result in a running order of "/foo/simple", "/foo/using-bar",
@@ -8054,8 +8054,8 @@ int testRandIntRange(int begin, int end)
  * this function will return 0 if producing TAP output, or 77 $(LPAREN)treated
  * as "skip test" by Automake$(RPAREN) otherwise.
  * Returns: 0 on success, 1 on failure $(LPAREN)assuming it returns at all$(RPAREN),
- *   0 or 77 if all tests were skipped with [GLib.Global.testSkip] and/or
- *   [GLib.Global.testIncomplete]
+ *   0 or 77 if all tests were skipped with [glib.global.testSkip] and/or
+ *   [glib.global.testIncomplete]
  */
 int testRun()
 {
@@ -8068,9 +8068,9 @@ int testRun()
  * Execute the tests within suite and all nested #GTestSuites.
  * The test suites to be executed are filtered according to
  * test path arguments $(LPAREN)`-p testpath` and `-s testpath`$(RPAREN) as parsed by
- * [GLib.Global.testInit]. See the [GLib.Global.testRun] documentation for more
+ * [glib.global.testInit]. See the [glib.global.testRun] documentation for more
  * information on the order that tests are run in.
- * [GLib.Global.testRunSuite] or [GLib.Global.testRun] may only be called once
+ * [glib.global.testRunSuite] or [glib.global.testRun] may only be called once
  * in a program.
  * Params:
  *   suite = a #GTestSuite
@@ -8087,12 +8087,12 @@ int testRunSuite(TestSuite suite)
  * Changes the behaviour of the various `g_assert_*$(LPAREN)$(RPAREN)` macros,
  * g_test_assert_expected_messages$(LPAREN)$(RPAREN) and the various
  * `g_test_trap_assert_*$(LPAREN)$(RPAREN)` macros to not abort to program, but instead
- * call [GLib.Global.testFail] and continue. $(LPAREN)This also changes the behavior of
- * [GLib.Global.testFail] so that it will not cause the test program to abort
+ * call [glib.global.testFail] and continue. $(LPAREN)This also changes the behavior of
+ * [glib.global.testFail] so that it will not cause the test program to abort
  * after completing the failed test.$(RPAREN)
  * Note that the g_assert_not_reached$(LPAREN)$(RPAREN) and g_assert$(LPAREN)$(RPAREN) macros are not
  * affected by this.
- * This function can only be called after [GLib.Global.testInit].
+ * This function can only be called after [glib.global.testInit].
  */
 void testSetNonfatalAssertions()
 {
@@ -8116,10 +8116,10 @@ void testSkip(string msg)
 }
 
 /**
- * Returns %TRUE $(LPAREN)after [GLib.Global.testInit] has been called$(RPAREN) if the test
- * program is running under [GLib.Global.testTrapSubprocess].
+ * Returns %TRUE $(LPAREN)after [glib.global.testInit] has been called$(RPAREN) if the test
+ * program is running under [glib.global.testTrapSubprocess].
  * Returns: %TRUE if the test program is running under
- *   [GLib.Global.testTrapSubprocess].
+ *   [glib.global.testTrapSubprocess].
  */
 bool testSubprocess()
 {
@@ -8158,7 +8158,7 @@ void testSummary(string summary)
 
 /**
  * Get the number of seconds since the last start of the timer with
- * [GLib.Global.testTimerStart].
+ * [glib.global.testTimerStart].
  * Returns: the time since the last start of the timer in seconds, as a double
  */
 double testTimerElapsed()
@@ -8169,8 +8169,8 @@ double testTimerElapsed()
 }
 
 /**
- * Report the last result of [GLib.Global.testTimerElapsed].
- * Returns: the last result of [GLib.Global.testTimerElapsed], as a double
+ * Report the last result of [glib.global.testTimerElapsed].
+ * Returns: the last result of [glib.global.testTimerElapsed], as a double
  */
 double testTimerLast()
 {
@@ -8180,7 +8180,7 @@ double testTimerLast()
 }
 
 /**
- * Start a timing test. Call [GLib.Global.testTimerElapsed] when the task is supposed
+ * Start a timing test. Call [glib.global.testTimerElapsed] when the task is supposed
  * to be done. Call this function again to restart the timer.
  */
 void testTimerStart()
@@ -8230,7 +8230,7 @@ void testTrapAssertions(string domain, string file, int line, string func, ulong
  * Deprecated: This function is implemented only on Unix platforms,
  *   is not always reliable due to problems inherent in fork-without-exec
  *   and doesn't set close-on-exec flag on its file descriptors.
- *   Use [GLib.Global.testTrapSubprocess] instead.
+ *   Use [glib.global.testTrapSubprocess] instead.
  */
 bool testTrapFork(ulong usecTimeout, TestTrapFlags testTrapFlags)
 {
@@ -8240,7 +8240,7 @@ bool testTrapFork(ulong usecTimeout, TestTrapFlags testTrapFlags)
 }
 
 /**
- * Check the result of the last [GLib.Global.testTrapSubprocess] call.
+ * Check the result of the last [glib.global.testTrapSubprocess] call.
  * Returns: %TRUE if the last test subprocess terminated successfully.
  */
 bool testTrapHasPassed()
@@ -8251,7 +8251,7 @@ bool testTrapHasPassed()
 }
 
 /**
- * Check the result of the last [GLib.Global.testTrapSubprocess] call.
+ * Check the result of the last [glib.global.testTrapSubprocess] call.
  * Returns: %TRUE if the last test subprocess got killed due to a timeout.
  */
 bool testTrapReachedTimeout()
@@ -8263,7 +8263,7 @@ bool testTrapReachedTimeout()
 
 /**
  * Respawns the test program to run only test_path in a subprocess.
- * This is equivalent to calling [GLib.Global.testTrapSubprocessWithEnvp] with `envp`
+ * This is equivalent to calling [glib.global.testTrapSubprocessWithEnvp] with `envp`
  * set to %NULL. See the documentation for that function for full details.
  * Params:
  *   testPath = Test to run in a subprocess
@@ -8282,7 +8282,7 @@ void testTrapSubprocess(string testPath, ulong usecTimeout, TestSubprocessFlags 
  * This can be used for a test case that might not return, or that
  * might abort.
  * If test_path is %NULL then the same test is re-run in a subprocess.
- * You can use [GLib.Global.testSubprocess] to determine whether the test is in
+ * You can use [glib.global.testSubprocess] to determine whether the test is in
  * a subprocess or not.
  * test_path can also be the name of the parent test, followed by
  * "`/subprocess/`" and then a name for the specific subtest $(LPAREN)or just
@@ -8301,10 +8301,10 @@ void testTrapSubprocess(string testPath, ulong usecTimeout, TestSubprocessFlags 
  * cannot be used if test_flags specifies that the child should
  * inherit the parent stdout/stderr.$(RPAREN)
  * If your `main $(LPAREN)$(RPAREN)` needs to behave differently in
- * the subprocess, you can call [GLib.Global.testSubprocess] $(LPAREN)after calling
- * [GLib.Global.testInit]$(RPAREN) to see whether you are in a subprocess.
+ * the subprocess, you can call [glib.global.testSubprocess] $(LPAREN)after calling
+ * [glib.global.testInit]$(RPAREN) to see whether you are in a subprocess.
  * Internally, this function tracks the child process using
- * [GLib.Global.childWatchSourceNew], so your process must not ignore `SIGCHLD`, and
+ * [glib.global.childWatchSourceNew], so your process must not ignore `SIGCHLD`, and
  * must not attempt to watch or wait for the child process via another
  * mechanism.
  * The following example tests that calling
@@ -8384,13 +8384,13 @@ void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeou
  * $(LPAREN)it does not try to 'catch up' time lost in delays$(RPAREN).
  * See [memory management of sources][mainloop-memory-management] for details
  * on how to handle the return value and memory management of data.
- * This internally creates a main loop source using [GLib.Global.timeoutSourceNew]
- * and attaches it to the global #GMainContext using [GLib.Source.attach], so
+ * This internally creates a main loop source using [glib.global.timeoutSourceNew]
+ * and attaches it to the global #GMainContext using [glib.source.Source.attach], so
  * the callback will be invoked in whichever thread is running that main
  * context. You can do these steps manually if you need greater control or to
  * use a custom main context.
  * The interval given is in terms of monotonic time, not wall clock time.
- * See [GLib.Global.getMonotonicTime].
+ * See [glib.global.getMonotonicTime].
  * Params:
  *   priority = the priority of the timeout source. Typically this will be in
  *     the range between %G_PRIORITY_DEFAULT and %G_PRIORITY_HIGH.
@@ -8422,7 +8422,7 @@ uint timeoutAdd(int priority, uint interval, SourceFunc function_)
  * The function is called repeatedly until it returns %G_SOURCE_REMOVE
  * or %FALSE, at which point the timeout is automatically destroyed and
  * the function will not be called again.
- * Unlike [GLib.Global.timeoutAdd], this function operates at whole second granularity.
+ * Unlike [glib.global.timeoutAdd], this function operates at whole second granularity.
  * The initial starting point of the timer is determined by the implementation
  * and the implementation is expected to group multiple timers together so that
  * they fire all at the same time. To allow this grouping, the interval to the
@@ -8435,19 +8435,19 @@ uint timeoutAdd(int priority, uint interval, SourceFunc function_)
  * timeout is recalculated based on the current time and the given interval
  * See [memory management of sources][mainloop-memory-management] for details
  * on how to handle the return value and memory management of data.
- * If you want timing more precise than whole seconds, use [GLib.Global.timeoutAdd]
+ * If you want timing more precise than whole seconds, use [glib.global.timeoutAdd]
  * instead.
  * The grouping of timers to fire at the same time results in a more power
  * and CPU efficient behavior so if your timer is in multiples of seconds
  * and you don't require the first timer exactly one second from now, the
- * use of [GLib.Global.timeoutAddSeconds] is preferred over [GLib.Global.timeoutAdd].
+ * use of [glib.global.timeoutAddSeconds] is preferred over [glib.global.timeoutAdd].
  * This internally creates a main loop source using
- * [GLib.Global.timeoutSourceNewSeconds] and attaches it to the main loop context
- * using [GLib.Source.attach]. You can do these steps manually if you need
+ * [glib.global.timeoutSourceNewSeconds] and attaches it to the main loop context
+ * using [glib.source.Source.attach]. You can do these steps manually if you need
  * greater control.
  * It is safe to call this function from any thread.
  * The interval given is in terms of monotonic time, not wall clock
- * time.  See [GLib.Global.getMonotonicTime].
+ * time.  See [glib.global.getMonotonicTime].
  * Params:
  *   priority = the priority of the timeout source. Typically this will be in
  *     the range between %G_PRIORITY_DEFAULT and %G_PRIORITY_HIGH.
@@ -8476,10 +8476,10 @@ uint timeoutAddSeconds(int priority, uint interval, SourceFunc function_)
 /**
  * Creates a new timeout source.
  * The source will not initially be associated with any #GMainContext
- * and must be added to one with [GLib.Source.attach] before it will be
+ * and must be added to one with [glib.source.Source.attach] before it will be
  * executed.
  * The interval given is in terms of monotonic time, not wall clock
- * time.  See [GLib.Global.getMonotonicTime].
+ * time.  See [glib.global.getMonotonicTime].
  * Params:
  *   interval = the timeout interval in milliseconds.
  * Returns: the newly-created timeout source
@@ -8495,12 +8495,12 @@ Source timeoutSourceNew(uint interval)
 /**
  * Creates a new timeout source.
  * The source will not initially be associated with any #GMainContext
- * and must be added to one with [GLib.Source.attach] before it will be
+ * and must be added to one with [glib.source.Source.attach] before it will be
  * executed.
  * The scheduling granularity/accuracy of this timeout source will be
  * in seconds.
  * The interval given is in terms of monotonic time, not wall clock time.
- * See [GLib.Global.getMonotonicTime].
+ * See [glib.global.getMonotonicTime].
  * Params:
  *   interval = the timeout interval in seconds
  * Returns: the newly-created timeout source
@@ -8515,7 +8515,7 @@ Source timeoutSourceNewSeconds(uint interval)
 
 /**
  * Attempts to allocate n_bytes, and returns %NULL on failure.
- * Contrast with [GLib.Global.gmalloc], which aborts the program on failure.
+ * Contrast with [glib.global.gmalloc], which aborts the program on failure.
  * Params:
  *   nBytes = number of bytes to allocate.
  * Returns: the allocated memory, or %NULL.
@@ -8528,7 +8528,7 @@ void* tryMalloc(size_t nBytes)
 
 /**
  * Attempts to allocate n_bytes, initialized to 0's, and returns %NULL on
- * failure. Contrast with [GLib.Global.malloc0], which aborts the program on failure.
+ * failure. Contrast with [glib.global.malloc0], which aborts the program on failure.
  * Params:
  *   nBytes = number of bytes to allocate
  * Returns: the allocated memory, or %NULL
@@ -8540,7 +8540,7 @@ void* tryMalloc0(size_t nBytes)
 }
 
 /**
- * This function is similar to [GLib.Global.tryMalloc0], allocating (n_blocks * n_block_bytes) bytes,
+ * This function is similar to [glib.global.tryMalloc0], allocating (n_blocks * n_block_bytes) bytes,
  * but care is taken to detect possible overflow during multiplication.
  * Params:
  *   nBlocks = the number of blocks to allocate
@@ -8554,7 +8554,7 @@ void* tryMalloc0N(size_t nBlocks, size_t nBlockBytes)
 }
 
 /**
- * This function is similar to [GLib.Global.tryMalloc], allocating (n_blocks * n_block_bytes) bytes,
+ * This function is similar to [glib.global.tryMalloc], allocating (n_blocks * n_block_bytes) bytes,
  * but care is taken to detect possible overflow during multiplication.
  * Params:
  *   nBlocks = the number of blocks to allocate
@@ -8569,9 +8569,9 @@ void* tryMallocN(size_t nBlocks, size_t nBlockBytes)
 
 /**
  * Attempts to realloc mem to a new size, n_bytes, and returns %NULL
- * on failure. Contrast with [GLib.Global.realloc], which aborts the program
+ * on failure. Contrast with [glib.global.realloc], which aborts the program
  * on failure.
- * If mem is %NULL, behaves the same as [GLib.Global.tryMalloc].
+ * If mem is %NULL, behaves the same as [glib.global.tryMalloc].
  * Params:
  *   mem = previously-allocated memory, or %NULL.
  *   nBytes = number of bytes to allocate.
@@ -8584,7 +8584,7 @@ void* tryRealloc(void* mem, size_t nBytes)
 }
 
 /**
- * This function is similar to [GLib.Global.tryRealloc], allocating (n_blocks * n_block_bytes) bytes,
+ * This function is similar to [glib.global.tryRealloc], allocating (n_blocks * n_block_bytes) bytes,
  * but care is taken to detect possible overflow during multiplication.
  * Params:
  *   mem = previously-allocated memory, or %NULL.
@@ -8610,7 +8610,7 @@ void* tryReallocN(void* mem, size_t nBlocks, size_t nBlockBytes)
  *     of #gunichar2  written, or %NULL. The value stored here does not include
  *     the trailing 0.
  * Returns: a pointer to a newly allocated UTF-16 string.
- *   This value must be freed with [GLib.Global.gfree]. If an error occurs,
+ *   This value must be freed with [glib.global.gfree]. If an error occurs,
  *   %NULL will be returned and error set.
  */
 ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
@@ -8648,7 +8648,7 @@ ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
  *     of bytes written or %NULL. The value here stored does not include the
  *     trailing 0 byte.
  * Returns: a pointer to a newly allocated UTF-8 string.
- *   This value must be freed with [GLib.Global.gfree]. If an error occurs,
+ *   This value must be freed with [glib.global.gfree]. If an error occurs,
  *   %NULL will be returned and error set. In that case, items_read
  *   will be set to the position of the first invalid input character.
  */
@@ -8671,10 +8671,10 @@ string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
 /**
  * Determines the break type of c. c should be a Unicode character
  * $(LPAREN)to derive a character from UTF-8 encoded text, use
- * [GLib.Global.utf8GetChar]$(RPAREN). The break type is used to find word and line
+ * [glib.global.utf8GetChar]$(RPAREN). The break type is used to find word and line
  * breaks $(LPAREN)"text boundaries"$(RPAREN), Pango implements the Unicode boundary
  * resolution algorithms and normally you would use a function such
- * as [Pango.Global.break_] instead of caring about break types yourself.
+ * as [pango.global.break_] instead of caring about break types yourself.
  * Params:
  *   c = a Unicode character
  * Returns: the break type of c
@@ -8704,7 +8704,7 @@ int unicharCombiningClass(dchar uc)
  * Performs a single composition step of the
  * Unicode canonical composition algorithm.
  * This function includes algorithmic Hangul Jamo composition,
- * but it is not exactly the inverse of [GLib.Global.unicharDecompose].
+ * but it is not exactly the inverse of [glib.global.unicharDecompose].
  * No composition can have either of a or b equal to zero.
  * To be precise, this function composes if and only if
  * there exists a Primary Composite P which is canonically
@@ -8743,7 +8743,7 @@ bool unicharCompose(dchar a, dchar b, out dchar ch)
  * further, but a may itself decompose.  To get the full
  * canonical decomposition for ch, one would need to
  * recursively call this function on a.  Or use
- * [GLib.Global.unicharFullyDecompose].
+ * [glib.global.unicharFullyDecompose].
  * See
  * [UAX#15](http://unicode.org/reports/tr15/)
  * for details.
@@ -8766,7 +8766,7 @@ bool unicharDecompose(dchar ch, out dchar a, out dchar b)
  * Params:
  *   c = a Unicode character
  * Returns: If c is a decimal digit $(LPAREN)according to
- *   [GLib.Global.unicharIsdigit]$(RPAREN), its numeric value. Otherwise, -1.
+ *   [glib.global.unicharIsdigit]$(RPAREN), its numeric value. Otherwise, -1.
  */
 int unicharDigitValue(dchar c)
 {
@@ -8833,7 +8833,7 @@ bool unicharGetMirrorChar(dchar ch, out dchar mirroredCh)
  * by Unicode Standard Annex \#24$(RPAREN). No check is made for ch being a
  * valid Unicode character; if you pass in invalid character, the
  * result is undefined.
- * This function is equivalent to [Pango.Global.scriptForUnichar] and the
+ * This function is equivalent to [pango.global.scriptForUnichar] and the
  * two are interchangeable.
  * Params:
  *   ch = a Unicode character
@@ -8850,7 +8850,7 @@ UnicodeScript unicharGetScript(dchar ch)
 /**
  * Determines whether a character is alphanumeric.
  * Given some UTF-8 text, obtain a character value
- * with [GLib.Global.utf8GetChar].
+ * with [glib.global.utf8GetChar].
  * Params:
  *   c = a Unicode character
  * Returns: %TRUE if c is an alphanumeric character
@@ -8865,7 +8865,7 @@ bool unicharIsalnum(dchar c)
 /**
  * Determines whether a character is alphabetic $(LPAREN)i.e. a letter$(RPAREN).
  * Given some UTF-8 text, obtain a character value with
- * [GLib.Global.utf8GetChar].
+ * [glib.global.utf8GetChar].
  * Params:
  *   c = a Unicode character
  * Returns: %TRUE if c is an alphabetic character
@@ -8880,7 +8880,7 @@ bool unicharIsalpha(dchar c)
 /**
  * Determines whether a character is a control character.
  * Given some UTF-8 text, obtain a character value with
- * [GLib.Global.utf8GetChar].
+ * [glib.global.utf8GetChar].
  * Params:
  *   c = a Unicode character
  * Returns: %TRUE if c is a control character
@@ -8909,7 +8909,7 @@ bool unicharIsdefined(dchar c)
 /**
  * Determines whether a character is numeric $(LPAREN)i.e. a digit$(RPAREN).  This
  * covers ASCII 0-9 and also digits in other languages/scripts.  Given
- * some UTF-8 text, obtain a character value with [GLib.Global.utf8GetChar].
+ * some UTF-8 text, obtain a character value with [glib.global.utf8GetChar].
  * Params:
  *   c = a Unicode character
  * Returns: %TRUE if c is a digit
@@ -8924,9 +8924,9 @@ bool unicharIsdigit(dchar c)
 /**
  * Determines whether a character is printable and not a space
  * $(LPAREN)returns %FALSE for control characters, format characters, and
- * spaces$(RPAREN). [GLib.Global.unicharIsprint] is similar, but returns %TRUE for
+ * spaces$(RPAREN). [glib.global.unicharIsprint] is similar, but returns %TRUE for
  * spaces. Given some UTF-8 text, obtain a character value with
- * [GLib.Global.utf8GetChar].
+ * [glib.global.utf8GetChar].
  * Params:
  *   c = a Unicode character
  * Returns: %TRUE if c is printable unless it's a space
@@ -8941,7 +8941,7 @@ bool unicharIsgraph(dchar c)
 /**
  * Determines whether a character is a lowercase letter.
  * Given some UTF-8 text, obtain a character value with
- * [GLib.Global.utf8GetChar].
+ * [glib.global.utf8GetChar].
  * Params:
  *   c = a Unicode character
  * Returns: %TRUE if c is a lowercase letter
@@ -8957,7 +8957,7 @@ bool unicharIslower(dchar c)
  * Determines whether a character is a mark $(LPAREN)non-spacing mark,
  * combining mark, or enclosing mark in Unicode speak$(RPAREN).
  * Given some UTF-8 text, obtain a character value
- * with [GLib.Global.utf8GetChar].
+ * with [glib.global.utf8GetChar].
  * Note: in most cases where isalpha characters are allowed,
  * ismark characters should be allowed to as they are essential
  * for writing most European languages as well as many non-Latin
@@ -8975,9 +8975,9 @@ bool unicharIsmark(dchar c)
 
 /**
  * Determines whether a character is printable.
- * Unlike [GLib.Global.unicharIsgraph], returns %TRUE for spaces.
+ * Unlike [glib.global.unicharIsgraph], returns %TRUE for spaces.
  * Given some UTF-8 text, obtain a character value with
- * [GLib.Global.utf8GetChar].
+ * [glib.global.utf8GetChar].
  * Params:
  *   c = a Unicode character
  * Returns: %TRUE if c is printable
@@ -8992,7 +8992,7 @@ bool unicharIsprint(dchar c)
 /**
  * Determines whether a character is punctuation or a symbol.
  * Given some UTF-8 text, obtain a character value with
- * [GLib.Global.utf8GetChar].
+ * [glib.global.utf8GetChar].
  * Params:
  *   c = a Unicode character
  * Returns: %TRUE if c is a punctuation or symbol character
@@ -9007,7 +9007,7 @@ bool unicharIspunct(dchar c)
 /**
  * Determines whether a character is a space, tab, or line separator
  * $(LPAREN)newline, carriage return, etc.$(RPAREN).  Given some UTF-8 text, obtain a
- * character value with [GLib.Global.utf8GetChar].
+ * character value with [glib.global.utf8GetChar].
  * $(LPAREN)Note: don't use this to do word breaking; you have to use
  * Pango or equivalent to get word breaking right, the algorithm
  * is fairly complex.$(RPAREN)
@@ -9070,13 +9070,13 @@ bool unicharIswide(dchar c)
 /**
  * Determines if a character is typically rendered in a double-width
  * cell under legacy East Asian locales.  If a character is wide according to
- * [GLib.Global.unicharIswide], then it is also reported wide with this function, but
+ * [glib.global.unicharIswide], then it is also reported wide with this function, but
  * the converse is not necessarily true. See the
  * [Unicode Standard Annex #11](http://www.unicode.org/reports/tr11/)
  * for details.
- * If a character passes the [GLib.Global.unicharIswide] test then it will also pass
+ * If a character passes the [glib.global.unicharIswide] test then it will also pass
  * this test, but not the other way around.  Note that some characters may
- * pass both this test and [GLib.Global.unicharIszerowidth].
+ * pass both this test and [glib.global.unicharIszerowidth].
  * Params:
  *   c = a Unicode character
  * Returns: %TRUE if the character is wide in legacy East Asian locales
@@ -9106,8 +9106,8 @@ bool unicharIsxdigit(dchar c)
  * The return value is %TRUE for all non-spacing and enclosing marks
  * $(LPAREN)e.g., combining accents$(RPAREN), format characters, zero-width
  * space, but not U+00AD SOFT HYPHEN.
- * A typical use of this function is with one of [GLib.Global.unicharIswide] or
- * [GLib.Global.unicharIswideCjk] to determine the number of cells a string occupies
+ * A typical use of this function is with one of [glib.global.unicharIswide] or
+ * [glib.global.unicharIswideCjk] to determine the number of cells a string occupies
  * when displayed on a grid display $(LPAREN)terminals$(RPAREN).  However, note that not all
  * terminals support zero-width rendering of zero-width marks.
  * Params:
@@ -9201,7 +9201,7 @@ bool unicharValidate(dchar ch)
  * Params:
  *   c = a Unicode character
  * Returns: If c is a hex digit $(LPAREN)according to
- *   [GLib.Global.unicharIsxdigit]$(RPAREN), its numeric value. Otherwise, -1.
+ *   [glib.global.unicharIsxdigit]$(RPAREN), its numeric value. Otherwise, -1.
  */
 int unicharXdigitValue(dchar c)
 {
@@ -9217,7 +9217,7 @@ int unicharXdigitValue(dchar c)
  * Returns: a newly allocated string of Unicode characters.
  *   result_len is set to the resulting length of the string.
 
- * Deprecated: Use the more flexible [GLib.Global.unicharFullyDecompose]
+ * Deprecated: Use the more flexible [glib.global.unicharFullyDecompose]
  *   instead.
  */
 dchar[] unicodeCanonicalDecomposition(dchar ch)
@@ -9262,7 +9262,7 @@ Quark unixErrorQuark()
 /**
  * Sets a function to be called when the IO condition, as specified by
  * condition becomes true for fd.
- * This is the same as [GLib.Global.unixFdAdd], except that it allows you to
+ * This is the same as [glib.global.unixFdAdd], except that it allows you to
  * specify a non-default priority and a provide a #GDestroyNotify for
  * user_data.
  * Params:
@@ -9312,8 +9312,8 @@ Source unixFdSourceNew(int fd, IOCondition condition)
 /**
  * Get the `passwd` file entry for the given user_name using `getpwnam_r$(LPAREN)$(RPAREN)`.
  * This can fail if the given user_name doesn’t exist.
- * The returned `struct passwd` has been allocated using [GLib.Global.gmalloc] and should
- * be freed using [GLib.Global.gfree]. The strings referenced by the returned struct are
+ * The returned `struct passwd` has been allocated using [glib.global.gmalloc] and should
+ * be freed using [glib.global.gfree]. The strings referenced by the returned struct are
  * included in the same allocation, so are valid until the `struct passwd` is
  * freed.
  * This function is safe to call from multiple threads concurrently.
@@ -9321,7 +9321,7 @@ Source unixFdSourceNew(int fd, IOCondition condition)
  * Params:
  *   userName = the username to get the passwd file entry for
  * Returns: passwd entry, or %NULL on error; free the returned
- *   value with [GLib.Global.gfree]
+ *   value with [glib.global.gfree]
  */
 void* unixGetPasswdEntry(string userName)
 {
@@ -9386,9 +9386,9 @@ bool unixSetFdNonblocking(int fd, bool nonblock)
 }
 
 /**
- * A convenience function for [GLib.Global.unixSignalSourceNew], which
+ * A convenience function for [glib.global.unixSignalSourceNew], which
  * attaches to the default #GMainContext.  You can remove the watch
- * using [GLib.Source.remove].
+ * using [glib.source.Source.remove].
  * Params:
  *   priority = the priority of the signal source. Typically this will be in
  *     the range between %G_PRIORITY_DEFAULT and %G_PRIORITY_HIGH.
@@ -9421,10 +9421,10 @@ uint unixSignalAdd(int priority, int signum, SourceFunc handler)
  * were added. In GLib 2.54, `SIGWINCH` was added.
  * Note that unlike the UNIX default, all sources which have created a
  * watch will be dispatched, regardless of which underlying thread
- * invoked [GLib.Global.unixSignalSourceNew].
+ * invoked [glib.global.unixSignalSourceNew].
  * For example, an effective use of this function is to handle `SIGTERM`
  * cleanly; flushing any outstanding files, and then calling
- * [GLib.MainLoop.quit].  It is not safe to do any of this from a regular
+ * [glib.main_loop.MainLoop.quit].  It is not safe to do any of this from a regular
  * UNIX signal handler; such a handler may be invoked while malloc$(LPAREN)$(RPAREN) or
  * another library function is running, causing reentrancy issues if the
  * handler attempts to use those functions.  None of the GLib/GObject
@@ -9432,7 +9432,7 @@ uint unixSignalAdd(int priority, int signum, SourceFunc handler)
  * The interaction of this source when combined with native UNIX
  * functions like sigprocmask$(LPAREN)$(RPAREN) is not defined.
  * The source will not initially be associated with any #GMainContext
- * and must be added to one with [GLib.Source.attach] before it will be
+ * and must be added to one with [glib.source.Source.attach] before it will be
  * executed.
  * Params:
  *   signum = A signal number
@@ -9474,15 +9474,15 @@ int unlink(string filename)
  * memory used for the previous variables and its value isn't reclaimed.
  * You should be mindful of the fact that environment variable handling
  * in UNIX is not thread-safe, and your program may crash if one thread
- * calls [GLib.Global.unsetenv] while another thread is calling getenv(). $(LPAREN)And note
+ * calls [glib.global.unsetenv] while another thread is calling getenv(). $(LPAREN)And note
  * that many functions, such as gettext$(LPAREN)$(RPAREN), call getenv$(LPAREN)$(RPAREN) internally.$(RPAREN) This
  * function is only safe to use at the very start of your program, before
  * creating any other threads $(LPAREN)or creating objects that create worker
  * threads of their own$(RPAREN).
  * If you need to set up the environment for a child process, you can
- * use [GLib.Global.getEnviron] to get an environment array, modify that with
- * [GLib.Global.environSetenv] and [GLib.Global.environUnsetenv], and then pass that
- * array directly to execvpe$(LPAREN)$(RPAREN), [GLib.Global.spawnAsync], or the like.
+ * use [glib.global.getEnviron] to get an environment array, modify that with
+ * [glib.global.environSetenv] and [glib.global.environUnsetenv], and then pass that
+ * array directly to execvpe$(LPAREN)$(RPAREN), [glib.global.spawnAsync], or the like.
  * Params:
  *   variable = the environment variable to remove, must
  *     not contain '\='
@@ -9496,7 +9496,7 @@ void unsetenv(string variable)
 /**
  * Pauses the current thread for the given number of microseconds.
  * There are 1 million microseconds per second $(LPAREN)represented by the
- * %G_USEC_PER_SEC macro$(RPAREN). [GLib.Global.usleep] may have limited precision,
+ * %G_USEC_PER_SEC macro$(RPAREN). [glib.global.usleep] may have limited precision,
  * depending on hardware and operating system; don't rely on the exact
  * length of the sleep.
  * Params:
@@ -9517,7 +9517,7 @@ void usleep(gulong microseconds)
  *     be returned in case str contains a trailing partial character. If
  *     an error occurs then the index of the invalid input is stored here.
  * Returns: a pointer to a newly allocated UCS-4 string.
- *   This value must be freed with [GLib.Global.gfree]. If an error occurs,
+ *   This value must be freed with [glib.global.gfree]. If an error occurs,
  *   %NULL will be returned and error set.
  */
 dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
@@ -9547,7 +9547,7 @@ dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
  * terminated with a 0 byte.
  * Note that the input is expected to be already in native endianness,
  * an initial byte-order-mark character is not handled specially.
- * [GLib.Global.convert] can be used to convert a byte buffer of UTF-16 data of
+ * [glib.global.convert] can be used to convert a byte buffer of UTF-16 data of
  * ambiguous endianness.
  * Further note that this function does not validate the result
  * string; it may e.g. include embedded NUL characters. The only
@@ -9565,7 +9565,7 @@ dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
  *     of bytes written, or %NULL. The value stored here does not include the
  *     trailing 0 byte. It’s guaranteed to be non-negative.
  * Returns: a pointer to a newly allocated UTF-8 string.
- *   This value must be freed with [GLib.Global.gfree]. If an error occurs,
+ *   This value must be freed with [glib.global.gfree]. If an error occurs,
  *   %NULL will be returned and error set.
  */
 string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
@@ -9588,8 +9588,8 @@ string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
  * Converts a string into a form that is independent of case. The
  * result will not correspond to any particular case, but can be
  * compared for equality or ordered with the results of calling
- * [GLib.Global.utf8Casefold] on other strings.
- * Note that calling [GLib.Global.utf8Casefold] followed by [GLib.Global.utf8Collate] is
+ * [glib.global.utf8Casefold] on other strings.
+ * Note that calling [glib.global.utf8Casefold] followed by [glib.global.utf8Collate] is
  * only an approximation to the correct linguistic case insensitive
  * ordering, though it is a fairly good one. Getting this exactly
  * right would require a more sophisticated collation function that
@@ -9614,7 +9614,7 @@ string utf8Casefold(string str, ptrdiff_t len)
  * Compares two strings for ordering using the linguistically
  * correct rules for the [current locale][setlocale].
  * When sorting a large number of strings, it will be significantly
- * faster to obtain collation keys with [GLib.Global.utf8CollateKey] and
+ * faster to obtain collation keys with [glib.global.utf8CollateKey] and
  * compare the keys with strcmp$(LPAREN)$(RPAREN) when sorting instead of sorting
  * the original strings.
  * If the two strings are not comparable due to being in different collation
@@ -9641,13 +9641,13 @@ int utf8Collate(string str1, string str2)
  * strcmp$(LPAREN)$(RPAREN).
  * The results of comparing the collation keys of two strings
  * with strcmp$(LPAREN)$(RPAREN) will always be the same as comparing the two
- * original keys with [GLib.Global.utf8Collate].
+ * original keys with [glib.global.utf8Collate].
  * Note that this function depends on the [current locale][setlocale].
  * Params:
  *   str = a UTF-8 encoded string.
  *   len = length of str, in bytes, or -1 if str is nul-terminated.
  * Returns: a newly allocated string. This string should
- *   be freed with [GLib.Global.gfree] when you are done with it.
+ *   be freed with [glib.global.gfree] when you are done with it.
  */
 string utf8CollateKey(string str, ptrdiff_t len)
 {
@@ -9672,7 +9672,7 @@ string utf8CollateKey(string str, ptrdiff_t len)
  *   str = a UTF-8 encoded string.
  *   len = length of str, in bytes, or -1 if str is nul-terminated.
  * Returns: a newly allocated string. This string should
- *   be freed with [GLib.Global.gfree] when you are done with it.
+ *   be freed with [glib.global.gfree] when you are done with it.
  */
 string utf8CollateKeyForFilename(string str, ptrdiff_t len)
 {
@@ -9735,7 +9735,7 @@ string utf8FindPrevChar(string str, string p)
  * Converts a sequence of bytes encoded as UTF-8 to a Unicode character.
  * If p does not point to a valid UTF-8 encoded character, results
  * are undefined. If you are not sure that the bytes are complete
- * valid Unicode characters, you should use [GLib.Global.utf8GetCharValidated]
+ * valid Unicode characters, you should use [glib.global.utf8GetCharValidated]
  * instead.
  * Params:
  *   p = a pointer to Unicode character encoded as UTF-8
@@ -9754,7 +9754,7 @@ dchar utf8GetChar(string p)
  * This function checks for incomplete characters, for invalid characters
  * such as characters that are out of the range of Unicode, and for
  * overlong encodings of valid characters.
- * Note that [GLib.Global.utf8GetCharValidated] returns (gunichar)-2 if
+ * Note that [glib.global.utf8GetCharValidated] returns (gunichar)-2 if
  * max_len is positive and any of the bytes in the first UTF-8 character
  * sequence are nul.
  * Params:
@@ -9804,7 +9804,7 @@ string utf8MakeValid(string str, ptrdiff_t len)
  * is represented as a base character and combining
  * accent or as a single precomposed character. The
  * string has to be valid UTF-8, otherwise %NULL is
- * returned. You should generally call [GLib.Global.utf8Normalize]
+ * returned. You should generally call [glib.global.utf8Normalize]
  * before comparing two Unicode strings.
  * The normalization mode %G_NORMALIZE_DEFAULT only
  * standardizes differences that do not affect the
@@ -9848,7 +9848,7 @@ string utf8Normalize(string str, ptrdiff_t len, NormalizeMode mode)
  * since moving forward is about 3 times faster than moving backward.
  * Note that this function doesn't abort when reaching the end of str.
  * Therefore you should be sure that offset is within string boundaries
- * before calling that function. Call [GLib.Global.utf8Strlen] when unsure.
+ * before calling that function. Call [glib.global.utf8Strlen] when unsure.
  * This limitation exists as this function is called frequently during
  * text rendering and therefore has to be as fast as possible.
  * Params:
@@ -9889,7 +9889,7 @@ glong utf8PointerToOffset(string str, string pos)
  * p does not have to be at the beginning of a UTF-8 character. No check
  * is made to see if the character found is actually valid other than
  * it starts with an appropriate byte. If p might be the first
- * character of the string, you must use [GLib.Global.utf8FindPrevChar] instead.
+ * character of the string, you must use [glib.global.utf8FindPrevChar] instead.
  * Params:
  *   p = a pointer to a position within a UTF-8 encoded string
  * Returns: a pointer to the found character
@@ -9968,7 +9968,7 @@ glong utf8Strlen(string p, ptrdiff_t max)
 /**
  * Like the standard C strncpy$(LPAREN)$(RPAREN) function, but copies a given number
  * of characters instead of a given number of bytes. The src string
- * must be valid UTF-8 encoded text. $(LPAREN)Use [GLib.Global.utf8Validate] on all
+ * must be valid UTF-8 encoded text. $(LPAREN)Use [glib.global.utf8Validate] on all
  * text before trying to use UTF-8 utility functions with it.$(RPAREN)
  * Note you must ensure dest is at least 4 * n + 1 to fit the
  * largest possible UTF-8 characters
@@ -10011,15 +10011,15 @@ string utf8Strrchr(string p, ptrdiff_t len, dchar c)
 
 /**
  * Reverses a UTF-8 string. str must be valid UTF-8 encoded text.
- * $(LPAREN)Use [GLib.Global.utf8Validate] on all text before trying to use UTF-8
+ * $(LPAREN)Use [glib.global.utf8Validate] on all text before trying to use UTF-8
  * utility functions with it.$(RPAREN)
  * This function is intended for programmatic uses of reversed strings.
  * It pays no attention to decomposed characters, combining marks, byte
  * order marks, directional indicators $(LPAREN)LRM, LRO, etc$(RPAREN) and similar
  * characters which might need special handling when reversing a string
  * for display purposes.
- * Note that unlike [GLib.Global.strreverse], this function returns
- * newly-allocated memory, which should be freed with [GLib.Global.gfree] when
+ * Note that unlike [glib.global.strreverse], this function returns
+ * newly-allocated memory, which should be freed with [glib.global.gfree] when
  * no longer needed.
  * Params:
  *   str = a UTF-8 encoded string
@@ -10068,7 +10068,7 @@ string utf8Strup(string str, ptrdiff_t len)
  *   endPos = another character offset within str,
  *     or `-1` to indicate the end of the string
  * Returns: a newly allocated copy of the requested
- *   substring. Free with [GLib.Global.gfree] when no longer needed.
+ *   substring. Free with [glib.global.gfree] when no longer needed.
  */
 string utf8Substring(string str, glong startPos, glong endPos)
 {
@@ -10094,7 +10094,7 @@ string utf8Substring(string str, glong startPos, glong endPos)
  *     character. If an error occurs then the index of the
  *     invalid input is stored here.
  * Returns: a pointer to a newly allocated UCS-4 string.
- *   This value must be freed with [GLib.Global.gfree]. If an error occurs,
+ *   This value must be freed with [glib.global.gfree]. If an error occurs,
  *   %NULL will be returned and error set.
  */
 dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
@@ -10118,13 +10118,13 @@ dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
 /**
  * Convert a string from UTF-8 to a 32-bit fixed width
  * representation as UCS-4, assuming valid UTF-8 input.
- * This function is roughly twice as fast as [GLib.Global.utf8ToUcs4]
+ * This function is roughly twice as fast as [glib.global.utf8ToUcs4]
  * but does no error checking on the input. A trailing 0 character
  * will be added to the string after the converted text.
  * Params:
  *   str = a UTF-8 encoded string
  * Returns: a pointer to a newly allocated UCS-4 string.
- *   This value must be freed with [GLib.Global.gfree].
+ *   This value must be freed with [glib.global.gfree].
  */
 dchar[] utf8ToUcs4Fast(string str)
 {
@@ -10157,7 +10157,7 @@ dchar[] utf8ToUcs4Fast(string str)
  *     be returned in case str contains a trailing partial character. If
  *     an error occurs then the index of the invalid input is stored here.
  * Returns: a pointer to a newly allocated UTF-16 string.
- *   This value must be freed with [GLib.Global.gfree]. If an error occurs,
+ *   This value must be freed with [glib.global.gfree]. If an error occurs,
  *   %NULL will be returned and error set.
  */
 ushort[] utf8ToUtf16(string str, glong len, out glong itemsRead)
@@ -10205,11 +10205,11 @@ string utf8TruncateMiddle(string string_, size_t truncateLength)
  * will be stored there $(LPAREN)i.e. the start of the first invalid
  * character if some bytes were invalid, or the end of the text
  * being validated otherwise$(RPAREN).
- * Note that [GLib.Global.utf8Validate] returns %FALSE if max_len is
+ * Note that [glib.global.utf8Validate] returns %FALSE if max_len is
  * positive and any of the max_len bytes are nul.
  * Returns %TRUE if all of str was valid. Many GLib and GTK
  * routines require valid UTF-8 as input; so data read from a file
- * or the network should be checked with [GLib.Global.utf8Validate] before
+ * or the network should be checked with [glib.global.utf8Validate] before
  * doing anything else with it.
  * Params:
  *   str = a pointer to character data
@@ -10232,7 +10232,7 @@ bool utf8Validate(ubyte[] str, out string end)
 
 /**
  * Validates UTF-8 encoded text.
- * As with [GLib.Global.utf8Validate], but max_len must be set, and hence this function
+ * As with [glib.global.utf8Validate], but max_len must be set, and hence this function
  * will always return %FALSE if any of the bytes of str are nul.
  * Params:
  *   str = a pointer to character data
@@ -10275,7 +10275,7 @@ bool uuidStringIsValid(string str)
  * Generates a random UUID $(LPAREN)RFC 4122 version 4$(RPAREN) as a string. It has the same
  * randomness guarantees as #GRand, so must not be used for cryptographic
  * purposes such as key generation, nonces, salts or one-time pads.
- * Returns: A string that should be freed with [GLib.Global.gfree].
+ * Returns: A string that should be freed with [glib.global.gfree].
  */
 string uuidStringRandom()
 {

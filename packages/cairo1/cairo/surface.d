@@ -6,28 +6,28 @@ import cairo.device;
 import cairo.font_options;
 import cairo.rectangle_int;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
  * A #cairo_surface_t represents an image, either as the destination
  * of a drawing operation or as source when drawing onto another
  * surface.  To draw to a #cairo_surface_t, create a cairo context
- * with the surface as the target, using [cairo.Global.create].
+ * with the surface as the target, using [cairo.global.create].
  * There are different subtypes of #cairo_surface_t for
- * different drawing backends; for example, [cairo.Global.imageSurfaceCreate]
+ * different drawing backends; for example, [cairo.global.imageSurfaceCreate]
  * creates a bitmap image in memory.
- * The type of a surface can be queried with [cairo.Surface.getSurfaceType].
+ * The type of a surface can be queried with [cairo.surface.Surface.getSurfaceType].
  * The initial contents of a surface after creation depend upon the manner
  * of its creation. If cairo creates the surface and backing storage for
  * the user, it will be initially cleared; for example,
- * [cairo.Global.imageSurfaceCreate] and [cairo.Surface.createSimilar].
+ * [cairo.global.imageSurfaceCreate] and [cairo.surface.Surface.createSimilar].
  * Alternatively, if the user passes in a reference to some backing storage
  * and asks cairo to wrap that in a #cairo_surface_t, then the contents are
- * not modified; for example, [cairo.Global.imageSurfaceCreateForData] and
+ * not modified; for example, [cairo.global.imageSurfaceCreateForData] and
  * cairo_xlib_surface_create$(LPAREN)$(RPAREN).
  * Memory management of #cairo_surface_t is done with
- * [cairo.Surface.reference] and [cairo.Surface.destroy].
+ * [cairo.surface.Surface.reference] and [cairo.surface.Surface.destroy].
  */
 class Surface : Boxed
 {
@@ -56,10 +56,10 @@ class Surface : Boxed
   /**
    * Emits the current page for backends that support multiple pages,
    * but doesn't clear it, so that the contents of the current page will
-   * be retained for the next page.  Use [cairo.Surface.showPage] if you
+   * be retained for the next page.  Use [cairo.surface.Surface.showPage] if you
    * want to get an empty page after the emission.
    * There is a convenience function for this that takes a #cairo_t,
-   * namely [cairo.Context.copyPage].
+   * namely [cairo.context.Context.copyPage].
    */
   void copyPage()
   {
@@ -84,7 +84,7 @@ class Surface : Boxed
    *   width = width of the sub-surface $(LPAREN)in device-space units$(RPAREN)
    *   height = height of the sub-surface $(LPAREN)in device-space units$(RPAREN)
    * Returns: a pointer to the newly allocated surface. The caller
-   *   owns the surface and should call [cairo.Surface.destroy] when done
+   *   owns the surface and should call [cairo.surface.Surface.destroy] when done
    *   with it.
    *   This function always returns a valid pointer, but it will return a
    *   pointer to a "nil" surface if other is already in an error state
@@ -108,7 +108,7 @@ class Surface : Boxed
    * Params:
    *   mode = sets the mode of operation $(LPAREN)normal vs. record$(RPAREN)
    * Returns: a pointer to the newly allocated surface. The caller
-   *   owns the surface and should call [cairo.Surface.destroy] when done
+   *   owns the surface and should call [cairo.surface.Surface.destroy] when done
    *   with it.
    *   This function always returns a valid pointer, but it will return a
    *   pointer to a "nil" surface if other is already in an error state
@@ -129,17 +129,17 @@ class Surface : Boxed
    * other. Generally, the new surface will also use the same backend
    * as other, unless that is not possible for some reason. The type of
    * the returned surface may be examined with
-   * [cairo.Surface.getSurfaceType].
+   * [cairo.surface.Surface.getSurfaceType].
    * Initially the surface contents are all 0 $(LPAREN)transparent if contents
    * have transparency, black otherwise.$(RPAREN)
-   * Use [cairo.Surface.createSimilarImage] if you need an image surface
+   * Use [cairo.surface.Surface.createSimilarImage] if you need an image surface
    * which can be painted quickly to the target surface.
    * Params:
    *   content = the content for the new surface
    *   width = width of the new surface, $(LPAREN)in device-space units$(RPAREN)
    *   height = height of the new surface $(LPAREN)in device-space units$(RPAREN)
    * Returns: a pointer to the newly allocated surface. The caller
-   *   owns the surface and should call [cairo.Surface.destroy] when done
+   *   owns the surface and should call [cairo.surface.Surface.destroy] when done
    *   with it.
    *   This function always returns a valid pointer, but it will return a
    *   pointer to a "nil" surface if other is already in an error state
@@ -157,17 +157,17 @@ class Surface : Boxed
    * Create a new image surface that is as compatible as possible for uploading
    * to and the use in conjunction with an existing surface. However, this surface
    * can still be used like any normal image surface. Unlike
-   * [cairo.Surface.createSimilar] the new image surface won't inherit
+   * [cairo.surface.Surface.createSimilar] the new image surface won't inherit
    * the device scale from other.
    * Initially the surface contents are all 0 $(LPAREN)transparent if contents
    * have transparency, black otherwise.$(RPAREN)
-   * Use [cairo.Surface.createSimilar] if you don't need an image surface.
+   * Use [cairo.surface.Surface.createSimilar] if you don't need an image surface.
    * Params:
    *   format = the format for the new surface
    *   width = width of the new surface, $(LPAREN)in pixels$(RPAREN)
    *   height = height of the new surface $(LPAREN)in pixels$(RPAREN)
    * Returns: a pointer to the newly allocated image surface. The caller
-   *   owns the surface and should call [cairo.Surface.destroy] when done
+   *   owns the surface and should call [cairo.surface.Surface.destroy] when done
    *   with it.
    *   This function always returns a valid pointer, but it will return a
    *   pointer to a "nil" surface if other is already in an error state
@@ -185,14 +185,14 @@ class Surface : Boxed
    * This function finishes the surface and drops all references to
    * external resources.  For example, for the Xlib backend it means
    * that cairo will no longer access the drawable, which can be freed.
-   * After calling [cairo.Surface.finish] the only valid operations on a
+   * After calling [cairo.surface.Surface.finish] the only valid operations on a
    * surface are checking status, getting and setting user, referencing
    * and destroying, and flushing and finishing it.
    * Further drawing to the surface will not affect the
    * surface but will instead trigger a %CAIRO_STATUS_SURFACE_FINISHED
    * error.
-   * When the last call to [cairo.Surface.destroy] decreases the
-   * reference count to zero, cairo will call [cairo.Surface.finish] if
+   * When the last call to [cairo.surface.Surface.destroy] decreases the
+   * reference count to zero, cairo will call [cairo.surface.Surface.finish] if
    * it hasn't been called already, before freeing the resources
    * associated with the surface.
    */
@@ -244,7 +244,7 @@ class Surface : Boxed
 
   /**
    * This function returns the previous device offset set by
-   * [cairo.Surface.setDeviceOffset].
+   * [cairo.surface.Surface.setDeviceOffset].
    * Params:
    *   xOffset = the offset in the X direction, in device units
    *   yOffset = the offset in the Y direction, in device units
@@ -256,7 +256,7 @@ class Surface : Boxed
 
   /**
    * This function returns the previous device scale set by
-   * [cairo.Surface.setDeviceScale].
+   * [cairo.surface.Surface.setDeviceScale].
    * Params:
    *   xScale = the scale in the X direction, in device units
    *   yScale = the scale in the Y direction, in device units
@@ -268,7 +268,7 @@ class Surface : Boxed
 
   /**
    * This function returns the previous fallback resolution set by
-   * [cairo.Surface.setFallbackResolution], or default fallback
+   * [cairo.surface.Surface.setFallbackResolution], or default fallback
    * resolution if never set.
    * Params:
    *   xPixelsPerInch = horizontal pixels per inch
@@ -284,7 +284,7 @@ class Surface : Boxed
    * This allows display surfaces to report the correct subpixel order
    * for rendering on them, print surfaces to disable hinting of
    * metrics and so forth. The result can then be used with
-   * [cairo.Global.scaledFontCreate].
+   * [cairo.global.scaledFontCreate].
    * Params:
    *   options = a #cairo_font_options_t object into which to store
    *     the retrieved options. All existing values are overwritten
@@ -342,17 +342,17 @@ class Surface : Boxed
 
   /**
    * Returns whether the surface supports
-   * sophisticated [cairo.Context.showTextGlyphs] operations.  That is,
+   * sophisticated [cairo.context.Context.showTextGlyphs] operations.  That is,
    * whether it actually uses the provided text and cluster data
-   * to a [cairo.Context.showTextGlyphs] call.
+   * to a [cairo.context.Context.showTextGlyphs] call.
    * Note: Even if this function returns %FALSE, a
-   * [cairo.Context.showTextGlyphs] operation targeted at surface will
+   * [cairo.context.Context.showTextGlyphs] operation targeted at surface will
    * still succeed.  It just will
-   * act like a [cairo.Context.showGlyphs] operation.  Users can use this
+   * act like a [cairo.context.Context.showGlyphs] operation.  Users can use this
    * function to avoid computing UTF-8 text and cluster mapping if the
    * target surface does not use it.
    * Returns: %TRUE if surface supports
-   *   [cairo.Context.showTextGlyphs], %FALSE otherwise
+   *   [cairo.context.Context.showTextGlyphs], %FALSE otherwise
    */
   Bool hasShowTextGlyphs()
   {
@@ -367,15 +367,15 @@ class Surface : Boxed
    * may be limited to the extents or %NULL for the whole surface
    * Note, the use of the original surface as a target or source whilst
    * it is mapped is undefined. The result of mapping the surface
-   * multiple times is undefined. Calling [cairo.Surface.destroy] or
-   * [cairo.Surface.finish] on the resulting image surface results in
+   * multiple times is undefined. Calling [cairo.surface.Surface.destroy] or
+   * [cairo.surface.Surface.finish] on the resulting image surface results in
    * undefined behavior. Changing the device transform of the image
    * surface or of surface before the image surface is unmapped results
    * in undefined behavior.
    * Params:
    *   extents = limit the extraction to an rectangular region
    * Returns: a pointer to the newly allocated image surface. The caller
-   *   must use [cairo.Surface.unmapImage] to destroy this image surface.
+   *   must use [cairo.surface.Surface.unmapImage] to destroy this image surface.
    *   This function always returns a valid pointer, but it will return a
    *   pointer to a "nil" surface if other is already in an error state
    *   or any other error occurs. If the returned pointer does not have an
@@ -393,7 +393,7 @@ class Surface : Boxed
   /**
    * Tells cairo that drawing has been done to surface using means other
    * than cairo, and that cairo should reread any cached areas. Note
-   * that you must call [cairo.Surface.flush] before doing such drawing.
+   * that you must call [cairo.surface.Surface.flush] before doing such drawing.
    */
   void markDirty()
   {
@@ -401,7 +401,7 @@ class Surface : Boxed
   }
 
   /**
-   * Like [cairo.Surface.markDirty], but drawing has been done only to
+   * Like [cairo.surface.Surface.markDirty], but drawing has been done only to
    * the specified rectangle, so that cairo can retain cached contents
    * for other parts of the surface.
    * Any cached clip set on the surface will be reset by this function,
@@ -465,9 +465,9 @@ class Surface : Boxed
    * is when we want to create a #cairo_surface_t that redirects drawing
    * for a portion of an onscreen surface to an offscreen surface in a
    * way that is completely invisible to the user of the cairo
-   * API. Setting a transformation via [cairo.Context.translate] isn't
+   * API. Setting a transformation via [cairo.context.Context.translate] isn't
    * sufficient to do this, since functions like
-   * [cairo.Context.deviceToUser] will expose the hidden offset.
+   * [cairo.context.Context.deviceToUser] will expose the hidden offset.
    * Note that the offset affects drawing to the surface as well as
    * using the surface in a source pattern.
    * Params:
@@ -484,9 +484,9 @@ class Surface : Boxed
    * by the CTM when drawing to surface. One common use for this is to
    * render to very high resolution display devices at a scale factor, so
    * that code that assumes 1 pixel will be a certain size will still work.
-   * Setting a transformation via [cairo.Context.scale] isn't
+   * Setting a transformation via [cairo.context.Context.scale] isn't
    * sufficient to do this, since functions like
-   * [cairo.Context.deviceToUser] will expose the hidden scale.
+   * [cairo.context.Context.deviceToUser] will expose the hidden scale.
    * Note that the scale affects drawing to the surface as well as
    * using the surface in a source pattern.
    * Params:
@@ -513,7 +513,7 @@ class Surface : Boxed
    * device resolution. So this function has no effect on those
    * backends.
    * Note: The fallback resolution only takes effect at the time of
-   * completing a page $(LPAREN)with [cairo.Context.showPage] or [cairo.Context.copyPage]$(RPAREN) so
+   * completing a page $(LPAREN)with [cairo.context.Context.showPage] or [cairo.context.Context.copyPage]$(RPAREN) so
    * there is currently no way to have more than one fallback resolution
    * in effect on a single page.
    * The default fallback resolution is 300 pixels per inch in both
@@ -589,9 +589,9 @@ class Surface : Boxed
 
   /**
    * Emits and clears the current page for backends that support multiple
-   * pages.  Use [cairo.Surface.copyPage] if you don't want to clear the page.
+   * pages.  Use [cairo.surface.Surface.copyPage] if you don't want to clear the page.
    * There is a convenience function for this that takes a #cairo_t,
-   * namely [cairo.Context.showPage].
+   * namely [cairo.context.Context.showPage].
    */
   void showPage()
   {
@@ -630,10 +630,10 @@ class Surface : Boxed
   }
 
   /**
-   * Unmaps the image surface as returned from #[cairo.Surface.mapToImage].
+   * Unmaps the image surface as returned from #[cairo.surface.Surface.mapToImage].
    * The content of the image will be uploaded to the target surface.
    * Afterwards, the image is destroyed.
-   * Using an image surface which wasn't returned by [cairo.Surface.mapToImage]
+   * Using an image surface which wasn't returned by [cairo.surface.Surface.mapToImage]
    * results in undefined behavior.
    * Params:
    *   image = the currently mapped image

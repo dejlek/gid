@@ -1,6 +1,6 @@
 module gio.tls_password;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -94,7 +94,7 @@ class TlsPassword : ObjectG
   /**
    * Get a user readable translated warning. Usually this warning is a
    * representation of the password flags returned from
-   * [Gio.TlsPassword.getFlags].
+   * [gio.tls_password.TlsPassword.getFlags].
    * Returns: The warning.
    */
   string getWarning()
@@ -180,7 +180,7 @@ class TlsPassword : ObjectG
   /**
    * Set a user readable translated warning. Usually this warning is a
    * representation of the password flags returned from
-   * [Gio.TlsPassword.getFlags].
+   * [gio.tls_password.TlsPassword.getFlags].
    * Params:
    *   warning = The user readable warning
    */

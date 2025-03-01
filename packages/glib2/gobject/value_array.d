@@ -1,6 +1,6 @@
 module gobject.value_array;
 
-import gid.gid;
+import gid.global;
 import glib.types;
 import gobject.boxed;
 import gobject.c.functions;
@@ -17,8 +17,8 @@ import gobject.value;
  * `GValueArray` is deprecated in favour of `GArray` since GLib 2.32.
  * It is possible to create a `GArray` that behaves like a `GValueArray`
  * by using the size of `GValue` as the element size, and by setting
- * [GObject.Value.unset] as the clear function using
- * [GLib.Array.setClearFunc], for instance, the following code:
+ * [gobject.value.Value.unset] as the clear function using
+ * [glib.array.Array.setClearFunc], for instance, the following code:
  * ```c
  * GValueArray *array \= g_value_array_new $(LPAREN)10$(RPAREN);
  * ```
@@ -78,7 +78,7 @@ class ValueArray : Boxed
    *   nPrealloced = number of values to preallocate space for
    * Returns: a newly allocated #GValueArray with 0 values
 
-   * Deprecated: Use #GArray and [GLib.Array.sizedNew] instead.
+   * Deprecated: Use #GArray and [glib.array.Array.sizedNew] instead.
    */
   this(uint nPrealloced)
   {
@@ -109,7 +109,7 @@ class ValueArray : Boxed
    * contents.
    * Returns: Newly allocated copy of #GValueArray
 
-   * Deprecated: Use #GArray and [GLib.Array.ref_] instead.
+   * Deprecated: Use #GArray and [glib.array.Array.ref_] instead.
    */
   ValueArray copy()
   {
@@ -177,7 +177,7 @@ class ValueArray : Boxed
    *     value_array->n_values
    * Returns: the #GValueArray passed in as value_array
 
-   * Deprecated: Use #GArray and [GLib.Array.removeIndex] instead.
+   * Deprecated: Use #GArray and [glib.array.Array.removeIndex] instead.
    */
   ValueArray remove(uint index)
   {
@@ -196,7 +196,7 @@ class ValueArray : Boxed
    *   compareFunc = function to compare elements
    * Returns: the #GValueArray passed in as value_array
 
-   * Deprecated: Use #GArray and [GLib.Array.sortWithData].
+   * Deprecated: Use #GArray and [glib.array.Array.sortWithData].
    */
   ValueArray sort(CompareDataFunc compareFunc)
   {

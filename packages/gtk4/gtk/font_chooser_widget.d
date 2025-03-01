@@ -1,6 +1,6 @@
 module gtk.font_chooser_widget;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -19,11 +19,11 @@ import gtk.widget;
  * It is used in the `GtkFontChooserDialog` widget to provide a
  * dialog for selecting fonts.
  * To set the font which is initially selected, use
- * [Gtk.FontChooser.setFont] or [Gtk.FontChooser.setFontDesc].
- * To get the selected font use [Gtk.FontChooser.getFont] or
- * [Gtk.FontChooser.getFontDesc].
+ * [gtk.font_chooser.FontChooser.setFont] or [gtk.font_chooser.FontChooser.setFontDesc].
+ * To get the selected font use [gtk.font_chooser.FontChooser.getFont] or
+ * [gtk.font_chooser.FontChooser.getFontDesc].
  * To change the text which is shown in the preview area, use
- * [Gtk.FontChooser.setPreviewText].
+ * [gtk.font_chooser.FontChooser.setPreviewText].
  * # CSS nodes
  * `GtkFontChooserWidget` has a single CSS node with name fontchooser.
 

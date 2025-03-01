@@ -1,6 +1,6 @@
 module glib.path_buf;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -51,8 +51,8 @@ class PathBuf
   /**
    * Clears the contents of the path buffer.
    * This function should be use to free the resources in a stack-allocated
-   * `GPathBuf` initialized using [GLib.PathBuf.init_] or
-   * [GLib.PathBuf.initFromPath].
+   * `GPathBuf` initialized using [glib.path_buf.PathBuf.init_] or
+   * [glib.path_buf.PathBuf.initFromPath].
    */
   void clear()
   {
@@ -62,7 +62,7 @@ class PathBuf
   /**
    * Clears the contents of the path buffer and returns the built path.
    * This function returns `NULL` if the `GPathBuf` is empty.
-   * See also: [GLib.PathBuf.toPath]
+   * See also: [glib.path_buf.PathBuf.toPath]
    * Returns: the built path
    */
   string clearToPath()
@@ -74,10 +74,10 @@ class PathBuf
   }
 
   /**
-   * Frees a `GPathBuf` allocated by [GLib.PathBuf.new_], and
+   * Frees a `GPathBuf` allocated by [glib.path_buf.PathBuf.new_], and
    * returns the path inside the buffer.
    * This function returns `NULL` if the `GPathBuf` is empty.
-   * See also: [GLib.PathBuf.toPath]
+   * See also: [glib.path_buf.PathBuf.toPath]
    * Returns: the path
    */
   string freeToPath()
@@ -249,7 +249,7 @@ class PathBuf
    * The path inside the paths buffers are not going to be normalized,
    * so `X/Y/Z/A/..`, `X/./Y/Z` and `X/Y/Z` are not going to be considered
    * equal.
-   * This function can be passed to [GLib.HashTable.new_] as the
+   * This function can be passed to [glib.hash_table.HashTable.new_] as the
    * `key_equal_func` parameter.
    * Params:
    *   v1 = a path buffer to compare

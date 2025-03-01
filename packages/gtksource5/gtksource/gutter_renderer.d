@@ -2,7 +2,7 @@ module gtksource.gutter_renderer;
 
 import gdk.rectangle;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -22,11 +22,11 @@ import gtksource.view;
 /**
  * Gutter cell renderer.
  * A `GtkSourceGutterRenderer` represents a column in a class@Gutter. The
- * column contains one cell for each visible line of the [Gtk.TextBuffer]. Due to
- * text wrapping, a cell can thus span multiple lines of the [Gtk.TextView]. In
+ * column contains one cell for each visible line of the [gtk.text_buffer.TextBuffer]. Due to
+ * text wrapping, a cell can thus span multiple lines of the [gtk.text_view.TextView]. In
  * this case, enum@GutterRendererAlignmentMode controls the alignment of
  * the cell.
- * The gutter renderer is a [Gtk.Widget] and is measured using the normal widget
+ * The gutter renderer is a [gtk.widget.Widget] and is measured using the normal widget
  * measurement facilities. The width of the gutter will be determined by the
  * measurements of the gutter renderers.
  * The width of a gutter renderer generally takes into account the entire text
@@ -40,12 +40,12 @@ import gtksource.view;
  * icons size displayed in the gutter column.
  * When the available size to render a cell is greater than the required size to
  * render the cell contents, the cell contents can be aligned horizontally and
- * vertically with [GtkSource.GutterRenderer.setAlignmentMode].
+ * vertically with [gtksource.gutter_renderer.GutterRenderer.setAlignmentMode].
  * The cells rendering occurs using vfunc@Gtk.Widget.snapshot. Implementations
  * should use `gtk_source_gutter_renderer_get_lines$(LPAREN)$(RPAREN)` to retrieve information
  * about the lines to be rendered. To help with aligning content which takes
  * into account the padding and alignment of a cell, implementations may call
- * [GtkSource.GutterRenderer.alignCell] for a given line number with the
+ * [gtksource.gutter_renderer.GutterRenderer.alignCell] for a given line number with the
  * width and height measurement of the content they width to render.
  */
 class GutterRenderer : Widget

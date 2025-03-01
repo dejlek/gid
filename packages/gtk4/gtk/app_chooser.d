@@ -1,7 +1,7 @@
 module gtk.app_chooser;
 
 public import gtk.app_chooser_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.app_info;
 import gio.app_info_mixin;
 import gobject.object;
@@ -13,8 +13,8 @@ import gtk.types;
  * `GtkAppChooser` is an interface for widgets which allow the user to
  * choose an application.
  * The main objects that implement this interface are
- * [Gtk.AppChooserWidget],
- * [Gtk.AppChooserDialog] and [Gtk.AppChooserButton].
+ * [gtk.app_chooser_widget.AppChooserWidget],
+ * [gtk.app_chooser_dialog.AppChooserDialog] and [gtk.app_chooser_button.AppChooserButton].
  * Applications are represented by GIO `GAppInfo` objects here.
  * GIO has a concept of recommended and fallback applications for a
  * given content type. Recommended applications are those that claim
@@ -25,7 +25,7 @@ import gtk.types;
  * whether the shown list of applications should include default,
  * recommended or fallback applications.
  * To obtain the application that has been selected in a `GtkAppChooser`,
- * use [Gtk.AppChooser.getAppInfo].
+ * use [gtk.app_chooser.AppChooser.getAppInfo].
 
  * Deprecated: The application selection widgets should be
  *   implemented according to the design of each platform and/or
@@ -52,7 +52,7 @@ interface AppChooser
   /**
    * Returns the content type for which the `GtkAppChooser`
    * shows applications.
-   * Returns: the content type of self. Free with [GLib.Global.gfree]
+   * Returns: the content type of self. Free with [glib.global.gfree]
 
    * Deprecated: This widget will be removed in GTK 5
    */

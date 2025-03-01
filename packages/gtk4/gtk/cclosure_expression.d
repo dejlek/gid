@@ -1,6 +1,6 @@
 module gtk.cclosure_expression;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;

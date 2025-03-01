@@ -1,6 +1,6 @@
 module glib.strv_builder;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -42,7 +42,7 @@ class StrvBuilder : Boxed
 
   /**
    * Creates a new #GStrvBuilder with a reference count of 1.
-   * Use [GLib.StrvBuilder.unref] on the returned value when no longer needed.
+   * Use [glib.strv_builder.StrvBuilder.unref] on the returned value when no longer needed.
    * Returns: the new #GStrvBuilder
    */
   this()
@@ -82,7 +82,7 @@ class StrvBuilder : Boxed
 
   /**
    * Ends the builder process and returns the constructed NULL-terminated string
-   * array. The returned value should be freed with [GLib.Global.strfreev] when no longer
+   * array. The returned value should be freed with [glib.global.strfreev] when no longer
    * needed.
    * Returns: the constructed string array.
    *   Since 2.68

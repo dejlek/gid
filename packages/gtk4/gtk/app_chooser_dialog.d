@@ -1,6 +1,6 @@
 module gtk.app_chooser_dialog;
 
-import gid.gid;
+import gid.global;
 import gio.file;
 import gio.file_mixin;
 import gobject.object;
@@ -30,11 +30,11 @@ import gtk.window;
  * ![An example GtkAppChooserDialog](appchooserdialog.png)
  * Note that `GtkAppChooserDialog` does not have any interesting methods
  * of its own. Instead, you should get the embedded `GtkAppChooserWidget`
- * using [Gtk.AppChooserDialog.getWidget] and call its methods if
- * the generic [Gtk.AppChooser] interface is not sufficient for
+ * using [gtk.app_chooser_dialog.AppChooserDialog.getWidget] and call its methods if
+ * the generic [gtk.app_chooser.AppChooser] interface is not sufficient for
  * your needs.
  * To set the heading that is shown above the `GtkAppChooserWidget`,
- * use [Gtk.AppChooserDialog.setHeading].
+ * use [gtk.app_chooser_dialog.AppChooserDialog.setHeading].
  * ## CSS nodes
  * `GtkAppChooserDialog` has a single CSS node with the name `window` and style
  * class `.appchooser`.

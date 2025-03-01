@@ -1,6 +1,6 @@
 module gtk.window_group;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -16,7 +16,7 @@ import gtk.window;
  * implicitly treated like windows of the default window group.
  * `GtkWindowGroup` objects are referenced by each window in the group,
  * so once you have added all windows to a `GtkWindowGroup`, you can drop
- * the initial reference to the window group with [GObject.ObjectG.unref]. If the
+ * the initial reference to the window group with [gobject.object.ObjectG.unref]. If the
  * windows in the window group are subsequently destroyed, then they will
  * be removed from the window group and drop their references on the window
  * group; when all window have been removed, the window group will be

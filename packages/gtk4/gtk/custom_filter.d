@@ -1,6 +1,6 @@
 module gtk.custom_filter;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -34,7 +34,7 @@ class CustomFilter : Filter
    * items.
    * If match_func is %NULL, the filter matches all items.
    * If the filter func changes its filtering behavior,
-   * [Gtk.Filter.changed] needs to be called.
+   * [gtk.filter.Filter.changed] needs to be called.
    * Params:
    *   matchFunc = function to filter items
    * Returns: a new `GtkCustomFilter`
@@ -61,7 +61,7 @@ class CustomFilter : Filter
    * Sets the function used for filtering items.
    * If match_func is %NULL, the filter matches all items.
    * If the filter func changes its filtering behavior,
-   * [Gtk.Filter.changed] needs to be called.
+   * [gtk.filter.Filter.changed] needs to be called.
    * If a previous function was set, its user_destroy will be
    * called now.
    * Params:

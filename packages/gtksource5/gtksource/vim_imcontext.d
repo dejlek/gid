@@ -1,6 +1,6 @@
 module gtksource.vim_imcontext;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.imcontext;
 import gtk.text_iter;
@@ -11,10 +11,10 @@ import gtksource.view;
 
 /**
  * Vim emulation.
- * The `GtkSourceVimIMContext` is a [Gtk.IMContext] implementation that can
+ * The `GtkSourceVimIMContext` is a [gtk.imcontext.IMContext] implementation that can
  * be used to provide Vim-like editing controls within a class@View.
- * The `GtkSourceViMIMContext` will process incoming [Gdk.KeyEvent] as the
- * user types. It should be used in conjunction with a [Gtk.EventControllerKey].
+ * The `GtkSourceViMIMContext` will process incoming [gdk.key_event.KeyEvent] as the
+ * user types. It should be used in conjunction with a [gtk.event_controller_key.EventControllerKey].
  * Various features supported by `GtkSourceVimIMContext` include:
  * - Normal, Insert, Replace, Visual, and Visual Line modes
  * - Support for an integrated command bar and current command preview
@@ -29,8 +29,8 @@ import gtksource.view;
  * property@VimIMContext:command-bar-text and
  * property@VimIMContext:command-text to the user as they represent the
  * command-bar and current command preview found in Vim.
- * `GtkSourceVimIMContext` attempts to work with additional [Gtk.IMContext]
- * implementations such as IBus by querying the [Gtk.TextView] before processing
+ * `GtkSourceVimIMContext` attempts to work with additional [gtk.imcontext.IMContext]
+ * implementations such as IBus by querying the [gtk.text_view.TextView] before processing
  * the command in states which support it $(LPAREN)notably Insert and Replace modes$(RPAREN).
  * ```c
  * GtkEventController *key;

@@ -1,7 +1,7 @@
 module gtk.range;
 
 import gdk.rectangle;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -24,10 +24,10 @@ import gtk.widget;
  * `GtkRange` is the common base class for widgets which visualize an
  * adjustment.
  * Widgets that are derived from `GtkRange` include
- * [Gtk.Scale] and [Gtk.Scrollbar].
+ * [gtk.scale.Scale] and [gtk.scrollbar.Scrollbar].
  * Apart from signals for monitoring the parameters of the adjustment,
  * `GtkRange` provides properties and methods for setting a
- * “fill level” on range widgets. See [Gtk.Range.setFillLevel].
+ * “fill level” on range widgets. See [gtk.range.Range.setFillLevel].
  */
 class Range : Widget, AccessibleRange, Orientable
 {
@@ -76,7 +76,7 @@ class Range : Widget, AccessibleRange, Orientable
 
   /**
    * Gets whether the `GtkRange` respects text direction.
-   * See [Gtk.Range.setFlippable].
+   * See [gtk.range.Range.setFlippable].
    * Returns: %TRUE if the range is flippable
    */
   bool getFlippable()
@@ -88,7 +88,7 @@ class Range : Widget, AccessibleRange, Orientable
 
   /**
    * Gets whether the range is inverted.
-   * See [Gtk.Range.setInverted].
+   * See [gtk.range.Range.setInverted].
    * Returns: %TRUE if the range is inverted
    */
   bool getInverted()
@@ -162,7 +162,7 @@ class Range : Widget, AccessibleRange, Orientable
 
   /**
    * This function is useful mainly for `GtkRange` subclasses.
-   * See [Gtk.Range.setSliderSizeFixed].
+   * See [gtk.range.Range.setSliderSizeFixed].
    * Returns: whether the range’s slider has a fixed size.
    */
   bool getSliderSizeFixed()
@@ -208,11 +208,11 @@ class Range : Widget, AccessibleRange, Orientable
    * be the position up to which the file/stream has been downloaded.
    * This amount of prebuffering can be displayed on the range’s trough
    * and is themeable separately from the trough. To enable fill level
-   * display, use [Gtk.Range.setShowFillLevel]. The range defaults
+   * display, use [gtk.range.Range.setShowFillLevel]. The range defaults
    * to not showing the fill level.
    * Additionally, it’s possible to restrict the range’s slider position
    * to values which are smaller than the fill level. This is controlled
-   * by [Gtk.Range.setRestrictToFillLevel] and is by default
+   * by [gtk.range.Range.setRestrictToFillLevel] and is by default
    * enabled.
    * Params:
    *   fillLevel = the new position of the fill level indicator
@@ -226,7 +226,7 @@ class Range : Widget, AccessibleRange, Orientable
    * Sets whether the `GtkRange` respects text direction.
    * If a range is flippable, it will switch its direction
    * if it is horizontal and its direction is %GTK_TEXT_DIR_RTL.
-   * See [Gtk.Widget.getDirection].
+   * See [gtk.widget.Widget.getDirection].
    * Params:
    *   flippable = %TRUE to make the range flippable
    */
@@ -279,7 +279,7 @@ class Range : Widget, AccessibleRange, Orientable
 
   /**
    * Sets whether the slider is restricted to the fill level.
-   * See [Gtk.Range.setFillLevel] for a general description
+   * See [gtk.range.Range.setFillLevel] for a general description
    * of the fill level concept.
    * Params:
    *   restrictToFillLevel = Whether the fill level restricts slider movement.
@@ -303,7 +303,7 @@ class Range : Widget, AccessibleRange, Orientable
 
   /**
    * Sets whether a graphical fill level is show on the trough.
-   * See [Gtk.Range.setFillLevel] for a general description
+   * See [gtk.range.Range.setFillLevel] for a general description
    * of the fill level concept.
    * Params:
    *   showFillLevel = Whether a fill level indicator graphics is shown.

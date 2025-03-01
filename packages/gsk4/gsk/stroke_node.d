@@ -1,6 +1,6 @@
 module gsk.stroke_node;
 
-import gid.gid;
+import gid.global;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.path;
@@ -10,7 +10,7 @@ import gsk.types;
 
 /**
  * A render node that will fill the area determined by stroking the the given
- * [Gsk.Path] using the [Gsk.Stroke] attributes.
+ * [gsk.path.Path] using the [gsk.stroke.Stroke] attributes.
  */
 class StrokeNode : RenderNode
 {

@@ -1,7 +1,7 @@
 module gsk.text_node;
 
 import gdk.rgba;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import graphene.point;
 import gsk.c.functions;

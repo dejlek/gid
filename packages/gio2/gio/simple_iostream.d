@@ -1,6 +1,6 @@
 module gio.simple_iostream;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.input_stream;
@@ -9,15 +9,15 @@ import gio.output_stream;
 import gio.types;
 
 /**
- * `GSimpleIOStream` creates a [Gio.IOStream] from an arbitrary
- * [Gio.InputStream] and [Gio.OutputStream]. This allows any pair of
- * input and output streams to be used with [Gio.IOStream] methods.
- * This is useful when you obtained a [Gio.InputStream] and a
- * [Gio.OutputStream] by other means, for instance creating them with
+ * `GSimpleIOStream` creates a [gio.iostream.IOStream] from an arbitrary
+ * [gio.input_stream.InputStream] and [gio.output_stream.OutputStream]. This allows any pair of
+ * input and output streams to be used with [gio.iostream.IOStream] methods.
+ * This is useful when you obtained a [gio.input_stream.InputStream] and a
+ * [gio.output_stream.OutputStream] by other means, for instance creating them with
  * platform specific methods as
- * [`[Gio.UnixInputStream.new_]`](../gio-unix/ctor.UnixInputStream.new.html)
+ * [`[gio.unix_input_stream.UnixInputStream.new_]`](../gio-unix/ctor.UnixInputStream.new.html)
  * $(LPAREN)from `gio-unix-2.0.pc` / `GioUnix-2.0`$(RPAREN), and you want to
- * take advantage of the methods provided by [Gio.IOStream].
+ * take advantage of the methods provided by [gio.iostream.IOStream].
  */
 class SimpleIOStream : IOStream
 {

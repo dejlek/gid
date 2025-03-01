@@ -1,6 +1,6 @@
 module glib.option_context;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.option_group;
@@ -66,7 +66,7 @@ class OptionContext
   }
 
   /**
-   * Returns the description. See [GLib.OptionContext.setDescription].
+   * Returns the description. See [glib.option_context.OptionContext.setDescription].
    * Returns: the description
    */
   string getDescription()
@@ -100,7 +100,7 @@ class OptionContext
 
   /**
    * Returns whether automatic `--help` generation
-   * is turned on for context. See [GLib.OptionContext.setHelpEnabled].
+   * is turned on for context. See [glib.option_context.OptionContext.setHelpEnabled].
    * Returns: %TRUE if automatic help generation is turned on.
    */
   bool getHelpEnabled()
@@ -112,7 +112,7 @@ class OptionContext
 
   /**
    * Returns whether unknown options are ignored or not. See
-   * [GLib.OptionContext.setIgnoreUnknownOptions].
+   * [glib.option_context.OptionContext.setIgnoreUnknownOptions].
    * Returns: %TRUE if unknown options are ignored.
    */
   bool getIgnoreUnknownOptions()
@@ -138,7 +138,7 @@ class OptionContext
 
   /**
    * Returns whether strict POSIX code is enabled.
-   * See [GLib.OptionContext.setStrictPosix] for more information.
+   * See [glib.option_context.OptionContext.setStrictPosix] for more information.
    * Returns: %TRUE if strict POSIX is enabled, %FALSE otherwise.
    */
   bool getStrictPosix()
@@ -149,7 +149,7 @@ class OptionContext
   }
 
   /**
-   * Returns the summary. See [GLib.OptionContext.setSummary].
+   * Returns the summary. See [glib.option_context.OptionContext.setSummary].
    * Returns: the summary
    */
   string getSummary()
@@ -164,7 +164,7 @@ class OptionContext
    * Adds a string to be displayed in `--help` output after the list
    * of options. This text often includes a bug reporting address.
    * Note that the summary is translated $(LPAREN)see
-   * [GLib.OptionContext.setTranslateFunc]$(RPAREN).
+   * [glib.option_context.OptionContext.setTranslateFunc]$(RPAREN).
    * Params:
    *   description = a string to be shown in `--help` output
    *     after the list of options, or %NULL
@@ -177,7 +177,7 @@ class OptionContext
 
   /**
    * Enables or disables automatic generation of `--help` output.
-   * By default, [GLib.OptionContext.parse] recognizes `--help`, `-h`,
+   * By default, [glib.option_context.OptionContext.parse] recognizes `--help`, `-h`,
    * `-?`, `--help-all` and `--help-groupname` and creates suitable
    * output to stdout.
    * Params:
@@ -191,7 +191,7 @@ class OptionContext
   /**
    * Sets whether to ignore unknown options or not. If an argument is
    * ignored, it is left in the argv array after parsing. By default,
-   * [GLib.OptionContext.parse] treats unknown options as error.
+   * [glib.option_context.OptionContext.parse] treats unknown options as error.
    * This setting does not affect non-option arguments $(LPAREN)i.e. arguments
    * which don't start with a dash$(RPAREN). But note that GOption cannot reliably
    * determine whether a non-option belongs to a preceding unknown option.
@@ -206,7 +206,7 @@ class OptionContext
 
   /**
    * Sets a #GOptionGroup as main group of the context.
-   * This has the same effect as calling [GLib.OptionContext.addGroup],
+   * This has the same effect as calling [glib.option_context.OptionContext.addGroup],
    * the only difference is that the options in the main group are
    * treated differently when generating `--help` output.
    * Params:
@@ -249,8 +249,8 @@ class OptionContext
    * Adds a string to be displayed in `--help` output before the list
    * of options. This is typically a summary of the program functionality.
    * Note that the summary is translated $(LPAREN)see
-   * [GLib.OptionContext.setTranslateFunc] and
-   * [GLib.OptionContext.setTranslationDomain]$(RPAREN).
+   * [glib.option_context.OptionContext.setTranslateFunc] and
+   * [glib.option_context.OptionContext.setTranslationDomain]$(RPAREN).
    * Params:
    *   summary = a string to be shown in `--help` output
    *     before the list of options, or %NULL
@@ -266,11 +266,11 @@ class OptionContext
    * user-visible strings, for `--help` output. If func is %NULL,
    * strings are not translated.
    * Note that option groups have their own translation functions,
-   * this function only affects the parameter_string $(LPAREN)see [GLib.OptionContext.new_]$(RPAREN),
-   * the summary $(LPAREN)see [GLib.OptionContext.setSummary]$(RPAREN) and the description
-   * $(LPAREN)see [GLib.OptionContext.setDescription]$(RPAREN).
+   * this function only affects the parameter_string $(LPAREN)see [glib.option_context.OptionContext.new_]$(RPAREN),
+   * the summary $(LPAREN)see [glib.option_context.OptionContext.setSummary]$(RPAREN) and the description
+   * $(LPAREN)see [glib.option_context.OptionContext.setDescription]$(RPAREN).
    * If you are using gettext$(LPAREN)$(RPAREN), you only need to set the translation
-   * domain, see [GLib.OptionContext.setTranslationDomain].
+   * domain, see [glib.option_context.OptionContext.setTranslationDomain].
    * Params:
    *   func = the #GTranslateFunc, or %NULL
    */

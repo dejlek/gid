@@ -1,6 +1,6 @@
 module gsk.repeat_node;
 
-import gid.gid;
+import gid.global;
 import graphene.rect;
 import gsk.c.functions;
 import gsk.c.types;

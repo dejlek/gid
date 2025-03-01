@@ -5,7 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.day_millisecond;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class DayTimeIntervalArrayBuilder : ArrayBuilder

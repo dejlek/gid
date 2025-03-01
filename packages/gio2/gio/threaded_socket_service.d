@@ -1,6 +1,6 @@
 module gio.threaded_socket_service;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_connection;
@@ -10,18 +10,18 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * A `GThreadedSocketService` is a simple subclass of [Gio.SocketService]
+ * A `GThreadedSocketService` is a simple subclass of [gio.socket_service.SocketService]
  * that handles incoming connections by creating a worker thread and
  * dispatching the connection to it by emitting the
- * [Gio.ThreadedSocketService.run] in the new thread.
+ * [gio.threaded_socket_service.ThreadedSocketService.run] in the new thread.
  * The signal handler may perform blocking I/O and need not return
  * until the connection is closed.
  * The service is implemented using a thread pool, so there is a
  * limited amount of threads available to serve incoming requests.
- * The service automatically stops the [Gio.SocketService] from accepting
+ * The service automatically stops the [gio.socket_service.SocketService] from accepting
  * new connections when all threads are busy.
- * As with [Gio.SocketService], you may connect to
- * [Gio.ThreadedSocketService.run], or subclass and override the default
+ * As with [gio.socket_service.SocketService], you may connect to
+ * [gio.threaded_socket_service.ThreadedSocketService.run], or subclass and override the default
  * handler.
  */
 class ThreadedSocketService : SocketService
@@ -65,7 +65,7 @@ class ThreadedSocketService : SocketService
    * not return until the connection is closed.
    * Params
    *   connection = a new #GSocketConnection object.
-   *   sourceObject = the source_object passed to [Gio.SocketListener.addAddress].
+   *   sourceObject = the source_object passed to [gio.socket_listener.SocketListener.addAddress].
    *   threadedSocketService = the instance the signal is connected to
    * Returns: %TRUE to stop further signal handlers from being called
    */

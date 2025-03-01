@@ -332,7 +332,7 @@ struct graphene_ray_t
  * a #graphene_rect_t with an origin of [ 0, 0 ] and a size of [ 10, 10 ] is
  * equivalent to a #graphene_rect_t with an origin of [ 10, 10 ] and a size
  * of [ -10, -10 ].
- * Application code can normalize rectangles using [Graphene.Rect.normalize];
+ * Application code can normalize rectangles using [graphene.rect.Rect.normalize];
  * this function will ensure that the width and height of a rectangle are
  * positive values. All functions taking a #graphene_rect_t as an argument
  * will internally operate on a normalized copy; all functions returning a

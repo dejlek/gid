@@ -4,7 +4,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class Int64Scalar : Scalar
 {

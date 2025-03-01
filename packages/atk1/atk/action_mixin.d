@@ -4,7 +4,7 @@ public import atk.action_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
-public import gid.gid;
+public import gid.global;
 
 /**
  * The ATK interface provided by UI components
@@ -131,7 +131,7 @@ template ActionT()
    * object, if one exists.
    * For technical reasons, some toolkits cannot guarantee that the
    * reported action is actually 'bound' to a nontrivial user event;
-   * i.e. the result of some actions via [Atk.Action.doAction] may be
+   * i.e. the result of some actions via [atk.action.Action.doAction] may be
    * NIL.
    * Params:
    *   i = the action index corresponding to the action to be performed

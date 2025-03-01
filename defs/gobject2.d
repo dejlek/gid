@@ -1,7 +1,7 @@
 //!gir GObject-2.0
 
 //# Merge GObject into GLib package to simplify interdependencies
-//!merge GLib
+//!merge GLib 2.0
 
 //# Re-enable EnumClass and FlagClass which were set to ignore with global wildcard rule
 //!set record[EnumClass][ignore] 0

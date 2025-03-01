@@ -1,6 +1,6 @@
 module gtk.check_button;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -19,11 +19,11 @@ import gtk.widget;
 /**
  * A `GtkCheckButton` places a label next to an indicator.
  * ![Example GtkCheckButtons](check-button.png)
- * A `GtkCheckButton` is created by calling either [Gtk.CheckButton.new_]
- * or [Gtk.CheckButton.newWithLabel].
+ * A `GtkCheckButton` is created by calling either [gtk.check_button.CheckButton.new_]
+ * or [gtk.check_button.CheckButton.newWithLabel].
  * The state of a `GtkCheckButton` can be set specifically using
- * [Gtk.CheckButton.setActive], and retrieved using
- * [Gtk.CheckButton.getActive].
+ * [gtk.check_button.CheckButton.setActive], and retrieved using
+ * [gtk.check_button.CheckButton.getActive].
  * # Inconsistent state
  * In addition to "on" and "off", check buttons can be an
  * "in between" state that is neither on nor off. This can be used
@@ -31,7 +31,7 @@ import gtk.widget;
  * text or spreadsheet cells$(RPAREN) that are affected by a check button,
  * and the current values in that range are inconsistent.
  * To set a `GtkCheckButton` to inconsistent state, use
- * [Gtk.CheckButton.setInconsistent].
+ * [gtk.check_button.CheckButton.setInconsistent].
  * # Grouping
  * Check buttons can be grouped together, to form mutually exclusive
  * groups - only one of the buttons can be toggled at a time, and toggling
@@ -39,7 +39,7 @@ import gtk.widget;
  * Grouped check buttons use a different indicator, and are commonly referred
  * to as *radio buttons*.
  * ![Example GtkCheckButtons](radio-button.png)
- * To add a `GtkCheckButton` to a group, use [Gtk.CheckButton.setGroup].
+ * To add a `GtkCheckButton` to a group, use [gtk.check_button.CheckButton.setGroup].
  * When the code must keep track of the state of a group of radio buttons, it
  * is recommended to keep track of such state through a stateful
  * `GAction` with a target for each button. Using the `toggled` signals to keep
@@ -51,7 +51,7 @@ import gtk.widget;
  * ╰── [label]
  * ```
  * A `GtkCheckButton` has a main node with name checkbutton. If the
- * [Gtk.CheckButton.label] or [Gtk.CheckButton.child]
+ * [gtk.check_button.CheckButton.utf8] or [gtk.check_button.CheckButton.Widget]
  * properties are set, it contains a child widget. The indicator node
  * is named check when no group is set, and radio if the checkbutton
  * is grouped together with other checkbuttons.
@@ -171,7 +171,7 @@ class CheckButton : Widget, Actionable
   /**
    * Returns whether underlines in the label indicate mnemonics.
    * Returns: The value of the propertyGtk.CheckButton:use-underline property.
-   *   See [Gtk.CheckButton.setUseUnderline] for details on how to set
+   *   See [gtk.check_button.CheckButton.setUseUnderline] for details on how to set
    *   a new value.
    */
   bool getUseUnderline()
@@ -214,7 +214,7 @@ class CheckButton : Widget, Actionable
    * Setting the group of a check button also changes the css name of the
    * indicator widget's CSS node to 'radio'.
    * Setting up groups in a cycle leads to undefined behavior.
-   * Note that the same effect can be achieved via the [Gtk.Actionable]
+   * Note that the same effect can be achieved via the [gtk.actionable.Actionable]
    * API, by using the same action with parameter type and state type 's'
    * for all buttons in the group, and giving each button its own target
    * value.
@@ -243,7 +243,7 @@ class CheckButton : Widget, Actionable
    * Sets the text of self.
    * If propertyGtk.CheckButton:use-underline is %TRUE, an underscore
    * in label is interpreted as mnemonic indicator, see
-   * [Gtk.CheckButton.setUseUnderline] for details on this behavior.
+   * [gtk.check_button.CheckButton.setUseUnderline] for details on this behavior.
    * Params:
    *   label = The text shown next to the indicator, or %NULL
    *     to show no text
@@ -272,7 +272,7 @@ class CheckButton : Widget, Actionable
    * The `::activate` signal on `GtkCheckButton` is an action signal and
    * emitting it causes the button to animate press then release.
    * Applications should never connect to this signal, but use the
-   * [Gtk.CheckButton.toggled] signal.
+   * [gtk.check_button.CheckButton.toggled] signal.
    * The default bindings for this signal are all forms of the
    * <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
    *   checkButton = the instance the signal is connected to
@@ -303,7 +303,7 @@ class CheckButton : Widget, Actionable
   }
 
   /**
-   * Emitted when the buttons's [Gtk.CheckButton.active]
+   * Emitted when the buttons's [gtk.check_button.CheckButton.gboolean]
    * property changes.
    *   checkButton = the instance the signal is connected to
    */

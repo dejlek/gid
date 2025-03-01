@@ -4,7 +4,7 @@ import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf;
 import gdkpixbuf.types;
-import gid.gid;
+import gid.global;
 import glib.time_val;
 import gobject.object;
 
@@ -34,20 +34,20 @@ class PixbufAnimationIter : ObjectG
   /**
    * Possibly advances an animation to a new frame.
    * Chooses the frame based on the start time passed to
-   * [GdkPixbuf.PixbufAnimation.getIter].
-   * current_time would normally come from [GLib.Global.getCurrentTime], and
+   * [gdkpixbuf.pixbuf_animation.PixbufAnimation.getIter].
+   * current_time would normally come from [glib.global.getCurrentTime], and
    * must be greater than or equal to the time passed to
-   * [GdkPixbuf.PixbufAnimation.getIter], and must increase or remain
-   * unchanged each time [GdkPixbuf.PixbufAnimationIter.getPixbuf] is
+   * [gdkpixbuf.pixbuf_animation.PixbufAnimation.getIter], and must increase or remain
+   * unchanged each time [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter.getPixbuf] is
    * called. That is, you can't go backward in time; animations only
    * play forward.
-   * As a shortcut, pass `NULL` for the current time and [GLib.Global.getCurrentTime]
+   * As a shortcut, pass `NULL` for the current time and [glib.global.getCurrentTime]
    * will be invoked on your behalf. So you only need to explicitly pass
    * current_time if you're doing something odd like playing the animation
    * at double speed.
    * If this function returns `FALSE`, there's no need to update the animation
    * display, assuming the display had been rendered prior to advancing;
-   * if `TRUE`, you need to call [GdkPixbuf.PixbufAnimationIter.getPixbuf]
+   * if `TRUE`, you need to call [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter.getPixbuf]
    * and update the display with the new pixbuf.
    * Params:
    *   currentTime = current time
@@ -63,7 +63,7 @@ class PixbufAnimationIter : ObjectG
   /**
    * Gets the number of milliseconds the current pixbuf should be displayed,
    * or -1 if the current pixbuf should be displayed forever.
-   * The `[GLib.Global.timeoutAdd]` function conveniently takes a timeout in milliseconds,
+   * The `[glib.global.timeoutAdd]` function conveniently takes a timeout in milliseconds,
    * so you can use a timeout to schedule the next update.
    * Note that some formats, like GIF, might clamp the timeout values in the
    * image file to avoid updates that are just too quick. The minimum timeout
@@ -80,13 +80,13 @@ class PixbufAnimationIter : ObjectG
   /**
    * Gets the current pixbuf which should be displayed.
    * The pixbuf might not be the same size as the animation itself
-   * $(LPAREN)[GdkPixbuf.PixbufAnimation.getWidth], [GdkPixbuf.PixbufAnimation.getHeight]$(RPAREN).
-   * This pixbuf should be displayed for [GdkPixbuf.PixbufAnimationIter.getDelayTime]
+   * $(LPAREN)[gdkpixbuf.pixbuf_animation.PixbufAnimation.getWidth], [gdkpixbuf.pixbuf_animation.PixbufAnimation.getHeight]$(RPAREN).
+   * This pixbuf should be displayed for [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter.getDelayTime]
    * milliseconds.
    * The caller of this function does not own a reference to the returned
    * pixbuf; the returned pixbuf will become invalid when the iterator
    * advances to the next frame, which may happen anytime you call
-   * [GdkPixbuf.PixbufAnimationIter.advance].
+   * [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter.advance].
    * Copy the pixbuf to keep it $(LPAREN)don't just add a reference$(RPAREN), as it may get
    * recycled as you advance the iterator.
    * Returns: the pixbuf to be displayed

@@ -1,7 +1,7 @@
 module gtk.accessible_range_mixin;
 
 public import gtk.accessible_range_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;

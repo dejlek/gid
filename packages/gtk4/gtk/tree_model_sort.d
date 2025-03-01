@@ -1,6 +1,6 @@
 module gtk.tree_model_sort;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -96,7 +96,7 @@ import gtk.types;
  * }
  * ]|
 
- * Deprecated: Use [Gtk.SortListModel] instead
+ * Deprecated: Use [gtk.sort_list_model.SortListModel] instead
  */
 class TreeModelSort : ObjectG, TreeDragSource, TreeModel, TreeSortable
 {
@@ -138,7 +138,7 @@ class TreeModelSort : ObjectG, TreeDragSource, TreeModel, TreeSortable
   /**
    * This function should almost never be called.  It clears the tree_model_sort
    * of any cached iterators that haven’t been reffed with
-   * [Gtk.TreeModel.refNode].  This might be useful if the child model being
+   * [gtk.tree_model.TreeModel.refNode].  This might be useful if the child model being
    * sorted is static $(LPAREN)and doesn’t change often$(RPAREN) and there has been a lot of
    * unreffed access to nodes.  As a side effect of this function, all unreffed
    * iters will be invalid.

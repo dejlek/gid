@@ -28,7 +28,7 @@ import atk.value;
 import atk.value_mixin;
 import atk.window;
 import atk.window_mixin;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**

@@ -1,6 +1,6 @@
 module gtk.stack_sidebar;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -18,7 +18,7 @@ import gtk.widget;
  * A `GtkStackSidebar` uses a sidebar to switch between `GtkStack` pages.
  * In order to use a `GtkStackSidebar`, you simply use a `GtkStack` to
  * organize your UI flow, and add the sidebar to your sidebar area. You
- * can use [Gtk.StackSidebar.setStack] to connect the `GtkStackSidebar`
+ * can use [gtk.stack_sidebar.StackSidebar.setStack] to connect the `GtkStackSidebar`
  * to the `GtkStack`.
  * # CSS nodes
  * `GtkStackSidebar` has a single CSS node with name stacksidebar and

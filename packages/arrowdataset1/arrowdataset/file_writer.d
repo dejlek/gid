@@ -5,7 +5,7 @@ import arrow.record_batch_reader;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

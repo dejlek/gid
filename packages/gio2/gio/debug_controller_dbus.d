@@ -1,6 +1,6 @@
 module gio.debug_controller_dbus;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -16,11 +16,11 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * `GDebugControllerDBus` is an implementation of [Gio.DebugController]
+ * `GDebugControllerDBus` is an implementation of [gio.debug_controller.DebugController]
  * which exposes debug settings as a D-Bus object.
- * It is a [Gio.Initable] object, and will register an object at
+ * It is a [gio.initable.Initable] object, and will register an object at
  * `/org/gtk/Debugging` on the bus given as
- * [Gio.DebugControllerDBus.connection] once it’s initialized. The
+ * [gio.debug_controller_dbus.DebugControllerDBus.DBusConnection] once it’s initialized. The
  * object will be unregistered when the last reference to the
  * `GDebugControllerDBus` is dropped.
  * This D-Bus object can be used by remote processes to enable or disable debug
@@ -29,7 +29,7 @@ import gobject.object;
  * property@Gio.DebugController:debug-enabled and, by default,
  * func@GLib.log_get_debug_enabled.
  * By default, no processes are allowed to call `SetDebugEnabled$(LPAREN)$(RPAREN)` unless a
- * [Gio.DebugControllerDBus.authorize] signal handler is installed. This
+ * [gio.debug_controller_dbus.DebugControllerDBus.authorize] signal handler is installed. This
  * is because the process may be privileged, or might expose sensitive
  * information in its debug output. You may want to restrict the ability to
  * enable debug output to privileged users or processes.
@@ -54,7 +54,7 @@ import gobject.object;
  * as it’s accessed through the `org.freedesktop.DBus.Properties` interface.
  * Another option is to use polkit to allow or deny requests on a case-by-case
  * basis, allowing for the possibility of dynamic authorisation. To do this,
- * connect to the [Gio.DebugControllerDBus.authorize] signal and query
+ * connect to the [gio.debug_controller_dbus.DebugControllerDBus.authorize] signal and query
  * polkit in it:
  * ```c
  * g_autoptr$(LPAREN)GError$(RPAREN) child_error \= NULL;

@@ -1,6 +1,6 @@
 module gsk.radial_gradient_node;
 
-import gid.gid;
+import gid.global;
 import graphene.point;
 import gsk.c.functions;
 import gsk.c.types;

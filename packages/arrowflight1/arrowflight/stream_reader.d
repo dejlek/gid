@@ -4,7 +4,7 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.record_batch_reader;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 
 class StreamReader : RecordBatchReader
 {

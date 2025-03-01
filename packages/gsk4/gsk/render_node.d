@@ -1,7 +1,7 @@
 module gsk.render_node;
 
 import cairo.context;
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.error;
 import graphene.rect;
@@ -11,14 +11,14 @@ import gsk.types;
 
 /**
  * `GskRenderNode` is the basic block in a scene graph to be
- * rendered using [Gsk.Renderer].
+ * rendered using [gsk.renderer.Renderer].
  * Each node has a parent, except the top-level node; each node may have
  * children nodes.
  * Each node has an associated drawing surface, which has the size of
  * the rectangle set when creating it.
  * Render nodes are meant to be transient; once they have been associated
- * to a [Gsk.Renderer] it's safe to release any reference you have on
- * them. All [Gsk.RenderNode]s are immutable, you can only specify their
+ * to a [gsk.renderer.Renderer] it's safe to release any reference you have on
+ * them. All [gsk.render_node.RenderNode]s are immutable, you can only specify their
  * properties during construction.
  */
 class RenderNode
@@ -51,7 +51,7 @@ class RenderNode
   }
 
   /**
-   * Loads data previously created via [Gsk.RenderNode.serialize].
+   * Loads data previously created via [gsk.render_node.RenderNode.serialize].
    * For a discussion of the supported format, see that function.
    * Params:
    *   bytes = the bytes containing the data
@@ -79,7 +79,7 @@ class RenderNode
    * Draw the contents of node to the given cairo context.
    * Typically, you'll use this function to implement fallback rendering
    * of `GskRenderNode`s on an intermediate Cairo context, instead of using
-   * the drawing context associated to a [Gdk.Surface]'s rendering buffer.
+   * the drawing context associated to a [gdk.surface.Surface]'s rendering buffer.
    * For advanced nodes that cannot be supported using Cairo, in particular
    * for nodes doing 3D operations, this function may fail.
    * Params:
@@ -117,10 +117,10 @@ class RenderNode
 
   /**
    * Serializes the node for later deserialization via
-   * [Gsk.RenderNode.deserialize]. No guarantees are made about the format
+   * [gsk.render_node.RenderNode.deserialize]. No guarantees are made about the format
    * used other than that the same version of GTK will be able to deserialize
-   * the result of a call to [Gsk.RenderNode.serialize] and
-   * [Gsk.RenderNode.deserialize] will correctly reject files it cannot open
+   * the result of a call to [gsk.render_node.RenderNode.serialize] and
+   * [gsk.render_node.RenderNode.deserialize] will correctly reject files it cannot open
    * that were created with previous versions of GTK.
    * The intended use of this functions is testing, benchmarking and debugging.
    * The format is not meant as a permanent storage format.
@@ -135,7 +135,7 @@ class RenderNode
   }
 
   /**
-   * This function is equivalent to calling [Gsk.RenderNode.serialize]
+   * This function is equivalent to calling [gsk.render_node.RenderNode.serialize]
    * followed by funcGLib.file_set_contents.
    * See those two functions for details on the arguments.
    * It is mostly intended for use inside a debugger to quickly dump a render

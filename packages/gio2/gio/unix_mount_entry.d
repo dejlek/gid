@@ -1,6 +1,6 @@
 module gio.unix_mount_entry;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;

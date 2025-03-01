@@ -1,6 +1,6 @@
 module gtksource.language_manager;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -12,9 +12,9 @@ import gtksource.types;
  * `GtkSourceLanguageManager` is an object which processes language description
  * files and creates and stores class@Language objects, and provides API to
  * access them.
- * Use [GtkSource.LanguageManager.getDefault] to retrieve the default
+ * Use [gtksource.language_manager.LanguageManager.getDefault] to retrieve the default
  * instance of `GtkSourceLanguageManager`, and
- * [GtkSource.LanguageManager.guessLanguage] to get a class@Language for
+ * [gtksource.language_manager.LanguageManager.guessLanguage] to get a class@Language for
  * given file name and content type.
  */
 class LanguageManager : ObjectG
@@ -39,7 +39,7 @@ class LanguageManager : ObjectG
   /**
    * Creates a new language manager.
    * If you do not need more than one language manager or a private language manager
-   * instance then use [GtkSource.LanguageManager.getDefault] instead.
+   * instance then use [gtksource.language_manager.LanguageManager.getDefault] instead.
    * Returns: a new #GtkSourceLanguageManager.
    */
   this()
@@ -65,7 +65,7 @@ class LanguageManager : ObjectG
   /**
    * Appends path to the list of directories where the manager looks for
    * language files.
-   * See [GtkSource.LanguageManager.setSearchPath] for details.
+   * See [gtksource.language_manager.LanguageManager.setSearchPath] for details.
    * Params:
    *   path = a directory or a filename.
    */
@@ -170,7 +170,7 @@ class LanguageManager : ObjectG
    * gtk_source_buffer_set_language $(LPAREN)buffer, lang$(RPAREN);
    * g_free $(LPAREN)content_type$(RPAREN);
    * ```
-   * etc. Use [GtkSource.Language.getMimeTypes] and [GtkSource.Language.getGlobs]
+   * etc. Use [gtksource.language.Language.getMimeTypes] and [gtksource.language.Language.getGlobs]
    * if you need full control over file -> language mapping.
    * Params:
    *   filename = a filename in Glib filename encoding, or %NULL.
@@ -192,7 +192,7 @@ class LanguageManager : ObjectG
   /**
    * Prepends path to the list of directories where the manager looks
    * for language files.
-   * See [GtkSource.LanguageManager.setSearchPath] for details.
+   * See [gtksource.language_manager.LanguageManager.setSearchPath] for details.
    * Params:
    *   path = a directory or a filename.
    */

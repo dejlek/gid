@@ -4,22 +4,22 @@ public import gdk.device_pad_iface_proxy;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.gid;
+import gid.global;
 
 /**
  * `GdkDevicePad` is an interface implemented by devices of type
  * %GDK_SOURCE_TABLET_PAD
  * It allows querying the features provided by the pad device.
  * Tablet pads may contain one or more groups, each containing a subset
- * of the buttons/rings/strips available. [Gdk.DevicePad.getNGroups]
- * can be used to obtain the number of groups, [Gdk.DevicePad.getNFeatures]
- * and [Gdk.DevicePad.getFeatureGroup] can be combined to find out
+ * of the buttons/rings/strips available. [gdk.device_pad.DevicePad.getNGroups]
+ * can be used to obtain the number of groups, [gdk.device_pad.DevicePad.getNFeatures]
+ * and [gdk.device_pad.DevicePad.getFeatureGroup] can be combined to find out
  * the number of buttons/rings/strips the device has, and how are they grouped.
  * Each of those groups have different modes, which may be used to map each
  * individual pad feature to multiple actions. Only one mode is effective
  * $(LPAREN)current$(RPAREN) for each given group, different groups may have different
  * current modes. The number of available modes in a group can be found
- * out through [Gdk.DevicePad.getGroupNModes], and the current mode
+ * out through [gdk.device_pad.DevicePad.getGroupNModes], and the current mode
  * for a given group will be notified through events of type `GDK_PAD_GROUP_MODE`.
  */
 interface DevicePad

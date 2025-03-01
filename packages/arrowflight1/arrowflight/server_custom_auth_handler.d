@@ -7,7 +7,7 @@ import arrowflight.server_auth_reader;
 import arrowflight.server_auth_sender;
 import arrowflight.server_call_context;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.error;
 

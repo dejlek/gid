@@ -1,6 +1,6 @@
 module Pango.global;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import glib.markup_parse_context;
 import glib.string_;
@@ -26,7 +26,7 @@ import pango.types;
  *   allowBreaks = %TRUE if we line breaks are allowed
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrAllowBreaksNew(bool allowBreaks)
 {
@@ -42,7 +42,7 @@ Attribute attrAllowBreaksNew(bool allowBreaks)
  *   alpha = the alpha value, between 1 and 65536
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrBackgroundAlphaNew(ushort alpha)
 {
@@ -60,7 +60,7 @@ Attribute attrBackgroundAlphaNew(ushort alpha)
  *   blue = the blue value
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrBackgroundNew(ushort red, ushort green, ushort blue)
 {
@@ -84,7 +84,7 @@ Attribute attrBackgroundNew(ushort red, ushort green, ushort blue)
  *     Positive values displace the text upwards.
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrBaselineShiftNew(int shift)
 {
@@ -131,7 +131,7 @@ void attrBreak(string text, AttrList attrList, int offset, LogAttr[] attrs)
  *     for characters the active font is missing
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrFallbackNew(bool enableFallback)
 {
@@ -147,7 +147,7 @@ Attribute attrFallbackNew(bool enableFallback)
  *   family = the family or comma-separated list of families
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrFamilyNew(string family)
 {
@@ -167,7 +167,7 @@ Attribute attrFamilyNew(string family)
  *     to the size of the previous run.
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrFontScaleNew(FontScale scale)
 {
@@ -183,7 +183,7 @@ Attribute attrFontScaleNew(FontScale scale)
  *   alpha = the alpha value, between 1 and 65536
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrForegroundAlphaNew(ushort alpha)
 {
@@ -201,7 +201,7 @@ Attribute attrForegroundAlphaNew(ushort alpha)
  *   blue = the blue value
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrForegroundNew(ushort red, ushort green, ushort blue)
 {
@@ -217,7 +217,7 @@ Attribute attrForegroundNew(ushort red, ushort green, ushort blue)
  *   hint = the gravity hint value
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrGravityHintNew(GravityHint hint)
 {
@@ -233,7 +233,7 @@ Attribute attrGravityHintNew(GravityHint hint)
  *   gravity = the gravity value; should not be %PANGO_GRAVITY_AUTO
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrGravityNew(Gravity gravity)
 {
@@ -252,7 +252,7 @@ Attribute attrGravityNew(Gravity gravity)
  *   insertHyphens = %TRUE if hyphens should be inserted
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrInsertHyphensNew(bool insertHyphens)
 {
@@ -269,7 +269,7 @@ Attribute attrInsertHyphensNew(bool insertHyphens)
  *     graphemes of the text, in Pango units
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrLetterSpacingNew(int letterSpacing)
 {
@@ -282,9 +282,9 @@ Attribute attrLetterSpacingNew(int letterSpacing)
 /**
  * Modify the height of logical line extents by a factor.
  * This affects the values returned by
- * [Pango.LayoutLine.getExtents],
- * [Pango.LayoutLine.getPixelExtents] and
- * [Pango.LayoutIter.getLineExtents].
+ * [pango.layout_line.LayoutLine.getExtents],
+ * [pango.layout_line.LayoutLine.getPixelExtents] and
+ * [pango.layout_iter.LayoutIter.getLineExtents].
  * Params:
  *   factor = the scaling factor to apply to the logical height
  * Returns:
@@ -300,9 +300,9 @@ Attribute attrLineHeightNew(double factor)
 /**
  * Override the height of logical line extents to be height.
  * This affects the values returned by
- * [Pango.LayoutLine.getExtents],
- * [Pango.LayoutLine.getPixelExtents] and
- * [Pango.LayoutIter.getLineExtents].
+ * [pango.layout_line.LayoutLine.getExtents],
+ * [pango.layout_line.LayoutLine.getPixelExtents] and
+ * [pango.layout_iter.LayoutIter.getLineExtents].
  * Params:
  *   height = the line height, in %PANGO_SCALE-ths of a point
  * Returns:
@@ -325,7 +325,7 @@ Attribute attrLineHeightNewAbsolute(int height)
  *   blue = the blue value
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrOverlineColorNew(ushort red, ushort green, ushort blue)
 {
@@ -341,7 +341,7 @@ Attribute attrOverlineColorNew(ushort red, ushort green, ushort blue)
  *   overline = the overline style
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrOverlineNew(Overline overline)
 {
@@ -358,7 +358,7 @@ Attribute attrOverlineNew(Overline overline)
  *     in Pango units. Positive values displace the text upwards.
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrRiseNew(int rise)
 {
@@ -376,7 +376,7 @@ Attribute attrRiseNew(int rise)
  *   scaleFactor = factor to scale the font
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrScaleNew(double scaleFactor)
 {
@@ -392,7 +392,7 @@ Attribute attrScaleNew(double scaleFactor)
  * sentence classification around the range.
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrSentenceNew()
 {
@@ -409,7 +409,7 @@ Attribute attrSentenceNew()
  *   flags = `PangoShowFlags` to apply
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrShowNew(ShowFlags flags)
 {
@@ -425,7 +425,7 @@ Attribute attrShowNew(ShowFlags flags)
  *   stretch = the stretch
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrStretchNew(Stretch stretch)
 {
@@ -445,7 +445,7 @@ Attribute attrStretchNew(Stretch stretch)
  *   blue = the blue value
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrStrikethroughColorNew(ushort red, ushort green, ushort blue)
 {
@@ -461,7 +461,7 @@ Attribute attrStrikethroughColorNew(ushort red, ushort green, ushort blue)
  *   strikethrough = %TRUE if the text should be struck-through
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrStrikethroughNew(bool strikethrough)
 {
@@ -477,7 +477,7 @@ Attribute attrStrikethroughNew(bool strikethrough)
  *   style = the slant style
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrStyleNew(Style style)
 {
@@ -494,7 +494,7 @@ Attribute attrStyleNew(Style style)
  *   transform = `PangoTextTransform` to apply
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrTextTransformNew(TextTransform transform)
 {
@@ -514,7 +514,7 @@ Attribute attrTextTransformNew(TextTransform transform)
  *   blue = the blue value
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrUnderlineColorNew(ushort red, ushort green, ushort blue)
 {
@@ -530,7 +530,7 @@ Attribute attrUnderlineColorNew(ushort red, ushort green, ushort blue)
  *   underline = the underline style
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrUnderlineNew(Underline underline)
 {
@@ -545,7 +545,7 @@ Attribute attrUnderlineNew(Underline underline)
  * Params:
  *   variant = the variant
  * Returns: the newly allocated `PangoAttribute`,
- *   which should be freed with [Pango.Attribute.destroy].
+ *   which should be freed with [pango.attribute.Attribute.destroy].
  */
 Attribute attrVariantNew(Variant variant)
 {
@@ -561,7 +561,7 @@ Attribute attrVariantNew(Variant variant)
  *   weight = the weight
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrWeightNew(Weight weight)
 {
@@ -577,7 +577,7 @@ Attribute attrWeightNew(Weight weight)
  * sentence classification around the range.
  * Returns: the newly allocated
  *   `PangoAttribute`, which should be freed with
- *   [Pango.Attribute.destroy]
+ *   [pango.attribute.Attribute.destroy]
  */
 Attribute attrWordNew()
 {
@@ -778,8 +778,8 @@ bool isZeroWidth(dchar ch)
  *   attrs = the set of attributes that apply to text.
  *   cachedIter = Cached attribute iterator
  * Returns: a `GList` of
- *   [Pango.Item] structures. The items should be freed using
- *   [Pango.Item.free] in combination with [GLib.List.freeFull].
+ *   [pango.item.Item] structures. The items should be freed using
+ *   [pango.item.Item.free] in combination with [glib.list.List.freeFull].
  */
 Item[] itemize(Context context, string text, int startIndex, int length, AttrList attrs, AttrIterator cachedIter)
 {
@@ -791,10 +791,10 @@ Item[] itemize(Context context, string text, int startIndex, int length, AttrLis
 }
 
 /**
- * Like `[Pango.Global.itemize]`, but with an explicitly specified base direction.
+ * Like `[pango.global.itemize]`, but with an explicitly specified base direction.
  * The base direction is used when computing bidirectional levels.
  * funcitemize gets the base direction from the `PangoContext`
- * $(LPAREN)see [Pango.Context.setBaseDir]$(RPAREN).
+ * $(LPAREN)see [pango.context.Context.setBaseDir]$(RPAREN).
  * Params:
  *   context = a structure holding information that affects
  *     the itemization process.
@@ -806,8 +806,8 @@ Item[] itemize(Context context, string text, int startIndex, int length, AttrLis
  *   attrs = the set of attributes that apply to text.
  *   cachedIter = Cached attribute iterator
  * Returns: a `GList` of
- *   [Pango.Item] structures. The items should be freed using
- *   [Pango.Item.free] probably in combination with [GLib.List.freeFull].
+ *   [pango.item.Item] structures. The items should be freed using
+ *   [pango.item.Item.free] probably in combination with [glib.list.List.freeFull].
  */
 Item[] itemizeWithBaseDir(Context context, Direction baseDir, string text, int startIndex, int length, AttrList attrs, AttrIterator cachedIter)
 {
@@ -820,9 +820,9 @@ Item[] itemizeWithBaseDir(Context context, Direction baseDir, string text, int s
 
 /**
  * Finishes parsing markup.
- * After feeding a Pango markup parser some data with [GLib.MarkupParseContext.parse],
+ * After feeding a Pango markup parser some data with [glib.markup_parse_context.MarkupParseContext.parse],
  * use this function to get the list of attributes and text out of the
- * markup. This function will not free context, use [GLib.MarkupParseContext.free]
+ * markup. This function will not free context, use [glib.markup_parse_context.MarkupParseContext.free]
  * to do so.
  * Params:
  *   context = A valid parse context that was returned from funcmarkup_parser_new
@@ -857,17 +857,17 @@ bool markupParserFinish(MarkupParseContext context, out AttrList attrList, out s
  * and the first character so marked will be returned in accel_char,
  * when calling funcmarkup_parser_finish. Two accel_marker characters
  * following each other produce a single literal accel_marker character.
- * To feed markup to the parser, use [GLib.MarkupParseContext.parse]
- * on the returned [GLib.MarkupParseContext]. When done with feeding markup
+ * To feed markup to the parser, use [glib.markup_parse_context.MarkupParseContext.parse]
+ * on the returned [glib.markup_parse_context.MarkupParseContext]. When done with feeding markup
  * to the parser, use funcmarkup_parser_finish to get the data out
- * of it, and then use [GLib.MarkupParseContext.free] to free it.
+ * of it, and then use [glib.markup_parse_context.MarkupParseContext.free] to free it.
  * This function is designed for applications that read Pango markup
  * from streams. To simply parse a string containing Pango markup,
  * the funcPango.parse_markup API is recommended instead.
  * Params:
  *   accelMarker = character that precedes an accelerator, or 0 for none
  * Returns: a `GMarkupParseContext` that should be
- *   destroyed with [GLib.MarkupParseContext.free].
+ *   destroyed with [glib.markup_parse_context.MarkupParseContext.free].
  */
 MarkupParseContext markupParserNew(dchar accelMarker)
 {
@@ -885,7 +885,7 @@ MarkupParseContext markupParserNew(dchar accelMarker)
  * possible values is stored in possible_values. The list is
  * slash-separated, eg. "none/start/middle/end".
  * If failed and possible_values is not %NULL, returned string should
- * be freed using [GLib.Global.gfree].
+ * be freed using [glib.global.gfree].
  * Params:
  *   type = enum type to parse, eg. %PANGO_TYPE_ELLIPSIZE_MODE
  *   str = string to parse
@@ -1225,7 +1225,7 @@ void shapeWithFlags(string itemText, string paragraphText, Analysis analysis, Gl
  * Params:
  *   str = a %G_SEARCHPATH_SEPARATOR separated list of filenames
  * Returns: a list of
- *   strings to be freed with [GLib.Global.strfreev]
+ *   strings to be freed with [glib.global.strfreev]
  */
 string[] splitFileList(string str)
 {
@@ -1280,7 +1280,7 @@ void tailorBreak(string text, Analysis analysis, int offset, LogAttr[] attrs)
  * Trims leading and trailing whitespace from a string.
  * Params:
  *   str = a string
- * Returns: A newly-allocated string that must be freed with [GLib.Global.gfree]
+ * Returns: A newly-allocated string that must be freed with [glib.global.gfree]
  */
 string trimString(string str)
 {

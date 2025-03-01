@@ -1,6 +1,6 @@
 module pango.item;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.analysis;
 import pango.attr_iterator;
@@ -75,7 +75,7 @@ class Item : Boxed
   /**
    * Creates a new `PangoItem` structure initialized to default values.
    * Returns: the newly allocated `PangoItem`, which should
-   *   be freed with [Pango.Item.free].
+   *   be freed with [pango.item.Item.free].
    */
   this()
   {
@@ -88,7 +88,7 @@ class Item : Boxed
    * Add attributes to a `PangoItem`.
    * The idea is that you have attributes that don't affect itemization,
    * such as font features, so you filter them out using
-   * [Pango.AttrList.filter], itemize your text, then reapply the
+   * [pango.attr_list.AttrList.filter], itemize your text, then reapply the
    * attributes to the resulting items using this function.
    * The iter should be positioned before the range of the item,
    * and will be advanced past it. This function is meant to be called
@@ -124,14 +124,14 @@ class Item : Boxed
    * assigned to each item, you can't create a zero-length item$(RPAREN).
    * split_offset is the length of the first item in chars, and must be
    * provided because the text used to generate the item isn't available,
-   * so `[Pango.Item.split]` can't count the char length of the split items
+   * so `[pango.item.Item.split]` can't count the char length of the split items
    * itself.
    * Params:
    *   splitIndex = byte index of position to split item, relative to the
    *     start of the item
    *   splitOffset = number of chars between start of orig and split_index
    * Returns: new item representing text before split_index, which
-   *   should be freed with [Pango.Item.free].
+   *   should be freed with [pango.item.Item.free].
    */
   Item split(int splitIndex, int splitOffset)
   {

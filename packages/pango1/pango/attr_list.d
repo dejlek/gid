@@ -1,6 +1,6 @@
 module pango.attr_list;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.attr_iterator;
 import pango.attribute;
@@ -13,7 +13,7 @@ import pango.types;
  * of text.
  * The attributes in a `PangoAttrList` are, in general, allowed to overlap in
  * an arbitrary fashion. However, if the attributes are manipulated only through
- * [Pango.AttrList.change], the overlap between properties will meet
+ * [pango.attr_list.AttrList.change], the overlap between properties will meet
  * stricter criteria.
  * Since the `PangoAttrList` structure is stored as a linear list, it is not
  * suitable for storing attributes for large amounts of text. In general, you
@@ -48,7 +48,7 @@ class AttrList : Boxed
    * count of one.
    * Returns: the newly allocated
    *   `PangoAttrList`, which should be freed with
-   *   [Pango.AttrList.unref]
+   *   [pango.attr_list.AttrList.unref]
    */
   this()
   {
@@ -62,10 +62,10 @@ class AttrList : Boxed
    * It will replace any attributes of the same type
    * on that segment and be merged with any adjoining
    * attributes that are identical.
-   * This function is slower than [Pango.AttrList.insert]
+   * This function is slower than [pango.attr_list.AttrList.insert]
    * for creating an attribute list in order $(LPAREN)potentially
    * much slower for large lists$(RPAREN). However,
-   * [Pango.AttrList.insert] is not suitable for
+   * [pango.attr_list.AttrList.insert] is not suitable for
    * continually changing a set of attributes since it
    * never removes or combines existing attributes.
    * Params:
@@ -80,7 +80,7 @@ class AttrList : Boxed
    * Copy list and return an identical new list.
    * Returns: the newly allocated
    *   `PangoAttrList`, with a reference count of one,
-   *   which should be freed with [Pango.AttrList.unref].
+   *   which should be freed with [pango.attr_list.AttrList.unref].
    *   Returns %NULL if list was %NULL.
    */
   AttrList copy()
@@ -141,8 +141,8 @@ class AttrList : Boxed
   /**
    * Gets a list of all attributes in list.
    * Returns: a list of all attributes in list. To free this value,
-   *   call [Pango.Attribute.destroy] on each value and
-   *   [GLib.SList.free] on the list.
+   *   call [pango.attribute.Attribute.destroy] on each value and
+   *   [glib.slist.SList.free] on the list.
    */
   Attribute[] getAttributes()
   {
@@ -157,7 +157,7 @@ class AttrList : Boxed
    * list must not be modified until this iterator is freed.
    * Returns: the newly allocated
    *   `PangoAttrIterator`, which should be freed with
-   *   [Pango.AttrIterator.destroy]
+   *   [pango.attr_iterator.AttrIterator.destroy]
    */
   AttrIterator getIterator()
   {
@@ -197,7 +197,7 @@ class AttrList : Boxed
    * other on top of the hole.
    * This operation is equivalent to stretching every attribute
    * that applies at position pos in list by an amount len,
-   * and then calling [Pango.AttrList.change] with a copy
+   * and then calling [pango.attr_list.AttrList.change] with a copy
    * of each attribute in other in sequence $(LPAREN)offset in position
    * by pos, and limited in length to len$(RPAREN).
    * This operation proves useful for, for instance, inserting
@@ -232,8 +232,8 @@ class AttrList : Boxed
    * - strings as string, optionally quoted
    * - font features as quoted string
    * - PangoLanguage as string
-   * - PangoFontDescription as serialized by [Pango.FontDescription.toString_], quoted
-   * - PangoColor as serialized by [Pango.Color.toString_]
+   * - PangoFontDescription as serialized by [pango.font_description.FontDescription.toString_], quoted
+   * - PangoColor as serialized by [pango.color.Color.toString_]
    * Examples:
    * ```
    * 0 10 foreground red, 5 15 weight bold, 0 200 font-desc "Sans 10"
@@ -242,7 +242,7 @@ class AttrList : Boxed
    * 0 -1 weight 700
    * 0 100 family Times
    * ```
-   * To parse the returned value, use [Pango.AttrList.fromString].
+   * To parse the returned value, use [pango.attr_list.AttrList.fromString].
    * Note that shape attributes can not be serialized.
    * Returns: a newly allocated string
    */
@@ -277,7 +277,7 @@ class AttrList : Boxed
 
   /**
    * Deserializes a `PangoAttrList` from a string.
-   * This is the counterpart to [Pango.AttrList.toString_].
+   * This is the counterpart to [pango.attr_list.AttrList.toString_].
    * See that functions for details about the format.
    * Params:
    *   text = a string

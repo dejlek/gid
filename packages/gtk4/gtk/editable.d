@@ -1,7 +1,7 @@
 module gtk.editable;
 
 public import gtk.editable_iface_proxy;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gobject.param_spec;
@@ -12,8 +12,8 @@ import gtk.types;
 
 /**
  * `GtkEditable` is an interface for text editing widgets.
- * Typical examples of editable widgets are [Gtk.Entry] and
- * [Gtk.SpinButton]. It contains functions for generically manipulating
+ * Typical examples of editable widgets are [gtk.entry.Entry] and
+ * [gtk.spin_button.SpinButton]. It contains functions for generically manipulating
  * an editable widget, a large number of action signals used for key bindings,
  * and several signals that an application can connect to modify the behavior
  * of a widget.
@@ -45,7 +45,7 @@ import gtk.types;
  * is that you will embed a `GtkText` inside a complex widget, and want to
  * delegate the editable functionality to that text widget. `GtkEditable`
  * provides some utility functions to make this easy.
- * In your class_init function, call [Gtk.Editable.installProperties],
+ * In your class_init function, call [gtk.editable.Editable.installProperties],
  * passing the first available property ID:
  * ```c
  * static void
@@ -75,7 +75,7 @@ import gtk.types;
  * work by forwarding to the delegate that the GtkEditableInterface.get_delegate$(LPAREN)$(RPAREN)
  * vfunc returns.
  * In your instance_init function, create your text widget, and then call
- * [Gtk.Editable.initDelegate]:
+ * [gtk.editable.Editable.initDelegate]:
  * ```c
  * static void
  * my_widget_init $(LPAREN)MyWidget *self$(RPAREN)
@@ -86,7 +86,7 @@ import gtk.types;
  * ...
  * }
  * ```
- * In your dispose function, call [Gtk.Editable.finishDelegate] before
+ * In your dispose function, call [gtk.editable.Editable.finishDelegate] before
  * destroying your text widget:
  * ```c
  * static void
@@ -98,7 +98,7 @@ import gtk.types;
  * ...
  * }
  * ```
- * Finally, use [Gtk.Editable.delegateSetProperty] in your `set_property`
+ * Finally, use [gtk.editable.Editable.delegateSetProperty] in your `set_property`
  * function $(LPAREN)and similar for `get_property`$(RPAREN), to set the editable properties:
  * ```c
  * ...
@@ -114,7 +114,7 @@ import gtk.types;
  * the delegate to the "wrapper" editable, as they would cause an infinite
  * recursion. If you wish to connect to the signal@Gtk.Editable::insert-text
  * and signal@Gtk.Editable::delete-text signals, you will need to connect
- * to them on the delegate obtained via [Gtk.Editable.getDelegate].
+ * to them on the delegate obtained via [gtk.editable.Editable.getDelegate].
  */
 interface Editable
 {
@@ -209,7 +209,7 @@ interface Editable
   void deleteText(int startPos, int endPos);
 
   /**
-   * Undoes the setup done by [Gtk.Editable.initDelegate].
+   * Undoes the setup done by [gtk.editable.Editable.initDelegate].
    * This is a helper function that should be called from dispose,
    * before removing the delegate object.
    */
@@ -240,7 +240,7 @@ interface Editable
   /**
    * Gets the `GtkEditable` that editable is delegating its
    * implementation to.
-   * Typically, the delegate is a [Gtk.Text] widget.
+   * Typically, the delegate is a [gtk.text.Text] widget.
    * Returns: the delegate `GtkEditable`
    */
   Editable getDelegate();
@@ -355,7 +355,7 @@ interface Editable
    * actions.
    * This results in an additional copy of text changes and are not
    * stored in secure memory. As such, undo is forcefully disabled
-   * when [Gtk.Text.visibility] is set to %FALSE.
+   * when [gtk.text.Text.gboolean] is set to %FALSE.
    * Params:
    *   enableUndo = if undo/redo should be enabled
    */
@@ -426,10 +426,10 @@ interface Editable
    * Emitted when text is deleted from the widget by the user.
    * The default handler for this signal will normally be responsible for
    * deleting the text, so by connecting to this signal and then stopping
-   * the signal with [GObject.Global.signalStopEmission], it is possible to modify the
+   * the signal with [gobject.global.signalStopEmission], it is possible to modify the
    * range of deleted text, or prevent it from being deleted entirely.
    * The start_pos and end_pos parameters are interpreted as for
-   * [Gtk.Editable.deleteText].
+   * [gtk.editable.Editable.deleteText].
    * Params
    *   startPos = the starting position
    *   endPos = the end position

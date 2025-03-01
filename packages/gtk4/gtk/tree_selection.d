@@ -1,6 +1,6 @@
 module gtk.tree_selection;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -22,7 +22,7 @@ import gtk.types;
  * That is, there is no conceptual reason all these functions could not be
  * methods on the `GtkTreeView` widget instead of a separate function.
  * The `GtkTreeSelection` object is gotten from a `GtkTreeView` by calling
- * [Gtk.TreeView.getSelection].  It can be manipulated to check the
+ * [gtk.tree_view.TreeView.getSelection].  It can be manipulated to check the
  * selection status of the tree, as well as select and deselect individual
  * rows.  Selection is done completely view side.  As a result, multiple
  * views of the same model can have completely different selections.
@@ -36,7 +36,7 @@ import gtk.types;
  * when nothing has happened $(LPAREN)mostly as a result of programmers calling
  * select_row on an already selected row$(RPAREN).
 
- * Deprecated: Use [Gtk.SelectionModel] instead
+ * Deprecated: Use [gtk.selection_model.SelectionModel] instead
  */
 class TreeSelection : ObjectG
 {
@@ -72,7 +72,7 @@ class TreeSelection : ObjectG
 
   /**
    * Gets the selection mode for selection. See
-   * [Gtk.TreeSelection.setMode].
+   * [gtk.tree_selection.TreeSelection.setMode].
    * Returns: the current selection mode
 
    * Deprecated: Use GtkListView or GtkColumnView
@@ -113,7 +113,7 @@ class TreeSelection : ObjectG
    * Creates a list of path of all selected rows. Additionally, if you are
    * planning on modifying the model after calling this function, you may
    * want to convert the returned list into a list of `GtkTreeRowReference`s.
-   * To do this, you can use [Gtk.TreeRowReference.new_].
+   * To do this, you can use [gtk.tree_row_reference.TreeRowReference.new_].
    * To free the return value, use:
    * |[<!-- language\="C" -->
    * g_list_free_full $(LPAREN)list, $(LPAREN)GDestroyNotify$(RPAREN) gtk_tree_path_free$(RPAREN);
@@ -231,7 +231,7 @@ class TreeSelection : ObjectG
   /**
    * Calls a function for each selected node. Note that you cannot modify
    * the tree or selection from within this function. As a result,
-   * [Gtk.TreeSelection.getSelectedRows] might be more useful.
+   * [gtk.tree_selection.TreeSelection.getSelectedRows] might be more useful.
    * Params:
    *   func = The function to call for each selected node.
 

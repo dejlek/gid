@@ -1,6 +1,6 @@
 module gtk.window_controls;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -18,7 +18,7 @@ import gtk.widget;
  * and the window icon.
  * ![An example GtkWindowControls](windowcontrols.png)
  * `GtkWindowControls` only displays start or end side of the controls $(LPAREN)see
- * [Gtk.WindowControls.side]$(RPAREN), so it's intended to be always used
+ * [gtk.window_controls.WindowControls.PackType]$(RPAREN), so it's intended to be always used
  * in pair with another `GtkWindowControls` for the opposite side, for example:
  * ```xml
  * <object class\="GtkBox">
@@ -47,7 +47,7 @@ import gtk.widget;
  * subnodes corresponding to each title button. Which of the title buttons
  * exist and where they are placed exactly depends on the desktop environment
  * and property@Gtk.WindowControls:decoration-layout value.
- * When [Gtk.WindowControls.empty] is %TRUE, it gets the .empty
+ * When [gtk.window_controls.WindowControls.gboolean] is %TRUE, it gets the .empty
  * style class.
  * # Accessibility
  * `GtkWindowControls` uses the %GTK_ACCESSIBLE_ROLE_GROUP role.
@@ -129,7 +129,7 @@ class WindowControls : Widget
    * maximize, close and icon $(LPAREN)the window icon$(RPAREN).
    * For example, “icon:minimize,maximize,close” specifies a icon
    * on the left, and minimize, maximize and close buttons on the right.
-   * If [Gtk.WindowControls.side] value is GTK_PACK_START, self
+   * If [gtk.window_controls.WindowControls.PackType] value is GTK_PACK_START, self
    * will display the part before the colon, otherwise after that.
    * Params:
    *   layout = a decoration layout, or %NULL to unset the layout

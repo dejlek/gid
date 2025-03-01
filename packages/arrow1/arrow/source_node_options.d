@@ -7,7 +7,7 @@ import arrow.record_batch;
 import arrow.record_batch_reader;
 import arrow.table;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class SourceNodeOptions : ExecuteNodeOptions

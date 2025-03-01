@@ -1,6 +1,6 @@
 module glib.private_;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -56,7 +56,7 @@ class Private
   /**
    * Sets the thread local variable key to have the value value in the
    * current thread.
-   * This function differs from [GLib.Private.set] in the following way: if
+   * This function differs from [glib.private_.Private.set] in the following way: if
    * the previous value was non-%NULL then the #GDestroyNotify handler for
    * key is run on it.
    * Params:
@@ -70,7 +70,7 @@ class Private
   /**
    * Sets the thread local variable key to have the value value in the
    * current thread.
-   * This function differs from [GLib.Private.replace] in the following way:
+   * This function differs from [glib.private_.Private.replace] in the following way:
    * the #GDestroyNotify for key is not called on the old value.
    * Params:
    *   value = the new value

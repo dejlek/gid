@@ -1,6 +1,6 @@
 module gio.dbus_auth_observer;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.credentials;
@@ -11,7 +11,7 @@ import gobject.object;
 
 /**
  * `GDBusAuthObserver` provides a mechanism for participating
- * in how a [Gio.DBusServer] [](or a Gio.DBusConnection)
+ * in how a [gio.dbus_server.DBusServer] [](or a gio.dbus_connection.DBusConnection)
  * authenticates remote peers.
  * Simply instantiate a `GDBusAuthObserver` and connect to the
  * signals you are interested in. Note that new signals may be added
@@ -85,7 +85,7 @@ class DBusAuthObserver : ObjectG
 
   /**
    * Creates a new #GDBusAuthObserver object.
-   * Returns: A #GDBusAuthObserver. Free with [GObject.ObjectG.unref].
+   * Returns: A #GDBusAuthObserver. Free with [gobject.object.ObjectG.unref].
    */
   this()
   {

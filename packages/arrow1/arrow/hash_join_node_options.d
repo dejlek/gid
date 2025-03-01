@@ -4,7 +4,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.execute_node_options;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class HashJoinNodeOptions : ExecuteNodeOptions

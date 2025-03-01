@@ -1,6 +1,6 @@
 module gio.file_input_stream;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -17,10 +17,10 @@ import gobject.object;
 /**
  * `GFileInputStream` provides input streams that take their
  * content from a file.
- * `GFileInputStream` implements [Gio.Seekable], which allows the input
+ * `GFileInputStream` implements [gio.seekable.Seekable], which allows the input
  * stream to jump to arbitrary positions in the file, provided the
  * filesystem of the file allows it. To find the position of a file
- * input stream, use [Gio.Seekable.tell]. To find out if a file input
+ * input stream, use [gio.seekable.Seekable.tell]. To find out if a file input
  * stream supports seeking, use vfunc@Gio.Seekable.can_seek.
  * To position a file input stream, use vfunc@Gio.Seekable.seek.
  */
@@ -48,7 +48,7 @@ class FileInputStream : InputStream, Seekable
   /**
    * Queries a file input stream the given attributes. This function blocks
    * while querying the stream. For the asynchronous $(LPAREN)non-blocking$(RPAREN) version
-   * of this function, see [Gio.FileInputStream.queryInfoAsync]. While the
+   * of this function, see [gio.file_input_stream.FileInputStream.queryInfoAsync]. While the
    * stream is blocked, the stream will set the pending flag internally, and
    * any other operations on the stream will fail with %G_IO_ERROR_PENDING.
    * Params:
@@ -71,10 +71,10 @@ class FileInputStream : InputStream, Seekable
   /**
    * Queries the stream information asynchronously.
    * When the operation is finished callback will be called.
-   * You can then call [Gio.FileInputStream.queryInfoFinish]
+   * You can then call [gio.file_input_stream.FileInputStream.queryInfoFinish]
    * to get the result of the operation.
    * For the synchronous version of this function,
-   * see [Gio.FileInputStream.queryInfo].
+   * see [gio.file_input_stream.FileInputStream.queryInfo].
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be set

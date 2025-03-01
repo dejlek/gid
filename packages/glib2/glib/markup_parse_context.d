@@ -1,6 +1,6 @@
 module glib.markup_parse_context;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -10,7 +10,7 @@ import gobject.boxed;
 /**
  * A parse context is used to parse a stream of bytes that
  * you expect to contain marked-up text.
- * See [GLib.MarkupParseContext.new_], #GMarkupParser, and so
+ * See [glib.markup_parse_context.MarkupParseContext.new_], #GMarkupParser, and so
  * on for more details.
  */
 class MarkupParseContext : Boxed
@@ -48,7 +48,7 @@ class MarkupParseContext : Boxed
 
   /**
    * Signals to the #GMarkupParseContext that all data has been
-   * fed into the parse context with [GLib.MarkupParseContext.parse].
+   * fed into the parse context with [glib.markup_parse_context.MarkupParseContext.parse].
    * This function reports an error if the document isn't complete,
    * for example if elements are still open.
    * Returns: %TRUE on success, %FALSE if an error was set
@@ -67,7 +67,7 @@ class MarkupParseContext : Boxed
    * Retrieves the name of the currently open element.
    * If called from the start_element or end_element handlers this will
    * give the element_name as passed to those functions. For the parent
-   * elements, see [GLib.MarkupParseContext.getElementStack].
+   * elements, see [glib.markup_parse_context.MarkupParseContext.getElementStack].
    * Returns: the name of the currently open element, or %NULL
    */
   string getElement()
@@ -82,10 +82,10 @@ class MarkupParseContext : Boxed
    * Retrieves the element stack from the internal state of the parser.
    * The returned #GSList is a list of strings where the first item is
    * the currently open tag $(LPAREN)as would be returned by
-   * [GLib.MarkupParseContext.getElement]$(RPAREN) and the next item is its
+   * [glib.markup_parse_context.MarkupParseContext.getElement]$(RPAREN) and the next item is its
    * immediate parent.
    * This function is intended to be used in the start_element and
-   * end_element handlers where [GLib.MarkupParseContext.getElement]
+   * end_element handlers where [glib.markup_parse_context.MarkupParseContext.getElement]
    * would merely return the name of the element that is being
    * processed.
    * Returns: the element stack, which must not be modified
@@ -115,11 +115,11 @@ class MarkupParseContext : Boxed
   /**
    * Returns the user_data associated with context.
    * This will either be the user_data that was provided to
-   * [GLib.MarkupParseContext.new_] or to the most recent call
-   * of [GLib.MarkupParseContext.push].
+   * [glib.markup_parse_context.MarkupParseContext.new_] or to the most recent call
+   * of [glib.markup_parse_context.MarkupParseContext.push].
    * Returns: the provided user_data. The returned data belongs to
    *   the markup context and will be freed when
-   *   [GLib.MarkupParseContext.free] is called.
+   *   [glib.markup_parse_context.MarkupParseContext.free] is called.
    */
   void* getUserData()
   {
@@ -156,16 +156,16 @@ class MarkupParseContext : Boxed
   /**
    * Completes the process of a temporary sub-parser redirection.
    * This function exists to collect the user_data allocated by a
-   * matching call to [GLib.MarkupParseContext.push]. It must be called
+   * matching call to [glib.markup_parse_context.MarkupParseContext.push]. It must be called
    * in the end_element handler corresponding to the start_element
-   * handler during which [GLib.MarkupParseContext.push] was called.
+   * handler during which [glib.markup_parse_context.MarkupParseContext.push] was called.
    * You must not call this function from the error callback -- the
    * user_data is provided directly to the callback in that case.
    * This function is not intended to be directly called by users
    * interested in invoking subparsers. Instead, it is intended to
    * be used by the subparsers themselves to implement a higher-level
    * interface.
-   * Returns: the user data passed to [GLib.MarkupParseContext.push]
+   * Returns: the user data passed to [glib.markup_parse_context.MarkupParseContext.push]
    */
   void* pop()
   {
@@ -177,7 +177,7 @@ class MarkupParseContext : Boxed
    * Temporarily redirects markup data to a sub-parser.
    * This function may only be called from the start_element handler of
    * a #GMarkupParser. It must be matched with a corresponding call to
-   * [GLib.MarkupParseContext.pop] in the matching end_element handler
+   * [glib.markup_parse_context.MarkupParseContext.pop] in the matching end_element handler
    * $(LPAREN)except in the case that the parser aborts due to an error$(RPAREN).
    * All tags, text and other data between the matching tags is
    * redirected to the subparser given by parser. user_data is used
@@ -186,10 +186,10 @@ class MarkupParseContext : Boxed
    * errors that occur in subparsers of the subparser.
    * The end tag matching the start tag for which this call was made is
    * handled by the previous parser $(LPAREN)which is given its own user_data$(RPAREN)
-   * which is why [GLib.MarkupParseContext.pop] is provided to allow "one
+   * which is why [glib.markup_parse_context.MarkupParseContext.pop] is provided to allow "one
    * last access" to the user_data provided to this function. In the
    * case of error, the user_data provided here is passed directly to
-   * the error callback of the subparser and [GLib.MarkupParseContext.pop]
+   * the error callback of the subparser and [glib.markup_parse_context.MarkupParseContext.pop]
    * should not be called. In either case, if user_data was allocated
    * then it ought to be freed from both of these locations.
    * This function is not intended to be directly called by users

@@ -1,6 +1,6 @@
 module gtk.text_mark;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -16,7 +16,7 @@ import gtk.types;
  * related to the text widget and how they work together.
  * A `GtkTextMark` is like a bookmark in a text buffer; it preserves
  * a position in the text. You can convert the mark to an iterator using
- * [Gtk.TextBuffer.getIterAtMark]. Unlike iterators, marks remain
+ * [gtk.text_buffer.TextBuffer.getIterAtMark]. Unlike iterators, marks remain
  * valid across buffer mutations, because their behavior is defined when
  * text is inserted or deleted. When text containing a mark is deleted,
  * the mark remains in the position originally occupied by the deleted
@@ -29,11 +29,11 @@ import gtk.types;
  * displayed.
  * Marks are reference counted, but the reference count only controls
  * the validity of the memory; marks can be deleted from the buffer at
- * any time with [Gtk.TextBuffer.deleteMark]. Once deleted from
+ * any time with [gtk.text_buffer.TextBuffer.deleteMark]. Once deleted from
  * the buffer, a mark is essentially useless.
  * Marks optionally have names; these can be convenient to avoid passing
  * the `GtkTextMark` object around.
- * Marks are typically created using the [Gtk.TextBuffer.createMark]
+ * Marks are typically created using the [gtk.text_buffer.TextBuffer.createMark]
  * function.
  */
 class TextMark : ObjectG
@@ -57,9 +57,9 @@ class TextMark : ObjectG
 
   /**
    * Creates a text mark.
-   * Add it to a buffer using [Gtk.TextBuffer.addMark].
+   * Add it to a buffer using [gtk.text_buffer.TextBuffer.addMark].
    * If name is %NULL, the mark is anonymous; otherwise, the mark can be
-   * retrieved by name using [Gtk.TextBuffer.getMark]. If a mark
+   * retrieved by name using [gtk.text_buffer.TextBuffer.getMark]. If a mark
    * has left gravity, and text is inserted at the mark’s current location,
    * the mark will be moved to the left of the newly-inserted text. If the
    * mark has right gravity $(LPAREN)left_gravity \= %FALSE$(RPAREN), the mark will end up
@@ -94,7 +94,7 @@ class TextMark : ObjectG
 
   /**
    * Returns %TRUE if the mark has been removed from its buffer.
-   * See [Gtk.TextBuffer.addMark] for a way to add it
+   * See [gtk.text_buffer.TextBuffer.addMark] for a way to add it
    * to a buffer again.
    * Returns: whether the mark is deleted
    */

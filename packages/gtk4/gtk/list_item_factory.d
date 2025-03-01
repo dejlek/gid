@@ -1,6 +1,6 @@
 module gtk.list_item_factory;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -9,7 +9,7 @@ import gtk.types;
 /**
  * A `GtkListItemFactory` creates widgets for the items taken from a `GListModel`.
  * This is one of the core concepts of handling list widgets such
- * as [Gtk.ListView] or [Gtk.GridView].
+ * as [gtk.list_view.ListView] or [gtk.grid_view.GridView].
  * The `GtkListItemFactory` is tasked with creating widgets for items
  * taken from the model when the views need them and updating them as
  * the items displayed by the view change.
@@ -28,12 +28,12 @@ import gtk.types;
  * and hand it to your code to set up a widget for. This list item will provide
  * various properties with information about what item to display and provide
  * you with some opportunities to configure its behavior. See the
- * [Gtk.ListItem] documentation for further details.
+ * [gtk.list_item.ListItem] documentation for further details.
  * Various implementations of `GtkListItemFactory` exist to allow you different
  * ways to provide those widgets. The most common implementations are
- * [Gtk.BuilderListItemFactory] which takes a `GtkBuilder` .ui file
+ * [gtk.builder_list_item_factory.BuilderListItemFactory] which takes a `GtkBuilder` .ui file
  * and then creates widgets and manages everything automatically from the
- * information in that file and [Gtk.SignalListItemFactory] which allows
+ * information in that file and [gtk.signal_list_item_factory.SignalListItemFactory] which allows
  * you to connect to signals with your own code and retain full control over
  * how the widgets are setup and managed.
  * A `GtkListItemFactory` is supposed to be final - that means its behavior should
@@ -43,7 +43,7 @@ import gtk.types;
  * a new `GtkListItemFactory` which will allow the views to recreate its widgets.
  * Once you have chosen your factory and created it, you need to set it
  * on the view widget you want to use it with, such as via
- * [Gtk.ListView.setFactory]. Reusing factories across different
+ * [gtk.list_view.ListView.setFactory]. Reusing factories across different
  * views is allowed, but very uncommon.
  */
 class ListItemFactory : ObjectG

@@ -2,7 +2,7 @@ module pangocairo.font_mixin;
 
 public import pangocairo.font_iface_proxy;
 public import cairo.scaled_font;
-public import gid.gid;
+public import gid.global;
 public import pangocairo.c.functions;
 public import pangocairo.c.types;
 public import pangocairo.types;
@@ -19,7 +19,7 @@ template FontT()
   /**
    * Gets the `cairo_scaled_font_t` used by font.
    * The scaled font can be referenced and kept using
-   * [cairo.ScaledFont.reference].
+   * [cairo.scaled_font.ScaledFont.reference].
    * Returns: the `cairo_scaled_font_t`
    *   used by font
    */

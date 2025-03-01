@@ -1,6 +1,6 @@
 module gtk.cell_renderer_text;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -16,7 +16,7 @@ import gtk.types;
  * the `GtkCellRendererText` allows to edit its text using an entry.
 
  * Deprecated: List views use widgets to display their contents.
- *   You should use [Gtk.Inscription] or [Gtk.Label] instead
+ *   You should use [gtk.inscription.Inscription] or [gtk.label.Label] instead
  */
 class CellRendererText : CellRenderer
 {
@@ -40,7 +40,7 @@ class CellRendererText : CellRenderer
   /**
    * Creates a new `GtkCellRendererText`. Adjust how text is drawn using
    * object properties. Object properties can be
-   * set globally $(LPAREN)with [GObject.ObjectG.set]$(RPAREN). Also, with `GtkTreeViewColumn`,
+   * set globally $(LPAREN)with [gobject.object.ObjectG.set]$(RPAREN). Also, with `GtkTreeViewColumn`,
    * you can bind a property to a value in a `GtkTreeModel`. For example,
    * you can bind the “text” property on the cell renderer to a string
    * value in the model, thus rendering a different string in each row

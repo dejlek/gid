@@ -1,6 +1,6 @@
 module glib.bookmark_file;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.date_time;
@@ -37,10 +37,10 @@ import gobject.boxed;
  * is accessed through its URI.
  * The important caveat of bookmark files is that when you add a new
  * bookmark you must also add the application that is registering it, using
- * [GLib.BookmarkFile.addApplication] or [GLib.BookmarkFile.setApplicationInfo].
+ * [glib.bookmark_file.BookmarkFile.addApplication] or [glib.bookmark_file.BookmarkFile.setApplicationInfo].
  * If a bookmark has no applications then it won't be dumped when creating
- * the on disk representation, using [GLib.BookmarkFile.toData] or
- * [GLib.BookmarkFile.toFile].
+ * the on disk representation, using [glib.bookmark_file.BookmarkFile.toData] or
+ * [glib.bookmark_file.BookmarkFile.toFile].
  */
 class BookmarkFile : Boxed
 {
@@ -68,8 +68,8 @@ class BookmarkFile : Boxed
 
   /**
    * Creates a new empty #GBookmarkFile object.
-   * Use [GLib.BookmarkFile.loadFromFile], [GLib.BookmarkFile.loadFromData]
-   * or [GLib.BookmarkFile.loadFromDataDirs] to read an existing bookmark
+   * Use [glib.bookmark_file.BookmarkFile.loadFromFile], [glib.bookmark_file.BookmarkFile.loadFromData]
+   * or [glib.bookmark_file.BookmarkFile.loadFromDataDirs] to read an existing bookmark
    * file.
    * Returns: an empty #GBookmarkFile
    */
@@ -90,9 +90,9 @@ class BookmarkFile : Boxed
    * the bookmark has been registered by the application and the last
    * time the application registered this bookmark.
    * If name is %NULL, the name of the application will be the
-   * same returned by [GLib.Global.getApplicationName]; if exec is %NULL, the
+   * same returned by [glib.global.getApplicationName]; if exec is %NULL, the
    * command line will be a composition of the program name as
-   * returned by [GLib.Global.getPrgname] and the "\%u" modifier, which will be
+   * returned by [glib.global.getPrgname] and the "\%u" modifier, which will be
    * expanded to the bookmark's URI.
    * This function will automatically take care of updating the
    * registrations count and timestamping in case an application
@@ -149,7 +149,7 @@ class BookmarkFile : Boxed
    *   uri = a valid URI
    * Returns: a timestamp
 
-   * Deprecated: Use [GLib.BookmarkFile.getAddedDateTime] instead, as
+   * Deprecated: Use [glib.bookmark_file.BookmarkFile.getAddedDateTime] instead, as
    *   `time_t` is deprecated due to the year 2038 problem.
    */
   long getAdded(string uri)
@@ -185,7 +185,7 @@ class BookmarkFile : Boxed
 
   /**
    * Gets the registration information of app_name for the bookmark for
-   * uri.  See [GLib.BookmarkFile.setApplicationInfo] for more information about
+   * uri.  See [glib.bookmark_file.BookmarkFile.setApplicationInfo] for more information about
    * the returned data.
    * The string returned in app_exec must be freed.
    * In the event the URI cannot be found, %FALSE is returned and
@@ -203,7 +203,7 @@ class BookmarkFile : Boxed
    *   stamp = return location for the last registration time, or %NULL
    * Returns: %TRUE on success.
 
-   * Deprecated: Use [GLib.BookmarkFile.getApplicationInfo] instead, as
+   * Deprecated: Use [glib.bookmark_file.BookmarkFile.getApplicationInfo] instead, as
    *   `time_t` is deprecated due to the year 2038 problem.
    */
   bool getAppInfo(string uri, string name, out string exec, out uint count, out long stamp)
@@ -222,7 +222,7 @@ class BookmarkFile : Boxed
 
   /**
    * Gets the registration information of app_name for the bookmark for
-   * uri.  See [GLib.BookmarkFile.setApplicationInfo] for more information about
+   * uri.  See [glib.bookmark_file.BookmarkFile.setApplicationInfo] for more information about
    * the returned data.
    * The string returned in app_exec must be freed.
    * In the event the URI cannot be found, %FALSE is returned and
@@ -264,7 +264,7 @@ class BookmarkFile : Boxed
    * Params:
    *   uri = a valid URI
    * Returns: a newly allocated %NULL-terminated array of strings.
-   *   Use [GLib.Global.strfreev] to free it.
+   *   Use [glib.global.strfreev] to free it.
    */
   string[] getApplications(string uri)
   {
@@ -316,7 +316,7 @@ class BookmarkFile : Boxed
    * Params:
    *   uri = a valid URI
    * Returns: a newly allocated %NULL-terminated array of group names.
-   *   Use [GLib.Global.strfreev] to free it.
+   *   Use [glib.global.strfreev] to free it.
    */
   string[] getGroups(string uri)
   {
@@ -416,7 +416,7 @@ class BookmarkFile : Boxed
    *   uri = a valid URI
    * Returns: a timestamp
 
-   * Deprecated: Use [GLib.BookmarkFile.getModifiedDateTime] instead, as
+   * Deprecated: Use [glib.bookmark_file.BookmarkFile.getModifiedDateTime] instead, as
    *   `time_t` is deprecated due to the year 2038 problem.
    */
   long getModified(string uri)
@@ -488,7 +488,7 @@ class BookmarkFile : Boxed
    * The array of returned URIs will be %NULL-terminated, so length may
    * optionally be %NULL.
    * Returns: a newly allocated %NULL-terminated array of strings.
-   *   Use [GLib.Global.strfreev] to free it.
+   *   Use [glib.global.strfreev] to free it.
    */
   string[] getUris()
   {
@@ -514,7 +514,7 @@ class BookmarkFile : Boxed
    *   uri = a valid URI
    * Returns: a timestamp.
 
-   * Deprecated: Use [GLib.BookmarkFile.getVisitedDateTime] instead, as
+   * Deprecated: Use [glib.bookmark_file.BookmarkFile.getVisitedDateTime] instead, as
    *   `time_t` is deprecated due to the year 2038 problem.
    */
   long getVisited(string uri)
@@ -632,7 +632,7 @@ class BookmarkFile : Boxed
 
   /**
    * This function looks for a desktop bookmark file named file in the
-   * paths returned from [GLib.Global.getUserDataDir] and [GLib.Global.getSystemDataDirs],
+   * paths returned from [glib.global.getUserDataDir] and [glib.global.getSystemDataDirs],
    * loads the file into bookmark and returns the file's full path in
    * full_path.  If the file could not be loaded then error is
    * set to either a #GFileError or #GBookmarkFileError.
@@ -771,7 +771,7 @@ class BookmarkFile : Boxed
    *   uri = a valid URI
    *   added = a timestamp or -1 to use the current time
 
-   * Deprecated: Use [GLib.BookmarkFile.setAddedDateTime] instead, as
+   * Deprecated: Use [glib.bookmark_file.BookmarkFile.setAddedDateTime] instead, as
    *   `time_t` is deprecated due to the year 2038 problem.
    */
   void setAdded(string uri, long added)
@@ -797,15 +797,15 @@ class BookmarkFile : Boxed
    * Sets the meta-data of application name inside the list of
    * applications that have registered a bookmark for uri inside
    * bookmark.
-   * You should rarely use this function; use [GLib.BookmarkFile.addApplication]
-   * and [GLib.BookmarkFile.removeApplication] instead.
+   * You should rarely use this function; use [glib.bookmark_file.BookmarkFile.addApplication]
+   * and [glib.bookmark_file.BookmarkFile.removeApplication] instead.
    * name can be any UTF-8 encoded string used to identify an
    * application.
    * exec can have one of these two modifiers: "\%f", which will
    * be expanded as the local file name retrieved from the bookmark's
    * URI; "\%u", which will be expanded as the bookmark's URI.
    * The expansion is done automatically when retrieving the stored
-   * command line using the [GLib.BookmarkFile.getApplicationInfo] function.
+   * command line using the [glib.bookmark_file.BookmarkFile.getApplicationInfo] function.
    * count is the number of times the application has registered the
    * bookmark; if is < 0, the current registration count will be increased
    * by one, if is 0, the application with name will be removed from
@@ -828,7 +828,7 @@ class BookmarkFile : Boxed
    * Returns: %TRUE if the application's meta-data was successfully
    *   changed.
 
-   * Deprecated: Use [GLib.BookmarkFile.setApplicationInfo] instead, as
+   * Deprecated: Use [glib.bookmark_file.BookmarkFile.setApplicationInfo] instead, as
    *   `time_t` is deprecated due to the year 2038 problem.
    */
   bool setAppInfo(string uri, string name, string exec, int count, long stamp)
@@ -848,15 +848,15 @@ class BookmarkFile : Boxed
    * Sets the meta-data of application name inside the list of
    * applications that have registered a bookmark for uri inside
    * bookmark.
-   * You should rarely use this function; use [GLib.BookmarkFile.addApplication]
-   * and [GLib.BookmarkFile.removeApplication] instead.
+   * You should rarely use this function; use [glib.bookmark_file.BookmarkFile.addApplication]
+   * and [glib.bookmark_file.BookmarkFile.removeApplication] instead.
    * name can be any UTF-8 encoded string used to identify an
    * application.
    * exec can have one of these two modifiers: "\%f", which will
    * be expanded as the local file name retrieved from the bookmark's
    * URI; "\%u", which will be expanded as the bookmark's URI.
    * The expansion is done automatically when retrieving the stored
-   * command line using the [GLib.BookmarkFile.getApplicationInfo] function.
+   * command line using the [glib.bookmark_file.BookmarkFile.getApplicationInfo] function.
    * count is the number of times the application has registered the
    * bookmark; if is < 0, the current registration count will be increased
    * by one, if is 0, the application with name will be removed from
@@ -981,12 +981,12 @@ class BookmarkFile : Boxed
    * The "modified" time should only be set when the bookmark's meta-data
    * was actually changed.  Every function of #GBookmarkFile that
    * modifies a bookmark also changes the modification time, except for
-   * [GLib.BookmarkFile.setVisitedDateTime].
+   * [glib.bookmark_file.BookmarkFile.setVisitedDateTime].
    * Params:
    *   uri = a valid URI
    *   modified = a timestamp or -1 to use the current time
 
-   * Deprecated: Use [GLib.BookmarkFile.setModifiedDateTime] instead, as
+   * Deprecated: Use [glib.bookmark_file.BookmarkFile.setModifiedDateTime] instead, as
    *   `time_t` is deprecated due to the year 2038 problem.
    */
   void setModified(string uri, long modified)
@@ -1001,7 +1001,7 @@ class BookmarkFile : Boxed
    * The "modified" time should only be set when the bookmark's meta-data
    * was actually changed.  Every function of #GBookmarkFile that
    * modifies a bookmark also changes the modification time, except for
-   * [GLib.BookmarkFile.setVisitedDateTime].
+   * [glib.bookmark_file.BookmarkFile.setVisitedDateTime].
    * Params:
    *   uri = a valid URI
    *   modified = a #GDateTime
@@ -1032,15 +1032,15 @@ class BookmarkFile : Boxed
    * Sets the time the bookmark for uri was last visited.
    * If no bookmark for uri is found then it is created.
    * The "visited" time should only be set if the bookmark was launched,
-   * either using the command line retrieved by [GLib.BookmarkFile.getApplicationInfo]
+   * either using the command line retrieved by [glib.bookmark_file.BookmarkFile.getApplicationInfo]
    * or by the default application for the bookmark's MIME type, retrieved
-   * using [GLib.BookmarkFile.getMimeType].  Changing the "visited" time
+   * using [glib.bookmark_file.BookmarkFile.getMimeType].  Changing the "visited" time
    * does not affect the "modified" time.
    * Params:
    *   uri = a valid URI
    *   visited = a timestamp or -1 to use the current time
 
-   * Deprecated: Use [GLib.BookmarkFile.setVisitedDateTime] instead, as
+   * Deprecated: Use [glib.bookmark_file.BookmarkFile.setVisitedDateTime] instead, as
    *   `time_t` is deprecated due to the year 2038 problem.
    */
   void setVisited(string uri, long visited)
@@ -1053,9 +1053,9 @@ class BookmarkFile : Boxed
    * Sets the time the bookmark for uri was last visited.
    * If no bookmark for uri is found then it is created.
    * The "visited" time should only be set if the bookmark was launched,
-   * either using the command line retrieved by [GLib.BookmarkFile.getApplicationInfo]
+   * either using the command line retrieved by [glib.bookmark_file.BookmarkFile.getApplicationInfo]
    * or by the default application for the bookmark's MIME type, retrieved
-   * using [GLib.BookmarkFile.getMimeType].  Changing the "visited" time
+   * using [glib.bookmark_file.BookmarkFile.getMimeType].  Changing the "visited" time
    * does not affect the "modified" time.
    * Params:
    *   uri = a valid URI
@@ -1090,7 +1090,7 @@ class BookmarkFile : Boxed
 
   /**
    * This function outputs bookmark into a file.  The write process is
-   * guaranteed to be atomic by using [GLib.Global.fileSetContents] internally.
+   * guaranteed to be atomic by using [glib.global.fileSetContents] internally.
    * Params:
    *   filename = path of the output file
    * Returns: %TRUE if the file was successfully written.

@@ -1,6 +1,6 @@
 module gtk.adjustment;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.initially_unowned;
 import gtk.c.functions;
@@ -12,8 +12,8 @@ import gtk.types;
  * The `GtkAdjustment` has an associated lower and upper bound.
  * It also contains step and page increments, and a page size.
  * Adjustments are used within several GTK widgets, including
- * [Gtk.SpinButton], [Gtk.Viewport], [Gtk.Scrollbar]
- * and [Gtk.Scale].
+ * [gtk.spin_button.SpinButton], [gtk.viewport.Viewport], [gtk.scrollbar.Scrollbar]
+ * and [gtk.scale.Scale].
  * The `GtkAdjustment` object does not update the value itself. Instead
  * it is left up to the owner of the `GtkAdjustment` to control the value.
  */
@@ -74,10 +74,10 @@ class Adjustment : InitiallyUnowned
   /**
    * Sets all properties of the adjustment at once.
    * Use this function to avoid multiple emissions of the
-   * [Gtk.Adjustment.changed] signal. See
-   * [Gtk.Adjustment.setLower] for an alternative
+   * [gtk.adjustment.Adjustment.changed] signal. See
+   * [gtk.adjustment.Adjustment.setLower] for an alternative
    * way of compressing multiple emissions of
-   * [Gtk.Adjustment.changed] into one.
+   * [gtk.adjustment.Adjustment.changed] into one.
    * Params:
    *   value = the new value
    *   lower = the new minimum value
@@ -171,15 +171,15 @@ class Adjustment : InitiallyUnowned
   /**
    * Sets the minimum value of the adjustment.
    * When setting multiple adjustment properties via their individual
-   * setters, multiple [Gtk.Adjustment.changed] signals will
+   * setters, multiple [gtk.adjustment.Adjustment.changed] signals will
    * be emitted. However, since the emission of the
-   * [Gtk.Adjustment.changed] signal is tied to the emission
+   * [gtk.adjustment.Adjustment.changed] signal is tied to the emission
    * of the ::notify signals of the changed properties, it’s possible
-   * to compress the [Gtk.Adjustment.changed] signals into one
-   * by calling [GObject.ObjectG.freezeNotify] and [GObject.ObjectG.thawNotify]
+   * to compress the [gtk.adjustment.Adjustment.changed] signals into one
+   * by calling [gobject.object.ObjectG.freezeNotify] and [gobject.object.ObjectG.thawNotify]
    * around the calls to the individual setters.
-   * Alternatively, using a single [GObject.ObjectG.set] for all the properties
-   * to change, or using [Gtk.Adjustment.configure] has the same effect.
+   * Alternatively, using a single [gobject.object.ObjectG.set] for all the properties
+   * to change, or using [gtk.adjustment.Adjustment.configure] has the same effect.
    * Params:
    *   lower = the new minimum value
    */
@@ -190,8 +190,8 @@ class Adjustment : InitiallyUnowned
 
   /**
    * Sets the page increment of the adjustment.
-   * See [Gtk.Adjustment.setLower] about how to compress
-   * multiple emissions of the [Gtk.Adjustment.changed]
+   * See [gtk.adjustment.Adjustment.setLower] about how to compress
+   * multiple emissions of the [gtk.adjustment.Adjustment.changed]
    * signal when setting multiple adjustment properties.
    * Params:
    *   pageIncrement = the new page increment
@@ -203,8 +203,8 @@ class Adjustment : InitiallyUnowned
 
   /**
    * Sets the page size of the adjustment.
-   * See [Gtk.Adjustment.setLower] about how to compress
-   * multiple emissions of the [Gtk.Adjustment.changed]
+   * See [gtk.adjustment.Adjustment.setLower] about how to compress
+   * multiple emissions of the [gtk.adjustment.Adjustment.changed]
    * signal when setting multiple adjustment properties.
    * Params:
    *   pageSize = the new page size
@@ -216,8 +216,8 @@ class Adjustment : InitiallyUnowned
 
   /**
    * Sets the step increment of the adjustment.
-   * See [Gtk.Adjustment.setLower] about how to compress
-   * multiple emissions of the [Gtk.Adjustment.changed]
+   * See [gtk.adjustment.Adjustment.setLower] about how to compress
+   * multiple emissions of the [gtk.adjustment.Adjustment.changed]
    * signal when setting multiple adjustment properties.
    * Params:
    *   stepIncrement = the new step increment
@@ -231,8 +231,8 @@ class Adjustment : InitiallyUnowned
    * Sets the maximum value of the adjustment.
    * Note that values will be restricted by `upper - page-size`
    * if the page-size property is nonzero.
-   * See [Gtk.Adjustment.setLower] about how to compress
-   * multiple emissions of the [Gtk.Adjustment.changed]
+   * See [gtk.adjustment.Adjustment.setLower] about how to compress
+   * multiple emissions of the [gtk.adjustment.Adjustment.changed]
    * signal when setting multiple adjustment properties.
    * Params:
    *   upper = the new maximum value
@@ -244,12 +244,12 @@ class Adjustment : InitiallyUnowned
 
   /**
    * Sets the `GtkAdjustment` value.
-   * The value is clamped to lie between [Gtk.Adjustment.lower]
-   * and [Gtk.Adjustment.upper].
+   * The value is clamped to lie between [gtk.adjustment.Adjustment.gdouble]
+   * and [gtk.adjustment.Adjustment.gdouble].
    * Note that for adjustments which are used in a `GtkScrollbar`,
    * the effective range of allowed values goes from
-   * [Gtk.Adjustment.lower] to
-   * [Gtk.Adjustment.upper] - propertyGtk.Adjustment:page-size.
+   * [gtk.adjustment.Adjustment.gdouble] to
+   * [gtk.adjustment.Adjustment.gdouble] - propertyGtk.Adjustment:page-size.
    * Params:
    *   value = the new value
    */
@@ -261,7 +261,7 @@ class Adjustment : InitiallyUnowned
   /**
    * Emitted when one or more of the `GtkAdjustment` properties have been
    * changed.
-   * Note that the [Gtk.Adjustment.value] property is
+   * Note that the [gtk.adjustment.Adjustment.gdouble] property is
    * covered by the signalGtk.Adjustment::value-changed signal.
    *   adjustment = the instance the signal is connected to
    */

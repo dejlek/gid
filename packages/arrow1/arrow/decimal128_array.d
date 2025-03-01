@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.decimal128;
 import arrow.fixed_size_binary_array;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import gobject.object;
 

@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.execute_node_options;
 import arrow.expression;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class ProjectNodeOptions : ExecuteNodeOptions
 {

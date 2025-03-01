@@ -1,6 +1,6 @@
 module gtk.font_chooser_dialog;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -24,9 +24,9 @@ import gtk.window;
 /**
  * The `GtkFontChooserDialog` widget is a dialog for selecting a font.
  * ![An example GtkFontChooserDialog](fontchooser.png)
- * `GtkFontChooserDialog` implements the [Gtk.FontChooser] interface
+ * `GtkFontChooserDialog` implements the [gtk.font_chooser.FontChooser] interface
  * and does not provide much API of its own.
- * To create a `GtkFontChooserDialog`, use [Gtk.FontChooserDialog.new_].
+ * To create a `GtkFontChooserDialog`, use [gtk.font_chooser_dialog.FontChooserDialog.new_].
  * # GtkFontChooserDialog as GtkBuildable
  * The `GtkFontChooserDialog` implementation of the `GtkBuildable`
  * interface exposes the buttons with the names “select_button”
@@ -35,7 +35,7 @@ import gtk.window;
  * `GtkFontChooserDialog` has a single CSS node with the name `window` and style
  * class `.fontchooser`.
 
- * Deprecated: Use [Gtk.FontDialog] instead
+ * Deprecated: Use [gtk.font_dialog.FontDialog] instead
  */
 class FontChooserDialog : Dialog, FontChooser
 {
@@ -65,7 +65,7 @@ class FontChooserDialog : Dialog, FontChooser
    *   parent = Transient parent of the dialog
    * Returns: a new `GtkFontChooserDialog`
 
-   * Deprecated: Use [Gtk.FontDialog] instead
+   * Deprecated: Use [gtk.font_dialog.FontDialog] instead
    */
   this(string title, Window parent)
   {

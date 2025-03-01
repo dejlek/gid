@@ -1,6 +1,6 @@
 module gio.dbus_object_proxy;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_connection;
@@ -12,7 +12,7 @@ import gobject.object;
 /**
  * A `GDBusObjectProxy` is an object used to represent a remote object
  * with one or more D-Bus interfaces. Normally, you don’t instantiate
- * a `GDBusObjectProxy` yourself — typically [Gio.DBusObjectManagerClient]
+ * a `GDBusObjectProxy` yourself — typically [gio.dbus_object_manager_client.DBusObjectManagerClient]
  * is used to obtain it.
  */
 class DBusObjectProxy : ObjectG, DBusObject

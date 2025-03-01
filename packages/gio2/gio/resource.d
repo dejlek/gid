@@ -1,6 +1,6 @@
 module gio.resource;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.input_stream;
@@ -14,7 +14,7 @@ import gobject.object;
  * Applications and libraries often contain binary or textual data that is
  * really part of the application, rather than user data. For instance
  * [`GtkBuilder`](https://docs.gtk.org/gtk4/class.Builder.html) `.ui` files,
- * splashscreen images, [Gio.Menu] markup XML, CSS files, icons, etc.
+ * splashscreen images, [gio.menu.Menu] markup XML, CSS files, icons, etc.
  * These are often shipped as files in `\$datadir/appname`, or manually
  * included as literal strings in the code.
  * The `GResource` API and the
@@ -88,7 +88,7 @@ import gobject.object;
  * Java-style path prefixes $(LPAREN)like in the above example$(RPAREN) to avoid conflicts.
  * You can then use [`glib-compile-resources`](glib-compile-resources.html) to
  * compile the XML to a binary bundle that you can load with
- * [Gio.Resource.load]. However, it’s more common to use the
+ * [gio.resource.Resource.load]. However, it’s more common to use the
  * `--generate-source` and `--generate-header` arguments to create a source file
  * and header to link directly into your application.
  * This will generate `get_resource$(LPAREN)$(RPAREN)`, `register_resource$(LPAREN)$(RPAREN)` and
@@ -102,7 +102,7 @@ import gobject.object;
  * func@Gio.resources_open_stream to stream the data or
  * func@Gio.resources_lookup_data to get a direct pointer to the data. You can
  * also use URIs like `resource:///org/gtk/Example/data/splashscreen.png` with
- * [Gio.File] to access the resource data.
+ * [gio.file.File] to access the resource data.
  * Some higher-level APIs, such as [`GtkApplication`](https://docs.gtk.org/gtk4/class.Application.html),
  * will automatically load resources from certain well-known paths in the
  * resource namespace as a convenience. See the documentation for those APIs
@@ -179,7 +179,7 @@ class Resource : Boxed
    * This will keep a reference to data while the resource lives, so
    * the data should not be modified or freed.
    * If you want to use this resource in the global resource namespace you need
-   * to register it with [Gio.Resource.Register].
+   * to register it with [gio.resource.Resource.Register].
    * Note: data must be backed by memory that is at least pointer aligned.
    * Otherwise this function will internally create a copy of the memory since
    * GLib 2.56, or in older versions fail and exit the process.
@@ -202,7 +202,7 @@ class Resource : Boxed
   /**
    * Returns all the names of children at the specified path in the resource.
    * The return result is a %NULL terminated list of strings which should
-   * be released with [GLib.Global.strfreev].
+   * be released with [glib.global.strfreev].
    * If path is invalid or does not exist in the #GResource,
    * %G_RESOURCE_ERROR_NOT_FOUND will be returned.
    * lookup_flags controls the behaviour of the lookup.
@@ -273,7 +273,7 @@ class Resource : Boxed
    *   path = A pathname inside the resource
    *   lookupFlags = A #GResourceLookupFlags
    * Returns: #GBytes or %NULL on error.
-   *   Free the returned object with [GLib.Bytes.unref]
+   *   Free the returned object with [glib.bytes.Bytes.unref]
    */
   Bytes lookupData(string path, ResourceLookupFlags lookupFlags)
   {
@@ -295,7 +295,7 @@ class Resource : Boxed
    *   path = A pathname inside the resource
    *   lookupFlags = A #GResourceLookupFlags
    * Returns: #GInputStream or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref]
+   *   Free the returned object with [gobject.object.ObjectG.unref]
    */
   InputStream openStream(string path, ResourceLookupFlags lookupFlags)
   {
@@ -313,10 +313,10 @@ class Resource : Boxed
    * Loads a binary resource bundle and creates a #GResource representation of it, allowing
    * you to query it for data.
    * If you want to use this resource in the global resource namespace you need
-   * to register it with [Gio.Resource.Register].
+   * to register it with [gio.resource.Resource.Register].
    * If filename is empty or the data in it is corrupt,
    * %G_RESOURCE_ERROR_INTERNAL will be returned. If filename doesn’t exist, or
-   * there is an error in reading it, an error from [GLib.MappedFile.new_] will be
+   * there is an error in reading it, an error from [glib.mapped_file.MappedFile.new_] will be
    * returned.
    * Params:
    *   filename = the path of a filename to load, in the GLib filename encoding

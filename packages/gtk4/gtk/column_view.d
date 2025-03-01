@@ -1,6 +1,6 @@
 module gtk.column_view;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.dclosure;
@@ -39,14 +39,14 @@ import gtk.widget;
  * property@Gtk.ColumnView:enable-rubberband.
  * The column view supports sorting that can be customized by the user by
  * clicking on column headers. To set this up, the `GtkSorter` returned by
- * [Gtk.ColumnView.getSorter] must be attached to a sort model for the
+ * [gtk.column_view.ColumnView.getSorter] must be attached to a sort model for the
  * data that the view is showing, and the columns must have sorters attached to
- * them by calling [Gtk.ColumnViewColumn.setSorter]. The initial sort
- * order can be set with [Gtk.ColumnView.sortByColumn].
+ * them by calling [gtk.column_view_column.ColumnViewColumn.setSorter]. The initial sort
+ * order can be set with [gtk.column_view.ColumnView.sortByColumn].
  * The column view also supports interactive resizing and reordering of
  * columns, via Drag-and-Drop of the column headers. This can be enabled or
- * disabled with the [Gtk.ColumnView.reorderable] and
- * [Gtk.ColumnViewColumn.resizable] properties.
+ * disabled with the [gtk.column_view.ColumnView.gboolean] and
+ * [gtk.column_view_column.ColumnViewColumn.gboolean] properties.
  * To learn more about the list widget framework, see the
  * [overview](section-list-widget.html).
  * # CSS nodes
@@ -102,7 +102,7 @@ class ColumnView : Widget, Scrollable
 
   /**
    * Creates a new `GtkColumnView`.
-   * You most likely want to call [Gtk.ColumnView.appendColumn]
+   * You most likely want to call [gtk.column_view.ColumnView.appendColumn]
    * to add columns next.
    * Params:
    *   model = the list model to use
@@ -188,7 +188,7 @@ class ColumnView : Widget, Scrollable
   }
 
   /**
-   * Gets the factory set via [Gtk.ColumnView.setRowFactory].
+   * Gets the factory set via [gtk.column_view.ColumnView.setRowFactory].
    * Returns: The factory
    */
   ListItemFactory getRowFactory()
@@ -241,7 +241,7 @@ class ColumnView : Widget, Scrollable
    * To allow users to customizable sorting by clicking on column
    * headers, this sorter needs to be set on the sort model underneath
    * the model that is displayed by the view.
-   * See [Gtk.ColumnViewColumn.setSorter] for setting up
+   * See [gtk.column_view_column.ColumnViewColumn.setSorter] for setting up
    * per-column sorting.
    * Here is an example:
    * ```c
@@ -326,7 +326,7 @@ class ColumnView : Widget, Scrollable
 
   /**
    * Sets the `GtkListItemFactory` to use for populating the
-   * [Gtk.ListHeader] objects used in section headers.
+   * [gtk.list_header.ListHeader] objects used in section headers.
    * If this factory is set to %NULL, the list will not show
    * section headers.
    * Params:
@@ -339,7 +339,7 @@ class ColumnView : Widget, Scrollable
 
   /**
    * Sets the model to use.
-   * This must be a [Gtk.SelectionModel].
+   * This must be a [gtk.selection_model.SelectionModel].
    * Params:
    *   model = the model to use
    */
@@ -360,7 +360,7 @@ class ColumnView : Widget, Scrollable
 
   /**
    * Sets the factory used for configuring rows. The factory must be for configuring
-   * [Gtk.ColumnViewRow] objects.
+   * [gtk.column_view_row.ColumnViewRow] objects.
    * If this factory is not set - which is the default - then the defaults will be used.
    * This factory is not used to set the widgets displayed in the individual cells. For
    * that see methodGtkColumnViewColumn.set_factory and classGtkColumnViewCell.
@@ -421,8 +421,8 @@ class ColumnView : Widget, Scrollable
    * At runtime, users can change the sorting of a column view
    * by clicking on the list headers.
    * This call only has an effect if the sorter returned by
-   * [Gtk.ColumnView.getSorter] is set on a sort model,
-   * and [Gtk.ColumnViewColumn.setSorter] has been called
+   * [gtk.column_view.ColumnView.getSorter] is set on a sort model,
+   * and [gtk.column_view_column.ColumnViewColumn.setSorter] has been called
    * on column to associate a sorter with the column.
    * If column is %NULL, the view will be unsorted.
    * Params:
@@ -438,7 +438,7 @@ class ColumnView : Widget, Scrollable
    * Emitted when a row has been activated by the user, usually via activating
    * the GtkListBase|list.activate-item action.
    * This allows for a convenient way to handle activation in a columnview.
-   * See [Gtk.ListItem.setActivatable] for details on how to use this
+   * See [gtk.list_item.ListItem.setActivatable] for details on how to use this
    * signal.
    * Params
    *   position = position of item to activate

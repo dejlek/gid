@@ -1,6 +1,6 @@
 module glib.key_file;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
@@ -138,8 +138,8 @@ class KeyFile : Boxed
 
   /**
    * Creates a new empty #GKeyFile object. Use
-   * [GLib.KeyFile.loadFromFile], [GLib.KeyFile.loadFromData],
-   * [GLib.KeyFile.loadFromDirs] or [GLib.KeyFile.loadFromDataDirs] to
+   * [glib.key_file.KeyFile.loadFromFile], [glib.key_file.KeyFile.loadFromData],
+   * [glib.key_file.KeyFile.loadFromDirs] or [glib.key_file.KeyFile.loadFromDataDirs] to
    * read an existing key file.
    * Returns: an empty #GKeyFile.
    */
@@ -187,7 +187,7 @@ class KeyFile : Boxed
    *   key = a key
    * Returns: the values associated with the key as a list of booleans, or %NULL if the
    *   key was not found or could not be parsed. The returned list of booleans
-   *   should be freed with [GLib.Global.gfree] when no longer needed.
+   *   should be freed with [glib.global.gfree] when no longer needed.
    */
   bool[] getBooleanList(string groupName, string key)
   {
@@ -219,7 +219,7 @@ class KeyFile : Boxed
    * Params:
    *   groupName = a group name, or %NULL
    *   key = a key
-   * Returns: a comment that should be freed with [GLib.Global.gfree]
+   * Returns: a comment that should be freed with [glib.global.gfree]
    */
   string getComment(string groupName, string key)
   {
@@ -271,7 +271,7 @@ class KeyFile : Boxed
    *   key = a key
    * Returns: the values associated with the key as a list of doubles, or %NULL if the
    *   key was not found or could not be parsed. The returned list of doubles
-   *   should be freed with [GLib.Global.gfree] when no longer needed.
+   *   should be freed with [glib.global.gfree] when no longer needed.
    */
   double[] getDoubleList(string groupName, string key)
   {
@@ -299,7 +299,7 @@ class KeyFile : Boxed
    * Params:
    *   length = return location for the number of returned groups, or %NULL
    * Returns: a newly-allocated %NULL-terminated array of strings.
-   *   Use [GLib.Global.strfreev] to free it.
+   *   Use [glib.global.strfreev] to free it.
    */
   string[] getGroups(out size_t length)
   {
@@ -321,7 +321,7 @@ class KeyFile : Boxed
 
   /**
    * Returns the value associated with key under group_name as a signed
-   * 64-bit integer. This is similar to [GLib.KeyFile.getInteger] but can return
+   * 64-bit integer. This is similar to [glib.key_file.KeyFile.getInteger] but can return
    * 64-bit results without truncation.
    * Params:
    *   groupName = a non-%NULL group name
@@ -380,7 +380,7 @@ class KeyFile : Boxed
    *   key = a key
    * Returns: the values associated with the key as a list of integers, or %NULL if
    *   the key was not found or could not be parsed. The returned list of
-   *   integers should be freed with [GLib.Global.gfree] when no longer needed.
+   *   integers should be freed with [glib.global.gfree] when no longer needed.
    */
   int[] getIntegerList(string groupName, string key)
   {
@@ -411,7 +411,7 @@ class KeyFile : Boxed
    *   groupName = a group name
    *   length = return location for the number of keys returned, or %NULL
    * Returns: a newly-allocated %NULL-terminated array of strings.
-   *   Use [GLib.Global.strfreev] to free it.
+   *   Use [glib.global.strfreev] to free it.
    */
   string[] getKeys(string groupName, out size_t length)
   {
@@ -437,10 +437,10 @@ class KeyFile : Boxed
 
   /**
    * Returns the actual locale which the result of
-   * [GLib.KeyFile.getLocaleString] or [GLib.KeyFile.getLocaleStringList]
+   * [glib.key_file.KeyFile.getLocaleString] or [glib.key_file.KeyFile.getLocaleStringList]
    * came from.
-   * If calling [GLib.KeyFile.getLocaleString] or
-   * [GLib.KeyFile.getLocaleStringList] with exactly the same key_file,
+   * If calling [glib.key_file.KeyFile.getLocaleString] or
+   * [glib.key_file.KeyFile.getLocaleStringList] with exactly the same key_file,
    * group_name, key and locale, the result of those functions will
    * have originally been tagged with the locale that is the result of
    * this function.
@@ -513,7 +513,7 @@ class KeyFile : Boxed
    *   locale = a locale identifier or %NULL
    * Returns: a newly allocated %NULL-terminated string array
    *   or %NULL if the key isn't found. The string array should be freed
-   *   with [GLib.Global.strfreev].
+   *   with [glib.global.strfreev].
    */
   string[] getLocaleStringList(string groupName, string key, string locale)
   {
@@ -551,7 +551,7 @@ class KeyFile : Boxed
 
   /**
    * Returns the string value associated with key under group_name.
-   * Unlike [GLib.KeyFile.getValue], this function handles escape sequences
+   * Unlike [glib.key_file.KeyFile.getValue], this function handles escape sequences
    * like \s.
    * In the event the key cannot be found, %NULL is returned and
    * error is set to %G_KEY_FILE_ERROR_KEY_NOT_FOUND.  In the
@@ -586,7 +586,7 @@ class KeyFile : Boxed
    *   groupName = a group name
    *   key = a key
    * Returns: a %NULL-terminated string array or %NULL if the specified
-   *   key cannot be found. The array should be freed with [GLib.Global.strfreev].
+   *   key cannot be found. The array should be freed with [glib.global.strfreev].
    */
   string[] getStringList(string groupName, string key)
   {
@@ -611,7 +611,7 @@ class KeyFile : Boxed
 
   /**
    * Returns the value associated with key under group_name as an unsigned
-   * 64-bit integer. This is similar to [GLib.KeyFile.getInteger] but can return
+   * 64-bit integer. This is similar to [glib.key_file.KeyFile.getInteger] but can return
    * large positive results without truncation.
    * Params:
    *   groupName = a non-%NULL group name
@@ -633,7 +633,7 @@ class KeyFile : Boxed
 
   /**
    * Returns the raw value associated with key under group_name.
-   * Use [GLib.KeyFile.getString] to retrieve an unescaped UTF-8 string.
+   * Use [glib.key_file.KeyFile.getString] to retrieve an unescaped UTF-8 string.
    * In the event the key cannot be found, %NULL is returned and
    * error is set to %G_KEY_FILE_ERROR_KEY_NOT_FOUND.  In the
    * event that the group_name cannot be found, %NULL is returned
@@ -712,7 +712,7 @@ class KeyFile : Boxed
 
   /**
    * This function looks for a key file named file in the paths
-   * returned from [GLib.Global.getUserDataDir] and [GLib.Global.getSystemDataDirs],
+   * returned from [glib.global.getUserDataDir] and [glib.global.getSystemDataDirs],
    * loads the file into key_file and returns the file's full path in
    * full_path.  If the file could not be loaded then an %error is
    * set to either a #GFileError or #GKeyFileError.
@@ -856,11 +856,11 @@ class KeyFile : Boxed
 
   /**
    * Writes the contents of key_file to filename using
-   * [GLib.Global.fileSetContents]. If you need stricter guarantees about durability of
-   * the written file than are provided by [GLib.Global.fileSetContents], use
-   * [GLib.Global.fileSetContentsFull] with the return value of [GLib.KeyFile.toData].
+   * [glib.global.fileSetContents]. If you need stricter guarantees about durability of
+   * the written file than are provided by [glib.global.fileSetContents], use
+   * [glib.global.fileSetContentsFull] with the return value of [glib.key_file.KeyFile.toData].
    * This function can fail for any of the reasons that
-   * [GLib.Global.fileSetContents] may fail.
+   * [glib.global.fileSetContents] may fail.
    * Params:
    *   filename = the name of the file to write to
    * Returns: %TRUE if successful, else %FALSE with error set
@@ -1084,7 +1084,7 @@ class KeyFile : Boxed
    * Associates a new string value with key under group_name.
    * If key cannot be found then it is created.
    * If group_name cannot be found then it is created.
-   * Unlike [GLib.KeyFile.setValue], this function handles characters
+   * Unlike [glib.key_file.KeyFile.setValue], this function handles characters
    * that need escaping, such as newlines.
    * Params:
    *   groupName = a group name
@@ -1144,7 +1144,7 @@ class KeyFile : Boxed
    * If key cannot be found then it is created. If group_name cannot
    * be found then it is created. To set an UTF-8 string which may contain
    * characters that need escaping $(LPAREN)such as newlines or spaces$(RPAREN), use
-   * [GLib.KeyFile.setString].
+   * [glib.key_file.KeyFile.setString].
    * Params:
    *   groupName = a group name
    *   key = a key

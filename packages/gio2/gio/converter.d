@@ -1,7 +1,7 @@
 module gio.converter;
 
 public import gio.converter_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -70,10 +70,10 @@ interface Converter
    * to finish as e.g. in the regexp match case $(LPAREN)or, to fail again with
    * %G_IO_ERROR_PARTIAL_INPUT in e.g. a charset conversion where the
    * input is actually partial$(RPAREN).
-   * After [Gio.Converter.convert] has returned %G_CONVERTER_FINISHED the
+   * After [gio.converter.Converter.convert] has returned %G_CONVERTER_FINISHED the
    * converter object is in an invalid state where its not allowed
-   * to call [Gio.Converter.convert] anymore. At this time you can only
-   * free the object or call [Gio.Converter.reset] to reset it to the
+   * to call [gio.converter.Converter.convert] anymore. At this time you can only
+   * free the object or call [gio.converter.Converter.reset] to reset it to the
    * initial state.
    * If the flag %G_CONVERTER_FLUSH is set then conversion is modified
    * to try to write out all internal state to the output. The application

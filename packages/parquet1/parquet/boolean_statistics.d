@@ -1,6 +1,6 @@
 module parquet.boolean_statistics;
 
-import gid.gid;
+import gid.global;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.statistics;

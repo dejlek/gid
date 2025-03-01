@@ -1,6 +1,6 @@
 module gio.settings_schema_source;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.settings_schema;
@@ -50,7 +50,7 @@ class SettingsSchemaSource : Boxed
    * In either case, an empty file or some types of corruption in the file will
    * result in %G_FILE_ERROR_INVAL being returned.
    * If parent is non-%NULL then there are two effects.
-   * First, if [Gio.SettingsSchemaSource.lookup] is called with the
+   * First, if [gio.settings_schema_source.SettingsSchemaSource.lookup] is called with the
    * recursive flag set to %TRUE and the schema can not be found in the
    * source, the lookup will recurse to the parent.
    * Second, any references to other schemas specified within this
@@ -58,7 +58,7 @@ class SettingsSchemaSource : Boxed
    * from the parent.
    * For this second reason, except in very unusual situations, the
    * parent should probably be given as the default schema source, as
-   * returned by [Gio.SettingsSchemaSource.getDefault].
+   * returned by [gio.settings_schema_source.SettingsSchemaSource.getDefault].
    * Params:
    *   directory = the filename of a directory
    *   parent = a #GSettingsSchemaSource, or %NULL
@@ -83,8 +83,8 @@ class SettingsSchemaSource : Boxed
    * only include the schemas from one source $(LPAREN)ie: one directory$(RPAREN).  You
    * probably want %TRUE.
    * Non-relocatable schemas are those for which you can call
-   * [Gio.Settings.new_].  Relocatable schemas are those for which you must
-   * use [Gio.Settings.newWithPath].
+   * [gio.settings.Settings.new_].  Relocatable schemas are those for which you must
+   * use [gio.settings.Settings.newWithPath].
    * Do not call this function from normal programs.  This is designed for
    * use by database editors, commandline tools, etc.
    * Params:

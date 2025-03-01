@@ -1,6 +1,6 @@
 module gio.menu_link_iter;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.menu_model;
@@ -44,17 +44,17 @@ class MenuLinkIter : ObjectG
   }
 
   /**
-   * This function combines [Gio.MenuLinkIter.next] with
-   * [Gio.MenuLinkIter.getName] and [Gio.MenuLinkIter.getValue].
+   * This function combines [gio.menu_link_iter.MenuLinkIter.next] with
+   * [gio.menu_link_iter.MenuLinkIter.getName] and [gio.menu_link_iter.MenuLinkIter.getValue].
    * First the iterator is advanced to the next $(LPAREN)possibly first$(RPAREN) link.
    * If that fails, then %FALSE is returned and there are no other effects.
    * If successful, out_link and value are set to the name and #GMenuModel
    * of the link that has just been advanced to.  At this point,
-   * [Gio.MenuLinkIter.getName] and [Gio.MenuLinkIter.getValue] will return the
+   * [gio.menu_link_iter.MenuLinkIter.getName] and [gio.menu_link_iter.MenuLinkIter.getValue] will return the
    * same values again.
    * The value returned in out_link remains valid for as long as the iterator
    * remains at the current position.  The value returned in value must
-   * be unreffed using [GObject.ObjectG.unref] when it is no longer in use.
+   * be unreffed using [gobject.object.ObjectG.unref] when it is no longer in use.
    * Params:
    *   outLink = the name of the link
    *   value = the linked #GMenuModel

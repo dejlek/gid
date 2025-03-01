@@ -1,6 +1,6 @@
 module gtk.activate_action;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -8,7 +8,7 @@ import gtk.shortcut_action;
 import gtk.types;
 
 /**
- * A `GtkShortcutAction` that calls [Gtk.Widget.activate].
+ * A `GtkShortcutAction` that calls [gtk.widget.Widget.activate].
  */
 class ActivateAction : ShortcutAction
 {
@@ -31,7 +31,7 @@ class ActivateAction : ShortcutAction
 
   /**
    * Gets the activate action.
-   * This is an action that calls [Gtk.Widget.activate]
+   * This is an action that calls [gtk.widget.Widget.activate]
    * on the given widget upon activation.
    * Returns: The activate action
    */

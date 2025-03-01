@@ -8,7 +8,7 @@ import arrow.write_options;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class RecordBatchWriter : DArrowRecordBatchWriter

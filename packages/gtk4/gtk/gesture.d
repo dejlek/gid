@@ -4,7 +4,7 @@ import gdk.device;
 import gdk.event;
 import gdk.event_sequence;
 import gdk.rectangle;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -26,12 +26,12 @@ import gtk.types;
  * regularly if it is recognized, the criteria to consider a gesture as
  * "recognized" is left to `GtkGesture` subclasses.
  * A recognized gesture will then emit the following signals:
- * - [Gtk.Gesture.begin] when the gesture is recognized.
- * - [Gtk.Gesture.update], whenever an input event is processed.
- * - [Gtk.Gesture.end] when the gesture is no longer recognized.
+ * - [gtk.gesture.Gesture.begin] when the gesture is recognized.
+ * - [gtk.gesture.Gesture.update], whenever an input event is processed.
+ * - [gtk.gesture.Gesture.end] when the gesture is no longer recognized.
  * ## Event propagation
  * In order to receive events, a gesture needs to set a propagation phase
- * through [Gtk.EventController.setPropagationPhase].
+ * through [gtk.event_controller.EventController.setPropagationPhase].
  * In the capture phase, events are propagated from the toplevel down
  * to the target widget, and gestures that are attached to containers
  * above the widget get a chance to interact with the event before it
@@ -47,9 +47,9 @@ import gtk.types;
  * of the widgets using those gestures to set the state of touch sequences
  * accordingly in order to enable cooperation of gestures around the
  * `GdkEventSequence`s triggering those.
- * Within a widget, gestures can be grouped through [Gtk.Gesture.group].
+ * Within a widget, gestures can be grouped through [gtk.gesture.Gesture.group].
  * Grouped gestures synchronize the state of sequences, so calling
- * [Gtk.Gesture.setState] on one will effectively propagate
+ * [gtk.gesture.Gesture.setState] on one will effectively propagate
  * the state throughout the group.
  * By default, all sequences start out in the %GTK_EVENT_SEQUENCE_NONE state,
  * sequences in this state trigger the gesture event handler, but event
@@ -63,7 +63,7 @@ import gtk.types;
  * - Setting the same sequence to %GTK_EVENT_SEQUENCE_DENIED on every other
  * gesture group within the widget, and every gesture on parent widgets
  * in the propagation chain.
- * - Emitting [Gtk.Gesture.cancel] on every gesture in widgets
+ * - Emitting [gtk.gesture.Gesture.cancel] on every gesture in widgets
  * underneath in the propagation chain.
  * - Stopping event propagation after the gesture group handles the event.
  * Note: if a sequence is set early to %GTK_EVENT_SEQUENCE_CLAIMED on
@@ -73,7 +73,7 @@ import gtk.types;
  * This way event coherence is preserved before event propagation is unstopped
  * again.
  * Sequence states can't be changed freely.
- * See [Gtk.Gesture.setState] to know about the possible
+ * See [gtk.gesture.Gesture.setState] to know about the possible
  * lifetimes of a `GdkEventSequence`.
  * ## Touchpad gestures
  * On the platforms that support it, `GtkGesture` will handle transparently
@@ -158,7 +158,7 @@ class Gesture : EventController
   /**
    * Returns all gestures in the group of gesture
    * Returns: The list
-   *   of `GtkGesture`s, free with [GLib.List.free]
+   *   of `GtkGesture`s, free with [glib.list.List.free]
    */
   Gesture[] getGroup()
   {
@@ -235,7 +235,7 @@ class Gesture : EventController
    * Returns: A list
    *   of `GdkEventSequence`, the list elements are owned by GTK and must
    *   not be freed or modified, the list itself must be deleted
-   *   through [GLib.List.free]
+   *   through [glib.list.List.free]
    */
   EventSequence[] getSequences()
   {
@@ -252,7 +252,7 @@ class Gesture : EventController
    * they can be grouped.
    * When gestures are grouped, the state of `GdkEventSequences`
    * is kept in sync for all of those, so calling
-   * [Gtk.Gesture.setSequenceState], on one will transfer
+   * [gtk.gesture.Gesture.setSequenceState], on one will transfer
    * the same value to the others.
    * Groups also perform an "implicit grabbing" of sequences, if a
    * `GdkEventSequence` state is set to %GTK_EVENT_SEQUENCE_CLAIMED
@@ -332,7 +332,7 @@ class Gesture : EventController
    * * None → Claimed
    * * None → Claimed → Denied
    * Note: Due to event handling ordering, it may be unsafe to set the
-   * state on another gesture within a [Gtk.Gesture.begin] signal
+   * state on another gesture within a [gtk.gesture.Gesture.begin] signal
    * handler, as the callback might be executed before the other gesture
    * knows about the sequence. A safe way to perform this could be:
    * ```c
@@ -363,7 +363,7 @@ class Gesture : EventController
    * Returns: %TRUE if sequence is handled by gesture,
    *   and the state is changed successfully
 
-   * Deprecated: Use [Gtk.Gesture.setState]
+   * Deprecated: Use [gtk.gesture.Gesture.setState]
    */
   bool setSequenceState(EventSequence sequence, EventSequenceState state)
   {
@@ -385,7 +385,7 @@ class Gesture : EventController
    * * None → Claimed
    * * None → Claimed → Denied
    * Note: Due to event handling ordering, it may be unsafe to set the
-   * state on another gesture within a [Gtk.Gesture.begin] signal
+   * state on another gesture within a [gtk.gesture.Gesture.begin] signal
    * handler, as the callback might be executed before the other gesture
    * knows about the sequence. A safe way to perform this could be:
    * ```c
@@ -472,10 +472,10 @@ class Gesture : EventController
   /**
    * Emitted whenever a sequence is cancelled.
    * This usually happens on active touches when
-   * [Gtk.EventController.reset] is called on gesture
+   * [gtk.event_controller.EventController.reset] is called on gesture
    * $(LPAREN)manually, due to grabs...$(RPAREN), or the individual sequence
    * was claimed by parent widgets' controllers $(LPAREN)see
-   * [Gtk.Gesture.setSequenceState]$(RPAREN).
+   * [gtk.gesture.Gesture.setSequenceState]$(RPAREN).
    * gesture must forget everything about sequence as in
    * response to this signal.
    * Params
@@ -516,7 +516,7 @@ class Gesture : EventController
    * were previously triggering recognition on gesture $(LPAREN)ie. a just
    * pressed touch sequence that exceeds propertyGtk.Gesture:n-points$(RPAREN).
    * This situation may be detected by checking through
-   * [Gtk.Gesture.handlesSequence].
+   * [gtk.gesture.Gesture.handlesSequence].
    * Params
    *   sequence = the `GdkEventSequence` that made gesture
    *     recognition to finish
@@ -550,7 +550,7 @@ class Gesture : EventController
 
   /**
    * Emitted whenever a sequence state changes.
-   * See [Gtk.Gesture.setSequenceState] to know
+   * See [gtk.gesture.Gesture.setSequenceState] to know
    * more about the expectable sequence lifetimes.
    * Params
    *   sequence = the `GdkEventSequence` that was cancelled

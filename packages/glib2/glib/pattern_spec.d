@@ -1,6 +1,6 @@
 module glib.pattern_spec;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -8,7 +8,7 @@ import gobject.boxed;
 
 /**
  * A `GPatternSpec` struct is the 'compiled' form of a glob-style pattern.
- * The func@GLib.pattern_match_simple and [GLib.PatternSpec.match] functions
+ * The func@GLib.pattern_match_simple and [glib.pattern_spec.PatternSpec.match] functions
  * match a string against a pattern containing '*' and '?' wildcards with similar
  * semantics as the standard `glob$(LPAREN)$(RPAREN)` function: '*' matches an arbitrary,
  * possibly empty, string, '?' matches an arbitrary character.
@@ -16,8 +16,8 @@ import gobject.boxed;
  * the wildcards, there are no '[...]' character ranges and '*' and '?'
  * can not be escaped to include them literally in a pattern.
  * When multiple strings must be matched against the same pattern, it is better
- * to compile the pattern to a [GLib.PatternSpec] using
- * [GLib.PatternSpec.new_] and use [GLib.PatternSpec.matchString]
+ * to compile the pattern to a [glib.pattern_spec.PatternSpec] using
+ * [glib.pattern_spec.PatternSpec.new_] and use [glib.pattern_spec.PatternSpec.matchString]
  * instead of func@GLib.pattern_match_simple. This avoids the overhead of repeated
  * pattern compilation.
  */
@@ -90,20 +90,20 @@ class PatternSpec : Boxed
    * length of the string given is mandatory. The reversed string can be
    * omitted by passing %NULL, this is more efficient if the reversed
    * version of the string to be matched is not at hand, as
-   * [GLib.Global.patternMatch] will only construct it if the compiled pattern
+   * [glib.global.patternMatch] will only construct it if the compiled pattern
    * requires reverse matches.
    * Note that, if the user code will $(LPAREN)possibly$(RPAREN) match a string against a
    * multitude of patterns containing wildcards, chances are high that
    * some patterns will require a reversed string. In this case, it's
    * more efficient to provide the reversed string to avoid multiple
-   * constructions thereof in the various calls to [GLib.Global.patternMatch].
+   * constructions thereof in the various calls to [glib.global.patternMatch].
    * Note also that the reverse of a UTF-8 encoded string can in general
-   * not be obtained by [GLib.Global.strreverse]. This works only if the string
+   * not be obtained by [glib.global.strreverse]. This works only if the string
    * does not contain any multibyte characters. GLib offers the
-   * [GLib.Global.utf8Strreverse] function to reverse UTF-8 encoded strings.
+   * [glib.global.utf8Strreverse] function to reverse UTF-8 encoded strings.
    * Params:
    *   stringLength = the length of string $(LPAREN)in bytes, i.e. strlen$(LPAREN)$(RPAREN),
-   *     not [GLib.Global.utf8Strlen]$(RPAREN)
+   *     not [glib.global.utf8Strlen]$(RPAREN)
    *   string_ = the UTF-8 encoded string to match
    *   stringReversed = the reverse of string or %NULL
    * Returns: %TRUE if string matches pspec
@@ -120,7 +120,7 @@ class PatternSpec : Boxed
   /**
    * Matches a string against a compiled pattern. If the string is to be
    * matched against more than one pattern, consider using
-   * [GLib.Global.patternMatch] instead while supplying the reversed string.
+   * [glib.global.patternMatch] instead while supplying the reversed string.
    * Params:
    *   string_ = the UTF-8 encoded string to match
    * Returns: %TRUE if string matches pspec

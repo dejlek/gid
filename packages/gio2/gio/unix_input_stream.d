@@ -1,6 +1,6 @@
 module gio.unix_input_stream;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.file_descriptor_based;
@@ -11,7 +11,7 @@ import gio.pollable_input_stream_mixin;
 import gio.types;
 
 /**
- * `GUnixInputStream` implements [Gio.InputStream] for reading from a UNIX
+ * `GUnixInputStream` implements [gio.input_stream.InputStream] for reading from a UNIX
  * file descriptor, including asynchronous operations. $(LPAREN)If the file
  * descriptor refers to a socket or pipe, this will use `poll$(LPAREN)$(RPAREN)` to do
  * asynchronous I/O. If it refers to a regular file, it will fall back

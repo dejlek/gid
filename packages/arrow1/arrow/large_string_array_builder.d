@@ -4,7 +4,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.large_binary_array_builder;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class LargeStringArrayBuilder : LargeBinaryArrayBuilder

@@ -1,6 +1,6 @@
 module gtk.css_section;
 
-import gid.gid;
+import gid.global;
 import gio.file;
 import gio.file_mixin;
 import glib.string_;
@@ -13,7 +13,7 @@ import gtk.types;
 /**
  * Defines a part of a CSS document.
  * Because sections are nested into one another, you can use
- * [Gtk.CssSection.getParent] to get the containing region.
+ * [gtk.css_section.CssSection.getParent] to get the containing region.
  */
 class CssSection : Boxed
 {
@@ -74,7 +74,7 @@ class CssSection : Boxed
   /**
    * Gets the file that section was parsed from.
    * If no such file exists, for example because the CSS was loaded via
-   * [Gtk.CssProvider.loadFromData], then `NULL` is returned.
+   * [gtk.css_provider.CssProvider.loadFromData], then `NULL` is returned.
    * Returns: the `GFile` from which the `section`
    *   was parsed
    */
@@ -91,7 +91,7 @@ class CssSection : Boxed
    * The parent section is the section that contains this `section`. A special
    * case are sections of  type `GTK_CSS_SECTION_DOCUMEN`T. Their parent will
    * either be `NULL` if they are the original CSS document that was loaded by
-   * [Gtk.CssProvider.loadFromFile] or a section of type
+   * [gtk.css_provider.CssProvider.loadFromFile] or a section of type
    * `GTK_CSS_SECTION_IMPORT` if it was loaded with an `import` rule from
    * a different file.
    * Returns: the parent section
@@ -133,7 +133,7 @@ class CssSection : Boxed
 
   /**
    * Prints the section into a human-readable text form using
-   * [Gtk.CssSection.print].
+   * [gtk.css_section.CssSection.print].
    * Returns: A new string.
    */
   string toString_()

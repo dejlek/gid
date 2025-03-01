@@ -1,6 +1,6 @@
 module gio.file_info;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.file_attribute_matcher;
@@ -12,33 +12,33 @@ import glib.time_val;
 import gobject.object;
 
 /**
- * Stores information about a file system object referenced by a [Gio.File].
+ * Stores information about a file system object referenced by a [gio.file.File].
  * Functionality for manipulating basic metadata for files. `GFileInfo`
  * implements methods for getting information that all files should
  * contain, and allows for manipulation of extended attributes.
  * See [file-attributes.html](file attributes) for more information on how GIO
  * handles file attributes.
- * To obtain a `GFileInfo` for a [Gio.File], use
- * [Gio.File.queryInfo] (or its async variant). To obtain a `GFileInfo`
- * for a file input or output stream, use [Gio.FileInputStream.queryInfo]
- * or [Gio.FileOutputStream.queryInfo] (or their async variants).
+ * To obtain a `GFileInfo` for a [gio.file.File], use
+ * [gio.file.File.queryInfo] (or its async variant). To obtain a `GFileInfo`
+ * for a file input or output stream, use [gio.file_input_stream.FileInputStream.queryInfo]
+ * or [gio.file_output_stream.FileOutputStream.queryInfo] (or their async variants).
  * To change the actual attributes of a file, you should then set the
- * attribute in the `GFileInfo` and call [Gio.File.setAttributesFromInfo]
- * or [Gio.File.setAttributesAsync] on a `GFile`.
+ * attribute in the `GFileInfo` and call [gio.file.File.setAttributesFromInfo]
+ * or [gio.file.File.setAttributesAsync] on a `GFile`.
  * However, not all attributes can be changed in the file. For instance,
- * the actual size of a file cannot be changed via [Gio.FileInfo.setSize].
- * You may call [Gio.File.querySettableAttributes] and
- * [Gio.File.queryWritableNamespaces] to discover the settable attributes
+ * the actual size of a file cannot be changed via [gio.file_info.FileInfo.setSize].
+ * You may call [gio.file.File.querySettableAttributes] and
+ * [gio.file.File.queryWritableNamespaces] to discover the settable attributes
  * of a particular file at runtime.
- * The direct accessors, such as [Gio.FileInfo.getName], are slightly more
+ * The direct accessors, such as [gio.file_info.FileInfo.getName], are slightly more
  * optimized than the generic attribute accessors, such as
- * [Gio.FileInfo.getAttributeByteString].This optimization will matter
+ * [gio.file_info.FileInfo.getAttributeByteString].This optimization will matter
  * only if calling the API in a tight loop.
  * It is an error to call these accessors without specifying their required file
  * attributes when creating the `GFileInfo`. Use
- * [Gio.FileInfo.hasAttribute] or [Gio.FileInfo.listAttributes]
+ * [gio.file_info.FileInfo.hasAttribute] or [gio.file_info.FileInfo.listAttributes]
  * to check what attributes are specified for a `GFileInfo`.
- * [Gio.FileAttributeMatcher] allows for searching through a `GFileInfo`
+ * [gio.file_attribute_matcher.FileAttributeMatcher] allows for searching through a `GFileInfo`
  * for attributes.
  */
 class FileInfo : ObjectG
@@ -110,7 +110,7 @@ class FileInfo : ObjectG
    * provided, the resulting #GDateTime will additionally have microsecond
    * precision.
    * If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC must
-   * be queried separately using [Gio.FileInfo.getAttributeUint32].
+   * be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
    * Returns: access time, or %NULL if unknown
    */
   DateTime getAccessDateTime()
@@ -129,7 +129,7 @@ class FileInfo : ObjectG
    *   attribute = a file attribute key.
    * Returns: a UTF-8 string associated with the given attribute, or
    *   %NULL if the attribute wasn’t set.
-   *   When you're done with the string it must be freed with [GLib.Global.gfree].
+   *   When you're done with the string it must be freed with [glib.global.gfree].
    */
   string getAttributeAsString(string attribute)
   {
@@ -390,7 +390,7 @@ class FileInfo : ObjectG
    * provided, the resulting #GDateTime will additionally have microsecond
    * precision.
    * If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_CREATED_NSEC must
-   * be queried separately using [Gio.FileInfo.getAttributeUint32].
+   * be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
    * Returns: creation time, or %NULL if unknown
    */
   DateTime getCreationDateTime()
@@ -460,7 +460,7 @@ class FileInfo : ObjectG
 
   /**
    * Gets a file's type $(LPAREN)whether it is a regular file, symlink, etc$(RPAREN).
-   * This is different from the file's content type, see [Gio.FileInfo.getContentType].
+   * This is different from the file's content type, see [gio.file_info.FileInfo.getContentType].
    * It is an error to call this if the #GFileInfo does not contain
    * %G_FILE_ATTRIBUTE_STANDARD_TYPE.
    * Returns: a #GFileType for the given file.
@@ -534,7 +534,7 @@ class FileInfo : ObjectG
    * provided, the resulting #GDateTime will additionally have microsecond
    * precision.
    * If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC must
-   * be queried separately using [Gio.FileInfo.getAttributeUint32].
+   * be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
    * Returns: modification time, or %NULL if unknown
    */
   DateTime getModificationDateTime()
@@ -554,7 +554,7 @@ class FileInfo : ObjectG
    * Params:
    *   result = a #GTimeVal.
 
-   * Deprecated: Use [Gio.FileInfo.getModificationDateTime] instead, as
+   * Deprecated: Use [gio.file_info.FileInfo.getModificationDateTime] instead, as
    *   #GTimeVal is deprecated due to the year 2038 problem.
    */
   void getModificationTime(out TimeVal result)
@@ -826,7 +826,7 @@ class FileInfo : ObjectG
 
   /**
    * Sets the attribute status for an attribute key. This is only
-   * needed by external code that implement [Gio.File.setAttributesFromInfo]
+   * needed by external code that implement [gio.file.File.setAttributesFromInfo]
    * or similar functions.
    * The attribute must exist in info for this to work. Otherwise %FALSE
    * is returned and info is unchanged.
@@ -1017,7 +1017,7 @@ class FileInfo : ObjectG
    * Params:
    *   mtime = a #GTimeVal.
 
-   * Deprecated: Use [Gio.FileInfo.setModificationDateTime] instead, as
+   * Deprecated: Use [gio.file_info.FileInfo.setModificationDateTime] instead, as
    *   #GTimeVal is deprecated due to the year 2038 problem.
    */
   void setModificationTime(TimeVal mtime)
@@ -1083,7 +1083,7 @@ class FileInfo : ObjectG
   }
 
   /**
-   * Unsets a mask set by [Gio.FileInfo.setAttributeMask], if one
+   * Unsets a mask set by [gio.file_info.FileInfo.setAttributeMask], if one
    * is set.
    */
   void unsetAttributeMask()

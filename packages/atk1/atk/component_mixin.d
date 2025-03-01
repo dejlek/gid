@@ -6,7 +6,7 @@ public import atk.c.types;
 public import atk.object;
 public import atk.rectangle;
 public import atk.types;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 public import gobject.object;
 
@@ -114,7 +114,7 @@ template ComponentT()
    *   coordType = specifies whether the coordinates are relative to the screen
    *     or to the components top level window
 
-   * Deprecated: Since 2.12. Use [Atk.Component.getExtents] instead.
+   * Deprecated: Since 2.12. Use [atk.component.Component.getExtents] instead.
    */
   override void getPosition(out int x, out int y, CoordType coordType)
   {
@@ -129,7 +129,7 @@ template ComponentT()
    *   width = address of #gint to put width of component
    *   height = address of #gint to put height of component
 
-   * Deprecated: Since 2.12. Use [Atk.Component.getExtents] instead.
+   * Deprecated: Since 2.12. Use [atk.component.Component.getExtents] instead.
    */
   override void getSize(out int width, out int height)
   {

@@ -1,6 +1,6 @@
 module gio.input_stream;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -13,12 +13,12 @@ import gobject.object;
 
 /**
  * `GInputStream` is a base class for implementing streaming input.
- * It has functions to read from a stream $(LPAREN)[Gio.InputStream.read]$(RPAREN),
- * to close a stream $(LPAREN)[Gio.InputStream.close]$(RPAREN) and to skip some content
- * $(LPAREN)[Gio.InputStream.skip]$(RPAREN).
+ * It has functions to read from a stream $(LPAREN)[gio.input_stream.InputStream.read]$(RPAREN),
+ * to close a stream $(LPAREN)[gio.input_stream.InputStream.close]$(RPAREN) and to skip some content
+ * $(LPAREN)[gio.input_stream.InputStream.skip]$(RPAREN).
  * To copy the content of an input stream to an output stream without
- * manually handling the reads and writes, use [Gio.OutputStream.splice].
- * See the documentation for [Gio.IOStream] for details of thread safety
+ * manually handling the reads and writes, use [gio.output_stream.OutputStream.splice].
+ * See the documentation for [gio.iostream.IOStream] for details of thread safety
  * of streaming APIs.
  * All of these functions have async variants too.
  */
@@ -85,9 +85,9 @@ class InputStream : ObjectG
   /**
    * Requests an asynchronous closes of the stream, releasing resources related to it.
    * When the operation is finished callback will be called.
-   * You can then call [Gio.InputStream.closeFinish] to get the result of the
+   * You can then call [gio.input_stream.InputStream.closeFinish] to get the result of the
    * operation.
-   * For behaviour details see [Gio.InputStream.close].
+   * For behaviour details see [gio.input_stream.InputStream.close].
    * The asynchronous methods have a default fallback that uses threads to implement
    * asynchronicity, so they are optional for inheriting classes. However, if you
    * override one you must override all.
@@ -113,7 +113,7 @@ class InputStream : ObjectG
   }
 
   /**
-   * Finishes closing a stream asynchronously, started from [Gio.InputStream.closeAsync].
+   * Finishes closing a stream asynchronously, started from [gio.input_stream.InputStream.closeAsync].
    * Params:
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the stream was closed successfully.
@@ -186,7 +186,7 @@ class InputStream : ObjectG
   /**
    * Tries to read count bytes from the stream into the buffer starting at
    * buffer. Will block during this read.
-   * This function is similar to [Gio.InputStream.read], except it tries to
+   * This function is similar to [gio.input_stream.InputStream.read], except it tries to
    * read as many bytes as requested, only stopping on an error or end of stream.
    * On a successful read of count bytes, or if we reached the end of the
    * stream,  %TRUE is returned, and bytes_read is set to the number of bytes
@@ -198,7 +198,7 @@ class InputStream : ObjectG
    * bytes_read will be set to the number of bytes that were successfully
    * read before the error was encountered.  This functionality is only
    * available from C.  If you need it from another language then you must
-   * write your own loop around [Gio.InputStream.read].
+   * write your own loop around [gio.input_stream.InputStream.read].
    * Params:
    *   buffer = a buffer to read data into $(LPAREN)which should be at least count bytes long$(RPAREN).
    *   bytesRead = location to store the number of bytes that was read from the stream
@@ -219,8 +219,8 @@ class InputStream : ObjectG
   /**
    * Request an asynchronous read of count bytes from the stream into the
    * buffer starting at buffer.
-   * This is the asynchronous equivalent of [Gio.InputStream.readAll].
-   * Call [Gio.InputStream.readAllFinish] to collect the result.
+   * This is the asynchronous equivalent of [gio.input_stream.InputStream.readAll].
+   * Call [gio.input_stream.InputStream.readAllFinish] to collect the result.
    * Any outstanding I/O request with higher priority $(LPAREN)lower numerical
    * value$(RPAREN) will be executed before an outstanding request with lower
    * priority. Default priority is %G_PRIORITY_DEFAULT.
@@ -249,13 +249,13 @@ class InputStream : ObjectG
 
   /**
    * Finishes an asynchronous stream read operation started with
-   * [Gio.InputStream.readAllAsync].
+   * [gio.input_stream.InputStream.readAllAsync].
    * As a special exception to the normal conventions for functions that
    * use #GError, if this function returns %FALSE $(LPAREN)and sets error$(RPAREN) then
    * bytes_read will be set to the number of bytes that were successfully
    * read before the error was encountered.  This functionality is only
    * available from C.  If you need it from another language then you must
-   * write your own loop around [Gio.InputStream.readAsync].
+   * write your own loop around [gio.input_stream.InputStream.readAsync].
    * Params:
    *   result = a #GAsyncResult
    *   bytesRead = location to store the number of bytes that was read from the stream
@@ -274,7 +274,7 @@ class InputStream : ObjectG
   /**
    * Request an asynchronous read of count bytes from the stream into the buffer
    * starting at buffer. When the operation is finished callback will be called.
-   * You can then call [Gio.InputStream.readFinish] to get the result of the
+   * You can then call [gio.input_stream.InputStream.readFinish] to get the result of the
    * operation.
    * During an async request no other sync and async calls are allowed on stream, and will
    * result in %G_IO_ERROR_PENDING errors.
@@ -315,7 +315,7 @@ class InputStream : ObjectG
   }
 
   /**
-   * Like [Gio.InputStream.read], this tries to read count bytes from
+   * Like [gio.input_stream.InputStream.read], this tries to read count bytes from
    * the stream in a blocking fashion. However, rather than reading into
    * a user-supplied buffer, this will create a new #GBytes containing
    * the data that was read. This may be easier to use from language
@@ -354,7 +354,7 @@ class InputStream : ObjectG
   /**
    * Request an asynchronous read of count bytes from the stream into a
    * new #GBytes. When the operation is finished callback will be
-   * called. You can then call [Gio.InputStream.readBytesFinish] to get the
+   * called. You can then call [gio.input_stream.InputStream.readBytesFinish] to get the
    * result of the operation.
    * During an async request no other sync and async calls are allowed
    * on stream, and will result in %G_IO_ERROR_PENDING errors.
@@ -441,7 +441,7 @@ class InputStream : ObjectG
 
   /**
    * Tries to skip count bytes from the stream. Will block during the operation.
-   * This is identical to [Gio.InputStream.read], from a behaviour standpoint,
+   * This is identical to [gio.input_stream.InputStream.read], from a behaviour standpoint,
    * but the bytes that are skipped are not returned to the user. Some
    * streams have an implementation that is more efficient than reading the data.
    * This function is optional for inherited classes, as the default implementation
@@ -469,7 +469,7 @@ class InputStream : ObjectG
   /**
    * Request an asynchronous skip of count bytes from the stream.
    * When the operation is finished callback will be called.
-   * You can then call [Gio.InputStream.skipFinish] to get the result
+   * You can then call [gio.input_stream.InputStream.skipFinish] to get the result
    * of the operation.
    * During an async request no other sync and async calls are allowed,
    * and will result in %G_IO_ERROR_PENDING errors.

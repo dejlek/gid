@@ -1,6 +1,6 @@
 module gtk.cell_renderer_spin;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer_text;
@@ -20,7 +20,7 @@ import gtk.types;
  * can be set in a handler for the `GtkCellRenderer::editing-started` signal.
 
  * Deprecated: List views use widgets to display their contents.
- *   You should use [Gtk.SpinButton] instead
+ *   You should use [gtk.spin_button.SpinButton] instead
  */
 class CellRendererSpin : CellRendererText
 {

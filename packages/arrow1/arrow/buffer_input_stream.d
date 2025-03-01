@@ -9,7 +9,7 @@ import arrow.readable;
 import arrow.readable_mixin;
 import arrow.seekable_input_stream;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class BufferInputStream : SeekableInputStream

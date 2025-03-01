@@ -1,6 +1,6 @@
 module gio.list_store;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.list_model;
@@ -10,7 +10,7 @@ import gobject.object;
 import gobject.types;
 
 /**
- * `GListStore` is a simple implementation of [Gio.ListModel] that stores
+ * `GListStore` is a simple implementation of [gio.list_model.ListModel] that stores
  * all items in memory.
  * It provides insertions, deletions, and lookups in logarithmic time
  * with a fast path for the common case of iterating the list linearly.
@@ -133,7 +133,7 @@ class ListStore : ObjectG, ListModel
   /**
    * Appends item to store. item must be of type #GListStore:item-type.
    * This function takes a ref on item.
-   * Use [Gio.ListStore.splice] to append multiple items at the same time
+   * Use [gio.list_store.ListStore.splice] to append multiple items at the same time
    * efficiently.
    * Params:
    *   item = the new item
@@ -148,7 +148,7 @@ class ListStore : ObjectG, ListModel
    * the first occurrence of item. If item was not found, then position will
    * not be set, and this method will return %FALSE.
    * If you need to compare the two items with a custom comparison function, use
-   * [Gio.ListStore.findWithEqualFunc] with a custom #GEqualFunc instead.
+   * [gio.list_store.ListStore.findWithEqualFunc] with a custom #GEqualFunc instead.
    * Params:
    *   item = an item
    *   position = the first position of item, if it was found.
@@ -167,7 +167,7 @@ class ListStore : ObjectG, ListModel
    * #GListStore:item-type or derived from it. position must be smaller
    * than the length of the list, or equal to it to append.
    * This function takes a ref on item.
-   * Use [Gio.ListStore.splice] to insert multiple items at the same time
+   * Use [gio.list_store.ListStore.splice] to insert multiple items at the same time
    * efficiently.
    * Params:
    *   position = the position at which to insert the new item
@@ -181,7 +181,7 @@ class ListStore : ObjectG, ListModel
   /**
    * Removes the item from store that is at position. position must be
    * smaller than the current length of the list.
-   * Use [Gio.ListStore.splice] to remove multiple items at the same time
+   * Use [gio.list_store.ListStore.splice] to remove multiple items at the same time
    * efficiently.
    * Params:
    *   position = the position of the item that is to be removed
@@ -203,8 +203,8 @@ class ListStore : ObjectG, ListModel
    * Changes store by removing n_removals items and adding n_additions
    * items to it. additions must contain n_additions items of type
    * #GListStore:item-type.  %NULL is not permitted.
-   * This function is more efficient than [Gio.ListStore.insert] and
-   * [Gio.ListStore.remove], because it only emits
+   * This function is more efficient than [gio.list_store.ListStore.insert] and
+   * [gio.list_store.ListStore.remove], because it only emits
    * #GListModel::items-changed once for the change.
    * This function takes a ref on each item in additions.
    * The parameters position and n_removals must be correct $(LPAREN)ie:

@@ -1,6 +1,6 @@
 module gio.file_enumerator;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -14,17 +14,17 @@ import glib.error;
 import gobject.object;
 
 /**
- * `GFileEnumerator` allows you to operate on a set of [Gio.File] objects,
- * returning a [Gio.FileInfo] structure for each file enumerated $(LPAREN)e.g.
- * [Gio.File.enumerateChildren] will return a `GFileEnumerator` for each
+ * `GFileEnumerator` allows you to operate on a set of [gio.file.File] objects,
+ * returning a [gio.file_info.FileInfo] structure for each file enumerated $(LPAREN)e.g.
+ * [gio.file.File.enumerateChildren] will return a `GFileEnumerator` for each
  * of the children within a directory$(RPAREN).
  * To get the next file's information from a `GFileEnumerator`, use
- * [Gio.FileEnumerator.nextFile] or its asynchronous version,
- * [Gio.FileEnumerator.nextFilesAsync]. Note that the asynchronous
- * version will return a list of [Gio.FileInfo] objects, whereas the
+ * [gio.file_enumerator.FileEnumerator.nextFile] or its asynchronous version,
+ * [gio.file_enumerator.FileEnumerator.nextFilesAsync]. Note that the asynchronous
+ * version will return a list of [gio.file_info.FileInfo] objects, whereas the
  * synchronous will only return the next file in the enumerator.
  * The ordering of returned files is unspecified for non-Unix
- * platforms; for more information, see [GLib.Dir.readName].  On Unix,
+ * platforms; for more information, see [glib.dir.Dir.readName].  On Unix,
  * when operating on local files, returned files will be sorted by
  * inode number.  Effectively you can assume that the ordering of
  * returned files will be stable between successive calls $(LPAREN)and
@@ -32,10 +32,10 @@ import gobject.object;
  * If your application needs a specific ordering, such as by name or
  * modification time, you will have to implement that in your
  * application code.
- * To close a `GFileEnumerator`, use [Gio.FileEnumerator.close], or
- * its asynchronous version, [Gio.FileEnumerator.closeAsync]. Once
+ * To close a `GFileEnumerator`, use [gio.file_enumerator.FileEnumerator.close], or
+ * its asynchronous version, [gio.file_enumerator.FileEnumerator.closeAsync]. Once
  * a `GFileEnumerator` is closed, no further actions may be performed
- * on it, and it should be freed with [GObject.ObjectG.unref].
+ * on it, and it should be freed with [gobject.object.ObjectG.unref].
  */
 class FileEnumerator : ObjectG
 {
@@ -81,7 +81,7 @@ class FileEnumerator : ObjectG
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned in
-   * [Gio.FileEnumerator.closeFinish].
+   * [gio.file_enumerator.FileEnumerator.closeFinish].
    * Params:
    *   ioPriority = the [I/O priority][io-priority] of the request
    *   cancellable = optional #GCancellable object, %NULL to ignore.
@@ -104,8 +104,8 @@ class FileEnumerator : ObjectG
   }
 
   /**
-   * Finishes closing a file enumerator, started from [Gio.FileEnumerator.closeAsync].
-   * If the file enumerator was already closed when [Gio.FileEnumerator.closeAsync]
+   * Finishes closing a file enumerator, started from [gio.file_enumerator.FileEnumerator.closeAsync].
+   * If the file enumerator was already closed when [gio.file_enumerator.FileEnumerator.closeAsync]
    * was called, then this function will report %G_IO_ERROR_CLOSED in error, and
    * return %FALSE. If the file enumerator had pending operation when the close
    * operation was started, then this function will report %G_IO_ERROR_PENDING, and
@@ -130,7 +130,7 @@ class FileEnumerator : ObjectG
   /**
    * Return a new #GFile which refers to the file named by info in the source
    * directory of enumerator.  This function is primarily intended to be used
-   * inside loops with [Gio.FileEnumerator.nextFile].
+   * inside loops with [gio.file_enumerator.FileEnumerator.nextFile].
    * To use this, %G_FILE_ATTRIBUTE_STANDARD_NAME must have been listed in the
    * attributes list used when creating the #GFileEnumerator.
    * This is a convenience method that's equivalent to:
@@ -140,7 +140,7 @@ class FileEnumerator : ObjectG
    * name$(RPAREN);
    * ]|
    * Params:
-   *   info = a #GFileInfo gotten from [Gio.FileEnumerator.nextFile]
+   *   info = a #GFileInfo gotten from [gio.file_enumerator.FileEnumerator.nextFile]
    *     or the async equivalents.
    * Returns: a #GFile for the #GFileInfo passed it.
    */
@@ -187,12 +187,12 @@ class FileEnumerator : ObjectG
   }
 
   /**
-   * This is a version of [Gio.FileEnumerator.nextFile] that's easier to
-   * use correctly from C programs.  With [Gio.FileEnumerator.nextFile],
+   * This is a version of [gio.file_enumerator.FileEnumerator.nextFile] that's easier to
+   * use correctly from C programs.  With [gio.file_enumerator.FileEnumerator.nextFile],
    * the gboolean return value signifies "end of iteration or error", which
    * requires allocation of a temporary #GError.
    * In contrast, with this function, a %FALSE return from
-   * [Gio.FileEnumerator.iterate] *always* means
+   * [gio.file_enumerator.FileEnumerator.iterate] *always* means
    * "error".  End of iteration is signaled by out_info or out_child being %NULL.
    * Another crucial difference is that the references for out_info and
    * out_child are owned by direnum $(LPAREN)they are cached as hidden
@@ -202,7 +202,7 @@ class FileEnumerator : ObjectG
    * Finally, this function optionally allows retrieving a #GFile as
    * well.
    * You must specify at least one of out_info or out_child.
-   * The code pattern for correctly using [Gio.FileEnumerator.iterate] from C
+   * The code pattern for correctly using [gio.file_enumerator.FileEnumerator.iterate] from C
    * is:
    * |[
    * direnum \= g_file_enumerate_children $(LPAREN)file, ...$(RPAREN);
@@ -252,7 +252,7 @@ class FileEnumerator : ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: A #GFileInfo or %NULL on error
    *   or end of enumerator.  Free the returned object with
-   *   [GObject.ObjectG.unref] when no longer needed.
+   *   [gobject.object.ObjectG.unref] when no longer needed.
    */
   FileInfo nextFile(Cancellable cancellable)
   {
@@ -273,7 +273,7 @@ class FileEnumerator : ObjectG
    * order of returned files.
    * Once the end of the enumerator is reached, or if an error occurs, the
    * callback will be called with an empty list. In this case, the previous call
-   * to [Gio.FileEnumerator.nextFilesAsync] will typically have returned fewer
+   * to [gio.file_enumerator.FileEnumerator.nextFilesAsync] will typically have returned fewer
    * than num_files items.
    * If a request is cancelled the callback will be called with
    * %G_IO_ERROR_CANCELLED.
@@ -343,11 +343,11 @@ class FileEnumerator : ObjectG
   }
 
   /**
-   * Finishes the asynchronous operation started with [Gio.FileEnumerator.nextFilesAsync].
+   * Finishes the asynchronous operation started with [gio.file_enumerator.FileEnumerator.nextFilesAsync].
    * Params:
    *   result = a #GAsyncResult.
    * Returns: a #GList of #GFileInfos. You must free the list with
-   *   [GLib.List.free] and unref the infos with [GObject.ObjectG.unref] when you're
+   *   [glib.list.List.free] and unref the infos with [gobject.object.ObjectG.unref] when you're
    *   done with them.
    */
   FileInfo[] nextFilesFinish(AsyncResult result)

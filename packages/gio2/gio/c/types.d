@@ -65,7 +65,7 @@ enum GApplicationFlags : uint
    * the primary instance$(RPAREN). Note that this flag only affects the default
    * implementation of local_command_line$(LPAREN)$(RPAREN), and has no effect if
    * %G_APPLICATION_HANDLES_COMMAND_LINE is given.
-   * See [Gio.ApplicationGio.run] for details.
+   * See [gio.application.ApplicationGio.run] for details.
    */
   HandlesOpen = 4,
 
@@ -73,7 +73,7 @@ enum GApplicationFlags : uint
    * This application handles command line
    * arguments $(LPAREN)in the primary instance$(RPAREN). Note that this flag only affect
    * the default implementation of local_command_line$(LPAREN)$(RPAREN).
-   * See [Gio.ApplicationGio.run] for details.
+   * See [gio.application.ApplicationGio.run] for details.
    */
   HandlesCommandLine = 8,
 
@@ -85,7 +85,7 @@ enum GApplicationFlags : uint
    * to use the `GIT_COMMITTER_NAME` environment variable
    * when editing a git commit message. The environment is available
    * to the #GApplication::command-line signal handler, via
-   * [Gio.ApplicationCommandLine.getenv].
+   * [gio.application_command_line.ApplicationCommandLine.getenv].
    */
   SendEnvironment = 16,
 
@@ -159,7 +159,7 @@ enum GAskPasswordFlags : uint
 }
 
 /**
- * Flags used in [Gio.Global.busOwnName].
+ * Flags used in [gio.global.busOwnName].
  */
 enum GBusNameOwnerFlags : uint
 {
@@ -181,13 +181,13 @@ enum GBusNameOwnerFlags : uint
 
   /**
    * If another message bus connection owns the name, immediately
-   * return an error from [Gio.Global.busOwnName] rather than entering the waiting queue for that name. (Since 2.54)
+   * return an error from [gio.global.busOwnName] rather than entering the waiting queue for that name. (Since 2.54)
    */
   DoNotQueue = 4,
 }
 
 /**
- * Flags used in [Gio.Global.busWatchName].
+ * Flags used in [gio.global.busWatchName].
  */
 enum GBusNameWatcherFlags : uint
 {
@@ -231,7 +231,7 @@ enum GBusType
 }
 
 /**
- * Flags used when calling a [Gio.Converter.convert].
+ * Flags used when calling a [gio.converter.Converter.convert].
  */
 enum GConverterFlags : uint
 {
@@ -252,7 +252,7 @@ enum GConverterFlags : uint
 }
 
 /**
- * Results returned from [Gio.Converter.convert].
+ * Results returned from [gio.converter.Converter.convert].
  */
 enum GConverterResult
 {
@@ -324,7 +324,7 @@ enum GCredentialsType
 }
 
 /**
- * Flags used in [Gio.DBusConnection.call] and similar APIs.
+ * Flags used in [gio.dbus_connection.DBusConnection.call] and similar APIs.
  */
 enum GDBusCallFlags : uint
 {
@@ -399,7 +399,7 @@ enum GDBusConnectionFlags : uint
 
   /**
    * If set, processing of D-Bus messages is
-   * delayed until [Gio.DBusConnection.startMessageProcessing] is called.
+   * delayed until [gio.dbus_connection.DBusConnection.startMessageProcessing] is called.
    */
   DelayMessageProcessing = 16,
 
@@ -949,7 +949,7 @@ enum GDBusServerFlags : uint
 }
 
 /**
- * Flags used when subscribing to signals via [Gio.DBusConnection.signalSubscribe].
+ * Flags used when subscribing to signals via [gio.dbus_connection.DBusConnection.signalSubscribe].
  */
 enum GDBusSignalFlags : uint
 {
@@ -980,7 +980,7 @@ enum GDBusSignalFlags : uint
 }
 
 /**
- * Flags passed to [Gio.DBusConnection.registerSubtree].
+ * Flags passed to [gio.dbus_connection.DBusConnection.registerSubtree].
  */
 enum GDBusSubtreeFlags : uint
 {
@@ -1144,7 +1144,7 @@ enum GFileAttributeInfoFlags : uint
 }
 
 /**
- * Used by [Gio.File.setAttributesFromInfo] when setting file attributes.
+ * Used by [gio.file.File.setAttributesFromInfo] when setting file attributes.
  */
 enum GFileAttributeStatus
 {
@@ -1292,14 +1292,14 @@ enum GFileCreateFlags : uint
    * You can think of it as "unlink destination" before
    * writing to it, although the implementation may not
    * be exactly like that. This flag can only be used with
-   * [Gio.File.replace] and its variants, including [Gio.File.replaceContents].
+   * [gio.file.File.replace] and its variants, including [gio.file.File.replaceContents].
    * Since 2.20
    */
   ReplaceDestination = 2,
 }
 
 /**
- * Flags that can be used with [Gio.File.measureDiskUsage].
+ * Flags that can be used with [gio.file.File.measureDiskUsage].
  */
 enum GFileMeasureFlags : uint
 {
@@ -1738,8 +1738,8 @@ enum GIOErrorEnum
   /**
    * A remote object generated an error that
    * doesn't correspond to a locally registered #GError error
-   * domain. Use [Gio.Global.dbusErrorGetRemoteError] to extract the D-Bus
-   * error name and [Gio.Global.dbusErrorStripRemoteError] to fix up the
+   * domain. Use [gio.global.dbusErrorGetRemoteError] to extract the D-Bus
+   * error name and [gio.global.dbusErrorStripRemoteError] to fix up the
    * message so it matches what was received on the wire. Since 2.26.
    */
   DbusError = 36,
@@ -1816,7 +1816,7 @@ enum GIOErrorEnum
 }
 
 /**
- * Flags for use with [Gio.IOModuleScope.new_].
+ * Flags for use with [gio.iomodule_scope.IOModuleScope.new_].
  */
 enum GIOModuleScopeFlags
 {
@@ -2117,7 +2117,7 @@ enum GResolverError
 enum GResolverNameLookupFlags : uint
 {
   /**
-   * default behavior $(LPAREN)same as [Gio.Resolver.lookupByName]$(RPAREN)
+   * default behavior $(LPAREN)same as [gio.resolver.Resolver.lookupByName]$(RPAREN)
    */
   Default = 0,
 
@@ -2133,8 +2133,8 @@ enum GResolverNameLookupFlags : uint
 }
 
 /**
- * The type of record that [Gio.Resolver.lookupRecords] or
- * [Gio.Resolver.lookupRecordsAsync] should retrieve. The records are returned
+ * The type of record that [gio.resolver.Resolver.lookupRecords] or
+ * [gio.resolver.Resolver.lookupRecordsAsync] should retrieve. The records are returned
  * as lists of #GVariant tuples. Each record type has different values in
  * the variant tuples returned.
  * %G_RESOLVER_RECORD_SRV records are returned as variants with the signature
@@ -2268,9 +2268,9 @@ enum GSettingsBindFlags : uint
   GetNoChanges = 8,
 
   /**
-   * When passed to [Gio.Settings.bind], uses a pair of mapping functions that invert
+   * When passed to [gio.settings.Settings.bind], uses a pair of mapping functions that invert
    * the boolean value when mapping between the setting and the property.  The setting and property must both
-   * be booleans.  You cannot pass this flag to [Gio.Settings.bindWithMapping].
+   * be booleans.  You cannot pass this flag to [gio.settings.Settings.bindWithMapping].
    */
   InvertBoolean = 16,
 }
@@ -2394,7 +2394,7 @@ enum GSocketListenerEvent
 }
 
 /**
- * Flags used in [Gio.Socket.receiveMessage] and [Gio.Socket.sendMessage].
+ * Flags used in [gio.socket.Socket.receiveMessage] and [gio.socket.Socket.sendMessage].
  * The flags listed in the enum are some commonly available flags, but the
  * values used for them are the same as on the platform, and any other flags
  * are passed in/out as is. So to use a platform specific flag, just include
@@ -2509,7 +2509,7 @@ enum GSubprocessFlags : uint
   /**
    * create a pipe for the stdin of the
    * spawned process that can be accessed with
-   * [Gio.Subprocess.getStdinPipe].
+   * [gio.subprocess.Subprocess.getStdinPipe].
    */
   StdinPipe = 1,
 
@@ -2522,7 +2522,7 @@ enum GSubprocessFlags : uint
   /**
    * create a pipe for the stdout of the
    * spawned process that can be accessed with
-   * [Gio.Subprocess.getStdoutPipe].
+   * [gio.subprocess.Subprocess.getStdoutPipe].
    */
   StdoutPipe = 4,
 
@@ -2535,7 +2535,7 @@ enum GSubprocessFlags : uint
   /**
    * create a pipe for the stderr of the
    * spawned process that can be accessed with
-   * [Gio.Subprocess.getStderrPipe].
+   * [gio.subprocess.Subprocess.getStderrPipe].
    */
   StderrPipe = 16,
 
@@ -2668,9 +2668,9 @@ enum GTlsCertificateFlags : uint
 }
 
 /**
- * Flags for [Gio.TlsInteraction.requestCertificate],
- * [Gio.TlsInteraction.requestCertificateAsync], and
- * [Gio.TlsInteraction.invokeRequestCertificate].
+ * Flags for [gio.tls_interaction.TlsInteraction.requestCertificate],
+ * [gio.tls_interaction.TlsInteraction.requestCertificateAsync], and
+ * [gio.tls_interaction.TlsInteraction.invokeRequestCertificate].
  */
 enum GTlsCertificateRequestFlags
 {
@@ -2751,9 +2751,9 @@ enum GTlsChannelBindingType
 }
 
 /**
- * Flags for [Gio.TlsDatabase.lookupCertificateForHandle],
- * [Gio.TlsDatabase.lookupCertificateIssuer],
- * and [Gio.TlsDatabase.lookupCertificatesIssuedBy].
+ * Flags for [gio.tls_database.TlsDatabase.lookupCertificateForHandle],
+ * [gio.tls_database.TlsDatabase.lookupCertificateIssuer],
+ * and [gio.tls_database.TlsDatabase.lookupCertificatesIssuedBy].
  */
 enum GTlsDatabaseLookupFlags
 {
@@ -2770,7 +2770,7 @@ enum GTlsDatabaseLookupFlags
 }
 
 /**
- * Flags for [Gio.TlsDatabase.verifyChain].
+ * Flags for [gio.tls_database.TlsDatabase.verifyChain].
  */
 enum GTlsDatabaseVerifyFlags : uint
 {
@@ -2817,14 +2817,14 @@ enum GTlsError
   /**
    * The TLS handshake failed because
    * the server requested a client-side certificate, but none was
-   * provided. See [Gio.TlsConnection.setCertificate].
+   * provided. See [gio.tls_connection.TlsConnection.setCertificate].
    */
   CertificateRequired = 5,
 
   /**
    * The TLS connection was closed without proper
    * notice, which may indicate an attack. See
-   * [Gio.TlsConnection.setRequireCloseNotify].
+   * [gio.tls_connection.TlsConnection.setRequireCloseNotify].
    */
   Eof = 6,
 
@@ -2969,7 +2969,7 @@ enum GTlsProtocolVersion
 
 /**
  * When to allow rehandshaking. See
- * [Gio.TlsConnection.setRehandshakeMode].
+ * [gio.tls_connection.TlsConnection.setRehandshakeMode].
 
  * Deprecated: Changing the rehandshake mode is no longer
  *   required for compatibility. Also, rehandshaking has been removed
@@ -3061,39 +3061,39 @@ enum GZlibCompressorFormat
 /**
  * `GAction` represents a single named action.
  * The main interface to an action is that it can be activated with
- * [Gio.Action.activate]. This results in the 'activate' signal being
+ * [gio.action.Action.activate]. This results in the 'activate' signal being
  * emitted. An activation has a `GVariant` parameter $(LPAREN)which may be
  * `NULL`$(RPAREN). The correct type for the parameter is determined by a static
  * parameter type $(LPAREN)which is given at construction time$(RPAREN).
  * An action may optionally have a state, in which case the state may be
- * set with [Gio.Action.changeState]. This call takes a #GVariant. The
+ * set with [gio.action.Action.changeState]. This call takes a #GVariant. The
  * correct type for the state is determined by a static state type
  * $(LPAREN)which is given at construction time$(RPAREN).
  * The state may have a hint associated with it, specifying its valid
  * range.
  * `GAction` is merely the interface to the concept of an action, as
  * described above.  Various implementations of actions exist, including
- * [Gio.SimpleAction].
+ * [gio.simple_action.SimpleAction].
  * In all cases, the implementing class is responsible for storing the
  * name of the action, the parameter type, the enabled state, the optional
  * state type and the state and emitting the appropriate signals when these
  * change. The implementor is responsible for filtering calls to
- * [Gio.Action.activate] and [Gio.Action.changeState]
+ * [gio.action.Action.activate] and [gio.action.Action.changeState]
  * for type safety and for the state being enabled.
  * Probably the only useful thing to do with a `GAction` is to put it
- * inside of a [Gio.SimpleActionGroup].
+ * inside of a [gio.simple_action_group.SimpleActionGroup].
  */
 struct GAction;
 
 /**
  * This struct defines a single action.  It is for use with
- * [Gio.ActionMap.addActionEntries].
+ * [gio.action_map.ActionMap.addActionEntries].
  * The order of the items in the structure are intended to reflect
  * frequency of use.  It is permissible to use an incomplete initialiser
  * in order to leave some of the later values as %NULL.  All values
  * after @name are optional.  Additional optional fields may be added in
  * the future.
- * See [Gio.ActionMap.addActionEntries] for an example.
+ * See [gio.action_map.ActionMap.addActionEntries] for an example.
  */
 struct GActionEntry
 {
@@ -3146,36 +3146,36 @@ struct GActionEntry
  * groups are often used together with a `GMenuModel` that provides additional
  * representation data for displaying the actions to the user, e.g. in a menu.
  * The main way to interact with the actions in a `GActionGroup` is to
- * activate them with [Gio.ActionGroup.activateAction]. Activating an
+ * activate them with [gio.action_group.ActionGroup.activateAction]. Activating an
  * action may require a `GVariant` parameter. The required type of the
- * parameter can be inquired with [Gio.ActionGroup.getActionParameterType].
- * Actions may be disabled, see [Gio.ActionGroup.getActionEnabled].
+ * parameter can be inquired with [gio.action_group.ActionGroup.getActionParameterType].
+ * Actions may be disabled, see [gio.action_group.ActionGroup.getActionEnabled].
  * Activating a disabled action has no effect.
  * Actions may optionally have a state in the form of a #GVariant. The current
- * state of an action can be inquired with [Gio.ActionGroup.getActionState].
+ * state of an action can be inquired with [gio.action_group.ActionGroup.getActionState].
  * Activating a stateful action may change its state, but it is also possible to
- * set the state by calling [Gio.ActionGroup.changeActionState].
+ * set the state by calling [gio.action_group.ActionGroup.changeActionState].
  * As typical example, consider a text editing application which has an
  * option to change the current font to 'bold'. A good way to represent
  * this would be a stateful action, with a boolean state. Activating the
  * action would toggle the state.
  * Each action in the group has a unique name $(LPAREN)which is a string$(RPAREN).  All
- * method calls, except [Gio.ActionGroup.listActions] take the name of
+ * method calls, except [gio.action_group.ActionGroup.listActions] take the name of
  * an action as an argument.
  * The `GActionGroup` API is meant to be the 'public' API to the action
  * group. The calls here are exactly the interaction that 'external
  * forces' $(LPAREN)eg: UI, incoming D-Bus messages, etc.$(RPAREN) are supposed to have
  * with actions. 'Internal' APIs $(LPAREN)ie: ones meant only to be accessed by
  * the action group implementation$(RPAREN) are found on subclasses. This is
- * why you will find - for example - [Gio.ActionGroup.getActionEnabled]
+ * why you will find - for example - [gio.action_group.ActionGroup.getActionEnabled]
  * but not an equivalent set$(LPAREN)$(RPAREN) call.
  * Signals are emitted on the action group in response to state changes
  * on individual actions.
  * Implementations of `GActionGroup` should provide implementations for
- * the virtual functions [Gio.ActionGroup.listActions] and
- * [Gio.ActionGroup.queryAction]. The other virtual functions should
+ * the virtual functions [gio.action_group.ActionGroup.listActions] and
+ * [gio.action_group.ActionGroup.queryAction]. The other virtual functions should
  * not be implemented - their "wrappers" are actually implemented with
- * calls to [Gio.ActionGroup.queryAction].
+ * calls to [gio.action_group.ActionGroup.queryAction].
  */
 struct GActionGroup;
 
@@ -3187,47 +3187,47 @@ struct GActionGroupInterface
   GTypeInterface gIface;
 
   /**
-   * the virtual function pointer for [Gio.ActionGroup.hasAction]
+   * the virtual function pointer for [gio.action_group.ActionGroup.hasAction]
    */
   extern(C) bool function(GActionGroup* actionGroup, const(char)* actionName) hasAction;
 
   /**
-   * the virtual function pointer for [Gio.ActionGroup.listActions]
+   * the virtual function pointer for [gio.action_group.ActionGroup.listActions]
    */
   extern(C) char** function(GActionGroup* actionGroup) listActions;
 
   /**
-   * the virtual function pointer for [Gio.ActionGroup.getActionEnabled]
+   * the virtual function pointer for [gio.action_group.ActionGroup.getActionEnabled]
    */
   extern(C) bool function(GActionGroup* actionGroup, const(char)* actionName) getActionEnabled;
 
   /**
-   * the virtual function pointer for [Gio.ActionGroup.getActionParameterType]
+   * the virtual function pointer for [gio.action_group.ActionGroup.getActionParameterType]
    */
   extern(C) const(GVariantType)* function(GActionGroup* actionGroup, const(char)* actionName) getActionParameterType;
 
   /**
-   * the virtual function pointer for [Gio.ActionGroup.getActionStateType]
+   * the virtual function pointer for [gio.action_group.ActionGroup.getActionStateType]
    */
   extern(C) const(GVariantType)* function(GActionGroup* actionGroup, const(char)* actionName) getActionStateType;
 
   /**
-   * the virtual function pointer for [Gio.ActionGroup.getActionStateHint]
+   * the virtual function pointer for [gio.action_group.ActionGroup.getActionStateHint]
    */
   extern(C) VariantC* function(GActionGroup* actionGroup, const(char)* actionName) getActionStateHint;
 
   /**
-   * the virtual function pointer for [Gio.ActionGroup.getActionState]
+   * the virtual function pointer for [gio.action_group.ActionGroup.getActionState]
    */
   extern(C) VariantC* function(GActionGroup* actionGroup, const(char)* actionName) getActionState;
 
   /**
-   * the virtual function pointer for [Gio.ActionGroup.changeActionState]
+   * the virtual function pointer for [gio.action_group.ActionGroup.changeActionState]
    */
   extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, VariantC* value) changeActionState;
 
   /**
-   * the virtual function pointer for [Gio.ActionGroup.activateAction]
+   * the virtual function pointer for [gio.action_group.ActionGroup.activateAction]
    */
   extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, VariantC* parameter) activateAction;
 
@@ -3252,7 +3252,7 @@ struct GActionGroupInterface
   extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, VariantC* state) actionStateChanged;
 
   /**
-   * the virtual function pointer for [Gio.ActionGroup.queryAction]
+   * the virtual function pointer for [gio.action_group.ActionGroup.queryAction]
    */
   extern(C) bool function(GActionGroup* actionGroup, const(char)* actionName, bool* enabled, const(GVariantType*)* parameterType, const(GVariantType*)* stateType, VariantC** stateHint, VariantC** state) queryAction;
 }
@@ -3265,42 +3265,42 @@ struct GActionInterface
   GTypeInterface gIface;
 
   /**
-   * the virtual function pointer for [Gio.Action.getName]
+   * the virtual function pointer for [gio.action.Action.getName]
    */
   extern(C) const(char)* function(GAction* action) getName;
 
   /**
-   * the virtual function pointer for [Gio.Action.getParameterType]
+   * the virtual function pointer for [gio.action.Action.getParameterType]
    */
   extern(C) const(GVariantType)* function(GAction* action) getParameterType;
 
   /**
-   * the virtual function pointer for [Gio.Action.getStateType]
+   * the virtual function pointer for [gio.action.Action.getStateType]
    */
   extern(C) const(GVariantType)* function(GAction* action) getStateType;
 
   /**
-   * the virtual function pointer for [Gio.Action.getStateHint]
+   * the virtual function pointer for [gio.action.Action.getStateHint]
    */
   extern(C) VariantC* function(GAction* action) getStateHint;
 
   /**
-   * the virtual function pointer for [Gio.Action.getEnabled]
+   * the virtual function pointer for [gio.action.Action.getEnabled]
    */
   extern(C) bool function(GAction* action) getEnabled;
 
   /**
-   * the virtual function pointer for [Gio.Action.getState]
+   * the virtual function pointer for [gio.action.Action.getState]
    */
   extern(C) VariantC* function(GAction* action) getState;
 
   /**
-   * the virtual function pointer for [Gio.Action.changeState]
+   * the virtual function pointer for [gio.action.Action.changeState]
    */
   extern(C) void function(GAction* action, VariantC* value) changeState;
 
   /**
-   * the virtual function pointer for [Gio.Action.activate].  Note that #GAction does not have an
+   * the virtual function pointer for [gio.action.Action.activate].  Note that #GAction does not have an
    * 'activate' signal but that implementations of it may have one.
    */
   extern(C) void function(GAction* action, VariantC* parameter) activate;
@@ -3308,9 +3308,9 @@ struct GActionInterface
 
 /**
  * `GActionMap` is an interface for action containers.
- * The `GActionMap` interface is implemented by [Gio.ActionGroup]
+ * The `GActionMap` interface is implemented by [gio.action_group.ActionGroup]
  * implementations that operate by containing a number of named
- * [Gio.Action] instances, such as [Gio.SimpleActionGroup].
+ * [gio.action.Action] instances, such as [gio.simple_action_group.SimpleActionGroup].
  * One useful application of this interface is to map the
  * names of actions from various action groups to unique,
  * prefixed names $(LPAREN)e.g. by prepending "app." or "win."$(RPAREN).
@@ -3327,17 +3327,17 @@ struct GActionMapInterface
   GTypeInterface gIface;
 
   /**
-   * the virtual function pointer for [Gio.ActionMap.lookupAction]
+   * the virtual function pointer for [gio.action_map.ActionMap.lookupAction]
    */
   extern(C) GAction* function(GActionMap* actionMap, const(char)* actionName) lookupAction;
 
   /**
-   * the virtual function pointer for [Gio.ActionMap.addAction]
+   * the virtual function pointer for [gio.action_map.ActionMap.addAction]
    */
   extern(C) void function(GActionMap* actionMap, GAction* action) addAction;
 
   /**
-   * the virtual function pointer for [Gio.ActionMap.removeAction]
+   * the virtual function pointer for [gio.action_map.ActionMap.removeAction]
    */
   extern(C) void function(GActionMap* actionMap, const(char)* actionName) removeAction;
 }
@@ -3348,7 +3348,7 @@ struct GActionMapInterface
  * `GAppInfo` and `GAppLaunchContext` are used for describing and launching
  * applications installed on the system.
  * As of GLib 2.20, URIs will always be converted to POSIX paths
- * $(LPAREN)using [Gio.File.getPath]$(RPAREN) when using [Gio.AppInfo.launch]
+ * $(LPAREN)using [gio.file.File.getPath]$(RPAREN) when using [gio.app_info.AppInfo.launch]
  * even if the application requested an URI and not a POSIX path. For example
  * for a desktop-file based application with Exec key `totem
  * %U` and a single URI, `sftp://foo/file.avi`, then
@@ -3360,12 +3360,12 @@ struct GActionMapInterface
  * path $(LPAREN)in GVfs there's no FUSE mount for it$(RPAREN); such URIs will be
  * passed unmodified to the application.
  * Specifically for GVfs 2.26 and later, the POSIX URI will be mapped
- * back to the GIO URI in the [Gio.File] constructors $(LPAREN)since GVfs
+ * back to the GIO URI in the [gio.file.File] constructors $(LPAREN)since GVfs
  * implements the GVfs extension point$(RPAREN). As such, if the application
- * needs to examine the URI, it needs to use [Gio.File.getUri]
- * or similar on [Gio.File]. In other words, an application cannot
- * assume that the URI passed to e.g. [Gio.File.newForCommandlineArg]
- * is equal to the result of [Gio.File.getUri]. The following snippet
+ * needs to examine the URI, it needs to use [gio.file.File.getUri]
+ * or similar on [gio.file.File]. In other words, an application cannot
+ * assume that the URI passed to e.g. [gio.file.File.newForCommandlineArg]
+ * is equal to the result of [gio.file.File.getUri]. The following snippet
  * illustrates this:
  * ```c
  * GFile *f;
@@ -3506,7 +3506,7 @@ struct GAppInfoIface
   extern(C) const(char)* function(GAppInfo* appinfo) getDisplayName;
 
   /**
-   * Sets the application as the last used. See [Gio.AppInfo.setAsLastUsedForType].
+   * Sets the application as the last used. See [gio.app_info.AppInfo.setAsLastUsedForType].
    */
   extern(C) bool function(GAppInfo* appinfo, const(char)* contentType, GError** _err) setAsLastUsedForType;
 
@@ -3530,23 +3530,23 @@ struct GAppInfoIface
  * `GAppInfoMonitor` monitors application information for changes.
  * `GAppInfoMonitor` is a very simple object used for monitoring the app
  * info database for changes $(LPAREN)newly installed or removed applications$(RPAREN).
- * Call [Gio.AppInfoMonitor.get] to get a `GAppInfoMonitor` and connect
- * to the [Gio.AppInfoMonitor.changed] signal. The signal will be emitted once when
+ * Call [gio.app_info_monitor.AppInfoMonitor.get] to get a `GAppInfoMonitor` and connect
+ * to the [gio.app_info_monitor.AppInfoMonitor.changed] signal. The signal will be emitted once when
  * the app info database changes, and will not be emitted again until after the
- * next call to [Gio.AppInfo.getAll] or another `g_app_info_*()` function.
+ * next call to [gio.app_info.AppInfo.getAll] or another `g_app_info_*()` function.
  * This is because monitoring the app info database for changes is expensive.
- * The following functions will re-arm the [Gio.AppInfoMonitor.changed]
+ * The following functions will re-arm the [gio.app_info_monitor.AppInfoMonitor.changed]
  * signal so it can be emitted again:
- * - [Gio.AppInfo.getAll]
- * - [Gio.AppInfo.getAllForType]
- * - [Gio.AppInfo.getDefaultForType]
- * - [Gio.AppInfo.getFallbackForType]
- * - [Gio.AppInfo.getRecommendedForType]
- * - [`[Gio.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
- * - [`[Gio.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
- * - [`[Gio.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
- * - [`[Gio.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
- * - [`[Gio.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
+ * - [gio.app_info.AppInfo.getAll]
+ * - [gio.app_info.AppInfo.getAllForType]
+ * - [gio.app_info.AppInfo.getDefaultForType]
+ * - [gio.app_info.AppInfo.getFallbackForType]
+ * - [gio.app_info.AppInfo.getRecommendedForType]
+ * - [`[gio.desktop_app_info.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
+ * - [`[gio.desktop_app_info.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
+ * - [`[gio.desktop_app_info.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
+ * - [`[gio.desktop_app_info.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
+ * - [`[gio.desktop_app_info.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
  * The latter functions are available if using
  * [`GDesktopAppInfo`](../gio-unix/class.DesktopAppInfo.html) from
  * `gio-unix-2.0.pc` $(LPAREN)GIR namespace `GioUnix-2.0`$(RPAREN).
@@ -3629,7 +3629,7 @@ struct GApplicationClass
   /**
    * invoked $(LPAREN)locally$(RPAREN). The virtual function has the chance
    * to inspect $(LPAREN)and possibly replace$(RPAREN) command line arguments. See
-   * [Gio.ApplicationGio.run] for more information. Also see the
+   * [gio.application.ApplicationGio.run] for more information. Also see the
    * #GApplication::handle-local-options signal, which is a simpler
    * alternative to handling some commandline options locally
    */
@@ -3664,7 +3664,7 @@ struct GApplicationClass
 
   /**
    * Used to be invoked on the primary instance from
-   * [Gio.ApplicationGio.run] if the use-count is non-zero. Since 2.32,
+   * [gio.application.ApplicationGio.run] if the use-count is non-zero. Since 2.32,
    * GApplication is iterating the main context directly and is not
    * using @run_mainloop anymore
    */
@@ -3711,7 +3711,7 @@ struct GApplicationClass
 /**
  * `GApplicationCommandLine` represents a command-line invocation of
  * an application.
- * It is created by [Gio.ApplicationGio] and emitted
+ * It is created by [gio.application.ApplicationGio] and emitted
  * in the signal@Gio.Application::command-line signal and virtual function.
  * The class contains the list of arguments that the program was invoked
  * with. It is also possible to query if the commandline invocation was
@@ -3719,14 +3719,14 @@ struct GApplicationClass
  * invocation$(RPAREN) or remote $(LPAREN)ie: some other process forwarded the
  * commandline to this process$(RPAREN).
  * The `GApplicationCommandLine` object can provide the @argc and @argv
- * parameters for use with the [GLib.OptionContext] command-line parsing API,
- * with the [Gio.ApplicationCommandLine.getArguments] function. See
+ * parameters for use with the [glib.option_context.OptionContext] command-line parsing API,
+ * with the [gio.application_command_line.ApplicationCommandLine.getArguments] function. See
  * [gapplication-example-cmdline3.c][gapplication-example-cmdline3]
  * for an example.
  * The exit status of the originally-invoked process may be set and
  * messages can be printed to stdout or stderr of that process.
  * For remote invocation, the originally-invoked process exits when
- * [Gio.ApplicationCommandLine.done] method is called. This method is
+ * [gio.application_command_line.ApplicationCommandLine.done] method is called. This method is
  * also automatically called when the object is disposed.
  * The main use for `GApplicationCommandLine` $(LPAREN)and the
  * signal@Gio.Application::command-line signal$(RPAREN) is 'Emacs server' like use cases:
@@ -3879,8 +3879,8 @@ struct GApplicationCommandLinePrivate;
  * this class outside of a higher level framework.
  * `GApplication` provides convenient life-cycle management by maintaining
  * a "use count" for the primary application instance. The use count can
- * be changed using [Gio.ApplicationGio.hold] and
- * [Gio.ApplicationGio.release]. If it drops to zero, the application
+ * be changed using [gio.application.ApplicationGio.hold] and
+ * [gio.application.ApplicationGio.release]. If it drops to zero, the application
  * exits. Higher-level classes such as `GtkApplication` employ the use count
  * to ensure that the application stays alive as long as it has any opened
  * windows.
@@ -3901,18 +3901,18 @@ struct GApplicationCommandLinePrivate;
  * if it is the primary instance. Instead, the main$(LPAREN)$(RPAREN) function of a
  * `GApplication` should do very little more than instantiating the
  * application instance, possibly connecting signal handlers, then
- * calling [Gio.ApplicationGio.run]. All checks for uniqueness are done
+ * calling [gio.application.ApplicationGio.run]. All checks for uniqueness are done
  * internally. If the application is the primary instance then the
  * startup signal is emitted and the mainloop runs. If the application
  * is not the primary instance then a signal is sent to the primary
- * instance and [Gio.ApplicationGio.run] promptly returns. See the code
+ * instance and [gio.application.ApplicationGio.run] promptly returns. See the code
  * examples below.
  * If used, the expected form of an application identifier is the
  * same as that of a
  * [D-Bus well-known bus name](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus).
  * Examples include: `com.example.MyApp`, `org.example.internal_apps.Calculator`,
  * `org._7_zip.Archiver`.
- * For details on valid application identifiers, see [Gio.ApplicationGio.idIsValid].
+ * For details on valid application identifiers, see [gio.application.ApplicationGio.idIsValid].
  * On Linux, the application identifier is claimed as a well-known bus name
  * on the user's session bus. This means that the uniqueness of your
  * application is scoped to the current session. It also means that your
@@ -3923,17 +3923,17 @@ struct GApplicationCommandLinePrivate;
  * $(LPAREN)even if a main loop is not running$(RPAREN). For this reason, you must ensure that
  * any object paths that you wish to register are registered before #GApplication
  * attempts to acquire the bus name of your application $(LPAREN)which happens in
- * [Gio.ApplicationGio.register]$(RPAREN). Unfortunately, this means that you cannot
+ * [gio.application.ApplicationGio.register]$(RPAREN). Unfortunately, this means that you cannot
  * use property@Gio.Application:is-remote to decide if you want to register
  * object paths.
- * `GApplication` also implements the [Gio.ActionGroup] and [Gio.ActionMap]
+ * `GApplication` also implements the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap]
  * interfaces and lets you easily export actions by adding them with
- * [Gio.ActionMap.addAction]. When invoking an action by calling
- * [Gio.ActionGroup.activateAction] on the application, it is always
+ * [gio.action_map.ActionMap.addAction]. When invoking an action by calling
+ * [gio.action_group.ActionGroup.activateAction] on the application, it is always
  * invoked in the primary instance. The actions are also exported on
- * the session bus, and GIO provides the [Gio.DBusActionGroup] wrapper to
- * conveniently access them remotely. GIO provides a [Gio.DBusMenuModel] wrapper
- * for remote access to exported [Gio.MenuModel]s.
+ * the session bus, and GIO provides the [gio.dbus_action_group.DBusActionGroup] wrapper to
+ * conveniently access them remotely. GIO provides a [gio.dbus_menu_model.DBusMenuModel] wrapper
+ * for remote access to exported [gio.menu_model.MenuModel]s.
  * Note: Due to the fact that actions are exported on the session bus,
  * using `maybe` parameters is not supported, since D-Bus does not support
  * `maybe` types.
@@ -3942,19 +3942,19 @@ struct GApplicationCommandLinePrivate;
  * - via 'Open' $(LPAREN)i.e. opening some files$(RPAREN)
  * - by handling a command-line
  * - via activating an action
- * The [Gio.ApplicationGio.startup] signal lets you handle the application
+ * The [gio.application.ApplicationGio.startup] signal lets you handle the application
  * initialization for all of these in a single place.
  * Regardless of which of these entry points is used to start the
  * application, `GApplication` passes some ‘platform data’ from the
  * launching instance to the primary instance, in the form of a
- * [GLib.VariantG] dictionary mapping strings to variants. To use platform
+ * [glib.variant.VariantG] dictionary mapping strings to variants. To use platform
  * data, override the vfunc@Gio.Application.before_emit or
  * vfunc@Gio.Application.after_emit virtual functions
  * in your `GApplication` subclass. When dealing with
- * [Gio.ApplicationCommandLine] objects, the platform data is
- * directly available via [Gio.ApplicationCommandLine.getCwd],
- * [Gio.ApplicationCommandLine.getEnviron] and
- * [Gio.ApplicationCommandLine.getPlatformData].
+ * [gio.application_command_line.ApplicationCommandLine] objects, the platform data is
+ * directly available via [gio.application_command_line.ApplicationCommandLine.getCwd],
+ * [gio.application_command_line.ApplicationCommandLine.getEnviron] and
+ * [gio.application_command_line.ApplicationCommandLine.getPlatformData].
  * As the name indicates, the platform data may vary depending on the
  * operating system, but it always includes the current directory $(LPAREN)key
  * `cwd`$(RPAREN), and optionally the environment $(LPAREN)ie the set of environment
@@ -3986,15 +3986,15 @@ struct GApplicationPrivate;
 
 /**
  * `GAsyncInitable` is an interface for asynchronously initializable objects.
- * This is the asynchronous version of [Gio.Initable]; it behaves the same
+ * This is the asynchronous version of [gio.initable.Initable]; it behaves the same
  * in all ways except that initialization is asynchronous. For more details
  * see the descriptions on `GInitable`.
  * A class may implement both the `GInitable` and `GAsyncInitable` interfaces.
  * Users of objects implementing this are not intended to use the interface
  * method directly; instead it will be used automatically in various ways.
- * For C applications you generally just call [Gio.AsyncInitable.newAsync]
+ * For C applications you generally just call [gio.async_initable.AsyncInitable.newAsync]
  * directly, or indirectly via a foo_thing_new_async$(LPAREN)$(RPAREN) wrapper. This will call
- * [Gio.AsyncInitable.initAsync] under the covers, calling back with `NULL`
+ * [gio.async_initable.AsyncInitable.initAsync] under the covers, calling back with `NULL`
  * and a set `GError` on failure.
  * A typical implementation might look something like this:
  * ```c
@@ -4102,7 +4102,7 @@ struct GAsyncInitableIface
  * asynchronous function. This callback will be triggered when the
  * operation has completed, and must be run in a later iteration of
  * the thread-default main context $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN) from where the operation was
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) from where the operation was
  * initiated. It will be passed a `GAsyncResult` instance filled with the
  * details of the operation's success or failure, the object the asynchronous
  * function was started for and any error codes returned. The asynchronous
@@ -4112,7 +4112,7 @@ struct GAsyncInitableIface
  * error conditions that may have occurred.
  * The `_finish$(LPAREN)$(RPAREN)` function for an operation takes the generic result
  * $(LPAREN)of type `GAsyncResult`$(RPAREN) and returns the specific result that the
- * operation in question yields $(LPAREN)e.g. a [Gio.FileEnumerator] for a
+ * operation in question yields $(LPAREN)e.g. a [gio.file_enumerator.FileEnumerator] for a
  * "enumerate children" operation$(RPAREN). If the result or error status of the
  * operation is not needed, there is no need to call the `_finish$(LPAREN)$(RPAREN)`
  * function; GIO will take care of cleaning up the result and error
@@ -4197,12 +4197,12 @@ struct GAsyncResultIface
  * Buffered input stream implements #GFilterInputStream and provides
  * for buffered reads.
  * By default, `GBufferedInputStream`'s buffer size is set at 4 kilobytes.
- * To create a buffered input stream, use [Gio.BufferedInputStream.new_],
- * or [Gio.BufferedInputStream.newSized] to specify the buffer's size at
+ * To create a buffered input stream, use [gio.buffered_input_stream.BufferedInputStream.new_],
+ * or [gio.buffered_input_stream.BufferedInputStream.newSized] to specify the buffer's size at
  * construction.
  * To get the size of a buffer within a buffered input stream, use
- * [Gio.BufferedInputStream.getBufferSize]. To change the size of a
- * buffered input stream's buffer, use [Gio.BufferedInputStream.setBufferSize].
+ * [gio.buffered_input_stream.BufferedInputStream.getBufferSize]. To change the size of a
+ * buffered input stream's buffer, use [gio.buffered_input_stream.BufferedInputStream.setBufferSize].
  * Note that the buffer's size cannot be reduced below the size of the data within the buffer.
  */
 struct GBufferedInputStream
@@ -4236,15 +4236,15 @@ struct GBufferedInputStreamClass
 struct GBufferedInputStreamPrivate;
 
 /**
- * Buffered output stream implements [Gio.FilterOutputStream] and provides
+ * Buffered output stream implements [gio.filter_output_stream.FilterOutputStream] and provides
  * for buffered writes.
  * By default, `GBufferedOutputStream`'s buffer size is set at 4 kilobytes.
- * To create a buffered output stream, use [Gio.BufferedOutputStream.new_],
- * or [Gio.BufferedOutputStream.newSized] to specify the buffer's size
+ * To create a buffered output stream, use [gio.buffered_output_stream.BufferedOutputStream.new_],
+ * or [gio.buffered_output_stream.BufferedOutputStream.newSized] to specify the buffer's size
  * at construction.
  * To get the size of a buffer within a buffered input stream, use
- * [Gio.BufferedOutputStream.getBufferSize]. To change the size of a
- * buffered output stream's buffer, use [Gio.BufferedOutputStream.setBufferSize].
+ * [gio.buffered_output_stream.BufferedOutputStream.getBufferSize]. To change the size of a
+ * buffered output stream's buffer, use [gio.buffered_output_stream.BufferedOutputStream.setBufferSize].
  * Note that the buffer's size cannot be reduced below the size of the data within the buffer.
  */
 struct GBufferedOutputStream
@@ -4304,8 +4304,8 @@ struct GCancellableClass
 struct GCancellablePrivate;
 
 /**
- * `GCharsetConverter` is an implementation of [Gio.Converter] based on
- * [GLib.IConv].
+ * `GCharsetConverter` is an implementation of [gio.converter.Converter] based on
+ * [glib.void*].
  */
 struct GCharsetConverter;
 
@@ -4349,10 +4349,10 @@ struct GConverterIface
 }
 
 /**
- * Converter input stream implements [Gio.InputStream] and allows
+ * Converter input stream implements [gio.input_stream.InputStream] and allows
  * conversion of data of various types during reading.
  * As of GLib 2.34, `GConverterInputStream` implements
- * [Gio.PollableInputStream].
+ * [gio.pollable_input_stream.PollableInputStream].
  */
 struct GConverterInputStream
 {
@@ -4379,10 +4379,10 @@ struct GConverterInputStreamClass
 struct GConverterInputStreamPrivate;
 
 /**
- * Converter output stream implements [Gio.OutputStream] and allows
+ * Converter output stream implements [gio.output_stream.OutputStream] and allows
  * conversion of data of various types during reading.
  * As of GLib 2.34, `GConverterOutputStream` implements
- * [Gio.PollableOutputStream].
+ * [gio.pollable_output_stream.PollableOutputStream].
  */
 struct GConverterOutputStream
 {
@@ -4414,11 +4414,11 @@ struct GConverterOutputStreamPrivate;
  * The information in `GCredentials` is typically used for identifying,
  * authenticating and authorizing other processes.
  * Some operating systems supports looking up the credentials of the remote
- * peer of a communication endpoint - see e.g. [Gio.Socket.getCredentials].
+ * peer of a communication endpoint - see e.g. [gio.socket.Socket.getCredentials].
  * Some operating systems supports securely sending and receiving
- * credentials over a Unix Domain Socket, see [Gio.UnixCredentialsMessage],
- * [Gio.UnixConnection.sendCredentials] and
- * [Gio.UnixConnection.receiveCredentials] for details.
+ * credentials over a Unix Domain Socket, see [gio.unix_credentials_message.UnixCredentialsMessage],
+ * [gio.unix_connection.UnixConnection.sendCredentials] and
+ * [gio.unix_connection.UnixConnection.receiveCredentials] for details.
  * On Linux, the native credential type is a `struct ucred` - see the
  * [`unix$(LPAREN)7$(RPAREN)` man page]$(LPAREN)$(RPAREN)(man:unix7) for details. This corresponds to
  * `G_CREDENTIALS_TYPE_LINUX_UCRED`.
@@ -4443,10 +4443,10 @@ struct GCredentials;
 struct GCredentialsClass;
 
 /**
- * `GDBusActionGroup` is an implementation of the [Gio.ActionGroup]
+ * `GDBusActionGroup` is an implementation of the [gio.action_group.ActionGroup]
  * interface.
  * `GDBusActionGroup` can be used as a proxy for an action group
- * that is exported over D-Bus with [Gio.DBusConnection.exportActionGroup].
+ * that is exported over D-Bus with [gio.dbus_connection.DBusConnection.exportActionGroup].
  */
 struct GDBusActionGroup;
 
@@ -4504,7 +4504,7 @@ struct GDBusArgInfo
 
 /**
  * `GDBusAuthObserver` provides a mechanism for participating
- * in how a [Gio.DBusServer] [](or a Gio.DBusConnection)
+ * in how a [gio.dbus_server.DBusServer] [](or a gio.dbus_connection.DBusConnection)
  * authenticates remote peers.
  * Simply instantiate a `GDBusAuthObserver` and connect to the
  * signals you are interested in. Note that new signals may be added
@@ -4564,29 +4564,29 @@ struct GDBusAuthObserver;
  * peers such as a message buses.
  * It is a low-level API that offers a lot of flexibility. For instance,
  * it lets you establish a connection over any transport that can by represented
- * as a [Gio.IOStream].
+ * as a [gio.iostream.IOStream].
  * This class is rarely used directly in D-Bus clients. If you are writing
  * a D-Bus client, it is often easier to use the func@Gio.bus_own_name,
- * func@Gio.bus_watch_name or [Gio.DBusProxy.newForBus] APIs.
+ * func@Gio.bus_watch_name or [gio.dbus_proxy.DBusProxy.newForBus] APIs.
  * As an exception to the usual GLib rule that a particular object must not
  * be used by two threads at the same time, `GDBusConnection`s methods may be
  * called from any thread. This is so that func@Gio.bus_get and
  * func@Gio.bus_get_sync can safely return the same `GDBusConnection` when
  * called from any thread.
  * Most of the ways to obtain a `GDBusConnection` automatically initialize it
- * $(LPAREN)i.e. connect to D-Bus$(RPAREN): for instance, [Gio.DBusConnection.new_] and
+ * $(LPAREN)i.e. connect to D-Bus$(RPAREN): for instance, [gio.dbus_connection.DBusConnection.new_] and
  * func@Gio.bus_get, and the synchronous versions of those methods, give you
  * an initialized connection. Language bindings for GIO should use
- * [Gio.Initable.new_] or [Gio.AsyncInitable.newAsync], which also
+ * [gio.initable.Initable.new_] or [gio.async_initable.AsyncInitable.newAsync], which also
  * initialize the connection.
  * If you construct an uninitialized `GDBusConnection`, such as via
- * [GObject.ObjectG.new_], you must initialize it via [Gio.Initable.init_] or
- * [Gio.AsyncInitable.initAsync] before using its methods or properties.
+ * [gobject.object.ObjectG.new_], you must initialize it via [gio.initable.Initable.init_] or
+ * [gio.async_initable.AsyncInitable.initAsync] before using its methods or properties.
  * Calling methods or accessing properties on a `GDBusConnection` that has not
  * completed initialization successfully is considered to be invalid, and leads
  * to undefined behaviour. In particular, if initialization fails with a
  * `GError`, the only valid thing you can do with that `GDBusConnection` is to
- * free it with [GObject.ObjectG.unref].
+ * free it with [gobject.object.ObjectG.unref].
  * ## An example D-Bus server
  * Here is an example for a D-Bus server:
  * [gdbus-example-server.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-server.c)
@@ -4603,7 +4603,7 @@ struct GDBusAuthObserver;
 struct GDBusConnection;
 
 /**
- * Struct used in [Gio.Global.dbusErrorRegisterErrorDomain].
+ * Struct used in [gio.global.dbusErrorRegisterErrorDomain].
  */
 struct GDBusErrorEntry
 {
@@ -4621,8 +4621,8 @@ struct GDBusErrorEntry
 /**
  * Base type for D-Bus interfaces.
  * The `GDBusInterface` type is the base type for D-Bus interfaces both
- * on the service side $(LPAREN)see [Gio.DBusInterfaceSkeleton]$(RPAREN) and client side
- * $(LPAREN)see [Gio.DBusProxy]$(RPAREN).
+ * on the service side $(LPAREN)see [gio.dbus_interface_skeleton.DBusInterfaceSkeleton]$(RPAREN) and client side
+ * $(LPAREN)see [gio.dbus_proxy.DBusProxy]$(RPAREN).
  */
 struct GDBusInterface;
 
@@ -4637,22 +4637,22 @@ struct GDBusInterfaceIface
   GTypeInterface parentIface;
 
   /**
-   * Returns a #GDBusInterfaceInfo. See [Gio.DBusInterface.getInfo].
+   * Returns a #GDBusInterfaceInfo. See [gio.dbus_interface.DBusInterface.getInfo].
    */
   extern(C) GDBusInterfaceInfo* function(GDBusInterface* interface_) getInfo;
 
   /**
-   * Gets the enclosing #GDBusObject. See [Gio.DBusInterface.getObject].
+   * Gets the enclosing #GDBusObject. See [gio.dbus_interface.DBusInterface.getObject].
    */
   extern(C) GDBusObject* function(GDBusInterface* interface_) getObject;
 
   /**
-   * Sets the enclosing #GDBusObject. See [Gio.DBusInterface.setObject].
+   * Sets the enclosing #GDBusObject. See [gio.dbus_interface.DBusInterface.setObject].
    */
   extern(C) void function(GDBusInterface* interface_, GDBusObject* object) setObject;
 
   /**
-   * Gets a reference to the enclosing #GDBusObject. See [Gio.DBusInterface.dupObject]. Added in 2.32.
+   * Gets a reference to the enclosing #GDBusObject. See [gio.dbus_interface.DBusInterface.dupObject]. Added in 2.32.
    */
   extern(C) GDBusObject* function(GDBusInterface* interface_) dupObject;
 }
@@ -4714,22 +4714,22 @@ struct GDBusInterfaceSkeletonClass
   GObjectClass parentClass;
 
   /**
-   * Returns a #GDBusInterfaceInfo. See [Gio.DBusInterfaceSkeleton.getInfo] for details.
+   * Returns a #GDBusInterfaceInfo. See [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.getInfo] for details.
    */
   extern(C) GDBusInterfaceInfo* function(GDBusInterfaceSkeleton* interface_) getInfo;
 
   /**
-   * Returns a #GDBusInterfaceVTable. See [Gio.DBusInterfaceSkeleton.getVtable] for details.
+   * Returns a #GDBusInterfaceVTable. See [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.getVtable] for details.
    */
   extern(C) GDBusInterfaceVTable* function(GDBusInterfaceSkeleton* interface_) getVtable;
 
   /**
-   * Returns a #GVariant with all properties. See [Gio.DBusInterfaceSkeleton.getProperties].
+   * Returns a #GVariant with all properties. See [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.getProperties].
    */
   extern(C) VariantC* function(GDBusInterfaceSkeleton* interface_) getProperties;
 
   /**
-   * Emits outstanding changes, if any. See [Gio.DBusInterfaceSkeleton.flush].
+   * Emits outstanding changes, if any. See [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.flush].
    */
   extern(C) void function(GDBusInterfaceSkeleton* interface_) flush;
 
@@ -4768,7 +4768,7 @@ struct GDBusInterfaceSkeletonPrivate;
  * being the correct type.
  * For both `Get` and `Set` calls, the #GDBusMethodInvocation
  * passed to the @method_call handler can be queried with
- * [Gio.DBusMethodInvocation.getPropertyInfo] to get a pointer
+ * [gio.dbus_method_invocation.DBusMethodInvocation.getPropertyInfo] to get a pointer
  * to the #GDBusPropertyInfo of the property.
  * If you have readable properties specified in your interface info,
  * you must ensure that you either provide a non-%NULL @get_property$(LPAREN)$(RPAREN)
@@ -4803,15 +4803,15 @@ struct GDBusInterfaceVTable
 }
 
 /**
- * `GDBusMenuModel` is an implementation of [Gio.MenuModel] that can be
+ * `GDBusMenuModel` is an implementation of [gio.menu_model.MenuModel] that can be
  * used as a proxy for a menu model that is exported over D-Bus with
- * [Gio.DBusConnection.exportMenuModel].
+ * [gio.dbus_connection.DBusConnection.exportMenuModel].
  */
 struct GDBusMenuModel;
 
 /**
  * A type for representing D-Bus messages that can be sent or received
- * on a [Gio.DBusConnection].
+ * on a [gio.dbus_connection.DBusConnection].
  */
 struct GDBusMessage;
 
@@ -4852,8 +4852,8 @@ struct GDBusMethodInfo
  * return results and errors.
  * The normal way to obtain a `GDBusMethodInvocation` object is to receive
  * it as an argument to the `handle_method_call$(LPAREN)$(RPAREN)` function in a
- * [Gio.DBusInterfaceVTable] that was passed to
- * [Gio.DBusConnection.registerObject].
+ * [gio.dbus_interface_vtable.DBusInterfaceVTable] that was passed to
+ * [gio.dbus_connection.DBusConnection.registerObject].
  */
 struct GDBusMethodInvocation;
 
@@ -4890,8 +4890,8 @@ struct GDBusNodeInfo
 
 /**
  * The `GDBusObject` type is the base type for D-Bus objects on both
- * the service side $(LPAREN)see [Gio.DBusObjectSkeleton]$(RPAREN) and the client side
- * $(LPAREN)see [Gio.DBusObjectProxy]$(RPAREN). It is essentially just a container of
+ * the service side $(LPAREN)see [gio.dbus_object_skeleton.DBusObjectSkeleton]$(RPAREN) and the client side
+ * $(LPAREN)see [gio.dbus_object_proxy.DBusObjectProxy]$(RPAREN). It is essentially just a container of
  * interfaces.
  */
 struct GDBusObject;
@@ -4907,17 +4907,17 @@ struct GDBusObjectIface
   GTypeInterface parentIface;
 
   /**
-   * Returns the object path. See [Gio.DBusObject.getObjectPath].
+   * Returns the object path. See [gio.dbus_object.DBusObject.getObjectPath].
    */
   extern(C) const(char)* function(GDBusObject* object) getObjectPath;
 
   /**
-   * Returns all interfaces. See [Gio.DBusObject.getInterfaces].
+   * Returns all interfaces. See [gio.dbus_object.DBusObject.getInterfaces].
    */
   extern(C) GList* function(GDBusObject* object) getInterfaces;
 
   /**
-   * Returns an interface by name. See [Gio.DBusObject.getInterface].
+   * Returns an interface by name. See [gio.dbus_object.DBusObject.getInterface].
    */
   extern(C) GDBusInterface* function(GDBusObject* object, const(char)* interfaceName) getInterface;
 
@@ -4937,22 +4937,22 @@ struct GDBusObjectIface
  * client-side implementations of the standardized
  * [`org.freedesktop.DBus.ObjectManager`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
  * interface.
- * See [Gio.DBusObjectManagerClient] for the client-side implementation
- * and [Gio.DBusObjectManagerServer] for the service-side implementation.
+ * See [gio.dbus_object_manager_client.DBusObjectManagerClient] for the client-side implementation
+ * and [gio.dbus_object_manager_server.DBusObjectManagerServer] for the service-side implementation.
  */
 struct GDBusObjectManager;
 
 /**
  * `GDBusObjectManagerClient` is used to create, monitor and delete object
- * proxies for remote objects exported by a [Gio.DBusObjectManagerServer]
+ * proxies for remote objects exported by a [gio.dbus_object_manager_server.DBusObjectManagerServer]
  * $(LPAREN)or any code implementing the
  * [org.freedesktop.DBus.ObjectManager](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
  * interface$(RPAREN).
  * Once an instance of this type has been created, you can connect to
  * the signal@Gio.DBusObjectManager::object-added and
  * signal@Gio.DBusObjectManager::object-removed signals and inspect the
- * [Gio.DBusObjectProxy] objects returned by
- * [Gio.DBusObjectManager.getObjects].
+ * [gio.dbus_object_proxy.DBusObjectProxy] objects returned by
+ * [gio.dbus_object_manager.DBusObjectManager.getObjects].
  * If the name for a `GDBusObjectManagerClient` is not owned by anyone at
  * object construction time, the default behavior is to request the
  * message bus to launch an owner for the name. This behavior can be
@@ -4962,41 +4962,41 @@ struct GDBusObjectManager;
  * is not possible to launch an owner for the requested name. In this
  * case, `GDBusObjectManagerClient` object construction still succeeds but
  * there will be no object proxies
- * $(LPAREN)e.g. [Gio.DBusObjectManager.getObjects] returns the empty list$(RPAREN) and
- * the [Gio.DBusObjectManagerClient.name] property is `NULL`.
+ * $(LPAREN)e.g. [gio.dbus_object_manager.DBusObjectManager.getObjects] returns the empty list$(RPAREN) and
+ * the [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] property is `NULL`.
  * The owner of the requested name can come and go $(LPAREN)for example
  * consider a system service being restarted$(RPAREN) – `GDBusObjectManagerClient`
- * handles this case too; simply connect to the [GObject.ObjectG.notify]
+ * handles this case too; simply connect to the [gobject.object.ObjectG.notify]
  * signal to watch for changes on the
- * [Gio.DBusObjectManagerClient.name] property. When the name
+ * [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] property. When the name
  * owner vanishes, the behavior is that
- * [Gio.DBusObjectManagerClient.name] is set to `NULL` $(LPAREN)this
- * includes emission of the [GObject.ObjectG.notify] signal$(RPAREN) and then
+ * [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] is set to `NULL` $(LPAREN)this
+ * includes emission of the [gobject.object.ObjectG.notify] signal$(RPAREN) and then
  * signal@Gio.DBusObjectManager::object-removed signals are synthesized
  * for all currently existing object proxies. Since
- * [Gio.DBusObjectManagerClient.name] is `NULL` when this
+ * [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] is `NULL` when this
  * happens, you can use this information to disambiguate a synthesized signal
  * from a genuine signal caused by object removal on the remote
- * [Gio.DBusObjectManager]. Similarly, when a new name owner appears,
+ * [gio.dbus_object_manager.DBusObjectManager]. Similarly, when a new name owner appears,
  * signal@Gio.DBusObjectManager::object-added signals are synthesized
- * while [Gio.DBusObjectManagerClient.name] is still `NULL`. Only
+ * while [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] is still `NULL`. Only
  * when all object proxies have been added, the
- * [Gio.DBusObjectManagerClient.name] is set to the new name
- * owner $(LPAREN)this includes emission of the [GObject.ObjectG.notify] signal$(RPAREN).
+ * [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] is set to the new name
+ * owner $(LPAREN)this includes emission of the [gobject.object.ObjectG.notify] signal$(RPAREN).
  * Furthermore, you are guaranteed that
- * [Gio.DBusObjectManagerClient.name] will alternate between a
+ * [gio.dbus_object_manager_client.DBusObjectManagerClient.utf8] will alternate between a
  * name owner $(LPAREN)e.g. `:1.42`$(RPAREN) and `NULL` even in the case where
  * the name of interest is atomically replaced
  * Ultimately, `GDBusObjectManagerClient` is used to obtain
- * [Gio.DBusProxy] instances. All signals $(LPAREN)including the
+ * [gio.dbus_proxy.DBusProxy] instances. All signals $(LPAREN)including the
  * `org.freedesktop.DBus.Properties::PropertiesChanged` signal$(RPAREN)
- * delivered to [Gio.DBusProxy] instances are guaranteed to originate
+ * delivered to [gio.dbus_proxy.DBusProxy] instances are guaranteed to originate
  * from the name owner. This guarantee along with the behavior
  * described above, means that certain race conditions including the
  * “half the proxy is from the old owner and the other half is from
  * the new owner” problem cannot happen.
  * To avoid having the application connect to signals on the returned
- * [Gio.DBusObjectProxy] and [Gio.DBusProxy] objects, the
+ * [gio.dbus_object_proxy.DBusObjectProxy] and [gio.dbus_proxy.DBusProxy] objects, the
  * signal@Gio.DBusObject::interface-added,
  * signal@Gio.DBusObject::interface-removed,
  * signal@Gio.DBusProxy::g-properties-changed and
@@ -5009,9 +5009,9 @@ struct GDBusObjectManager;
  * signal@Gio.DBusObjectManagerClient::interface-proxy-signal.
  * Note that all callbacks and signals are emitted in the
  * thread-default main context $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN) that the
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) that the
  * `GDBusObjectManagerClient` object was constructed in. Additionally, the
- * [Gio.DBusObjectProxy] and [Gio.DBusProxy] objects
+ * [gio.dbus_object_proxy.DBusObjectProxy] and [gio.dbus_proxy.DBusProxy] objects
  * originating from the `GDBusObjectManagerClient` object will be created in
  * the same context and, consequently, will deliver signals in the
  * same main loop.
@@ -5059,22 +5059,22 @@ struct GDBusObjectManagerIface
   GTypeInterface parentIface;
 
   /**
-   * Virtual function for [Gio.DBusObjectManager.getObjectPath].
+   * Virtual function for [gio.dbus_object_manager.DBusObjectManager.getObjectPath].
    */
   extern(C) const(char)* function(GDBusObjectManager* manager) getObjectPath;
 
   /**
-   * Virtual function for [Gio.DBusObjectManager.getObjects].
+   * Virtual function for [gio.dbus_object_manager.DBusObjectManager.getObjects].
    */
   extern(C) GList* function(GDBusObjectManager* manager) getObjects;
 
   /**
-   * Virtual function for [Gio.DBusObjectManager.getObject].
+   * Virtual function for [gio.dbus_object_manager.DBusObjectManager.getObject].
    */
   extern(C) GDBusObject* function(GDBusObjectManager* manager, const(char)* objectPath) getObject;
 
   /**
-   * Virtual function for [Gio.DBusObjectManager.getInterface].
+   * Virtual function for [gio.dbus_object_manager.DBusObjectManager.getInterface].
    */
   extern(C) GDBusInterface* function(GDBusObjectManager* manager, const(char)* objectPath, const(char)* interfaceName) getInterface;
 
@@ -5100,7 +5100,7 @@ struct GDBusObjectManagerIface
 }
 
 /**
- * `GDBusObjectManagerServer` is used to export [Gio.DBusObject] instances
+ * `GDBusObjectManagerServer` is used to export [gio.dbus_object.DBusObject] instances
  * using the standardized
  * [`org.freedesktop.DBus.ObjectManager`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
  * interface. For example, remote D-Bus clients can get all objects
@@ -5115,7 +5115,7 @@ struct GDBusObjectManagerIface
  * below $(LPAREN)to allow for multiple object managers in a service$(RPAREN).
  * It is supported, but not recommended, to export an object manager at the root
  * path, `/`.
- * See [Gio.DBusObjectManagerClient] for the client-side code that is
+ * See [gio.dbus_object_manager_client.DBusObjectManagerClient] for the client-side code that is
  * intended to be used with `GDBusObjectManagerServer` or any D-Bus
  * object implementing the `org.freedesktop.DBus.ObjectManager` interface.
  */
@@ -5144,7 +5144,7 @@ struct GDBusObjectManagerServerPrivate;
 /**
  * A `GDBusObjectProxy` is an object used to represent a remote object
  * with one or more D-Bus interfaces. Normally, you don’t instantiate
- * a `GDBusObjectProxy` yourself — typically [Gio.DBusObjectManagerClient]
+ * a `GDBusObjectProxy` yourself — typically [gio.dbus_object_manager_client.DBusObjectManagerClient]
  * is used to obtain it.
  */
 struct GDBusObjectProxy
@@ -5173,7 +5173,7 @@ struct GDBusObjectProxyPrivate;
  * A `GDBusObjectSkeleton` instance is essentially a group of D-Bus
  * interfaces. The set of exported interfaces on the object may be
  * dynamic and change at runtime.
- * This type is intended to be used with [Gio.DBusObjectManager].
+ * This type is intended to be used with [gio.dbus_object_manager.DBusObjectManager].
  */
 struct GDBusObjectSkeleton
 {
@@ -5240,12 +5240,12 @@ struct GDBusPropertyInfo
  * By default, `GDBusProxy` will cache all properties $(LPAREN)and listen to
  * changes$(RPAREN) of the remote object, and proxy all signals that get
  * emitted. This behaviour can be changed by passing suitable
- * [Gio.DBusProxyFlags] when the proxy is created. If the proxy is for a
+ * [gio.DBusProxyFlags] when the proxy is created. If the proxy is for a
  * well-known name, the property cache is flushed when the name owner
  * vanishes and reloaded when a name owner appears.
  * The unique name owner of the proxy’s name is tracked and can be read from
  * property@Gio.DBusProxy:g-name-owner. Connect to the
- * [GObject.ObjectG.notify] signal to get notified of changes.
+ * [gobject.object.ObjectG.notify] signal to get notified of changes.
  * Additionally, only signals and property changes emitted from the current name
  * owner are considered and calls are always sent to the current name owner.
  * This avoids a number of race conditions when the name is lost by one owner
@@ -5269,8 +5269,8 @@ struct GDBusPropertyInfo
  * A `GDBusProxy` instance can be used from multiple threads but note
  * that all signals $(LPAREN)e.g. signal@Gio.DBusProxy::g-signal,
  * signal@Gio.DBusProxy::g-properties-changed and
- * [GObject.ObjectG.notify]$(RPAREN) are emitted in the thread-default main
- * context $(LPAREN)see [GLib.MainContext.pushThreadDefault]$(RPAREN) of the thread
+ * [gobject.object.ObjectG.notify]$(RPAREN) are emitted in the thread-default main
+ * context $(LPAREN)see [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) of the thread
  * where the instance was constructed.
  * An example using a proxy for a well-known name can be found in
  * [`gdbus-example-watch-proxy.c`](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-watch-proxy.c).
@@ -5317,7 +5317,7 @@ struct GDBusProxyPrivate;
  * in [gdbus-example-peer.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-peer.c).
  * Note that a minimal `GDBusServer` will accept connections from any
  * peer. In many use-cases it will be necessary to add a
- * [Gio.DBusAuthObserver] that only accepts connections that have
+ * [gio.dbus_auth_observer.DBusAuthObserver] that only accepts connections that have
  * successfully authenticated as the same user that is running the
  * `GDBusServer`. Since GLib 2.68 this can be achieved more simply by passing
  * the `G_DBUS_SERVER_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER` flag to the
@@ -5352,7 +5352,7 @@ struct GDBusSignalInfo
 }
 
 /**
- * Virtual table for handling subtrees registered with [Gio.DBusConnection.registerSubtree].
+ * Virtual table for handling subtrees registered with [gio.dbus_connection.DBusConnection.registerSubtree].
  */
 struct GDBusSubtreeVTable
 {
@@ -5375,7 +5375,7 @@ struct GDBusSubtreeVTable
 }
 
 /**
- * Data input stream implements [Gio.InputStream] and includes functions
+ * Data input stream implements [gio.input_stream.InputStream] and includes functions
  * for reading structured data directly from a binary input stream.
  */
 struct GDataInputStream
@@ -5403,7 +5403,7 @@ struct GDataInputStreamClass
 struct GDataInputStreamPrivate;
 
 /**
- * Data output stream implements [Gio.OutputStream] and includes functions
+ * Data output stream implements [gio.output_stream.OutputStream] and includes functions
  * for writing data directly to an output stream.
  */
 struct GDataOutputStream
@@ -5435,9 +5435,9 @@ struct GDataOutputStreamPrivate;
  * A `GDatagramBased` is a networking interface for representing datagram-based
  * communications. It is a more or less direct mapping of the core parts of the
  * BSD socket API in a portable GObject interface. It is implemented by
- * [Gio.Socket], which wraps the UNIX socket API on UNIX and winsock2 on Windows.
+ * [gio.socket.Socket], which wraps the UNIX socket API on UNIX and winsock2 on Windows.
  * `GDatagramBased` is entirely platform independent, and is intended to be used
- * alongside higher-level networking APIs such as [Gio.IOStream].
+ * alongside higher-level networking APIs such as [gio.iostream.IOStream].
  * It uses vectored scatter/gather I/O by default, allowing for many messages
  * to be sent or received in a single call. Where possible, implementations of
  * the interface should take advantage of vectored I/O to minimise processing
@@ -5453,9 +5453,9 @@ struct GDataOutputStreamPrivate;
  * will block until the operation is complete or the timeout expires; if the
  * timeout expires it will return what progress it made, or
  * `G_IO_ERROR_TIMED_OUT` if no progress was made. To know when a call would
- * successfully run you can call [Gio.DatagramBased.conditionCheck] or
- * [Gio.DatagramBased.conditionWait]. You can also use
- * [Gio.DatagramBased.createSource] and attach it to a [GLib.MainContext]
+ * successfully run you can call [gio.datagram_based.DatagramBased.conditionCheck] or
+ * [gio.datagram_based.DatagramBased.conditionWait]. You can also use
+ * [gio.datagram_based.DatagramBased.createSource] and attach it to a [glib.main_context.MainContext]
  * to get callbacks when I/O is possible.
  * When running a non-blocking operation applications should always be able to
  * handle getting a `G_IO_ERROR_WOULD_BLOCK` error even when some other function
@@ -5491,28 +5491,28 @@ struct GDatagramBasedInterface
   GTypeInterface gIface;
 
   /**
-   * Virtual method for [Gio.DatagramBased.receiveMessages].
+   * Virtual method for [gio.datagram_based.DatagramBased.receiveMessages].
    */
   extern(C) int function(GDatagramBased* datagramBased, GInputMessage* messages, uint numMessages, int flags, long timeout, GCancellable* cancellable, GError** _err) receiveMessages;
 
   /**
-   * Virtual method for [Gio.DatagramBased.sendMessages].
+   * Virtual method for [gio.datagram_based.DatagramBased.sendMessages].
    */
   extern(C) int function(GDatagramBased* datagramBased, GOutputMessage* messages, uint numMessages, int flags, long timeout, GCancellable* cancellable, GError** _err) sendMessages;
 
   /**
-   * Virtual method for [Gio.DatagramBased.createSource].
+   * Virtual method for [gio.datagram_based.DatagramBased.createSource].
    */
   extern(C) GSource* function(GDatagramBased* datagramBased, GIOCondition condition, GCancellable* cancellable) createSource;
 
   /**
-   * Virtual method for [Gio.DatagramBased.conditionCheck].
+   * Virtual method for [gio.datagram_based.DatagramBased.conditionCheck].
    */
   extern(C) GIOCondition function(GDatagramBased* datagramBased, GIOCondition condition) conditionCheck;
 
   /**
    * Virtual method for
-   * [Gio.DatagramBased.conditionWait].
+   * [gio.datagram_based.DatagramBased.conditionWait].
    */
   extern(C) bool function(GDatagramBased* datagramBased, GIOCondition condition, long timeout, GCancellable* cancellable, GError** _err) conditionWait;
 }
@@ -5520,13 +5520,13 @@ struct GDatagramBasedInterface
 /**
  * `GDebugController` is an interface to expose control of debugging features and
  * debug output.
- * It is implemented on Linux using [Gio.DebugControllerDBus], which
+ * It is implemented on Linux using [gio.debug_controller_dbus.DebugControllerDBus], which
  * exposes a D-Bus interface to allow authenticated peers to control debug
  * features in this process.
  * Whether debug output is enabled is exposed as
  * property@Gio.DebugController:debug-enabled. This controls
  * func@GLib.log_set_debug_enabled by default. Application code may
- * connect to the [GObject.ObjectG.notify] signal for it
+ * connect to the [gobject.object.ObjectG.notify] signal for it
  * to control other parts of its debug infrastructure as necessary.
  * If your application or service is using the default GLib log writer function,
  * creating one of the built-in implementations of `GDebugController` should be
@@ -5535,11 +5535,11 @@ struct GDatagramBasedInterface
 struct GDebugController;
 
 /**
- * `GDebugControllerDBus` is an implementation of [Gio.DebugController]
+ * `GDebugControllerDBus` is an implementation of [gio.debug_controller.DebugController]
  * which exposes debug settings as a D-Bus object.
- * It is a [Gio.Initable] object, and will register an object at
+ * It is a [gio.initable.Initable] object, and will register an object at
  * `/org/gtk/Debugging` on the bus given as
- * [Gio.DebugControllerDBus.connection] once it’s initialized. The
+ * [gio.debug_controller_dbus.DebugControllerDBus.DBusConnection] once it’s initialized. The
  * object will be unregistered when the last reference to the
  * `GDebugControllerDBus` is dropped.
  * This D-Bus object can be used by remote processes to enable or disable debug
@@ -5548,7 +5548,7 @@ struct GDebugController;
  * property@Gio.DebugController:debug-enabled and, by default,
  * func@GLib.log_get_debug_enabled.
  * By default, no processes are allowed to call `SetDebugEnabled$(LPAREN)$(RPAREN)` unless a
- * [Gio.DebugControllerDBus.authorize] signal handler is installed. This
+ * [gio.debug_controller_dbus.DebugControllerDBus.authorize] signal handler is installed. This
  * is because the process may be privileged, or might expose sensitive
  * information in its debug output. You may want to restrict the ability to
  * enable debug output to privileged users or processes.
@@ -5573,7 +5573,7 @@ struct GDebugController;
  * as it’s accessed through the `org.freedesktop.DBus.Properties` interface.
  * Another option is to use polkit to allow or deny requests on a case-by-case
  * basis, allowing for the possibility of dynamic authorisation. To do this,
- * connect to the [Gio.DebugControllerDBus.authorize] signal and query
+ * connect to the [gio.debug_controller_dbus.DebugControllerDBus.authorize] signal and query
  * polkit in it:
  * ```c
  * g_autoptr$(LPAREN)GError$(RPAREN) child_error \= NULL;
@@ -5664,7 +5664,7 @@ struct GDebugControllerInterface
 }
 
 /**
- * `GDesktopAppInfo` is an implementation of [Gio.AppInfo] based on
+ * `GDesktopAppInfo` is an implementation of [gio.app_info.AppInfo] based on
  * desktop files.
  * Note that `<gio/gdesktopappinfo.h>` belongs to the UNIX-specific
  * GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
@@ -5696,7 +5696,7 @@ struct GDesktopAppInfoLookupIface
 
   /**
    * Virtual method for
-   * [Gio.DesktopAppInfoLookup.getDefaultForUriScheme].
+   * [gio.desktop_app_info_lookup.DesktopAppInfoLookup.getDefaultForUriScheme].
    */
   extern(C) GAppInfo* function(GDesktopAppInfoLookup* lookup, const(char)* uriScheme) getDefaultForUriScheme;
 }
@@ -5705,7 +5705,7 @@ struct GDesktopAppInfoLookupIface
  * `GDrive` represents a piece of hardware connected to the machine.
  * It’s generally only created for removable hardware or hardware with
  * removable media.
- * `GDrive` is a container class for [Gio.Volume] objects that stem from
+ * `GDrive` is a container class for [gio.volume.Volume] objects that stem from
  * the same piece of media. As such, `GDrive` abstracts a drive with
  * $(LPAREN)or without$(RPAREN) removable media and provides operations for querying
  * whether media is available, determining whether media change is
@@ -5721,7 +5721,7 @@ struct GDesktopAppInfoLookupIface
  * multi-disk devices such as RAID devices. Note that the actual
  * semantics and side-effects of starting/stopping a `GDrive` may vary
  * according to implementation. To choose the correct verbs in e.g. a
- * file manager, use [Gio.Drive.getStartStopType].
+ * file manager, use [gio.drive.Drive.getStartStopType].
  * For [porting from GnomeVFS](migrating-gnome-vfs.html) note that there is no
  * equivalent of `GDrive` in that API.
  */
@@ -5902,7 +5902,7 @@ struct GDriveIface
 
 /**
  * `GDtlsClientConnection` is the client-side subclass of
- * [Gio.DtlsConnection], representing a client-side DTLS connection.
+ * [gio.dtls_connection.DtlsConnection], representing a client-side DTLS connection.
  */
 struct GDtlsClientConnection;
 
@@ -5919,20 +5919,20 @@ struct GDtlsClientConnectionInterface
 
 /**
  * `GDtlsConnection` is the base DTLS connection class type, which wraps
- * a [Gio.DatagramBased] and provides DTLS encryption on top of it. Its
- * subclasses, [Gio.DtlsClientConnection] and
- * [Gio.DtlsServerConnection], implement client-side and server-side DTLS,
+ * a [gio.datagram_based.DatagramBased] and provides DTLS encryption on top of it. Its
+ * subclasses, [gio.dtls_client_connection.DtlsClientConnection] and
+ * [gio.dtls_server_connection.DtlsServerConnection], implement client-side and server-side DTLS,
  * respectively.
- * For TLS support, see [Gio.TlsConnection].
+ * For TLS support, see [gio.tls_connection.TlsConnection].
  * As DTLS is datagram based, `GDtlsConnection` implements
- * [Gio.DatagramBased], presenting a datagram-socket-like API for the
+ * [gio.datagram_based.DatagramBased], presenting a datagram-socket-like API for the
  * encrypted connection. This operates over a base datagram connection, which is
  * also a `GDatagramBased` $(LPAREN)property@Gio.DtlsConnection:base-socket$(RPAREN).
- * To close a DTLS connection, use [Gio.DtlsConnection.close].
- * Neither [Gio.DtlsServerConnection] or [Gio.DtlsClientConnection]
- * set the peer address on their base [Gio.DatagramBased] if it is a
- * [Gio.Socket] — it is up to the caller to do that if they wish. If they
- * do not, and [Gio.Socket.close] is called on the base socket, the
+ * To close a DTLS connection, use [gio.dtls_connection.DtlsConnection.close].
+ * Neither [gio.dtls_server_connection.DtlsServerConnection] or [gio.dtls_client_connection.DtlsClientConnection]
+ * set the peer address on their base [gio.datagram_based.DatagramBased] if it is a
+ * [gio.socket.Socket] — it is up to the caller to do that if they wish. If they
+ * do not, and [gio.socket.Socket.close] is called on the base socket, the
  * `GDtlsConnection` will not raise a `G_IO_ERROR_NOT_CONNECTED` error on
  * further I/O.
  */
@@ -6001,7 +6001,7 @@ struct GDtlsConnectionInterface
 
 /**
  * `GDtlsServerConnection` is the server-side subclass of
- * [Gio.DtlsConnection], representing a server-side DTLS connection.
+ * [gio.dtls_connection.DtlsConnection], representing a server-side DTLS connection.
  */
 struct GDtlsServerConnection;
 
@@ -6017,9 +6017,9 @@ struct GDtlsServerConnectionInterface
 }
 
 /**
- * `GEmblem` is an implementation of [Gio.Icon] that supports
+ * `GEmblem` is an implementation of [gio.icon.Icon] that supports
  * having an emblem, which is an icon with additional properties.
- * It can than be added to a [Gio.EmblemedIcon].
+ * It can than be added to a [gio.emblemed_icon.EmblemedIcon].
  * Currently, only metainformation about the emblem's origin is
  * supported. More may be added in the future.
  */
@@ -6028,11 +6028,11 @@ struct GEmblem;
 struct GEmblemClass;
 
 /**
- * `GEmblemedIcon` is an implementation of [Gio.Icon] that supports
+ * `GEmblemedIcon` is an implementation of [gio.icon.Icon] that supports
  * adding an emblem to an icon. Adding multiple emblems to an
- * icon is ensured via [Gio.EmblemedIcon.addEmblem].
+ * icon is ensured via [gio.emblemed_icon.EmblemedIcon.addEmblem].
  * Note that `GEmblemedIcon` allows no control over the position
- * of the emblems. See also [Gio.Emblem] for more information.
+ * of the emblems. See also [gio.emblem.Emblem] for more information.
  */
 struct GEmblemedIcon
 {
@@ -6054,20 +6054,20 @@ struct GEmblemedIconPrivate;
  * that do no I/O upon creation. It is necessary to understand that
  * `GFile` objects do not represent files, merely an identifier for a
  * file. All file content I/O is implemented as streaming operations
- * $(LPAREN)see [Gio.InputStream] and [Gio.OutputStream]$(RPAREN).
+ * $(LPAREN)see [gio.input_stream.InputStream] and [gio.output_stream.OutputStream]$(RPAREN).
  * To construct a `GFile`, you can use:
- * - [Gio.File.newForPath] if you have a path.
- * - [Gio.File.newForUri] if you have a URI.
- * - [Gio.File.newForCommandlineArg] or
- * [Gio.File.newForCommandlineArgAndCwd] for a command line
+ * - [gio.file.File.newForPath] if you have a path.
+ * - [gio.file.File.newForUri] if you have a URI.
+ * - [gio.file.File.newForCommandlineArg] or
+ * [gio.file.File.newForCommandlineArgAndCwd] for a command line
  * argument.
- * - [Gio.File.newTmp] to create a temporary file from a template.
- * - [Gio.File.newTmpAsync] to asynchronously create a temporary file.
- * - [Gio.File.newTmpDirAsync] to asynchronously create a temporary
+ * - [gio.file.File.newTmp] to create a temporary file from a template.
+ * - [gio.file.File.newTmpAsync] to asynchronously create a temporary file.
+ * - [gio.file.File.newTmpDirAsync] to asynchronously create a temporary
  * directory.
- * - [Gio.File.parseName] from a UTF-8 string gotten from
- * [Gio.File.getParseName].
- * - [Gio.File.newBuildFilename] or [Gio.File.newBuildFilenamev]
+ * - [gio.file.File.parseName] from a UTF-8 string gotten from
+ * [gio.file.File.getParseName].
+ * - [gio.file.File.newBuildFilename] or [gio.file.File.newBuildFilenamev]
  * to create a file from path elements.
  * One way to think of a `GFile` is as an abstraction of a pathname. For
  * normal files the system pathname is what is stored internally, but as
@@ -6075,20 +6075,20 @@ struct GEmblemedIconPrivate;
  * to a pathname in a userspace implementation of a filesystem.
  * `GFile`s make up hierarchies of directories and files that correspond to
  * the files on a filesystem. You can move through the file system with
- * `GFile` using [Gio.File.getParent] to get an identifier for the
- * parent directory, [Gio.File.getChild] to get a child within a
- * directory, and [Gio.File.resolveRelativePath] to resolve a relative
+ * `GFile` using [gio.file.File.getParent] to get an identifier for the
+ * parent directory, [gio.file.File.getChild] to get a child within a
+ * directory, and [gio.file.File.resolveRelativePath] to resolve a relative
  * path between two `GFile`s. There can be multiple hierarchies, so you may not
- * end up at the same root if you repeatedly call [Gio.File.getParent]
+ * end up at the same root if you repeatedly call [gio.file.File.getParent]
  * on two different files.
- * All `GFile`s have a basename $(LPAREN)get with [Gio.File.getBasename]$(RPAREN). These
+ * All `GFile`s have a basename $(LPAREN)get with [gio.file.File.getBasename]$(RPAREN). These
  * names are byte strings that are used to identify the file on the filesystem
  * $(LPAREN)relative to its parent directory$(RPAREN) and there is no guarantees that they
  * have any particular charset encoding or even make any sense at all. If
  * you want to use filenames in a user interface you should use the display
  * name that you can get by requesting the
  * `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME` attribute with
- * [Gio.File.queryInfo]. This is guaranteed to be in UTF-8 and can be
+ * [gio.file.File.queryInfo]. This is guaranteed to be in UTF-8 and can be
  * used in a user interface. But always store the real basename or the `GFile`
  * to use to actually access the file, because there is no way to go from a
  * display name to the actual name.
@@ -6105,8 +6105,8 @@ struct GEmblemedIconPrivate;
  * Many `GFile` operations have both synchronous and asynchronous versions
  * to suit your application. Asynchronous versions of synchronous functions
  * simply have `_async$(LPAREN)$(RPAREN)` appended to their function names. The asynchronous
- * I/O functions call a [Gio.AsyncReadyCallback] which is then used to
- * finalize the operation, producing a [Gio.AsyncResult] which is then
+ * I/O functions call a [gio.AsyncReadyCallback] which is then used to
+ * finalize the operation, producing a [gio.async_result.AsyncResult] which is then
  * passed to the function’s matching `_finish$(LPAREN)$(RPAREN)` operation.
  * It is highly recommended to use asynchronous calls when running within a
  * shared main loop, such as in the main thread of an application. This avoids
@@ -6116,10 +6116,10 @@ struct GEmblemedIconPrivate;
  * for more.
  * Some `GFile` operations almost always take a noticeable amount of time, and
  * so do not have synchronous analogs. Notable cases include:
- * - [Gio.File.mountMountable] to mount a mountable file.
- * - [Gio.File.unmountMountableWithOperation] to unmount a mountable
+ * - [gio.file.File.mountMountable] to mount a mountable file.
+ * - [gio.file.File.unmountMountableWithOperation] to unmount a mountable
  * file.
- * - [Gio.File.ejectMountableWithOperation] to eject a mountable file.
+ * - [gio.file.File.ejectMountableWithOperation] to eject a mountable file.
  * ## Entity Tags
  * One notable feature of `GFile`s are entity tags, or ‘etags’ for
  * short. Entity tags are somewhat like a more abstract version of the
@@ -6176,8 +6176,8 @@ struct GFileAttributeMatcher;
 
 /**
  * `GFileDescriptorBased` is an interface for file descriptor based IO.
- * It is implemented by streams $(LPAREN)implementations of [Gio.InputStream] or
- * [Gio.OutputStream]$(RPAREN) that are based on file descriptors.
+ * It is implemented by streams $(LPAREN)implementations of [gio.input_stream.InputStream] or
+ * [gio.output_stream.OutputStream]$(RPAREN) that are based on file descriptors.
  * Note that `<gio/gfiledescriptorbased.h>` belongs to the UNIX-specific
  * GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
  * file or the `GioUnix-2.0` GIR namespace when using it.
@@ -6201,17 +6201,17 @@ struct GFileDescriptorBasedIface
 }
 
 /**
- * `GFileEnumerator` allows you to operate on a set of [Gio.File] objects,
- * returning a [Gio.FileInfo] structure for each file enumerated $(LPAREN)e.g.
- * [Gio.File.enumerateChildren] will return a `GFileEnumerator` for each
+ * `GFileEnumerator` allows you to operate on a set of [gio.file.File] objects,
+ * returning a [gio.file_info.FileInfo] structure for each file enumerated $(LPAREN)e.g.
+ * [gio.file.File.enumerateChildren] will return a `GFileEnumerator` for each
  * of the children within a directory$(RPAREN).
  * To get the next file's information from a `GFileEnumerator`, use
- * [Gio.FileEnumerator.nextFile] or its asynchronous version,
- * [Gio.FileEnumerator.nextFilesAsync]. Note that the asynchronous
- * version will return a list of [Gio.FileInfo] objects, whereas the
+ * [gio.file_enumerator.FileEnumerator.nextFile] or its asynchronous version,
+ * [gio.file_enumerator.FileEnumerator.nextFilesAsync]. Note that the asynchronous
+ * version will return a list of [gio.file_info.FileInfo] objects, whereas the
  * synchronous will only return the next file in the enumerator.
  * The ordering of returned files is unspecified for non-Unix
- * platforms; for more information, see [GLib.Dir.readName].  On Unix,
+ * platforms; for more information, see [glib.dir.Dir.readName].  On Unix,
  * when operating on local files, returned files will be sorted by
  * inode number.  Effectively you can assume that the ordering of
  * returned files will be stable between successive calls $(LPAREN)and
@@ -6219,10 +6219,10 @@ struct GFileDescriptorBasedIface
  * If your application needs a specific ordering, such as by name or
  * modification time, you will have to implement that in your
  * application code.
- * To close a `GFileEnumerator`, use [Gio.FileEnumerator.close], or
- * its asynchronous version, [Gio.FileEnumerator.closeAsync]. Once
+ * To close a `GFileEnumerator`, use [gio.file_enumerator.FileEnumerator.close], or
+ * its asynchronous version, [gio.file_enumerator.FileEnumerator.closeAsync]. Once
  * a `GFileEnumerator` is closed, no further actions may be performed
- * on it, and it should be freed with [GObject.ObjectG.unref].
+ * on it, and it should be freed with [gobject.object.ObjectG.unref].
  */
 struct GFileEnumerator
 {
@@ -6267,18 +6267,18 @@ struct GFileEnumeratorPrivate;
 /**
  * `GFileIOStream` provides I/O streams that both read and write to the same
  * file handle.
- * `GFileIOStream` implements [Gio.Seekable], which allows the I/O
+ * `GFileIOStream` implements [gio.seekable.Seekable], which allows the I/O
  * stream to jump to arbitrary positions in the file and to truncate
  * the file, provided the filesystem of the file supports these
  * operations.
- * To find the position of a file I/O stream, use [Gio.Seekable.tell].
+ * To find the position of a file I/O stream, use [gio.seekable.Seekable.tell].
  * To find out if a file I/O stream supports seeking, use
- * [Gio.Seekable.canSeek]. To position a file I/O stream, use
- * [Gio.Seekable.seek]. To find out if a file I/O stream supports
- * truncating, use [Gio.Seekable.canTruncate]. To truncate a file I/O
- * stream, use [Gio.Seekable.truncate].
+ * [gio.seekable.Seekable.canSeek]. To position a file I/O stream, use
+ * [gio.seekable.Seekable.seek]. To find out if a file I/O stream supports
+ * truncating, use [gio.seekable.Seekable.canTruncate]. To truncate a file I/O
+ * stream, use [gio.seekable.Seekable.truncate].
  * The default implementation of all the `GFileIOStream` operations
- * and the implementation of [Gio.Seekable] just call into the same
+ * and the implementation of [gio.seekable.Seekable] just call into the same
  * operations on the output stream.
  */
 struct GFileIOStream
@@ -6326,7 +6326,7 @@ struct GFileIOStreamPrivate;
 /**
  * `GFileIcon` specifies an icon by pointing to an image file
  * to be used as icon.
- * It implements [Gio.LoadableIcon].
+ * It implements [gio.loadable_icon.LoadableIcon].
  */
 struct GFileIcon;
 
@@ -6862,33 +6862,33 @@ struct GFileIface
 }
 
 /**
- * Stores information about a file system object referenced by a [Gio.File].
+ * Stores information about a file system object referenced by a [gio.file.File].
  * Functionality for manipulating basic metadata for files. `GFileInfo`
  * implements methods for getting information that all files should
  * contain, and allows for manipulation of extended attributes.
  * See [file-attributes.html](file attributes) for more information on how GIO
  * handles file attributes.
- * To obtain a `GFileInfo` for a [Gio.File], use
- * [Gio.File.queryInfo] (or its async variant). To obtain a `GFileInfo`
- * for a file input or output stream, use [Gio.FileInputStream.queryInfo]
- * or [Gio.FileOutputStream.queryInfo] (or their async variants).
+ * To obtain a `GFileInfo` for a [gio.file.File], use
+ * [gio.file.File.queryInfo] (or its async variant). To obtain a `GFileInfo`
+ * for a file input or output stream, use [gio.file_input_stream.FileInputStream.queryInfo]
+ * or [gio.file_output_stream.FileOutputStream.queryInfo] (or their async variants).
  * To change the actual attributes of a file, you should then set the
- * attribute in the `GFileInfo` and call [Gio.File.setAttributesFromInfo]
- * or [Gio.File.setAttributesAsync] on a `GFile`.
+ * attribute in the `GFileInfo` and call [gio.file.File.setAttributesFromInfo]
+ * or [gio.file.File.setAttributesAsync] on a `GFile`.
  * However, not all attributes can be changed in the file. For instance,
- * the actual size of a file cannot be changed via [Gio.FileInfo.setSize].
- * You may call [Gio.File.querySettableAttributes] and
- * [Gio.File.queryWritableNamespaces] to discover the settable attributes
+ * the actual size of a file cannot be changed via [gio.file_info.FileInfo.setSize].
+ * You may call [gio.file.File.querySettableAttributes] and
+ * [gio.file.File.queryWritableNamespaces] to discover the settable attributes
  * of a particular file at runtime.
- * The direct accessors, such as [Gio.FileInfo.getName], are slightly more
+ * The direct accessors, such as [gio.file_info.FileInfo.getName], are slightly more
  * optimized than the generic attribute accessors, such as
- * [Gio.FileInfo.getAttributeByteString].This optimization will matter
+ * [gio.file_info.FileInfo.getAttributeByteString].This optimization will matter
  * only if calling the API in a tight loop.
  * It is an error to call these accessors without specifying their required file
  * attributes when creating the `GFileInfo`. Use
- * [Gio.FileInfo.hasAttribute] or [Gio.FileInfo.listAttributes]
+ * [gio.file_info.FileInfo.hasAttribute] or [gio.file_info.FileInfo.listAttributes]
  * to check what attributes are specified for a `GFileInfo`.
- * [Gio.FileAttributeMatcher] allows for searching through a `GFileInfo`
+ * [gio.file_attribute_matcher.FileAttributeMatcher] allows for searching through a `GFileInfo`
  * for attributes.
  */
 struct GFileInfo;
@@ -6898,10 +6898,10 @@ struct GFileInfoClass;
 /**
  * `GFileInputStream` provides input streams that take their
  * content from a file.
- * `GFileInputStream` implements [Gio.Seekable], which allows the input
+ * `GFileInputStream` implements [gio.seekable.Seekable], which allows the input
  * stream to jump to arbitrary positions in the file, provided the
  * filesystem of the file allows it. To find the position of a file
- * input stream, use [Gio.Seekable.tell]. To find out if a file input
+ * input stream, use [gio.seekable.Seekable.tell]. To find out if a file input
  * stream supports seeking, use vfunc@Gio.Seekable.can_seek.
  * To position a file input stream, use vfunc@Gio.Seekable.seek.
  */
@@ -6944,12 +6944,12 @@ struct GFileInputStreamPrivate;
 /**
  * Monitors a file or directory for changes.
  * To obtain a `GFileMonitor` for a file or directory, use
- * [Gio.File.monitor], [Gio.File.monitorFile], or
- * [Gio.File.monitorDirectory].
+ * [gio.file.File.monitor], [gio.file.File.monitorFile], or
+ * [gio.file.File.monitorDirectory].
  * To get informed about changes to the file or directory you are
- * monitoring, connect to the [Gio.FileMonitor.changed] signal. The
+ * monitoring, connect to the [gio.file_monitor.FileMonitor.changed] signal. The
  * signal will be emitted in the thread-default main context $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN) of the thread that the monitor
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) of the thread that the monitor
  * was created in $(LPAREN)though if the global default main context is blocked, this
  * may cause notifications to be blocked even if the thread-default
  * context is still running$(RPAREN).
@@ -6985,16 +6985,16 @@ struct GFileMonitorPrivate;
 /**
  * `GFileOutputStream` provides output streams that write their
  * content to a file.
- * `GFileOutputStream` implements [Gio.Seekable], which allows the output
+ * `GFileOutputStream` implements [gio.seekable.Seekable], which allows the output
  * stream to jump to arbitrary positions in the file and to truncate
  * the file, provided the filesystem of the file supports these
  * operations.
- * To find the position of a file output stream, use [Gio.Seekable.tell].
+ * To find the position of a file output stream, use [gio.seekable.Seekable.tell].
  * To find out if a file output stream supports seeking, use
- * [Gio.Seekable.canSeek].To position a file output stream, use
- * [Gio.Seekable.seek]. To find out if a file output stream supports
- * truncating, use [Gio.Seekable.canTruncate]. To truncate a file output
- * stream, use [Gio.Seekable.truncate].
+ * [gio.seekable.Seekable.canSeek].To position a file output stream, use
+ * [gio.seekable.Seekable.seek]. To find out if a file output stream supports
+ * truncating, use [gio.seekable.Seekable.canTruncate]. To truncate a file output
+ * stream, use [gio.seekable.Seekable.truncate].
  */
 struct GFileOutputStream
 {
@@ -7118,13 +7118,13 @@ struct GIOExtension;
  * organized fashion.
  * An extension point is identified by a name, and it may optionally
  * require that any implementation must be of a certain type $(LPAREN)or derived
- * thereof$(RPAREN). Use [Gio.IOExtensionPoint.register] to register an
- * extension point, and [Gio.IOExtensionPoint.setRequiredType] to
+ * thereof$(RPAREN). Use [gio.ioextension_point.IOExtensionPoint.register] to register an
+ * extension point, and [gio.ioextension_point.IOExtensionPoint.setRequiredType] to
  * set a required type.
  * A module can implement an extension point by specifying the
- * [GObject.GType] that implements the functionality. Additionally, each
+ * [gobject.size_t] that implements the functionality. Additionally, each
  * implementation of an extension point has a name, and a priority. Use
- * [Gio.IOExtensionPoint.implement] to implement an extension point.
+ * [gio.ioextension_point.IOExtensionPoint.implement] to implement an extension point.
  * ```c
  * GIOExtensionPoint *ep;
  * // Register an extension point
@@ -7171,16 +7171,16 @@ struct GIOModuleClass;
 /**
  * Represents a scope for loading IO modules. A scope can be used for blocking
  * duplicate modules, or blocking a module you don't want to load.
- * The scope can be used with [Gio.Global.ioModulesLoadAllInDirectoryWithScope]
- * or [Gio.Global.ioModulesScanAllInDirectoryWithScope].
+ * The scope can be used with [gio.global.ioModulesLoadAllInDirectoryWithScope]
+ * or [gio.global.ioModulesScanAllInDirectoryWithScope].
  */
 struct GIOModuleScope;
 
 /**
  * Opaque class for defining and scheduling IO jobs.
 
- * Deprecated: Use [GLib.ThreadPool] or
- *   [Gio.Task.runInThread]
+ * Deprecated: Use [glib.thread_pool.ThreadPool] or
+ *   [gio.task.Task.runInThread]
  */
 struct GIOSchedulerJob;
 
@@ -7189,18 +7189,18 @@ struct GIOSchedulerJob;
  * Generally the two streams act as separate input and output streams,
  * but they share some common resources and state. For instance, for
  * seekable streams, both streams may use the same position.
- * Examples of `GIOStream` objects are [Gio.SocketConnection], which represents
- * a two-way network connection; and [Gio.FileIOStream], which represents a
+ * Examples of `GIOStream` objects are [gio.socket_connection.SocketConnection], which represents
+ * a two-way network connection; and [gio.file_iostream.FileIOStream], which represents a
  * file handle opened in read-write mode.
  * To do the actual reading and writing you need to get the substreams
- * with [Gio.IOStream.getInputStream] and
- * [Gio.IOStream.getOutputStream].
+ * with [gio.iostream.IOStream.getInputStream] and
+ * [gio.iostream.IOStream.getOutputStream].
  * The `GIOStream` object owns the input and the output streams, not the other
  * way around, so keeping the substreams alive will not keep the `GIOStream`
  * object alive. If the `GIOStream` object is freed it will be closed, thus
  * closing the substreams, so even if the substreams stay alive they will
  * always return `G_IO_ERROR_CLOSED` for all operations.
- * To close a stream use [Gio.IOStream.close] which will close the common
+ * To close a stream use [gio.iostream.IOStream.close] which will close the common
  * stream object and also the individual substreams. You can also close
  * the substreams themselves. In most cases this only marks the
  * substream as closed, so further I/O on it fails but common state in the
@@ -7208,20 +7208,20 @@ struct GIOSchedulerJob;
  * ‘half-closed’ states where one direction of the stream is actually shut down.
  * Operations on `GIOStream`s cannot be started while another operation on the
  * `GIOStream` or its substreams is in progress. Specifically, an application can
- * read from the [Gio.InputStream] and write to the
- * [Gio.OutputStream] simultaneously $(LPAREN)either in separate threads, or as
+ * read from the [gio.input_stream.InputStream] and write to the
+ * [gio.output_stream.OutputStream] simultaneously $(LPAREN)either in separate threads, or as
  * asynchronous operations in the same thread$(RPAREN), but an application cannot start
  * any `GIOStream` operation while there is a `GIOStream`, `GInputStream` or
  * `GOutputStream` operation in progress, and an application can’t start any
  * `GInputStream` or `GOutputStream` operation while there is a `GIOStream`
  * operation in progress.
  * This is a product of individual stream operations being associated with a
- * given [GLib.MainContext] $(LPAREN)the thread-default context at the time the
+ * given [glib.main_context.MainContext] $(LPAREN)the thread-default context at the time the
  * operation was started$(RPAREN), rather than entire streams being associated with a
  * single `GMainContext`.
  * GIO may run operations on `GIOStream`s from other $(LPAREN)worker$(RPAREN) threads, and this
  * may be exposed to application code in the behaviour of wrapper streams, such
- * as [Gio.BufferedInputStream] or [Gio.TlsConnection]. With such
+ * as [gio.buffered_input_stream.BufferedInputStream] or [gio.tls_connection.TlsConnection]. With such
  * wrapper APIs, application code may only run operations on the base $(LPAREN)wrapped$(RPAREN)
  * stream when the wrapper stream is idle. Note that the semantics of such
  * operations may not be well-defined due to the state the wrapper stream leaves
@@ -7279,24 +7279,24 @@ struct GIOStreamPrivate;
  * serializing an icon to and from strings.
  * `GIcon` does not provide the actual pixmap for the icon as this is out
  * of GIO's scope, however implementations of `GIcon` may contain the name
- * of an icon $(LPAREN)see [Gio.ThemedIcon]$(RPAREN), or the path to an icon
- * $(LPAREN)see [Gio.LoadableIcon]$(RPAREN).
- * To obtain a hash of a `GIcon`, see [Gio.Icon.hash].
- * To check if two `GIcon`s are equal, see [Gio.Icon.equal].
- * For serializing a `GIcon`, use [Gio.Icon.serialize] and
- * [Gio.Icon.deserialize].
+ * of an icon $(LPAREN)see [gio.themed_icon.ThemedIcon]$(RPAREN), or the path to an icon
+ * $(LPAREN)see [gio.loadable_icon.LoadableIcon]$(RPAREN).
+ * To obtain a hash of a `GIcon`, see [gio.icon.Icon.hash].
+ * To check if two `GIcon`s are equal, see [gio.icon.Icon.equal].
+ * For serializing a `GIcon`, use [gio.icon.Icon.serialize] and
+ * [gio.icon.Icon.deserialize].
  * If you want to consume `GIcon` $(LPAREN)for example, in a toolkit$(RPAREN) you must
  * be prepared to handle at least the three following cases:
- * [Gio.LoadableIcon], [Gio.ThemedIcon] and [Gio.EmblemedIcon].
+ * [gio.loadable_icon.LoadableIcon], [gio.themed_icon.ThemedIcon] and [gio.emblemed_icon.EmblemedIcon].
  * It may also make sense to have fast-paths for other cases $(LPAREN)like handling
  * [`GdkPixbuf`](https://docs.gtk.org/gdk-pixbuf/class.Pixbuf.html) directly,
  * for example$(RPAREN) but all compliant `GIcon` implementations outside of GIO must
- * implement [Gio.LoadableIcon].
+ * implement [gio.loadable_icon.LoadableIcon].
  * If your application or library provides one or more `GIcon`
  * implementations you need to ensure that your new implementation also
- * implements [Gio.LoadableIcon].  Additionally, you must provide an
- * implementation of [Gio.Icon.serialize] that gives a result that is
- * understood by [Gio.Icon.deserialize], yielding one of the built-in
+ * implements [gio.loadable_icon.LoadableIcon].  Additionally, you must provide an
+ * implementation of [gio.icon.Icon.serialize] that gives a result that is
+ * understood by [gio.icon.Icon.deserialize], yielding one of the built-in
  * icon types.
  */
 struct GIcon;
@@ -7345,13 +7345,13 @@ struct GIconIface
 
 /**
  * `GInetAddress` represents an IPv4 or IPv6 internet address. Use
- * [Gio.Resolver.lookupByName] or
- * [Gio.Resolver.lookupByNameAsync] to look up the `GInetAddress` for
- * a hostname. Use [Gio.Resolver.lookupByAddress] or
- * [Gio.Resolver.lookupByAddressAsync] to look up the hostname for a
+ * [gio.resolver.Resolver.lookupByName] or
+ * [gio.resolver.Resolver.lookupByNameAsync] to look up the `GInetAddress` for
+ * a hostname. Use [gio.resolver.Resolver.lookupByAddress] or
+ * [gio.resolver.Resolver.lookupByAddressAsync] to look up the hostname for a
  * `GInetAddress`.
  * To actually connect to a remote host, you will need a
- * [Gio.InetSocketAddress] $(LPAREN)which includes a `GInetAddress` as well as a
+ * [gio.inet_socket_address.InetSocketAddress] $(LPAREN)which includes a `GInetAddress` as well as a
  * port number$(RPAREN).
  */
 struct GInetAddress
@@ -7394,7 +7394,7 @@ struct GInetAddressPrivate;
 
 /**
  * An IPv4 or IPv6 socket address. That is, the combination of a
- * [Gio.InetAddress] and a port number.
+ * [gio.inet_address.InetAddress] and a port number.
  * In UNIX terms, `GInetSocketAddress` corresponds to a
  * [`struct sockaddr_in` or `struct sockaddr_in6`]$(LPAREN)$(RPAREN)(man:sockaddr3type).
  */
@@ -7416,18 +7416,18 @@ struct GInetSocketAddressPrivate;
  * `GInitable` is implemented by objects that can fail during
  * initialization. If an object implements this interface then
  * it must be initialized as the first thing after construction,
- * either via [Gio.Initable.init_] or [Gio.AsyncInitable.initAsync]
- * $(LPAREN)the latter is only available if it also implements [Gio.AsyncInitable]$(RPAREN).
+ * either via [gio.initable.Initable.init_] or [gio.async_initable.AsyncInitable.initAsync]
+ * $(LPAREN)the latter is only available if it also implements [gio.async_initable.AsyncInitable]$(RPAREN).
  * If the object is not initialized, or initialization returns with an
- * error, then all operations on the object except `[GObject.ObjectG.ref_]` and
- * `[GObject.ObjectG.unref]` are considered to be invalid, and have undefined
+ * error, then all operations on the object except `[gobject.object.ObjectG.ref_]` and
+ * `[gobject.object.ObjectG.unref]` are considered to be invalid, and have undefined
  * behaviour. They will often fail with func@GLib.critical or
  * func@GLib.warning, but this must not be relied on.
  * Users of objects implementing this are not intended to use
  * the interface method directly, instead it will be used automatically
  * in various ways. For C applications you generally just call
- * [Gio.Initable.new_] directly, or indirectly via a `foo_thing_new()` wrapper.
- * This will call [Gio.Initable.init_] under the cover, returning `NULL`
+ * [gio.initable.Initable.new_] directly, or indirectly via a `foo_thing_new()` wrapper.
+ * This will call [gio.initable.Initable.init_] under the cover, returning `NULL`
  * and setting a `GError` on failure $(LPAREN)at which point the instance is
  * unreferenced$(RPAREN).
  * For bindings in languages where the native constructor supports
@@ -7517,12 +7517,12 @@ struct GInputMessage
 
 /**
  * `GInputStream` is a base class for implementing streaming input.
- * It has functions to read from a stream $(LPAREN)[Gio.InputStream.read]$(RPAREN),
- * to close a stream $(LPAREN)[Gio.InputStream.close]$(RPAREN) and to skip some content
- * $(LPAREN)[Gio.InputStream.skip]$(RPAREN).
+ * It has functions to read from a stream $(LPAREN)[gio.input_stream.InputStream.read]$(RPAREN),
+ * to close a stream $(LPAREN)[gio.input_stream.InputStream.close]$(RPAREN) and to skip some content
+ * $(LPAREN)[gio.input_stream.InputStream.skip]$(RPAREN).
  * To copy the content of an input stream to an output stream without
- * manually handling the reads and writes, use [Gio.OutputStream.splice].
- * See the documentation for [Gio.IOStream] for details of thread safety
+ * manually handling the reads and writes, use [gio.output_stream.OutputStream.splice].
+ * See the documentation for [gio.iostream.IOStream] for details of thread safety
  * of streaming APIs.
  * All of these functions have async variants too.
  */
@@ -7589,12 +7589,12 @@ struct GInputVector
 
 /**
  * `GListModel` is an interface that represents a mutable list of
- * [GObject.ObjectG]. Its main intention is as a model for various widgets
+ * [gobject.object.ObjectG]. Its main intention is as a model for various widgets
  * in user interfaces, such as list views, but it can also be used as a
  * convenient method of returning lists of data, with support for
  * updates.
  * Each object in the list may also report changes in itself via some
- * mechanism $(LPAREN)normally the [GObject.ObjectG.notify] signal$(RPAREN).  Taken
+ * mechanism $(LPAREN)normally the [gobject.object.ObjectG.notify] signal$(RPAREN).  Taken
  * together with the signal@Gio.ListModel::items-changed signal, this provides
  * for a list that can change its membership, and in which the members can
  * change their individual properties.
@@ -7607,14 +7607,14 @@ struct GInputVector
  * then you need to connect signals to the objects that you are
  * interested in.
  * All items in a `GListModel` are of $(LPAREN)or derived from$(RPAREN) the same type.
- * [Gio.ListModel.getItemType] returns that type.  The type may be an
+ * [gio.list_model.ListModel.getItemType] returns that type.  The type may be an
  * interface, in which case all objects in the list must implement it.
  * The semantics are close to that of an array:
- * [Gio.ListModel.getNItems] returns the number of items in the list
- * and [Gio.ListModel.getItem] returns an item at a (0-based) position.
+ * [gio.list_model.ListModel.getNItems] returns the number of items in the list
+ * and [gio.list_model.ListModel.getItem] returns an item at a (0-based) position.
  * In order to allow implementations to calculate the list length lazily,
  * you can also iterate over items: starting from 0, repeatedly call
- * [Gio.ListModel.getItem] until it returns `NULL`.
+ * [gio.list_model.ListModel.getItem] until it returns `NULL`.
  * An implementation may create objects lazily, but must take care to
  * return the same object for a given position until all references to
  * it are gone.
@@ -7626,14 +7626,14 @@ struct GInputVector
  * thread in which it is appropriate to use it depends on the particular
  * implementation, but typically it will be from the thread that owns
  * the thread-default main context $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN) in effect at the time that the
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) in effect at the time that the
  * model was created.
  * Over time, it has established itself as good practice for list model
  * implementations to provide properties `item-type` and `n-items` to
  * ease working with them. While it is not required, it is recommended
  * that implementations provide these two properties. They should return
- * the values of [Gio.ListModel.getItemType] and
- * [Gio.ListModel.getNItems] respectively and be defined as such:
+ * the values of [gio.list_model.ListModel.getItemType] and
+ * [gio.list_model.ListModel.getNItems] respectively and be defined as such:
  * ```c
  * properties[PROP_ITEM_TYPE] \=
  * g_param_spec_gtype $(LPAREN)"item-type", NULL, NULL, G_TYPE_OBJECT,
@@ -7656,23 +7656,23 @@ struct GListModelInterface
   GTypeInterface gIface;
 
   /**
-   * the virtual function pointer for [Gio.ListModel.getItemType]
+   * the virtual function pointer for [gio.list_model.ListModel.getItemType]
    */
   extern(C) GType function(GListModel* list) getItemType;
 
   /**
-   * the virtual function pointer for [Gio.ListModel.getNItems]
+   * the virtual function pointer for [gio.list_model.ListModel.getNItems]
    */
   extern(C) uint function(GListModel* list) getNItems;
 
   /**
-   * the virtual function pointer for [Gio.ListModel.getItem]
+   * the virtual function pointer for [gio.list_model.ListModel.getItem]
    */
   extern(C) ObjectC* function(GListModel* list, uint position) getItem;
 }
 
 /**
- * `GListStore` is a simple implementation of [Gio.ListModel] that stores
+ * `GListStore` is a simple implementation of [gio.list_model.ListModel] that stores
  * all items in memory.
  * It provides insertions, deletions, and lookups in logarithmic time
  * with a fast path for the common case of iterating the list linearly.
@@ -7685,7 +7685,7 @@ struct GListStoreClass
 }
 
 /**
- * `GLoadableIcon` extends the [Gio.Icon] interface and adds the ability
+ * `GLoadableIcon` extends the [gio.icon.Icon] interface and adds the ability
  * to load icons from streams.
  */
 struct GLoadableIcon;
@@ -7720,7 +7720,7 @@ struct GLoadableIconIface
  * `GMemoryInputStream` is a class for using arbitrary
  * memory chunks as input for GIO streaming input operations.
  * As of GLib 2.34, `GMemoryInputStream` implements
- * [Gio.PollableInputStream].
+ * [gio.pollable_input_stream.PollableInputStream].
  */
 struct GMemoryInputStream
 {
@@ -7765,7 +7765,7 @@ struct GMemoryInputStreamPrivate;
  * should be profiled for your application. `malloc_trim$(LPAREN)$(RPAREN)`, for example, may
  * make future heap allocations slower $(LPAREN)due to releasing cached heap pages back
  * to the kernel$(RPAREN).
- * See [Gio.MemoryMonitorWarningLevel] for details on the various warning
+ * See [gio.MemoryMonitorWarningLevel] for details on the various warning
  * levels.
  * ```c
  * static void
@@ -7811,7 +7811,7 @@ struct GMemoryMonitorInterface
  * `GMemoryOutputStream` is a class for using arbitrary
  * memory chunks as output for GIO streaming output operations.
  * As of GLib 2.34, `GMemoryOutputStream` trivially implements
- * [Gio.PollableOutputStream]: it always polls as ready.
+ * [gio.pollable_output_stream.PollableOutputStream]: it always polls as ready.
  */
 struct GMemoryOutputStream
 {
@@ -7838,13 +7838,13 @@ struct GMemoryOutputStreamClass
 struct GMemoryOutputStreamPrivate;
 
 /**
- * `GMenu` is a simple implementation of [Gio.MenuModel].
- * You populate a `GMenu` by adding [Gio.MenuItem] instances to it.
+ * `GMenu` is a simple implementation of [gio.menu_model.MenuModel].
+ * You populate a `GMenu` by adding [gio.menu_item.MenuItem] instances to it.
  * There are some convenience functions to allow you to directly
- * add items $(LPAREN)avoiding [Gio.MenuItem]$(RPAREN) for the common cases. To add
- * a regular item, use [Gio.Menu.insert]. To add a section, use
- * [Gio.Menu.insertSection]. To add a submenu, use
- * [Gio.Menu.insertSubmenu].
+ * add items $(LPAREN)avoiding [gio.menu_item.MenuItem]$(RPAREN) for the common cases. To add
+ * a regular item, use [gio.menu.Menu.insert]. To add a section, use
+ * [gio.menu.Menu.insertSection]. To add a submenu, use
+ * [gio.menu.Menu.insertSubmenu].
  */
 struct GMenu;
 
@@ -7939,13 +7939,13 @@ struct GMenuLinkIterPrivate;
  * dash boards, etc. To support such uses, it is necessary to ‘export’
  * information about actions and their representation in menus, which
  * is exactly what the action group exporter and the menu model exporter do for
- * [Gio.ActionGroup] and [Gio.MenuModel]. The client-side
+ * [gio.action_group.ActionGroup] and [gio.menu_model.MenuModel]. The client-side
  * counterparts to make use of the exported information are
- * [Gio.DBusActionGroup] and [Gio.DBusMenuModel].
+ * [gio.dbus_action_group.DBusActionGroup] and [gio.dbus_menu_model.DBusMenuModel].
  * The API of `GMenuModel` is very generic, with iterators for the
  * attributes and links of an item, see
- * [Gio.MenuModel.iterateItemAttributes] and
- * [Gio.MenuModel.iterateItemLinks]. The ‘standard’ attributes and
+ * [gio.menu_model.MenuModel.iterateItemAttributes] and
+ * [gio.menu_model.MenuModel.iterateItemLinks]. The ‘standard’ attributes and
  * link types have predefined names: `G_MENU_ATTRIBUTE_LABEL`,
  * `G_MENU_ATTRIBUTE_ACTION`, `G_MENU_ATTRIBUTE_TARGET`, `G_MENU_LINK_SECTION`
  * and `G_MENU_LINK_SUBMENU`.
@@ -8026,16 +8026,16 @@ struct GMenuModelPrivate;
  * mount, but you can still access the files on it if you use GIO. Might or
  * might not be related to a volume object.
  * Unmounting a `GMount` instance is an asynchronous operation. For
- * more information about asynchronous operations, see [Gio.AsyncResult]
- * and [Gio.Task]. To unmount a `GMount` instance, first call
- * [Gio.Mount.unmountWithOperation] with (at least) the `GMount`
- * instance and a [Gio.AsyncReadyCallback].  The callback will be fired
+ * more information about asynchronous operations, see [gio.async_result.AsyncResult]
+ * and [gio.task.Task]. To unmount a `GMount` instance, first call
+ * [gio.mount.Mount.unmountWithOperation] with (at least) the `GMount`
+ * instance and a [gio.AsyncReadyCallback].  The callback will be fired
  * when the operation has resolved $(LPAREN)either with success or failure$(RPAREN), and a
- * [Gio.AsyncResult] structure will be passed to the callback.  That
- * callback should then call [Gio.Mount.unmountWithOperationFinish]
- * with the `GMount` and the [Gio.AsyncResult] data to see if the
+ * [gio.async_result.AsyncResult] structure will be passed to the callback.  That
+ * callback should then call [gio.mount.Mount.unmountWithOperationFinish]
+ * with the `GMount` and the [gio.async_result.AsyncResult] data to see if the
  * operation was completed successfully.  If an `error` is present when
- * [Gio.Mount.unmountWithOperationFinish] is called, then it will be
+ * [gio.mount.Mount.unmountWithOperationFinish] is called, then it will be
  * filled with any error information.
  */
 struct GMount;
@@ -8132,7 +8132,7 @@ struct GMountIface
 
   /**
    * Starts guessing the type of the content of a #GMount.
-   * See [Gio.Mount.guessContentType] for more information on content
+   * See [gio.mount.Mount.guessContentType] for more information on content
    * type guessing. This operation was added in 2.18.
    */
   extern(C) void function(GMount* mount, bool forceRescan, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) guessContentType;
@@ -8194,9 +8194,9 @@ struct GMountIface
  * mounting files, hard drive partitions or server locations. It can
  * also be used to ask the user questions or show a list of applications
  * preventing unmount or eject operations from completing.
- * Note that `GMountOperation` is used for more than just [Gio.Mount]
- * objects – for example it is also used in [Gio.Drive.start] and
- * [Gio.Drive.stop].
+ * Note that `GMountOperation` is used for more than just [gio.mount.Mount]
+ * objects – for example it is also used in [gio.drive.Drive.start] and
+ * [gio.drive.Drive.stop].
  * Users should instantiate a subclass of this that implements all the
  * various callbacks to show the required dialogs, such as
  * [`GtkMountOperation`](https://docs.gtk.org/gtk4/class.MountOperation.html).
@@ -8291,7 +8291,7 @@ struct GNativeVolumeMonitorClass
  * The enumeration results of resolved addresses *may* be cached as long
  * as this object is kept alive which may have unexpected results if
  * alive for too long.
- * See [Gio.SocketConnectable] for an example of using the connectable
+ * See [gio.socket_connectable.SocketConnectable] for an example of using the connectable
  * interface.
  */
 struct GNetworkAddress
@@ -8334,31 +8334,31 @@ struct GNetworkMonitorInterface
   extern(C) void function(GNetworkMonitor* monitor, bool networkAvailable) networkChanged;
 
   /**
-   * the virtual function pointer for [Gio.NetworkMonitor.canReach]
+   * the virtual function pointer for [gio.network_monitor.NetworkMonitor.canReach]
    */
   extern(C) bool function(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GError** _err) canReach;
 
   /**
    * the virtual function pointer for
-   * [Gio.NetworkMonitor.canReachAsync]
+   * [gio.network_monitor.NetworkMonitor.canReachAsync]
    */
   extern(C) void function(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) canReachAsync;
 
   /**
    * the virtual function pointer for
-   * [Gio.NetworkMonitor.canReachFinish]
+   * [gio.network_monitor.NetworkMonitor.canReachFinish]
    */
   extern(C) bool function(GNetworkMonitor* monitor, GAsyncResult* result, GError** _err) canReachFinish;
 }
 
 /**
- * Like [Gio.NetworkAddress] does with hostnames, `GNetworkService`
+ * Like [gio.network_address.NetworkAddress] does with hostnames, `GNetworkService`
  * provides an easy way to resolve a SRV record, and then attempt to
  * connect to one of the hosts that implements that service, handling
  * service priority/weighting, multiple IP addresses, and multiple
  * address families.
- * See [Gio.SrvTarget] for more information about SRV records, and see
- * [Gio.SocketConnectable] for an example of using the connectable
+ * See [gio.srv_target.SrvTarget] for more information about SRV records, and see
+ * [gio.socket_connectable.SocketConnectable] for an example of using the connectable
  * interface.
  */
 struct GNetworkService
@@ -8385,7 +8385,7 @@ struct GNetworkServicePrivate;
  * and even across system reboots.
  * Since the user may click on a notification while the application is
  * not running, applications using `GNotification` should be able to be
- * started as a D-Bus service, using [Gio.ApplicationGio].
+ * started as a D-Bus service, using [gio.application.ApplicationGio].
  * In order for `GNotification` to work, the application must have installed
  * a `.desktop` file. For example:
  * ```
@@ -8406,14 +8406,14 @@ struct GNetworkServicePrivate;
  * Control Center’s ‘Notifications’ panel.
  * The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
  * where `org.gnome.TestApplication` is the ID passed to
- * [Gio.ApplicationGio.new_].
+ * [gio.application.ApplicationGio.new_].
  * User interaction with a notification $(LPAREN)either the default action, or
  * buttons$(RPAREN) must be associated with actions on the application $(LPAREN)ie:
  * `app.` actions$(RPAREN).  It is not possible to route user interaction
  * through the notification itself, because the object will not exist if
  * the application is autostarted as a result of a notification being
  * clicked.
- * A notification can be sent with [Gio.ApplicationGio.sendNotification].
+ * A notification can be sent with [gio.application.ApplicationGio.sendNotification].
  */
 struct GNotification;
 
@@ -8423,7 +8423,7 @@ struct GNotification;
  * #GOutputVectors and the operation will use all the buffers as if they
  * were one buffer.
  * If @address is %NULL then the message is sent to the default receiver
- * $(LPAREN)as previously set by [Gio.Socket.connect]$(RPAREN).
+ * $(LPAREN)as previously set by [gio.socket.Socket.connect]$(RPAREN).
  */
 struct GOutputMessage
 {
@@ -8462,12 +8462,12 @@ struct GOutputMessage
 
 /**
  * `GOutputStream` is a base class for implementing streaming output.
- * It has functions to write to a stream $(LPAREN)[Gio.OutputStream.write]$(RPAREN),
- * to close a stream $(LPAREN)[Gio.OutputStream.close]$(RPAREN) and to flush pending
- * writes $(LPAREN)[Gio.OutputStream.flush]$(RPAREN).
+ * It has functions to write to a stream $(LPAREN)[gio.output_stream.OutputStream.write]$(RPAREN),
+ * to close a stream $(LPAREN)[gio.output_stream.OutputStream.close]$(RPAREN) and to flush pending
+ * writes $(LPAREN)[gio.output_stream.OutputStream.flush]$(RPAREN).
  * To copy the content of an input stream to an output stream without
- * manually handling the reads and writes, use [Gio.OutputStream.splice].
- * See the documentation for [Gio.IOStream] for details of thread safety
+ * manually handling the reads and writes, use [gio.output_stream.OutputStream.splice].
+ * See the documentation for [gio.iostream.IOStream] for details of thread safety
  * of streaming APIs.
  * All of these functions have async variants too.
  * All classes derived from `GOutputStream` *should* implement synchronous
@@ -8556,7 +8556,7 @@ struct GOutputVector
  * There is also an API to actually acquire the permission and one to
  * release it.
  * As an example, a `GPermission` might represent the ability for the
- * user to write to a [Gio.Settings] object.  This `GPermission` object
+ * user to write to a [gio.settings.Settings] object.  This `GPermission` object
  * could then be used to decide if it is appropriate to show a “Click here to
  * unlock” button in a dialog and to provide the mechanism to invoke
  * when that button is clicked.
@@ -8590,12 +8590,12 @@ struct GPermissionClass
 struct GPermissionPrivate;
 
 /**
- * `GPollableInputStream` is implemented by [Gio.InputStream]s that
+ * `GPollableInputStream` is implemented by [gio.input_stream.InputStream]s that
  * can be polled for readiness to read. This can be used when
  * interfacing with a non-GIO API that expects
  * UNIX-file-descriptor-style asynchronous I/O rather than GIO-style.
  * Some classes may implement `GPollableInputStream` but have only certain
- * instances of that class be pollable. If [Gio.PollableInputStream.canPoll]
+ * instances of that class be pollable. If [gio.pollable_input_stream.PollableInputStream.canPoll]
  * returns false, then the behavior of other `GPollableInputStream` methods is
  * undefined.
  */
@@ -8605,8 +8605,8 @@ struct GPollableInputStream;
  * The interface for pollable input streams.
  * The default implementation of @can_poll always returns %TRUE.
  * The default implementation of @read_nonblocking calls
- * [Gio.PollableInputStream.isReadable], and then calls
- * [Gio.InputStream.read] if it returns %TRUE. This means you only need
+ * [gio.pollable_input_stream.PollableInputStream.isReadable], and then calls
+ * [gio.input_stream.InputStream.read] if it returns %TRUE. This means you only need
  * to override it if it is possible that your @is_readable
  * implementation may return %TRUE when the stream is not actually
  * readable.
@@ -8641,12 +8641,12 @@ struct GPollableInputStreamInterface
 }
 
 /**
- * `GPollableOutputStream` is implemented by [Gio.OutputStream]s that
+ * `GPollableOutputStream` is implemented by [gio.output_stream.OutputStream]s that
  * can be polled for readiness to write. This can be used when
  * interfacing with a non-GIO API that expects
  * UNIX-file-descriptor-style asynchronous I/O rather than GIO-style.
  * Some classes may implement `GPollableOutputStream` but have only certain
- * instances of that class be pollable. If [Gio.PollableOutputStream.canPoll]
+ * instances of that class be pollable. If [gio.pollable_output_stream.PollableOutputStream.canPoll]
  * returns false, then the behavior of other `GPollableOutputStream` methods is
  * undefined.
  */
@@ -8656,13 +8656,13 @@ struct GPollableOutputStream;
  * The interface for pollable output streams.
  * The default implementation of @can_poll always returns %TRUE.
  * The default implementation of @write_nonblocking calls
- * [Gio.PollableOutputStream.isWritable], and then calls
- * [Gio.OutputStream.write] if it returns %TRUE. This means you only
+ * [gio.pollable_output_stream.PollableOutputStream.isWritable], and then calls
+ * [gio.output_stream.OutputStream.write] if it returns %TRUE. This means you only
  * need to override it if it is possible that your @is_writable
  * implementation may return %TRUE when the stream is not actually
  * writable.
  * The default implementation of @writev_nonblocking calls
- * [Gio.PollableOutputStream.writeNonblocking] for each vector, and converts
+ * [gio.pollable_output_stream.PollableOutputStream.writeNonblocking] for each vector, and converts
  * its return value and error $(LPAREN)if set$(RPAREN) to a #GPollableReturn. You should
  * override this where possible to avoid having to allocate a #GError to return
  * %G_IO_ERROR_WOULD_BLOCK.
@@ -8719,7 +8719,7 @@ struct GPollableOutputStreamInterface
  * monitor the battery discharge rate, `powertop` to check on the background activity
  * or activity at all$(RPAREN), `sysprof` to inspect CPU usage, and `intel_gpu_time` to
  * profile GPU usage.
- * Don’t forget to disconnect the [GObject.ObjectG.notify] signal for
+ * Don’t forget to disconnect the [gobject.object.ObjectG.notify] signal for
  * property@Gio.PowerProfileMonitor:power-saver-enabled, and unref the
  * `GPowerProfileMonitor` itself when exiting.
  */
@@ -8737,21 +8737,21 @@ struct GPowerProfileMonitorInterface
 }
 
 /**
- * A `GPropertyAction` is a way to get a [Gio.Action] with a state value
- * reflecting and controlling the value of a [GObject.ObjectG] property.
+ * A `GPropertyAction` is a way to get a [gio.action.Action] with a state value
+ * reflecting and controlling the value of a [gobject.object.ObjectG] property.
  * The state of the action will correspond to the value of the property.
  * Changing it will change the property $(LPAREN)assuming the requested value
- * matches the requirements as specified in the [GObject.ParamSpec]$(RPAREN).
+ * matches the requirements as specified in the [gobject.param_spec.ParamSpec]$(RPAREN).
  * Only the most common types are presently supported.  Booleans are
  * mapped to booleans, strings to strings, signed/unsigned integers to
  * int32/uint32 and floats and doubles to doubles.
  * If the property is an enum then the state will be string-typed and
  * conversion will automatically be performed between the enum value and
- * ‘nick’ string as per the [GObject.EnumValue] table.
+ * ‘nick’ string as per the [gobject.enum_value.EnumValue] table.
  * Flags types are not currently supported.
  * Properties of object types, boxed types and pointer types are not
  * supported and probably never will be.
- * Properties of [GLib.VariantG] types are not currently supported.
+ * Properties of [glib.variant.VariantG] types are not currently supported.
  * If the property is boolean-valued then the action will have a `NULL`
  * parameter type, and activating the action $(LPAREN)with no parameter$(RPAREN) will
  * toggle the value of the property.
@@ -8761,7 +8761,7 @@ struct GPowerProfileMonitorInterface
  * particular piece of state is kept $(LPAREN)and therefore has to be synchronised
  * between$(RPAREN). `GPropertyAction` does not have a separate state that is kept
  * in sync with the property value — its state is the property value.
- * For example, it might be useful to create a [Gio.Action] corresponding
+ * For example, it might be useful to create a [gio.action.Action] corresponding
  * to the `visible-child-name` property of a [`GtkStack`](https://docs.gtk.org/gtk4/class.Stack.html)
  * so that the current page can be switched from a menu.  The active radio
  * indication in the menu is then directly determined from the active page of
@@ -8772,11 +8772,11 @@ struct GPowerProfileMonitorInterface
  * actually being used to control something else.
  * Another anti-example would be to bind to the `visible-child-name`
  * property of a [`GtkStack`](https://docs.gtk.org/gtk4/class.Stack.html) if
- * this value is actually stored in [Gio.Settings].  In that case, the
- * real source of the value is* [Gio.Settings].  If you want
- * a [Gio.Action] to control a setting stored in [Gio.Settings],
- * see [Gio.Settings.createAction] instead, and possibly combine its
- * use with [Gio.Settings.bind].
+ * this value is actually stored in [gio.settings.Settings].  In that case, the
+ * real source of the value is* [gio.settings.Settings].  If you want
+ * a [gio.action.Action] to control a setting stored in [gio.settings.Settings],
+ * see [gio.settings.Settings.createAction] instead, and possibly combine its
+ * use with [gio.settings.Settings.bind].
  */
 struct GPropertyAction;
 
@@ -8786,12 +8786,12 @@ struct GPropertyAction;
  * The extensions are named after their proxy protocol name. As an
  * example, a SOCKS5 proxy implementation can be retrieved with the
  * name `socks5` using the function
- * [Gio.IOExtensionPoint.getExtensionByName].
+ * [gio.ioextension_point.IOExtensionPoint.getExtensionByName].
  */
 struct GProxy;
 
 /**
- * A [Gio.InetSocketAddress] representing a connection via a proxy server.
+ * A [gio.inet_socket_address.InetSocketAddress] representing a connection via a proxy server.
  */
 struct GProxyAddress
 {
@@ -8810,14 +8810,14 @@ struct GProxyAddressClass
 
 /**
  * `GProxyAddressEnumerator` is a wrapper around
- * [Gio.SocketAddressEnumerator] which takes the [Gio.SocketAddress]
- * instances returned by the [Gio.SocketAddressEnumerator]
- * and wraps them in [Gio.ProxyAddress] instances, using the given
+ * [gio.socket_address_enumerator.SocketAddressEnumerator] which takes the [gio.socket_address.SocketAddress]
+ * instances returned by the [gio.socket_address_enumerator.SocketAddressEnumerator]
+ * and wraps them in [gio.proxy_address.ProxyAddress] instances, using the given
  * property@Gio.ProxyAddressEnumerator:proxy-resolver.
  * This enumerator will be returned $(LPAREN)for example, by
- * [Gio.SocketConnectable.enumerate]$(RPAREN) as appropriate when a proxy is
+ * [gio.socket_connectable.SocketConnectable.enumerate]$(RPAREN) as appropriate when a proxy is
  * configured; there should be no need to manually wrap a
- * [Gio.SocketAddressEnumerator] instance with one.
+ * [gio.socket_address_enumerator.SocketAddressEnumerator] instance with one.
  */
 struct GProxyAddressEnumerator
 {
@@ -8886,8 +8886,8 @@ struct GProxyInterface
 
 /**
  * `GProxyResolver` provides synchronous and asynchronous network proxy
- * resolution. `GProxyResolver` is used within [Gio.SocketClient] through
- * the method [Gio.SocketConnectable.proxyEnumerate].
+ * resolution. `GProxyResolver` is used within [gio.socket_client.SocketClient] through
+ * the method [gio.socket_connectable.SocketConnectable.proxyEnumerate].
  * Implementations of `GProxyResolver` based on
  * [libproxy](https://github.com/libproxy/libproxy) and GNOME settings can be
  * found in [glib-networking](https://gitlab.gnome.org/GNOME/glib-networking).
@@ -8906,44 +8906,44 @@ struct GProxyResolverInterface
   GTypeInterface gIface;
 
   /**
-   * the virtual function pointer for [Gio.ProxyResolver.isSupported]
+   * the virtual function pointer for [gio.proxy_resolver.ProxyResolver.isSupported]
    */
   extern(C) bool function(GProxyResolver* resolver) isSupported;
 
   /**
-   * the virtual function pointer for [Gio.ProxyResolver.lookup]
+   * the virtual function pointer for [gio.proxy_resolver.ProxyResolver.lookup]
    */
   extern(C) char** function(GProxyResolver* resolver, const(char)* uri, GCancellable* cancellable, GError** _err) lookup;
 
   /**
    * the virtual function pointer for
-   * [Gio.ProxyResolver.lookupAsync]
+   * [gio.proxy_resolver.ProxyResolver.lookupAsync]
    */
   extern(C) void function(GProxyResolver* resolver, const(char)* uri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) lookupAsync;
 
   /**
    * the virtual function pointer for
-   * [Gio.ProxyResolver.lookupFinish]
+   * [gio.proxy_resolver.ProxyResolver.lookupFinish]
    */
   extern(C) char** function(GProxyResolver* resolver, GAsyncResult* result, GError** _err) lookupFinish;
 }
 
 /**
- * The `GRemoteActionGroup` interface is implemented by [Gio.ActionGroup]
+ * The `GRemoteActionGroup` interface is implemented by [gio.action_group.ActionGroup]
  * instances that either transmit action invocations to other processes
  * or receive action invocations in the local process from other
  * processes.
  * The interface has `_full` variants of the two
- * methods on [Gio.ActionGroup] used to activate actions:
- * [Gio.ActionGroup.activateAction] and
- * [Gio.ActionGroup.changeActionState]. These variants allow a
- * ‘platform data’ [GLib.VariantG] to be specified: a dictionary providing
+ * methods on [gio.action_group.ActionGroup] used to activate actions:
+ * [gio.action_group.ActionGroup.activateAction] and
+ * [gio.action_group.ActionGroup.changeActionState]. These variants allow a
+ * ‘platform data’ [glib.variant.VariantG] to be specified: a dictionary providing
  * context for the action invocation $(LPAREN)for example: timestamps, startup
  * notification IDs, etc$(RPAREN).
- * [Gio.DBusActionGroup] implements `GRemoteActionGroup`.  This provides a
+ * [gio.dbus_action_group.DBusActionGroup] implements `GRemoteActionGroup`.  This provides a
  * mechanism to send platform data for action invocations over D-Bus.
- * Additionally, [Gio.DBusConnection.exportActionGroup] will check if
- * the exported [Gio.ActionGroup] implements `GRemoteActionGroup` and use
+ * Additionally, [gio.dbus_connection.DBusConnection.exportActionGroup] will check if
+ * the exported [gio.action_group.ActionGroup] implements `GRemoteActionGroup` and use
  * the `_full` variants of the calls if available.  This
  * provides a mechanism by which to receive platform data for action
  * invocations that arrive by way of D-Bus.
@@ -8958,28 +8958,28 @@ struct GRemoteActionGroupInterface
   GTypeInterface gIface;
 
   /**
-   * the virtual function pointer for [Gio.RemoteActionGroup.activateActionFull]
+   * the virtual function pointer for [gio.remote_action_group.RemoteActionGroup.activateActionFull]
    */
   extern(C) void function(GRemoteActionGroup* remote, const(char)* actionName, VariantC* parameter, VariantC* platformData) activateActionFull;
 
   /**
-   * the virtual function pointer for [Gio.RemoteActionGroup.changeActionStateFull]
+   * the virtual function pointer for [gio.remote_action_group.RemoteActionGroup.changeActionStateFull]
    */
   extern(C) void function(GRemoteActionGroup* remote, const(char)* actionName, VariantC* value, VariantC* platformData) changeActionStateFull;
 }
 
 /**
- * The object that handles DNS resolution. Use [Gio.Resolver.getDefault]
+ * The object that handles DNS resolution. Use [gio.resolver.Resolver.getDefault]
  * to get the default resolver.
  * `GResolver` provides cancellable synchronous and asynchronous DNS
- * resolution, for hostnames $(LPAREN)[Gio.Resolver.lookupByAddress],
- * [Gio.Resolver.lookupByName] and their async variants$(RPAREN) and SRV
- * $(LPAREN)service$(RPAREN) records $(LPAREN)[Gio.Resolver.lookupService]$(RPAREN).
- * [Gio.NetworkAddress] and [Gio.NetworkService] provide wrappers
+ * resolution, for hostnames $(LPAREN)[gio.resolver.Resolver.lookupByAddress],
+ * [gio.resolver.Resolver.lookupByName] and their async variants$(RPAREN) and SRV
+ * $(LPAREN)service$(RPAREN) records $(LPAREN)[gio.resolver.Resolver.lookupService]$(RPAREN).
+ * [gio.network_address.NetworkAddress] and [gio.network_service.NetworkService] provide wrappers
  * around `GResolver` functionality that also implement
- * [Gio.SocketConnectable], making it easy to connect to a remote
+ * [gio.socket_connectable.SocketConnectable], making it easy to connect to a remote
  * host/service.
- * The default resolver $(LPAREN)see [Gio.Resolver.getDefault]$(RPAREN) has a timeout of
+ * The default resolver $(LPAREN)see [gio.resolver.Resolver.getDefault]$(RPAREN) has a timeout of
  * 30s set on it since GLib 2.78. Earlier versions of GLib did not support
  * resolver timeouts.
  * This is an abstract type; subclasses of it implement different resolvers for
@@ -9035,7 +9035,7 @@ struct GResolverPrivate;
  * Applications and libraries often contain binary or textual data that is
  * really part of the application, rather than user data. For instance
  * [`GtkBuilder`](https://docs.gtk.org/gtk4/class.Builder.html) `.ui` files,
- * splashscreen images, [Gio.Menu] markup XML, CSS files, icons, etc.
+ * splashscreen images, [gio.menu.Menu] markup XML, CSS files, icons, etc.
  * These are often shipped as files in `\$datadir/appname`, or manually
  * included as literal strings in the code.
  * The `GResource` API and the
@@ -9109,7 +9109,7 @@ struct GResolverPrivate;
  * Java-style path prefixes $(LPAREN)like in the above example$(RPAREN) to avoid conflicts.
  * You can then use [`glib-compile-resources`](glib-compile-resources.html) to
  * compile the XML to a binary bundle that you can load with
- * [Gio.Resource.load]. However, it’s more common to use the
+ * [gio.resource.Resource.load]. However, it’s more common to use the
  * `--generate-source` and `--generate-header` arguments to create a source file
  * and header to link directly into your application.
  * This will generate `get_resource$(LPAREN)$(RPAREN)`, `register_resource$(LPAREN)$(RPAREN)` and
@@ -9123,7 +9123,7 @@ struct GResolverPrivate;
  * func@Gio.resources_open_stream to stream the data or
  * func@Gio.resources_lookup_data to get a direct pointer to the data. You can
  * also use URIs like `resource:///org/gtk/Example/data/splashscreen.png` with
- * [Gio.File] to access the resource data.
+ * [gio.file.File] to access the resource data.
  * Some higher-level APIs, such as [`GtkApplication`](https://docs.gtk.org/gtk4/class.Application.html),
  * will automatically load resources from certain well-known paths in the
  * resource namespace as a convenience. See the documentation for those APIs
@@ -9175,7 +9175,7 @@ struct GResource;
 
 /**
  * `GSeekable` is implemented by streams $(LPAREN)implementations of
- * [Gio.InputStream] or [Gio.OutputStream]$(RPAREN) that support seeking.
+ * [gio.input_stream.InputStream] or [gio.output_stream.OutputStream]$(RPAREN) that support seeking.
  * Seekable streams largely fall into two categories: resizable and
  * fixed-size.
  * `GSeekable` on fixed-sized streams is approximately the same as POSIX
@@ -9230,7 +9230,7 @@ struct GSeekableIface
  * Reads and writes can be considered to be non-blocking.  Reading
  * settings with `GSettings` is typically extremely fast: on
  * approximately the same order of magnitude $(LPAREN)but slower than$(RPAREN) a
- * [GLib.HashTable] lookup.  Writing settings is also extremely fast in
+ * [glib.hash_table.HashTable] lookup.  Writing settings is also extremely fast in
  * terms of time to return to your application, but can be extremely expensive
  * for other threads and other processes.  Many settings backends
  * $(LPAREN)including dconf$(RPAREN) have lazy initialisation which means in the common
@@ -9240,7 +9240,7 @@ struct GSeekableIface
  * only ever modify `GSettings` keys in response to explicit user action.
  * Particular care should be paid to ensure that modifications are not
  * made during startup — for example, when setting the initial value
- * of preferences widgets.  The built-in [Gio.Settings.bind]
+ * of preferences widgets.  The built-in [gio.settings.Settings.bind]
  * functionality is careful not to write settings in response to notify signals
  * as a result of modifications that it makes to widgets.
  * When creating a `GSettings` instance, you have to specify a schema
@@ -9261,7 +9261,7 @@ struct GSeekableIface
  * they often did in GConf.
  * Unlike other configuration systems $(LPAREN)like GConf$(RPAREN), GSettings does not
  * restrict keys to basic types like strings and numbers. GSettings stores
- * values as [GLib.VariantG], and allows any [GLib.VariantType] for
+ * values as [glib.variant.VariantG], and allows any [glib.variant_type.VariantType] for
  * keys. Key names are restricted to lowercase characters, numbers and `-`.
  * Furthermore, the names must begin with a lowercase character, must not end
  * with a `-`, and must not contain consecutive dashes.
@@ -9290,7 +9290,7 @@ struct GSeekableIface
  * <default l10n\='messages' context\='Banned words'>['bad', 'words']</default>
  * ```
  * Translations of default values must remain syntactically valid serialized
- * [GLib.VariantG]s (e.g. retaining any surrounding quotation marks) or
+ * [glib.variant.VariantG]s (e.g. retaining any surrounding quotation marks) or
  * runtime errors will occur.
  * GSettings uses schemas in a compact binary form that is created
  * by the [`glib-compile-schemas`](glib-compile-schemas.html)
@@ -9307,13 +9307,13 @@ struct GSeekableIface
  * and schema ID should match. For schemas which deal with settings not
  * associated with one named application, the ID should not use
  * StudlyCaps, e.g. `org.gnome.font-rendering`.
- * In addition to [GLib.VariantG] types, keys can have types that have
+ * In addition to [glib.variant.VariantG] types, keys can have types that have
  * enumerated types. These can be described by a `<choice>`,
  * `<enum>` or `<flags>` element, as seen in the
  * second example below. The underlying type of such a key
- * is string, but you can use [Gio.Settings.getEnum],
- * [Gio.Settings.setEnum], [Gio.Settings.getFlags],
- * [Gio.Settings.setFlags] access the numeric values corresponding to
+ * is string, but you can use [gio.settings.Settings.getEnum],
+ * [gio.settings.Settings.setEnum], [gio.settings.Settings.getFlags],
+ * [gio.settings.Settings.setFlags] access the numeric values corresponding to
  * the string value of enum and flags keys.
  * An example for default value:
  * ```xml
@@ -9383,7 +9383,7 @@ struct GSeekableIface
  * override’ files. These are keyfiles in the same directory as the XML
  * schema sources which can override default values. The schema ID serves
  * as the group name in the key file, and the values are expected in
- * serialized [GLib.VariantG] form, as in the following example:
+ * serialized [glib.variant.VariantG] form, as in the following example:
  * ```
  * [org.gtk.Example]
  * key1\='string'
@@ -9392,11 +9392,11 @@ struct GSeekableIface
  * `glib-compile-schemas` expects schema files to have the extension
  * `.gschema.override`.
  * ## Binding
- * A very convenient feature of GSettings lets you bind [GObject.ObjectG]
- * properties directly to settings, using [Gio.Settings.bind]. Once a
- * [GObject.ObjectG] property has been bound to a setting, changes on
+ * A very convenient feature of GSettings lets you bind [gobject.object.ObjectG]
+ * properties directly to settings, using [gio.settings.Settings.bind]. Once a
+ * [gobject.object.ObjectG] property has been bound to a setting, changes on
  * either side are automatically propagated to the other side. GSettings handles
- * details like mapping between [GObject.ObjectG] and [GLib.VariantG]
+ * details like mapping between [gobject.object.ObjectG] and [glib.variant.VariantG]
  * types, and preventing infinite cycles.
  * This makes it very easy to hook up a preferences dialog to the
  * underlying settings. To make this even more convenient, GSettings
@@ -9406,9 +9406,9 @@ struct GSeekableIface
  * `G_SETTINGS_BIND_NO_SENSITIVITY` flag.
  * ## Relocatable schemas
  * A relocatable schema is one with no `path` attribute specified on its
- * `<schema>` element. By using [Gio.Settings.newWithPath], a `GSettings`
+ * `<schema>` element. By using [gio.settings.Settings.newWithPath], a `GSettings`
  * object can be instantiated for a relocatable schema, assigning a path to the
- * instance. Paths passed to [Gio.Settings.newWithPath] will typically be
+ * instance. Paths passed to [gio.settings.Settings.newWithPath] will typically be
  * constructed dynamically from a constant prefix plus some form of instance
  * identifier; but they must still be valid GSettings paths. Paths could also
  * be constant and used with a globally installed schema originating from a
@@ -9480,7 +9480,7 @@ struct GSettings
 /**
  * The `GSettingsBackend` interface defines a generic interface for
  * non-strictly-typed data that is stored in a hierarchy. To implement
- * an alternative storage backend for [Gio.Settings], you need to
+ * an alternative storage backend for [gio.settings.Settings], you need to
  * implement the `GSettingsBackend` interface and then make it implement the
  * extension point `G_SETTINGS_BACKEND_EXTENSION_POINT_NAME`.
  * The interface defines methods for reading and writing values, a
@@ -9490,8 +9490,8 @@ struct GSettings
  * implementations must carefully adhere to the expectations of
  * callers that are documented on each of the interface methods.
  * Some of the `GSettingsBackend` functions accept or return a
- * [GLib.Tree]. These trees always have strings as keys and
- * [GLib.VariantG] as values.
+ * [glib.tree.Tree]. These trees always have strings as keys and
+ * [glib.variant.VariantG] as values.
  * The `GSettingsBackend` API is exported to allow third-party
  * implementations, but does not carry the same stability guarantees
  * as the public GIO API. For this reason, you have to define the
@@ -9585,7 +9585,7 @@ struct GSettingsClass
 struct GSettingsPrivate;
 
 /**
- * The [Gio.SettingsSchemaSource] and `GSettingsSchema` APIs provide a
+ * The [gio.settings_schema_source.SettingsSchemaSource] and `GSettingsSchema` APIs provide a
  * mechanism for advanced control over the loading of schemas and a
  * mechanism for introspecting their content.
  * Plugin loading systems that wish to provide plugins a way to access
@@ -9593,7 +9593,7 @@ struct GSettingsPrivate;
  * settings visible to GSettings.  Typically, a plugin will want to ship
  * the schema along with itself and it won't be installed into the
  * standard system directories for schemas.
- * [Gio.SettingsSchemaSource] provides a mechanism for dealing with this
+ * [gio.settings_schema_source.SettingsSchemaSource] provides a mechanism for dealing with this
  * by allowing the creation of a new ‘schema source’ from which schemas can
  * be acquired.  This schema source can then become part of the metadata
  * associated with the plugin and queried whenever the plugin requires
@@ -9671,14 +9671,14 @@ struct GSettingsSchemaSource;
 
 /**
  * A `GSimpleAction` is the obvious simple implementation of the
- * [Gio.Action] interface. This is the easiest way to create an action for
- * purposes of adding it to a [Gio.SimpleActionGroup].
+ * [gio.action.Action] interface. This is the easiest way to create an action for
+ * purposes of adding it to a [gio.simple_action_group.SimpleActionGroup].
  */
 struct GSimpleAction;
 
 /**
- * `GSimpleActionGroup` is a hash table filled with [Gio.Action] objects,
- * implementing the [Gio.ActionGroup] and [Gio.ActionMap]
+ * `GSimpleActionGroup` is a hash table filled with [gio.action.Action] objects,
+ * implementing the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap]
  * interfaces.
  */
 struct GSimpleActionGroup
@@ -9699,9 +9699,9 @@ struct GSimpleActionGroupPrivate;
 
 /**
  * As of GLib 2.46, `GSimpleAsyncResult` is deprecated in favor of
- * [Gio.Task], which provides a simpler API.
- * `GSimpleAsyncResult` implements [Gio.AsyncResult].
- * `GSimpleAsyncResult` handles [Gio.AsyncReadyCallback]s, error
+ * [gio.task.Task], which provides a simpler API.
+ * `GSimpleAsyncResult` implements [gio.async_result.AsyncResult].
+ * `GSimpleAsyncResult` handles [gio.AsyncReadyCallback]s, error
  * reporting, operation cancellation and the final state of an operation,
  * completely transparent to the application. Results can be returned
  * as a pointer e.g. for functions that return data that is collected
@@ -9711,53 +9711,53 @@ struct GSimpleActionGroupPrivate;
  * are covered.
  * Most of the time, an application will not need to know of the details
  * of this API; it is handled transparently, and any necessary operations
- * are handled by [Gio.AsyncResult]’s interface. However, if implementing
+ * are handled by [gio.async_result.AsyncResult]’s interface. However, if implementing
  * a new GIO module, for writing language bindings, or for complex
  * applications that need better control of how asynchronous operations
  * are completed, it is important to understand this functionality.
  * `GSimpleAsyncResult`s are tagged with the calling function to ensure
  * that asynchronous functions and their finishing functions are used
  * together correctly.
- * To create a new `GSimpleAsyncResult`, call [Gio.SimpleAsyncResult.new_].
+ * To create a new `GSimpleAsyncResult`, call [gio.simple_async_result.SimpleAsyncResult.new_].
  * If the result needs to be created for a `GError`, use
- * [Gio.SimpleAsyncResult.newFromError] or
- * [Gio.SimpleAsyncResult.newTakeError]. If a `GError` is not available
+ * [gio.simple_async_result.SimpleAsyncResult.newFromError] or
+ * [gio.simple_async_result.SimpleAsyncResult.newTakeError]. If a `GError` is not available
  * $(LPAREN)e.g. the asynchronous operation doesn’t take a `GError` argument$(RPAREN),
  * but the result still needs to be created for an error condition, use
- * [Gio.SimpleAsyncResult.newError] $(LPAREN)or
- * [Gio.SimpleAsyncResult.setErrorVa] if your application or binding
+ * [gio.simple_async_result.SimpleAsyncResult.newError] $(LPAREN)or
+ * [gio.simple_async_result.SimpleAsyncResult.setErrorVa] if your application or binding
  * requires passing a variable argument list directly$(RPAREN), and the error can then
  * be propagated through the use of
- * [Gio.SimpleAsyncResult.propagateError].
+ * [gio.simple_async_result.SimpleAsyncResult.propagateError].
  * An asynchronous operation can be made to ignore a cancellation event by
- * calling [Gio.SimpleAsyncResult.setHandleCancellation] with a
+ * calling [gio.simple_async_result.SimpleAsyncResult.setHandleCancellation] with a
  * `GSimpleAsyncResult` for the operation and `FALSE`. This is useful for
  * operations that are dangerous to cancel, such as close $(LPAREN)which would
  * cause a leak if cancelled before being run$(RPAREN).
  * `GSimpleAsyncResult` can integrate into GLib’s event loop,
- * [GLib.MainLoop], or it can use [GLib.Thread]s.
- * [Gio.SimpleAsyncResult.complete] will finish an I/O task directly
+ * [glib.main_loop.MainLoop], or it can use [glib.thread.Thread]s.
+ * [gio.simple_async_result.SimpleAsyncResult.complete] will finish an I/O task directly
  * from the point where it is called.
- * [Gio.SimpleAsyncResult.completeInIdle] will finish it from an idle
+ * [gio.simple_async_result.SimpleAsyncResult.completeInIdle] will finish it from an idle
  * handler in the  thread-default main context $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN) where the `GSimpleAsyncResult`
- * was created. [Gio.SimpleAsyncResult.runInThread] will run the job in
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) where the `GSimpleAsyncResult`
+ * was created. [gio.simple_async_result.SimpleAsyncResult.runInThread] will run the job in
  * a separate thread and then use
- * [Gio.SimpleAsyncResult.completeInIdle] to deliver the result.
+ * [gio.simple_async_result.SimpleAsyncResult.completeInIdle] to deliver the result.
  * To set the results of an asynchronous function,
- * [Gio.SimpleAsyncResult.setOpResGpointer],
- * [Gio.SimpleAsyncResult.setOpResGboolean], and
- * [Gio.SimpleAsyncResult.setOpResGssize]
+ * [gio.simple_async_result.SimpleAsyncResult.setOpResGpointer],
+ * [gio.simple_async_result.SimpleAsyncResult.setOpResGboolean], and
+ * [gio.simple_async_result.SimpleAsyncResult.setOpResGssize]
  * are provided, setting the operation's result to a `gpointer`, `gboolean`, or
  * `gssize`, respectively.
  * Likewise, to get the result of an asynchronous function,
- * [Gio.SimpleAsyncResult.getOpResGpointer],
- * [Gio.SimpleAsyncResult.getOpResGboolean], and
- * [Gio.SimpleAsyncResult.getOpResGssize] are
+ * [gio.simple_async_result.SimpleAsyncResult.getOpResGpointer],
+ * [gio.simple_async_result.SimpleAsyncResult.getOpResGboolean], and
+ * [gio.simple_async_result.SimpleAsyncResult.getOpResGssize] are
  * provided, getting the operation’s result as a `gpointer`, `gboolean`, and
  * `gssize`, respectively.
  * For the details of the requirements implementations must respect, see
- * [Gio.AsyncResult].  A typical implementation of an asynchronous
+ * [gio.async_result.AsyncResult].  A typical implementation of an asynchronous
  * operation using `GSimpleAsyncResult` looks something like this:
  * ```c
  * static void
@@ -9780,7 +9780,7 @@ struct GSimpleActionGroupPrivate;
  * // the mainloop, so it's safe to complete the operation synchronously here.
  * // If, however, _baker_prepare_cake $(LPAREN)$(RPAREN) might call its callback without
  * // first returning to the mainloop — inadvisable, but some APIs do so —
- * // we would need to use [Gio.SimpleAsyncResult.completeInIdle].
+ * // we would need to use [gio.simple_async_result.SimpleAsyncResult.completeInIdle].
  * g_simple_async_result_complete $(LPAREN)result$(RPAREN);
  * g_object_unref $(LPAREN)result$(RPAREN);
  * }
@@ -9846,35 +9846,35 @@ struct GSimpleAsyncResult;
 struct GSimpleAsyncResultClass;
 
 /**
- * `GSimpleIOStream` creates a [Gio.IOStream] from an arbitrary
- * [Gio.InputStream] and [Gio.OutputStream]. This allows any pair of
- * input and output streams to be used with [Gio.IOStream] methods.
- * This is useful when you obtained a [Gio.InputStream] and a
- * [Gio.OutputStream] by other means, for instance creating them with
+ * `GSimpleIOStream` creates a [gio.iostream.IOStream] from an arbitrary
+ * [gio.input_stream.InputStream] and [gio.output_stream.OutputStream]. This allows any pair of
+ * input and output streams to be used with [gio.iostream.IOStream] methods.
+ * This is useful when you obtained a [gio.input_stream.InputStream] and a
+ * [gio.output_stream.OutputStream] by other means, for instance creating them with
  * platform specific methods as
- * [`[Gio.UnixInputStream.new_]`](../gio-unix/ctor.UnixInputStream.new.html)
+ * [`[gio.unix_input_stream.UnixInputStream.new_]`](../gio-unix/ctor.UnixInputStream.new.html)
  * $(LPAREN)from `gio-unix-2.0.pc` / `GioUnix-2.0`$(RPAREN), and you want to
- * take advantage of the methods provided by [Gio.IOStream].
+ * take advantage of the methods provided by [gio.iostream.IOStream].
  */
 struct GSimpleIOStream;
 
 /**
- * `GSimplePermission` is a trivial implementation of [Gio.Permission]
+ * `GSimplePermission` is a trivial implementation of [gio.permission.Permission]
  * that represents a permission that is either always or never allowed.  The
  * value is given at construction and doesn’t change.
- * Calling [Gio.Permission.acquire] or [Gio.Permission.release]
+ * Calling [gio.permission.Permission.acquire] or [gio.permission.Permission.release]
  * on a `GSimplePermission` will result in errors.
  */
 struct GSimplePermission;
 
 /**
- * `GSimpleProxyResolver` is a simple [Gio.ProxyResolver] implementation
+ * `GSimpleProxyResolver` is a simple [gio.proxy_resolver.ProxyResolver] implementation
  * that handles a single default proxy, multiple URI-scheme-specific
  * proxies, and a list of hosts that proxies should not be used for.
  * `GSimpleProxyResolver` is never the default proxy resolver, but it
  * can be used as the base class for another proxy resolver
  * implementation, or it can be created and used manually, such as
- * with [Gio.SocketClient.setProxyResolver].
+ * with [gio.socket_client.SocketClient.setProxyResolver].
  */
 struct GSimpleProxyResolver
 {
@@ -9906,23 +9906,23 @@ struct GSimpleProxyResolverPrivate;
  * It supports both the UNIX socket implementations and winsock2 on Windows.
  * `GSocket` is the platform independent base upon which the higher level
  * network primitives are based. Applications are not typically meant to
- * use it directly, but rather through classes like [Gio.SocketClient],
- * [Gio.SocketService] and [Gio.SocketConnection]. However there may
+ * use it directly, but rather through classes like [gio.socket_client.SocketClient],
+ * [gio.socket_service.SocketService] and [gio.socket_connection.SocketConnection]. However there may
  * be cases where direct use of `GSocket` is useful.
- * `GSocket` implements the [Gio.Initable] interface, so if it is manually
- * constructed by e.g. [GObject.ObjectG.new_] you must call
- * [Gio.Initable.init_] and check the results before using the object.
- * This is done automatically in [Gio.Socket.new_] and
- * [Gio.Socket.newFromFd], so these functions can return `NULL`.
+ * `GSocket` implements the [gio.initable.Initable] interface, so if it is manually
+ * constructed by e.g. [gobject.object.ObjectG.new_] you must call
+ * [gio.initable.Initable.init_] and check the results before using the object.
+ * This is done automatically in [gio.socket.Socket.new_] and
+ * [gio.socket.Socket.newFromFd], so these functions can return `NULL`.
  * Sockets operate in two general modes, blocking or non-blocking. When
  * in blocking mode all operations $(LPAREN)which don’t take an explicit blocking
  * parameter$(RPAREN) block until the requested operation
  * is finished or there is an error. In non-blocking mode all calls that
  * would block return immediately with a `G_IO_ERROR_WOULD_BLOCK` error.
  * To know when a call would successfully run you can call
- * [Gio.Socket.conditionCheck], or [Gio.Socket.conditionWait].
- * You can also use [Gio.Socket.createSource] and attach it to a
- * [GLib.MainContext] to get callbacks when I/O is possible.
+ * [gio.socket.Socket.conditionCheck], or [gio.socket.Socket.conditionWait].
+ * You can also use [gio.socket.Socket.createSource] and attach it to a
+ * [glib.main_context.MainContext] to get callbacks when I/O is possible.
  * Note that all sockets are always set to non blocking mode in the system, and
  * blocking mode is emulated in `GSocket`.
  * When working in non-blocking mode applications should always be able to
@@ -9951,7 +9951,7 @@ struct GSimpleProxyResolverPrivate;
  * [Nagle’s algorithm](https://en.wikipedia.org/wiki/Nagle%27s_algorithm) as it
  * typically does more harm than good on modern networks.
  * If your application needs Nagle’s algorithm enabled, call
- * [Gio.Socket.setOption] after constructing a `GSocket` to enable it:
+ * [gio.socket.Socket.setOption] after constructing a `GSocket` to enable it:
  * ```c
  * socket \= g_socket_new $(LPAREN)…, G_SOCKET_TYPE_STREAM, …$(RPAREN);
  * if $(LPAREN)socket !\= NULL$(RPAREN)
@@ -9971,8 +9971,8 @@ struct GSocket
 /**
  * `GSocketAddress` is the equivalent of
  * [`struct sockaddr`]$(LPAREN)$(RPAREN)(man:sockaddr3type) and its subtypes in the BSD sockets
- * API. This is an abstract class; use [Gio.InetSocketAddress] for
- * internet sockets, or [Gio.UnixSocketAddress] for UNIX domain sockets.
+ * API. This is an abstract class; use [gio.inet_socket_address.InetSocketAddress] for
+ * internet sockets, or [gio.unix_socket_address.UnixSocketAddress] for UNIX domain sockets.
  */
 struct GSocketAddress
 {
@@ -9992,16 +9992,16 @@ struct GSocketAddressClass
 
 /**
  * `GSocketAddressEnumerator` is an enumerator type for
- * [Gio.SocketAddress] instances. It is returned by enumeration functions
- * such as [Gio.SocketConnectable.enumerate], which returns a
- * `GSocketAddressEnumerator` to list each [Gio.SocketAddress] which could
- * be used to connect to that [Gio.SocketConnectable].
+ * [gio.socket_address.SocketAddress] instances. It is returned by enumeration functions
+ * such as [gio.socket_connectable.SocketConnectable.enumerate], which returns a
+ * `GSocketAddressEnumerator` to list each [gio.socket_address.SocketAddress] which could
+ * be used to connect to that [gio.socket_connectable.SocketConnectable].
  * Enumeration is typically a blocking operation, so the asynchronous methods
- * [Gio.SocketAddressEnumerator.nextAsync] and
- * [Gio.SocketAddressEnumerator.nextFinish] should be used where
+ * [gio.socket_address_enumerator.SocketAddressEnumerator.nextAsync] and
+ * [gio.socket_address_enumerator.SocketAddressEnumerator.nextFinish] should be used where
  * possible.
  * Each `GSocketAddressEnumerator` can only be enumerated once. Once
- * [Gio.SocketAddressEnumerator.next] has returned `NULL`, further
+ * [gio.socket_address_enumerator.SocketAddressEnumerator.next] has returned `NULL`, further
  * enumeration with that `GSocketAddressEnumerator` is not possible, and it can
  * be unreffed.
  */
@@ -10018,17 +10018,17 @@ struct GSocketAddressEnumeratorClass
   GObjectClass parentClass;
 
   /**
-   * Virtual method for [Gio.SocketAddressEnumerator.next].
+   * Virtual method for [gio.socket_address_enumerator.SocketAddressEnumerator.next].
    */
   extern(C) GSocketAddress* function(GSocketAddressEnumerator* enumerator, GCancellable* cancellable, GError** _err) next;
 
   /**
-   * Virtual method for [Gio.SocketAddressEnumerator.nextAsync].
+   * Virtual method for [gio.socket_address_enumerator.SocketAddressEnumerator.nextAsync].
    */
   extern(C) void function(GSocketAddressEnumerator* enumerator, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nextAsync;
 
   /**
-   * Virtual method for [Gio.SocketAddressEnumerator.nextFinish].
+   * Virtual method for [gio.socket_address_enumerator.SocketAddressEnumerator.nextFinish].
    */
   extern(C) GSocketAddress* function(GSocketAddressEnumerator* enumerator, GAsyncResult* result, GError** _err) nextFinish;
 }
@@ -10063,10 +10063,10 @@ struct GSocketClass
  * a network host using a connection oriented socket type.
  * You create a `GSocketClient` object, set any options you want, and then
  * call a sync or async connect operation, which returns a
- * [Gio.SocketConnection] subclass on success.
- * The type of the [Gio.SocketConnection] object returned depends on the
+ * [gio.socket_connection.SocketConnection] subclass on success.
+ * The type of the [gio.socket_connection.SocketConnection] object returned depends on the
  * type of the underlying socket that is in use. For instance, for a TCP/IP
- * connection it will be a [Gio.TcpConnection].
+ * connection it will be a [gio.tcp_connection.TcpConnection].
  * As `GSocketClient` is a lightweight object, you don't need to cache it. You
  * can just create a new one any time you need one.
  */
@@ -10097,8 +10097,8 @@ struct GSocketClientPrivate;
 /**
  * Objects that describe one or more potential socket endpoints
  * implement `GSocketConnectable`. Callers can then use
- * [Gio.SocketConnectable.enumerate] to get a
- * [Gio.SocketAddressEnumerator] to try out each socket address in turn
+ * [gio.socket_connectable.SocketConnectable.enumerate] to get a
+ * [gio.socket_address_enumerator.SocketAddressEnumerator] to try out each socket address in turn
  * until one succeeds, as shown in the sample code below.
  * ```c
  * MyConnectionType *
@@ -10180,19 +10180,19 @@ struct GSocketConnectableIface
 }
 
 /**
- * `GSocketConnection` is a [Gio.IOStream] for a connected socket. They
- * can be created either by [Gio.SocketClient] when connecting to a host,
- * or by [Gio.SocketListener] when accepting a new client.
+ * `GSocketConnection` is a [gio.iostream.IOStream] for a connected socket. They
+ * can be created either by [gio.socket_client.SocketClient] when connecting to a host,
+ * or by [gio.socket_listener.SocketListener] when accepting a new client.
  * The type of the `GSocketConnection` object returned from these calls
  * depends on the type of the underlying socket that is in use. For
- * instance, for a TCP/IP connection it will be a [Gio.TcpConnection].
+ * instance, for a TCP/IP connection it will be a [gio.tcp_connection.TcpConnection].
  * Choosing what type of object to construct is done with the socket
  * connection factory, and it is possible for third parties to register
  * custom socket connection types for specific combination of socket
- * family/type/protocol using [Gio.SocketConnection.factoryRegisterType].
- * To close a `GSocketConnection`, use [Gio.IOStream.close]. Closing both
- * substreams of the [Gio.IOStream] separately will not close the
- * underlying [Gio.Socket].
+ * family/type/protocol using [gio.socket_connection.SocketConnection.factoryRegisterType].
+ * To close a `GSocketConnection`, use [gio.iostream.IOStream.close]. Closing both
+ * substreams of the [gio.iostream.IOStream] separately will not close the
+ * underlying [gio.socket.Socket].
  */
 struct GSocketConnection
 {
@@ -10222,21 +10222,21 @@ struct GSocketConnectionPrivate;
 
 /**
  * A `GSocketControlMessage` is a special-purpose utility message that
- * can be sent to or received from a [Gio.Socket]. These types of
+ * can be sent to or received from a [gio.socket.Socket]. These types of
  * messages are often called ‘ancillary data’.
  * The message can represent some sort of special instruction to or
  * information from the socket or can represent a special kind of
  * transfer to the peer $(LPAREN)for example, sending a file descriptor over
  * a UNIX socket$(RPAREN).
- * These messages are sent with [Gio.Socket.sendMessage] and received
- * with [Gio.Socket.receiveMessage].
+ * These messages are sent with [gio.socket.Socket.sendMessage] and received
+ * with [gio.socket.Socket.receiveMessage].
  * To extend the set of control message that can be sent, subclass this
  * class and override the `get_size`, `get_level`, `get_type` and `serialize`
  * methods.
  * To extend the set of control messages that can be received, subclass
  * this class and implement the `deserialize` method. Also, make sure your
- * class is registered with the [GObject.GType] type system before calling
- * [Gio.Socket.receiveMessage] to read such a message.
+ * class is registered with the [gobject.size_t] type system before calling
+ * [gio.socket.Socket.receiveMessage] to read such a message.
  */
 struct GSocketControlMessage
 {
@@ -10295,14 +10295,14 @@ struct GSocketControlMessagePrivate;
  * of server sockets and helps you accept sockets from any of the
  * socket, either sync or async.
  * Add addresses and ports to listen on using
- * [Gio.SocketListener.addAddress] and
- * [Gio.SocketListener.addInetPort]. These will be listened on until
- * [Gio.SocketListener.close] is called. Dropping your final reference to
- * the `GSocketListener` will not cause [Gio.SocketListener.close] to be
+ * [gio.socket_listener.SocketListener.addAddress] and
+ * [gio.socket_listener.SocketListener.addInetPort]. These will be listened on until
+ * [gio.socket_listener.SocketListener.close] is called. Dropping your final reference to
+ * the `GSocketListener` will not cause [gio.socket_listener.SocketListener.close] to be
  * called implicitly, as some references to the `GSocketListener` may be held
  * internally.
  * If you want to implement a network server, also look at
- * [Gio.SocketService] and [Gio.ThreadedSocketService] which are
+ * [gio.socket_service.SocketService] and [gio.threaded_socket_service.ThreadedSocketService] which are
  * subclasses of `GSocketListener` that make this even easier.
  */
 struct GSocketListener
@@ -10344,23 +10344,23 @@ struct GSocketPrivate;
 /**
  * A `GSocketService` is an object that represents a service that
  * is provided to the network or over local sockets.  When a new
- * connection is made to the service the [Gio.SocketService.incoming]
+ * connection is made to the service the [gio.socket_service.SocketService.incoming]
  * signal is emitted.
- * A `GSocketService` is a subclass of [Gio.SocketListener] and you need
+ * A `GSocketService` is a subclass of [gio.socket_listener.SocketListener] and you need
  * to add the addresses you want to accept connections on with the
- * [Gio.SocketListener] APIs.
+ * [gio.socket_listener.SocketListener] APIs.
  * There are two options for implementing a network service based on
  * `GSocketService`. The first is to create the service using
- * [Gio.SocketService.new_] and to connect to the
- * [Gio.SocketService.incoming] signal. The second is to subclass
+ * [gio.socket_service.SocketService.new_] and to connect to the
+ * [gio.socket_service.SocketService.incoming] signal. The second is to subclass
  * `GSocketService` and override the default signal handler implementation.
  * In either case, the handler must immediately return, or else it
  * will block additional incoming connections from being serviced.
  * If you are interested in writing connection handlers that contain
- * blocking code then see [Gio.ThreadedSocketService].
+ * blocking code then see [gio.threaded_socket_service.ThreadedSocketService].
  * The socket service runs on the main loop of the
  * thread-default context $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN) of the thread it is
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) of the thread it is
  * created in, and is not threadsafe in general. However, the calls to start and
  * stop the service are thread-safe so these can be used from threads that
  * handle incoming clients.
@@ -10408,11 +10408,11 @@ struct GSocketServicePrivate;
  * specific server hostname like ‘xmpp.example.com’, an XMPP client
  * would look up the `xmpp-client` SRV record for ‘example.com’, and
  * then connect to whatever host was pointed to by that record.
- * You can use [Gio.Resolver.lookupService] or
- * [Gio.Resolver.lookupServiceAsync] to find the `GSrvTarget`s
+ * You can use [gio.resolver.Resolver.lookupService] or
+ * [gio.resolver.Resolver.lookupServiceAsync] to find the `GSrvTarget`s
  * for a given service. However, if you are simply planning to connect
- * to the remote service, you can use [Gio.NetworkService]’s
- * [Gio.SocketConnectable] interface and not need to worry about
+ * to the remote service, you can use [gio.network_service.NetworkService]’s
+ * [gio.socket_connectable.SocketConnectable] interface and not need to worry about
  * `GSrvTarget` at all.
  */
 struct GSrvTarget;
@@ -10438,21 +10438,21 @@ struct GStaticResource
  * `GSubprocess` allows the creation of and interaction with child
  * processes.
  * Processes can be communicated with using standard GIO-style APIs $(LPAREN)ie:
- * [Gio.InputStream], [Gio.OutputStream]$(RPAREN). There are GIO-style APIs
+ * [gio.input_stream.InputStream], [gio.output_stream.OutputStream]$(RPAREN). There are GIO-style APIs
  * to wait for process termination $(LPAREN)ie: cancellable and with an asynchronous
  * variant$(RPAREN).
  * There is an API to force a process to terminate, as well as a
  * race-free API for sending UNIX signals to a subprocess.
  * One major advantage that GIO brings over the core GLib library is
  * comprehensive API for asynchronous I/O, such
- * [Gio.OutputStream.spliceAsync].  This makes `GSubprocess`
+ * [gio.output_stream.OutputStream.spliceAsync].  This makes `GSubprocess`
  * significantly more powerful and flexible than equivalent APIs in
  * some other languages such as the `subprocess.py`
  * included with Python.  For example, using `GSubprocess` one could
  * create two child processes, reading standard output from the first,
  * processing it, and writing to the input stream of the second, all
  * without blocking the main loop.
- * A powerful [Gio.Subprocess.communicate] API is provided similar to the
+ * A powerful [gio.subprocess.Subprocess.communicate] API is provided similar to the
  * `communicate$(LPAREN)$(RPAREN)` method of `subprocess.py`. This enables very easy
  * interaction with a subprocess that has been opened with pipes.
  * `GSubprocess` defaults to tight control over the file descriptors open
@@ -10463,7 +10463,7 @@ struct GStaticResource
  * specified$(RPAREN).
  * `GSubprocess` will quickly reap all child processes as they exit,
  * avoiding ‘zombie processes’ remaining around for long periods of
- * time.  [Gio.Subprocess.wait] can be used to wait for this to happen,
+ * time.  [gio.subprocess.Subprocess.wait] can be used to wait for this to happen,
  * but it will happen even without the call being explicitly made.
  * As a matter of principle, `GSubprocess` has no API that accepts
  * shell-style space-separated strings.  It will, however, match the
@@ -10474,14 +10474,14 @@ struct GStaticResource
  * launcher environment instead.
  * `GSubprocess` attempts to have a very simple API for most uses $(LPAREN)ie:
  * spawning a subprocess with arguments and support for most typical
- * kinds of input and output redirection$(RPAREN).  See [Gio.Subprocess.new_]. The
- * [Gio.SubprocessLauncher] API is provided for more complicated cases
+ * kinds of input and output redirection$(RPAREN).  See [gio.subprocess.Subprocess.new_]. The
+ * [gio.subprocess_launcher.SubprocessLauncher] API is provided for more complicated cases
  * $(LPAREN)advanced types of redirection, environment variable manipulation,
  * change of working directory, child setup functions, etc$(RPAREN).
  * A typical use of `GSubprocess` will involve calling
- * [Gio.Subprocess.new_], followed by [Gio.Subprocess.waitAsync] or
- * [Gio.Subprocess.wait].  After the process exits, the status can be
- * checked using functions such as [Gio.Subprocess.getIfExited] $(LPAREN)which
+ * [gio.subprocess.Subprocess.new_], followed by [gio.subprocess.Subprocess.waitAsync] or
+ * [gio.subprocess.Subprocess.wait].  After the process exits, the status can be
+ * checked using functions such as [gio.subprocess.Subprocess.getIfExited] $(LPAREN)which
  * are similar to the familiar `WIFEXITED`-style POSIX macros$(RPAREN).
  */
 struct GSubprocess;
@@ -10490,7 +10490,7 @@ struct GSubprocess;
  * This class contains a set of options for launching child processes,
  * such as where its standard input and output will be directed, the
  * argument list, the environment, and more.
- * While the [Gio.Subprocess] class has high level functions covering
+ * While the [gio.subprocess.Subprocess] class has high level functions covering
  * popular cases, use of this class allows access to more advanced
  * options.  It can also be used to launch multiple subprocesses with
  * a similar configuration.
@@ -10500,29 +10500,29 @@ struct GSubprocessLauncher;
 /**
  * A `GTask` represents and manages a cancellable ‘task’.
  * ## Asynchronous operations
- * The most common usage of `GTask` is as a [Gio.AsyncResult], to
+ * The most common usage of `GTask` is as a [gio.async_result.AsyncResult], to
  * manage data during an asynchronous operation. You call
- * [Gio.Task.new_] in the ‘start’ method, followed by
- * [Gio.Task.setTaskData] and the like if you need to keep some
+ * [gio.task.Task.new_] in the ‘start’ method, followed by
+ * [gio.task.Task.setTaskData] and the like if you need to keep some
  * additional data associated with the task, and then pass the
  * task object around through your asynchronous operation.
  * Eventually, you will call a method such as
- * [Gio.Task.returnPointer] or [Gio.Task.returnError], which
+ * [gio.task.Task.returnPointer] or [gio.task.Task.returnError], which
  * will save the value you give it and then invoke the task’s callback
  * function in the thread-default main context $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN)
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN)
  * where it was created $(LPAREN)waiting until the next iteration of the main
  * loop first, if necessary$(RPAREN). The caller will pass the `GTask` back to
- * the operation’s finish function $(LPAREN)as a [Gio.AsyncResult]$(RPAREN), and you can
- * use [Gio.Task.propagatePointer] or the like to extract the
+ * the operation’s finish function $(LPAREN)as a [gio.async_result.AsyncResult]$(RPAREN), and you can
+ * use [gio.task.Task.propagatePointer] or the like to extract the
  * return value.
- * Using `GTask` requires the thread-default [GLib.MainContext] from when
+ * Using `GTask` requires the thread-default [glib.main_context.MainContext] from when
  * the `GTask` was constructed to be running at least until the task has
  * completed and its data has been freed.
  * If a `GTask` has been constructed and its callback set, it is an error to
  * not call `g_task_return_*$(LPAREN)$(RPAREN)` on it. GLib will warn at runtime if this happens
  * $(LPAREN)since 2.76$(RPAREN).
- * Here is an example for using `GTask` as a [Gio.AsyncResult]:
+ * Here is an example for using `GTask` as a [gio.async_result.AsyncResult]:
  * ```c
  * typedef struct {
  * CakeFrostingType frosting;
@@ -10551,7 +10551,7 @@ struct GSubprocessLauncher;
  * if $(LPAREN)!cake_decorate $(LPAREN)cake, decoration->frosting, decoration->message, &error$(RPAREN)$(RPAREN)
  * {
  * g_object_unref $(LPAREN)cake$(RPAREN);
- * // [Gio.Task.returnError] takes ownership of error
+ * // [gio.task.Task.returnError] takes ownership of error
  * g_task_return_error $(LPAREN)task, error$(RPAREN);
  * g_object_unref $(LPAREN)task$(RPAREN);
  * return;
@@ -10607,14 +10607,14 @@ struct GSubprocessLauncher;
  * ## Chained asynchronous operations
  * `GTask` also tries to simplify asynchronous operations that
  * internally chain together several smaller asynchronous
- * operations. [Gio.Task.getCancellable], [Gio.Task.getContext],
- * and [Gio.Task.getPriority] allow you to get back the task’s
- * [Gio.Cancellable], [GLib.MainContext], and
+ * operations. [gio.task.Task.getCancellable], [gio.task.Task.getContext],
+ * and [gio.task.Task.getPriority] allow you to get back the task’s
+ * [gio.cancellable.Cancellable], [glib.main_context.MainContext], and
  * [I/O priority](iface.AsyncResult.html#io-priority)
  * when starting a new subtask, so you don’t have to keep track
- * of them yourself. [Gio.Task.attachSource] simplifies the case
+ * of them yourself. [gio.task.Task.attachSource] simplifies the case
  * of waiting for a source to fire $(LPAREN)automatically using the correct
- * [GLib.MainContext] and priority$(RPAREN).
+ * [glib.main_context.MainContext] and priority$(RPAREN).
  * Here is an example for chained asynchronous operations:
  * ```c
  * typedef struct {
@@ -10723,10 +10723,10 @@ struct GSubprocessLauncher;
  * }
  * ```
  * ## Asynchronous operations from synchronous ones
- * You can use [Gio.Task.runInThread] to turn a synchronous
+ * You can use [gio.task.Task.runInThread] to turn a synchronous
  * operation into an asynchronous one, by running it in a thread.
  * When it completes, the result will be dispatched to the thread-default main
- * context $(LPAREN)see [GLib.MainContext.pushThreadDefault]$(RPAREN) where the `GTask`
+ * context $(LPAREN)see [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) where the `GTask`
  * was created.
  * Running a task in a thread:
  * ```c
@@ -10792,11 +10792,11 @@ struct GSubprocessLauncher;
  * }
  * ```
  * ## Adding cancellability to uncancellable tasks
- * Finally, [Gio.Task.runInThread] and
- * [Gio.Task.runInThreadSync] can be used to turn an uncancellable
+ * Finally, [gio.task.Task.runInThread] and
+ * [gio.task.Task.runInThreadSync] can be used to turn an uncancellable
  * operation into a cancellable one. If you call
- * [Gio.Task.setReturnOnCancel], passing `TRUE`, then if the task’s
- * [Gio.Cancellable] is cancelled, it will return control back to the
+ * [gio.task.Task.setReturnOnCancel], passing `TRUE`, then if the task’s
+ * [gio.cancellable.Cancellable] is cancelled, it will return control back to the
  * caller immediately, while allowing the task thread to continue running in the
  * background $(LPAREN)and simply discarding its result when it finally does finish$(RPAREN).
  * Provided that the task thread is careful about how it uses
@@ -10826,7 +10826,7 @@ struct GSubprocessLauncher;
  * // If the task has already been cancelled, then we don’t want to add
  * // the cake to the cake cache. Likewise, we don’t  want to have the
  * // task get cancelled in the middle of updating the cache.
- * // [Gio.Task.setReturnOnCancel] will return %TRUE here if it managed
+ * // [gio.task.Task.setReturnOnCancel] will return %TRUE here if it managed
  * // to disable return-on-cancel, or %FALSE if the task was cancelled
  * // before it could.
  * if $(LPAREN)g_task_set_return_on_cancel $(LPAREN)task, FALSE$(RPAREN)$(RPAREN)
@@ -10883,46 +10883,46 @@ struct GSubprocessLauncher;
  * return cake;
  * }
  * ```
- * ## Porting from [Gio.SimpleAsyncResult]
- * `GTask`’s API attempts to be simpler than [Gio.SimpleAsyncResult]’s
+ * ## Porting from [gio.simple_async_result.SimpleAsyncResult]
+ * `GTask`’s API attempts to be simpler than [gio.simple_async_result.SimpleAsyncResult]’s
  * in several ways:
- * - You can save task-specific data with [Gio.Task.setTaskData], and
- * retrieve it later with [Gio.Task.getTaskData]. This replaces the
- * abuse of [Gio.SimpleAsyncResult.setOpResGpointer] for the same
- * purpose with [Gio.SimpleAsyncResult].
+ * - You can save task-specific data with [gio.task.Task.setTaskData], and
+ * retrieve it later with [gio.task.Task.getTaskData]. This replaces the
+ * abuse of [gio.simple_async_result.SimpleAsyncResult.setOpResGpointer] for the same
+ * purpose with [gio.simple_async_result.SimpleAsyncResult].
  * - In addition to the task data, `GTask` also keeps track of the
- * [priority](iface.AsyncResult.html#io-priority), [Gio.Cancellable],
- * and [GLib.MainContext] associated with the task, so tasks that
+ * [priority](iface.AsyncResult.html#io-priority), [gio.cancellable.Cancellable],
+ * and [glib.main_context.MainContext] associated with the task, so tasks that
  * consist of a chain of simpler asynchronous operations will have easy access
  * to those values when starting each sub-task.
- * - [Gio.Task.returnErrorIfCancelled] provides simplified
+ * - [gio.task.Task.returnErrorIfCancelled] provides simplified
  * handling for cancellation. In addition, cancellation
  * overrides any other `GTask` return value by default, like
- * [Gio.SimpleAsyncResult] does when
- * [Gio.SimpleAsyncResult.setCheckCancellable] is called.
- * $(LPAREN)You can use [Gio.Task.setCheckCancellable] to turn off that
- * behavior.$(RPAREN) On the other hand, [Gio.Task.runInThread]
+ * [gio.simple_async_result.SimpleAsyncResult] does when
+ * [gio.simple_async_result.SimpleAsyncResult.setCheckCancellable] is called.
+ * $(LPAREN)You can use [gio.task.Task.setCheckCancellable] to turn off that
+ * behavior.$(RPAREN) On the other hand, [gio.task.Task.runInThread]
  * guarantees that it will always run your
- * `task_func`, even if the task’s [Gio.Cancellable]
+ * `task_func`, even if the task’s [gio.cancellable.Cancellable]
  * is already cancelled before the task gets a chance to run;
  * you can start your `task_func` with a
- * [Gio.Task.returnErrorIfCancelled] check if you need the
+ * [gio.task.Task.returnErrorIfCancelled] check if you need the
  * old behavior.
- * - The ‘return’ methods $(LPAREN)eg, [Gio.Task.returnPointer]$(RPAREN)
+ * - The ‘return’ methods $(LPAREN)eg, [gio.task.Task.returnPointer]$(RPAREN)
  * automatically cause the task to be ‘completed’ as well, and
  * there is no need to worry about the ‘complete’ vs ‘complete in idle’
  * distinction. $(LPAREN)`GTask` automatically figures out
  * whether the task’s callback can be invoked directly, or
- * if it needs to be sent to another [GLib.MainContext], or delayed
- * until the next iteration of the current [GLib.MainContext].$(RPAREN)
+ * if it needs to be sent to another [glib.main_context.MainContext], or delayed
+ * until the next iteration of the current [glib.main_context.MainContext].$(RPAREN)
  * - The ‘finish’ functions for `GTask` based operations are generally
- * much simpler than [Gio.SimpleAsyncResult] ones, normally consisting
- * of only a single call to [Gio.Task.propagatePointer] or the like.
- * Since [Gio.Task.propagatePointer] ‘steals’ the return value from
+ * much simpler than [gio.simple_async_result.SimpleAsyncResult] ones, normally consisting
+ * of only a single call to [gio.task.Task.propagatePointer] or the like.
+ * Since [gio.task.Task.propagatePointer] ‘steals’ the return value from
  * the `GTask`, it is not necessary to juggle pointers around to
  * prevent it from being freed twice.
- * - With [Gio.SimpleAsyncResult], it was common to call
- * [Gio.SimpleAsyncResult.propagateError] from the
+ * - With [gio.simple_async_result.SimpleAsyncResult], it was common to call
+ * [gio.simple_async_result.SimpleAsyncResult.propagateError] from the
  * `_finish$(LPAREN)$(RPAREN)` wrapper function, and have
  * virtual method implementations only deal with successful
  * returns. This behavior is deprecated, because it makes it
@@ -10931,12 +10931,12 @@ struct GSubprocessLauncher;
  * simple wrapper, and the virtual method should call an
  * appropriate `g_task_propagate_` function.
  * Note that wrapper methods can now use
- * [Gio.AsyncResult.legacyPropagateError] to do old-style
- * [Gio.SimpleAsyncResult] error-returning behavior, and
- * [Gio.AsyncResult.isTagged] to check if a result is tagged as
+ * [gio.async_result.AsyncResult.legacyPropagateError] to do old-style
+ * [gio.simple_async_result.SimpleAsyncResult] error-returning behavior, and
+ * [gio.async_result.AsyncResult.isTagged] to check if a result is tagged as
  * having come from the `_async$(LPAREN)$(RPAREN)` wrapper
  * function $(LPAREN)for ‘short-circuit’ results, such as when passing
- * `0` to [Gio.InputStream.readAsync]$(RPAREN).
+ * `0` to [gio.input_stream.InputStream.readAsync]$(RPAREN).
  * ## Thread-safety considerations
  * Due to some infelicities in the API design, there is a
  * thread-safety concern that users of `GTask` have to be aware of:
@@ -10955,7 +10955,7 @@ struct GTask;
 struct GTaskClass;
 
 /**
- * This is the subclass of [Gio.SocketConnection] that is created
+ * This is the subclass of [gio.socket_connection.SocketConnection] that is created
  * for TCP/IP sockets.
  */
 struct GTcpConnection
@@ -10973,12 +10973,12 @@ struct GTcpConnectionClass
 struct GTcpConnectionPrivate;
 
 /**
- * A `GTcpWrapperConnection` can be used to wrap a [Gio.IOStream] that is
- * based on a [Gio.Socket], but which is not actually a
- * [Gio.SocketConnection]. This is used by [Gio.SocketClient] so
- * that it can always return a [Gio.SocketConnection], even when the
+ * A `GTcpWrapperConnection` can be used to wrap a [gio.iostream.IOStream] that is
+ * based on a [gio.socket.Socket], but which is not actually a
+ * [gio.socket_connection.SocketConnection]. This is used by [gio.socket_client.SocketClient] so
+ * that it can always return a [gio.socket_connection.SocketConnection], even when the
  * connection it has actually created is not directly a
- * [Gio.SocketConnection].
+ * [gio.socket_connection.SocketConnection].
  */
 struct GTcpWrapperConnection
 {
@@ -11037,7 +11037,7 @@ struct GTcpWrapperConnectionPrivate;
  * Note that these examples only deal with isolating the D-Bus aspect of your
  * service. To successfully run isolated unit tests on your service you may need
  * some additional modifications to your test case fixture. For example; if your
- * service uses [Gio.Settings] and installs a schema then it is important
+ * service uses [gio.settings.Settings] and installs a schema then it is important
  * that your test service not load the schema in the ordinary installed location
  * $(LPAREN)chances are that your service and schema files are not yet installed, or
  * worse; there is an older version of the schema file sitting in the install
@@ -11063,7 +11063,7 @@ struct GTcpWrapperConnectionPrivate;
 struct GTestDBus;
 
 /**
- * `GThemedIcon` is an implementation of [Gio.Icon] that supports icon
+ * `GThemedIcon` is an implementation of [gio.icon.Icon] that supports icon
  * themes.
  * `GThemedIcon` contains a list of all of the icons present in an icon
  * theme, so that icons can be looked up quickly. `GThemedIcon` does
@@ -11088,18 +11088,18 @@ struct GThreadedResolverClass
 }
 
 /**
- * A `GThreadedSocketService` is a simple subclass of [Gio.SocketService]
+ * A `GThreadedSocketService` is a simple subclass of [gio.socket_service.SocketService]
  * that handles incoming connections by creating a worker thread and
  * dispatching the connection to it by emitting the
- * [Gio.ThreadedSocketService.run] in the new thread.
+ * [gio.threaded_socket_service.ThreadedSocketService.run] in the new thread.
  * The signal handler may perform blocking I/O and need not return
  * until the connection is closed.
  * The service is implemented using a thread pool, so there is a
  * limited amount of threads available to serve incoming requests.
- * The service automatically stops the [Gio.SocketService] from accepting
+ * The service automatically stops the [gio.socket_service.SocketService] from accepting
  * new connections when all threads are busy.
- * As with [Gio.SocketService], you may connect to
- * [Gio.ThreadedSocketService.run], or subclass and override the default
+ * As with [gio.socket_service.SocketService], you may connect to
+ * [gio.threaded_socket_service.ThreadedSocketService.run], or subclass and override the default
  * handler.
  */
 struct GThreadedSocketService
@@ -11196,7 +11196,7 @@ struct GTlsBackendInterface
  * This can represent either a certificate only $(LPAREN)eg, the certificate
  * received by a client from a server$(RPAREN), or the combination of
  * a certificate and a private key $(LPAREN)which is needed when acting as a
- * [Gio.TlsServerConnection]$(RPAREN).
+ * [gio.tls_server_connection.TlsServerConnection]$(RPAREN).
  */
 struct GTlsCertificate
 {
@@ -11218,7 +11218,7 @@ struct GTlsCertificatePrivate;
 
 /**
  * `GTlsClientConnection` is the client-side subclass of
- * [Gio.TlsConnection], representing a client-side TLS connection.
+ * [gio.tls_connection.TlsConnection], representing a client-side TLS connection.
  */
 struct GTlsClientConnection;
 
@@ -11240,11 +11240,11 @@ struct GTlsClientConnectionInterface
 
 /**
  * `GTlsConnection` is the base TLS connection class type, which wraps
- * a [Gio.IOStream] and provides TLS encryption on top of it. Its
- * subclasses, [Gio.TlsClientConnection] and
- * [Gio.TlsServerConnection], implement client-side and server-side TLS,
+ * a [gio.iostream.IOStream] and provides TLS encryption on top of it. Its
+ * subclasses, [gio.tls_client_connection.TlsClientConnection] and
+ * [gio.tls_server_connection.TlsServerConnection], implement client-side and server-side TLS,
  * respectively.
- * For DTLS $(LPAREN)Datagram TLS$(RPAREN) support, see [Gio.DtlsConnection].
+ * For DTLS $(LPAREN)Datagram TLS$(RPAREN) support, see [gio.dtls_connection.DtlsConnection].
  */
 struct GTlsConnection
 {
@@ -11305,7 +11305,7 @@ struct GTlsConnectionPrivate;
  * A `GTlsDatabase` may be accessed from multiple threads by the TLS backend.
  * All implementations are required to be fully thread-safe.
  * Most common client applications will not directly interact with
- * `GTlsDatabase`. It is used internally by [Gio.TlsConnection].
+ * `GTlsDatabase`. It is used internally by [gio.tls_connection.TlsConnection].
  */
 struct GTlsDatabase
 {
@@ -11325,79 +11325,79 @@ struct GTlsDatabaseClass
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.verifyChain].
+   * [gio.tls_database.TlsDatabase.verifyChain].
    */
   extern(C) GTlsCertificateFlags function(GTlsDatabase* self, GTlsCertificate* chain, const(char)* purpose, GSocketConnectable* identity, GTlsInteraction* interaction, GTlsDatabaseVerifyFlags flags, GCancellable* cancellable, GError** _err) verifyChain;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.verifyChainAsync].
+   * [gio.tls_database.TlsDatabase.verifyChainAsync].
    */
   extern(C) void function(GTlsDatabase* self, GTlsCertificate* chain, const(char)* purpose, GSocketConnectable* identity, GTlsInteraction* interaction, GTlsDatabaseVerifyFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) verifyChainAsync;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.verifyChainFinish].
+   * [gio.tls_database.TlsDatabase.verifyChainFinish].
    */
   extern(C) GTlsCertificateFlags function(GTlsDatabase* self, GAsyncResult* result, GError** _err) verifyChainFinish;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.createCertificateHandle].
+   * [gio.tls_database.TlsDatabase.createCertificateHandle].
    */
   extern(C) char* function(GTlsDatabase* self, GTlsCertificate* certificate) createCertificateHandle;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.lookupCertificateForHandle].
+   * [gio.tls_database.TlsDatabase.lookupCertificateForHandle].
    */
   extern(C) GTlsCertificate* function(GTlsDatabase* self, const(char)* handle, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) lookupCertificateForHandle;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.lookupCertificateForHandleAsync].
+   * [gio.tls_database.TlsDatabase.lookupCertificateForHandleAsync].
    */
   extern(C) void function(GTlsDatabase* self, const(char)* handle, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) lookupCertificateForHandleAsync;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.lookupCertificateForHandleFinish].
+   * [gio.tls_database.TlsDatabase.lookupCertificateForHandleFinish].
    */
   extern(C) GTlsCertificate* function(GTlsDatabase* self, GAsyncResult* result, GError** _err) lookupCertificateForHandleFinish;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.lookupCertificateIssuer].
+   * [gio.tls_database.TlsDatabase.lookupCertificateIssuer].
    */
   extern(C) GTlsCertificate* function(GTlsDatabase* self, GTlsCertificate* certificate, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) lookupCertificateIssuer;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.lookupCertificateIssuerAsync].
+   * [gio.tls_database.TlsDatabase.lookupCertificateIssuerAsync].
    */
   extern(C) void function(GTlsDatabase* self, GTlsCertificate* certificate, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) lookupCertificateIssuerAsync;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.lookupCertificateIssuerFinish].
+   * [gio.tls_database.TlsDatabase.lookupCertificateIssuerFinish].
    */
   extern(C) GTlsCertificate* function(GTlsDatabase* self, GAsyncResult* result, GError** _err) lookupCertificateIssuerFinish;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.lookupCertificatesIssuedBy].
+   * [gio.tls_database.TlsDatabase.lookupCertificatesIssuedBy].
    */
   extern(C) GList* function(GTlsDatabase* self, GByteArray* issuerRawDn, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) lookupCertificatesIssuedBy;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.lookupCertificatesIssuedByAsync].
+   * [gio.tls_database.TlsDatabase.lookupCertificatesIssuedByAsync].
    */
   extern(C) void function(GTlsDatabase* self, GByteArray* issuerRawDn, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) lookupCertificatesIssuedByAsync;
 
   /**
    * Virtual method implementing
-   * [Gio.TlsDatabase.lookupCertificatesIssuedByFinish].
+   * [gio.tls_database.TlsDatabase.lookupCertificatesIssuedByFinish].
    */
   extern(C) GList* function(GTlsDatabase* self, GAsyncResult* result, GError** _err) lookupCertificatesIssuedByFinish;
 
@@ -11407,7 +11407,7 @@ struct GTlsDatabaseClass
 struct GTlsDatabasePrivate;
 
 /**
- * `GTlsFileDatabase` is implemented by [Gio.TlsDatabase] objects which
+ * `GTlsFileDatabase` is implemented by [gio.tls_database.TlsDatabase] objects which
  * load their certificate information from a file. It is an interface which
  * TLS library specific subtypes implement.
  */
@@ -11430,11 +11430,11 @@ struct GTlsFileDatabaseInterface
  * `GTlsInteraction` provides a mechanism for the TLS connection and database
  * code to interact with the user. It can be used to ask the user for passwords.
  * To use a `GTlsInteraction` with a TLS connection use
- * [Gio.TlsConnection.setInteraction].
+ * [gio.tls_connection.TlsConnection.setInteraction].
  * Callers should instantiate a derived class that implements the various
  * interaction methods to show the required dialogs.
  * Callers should use the 'invoke' functions like
- * [Gio.TlsInteraction.invokeAskPassword] to run interaction methods.
+ * [gio.tls_interaction.TlsInteraction.invokeAskPassword] to run interaction methods.
  * These functions make sure that the interaction is invoked in the main loop
  * and not in the current thread, if the current thread is not running the
  * main loop.
@@ -11471,7 +11471,7 @@ struct GTlsInteractionClass
   /**
    * ask for a password synchronously. If the implementation
    * returns %G_TLS_INTERACTION_HANDLED, then the password argument should
-   * have been filled in by using [Gio.TlsPassword.setValue] or a similar
+   * have been filled in by using [gio.tls_password.TlsPassword.setValue] or a similar
    * function.
    */
   extern(C) GTlsInteractionResult function(GTlsInteraction* interaction, GTlsPassword* password, GCancellable* cancellable, GError** _err) askPassword;
@@ -11485,7 +11485,7 @@ struct GTlsInteractionClass
    * complete operation to ask for a password asynchronously.
    * If the implementation returns %G_TLS_INTERACTION_HANDLED, then the
    * password argument of the async method should have been filled in by using
-   * [Gio.TlsPassword.setValue] or a similar function.
+   * [gio.tls_password.TlsPassword.setValue] or a similar function.
    */
   extern(C) GTlsInteractionResult function(GTlsInteraction* interaction, GAsyncResult* result, GError** _err) askPasswordFinish;
 
@@ -11493,7 +11493,7 @@ struct GTlsInteractionClass
    * ask for a certificate synchronously. If the
    * implementation returns %G_TLS_INTERACTION_HANDLED, then the connection
    * argument should have been filled in by using
-   * [Gio.TlsConnection.setCertificate].
+   * [gio.tls_connection.TlsConnection.setCertificate].
    */
   extern(C) GTlsInteractionResult function(GTlsInteraction* interaction, GTlsConnection* connection, GTlsCertificateRequestFlags flags, GCancellable* cancellable, GError** _err) requestCertificate;
 
@@ -11506,7 +11506,7 @@ struct GTlsInteractionClass
    * complete operation to ask for a certificate
    * asynchronously. If the implementation returns %G_TLS_INTERACTION_HANDLED,
    * then the connection argument of the async method should have been
-   * filled in by using [Gio.TlsConnection.setCertificate].
+   * filled in by using [gio.tls_connection.TlsConnection.setCertificate].
    */
   extern(C) GTlsInteractionResult function(GTlsInteraction* interaction, GAsyncResult* result, GError** _err) requestCertificateFinish;
 
@@ -11534,18 +11534,18 @@ struct GTlsPasswordClass
   GObjectClass parentClass;
 
   /**
-   * virtual method for [Gio.TlsPassword.getValue]
+   * virtual method for [gio.tls_password.TlsPassword.getValue]
    */
   extern(C) const(ubyte)* function(GTlsPassword* password, size_t* length) getValue;
 
   /**
-   * virtual method for [Gio.TlsPassword.setValue]
+   * virtual method for [gio.tls_password.TlsPassword.setValue]
    */
   extern(C) void function(GTlsPassword* password, ubyte* value, ptrdiff_t length, GDestroyNotify destroy) setValue;
 
   /**
-   * virtual method for [Gio.TlsPassword.getWarning] if no
-   * value has been set using [Gio.TlsPassword.setWarning]
+   * virtual method for [gio.tls_password.TlsPassword.getWarning] if no
+   * value has been set using [gio.tls_password.TlsPassword.setWarning]
    */
   extern(C) const(char)* function(GTlsPassword* password) getDefaultWarning;
 
@@ -11556,7 +11556,7 @@ struct GTlsPasswordPrivate;
 
 /**
  * `GTlsServerConnection` is the server-side subclass of
- * [Gio.TlsConnection], representing a server-side TLS connection.
+ * [gio.tls_connection.TlsConnection], representing a server-side TLS connection.
  */
 struct GTlsServerConnection;
 
@@ -11572,7 +11572,7 @@ struct GTlsServerConnectionInterface
 }
 
 /**
- * This is the subclass of [Gio.SocketConnection] that is created
+ * This is the subclass of [gio.socket_connection.SocketConnection] that is created
  * for UNIX domain sockets.
  * It contains functions to do some of the UNIX socket specific
  * functionality like passing file descriptors.
@@ -11597,16 +11597,16 @@ struct GUnixConnectionClass
 struct GUnixConnectionPrivate;
 
 /**
- * This [Gio.SocketControlMessage] contains a [Gio.Credentials]
- * instance.  It may be sent using [Gio.Socket.sendMessage] and received
- * using [Gio.Socket.receiveMessage] over UNIX sockets $(LPAREN)ie: sockets in
+ * This [gio.socket_control_message.SocketControlMessage] contains a [gio.credentials.Credentials]
+ * instance.  It may be sent using [gio.socket.Socket.sendMessage] and received
+ * using [gio.socket.Socket.receiveMessage] over UNIX sockets $(LPAREN)ie: sockets in
  * the `G_SOCKET_FAMILY_UNIX` family$(RPAREN).
  * For an easier way to send and receive credentials over
  * stream-oriented UNIX sockets, see
- * [Gio.UnixConnection.sendCredentials] and
- * [Gio.UnixConnection.receiveCredentials]. To receive credentials of
+ * [gio.unix_connection.UnixConnection.sendCredentials] and
+ * [gio.unix_connection.UnixConnection.receiveCredentials]. To receive credentials of
  * a foreign process connected to a socket, use
- * [Gio.Socket.getCredentials].
+ * [gio.socket.Socket.getCredentials].
  * Since GLib 2.72, `GUnixCredentialMessage` is available on all platforms. It
  * requires underlying system support $(LPAREN)such as Windows 10 with `AF_UNIX`$(RPAREN) at run
  * time.
@@ -11640,9 +11640,9 @@ struct GUnixCredentialsMessagePrivate;
  * descriptors that it contains, closing them when finalized.
  * It may be wrapped in a
  * [`GUnixFDMessage`](../gio-unix/class.UnixFDMessage.html) and sent over a
- * [Gio.Socket] in the `G_SOCKET_FAMILY_UNIX` family by using
- * [Gio.Socket.sendMessage] and received using
- * [Gio.Socket.receiveMessage].
+ * [gio.socket.Socket] in the `G_SOCKET_FAMILY_UNIX` family by using
+ * [gio.socket.Socket.sendMessage] and received using
+ * [gio.socket.Socket.receiveMessage].
  * Before 2.74, `<gio/gunixfdlist.h>` belonged to the UNIX-specific GIO
  * interfaces, thus you had to use the `gio-unix-2.0.pc` pkg-config file when
  * using it.
@@ -11673,14 +11673,14 @@ struct GUnixFDListClass
 struct GUnixFDListPrivate;
 
 /**
- * This [Gio.SocketControlMessage] contains a [Gio.UnixFDList].
- * It may be sent using [Gio.Socket.sendMessage] and received using
- * [Gio.Socket.receiveMessage] over UNIX sockets $(LPAREN)ie: sockets in the
+ * This [gio.socket_control_message.SocketControlMessage] contains a [gio.unix_fdlist.UnixFDList].
+ * It may be sent using [gio.socket.Socket.sendMessage] and received using
+ * [gio.socket.Socket.receiveMessage] over UNIX sockets $(LPAREN)ie: sockets in the
  * `G_SOCKET_FAMILY_UNIX` family$(RPAREN). The file descriptors are copied
  * between processes by the kernel.
  * For an easier way to send and receive file descriptors over
- * stream-oriented UNIX sockets, see [Gio.UnixConnection.sendFd] and
- * [Gio.UnixConnection.receiveFd].
+ * stream-oriented UNIX sockets, see [gio.unix_connection.UnixConnection.sendFd] and
+ * [gio.unix_connection.UnixConnection.receiveFd].
  * Note that `<gio/gunixfdmessage.h>` belongs to the UNIX-specific GIO
  * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
  * file or the `GioUnix-2.0` GIR namespace when using it.
@@ -11704,7 +11704,7 @@ struct GUnixFDMessageClass
 struct GUnixFDMessagePrivate;
 
 /**
- * `GUnixInputStream` implements [Gio.InputStream] for reading from a UNIX
+ * `GUnixInputStream` implements [gio.input_stream.InputStream] for reading from a UNIX
  * file descriptor, including asynchronous operations. $(LPAREN)If the file
  * descriptor refers to a socket or pipe, this will use `poll$(LPAREN)$(RPAREN)` to do
  * asynchronous I/O. If it refers to a regular file, it will fall back
@@ -11757,7 +11757,7 @@ struct GUnixMountMonitorClass;
 struct GUnixMountPoint;
 
 /**
- * `GUnixOutputStream` implements [Gio.OutputStream] for writing to a UNIX
+ * `GUnixOutputStream` implements [gio.output_stream.OutputStream] for writing to a UNIX
  * file descriptor, including asynchronous operations. $(LPAREN)If the file
  * descriptor refers to a socket or pipe, this will use `poll$(LPAREN)$(RPAREN)` to do
  * asynchronous I/O. If it refers to a regular file, it will fall back
@@ -11799,7 +11799,7 @@ struct GUnixOutputStreamPrivate;
  * permissions, visibility, etc. Currently this is only supported
  * under Linux. If you attempt to use abstract sockets on other
  * systems, function calls may return `G_IO_ERROR_NOT_SUPPORTED`
- * errors. You can use [Gio.UnixSocketAddress.abstractNamesSupported]
+ * errors. You can use [gio.unix_socket_address.UnixSocketAddress.abstractNamesSupported]
  * to see if abstract names are supported.
  * Since GLib 2.72, `GUnixSocketAddress` is available on all platforms. It
  * requires underlying system support $(LPAREN)such as Windows 10 with `AF_UNIX`$(RPAREN) at
@@ -11874,21 +11874,21 @@ struct GVfsClass
  * mounted. Note, when [porting from GnomeVFS](migrating-gnome-vfs.html),
  * `GVolume` is the moral equivalent of `GnomeVFSDrive`.
  * Mounting a `GVolume` instance is an asynchronous operation. For more
- * information about asynchronous operations, see [Gio.AsyncResult] and
- * [Gio.Task]. To mount a `GVolume`, first call [Gio.Volume.mount]
+ * information about asynchronous operations, see [gio.async_result.AsyncResult] and
+ * [gio.task.Task]. To mount a `GVolume`, first call [gio.volume.Volume.mount]
  * with $(LPAREN)at least$(RPAREN) the `GVolume` instance, optionally a
- * [Gio.MountOperation] object and a [Gio.AsyncReadyCallback].
+ * [gio.mount_operation.MountOperation] object and a [gio.AsyncReadyCallback].
  * Typically, one will only want to pass `NULL` for the
- * [Gio.MountOperation] if automounting all volumes when a desktop session
+ * [gio.mount_operation.MountOperation] if automounting all volumes when a desktop session
  * starts since it’s not desirable to put up a lot of dialogs asking
  * for credentials.
  * The callback will be fired when the operation has resolved $(LPAREN)either
- * with success or failure$(RPAREN), and a [Gio.AsyncResult] instance will be
+ * with success or failure$(RPAREN), and a [gio.async_result.AsyncResult] instance will be
  * passed to the callback.  That callback should then call
- * [Gio.Volume.mountFinish] with the `GVolume` instance and the
- * [Gio.AsyncResult] data to see if the operation was completed
- * successfully.  If a [GLib.ErrorG] is present when
- * [Gio.Volume.mountFinish] is called, then it will be filled with any
+ * [gio.volume.Volume.mountFinish] with the `GVolume` instance and the
+ * [gio.async_result.AsyncResult] data to see if the operation was completed
+ * successfully.  If a [glib.error.ErrorG] is present when
+ * [gio.volume.Volume.mountFinish] is called, then it will be filled with any
  * error information.
  * ## Volume Identifiers
  * It is sometimes necessary to directly access the underlying
@@ -11899,7 +11899,7 @@ struct GVfsClass
  * traditional Unix devices $(LPAREN)e.g. `/dev/sda2`$(RPAREN), UUIDs. GIO uses predefined
  * strings as names for the different kinds of identifiers:
  * `G_VOLUME_IDENTIFIER_KIND_UUID`, `G_VOLUME_IDENTIFIER_KIND_LABEL`, etc.
- * Use [Gio.Volume.getIdentifier] to obtain an identifier for a volume.
+ * Use [gio.volume.Volume.getIdentifier] to obtain an identifier for a volume.
  * Note that `G_VOLUME_IDENTIFIER_KIND_HAL_UDI` will only be available
  * when the GVFS hal volume monitor is in use. Other volume monitors
  * will generally be able to provide the `G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE`
@@ -12036,7 +12036,7 @@ struct GVolumeIface
  * would show in a sidebar.
  * `GVolumeMonitor` is not
  * thread-default-context aware $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN), and so should not be used
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN), and so should not be used
  * other than from the main thread, with no thread-default-context active.
  * In order to receive updates about volumes and mounts monitored through GVFS,
  * a main loop must be running.
@@ -12104,7 +12104,7 @@ struct GVolumeMonitorClass
 }
 
 /**
- * `GZlibCompressor` is an implementation of [Gio.Converter] that
+ * `GZlibCompressor` is an implementation of [gio.converter.Converter] that
  * compresses data using zlib.
  */
 struct GZlibCompressor;
@@ -12115,7 +12115,7 @@ struct GZlibCompressorClass
 }
 
 /**
- * `GZlibDecompressor` is an implementation of [Gio.Converter] that
+ * `GZlibDecompressor` is an implementation of [gio.converter.Converter] that
  * decompresses data compressed with zlib.
  */
 struct GZlibDecompressor;

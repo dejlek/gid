@@ -6,7 +6,7 @@ import gdkpixbuf.pixbuf;
 import gdkpixbuf.pixbuf_animation;
 import gdkpixbuf.pixbuf_format;
 import gdkpixbuf.types;
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.error;
 import gobject.dclosure;
@@ -18,25 +18,25 @@ import gobject.object;
  * process of loading an image, by letting them send the image data
  * directly to the loader instead of having the loader read the data
  * from a file. Applications can use this functionality instead of
- * `[GdkPixbuf.Pixbuf.newFromFile]` or `[GdkPixbuf.PixbufAnimation.newFromFile]`
+ * `[gdkpixbuf.pixbuf.Pixbuf.newFromFile]` or `[gdkpixbuf.pixbuf_animation.PixbufAnimation.newFromFile]`
  * when they need to parse image data in small chunks. For example,
  * it should be used when reading an image from a $(LPAREN)potentially$(RPAREN) slow
  * network connection, or when loading an extremely large file.
  * To use `GdkPixbufLoader` to load an image, create a new instance,
- * and call [GdkPixbuf.PixbufLoader.write] to send the data
- * to it. When done, [GdkPixbuf.PixbufLoader.close] should be
+ * and call [gdkpixbuf.pixbuf_loader.PixbufLoader.write] to send the data
+ * to it. When done, [gdkpixbuf.pixbuf_loader.PixbufLoader.close] should be
  * called to end the stream and finalize everything.
  * The loader will emit three important signals throughout the process:
  * - signal@GdkPixbuf.PixbufLoader::size-prepared will be emitted as
  * soon as the image has enough information to determine the size of
  * the image to be used. If you want to scale the image while loading
- * it, you can call [GdkPixbuf.PixbufLoader.setSize] in
+ * it, you can call [gdkpixbuf.pixbuf_loader.PixbufLoader.setSize] in
  * response to this signal.
  * - signal@GdkPixbuf.PixbufLoader::area-prepared will be emitted as
  * soon as the pixbuf of the desired has been allocated. You can obtain
- * the `GdkPixbuf` instance by calling [GdkPixbuf.PixbufLoader.getPixbuf].
+ * the `GdkPixbuf` instance by calling [gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf].
  * If you want to use it, simply acquire a reference to it. You can
- * also call `[GdkPixbuf.PixbufLoader.getPixbuf]` later to get the same
+ * also call `[gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf]` later to get the same
  * pixbuf.
  * - signal@GdkPixbuf.PixbufLoader::area-updated will be emitted every
  * time a region is updated. This way you can update a partially
@@ -47,10 +47,10 @@ import gobject.object;
  * ## Loading an animation
  * Loading an animation is almost as easy as loading an image. Once the
  * first signal@GdkPixbuf.PixbufLoader::area-prepared signal has been
- * emitted, you can call [GdkPixbuf.PixbufLoader.getAnimation] to
- * get the [GdkPixbuf.PixbufAnimation] instance, and then call
- * and [GdkPixbuf.PixbufAnimation.getIter] to get a
- * [GdkPixbuf.PixbufAnimationIter] to retrieve the pixbuf for the
+ * emitted, you can call [gdkpixbuf.pixbuf_loader.PixbufLoader.getAnimation] to
+ * get the [gdkpixbuf.pixbuf_animation.PixbufAnimation] instance, and then call
+ * and [gdkpixbuf.pixbuf_animation.PixbufAnimation.getIter] to get a
+ * [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter] to retrieve the pixbuf for the
  * desired time stamp.
  */
 class PixbufLoader : ObjectG
@@ -95,8 +95,8 @@ class PixbufLoader : ObjectG
    * are installed, but typically "image/png", "image/jpeg", "image/gif",
    * "image/tiff" and "image/x-xpixmap" are among the supported mime types.
    * To obtain the full list of supported mime types, call
-   * [GdkPixbuf.PixbufFormat.getMimeTypes] on each of the #GdkPixbufFormat
-   * structs returned by [GdkPixbuf.Pixbuf.getFormats].
+   * [gdkpixbuf.pixbuf_format.PixbufFormat.getMimeTypes] on each of the #GdkPixbufFormat
+   * structs returned by [gdkpixbuf.pixbuf.Pixbuf.getFormats].
    * Params:
    *   mimeType = the mime type to be loaded
    * Returns: A newly-created pixbuf loader.
@@ -124,8 +124,8 @@ class PixbufLoader : ObjectG
    * The list of supported image formats depends on what image loaders
    * are installed, but typically "png", "jpeg", "gif", "tiff" and
    * "xpm" are among the supported formats. To obtain the full list of
-   * supported image formats, call [GdkPixbuf.PixbufFormat.getName] on each
-   * of the #GdkPixbufFormat structs returned by [GdkPixbuf.Pixbuf.getFormats].
+   * supported image formats, call [gdkpixbuf.pixbuf_format.PixbufFormat.getName] on each
+   * of the #GdkPixbufFormat structs returned by [gdkpixbuf.pixbuf.Pixbuf.getFormats].
    * Params:
    *   imageType = name of the image format to be loaded with the image
    * Returns: A newly-created pixbuf loader.
@@ -144,7 +144,7 @@ class PixbufLoader : ObjectG
 
   /**
    * Informs a pixbuf loader that no further writes with
-   * [GdkPixbuf.PixbufLoader.write] will occur, so that it can free its
+   * [gdkpixbuf.pixbuf_loader.PixbufLoader.write] will occur, so that it can free its
    * internal loading structures.
    * This function also tries to parse any data that hasn't yet been parsed;
    * if the remaining data is partial or corrupt, an error will be returned.
@@ -204,12 +204,12 @@ class PixbufLoader : ObjectG
    * signalGdkPixbuf.PixbufLoader::area-prepared signal has been
    * emitted by the loader; this means that enough data has been read
    * to know the size of the image that will be allocated.
-   * If the loader has not received enough data via [GdkPixbuf.PixbufLoader.write],
+   * If the loader has not received enough data via [gdkpixbuf.pixbuf_loader.PixbufLoader.write],
    * then this function returns `NULL`.
    * The returned pixbuf will be the same in all future calls to the loader,
    * so if you want to keep using it, you should acquire a reference to it.
    * Additionally, if the loader is an animation, it will return the "static
-   * image" of the animation $(LPAREN)see [GdkPixbuf.PixbufAnimation.getStaticImage]$(RPAREN).
+   * image" of the animation $(LPAREN)see [gdkpixbuf.pixbuf_animation.PixbufAnimation.getStaticImage]$(RPAREN).
    * Returns: The pixbuf that the loader is
    *   creating
    */
@@ -224,7 +224,7 @@ class PixbufLoader : ObjectG
   /**
    * Causes the image to be scaled while it is loaded.
    * The desired image size can be determined relative to the original
-   * size of the image by calling [GdkPixbuf.PixbufLoader.setSize] from a
+   * size of the image by calling [gdkpixbuf.pixbuf_loader.PixbufLoader.setSize] from a
    * signal handler for the ::size-prepared signal.
    * Attempts to set the desired image size  are ignored after the
    * emission of the ::size-prepared signal.
@@ -280,7 +280,7 @@ class PixbufLoader : ObjectG
    * This signal is emitted when the pixbuf loader has allocated the
    * pixbuf in the desired size.
    * After this signal is emitted, applications can call
-   * [GdkPixbuf.PixbufLoader.getPixbuf] to fetch the partially-loaded
+   * [gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf] to fetch the partially-loaded
    * pixbuf.
    *   pixbufLoader = the instance the signal is connected to
    */
@@ -353,7 +353,7 @@ class PixbufLoader : ObjectG
   }
 
   /**
-   * This signal is emitted when [GdkPixbuf.PixbufLoader.close] is called.
+   * This signal is emitted when [gdkpixbuf.pixbuf_loader.PixbufLoader.close] is called.
    * It can be used by different parts of an application to receive
    * notification when an image loader is closed by the code that
    * drives it.
@@ -388,7 +388,7 @@ class PixbufLoader : ObjectG
    * This signal is emitted when the pixbuf loader has been fed the
    * initial amount of data that is required to figure out the size
    * of the image that it will create.
-   * Applications can call [GdkPixbuf.PixbufLoader.setSize] in response
+   * Applications can call [gdkpixbuf.pixbuf_loader.PixbufLoader.setSize] in response
    * to this signal to set the desired size to which the image
    * should be scaled.
    * Params

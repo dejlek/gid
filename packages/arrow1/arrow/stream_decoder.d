@@ -7,7 +7,7 @@ import arrow.read_options;
 import arrow.schema;
 import arrow.stream_listener;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.error;
 import gobject.object;
@@ -88,7 +88,7 @@ class StreamDecoder : ObjectG
    * the internal buffer. It causes performance overhead.
    * If you pass garrow_stream_decoer_get_next_required_size$(LPAREN)$(RPAREN) size data
    * to each
-   * [Arrow.StreamDecoder.consumeBytes]/[Arrow.StreamDecoder.consumeBuffer]
+   * [arrow.stream_decoder.StreamDecoder.consumeBytes]/[arrow.stream_decoder.StreamDecoder.consumeBuffer]
    * call, the decoder doesn't use its internal buffer. It improves
    * performance.
    * Here is an example usage to avoid using internal buffer:

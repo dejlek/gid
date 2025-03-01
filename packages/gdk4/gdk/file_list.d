@@ -3,7 +3,7 @@ module gdk.file_list;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gio.file;
 import gio.file_mixin;
 import gobject.boxed;

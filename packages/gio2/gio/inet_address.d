@@ -1,6 +1,6 @@
 module gio.inet_address;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -8,13 +8,13 @@ import gobject.object;
 
 /**
  * `GInetAddress` represents an IPv4 or IPv6 internet address. Use
- * [Gio.Resolver.lookupByName] or
- * [Gio.Resolver.lookupByNameAsync] to look up the `GInetAddress` for
- * a hostname. Use [Gio.Resolver.lookupByAddress] or
- * [Gio.Resolver.lookupByAddressAsync] to look up the hostname for a
+ * [gio.resolver.Resolver.lookupByName] or
+ * [gio.resolver.Resolver.lookupByNameAsync] to look up the `GInetAddress` for
+ * a hostname. Use [gio.resolver.Resolver.lookupByAddress] or
+ * [gio.resolver.Resolver.lookupByAddressAsync] to look up the hostname for a
  * `GInetAddress`.
  * To actually connect to a remote host, you will need a
- * [Gio.InetSocketAddress] $(LPAREN)which includes a `GInetAddress` as well as a
+ * [gio.inet_socket_address.InetSocketAddress] $(LPAREN)which includes a `GInetAddress` as well as a
  * port number$(RPAREN).
  */
 class InetAddress : ObjectG
@@ -43,7 +43,7 @@ class InetAddress : ObjectG
    *   family = the address family
    * Returns: a new #GInetAddress corresponding to the "any" address
    *   for family.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   static InetAddress newAny(SocketFamily family)
   {
@@ -61,7 +61,7 @@ class InetAddress : ObjectG
    *   bytes = raw address data
    *   family = the address family of bytes
    * Returns: a new #GInetAddress corresponding to family and bytes.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   static InetAddress newFromBytes(ubyte[] bytes, SocketFamily family)
   {
@@ -78,7 +78,7 @@ class InetAddress : ObjectG
    *   string_ = a string representation of an IP address
    * Returns: a new #GInetAddress corresponding
    *   to string, or %NULL if string could not be parsed.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   static InetAddress newFromString(string string_)
   {
@@ -95,7 +95,7 @@ class InetAddress : ObjectG
    *   family = the address family
    * Returns: a new #GInetAddress corresponding to the loopback address
    *   for family.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   static InetAddress newLoopback(SocketFamily family)
   {
@@ -247,7 +247,7 @@ class InetAddress : ObjectG
 
   /**
    * Gets the size of the native raw binary address for address. This
-   * is the size of the data that you get from [Gio.InetAddress.toBytes].
+   * is the size of the data that you get from [gio.inet_address.InetAddress.toBytes].
    * Returns: the number of bytes used for the native version of address.
    */
   size_t getNativeSize()

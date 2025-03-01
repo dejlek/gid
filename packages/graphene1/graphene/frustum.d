@@ -1,6 +1,6 @@
 module graphene.frustum;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.box;
 import graphene.c.functions;
@@ -49,7 +49,7 @@ class Frustum : Boxed
    * Allocates a new #graphene_frustum_t structure.
    * The contents of the returned structure are undefined.
    * Returns: the newly allocated #graphene_frustum_t
-   *   structure. Use [Graphene.Frustum.free] to free the resources
+   *   structure. Use [graphene.frustum.Frustum.free] to free the resources
    *   allocated by this function.
    */
   static Frustum alloc()

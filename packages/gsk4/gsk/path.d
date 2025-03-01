@@ -1,7 +1,7 @@
 module gsk.path;
 
 import cairo.context;
-import gid.gid;
+import gid.global;
 import glib.string_;
 import gobject.boxed;
 import graphene.point;
@@ -18,7 +18,7 @@ import gsk.types;
  * $(LPAREN)e.g. as trajectories$(RPAREN).
  * `GskPath` is an immutable, opaque, reference-counted struct.
  * After creation, you cannot change the types it represents. Instead,
- * new `GskPath` objects have to be created. The [Gsk.PathBuilder]
+ * new `GskPath` objects have to be created. The [gsk.path_builder.PathBuilder]
  * structure is meant to help in this endeavor.
  * Conceptually, a path consists of zero or more contours $(LPAREN)continuous, connected
  * curves$(RPAREN), each of which may or may not be closed. Contours are typically
@@ -64,7 +64,7 @@ class Path : Boxed
    * - When the flags disallow certain operations, it provides
    * an approximation of the path using just the allowed operations.
    * Params:
-   *   flags = flags to pass to the foreach function. See [Gsk.PathForeachFlags]
+   *   flags = flags to pass to the foreach function. See [gsk.PathForeachFlags]
    *     for details about flags
    *   func = the function to call for operations
    * Returns: `FALSE` if func returned FALSE`, `TRUE` otherwise.
@@ -95,7 +95,7 @@ class Path : Boxed
    * This can happen when the path only describes a point or an
    * axis-aligned line.
    * If the path is empty, `FALSE` is returned and bounds are set to
-   * [Graphene.Rect.zero]. This is different from the case where the path
+   * [graphene.rect.Rect.zero]. This is different from the case where the path
    * is a single point at the origin, where the bounds will also be set to
    * the zero rectangle but `TRUE` will be returned.
    * Params:
@@ -180,7 +180,7 @@ class Path : Boxed
    * for printing.
    * The string is compatible with $(LPAREN)a superset of$(RPAREN)
    * [SVG path syntax](https://www.w3.org/TR/SVG11/paths.html#PathData),
-   * see [Gsk.Path.parse] for a summary of the syntax.
+   * see [gsk.path.Path.parse] for a summary of the syntax.
    * Params:
    *   string_ = The string to print into
    */
@@ -195,7 +195,7 @@ class Path : Boxed
    * This may cause some suboptimal conversions to be performed as
    * Cairo does not support all features of `GskPath`.
    * This function does not clear the existing Cairo path. Call
-   * [cairo.Context.newPath] if you want this.
+   * [cairo.context.Context.newPath] if you want this.
    * Params:
    *   cr = a cairo context
    */
@@ -208,7 +208,7 @@ class Path : Boxed
    * Converts the path into a string that is suitable for printing.
    * You can use this function in a debugger to get a quick overview
    * of the path.
-   * This is a wrapper around [Gsk.Path.print], see that function
+   * This is a wrapper around [gsk.path.Path.print], see that function
    * for details.
    * Returns: A new string for self
    */
@@ -225,7 +225,7 @@ class Path : Boxed
    * from a serialized form.
    * The string is expected to be in $(LPAREN)a superset of$(RPAREN)
    * [SVG path syntax](https://www.w3.org/TR/SVG11/paths.html#PathData),
-   * as e.g. produced by [Gsk.Path.toString_].
+   * as e.g. produced by [gsk.path.Path.toString_].
    * A high-level summary of the syntax:
    * - `M x y` Move to `$(LPAREN)x, y$(RPAREN)`
    * - `L x y` Add a line from the current point to `$(LPAREN)x, y$(RPAREN)`

@@ -1,6 +1,6 @@
 module gtk.print_operation;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -22,18 +22,18 @@ import gtk.window;
  * infrastructure to implement a good print dialog. On such
  * platforms, `GtkPrintOperation` uses the native print dialog.
  * On platforms which do not provide a native print dialog, GTK
- * uses its own, see [Gtk.PrintUnixDialog].
+ * uses its own, see [gtk.print_unix_dialog.PrintUnixDialog].
  * The typical way to use the high-level printing API is to create
- * a `GtkPrintOperation` object with [Gtk.PrintOperation.new_]
+ * a `GtkPrintOperation` object with [gtk.print_operation.PrintOperation.new_]
  * when the user selects to print. Then you set some properties on it,
- * e.g. the page size, any [Gtk.PrintSettings] from previous print
+ * e.g. the page size, any [gtk.print_settings.PrintSettings] from previous print
  * operations, the number of pages, the current page, etc.
- * Then you start the print operation by calling [Gtk.PrintOperation.run].
+ * Then you start the print operation by calling [gtk.print_operation.PrintOperation.run].
  * It will then show a dialog, let the user select a printer and options.
  * When the user finished the dialog, various signals will be emitted on
  * the `GtkPrintOperation`, the main one being
  * signal@Gtk.PrintOperation::draw-page, which you are supposed to handle
- * and render the page on the provided [Gtk.PrintContext] using Cairo.
+ * and render the page on the provided [gtk.print_context.PrintContext] using Cairo.
  * # The high-level printing API
  * ```c
  * static GtkPrintSettings *settings \= NULL;
@@ -61,9 +61,9 @@ import gtk.window;
  * By default `GtkPrintOperation` uses an external application to do
  * print preview. To implement a custom print preview, an application
  * must connect to the preview signal. The functions
- * [Gtk.PrintOperationPreview.renderPage],
- * [Gtk.PrintOperationPreview.endPreview] and
- * [Gtk.PrintOperationPreview.isSelected]
+ * [gtk.print_operation_preview.PrintOperationPreview.renderPage],
+ * [gtk.print_operation_preview.PrintOperationPreview.endPreview] and
+ * [gtk.print_operation_preview.PrintOperationPreview.isSelected]
  * are useful when implementing a print preview.
  */
 class PrintOperation : ObjectG, PrintOperationPreview
@@ -101,7 +101,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
   /**
    * Cancels a running print operation.
    * This function may be called from a signalGtk.PrintOperation::begin-print,
-   * [Gtk.PrintOperation.paginate] or signalGtk.PrintOperation::draw-page
+   * [gtk.print_operation.PrintOperation.paginate] or signalGtk.PrintOperation::draw-page
    * signal handler to stop the currently running print operation.
    */
   void cancel()
@@ -112,7 +112,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
   /**
    * Signal that drawing of particular page is complete.
    * It is called after completion of page drawing $(LPAREN)e.g. drawing
-   * in another thread$(RPAREN). If [Gtk.PrintOperation.setDeferDrawing]
+   * in another thread$(RPAREN). If [gtk.print_operation.PrintOperation.setDeferDrawing]
    * was called before, then this function has to be called by application.
    * Otherwise it is called by GTK itself.
    */
@@ -147,8 +147,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
   /**
    * Call this when the result of a print operation is
    * %GTK_PRINT_OPERATION_RESULT_ERROR.
-   * It can be called either after [Gtk.PrintOperation.run]
-   * returns, or in the [Gtk.PrintOperation.done] signal
+   * It can be called either after [gtk.print_operation.PrintOperation.run]
+   * returns, or in the [gtk.print_operation.PrintOperation.done] signal
    * handler.
    * The returned `GError` will contain more details on what went wrong.
    */
@@ -177,7 +177,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * $(LPAREN)%GTK_PRINT_STATUS_PREPARING$(RPAREN), so this function should never be
    * called before the data generation phase $(LPAREN)%GTK_PRINT_STATUS_GENERATING_DATA$(RPAREN).
    * You can connect to the signalGtk.PrintOperation::status-changed
-   * signal and call [Gtk.PrintOperation.getNPagesToPrint] when
+   * signal and call [gtk.print_operation.PrintOperation.getNPagesToPrint] when
    * print status is %GTK_PRINT_STATUS_GENERATING_DATA.
    * This is typically used to track the progress of print operation.
    * Returns: the number of pages that will be printed
@@ -192,8 +192,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
   /**
    * Returns the current print settings.
    * Note that the return value is %NULL until either
-   * [Gtk.PrintOperation.setPrintSettings] or
-   * [Gtk.PrintOperation.run] have been called.
+   * [gtk.print_operation.PrintOperation.setPrintSettings] or
+   * [gtk.print_operation.PrintOperation.run] have been called.
    * Returns: the current print settings of op.
    */
   PrintSettings getPrintSettings()
@@ -206,7 +206,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
 
   /**
    * Returns the status of the print operation.
-   * Also see [Gtk.PrintOperation.getStatusString].
+   * Also see [gtk.print_operation.PrintOperation.getStatusString].
    * Returns: the status of the print operation
    */
   PrintStatus getStatus()
@@ -222,7 +222,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * print operation.
    * The string is translated and suitable for displaying
    * the print status e.g. in a `GtkStatusbar`.
-   * Use [Gtk.PrintOperation.getStatus] to obtain
+   * Use [gtk.print_operation.PrintOperation.getStatus] to obtain
    * a status value that is suitable for programmatic use.
    * Returns: a string representation of the status
    *   of the print operation
@@ -272,7 +272,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Furthermore, it may use a recursive mainloop to show the print dialog.
    * If you set the [Gtk.PrintOperation:allow-async] property, the operation
    * will run asynchronously if this is supported on the platform. The
-   * [Gtk.PrintOperation.done] signal will be emitted with the result
+   * [gtk.print_operation.PrintOperation.done] signal will be emitted with the result
    * of the operation when the it is done $(LPAREN)i.e. when the dialog is canceled,
    * or when the print succeeds or fails$(RPAREN).
    * ```c
@@ -308,7 +308,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * settings \= g_object_ref $(LPAREN)gtk_print_operation_get_print_settings $(LPAREN)print$(RPAREN)$(RPAREN);
    * }
    * ```
-   * Note that [Gtk.PrintOperation.run] can only be called once on a
+   * Note that [gtk.print_operation.PrintOperation.run] can only be called once on a
    * given `GtkPrintOperation`.
    * Params:
    *   action = the action to start
@@ -317,10 +317,10 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   %GTK_PRINT_OPERATION_RESULT_APPLY indicates that the printing was
    *   completed successfully. In this case, it is a good idea to obtain
    *   the used print settings with
-   *   [Gtk.PrintOperation.getPrintSettings]
+   *   [gtk.print_operation.PrintOperation.getPrintSettings]
    *   and store them for reuse with the next print operation. A value of
    *   %GTK_PRINT_OPERATION_RESULT_IN_PROGRESS means the operation is running
-   *   asynchronously, and will emit the [Gtk.PrintOperation.done]
+   *   asynchronously, and will emit the [gtk.print_operation.PrintOperation.done]
    *   signal when done.
    */
   PrintOperationResult run(PrintOperationAction action, Window parent)
@@ -335,7 +335,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
   }
 
   /**
-   * Sets whether [Gtk.PrintOperation.run] may return
+   * Sets whether [gtk.print_operation.PrintOperation.run] may return
    * before the print operation is completed.
    * Note that some platforms may not allow asynchronous
    * operation.
@@ -349,7 +349,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
 
   /**
    * Sets the current page.
-   * If this is called before [Gtk.PrintOperation.run],
+   * If this is called before [gtk.print_operation.PrintOperation.run],
    * the user will be able to select to print only the current page.
    * Note that this only makes sense for pre-paginated documents.
    * Params:
@@ -373,7 +373,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
 
   /**
    * Makes default_page_setup the default page setup for op.
-   * This page setup will be used by [Gtk.PrintOperation.run],
+   * This page setup will be used by [gtk.print_operation.PrintOperation.run],
    * but it can be overridden on a per-page basis by connecting
    * to the signalGtk.PrintOperation::request-page-setup signal.
    * Params:
@@ -386,7 +386,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
 
   /**
    * Sets up the `GtkPrintOperation` to wait for calling of
-   * [Gtk.PrintOperation.drawPageFinish] signal.
+   * [gtk.print_operation.PrintOperation.drawPageFinish] signal.
    */
   void setDeferDrawing()
   {
@@ -425,7 +425,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
   /**
    * Sets whether there is a selection to print.
    * Application has to set number of pages to which the selection
-   * will draw by [Gtk.PrintOperation.setNPages] in a handler
+   * will draw by [gtk.print_operation.PrintOperation.setNPages] in a handler
    * for the signalGtk.PrintOperation::begin-print signal.
    * Params:
    *   hasSelection = %TRUE indicates that a selection exists
@@ -471,7 +471,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
   /**
    * Sets the print settings for op.
    * This is typically used to re-establish print settings
-   * from a previous print operation, see [Gtk.PrintOperation.run].
+   * from a previous print operation, see [gtk.print_operation.PrintOperation.run].
    * Params:
    *   printSettings = `GtkPrintSettings`
    */
@@ -547,9 +547,9 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Emitted after the user has finished changing print settings
    * in the dialog, before the actual rendering starts.
    * A typical use for ::begin-print is to use the parameters from the
-   * [Gtk.PrintContext] and paginate the document accordingly,
+   * [gtk.print_context.PrintContext] and paginate the document accordingly,
    * and then set the number of pages with
-   * [Gtk.PrintOperation.setNPages].
+   * [gtk.print_operation.PrintOperation.setNPages].
    * Params
    *   context = the `GtkPrintContext` for the current operation
    *   printOperation = the instance the signal is connected to
@@ -661,9 +661,9 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * everything required for printing.
    * result gives you information about what happened during the run.
    * If result is %GTK_PRINT_OPERATION_RESULT_ERROR then you can call
-   * [Gtk.PrintOperation.getError] for more information.
+   * [gtk.print_operation.PrintOperation.getError] for more information.
    * If you enabled print status tracking then
-   * [Gtk.PrintOperation.isFinished] may still return %FALSE
+   * [gtk.print_operation.PrintOperation.isFinished] may still return %FALSE
    * after the ::done signal was emitted.
    * Params
    *   result = the result of the print operation
@@ -699,7 +699,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Emitted for every page that is printed.
    * The signal handler must render the page_nr's page onto the cairo
    * context obtained from context using
-   * [Gtk.PrintContext.getCairoContext].
+   * [gtk.print_context.PrintContext.getCairoContext].
    * ```c
    * static void
    * draw_page $(LPAREN)GtkPrintOperation *operation,
@@ -731,8 +731,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * g_object_unref $(LPAREN)layout$(RPAREN);
    * }
    * ```
-   * Use [Gtk.PrintOperation.setUseFullPage] and
-   * [Gtk.PrintOperation.setUnit] before starting the print
+   * Use [gtk.print_operation.PrintOperation.setUseFullPage] and
+   * [gtk.print_operation.PrintOperation.setUnit] before starting the print
    * operation to set up the transformation of the cairo context
    * according to your needs.
    * Params
@@ -808,7 +808,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * The ::paginate signal is intended to be used for paginating a document
    * in small chunks, to avoid blocking the user interface for a long
    * time. The signal handler should update the number of pages using
-   * [Gtk.PrintOperation.setNPages], and return %TRUE if the document
+   * [gtk.print_operation.PrintOperation.setNPages], and return %TRUE if the document
    * has been completely paginated.
    * If you don't need to do pagination in chunks, you can simply do
    * it all in the ::begin-print handler, and set the number of pages
@@ -854,12 +854,12 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * %TRUE from its handler for this signal. In order to use the
    * provided context for the preview implementation, it must be
    * given a suitable cairo context with
-   * [Gtk.PrintContext.setCairoContext].
+   * [gtk.print_context.PrintContext.setCairoContext].
    * The custom preview implementation can use
-   * [Gtk.PrintOperationPreview.isSelected] and
-   * [Gtk.PrintOperationPreview.renderPage] to find pages which
+   * [gtk.print_operation_preview.PrintOperationPreview.isSelected] and
+   * [gtk.print_operation_preview.PrintOperationPreview.renderPage] to find pages which
    * are selected for print and render them. The preview must be
-   * finished by calling [Gtk.PrintOperationPreview.endPreview]
+   * finished by calling [gtk.print_operation_preview.PrintOperationPreview.endPreview]
    * $(LPAREN)typically in response to the user clicking a close button$(RPAREN).
    * Params
    *   preview = the `GtkPrintOperationPreview` for the current operation
@@ -939,8 +939,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
 
   /**
    * Emitted at between the various phases of the print operation.
-   * See [Gtk.PrintStatus] for the phases that are being discriminated.
-   * Use [Gtk.PrintOperation.getStatus] to find out the current
+   * See [gtk.PrintStatus] for the phases that are being discriminated.
+   * Use [gtk.print_operation.PrintOperation.getStatus] to find out the current
    * status.
    *   printOperation = the instance the signal is connected to
    */

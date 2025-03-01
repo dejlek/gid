@@ -1,6 +1,6 @@
 module gtksource.snippet_chunk;
 
-import gid.gid;
+import gid.global;
 import gobject.initially_unowned;
 import gobject.object;
 import gtksource.c.functions;

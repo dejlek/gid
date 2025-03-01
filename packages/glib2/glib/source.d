@@ -1,6 +1,6 @@
 module glib.source;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.main_context;
@@ -42,7 +42,7 @@ class Source : Boxed
    * additional data. The size passed in must be at least
    * `sizeof $(LPAREN)GSource$(RPAREN)`.
    * The source will not initially be associated with any #GMainContext
-   * and must be added to one with [GLib.Source.attach] before it will be
+   * and must be added to one with [glib.source.Source.attach] before it will be
    * executed.
    * Params:
    *   sourceFuncs = structure containing functions that implement
@@ -66,7 +66,7 @@ class Source : Boxed
    * child_source as well. $(LPAREN)source will also still be dispatched if
    * its own prepare/check functions indicate that it is ready.$(RPAREN)
    * If you don't need child_source to do anything on its own when it
-   * triggers, you can call [GObject.Global.sourceSetDummyCallback] on it to set a
+   * triggers, you can call [gobject.global.sourceSetDummyCallback] on it to set a
    * callback that does nothing $(LPAREN)except return %TRUE if appropriate$(RPAREN).
    * source will hold a reference on child_source while child_source
    * is attached to it.
@@ -82,7 +82,7 @@ class Source : Boxed
 
   /**
    * Adds a file descriptor to the set of file descriptors polled for
-   * this source. This is usually combined with [GLib.Source.new_] to add an
+   * this source. This is usually combined with [glib.source.Source.new_] to add an
    * event source. The event source's check function will typically test
    * the revents field in the #GPollFD struct and return %TRUE if events need
    * to be processed.
@@ -90,7 +90,7 @@ class Source : Boxed
    * Do not call this API on a #GSource that you did not create.
    * Using this API forces the linear scanning of event sources on each
    * main loop iteration.  Newly-written event sources should try to use
-   * [GLib.Source.addUnixFd] instead of this API.
+   * [glib.source.Source.addUnixFd] instead of this API.
    * Params:
    *   fd = a #GPollFD structure holding information about a file
    *     descriptor to watch.
@@ -103,8 +103,8 @@ class Source : Boxed
   /**
    * Monitors fd for the IO events in events.
    * The tag returned by this function can be used to remove or modify the
-   * monitoring of the fd using [GLib.Source.removeUnixFd] or
-   * [GLib.Source.modifyUnixFd].
+   * monitoring of the fd using [glib.source.Source.removeUnixFd] or
+   * [glib.source.Source.modifyUnixFd].
    * It is not necessary to remove the fd before destroying the source; it
    * will be cleaned up automatically.
    * This API is only intended to be used by implementations of #GSource.
@@ -123,7 +123,7 @@ class Source : Boxed
 
   /**
    * Adds a #GSource to a context so that it will be executed within
-   * that context. Remove it by calling [GLib.Source.destroy].
+   * that context. Remove it by calling [glib.source.Source.destroy].
    * This function is safe to call from any thread, regardless of which thread
    * the context is running in.
    * Params:
@@ -145,11 +145,11 @@ class Source : Boxed
    * context. It is safe to call this on sources which have already been
    * removed from their context.
    * This does not unref the #GSource: if you still hold a reference, use
-   * [GLib.Source.unref] to drop it.
+   * [glib.source.Source.unref] to drop it.
    * This function is safe to call from any thread, regardless of which thread
    * the #GMainContext is running in.
    * If the source is currently attached to a #GMainContext, destroying it
-   * will effectively unset the callback similar to calling [GLib.Source.setCallback].
+   * will effectively unset the callback similar to calling [glib.source.Source.setCallback].
    * This can mean, that the data's #GDestroyNotify gets called right away.
    */
   void destroy()
@@ -159,7 +159,7 @@ class Source : Boxed
 
   /**
    * Checks whether a source is allowed to be called recursively.
-   * see [GLib.Source.setCanRecurse].
+   * see [glib.source.Source.setCanRecurse].
    * Returns: whether recursion is allowed.
    */
   bool getCanRecurse()
@@ -175,7 +175,7 @@ class Source : Boxed
    * that the #GMainContext it was attached to still exists $(LPAREN)in which
    * case it will return that #GMainContext$(RPAREN). In particular, you can
    * always call this function on the source returned from
-   * [GLib.DGLibGlobal.mainCurrentSource]. But calling this function on a source
+   * [glib.global.mainCurrentSource]. But calling this function on a source
    * whose #GMainContext has been destroyed is an error.
    * Returns: the #GMainContext with which the
    *   source is associated, or %NULL if the context has not
@@ -191,11 +191,11 @@ class Source : Boxed
 
   /**
    * This function ignores source and is otherwise the same as
-   * [GLib.DGLibGlobal.getCurrentTime].
+   * [glib.global.getCurrentTime].
    * Params:
    *   timeval = #GTimeVal structure in which to store current time.
 
-   * Deprecated: use [GLib.Source.getTime] instead
+   * Deprecated: use [glib.source.Source.getTime] instead
    */
   void getCurrentTime(TimeVal timeval)
   {
@@ -206,11 +206,11 @@ class Source : Boxed
    * Returns the numeric ID for a particular source. The ID of a source
    * is a positive integer which is unique within a particular main loop
    * context. The reverse
-   * mapping from ID to source is done by [GLib.MainContext.findSourceById].
+   * mapping from ID to source is done by [glib.main_context.MainContext.findSourceById].
    * You can only call this function while the source is associated to a
-   * #GMainContext instance; calling this function before [GLib.Source.attach]
-   * or after [GLib.Source.destroy] yields undefined behavior. The ID returned
-   * is unique within the #GMainContext instance passed to [GLib.Source.attach].
+   * #GMainContext instance; calling this function before [glib.source.Source.attach]
+   * or after [glib.source.Source.destroy] yields undefined behavior. The ID returned
+   * is unique within the #GMainContext instance passed to [glib.source.Source.attach].
    * Returns: the ID $(LPAREN)greater than 0$(RPAREN) for the source
    */
   uint getId()
@@ -222,7 +222,7 @@ class Source : Boxed
 
   /**
    * Gets a name for the source, used in debugging and profiling.  The
-   * name may be #NULL if it has never been set with [GLib.Source.setName].
+   * name may be #NULL if it has never been set with [glib.source.Source.setName].
    * Returns: the name of the source
    */
   string getName()
@@ -246,7 +246,7 @@ class Source : Boxed
 
   /**
    * Gets the "ready time" of source, as set by
-   * [GLib.Source.setReadyTime].
+   * [glib.source.Source.setReadyTime].
    * Any time before or equal to the current monotonic time $(LPAREN)including 0$(RPAREN)
    * is an indication that the source will fire immediately.
    * Returns: the monotonic ready time, -1 for "never"
@@ -260,11 +260,11 @@ class Source : Boxed
 
   /**
    * Gets the time to be used when checking this source. The advantage of
-   * calling this function over calling [GLib.DGLibGlobal.getMonotonicTime] directly is
+   * calling this function over calling [glib.global.getMonotonicTime] directly is
    * that when checking multiple sources, GLib can cache a single value
    * instead of having to repeatedly get the system monotonic time.
    * The time here is the system monotonic time, if available, or some
-   * other reasonable alternative otherwise.  See [GLib.DGLibGlobal.getMonotonicTime].
+   * other reasonable alternative otherwise.  See [glib.global.getMonotonicTime].
    * Returns: the monotonic time in microseconds
    */
   long getTime()
@@ -348,14 +348,14 @@ class Source : Boxed
 
   /**
    * Updates the event mask to watch for the fd identified by tag.
-   * tag is the tag returned from [GLib.Source.addUnixFd].
+   * tag is the tag returned from [glib.source.Source.addUnixFd].
    * If you want to remove a fd, don't set its event mask to zero.
-   * Instead, call [GLib.Source.removeUnixFd].
+   * Instead, call [glib.source.Source.removeUnixFd].
    * This API is only intended to be used by implementations of #GSource.
    * Do not call this API on a #GSource that you did not create.
    * As the name suggests, this function is not available on Windows.
    * Params:
-   *   tag = the tag from [GLib.Source.addUnixFd]
+   *   tag = the tag from [glib.source.Source.addUnixFd]
    *   newEvents = the new event mask to watch
    */
   void modifyUnixFd(void* tag, IOCondition newEvents)
@@ -372,7 +372,7 @@ class Source : Boxed
    * Do not call this API on a #GSource that you did not create.
    * As the name suggests, this function is not available on Windows.
    * Params:
-   *   tag = the tag from [GLib.Source.addUnixFd]
+   *   tag = the tag from [glib.source.Source.addUnixFd]
    * Returns: the conditions reported on the fd
    */
   IOCondition queryUnixFd(void* tag)
@@ -389,7 +389,7 @@ class Source : Boxed
    * Do not call this API on a #GSource that you did not create.
    * Params:
    *   childSource = a #GSource previously passed to
-   *     [GLib.Source.addChildSource].
+   *     [glib.source.Source.addChildSource].
    */
   void removeChildSource(Source childSource)
   {
@@ -402,7 +402,7 @@ class Source : Boxed
    * This API is only intended to be used by implementations of #GSource.
    * Do not call this API on a #GSource that you did not create.
    * Params:
-   *   fd = a #GPollFD structure previously passed to [GLib.Source.addPoll].
+   *   fd = a #GPollFD structure previously passed to [glib.source.Source.addPoll].
    */
   void removePoll(PollFD fd)
   {
@@ -410,7 +410,7 @@ class Source : Boxed
   }
 
   /**
-   * Reverses the effect of a previous call to [GLib.Source.addUnixFd].
+   * Reverses the effect of a previous call to [glib.source.Source.addUnixFd].
    * You only need to call this if you want to remove an fd from being
    * watched while keeping the same source around.  In the normal case you
    * will just want to destroy the source.
@@ -418,7 +418,7 @@ class Source : Boxed
    * Do not call this API on a #GSource that you did not create.
    * As the name suggests, this function is not available on Windows.
    * Params:
-   *   tag = the tag from [GLib.Source.addUnixFd]
+   *   tag = the tag from [glib.source.Source.addUnixFd]
    */
   void removeUnixFd(void* tag)
   {
@@ -435,11 +435,11 @@ class Source : Boxed
    * See [memory management of sources][mainloop-memory-management] for details
    * on how to handle memory management of data.
    * Typically, you won't use this function. Instead use functions specific
-   * to the type of source you are using, such as [GLib.DGLibGlobal.idleAdd] or [GLib.DGLibGlobal.timeoutAdd].
+   * to the type of source you are using, such as [glib.global.idleAdd] or [glib.global.timeoutAdd].
    * It is safe to call this function multiple times on a source which has already
    * been attached to a context. The changes will take effect for the next time
    * the source is dispatched after this call returns.
-   * Note that [GLib.Source.destroy] for a currently attached source has the effect
+   * Note that [glib.source.Source.destroy] for a currently attached source has the effect
    * of also unsetting the callback.
    * Params:
    *   func = a callback function
@@ -463,7 +463,7 @@ class Source : Boxed
   /**
    * Sets the callback function storing the data as a refcounted callback
    * "object". This is used internally. Note that calling
-   * [GLib.Source.setCallbackIndirect] assumes
+   * [glib.source.Source.setCallbackIndirect] assumes
    * an initial reference count on callback_data, and thus
    * callback_funcs->unref will eventually be called once more
    * than callback_funcs->ref.
@@ -515,10 +515,10 @@ class Source : Boxed
    * one could change the name in the "check" function of a #GSourceFuncs
    * to include details like the event type in the source name.
    * Use caution if changing the name while another thread may be
-   * accessing it with [GLib.Source.getName]; that function does not copy
+   * accessing it with [glib.source.Source.getName]; that function does not copy
    * the value, and changing the value will free it while the other thread
    * may be attempting to use it.
-   * Also see [GLib.Source.setStaticName].
+   * Also see [glib.source.Source.setStaticName].
    * Params:
    *   name = debug name for the source
    */
@@ -559,7 +559,7 @@ class Source : Boxed
    * for both sources is reached during the same main context iteration,
    * then the order of dispatch is undefined.
    * It is a no-op to call this function on a #GSource which has already been
-   * destroyed with [GLib.Source.destroy].
+   * destroyed with [glib.source.Source.destroy].
    * This API is only intended to be used by implementations of #GSource.
    * Do not call this API on a #GSource that you did not create.
    * Params:
@@ -572,7 +572,7 @@ class Source : Boxed
   }
 
   /**
-   * A variant of [GLib.Source.setName] that does not
+   * A variant of [glib.source.Source.setName] that does not
    * duplicate the name, and can only be used with
    * string literals.
    * Params:
@@ -586,17 +586,17 @@ class Source : Boxed
 
   /**
    * Removes the source with the given ID from the default main context. You must
-   * use [GLib.Source.destroy] for sources added to a non-default main context.
-   * The ID of a #GSource is given by [GLib.Source.getId], or will be
-   * returned by the functions [GLib.Source.attach], [GLib.DGLibGlobal.idleAdd],
-   * [GLib.DGLibGlobal.idleAddFull], [GLib.DGLibGlobal.timeoutAdd], [GLib.DGLibGlobal.timeoutAddFull],
-   * [GLib.DGLibGlobal.childWatchAdd], [GLib.DGLibGlobal.childWatchAddFull], [GLib.DGLibGlobal.ioAddWatch], and
-   * [GLib.DGLibGlobal.ioAddWatchFull].
+   * use [glib.source.Source.destroy] for sources added to a non-default main context.
+   * The ID of a #GSource is given by [glib.source.Source.getId], or will be
+   * returned by the functions [glib.source.Source.attach], [glib.global.idleAdd],
+   * [glib.global.idleAddFull], [glib.global.timeoutAdd], [glib.global.timeoutAddFull],
+   * [glib.global.childWatchAdd], [glib.global.childWatchAddFull], [glib.global.ioAddWatch], and
+   * [glib.global.ioAddWatchFull].
    * It is a programmer error to attempt to remove a non-existent source.
    * More specifically: source IDs can be reissued after a source has been
    * destroyed and therefore it is never valid to use this function with a
    * source ID which may have already been removed.  An example is when
-   * scheduling an idle to run in another thread with [GLib.DGLibGlobal.idleAdd]: the
+   * scheduling an idle to run in another thread with [glib.global.idleAdd]: the
    * idle may already have run and been removed by the time this function
    * is called on its $(LPAREN)now invalid$(RPAREN) source ID.  This source ID may have
    * been reissued, leading to the operation being performed against the
@@ -617,7 +617,7 @@ class Source : Boxed
    * source functions and user data. If multiple sources exist with the
    * same source functions and user data, only one will be destroyed.
    * Params:
-   *   funcs = The source_funcs passed to [GLib.Source.new_]
+   *   funcs = The source_funcs passed to [glib.source.Source.new_]
    *   userData = the user data for the callback
    * Returns: %TRUE if a source was found and removed.
    */
@@ -646,13 +646,13 @@ class Source : Boxed
   /**
    * Sets the name of a source using its ID.
    * This is a convenience utility to set source names from the return
-   * value of [GLib.DGLibGlobal.idleAdd], [GLib.DGLibGlobal.timeoutAdd], etc.
+   * value of [glib.global.idleAdd], [glib.global.timeoutAdd], etc.
    * It is a programmer error to attempt to set the name of a non-existent
    * source.
    * More specifically: source IDs can be reissued after a source has been
    * destroyed and therefore it is never valid to use this function with a
    * source ID which may have already been removed.  An example is when
-   * scheduling an idle to run in another thread with [GLib.DGLibGlobal.idleAdd]: the
+   * scheduling an idle to run in another thread with [glib.global.idleAdd]: the
    * idle may already have run and been removed by the time this function
    * is called on its $(LPAREN)now invalid$(RPAREN) source ID.  This source ID may have
    * been reissued, leading to the operation being performed against the

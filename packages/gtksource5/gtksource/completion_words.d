@@ -1,6 +1,6 @@
 module gtksource.completion_words;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.text_buffer;
 import gtksource.c.functions;
@@ -13,7 +13,7 @@ import gtksource.types;
  * A iface@CompletionProvider for the completion of words.
  * The `GtkSourceCompletionWords` is an example of an implementation of
  * the iface@CompletionProvider interface. The proposals are words
- * appearing in the registered [Gtk.TextBuffer]s.
+ * appearing in the registered [gtk.text_buffer.TextBuffer]s.
  */
 class CompletionWords : ObjectG, CompletionProvider
 {

@@ -1,6 +1,6 @@
 module glib.variant_iter;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -52,9 +52,9 @@ class VariantIter
   /**
    * Gets the next item in the container.  If no more items remain then
    * %NULL is returned.
-   * Use [GLib.VariantG.unref] to drop your reference on the return value when
+   * Use [glib.variant.VariantG.unref] to drop your reference on the return value when
    * you no longer need it.
-   * Here is an example for iterating with [GLib.VariantIter.nextValue]:
+   * Here is an example for iterating with [glib.variant_iter.VariantIter.nextValue]:
    * |[<!-- language\="C" -->
    * // recursively iterate a container
    * void

@@ -1,6 +1,6 @@
 module gtk.file_launcher;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -20,10 +20,10 @@ import gtk.window;
  * Depending on system configuration, user preferences and available APIs, this
  * may or may not show an app chooser dialog or launch the default application
  * right away.
- * The operation is started with the [Gtk.FileLauncher.launch] function.
+ * The operation is started with the [gtk.file_launcher.FileLauncher.launch] function.
  * This API follows the GIO async pattern, and the result can be obtained by
- * calling [Gtk.FileLauncher.launchFinish].
- * To launch uris that don't represent files, use [Gtk.UriLauncher].
+ * calling [gtk.file_launcher.FileLauncher.launchFinish].
+ * To launch uris that don't represent files, use [gtk.uri_launcher.UriLauncher].
  */
 class FileLauncher : ObjectG
 {
@@ -95,7 +95,7 @@ class FileLauncher : ObjectG
    * Launch an application to open the file.
    * This may present an app chooser dialog to the user.
    * The callback will be called when the operation is completed.
-   * It should call [Gtk.FileLauncher.launchFinish] to obtain
+   * It should call [gtk.file_launcher.FileLauncher.launchFinish] to obtain
    * the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -118,7 +118,7 @@ class FileLauncher : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.FileLauncher.launch] call and
+   * Finishes the [gtk.file_launcher.FileLauncher.launch] call and
    * returns the result.
    * Params:
    *   result = a `GAsyncResult`
@@ -140,7 +140,7 @@ class FileLauncher : ObjectG
    * This is only supported native files. It will fail if file
    * is e.g. a http:// uri.
    * The callback will be called when the operation is completed.
-   * It should call [Gtk.FileLauncher.openContainingFolderFinish]
+   * It should call [gtk.file_launcher.FileLauncher.openContainingFolderFinish]
    * to obtain the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -163,7 +163,7 @@ class FileLauncher : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.FileLauncher.openContainingFolder]
+   * Finishes the [gtk.file_launcher.FileLauncher.openContainingFolder]
    * call and returns the result.
    * Params:
    *   result = a `GAsyncResult`

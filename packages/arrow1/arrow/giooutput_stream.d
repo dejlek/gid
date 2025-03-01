@@ -8,7 +8,7 @@ import arrow.output_stream : DArrowOutputStream = OutputStream;
 import arrow.types;
 import arrow.writable;
 import arrow.writable_mixin;
-import gid.gid;
+import gid.global;
 import gio.output_stream;
 import gobject.object;
 

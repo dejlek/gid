@@ -1,6 +1,6 @@
 module gtk.builder;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.closure;
 import gobject.object;
@@ -17,31 +17,31 @@ import gtk.types;
  * A `GtkBuilder` reads XML descriptions of a user interface and
  * instantiates the described objects.
  * To create a `GtkBuilder` from a user interface description, call
- * [Gtk.Builder.newFromFile], [Gtk.Builder.newFromResource]
- * or [Gtk.Builder.newFromString].
+ * [gtk.builder.Builder.newFromFile], [gtk.builder.Builder.newFromResource]
+ * or [gtk.builder.Builder.newFromString].
  * In the $(LPAREN)unusual$(RPAREN) case that you want to add user interface
  * descriptions from multiple sources to the same `GtkBuilder` you can
- * call [Gtk.Builder.new_] to get an empty builder and populate it by
- * $(LPAREN)multiple$(RPAREN) calls to [Gtk.Builder.addFromFile],
- * [Gtk.Builder.addFromResource] or
- * [Gtk.Builder.addFromString].
+ * call [gtk.builder.Builder.new_] to get an empty builder and populate it by
+ * $(LPAREN)multiple$(RPAREN) calls to [gtk.builder.Builder.addFromFile],
+ * [gtk.builder.Builder.addFromResource] or
+ * [gtk.builder.Builder.addFromString].
  * A `GtkBuilder` holds a reference to all objects that it has constructed
  * and drops these references when it is finalized. This finalization can
  * cause the destruction of non-widget objects or widgets which are not
  * contained in a toplevel window. For toplevel windows constructed by a
  * builder, it is the responsibility of the user to call
- * [Gtk.Window.destroy] to get rid of them and all the widgets
+ * [gtk.window.Window.destroy] to get rid of them and all the widgets
  * they contain.
- * The functions [Gtk.Builder.getObject] and
- * [Gtk.Builder.getObjects] can be used to access the widgets in
+ * The functions [gtk.builder.Builder.getObject] and
+ * [gtk.builder.Builder.getObjects] can be used to access the widgets in
  * the interface by the names assigned to them inside the UI description.
  * Toplevel windows returned by these functions will stay around until the
- * user explicitly destroys them with [Gtk.Window.destroy]. Other
+ * user explicitly destroys them with [gtk.window.Window.destroy]. Other
  * widgets will either be part of a larger hierarchy constructed by the
  * builder $(LPAREN)in which case you should not have to worry about their lifecycle$(RPAREN),
  * or without a parent, in which case they have to be added to some container
  * to make use of them. Non-widget objects need to be reffed with
- * [GObject.ObjectG.ref_] to keep them beyond the lifespan of the builder.
+ * [gobject.object.ObjectG.ref_] to keep them beyond the lifespan of the builder.
  * ## GtkBuilder UI Definitions
  * `GtkBuilder` parses textual descriptions of user interfaces which are
  * specified in XML format. We refer to these descriptions as “GtkBuilder
@@ -51,7 +51,7 @@ import gtk.types;
  * The toplevel element is `<interface>`. It optionally takes a “domain”
  * attribute, which will make the builder look for translated strings
  * using `dgettext$(LPAREN)$(RPAREN)` in the domain specified. This can also be done by
- * calling [Gtk.Builder.setTranslationDomain] on the builder.
+ * calling [gtk.builder.Builder.setTranslationDomain] on the builder.
  * For example:
  * ```xml
  * <?xml version\="1.0" encoding\="UTF-8">
@@ -84,10 +84,10 @@ import gtk.types;
  * necessary, it is possible to specify the name of the `get_type$(LPAREN)$(RPAREN)`
  * function explicitly with the "type-func" attribute. If your UI definition
  * is referencing internal types, you should make sure to call
- * `[GObject.Global.typeEnsure]` for each object type before parsing the UI definition.
+ * `[gobject.global.typeEnsure]` for each object type before parsing the UI definition.
  * Objects may be given a name with the “id” attribute, which allows the
  * application to retrieve them from the builder with
- * [Gtk.Builder.getObject]. An id is also necessary to use the
+ * [gtk.builder.Builder.getObject]. An id is also necessary to use the
  * object as property value in other parts of the UI definition. GTK
  * reserves ids starting and ending with `___` $(LPAREN)three consecutive
  * underscores$(RPAREN) for its own purposes.
@@ -126,20 +126,20 @@ import gtk.types;
  * - flag types $(LPAREN)can be specified by their C identifier, short name, integer
  * value, and optionally combined with “|” for bitwise OR, e.g.
  * “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase”$(RPAREN)
- * - colors $(LPAREN)in a format understood by [Gdk.RGBA.parse]$(RPAREN)
+ * - colors $(LPAREN)in a format understood by [gdk.rgba.RGBA.parse]$(RPAREN)
  * - `GVariant` $(LPAREN)can be specified in the format understood by
- * [GLib.VariantG.parse]$(RPAREN)
+ * [glib.variant.VariantG.parse]$(RPAREN)
  * - pixbufs $(LPAREN)can be specified as a filename of an image file to load$(RPAREN)
  * Objects can be referred to by their name and by default refer to
  * objects declared in the local XML fragment and objects exposed via
- * [Gtk.Builder.exposeObject]. In general, `GtkBuilder` allows
+ * [gtk.builder.Builder.exposeObject]. In general, `GtkBuilder` allows
  * forward references to objects declared in the local XML; an object
  * doesn’t have to be constructed before it can be referred to. The
  * exception to this rule is that an object has to be constructed before
  * it can be used as the value of a construct-only property.
  * ### Child objects
  * Many widgets have properties for child widgets, such as
- * [Gtk.Expander.child]. In this case, the preferred way to
+ * [gtk.expander.Expander.Widget]. In this case, the preferred way to
  * specify the child widget in a ui file is to simply set the property:
  * ```xml
  * <object class\="GtkExpander">
@@ -151,11 +151,11 @@ import gtk.types;
  * </object>
  * ```
  * Generic containers that can contain an arbitrary number of children,
- * such as [Gtk.Box] instead use the `<child>` element. A `<child>`
+ * such as [gtk.box.Box] instead use the `<child>` element. A `<child>`
  * element contains an `<object>` element which describes the child object.
  * Most often, child objects are widgets inside a container, but they can
  * also be, e.g., actions in an action group, or columns in a tree model.
- * Any object type that implements the [Gtk.Buildable] interface can
+ * Any object type that implements the [gtk.buildable.Buildable] interface can
  * specify how children may be added to it. Since many objects and widgets that
  * are included with GTK already implement the `GtkBuildable` interface,
  * typically child objects can be added using the `<child>` element without
@@ -166,7 +166,7 @@ import gtk.types;
  * A noteworthy special case to the general rule that only objects implementing
  * `GtkBuildable` may specify how to handle the `<child>` element is that
  * `GtkBuilder` provides special support for adding objects to a
- * [Gio.ListStore] by using the `<child>` element. For instance:
+ * [gio.list_store.ListStore] by using the `<child>` element. For instance:
  * ```xml
  * <object class\="GListStore">
  * <property name\="item-type">MyObject</property>
@@ -182,7 +182,7 @@ import gtk.types;
  * source object of the binding, and optionally, "bind-property" and
  * "bind-flags" to specify the source property and source binding flags
  * respectively. Internally, `GtkBuilder` implements this using
- * [GObject.Binding] objects.
+ * [gobject.binding.Binding] objects.
  * For instance, in the example below the “label” property of the
  * `bottom_label` widget is bound to the “label” property of the
  * `top_button` widget:
@@ -205,7 +205,7 @@ import gtk.types;
  * </object>
  * ```
  * For more information, see the documentation of the
- * [GObject.ObjectG.bindProperty] method.
+ * [gobject.object.ObjectG.bindProperty] method.
  * Please note that another way to set up bindings between objects in .ui files
  * is to use the `GtkExpression` methodology. See the
  * [`GtkExpression` documentation](class.Expression.html#gtkexpression-in-ui-files)
@@ -283,11 +283,11 @@ import gtk.types;
  * </interface>
  * ```
  * ## Using GtkBuildable for extending UI definitions
- * Objects can implement the [Gtk.Buildable] interface to add custom
+ * Objects can implement the [gtk.buildable.Buildable] interface to add custom
  * elements and attributes to the XML. Typically, any extension will be
  * documented in each type that implements the interface.
  * ## Templates
- * When describing a [Gtk.Widget], you can use the `<template>` tag to
+ * When describing a [gtk.widget.Widget], you can use the `<template>` tag to
  * describe a UI bound to a specific widget type. GTK will automatically load
  * the UI definition when instantiating the type, and bind children and
  * signal handlers to instance fields and function symbols.
@@ -316,8 +316,8 @@ class Builder : ObjectG
   /**
    * Creates a new empty builder object.
    * This function is only useful if you intend to make multiple calls
-   * to [Gtk.Builder.addFromFile], [Gtk.Builder.addFromResource]
-   * or [Gtk.Builder.addFromString] in order to merge multiple UI
+   * to [gtk.builder.Builder.addFromFile], [gtk.builder.Builder.addFromResource]
+   * or [gtk.builder.Builder.addFromString] in order to merge multiple UI
    * descriptions into a single builder.
    * Returns: a new $(LPAREN)empty$(RPAREN) `GtkBuilder` object
    */
@@ -391,9 +391,9 @@ class Builder : ObjectG
    * Parses a file containing a UI definition and merges it with
    * the current contents of builder.
    * This function is useful if you need to call
-   * [Gtk.Builder.setCurrentObject]$(RPAREN) to add user data to
+   * [gtk.builder.Builder.setCurrentObject]$(RPAREN) to add user data to
    * callbacks before loading GtkBuilder UI. Otherwise, you probably
-   * want [Gtk.Builder.newFromFile] instead.
+   * want [gtk.builder.Builder.newFromFile] instead.
    * If an error occurs, 0 will be returned and error will be assigned a
    * `GError` from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_FILE_ERROR`
    * domains.
@@ -422,9 +422,9 @@ class Builder : ObjectG
    * Parses a resource file containing a UI definition
    * and merges it with the current contents of builder.
    * This function is useful if you need to call
-   * [Gtk.Builder.setCurrentObject] to add user data to
+   * [gtk.builder.Builder.setCurrentObject] to add user data to
    * callbacks before loading GtkBuilder UI. Otherwise, you probably
-   * want [Gtk.Builder.newFromResource] instead.
+   * want [gtk.builder.Builder.newFromResource] instead.
    * If an error occurs, 0 will be returned and error will be assigned a
    * `GError` from the %GTK_BUILDER_ERROR, %G_MARKUP_ERROR or %G_RESOURCE_ERROR
    * domain.
@@ -450,9 +450,9 @@ class Builder : ObjectG
    * Parses a string containing a UI definition and merges it
    * with the current contents of builder.
    * This function is useful if you need to call
-   * [Gtk.Builder.setCurrentObject] to add user data to
+   * [gtk.builder.Builder.setCurrentObject] to add user data to
    * callbacks before loading `GtkBuilder` UI. Otherwise, you probably
-   * want [Gtk.Builder.newFromString] instead.
+   * want [gtk.builder.Builder.newFromString] instead.
    * Upon errors %FALSE will be returned and error will be assigned a
    * `GError` from the %GTK_BUILDER_ERROR, %G_MARKUP_ERROR or
    * %G_VARIANT_PARSE_ERROR domain.
@@ -574,7 +574,7 @@ class Builder : ObjectG
   /**
    * Creates a closure to invoke the function called function_name.
    * This is using the create_closure$(LPAREN)$(RPAREN) implementation of builder's
-   * [Gtk.BuilderScope].
+   * [gtk.builder_scope.BuilderScope].
    * If no closure could be created, %NULL will be returned and error
    * will be set.
    * Params:
@@ -600,7 +600,7 @@ class Builder : ObjectG
    * referenced just like any other object built by builder.
    * Only a single object may be added using name. However,
    * it is not an error to expose the same object under multiple
-   * names. `[Gtk.Builder.getObject]` may be used to determine
+   * names. `[gtk.builder.Builder.getObject]` may be used to determine
    * if an object has already been added with name.
    * Params:
    *   name = the name of the object exposed to the builder
@@ -636,7 +636,7 @@ class Builder : ObjectG
   }
 
   /**
-   * Gets the current object set via [Gtk.Builder.setCurrentObject].
+   * Gets the current object set via [gtk.builder.Builder.setCurrentObject].
    * Returns: the current object
    */
   ObjectG getCurrentObject()
@@ -671,7 +671,7 @@ class Builder : ObjectG
    * Returns: a
    *   newly-allocated `GSList` containing all the objects
    *   constructed by the `GtkBuilder instance`. It should be
-   *   freed by [GLib.SList.free]
+   *   freed by [glib.slist.SList.free]
    */
   ObjectG[] getObjects()
   {
@@ -682,7 +682,7 @@ class Builder : ObjectG
   }
 
   /**
-   * Gets the scope in use that was set via [Gtk.Builder.setScope].
+   * Gets the scope in use that was set via [gtk.builder.Builder.setScope].
    * Returns: the current scope
    */
   BuilderScope getScope()
@@ -728,9 +728,9 @@ class Builder : ObjectG
    * The current object can be thought of as the `this` object that the
    * builder is working for and will often be used as the default object
    * when an object is optional.
-   * [Gtk.Widget.initTemplate] for example will set the current
+   * [gtk.widget.Widget.initTemplate] for example will set the current
    * object to the widget the template is inited for. For functions like
-   * [Gtk.Builder.newFromResource], the current object will be %NULL.
+   * [gtk.builder.Builder.newFromResource], the current object will be %NULL.
    * Params:
    *   currentObject = the new current object
    */
@@ -741,7 +741,7 @@ class Builder : ObjectG
 
   /**
    * Sets the scope the builder should operate in.
-   * If scope is %NULL, a new [Gtk.BuilderCScope] will be created.
+   * If scope is %NULL, a new [gtk.builder_cscope.BuilderCScope] will be created.
    * Params:
    *   scope_ = the scope to use
    */
@@ -763,7 +763,7 @@ class Builder : ObjectG
 
   /**
    * Demarshals a value from a string.
-   * This function calls [GObject.Value.init_] on the value argument,
+   * This function calls [gobject.value.Value.init_] on the value argument,
    * so it need not be initialised beforehand.
    * Can handle char, uchar, boolean, int, uint, long,
    * ulong, enum, flags, float, double, string, `GdkRGBA` and
@@ -791,9 +791,9 @@ class Builder : ObjectG
 
   /**
    * Demarshals a value from a string.
-   * Unlike [Gtk.Builder.valueFromString], this function
+   * Unlike [gtk.builder.Builder.valueFromString], this function
    * takes a `GType` instead of `GParamSpec`.
-   * Calls [GObject.Value.init_] on the value argument, so it
+   * Calls [gobject.value.Value.init_] on the value argument, so it
    * need not be initialised beforehand.
    * Upon errors %FALSE will be returned and error will be
    * assigned a `GError` from the %GTK_BUILDER_ERROR domain.

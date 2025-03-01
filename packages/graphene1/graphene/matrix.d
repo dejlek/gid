@@ -1,6 +1,6 @@
 module graphene.matrix;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.box;
 import graphene.c.functions;
@@ -122,10 +122,10 @@ class Matrix : Boxed
   /**
    * Checks whether the two given #graphene_matrix_t matrices are
    * byte-by-byte equal.
-   * While this function is faster than [Graphene.Matrix.equal], it
+   * While this function is faster than [graphene.matrix.Matrix.equal], it
    * can also return false negatives, so it should be used in
-   * conjuction with either [Graphene.Matrix.equal] or
-   * [Graphene.Matrix.near]. For instance:
+   * conjuction with either [graphene.matrix.Matrix.equal] or
+   * [graphene.matrix.Matrix.near]. For instance:
    * |[<!-- language\="C" -->
    * if $(LPAREN)graphene_matrix_equal_fast $(LPAREN)a, b$(RPAREN)$(RPAREN)
    * {
@@ -327,7 +327,7 @@ class Matrix : Boxed
 
   /**
    * Initializes a #graphene_matrix_t compatible with #graphene_frustum_t.
-   * See also: [Graphene.Frustum.initFromMatrix]
+   * See also: [graphene.frustum.Frustum.initFromMatrix]
    * Params:
    *   left = distance of the left clipping plane
    *   right = distance of the right clipping plane
@@ -376,7 +376,7 @@ class Matrix : Boxed
    *   eye = the vector describing the position to look from
    *   center = the vector describing the position to look at
    *   up = the vector describing the world's upward direction; usually,
-   *     this is the [Graphene.Vec3.yAxis] vector
+   *     this is the [graphene.vec3.Vec3.yAxis] vector
    * Returns: the initialized matrix
    */
   Matrix initLookAt(Vec3 eye, Vec3 center, Vec3 up)
@@ -652,7 +652,7 @@ class Matrix : Boxed
 
   /**
    * Projects all corners of a #graphene_rect_t using the given matrix.
-   * See also: [Graphene.Matrix.projectPoint]
+   * See also: [graphene.matrix.Matrix.projectPoint]
    * Params:
    *   r = a #graphene_rect_t
    *   res = return location for the projected
@@ -684,7 +684,7 @@ class Matrix : Boxed
   /**
    * Adds a rotation transformation to m, using the given angle
    * and axis vector.
-   * This is the equivalent of calling [Graphene.Matrix.initRotate] and
+   * This is the equivalent of calling [graphene.matrix.Matrix.initRotate] and
    * then multiplying the matrix m with the rotation matrix.
    * Params:
    *   angle = the rotation angle, in degrees
@@ -709,7 +709,7 @@ class Matrix : Boxed
   /**
    * Adds a rotation transformation to m, using the given
    * #graphene_quaternion_t.
-   * This is the equivalent of calling [Graphene.Quaternion.toMatrix] and
+   * This is the equivalent of calling [graphene.quaternion.Quaternion.toMatrix] and
    * then multiplying m with the rotation matrix.
    * Params:
    *   q = a rotation described by a #graphene_quaternion_t
@@ -722,7 +722,7 @@ class Matrix : Boxed
   /**
    * Adds a rotation transformation around the X axis to m, using
    * the given angle.
-   * See also: [Graphene.Matrix.rotate]
+   * See also: [graphene.matrix.Matrix.rotate]
    * Params:
    *   angle = the rotation angle, in degrees
    */
@@ -734,7 +734,7 @@ class Matrix : Boxed
   /**
    * Adds a rotation transformation around the Y axis to m, using
    * the given angle.
-   * See also: [Graphene.Matrix.rotate]
+   * See also: [graphene.matrix.Matrix.rotate]
    * Params:
    *   angle = the rotation angle, in degrees
    */
@@ -746,7 +746,7 @@ class Matrix : Boxed
   /**
    * Adds a rotation transformation around the Z axis to m, using
    * the given angle.
-   * See also: [Graphene.Matrix.rotate]
+   * See also: [graphene.matrix.Matrix.rotate]
    * Params:
    *   angle = the rotation angle, in degrees
    */
@@ -758,7 +758,7 @@ class Matrix : Boxed
   /**
    * Adds a scaling transformation to m, using the three
    * given factors.
-   * This is the equivalent of calling [Graphene.Matrix.initScale] and then
+   * This is the equivalent of calling [graphene.matrix.Matrix.initScale] and then
    * multiplying the matrix m with the scale matrix.
    * Params:
    *   factorX = scaling factor on the X axis
@@ -845,7 +845,7 @@ class Matrix : Boxed
    * Transforms each corner of a #graphene_rect_t using the given matrix m.
    * The result is the axis aligned bounding rectangle containing the coplanar
    * quadrilateral.
-   * See also: [Graphene.Matrix.transformPoint]
+   * See also: [graphene.matrix.Matrix.transformPoint]
    * Params:
    *   r = a #graphene_rect_t
    *   res = return location for the bounds
@@ -876,7 +876,7 @@ class Matrix : Boxed
 
   /**
    * Transforms the given #graphene_point_t using the matrix m.
-   * Unlike [Graphene.Matrix.transformVec3], this function will take into
+   * Unlike [graphene.matrix.Matrix.transformVec3], this function will take into
    * account the fourth row vector of the #graphene_matrix_t when computing
    * the dot product of each row vector of the matrix.
    * See also: graphene_simd4x4f_point3_mul$(LPAREN)$(RPAREN)
@@ -894,7 +894,7 @@ class Matrix : Boxed
 
   /**
    * Transforms the given #graphene_point3d_t using the matrix m.
-   * Unlike [Graphene.Matrix.transformVec3], this function will take into
+   * Unlike [graphene.matrix.Matrix.transformVec3], this function will take into
    * account the fourth row vector of the #graphene_matrix_t when computing
    * the dot product of each row vector of the matrix.
    * See also: graphene_simd4x4f_point3_mul$(LPAREN)$(RPAREN)
@@ -926,7 +926,7 @@ class Matrix : Boxed
   /**
    * Transforms each corner of a #graphene_rect_t using the given matrix m.
    * The result is a coplanar quadrilateral.
-   * See also: [Graphene.Matrix.transformPoint]
+   * See also: [graphene.matrix.Matrix.transformPoint]
    * Params:
    *   r = a #graphene_rect_t
    *   res = return location for the
@@ -988,7 +988,7 @@ class Matrix : Boxed
   /**
    * Adds a translation transformation to m using the coordinates
    * of the given #graphene_point3d_t.
-   * This is the equivalent of calling [Graphene.Matrix.initTranslate] and
+   * This is the equivalent of calling [graphene.matrix.Matrix.initTranslate] and
    * then multiplying m with the translation matrix.
    * Params:
    *   pos = a #graphene_point3d_t

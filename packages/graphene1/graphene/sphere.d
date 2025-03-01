@@ -1,6 +1,6 @@
 module graphene.sphere;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.box;
 import graphene.c.functions;
@@ -45,7 +45,7 @@ class Sphere : Boxed
    * Allocates a new #graphene_sphere_t.
    * The contents of the newly allocated structure are undefined.
    * Returns: the newly allocated #graphene_sphere_t. Use
-   *   [Graphene.Sphere.free] to free the resources allocated by this function
+   *   [graphene.sphere.Sphere.free] to free the resources allocated by this function
    */
   static Sphere alloc()
   {

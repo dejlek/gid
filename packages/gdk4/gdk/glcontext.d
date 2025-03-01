@@ -6,7 +6,7 @@ import gdk.display;
 import gdk.draw_context;
 import gdk.surface;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 
@@ -14,7 +14,7 @@ import gobject.object;
  * `GdkGLContext` is an object representing a platform-specific
  * OpenGL draw context.
  * `GdkGLContext`s are created for a surface using
- * [Gdk.Surface.createGlContext], and the context will match
+ * [gdk.surface.Surface.createGlContext], and the context will match
  * the characteristics of the surface.
  * A `GdkGLContext` is not tied to any particular normal framebuffer.
  * For instance, it cannot draw to the surface back buffer. The GDK
@@ -29,11 +29,11 @@ import gobject.object;
  * ## Creating a new OpenGL context
  * In order to create a new `GdkGLContext` instance you need a `GdkSurface`,
  * which you typically get during the realize call of a widget.
- * A `GdkGLContext` is not realized until either [Gdk.GLContext.makeCurrent]
- * or [Gdk.GLContext.realize] is called. It is possible to specify
+ * A `GdkGLContext` is not realized until either [gdk.glcontext.GLContext.makeCurrent]
+ * or [gdk.glcontext.GLContext.realize] is called. It is possible to specify
  * details of the GL context like the OpenGL version to be used, or whether
  * the GL context should have extra state validation enabled after calling
- * [Gdk.Surface.createGlContext] by calling [Gdk.GLContext.realize].
+ * [gdk.surface.Surface.createGlContext] by calling [gdk.glcontext.GLContext.realize].
  * If the realization fails you have the option to change the settings of
  * the `GdkGLContext` and try again.
  * ## Using a GdkGLContext
@@ -46,8 +46,8 @@ import gobject.object;
  * ```
  * You can now perform your drawing using OpenGL commands.
  * You can check which `GdkGLContext` is the current one by using
- * [Gdk.GLContext.getCurrent]; you can also unset any `GdkGLContext`
- * that is currently set by calling [Gdk.GLContext.clearCurrent].
+ * [gdk.glcontext.GLContext.getCurrent]; you can also unset any `GdkGLContext`
+ * that is currently set by calling [gdk.glcontext.GLContext.clearCurrent].
  */
 class GLContext : DrawContext
 {
@@ -71,7 +71,7 @@ class GLContext : DrawContext
   /**
    * Clears the current `GdkGLContext`.
    * Any OpenGL call after this function returns will be ignored
-   * until [Gdk.GLContext.makeCurrent] is called.
+   * until [gdk.glcontext.GLContext.makeCurrent] is called.
    */
   static void clearCurrent()
   {
@@ -91,7 +91,7 @@ class GLContext : DrawContext
   }
 
   /**
-   * Gets the allowed APIs set via [Gdk.GLContext.setAllowedApis].
+   * Gets the allowed APIs set via [gdk.glcontext.GLContext.setAllowedApis].
    * Returns: the allowed APIs
    */
   GLAPI getAllowedApis()
@@ -117,7 +117,7 @@ class GLContext : DrawContext
 
   /**
    * Retrieves whether the context is doing extra validations and runtime checking.
-   * See [Gdk.GLContext.setDebugEnabled].
+   * See [gdk.glcontext.GLContext.setDebugEnabled].
    * Returns: %TRUE if debugging is enabled
    */
   bool getDebugEnabled()
@@ -141,7 +141,7 @@ class GLContext : DrawContext
 
   /**
    * Retrieves whether the context is forward-compatible.
-   * See [Gdk.GLContext.setForwardCompatible].
+   * See [gdk.glcontext.GLContext.setForwardCompatible].
    * Returns: %TRUE if the context should be forward-compatible
    */
   bool getForwardCompatible()
@@ -155,8 +155,8 @@ class GLContext : DrawContext
    * Retrieves required OpenGL version set as a requirement for the context
    * realization. It will not change even if a greater OpenGL version is supported
    * and used after the context is realized. See
-   * [Gdk.GLContext.getVersion] for the real version in use.
-   * See [Gdk.GLContext.setRequiredVersion].
+   * [gdk.glcontext.GLContext.getVersion] for the real version in use.
+   * See [gdk.glcontext.GLContext.setRequiredVersion].
    * Params:
    *   major = return location for the major version to request
    *   minor = return location for the minor version to request
@@ -172,7 +172,7 @@ class GLContext : DrawContext
    * anymore, this function has been deprecated and now always returns %NULL.
    * Returns: %NULL
 
-   * Deprecated: Use [Gdk.GLContext.isShared] to check if contexts
+   * Deprecated: Use [gdk.glcontext.GLContext.isShared] to check if contexts
    *   can be shared.
    */
   GLContext getSharedContext()
@@ -287,10 +287,10 @@ class GLContext : DrawContext
   }
 
   /**
-   * Sets the allowed APIs. When [Gdk.GLContext.realize] is called, only the
+   * Sets the allowed APIs. When [gdk.glcontext.GLContext.realize] is called, only the
    * allowed APIs will be tried. If you set this to 0, realizing will always fail.
    * If you set it on a realized context, the property will not have any effect.
-   * It is only relevant during [Gdk.GLContext.realize].
+   * It is only relevant during [gdk.glcontext.GLContext.realize].
    * By default, all APIs are allowed.
    * Params:
    *   apis = the allowed APIs
@@ -353,8 +353,8 @@ class GLContext : DrawContext
    * By default, GDK will attempt to automatically detect whether the
    * underlying GL implementation is OpenGL or OpenGL ES once the context
    * is realized.
-   * You should check the return value of [Gdk.GLContext.getUseEs]
-   * after calling [Gdk.GLContext.realize] to decide whether to use
+   * You should check the return value of [gdk.glcontext.GLContext.getUseEs]
+   * after calling [gdk.glcontext.GLContext.realize] to decide whether to use
    * the OpenGL or OpenGL ES API, extensions, or shaders.
    * Params:
    *   useEs = whether the context should use OpenGL ES instead of OpenGL,

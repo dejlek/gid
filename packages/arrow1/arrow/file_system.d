@@ -8,7 +8,7 @@ import arrow.input_stream;
 import arrow.output_stream;
 import arrow.seekable_input_stream;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 
@@ -36,7 +36,7 @@ class FileSystem : ObjectG
    * object.
    * Params:
    *   uri = An URI to specify file system with options. If you only have an
-   *     absolute path, [GLib.Global.filenameToUri] will help you.
+   *     absolute path, [glib.global.filenameToUri] will help you.
    * Returns: The newly created file system
    *   that is an object of a subclass of #GArrowFileSystem.
    */
@@ -111,7 +111,7 @@ class FileSystem : ObjectG
 
   /**
    * Delete a directory's contents, recursively. Like
-   * [Arrow.FileSystem.deleteDir], but doesn't delete the directory
+   * [arrow.file_system.FileSystem.deleteDir], but doesn't delete the directory
    * itself. Passing an empty path $(LPAREN)`""`$(RPAREN) will wipe the entire file
    * system tree.
    * Params:
@@ -195,7 +195,7 @@ class FileSystem : ObjectG
   }
 
   /**
-   * Get information same as [Arrow.FileSystem.getFileInfo]
+   * Get information same as [arrow.file_system.FileSystem.getFileInfo]
    * for the given many targets at once.
    * Params:
    *   paths = The paths of the targets.
@@ -222,7 +222,7 @@ class FileSystem : ObjectG
   }
 
   /**
-   * Get information same as [Arrow.FileSystem.getFileInfo]
+   * Get information same as [arrow.file_system.FileSystem.getFileInfo]
    * according to a selector.
    * The selector's base directory will not be part of the results,
    * even if it exists.

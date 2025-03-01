@@ -1,7 +1,7 @@
 module gio.action_map;
 
 public import gio.action_map_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.action;
 import gio.action_mixin;
 import gio.c.functions;
@@ -11,9 +11,9 @@ import gobject.object;
 
 /**
  * `GActionMap` is an interface for action containers.
- * The `GActionMap` interface is implemented by [Gio.ActionGroup]
+ * The `GActionMap` interface is implemented by [gio.action_group.ActionGroup]
  * implementations that operate by containing a number of named
- * [Gio.Action] instances, such as [Gio.SimpleActionGroup].
+ * [gio.action.Action] instances, such as [gio.simple_action_group.SimpleActionGroup].
  * One useful application of this interface is to map the
  * names of actions from various action groups to unique,
  * prefixed names $(LPAREN)e.g. by prepending "app." or "win."$(RPAREN).

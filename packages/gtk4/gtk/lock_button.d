@@ -1,6 +1,6 @@
 module gtk.lock_button;
 
-import gid.gid;
+import gid.global;
 import gio.permission;
 import gobject.object;
 import gtk.accessible;

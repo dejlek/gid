@@ -1,6 +1,6 @@
 module gtk.object_expression;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -25,7 +25,7 @@ class ObjectExpression : Expression
    * Creates an expression evaluating to the given `object` with a weak reference.
    * Once the `object` is disposed, it will fail to evaluate.
    * This expression is meant to break reference cycles.
-   * If you want to keep a reference to `object`, use [Gtk.ConstantExpression.new_].
+   * If you want to keep a reference to `object`, use [gtk.constant_expression.ConstantExpression.new_].
    * Params:
    *   object = object to watch
    * Returns: a new `GtkExpression`

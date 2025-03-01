@@ -3,7 +3,7 @@ module arrowflight.server_auth_handler;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class ServerAuthHandler : ObjectG

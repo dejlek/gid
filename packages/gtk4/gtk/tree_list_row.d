@@ -1,6 +1,6 @@
 module gtk.tree_list_row;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -12,10 +12,10 @@ import gtk.types;
  * `GtkTreeListRow` is used by `GtkTreeListModel` to represent items.
  * It allows navigating the model as a tree and modify the state of rows.
  * `GtkTreeListRow` instances are created by a `GtkTreeListModel` only
- * when the [Gtk.TreeListModel.passthrough] property is not set.
+ * when the [gtk.tree_list_model.TreeListModel.gboolean] property is not set.
  * There are various support objects that can make use of `GtkTreeListRow`
- * objects, such as the [Gtk.TreeExpander] widget that allows displaying
- * an icon to expand or collapse a row or [Gtk.TreeListRowSorter] that
+ * objects, such as the [gtk.tree_expander.TreeExpander] widget that allows displaying
+ * an icon to expand or collapse a row or [gtk.tree_list_row_sorter.TreeListRowSorter] that
  * makes it possible to sort trees properly.
  */
 class TreeListRow : ObjectG
@@ -55,9 +55,9 @@ class TreeListRow : ObjectG
   /**
    * If the row is expanded, gets the model holding the children of self.
    * This model is the model created by the
-   * [Gtk.TreeListModelCreateModelFunc]
+   * [gtk.TreeListModelCreateModelFunc]
    * and contains the original items, no matter what value
-   * [Gtk.TreeListModel.passthrough] is set to.
+   * [gtk.tree_list_model.TreeListModel.gboolean] is set to.
    * Returns: The model containing the children
    */
   ListModel getChildren()
@@ -143,7 +143,7 @@ class TreeListRow : ObjectG
   /**
    * Checks if a row can be expanded.
    * This does not mean that the row is actually expanded,
-   * this can be checked with [Gtk.TreeListRow.getExpanded].
+   * this can be checked with [gtk.tree_list_row.TreeListRow.getExpanded].
    * If a row is expandable never changes until the row is removed
    * from its model at which point it will forever return %FALSE.
    * Returns: %TRUE if the row is expandable
@@ -158,7 +158,7 @@ class TreeListRow : ObjectG
   /**
    * Expands or collapses a row.
    * If a row is expanded, the model of calling the
-   * [Gtk.TreeListModelCreateModelFunc] for the row's
+   * [gtk.TreeListModelCreateModelFunc] for the row's
    * item will be inserted after this row. If a row is collapsed,
    * those items will be removed from the model.
    * If the row is not expandable, this function does nothing.

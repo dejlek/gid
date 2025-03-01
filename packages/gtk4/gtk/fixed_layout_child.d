@@ -1,6 +1,6 @@
 module gtk.fixed_layout_child;
 
-import gid.gid;
+import gid.global;
 import gsk.transform;
 import gtk.c.functions;
 import gtk.c.types;

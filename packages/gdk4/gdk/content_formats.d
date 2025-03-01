@@ -3,7 +3,7 @@ module gdk.content_formats;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import glib.string_;
 import gobject.boxed;
 import gobject.types;
@@ -13,28 +13,28 @@ import gobject.types;
  * format of content.
  * You will encounter `GdkContentFormats` when interacting with objects
  * controlling operations that pass data between different widgets, window
- * or application, like [Gdk.Drag], [Gdk.Drop],
- * [Gdk.Clipboard] or [Gdk.ContentProvider].
+ * or application, like [gdk.drag.Drag], [gdk.drop.Drop],
+ * [gdk.clipboard.Clipboard] or [gdk.content_provider.ContentProvider].
  * GDK supports content in 2 forms: `GType` and mime type.
  * Using `GTypes` is meant only for in-process content transfers. Mime types
  * are meant to be used for data passing both in-process and out-of-process.
  * The details of how data is passed is described in the documentation of
  * the actual implementations. To transform between the two forms,
- * [Gdk.ContentSerializer] and [Gdk.ContentDeserializer] are used.
+ * [gdk.content_serializer.ContentSerializer] and [gdk.content_deserializer.ContentDeserializer] are used.
  * A `GdkContentFormats` describes a set of possible formats content can be
  * exchanged in. It is assumed that this set is ordered. `GTypes` are more
  * important than mime types. Order between different `GTypes` or mime types
  * is the order they were added in, most important first. Functions that
- * care about order, such as [Gdk.ContentFormats.union_], will describe
+ * care about order, such as [gdk.content_formats.ContentFormats.union_], will describe
  * in their documentation how they interpret that order, though in general the
  * order of the first argument is considered the primary order of the result,
  * followed by the order of further arguments.
- * For debugging purposes, the function [Gdk.ContentFormats.toString_]
+ * For debugging purposes, the function [gdk.content_formats.ContentFormats.toString_]
  * exists. It will print a comma-separated list of formats from most important
  * to least important.
  * `GdkContentFormats` is an immutable struct. After creation, you cannot change
  * the types it represents. Instead, new `GdkContentFormats` have to be created.
- * The [Gdk.ContentFormatsBuilder] structure is meant to help in this
+ * The [gdk.content_formats_builder.ContentFormatsBuilder] structure is meant to help in this
  * endeavor.
  */
 class ContentFormats : Boxed
@@ -65,7 +65,7 @@ class ContentFormats : Boxed
    * Creates a new `GdkContentFormats` from an array of mime types.
    * The mime types must be valid and different from each other or the
    * behavior of the return value is undefined. If you cannot guarantee
-   * this, use [Gdk.ContentFormatsBuilder] instead.
+   * this, use [gdk.content_formats_builder.ContentFormatsBuilder] instead.
    * Params:
    *   mimeTypes = Pointer to an
    *     array of mime types
@@ -217,7 +217,7 @@ class ContentFormats : Boxed
   /**
    * Prints the given formats into a string for human consumption.
    * The result of this function can later be parsed with
-   * [Gdk.ContentFormats.parse].
+   * [gdk.content_formats.ContentFormats.parse].
    * Params:
    *   string_ = a `GString` to print into
    */
@@ -228,8 +228,8 @@ class ContentFormats : Boxed
 
   /**
    * Prints the given formats into a human-readable string.
-   * The resulting string can be parsed with [Gdk.ContentFormats.parse].
-   * This is a small wrapper around [Gdk.ContentFormats.print]
+   * The resulting string can be parsed with [gdk.content_formats.ContentFormats.parse].
+   * This is a small wrapper around [gdk.content_formats.ContentFormats.print]
    * to help when debugging.
    * Returns: a new string
    */
@@ -311,7 +311,7 @@ class ContentFormats : Boxed
   /**
    * Parses the given string into `GdkContentFormats` and
    * returns the formats.
-   * Strings printed via [Gdk.ContentFormats.toString_]
+   * Strings printed via [gdk.content_formats.ContentFormats.toString_]
    * can be read in again successfully using this function.
    * If string does not describe valid content formats, %NULL
    * is returned.

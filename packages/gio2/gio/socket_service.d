@@ -1,6 +1,6 @@
 module gio.socket_service;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_connection;
@@ -12,23 +12,23 @@ import gobject.object;
 /**
  * A `GSocketService` is an object that represents a service that
  * is provided to the network or over local sockets.  When a new
- * connection is made to the service the [Gio.SocketService.incoming]
+ * connection is made to the service the [gio.socket_service.SocketService.incoming]
  * signal is emitted.
- * A `GSocketService` is a subclass of [Gio.SocketListener] and you need
+ * A `GSocketService` is a subclass of [gio.socket_listener.SocketListener] and you need
  * to add the addresses you want to accept connections on with the
- * [Gio.SocketListener] APIs.
+ * [gio.socket_listener.SocketListener] APIs.
  * There are two options for implementing a network service based on
  * `GSocketService`. The first is to create the service using
- * [Gio.SocketService.new_] and to connect to the
- * [Gio.SocketService.incoming] signal. The second is to subclass
+ * [gio.socket_service.SocketService.new_] and to connect to the
+ * [gio.socket_service.SocketService.incoming] signal. The second is to subclass
  * `GSocketService` and override the default signal handler implementation.
  * In either case, the handler must immediately return, or else it
  * will block additional incoming connections from being serviced.
  * If you are interested in writing connection handlers that contain
- * blocking code then see [Gio.ThreadedSocketService].
+ * blocking code then see [gio.threaded_socket_service.ThreadedSocketService].
  * The socket service runs on the main loop of the
  * thread-default context $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN) of the thread it is
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) of the thread it is
  * created in, and is not threadsafe in general. However, the calls to start and
  * stop the service are thread-safe so these can be used from threads that
  * handle incoming clients.
@@ -54,10 +54,10 @@ class SocketService : SocketListener
 
   /**
    * Creates a new #GSocketService with no sockets to listen for.
-   * New listeners can be added with e.g. [Gio.SocketListener.addAddress]
-   * or [Gio.SocketListener.addInetPort].
+   * New listeners can be added with e.g. [gio.socket_listener.SocketListener.addAddress]
+   * or [gio.socket_listener.SocketListener.addInetPort].
    * New services are created active, there is no need to call
-   * [Gio.SocketService.start], unless [Gio.SocketService.stop] has been
+   * [gio.socket_service.SocketService.start], unless [gio.socket_service.SocketService.stop] has been
    * called before.
    * Returns: a new #GSocketService.
    */
@@ -86,7 +86,7 @@ class SocketService : SocketListener
    * Restarts the service, i.e. start accepting connections
    * from the added sockets when the mainloop runs. This only needs
    * to be called after the service has been stopped from
-   * [Gio.SocketService.stop].
+   * [gio.socket_service.SocketService.stop].
    * This call is thread-safe, so it may be called from a thread
    * handling an incoming client request.
    */
@@ -102,10 +102,10 @@ class SocketService : SocketListener
    * handling an incoming client request.
    * Note that this only stops accepting new connections; it does not
    * close the listening sockets, and you can call
-   * [Gio.SocketService.start] again later to begin listening again. To
-   * close the listening sockets, call [Gio.SocketListener.close]. $(LPAREN)This
+   * [gio.socket_service.SocketService.start] again later to begin listening again. To
+   * close the listening sockets, call [gio.socket_listener.SocketListener.close]. $(LPAREN)This
    * will happen automatically when the #GSocketService is finalized.$(RPAREN)
-   * This must be called before calling [Gio.SocketListener.close] as
+   * This must be called before calling [gio.socket_listener.SocketListener.close] as
    * the socket service will start accepting connections immediately
    * when a new socket is added.
    */
@@ -124,7 +124,7 @@ class SocketService : SocketListener
    * Params
    *   connection = a new #GSocketConnection object
    *   sourceObject = the source_object passed to
-   *     [Gio.SocketListener.addAddress]
+   *     [gio.socket_listener.SocketListener.addAddress]
    *   socketService = the instance the signal is connected to
    * Returns: %TRUE to stop other handlers from being called
    */

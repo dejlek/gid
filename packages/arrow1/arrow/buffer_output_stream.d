@@ -9,7 +9,7 @@ import arrow.resizable_buffer;
 import arrow.types;
 import arrow.writable;
 import arrow.writable_mixin;
-import gid.gid;
+import gid.global;
 
 class BufferOutputStream : OutputStream
 {

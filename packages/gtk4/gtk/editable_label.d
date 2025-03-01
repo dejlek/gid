@@ -1,6 +1,6 @@
 module gtk.editable_label;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -19,7 +19,7 @@ import gtk.widget;
  * edit the text by switching to an “edit mode”.
  * ![An example GtkEditableLabel](editable-label.png)
  * `GtkEditableLabel` does not have API of its own, but it
- * implements the [Gtk.Editable] interface.
+ * implements the [gtk.editable.Editable] interface.
  * The default bindings for activating the edit mode is
  * to click or press the Enter key. The default bindings
  * for leaving the edit mode are the Enter key $(LPAREN)to save
@@ -35,7 +35,7 @@ import gtk.widget;
  * When the entry is in editing mode, it gets the .editing style
  * class.
  * For all the subnodes added to the text node in various situations,
- * see [Gtk.Text].
+ * see [gtk.text.Text].
  */
 class EditableLabel : Widget, Editable
 {
@@ -94,9 +94,9 @@ class EditableLabel : Widget, Editable
   /**
    * Switches the label out of “editing mode”.
    * If commit is %TRUE, the resulting text is kept as the
-   * [Gtk.Editable.text] property value, otherwise the
+   * [gtk.editable.Editable.utf8] property value, otherwise the
    * resulting text is discarded and the label will keep its
-   * previous [Gtk.Editable.text] property value.
+   * previous [gtk.editable.Editable.utf8] property value.
    * Params:
    *   commit = whether to set the edited text on the label
    */

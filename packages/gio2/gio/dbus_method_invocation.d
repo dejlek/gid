@@ -1,6 +1,6 @@
 module gio.dbus_method_invocation;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_connection;
@@ -20,8 +20,8 @@ import gobject.object;
  * return results and errors.
  * The normal way to obtain a `GDBusMethodInvocation` object is to receive
  * it as an argument to the `handle_method_call$(LPAREN)$(RPAREN)` function in a
- * [Gio.DBusInterfaceVTable] that was passed to
- * [Gio.DBusConnection.registerObject].
+ * [gio.dbus_interface_vtable.DBusInterfaceVTable] that was passed to
+ * [gio.dbus_connection.DBusConnection.registerObject].
  */
 class DBusMethodInvocation : ObjectG
 {
@@ -92,7 +92,7 @@ class DBusMethodInvocation : ObjectG
    * Gets information about the method call, if any.
    * If this method invocation is a property Get, Set or GetAll call that
    * has been redirected to the method call handler then %NULL will be
-   * returned.  See [Gio.DBusMethodInvocation.getPropertyInfo] and
+   * returned.  See [gio.dbus_method_invocation.DBusMethodInvocation.getPropertyInfo] and
    * #GDBusInterfaceVTable for more information.
    * Returns: A #GDBusMethodInfo or %NULL. Do not free, it is owned by invocation.
    */
@@ -189,7 +189,7 @@ class DBusMethodInvocation : ObjectG
   }
 
   /**
-   * Like [Gio.DBusMethodInvocation.returnError] but without printf()-style formatting.
+   * Like [gio.dbus_method_invocation.DBusMethodInvocation.returnError] but without printf()-style formatting.
    * This method will take ownership of invocation. See
    * #GDBusInterfaceVTable for more information about the ownership of
    * invocation.
@@ -205,7 +205,7 @@ class DBusMethodInvocation : ObjectG
   }
 
   /**
-   * Like [Gio.DBusMethodInvocation.returnError] but takes a #GError
+   * Like [gio.dbus_method_invocation.DBusMethodInvocation.returnError] but takes a #GError
    * instead of the error domain, error code and message.
    * This method will take ownership of invocation. See
    * #GDBusInterfaceVTable for more information about the ownership of
@@ -253,7 +253,7 @@ class DBusMethodInvocation : ObjectG
   }
 
   /**
-   * Like [Gio.DBusMethodInvocation.returnValue] but also takes a #GUnixFDList.
+   * Like [gio.dbus_method_invocation.DBusMethodInvocation.returnValue] but also takes a #GUnixFDList.
    * This method is only available on UNIX.
    * This method will take ownership of invocation. See
    * #GDBusInterfaceVTable for more information about the ownership of

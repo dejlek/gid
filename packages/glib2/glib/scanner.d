@@ -1,6 +1,6 @@
 module glib.scanner;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.scanner_config;
@@ -174,7 +174,7 @@ class Scanner
   /**
    * Returns the current line in the input stream $(LPAREN)counting
    * from 1$(RPAREN). This is the line of the last token parsed via
-   * [GLib.Scanner.getNextToken].
+   * [glib.scanner.Scanner.getNextToken].
    * Returns: the current line
    */
   uint curLine()
@@ -187,7 +187,7 @@ class Scanner
   /**
    * Returns the current position in the current line $(LPAREN)counting
    * from 0$(RPAREN). This is the position of the last token parsed via
-   * [GLib.Scanner.getNextToken].
+   * [glib.scanner.Scanner.getNextToken].
    * Returns: the current position on the line
    */
   uint curPosition()
@@ -232,7 +232,7 @@ class Scanner
   }
 
   /**
-   * Parses the next token just like [GLib.Scanner.peekNextToken]
+   * Parses the next token just like [glib.scanner.Scanner.peekNextToken]
    * and also removes it from the input stream. The token data is
    * placed in the token, value, line, and position fields of
    * the #GScanner structure.
@@ -289,7 +289,7 @@ class Scanner
    * The token data is placed in the next_token, next_value, next_line,
    * and next_position fields of the #GScanner structure.
    * Note that, while the token is not removed from the input stream
-   * $(LPAREN)i.e. the next call to [GLib.Scanner.getNextToken] will return the
+   * $(LPAREN)i.e. the next call to [glib.scanner.Scanner.getNextToken] will return the
    * same token$(RPAREN), it will not be reevaluated. This can lead to surprising
    * results when changing scope or the scanner configuration after peeking
    * the next token. Getting the next token after switching the scope or
@@ -396,9 +396,9 @@ class Scanner
   /**
    * Outputs a message through the scanner's msg_handler,
    * resulting from an unexpected token in the input stream.
-   * Note that you should not call [GLib.Scanner.peekNextToken]
-   * followed by [GLib.Scanner.unexpToken] without an intermediate
-   * call to [GLib.Scanner.getNextToken], as [GLib.Scanner.unexpToken]
+   * Note that you should not call [glib.scanner.Scanner.peekNextToken]
+   * followed by [glib.scanner.Scanner.unexpToken] without an intermediate
+   * call to [glib.scanner.Scanner.getNextToken], as [glib.scanner.Scanner.unexpToken]
    * evaluates the scanner's current token $(LPAREN)not the peeked token$(RPAREN)
    * to construct part of the message.
    * Params:

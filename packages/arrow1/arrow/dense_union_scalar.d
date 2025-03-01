@@ -6,7 +6,7 @@ import arrow.dense_union_data_type;
 import arrow.scalar;
 import arrow.types;
 import arrow.union_scalar;
-import gid.gid;
+import gid.global;
 
 class DenseUnionScalar : UnionScalar
 {

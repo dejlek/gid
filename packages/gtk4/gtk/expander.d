@@ -1,6 +1,6 @@
 module gtk.expander;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -20,7 +20,7 @@ import gtk.widget;
  * ![An example GtkExpander](expander.png)
  * This is similar to the triangles used in a `GtkTreeView`.
  * Normally you use an expander as you would use a frame; you create
- * the child widget and use [Gtk.Expander.setChild] to add it
+ * the child widget and use [gtk.expander.Expander.setChild] to add it
  * to the expander. When the expander is toggled, it will take care of
  * showing and hiding the child automatically.
  * # Special Usage
@@ -28,7 +28,7 @@ import gtk.widget;
  * expanded widget yourself, such as when you want to actually create
  * the widget at expansion time. In this case, create a `GtkExpander`
  * but do not add a child to it. The expander widget has an
- * [Gtk.Expander.expanded] property which can be used to
+ * [gtk.expander.Expander.gboolean] property which can be used to
  * monitor its expansion state. You should watch this property with
  * a signal connection as follows:
  * ```c
@@ -170,9 +170,9 @@ class Expander : Widget
   /**
    * Fetches the text from a label widget.
    * This is including any embedded underlines indicating mnemonics and
-   * Pango markup, as set by [Gtk.Expander.setLabel]. If the label
+   * Pango markup, as set by [gtk.expander.Expander.setLabel]. If the label
    * text has not been set the return value will be %NULL. This will be the
-   * case if you create an empty button with [Gtk.Button.new_] to use as a
+   * case if you create an empty button with [gtk.button.Button.new_] to use as a
    * container.
    * Returns: The text of the label widget. This string is owned
    *   by the widget and must not be modified or freed.

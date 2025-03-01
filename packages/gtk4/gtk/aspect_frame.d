@@ -1,6 +1,6 @@
 module gtk.aspect_frame;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;

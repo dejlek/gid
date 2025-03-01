@@ -1,6 +1,6 @@
 module gio.converter_input_stream;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.converter;
@@ -13,10 +13,10 @@ import gio.types;
 import gobject.object;
 
 /**
- * Converter input stream implements [Gio.InputStream] and allows
+ * Converter input stream implements [gio.input_stream.InputStream] and allows
  * conversion of data of various types during reading.
  * As of GLib 2.34, `GConverterInputStream` implements
- * [Gio.PollableInputStream].
+ * [gio.pollable_input_stream.PollableInputStream].
  */
 class ConverterInputStream : FilterInputStream, PollableInputStream
 {

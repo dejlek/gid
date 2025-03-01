@@ -1,6 +1,6 @@
 module gtk.string_sorter;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -13,7 +13,7 @@ import gtk.types;
  * current locale by normalizing Unicode strings and possibly case-folding
  * them before performing the comparison.
  * To obtain the strings to compare, this sorter evaluates a
- * [Gtk.Expression].
+ * [gtk.expression.Expression].
  */
 class StringSorter : Sorter
 {

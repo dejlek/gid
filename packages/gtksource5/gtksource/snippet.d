@@ -1,6 +1,6 @@
 module gtksource.snippet;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 import gtksource.c.functions;
@@ -16,7 +16,7 @@ import gtksource.types;
  * Snippets are defined in XML files which are loaded by the
  * class@SnippetManager. Alternatively, applications can create snippets
  * on demand and insert them into the class@View using
- * [GtkSource.View.pushSnippet].
+ * [gtksource.view.View.pushSnippet].
  * Snippet chunks can reference other snippet chunks as well as post-process
  * the values from other chunks such as capitalization.
  */

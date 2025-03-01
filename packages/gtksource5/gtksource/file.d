@@ -1,6 +1,6 @@
 module gtksource.file;
 
-import gid.gid;
+import gid.global;
 import gio.file : DGioFile = File;
 import gio.file_mixin : DGioFileT = FileT;
 import gobject.object;
@@ -48,11 +48,11 @@ class File : ObjectG
   /**
    * Checks synchronously the file on disk, to know whether the file is externally
    * modified, or has been deleted, and whether the file is read-only.
-   * #GtkSourceFile doesn't create a [Gio.FileMonitor] to track those properties, so
-   * this function needs to be called instead. Creating lots of [Gio.FileMonitor]'s
+   * #GtkSourceFile doesn't create a [gio.file_monitor.FileMonitor] to track those properties, so
+   * this function needs to be called instead. Creating lots of [gio.file_monitor.FileMonitor]'s
    * would take lots of resources.
    * Since this function is synchronous, it is advised to call it only on local
-   * files. See [GtkSource.File.isLocal].
+   * files. See [gtksource.file.File.isLocal].
    */
   void checkFileOnDisk()
   {
@@ -100,7 +100,7 @@ class File : ObjectG
    * Returns whether the file has been deleted. If the
    * propertyFile:location is %NULL, returns %FALSE.
    * To have an up-to-date value, you must first call
-   * [GtkSource.File.checkFileOnDisk].
+   * [gtksource.file.File.checkFileOnDisk].
    * Returns: whether the file has been deleted.
    */
   bool isDeleted()
@@ -114,7 +114,7 @@ class File : ObjectG
    * Returns whether the file is externally modified. If the
    * propertyFile:location is %NULL, returns %FALSE.
    * To have an up-to-date value, you must first call
-   * [GtkSource.File.checkFileOnDisk].
+   * [gtksource.file.File.checkFileOnDisk].
    * Returns: whether the file is externally modified.
    */
   bool isExternallyModified()
@@ -140,7 +140,7 @@ class File : ObjectG
    * Returns whether the file is read-only. If the
    * propertyFile:location is %NULL, returns %FALSE.
    * To have an up-to-date value, you must first call
-   * [GtkSource.File.checkFileOnDisk].
+   * [gtksource.file.File.checkFileOnDisk].
    * Returns: whether the file is read-only.
    */
   bool isReadonly()

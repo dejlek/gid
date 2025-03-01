@@ -4,7 +4,7 @@ import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.rgba;
 import gdkpixbuf.pixbuf;
-import gid.gid;
+import gid.global;
 import gio.icon;
 import gio.icon_mixin;
 import gobject.dclosure;
@@ -22,18 +22,18 @@ import gtksource.types;
  * of a specific category. It allows you to define a background color of a line,
  * an icon shown in gutter and tooltips.
  * The background color is used as a background of a line where a mark is placed
- * and it can be set with [GtkSource.MarkAttributes.setBackground]. To check
+ * and it can be set with [gtksource.mark_attributes.MarkAttributes.setBackground]. To check
  * if any custom background color was defined and what color it is, use
- * [GtkSource.MarkAttributes.getBackground].
+ * [gtksource.mark_attributes.MarkAttributes.getBackground].
  * An icon is a graphic element which is shown in the gutter of a view. An
  * example use is showing a red filled circle in a debugger to show that a
  * breakpoint was set in certain line. To get an icon that will be placed in
  * a gutter, first a base for it must be specified and then
- * [GtkSource.MarkAttributes.renderIcon] must be called.
+ * [gtksource.mark_attributes.MarkAttributes.renderIcon] must be called.
  * There are several ways to specify a base for an icon:
- * - [GtkSource.MarkAttributes.setIconName]
- * - [GtkSource.MarkAttributes.setGicon]
- * - [GtkSource.MarkAttributes.setPixbuf]
+ * - [gtksource.mark_attributes.MarkAttributes.setIconName]
+ * - [gtksource.mark_attributes.MarkAttributes.setGicon]
+ * - [gtksource.mark_attributes.MarkAttributes.setPixbuf]
  * Using any of the above functions overrides the one used earlier. But note
  * that a getter counterpart of earlier used function can still return some
  * value, but it is just not used when rendering the proper icon.
@@ -88,7 +88,7 @@ class MarkAttributes : ObjectG
   }
 
   /**
-   * Gets a [Gio.Icon] to be used as a base for rendered icon.
+   * Gets a [gio.icon.Icon] to be used as a base for rendered icon.
    * Note that the icon can be %NULL if it wasn't set earlier.
    * Returns: An icon. The icon belongs to attributes and should
    *   not be unreffed.
@@ -116,7 +116,7 @@ class MarkAttributes : ObjectG
   }
 
   /**
-   * Gets a [GdkPixbuf.Pixbuf] to be used as a base for rendered icon.
+   * Gets a [gdkpixbuf.pixbuf.Pixbuf] to be used as a base for rendered icon.
    * Note that the pixbuf can be %NULL if it wasn't set earlier.
    * Returns: A pixbuf. The pixbuf belongs to attributes and
    *   should not be unreffed.
@@ -135,7 +135,7 @@ class MarkAttributes : ObjectG
    * Params:
    *   mark = a #GtkSourceMark.
    * Returns: A tooltip. The returned string should be freed by
-   *   using [GLib.Global.gfree] when done with it.
+   *   using [glib.global.gfree] when done with it.
    */
   string getTooltipMarkup(Mark mark)
   {
@@ -151,7 +151,7 @@ class MarkAttributes : ObjectG
    * Params:
    *   mark = a #GtkSourceMark.
    * Returns: A tooltip. The returned string should be freed by
-   *   using [GLib.Global.gfree] when done with it.
+   *   using [glib.global.gfree] when done with it.
    */
   string getTooltipText(Mark mark)
   {
@@ -164,9 +164,9 @@ class MarkAttributes : ObjectG
   /**
    * Renders an icon of given size.
    * The base of the icon is set by the last call to one of:
-   * - [GtkSource.MarkAttributes.setPixbuf]
-   * - [GtkSource.MarkAttributes.setGicon]
-   * - [GtkSource.MarkAttributes.setIconName]
+   * - [gtksource.mark_attributes.MarkAttributes.setPixbuf]
+   * - [gtksource.mark_attributes.MarkAttributes.setGicon]
+   * - [gtksource.mark_attributes.MarkAttributes.setIconName]
    * size cannot be lower than 1.
    * Params:
    *   widget = widget of which style settings may be used.
@@ -230,7 +230,7 @@ class MarkAttributes : ObjectG
    *   mark = The #GtkSourceMark.
    *   markAttributes = the instance the signal is connected to
    * Returns: A tooltip. The string should be freed with
-   *   [GLib.Global.gfree] when done with it.
+   *   [glib.global.gfree] when done with it.
    */
   alias QueryTooltipMarkupCallbackDlg = string delegate(Mark mark, MarkAttributes markAttributes);
   alias QueryTooltipMarkupCallbackFunc = string function(Mark mark, MarkAttributes markAttributes);
@@ -266,7 +266,7 @@ class MarkAttributes : ObjectG
    *   mark = The #GtkSourceMark.
    *   markAttributes = the instance the signal is connected to
    * Returns: A tooltip. The string should be freed with
-   *   [GLib.Global.gfree] when done with it.
+   *   [glib.global.gfree] when done with it.
    */
   alias QueryTooltipTextCallbackDlg = string delegate(Mark mark, MarkAttributes markAttributes);
   alias QueryTooltipTextCallbackFunc = string function(Mark mark, MarkAttributes markAttributes);

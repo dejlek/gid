@@ -1,6 +1,6 @@
 module gtk.file_filter;
 
-import gid.gid;
+import gid.global;
 import glib.variant;
 import gobject.object;
 import gtk.buildable;
@@ -14,16 +14,16 @@ import gtk.types;
  * `GtkFileFilter` filters files by name or mime type.
  * `GtkFileFilter` can be used to restrict the files being shown in a
  * `GtkFileChooser`. Files can be filtered based on their name $(LPAREN)with
- * [Gtk.FileFilter.addPattern] or [Gtk.FileFilter.addSuffix]$(RPAREN)
- * or on their mime type $(LPAREN)with [Gtk.FileFilter.addMimeType]$(RPAREN).
+ * [gtk.file_filter.FileFilter.addPattern] or [gtk.file_filter.FileFilter.addSuffix]$(RPAREN)
+ * or on their mime type $(LPAREN)with [gtk.file_filter.FileFilter.addMimeType]$(RPAREN).
  * Filtering by mime types handles aliasing and subclassing of mime
  * types; e.g. a filter for text/plain also matches a file with mime
  * type application/rtf, since application/rtf is a subclass of
  * text/plain. Note that `GtkFileFilter` allows wildcards for the
  * subtype of a mime type, so you can e.g. filter for image/\*.
  * Normally, file filters are used by adding them to a `GtkFileChooser`
- * $(LPAREN)see [Gtk.FileChooser.addFilter]$(RPAREN), but it is also possible to
- * manually use a file filter on any [Gtk.FilterListModel] containing
+ * $(LPAREN)see [gtk.file_chooser.FileChooser.addFilter]$(RPAREN), but it is also possible to
+ * manually use a file filter on any [gtk.filter_list_model.FilterListModel] containing
  * `GFileInfo` objects.
  * # GtkFileFilter as GtkBuildable
  * The `GtkFileFilter` implementation of the `GtkBuildable` interface
@@ -31,9 +31,9 @@ import gtk.types;
  * `<suffixes>` elements and listing the rules within. Specifying a
  * `<mime-type>` or `<pattern>` or `<suffix>` has the same effect as
  * as calling
- * [Gtk.FileFilter.addMimeType] or
- * [Gtk.FileFilter.addPattern] or
- * [Gtk.FileFilter.addSuffix].
+ * [gtk.file_filter.FileFilter.addMimeType] or
+ * [gtk.file_filter.FileFilter.addPattern] or
+ * [gtk.file_filter.FileFilter.addSuffix].
  * An example of a UI definition fragment specifying `GtkFileFilter`
  * rules:
  * ```xml
@@ -77,10 +77,10 @@ class FileFilter : Filter, Buildable
    * Creates a new `GtkFileFilter` with no rules added to it.
    * Such a filter doesn’t accept any files, so is not
    * particularly useful until you add rules with
-   * [Gtk.FileFilter.addMimeType],
-   * [Gtk.FileFilter.addPattern],
-   * [Gtk.FileFilter.addSuffix] or
-   * [Gtk.FileFilter.addPixbufFormats].
+   * [gtk.file_filter.FileFilter.addMimeType],
+   * [gtk.file_filter.FileFilter.addPattern],
+   * [gtk.file_filter.FileFilter.addSuffix] or
+   * [gtk.file_filter.FileFilter.addPixbufFormats].
    * To create a filter that accepts any file, use:
    * ```c
    * GtkFileFilter *filter \= gtk_file_filter_new $(LPAREN)$(RPAREN);
@@ -98,7 +98,7 @@ class FileFilter : Filter, Buildable
   /**
    * Deserialize a file filter from a `GVariant`.
    * The variant must be in the format produced by
-   * [Gtk.FileFilter.toGvariant].
+   * [gtk.file_filter.FileFilter.toGvariant].
    * Params:
    *   variant = an `a{sv}` `GVariant`
    * Returns: a new `GtkFileFilter` object
@@ -139,7 +139,7 @@ class FileFilter : Filter, Buildable
   /**
    * Adds a rule allowing image files in the formats supported
    * by GdkPixbuf.
-   * This is equivalent to calling [Gtk.FileFilter.addMimeType]
+   * This is equivalent to calling [gtk.file_filter.FileFilter.addMimeType]
    * for all the supported mime types.
    */
   void addPixbufFormats()
@@ -190,7 +190,7 @@ class FileFilter : Filter, Buildable
 
   /**
    * Gets the human-readable name for the filter.
-   * See [Gtk.FileFilter.setName].
+   * See [gtk.file_filter.FileFilter.setName].
    * Returns: The human-readable name of the filter
    */
   string getName()

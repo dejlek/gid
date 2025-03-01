@@ -3,7 +3,7 @@ module atk.util;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**

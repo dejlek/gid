@@ -2,7 +2,7 @@ module gtk.media_file;
 
 import gdk.paintable;
 import gdk.paintable_mixin;
-import gid.gid;
+import gid.global;
 import gio.file;
 import gio.file_mixin;
 import gio.input_stream;
@@ -66,7 +66,7 @@ class MediaFile : MediaStream
   /**
    * Creates a new media file for the given filename.
    * This is a utility function that converts the given filename
-   * to a `GFile` and calls [Gtk.MediaFile.newForFile].
+   * to a `GFile` and calls [gtk.media_file.MediaFile.newForFile].
    * Params:
    *   filename = filename to open
    * Returns: a new `GtkMediaFile` playing filename
@@ -99,7 +99,7 @@ class MediaFile : MediaStream
   /**
    * Creates a new new media file for the given resource.
    * This is a utility function that converts the given resource
-   * to a `GFile` and calls [Gtk.MediaFile.newForFile].
+   * to a `GFile` and calls [gtk.media_file.MediaFile.newForFile].
    * Params:
    *   resourcePath = resource path to open
    * Returns: a new `GtkMediaFile` playing resource_path
@@ -163,7 +163,7 @@ class MediaFile : MediaStream
   /**
    * Sets the `GtkMediaFile to play the given file.
    * This is a utility function that converts the given filename
-   * to a `GFile` and calls [Gtk.MediaFile.setFile].
+   * to a `GFile` and calls [gtk.media_file.MediaFile.setFile].
    * Params:
    *   filename = name of file to play
    */
@@ -189,7 +189,7 @@ class MediaFile : MediaStream
   /**
    * Sets the `GtkMediaFile to play the given resource.
    * This is a utility function that converts the given resource_path
-   * to a `GFile` and calls [Gtk.MediaFile.setFile].
+   * to a `GFile` and calls [gtk.media_file.MediaFile.setFile].
    * Params:
    *   resourcePath = path to resource to play
    */

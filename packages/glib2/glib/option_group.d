@@ -1,6 +1,6 @@
 module glib.option_group;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -65,7 +65,7 @@ class OptionGroup : Boxed
    * for `--help` output. Different groups can use different
    * #GTranslateFuncs. If func is %NULL, strings are not translated.
    * If you are using gettext$(LPAREN)$(RPAREN), you only need to set the translation
-   * domain, see [GLib.OptionGroup.setTranslationDomain].
+   * domain, see [glib.option_group.OptionGroup.setTranslationDomain].
    * Params:
    *   func = the #GTranslateFunc, or %NULL
    */

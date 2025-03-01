@@ -2,7 +2,7 @@ module gtk.about_dialog;
 
 import gdk.paintable;
 import gdk.paintable_mixin;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -32,7 +32,7 @@ import gtk.window;
  * option from the `Help` menu. All parts of the dialog are optional.
  * ![An example GtkAboutDialog](aboutdialog.png)
  * About dialogs often contain links and email addresses. `GtkAboutDialog`
- * displays these as clickable links. By default, it calls [Gtk.FileLauncher.launch]
+ * displays these as clickable links. By default, it calls [gtk.file_launcher.FileLauncher.launch]
  * when a user clicks one. The behaviour can be overridden with the
  * signal@Gtk.AboutDialog::activate-link signal.
  * To specify a person with an email address, use a string like
@@ -217,7 +217,7 @@ class AboutDialog : Window
 
   /**
    * Retrieves the license type.
-   * Returns: a [Gtk.License] value
+   * Returns: a [gtk.License] value
    */
   License getLicenseType()
   {
@@ -231,7 +231,7 @@ class AboutDialog : Window
    * Returns the paintable displayed as logo in the about dialog.
    * Returns: the paintable displayed as
    *   logo or `NULL` if the logo is unset or has been set via
-   *   [Gtk.AboutDialog.setLogoIconName]
+   *   [gtk.about_dialog.AboutDialog.setLogoIconName]
    */
   Paintable getLogo()
   {
@@ -244,7 +244,7 @@ class AboutDialog : Window
   /**
    * Returns the icon name displayed as logo in the about dialog.
    * Returns: the icon name displayed as logo,
-   *   or `NULL` if the logo has been set via [Gtk.AboutDialog.setLogo]
+   *   or `NULL` if the logo has been set via [gtk.about_dialog.AboutDialog.setLogo]
    */
   string getLogoIconName()
   {
@@ -430,7 +430,7 @@ class AboutDialog : Window
    * Sets the license of the application showing the about dialog from a
    * list of known licenses.
    * This function overrides the license set using
-   * [Gtk.AboutDialog.setLicense].
+   * [gtk.about_dialog.AboutDialog.setLicense].
    * Params:
    *   licenseType = the type of license
    */
@@ -463,7 +463,7 @@ class AboutDialog : Window
   /**
    * Sets the name to display in the about dialog.
    * If `name` is not set, the string returned
-   * by `[GLib.Global.getApplicationName]` is used.
+   * by `[glib.global.getApplicationName]` is used.
    * Params:
    *   name = the program name
    */
@@ -560,7 +560,7 @@ class AboutDialog : Window
   /**
    * Emitted every time a URL is activated.
    * Applications may connect to it to override the default behaviour,
-   * which is to call [Gtk.FileLauncher.launch].
+   * which is to call [gtk.file_launcher.FileLauncher.launch].
    * Params
    *   uri = the URI that is activated
    *   aboutDialog = the instance the signal is connected to

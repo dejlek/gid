@@ -1,6 +1,6 @@
 module gio.dbus_menu_model;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_connection;
@@ -9,9 +9,9 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GDBusMenuModel` is an implementation of [Gio.MenuModel] that can be
+ * `GDBusMenuModel` is an implementation of [gio.menu_model.MenuModel] that can be
  * used as a proxy for a menu model that is exported over D-Bus with
- * [Gio.DBusConnection.exportMenuModel].
+ * [gio.dbus_connection.DBusConnection.exportMenuModel].
  */
 class DBusMenuModel : MenuModel
 {
@@ -46,7 +46,7 @@ class DBusMenuModel : MenuModel
    *     or %NULL if connection is not a message bus connection
    *   objectPath = the object path at which the menu model is exported
    * Returns: a #GDBusMenuModel object. Free with
-   *   [GObject.ObjectG.unref].
+   *   [gobject.object.ObjectG.unref].
    */
   static DBusMenuModel get(DBusConnection connection, string busName, string objectPath)
   {

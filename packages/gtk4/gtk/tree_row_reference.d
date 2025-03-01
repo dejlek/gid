@@ -1,6 +1,6 @@
 module gtk.tree_row_reference;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gobject.object;
 import gtk.c.functions;
@@ -13,9 +13,9 @@ import gtk.types;
 /**
  * A GtkTreeRowReference tracks model changes so that it always refers to the
  * same row $(LPAREN)a `GtkTreePath` refers to a position, not a fixed row$(RPAREN). Create a
- * new GtkTreeRowReference with [Gtk.TreeRowReference.new_].
+ * new GtkTreeRowReference with [gtk.tree_row_reference.TreeRowReference.new_].
 
- * Deprecated: Use [Gio.ListModel] instead
+ * Deprecated: Use [gio.list_model.ListModel] instead
  */
 class TreeRowReference : Boxed
 {
@@ -65,11 +65,11 @@ class TreeRowReference : Boxed
    * This reference will keep pointing to the node pointed to
    * by path, so long as it exists. If path isn’t a valid
    * path in model, then %NULL is returned. However, unlike
-   * references created with [Gtk.TreeRowReference.new_], it
+   * references created with [gtk.tree_row_reference.TreeRowReference.new_], it
    * does not listen to the model for changes. The creator of
    * the row reference must do this explicitly using
-   * [Gtk.TreeRowReference.inserted], [Gtk.TreeRowReference.deleted],
-   * [Gtk.TreeRowReference.reordered].
+   * [gtk.tree_row_reference.TreeRowReference.inserted], [gtk.tree_row_reference.TreeRowReference.deleted],
+   * [gtk.tree_row_reference.TreeRowReference.reordered].
    * These functions must be called exactly once per proxy when the
    * corresponding signal on the model is emitted. This single call
    * updates all row references for that proxy. Since built-in GTK
@@ -145,7 +145,7 @@ class TreeRowReference : Boxed
 
   /**
    * Lets a set of row reference created by
-   * [Gtk.TreeRowReference.newProxy] know that the
+   * [gtk.tree_row_reference.TreeRowReference.newProxy] know that the
    * model emitted the ::row-deleted signal.
    * Params:
    *   proxy = a `GObject`
@@ -158,7 +158,7 @@ class TreeRowReference : Boxed
 
   /**
    * Lets a set of row reference created by
-   * [Gtk.TreeRowReference.newProxy] know that the
+   * [gtk.tree_row_reference.TreeRowReference.newProxy] know that the
    * model emitted the ::row-inserted signal.
    * Params:
    *   proxy = a `GObject`

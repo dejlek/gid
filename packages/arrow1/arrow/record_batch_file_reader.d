@@ -6,7 +6,7 @@ import arrow.record_batch;
 import arrow.schema;
 import arrow.seekable_input_stream;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

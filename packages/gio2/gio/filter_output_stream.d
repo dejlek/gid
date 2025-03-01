@@ -1,6 +1,6 @@
 module gio.filter_output_stream;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.output_stream;

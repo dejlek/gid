@@ -1,6 +1,6 @@
 module gio.unix_credentials_message;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.credentials;
@@ -9,16 +9,16 @@ import gio.types;
 import gobject.object;
 
 /**
- * This [Gio.SocketControlMessage] contains a [Gio.Credentials]
- * instance.  It may be sent using [Gio.Socket.sendMessage] and received
- * using [Gio.Socket.receiveMessage] over UNIX sockets $(LPAREN)ie: sockets in
+ * This [gio.socket_control_message.SocketControlMessage] contains a [gio.credentials.Credentials]
+ * instance.  It may be sent using [gio.socket.Socket.sendMessage] and received
+ * using [gio.socket.Socket.receiveMessage] over UNIX sockets $(LPAREN)ie: sockets in
  * the `G_SOCKET_FAMILY_UNIX` family$(RPAREN).
  * For an easier way to send and receive credentials over
  * stream-oriented UNIX sockets, see
- * [Gio.UnixConnection.sendCredentials] and
- * [Gio.UnixConnection.receiveCredentials]. To receive credentials of
+ * [gio.unix_connection.UnixConnection.sendCredentials] and
+ * [gio.unix_connection.UnixConnection.receiveCredentials]. To receive credentials of
  * a foreign process connected to a socket, use
- * [Gio.Socket.getCredentials].
+ * [gio.socket.Socket.getCredentials].
  * Since GLib 2.72, `GUnixCredentialMessage` is available on all platforms. It
  * requires underlying system support $(LPAREN)such as Windows 10 with `AF_UNIX`$(RPAREN) at run
  * time.

@@ -1,6 +1,6 @@
 module gtk.stack;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -21,17 +21,17 @@ import gtk.widget;
  * at a time.
  * In contrast to `GtkNotebook`, `GtkStack` does not provide a means
  * for users to change the visible child. Instead, a separate widget
- * such as [Gtk.StackSwitcher] or [Gtk.StackSidebar] can
+ * such as [gtk.stack_switcher.StackSwitcher] or [gtk.stack_sidebar.StackSidebar] can
  * be used with `GtkStack` to provide this functionality.
  * Transitions between pages can be animated as slides or fades. This
- * can be controlled with [Gtk.Stack.setTransitionType].
+ * can be controlled with [gtk.stack.Stack.setTransitionType].
  * These animations respect the property@Gtk.Settings:gtk-enable-animations
  * setting.
- * `GtkStack` maintains a [Gtk.StackPage] object for each added
+ * `GtkStack` maintains a [gtk.stack_page.StackPage] object for each added
  * child, which holds additional per-child properties. You
- * obtain the `GtkStackPage` for a child with [Gtk.Stack.getPage]
+ * obtain the `GtkStackPage` for a child with [gtk.stack.Stack.getPage]
  * and you can obtain a `GtkSelectionModel` containing all the pages
- * with [Gtk.Stack.getPages].
+ * with [gtk.stack.Stack.getPages].
  * # GtkStack as GtkBuildable
  * To set child-specific properties in a .ui file, create `GtkStackPage`
  * objects explicitly, and set the child widget as a property on it:
@@ -194,7 +194,7 @@ class Stack : Widget
   /**
    * Returns a `GListModel` that contains the pages of the stack.
    * This can be used to keep an up-to-date view. The model also
-   * implements [Gtk.SelectionModel] and can be used to track
+   * implements [gtk.selection_model.SelectionModel] and can be used to track
    * and modify the visible page.
    * Returns: a `GtkSelectionModel` for the stack's children
    */
@@ -364,7 +364,7 @@ class Stack : Widget
    * the transition between the two will be animated with the
    * current transition type of stack.
    * Note that the child widget has to be visible itself
-   * $(LPAREN)see [Gtk.Widget.show]$(RPAREN) in order to become the visible
+   * $(LPAREN)see [gtk.widget.Widget.show]$(RPAREN) in order to become the visible
    * child of stack.
    * Params:
    *   child = a child of stack
@@ -377,7 +377,7 @@ class Stack : Widget
   /**
    * Makes the child with the given name visible.
    * Note that the child widget has to be visible itself
-   * $(LPAREN)see [Gtk.Widget.show]$(RPAREN) in order to become the visible
+   * $(LPAREN)see [gtk.widget.Widget.show]$(RPAREN) in order to become the visible
    * child of stack.
    * Params:
    *   name = the name of the child to make visible
@@ -395,7 +395,7 @@ class Stack : Widget
    * the transition between the two will be animated with the
    * current transition type of stack.
    * Note that the child widget has to be visible itself
-   * $(LPAREN)see [Gtk.Widget.show]$(RPAREN) in order to become the visible
+   * $(LPAREN)see [gtk.widget.Widget.show]$(RPAREN) in order to become the visible
    * child of stack.
    * Params:
    *   name = the name of the child to make visible

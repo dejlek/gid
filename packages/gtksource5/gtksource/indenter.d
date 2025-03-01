@@ -2,7 +2,7 @@ module gtksource.indenter;
 
 public import gtksource.indenter_iface_proxy;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gtk.text_iter;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -21,13 +21,13 @@ import gtksource.view;
  * vfunc@Indenter.is_trigger is called upon key-press to
  * determine of the key press should trigger an indentation.  The default
  * implementation of the interface checks to see if the key was
- * [Gdk.KEY_Return] or [Gdk.KEY_KP_Enter] without %GDK_SHIFT_MASK set.
+ * [gdk.int] or [gdk.int] without %GDK_SHIFT_MASK set.
  * vfunc@Indenter.indent is called after text has been
  * inserted into class@Buffer when
- * vfunc@Indenter.is_trigger returned %TRUE. The [Gtk.TextIter]
+ * vfunc@Indenter.is_trigger returned %TRUE. The [gtk.text_iter.TextIter]
  * is placed directly after the inserted character or characters.
  * It may be beneficial to move the insertion mark using
- * [Gtk.TextBuffer.selectRange] depending on how the indenter changes
+ * [gtk.text_buffer.TextBuffer.selectRange] depending on how the indenter changes
  * the indentation.
  * All changes are encapsulated within a single user action so that the
  * user may undo them using standard undo/redo accelerators.
@@ -65,7 +65,7 @@ interface Indenter
    * This function is used to determine if a key pressed should cause the
    * indenter to automatically indent.
    * The default implementation of this virtual method will check to see
-   * if keyval is [Gdk.KEY_Return] or [Gdk.KEY_KP_Enter] and state does
+   * if keyval is [gdk.int] or [gdk.int] and state does
    * not have %GDK_SHIFT_MASK set. This is to allow the user to avoid
    * indentation when Shift+Return is pressed. Other indenters may want
    * to copy this behavior to provide a consistent experience to users.
@@ -73,7 +73,7 @@ interface Indenter
    *   view = a #GtkSourceView
    *   location = the location where ch is to be inserted
    *   state = modifier state for the insertion
-   *   keyval = the keyval pressed such as [Gdk.KEY_Return]
+   *   keyval = the keyval pressed such as [gdk.int]
    * Returns: %TRUE if indentation should be automatically triggered;
    *   otherwise %FALSE and no indentation will be performed.
    */

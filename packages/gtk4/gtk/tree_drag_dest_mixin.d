@@ -1,7 +1,7 @@
 module gtk.tree_drag_dest_mixin;
 
 public import gtk.tree_drag_dest_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gobject.value;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -12,7 +12,7 @@ public import gtk.types;
  * Interface for Drag-and-Drop destinations in `GtkTreeView`.
 
  * Deprecated: List views use widgets to display their contents.
- *   You can use [Gtk.DropTarget] to implement a drop destination
+ *   You can use [gtk.drop_target.DropTarget] to implement a drop destination
  */
 template TreeDragDestT()
 {

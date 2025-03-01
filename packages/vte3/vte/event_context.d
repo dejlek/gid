@@ -1,6 +1,6 @@
 module vte.event_context;
 
-import gid.gid;
+import gid.global;
 import vte.c.functions;
 import vte.c.types;
 import vte.types;

@@ -8,14 +8,14 @@ import gdk.device;
 import gdk.display;
 import gdk.surface;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 
 /**
  * The `GdkDrag` object represents the source of an ongoing DND operation.
  * A `GdkDrag` is created when a drag is started, and stays alive for duration of
- * the DND operation. After a drag has been started with [Gdk.Drag.begin],
+ * the DND operation. After a drag has been started with [gdk.drag.Drag.begin],
  * the caller gets informed about the status of the ongoing drag operation
  * with signals on the `GdkDrag` object.
  * GTK provides a higher level abstraction based on top of these functions,
@@ -45,13 +45,13 @@ class Drag : ObjectG
    * Starts a drag and creates a new drag context for it.
    * This function is called by the drag source. After this call, you
    * probably want to set up the drag icon using the surface returned
-   * by [Gdk.Drag.getDragSurface].
-   * This function returns a reference to the [Gdk.Drag] object,
+   * by [gdk.drag.Drag.getDragSurface].
+   * This function returns a reference to the [gdk.drag.Drag] object,
    * but GTK keeps its own reference as well, as long as the DND operation
    * is going on.
    * Note: if actions include %GDK_ACTION_MOVE, you need to listen for
    * the signalGdk.Drag::dnd-finished signal and delete the data at
-   * the source if [Gdk.Drag.getSelectedAction] returns
+   * the source if [gdk.drag.Drag.getSelectedAction] returns
    * %GDK_ACTION_MOVE.
    * Params:
    *   surface = the source surface for this drag
@@ -76,7 +76,7 @@ class Drag : ObjectG
    * animation.
    * This function is called by the drag source, and should be the
    * last call before dropping the reference to the drag.
-   * The `GdkDrag` will only take the first [Gdk.Drag.dropDone]
+   * The `GdkDrag` will only take the first [gdk.drag.Drag.dropDone]
    * call as effective, if this function is called multiple times,
    * all subsequent calls will be ignored.
    * Params:

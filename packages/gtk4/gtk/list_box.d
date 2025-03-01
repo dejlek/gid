@@ -1,6 +1,6 @@
 module gtk.list_box;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.dclosure;
@@ -29,8 +29,8 @@ import gtk.widget;
  * by a `GtkCellRenderer`, or when the contents is interactive $(LPAREN)i.e. has a
  * button in it$(RPAREN).
  * Although a `GtkListBox` must have only `GtkListBoxRow` children, you can
- * add any kind of widget to it via [Gtk.ListBox.prepend],
- * [Gtk.ListBox.append] and [Gtk.ListBox.insert] and a
+ * add any kind of widget to it via [gtk.list_box.ListBox.prepend],
+ * [gtk.list_box.ListBox.append] and [gtk.list_box.ListBox.insert] and a
  * `GtkListBoxRow` widget will automatically be inserted between the list
  * and the widget.
  * `GtkListBoxRows` can be marked as activatable or selectable. If a row is
@@ -40,7 +40,7 @@ import gtk.widget;
  * # GtkListBox as GtkBuildable
  * The `GtkListBox` implementation of the `GtkBuildable` interface supports
  * setting a child as the placeholder by specifying “placeholder” as the “type”
- * attribute of a `<child>` element. See [Gtk.ListBox.setPlaceholder]
+ * attribute of a `<child>` element. See [gtk.list_box.ListBox.setPlaceholder]
  * for info.
  * # CSS nodes
  * |[<!-- language\="plain" -->
@@ -110,7 +110,7 @@ class ListBox : Widget
    * represent items from model. box is updated whenever model changes.
    * If model is %NULL, box is left empty.
    * It is undefined to add or remove widgets directly $(LPAREN)for example, with
-   * [Gtk.ListBox.insert]$(RPAREN) while box is bound to a model.
+   * [gtk.list_box.ListBox.insert]$(RPAREN) while box is bound to a model.
    * Note that using a model is incompatible with the filtering and sorting
    * functionality in `GtkListBox`. When using a model, filtering and sorting
    * should be implemented by the model.
@@ -155,7 +155,7 @@ class ListBox : Widget
   }
 
   /**
-   * If a row has previously been highlighted via [Gtk.ListBox.dragHighlightRow],
+   * If a row has previously been highlighted via [gtk.list_box.ListBox.dragHighlightRow],
    * it will have the highlight removed.
    */
   void dragUnhighlightRow()
@@ -220,7 +220,7 @@ class ListBox : Widget
   /**
    * Gets the selected row, or %NULL if no rows are selected.
    * Note that the box may allow multiple selection, in which
-   * case you should use [Gtk.ListBox.selectedForeach] to
+   * case you should use [gtk.list_box.ListBox.selectedForeach] to
    * find all selected rows.
    * Returns: the selected row
    */
@@ -235,7 +235,7 @@ class ListBox : Widget
   /**
    * Creates a list of all selected children.
    * Returns: A `GList` containing the `GtkWidget` for each selected child.
-   *   Free with [GLib.List.free] when done.
+   *   Free with [glib.list.List.free] when done.
    */
   ListBoxRow[] getSelectedRows()
   {
@@ -423,10 +423,10 @@ class ListBox : Widget
    * filters the original list to only show the matching rows.
    * The filter_func will be called for each row after the call, and
    * it will continue to be called each time a row changes $(LPAREN)via
-   * [Gtk.ListBoxRow.changed]$(RPAREN) or when [Gtk.ListBox.invalidateFilter]
+   * [gtk.list_box_row.ListBoxRow.changed]$(RPAREN) or when [gtk.list_box.ListBox.invalidateFilter]
    * is called.
    * Note that using a filter function is incompatible with using a model
-   * $(LPAREN)see [Gtk.ListBox.bindModel]$(RPAREN).
+   * $(LPAREN)see [gtk.list_box.ListBox.bindModel]$(RPAREN).
    * Params:
    *   filterFunc = callback that lets you filter which rows to show
    */
@@ -454,8 +454,8 @@ class ListBox : Widget
    * For instance, one could use it to add headers in front of the first item
    * of a new kind, in a list sorted by the kind.
    * The update_header can look at the current header widget using
-   * [Gtk.ListBoxRow.getHeader] and either update the state of the widget
-   * as needed, or set a new one using [Gtk.ListBoxRow.setHeader]. If no
+   * [gtk.list_box_row.ListBoxRow.getHeader] and either update the state of the widget
+   * as needed, or set a new one using [gtk.list_box_row.ListBoxRow.setHeader]. If no
    * header is needed, set the header to %NULL.
    * Note that you may get many calls update_header to this for a particular
    * row when e.g. changing things that don’t affect the header. In this case
@@ -463,10 +463,10 @@ class ListBox : Widget
    * with an identical one.
    * The update_header function will be called for each row after the call,
    * and it will continue to be called each time a row changes $(LPAREN)via
-   * [Gtk.ListBoxRow.changed]$(RPAREN) and when the row before changes $(LPAREN)either
-   * by [Gtk.ListBoxRow.changed] on the previous row, or when the previous
+   * [gtk.list_box_row.ListBoxRow.changed]$(RPAREN) and when the row before changes $(LPAREN)either
+   * by [gtk.list_box_row.ListBoxRow.changed] on the previous row, or when the previous
    * row becomes a different row$(RPAREN). It is also called for all rows when
-   * [Gtk.ListBox.invalidateHeaders] is called.
+   * [gtk.list_box.ListBox.invalidateHeaders] is called.
    * Params:
    *   updateHeader = callback that lets you add row headers
    */
@@ -523,10 +523,10 @@ class ListBox : Widget
    * the rows of the list, based on the contents of the rows.
    * The sort_func will be called for each row after the call, and will
    * continue to be called each time a row changes $(LPAREN)via
-   * [Gtk.ListBoxRow.changed]$(RPAREN) and when [Gtk.ListBox.invalidateSort]
+   * [gtk.list_box_row.ListBoxRow.changed]$(RPAREN) and when [gtk.list_box.ListBox.invalidateSort]
    * is called.
    * Note that using a sort function is incompatible with using a model
-   * $(LPAREN)see [Gtk.ListBox.bindModel]$(RPAREN).
+   * $(LPAREN)see [gtk.list_box.ListBox.bindModel]$(RPAREN).
    * Params:
    *   sortFunc = the sort function
    */

@@ -1,6 +1,6 @@
 module pango.attr_font_features;
 
-import gid.gid;
+import gid.global;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -55,7 +55,7 @@ class AttrFontFeatures
    *     font-feature-settings property]$(LPAREN)https://www.w3.org/TR/css-fonts-4/#font-rend-desc$(RPAREN)
    * Returns: the newly allocated
    *   `PangoAttribute`, which should be freed with
-   *   [Pango.Attribute.destroy]
+   *   [pango.attribute.Attribute.destroy]
    */
   static Attribute new_(string features)
   {

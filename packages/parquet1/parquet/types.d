@@ -1,6 +1,6 @@
 module parquet.types;
 
-import gid.gid;
+import gid.global;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.types;

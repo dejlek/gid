@@ -1,6 +1,6 @@
 module gtk.expression;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -23,12 +23,12 @@ import gtk.types;
  * refers to. An evaluation always happens in the context of a current object
  * called `this` $(LPAREN)it mirrors the behavior of object-oriented languages$(RPAREN),
  * which may or may not influence the result of the evaluation. Use
- * [Gtk.Expression.evaluate] for evaluating an expression.
+ * [gtk.expression.Expression.evaluate] for evaluating an expression.
  * Various methods for defining expressions exist, from simple constants via
- * [Gtk.ConstantExpression.new_] to looking up properties in a `GObject`
- * $(LPAREN)even recursively$(RPAREN) via [Gtk.PropertyExpression.new_] or providing
+ * [gtk.constant_expression.ConstantExpression.new_] to looking up properties in a `GObject`
+ * $(LPAREN)even recursively$(RPAREN) via [gtk.property_expression.PropertyExpression.new_] or providing
  * custom functions to transform and combine expressions via
- * [Gtk.ClosureExpression.new_].
+ * [gtk.closure_expression.ClosureExpression.new_].
  * Here is an example of a complex expression:
  * ```c
  * color_expr \= gtk_property_expression_new $(LPAREN)GTK_TYPE_LIST_ITEM,
@@ -50,12 +50,12 @@ import gtk.types;
  * `GtkStringFilter` is using a `GtkExpression` for similar reasons.
  * By default, expressions are not paying attention to changes and evaluation is
  * just a snapshot of the current state at a given time. To get informed about
- * changes, an expression needs to be "watched" via a [Gtk.ExpressionWatch],
+ * changes, an expression needs to be "watched" via a [gtk.expression_watch.ExpressionWatch],
  * which will cause a callback to be called whenever the value of the expression may
- * have changed; [Gtk.Expression.watch] starts watching an expression, and
- * [Gtk.ExpressionWatch.unwatch] stops.
+ * have changed; [gtk.expression.Expression.watch] starts watching an expression, and
+ * [gtk.expression_watch.ExpressionWatch.unwatch] stops.
  * Watches can be created for automatically updating the property of an object,
- * similar to GObject's `GBinding` mechanism, by using [Gtk.Expression.bind].
+ * similar to GObject's `GBinding` mechanism, by using [gtk.expression.Expression.bind].
  * ## GtkExpression in GObject properties
  * In order to use a `GtkExpression` as a `GObject` property, you must use the
  * func@Gtk.param_spec_expression when creating a `GParamSpec` to install in the
@@ -98,7 +98,7 @@ import gtk.types;
  * Since the `<lookup>` element creates an expression and its element content can
  * itself be an expression, this means that `<lookup>` tags can also be nested.
  * This is a common idiom when dealing with `GtkListItem`s. See
- * [Gtk.BuilderListItemFactory] for an example of this technique.
+ * [gtk.builder_list_item_factory.BuilderListItemFactory] for an example of this technique.
  * To create a constant expression, use the `<constant>` element. If the type attribute
  * is specified, the element content is interpreted as a value of that type. Otherwise,
  * it is assumed to be an object. For instance:
@@ -162,14 +162,14 @@ class Expression
 
   /**
    * Bind `target`'s property named `property` to `self`.
-   * The value that `self` evaluates to is set via `[GObject.ObjectG.set]` on
+   * The value that `self` evaluates to is set via `[gobject.object.ObjectG.set]` on
    * `target`. This is repeated whenever `self` changes to ensure that
    * the object's property stays synchronized with `self`.
    * If `self`'s evaluation fails, `target`'s `property` is not updated.
    * You can ensure that this doesn't happen by using a fallback
    * expression.
    * Note that this function takes ownership of `self`. If you want
-   * to keep it around, you should [Gtk.Expression.ref_] it beforehand.
+   * to keep it around, you should [gtk.expression.Expression.ref_] it beforehand.
    * Params:
    *   target = the target object to bind to
    *   property = name of the property on `target` to bind to
@@ -190,7 +190,7 @@ class Expression
    * Evaluates the given expression and on success stores the result
    * in value.
    * The `GType` of `value` will be the type given by
-   * [Gtk.Expression.getValueType].
+   * [gtk.expression.Expression.getValueType].
    * It is possible that expressions cannot be evaluated - for example
    * when the expression references objects that have been destroyed or
    * set to `NULL`. In that case `value` will remain empty and `FALSE`
@@ -211,7 +211,7 @@ class Expression
    * Gets the `GType` that this expression evaluates to.
    * This type is constant and will not change over the lifetime
    * of this expression.
-   * Returns: The type returned from [Gtk.Expression.evaluate]
+   * Returns: The type returned from [gtk.expression.Expression.evaluate]
    */
   GType getValueType()
   {
@@ -223,8 +223,8 @@ class Expression
   /**
    * Checks if the expression is static.
    * A static expression will never change its result when
-   * [Gtk.Expression.evaluate] is called on it with the same arguments.
-   * That means a call to [Gtk.Expression.watch] is not necessary because
+   * [gtk.expression.Expression.evaluate] is called on it with the same arguments.
+   * That means a call to [gtk.expression.Expression.watch] is not necessary because
    * it will never trigger a notify.
    * Returns: `TRUE` if the expression is static
    */
@@ -249,7 +249,7 @@ class Expression
    * Returns: The newly installed watch. Note that the only
    *   reference held to the watch will be released when the watch is unwatched
    *   which can happen automatically, and not just via
-   *   [Gtk.ExpressionWatch.unwatch]. You should call [Gtk.ExpressionWatch.ref_]
+   *   [gtk.expression_watch.ExpressionWatch.unwatch]. You should call [gtk.expression_watch.ExpressionWatch.ref_]
    *   if you want to keep the watch around.
    */
   ExpressionWatch watch(ObjectG this_, ExpressionNotify notify)

@@ -1,3 +1,5 @@
+//!class Value pre
+
 import std.traits : isPointer;
 
 import gobject.object;

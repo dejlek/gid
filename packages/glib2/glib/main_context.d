@@ -1,6 +1,6 @@
 module glib.main_context;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.cond;
@@ -68,11 +68,11 @@ class MainContext : Boxed
    * If some other thread is the owner of the context,
    * returns %FALSE immediately. Ownership is properly
    * recursive: the owner can require ownership again
-   * and will release ownership when [GLib.MainContext.release]
-   * is called as many times as [GLib.MainContext.acquire].
+   * and will release ownership when [glib.main_context.MainContext.release]
+   * is called as many times as [glib.main_context.MainContext.acquire].
    * You must be the owner of a context before you
-   * can call [GLib.MainContext.prepare], [GLib.MainContext.query],
-   * [GLib.MainContext.check], [GLib.MainContext.dispatch], [GLib.MainContext.release].
+   * can call [glib.main_context.MainContext.prepare], [glib.main_context.MainContext.query],
+   * [glib.main_context.MainContext.check], [glib.main_context.MainContext.dispatch], [glib.main_context.MainContext.release].
    * Since 2.76 context can be %NULL to use the global-default
    * main context.
    * Returns: %TRUE if the operation succeeded, and
@@ -88,12 +88,12 @@ class MainContext : Boxed
   /**
    * Adds a file descriptor to the set of file descriptors polled for
    * this context. This will very seldom be used directly. Instead
-   * a typical event source will use [GLib.Source.addUnixFd] instead.
+   * a typical event source will use [glib.source.Source.addUnixFd] instead.
    * Params:
    *   fd = a #GPollFD structure holding information about a file
    *     descriptor to watch.
    *   priority = the priority for this file descriptor which should be
-   *     the same as the priority used for [GLib.Source.attach] to ensure that the
+   *     the same as the priority used for [glib.source.Source.attach] to ensure that the
    *     file descriptor is polled whenever the results may be needed.
    */
   void addPoll(PollFD fd, int priority)
@@ -104,16 +104,16 @@ class MainContext : Boxed
   /**
    * Passes the results of polling back to the main loop. You should be
    * careful to pass fds and its length n_fds as received from
-   * [GLib.MainContext.query], as this functions relies on assumptions
+   * [glib.main_context.MainContext.query], as this functions relies on assumptions
    * on how fds is filled.
    * You must have successfully acquired the context with
-   * [GLib.MainContext.acquire] before you may call this function.
+   * [glib.main_context.MainContext.acquire] before you may call this function.
    * Since 2.76 context can be %NULL to use the global-default
    * main context.
    * Params:
    *   maxPriority = the maximum numerical priority of sources to check
    *   fds = array of #GPollFD's that was passed to
-   *     the last call to [GLib.MainContext.query]
+   *     the last call to [glib.main_context.MainContext.query]
    * Returns: %TRUE if some sources are ready to be dispatched.
    */
   bool check(int maxPriority, PollFD[] fds)
@@ -131,7 +131,7 @@ class MainContext : Boxed
   /**
    * Dispatches all pending sources.
    * You must have successfully acquired the context with
-   * [GLib.MainContext.acquire] before you may call this function.
+   * [glib.main_context.MainContext.acquire] before you may call this function.
    * Since 2.76 context can be %NULL to use the global-default
    * main context.
    */
@@ -145,7 +145,7 @@ class MainContext : Boxed
    * multiple sources exist with the same source function and user data,
    * the first one found will be returned.
    * Params:
-   *   funcs = the source_funcs passed to [GLib.Source.new_].
+   *   funcs = the source_funcs passed to [glib.source.Source.new_].
    *   userData = the user data from the callback.
    * Returns: the source, if one was found, otherwise %NULL
    */
@@ -163,13 +163,13 @@ class MainContext : Boxed
    * More specifically: source IDs can be reissued after a source has been
    * destroyed and therefore it is never valid to use this function with a
    * source ID which may have already been removed.  An example is when
-   * scheduling an idle to run in another thread with [GLib.Global.idleAdd]: the
+   * scheduling an idle to run in another thread with [glib.global.idleAdd]: the
    * idle may already have run and been removed by the time this function
    * is called on its $(LPAREN)now invalid$(RPAREN) source ID.  This source ID may have
    * been reissued, leading to the operation being performed against the
    * wrong source.
    * Params:
-   *   sourceId = the source ID, as returned by [GLib.Source.getId].
+   *   sourceId = the source ID, as returned by [glib.source.Source.getId].
    * Returns: the #GSource
    */
   Source findSourceById(uint sourceId)
@@ -199,7 +199,7 @@ class MainContext : Boxed
   /**
    * Invokes a function in such a way that context is owned during the
    * invocation of function.
-   * This function is the same as [GLib.MainContext.invoke] except that it
+   * This function is the same as [glib.main_context.MainContext.invoke] except that it
    * lets you specify the priority in case function ends up being
    * scheduled as an idle and also lets you give a #GDestroyNotify for data.
    * notify should not assume that it is called from any particular
@@ -248,7 +248,7 @@ class MainContext : Boxed
    * events sources will be dispatched $(LPAREN)if any$(RPAREN), that are ready at this
    * given moment without further waiting.
    * Note that even when may_block is %TRUE, it is still possible for
-   * [GLib.MainContext.iteration] to return %FALSE, since the wait may
+   * [glib.main_context.MainContext.iteration] to return %FALSE, since the wait may
    * be interrupted for other reasons than an event source becoming ready.
    * Params:
    *   mayBlock = whether the call may block.
@@ -285,7 +285,7 @@ class MainContext : Boxed
    * Prepares to poll sources within a main loop. The resulting information
    * for polling is determined by calling g_main_context_query $(LPAREN)$(RPAREN).
    * You must have successfully acquired the context with
-   * [GLib.MainContext.acquire] before you may call this function.
+   * [glib.main_context.MainContext.acquire] before you may call this function.
    * Params:
    *   priority = location to store priority of highest priority
    *     source already ready.
@@ -306,34 +306,34 @@ class MainContext : Boxed
    * started in this thread to run under context and deliver their
    * results to its main loop, rather than running under the global
    * default main context in the main thread. Note that calling this function
-   * changes the context returned by [GLib.MainContext.getThreadDefault],
-   * not the one returned by [GLib.MainContext.default_], so it does not affect
-   * the context used by functions like [GLib.Global.idleAdd].
+   * changes the context returned by [glib.main_context.MainContext.getThreadDefault],
+   * not the one returned by [glib.main_context.MainContext.default_], so it does not affect
+   * the context used by functions like [glib.global.idleAdd].
    * Normally you would call this function shortly after creating a new
    * thread, passing it a #GMainContext which will be run by a
    * #GMainLoop in that thread, to set a new default context for all
    * async operations in that thread. In this case you may not need to
-   * ever call [GLib.MainContext.popThreadDefault], assuming you want the
+   * ever call [glib.main_context.MainContext.popThreadDefault], assuming you want the
    * new #GMainContext to be the default for the whole lifecycle of the
    * thread.
    * If you don't have control over how the new thread was created $(LPAREN)e.g.
    * in the new thread isn't newly created, or if the thread life
    * cycle is managed by a #GThreadPool$(RPAREN), it is always suggested to wrap
    * the logic that needs to use the new #GMainContext inside a
-   * [GLib.MainContext.pushThreadDefault] / [GLib.MainContext.popThreadDefault]
+   * [glib.main_context.MainContext.pushThreadDefault] / [glib.main_context.MainContext.popThreadDefault]
    * pair, otherwise threads that are re-used will end up never explicitly
    * releasing the #GMainContext reference they hold.
    * In some cases you may want to schedule a single operation in a
    * non-default context, or temporarily use a non-default context in
    * the main thread. In that case, you can wrap the call to the
    * asynchronous operation inside a
-   * [GLib.MainContext.pushThreadDefault] /
-   * [GLib.MainContext.popThreadDefault] pair, but it is up to you to
+   * [glib.main_context.MainContext.pushThreadDefault] /
+   * [glib.main_context.MainContext.popThreadDefault] pair, but it is up to you to
    * ensure that no other asynchronous operations accidentally get
    * started while the non-default context is active.
    * Beware that libraries that predate this function may not correctly
    * handle being used from a thread with a thread-default context. Eg,
-   * see [Gio.File.supportsThreadContexts].
+   * see [gio.file.File.supportsThreadContexts].
    */
   void pushThreadDefault()
   {
@@ -343,10 +343,10 @@ class MainContext : Boxed
   /**
    * Determines information necessary to poll this main loop. You should
    * be careful to pass the resulting fds array and its length n_fds
-   * as is when calling [GLib.MainContext.check], as this function relies
+   * as is when calling [glib.main_context.MainContext.check], as this function relies
    * on assumptions made when the array is filled.
    * You must have successfully acquired the context with
-   * [GLib.MainContext.acquire] before you may call this function.
+   * [glib.main_context.MainContext.acquire] before you may call this function.
    * Params:
    *   maxPriority = maximum priority source to check
    *   timeout = location to store timeout to be used in polling
@@ -366,11 +366,11 @@ class MainContext : Boxed
 
   /**
    * Releases ownership of a context previously acquired by this thread
-   * with [GLib.MainContext.acquire]. If the context was acquired multiple
-   * times, the ownership will be released only when [GLib.MainContext.release]
+   * with [glib.main_context.MainContext.acquire]. If the context was acquired multiple
+   * times, the ownership will be released only when [glib.main_context.MainContext.release]
    * is called as many times as it was acquired.
    * You must have successfully acquired the context with
-   * [GLib.MainContext.acquire] before you may call this function.
+   * [glib.main_context.MainContext.acquire] before you may call this function.
    */
   void release()
   {
@@ -381,7 +381,7 @@ class MainContext : Boxed
    * Removes file descriptor from the set of file descriptors to be
    * polled for a particular context.
    * Params:
-   *   fd = a #GPollFD descriptor previously added with [GLib.MainContext.addPoll]
+   *   fd = a #GPollFD descriptor previously added with [glib.main_context.MainContext.addPoll]
    */
   void removePoll(PollFD fd)
   {
@@ -390,7 +390,7 @@ class MainContext : Boxed
 
   /**
    * Tries to become the owner of the specified context,
-   * as with [GLib.MainContext.acquire]. But if another thread
+   * as with [glib.main_context.MainContext.acquire]. But if another thread
    * is the owner, atomically drop mutex and wait on cond until
    * that owner releases ownership or until cond is signaled, then
    * try again $(LPAREN)once$(RPAREN) to become the owner.
@@ -400,7 +400,7 @@ class MainContext : Boxed
    * Returns: %TRUE if the operation succeeded, and
    *   this thread is now the owner of context.
 
-   * Deprecated: Use [GLib.MainContext.isOwner] and separate locking instead.
+   * Deprecated: Use [glib.main_context.MainContext.isOwner] and separate locking instead.
    */
   bool wait(Cond cond, Mutex mutex)
   {
@@ -410,10 +410,10 @@ class MainContext : Boxed
   }
 
   /**
-   * If context is currently blocking in [GLib.MainContext.iteration]
+   * If context is currently blocking in [glib.main_context.MainContext.iteration]
    * waiting for a source to become ready, cause it to stop blocking
    * and return.  Otherwise, cause the next invocation of
-   * [GLib.MainContext.iteration] to return without blocking.
+   * [glib.main_context.MainContext.iteration] to return without blocking.
    * This API is useful for low-level control over #GMainContext; for
    * example, integrating it with main loop implementations such as
    * #GMainLoop.
@@ -442,7 +442,7 @@ class MainContext : Boxed
    * Returns the global-default main context. This is the main context
    * used for main loop functions when a main loop is not explicitly
    * specified, and corresponds to the "main" main loop. See also
-   * [GLib.MainContext.getThreadDefault].
+   * [glib.main_context.MainContext.getThreadDefault].
    * Returns: the global-default main context.
    */
   static MainContext default_()
@@ -457,13 +457,13 @@ class MainContext : Boxed
    * Gets the thread-default #GMainContext for this thread. Asynchronous
    * operations that want to be able to be run in contexts other than
    * the default one should call this method or
-   * [GLib.MainContext.refThreadDefault] to get a #GMainContext to add
+   * [glib.main_context.MainContext.refThreadDefault] to get a #GMainContext to add
    * their #GSources to. $(LPAREN)Note that even in single-threaded
    * programs applications may sometimes want to temporarily push a
    * non-default context, so it is not safe to assume that this will
    * always return %NULL if you are running in the default thread.$(RPAREN)
    * If you need to hold a reference on the context, use
-   * [GLib.MainContext.refThreadDefault] instead.
+   * [glib.main_context.MainContext.refThreadDefault] instead.
    * Returns: the thread-default #GMainContext, or
    *   %NULL if the thread-default context is the global-default main context.
    */
@@ -477,13 +477,13 @@ class MainContext : Boxed
 
   /**
    * Gets the thread-default #GMainContext for this thread, as with
-   * [GLib.MainContext.getThreadDefault], but also adds a reference to
-   * it with [GLib.MainContext.ref_]. In addition, unlike
-   * [GLib.MainContext.getThreadDefault], if the thread-default context
+   * [glib.main_context.MainContext.getThreadDefault], but also adds a reference to
+   * it with [glib.main_context.MainContext.ref_]. In addition, unlike
+   * [glib.main_context.MainContext.getThreadDefault], if the thread-default context
    * is the global-default context, this will return that #GMainContext
    * $(LPAREN)with a ref added to it$(RPAREN) rather than returning %NULL.
    * Returns: the thread-default #GMainContext. Unref
-   *   with [GLib.MainContext.unref] when you are done with it.
+   *   with [glib.main_context.MainContext.unref] when you are done with it.
    */
   static MainContext refThreadDefault()
   {

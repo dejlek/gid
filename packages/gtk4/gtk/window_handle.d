@@ -1,6 +1,6 @@
 module gtk.window_handle;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;

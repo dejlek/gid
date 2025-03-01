@@ -3,7 +3,7 @@ module arrowdataset.key_value_partitioning_options;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class KeyValuePartitioningOptions : ObjectG

@@ -1,6 +1,6 @@
 module gio.unix_fdmessage;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_control_message;
@@ -10,14 +10,14 @@ import glib.error;
 import gobject.object;
 
 /**
- * This [Gio.SocketControlMessage] contains a [Gio.UnixFDList].
- * It may be sent using [Gio.Socket.sendMessage] and received using
- * [Gio.Socket.receiveMessage] over UNIX sockets $(LPAREN)ie: sockets in the
+ * This [gio.socket_control_message.SocketControlMessage] contains a [gio.unix_fdlist.UnixFDList].
+ * It may be sent using [gio.socket.Socket.sendMessage] and received using
+ * [gio.socket.Socket.receiveMessage] over UNIX sockets $(LPAREN)ie: sockets in the
  * `G_SOCKET_FAMILY_UNIX` family$(RPAREN). The file descriptors are copied
  * between processes by the kernel.
  * For an easier way to send and receive file descriptors over
- * stream-oriented UNIX sockets, see [Gio.UnixConnection.sendFd] and
- * [Gio.UnixConnection.receiveFd].
+ * stream-oriented UNIX sockets, see [gio.unix_connection.UnixConnection.sendFd] and
+ * [gio.unix_connection.UnixConnection.receiveFd].
  * Note that `<gio/gunixfdmessage.h>` belongs to the UNIX-specific GIO
  * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
  * file or the `GioUnix-2.0` GIR namespace when using it.
@@ -108,7 +108,7 @@ class UnixFDMessage : SocketControlMessage
    * After this call, the descriptors are no longer contained in
    * message. Further calls will return an empty list $(LPAREN)unless more
    * descriptors have been added$(RPAREN).
-   * The return result of this function must be freed with [GLib.Global.gfree].
+   * The return result of this function must be freed with [glib.global.gfree].
    * The caller is also responsible for closing all of the file
    * descriptors.
    * If length is non-%NULL then it is set to the number of file

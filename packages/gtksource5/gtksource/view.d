@@ -1,7 +1,7 @@
 module gtksource.view;
 
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -32,7 +32,7 @@ import gtksource.space_drawer;
 import gtksource.types;
 
 /**
- * Subclass of [Gtk.TextView].
+ * Subclass of [gtk.text_view.TextView].
  * `GtkSourceView` is the main class of the GtkSourceView library.
  * Use a class@Buffer to display text with a `GtkSourceView`.
  * This class provides:
@@ -46,7 +46,7 @@ import gtksource.types;
  * An easy way to test all these features is to use the test-widget mini-program
  * provided in the GtkSourceView repository, in the tests/ directory.
  * # GtkSourceView as GtkBuildable
- * The GtkSourceView implementation of the [Gtk.Buildable] interface exposes the
+ * The GtkSourceView implementation of the [gtk.buildable.Buildable] interface exposes the
  * property@View:completion object with the internal-child "completion".
  * An example of a UI definition fragment with GtkSourceView:
  * ```xml
@@ -76,8 +76,8 @@ import gtksource.types;
  * g_object_unref $(LPAREN)provider$(RPAREN);
  * ```
  * If you need to adjust the font or size of font within a portion of the
- * document only, you should use a [Gtk.TextTag] with the [Gtk.TextTag.family] or
- * [Gtk.TextTag.scale] set so that the font size may be scaled relative to
+ * document only, you should use a [gtk.text_tag.TextTag] with the [gtk.text_tag.TextTag.utf8] or
+ * [gtk.text_tag.TextTag.gdouble] set so that the font size may be scaled relative to
  * the default font set in CSS.
  */
 class View : TextView
@@ -102,10 +102,10 @@ class View : TextView
   /**
    * Creates a new `GtkSourceView`.
    * By default, an empty classBuffer will be lazily created and can be
-   * retrieved with [Gtk.TextView.getBuffer].
+   * retrieved with [gtk.text_view.TextView.getBuffer].
    * If you want to specify your own buffer, either override the
    * vfuncGtk.TextView.create_buffer factory method, or use
-   * [GtkSource.View.newWithBuffer].
+   * [gtksource.view.View.newWithBuffer].
    * Returns: a new #GtkSourceView.
    */
   this()
@@ -237,7 +237,7 @@ class View : TextView
 
   /**
    * Returns the number of spaces to use for each step of indent.
-   * See [GtkSource.View.setIndentWidth] for details.
+   * See [gtksource.view.View.setIndentWidth] for details.
    * Returns: indent width.
    */
   int getIndentWidth()
@@ -500,7 +500,7 @@ class View : TextView
    * instead $(LPAREN)since propertyView:tab-width is 8$(RPAREN). On the other hand, if
    * propertyView:insert-spaces-instead-of-tabs is %TRUE, the second tab key
    * pressed will insert 4 more spaces for a total of 8 spaces in the
-   * [Gtk.TextBuffer].
+   * [gtk.text_buffer.TextBuffer].
    * The test-widget program $(LPAREN)available in the GtkSourceView repository$(RPAREN) may be
    * useful to better understand the indentation settings $(LPAREN)enable the space
    * drawing!$(RPAREN).
@@ -527,7 +527,7 @@ class View : TextView
   /**
    * If %TRUE a tab key pressed is replaced by a group of space characters.
    * Of course it is still possible to insert a real `\t` programmatically with the
-   * [Gtk.TextBuffer] API.
+   * [gtk.text_buffer.TextBuffer] API.
    * Params:
    *   enable = whether to insert spaces instead of tabs.
    */

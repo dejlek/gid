@@ -12,7 +12,7 @@ import gdk.surface;
 import gdk.texture;
 import gdk.types;
 import gdkpixbuf.pixbuf;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -53,8 +53,8 @@ import gobject.value;
 
  * Deprecated: The function is overly complex and produces broken output
  *   in various combinations of arguments. If you want to draw with GL textures
- *   in GTK, use [Gdk.GLTexture.new_]; if you want to use that texture in
- *   Cairo, use [Gdk.Texture.download] to download the data into a Cairo
+ *   in GTK, use [gdk.gltexture.GLTexture.new_]; if you want to use that texture in
+ *   Cairo, use [gdk.texture.Texture.download] to download the data into a Cairo
  *   image surface.
  */
 void cairoDrawFromGl(Context cr, Surface surface, int source, int sourceType, int bufferScale, int x, int y, int width, int height)
@@ -88,7 +88,7 @@ void cairoRegion(Context cr, Region region)
  * Creates region that covers the area where the given
  * surface is more than 50% opaque.
  * This function takes into account device offsets that might be
- * set with [cairo.Surface.setDeviceOffset].
+ * set with [cairo.surface.Surface.setDeviceOffset].
  * Params:
  *   surface = a cairo surface
  * Returns: A `cairo_region_t`
@@ -443,7 +443,7 @@ uint keyvalToUpper(uint keyval)
  * Returns: A newly-created pixbuf with a
  *   reference count of 1
 
- * Deprecated: Use [Gdk.Texture] and subclasses instead
+ * Deprecated: Use [gdk.texture.Texture] and subclasses instead
  *   cairo surfaces and pixbufs
  */
 Pixbuf pixbufGetFromSurface(DcairoSurface surface, int srcX, int srcY, int width, int height)
@@ -463,7 +463,7 @@ Pixbuf pixbufGetFromSurface(DcairoSurface surface, int srcX, int srcY, int width
  *   texture = a `GdkTexture`
  * Returns: a new `GdkPixbuf`
 
- * Deprecated: Use [Gdk.Texture] and subclasses instead
+ * Deprecated: Use [gdk.texture.Texture] and subclasses instead
  *   cairo surfaces and pixbufs
  */
 Pixbuf pixbufGetFromTexture(Texture texture)
@@ -496,7 +496,7 @@ Pixbuf pixbufGetFromTexture(Texture texture)
  * - `x11`
  * You can also include a `*` in the list to try all remaining backends.
  * This call must happen prior to functions that open a display, such
- * as [Gdk.Display.open], `[Gtk.Global.init_]`, or `[Gtk.Global.initCheck]`
+ * as [gdk.display.Display.open], `[gtk.global.init_]`, or `[gtk.global.initCheck]`
  * in order to take effect.
  * Params:
  *   backends = a comma-separated list of backends

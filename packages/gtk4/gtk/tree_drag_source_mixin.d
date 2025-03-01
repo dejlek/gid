@@ -2,7 +2,7 @@ module gtk.tree_drag_source_mixin;
 
 public import gtk.tree_drag_source_iface_proxy;
 public import gdk.content_provider;
-public import gid.gid;
+public import gid.global;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -13,7 +13,7 @@ public import gtk.types;
  * Interface for Drag-and-Drop destinations in `GtkTreeView`.
 
  * Deprecated: List views use widgets to display their contents.
- *   You can use [Gtk.DragSource] to implement a drag source
+ *   You can use [gtk.drag_source.DragSource] to implement a drag source
  */
 template TreeDragSourceT()
 {

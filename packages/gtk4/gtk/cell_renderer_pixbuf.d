@@ -1,6 +1,6 @@
 module gtk.cell_renderer_pixbuf;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer;
@@ -21,7 +21,7 @@ import gtk.types;
  * pixbuf, it renders that one.
 
  * Deprecated: List views use widgets to display their contents. You
- *   should use [Gtk.Image] for icons, and [Gtk.Picture] for images
+ *   should use [gtk.image.Image] for icons, and [gtk.picture.Picture] for images
  */
 class CellRendererPixbuf : CellRenderer
 {
@@ -45,7 +45,7 @@ class CellRendererPixbuf : CellRenderer
   /**
    * Creates a new `GtkCellRendererPixbuf`. Adjust rendering
    * parameters using object properties. Object properties can be set
-   * globally $(LPAREN)with [GObject.ObjectG.set]$(RPAREN). Also, with `GtkTreeViewColumn`, you
+   * globally $(LPAREN)with [gobject.object.ObjectG.set]$(RPAREN). Also, with `GtkTreeViewColumn`, you
    * can bind a property to a value in a `GtkTreeModel`. For example, you
    * can bind the “pixbuf” property on the cell renderer to a pixbuf value
    * in the model, thus rendering a different image in each row of the

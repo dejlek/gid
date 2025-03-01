@@ -1,6 +1,6 @@
 module gio.property_action;
 
-import gid.gid;
+import gid.global;
 import gio.action;
 import gio.action_mixin;
 import gio.c.functions;
@@ -9,21 +9,21 @@ import gio.types;
 import gobject.object;
 
 /**
- * A `GPropertyAction` is a way to get a [Gio.Action] with a state value
- * reflecting and controlling the value of a [GObject.ObjectG] property.
+ * A `GPropertyAction` is a way to get a [gio.action.Action] with a state value
+ * reflecting and controlling the value of a [gobject.object.ObjectG] property.
  * The state of the action will correspond to the value of the property.
  * Changing it will change the property $(LPAREN)assuming the requested value
- * matches the requirements as specified in the [GObject.ParamSpec]$(RPAREN).
+ * matches the requirements as specified in the [gobject.param_spec.ParamSpec]$(RPAREN).
  * Only the most common types are presently supported.  Booleans are
  * mapped to booleans, strings to strings, signed/unsigned integers to
  * int32/uint32 and floats and doubles to doubles.
  * If the property is an enum then the state will be string-typed and
  * conversion will automatically be performed between the enum value and
- * ‘nick’ string as per the [GObject.EnumValue] table.
+ * ‘nick’ string as per the [gobject.enum_value.EnumValue] table.
  * Flags types are not currently supported.
  * Properties of object types, boxed types and pointer types are not
  * supported and probably never will be.
- * Properties of [GLib.VariantG] types are not currently supported.
+ * Properties of [glib.variant.VariantG] types are not currently supported.
  * If the property is boolean-valued then the action will have a `NULL`
  * parameter type, and activating the action $(LPAREN)with no parameter$(RPAREN) will
  * toggle the value of the property.
@@ -33,7 +33,7 @@ import gobject.object;
  * particular piece of state is kept $(LPAREN)and therefore has to be synchronised
  * between$(RPAREN). `GPropertyAction` does not have a separate state that is kept
  * in sync with the property value — its state is the property value.
- * For example, it might be useful to create a [Gio.Action] corresponding
+ * For example, it might be useful to create a [gio.action.Action] corresponding
  * to the `visible-child-name` property of a [`GtkStack`](https://docs.gtk.org/gtk4/class.Stack.html)
  * so that the current page can be switched from a menu.  The active radio
  * indication in the menu is then directly determined from the active page of
@@ -44,11 +44,11 @@ import gobject.object;
  * actually being used to control something else.
  * Another anti-example would be to bind to the `visible-child-name`
  * property of a [`GtkStack`](https://docs.gtk.org/gtk4/class.Stack.html) if
- * this value is actually stored in [Gio.Settings].  In that case, the
- * real source of the value is* [Gio.Settings].  If you want
- * a [Gio.Action] to control a setting stored in [Gio.Settings],
- * see [Gio.Settings.createAction] instead, and possibly combine its
- * use with [Gio.Settings.bind].
+ * this value is actually stored in [gio.settings.Settings].  In that case, the
+ * real source of the value is* [gio.settings.Settings].  If you want
+ * a [gio.action.Action] to control a setting stored in [gio.settings.Settings],
+ * see [gio.settings.Settings.createAction] instead, and possibly combine its
+ * use with [gio.settings.Settings.bind].
  */
 class PropertyAction : ObjectG, Action
 {

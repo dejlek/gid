@@ -1,6 +1,6 @@
 module gtksource.style_scheme_preview;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -19,7 +19,7 @@ import gtksource.types;
 
 /**
  * A preview widget for class@StyleScheme.
- * This widget provides a convenient [Gtk.Widget] to preview a class@StyleScheme.
+ * This widget provides a convenient [gtk.widget.Widget] to preview a class@StyleScheme.
  * The property@StyleSchemePreview:selected property can be used to manage
  * the selection state of a single preview widget.
  */

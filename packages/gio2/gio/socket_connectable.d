@@ -1,7 +1,7 @@
 module gio.socket_connectable;
 
 public import gio.socket_connectable_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_address_enumerator;
@@ -11,8 +11,8 @@ import gobject.object;
 /**
  * Objects that describe one or more potential socket endpoints
  * implement `GSocketConnectable`. Callers can then use
- * [Gio.SocketConnectable.enumerate] to get a
- * [Gio.SocketAddressEnumerator] to try out each socket address in turn
+ * [gio.socket_connectable.SocketConnectable.enumerate] to get a
+ * [gio.socket_address_enumerator.SocketAddressEnumerator] to try out each socket address in turn
  * until one succeeds, as shown in the sample code below.
  * ```c
  * MyConnectionType *
@@ -83,8 +83,8 @@ interface SocketConnectable
    * return a #GProxyAddress for each of its addresses that you must connect
    * to via a proxy.
    * If connectable does not implement
-   * [Gio.SocketConnectable.proxyEnumerate], this will fall back to
-   * calling [Gio.SocketConnectable.enumerate].
+   * [gio.socket_connectable.SocketConnectable.proxyEnumerate], this will fall back to
+   * calling [gio.socket_connectable.SocketConnectable.enumerate].
    * Returns: a new #GSocketAddressEnumerator.
    */
   SocketAddressEnumerator proxyEnumerate();

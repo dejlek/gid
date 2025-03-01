@@ -1,6 +1,6 @@
 module gio.dbus_interface_info;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_method_info;
@@ -65,13 +65,13 @@ class DBusInterfaceInfo : Boxed
 
   /**
    * Builds a lookup-cache to speed up
-   * [Gio.DBusInterfaceInfo.lookupMethod],
-   * [Gio.DBusInterfaceInfo.lookupSignal] and
-   * [Gio.DBusInterfaceInfo.lookupProperty].
+   * [gio.dbus_interface_info.DBusInterfaceInfo.lookupMethod],
+   * [gio.dbus_interface_info.DBusInterfaceInfo.lookupSignal] and
+   * [gio.dbus_interface_info.DBusInterfaceInfo.lookupProperty].
    * If this has already been called with info, the existing cache is
    * used and its use count is increased.
    * Note that info cannot be modified until
-   * [Gio.DBusInterfaceInfo.cacheRelease] is called.
+   * [gio.dbus_interface_info.DBusInterfaceInfo.cacheRelease] is called.
    */
   void cacheBuild()
   {
@@ -80,7 +80,7 @@ class DBusInterfaceInfo : Boxed
 
   /**
    * Decrements the usage count for the cache for info built by
-   * [Gio.DBusInterfaceInfo.cacheBuild] (if any) and frees the
+   * [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] (if any) and frees the
    * resources used by the cache if the usage count drops to zero.
    */
   void cacheRelease()
@@ -106,7 +106,7 @@ class DBusInterfaceInfo : Boxed
   /**
    * Looks up information about a method.
    * The cost of this function is O$(LPAREN)n$(RPAREN) in number of methods unless
-   * [Gio.DBusInterfaceInfo.cacheBuild] has been used on info.
+   * [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] has been used on info.
    * Params:
    *   name = A D-Bus method name $(LPAREN)typically in CamelCase$(RPAREN)
    * Returns: A #GDBusMethodInfo or %NULL if not found. Do not free, it is owned by info.
@@ -123,7 +123,7 @@ class DBusInterfaceInfo : Boxed
   /**
    * Looks up information about a property.
    * The cost of this function is O$(LPAREN)n$(RPAREN) in number of properties unless
-   * [Gio.DBusInterfaceInfo.cacheBuild] has been used on info.
+   * [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] has been used on info.
    * Params:
    *   name = A D-Bus property name $(LPAREN)typically in CamelCase$(RPAREN).
    * Returns: A #GDBusPropertyInfo or %NULL if not found. Do not free, it is owned by info.
@@ -140,7 +140,7 @@ class DBusInterfaceInfo : Boxed
   /**
    * Looks up information about a signal.
    * The cost of this function is O$(LPAREN)n$(RPAREN) in number of signals unless
-   * [Gio.DBusInterfaceInfo.cacheBuild] has been used on info.
+   * [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] has been used on info.
    * Params:
    *   name = A D-Bus signal name $(LPAREN)typically in CamelCase$(RPAREN)
    * Returns: A #GDBusSignalInfo or %NULL if not found. Do not free, it is owned by info.

@@ -1,6 +1,6 @@
 module harfbuzz.variation;
 
-import gid.gid;
+import gid.global;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
 import harfbuzz.types;

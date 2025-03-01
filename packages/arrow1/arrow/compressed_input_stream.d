@@ -9,7 +9,7 @@ import arrow.input_stream;
 import arrow.readable;
 import arrow.readable_mixin;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class CompressedInputStream : InputStream

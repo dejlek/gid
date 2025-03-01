@@ -1,6 +1,6 @@
 module pango.script_iter;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -39,12 +39,12 @@ class ScriptIter : Boxed
    * Unicode text into runs by Unicode script.
    * No copy is made of text, so the caller needs to make
    * sure it remains valid until the iterator is freed with
-   * [Pango.ScriptIter.free].
+   * [pango.script_iter.ScriptIter.free].
    * Params:
    *   text = a UTF-8 string
    * Returns: the new script iterator, initialized
    *   to point at the first range in the text, which should be
-   *   freed with [Pango.ScriptIter.free]. If the string is
+   *   freed with [pango.script_iter.ScriptIter.free]. If the string is
    *   empty, it will point at an empty range.
    */
   this(string text)

@@ -1,6 +1,6 @@
 module gtk.alert_dialog;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -15,11 +15,11 @@ import gtk.window;
 /**
  * A `GtkAlertDialog` object collects the arguments that
  * are needed to present a message to the user.
- * The message is shown with the [Gtk.AlertDialog.choose]
+ * The message is shown with the [gtk.alert_dialog.AlertDialog.choose]
  * function. This API follows the GIO async pattern, and the result can
- * be obtained by calling [Gtk.AlertDialog.chooseFinish].
+ * be obtained by calling [gtk.alert_dialog.AlertDialog.chooseFinish].
  * If you don't need to wait for a button to be clicked, you can use
- * [Gtk.AlertDialog.show].
+ * [gtk.alert_dialog.AlertDialog.show].
  */
 class AlertDialog : ObjectG
 {
@@ -43,11 +43,11 @@ class AlertDialog : ObjectG
   /**
    * This function shows the alert to the user.
    * The callback will be called when the alert is dismissed.
-   * It should call [Gtk.AlertDialog.chooseFinish]
+   * It should call [gtk.alert_dialog.AlertDialog.chooseFinish]
    * to obtain the result.
    * It is ok to pass `NULL` for the callback if the alert
    * does not have more than one button. A simpler API for
-   * this case is [Gtk.AlertDialog.show].
+   * this case is [gtk.alert_dialog.AlertDialog.show].
    * Params:
    *   parent = the parent `GtkWindow`
    *   cancellable = a `GCancellable` to cancel the operation
@@ -69,7 +69,7 @@ class AlertDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.AlertDialog.choose] call
+   * Finishes the [gtk.alert_dialog.AlertDialog.choose] call
    * and returns the index of the button that was clicked.
    * Params:
    *   result = a `GAsyncResult`
@@ -241,7 +241,7 @@ class AlertDialog : ObjectG
 
   /**
    * Show the alert to the user.
-   * This function is a simple version of [Gtk.AlertDialog.choose]
+   * This function is a simple version of [gtk.alert_dialog.AlertDialog.choose]
    * intended for dialogs with a single button.
    * If you want to cancel the dialog or if the alert has more than one button,
    * you should use that function instead and provide it with a #GCancellable or

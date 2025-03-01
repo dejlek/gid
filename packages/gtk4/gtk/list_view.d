@@ -1,6 +1,6 @@
 module gtk.list_view;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -32,7 +32,7 @@ import gtk.types;
  * characteristics of the model. For models that allow multiple selected items,
  * it is possible to turn on _rubberband selection_, using
  * property@Gtk.ListView:enable-rubberband.
- * If you need multiple columns with headers, see [Gtk.ColumnView].
+ * If you need multiple columns with headers, see [gtk.column_view.ColumnView].
  * To learn more about the list widget framework, see the
  * [overview](section-list-widget.html).
  * An example of using `GtkListView`:
@@ -88,7 +88,7 @@ import gtk.types;
  * `GtkListView` uses a single CSS node named `listview`. It may carry the
  * `.separators` style class, when property@Gtk.ListView:show-separators
  * property is set. Each child widget uses a single CSS node named `row`.
- * If the [Gtk.ListItem.activatable] property is set, the
+ * If the [gtk.list_item.ListItem.gboolean] property is set, the
  * corresponding row will have the `.activatable` style class. For
  * rubberband selection, a node with name `rubberband` is used.
  * The main listview node may also carry style classes to select
@@ -259,7 +259,7 @@ class ListView : ListBase
 
   /**
    * Sets the `GtkListItemFactory` to use for populating the
-   * [Gtk.ListHeader] objects used in section headers.
+   * [gtk.list_header.ListHeader] objects used in section headers.
    * If this factory is set to %NULL, the list will not show section headers.
    * Params:
    *   factory = the factory to use
@@ -271,7 +271,7 @@ class ListView : ListBase
 
   /**
    * Sets the model to use.
-   * This must be a [Gtk.SelectionModel] to use.
+   * This must be a [gtk.selection_model.SelectionModel] to use.
    * Params:
    *   model = the model to use
    */
@@ -316,7 +316,7 @@ class ListView : ListBase
    * Emitted when a row has been activated by the user,
    * usually via activating the GtkListView|list.activate-item action.
    * This allows for a convenient way to handle activation in a listview.
-   * See [Gtk.ListItem.setActivatable] for details on how to use
+   * See [gtk.list_item.ListItem.setActivatable] for details on how to use
    * this signal.
    * Params
    *   position = position of item to activate

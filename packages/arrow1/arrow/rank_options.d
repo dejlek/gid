@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.function_options;
 import arrow.sort_key;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class RankOptions : FunctionOptions
 {

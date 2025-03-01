@@ -1,6 +1,6 @@
 module gio.dbus_node_info;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_interface_info;
@@ -72,7 +72,7 @@ class DBusNodeInfo : Boxed
    * Params:
    *   xmlData = Valid D-Bus introspection XML.
    * Returns: A #GDBusNodeInfo structure or %NULL if error is set. Free
-   *   with [Gio.DBusNodeInfo.unref].
+   *   with [gio.dbus_node_info.DBusNodeInfo.unref].
    */
   static DBusNodeInfo newForXml(string xmlData)
   {

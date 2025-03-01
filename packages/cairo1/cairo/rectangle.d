@@ -3,7 +3,7 @@ module cairo.rectangle;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**

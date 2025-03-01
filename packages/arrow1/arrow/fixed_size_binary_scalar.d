@@ -6,7 +6,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.fixed_size_binary_data_type;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class FixedSizeBinaryScalar : BaseBinaryScalar
 {

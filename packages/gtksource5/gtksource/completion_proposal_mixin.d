@@ -1,7 +1,7 @@
 module gtksource.completion_proposal_mixin;
 
 public import gtksource.completion_proposal_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gtksource.c.functions;
 public import gtksource.c.types;
 public import gtksource.types;

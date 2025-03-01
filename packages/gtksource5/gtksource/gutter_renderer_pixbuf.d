@@ -3,7 +3,7 @@ module gtksource.gutter_renderer_pixbuf;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gdkpixbuf.pixbuf;
-import gid.gid;
+import gid.global;
 import gio.icon;
 import gio.icon_mixin;
 import gobject.object;
@@ -74,8 +74,8 @@ class GutterRendererPixbuf : GutterRenderer
   }
 
   /**
-   * Gets a [Gdk.Paintable] that was set with
-   * [GtkSource.GutterRendererPixbuf.setPaintable]
+   * Gets a [gdk.paintable.Paintable] that was set with
+   * [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf.setPaintable]
    * Returns: a #GdkPaintable or %NULL
    */
   Paintable getPaintable()

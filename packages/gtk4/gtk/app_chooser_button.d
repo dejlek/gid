@@ -1,6 +1,6 @@
 module gtk.app_chooser_button;
 
-import gid.gid;
+import gid.global;
 import gio.icon;
 import gio.icon_mixin;
 import gobject.dclosure;
@@ -30,13 +30,13 @@ import gtk.widget;
  * property@Gtk.AppChooserButton:show-default-item is set, the default
  * application is also included. To let the user chooser other applications,
  * you can set the property@Gtk.AppChooserButton:show-dialog-item property,
- * which allows to open a full [Gtk.AppChooserDialog].
+ * which allows to open a full [gtk.app_chooser_dialog.AppChooserDialog].
  * It is possible to add custom items to the list, using
- * [Gtk.AppChooserButton.appendCustomItem]. These items cause
+ * [gtk.app_chooser_button.AppChooserButton.appendCustomItem]. These items cause
  * the signal@Gtk.AppChooserButton::custom-item-activated signal to be
  * emitted when they are selected.
  * To track changes in the selected application, use the
- * [Gtk.AppChooserButton.changed] signal.
+ * [gtk.app_chooser_button.AppChooserButton.changed] signal.
  * ## CSS nodes
  * `GtkAppChooserButton` has a single CSS node with the name “appchooserbutton”.
 
@@ -89,7 +89,7 @@ class AppChooserButton : Widget, AppChooser
    * provided name as a detail for the
    * signalGtk.AppChooserButton::custom-item-activated signal, to add a
    * callback for the activation of a particular custom item in the list.
-   * See also [Gtk.AppChooserButton.appendSeparator].
+   * See also [gtk.app_chooser_button.AppChooserButton.appendSeparator].
    * Params:
    *   name = the name of the custom item
    *   label = the label for the custom item
@@ -173,8 +173,8 @@ class AppChooserButton : Widget, AppChooser
 
   /**
    * Selects a custom item.
-   * See [Gtk.AppChooserButton.appendCustomItem].
-   * Use [Gtk.AppChooser.refresh] to bring the selection
+   * See [gtk.app_chooser_button.AppChooserButton.appendCustomItem].
+   * Use [gtk.app_chooser.AppChooser.refresh] to bring the selection
    * to its initial state.
    * Params:
    *   name = the name of the custom item
@@ -301,7 +301,7 @@ class AppChooserButton : Widget, AppChooser
 
   /**
    * Emitted when a custom item is activated.
-   * Use [Gtk.AppChooserButton.appendCustomItem],
+   * Use [gtk.app_chooser_button.AppChooserButton.appendCustomItem],
    * to add custom items.
    * Params
    *   itemName = the name of the activated item

@@ -1,6 +1,6 @@
 module pango.font_description;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -40,7 +40,7 @@ class FontDescription : Boxed
   /**
    * Creates a new font description structure with all fields unset.
    * Returns: the newly allocated `PangoFontDescription`,
-   *   which should be freed using [Pango.FontDescription.free].
+   *   which should be freed using [pango.font_description.FontDescription.free].
    */
   this()
   {
@@ -74,7 +74,7 @@ class FontDescription : Boxed
   /**
    * Make a copy of a `PangoFontDescription`.
    * Returns: the newly allocated `PangoFontDescription`,
-   *   which should be freed with [Pango.FontDescription.free],
+   *   which should be freed with [pango.font_description.FontDescription.free],
    *   or %NULL if desc was %NULL.
    */
   FontDescription copy()
@@ -88,12 +88,12 @@ class FontDescription : Boxed
   /**
    * Make a copy of a `PangoFontDescription`, but don't duplicate
    * allocated fields.
-   * This is like [Pango.FontDescription.copy], but only a shallow
+   * This is like [pango.font_description.FontDescription.copy], but only a shallow
    * copy is made of the family name and other allocated fields. The result
    * can only be used until desc is modified or freed. This is meant
    * to be used when the copy is only needed temporarily.
    * Returns: the newly allocated `PangoFontDescription`,
-   *   which should be freed with [Pango.FontDescription.free],
+   *   which should be freed with [pango.font_description.FontDescription.free],
    *   or %NULL if desc was %NULL.
    */
   FontDescription copyStatic()
@@ -124,7 +124,7 @@ class FontDescription : Boxed
 
   /**
    * Gets the family name field of a font description.
-   * See [Pango.FontDescription.setFamily].
+   * See [pango.font_description.FontDescription.setFamily].
    * Returns: the family name field for the
    *   font description, or %NULL if not previously set. This has the same
    *   life-time as the font description itself and should not be freed.
@@ -139,9 +139,9 @@ class FontDescription : Boxed
 
   /**
    * Gets the gravity field of a font description.
-   * See [Pango.FontDescription.setGravity].
+   * See [pango.font_description.FontDescription.setGravity].
    * Returns: the gravity field for the font description.
-   *   Use [Pango.FontDescription.getSetFields] to find out
+   *   Use [pango.font_description.FontDescription.getSetFields] to find out
    *   if the field was explicitly set or not.
    */
   Gravity getGravity()
@@ -167,13 +167,13 @@ class FontDescription : Boxed
 
   /**
    * Gets the size field of a font description.
-   * See [Pango.FontDescription.setSize].
+   * See [pango.font_description.FontDescription.setSize].
    * Returns: the size field for the font description in points
    *   or device units. You must call
-   *   [Pango.FontDescription.getSizeIsAbsolute] to find out
+   *   [pango.font_description.FontDescription.getSizeIsAbsolute] to find out
    *   which is the case. Returns 0 if the size field has not previously
    *   been set or it has been set to 0 explicitly.
-   *   Use [Pango.FontDescription.getSetFields] to find out
+   *   Use [pango.font_description.FontDescription.getSetFields] to find out
    *   if the field was explicitly set or not.
    */
   int getSize()
@@ -186,10 +186,10 @@ class FontDescription : Boxed
   /**
    * Determines whether the size of the font is in points $(LPAREN)not absolute$(RPAREN)
    * or device units $(LPAREN)absolute$(RPAREN).
-   * See [Pango.FontDescription.setSize]
-   * and [Pango.FontDescription.setAbsoluteSize].
+   * See [pango.font_description.FontDescription.setSize]
+   * and [pango.font_description.FontDescription.setAbsoluteSize].
    * Returns: whether the size for the font description is in
-   *   points or device units. Use [Pango.FontDescription.getSetFields]
+   *   points or device units. Use [pango.font_description.FontDescription.getSetFields]
    *   to find out if the size field of the font description was explicitly
    *   set or not.
    */
@@ -202,9 +202,9 @@ class FontDescription : Boxed
 
   /**
    * Gets the stretch field of a font description.
-   * See [Pango.FontDescription.setStretch].
+   * See [pango.font_description.FontDescription.setStretch].
    * Returns: the stretch field for the font description.
-   *   Use [Pango.FontDescription.getSetFields] to find
+   *   Use [pango.font_description.FontDescription.getSetFields] to find
    *   out if the field was explicitly set or not.
    */
   Stretch getStretch()
@@ -217,9 +217,9 @@ class FontDescription : Boxed
 
   /**
    * Gets the style field of a `PangoFontDescription`.
-   * See [Pango.FontDescription.setStyle].
+   * See [pango.font_description.FontDescription.setStyle].
    * Returns: the style field for the font description.
-   *   Use [Pango.FontDescription.getSetFields] to
+   *   Use [pango.font_description.FontDescription.getSetFields] to
    *   find out if the field was explicitly set or not.
    */
   Style getStyle()
@@ -232,9 +232,9 @@ class FontDescription : Boxed
 
   /**
    * Gets the variant field of a `PangoFontDescription`.
-   * See [Pango.FontDescription.setVariant].
+   * See [pango.font_description.FontDescription.setVariant].
    * Returns: the variant field for the font description.
-   *   Use [Pango.FontDescription.getSetFields] to find
+   *   Use [pango.font_description.FontDescription.getSetFields] to find
    *   out if the field was explicitly set or not.
    */
   Variant getVariant()
@@ -247,7 +247,7 @@ class FontDescription : Boxed
 
   /**
    * Gets the variations field of a font description.
-   * See [Pango.FontDescription.setVariations].
+   * See [pango.font_description.FontDescription.setVariations].
    * Returns: the variations field for the font
    *   description, or %NULL if not previously set. This has the same
    *   life-time as the font description itself and should not be freed.
@@ -262,9 +262,9 @@ class FontDescription : Boxed
 
   /**
    * Gets the weight field of a font description.
-   * See [Pango.FontDescription.setWeight].
+   * See [pango.font_description.FontDescription.setWeight].
    * Returns: the weight field for the font description.
-   *   Use [Pango.FontDescription.getSetFields] to find
+   *   Use [pango.font_description.FontDescription.getSetFields] to find
    *   out if the field was explicitly set or not.
    */
   Weight getWeight()
@@ -278,7 +278,7 @@ class FontDescription : Boxed
   /**
    * Computes a hash of a `PangoFontDescription` structure.
    * This is suitable to be used, for example, as an argument
-   * to [GLib.HashTable.new_]. The hash value is independent of desc->mask.
+   * to [glib.hash_table.HashTable.new_]. The hash value is independent of desc->mask.
    * Returns: the hash value.
    */
   uint hash()
@@ -310,7 +310,7 @@ class FontDescription : Boxed
   /**
    * Merges the fields that are set in desc_to_merge into the fields in
    * desc, without copying allocated fields.
-   * This is like [Pango.FontDescription.merge], but only a shallow copy
+   * This is like [pango.font_description.FontDescription.merge], but only a shallow copy
    * is made of the family name and other allocated fields. desc can only
    * be used until desc_to_merge is modified or freed. This is meant to
    * be used when the merged font description is only needed temporarily.
@@ -327,7 +327,7 @@ class FontDescription : Boxed
 
   /**
    * Sets the size field of a font description, in device units.
-   * This is mutually exclusive with [Pango.FontDescription.setSize]
+   * This is mutually exclusive with [pango.font_description.FontDescription.setSize]
    * which sets the font size in points.
    * Params:
    *   size = the new size, in Pango units. There are %PANGO_SCALE Pango units
@@ -357,7 +357,7 @@ class FontDescription : Boxed
 
   /**
    * Sets the family name field of a font description, without copying the string.
-   * This is like [Pango.FontDescription.setFamily], except that no
+   * This is like [pango.font_description.FontDescription.setFamily], except that no
    * copy of family is made. The caller must make sure that the
    * string passed in stays around until desc has been freed or the
    * name is set again. This function can be used if family is a static
@@ -390,7 +390,7 @@ class FontDescription : Boxed
   /**
    * Sets the size field of a font description in fractional points.
    * This is mutually exclusive with
-   * [Pango.FontDescription.setAbsoluteSize].
+   * [pango.font_description.FontDescription.setAbsoluteSize].
    * Params:
    *   size = the size of the font in points, scaled by %PANGO_SCALE.
    *     $(LPAREN)That is, a size value of 10 * PANGO_SCALE is a 10 point font.
@@ -398,7 +398,7 @@ class FontDescription : Boxed
    *     system configuration and the output device. For screen display, a
    *     logical DPI of 96 is common, in which case a 10 point font corresponds
    *     to a 10 * $(LPAREN)96 / 72$(RPAREN) \= 13.3 pixel font.
-   *     Use [Pango.FontDescription.setAbsoluteSize] if you need
+   *     Use [pango.font_description.FontDescription.setAbsoluteSize] if you need
    *     a particular size in device units.
    */
   void setSize(int size)
@@ -408,7 +408,7 @@ class FontDescription : Boxed
 
   /**
    * Sets the stretch field of a font description.
-   * The [Pango.Stretch] field specifies how narrow or
+   * The [pango.Stretch] field specifies how narrow or
    * wide the font should be.
    * Params:
    *   stretch = the stretch for the font description
@@ -420,7 +420,7 @@ class FontDescription : Boxed
 
   /**
    * Sets the style field of a `PangoFontDescription`.
-   * The [Pango.Style] enumeration describes whether the font is
+   * The [pango.Style] enumeration describes whether the font is
    * slanted and the manner in which it is slanted; it can be either
    * %PANGO_STYLE_NORMAL, %PANGO_STYLE_ITALIC, or %PANGO_STYLE_OBLIQUE.
    * Most fonts will either have a italic style or an oblique style,
@@ -437,7 +437,7 @@ class FontDescription : Boxed
 
   /**
    * Sets the variant field of a font description.
-   * The [Pango.Variant] can either be %PANGO_VARIANT_NORMAL
+   * The [pango.Variant] can either be %PANGO_VARIANT_NORMAL
    * or %PANGO_VARIANT_SMALL_CAPS.
    * Params:
    *   variant = the variant type for the font description.
@@ -470,7 +470,7 @@ class FontDescription : Boxed
 
   /**
    * Sets the variations field of a font description.
-   * This is like [Pango.FontDescription.setVariations], except
+   * This is like [pango.font_description.FontDescription.setVariations], except
    * that no copy of variations is made. The caller must make sure that
    * the string passed in stays around until desc has been freed
    * or the name is set again. This function can be used if
@@ -489,7 +489,7 @@ class FontDescription : Boxed
    * Sets the weight field of a font description.
    * The weight field
    * specifies how bold or light the font should be. In addition
-   * to the values of the [Pango.Weight] enumeration, other
+   * to the values of the [pango.Weight] enumeration, other
    * intermediate numeric values are possible.
    * Params:
    *   weight = the weight for the font description.
@@ -502,10 +502,10 @@ class FontDescription : Boxed
   /**
    * Creates a filename representation of a font description.
    * The filename is identical to the result from calling
-   * [Pango.FontDescription.toString_], but with underscores
+   * [pango.font_description.FontDescription.toString_], but with underscores
    * instead of characters that are untypical in filenames, and in
    * lower case only.
-   * Returns: a new string that must be freed with [GLib.Global.gfree].
+   * Returns: a new string that must be freed with [glib.global.gfree].
    */
   string toFilename()
   {
@@ -517,11 +517,11 @@ class FontDescription : Boxed
 
   /**
    * Creates a string representation of a font description.
-   * See [Pango.FontDescription.fromString] for a description
+   * See [pango.font_description.FontDescription.fromString] for a description
    * of the format of the string representation. The family list in
    * the string description will only have a terminating comma if
    * the last word of the list is a valid style option.
-   * Returns: a new string that must be freed with [GLib.Global.gfree].
+   * Returns: a new string that must be freed with [glib.global.gfree].
    */
   string toString_()
   {

@@ -4,7 +4,7 @@ import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf_module_pattern;
 import gdkpixbuf.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
@@ -114,7 +114,7 @@ class PixbufFormat : Boxed
   /**
    * Creates a copy of `format`.
    * Returns: the newly allocated copy of a `GdkPixbufFormat`. Use
-   *   [GdkPixbuf.PixbufFormat.free] to free the resources when done
+   *   [gdkpixbuf.pixbuf_format.PixbufFormat.free] to free the resources when done
    */
   PixbufFormat copy()
   {
@@ -210,7 +210,7 @@ class PixbufFormat : Boxed
 
   /**
    * Returns whether this image format is disabled.
-   * See [GdkPixbuf.PixbufFormat.setDisabled].
+   * See [gdkpixbuf.pixbuf_format.PixbufFormat.setDisabled].
    * Returns: whether this image format is disabled.
    */
   bool isDisabled()
@@ -223,7 +223,7 @@ class PixbufFormat : Boxed
   /**
    * Returns `TRUE` if the save option specified by option_key is supported when
    * saving a pixbuf using the module implementing format.
-   * See [GdkPixbuf.Pixbuf.save] for more information about option keys.
+   * See [gdkpixbuf.pixbuf.Pixbuf.save] for more information about option keys.
    * Params:
    *   optionKey = the name of an option
    * Returns: `TRUE` if the specified option is supported
@@ -266,7 +266,7 @@ class PixbufFormat : Boxed
    * If a format is disabled, GdkPixbuf won't use the image loader for
    * this format to load images.
    * Applications can use this to avoid using image loaders with an
-   * inappropriate license, see [GdkPixbuf.PixbufFormat.getLicense].
+   * inappropriate license, see [gdkpixbuf.pixbuf_format.PixbufFormat.getLicense].
    * Params:
    *   disabled = `TRUE` to disable the format format
    */

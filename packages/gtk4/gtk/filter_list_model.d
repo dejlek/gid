@@ -1,6 +1,6 @@
 module gtk.filter_list_model;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -18,7 +18,7 @@ import gtk.types;
  * criteria given by a `GtkFilter`.
  * The model can be set up to do incremental filtering, so that
  * filtering long lists doesn't block the UI. See
- * [Gtk.FilterListModel.setIncremental] for details.
+ * [gtk.filter_list_model.FilterListModel.setIncremental] for details.
  * `GtkFilterListModel` passes through sections from the underlying model.
  */
 class FilterListModel : ObjectG, ListModel, SectionModel
@@ -72,7 +72,7 @@ class FilterListModel : ObjectG, ListModel, SectionModel
 
   /**
    * Returns whether incremental filtering is enabled.
-   * See [Gtk.FilterListModel.setIncremental].
+   * See [gtk.filter_list_model.FilterListModel.setIncremental].
    * Returns: %TRUE if incremental filtering is enabled
    */
   bool getIncremental()
@@ -106,7 +106,7 @@ class FilterListModel : ObjectG, ListModel, SectionModel
    * percentage \= pending / $(LPAREN)double$(RPAREN) g_list_model_get_n_items $(LPAREN)model$(RPAREN);
    * ```
    * If no filter operation is ongoing - in particular when
-   * [Gtk.FilterListModel.incremental] is %FALSE - this
+   * [gtk.filter_list_model.FilterListModel.gboolean] is %FALSE - this
    * function returns 0.
    * Returns: The number of items not yet filtered
    */
@@ -138,7 +138,7 @@ class FilterListModel : ObjectG, ListModel, SectionModel
    * turning this on. Depending on your model and filters, this may become
    * interesting around 10,000 to 100,000 items.
    * By default, incremental filtering is disabled.
-   * See [Gtk.FilterListModel.getPending] for progress information
+   * See [gtk.filter_list_model.FilterListModel.getPending] for progress information
    * about an ongoing incremental filtering operation.
    * Params:
    *   incremental = %TRUE to enable incremental filtering

@@ -6,7 +6,7 @@ import gdk.device;
 import gdk.device_tool;
 import gdk.display;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 
@@ -50,7 +50,7 @@ class Seat : ObjectG
    * Params:
    *   capabilities = capabilities to get devices for
    * Returns: A list
-   *   of `GdkDevices`. The list must be freed with [GLib.List.free],
+   *   of `GdkDevices`. The list must be freed with [glib.list.List.free],
    *   the elements are owned by GTK and must not be freed.
    */
   Device[] getDevices(SeatCapabilities capabilities)
@@ -102,7 +102,7 @@ class Seat : ObjectG
 
   /**
    * Returns all `GdkDeviceTools` that are known to the application.
-   * Returns: A list of tools. Free with [GLib.List.free].
+   * Returns: A list of tools. Free with [glib.list.List.free].
    */
   DeviceTool[] getTools()
   {

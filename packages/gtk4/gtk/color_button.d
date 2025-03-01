@@ -1,7 +1,7 @@
 module gtk.color_button;
 
 import gdk.rgba;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -32,7 +32,7 @@ import gtk.widget;
  * contains a button node. To differentiate it from a plain `GtkButton`,
  * it gets the .color style class.
 
- * Deprecated: Use [Gtk.ColorDialogButton] instead
+ * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
  */
 class ColorButton : Widget, ColorChooser
 {
@@ -64,7 +64,7 @@ class ColorButton : Widget, ColorChooser
    * color when the user finishes.
    * Returns: a new color button
 
-   * Deprecated: Use [Gtk.ColorDialogButton] instead
+   * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
    */
   this()
   {
@@ -91,7 +91,7 @@ class ColorButton : Widget, ColorChooser
    * Gets whether the dialog is modal.
    * Returns: %TRUE if the dialog is modal
 
-   * Deprecated: Use [Gtk.ColorDialogButton] instead
+   * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
    */
   bool getModal()
   {
@@ -104,7 +104,7 @@ class ColorButton : Widget, ColorChooser
    * Gets the title of the color chooser dialog.
    * Returns: An internal string, do not free the return value
 
-   * Deprecated: Use [Gtk.ColorDialogButton] instead
+   * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
    */
   string getTitle()
   {
@@ -119,7 +119,7 @@ class ColorButton : Widget, ColorChooser
    * Params:
    *   modal = %TRUE to make the dialog modal
 
-   * Deprecated: Use [Gtk.ColorDialogButton] instead
+   * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
    */
   void setModal(bool modal)
   {
@@ -131,7 +131,7 @@ class ColorButton : Widget, ColorChooser
    * Params:
    *   title = String containing new window title
 
-   * Deprecated: Use [Gtk.ColorDialogButton] instead
+   * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
    */
   void setTitle(string title)
   {
@@ -172,7 +172,7 @@ class ColorButton : Widget, ColorChooser
 
   /**
    * Emitted when the user selects a color.
-   * When handling this signal, use [Gtk.ColorChooser.getRgba]
+   * When handling this signal, use [gtk.color_chooser.ColorChooser.getRgba]
    * to find out which color was just selected.
    * Note that this signal is only emitted when the user changes the color.
    * If you need to react to programmatic color changes as well, use

@@ -1,6 +1,6 @@
 module gtk.notebook;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.dclosure;
@@ -23,11 +23,11 @@ import gtk.widget;
  * ![An example GtkNotebook](notebook.png)
  * There are many configuration options for `GtkNotebook`. Among
  * other things, you can choose on which edge the tabs appear
- * $(LPAREN)see [Gtk.Notebook.setTabPos]$(RPAREN), whether, if there are
+ * $(LPAREN)see [gtk.notebook.Notebook.setTabPos]$(RPAREN), whether, if there are
  * too many tabs to fit the notebook should be made bigger or scrolling
- * arrows added $(LPAREN)see [Gtk.Notebook.setScrollable]$(RPAREN), and whether
+ * arrows added $(LPAREN)see [gtk.notebook.Notebook.setScrollable]$(RPAREN), and whether
  * there will be a popup menu allowing the users to switch pages.
- * $(LPAREN)see [Gtk.Notebook.popupEnable]$(RPAREN).
+ * $(LPAREN)see [gtk.notebook.Notebook.popupEnable]$(RPAREN).
  * # GtkNotebook as GtkBuildable
  * The `GtkNotebook` implementation of the `GtkBuildable` interface
  * supports placing children into tabs by specifying “tab” as the
@@ -80,7 +80,7 @@ import gtk.widget;
  * to the `tabs` node. If the notebook is scrollable, CSS nodes with
  * name `arrow` are placed as first and last child of the `tabs` node.
  * The main node gets the `.frame` style class when the notebook
- * has a border $(LPAREN)see [Gtk.Notebook.setShowBorder]$(RPAREN).
+ * has a border $(LPAREN)see [gtk.notebook.Notebook.setShowBorder]$(RPAREN).
  * The header node gets one of the style class `.top`, `.bottom`,
  * `.left` or `.right`, depending on where the tabs are placed. For
  * reorderable pages, the tab node gets the `.reorderable-page` class.
@@ -164,7 +164,7 @@ class Notebook : Widget
 
   /**
    * Removes the child from the notebook.
-   * This function is very similar to [Gtk.Notebook.removePage],
+   * This function is very similar to [gtk.notebook.Notebook.removePage],
    * but additionally informs the notebook that the removal
    * is happening as part of a tab DND operation, which should
    * not be cancelled.
@@ -178,7 +178,7 @@ class Notebook : Widget
 
   /**
    * Gets one of the action widgets.
-   * See [Gtk.Notebook.setActionWidget].
+   * See [gtk.notebook.Notebook.setActionWidget].
    * Params:
    *   packType = pack type of the action widget to receive
    * Returns: The action widget
@@ -297,7 +297,7 @@ class Notebook : Widget
   /**
    * Returns a `GListModel` that contains the pages of the notebook.
    * This can be used to keep an up-to-date view. The model also
-   * implements [Gtk.SelectionModel] and can be used to track
+   * implements [gtk.selection_model.SelectionModel] and can be used to track
    * and modify the visible page.
    * Returns: a
    *   `GListModel` for the notebook's children
@@ -678,16 +678,16 @@ class Notebook : Widget
    * Sets whether the tab can be detached from notebook to another
    * notebook or widget.
    * Note that two notebooks must share a common group identifier
-   * $(LPAREN)see [Gtk.Notebook.setGroupName]$(RPAREN) to allow automatic tabs
+   * $(LPAREN)see [gtk.notebook.Notebook.setGroupName]$(RPAREN) to allow automatic tabs
    * interchange between them.
    * If you want a widget to interact with a notebook through DnD
    * $(LPAREN)i.e.: accept dragged tabs from it$(RPAREN) it must be set as a drop
-   * destination by adding to it a [Gtk.DropTarget] controller that accepts
+   * destination by adding to it a [gtk.drop_target.DropTarget] controller that accepts
    * the GType `GTK_TYPE_NOTEBOOK_PAGE`. The `:value` of said drop target will be
-   * preloaded with a [Gtk.NotebookPage] object that corresponds to the
+   * preloaded with a [gtk.notebook_page.NotebookPage] object that corresponds to the
    * dropped tab, so you can process the value via `::accept` or `::drop` signals.
-   * Note that you should use [Gtk.Notebook.detachTab] instead
-   * of [Gtk.Notebook.removePage] if you want to remove the tab
+   * Note that you should use [gtk.notebook.Notebook.detachTab] instead
+   * of [gtk.notebook.Notebook.removePage] if you want to remove the tab
    * from the source notebook as part of accepting a drop. Otherwise,
    * the source notebook will think that the dragged tab was removed
    * from underneath the ongoing drag operation, and will initiate a

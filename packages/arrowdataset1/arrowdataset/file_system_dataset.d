@@ -6,7 +6,7 @@ import arrowdataset.dataset;
 import arrowdataset.file_system_dataset_write_options;
 import arrowdataset.scanner;
 import arrowdataset.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class FileSystemDataset : Dataset

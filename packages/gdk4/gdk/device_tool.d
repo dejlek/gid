@@ -3,7 +3,7 @@ module gdk.device_tool;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**
@@ -45,9 +45,9 @@ class DeviceTool : ObjectG
    * When non-zero, the identifier is unique for the given tool model,
    * meaning that two identical tools will share the same hardware_id,
    * but will have different serial numbers $(LPAREN)see
-   * [Gdk.DeviceTool.getSerial]$(RPAREN).
+   * [gdk.device_tool.DeviceTool.getSerial]$(RPAREN).
    * This is a more concrete $(LPAREN)and device specific$(RPAREN) method to identify
-   * a `GdkDeviceTool` than [Gdk.DeviceTool.getToolType],
+   * a `GdkDeviceTool` than [gdk.device_tool.DeviceTool.getToolType],
    * as a tablet may support multiple devices with the same
    * `GdkDeviceToolType`, but different hardware identifiers.
    * Returns: The hardware identifier of this tool.

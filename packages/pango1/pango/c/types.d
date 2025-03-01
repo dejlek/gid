@@ -26,17 +26,17 @@ alias PangoGlyphUnit = int;
 
 /**
  * A `PangoLayoutRun` represents a single run within a `PangoLayoutLine`.
- * It is simply an alternate name for [Pango.GlyphItem].
- * See the [Pango.GlyphItem] docs for details on the fields.
+ * It is simply an alternate name for [pango.glyph_item.GlyphItem].
+ * See the [pango.glyph_item.GlyphItem] docs for details on the fields.
  */
 alias PangoLayoutRun = PangoGlyphItem;
 
 /**
  * `PangoAlignment` describes how to align the lines of a `PangoLayout`
  * within the available space.
- * If the `PangoLayout` is set to justify using [Pango.Layout.setJustify],
+ * If the `PangoLayout` is set to justify using [pango.layout.Layout.setJustify],
  * this only affects partial lines.
- * See [Pango.Layout.setAutoDir] for how text direction affects
+ * See [pango.layout.Layout.setAutoDir] for how text direction affects
  * the interpretation of `PangoAlignment` values.
  */
 enum PangoAlignment
@@ -72,82 +72,82 @@ enum PangoAttrType
   Invalid = 0,
 
   /**
-   * language $(LPAREN)[Pango.AttrLanguage]$(RPAREN)
+   * language $(LPAREN)[pango.attr_language.AttrLanguage]$(RPAREN)
    */
   Language = 1,
 
   /**
-   * font family name list $(LPAREN)[Pango.AttrString]$(RPAREN)
+   * font family name list $(LPAREN)[pango.attr_string.AttrString]$(RPAREN)
    */
   Family = 2,
 
   /**
-   * font slant style $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * font slant style $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   Style = 3,
 
   /**
-   * font weight $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * font weight $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   Weight = 4,
 
   /**
-   * font variant $(LPAREN)normal or small caps$(RPAREN) $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * font variant $(LPAREN)normal or small caps$(RPAREN) $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   Variant = 5,
 
   /**
-   * font stretch $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * font stretch $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   Stretch = 6,
 
   /**
-   * font size in points scaled by %PANGO_SCALE $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * font size in points scaled by %PANGO_SCALE $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   Size = 7,
 
   /**
-   * font description $(LPAREN)[Pango.AttrFontDesc]$(RPAREN)
+   * font description $(LPAREN)[pango.attr_font_desc.AttrFontDesc]$(RPAREN)
    */
   FontDesc = 8,
 
   /**
-   * foreground color $(LPAREN)[Pango.AttrColor]$(RPAREN)
+   * foreground color $(LPAREN)[pango.attr_color.AttrColor]$(RPAREN)
    */
   Foreground = 9,
 
   /**
-   * background color $(LPAREN)[Pango.AttrColor]$(RPAREN)
+   * background color $(LPAREN)[pango.attr_color.AttrColor]$(RPAREN)
    */
   Background = 10,
 
   /**
-   * whether the text has an underline $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * whether the text has an underline $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   Underline = 11,
 
   /**
-   * whether the text is struck-through $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * whether the text is struck-through $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   Strikethrough = 12,
 
   /**
-   * baseline displacement $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * baseline displacement $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   Rise = 13,
 
   /**
-   * shape $(LPAREN)[Pango.AttrShape]$(RPAREN)
+   * shape $(LPAREN)[pango.attr_shape.AttrShape]$(RPAREN)
    */
   Shape = 14,
 
   /**
-   * font size scale factor $(LPAREN)[Pango.AttrFloat]$(RPAREN)
+   * font size scale factor $(LPAREN)[pango.attr_float.AttrFloat]$(RPAREN)
    */
   Scale = 15,
 
   /**
-   * whether fallback is enabled $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * whether fallback is enabled $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   Fallback = 16,
 
@@ -157,99 +157,99 @@ enum PangoAttrType
   LetterSpacing = 17,
 
   /**
-   * underline color $(LPAREN)[Pango.AttrColor]$(RPAREN)
+   * underline color $(LPAREN)[pango.attr_color.AttrColor]$(RPAREN)
    */
   UnderlineColor = 18,
 
   /**
-   * strikethrough color $(LPAREN)[Pango.AttrColor]$(RPAREN)
+   * strikethrough color $(LPAREN)[pango.attr_color.AttrColor]$(RPAREN)
    */
   StrikethroughColor = 19,
 
   /**
-   * font size in pixels scaled by %PANGO_SCALE $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * font size in pixels scaled by %PANGO_SCALE $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   AbsoluteSize = 20,
 
   /**
-   * base text gravity $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * base text gravity $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   Gravity = 21,
 
   /**
-   * gravity hint $(LPAREN)[Pango.AttrInt]$(RPAREN)
+   * gravity hint $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN)
    */
   GravityHint = 22,
 
   /**
-   * OpenType font features $(LPAREN)[Pango.AttrFontFeatures]$(RPAREN). Since 1.38
+   * OpenType font features $(LPAREN)[pango.attr_font_features.AttrFontFeatures]$(RPAREN). Since 1.38
    */
   FontFeatures = 23,
 
   /**
-   * foreground alpha $(LPAREN)[Pango.AttrInt]$(RPAREN). Since 1.38
+   * foreground alpha $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN). Since 1.38
    */
   ForegroundAlpha = 24,
 
   /**
-   * background alpha $(LPAREN)[Pango.AttrInt]$(RPAREN). Since 1.38
+   * background alpha $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN). Since 1.38
    */
   BackgroundAlpha = 25,
 
   /**
-   * whether breaks are allowed $(LPAREN)[Pango.AttrInt]$(RPAREN). Since 1.44
+   * whether breaks are allowed $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN). Since 1.44
    */
   AllowBreaks = 26,
 
   /**
-   * how to render invisible characters $(LPAREN)[Pango.AttrInt]$(RPAREN). Since 1.44
+   * how to render invisible characters $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN). Since 1.44
    */
   Show = 27,
 
   /**
-   * whether to insert hyphens at intra-word line breaks $(LPAREN)[Pango.AttrInt]$(RPAREN). Since 1.44
+   * whether to insert hyphens at intra-word line breaks $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN). Since 1.44
    */
   InsertHyphens = 28,
 
   /**
-   * whether the text has an overline $(LPAREN)[Pango.AttrInt]$(RPAREN). Since 1.46
+   * whether the text has an overline $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN). Since 1.46
    */
   Overline = 29,
 
   /**
-   * overline color $(LPAREN)[Pango.AttrColor]$(RPAREN). Since 1.46
+   * overline color $(LPAREN)[pango.attr_color.AttrColor]$(RPAREN). Since 1.46
    */
   OverlineColor = 30,
 
   /**
-   * line height factor $(LPAREN)[Pango.AttrFloat]$(RPAREN). Since: 1.50
+   * line height factor $(LPAREN)[pango.attr_float.AttrFloat]$(RPAREN). Since: 1.50
    */
   LineHeight = 31,
 
   /**
-   * line height $(LPAREN)[Pango.AttrInt]$(RPAREN). Since: 1.50
+   * line height $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN). Since: 1.50
    */
   AbsoluteLineHeight = 32,
 
   TextTransform = 33,
 
   /**
-   * override segmentation to classify the range of the attribute as a single word $(LPAREN)[Pango.AttrInt]$(RPAREN). Since 1.50
+   * override segmentation to classify the range of the attribute as a single word $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN). Since 1.50
    */
   Word = 34,
 
   /**
-   * override segmentation to classify the range of the attribute as a single sentence $(LPAREN)[Pango.AttrInt]$(RPAREN). Since 1.50
+   * override segmentation to classify the range of the attribute as a single sentence $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN). Since 1.50
    */
   Sentence = 35,
 
   /**
-   * baseline displacement $(LPAREN)[Pango.AttrInt]$(RPAREN). Since 1.50
+   * baseline displacement $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN). Since 1.50
    */
   BaselineShift = 36,
 
   /**
-   * font-relative size change $(LPAREN)[Pango.AttrInt]$(RPAREN). Since 1.50
+   * font-relative size change $(LPAREN)[pango.attr_int.AttrInt]$(RPAREN). Since 1.50
    */
   FontScale = 37,
 }
@@ -605,13 +605,13 @@ enum PangoFontScale
  * `PangoGravity` represents the orientation of glyphs in a segment
  * of text.
  * This is useful when rendering vertical text layouts. In those situations,
- * the layout is rotated using a non-identity [Pango.Matrix], and then
+ * the layout is rotated using a non-identity [pango.matrix.Matrix], and then
  * glyph orientation is controlled using `PangoGravity`.
  * Not every value in this enumeration makes sense for every usage of
  * `PangoGravity`; for example, %PANGO_GRAVITY_AUTO only can be passed to
- * [Pango.Context.setBaseGravity] and can only be returned by
- * [Pango.Context.getBaseGravity].
- * See also: [Pango.GravityHint]
+ * [pango.context.Context.setBaseGravity] and can only be returned by
+ * [pango.context.Context.getBaseGravity].
+ * See also: [pango.GravityHint]
  */
 enum PangoGravity
 {
@@ -645,7 +645,7 @@ enum PangoGravity
  * `PangoGravityHint` defines how horizontal scripts should behave in a
  * vertical context.
  * That is, English excerpts in a vertical paragraph for example.
- * See also [Pango.Gravity]
+ * See also [pango.Gravity]
  */
 enum PangoGravityHint
 {
@@ -671,7 +671,7 @@ enum PangoGravityHint
 }
 
 /**
- * Errors that can be returned by [Pango.Layout.deserialize].
+ * Errors that can be returned by [pango.layout.Layout.deserialize].
  */
 enum PangoLayoutDeserializeError
 {
@@ -694,7 +694,7 @@ enum PangoLayoutDeserializeError
 }
 
 /**
- * Flags that influence the behavior of [Pango.Layout.deserialize].
+ * Flags that influence the behavior of [pango.layout.Layout.deserialize].
  * New members may be added to this enumeration over time.
  */
 enum PangoLayoutDeserializeFlags : uint
@@ -712,7 +712,7 @@ enum PangoLayoutDeserializeFlags : uint
 }
 
 /**
- * Flags that influence the behavior of [Pango.Layout.serialize].
+ * Flags that influence the behavior of [pango.layout.Layout.serialize].
  * New members may be added to this enumeration over time.
  */
 enum PangoLayoutSerializeFlags : uint
@@ -790,13 +790,13 @@ enum PangoRenderPart
  * [Unicode Standard Annex 24: Script names](http://www.unicode.org/reports/tr24/)
  * Note that this enumeration is deprecated and will not be updated to include values
  * in newer versions of the Unicode standard. Applications should use the
- * [GLib.UnicodeScript] enumeration instead,
+ * [glib.UnicodeScript] enumeration instead,
  * whose values are interchangeable with `PangoScript`.
  */
 enum PangoScript
 {
   /**
-   * a value never returned from [Pango.Global.scriptForUnichar]
+   * a value never returned from [pango.global.scriptForUnichar]
    */
   InvalidCode = -1,
 
@@ -1932,9 +1932,9 @@ struct PangoAttrInt
 
 /**
  * A `PangoAttrIterator` is used to iterate through a `PangoAttrList`.
- * A new iterator is created with [Pango.AttrList.getIterator].
+ * A new iterator is created with [pango.attr_list.AttrList.getIterator].
  * Once the iterator is created, it can be advanced through the style
- * changes in the text using [Pango.AttrIterator.next]. At each
+ * changes in the text using [pango.attr_iterator.AttrIterator.next]. At each
  * style change, the range of the current style segment and the attributes
  * currently in effect can be queried.
  */
@@ -1962,7 +1962,7 @@ struct PangoAttrLanguage
  * of text.
  * The attributes in a `PangoAttrList` are, in general, allowed to overlap in
  * an arbitrary fashion. However, if the attributes are manipulated only through
- * [Pango.AttrList.change], the overlap between properties will meet
+ * [pango.attr_list.AttrList.change], the overlap between properties will meet
  * stricter criteria.
  * Since the `PangoAttrList` structure is stored as a linear list, it is not
  * suitable for storing attributes for large amounts of text. In general, you
@@ -1992,7 +1992,7 @@ struct PangoAttrShape
   PangoRectangle logicalRect;
 
   /**
-   * user data set $(LPAREN)see [Pango.AttrShape.newWithData]$(RPAREN)
+   * user data set $(LPAREN)see [pango.attr_shape.AttrShape.newWithData]$(RPAREN)
    */
   void* data;
 
@@ -2056,7 +2056,7 @@ struct PangoAttrString
  * Particular types of attributes include this structure as their initial
  * portion. The common portion of the attribute holds the range to which
  * the value in the type-specific part of the attribute applies and should
- * be initialized using [Pango.Attribute.init_]. By default, an attribute
+ * be initialized using [pango.attribute.Attribute.init_]. By default, an attribute
  * will have an all-inclusive range of [0,%G_MAXUINT].
  */
 struct PangoAttribute
@@ -2106,7 +2106,7 @@ struct PangoColor
  * The information stored by `PangoContext` includes the fontmap used
  * to look up fonts, and default values such as the default language,
  * default gravity, or default font.
- * To obtain a `PangoContext`, use [Pango.FontMap.createContext].
+ * To obtain a `PangoContext`, use [pango.font_map.FontMap.createContext].
  */
 struct PangoContext;
 
@@ -2114,7 +2114,7 @@ struct PangoContextClass;
 
 /**
  * A `PangoCoverage` structure is a map from Unicode characters
- * to [Pango.CoverageLevel] values.
+ * to [pango.CoverageLevel] values.
  * It is often necessary in Pango to determine if a particular
  * font can represent a particular character, and also how well
  * it can represent that character. The `PangoCoverage` is a data
@@ -2448,11 +2448,11 @@ struct PangoGlyphItem
  * then @start_glyph decreases as the iterator moves forward.  Moreover,
  * in right-to-left cases, @start_glyph is greater than @end_glyph.
  * An iterator should be initialized using either
- * [Pango.GlyphItemIter.initStart] or
- * [Pango.GlyphItemIter.initEnd], for forward and backward iteration
+ * [pango.glyph_item_iter.GlyphItemIter.initStart] or
+ * [pango.glyph_item_iter.GlyphItemIter.initEnd], for forward and backward iteration
  * respectively, and walked over using any desired mixture of
- * [Pango.GlyphItemIter.nextCluster] and
- * [Pango.GlyphItemIter.prevCluster].
+ * [pango.glyph_item_iter.GlyphItemIter.nextCluster] and
+ * [pango.glyph_item_iter.GlyphItemIter.prevCluster].
  * A common idiom for doing a forward iteration over the clusters is:
  * ```
  * PangoGlyphItemIter cluster_iter;
@@ -2610,7 +2610,7 @@ struct PangoLayoutClass;
 /**
  * A `PangoLayoutIter` can be used to iterate over the visual
  * extents of a `PangoLayout`.
- * To obtain a `PangoLayoutIter`, use [Pango.Layout.getIter].
+ * To obtain a `PangoLayoutIter`, use [pango.layout.Layout.getIter].
  * The `PangoLayoutIter` structure is opaque, and has no user-visible fields.
  */
 struct PangoLayoutIter;
@@ -2619,7 +2619,7 @@ struct PangoLayoutIter;
  * A `PangoLayoutLine` represents one of the lines resulting from laying
  * out a paragraph via `PangoLayout`.
  * `PangoLayoutLine` structures are obtained by calling
- * [Pango.Layout.getLine] and are only valid until the text,
+ * [pango.layout.Layout.getLine] and are only valid until the text,
  * attributes, or settings of the parent `PangoLayout` are modified.
  */
 struct PangoLayoutLine
@@ -2823,7 +2823,7 @@ struct PangoLanguage;
  * The `PangoRectangle` structure represents a rectangle.
  * `PangoRectangle` is frequently used to represent the logical or ink
  * extents of a single glyph or section of text. $(LPAREN)See, for instance,
- * [Pango.Font.getGlyphExtents].$(RPAREN)
+ * [pango.font.Font.getGlyphExtents].$(RPAREN)
  */
 struct PangoRectangle
 {

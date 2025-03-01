@@ -6,7 +6,7 @@ import atk.c.types;
 import atk.object;
 import atk.rectangle;
 import atk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 
@@ -96,7 +96,7 @@ interface Component
    *   coordType = specifies whether the coordinates are relative to the screen
    *     or to the components top level window
 
-   * Deprecated: Since 2.12. Use [Atk.Component.getExtents] instead.
+   * Deprecated: Since 2.12. Use [atk.component.Component.getExtents] instead.
    */
   void getPosition(out int x, out int y, CoordType coordType);
 
@@ -108,7 +108,7 @@ interface Component
    *   width = address of #gint to put width of component
    *   height = address of #gint to put height of component
 
-   * Deprecated: Since 2.12. Use [Atk.Component.getExtents] instead.
+   * Deprecated: Since 2.12. Use [atk.component.Component.getExtents] instead.
    */
   void getSize(out int width, out int height);
 

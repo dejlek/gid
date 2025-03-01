@@ -1,7 +1,7 @@
 module gio.async_initable;
 
 public import gio.async_initable_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -15,15 +15,15 @@ import gobject.types;
 
 /**
  * `GAsyncInitable` is an interface for asynchronously initializable objects.
- * This is the asynchronous version of [Gio.Initable]; it behaves the same
+ * This is the asynchronous version of [gio.initable.Initable]; it behaves the same
  * in all ways except that initialization is asynchronous. For more details
  * see the descriptions on `GInitable`.
  * A class may implement both the `GInitable` and `GAsyncInitable` interfaces.
  * Users of objects implementing this are not intended to use the interface
  * method directly; instead it will be used automatically in various ways.
- * For C applications you generally just call [Gio.AsyncInitable.newAsync]
+ * For C applications you generally just call [gio.async_initable.AsyncInitable.newAsync]
  * directly, or indirectly via a foo_thing_new_async$(LPAREN)$(RPAREN) wrapper. This will call
- * [Gio.AsyncInitable.initAsync] under the covers, calling back with `NULL`
+ * [gio.async_initable.AsyncInitable.initAsync] under the covers, calling back with `NULL`
  * and a set `GError` on failure.
  * A typical implementation might look something like this:
  * ```c
@@ -110,9 +110,9 @@ interface AsyncInitable
 
   /**
    * Helper function for constructing #GAsyncInitable object. This is
-   * similar to [GObject.ObjectG.newv] but also initializes the object asynchronously.
+   * similar to [gobject.object.ObjectG.newv] but also initializes the object asynchronously.
    * When the initialization is finished, callback will be called. You can
-   * then call [Gio.AsyncInitable.newFinish] to get the new object and check
+   * then call [gio.async_initable.AsyncInitable.newFinish] to get the new object and check
    * for any errors.
    * Params:
    *   objectType = a #GType supporting #GAsyncInitable.
@@ -123,8 +123,8 @@ interface AsyncInitable
    *   callback = a #GAsyncReadyCallback to call when the initialization is
    *     finished
 
-   * Deprecated: Use [GObject.ObjectG.newWithProperties] and
-   *   [Gio.AsyncInitable.initAsync] instead. See #GParameter for more information.
+   * Deprecated: Use [gobject.object.ObjectG.newWithProperties] and
+   *   [gio.async_initable.AsyncInitable.initAsync] instead. See #GParameter for more information.
    */
   static void newvAsync(GType objectType, uint nParameters, Parameter parameters, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
   {
@@ -145,11 +145,11 @@ interface AsyncInitable
    * Starts asynchronous initialization of the object implementing the
    * interface. This must be done before any real use of the object after
    * initial construction. If the object also implements #GInitable you can
-   * optionally call [Gio.Initable.init_] instead.
+   * optionally call [gio.initable.Initable.init_] instead.
    * This method is intended for language bindings. If writing in C,
-   * [Gio.AsyncInitable.newAsync] should typically be used instead.
+   * [gio.async_initable.AsyncInitable.newAsync] should typically be used instead.
    * When the initialization is finished, callback will be called. You can
-   * then call [Gio.AsyncInitable.initFinish] to get the result of the
+   * then call [gio.async_initable.AsyncInitable.initFinish] to get the result of the
    * initialization.
    * Implementations may also support cancellation. If cancellable is not
    * %NULL, then initialization can be cancelled by triggering the cancellable
@@ -159,16 +159,16 @@ interface AsyncInitable
    * %G_IO_ERROR_NOT_SUPPORTED will be returned.
    * As with #GInitable, if the object is not initialized, or initialization
    * returns with an error, then all operations on the object except
-   * [GObject.ObjectG.ref_] and [GObject.ObjectG.unref] are considered to be invalid, and
+   * [gobject.object.ObjectG.ref_] and [gobject.object.ObjectG.unref] are considered to be invalid, and
    * have undefined behaviour. They will often fail with g_critical$(LPAREN)$(RPAREN) or
    * g_warning$(LPAREN)$(RPAREN), but this must not be relied on.
    * Callers should not assume that a class which implements #GAsyncInitable can
-   * be initialized multiple times; for more information, see [Gio.Initable.init_].
+   * be initialized multiple times; for more information, see [gio.initable.Initable.init_].
    * If a class explicitly supports being initialized multiple times,
    * implementation requires yielding all subsequent calls to init_async$(LPAREN)$(RPAREN) on the
    * results of the first call.
    * For classes that also support the #GInitable interface, the default
-   * implementation of this method will run the [Gio.Initable.init_] function
+   * implementation of this method will run the [gio.initable.Initable.init_] function
    * in a thread, so if you want to support asynchronous initialization via
    * threads, just implement the #GAsyncInitable interface without overriding
    * any interface methods.
@@ -181,7 +181,7 @@ interface AsyncInitable
 
   /**
    * Finishes asynchronous initialization and returns the result.
-   * See [Gio.AsyncInitable.initAsync].
+   * See [gio.async_initable.AsyncInitable.initAsync].
    * Params:
    *   res = a #GAsyncResult.
    * Returns: %TRUE if successful. If an error has occurred, this function
@@ -195,7 +195,7 @@ interface AsyncInitable
    * Params:
    *   res = the #GAsyncResult from the callback
    * Returns: a newly created #GObject,
-   *   or %NULL on error. Free with [GObject.ObjectG.unref].
+   *   or %NULL on error. Free with [gobject.object.ObjectG.unref].
    */
   ObjectG newFinish(AsyncResult res);
 }

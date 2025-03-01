@@ -1,6 +1,6 @@
 module gtk.progress_bar;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.accessible_range;
@@ -28,11 +28,11 @@ import pango.types;
  * progress, it can use the `GtkProgressBar` in percentage mode and the
  * user sees a growing bar indicating the percentage of the work that
  * has been completed. In this mode, the application is required to call
- * [Gtk.ProgressBar.setFraction] periodically to update the progress bar.
+ * [gtk.progress_bar.ProgressBar.setFraction] periodically to update the progress bar.
  * When an application has no accurate way of knowing the amount of work
  * to do, it can use the `GtkProgressBar` in activity mode, which shows
  * activity by a block moving back and forth within the progress area. In
- * this mode, the application is required to call [Gtk.ProgressBar.pulse]
+ * this mode, the application is required to call [gtk.progress_bar.ProgressBar.pulse]
  * periodically to update the progress bar.
  * There is quite a bit of flexibility provided to control the appearance
  * of the `GtkProgressBar`. Functions are provided to control the orientation
@@ -90,7 +90,7 @@ class ProgressBar : Widget, AccessibleRange, Orientable
 
   /**
    * Returns the ellipsizing position of the progress bar.
-   * See [Gtk.ProgressBar.setEllipsize].
+   * See [gtk.progress_bar.ProgressBar.setEllipsize].
    * Returns: `PangoEllipsizeMode`
    */
   EllipsizeMode getEllipsize()
@@ -125,7 +125,7 @@ class ProgressBar : Widget, AccessibleRange, Orientable
 
   /**
    * Retrieves the pulse step.
-   * See [Gtk.ProgressBar.setPulseStep].
+   * See [gtk.progress_bar.ProgressBar.setPulseStep].
    * Returns: a fraction from 0.0 to 1.0
    */
   double getPulseStep()
@@ -137,7 +137,7 @@ class ProgressBar : Widget, AccessibleRange, Orientable
 
   /**
    * Returns whether the `GtkProgressBar` shows text.
-   * See [Gtk.ProgressBar.setShowText].
+   * See [gtk.progress_bar.ProgressBar.setShowText].
    * Returns: %TRUE if text is shown in the progress bar
    */
   bool getShowText()
@@ -164,9 +164,9 @@ class ProgressBar : Widget, AccessibleRange, Orientable
   /**
    * Indicates that some progress has been made, but you don’t know how much.
    * Causes the progress bar to enter “activity mode,” where a block
-   * bounces back and forth. Each call to [Gtk.ProgressBar.pulse]
+   * bounces back and forth. Each call to [gtk.progress_bar.ProgressBar.pulse]
    * causes the block to move by a little bit $(LPAREN)the amount of movement
-   * per pulse is determined by [Gtk.ProgressBar.setPulseStep]$(RPAREN).
+   * per pulse is determined by [gtk.progress_bar.ProgressBar.setPulseStep]$(RPAREN).
    */
   void pulse()
   {
@@ -212,7 +212,7 @@ class ProgressBar : Widget, AccessibleRange, Orientable
   /**
    * Sets the fraction of total progress bar length to move the
    * bouncing block.
-   * The bouncing block is moved when [Gtk.ProgressBar.pulse]
+   * The bouncing block is moved when [gtk.progress_bar.ProgressBar.pulse]
    * is called.
    * Params:
    *   fraction = fraction between 0.0 and 1.0
@@ -224,12 +224,12 @@ class ProgressBar : Widget, AccessibleRange, Orientable
 
   /**
    * Sets whether the progress bar will show text next to the bar.
-   * The shown text is either the value of the [Gtk.ProgressBar.text]
-   * property or, if that is %NULL, the [Gtk.ProgressBar.fraction] value,
+   * The shown text is either the value of the [gtk.progress_bar.ProgressBar.utf8]
+   * property or, if that is %NULL, the [gtk.progress_bar.ProgressBar.gdouble] value,
    * as a percentage.
    * To make a progress bar that is styled and sized suitably for containing
    * text $(LPAREN)even if the actual text is blank$(RPAREN), set propertyGtk.ProgressBar:show-text
-   * to %TRUE and [Gtk.ProgressBar.text] to the empty string (not %NULL).
+   * to %TRUE and [gtk.progress_bar.ProgressBar.utf8] to the empty string (not %NULL).
    * Params:
    *   showText = whether to show text
    */
@@ -241,7 +241,7 @@ class ProgressBar : Widget, AccessibleRange, Orientable
   /**
    * Causes the given text to appear next to the progress bar.
    * If text is %NULL and propertyGtk.ProgressBar:show-text is %TRUE,
-   * the current value of [Gtk.ProgressBar.fraction] will be displayed
+   * the current value of [gtk.progress_bar.ProgressBar.gdouble] will be displayed
    * as a percentage.
    * If text is non-%NULL and propertyGtk.ProgressBar:show-text is %TRUE,
    * the text will be displayed. In this case, it will not display the progress

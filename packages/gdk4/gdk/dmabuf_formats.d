@@ -3,23 +3,23 @@ module gdk.dmabuf_formats;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
  * The `GdkDmabufFormats` struct provides information about
  * supported DMA buffer formats.
  * You can query whether a given format is supported with
- * [Gdk.DmabufFormats.contains] and you can iterate
+ * [gdk.dmabuf_formats.DmabufFormats.contains] and you can iterate
  * over the list of all supported formats with
- * [Gdk.DmabufFormats.getNFormats] and
- * [Gdk.DmabufFormats.getFormat].
+ * [gdk.dmabuf_formats.DmabufFormats.getNFormats] and
+ * [gdk.dmabuf_formats.DmabufFormats.getFormat].
  * The list of supported formats is sorted by preference,
  * with the best formats coming first.
  * The list may contains $(LPAREN)format, modifier$(RPAREN) pairs where the modifier
  * is `DMA_FORMAT_MOD_INVALID`, indicating that **_implicit modifiers_**
  * may be used with this format.
- * See [Gdk.DmabufTextureBuilder] for more information
+ * See [gdk.dmabuf_texture_builder.DmabufTextureBuilder] for more information
  * about DMA buffers.
  * Note that DMA buffers only exist on Linux.
  */
@@ -93,7 +93,7 @@ class DmabufFormats : Boxed
    * Returns the number of formats that the formats object
    * contains.
    * Note that DMA buffers are a Linux concept, so on other
-   * platforms, [Gdk.DmabufFormats.getNFormats] will
+   * platforms, [gdk.dmabuf_formats.DmabufFormats.getNFormats] will
    * always return zero.
    * Returns: the number of formats
    */

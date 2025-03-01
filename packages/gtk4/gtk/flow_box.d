@@ -1,6 +1,6 @@
 module gtk.flow_box;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.dclosure;
@@ -36,10 +36,10 @@ import gtk.widget;
  * to enable that.
  * The children of a `GtkFlowBox` can be dynamically sorted and filtered.
  * Although a `GtkFlowBox` must have only `GtkFlowBoxChild` children, you
- * can add any kind of widget to it via [Gtk.FlowBox.insert], and a
+ * can add any kind of widget to it via [gtk.flow_box.FlowBox.insert], and a
  * `GtkFlowBoxChild` widget will automatically be inserted between the box
  * and the widget.
- * Also see [Gtk.ListBox].
+ * Also see [gtk.list_box.ListBox].
  * # CSS nodes
  * ```
  * flowbox
@@ -93,7 +93,7 @@ class FlowBox : Widget, Orientable
    * Adds child to the end of self.
    * If a sort function is set, the widget will
    * actually be inserted at the calculated position.
-   * See also: [Gtk.FlowBox.insert].
+   * See also: [gtk.flow_box.FlowBox.insert].
    * Params:
    *   child = the `GtkWidget` to add
    */
@@ -110,7 +110,7 @@ class FlowBox : Widget, Orientable
    * represent items from model. box is updated whenever model changes.
    * If model is %NULL, box is left empty.
    * It is undefined to add or remove widgets directly $(LPAREN)for example, with
-   * [Gtk.FlowBox.insert]$(RPAREN) while box is bound to a model.
+   * [gtk.flow_box.FlowBox.insert]$(RPAREN) while box is bound to a model.
    * Note that using a model is incompatible with the filtering and sorting
    * functionality in `GtkFlowBox`. When using a model, filtering and sorting
    * should be implemented by the model.
@@ -241,7 +241,7 @@ class FlowBox : Widget, Orientable
   /**
    * Creates a list of all selected children.
    * Returns: A `GList` containing the `GtkWidget` for each selected child.
-   *   Free with [GLib.List.free] when done.
+   *   Free with [glib.list.List.free] when done.
    */
   FlowBoxChild[] getSelectedChildren()
   {
@@ -305,7 +305,7 @@ class FlowBox : Widget, Orientable
    * Adds child to the start of self.
    * If a sort function is set, the widget will
    * actually be inserted at the calculated position.
-   * See also: [Gtk.FlowBox.insert].
+   * See also: [gtk.flow_box.FlowBox.insert].
    * Params:
    *   child = the `GtkWidget` to add
    */
@@ -402,10 +402,10 @@ class FlowBox : Widget, Orientable
    * children matching the search terms.
    * The filter_func will be called for each child after the call, and
    * it will continue to be called each time a child changes $(LPAREN)via
-   * [Gtk.FlowBoxChild.changed]$(RPAREN) or when
-   * [Gtk.FlowBox.invalidateFilter] is called.
+   * [gtk.flow_box_child.FlowBoxChild.changed]$(RPAREN) or when
+   * [gtk.flow_box.FlowBox.invalidateFilter] is called.
    * Note that using a filter function is incompatible with using a model
-   * $(LPAREN)see [Gtk.FlowBox.bindModel]$(RPAREN).
+   * $(LPAREN)see [gtk.flow_box.FlowBox.bindModel]$(RPAREN).
    * Params:
    *   filterFunc = callback that
    *     lets you filter which children to show
@@ -429,9 +429,9 @@ class FlowBox : Widget, Orientable
   /**
    * Hooks up an adjustment to focus handling in box.
    * The adjustment is also used for autoscrolling during
-   * rubberband selection. See [Gtk.ScrolledWindow.getHadjustment]
+   * rubberband selection. See [gtk.scrolled_window.ScrolledWindow.getHadjustment]
    * for a typical way of obtaining the adjustment, and
-   * [Gtk.FlowBox.setVadjustment] for setting the vertical
+   * [gtk.flow_box.FlowBox.setVadjustment] for setting the vertical
    * adjustment.
    * The adjustments have to be in pixel units and in the same
    * coordinate system as the allocation for immediate children
@@ -508,10 +508,10 @@ class FlowBox : Widget, Orientable
    * the children.
    * The sort_func will be called for each child after the call,
    * and will continue to be called each time a child changes $(LPAREN)via
-   * [Gtk.FlowBoxChild.changed]$(RPAREN) and when
-   * [Gtk.FlowBox.invalidateSort] is called.
+   * [gtk.flow_box_child.FlowBoxChild.changed]$(RPAREN) and when
+   * [gtk.flow_box.FlowBox.invalidateSort] is called.
    * Note that using a sort function is incompatible with using a model
-   * $(LPAREN)see [Gtk.FlowBox.bindModel]$(RPAREN).
+   * $(LPAREN)see [gtk.flow_box.FlowBox.bindModel]$(RPAREN).
    * Params:
    *   sortFunc = the sort function
    */
@@ -534,9 +534,9 @@ class FlowBox : Widget, Orientable
   /**
    * Hooks up an adjustment to focus handling in box.
    * The adjustment is also used for autoscrolling during
-   * rubberband selection. See [Gtk.ScrolledWindow.getVadjustment]
+   * rubberband selection. See [gtk.scrolled_window.ScrolledWindow.getVadjustment]
    * for a typical way of obtaining the adjustment, and
-   * [Gtk.FlowBox.setHadjustment] for setting the horizontal
+   * [gtk.flow_box.FlowBox.setHadjustment] for setting the horizontal
    * adjustment.
    * The adjustments have to be in pixel units and in the same
    * coordinate system as the allocation for immediate children
@@ -636,7 +636,7 @@ class FlowBox : Widget, Orientable
    * Emitted when the user initiates a cursor movement.
    * This is a [keybinding signal](class.SignalAction.html).
    * Applications should not connect to it, but may emit it with
-   * [GObject.Global.signalEmitByName] if they need to control the cursor
+   * [gobject.global.signalEmitByName] if they need to control the cursor
    * programmatically.
    * The default bindings for this signal come in two variants,
    * the variant with the Shift modifier extends the selection,
@@ -720,8 +720,8 @@ class FlowBox : Widget, Orientable
 
   /**
    * Emitted when the set of selected children changes.
-   * Use [Gtk.FlowBox.selectedForeach] or
-   * [Gtk.FlowBox.getSelectedChildren] to obtain the
+   * Use [gtk.flow_box.FlowBox.selectedForeach] or
+   * [gtk.flow_box.FlowBox.getSelectedChildren] to obtain the
    * selected children.
    *   flowBox = the instance the signal is connected to
    */

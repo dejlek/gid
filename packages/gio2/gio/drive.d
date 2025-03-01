@@ -1,7 +1,7 @@
 module gio.drive;
 
 public import gio.drive_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -21,7 +21,7 @@ import gobject.object;
  * `GDrive` represents a piece of hardware connected to the machine.
  * It’s generally only created for removable hardware or hardware with
  * removable media.
- * `GDrive` is a container class for [Gio.Volume] objects that stem from
+ * `GDrive` is a container class for [gio.volume.Volume] objects that stem from
  * the same piece of media. As such, `GDrive` abstracts a drive with
  * $(LPAREN)or without$(RPAREN) removable media and provides operations for querying
  * whether media is available, determining whether media change is
@@ -37,7 +37,7 @@ import gobject.object;
  * multi-disk devices such as RAID devices. Note that the actual
  * semantics and side-effects of starting/stopping a `GDrive` may vary
  * according to implementation. To choose the correct verbs in e.g. a
- * file manager, use [Gio.Drive.getStartStopType].
+ * file manager, use [gio.drive.Drive.getStartStopType].
  * For [porting from GnomeVFS](migrating-gnome-vfs.html) note that there is no
  * equivalent of `GDrive` in that API.
  */
@@ -84,14 +84,14 @@ interface Drive
   /**
    * Asynchronously ejects a drive.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.Drive.ejectFinish] to obtain the
+   * You can then call [gio.drive.Drive.ejectFinish] to obtain the
    * result of the operation.
    * Params:
    *   flags = flags affecting the unmount if required for eject
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
 
-   * Deprecated: Use [Gio.Drive.ejectWithOperation] instead.
+   * Deprecated: Use [gio.drive.Drive.ejectWithOperation] instead.
    */
   void eject(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback);
 
@@ -102,13 +102,13 @@ interface Drive
    * Returns: %TRUE if the drive has been ejected successfully,
    *   %FALSE otherwise.
 
-   * Deprecated: Use [Gio.Drive.ejectWithOperationFinish] instead.
+   * Deprecated: Use [gio.drive.Drive.ejectWithOperationFinish] instead.
    */
   bool ejectFinish(AsyncResult result);
 
   /**
    * Ejects a drive. This is an asynchronous operation, and is
-   * finished by calling [Gio.Drive.ejectWithOperationFinish] with the drive
+   * finished by calling [gio.drive.Drive.ejectWithOperationFinish] with the drive
    * and #GAsyncResult data returned in the callback.
    * Params:
    *   flags = flags affecting the unmount if required for eject
@@ -130,10 +130,10 @@ interface Drive
 
   /**
    * Gets the kinds of identifiers that drive has.
-   * Use [Gio.Drive.getIdentifier] to obtain the identifiers
+   * Use [gio.drive.Drive.getIdentifier] to obtain the identifiers
    * themselves.
    * Returns: a %NULL-terminated
-   *   array of strings containing kinds of identifiers. Use [GLib.Global.strfreev]
+   *   array of strings containing kinds of identifiers. Use [glib.global.strfreev]
    *   to free.
    */
   string[] enumerateIdentifiers();
@@ -141,7 +141,7 @@ interface Drive
   /**
    * Gets the icon for drive.
    * Returns: #GIcon for the drive.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   Icon getIcon();
 
@@ -179,21 +179,21 @@ interface Drive
   /**
    * Gets the icon for drive.
    * Returns: symbolic #GIcon for the drive.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   Icon getSymbolicIcon();
 
   /**
    * Get a list of mountable volumes for drive.
-   * The returned list should be freed with [GLib.List.free], after
-   * its elements have been unreffed with [GObject.ObjectG.unref].
+   * The returned list should be freed with [glib.list.List.free], after
+   * its elements have been unreffed with [gobject.object.ObjectG.unref].
    * Returns: #GList containing any #GVolume objects on the given drive.
    */
   Volume[] getVolumes();
 
   /**
    * Checks if the drive has media. Note that the OS may not be polling
-   * the drive for media changes; see [Gio.Drive.isMediaCheckAutomatic]
+   * the drive for media changes; see [gio.drive.Drive.isMediaCheckAutomatic]
    * for more details.
    * Returns: %TRUE if drive has media, %FALSE otherwise.
    */
@@ -220,7 +220,7 @@ interface Drive
 
   /**
    * Checks if the #GDrive and/or its media is considered removable by the user.
-   * See [Gio.Drive.isMediaRemovable].
+   * See [gio.drive.Drive.isMediaRemovable].
    * Returns: %TRUE if drive and/or its media is considered removable, %FALSE otherwise.
    */
   bool isRemovable();
@@ -228,7 +228,7 @@ interface Drive
   /**
    * Asynchronously polls drive to see if media has been inserted or removed.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.Drive.pollForMediaFinish] to obtain the
+   * You can then call [gio.drive.Drive.pollForMediaFinish] to obtain the
    * result of the operation.
    * Params:
    *   cancellable = optional #GCancellable object, %NULL to ignore.
@@ -237,7 +237,7 @@ interface Drive
   void pollForMedia(Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes an operation started with [Gio.Drive.pollForMedia] on a drive.
+   * Finishes an operation started with [gio.drive.Drive.pollForMedia] on a drive.
    * Params:
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the drive has been poll_for_mediaed successfully,
@@ -248,7 +248,7 @@ interface Drive
   /**
    * Asynchronously starts a drive.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.Drive.startFinish] to obtain the
+   * You can then call [gio.drive.Drive.startFinish] to obtain the
    * result of the operation.
    * Params:
    *   flags = flags affecting the start operation.
@@ -271,7 +271,7 @@ interface Drive
   /**
    * Asynchronously stops a drive.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.Drive.stopFinish] to obtain the
+   * You can then call [gio.drive.Drive.stopFinish] to obtain the
    * result of the operation.
    * Params:
    *   flags = flags affecting the unmount if required for stopping.

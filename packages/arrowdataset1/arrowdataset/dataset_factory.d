@@ -5,7 +5,7 @@ import arrowdataset.c.types;
 import arrowdataset.dataset;
 import arrowdataset.finish_options;
 import arrowdataset.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

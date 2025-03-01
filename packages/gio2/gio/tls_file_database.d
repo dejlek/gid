@@ -1,7 +1,7 @@
 module gio.tls_file_database;
 
 public import gio.tls_file_database_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -9,7 +9,7 @@ import glib.error;
 import gobject.object;
 
 /**
- * `GTlsFileDatabase` is implemented by [Gio.TlsDatabase] objects which
+ * `GTlsFileDatabase` is implemented by [gio.tls_database.TlsDatabase] objects which
  * load their certificate information from a file. It is an interface which
  * TLS library specific subtypes implement.
  */

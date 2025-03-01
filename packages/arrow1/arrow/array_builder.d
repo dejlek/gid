@@ -5,7 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.data_type;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 
@@ -40,7 +40,7 @@ class ArrayBuilder : ObjectG
 
   /**
    * Append multiple empty values at once. It's more efficient than multiple
-   * [Arrow.ArrayBuilder.appendEmptyValue] calls.
+   * [arrow.array_builder.ArrayBuilder.appendEmptyValue] calls.
    * Params:
    *   n = The number of null values to be appended.
    * Returns: %TRUE on success, %FALSE if there was an error.
@@ -67,7 +67,7 @@ class ArrayBuilder : ObjectG
 
   /**
    * Append multiple nulls at once. It's more efficient than multiple
-   * [Arrow.ArrayBuilder.appendNull] calls.
+   * [arrow.array_builder.ArrayBuilder.appendNull] calls.
    * Params:
    *   n = The number of null values to be appended.
    * Returns: %TRUE on success, %FALSE if there was an error.

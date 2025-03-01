@@ -1,6 +1,6 @@
 module gtk.assistant;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.dclosure;
@@ -31,7 +31,7 @@ import gtk.window;
  * through the pages, and controls the page flow to collect the data needed
  * for the operation.
  * `GtkAssistant` handles which buttons to show and to make sensitive based
- * on page sequence knowledge and the [Gtk.AssistantPageType] of each
+ * on page sequence knowledge and the [gtk.AssistantPageType] of each
  * page in addition to state information like the *completed* and *committed*
  * page statuses.
  * If you have a case that doesn’t quite fit in `GtkAssistant`s way of
@@ -39,7 +39,7 @@ import gtk.window;
  * type and handle buttons yourself.
  * `GtkAssistant` maintains a `GtkAssistantPage` object for each added
  * child, which holds additional per-child properties. You
- * obtain the `GtkAssistantPage` for a child with [Gtk.Assistant.getPage].
+ * obtain the `GtkAssistantPage` for a child with [gtk.assistant.Assistant.getPage].
  * # GtkAssistant as GtkBuildable
  * The `GtkAssistant` implementation of the `GtkBuildable` interface
  * exposes the @action_area as internal children with the name
@@ -342,7 +342,7 @@ class Assistant : Window
    * Switches the page to page_num.
    * Note that this will only be necessary in custom buttons,
    * as the assistant flow can be set with
-   * [Gtk.Assistant.setForwardPageFunc].
+   * [gtk.assistant.Assistant.setForwardPageFunc].
    * Params:
    *   pageNum = index of the page to switch to, starting from 0.
    *     If negative, the last page will be used. If greater
@@ -454,7 +454,7 @@ class Assistant : Window
    * which the wizard has collected data. If the action takes a long time
    * to complete, you might consider putting a page of type
    * %GTK_ASSISTANT_PAGE_PROGRESS after the confirmation page and handle
-   * this operation within the [Gtk.Assistant.prepare] signal of
+   * this operation within the [gtk.assistant.Assistant.prepare] signal of
    * the progress page.
    *   assistant = the instance the signal is connected to
 

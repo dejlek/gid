@@ -1,3 +1,5 @@
+//!class VariantType pre
+
 import std.traits : isSomeString;
 import std.typecons : isTuple;
 

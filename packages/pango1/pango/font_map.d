@@ -1,6 +1,6 @@
 module pango.font_map;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -56,14 +56,14 @@ class FontMap : ObjectG, ListModel
 
   /**
    * Creates a `PangoContext` connected to fontmap.
-   * This is equivalent to [Pango.Context.new_] followed by
-   * [Pango.Context.setFontMap].
+   * This is equivalent to [pango.context.Context.new_] followed by
+   * [pango.context.Context.setFontMap].
    * If you are using Pango as part of a higher-level system,
    * that system may have it's own way of create a `PangoContext`.
    * For instance, the GTK toolkit has, among others,
-   * [Gtk.Widget.getPangoContext]. Use those instead.
+   * [gtk.widget.Widget.getPangoContext]. Use those instead.
    * Returns: the newly allocated `PangoContext`,
-   *   which should be freed with [GObject.ObjectG.unref].
+   *   which should be freed with [gobject.object.ObjectG.unref].
    */
   Context createContext()
   {
@@ -110,12 +110,12 @@ class FontMap : ObjectG, ListModel
   /**
    * List all families for a fontmap.
    * Note that the returned families are not in any particular order.
-   * `PangoFontMap` also implemented the [Gio.ListModel] interface
+   * `PangoFontMap` also implemented the [gio.list_model.ListModel] interface
    * for enumerating families.
    * Params:
    *   families = location to
    *     store a pointer to an array of `PangoFontFamily` *.
-   *     This array should be freed with [GLib.Global.gfree].
+   *     This array should be freed with [glib.global.gfree].
    */
   void listFamilies(out FontFamily[] families)
   {

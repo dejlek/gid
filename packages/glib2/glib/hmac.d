@@ -1,6 +1,6 @@
 module glib.hmac;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -17,8 +17,8 @@ import gobject.boxed;
  * Both the key and data are arbitrary byte arrays of bytes or characters.
  * Support for HMAC Digests has been added in GLib 2.30, and support for SHA-512
  * in GLib 2.42. Support for SHA-384 was added in GLib 2.52.
- * To create a new `GHmac`, use [GLib.Hmac.new_]. To free a `GHmac`, use
- * [GLib.Hmac.unref].
+ * To create a new `GHmac`, use [glib.hmac.Hmac.new_]. To free a `GHmac`, use
+ * [glib.hmac.Hmac.unref].
  */
 class Hmac : Boxed
 {
@@ -49,13 +49,13 @@ class Hmac : Boxed
    * If the digest_type is not known, %NULL is returned.
    * A #GHmac can be used to compute the HMAC of a key and an
    * arbitrary binary blob, using different hashing algorithms.
-   * A #GHmac works by feeding a binary blob through [GLib.Hmac.update]
+   * A #GHmac works by feeding a binary blob through [glib.hmac.Hmac.update]
    * until the data is complete; the digest can then be extracted
-   * using [GLib.Hmac.getString], which will return the checksum as a
-   * hexadecimal string; or [GLib.Hmac.getDigest], which will return a
-   * array of raw bytes. Once either [GLib.Hmac.getString] or
-   * [GLib.Hmac.getDigest] have been called on a #GHmac, the HMAC
-   * will be closed and it won't be possible to call [GLib.Hmac.update]
+   * using [glib.hmac.Hmac.getString], which will return the checksum as a
+   * hexadecimal string; or [glib.hmac.Hmac.getDigest], which will return a
+   * array of raw bytes. Once either [glib.hmac.Hmac.getString] or
+   * [glib.hmac.Hmac.getDigest] have been called on a #GHmac, the HMAC
+   * will be closed and it won't be possible to call [glib.hmac.Hmac.update]
    * on it anymore.
    * Support for digests of type %G_CHECKSUM_SHA512 has been added in GLib 2.42.
    * Support for %G_CHECKSUM_SHA384 was added in GLib 2.52.
@@ -63,7 +63,7 @@ class Hmac : Boxed
    *   digestType = the desired type of digest
    *   key = the key for the HMAC
    * Returns: the newly created #GHmac, or %NULL.
-   *   Use [GLib.Hmac.unref] to free the memory allocated by it.
+   *   Use [glib.hmac.Hmac.unref] to free the memory allocated by it.
    */
   this(ChecksumType digestType, ubyte[] key)
   {
@@ -79,9 +79,9 @@ class Hmac : Boxed
 
   /**
    * Copies a #GHmac. If hmac has been closed, by calling
-   * [GLib.Hmac.getString] or [GLib.Hmac.getDigest], the copied
+   * [glib.hmac.Hmac.getString] or [glib.hmac.Hmac.getDigest], the copied
    * HMAC will be closed as well.
-   * Returns: the copy of the passed #GHmac. Use [GLib.Hmac.unref]
+   * Returns: the copy of the passed #GHmac. Use [glib.hmac.Hmac.unref]
    *   when finished using it.
    */
   Hmac copy()
@@ -96,7 +96,7 @@ class Hmac : Boxed
    * Gets the digest from checksum as a raw binary array and places it
    * into buffer. The size of the digest depends on the type of checksum.
    * Once this function has been called, the #GHmac is closed and can
-   * no longer be updated with [GLib.Checksum.update].
+   * no longer be updated with [glib.checksum.Checksum.update].
    * Params:
    *   buffer = output buffer
    */
@@ -109,7 +109,7 @@ class Hmac : Boxed
   /**
    * Gets the HMAC as a hexadecimal string.
    * Once this function has been called the #GHmac can no longer be
-   * updated with [GLib.Hmac.update].
+   * updated with [glib.hmac.Hmac.update].
    * The hexadecimal characters will be lower case.
    * Returns: the hexadecimal representation of the HMAC. The
    *   returned string is owned by the HMAC and should not be modified
@@ -125,8 +125,8 @@ class Hmac : Boxed
 
   /**
    * Feeds data into an existing #GHmac.
-   * The HMAC must still be open, that is [GLib.Hmac.getString] or
-   * [GLib.Hmac.getDigest] must not have been called on hmac.
+   * The HMAC must still be open, that is [glib.hmac.Hmac.getString] or
+   * [glib.hmac.Hmac.getDigest] must not have been called on hmac.
    * Params:
    *   data = buffer used to compute the checksum
    */

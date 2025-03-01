@@ -1,6 +1,6 @@
 module gtk.overlay;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -18,7 +18,7 @@ import gtk.widget;
  * of which it can place “overlay” widgets.
  * ![An example GtkOverlay](overlay.png)
  * The position of each overlay widget is determined by its
- * [Gtk.Widget.halign] and [Gtk.Widget.valign]
+ * [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
  * properties. E.g. a widget with both alignments set to %GTK_ALIGN_START
  * will be placed at the top left corner of the `GtkOverlay` container,
  * whereas an overlay with halign set to %GTK_ALIGN_CENTER and valign set
@@ -72,10 +72,10 @@ class Overlay : Widget
   /**
    * Adds widget to overlay.
    * The widget will be stacked on top of the main widget
-   * added with [Gtk.Overlay.setChild].
+   * added with [gtk.overlay.Overlay.setChild].
    * The position at which widget is placed is determined
-   * from its [Gtk.Widget.halign] and
-   * [Gtk.Widget.valign] properties.
+   * from its [gtk.widget.Widget.Align] and
+   * [gtk.widget.Widget.Align] properties.
    * Params:
    *   widget = a `GtkWidget` to be added to the container
    */
@@ -124,7 +124,7 @@ class Overlay : Widget
   }
 
   /**
-   * Removes an overlay that was added with [Gtk.Overlay.addOverlay].
+   * Removes an overlay that was added with [gtk.overlay.Overlay.addOverlay].
    * Params:
    *   widget = a `GtkWidget` to be removed
    */

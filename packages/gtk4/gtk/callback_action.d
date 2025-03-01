@@ -1,6 +1,6 @@
 module gtk.callback_action;
 
-import gid.gid;
+import gid.global;
 import glib.variant;
 import gobject.object;
 import gtk.c.functions;

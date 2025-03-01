@@ -1,6 +1,6 @@
 module gio.bytes_icon;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.icon;
@@ -40,7 +40,7 @@ class BytesIcon : ObjectG, Icon, LoadableIcon
   /**
    * Creates a new icon for a bytes.
    * This cannot fail, but loading and interpreting the bytes may fail later on
-   * $(LPAREN)for example, if [Gio.LoadableIcon.load] is called$(RPAREN) if the image is invalid.
+   * $(LPAREN)for example, if [gio.loadable_icon.LoadableIcon.load] is called$(RPAREN) if the image is invalid.
    * Params:
    *   bytes = a #GBytes.
    * Returns: a #GIcon for the given

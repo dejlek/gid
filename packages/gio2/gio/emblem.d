@@ -1,6 +1,6 @@
 module gio.emblem;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.icon;
@@ -9,9 +9,9 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GEmblem` is an implementation of [Gio.Icon] that supports
+ * `GEmblem` is an implementation of [gio.icon.Icon] that supports
  * having an emblem, which is an icon with additional properties.
- * It can than be added to a [Gio.EmblemedIcon].
+ * It can than be added to a [gio.emblemed_icon.EmblemedIcon].
  * Currently, only metainformation about the emblem's origin is
  * supported. More may be added in the future.
  */

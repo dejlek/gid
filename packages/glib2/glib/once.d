@@ -1,6 +1,6 @@
 module glib.once;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -45,7 +45,7 @@ class Once
    * section. The argument location must point to a static
    * 0-initialized variable that will be set to a value other than 0 at
    * the end of the initialization section. In combination with
-   * [GLib.Once.initLeave] and the unique address value_location, it can
+   * [glib.once.Once.initLeave] and the unique address value_location, it can
    * be ensured that an initialization section will be executed only once
    * during a program's life time, and that concurrent threads are
    * blocked until initialization completed. To be used in constructs
@@ -82,7 +82,7 @@ class Once
   }
 
   /**
-   * This functions behaves in the same way as [GLib.Once.initEnter], but can
+   * This functions behaves in the same way as [glib.once.Once.initEnter], but can
    * can be used to initialize pointers $(LPAREN)or #guintptr$(RPAREN) instead of #gsize.
    * |[<!-- language\="C" -->
    * static MyStruct *interesting_struct \= NULL;
@@ -107,10 +107,10 @@ class Once
   }
 
   /**
-   * Counterpart to [GLib.Once.initEnter]. Expects a location of a static
+   * Counterpart to [glib.once.Once.initEnter]. Expects a location of a static
    * 0-initialized initialization variable, and an initialization value
    * other than 0. Sets the variable to the initialization value, and
-   * releases concurrent threads blocking in [GLib.Once.initEnter] on this
+   * releases concurrent threads blocking in [glib.once.Once.initEnter] on this
    * initialization variable.
    * While location has a `volatile` qualifier, this is a historical artifact and
    * the pointer passed to it should not be `volatile`.
@@ -125,12 +125,12 @@ class Once
   }
 
   /**
-   * Counterpart to [GLib.Once.initEnterPointer]. Expects a location of a static
+   * Counterpart to [glib.once.Once.initEnterPointer]. Expects a location of a static
    * `NULL`-initialized initialization variable, and an initialization value
    * other than `NULL`. Sets the variable to the initialization value, and
-   * releases concurrent threads blocking in [GLib.Once.initEnterPointer] on this
+   * releases concurrent threads blocking in [glib.once.Once.initEnterPointer] on this
    * initialization variable.
-   * This functions behaves in the same way as [GLib.Once.initLeave], but
+   * This functions behaves in the same way as [glib.once.Once.initLeave], but
    * can be used to initialize pointers $(LPAREN)or #guintptr$(RPAREN) instead of #gsize.
    * Params:
    *   location = location of a static initializable variable

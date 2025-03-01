@@ -4,7 +4,7 @@ import arrow.binary_view_data_type;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class StringViewDataType : BinaryViewDataType
 {

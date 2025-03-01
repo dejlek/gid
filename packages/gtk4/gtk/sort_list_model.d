@@ -1,6 +1,6 @@
 module gtk.sort_list_model;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -22,7 +22,7 @@ import gtk.types;
  * `GtkMultiSorter` and appending the previous sorter to it.
  * The model can be set up to do incremental sorting, so that
  * sorting long lists doesn't block the UI. See
- * [Gtk.SortListModel.setIncremental] for details.
+ * [gtk.sort_list_model.SortListModel.setIncremental] for details.
  * `GtkSortListModel` is a generic model and because of that it
  * cannot take advantage of any external knowledge when sorting.
  * If you run into performance issues with `GtkSortListModel`,
@@ -32,7 +32,7 @@ import gtk.types;
  * implements `GtkSectionModel` and when property@Gtk.SortListModel:section-sorter
  * is set, it will sort all items with that sorter and items comparing
  * equal with it will be put into the same section.
- * The [Gtk.SortListModel.sorter] will then be used to sort items
+ * The [gtk.sort_list_model.SortListModel.Sorter] will then be used to sort items
  * inside their sections.
  */
 class SortListModel : ObjectG, ListModel, SectionModel
@@ -73,7 +73,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
 
   /**
    * Returns whether incremental sorting is enabled.
-   * See [Gtk.SortListModel.setIncremental].
+   * See [gtk.sort_list_model.SortListModel.setIncremental].
    * Returns: %TRUE if incremental sorting is enabled
    */
   bool getIncremental()
@@ -108,7 +108,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
    * progress \= 1.0 - pending / $(LPAREN)double$(RPAREN) MAX $(LPAREN)1, g_list_model_get_n_items $(LPAREN)model$(RPAREN)$(RPAREN);
    * ```
    * If no sort operation is ongoing - in particular when
-   * [Gtk.SortListModel.incremental] is %FALSE - this
+   * [gtk.sort_list_model.SortListModel.gboolean] is %FALSE - this
    * function returns 0.
    * Returns: a progress estimate of remaining items to sort
    */
@@ -155,7 +155,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
    * turning this on. Depending on your model and sorters, this may become
    * interesting around 10,000 to 100,000 items.
    * By default, incremental sorting is disabled.
-   * See [Gtk.SortListModel.getPending] for progress information
+   * See [gtk.sort_list_model.SortListModel.getPending] for progress information
    * about an ongoing incremental sorting operation.
    * Params:
    *   incremental = %TRUE to sort incrementally

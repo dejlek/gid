@@ -1,6 +1,6 @@
 module gobject.param_spec;
 
-import gid.gid;
+import gid.global;
 import glib.types;
 import gobject.c.functions;
 import gobject.c.types;
@@ -92,7 +92,7 @@ class ParamSpec
 
   /**
    * Get the name of a #GParamSpec.
-   * The name is always an "interned" string $(LPAREN)as per [GLib.Global.internString]$(RPAREN).
+   * The name is always an "interned" string $(LPAREN)as per [glib.global.internString]$(RPAREN).
    * This allows for pointer-value comparisons.
    * Returns: the name of pspec.
    */
@@ -128,7 +128,7 @@ class ParamSpec
   }
 
   /**
-   * Gets back user data pointers stored via [GObject.ParamSpec.setQdata].
+   * Gets back user data pointers stored via [gobject.param_spec.ParamSpec.setQdata].
    * Params:
    *   quark = a #GQuark, naming the user data pointer
    * Returns: the user data pointer set, or %NULL
@@ -145,7 +145,7 @@ class ParamSpec
    * providing a new implementation of a property in a derived
    * type while preserving all the properties from the parent
    * type. Redirection is established by creating a property
-   * of type #GParamSpecOverride. See [GObject.ObjectClass.overrideProperty]
+   * of type #GParamSpecOverride. See [gobject.object_class.ObjectClass.overrideProperty]
    * for an example of the use of this capability.
    * Returns: paramspec to which requests on this
    *   paramspec should be redirected, or %NULL if none.
@@ -161,8 +161,8 @@ class ParamSpec
   /**
    * Sets an opaque, named pointer on a #GParamSpec. The name is
    * specified through a #GQuark $(LPAREN)retrieved e.g. via
-   * [GLib.Global.quarkFromStaticString]$(RPAREN), and the pointer can be gotten back
-   * from the pspec with [GObject.ParamSpec.getQdata].  Setting a
+   * [glib.global.quarkFromStaticString]$(RPAREN), and the pointer can be gotten back
+   * from the pspec with [gobject.param_spec.ParamSpec.getQdata].  Setting a
    * previously set user data pointer, overrides $(LPAREN)frees$(RPAREN) the old pointer
    * set, using %NULL as pointer essentially removes the data stored.
    * Params:
@@ -176,7 +176,7 @@ class ParamSpec
 
   /**
    * The initial reference count of a newly created #GParamSpec is 1,
-   * even though no one has explicitly called [GObject.ParamSpec.ref_] on it
+   * even though no one has explicitly called [gobject.param_spec.ParamSpec.ref_] on it
    * yet. So the initial reference count is flagged as "floating", until
    * someone calls `g_param_spec_ref $(LPAREN)pspec$(RPAREN); g_param_spec_sink
    * $(LPAREN)pspec$(RPAREN);` in sequence on it, taking over the initial
@@ -189,7 +189,7 @@ class ParamSpec
   }
 
   /**
-   * Gets back user data pointers stored via [GObject.ParamSpec.setQdata]
+   * Gets back user data pointers stored via [gobject.param_spec.ParamSpec.setQdata]
    * and removes the data from pspec without invoking its destroy$(LPAREN)$(RPAREN)
    * function $(LPAREN)if any was set$(RPAREN).  Usually, calling this function is only
    * required to update user data pointers with a destroy notifier.

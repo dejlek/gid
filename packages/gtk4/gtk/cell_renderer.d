@@ -2,7 +2,7 @@ module gtk.cell_renderer;
 
 import gdk.event;
 import gdk.rectangle;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.initially_unowned;
 import gobject.object;
@@ -27,8 +27,8 @@ import gtk.widget;
  * draw many cells on the screen.  To this extent, it isn’t expected that a
  * CellRenderer keep any permanent state around.  Instead, any state is set
  * just prior to use using `GObject`s property system.  Then, the
- * cell is measured using [Gtk.CellRenderer.getPreferredSize]. Finally, the cell
- * is rendered in the correct location using [Gtk.CellRenderer.snapshot].
+ * cell is measured using [gtk.cell_renderer.CellRenderer.getPreferredSize]. Finally, the cell
+ * is rendered in the correct location using [gtk.cell_renderer.CellRenderer.snapshot].
  * There are a number of rules that must be followed when writing a new
  * `GtkCellRenderer`.  First and foremost, it’s important that a certain set
  * of properties will always yield a cell renderer of the same size,
@@ -433,7 +433,7 @@ class CellRenderer : InitiallyUnowned
    * This signal gets emitted when the user cancels the process of editing a
    * cell.  For example, an editable cell renderer could be written to cancel
    * editing when the user presses Escape.
-   * See also: [Gtk.CellRenderer.stopEditing].
+   * See also: [gtk.cell_renderer.CellRenderer.stopEditing].
    *   cellRenderer = the instance the signal is connected to
    */
   alias EditingCanceledCallbackDlg = void delegate(CellRenderer cellRenderer);
@@ -466,7 +466,7 @@ class CellRenderer : InitiallyUnowned
    * The intended use of this signal is to do special setup
    * on editable, e.g. adding a `GtkEntryCompletion` or setting
    * up additional columns in a `GtkComboBox`.
-   * See [Gtk.CellEditable.startEditing] for information on the lifecycle of
+   * See [gtk.cell_editable.CellEditable.startEditing] for information on the lifecycle of
    * the editable and a way to do setup that doesn’t depend on the renderer.
    * Note that GTK doesn't guarantee that cell renderers will
    * continue to use the same kind of widget for editing in future

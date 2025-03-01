@@ -1,6 +1,6 @@
 module gio.desktop_app_info;
 
-import gid.gid;
+import gid.global;
 import gio.app_info;
 import gio.app_info_mixin;
 import gio.app_launch_context;
@@ -13,7 +13,7 @@ import glib.types;
 import gobject.object;
 
 /**
- * `GDesktopAppInfo` is an implementation of [Gio.AppInfo] based on
+ * `GDesktopAppInfo` is an implementation of [gio.app_info.AppInfo] based on
  * desktop files.
  * Note that `<gio/gdesktopappinfo.h>` belongs to the UNIX-specific
  * GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
@@ -114,8 +114,8 @@ class DesktopAppInfo : ObjectG, AppInfo
 
   /**
    * Sets the name of the desktop that the application is running in.
-   * This is used by [Gio.AppInfo.shouldShow] and
-   * [Gio.DesktopAppInfo.getShowIn] to evaluate the
+   * This is used by [gio.app_info.AppInfo.shouldShow] and
+   * [gio.desktop_app_info.DesktopAppInfo.getShowIn] to evaluate the
    * `OnlyShowIn` and `NotShowIn`
    * desktop entry fields.
    * Should be called only once; subsequent calls are ignored.
@@ -138,7 +138,7 @@ class DesktopAppInfo : ObjectG, AppInfo
    * action.
    * Params:
    *   actionName = the name of the action as from
-   *     [Gio.DesktopAppInfo.listActions]
+   *     [gio.desktop_app_info.DesktopAppInfo.listActions]
    * Returns: the locale-specific action name
    */
   string getActionName(string actionName)
@@ -182,7 +182,7 @@ class DesktopAppInfo : ObjectG, AppInfo
   /**
    * When info was created from a known filename, return it.  In some
    * situations such as the #GDesktopAppInfo returned from
-   * [Gio.DesktopAppInfo.newFromKeyfile], this function will return %NULL.
+   * [gio.desktop_app_info.DesktopAppInfo.newFromKeyfile], this function will return %NULL.
    * Returns: The full path to the file for info,
    *   or %NULL if not known.
    */
@@ -261,7 +261,7 @@ class DesktopAppInfo : ObjectG, AppInfo
   /**
    * Gets the value of the NoDisplay key, which helps determine if the
    * application info should be shown in menus. See
-   * %G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY and [Gio.AppInfo.shouldShow].
+   * %G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY and [gio.app_info.AppInfo.shouldShow].
    * Returns: The value of the NoDisplay key
    */
   bool getNodisplay()
@@ -279,7 +279,7 @@ class DesktopAppInfo : ObjectG, AppInfo
    * `XDG_CURRENT_DESKTOP` environment variable is consulted.  If you want
    * to override the default mechanism then you may specify desktop_env,
    * but this is not recommended.
-   * Note that [Gio.AppInfo.shouldShow] for info will include this check $(LPAREN)with
+   * Note that [gio.app_info.AppInfo.shouldShow] for info will include this check $(LPAREN)with
    * %NULL for desktop_env$(RPAREN) as well as additional checks.
    * Params:
    *   desktopEnv = a string specifying a desktop name
@@ -333,7 +333,7 @@ class DesktopAppInfo : ObjectG, AppInfo
    * Params:
    *   key = the key to look up
    * Returns: a %NULL-terminated string array or %NULL if the specified
-   *   key cannot be found. The array should be freed with [GLib.Global.strfreev].
+   *   key cannot be found. The array should be freed with [glib.global.strfreev].
    */
   string[] getStringList(string key)
   {
@@ -370,7 +370,7 @@ class DesktopAppInfo : ObjectG, AppInfo
   /**
    * Activates the named application action.
    * You may only call this function on action names that were
-   * returned from [Gio.DesktopAppInfo.listActions].
+   * returned from [gio.desktop_app_info.DesktopAppInfo.listActions].
    * Note that if the main entry of the desktop file indicates that the
    * application supports startup notification, and launch_context is
    * non-%NULL, then startup notification will be used when activating the
@@ -378,11 +378,11 @@ class DesktopAppInfo : ObjectG, AppInfo
    * must signal the end of startup notification when it is completed$(RPAREN).
    * This is the expected behaviour of applications declaring additional
    * actions, as per the desktop file specification.
-   * As with [Gio.AppInfo.launch] there is no way to detect failures that
+   * As with [gio.app_info.AppInfo.launch] there is no way to detect failures that
    * occur while using this function.
    * Params:
    *   actionName = the name of the action as from
-   *     [Gio.DesktopAppInfo.listActions]
+   *     [gio.desktop_app_info.DesktopAppInfo.listActions]
    *   launchContext = a #GAppLaunchContext
    */
   void launchAction(string actionName, AppLaunchContext launchContext)
@@ -392,14 +392,14 @@ class DesktopAppInfo : ObjectG, AppInfo
   }
 
   /**
-   * This function performs the equivalent of [Gio.AppInfo.launchUris],
+   * This function performs the equivalent of [gio.app_info.AppInfo.launchUris],
    * but is intended primarily for operating system components that
    * launch applications.  Ordinary applications should use
-   * [Gio.AppInfo.launchUris].
+   * [gio.app_info.AppInfo.launchUris].
    * If the application is launched via GSpawn, then spawn_flags, user_setup
-   * and user_setup_data are used for the call to [GLib.Global.spawnAsync].
+   * and user_setup_data are used for the call to [glib.global.spawnAsync].
    * Additionally, pid_callback $(LPAREN)with pid_callback_data$(RPAREN) will be called to
-   * inform about the PID of the created process. See [GLib.Global.spawnAsyncWithPipes]
+   * inform about the PID of the created process. See [glib.global.spawnAsyncWithPipes]
    * for information on certain parameter conditions that can enable an
    * optimized posix_spawn$(LPAREN)$(RPAREN) codepath to be used.
    * If application launching occurs via some other mechanism $(LPAREN)eg: D-Bus
@@ -446,7 +446,7 @@ class DesktopAppInfo : ObjectG, AppInfo
   }
 
   /**
-   * Equivalent to [Gio.DesktopAppInfo.launchUrisAsManager] but allows
+   * Equivalent to [gio.desktop_app_info.DesktopAppInfo.launchUrisAsManager] but allows
    * you to pass in file descriptors for the stdin, stdout and stderr streams
    * of the launched process.
    * If application launching occurs via some non-spawn mechanism $(LPAREN)e.g. D-Bus

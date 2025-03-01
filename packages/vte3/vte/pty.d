@@ -1,6 +1,6 @@
 module vte.pty;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -58,24 +58,24 @@ class Pty : ObjectG, Initable
 
   /**
    * Allocates a new pseudo-terminal.
-   * You can later use fork$(LPAREN)$(RPAREN) or the [GLib.Global.spawnAsync] family of functions
+   * You can later use fork$(LPAREN)$(RPAREN) or the [glib.global.spawnAsync] family of functions
    * to start a process on the PTY.
-   * If using fork$(LPAREN)$(RPAREN), you MUST call [Vte.Pty.childSetup] in the child.
-   * If using [GLib.Global.spawnAsync] and friends, you MUST either use
-   * [Vte.Pty.childSetup] directly as the child setup function, or call
-   * [Vte.Pty.childSetup] from your own child setup function supplied.
-   * When using [Vte.Terminal.spawnSync] with a custom child setup
-   * function, [Vte.Pty.childSetup] will be called before the supplied
+   * If using fork$(LPAREN)$(RPAREN), you MUST call [vte.pty.Pty.childSetup] in the child.
+   * If using [glib.global.spawnAsync] and friends, you MUST either use
+   * [vte.pty.Pty.childSetup] directly as the child setup function, or call
+   * [vte.pty.Pty.childSetup] from your own child setup function supplied.
+   * When using [vte.terminal.Terminal.spawnSync] with a custom child setup
+   * function, [vte.pty.Pty.childSetup] will be called before the supplied
    * function; you must not call it again.
    * Also, you MUST pass the %G_SPAWN_DO_NOT_REAP_CHILD flag.
    * Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
    * and %G_SPAWN_CHILD_INHERITS_STDIN are not supported, since stdin, stdout
    * and stderr of the child process will always be connected to the PTY.
-   * Note that you should set the PTY's size using [Vte.Pty.setSize] before
+   * Note that you should set the PTY's size using [vte.pty.Pty.setSize] before
    * spawning the child process, so that the child process has the correct
    * size from the start instead of starting with a default size and then
    * shortly afterwards receiving a <literal>SIGWINCH</literal> signal. You
-   * should prefer using [Vte.Terminal.ptyNewSync] which does this
+   * should prefer using [vte.terminal.Terminal.ptyNewSync] which does this
    * automatically.
    * Params:
    *   flags = flags from #VtePtyFlags
@@ -169,8 +169,8 @@ class Pty : ObjectG, Initable
   }
 
   /**
-   * Like [Vte.Pty.spawnWithFdsAsync], except that this function does not
-   * allow passing file descriptors to the child process. See [Vte.Pty.spawnWithFdsAsync]
+   * Like [vte.pty.Pty.spawnWithFdsAsync], except that this function does not
+   * allow passing file descriptors to the child process. See [vte.pty.Pty.spawnWithFdsAsync]
    * for more information.
    * Params:
    *   workingDirectory = the name of a directory the command should start
@@ -259,7 +259,7 @@ class Pty : ObjectG, Initable
    * You can override the options used for the systemd user scope by
    * providing a systemd override file for 'vte-spawn-.scope' unit. See man:systemd.unit$(LPAREN)5$(RPAREN)
    * for further information.
-   * See vte_pty_new$(LPAREN)$(RPAREN), and [Vte.Terminal.watchChild] for more information.
+   * See vte_pty_new$(LPAREN)$(RPAREN), and [vte.terminal.Terminal.watchChild] for more information.
    * Params:
    *   workingDirectory = the name of a directory the command should start
    *     in, or %NULL to use the current working directory

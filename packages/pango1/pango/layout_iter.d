@@ -1,6 +1,6 @@
 module pango.layout_iter;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gobject.object;
 import pango.c.functions;
@@ -12,7 +12,7 @@ import pango.types;
 /**
  * A `PangoLayoutIter` can be used to iterate over the visual
  * extents of a `PangoLayout`.
- * To obtain a `PangoLayoutIter`, use [Pango.Layout.getIter].
+ * To obtain a `PangoLayoutIter`, use [pango.layout.Layout.getIter].
  * The `PangoLayoutIter` structure is opaque, and has no user-visible fields.
  */
 class LayoutIter : Boxed
@@ -106,7 +106,7 @@ class LayoutIter : Boxed
    * Note that iterating forward by char moves in visual order,
    * not logical order, so indexes may not be sequential. Also,
    * the index may be equal to the length of the text in the
-   * layout, if on the %NULL run $(LPAREN)see [Pango.LayoutIter.getRun]$(RPAREN).
+   * layout, if on the %NULL run $(LPAREN)see [pango.layout_iter.LayoutIter.getRun]$(RPAREN).
    * Returns: current byte index
    */
   int getIndex()
@@ -141,7 +141,7 @@ class LayoutIter : Boxed
 
   /**
    * Gets the current line.
-   * Use the faster [Pango.LayoutIter.getLineReadonly] if
+   * Use the faster [pango.layout_iter.LayoutIter.getLineReadonly] if
    * you do not plan to modify the contents of the line $(LPAREN)glyphs,
    * glyph widths, etc.$(RPAREN).
    * Returns: the current line
@@ -159,7 +159,7 @@ class LayoutIter : Boxed
    * Extents are in layout coordinates $(LPAREN)origin is the top-left corner
    * of the entire `PangoLayout`$(RPAREN). Thus the extents returned by this
    * function will be the same width/height but not at the same x/y
-   * as the extents returned from [Pango.LayoutLine.getExtents].
+   * as the extents returned from [pango.layout_line.LayoutLine.getExtents].
    * Params:
    *   inkRect = rectangle to fill with ink extents
    *   logicalRect = rectangle to fill with logical extents
@@ -171,7 +171,7 @@ class LayoutIter : Boxed
 
   /**
    * Gets the current line for read-only access.
-   * This is a faster alternative to [Pango.LayoutIter.getLine],
+   * This is a faster alternative to [pango.layout_iter.LayoutIter.getLine],
    * but the user is not expected to modify the contents of the line
    * $(LPAREN)glyphs, glyph widths, etc.$(RPAREN).
    * Returns: the current line, that should not be
@@ -190,7 +190,7 @@ class LayoutIter : Boxed
    * between the lines in the layout, and returns the space belonging to
    * the current line.
    * A line's range includes the line's logical extents. plus half of the
-   * spacing above and below the line, if [Pango.Layout.setSpacing]
+   * spacing above and below the line, if [pango.layout.Layout.setSpacing]
    * has been called to set layout spacing. The Y positions are in layout
    * coordinates $(LPAREN)origin at top left of the entire layout$(RPAREN).
    * Note: Since 1.44, Pango uses line heights for placing lines, and there
@@ -210,7 +210,7 @@ class LayoutIter : Boxed
    * with a %NULL run, so this function can return %NULL. The %NULL run
    * at the end of each line ensures that all lines have at least one run,
    * even lines consisting of only a newline.
-   * Use the faster [Pango.LayoutIter.getRunReadonly] if you do not
+   * Use the faster [pango.layout_iter.LayoutIter.getRunReadonly] if you do not
    * plan to modify the contents of the run $(LPAREN)glyphs, glyph widths, etc.$(RPAREN).
    * Returns: the current run
    */
@@ -255,7 +255,7 @@ class LayoutIter : Boxed
    * with a %NULL run, so this function can return %NULL. The %NULL run
    * at the end of each line ensures that all lines have at least one run,
    * even lines consisting of only a newline.
-   * This is a faster alternative to [Pango.LayoutIter.getRun],
+   * This is a faster alternative to [pango.layout_iter.LayoutIter.getRun],
    * but the user is not expected to modify the contents of the run $(LPAREN)glyphs,
    * glyph widths, etc.$(RPAREN).
    * Returns: the current run, that

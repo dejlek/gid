@@ -1,6 +1,6 @@
 module gio.filename_completer;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -47,7 +47,7 @@ class FilenameCompleter : ObjectG
    * Params:
    *   initialText = text to be completed.
    * Returns: a completed string, or %NULL if no
-   *   completion exists. This string is not owned by GIO, so remember to [GLib.Global.gfree]
+   *   completion exists. This string is not owned by GIO, so remember to [glib.global.gfree]
    *   it when finished.
    */
   string getCompletionSuffix(string initialText)
@@ -64,7 +64,7 @@ class FilenameCompleter : ObjectG
    * Params:
    *   initialText = text to be completed.
    * Returns: array of strings with possible completions for initial_text.
-   *   This array must be freed by [GLib.Global.strfreev] when finished.
+   *   This array must be freed by [glib.global.strfreev] when finished.
    */
   string[] getCompletions(string initialText)
   {

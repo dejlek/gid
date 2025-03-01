@@ -1,6 +1,6 @@
 module gsk.shader_args_builder;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import gobject.boxed;
 import graphene.vec2;
@@ -45,7 +45,7 @@ class ShaderArgsBuilder : Boxed
    *   shader = a `GskGLShader`
    *   initialValues = optional `GBytes` with initial values
    * Returns: The newly allocated builder, free with
-   *   [Gsk.ShaderArgsBuilder.unref]
+   *   [gsk.shader_args_builder.ShaderArgsBuilder.unref]
    */
   this(GLShader shader, Bytes initialValues)
   {
@@ -146,7 +146,7 @@ class ShaderArgsBuilder : Boxed
    * The given `GskShaderArgsBuilder` is reset once this function returns;
    * you cannot call this function multiple times on the same builder instance.
    * This function is intended primarily for bindings. C code should use
-   * [Gsk.ShaderArgsBuilder.freeToArgs].
+   * [gsk.shader_args_builder.ShaderArgsBuilder.freeToArgs].
    * Returns: the newly allocated buffer with
    *   all the args added to builder
    */

@@ -1,6 +1,6 @@
 module gio.tcp_wrapper_connection;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.iostream;
@@ -10,12 +10,12 @@ import gio.types;
 import gobject.object;
 
 /**
- * A `GTcpWrapperConnection` can be used to wrap a [Gio.IOStream] that is
- * based on a [Gio.Socket], but which is not actually a
- * [Gio.SocketConnection]. This is used by [Gio.SocketClient] so
- * that it can always return a [Gio.SocketConnection], even when the
+ * A `GTcpWrapperConnection` can be used to wrap a [gio.iostream.IOStream] that is
+ * based on a [gio.socket.Socket], but which is not actually a
+ * [gio.socket_connection.SocketConnection]. This is used by [gio.socket_client.SocketClient] so
+ * that it can always return a [gio.socket_connection.SocketConnection], even when the
  * connection it has actually created is not directly a
- * [Gio.SocketConnection].
+ * [gio.socket_connection.SocketConnection].
  */
 class TcpWrapperConnection : TcpConnection
 {

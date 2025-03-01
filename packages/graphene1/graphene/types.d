@@ -1,6 +1,6 @@
 module graphene.types;
 
-import gid.gid;
+import gid.global;
 import graphene.c.functions;
 import graphene.c.types;
 import graphene.types;
@@ -22,8 +22,8 @@ enum PI_2 = 1.570796;
 /**
  * Evaluates to the number of components of a #graphene_vec2_t.
  * This symbol is useful when declaring a C array of floating
- * point values to be used with [Graphene.Vec2.initFromFloat] and
- * [Graphene.Vec2.toFloat], e.g.
+ * point values to be used with [graphene.vec2.Vec2.initFromFloat] and
+ * [graphene.vec2.Vec2.toFloat], e.g.
  * |[
  * float v[GRAPHENE_VEC2_LEN];
  * // vec is defined elsewhere
@@ -38,8 +38,8 @@ enum VEC2_LEN = 2;
 /**
  * Evaluates to the number of components of a #graphene_vec3_t.
  * This symbol is useful when declaring a C array of floating
- * point values to be used with [Graphene.Vec3.initFromFloat] and
- * [Graphene.Vec3.toFloat], e.g.
+ * point values to be used with [graphene.vec3.Vec3.initFromFloat] and
+ * [graphene.vec3.Vec3.toFloat], e.g.
  * |[
  * float v[GRAPHENE_VEC3_LEN];
  * // vec is defined elsewhere
@@ -54,8 +54,8 @@ enum VEC3_LEN = 3;
 /**
  * Evaluates to the number of components of a #graphene_vec4_t.
  * This symbol is useful when declaring a C array of floating
- * point values to be used with [Graphene.Vec4.initFromFloat] and
- * [Graphene.Vec4.toFloat], e.g.
+ * point values to be used with [graphene.vec4.Vec4.initFromFloat] and
+ * [graphene.vec4.Vec4.toFloat], e.g.
  * |[
  * float v[GRAPHENE_VEC4_LEN];
  * // vec is defined elsewhere

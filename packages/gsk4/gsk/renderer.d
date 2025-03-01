@@ -4,7 +4,7 @@ import cairo.region;
 import gdk.display;
 import gdk.surface;
 import gdk.texture;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 import graphene.rect;
@@ -15,12 +15,12 @@ import gsk.types;
 
 /**
  * `GskRenderer` is a class that renders a scene graph defined via a
- * tree of [Gsk.RenderNode] instances.
+ * tree of [gsk.render_node.RenderNode] instances.
  * Typically you will use a `GskRenderer` instance to repeatedly call
- * [Gsk.Renderer.render] to update the contents of its associated
- * [Gdk.Surface].
+ * [gsk.renderer.Renderer.render] to update the contents of its associated
+ * [gdk.surface.Surface].
  * It is necessary to realize a `GskRenderer` instance using
- * [Gsk.Renderer.realize] before calling [Gsk.Renderer.render],
+ * [gsk.renderer.Renderer.realize] before calling [gsk.renderer.Renderer.render],
  * in order to create the appropriate windowing system resources needed
  * to render the scene.
  */
@@ -90,9 +90,9 @@ class Renderer : ObjectG
    * graph.
    * Since GTK 4.6, the surface may be `NULL`, which allows using
    * renderers without having to create a surface.
-   * Since GTK 4.14, it is recommended to use [Gsk.Renderer.realizeForDisplay]
+   * Since GTK 4.14, it is recommended to use [gsk.renderer.Renderer.realizeForDisplay]
    * instead.
-   * Note that it is mandatory to call [Gsk.Renderer.unrealize] before
+   * Note that it is mandatory to call [gsk.renderer.Renderer.unrealize] before
    * destroying the renderer.
    * Params:
    *   surface = the `GdkSurface` renderer will be used on
@@ -111,7 +111,7 @@ class Renderer : ObjectG
   /**
    * Creates the resources needed by the renderer to render the scene
    * graph.
-   * Note that it is mandatory to call [Gsk.Renderer.unrealize] before
+   * Note that it is mandatory to call [gsk.renderer.Renderer.unrealize] before
    * destroying the renderer.
    * Params:
    *   display = the `GdkDisplay` renderer will be used on
@@ -168,7 +168,7 @@ class Renderer : ObjectG
   }
 
   /**
-   * Releases all the resources created by [Gsk.Renderer.realize].
+   * Releases all the resources created by [gsk.renderer.Renderer.realize].
    */
   void unrealize()
   {

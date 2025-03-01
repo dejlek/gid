@@ -1,6 +1,6 @@
 module harfbuzz.blob;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;

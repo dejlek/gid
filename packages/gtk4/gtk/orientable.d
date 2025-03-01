@@ -1,7 +1,7 @@
 module gtk.orientable;
 
 public import gtk.orientable_iface_proxy;
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -14,7 +14,7 @@ import gtk.types;
  * ## CSS nodes
  * `GtkWidget` types implementing the `GtkOrientable` interface will
  * automatically acquire the `horizontal` or `vertical` CSS class depending on
- * the value of the [Gtk.Orientable.orientation] property.
+ * the value of the [gtk.orientable.Orientable.Orientation] property.
  */
 interface Orientable
 {

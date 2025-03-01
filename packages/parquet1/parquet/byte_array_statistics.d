@@ -1,6 +1,6 @@
 module parquet.byte_array_statistics;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import parquet.c.functions;
 import parquet.c.types;

@@ -1,6 +1,6 @@
 module gsk.glshader;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.error;
 import gobject.object;
@@ -21,8 +21,8 @@ import gsk.types;
  * uniforms $(LPAREN)as they are uniform over all the calls to your shader in
  * each instance of use$(RPAREN). A shader can also receive up to 4
  * textures that it can use as input when producing the pixel data.
- * `GskGLShader` is usually used with [Gtk.Snapshot.pushGlShader]
- * to produce a [Gsk.GLShaderNode] in the rendering hierarchy,
+ * `GskGLShader` is usually used with [gtk.snapshot.Snapshot.pushGlShader]
+ * to produce a [gsk.glshader_node.GLShaderNode] in the rendering hierarchy,
  * and then its input textures are constructed by rendering the child
  * nodes to textures before rendering the shader node itself. $(LPAREN)You can
  * pass texture nodes as children if you want to directly use a texture
@@ -84,7 +84,7 @@ import gsk.types;
  * This samples a texture $(LPAREN)e.g. u_texture1$(RPAREN) at the specified
  * coordinates, and contains some helper ifdefs to ensure that
  * it works on all OpenGL versions.
- * You can compile the shader yourself using [Gsk.GLShader.compile],
+ * You can compile the shader yourself using [gsk.glshader.GLShader.compile],
  * otherwise the GSK renderer will do it when it handling the glshader
  * node. If errors occurs, the returned @error will include the glsl
  * sources, so you can see what GSK was passing to the compiler. You

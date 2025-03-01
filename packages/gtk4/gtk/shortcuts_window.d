@@ -1,6 +1,6 @@
 module gtk.shortcuts_window;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -28,12 +28,12 @@ import gtk.window;
  * Additionally, the shortcuts can be filtered by the current view, to avoid
  * showing information that is not relevant in the current application context.
  * The recommended way to construct a `GtkShortcutsWindow` is with
- * [Gtk.Builder], by using the `<child>` tag to populate a
- * `GtkShortcutsWindow` with one or more [Gtk.ShortcutsSection] objects,
- * which contain one or more [Gtk.ShortcutsGroup] instances, which, in turn,
- * contain [Gtk.ShortcutsShortcut] instances.
- * If you need to add a section programmatically, use [Gtk.ShortcutsWindow.addSection]
- * instead of [Gtk.Window.setChild], as the shortcuts window manages
+ * [gtk.builder.Builder], by using the `<child>` tag to populate a
+ * `GtkShortcutsWindow` with one or more [gtk.shortcuts_section.ShortcutsSection] objects,
+ * which contain one or more [gtk.shortcuts_group.ShortcutsGroup] instances, which, in turn,
+ * contain [gtk.shortcuts_shortcut.ShortcutsShortcut] instances.
+ * If you need to add a section programmatically, use [gtk.shortcuts_window.ShortcutsWindow.addSection]
+ * instead of [gtk.window.Window.setChild], as the shortcuts window manages
  * its children directly.
  * # A simple example:
  * ![](gedit-shortcuts.png)
@@ -76,9 +76,9 @@ class ShortcutsWindow : Window
 
   /**
    * Adds a section to the shortcuts window.
-   * This is the programmatic equivalent to using [Gtk.Builder] and a
+   * This is the programmatic equivalent to using [gtk.builder.Builder] and a
    * `<child>` tag to add the child.
-   * Using [Gtk.Window.setChild] is not appropriate as the shortcuts
+   * Using [gtk.window.Window.setChild] is not appropriate as the shortcuts
    * window manages its children internally.
    * Params:
    *   section = the `GtkShortcutsSection` to add

@@ -336,9 +336,9 @@ enum GskPathDirection
 }
 
 /**
- * Flags that can be passed to [Gsk.Path.foreach_] to influence what
+ * Flags that can be passed to [gsk.path.Path.foreach_] to influence what
  * kinds of operations the path is decomposed into.
- * By default, [Gsk.Path.foreach_] will only emit a path with all
+ * By default, [gsk.path.Path.foreach_] will only emit a path with all
  * operations flattened to straight lines to allow for maximum compatibility.
  * The only operations emitted will be `GSK_PATH_MOVE`, `GSK_PATH_LINE` and
  * `GSK_PATH_CLOSE`.
@@ -652,7 +652,7 @@ enum GskTransformCategory
 
   /**
    * The matrix is a 2D matrix. This is equivalent
-   * to [Graphene.Matrix.is2d] returning %TRUE. In particular, this
+   * to [graphene.matrix.Matrix.is2d] returning %TRUE. In particular, this
    * means that Cairo can deal with the matrix.
    */
   _2d = 3,
@@ -761,8 +761,8 @@ struct GskCrossFadeNode;
 struct GskDebugNode;
 
 /**
- * A render node filling the area given by [Gsk.Path]
- * and [Gsk.FillRule] with the child node.
+ * A render node filling the area given by [gsk.path.Path]
+ * and [gsk.FillRule] with the child node.
  */
 struct GskFillNode;
 
@@ -779,8 +779,8 @@ struct GskGLRendererClass;
  * uniforms $(LPAREN)as they are uniform over all the calls to your shader in
  * each instance of use$(RPAREN). A shader can also receive up to 4
  * textures that it can use as input when producing the pixel data.
- * `GskGLShader` is usually used with [Gtk.Snapshot.pushGlShader]
- * to produce a [Gsk.GLShaderNode] in the rendering hierarchy,
+ * `GskGLShader` is usually used with [gtk.snapshot.Snapshot.pushGlShader]
+ * to produce a [gsk.glshader_node.GLShaderNode] in the rendering hierarchy,
  * and then its input textures are constructed by rendering the child
  * nodes to textures before rendering the shader node itself. $(LPAREN)You can
  * pass texture nodes as children if you want to directly use a texture
@@ -842,7 +842,7 @@ struct GskGLRendererClass;
  * This samples a texture $(LPAREN)e.g. u_texture1$(RPAREN) at the specified
  * coordinates, and contains some helper ifdefs to ensure that
  * it works on all OpenGL versions.
- * You can compile the shader yourself using [Gsk.GLShader.compile],
+ * You can compile the shader yourself using [gsk.glshader.GLShader.compile],
  * otherwise the GSK renderer will do it when it handling the glshader
  * node. If errors occurs, the returned @error will include the glsl
  * sources, so you can see what GSK was passing to the compiler. You
@@ -938,7 +938,7 @@ struct GskParseLocation
  * $(LPAREN)e.g. as trajectories$(RPAREN).
  * `GskPath` is an immutable, opaque, reference-counted struct.
  * After creation, you cannot change the types it represents. Instead,
- * new `GskPath` objects have to be created. The [Gsk.PathBuilder]
+ * new `GskPath` objects have to be created. The [gsk.path_builder.PathBuilder]
  * structure is meant to help in this endeavor.
  * Conceptually, a path consists of zero or more contours $(LPAREN)continuous, connected
  * curves$(RPAREN), each of which may or may not be closed. Contours are typically
@@ -966,16 +966,16 @@ struct GskPath;
  * Adding contours to the path can be done in two ways.
  * The easiest option is to use the `gsk_path_builder_add_*` group
  * of functions that add predefined contours to the current path,
- * either common shapes like [Gsk.PathBuilder.addCircle]
- * or by adding from other paths like [Gsk.PathBuilder.addPath].
+ * either common shapes like [gsk.path_builder.PathBuilder.addCircle]
+ * or by adding from other paths like [gsk.path_builder.PathBuilder.addPath].
  * The `gsk_path_builder_add_*` methods always add complete contours,
  * and do not use or modify the current point.
  * The other option is to define each line and curve manually with
  * the `gsk_path_builder_*_to` group of functions. You start with
- * a call to [Gsk.PathBuilder.moveTo] to set the starting point
+ * a call to [gsk.path_builder.PathBuilder.moveTo] to set the starting point
  * and then use multiple calls to any of the drawing functions to
  * move the pen along the plane. Once you are done, you can call
- * [Gsk.PathBuilder.close] to close the path by connecting it
+ * [gsk.path_builder.PathBuilder.close] to close the path by connecting it
  * back with a line to the starting point.
  * This is similar to how paths are drawn in Cairo.
  * Note that `GskPathBuilder` will reduce the degree of added Bézier
@@ -999,9 +999,9 @@ struct GskPathMeasure;
  * `GskPathPoint` is an opaque type representing a point on a path.
  * It can be queried for properties of the path at that point, such as
  * its tangent or its curvature.
- * To obtain a `GskPathPoint`, use [Gsk.Path.getClosestPoint],
- * [Gsk.Path.getStartPoint], [Gsk.Path.getEndPoint]
- * or [Gsk.PathMeasure.getPoint].
+ * To obtain a `GskPathPoint`, use [gsk.path.Path.getClosestPoint],
+ * [gsk.path.Path.getStartPoint], [gsk.path.Path.getEndPoint]
+ * or [gsk.path_measure.PathMeasure.getPoint].
  * Note that `GskPathPoint` structs are meant to be stack-allocated,
  * and don't hold a reference to the path object they are obtained from.
  * It is the callers responsibility to keep a reference to the path
@@ -1016,26 +1016,26 @@ struct GskRadialGradientNode;
 
 /**
  * `GskRenderNode` is the basic block in a scene graph to be
- * rendered using [Gsk.Renderer].
+ * rendered using [gsk.renderer.Renderer].
  * Each node has a parent, except the top-level node; each node may have
  * children nodes.
  * Each node has an associated drawing surface, which has the size of
  * the rectangle set when creating it.
  * Render nodes are meant to be transient; once they have been associated
- * to a [Gsk.Renderer] it's safe to release any reference you have on
- * them. All [Gsk.RenderNode]s are immutable, you can only specify their
+ * to a [gsk.renderer.Renderer] it's safe to release any reference you have on
+ * them. All [gsk.render_node.RenderNode]s are immutable, you can only specify their
  * properties during construction.
  */
 struct GskRenderNode;
 
 /**
  * `GskRenderer` is a class that renders a scene graph defined via a
- * tree of [Gsk.RenderNode] instances.
+ * tree of [gsk.render_node.RenderNode] instances.
  * Typically you will use a `GskRenderer` instance to repeatedly call
- * [Gsk.Renderer.render] to update the contents of its associated
- * [Gdk.Surface].
+ * [gsk.renderer.Renderer.render] to update the contents of its associated
+ * [gdk.surface.Surface].
  * It is necessary to realize a `GskRenderer` instance using
- * [Gsk.Renderer.realize] before calling [Gsk.Renderer.render],
+ * [gsk.renderer.Renderer.realize] before calling [gsk.renderer.Renderer.render],
  * in order to create the appropriate windowing system resources needed
  * to render the scene.
  */
@@ -1066,7 +1066,7 @@ struct GskRoundedClipNode;
 /**
  * A rectangular region with rounded corners.
  * Application code should normalize rectangles using
- * [Gsk.RoundedRect.normalize]; this function will ensure that
+ * [gsk.rounded_rect.RoundedRect.normalize]; this function will ensure that
  * the bounds of the rectangle are normalized and ensure that the corner
  * values are positive and the corners do not overlap.
  * All functions taking a `GskRoundedRect` as an argument will internally
@@ -1132,7 +1132,7 @@ struct GskStroke;
 
 /**
  * A render node that will fill the area determined by stroking the the given
- * [Gsk.Path] using the [Gsk.Stroke] attributes.
+ * [gsk.path.Path] using the [gsk.stroke.Stroke] attributes.
  */
 struct GskStrokeNode;
 

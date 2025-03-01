@@ -3,14 +3,14 @@ module atk.state_set;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**
  * An AtkStateSet contains the states of an object.
  * An AtkStateSet is a read-only representation of the full set of #AtkStates
  * that apply to an object at a given time. This set is not meant to be
- * modified, but rather created when #[Atk.ObjectAtk.refStateSet] is called.
+ * modified, but rather created when #[atk.object.ObjectAtk.refStateSet] is called.
  */
 class StateSet : ObjectG
 {

@@ -1,6 +1,6 @@
 module gtk.flow_box_child;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -56,13 +56,13 @@ class FlowBoxChild : Widget
    * used for the sorting and filtering functions. For instance, if
    * the list is mirroring some external data set, and *two* children
    * changed in the external data set when you call
-   * [Gtk.FlowBoxChild.changed] on the first child, the sort function
+   * [gtk.flow_box_child.FlowBoxChild.changed] on the first child, the sort function
    * must only read the new data for the first of the two changed
    * children, otherwise the resorting of the children will be wrong.
    * This generally means that if you don’t fully control the data
    * model, you have to duplicate the data that affects the sorting
    * and filtering functions into the widgets themselves.
-   * Another alternative is to call [Gtk.FlowBox.invalidateSort]
+   * Another alternative is to call [gtk.flow_box.FlowBox.invalidateSort]
    * on any model change, but that is more expensive.
    */
   void changed()

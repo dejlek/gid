@@ -1,6 +1,6 @@
 module gtk.cell_renderer_combo;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -21,7 +21,7 @@ import gtk.types;
  * can be set in a handler for the `GtkCellRenderer::editing-started` signal.
 
  * Deprecated: List views use widgets to display their contents. You
- *   should use [Gtk.DropDown] instead
+ *   should use [gtk.drop_down.DropDown] instead
  */
 class CellRendererCombo : CellRendererText
 {
@@ -45,7 +45,7 @@ class CellRendererCombo : CellRendererText
   /**
    * Creates a new `GtkCellRendererCombo`.
    * Adjust how text is drawn using object properties.
-   * Object properties can be set globally $(LPAREN)with [GObject.ObjectG.set]$(RPAREN).
+   * Object properties can be set globally $(LPAREN)with [gobject.object.ObjectG.set]$(RPAREN).
    * Also, with `GtkTreeViewColumn`, you can bind a property to a value
    * in a `GtkTreeModel`. For example, you can bind the “text” property
    * on the cell renderer to a string value in the model, thus rendering

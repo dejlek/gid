@@ -1,6 +1,6 @@
 module graphene.simd4_x4_f;
 
-import gid.gid;
+import gid.global;
 import graphene.c.functions;
 import graphene.c.types;
 import graphene.types;

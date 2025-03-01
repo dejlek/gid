@@ -1,6 +1,6 @@
 module gtk.pad_action_entry;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;

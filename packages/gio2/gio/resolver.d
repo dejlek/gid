@@ -1,6 +1,6 @@
 module gio.resolver;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -15,17 +15,17 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * The object that handles DNS resolution. Use [Gio.Resolver.getDefault]
+ * The object that handles DNS resolution. Use [gio.resolver.Resolver.getDefault]
  * to get the default resolver.
  * `GResolver` provides cancellable synchronous and asynchronous DNS
- * resolution, for hostnames $(LPAREN)[Gio.Resolver.lookupByAddress],
- * [Gio.Resolver.lookupByName] and their async variants$(RPAREN) and SRV
- * $(LPAREN)service$(RPAREN) records $(LPAREN)[Gio.Resolver.lookupService]$(RPAREN).
- * [Gio.NetworkAddress] and [Gio.NetworkService] provide wrappers
+ * resolution, for hostnames $(LPAREN)[gio.resolver.Resolver.lookupByAddress],
+ * [gio.resolver.Resolver.lookupByName] and their async variants$(RPAREN) and SRV
+ * $(LPAREN)service$(RPAREN) records $(LPAREN)[gio.resolver.Resolver.lookupService]$(RPAREN).
+ * [gio.network_address.NetworkAddress] and [gio.network_service.NetworkService] provide wrappers
  * around `GResolver` functionality that also implement
- * [Gio.SocketConnectable], making it easy to connect to a remote
+ * [gio.socket_connectable.SocketConnectable], making it easy to connect to a remote
  * host/service.
- * The default resolver $(LPAREN)see [Gio.Resolver.getDefault]$(RPAREN) has a timeout of
+ * The default resolver $(LPAREN)see [gio.resolver.Resolver.getDefault]$(RPAREN) has a timeout of
  * 30s set on it since GLib 2.78. Earlier versions of GLib did not support
  * resolver timeouts.
  * This is an abstract type; subclasses of it implement different resolvers for
@@ -103,7 +103,7 @@ class Resolver : ObjectG
   /**
    * Begins asynchronously reverse-resolving address to determine its
    * associated hostname, and eventually calls callback, which must
-   * call [Gio.Resolver.lookupByAddressFinish] to get the final result.
+   * call [gio.resolver.Resolver.lookupByAddressFinish] to get the final result.
    * Params:
    *   address = the address to reverse-resolve
    *   cancellable = a #GCancellable, or %NULL
@@ -126,7 +126,7 @@ class Resolver : ObjectG
 
   /**
    * Retrieves the result of a previous call to
-   * [Gio.Resolver.lookupByAddressAsync].
+   * [gio.resolver.Resolver.lookupByAddressAsync].
    * If the DNS resolution failed, error $(LPAREN)if non-%NULL$(RPAREN) will be set to
    * a value from #GResolverError. If the operation was cancelled,
    * error will be set to %G_IO_ERROR_CANCELLED.
@@ -150,14 +150,14 @@ class Resolver : ObjectG
    * Synchronously resolves hostname to determine its associated IP
    * address$(LPAREN)es$(RPAREN). hostname may be an ASCII-only or UTF-8 hostname, or
    * the textual form of an IP address $(LPAREN)in which case this just becomes
-   * a wrapper around [Gio.InetAddress.newFromString]$(RPAREN).
-   * On success, [Gio.Resolver.lookupByName] will return a non-empty #GList of
+   * a wrapper around [gio.inet_address.InetAddress.newFromString]$(RPAREN).
+   * On success, [gio.resolver.Resolver.lookupByName] will return a non-empty #GList of
    * #GInetAddress, sorted in order of preference and guaranteed to not
    * contain duplicates. That is, if using the result to connect to
    * hostname, you should attempt to connect to the first address
    * first, then the second if the first fails, etc. If you are using
    * the result to listen on a socket, it is appropriate to add each
-   * result using e.g. [Gio.SocketListener.addAddress].
+   * result using e.g. [gio.socket_listener.SocketListener.addAddress].
    * If the DNS resolution fails, error $(LPAREN)if non-%NULL$(RPAREN) will be set to a
    * value from #GResolverError and %NULL will be returned.
    * If cancellable is non-%NULL, it can be used to cancel the
@@ -172,7 +172,7 @@ class Resolver : ObjectG
    * Returns: a non-empty #GList
    *   of #GInetAddress, or %NULL on error. You
    *   must unref each of the addresses and free the list when you are
-   *   done with it. $(LPAREN)You can use [Gio.Resolver.freeAddresses] to do this.$(RPAREN)
+   *   done with it. $(LPAREN)You can use [gio.resolver.Resolver.freeAddresses] to do this.$(RPAREN)
    */
   InetAddress[] lookupByName(string hostname, Cancellable cancellable)
   {
@@ -189,8 +189,8 @@ class Resolver : ObjectG
   /**
    * Begins asynchronously resolving hostname to determine its
    * associated IP address$(LPAREN)es$(RPAREN), and eventually calls callback, which
-   * must call [Gio.Resolver.lookupByNameFinish] to get the result.
-   * See [Gio.Resolver.lookupByName] for more details.
+   * must call [gio.resolver.Resolver.lookupByNameFinish] to get the result.
+   * See [gio.resolver.Resolver.lookupByName] for more details.
    * Params:
    *   hostname = the hostname to look up the address of
    *   cancellable = a #GCancellable, or %NULL
@@ -214,14 +214,14 @@ class Resolver : ObjectG
 
   /**
    * Retrieves the result of a call to
-   * [Gio.Resolver.lookupByNameAsync].
+   * [gio.resolver.Resolver.lookupByNameAsync].
    * If the DNS resolution failed, error $(LPAREN)if non-%NULL$(RPAREN) will be set to
    * a value from #GResolverError. If the operation was cancelled,
    * error will be set to %G_IO_ERROR_CANCELLED.
    * Params:
    *   result = the result passed to your #GAsyncReadyCallback
    * Returns: a #GList
-   *   of #GInetAddress, or %NULL on error. See [Gio.Resolver.lookupByName]
+   *   of #GInetAddress, or %NULL on error. See [gio.resolver.Resolver.lookupByName]
    *   for more details.
    */
   InetAddress[] lookupByNameFinish(AsyncResult result)
@@ -236,7 +236,7 @@ class Resolver : ObjectG
   }
 
   /**
-   * This differs from [Gio.Resolver.lookupByName] in that you can modify
+   * This differs from [gio.resolver.Resolver.lookupByName] in that you can modify
    * the lookup behavior with flags. For example this can be used to limit
    * results with %G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY.
    * Params:
@@ -246,7 +246,7 @@ class Resolver : ObjectG
    * Returns: a non-empty #GList
    *   of #GInetAddress, or %NULL on error. You
    *   must unref each of the addresses and free the list when you are
-   *   done with it. $(LPAREN)You can use [Gio.Resolver.freeAddresses] to do this.$(RPAREN)
+   *   done with it. $(LPAREN)You can use [gio.resolver.Resolver.freeAddresses] to do this.$(RPAREN)
    */
   InetAddress[] lookupByNameWithFlags(string hostname, ResolverNameLookupFlags flags, Cancellable cancellable)
   {
@@ -263,8 +263,8 @@ class Resolver : ObjectG
   /**
    * Begins asynchronously resolving hostname to determine its
    * associated IP address$(LPAREN)es$(RPAREN), and eventually calls callback, which
-   * must call [Gio.Resolver.lookupByNameWithFlagsFinish] to get the result.
-   * See [Gio.Resolver.lookupByName] for more details.
+   * must call [gio.resolver.Resolver.lookupByNameWithFlagsFinish] to get the result.
+   * See [gio.resolver.Resolver.lookupByName] for more details.
    * Params:
    *   hostname = the hostname to look up the address of
    *   flags = extra #GResolverNameLookupFlags for the lookup
@@ -289,14 +289,14 @@ class Resolver : ObjectG
 
   /**
    * Retrieves the result of a call to
-   * [Gio.Resolver.lookupByNameWithFlagsAsync].
+   * [gio.resolver.Resolver.lookupByNameWithFlagsAsync].
    * If the DNS resolution failed, error $(LPAREN)if non-%NULL$(RPAREN) will be set to
    * a value from #GResolverError. If the operation was cancelled,
    * error will be set to %G_IO_ERROR_CANCELLED.
    * Params:
    *   result = the result passed to your #GAsyncReadyCallback
    * Returns: a #GList
-   *   of #GInetAddress, or %NULL on error. See [Gio.Resolver.lookupByName]
+   *   of #GInetAddress, or %NULL on error. See [gio.resolver.Resolver.lookupByName]
    *   for more details.
    */
   InetAddress[] lookupByNameWithFlagsFinish(AsyncResult result)
@@ -325,8 +325,8 @@ class Resolver : ObjectG
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a non-empty #GList of
    *   #GVariant, or %NULL on error. You must free each of the records and the list
-   *   when you are done with it. $(LPAREN)You can use [GLib.List.freeFull] with
-   *   [GLib.VariantG.unref] to do this.$(RPAREN)
+   *   when you are done with it. $(LPAREN)You can use [glib.list.List.freeFull] with
+   *   [glib.variant.VariantG.unref] to do this.$(RPAREN)
    */
   VariantG[] lookupRecords(string rrname, ResolverRecordType recordType, Cancellable cancellable)
   {
@@ -343,8 +343,8 @@ class Resolver : ObjectG
   /**
    * Begins asynchronously performing a DNS lookup for the given
    * rrname, and eventually calls callback, which must call
-   * [Gio.Resolver.lookupRecordsFinish] to get the final result. See
-   * [Gio.Resolver.lookupRecords] for more details.
+   * [gio.resolver.Resolver.lookupRecordsFinish] to get the final result. See
+   * [gio.resolver.Resolver.lookupRecords] for more details.
    * Params:
    *   rrname = the DNS name to look up the record for
    *   recordType = the type of DNS record to look up
@@ -369,7 +369,7 @@ class Resolver : ObjectG
 
   /**
    * Retrieves the result of a previous call to
-   * [Gio.Resolver.lookupRecordsAsync]. Returns a non-empty list of records as
+   * [gio.resolver.Resolver.lookupRecordsAsync]. Returns a non-empty list of records as
    * #GVariant tuples. See #GResolverRecordType for information on what the
    * records contain.
    * If the DNS resolution failed, error $(LPAREN)if non-%NULL$(RPAREN) will be set to
@@ -379,8 +379,8 @@ class Resolver : ObjectG
    *   result = the result passed to your #GAsyncReadyCallback
    * Returns: a non-empty #GList of
    *   #GVariant, or %NULL on error. You must free each of the records and the list
-   *   when you are done with it. $(LPAREN)You can use [GLib.List.freeFull] with
-   *   [GLib.VariantG.unref] to do this.$(RPAREN)
+   *   when you are done with it. $(LPAREN)You can use [glib.list.List.freeFull] with
+   *   [glib.variant.VariantG.unref] to do this.$(RPAREN)
    */
   VariantG[] lookupRecordsFinish(AsyncResult result)
   {
@@ -399,7 +399,7 @@ class Resolver : ObjectG
    * domain may be an ASCII-only or UTF-8 hostname. Note also that the
    * service and protocol arguments do not include the leading underscore
    * that appears in the actual DNS entry.
-   * On success, [Gio.Resolver.lookupService] will return a non-empty #GList of
+   * On success, [gio.resolver.Resolver.lookupService] will return a non-empty #GList of
    * #GSrvTarget, sorted in order of preference. $(LPAREN)That is, you should
    * attempt to connect to the first target first, then the second if
    * the first fails, etc.$(RPAREN)
@@ -418,7 +418,7 @@ class Resolver : ObjectG
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a non-empty #GList of
    *   #GSrvTarget, or %NULL on error. You must free each of the targets and the
-   *   list when you are done with it. $(LPAREN)You can use [Gio.Resolver.freeTargets] to do
+   *   list when you are done with it. $(LPAREN)You can use [gio.resolver.Resolver.freeTargets] to do
    *   this.$(RPAREN)
    */
   SrvTarget[] lookupService(string service, string protocol, string domain, Cancellable cancellable)
@@ -438,8 +438,8 @@ class Resolver : ObjectG
   /**
    * Begins asynchronously performing a DNS SRV lookup for the given
    * service and protocol in the given domain, and eventually calls
-   * callback, which must call [Gio.Resolver.lookupServiceFinish] to
-   * get the final result. See [Gio.Resolver.lookupService] for more
+   * callback, which must call [gio.resolver.Resolver.lookupServiceFinish] to
+   * get the final result. See [gio.resolver.Resolver.lookupService] for more
    * details.
    * Params:
    *   service = the service type to look up $(LPAREN)eg, "ldap"$(RPAREN)
@@ -468,14 +468,14 @@ class Resolver : ObjectG
 
   /**
    * Retrieves the result of a previous call to
-   * [Gio.Resolver.lookupServiceAsync].
+   * [gio.resolver.Resolver.lookupServiceAsync].
    * If the DNS resolution failed, error $(LPAREN)if non-%NULL$(RPAREN) will be set to
    * a value from #GResolverError. If the operation was cancelled,
    * error will be set to %G_IO_ERROR_CANCELLED.
    * Params:
    *   result = the result passed to your #GAsyncReadyCallback
    * Returns: a non-empty #GList of
-   *   #GSrvTarget, or %NULL on error. See [Gio.Resolver.lookupService] for more
+   *   #GSrvTarget, or %NULL on error. See [gio.resolver.Resolver.lookupService] for more
    *   details.
    */
   SrvTarget[] lookupServiceFinish(AsyncResult result)
@@ -492,7 +492,7 @@ class Resolver : ObjectG
   /**
    * Sets resolver to be the application's default resolver $(LPAREN)reffing
    * resolver, and unreffing the previous default resolver, if any$(RPAREN).
-   * Future calls to [Gio.Resolver.getDefault] will return this resolver.
+   * Future calls to [gio.resolver.Resolver.getDefault] will return this resolver.
    * This can be used if an application wants to perform any sort of DNS
    * caching or "pinning"; it can implement its own #GResolver that
    * calls the original default resolver for DNS operations, and

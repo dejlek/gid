@@ -1,6 +1,6 @@
 module gtk.tree_iter;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;
@@ -57,7 +57,7 @@ class TreeIter : Boxed
    * This function is not intended for use in applications,
    * because you can just copy the structs by value
    * $(LPAREN)`GtkTreeIter new_iter \= iter;`$(RPAREN).
-   * You must free this iter with [Gtk.TreeIter.free].
+   * You must free this iter with [gtk.tree_iter.TreeIter.free].
    * Returns: a newly-allocated copy of iter
    */
   TreeIter copy()

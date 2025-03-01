@@ -1,7 +1,7 @@
 module gtk.gesture_click;
 
 import gdk.event_sequence;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -11,9 +11,9 @@ import gtk.types;
 /**
  * `GtkGestureClick` is a `GtkGesture` implementation for clicks.
  * It is able to recognize multiple clicks on a nearby zone, which
- * can be listened for through the [Gtk.GestureClick.pressed]
+ * can be listened for through the [gtk.gesture_click.GestureClick.pressed]
  * signal. Whenever time or distance between clicks exceed the GTK
- * defaults, [Gtk.GestureClick.stopped] is emitted, and the
+ * defaults, [gtk.gesture_click.GestureClick.stopped] is emitted, and the
  * click counter is reset.
  */
 class GestureClick : GestureSingle
@@ -86,7 +86,7 @@ class GestureClick : GestureSingle
   /**
    * Emitted when a button or touch is released.
    * n_press will report the number of press that is paired to
-   * this event, note that [Gtk.GestureClick.stopped] may
+   * this event, note that [gtk.gesture_click.GestureClick.stopped] may
    * have been emitted between the press and its release, n_press
    * will only start over at the next press.
    * Params

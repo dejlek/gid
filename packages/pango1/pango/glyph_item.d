@@ -1,6 +1,6 @@
 module pango.glyph_item;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.attr_list;
 import pango.c.functions;
@@ -90,7 +90,7 @@ class GlyphItem : Boxed
    * on an attribute list.
    * The idea is that if you have attributes that don't affect shaping,
    * such as color or underline, to avoid affecting shaping, you filter
-   * them out $(LPAREN)[Pango.AttrList.filter]$(RPAREN), apply the shaping process
+   * them out $(LPAREN)[pango.attr_list.AttrList.filter]$(RPAREN), apply the shaping process
    * and then reapply them to the result using this function.
    * All attributes that start or end inside a cluster are applied
    * to that cluster; for instance, if half of a cluster is underlined
@@ -105,8 +105,8 @@ class GlyphItem : Boxed
    *   list = a `PangoAttrList`
    * Returns: a
    *   list of glyph items resulting from splitting glyph_item. Free
-   *   the elements using [Pango.GlyphItem.free], the list using
-   *   [GLib.SList.free].
+   *   the elements using [pango.glyph_item.GlyphItem.free], the list using
+   *   [glib.slist.SList.free].
    */
   GlyphItem[] applyAttrs(string text, AttrList list)
   {
@@ -137,7 +137,7 @@ class GlyphItem : Boxed
    * split_index may not be 0, and it may not be greater than or equal
    * to the length of orig $(LPAREN)that is, there must be at least one byte
    * assigned to each item, you can't create a zero-length item$(RPAREN).
-   * This function is similar in function to [Pango.Item.split] $(LPAREN)and uses
+   * This function is similar in function to [pango.item.Item.split] $(LPAREN)and uses
    * it internally.$(RPAREN)
    * Params:
    *   text = text to which positions in orig apply
@@ -145,7 +145,7 @@ class GlyphItem : Boxed
    *     start of the item
    * Returns: the newly allocated item
    *   representing text before split_index, which should be freed
-   *   with [Pango.GlyphItem.free].
+   *   with [pango.glyph_item.GlyphItem.free].
    */
   GlyphItem split(string text, int splitIndex)
   {

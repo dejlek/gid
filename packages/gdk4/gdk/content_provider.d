@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.content_formats;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -19,10 +19,10 @@ import gobject.value;
 /**
  * A `GdkContentProvider` is used to provide content for the clipboard or
  * for drag-and-drop operations in a number of formats.
- * To create a `GdkContentProvider`, use [Gdk.ContentProvider.newForValue]
- * or [Gdk.ContentProvider.newForBytes].
+ * To create a `GdkContentProvider`, use [gdk.content_provider.ContentProvider.newForValue]
+ * or [gdk.content_provider.ContentProvider.newForBytes].
  * GDK knows how to handle common text and image formats out-of-the-box. See
- * [Gdk.ContentSerializer] and [Gdk.ContentDeserializer] if you want
+ * [gdk.content_serializer.ContentSerializer] and [gdk.content_deserializer.ContentDeserializer] if you want
  * to add support for application-specific data formats.
  */
 class ContentProvider : ObjectG
@@ -87,7 +87,7 @@ class ContentProvider : ObjectG
    * Gets the contents of provider stored in value.
    * The value will have been initialized to the `GType` the value should be
    * provided in. This given `GType` does not need to be listed in the formats
-   * returned by [Gdk.ContentProvider.refFormats]. However, if the
+   * returned by [gdk.content_provider.ContentProvider.refFormats]. However, if the
    * given `GType` is not supported, this operation can fail and
    * `G_IO_ERROR_NOT_SUPPORTED` will be reported.
    * Params:
@@ -123,7 +123,7 @@ class ContentProvider : ObjectG
    * Gets the formats that the provider suggests other applications to store
    * the data in.
    * An example of such an application would be a clipboard manager.
-   * This can be assumed to be a subset of [Gdk.ContentProvider.refFormats].
+   * This can be assumed to be a subset of [gdk.content_provider.ContentProvider.refFormats].
    * Returns: The storable formats of the provider
    */
   ContentFormats refStorableFormats()
@@ -138,10 +138,10 @@ class ContentProvider : ObjectG
    * Asynchronously writes the contents of provider to stream in the given
    * mime_type.
    * When the operation is finished callback will be called. You must then call
-   * [Gdk.ContentProvider.writeMimeTypeFinish] to get the result
+   * [gdk.content_provider.ContentProvider.writeMimeTypeFinish] to get the result
    * of the operation.
    * The given mime type does not need to be listed in the formats returned by
-   * [Gdk.ContentProvider.refFormats]. However, if the given `GType` is
+   * [gdk.content_provider.ContentProvider.refFormats]. However, if the given `GType` is
    * not supported, `G_IO_ERROR_NOT_SUPPORTED` will be reported.
    * The given stream will not be closed.
    * Params:
@@ -169,7 +169,7 @@ class ContentProvider : ObjectG
 
   /**
    * Finishes an asynchronous write operation.
-   * See [Gdk.ContentProvider.writeMimeTypeAsync].
+   * See [gdk.content_provider.ContentProvider.writeMimeTypeAsync].
    * Params:
    *   result = a `GAsyncResult`
    * Returns: %TRUE if the operation was completed successfully. Otherwise

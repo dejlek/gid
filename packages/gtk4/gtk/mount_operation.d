@@ -1,7 +1,7 @@
 module gtk.mount_operation;
 
 import gdk.display;
-import gid.gid;
+import gid.global;
 import gio.mount_operation : DGioMountOperation = MountOperation;
 import gobject.object;
 import gtk.c.functions;
@@ -16,8 +16,8 @@ import gtk.window;
  * `GtkMountOperation` is needed when mounting volumes:
  * It is an implementation of `GMountOperation` that can be used with
  * GIO functions for mounting volumes such as
- * [Gio.File.mountEnclosingVolume], [Gio.File.mountMountable],
- * [Gio.Volume.mount], [Gio.Mount.unmountWithOperation] and others.
+ * [gio.file.File.mountEnclosingVolume], [gio.file.File.mountMountable],
+ * [gio.volume.Volume.mount], [gio.mount.Mount.unmountWithOperation] and others.
  * When necessary, `GtkMountOperation` shows dialogs to let the user
  * enter passwords, ask questions or show processes blocking unmount.
  */

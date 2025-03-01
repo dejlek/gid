@@ -1,6 +1,6 @@
 module gtk.cell_area_context;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -17,7 +17,7 @@ import gtk.types;
  * request and render groups of data rows. However, it’s important that the
  * same context which was used to request sizes for a given `GtkTreeModel`
  * row also be used for the same row when calling other `GtkCellArea` APIs
- * such as gtk_cell_area_render$(LPAREN)$(RPAREN) and [Gtk.CellArea.event].
+ * such as gtk_cell_area_render$(LPAREN)$(RPAREN) and [gtk.cell_area.CellArea.event].
 
  * Deprecated: This object will be removed in GTK 5
  */
@@ -66,7 +66,7 @@ class CellAreaContext : ObjectG
   /**
    * Fetches the current allocation size for context.
    * If the context was not allocated in width or height, or if the
-   * context was recently reset with [Gtk.CellAreaContext.reset],
+   * context was recently reset with [gtk.cell_area_context.CellAreaContext.reset],
    * the returned value will be -1.
    * Params:
    *   width = location to store the allocated width
@@ -103,7 +103,7 @@ class CellAreaContext : ObjectG
   /**
    * Gets the accumulative preferred height for all rows which have been
    * requested with this context.
-   * After [Gtk.CellAreaContext.reset] is called and/or before ever
+   * After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
    * requesting the size of a `GtkCellArea`, the returned values are 0.
    * Params:
    *   minimumHeight = location to store the minimum height
@@ -119,7 +119,7 @@ class CellAreaContext : ObjectG
   /**
    * Gets the accumulative preferred height for width for all rows
    * which have been requested for the same said width with this context.
-   * After [Gtk.CellAreaContext.reset] is called and/or before ever
+   * After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
    * requesting the size of a `GtkCellArea`, the returned values are -1.
    * Params:
    *   width = a proposed width for allocation
@@ -136,7 +136,7 @@ class CellAreaContext : ObjectG
   /**
    * Gets the accumulative preferred width for all rows which have been
    * requested with this context.
-   * After [Gtk.CellAreaContext.reset] is called and/or before ever
+   * After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
    * requesting the size of a `GtkCellArea`, the returned values are 0.
    * Params:
    *   minimumWidth = location to store the minimum width
@@ -152,7 +152,7 @@ class CellAreaContext : ObjectG
   /**
    * Gets the accumulative preferred width for height for all rows which
    * have been requested for the same said height with this context.
-   * After [Gtk.CellAreaContext.reset] is called and/or before ever
+   * After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
    * requesting the size of a `GtkCellArea`, the returned values are -1.
    * Params:
    *   height = a proposed height for allocation
@@ -172,7 +172,7 @@ class CellAreaContext : ObjectG
    * This is used by `GtkCellAreaContext` implementations during
    * the request process over a series of `GtkTreeModel` rows to
    * progressively push the requested height over a series of
-   * [Gtk.CellArea.getPreferredHeight] requests.
+   * [gtk.cell_area.CellArea.getPreferredHeight] requests.
    * Params:
    *   minimumHeight = the proposed new minimum height for context
    *   naturalHeight = the proposed new natural height for context
@@ -190,7 +190,7 @@ class CellAreaContext : ObjectG
    * This is used by `GtkCellAreaContext` implementations during
    * the request process over a series of `GtkTreeModel` rows to
    * progressively push the requested width over a series of
-   * [Gtk.CellArea.getPreferredWidth] requests.
+   * [gtk.cell_area.CellArea.getPreferredWidth] requests.
    * Params:
    *   minimumWidth = the proposed new minimum width for context
    *   naturalWidth = the proposed new natural width for context
@@ -212,7 +212,7 @@ class CellAreaContext : ObjectG
    * for views rendering large data stores as a measure
    * of optimization$(RPAREN), then only the row that changed
    * or was inserted needs to be $(LPAREN)re$(RPAREN)requested with
-   * [Gtk.CellArea.getPreferredWidth].
+   * [gtk.cell_area.CellArea.getPreferredWidth].
    * When the new overall size of the context requires
    * that the allocated size changes $(LPAREN)or whenever this
    * allocation changes at all$(RPAREN), the variable row
@@ -221,7 +221,7 @@ class CellAreaContext : ObjectG
    * the same width from top to bottom then a change
    * in the allocated width necessitates a recalculation
    * of all the displayed row heights using
-   * [Gtk.CellArea.getPreferredHeightForWidth].
+   * [gtk.cell_area.CellArea.getPreferredHeightForWidth].
 
    * Deprecated: This object will be removed in GTK 5
    */

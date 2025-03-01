@@ -1,6 +1,6 @@
 module gio.themed_icon;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.icon;
@@ -9,7 +9,7 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GThemedIcon` is an implementation of [Gio.Icon] that supports icon
+ * `GThemedIcon` is an implementation of [gio.icon.Icon] that supports icon
  * themes.
  * `GThemedIcon` contains a list of all of the icons present in an icon
  * theme, so that icons can be looked up quickly. `GThemedIcon` does
@@ -105,7 +105,7 @@ class ThemedIcon : ObjectG, Icon
   /**
    * Append a name to the list of icons from within icon.
    * Note that doing so invalidates the hash computed by prior calls
-   * to [Gio.Icon.hash].
+   * to [gio.icon.Icon.hash].
    * Params:
    *   iconname = name of icon to append to list of icons from within icon.
    */
@@ -140,7 +140,7 @@ class ThemedIcon : ObjectG, Icon
   /**
    * Prepend a name to the list of icons from within icon.
    * Note that doing so invalidates the hash computed by prior calls
-   * to [Gio.Icon.hash].
+   * to [gio.icon.Icon.hash].
    * Params:
    *   iconname = name of icon to prepend to list of icons from within icon.
    */

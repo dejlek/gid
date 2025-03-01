@@ -7,7 +7,7 @@ import arrow.execute_context;
 import arrow.function_doc;
 import arrow.function_options;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 import gobject.types;

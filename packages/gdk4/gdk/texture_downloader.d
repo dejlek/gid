@@ -4,14 +4,14 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.texture;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import gobject.boxed;
 import gobject.object;
 
 /**
  * The `GdkTextureDownloader` is used to download the contents of a
- * [Gdk.Texture].
+ * [gdk.texture.Texture].
  * It is intended to be created as a short-term object for a single download,
  * but can be used for multiple downloads of different textures or with different
  * settings.
@@ -74,7 +74,7 @@ class TextureDownloader : Boxed
    * be stored in the stride value.
    * This function will abort if it tries to download a large texture and
    * fails to allocate memory. If you think that may happen, you should handle
-   * memory allocation yourself and use [Gdk.TextureDownloader.downloadInto]
+   * memory allocation yourself and use [gdk.texture_downloader.TextureDownloader.downloadInto]
    * once allocation succeeded.
    * Params:
    *   outStride = The stride of the resulting data in bytes

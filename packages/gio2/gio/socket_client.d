@@ -1,6 +1,6 @@
 module gio.socket_client;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -23,10 +23,10 @@ import gobject.object;
  * a network host using a connection oriented socket type.
  * You create a `GSocketClient` object, set any options you want, and then
  * call a sync or async connect operation, which returns a
- * [Gio.SocketConnection] subclass on success.
- * The type of the [Gio.SocketConnection] object returned depends on the
+ * [gio.socket_connection.SocketConnection] subclass on success.
+ * The type of the [gio.socket_connection.SocketConnection] object returned depends on the
  * type of the underlying socket that is in use. For instance, for a TCP/IP
- * connection it will be a [Gio.TcpConnection].
+ * connection it will be a [gio.tcp_connection.TcpConnection].
  * As `GSocketClient` is a lightweight object, you don't need to cache it. You
  * can just create a new one any time you need one.
  */
@@ -52,7 +52,7 @@ class SocketClient : ObjectG
   /**
    * Creates a new #GSocketClient with the default options.
    * Returns: a #GSocketClient.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   this()
   {
@@ -67,7 +67,7 @@ class SocketClient : ObjectG
    * #GSocketClient will consider this protocol as supported but will
    * not try to find a #GProxy instance to handle handshaking. The
    * application must check for this case by calling
-   * [Gio.SocketConnection.getRemoteAddress] on the returned
+   * [gio.socket_connection.SocketConnection.getRemoteAddress] on the returned
    * #GSocketConnection, and seeing if it's a #GProxyAddress of the
    * appropriate type, to determine whether or not it needs to handle
    * the proxy handshaking itself.
@@ -97,11 +97,11 @@ class SocketClient : ObjectG
    * the underlying socket that is used. For instance, for a TCP/IP connection
    * it will be a #GTcpConnection.
    * The socket created will be the same family as the address that the
-   * connectable resolves to, unless family is set with [Gio.SocketClient.setFamily]
-   * or indirectly via [Gio.SocketClient.setLocalAddress]. The socket type
+   * connectable resolves to, unless family is set with [gio.socket_client.SocketClient.setFamily]
+   * or indirectly via [gio.socket_client.SocketClient.setLocalAddress]. The socket type
    * defaults to %G_SOCKET_TYPE_STREAM but can be set with
-   * [Gio.SocketClient.setSocketType].
-   * If a local address is specified with [Gio.SocketClient.setLocalAddress] the
+   * [gio.socket_client.SocketClient.setSocketType].
+   * If a local address is specified with [gio.socket_client.SocketClient.setLocalAddress] the
    * socket will be bound to this address before connecting.
    * Params:
    *   connectable = a #GSocketConnectable specifying the remote address.
@@ -120,7 +120,7 @@ class SocketClient : ObjectG
   }
 
   /**
-   * This is the asynchronous version of [Gio.SocketClient.connect].
+   * This is the asynchronous version of [gio.socket_client.SocketClient.connect].
    * You may wish to prefer the asynchronous version even in synchronous
    * command line programs because, since 2.60, it implements
    * [RFC 8305](https://tools.ietf.org/html/rfc8305) "Happy Eyeballs"
@@ -130,7 +130,7 @@ class SocketClient : ObjectG
    * synchronous call. $(LPAREN)This is not an API guarantee, and may change in
    * the future.$(RPAREN)
    * When the operation is finished callback will be
-   * called. You can then call [Gio.SocketClient.connectFinish] to get
+   * called. You can then call [gio.socket_client.SocketClient.connectFinish] to get
    * the result of the operation.
    * Params:
    *   connectable = a #GSocketConnectable specifying the remote address.
@@ -153,7 +153,7 @@ class SocketClient : ObjectG
   }
 
   /**
-   * Finishes an async connect operation. See [Gio.SocketClient.connectAsync]
+   * Finishes an async connect operation. See [gio.socket_client.SocketClient.connectAsync]
    * Params:
    *   result = a #GAsyncResult.
    * Returns: a #GSocketConnection on success, %NULL on error.
@@ -170,7 +170,7 @@ class SocketClient : ObjectG
   }
 
   /**
-   * This is a helper function for [Gio.SocketClient.connect].
+   * This is a helper function for [gio.socket_client.SocketClient.connect].
    * Attempts to create a TCP connection to the named host.
    * host_and_port may be in any of a number of recognized formats; an IPv6
    * address, an IPv4 address, or a domain name $(LPAREN)in which case a DNS
@@ -212,9 +212,9 @@ class SocketClient : ObjectG
   }
 
   /**
-   * This is the asynchronous version of [Gio.SocketClient.connectToHost].
+   * This is the asynchronous version of [gio.socket_client.SocketClient.connectToHost].
    * When the operation is finished callback will be
-   * called. You can then call [Gio.SocketClient.connectToHostFinish] to get
+   * called. You can then call [gio.socket_client.SocketClient.connectToHostFinish] to get
    * the result of the operation.
    * Params:
    *   hostAndPort = the name and optionally the port of the host to connect to
@@ -239,7 +239,7 @@ class SocketClient : ObjectG
   }
 
   /**
-   * Finishes an async connect operation. See [Gio.SocketClient.connectToHostAsync]
+   * Finishes an async connect operation. See [gio.socket_client.SocketClient.connectToHostAsync]
    * Params:
    *   result = a #GAsyncResult.
    * Returns: a #GSocketConnection on success, %NULL on error.
@@ -288,7 +288,7 @@ class SocketClient : ObjectG
 
   /**
    * This is the asynchronous version of
-   * [Gio.SocketClient.connectToService].
+   * [gio.socket_client.SocketClient.connectToService].
    * Params:
    *   domain = a domain name
    *   service = the name of the service to connect to
@@ -313,7 +313,7 @@ class SocketClient : ObjectG
   }
 
   /**
-   * Finishes an async connect operation. See [Gio.SocketClient.connectToServiceAsync]
+   * Finishes an async connect operation. See [gio.socket_client.SocketClient.connectToServiceAsync]
    * Params:
    *   result = a #GAsyncResult.
    * Returns: a #GSocketConnection on success, %NULL on error.
@@ -330,15 +330,15 @@ class SocketClient : ObjectG
   }
 
   /**
-   * This is a helper function for [Gio.SocketClient.connect].
+   * This is a helper function for [gio.socket_client.SocketClient.connect].
    * Attempts to create a TCP connection with a network URI.
    * uri may be any valid URI containing an "authority" $(LPAREN)hostname/port$(RPAREN)
    * component. If a port is not specified in the URI, default_port
    * will be used. TLS will be negotiated if #GSocketClient:tls is %TRUE.
    * $(LPAREN)#GSocketClient does not know to automatically assume TLS for
    * certain URI schemes.$(RPAREN)
-   * Using this rather than [Gio.SocketClient.connect] or
-   * [Gio.SocketClient.connectToHost] allows #GSocketClient to
+   * Using this rather than [gio.socket_client.SocketClient.connect] or
+   * [gio.socket_client.SocketClient.connectToHost] allows #GSocketClient to
    * determine when to use application-specific proxy protocols.
    * Upon a successful connection, a new #GSocketConnection is constructed
    * and returned.  The caller owns this new object and must drop their
@@ -365,9 +365,9 @@ class SocketClient : ObjectG
   }
 
   /**
-   * This is the asynchronous version of [Gio.SocketClient.connectToUri].
+   * This is the asynchronous version of [gio.socket_client.SocketClient.connectToUri].
    * When the operation is finished callback will be
-   * called. You can then call [Gio.SocketClient.connectToUriFinish] to get
+   * called. You can then call [gio.socket_client.SocketClient.connectToUriFinish] to get
    * the result of the operation.
    * Params:
    *   uri = a network uri
@@ -392,7 +392,7 @@ class SocketClient : ObjectG
   }
 
   /**
-   * Finishes an async connect operation. See [Gio.SocketClient.connectToUriAsync]
+   * Finishes an async connect operation. See [gio.socket_client.SocketClient.connectToUriAsync]
    * Params:
    *   result = a #GAsyncResult.
    * Returns: a #GSocketConnection on success, %NULL on error.
@@ -409,7 +409,7 @@ class SocketClient : ObjectG
   }
 
   /**
-   * Gets the proxy enable state; see [Gio.SocketClient.setEnableProxy]
+   * Gets the proxy enable state; see [gio.socket_client.SocketClient.setEnableProxy]
    * Returns: whether proxying is enabled
    */
   bool getEnableProxy()
@@ -421,7 +421,7 @@ class SocketClient : ObjectG
 
   /**
    * Gets the socket family of the socket client.
-   * See [Gio.SocketClient.setFamily] for details.
+   * See [gio.socket_client.SocketClient.setFamily] for details.
    * Returns: a #GSocketFamily
    */
   SocketFamily getFamily()
@@ -434,7 +434,7 @@ class SocketClient : ObjectG
 
   /**
    * Gets the local address of the socket client.
-   * See [Gio.SocketClient.setLocalAddress] for details.
+   * See [gio.socket_client.SocketClient.setLocalAddress] for details.
    * Returns: a #GSocketAddress or %NULL. Do not free.
    */
   SocketAddress getLocalAddress()
@@ -447,7 +447,7 @@ class SocketClient : ObjectG
 
   /**
    * Gets the protocol name type of the socket client.
-   * See [Gio.SocketClient.setProtocol] for details.
+   * See [gio.socket_client.SocketClient.setProtocol] for details.
    * Returns: a #GSocketProtocol
    */
   SocketProtocol getProtocol()
@@ -460,8 +460,8 @@ class SocketClient : ObjectG
 
   /**
    * Gets the #GProxyResolver being used by client. Normally, this will
-   * be the resolver returned by [Gio.ProxyResolver.getDefault], but you
-   * can override it with [Gio.SocketClient.setProxyResolver].
+   * be the resolver returned by [gio.proxy_resolver.ProxyResolver.getDefault], but you
+   * can override it with [gio.socket_client.SocketClient.setProxyResolver].
    * Returns: The #GProxyResolver being used by
    *   client.
    */
@@ -475,7 +475,7 @@ class SocketClient : ObjectG
 
   /**
    * Gets the socket type of the socket client.
-   * See [Gio.SocketClient.setSocketType] for details.
+   * See [gio.socket_client.SocketClient.setSocketType] for details.
    * Returns: a #GSocketFamily
    */
   SocketType getSocketType()
@@ -488,7 +488,7 @@ class SocketClient : ObjectG
 
   /**
    * Gets the I/O timeout time for sockets created by client.
-   * See [Gio.SocketClient.setTimeout] for details.
+   * See [gio.socket_client.SocketClient.setTimeout] for details.
    * Returns: the timeout in seconds
    */
   uint getTimeout()
@@ -500,7 +500,7 @@ class SocketClient : ObjectG
 
   /**
    * Gets whether client creates TLS connections. See
-   * [Gio.SocketClient.setTls] for details.
+   * [gio.socket_client.SocketClient.setTls] for details.
    * Returns: whether client uses TLS
    */
   bool getTls()
@@ -533,7 +533,7 @@ class SocketClient : ObjectG
    * proxy server. When enabled $(LPAREN)the default$(RPAREN), #GSocketClient will use a
    * #GProxyResolver to determine if a proxy protocol such as SOCKS is
    * needed, and automatically do the necessary proxy negotiation.
-   * See also [Gio.SocketClient.setProxyResolver].
+   * See also [gio.socket_client.SocketClient.setProxyResolver].
    * Params:
    *   enable = whether to enable proxies
    */
@@ -621,7 +621,7 @@ class SocketClient : ObjectG
    * Sets the I/O timeout for sockets created by client. timeout is a
    * time in seconds, or 0 for no timeout $(LPAREN)the default$(RPAREN).
    * The timeout value affects the initial connection attempt as well,
-   * so setting this may cause calls to [Gio.SocketClient.connect], etc,
+   * so setting this may cause calls to [gio.socket_client.SocketClient.connect], etc,
    * to fail with %G_IO_ERROR_TIMED_OUT.
    * Params:
    *   timeout = the timeout
@@ -639,7 +639,7 @@ class SocketClient : ObjectG
    * but #GTlsClientConnection is not a #GSocketConnection, this
    * actually wraps the resulting #GTlsClientConnection in a
    * #GTcpWrapperConnection when returning it. You can use
-   * [Gio.TcpWrapperConnection.getBaseIoStream] on the return value
+   * [gio.tcp_wrapper_connection.TcpWrapperConnection.getBaseIoStream] on the return value
    * to extract the #GTlsClientConnection.
    * If you need to modify the behavior of the TLS handshake $(LPAREN)eg, by
    * setting a client-side certificate to use, or connecting to the
@@ -685,7 +685,7 @@ class SocketClient : ObjectG
    * to a remote host; either a proxy server or the destination server
    * itself. connection is the #GSocketConnection, which is not yet
    * connected.  Since GLib 2.40, you can access the remote
-   * address via [Gio.SocketConnection.getRemoteAddress].
+   * address via [gio.socket_connection.SocketConnection.getRemoteAddress].
    * - %G_SOCKET_CLIENT_CONNECTED: client has successfully connected
    * to a remote host. connection is the connected #GSocketConnection.
    * - %G_SOCKET_CLIENT_PROXY_NEGOTIATING: client is about to negotiate
@@ -693,7 +693,7 @@ class SocketClient : ObjectG
    * the #GSocketConnection to the proxy server.
    * - %G_SOCKET_CLIENT_PROXY_NEGOTIATED: client has negotiated a
    * connection to connectable through a proxy server. connection is
-   * the stream returned from [Gio.Proxy.connect], which may or may not
+   * the stream returned from [gio.proxy.Proxy.connect], which may or may not
    * be a #GSocketConnection.
    * - %G_SOCKET_CLIENT_TLS_HANDSHAKING: client is about to begin a TLS
    * handshake. connection is a #GTlsClientConnection.

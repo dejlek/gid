@@ -1,7 +1,7 @@
 module gio.dbus_interface;
 
 public import gio.dbus_interface_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_interface_info;
@@ -13,8 +13,8 @@ import gobject.object;
 /**
  * Base type for D-Bus interfaces.
  * The `GDBusInterface` type is the base type for D-Bus interfaces both
- * on the service side $(LPAREN)see [Gio.DBusInterfaceSkeleton]$(RPAREN) and client side
- * $(LPAREN)see [Gio.DBusProxy]$(RPAREN).
+ * on the service side $(LPAREN)see [gio.dbus_interface_skeleton.DBusInterfaceSkeleton]$(RPAREN) and client side
+ * $(LPAREN)see [gio.dbus_proxy.DBusProxy]$(RPAREN).
  */
 interface DBusInterface
 {
@@ -28,7 +28,7 @@ interface DBusInterface
   /**
    * Gets the #GDBusObject that interface_ belongs to, if any.
    * Returns: A #GDBusObject or %NULL. The returned
-   *   reference should be freed with [GObject.ObjectG.unref].
+   *   reference should be freed with [gobject.object.ObjectG.unref].
    */
   DBusObject getObject();
 

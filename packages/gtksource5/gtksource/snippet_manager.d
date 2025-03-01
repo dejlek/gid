@@ -1,6 +1,6 @@
 module gtksource.snippet_manager;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -13,9 +13,9 @@ import gtksource.types;
  * Provides access to class@Snippet.
  * `GtkSourceSnippetManager` is an object which processes snippet description
  * files and creates class@Snippet objects.
- * Use [GtkSource.SnippetManager.getDefault] to retrieve the default
+ * Use [gtksource.snippet_manager.SnippetManager.getDefault] to retrieve the default
  * instance of `GtkSourceSnippetManager`.
- * Use [GtkSource.SnippetManager.getSnippet] to retrieve snippets for
+ * Use [gtksource.snippet_manager.SnippetManager.getSnippet] to retrieve snippets for
  * a given snippets.
  */
 class SnippetManager : ObjectG
@@ -97,10 +97,10 @@ class SnippetManager : ObjectG
   }
 
   /**
-   * Gets a [Gio.ListModel] of all snippets.
+   * Gets a [gio.list_model.ListModel] of all snippets.
    * This can be used to get an unfiltered list of all of the snippets
    * known to the snippet manager.
-   * Returns: a [Gio.ListModel] of [GtkSource.Snippet]
+   * Returns: a [gio.list_model.ListModel] of [gtksource.snippet.Snippet]
    */
   ListModel listAll()
   {
@@ -112,9 +112,9 @@ class SnippetManager : ObjectG
 
   /**
    * List all the known groups within the snippet manager.
-   * The result should be freed with [GLib.Global.gfree], and the individual strings are
+   * The result should be freed with [glib.global.gfree], and the individual strings are
    * owned by self and should never be freed by the caller.
-   * Returns: An array of strings which should be freed with [GLib.Global.gfree].
+   * Returns: An array of strings which should be freed with [glib.global.gfree].
    */
   string[] listGroups()
   {
@@ -138,9 +138,9 @@ class SnippetManager : ObjectG
    * Queries the known snippets for those matching group, language_id, and/or
    * trigger_prefix.
    * If any of these are %NULL, they will be ignored when filtering the available snippets.
-   * The [Gio.ListModel] only contains information about the available snippets until
-   * [Gio.ListModel.getItem] is called for a specific snippet. This helps reduce
-   * the number of [GObject.ObjectG]'s that are created at runtime to those needed by
+   * The [gio.list_model.ListModel] only contains information about the available snippets until
+   * [gio.list_model.ListModel.getItem] is called for a specific snippet. This helps reduce
+   * the number of [gobject.object.ObjectG]'s that are created at runtime to those needed by
    * the calling application.
    * Params:
    *   group = a group name or %NULL

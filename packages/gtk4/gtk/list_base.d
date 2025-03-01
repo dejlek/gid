@@ -1,6 +1,6 @@
 module gtk.list_base;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;

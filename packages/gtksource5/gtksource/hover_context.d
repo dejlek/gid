@@ -1,6 +1,6 @@
 module gtksource.hover_context;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.text_iter;
 import gtksource.buffer;
@@ -14,9 +14,9 @@ import gtksource.view;
  * `GtkSourceHoverContext` contains information about the request to populate
  * contents for a class@HoverDisplay.
  * It can be used to retrieve the class@View, class@Buffer, and
- * [Gtk.TextIter] for the regions of text which are being displayed.
- * Use [GtkSource.HoverContext.getBounds] to get the word that was
- * requested. [GtkSource.HoverContext.getIter] will get you the location
+ * [gtk.text_iter.TextIter] for the regions of text which are being displayed.
+ * Use [gtksource.hover_context.HoverContext.getBounds] to get the word that was
+ * requested. [gtksource.hover_context.HoverContext.getIter] will get you the location
  * of the pointer when the request was made.
  */
 class HoverContext : ObjectG

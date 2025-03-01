@@ -6,7 +6,7 @@ import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.texture;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gio.icon;
 import gio.icon_mixin;
 import gio.loadable_icon;
@@ -15,7 +15,7 @@ import gio.loadable_icon_mixin;
 /**
  * A `GdkTexture` representing a DMA buffer.
  * To create a `GdkDmabufTexture`, use the auxiliary
- * [Gdk.DmabufTextureBuilder] object.
+ * [gdk.dmabuf_texture_builder.DmabufTextureBuilder] object.
  * Dma-buf textures can only be created on Linux.
  */
 class DmabufTexture : Texture

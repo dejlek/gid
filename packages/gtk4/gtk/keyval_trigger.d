@@ -1,7 +1,7 @@
 module gtk.keyval_trigger;
 
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.shortcut_trigger;

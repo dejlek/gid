@@ -1,6 +1,6 @@
 module glib.static_rwlock;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -54,10 +54,10 @@ import glib.types;
  * Even though #GStaticRWLock is not opaque, it should only be used
  * with the following functions.
  * All of the g_static_rw_lock_* functions can be used even if
- * [GLib.Thread.init_] has not been called. Then they do nothing, apart
+ * [glib.thread.Thread.init_] has not been called. Then they do nothing, apart
  * from g_static_rw_lock_*_trylock, which does nothing but returning %TRUE.
  * A read-write lock has a higher overhead than a mutex. For example, both
- * [GLib.StaticRWLock.readerLock] and [GLib.StaticRWLock.readerUnlock] have
+ * [glib.static_rwlock.StaticRWLock.readerLock] and [glib.static_rwlock.StaticRWLock.readerUnlock] have
  * to lock and unlock a #GStaticMutex, so it takes at least twice the time
  * to lock and unlock a #GStaticRWLock that it does to lock and unlock a
  * #GStaticMutex. So only data structures that are accessed by multiple

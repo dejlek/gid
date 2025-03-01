@@ -9,7 +9,7 @@ import gdk.event_sequence;
 import gdk.seat;
 import gdk.surface;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**
@@ -50,8 +50,8 @@ class Event
 
   /**
    * Extracts all axis values from an event.
-   * To find out which axes are used, use [Gdk.DeviceTool.getAxes]
-   * on the device tool returned by [Gdk.Event.getDeviceTool].
+   * To find out which axes are used, use [gdk.device_tool.DeviceTool.getAxes]
+   * on the device tool returned by [gdk.event.Event.getDeviceTool].
    * Params:
    *   axes = the array of values for all axes
    * Returns: %TRUE on success, otherwise %FALSE
@@ -70,8 +70,8 @@ class Event
   /**
    * Extract the axis value for a particular axis use from
    * an event structure.
-   * To find out which axes are used, use [Gdk.DeviceTool.getAxes]
-   * on the device tool returned by [Gdk.Event.getDeviceTool].
+   * To find out which axes are used, use [gdk.device_tool.DeviceTool.getAxes]
+   * on the device tool returned by [gdk.event.Event.getDeviceTool].
    * Params:
    *   axisUse = the axis use to look for
    *   value = location to store the value found
@@ -104,7 +104,7 @@ class Event
    * return %NULL.
    * Note: the `GdkDeviceTool` will be constant during
    * the application lifetime, if settings must be stored
-   * persistently across runs, see [Gdk.DeviceTool.getSerial].
+   * persistently across runs, see [gdk.device_tool.DeviceTool.getSerial].
    * Returns: The current device tool
    */
   DeviceTool getDeviceTool()

@@ -1,6 +1,6 @@
 module gtk.column_view_column;
 
-import gid.gid;
+import gid.global;
 import gio.menu_model;
 import gobject.object;
 import gtk.c.functions;
@@ -16,9 +16,9 @@ import gtk.types;
  * that tells the columnview how to create cells for this column from items in
  * the model.
  * Columns have a title, and can optionally have a header menu set
- * with [Gtk.ColumnViewColumn.setHeaderMenu].
+ * with [gtk.column_view_column.ColumnViewColumn.setHeaderMenu].
  * A sorter can be associated with a column using
- * [Gtk.ColumnViewColumn.setSorter], to let users influence sorting
+ * [gtk.column_view_column.ColumnViewColumn.setSorter], to let users influence sorting
  * by clicking on the column header.
  */
 class ColumnViewColumn : ObjectG
@@ -43,7 +43,7 @@ class ColumnViewColumn : ObjectG
   /**
    * Creates a new `GtkColumnViewColumn` that uses the given factory for
    * mapping items to widgets.
-   * You most likely want to call [Gtk.ColumnView.appendColumn] next.
+   * You most likely want to call [gtk.column_view.ColumnView.appendColumn] next.
    * The function takes ownership of the argument, so you can write code like:
    * ```c
    * column \= gtk_column_view_column_new $(LPAREN)_$(LPAREN)"Name"$(RPAREN),
@@ -124,7 +124,7 @@ class ColumnViewColumn : ObjectG
   }
 
   /**
-   * Returns the ID set with [Gtk.ColumnViewColumn.setId].
+   * Returns the ID set with [gtk.column_view_column.ColumnViewColumn.setId].
    * Returns: The column's ID
    */
   string getId()
@@ -159,7 +159,7 @@ class ColumnViewColumn : ObjectG
   }
 
   /**
-   * Returns the title set with [Gtk.ColumnViewColumn.setTitle].
+   * Returns the title set with [gtk.column_view_column.ColumnViewColumn.setTitle].
    * Returns: The column's title
    */
   string getTitle()
@@ -257,9 +257,9 @@ class ColumnViewColumn : ObjectG
    * If sorter is %NULL, the column will not let users change
    * the sorting by clicking on its header.
    * This sorter can be made active by clicking on the column
-   * header, or by calling [Gtk.ColumnView.sortByColumn].
-   * See [Gtk.ColumnView.getSorter] for the necessary steps
-   * for setting up customizable sorting for [Gtk.ColumnView].
+   * header, or by calling [gtk.column_view.ColumnView.sortByColumn].
+   * See [gtk.column_view.ColumnView.getSorter] for the necessary steps
+   * for setting up customizable sorting for [gtk.column_view.ColumnView].
    * Params:
    *   sorter = the `GtkSorter` to associate with column
    */

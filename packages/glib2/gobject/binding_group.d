@@ -1,6 +1,6 @@
 module gobject.binding_group;
 
-import gid.gid;
+import gid.global;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.closure;
@@ -13,7 +13,7 @@ import gobject.types;
  * Use the various methods to bind properties from a single source
  * object to multiple destination objects. Properties can be bound
  * bidirectionally and are connected when the source object is set
- * with [GObject.BindingGroup.setSource].
+ * with [gobject.binding_group.BindingGroup.setSource].
  */
 class BindingGroup : ObjectG
 {
@@ -50,7 +50,7 @@ class BindingGroup : ObjectG
    * and target_property on target. Whenever the source_property
    * is changed the target_property is updated using the same value.
    * The binding flag %G_BINDING_SYNC_CREATE is automatically specified.
-   * See [GObject.ObjectG.bindProperty] for more information.
+   * See [gobject.object.ObjectG.bindProperty] for more information.
    * Params:
    *   sourceProperty = the property on the source to bind
    *   target = the target #GObject
@@ -72,7 +72,7 @@ class BindingGroup : ObjectG
    * This function is the language bindings friendly version of
    * g_binding_group_bind_property_full$(LPAREN)$(RPAREN), using #GClosures
    * instead of function pointers.
-   * See [GObject.ObjectG.bindPropertyWithClosures] for more information.
+   * See [gobject.object.ObjectG.bindPropertyWithClosures] for more information.
    * Params:
    *   sourceProperty = the property on the source to bind
    *   target = the target #GObject

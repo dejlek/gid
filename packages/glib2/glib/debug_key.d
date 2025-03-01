@@ -1,13 +1,13 @@
 module glib.debug_key;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
 
 /**
  * Associates a string with a bit flag.
- * Used in [GLib.Global.parseDebugString].
+ * Used in [glib.global.parseDebugString].
  */
 class DebugKey
 {

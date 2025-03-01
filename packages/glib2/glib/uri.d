@@ -1,6 +1,6 @@
 module glib.uri;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
@@ -12,9 +12,9 @@ import gobject.boxed;
  * The `GUri` type and related functions can be used to parse URIs into
  * their components, and build valid URIs from individual components.
  * Since `GUri` only represents absolute URIs, all `GUri`s will have a
- * URI scheme, so [GLib.Uri.getScheme] will always return a non-`NULL`
+ * URI scheme, so [glib.uri.Uri.getScheme] will always return a non-`NULL`
  * answer. Likewise, by definition, all URIs have a path component, so
- * [GLib.Uri.getPath] will always return a non-`NULL` string $(LPAREN)which may
+ * [glib.uri.Uri.getPath] will always return a non-`NULL` string $(LPAREN)which may
  * be empty$(RPAREN).
  * If the URI string has an
  * [‘authority’ component](https://tools.ietf.org/html/rfc3986#section-3) $(LPAREN)that
@@ -50,7 +50,7 @@ import gobject.boxed;
  * You should pass `G_URI_FLAGS_ENCODED` or `G_URI_FLAGS_ENCODED_QUERY` if you
  * need to handle that case manually. In particular, if the query string
  * contains `\=` characters that are `%`-encoded, you should let
- * [GLib.Uri.parseParams] do the decoding once of the query.
+ * [glib.uri.Uri.parseParams] do the decoding once of the query.
  * `GUri` is immutable once constructed, and can safely be accessed from
  * multiple threads. Its reference counting is atomic.
  * Note that the scope of `GUri` is to help manipulate URIs in various applications,
@@ -77,48 +77,48 @@ import gobject.boxed;
  * `/?query#fragment` or `//example.com`.
  * Absolute URIs have a scheme specified. Any other components of the URI which
  * are missing are specified as explicitly unset in the URI, rather than being
- * resolved relative to a base URI using [GLib.Uri.parseRelative].
+ * resolved relative to a base URI using [glib.uri.Uri.parseRelative].
  * For example, a valid absolute URI is `file:///home/bob` or
  * `https://search.com?query\=string`.
  * A `GUri` instance is always an absolute URI. A string may be an absolute URI
  * or a relative reference; see the documentation for individual functions as to
  * what forms they accept.
  * ## Parsing URIs
- * The most minimalist APIs for parsing URIs are [GLib.Uri.split] and
- * [GLib.Uri.splitWithUser]. These split a URI into its component
+ * The most minimalist APIs for parsing URIs are [glib.uri.Uri.split] and
+ * [glib.uri.Uri.splitWithUser]. These split a URI into its component
  * parts, and return the parts; the difference between the two is that
- * [GLib.Uri.split] treats the ‘userinfo’ component of the URI as a
- * single element, while [GLib.Uri.splitWithUser] can $(LPAREN)depending on the
- * [GLib.UriFlags] you pass$(RPAREN) treat it as containing a username, password,
- * and authentication parameters. Alternatively, [GLib.Uri.splitNetwork]
+ * [glib.uri.Uri.split] treats the ‘userinfo’ component of the URI as a
+ * single element, while [glib.uri.Uri.splitWithUser] can $(LPAREN)depending on the
+ * [glib.UriFlags] you pass$(RPAREN) treat it as containing a username, password,
+ * and authentication parameters. Alternatively, [glib.uri.Uri.splitNetwork]
  * can be used when you are only interested in the components that are
  * needed to initiate a network connection to the service $(LPAREN)scheme,
  * host, and port$(RPAREN).
- * [GLib.Uri.parse] is similar to [GLib.Uri.split], but instead of
+ * [glib.uri.Uri.parse] is similar to [glib.uri.Uri.split], but instead of
  * returning individual strings, it returns a `GUri` structure $(LPAREN)and it requires
  * that the URI be an absolute URI$(RPAREN).
- * [GLib.Uri.resolveRelative] and [GLib.Uri.parseRelative] allow
+ * [glib.uri.Uri.resolveRelative] and [glib.uri.Uri.parseRelative] allow
  * you to resolve a relative URI relative to a base URI.
- * [GLib.Uri.resolveRelative] takes two strings and returns a string,
- * and [GLib.Uri.parseRelative] takes a `GUri` and a string and returns a
+ * [glib.uri.Uri.resolveRelative] takes two strings and returns a string,
+ * and [glib.uri.Uri.parseRelative] takes a `GUri` and a string and returns a
  * `GUri`.
- * All of the parsing functions take a [GLib.UriFlags] argument describing
+ * All of the parsing functions take a [glib.UriFlags] argument describing
  * exactly how to parse the URI; see the documentation for that type
  * for more details on the specific flags that you can pass. If you
  * need to choose different flags based on the type of URI, you can
- * use [GLib.Uri.peekScheme] on the URI string to check the scheme
+ * use [glib.uri.Uri.peekScheme] on the URI string to check the scheme
  * first, and use that to decide what flags to parse it with.
  * For example, you might want to use `G_URI_PARAMS_WWW_FORM` when parsing the
- * params for a web URI, so compare the result of [GLib.Uri.peekScheme]
+ * params for a web URI, so compare the result of [glib.uri.Uri.peekScheme]
  * against `http` and `https`.
  * ## Building URIs
- * [GLib.Uri.join] and [GLib.Uri.joinWithUser] can be used to construct
+ * [glib.uri.Uri.join] and [glib.uri.Uri.joinWithUser] can be used to construct
  * valid URI strings from a set of component strings. They are the
- * inverse of [GLib.Uri.split] and [GLib.Uri.splitWithUser].
- * Similarly, [GLib.Uri.build] and [GLib.Uri.buildWithUser] can be
+ * inverse of [glib.uri.Uri.split] and [glib.uri.Uri.splitWithUser].
+ * Similarly, [glib.uri.Uri.build] and [glib.uri.Uri.buildWithUser] can be
  * used to construct a `GUri` from a set of component strings.
  * As with the parsing functions, the building functions take a
- * [GLib.UriFlags] argument. In particular, it is important to keep in mind
+ * [glib.UriFlags] argument. In particular, it is important to keep in mind
  * whether the URI components you are using are already `%`-encoded. If so,
  * you must pass the `G_URI_FLAGS_ENCODED` flag.
  * ## `file://` URIs
@@ -132,7 +132,7 @@ import gobject.boxed;
  * Note that there is no `g_uri_equal $(LPAREN)$(RPAREN)` function, because comparing
  * URIs usefully requires scheme-specific knowledge that `GUri` does
  * not have. `GUri` can help with normalization if you use the various
- * encoded [GLib.UriFlags] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
+ * encoded [glib.UriFlags] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
  * however it is not comprehensive.
  * For example, `data:,foo` and `data:;base64,Zm9v` resolve to the same
  * thing according to the `data:` URI specification which GLib does not
@@ -167,7 +167,7 @@ class Uri : Boxed
    * `%`-encoding, depending on the flags with which uri was created.
    * $(LPAREN)If uri was not created with %G_URI_FLAGS_HAS_AUTH_PARAMS then this will
    * be %NULL.$(RPAREN)
-   * Depending on the URI scheme, [GLib.Uri.parseParams] may be useful for
+   * Depending on the URI scheme, [glib.uri.Uri.parseParams] may be useful for
    * further parsing this information.
    * Returns: uri's authentication parameters.
    */
@@ -265,7 +265,7 @@ class Uri : Boxed
    * Gets uri's query, which may contain `%`-encoding, depending on the
    * flags with which uri was created.
    * For queries consisting of a series of `name\=value` parameters,
-   * #GUriParamsIter or [GLib.Uri.parseParams] may be useful.
+   * #GUriParamsIter or [glib.uri.Uri.parseParams] may be useful.
    * Returns: uri's query.
    */
   string getQuery()
@@ -293,7 +293,7 @@ class Uri : Boxed
    * Gets the ‘username’ component of uri's userinfo, which may contain
    * `%`-encoding, depending on the flags with which uri was created.
    * If uri was not created with %G_URI_FLAGS_HAS_PASSWORD or
-   * %G_URI_FLAGS_HAS_AUTH_PARAMS, this is the same as [GLib.Uri.getUserinfo].
+   * %G_URI_FLAGS_HAS_AUTH_PARAMS, this is the same as [glib.uri.Uri.getUserinfo].
    * Returns: uri's user.
    */
   string getUser()
@@ -344,12 +344,12 @@ class Uri : Boxed
    * This is not guaranteed to return a string which is identical to the
    * string that uri was parsed from. However, if the source URI was
    * syntactically correct $(LPAREN)according to RFC 3986$(RPAREN), and it was parsed
-   * with %G_URI_FLAGS_ENCODED, then [GLib.Uri.toString_] is guaranteed to return
+   * with %G_URI_FLAGS_ENCODED, then [glib.uri.Uri.toString_] is guaranteed to return
    * a string which is at least semantically equivalent to the source
    * URI $(LPAREN)according to RFC 3986$(RPAREN).
    * If uri might contain sensitive details, such as authentication parameters,
    * or private data in its query string, and the returned string is going to be
-   * logged, then consider using [GLib.Uri.toStringPartial] to redact parts.
+   * logged, then consider using [glib.uri.Uri.toStringPartial] to redact parts.
    * Returns: a string representing uri,
    *   which the caller must free.
    */
@@ -363,7 +363,7 @@ class Uri : Boxed
 
   /**
    * Returns a string representing uri, subject to the options in
-   * flags. See [GLib.Uri.toString_] and #GUriHideFlags for more details.
+   * flags. See [glib.uri.Uri.toString_] and #GUriHideFlags for more details.
    * Params:
    *   flags = flags describing what parts of uri to hide
    * Returns: a string representing
@@ -379,7 +379,7 @@ class Uri : Boxed
 
   /**
    * Creates a new #GUri from the given components according to flags.
-   * See also [GLib.Uri.buildWithUser], which allows specifying the
+   * See also [glib.uri.Uri.buildWithUser], which allows specifying the
    * components of the "userinfo" separately.
    * Params:
    *   flags = flags describing how to build the #GUri
@@ -411,7 +411,7 @@ class Uri : Boxed
    * $(LPAREN)%G_URI_FLAGS_HAS_PASSWORD is added unconditionally$(RPAREN). The flags must be
    * coherent with the passed values, in particular use `%`-encoded values with
    * %G_URI_FLAGS_ENCODED.
-   * In contrast to [GLib.Uri.build], this allows specifying the components
+   * In contrast to [glib.uri.Uri.build], this allows specifying the components
    * of the ‘userinfo’ field separately. Note that user must be non-%NULL
    * if either password or auth_params is non-%NULL.
    * Params:
@@ -510,9 +510,9 @@ class Uri : Boxed
   /**
    * Parses uri_string according to flags, to determine whether it is a valid
    * [absolute URI](#relative-and-absolute-uris), i.e. it does not need to be resolved
-   * relative to another URI using [GLib.Uri.parseRelative].
+   * relative to another URI using [glib.uri.Uri.parseRelative].
    * If it’s not a valid URI, an error is returned explaining how it’s invalid.
-   * See [GLib.Uri.split], and the definition of #GUriFlags, for more
+   * See [glib.uri.Uri.split], and the definition of #GUriFlags, for more
    * information on the effect of flags.
    * Params:
    *   uriString = a string containing an absolute URI
@@ -538,7 +538,7 @@ class Uri : Boxed
    * character. When host is not present, path cannot begin with two slash
    * characters $(LPAREN)`//`$(RPAREN). See
    * [RFC 3986, section 3](https://tools.ietf.org/html/rfc3986#section-3).
-   * See also [GLib.Uri.joinWithUser], which allows specifying the
+   * See also [glib.uri.Uri.joinWithUser], which allows specifying the
    * components of the ‘userinfo’ separately.
    * %G_URI_FLAGS_HAS_PASSWORD and %G_URI_FLAGS_HAS_AUTH_PARAMS are ignored if set
    * in flags.
@@ -571,7 +571,7 @@ class Uri : Boxed
    * Joins the given components together according to flags to create
    * an absolute URI string. path may not be %NULL $(LPAREN)though it may be the empty
    * string$(RPAREN).
-   * In contrast to [GLib.Uri.join], this allows specifying the components
+   * In contrast to [glib.uri.Uri.join], this allows specifying the components
    * of the ‘userinfo’ separately. It otherwise behaves the same.
    * %G_URI_FLAGS_HAS_PASSWORD and %G_URI_FLAGS_HAS_AUTH_PARAMS are ignored if set
    * in flags.
@@ -614,7 +614,7 @@ class Uri : Boxed
    *   uriList = an URI list
    * Returns: a newly allocated %NULL-terminated list
    *   of strings holding the individual URIs. The array should be freed
-   *   with [GLib.Global.strfreev].
+   *   with [glib.global.strfreev].
    */
   static string[] listExtractUris(string uriList)
   {
@@ -666,11 +666,11 @@ class Uri : Boxed
    * values will be fully decoded. $(LPAREN)Thus it is possible that the returned values
    * may contain `\=` or separators, if the value was encoded in the input.$(RPAREN)
    * Invalid `%`-encoding is treated as with the %G_URI_FLAGS_PARSE_RELAXED
-   * rules for [GLib.Uri.parse]. $(LPAREN)However, if params is the path or query string
+   * rules for [glib.uri.Uri.parse]. $(LPAREN)However, if params is the path or query string
    * from a #GUri that was parsed without %G_URI_FLAGS_PARSE_RELAXED and
    * %G_URI_FLAGS_ENCODED, then you already know that it does not contain any
    * invalid encoding.$(RPAREN)
-   * %G_URI_PARAMS_WWW_FORM is handled as documented for [GLib.UriParamsIter.init_].
+   * %G_URI_PARAMS_WWW_FORM is handled as documented for [glib.uri_params_iter.UriParamsIter.init_].
    * If %G_URI_PARAMS_CASE_INSENSITIVE is passed to flags, attributes will be
    * compared case-insensitively, so a params string `attr\=123&Attr\=456` will only
    * return a single attribute–value pair, `Attr\=456`. Case will be preserved in
@@ -733,13 +733,13 @@ class Uri : Boxed
    * URI \= scheme ":" hier-part [ "?" query ] [ "#" fragment ]
    * ]|
    * Common schemes include `file`, `https`, `svn+ssh`, etc.
-   * Unlike [GLib.Uri.parseScheme], the returned scheme is normalized to
+   * Unlike [glib.uri.Uri.parseScheme], the returned scheme is normalized to
    * all-lowercase and does not need to be freed.
    * Params:
    *   uri = a valid URI.
    * Returns: The ‘scheme’ component of the URI, or
    *   %NULL on error. The returned string is normalized to all-lowercase, and
-   *   interned via [GLib.Global.internString], so it does not need to be freed.
+   *   interned via [glib.global.internString], so it does not need to be freed.
    */
   static string peekScheme(string uri)
   {
@@ -789,9 +789,9 @@ class Uri : Boxed
    * only work if the URI components are ASCII or UTF-8, so you will
    * need to use %G_URI_FLAGS_ENCODED if they are not.
    * Note that the %G_URI_FLAGS_HAS_PASSWORD and
-   * %G_URI_FLAGS_HAS_AUTH_PARAMS flags are ignored by [GLib.Uri.split],
+   * %G_URI_FLAGS_HAS_AUTH_PARAMS flags are ignored by [glib.uri.Uri.split],
    * since it always returns only the full userinfo; use
-   * [GLib.Uri.splitWithUser] if you want it split up.
+   * [glib.uri.Uri.splitWithUser] if you want it split up.
    * Params:
    *   uriRef = a string containing a relative or absolute URI
    *   flags = flags for parsing uri_ref
@@ -838,7 +838,7 @@ class Uri : Boxed
   /**
    * Parses uri_string $(LPAREN)which must be an [absolute URI](#relative-and-absolute-uris)$(RPAREN)
    * according to flags, and returns the pieces relevant to connecting to a host.
-   * See the documentation for [GLib.Uri.split] for more details; this is
+   * See the documentation for [glib.uri.Uri.split] for more details; this is
    * mostly a wrapper around that function with simpler arguments.
    * However, it will return an error if uri_string is a relative URI,
    * or does not contain a hostname component.
@@ -875,7 +875,7 @@ class Uri : Boxed
    * returns the pieces. Any component that doesn't appear in uri_ref will be
    * returned as %NULL $(LPAREN)but note that all URIs always have a path component,
    * though it may be the empty string$(RPAREN).
-   * See [GLib.Uri.split], and the definition of #GUriFlags, for more
+   * See [glib.uri.Uri.split], and the definition of #GUriFlags, for more
    * information on the effect of flags. Note that password will only
    * be parsed out if flags contains %G_URI_FLAGS_HAS_PASSWORD, and
    * auth_params will only be parsed out if flags contains
@@ -933,7 +933,7 @@ class Uri : Boxed
 
   /**
    * Unescapes a segment of an escaped string as binary data.
-   * Note that in contrast to [GLib.Uri.unescapeString], this does allow
+   * Note that in contrast to [glib.uri.Uri.unescapeString], this does allow
    * nul bytes to appear in the output.
    * If any of the characters in illegal_characters appears as an escaped
    * character in escaped_string, then that is an error and %NULL will be
@@ -971,7 +971,7 @@ class Uri : Boxed
    * want to avoid for instance having a slash being expanded in an
    * escaped path element, which might confuse pathname handling.
    * Note: `NUL` byte is not accepted in the output, in contrast to
-   * [GLib.Uri.unescapeBytes].
+   * [glib.uri.Uri.unescapeBytes].
    * Params:
    *   escapedString = A string, may be %NULL
    *   escapedStringEnd = Pointer to end of escaped_string,

@@ -3,7 +3,7 @@ module gtk.types;
 import cairo.context;
 import gdk.frame_clock;
 import gdk.rectangle;
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import glib.error;
@@ -270,20 +270,20 @@ enum ACCESSIBLE_ATTRIBUTE_FOREGROUND = "fg-color";
 /**
  * An attribute for the overline style.
  * Possible values are:
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_OVERLINE_NONE]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_OVERLINE_SINGLE]
+ * - [gtk.string]
+ * - [gtk.string]
  */
 enum ACCESSIBLE_ATTRIBUTE_OVERLINE = "overline";
 
 
 /**
- * The "none" overline value for [Gtk.ACCESSIBLE_ATTRIBUTE_OVERLINE].
+ * The "none" overline value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_OVERLINE_NONE = "none";
 
 
 /**
- * The "single" overline value for [Gtk.ACCESSIBLE_ATTRIBUTE_OVERLINE].
+ * The "single" overline value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_OVERLINE_SINGLE = "single";
 
@@ -297,64 +297,64 @@ enum ACCESSIBLE_ATTRIBUTE_SIZE = "size";
 /**
  * An attribute for the font stretch type.
  * Possible values are:
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH_ULTRA_CONDENSED]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH_EXTRA_CONDENSED]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH_CONDENSED]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH_SEMI_CONDENSED]
+ * - [gtk.string]
+ * - [gtk.string]
+ * - [gtk.string]
+ * - [gtk.string]
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH = "stretch";
 
 
 /**
- * The "condensed" stretch value for [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH].
+ * The "condensed" stretch value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_CONDENSED = "condensed";
 
 
 /**
- * The "expanded" stretch value for [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH].
+ * The "expanded" stretch value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_EXPANDED = "expanded";
 
 
 /**
- * The "extra condensed" stretch value for [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH].
+ * The "extra condensed" stretch value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_EXTRA_CONDENSED = "extra_condensed";
 
 
 /**
- * The "extra expanded" stretch value for [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH].
+ * The "extra expanded" stretch value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_EXTRA_EXPANDED = "extra_expanded";
 
 
 /**
- * The "normal" stretch value for [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH].
+ * The "normal" stretch value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_NORMAL = "normal";
 
 
 /**
- * The "semi condensed" stretch value for [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH].
+ * The "semi condensed" stretch value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_SEMI_CONDENSED = "semi_condensed";
 
 
 /**
- * The "semi expanded" stretch value for [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH].
+ * The "semi expanded" stretch value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_SEMI_EXPANDED = "semi_expanded";
 
 
 /**
- * The "ultra condensed" stretch value for [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH].
+ * The "ultra condensed" stretch value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_ULTRA_CONDENSED = "ultra_condensed";
 
 
 /**
- * The "ultra expanded" stretch value for [Gtk.ACCESSIBLE_ATTRIBUTE_STRETCH].
+ * The "ultra expanded" stretch value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_ULTRA_EXPANDED = "ultra_expanded";
 
@@ -369,27 +369,27 @@ enum ACCESSIBLE_ATTRIBUTE_STRIKETHROUGH = "strikethrough";
 /**
  * An attribute for the font style.
  * Possible values are:
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_STYLE_NORMAL]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_STYLE_OBLIQUE]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_STYLE_ITALIC]
+ * - [gtk.string]
+ * - [gtk.string]
+ * - [gtk.string]
  */
 enum ACCESSIBLE_ATTRIBUTE_STYLE = "style";
 
 
 /**
- * The "italic" style value for [Gtk.ACCESSIBLE_ATTRIBUTE_STYLE].
+ * The "italic" style value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STYLE_ITALIC = "italic";
 
 
 /**
- * The "normal" style value for [Gtk.ACCESSIBLE_ATTRIBUTE_STYLE].
+ * The "normal" style value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STYLE_NORMAL = "normal";
 
 
 /**
- * The "oblique" style value for [Gtk.ACCESSIBLE_ATTRIBUTE_STYLE].
+ * The "oblique" style value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STYLE_OBLIQUE = "oblique";
 
@@ -397,34 +397,34 @@ enum ACCESSIBLE_ATTRIBUTE_STYLE_OBLIQUE = "oblique";
 /**
  * An attribute for the underline style.
  * Possible values are:
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_UNDERLINE_NONE]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_UNDERLINE_SINGLE]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_UNDERLINE_DOUBLE]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_UNDERLINE_ERROR]
+ * - [gtk.string]
+ * - [gtk.string]
+ * - [gtk.string]
+ * - [gtk.string]
  */
 enum ACCESSIBLE_ATTRIBUTE_UNDERLINE = "underline";
 
 
 /**
- * The "double" underline value for [Gtk.ACCESSIBLE_ATTRIBUTE_UNDERLINE].
+ * The "double" underline value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_UNDERLINE_DOUBLE = "double";
 
 
 /**
- * The "error" underline value for [Gtk.ACCESSIBLE_ATTRIBUTE_UNDERLINE].
+ * The "error" underline value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_UNDERLINE_ERROR = "error";
 
 
 /**
- * The "none" underline value for [Gtk.ACCESSIBLE_ATTRIBUTE_UNDERLINE].
+ * The "none" underline value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_UNDERLINE_NONE = "none";
 
 
 /**
- * The "single" underline value for [Gtk.ACCESSIBLE_ATTRIBUTE_UNDERLINE].
+ * The "single" underline value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_UNDERLINE_SINGLE = "single";
 
@@ -432,48 +432,48 @@ enum ACCESSIBLE_ATTRIBUTE_UNDERLINE_SINGLE = "single";
 /**
  * An attribute for the font variant.
  * Possible values are:
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT_SMALL_CAPS]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT_ALL_SMALL_CAPS]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT_PETITE_CAPS]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT_ALL_PETITE_CAPS]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT_UNICASE]
- * - [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT_TITLE_CAPS]
+ * - [gtk.string]
+ * - [gtk.string]
+ * - [gtk.string]
+ * - [gtk.string]
+ * - [gtk.string]
+ * - [gtk.string]
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT = "variant";
 
 
 /**
- * The "all petite caps" variant value for [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT].
+ * The "all petite caps" variant value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_ALL_PETITE_CAPS = "all-petite-caps";
 
 
 /**
- * The "all small caps" variant value for [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT].
+ * The "all small caps" variant value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_ALL_SMALL_CAPS = "all-small-caps";
 
 
 /**
- * The "petite caps" variant value for [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT].
+ * The "petite caps" variant value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_PETITE_CAPS = "petite-caps";
 
 
 /**
- * The "small caps" variant value for [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT].
+ * The "small caps" variant value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_SMALL_CAPS = "small-caps";
 
 
 /**
- * The "title caps" variant value for [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT].
+ * The "title caps" variant value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_TITLE_CAPS = "title-caps";
 
 
 /**
- * The "unicase" variant value for [Gtk.ACCESSIBLE_ATTRIBUTE_VARIANT].
+ * The "unicase" variant value for [gtk.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_UNICASE = "unicase";
 
@@ -505,7 +505,7 @@ enum IM_MODULE_EXTENSION_POINT_NAME = "gtk-im-module";
 /**
  * Constant to return from a signal handler for the ::input
  * signal in case of conversion failure.
- * See [Gtk.SpinButton.input].
+ * See [gtk.spin_button.SpinButton.input].
  */
 enum INPUT_ERROR = -1;
 
@@ -794,15 +794,15 @@ enum TEXT_VIEW_PRIORITY_VALIDATE = 125;
 
 
 /**
- * Uses the default sort function in a [Gtk.TreeSortable].
- * See also: [Gtk.TreeSortable.setSortColumnId]
+ * Uses the default sort function in a [gtk.tree_sortable.TreeSortable].
+ * See also: [gtk.tree_sortable.TreeSortable.setSortColumnId]
  */
 enum TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID = -1;
 
 
 /**
- * Disables sorting in a [Gtk.TreeSortable].
- * See also: [Gtk.TreeSortable.setSortColumnId]
+ * Disables sorting in a [gtk.tree_sortable.TreeSortable].
+ * See also: [gtk.tree_sortable.TreeSortable.setSortColumnId]
  */
 enum TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID = -2;
 

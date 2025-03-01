@@ -1,6 +1,6 @@
 module gtk.column_view_cell;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -9,17 +9,17 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkColumnViewCell` is used by [Gtk.ColumnViewColumn] to represent items
- * in a cell in [Gtk.ColumnView].
+ * `GtkColumnViewCell` is used by [gtk.column_view_column.ColumnViewColumn] to represent items
+ * in a cell in [gtk.column_view.ColumnView].
  * The `GtkColumnViewCell`s are managed by the columnview widget $(LPAREN)with its factory$(RPAREN)
  * and cannot be created by applications, but they need to be populated
- * by application code. This is done by calling [Gtk.ColumnViewCell.setChild].
+ * by application code. This is done by calling [gtk.column_view_cell.ColumnViewCell.setChild].
  * `GtkColumnViewCell`s exist in 2 stages:
  * 1. The unbound stage where the listitem is not currently connected to
- * an item in the list. In that case, the [Gtk.ColumnViewCell.item]
+ * an item in the list. In that case, the [gtk.column_view_cell.ColumnViewCell.GObject.Object]
  * property is set to %NULL.
  * 2. The bound stage where the listitem references an item from the list.
- * The [Gtk.ColumnViewCell.item] property is not %NULL.
+ * The [gtk.column_view_cell.ColumnViewCell.GObject.Object] property is not %NULL.
  */
 class ColumnViewCell : ListItem
 {
@@ -41,7 +41,7 @@ class ColumnViewCell : ListItem
   }
 
   /**
-   * Gets the child previously set via [Gtk.ColumnViewCell.setChild] or
+   * Gets the child previously set via [gtk.column_view_cell.ColumnViewCell.setChild] or
    * %NULL if none was set.
    * Returns: The child
    */
@@ -55,7 +55,7 @@ class ColumnViewCell : ListItem
 
   /**
    * Checks if a list item has been set to be focusable via
-   * [Gtk.ColumnViewCell.setFocusable].
+   * [gtk.column_view_cell.ColumnViewCell.setFocusable].
    * Returns: %TRUE if the item is focusable
    */
   override bool getFocusable()
@@ -119,7 +119,7 @@ class ColumnViewCell : ListItem
   /**
    * Sets self to be focusable.
    * If an item is focusable, it can be focused using the keyboard.
-   * This works similar to [Gtk.Widget.setFocusable].
+   * This works similar to [gtk.widget.Widget.setFocusable].
    * Note that if items are not focusable, the keyboard cannot be used to activate
    * them and selecting only works if one of the listitem's children is focusable.
    * By default, list items are focusable.

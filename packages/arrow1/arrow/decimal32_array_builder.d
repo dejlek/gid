@@ -6,7 +6,7 @@ import arrow.decimal32;
 import arrow.decimal32_data_type;
 import arrow.fixed_size_binary_array_builder;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.error;
 

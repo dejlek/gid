@@ -1,6 +1,6 @@
 module gtk.requisition;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;
@@ -60,7 +60,7 @@ class Requisition : Boxed
    * The struct is initialized to zero.
    * Returns: a new empty `GtkRequisition`. The newly
    *   allocated `GtkRequisition` should be freed with
-   *   [Gtk.Requisition.free]
+   *   [gtk.requisition.Requisition.free]
    */
   this()
   {

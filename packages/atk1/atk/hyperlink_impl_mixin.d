@@ -5,7 +5,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.hyperlink;
 public import atk.types;
-public import gid.gid;
+public import gid.global;
 public import gobject.object;
 
 /**

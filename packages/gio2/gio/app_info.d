@@ -1,7 +1,7 @@
 module gio.app_info;
 
 public import gio.app_info_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.app_launch_context;
 import gio.async_result;
 import gio.async_result_mixin;
@@ -22,7 +22,7 @@ import gobject.object;
  * `GAppInfo` and `GAppLaunchContext` are used for describing and launching
  * applications installed on the system.
  * As of GLib 2.20, URIs will always be converted to POSIX paths
- * $(LPAREN)using [Gio.File.getPath]$(RPAREN) when using [Gio.AppInfo.launch]
+ * $(LPAREN)using [gio.file.File.getPath]$(RPAREN) when using [gio.app_info.AppInfo.launch]
  * even if the application requested an URI and not a POSIX path. For example
  * for a desktop-file based application with Exec key `totem
  * %U` and a single URI, `sftp://foo/file.avi`, then
@@ -34,12 +34,12 @@ import gobject.object;
  * path $(LPAREN)in GVfs there's no FUSE mount for it$(RPAREN); such URIs will be
  * passed unmodified to the application.
  * Specifically for GVfs 2.26 and later, the POSIX URI will be mapped
- * back to the GIO URI in the [Gio.File] constructors $(LPAREN)since GVfs
+ * back to the GIO URI in the [gio.file.File] constructors $(LPAREN)since GVfs
  * implements the GVfs extension point$(RPAREN). As such, if the application
- * needs to examine the URI, it needs to use [Gio.File.getUri]
- * or similar on [Gio.File]. In other words, an application cannot
- * assume that the URI passed to e.g. [Gio.File.newForCommandlineArg]
- * is equal to the result of [Gio.File.getUri]. The following snippet
+ * needs to examine the URI, it needs to use [gio.file.File.getUri]
+ * or similar on [gio.file.File]. In other words, an application cannot
+ * assume that the URI passed to e.g. [gio.file.File.newForCommandlineArg]
+ * is equal to the result of [gio.file.File.getUri]. The following snippet
  * illustrates this:
  * ```c
  * GFile *f;
@@ -101,7 +101,7 @@ interface AppInfo
    * on this system.
    * For desktop files, this includes applications that have
    * `NoDisplay\=true` set or are excluded from display by means
-   * of `OnlyShowIn` or `NotShowIn`. See [Gio.AppInfo.shouldShow].
+   * of `OnlyShowIn` or `NotShowIn`. See [gio.app_info.AppInfo.shouldShow].
    * The returned list does not include applications which have
    * the `Hidden` key set.
    * Returns: a newly allocated #GList of references to #GAppInfos.
@@ -117,8 +117,8 @@ interface AppInfo
   /**
    * Gets a list of all #GAppInfos for a given content type,
    * including the recommended and fallback #GAppInfos. See
-   * [Gio.AppInfo.getRecommendedForType] and
-   * [Gio.AppInfo.getFallbackForType].
+   * [gio.app_info.AppInfo.getRecommendedForType] and
+   * [gio.app_info.AppInfo.getFallbackForType].
    * Params:
    *   contentType = the content type to find a #GAppInfo for
    * Returns: #GList of #GAppInfos
@@ -178,7 +178,7 @@ interface AppInfo
 
   /**
    * Finishes a default #GAppInfo lookup started by
-   * [Gio.AppInfo.getDefaultForTypeAsync].
+   * [gio.app_info.AppInfo.getDefaultForTypeAsync].
    * If no #GAppInfo is found, then error will be set to %G_IO_ERROR_NOT_FOUND.
    * Params:
    *   result = a #GAsyncResult
@@ -243,7 +243,7 @@ interface AppInfo
 
   /**
    * Finishes a default #GAppInfo lookup started by
-   * [Gio.AppInfo.getDefaultForUriSchemeAsync].
+   * [gio.app_info.AppInfo.getDefaultForUriSchemeAsync].
    * If no #GAppInfo is found, then error will be set to %G_IO_ERROR_NOT_FOUND.
    * Params:
    *   result = a #GAsyncResult
@@ -284,7 +284,7 @@ interface AppInfo
    * those applications which claim to support the given content type exactly,
    * and not by MIME type subclassing.
    * Note that the first application of the list is the last used one, i.e.
-   * the last one for which [Gio.AppInfo.setAsLastUsedForType] has been
+   * the last one for which [gio.app_info.AppInfo.setAsLastUsedForType] has been
    * called.
    * Params:
    *   contentType = the content type to find a #GAppInfo for
@@ -307,7 +307,7 @@ interface AppInfo
    * required.
    * The D-Bus–activated applications don't have to be started if your application
    * terminates too soon after this function. To prevent this, use
-   * [Gio.AppInfo.launchDefaultForUriAsync] instead.
+   * [gio.app_info.AppInfo.launchDefaultForUriAsync] instead.
    * Params:
    *   uri = the uri to show
    *   context = an optional #GAppLaunchContext
@@ -325,7 +325,7 @@ interface AppInfo
   }
 
   /**
-   * Async version of [Gio.AppInfo.launchDefaultForUri].
+   * Async version of [gio.app_info.AppInfo.launchDefaultForUri].
    * This version is useful if you are interested in receiving
    * error information in the case where the application is
    * sandboxed and the portal may present an application chooser
@@ -373,10 +373,10 @@ interface AppInfo
 
   /**
    * Removes all changes to the type associations done by
-   * [Gio.AppInfo.setAsDefaultForType],
-   * [Gio.AppInfo.setAsDefaultForExtension],
-   * [Gio.AppInfo.addSupportsType] or
-   * [Gio.AppInfo.removeSupportsType].
+   * [gio.app_info.AppInfo.setAsDefaultForType],
+   * [gio.app_info.AppInfo.setAsDefaultForExtension],
+   * [gio.app_info.AppInfo.addSupportsType] or
+   * [gio.app_info.AppInfo.removeSupportsType].
    * Params:
    *   contentType = a content type
    */
@@ -397,7 +397,7 @@ interface AppInfo
 
   /**
    * Obtains the information whether the #GAppInfo can be deleted.
-   * See [Gio.AppInfo.delete_].
+   * See [gio.app_info.AppInfo.delete_].
    * Returns: %TRUE if appinfo can be deleted
    */
   bool canDelete();
@@ -413,7 +413,7 @@ interface AppInfo
    * Tries to delete a #GAppInfo.
    * On some platforms, there may be a difference between user-defined
    * #GAppInfos which can be deleted, and system-wide ones which cannot.
-   * See [Gio.AppInfo.canDelete].
+   * See [gio.app_info.AppInfo.canDelete].
    * Returns: %TRUE if appinfo has been deleted
    */
   bool delete_();
@@ -461,7 +461,7 @@ interface AppInfo
   /**
    * Gets the executable's name for the installed application.
    * This is intended to be used for debugging or labelling what program is going
-   * to be run. To launch the executable, use [Gio.AppInfo.launch] and related
+   * to be run. To launch the executable, use [gio.app_info.AppInfo.launch] and related
    * functions, rather than spawning the return value from this function.
    * Returns: a string containing the appinfo's application
    *   binaries name
@@ -497,7 +497,7 @@ interface AppInfo
    * If this information is not provided by the environment, this function
    * will return %NULL.
    * This function does not take in consideration associations added with
-   * [Gio.AppInfo.addSupportsType], but only those exported directly by
+   * [gio.app_info.AppInfo.addSupportsType], but only those exported directly by
    * the application.
    * Returns: a list of content types.
    */
@@ -515,10 +515,10 @@ interface AppInfo
    * Some URIs can be changed when passed through a GFile $(LPAREN)for instance
    * unsupported URIs with strange formats like mailto:$(RPAREN), so if you have
    * a textual URI you want to pass in as argument, consider using
-   * [Gio.AppInfo.launchUris] instead.
+   * [gio.app_info.AppInfo.launchUris] instead.
    * The launched application inherits the environment of the launching
-   * process, but it can be modified with [Gio.AppLaunchContext.setenv]
-   * and [Gio.AppLaunchContext.unsetenv].
+   * process, but it can be modified with [gio.app_launch_context.AppLaunchContext.setenv]
+   * and [gio.app_launch_context.AppLaunchContext.unsetenv].
    * On UNIX, this function sets the `GIO_LAUNCHED_DESKTOP_FILE`
    * environment variable with the path of the launched desktop file and
    * `GIO_LAUNCHED_DESKTOP_FILE_PID` to the process id of the launched
@@ -552,11 +552,11 @@ interface AppInfo
   bool launchUris(string[] uris, AppLaunchContext context);
 
   /**
-   * Async version of [Gio.AppInfo.launchUris].
+   * Async version of [gio.app_info.AppInfo.launchUris].
    * The callback is invoked immediately after the application launch, but it
    * waits for activation in case of D-Bus–activated applications and also provides
    * extended error information for sandboxed applications, see notes for
-   * [Gio.AppInfo.launchDefaultForUriAsync].
+   * [gio.app_info.AppInfo.launchDefaultForUriAsync].
    * Params:
    *   uris = a #GList containing URIs to launch.
    *   context = a #GAppLaunchContext or %NULL
@@ -566,7 +566,7 @@ interface AppInfo
   void launchUrisAsync(string[] uris, AppLaunchContext context, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes a [Gio.AppInfo.launchUrisAsync] operation.
+   * Finishes a [gio.app_info.AppInfo.launchUrisAsync] operation.
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE on successful launch, %FALSE otherwise.
@@ -601,7 +601,7 @@ interface AppInfo
   /**
    * Sets the application as the last used application for a given type.
    * This will make the application appear as first in the list returned
-   * by [Gio.AppInfo.getRecommendedForType], regardless of the default
+   * by [gio.app_info.AppInfo.getRecommendedForType], regardless of the default
    * application for that content type.
    * Params:
    *   contentType = the content type.

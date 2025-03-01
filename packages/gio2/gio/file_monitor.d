@@ -1,6 +1,6 @@
 module gio.file_monitor;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.file;
@@ -12,12 +12,12 @@ import gobject.object;
 /**
  * Monitors a file or directory for changes.
  * To obtain a `GFileMonitor` for a file or directory, use
- * [Gio.File.monitor], [Gio.File.monitorFile], or
- * [Gio.File.monitorDirectory].
+ * [gio.file.File.monitor], [gio.file.File.monitorFile], or
+ * [gio.file.File.monitorDirectory].
  * To get informed about changes to the file or directory you are
- * monitoring, connect to the [Gio.FileMonitor.changed] signal. The
+ * monitoring, connect to the [gio.file_monitor.FileMonitor.changed] signal. The
  * signal will be emitted in the thread-default main context $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN) of the thread that the monitor
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) of the thread that the monitor
  * was created in $(LPAREN)though if the global default main context is blocked, this
  * may cause notifications to be blocked even if the thread-default
  * context is still running$(RPAREN).

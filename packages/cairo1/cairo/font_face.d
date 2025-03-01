@@ -3,7 +3,7 @@ module cairo.font_face;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
@@ -11,13 +11,13 @@ import gobject.boxed;
  * than the size or font matrix $(LPAREN)a font matrix is used to distort
  * a font by shearing it or scaling it unequally in the two
  * directions$(RPAREN) . A font face can be set on a #cairo_t by using
- * [cairo.Context.setFontFace]; the size and font matrix are set with
- * [cairo.Context.setFontSize] and [cairo.Context.setFontMatrix].
+ * [cairo.context.Context.setFontFace]; the size and font matrix are set with
+ * [cairo.context.Context.setFontSize] and [cairo.context.Context.setFontMatrix].
  * There are various types of font faces, depending on the
  * <firstterm>font backend</firstterm> they use. The type of a
- * font face can be queried using [cairo.FontFace.getFontType].
+ * font face can be queried using [cairo.font_face.FontFace.getFontType].
  * Memory management of #cairo_font_face_t is done with
- * [cairo.FontFace.reference] and [cairo.FontFace.destroy].
+ * [cairo.font_face.FontFace.reference] and [cairo.font_face.FontFace.destroy].
  */
 class FontFace : Boxed
 {

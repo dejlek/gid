@@ -4,7 +4,7 @@ import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.key_value_partitioning_options;
 import arrowdataset.types;
-import gid.gid;
+import gid.global;
 
 class HivePartitioningOptions : KeyValuePartitioningOptions
 {

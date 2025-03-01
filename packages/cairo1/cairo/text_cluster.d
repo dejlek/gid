@@ -3,7 +3,7 @@ module cairo.text_cluster;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
@@ -15,7 +15,7 @@ import gobject.boxed;
  * Note that clusters with zero glyphs are not as well supported as
  * normal clusters.  For example, PDF rendering applications typically
  * ignore those clusters when PDF text is being selected.
- * See [cairo.Context.showTextGlyphs] for how clusters are used in advanced
+ * See [cairo.context.Context.showTextGlyphs] for how clusters are used in advanced
  * text operations.
  */
 class TextCluster : Boxed

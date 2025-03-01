@@ -1,6 +1,6 @@
 module gobject.param_spec_flags;
 
-import gid.gid;
+import gid.global;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.param_spec;

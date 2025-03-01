@@ -1,6 +1,6 @@
 module pango.layout_line;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gobject.object;
 import pango.c.functions;
@@ -12,7 +12,7 @@ import pango.types;
  * A `PangoLayoutLine` represents one of the lines resulting from laying
  * out a paragraph via `PangoLayout`.
  * `PangoLayoutLine` structures are obtained by calling
- * [Pango.Layout.getLine] and are only valid until the text,
+ * [pango.layout.Layout.getLine] and are only valid until the text,
  * attributes, or settings of the parent `PangoLayout` are modified.
  */
 class LayoutLine : Boxed
@@ -91,7 +91,7 @@ class LayoutLine : Boxed
 
   /**
    * Computes the logical and ink extents of a layout line.
-   * See [Pango.Font.getGlyphExtents] for details
+   * See [pango.font.Font.getGlyphExtents] for details
    * about the interpretation of the rectangles.
    * Params:
    *   inkRect = rectangle used to store the extents of
@@ -109,8 +109,8 @@ class LayoutLine : Boxed
    * of fonts used in this line.
    * Note that the actual baseline-to-baseline distance between lines
    * of text is influenced by other factors, such as
-   * [Pango.Layout.setSpacing] and
-   * [Pango.Layout.setLineSpacing].
+   * [pango.layout.Layout.setSpacing] and
+   * [pango.layout.Layout.setLineSpacing].
    * Params:
    *   height = return location for the line height
    */
@@ -132,7 +132,7 @@ class LayoutLine : Boxed
 
   /**
    * Computes the logical and ink extents of layout_line in device units.
-   * This function just calls [Pango.LayoutLine.getExtents] followed by
+   * This function just calls [pango.layout_line.LayoutLine.getExtents] followed by
    * two funcextents_to_pixels calls, rounding ink_rect and logical_rect
    * such that the rounded rectangles fully contain the unrounded one $(LPAREN)that is,
    * passes them as first argument to funcextents_to_pixels$(RPAREN).
@@ -190,7 +190,7 @@ class LayoutLine : Boxed
    *     store a pointer to an array of ranges. The array will be of length
    *     `2*n_ranges`, with each range starting at `$(LPAREN)*ranges$(RPAREN)[2*n]` and of
    *     width `$(LPAREN)*ranges$(RPAREN)[2*n + 1] - (*ranges)[2*n]`. This array must be freed
-   *     with [GLib.Global.gfree]. The coordinates are relative to the layout and are in
+   *     with [glib.global.gfree]. The coordinates are relative to the layout and are in
    *     Pango units.
    */
   void getXRanges(int startIndex, int endIndex, out int[] ranges)

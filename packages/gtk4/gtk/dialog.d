@@ -1,6 +1,6 @@
 module gtk.dialog;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -36,29 +36,29 @@ import gtk.window;
  * action widgets are buttons. Depending on the platform, action widgets may
  * be presented in the header bar at the top of the window, or at the bottom
  * of the window. To add action widgets, create your `GtkDialog` using
- * [Gtk.Dialog.newWithButtons], or use
- * [Gtk.Dialog.addButton], [Gtk.Dialog.addButtons],
- * or [Gtk.Dialog.addActionWidget].
+ * [gtk.dialog.Dialog.newWithButtons], or use
+ * [gtk.dialog.Dialog.addButton], [gtk.dialog.Dialog.addButtons],
+ * or [gtk.dialog.Dialog.addActionWidget].
  * `GtkDialogs` uses some heuristics to decide whether to add a close
  * button to the window decorations. If any of the action buttons use
  * the response ID %GTK_RESPONSE_CLOSE or %GTK_RESPONSE_CANCEL, the
  * close button is omitted.
  * Clicking a button that was added as an action widget will emit the
- * [Gtk.Dialog.response] signal with a response ID that you specified.
+ * [gtk.dialog.Dialog.response] signal with a response ID that you specified.
  * GTK will never assign a meaning to positive response IDs; these are
  * entirely user-defined. But for convenience, you can use the response
- * IDs in the [Gtk.ResponseType] enumeration $(LPAREN)these all have values
+ * IDs in the [gtk.ResponseType] enumeration $(LPAREN)these all have values
  * less than zero$(RPAREN). If a dialog receives a delete event, the
- * [Gtk.Dialog.response] signal will be emitted with the
+ * [gtk.dialog.Dialog.response] signal will be emitted with the
  * %GTK_RESPONSE_DELETE_EVENT response ID.
- * Dialogs are created with a call to [Gtk.Dialog.new_] or
- * [Gtk.Dialog.newWithButtons]. The latter is recommended; it allows
+ * Dialogs are created with a call to [gtk.dialog.Dialog.new_] or
+ * [gtk.dialog.Dialog.newWithButtons]. The latter is recommended; it allows
  * you to set the dialog title, some convenient flags, and add buttons.
  * A “modal” dialog $(LPAREN)that is, one which freezes the rest of the application
- * from user input$(RPAREN), can be created by calling [Gtk.Window.setModal]
- * on the dialog. When using [Gtk.Dialog.newWithButtons], you can also
+ * from user input$(RPAREN), can be created by calling [gtk.window.Window.setModal]
+ * on the dialog. When using [gtk.dialog.Dialog.newWithButtons], you can also
  * pass the %GTK_DIALOG_MODAL flag to make a dialog modal.
- * For the simple dialog in the following example, a [Gtk.MessageDialog]
+ * For the simple dialog in the following example, a [gtk.message_dialog.MessageDialog]
  * would save some effort. But you’d need to create the dialog contents manually
  * if you had more than a simple message in the dialog.
  * An example for simple `GtkDialog` usage:
@@ -122,7 +122,7 @@ import gtk.window;
  * # Accessibility
  * `GtkDialog` uses the %GTK_ACCESSIBLE_ROLE_DIALOG role.
 
- * Deprecated: Use [Gtk.Window] instead
+ * Deprecated: Use [gtk.window.Window] instead
  */
 class Dialog : Window
 {
@@ -150,7 +150,7 @@ class Dialog : Window
    * as described above.
    * Returns: the new dialog as a `GtkWidget`
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   this()
   {
@@ -162,7 +162,7 @@ class Dialog : Window
   /**
    * Adds an activatable widget to the action area of a `GtkDialog`.
    * GTK connects a signal handler that will emit the
-   * [Gtk.Dialog.response] signal on the dialog when the widget
+   * [gtk.dialog.Dialog.response] signal on the dialog when the widget
    * is activated. The widget is appended to the end of the dialog’s action
    * area.
    * If you want to add a non-activatable widget, simply pack it into
@@ -171,7 +171,7 @@ class Dialog : Window
    *   child = an activatable widget
    *   responseId = response ID for child
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   void addActionWidget(Widget child, int responseId)
   {
@@ -181,7 +181,7 @@ class Dialog : Window
   /**
    * Adds a button with the given text.
    * GTK arranges things so that clicking the button will emit the
-   * [Gtk.Dialog.response] signal with the given response_id.
+   * [gtk.dialog.Dialog.response] signal with the given response_id.
    * The button is appended to the end of the dialog’s action area.
    * The button widget is returned, but usually you don’t need it.
    * Params:
@@ -189,7 +189,7 @@ class Dialog : Window
    *   responseId = response ID for the button
    * Returns: the `GtkButton` widget that was added
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   Widget addButton(string buttonText, int responseId)
   {
@@ -204,7 +204,7 @@ class Dialog : Window
    * Returns the content area of dialog.
    * Returns: the content area `GtkBox`.
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   Box getContentArea()
   {
@@ -220,7 +220,7 @@ class Dialog : Window
    * propertyGtk.Dialog:use-header-bar property is %TRUE.
    * Returns: the header bar
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   HeaderBar getHeaderBar()
   {
@@ -238,7 +238,7 @@ class Dialog : Window
    * Returns: the response id of widget, or %GTK_RESPONSE_NONE
    *   if widget doesn’t have a response id set.
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   int getResponseForWidget(Widget widget)
   {
@@ -255,7 +255,7 @@ class Dialog : Window
    * Returns: the widget button that uses the given
    *   response_id
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   Widget getWidgetForResponse(int responseId)
   {
@@ -271,7 +271,7 @@ class Dialog : Window
    * Params:
    *   responseId = response ID
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   void response(int responseId)
   {
@@ -284,7 +284,7 @@ class Dialog : Window
    * Params:
    *   responseId = a response ID
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   void setDefaultResponse(int responseId)
   {
@@ -299,7 +299,7 @@ class Dialog : Window
    *   responseId = a response ID
    *   setting = %TRUE for sensitive
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   void setResponseSensitive(int responseId, bool setting)
   {
@@ -312,7 +312,7 @@ class Dialog : Window
    * The default binding for this signal is the Escape key.
    *   dialog = the instance the signal is connected to
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   alias CloseCallbackDlg = void delegate(Dialog dialog);
   alias CloseCallbackFunc = void function(Dialog dialog);
@@ -342,14 +342,14 @@ class Dialog : Window
   /**
    * Emitted when an action widget is clicked.
    * The signal is also emitted when the dialog receives a
-   * delete event, and when [Gtk.Dialog.response] is called.
+   * delete event, and when [gtk.dialog.Dialog.response] is called.
    * On a delete event, the response ID is %GTK_RESPONSE_DELETE_EVENT.
    * Otherwise, it depends on which action widget was clicked.
    * Params
    *   responseId = the response ID
    *   dialog = the instance the signal is connected to
 
-   * Deprecated: Use [Gtk.Window] instead
+   * Deprecated: Use [gtk.window.Window] instead
    */
   alias ResponseCallbackDlg = void delegate(int responseId, Dialog dialog);
   alias ResponseCallbackFunc = void function(int responseId, Dialog dialog);

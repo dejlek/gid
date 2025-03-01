@@ -5,7 +5,7 @@ import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.rectangle;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gio.icon;
 import gio.icon_mixin;
 import gio.menu_model;
@@ -37,24 +37,24 @@ import pango.tab_array;
  * entered text is longer than the allocation of the widget, the widget
  * will scroll so that the cursor position is visible.
  * When using an entry for passwords and other sensitive information, it
- * can be put into “password mode” using [Gtk.Entry.setVisibility].
+ * can be put into “password mode” using [gtk.entry.Entry.setVisibility].
  * In this mode, entered text is displayed using a “invisible” character.
  * By default, GTK picks the best invisible character that is available
  * in the current font, but it can be changed with
- * [Gtk.Entry.setInvisibleChar].
+ * [gtk.entry.Entry.setInvisibleChar].
  * `GtkEntry` has the ability to display progress or activity
  * information behind the text. To make an entry display such information,
- * use [Gtk.Entry.setProgressFraction] or
- * [Gtk.Entry.setProgressPulseStep].
+ * use [gtk.entry.Entry.setProgressFraction] or
+ * [gtk.entry.Entry.setProgressPulseStep].
  * Additionally, `GtkEntry` can show icons at either side of the entry.
  * These icons can be activatable by clicking, can be set up as drag source
  * and can have tooltips. To add an icon, use
- * [Gtk.Entry.setIconFromGicon] or one of the various other functions
+ * [gtk.entry.Entry.setIconFromGicon] or one of the various other functions
  * that set an icon from an icon name or a paintable. To trigger an action when
  * the user clicks an icon, connect to the signal@Gtk.Entry::icon-press signal.
  * To allow DND operations from an icon, use
- * [Gtk.Entry.setIconDragSource]. To set a tooltip on an icon, use
- * [Gtk.Entry.setIconTooltipText] or the corresponding function
+ * [gtk.entry.Entry.setIconDragSource]. To set a tooltip on an icon, use
+ * [gtk.entry.Entry.setIconTooltipText] or the corresponding function
  * for markup.
  * Note that functionality or information that is only available by clicking
  * on an icon in an entry may not be accessible at all to users which are not
@@ -77,7 +77,7 @@ import pango.tab_array;
  * When the entry shows progress, it adds a subnode with the name progress.
  * The node has the style class .pulse when the shown progress is pulsing.
  * For all the subnodes added to the text node in various situations,
- * see [Gtk.Text].
+ * see [gtk.text.Text].
  * # GtkEntry as GtkBuildable
  * The `GtkEntry` implementation of the `GtkBuildable` interface supports a
  * custom `<attributes>` element, which supports any number of `<attribute>`
@@ -149,7 +149,7 @@ class Entry : Widget, CellEditable, Editable
   }
 
   /**
-   * Retrieves the value set by [Gtk.Entry.setActivatesDefault].
+   * Retrieves the value set by [gtk.entry.Entry.setActivatesDefault].
    * Returns: %TRUE if the entry will activate the default widget
    */
   bool getActivatesDefault()
@@ -160,8 +160,8 @@ class Entry : Widget, CellEditable, Editable
   }
 
   /**
-   * Gets the value set by [Gtk.Entry.setAlignment].
-   * See also: [Gtk.Editable.xalign]
+   * Gets the value set by [gtk.entry.Entry.setAlignment].
+   * See also: [gtk.editable.Editable.gfloat]
    * Returns: the alignment
    */
   float getAlignment()
@@ -173,7 +173,7 @@ class Entry : Widget, CellEditable, Editable
 
   /**
    * Gets the attribute list of the `GtkEntry`.
-   * See [Gtk.Entry.setAttributes].
+   * See [gtk.entry.Entry.setAttributes].
    * Returns: the attribute list
    */
   AttrList getAttributes()
@@ -227,7 +227,7 @@ class Entry : Widget, CellEditable, Editable
   }
 
   /**
-   * Gets the menu model set with [Gtk.Entry.setExtraMenu].
+   * Gets the menu model set with [gtk.entry.Entry.setExtraMenu].
    * Returns: the menu model
    */
   MenuModel getExtraMenu()
@@ -239,7 +239,7 @@ class Entry : Widget, CellEditable, Editable
   }
 
   /**
-   * Gets the value set by [Gtk.Entry.setHasFrame].
+   * Gets the value set by [gtk.entry.Entry.setHasFrame].
    * Returns: whether the entry has a beveled frame
    */
   bool getHasFrame()
@@ -447,7 +447,7 @@ class Entry : Widget, CellEditable, Editable
 
   /**
    * Retrieves the maximum allowed length of the text in entry.
-   * See [Gtk.Entry.setMaxLength].
+   * See [gtk.entry.Entry.setMaxLength].
    * Returns: the maximum allowed number of characters
    *   in `GtkEntry`, or 0 if there is no maximum.
    */
@@ -488,7 +488,7 @@ class Entry : Widget, CellEditable, Editable
 
   /**
    * Returns the current fraction of the task that’s been completed.
-   * See [Gtk.Entry.setProgressFraction].
+   * See [gtk.entry.Entry.setProgressFraction].
    * Returns: a fraction from 0.0 to 1.0
    */
   double getProgressFraction()
@@ -500,7 +500,7 @@ class Entry : Widget, CellEditable, Editable
 
   /**
    * Retrieves the pulse step set with
-   * [Gtk.Entry.setProgressPulseStep].
+   * [gtk.entry.Entry.setProgressPulseStep].
    * Returns: a fraction from 0.0 to 1.0
    */
   double getProgressPulseStep()
@@ -512,7 +512,7 @@ class Entry : Widget, CellEditable, Editable
 
   /**
    * Gets the tabstops of the `GtkEntry`.
-   * See [Gtk.Entry.setTabs].
+   * See [gtk.entry.Entry.setTabs].
    * Returns: the tabstops
    */
   TabArray getTabs()
@@ -526,7 +526,7 @@ class Entry : Widget, CellEditable, Editable
   /**
    * Retrieves the current length of the text in entry.
    * This is equivalent to getting entry's `GtkEntryBuffer`
-   * and calling [Gtk.EntryBuffer.getLength] on it.
+   * and calling [gtk.entry_buffer.EntryBuffer.getLength] on it.
    * Returns: the current number of characters
    *   in `GtkEntry`, or 0 if there are none.
    */
@@ -539,7 +539,7 @@ class Entry : Widget, CellEditable, Editable
 
   /**
    * Retrieves whether the text in entry is visible.
-   * See [Gtk.Entry.setVisibility].
+   * See [gtk.entry.Entry.setVisibility].
    * Returns: %TRUE if the text is currently visible
    */
   bool getVisibility()
@@ -551,7 +551,7 @@ class Entry : Widget, CellEditable, Editable
 
   /**
    * Causes entry to have keyboard focus.
-   * It behaves like [Gtk.Widget.grabFocus], except that it doesn't
+   * It behaves like [gtk.widget.Widget.grabFocus], except that it doesn't
    * select the contents of the entry. You only want to call this on some
    * special entries which the user usually doesn't want to replace all text
    * in, such as search-as-you-type entries.
@@ -569,9 +569,9 @@ class Entry : Widget, CellEditable, Editable
    * know how much.
    * Causes the entry’s progress indicator to enter “activity
    * mode”, where a block bounces back and forth. Each call to
-   * [Gtk.Entry.progressPulse] causes the block to move by a
+   * [gtk.entry.Entry.progressPulse] causes the block to move by a
    * little bit $(LPAREN)the amount of movement per pulse is determined
-   * by [Gtk.Entry.setProgressPulseStep]$(RPAREN).
+   * by [gtk.entry.Entry.setProgressPulseStep]$(RPAREN).
    */
   void progressPulse()
   {
@@ -605,7 +605,7 @@ class Entry : Widget, CellEditable, Editable
    * Sets the alignment for the contents of the entry.
    * This controls the horizontal positioning of the contents when
    * the displayed text is shorter than the width of the entry.
-   * See also: [Gtk.Editable.xalign]
+   * See also: [gtk.editable.Editable.gfloat]
    * Params:
    *   xalign = The horizontal alignment, from 0 $(LPAREN)left$(RPAREN) to 1 $(LPAREN)right$(RPAREN).
    *     Reversed for RTL layouts
@@ -764,8 +764,8 @@ class Entry : Widget, CellEditable, Editable
    * the specified position.
    * tooltip is assumed to be marked up with Pango Markup.
    * Use %NULL for tooltip to remove an existing tooltip.
-   * See also [Gtk.Widget.setTooltipMarkup] and
-   * [Gtk.Entry.setIconTooltipText].
+   * See also [gtk.widget.Widget.setTooltipMarkup] and
+   * [gtk.entry.Entry.setIconTooltipText].
    * Params:
    *   iconPos = the icon position
    *   tooltip = the contents of the tooltip for the icon
@@ -780,14 +780,14 @@ class Entry : Widget, CellEditable, Editable
    * Sets tooltip as the contents of the tooltip for the icon
    * at the specified position.
    * Use %NULL for tooltip to remove an existing tooltip.
-   * See also [Gtk.Widget.setTooltipText] and
-   * [Gtk.Entry.setIconTooltipMarkup].
+   * See also [gtk.widget.Widget.setTooltipText] and
+   * [gtk.entry.Entry.setIconTooltipMarkup].
    * If you unset the widget tooltip via
-   * [Gtk.Widget.setTooltipText] or
-   * [Gtk.Widget.setTooltipMarkup], this sets
+   * [gtk.widget.Widget.setTooltipText] or
+   * [gtk.widget.Widget.setTooltipMarkup], this sets
    * propertyGtk.Widget:has-tooltip to %FALSE, which suppresses
    * icon tooltips too. You can resolve this by then calling
-   * [Gtk.Widget.setHasTooltip] to set
+   * [gtk.widget.Widget.setHasTooltip] to set
    * propertyGtk.Widget:has-tooltip back to %TRUE, or
    * setting at least one non-empty tooltip on any icon
    * achieves the same result.
@@ -826,7 +826,7 @@ class Entry : Widget, CellEditable, Editable
   /**
    * Sets the character to use in place of the actual text
    * in “password mode”.
-   * See [Gtk.Entry.setVisibility] for how to enable
+   * See [gtk.entry.Entry.setVisibility] for how to enable
    * “password mode”.
    * By default, GTK picks the best invisible char available in
    * the current font. If you set the invisible char to 0, then
@@ -845,7 +845,7 @@ class Entry : Widget, CellEditable, Editable
    * If the current contents are longer than the given length, then
    * they will be truncated to fit. The length is in characters.
    * This is equivalent to getting entry's `GtkEntryBuffer` and
-   * calling [Gtk.EntryBuffer.setMaxLength] on it.
+   * calling [gtk.entry_buffer.EntryBuffer.setMaxLength] on it.
    * Params:
    *   max = the maximum length of the entry, or 0 for no maximum.
    *     $(LPAREN)other than the maximum length of entries.$(RPAREN) The value passed in will
@@ -894,7 +894,7 @@ class Entry : Widget, CellEditable, Editable
   /**
    * Sets the fraction of total entry width to move the progress
    * bouncing block for each pulse.
-   * Use [Gtk.Entry.progressPulse] to pulse
+   * Use [gtk.entry.Entry.progressPulse] to pulse
    * the progress.
    * Params:
    *   fraction = fraction between 0.0 and 1.0
@@ -922,7 +922,7 @@ class Entry : Widget, CellEditable, Editable
    * the text in the entry widget is copied elsewhere.
    * By default, GTK picks the best invisible character available
    * in the current font, but it can be changed with
-   * [Gtk.Entry.setInvisibleChar].
+   * [gtk.entry.Entry.setInvisibleChar].
    * Note that you probably want to set propertyGtk.Entry:input-purpose
    * to %GTK_INPUT_PURPOSE_PASSWORD or %GTK_INPUT_PURPOSE_PIN to
    * inform input methods about the purpose of this entry,
@@ -937,7 +937,7 @@ class Entry : Widget, CellEditable, Editable
 
   /**
    * Unsets the invisible char, so that the default invisible char
-   * is used again. See [Gtk.Entry.setInvisibleChar].
+   * is used again. See [gtk.entry.Entry.setInvisibleChar].
    */
   void unsetInvisibleChar()
   {

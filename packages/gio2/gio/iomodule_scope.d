@@ -1,6 +1,6 @@
 module gio.iomodule_scope;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -8,8 +8,8 @@ import gio.types;
 /**
  * Represents a scope for loading IO modules. A scope can be used for blocking
  * duplicate modules, or blocking a module you don't want to load.
- * The scope can be used with [Gio.Global.ioModulesLoadAllInDirectoryWithScope]
- * or [Gio.Global.ioModulesScanAllInDirectoryWithScope].
+ * The scope can be used with [gio.global.ioModulesLoadAllInDirectoryWithScope]
+ * or [gio.global.ioModulesScanAllInDirectoryWithScope].
  */
 class IOModuleScope
 {
@@ -33,8 +33,8 @@ class IOModuleScope
 
   /**
    * Block modules with the given basename from being loaded when
-   * this scope is used with [Gio.Global.ioModulesScanAllInDirectoryWithScope]
-   * or [Gio.Global.ioModulesLoadAllInDirectoryWithScope].
+   * this scope is used with [gio.global.ioModulesScanAllInDirectoryWithScope]
+   * or [gio.global.ioModulesLoadAllInDirectoryWithScope].
    * Params:
    *   basename = the basename to block
    */

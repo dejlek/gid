@@ -7,7 +7,7 @@ import cairo.font_options;
 import cairo.glyph;
 import cairo.matrix;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
@@ -17,9 +17,9 @@ import gobject.boxed;
  * to a scaled font to speed up the computation of metrics.
  * There are various types of scaled fonts, depending on the
  * <firstterm>font backend</firstterm> they use. The type of a
- * scaled font can be queried using [cairo.ScaledFont.getFontType].
+ * scaled font can be queried using [cairo.scaled_font.ScaledFont.getFontType].
  * Memory management of #cairo_scaled_font_t is done with
- * [cairo.ScaledFont.reference] and [cairo.ScaledFont.destroy].
+ * [cairo.scaled_font.ScaledFont.reference] and [cairo.scaled_font.ScaledFont.destroy].
  */
 class ScaledFont : Boxed
 {
@@ -58,7 +58,7 @@ class ScaledFont : Boxed
   /**
    * Stores the CTM with which scaled_font was created into ctm.
    * Note that the translation offsets $(LPAREN)x0, y0$(RPAREN) of the CTM are ignored
-   * by [cairo.Global.scaledFontCreate].  So, the matrix this
+   * by [cairo.global.scaledFontCreate].  So, the matrix this
    * function returns always has 0,0 as x0,y0.
    * Params:
    *   ctm = return value for the CTM
@@ -70,11 +70,11 @@ class ScaledFont : Boxed
 
   /**
    * Gets the font face that this scaled font uses.  This might be the
-   * font face passed to [cairo.Global.scaledFontCreate], but this does not
+   * font face passed to [cairo.global.scaledFontCreate], but this does not
    * hold true for all possible cases.
    * Returns: The #cairo_font_face_t with which scaled_font was
    *   created.  This object is owned by cairo. To keep a reference to it,
-   *   you must call [cairo.ScaledFont.reference].
+   *   you must call [cairo.scaled_font.ScaledFont.reference].
    */
   FontFace getFontFace()
   {
@@ -151,11 +151,11 @@ class ScaledFont : Boxed
   /**
    * Gets the extents for an array of glyphs. The extents describe a
    * user-space rectangle that encloses the "inked" portion of the
-   * glyphs, $(LPAREN)as they would be drawn by [cairo.Context.showGlyphs] if the cairo
+   * glyphs, $(LPAREN)as they would be drawn by [cairo.context.Context.showGlyphs] if the cairo
    * graphics state were set to the same font_face, font_matrix, ctm,
    * and font_options as scaled_font$(RPAREN).  Additionally, the x_advance and
    * y_advance values indicate the amount by which the current point
-   * would be advanced by [cairo.Context.showGlyphs].
+   * would be advanced by [cairo.context.Context.showGlyphs].
    * Note that whitespace glyphs do not contribute to the size of the
    * rectangle $(LPAREN)extents.width and extents.height$(RPAREN).
    * Params:
@@ -185,11 +185,11 @@ class ScaledFont : Boxed
   /**
    * Gets the extents for a string of text. The extents describe a
    * user-space rectangle that encloses the "inked" portion of the text
-   * drawn at the origin $(LPAREN)0,0$(RPAREN) $(LPAREN)as it would be drawn by [cairo.Context.showText]
+   * drawn at the origin $(LPAREN)0,0$(RPAREN) $(LPAREN)as it would be drawn by [cairo.context.Context.showText]
    * if the cairo graphics state were set to the same font_face,
    * font_matrix, ctm, and font_options as scaled_font$(RPAREN).  Additionally,
    * the x_advance and y_advance values indicate the amount by which the
-   * current point would be advanced by [cairo.Context.showText].
+   * current point would be advanced by [cairo.context.Context.showText].
    * Note that whitespace characters do not directly contribute to the
    * size of the rectangle $(LPAREN)extents.width and extents.height$(RPAREN). They do
    * contribute indirectly by changing the position of non-whitespace

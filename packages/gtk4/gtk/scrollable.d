@@ -1,7 +1,7 @@
 module gtk.scrollable;
 
 public import gtk.scrollable_iface_proxy;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.adjustment;
 import gtk.border;
@@ -12,8 +12,8 @@ import gtk.types;
 /**
  * `GtkScrollable` is an interface for widgets with native scrolling ability.
  * To implement this interface you should override the
- * [Gtk.Scrollable.hadjustment] and
- * [Gtk.Scrollable.vadjustment] properties.
+ * [gtk.scrollable.Scrollable.Adjustment] and
+ * [gtk.scrollable.Scrollable.Adjustment] properties.
  * ## Creating a scrollable widget
  * All scrollable widgets should do the following.
  * - When a parent widget sets the scrollable child widget’s adjustments,
@@ -28,7 +28,7 @@ import gtk.types;
  * vfunc@Gtk.Widget.size_allocate implementation.
  * - When the parent allocates space to the scrollable child widget,
  * the widget must ensure the adjustments’ property values are correct and up
- * to date, for example using [Gtk.Adjustment.configure].
+ * to date, for example using [gtk.adjustment.Adjustment.configure].
  * - When any of the adjustments emits the signal@Gtk.Adjustment::value-changed
  * signal, the scrollable widget should scroll its contents.
  */

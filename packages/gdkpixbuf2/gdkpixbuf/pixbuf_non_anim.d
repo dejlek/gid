@@ -5,7 +5,7 @@ import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf;
 import gdkpixbuf.pixbuf_animation;
 import gdkpixbuf.types;
-import gid.gid;
+import gid.global;
 
 class PixbufNonAnim : PixbufAnimation
 {

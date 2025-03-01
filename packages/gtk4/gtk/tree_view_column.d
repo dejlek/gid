@@ -1,6 +1,6 @@
 module gtk.tree_view_column;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.initially_unowned;
 import gobject.object;
@@ -19,17 +19,17 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * A visible column in a [Gtk.TreeView] widget
+ * A visible column in a [gtk.tree_view.TreeView] widget
  * The `GtkTreeViewColumn` object represents a visible column in a `GtkTreeView` widget.
  * It allows to set properties of the column header, and functions as a holding pen
  * for the cell renderers which determine how the data in the column is displayed.
  * Please refer to the [tree widget conceptual overview](section-tree-widget.html)
  * for an overview of all the objects and data types related to the tree widget and
- * how they work together, and to the [Gtk.TreeView] documentation for specifics
+ * how they work together, and to the [gtk.tree_view.TreeView] documentation for specifics
  * about the CSS node structure for treeviews and their headers.
 
- * Deprecated: Use [Gtk.ColumnView] and [Gtk.ColumnViewColumn]
- *   instead of [Gtk.TreeView] to show a tabular list
+ * Deprecated: Use [gtk.column_view.ColumnView] and [gtk.column_view_column.ColumnViewColumn]
+ *   instead of [gtk.tree_view.TreeView] to show a tabular list
  */
 class TreeViewColumn : InitiallyUnowned, Buildable, CellLayout
 {
@@ -142,7 +142,7 @@ class TreeViewColumn : InitiallyUnowned, Buildable, CellLayout
   /**
    * Returns %TRUE if any of the cells packed into the tree_column are visible.
    * For this to be meaningful, you must first initialize the cells with
-   * [Gtk.TreeViewColumn.cellSetCellData]
+   * [gtk.tree_view_column.TreeViewColumn.cellSetCellData]
    * Returns: %TRUE, if any of the cells packed into the tree_column are currently visible
 
    * Deprecated: Use GtkColumnView instead
@@ -184,7 +184,7 @@ class TreeViewColumn : InitiallyUnowned, Buildable, CellLayout
 
   /**
    * Clears all existing attributes previously set with
-   * [Gtk.TreeViewColumn.setAttributes].
+   * [gtk.tree_view_column.TreeViewColumn.setAttributes].
    * Params:
    *   cellRenderer = a `GtkCellRenderer` to clear the attribute mapping on.
 
@@ -275,7 +275,7 @@ class TreeViewColumn : InitiallyUnowned, Buildable, CellLayout
 
   /**
    * Gets the fixed width of the column.  This may not be the actual displayed
-   * width of the column; for that, use [Gtk.TreeViewColumn.getWidth].
+   * width of the column; for that, use [gtk.tree_view_column.TreeViewColumn.getWidth].
    * Returns: The fixed width of the column.
 
    * Deprecated: Use GtkColumnView instead
@@ -358,7 +358,7 @@ class TreeViewColumn : InitiallyUnowned, Buildable, CellLayout
   /**
    * Gets the logical sort_column_id that the model sorts on
    * when this column is selected for sorting.
-   * See [Gtk.TreeViewColumn.setSortColumnId].
+   * See [gtk.tree_view_column.TreeViewColumn.setSortColumnId].
    * Returns: the current sort_column_id for this column, or -1 if
    *   this column can’t be used for sorting
 
@@ -372,7 +372,7 @@ class TreeViewColumn : InitiallyUnowned, Buildable, CellLayout
   }
 
   /**
-   * Gets the value set by [Gtk.TreeViewColumn.setSortIndicator].
+   * Gets the value set by [gtk.tree_view_column.TreeViewColumn.setSortIndicator].
    * Returns: whether the sort indicator arrow is displayed
 
    * Deprecated: Use GtkColumnView instead
@@ -385,7 +385,7 @@ class TreeViewColumn : InitiallyUnowned, Buildable, CellLayout
   }
 
   /**
-   * Gets the value set by [Gtk.TreeViewColumn.setSortOrder].
+   * Gets the value set by [gtk.tree_view_column.TreeViewColumn.setSortOrder].
    * Returns: the sort order the sort indicator is indicating
 
    * Deprecated: Use GtkColumnView instead
@@ -717,7 +717,7 @@ class TreeViewColumn : InitiallyUnowned, Buildable, CellLayout
   /**
    * Call this function with a setting of %TRUE to display an arrow in
    * the header button indicating the column is sorted. Call
-   * [Gtk.TreeViewColumn.setSortOrder] to change the direction of
+   * [gtk.tree_view_column.TreeViewColumn.setSortOrder] to change the direction of
    * the arrow.
    * Params:
    *   setting = %TRUE to display an indicator that the column is sorted
@@ -732,13 +732,13 @@ class TreeViewColumn : InitiallyUnowned, Buildable, CellLayout
   /**
    * Changes the appearance of the sort indicator.
    * This does not actually sort the model.  Use
-   * [Gtk.TreeViewColumn.setSortColumnId] if you want automatic sorting
+   * [gtk.tree_view_column.TreeViewColumn.setSortColumnId] if you want automatic sorting
    * support.  This function is primarily for custom sorting behavior, and should
-   * be used in conjunction with [Gtk.TreeSortable.setSortColumnId] to do
+   * be used in conjunction with [gtk.tree_sortable.TreeSortable.setSortColumnId] to do
    * that. For custom models, the mechanism will vary.
    * The sort indicator changes direction to indicate normal sort or reverse sort.
    * Note that you must have the sort indicator enabled to see anything when
-   * calling this function; see [Gtk.TreeViewColumn.setSortIndicator].
+   * calling this function; see [gtk.tree_view_column.TreeViewColumn.setSortIndicator].
    * Params:
    *   order = sort order that the sort indicator should indicate
 

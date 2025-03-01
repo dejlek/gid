@@ -1,3 +1,5 @@
+//!class VariantG pre
+
 import glib.variant_builder;
 import glib.variant_type;
 

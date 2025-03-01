@@ -1,6 +1,6 @@
 module gtk.flatten_list_model;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -51,7 +51,7 @@ class FlattenListModel : ObjectG, ListModel, SectionModel
   }
 
   /**
-   * Gets the model set via [Gtk.FlattenListModel.setModel].
+   * Gets the model set via [gtk.flatten_list_model.FlattenListModel.setModel].
    * Returns: The model flattened by self
    */
   ListModel getModel()

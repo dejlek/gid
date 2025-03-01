@@ -1,6 +1,6 @@
 module gtk.frame;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -19,7 +19,7 @@ import gtk.widget;
  * ![An example GtkFrame](frame.png)
  * If present, the label is drawn inside the top edge of the frame.
  * The horizontal position of the label can be controlled with
- * [Gtk.Frame.setLabelAlign].
+ * [gtk.frame.Frame.setLabelAlign].
  * `GtkFrame` clips its child. You can use this to add rounded corners
  * to widgets, but be aware that it also cuts off shadows.
  * # GtkFrame as GtkBuildable

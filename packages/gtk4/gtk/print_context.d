@@ -1,7 +1,7 @@
 module gtk.print_context;
 
 import cairo.context : DcairoContext = Context;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -15,14 +15,14 @@ import pango.layout;
  * A `GtkPrintContext` encapsulates context information that is required when
  * drawing pages for printing.
  * This includes the cairo context and important parameters like page size
- * and resolution. It also lets you easily create [Pango.Layout] and
- * [Pango.Context] objects that match the font metrics of the cairo surface.
+ * and resolution. It also lets you easily create [pango.layout.Layout] and
+ * [pango.context.Context] objects that match the font metrics of the cairo surface.
  * `GtkPrintContext` objects get passed to the
  * signal@Gtk.PrintOperation::begin-print,
  * signal@Gtk.PrintOperation::end-print,
  * signal@Gtk.PrintOperation::request-page-setup and
  * signal@Gtk.PrintOperation::draw-page signals on the
- * [Gtk.PrintOperation] object.
+ * [gtk.print_operation.PrintOperation] object.
  * ## Using GtkPrintContext in a ::draw-page callback
  * ```c
  * static void

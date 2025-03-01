@@ -2,7 +2,7 @@ module pangocairo.font_map_mixin;
 
 public import pangocairo.font_map_iface_proxy;
 public import cairo.types;
-public import gid.gid;
+public import gid.global;
 public import gobject.object;
 public import pango.font_map : DPangoFontMap = FontMap;
 public import pangocairo.c.functions;
@@ -35,7 +35,7 @@ template FontMapT()
 
   /**
    * Gets the resolution for the fontmap.
-   * See [PangoCairo.FontMap.setResolution].
+   * See [pangocairo.font_map.FontMap.setResolution].
    * Returns: the resolution in "dots per inch"
    */
   override double getResolution()
@@ -54,10 +54,10 @@ template FontMapT()
    * This function only changes the default fontmap for
    * the current thread. Default fontmaps of existing threads
    * are not changed. Default fontmaps of any new threads will
-   * still be created using [PangoCairo.FontMap.new_].
+   * still be created using [pangocairo.font_map.FontMap.new_].
    * A value of %NULL for fontmap will cause the current default
    * font map to be released and a new default font map to be created
-   * on demand, using [PangoCairo.FontMap.new_].
+   * on demand, using [pangocairo.font_map.FontMap.new_].
    */
   override void setDefault()
   {

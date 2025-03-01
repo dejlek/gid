@@ -14,7 +14,7 @@ import arrowflight.server_call_context;
 import arrowflight.server_options;
 import arrowflight.ticket;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.event;
 import gdk.types;
-import gid.gid;
+import gid.global;
 
 /**
  * An event related to closing a top-level surface.

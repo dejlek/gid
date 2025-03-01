@@ -1,6 +1,6 @@
 module gtk.print_unix_dialog;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -31,11 +31,11 @@ import gtk.window;
  * ![An example GtkPrintUnixDialog](printdialog.png)
  * It can be used very much like any other GTK dialog, at the cost of
  * the portability offered by the high-level printing API with
- * [Gtk.PrintOperation].
+ * [gtk.print_operation.PrintOperation].
  * In order to print something with `GtkPrintUnixDialog`, you need to
- * use [Gtk.PrintUnixDialog.getSelectedPrinter] to obtain a
- * [Gtk.Printer] object and use it to construct a [Gtk.PrintJob]
- * using [Gtk.PrintJob.new_].
+ * use [gtk.print_unix_dialog.PrintUnixDialog.getSelectedPrinter] to obtain a
+ * [gtk.printer.Printer] object and use it to construct a [gtk.print_job.PrintJob]
+ * using [gtk.print_job.PrintJob.new_].
  * `GtkPrintUnixDialog` uses the following response values:
  * - %GTK_RESPONSE_OK: for the “Print” button
  * - %GTK_RESPONSE_APPLY: for the “Preview” button

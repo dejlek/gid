@@ -1,7 +1,7 @@
 module gtk.event_controller_scroll;
 
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -13,20 +13,20 @@ import gtk.types;
  * events.
  * It is capable of handling both discrete and continuous scroll
  * events from mice or touchpads, abstracting them both with the
- * [Gtk.EventControllerScroll.scroll] signal. Deltas in
+ * [gtk.event_controller_scroll.EventControllerScroll.scroll] signal. Deltas in
  * the discrete case are multiples of 1.
  * In the case of continuous scroll events, `GtkEventControllerScroll`
- * encloses all [Gtk.EventControllerScroll.scroll] emissions
- * between two [Gtk.EventControllerScroll.scroll] and
- * [Gtk.EventControllerScroll.scroll] signals.
+ * encloses all [gtk.event_controller_scroll.EventControllerScroll.scroll] emissions
+ * between two [gtk.event_controller_scroll.EventControllerScroll.scroll] and
+ * [gtk.event_controller_scroll.EventControllerScroll.scroll] signals.
  * The behavior of the event controller can be modified by the flags
  * given at creation time, or modified at a later point through
- * [Gtk.EventControllerScroll.setFlags] $(LPAREN)e.g. because the scrolling
+ * [gtk.event_controller_scroll.EventControllerScroll.setFlags] $(LPAREN)e.g. because the scrolling
  * conditions of the widget changed$(RPAREN).
  * The controller can be set up to emit motion for either/both vertical
  * and horizontal scroll events through %GTK_EVENT_CONTROLLER_SCROLL_VERTICAL,
  * %GTK_EVENT_CONTROLLER_SCROLL_HORIZONTAL and %GTK_EVENT_CONTROLLER_SCROLL_BOTH_AXES.
- * If any axis is disabled, the respective [Gtk.EventControllerScroll.scroll]
+ * If any axis is disabled, the respective [gtk.event_controller_scroll.EventControllerScroll.scroll]
  * delta will be 0. Vertical scroll events will be translated to horizontal
  * motion for the devices incapable of horizontal scrolling.
  * The event controller can also be forced to emit discrete events on all
@@ -34,7 +34,7 @@ import gtk.types;
  * to implement discrete actions triggered through scroll events $(LPAREN)e.g.
  * switching across combobox options$(RPAREN).
  * The %GTK_EVENT_CONTROLLER_SCROLL_KINETIC flag toggles the emission of the
- * [Gtk.EventControllerScroll.decelerate] signal, emitted at the end
+ * [gtk.event_controller_scroll.EventControllerScroll.decelerate] signal, emitted at the end
  * of scrolling with two X/Y velocity arguments that are consistent with the
  * motion that was received.
  */
@@ -84,7 +84,7 @@ class EventControllerScroll : EventController
 
   /**
    * Gets the scroll unit of the last
-   * [Gtk.EventControllerScroll.scroll] signal received.
+   * [gtk.event_controller_scroll.EventControllerScroll.scroll] signal received.
    * Always returns %GDK_SCROLL_UNIT_WHEEL if the
    * %GTK_EVENT_CONTROLLER_SCROLL_DISCRETE flag is set.
    * Returns: the scroll unit.
@@ -149,7 +149,7 @@ class EventControllerScroll : EventController
    * Signals that the widget should scroll by the
    * amount specified by dx and dy.
    * For the representation unit of the deltas, see
-   * [Gtk.EventControllerScroll.getUnit].
+   * [gtk.event_controller_scroll.EventControllerScroll.getUnit].
    * Params
    *   dx = X delta
    *   dy = Y delta

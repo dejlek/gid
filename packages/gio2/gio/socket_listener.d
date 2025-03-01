@@ -1,6 +1,6 @@
 module gio.socket_listener;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -19,14 +19,14 @@ import gobject.object;
  * of server sockets and helps you accept sockets from any of the
  * socket, either sync or async.
  * Add addresses and ports to listen on using
- * [Gio.SocketListener.addAddress] and
- * [Gio.SocketListener.addInetPort]. These will be listened on until
- * [Gio.SocketListener.close] is called. Dropping your final reference to
- * the `GSocketListener` will not cause [Gio.SocketListener.close] to be
+ * [gio.socket_listener.SocketListener.addAddress] and
+ * [gio.socket_listener.SocketListener.addInetPort]. These will be listened on until
+ * [gio.socket_listener.SocketListener.close] is called. Dropping your final reference to
+ * the `GSocketListener` will not cause [gio.socket_listener.SocketListener.close] to be
  * called implicitly, as some references to the `GSocketListener` may be held
  * internally.
  * If you want to implement a network server, also look at
- * [Gio.SocketService] and [Gio.ThreadedSocketService] which are
+ * [gio.socket_service.SocketService] and [gio.threaded_socket_service.ThreadedSocketService] which are
  * subclasses of `GSocketListener` that make this even easier.
  */
 class SocketListener : ObjectG
@@ -50,8 +50,8 @@ class SocketListener : ObjectG
 
   /**
    * Creates a new #GSocketListener with no sockets to listen for.
-   * New listeners can be added with e.g. [Gio.SocketListener.addAddress]
-   * or [Gio.SocketListener.addInetPort].
+   * New listeners can be added with e.g. [gio.socket_listener.SocketListener.addAddress]
+   * or [gio.socket_listener.SocketListener.addInetPort].
    * Returns: a new #GSocketListener.
    */
   this()
@@ -90,9 +90,9 @@ class SocketListener : ObjectG
   }
 
   /**
-   * This is the asynchronous version of [Gio.SocketListener.accept].
+   * This is the asynchronous version of [gio.socket_listener.SocketListener.accept].
    * When the operation is finished callback will be
-   * called. You can then call [Gio.SocketListener.acceptFinish]
+   * called. You can then call [gio.socket_listener.SocketListener.acceptFinish]
    * to get the result of the operation.
    * Params:
    *   cancellable = a #GCancellable, or %NULL
@@ -114,7 +114,7 @@ class SocketListener : ObjectG
   }
 
   /**
-   * Finishes an async accept operation. See [Gio.SocketListener.acceptAsync]
+   * Finishes an async accept operation. See [gio.socket_listener.SocketListener.acceptAsync]
    * Params:
    *   result = a #GAsyncResult.
    *   sourceObject = Optional #GObject identifying this source
@@ -137,7 +137,7 @@ class SocketListener : ObjectG
    * Blocks waiting for a client to connect to any of the sockets added
    * to the listener. Returns the #GSocket that was accepted.
    * If you want to accept the high-level #GSocketConnection, not a #GSocket,
-   * which is often the case, then you should use [Gio.SocketListener.accept]
+   * which is often the case, then you should use [gio.socket_listener.SocketListener.accept]
    * instead.
    * If source_object is not %NULL it will be filled out with the source
    * object specified when the corresponding socket or address was added
@@ -164,9 +164,9 @@ class SocketListener : ObjectG
   }
 
   /**
-   * This is the asynchronous version of [Gio.SocketListener.acceptSocket].
+   * This is the asynchronous version of [gio.socket_listener.SocketListener.acceptSocket].
    * When the operation is finished callback will be
-   * called. You can then call [Gio.SocketListener.acceptSocketFinish]
+   * called. You can then call [gio.socket_listener.SocketListener.acceptSocketFinish]
    * to get the result of the operation.
    * Params:
    *   cancellable = a #GCancellable, or %NULL
@@ -188,7 +188,7 @@ class SocketListener : ObjectG
   }
 
   /**
-   * Finishes an async accept operation. See [Gio.SocketListener.acceptSocketAsync]
+   * Finishes an async accept operation. See [gio.socket_listener.SocketListener.acceptSocketAsync]
    * Params:
    *   result = a #GAsyncResult.
    *   sourceObject = Optional #GObject identifying this source
@@ -214,7 +214,7 @@ class SocketListener : ObjectG
    * Note that adding an IPv6 address, depending on the platform,
    * may or may not result in a listener that also accepts IPv4
    * connections.  For more deterministic behavior, see
-   * [Gio.SocketListener.addInetPort].
+   * [gio.socket_listener.SocketListener.addInetPort].
    * source_object will be passed out in the various calls
    * to accept to identify this particular source, which is
    * useful if you're listening on multiple addresses and do
@@ -224,7 +224,7 @@ class SocketListener : ObjectG
    * is helpful for determining the port number that was used for when
    * requesting a binding to port 0 $(LPAREN)ie: "any port"$(RPAREN).  This address, if
    * requested, belongs to the caller and must be freed.
-   * Call [Gio.SocketListener.close] to stop listening on address; this will not
+   * Call [gio.socket_listener.SocketListener.close] to stop listening on address; this will not
    * be done automatically when you drop your final reference to listener, as
    * references may be held internally.
    * Params:
@@ -271,14 +271,14 @@ class SocketListener : ObjectG
   }
 
   /**
-   * Helper function for [Gio.SocketListener.addAddress] that
+   * Helper function for [gio.socket_listener.SocketListener.addAddress] that
    * creates a TCP/IP socket listening on IPv4 and IPv6 $(LPAREN)if
    * supported$(RPAREN) on the specified port on all interfaces.
    * source_object will be passed out in the various calls
    * to accept to identify this particular source, which is
    * useful if you're listening on multiple addresses and do
    * different things depending on what address is connected to.
-   * Call [Gio.SocketListener.close] to stop listening on port; this will not
+   * Call [gio.socket_listener.SocketListener.close] to stop listening on port; this will not
    * be done automatically when you drop your final reference to listener, as
    * references may be held internally.
    * Params:
@@ -334,8 +334,8 @@ class SocketListener : ObjectG
   /**
    * Sets the listen backlog on the sockets in the listener. This must be called
    * before adding any sockets, addresses or ports to the #GSocketListener $(LPAREN)for
-   * example, by calling [Gio.SocketListener.addInetPort]$(RPAREN) to be effective.
-   * See [Gio.Socket.setListenBacklog] for details
+   * example, by calling [gio.socket_listener.SocketListener.addInetPort]$(RPAREN) to be effective.
+   * See [gio.socket.Socket.setListenBacklog] for details
    * Params:
    *   listenBacklog = an integer
    */

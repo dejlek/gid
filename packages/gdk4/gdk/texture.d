@@ -6,7 +6,7 @@ import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.types;
 import gdkpixbuf.pixbuf;
-import gid.gid;
+import gid.global;
 import gio.file;
 import gio.file_mixin;
 import gio.icon;
@@ -22,13 +22,13 @@ import gobject.object;
  * It is primarily meant for pixel data that will not change over
  * multiple frames, and will be used for a long time.
  * There are various ways to create `GdkTexture` objects from a
- * [GdkPixbuf.Pixbuf], or from bytes stored in memory, a file, or a
- * [Gio.Resource].
+ * [gdkpixbuf.pixbuf.Pixbuf], or from bytes stored in memory, a file, or a
+ * [gio.resource.Resource].
  * The ownership of the pixel data is transferred to the `GdkTexture`
- * instance; you can only make a copy of it, via [Gdk.Texture.download].
+ * instance; you can only make a copy of it, via [gdk.texture.Texture.download].
  * `GdkTexture` is an immutable object: That means you cannot change
  * anything about it other than increasing the reference count via
- * [GObject.ObjectG.ref_], and consequently, it is a thread-safe object.
+ * [gobject.object.ObjectG.ref_], and consequently, it is a thread-safe object.
  */
 class Texture : ObjectG, Paintable, Icon, LoadableIcon
 {
@@ -56,7 +56,7 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
   /**
    * Creates a new texture object representing the `GdkPixbuf`.
    * This function is threadsafe, so that you can e.g. use GTask
-   * and [Gio.Task.runInThread] to avoid blocking the main thread
+   * and [gio.task.Task.runInThread] to avoid blocking the main thread
    * while loading a big image.
    * Params:
    *   pixbuf = a `GdkPixbuf`
@@ -76,7 +76,7 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    * are PNG, JPEG and TIFF, though more formats might be available.
    * If %NULL is returned, then error will be set.
    * This function is threadsafe, so that you can e.g. use GTask
-   * and [Gio.Task.runInThread] to avoid blocking the main thread
+   * and [gio.task.Task.runInThread] to avoid blocking the main thread
    * while loading a big image.
    * Params:
    *   bytes = a `GBytes` containing the data to load
@@ -99,7 +99,7 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    * are PNG, JPEG and TIFF, though more formats might be available.
    * If %NULL is returned, then error will be set.
    * This function is threadsafe, so that you can e.g. use GTask
-   * and [Gio.Task.runInThread] to avoid blocking the main thread
+   * and [gio.task.Task.runInThread] to avoid blocking the main thread
    * while loading a big image.
    * Params:
    *   file = `GFile` to load
@@ -122,7 +122,7 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    * are PNG, JPEG and TIFF, though more formats might be available.
    * If %NULL is returned, then error will be set.
    * This function is threadsafe, so that you can e.g. use GTask
-   * and [Gio.Task.runInThread] to avoid blocking the main thread
+   * and [gio.task.Task.runInThread] to avoid blocking the main thread
    * while loading a big image.
    * Params:
    *   path = the filename to load
@@ -147,9 +147,9 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    * It is a fatal error if resource_path does not specify a valid
    * image resource and the program will abort if that happens.
    * If you are unsure about the validity of a resource, use
-   * [Gdk.Texture.newFromFile] to load it.
+   * [gdk.texture.Texture.newFromFile] to load it.
    * This function is threadsafe, so that you can e.g. use GTask
-   * and [Gio.Task.runInThread] to avoid blocking the main thread
+   * and [gio.task.Task.runInThread] to avoid blocking the main thread
    * while loading a big image.
    * Params:
    *   resourcePath = the path of the resource file
@@ -208,8 +208,8 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    * Store the given texture to the filename as a PNG file.
    * This is a utility function intended for debugging and testing.
    * If you want more control over formats, proper error handling or
-   * want to store to a [Gio.File] or other location, you might want to
-   * use [Gdk.Texture.saveToPngBytes] or look into the
+   * want to store to a [gio.file.File] or other location, you might want to
+   * use [gdk.texture.Texture.saveToPngBytes] or look into the
    * gdk-pixbuf library.
    * Params:
    *   filename = the filename to store to
@@ -225,14 +225,14 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
 
   /**
    * Store the given texture in memory as a PNG file.
-   * Use [Gdk.Texture.newFromBytes] to read it back.
+   * Use [gdk.texture.Texture.newFromBytes] to read it back.
    * If you want to serialize a texture, this is a convenient and
    * portable way to do that.
    * If you need more control over the generated image, such as
    * attaching metadata, you should look into an image handling
    * library such as the gdk-pixbuf library.
    * If you are dealing with high dynamic range float data, you
-   * might also want to consider [Gdk.Texture.saveToTiffBytes]
+   * might also want to consider [gdk.texture.Texture.saveToTiffBytes]
    * instead.
    * Returns: a newly allocated `GBytes` containing PNG data
    */
@@ -261,14 +261,14 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
 
   /**
    * Store the given texture in memory as a TIFF file.
-   * Use [Gdk.Texture.newFromBytes] to read it back.
+   * Use [gdk.texture.Texture.newFromBytes] to read it back.
    * This function is intended to store a representation of the
    * texture's data that is as accurate as possible. This is
    * particularly relevant when working with high dynamic range
    * images and floating-point texture data.
    * If that is not your concern and you are interested in a
    * smaller size and a more portable format, you might want to
-   * use [Gdk.Texture.saveToPngBytes].
+   * use [gdk.texture.Texture.saveToPngBytes].
    * Returns: a newly allocated `GBytes` containing TIFF data
    */
   Bytes saveToTiffBytes()

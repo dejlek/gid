@@ -1,6 +1,6 @@
 module glib.async_queue;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.time_val;
@@ -75,7 +75,7 @@ class AsyncQueue
    * Acquires the queue's lock. If another thread is already
    * holding the lock, this call will block until the lock
    * becomes available.
-   * Call [GLib.AsyncQueue.unlock] to drop the lock again.
+   * Call [glib.async_queue.AsyncQueue.unlock] to drop the lock again.
    * While holding the lock, you can only call the
    * g_async_queue_*_unlocked$(LPAREN)$(RPAREN) functions on queue. Otherwise,
    * deadlock may occur.
@@ -121,7 +121,7 @@ class AsyncQueue
 
   /**
    * Pushes the item into the queue. item must not be %NULL.
-   * In contrast to [GLib.AsyncQueue.push], this function
+   * In contrast to [glib.async_queue.AsyncQueue.push], this function
    * pushes the new item ahead of the items already in the queue,
    * so that it will be the next one to be popped off the queue.
    * Params:
@@ -134,7 +134,7 @@ class AsyncQueue
 
   /**
    * Pushes the item into the queue. item must not be %NULL.
-   * In contrast to [GLib.AsyncQueue.pushUnlocked], this function
+   * In contrast to [glib.async_queue.AsyncQueue.pushUnlocked], this function
    * pushes the new item ahead of the items already in the queue,
    * so that it will be the next one to be popped off the queue.
    * This function must be called while holding the queue's lock.
@@ -150,10 +150,10 @@ class AsyncQueue
    * Inserts data into queue using func to determine the new
    * position.
    * This function requires that the queue is sorted before pushing on
-   * new elements, see [GLib.AsyncQueue.sort].
+   * new elements, see [glib.async_queue.AsyncQueue.sort].
    * This function will lock queue before it sorts the queue and unlock
    * it when it is finished.
-   * For an example of func see [GLib.AsyncQueue.sort].
+   * For an example of func see [glib.async_queue.AsyncQueue.sort].
    * Params:
    *   data = the data to push into the queue
    *   func = the #GCompareDataFunc is used to sort queue
@@ -182,9 +182,9 @@ class AsyncQueue
    * if the first element should be lower in the queue than the second
    * element.
    * This function requires that the queue is sorted before pushing on
-   * new elements, see [GLib.AsyncQueue.sort].
+   * new elements, see [glib.async_queue.AsyncQueue.sort].
    * This function must be called while holding the queue's lock.
-   * For an example of func see [GLib.AsyncQueue.sort].
+   * For an example of func see [glib.async_queue.AsyncQueue.sort].
    * Params:
    *   data = the data to push into the queue
    *   func = the #GCompareDataFunc is used to sort queue
@@ -220,7 +220,7 @@ class AsyncQueue
    * Increases the reference count of the asynchronous queue by 1.
 
    * Deprecated: Reference counting is done atomically.
-   *   so [GLib.AsyncQueue.ref_] can be used regardless of the queue's
+   *   so [glib.async_queue.AsyncQueue.ref_] can be used regardless of the queue's
    *   lock.
    */
   void refUnlocked()
@@ -321,14 +321,14 @@ class AsyncQueue
    * Pops data from the queue. If the queue is empty, blocks until
    * end_time or until data becomes available.
    * If no data is received before end_time, %NULL is returned.
-   * To easily calculate end_time, a combination of [GLib.Global.getRealTime]
-   * and [GLib.TimeVal.add] can be used.
+   * To easily calculate end_time, a combination of [glib.global.getRealTime]
+   * and [glib.time_val.TimeVal.add] can be used.
    * Params:
    *   endTime = a #GTimeVal, determining the final time
    * Returns: data from the queue or %NULL, when no data is
    *   received before end_time.
 
-   * Deprecated: use [GLib.AsyncQueue.timeoutPop].
+   * Deprecated: use [glib.async_queue.AsyncQueue.timeoutPop].
    */
   void* timedPop(TimeVal endTime)
   {
@@ -340,15 +340,15 @@ class AsyncQueue
    * Pops data from the queue. If the queue is empty, blocks until
    * end_time or until data becomes available.
    * If no data is received before end_time, %NULL is returned.
-   * To easily calculate end_time, a combination of [GLib.Global.getRealTime]
-   * and [GLib.TimeVal.add] can be used.
+   * To easily calculate end_time, a combination of [glib.global.getRealTime]
+   * and [glib.time_val.TimeVal.add] can be used.
    * This function must be called while holding the queue's lock.
    * Params:
    *   endTime = a #GTimeVal, determining the final time
    * Returns: data from the queue or %NULL, when no data is
    *   received before end_time.
 
-   * Deprecated: use [GLib.AsyncQueue.timeoutPopUnlocked].
+   * Deprecated: use [glib.async_queue.AsyncQueue.timeoutPopUnlocked].
    */
   void* timedPopUnlocked(TimeVal endTime)
   {
@@ -415,7 +415,7 @@ class AsyncQueue
   /**
    * Releases the queue's lock.
    * Calling this function when you have not acquired
-   * the with [GLib.AsyncQueue.lock] leads to undefined
+   * the with [glib.async_queue.AsyncQueue.lock] leads to undefined
    * behaviour.
    */
   void unlock()
@@ -430,7 +430,7 @@ class AsyncQueue
    * will be destroyed and the memory allocated will be freed.
 
    * Deprecated: Reference counting is done atomically.
-   *   so [GLib.AsyncQueue.unref] can be used regardless of the queue's
+   *   so [glib.async_queue.AsyncQueue.unref] can be used regardless of the queue's
    *   lock.
    */
   void unrefAndUnlock()

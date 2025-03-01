@@ -1,6 +1,6 @@
 module gio.application_command_line;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.file;
@@ -14,7 +14,7 @@ import gobject.object;
 /**
  * `GApplicationCommandLine` represents a command-line invocation of
  * an application.
- * It is created by [Gio.ApplicationGio] and emitted
+ * It is created by [gio.application.ApplicationGio] and emitted
  * in the signal@Gio.Application::command-line signal and virtual function.
  * The class contains the list of arguments that the program was invoked
  * with. It is also possible to query if the commandline invocation was
@@ -22,14 +22,14 @@ import gobject.object;
  * invocation$(RPAREN) or remote $(LPAREN)ie: some other process forwarded the
  * commandline to this process$(RPAREN).
  * The `GApplicationCommandLine` object can provide the @argc and @argv
- * parameters for use with the [GLib.OptionContext] command-line parsing API,
- * with the [Gio.ApplicationCommandLine.getArguments] function. See
+ * parameters for use with the [glib.option_context.OptionContext] command-line parsing API,
+ * with the [gio.application_command_line.ApplicationCommandLine.getArguments] function. See
  * [gapplication-example-cmdline3.c][gapplication-example-cmdline3]
  * for an example.
  * The exit status of the originally-invoked process may be set and
  * messages can be printed to stdout or stderr of that process.
  * For remote invocation, the originally-invoked process exits when
- * [Gio.ApplicationCommandLine.done] method is called. This method is
+ * [gio.application_command_line.ApplicationCommandLine.done] method is called. This method is
  * also automatically called when the object is disposed.
  * The main use for `GApplicationCommandLine` $(LPAREN)and the
  * signal@Gio.Application::command-line signal$(RPAREN) is 'Emacs server' like use cases:
@@ -167,7 +167,7 @@ class ApplicationCommandLine : ObjectG
   /**
    * Creates a #GFile corresponding to a filename that was given as part
    * of the invocation of cmdline.
-   * This differs from [Gio.File.newForCommandlineArg] in that it
+   * This differs from [gio.file.File.newForCommandlineArg] in that it
    * resolves relative pathnames using the current working directory of
    * the invoking process rather than the local process.
    * Params:
@@ -189,7 +189,7 @@ class ApplicationCommandLine : ObjectG
    * For local invocation, it does nothing.
    * This method should be called in the signalGio.Application::command-line
    * handler, after the exit status is set and all messages are printed.
-   * After this call, [Gio.ApplicationCommandLine.setExitStatus] has no effect.
+   * After this call, [gio.application_command_line.ApplicationCommandLine.setExitStatus] has no effect.
    * Subsequent calls to this method are no-ops.
    * This method is automatically called when the #GApplicationCommandLine
    * object is disposed — so you can omit the call in non-garbage collected
@@ -206,9 +206,9 @@ class ApplicationCommandLine : ObjectG
    * filenames or arguments given in the system locale$(RPAREN) but are always in
    * UTF-8 on Windows.
    * If you wish to use the return value with #GOptionContext, you must
-   * use [GLib.OptionContext.parseStrv].
+   * use [glib.option_context.OptionContext.parseStrv].
    * The return value is %NULL-terminated and should be freed using
-   * [GLib.Global.strfreev].
+   * [glib.global.strfreev].
    * Returns: the string array containing the arguments $(LPAREN)the argv$(RPAREN)
    */
   string[] getArguments()
@@ -246,7 +246,7 @@ class ApplicationCommandLine : ObjectG
 
   /**
    * Gets the contents of the 'environ' variable of the command line
-   * invocation, as would be returned by [GLib.Global.getEnviron], ie as a
+   * invocation, as would be returned by [glib.global.getEnviron], ie as a
    * %NULL-terminated list of strings in the form 'NAME\=VALUE'.
    * The strings may contain non-utf8 data.
    * The remote application usually does not send an environment.  Use
@@ -255,7 +255,7 @@ class ApplicationCommandLine : ObjectG
    * to invocation messages from other applications$(RPAREN).
    * The return value should not be modified or freed and is valid for as
    * long as cmdline exists.
-   * See [Gio.ApplicationCommandLine.getenv] if you are only interested
+   * See [gio.application_command_line.ApplicationCommandLine.getenv] if you are only interested
    * in the value of a single environment variable.
    * Returns: the environment strings, or %NULL if they were not sent
    */
@@ -279,7 +279,7 @@ class ApplicationCommandLine : ObjectG
 
   /**
    * Gets the exit status of cmdline.  See
-   * [Gio.ApplicationCommandLine.setExitStatus] for more information.
+   * [gio.application_command_line.ApplicationCommandLine.setExitStatus] for more information.
    * Returns: the exit status
    */
   int getExitStatus()
@@ -304,7 +304,7 @@ class ApplicationCommandLine : ObjectG
    * Gets the options that were passed to g_application_command_line$(LPAREN)$(RPAREN).
    * If you did not override local_command_line$(LPAREN)$(RPAREN) then these are the same
    * options that were parsed according to the #GOptionEntrys added to the
-   * application with [Gio.ApplicationGio.addMainOptionEntries] and possibly
+   * application with [gio.application.ApplicationGio.addMainOptionEntries] and possibly
    * modified from your GApplication::handle-local-options handler.
    * If no options were sent then an empty dictionary is returned so that
    * you don't need to check for %NULL.
@@ -360,7 +360,7 @@ class ApplicationCommandLine : ObjectG
 
   /**
    * Gets the value of a particular environment variable of the command
-   * line invocation, as would be returned by [GLib.Global.getenv].  The strings may
+   * line invocation, as would be returned by [glib.global.getenv].  The strings may
    * contain non-utf8 data.
    * The remote application usually does not send an environment.  Use
    * %G_APPLICATION_SEND_ENVIRONMENT to affect that.  Even with this flag
@@ -383,7 +383,7 @@ class ApplicationCommandLine : ObjectG
 
   /**
    * Prints a message using the stdout print handler in the invoking process.
-   * Unlike [Gio.ApplicationCommandLine.print], message is not a `printf()`-style
+   * Unlike [gio.application_command_line.ApplicationCommandLine.print], message is not a `printf()`-style
    * format string. Use this function if message contains text you don't have
    * control over, that could include `printf$(LPAREN)$(RPAREN)` escape sequences.
    * Params:
@@ -397,7 +397,7 @@ class ApplicationCommandLine : ObjectG
 
   /**
    * Prints a message using the stderr print handler in the invoking process.
-   * Unlike [Gio.ApplicationCommandLine.printerr], message is not
+   * Unlike [gio.application_command_line.ApplicationCommandLine.printerr], message is not
    * a `printf$(LPAREN)$(RPAREN)`-style format string. Use this function if message contains text
    * you don't have control over, that could include `printf$(LPAREN)$(RPAREN)` escape sequences.
    * Params:
@@ -428,7 +428,7 @@ class ApplicationCommandLine : ObjectG
    * have been 'successful' in a certain sense, and the exit status is
    * always zero.  If the application use count is zero, though, the exit
    * status of the local #GApplicationCommandLine is used.
-   * This method is a no-op if [Gio.ApplicationCommandLine.done] has
+   * This method is a no-op if [gio.application_command_line.ApplicationCommandLine.done] has
    * been called.
    * Params:
    *   exitStatus = the exit status

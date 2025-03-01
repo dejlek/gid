@@ -1,7 +1,7 @@
 module gtk.drop_controller_motion;
 
 import gdk.drop;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -12,9 +12,9 @@ import gtk.types;
 /**
  * `GtkDropControllerMotion` is an event controller tracking
  * the pointer during Drag-and-Drop operations.
- * It is modeled after [Gtk.EventControllerMotion] so if you
+ * It is modeled after [gtk.event_controller_motion.EventControllerMotion] so if you
  * have used that, this should feel really familiar.
- * This controller is not able to accept drops, use [Gtk.DropTarget]
+ * This controller is not able to accept drops, use [gtk.drop_target.DropTarget]
  * for that purpose.
  */
 class DropControllerMotion : EventController

@@ -1,6 +1,6 @@
 module glib.sequence;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.sequence_iter;
@@ -112,7 +112,7 @@ class Sequence
   /**
    * Returns the positive length $(LPAREN)>\= 0$(RPAREN) of seq. Note that this method is
    * O$(LPAREN)h$(RPAREN) where `h' is the height of the tree. It is thus more efficient
-   * to use [GLib.Sequence.isEmpty] when comparing the length to zero.
+   * to use [glib.sequence.Sequence.isEmpty] when comparing the length to zero.
    * Returns: the length of seq
    */
   int getLength()
@@ -132,7 +132,7 @@ class Sequence
    * if the second item comes before the first.
    * Note that when adding a large amount of data to a #GSequence,
    * it is more efficient to do unsorted insertions and then call
-   * [GLib.Sequence.sort] or [GLib.Sequence.sortIter].
+   * [glib.sequence.Sequence.sort] or [glib.sequence.Sequence.sortIter].
    * Params:
    *   data = the data to insert
    *   cmpFunc = the function used to compare items in the sequence
@@ -157,7 +157,7 @@ class Sequence
   }
 
   /**
-   * Like [GLib.Sequence.insertSorted], but uses
+   * Like [glib.sequence.Sequence.insertSorted], but uses
    * a #GSequenceIterCompareFunc instead of a #GCompareDataFunc as
    * the compare function.
    * iter_cmp is called with two iterators pointing into seq.
@@ -166,7 +166,7 @@ class Sequence
    * positive value if the second iterator comes before the first.
    * Note that when adding a large amount of data to a #GSequence,
    * it is more efficient to do unsorted insertions and then call
-   * [GLib.Sequence.sort] or [GLib.Sequence.sortIter].
+   * [glib.sequence.Sequence.sort] or [glib.sequence.Sequence.sortIter].
    * Params:
    *   data = data for the new item
    *   iterCmp = the function used to compare iterators in the sequence
@@ -193,7 +193,7 @@ class Sequence
   /**
    * Returns %TRUE if the sequence contains zero items.
    * This function is functionally identical to checking the result of
-   * [GLib.Sequence.getLength] being equal to zero. However this function is
+   * [glib.sequence.Sequence.getLength] being equal to zero. However this function is
    * implemented in O$(LPAREN)1$(RPAREN) running time.
    * Returns: %TRUE if the sequence is empty, otherwise %FALSE.
    */
@@ -208,8 +208,8 @@ class Sequence
    * Returns an iterator pointing to the position of the first item found
    * equal to data according to cmp_func and cmp_data. If more than one
    * item is equal, it is not guaranteed that it is the first which is
-   * returned. In that case, you can use [GLib.SequenceIter.next] and
-   * [GLib.SequenceIter.prev] to get others.
+   * returned. In that case, you can use [glib.sequence_iter.SequenceIter.next] and
+   * [glib.sequence_iter.SequenceIter.prev] to get others.
    * cmp_func is called with two items of the seq, and cmp_data.
    * It should return 0 if the items are equal, a negative value if
    * the first item comes before the second, and a positive value if
@@ -242,7 +242,7 @@ class Sequence
   }
 
   /**
-   * Like [GLib.Sequence.lookup], but uses a #GSequenceIterCompareFunc
+   * Like [glib.sequence.Sequence.lookup], but uses a #GSequenceIterCompareFunc
    * instead of a #GCompareDataFunc as the compare function.
    * iter_cmp is called with two iterators pointing into seq.
    * It should return 0 if the iterators are equal, a negative value
@@ -297,7 +297,7 @@ class Sequence
    * the first item comes before the second, and a positive value if
    * the second item comes before the first.
    * If you are simply searching for an existing element of the sequence,
-   * consider using [GLib.Sequence.lookup].
+   * consider using [glib.sequence.Sequence.lookup].
    * This function will fail if the data contained in the sequence is
    * unsorted.
    * Params:
@@ -325,14 +325,14 @@ class Sequence
   }
 
   /**
-   * Like [GLib.Sequence.search], but uses a #GSequenceIterCompareFunc
+   * Like [glib.sequence.Sequence.search], but uses a #GSequenceIterCompareFunc
    * instead of a #GCompareDataFunc as the compare function.
    * iter_cmp is called with two iterators pointing into seq.
    * It should return 0 if the iterators are equal, a negative value
    * if the first iterator comes before the second, and a positive
    * value if the second iterator comes before the first.
    * If you are simply searching for an existing element of the sequence,
-   * consider using [GLib.Sequence.lookupIter].
+   * consider using [glib.sequence.Sequence.lookupIter].
    * This function will fail if the data contained in the sequence is
    * unsorted.
    * Params:
@@ -385,7 +385,7 @@ class Sequence
   }
 
   /**
-   * Like [GLib.Sequence.sort], but uses a #GSequenceIterCompareFunc instead
+   * Like [glib.sequence.Sequence.sort], but uses a #GSequenceIterCompareFunc instead
    * of a #GCompareDataFunc as the compare function
    * cmp_func is called with two iterators pointing into seq. It should
    * return 0 if the iterators are equal, a negative value if the first
@@ -581,7 +581,7 @@ class Sequence
   }
 
   /**
-   * Like [GLib.Sequence.sortChanged], but uses
+   * Like [glib.sequence.Sequence.sortChanged], but uses
    * a #GSequenceIterCompareFunc instead of a #GCompareDataFunc as
    * the compare function.
    * iter_cmp is called with two iterators pointing into the #GSequence that

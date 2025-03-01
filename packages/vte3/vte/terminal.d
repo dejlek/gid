@@ -4,7 +4,7 @@ import cairo.font_options;
 import gdk.cursor;
 import gdk.rectangle;
 import gdk.rgba;
-import gid.gid;
+import gid.global;
 import gio.cancellable;
 import gio.menu_model;
 import gio.output_stream;
@@ -105,11 +105,11 @@ class Terminal : Widget, Scrollable
   }
 
   /**
-   * Like [Vte.Terminal.checkRegexSimpleAt], but returns an array of strings,
+   * Like [vte.terminal.Terminal.checkRegexSimpleAt], but returns an array of strings,
    * containing the matching text $(LPAREN)or %NULL if no match$(RPAREN) corresponding to each of the
    * regexes in regexes.
    * You must free each string and the array; but note that this is *not* a %NULL-terminated
-   * string array, and so you must *not* use [GLib.Global.strfreev] on it.
+   * string array, and so you must *not* use [glib.global.strfreev] on it.
    * Params:
    *   x =
    *   y =
@@ -146,7 +146,7 @@ class Terminal : Widget, Scrollable
    * Places the selected text in the terminal in the #GDK_SELECTION_CLIPBOARD
    * selection.
 
-   * Deprecated: Use [Vte.Terminal.copyClipboardFormat] with %VTE_FORMAT_TEXT
+   * Deprecated: Use [vte.terminal.Terminal.copyClipboardFormat] with %VTE_FORMAT_TEXT
    *   instead.
    */
   void copyClipboard()
@@ -216,7 +216,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   data = data to send to the child
 
-   * Deprecated: Don't send binary data. Use [Vte.Terminal.feedChild] instead to send
+   * Deprecated: Don't send binary data. Use [vte.terminal.Terminal.feedChild] instead to send
    *   UTF-8 text
    */
   void feedChildBinary(ubyte[] data)
@@ -309,7 +309,7 @@ class Terminal : Widget, Scrollable
 
   /**
    * Returns whether ambiguous-width characters are narrow or wide.
-   * $(LPAREN)Note that when using a non-UTF-8 encoding set via [Vte.Terminal.setEncoding],
+   * $(LPAREN)Note that when using a non-UTF-8 encoding set via [vte.terminal.Terminal.setEncoding],
    * the width of ambiguous-width characters is fixed and determined by the encoding
    * itself.$(RPAREN)
    * Returns: 1 if ambiguous-width characters are narrow, or 2 if they are wide
@@ -324,11 +324,11 @@ class Terminal : Widget, Scrollable
   /**
    * Returns the background colour, as used by terminal when
    * drawing the background, which may be different from
-   * the color set by [Vte.Terminal.setColorBackground].
+   * the color set by [vte.terminal.Terminal.setColorBackground].
    * Note: you must only call this function while handling the
    * GtkWidget::draw signal.
    * This function is rarely useful. One use for it is if you disable
-   * drawing the background $(LPAREN)see [Vte.Terminal.setClearBackground]$(RPAREN)
+   * drawing the background $(LPAREN)see [vte.terminal.Terminal.setClearBackground]$(RPAREN)
    * and then need to draw the background yourself.
    * Params:
    *   color = a location to store a #GdkRGBA color
@@ -534,7 +534,7 @@ class Terminal : Widget, Scrollable
    * Determines the value of the terminal's mouse autohide setting.  When
    * autohiding is enabled, the mouse cursor will be hidden when the user presses
    * a key and shown when the user moves the mouse.  This setting can be changed
-   * using [Vte.Terminal.setMouseAutohide].
+   * using [vte.terminal.Terminal.setMouseAutohide].
    * Returns: %TRUE if autohiding is enabled, %FALSE if not
    */
   bool getMouseAutohide()
@@ -811,7 +811,7 @@ class Terminal : Widget, Scrollable
    *   cursor = the #GdkCursor which the terminal should use when the pattern is
    *     highlighted, or %NULL to use the standard cursor
 
-   * Deprecated: Use [Vte.Terminal.matchSetCursorName] instead.
+   * Deprecated: Use [vte.terminal.Terminal.matchSetCursorName] instead.
    */
   void matchSetCursor(int tag, Cursor cursor)
   {
@@ -854,7 +854,7 @@ class Terminal : Widget, Scrollable
 
   /**
    * Sends text to the terminal's child as if retrived from the clipboard,
-   * this differs from [Vte.Terminal.feedChild] in that it may process
+   * this differs from [vte.terminal.Terminal.feedChild] in that it may process
    * text before passing it to the child $(LPAREN)e.g. apply bracketed mode$(RPAREN)
    * Params:
    *   text = a string to paste
@@ -902,7 +902,7 @@ class Terminal : Widget, Scrollable
 
   /**
    * Searches the next string matching the search regex set with
-   * [Vte.Terminal.searchSetRegex].
+   * [vte.terminal.Terminal.searchSetRegex].
    * Returns: %TRUE if a match was found
    */
   bool searchFindNext()
@@ -914,7 +914,7 @@ class Terminal : Widget, Scrollable
 
   /**
    * Searches the previous string matching the search regex set with
-   * [Vte.Terminal.searchSetRegex].
+   * [vte.terminal.Terminal.searchSetRegex].
    * Returns: %TRUE if a match was found
    */
   bool searchFindPrevious()
@@ -1055,7 +1055,7 @@ class Terminal : Widget, Scrollable
 
   /**
    * This setting controls whether ambiguous-width characters are narrow or wide.
-   * $(LPAREN)Note that when using a non-UTF-8 encoding set via [Vte.Terminal.setEncoding],
+   * $(LPAREN)Note that when using a non-UTF-8 encoding set via [vte.terminal.Terminal.setEncoding],
    * the width of ambiguous-width characters is fixed and determined by the encoding
    * itself.$(RPAREN)
    * Params:
@@ -1191,7 +1191,7 @@ class Terminal : Widget, Scrollable
   /**
    * Sets menu as the context menu in terminal.
    * Use %NULL to unset the current menu.
-   * Note that a menu model set with [Vte.Terminal.setContextMenuModel]
+   * Note that a menu model set with [vte.terminal.Terminal.setContextMenuModel]
    * takes precedence over a menu set using this function.
    * Params:
    *   menu = a menu
@@ -1376,7 +1376,7 @@ class Terminal : Widget, Scrollable
    * Changes the value of the terminal's mouse autohide setting.  When autohiding
    * is enabled, the mouse cursor will be hidden when the user presses a key and
    * shown when the user moves the mouse.  This setting can be read using
-   * [Vte.Terminal.getMouseAutohide].
+   * [vte.terminal.Terminal.getMouseAutohide].
    * Params:
    *   setting = whether the mouse pointer should autohide
    */
@@ -1559,9 +1559,9 @@ class Terminal : Widget, Scrollable
 
   /**
    * A convenience function that wraps creating the #VtePty and spawning
-   * the child process on it. Like [Vte.Terminal.spawnWithFdsAsync],
+   * the child process on it. Like [vte.terminal.Terminal.spawnWithFdsAsync],
    * except that this function does not allow passing file descriptors to
-   * the child process. See [Vte.Terminal.spawnWithFdsAsync] for more
+   * the child process. See [vte.terminal.Terminal.spawnWithFdsAsync] for more
    * information.
    * Params:
    *   ptyFlags = flags from #VtePtyFlags
@@ -1629,10 +1629,10 @@ class Terminal : Widget, Scrollable
    * to keep some file descriptor open for use in the child process, you need to
    * use a child setup function that unsets the FD_CLOEXEC flag on that file
    * descriptor.
-   * See vte_pty_new$(LPAREN)$(RPAREN), [GLib.Global.spawnAsync] and [Vte.Terminal.watchChild] for more information.
+   * See vte_pty_new$(LPAREN)$(RPAREN), [glib.global.spawnAsync] and [vte.terminal.Terminal.watchChild] for more information.
    * Beginning with 0.52, sets PWD to working_directory in order to preserve symlink components.
    * The caller should also make sure that symlinks were preserved while constructing the value of working_directory,
-   * e.g. by using [Vte.Terminal.getCurrentDirectoryUri], [GLib.Global.getCurrentDir] or get_current_dir_name().
+   * e.g. by using [vte.terminal.Terminal.getCurrentDirectoryUri], [glib.global.getCurrentDir] or get_current_dir_name().
    * Params:
    *   ptyFlags = flags from #VtePtyFlags
    *   workingDirectory = the name of a directory the command should start
@@ -1646,7 +1646,7 @@ class Terminal : Widget, Scrollable
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE on success, or %FALSE on error with error filled in
 
-   * Deprecated: Use [Vte.Terminal.spawnAsync] instead.
+   * Deprecated: Use [vte.terminal.Terminal.spawnAsync] instead.
    */
   bool spawnSync(PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, SpawnFlags spawnFlags, SpawnChildSetupFunc childSetup, out Pid childPid, Cancellable cancellable)
   {
@@ -1682,11 +1682,11 @@ class Terminal : Widget, Scrollable
 
   /**
    * A convenience function that wraps creating the #VtePty and spawning
-   * the child process on it. See [Vte.Pty.newSync], [Vte.Pty.spawnWithFdsAsync],
-   * and [Vte.Pty.spawnFinish] for more information.
+   * the child process on it. See [vte.pty.Pty.newSync], [vte.pty.Pty.spawnWithFdsAsync],
+   * and [vte.pty.Pty.spawnFinish] for more information.
    * When the operation is finished successfully, callback will be called
    * with the child #GPid, and a %NULL #GError. The child PID will already be
-   * watched via [Vte.Terminal.watchChild].
+   * watched via [vte.terminal.Terminal.watchChild].
    * When the operation fails, callback will be called with a -1 #GPid,
    * and a non-%NULL #GError containing the error information.
    * Note that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
@@ -1716,7 +1716,7 @@ class Terminal : Widget, Scrollable
    * automatically.
    * Beginning with 0.52, sets PWD to working_directory in order to preserve symlink components.
    * The caller should also make sure that symlinks were preserved while constructing the value of working_directory,
-   * e.g. by using [Vte.Terminal.getCurrentDirectoryUri], [GLib.Global.getCurrentDir] or get_current_dir_name().
+   * e.g. by using [vte.terminal.Terminal.getCurrentDirectoryUri], [glib.global.getCurrentDir] or get_current_dir_name().
    * Params:
    *   ptyFlags = flags from #VtePtyFlags
    *   workingDirectory = the name of a directory the command should start
@@ -1792,12 +1792,12 @@ class Terminal : Widget, Scrollable
    * Watches child_pid. When the process exists, the #VteTerminal::child-exited
    * signal will be called with the child's exit status.
    * Prior to calling this function, a #VtePty must have been set in terminal
-   * using [Vte.Terminal.setPty].
+   * using [vte.terminal.Terminal.setPty].
    * When the child exits, the terminal's #VtePty will be set to %NULL.
-   * Note: [GLib.Global.childWatchAdd] or [GLib.Global.childWatchAddFull] must not have
+   * Note: [glib.global.childWatchAdd] or [glib.global.childWatchAddFull] must not have
    * been called for child_pid, nor a #GSource for it been created with
-   * [GLib.Global.childWatchSourceNew].
-   * Note: when using the [GLib.Global.spawnAsync] family of functions,
+   * [glib.global.childWatchSourceNew].
+   * Note: when using the [glib.global.spawnAsync] family of functions,
    * the %G_SPAWN_DO_NOT_REAP_CHILD flag MUST have been passed.
    * Params:
    *   childPid = a #GPid
@@ -1900,7 +1900,7 @@ class Terminal : Widget, Scrollable
 
   /**
    * This signal is emitted when the terminal detects that a child
-   * watched using [Vte.Terminal.watchChild] has exited.
+   * watched using [vte.terminal.Terminal.watchChild] has exited.
    * Params
    *   status = the child's exit status
    *   terminal = the instance the signal is connected to
@@ -1997,7 +1997,7 @@ class Terminal : Widget, Scrollable
   }
 
   /**
-   * Emitted whenever [Vte.Terminal.copyClipboard] is called.
+   * Emitted whenever [vte.terminal.Terminal.copyClipboard] is called.
    *   terminal = the instance the signal is connected to
    */
   alias CopyClipboardCallbackDlg = void delegate(Terminal terminal);
@@ -2446,7 +2446,7 @@ class Terminal : Widget, Scrollable
   }
 
   /**
-   * Emitted whenever [Vte.Terminal.pasteClipboard] is called.
+   * Emitted whenever [vte.terminal.Terminal.pasteClipboard] is called.
    *   terminal = the instance the signal is connected to
    */
   alias PasteClipboardCallbackDlg = void delegate(Terminal terminal);
@@ -2627,8 +2627,8 @@ class Terminal : Widget, Scrollable
   /**
    * Emitted with non-%NULL context before terminal shows a context menu.
    * The handler may set either a menu model using
-   * [Vte.Terminal.setContextMenuModel], or a menu using
-   * [Vte.Terminal.setContextMenu], which will then be used as context
+   * [vte.terminal.Terminal.setContextMenuModel], or a menu using
+   * [vte.terminal.Terminal.setContextMenu], which will then be used as context
    * menu.
    * If neither a menu model nor a menu are set, a context menu
    * will not be shown.

@@ -1,6 +1,6 @@
 module gtk.gesture_swipe;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,12 +10,12 @@ import gtk.types;
 /**
  * `GtkGestureSwipe` is a `GtkGesture` for swipe gestures.
  * After a press/move/.../move/release sequence happens, the
- * [Gtk.GestureSwipe.swipe] signal will be emitted,
+ * [gtk.gesture_swipe.GestureSwipe.swipe] signal will be emitted,
  * providing the velocity and directionality of the sequence
  * at the time it was lifted.
  * If the velocity is desired in intermediate points,
- * [Gtk.GestureSwipe.getVelocity] can be called in a
- * [Gtk.Gesture.update] handler.
+ * [gtk.gesture_swipe.GestureSwipe.getVelocity] can be called in a
+ * [gtk.gesture.Gesture.update] handler.
  * All velocities are reported in pixels/sec units.
  */
 class GestureSwipe : GestureSingle

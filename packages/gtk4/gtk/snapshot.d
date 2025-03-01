@@ -6,7 +6,7 @@ import gdk.paintable_mixin;
 import gdk.rgba;
 import gdk.snapshot : DGdkSnapshot = Snapshot;
 import gdk.texture;
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import gobject.object;
 import graphene.matrix;
@@ -31,15 +31,15 @@ import pango.layout;
 import pango.types;
 
 /**
- * `GtkSnapshot` assists in creating [Gsk.RenderNode]s for widgets.
+ * `GtkSnapshot` assists in creating [gsk.render_node.RenderNode]s for widgets.
  * It functions in a similar way to a cairo context, and maintains a stack
  * of render nodes and their associated transformations.
  * The node at the top of the stack is the one that `gtk_snapshot_append_…$(LPAREN)$(RPAREN)`
  * functions operate on. Use the `gtk_snapshot_push_…$(LPAREN)$(RPAREN)` functions and
- * [Gtk.Snapshot.pop] to change the current node.
+ * [gtk.snapshot.Snapshot.pop] to change the current node.
  * The typical way to obtain a `GtkSnapshot` object is as an argument to
  * the vfunc@Gtk.Widget.snapshot vfunc. If you need to create your own
- * `GtkSnapshot`, use [Gtk.Snapshot.new_].
+ * `GtkSnapshot`, use [gtk.snapshot.Snapshot.new_].
  */
 class Snapshot : DGdkSnapshot
 {
@@ -94,7 +94,7 @@ class Snapshot : DGdkSnapshot
   }
 
   /**
-   * Creates a new [Gsk.CairoNode] and appends it to the current
+   * Creates a new [gsk.cairo_node.CairoNode] and appends it to the current
    * render node of snapshot, without changing the current node.
    * Params:
    *   bounds = the bounds for the new node
@@ -126,7 +126,7 @@ class Snapshot : DGdkSnapshot
 
   /**
    * A convenience method to fill a path with a color.
-   * See [Gtk.Snapshot.pushFill] if you need
+   * See [gtk.snapshot.Snapshot.pushFill] if you need
    * to fill a path with more complex content than
    * a color.
    * Params:
@@ -191,7 +191,7 @@ class Snapshot : DGdkSnapshot
    * Creates a new render node drawing the texture
    * into the given bounds and appends it to the
    * current render node of snapshot.
-   * In contrast to [Gtk.Snapshot.appendTexture],
+   * In contrast to [gtk.snapshot.Snapshot.appendTexture],
    * this function provides control about how the filter
    * that is used when scaling.
    * Params:
@@ -206,7 +206,7 @@ class Snapshot : DGdkSnapshot
 
   /**
    * A convenience method to stroke a path with a color.
-   * See [Gtk.Snapshot.pushStroke] if you need
+   * See [gtk.snapshot.Snapshot.pushStroke] if you need
    * to stroke a path with more complex content than
    * a color.
    * Params:
@@ -224,7 +224,7 @@ class Snapshot : DGdkSnapshot
    * into the given bounds and appends it to the
    * current render node of snapshot.
    * If the texture needs to be scaled to fill bounds,
-   * linear filtering is used. See [Gtk.Snapshot.appendScaledTexture]
+   * linear filtering is used. See [gtk.snapshot.Snapshot.appendScaledTexture]
    * if you need other filtering, such as nearest-neighbour.
    * Params:
    *   texture = the texture to render
@@ -237,10 +237,10 @@ class Snapshot : DGdkSnapshot
 
   /**
    * Removes the top element from the stack of render nodes and
-   * adds it to the nearest [Gsk.GLShaderNode] below it.
+   * adds it to the nearest [gsk.glshader_node.GLShaderNode] below it.
    * This must be called the same number of times as the number
    * of textures is needed for the shader in
-   * [Gtk.Snapshot.pushGlShader].
+   * [gtk.snapshot.Snapshot.pushGlShader].
    */
   void glShaderPopTexture()
   {
@@ -249,7 +249,7 @@ class Snapshot : DGdkSnapshot
 
   /**
    * Applies a perspective projection transform.
-   * See [Gsk.Transform.perspective] for a discussion on the details.
+   * See [gsk.transform.Transform.perspective] for a discussion on the details.
    * Params:
    *   depth = distance of the z\=0 plane
    */
@@ -269,12 +269,12 @@ class Snapshot : DGdkSnapshot
 
   /**
    * Blends together two images with the given blend mode.
-   * Until the first call to [Gtk.Snapshot.pop], the
+   * Until the first call to [gtk.snapshot.Snapshot.pop], the
    * bottom image for the blend operation will be recorded.
    * After that call, the top image to be blended will be
-   * recorded until the second call to [Gtk.Snapshot.pop].
+   * recorded until the second call to [gtk.snapshot.Snapshot.pop].
    * Calling this function requires two subsequent calls
-   * to [Gtk.Snapshot.pop].
+   * to [gtk.snapshot.Snapshot.pop].
    * Params:
    *   blendMode = blend mode to use
    */
@@ -285,7 +285,7 @@ class Snapshot : DGdkSnapshot
 
   /**
    * Blurs an image.
-   * The image is recorded until the next call to [Gtk.Snapshot.pop].
+   * The image is recorded until the next call to [gtk.snapshot.Snapshot.pop].
    * Params:
    *   radius = the blur radius to use. Must be positive
    */
@@ -296,7 +296,7 @@ class Snapshot : DGdkSnapshot
 
   /**
    * Clips an image to a rectangle.
-   * The image is recorded until the next call to [Gtk.Snapshot.pop].
+   * The image is recorded until the next call to [gtk.snapshot.Snapshot.pop].
    * Params:
    *   bounds = the rectangle to clip to
    */
@@ -312,7 +312,7 @@ class Snapshot : DGdkSnapshot
    * pixel \= transpose$(LPAREN)color_matrix$(RPAREN) * pixel + color_offset
    * for every pixel. The transformation operates on unpremultiplied
    * colors, with color components ordered R, G, B, A.
-   * The image is recorded until the next call to [Gtk.Snapshot.pop].
+   * The image is recorded until the next call to [gtk.snapshot.Snapshot.pop].
    * Params:
    *   colorMatrix = the color matrix to use
    *   colorOffset = the color offset to use
@@ -325,11 +325,11 @@ class Snapshot : DGdkSnapshot
   /**
    * Snapshots a cross-fade operation between two images with the
    * given progress.
-   * Until the first call to [Gtk.Snapshot.pop], the start image
+   * Until the first call to [gtk.snapshot.Snapshot.pop], the start image
    * will be snapshot. After that call, the end image will be recorded
-   * until the second call to [Gtk.Snapshot.pop].
+   * until the second call to [gtk.snapshot.Snapshot.pop].
    * Calling this function requires two subsequent calls
-   * to [Gtk.Snapshot.pop].
+   * to [gtk.snapshot.Snapshot.pop].
    * Params:
    *   progress = progress between 0.0 and 1.0
    */
@@ -341,8 +341,8 @@ class Snapshot : DGdkSnapshot
   /**
    * Fills the area given by path and fill_rule with an image and discards everything
    * outside of it.
-   * The image is recorded until the next call to [Gtk.Snapshot.pop].
-   * If you want to fill the path with a color, [Gtk.Snapshot.appendFill]
+   * The image is recorded until the next call to [gtk.snapshot.Snapshot.pop].
+   * If you want to fill the path with a color, [gtk.snapshot.Snapshot.appendFill]
    * may be more convenient.
    * Params:
    *   path = The path describing the area to fill
@@ -354,32 +354,32 @@ class Snapshot : DGdkSnapshot
   }
 
   /**
-   * Push a [Gsk.GLShaderNode].
-   * The node uses the given [Gsk.GLShader] and uniform values
+   * Push a [gsk.glshader_node.GLShaderNode].
+   * The node uses the given [gsk.glshader.GLShader] and uniform values
    * Additionally this takes a list of n_children other nodes
-   * which will be passed to the [Gsk.GLShaderNode].
+   * which will be passed to the [gsk.glshader_node.GLShaderNode].
    * The take_args argument is a block of data to use for uniform
    * arguments, as per types and offsets defined by the shader.
-   * Normally this is generated by [Gsk.GLShader.formatArgs]
-   * or [Gsk.ShaderArgsBuilder].
+   * Normally this is generated by [gsk.glshader.GLShader.formatArgs]
+   * or [gsk.shader_args_builder.ShaderArgsBuilder].
    * The snapshotter takes ownership of take_args, so the caller should
    * not free it after this.
    * If the renderer doesn't support GL shaders, or if there is any
    * problem when compiling the shader, then the node will draw pink.
-   * You should use [Gsk.GLShader.compile] to ensure the shader
+   * You should use [gsk.glshader.GLShader.compile] to ensure the shader
    * will work for the renderer before using it.
-   * If the shader requires textures $(LPAREN)see [Gsk.GLShader.getNTextures]$(RPAREN),
-   * then it is expected that you call [Gtk.Snapshot.glShaderPopTexture]
+   * If the shader requires textures $(LPAREN)see [gsk.glshader.GLShader.getNTextures]$(RPAREN),
+   * then it is expected that you call [gtk.snapshot.Snapshot.glShaderPopTexture]
    * the number of times that are required. Each of these calls will generate
    * a node that is added as a child to the `GskGLShaderNode`, which in turn
    * will render these offscreen and pass as a texture to the shader.
    * Once all textures $(LPAREN)if any$(RPAREN) are pop:ed, you must call the regular
-   * [Gtk.Snapshot.pop].
+   * [gtk.snapshot.Snapshot.pop].
    * If you want to use pre-existing textures as input to the shader rather
-   * than rendering new ones, use [Gtk.Snapshot.appendTexture] to
+   * than rendering new ones, use [gtk.snapshot.Snapshot.appendTexture] to
    * push a texture node. These will be used directly rather than being
    * re-rendered.
-   * For details on how to write shaders, see [Gsk.GLShader].
+   * For details on how to write shaders, see [gsk.glshader.GLShader].
    * Params:
    *   shader = The code to run
    *   bounds = the rectangle to render into
@@ -391,11 +391,11 @@ class Snapshot : DGdkSnapshot
   }
 
   /**
-   * Until the first call to [Gtk.Snapshot.pop], the
+   * Until the first call to [gtk.snapshot.Snapshot.pop], the
    * mask image for the mask operation will be recorded.
    * After that call, the source image will be recorded until
-   * the second call to [Gtk.Snapshot.pop].
-   * Calling this function requires 2 subsequent calls to [Gtk.Snapshot.pop].
+   * the second call to [gtk.snapshot.Snapshot.pop].
+   * Calling this function requires 2 subsequent calls to [gtk.snapshot.Snapshot.pop].
    * Params:
    *   maskMode = mask mode to use
    */
@@ -406,7 +406,7 @@ class Snapshot : DGdkSnapshot
 
   /**
    * Modifies the opacity of an image.
-   * The image is recorded until the next call to [Gtk.Snapshot.pop].
+   * The image is recorded until the next call to [gtk.snapshot.Snapshot.pop].
    * Params:
    *   opacity = the opacity to use
    */
@@ -417,7 +417,7 @@ class Snapshot : DGdkSnapshot
 
   /**
    * Creates a node that repeats the child node.
-   * The child is recorded until the next call to [Gtk.Snapshot.pop].
+   * The child is recorded until the next call to [gtk.snapshot.Snapshot.pop].
    * Params:
    *   bounds = the bounds within which to repeat
    *   childBounds = the bounds of the child or %NULL
@@ -430,7 +430,7 @@ class Snapshot : DGdkSnapshot
 
   /**
    * Clips an image to a rounded rectangle.
-   * The image is recorded until the next call to [Gtk.Snapshot.pop].
+   * The image is recorded until the next call to [gtk.snapshot.Snapshot.pop].
    * Params:
    *   bounds = the rounded rectangle to clip to
    */
@@ -442,11 +442,11 @@ class Snapshot : DGdkSnapshot
   /**
    * Strokes the given path with the attributes given by stroke and
    * an image.
-   * The image is recorded until the next call to [Gtk.Snapshot.pop].
+   * The image is recorded until the next call to [gtk.snapshot.Snapshot.pop].
    * Note that the strokes are subject to the same transformation as
    * everything else, so uneven scaling will cause horizontal and vertical
    * strokes to have different widths.
-   * If you want to stroke the path with a color, [Gtk.Snapshot.appendStroke]
+   * If you want to stroke the path with a color, [gtk.snapshot.Snapshot.appendStroke]
    * may be more convenient.
    * Params:
    *   path = The path to stroke
@@ -537,7 +537,7 @@ class Snapshot : DGdkSnapshot
 
   /**
    * Restores snapshot to the state saved by a preceding call to
-   * [Gtk.Snapshot.save] and removes that state from the stack of
+   * [gtk.snapshot.Snapshot.save] and removes that state from the stack of
    * saved states.
    */
   void restore()
@@ -549,7 +549,7 @@ class Snapshot : DGdkSnapshot
    * Rotates @snapshot's coordinate system by angle degrees in 2D space -
    * or in 3D speak, rotates around the Z axis. The rotation happens around
    * the origin point of $(LPAREN)0, 0$(RPAREN) in the snapshot's current coordinate system.
-   * To rotate around axes other than the Z axis, use [Gsk.Transform.rotate3d].
+   * To rotate around axes other than the Z axis, use [gsk.transform.Transform.rotate3d].
    * Params:
    *   angle = the rotation angle, in degrees $(LPAREN)clockwise$(RPAREN)
    */
@@ -560,7 +560,7 @@ class Snapshot : DGdkSnapshot
 
   /**
    * Rotates snapshot's coordinate system by angle degrees around axis.
-   * For a rotation in 2D space, use [Gsk.Transform.rotate].
+   * For a rotation in 2D space, use [gsk.transform.Transform.rotate].
    * Params:
    *   angle = the rotation angle, in degrees $(LPAREN)clockwise$(RPAREN)
    *   axis = The rotation axis
@@ -573,13 +573,13 @@ class Snapshot : DGdkSnapshot
   /**
    * Makes a copy of the current state of snapshot and saves it
    * on an internal stack.
-   * When [Gtk.Snapshot.restore] is called, snapshot will
+   * When [gtk.snapshot.Snapshot.restore] is called, snapshot will
    * be restored to the saved state.
-   * Multiple calls to [Gtk.Snapshot.save] and [Gtk.Snapshot.restore]
-   * can be nested; each call to `[Gtk.Snapshot.restore]` restores the state from
-   * the matching paired `[Gtk.Snapshot.save]`.
+   * Multiple calls to [gtk.snapshot.Snapshot.save] and [gtk.snapshot.Snapshot.restore]
+   * can be nested; each call to `[gtk.snapshot.Snapshot.restore]` restores the state from
+   * the matching paired `[gtk.snapshot.Snapshot.save]`.
    * It is necessary to clear all saved states with corresponding
-   * calls to `[Gtk.Snapshot.restore]`.
+   * calls to `[gtk.snapshot.Snapshot.restore]`.
    */
   void save()
   {
@@ -589,7 +589,7 @@ class Snapshot : DGdkSnapshot
   /**
    * Scales snapshot's coordinate system in 2-dimensional space by
    * the given factors.
-   * Use [Gtk.Snapshot.scale3d] to scale in all 3 dimensions.
+   * Use [gtk.snapshot.Snapshot.scale3d] to scale in all 3 dimensions.
    * Params:
    *   factorX = scaling factor on the X axis
    *   factorY = scaling factor on the Y axis
@@ -619,7 +619,7 @@ class Snapshot : DGdkSnapshot
    * to be rendered.
    * After calling this function, it is no longer possible to
    * add more nodes to snapshot. The only function that should
-   * be called after this is [GObject.ObjectG.unref].
+   * be called after this is [gobject.object.ObjectG.unref].
    * Returns: the constructed `GskRenderNode` or
    *   %NULL if there are no nodes to render.
    */
@@ -636,7 +636,7 @@ class Snapshot : DGdkSnapshot
    * that was constructed by snapshot.
    * After calling this function, it is no longer possible to
    * add more nodes to snapshot. The only function that should
-   * be called after this is [GObject.ObjectG.unref].
+   * be called after this is [gobject.object.ObjectG.unref].
    * Params:
    *   size = The size of the resulting paintable
    *     or %NULL to use the bounds of the snapshot

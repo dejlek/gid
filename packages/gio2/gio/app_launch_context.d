@@ -1,6 +1,6 @@
 module gio.app_launch_context;
 
-import gid.gid;
+import gid.global;
 import gio.app_info;
 import gio.app_info_mixin;
 import gio.c.functions;
@@ -121,9 +121,9 @@ class AppLaunchContext : ObjectG
 
   /**
    * Called when an application has failed to launch, so that it can cancel
-   * the application startup notification started in [Gio.AppLaunchContext.getStartupNotifyId].
+   * the application startup notification started in [gio.app_launch_context.AppLaunchContext.getStartupNotifyId].
    * Params:
-   *   startupNotifyId = the startup notification id that was returned by [Gio.AppLaunchContext.getStartupNotifyId].
+   *   startupNotifyId = the startup notification id that was returned by [gio.app_launch_context.AppLaunchContext.getStartupNotifyId].
    */
   void launchFailed(string startupNotifyId)
   {
@@ -257,7 +257,7 @@ class AppLaunchContext : ObjectG
    * set at all in subsequent releases.
    * On Windows, `pid` is guaranteed to be valid only for the duration of the
    * #GAppLaunchContext::launched signal emission; after the signal is emitted,
-   * GLib will call [GLib.Global.spawnClosePid]. If you need to keep the #GPid after the
+   * GLib will call [glib.global.spawnClosePid]. If you need to keep the #GPid after the
    * signal has been emitted, then you can duplicate `pid` using `DuplicateHandle$(LPAREN)$(RPAREN)`.
    * Params
    *   info = the #GAppInfo that was just launched

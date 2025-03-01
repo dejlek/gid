@@ -1,13 +1,13 @@
 module gobject.type_query;
 
-import gid.gid;
+import gid.global;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.types;
 
 /**
  * A structure holding information for a specific type.
- * See also: [GObject.Global.typeQuery]
+ * See also: [gobject.global.typeQuery]
  */
 class TypeQuery
 {

@@ -1,6 +1,6 @@
 module glib.types;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -258,7 +258,7 @@ enum C_STD_VERSION = 199000;
 
 /**
  * A bitmask that restricts the possible flags passed to
- * [GLib.Global.datalistSetFlags]. Passing a flags value where
+ * [glib.global.datalistSetFlags]. Passing a flags value where
  * flags & ~G_DATALIST_FLAGS_MASK !\= 0 is an error.
  */
 enum DATALIST_FLAGS_MASK = 3;
@@ -751,7 +751,7 @@ enum POLLFD_FORMAT = "%d";
 /**
  * Use this for default priority event sources.
  * In GLib this priority is used when adding timeout functions
- * with [GLib.Global.timeoutAdd]. In GDK this priority is used for events
+ * with [glib.global.timeoutAdd]. In GDK this priority is used for events
  * from the X server.
  */
 enum PRIORITY_DEFAULT = 0;
@@ -760,7 +760,7 @@ enum PRIORITY_DEFAULT = 0;
 /**
  * Use this for default priority idle functions.
  * In GLib this priority is used when adding idle functions with
- * [GLib.Global.idleAdd].
+ * [glib.global.idleAdd].
  */
 enum PRIORITY_DEFAULT_IDLE = 200;
 
@@ -873,21 +873,21 @@ enum SYSDEF_MSG_PEEK = 2;
  * g_set_user_dirs$(LPAREN)$(RPAREN) to set XDG directories to point into subdirectories of it
  * for the duration of the unit test. The directory tree is cleaned up after the
  * test finishes successfully. Note that this doesn’t take effect until
- * [GLib.Global.testRun] is called, so calls to (for example) g_get_user_home_dir$(LPAREN)$(RPAREN) will
+ * [glib.global.testRun] is called, so calls to (for example) g_get_user_home_dir$(LPAREN)$(RPAREN) will
  * return the system-wide value when made in a test program’s main$(LPAREN)$(RPAREN) function.
  * The following functions will return subdirectories of the temporary directory
  * when this option is used. The specific subdirectory paths in use are not
  * guaranteed to be stable API — always use a getter function to retrieve them.
- * - [GLib.Global.getHomeDir]
- * - [GLib.Global.getUserCacheDir]
- * - [GLib.Global.getSystemConfigDirs]
- * - [GLib.Global.getUserConfigDir]
- * - [GLib.Global.getSystemDataDirs]
- * - [GLib.Global.getUserDataDir]
- * - [GLib.Global.getUserStateDir]
- * - [GLib.Global.getUserRuntimeDir]
+ * - [glib.global.getHomeDir]
+ * - [glib.global.getUserCacheDir]
+ * - [glib.global.getSystemConfigDirs]
+ * - [glib.global.getUserConfigDir]
+ * - [glib.global.getSystemDataDirs]
+ * - [glib.global.getUserDataDir]
+ * - [glib.global.getUserStateDir]
+ * - [glib.global.getUserRuntimeDir]
  * The subdirectories may not be created by the test harness; as with normal
- * calls to functions like [GLib.Global.getUserCacheDir], the caller must be prepared
+ * calls to functions like [glib.global.getUserCacheDir], the caller must be prepared
  * to create the directory if it doesn’t exist.
  */
 enum TEST_OPTION_ISOLATE_DIRS = "isolate_dirs";

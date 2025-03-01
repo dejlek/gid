@@ -78,7 +78,7 @@ alias GRecMutexLocker = void;
  * A typedef for a reference-counted string. A pointer to a #GRefString can be
  * treated like a standard `char*` array by all code, but can additionally have
  * `g_ref_string_*$(LPAREN)$(RPAREN)` methods called on it. `g_ref_string_*$(LPAREN)$(RPAREN)` methods cannot be
- * called on `char*` arrays not allocated using [GLib.Global.refStringNew].
+ * called on `char*` arrays not allocated using [glib.global.refStringNew].
  * If using #GRefString with autocleanups, g_autoptr$(LPAREN)$(RPAREN) must be used rather than
  * g_autofree$(LPAREN)$(RPAREN), so that the reference counting metadata is also freed.
  */
@@ -650,7 +650,7 @@ enum GFileError
 }
 
 /**
- * Flags to pass to [GLib.Global.fileSetContentsFull] to affect its safety and
+ * Flags to pass to [glib.global.fileSetContentsFull] to affect its safety and
  * performance.
  */
 enum GFileSetContentsFlags : uint
@@ -689,7 +689,7 @@ enum GFileSetContentsFlags : uint
 }
 
 /**
- * A test to perform on a file using [GLib.Global.fileTest].
+ * A test to perform on a file using [glib.global.fileTest].
  */
 enum GFileTest : uint
 {
@@ -723,12 +723,12 @@ enum GFileTest : uint
 }
 
 /**
- * Flags to modify the format of the string returned by [GLib.Global.formatSizeFull].
+ * Flags to modify the format of the string returned by [glib.global.formatSizeFull].
  */
 enum GFormatSizeFlags : uint
 {
   /**
-   * behave the same as [GLib.Global.formatSize]
+   * behave the same as [glib.global.formatSize]
    */
   Default = 0,
 
@@ -880,7 +880,7 @@ enum GIOCondition : uint
 
 /**
  * #GIOError is only used by the deprecated functions
- * [GLib.IOChannel.read], [GLib.IOChannel.write], and [GLib.IOChannel.seek].
+ * [glib.iochannel.IOChannel.read], [glib.iochannel.IOChannel.write], and [glib.iochannel.IOChannel.seek].
  */
 enum GIOError
 {
@@ -907,8 +907,8 @@ enum GIOError
 
 /**
  * Specifies properties of a #GIOChannel. Some of the flags can only be
- * read with [GLib.IOChannel.getFlags], but not changed with
- * [GLib.IOChannel.setFlags].
+ * read with [glib.iochannel.IOChannel.getFlags], but not changed with
+ * [glib.iochannel.IOChannel.setFlags].
  */
 enum GIOFlags : uint
 {
@@ -951,7 +951,7 @@ enum GIOFlags : uint
 
   /**
    * indicates that the io channel is seekable,
-   * i.e. that [GLib.IOChannel.seekPosition] can be used on it.
+   * i.e. that [glib.iochannel.IOChannel.seekPosition] can be used on it.
    * This flag cannot be changed.
    */
   IsSeekable = 16,
@@ -963,13 +963,13 @@ enum GIOFlags : uint
 
   /**
    * the mask of the flags that are returned from
-   * [GLib.IOChannel.getFlags]
+   * [glib.iochannel.IOChannel.getFlags]
    */
   GetMask = 31,
 
   /**
    * the mask of the flags that the user can modify
-   * with [GLib.IOChannel.setFlags]
+   * with [glib.iochannel.IOChannel.setFlags]
    */
   SetMask = 3,
 }
@@ -1141,7 +1141,7 @@ enum GLogWriterOutput
 }
 
 /**
- * Flags to pass to [GLib.MainContext.newWithFlags] which affect the behaviour
+ * Flags to pass to [glib.main_context.MainContext.newWithFlags] which affect the behaviour
  * of a #GMainContext.
  */
 enum GMainContextFlags : uint
@@ -1185,8 +1185,8 @@ enum GMarkupCollectType : uint
 
   /**
    * as with %G_MARKUP_COLLECT_STRING, but
-   * expects a parameter of type $(LPAREN)char **$(RPAREN) and [GLib.Global.strdup]s the
-   * returned pointer. The pointer must be freed with [GLib.Global.gfree]
+   * expects a parameter of type $(LPAREN)char **$(RPAREN) and [glib.global.strdup]s the
+   * returned pointer. The pointer must be freed with [glib.global.gfree]
    */
   Strdup = 2,
 
@@ -1468,7 +1468,7 @@ enum GOptionError
   /**
    * An option was not known to the parser.
    * This error will only be reported, if the parser hasn't been instructed
-   * to ignore unknown options, see [GLib.OptionContext.setIgnoreUnknownOptions].
+   * to ignore unknown options, see [glib.option_context.OptionContext.setIgnoreUnknownOptions].
    */
   UnknownOption = 0,
 
@@ -2088,7 +2088,7 @@ enum GRegexMatchFlags : uint
 
   /**
    * Turns on the partial matching feature, for more
-   * documentation on partial matching see [GLib.MatchInfo.isPartialMatch].
+   * documentation on partial matching see [glib.match_info.MatchInfo.isPartialMatch].
    */
   Partial = 32768,
 
@@ -2153,7 +2153,7 @@ enum GRegexMatchFlags : uint
    * Turns on the partial matching feature. In contrast to
    * to %G_REGEX_MATCH_PARTIAL_SOFT, this stops matching as soon as a partial match
    * is found, without continuing to search for a possible complete match. See
-   * [GLib.MatchInfo.isPartialMatch] for more information. Since: 2.34
+   * [glib.match_info.MatchInfo.isPartialMatch] for more information. Since: 2.34
    */
   PartialHard = 134217728,
 
@@ -2167,7 +2167,7 @@ enum GRegexMatchFlags : uint
 
 /**
  * An enumeration specifying the base position for a
- * [GLib.IOChannel.seekPosition] operation.
+ * [glib.iochannel.IOChannel.seekPosition] operation.
  */
 enum GSeekType
 {
@@ -2336,7 +2336,7 @@ enum GSpawnError
 }
 
 /**
- * Flags passed to [GLib.Global.spawnSync], [GLib.Global.spawnAsync] and [GLib.Global.spawnAsyncWithPipes].
+ * Flags passed to [glib.global.spawnSync], [glib.global.spawnAsync] and [glib.global.spawnAsyncWithPipes].
  */
 enum GSpawnFlags : uint
 {
@@ -2354,7 +2354,7 @@ enum GSpawnFlags : uint
 
   /**
    * the child will not be automatically reaped;
-   * you must use [GLib.Global.childWatchAdd] yourself $(LPAREN)$(RPAREN)$(LPAREN)or call waitpid or handle
+   * you must use [glib.global.childWatchAdd] yourself $(LPAREN)$(RPAREN)$(LPAREN)or call waitpid or handle
    * `SIGCHLD` yourself$(RPAREN), or the child will become a zombie.
    */
   DoNotReapChild = 2,
@@ -2385,7 +2385,7 @@ enum GSpawnFlags : uint
   /**
    * the first element of `argv` is the file to
    * execute, while the remaining elements are the actual argument vector
-   * to pass to the file. Normally [GLib.Global.spawnAsyncWithPipes] uses `argv[0]`
+   * to pass to the file. Normally [glib.global.spawnAsyncWithPipes] uses `argv[0]`
    * as the file to execute, and passes all of `argv` to the child.
    */
   FileAndArgvZero = 64,
@@ -2421,7 +2421,7 @@ enum GSpawnFlags : uint
 
 /**
  * The type of file to return the filename for, when used with
- * [GLib.Global.testBuildFilename].
+ * [glib.global.testBuildFilename].
  * These two options correspond rather directly to the 'dist' and
  * 'built' terminology that automake uses and are explicitly used to
  * distinguish between the 'srcdir' and 'builddir' being separate.  All
@@ -2487,8 +2487,8 @@ enum GTestResult
 }
 
 /**
- * Flags to pass to [GLib.Global.testTrapSubprocess] to control input and output.
- * Note that in contrast with [GLib.Global.testTrapFork], the default is to
+ * Flags to pass to [glib.global.testTrapSubprocess] to control input and output.
+ * Note that in contrast with [glib.global.testTrapFork], the default is to
  * not show stdout and stderr.
  */
 enum GTestSubprocessFlags : uint
@@ -2526,8 +2526,8 @@ enum GTestSubprocessFlags : uint
  * Test traps are guards around forked tests.
  * These flags determine what traps to set.
 
- * Deprecated: #GTestTrapFlags is used only with [GLib.Global.testTrapFork],
- *   which is deprecated. [GLib.Global.testTrapSubprocess] uses
+ * Deprecated: #GTestTrapFlags is used only with [glib.global.testTrapFork],
+ *   which is deprecated. [glib.global.testTrapSubprocess] uses
  *   #GTestSubprocessFlags.
  */
 enum GTestTrapFlags : uint
@@ -2629,7 +2629,7 @@ enum GTimeType
 
 /**
  * The possible types of token returned from each
- * [GLib.Scanner.getNextToken] call.
+ * [glib.scanner.Scanner.getNextToken] call.
  */
 enum GTokenType
 {
@@ -2751,7 +2751,7 @@ enum GTokenType
 
 /**
  * Specifies which nodes are visited during several of the tree
- * functions, including [GLib.Node.traverse] and [GLib.Node.find].
+ * functions, including [glib.node.Node.traverse] and [glib.node.Node.find].
  */
 enum GTraverseFlags : uint
 {
@@ -2791,8 +2791,8 @@ enum GTraverseFlags : uint
 }
 
 /**
- * Specifies the type of traversal performed by [GLib.Tree.traverse],
- * [GLib.Node.traverse] and [GLib.Node.find]. The different orders are
+ * Specifies the type of traversal performed by [glib.tree.Tree.traverse],
+ * [glib.node.Node.traverse] and [glib.node.Node.find]. The different orders are
  * illustrated here:
  * - In order: A, B, C, D, E, F, G, H, I
  * ![](Sorted_binary_tree_inorder.svg)
@@ -3092,7 +3092,7 @@ enum GUnicodeBreakType
 enum GUnicodeScript
 {
   /**
-   * a value never returned from [GLib.Global.unicharGetScript]
+   * a value never returned from [glib.global.unicharGetScript]
    */
   InvalidCode = -1,
 
@@ -4157,7 +4157,7 @@ enum GUriError
 /**
  * Flags that describe a URI.
  * When parsing a URI, if you need to choose different flags based on
- * the type of URI, you can use [GLib.Uri.peekScheme] on the URI string
+ * the type of URI, you can use [glib.uri.Uri.peekScheme] on the URI string
  * to check the scheme first, and use that to decide what flags to
  * parse it with.
  */
@@ -4235,7 +4235,7 @@ enum GUriFlags : uint
 
 /**
  * Flags describing what parts of the URI to hide in
- * [GLib.Uri.toStringPartial]. Note that %G_URI_HIDE_PASSWORD and
+ * [glib.uri.Uri.toStringPartial]. Note that %G_URI_HIDE_PASSWORD and
  * %G_URI_HIDE_AUTH_PARAMS will only work if the #GUri was parsed with
  * the corresponding flags.
  */
@@ -4273,7 +4273,7 @@ enum GUriHideFlags : uint
 }
 
 /**
- * Flags modifying the way parameters are handled by [GLib.Uri.parseParams] and
+ * Flags modifying the way parameters are handled by [glib.uri.Uri.parseParams] and
  * #GUriParamsIter.
  */
 enum GUriParamsFlags : uint
@@ -4302,7 +4302,7 @@ enum GUriParamsFlags : uint
 
 /**
  * These are logical ids for special directories which are defined
- * depending on the platform used. You should use [GLib.Global.getUserSpecialDir]
+ * depending on the platform used. You should use [glib.global.getUserSpecialDir]
  * to retrieve the full path associated to the logical id.
  * The #GUserDirectory enumeration can be extended at later date. Not
  * every platform has a directory for every logical id in this
@@ -4610,10 +4610,10 @@ struct GAsyncQueue;
  * is accessed through its URI.
  * The important caveat of bookmark files is that when you add a new
  * bookmark you must also add the application that is registering it, using
- * [GLib.BookmarkFile.addApplication] or [GLib.BookmarkFile.setApplicationInfo].
+ * [glib.bookmark_file.BookmarkFile.addApplication] or [glib.bookmark_file.BookmarkFile.setApplicationInfo].
  * If a bookmark has no applications then it won't be dumped when creating
- * the on disk representation, using [GLib.BookmarkFile.toData] or
- * [GLib.BookmarkFile.toFile].
+ * the on disk representation, using [glib.bookmark_file.BookmarkFile.toData] or
+ * [glib.bookmark_file.BookmarkFile.toFile].
  */
 struct GBookmarkFile;
 
@@ -4645,16 +4645,16 @@ struct GByteArray
  * move while they hold a reference.
  * A #GBytes can come from many different origins that may have
  * different procedures for freeing the memory region.  Examples are
- * memory from [GLib.Global.gmalloc], from memory slices, from a #GMappedFile or
+ * memory from [glib.global.gmalloc], from memory slices, from a #GMappedFile or
  * memory from other allocators.
- * #GBytes work well as keys in #GHashTable. Use [GLib.Bytes.equal] and
- * [GLib.Bytes.hash] as parameters to [GLib.HashTable.new_] or [GLib.HashTable.newFull].
- * #GBytes can also be used as keys in a #GTree by passing the [GLib.Bytes.compare]
- * function to [GLib.Tree.new_].
+ * #GBytes work well as keys in #GHashTable. Use [glib.bytes.Bytes.equal] and
+ * [glib.bytes.Bytes.hash] as parameters to [glib.hash_table.HashTable.new_] or [glib.hash_table.HashTable.newFull].
+ * #GBytes can also be used as keys in a #GTree by passing the [glib.bytes.Bytes.compare]
+ * function to [glib.tree.Tree.new_].
  * The data pointed to by this bytes must not be modified. For a mutable
- * array of bytes see #GByteArray. Use [GLib.Bytes.unrefToArray] to create a
+ * array of bytes see #GByteArray. Use [glib.bytes.Bytes.unrefToArray] to create a
  * mutable array for a #GBytes sequence. To create an immutable #GBytes from
- * a mutable #GByteArray, use the [GLib.ByteArray.freeToBytes] function.
+ * a mutable #GByteArray, use the [glib.byte_array.ByteArray.freeToBytes] function.
  */
 struct GBytes;
 
@@ -4675,12 +4675,12 @@ struct GCache;
  * for a sequence of arbitrary bytes, using various hashing algorithms
  * like MD5, SHA-1 and SHA-256. Checksums are commonly used in various
  * environments and specifications.
- * To create a new `GChecksum`, use [GLib.Checksum.new_]. To free
- * a `GChecksum`, use [GLib.Checksum.free].
+ * To create a new `GChecksum`, use [glib.checksum.Checksum.new_]. To free
+ * a `GChecksum`, use [glib.checksum.Checksum.free].
  * GLib supports incremental checksums using the `GChecksum` data
- * structure, by calling [GLib.Checksum.update] as long as there’s data
- * available and then using [GLib.Checksum.getString] or
- * [GLib.Checksum.getDigest] to compute the checksum and return it
+ * structure, by calling [glib.checksum.Checksum.update] as long as there’s data
+ * available and then using [glib.checksum.Checksum.getString] or
+ * [glib.checksum.Checksum.getDigest] to compute the checksum and return it
  * either as a string in hexadecimal form, or as a raw sequence of bytes. To
  * compute the checksum for binary blobs and nul-terminated strings in
  * one go, use the convenience functions func@GLib.compute_checksum_for_data
@@ -4692,19 +4692,19 @@ struct GChecksum;
  * `GCompletion` provides support for automatic completion of a string
  * using any group of target strings. It is typically used for file
  * name completion as is common in many UNIX shells.
- * A `GCompletion` is created using [GLib.Completion.new_]. Target items are
- * added and removed with [GLib.Completion.addItems],
- * [GLib.Completion.removeItems] and
- * [GLib.Completion.clearItems]. A completion attempt is requested with
- * [GLib.Completion.complete] or [GLib.Completion.completeUtf8].
+ * A `GCompletion` is created using [glib.completion.Completion.new_]. Target items are
+ * added and removed with [glib.completion.Completion.addItems],
+ * [glib.completion.Completion.removeItems] and
+ * [glib.completion.Completion.clearItems]. A completion attempt is requested with
+ * [glib.completion.Completion.complete] or [glib.completion.Completion.completeUtf8].
  * When no longer needed, the `GCompletion` is freed with
- * [GLib.Completion.free].
+ * [glib.completion.Completion.free].
  * Items in the completion can be simple strings $(LPAREN)e.g. filenames$(RPAREN), or
  * pointers to arbitrary data structures. If data structures are used
- * you must provide a [GLib.CompletionFunc] in [GLib.Completion.new_],
+ * you must provide a [glib.CompletionFunc] in [glib.completion.Completion.new_],
  * which retrieves the item’s string from the data structure. You can change
  * the way in which strings are compared by setting a different
- * [GLib.CompletionStrncmpFunc] in [GLib.Completion.setCompare].
+ * [glib.CompletionStrncmpFunc] in [glib.completion.Completion.setCompare].
  * `GCompletion` has been marked as deprecated, since this API is rarely
  * used and not very actively maintained.
 
@@ -4724,8 +4724,8 @@ struct GCompletion
   GCompletionFunc func;
 
   /**
-   * the last prefix passed to [GLib.Completion.complete] or
-   * [GLib.Completion.completeUtf8].
+   * the last prefix passed to [glib.completion.Completion.complete] or
+   * [glib.completion.Completion.completeUtf8].
    */
   char* prefix;
 
@@ -4736,7 +4736,7 @@ struct GCompletion
 
   /**
    * The function to use when comparing strings.  Use
-   * [GLib.Completion.setCompare] to modify this function.
+   * [glib.completion.Completion.setCompare] to modify this function.
    */
   GCompletionStrncmpFunc strncmpFunc;
 }
@@ -4789,13 +4789,13 @@ struct GCompletion
  * waiting on it$(RPAREN) before the first thread goes to sleep. #GCond is
  * specifically useful for its ability to release the mutex and go
  * to sleep atomically.
- * It is also important to use the [GLib.Cond.wait] and [GLib.Cond.waitUntil]
+ * It is also important to use the [glib.cond.Cond.wait] and [glib.cond.Cond.waitUntil]
  * functions only inside a loop which checks for the condition to be
- * true.  See [GLib.Cond.wait] for an explanation of why the condition may
+ * true.  See [glib.cond.Cond.wait] for an explanation of why the condition may
  * not be true even after it returns.
  * If a #GCond is allocated in static storage then it can be used
- * without initialisation.  Otherwise, you should call [GLib.Cond.init_]
- * on it and [GLib.Cond.clear] when done.
+ * without initialisation.  Otherwise, you should call [glib.cond.Cond.init_]
+ * on it and [glib.cond.Cond.clear] when done.
  * A #GCond should only be accessed via the g_cond_ functions.
  */
 struct GCond
@@ -4815,7 +4815,7 @@ struct GData;
  * `GDate` is a struct for calendrical calculations.
  * The `GDate` data structure represents a day between January 1, Year 1,
  * and sometime a few thousand years in the future $(LPAREN)right now it will go
- * to the year 65535 or so, but [GLib.Date.setParse] only parses up to the
+ * to the year 65535 or so, but [glib.date.Date.setParse] only parses up to the
  * year 8000 or so - just count on "a few thousand"$(RPAREN). `GDate` is meant to
  * represent everyday dates, not astronomical dates or historical dates
  * or ISO timestamps or the like. It extrapolates the current Gregorian
@@ -4832,16 +4832,16 @@ struct GData;
  * technical sense; technically, Julian dates count from the start of the
  * Julian period, Jan 1, 4713 BC$(RPAREN).
  * `GDate` is simple to use. First you need a "blank" date; you can get a
- * dynamically allocated date from [GLib.Date.new_], or you can declare an
- * automatic variable or array and initialize it by calling [GLib.Date.clear].
- * A cleared date is safe; it's safe to call [GLib.Date.setDmy] and the other
+ * dynamically allocated date from [glib.date.Date.new_], or you can declare an
+ * automatic variable or array and initialize it by calling [glib.date.Date.clear].
+ * A cleared date is safe; it's safe to call [glib.date.Date.setDmy] and the other
  * mutator functions to initialize the value of a cleared date. However, a cleared date
  * is initially invalid, meaning that it doesn't represent a day that exists.
  * It is undefined to call any of the date calculation routines on an invalid date.
  * If you obtain a date from a user or other unpredictable source, you should check
- * its validity with the [GLib.Date.valid] predicate. [GLib.Date.valid]
- * is also used to check for errors with [GLib.Date.setParse] and other functions
- * that can fail. Dates can be invalidated by calling [GLib.Date.clear] again.
+ * its validity with the [glib.date.Date.valid] predicate. [glib.date.Date.valid]
+ * is also used to check for errors with [glib.date.Date.setParse] and other functions
+ * that can fail. Dates can be invalidated by calling [glib.date.Date.clear] again.
  * It is very important to use the API to access the `GDate` struct. Often only the
  * day-month-year or only the Julian representation is valid. Sometimes neither is valid.
  * Use the API.
@@ -4895,7 +4895,7 @@ struct GDate
  * Nearly all such functions can fail due to the date or time going out
  * of range, in which case %NULL will be returned.
  * `GDateTime` is reference counted: the reference count is increased by calling
- * [GLib.DateTime.ref_] and decreased by calling [GLib.DateTime.unref].
+ * [glib.date_time.DateTime.ref_] and decreased by calling [glib.date_time.DateTime.unref].
  * When the reference count drops to 0, the resources allocated by the `GDateTime`
  * structure are released.
  * Many parts of the API may produce non-obvious results. As an
@@ -4909,7 +4909,7 @@ struct GDateTime;
 
 /**
  * Associates a string with a bit flag.
- * Used in [GLib.Global.parseDebugString].
+ * Used in [glib.global.parseDebugString].
  */
 struct GDebugKey
 {
@@ -4962,7 +4962,7 @@ struct GHashTable;
  * A GHashTableIter structure represents an iterator that can be used
  * to iterate over the elements of a #GHashTable. GHashTableIter
  * structures are typically allocated on the stack and then initialized
- * with [GLib.HashTableIter.init_].
+ * with [glib.hash_table_iter.HashTableIter.init_].
  * The iteration order of a #GHashTableIter over the keys/values in a hash
  * table is not defined.
  */
@@ -4992,8 +4992,8 @@ struct GHashTableIter
  * Both the key and data are arbitrary byte arrays of bytes or characters.
  * Support for HMAC Digests has been added in GLib 2.30, and support for SHA-512
  * in GLib 2.42. Support for SHA-384 was added in GLib 2.52.
- * To create a new `GHmac`, use [GLib.Hmac.new_]. To free a `GHmac`, use
- * [GLib.Hmac.unref].
+ * To create a new `GHmac`, use [glib.hmac.Hmac.new_]. To free a `GHmac`, use
+ * [glib.hmac.Hmac.unref].
  */
 struct GHmac;
 
@@ -5091,35 +5091,35 @@ struct GHookList
 /**
  * The `GIOChannel` data type aims to provide a portable method for
  * using file descriptors, pipes, and sockets, and integrating them
- * into the main event loop $(LPAREN)see [GLib.MainContext]$(RPAREN). Currently,
+ * into the main event loop $(LPAREN)see [glib.main_context.MainContext]$(RPAREN). Currently,
  * full support is available on UNIX platforms; support for Windows
  * is only partially complete.
  * To create a new `GIOChannel` on UNIX systems use
- * [GLib.IOChannel.unixNew]. This works for plain file descriptors,
+ * [glib.iochannel.IOChannel.unixNew]. This works for plain file descriptors,
  * pipes and sockets. Alternatively, a channel can be created for a
- * file in a system independent manner using [GLib.IOChannel.newFile].
+ * file in a system independent manner using [glib.iochannel.IOChannel.newFile].
  * Once a `GIOChannel` has been created, it can be used in a generic
- * manner with the functions [GLib.IOChannel.readChars],
- * [GLib.IOChannel.writeChars], [GLib.IOChannel.seekPosition],
- * and [GLib.IOChannel.shutdown].
+ * manner with the functions [glib.iochannel.IOChannel.readChars],
+ * [glib.iochannel.IOChannel.writeChars], [glib.iochannel.IOChannel.seekPosition],
+ * and [glib.iochannel.IOChannel.shutdown].
  * To add a `GIOChannel` to the main event loop, use func@GLib.io_add_watch or
  * func@GLib.io_add_watch_full. Here you specify which events you are
  * interested in on the `GIOChannel`, and provide a function to be called
  * whenever these events occur.
  * `GIOChannel` instances are created with an initial reference count of 1.
- * [GLib.IOChannel.ref_] and [GLib.IOChannel.unref] can be used to
+ * [glib.iochannel.IOChannel.ref_] and [glib.iochannel.IOChannel.unref] can be used to
  * increment or decrement the reference count respectively. When the
  * reference count falls to 0, the `GIOChannel` is freed. $(LPAREN)Though it
  * isn’t closed automatically, unless it was created using
- * [GLib.IOChannel.newFile].$(RPAREN) Using func@GLib.io_add_watch or
+ * [glib.iochannel.IOChannel.newFile].$(RPAREN) Using func@GLib.io_add_watch or
  * func@GLib.io_add_watch_full increments a channel’s reference count.
- * The new functions [GLib.IOChannel.readChars],
- * [GLib.IOChannel.readLine], [GLib.IOChannel.readLineString],
- * [GLib.IOChannel.readToEnd], [GLib.IOChannel.writeChars],
- * [GLib.IOChannel.seekPosition], and [GLib.IOChannel.flush]
+ * The new functions [glib.iochannel.IOChannel.readChars],
+ * [glib.iochannel.IOChannel.readLine], [glib.iochannel.IOChannel.readLineString],
+ * [glib.iochannel.IOChannel.readToEnd], [glib.iochannel.IOChannel.writeChars],
+ * [glib.iochannel.IOChannel.seekPosition], and [glib.iochannel.IOChannel.flush]
  * should not be mixed with the deprecated functions
- * [GLib.IOChannel.read], [GLib.IOChannel.write], and
- * [GLib.IOChannel.seek] on the same channel.
+ * [glib.iochannel.IOChannel.read], [glib.iochannel.IOChannel.write], and
+ * [glib.iochannel.IOChannel.seek] on the same channel.
  */
 struct GIOChannel;
 
@@ -5131,7 +5131,7 @@ struct GIOFuncs
 {
   /**
    * reads raw bytes from the channel.  This is called from
-   * various functions such as [GLib.IOChannel.readChars] to
+   * various functions such as [glib.iochannel.IOChannel.readChars] to
    * read raw bytes from the channel.  Encoding and buffering
    * issues are dealt with at a higher level.
    */
@@ -5139,7 +5139,7 @@ struct GIOFuncs
 
   /**
    * writes raw bytes to the channel.  This is called from
-   * various functions such as [GLib.IOChannel.writeChars] to
+   * various functions such as [glib.iochannel.IOChannel.writeChars] to
    * write raw bytes to the channel.  Encoding and buffering
    * issues are dealt with at a higher level.
    */
@@ -5147,24 +5147,24 @@ struct GIOFuncs
 
   /**
    * seeks the channel.  This is called from
-   * [GLib.IOChannel.seek] on channels that support it.
+   * [glib.iochannel.IOChannel.seek] on channels that support it.
    */
   extern(C) GIOStatus function(GIOChannel* channel, long offset, GSeekType type, GError** _err) ioSeek;
 
   /**
    * closes the channel.  This is called from
-   * [GLib.IOChannel.close] after flushing the buffers.
+   * [glib.iochannel.IOChannel.close] after flushing the buffers.
    */
   extern(C) GIOStatus function(GIOChannel* channel, GError** _err) ioClose;
 
   /**
    * creates a watch on the channel.  This call
-   * corresponds directly to [GLib.Global.ioCreateWatch].
+   * corresponds directly to [glib.global.ioCreateWatch].
    */
   extern(C) GSource* function(GIOChannel* channel, GIOCondition condition) ioCreateWatch;
 
   /**
-   * called from [GLib.IOChannel.unref] when the channel needs to
+   * called from [glib.iochannel.IOChannel.unref] when the channel needs to
    * be freed.  This function must free the memory associated
    * with the channel, including freeing the #GIOChannel
    * structure itself.  The channel buffers have been flushed
@@ -5175,7 +5175,7 @@ struct GIOFuncs
 
   /**
    * sets the #GIOFlags on the channel.  This is called
-   * from [GLib.IOChannel.setFlags] with all flags except
+   * from [glib.iochannel.IOChannel.setFlags] with all flags except
    * for %G_IO_FLAG_APPEND and %G_IO_FLAG_NONBLOCK masked
    * out.
    */
@@ -5184,7 +5184,7 @@ struct GIOFuncs
   /**
    * gets the #GIOFlags for the channel.  This function
    * need only return the %G_IO_FLAG_APPEND and
-   * %G_IO_FLAG_NONBLOCK flags; [GLib.IOChannel.getFlags]
+   * %G_IO_FLAG_NONBLOCK flags; [glib.iochannel.IOChannel.getFlags]
    * automatically adds the others as appropriate.
    */
   extern(C) GIOFlags function(GIOChannel* channel) ioGetFlags;
@@ -5321,7 +5321,7 @@ struct GList
 
 /**
  * Structure representing a single field in a structured log entry. See
- * [GLib.Global.logStructured] for details.
+ * [glib.global.logStructured] for details.
  * Log fields may contain arbitrary values, including binary with embedded nul
  * bytes. If the field contains a string, the string must be UTF-8 encoded and
  * have a trailing nul byte. Otherwise, @length must be set to a non-negative
@@ -5359,7 +5359,7 @@ struct GMainLoop;
 
 /**
  * The #GMappedFile represents a file mapping created with
- * [GLib.MappedFile.new_]. It has only private members and should
+ * [glib.mapped_file.MappedFile.new_]. It has only private members and should
  * not be accessed directly.
  */
 struct GMappedFile;
@@ -5367,7 +5367,7 @@ struct GMappedFile;
 /**
  * A parse context is used to parse a stream of bytes that
  * you expect to contain marked-up text.
- * See [GLib.MarkupParseContext.new_], #GMarkupParser, and so
+ * See [glib.markup_parse_context.MarkupParseContext.new_], #GMarkupParser, and so
  * on for more details.
  */
 struct GMarkupParseContext;
@@ -5378,7 +5378,7 @@ struct GMarkupParseContext;
  * can set an error; in particular the %G_MARKUP_ERROR_UNKNOWN_ELEMENT,
  * %G_MARKUP_ERROR_UNKNOWN_ATTRIBUTE, and %G_MARKUP_ERROR_INVALID_CONTENT
  * errors are intended to be set from these callbacks. If you set an error
- * from a callback, [GLib.MarkupParseContext.parse] will report that error
+ * from a callback, [glib.markup_parse_context.MarkupParseContext.parse] will report that error
  * back to its caller.
  */
 struct GMarkupParser
@@ -5431,7 +5431,7 @@ struct GMemChunk;
 
 /**
  * A set of functions used to perform memory allocation. The same #GMemVTable must
- * be used for all allocations in the same program; a call to [GLib.Global.memSetVtable],
+ * be used for all allocations in the same program; a call to [glib.global.memSetVtable],
  * if it exists, should be prior to any use of GLib.
  * This functions related to this has been deprecated in 2.46, and no longer work.
  */
@@ -5504,7 +5504,7 @@ struct GMemVTable
  * Its placement in static storage ensures that it will be initialised
  * to all-zeros, which is appropriate.
  * If a #GMutex is placed in other contexts $(LPAREN)eg: embedded in a struct$(RPAREN)
- * then it must be explicitly initialised using [GLib.Mutex.init_].
+ * then it must be explicitly initialised using [glib.mutex.Mutex.init_].
  * A #GMutex should only be accessed via g_mutex_ functions.
  */
 union GMutex
@@ -5577,8 +5577,8 @@ struct GOptionContext;
 
 /**
  * A GOptionEntry struct defines a single option. To have an effect, they
- * must be added to a #GOptionGroup with [GLib.OptionContext.addMainEntries]
- * or [GLib.OptionGroup.addEntries].
+ * must be added to a #GOptionGroup with [glib.option_context.OptionContext.addMainEntries]
+ * or [glib.option_group.OptionGroup.addEntries].
  */
 struct GOptionEntry
 {
@@ -5624,16 +5624,16 @@ struct GOptionEntry
    * - %G_OPTION_ARG_DOUBLE: %gdouble
    * If @arg type is %G_OPTION_ARG_STRING or %G_OPTION_ARG_FILENAME,
    * the location will contain a newly allocated string if the option
-   * was given. That string needs to be freed by the callee using [GLib.Global.gfree].
+   * was given. That string needs to be freed by the callee using [glib.global.gfree].
    * Likewise if @arg type is %G_OPTION_ARG_STRING_ARRAY or
-   * %G_OPTION_ARG_FILENAME_ARRAY, the data should be freed using [GLib.Global.strfreev].
+   * %G_OPTION_ARG_FILENAME_ARRAY, the data should be freed using [glib.global.strfreev].
    */
   void* argData;
 
   /**
    * the description for the option in `--help`
    * output. The @description is translated using the @translate_func
-   * of the group, see [GLib.OptionGroup.setTranslationDomain].
+   * of the group, see [glib.option_group.OptionGroup.setTranslationDomain].
    */
   const(char)* description;
 
@@ -5641,7 +5641,7 @@ struct GOptionEntry
    * The placeholder to use for the extra argument parsed
    * by the option in `--help` output. The @arg_description is translated
    * using the @translate_func of the group, see
-   * [GLib.OptionGroup.setTranslationDomain].
+   * [glib.option_group.OptionGroup.setTranslationDomain].
    */
   const(char)* argDescription;
 }
@@ -5686,7 +5686,7 @@ struct GPathBuf
 
 /**
  * A `GPatternSpec` struct is the 'compiled' form of a glob-style pattern.
- * The func@GLib.pattern_match_simple and [GLib.PatternSpec.match] functions
+ * The func@GLib.pattern_match_simple and [glib.pattern_spec.PatternSpec.match] functions
  * match a string against a pattern containing '*' and '?' wildcards with similar
  * semantics as the standard `glob$(LPAREN)$(RPAREN)` function: '*' matches an arbitrary,
  * possibly empty, string, '?' matches an arbitrary character.
@@ -5694,8 +5694,8 @@ struct GPathBuf
  * the wildcards, there are no '[...]' character ranges and '*' and '?'
  * can not be escaped to include them literally in a pattern.
  * When multiple strings must be matched against the same pattern, it is better
- * to compile the pattern to a [GLib.PatternSpec] using
- * [GLib.PatternSpec.new_] and use [GLib.PatternSpec.matchString]
+ * to compile the pattern to a [glib.pattern_spec.PatternSpec] using
+ * [glib.pattern_spec.PatternSpec.new_] and use [glib.pattern_spec.PatternSpec.matchString]
  * instead of func@GLib.pattern_match_simple. This avoids the overhead of repeated
  * pattern compilation.
  */
@@ -5797,9 +5797,9 @@ struct GQueue
  * The difference to a mutex is that a reader-writer lock discriminates
  * between read-only $(LPAREN)'reader'$(RPAREN) and full $(LPAREN)'writer'$(RPAREN) access. While only
  * one thread at a time is allowed write access $(LPAREN)by holding the 'writer'
- * lock via [GLib.RWLock.writerLock]$(RPAREN), multiple threads can gain
+ * lock via [glib.rwlock.RWLock.writerLock]$(RPAREN), multiple threads can gain
  * simultaneous read-only access $(LPAREN)by holding the 'reader' lock via
- * [GLib.RWLock.readerLock]$(RPAREN).
+ * [glib.rwlock.RWLock.readerLock]$(RPAREN).
  * It is unspecified whether readers or writers have priority in acquiring the
  * lock when a reader already holds the lock and a writer is queued to acquire
  * it.
@@ -5839,7 +5839,7 @@ struct GQueue
  * functions is fully multi-thread safe now.
  * If a #GRWLock is allocated in static storage then it can be used
  * without initialisation.  Otherwise, you should call
- * [GLib.RWLock.init_] on it and [GLib.RWLock.clear] when done.
+ * [glib.rwlock.RWLock.init_] on it and [glib.rwlock.RWLock.clear] when done.
  * A GRWLock should only be accessed with the g_rw_lock_ functions.
  */
 struct GRWLock
@@ -5863,7 +5863,7 @@ struct GRand;
  * unlock the recursive mutex as often as it has been locked.
  * If a #GRecMutex is allocated in static storage then it can be used
  * without initialisation.  Otherwise, you should call
- * [GLib.RecMutex.init_] on it and [GLib.RecMutex.clear] when done.
+ * [glib.rec_mutex.RecMutex.init_] on it and [glib.rec_mutex.RecMutex.clear] when done.
  * A GRecMutex should only be accessed with the
  * g_rec_mutex_ functions.
  */
@@ -5931,25 +5931,25 @@ struct GRegex;
  * fields. Records are not ordered, so it is not possible to find the
  * record at a particular index.
  * Note that `GRelation` tables are currently limited to 2 fields.
- * To create a `GRelation`, use [GLib.Relation.new_].
- * To specify which fields should be indexed, use [GLib.Relation.index].
+ * To create a `GRelation`, use [glib.relation.Relation.new_].
+ * To specify which fields should be indexed, use [glib.relation.Relation.index].
  * Note that this must be called before any tuples are added to the
  * `GRelation`.
- * To add records to a `GRelation` use [GLib.Relation.insert].
+ * To add records to a `GRelation` use [glib.relation.Relation.insert].
  * To determine if a given record appears in a `GRelation`, use
- * [GLib.Relation.exists]. Note that fields are compared directly, so
+ * [glib.relation.Relation.exists]. Note that fields are compared directly, so
  * pointers must point to the exact same position $(LPAREN)i.e. different
  * copies of the same string will not match.$(RPAREN)
  * To count the number of records which have a particular value in a
- * given field, use [GLib.Relation.count].
+ * given field, use [glib.relation.Relation.count].
  * To get all the records which have a particular value in a given
- * field, use [GLib.Relation.select]. To access fields of the resulting
- * records, use [GLib.Tuples.index]. To free the resulting records use
- * [GLib.Tuples.destroy].
+ * field, use [glib.relation.Relation.select]. To access fields of the resulting
+ * records, use [glib.tuples.Tuples.index]. To free the resulting records use
+ * [glib.tuples.Tuples.destroy].
  * To delete all records which have a particular value in a given
- * field, use [GLib.Relation.delete_].
- * To destroy the `GRelation`, use [GLib.Relation.destroy].
- * To help debug `GRelation` objects, use [GLib.Relation.print].
+ * field, use [glib.relation.Relation.delete_].
+ * To destroy the `GRelation`, use [glib.relation.Relation.destroy].
+ * To help debug `GRelation` objects, use [glib.relation.Relation.print].
  * `GRelation` has been marked as deprecated, since this API has never
  * been fully implemented, is not very actively maintained and rarely
  * used.
@@ -6003,7 +6003,7 @@ struct GScanner
   uint maxParseErrors;
 
   /**
-   * [GLib.Scanner.error] increments this field
+   * [glib.scanner.Scanner.error] increments this field
    */
   uint parseErrors;
 
@@ -6023,42 +6023,42 @@ struct GScanner
   GScannerConfig* config;
 
   /**
-   * token parsed by the last [GLib.Scanner.getNextToken]
+   * token parsed by the last [glib.scanner.Scanner.getNextToken]
    */
   GTokenType token;
 
   /**
-   * value of the last token from [GLib.Scanner.getNextToken]
+   * value of the last token from [glib.scanner.Scanner.getNextToken]
    */
   GTokenValue value;
 
   /**
-   * line number of the last token from [GLib.Scanner.getNextToken]
+   * line number of the last token from [glib.scanner.Scanner.getNextToken]
    */
   uint line;
 
   /**
-   * char number of the last token from [GLib.Scanner.getNextToken]
+   * char number of the last token from [glib.scanner.Scanner.getNextToken]
    */
   uint position;
 
   /**
-   * token parsed by the last [GLib.Scanner.peekNextToken]
+   * token parsed by the last [glib.scanner.Scanner.peekNextToken]
    */
   GTokenType nextToken;
 
   /**
-   * value of the last token from [GLib.Scanner.peekNextToken]
+   * value of the last token from [glib.scanner.Scanner.peekNextToken]
    */
   GTokenValue nextValue;
 
   /**
-   * line number of the last token from [GLib.Scanner.peekNextToken]
+   * line number of the last token from [glib.scanner.Scanner.peekNextToken]
    */
   uint nextLine;
 
   /**
-   * char number of the last token from [GLib.Scanner.peekNextToken]
+   * char number of the last token from [glib.scanner.Scanner.peekNextToken]
    */
   uint nextPosition;
 
@@ -6369,7 +6369,7 @@ struct GSourceFuncs
    * %TRUE in either its @prepare or its @check function, or if a ready time
    * has been reached. The @dispatch function receives a callback function and
    * user data. The callback function may be %NULL if the source was never
-   * connected to a callback using [GLib.Source.setCallback]. The @dispatch
+   * connected to a callback using [glib.source.Source.setCallback]. The @dispatch
    * function should call the callback function with @user_data and whatever
    * additional parameters are needed for this type of event source. The
    * return value of the @dispatch function should be %G_SOURCE_REMOVE if the
@@ -6395,7 +6395,7 @@ struct GSourcePrivate;
 /**
  * A type corresponding to the appropriate struct type for the stat$(LPAREN)$(RPAREN)
  * system call, depending on the platform and/or compiler being used.
- * See [GLib.Global.stat] for more information.
+ * See [glib.global.stat] for more information.
  */
 struct GStatBuf;
 
@@ -6421,18 +6421,18 @@ struct GStatBuf;
  * }
  * ]|
  * Sometimes you would like to dynamically create a mutex. If you don't
- * want to require prior calling to [GLib.Thread.init_], because your code
+ * want to require prior calling to [glib.thread.Thread.init_], because your code
  * should also be usable in non-threaded programs, you are not able to
- * use [GLib.Mutex.new_] and thus #GMutex, as that requires a prior call to
- * [GLib.Thread.init_]. In these cases you can also use a #GStaticMutex.
- * It must be initialized with [GLib.StaticMutex.init_] before using it
- * and freed with with [GLib.StaticMutex.free] when not needed anymore to
+ * use [glib.mutex.Mutex.new_] and thus #GMutex, as that requires a prior call to
+ * [glib.thread.Thread.init_]. In these cases you can also use a #GStaticMutex.
+ * It must be initialized with [glib.static_mutex.StaticMutex.init_] before using it
+ * and freed with with [glib.static_mutex.StaticMutex.free] when not needed anymore to
  * free up any allocated resources.
  * Even though #GStaticMutex is not opaque, it should only be used with
  * the following functions, as it is defined differently on different
  * platforms.
  * All of the g_static_mutex_* functions apart from
- * g_static_mutex_get_mutex$(LPAREN)$(RPAREN) can also be used even if [GLib.Thread.init_]
+ * g_static_mutex_get_mutex$(LPAREN)$(RPAREN) can also be used even if [glib.thread.Thread.init_]
  * has not yet been called. Then they do nothing, apart from
  * g_static_mutex_trylock$(LPAREN)$(RPAREN) which does nothing but returning %TRUE.
  * All of the g_static_mutex_* functions are actually macros. Apart from
@@ -6521,10 +6521,10 @@ struct GStaticPrivate
  * Even though #GStaticRWLock is not opaque, it should only be used
  * with the following functions.
  * All of the g_static_rw_lock_* functions can be used even if
- * [GLib.Thread.init_] has not been called. Then they do nothing, apart
+ * [glib.thread.Thread.init_] has not been called. Then they do nothing, apart
  * from g_static_rw_lock_*_trylock, which does nothing but returning %TRUE.
  * A read-write lock has a higher overhead than a mutex. For example, both
- * [GLib.StaticRWLock.readerLock] and [GLib.StaticRWLock.readerUnlock] have
+ * [glib.static_rwlock.StaticRWLock.readerLock] and [glib.static_rwlock.StaticRWLock.readerUnlock] have
  * to lock and unlock a #GStaticMutex, so it takes at least twice the time
  * to lock and unlock a #GStaticRWLock that it does to lock and unlock a
  * #GStaticMutex. So only data structures that are accessed by multiple
@@ -6555,17 +6555,17 @@ struct GStaticRWLock
  * A #GStaticRecMutex works like a #GStaticMutex, but it can be locked
  * multiple times by one thread. If you enter it n times, you have to
  * unlock it n times again to let other threads lock it. An exception
- * is the function [GLib.StaticRecMutex.unlockFull]: that allows you to
+ * is the function [glib.static_rec_mutex.StaticRecMutex.unlockFull]: that allows you to
  * unlock a #GStaticRecMutex completely returning the depth, $(LPAREN)i.e. the
  * number of times this mutex was locked$(RPAREN). The depth can later be used
  * to restore the state of the #GStaticRecMutex by calling
- * [GLib.StaticRecMutex.lockFull]. In GLib 2.32, #GStaticRecMutex has
+ * [glib.static_rec_mutex.StaticRecMutex.lockFull]. In GLib 2.32, #GStaticRecMutex has
  * been deprecated in favor of #GRecMutex.
  * Even though #GStaticRecMutex is not opaque, it should only be used
  * with the following functions.
  * All of the g_static_rec_mutex_* functions can be used even if
- * [GLib.Thread.init_] has not been called. Then they do nothing, apart
- * from [GLib.StaticRecMutex.trylock], which does nothing but returning
+ * [glib.thread.Thread.init_] has not been called. Then they do nothing, apart
+ * from [glib.static_rec_mutex.StaticRecMutex.trylock], which does nothing but returning
  * %TRUE.
  */
 struct GStaticRecMutex
@@ -6616,13 +6616,13 @@ struct GString
  * When storing a large number of strings, string chunks are more
  * efficient than using func@GLib.strdup since fewer calls to `malloc$(LPAREN)$(RPAREN)`
  * are needed, and less memory is wasted in memory allocation overheads.
- * By adding strings with [GLib.StringChunk.insertConst] it is also
+ * By adding strings with [glib.string_chunk.StringChunk.insertConst] it is also
  * possible to remove duplicates.
- * To create a new `GStringChunk` use [GLib.StringChunk.new_].
- * To add strings to a `GStringChunk` use [GLib.StringChunk.insert].
+ * To create a new `GStringChunk` use [glib.string_chunk.StringChunk.new_].
+ * To add strings to a `GStringChunk` use [glib.string_chunk.StringChunk.insert].
  * To add strings to a `GStringChunk`, but without duplicating strings
- * which are already in the `GStringChunk`, use [GLib.StringChunk.insertConst].
- * To free the entire `GStringChunk` use [GLib.StringChunk.free].
+ * which are already in the `GStringChunk`, use [glib.string_chunk.StringChunk.insertConst].
+ * To free the entire `GStringChunk` use [glib.string_chunk.StringChunk.free].
  * It is not possible to free individual strings.
  */
 struct GStringChunk;
@@ -6686,12 +6686,12 @@ struct GTestSuite;
 
 /**
  * The #GThread struct represents a running thread. This struct
- * is returned by [GLib.Thread.new_] or [GLib.Thread.tryNew]. You can
+ * is returned by [glib.thread.Thread.new_] or [glib.thread.Thread.tryNew]. You can
  * obtain the #GThread struct representing the current thread by
- * calling [GLib.Thread.self].
- * GThread is refcounted, see [GLib.Thread.ref_] and [GLib.Thread.unref].
+ * calling [glib.thread.Thread.self].
+ * GThread is refcounted, see [glib.thread.Thread.ref_] and [glib.thread.Thread.unref].
  * The thread represented by it holds a reference while it is running,
- * and [GLib.Thread.join] consumes the reference that it is given, so
+ * and [glib.thread.Thread.join] consumes the reference that it is given, so
  * it is normally not necessary to manage GThread references
  * explicitly.
  * The structure is opaque -- none of its fields may be directly
@@ -6709,109 +6709,109 @@ struct GThread
 }
 
 /**
- * This function table is no longer used by [GLib.Thread.init_]
+ * This function table is no longer used by [glib.thread.Thread.init_]
  * to initialize the thread system.
  */
 struct GThreadFunctions
 {
   /**
-   * virtual function pointer for [GLib.Mutex.new_]
+   * virtual function pointer for [glib.mutex.Mutex.new_]
    */
   extern(C) GMutex* function() mutexNew;
 
   /**
-   * virtual function pointer for [GLib.Mutex.lock]
+   * virtual function pointer for [glib.mutex.Mutex.lock]
    */
   extern(C) void function(GMutex* mutex) mutexLock;
 
   /**
-   * virtual function pointer for [GLib.Mutex.trylock]
+   * virtual function pointer for [glib.mutex.Mutex.trylock]
    */
   extern(C) bool function(GMutex* mutex) mutexTrylock;
 
   /**
-   * virtual function pointer for [GLib.Mutex.unlock]
+   * virtual function pointer for [glib.mutex.Mutex.unlock]
    */
   extern(C) void function(GMutex* mutex) mutexUnlock;
 
   /**
-   * virtual function pointer for [GLib.Mutex.free]
+   * virtual function pointer for [glib.mutex.Mutex.free]
    */
   extern(C) void function(GMutex* mutex) mutexFree;
 
   /**
-   * virtual function pointer for [GLib.Cond.new_]
+   * virtual function pointer for [glib.cond.Cond.new_]
    */
   extern(C) GCond* function() condNew;
 
   /**
-   * virtual function pointer for [GLib.Cond.signal]
+   * virtual function pointer for [glib.cond.Cond.signal]
    */
   extern(C) void function(GCond* cond) condSignal;
 
   /**
-   * virtual function pointer for [GLib.Cond.broadcast]
+   * virtual function pointer for [glib.cond.Cond.broadcast]
    */
   extern(C) void function(GCond* cond) condBroadcast;
 
   /**
-   * virtual function pointer for [GLib.Cond.wait]
+   * virtual function pointer for [glib.cond.Cond.wait]
    */
   extern(C) void function(GCond* cond, GMutex* mutex) condWait;
 
   /**
-   * virtual function pointer for [GLib.Cond.timedWait]
+   * virtual function pointer for [glib.cond.Cond.timedWait]
    */
   extern(C) bool function(GCond* cond, GMutex* mutex, GTimeVal* endTime) condTimedWait;
 
   /**
-   * virtual function pointer for [GLib.Cond.free]
+   * virtual function pointer for [glib.cond.Cond.free]
    */
   extern(C) void function(GCond* cond) condFree;
 
   /**
-   * virtual function pointer for [GLib.Private.new_]
+   * virtual function pointer for [glib.private_.Private.new_]
    */
   extern(C) GPrivate* function(GDestroyNotify destructor) privateNew;
 
   /**
-   * virtual function pointer for [GLib.Private.get]
+   * virtual function pointer for [glib.private_.Private.get]
    */
   extern(C) void* function(GPrivate* privateKey) privateGet;
 
   /**
-   * virtual function pointer for [GLib.Private.set]
+   * virtual function pointer for [glib.private_.Private.set]
    */
   extern(C) void function(GPrivate* privateKey, void* data) privateSet;
 
   /**
-   * virtual function pointer for [GLib.Thread.create]
+   * virtual function pointer for [glib.thread.Thread.create]
    */
   extern(C) void function(GThreadFunc func, void* data, gulong stackSize, bool joinable, bool bound, GThreadPriority priority, void* thread, GError** _err) threadCreate;
 
   /**
-   * virtual function pointer for [GLib.Thread.yield]
+   * virtual function pointer for [glib.thread.Thread.yield]
    */
   extern(C) void function() threadYield;
 
   /**
-   * virtual function pointer for [GLib.Thread.join]
+   * virtual function pointer for [glib.thread.Thread.join]
    */
   extern(C) void function(void* thread) threadJoin;
 
   /**
-   * virtual function pointer for [GLib.Thread.exit]
+   * virtual function pointer for [glib.thread.Thread.exit]
    */
   extern(C) void function() threadExit;
 
   /**
    * virtual function pointer for
-   * [GLib.Thread.setPriority]
+   * [glib.thread.Thread.setPriority]
    */
   extern(C) void function(void* thread, GThreadPriority priority) threadSetPriority;
 
   /**
-   * virtual function pointer for [GLib.Thread.self]
+   * virtual function pointer for [glib.thread.Thread.self]
    */
   extern(C) void function(void* thread) threadSelf;
 
@@ -6831,18 +6831,18 @@ struct GThreadFunctions
  * and error-prone.
  * Therefore GLib provides thread pools for your convenience. An added advantage is, that the
  * threads can be shared between the different subsystems of your program, when they are using GLib.
- * To create a new thread pool, you use [GLib.ThreadPool.new_].
- * It is destroyed by [GLib.ThreadPool.free].
- * If you want to execute a certain task within a thread pool, use [GLib.ThreadPool.push].
- * To get the current number of running threads you call [GLib.ThreadPool.getNumThreads].
- * To get the number of still unprocessed tasks you call [GLib.ThreadPool.unprocessed].
+ * To create a new thread pool, you use [glib.thread_pool.ThreadPool.new_].
+ * It is destroyed by [glib.thread_pool.ThreadPool.free].
+ * If you want to execute a certain task within a thread pool, use [glib.thread_pool.ThreadPool.push].
+ * To get the current number of running threads you call [glib.thread_pool.ThreadPool.getNumThreads].
+ * To get the number of still unprocessed tasks you call [glib.thread_pool.ThreadPool.unprocessed].
  * To control the maximum number of threads for a thread pool, you use
- * [GLib.ThreadPool.getMaxThreads]. and [GLib.ThreadPool.setMaxThreads].
+ * [glib.thread_pool.ThreadPool.getMaxThreads]. and [glib.thread_pool.ThreadPool.setMaxThreads].
  * Finally you can control the number of unused threads, that are kept alive by GLib for future use.
- * The current number can be fetched with [GLib.ThreadPool.getNumUnusedThreads].
- * The maximum number can be controlled by [GLib.ThreadPool.getMaxUnusedThreads] and
- * [GLib.ThreadPool.setMaxUnusedThreads]. All currently unused threads
- * can be stopped by calling [GLib.ThreadPool.stopUnusedThreads].
+ * The current number can be fetched with [glib.thread_pool.ThreadPool.getNumUnusedThreads].
+ * The maximum number can be controlled by [glib.thread_pool.ThreadPool.getMaxUnusedThreads] and
+ * [glib.thread_pool.ThreadPool.setMaxUnusedThreads]. All currently unused threads
+ * can be stopped by calling [glib.thread_pool.ThreadPool.stopUnusedThreads].
  */
 struct GThreadPool
 {
@@ -6891,15 +6891,15 @@ struct GTimeVal
  * A `GTimeZone` represents a time zone, at no particular point in time.
  * The `GTimeZone` struct is refcounted and immutable.
  * Each time zone has an identifier $(LPAREN)for example, ‘Europe/London’$(RPAREN) which is
- * platform dependent. See [GLib.TimeZone.new_] for information on the
+ * platform dependent. See [glib.time_zone.TimeZone.new_] for information on the
  * identifier formats. The identifier of a time zone can be retrieved using
- * [GLib.TimeZone.getIdentifier].
+ * [glib.time_zone.TimeZone.getIdentifier].
  * A time zone contains a number of intervals. Each interval has an abbreviation
  * to describe it $(LPAREN)for example, ‘PDT’$(RPAREN), an offset to UTC and a flag indicating
  * if the daylight savings time is in effect during that interval. A time zone
  * always has at least one interval — interval 0. Note that interval abbreviations
  * are not the same as time zone identifiers $(LPAREN)apart from ‘UTC’$(RPAREN), and cannot be
- * passed to [GLib.TimeZone.new_].
+ * passed to [glib.time_zone.TimeZone.new_].
  * Every UTC time is contained within exactly one interval, but a given
  * local time may be contained within zero, one or two intervals $(LPAREN)due to
  * incontinuities associated with daylight savings time$(RPAREN).
@@ -7024,9 +7024,9 @@ struct GTreeNode;
 
 /**
  * The #GTuples struct is used to return records $(LPAREN)or tuples$(RPAREN) from the
- * #GRelation by [GLib.Relation.select]. It only contains one public
+ * #GRelation by [glib.relation.Relation.select]. It only contains one public
  * member - the number of records that matched. To access the matched
- * records, you must use [GLib.Tuples.index].
+ * records, you must use [glib.tuples.Tuples.index].
 
  * Deprecated: Rarely used API
  */
@@ -7057,9 +7057,9 @@ struct GUnixPipe
  * The `GUri` type and related functions can be used to parse URIs into
  * their components, and build valid URIs from individual components.
  * Since `GUri` only represents absolute URIs, all `GUri`s will have a
- * URI scheme, so [GLib.Uri.getScheme] will always return a non-`NULL`
+ * URI scheme, so [glib.uri.Uri.getScheme] will always return a non-`NULL`
  * answer. Likewise, by definition, all URIs have a path component, so
- * [GLib.Uri.getPath] will always return a non-`NULL` string $(LPAREN)which may
+ * [glib.uri.Uri.getPath] will always return a non-`NULL` string $(LPAREN)which may
  * be empty$(RPAREN).
  * If the URI string has an
  * [‘authority’ component](https://tools.ietf.org/html/rfc3986#section-3) $(LPAREN)that
@@ -7095,7 +7095,7 @@ struct GUnixPipe
  * You should pass `G_URI_FLAGS_ENCODED` or `G_URI_FLAGS_ENCODED_QUERY` if you
  * need to handle that case manually. In particular, if the query string
  * contains `\=` characters that are `%`-encoded, you should let
- * [GLib.Uri.parseParams] do the decoding once of the query.
+ * [glib.uri.Uri.parseParams] do the decoding once of the query.
  * `GUri` is immutable once constructed, and can safely be accessed from
  * multiple threads. Its reference counting is atomic.
  * Note that the scope of `GUri` is to help manipulate URIs in various applications,
@@ -7122,48 +7122,48 @@ struct GUnixPipe
  * `/?query#fragment` or `//example.com`.
  * Absolute URIs have a scheme specified. Any other components of the URI which
  * are missing are specified as explicitly unset in the URI, rather than being
- * resolved relative to a base URI using [GLib.Uri.parseRelative].
+ * resolved relative to a base URI using [glib.uri.Uri.parseRelative].
  * For example, a valid absolute URI is `file:///home/bob` or
  * `https://search.com?query\=string`.
  * A `GUri` instance is always an absolute URI. A string may be an absolute URI
  * or a relative reference; see the documentation for individual functions as to
  * what forms they accept.
  * ## Parsing URIs
- * The most minimalist APIs for parsing URIs are [GLib.Uri.split] and
- * [GLib.Uri.splitWithUser]. These split a URI into its component
+ * The most minimalist APIs for parsing URIs are [glib.uri.Uri.split] and
+ * [glib.uri.Uri.splitWithUser]. These split a URI into its component
  * parts, and return the parts; the difference between the two is that
- * [GLib.Uri.split] treats the ‘userinfo’ component of the URI as a
- * single element, while [GLib.Uri.splitWithUser] can $(LPAREN)depending on the
- * [GLib.UriFlags] you pass$(RPAREN) treat it as containing a username, password,
- * and authentication parameters. Alternatively, [GLib.Uri.splitNetwork]
+ * [glib.uri.Uri.split] treats the ‘userinfo’ component of the URI as a
+ * single element, while [glib.uri.Uri.splitWithUser] can $(LPAREN)depending on the
+ * [glib.UriFlags] you pass$(RPAREN) treat it as containing a username, password,
+ * and authentication parameters. Alternatively, [glib.uri.Uri.splitNetwork]
  * can be used when you are only interested in the components that are
  * needed to initiate a network connection to the service $(LPAREN)scheme,
  * host, and port$(RPAREN).
- * [GLib.Uri.parse] is similar to [GLib.Uri.split], but instead of
+ * [glib.uri.Uri.parse] is similar to [glib.uri.Uri.split], but instead of
  * returning individual strings, it returns a `GUri` structure $(LPAREN)and it requires
  * that the URI be an absolute URI$(RPAREN).
- * [GLib.Uri.resolveRelative] and [GLib.Uri.parseRelative] allow
+ * [glib.uri.Uri.resolveRelative] and [glib.uri.Uri.parseRelative] allow
  * you to resolve a relative URI relative to a base URI.
- * [GLib.Uri.resolveRelative] takes two strings and returns a string,
- * and [GLib.Uri.parseRelative] takes a `GUri` and a string and returns a
+ * [glib.uri.Uri.resolveRelative] takes two strings and returns a string,
+ * and [glib.uri.Uri.parseRelative] takes a `GUri` and a string and returns a
  * `GUri`.
- * All of the parsing functions take a [GLib.UriFlags] argument describing
+ * All of the parsing functions take a [glib.UriFlags] argument describing
  * exactly how to parse the URI; see the documentation for that type
  * for more details on the specific flags that you can pass. If you
  * need to choose different flags based on the type of URI, you can
- * use [GLib.Uri.peekScheme] on the URI string to check the scheme
+ * use [glib.uri.Uri.peekScheme] on the URI string to check the scheme
  * first, and use that to decide what flags to parse it with.
  * For example, you might want to use `G_URI_PARAMS_WWW_FORM` when parsing the
- * params for a web URI, so compare the result of [GLib.Uri.peekScheme]
+ * params for a web URI, so compare the result of [glib.uri.Uri.peekScheme]
  * against `http` and `https`.
  * ## Building URIs
- * [GLib.Uri.join] and [GLib.Uri.joinWithUser] can be used to construct
+ * [glib.uri.Uri.join] and [glib.uri.Uri.joinWithUser] can be used to construct
  * valid URI strings from a set of component strings. They are the
- * inverse of [GLib.Uri.split] and [GLib.Uri.splitWithUser].
- * Similarly, [GLib.Uri.build] and [GLib.Uri.buildWithUser] can be
+ * inverse of [glib.uri.Uri.split] and [glib.uri.Uri.splitWithUser].
+ * Similarly, [glib.uri.Uri.build] and [glib.uri.Uri.buildWithUser] can be
  * used to construct a `GUri` from a set of component strings.
  * As with the parsing functions, the building functions take a
- * [GLib.UriFlags] argument. In particular, it is important to keep in mind
+ * [glib.UriFlags] argument. In particular, it is important to keep in mind
  * whether the URI components you are using are already `%`-encoded. If so,
  * you must pass the `G_URI_FLAGS_ENCODED` flag.
  * ## `file://` URIs
@@ -7177,7 +7177,7 @@ struct GUnixPipe
  * Note that there is no `g_uri_equal $(LPAREN)$(RPAREN)` function, because comparing
  * URIs usefully requires scheme-specific knowledge that `GUri` does
  * not have. `GUri` can help with normalization if you use the various
- * encoded [GLib.UriFlags] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
+ * encoded [glib.UriFlags] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
  * however it is not comprehensive.
  * For example, `data:,foo` and `data:;base64,Zm9v` resolve to the same
  * thing according to the `data:` URI specification which GLib does not
@@ -7192,7 +7192,7 @@ struct GUri;
  * A #GUriParamsIter structure represents an iterator that can be used to
  * iterate over the attribute/value pairs of a URI query string. #GUriParamsIter
  * structures are typically allocated on the stack and then initialized with
- * [GLib.UriParamsIter.init_]. See the documentation for [GLib.UriParamsIter.init_]
+ * [glib.uri_params_iter.UriParamsIter.init_]. See the documentation for [glib.uri_params_iter.UriParamsIter.init_]
  * for a usage example.
  */
 struct GUriParamsIter
@@ -7245,15 +7245,15 @@ struct GVariantBuilder
  * dictionaries.
  * It is possible to use #GVariantDict allocated on the stack or on the
  * heap.  When using a stack-allocated #GVariantDict, you begin with a
- * call to [GLib.VariantDict.init_] and free the resources with a call to
- * [GLib.VariantDict.clear].
+ * call to [glib.variant_dict.VariantDict.init_] and free the resources with a call to
+ * [glib.variant_dict.VariantDict.clear].
  * Heap-allocated #GVariantDict follows normal refcounting rules: you
- * allocate it with [GLib.VariantDict.new_] and use [GLib.VariantDict.ref_]
- * and [GLib.VariantDict.unref].
- * [GLib.VariantDict.end] is used to convert the #GVariantDict back into a
+ * allocate it with [glib.variant_dict.VariantDict.new_] and use [glib.variant_dict.VariantDict.ref_]
+ * and [glib.variant_dict.VariantDict.unref].
+ * [glib.variant_dict.VariantDict.end] is used to convert the #GVariantDict back into a
  * dictionary-type #GVariant.  When used with stack-allocated instances,
  * this also implicitly frees all associated memory, but for
- * heap-allocated instances, you must still call [GLib.VariantDict.unref]
+ * heap-allocated instances, you must still call [glib.variant_dict.VariantDict.unref]
  * afterwards.
  * You will typically want to use a heap-allocated #GVariantDict when
  * you expose it as part of an API.  For most other uses, the
@@ -7331,14 +7331,14 @@ struct GVariantDict;
  * More advanced examples of `GVariant` in use can be found in documentation for
  * [`GVariant` format strings](gvariant-format-strings.html#pointers).
  * The range of possible values is determined by the type.
- * The type system used by `GVariant` is [GLib.VariantType].
+ * The type system used by `GVariant` is [glib.variant_type.VariantType].
  * `GVariant` instances always have a type and a value $(LPAREN)which are given
  * at construction time$(RPAREN).  The type and value of a `GVariant` instance
  * can never change other than by the `GVariant` itself being
  * destroyed.  A `GVariant` cannot contain a pointer.
- * `GVariant` is reference counted using [GLib.VariantG.ref_] and
- * [GLib.VariantG.unref].  `GVariant` also has floating reference counts —
- * see [GLib.VariantG.refSink].
+ * `GVariant` is reference counted using [glib.variant.VariantG.ref_] and
+ * [glib.variant.VariantG.unref].  `GVariant` also has floating reference counts —
+ * see [glib.variant.VariantG.refSink].
  * `GVariant` is completely threadsafe.  A `GVariant` instance can be
  * concurrently accessed in any way from any number of threads without
  * problems.
@@ -7348,7 +7348,7 @@ struct GVariantDict;
  * small constant time, usually touching only a single memory page.
  * Serialized `GVariant` data can also be sent over the network.
  * `GVariant` is largely compatible with D-Bus.  Almost all types of
- * `GVariant` instances can be sent over D-Bus.  See [GLib.VariantType] for
+ * `GVariant` instances can be sent over D-Bus.  See [glib.variant_type.VariantType] for
  * exceptions.  $(LPAREN)However, `GVariant`’s serialization format is not the same
  * as the serialization format of a D-Bus message body: use
  * [GDBusMessage](../gio/class.DBusMessage.html), in the GIO library, for those.$(RPAREN)
@@ -7363,7 +7363,7 @@ struct GVariantDict;
  * A `GVariant`’s size is limited mainly by any lower level operating
  * system constraints, such as the number of bits in `gsize`.  For
  * example, it is reasonable to have a 2GB file mapped into memory
- * with [GLib.MappedFile], and call [GLib.VariantG.newFromData] on
+ * with [glib.mapped_file.MappedFile], and call [glib.variant.VariantG.newFromData] on
  * it.
  * For convenience to C programmers, `GVariant` features powerful
  * varargs-based value construction and destruction.  This feature is
@@ -7457,7 +7457,7 @@ struct GVariantDict;
  * `{sv}` would require 61 bytes of memory $(LPAREN)plus allocation overhead$(RPAREN).
  * This means that in total, for our `a{sv}` example, 91 bytes of
  * type information would be allocated.
- * The type information cache, additionally, uses a [GLib.HashTable] to
+ * The type information cache, additionally, uses a [glib.hash_table.HashTable] to
  * store and look up the cached items and stores a pointer to this
  * hash table in static storage.  The hash table is freed when there
  * are zero items in the type cache.
@@ -7471,7 +7471,7 @@ struct GVariantDict;
  * that it uses.  The buffer is responsible for ensuring that the
  * correct call is made when the data is no longer in use by
  * `GVariant`.  This may involve a func@GLib.free or
- * even [GLib.MappedFile.unref].
+ * even [glib.mapped_file.MappedFile.unref].
  * One buffer management structure is used for each chunk of
  * serialized data.  The size of the buffer management structure
  * is `4 * $(LPAREN)void *$(RPAREN)`.  On 32-bit systems, that’s 16 bytes.
@@ -7488,7 +7488,7 @@ struct GVariantDict;
  * dictionary.
  * If calls are made to start accessing the other values then
  * `GVariant` instances will exist for those values only for as long
- * as they are in use $(LPAREN)ie: until you call [GLib.VariantG.unref]$(RPAREN).  The
+ * as they are in use $(LPAREN)ie: until you call [glib.variant.VariantG.unref]$(RPAREN).  The
  * type information is shared.  The serialized data and the buffer
  * management structure for that serialized data is shared by the
  * child.
@@ -7498,7 +7498,7 @@ struct GVariantDict;
  * using 91 bytes of memory for type information, 29 bytes of memory
  * for the serialized data, 16 bytes for buffer management and 24
  * bytes for the `GVariant` instance, or a total of 160 bytes, plus
- * allocation overhead.  If we were to use [GLib.VariantG.getChildValue]
+ * allocation overhead.  If we were to use [glib.variant.VariantG.getChildValue]
  * to access the two dictionary entries, we would use an additional 48
  * bytes.  If we were to have other dictionaries of the same type, we
  * would use more memory for the serialized data and buffer
@@ -7517,45 +7517,45 @@ struct GVariantIter
 }
 
 /**
- * A type in the [GLib.VariantG] type system.
- * This section introduces the [GLib.VariantG] type system. It is based, in
+ * A type in the [glib.variant.VariantG] type system.
+ * This section introduces the [glib.variant.VariantG] type system. It is based, in
  * large part, on the D-Bus type system, with two major changes and
  * some minor lifting of restrictions. The
  * [D-Bus specification](http://dbus.freedesktop.org/doc/dbus-specification.html),
  * therefore, provides a significant amount of
- * information that is useful when working with [GLib.VariantG].
+ * information that is useful when working with [glib.variant.VariantG].
  * The first major change with respect to the D-Bus type system is the
- * introduction of maybe $(LPAREN)or ‘nullable’$(RPAREN) types.  Any type in [GLib.VariantG]
+ * introduction of maybe $(LPAREN)or ‘nullable’$(RPAREN) types.  Any type in [glib.variant.VariantG]
  * can be converted to a maybe type, in which case, `nothing` $(LPAREN)or `null`$(RPAREN)
  * becomes a valid value.  Maybe types have been added by introducing the
  * character `m` to type strings.
- * The second major change is that the [GLib.VariantG] type system supports
+ * The second major change is that the [glib.variant.VariantG] type system supports
  * the concept of ‘indefinite types’ — types that are less specific than
  * the normal types found in D-Bus.  For example, it is possible to speak
- * of ‘an array of any type’ in [GLib.VariantG], where the D-Bus type system
+ * of ‘an array of any type’ in [glib.variant.VariantG], where the D-Bus type system
  * would require you to speak of ‘an array of integers’ or ‘an array of
  * strings’.  Indefinite types have been added by introducing the
  * characters `*`, `?` and `r` to type strings.
  * Finally, all arbitrary restrictions relating to the complexity of
  * types are lifted along with the restriction that dictionary entries
  * may only appear nested inside of arrays.
- * Just as in D-Bus, [GLib.VariantG] types are described with strings $(LPAREN)‘type
+ * Just as in D-Bus, [glib.variant.VariantG] types are described with strings $(LPAREN)‘type
  * strings’$(RPAREN).  Subject to the differences mentioned above, these strings
  * are of the same form as those found in D-Bus.  Note, however: D-Bus
  * always works in terms of messages and therefore individual type
  * strings appear nowhere in its interface.  Instead, ‘signatures’
  * are a concatenation of the strings of the type of each argument in a
- * message.  [GLib.VariantG] deals with single values directly so
- * [GLib.VariantG] type strings always describe the type of exactly one
+ * message.  [glib.variant.VariantG] deals with single values directly so
+ * [glib.variant.VariantG] type strings always describe the type of exactly one
  * value.  This means that a D-Bus signature string is generally not a valid
- * [GLib.VariantG] type string — except in the case that it is the signature
+ * [glib.variant.VariantG] type string — except in the case that it is the signature
  * of a message containing exactly one argument.
  * An indefinite type is similar in spirit to what may be called an
  * abstract type in other type systems.  No value can exist that has an
  * indefinite type as its type, but values can exist that have types
  * that are subtypes of indefinite types.  That is to say,
- * [GLib.VariantG.getType] will never return an indefinite type, but
- * calling [GLib.VariantG.isOfType] with an indefinite type may return
+ * [glib.variant.VariantG.getType] will never return an indefinite type, but
+ * calling [glib.variant.VariantG.isOfType] with an indefinite type may return
  * true.  For example, you cannot have a value that represents ‘an
  * array of no particular type’, but you can have an ‘array of integers’
  * which certainly matches the type of ‘an array of no particular type’,
@@ -7568,11 +7568,11 @@ struct GVariantIter
  * exist $(LPAREN)since `GtkWidget` is an abstract class$(RPAREN), but a [`GtkWindow`](https://docs.gtk.org/gtk4/class.Window.html)
  * can certainly be instantiated, and you would say that a `GtkWindow` is a
  * `GtkWidget` $(LPAREN)since `GtkWindow` is a subclass of `GtkWidget`$(RPAREN).
- * Two types may not be compared by value; use [GLib.VariantType.equal]
- * or [GLib.VariantType.isSubtypeOf]  May be copied using
- * [GLib.VariantType.copy] and freed using [GLib.VariantType.free].
+ * Two types may not be compared by value; use [glib.variant_type.VariantType.equal]
+ * or [glib.variant_type.VariantType.isSubtypeOf]  May be copied using
+ * [glib.variant_type.VariantType.copy] and freed using [glib.variant_type.VariantType.free].
  * ## GVariant Type Strings
- * A [GLib.VariantG] type string can be any of the following:
+ * A [glib.variant.VariantG] type string can be any of the following:
  * - any basic type string $(LPAREN)listed below$(RPAREN)
  * - `v`, `r` or `*`
  * - one of the characters `a` or `m`, followed by another type string
@@ -7581,13 +7581,13 @@ struct GVariantIter
  * - the character `{`, followed by a basic type string $(LPAREN)see below$(RPAREN),
  * followed by another type string, followed by the character `}`
  * A basic type string describes a basic type $(LPAREN)as per
- * [GLib.VariantType.isBasic]$(RPAREN) and is always a single character in
+ * [glib.variant_type.VariantType.isBasic]$(RPAREN) and is always a single character in
  * length. The valid basic type strings are `b`, `y`, `n`, `q`, `i`, `u`, `x`,
  * `t`, `h`, `d`, `s`, `o`, `g` and `?`.
  * The above definition is recursive to arbitrary depth. `aaaaai` and
  * `$(LPAREN)ui$(LPAREN)nq$(LPAREN)$(LPAREN)y$(RPAREN)$(RPAREN)$(RPAREN)s$(RPAREN)` are both valid type strings, as is
  * `a$(LPAREN)aa$(LPAREN)ui$(RPAREN)$(LPAREN)qna{ya$(LPAREN)yd$(RPAREN)}$(RPAREN)$(RPAREN)`. In order to not hit memory limits,
- * [GLib.VariantG] imposes a limit on recursion depth of 65 nested
+ * [glib.variant.VariantG] imposes a limit on recursion depth of 65 nested
  * containers. This is the limit in the D-Bus specification $(LPAREN)64$(RPAREN) plus one to
  * allow a [`GDBusMessage`](../gio/class.DBusMessage.html) to be nested in
  * a top-level tuple.

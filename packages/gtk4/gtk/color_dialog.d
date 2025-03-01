@@ -1,7 +1,7 @@
 module gtk.color_dialog;
 
 import gdk.rgba;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -18,11 +18,11 @@ import gtk.window;
  * are needed to present a color chooser dialog to the
  * user, such as a title for the dialog and whether it
  * should be modal.
- * The dialog is shown with the [Gtk.ColorDialog.chooseRgba]
+ * The dialog is shown with the [gtk.color_dialog.ColorDialog.chooseRgba]
  * function. This API follows the GIO async pattern, and the
  * result can be obtained by calling
- * [Gtk.ColorDialog.chooseRgbaFinish].
- * See [Gtk.ColorDialogButton] for a convenient control
+ * [gtk.color_dialog.ColorDialog.chooseRgbaFinish].
+ * See [gtk.color_dialog_button.ColorDialogButton] for a convenient control
  * that uses `GtkColorDialog` and presents the results.
  */
 class ColorDialog : ObjectG
@@ -59,7 +59,7 @@ class ColorDialog : ObjectG
    * This function initiates a color choice operation by
    * presenting a color chooser dialog to the user.
    * The callback will be called when the dialog is dismissed.
-   * It should call [Gtk.ColorDialog.chooseRgbaFinish]
+   * It should call [gtk.color_dialog.ColorDialog.chooseRgbaFinish]
    * to obtain the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -83,7 +83,7 @@ class ColorDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.ColorDialog.chooseRgba] call and
+   * Finishes the [gtk.color_dialog.ColorDialog.chooseRgba] call and
    * returns the resulting color.
    * Params:
    *   result = a `GAsyncResult`

@@ -1,6 +1,6 @@
 module gtk.scroll_info;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;

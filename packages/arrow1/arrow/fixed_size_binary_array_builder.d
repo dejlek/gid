@@ -5,7 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.fixed_size_binary_data_type;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.error;
 
@@ -99,7 +99,7 @@ class FixedSizeBinaryArrayBuilder : ArrayBuilder
    * Append multiple values at once. It's more efficient than multiple
    * `append` and `append_null` calls.
    * This is more efficient than
-   * [Arrow.FixedSizeBinaryArrayBuilder.appendValues].
+   * [arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValues].
    * Params:
    *   values = A #GBytes that contains multiple values.
    *   isValids = The array of

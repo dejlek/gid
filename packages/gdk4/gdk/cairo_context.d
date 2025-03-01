@@ -5,13 +5,13 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.draw_context;
 import gdk.types;
-import gid.gid;
+import gid.global;
 
 /**
  * `GdkCairoContext` is an object representing the platform-specific
  * draw context.
  * `GdkCairoContext`s are created for a surface using
- * [Gdk.Surface.createCairoContext], and the context
+ * [gdk.surface.Surface.createCairoContext], and the context
  * can then be used to draw on that surface.
  */
 class CairoContext : DrawContext
@@ -36,10 +36,10 @@ class CairoContext : DrawContext
   /**
    * Retrieves a Cairo context to be used to draw on the `GdkSurface`
    * of context.
-   * A call to [Gdk.DrawContext.beginFrame] with this
+   * A call to [gdk.draw_context.DrawContext.beginFrame] with this
    * context must have been done or this function will return %NULL.
    * The returned context is guaranteed to be valid until
-   * [Gdk.DrawContext.endFrame] is called.
+   * [gdk.draw_context.DrawContext.endFrame] is called.
    * Returns: a Cairo context
    *   to draw on `GdkSurface
    */

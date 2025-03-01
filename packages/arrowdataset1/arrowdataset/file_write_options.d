@@ -3,7 +3,7 @@ module arrowdataset.file_write_options;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class FileWriteOptions : ObjectG

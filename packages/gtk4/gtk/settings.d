@@ -1,7 +1,7 @@
 module gtk.settings;
 
 import gdk.display;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -26,12 +26,12 @@ import gtk.types;
  * default values for settings by installing a `settings.ini` file
  * next to their `gtk.css` file.
  * Applications can override system-wide settings by setting the property
- * of the `GtkSettings` object with [GObject.ObjectG.set]. This should be restricted
+ * of the `GtkSettings` object with [gobject.object.ObjectG.set]. This should be restricted
  * to special cases though; `GtkSettings` are not meant as an application
  * configuration facility.
  * There is one `GtkSettings` instance per display. It can be obtained with
- * [Gtk.Settings.getForDisplay], but in many cases, it is more
- * convenient to use [Gtk.Widget.getSettings].
+ * [gtk.settings.Settings.getForDisplay], but in many cases, it is more
+ * convenient to use [gtk.widget.Widget.getSettings].
  */
 class Settings : ObjectG, StyleProvider
 {
@@ -57,7 +57,7 @@ class Settings : ObjectG, StyleProvider
   /**
    * Gets the `GtkSettings` object for the default display, creating
    * it if necessary.
-   * See [Gtk.Settings.getForDisplay].
+   * See [gtk.settings.Settings.getForDisplay].
    * Returns: a `GtkSettings` object. If there is
    *   no default display, then returns %NULL.
    */
@@ -84,7 +84,7 @@ class Settings : ObjectG, StyleProvider
   }
 
   /**
-   * Undoes the effect of calling [GObject.ObjectG.set] to install an
+   * Undoes the effect of calling [gobject.object.ObjectG.set] to install an
    * application-specific value for a setting.
    * After this call, the setting will again follow the session-wide
    * value for this setting.

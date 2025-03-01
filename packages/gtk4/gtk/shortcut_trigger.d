@@ -3,7 +3,7 @@ module gtk.shortcut_trigger;
 import gdk.display;
 import gdk.event;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import glib.string_;
 import gobject.object;
 import gtk.c.functions;
@@ -13,7 +13,7 @@ import gtk.types;
 /**
  * `GtkShortcutTrigger` tracks how a `GtkShortcut` should be activated.
  * To find out if a `GtkShortcutTrigger` triggers, you can call
- * [Gtk.ShortcutTrigger.trigger] on a `GdkEvent`.
+ * [gtk.shortcut_trigger.ShortcutTrigger.trigger] on a `GdkEvent`.
  * `GtkShortcutTriggers` contain functions that allow easy presentation
  * to end users as well as being printed for debugging.
  * All `GtkShortcutTriggers` are immutable, you can only specify their
@@ -45,7 +45,7 @@ class ShortcutTrigger : ObjectG
    * When parsing failed, %NULL is returned.
    * The accepted strings are:
    * - `never`, for `GtkNeverTrigger`
-   * - a string parsed by [Gtk.Global.acceleratorParse], for a `GtkKeyvalTrigger`, e.g. `<Control>C`
+   * - a string parsed by [gtk.global.acceleratorParse], for a `GtkKeyvalTrigger`, e.g. `<Control>C`
    * - underscore, followed by a single character, for `GtkMnemonicTrigger`, e.g. `_l`
    * - two valid trigger strings, separated by a `|` character, for a
    * `GtkAlternativeTrigger`: `<Control>q|<Control>w`
@@ -174,7 +174,7 @@ class ShortcutTrigger : ObjectG
 
   /**
    * Prints the given trigger into a human-readable string.
-   * This is a small wrapper around [Gtk.ShortcutTrigger.print]
+   * This is a small wrapper around [gtk.shortcut_trigger.ShortcutTrigger.print]
    * to help when debugging.
    * Returns: a new string
    */

@@ -1,6 +1,6 @@
 module gsk.subsurface_node;
 
-import gid.gid;
+import gid.global;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;

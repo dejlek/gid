@@ -1,6 +1,6 @@
 module gtk.signal_action;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.shortcut_action;

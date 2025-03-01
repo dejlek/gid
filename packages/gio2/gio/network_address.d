@@ -1,6 +1,6 @@
 module gio.network_address;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_connectable;
@@ -16,7 +16,7 @@ import gobject.object;
  * The enumeration results of resolved addresses *may* be cached as long
  * as this object is kept alive which may have unexpected results if
  * alive for too long.
- * See [Gio.SocketConnectable] for an example of using the connectable
+ * See [gio.socket_connectable.SocketConnectable] for an example of using the connectable
  * interface.
  */
 class NetworkAddress : ObjectG, SocketConnectable
@@ -46,7 +46,7 @@ class NetworkAddress : ObjectG, SocketConnectable
    * Note that depending on the configuration of the machine, a
    * hostname of `localhost` may refer to the IPv4 loopback address
    * only, or to both IPv4 and IPv6; use
-   * [Gio.NetworkAddress.newLoopback] to create a #GNetworkAddress that
+   * [gio.network_address.NetworkAddress.newLoopback] to create a #GNetworkAddress that
    * is guaranteed to resolve to both addresses.
    * Params:
    *   hostname = the hostname
@@ -68,9 +68,9 @@ class NetworkAddress : ObjectG, SocketConnectable
    * IPv6.
    * The connectable will return IPv4 and IPv6 loopback addresses,
    * regardless of how the host resolves `localhost`. By contrast,
-   * [Gio.NetworkAddress.new_] will often only return an IPv4 address when
+   * [gio.network_address.NetworkAddress.new_] will often only return an IPv4 address when
    * resolving `localhost`, and an IPv6 address for `localhost6`.
-   * [Gio.NetworkAddress.getHostname] will always return `localhost` for
+   * [gio.network_address.NetworkAddress.getHostname] will always return `localhost` for
    * a #GNetworkAddress created with this constructor.
    * Params:
    *   port = the port
@@ -123,8 +123,8 @@ class NetworkAddress : ObjectG, SocketConnectable
   /**
    * Creates a new #GSocketConnectable for connecting to the given
    * uri. May fail and return %NULL in case parsing uri fails.
-   * Using this rather than [Gio.NetworkAddress.new_] or
-   * [Gio.NetworkAddress.parse] allows #GSocketClient to determine
+   * Using this rather than [gio.network_address.NetworkAddress.new_] or
+   * [gio.network_address.NetworkAddress.parse] allows #GSocketClient to determine
    * when to use application-specific proxy protocols.
    * Params:
    *   uri = the hostname and optionally a port

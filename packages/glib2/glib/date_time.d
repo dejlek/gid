@@ -1,6 +1,6 @@
 module glib.date_time;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.time_val;
@@ -21,7 +21,7 @@ import gobject.boxed;
  * Nearly all such functions can fail due to the date or time going out
  * of range, in which case %NULL will be returned.
  * `GDateTime` is reference counted: the reference count is increased by calling
- * [GLib.DateTime.ref_] and decreased by calling [GLib.DateTime.unref].
+ * [glib.date_time.DateTime.ref_] and decreased by calling [glib.date_time.DateTime.unref].
  * When the reference count drops to 0, the resources allocated by the `GDateTime`
  * structure are released.
  * Many parts of the API may produce non-obvious results. As an
@@ -75,7 +75,7 @@ class DateTime : Boxed
    * It not considered a programmer error for the values to this function
    * to be out of range, but in the case that they are, the function will
    * return %NULL.
-   * You should release the return value by calling [GLib.DateTime.unref]
+   * You should release the return value by calling [glib.date_time.DateTime.unref]
    * when you are done with it.
    * Params:
    *   tz = a #GTimeZone
@@ -125,7 +125,7 @@ class DateTime : Boxed
    * $(LPAREN)this field is otherwise ignored$(RPAREN).
    * This call can fail $(LPAREN)returning %NULL$(RPAREN) if text is not a valid ISO 8601
    * formatted string.
-   * You should release the return value by calling [GLib.DateTime.unref]
+   * You should release the return value by calling [glib.date_time.DateTime.unref]
    * when you are done with it.
    * Params:
    *   text = an ISO 8601 formatted time string.
@@ -150,14 +150,14 @@ class DateTime : Boxed
    * local time offset.
    * This call can fail $(LPAREN)returning %NULL$(RPAREN) if tv represents a time outside
    * of the supported range of #GDateTime.
-   * You should release the return value by calling [GLib.DateTime.unref]
+   * You should release the return value by calling [glib.date_time.DateTime.unref]
    * when you are done with it.
    * Params:
    *   tv = a #GTimeVal
    * Returns: a new #GDateTime, or %NULL
 
    * Deprecated: #GTimeVal is not year-2038-safe. Use
-   *   [GLib.DateTime.newFromUnixLocal] instead.
+   *   [glib.date_time.DateTime.newFromUnixLocal] instead.
    */
   static DateTime newFromTimevalLocal(TimeVal tv)
   {
@@ -173,14 +173,14 @@ class DateTime : Boxed
    * seconds elapsed since 1970-01-01 00:00:00 UTC.
    * This call can fail $(LPAREN)returning %NULL$(RPAREN) if tv represents a time outside
    * of the supported range of #GDateTime.
-   * You should release the return value by calling [GLib.DateTime.unref]
+   * You should release the return value by calling [glib.date_time.DateTime.unref]
    * when you are done with it.
    * Params:
    *   tv = a #GTimeVal
    * Returns: a new #GDateTime, or %NULL
 
    * Deprecated: #GTimeVal is not year-2038-safe. Use
-   *   [GLib.DateTime.newFromUnixUtc] instead.
+   *   [glib.date_time.DateTime.newFromUnixUtc] instead.
    */
   static DateTime newFromTimevalUtc(TimeVal tv)
   {
@@ -197,7 +197,7 @@ class DateTime : Boxed
    * 00:00:00 UTC, regardless of the local time offset.
    * This call can fail $(LPAREN)returning %NULL$(RPAREN) if t represents a time outside
    * of the supported range of #GDateTime.
-   * You should release the return value by calling [GLib.DateTime.unref]
+   * You should release the return value by calling [glib.date_time.DateTime.unref]
    * when you are done with it.
    * Params:
    *   t = the Unix time
@@ -212,17 +212,17 @@ class DateTime : Boxed
   }
 
   /**
-   * Creates a [GLib.DateTime] corresponding to the given Unix time t in the
+   * Creates a [glib.date_time.DateTime] corresponding to the given Unix time t in the
    * local time zone.
    * Unix time is the number of microseconds that have elapsed since 1970-01-01
    * 00:00:00 UTC, regardless of the local time offset.
    * This call can fail $(LPAREN)returning `NULL`$(RPAREN) if t represents a time outside
    * of the supported range of #GDateTime.
-   * You should release the return value by calling [GLib.DateTime.unref]
+   * You should release the return value by calling [glib.date_time.DateTime.unref]
    * when you are done with it.
    * Params:
    *   usecs = the Unix time in microseconds
-   * Returns: a new [GLib.DateTime], or `NULL`
+   * Returns: a new [glib.date_time.DateTime], or `NULL`
    */
   static DateTime newFromUnixLocalUsec(long usecs)
   {
@@ -238,7 +238,7 @@ class DateTime : Boxed
    * 00:00:00 UTC.
    * This call can fail $(LPAREN)returning %NULL$(RPAREN) if t represents a time outside
    * of the supported range of #GDateTime.
-   * You should release the return value by calling [GLib.DateTime.unref]
+   * You should release the return value by calling [glib.date_time.DateTime.unref]
    * when you are done with it.
    * Params:
    *   t = the Unix time
@@ -253,16 +253,16 @@ class DateTime : Boxed
   }
 
   /**
-   * Creates a [GLib.DateTime] corresponding to the given Unix time t in UTC.
+   * Creates a [glib.date_time.DateTime] corresponding to the given Unix time t in UTC.
    * Unix time is the number of microseconds that have elapsed since 1970-01-01
    * 00:00:00 UTC.
    * This call can fail $(LPAREN)returning `NULL`$(RPAREN) if t represents a time outside
    * of the supported range of #GDateTime.
-   * You should release the return value by calling [GLib.DateTime.unref]
+   * You should release the return value by calling [glib.date_time.DateTime.unref]
    * when you are done with it.
    * Params:
    *   usecs = the Unix time in microseconds
-   * Returns: a new [GLib.DateTime], or `NULL`
+   * Returns: a new [glib.date_time.DateTime], or `NULL`
    */
   static DateTime newFromUnixUtcUsec(long usecs)
   {
@@ -275,8 +275,8 @@ class DateTime : Boxed
   /**
    * Creates a new #GDateTime corresponding to the given date and time in
    * the local time zone.
-   * This call is equivalent to calling [GLib.DateTime.new_] with the time
-   * zone returned by [GLib.TimeZone.newLocal].
+   * This call is equivalent to calling [glib.date_time.DateTime.new_] with the time
+   * zone returned by [glib.time_zone.TimeZone.newLocal].
    * Params:
    *   year = the year component of the date
    *   month = the month component of the date
@@ -300,7 +300,7 @@ class DateTime : Boxed
    * maximum accuracy of 1 microsecond.
    * This function will always succeed unless GLib is still being used after the
    * year 9999.
-   * You should release the return value by calling [GLib.DateTime.unref]
+   * You should release the return value by calling [glib.date_time.DateTime.unref]
    * when you are done with it.
    * Params:
    *   tz = a #GTimeZone
@@ -317,8 +317,8 @@ class DateTime : Boxed
   /**
    * Creates a #GDateTime corresponding to this exact instant in the local
    * time zone.
-   * This is equivalent to calling [GLib.DateTime.newNow] with the time
-   * zone returned by [GLib.TimeZone.newLocal].
+   * This is equivalent to calling [glib.date_time.DateTime.newNow] with the time
+   * zone returned by [glib.time_zone.TimeZone.newLocal].
    * Returns: a new #GDateTime, or %NULL
    */
   static DateTime newNowLocal()
@@ -331,8 +331,8 @@ class DateTime : Boxed
 
   /**
    * Creates a #GDateTime corresponding to this exact instant in UTC.
-   * This is equivalent to calling [GLib.DateTime.newNow] with the time
-   * zone returned by [GLib.TimeZone.newUtc].
+   * This is equivalent to calling [glib.date_time.DateTime.newNow] with the time
+   * zone returned by [glib.time_zone.TimeZone.newUtc].
    * Returns: a new #GDateTime, or %NULL
    */
   static DateTime newNowUtc()
@@ -346,8 +346,8 @@ class DateTime : Boxed
   /**
    * Creates a new #GDateTime corresponding to the given date and time in
    * UTC.
-   * This call is equivalent to calling [GLib.DateTime.new_] with the time
-   * zone returned by [GLib.TimeZone.newUtc].
+   * This call is equivalent to calling [glib.date_time.DateTime.new_] with the time
+   * zone returned by [glib.time_zone.TimeZone.newUtc].
    * Params:
    *   year = the year component of the date
    *   month = the month component of the date
@@ -370,7 +370,7 @@ class DateTime : Boxed
    * Params:
    *   timespan = a #GTimeSpan
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime add(TimeSpan timespan)
   {
@@ -386,7 +386,7 @@ class DateTime : Boxed
    * Params:
    *   days = the number of days
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime addDays(int days)
   {
@@ -407,7 +407,7 @@ class DateTime : Boxed
    *   minutes = the number of minutes to add
    *   seconds = the number of seconds to add
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime addFull(int years, int months, int days, int hours, int minutes, double seconds)
   {
@@ -423,7 +423,7 @@ class DateTime : Boxed
    * Params:
    *   hours = the number of hours to add
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime addHours(int hours)
   {
@@ -439,7 +439,7 @@ class DateTime : Boxed
    * Params:
    *   minutes = the number of minutes to add
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime addMinutes(int minutes)
   {
@@ -459,7 +459,7 @@ class DateTime : Boxed
    * Params:
    *   months = the number of months
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime addMonths(int months)
   {
@@ -475,7 +475,7 @@ class DateTime : Boxed
    * Params:
    *   seconds = the number of seconds to add
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime addSeconds(double seconds)
   {
@@ -491,7 +491,7 @@ class DateTime : Boxed
    * Params:
    *   weeks = the number of weeks
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime addWeeks(int weeks)
   {
@@ -504,12 +504,12 @@ class DateTime : Boxed
   /**
    * Creates a copy of datetime and adds the specified number of years to the
    * copy. Add negative values to subtract years.
-   * As with [GLib.DateTime.addMonths], if the resulting date would be 29th
+   * As with [glib.date_time.DateTime.addMonths], if the resulting date would be 29th
    * February on a non-leap year, the day will be clamped to 28th February.
    * Params:
    *   years = the number of years
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime addYears(int years)
   {
@@ -622,7 +622,7 @@ class DateTime : Boxed
    * Monday being 1. This works well with `%G` and `%V`.
    * - `%V`: the ISO 8601 standard week number of the current year as a decimal
    * number, range 01 to 53, where week 1 is the first week that has at
-   * least 4 days in the new year. See [GLib.DateTime.getWeekOfYear].
+   * least 4 days in the new year. See [glib.date_time.DateTime.getWeekOfYear].
    * This works well with `%G` and `%u`.
    * - `%w`: the day of the week as a decimal, range 0 to 6, Sunday being 0.
    * This is not the ISO 8601 standard format — use `%u` instead.
@@ -684,7 +684,7 @@ class DateTime : Boxed
    * Returns: a newly allocated string formatted to
    *   the requested format or %NULL in the case that there was an error $(LPAREN)such
    *   as a format specifier not being supported in the current locale$(RPAREN). The
-   *   string should be freed with [GLib.Global.gfree].
+   *   string should be freed with [glib.global.gfree].
    */
   string format(string format)
   {
@@ -702,7 +702,7 @@ class DateTime : Boxed
    * Since GLib 2.66, this will output to sub-second precision if needed.
    * Returns: a newly allocated string formatted in
    *   ISO 8601 format or %NULL in the case that there was an error. The string
-   *   should be freed with [GLib.Global.gfree].
+   *   should be freed with [glib.global.gfree].
    */
   string formatIso8601()
   {
@@ -866,11 +866,11 @@ class DateTime : Boxed
   /**
    * Returns the ISO 8601 week-numbering year in which the week containing
    * datetime falls.
-   * This function, taken together with [GLib.DateTime.getWeekOfYear] and
-   * [GLib.DateTime.getDayOfWeek] can be used to determine the full ISO
+   * This function, taken together with [glib.date_time.DateTime.getWeekOfYear] and
+   * [glib.date_time.DateTime.getDayOfWeek] can be used to determine the full ISO
    * week date on which datetime falls.
    * This is usually equal to the normal Gregorian year $(LPAREN)as returned by
-   * [GLib.DateTime.getYear]$(RPAREN), except as detailed below:
+   * [glib.date_time.DateTime.getYear]$(RPAREN), except as detailed below:
    * For Thursday, the week-numbering year is always equal to the usual
    * calendar year.  For other days, the number is such that every day
    * within a complete week $(LPAREN)Monday to Sunday$(RPAREN) is contained within the
@@ -969,10 +969,10 @@ class DateTime : Boxed
   /**
    * Creates a new #GDateTime corresponding to the same instant in time as
    * datetime, but in the local time zone.
-   * This call is equivalent to calling [GLib.DateTime.toTimezone] with the
-   * time zone returned by [GLib.TimeZone.newLocal].
+   * This call is equivalent to calling [glib.date_time.DateTime.toTimezone] with the
+   * time zone returned by [glib.time_zone.TimeZone.newLocal].
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime toLocal()
   {
@@ -998,7 +998,7 @@ class DateTime : Boxed
    * Returns: %TRUE if successful, else %FALSE
 
    * Deprecated: #GTimeVal is not year-2038-safe. Use
-   *   [GLib.DateTime.toUnix] instead.
+   *   [glib.date_time.DateTime.toUnix] instead.
    */
   bool toTimeval(TimeVal tv)
   {
@@ -1016,7 +1016,7 @@ class DateTime : Boxed
    * Params:
    *   tz = the new #GTimeZone
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime toTimezone(TimeZone tz)
   {
@@ -1056,10 +1056,10 @@ class DateTime : Boxed
   /**
    * Creates a new #GDateTime corresponding to the same instant in time as
    * datetime, but in UTC.
-   * This call is equivalent to calling [GLib.DateTime.toTimezone] with the
-   * time zone returned by [GLib.TimeZone.newUtc].
+   * This call is equivalent to calling [glib.date_time.DateTime.toTimezone] with the
+   * time zone returned by [glib.time_zone.TimeZone.newUtc].
    * Returns: the newly created #GDateTime which
-   *   should be freed with [GLib.DateTime.unref], or %NULL
+   *   should be freed with [glib.date_time.DateTime.unref], or %NULL
    */
   DateTime toUtc()
   {

@@ -1,6 +1,6 @@
 module gio.iostream;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -17,18 +17,18 @@ import gobject.object;
  * Generally the two streams act as separate input and output streams,
  * but they share some common resources and state. For instance, for
  * seekable streams, both streams may use the same position.
- * Examples of `GIOStream` objects are [Gio.SocketConnection], which represents
- * a two-way network connection; and [Gio.FileIOStream], which represents a
+ * Examples of `GIOStream` objects are [gio.socket_connection.SocketConnection], which represents
+ * a two-way network connection; and [gio.file_iostream.FileIOStream], which represents a
  * file handle opened in read-write mode.
  * To do the actual reading and writing you need to get the substreams
- * with [Gio.IOStream.getInputStream] and
- * [Gio.IOStream.getOutputStream].
+ * with [gio.iostream.IOStream.getInputStream] and
+ * [gio.iostream.IOStream.getOutputStream].
  * The `GIOStream` object owns the input and the output streams, not the other
  * way around, so keeping the substreams alive will not keep the `GIOStream`
  * object alive. If the `GIOStream` object is freed it will be closed, thus
  * closing the substreams, so even if the substreams stay alive they will
  * always return `G_IO_ERROR_CLOSED` for all operations.
- * To close a stream use [Gio.IOStream.close] which will close the common
+ * To close a stream use [gio.iostream.IOStream.close] which will close the common
  * stream object and also the individual substreams. You can also close
  * the substreams themselves. In most cases this only marks the
  * substream as closed, so further I/O on it fails but common state in the
@@ -36,20 +36,20 @@ import gobject.object;
  * ‘half-closed’ states where one direction of the stream is actually shut down.
  * Operations on `GIOStream`s cannot be started while another operation on the
  * `GIOStream` or its substreams is in progress. Specifically, an application can
- * read from the [Gio.InputStream] and write to the
- * [Gio.OutputStream] simultaneously $(LPAREN)either in separate threads, or as
+ * read from the [gio.input_stream.InputStream] and write to the
+ * [gio.output_stream.OutputStream] simultaneously $(LPAREN)either in separate threads, or as
  * asynchronous operations in the same thread$(RPAREN), but an application cannot start
  * any `GIOStream` operation while there is a `GIOStream`, `GInputStream` or
  * `GOutputStream` operation in progress, and an application can’t start any
  * `GInputStream` or `GOutputStream` operation while there is a `GIOStream`
  * operation in progress.
  * This is a product of individual stream operations being associated with a
- * given [GLib.MainContext] $(LPAREN)the thread-default context at the time the
+ * given [glib.main_context.MainContext] $(LPAREN)the thread-default context at the time the
  * operation was started$(RPAREN), rather than entire streams being associated with a
  * single `GMainContext`.
  * GIO may run operations on `GIOStream`s from other $(LPAREN)worker$(RPAREN) threads, and this
  * may be exposed to application code in the behaviour of wrapper streams, such
- * as [Gio.BufferedInputStream] or [Gio.TlsConnection]. With such
+ * as [gio.buffered_input_stream.BufferedInputStream] or [gio.tls_connection.TlsConnection]. With such
  * wrapper APIs, application code may only run operations on the base $(LPAREN)wrapped$(RPAREN)
  * stream when the wrapper stream is idle. Note that the semantics of such
  * operations may not be well-defined due to the state the wrapper stream leaves
@@ -142,9 +142,9 @@ class IOStream : ObjectG
   /**
    * Requests an asynchronous close of the stream, releasing resources
    * related to it. When the operation is finished callback will be
-   * called. You can then call [Gio.IOStream.closeFinish] to get
+   * called. You can then call [gio.iostream.IOStream.closeFinish] to get
    * the result of the operation.
-   * For behaviour details see [Gio.IOStream.close].
+   * For behaviour details see [gio.iostream.IOStream.close].
    * The asynchronous methods have a default fallback that uses threads
    * to implement asynchronicity, so they are optional for inheriting
    * classes. However, if you override one you must override all.
@@ -256,7 +256,7 @@ class IOStream : ObjectG
    * stream2, and splice the output stream of stream2 to the input stream of
    * stream1.
    * When the operation is finished callback will be called.
-   * You can then call [Gio.IOStream.spliceFinish] to get the
+   * You can then call [gio.iostream.IOStream.spliceFinish] to get the
    * result of the operation.
    * Params:
    *   stream2 = a #GIOStream.

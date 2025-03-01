@@ -1,6 +1,6 @@
 module gtk.gesture_long_press;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -11,10 +11,10 @@ import gtk.types;
  * `GtkGestureLongPress` is a `GtkGesture` for long presses.
  * This gesture is also known as “Press and Hold”.
  * When the timeout is exceeded, the gesture is triggering the
- * [Gtk.GestureLongPress.pressed] signal.
+ * [gtk.gesture_long_press.GestureLongPress.pressed] signal.
  * If the touchpoint is lifted before the timeout passes, or if
  * it drifts too far of the initial press point, the
- * [Gtk.GestureLongPress.cancelled] signal will be emitted.
+ * [gtk.gesture_long_press.GestureLongPress.cancelled] signal will be emitted.
  * How long the timeout is before the ::pressed signal gets emitted is
  * determined by the property@Gtk.Settings:gtk-long-press-time setting.
  * It can be modified by the property@Gtk.GestureLongPress:delay-factor
@@ -75,7 +75,7 @@ class GestureLongPress : GestureSingle
 
   /**
    * Emitted whenever a press moved too far, or was released
-   * before [Gtk.GestureLongPress.pressed] happened.
+   * before [gtk.gesture_long_press.GestureLongPress.pressed] happened.
    *   gestureLongPress = the instance the signal is connected to
    */
   alias CancelledCallbackDlg = void delegate(GestureLongPress gestureLongPress);

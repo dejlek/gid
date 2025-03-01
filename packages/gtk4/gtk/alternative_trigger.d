@@ -1,6 +1,6 @@
 module gtk.alternative_trigger;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -51,7 +51,7 @@ class AlternativeTrigger : ShortcutTrigger
   /**
    * Gets the first of the two alternative triggers that may
    * trigger self.
-   * [Gtk.AlternativeTrigger.getSecond] will return
+   * [gtk.alternative_trigger.AlternativeTrigger.getSecond] will return
    * the other one.
    * Returns: the first alternative trigger
    */
@@ -66,7 +66,7 @@ class AlternativeTrigger : ShortcutTrigger
   /**
    * Gets the second of the two alternative triggers that may
    * trigger self.
-   * [Gtk.AlternativeTrigger.getFirst] will return
+   * [gtk.alternative_trigger.AlternativeTrigger.getFirst] will return
    * the other one.
    * Returns: the second alternative trigger
    */

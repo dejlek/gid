@@ -4,7 +4,7 @@ import arrow.buffer;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

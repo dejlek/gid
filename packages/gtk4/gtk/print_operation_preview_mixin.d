@@ -1,7 +1,7 @@
 module gtk.print_operation_preview_mixin;
 
 public import gtk.print_operation_preview_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -13,8 +13,8 @@ public import gtk.types;
  * `GtkPrintOperationPreview` is the interface that is used to
  * implement print preview.
  * A `GtkPrintOperationPreview` object is passed to the
- * [Gtk.PrintOperation.preview] signal by
- * [Gtk.PrintOperation].
+ * [gtk.print_operation.PrintOperation.preview] signal by
+ * [gtk.print_operation.PrintOperation].
  */
 template PrintOperationPreviewT()
 {
@@ -45,7 +45,7 @@ template PrintOperationPreviewT()
   /**
    * Renders a page to the preview.
    * This is using the print context that was passed to the
-   * [Gtk.PrintOperation.preview] handler together
+   * [gtk.print_operation.PrintOperation.preview] handler together
    * with preview.
    * A custom print preview should use this function to render
    * the currently selected page.
@@ -63,7 +63,7 @@ template PrintOperationPreviewT()
    * Emitted once for each page that gets rendered to the preview.
    * A handler for this signal should update the context
    * according to page_setup and set up a suitable cairo
-   * context, using [Gtk.PrintContext.setCairoContext].
+   * context, using [gtk.print_context.PrintContext.setCairoContext].
    * Params
    *   context = the current `GtkPrintContext`
    *   pageSetup = the `GtkPageSetup` for the current page

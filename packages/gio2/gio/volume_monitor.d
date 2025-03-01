@@ -1,6 +1,6 @@
 module gio.volume_monitor;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.drive;
@@ -19,7 +19,7 @@ import gobject.object;
  * would show in a sidebar.
  * `GVolumeMonitor` is not
  * thread-default-context aware $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN), and so should not be used
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN), and so should not be used
  * other than from the main thread, with no thread-default-context active.
  * In order to receive updates about volumes and mounts monitored through GVFS,
  * a main loop must be running.
@@ -50,12 +50,12 @@ class VolumeMonitor : ObjectG
    * emitting the mount_added signal.
    * If the return value is not %NULL, the caller must associate the
    * returned #GVolume object with the #GMount. This involves returning
-   * it in its [Gio.Mount.getVolume] implementation. The caller must
+   * it in its [gio.mount.Mount.getVolume] implementation. The caller must
    * also listen for the "removed" signal on the returned object
    * and give up its reference when handling that signal
-   * Similarly, if implementing [Gio.VolumeMonitor.adoptOrphanMount],
+   * Similarly, if implementing [gio.volume_monitor.VolumeMonitor.adoptOrphanMount],
    * the implementor must take a reference to mount and return it in
-   * its [Gio.Volume.getMount] implemented. Also, the implementor must
+   * its [gio.volume.Volume.getMount] implemented. Also, the implementor must
    * listen for the "unmounted" signal on mount and give up its
    * reference upon handling that signal.
    * There are two main use cases for this function.
@@ -75,8 +75,8 @@ class VolumeMonitor : ObjectG
    * Deprecated: Instead of using this function, #GVolumeMonitor
    *   implementations should instead create shadow mounts with the URI of
    *   the mount they intend to adopt. See the proxy volume monitor in
-   *   gvfs for an example of this. Also see [Gio.Mount.isShadowed],
-   *   [Gio.Mount.shadow] and [Gio.Mount.unshadow] functions.
+   *   gvfs for an example of this. Also see [gio.mount.Mount.isShadowed],
+   *   [gio.mount.Mount.shadow] and [gio.mount.Mount.unshadow] functions.
    */
   static Volume adoptOrphanMount(Mount mount)
   {
@@ -89,7 +89,7 @@ class VolumeMonitor : ObjectG
   /**
    * Gets the volume monitor used by gio.
    * Returns: a reference to the #GVolumeMonitor used by gio. Call
-   *   [GObject.ObjectG.unref] when done with it.
+   *   [gobject.object.ObjectG.unref] when done with it.
    */
   static VolumeMonitor get()
   {
@@ -101,8 +101,8 @@ class VolumeMonitor : ObjectG
 
   /**
    * Gets a list of drives connected to the system.
-   * The returned list should be freed with [GLib.List.free], after
-   * its elements have been unreffed with [GObject.ObjectG.unref].
+   * The returned list should be freed with [glib.list.List.free], after
+   * its elements have been unreffed with [gobject.object.ObjectG.unref].
    * Returns: a #GList of connected #GDrive objects.
    */
   Drive[] getConnectedDrives()
@@ -114,11 +114,11 @@ class VolumeMonitor : ObjectG
   }
 
   /**
-   * Finds a #GMount object by its UUID $(LPAREN)see [Gio.Mount.getUuid]$(RPAREN)
+   * Finds a #GMount object by its UUID $(LPAREN)see [gio.mount.Mount.getUuid]$(RPAREN)
    * Params:
    *   uuid = the UUID to look for
    * Returns: a #GMount or %NULL if no such mount is available.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   Mount getMountForUuid(string uuid)
   {
@@ -131,8 +131,8 @@ class VolumeMonitor : ObjectG
 
   /**
    * Gets a list of the mounts on the system.
-   * The returned list should be freed with [GLib.List.free], after
-   * its elements have been unreffed with [GObject.ObjectG.unref].
+   * The returned list should be freed with [glib.list.List.free], after
+   * its elements have been unreffed with [gobject.object.ObjectG.unref].
    * Returns: a #GList of #GMount objects.
    */
   Mount[] getMounts()
@@ -144,11 +144,11 @@ class VolumeMonitor : ObjectG
   }
 
   /**
-   * Finds a #GVolume object by its UUID $(LPAREN)see [Gio.Volume.getUuid]$(RPAREN)
+   * Finds a #GVolume object by its UUID $(LPAREN)see [gio.volume.Volume.getUuid]$(RPAREN)
    * Params:
    *   uuid = the UUID to look for
    * Returns: a #GVolume or %NULL if no such volume is available.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   Volume getVolumeForUuid(string uuid)
   {
@@ -161,8 +161,8 @@ class VolumeMonitor : ObjectG
 
   /**
    * Gets a list of the volumes on the system.
-   * The returned list should be freed with [GLib.List.free], after
-   * its elements have been unreffed with [GObject.ObjectG.unref].
+   * The returned list should be freed with [glib.list.List.free], after
+   * its elements have been unreffed with [gobject.object.ObjectG.unref].
    * Returns: a #GList of #GVolume objects.
    */
   Volume[] getVolumes()

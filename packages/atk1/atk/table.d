@@ -5,7 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object;
 import atk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 
@@ -122,7 +122,7 @@ interface Table
    *   The value -1 is returned if the object at row,column is not a child
    *   of table or table does not implement this interface.
 
-   * Deprecated: Since 2.12. Use [Atk.Table.refAt] in order to get the
+   * Deprecated: Since 2.12. Use [atk.table.Table.refAt] in order to get the
    *   accessible that represents the cell at $(LPAREN)row, column$(RPAREN)
    */
   int getIndexAt(int row, int column);

@@ -1,6 +1,6 @@
 module gio.dbus_property_info;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;

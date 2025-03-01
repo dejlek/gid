@@ -1,6 +1,6 @@
 module pango.coverage;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -8,7 +8,7 @@ import pango.types;
 
 /**
  * A `PangoCoverage` structure is a map from Unicode characters
- * to [Pango.CoverageLevel] values.
+ * to [pango.CoverageLevel] values.
  * It is often necessary in Pango to determine if a particular
  * font can represent a particular character, and also how well
  * it can represent that character. The `PangoCoverage` is a data
@@ -38,7 +38,7 @@ class Coverage : ObjectG
    * Create a new `PangoCoverage`
    * Returns: the newly allocated `PangoCoverage`, initialized
    *   to %PANGO_COVERAGE_NONE with a reference count of one, which
-   *   should be freed with [Pango.Coverage.unref].
+   *   should be freed with [pango.coverage.Coverage.unref].
    */
   this()
   {
@@ -48,7 +48,7 @@ class Coverage : ObjectG
   }
 
   /**
-   * Convert data generated from [Pango.Coverage.toBytes]
+   * Convert data generated from [pango.coverage.Coverage.toBytes]
    * back to a `PangoCoverage`.
    * Params:
    *   bytes = binary data
@@ -74,7 +74,7 @@ class Coverage : ObjectG
    * Copy an existing `PangoCoverage`.
    * Returns: the newly allocated `PangoCoverage`,
    *   with a reference count of one, which should be freed with
-   *   [Pango.Coverage.unref].
+   *   [pango.coverage.Coverage.unref].
    */
   Coverage copy()
   {
@@ -126,7 +126,7 @@ class Coverage : ObjectG
   /**
    * Convert a `PangoCoverage` structure into a flat binary format.
    * Params:
-   *   bytes = location to store result $(LPAREN)must be freed with [GLib.Global.gfree]$(RPAREN)
+   *   bytes = location to store result $(LPAREN)must be freed with [glib.global.gfree]$(RPAREN)
 
    * Deprecated: This returns %NULL
    */

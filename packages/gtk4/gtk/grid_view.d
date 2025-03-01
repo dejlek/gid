@@ -1,6 +1,6 @@
 module gtk.grid_view;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -44,7 +44,7 @@ import gtk.types;
  * ╰── [rubberband]
  * ```
  * `GtkGridView` uses a single CSS node with name `gridview`. Each child uses
- * a single CSS node with name `child`. If the [Gtk.ListItem.activatable]
+ * a single CSS node with name `child`. If the [gtk.list_item.ListItem.gboolean]
  * property is set, the corresponding row will have the `.activatable` style
  * class. For rubberband selection, a subnode with name `rubberband` is used.
  * # Accessibility
@@ -212,7 +212,7 @@ class GridView : ListBase
    * Sets the maximum number of columns to use.
    * This number must be at least 1.
    * If max_columns is smaller than the minimum set via
-   * [Gtk.GridView.setMinColumns], that value is used instead.
+   * [gtk.grid_view.GridView.setMinColumns], that value is used instead.
    * Params:
    *   maxColumns = The maximum number of columns
    */
@@ -225,7 +225,7 @@ class GridView : ListBase
    * Sets the minimum number of columns to use.
    * This number must be at least 1.
    * If min_columns is smaller than the minimum set via
-   * [Gtk.GridView.setMaxColumns], that value is ignored.
+   * [gtk.grid_view.GridView.setMaxColumns], that value is ignored.
    * Params:
    *   minColumns = The minimum number of columns
    */
@@ -236,7 +236,7 @@ class GridView : ListBase
 
   /**
    * Sets the model to use.
-   * This must be a [Gtk.SelectionModel].
+   * This must be a [gtk.selection_model.SelectionModel].
    * Params:
    *   model = the model to use
    */
@@ -270,7 +270,7 @@ class GridView : ListBase
    * Emitted when a cell has been activated by the user,
    * usually via activating the GtkGridView|list.activate-item action.
    * This allows for a convenient way to handle activation in a gridview.
-   * See [Gtk.ListItem.activatable] for details on how to use
+   * See [gtk.list_item.ListItem.gboolean] for details on how to use
    * this signal.
    * Params
    *   position = position of item to activate

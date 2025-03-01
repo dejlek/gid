@@ -1,7 +1,7 @@
 module gio.file;
 
 public import gio.file_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.app_info;
 import gio.app_info_mixin;
 import gio.async_result;
@@ -30,20 +30,20 @@ import gobject.object;
  * that do no I/O upon creation. It is necessary to understand that
  * `GFile` objects do not represent files, merely an identifier for a
  * file. All file content I/O is implemented as streaming operations
- * $(LPAREN)see [Gio.InputStream] and [Gio.OutputStream]$(RPAREN).
+ * $(LPAREN)see [gio.input_stream.InputStream] and [gio.output_stream.OutputStream]$(RPAREN).
  * To construct a `GFile`, you can use:
- * - [Gio.File.newForPath] if you have a path.
- * - [Gio.File.newForUri] if you have a URI.
- * - [Gio.File.newForCommandlineArg] or
- * [Gio.File.newForCommandlineArgAndCwd] for a command line
+ * - [gio.file.File.newForPath] if you have a path.
+ * - [gio.file.File.newForUri] if you have a URI.
+ * - [gio.file.File.newForCommandlineArg] or
+ * [gio.file.File.newForCommandlineArgAndCwd] for a command line
  * argument.
- * - [Gio.File.newTmp] to create a temporary file from a template.
- * - [Gio.File.newTmpAsync] to asynchronously create a temporary file.
- * - [Gio.File.newTmpDirAsync] to asynchronously create a temporary
+ * - [gio.file.File.newTmp] to create a temporary file from a template.
+ * - [gio.file.File.newTmpAsync] to asynchronously create a temporary file.
+ * - [gio.file.File.newTmpDirAsync] to asynchronously create a temporary
  * directory.
- * - [Gio.File.parseName] from a UTF-8 string gotten from
- * [Gio.File.getParseName].
- * - [Gio.File.newBuildFilename] or [Gio.File.newBuildFilenamev]
+ * - [gio.file.File.parseName] from a UTF-8 string gotten from
+ * [gio.file.File.getParseName].
+ * - [gio.file.File.newBuildFilename] or [gio.file.File.newBuildFilenamev]
  * to create a file from path elements.
  * One way to think of a `GFile` is as an abstraction of a pathname. For
  * normal files the system pathname is what is stored internally, but as
@@ -51,20 +51,20 @@ import gobject.object;
  * to a pathname in a userspace implementation of a filesystem.
  * `GFile`s make up hierarchies of directories and files that correspond to
  * the files on a filesystem. You can move through the file system with
- * `GFile` using [Gio.File.getParent] to get an identifier for the
- * parent directory, [Gio.File.getChild] to get a child within a
- * directory, and [Gio.File.resolveRelativePath] to resolve a relative
+ * `GFile` using [gio.file.File.getParent] to get an identifier for the
+ * parent directory, [gio.file.File.getChild] to get a child within a
+ * directory, and [gio.file.File.resolveRelativePath] to resolve a relative
  * path between two `GFile`s. There can be multiple hierarchies, so you may not
- * end up at the same root if you repeatedly call [Gio.File.getParent]
+ * end up at the same root if you repeatedly call [gio.file.File.getParent]
  * on two different files.
- * All `GFile`s have a basename $(LPAREN)get with [Gio.File.getBasename]$(RPAREN). These
+ * All `GFile`s have a basename $(LPAREN)get with [gio.file.File.getBasename]$(RPAREN). These
  * names are byte strings that are used to identify the file on the filesystem
  * $(LPAREN)relative to its parent directory$(RPAREN) and there is no guarantees that they
  * have any particular charset encoding or even make any sense at all. If
  * you want to use filenames in a user interface you should use the display
  * name that you can get by requesting the
  * `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME` attribute with
- * [Gio.File.queryInfo]. This is guaranteed to be in UTF-8 and can be
+ * [gio.file.File.queryInfo]. This is guaranteed to be in UTF-8 and can be
  * used in a user interface. But always store the real basename or the `GFile`
  * to use to actually access the file, because there is no way to go from a
  * display name to the actual name.
@@ -81,8 +81,8 @@ import gobject.object;
  * Many `GFile` operations have both synchronous and asynchronous versions
  * to suit your application. Asynchronous versions of synchronous functions
  * simply have `_async$(LPAREN)$(RPAREN)` appended to their function names. The asynchronous
- * I/O functions call a [Gio.AsyncReadyCallback] which is then used to
- * finalize the operation, producing a [Gio.AsyncResult] which is then
+ * I/O functions call a [gio.AsyncReadyCallback] which is then used to
+ * finalize the operation, producing a [gio.async_result.AsyncResult] which is then
  * passed to the function’s matching `_finish$(LPAREN)$(RPAREN)` operation.
  * It is highly recommended to use asynchronous calls when running within a
  * shared main loop, such as in the main thread of an application. This avoids
@@ -92,10 +92,10 @@ import gobject.object;
  * for more.
  * Some `GFile` operations almost always take a noticeable amount of time, and
  * so do not have synchronous analogs. Notable cases include:
- * - [Gio.File.mountMountable] to mount a mountable file.
- * - [Gio.File.unmountMountableWithOperation] to unmount a mountable
+ * - [gio.file.File.mountMountable] to mount a mountable file.
+ * - [gio.file.File.unmountMountableWithOperation] to unmount a mountable
  * file.
- * - [Gio.File.ejectMountableWithOperation] to eject a mountable file.
+ * - [gio.file.File.ejectMountableWithOperation] to eject a mountable file.
  * ## Entity Tags
  * One notable feature of `GFile`s are entity tags, or ‘etags’ for
  * short. Entity tags are somewhat like a more abstract version of the
@@ -117,8 +117,8 @@ interface File
   /**
    * Constructs a #GFile from a vector of elements using the correct
    * separator for filenames.
-   * Using this function is equivalent to calling [GLib.Global.buildFilenamev],
-   * followed by [Gio.File.newForPath] on the result.
+   * Using this function is equivalent to calling [glib.global.buildFilenamev],
+   * followed by [gio.file.File.newForPath] on the result.
    * Params:
    *   args = %NULL-terminated
    *     array of strings containing the path elements.
@@ -148,13 +148,13 @@ interface File
    * should not use this function with string from argv as it is passed
    * to main$(LPAREN)$(RPAREN).  g_win32_get_command_line$(LPAREN)$(RPAREN) will return a UTF-8 version of
    * the commandline.  #GApplication also uses UTF-8 but
-   * [Gio.ApplicationCommandLine.createFileForArg] may be more useful
+   * [gio.application_command_line.ApplicationCommandLine.createFileForArg] may be more useful
    * for you there.  It is also always possible to use this function with
    * #GOptionContext arguments of type %G_OPTION_ARG_FILENAME.
    * Params:
    *   arg = a command line string
    * Returns: a new #GFile.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   static File newForCommandlineArg(string arg)
   {
@@ -167,13 +167,13 @@ interface File
 
   /**
    * Creates a #GFile with the given argument from the command line.
-   * This function is similar to [Gio.File.newForCommandlineArg] except
+   * This function is similar to [gio.file.File.newForCommandlineArg] except
    * that it allows for passing the current working directory as an
    * argument instead of using the current working directory of the
    * process.
    * This is useful if the commandline argument was given in a context
    * other than the invocation of the current process.
-   * See also [Gio.ApplicationCommandLine.createFileForArg].
+   * See also [gio.application_command_line.ApplicationCommandLine.createFileForArg].
    * Params:
    *   arg = a command line string
    *   cwd = the current working directory of the commandline
@@ -197,7 +197,7 @@ interface File
    *   path = a string containing a relative or absolute path.
    *     The string must be encoded in the glib filename encoding.
    * Returns: a new #GFile for the given path.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   static File newForPath(string path)
   {
@@ -216,7 +216,7 @@ interface File
    * Params:
    *   uri = a UTF-8 string containing a URI
    * Returns: a new #GFile for the given uri.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   static File newForUri(string uri)
   {
@@ -229,7 +229,7 @@ interface File
 
   /**
    * Opens a file in the preferred directory for temporary files $(LPAREN)as
-   * returned by [GLib.Global.getTmpDir]$(RPAREN) and returns a #GFile and
+   * returned by [glib.global.getTmpDir]$(RPAREN) and returns a #GFile and
    * #GFileIOStream pointing to it.
    * tmpl should be a string in the GLib file name encoding
    * containing a sequence of six 'X' characters, and containing no
@@ -238,10 +238,10 @@ interface File
    * a temporary file could not be created.
    * Params:
    *   tmpl = Template for the file
-   *     name, as in [GLib.Global.fileOpenTmp], or %NULL for a default template
+   *     name, as in [glib.global.fileOpenTmp], or %NULL for a default template
    *   iostream = on return, a #GFileIOStream for the created file
    * Returns: a new #GFile.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   static File newTmp(string tmpl, out FileIOStream iostream)
   {
@@ -259,13 +259,13 @@ interface File
 
   /**
    * Asynchronously opens a file in the preferred directory for temporary files
-   * $(LPAREN)as returned by [GLib.Global.getTmpDir]$(RPAREN) as [Gio.File.newTmp].
+   * $(LPAREN)as returned by [glib.global.getTmpDir]$(RPAREN) as [gio.file.File.newTmp].
    * tmpl should be a string in the GLib file name encoding
    * containing a sequence of six 'X' characters, and containing no
    * directory components. If it is %NULL, a default template is used.
    * Params:
    *   tmpl = Template for the file
-   *     name, as in [GLib.Global.fileOpenTmp], or %NULL for a default template
+   *     name, as in [glib.global.fileOpenTmp], or %NULL for a default template
    *   ioPriority = the [I/O priority][io-priority] of the request
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is done
@@ -288,13 +288,13 @@ interface File
 
   /**
    * Asynchronously creates a directory in the preferred directory for
-   * temporary files $(LPAREN)as returned by [GLib.Global.getTmpDir]$(RPAREN) as [GLib.Dir.makeTmp].
+   * temporary files $(LPAREN)as returned by [glib.global.getTmpDir]$(RPAREN) as [glib.dir.Dir.makeTmp].
    * tmpl should be a string in the GLib file name encoding
    * containing a sequence of six 'X' characters, and containing no
    * directory components. If it is %NULL, a default template is used.
    * Params:
    *   tmpl = Template for the file
-   *     name, as in [GLib.Dir.makeTmp], or %NULL for a default template
+   *     name, as in [glib.dir.Dir.makeTmp], or %NULL for a default template
    *   ioPriority = the [I/O priority][io-priority] of the request
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is done
@@ -317,11 +317,11 @@ interface File
 
   /**
    * Finishes a temporary directory creation started by
-   * [Gio.File.newTmpDirAsync].
+   * [gio.file.File.newTmpDirAsync].
    * Params:
    *   result = a #GAsyncResult
    * Returns: a new #GFile.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   static File newTmpDirFinish(AsyncResult result)
   {
@@ -335,12 +335,12 @@ interface File
   }
 
   /**
-   * Finishes a temporary file creation started by [Gio.File.newTmpAsync].
+   * Finishes a temporary file creation started by [gio.file.File.newTmpAsync].
    * Params:
    *   result = a #GAsyncResult
    *   iostream = on return, a #GFileIOStream for the created file
    * Returns: a new #GFile.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   static File newTmpFinish(AsyncResult result, out FileIOStream iostream)
   {
@@ -357,7 +357,7 @@ interface File
 
   /**
    * Constructs a #GFile with the given parse_name $(LPAREN)i.e. something
-   * given by [Gio.File.getParseName]$(RPAREN). This operation never fails,
+   * given by [gio.file.File.getParseName]$(RPAREN). This operation never fails,
    * but the returned object might not support any I/O operation if
    * the parse_name cannot be parsed.
    * Params:
@@ -393,16 +393,16 @@ interface File
    *   cancellable = optional #GCancellable object,
    *     %NULL to ignore
    * Returns: a #GFileOutputStream, or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileOutputStream appendTo(FileCreateFlags flags, Cancellable cancellable);
 
   /**
    * Asynchronously opens file for appending.
-   * For more details, see [Gio.File.appendTo] which is
+   * For more details, see [gio.file.File.appendTo] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.appendToFinish] to get the result
+   * You can then call [gio.file.File.appendToFinish] to get the result
    * of the operation.
    * Params:
    *   flags = a set of #GFileCreateFlags
@@ -416,29 +416,29 @@ interface File
 
   /**
    * Finishes an asynchronous file append operation started with
-   * [Gio.File.appendToAsync].
+   * [gio.file.File.appendToAsync].
    * Params:
    *   res = #GAsyncResult
    * Returns: a valid #GFileOutputStream
    *   or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileOutputStream appendToFinish(AsyncResult res);
 
   /**
    * Prepares the file attribute query string for copying to file.
    * This function prepares an attribute query string to be
-   * passed to [Gio.File.queryInfo] to get a list of attributes
-   * normally copied with the file $(LPAREN)see [Gio.File.copyAttributes]
+   * passed to [gio.file.File.queryInfo] to get a list of attributes
+   * normally copied with the file $(LPAREN)see [gio.file.File.copyAttributes]
    * for the detailed description$(RPAREN). This function is used by the
-   * implementation of [Gio.File.copyAttributes] and is useful
+   * implementation of [gio.file.File.copyAttributes] and is useful
    * when one needs to query and set the attributes in two
    * stages $(LPAREN)e.g., for recursive move of a directory$(RPAREN).
    * Params:
    *   flags = a set of #GFileCopyFlags
    *   cancellable = optional #GCancellable object,
    *     %NULL to ignore
-   * Returns: an attribute query string for [Gio.File.queryInfo],
+   * Returns: an attribute query string for [gio.file.File.queryInfo],
    *   or %NULL if an error occurs.
    */
   string buildAttributeListForCopy(FileCopyFlags flags, Cancellable cancellable);
@@ -473,7 +473,7 @@ interface File
    * %G_FILE_COPY_OVERWRITE is specified and the target is a file, then the
    * %G_IO_ERROR_WOULD_RECURSE error is returned.
    * If you are interested in copying the #GFile object itself $(LPAREN)not the on-disk
-   * file$(RPAREN), see [Gio.File.dup].
+   * file$(RPAREN), see [gio.file.File.dup].
    * Params:
    *   destination = destination #GFile
    *   flags = set of #GFileCopyFlags
@@ -487,13 +487,13 @@ interface File
 
   /**
    * Copies the file source to the location specified by destination
-   * asynchronously. For details of the behaviour, see [Gio.File.copy].
+   * asynchronously. For details of the behaviour, see [gio.file.File.copy].
    * If progress_callback is not %NULL, then that function that will be called
-   * just like in [Gio.File.copy]. The callback will run in the default main context
-   * of the thread calling [Gio.File.copyAsync] — the same context as callback is
+   * just like in [gio.file.File.copy]. The callback will run in the default main context
+   * of the thread calling [gio.file.File.copyAsync] — the same context as callback is
    * run in.
    * When the operation is finished, callback will be called. You can then call
-   * [Gio.File.copyFinish] to get the result of the operation.
+   * [gio.file.File.copyFinish] to get the result of the operation.
    * Params:
    *   destination = destination #GFile
    *   flags = set of #GFileCopyFlags
@@ -526,7 +526,7 @@ interface File
   bool copyAttributes(File destination, FileCopyFlags flags, Cancellable cancellable);
 
   /**
-   * Finishes copying the file started with [Gio.File.copyAsync].
+   * Finishes copying the file started with [gio.file.File.copyAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: a %TRUE on success, %FALSE on error.
@@ -556,17 +556,17 @@ interface File
    *     %NULL to ignore
    * Returns: a #GFileOutputStream for the newly created
    *   file, or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileOutputStream create(FileCreateFlags flags, Cancellable cancellable);
 
   /**
    * Asynchronously creates a new file and returns an output stream
    * for writing to it. The file must not already exist.
-   * For more details, see [Gio.File.create] which is
+   * For more details, see [gio.file.File.create] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.createFinish] to get the result
+   * You can then call [gio.file.File.createFinish] to get the result
    * of the operation.
    * Params:
    *   flags = a set of #GFileCreateFlags
@@ -580,11 +580,11 @@ interface File
 
   /**
    * Finishes an asynchronous file create operation started with
-   * [Gio.File.createAsync].
+   * [gio.file.File.createAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: a #GFileOutputStream or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileOutputStream createFinish(AsyncResult res);
 
@@ -614,17 +614,17 @@ interface File
    *     %NULL to ignore
    * Returns: a #GFileIOStream for the newly created
    *   file, or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileIOStream createReadwrite(FileCreateFlags flags, Cancellable cancellable);
 
   /**
    * Asynchronously creates a new file and returns a stream
    * for reading and writing to it. The file must not already exist.
-   * For more details, see [Gio.File.createReadwrite] which is
+   * For more details, see [gio.file.File.createReadwrite] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.createReadwriteFinish] to get
+   * You can then call [gio.file.File.createReadwriteFinish] to get
    * the result of the operation.
    * Params:
    *   flags = a set of #GFileCreateFlags
@@ -638,17 +638,17 @@ interface File
 
   /**
    * Finishes an asynchronous file create operation started with
-   * [Gio.File.createReadwriteAsync].
+   * [gio.file.File.createReadwriteAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: a #GFileIOStream or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileIOStream createReadwriteFinish(AsyncResult res);
 
   /**
    * Deletes a file. If the file is a directory, it will only be
-   * deleted if it is empty. This has the same semantics as [GLib.Global.unlink].
+   * deleted if it is empty. This has the same semantics as [glib.global.unlink].
    * If file doesn’t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
    * for deletion to be implemented avoiding
    * [time-of-check to time-of-use races](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use):
@@ -676,7 +676,7 @@ interface File
   /**
    * Asynchronously delete a file. If the file is a directory, it will
    * only be deleted if it is empty.  This has the same semantics as
-   * [GLib.Global.unlink].
+   * [glib.global.unlink].
    * Params:
    *   ioPriority = the [I/O priority][io-priority] of the request
    *   cancellable = optional #GCancellable object,
@@ -687,7 +687,7 @@ interface File
   void deleteAsync(int ioPriority, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes deleting a file started with [Gio.File.deleteAsync].
+   * Finishes deleting a file started with [gio.file.File.deleteAsync].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE if the file was deleted. %FALSE otherwise.
@@ -697,10 +697,10 @@ interface File
   /**
    * Duplicates a #GFile handle. This operation does not duplicate
    * the actual file or directory represented by the #GFile; see
-   * [Gio.File.copy] if attempting to copy a file.
-   * [Gio.File.dup] is useful when a second handle is needed to the same underlying
+   * [gio.file.File.copy] if attempting to copy a file.
+   * [gio.file.File.dup] is useful when a second handle is needed to the same underlying
    * file, for use in a separate thread $(LPAREN)#GFile is not thread-safe$(RPAREN). For use
-   * within the same thread, use [GObject.ObjectG.ref_] to increment the existing object’s
+   * within the same thread, use [gobject.object.ObjectG.ref_] to increment the existing object’s
    * reference count.
    * This call does no blocking I/O.
    * Returns: a new #GFile that is a duplicate
@@ -712,7 +712,7 @@ interface File
    * Starts an asynchronous eject on a mountable.
    * When this operation has completed, callback will be called with
    * user_user data, and the operation can be finalized with
-   * [Gio.File.ejectMountableFinish].
+   * [gio.file.File.ejectMountableFinish].
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
@@ -723,19 +723,19 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
 
-   * Deprecated: Use [Gio.File.ejectMountableWithOperation] instead.
+   * Deprecated: Use [gio.file.File.ejectMountableWithOperation] instead.
    */
   void ejectMountable(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
    * Finishes an asynchronous eject operation started by
-   * [Gio.File.ejectMountable].
+   * [gio.file.File.ejectMountable].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE if the file was ejected successfully.
    *   %FALSE otherwise.
 
-   * Deprecated: Use [Gio.File.ejectMountableWithOperationFinish]
+   * Deprecated: Use [gio.file.File.ejectMountableWithOperationFinish]
    *   instead.
    */
   bool ejectMountableFinish(AsyncResult result);
@@ -744,7 +744,7 @@ interface File
    * Starts an asynchronous eject on a mountable.
    * When this operation has completed, callback will be called with
    * user_user data, and the operation can be finalized with
-   * [Gio.File.ejectMountableWithOperationFinish].
+   * [gio.file.File.ejectMountableWithOperationFinish].
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
@@ -761,7 +761,7 @@ interface File
 
   /**
    * Finishes an asynchronous eject operation started by
-   * [Gio.File.ejectMountableWithOperation].
+   * [gio.file.File.ejectMountableWithOperation].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE if the file was ejected successfully.
@@ -783,8 +783,8 @@ interface File
    * An example attribute query be "standard::*,owner::user".
    * The standard attributes are available as defines, like
    * %G_FILE_ATTRIBUTE_STANDARD_NAME. %G_FILE_ATTRIBUTE_STANDARD_NAME should
-   * always be specified if you plan to call [Gio.FileEnumerator.getChild] or
-   * [Gio.FileEnumerator.iterate] on the returned enumerator.
+   * always be specified if you plan to call [gio.file_enumerator.FileEnumerator.getChild] or
+   * [gio.file_enumerator.FileEnumerator.iterate] on the returned enumerator.
    * If cancellable is not %NULL, then the operation can be cancelled
    * by triggering the cancellable object from another thread. If the
    * operation was cancelled, the error %G_IO_ERROR_CANCELLED will be
@@ -798,7 +798,7 @@ interface File
    *   cancellable = optional #GCancellable object,
    *     %NULL to ignore
    * Returns: A #GFileEnumerator if successful,
-   *   %NULL on error. Free the returned object with [GObject.ObjectG.unref].
+   *   %NULL on error. Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileEnumerator enumerateChildren(string attributes, FileQueryInfoFlags flags, Cancellable cancellable);
 
@@ -806,10 +806,10 @@ interface File
    * Asynchronously gets the requested information about the files
    * in a directory. The result is a #GFileEnumerator object that will
    * give out #GFileInfo objects for all the files in the directory.
-   * For more details, see [Gio.File.enumerateChildren] which is
+   * For more details, see [gio.file.File.enumerateChildren] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called. You can
-   * then call [Gio.File.enumerateChildrenFinish] to get the result of
+   * then call [gio.file.File.enumerateChildrenFinish] to get the result of
    * the operation.
    * Params:
    *   attributes = an attribute query string
@@ -824,12 +824,12 @@ interface File
 
   /**
    * Finishes an async enumerate children operation.
-   * See [Gio.File.enumerateChildrenAsync].
+   * See [gio.file.File.enumerateChildrenAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: a #GFileEnumerator or %NULL
    *   if an error occurred.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileEnumerator enumerateChildrenFinish(AsyncResult res);
 
@@ -858,16 +858,16 @@ interface File
    *     %NULL to ignore
    * Returns: a #GMount where the file is located
    *   or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   Mount findEnclosingMount(Cancellable cancellable);
 
   /**
    * Asynchronously gets the mount for the file.
-   * For more details, see [Gio.File.findEnclosingMount] which is
+   * For more details, see [gio.file.File.findEnclosingMount] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.findEnclosingMountFinish] to
+   * You can then call [gio.file.File.findEnclosingMountFinish] to
    * get the result of the operation.
    * Params:
    *   ioPriority = the [I/O priority][io-priority] of the request
@@ -880,11 +880,11 @@ interface File
 
   /**
    * Finishes an asynchronous find mount request.
-   * See [Gio.File.findEnclosingMountAsync].
+   * See [gio.file.File.findEnclosingMountAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: #GMount for given file or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   Mount findEnclosingMountFinish(AsyncResult res);
 
@@ -897,11 +897,11 @@ interface File
    * or rules other than it may not contain zero bytes.  If you want to use
    * filenames in a user interface you should use the display name that you
    * can get by requesting the %G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME
-   * attribute with [Gio.File.queryInfo].
+   * attribute with [gio.file.File.queryInfo].
    * This call does no blocking I/O.
    * Returns: string containing the #GFile's
    *   base name, or %NULL if given #GFile is invalid. The returned string
-   *   should be freed with [GLib.Global.gfree] when no longer needed.
+   *   should be freed with [glib.global.gfree] when no longer needed.
    */
   string getBasename();
 
@@ -914,7 +914,7 @@ interface File
    * Params:
    *   name = string containing the child's basename
    * Returns: a #GFile to a child specified by name.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   File getChild(string name);
 
@@ -930,7 +930,7 @@ interface File
    *   displayName = string to a possible child
    * Returns: a #GFile to the specified child, or
    *   %NULL if the display name couldn't be converted.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   File getChildForDisplayName(string displayName);
 
@@ -941,7 +941,7 @@ interface File
    * This call does no blocking I/O.
    * Returns: a #GFile structure to the
    *   parent of the given #GFile or %NULL if there is no parent. Free
-   *   the returned object with [GObject.ObjectG.unref].
+   *   the returned object with [gobject.object.ObjectG.unref].
    */
   File getParent();
 
@@ -949,7 +949,7 @@ interface File
    * Gets the parse name of the file.
    * A parse name is a UTF-8 string that describes the
    * file such that one can get the #GFile back using
-   * [Gio.File.parseName].
+   * [gio.file.File.parseName].
    * This is generally used to show the #GFile as a nice
    * full-pathname kind of string in a user interface,
    * like in a location entry.
@@ -958,7 +958,7 @@ interface File
    * $(LPAREN)a form of URI that allows UTF-8 characters unescaped$(RPAREN).
    * This call does no blocking I/O.
    * Returns: a string containing the #GFile's parse name.
-   *   The returned string should be freed with [GLib.Global.gfree]
+   *   The returned string should be freed with [glib.global.gfree]
    *   when no longer needed.
    */
   string getParseName();
@@ -969,7 +969,7 @@ interface File
    * This call does no blocking I/O.
    * Returns: string containing the #GFile's path,
    *   or %NULL if no such path exists. The returned string should be freed
-   *   with [GLib.Global.gfree] when no longer needed.
+   *   with [glib.global.gfree] when no longer needed.
    */
   string getPath();
 
@@ -980,7 +980,7 @@ interface File
    *   descendant = input #GFile
    * Returns: string with the relative path from
    *   descendant to parent, or %NULL if descendant doesn't have parent as
-   *   prefix. The returned string should be freed with [GLib.Global.gfree] when
+   *   prefix. The returned string should be freed with [glib.global.gfree] when
    *   no longer needed.
    */
   string getRelativePath(File descendant);
@@ -990,7 +990,7 @@ interface File
    * This call does no blocking I/O.
    * Returns: a string containing the #GFile's URI. If the #GFile was constructed
    *   with an invalid URI, an invalid URI is returned.
-   *   The returned string should be freed with [GLib.Global.gfree]
+   *   The returned string should be freed with [glib.global.gfree]
    *   when no longer needed.
    */
   string getUri();
@@ -1007,7 +1007,7 @@ interface File
    * This call does no blocking I/O.
    * Returns: a string containing the URI scheme for the given
    *   #GFile or %NULL if the #GFile was constructed with an invalid URI. The
-   *   returned string should be freed with [GLib.Global.gfree] when no longer needed.
+   *   returned string should be freed with [glib.global.gfree] when no longer needed.
    */
   string getUriScheme();
 
@@ -1030,7 +1030,7 @@ interface File
    * so a path like /foo is not considered a prefix of /foobar, only
    * of /foo/bar.
    * A #GFile is not a prefix of itself. If you want to check for
-   * equality, use [Gio.File.equal].
+   * equality, use [gio.file.File.equal].
    * This call does no I/O, as it works purely on names. As such it can
    * sometimes return %FALSE even if file is inside a prefix $(LPAREN)from a
    * filesystem point of view$(RPAREN), because the prefix of file is an alias
@@ -1070,7 +1070,7 @@ interface File
    * as it might be on a locally mounted remote filesystem.
    * On some systems non-native files may be available using the native
    * filesystem via a userspace filesystem $(LPAREN)FUSE$(RPAREN), in these cases this call
-   * will return %FALSE, but [Gio.File.getPath] will still return a native path.
+   * will return %FALSE, but [gio.file.File.getPath] will still return a native path.
    * This call does no blocking I/O.
    * Returns: %TRUE if file is native
    */
@@ -1080,11 +1080,11 @@ interface File
    * Loads the contents of file and returns it as #GBytes.
    * If file is a resource:// based URI, the resulting bytes will reference the
    * embedded resource instead of a copy. Otherwise, this is equivalent to calling
-   * [Gio.File.loadContents] and [GLib.Bytes.newTake].
+   * [gio.file.File.loadContents] and [glib.bytes.Bytes.newTake].
    * For resources, etag_out will be set to %NULL.
    * The data contained in the resulting #GBytes is always zero-terminated, but
    * this is not included in the #GBytes length. The resulting #GBytes should be
-   * freed with [GLib.Bytes.unref] when no longer in use.
+   * freed with [glib.bytes.Bytes.unref] when no longer in use.
    * Params:
    *   cancellable = a #GCancellable or %NULL
    *   etagOut = a location to place the current
@@ -1097,10 +1097,10 @@ interface File
    * Asynchronously loads the contents of file as #GBytes.
    * If file is a resource:// based URI, the resulting bytes will reference the
    * embedded resource instead of a copy. Otherwise, this is equivalent to calling
-   * [Gio.File.loadContentsAsync] and [GLib.Bytes.newTake].
-   * callback should call [Gio.File.loadBytesFinish] to get the result of this
+   * [gio.file.File.loadContentsAsync] and [glib.bytes.Bytes.newTake].
+   * callback should call [gio.file.File.loadBytesFinish] to get the result of this
    * asynchronous operation.
-   * See [Gio.File.loadBytes] for more information.
+   * See [gio.file.File.loadBytes] for more information.
    * Params:
    *   cancellable = a #GCancellable or %NULL
    *   callback = a #GAsyncReadyCallback
@@ -1109,12 +1109,12 @@ interface File
   void loadBytesAsync(Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Completes an asynchronous request to [Gio.File.loadBytesAsync].
+   * Completes an asynchronous request to [gio.file.File.loadBytesAsync].
    * For resources, etag_out will be set to %NULL.
    * The data contained in the resulting #GBytes is always zero-terminated, but
    * this is not included in the #GBytes length. The resulting #GBytes should be
-   * freed with [GLib.Bytes.unref] when no longer in use.
-   * See [Gio.File.loadBytes] for more information.
+   * freed with [glib.bytes.Bytes.unref] when no longer in use.
+   * See [gio.file.File.loadBytes] for more information.
    * Params:
    *   result = a #GAsyncResult provided to the callback
    *   etagOut = a location to place the current
@@ -1126,7 +1126,7 @@ interface File
   /**
    * Loads the content of the file into memory. The data is always
    * zero-terminated, but this is not included in the resultant length.
-   * The returned contents should be freed with [GLib.Global.gfree] when no longer
+   * The returned contents should be freed with [glib.global.gfree] when no longer
    * needed.
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
@@ -1143,11 +1143,11 @@ interface File
 
   /**
    * Starts an asynchronous load of the file's contents.
-   * For more details, see [Gio.File.loadContents] which is
+   * For more details, see [gio.file.File.loadContents] which is
    * the synchronous version of this call.
    * When the load operation has completed, callback will be called
    * with user data. To finish the operation, call
-   * [Gio.File.loadContentsFinish] with the #GAsyncResult returned by
+   * [gio.file.File.loadContentsFinish] with the #GAsyncResult returned by
    * the callback.
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
@@ -1162,7 +1162,7 @@ interface File
    * Finishes an asynchronous load of the file's contents.
    * The contents are placed in contents, and length is set to the
    * size of the contents string. The contents should be freed with
-   * [GLib.Global.gfree] when no longer needed. If etag_out is present, it will be
+   * [glib.global.gfree] when no longer needed. If etag_out is present, it will be
    * set to the new entity tag for the file.
    * Params:
    *   res = a #GAsyncResult
@@ -1176,9 +1176,9 @@ interface File
 
   /**
    * Finishes an asynchronous partial load operation that was started
-   * with [Gio.File.loadPartialContentsAsync]. The data is always
+   * with [gio.file.File.loadPartialContentsAsync]. The data is always
    * zero-terminated, but this is not included in the resultant length.
-   * The returned contents should be freed with [GLib.Global.gfree] when no longer
+   * The returned contents should be freed with [glib.global.gfree] when no longer
    * needed.
    * Params:
    *   res = a #GAsyncResult
@@ -1193,7 +1193,7 @@ interface File
   /**
    * Creates a directory. Note that this will only create a child directory
    * of the immediate parent directory of the path or URI given by the #GFile.
-   * To recursively create directories, see [Gio.File.makeDirectoryWithParents].
+   * To recursively create directories, see [gio.file.File.makeDirectoryWithParents].
    * This function will fail if the parent directory does not exist, setting
    * error to %G_IO_ERROR_NOT_FOUND. If the file system doesn't support
    * creating directories, this function will fail, setting error to
@@ -1223,7 +1223,7 @@ interface File
 
   /**
    * Finishes an asynchronous directory creation, started with
-   * [Gio.File.makeDirectoryAsync].
+   * [gio.file.File.makeDirectoryAsync].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE on successful directory creation, %FALSE otherwise.
@@ -1236,7 +1236,7 @@ interface File
    * creating directories, this function will fail, setting error to
    * %G_IO_ERROR_NOT_SUPPORTED. If the directory itself already exists,
    * this function will fail setting error to %G_IO_ERROR_EXISTS, unlike
-   * the similar [GLib.Global.mkdirWithParents].
+   * the similar [glib.global.mkdirWithParents].
    * For a local #GFile the newly created directories will have the default
    * $(LPAREN)current$(RPAREN) ownership and permissions of the current process.
    * If cancellable is not %NULL, then the operation can be cancelled by
@@ -1281,7 +1281,7 @@ interface File
 
   /**
    * Finishes an asynchronous symbolic link creation, started with
-   * [Gio.File.makeSymbolicLinkAsync].
+   * [gio.file.File.makeSymbolicLinkAsync].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE on successful directory creation, %FALSE otherwise.
@@ -1297,7 +1297,7 @@ interface File
    * itself.  Errors found while recursing are silently ignored, unless
    * %G_FILE_MEASURE_REPORT_ANY_ERROR is given in flags.
    * The returned size, disk_usage, is in bytes and should be formatted
-   * with [GLib.Global.formatSize] in order to get something reasonable for showing
+   * with [glib.global.formatSize] in order to get something reasonable for showing
    * in a user interface.
    * progress_callback and progress_data can be given to request
    * periodic progress updates while scanning.  See the documentation for
@@ -1317,7 +1317,7 @@ interface File
 
   /**
    * Collects the results from an earlier call to
-   * [Gio.File.measureDiskUsageAsync].  See [Gio.File.measureDiskUsage] for
+   * [gio.file.File.measureDiskUsageAsync].  See [gio.file.File.measureDiskUsage] for
    * more information.
    * Params:
    *   result = the #GAsyncResult passed to your #GAsyncReadyCallback
@@ -1341,7 +1341,7 @@ interface File
    *     %NULL to ignore
    * Returns: a #GFileMonitor for the given file,
    *   or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileMonitor monitor(FileMonitorFlags flags, Cancellable cancellable);
 
@@ -1355,13 +1355,13 @@ interface File
    * %G_FILE_MONITOR_WATCH_HARD_LINKS, since hard links can not be made to
    * directories.  It is not possible to monitor all the files in a
    * directory for changes made via hard links; if you want to do this then
-   * you must register individual watches with [Gio.File.monitor].
+   * you must register individual watches with [gio.file.File.monitor].
    * Params:
    *   flags = a set of #GFileMonitorFlags
    *   cancellable = optional #GCancellable object,
    *     %NULL to ignore
    * Returns: a #GFileMonitor for the given file,
-   *   or %NULL on error. Free the returned object with [GObject.ObjectG.unref].
+   *   or %NULL on error. Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileMonitor monitorDirectory(FileMonitorFlags flags, Cancellable cancellable);
 
@@ -1384,7 +1384,7 @@ interface File
    *     %NULL to ignore
    * Returns: a #GFileMonitor for the given file,
    *   or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileMonitor monitorFile(FileMonitorFlags flags, Cancellable cancellable);
 
@@ -1393,7 +1393,7 @@ interface File
    * the file location.
    * When this operation has completed, callback will be called with
    * user_user data, and the operation can be finalized with
-   * [Gio.File.mountEnclosingVolumeFinish].
+   * [gio.file.File.mountEnclosingVolumeFinish].
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
@@ -1409,7 +1409,7 @@ interface File
   void mountEnclosingVolume(MountMountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes a mount operation started by [Gio.File.mountEnclosingVolume].
+   * Finishes a mount operation started by [gio.file.File.mountEnclosingVolume].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE if successful. If an error has occurred,
@@ -1426,7 +1426,7 @@ interface File
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.mountMountableFinish] to get
+   * You can then call [gio.file.File.mountMountableFinish] to get
    * the result of the operation.
    * Params:
    *   flags = flags affecting the operation
@@ -1440,13 +1440,13 @@ interface File
   void mountMountable(MountMountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes a mount operation. See [Gio.File.mountMountable] for details.
+   * Finishes a mount operation. See [gio.file.File.mountMountable] for details.
    * Finish an asynchronous mount operation that was started
-   * with [Gio.File.mountMountable].
+   * with [gio.file.File.mountMountable].
    * Params:
    *   result = a #GAsyncResult
    * Returns: a #GFile or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   File mountMountableFinish(AsyncResult result);
 
@@ -1489,13 +1489,13 @@ interface File
   bool move(File destination, FileCopyFlags flags, Cancellable cancellable, FileProgressCallback progressCallback);
 
   /**
-   * Asynchronously moves a file source to the location of destination. For details of the behaviour, see [Gio.File.move].
+   * Asynchronously moves a file source to the location of destination. For details of the behaviour, see [gio.file.File.move].
    * If progress_callback is not %NULL, then that function that will be called
-   * just like in [Gio.File.move]. The callback will run in the default main context
-   * of the thread calling [Gio.File.moveAsync] — the same context as callback is
+   * just like in [gio.file.File.move]. The callback will run in the default main context
+   * of the thread calling [gio.file.File.moveAsync] — the same context as callback is
    * run in.
    * When the operation is finished, callback will be called. You can then call
-   * [Gio.File.moveFinish] to get the result of the operation.
+   * [gio.file.File.moveFinish] to get the result of the operation.
    * Params:
    *   destination = #GFile pointing to the destination location
    *   flags = set of #GFileCopyFlags
@@ -1510,7 +1510,7 @@ interface File
 
   /**
    * Finishes an asynchronous file movement, started with
-   * [Gio.File.moveAsync].
+   * [gio.file.File.moveAsync].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE on successful file move, %FALSE otherwise.
@@ -1535,16 +1535,16 @@ interface File
    * Params:
    *   cancellable = a #GCancellable
    * Returns: #GFileIOStream or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileIOStream openReadwrite(Cancellable cancellable);
 
   /**
    * Asynchronously opens file for reading and writing.
-   * For more details, see [Gio.File.openReadwrite] which is
+   * For more details, see [gio.file.File.openReadwrite] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.openReadwriteFinish] to get
+   * You can then call [gio.file.File.openReadwriteFinish] to get
    * the result of the operation.
    * Params:
    *   ioPriority = the [I/O priority][io-priority] of the request
@@ -1557,17 +1557,17 @@ interface File
 
   /**
    * Finishes an asynchronous file read operation started with
-   * [Gio.File.openReadwriteAsync].
+   * [gio.file.File.openReadwriteAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: a #GFileIOStream or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileIOStream openReadwriteFinish(AsyncResult res);
 
   /**
-   * Exactly like [Gio.File.getPath], but caches the result via
-   * [GObject.ObjectG.setQdataFull].  This is useful for example in C
+   * Exactly like [gio.file.File.getPath], but caches the result via
+   * [gobject.object.ObjectG.setQdataFull].  This is useful for example in C
    * applications which mix `g_file_*` APIs with native ones.  It
    * also avoids an extra duplicated string when possible, so will be
    * generally more efficient.
@@ -1583,7 +1583,7 @@ interface File
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.mountMountableFinish] to get
+   * You can then call [gio.file.File.mountMountableFinish] to get
    * the result of the operation.
    * Params:
    *   cancellable = optional #GCancellable object, %NULL to ignore
@@ -1593,9 +1593,9 @@ interface File
   void pollMountable(Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes a poll operation. See [Gio.File.pollMountable] for details.
+   * Finishes a poll operation. See [gio.file.File.pollMountable] for details.
    * Finish an asynchronous poll operation that was polled
-   * with [Gio.File.pollMountable].
+   * with [gio.file.File.pollMountable].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE if the operation finished successfully. %FALSE
@@ -1613,12 +1613,12 @@ interface File
    *   cancellable = optional #GCancellable object, %NULL to ignore
    * Returns: a #GAppInfo if the handle was found,
    *   %NULL if there were errors.
-   *   When you are done with it, release it with [GObject.ObjectG.unref]
+   *   When you are done with it, release it with [gobject.object.ObjectG.unref]
    */
   AppInfo queryDefaultHandler(Cancellable cancellable);
 
   /**
-   * Async version of [Gio.File.queryDefaultHandler].
+   * Async version of [gio.file.File.queryDefaultHandler].
    * Params:
    *   ioPriority = the [I/O priority][io-priority] of the request
    *   cancellable = optional #GCancellable object, %NULL to ignore
@@ -1627,18 +1627,18 @@ interface File
   void queryDefaultHandlerAsync(int ioPriority, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes a [Gio.File.queryDefaultHandlerAsync] operation.
+   * Finishes a [gio.file.File.queryDefaultHandlerAsync] operation.
    * Params:
    *   result = a #GAsyncResult
    * Returns: a #GAppInfo if the handle was found,
    *   %NULL if there were errors.
-   *   When you are done with it, release it with [GObject.ObjectG.unref]
+   *   When you are done with it, release it with [gobject.object.ObjectG.unref]
    */
   AppInfo queryDefaultHandlerFinish(AsyncResult result);
 
   /**
    * Utility function to check if a particular file exists. This is
-   * implemented using [Gio.File.queryInfo] and as such does blocking I/O.
+   * implemented using [gio.file.File.queryInfo] and as such does blocking I/O.
    * Note that in many cases it is [racy to first check for file existence](https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use)
    * and then execute something based on the outcome of that, because the
    * file might have been created or removed in between the operations. The
@@ -1649,7 +1649,7 @@ interface File
    * it, and on error create it; and: check if it exists, if not create it.
    * These can both result in two processes creating the file $(LPAREN)with perhaps
    * a partially written file as the result$(RPAREN). The correct approach is to
-   * always try to create the file with [Gio.File.create] which will either
+   * always try to create the file with [gio.file.File.create] which will either
    * atomically create the file or fail with a %G_IO_ERROR_EXISTS error.
    * However, in many cases an existence check is useful in a user interface,
    * for instance to make a menu item sensitive/insensitive, so that you don't
@@ -1666,11 +1666,11 @@ interface File
 
   /**
    * Utility function to inspect the #GFileType of a file. This is
-   * implemented using [Gio.File.queryInfo] and as such does blocking I/O.
+   * implemented using [gio.file.File.queryInfo] and as such does blocking I/O.
    * The primary use case of this method is to check if a file is
    * a regular file, directory, or symlink.
    * Params:
-   *   flags = a set of #GFileQueryInfoFlags passed to [Gio.File.queryInfo]
+   *   flags = a set of #GFileQueryInfoFlags passed to [gio.file.File.queryInfo]
    *   cancellable = optional #GCancellable object,
    *     %NULL to ignore
    * Returns: The #GFileType of the file and %G_FILE_TYPE_UNKNOWN
@@ -1679,7 +1679,7 @@ interface File
   FileType queryFileType(FileQueryInfoFlags flags, Cancellable cancellable);
 
   /**
-   * Similar to [Gio.File.queryInfo], but obtains information
+   * Similar to [gio.file.File.queryInfo], but obtains information
    * about the filesystem the file is on, rather than the file itself.
    * For instance the amount of space available and the type of
    * the filesystem.
@@ -1706,7 +1706,7 @@ interface File
    *   cancellable = optional #GCancellable object,
    *     %NULL to ignore
    * Returns: a #GFileInfo or %NULL if there was an error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileInfo queryFilesystemInfo(string attributes, Cancellable cancellable);
 
@@ -1715,10 +1715,10 @@ interface File
    * that the specified file is on. The result is a #GFileInfo object
    * that contains key-value attributes $(LPAREN)such as type or size for the
    * file$(RPAREN).
-   * For more details, see [Gio.File.queryFilesystemInfo] which is the
+   * For more details, see [gio.file.File.queryFilesystemInfo] which is the
    * synchronous version of this call.
    * When the operation is finished, callback will be called. You can
-   * then call [Gio.File.queryInfoFinish] to get the result of the
+   * then call [gio.file.File.queryInfoFinish] to get the result of the
    * operation.
    * Params:
    *   attributes = an attribute query string
@@ -1732,12 +1732,12 @@ interface File
 
   /**
    * Finishes an asynchronous filesystem info query.
-   * See [Gio.File.queryFilesystemInfoAsync].
+   * See [gio.file.File.queryFilesystemInfoAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: #GFileInfo for given file
    *   or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileInfo queryFilesystemInfoFinish(AsyncResult res);
 
@@ -1774,7 +1774,7 @@ interface File
    *   cancellable = optional #GCancellable object,
    *     %NULL to ignore
    * Returns: a #GFileInfo for the given file, or %NULL
-   *   on error. Free the returned object with [GObject.ObjectG.unref].
+   *   on error. Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileInfo queryInfo(string attributes, FileQueryInfoFlags flags, Cancellable cancellable);
 
@@ -1782,10 +1782,10 @@ interface File
    * Asynchronously gets the requested information about specified file.
    * The result is a #GFileInfo object that contains key-value attributes
    * $(LPAREN)such as type or size for the file$(RPAREN).
-   * For more details, see [Gio.File.queryInfo] which is the synchronous
+   * For more details, see [gio.file.File.queryInfo] which is the synchronous
    * version of this call.
    * When the operation is finished, callback will be called. You can
-   * then call [Gio.File.queryInfoFinish] to get the result of the operation.
+   * then call [gio.file.File.queryInfoFinish] to get the result of the operation.
    * Params:
    *   attributes = an attribute query string
    *   flags = a set of #GFileQueryInfoFlags
@@ -1799,12 +1799,12 @@ interface File
 
   /**
    * Finishes an asynchronous file info query.
-   * See [Gio.File.queryInfoAsync].
+   * See [gio.file.File.queryInfoAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: #GFileInfo for given file
    *   or %NULL on error. Free the returned object with
-   *   [GObject.ObjectG.unref].
+   *   [gobject.object.ObjectG.unref].
    */
   FileInfo queryInfoFinish(AsyncResult res);
 
@@ -1822,7 +1822,7 @@ interface File
    *     %NULL to ignore
    * Returns: a #GFileAttributeInfoList describing the settable attributes.
    *   When you are done with it, release it with
-   *   [Gio.FileAttributeInfoList.unref]
+   *   [gio.file_attribute_info_list.FileAttributeInfoList.unref]
    */
   FileAttributeInfoList querySettableAttributes(Cancellable cancellable);
 
@@ -1838,7 +1838,7 @@ interface File
    *     %NULL to ignore
    * Returns: a #GFileAttributeInfoList describing the writable namespaces.
    *   When you are done with it, release it with
-   *   [Gio.FileAttributeInfoList.unref]
+   *   [gio.file_attribute_info_list.FileAttributeInfoList.unref]
    */
   FileAttributeInfoList queryWritableNamespaces(Cancellable cancellable);
 
@@ -1855,16 +1855,16 @@ interface File
    * Params:
    *   cancellable = a #GCancellable
    * Returns: #GFileInputStream or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileInputStream read(Cancellable cancellable);
 
   /**
    * Asynchronously opens file for reading.
-   * For more details, see [Gio.File.read] which is
+   * For more details, see [gio.file.File.read] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.readFinish] to get the result
+   * You can then call [gio.file.File.readFinish] to get the result
    * of the operation.
    * Params:
    *   ioPriority = the [I/O priority][io-priority] of the request
@@ -1877,11 +1877,11 @@ interface File
 
   /**
    * Finishes an asynchronous file read operation started with
-   * [Gio.File.readAsync].
+   * [gio.file.File.readAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: a #GFileInputStream or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileInputStream readFinish(AsyncResult res);
 
@@ -1906,9 +1906,9 @@ interface File
    * this value is compared to the current entity tag of the file, and if
    * they differ an %G_IO_ERROR_WRONG_ETAG error is returned. This
    * generally means that the file has been changed since you last read
-   * it. You can get the new etag from [Gio.FileOutputStream.getEtag]
+   * it. You can get the new etag from [gio.file_output_stream.FileOutputStream.getEtag]
    * after you've finished writing and closed the #GFileOutputStream. When
-   * you load a new file you can use [Gio.FileInputStream.queryInfo] to
+   * you load a new file you can use [gio.file_input_stream.FileInputStream.queryInfo] to
    * get the etag of the file.
    * If make_backup is %TRUE, this function will attempt to make a
    * backup of the current file before overwriting it. If this fails
@@ -1929,17 +1929,17 @@ interface File
    *   cancellable = optional #GCancellable object,
    *     %NULL to ignore
    * Returns: a #GFileOutputStream or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileOutputStream replace(string etag, bool makeBackup, FileCreateFlags flags, Cancellable cancellable);
 
   /**
    * Asynchronously overwrites the file, replacing the contents,
    * possibly creating a backup copy of the file first.
-   * For more details, see [Gio.File.replace] which is
+   * For more details, see [gio.file.File.replace] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.replaceFinish] to get the result
+   * You can then call [gio.file.File.replaceFinish] to get the result
    * of the operation.
    * Params:
    *   etag = an [entity tag](#entity-tags) for the current #GFile,
@@ -1959,7 +1959,7 @@ interface File
    * If etag is specified $(LPAREN)not %NULL$(RPAREN), any existing file must have that etag,
    * or the error %G_IO_ERROR_WRONG_ETAG will be returned.
    * If make_backup is %TRUE, this function will attempt to make a backup
-   * of file. Internally, it uses [Gio.File.replace], so will try to replace the
+   * of file. Internally, it uses [gio.file.File.replace], so will try to replace the
    * file contents in the safest way possible. For example, atomic renames are
    * used when replacing local files’ contents.
    * If cancellable is not %NULL, then the operation can be cancelled by
@@ -1974,7 +1974,7 @@ interface File
    *   makeBackup = %TRUE if a backup should be created
    *   flags = a set of #GFileCreateFlags
    *   newEtag = a location to a new [entity tag](#entity-tags)
-   *     for the document. This should be freed with [GLib.Global.gfree] when no longer
+   *     for the document. This should be freed with [glib.global.gfree] when no longer
    *     needed, or %NULL
    *   cancellable = optional #GCancellable object, %NULL to ignore
    * Returns: %TRUE if successful. If an error has occurred, this function
@@ -1988,14 +1988,14 @@ interface File
    * current entity tag.
    * When this operation has completed, callback will be called with
    * user_user data, and the operation can be finalized with
-   * [Gio.File.replaceContentsFinish].
+   * [gio.file.File.replaceContentsFinish].
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
    * If make_backup is %TRUE, this function will attempt to
    * make a backup of file.
    * Note that no copy of contents will be made, so it must stay valid
-   * until callback is called. See [Gio.File.replaceContentsBytesAsync]
+   * until callback is called. See [gio.file.File.replaceContentsBytesAsync]
    * for a #GBytes version that will automatically hold a reference to the
    * contents $(LPAREN)without copying$(RPAREN) for the duration of the call.
    * Params:
@@ -2009,13 +2009,13 @@ interface File
   void replaceContentsAsync(ubyte[] contents, string etag, bool makeBackup, FileCreateFlags flags, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Same as [Gio.File.replaceContentsAsync] but takes a #GBytes input instead.
+   * Same as [gio.file.File.replaceContentsAsync] but takes a #GBytes input instead.
    * This function will keep a ref on contents until the operation is done.
-   * Unlike [Gio.File.replaceContentsAsync] this allows forgetting about the
+   * Unlike [gio.file.File.replaceContentsAsync] this allows forgetting about the
    * content without waiting for the callback.
    * When this operation has completed, callback will be called with
    * user_user data, and the operation can be finalized with
-   * [Gio.File.replaceContentsFinish].
+   * [gio.file.File.replaceContentsFinish].
    * Params:
    *   contents = a #GBytes
    *   etag = a new [entity tag](#entity-tags) for the file, or %NULL
@@ -2028,12 +2028,12 @@ interface File
 
   /**
    * Finishes an asynchronous replace of the given file. See
-   * [Gio.File.replaceContentsAsync]. Sets new_etag to the new entity
+   * [gio.file.File.replaceContentsAsync]. Sets new_etag to the new entity
    * tag for the document, if present.
    * Params:
    *   res = a #GAsyncResult
    *   newEtag = a location of a new [entity tag](#entity-tags)
-   *     for the document. This should be freed with [GLib.Global.gfree] when it is no
+   *     for the document. This should be freed with [glib.global.gfree] when it is no
    *     longer needed, or %NULL
    * Returns: %TRUE on success, %FALSE on failure.
    */
@@ -2041,11 +2041,11 @@ interface File
 
   /**
    * Finishes an asynchronous file replace operation started with
-   * [Gio.File.replaceAsync].
+   * [gio.file.File.replaceAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: a #GFileOutputStream, or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileOutputStream replaceFinish(AsyncResult res);
 
@@ -2053,7 +2053,7 @@ interface File
    * Returns an output stream for overwriting the file in readwrite mode,
    * possibly creating a backup copy of the file first. If the file doesn't
    * exist, it will be created.
-   * For details about the behaviour, see [Gio.File.replace] which does the
+   * For details about the behaviour, see [gio.file.File.replace] which does the
    * same thing but returns an output stream only.
    * Note that in many non-local file cases read and write streams are not
    * supported, so make sure you really need to do read and write streaming,
@@ -2066,7 +2066,7 @@ interface File
    *   cancellable = optional #GCancellable object,
    *     %NULL to ignore
    * Returns: a #GFileIOStream or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileIOStream replaceReadwrite(string etag, bool makeBackup, FileCreateFlags flags, Cancellable cancellable);
 
@@ -2074,10 +2074,10 @@ interface File
    * Asynchronously overwrites the file in read-write mode,
    * replacing the contents, possibly creating a backup copy
    * of the file first.
-   * For more details, see [Gio.File.replaceReadwrite] which is
+   * For more details, see [gio.file.File.replaceReadwrite] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.replaceReadwriteFinish] to get
+   * You can then call [gio.file.File.replaceReadwriteFinish] to get
    * the result of the operation.
    * Params:
    *   etag = an [entity tag](#entity-tags) for the current #GFile,
@@ -2094,11 +2094,11 @@ interface File
 
   /**
    * Finishes an asynchronous file replace operation started with
-   * [Gio.File.replaceReadwriteAsync].
+   * [gio.file.File.replaceReadwriteAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: a #GFileIOStream, or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   FileIOStream replaceReadwriteFinish(AsyncResult res);
 
@@ -2235,10 +2235,10 @@ interface File
 
   /**
    * Asynchronously sets the attributes of file with info.
-   * For more details, see [Gio.File.setAttributesFromInfo],
+   * For more details, see [gio.file.File.setAttributesFromInfo],
    * which is the synchronous version of this call.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.setAttributesFinish] to get
+   * You can then call [gio.file.File.setAttributesFinish] to get
    * the result of the operation.
    * Params:
    *   info = a #GFileInfo
@@ -2252,7 +2252,7 @@ interface File
   void setAttributesAsync(FileInfo info, FileQueryInfoFlags flags, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes setting an attribute started in [Gio.File.setAttributesAsync].
+   * Finishes setting an attribute started in [gio.file.File.setAttributesAsync].
    * Params:
    *   result = a #GAsyncResult
    *   info = a #GFileInfo
@@ -2287,7 +2287,7 @@ interface File
    * If you want to implement a rename operation in the user interface the
    * edit name $(LPAREN)%G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME$(RPAREN) should be used as the
    * initial value in the rename widget, and then the result after editing
-   * should be passed to [Gio.File.setDisplayName].
+   * should be passed to [gio.file.File.setDisplayName].
    * On success the resulting converted filename is returned.
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
@@ -2298,16 +2298,16 @@ interface File
    *     %NULL to ignore
    * Returns: a #GFile specifying what file was renamed to,
    *   or %NULL if there was an error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   File setDisplayName(string displayName, Cancellable cancellable);
 
   /**
    * Asynchronously sets the display name for a given #GFile.
-   * For more details, see [Gio.File.setDisplayName] which is
+   * For more details, see [gio.file.File.setDisplayName] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.setDisplayNameFinish] to get
+   * You can then call [gio.file.File.setDisplayNameFinish] to get
    * the result of the operation.
    * Params:
    *   displayName = a string
@@ -2321,11 +2321,11 @@ interface File
 
   /**
    * Finishes setting a display name started with
-   * [Gio.File.setDisplayNameAsync].
+   * [gio.file.File.setDisplayNameAsync].
    * Params:
    *   res = a #GAsyncResult
    * Returns: a #GFile or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   File setDisplayNameFinish(AsyncResult res);
 
@@ -2337,7 +2337,7 @@ interface File
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.mountMountableFinish] to get
+   * You can then call [gio.file.File.mountMountableFinish] to get
    * the result of the operation.
    * Params:
    *   flags = flags affecting the operation
@@ -2348,9 +2348,9 @@ interface File
   void startMountable(DriveStartFlags flags, MountOperation startOperation, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes a start operation. See [Gio.File.startMountable] for details.
+   * Finishes a start operation. See [gio.file.File.startMountable] for details.
    * Finish an asynchronous start operation that was started
-   * with [Gio.File.startMountable].
+   * with [gio.file.File.startMountable].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE if the operation finished successfully. %FALSE
@@ -2364,7 +2364,7 @@ interface File
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.stopMountableFinish] to get
+   * You can then call [gio.file.File.stopMountableFinish] to get
    * the result of the operation.
    * Params:
    *   flags = flags affecting the operation
@@ -2378,9 +2378,9 @@ interface File
   void stopMountable(MountUnmountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes a stop operation, see [Gio.File.stopMountable] for details.
+   * Finishes a stop operation, see [gio.file.File.stopMountable] for details.
    * Finish an asynchronous stop operation that was started
-   * with [Gio.File.stopMountable].
+   * with [gio.file.File.stopMountable].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE if the operation finished successfully.
@@ -2402,7 +2402,7 @@ interface File
    * deleting it, but the user can recover it before emptying the trashcan.
    * Not all file systems support trashing, so this call can return the
    * %G_IO_ERROR_NOT_SUPPORTED error. Since GLib 2.66, the `x-gvfs-notrash` unix
-   * mount option can be used to disable [Gio.File.trash] support for certain
+   * mount option can be used to disable [gio.file.File.trash] support for certain
    * mounts, the %G_IO_ERROR_NOT_SUPPORTED error will be returned in that case.
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
@@ -2427,7 +2427,7 @@ interface File
 
   /**
    * Finishes an asynchronous file trashing operation, started with
-   * [Gio.File.trashAsync].
+   * [gio.file.File.trashAsync].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE on successful trash, %FALSE otherwise.
@@ -2440,7 +2440,7 @@ interface File
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.unmountMountableFinish] to get
+   * You can then call [gio.file.File.unmountMountableFinish] to get
    * the result of the operation.
    * Params:
    *   flags = flags affecting the operation
@@ -2449,20 +2449,20 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
 
-   * Deprecated: Use [Gio.File.unmountMountableWithOperation] instead.
+   * Deprecated: Use [gio.file.File.unmountMountableWithOperation] instead.
    */
   void unmountMountable(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes an unmount operation, see [Gio.File.unmountMountable] for details.
+   * Finishes an unmount operation, see [gio.file.File.unmountMountable] for details.
    * Finish an asynchronous unmount operation that was started
-   * with [Gio.File.unmountMountable].
+   * with [gio.file.File.unmountMountable].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE if the operation finished successfully.
    *   %FALSE otherwise.
 
-   * Deprecated: Use [Gio.File.unmountMountableWithOperationFinish]
+   * Deprecated: Use [gio.file.File.unmountMountableWithOperationFinish]
    *   instead.
    */
   bool unmountMountableFinish(AsyncResult result);
@@ -2473,7 +2473,7 @@ interface File
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.File.unmountMountableFinish] to get
+   * You can then call [gio.file.File.unmountMountableFinish] to get
    * the result of the operation.
    * Params:
    *   flags = flags affecting the operation
@@ -2488,9 +2488,9 @@ interface File
 
   /**
    * Finishes an unmount operation,
-   * see [Gio.File.unmountMountableWithOperation] for details.
+   * see [gio.file.File.unmountMountableWithOperation] for details.
    * Finish an asynchronous unmount operation that was started
-   * with [Gio.File.unmountMountableWithOperation].
+   * with [gio.file.File.unmountMountableWithOperation].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE if the operation finished successfully.

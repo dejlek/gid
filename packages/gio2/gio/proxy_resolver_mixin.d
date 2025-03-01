@@ -1,7 +1,7 @@
 module gio.proxy_resolver_mixin;
 
 public import gio.proxy_resolver_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.async_result;
 public import gio.async_result_mixin;
 public import gio.c.functions;
@@ -13,8 +13,8 @@ public import gobject.object;
 
 /**
  * `GProxyResolver` provides synchronous and asynchronous network proxy
- * resolution. `GProxyResolver` is used within [Gio.SocketClient] through
- * the method [Gio.SocketConnectable.proxyEnumerate].
+ * resolution. `GProxyResolver` is used within [gio.socket_client.SocketClient] through
+ * the method [gio.socket_connectable.SocketConnectable.proxyEnumerate].
  * Implementations of `GProxyResolver` based on
  * [libproxy](https://github.com/libproxy/libproxy) and GNOME settings can be
  * found in [glib-networking](https://gitlab.gnome.org/GNOME/glib-networking).
@@ -26,7 +26,7 @@ template ProxyResolverT()
 
   /**
    * Checks if resolver can be used on this system. $(LPAREN)This is used
-   * internally; [Gio.ProxyResolver.getDefault] will only return a proxy
+   * internally; [gio.proxy_resolver.ProxyResolver.getDefault] will only return a proxy
    * resolver that returns %TRUE for this method.$(RPAREN)
    * Returns: %TRUE if resolver is supported.
    */
@@ -56,7 +56,7 @@ template ProxyResolverT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: A
    *   NULL-terminated array of proxy URIs. Must be freed
-   *   with [GLib.Global.strfreev].
+   *   with [glib.global.strfreev].
    */
   override string[] lookup(string uri, Cancellable cancellable)
   {
@@ -81,7 +81,7 @@ template ProxyResolverT()
   }
 
   /**
-   * Asynchronous lookup of proxy. See [Gio.ProxyResolver.lookup] for more
+   * Asynchronous lookup of proxy. See [gio.proxy_resolver.ProxyResolver.lookup] for more
    * details.
    * Params:
    *   uri = a URI representing the destination to connect to
@@ -106,13 +106,13 @@ template ProxyResolverT()
 
   /**
    * Call this function to obtain the array of proxy URIs when
-   * [Gio.ProxyResolver.lookupAsync] is complete. See
-   * [Gio.ProxyResolver.lookup] for more details.
+   * [gio.proxy_resolver.ProxyResolver.lookupAsync] is complete. See
+   * [gio.proxy_resolver.ProxyResolver.lookup] for more details.
    * Params:
    *   result = the result passed to your #GAsyncReadyCallback
    * Returns: A
    *   NULL-terminated array of proxy URIs. Must be freed
-   *   with [GLib.Global.strfreev].
+   *   with [glib.global.strfreev].
    */
   override string[] lookupFinish(AsyncResult result)
   {

@@ -1,6 +1,6 @@
 module gio.menu_attribute_iter;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -45,18 +45,18 @@ class MenuAttributeIter : ObjectG
   }
 
   /**
-   * This function combines [Gio.MenuAttributeIter.next] with
-   * [Gio.MenuAttributeIter.getName] and [Gio.MenuAttributeIter.getValue].
+   * This function combines [gio.menu_attribute_iter.MenuAttributeIter.next] with
+   * [gio.menu_attribute_iter.MenuAttributeIter.getName] and [gio.menu_attribute_iter.MenuAttributeIter.getValue].
    * First the iterator is advanced to the next $(LPAREN)possibly first$(RPAREN) attribute.
    * If that fails, then %FALSE is returned and there are no other
    * effects.
    * If successful, name and value are set to the name and value of the
    * attribute that has just been advanced to.  At this point,
-   * [Gio.MenuAttributeIter.getName] and [Gio.MenuAttributeIter.getValue] will
+   * [gio.menu_attribute_iter.MenuAttributeIter.getName] and [gio.menu_attribute_iter.MenuAttributeIter.getValue] will
    * return the same values again.
    * The value returned in name remains valid for as long as the iterator
    * remains at the current position.  The value returned in value must
-   * be unreffed using [GLib.VariantG.unref] when it is no longer in use.
+   * be unreffed using [glib.variant.VariantG.unref] when it is no longer in use.
    * Params:
    *   outName = the type of the attribute
    *   value = the attribute value

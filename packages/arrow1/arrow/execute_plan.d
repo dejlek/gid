@@ -11,7 +11,7 @@ import arrow.project_node_options;
 import arrow.sink_node_options;
 import arrow.source_node_options;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 
@@ -45,7 +45,7 @@ class ExecutePlan : ObjectG
   }
 
   /**
-   * This is a shortcut of [Arrow.ExecutePlan.buildNode] for aggregate
+   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for aggregate
    * node.
    * Params:
    *   input = A #GArrowExecuteNode.
@@ -65,7 +65,7 @@ class ExecutePlan : ObjectG
   }
 
   /**
-   * This is a shortcut of [Arrow.ExecutePlan.buildNode] for filter
+   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for filter
    * node.
    * Params:
    *   input = A #GArrowExecuteNode.
@@ -85,7 +85,7 @@ class ExecutePlan : ObjectG
   }
 
   /**
-   * This is a shortcut of [Arrow.ExecutePlan.buildNode] for hash
+   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for hash
    * join node.
    * Params:
    *   left = A left #GArrowExecuteNode.
@@ -120,7 +120,7 @@ class ExecutePlan : ObjectG
   }
 
   /**
-   * This is a shortcut of [Arrow.ExecutePlan.buildNode] for project
+   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for project
    * node.
    * Params:
    *   input = A #GArrowExecuteNode.
@@ -140,7 +140,7 @@ class ExecutePlan : ObjectG
   }
 
   /**
-   * This is a shortcut of [Arrow.ExecutePlan.buildNode] for sink
+   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for sink
    * node.
    * Params:
    *   input = A #GArrowExecuteNode.
@@ -160,7 +160,7 @@ class ExecutePlan : ObjectG
   }
 
   /**
-   * This is a shortcut of [Arrow.ExecutePlan.buildNode] for source
+   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for source
    * node.
    * Params:
    *   options = A #GArrowSourceNodeOptions.

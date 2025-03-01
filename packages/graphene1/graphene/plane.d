@@ -1,6 +1,6 @@
 module graphene.plane;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -48,7 +48,7 @@ class Plane : Boxed
    * Allocates a new #graphene_plane_t structure.
    * The contents of the returned structure are undefined.
    * Returns: the newly allocated #graphene_plane_t.
-   *   Use [Graphene.Plane.free] to free the resources allocated by
+   *   Use [graphene.plane.Plane.free] to free the resources allocated by
    *   this function
    */
   static Plane alloc()

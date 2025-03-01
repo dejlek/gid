@@ -1,6 +1,6 @@
 module gtk.font_dialog_button;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -18,7 +18,7 @@ import pango.font_description;
 import pango.language;
 
 /**
- * The `GtkFontDialogButton` is wrapped around a [Gtk.FontDialog]
+ * The `GtkFontDialogButton` is wrapped around a [gtk.font_dialog.FontDialog]
  * and allows to open a font chooser dialog to change the font.
  * ![An example GtkFontDialogButton](font-button.png)
  * It is suitable widget for selecting a font in a preference dialog.
@@ -99,7 +99,7 @@ class FontDialogButton : Widget
    * that were chosen by the user. To get informed about changes, listen
    * to "notify::font-features".
    * Note that the button will only let users choose font features
-   * if [Gtk.FontDialogButton.level] is set to
+   * if [gtk.font_dialog_button.FontDialogButton.FontLevel] is set to
    * `GTK_FONT_LEVEL_FEATURES`.
    * Returns: the font features
    */

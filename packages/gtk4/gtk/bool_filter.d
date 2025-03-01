@@ -1,6 +1,6 @@
 module gtk.bool_filter;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;

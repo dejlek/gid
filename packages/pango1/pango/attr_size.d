@@ -1,6 +1,6 @@
 module pango.attr_size;
 
-import gid.gid;
+import gid.global;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -61,7 +61,7 @@ class AttrSize
    *   size = the font size, in %PANGO_SCALE-ths of a point
    * Returns: the newly allocated
    *   `PangoAttribute`, which should be freed with
-   *   [Pango.Attribute.destroy]
+   *   [pango.attribute.Attribute.destroy]
    */
   static Attribute new_(int size)
   {
@@ -77,7 +77,7 @@ class AttrSize
    *   size = the font size, in %PANGO_SCALE-ths of a device unit
    * Returns: the newly allocated
    *   `PangoAttribute`, which should be freed with
-   *   [Pango.Attribute.destroy]
+   *   [pango.attribute.Attribute.destroy]
    */
   static Attribute newAbsolute(int size)
   {

@@ -1,7 +1,7 @@
 module gio.tls_backend_mixin;
 
 public import gio.tls_backend_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.tls_database;
@@ -104,11 +104,11 @@ template TlsBackendT()
 
   /**
    * Set the default #GTlsDatabase used to verify TLS connections
-   * Any subsequent call to [Gio.TlsBackend.getDefaultDatabase] will return
+   * Any subsequent call to [gio.tls_backend.TlsBackend.getDefaultDatabase] will return
    * the database set in this call.  Existing databases and connections are not
    * modified.
    * Setting a %NULL default database will reset to using the system default
-   * database as if [Gio.TlsBackend.setDefaultDatabase] had never been called.
+   * database as if [gio.tls_backend.TlsBackend.setDefaultDatabase] had never been called.
    * Params:
    *   database = the #GTlsDatabase
    */

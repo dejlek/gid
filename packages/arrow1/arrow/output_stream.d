@@ -10,7 +10,7 @@ import arrow.types;
 import arrow.writable;
 import arrow.writable_mixin;
 import arrow.write_options;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

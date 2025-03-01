@@ -1,6 +1,6 @@
 module graphene.quaternion;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -133,7 +133,7 @@ class Quaternion : Boxed
    * Initializes a #graphene_quaternion_t using the values of
    * the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
    * on each axis.
-   * See also: [Graphene.Quaternion.initFromEuler]
+   * See also: [graphene.quaternion.Quaternion.initFromEuler]
    * Params:
    *   degX = rotation angle on the X axis $(LPAREN)yaw$(RPAREN), in degrees
    *   degY = rotation angle on the Y axis $(LPAREN)pitch$(RPAREN), in degrees
@@ -195,7 +195,7 @@ class Quaternion : Boxed
    * Initializes a #graphene_quaternion_t using the values of
    * the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
    * on each axis.
-   * See also: [Graphene.Quaternion.initFromEuler]
+   * See also: [graphene.quaternion.Quaternion.initFromEuler]
    * Params:
    *   radX = rotation angle on the X axis $(LPAREN)yaw$(RPAREN), in radians
    *   radY = rotation angle on the Y axis $(LPAREN)pitch$(RPAREN), in radians

@@ -1,6 +1,6 @@
 module gobject.type_value_table;
 
-import gid.gid;
+import gid.global;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.types;

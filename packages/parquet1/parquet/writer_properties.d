@@ -1,7 +1,7 @@
 module parquet.writer_properties;
 
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;

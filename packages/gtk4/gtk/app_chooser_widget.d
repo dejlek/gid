@@ -1,6 +1,6 @@
 module gtk.app_chooser_widget;
 
-import gid.gid;
+import gid.global;
 import gio.app_info;
 import gio.app_info_mixin;
 import gobject.dclosure;
@@ -19,7 +19,7 @@ import gtk.widget;
 
 /**
  * `GtkAppChooserWidget` is a widget for selecting applications.
- * It is the main building block for [Gtk.AppChooserDialog].
+ * It is the main building block for [gtk.app_chooser_dialog.AppChooserDialog].
  * Most applications only need to use the latter; but you can use
  * this widget as part of a larger widget if you have special needs.
  * `GtkAppChooserWidget` offers detailed control over what applications
@@ -29,7 +29,7 @@ import gtk.widget;
  * property@Gtk.AppChooserWidget:show-fallback,
  * property@Gtk.AppChooserWidget:show-other and
  * property@Gtk.AppChooserWidget:show-all properties. See the
- * [Gtk.AppChooser] documentation for more information about these
+ * [gtk.app_chooser.AppChooser] documentation for more information about these
  * groups of applications.
  * To keep track of the selected application, use the
  * signal@Gtk.AppChooserWidget::application-selected and

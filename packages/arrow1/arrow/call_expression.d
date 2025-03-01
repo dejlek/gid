@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.expression;
 import arrow.function_options;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class CallExpression : Expression
 {

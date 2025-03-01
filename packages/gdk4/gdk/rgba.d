@@ -3,7 +3,7 @@ module gdk.rgba;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
@@ -87,7 +87,7 @@ class RGBA : Boxed
 
   /**
    * Makes a copy of a `GdkRGBA`.
-   * The result must be freed through [Gdk.RGBA.free].
+   * The result must be freed through [gdk.rgba.RGBA.free].
    * Returns: A newly allocated `GdkRGBA`, with the same contents as rgba
    */
   RGBA copy()
@@ -186,7 +186,7 @@ class RGBA : Boxed
    * in the range 0 to 255, and “a” is represented as a floating
    * point value in the range 0 to 1.
    * These string forms are string forms that are supported by
-   * the CSS3 colors module, and can be parsed by [Gdk.RGBA.parse].
+   * the CSS3 colors module, and can be parsed by [gdk.rgba.RGBA.parse].
    * Note that this string representation may lose some precision,
    * since “r”, “g” and “b” are represented as 8-bit integers. If
    * this is a concern, you should use a different representation.

@@ -1,6 +1,6 @@
 module gtk.border;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;
@@ -77,7 +77,7 @@ class Border : Boxed
   /**
    * Allocates a new `GtkBorder` struct and initializes its elements to zero.
    * Returns: a newly allocated `GtkBorder` struct.
-   *   Free with [Gtk.Border.free]
+   *   Free with [gtk.border.Border.free]
    */
   this()
   {

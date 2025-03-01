@@ -1,7 +1,7 @@
 module gtk.print_job;
 
 import cairo.surface;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -15,12 +15,12 @@ import gtk.types;
 /**
  * A `GtkPrintJob` object represents a job that is sent to a printer.
  * You only need to deal directly with print jobs if you use the
- * non-portable [Gtk.PrintUnixDialog] API.
- * Use [Gtk.PrintJob.getSurface] to obtain the cairo surface
- * onto which the pages must be drawn. Use [Gtk.PrintJob.send]
+ * non-portable [gtk.print_unix_dialog.PrintUnixDialog] API.
+ * Use [gtk.print_job.PrintJob.getSurface] to obtain the cairo surface
+ * onto which the pages must be drawn. Use [gtk.print_job.PrintJob.send]
  * to send the finished job to the printer. If you don’t use cairo
  * `GtkPrintJob` also supports printing of manually generated PostScript,
- * via [Gtk.PrintJob.setSourceFile].
+ * via [gtk.print_job.PrintJob.setSourceFile].
  */
 class PrintJob : ObjectG
 {
@@ -247,7 +247,7 @@ class PrintJob : ObjectG
 
   /**
    * Returns whether jobs will be tracked after printing.
-   * For details, see [Gtk.PrintJob.setTrackPrintStatus].
+   * For details, see [gtk.print_job.PrintJob.setTrackPrintStatus].
    * Returns: %TRUE if print job status will be reported after printing
    */
   bool getTrackPrintStatus()
@@ -373,9 +373,9 @@ class PrintJob : ObjectG
    * printing system.
    * The file can be in any format understood by the platforms
    * printing system $(LPAREN)typically PostScript, but on many platforms
-   * PDF may work too$(RPAREN). See [Gtk.Printer.acceptsPdf] and
-   * [Gtk.Printer.acceptsPs].
-   * This is similar to [Gtk.PrintJob.setSourceFile],
+   * PDF may work too$(RPAREN). See [gtk.printer.Printer.acceptsPdf] and
+   * [gtk.printer.Printer.acceptsPs].
+   * This is similar to [gtk.print_job.PrintJob.setSourceFile],
    * but takes expects an open file descriptor for the file,
    * instead of a filename.
    * Params:
@@ -397,8 +397,8 @@ class PrintJob : ObjectG
    * printing system.
    * The file can be in any format understood by the platforms
    * printing system $(LPAREN)typically PostScript, but on many platforms
-   * PDF may work too$(RPAREN). See [Gtk.Printer.acceptsPdf] and
-   * [Gtk.Printer.acceptsPs].
+   * PDF may work too$(RPAREN). See [gtk.printer.Printer.acceptsPdf] and
+   * [gtk.printer.Printer.acceptsPs].
    * Params:
    *   filename = the file to be printed
    * Returns: %FALSE if an error occurred
@@ -431,7 +431,7 @@ class PrintJob : ObjectG
 
   /**
    * Emitted when the status of a job changes.
-   * The signal handler can use [Gtk.PrintJob.getStatus]
+   * The signal handler can use [gtk.print_job.PrintJob.getStatus]
    * to obtain the new status.
    *   printJob = the instance the signal is connected to
    */

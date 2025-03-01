@@ -1,6 +1,6 @@
 module glib.thread_pool;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -15,18 +15,18 @@ import glib.types;
  * and error-prone.
  * Therefore GLib provides thread pools for your convenience. An added advantage is, that the
  * threads can be shared between the different subsystems of your program, when they are using GLib.
- * To create a new thread pool, you use [GLib.ThreadPool.new_].
- * It is destroyed by [GLib.ThreadPool.free].
- * If you want to execute a certain task within a thread pool, use [GLib.ThreadPool.push].
- * To get the current number of running threads you call [GLib.ThreadPool.getNumThreads].
- * To get the number of still unprocessed tasks you call [GLib.ThreadPool.unprocessed].
+ * To create a new thread pool, you use [glib.thread_pool.ThreadPool.new_].
+ * It is destroyed by [glib.thread_pool.ThreadPool.free].
+ * If you want to execute a certain task within a thread pool, use [glib.thread_pool.ThreadPool.push].
+ * To get the current number of running threads you call [glib.thread_pool.ThreadPool.getNumThreads].
+ * To get the number of still unprocessed tasks you call [glib.thread_pool.ThreadPool.unprocessed].
  * To control the maximum number of threads for a thread pool, you use
- * [GLib.ThreadPool.getMaxThreads]. and [GLib.ThreadPool.setMaxThreads].
+ * [glib.thread_pool.ThreadPool.getMaxThreads]. and [glib.thread_pool.ThreadPool.setMaxThreads].
  * Finally you can control the number of unused threads, that are kept alive by GLib for future use.
- * The current number can be fetched with [GLib.ThreadPool.getNumUnusedThreads].
- * The maximum number can be controlled by [GLib.ThreadPool.getMaxUnusedThreads] and
- * [GLib.ThreadPool.setMaxUnusedThreads]. All currently unused threads
- * can be stopped by calling [GLib.ThreadPool.stopUnusedThreads].
+ * The current number can be fetched with [glib.thread_pool.ThreadPool.getNumUnusedThreads].
+ * The maximum number can be controlled by [glib.thread_pool.ThreadPool.getMaxUnusedThreads] and
+ * [glib.thread_pool.ThreadPool.setMaxUnusedThreads]. All currently unused threads
+ * can be stopped by calling [glib.thread_pool.ThreadPool.stopUnusedThreads].
  */
 class ThreadPool
 {
@@ -120,7 +120,7 @@ class ThreadPool
    * Inserts data into the list of tasks to be executed by pool.
    * When the number of currently running threads is lower than the
    * maximal allowed number of threads, a new thread is started $(LPAREN)or
-   * reused$(RPAREN) with the properties given to [GLib.ThreadPool.new_].
+   * reused$(RPAREN) with the properties given to [glib.thread_pool.ThreadPool.new_].
    * Otherwise, data stays in the queue until a thread in this pool
    * finishes its previous task and processes data.
    * error can be %NULL to ignore errors, or non-%NULL to report
@@ -151,8 +151,8 @@ class ThreadPool
    * It is effectively frozen until max_threads is set to a non-zero
    * value again.
    * A thread is never terminated while calling func, as supplied by
-   * [GLib.ThreadPool.new_]. Instead the maximal number of threads only
-   * has effect for the allocation of new threads in [GLib.ThreadPool.push].
+   * [glib.thread_pool.ThreadPool.new_]. Instead the maximal number of threads only
+   * has effect for the allocation of new threads in [glib.thread_pool.ThreadPool.push].
    * A new thread is allocated, whenever the number of currently
    * running threads in pool is smaller than the maximal number.
    * error can be %NULL to ignore errors, or non-%NULL to report
@@ -228,7 +228,7 @@ class ThreadPool
    * This function will set the maximum interval that a thread
    * waiting in the pool for new tasks can be idle for before
    * being stopped. This function is similar to calling
-   * [GLib.ThreadPool.stopUnusedThreads] on a regular timeout,
+   * [glib.thread_pool.ThreadPool.stopUnusedThreads] on a regular timeout,
    * except this is done on a per thread basis.
    * By setting interval to 0, idle threads will not be stopped.
    * The default value is 15000 $(LPAREN)15 seconds$(RPAREN).
@@ -257,7 +257,7 @@ class ThreadPool
   /**
    * Stops all currently unused threads. This does not change the
    * maximal number of unused threads. This function can be used to
-   * regularly stop all unused threads e.g. from [GLib.Global.timeoutAdd].
+   * regularly stop all unused threads e.g. from [glib.global.timeoutAdd].
    */
   static void stopUnusedThreads()
   {

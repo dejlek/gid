@@ -1,6 +1,6 @@
 module gobject.object;
 
-import gid.gid;
+import gid.global;
 import glib.types;
 import gobject.binding;
 import gobject.c.functions;
@@ -400,14 +400,14 @@ class ObjectG
    * will be updated as well.
    * The binding will automatically be removed when either the source or the
    * target instances are finalized. To remove the binding without affecting the
-   * source and the target you can just call [GObject.ObjectG.unref] on the returned
+   * source and the target you can just call [gobject.object.ObjectG.unref] on the returned
    * #GBinding instance.
-   * Removing the binding by calling [GObject.ObjectG.unref] on it must only be done if
+   * Removing the binding by calling [gobject.object.ObjectG.unref] on it must only be done if
    * the binding, source and target are only used from a single thread and it
    * is clear that both source and target outlive the binding. Especially it
    * is not safe to rely on this if the binding, source or target can be
    * finalized from different threads. Keep another reference to the binding and
-   * use [GObject.Binding.unbind] instead to be on the safe side.
+   * use [gobject.binding.Binding.unbind] instead to be on the safe side.
    * A #GObject can have multiple bindings.
    * Params:
    *   sourceProperty = the property on source to bind
@@ -433,7 +433,7 @@ class ObjectG
    * on target, allowing you to set the transformation functions to be used by
    * the binding.
    * This function is the language bindings friendly version of
-   * [GObject.ObjectG.bindPropertyFull], using #GClosures instead of
+   * [gobject.object.ObjectG.bindPropertyFull], using #GClosures instead of
    * function pointers.
    * Params:
    *   sourceProperty = the property on source to bind
@@ -462,7 +462,7 @@ class ObjectG
    * This function is intended for #GObject implementations to re-enforce
    * a [floating][floating-ref] object reference. Doing this is seldom
    * required: all #GInitiallyUnowneds are created with a floating reference
-   * which usually just needs to be sunken by calling [GObject.ObjectG.refSink].
+   * which usually just needs to be sunken by calling [gobject.object.ObjectG.refSink].
    */
   void forceFloating()
   {
@@ -485,7 +485,7 @@ class ObjectG
   }
 
   /**
-   * Gets a named field from the objects table of associations $(LPAREN)see [GObject.ObjectG.setData]$(RPAREN).
+   * Gets a named field from the objects table of associations $(LPAREN)see [gobject.object.ObjectG.setData]$(RPAREN).
    * Params:
    *   key = name of the key for that association
    * Returns: the data if found,
@@ -508,9 +508,9 @@ class ObjectG
    * - a #GValue initialized with a type to which the expected type
    * of the property can be transformed
    * In general, a copy is made of the property contents and the caller is
-   * responsible for freeing the memory by calling [GObject.Value.unset].
-   * Note that [GObject.ObjectG.getProperty] is really intended for language
-   * bindings, [GObject.ObjectG.get] is much more convenient for C programming.
+   * responsible for freeing the memory by calling [gobject.value.Value.unset].
+   * Note that [gobject.object.ObjectG.getProperty] is really intended for language
+   * bindings, [gobject.object.ObjectG.get] is much more convenient for C programming.
    * Params:
    *   propertyName = the name of the property to get
    *   value = return location for the property value
@@ -523,7 +523,7 @@ class ObjectG
 
   /**
    * This function gets back user data pointers stored via
-   * [GObject.ObjectG.setQdata].
+   * [gobject.object.ObjectG.setQdata].
    * Params:
    *   quark = A #GQuark, naming the user data pointer
    * Returns: The user data pointer set, or %NULL
@@ -578,11 +578,11 @@ class ObjectG
   /**
    * Emits a "notify" signal for the property property_name on object.
    * When possible, eg. when signaling a property change from within the class
-   * that registered the property, you should use [GObject.ObjectG.notifyByPspec]
+   * that registered the property, you should use [gobject.object.ObjectG.notifyByPspec]
    * instead.
    * Note that emission of the notify signal may be blocked with
-   * [GObject.ObjectG.freezeNotify]. In this case, the signal emissions are queued
-   * and will be emitted $(LPAREN)in reverse order$(RPAREN) when [GObject.ObjectG.thawNotify] is
+   * [gobject.object.ObjectG.freezeNotify]. In this case, the signal emissions are queued
+   * and will be emitted $(LPAREN)in reverse order$(RPAREN) when [gobject.object.ObjectG.thawNotify] is
    * called.
    * Params:
    *   propertyName = the name of a property installed on the class of object.
@@ -596,11 +596,11 @@ class ObjectG
   /**
    * Emits a "notify" signal for the property specified by pspec on object.
    * This function omits the property name lookup, hence it is faster than
-   * [GObject.ObjectG.notify].
-   * One way to avoid using [GObject.ObjectG.notify] from within the
-   * class that registered the properties, and using [GObject.ObjectG.notifyByPspec]
+   * [gobject.object.ObjectG.notify].
+   * One way to avoid using [gobject.object.ObjectG.notify] from within the
+   * class that registered the properties, and using [gobject.object.ObjectG.notifyByPspec]
    * instead, is to store the GParamSpec used with
-   * [GObject.ObjectClass.installProperty] inside a static array, e.g.:
+   * [gobject.object_class.ObjectClass.installProperty] inside a static array, e.g.:
    * |[<!-- language\="C" -->
    * typedef enum
    * {
@@ -641,7 +641,7 @@ class ObjectG
    * count unchanged.  If the object is not floating, then this call
    * adds a new normal reference increasing the reference count by one.
    * Since GLib 2.56, the type of object will be propagated to the return type
-   * under the same conditions as for [GObject.ObjectG.ref_].
+   * under the same conditions as for [gobject.object.ObjectG.ref_].
    * Returns: object
    */
   ObjectG refSink()
@@ -667,7 +667,7 @@ class ObjectG
    * strings to pointers.  This function lets you set an association.
    * If the object already had an association with that name,
    * the old association will be destroyed.
-   * Internally, the key is converted to a #GQuark using [GLib.Global.quarkFromString].
+   * Internally, the key is converted to a #GQuark using [glib.global.quarkFromString].
    * This means a copy of key is kept permanently $(LPAREN)even after object has been
    * finalized$(RPAREN) — so it is recommended to only use a small, bounded set of values
    * for key in your program, to avoid the #GQuark storage growing unbounded.
@@ -710,7 +710,7 @@ class ObjectG
 
   /**
    * This function gets back user data pointers stored via
-   * [GObject.ObjectG.setQdata] and removes the data from object
+   * [gobject.object.ObjectG.setQdata] and removes the data from object
    * without invoking its destroy$(LPAREN)$(RPAREN) function $(LPAREN)if any was
    * set$(RPAREN).
    * Usually, calling this function is only required to update
@@ -738,10 +738,10 @@ class ObjectG
    * g_list_free $(LPAREN)list$(RPAREN);
    * }
    * ]|
-   * Using [GObject.ObjectG.getQdata] in the above example, instead of
-   * [GObject.ObjectG.stealQdata] would have left the destroy function set,
+   * Using [gobject.object.ObjectG.getQdata] in the above example, instead of
+   * [gobject.object.ObjectG.stealQdata] would have left the destroy function set,
    * and thus the partial string list would have been freed upon
-   * [GObject.ObjectG.setQdataFull].
+   * [gobject.object.ObjectG.setQdataFull].
    * Params:
    *   quark = A #GQuark, naming the user data pointer
    * Returns: The user data pointer set, or %NULL
@@ -754,7 +754,7 @@ class ObjectG
 
   /**
    * Reverts the effect of a previous call to
-   * [GObject.ObjectG.freezeNotify]. The freeze count is decreased on object
+   * [gobject.object.ObjectG.freezeNotify]. The freeze count is decreased on object
    * and when it reaches zero, queued "notify" signals are emitted.
    * Duplicate notifications for each property are squashed so that at most one
    * #GObject::notify signal is emitted for each property, in the reverse order
@@ -769,9 +769,9 @@ class ObjectG
   /**
    * This function essentially limits the life time of the closure to
    * the life time of the object. That is, when the object is finalized,
-   * the closure is invalidated by calling [GObject.Closure.invalidate] on
+   * the closure is invalidated by calling [gobject.closure.Closure.invalidate] on
    * it, in order to prevent invocations of the closure with a finalized
-   * $(LPAREN)nonexisting$(RPAREN) object. Also, [GObject.ObjectG.ref_] and [GObject.ObjectG.unref] are
+   * $(LPAREN)nonexisting$(RPAREN) object. Also, [gobject.object.ObjectG.ref_] and [gobject.object.ObjectG.unref] are
    * added as marshal guards to the closure, to ensure that an extra
    * reference count is held on object during invocation of the
    * closure.  Usually, this function will be called on closures that
@@ -786,14 +786,14 @@ class ObjectG
 
   /**
    * The notify signal is emitted on an object when one of its properties has
-   * its value set through [GObject.ObjectG.setProperty], [GObject.ObjectG.set], et al.
+   * its value set through [gobject.object.ObjectG.setProperty], [gobject.object.ObjectG.set], et al.
    * Note that getting this signal doesn’t itself guarantee that the value of
    * the property has actually changed. When it is emitted is determined by the
    * derived GObject class. If the implementor did not create the property with
-   * %G_PARAM_EXPLICIT_NOTIFY, then any call to [GObject.ObjectG.setProperty] results
+   * %G_PARAM_EXPLICIT_NOTIFY, then any call to [gobject.object.ObjectG.setProperty] results
    * in ::notify being emitted, even if the new value is the same as the old.
    * If they did pass %G_PARAM_EXPLICIT_NOTIFY, then this signal is emitted only
-   * when they explicitly call [GObject.ObjectG.notify] or [GObject.ObjectG.notifyByPspec],
+   * when they explicitly call [gobject.object.ObjectG.notify] or [gobject.object.ObjectG.notifyByPspec],
    * and common practice is to do that only when the value has actually changed.
    * This signal is typically used to obtain change notification for a
    * single property, by specifying the property name as a detail in the

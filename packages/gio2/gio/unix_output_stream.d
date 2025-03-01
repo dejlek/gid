@@ -1,6 +1,6 @@
 module gio.unix_output_stream;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.file_descriptor_based;
@@ -11,7 +11,7 @@ import gio.pollable_output_stream_mixin;
 import gio.types;
 
 /**
- * `GUnixOutputStream` implements [Gio.OutputStream] for writing to a UNIX
+ * `GUnixOutputStream` implements [gio.output_stream.OutputStream] for writing to a UNIX
  * file descriptor, including asynchronous operations. $(LPAREN)If the file
  * descriptor refers to a socket or pipe, this will use `poll$(LPAREN)$(RPAREN)` to do
  * asynchronous I/O. If it refers to a regular file, it will fall back

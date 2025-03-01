@@ -5,7 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.large_binary_array;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class LargeStringArray : LargeBinaryArray
 {

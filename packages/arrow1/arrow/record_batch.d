@@ -13,7 +13,7 @@ import arrow.take_options;
 import arrow.types;
 import arrow.uint64_array;
 import arrow.write_options;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

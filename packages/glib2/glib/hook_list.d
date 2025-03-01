@@ -1,6 +1,6 @@
 module glib.hook_list;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.hook;

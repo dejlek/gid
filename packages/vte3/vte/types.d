@@ -1,6 +1,6 @@
 module vte.types;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import glib.types;
 import vte.c.functions;
@@ -55,18 +55,18 @@ enum REGEX_FLAGS_DEFAULT = 1075314688;
 
 /**
  * Use this as a spawn flag $(LPAREN)together with flags from #GSpawnFlags$(RPAREN) in
- * [Vte.Pty.spawnAsync].
+ * [vte.pty.Pty.spawnAsync].
  * Normally, the spawned process inherits the environment from the parent
  * process; when this flag is used, only the environment variables passed
- * to [Vte.Pty.spawnAsync] etc. are passed to the child process.
+ * to [vte.pty.Pty.spawnAsync] etc. are passed to the child process.
  */
 enum SPAWN_NO_PARENT_ENVV = 33554432;
 
 
 /**
  * Use this as a spawn flag $(LPAREN)together with flags from #GSpawnFlags$(RPAREN) in
- * [Vte.Pty.spawnAsync].
- * Prevents [Vte.Pty.spawnAsync] etc. from moving the newly created child
+ * [vte.pty.Pty.spawnAsync].
+ * Prevents [vte.pty.Pty.spawnAsync] etc. from moving the newly created child
  * process to a systemd user scope.
  */
 enum SPAWN_NO_SYSTEMD_SCOPE = 67108864;
@@ -74,8 +74,8 @@ enum SPAWN_NO_SYSTEMD_SCOPE = 67108864;
 
 /**
  * Use this as a spawn flag $(LPAREN)together with flags from #GSpawnFlags$(RPAREN) in
- * [Vte.Pty.spawnAsync].
- * Requires [Vte.Pty.spawnAsync] etc. to move the newly created child
+ * [vte.pty.Pty.spawnAsync].
+ * Requires [vte.pty.Pty.spawnAsync] etc. to move the newly created child
  * process to a systemd user scope; if that fails, the whole spawn fails.
  * This is supported on Linux only.
  */

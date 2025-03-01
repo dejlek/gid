@@ -4,7 +4,7 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.record_batch_writer;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class StreamWriter : RecordBatchWriter

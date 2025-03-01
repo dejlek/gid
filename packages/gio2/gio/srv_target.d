@@ -1,6 +1,6 @@
 module gio.srv_target;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -15,11 +15,11 @@ import gobject.boxed;
  * specific server hostname like ‘xmpp.example.com’, an XMPP client
  * would look up the `xmpp-client` SRV record for ‘example.com’, and
  * then connect to whatever host was pointed to by that record.
- * You can use [Gio.Resolver.lookupService] or
- * [Gio.Resolver.lookupServiceAsync] to find the `GSrvTarget`s
+ * You can use [gio.resolver.Resolver.lookupService] or
+ * [gio.resolver.Resolver.lookupServiceAsync] to find the `GSrvTarget`s
  * for a given service. However, if you are simply planning to connect
- * to the remote service, you can use [Gio.NetworkService]’s
- * [Gio.SocketConnectable] interface and not need to worry about
+ * to the remote service, you can use [gio.network_service.NetworkService]’s
+ * [gio.socket_connectable.SocketConnectable] interface and not need to worry about
  * `GSrvTarget` at all.
  */
 class SrvTarget : Boxed
@@ -79,9 +79,9 @@ class SrvTarget : Boxed
 
   /**
    * Gets target's hostname $(LPAREN)in ASCII form; if you are going to present
-   * this to the user, you should use [GLib.Global.hostnameIsAsciiEncoded] to
+   * this to the user, you should use [glib.global.hostnameIsAsciiEncoded] to
    * check if it contains encoded Unicode segments, and use
-   * [GLib.Global.hostnameToUnicode] to convert it if it does.$(RPAREN)
+   * [glib.global.hostnameToUnicode] to convert it if it does.$(RPAREN)
    * Returns: target's hostname
    */
   string getHostname()

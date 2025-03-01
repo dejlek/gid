@@ -1,6 +1,6 @@
 module gtk.toggle_button;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -20,20 +20,20 @@ import gtk.types;
  * A `GtkToggleButton` is a button which remains “pressed-in” when
  * clicked.
  * Clicking again will cause the toggle button to return to its normal state.
- * A toggle button is created by calling either [Gtk.ToggleButton.new_] or
- * [Gtk.ToggleButton.newWithLabel]. If using the former, it is advisable
+ * A toggle button is created by calling either [gtk.toggle_button.ToggleButton.new_] or
+ * [gtk.toggle_button.ToggleButton.newWithLabel]. If using the former, it is advisable
  * to pack a widget, $(LPAREN)such as a `GtkLabel` and/or a `GtkImage`$(RPAREN), into the toggle
- * button’s container. $(LPAREN)See [Gtk.Button] for more information$(RPAREN).
+ * button’s container. $(LPAREN)See [gtk.button.Button] for more information$(RPAREN).
  * The state of a `GtkToggleButton` can be set specifically using
- * [Gtk.ToggleButton.setActive], and retrieved using
- * [Gtk.ToggleButton.getActive].
+ * [gtk.toggle_button.ToggleButton.setActive], and retrieved using
+ * [gtk.toggle_button.ToggleButton.getActive].
  * To simply switch the state of a toggle button, use
- * [Gtk.ToggleButton.toggled].
+ * [gtk.toggle_button.ToggleButton.toggled].
  * ## Grouping
  * Toggle buttons can be grouped together, to form mutually exclusive
  * groups - only one of the buttons can be toggled at a time, and toggling
  * another one will switch the currently toggled one off.
- * To add a `GtkToggleButton` to a group, use [Gtk.ToggleButton.setGroup].
+ * To add a `GtkToggleButton` to a group, use [gtk.toggle_button.ToggleButton.setGroup].
  * ## CSS nodes
  * `GtkToggleButton` has a single CSS node with name button. To differentiate
  * it from a plain `GtkButton`, it gets the `.toggle` style class.
@@ -95,7 +95,7 @@ class ToggleButton : Button
 
   /**
    * Creates a new toggle button.
-   * A widget should be packed into the button, as in [Gtk.Button.new_].
+   * A widget should be packed into the button, as in [gtk.button.Button.new_].
    * Returns: a new toggle button.
    */
   this()
@@ -122,7 +122,7 @@ class ToggleButton : Button
 
   /**
    * Creates a new `GtkToggleButton` containing a label.
-   * The label will be created using [Gtk.Label.newWithMnemonic],
+   * The label will be created using [gtk.label.Label.newWithMnemonic],
    * so underscores in label indicate the mnemonic for the button.
    * Params:
    *   label = the text of the button, with an underscore in front of the
@@ -156,7 +156,7 @@ class ToggleButton : Button
    * Set to %TRUE if you want the `GtkToggleButton` to be “pressed in”,
    * and %FALSE to raise it.
    * If the status of the button changes, this action causes the
-   * [Gtk.ToggleButton.toggled] signal to be emitted.
+   * [gtk.toggle_button.ToggleButton.toggled] signal to be emitted.
    * Params:
    *   isActive = %TRUE or %FALSE.
    */
@@ -170,7 +170,7 @@ class ToggleButton : Button
    * In a group of multiple toggle buttons, only one button can be active
    * at a time.
    * Setting up groups in a cycle leads to undefined behavior.
-   * Note that the same effect can be achieved via the [Gtk.Actionable]
+   * Note that the same effect can be achieved via the [gtk.actionable.Actionable]
    * API, by using the same action with parameter type and state type 's'
    * for all buttons in the group, and giving each button its own target
    * value.

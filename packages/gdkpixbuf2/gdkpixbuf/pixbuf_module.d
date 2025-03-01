@@ -4,7 +4,7 @@ import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf_format;
 import gdkpixbuf.types;
-import gid.gid;
+import gid.global;
 import gmodule.module_;
 
 /**

@@ -1,6 +1,6 @@
 module glib.string_;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
@@ -112,7 +112,7 @@ class String : Boxed
    * Creates a new #GString, initialized with the given string.
    * After this call, init belongs to the #GString and may no longer be
    * modified by the caller. The memory of data has to be dynamically
-   * allocated and will eventually be freed with [GLib.Global.gfree].
+   * allocated and will eventually be freed with [glib.global.gfree].
    * Params:
    *   init_ = initial text used as the string.
    *     Ownership of the string is transferred to the #GString.
@@ -183,7 +183,7 @@ class String : Boxed
    * ensure that val has at least len addressable bytes.
    * If len is negative, val must be nul-terminated and len
    * is considered to request the entire string length. This
-   * makes [GLib.String.appendLen] equivalent to [GLib.String.append].
+   * makes [glib.string_.String.appendLen] equivalent to [glib.string_.String.append].
    * Params:
    *   val = bytes to append
    *   len = number of bytes of val to use, or -1 for all of val
@@ -237,7 +237,7 @@ class String : Boxed
    * Converts all uppercase ASCII letters to lowercase ASCII letters.
    * Returns: passed-in string pointer, with all the
    *   uppercase characters converted to lowercase in place,
-   *   with semantics that exactly match [GLib.Global.asciiTolower].
+   *   with semantics that exactly match [glib.global.asciiTolower].
    */
   String asciiDown()
   {
@@ -251,7 +251,7 @@ class String : Boxed
    * Converts all lowercase ASCII letters to uppercase ASCII letters.
    * Returns: passed-in string pointer, with all the
    *   lowercase characters converted to uppercase in place,
-   *   with semantics that exactly match [GLib.Global.asciiToupper].
+   *   with semantics that exactly match [glib.global.asciiToupper].
    */
   String asciiUp()
   {
@@ -285,7 +285,7 @@ class String : Boxed
 
    * Deprecated: This function uses the locale-specific
    *   tolower$(LPAREN)$(RPAREN) function, which is almost never the right thing.
-   *   Use [GLib.String.asciiDown] or [GLib.Global.utf8Strdown] instead.
+   *   Use [glib.string_.String.asciiDown] or [glib.global.utf8Strdown] instead.
    */
   String down()
   {
@@ -330,7 +330,7 @@ class String : Boxed
   /**
    * Frees the memory allocated for the #GString.
    * The caller gains ownership of the buffer and
-   * must free it after use with [GLib.Global.gfree].
+   * must free it after use with [glib.global.gfree].
    * Returns: the character data of string
    */
   string freeAndSteal()
@@ -515,7 +515,7 @@ class String : Boxed
    * ensure that val has at least len addressable bytes.
    * If len is negative, val must be nul-terminated and len
    * is considered to request the entire string length. This
-   * makes [GLib.String.prependLen] equivalent to [GLib.String.prepend].
+   * makes [glib.string_.String.prependLen] equivalent to [glib.string_.String.prepend].
    * Params:
    *   val = bytes to prepend
    *   len = number of bytes in val to prepend, or -1 for all of val
@@ -608,7 +608,7 @@ class String : Boxed
 
    * Deprecated: This function uses the locale-specific
    *   toupper$(LPAREN)$(RPAREN) function, which is almost never the right thing.
-   *   Use [GLib.String.asciiUp] or [GLib.Global.utf8Strup] instead.
+   *   Use [glib.string_.String.asciiUp] or [glib.global.utf8Strup] instead.
    */
   String up()
   {

@@ -1,6 +1,6 @@
 module gtksource.types;
 
-import gid.gid;
+import gid.global;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.types;
@@ -28,7 +28,7 @@ alias ViewGutterPosition = GtkSourceViewGutterPosition;
 alias SchedulerCallback = bool delegate(long deadline);
 
 /**
- * Like [GtkSource.Global.getMajorVersion], but from the headers used at
+ * Like [gtksource.global.getMajorVersion], but from the headers used at
  * application compile time, rather than from the library linked
  * against at application run time.
  */
@@ -36,7 +36,7 @@ enum MAJOR_VERSION = 5;
 
 
 /**
- * Like [GtkSource.Global.getMicroVersion], but from the headers used at
+ * Like [gtksource.global.getMicroVersion], but from the headers used at
  * application compile time, rather than from the library linked
  * against at application run time.
  */
@@ -44,7 +44,7 @@ enum MICRO_VERSION = 1;
 
 
 /**
- * Like [GtkSource.Global.getMinorVersion], but from the headers used at
+ * Like [gtksource.global.getMinorVersion], but from the headers used at
  * application compile time, rather than from the library linked
  * against at application run time.
  */

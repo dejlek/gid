@@ -1,6 +1,6 @@
 module graphene.rect;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -15,7 +15,7 @@ import graphene.vec2;
  * a #graphene_rect_t with an origin of [ 0, 0 ] and a size of [ 10, 10 ] is
  * equivalent to a #graphene_rect_t with an origin of [ 10, 10 ] and a size
  * of [ -10, -10 ].
- * Application code can normalize rectangles using [Graphene.Rect.normalize];
+ * Application code can normalize rectangles using [graphene.rect.Rect.normalize];
  * this function will ensure that the width and height of a rectangle are
  * positive values. All functions taking a #graphene_rect_t as an argument
  * will internally operate on a normalized copy; all functions returning a
@@ -435,7 +435,7 @@ class Rect : Boxed
    * their nearest integer values; the rounding is guaranteed
    * to be large enough to have an area bigger or equal to the
    * original rectangle, but might not fully contain its extents.
-   * Use [Graphene.Rect.roundExtents] in case you need to round
+   * Use [graphene.rect.Rect.roundExtents] in case you need to round
    * to a rectangle that covers fully the original one.
    * This function is the equivalent of calling `floor` on
    * the coordinates of the origin, and `ceil` on the size.
@@ -443,7 +443,7 @@ class Rect : Boxed
    *   res = return location for the
    *     rounded rectangle
 
-   * Deprecated: Use [Graphene.Rect.roundExtents] instead
+   * Deprecated: Use [graphene.rect.Rect.roundExtents] instead
    */
   void round(out Rect res)
   {
@@ -489,7 +489,7 @@ class Rect : Boxed
    * to be large enough to contain the original rectangle.
    * Returns: the pixel-aligned rectangle.
 
-   * Deprecated: Use [Graphene.Rect.round] instead
+   * Deprecated: Use [graphene.rect.Rect.round] instead
    */
   Rect roundToPixel()
   {

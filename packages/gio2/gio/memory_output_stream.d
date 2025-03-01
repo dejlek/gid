@@ -1,6 +1,6 @@
 module gio.memory_output_stream;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.output_stream;
@@ -16,7 +16,7 @@ import gobject.object;
  * `GMemoryOutputStream` is a class for using arbitrary
  * memory chunks as output for GIO streaming output operations.
  * As of GLib 2.34, `GMemoryOutputStream` trivially implements
- * [Gio.PollableOutputStream]: it always polls as ready.
+ * [gio.pollable_output_stream.PollableOutputStream]: it always polls as ready.
  */
 class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
 {
@@ -41,7 +41,7 @@ class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
   mixin SeekableT!();
 
   /**
-   * Creates a new #GMemoryOutputStream, using [GLib.Global.realloc] and [GLib.Global.gfree]
+   * Creates a new #GMemoryOutputStream, using [glib.global.realloc] and [glib.global.gfree]
    * for memory allocation.
    * Returns:
    */
@@ -82,17 +82,17 @@ class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
 
   /**
    * Gets the size of the currently allocated data area $(LPAREN)available from
-   * [Gio.MemoryOutputStream.getData]$(RPAREN).
+   * [gio.memory_output_stream.MemoryOutputStream.getData]$(RPAREN).
    * You probably don't want to use this function on resizable streams.
-   * See [Gio.MemoryOutputStream.getDataSize] instead.  For resizable
+   * See [gio.memory_output_stream.MemoryOutputStream.getDataSize] instead.  For resizable
    * streams the size returned by this function is an implementation
    * detail and may be change at any time in response to operations on the
    * stream.
    * If the stream is fixed-sized $(LPAREN)ie: no realloc was passed to
-   * [Gio.MemoryOutputStream.new_]$(RPAREN) then this is the maximum size of the
+   * [gio.memory_output_stream.MemoryOutputStream.new_]$(RPAREN) then this is the maximum size of the
    * stream and further writes will return %G_IO_ERROR_NO_SPACE.
    * In any case, if you want the number of bytes currently written to the
-   * stream, use [Gio.MemoryOutputStream.getDataSize].
+   * stream, use [gio.memory_output_stream.MemoryOutputStream.getDataSize].
    * Returns: the number of bytes allocated for the data buffer
    */
   size_t getSize()

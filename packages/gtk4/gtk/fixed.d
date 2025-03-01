@@ -1,6 +1,6 @@
 module gtk.fixed;
 
-import gid.gid;
+import gid.global;
 import gsk.transform;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -77,7 +77,7 @@ class Fixed : Widget
   /**
    * Retrieves the translation transformation of the
    * given child `GtkWidget` in the `GtkFixed`.
-   * See also: [Gtk.Fixed.getChildTransform].
+   * See also: [gtk.fixed.Fixed.getChildTransform].
    * Params:
    *   widget = a child of fixed
    *   x = the horizontal position of the widget
@@ -90,7 +90,7 @@ class Fixed : Widget
 
   /**
    * Retrieves the transformation for widget set using
-   * [Gtk.Fixed.setChildTransform].
+   * [gtk.fixed.Fixed.setChildTransform].
    * Params:
    *   widget = a `GtkWidget`, child of fixed
    * Returns: a `GskTransform`
@@ -141,8 +141,8 @@ class Fixed : Widget
   /**
    * Sets the transformation for widget.
    * This is a convenience function that retrieves the
-   * [Gtk.FixedLayoutChild] instance associated to
-   * widget and calls [Gtk.FixedLayoutChild.setTransform].
+   * [gtk.fixed_layout_child.FixedLayoutChild] instance associated to
+   * widget and calls [gtk.fixed_layout_child.FixedLayoutChild.setTransform].
    * Params:
    *   widget = a `GtkWidget`, child of fixed
    *   transform = the transformation assigned to widget

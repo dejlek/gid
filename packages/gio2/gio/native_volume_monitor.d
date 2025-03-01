@@ -1,6 +1,6 @@
 module gio.native_volume_monitor;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;

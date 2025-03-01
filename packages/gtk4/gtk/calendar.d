@@ -1,6 +1,6 @@
 module gtk.calendar;
 
-import gid.gid;
+import gid.global;
 import glib.date_time;
 import gobject.dclosure;
 import gtk.accessible;
@@ -18,15 +18,15 @@ import gtk.widget;
  * `GtkCalendar` is a widget that displays a Gregorian calendar, one month
  * at a time.
  * ![An example GtkCalendar](calendar.png)
- * A `GtkCalendar` can be created with [Gtk.Calendar.new_].
+ * A `GtkCalendar` can be created with [gtk.calendar.Calendar.new_].
  * The date that is currently displayed can be altered with
- * [Gtk.Calendar.selectDay].
+ * [gtk.calendar.Calendar.selectDay].
  * To place a visual marker on a particular day, use
- * [Gtk.Calendar.markDay] and to remove the marker,
- * [Gtk.Calendar.unmarkDay]. Alternative, all
- * marks can be cleared with [Gtk.Calendar.clearMarks].
+ * [gtk.calendar.Calendar.markDay] and to remove the marker,
+ * [gtk.calendar.Calendar.unmarkDay]. Alternative, all
+ * marks can be cleared with [gtk.calendar.Calendar.clearMarks].
  * The selected date can be retrieved from a `GtkCalendar` using
- * [Gtk.Calendar.getDate].
+ * [gtk.calendar.Calendar.getDate].
  * Users should be aware that, although the Gregorian calendar is the
  * legal calendar in most countries, it was adopted progressively
  * between 1582 and 1929. Display before these dates is likely to be
@@ -273,7 +273,7 @@ class Calendar : Widget
    * The new date must be valid. For example, setting 2023 for the year when then
    * the date is 2024-02-29, fails.
    * Params:
-   *   year = The desired year for the selected date $(LPAREN)within [GLib.DateTime]
+   *   year = The desired year for the selected date $(LPAREN)within [glib.date_time.DateTime]
    *     limits, i.e. from 0001 to 9999$(RPAREN).
    */
   void setYear(int year)

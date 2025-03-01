@@ -6,7 +6,7 @@ import arrow.execute_node_options;
 import arrow.record_batch_reader;
 import arrow.schema;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class SinkNodeOptions : ExecuteNodeOptions

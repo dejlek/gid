@@ -3,7 +3,7 @@ module gtk.picture;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gdkpixbuf.pixbuf;
-import gid.gid;
+import gid.global;
 import gio.file;
 import gio.file_mixin;
 import gobject.object;
@@ -31,23 +31,23 @@ import gtk.widget;
  * “broken image” icon similar to that used in many web browsers.
  * If you want to handle errors in loading the file yourself,
  * for example by displaying an error message, then load the image with
- * [Gdk.Texture.newFromFile], then create the `GtkPicture` with
- * [Gtk.Picture.newForPaintable].
+ * [gdk.texture.Texture.newFromFile], then create the `GtkPicture` with
+ * [gtk.picture.Picture.newForPaintable].
  * Sometimes an application will want to avoid depending on external data
  * files, such as image files. See the documentation of `GResource` for details.
- * In this case, [Gtk.Picture.newForResource] and
- * [Gtk.Picture.setResource] should be used.
- * `GtkPicture` displays an image at its natural size. See [Gtk.Image]
+ * In this case, [gtk.picture.Picture.newForResource] and
+ * [gtk.picture.Picture.setResource] should be used.
+ * `GtkPicture` displays an image at its natural size. See [gtk.image.Image]
  * if you want to display a fixed-size image, such as an icon.
  * ## Sizing the paintable
  * You can influence how the paintable is displayed inside the `GtkPicture`
- * by changing property@Gtk.Picture:content-fit. See [Gtk.ContentFit]
+ * by changing property@Gtk.Picture:content-fit. See [gtk.ContentFit]
  * for details. property@Gtk.Picture:can-shrink can be unset to make sure
  * that paintables are never made smaller than their ideal size - but
  * be careful if you do not know the size of the paintable in use $(LPAREN)like
  * when displaying user-loaded images$(RPAREN). This can easily cause the picture to
- * grow larger than the screen. And [Gtk.Widget.halign] and
- * [Gtk.Widget.valign] can be used to make sure the paintable doesn't
+ * grow larger than the screen. And [gtk.widget.Widget.Align] and
+ * [gtk.widget.Widget.Align] can be used to make sure the paintable doesn't
  * fill all available space but is instead displayed at its original size.
  * ## CSS nodes
  * `GtkPicture` has a single CSS node with the name `picture`.
@@ -89,7 +89,7 @@ class Picture : Widget
    * If the file isn’t found or can’t be loaded, the resulting
    * `GtkPicture` is empty.
    * If you need to detect failures to load the file, use
-   * [Gdk.Texture.newFromFile] to load the file yourself,
+   * [gdk.texture.Texture.newFromFile] to load the file yourself,
    * then create the `GtkPicture` from the texture.
    * Params:
    *   file = a `GFile`
@@ -105,7 +105,7 @@ class Picture : Widget
 
   /**
    * Creates a new `GtkPicture` displaying the file filename.
-   * This is a utility function that calls [Gtk.Picture.newForFile].
+   * This is a utility function that calls [gtk.picture.Picture.newForFile].
    * See that function for details.
    * Params:
    *   filename = a filename
@@ -138,15 +138,15 @@ class Picture : Widget
 
   /**
    * Creates a new `GtkPicture` displaying pixbuf.
-   * This is a utility function that calls [Gtk.Picture.newForPaintable],
+   * This is a utility function that calls [gtk.picture.Picture.newForPaintable],
    * See that function for details.
    * The pixbuf must not be modified after passing it to this function.
    * Params:
    *   pixbuf = a `GdkPixbuf`
    * Returns: a new `GtkPicture`
 
-   * Deprecated: Use [Gtk.Picture.newForPaintable] and
-   *   [Gdk.Texture.newForPixbuf] instead
+   * Deprecated: Use [gtk.picture.Picture.newForPaintable] and
+   *   [gdk.texture.Texture.newForPixbuf] instead
    */
   static Picture newForPixbuf(Pixbuf pixbuf)
   {
@@ -158,7 +158,7 @@ class Picture : Widget
 
   /**
    * Creates a new `GtkPicture` displaying the resource at resource_path.
-   * This is a utility function that calls [Gtk.Picture.newForFile].
+   * This is a utility function that calls [gtk.picture.Picture.newForFile].
    * See that function for details.
    * Params:
    *   resourcePath = resource path to play back
@@ -199,7 +199,7 @@ class Picture : Widget
 
   /**
    * Returns the fit mode for the content of the `GtkPicture`.
-   * See [Gtk.ContentFit] for details.
+   * See [gtk.ContentFit] for details.
    * Returns: the content fit mode
    */
   ContentFit getContentFit()
@@ -213,7 +213,7 @@ class Picture : Widget
   /**
    * Gets the `GFile` currently displayed if self is displaying a file.
    * If self is not displaying a file, for example when
-   * [Gtk.Picture.setPaintable] was used, then %NULL is returned.
+   * [gtk.picture.Picture.setPaintable] was used, then %NULL is returned.
    * Returns: The `GFile` displayed by self.
    */
   File getFile()
@@ -228,7 +228,7 @@ class Picture : Widget
    * Returns whether the `GtkPicture` preserves its contents aspect ratio.
    * Returns: %TRUE if the self tries to keep the contents' aspect ratio
 
-   * Deprecated: Use [Gtk.Picture.getContentFit] instead. This will
+   * Deprecated: Use [gtk.picture.Picture.getContentFit] instead. This will
    *   now return `FALSE` only if propertyGtk.Picture:content-fit is
    *   `GTK_CONTENT_FIT_FILL`. Returns `TRUE` otherwise.
    */
@@ -269,10 +269,10 @@ class Picture : Widget
    * If set to %TRUE, the self can be made smaller than its contents.
    * The contents will then be scaled down when rendering.
    * If you want to still force a minimum size manually, consider using
-   * [Gtk.Widget.setSizeRequest].
+   * [gtk.widget.Widget.setSizeRequest].
    * Also of note is that a similar function for growing does not exist
    * because the grow behavior can be controlled via
-   * [Gtk.Widget.setHalign] and [Gtk.Widget.setValign].
+   * [gtk.widget.Widget.setHalign] and [gtk.widget.Widget.setValign].
    * Params:
    *   canShrink = if self can be made smaller than its contents
    */
@@ -283,7 +283,7 @@ class Picture : Widget
 
   /**
    * Sets how the content should be resized to fit the `GtkPicture`.
-   * See [Gtk.ContentFit] for details.
+   * See [gtk.ContentFit] for details.
    * Params:
    *   contentFit = the content fit mode
    */
@@ -294,7 +294,7 @@ class Picture : Widget
 
   /**
    * Makes self load and display file.
-   * See [Gtk.Picture.newForFile] for details.
+   * See [gtk.picture.Picture.newForFile] for details.
    * Params:
    *   file = a `GFile`
    */
@@ -305,7 +305,7 @@ class Picture : Widget
 
   /**
    * Makes self load and display the given filename.
-   * This is a utility function that calls [Gtk.Picture.setFile].
+   * This is a utility function that calls [gtk.picture.Picture.setFile].
    * Params:
    *   filename = the filename to play
    */
@@ -325,7 +325,7 @@ class Picture : Widget
    * Params:
    *   keepAspectRatio = whether to keep aspect ratio
 
-   * Deprecated: Use [Gtk.Picture.setContentFit] instead. If still
+   * Deprecated: Use [gtk.picture.Picture.setContentFit] instead. If still
    *   used, this method will always set the propertyGtk.Picture:content-fit
    *   property to `GTK_CONTENT_FIT_CONTAIN` if keep_aspect_ratio is true,
    *   otherwise it will set it to `GTK_CONTENT_FIT_FILL`.
@@ -338,7 +338,7 @@ class Picture : Widget
   /**
    * Makes self display the given paintable.
    * If paintable is %NULL, nothing will be displayed.
-   * See [Gtk.Picture.newForPaintable] for details.
+   * See [gtk.picture.Picture.newForPaintable] for details.
    * Params:
    *   paintable = a `GdkPaintable`
    */
@@ -349,12 +349,12 @@ class Picture : Widget
 
   /**
    * Sets a `GtkPicture` to show a `GdkPixbuf`.
-   * See [Gtk.Picture.newForPixbuf] for details.
-   * This is a utility function that calls [Gtk.Picture.setPaintable].
+   * See [gtk.picture.Picture.newForPixbuf] for details.
+   * This is a utility function that calls [gtk.picture.Picture.setPaintable].
    * Params:
    *   pixbuf = a `GdkPixbuf`
 
-   * Deprecated: Use [Gtk.Picture.setPaintable] instead
+   * Deprecated: Use [gtk.picture.Picture.setPaintable] instead
    */
   void setPixbuf(Pixbuf pixbuf)
   {
@@ -364,7 +364,7 @@ class Picture : Widget
   /**
    * Makes self load and display the resource at the given
    * resource_path.
-   * This is a utility function that calls [Gtk.Picture.setFile].
+   * This is a utility function that calls [gtk.picture.Picture.setFile].
    * Params:
    *   resourcePath = the resource to set
    */

@@ -6,13 +6,13 @@ import gdk.c.types;
 import gdk.display;
 import gdk.surface;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**
  * Base class for objects implementing different rendering methods.
  * `GdkDrawContext` is the base object used by contexts implementing different
- * rendering methods, such as [Gdk.CairoContext] or [Gdk.GLContext].
+ * rendering methods, such as [gdk.cairo_context.CairoContext] or [gdk.glcontext.GLContext].
  * It provides shared functionality between those contexts.
  * You will always interact with one of those subclasses.
  * A `GdkDrawContext` is always associated with a single toplevel surface.
@@ -42,19 +42,19 @@ class DrawContext : ObjectG
    * Calling this function begins a drawing operation using context on the
    * surface that context was created from. The actual requirements and
    * guarantees for the drawing operation vary for different implementations
-   * of drawing, so a [Gdk.CairoContext] and a [Gdk.GLContext]
+   * of drawing, so a [gdk.cairo_context.CairoContext] and a [gdk.glcontext.GLContext]
    * need to be treated differently.
    * A call to this function is a requirement for drawing and must be
-   * followed by a call to [Gdk.DrawContext.endFrame], which will
+   * followed by a call to [gdk.draw_context.DrawContext.endFrame], which will
    * complete the drawing operation and ensure the contents become visible
    * on screen.
    * Note that the region passed to this function is the minimum region that
    * needs to be drawn and depending on implementation, windowing system and
    * hardware in use, it might be necessary to draw a larger region. Drawing
-   * implementation must use [Gdk.DrawContext.getFrameRegion] to
+   * implementation must use [gdk.draw_context.DrawContext.getFrameRegion] to
    * query the region that must be drawn.
    * When using GTK, the widget system automatically places calls to
-   * [Gdk.DrawContext.beginFrame] and [Gdk.DrawContext.endFrame] via the
+   * [gdk.draw_context.DrawContext.beginFrame] and [gdk.draw_context.DrawContext.endFrame] via the
    * use of [GskRenderer](../gsk4/class.Renderer.html)s, so application code
    * does not need to call these functions explicitly.
    * Params:
@@ -66,10 +66,10 @@ class DrawContext : ObjectG
   }
 
   /**
-   * Ends a drawing operation started with [Gdk.DrawContext.beginFrame].
+   * Ends a drawing operation started with [gdk.draw_context.DrawContext.beginFrame].
    * This makes the drawing available on screen.
-   * See [Gdk.DrawContext.beginFrame] for more details about drawing.
-   * When using a [Gdk.GLContext], this function may call `glFlush()`
+   * See [gdk.draw_context.DrawContext.beginFrame] for more details about drawing.
+   * When using a [gdk.glcontext.GLContext], this function may call `glFlush()`
    * implicitly before returning; it is not recommended to call `glFlush$(LPAREN)$(RPAREN)`
    * explicitly before calling this function.
    */
@@ -92,11 +92,11 @@ class DrawContext : ObjectG
 
   /**
    * Retrieves the region that is currently being repainted.
-   * After a call to [Gdk.DrawContext.beginFrame] this function will
+   * After a call to [gdk.draw_context.DrawContext.beginFrame] this function will
    * return a union of the region passed to that function and the area of the
    * surface that the context determined needs to be repainted.
-   * If context is not in between calls to [Gdk.DrawContext.beginFrame]
-   * and [Gdk.DrawContext.endFrame], %NULL will be returned.
+   * If context is not in between calls to [gdk.draw_context.DrawContext.beginFrame]
+   * and [gdk.draw_context.DrawContext.endFrame], %NULL will be returned.
    * Returns: a Cairo region
    */
   Region getFrameRegion()
@@ -121,11 +121,11 @@ class DrawContext : ObjectG
 
   /**
    * Returns %TRUE if context is in the process of drawing to its surface.
-   * This is the case between calls to [Gdk.DrawContext.beginFrame]
-   * and [Gdk.DrawContext.endFrame]. In this situation, drawing commands
+   * This is the case between calls to [gdk.draw_context.DrawContext.beginFrame]
+   * and [gdk.draw_context.DrawContext.endFrame]. In this situation, drawing commands
    * may be effecting the contents of the context's surface.
-   * Returns: %TRUE if the context is between [Gdk.DrawContext.beginFrame]
-   *   and [Gdk.DrawContext.endFrame] calls.
+   * Returns: %TRUE if the context is between [gdk.draw_context.DrawContext.beginFrame]
+   *   and [gdk.draw_context.DrawContext.endFrame] calls.
    */
   bool isInFrame()
   {
