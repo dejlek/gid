@@ -1,6 +1,6 @@
 module harfbuzz.ot_math_glyph_variant;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;

@@ -2,7 +2,7 @@ module gtk.text_view;
 
 import gdk.event;
 import gdk.rectangle;
-import gid.gid;
+import gid.global;
 import gio.menu_model;
 import gobject.dclosure;
 import gobject.object;
@@ -28,7 +28,7 @@ import pango.context;
 import pango.tab_array;
 
 /**
- * A widget that displays the contents of a [Gtk.TextBuffer].
+ * A widget that displays the contents of a [gtk.text_buffer.TextBuffer].
  * ![An example GtkTextview](multiline-text.png)
  * You may wish to begin by reading the [conceptual overview](section-text-widget.html),
  * which gives an overview of all the objects and data types related to the
@@ -78,10 +78,10 @@ class TextView : Widget, AccessibleText, Scrollable
 
   /**
    * Creates a new `GtkTextView`.
-   * If you don’t call [Gtk.TextView.setBuffer] before using the
+   * If you don’t call [gtk.text_view.TextView.setBuffer] before using the
    * text view, an empty default buffer will be created for you. Get the
-   * buffer with [Gtk.TextView.getBuffer]. If you want to specify
-   * your own buffer, consider [Gtk.TextView.newWithBuffer].
+   * buffer with [gtk.text_view.TextView.getBuffer]. If you want to specify
+   * your own buffer, consider [gtk.text_view.TextView.newWithBuffer].
    * Returns: a new `GtkTextView`
    */
   this()
@@ -95,7 +95,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Creates a new `GtkTextView` widget displaying the buffer buffer.
    * One buffer can be shared among many widgets. buffer may be %NULL
    * to create a default buffer, in which case this function is equivalent
-   * to [Gtk.TextView.new_]. The text view adds its own reference count
+   * to [gtk.text_view.TextView.new_]. The text view adds its own reference count
    * to the buffer; it does not take over an existing reference.
    * Params:
    *   buffer = a `GtkTextBuffer`
@@ -123,7 +123,7 @@ class TextView : Widget, AccessibleText, Scrollable
   /**
    * Adds child at a fixed coordinate in the `GtkTextView`'s text window.
    * The xpos and ypos must be in buffer coordinates $(LPAREN)see
-   * [Gtk.TextView.getIterLocation] to convert to
+   * [gtk.text_view.TextView.getIterLocation] to convert to
    * buffer coordinates$(RPAREN).
    * child will scroll with the text view.
    * If instead you want a widget that will not move with the
@@ -234,7 +234,7 @@ class TextView : Widget, AccessibleText, Scrollable
 
   /**
    * Returns whether pressing the <kbd>Tab</kbd> key inserts a tab characters.
-   * See [Gtk.TextView.setAcceptsTab].
+   * See [gtk.text_view.TextView.setAcceptsTab].
    * Returns: %TRUE if pressing the Tab key inserts a tab character,
    *   %FALSE if pressing the Tab key moves the keyboard focus.
    */
@@ -285,7 +285,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * returned locations will be adjusted to account for the preedit
    * cursor’s offset within the preedit sequence.
    * The rectangle position is in buffer coordinates; use
-   * [Gtk.TextView.bufferToWindowCoords] to convert these
+   * [gtk.text_view.TextView.bufferToWindowCoords] to convert these
    * coordinates to coordinates for one of the windows in the text view.
    * Params:
    *   iter = a `GtkTextIter`
@@ -339,7 +339,7 @@ class TextView : Widget, AccessibleText, Scrollable
 
   /**
    * Gets a `GtkWidget` that has previously been set as gutter.
-   * See [Gtk.TextView.setGutter].
+   * See [gtk.text_view.TextView.setGutter].
    * win must be one of %GTK_TEXT_WINDOW_LEFT, %GTK_TEXT_WINDOW_RIGHT,
    * %GTK_TEXT_WINDOW_TOP, or %GTK_TEXT_WINDOW_BOTTOM.
    * Params:
@@ -396,7 +396,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Buffer coordinates are coordinates for the entire buffer, not just
    * the currently-displayed portion. If you have coordinates from an
    * event, you have to convert those to buffer coordinates with
-   * [Gtk.TextView.windowToBufferCoords].
+   * [gtk.text_view.TextView.windowToBufferCoords].
    * Params:
    *   iter = a `GtkTextIter`
    *   x = x position, in buffer coordinates
@@ -418,8 +418,8 @@ class TextView : Widget, AccessibleText, Scrollable
    * Buffer coordinates are coordinates for the entire buffer, not just
    * the currently-displayed portion. If you have coordinates from an event,
    * you have to convert those to buffer coordinates with
-   * [Gtk.TextView.windowToBufferCoords].
-   * Note that this is different from [Gtk.TextView.getIterAtLocation],
+   * [gtk.text_view.TextView.windowToBufferCoords].
+   * Note that this is different from [gtk.text_view.TextView.getIterAtLocation],
    * which returns cursor locations, i.e. positions between characters.
    * Params:
    *   iter = a `GtkTextIter`
@@ -443,7 +443,7 @@ class TextView : Widget, AccessibleText, Scrollable
   /**
    * Gets a rectangle which roughly contains the character at iter.
    * The rectangle position is in buffer coordinates; use
-   * [Gtk.TextView.bufferToWindowCoords] to convert these
+   * [gtk.text_view.TextView.bufferToWindowCoords] to convert these
    * coordinates to coordinates for one of the windows in the text view.
    * Params:
    *   iter = a `GtkTextIter`
@@ -485,7 +485,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Gets the `GtkTextIter` at the start of the line containing
    * the coordinate y.
    * y is in buffer coordinates, convert from window coordinates with
-   * [Gtk.TextView.windowToBufferCoords]. If non-%NULL,
+   * [gtk.text_view.TextView.windowToBufferCoords]. If non-%NULL,
    * line_top will be filled with the coordinate of the top edge
    * of the line.
    * Params:
@@ -504,7 +504,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Gets the y coordinate of the top of the line containing iter,
    * and the height of the line.
    * The coordinate is a buffer coordinate; convert to window
-   * coordinates with [Gtk.TextView.bufferToWindowCoords].
+   * coordinates with [gtk.text_view.TextView.bufferToWindowCoords].
    * Params:
    *   iter = a `GtkTextIter`
    *   y = return location for a y coordinate
@@ -553,7 +553,7 @@ class TextView : Widget, AccessibleText, Scrollable
 
   /**
    * Gets the default number of pixels to put above paragraphs.
-   * Adding this function with [Gtk.TextView.getPixelsBelowLines]
+   * Adding this function with [gtk.text_view.TextView.getPixelsBelowLines]
    * is equal to the line space between each paragraph.
    * Returns: default number of pixels above paragraphs
    */
@@ -567,7 +567,7 @@ class TextView : Widget, AccessibleText, Scrollable
   /**
    * Gets the default number of pixels to put below paragraphs.
    * The line space is the sum of the value returned by this function and
-   * the value returned by [Gtk.TextView.getPixelsAboveLines].
+   * the value returned by [gtk.text_view.TextView.getPixelsAboveLines].
    * Returns: default number of blank pixels below paragraphs
    */
   int getPixelsBelowLines()
@@ -619,10 +619,10 @@ class TextView : Widget, AccessibleText, Scrollable
    * Gets the default tabs for text_view.
    * Tags in the buffer may override the defaults. The returned array
    * will be %NULL if “standard” $(LPAREN)8-space$(RPAREN) tabs are used. Free the
-   * return value with [Pango.TabArray.free].
+   * return value with [pango.tab_array.TabArray.free].
    * Returns: copy of default tab array,
    *   or %NULL if standard tabs are used; must be freed with
-   *   [Pango.TabArray.free].
+   *   [pango.tab_array.TabArray.free].
    */
   TabArray getTabs()
   {
@@ -647,7 +647,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Fills visible_rect with the currently-visible
    * region of the buffer, in buffer coordinates.
    * Convert to window coordinates with
-   * [Gtk.TextView.bufferToWindowCoords].
+   * [gtk.text_view.TextView.bufferToWindowCoords].
    * Params:
    *   visibleRect = rectangle to fill
    */
@@ -674,7 +674,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Allow the `GtkTextView` input method to internally handle key press
    * and release events.
    * If this function returns %TRUE, then no further processing should be
-   * done for this key event. See [Gtk.IMContext.filterKeypress].
+   * done for this key event. See [gtk.imcontext.IMContext.filterKeypress].
    * Note that you are expected to call this function from your handler
    * when overriding key event handling. This is needed in the case when
    * you need to insert your own key handling between the input method
@@ -722,9 +722,9 @@ class TextView : Widget, AccessibleText, Scrollable
 
   /**
    * Updates the position of a child.
-   * See [Gtk.TextView.addOverlay].
+   * See [gtk.text_view.TextView.addOverlay].
    * Params:
-   *   child = a widget already added with [Gtk.TextView.addOverlay]
+   *   child = a widget already added with [gtk.text_view.TextView.addOverlay]
    *   xpos = new X position in buffer coordinates
    *   ypos = new Y position in buffer coordinates
    */
@@ -825,7 +825,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * lines in the text buffer. Line heights are computed in an idle
    * handler; so this function may not have the desired effect if it’s
    * called before the height computations. To avoid oddness, consider
-   * using [Gtk.TextView.scrollToMark] which saves a point to be
+   * using [gtk.text_view.TextView.scrollToMark] which saves a point to be
    * scrolled to after line validation.
    * Params:
    *   iter = a `GtkTextIter`
@@ -1120,7 +1120,7 @@ class TextView : Widget, AccessibleText, Scrollable
 
   /**
    * Determines whether iter is at the start of a display line.
-   * See [Gtk.TextView.forwardDisplayLine] for an
+   * See [gtk.text_view.TextView.forwardDisplayLine] for an
    * explanation of display lines vs. paragraphs.
    * Params:
    *   iter = a `GtkTextIter`
@@ -1404,7 +1404,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * If the cursor is not visible in text_view, this signal causes
    * the viewport to be moved instead.
    * Applications should not connect to it, but may emit it with
-   * [GObject.Global.signalEmitByName] if they need to control the cursor
+   * [gobject.global.signalEmitByName] if they need to control the cursor
    * programmatically.
    * The default bindings for this signal come in two variants,
    * the variant with the <kbd>Shift</kbd> modifier extends the

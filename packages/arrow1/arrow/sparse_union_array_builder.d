@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.sparse_union_data_type;
 import arrow.types;
 import arrow.union_array_builder;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class SparseUnionArrayBuilder : UnionArrayBuilder

@@ -1,6 +1,6 @@
 module glib.hook;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.hook_list;
@@ -109,7 +109,7 @@ class Hook
 
   /**
    * Removes one #GHook from a #GHookList, marking it
-   * inactive and calling [GLib.Hook.unref] on it.
+   * inactive and calling [glib.hook.Hook.unref] on it.
    * Params:
    *   hookList = a #GHookList
    *   hook = the #GHook to remove
@@ -180,7 +180,7 @@ class Hook
   /**
    * Decrements the reference count of a #GHook.
    * If the reference count falls to 0, the #GHook is removed
-   * from the #GHookList and [GLib.Hook.free] is called to free it.
+   * from the #GHookList and [glib.hook.Hook.free] is called to free it.
    * Params:
    *   hookList = a #GHookList
    *   hook = the #GHook to unref

@@ -1,6 +1,6 @@
 module gtk.link_button;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -20,12 +20,12 @@ import gtk.types;
  * A `GtkLinkButton` is a button with a hyperlink.
  * ![An example GtkLinkButton](link-button.png)
  * It is useful to show quick links to resources.
- * A link button is created by calling either [Gtk.LinkButton.new_] or
- * [Gtk.LinkButton.newWithLabel]. If using the former, the URI you
+ * A link button is created by calling either [gtk.link_button.LinkButton.new_] or
+ * [gtk.link_button.LinkButton.newWithLabel]. If using the former, the URI you
  * pass to the constructor is used as a label for the widget.
  * The URI bound to a `GtkLinkButton` can be set specifically using
- * [Gtk.LinkButton.setUri].
- * By default, `GtkLinkButton` calls [Gtk.FileLauncher.launch] when the button
+ * [gtk.link_button.LinkButton.setUri].
+ * By default, `GtkLinkButton` calls [gtk.file_launcher.FileLauncher.launch] when the button
  * is clicked. This behaviour can be overridden by connecting to the
  * signal@Gtk.LinkButton::activate-link signal and returning %TRUE from
  * the signal handler.
@@ -102,7 +102,7 @@ class LinkButton : Button
    * Retrieves the “visited” state of the `GtkLinkButton`.
    * The button becomes visited when it is clicked. If the URI
    * is changed on the button, the “visited” state is unset again.
-   * The state may also be changed using [Gtk.LinkButton.setVisited].
+   * The state may also be changed using [gtk.link_button.LinkButton.setVisited].
    * Returns: %TRUE if the link has been visited, %FALSE otherwise
    */
   bool getVisited()
@@ -126,7 +126,7 @@ class LinkButton : Button
 
   /**
    * Sets the “visited” state of the `GtkLinkButton`.
-   * See [Gtk.LinkButton.getVisited] for more details.
+   * See [gtk.link_button.LinkButton.getVisited] for more details.
    * Params:
    *   visited = the new “visited” state
    */
@@ -137,8 +137,8 @@ class LinkButton : Button
 
   /**
    * Emitted each time the `GtkLinkButton` is clicked.
-   * The default handler will call [Gtk.FileLauncher.launch] with the URI
-   * stored inside the [Gtk.LinkButton.uri] property.
+   * The default handler will call [gtk.file_launcher.FileLauncher.launch] with the URI
+   * stored inside the [gtk.link_button.LinkButton.utf8] property.
    * To override the default behavior, you can connect to the
    * ::activate-link signal and stop the propagation of the signal
    * by returning %TRUE from your handler.

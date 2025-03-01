@@ -6,7 +6,7 @@ import gdk.cursor;
 import gdk.display;
 import gdk.frame_clock;
 import gdk.rgba;
-import gid.gid;
+import gid.global;
 import gio.action_group;
 import gio.action_group_mixin;
 import gio.list_model;
@@ -72,23 +72,23 @@ import pango.layout;
  * The geometry management system will query a widget hierarchy in
  * only one orientation at a time. When widgets are initially queried
  * for their minimum sizes it is generally done in two initial passes
- * in the [Gtk.SizeRequestMode] chosen by the toplevel.
+ * in the [gtk.SizeRequestMode] chosen by the toplevel.
  * For example, when queried in the normal %GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH mode:
  * First, the default minimum and natural width for each widget
- * in the interface will be computed using [Gtk.Widget.measure] with an
+ * in the interface will be computed using [gtk.widget.Widget.measure] with an
  * orientation of %GTK_ORIENTATION_HORIZONTAL and a for_size of -1.
  * Because the preferred widths for each widget depend on the preferred
  * widths of their children, this information propagates up the hierarchy,
  * and finally a minimum and natural width is determined for the entire
  * toplevel. Next, the toplevel will use the minimum width to query for the
- * minimum height contextual to that width using [Gtk.Widget.measure] with an
+ * minimum height contextual to that width using [gtk.widget.Widget.measure] with an
  * orientation of %GTK_ORIENTATION_VERTICAL and a for_size of the just computed
  * width. This will also be a highly recursive operation. The minimum height
  * for the minimum width is normally used to set the minimum size constraint
  * on the toplevel.
  * After the toplevel window has initially requested its size in both
  * dimensions it can go on to allocate itself a reasonable size $(LPAREN)or a size
- * previously specified with [Gtk.Window.setDefaultSize]$(RPAREN). During the
+ * previously specified with [gtk.window.Window.setDefaultSize]$(RPAREN). During the
  * recursive allocation process it’s important to note that request cycles
  * will be recursively executed while widgets allocate their children.
  * Each widget, once allocated a size, will go on to first share the
@@ -103,7 +103,7 @@ import pango.layout;
  * allocated size then it must support the request in both
  * `GtkSizeRequestMode`s even if the widget in question only
  * trades sizes in a single orientation.
- * For instance, a [Gtk.Label] that does height-for-width word wrapping
+ * For instance, a [gtk.label.Label] that does height-for-width word wrapping
  * will not expect to have vfunc@Gtk.Widget.measure with an orientation of
  * %GTK_ORIENTATION_VERTICAL called because that call is specific to a
  * width-for-height request. In this case the label must return the height
@@ -152,17 +152,17 @@ import pango.layout;
  * may need to know its natural size. In these cases, the widget should
  * be careful to call its virtual methods directly, like in the code
  * example above.
- * It will not work to use the wrapper function [Gtk.Widget.measure]
+ * It will not work to use the wrapper function [gtk.widget.Widget.measure]
  * inside your own vfunc@Gtk.Widget.size_allocate implementation.
- * These return a request adjusted by [Gtk.SizeGroup], the widget's
+ * These return a request adjusted by [gtk.size_group.SizeGroup], the widget's
  * align and expand flags, as well as its CSS style.
  * If a widget used the wrappers inside its virtual method implementations,
  * then the adjustments $(LPAREN)such as widget margins$(RPAREN) would be applied
  * twice. GTK therefore does not allow this and will warn if you try
  * to do it.
  * Of course if you are getting the size request for another widget, such
- * as a child widget, you must use [Gtk.Widget.measure]; otherwise, you
- * would not properly consider widget margins, [Gtk.SizeGroup], and
+ * as a child widget, you must use [gtk.widget.Widget.measure]; otherwise, you
+ * would not properly consider widget margins, [gtk.size_group.SizeGroup], and
  * so forth.
  * GTK also supports baseline vertical alignment of widgets. This
  * means that widgets are positioned such that the typographical baseline of
@@ -175,14 +175,14 @@ import pango.layout;
  * both a minimum and natural size.
  * If a widget ends up baseline aligned it will be allocated all the space in
  * the parent as if it was %GTK_ALIGN_FILL, but the selected baseline can be
- * found via [Gtk.Widget.getBaseline]. If the baseline has a
+ * found via [gtk.widget.Widget.getBaseline]. If the baseline has a
  * value other than -1 you need to align the widget such that the baseline
  * appears at the position.
  * ### GtkWidget as GtkBuildable
  * The `GtkWidget` implementation of the `GtkBuildable` interface
  * supports various custom elements to specify additional aspects of widgets
  * that are not directly expressed as properties.
- * If the widget uses a [Gtk.LayoutManager], `GtkWidget` supports
+ * If the widget uses a [gtk.layout_manager.LayoutManager], `GtkWidget` supports
  * a custom `<layout>` element, used to define layout properties:
  * ```xml
  * <object class\="GtkGrid" id\="my_grid">
@@ -234,10 +234,10 @@ import pango.layout;
  * of creating composite widgets using "templates".
  * To create composite widgets with `GtkBuilder` XML, one must associate
  * the interface description with the widget class at class initialization
- * time using [Gtk.WidgetClass.setTemplate].
+ * time using [gtk.widget_class.WidgetClass.setTemplate].
  * The interface description semantics expected in composite template descriptions
- * is slightly different from regular [Gtk.Builder] XML.
- * Unlike regular interface descriptions, [Gtk.WidgetClass.setTemplate]
+ * is slightly different from regular [gtk.builder.Builder] XML.
+ * Unlike regular interface descriptions, [gtk.widget_class.WidgetClass.setTemplate]
  * will expect a `<template>` tag as a direct child of the toplevel
  * `<interface>` tag. The `<template>` tag must specify the “class” attribute
  * which must be the type name of the widget. Optionally, the “parent”
@@ -281,7 +281,7 @@ import pango.layout;
  * ```
  * Typically, you'll place the template fragment into a file that is
  * bundled with your project, using `GResource`. In order to load the
- * template, you need to call [Gtk.WidgetClass.setTemplateFromResource]
+ * template, you need to call [gtk.widget_class.WidgetClass.setTemplateFromResource]
  * from the class initialization of your `GtkWidget` type:
  * ```c
  * static void
@@ -292,7 +292,7 @@ import pango.layout;
  * "/com/example/ui/foowidget.ui"$(RPAREN);
  * }
  * ```
- * You will also need to call [Gtk.Widget.initTemplate] from the
+ * You will also need to call [gtk.widget.Widget.initTemplate] from the
  * instance initialization function:
  * ```c
  * static void
@@ -302,7 +302,7 @@ import pango.layout;
  * // Initialize the rest of the widget...
  * }
  * ```
- * as well as calling [Gtk.Widget.disposeTemplate] from the dispose
+ * as well as calling [gtk.widget.Widget.disposeTemplate] from the dispose
  * function:
  * ```c
  * static void
@@ -316,10 +316,10 @@ import pango.layout;
  * }
  * ```
  * You can access widgets defined in the template using the
- * [Gtk.Widget.getTemplateChild] function, but you will typically declare
+ * [gtk.widget.Widget.getTemplateChild] function, but you will typically declare
  * a pointer in the instance private data structure of your type using the same
  * name as the widget in the template definition, and call
- * [Gtk.WidgetClass.bindTemplateChildFull] $(LPAREN)or one of its wrapper macros
+ * [gtk.widget_class.WidgetClass.bindTemplateChildFull] $(LPAREN)or one of its wrapper macros
  * func@Gtk.widget_class_bind_template_child and func@Gtk.widget_class_bind_template_child_private$(RPAREN)
  * with that name, e.g.
  * ```c
@@ -352,7 +352,7 @@ import pango.layout;
  * gtk_widget_init_template $(LPAREN)GTK_WIDGET $(LPAREN)widget$(RPAREN)$(RPAREN);
  * }
  * ```
- * You can also use [Gtk.WidgetClass.bindTemplateCallbackFull] $(LPAREN)or
+ * You can also use [gtk.widget_class.WidgetClass.bindTemplateCallbackFull] $(LPAREN)or
  * is wrapper macro func@Gtk.widget_class_bind_template_callback$(RPAREN) to connect
  * a signal callback defined in the template with a function visible in the
  * scope of the class, e.g.
@@ -400,7 +400,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Obtains the current default reading direction.
-   * See [Gtk.Widget.setDefaultDirection].
+   * See [gtk.widget.Widget.setDefaultDirection].
    * Returns: the current default direction.
    */
   static TextDirection getDefaultDirection()
@@ -413,7 +413,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Sets the default reading direction for widgets.
-   * See [Gtk.Widget.setDirection].
+   * See [gtk.widget.Widget.setDirection].
    * Params:
    *   dir = the new default direction. This cannot be %GTK_TEXT_DIR_NONE.
    */
@@ -424,7 +424,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Enable or disable an action installed with
-   * [Gtk.WidgetClass.installAction].
+   * [gtk.widget_class.WidgetClass.installAction].
    * Params:
    *   actionName = action name, such as "clipboard.paste"
    *   enabled = whether the action is now enabled
@@ -439,12 +439,12 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * For widgets that can be “activated” $(LPAREN)buttons, menu items, etc.$(RPAREN),
    * this function activates them.
    * The activation will emit the signal set using
-   * [Gtk.WidgetClass.setActivateSignal] during class initialization.
+   * [gtk.widget_class.WidgetClass.setActivateSignal] during class initialization.
    * Activation is what happens when you press <kbd>Enter</kbd>
    * on a widget during key navigation.
    * If you wish to handle the activation keybinding yourself, it is
-   * recommended to use [Gtk.WidgetClass.addShortcut] with an action
-   * created with [Gtk.SignalAction.new_].
+   * recommended to use [gtk.widget_class.WidgetClass.addShortcut] with an action
+   * created with [gtk.signal_action.SignalAction.new_].
    * If widget isn't activatable, the function returns %FALSE.
    * Returns: %TRUE if the widget was activatable
    */
@@ -459,11 +459,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Looks up the action in the action groups associated with
    * widget and its ancestors, and activates it.
    * If the action is in an action group added with
-   * [Gtk.Widget.insertActionGroup], the name is expected
+   * [gtk.widget.Widget.insertActionGroup], the name is expected
    * to be prefixed with the prefix that was used when the group was
    * inserted.
    * The arguments must match the actions expected parameter type,
-   * as returned by `[Gio.Action.getParameterType]`.
+   * as returned by `[gio.action.Action.getParameterType]`.
    * Params:
    *   name = the name of the action to activate
    *   args = parameters to use
@@ -489,7 +489,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Adds controller to widget so that it will receive events.
    * You will usually want to call this function right after
-   * creating any kind of [Gtk.EventController].
+   * creating any kind of [gtk.event_controller.EventController].
    * Params:
    *   controller = a `GtkEventController` that hasn't been
    *     added to a widget yet
@@ -503,7 +503,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Adds a style class to widget.
    * After calling this function, the widget’s style will match
    * for css_class, according to CSS matching rules.
-   * Use [Gtk.Widget.removeCssClass] to remove the
+   * Use [gtk.widget.Widget.removeCssClass] to remove the
    * style again.
    * Params:
    *   cssClass = The style class to add to widget, without
@@ -517,7 +517,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Adds a widget to the list of mnemonic labels for this widget.
-   * See [Gtk.Widget.listMnemonicLabels]. Note the
+   * See [gtk.widget.Widget.listMnemonicLabels]. Note the
    * list of mnemonic labels for the widget is cleared when the
    * widget is destroyed, so the caller must make sure to update
    * its internal state at this point as well.
@@ -540,20 +540,20 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * imply a relayout or repaint. If you want a repaint or relayout, and
    * aren’t changing widget properties that would trigger that $(LPAREN)for example,
    * changing the text of a `GtkLabel`$(RPAREN), then you will have to call
-   * [Gtk.Widget.queueResize] or [Gtk.Widget.queueDraw]
+   * [gtk.widget.Widget.queueResize] or [gtk.widget.Widget.queueDraw]
    * yourself.
-   * [Gdk.FrameClock.getFrameTime] should generally be used
+   * [gdk.frame_clock.FrameClock.getFrameTime] should generally be used
    * for timing continuous animations and
-   * [Gdk.FrameTimings.getPredictedPresentationTime] if you are
+   * [gdk.frame_timings.FrameTimings.getPredictedPresentationTime] if you are
    * trying to display isolated frames at particular times.
    * This is a more convenient alternative to connecting directly to the
-   * [Gdk.FrameClock.update] signal of `GdkFrameClock`, since you
+   * [gdk.frame_clock.FrameClock.update] signal of `GdkFrameClock`, since you
    * don't have to worry about when a `GdkFrameClock` is assigned to a widget.
    * Params:
    *   callback = function to call for updating animations
    * Returns: an id for the connection of this callback. Remove the callback
    *   by passing the id returned from this function to
-   *   [Gtk.Widget.removeTickCallback]
+   *   [gtk.widget.Widget.removeTickCallback]
    */
   uint addTickCallback(TickCallback callback)
   {
@@ -581,7 +581,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * The given allocation will be forced to be bigger than the
    * widget's minimum size, as well as at least 0×0 in size.
    * For a version that does not take a transform, see
-   * [Gtk.Widget.sizeAllocate].
+   * [gtk.widget.Widget.sizeAllocate].
    * Params:
    *   width = New width of widget
    *   height = New height of widget
@@ -604,11 +604,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * The default `focus$(LPAREN)$(RPAREN)` virtual function for a widget should return `TRUE` if
    * moving in direction left the focus on a focusable location inside that
    * widget, and `FALSE` if moving in direction moved the focus outside the
-   * widget. When returning `TRUE`, widgets normally call [Gtk.Widget.grabFocus]
+   * widget. When returning `TRUE`, widgets normally call [gtk.widget.Widget.grabFocus]
    * to place the focus accordingly; when returning `FALSE`, they don’t modify
    * the current focus location.
    * This function is used by custom widget implementations; if you're
-   * writing an app, you’d use [Gtk.Widget.grabFocus] to move
+   * writing an app, you’d use [gtk.widget.Widget.grabFocus] to move
    * the focus to a particular widget.
    * Params:
    *   direction = direction of focus movement
@@ -649,7 +649,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Computes whether a container should give this widget
    * extra space when possible.
    * Containers should check this, rather than looking at
-   * [Gtk.Widget.getHexpand] or [Gtk.Widget.getVexpand].
+   * [gtk.widget.Widget.getHexpand] or [gtk.widget.Widget.getVexpand].
    * This function already checks whether the widget is visible, so
    * visibility does not need to be checked separately. Non-visible
    * widgets are not expanded.
@@ -732,7 +732,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Creates a new `PangoContext` with the appropriate font map,
    * font options, font description, and base direction for drawing
    * text for this widget.
-   * See also [Gtk.Widget.getPangoContext].
+   * See also [gtk.widget.Widget.getPangoContext].
    * Returns: the new `PangoContext`
    */
   Context createPangoContext()
@@ -750,7 +750,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * If you keep a `PangoLayout` created in this way around,
    * you need to re-create it when the widget `PangoContext`
    * is replaced. This can be tracked by listening to changes
-   * of the [Gtk.Widget.root] property on the widget.
+   * of the [gtk.widget.Widget.Root] property on the widget.
    * Params:
    *   text = text to set on the layout
    * Returns: the new `PangoLayout`
@@ -766,13 +766,13 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Clears the template children for the given widget.
-   * This function is the opposite of [Gtk.Widget.initTemplate], and
+   * This function is the opposite of [gtk.widget.Widget.initTemplate], and
    * it is used to clear all the template children from a widget instance.
    * If you bound a template child to a field in the instance structure, or
    * in the instance private data structure, the field will be set to `NULL`
    * after this function returns.
    * You should call this function inside the `GObjectClass.dispose$(LPAREN)$(RPAREN)`
-   * implementation of any widget that called `[Gtk.Widget.initTemplate]`.
+   * implementation of any widget that called `[gtk.widget.Widget.initTemplate]`.
    * Typically, you will want to call this function last, right before
    * chaining up to the parent type's dispose implementation, e.g.
    * ```c
@@ -812,8 +812,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Notifies the user about an input-related error on this widget.
    * If the propertyGtk.Settings:gtk-error-bell setting is %TRUE,
-   * it calls [Gdk.Surface.beep], otherwise it does nothing.
-   * Note that the effect of [Gdk.Surface.beep] can be configured
+   * it calls [gdk.surface.Surface.beep], otherwise it does nothing.
+   * Note that the effect of [gdk.surface.Surface.beep] can be configured
    * in many ways, depending on the windowing backend and the desktop
    * environment or window manager that is used.
    */
@@ -829,7 +829,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * child widgets in `GtkWidget`Class.size_allocate$(LPAREN)$(RPAREN).
    * Returns: the baseline of the widget, or -1 if none
 
-   * Deprecated: Use [Gtk.Widget.getBaseline] instead
+   * Deprecated: Use [gtk.widget.Widget.getBaseline] instead
    */
   int getAllocatedBaseline()
   {
@@ -844,7 +844,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * system [overview](coordinates.html).
    * Returns: the height of the widget
 
-   * Deprecated: Use [Gtk.Widget.getHeight] instead
+   * Deprecated: Use [gtk.widget.Widget.getHeight] instead
    */
   int getAllocatedHeight()
   {
@@ -859,7 +859,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * system [overview](coordinates.html).
    * Returns: the width of the widget
 
-   * Deprecated: Use [Gtk.Widget.getWidth] instead
+   * Deprecated: Use [gtk.widget.Widget.getWidth] instead
    */
   int getAllocatedWidth()
   {
@@ -874,7 +874,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * gets the first `GtkBox` that’s an ancestor of widget. No
    * reference will be added to the returned widget; it should
    * not be unreferenced.
-   * Note that unlike [Gtk.Widget.isAncestor], this function
+   * Note that unlike [gtk.widget.Widget.isAncestor], this function
    * considers widget to be an ancestor of itself.
    * Params:
    *   widgetType = ancestor type
@@ -905,7 +905,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Determines whether the input focus can enter widget or any
    * of its children.
-   * See [Gtk.Widget.setFocusable].
+   * See [gtk.widget.Widget.setFocusable].
    * Returns: %TRUE if the input focus can enter widget, %FALSE otherwise
    */
   bool getCanFocus()
@@ -927,7 +927,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   }
 
   /**
-   * Gets the value set with [Gtk.Widget.setChildVisible].
+   * Gets the value set with [gtk.widget.Widget.setChildVisible].
    * If you feel a need to use this function, your code probably
    * needs reorganization.
    * This function is only useful for container implementations
@@ -977,7 +977,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns the list of style classes applied to widget.
    * Returns: a %NULL-terminated list of
    *   css classes currently applied to widget. The returned
-   *   list must freed using [GLib.Global.strfreev].
+   *   list must freed using [glib.global.strfreev].
    */
   string[] getCssClasses()
   {
@@ -1011,7 +1011,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Queries the cursor set on widget.
-   * See [Gtk.Widget.setCursor] for details.
+   * See [gtk.widget.Widget.setCursor] for details.
    * Returns: the cursor
    *   currently in use or %NULL if the cursor is inherited
    */
@@ -1025,7 +1025,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Gets the reading direction for a particular widget.
-   * See [Gtk.Widget.setDirection].
+   * See [gtk.widget.Widget.setDirection].
    * Returns: the reading direction for the widget.
    */
   TextDirection getDirection()
@@ -1084,7 +1084,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Returns whether the widget should grab focus when it is clicked
    * with the mouse.
-   * See [Gtk.Widget.setFocusOnClick].
+   * See [gtk.widget.Widget.setFocusOnClick].
    * Returns: %TRUE if the widget should grab focus when it is
    *   clicked with the mouse
    */
@@ -1097,7 +1097,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Determines whether widget can own the input focus.
-   * See [Gtk.Widget.setFocusable].
+   * See [gtk.widget.Widget.setFocusable].
    * Returns: %TRUE if widget can own the input focus, %FALSE otherwise
    */
   bool getFocusable()
@@ -1109,7 +1109,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Gets the font map of widget.
-   * See [Gtk.Widget.setFontMap].
+   * See [gtk.widget.Widget.setFontMap].
    * Returns: A `PangoFontMap`
    */
   FontMap getFontMap()
@@ -1122,7 +1122,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Returns the `cairo_font_options_t` of widget.
-   * Seee [Gtk.Widget.setFontOptions].
+   * Seee [gtk.widget.Widget.setFontOptions].
    * Returns: the `cairo_font_options_t`
    *   of widget
    */
@@ -1138,16 +1138,16 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Obtains the frame clock for a widget.
    * The frame clock is a global “ticker” that can be used to drive
    * animations and repaints. The most common reason to get the frame
-   * clock is to call [Gdk.FrameClock.getFrameTime], in order
+   * clock is to call [gdk.frame_clock.FrameClock.getFrameTime], in order
    * to get a time to use for animating. For example you might record
    * the start of the animation with an initial value from
-   * [Gdk.FrameClock.getFrameTime], and then update the animation
-   * by calling [Gdk.FrameClock.getFrameTime] again during each repaint.
-   * [Gdk.FrameClock.requestPhase] will result in a new frame on the
+   * [gdk.frame_clock.FrameClock.getFrameTime], and then update the animation
+   * by calling [gdk.frame_clock.FrameClock.getFrameTime] again during each repaint.
+   * [gdk.frame_clock.FrameClock.requestPhase] will result in a new frame on the
    * clock, but won’t necessarily repaint any widgets. To repaint a
-   * widget, you have to use [Gtk.Widget.queueDraw] which invalidates
+   * widget, you have to use [gtk.widget.Widget.queueDraw] which invalidates
    * the widget $(LPAREN)thus scheduling it to receive a draw on the next
-   * frame$(RPAREN). [Gtk.Widget.queueDraw] will also end up requesting a frame
+   * frame$(RPAREN). [gtk.widget.Widget.queueDraw] will also end up requesting a frame
    * on the appropriate frame clock.
    * A widget’s frame clock will not change while the widget is
    * mapped. Reparenting a widget $(LPAREN)which implies a temporary unmap$(RPAREN) can
@@ -1195,7 +1195,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * This function returns the height passed to its
    * size-allocate implementation, which is the height you
    * should be using in vfuncGtk.Widget.snapshot.
-   * For pointer events, see [Gtk.Widget.contains].
+   * For pointer events, see [gtk.widget.Widget.contains].
    * To learn more about widget sizes, see the coordinate
    * system [overview](coordinates.html).
    * Returns: The height of widget
@@ -1214,7 +1214,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * generally receive the extra space. For example, a list or
    * scrollable area or document in your window would often be set to
    * expand.
-   * Containers should use [Gtk.Widget.computeExpand] rather
+   * Containers should use [gtk.widget.Widget.computeExpand] rather
    * than this function, to see whether a widget, or any of its children,
    * has the expand flag set. If any child of a widget wants to
    * expand, the parent may ask to expand also.
@@ -1231,9 +1231,9 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   }
 
   /**
-   * Gets whether [Gtk.Widget.setHexpand] has been used
+   * Gets whether [gtk.widget.Widget.setHexpand] has been used
    * to explicitly set the expand flag on this widget.
-   * If [Gtk.Widget.hexpand] property is set, then it
+   * If [gtk.widget.Widget.gboolean] property is set, then it
    * overrides any computed expand value based on child widgets.
    * If `hexpand` is not set, then the expand value depends on
    * whether any children of the widget would like to expand.
@@ -1263,7 +1263,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Retrieves the layout manager used by widget.
-   * See [Gtk.Widget.setLayoutManager].
+   * See [gtk.widget.Widget.setLayoutManager].
    * Returns: a `GtkLayoutManager`
    */
   LayoutManager getLayoutManager()
@@ -1331,7 +1331,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Retrieves the name of a widget.
-   * See [Gtk.Widget.setName] for the significance of widget names.
+   * See [gtk.widget.Widget.setName] for the significance of widget names.
    * Returns: name of the widget. This string is owned by GTK and
    *   should not be modified or freed
    */
@@ -1373,7 +1373,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * #Fetches the requested opacity for this widget.
-   * See [Gtk.Widget.setOpacity].
+   * See [gtk.widget.Widget.setOpacity].
    * Returns: the requested opacity for this widget.
    */
   double getOpacity()
@@ -1398,12 +1398,12 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Gets a `PangoContext` with the appropriate font map, font description,
    * and base direction for this widget.
-   * Unlike the context returned by [Gtk.Widget.createPangoContext],
+   * Unlike the context returned by [gtk.widget.Widget.createPangoContext],
    * this context is owned by the widget $(LPAREN)it can be used until the screen
    * for the widget changes or the widget is removed from its toplevel$(RPAREN),
    * and will be updated to match any changes to the widget’s attributes.
    * This can be tracked by listening to changes of the
-   * [Gtk.Widget.root] property on the widget.
+   * [gtk.widget.Widget.Root] property on the widget.
    * Returns: the `PangoContext` for the widget.
    */
   Context getPangoContext()
@@ -1437,7 +1437,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * widget will generally be a smaller size than the minimum height, since
    * the required height for the natural width is generally smaller than the
    * required height for the minimum width.
-   * Use [Gtk.Widget.measure] if you want to support baseline alignment.
+   * Use [gtk.widget.Widget.measure] if you want to support baseline alignment.
    * Params:
    *   minimumSize = location for storing the minimum size
    *   naturalSize = location for storing the natural size
@@ -1495,7 +1495,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Determines whether widget is always treated as the default widget
    * within its toplevel when it has the focus, even if another widget
    * is the default.
-   * See [Gtk.Widget.setReceivesDefault].
+   * See [gtk.widget.Widget.setReceivesDefault].
    * Returns: %TRUE if widget acts as the default widget when focused,
    *   %FALSE otherwise
    */
@@ -1543,7 +1543,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * coordinates to the actual device pixels.
    * On traditional systems this is 1, on high density outputs,
    * it can be a higher value $(LPAREN)typically 2$(RPAREN).
-   * See [Gdk.Surface.getScaleFactor].
+   * See [gdk.surface.Surface.getScaleFactor].
    * Returns: the scale factor for widget
    */
   int getScaleFactor()
@@ -1556,10 +1556,10 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Returns the widget’s sensitivity.
    * This function returns the value that has been set using
-   * [Gtk.Widget.setSensitive]$(RPAREN).
+   * [gtk.widget.Widget.setSensitive]$(RPAREN).
    * The effective sensitivity of a widget is however determined
    * by both its own and its parent widget’s sensitivity.
-   * See [Gtk.Widget.isSensitive].
+   * See [gtk.widget.Widget.isSensitive].
    * Returns: %TRUE if the widget is sensitive
    */
   bool getSensitive()
@@ -1588,11 +1588,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Returns the content width or height of the widget.
    * Which dimension is returned depends on orientation.
-   * This is equivalent to calling [Gtk.Widget.getWidth]
-   * for %GTK_ORIENTATION_HORIZONTAL or [Gtk.Widget.getHeight]
+   * This is equivalent to calling [gtk.widget.Widget.getWidth]
+   * for %GTK_ORIENTATION_HORIZONTAL or [gtk.widget.Widget.getHeight]
    * for %GTK_ORIENTATION_VERTICAL, but can be used when
    * writing orientation-independent code, such as when
-   * implementing [Gtk.Orientable] widgets.
+   * implementing [gtk.orientable.Orientable] widgets.
    * To learn more about widget sizes, see the coordinate
    * system [overview](coordinates.html).
    * Params:
@@ -1608,12 +1608,12 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Gets the size request that was explicitly set for the widget using
-   * [Gtk.Widget.setSizeRequest].
+   * [gtk.widget.Widget.setSizeRequest].
    * A value of -1 stored in width or height indicates that that
    * dimension has not been set explicitly and the natural requisition
    * of the widget will be used instead. See
-   * [Gtk.Widget.setSizeRequest]. To get the size a widget will
-   * actually request, call [Gtk.Widget.measure] instead of
+   * [gtk.widget.Widget.setSizeRequest]. To get the size a widget will
+   * actually request, call [gtk.widget.Widget.measure] instead of
    * this function.
    * Params:
    *   width = return location for width
@@ -1630,8 +1630,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * state will be returned, that is, also based on parent insensitivity,
    * even if widget itself is sensitive.
    * Also note that if you are looking for a way to obtain the
-   * [Gtk.StateFlags] to pass to a [Gtk.StyleContext]
-   * method, you should look at [Gtk.StyleContext.getState].
+   * [gtk.StateFlags] to pass to a [gtk.style_context.StyleContext]
+   * method, you should look at [gtk.style_context.StyleContext.getState].
    * Returns: The state flags for widget
    */
   StateFlags getStateFlags()
@@ -1662,7 +1662,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Fetch an object build from the template XML for widget_type in
    * this widget instance.
    * This will only report children which were previously declared
-   * with [Gtk.WidgetClass.bindTemplateChildFull] or one of its
+   * with [gtk.widget_class.WidgetClass.bindTemplateChildFull] or one of its
    * variants.
    * This function is only meant to be called for code which is private
    * to the widget_type which declared the child and is meant for language
@@ -1685,7 +1685,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Gets the contents of the tooltip for widget.
    * If the tooltip has not been set using
-   * [Gtk.Widget.setTooltipMarkup], this
+   * [gtk.widget.Widget.setTooltipMarkup], this
    * function returns %NULL.
    * Returns: the tooltip text
    */
@@ -1700,7 +1700,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Gets the contents of the tooltip for widget.
    * If the widget's tooltip was set using
-   * [Gtk.Widget.setTooltipMarkup],
+   * [gtk.widget.Widget.setTooltipMarkup],
    * this function will return the escaped text.
    * Returns: the tooltip text
    */
@@ -1727,7 +1727,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Gets whether the widget would like any available extra vertical
    * space.
-   * See [Gtk.Widget.getHexpand] for more detail.
+   * See [gtk.widget.Widget.getHexpand] for more detail.
    * Returns: whether vexpand flag is set
    */
   bool getVexpand()
@@ -1738,9 +1738,9 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   }
 
   /**
-   * Gets whether [Gtk.Widget.setVexpand] has been used to
+   * Gets whether [gtk.widget.Widget.setVexpand] has been used to
    * explicitly set the expand flag on this widget.
-   * See [Gtk.Widget.getHexpandSet] for more detail.
+   * See [gtk.widget.Widget.getHexpandSet] for more detail.
    * Returns: whether vexpand has been explicitly set
    */
   bool getVexpandSet()
@@ -1754,10 +1754,10 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Determines whether the widget is visible.
    * If you want to take into account whether the widget’s
    * parent is also marked as visible, use
-   * [Gtk.Widget.isVisible] instead.
+   * [gtk.widget.Widget.isVisible] instead.
    * This function does not check if the widget is
    * obscured in any way.
-   * See [Gtk.Widget.setVisible].
+   * See [gtk.widget.Widget.setVisible].
    * Returns: %TRUE if the widget is visible
    */
   bool getVisible()
@@ -1772,7 +1772,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * This function returns the width passed to its
    * size-allocate implementation, which is the width you
    * should be using in vfuncGtk.Widget.snapshot.
-   * For pointer events, see [Gtk.Widget.contains].
+   * For pointer events, see [gtk.widget.Widget.contains].
    * To learn more about widget sizes, see the coordinate
    * system [overview](coordinates.html).
    * Returns: The width of widget
@@ -1789,7 +1789,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * If widget is not focusable, or its vfuncGtk.Widget.grab_focus
    * implementation cannot transfer the focus to a descendant of widget
    * that is focusable, it will not take focus and %FALSE will be returned.
-   * Calling [Gtk.Widget.grabFocus] on an already focused widget
+   * Calling [gtk.widget.Widget.grabFocus] on an already focused widget
    * is allowed, should not have an effect, and return %TRUE.
    * Returns: %TRUE if focus is now inside widget.
    */
@@ -1831,7 +1831,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Determines if the widget has the global input focus.
-   * See [Gtk.Widget.isFocus] for the difference between
+   * See [gtk.widget.Widget.isFocus] for the difference between
    * having the global input focus, and only having the focus
    * within a toplevel.
    * Returns: %TRUE if the widget has the global input focus.
@@ -1848,10 +1848,10 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * it has the global input focus.
    * This is a convenience function that takes into account whether
    * focus indication should currently be shown in the toplevel window
-   * of widget. See [Gtk.Window.getFocusVisible] for more
+   * of widget. See [gtk.window.Window.getFocusVisible] for more
    * information about focus indication.
    * To find out if the widget has the global input focus, use
-   * [Gtk.Widget.hasFocus].
+   * [gtk.widget.Widget.hasFocus].
    * Returns: %TRUE if the widget should display a “focus rectangle”
    */
   bool hasVisibleFocus()
@@ -1862,10 +1862,10 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   }
 
   /**
-   * Reverses the effects of [Gtk.Widget.show].
+   * Reverses the effects of [gtk.widget.Widget.show].
    * This is causing the widget to be hidden $(LPAREN)invisible to the user$(RPAREN).
 
-   * Deprecated: Use [Gtk.Widget.setVisible] instead
+   * Deprecated: Use [gtk.widget.Widget.setVisible] instead
    */
   void hide()
   {
@@ -1889,16 +1889,16 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Creates and initializes child widgets defined in templates.
    * This function must be called in the instance initializer
    * for any class which assigned itself a template using
-   * [Gtk.WidgetClass.setTemplate].
+   * [gtk.widget_class.WidgetClass.setTemplate].
    * It is important to call this function in the instance initializer
    * of a `GtkWidget` subclass and not in `GObject.constructed$(LPAREN)$(RPAREN)` or
    * `GObject.constructor$(LPAREN)$(RPAREN)` for two reasons:
    * - derived widgets will assume that the composite widgets
    * defined by its parent classes have been created in their
    * relative instance initializers
-   * - when calling `[GObject.ObjectG.new_]` on a widget with composite templates,
+   * - when calling `[gobject.object.ObjectG.new_]` on a widget with composite templates,
    * it’s important to build the composite widgets before the construct
-   * properties are set. Properties passed to `[GObject.ObjectG.new_]` should
+   * properties are set. Properties passed to `[gobject.object.ObjectG.new_]` should
    * take precedence over properties set in the private template XML
    * A good rule of thumb is to call this function as the first thing in
    * an instance initialization function.
@@ -1910,7 +1910,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Inserts group into widget.
-   * Children of widget that implement [Gtk.Actionable] can
+   * Children of widget that implement [gtk.actionable.Actionable] can
    * then be associated with actions in group by setting their
    * “action-name” to prefix.`action-name`.
    * Note that inheritance is defined for individual actions. I.e.
@@ -2029,8 +2029,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Determines whether the widget and all its parents are marked as
    * visible.
    * This function does not check if the widget is obscured in any way.
-   * See also [Gtk.Widget.getVisible] and
-   * [Gtk.Widget.setVisible].
+   * See also [gtk.widget.Widget.getVisible] and
+   * [gtk.widget.Widget.setVisible].
    * Returns: %TRUE if the widget and all its parents are visible
    */
   bool isVisible()
@@ -2046,21 +2046,21 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * within a single widget hits a boundary.
    * The return value of this function should be interpreted
    * in a way similar to the return value of
-   * [Gtk.Widget.childFocus]. When %TRUE is returned,
+   * [gtk.widget.Widget.childFocus]. When %TRUE is returned,
    * stay in the widget, the failed keyboard  navigation is OK
    * and/or there is nowhere we can/should move the focus to.
    * When %FALSE is returned, the caller should continue with
    * keyboard navigation outside the widget, e.g. by calling
-   * [Gtk.Widget.childFocus] on the widget’s toplevel.
+   * [gtk.widget.Widget.childFocus] on the widget’s toplevel.
    * The default signalGtk.Widget::keynav-failed handler returns
    * %FALSE for %GTK_DIR_TAB_FORWARD and %GTK_DIR_TAB_BACKWARD.
    * For the other values of `GtkDirectionType` it returns %TRUE.
    * Whenever the default handler returns %TRUE, it also calls
-   * [Gtk.Widget.errorBell] to notify the user of the
+   * [gtk.widget.Widget.errorBell] to notify the user of the
    * failed keyboard navigation.
    * A use case for providing an own implementation of ::keynav-failed
    * $(LPAREN)either by connecting to it or by overriding it$(RPAREN) would be a row of
-   * [Gtk.Entry] widgets where the user should be able to navigate
+   * [gtk.entry.Entry] widgets where the user should be able to navigate
    * the entire row with the cursor keys, as e.g. known from user
    * interfaces that require entering license keys.
    * Params:
@@ -2080,14 +2080,14 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns the widgets for which this widget is the target of a
    * mnemonic.
    * Typically, these widgets will be labels. See, for example,
-   * [Gtk.Label.setMnemonicWidget].
+   * [gtk.label.Label.setMnemonicWidget].
    * The widgets in the list are not individually referenced.
    * If you want to iterate through the list and perform actions
    * involving callbacks that might destroy the widgets, you
    * must call `g_list_foreach $(LPAREN)result, $(LPAREN)GFunc$(RPAREN)g_object_ref, NULL$(RPAREN)`
    * first, and then unref all the widgets afterwards.
    * Returns: the list
-   *   of mnemonic labels; free this list with [GLib.List.free] when you
+   *   of mnemonic labels; free this list with [glib.list.List.free] when you
    *   are done with it.
    */
   Widget[] listMnemonicLabels()
@@ -2165,7 +2165,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   }
 
   /**
-   * Returns a `GListModel` to track the [Gtk.EventController]s
+   * Returns a `GListModel` to track the [gtk.event_controller.EventController]s
    * of widget.
    * Calling this function will enable extra internal bookkeeping
    * to track controllers and emit signals on the returned listmodel.
@@ -2187,7 +2187,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * The point must be given in widget coordinates, so $(LPAREN)0, 0$(RPAREN) is assumed
    * to be the top left of widget's content area.
    * Usually widgets will return %NULL if the given coordinate is not
-   * contained in widget checked via [Gtk.Widget.contains].
+   * contained in widget checked via [gtk.widget.Widget.contains].
    * Otherwise they will recursively try to find a child that does
    * not return %NULL. Widgets are however free to customize their
    * picking algorithm.
@@ -2212,10 +2212,10 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Flags the widget for a rerun of the vfuncGtk.Widget.size_allocate
    * function.
-   * Use this function instead of [Gtk.Widget.queueResize]
+   * Use this function instead of [gtk.widget.Widget.queueResize]
    * when the widget's size request didn't change but it wants to
    * reposition its contents.
-   * An example user of this function is [Gtk.Widget.setHalign].
+   * An example user of this function is [gtk.widget.Widget.setHalign].
    * This function is only for use in widget implementations.
    */
   void queueAllocate()
@@ -2238,11 +2238,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Flags a widget to have its size renegotiated.
    * This should be called when a widget for some reason has a new
    * size request. For example, when you change the text in a
-   * [Gtk.Label], the label queues a resize to ensure there’s
+   * [gtk.label.Label], the label queues a resize to ensure there’s
    * enough space for the new text.
-   * Note that you cannot call [Gtk.Widget.queueResize] on a widget
+   * Note that you cannot call [gtk.widget.Widget.queueResize] on a widget
    * from inside its implementation of the vfuncGtk.Widget.size_allocate
-   * virtual method. Calls to [Gtk.Widget.queueResize] from inside
+   * virtual method. Calls to [gtk.widget.Widget.queueResize] from inside
    * vfuncGtk.Widget.size_allocate will be silently ignored.
    * This function is only for use in widget implementations.
    */
@@ -2264,7 +2264,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * isn’t very useful otherwise. Many times when you think you might
    * need it, a better approach is to connect to a signal that will be
    * called after the widget is realized automatically, such as
-   * [Gtk.Widget.realize].
+   * [gtk.widget.Widget.realize].
    */
   void realize()
   {
@@ -2300,12 +2300,12 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Removes a widget from the list of mnemonic labels for this widget.
-   * See [Gtk.Widget.listMnemonicLabels]. The widget must
+   * See [gtk.widget.Widget.listMnemonicLabels]. The widget must
    * have previously been added to the list with
-   * [Gtk.Widget.addMnemonicLabel].
+   * [gtk.widget.Widget.addMnemonicLabel].
    * Params:
    *   label = a `GtkWidget` that was previously set as a mnemonic
-   *     label for widget with [Gtk.Widget.addMnemonicLabel]
+   *     label for widget with [gtk.widget.Widget.addMnemonicLabel]
    */
   void removeMnemonicLabel(Widget label)
   {
@@ -2314,9 +2314,9 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Removes a tick callback previously registered with
-   * [Gtk.Widget.addTickCallback].
+   * [gtk.widget.Widget.addTickCallback].
    * Params:
-   *   id = an id returned by [Gtk.Widget.addTickCallback]
+   *   id = an id returned by [gtk.widget.Widget.addTickCallback]
    */
   void removeTickCallback(uint id)
   {
@@ -2333,7 +2333,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * also be sensitive and focusable and not have an ancestor
    * that is marked as not can-focus in order to receive input
    * focus.
-   * See [Gtk.Widget.grabFocus] for actually setting
+   * See [gtk.widget.Widget.grabFocus] for actually setting
    * the input focus on a widget.
    * Params:
    *   canFocus = whether or not the input focus can enter
@@ -2358,7 +2358,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Sets whether widget should be mapped along with its parent.
    * The child visibility can be set for widget before it is added
-   * to a container with [Gtk.Widget.setParent], to avoid
+   * to a container with [gtk.widget.Widget.setParent], to avoid
    * mapping children unnecessary before immediately unmapping them.
    * However it will be reset to its default state of %TRUE when the
    * widget is removed from a container.
@@ -2411,11 +2411,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Sets a named cursor to be shown when pointer devices point
    * towards widget.
    * This is a utility function that creates a cursor via
-   * [Gdk.Cursor.newFromName] and then sets it on widget
-   * with [Gtk.Widget.setCursor]. See those functions for
+   * [gdk.cursor.Cursor.newFromName] and then sets it on widget
+   * with [gtk.widget.Widget.setCursor]. See those functions for
    * details.
    * On top of that, this function allows name to be %NULL, which
-   * will do the same as calling [Gtk.Widget.setCursor]
+   * will do the same as calling [gtk.widget.Widget.setCursor]
    * with a %NULL cursor.
    * Params:
    *   name = The name of the cursor
@@ -2437,7 +2437,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * where the containers are arranged in an order that is explicitly
    * visual rather than logical $(LPAREN)such as buttons for text justification$(RPAREN).
    * If the direction is set to %GTK_TEXT_DIR_NONE, then the value
-   * set by [Gtk.Widget.setDefaultDirection] will be used.
+   * set by [gtk.widget.Widget.setDefaultDirection] will be used.
    * Params:
    *   dir = the new direction
    */
@@ -2450,7 +2450,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Set child as the current focus child of widget.
    * This function is only suitable for widget implementations.
    * If you want a certain widget to get the input focus, call
-   * [Gtk.Widget.grabFocus] on it.
+   * [gtk.widget.Widget.grabFocus] on it.
    * Params:
    *   child = a direct child widget of widget or %NULL
    *     to unset the focus child of widget
@@ -2484,7 +2484,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * also be sensitive and can-focus and not have an ancestor
    * that is marked as not can-focus in order to receive input
    * focus.
-   * See [Gtk.Widget.grabFocus] for actually setting
+   * See [gtk.widget.Widget.grabFocus] for actually setting
    * the input focus on a widget.
    * Params:
    *   focusable = whether or not widget can own the input focus
@@ -2556,7 +2556,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * room.
    * By default, widgets automatically expand if any of their children
    * want to expand. $(LPAREN)To see if a widget will automatically expand given
-   * its current children and state, call [Gtk.Widget.computeExpand].
+   * its current children and state, call [gtk.widget.Widget.computeExpand].
    * A container can decide how the expandability of children affects the
    * expansion of the container by overriding the compute_expand virtual
    * method on `GtkWidget`.$(RPAREN).
@@ -2564,8 +2564,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * automatic expand behavior.
    * This function forces the widget to expand or not to expand,
    * regardless of children.  The override occurs because
-   * [Gtk.Widget.setHexpand] sets the hexpand-set property $(LPAREN)see
-   * [Gtk.Widget.setHexpandSet]$(RPAREN) which causes the widget’s hexpand
+   * [gtk.widget.Widget.setHexpand] sets the hexpand-set property $(LPAREN)see
+   * [gtk.widget.Widget.setHexpandSet]$(RPAREN) which causes the widget’s hexpand
    * value to be used, rather than looking at children and widget state.
    * Params:
    *   expand = whether to expand
@@ -2577,8 +2577,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Sets whether the hexpand flag will be used.
-   * The [Gtk.Widget.hexpand] property will be set
-   * automatically when you call [Gtk.Widget.setHexpand]
+   * The [gtk.widget.Widget.gboolean] property will be set
+   * automatically when you call [gtk.widget.Widget.setHexpand]
    * to set hexpand, so the most likely reason to use this function
    * would be to unset an explicit expand flag.
    * If hexpand is set, then it overrides any computed
@@ -2651,7 +2651,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Setting a name allows you to refer to the widget from a
    * CSS file. You can apply a style to widgets with a particular name
    * in the CSS file. See the documentation for the CSS syntax $(LPAREN)on the
-   * same page as the docs for [Gtk.StyleContext].
+   * same page as the docs for [gtk.style_context.StyleContext].
    * Note that the CSS syntax has certain special characters to delimit
    * and represent elements in a selector $(LPAREN)period, #, >, *...$(RPAREN), so using
    * these will make your widget impossible to match by name. Any combination
@@ -2673,7 +2673,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * there are some limitations: For toplevel widgets, applying opacity
    * depends on the capabilities of the windowing system. On X11, this
    * has any effect only on X displays with a compositing manager,
-   * see [Gdk.Display.isComposited]. On Windows and Wayland it should
+   * see [gdk.display.Display.isComposited]. On Windows and Wayland it should
    * always work, although setting a window’s opacity after the window
    * has been shown may cause some flicker.
    * Note that the opacity is inherited through inclusion — if you set
@@ -2681,8 +2681,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * appear translucent, since it is ultimatively rendered on that
    * toplevel. The opacity value itself is not inherited by child
    * widgets $(LPAREN)since that would make widgets deeper in the hierarchy
-   * progressively more translucent$(RPAREN). As a consequence, [Gtk.Popover]s
-   * and other [Gtk.Native] widgets with their own surface will use their
+   * progressively more translucent$(RPAREN). As a consequence, [gtk.popover.Popover]s
+   * and other [gtk.native.Native] widgets with their own surface will use their
    * own opacity value, and thus by default appear non-translucent,
    * even if they are attached to a toplevel that is translucent.
    * Params:
@@ -2696,7 +2696,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Sets how widget treats content that is drawn outside the
    * widget's content area.
-   * See the definition of [Gtk.Overflow] for details.
+   * See the definition of [gtk.Overflow] for details.
    * This setting is provided for widget implementations and
    * should not be used by application code.
    * The default value is %GTK_OVERFLOW_VISIBLE.
@@ -2712,7 +2712,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Sets parent as the parent widget of widget.
    * This takes care of details such as updating the state and style
    * of the child to reflect its new location and resizing the parent.
-   * The opposite function is [Gtk.Widget.unparent].
+   * The opposite function is [gtk.widget.Widget.unparent].
    * This function is useful only when implementing subclasses of
    * `GtkWidget`.
    * Params:
@@ -2754,7 +2754,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * That is, the widget’s size request will be at least width
    * by height. You can use this function to force a widget to
    * be larger than it normally would be.
-   * In most cases, [Gtk.Window.setDefaultSize] is a better
+   * In most cases, [gtk.window.Window.setDefaultSize] is a better
    * choice for toplevel windows than this function; setting the default
    * size will still allow users to shrink the window. Setting the size
    * request will force them to leave the window at least as large as
@@ -2793,7 +2793,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Typical widget states are insensitive, prelighted, etc.
    * This function accepts the values %GTK_STATE_FLAG_DIR_LTR and
    * %GTK_STATE_FLAG_DIR_RTL but ignores them. If you want to set
-   * the widget's direction, use [Gtk.Widget.setDirection].
+   * the widget's direction, use [gtk.widget.Widget.setDirection].
    * This function is for use in widget implementations.
    * Params:
    *   flags = State flags to turn on
@@ -2810,7 +2810,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * This function will take care of setting the
    * propertyGtk.Widget:has-tooltip as a side effect, and of the
    * default handler for the signalGtk.Widget::query-tooltip signal.
-   * See also [Gtk.Tooltip.setMarkup].
+   * See also [gtk.tooltip.Tooltip.setMarkup].
    * Params:
    *   markup = the contents of the tooltip for widget
    */
@@ -2827,7 +2827,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * propertyGtk.Widget:has-tooltip as a side effect,
    * and of the default handler for the
    * signalGtk.Widget::query-tooltip signal.
-   * See also [Gtk.Tooltip.setText].
+   * See also [gtk.tooltip.Tooltip.setText].
    * Params:
    *   text = the contents of the tooltip for widget
    */
@@ -2850,7 +2850,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Sets whether the widget would like any available extra vertical
    * space.
-   * See [Gtk.Widget.setHexpand] for more detail.
+   * See [gtk.widget.Widget.setHexpand] for more detail.
    * Params:
    *   expand = whether to expand
    */
@@ -2861,7 +2861,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Sets whether the vexpand flag will be used.
-   * See [Gtk.Widget.setHexpandSet] for more detail.
+   * See [gtk.widget.Widget.setHexpandSet] for more detail.
    * Params:
    *   set = value for vexpand-set property
    */
@@ -2873,7 +2873,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Sets the visibility state of widget.
    * Note that setting this to %TRUE doesn’t mean the widget is
-   * actually viewable, see [Gtk.Widget.getVisible].
+   * actually viewable, see [gtk.widget.Widget.getVisible].
    * Params:
    *   visible = whether the widget should be shown or not
    */
@@ -2906,7 +2906,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * mapped; other shown widgets are realized and mapped when their
    * toplevel container is realized and mapped.
 
-   * Deprecated: Use [Gtk.Widget.setVisible] instead
+   * Deprecated: Use [gtk.widget.Widget.setVisible] instead
    */
   void show()
   {
@@ -2920,15 +2920,15 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * to all children. This function provides a convenient way
    * of doing this. A widget, when it receives a call to its
    * vfuncGtk.Widget.snapshot function, calls
-   * [Gtk.Widget.snapshotChild] once for each child, passing in
+   * [gtk.widget.Widget.snapshotChild] once for each child, passing in
    * the snapshot the widget received.
-   * [Gtk.Widget.snapshotChild] takes care of translating the origin of
+   * [gtk.widget.Widget.snapshotChild] takes care of translating the origin of
    * snapshot, and deciding whether the child needs to be snapshot.
    * This function does nothing for children that implement `GtkNative`.
    * Params:
    *   child = a child of widget
    *   snapshot = `GtkSnapshot` as passed to the widget. In particular, no
-   *     calls to [Gtk.Snapshot.translate] or other transform calls should
+   *     calls to [gtk.snapshot.Snapshot.translate] or other transform calls should
    *     have been made.
    */
   void snapshotChild(Widget child, Snapshot snapshot)
@@ -2951,7 +2951,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   ancestor. In this case, 0 is stored in *dest_x and *dest_y.
    *   Otherwise %TRUE.
 
-   * Deprecated: Use [Gtk.Widget.computePoint] instead
+   * Deprecated: Use [gtk.widget.Widget.computePoint] instead
    */
   bool translateCoordinates(Widget destWidget, double srcX, double srcY, out double destX, out double destY)
   {
@@ -3000,7 +3000,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Turns off flag values for the current widget state.
-   * See [Gtk.Widget.setStateFlags].
+   * See [gtk.widget.Widget.setStateFlags].
    * This function is for use in widget implementations.
    * Params:
    *   flags = State flags to turn off
@@ -3105,7 +3105,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Emitted if keyboard navigation fails.
-   * See [Gtk.Widget.keynavFailed] for details.
+   * See [gtk.widget.Widget.keynavFailed] for details.
    * Params
    *   direction = the direction of movement
    *   widget = the instance the signal is connected to
@@ -3144,11 +3144,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Emitted when widget is going to be mapped.
    * A widget is mapped when the widget is visible $(LPAREN)which is controlled with
-   * [Gtk.Widget.visible]$(RPAREN) and all its parents up to the toplevel widget
+   * [gtk.widget.Widget.gboolean]$(RPAREN) and all its parents up to the toplevel widget
    * are also visible.
    * The ::map signal can be used to determine whether a widget will be drawn,
    * for instance it can resume an animation that was stopped during the
-   * emission of [Gtk.Widget.unmap].
+   * emission of [gtk.widget.Widget.unmap].
    *   widget = the instance the signal is connected to
    */
   alias MapCallbackDlg = void delegate(Widget widget);
@@ -3304,7 +3304,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Emitted when widget is associated with a `GdkSurface`.
-   * This means that [Gtk.Widget.realize] has been called
+   * This means that [gtk.widget.Widget.realize] has been called
    * or the widget has been mapped $(LPAREN)that is, it is going to be drawn$(RPAREN).
    *   widget = the instance the signal is connected to
    */
@@ -3364,7 +3364,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Emitted when the widget state changes.
-   * See [Gtk.Widget.getStateFlags].
+   * See [gtk.widget.Widget.getStateFlags].
    * Params
    *   flags = The previous state flags.
    *   widget = the instance the signal is connected to
@@ -3430,7 +3430,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
   /**
    * Emitted when the `GdkSurface` associated with widget is destroyed.
-   * This means that [Gtk.Widget.unrealize] has been called
+   * This means that [gtk.widget.Widget.unrealize] has been called
    * or the widget has been unmapped $(LPAREN)that is, it is going to be hidden$(RPAREN).
    *   widget = the instance the signal is connected to
    */

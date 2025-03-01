@@ -1,6 +1,6 @@
 module gsk.cairo_renderer;
 
-import gid.gid;
+import gid.global;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.renderer;

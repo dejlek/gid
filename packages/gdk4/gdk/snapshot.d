@@ -3,7 +3,7 @@ module gdk.snapshot;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**

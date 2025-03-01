@@ -1,6 +1,6 @@
 module gtk.center_box;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -19,9 +19,9 @@ import gtk.widget;
  * `GtkCenterBox` arranges three children in a row, keeping the middle child
  * centered as well as possible.
  * ![An example GtkCenterBox](centerbox.png)
- * To add children to `GtkCenterBox`, use [Gtk.CenterBox.setStartWidget],
- * [Gtk.CenterBox.setCenterWidget] and
- * [Gtk.CenterBox.setEndWidget].
+ * To add children to `GtkCenterBox`, use [gtk.center_box.CenterBox.setStartWidget],
+ * [gtk.center_box.CenterBox.setCenterWidget] and
+ * [gtk.center_box.CenterBox.setEndWidget].
  * The sizing and positioning of children can be influenced with the
  * align and expand properties of the children.
  * # GtkCenterBox as GtkBuildable
@@ -72,7 +72,7 @@ class CenterBox : Widget, Orientable
   }
 
   /**
-   * Gets the value set by [Gtk.CenterBox.setBaselinePosition].
+   * Gets the value set by [gtk.center_box.CenterBox.setBaselinePosition].
    * Returns: the baseline position
    */
   BaselinePosition getBaselinePosition()

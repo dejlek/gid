@@ -1,6 +1,6 @@
 module gtk.recent_manager;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -31,7 +31,7 @@ import gtk.types;
  * The `GtkRecentManager` will try to gather all the needed information
  * from the file itself through GIO.
  * Looking up the meta-data associated with a recently used file
- * given its URI requires calling [Gtk.RecentManager.lookupItem]:
+ * given its URI requires calling [gtk.recent_manager.RecentManager.lookupItem]:
  * ```c
  * GtkRecentManager *manager;
  * GtkRecentInfo *info;
@@ -50,8 +50,8 @@ import gtk.types;
  * }
  * ```
  * In order to retrieve the list of recently used files, you can use
- * [Gtk.RecentManager.getItems], which returns a list of
- * [Gtk.RecentInfo].
+ * [gtk.recent_manager.RecentManager.getItems], which returns a list of
+ * [gtk.recent_info.RecentInfo].
  * Note that the maximum age of the recently used files list is
  * controllable through the property@Gtk.Settings:gtk-recent-files-max-age
  * property.
@@ -79,10 +79,10 @@ class RecentManager : ObjectG
    * Creates a new recent manager object.
    * Recent manager objects are used to handle the list of recently used
    * resources. A `GtkRecentManager` object monitors the recently used
-   * resources list, and emits the [Gtk.RecentManager.changed]
+   * resources list, and emits the [gtk.recent_manager.RecentManager.changed]
    * signal each time something inside the list changes.
    * `GtkRecentManager` objects are expensive: be sure to create them
-   * only when needed. You should use [Gtk.RecentManager.getDefault]
+   * only when needed. You should use [gtk.recent_manager.RecentManager.getDefault]
    * instead.
    * Returns: A newly created `GtkRecentManager` object
    */
@@ -143,8 +143,8 @@ class RecentManager : ObjectG
    * resources list.
    * This function automatically retrieves some of the needed
    * metadata and setting other metadata to common default values;
-   * it then feeds the data to [Gtk.RecentManager.addFull].
-   * See [Gtk.RecentManager.addFull] if you want to explicitly
+   * it then feeds the data to [gtk.recent_manager.RecentManager.addFull].
+   * See [gtk.recent_manager.RecentManager.addFull] if you want to explicitly
    * define the metadata for the resource pointed by uri.
    * Params:
    *   uri = a valid URI
@@ -163,8 +163,8 @@ class RecentManager : ObjectG
    * Gets the list of recently used resources.
    * Returns: a list of
    *   newly allocated `GtkRecentInfo objects`. Use
-   *   [Gtk.RecentInfo.unref] on each item inside the list, and then
-   *   free the list itself using [GLib.List.free].
+   *   [gtk.recent_info.RecentInfo.unref] on each item inside the list, and then
+   *   free the list itself using [glib.list.List.free].
    */
   RecentInfo[] getItems()
   {
@@ -198,7 +198,7 @@ class RecentManager : ObjectG
    * Returns: a `GtkRecentInfo` containing information
    *   about the resource pointed by uri, or %NULL if the URI was
    *   not registered in the recently used resources list. Free with
-   *   [Gtk.RecentInfo.unref].
+   *   [gtk.recent_info.RecentInfo.unref].
    */
   RecentInfo lookupItem(string uri)
   {
@@ -271,7 +271,7 @@ class RecentManager : ObjectG
   /**
    * Emitted when the current recently used resources manager changes
    * its contents.
-   * This can happen either by calling [Gtk.RecentManager.addItem]
+   * This can happen either by calling [gtk.recent_manager.RecentManager.addItem]
    * or by another application.
    *   recentManager = the instance the signal is connected to
    */

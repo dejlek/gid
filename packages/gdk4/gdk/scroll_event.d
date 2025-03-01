@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.event;
 import gdk.types;
-import gid.gid;
+import gid.global;
 
 /**
  * An event related to a scrolling motion.
@@ -25,7 +25,7 @@ class ScrollEvent : Event
    * The deltas will be zero unless the scroll direction
    * is %GDK_SCROLL_SMOOTH.
    * For the representation unit of these deltas, see
-   * [Gdk.ScrollEvent.getUnit].
+   * [gdk.scroll_event.ScrollEvent.getUnit].
    * Params:
    *   deltaX = return location for x scroll delta
    *   deltaY = return location for y scroll delta

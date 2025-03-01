@@ -2,7 +2,7 @@ module gtk.color_chooser_mixin;
 
 public import gtk.color_chooser_iface_proxy;
 public import gdk.rgba;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -13,10 +13,10 @@ public import gtk.types;
  * for choosing colors.
  * Depending on the situation, colors may be allowed to have alpha $(LPAREN)translucency$(RPAREN).
  * In GTK, the main widgets that implement this interface are
- * [Gtk.ColorChooserWidget], [Gtk.ColorChooserDialog] and
- * [Gtk.ColorButton].
+ * [gtk.color_chooser_widget.ColorChooserWidget], [gtk.color_chooser_dialog.ColorChooserDialog] and
+ * [gtk.color_button.ColorButton].
 
- * Deprecated: Use [Gtk.ColorDialog] and [Gtk.ColorDialogButton]
+ * Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
  *   instead of widgets implementing `GtkColorChooser`
  */
 template ColorChooserT()
@@ -27,7 +27,7 @@ template ColorChooserT()
    * If orientation is horizontal, the colors are grouped in rows,
    * with colors_per_line colors in each row. If horizontal is %FALSE,
    * the colors are grouped in columns instead.
-   * The default color palette of [Gtk.ColorChooserWidget] has
+   * The default color palette of [gtk.color_chooser_widget.ColorChooserWidget] has
    * 45 colors, organized in columns of 5 colors $(LPAREN)this includes some
    * grays$(RPAREN).
    * The layout of the color chooser widget works best when the
@@ -41,7 +41,7 @@ template ColorChooserT()
    *   colorsPerLine = the number of colors to show in each row/column
    *   colors = the colors of the palette
 
-   * Deprecated: Use [Gtk.ColorDialog] instead
+   * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
   override void addPalette(Orientation orientation, int colorsPerLine, RGBA[] colors)
   {
@@ -61,7 +61,7 @@ template ColorChooserT()
    * Params:
    *   color = a `GdkRGBA` to fill in with the current color
 
-   * Deprecated: Use [Gtk.ColorDialog] instead
+   * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
   override void getRgba(out RGBA color)
   {
@@ -75,7 +75,7 @@ template ColorChooserT()
    * Returns: %TRUE if the color chooser uses the alpha channel,
    *   %FALSE if not
 
-   * Deprecated: Use [Gtk.ColorDialog] instead
+   * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
   override bool getUseAlpha()
   {
@@ -89,7 +89,7 @@ template ColorChooserT()
    * Params:
    *   color = the new color
 
-   * Deprecated: Use [Gtk.ColorDialog] instead
+   * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
   override void setRgba(RGBA color)
   {
@@ -101,7 +101,7 @@ template ColorChooserT()
    * Params:
    *   useAlpha = %TRUE if color chooser should use alpha channel, %FALSE if not
 
-   * Deprecated: Use [Gtk.ColorDialog] instead
+   * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
   override void setUseAlpha(bool useAlpha)
   {
@@ -117,7 +117,7 @@ template ColorChooserT()
    *   color = the color
    *   colorChooser = the instance the signal is connected to
 
-   * Deprecated: Use [Gtk.ColorDialog] and [Gtk.ColorDialogButton]
+   * Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
    *   instead of widgets implementing `GtkColorChooser`
    */
   alias ColorActivatedCallbackDlg = void delegate(RGBA color, ColorChooser colorChooser);

@@ -1,6 +1,6 @@
 module gsk.path_measure;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gsk.c.functions;
 import gsk.c.types;

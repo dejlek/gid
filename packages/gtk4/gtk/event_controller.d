@@ -3,7 +3,7 @@ module gtk.event_controller;
 import gdk.device;
 import gdk.event;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -15,8 +15,8 @@ import gtk.widget;
  * These are ancillary objects associated to widgets, which react
  * to `GdkEvents`, and possibly trigger actions as a consequence.
  * Event controllers are added to a widget with
- * [Gtk.Widget.addController]. It is rarely necessary to
- * explicitly remove a controller with [Gtk.Widget.removeController].
+ * [gtk.widget.Widget.addController]. It is rarely necessary to
+ * explicitly remove a controller with [gtk.widget.Widget.removeController].
  * See the chapter on [input handling](input-handling.html) for
  * an overview of the basic concepts, such as the capture and bubble
  * phases of event propagation.

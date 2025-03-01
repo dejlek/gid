@@ -1,7 +1,7 @@
 module gio.tls_client_connection;
 
 public import gio.tls_client_connection_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.iostream;
@@ -13,7 +13,7 @@ import gobject.object;
 
 /**
  * `GTlsClientConnection` is the client-side subclass of
- * [Gio.TlsConnection], representing a client-side TLS connection.
+ * [gio.tls_connection.TlsConnection], representing a client-side TLS connection.
  */
 interface TlsClientConnection
 {
@@ -90,7 +90,7 @@ interface TlsClientConnection
 
   /**
    * SSL 3.0 is no longer supported. See
-   * [Gio.TlsClientConnection.setUseSsl3] for details.
+   * [gio.tls_client_connection.TlsClientConnection.setUseSsl3] for details.
    * Returns: %FALSE
 
    * Deprecated: SSL 3.0 is insecure.

@@ -1,6 +1,6 @@
 module gsk.rounded_rect;
 
-import gid.gid;
+import gid.global;
 import graphene.point;
 import graphene.rect;
 import graphene.size;
@@ -11,7 +11,7 @@ import gsk.types;
 /**
  * A rectangular region with rounded corners.
  * Application code should normalize rectangles using
- * [Gsk.RoundedRect.normalize]; this function will ensure that
+ * [gsk.rounded_rect.RoundedRect.normalize]; this function will ensure that
  * the bounds of the rectangle are normalized and ensure that the corner
  * values are positive and the corners do not overlap.
  * All functions taking a `GskRoundedRect` as an argument will internally
@@ -139,8 +139,8 @@ class RoundedRect
   /**
    * Checks if all corners of self are right angles and the
    * rectangle covers all of its bounds.
-   * This information can be used to decide if [Gsk.ClipNode.new_]
-   * or [Gsk.RoundedClipNode.new_] should be called.
+   * This information can be used to decide if [gsk.clip_node.ClipNode.new_]
+   * or [gsk.rounded_clip_node.RoundedClipNode.new_] should be called.
    * Returns: %TRUE if the rectangle is rectilinear
    */
   bool isRectilinear()

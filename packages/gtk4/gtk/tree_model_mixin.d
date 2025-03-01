@@ -1,7 +1,7 @@
 module gtk.tree_model_mixin;
 
 public import gtk.tree_model_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 public import gobject.object;
 public import gobject.types;
@@ -39,22 +39,22 @@ public import gtk.types;
  * Models are accessed on a node/column level of granularity. One can
  * query for the value of a model at a certain node and a certain
  * column on that node. There are two structures used to reference a
- * particular node in a model. They are the [Gtk.TreePath] and
- * the [Gtk.TreeIter] (“iter” is short for iterator). Most of the
- * interface consists of operations on a [Gtk.TreeIter].
+ * particular node in a model. They are the [gtk.tree_path.TreePath] and
+ * the [gtk.tree_iter.TreeIter] (“iter” is short for iterator). Most of the
+ * interface consists of operations on a [gtk.tree_iter.TreeIter].
  * A path is essentially a potential node. It is a location on a model
  * that may or may not actually correspond to a node on a specific
- * model. A [Gtk.TreePath] can be converted into either an
+ * model. A [gtk.tree_path.TreePath] can be converted into either an
  * array of unsigned integers or a string. The string form is a list
  * of numbers separated by a colon. Each number refers to the offset
  * at that level. Thus, the path `0` refers to the root
  * node and the path `2:4` refers to the fifth child of
  * the third node.
- * By contrast, a [Gtk.TreeIter] is a reference to a specific node on
+ * By contrast, a [gtk.tree_iter.TreeIter] is a reference to a specific node on
  * a specific model. It is a generic struct with an integer and three
  * generic pointers. These are filled in by the model in a model-specific
  * way. One can convert a path to an iterator by calling
- * [Gtk.TreeModel.getIter]. These iterators are the primary way
+ * [gtk.tree_model.TreeModel.getIter]. These iterators are the primary way
  * of accessing a model and are similar to the iterators used by
  * `GtkTextBuffer`. They are generally statically allocated on the
  * stack and only used for a short time. The model interface defines
@@ -139,7 +139,7 @@ public import gtk.types;
  * {
  * char *str_data;
  * int    int_data;
- * // Make sure you terminate calls to [Gtk.TreeModel.get] with a “-1” value
+ * // Make sure you terminate calls to [gtk.tree_model.TreeModel.get] with a “-1” value
  * gtk_tree_model_get $(LPAREN)list_store, &iter,
  * STRING_COLUMN, &str_data,
  * INT_COLUMN, &int_data,
@@ -154,7 +154,7 @@ public import gtk.types;
  * }
  * ```
  * The `GtkTreeModel` interface contains two methods for reference
- * counting: [Gtk.TreeModel.refNode] and [Gtk.TreeModel.unrefNode].
+ * counting: [gtk.tree_model.TreeModel.refNode] and [gtk.tree_model.TreeModel.unrefNode].
  * These two methods are optional to implement. The reference counting
  * is meant as a way for views to let models know when nodes are being
  * displayed. `GtkTreeView` will take a reference on a node when it is
@@ -179,7 +179,7 @@ public import gtk.types;
  * however, signals must be emitted at all times $(LPAREN)however the root level
  * is always referenced when any view is attached$(RPAREN).
 
- * Deprecated: Use [Gio.ListModel] instead
+ * Deprecated: Use [gio.list_model.ListModel] instead
  */
 template TreeModelT()
 {
@@ -202,7 +202,7 @@ template TreeModelT()
   /**
    * Calls func on each node in model in a depth-first fashion.
    * If func returns %TRUE, then the tree ceases to be walked,
-   * and [Gtk.TreeModel.foreach_] returns.
+   * and [gtk.tree_model.TreeModel.foreach_] returns.
    * Params:
    *   func = a function to be called on each row
    */
@@ -316,7 +316,7 @@ template TreeModelT()
 
   /**
    * Returns a newly-created `GtkTreePath` referenced by iter.
-   * This path should be freed with [Gtk.TreePath.free].
+   * This path should be freed with [gtk.tree_path.TreePath.free].
    * Params:
    *   iter = the `GtkTreeIter`
    * Returns: a newly-created `GtkTreePath`
@@ -348,7 +348,7 @@ template TreeModelT()
 
   /**
    * Initializes and sets value to that at column.
-   * When done with value, [GObject.Value.unset] needs to be called
+   * When done with value, [gobject.value.Value.unset] needs to be called
    * to free any allocated memory.
    * Params:
    *   iter = the `GtkTreeIter`
@@ -594,7 +594,7 @@ template TreeModelT()
    * This is an optional method for models to implement.
    * To be more specific, models may ignore this call as it exists
    * primarily for performance reasons. For more information on what
-   * this means, see [Gtk.TreeModel.refNode].
+   * this means, see [gtk.tree_model.TreeModel.refNode].
    * Please note that nodes that are deleted are not unreffed.
    * Params:
    *   iter = the `GtkTreeIter`

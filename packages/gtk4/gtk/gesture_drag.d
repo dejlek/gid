@@ -1,6 +1,6 @@
 module gtk.gesture_drag;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -14,8 +14,8 @@ import gtk.types;
  * signal@Gtk.GestureDrag::drag-update and
  * signal@Gtk.GestureDrag::drag-end signals, and the relevant
  * coordinates can be extracted through
- * [Gtk.GestureDrag.getOffset] and
- * [Gtk.GestureDrag.getStartPoint].
+ * [gtk.gesture_drag.GestureDrag.getOffset] and
+ * [gtk.gesture_drag.GestureDrag.getStartPoint].
  */
 class GestureDrag : GestureSingle
 {

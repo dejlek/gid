@@ -1,6 +1,6 @@
 module harfbuzz.unicode_funcs;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;

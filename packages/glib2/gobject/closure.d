@@ -1,6 +1,6 @@
 module gobject.closure;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gobject.c.functions;
 import gobject.c.types;
@@ -22,17 +22,17 @@ import gobject.value;
  * other languages need marshallers which convert between #GValues
  * and suitable representations in the runtime of the language in
  * order to use functions written in that language as callbacks. Use
- * [GObject.Closure.setMarshal] to set the marshaller on such a custom
+ * [gobject.closure.Closure.setMarshal] to set the marshaller on such a custom
  * closure implementation.
  * Within GObject, closures play an important role in the
  * implementation of signals. When a signal is registered, the
- * @c_marshaller argument to [GObject.Global.signalNew] specifies the default C
+ * @c_marshaller argument to [gobject.global.signalNew] specifies the default C
  * marshaller for any closure which is connected to this
  * signal. GObject provides a number of C marshallers for this
  * purpose, see the g_cclosure_marshal_*$(LPAREN)$(RPAREN) functions. Additional C
  * marshallers can be generated with the [glib-genmarshal][glib-genmarshal]
  * utility.  Closures can be explicitly connected to signals with
- * [GObject.Global.signalConnectClosure], but it usually more convenient to let
+ * [gobject.global.signalConnectClosure], but it usually more convenient to let
  * GObject create a closure automatically by using one of the
  * g_signal_connect_*$(LPAREN)$(RPAREN) functions which take a callback function/user
  * data pair.
@@ -44,7 +44,7 @@ import gobject.value;
  * - The reference counting of #GClosure makes it easy to handle reentrancy
  * right; if a callback is removed while it is being invoked, the closure
  * and its parameters won't be freed until the invocation finishes.
- * - [GObject.Closure.invalidate] and invalidation notifiers allow callbacks to be
+ * - [gobject.closure.Closure.invalidate] and invalidation notifiers allow callbacks to be
  * automatically removed when the objects they point to go away.
  */
 class Closure : Boxed
@@ -104,8 +104,8 @@ class Closure : Boxed
   }
 
   /**
-   * A variant of [GObject.Closure.newSimple] which stores object in the
-   * data field of the closure and calls [GObject.ObjectG.watchClosure] on
+   * A variant of [gobject.closure.Closure.newSimple] which stores object in the
+   * data field of the closure and calls [gobject.object.ObjectG.watchClosure] on
    * object and the created closure. This function is mainly useful
    * when implementing new types of closures.
    * Params:
@@ -170,15 +170,15 @@ class Closure : Boxed
   /**
    * Sets a flag on the closure to indicate that its calling
    * environment has become invalid, and thus causes any future
-   * invocations of [GObject.Closure.invoke] on this closure to be
+   * invocations of [gobject.closure.Closure.invoke] on this closure to be
    * ignored.
    * Also, invalidation notifiers installed on the closure will
    * be called at this point. Note that unless you are holding a
    * reference to the closure yourself, the invalidation notifiers may
    * unref the closure and cause it to be destroyed, so if you need to
-   * access the closure after calling [GObject.Closure.invalidate], make sure
-   * that you've previously called [GObject.Closure.ref_].
-   * Note that [GObject.Closure.invalidate] will also be called when the
+   * access the closure after calling [gobject.closure.Closure.invalidate], make sure
+   * that you've previously called [gobject.closure.Closure.ref_].
+   * Note that [gobject.closure.Closure.invalidate] will also be called when the
    * reference count of a closure drops to zero $(LPAREN)unless it has already
    * been invalidated before$(RPAREN).
    */
@@ -219,7 +219,7 @@ class Closure : Boxed
    * that the initial reference count is not owned by any caller.
    * This function checks to see if the object is still floating, and if so,
    * unsets the floating state and decreases the reference count. If the
-   * closure is not floating, [GObject.Closure.sink] does nothing.
+   * closure is not floating, [gobject.closure.Closure.sink] does nothing.
    * The reason for the existence of the floating state is to prevent
    * cumbersome code sequences like:
    * |[<!-- language\="C" -->
@@ -227,12 +227,12 @@ class Closure : Boxed
    * g_source_set_closure $(LPAREN)source, closure$(RPAREN);
    * g_closure_unref $(LPAREN)closure$(RPAREN); // GObject doesn't really need this
    * ]|
-   * Because [GObject.Global.sourceSetClosure] (and similar functions) take ownership of the
+   * Because [gobject.global.sourceSetClosure] (and similar functions) take ownership of the
    * initial reference count, if it is unowned, we instead can write:
    * |[<!-- language\="C" -->
    * g_source_set_closure $(LPAREN)source, g_cclosure_new $(LPAREN)cb_func, cb_data$(RPAREN)$(RPAREN);
    * ]|
-   * Generally, this function is used together with [GObject.Closure.ref_]. An example
+   * Generally, this function is used together with [gobject.closure.Closure.ref_]. An example
    * of storing a closure for later notification looks like:
    * |[<!-- language\="C" -->
    * static GClosure *notify_closure \= NULL;
@@ -249,9 +249,9 @@ class Closure : Boxed
    * }
    * }
    * ]|
-   * Because [GObject.Closure.sink] may decrement the reference count of a closure
-   * $(LPAREN)if it hasn't been called on closure yet$(RPAREN) just like [GObject.Closure.unref],
-   * [GObject.Closure.ref_] should be called prior to this function.
+   * Because [gobject.closure.Closure.sink] may decrement the reference count of a closure
+   * $(LPAREN)if it hasn't been called on closure yet$(RPAREN) just like [gobject.closure.Closure.unref],
+   * [gobject.closure.Closure.ref_] should be called prior to this function.
    */
   void sink()
   {

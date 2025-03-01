@@ -1,6 +1,6 @@
 module gio.network_service;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_connectable;
@@ -9,13 +9,13 @@ import gio.types;
 import gobject.object;
 
 /**
- * Like [Gio.NetworkAddress] does with hostnames, `GNetworkService`
+ * Like [gio.network_address.NetworkAddress] does with hostnames, `GNetworkService`
  * provides an easy way to resolve a SRV record, and then attempt to
  * connect to one of the hosts that implements that service, handling
  * service priority/weighting, multiple IP addresses, and multiple
  * address families.
- * See [Gio.SrvTarget] for more information about SRV records, and see
- * [Gio.SocketConnectable] for an example of using the connectable
+ * See [gio.srv_target.SrvTarget] for more information about SRV records, and see
+ * [gio.socket_connectable.SocketConnectable] for an example of using the connectable
  * interface.
  */
 class NetworkService : ObjectG, SocketConnectable

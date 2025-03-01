@@ -1,6 +1,6 @@
 module graphene.euler;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -72,7 +72,7 @@ class Euler : Boxed
   /**
    * Retrieves the first component of the Euler angle vector,
    * depending on the order of rotation.
-   * See also: [Graphene.Euler.getX]
+   * See also: [graphene.euler.Euler.getX]
    * Returns: the first component of the Euler angle vector, in radians
    */
   float getAlpha()
@@ -85,7 +85,7 @@ class Euler : Boxed
   /**
    * Retrieves the second component of the Euler angle vector,
    * depending on the order of rotation.
-   * See also: [Graphene.Euler.getY]
+   * See also: [graphene.euler.Euler.getY]
    * Returns: the second component of the Euler angle vector, in radians
    */
   float getBeta()
@@ -98,7 +98,7 @@ class Euler : Boxed
   /**
    * Retrieves the third component of the Euler angle vector,
    * depending on the order of rotation.
-   * See also: [Graphene.Euler.getZ]
+   * See also: [graphene.euler.Euler.getZ]
    * Returns: the third component of the Euler angle vector, in radians
    */
   float getGamma()
@@ -179,7 +179,7 @@ class Euler : Boxed
    * Initializes a #graphene_euler_t using the angles and order of
    * another #graphene_euler_t.
    * If the #graphene_euler_t src is %NULL, this function is equivalent
-   * to calling [Graphene.Euler.init_] with all angles set to 0.
+   * to calling [graphene.euler.Euler.init_] with all angles set to 0.
    * Params:
    *   src = a #graphene_euler_t
    * Returns: the initialized #graphene_euler_t

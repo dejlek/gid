@@ -1,6 +1,6 @@
 module gtk.menu_button;
 
-import gid.gid;
+import gid.global;
 import gio.menu_model;
 import gobject.dclosure;
 import gobject.object;
@@ -23,13 +23,13 @@ import gtk.widget;
  * `GMenuModel`.
  * The `GtkMenuButton` widget can show either an icon $(LPAREN)set with the
  * property@Gtk.MenuButton:icon-name property$(RPAREN) or a label $(LPAREN)set with the
- * [Gtk.MenuButton.label] property$(RPAREN). If neither is explicitly set,
- * a [Gtk.Image] is automatically created, using an arrow image oriented
- * according to [Gtk.MenuButton.direction] or the generic
+ * [gtk.menu_button.MenuButton.utf8] property$(RPAREN). If neither is explicitly set,
+ * a [gtk.image.Image] is automatically created, using an arrow image oriented
+ * according to [gtk.menu_button.MenuButton.ArrowType] or the generic
  * “open-menu-symbolic” icon if the direction is not set.
  * The positioning of the popup is determined by the
- * [Gtk.MenuButton.direction] property of the menu button.
- * For menus, the [Gtk.Widget.halign] and [Gtk.Widget.valign]
+ * [gtk.menu_button.MenuButton.ArrowType] property of the menu button.
+ * For menus, the [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
  * properties of the menu are also taken into account. For example, when the
  * direction is %GTK_ARROW_DOWN and the horizontal alignment is %GTK_ALIGN_START,
  * the menu will be positioned below the button, with the starting edge
@@ -299,10 +299,10 @@ class MenuButton : Widget
 
   /**
    * Sets the child widget of menu_button.
-   * Setting a child resets [Gtk.MenuButton.label] and
+   * Setting a child resets [gtk.menu_button.MenuButton.utf8] and
    * propertyGtk.MenuButton:icon-name.
    * If propertyGtk.MenuButton:always-show-arrow is set to `TRUE` and
-   * [Gtk.MenuButton.direction] is not `GTK_ARROW_NONE`, a dropdown arrow
+   * [gtk.menu_button.MenuButton.ArrowType] is not `GTK_ARROW_NONE`, a dropdown arrow
    * will be shown next to the child.
    * Params:
    *   child = the child widget
@@ -315,8 +315,8 @@ class MenuButton : Widget
   /**
    * Sets func to be called when a popup is about to be shown.
    * func should use one of
-   * - [Gtk.MenuButton.setPopover]
-   * - [Gtk.MenuButton.setMenuModel]
+   * - [gtk.menu_button.MenuButton.setPopover]
+   * - [gtk.menu_button.MenuButton.setMenuModel]
    * to set a popup for menu_button.
    * If func is non-%NULL, menu_button will always be sensitive.
    * Using this function will not reset the menu widget attached to
@@ -371,10 +371,10 @@ class MenuButton : Widget
 
   /**
    * Sets the name of an icon to show inside the menu button.
-   * Setting icon name resets [Gtk.MenuButton.label] and
-   * [Gtk.MenuButton.child].
+   * Setting icon name resets [gtk.menu_button.MenuButton.utf8] and
+   * [gtk.menu_button.MenuButton.Widget].
    * If propertyGtk.MenuButton:always-show-arrow is set to `TRUE` and
-   * [Gtk.MenuButton.direction] is not `GTK_ARROW_NONE`, a dropdown arrow
+   * [gtk.menu_button.MenuButton.ArrowType] is not `GTK_ARROW_NONE`, a dropdown arrow
    * will be shown next to the icon.
    * Params:
    *   iconName = the icon name
@@ -388,8 +388,8 @@ class MenuButton : Widget
   /**
    * Sets the label to show inside the menu button.
    * Setting a label resets propertyGtk.MenuButton:icon-name and
-   * [Gtk.MenuButton.child].
-   * If [Gtk.MenuButton.direction] is not `GTK_ARROW_NONE`, a dropdown
+   * [gtk.menu_button.MenuButton.Widget].
+   * If [gtk.menu_button.MenuButton.ArrowType] is not `GTK_ARROW_NONE`, a dropdown
    * arrow will be shown next to the label.
    * Params:
    *   label = the label
@@ -403,10 +403,10 @@ class MenuButton : Widget
   /**
    * Sets the `GMenuModel` from which the popup will be constructed.
    * If menu_model is %NULL, the button is disabled.
-   * A [Gtk.Popover] will be created from the menu model with
-   * [Gtk.PopoverMenu.newFromModel]. Actions will be connected
+   * A [gtk.popover.Popover] will be created from the menu model with
+   * [gtk.popover_menu.PopoverMenu.newFromModel]. Actions will be connected
    * as documented for this function.
-   * If [Gtk.MenuButton.popover] is already set, it will be
+   * If [gtk.menu_button.MenuButton.Popover] is already set, it will be
    * dissociated from the menu_button, and the property is set to %NULL.
    * Params:
    *   menuModel = a `GMenuModel`, or %NULL to unset and disable the

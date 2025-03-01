@@ -4,7 +4,7 @@ public import arrow.file_iface_proxy;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 interface File

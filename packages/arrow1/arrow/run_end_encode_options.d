@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.data_type;
 import arrow.function_options;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class RunEndEncodeOptions : FunctionOptions
 {

@@ -4,7 +4,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object;
 import atk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**
@@ -36,7 +36,7 @@ class Relation : ObjectG
 
   /**
    * Create a new relation for the specified key and the specified list
-   * of targets.  See also [Atk.ObjectAtk.addRelationship].
+   * of targets.  See also [atk.object.ObjectAtk.addRelationship].
    * Params:
    *   targets = an array of pointers to
    *     #AtkObjects
@@ -61,7 +61,7 @@ class Relation : ObjectG
 
   /**
    * Adds the specified AtkObject to the target for the relation, if it is
-   * not already present.  See also [Atk.ObjectAtk.addRelationship].
+   * not already present.  See also [atk.object.ObjectAtk.addRelationship].
    * Params:
    *   target = an #AtkObject
    */

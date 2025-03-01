@@ -9,7 +9,7 @@ import arrowdataset.file_format;
 import arrowdataset.file_system_dataset;
 import arrowdataset.finish_options;
 import arrowdataset.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

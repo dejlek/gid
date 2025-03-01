@@ -1,7 +1,7 @@
 module gio.dbus_object_manager_mixin;
 
 public import gio.dbus_object_manager_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.dbus_interface;
@@ -17,8 +17,8 @@ public import gobject.object;
  * client-side implementations of the standardized
  * [`org.freedesktop.DBus.ObjectManager`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
  * interface.
- * See [Gio.DBusObjectManagerClient] for the client-side implementation
- * and [Gio.DBusObjectManagerServer] for the service-side implementation.
+ * See [gio.dbus_object_manager_client.DBusObjectManagerClient] for the client-side implementation
+ * and [gio.dbus_object_manager_server.DBusObjectManagerServer] for the service-side implementation.
  */
 template DBusObjectManagerT()
 {
@@ -30,7 +30,7 @@ template DBusObjectManagerT()
    *   objectPath = Object path to look up.
    *   interfaceName = D-Bus interface name to look up.
    * Returns: A #GDBusInterface instance or %NULL. Free
-   *   with [GObject.ObjectG.unref].
+   *   with [gobject.object.ObjectG.unref].
    */
   override DBusInterface getInterface(string objectPath, string interfaceName)
   {
@@ -47,7 +47,7 @@ template DBusObjectManagerT()
    * Params:
    *   objectPath = Object path to look up.
    * Returns: A #GDBusObject or %NULL. Free with
-   *   [GObject.ObjectG.unref].
+   *   [gobject.object.ObjectG.unref].
    */
   override DBusObject getObject(string objectPath)
   {
@@ -74,8 +74,8 @@ template DBusObjectManagerT()
    * Gets all #GDBusObject objects known to manager.
    * Returns: A list of
    *   #GDBusObject objects. The returned list should be freed with
-   *   [GLib.List.free] after each element has been freed with
-   *   [GObject.ObjectG.unref].
+   *   [glib.list.List.free] after each element has been freed with
+   *   [gobject.object.ObjectG.unref].
    */
   override DBusObject[] getObjects()
   {

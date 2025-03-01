@@ -1,6 +1,6 @@
 module gtk.password_entry;
 
-import gid.gid;
+import gid.global;
 import gio.menu_model;
 import gobject.dclosure;
 import gobject.object;
@@ -27,7 +27,7 @@ import gtk.widget;
  * to disk by the operating system.
  * Optionally, it can offer a way to reveal the contents in clear text.
  * `GtkPasswordEntry` provides only minimal API and should be used with
- * the [Gtk.Editable] API.
+ * the [gtk.editable.Editable] API.
  * # CSS Nodes
  * ```
  * entry.password
@@ -75,7 +75,7 @@ class PasswordEntry : Widget, Editable
   }
 
   /**
-   * Gets the menu model set with [Gtk.PasswordEntry.setExtraMenu].
+   * Gets the menu model set with [gtk.password_entry.PasswordEntry.setExtraMenu].
    * Returns: the menu model
    */
   MenuModel getExtraMenu()

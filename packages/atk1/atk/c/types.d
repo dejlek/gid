@@ -5,10 +5,10 @@ public import gobject.c.types;
 
 /**
  * This is a singly-linked list $(LPAREN)a #GSList$(RPAREN) of #AtkAttribute. It is
- * used by [Atk.Text.getRunAttributes],
- * [Atk.Text.getDefaultAttributes],
- * [Atk.EditableText.setRunAttributes],
- * [Atk.Document.getAttributes] and [Atk.ObjectAtk.getAttributes]
+ * used by [atk.text.Text.getRunAttributes],
+ * [atk.text.Text.getDefaultAttributes],
+ * [atk.editable_text.EditableText.setRunAttributes],
+ * [atk.document.Document.getAttributes] and [atk.object.ObjectAtk.getAttributes]
  */
 alias AtkAttributeSet = GSList;
 
@@ -22,7 +22,7 @@ alias AtkState = ulong;
 
 /**
  * Specifies how xy coordinates are to be interpreted. Used by functions such
- * as [Atk.Component.getPosition] and [Atk.Text.getCharacterExtents]
+ * as [atk.component.Component.getPosition] and [atk.text.Text.getCharacterExtents]
  */
 enum AtkCoordType
 {
@@ -1646,7 +1646,7 @@ enum AtkTextGranularity
 /**
  * Default types for a given value. Those are defined in order to
  * easily get localized strings to describe a given value or a given
- * subrange, using [Atk.Global.valueTypeGetLocalizedName].
+ * subrange, using [atk.global.valueTypeGetLocalizedName].
  */
 enum AtkValueType
 {
@@ -1733,13 +1733,13 @@ struct AtkActionIface
 /**
  * AtkAttribute is a string name/value pair representing a generic
  * attribute. This can be used to expose additional information from
- * an accessible object as a whole $(LPAREN)see [Atk.ObjectAtk.getAttributes]$(RPAREN)
- * or an document $(LPAREN)see [Atk.Document.getAttributes]$(RPAREN). In the case of
- * text attributes $(LPAREN)see [Atk.Text.getDefaultAttributes]$(RPAREN),
+ * an accessible object as a whole $(LPAREN)see [atk.object.ObjectAtk.getAttributes]$(RPAREN)
+ * or an document $(LPAREN)see [atk.document.Document.getAttributes]$(RPAREN). In the case of
+ * text attributes $(LPAREN)see [atk.text.Text.getDefaultAttributes]$(RPAREN),
  * #AtkTextAttribute enum defines all the possible text attribute
- * names. You can use [Atk.Global.textAttributeGetName] to get the string
- * name from the enum value. See also [Atk.Global.textAttributeForName]
- * and [Atk.Global.textAttributeGetValue] for more information.
+ * names. You can use [atk.global.textAttributeGetName] to get the string
+ * name from the enum value. See also [atk.global.textAttributeForName]
+ * and [atk.global.textAttributeGetValue] for more information.
  * A string name/value pair representing a generic attribute.
  */
 struct AtkAttribute
@@ -1783,7 +1783,7 @@ struct AtkComponentIface
 
   /**
    * This virtual function is deprecated since 2.9.4
-   * and it should not be overriden. See [Atk.Component.addFocusHandler]
+   * and it should not be overriden. See [atk.component.Component.addFocusHandler]
    * for more information.
    */
   extern(C) uint function(AtkComponent* component, AtkFocusHandler handler) addFocusHandler;
@@ -1810,7 +1810,7 @@ struct AtkComponentIface
 
   /**
    * This virtual function is deprecated since
-   * 2.9.4 and it should not be overriden. See [Atk.Component.removeFocusHandler]
+   * 2.9.4 and it should not be overriden. See [atk.component.Component.removeFocusHandler]
    * for more information.
    */
   extern(C) void function(AtkComponent* component, uint handlerId) removeFocusHandler;
@@ -2313,7 +2313,7 @@ struct AtkObjectClass
  * create accessible objects for objects of a specific GType.
  * This class is the base object class for a factory used to create an
  * accessible object for a specific GType. The function
- * [Atk.Registry.setFactoryType] is normally called to store in the
+ * [atk.registry.Registry.setFactoryType] is normally called to store in the
  * registry the factory type to be used to create an accessible of a
  * particular GType.
  */
@@ -2529,21 +2529,21 @@ struct AtkSelectionIface
  * accessibles from one process into another in a fashion that is
  * transparent to assistive technologies. #AtkSocket works as the
  * container of #AtkPlug, embedding it using the method
- * [Atk.Socket.embed]. Any accessible contained in the #AtkPlug will
+ * [atk.socket.Socket.embed]. Any accessible contained in the #AtkPlug will
  * appear to the assistive technologies as being inside the
  * application that created the #AtkSocket.
  * The communication between a #AtkSocket and a #AtkPlug is done by
  * the IPC layer of the accessibility framework, normally implemented
  * by the D-Bus based implementation of AT-SPI $(LPAREN)at-spi2$(RPAREN). If that is
  * the case, at-spi-atk2 is the responsible to implement the abstract
- * methods [Atk.Plug.getId] and [Atk.Socket.embed], so an ATK
+ * methods [atk.plug.Plug.getId] and [atk.socket.Socket.embed], so an ATK
  * implementor shouldn't reimplement them. The process that contains
  * the #AtkPlug is responsible to send the ID returned by
  * atk_plug_id$(LPAREN)$(RPAREN) to the process that contains the #AtkSocket, so it
- * could call the method [Atk.Socket.embed] in order to embed it.
+ * could call the method [atk.socket.Socket.embed] in order to embed it.
  * For the same reasons, an implementor doesn't need to implement
- * [Atk.ObjectAtk.getNAccessibleChildren] and
- * [Atk.ObjectAtk.refAccessibleChild]. All the logic related to those
+ * [atk.object.ObjectAtk.getNAccessibleChildren] and
+ * [atk.object.ObjectAtk.refAccessibleChild]. All the logic related to those
  * functions will be implemented by the IPC layer.
  * See class@AtkPlug
  */
@@ -2565,7 +2565,7 @@ struct AtkSocketClass
  * An AtkStateSet contains the states of an object.
  * An AtkStateSet is a read-only representation of the full set of #AtkStates
  * that apply to an object at a given time. This set is not meant to be
- * modified, but rather created when #[Atk.ObjectAtk.refStateSet] is called.
+ * modified, but rather created when #[atk.object.ObjectAtk.refStateSet] is called.
  */
 struct AtkStateSet
 {
@@ -3141,7 +3141,7 @@ struct AtkUtilClass
  * implementors are expected to provide localized strings which can be
  * directly presented to end users via their assistive technology. In
  * order to simplify this for implementors, implementors can use
- * [Atk.Global.valueTypeGetLocalizedName] with the following
+ * [atk.global.valueTypeGetLocalizedName] with the following
  * already-localized constants for commonly-needed values can be used:
  * </para>
  * <itemizedlist>

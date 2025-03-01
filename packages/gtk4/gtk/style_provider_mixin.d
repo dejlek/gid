@@ -1,7 +1,7 @@
 module gtk.style_provider_mixin;
 
 public import gtk.style_provider_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -10,11 +10,11 @@ public import gtk.types;
 /**
  * `GtkStyleProvider` is an interface for style information used by
  * `GtkStyleContext`.
- * See [Gtk.StyleContext.addProvider] and
- * [Gtk.StyleContext.addProviderForDisplay] for
+ * See [gtk.style_context.StyleContext.addProvider] and
+ * [gtk.style_context.StyleContext.addProviderForDisplay] for
  * adding `GtkStyleProviders`.
  * GTK uses the `GtkStyleProvider` implementation for CSS in
- * [Gtk.CssProvider].
+ * [gtk.css_provider.CssProvider].
  */
 template StyleProviderT()
 {

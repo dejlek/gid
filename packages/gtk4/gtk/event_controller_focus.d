@@ -1,6 +1,6 @@
 module gtk.event_controller_focus;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,8 +10,8 @@ import gtk.types;
 /**
  * `GtkEventControllerFocus` is an event controller to keep track of
  * keyboard focus.
- * The event controller offers [Gtk.EventControllerFocus.enter]
- * and [Gtk.EventControllerFocus.leave] signals, as well as
+ * The event controller offers [gtk.event_controller_focus.EventControllerFocus.enter]
+ * and [gtk.event_controller_focus.EventControllerFocus.leave] signals, as well as
  * property@Gtk.EventControllerFocus:is-focus and
  * property@Gtk.EventControllerFocus:contains-focus properties
  * which are updated to reflect focus changes inside the widget hierarchy

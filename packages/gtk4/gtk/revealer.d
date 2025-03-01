@@ -1,6 +1,6 @@
 module gtk.revealer;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -16,7 +16,7 @@ import gtk.widget;
 /**
  * A `GtkRevealer` animates the transition of its child from invisible to visible.
  * The style of transition can be controlled with
- * [Gtk.Revealer.setTransitionType].
+ * [gtk.revealer.Revealer.setTransitionType].
  * These animations respect the property@Gtk.Settings:gtk-enable-animations
  * setting.
  * # CSS nodes
@@ -89,7 +89,7 @@ class Revealer : Widget
    * This function returns %TRUE as soon as the transition
    * is to the revealed state is started. To learn whether
    * the child is fully revealed $(LPAREN)ie the transition is completed$(RPAREN),
-   * use [Gtk.Revealer.getChildRevealed].
+   * use [gtk.revealer.Revealer.getChildRevealed].
    * Returns: %TRUE if the child is revealed.
    */
   bool getRevealChild()

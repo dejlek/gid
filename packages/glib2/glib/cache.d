@@ -1,6 +1,6 @@
 module glib.cache;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -51,7 +51,7 @@ class Cache
    * Gets the value corresponding to the given key, creating it if
    * necessary. It first checks if the value already exists in the
    * #GCache, by using the key_equal_func function passed to
-   * [GLib.Cache.new_]. If it does already exist it is returned, and its
+   * [glib.cache.Cache.new_]. If it does already exist it is returned, and its
    * reference count is increased by one. If the value does not currently
    * exist, if is created by calling the value_new_func. The key is
    * duplicated by calling key_dup_func and the duplicated key and value
@@ -72,7 +72,7 @@ class Cache
    * Calls the given function for each of the keys in the #GCache.
    * NOTE func is passed three parameters, the value and key of a cache
    * entry and the user_data. The order of value and key is different
-   * from the order in which [GLib.HashTable.foreach_] passes key-value
+   * from the order in which [glib.hash_table.HashTable.foreach_] passes key-value
    * pairs to its callback function !
    * Params:
    *   func = the function to call with each #GCache key
@@ -96,7 +96,7 @@ class Cache
   /**
    * Decreases the reference count of the given value. If it drops to 0
    * then the value and its corresponding key are destroyed, using the
-   * value_destroy_func and key_destroy_func passed to [GLib.Cache.new_].
+   * value_destroy_func and key_destroy_func passed to [glib.cache.Cache.new_].
    * Params:
    *   value = the value to remove
 
@@ -113,7 +113,7 @@ class Cache
    *   func = the function to call with each #GCache value
 
    * Deprecated: The reason is that it passes pointers to internal
-   *   data structures to func; use [GLib.Cache.keyForeach] instead
+   *   data structures to func; use [glib.cache.Cache.keyForeach] instead
    */
   void valueForeach(HFunc func)
   {

@@ -198,13 +198,13 @@ enum VtePtyFlags : uint
 
   /**
    * Do not start a new session for the child in
-   * [Vte.Pty.childSetup]. See man:setsid(2) for more information. Since: 0.58
+   * [vte.pty.Pty.childSetup]. See man:setsid(2) for more information. Since: 0.58
    */
   NoSession = 32,
 
   /**
    * Do not set the PTY as the controlling TTY for the child
-   * in [Vte.Pty.childSetup]. See man:tty_ioctl(4) for more information. Since: 0.58
+   * in [vte.pty.Pty.childSetup]. See man:tty_ioctl(4) for more information. Since: 0.58
    */
   NoCtty = 64,
 

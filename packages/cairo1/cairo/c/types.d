@@ -130,7 +130,7 @@ enum cairo_content_t
 /**
  * #cairo_device_type_t is used to describe the type of a given
  * device. The devices types are also known as "backends" within cairo.
- * The device type can be queried with [cairo.Device.getDeviceType]
+ * The device type can be queried with [cairo.device.Device.getDeviceType]
  * The various #cairo_device_t functions can be used with devices of
  * any type, but some backends also provide type-specific functions
  * that must only be called with a device of the appropriate
@@ -283,7 +283,7 @@ enum cairo_fill_rule_t
 /**
  * #cairo_filter_t is used to indicate what filtering should be
  * applied when reading pixel values from patterns. See
- * [cairo.Pattern.setFilter] for indicating the desired filter to be
+ * [cairo.pattern.Pattern.setFilter] for indicating the desired filter to be
  * used with a particular pattern.
  */
 enum cairo_filter_t
@@ -351,12 +351,12 @@ enum cairo_font_slant_t
  * The type of a font face is determined by the function used to
  * create it, which will generally be of the form
  * <function>cairo_<emphasis>type</emphasis>_font_face_create$(LPAREN)<!-- -->$(RPAREN)</function>.
- * The font face type can be queried with [cairo.FontFace.getFontType]
+ * The font face type can be queried with [cairo.font_face.FontFace.getFontType]
  * The various #cairo_font_face_t functions can be used with a font face
  * of any type.
  * The type of a scaled font is determined by the type of the font
- * face passed to [cairo.Global.scaledFontCreate]. The scaled font type can
- * be queried with [cairo.ScaledFont.getFontType]
+ * face passed to [cairo.global.scaledFontCreate]. The scaled font type can
+ * be queried with [cairo.scaled_font.ScaledFont.getFontType]
  * The various #cairo_scaled_font_t functions can be used with scaled
  * fonts of any type, but some font backends also provide
  * type-specific functions that must only be called with a scaled font
@@ -562,7 +562,7 @@ enum cairo_line_join_t
 {
   /**
    * use a sharp $(LPAREN)angled$(RPAREN) corner, see
-   * [cairo.Context.setMiterLimit] (Since 1.0)
+   * [cairo.context.Context.setMiterLimit] (Since 1.0)
    */
   Miter = 0,
 
@@ -803,16 +803,16 @@ enum cairo_path_data_type_t
 /**
  * #cairo_pattern_type_t is used to describe the type of a given pattern.
  * The type of a pattern is determined by the function used to create
- * it. The [cairo.Global.patternCreateRgb] and [cairo.Global.patternCreateRgba]
+ * it. The [cairo.global.patternCreateRgb] and [cairo.global.patternCreateRgba]
  * functions create SOLID patterns. The remaining
  * cairo_pattern_create<!-- --> functions map to pattern types in obvious
  * ways.
- * The pattern type can be queried with [cairo.Pattern.getPatternType]
+ * The pattern type can be queried with [cairo.pattern.Pattern.getPatternType]
  * Most #cairo_pattern_t functions can be called with a pattern of any
  * type, $(LPAREN)though trying to change the extend or filter for a solid
  * pattern will have no effect$(RPAREN). A notable exception is
- * [cairo.Pattern.addColorStopRgb] and
- * [cairo.Pattern.addColorStopRgba] which must only be called with
+ * [cairo.pattern.Pattern.addColorStopRgb] and
+ * [cairo.pattern.Pattern.addColorStopRgba] which must only be called with
  * gradient patterns $(LPAREN)either LINEAR or RADIAL$(RPAREN). Otherwise the pattern
  * will be shutdown and put into an error state.
  * New entries may be added in future versions.
@@ -848,7 +848,7 @@ enum cairo_pattern_type_t
 
 /**
  * #cairo_pdf_metadata_t is used by the
- * [cairo.Global.pdfSurfaceSetMetadata] function specify the metadata to set.
+ * [cairo.global.pdfSurfaceSetMetadata] function specify the metadata to set.
  */
 enum cairo_pdf_metadata_t
 {
@@ -890,7 +890,7 @@ enum cairo_pdf_metadata_t
 
 /**
  * #cairo_pdf_outline_flags_t is used by the
- * [cairo.Global.pdfSurfaceAddOutline] function specify the attributes of
+ * [cairo.global.pdfSurfaceAddOutline] function specify the attributes of
  * an outline item. These flags may be bitwise-or'd to produce any
  * combination of flags.
  */
@@ -958,7 +958,7 @@ enum cairo_ps_level_t
 }
 
 /**
- * Used as the return value for [cairo.Region.containsRectangle].
+ * Used as the return value for [cairo.region.Region.containsRectangle].
  */
 enum cairo_region_overlap_t
 {
@@ -999,8 +999,8 @@ enum cairo_script_mode_t
  * #cairo_status_t is used to indicate errors that can occur when
  * using Cairo. In some cases it is returned directly by functions.
  * but when using #cairo_t, the last error, if any, is stored in
- * the context and can be retrieved with [cairo.Context.status].
- * New entries may be added in future versions.  Use [cairo.Global.statusToString]
+ * the context and can be retrieved with [cairo.context.Context.status].
+ * New entries may be added in future versions.  Use [cairo.global.statusToString]
  * to get a human-readable representation of an error message.
  */
 enum cairo_status_t
@@ -1016,12 +1016,12 @@ enum cairo_status_t
   NoMemory = 1,
 
   /**
-   * [cairo.Context.restore] called without matching [cairo.Context.save] (Since 1.0)
+   * [cairo.context.Context.restore] called without matching [cairo.context.Context.save] (Since 1.0)
    */
   InvalidRestore = 2,
 
   /**
-   * no saved group to pop, i.e. [cairo.Context.popGroup] without matching [cairo.Context.pushGroup] (Since 1.0)
+   * no saved group to pop, i.e. [cairo.context.Context.popGroup] without matching [cairo.context.Context.pushGroup] (Since 1.0)
    */
   InvalidPopGroup = 3,
 
@@ -1188,7 +1188,7 @@ enum cairo_status_t
   /**
    * a mesh pattern
    * construction operation was used outside of a
-   * [cairo.Global.meshPatternBeginPatch]/[cairo.Global.meshPatternEndPatch]
+   * [cairo.global.meshPatternBeginPatch]/[cairo.global.meshPatternEndPatch]
    * pair $(LPAREN)Since 1.12$(RPAREN)
    */
   InvalidMeshConstruction = 36,
@@ -1289,13 +1289,13 @@ enum cairo_surface_observer_mode_t
  * The type of a surface is determined by the function used to create
  * it, which will generally be of the form
  * <function>cairo_<emphasis>type</emphasis>_surface_create$(LPAREN)<!-- -->$(RPAREN)</function>,
- * $(LPAREN)though see [cairo.Surface.createSimilar] as well$(RPAREN).
- * The surface type can be queried with [cairo.Surface.getSurfaceType]
+ * $(LPAREN)though see [cairo.surface.Surface.createSimilar] as well$(RPAREN).
+ * The surface type can be queried with [cairo.surface.Surface.getSurfaceType]
  * The various #cairo_surface_t functions can be used with surfaces of
  * any type, but some backends also provide type-specific functions
  * that must only be called with a surface of the appropriate
  * type. These functions have names that begin with
- * <literal>cairo_<emphasis>type</emphasis>_surface</literal> such as [cairo.Global.imageSurfaceGetWidth].
+ * <literal>cairo_<emphasis>type</emphasis>_surface</literal> such as [cairo.global.imageSurfaceGetWidth].
  * The behavior of calling a type-specific function with a surface of
  * the wrong type is undefined.
  * New entries may be added in future versions.
@@ -1527,7 +1527,7 @@ enum cairo_text_cluster_flags_t
  * cairo and all drawing with cairo is always done to a #cairo_t
  * object.
  * Memory management of #cairo_t is done with
- * [cairo.Global.reference] and [cairo.Global.destroy].
+ * [cairo.global.reference] and [cairo.global.destroy].
  */
 struct cairo_t;
 
@@ -1535,9 +1535,9 @@ struct cairo_t;
  * A #cairo_device_t represents the driver interface for drawing
  * operations to a #cairo_surface_t.  There are different subtypes of
  * #cairo_device_t for different drawing backends.
- * The type of a device can be queried with [cairo.Device.getDeviceType].
+ * The type of a device can be queried with [cairo.device.Device.getDeviceType].
  * Memory management of #cairo_device_t is done with
- * [cairo.Device.reference] and [cairo.Device.destroy].
+ * [cairo.device.Device.reference] and [cairo.device.Device.destroy].
  */
 struct cairo_device_t;
 
@@ -1607,13 +1607,13 @@ struct cairo_font_extents_t
  * than the size or font matrix $(LPAREN)a font matrix is used to distort
  * a font by shearing it or scaling it unequally in the two
  * directions$(RPAREN) . A font face can be set on a #cairo_t by using
- * [cairo.Context.setFontFace]; the size and font matrix are set with
- * [cairo.Context.setFontSize] and [cairo.Context.setFontMatrix].
+ * [cairo.context.Context.setFontFace]; the size and font matrix are set with
+ * [cairo.context.Context.setFontSize] and [cairo.context.Context.setFontMatrix].
  * There are various types of font faces, depending on the
  * <firstterm>font backend</firstterm> they use. The type of a
- * font face can be queried using [cairo.FontFace.getFontType].
+ * font face can be queried using [cairo.font_face.FontFace.getFontType].
  * Memory management of #cairo_font_face_t is done with
- * [cairo.FontFace.reference] and [cairo.FontFace.destroy].
+ * [cairo.font_face.FontFace.reference] and [cairo.font_face.FontFace.destroy].
  */
 struct cairo_font_face_t;
 
@@ -1624,12 +1624,12 @@ struct cairo_font_face_t;
  * accessed using functions named
  * <function>cairo_font_options_set_<emphasis>feature_name</emphasis>$(LPAREN)$(RPAREN)</function> and
  * <function>cairo_font_options_get_<emphasis>feature_name</emphasis>$(LPAREN)$(RPAREN)</function>, like
- * [cairo.FontOptions.setAntialias] and
- * [cairo.FontOptions.getAntialias].
+ * [cairo.font_options.FontOptions.setAntialias] and
+ * [cairo.font_options.FontOptions.getAntialias].
  * New features may be added to a #cairo_font_options_t in the
- * future.  For this reason, [cairo.FontOptions.copy],
- * [cairo.FontOptions.equal], [cairo.FontOptions.merge], and
- * [cairo.FontOptions.hash] should be used to copy, check
+ * future.  For this reason, [cairo.font_options.FontOptions.copy],
+ * [cairo.font_options.FontOptions.equal], [cairo.font_options.FontOptions.merge], and
+ * [cairo.font_options.FontOptions.hash] should be used to copy, check
  * for equality, merge, or compute a hash value of
  * #cairo_font_options_t objects.
  */
@@ -1715,9 +1715,9 @@ struct cairo_matrix_t
 
 /**
  * A data structure for holding a path. This data structure serves as
- * the return value for [cairo.Context.copyPath] and
- * [cairo.Context.copyPathFlat] as well the input value for
- * [cairo.Context.appendPath].
+ * the return value for [cairo.context.Context.copyPath] and
+ * [cairo.context.Context.copyPathFlat] as well the input value for
+ * [cairo.context.Context.appendPath].
  * See #cairo_path_data_t for hints on how to iterate over the
  * actual data within the path.
  * The num_data member gives the number of elements in the data
@@ -1761,8 +1761,8 @@ struct cairo_path_t
  * %CAIRO_PATH_CLOSE_PATH:  0 points
  * </programlisting>
  * The semantics and ordering of the coordinate values are consistent
- * with [cairo.Context.moveTo], [cairo.Context.lineTo], [cairo.Context.curveTo], and
- * [cairo.Context.closePath].
+ * with [cairo.context.Context.moveTo], [cairo.context.Context.lineTo], [cairo.context.Context.curveTo], and
+ * [cairo.context.Context.closePath].
  * Here is sample code for iterating through a #cairo_path_t:
  * <informalexample><programlisting>
  * int i;
@@ -1825,16 +1825,16 @@ union cairo_path_data_t
  * A #cairo_pattern_t represents a source when drawing onto a
  * surface. There are different subtypes of #cairo_pattern_t,
  * for different types of sources; for example,
- * [cairo.Global.patternCreateRgb] creates a pattern for a solid
+ * [cairo.global.patternCreateRgb] creates a pattern for a solid
  * opaque color.
  * Other than various
  * <function>cairo_pattern_create_<emphasis>type</emphasis>$(LPAREN)$(RPAREN)</function>
  * functions, some of the pattern types can be implicitly created using various
  * <function>cairo_set_source_<emphasis>type</emphasis>$(LPAREN)$(RPAREN)</function> functions;
- * for example [cairo.Context.setSourceRgb].
- * The type of a pattern can be queried with [cairo.Pattern.getPatternType].
+ * for example [cairo.context.Context.setSourceRgb].
+ * The type of a pattern can be queried with [cairo.pattern.Pattern.getPatternType].
  * Memory management of #cairo_pattern_t is done with
- * [cairo.Pattern.reference] and [cairo.Pattern.destroy].
+ * [cairo.pattern.Pattern.reference] and [cairo.pattern.Pattern.destroy].
  */
 struct cairo_pattern_t;
 
@@ -1914,10 +1914,10 @@ struct cairo_rectangle_list_t
 
 /**
  * A #cairo_region_t represents a set of integer-aligned rectangles.
- * It allows set-theoretical operations like [cairo.Region.union_] and
- * [cairo.Region.intersect] to be performed on them.
+ * It allows set-theoretical operations like [cairo.region.Region.union_] and
+ * [cairo.region.Region.intersect] to be performed on them.
  * Memory management of #cairo_region_t is done with
- * [cairo.Region.reference] and [cairo.Region.destroy].
+ * [cairo.region.Region.reference] and [cairo.region.Region.destroy].
  */
 struct cairo_region_t;
 
@@ -1928,9 +1928,9 @@ struct cairo_region_t;
  * to a scaled font to speed up the computation of metrics.
  * There are various types of scaled fonts, depending on the
  * <firstterm>font backend</firstterm> they use. The type of a
- * scaled font can be queried using [cairo.ScaledFont.getFontType].
+ * scaled font can be queried using [cairo.scaled_font.ScaledFont.getFontType].
  * Memory management of #cairo_scaled_font_t is done with
- * [cairo.ScaledFont.reference] and [cairo.ScaledFont.destroy].
+ * [cairo.scaled_font.ScaledFont.reference] and [cairo.scaled_font.ScaledFont.destroy].
  */
 struct cairo_scaled_font_t;
 
@@ -1938,21 +1938,21 @@ struct cairo_scaled_font_t;
  * A #cairo_surface_t represents an image, either as the destination
  * of a drawing operation or as source when drawing onto another
  * surface.  To draw to a #cairo_surface_t, create a cairo context
- * with the surface as the target, using [cairo.Global.create].
+ * with the surface as the target, using [cairo.global.create].
  * There are different subtypes of #cairo_surface_t for
- * different drawing backends; for example, [cairo.Global.imageSurfaceCreate]
+ * different drawing backends; for example, [cairo.global.imageSurfaceCreate]
  * creates a bitmap image in memory.
- * The type of a surface can be queried with [cairo.Surface.getSurfaceType].
+ * The type of a surface can be queried with [cairo.surface.Surface.getSurfaceType].
  * The initial contents of a surface after creation depend upon the manner
  * of its creation. If cairo creates the surface and backing storage for
  * the user, it will be initially cleared; for example,
- * [cairo.Global.imageSurfaceCreate] and [cairo.Surface.createSimilar].
+ * [cairo.global.imageSurfaceCreate] and [cairo.surface.Surface.createSimilar].
  * Alternatively, if the user passes in a reference to some backing storage
  * and asks cairo to wrap that in a #cairo_surface_t, then the contents are
- * not modified; for example, [cairo.Global.imageSurfaceCreateForData] and
+ * not modified; for example, [cairo.global.imageSurfaceCreateForData] and
  * cairo_xlib_surface_create$(LPAREN)$(RPAREN).
  * Memory management of #cairo_surface_t is done with
- * [cairo.Surface.reference] and [cairo.Surface.destroy].
+ * [cairo.surface.Surface.reference] and [cairo.surface.Surface.destroy].
  */
 struct cairo_surface_t;
 
@@ -1965,7 +1965,7 @@ struct cairo_surface_t;
  * Note that clusters with zero glyphs are not as well supported as
  * normal clusters.  For example, PDF rendering applications typically
  * ignore those clusters when PDF text is being selected.
- * See [cairo.Context.showTextGlyphs] for how clusters are used in advanced
+ * See [cairo.context.Context.showTextGlyphs] for how clusters are used in advanced
  * text operations.
  */
 struct cairo_text_cluster_t

@@ -1,6 +1,6 @@
 module gtksource.mark;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.text_mark;
 import gtksource.c.functions;
@@ -10,11 +10,11 @@ import gtksource.types;
 /**
  * Mark object for class@Buffer.
  * A `GtkSourceMark` marks a position in the text where you want to display
- * additional info. It is based on [Gtk.TextMark] and thus is still valid after
+ * additional info. It is based on [gtk.text_mark.TextMark] and thus is still valid after
  * the text has changed though its position may change.
  * `GtkSourceMark`s are organized in categories which you have to set
  * when you create the mark. Each category can have a priority, a pixbuf and
- * other associated attributes. See [GtkSource.View.setMarkAttributes].
+ * other associated attributes. See [gtksource.view.View.setMarkAttributes].
  * The pixbuf will be displayed in the margin at the line where the mark
  * residents if the property@View:show-line-marks property is set to %TRUE. If
  * there are multiple marks in the same line, the pixbufs will be drawn on top
@@ -41,18 +41,18 @@ class Mark : TextMark
 
   /**
    * Creates a text mark.
-   * Add it to a buffer using [Gtk.TextBuffer.addMark].
+   * Add it to a buffer using [gtk.text_buffer.TextBuffer.addMark].
    * If name is NULL, the mark is anonymous; otherwise, the mark can be retrieved
-   * by name using [Gtk.TextBuffer.getMark].
+   * by name using [gtk.text_buffer.TextBuffer.getMark].
    * Normally marks are created using the utility function
-   * [GtkSource.Buffer.createSourceMark].
+   * [gtksource.buffer.Buffer.createSourceMark].
    * Params:
    *   name = Name of the #GtkSourceMark or %NULL
    *   category = is used to classify marks according to common characteristics
    *     $(LPAREN)e.g. all the marks representing a bookmark could belong to the "bookmark"
    *     category, or all the marks representing a compilation error could belong
    *     to "error" category$(RPAREN).
-   * Returns: a new #GtkSourceMark that can be added using [Gtk.TextBuffer.addMark].
+   * Returns: a new #GtkSourceMark that can be added using [gtk.text_buffer.TextBuffer.addMark].
    */
   this(string name, string category)
   {

@@ -1,6 +1,6 @@
 module gobject.enum_class;
 
-import gid.gid;
+import gid.global;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.enum_value;

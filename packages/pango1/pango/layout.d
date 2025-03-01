@@ -1,6 +1,6 @@
 module pango.layout;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.error;
 import gobject.object;
@@ -80,7 +80,7 @@ class Layout : ObjectG
   }
 
   /**
-   * Loads data previously created via [Pango.Layout.serialize].
+   * Loads data previously created via [pango.layout.Layout.serialize].
    * For a discussion of the supported format, see that function.
    * Note: to verify that the returned layout is identical to
    * the one that was serialized, you can compare bytes to the
@@ -155,7 +155,7 @@ class Layout : ObjectG
   /**
    * Gets whether to calculate the base direction for the layout
    * according to its contents.
-   * See [Pango.Layout.setAutoDir].
+   * See [pango.layout.Layout.setAutoDir].
    * Returns: %TRUE if the bidirectional base direction
    *   is computed from the layout's contents, %FALSE otherwise
    */
@@ -180,7 +180,7 @@ class Layout : ObjectG
   /**
    * Given an index within a layout, determines the positions that of the
    * strong and weak cursors if the insertion point is at that index.
-   * This is a variant of [Pango.Layout.getCursorPos] that applies
+   * This is a variant of [pango.layout.Layout.getCursorPos] that applies
    * font metric information about caret slope and offset to the positions
    * it returns.
    * <picture>
@@ -270,8 +270,8 @@ class Layout : ObjectG
 
   /**
    * Gets the type of ellipsization being performed for layout.
-   * See [Pango.Layout.setEllipsize].
-   * Use [Pango.Layout.isEllipsized] to query whether any
+   * See [pango.layout.Layout.setEllipsize].
+   * Use [pango.layout.Layout.isEllipsized] to query whether any
    * paragraphs were actually ellipsized.
    * Returns: the current ellipsization mode for layout
    */
@@ -319,7 +319,7 @@ class Layout : ObjectG
 
   /**
    * Gets the height of layout used for ellipsization.
-   * See [Pango.Layout.setHeight] for details.
+   * See [pango.layout.Layout.setHeight] for details.
    * Returns: the height, in Pango units if positive,
    *   or number of lines if negative.
    */
@@ -380,7 +380,7 @@ class Layout : ObjectG
 
   /**
    * Retrieves a particular line from a `PangoLayout`.
-   * Use the faster [Pango.Layout.getLineReadonly] if you do not
+   * Use the faster [pango.layout.Layout.getLineReadonly] if you do not
    * plan to modify the contents of the line $(LPAREN)glyphs, glyph widths, etc.$(RPAREN).
    * Params:
    *   line = the index of a line, which must be between 0 and
@@ -411,7 +411,7 @@ class Layout : ObjectG
 
   /**
    * Retrieves a particular line from a `PangoLayout`.
-   * This is a faster alternative to [Pango.Layout.getLine],
+   * This is a faster alternative to [pango.layout.Layout.getLine],
    * but the user is not expected to modify the contents of the line
    * $(LPAREN)glyphs, glyph widths, etc.$(RPAREN).
    * Params:
@@ -432,7 +432,7 @@ class Layout : ObjectG
 
   /**
    * Gets the line spacing factor of layout.
-   * See [Pango.Layout.setLineSpacing].
+   * See [pango.layout.Layout.setLineSpacing].
    * Returns:
    */
   float getLineSpacing()
@@ -444,7 +444,7 @@ class Layout : ObjectG
 
   /**
    * Returns the lines of the layout as a list.
-   * Use the faster [Pango.Layout.getLinesReadonly] if you do not
+   * Use the faster [pango.layout.Layout.getLinesReadonly] if you do not
    * plan to modify the contents of the lines $(LPAREN)glyphs, glyph widths, etc.$(RPAREN).
    * Returns: a `GSList`
    *   containing the lines in the layout. This points to internal data of the
@@ -461,7 +461,7 @@ class Layout : ObjectG
 
   /**
    * Returns the lines of the layout as a list.
-   * This is a faster alternative to [Pango.Layout.getLines],
+   * This is a faster alternative to [pango.layout.Layout.getLines],
    * but the user is not expected to modify the contents of the lines
    * $(LPAREN)glyphs, glyph widths, etc.$(RPAREN).
    * Returns: a `GSList`
@@ -483,7 +483,7 @@ class Layout : ObjectG
    * the layout.
    * Params:
    *   attrs = location to store a pointer to an array of logical attributes.
-   *     This value must be freed with [GLib.Global.gfree].
+   *     This value must be freed with [glib.global.gfree].
    */
   void getLogAttrs(out LogAttr[] attrs)
   {
@@ -498,7 +498,7 @@ class Layout : ObjectG
   /**
    * Retrieves an array of logical attributes for each character in
    * the layout.
-   * This is a faster alternative to [Pango.Layout.getLogAttrs].
+   * This is a faster alternative to [pango.layout.Layout.getLogAttrs].
    * The returned array is part of layout and must not be modified.
    * Modifying the layout will invalidate the returned array.
    * The number of attributes returned in n_attrs will be one more
@@ -525,7 +525,7 @@ class Layout : ObjectG
 
   /**
    * Computes the logical and ink extents of layout in device units.
-   * This function just calls [Pango.Layout.getExtents] followed by
+   * This function just calls [pango.layout.Layout.getExtents] followed by
    * two funcextents_to_pixels calls, rounding ink_rect and logical_rect
    * such that the rounded rectangles fully contain the unrounded one $(LPAREN)that is,
    * passes them as first argument to funcPango.extents_to_pixels$(RPAREN).
@@ -543,9 +543,9 @@ class Layout : ObjectG
   /**
    * Determines the logical width and height of a `PangoLayout` in device
    * units.
-   * [Pango.Layout.getSize] returns the width and height
+   * [pango.layout.Layout.getSize] returns the width and height
    * scaled by %PANGO_SCALE. This is simply a convenience function
-   * around [Pango.Layout.getPixelExtents].
+   * around [pango.layout.Layout.getPixelExtents].
    * Params:
    *   width = location to store the logical width
    *   height = location to store the logical height
@@ -565,7 +565,7 @@ class Layout : ObjectG
    * This can be used to automatically detect changes to a `PangoLayout`,
    * and is useful for example to decide whether a layout needs redrawing.
    * To force the serial to be increased, use
-   * [Pango.Layout.contextChanged].
+   * [pango.layout.Layout.contextChanged].
    * Returns: The current serial number of layout.
    */
   uint getSerial()
@@ -577,7 +577,7 @@ class Layout : ObjectG
 
   /**
    * Obtains whether layout is in single paragraph mode.
-   * See [Pango.Layout.setSingleParagraphMode].
+   * See [pango.layout.Layout.setSingleParagraphMode].
    * Returns: %TRUE if the layout does not break paragraphs
    *   at paragraph separator characters, %FALSE otherwise
    */
@@ -591,7 +591,7 @@ class Layout : ObjectG
   /**
    * Determines the logical width and height of a `PangoLayout` in Pango
    * units.
-   * This is simply a convenience function around [Pango.Layout.getExtents].
+   * This is simply a convenience function around [pango.layout.Layout.getExtents].
    * Params:
    *   width = location to store the logical width
    *   height = location to store the logical height
@@ -616,7 +616,7 @@ class Layout : ObjectG
    * Gets the current `PangoTabArray` used by this layout.
    * If no `PangoTabArray` has been set, then the default tabs are
    * in use and %NULL is returned. Default tabs are every 8 spaces.
-   * The return value should be freed with [Pango.TabArray.free].
+   * The return value should be freed with [pango.tab_array.TabArray.free].
    * Returns: a copy of the tabs for this layout
    */
   TabArray getTabs()
@@ -668,7 +668,7 @@ class Layout : ObjectG
 
   /**
    * Gets the wrap mode for the layout.
-   * Use [Pango.Layout.isWrapped] to query whether
+   * Use [pango.layout.Layout.isWrapped] to query whether
    * any paragraphs were actually wrapped.
    * Returns: active wrap mode.
    */
@@ -786,9 +786,9 @@ class Layout : ObjectG
   }
 
   /**
-   * Serializes the layout for later deserialization via [Pango.Layout.deserialize].
+   * Serializes the layout for later deserialization via [pango.layout.Layout.deserialize].
    * There are no guarantees about the format of the output across different
-   * versions of Pango and [Pango.Layout.deserialize] will reject data
+   * versions of Pango and [pango.layout.Layout.deserialize] will reject data
    * that it cannot parse.
    * The intended use of this function is testing, benchmarking and debugging.
    * The format is not meant as a permanent storage format.
@@ -837,7 +837,7 @@ class Layout : ObjectG
    * get their direction from the surrounding paragraphs.
    * When %FALSE, the choice between left-to-right and right-to-left
    * layout is done according to the base direction of the layout's
-   * `PangoContext`. $(LPAREN)See [Pango.Context.setBaseDir]$(RPAREN).
+   * `PangoContext`. $(LPAREN)See [pango.context.Context.setBaseDir]$(RPAREN).
    * When the auto-computed direction of a paragraph differs from the
    * base direction of the context, the interpretation of
    * %PANGO_ALIGN_LEFT and %PANGO_ALIGN_RIGHT are swapped.
@@ -855,13 +855,13 @@ class Layout : ObjectG
    * Depending on the ellipsization mode ellipsize text is
    * removed from the start, middle, or end of text so they
    * fit within the width and height of layout set with
-   * [Pango.Layout.setWidth] and [Pango.Layout.setHeight].
+   * [pango.layout.Layout.setWidth] and [pango.layout.Layout.setHeight].
    * If the layout contains characters such as newlines that
    * force it to be layed out in multiple paragraphs, then whether
    * each paragraph is ellipsized separately or the entire layout
    * is ellipsized as a whole depends on the set height of the layout.
    * The default value is %PANGO_ELLIPSIZE_NONE.
-   * See [Pango.Layout.setHeight] for details.
+   * See [pango.layout.Layout.setHeight] for details.
    * Params:
    *   ellipsize = the new ellipsization mode for layout
    */
@@ -942,7 +942,7 @@ class Layout : ObjectG
    * Justification will move content away from its tab-aligned
    * positions.
    * The default value is %FALSE.
-   * Also see [Pango.Layout.setJustifyLastLine].
+   * Also see [pango.layout.Layout.setJustifyLastLine].
    * Params:
    *   justify = whether the lines in the layout should be justified
    */
@@ -954,7 +954,7 @@ class Layout : ObjectG
   /**
    * Sets whether the last line should be stretched to fill the
    * entire width of the layout.
-   * This only has an effect if [Pango.Layout.setJustify] has
+   * This only has an effect if [pango.layout.Layout.setJustify] has
    * been called as well.
    * The default value is %FALSE.
    * Params:
@@ -972,7 +972,7 @@ class Layout : ObjectG
    * baseline2 \= baseline1 + factor * height2
    * where height2 is the line height of the second line
    * $(LPAREN)as determined by the font$(LPAREN)s$(RPAREN)$(RPAREN). In this case, the spacing
-   * set with [Pango.Layout.setSpacing] is ignored.
+   * set with [pango.layout.Layout.setSpacing] is ignored.
    * If factor is zero $(LPAREN)the default$(RPAREN), spacing is applied as before.
    * Note: for semantics that are closer to the CSS line-height
    * property, see funcPango.attr_line_height_new.
@@ -988,7 +988,7 @@ class Layout : ObjectG
    * Sets the layout text and attribute list from marked-up text.
    * See [Pango Markup](pango_markup.html)$(RPAREN).
    * Replaces the current text and attribute list.
-   * This is the same as [Pango.Layout.setMarkupWithAccel],
+   * This is the same as [pango.layout.Layout.setMarkupWithAccel],
    * but the markup text isn't scanned for accelerators.
    * Params:
    *   markup = marked-up text
@@ -1053,7 +1053,7 @@ class Layout : ObjectG
    * The default value is 0.
    * Note: Since 1.44, Pango is using the line height $(LPAREN)as determined
    * by the font$(RPAREN) for placing lines when the line spacing factor is set
-   * to a non-zero value with [Pango.Layout.setLineSpacing].
+   * to a non-zero value with [pango.layout.Layout.setLineSpacing].
    * In that case, the spacing set with this function is ignored.
    * Note: for semantics that are closer to the CSS line-height
    * property, see funcPango.attr_line_height_new.
@@ -1088,9 +1088,9 @@ class Layout : ObjectG
    * Sets the text of the layout.
    * This function validates text and renders invalid UTF-8
    * with a placeholder glyph.
-   * Note that if you have used [Pango.Layout.setMarkup] or
-   * [Pango.Layout.setMarkupWithAccel] on layout before, you
-   * may want to call [Pango.Layout.setAttributes] to clear the
+   * Note that if you have used [pango.layout.Layout.setMarkup] or
+   * [pango.layout.Layout.setMarkupWithAccel] on layout before, you
+   * may want to call [pango.layout.Layout.setAttributes] to clear the
    * attributes set on the layout from the markup as this function does
    * not clear attributes.
    * Params:
@@ -1122,7 +1122,7 @@ class Layout : ObjectG
   /**
    * Sets the wrap mode.
    * The wrap mode only has effect if a width is set on the layout
-   * with [Pango.Layout.setWidth]. To turn off wrapping,
+   * with [pango.layout.Layout.setWidth]. To turn off wrapping,
    * set the width to -1.
    * The default value is %PANGO_WRAP_WORD.
    * Params:
@@ -1135,7 +1135,7 @@ class Layout : ObjectG
 
   /**
    * A convenience method to serialize a layout to a file.
-   * It is equivalent to calling [Pango.Layout.serialize]
+   * It is equivalent to calling [pango.layout.Layout.serialize]
    * followed by funcGLib.file_set_contents.
    * See those two functions for details on the arguments.
    * It is mostly intended for use inside a debugger to quickly dump
@@ -1162,7 +1162,7 @@ class Layout : ObjectG
    * If the Y position is not inside the layout, the closest position is
    * chosen $(LPAREN)the position will be clamped inside the layout$(RPAREN). If the X position
    * is not within the layout, then the start or the end of the line is
-   * chosen as described for [Pango.LayoutLine.xToIndex]. If either
+   * chosen as described for [pango.layout_line.LayoutLine.xToIndex]. If either
    * the X or Y positions were not inside the layout, then the function returns
    * %FALSE; on an exact hit, it returns %TRUE.
    * Params:

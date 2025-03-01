@@ -1,6 +1,6 @@
 module gtk.constraint_layout;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import glib.error;
@@ -19,11 +19,11 @@ import gtk.types;
 /**
  * A layout manager using constraints to describe relations between widgets.
  * `GtkConstraintLayout` is a layout manager that uses relations between
- * widget attributes, expressed via [Gtk.Constraint] instances, to
+ * widget attributes, expressed via [gtk.constraint.Constraint] instances, to
  * measure and allocate widgets.
  * ### How do constraints work
  * Constraints are objects defining the relationship between attributes
- * of a widget; you can read the description of the [Gtk.Constraint]
+ * of a widget; you can read the description of the [gtk.constraint.Constraint]
  * class to have a more in depth definition.
  * By taking multiple constraints and applying them to the children of
  * a widget using `GtkConstraintLayout`, it's possible to describe
@@ -42,12 +42,12 @@ import gtk.types;
  * that is: have more than one solution. The behavior of an unstable layout
  * is undefined.
  * A constraint-based layout with conflicting constraints may be unsolvable,
- * and lead to an unstable layout. You can use the [Gtk.Constraint.strength]
- * property of [Gtk.Constraint] to "nudge" the layout towards a solution.
+ * and lead to an unstable layout. You can use the [gtk.constraint.Constraint.gint]
+ * property of [gtk.constraint.Constraint] to "nudge" the layout towards a solution.
  * ### GtkConstraintLayout as GtkBuildable
- * `GtkConstraintLayout` implements the [Gtk.Buildable] interface and
+ * `GtkConstraintLayout` implements the [gtk.buildable.Buildable] interface and
  * has a custom "constraints" element which allows describing constraints in
- * a [Gtk.Builder] UI file.
+ * a [gtk.builder.Builder] UI file.
  * An example of a UI definition fragment specifying a constraint:
  * ```xml
  * <object class\="GtkConstraintLayout">
@@ -104,7 +104,7 @@ import gtk.types;
  * The Visual Format Language describes all the constraints on a row or
  * column, typically starting from the leading edge towards the trailing
  * one. Each element of the layout is composed by "views", which identify
- * a [Gtk.ConstraintTarget].
+ * a [gtk.constraint_target.ConstraintTarget].
  * For instance:
  * ```
  * [button]-[textField]
@@ -175,17 +175,17 @@ class ConstraintLayout : LayoutManager, Buildable
 
   /**
    * Adds a constraint to the layout manager.
-   * The [Gtk.Constraint.source] and [Gtk.Constraint.target]
+   * The [gtk.constraint.Constraint.ConstraintTarget] and [gtk.constraint.Constraint.ConstraintTarget]
    * properties of `constraint` can be:
    * - set to `NULL` to indicate that the constraint refers to the
    * widget using `layout`
-   * - set to the [Gtk.Widget] using `layout`
-   * - set to a child of the [Gtk.Widget] using `layout`
-   * - set to a [Gtk.ConstraintGuide] that is part of `layout`
+   * - set to the [gtk.widget.Widget] using `layout`
+   * - set to a child of the [gtk.widget.Widget] using `layout`
+   * - set to a [gtk.constraint_guide.ConstraintGuide] that is part of `layout`
    * The layout acquires the ownership of constraint after calling
    * this function.
    * Params:
-   *   constraint = a [Gtk.Constraint]
+   *   constraint = a [gtk.constraint.Constraint]
    */
   void addConstraint(Constraint constraint)
   {
@@ -195,7 +195,7 @@ class ConstraintLayout : LayoutManager, Buildable
   /**
    * Creates a list of constraints from a VFL description.
    * The Visual Format Language, VFL, is based on Apple's AutoLayout [VFL](https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html).
-   * The `views` dictionary is used to match [Gtk.ConstraintTarget]
+   * The `views` dictionary is used to match [gtk.constraint_target.ConstraintTarget]
    * instances to the symbolic view name inside the VFL.
    * The VFL grammar is:
    * ```
@@ -221,8 +221,8 @@ class ConstraintLayout : LayoutManager, Buildable
    * <metricName> \= [A-Za-z_][](A-Za-z0-9_*) // A C identifier
    * <attributeName> \= 'top' | 'bottom' | 'left' | 'right' | 'width' | 'height' |
    * 'start' | 'end' | 'centerX' | 'centerY' | 'baseline'
-   * <positiveNumber> // A positive real number parseable by [GLib.Global.asciiStrtod]
-   * <number> // A real number parseable by [GLib.Global.asciiStrtod]
+   * <positiveNumber> // A positive real number parseable by [glib.global.asciiStrtod]
+   * <number> // A real number parseable by [glib.global.asciiStrtod]
    * ```
    * **Note**: The VFL grammar used by GTK is slightly different than the one
    * defined by Apple, as it can use symbolic values for the constraint's
@@ -263,7 +263,7 @@ class ConstraintLayout : LayoutManager, Buildable
    *     the `target` values map to children of the widget using a `GtkConstraintLayout`,
    *     or guides
    * Returns: the list of
-   *   [Gtk.Constraint] instances that were added to the layout
+   *   [gtk.constraint.Constraint] instances that were added to the layout
    */
   Constraint[] addConstraintsFromDescription(string[] lines, int hspacing, int vspacing, ConstraintTarget[string] views)
   {
@@ -294,7 +294,7 @@ class ConstraintLayout : LayoutManager, Buildable
    * The `layout` acquires the ownership of `guide` after calling
    * this function.
    * Params:
-   *   guide = a [Gtk.ConstraintGuide] object
+   *   guide = a [gtk.constraint_guide.ConstraintGuide] object
    */
   void addGuide(ConstraintGuide guide)
   {
@@ -351,7 +351,7 @@ class ConstraintLayout : LayoutManager, Buildable
    * Removes `constraint` from the layout manager,
    * so that it no longer influences the layout.
    * Params:
-   *   constraint = a [Gtk.Constraint]
+   *   constraint = a [gtk.constraint.Constraint]
    */
   void removeConstraint(Constraint constraint)
   {
@@ -362,7 +362,7 @@ class ConstraintLayout : LayoutManager, Buildable
    * Removes `guide` from the layout manager,
    * so that it no longer influences the layout.
    * Params:
-   *   guide = a [Gtk.ConstraintGuide] object
+   *   guide = a [gtk.constraint_guide.ConstraintGuide] object
    */
   void removeGuide(ConstraintGuide guide)
   {

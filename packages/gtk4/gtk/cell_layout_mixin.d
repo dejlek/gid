@@ -1,7 +1,7 @@
 module gtk.cell_layout_mixin;
 
 public import gtk.cell_layout_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -21,10 +21,10 @@ public import gtk.types;
  * `GtkCellLayout` are attributes. Attributes let you set the properties
  * in flexible ways. They can just be set to constant values like regular
  * properties. But they can also be mapped to a column of the underlying
- * tree model with [Gtk.CellLayout.setAttributes], which means that the value
+ * tree model with [gtk.cell_layout.CellLayout.setAttributes], which means that the value
  * of the attribute can change from cell to cell as they are rendered by
  * the cell renderer. Finally, it is possible to specify a function with
- * [Gtk.CellLayout.setCellDataFunc] that is called to determine the
+ * [gtk.cell_layout.CellLayout.setCellDataFunc] that is called to determine the
  * value of the attribute for each cell that is rendered.
  * ## GtkCellLayouts as GtkBuildable
  * Implementations of GtkCellLayout which also implement the GtkBuildable
@@ -105,7 +105,7 @@ public import gtk.types;
  * for your class.
 
  * Deprecated: List views use widgets to display their contents.
- *   See [Gtk.LayoutManager] for layout manager delegate objects
+ *   See [gtk.layout_manager.LayoutManager] for layout manager delegate objects
  */
 template CellLayoutT()
 {
@@ -139,7 +139,7 @@ template CellLayoutT()
 
   /**
    * Clears all existing attributes previously set with
-   * [Gtk.CellLayout.setAttributes].
+   * [gtk.cell_layout.CellLayout.setAttributes].
    * Params:
    *   cell = a `GtkCellRenderer` to clear the attribute mapping on
    */
@@ -165,7 +165,7 @@ template CellLayoutT()
   /**
    * Returns the cell renderers which have been added to cell_layout.
    * Returns: a list of cell renderers. The list, but not the renderers has
-   *   been newly allocated and should be freed with [GLib.List.free]
+   *   been newly allocated and should be freed with [glib.list.List.free]
    *   when no longer needed.
    */
   override CellRenderer[] getCells()

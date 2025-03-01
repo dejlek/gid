@@ -1,6 +1,6 @@
 module gio.dbus_object_manager_server;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_connection;
@@ -11,7 +11,7 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GDBusObjectManagerServer` is used to export [Gio.DBusObject] instances
+ * `GDBusObjectManagerServer` is used to export [gio.dbus_object.DBusObject] instances
  * using the standardized
  * [`org.freedesktop.DBus.ObjectManager`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
  * interface. For example, remote D-Bus clients can get all objects
@@ -26,7 +26,7 @@ import gobject.object;
  * below $(LPAREN)to allow for multiple object managers in a service$(RPAREN).
  * It is supported, but not recommended, to export an object manager at the root
  * path, `/`.
- * See [Gio.DBusObjectManagerClient] for the client-side code that is
+ * See [gio.dbus_object_manager_client.DBusObjectManagerClient] for the client-side code that is
  * intended to be used with `GDBusObjectManagerServer` or any D-Bus
  * object implementing the `org.freedesktop.DBus.ObjectManager` interface.
  */
@@ -54,13 +54,13 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
   /**
    * Creates a new #GDBusObjectManagerServer object.
    * The returned server isn't yet exported on any connection. To do so,
-   * use [Gio.DBusObjectManagerServer.setConnection]. Normally you
+   * use [gio.dbus_object_manager_server.DBusObjectManagerServer.setConnection]. Normally you
    * want to export all of your objects before doing so to avoid
    * [InterfacesAdded](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
    * signals being emitted.
    * Params:
    *   objectPath = The object path to export the manager object at.
-   * Returns: A #GDBusObjectManagerServer object. Free with [GObject.ObjectG.unref].
+   * Returns: A #GDBusObjectManagerServer object. Free with [gobject.object.ObjectG.unref].
    */
   this(string objectPath)
   {
@@ -87,7 +87,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
   }
 
   /**
-   * Like [Gio.DBusObjectManagerServer.export_] but appends a string of
+   * Like [gio.dbus_object_manager_server.DBusObjectManagerServer.export_] but appends a string of
    * the form _N $(LPAREN)with N being a natural number$(RPAREN) to object's object path
    * if an object with the given path already exists. As such, the
    * #GDBusObjectProxy:g-object-path property of object may be modified.
@@ -103,7 +103,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
    * Gets the #GDBusConnection used by manager.
    * Returns: A #GDBusConnection object or %NULL if
    *   manager isn't exported on a connection. The returned object should
-   *   be freed with [GObject.ObjectG.unref].
+   *   be freed with [gobject.object.ObjectG.unref].
    */
   DBusConnection getConnection()
   {

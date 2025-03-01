@@ -1,6 +1,6 @@
 module glib.checksum;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -11,12 +11,12 @@ import gobject.boxed;
  * for a sequence of arbitrary bytes, using various hashing algorithms
  * like MD5, SHA-1 and SHA-256. Checksums are commonly used in various
  * environments and specifications.
- * To create a new `GChecksum`, use [GLib.Checksum.new_]. To free
- * a `GChecksum`, use [GLib.Checksum.free].
+ * To create a new `GChecksum`, use [glib.checksum.Checksum.new_]. To free
+ * a `GChecksum`, use [glib.checksum.Checksum.free].
  * GLib supports incremental checksums using the `GChecksum` data
- * structure, by calling [GLib.Checksum.update] as long as there’s data
- * available and then using [GLib.Checksum.getString] or
- * [GLib.Checksum.getDigest] to compute the checksum and return it
+ * structure, by calling [glib.checksum.Checksum.update] as long as there’s data
+ * available and then using [glib.checksum.Checksum.getString] or
+ * [glib.checksum.Checksum.getDigest] to compute the checksum and return it
  * either as a string in hexadecimal form, or as a raw sequence of bytes. To
  * compute the checksum for binary blobs and nul-terminated strings in
  * one go, use the convenience functions func@GLib.compute_checksum_for_data
@@ -51,18 +51,18 @@ class Checksum : Boxed
    * If the checksum_type is not known, %NULL is returned.
    * A #GChecksum can be used to compute the checksum, or digest, of an
    * arbitrary binary blob, using different hashing algorithms.
-   * A #GChecksum works by feeding a binary blob through [GLib.Checksum.update]
+   * A #GChecksum works by feeding a binary blob through [glib.checksum.Checksum.update]
    * until there is data to be checked; the digest can then be extracted
-   * using [GLib.Checksum.getString], which will return the checksum as a
-   * hexadecimal string; or [GLib.Checksum.getDigest], which will return a
-   * vector of raw bytes. Once either [GLib.Checksum.getString] or
-   * [GLib.Checksum.getDigest] have been called on a #GChecksum, the checksum
-   * will be closed and it won't be possible to call [GLib.Checksum.update]
+   * using [glib.checksum.Checksum.getString], which will return the checksum as a
+   * hexadecimal string; or [glib.checksum.Checksum.getDigest], which will return a
+   * vector of raw bytes. Once either [glib.checksum.Checksum.getString] or
+   * [glib.checksum.Checksum.getDigest] have been called on a #GChecksum, the checksum
+   * will be closed and it won't be possible to call [glib.checksum.Checksum.update]
    * on it anymore.
    * Params:
    *   checksumType = the desired type of checksum
    * Returns: the newly created #GChecksum, or %NULL.
-   *   Use [GLib.Checksum.free] to free the memory allocated by it.
+   *   Use [glib.checksum.Checksum.free] to free the memory allocated by it.
    */
   this(ChecksumType checksumType)
   {
@@ -73,10 +73,10 @@ class Checksum : Boxed
 
   /**
    * Copies a #GChecksum. If checksum has been closed, by calling
-   * [GLib.Checksum.getString] or [GLib.Checksum.getDigest], the copied
+   * [glib.checksum.Checksum.getString] or [glib.checksum.Checksum.getDigest], the copied
    * checksum will be closed as well.
    * Returns: the copy of the passed #GChecksum. Use
-   *   [GLib.Checksum.free] when finished using it.
+   *   [glib.checksum.Checksum.free] when finished using it.
    */
   Checksum copy()
   {
@@ -89,7 +89,7 @@ class Checksum : Boxed
   /**
    * Gets the digest as a hexadecimal string.
    * Once this function has been called the #GChecksum can no longer be
-   * updated with [GLib.Checksum.update].
+   * updated with [glib.checksum.Checksum.update].
    * The hexadecimal characters will be lower case.
    * Returns: the hexadecimal representation of the checksum. The
    *   returned string is owned by the checksum and should not be modified
@@ -113,7 +113,7 @@ class Checksum : Boxed
 
   /**
    * Feeds data into an existing #GChecksum. The checksum must still be
-   * open, that is [GLib.Checksum.getString] or [GLib.Checksum.getDigest] must
+   * open, that is [glib.checksum.Checksum.getString] or [glib.checksum.Checksum.getDigest] must
    * not have been called on checksum.
    * Params:
    *   data = buffer used to compute the checksum

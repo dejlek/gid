@@ -1,6 +1,6 @@
 module gtk.entry_buffer;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -99,7 +99,7 @@ class EntryBuffer : ObjectG
 
   /**
    * Retrieves the length in bytes of the buffer.
-   * See [Gtk.EntryBuffer.getLength].
+   * See [gtk.entry_buffer.EntryBuffer.getLength].
    * Returns: The byte length of the buffer.
    */
   size_t getBytes()
@@ -187,8 +187,8 @@ class EntryBuffer : ObjectG
   /**
    * Sets the text in the buffer.
    * This is roughly equivalent to calling
-   * [Gtk.EntryBuffer.deleteText] and
-   * [Gtk.EntryBuffer.insertText].
+   * [gtk.entry_buffer.EntryBuffer.deleteText] and
+   * [gtk.entry_buffer.EntryBuffer.insertText].
    * Note that n_chars is in characters, not in bytes.
    * Params:
    *   chars = the new text

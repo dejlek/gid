@@ -11,7 +11,7 @@ import arrow.record_batch;
 import arrow.schema;
 import arrow.tensor;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gio.input_stream : DGioInputStream = InputStream;
 import glib.error;
 import gobject.object;

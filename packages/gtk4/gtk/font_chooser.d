@@ -1,7 +1,7 @@
 module gtk.font_chooser;
 
 public import gtk.font_chooser_iface_proxy;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -16,10 +16,10 @@ import pango.font_map;
  * `GtkFontChooser` is an interface that can be implemented by widgets
  * for choosing fonts.
  * In GTK, the main objects that implement this interface are
- * [Gtk.FontChooserWidget], [Gtk.FontChooserDialog] and
- * [Gtk.FontButton].
+ * [gtk.font_chooser_widget.FontChooserWidget], [gtk.font_chooser_dialog.FontChooserDialog] and
+ * [gtk.font_button.FontButton].
 
- * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+ * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
  *   instead
  */
 interface FontChooser
@@ -34,16 +34,16 @@ interface FontChooser
   /**
    * Gets the currently-selected font name.
    * Note that this can be a different string than what you set with
-   * [Gtk.FontChooser.setFont], as the font chooser widget may
+   * [gtk.font_chooser.FontChooser.setFont], as the font chooser widget may
    * normalize font names and thus return a string with a different
    * structure. For example, “Helvetica Italic Bold 12” could be
    * normalized to “Helvetica Bold Italic 12”.
-   * Use [Pango.FontDescription.equal] if you want to compare two
+   * Use [pango.font_description.FontDescription.equal] if you want to compare two
    * font descriptions.
    * Returns: A string with the name
    *   of the current font
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   string getFont();
@@ -51,16 +51,16 @@ interface FontChooser
   /**
    * Gets the currently-selected font.
    * Note that this can be a different string than what you set with
-   * [Gtk.FontChooser.setFont], as the font chooser widget may
+   * [gtk.font_chooser.FontChooser.setFont], as the font chooser widget may
    * normalize font names and thus return a string with a different
    * structure. For example, “Helvetica Italic Bold 12” could be
    * normalized to “Helvetica Bold Italic 12”.
-   * Use [Pango.FontDescription.equal] if you want to compare two
+   * Use [pango.font_description.FontDescription.equal] if you want to compare two
    * font descriptions.
    * Returns: A `PangoFontDescription` for the
    *   current font
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   FontDescription getFontDesc();
@@ -72,7 +72,7 @@ interface FontChooser
    * Returns: A `PangoFontFace` representing the
    *   selected font group details
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   FontFace getFontFace();
@@ -84,7 +84,7 @@ interface FontChooser
    * Returns: A `PangoFontFamily` representing the
    *   selected font family
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   FontFamily getFontFamily();
@@ -93,10 +93,10 @@ interface FontChooser
    * Gets the currently-selected font features.
    * The format of the returned string is compatible with the
    * [CSS font-feature-settings property](https://www.w3.org/TR/css-fonts-4/#font-rend-desc).
-   * It can be passed to [Pango.AttrFontFeatures.new_].
+   * It can be passed to [pango.attr_font_features.AttrFontFeatures.new_].
    * Returns: the currently selected font features
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   string getFontFeatures();
@@ -106,7 +106,7 @@ interface FontChooser
    * or %NULL if it does not have one.
    * Returns: a `PangoFontMap`
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   FontMap getFontMap();
@@ -116,7 +116,7 @@ interface FontChooser
    * Returns: A n integer representing the selected font size,
    *   or -1 if no font size is selected.
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   int getFontSize();
@@ -125,7 +125,7 @@ interface FontChooser
    * Gets the language that is used for font features.
    * Returns: the currently selected language
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   string getLanguage();
@@ -134,7 +134,7 @@ interface FontChooser
    * Returns the current level of granularity for selecting fonts.
    * Returns: the current granularity level
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   FontChooserLevel getLevel();
@@ -143,7 +143,7 @@ interface FontChooser
    * Gets the text displayed in the preview area.
    * Returns: the text displayed in the preview area
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   string getPreviewText();
@@ -152,7 +152,7 @@ interface FontChooser
    * Returns whether the preview entry is shown or not.
    * Returns: %TRUE if the preview entry is shown or %FALSE if it is hidden.
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   bool getShowPreviewEntry();
@@ -163,7 +163,7 @@ interface FontChooser
    * Params:
    *   filter = a `GtkFontFilterFunc`
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   void setFilterFunc(FontFilterFunc filter);
@@ -173,7 +173,7 @@ interface FontChooser
    * Params:
    *   fontname = a font name like “Helvetica 12” or “Times Bold 18”
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   void setFont(string fontname);
@@ -183,7 +183,7 @@ interface FontChooser
    * Params:
    *   fontDesc = a `PangoFontDescription`
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   void setFontDesc(FontDescription fontDesc);
@@ -210,7 +210,7 @@ interface FontChooser
    * Params:
    *   fontmap = a `PangoFontMap`
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   void setFontMap(FontMap fontmap);
@@ -220,7 +220,7 @@ interface FontChooser
    * Params:
    *   language = a language
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   void setLanguage(string language);
@@ -230,7 +230,7 @@ interface FontChooser
    * Params:
    *   level = the desired level of granularity
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   void setLevel(FontChooserLevel level);
@@ -241,7 +241,7 @@ interface FontChooser
    * Params:
    *   text = the text to display in the preview area
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   void setPreviewText(string text);
@@ -251,7 +251,7 @@ interface FontChooser
    * Params:
    *   showPreviewEntry = whether to show the editable preview entry or not
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton]
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
   void setShowPreviewEntry(bool showPreviewEntry);
@@ -265,7 +265,7 @@ interface FontChooser
    *   fontname = the font name
    *   fontChooser = the instance the signal is connected to
 
-   * Deprecated: Use [Gtk.FontDialog] and [Gtk.FontDialogButton] instead
+   * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
    */
   alias FontActivatedCallbackDlg = void delegate(string fontname, FontChooser fontChooser);
   alias FontActivatedCallbackFunc = void function(string fontname, FontChooser fontChooser);

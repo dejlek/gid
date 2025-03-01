@@ -1,6 +1,6 @@
 module gtk.stack_page;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -59,7 +59,7 @@ class StackPage : ObjectG, Accessible
 
   /**
    * Returns the name of the page.
-   * Returns: The value of the [Gtk.StackPage.name] property
+   * Returns: The value of the [gtk.stack_page.StackPage.utf8] property
    */
   string getName()
   {
@@ -83,7 +83,7 @@ class StackPage : ObjectG, Accessible
 
   /**
    * Gets the page title.
-   * Returns: The value of the [Gtk.StackPage.title] property
+   * Returns: The value of the [gtk.stack_page.StackPage.utf8] property
    */
   string getTitle()
   {
@@ -106,7 +106,7 @@ class StackPage : ObjectG, Accessible
 
   /**
    * Returns whether page is visible in its `GtkStack`.
-   * This is independent from the [Gtk.Widget.visible]
+   * This is independent from the [gtk.widget.Widget.gboolean]
    * property of its widget.
    * Returns: %TRUE if page is visible
    */

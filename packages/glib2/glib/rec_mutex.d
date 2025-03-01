@@ -1,6 +1,6 @@
 module glib.rec_mutex;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -13,7 +13,7 @@ import glib.types;
  * unlock the recursive mutex as often as it has been locked.
  * If a #GRecMutex is allocated in static storage then it can be used
  * without initialisation.  Otherwise, you should call
- * [GLib.RecMutex.init_] on it and [GLib.RecMutex.clear] when done.
+ * [glib.rec_mutex.RecMutex.init_] on it and [glib.rec_mutex.RecMutex.clear] when done.
  * A GRecMutex should only be accessed with the
  * g_rec_mutex_ functions.
  */
@@ -39,10 +39,10 @@ class RecMutex
 
   /**
    * Frees the resources allocated to a recursive mutex with
-   * [GLib.RecMutex.init_].
+   * [glib.rec_mutex.RecMutex.init_].
    * This function should not be used with a #GRecMutex that has been
    * statically allocated.
-   * Calling [GLib.RecMutex.clear] on a locked recursive mutex leads
+   * Calling [glib.rec_mutex.RecMutex.clear] on a locked recursive mutex leads
    * to undefined behaviour.
    */
   void clear()
@@ -66,10 +66,10 @@ class RecMutex
    * b \= g_new $(LPAREN)Blob, 1$(RPAREN);
    * g_rec_mutex_init $(LPAREN)&b->m$(RPAREN);
    * ]|
-   * Calling [GLib.RecMutex.init_] on an already initialized #GRecMutex
+   * Calling [glib.rec_mutex.RecMutex.init_] on an already initialized #GRecMutex
    * leads to undefined behaviour.
-   * To undo the effect of [GLib.RecMutex.init_] when a recursive mutex
-   * is no longer needed, use [GLib.RecMutex.clear].
+   * To undo the effect of [glib.rec_mutex.RecMutex.init_] when a recursive mutex
+   * is no longer needed, use [glib.rec_mutex.RecMutex.clear].
    */
   void init_()
   {
@@ -104,9 +104,9 @@ class RecMutex
 
   /**
    * Unlocks rec_mutex. If another thread is blocked in a
-   * [GLib.RecMutex.lock] call for rec_mutex, it will become unblocked
+   * [glib.rec_mutex.RecMutex.lock] call for rec_mutex, it will become unblocked
    * and can lock rec_mutex itself.
-   * Calling [GLib.RecMutex.unlock] on a recursive mutex that is not
+   * Calling [glib.rec_mutex.RecMutex.unlock] on a recursive mutex that is not
    * locked by the current thread leads to undefined behaviour.
    */
   void unlock()

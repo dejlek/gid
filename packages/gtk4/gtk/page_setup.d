@@ -1,6 +1,6 @@
 module gtk.page_setup;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import glib.key_file;
 import glib.variant;
@@ -22,7 +22,7 @@ import gtk.types;
  * parts of the page that the printer cannot print on. These are different
  * from the layout margins that a word processor uses; they are typically
  * used to determine the minimal size for the layout margins.
- * To obtain a `GtkPageSetup` use [Gtk.PageSetup.new_] to get the defaults,
+ * To obtain a `GtkPageSetup` use [gtk.page_setup.PageSetup.new_] to get the defaults,
  * or use func@Gtk.print_run_page_setup_dialog to show the page setup dialog
  * and receive the resulting page setup.
  * ## A page setup dialog
@@ -77,7 +77,7 @@ class PageSetup : ObjectG
    * Reads the page setup from the file file_name.
    * Returns a new `GtkPageSetup` object with the restored
    * page setup, or %NULL if an error occurred.
-   * See [Gtk.PageSetup.toFile].
+   * See [gtk.page_setup.PageSetup.toFile].
    * Params:
    *   fileName = the filename to read the page setup from
    * Returns: the restored `GtkPageSetup`
@@ -97,7 +97,7 @@ class PageSetup : ObjectG
   /**
    * Desrialize a page setup from an a{sv} variant.
    * The variant must be in the format produced by
-   * [Gtk.PageSetup.toGvariant].
+   * [gtk.page_setup.PageSetup.toGvariant].
    * Params:
    *   variant = an a{sv} `GVariant`
    * Returns: a new `GtkPageSetup` object
@@ -187,7 +187,7 @@ class PageSetup : ObjectG
    * Returns the page height in units of unit.
    * Note that this function takes orientation
    * and margins into consideration.
-   * See [Gtk.PageSetup.getPaperHeight].
+   * See [gtk.page_setup.PageSetup.getPaperHeight].
    * Params:
    *   unit = the unit for the return value
    * Returns: the page height.
@@ -203,7 +203,7 @@ class PageSetup : ObjectG
    * Returns the page width in units of unit.
    * Note that this function takes orientation
    * and margins into consideration.
-   * See [Gtk.PageSetup.getPaperWidth].
+   * See [gtk.page_setup.PageSetup.getPaperWidth].
    * Params:
    *   unit = the unit for the return value
    * Returns: the page width.
@@ -219,7 +219,7 @@ class PageSetup : ObjectG
    * Returns the paper height in units of unit.
    * Note that this function takes orientation,
    * but not margins into consideration.
-   * See [Gtk.PageSetup.getPageHeight].
+   * See [gtk.page_setup.PageSetup.getPageHeight].
    * Params:
    *   unit = the unit for the return value
    * Returns: the paper height.
@@ -247,7 +247,7 @@ class PageSetup : ObjectG
    * Returns the paper width in units of unit.
    * Note that this function takes orientation,
    * but not margins into consideration.
-   * See [Gtk.PageSetup.getPageWidth].
+   * See [gtk.page_setup.PageSetup.getPageWidth].
    * Params:
    *   unit = the unit for the return value
    * Returns: the paper width.
@@ -287,7 +287,7 @@ class PageSetup : ObjectG
 
   /**
    * Reads the page setup from the file file_name.
-   * See [Gtk.PageSetup.toFile].
+   * See [gtk.page_setup.PageSetup.toFile].
    * Params:
    *   fileName = the filename to read the page setup from
    * Returns: %TRUE on success
@@ -358,7 +358,7 @@ class PageSetup : ObjectG
   /**
    * Sets the paper size of the `GtkPageSetup` without
    * changing the margins.
-   * See [Gtk.PageSetup.setPaperSizeAndDefaultMargins].
+   * See [gtk.page_setup.PageSetup.setPaperSizeAndDefaultMargins].
    * Params:
    *   size = a `GtkPaperSize`
    */

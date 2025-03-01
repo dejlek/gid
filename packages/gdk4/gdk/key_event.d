@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.event;
 import gdk.types;
-import gid.gid;
+import gid.global;
 
 /**
  * An event related to a key-based device.
@@ -79,7 +79,7 @@ class KeyEvent : Event
   /**
    * Gets a keyval and modifier combination that will match
    * the event.
-   * See [Gdk.KeyEvent.matches].
+   * See [gdk.key_event.KeyEvent.matches].
    * Params:
    *   keyval = return location for a keyval
    *   modifiers = return location for modifiers

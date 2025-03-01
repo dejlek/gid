@@ -1,6 +1,6 @@
 module gio.file_iostream;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -17,18 +17,18 @@ import gobject.object;
 /**
  * `GFileIOStream` provides I/O streams that both read and write to the same
  * file handle.
- * `GFileIOStream` implements [Gio.Seekable], which allows the I/O
+ * `GFileIOStream` implements [gio.seekable.Seekable], which allows the I/O
  * stream to jump to arbitrary positions in the file and to truncate
  * the file, provided the filesystem of the file supports these
  * operations.
- * To find the position of a file I/O stream, use [Gio.Seekable.tell].
+ * To find the position of a file I/O stream, use [gio.seekable.Seekable.tell].
  * To find out if a file I/O stream supports seeking, use
- * [Gio.Seekable.canSeek]. To position a file I/O stream, use
- * [Gio.Seekable.seek]. To find out if a file I/O stream supports
- * truncating, use [Gio.Seekable.canTruncate]. To truncate a file I/O
- * stream, use [Gio.Seekable.truncate].
+ * [gio.seekable.Seekable.canSeek]. To position a file I/O stream, use
+ * [gio.seekable.Seekable.seek]. To find out if a file I/O stream supports
+ * truncating, use [gio.seekable.Seekable.canTruncate]. To truncate a file I/O
+ * stream, use [gio.seekable.Seekable.truncate].
  * The default implementation of all the `GFileIOStream` operations
- * and the implementation of [Gio.Seekable] just call into the same
+ * and the implementation of [gio.seekable.Seekable] just call into the same
  * operations on the output stream.
  */
 class FileIOStream : IOStream, Seekable
@@ -69,7 +69,7 @@ class FileIOStream : IOStream, Seekable
   /**
    * Queries a file io stream for the given attributes.
    * This function blocks while querying the stream. For the asynchronous
-   * version of this function, see [Gio.FileIOStream.queryInfoAsync].
+   * version of this function, see [gio.file_iostream.FileIOStream.queryInfoAsync].
    * While the stream is blocked, the stream will set the pending flag
    * internally, and any other operations on the stream will fail with
    * %G_IO_ERROR_PENDING.
@@ -102,9 +102,9 @@ class FileIOStream : IOStream, Seekable
   /**
    * Asynchronously queries the stream for a #GFileInfo. When completed,
    * callback will be called with a #GAsyncResult which can be used to
-   * finish the operation with [Gio.FileIOStream.queryInfoFinish].
+   * finish the operation with [gio.file_iostream.FileIOStream.queryInfoFinish].
    * For the synchronous version of this function, see
-   * [Gio.FileIOStream.queryInfo].
+   * [gio.file_iostream.FileIOStream.queryInfo].
    * Params:
    *   attributes = a file attribute query string.
    *   ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the
@@ -131,7 +131,7 @@ class FileIOStream : IOStream, Seekable
 
   /**
    * Finalizes the asynchronous query started
-   * by [Gio.FileIOStream.queryInfoAsync].
+   * by [gio.file_iostream.FileIOStream.queryInfoAsync].
    * Params:
    *   result = a #GAsyncResult.
    * Returns: A #GFileInfo for the finished query.

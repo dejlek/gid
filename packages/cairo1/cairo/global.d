@@ -17,27 +17,27 @@ import cairo.scaled_font;
 import cairo.surface;
 import cairo.text_cluster;
 import cairo.types;
-import gid.gid;
+import gid.global;
 
 
 /**
  * Creates a new #cairo_t with all graphics state parameters set to
  * default values and with target as a target surface. The target
  * surface should be constructed with a backend-specific function such
- * as [cairo.Global.imageSurfaceCreate] $(LPAREN)or any other
+ * as [cairo.global.imageSurfaceCreate] $(LPAREN)or any other
  * <function>cairo_<emphasis>backend</emphasis>_surface_create$(LPAREN)<!-- -->$(RPAREN)</function>
  * variant$(RPAREN).
  * This function references target, so you can immediately
- * call [cairo.Surface.destroy] on it if you don't need to
+ * call [cairo.surface.Surface.destroy] on it if you don't need to
  * maintain a separate reference to it.
  * Params:
  *   target = target surface for the context
  * Returns: a newly allocated #cairo_t with a reference
  *   count of 1. The initial reference count should be released
- *   with [cairo.Global.destroy] when you are done using the #cairo_t.
+ *   with [cairo.global.destroy] when you are done using the #cairo_t.
  *   This function never returns %NULL. If memory cannot be
  *   allocated, a special #cairo_t object will be returned on
- *   which [cairo.Context.status] returns %CAIRO_STATUS_NO_MEMORY. If
+ *   which [cairo.context.Context.status] returns %CAIRO_STATUS_NO_MEMORY. If
  *   you attempt to target a surface which does not support
  *   writing $(LPAREN)such as #cairo_mime_surface_t$(RPAREN) then a
  *   %CAIRO_STATUS_WRITE_ERROR will be raised.  You can use this
@@ -57,9 +57,9 @@ Context create(Surface target)
  * example, all caches within cairo will be flushed empty.
  * This function is intended to be useful when using memory-checking
  * tools such as valgrind. When valgrind's memcheck analyzes a
- * cairo-using program without a call to [cairo.Global.debugResetStaticData],
+ * cairo-using program without a call to [cairo.global.debugResetStaticData],
  * it will report all data reachable via cairo's static objects as
- * "still reachable". Calling [cairo.Global.debugResetStaticData] just prior
+ * "still reachable". Calling [cairo.global.debugResetStaticData] just prior
  * to program termination will make it easier to get squeaky clean
  * reports from valgrind.
  * WARNING: It is only safe to call this function when there are no
@@ -77,10 +77,10 @@ void debugResetStaticData()
  * Allocates a new font options object with all options initialized
  * to default values.
  * Returns: a newly allocated #cairo_font_options_t. Free with
- *   [cairo.FontOptions.destroy]. This function always returns a
+ *   [cairo.font_options.FontOptions.destroy]. This function always returns a
  *   valid pointer; if memory cannot be allocated, then a special
  *   error object is returned where all operations on the object do nothing.
- *   You can check for this with [cairo.FontOptions.status].
+ *   You can check for this with [cairo.font_options.FontOptions.status].
  */
 FontOptions fontOptionsCreate()
 {
@@ -147,7 +147,7 @@ void* getUserData(Context cr, UserDataKey key)
  * Params:
  *   numGlyphs = number of glyphs to allocate
  * Returns: the newly allocated array of glyphs that should be
- *   freed using [cairo.Glyph.free]
+ *   freed using [cairo.glyph.Glyph.free]
  */
 Glyph glyphAllocate(int numGlyphs)
 {
@@ -168,11 +168,11 @@ Glyph glyphAllocate(int numGlyphs)
  *   width = width of the surface, in pixels
  *   height = height of the surface, in pixels
  * Returns: a pointer to the newly created surface. The caller
- *   owns the surface and should call [cairo.Surface.destroy] when done
+ *   owns the surface and should call [cairo.surface.Surface.destroy] when done
  *   with it.
  *   This function always returns a valid pointer, but it will return a
  *   pointer to a "nil" surface if an error such as out of memory
- *   occurs. You can use [cairo.Surface.status] to check for this.
+ *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
 Surface imageSurfaceCreate(Format format, int width, int height)
 {
@@ -198,7 +198,7 @@ Surface imageSurfaceCreate(Format format, int width, int height)
  *   %CAIRO_STATUS_PNG_ERROR
  *   Alternatively, you can allow errors to propagate through the drawing
  *   operations and check the status on the context upon completion
- *   using [cairo.Context.status].
+ *   using [cairo.context.Context.status].
  */
 Surface imageSurfaceCreateFromPng(string filename)
 {
@@ -224,7 +224,7 @@ Surface imageSurfaceCreateFromPng(string filename)
  *   %CAIRO_STATUS_PNG_ERROR
  *   Alternatively, you can allow errors to propagate through the drawing
  *   operations and check the status on the context upon completion
- *   using [cairo.Context.status].
+ *   using [cairo.context.Context.status].
  */
 Surface imageSurfaceCreateFromPngStream(ReadFunc readFunc)
 {
@@ -253,14 +253,14 @@ Surface imageSurfaceCreateFromPngStream(ReadFunc readFunc)
 /**
  * Get a pointer to the data of the image surface, for direct
  * inspection or modification.
- * A call to [cairo.Surface.flush] is required before accessing the
+ * A call to [cairo.surface.Surface.flush] is required before accessing the
  * pixel data to ensure that all pending drawing operations are
- * finished. A call to [cairo.Surface.markDirty] is required after
+ * finished. A call to [cairo.surface.Surface.markDirty] is required after
  * the data is modified.
  * Params:
  *   surface = a #cairo_image_surface_t
  * Returns: a pointer to the image data of this surface or %NULL
- *   if surface is not an image surface, or if [cairo.Surface.finish]
+ *   if surface is not an image surface, or if [cairo.surface.Surface.finish]
  *   has been called.
  */
 ubyte* imageSurfaceGetData(Surface surface)
@@ -328,9 +328,9 @@ int imageSurfaceGetWidth(Surface surface)
 /**
  * Begin a patch in a mesh pattern.
  * After calling this function, the patch shape should be defined with
- * [cairo.Global.meshPatternMoveTo], [cairo.Global.meshPatternLineTo] and
- * [cairo.Global.meshPatternCurveTo].
- * After defining the patch, [cairo.Global.meshPatternEndPatch] must be
+ * [cairo.global.meshPatternMoveTo], [cairo.global.meshPatternLineTo] and
+ * [cairo.global.meshPatternCurveTo].
+ * After defining the patch, [cairo.global.meshPatternEndPatch] must be
  * called before using pattern as a source or mask.
  * Note: If pattern is not a mesh pattern then pattern will be put
  * into an error status with a status of
@@ -350,7 +350,7 @@ void meshPatternBeginPatch(Pattern pattern)
  * point to position $(LPAREN)x3, y3$(RPAREN) in pattern-space coordinates, using
  * $(LPAREN)x1, y1$(RPAREN) and $(LPAREN)x2, y2$(RPAREN) as the control points.
  * If the current patch has no current point before the call to
- * [cairo.Global.meshPatternCurveTo], this function will behave as if
+ * [cairo.global.meshPatternCurveTo], this function will behave as if
  * preceded by a call to cairo_mesh_pattern_move_to$(LPAREN)pattern, x1,
  * y1$(RPAREN).
  * After this call the current point will be $(LPAREN)x3, y3$(RPAREN).
@@ -378,7 +378,7 @@ void meshPatternCurveTo(Pattern pattern, double x1, double y1, double x2, double
  * Indicates the end of the current patch in a mesh pattern.
  * If the current patch has less than 4 sides, it is closed with a
  * straight line from the current point to the first point of the
- * patch as if [cairo.Global.meshPatternLineTo] was used.
+ * patch as if [cairo.global.meshPatternLineTo] was used.
  * Note: If pattern is not a mesh pattern then pattern will be put
  * into an error status with a status of
  * %CAIRO_STATUS_PATTERN_TYPE_MISMATCH. If pattern has no current
@@ -397,9 +397,9 @@ void meshPatternEndPatch(Pattern pattern)
  * Gets the control point point_num of patch patch_num for a mesh
  * pattern.
  * patch_num can range from 0 to n-1 where n is the number returned by
- * [cairo.Global.meshPatternGetPatchCount].
+ * [cairo.global.meshPatternGetPatchCount].
  * Valid values for point_num are from 0 to 3 and identify the
- * control points as explained in [cairo.Global.patternCreateMesh].
+ * control points as explained in [cairo.global.patternCreateMesh].
  * Params:
  *   pattern = a #cairo_pattern_t
  *   patchNum = the patch number to return data for
@@ -423,9 +423,9 @@ Status meshPatternGetControlPoint(Pattern pattern, uint patchNum, uint pointNum,
  * Gets the color information in corner corner_num of patch
  * patch_num for a mesh pattern.
  * patch_num can range from 0 to n-1 where n is the number returned by
- * [cairo.Global.meshPatternGetPatchCount].
+ * [cairo.global.meshPatternGetPatchCount].
  * Valid values for corner_num are from 0 to 3 and identify the
- * corners as explained in [cairo.Global.patternCreateMesh].
+ * corners as explained in [cairo.global.patternCreateMesh].
  * Note that the color and alpha values are not premultiplied.
  * Params:
  *   pattern = a #cairo_pattern_t
@@ -451,7 +451,7 @@ Status meshPatternGetCornerColorRgba(Pattern pattern, uint patchNum, uint corner
 /**
  * Gets the number of patches specified in the given mesh pattern.
  * The number only includes patches which have been finished by
- * calling [cairo.Global.meshPatternEndPatch]. For example it will be 0
+ * calling [cairo.global.meshPatternEndPatch]. For example it will be 0
  * during the definition of the first patch.
  * Params:
  *   pattern = a #cairo_pattern_t
@@ -472,7 +472,7 @@ Status meshPatternGetPatchCount(Pattern pattern, out uint count)
  * Gets path defining the patch patch_num for a mesh
  * pattern.
  * patch_num can range from 0 to n-1 where n is the number returned by
- * [cairo.Global.meshPatternGetPatchCount].
+ * [cairo.global.meshPatternGetPatchCount].
  * Params:
  *   pattern = a #cairo_pattern_t
  *   patchNum = the patch number to return data for
@@ -493,7 +493,7 @@ Path meshPatternGetPath(Pattern pattern, uint patchNum)
  * Adds a line to the current patch from the current point to position
  * $(LPAREN)x, y$(RPAREN) in pattern-space coordinates.
  * If there is no current point before the call to
- * [cairo.Global.meshPatternLineTo] this function will behave as
+ * [cairo.global.meshPatternLineTo] this function will behave as
  * cairo_mesh_pattern_move_to$(LPAREN)pattern, x, y$(RPAREN).
  * After this call the current point will be $(LPAREN)x, y$(RPAREN).
  * Note: If pattern is not a mesh pattern then pattern will be put
@@ -534,7 +534,7 @@ void meshPatternMoveTo(Pattern pattern, double x, double y)
 /**
  * Set an internal control point of the current patch.
  * Valid values for point_num are from 0 to 3 and identify the
- * control points as explained in [cairo.Global.patternCreateMesh].
+ * control points as explained in [cairo.global.patternCreateMesh].
  * Note: If pattern is not a mesh pattern then pattern will be put
  * into an error status with a status of
  * %CAIRO_STATUS_PATTERN_TYPE_MISMATCH. If point_num is not valid,
@@ -555,9 +555,9 @@ void meshPatternSetControlPoint(Pattern pattern, uint pointNum, double x, double
 
 /**
  * Sets the color of a corner of the current patch in a mesh pattern.
- * The color is specified in the same way as in [cairo.Context.setSourceRgb].
+ * The color is specified in the same way as in [cairo.context.Context.setSourceRgb].
  * Valid values for corner_num are from 0 to 3 and identify the
- * corners as explained in [cairo.Global.patternCreateMesh].
+ * corners as explained in [cairo.global.patternCreateMesh].
  * Note: If pattern is not a mesh pattern then pattern will be put
  * into an error status with a status of
  * %CAIRO_STATUS_PATTERN_TYPE_MISMATCH. If corner_num is not valid,
@@ -579,9 +579,9 @@ void meshPatternSetCornerColorRgb(Pattern pattern, uint cornerNum, double red, d
 
 /**
  * Sets the color of a corner of the current patch in a mesh pattern.
- * The color is specified in the same way as in [cairo.Context.setSourceRgba].
+ * The color is specified in the same way as in [cairo.context.Context.setSourceRgba].
  * Valid values for corner_num are from 0 to 3 and identify the
- * corners as explained in [cairo.Global.patternCreateMesh].
+ * corners as explained in [cairo.global.patternCreateMesh].
  * Note: If pattern is not a mesh pattern then pattern will be put
  * into an error status with a status of
  * %CAIRO_STATUS_PATTERN_TYPE_MISMATCH. If corner_num is not valid,
@@ -608,11 +608,11 @@ void meshPatternSetCornerColorRgba(Pattern pattern, uint cornerNum, double red, 
  *   surface = the surface
  * Returns: the newly created #cairo_pattern_t if successful, or
  *   an error pattern in case of no memory.  The caller owns the
- *   returned object and should call [cairo.Pattern.destroy] when
+ *   returned object and should call [cairo.pattern.Pattern.destroy] when
  *   finished with it.
  *   This function will always return a valid pointer, but if an error
  *   occurred the pattern status will be set to an error.  To inspect
- *   the status of a pattern use [cairo.Pattern.status].
+ *   the status of a pattern use [cairo.pattern.Pattern.status].
  */
 Pattern patternCreateForSurface(Surface surface)
 {
@@ -626,11 +626,11 @@ Pattern patternCreateForSurface(Surface surface)
  * Create a new linear gradient #cairo_pattern_t along the line defined
  * by $(LPAREN)x0, y0$(RPAREN) and $(LPAREN)x1, y1$(RPAREN).  Before using the gradient pattern, a
  * number of color stops should be defined using
- * [cairo.Pattern.addColorStopRgb] or
- * [cairo.Pattern.addColorStopRgba].
+ * [cairo.pattern.Pattern.addColorStopRgb] or
+ * [cairo.pattern.Pattern.addColorStopRgba].
  * Note: The coordinates here are in pattern space. For a new pattern,
  * pattern space is identical to user space, but the relationship
- * between the spaces can be changed with [cairo.Pattern.setMatrix].
+ * between the spaces can be changed with [cairo.pattern.Pattern.setMatrix].
  * Params:
  *   x0 = x coordinate of the start point
  *   y0 = y coordinate of the start point
@@ -638,11 +638,11 @@ Pattern patternCreateForSurface(Surface surface)
  *   y1 = y coordinate of the end point
  * Returns: the newly created #cairo_pattern_t if successful, or
  *   an error pattern in case of no memory.  The caller owns the
- *   returned object and should call [cairo.Pattern.destroy] when
+ *   returned object and should call [cairo.pattern.Pattern.destroy] when
  *   finished with it.
  *   This function will always return a valid pointer, but if an error
  *   occurred the pattern status will be set to an error.  To inspect
- *   the status of a pattern use [cairo.Pattern.status].
+ *   the status of a pattern use [cairo.pattern.Pattern.status].
  */
 Pattern patternCreateLinear(double x0, double y0, double x1, double y1)
 {
@@ -686,15 +686,15 @@ Pattern patternCreateLinear(double x0, double y0, double x1, double y1)
  * C0     Side 3        C3
  * </screen></informalexample>
  * Each patch is constructed by first calling
- * [cairo.Global.meshPatternBeginPatch], then [cairo.Global.meshPatternMoveTo]
+ * [cairo.global.meshPatternBeginPatch], then [cairo.global.meshPatternMoveTo]
  * to specify the first point in the patch $(LPAREN)C0$(RPAREN). Then the sides are
- * specified with calls to [cairo.Global.meshPatternCurveTo] and
- * [cairo.Global.meshPatternLineTo].
+ * specified with calls to [cairo.global.meshPatternCurveTo] and
+ * [cairo.global.meshPatternLineTo].
  * The four additional control points $(LPAREN)P0, P1, P2, P3$(RPAREN) in a patch can
- * be specified with [cairo.Global.meshPatternSetControlPoint].
+ * be specified with [cairo.global.meshPatternSetControlPoint].
  * At each corner of the patch $(LPAREN)C0, C1, C2, C3$(RPAREN) a color may be
- * specified with [cairo.Global.meshPatternSetCornerColorRgb] or
- * [cairo.Global.meshPatternSetCornerColorRgba]. Any corner whose color
+ * specified with [cairo.global.meshPatternSetCornerColorRgb] or
+ * [cairo.global.meshPatternSetCornerColorRgba]. Any corner whose color
  * is not explicitly specified defaults to transparent black.
  * A Coons patch is a special case of the tensor-product patch where
  * the control points are implicitly defined by the sides of the
@@ -713,7 +713,7 @@ Pattern patternCreateLinear(double x0, double y0, double x1, double y1)
  * points. Regardless of where the first point is located, when
  * specifying colors, corner 0 will always be the first point, corner
  * 1 the point between side 0 and side 1 etc.
- * Calling [cairo.Global.meshPatternEndPatch] completes the current
+ * Calling [cairo.global.meshPatternEndPatch] completes the current
  * patch. If less than 4 sides have been defined, the first missing
  * side is defined as a line from the current point to the first point
  * of the patch $(LPAREN)C0$(RPAREN) and the other sides are degenerate lines from C0
@@ -721,7 +721,7 @@ Pattern patternCreateLinear(double x0, double y0, double x1, double y1)
  * with C0 of the patch and their color will be set to be the same as
  * the color of C0.
  * Additional patches may be added with additional calls to
- * [cairo.Global.meshPatternBeginPatch]/[cairo.Global.meshPatternEndPatch].
+ * [cairo.global.meshPatternBeginPatch]/[cairo.global.meshPatternEndPatch].
  * <informalexample><programlisting>
  * cairo_pattern_t *pattern \= cairo_pattern_create_mesh $(LPAREN)$(RPAREN);
  * /&ast; Add a Coons patch &ast;/
@@ -765,14 +765,14 @@ Pattern patternCreateLinear(double x0, double y0, double x1, double y1)
  * Note: The coordinates are always in pattern space. For a new
  * pattern, pattern space is identical to user space, but the
  * relationship between the spaces can be changed with
- * [cairo.Pattern.setMatrix].
+ * [cairo.pattern.Pattern.setMatrix].
  * Returns: the newly created #cairo_pattern_t if successful, or
  *   an error pattern in case of no memory. The caller owns the returned
- *   object and should call [cairo.Pattern.destroy] when finished with
+ *   object and should call [cairo.pattern.Pattern.destroy] when finished with
  *   it.
  *   This function will always return a valid pointer, but if an error
  *   occurred the pattern status will be set to an error. To inspect the
- *   status of a pattern use [cairo.Pattern.status].
+ *   status of a pattern use [cairo.pattern.Pattern.status].
  */
 Pattern patternCreateMesh()
 {
@@ -786,11 +786,11 @@ Pattern patternCreateMesh()
  * Creates a new radial gradient #cairo_pattern_t between the two
  * circles defined by $(LPAREN)cx0, cy0, radius0$(RPAREN) and $(LPAREN)cx1, cy1, radius1$(RPAREN).  Before using the
  * gradient pattern, a number of color stops should be defined using
- * [cairo.Pattern.addColorStopRgb] or
- * [cairo.Pattern.addColorStopRgba].
+ * [cairo.pattern.Pattern.addColorStopRgb] or
+ * [cairo.pattern.Pattern.addColorStopRgba].
  * Note: The coordinates here are in pattern space. For a new pattern,
  * pattern space is identical to user space, but the relationship
- * between the spaces can be changed with [cairo.Pattern.setMatrix].
+ * between the spaces can be changed with [cairo.pattern.Pattern.setMatrix].
  * Params:
  *   cx0 = x coordinate for the center of the start circle
  *   cy0 = y coordinate for the center of the start circle
@@ -800,11 +800,11 @@ Pattern patternCreateMesh()
  *   radius1 = radius of the end circle
  * Returns: the newly created #cairo_pattern_t if successful, or
  *   an error pattern in case of no memory.  The caller owns the
- *   returned object and should call [cairo.Pattern.destroy] when
+ *   returned object and should call [cairo.pattern.Pattern.destroy] when
  *   finished with it.
  *   This function will always return a valid pointer, but if an error
  *   occurred the pattern status will be set to an error.  To inspect
- *   the status of a pattern use [cairo.Pattern.status].
+ *   the status of a pattern use [cairo.pattern.Pattern.status].
  */
 Pattern patternCreateRadial(double cx0, double cy0, double radius0, double cx1, double cy1, double radius1)
 {
@@ -826,7 +826,7 @@ Pattern patternCreateRadial(double cx0, double cy0, double radius0, double cx1, 
  *   width = maximum size of the sample area
  *   height = maximum size of the sample area
  * Returns: a newly created #cairo_pattern_t. Free with
- *   [cairo.Pattern.destroy] when you are done using it.
+ *   [cairo.pattern.Pattern.destroy] when you are done using it.
  */
 Pattern patternCreateRasterSource(void* userData, Content content, int width, int height)
 {
@@ -847,11 +847,11 @@ Pattern patternCreateRasterSource(void* userData, Content content, int width, in
  *   blue = blue component of the color
  * Returns: the newly created #cairo_pattern_t if successful, or
  *   an error pattern in case of no memory.  The caller owns the
- *   returned object and should call [cairo.Pattern.destroy] when
+ *   returned object and should call [cairo.pattern.Pattern.destroy] when
  *   finished with it.
  *   This function will always return a valid pointer, but if an error
  *   occurred the pattern status will be set to an error.  To inspect
- *   the status of a pattern use [cairo.Pattern.status].
+ *   the status of a pattern use [cairo.pattern.Pattern.status].
  */
 Pattern patternCreateRgb(double red, double green, double blue)
 {
@@ -866,7 +866,7 @@ Pattern patternCreateRgb(double red, double green, double blue)
  * The color components are floating point numbers in the range 0 to
  * 1.  If the values passed in are outside that range, they will be
  * clamped.
- * The color is specified in the same way as in [cairo.Context.setSourceRgb].
+ * The color is specified in the same way as in [cairo.context.Context.setSourceRgb].
  * Params:
  *   red = red component of the color
  *   green = green component of the color
@@ -874,11 +874,11 @@ Pattern patternCreateRgb(double red, double green, double blue)
  *   alpha = alpha component of the color
  * Returns: the newly created #cairo_pattern_t if successful, or
  *   an error pattern in case of no memory.  The caller owns the
- *   returned object and should call [cairo.Pattern.destroy] when
+ *   returned object and should call [cairo.pattern.Pattern.destroy] when
  *   finished with it.
  *   This function will always return a valid pointer, but if an error
  *   occurred the pattern status will be set to an error.  To inspect
- *   the status of a pattern use [cairo.Pattern.status].
+ *   the status of a pattern use [cairo.pattern.Pattern.status].
  */
 Pattern patternCreateRgba(double red, double green, double blue, double alpha)
 {
@@ -890,7 +890,7 @@ Pattern patternCreateRgba(double red, double green, double blue, double alpha)
 
 /**
  * Used to retrieve the list of supported versions. See
- * [cairo.Global.pdfSurfaceRestrictToVersion].
+ * [cairo.global.pdfSurfaceRestrictToVersion].
  * Params:
  *   versions = supported version list
  */
@@ -938,11 +938,11 @@ int pdfSurfaceAddOutline(Surface surface, int parentId, string utf8, string link
  *   widthInPoints = width of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  *   heightInPoints = height of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  * Returns: a pointer to the newly created surface. The caller
- *   owns the surface and should call [cairo.Surface.destroy] when done
+ *   owns the surface and should call [cairo.surface.Surface.destroy] when done
  *   with it.
  *   This function always returns a valid pointer, but it will return a
  *   pointer to a "nil" surface if an error such as out of memory
- *   occurs. You can use [cairo.Surface.status] to check for this.
+ *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
 Surface pdfSurfaceCreate(string filename, double widthInPoints, double heightInPoints)
 {
@@ -964,11 +964,11 @@ Surface pdfSurfaceCreate(string filename, double widthInPoints, double heightInP
  *   widthInPoints = width of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  *   heightInPoints = height of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  * Returns: a pointer to the newly created surface. The caller
- *   owns the surface and should call [cairo.Surface.destroy] when done
+ *   owns the surface and should call [cairo.surface.Surface.destroy] when done
  *   with it.
  *   This function always returns a valid pointer, but it will return a
  *   pointer to a "nil" surface if an error such as out of memory
- *   occurs. You can use [cairo.Surface.status] to check for this.
+ *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
 Surface pdfSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, double heightInPoints)
 {
@@ -995,7 +995,7 @@ Surface pdfSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, dou
 }
 
 /**
- * Restricts the generated PDF file to version. See [cairo.Global.pdfGetVersions]
+ * Restricts the generated PDF file to version. See [cairo.global.pdfGetVersions]
  * for a list of available version values that can be used here.
  * This function should only be called before any drawing operations
  * have been performed on the given surface. The simplest way to do
@@ -1073,7 +1073,7 @@ void pdfSurfaceSetPageLabel(Surface surface, string utf8)
  * have been performed on the current page. The simplest way to do
  * this is to call this function immediately after creating the
  * surface or immediately after completing a page with either
- * [cairo.Context.showPage] or [cairo.Context.copyPage].
+ * [cairo.context.Context.showPage] or [cairo.context.Context.copyPage].
  * Params:
  *   surface = a PDF #cairo_surface_t
  *   widthInPoints = new surface width, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
@@ -1100,7 +1100,7 @@ void pdfSurfaceSetThumbnailSize(Surface surface, int width, int height)
 
 /**
  * Get the string representation of the given version id. This function
- * will return %NULL if version isn't valid. See [cairo.Global.pdfGetVersions]
+ * will return %NULL if version isn't valid. See [cairo.global.pdfGetVersions]
  * for a way to get the list of valid version ids.
  * Params:
  *   version_ = a version id
@@ -1116,7 +1116,7 @@ string pdfVersionToString(PdfVersion version_)
 
 /**
  * Used to retrieve the list of supported levels. See
- * [cairo.Global.psSurfaceRestrictToLevel].
+ * [cairo.global.psSurfaceRestrictToLevel].
  * Params:
  *   levels = supported level list
  */
@@ -1131,7 +1131,7 @@ void psGetLevels(out PsLevel[] levels)
 
 /**
  * Get the string representation of the given level id. This function
- * will return %NULL if level id isn't valid. See [cairo.Global.psGetLevels]
+ * will return %NULL if level id isn't valid. See [cairo.global.psGetLevels]
  * for a way to get the list of valid level ids.
  * Params:
  *   level = a level id
@@ -1147,11 +1147,11 @@ string psLevelToString(PsLevel level)
 
 /**
  * Creates a PostScript surface of the specified size in points to be
- * written to filename. See [cairo.Global.psSurfaceCreateForStream] for
+ * written to filename. See [cairo.global.psSurfaceCreateForStream] for
  * a more flexible mechanism for handling the PostScript output than
  * simply writing it to a named file.
  * Note that the size of individual pages of the PostScript output can
- * vary. See [cairo.Global.psSurfaceSetSize].
+ * vary. See [cairo.global.psSurfaceSetSize].
  * Params:
  *   filename = a filename for the PS output $(LPAREN)must be writable$(RPAREN), %NULL may be
  *     used to specify no output. This will generate a PS surface that
@@ -1160,11 +1160,11 @@ string psLevelToString(PsLevel level)
  *   widthInPoints = width of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  *   heightInPoints = height of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  * Returns: a pointer to the newly created surface. The caller
- *   owns the surface and should call [cairo.Surface.destroy] when done
+ *   owns the surface and should call [cairo.surface.Surface.destroy] when done
  *   with it.
  *   This function always returns a valid pointer, but it will return a
  *   pointer to a "nil" surface if an error such as out of memory
- *   occurs. You can use [cairo.Surface.status] to check for this.
+ *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
 Surface psSurfaceCreate(string filename, double widthInPoints, double heightInPoints)
 {
@@ -1178,10 +1178,10 @@ Surface psSurfaceCreate(string filename, double widthInPoints, double heightInPo
 /**
  * Creates a PostScript surface of the specified size in points to be
  * written incrementally to the stream represented by write_func and
- * closure. See [cairo.Global.psSurfaceCreate] for a more convenient way
+ * closure. See [cairo.global.psSurfaceCreate] for a more convenient way
  * to simply direct the PostScript output to a named file.
  * Note that the size of individual pages of the PostScript
- * output can vary. See [cairo.Global.psSurfaceSetSize].
+ * output can vary. See [cairo.global.psSurfaceSetSize].
  * Params:
  *   writeFunc = a #cairo_write_func_t to accept the output data, may be %NULL
  *     to indicate a no-op write_func. With a no-op write_func,
@@ -1190,11 +1190,11 @@ Surface psSurfaceCreate(string filename, double widthInPoints, double heightInPo
  *   widthInPoints = width of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  *   heightInPoints = height of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  * Returns: a pointer to the newly created surface. The caller
- *   owns the surface and should call [cairo.Surface.destroy] when done
+ *   owns the surface and should call [cairo.surface.Surface.destroy] when done
  *   with it.
  *   This function always returns a valid pointer, but it will return a
  *   pointer to a "nil" surface if an error such as out of memory
- *   occurs. You can use [cairo.Surface.status] to check for this.
+ *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
 Surface psSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, double heightInPoints)
 {
@@ -1222,13 +1222,13 @@ Surface psSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, doub
 
 /**
  * This function indicates that subsequent calls to
- * [cairo.Global.psSurfaceDscComment] should direct comments to the
+ * [cairo.global.psSurfaceDscComment] should direct comments to the
  * PageSetup section of the PostScript output.
  * This function call is only needed for the first page of a
  * surface. It should be called after any call to
- * [cairo.Global.psSurfaceDscBeginSetup] and before any drawing is
+ * [cairo.global.psSurfaceDscBeginSetup] and before any drawing is
  * performed to the surface.
- * See [cairo.Global.psSurfaceDscComment] for more details.
+ * See [cairo.global.psSurfaceDscComment] for more details.
  * Params:
  *   surface = a PostScript #cairo_surface_t
  */
@@ -1239,12 +1239,12 @@ void psSurfaceDscBeginPageSetup(Surface surface)
 
 /**
  * This function indicates that subsequent calls to
- * [cairo.Global.psSurfaceDscComment] should direct comments to the Setup
+ * [cairo.global.psSurfaceDscComment] should direct comments to the Setup
  * section of the PostScript output.
  * This function should be called at most once per surface, and must
- * be called before any call to [cairo.Global.psSurfaceDscBeginPageSetup]
+ * be called before any call to [cairo.global.psSurfaceDscBeginPageSetup]
  * and before any drawing is performed to the surface.
- * See [cairo.Global.psSurfaceDscComment] for more details.
+ * See [cairo.global.psSurfaceDscComment] for more details.
  * Params:
  *   surface = a PostScript #cairo_surface_t
  */
@@ -1277,16 +1277,16 @@ void psSurfaceDscBeginSetup(Surface surface)
  * section apply only to a single page.
  * For comments to appear in the header section, this function should
  * be called after the surface is created, but before a call to
- * [cairo.Global.psSurfaceDscBeginSetup].
+ * [cairo.global.psSurfaceDscBeginSetup].
  * For comments to appear in the Setup section, this function should
- * be called after a call to [cairo.Global.psSurfaceDscBeginSetup] but
- * before a call to [cairo.Global.psSurfaceDscBeginPageSetup].
+ * be called after a call to [cairo.global.psSurfaceDscBeginSetup] but
+ * before a call to [cairo.global.psSurfaceDscBeginPageSetup].
  * For comments to appear in the PageSetup section, this function
  * should be called after a call to
- * [cairo.Global.psSurfaceDscBeginPageSetup].
+ * [cairo.global.psSurfaceDscBeginPageSetup].
  * Note that it is only necessary to call
- * [cairo.Global.psSurfaceDscBeginPageSetup] for the first page of any
- * surface. After a call to [cairo.Context.showPage] or [cairo.Context.copyPage]
+ * [cairo.global.psSurfaceDscBeginPageSetup] for the first page of any
+ * surface. After a call to [cairo.context.Context.showPage] or [cairo.context.Context.copyPage]
  * comments are unambiguously directed to the PageSetup section of the
  * current page. But it doesn't hurt to call this function at the
  * beginning of every page as that consistency may make the calling
@@ -1345,7 +1345,7 @@ Bool psSurfaceGetEps(Surface surface)
 
 /**
  * Restricts the generated PostSript file to level. See
- * [cairo.Global.psGetLevels] for a list of available level values that
+ * [cairo.global.psGetLevels] for a list of available level values that
  * can be used here.
  * This function should only be called before any drawing operations
  * have been performed on the given surface. The simplest way to do
@@ -1384,7 +1384,7 @@ void psSurfaceSetEps(Surface surface, Bool eps)
  * have been performed on the current page. The simplest way to do
  * this is to call this function immediately after creating the
  * surface or immediately after completing a page with either
- * [cairo.Context.showPage] or [cairo.Context.copyPage].
+ * [cairo.context.Context.showPage] or [cairo.context.Context.copyPage].
  * Params:
  *   surface = a PostScript #cairo_surface_t
  *   widthInPoints = new surface width, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
@@ -1431,7 +1431,7 @@ void rasterSourcePatternSetCallbackData(Pattern pattern, void* data)
  *   extents = the extents to record in pixels, can be %NULL to record
  *     unbounded operations.
  * Returns: a pointer to the newly created surface. The caller
- *   owns the surface and should call [cairo.Surface.destroy] when done
+ *   owns the surface and should call [cairo.surface.Surface.destroy] when done
  *   with it.
  */
 Surface recordingSurfaceCreate(Content content, Rectangle extents)
@@ -1476,10 +1476,10 @@ void recordingSurfaceInkExtents(Surface surface, out double x0, out double y0, o
 /**
  * Allocates a new empty region object.
  * Returns: A newly allocated #cairo_region_t. Free with
- *   [cairo.Region.destroy]. This function always returns a
+ *   [cairo.region.Region.destroy]. This function always returns a
  *   valid pointer; if memory cannot be allocated, then a special
  *   error object is returned where all operations on the object do nothing.
- *   You can check for this with [cairo.Region.status].
+ *   You can check for this with [cairo.region.Region.status].
  */
 Region regionCreate()
 {
@@ -1494,10 +1494,10 @@ Region regionCreate()
  * Params:
  *   rectangle = a #cairo_rectangle_int_t
  * Returns: A newly allocated #cairo_region_t. Free with
- *   [cairo.Region.destroy]. This function always returns a
+ *   [cairo.region.Region.destroy]. This function always returns a
  *   valid pointer; if memory cannot be allocated, then a special
  *   error object is returned where all operations on the object do nothing.
- *   You can check for this with [cairo.Region.status].
+ *   You can check for this with [cairo.region.Region.status].
  */
 Region regionCreateRectangle(RectangleInt rectangle)
 {
@@ -1513,10 +1513,10 @@ Region regionCreateRectangle(RectangleInt rectangle)
  *   rects = an array of count rectangles
  *   count = number of rectangles
  * Returns: A newly allocated #cairo_region_t. Free with
- *   [cairo.Region.destroy]. This function always returns a
+ *   [cairo.region.Region.destroy]. This function always returns a
  *   valid pointer; if memory cannot be allocated, then a special
  *   error object is returned where all operations on the object do nothing.
- *   You can check for this with [cairo.Region.status].
+ *   You can check for this with [cairo.region.Region.status].
  */
 Region regionCreateRectangles(RectangleInt rects, int count)
 {
@@ -1536,13 +1536,13 @@ Region regionCreateRectangles(RectangleInt rects, int count)
  *     font. In the simplest case of a N point font, this matrix is
  *     just a scale by N, but it can also be used to shear the font
  *     or stretch it unequally along the two axes. See
- *     [cairo.Context.setFontMatrix].
+ *     [cairo.context.Context.setFontMatrix].
  *   ctm = user to device transformation matrix with which the font will
  *     be used.
  *   options = options to use when getting metrics for the font and
  *     rendering with it.
  * Returns: a newly created #cairo_scaled_font_t. Destroy with
- *   [cairo.ScaledFont.destroy]
+ *   [cairo.scaled_font.ScaledFont.destroy]
  */
 ScaledFont scaledFontCreate(FontFace fontFace, Matrix fontMatrix, Matrix ctm, FontOptions options)
 {
@@ -1558,11 +1558,11 @@ ScaledFont scaledFontCreate(FontFace fontFace, Matrix fontMatrix, Matrix ctm, Fo
  * Params:
  *   filename = the name $(LPAREN)path$(RPAREN) of the file to write the script to
  * Returns: a pointer to the newly created device. The caller
- *   owns the surface and should call [cairo.Device.destroy] when done
+ *   owns the surface and should call [cairo.device.Device.destroy] when done
  *   with it.
  *   This function always returns a valid pointer, but it will return a
  *   pointer to a "nil" device if an error such as out of memory
- *   occurs. You can use [cairo.Device.status] to check for this.
+ *   occurs. You can use [cairo.device.Device.status] to check for this.
  */
 Device scriptCreate(string filename)
 {
@@ -1579,11 +1579,11 @@ Device scriptCreate(string filename)
  * Params:
  *   writeFunc = callback function passed the bytes written to the script
  * Returns: a pointer to the newly created device. The caller
- *   owns the surface and should call [cairo.Device.destroy] when done
+ *   owns the surface and should call [cairo.device.Device.destroy] when done
  *   with it.
  *   This function always returns a valid pointer, but it will return a
  *   pointer to a "nil" device if an error such as out of memory
- *   occurs. You can use [cairo.Device.status] to check for this.
+ *   occurs. You can use [cairo.device.Device.status] to check for this.
  */
 Device scriptCreateForStream(WriteFunc writeFunc)
 {
@@ -1657,11 +1657,11 @@ void scriptSetMode(Device script, ScriptMode mode)
  *   width = width in pixels
  *   height = height in pixels
  * Returns: a pointer to the newly created surface. The caller
- *   owns the surface and should call [cairo.Surface.destroy] when done
+ *   owns the surface and should call [cairo.surface.Surface.destroy] when done
  *   with it.
  *   This function always returns a valid pointer, but it will return a
  *   pointer to a "nil" surface if an error such as out of memory
- *   occurs. You can use [cairo.Surface.status] to check for this.
+ *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
 Surface scriptSurfaceCreate(Device script, Content content, double width, double height)
 {
@@ -1678,11 +1678,11 @@ Surface scriptSurfaceCreate(Device script, Content content, double width, double
  *   script = the script $(LPAREN)output device$(RPAREN)
  *   target = a target surface to wrap
  * Returns: a pointer to the newly created surface. The caller
- *   owns the surface and should call [cairo.Surface.destroy] when done
+ *   owns the surface and should call [cairo.surface.Surface.destroy] when done
  *   with it.
  *   This function always returns a valid pointer, but it will return a
  *   pointer to a "nil" surface if an error such as out of memory
- *   occurs. You can use [cairo.Surface.status] to check for this.
+ *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
 Surface scriptSurfaceCreateForTarget(Device script, Surface target)
 {
@@ -1724,7 +1724,7 @@ string statusToString(Status status)
 
 /**
  * Used to retrieve the list of supported versions. See
- * [cairo.Global.svgSurfaceRestrictToVersion].
+ * [cairo.global.svgSurfaceRestrictToVersion].
  * Params:
  *   versions = supported version list
  */
@@ -1741,7 +1741,7 @@ void svgGetVersions(out SvgVersion[] versions)
  * Creates a SVG surface of the specified size in points to be written
  * to filename.
  * The SVG surface backend recognizes the following MIME types for the
- * data attached to a surface $(LPAREN)see [cairo.Surface.setMimeData]$(RPAREN) when
+ * data attached to a surface $(LPAREN)see [cairo.surface.Surface.setMimeData]$(RPAREN) when
  * it is used as a source pattern for drawing on this surface:
  * %CAIRO_MIME_TYPE_JPEG, %CAIRO_MIME_TYPE_PNG,
  * %CAIRO_MIME_TYPE_URI. If any of them is specified, the SVG backend
@@ -1763,11 +1763,11 @@ void svgGetVersions(out SvgVersion[] versions)
  *   widthInPoints = width of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  *   heightInPoints = height of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  * Returns: a pointer to the newly created surface. The caller
- *   owns the surface and should call [cairo.Surface.destroy] when done
+ *   owns the surface and should call [cairo.surface.Surface.destroy] when done
  *   with it.
  *   This function always returns a valid pointer, but it will return a
  *   pointer to a "nil" surface if an error such as out of memory
- *   occurs. You can use [cairo.Surface.status] to check for this.
+ *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
 Surface svgSurfaceCreate(string filename, double widthInPoints, double heightInPoints)
 {
@@ -1789,11 +1789,11 @@ Surface svgSurfaceCreate(string filename, double widthInPoints, double heightInP
  *   widthInPoints = width of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  *   heightInPoints = height of the surface, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  * Returns: a pointer to the newly created surface. The caller
- *   owns the surface and should call [cairo.Surface.destroy] when done
+ *   owns the surface and should call [cairo.surface.Surface.destroy] when done
  *   with it.
  *   This function always returns a valid pointer, but it will return a
  *   pointer to a "nil" surface if an error such as out of memory
- *   occurs. You can use [cairo.Surface.status] to check for this.
+ *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
 Surface svgSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, double heightInPoints)
 {
@@ -1837,7 +1837,7 @@ SvgUnit svgSurfaceGetDocumentUnit(Surface surface)
 }
 
 /**
- * Restricts the generated SVG file to version. See [cairo.Global.svgGetVersions]
+ * Restricts the generated SVG file to version. See [cairo.global.svgGetVersions]
  * for a list of available version values that can be used here.
  * This function should only be called before any drawing operations
  * have been performed on the given surface. The simplest way to do
@@ -1875,7 +1875,7 @@ void svgSurfaceSetDocumentUnit(Surface surface, SvgUnit unit)
 
 /**
  * Get the string representation of the given version id. This function
- * will return %NULL if version isn't valid. See [cairo.Global.svgGetVersions]
+ * will return %NULL if version isn't valid. See [cairo.global.svgGetVersions]
  * for a way to get the list of valid version ids.
  * Params:
  *   version_ = a version id
@@ -1961,7 +1961,7 @@ void teeSurfaceRemove(Surface abstractSurface, Surface target)
  * Params:
  *   numClusters = number of text_clusters to allocate
  * Returns: the newly allocated array of text clusters that should be
- *   freed using [cairo.TextCluster.free]
+ *   freed using [cairo.text_cluster.TextCluster.free]
  */
 TextCluster textClusterAllocate(int numClusters)
 {
@@ -1977,15 +1977,15 @@ TextCluster textClusterAllocate(int numClusters)
  * font API.
  * If family is the zero-length string "", the platform-specific default
  * family is assumed.  The default family then can be queried using
- * [cairo.Global.toyFontFaceGetFamily].
- * The [cairo.Context.selectFontFace] function uses this to create font faces.
+ * [cairo.global.toyFontFaceGetFamily].
+ * The [cairo.context.Context.selectFontFace] function uses this to create font faces.
  * See that function for limitations and other details of toy font faces.
  * Params:
  *   family = a font family name, encoded in UTF-8
  *   slant = the slant for the font
  *   weight = the weight for the font
  * Returns: a newly created #cairo_font_face_t. Free with
- *   [cairo.FontFace.destroy] when you are done using it.
+ *   [cairo.font_face.FontFace.destroy] when you are done using it.
  */
 FontFace toyFontFaceCreate(string family, FontSlant slant, FontWeight weight)
 {
@@ -2044,12 +2044,12 @@ FontWeight toyFontFaceGetWeight(FontFace fontFace)
  * Use the setter functions to associate callbacks with the returned
  * user font.  The only mandatory callback is render_glyph.
  * After the font-face is created, the user can attach arbitrary data
- * $(LPAREN)the actual font data$(RPAREN) to it using [cairo.FontFace.setUserData]
+ * $(LPAREN)the actual font data$(RPAREN) to it using [cairo.font_face.FontFace.setUserData]
  * and access it from the user-font callbacks by using
- * [cairo.ScaledFont.getFontFace] followed by
- * [cairo.FontFace.getUserData].
+ * [cairo.scaled_font.ScaledFont.getFontFace] followed by
+ * [cairo.font_face.FontFace.getUserData].
  * Returns: a newly created #cairo_font_face_t. Free with
- *   [cairo.FontFace.destroy] when you are done using it.
+ *   [cairo.font_face.FontFace.destroy] when you are done using it.
  */
 FontFace userFontFaceCreate()
 {
@@ -2063,10 +2063,10 @@ FontFace userFontFaceCreate()
  * Gets the foreground pattern of the glyph currently being
  * rendered. A #cairo_user_scaled_font_render_glyph_func_t function
  * that has been set with
- * [cairo.Global.userFontFaceSetRenderColorGlyphFunc] may call this
+ * [cairo.global.userFontFaceSetRenderColorGlyphFunc] may call this
  * function to retrieve the current foreground pattern for the glyph
  * being rendered. The function should not be called outside of a
- * [cairo.Global.userFontFaceSetRenderColorGlyphFunc] callback.
+ * [cairo.global.userFontFaceSetRenderColorGlyphFunc] callback.
  * The foreground marker pattern contains an internal marker to
  * indicate that it is to be substituted with the current source when
  * rendered to a surface. Querying the foreground marker will reveal a
@@ -2074,7 +2074,7 @@ FontFace userFontFaceCreate()
  * that will actually be used. Similarly, setting a solid black color
  * will render black, not the foreground pattern when the glyph is
  * painted to a surface. Using the foreground marker as the source
- * instead of [cairo.Global.userScaledFontGetForegroundSource] in a
+ * instead of [cairo.global.userScaledFontGetForegroundSource] in a
  * color render callback has the following benefits:
  * 1. Cairo only needs to call the render callback once as it can
  * cache the recording. Cairo will substitute the actual foreground
@@ -2087,18 +2087,18 @@ FontFace userFontFaceCreate()
  * actual foreground pattern is not available at the time the render
  * callback is invoked. If the render callback needs to query the
  * foreground pattern, use
- * [cairo.Global.userScaledFontGetForegroundSource].
- * If the render callback simply wants to call [cairo.Context.setSource] with
+ * [cairo.global.userScaledFontGetForegroundSource].
+ * If the render callback simply wants to call [cairo.context.Context.setSource] with
  * the foreground pattern,
- * [cairo.Global.userScaledFontGetForegroundMarker] is the preferred
+ * [cairo.global.userScaledFontGetForegroundMarker] is the preferred
  * function to use as it results in better performance than
- * [cairo.Global.userScaledFontGetForegroundSource].
+ * [cairo.global.userScaledFontGetForegroundSource].
  * Params:
  *   scaledFont = A user scaled font
  * Returns: the current foreground source marker pattern. This
  *   object is owned by cairo. This object must not be modified or used
  *   outside of a color render callback. To keep a reference to it,
- *   you must call [cairo.Pattern.reference].
+ *   you must call [cairo.pattern.Pattern.reference].
  */
 Pattern userScaledFontGetForegroundMarker(ScaledFont scaledFont)
 {
@@ -2112,13 +2112,13 @@ Pattern userScaledFontGetForegroundMarker(ScaledFont scaledFont)
  * Gets the foreground pattern of the glyph currently being
  * rendered. A #cairo_user_scaled_font_render_glyph_func_t function
  * that has been set with
- * [cairo.Global.userFontFaceSetRenderColorGlyphFunc] may call this
+ * [cairo.global.userFontFaceSetRenderColorGlyphFunc] may call this
  * function to retrieve the current foreground pattern for the glyph
  * being rendered. The function should not be called outside of a
- * [cairo.Global.userFontFaceSetRenderColorGlyphFunc] callback.
+ * [cairo.global.userFontFaceSetRenderColorGlyphFunc] callback.
  * This function returns the current source at the time the glyph is
  * rendered. Compared with
- * [cairo.Global.userScaledFontGetForegroundMarker], this function
+ * [cairo.global.userScaledFontGetForegroundMarker], this function
  * returns the actual source pattern that will be used to render the
  * glyph.  The render callback is free to query the pattern and
  * extract color components or other pattern data. For example if the
@@ -2126,7 +2126,7 @@ Pattern userScaledFontGetForegroundMarker(ScaledFont scaledFont)
  * the foreground source pattern, it will need to use this function in
  * order to be able to query the colors in the foreground pattern.
  * While this function does not have the restrictions on using the
- * pattern that [cairo.Global.userScaledFontGetForegroundMarker] has, it
+ * pattern that [cairo.global.userScaledFontGetForegroundMarker] has, it
  * does incur a performance penalty. If a render callback calls this
  * function:
  * 1. Cairo will call the render callback whenever the current pattern
@@ -2139,7 +2139,7 @@ Pattern userScaledFontGetForegroundMarker(ScaledFont scaledFont)
  *   scaledFont = A user scaled font
  * Returns: the current foreground source pattern. This object is
  *   owned by cairo. To keep a reference to it, you must call
- *   [cairo.Pattern.reference].
+ *   [cairo.pattern.Pattern.reference].
  */
 Pattern userScaledFontGetForegroundSource(ScaledFont scaledFont)
 {
@@ -2156,9 +2156,9 @@ Pattern userScaledFontGetForegroundSource(ScaledFont scaledFont)
  * A run-time comparison to check that cairo's version is greater than
  * or equal to version X.Y.Z could be performed as follows:
  * <informalexample><programlisting>
- * if $(LPAREN)[cairo.Global.version_] >\= CAIRO_VERSION_ENCODE(X,Y,Z)$(RPAREN) {...}
+ * if $(LPAREN)[cairo.global.version_] >\= CAIRO_VERSION_ENCODE(X,Y,Z)$(RPAREN) {...}
  * </programlisting></informalexample>
- * See also [cairo.Global.versionString] as well as the compile-time
+ * See also [cairo.global.versionString] as well as the compile-time
  * equivalents %CAIRO_VERSION and %CAIRO_VERSION_STRING.
  * Returns: the encoded version.
  */
@@ -2172,7 +2172,7 @@ int version_()
 /**
  * Returns the version of the cairo library as a human-readable string
  * of the form "X.Y.Z".
- * See also [cairo.Global.version_] as well as the compile-time equivalents
+ * See also [cairo.global.version_] as well as the compile-time equivalents
  * %CAIRO_VERSION_STRING and %CAIRO_VERSION.
  * Returns: a string containing the version.
  */

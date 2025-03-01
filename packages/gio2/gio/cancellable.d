@@ -1,6 +1,6 @@
 module gio.cancellable;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -86,7 +86,7 @@ class Cancellable : ObjectG
 
   /**
    * Disconnects a handler from a cancellable instance similar to
-   * [GObject.Global.signalHandlerDisconnect].  Additionally, in the event that a
+   * [gobject.global.signalHandlerDisconnect].  Additionally, in the event that a
    * signal handler is currently running, this call will block until the
    * handler has finished.  Calling this function from a
    * #GCancellable::cancelled signal handler will therefore result in a
@@ -111,11 +111,11 @@ class Cancellable : ObjectG
    * turn readable when cancellable is cancelled.
    * You are not supposed to read from the fd yourself, just check for
    * readable status. Reading to unset the readable status is done
-   * with [Gio.Cancellable.reset].
+   * with [gio.cancellable.Cancellable.reset].
    * After a successful return from this function, you should use
-   * [Gio.Cancellable.releaseFd] to free up resources allocated for
+   * [gio.cancellable.Cancellable.releaseFd] to free up resources allocated for
    * the returned file descriptor.
-   * See also [Gio.Cancellable.makePollfd].
+   * See also [gio.cancellable.Cancellable.makePollfd].
    * Returns: A valid file descriptor. `-1` if the file descriptor
    *   is not supported, or on errors.
    */
@@ -140,12 +140,12 @@ class Cancellable : ObjectG
 
   /**
    * Creates a #GPollFD corresponding to cancellable; this can be passed
-   * to [GLib.DGLibGlobal.poll] and used to poll for cancellation. This is useful both
+   * to [glib.global.poll] and used to poll for cancellation. This is useful both
    * for unix systems without a native poll and for portability to
    * windows.
    * When this function returns %TRUE, you should use
-   * [Gio.Cancellable.releaseFd] to free up resources allocated for the
-   * pollfd. After a %FALSE return, do not call [Gio.Cancellable.releaseFd].
+   * [gio.cancellable.Cancellable.releaseFd] to free up resources allocated for the
+   * pollfd. After a %FALSE return, do not call [gio.cancellable.Cancellable.releaseFd].
    * If this function returns %FALSE, either no cancellable was given or
    * resource limits prevent this function from allocating the necessary
    * structures for polling. $(LPAREN)On Linux, you will likely have reached
@@ -153,7 +153,7 @@ class Cancellable : ObjectG
    * these cases is to ignore the cancellable.
    * You are not supposed to read from the fd yourself, just check for
    * readable status. Reading to unset the readable status is done
-   * with [Gio.Cancellable.reset].
+   * with [gio.cancellable.Cancellable.reset].
    * Params:
    *   pollfd = a pointer to a #GPollFD
    * Returns: %TRUE if pollfd was successfully initialized, %FALSE on
@@ -177,7 +177,7 @@ class Cancellable : ObjectG
 
   /**
    * Pushes cancellable onto the cancellable stack. The current
-   * cancellable can then be received using [Gio.Cancellable.getCurrent].
+   * cancellable can then be received using [gio.cancellable.Cancellable.getCurrent].
    * This is useful when implementing cancellable operations in
    * code that does not allow you to pass down the cancellable object.
    * This is typically called automatically by e.g. #GFile operations,
@@ -189,8 +189,8 @@ class Cancellable : ObjectG
   }
 
   /**
-   * Releases a resources previously allocated by [Gio.Cancellable.getFd]
-   * or [Gio.Cancellable.makePollfd].
+   * Releases a resources previously allocated by [gio.cancellable.Cancellable.getFd]
+   * or [gio.cancellable.Cancellable.makePollfd].
    * For compatibility reasons with older releases, calling this function
    * is not strictly required, the resources will be automatically freed
    * when the cancellable is finalized. However, the cancellable will
@@ -238,7 +238,7 @@ class Cancellable : ObjectG
    * Creates a source that triggers if cancellable is cancelled and
    * calls its callback of type #GCancellableSourceFunc. This is
    * primarily useful for attaching to another $(LPAREN)non-cancellable$(RPAREN) source
-   * with [GLib.Source.addChildSource] to add cancellability to it.
+   * with [glib.source.Source.addChildSource] to add cancellability to it.
    * For convenience, you can call this with a %NULL #GCancellable,
    * in which case the source will never trigger.
    * The new #GSource will hold a reference to the #GCancellable.
@@ -261,15 +261,15 @@ class Cancellable : ObjectG
    * Note that disconnecting from this signal $(LPAREN)or any signal$(RPAREN) in a
    * multi-threaded program is prone to race conditions. For instance
    * it is possible that a signal handler may be invoked even after
-   * a call to [GObject.Global.signalHandlerDisconnect] for that handler has
+   * a call to [gobject.global.signalHandlerDisconnect] for that handler has
    * already returned.
    * There is also a problem when cancellation happens right before
    * connecting to the signal. If this happens the signal will
    * unexpectedly not be emitted, and checking before connecting to
    * the signal leaves a race condition where this is still happening.
    * In order to make it safe and easy to connect handlers there
-   * are two helper functions: [Gio.Cancellable.connect] and
-   * [Gio.Cancellable.disconnect] which protect against problems
+   * are two helper functions: [gio.cancellable.Cancellable.connect] and
+   * [gio.cancellable.Cancellable.disconnect] which protect against problems
    * like this.
    * An example of how to us this:
    * |[<!-- language\="C" -->

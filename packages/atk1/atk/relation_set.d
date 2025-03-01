@@ -5,7 +5,7 @@ import atk.c.types;
 import atk.object;
 import atk.relation;
 import atk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**

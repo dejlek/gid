@@ -1,6 +1,6 @@
 module gtk.file_dialog;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -22,11 +22,11 @@ import gtk.window;
  * are needed to present a file chooser dialog to the
  * user, such as a title for the dialog and whether it
  * should be modal.
- * The dialog is shown with [Gtk.FileDialog.open],
- * [Gtk.FileDialog.save], etc. These APIs follow the
+ * The dialog is shown with [gtk.file_dialog.FileDialog.open],
+ * [gtk.file_dialog.FileDialog.save], etc. These APIs follow the
  * GIO async pattern, and the result can be obtained by calling
  * the corresponding finish function, for example
- * [Gtk.FileDialog.openFinish].
+ * [gtk.file_dialog.FileDialog.openFinish].
  */
 class FileDialog : ObjectG
 {
@@ -161,7 +161,7 @@ class FileDialog : ObjectG
    * This function initiates a file selection operation by
    * presenting a file chooser dialog to the user.
    * The callback will be called when the dialog is dismissed.
-   * It should call [Gtk.FileDialog.openFinish]
+   * It should call [gtk.file_dialog.FileDialog.openFinish]
    * to obtain the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -184,7 +184,7 @@ class FileDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.FileDialog.open] call and
+   * Finishes the [gtk.file_dialog.FileDialog.open] call and
    * returns the resulting file.
    * Params:
    *   result = a `GAsyncResult`
@@ -208,7 +208,7 @@ class FileDialog : ObjectG
    * The file chooser will initially be opened in the directory
    * propertyGtk.FileDialog:initial-folder.
    * The callback will be called when the dialog is dismissed.
-   * It should call [Gtk.FileDialog.openMultipleFinish]
+   * It should call [gtk.file_dialog.FileDialog.openMultipleFinish]
    * to obtain the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -231,7 +231,7 @@ class FileDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.FileDialog.open] call and
+   * Finishes the [gtk.file_dialog.FileDialog.open] call and
    * returns the resulting files in a `GListModel`.
    * Params:
    *   result = a `GAsyncResult`
@@ -254,7 +254,7 @@ class FileDialog : ObjectG
    * This function initiates a file save operation by
    * presenting a file chooser dialog to the user.
    * The callback will be called when the dialog is dismissed.
-   * It should call [Gtk.FileDialog.saveFinish]
+   * It should call [gtk.file_dialog.FileDialog.saveFinish]
    * to obtain the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -277,7 +277,7 @@ class FileDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.FileDialog.save] call and
+   * Finishes the [gtk.file_dialog.FileDialog.save] call and
    * returns the resulting file.
    * Params:
    *   result = a `GAsyncResult`
@@ -302,7 +302,7 @@ class FileDialog : ObjectG
    * opened in the parent directory of that folder, otherwise, it
    * will be in the directory propertyGtk.FileDialog:initial-folder.
    * The callback will be called when the dialog is dismissed.
-   * It should call [Gtk.FileDialog.selectFolderFinish]
+   * It should call [gtk.file_dialog.FileDialog.selectFolderFinish]
    * to obtain the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -325,7 +325,7 @@ class FileDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.FileDialog.selectFolder] call and
+   * Finishes the [gtk.file_dialog.FileDialog.selectFolder] call and
    * returns the resulting file.
    * Params:
    *   result = a `GAsyncResult`
@@ -349,7 +349,7 @@ class FileDialog : ObjectG
    * The file chooser will initially be opened in the directory
    * propertyGtk.FileDialog:initial-folder.
    * The callback will be called when the dialog is dismissed.
-   * It should call [Gtk.FileDialog.selectMultipleFoldersFinish]
+   * It should call [gtk.file_dialog.FileDialog.selectMultipleFoldersFinish]
    * to obtain the result.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -372,7 +372,7 @@ class FileDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.FileDialog.selectMultipleFolders]
+   * Finishes the [gtk.file_dialog.FileDialog.selectMultipleFolders]
    * call and returns the resulting files in a `GListModel`.
    * Params:
    *   result = a `GAsyncResult`
@@ -407,7 +407,7 @@ class FileDialog : ObjectG
   /**
    * Sets the filter that will be selected by default
    * in the file chooser dialog.
-   * If set to %NULL, the first item in [Gtk.FileDialog.filters]
+   * If set to %NULL, the first item in [gtk.file_dialog.FileDialog.Gio.ListModel]
    * will be used as the default filter. If that list is empty, the dialog
    * will be unfiltered.
    * Params:
@@ -433,8 +433,8 @@ class FileDialog : ObjectG
    * Sets the file that will be initially selected in
    * the file chooser dialog.
    * This function is a shortcut for calling both
-   * [Gtk.FileDialog.setInitialFolder] and
-   * [Gtk.FileDialog.setInitialName] with the directory and
+   * [gtk.file_dialog.FileDialog.setInitialFolder] and
+   * [gtk.file_dialog.FileDialog.setInitialName] with the directory and
    * name of file respectively.
    * Params:
    *   file = a `GFile`

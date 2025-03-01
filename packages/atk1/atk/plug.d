@@ -6,7 +6,7 @@ import atk.component;
 import atk.component_mixin;
 import atk.object;
 import atk.types;
-import gid.gid;
+import gid.global;
 
 /**
  * Toplevel for embedding into other processes
@@ -46,7 +46,7 @@ class Plug : ObjectAtk, Component
 
   /**
    * Gets the unique ID of an #AtkPlug object, which can be used to
-   * embed inside of an #AtkSocket using [Atk.Socket.embed].
+   * embed inside of an #AtkSocket using [atk.socket.Socket.embed].
    * Internally, this calls a class function that should be registered
    * by the IPC layer $(LPAREN)usually at-spi2-atk$(RPAREN). The implementor of an
    * #AtkPlug object should call this function $(LPAREN)after atk-bridge is
@@ -70,7 +70,7 @@ class Plug : ObjectAtk, Component
    * case, GtkPlugAccessible can not inherit both from GtkWindowAccessible and
    * from AtkPlug. In such a case, one can create, in addition to the standard
    * accessible object for the toplevel widget, an AtkPlug object, and make the
-   * former the child of the latter by calling [Atk.Plug.setChild].
+   * former the child of the latter by calling [atk.plug.Plug.setChild].
    * Params:
    *   child = an #AtkObject to be set as accessible child of plug.
    */

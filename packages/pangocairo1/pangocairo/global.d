@@ -2,7 +2,7 @@ module PangoCairo.global;
 
 import cairo.context : DcairoContext = Context;
 import cairo.font_options;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import pango.attr_shape;
 import pango.context;
@@ -108,7 +108,7 @@ void contextSetShapeRenderer(Context context, ShapeRendererFunc func)
  * Creates a context object set up to match the current transformation
  * and target surface of the Cairo context.
  * This context can then be
- * used to create a layout using [Pango.Layout.new_].
+ * used to create a layout using [pango.layout.Layout.new_].
  * This function is a convenience function that creates a context using
  * the default font map, then updates it to cr. If you just need to
  * create a layout for use with cr and do not need to access `PangoContext`
@@ -129,7 +129,7 @@ Context createContext(DcairoContext cr)
  * Creates a layout object set up to match the current transformation
  * and target surface of the Cairo context.
  * This layout can then be used for text measurement with functions
- * like [Pango.Layout.getSize] or drawing with functions like
+ * like [pango.layout.Layout.getSize] or drawing with functions like
  * funcshow_layout. If you change the transformation or target
  * surface for cr, you need to call funcupdate_layout.
  * This function is the most convenient way to use Cairo with Pango,
@@ -293,7 +293,7 @@ void showLayoutLine(DcairoContext cr, LayoutLine line)
  * match the current transformation and target surface of a Cairo
  * context.
  * If any layouts have been created for the context, it's necessary
- * to call [Pango.Layout.contextChanged] on those layouts.
+ * to call [pango.layout.Layout.contextChanged] on those layouts.
  * Params:
  *   cr = a Cairo context
  *   context = a `PangoContext`, from a pangocairo font map

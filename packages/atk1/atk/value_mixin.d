@@ -5,7 +5,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.range;
 public import atk.types;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 public import gobject.value;
 
@@ -105,7 +105,7 @@ public import gobject.value;
  * implementors are expected to provide localized strings which can be
  * directly presented to end users via their assistive technology. In
  * order to simplify this for implementors, implementors can use
- * [Atk.Global.valueTypeGetLocalizedName] with the following
+ * [atk.global.valueTypeGetLocalizedName] with the following
  * already-localized constants for commonly-needed values can be used:
  * </para>
  * <itemizedlist>
@@ -150,7 +150,7 @@ template ValueAtkT()
    * Params:
    *   value = a #GValue representing the current accessible value
 
-   * Deprecated: Since 2.12. Use [Atk.ValueAtk.getValueAndText]
+   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getValueAndText]
    *   instead.
    */
   override void getCurrentValue(out Value value)
@@ -180,7 +180,7 @@ template ValueAtkT()
    * Params:
    *   value = a #GValue representing the maximum accessible value
 
-   * Deprecated: Since 2.12. Use [Atk.ValueAtk.getRange] instead.
+   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getRange] instead.
    */
   override void getMaximumValue(out Value value)
   {
@@ -196,7 +196,7 @@ template ValueAtkT()
    * Params:
    *   value = a #GValue representing the minimum increment by which the accessible value may be changed
 
-   * Deprecated: Since 2.12. Use [Atk.ValueAtk.getIncrement] instead.
+   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getIncrement] instead.
    */
   override void getMinimumIncrement(out Value value)
   {
@@ -210,7 +210,7 @@ template ValueAtkT()
    * Params:
    *   value = a #GValue representing the minimum accessible value
 
-   * Deprecated: Since 2.12. Use [Atk.ValueAtk.getRange] instead.
+   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getRange] instead.
    */
   override void getMinimumValue(out Value value)
   {
@@ -238,7 +238,7 @@ template ValueAtkT()
    * introduction for examples of subranges and when to expose them.
    * Returns: an #GSList of
    *   #AtkRange which each of the subranges defined for this object. Free
-   *   the returns list with [GLib.SList.free].
+   *   the returns list with [glib.slist.SList.free].
    */
   override Range[] getSubRanges()
   {
@@ -270,7 +270,7 @@ template ValueAtkT()
    *   value = a #GValue which is the desired new accessible value.
    * Returns: %TRUE if new value is successfully set, %FALSE otherwise.
 
-   * Deprecated: Since 2.12. Use [Atk.ValueAtk.setValue] instead.
+   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.setValue] instead.
    */
   override bool setCurrentValue(Value value)
   {
@@ -286,7 +286,7 @@ template ValueAtkT()
    * modified $(LPAREN)ie: a read-only component$(RPAREN). If the value changes due this
    * call, it is possible that the text could change, and will trigger
    * an #AtkValue::value-changed signal emission.
-   * Note for implementors: the deprecated [Atk.ValueAtk.setCurrentValue]
+   * Note for implementors: the deprecated [atk.value.ValueAtk.setCurrentValue]
    * method returned TRUE or FALSE depending if the value was assigned
    * or not. In the practice several implementors were not able to
    * decide it, and returned TRUE in any case. For that reason it is not

@@ -1,6 +1,6 @@
 module gtk.font_button;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -30,7 +30,7 @@ import gtk.widget;
  * `GtkFontButton` has a single CSS node with name fontbutton which
  * contains a button node with the .font style class.
 
- * Deprecated: Use [Gtk.FontDialogButton] instead
+ * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
  */
 class FontButton : Widget, FontChooser
 {
@@ -57,7 +57,7 @@ class FontButton : Widget, FontChooser
    * Creates a new font picker widget.
    * Returns: a new font picker widget.
 
-   * Deprecated: Use [Gtk.FontDialogButton] instead
+   * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
    */
   this()
   {
@@ -72,7 +72,7 @@ class FontButton : Widget, FontChooser
    *   fontname = Name of font to display in font chooser dialog
    * Returns: a new font picker widget.
 
-   * Deprecated: Use [Gtk.FontDialogButton] instead
+   * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
    */
   static FontButton newWithFont(string fontname)
   {
@@ -87,7 +87,7 @@ class FontButton : Widget, FontChooser
    * Gets whether the dialog is modal.
    * Returns: %TRUE if the dialog is modal
 
-   * Deprecated: Use [Gtk.FontDialogButton] instead
+   * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
    */
   bool getModal()
   {
@@ -101,7 +101,7 @@ class FontButton : Widget, FontChooser
    * Returns: an internal copy of the title string
    *   which must not be freed.
 
-   * Deprecated: Use [Gtk.FontDialogButton] instead
+   * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
    */
   string getTitle()
   {
@@ -115,7 +115,7 @@ class FontButton : Widget, FontChooser
    * Returns whether the selected font is used in the label.
    * Returns: whether the selected font is used in the label.
 
-   * Deprecated: Use [Gtk.FontDialogButton] instead
+   * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
    */
   bool getUseFont()
   {
@@ -128,7 +128,7 @@ class FontButton : Widget, FontChooser
    * Returns whether the selected size is used in the label.
    * Returns: whether the selected size is used in the label.
 
-   * Deprecated: Use [Gtk.FontDialogButton] instead
+   * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
    */
   bool getUseSize()
   {
@@ -142,7 +142,7 @@ class FontButton : Widget, FontChooser
    * Params:
    *   modal = %TRUE to make the dialog modal
 
-   * Deprecated: Use [Gtk.FontDialogButton] instead
+   * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
    */
   void setModal(bool modal)
   {
@@ -154,7 +154,7 @@ class FontButton : Widget, FontChooser
    * Params:
    *   title = a string containing the font chooser dialog title
 
-   * Deprecated: Use [Gtk.FontDialogButton] instead
+   * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
    */
   void setTitle(string title)
   {
@@ -168,7 +168,7 @@ class FontButton : Widget, FontChooser
    * Params:
    *   useFont = If %TRUE, font name will be written using font chosen.
 
-   * Deprecated: Use [Gtk.FontDialogButton] instead
+   * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
    */
   void setUseFont(bool useFont)
   {
@@ -182,7 +182,7 @@ class FontButton : Widget, FontChooser
    *   useSize = If %TRUE, font name will be written using the
    *     selected size.
 
-   * Deprecated: Use [Gtk.FontDialogButton] instead
+   * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
    */
   void setUseSize(bool useSize)
   {
@@ -222,7 +222,7 @@ class FontButton : Widget, FontChooser
 
   /**
    * Emitted when the user selects a font.
-   * When handling this signal, use [Gtk.FontChooser.getFont]
+   * When handling this signal, use [gtk.font_chooser.FontChooser.getFont]
    * to find out which font was just selected.
    * Note that this signal is only emitted when the user changes the font.
    * If you need to react to programmatic font changes as well, use

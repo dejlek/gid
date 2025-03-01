@@ -3,16 +3,16 @@ module cairo.device;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
  * A #cairo_device_t represents the driver interface for drawing
  * operations to a #cairo_surface_t.  There are different subtypes of
  * #cairo_device_t for different drawing backends.
- * The type of a device can be queried with [cairo.Device.getDeviceType].
+ * The type of a device can be queried with [cairo.device.Device.getDeviceType].
  * Memory management of #cairo_device_t is done with
- * [cairo.Device.reference] and [cairo.Device.destroy].
+ * [cairo.device.Device.reference] and [cairo.device.Device.destroy].
  */
 class Device : Boxed
 {
@@ -43,7 +43,7 @@ class Device : Boxed
    * until no other thread has acquired the device.
    * If the return value is %CAIRO_STATUS_SUCCESS, you successfully acquired the
    * device. From now on your thread owns the device and no other thread will be
-   * able to acquire it until a matching call to [cairo.Device.release]. It is
+   * able to acquire it until a matching call to [cairo.device.Device.release]. It is
    * allowed to recursively acquire the device multiple times from the same
    * thread.
    * <note><para>You must never acquire two different devices at the same time
@@ -56,8 +56,8 @@ class Device : Boxed
    * </para></note>
    * Returns: %CAIRO_STATUS_SUCCESS on success or an error code if
    *   the device is in an error state and could not be
-   *   acquired. After a successful call to [cairo.Device.acquire],
-   *   a matching call to [cairo.Device.release] is required.
+   *   acquired. After a successful call to [cairo.device.Device.acquire],
+   *   a matching call to [cairo.device.Device.release] is required.
    */
   Status acquire()
   {
@@ -73,8 +73,8 @@ class Device : Boxed
    * for this device will be finished, too.
    * Further operations on the device will not affect the device but
    * will instead trigger a %CAIRO_STATUS_DEVICE_FINISHED error.
-   * When the last call to [cairo.Device.destroy] decreases the
-   * reference count to zero, cairo will call [cairo.Device.finish] if
+   * When the last call to [cairo.device.Device.destroy] decreases the
+   * reference count to zero, cairo will call [cairo.device.Device.finish] if
    * it hasn't been called already, before freeing the resources
    * associated with the device.
    * This function may acquire devices.
@@ -223,7 +223,7 @@ class Device : Boxed
   }
 
   /**
-   * Releases a device previously acquired using [cairo.Device.acquire]. See
+   * Releases a device previously acquired using [cairo.device.Device.acquire]. See
    * that function for details.
    */
   void release()

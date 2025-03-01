@@ -1,6 +1,6 @@
 module gtk.bitset;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;
@@ -14,9 +14,9 @@ import gtk.types;
  * like unions, intersections and checks for equality or if a value is contained
  * in the set. `GtkBitset` also contains various functions to query metadata about
  * the bitset, such as the minimum or maximum values or its size.
- * The fastest way to iterate values in a bitset is [Gtk.BitsetIter].
+ * The fastest way to iterate values in a bitset is [gtk.bitset_iter.BitsetIter].
  * The main use case for `GtkBitset` is implementing complex selections for
- * [Gtk.SelectionModel].
+ * [gtk.selection_model.SelectionModel].
  */
 class Bitset : Boxed
 {

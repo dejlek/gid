@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.texture;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**
@@ -13,24 +13,24 @@ import gobject.object;
  * to modify them later. You should create a new cursor when you want to change
  * something about it.
  * Cursors by themselves are not very interesting: they must be bound to a
- * window for users to see them. This is done with [Gdk.Surface.setCursor]
- * or [Gdk.Surface.setDeviceCursor]. Applications will typically
- * use higher-level GTK functions such as [[Gtk.Widget.setCursor]](../gtk4/method.Widget.set_cursor.html)
+ * window for users to see them. This is done with [gdk.surface.Surface.setCursor]
+ * or [gdk.surface.Surface.setDeviceCursor]. Applications will typically
+ * use higher-level GTK functions such as [[gtk.widget.Widget.setCursor]](../gtk4/method.Widget.set_cursor.html)
  * instead.
- * Cursors are not bound to a given [Gdk.Display], so they can be shared.
+ * Cursors are not bound to a given [gdk.display.Display], so they can be shared.
  * However, the appearance of cursors may vary when used on different
  * platforms.
  * ## Named and texture cursors
  * There are multiple ways to create cursors. The platform's own cursors
- * can be created with [Gdk.Cursor.newFromName]. That function lists
+ * can be created with [gdk.cursor.Cursor.newFromName]. That function lists
  * the commonly available names that are shared with the CSS specification.
  * Other names may be available, depending on the platform in use. On some
  * platforms, what images are used for named cursors may be influenced by
  * the cursor theme.
- * Another option to create a cursor is to use [Gdk.Cursor.newFromTexture]
+ * Another option to create a cursor is to use [gdk.cursor.Cursor.newFromTexture]
  * and provide an image to use for the cursor.
  * To ease work with unsupported cursors, a fallback cursor can be provided.
- * If a [Gdk.Surface] cannot use a cursor because of the reasons mentioned
+ * If a [gdk.surface.Surface] cannot use a cursor because of the reasons mentioned
  * above, it will try the fallback cursor. Fallback cursors can themselves have
  * fallback cursors again, so it is possible to provide a chain of progressively
  * easier to support cursors. If none of the provided cursors can be supported,
@@ -128,7 +128,7 @@ class Cursor : ObjectG
    * The hotspot indicates the pixel that will be directly above the cursor.
    * Note that named cursors may have a nonzero hotspot, but this function
    * will only return the hotspot position for cursors created with
-   * [Gdk.Cursor.newFromTexture].
+   * [gdk.cursor.Cursor.newFromTexture].
    * Returns: the horizontal offset of the hotspot or 0 for named cursors
    */
   int getHotspotX()
@@ -143,7 +143,7 @@ class Cursor : ObjectG
    * The hotspot indicates the pixel that will be directly above the cursor.
    * Note that named cursors may have a nonzero hotspot, but this function
    * will only return the hotspot position for cursors created with
-   * [Gdk.Cursor.newFromTexture].
+   * [gdk.cursor.Cursor.newFromTexture].
    * Returns: the vertical offset of the hotspot or 0 for named cursors
    */
   int getHotspotY()

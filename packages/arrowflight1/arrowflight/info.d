@@ -7,7 +7,7 @@ import arrowflight.c.types;
 import arrowflight.descriptor;
 import arrowflight.endpoint;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

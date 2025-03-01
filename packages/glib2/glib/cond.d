@@ -1,6 +1,6 @@
 module glib.cond;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.mutex;
@@ -54,13 +54,13 @@ import glib.types;
  * waiting on it$(RPAREN) before the first thread goes to sleep. #GCond is
  * specifically useful for its ability to release the mutex and go
  * to sleep atomically.
- * It is also important to use the [GLib.Cond.wait] and [GLib.Cond.waitUntil]
+ * It is also important to use the [glib.cond.Cond.wait] and [glib.cond.Cond.waitUntil]
  * functions only inside a loop which checks for the condition to be
- * true.  See [GLib.Cond.wait] for an explanation of why the condition may
+ * true.  See [glib.cond.Cond.wait] for an explanation of why the condition may
  * not be true even after it returns.
  * If a #GCond is allocated in static storage then it can be used
- * without initialisation.  Otherwise, you should call [GLib.Cond.init_]
- * on it and [GLib.Cond.clear] when done.
+ * without initialisation.  Otherwise, you should call [glib.cond.Cond.init_]
+ * on it and [glib.cond.Cond.clear] when done.
  * A #GCond should only be accessed via the g_cond_ functions.
  */
 class Cond
@@ -95,10 +95,10 @@ class Cond
   }
 
   /**
-   * Frees the resources allocated to a #GCond with [GLib.Cond.init_].
+   * Frees the resources allocated to a #GCond with [glib.cond.Cond.init_].
    * This function should not be used with a #GCond that has been
    * statically allocated.
-   * Calling [GLib.Cond.clear] for a #GCond on which threads are
+   * Calling [glib.cond.Cond.clear] for a #GCond on which threads are
    * blocking leads to undefined behaviour.
    */
   void clear()
@@ -111,9 +111,9 @@ class Cond
    * This function is useful to initialise a #GCond that has been
    * allocated as part of a larger structure.  It is not necessary to
    * initialise a #GCond that has been statically allocated.
-   * To undo the effect of [GLib.Cond.init_] when a #GCond is no longer
-   * needed, use [GLib.Cond.clear].
-   * Calling [GLib.Cond.init_] on an already-initialised #GCond leads
+   * To undo the effect of [glib.cond.Cond.init_] when a #GCond is no longer
+   * needed, use [glib.cond.Cond.clear].
+   * Calling [glib.cond.Cond.init_] on an already-initialised #GCond leads
    * to undefined behaviour.
    */
   void init_()
@@ -137,13 +137,13 @@ class Cond
    * When this function returns, mutex is locked again and owned by the
    * calling thread.
    * When using condition variables, it is possible that a spurious wakeup
-   * may occur $(LPAREN)ie: [GLib.Cond.wait] returns even though [GLib.Cond.signal] was
+   * may occur $(LPAREN)ie: [glib.cond.Cond.wait] returns even though [glib.cond.Cond.signal] was
    * not called$(RPAREN).  It's also possible that a stolen wakeup may occur.
-   * This is when [GLib.Cond.signal] is called, but another thread acquires
+   * This is when [glib.cond.Cond.signal] is called, but another thread acquires
    * mutex before this thread and modifies the state of the program in
-   * such a way that when [GLib.Cond.wait] is able to return, the expected
+   * such a way that when [glib.cond.Cond.wait] is able to return, the expected
    * condition is no longer met.
-   * For this reason, [GLib.Cond.wait] must always be used in a loop.  See
+   * For this reason, [glib.cond.Cond.wait] must always be used in a loop.  See
    * the documentation for #GCond for a complete example.
    * Params:
    *   mutex = a #GMutex that is currently locked
@@ -155,7 +155,7 @@ class Cond
 
   /**
    * Waits until either cond is signalled or end_time has passed.
-   * As with [GLib.Cond.wait] it is possible that a spurious or stolen wakeup
+   * As with [glib.cond.Cond.wait] it is possible that a spurious or stolen wakeup
    * could occur.  For that reason, waiting on a condition variable should
    * always be in a loop, based on an explicitly-checked predicate.
    * %TRUE is returned if the condition variable was signalled $(LPAREN)or in the

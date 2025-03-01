@@ -1,7 +1,7 @@
 module HarfBuzz.global;
 
 import freetype2.types;
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.types;
 import harfbuzz.blob;
@@ -146,7 +146,7 @@ Blob blobCopyWritableOrFail(Blob blob)
  * Params:
  *   fileName = A font filename
  * Returns: An #hb_blob_t pointer with the content of the file,
- *   or [HarfBuzz.Global.blobGetEmpty] if failed.
+ *   or [harfbuzz.global.blobGetEmpty] if failed.
  */
 Blob blobCreateFromFile(string fileName)
 {
@@ -187,7 +187,7 @@ Blob blobCreateFromFileOrFail(string fileName)
  *   length = Length of sub-blob.
  * Returns: New blob, or the empty blob if something failed or if
  *   length is zero or offset is beyond the end of parent's data.  Destroy
- *   with [HarfBuzz.Global.blobDestroy].
+ *   with [harfbuzz.global.blobDestroy].
  */
 Blob blobCreateSubBlob(Blob parent, uint offset, uint length)
 {
@@ -320,7 +320,7 @@ void bufferAdd(Buffer buffer, Codepoint codepoint, uint cluster)
  * marks at stat of run.
  * This function does not check the validity of text, it is up to the caller
  * to ensure it contains a valid Unicode scalar values.  In contrast,
- * [HarfBuzz.Global.bufferAddUtf32] can be used that takes similar input but performs
+ * [harfbuzz.global.bufferAddUtf32] can be used that takes similar input but performs
  * sanity-check on the input.
  * Params:
  *   buffer = a #hb_buffer_t to append characters to.
@@ -340,7 +340,7 @@ void bufferAddCodepoints(Buffer buffer, Codepoint[] text, uint itemOffset, int i
 }
 
 /**
- * Similar to [HarfBuzz.Global.bufferAddCodepoints], but allows only access to first 256
+ * Similar to [harfbuzz.global.bufferAddCodepoints], but allows only access to first 256
  * Unicode code points that can fit in 8-bit strings.
  * <note>Has nothing to do with non-Unicode Latin-1 encoding.</note>
  * Params:
@@ -362,9 +362,9 @@ void bufferAddLatin1(Buffer buffer, ubyte[] text, uint itemOffset, int itemLengt
 }
 
 /**
- * See [HarfBuzz.Global.bufferAddCodepoints].
+ * See [harfbuzz.global.bufferAddCodepoints].
  * Replaces invalid UTF-16 characters with the buffer replacement code point,
- * see [HarfBuzz.Global.bufferSetReplacementCodepoint].
+ * see [harfbuzz.global.bufferSetReplacementCodepoint].
  * Params:
  *   buffer = An #hb_buffer_t
  *   text = An array of UTF-16 characters to append
@@ -383,9 +383,9 @@ void bufferAddUtf16(Buffer buffer, ushort[] text, uint itemOffset, int itemLengt
 }
 
 /**
- * See [HarfBuzz.Global.bufferAddCodepoints].
+ * See [harfbuzz.global.bufferAddCodepoints].
  * Replaces invalid UTF-32 characters with the buffer replacement code point,
- * see [HarfBuzz.Global.bufferSetReplacementCodepoint].
+ * see [harfbuzz.global.bufferSetReplacementCodepoint].
  * Params:
  *   buffer = An #hb_buffer_t
  *   text = An array of UTF-32 characters to append
@@ -404,9 +404,9 @@ void bufferAddUtf32(Buffer buffer, uint[] text, uint itemOffset, int itemLength)
 }
 
 /**
- * See [HarfBuzz.Global.bufferAddCodepoints].
+ * See [harfbuzz.global.bufferAddCodepoints].
  * Replaces invalid UTF-8 characters with the buffer replacement code point,
- * see [HarfBuzz.Global.bufferSetReplacementCodepoint].
+ * see [harfbuzz.global.bufferSetReplacementCodepoint].
  * Params:
  *   buffer = An #hb_buffer_t
  *   text = An array of UTF-8
@@ -452,7 +452,7 @@ void bufferAppend(Buffer buffer, Buffer source, uint start, uint end)
 }
 
 /**
- * Similar to [HarfBuzz.Global.bufferReset], but does not clear the Unicode functions and
+ * Similar to [harfbuzz.global.bufferReset], but does not clear the Unicode functions and
  * the replacement code point.
  * Params:
  *   buffer = An #hb_buffer_t
@@ -465,10 +465,10 @@ void bufferClearContents(Buffer buffer)
 /**
  * Creates a new #hb_buffer_t with all properties to defaults.
  * Returns: A newly allocated #hb_buffer_t with a reference count of 1. The initial
- *   reference count should be released with [HarfBuzz.Global.bufferDestroy] when you are done
+ *   reference count should be released with [harfbuzz.global.bufferDestroy] when you are done
  *   using the #hb_buffer_t. This function never returns `NULL`. If memory cannot
  *   be allocated, a special #hb_buffer_t object will be returned on which
- *   [HarfBuzz.Global.bufferAllocationSuccessful] returns `false`.
+ *   [harfbuzz.global.bufferAllocationSuccessful] returns `false`.
  */
 Buffer bufferCreate()
 {
@@ -479,11 +479,11 @@ Buffer bufferCreate()
 }
 
 /**
- * Creates a new #hb_buffer_t, similar to [HarfBuzz.Global.bufferCreate]. The only
+ * Creates a new #hb_buffer_t, similar to [harfbuzz.global.bufferCreate]. The only
  * difference is that the buffer is configured similarly to src.
  * Params:
  *   src = An #hb_buffer_t
- * Returns: A newly allocated #hb_buffer_t, similar to [HarfBuzz.Global.bufferCreate].
+ * Returns: A newly allocated #hb_buffer_t, similar to [harfbuzz.global.bufferCreate].
  */
 Buffer bufferCreateSimilar(Buffer src)
 {
@@ -495,7 +495,7 @@ Buffer bufferCreateSimilar(Buffer src)
 
 /**
  * Deserializes glyphs buffer from textual representation in the format
- * produced by [HarfBuzz.Global.bufferSerializeGlyphs].
+ * produced by [harfbuzz.global.bufferSerializeGlyphs].
  * Params:
  *   buffer = an #hb_buffer_t buffer.
  *   buf = string to deserialize
@@ -522,7 +522,7 @@ Bool bufferDeserializeGlyphs(Buffer buffer, string buf, out string endPtr, Font 
 
 /**
  * Deserializes Unicode buffer from textual representation in the format
- * produced by [HarfBuzz.Global.bufferSerializeUnicode].
+ * produced by [harfbuzz.global.bufferSerializeUnicode].
  * Params:
  *   buffer = an #hb_buffer_t buffer.
  *   buf = string to deserialize
@@ -597,7 +597,7 @@ BufferContentType bufferGetContentType(Buffer buffer)
 }
 
 /**
- * See [HarfBuzz.Global.bufferSetDirection]
+ * See [harfbuzz.global.bufferSetDirection]
  * Params:
  *   buffer = An #hb_buffer_t
  * Returns: The direction of the buffer.
@@ -665,7 +665,7 @@ GlyphInfo[] bufferGetGlyphInfos(Buffer buffer)
  * is valid as long as buffer contents are not modified.
  * If buffer did not have positions before, the positions will be
  * initialized to zeros, unless this function is called from
- * within a buffer message callback $(LPAREN)see [HarfBuzz.Global.bufferSetMessageFunc]$(RPAREN),
+ * within a buffer message callback $(LPAREN)see [harfbuzz.global.bufferSetMessageFunc]$(RPAREN),
  * in which case `NULL` is returned.
  * Params:
  *   buffer = An #hb_buffer_t
@@ -689,7 +689,7 @@ GlyphPosition[] bufferGetGlyphPositions(Buffer buffer)
 }
 
 /**
- * See [HarfBuzz.Global.bufferSetInvisibleGlyph].
+ * See [harfbuzz.global.bufferSetInvisibleGlyph].
  * Params:
  *   buffer = An #hb_buffer_t
  * Returns: The buffer invisible #hb_codepoint_t
@@ -702,7 +702,7 @@ Codepoint bufferGetInvisibleGlyph(Buffer buffer)
 }
 
 /**
- * See [HarfBuzz.Global.bufferSetLanguage].
+ * See [harfbuzz.global.bufferSetLanguage].
  * Params:
  *   buffer = An #hb_buffer_t
  * Returns: The #hb_language_t of the buffer. Must not be freed by the caller.
@@ -728,7 +728,7 @@ uint bufferGetLength(Buffer buffer)
 }
 
 /**
- * See [HarfBuzz.Global.bufferSetNotFoundGlyph].
+ * See [harfbuzz.global.bufferSetNotFoundGlyph].
  * Params:
  *   buffer = An #hb_buffer_t
  * Returns: The buffer not-found #hb_codepoint_t
@@ -805,14 +805,14 @@ UnicodeFuncs bufferGetUnicodeFuncs(Buffer buffer)
  * #HB_SCRIPT_INHERITED, and #HB_SCRIPT_UNKNOWN.
  * Next, if buffer direction is not set $(LPAREN)ie. is #HB_DIRECTION_INVALID$(RPAREN),
  * it will be set to the natural horizontal direction of the
- * buffer script as returned by [HarfBuzz.Global.scriptGetHorizontalDirection].
- * If [HarfBuzz.Global.scriptGetHorizontalDirection] returns #HB_DIRECTION_INVALID,
+ * buffer script as returned by [harfbuzz.global.scriptGetHorizontalDirection].
+ * If [harfbuzz.global.scriptGetHorizontalDirection] returns #HB_DIRECTION_INVALID,
  * then #HB_DIRECTION_LTR is used.
  * Finally, if buffer language is not set $(LPAREN)ie. is #HB_LANGUAGE_INVALID$(RPAREN),
  * it will be set to the process's default language as returned by
- * [HarfBuzz.Global.languageGetDefault].  This may change in the future by
+ * [harfbuzz.global.languageGetDefault].  This may change in the future by
  * taking buffer script into consideration when choosing a language.
- * Note that [HarfBuzz.Global.languageGetDefault] is NOT threadsafe the first time
+ * Note that [harfbuzz.global.languageGetDefault] is NOT threadsafe the first time
  * it is called.  See documentation for that function for details.
  * Params:
  *   buffer = An #hb_buffer_t
@@ -824,8 +824,8 @@ void bufferGuessSegmentProperties(Buffer buffer)
 
 /**
  * Returns whether buffer has glyph position data.
- * A buffer gains position data when [HarfBuzz.Global.bufferGetGlyphPositions] is called on it,
- * and cleared of position data when [HarfBuzz.Global.bufferClearContents] is called.
+ * A buffer gains position data when [harfbuzz.global.bufferGetGlyphPositions] is called on it,
+ * and cleared of position data when [harfbuzz.global.bufferClearContents] is called.
  * Params:
  *   buffer = an #hb_buffer_t.
  * Returns: `true` if the buffer has position array, `false` otherwise.
@@ -865,7 +865,7 @@ Bool bufferPreAllocate(Buffer buffer, uint size)
 
 /**
  * Resets the buffer to its initial status, as if it was just newly created
- * with [HarfBuzz.Global.bufferCreate].
+ * with [harfbuzz.global.bufferCreate].
  * Params:
  *   buffer = An #hb_buffer_t
  */
@@ -911,7 +911,7 @@ void bufferReverseRange(Buffer buffer, uint start, uint end)
 /**
  * Parses a string into an #hb_buffer_serialize_format_t. Does not check if
  * str is a valid buffer serialization format, use
- * [HarfBuzz.Global.bufferSerializeListFormats] to get the list of supported formats.
+ * [harfbuzz.global.bufferSerializeListFormats] to get the list of supported formats.
  * Params:
  *   str = a string to parse
  * Returns: The parsed #hb_buffer_serialize_format_t.
@@ -985,17 +985,17 @@ void bufferSetClusterLevel(Buffer buffer, BufferClusterLevel clusterLevel)
  * You rarely need to call this function, since a number of other
  * functions transition the content type for you. Namely:
  * - A newly created buffer starts with content type
- * %HB_BUFFER_CONTENT_TYPE_INVALID. Calling [HarfBuzz.Global.bufferReset],
- * [HarfBuzz.Global.bufferClearContents], as well as calling [HarfBuzz.Global.bufferSetLength]
+ * %HB_BUFFER_CONTENT_TYPE_INVALID. Calling [harfbuzz.global.bufferReset],
+ * [harfbuzz.global.bufferClearContents], as well as calling [harfbuzz.global.bufferSetLength]
  * with an argument of zero all set the buffer content type to invalid
  * as well.
- * - Calling [HarfBuzz.Global.bufferAddUtf8], [HarfBuzz.Global.bufferAddUtf16],
- * [HarfBuzz.Global.bufferAddUtf32], [HarfBuzz.Global.bufferAddCodepoints] and
- * [HarfBuzz.Global.bufferAddLatin1] expect that buffer is either empty and
+ * - Calling [harfbuzz.global.bufferAddUtf8], [harfbuzz.global.bufferAddUtf16],
+ * [harfbuzz.global.bufferAddUtf32], [harfbuzz.global.bufferAddCodepoints] and
+ * [harfbuzz.global.bufferAddLatin1] expect that buffer is either empty and
  * have a content type of invalid, or that buffer content type is
  * %HB_BUFFER_CONTENT_TYPE_UNICODE, and they also set the content
  * type to Unicode if they added anything to an empty buffer.
- * - Finally [HarfBuzz.Global.shape] and [HarfBuzz.Global.shapeFull] expect that the buffer
+ * - Finally [harfbuzz.global.shape] and [harfbuzz.global.shapeFull] expect that the buffer
  * is either empty and have content type of invalid, or that buffer
  * content type is %HB_BUFFER_CONTENT_TYPE_UNICODE, and upon
  * success they set the buffer content type to
@@ -1060,7 +1060,7 @@ void bufferSetInvisibleGlyph(Buffer buffer, Codepoint invisible)
  * buffer which can result in applying language-specific behaviour. Languages
  * are orthogonal to the scripts, and though they are related, they are
  * different concepts and should not be confused with each other.
- * Use [HarfBuzz.Global.languageFromString] to convert from BCP 47 language tags to
+ * Use [harfbuzz.global.languageFromString] to convert from BCP 47 language tags to
  * #hb_language_t.
  * Params:
  *   buffer = An #hb_buffer_t
@@ -1072,7 +1072,7 @@ void bufferSetLanguage(Buffer buffer, language_t language)
 }
 
 /**
- * Similar to [HarfBuzz.Global.bufferPreAllocate], but clears any new items added at the
+ * Similar to [harfbuzz.global.bufferPreAllocate], but clears any new items added at the
  * end.
  * Params:
  *   buffer = An #hb_buffer_t
@@ -1142,7 +1142,7 @@ void bufferSetReplacementCodepoint(Buffer buffer, Codepoint replacement)
  * require it $(LPAREN)e.g. Arabic$(RPAREN) and the which OpenType features defined in the font
  * to be applied.
  * You can pass one of the predefined #hb_script_t values, or use
- * [HarfBuzz.Global.scriptFromString] or [HarfBuzz.Global.scriptFromIso15924Tag] to get the
+ * [harfbuzz.global.scriptFromString] or [harfbuzz.global.scriptFromIso15924Tag] to get the
  * corresponding script from an ISO 15924 script tag.
  * Params:
  *   buffer = An #hb_buffer_t
@@ -1155,8 +1155,8 @@ void bufferSetScript(Buffer buffer, Script script)
 
 /**
  * Sets the segment properties of the buffer, a shortcut for calling
- * [HarfBuzz.Global.bufferSetDirection], [HarfBuzz.Global.bufferSetScript] and
- * [HarfBuzz.Global.bufferSetLanguage] individually.
+ * [harfbuzz.global.bufferSetDirection], [harfbuzz.global.bufferSetScript] and
+ * [harfbuzz.global.bufferSetLanguage] individually.
  * Params:
  *   buffer = An #hb_buffer_t
  *   props = An #hb_segment_properties_t to use
@@ -1536,9 +1536,9 @@ void drawQuadraticTo(DrawFuncs dfuncs, void* drawData, DrawState st, float contr
 
 /**
  * Add table for tag with data provided by blob to the face.  face must
- * be created using [HarfBuzz.Global.faceBuilderCreate].
+ * be created using [harfbuzz.global.faceBuilderCreate].
  * Params:
- *   face = A face object created with [HarfBuzz.Global.faceBuilderCreate]
+ *   face = A face object created with [harfbuzz.global.faceBuilderCreate]
  *   tag = The #hb_tag_t of the table to add
  *   blob = The blob containing the table data to add
  * Returns:
@@ -1551,9 +1551,9 @@ Bool faceBuilderAddTable(HBFace face, Tag tag, Blob blob)
 }
 
 /**
- * Creates a #hb_face_t that can be used with [HarfBuzz.Global.faceBuilderAddTable].
+ * Creates a #hb_face_t that can be used with [harfbuzz.global.faceBuilderAddTable].
  * After tables are added to the face, it can be compiled to a binary
- * font file by calling [HarfBuzz.Global.faceReferenceBlob].
+ * font file by calling [harfbuzz.global.faceReferenceBlob].
  * Returns: New face.
  */
 HBFace faceBuilderCreate()
@@ -1569,7 +1569,7 @@ HBFace faceBuilderCreate()
  * specified in the tags list will be ordered after the tables in
  * tags, ordered by the default sort ordering.
  * Params:
- *   face = A face object created with [HarfBuzz.Global.faceBuilderCreate]
+ *   face = A face object created with [harfbuzz.global.faceBuilderCreate]
  *   tags = ordered list of table tags terminated by
  *     %HB_TAG_NONE
  */
@@ -1600,10 +1600,10 @@ uint faceCount(Blob blob)
  * such collections are zero-based.
  * <note>Note: If the blob font format is not a collection, index
  * is ignored.  Otherwise, only the lower 16-bits of index are used.
- * The unmodified index can be accessed via [HarfBuzz.Global.faceGetIndex].</note>
+ * The unmodified index can be accessed via [harfbuzz.global.faceGetIndex].</note>
  * <note>Note: The high 16-bits of index, if non-zero, are used by
- * [HarfBuzz.Global.fontCreate] to load named-instances in variable fonts.  See
- * [HarfBuzz.Global.fontCreate] for details.</note>
+ * [harfbuzz.global.fontCreate] to load named-instances in variable fonts.  See
+ * [harfbuzz.global.fontCreate] for details.</note>
  * Params:
  *   blob = #hb_blob_t to work upon
  *   index = The index of the face within blob
@@ -1618,9 +1618,9 @@ HBFace faceCreate(Blob blob, uint index)
 }
 
 /**
- * Variant of [HarfBuzz.Global.faceCreate], built for those cases where it is more
+ * Variant of [harfbuzz.global.faceCreate], built for those cases where it is more
  * convenient to provide data for individual tables instead of the whole font
- * data. With the caveat that [HarfBuzz.Global.faceGetTableTags] does not currently work
+ * data. With the caveat that [harfbuzz.global.faceGetTableTags] does not currently work
  * with faces created this way.
  * Creates a new face object from the specified user_data and reference_table_func,
  * with the destroy callback.
@@ -1792,7 +1792,7 @@ void faceSetGlyphCount(HBFace face, uint glyphCount)
  * Assigns the specified face-index to face. Fails if the
  * face is immutable.
  * <note>Note: changing the index has no effect on the face itself
- * This only changes the value returned by [HarfBuzz.Global.faceGetIndex].</note>
+ * This only changes the value returned by [harfbuzz.global.faceGetIndex].</note>
  * Params:
  *   face = A face object
  *   index = The index to assign
@@ -1889,7 +1889,7 @@ void fontAddGlyphOriginForDirection(Font font, Codepoint glyph, Direction direct
 /**
  * Notifies the font that underlying font data has changed.
  * This has the effect of increasing the serial as returned
- * by [HarfBuzz.Global.fontGetSerial], which invalidates internal caches.
+ * by [harfbuzz.global.fontGetSerial], which invalidates internal caches.
  * Params:
  *   font = #hb_font_t to work upon
  */
@@ -1900,9 +1900,9 @@ void fontChanged(Font font)
 
 /**
  * Constructs a new font object from the specified face.
- * <note>Note: If face's index value $(LPAREN)as passed to [HarfBuzz.Global.faceCreate]
+ * <note>Note: If face's index value $(LPAREN)as passed to [harfbuzz.global.faceCreate]
  * has non-zero top 16-bits, those bits minus one are passed to
- * [HarfBuzz.Global.fontSetVarNamedInstance], effectively loading a named-instance
+ * [harfbuzz.global.fontSetVarNamedInstance], effectively loading a named-instance
  * of a variable font, instead of the default-instance.  This allows
  * specifying which named-instance to load by default when creating the
  * face.</note>
@@ -2130,8 +2130,8 @@ void fontFuncsSetGlyphFromNameFunc(FontFuncs ffuncs, FontGetGlyphFromNameFunc fu
 }
 
 /**
- * Deprecated.  Use [HarfBuzz.Global.fontFuncsSetNominalGlyphFunc] and
- * [HarfBuzz.Global.fontFuncsSetVariationGlyphFunc] instead.
+ * Deprecated.  Use [harfbuzz.global.fontFuncsSetNominalGlyphFunc] and
+ * [harfbuzz.global.fontFuncsSetVariationGlyphFunc] instead.
  * Params:
  *   ffuncs = The font-functions structure
  *   func = callback function
@@ -2251,7 +2251,7 @@ void fontFuncsSetGlyphNameFunc(FontFuncs ffuncs, FontGetGlyphNameFunc func)
  *   ffuncs = A font-function structure
  *   func = The callback function to assign
 
- * Deprecated: Use [HarfBuzz.Global.fontFuncsSetDrawGlyphFunc] instead
+ * Deprecated: Use [harfbuzz.global.fontFuncsSetDrawGlyphFunc] instead
  */
 void fontFuncsSetGlyphShapeFunc(FontFuncs ffuncs, FontGetGlyphShapeFunc func)
 {
@@ -2443,8 +2443,8 @@ HBFace fontGetFace(Font font)
 /**
  * Fetches the glyph ID for a Unicode code point in the specified
  * font, with an optional variation selector.
- * If variation_selector is 0, calls [HarfBuzz.Global.fontGetNominalGlyph];
- * otherwise calls [HarfBuzz.Global.fontGetVariationGlyph].
+ * If variation_selector is 0, calls [harfbuzz.global.fontGetNominalGlyph];
+ * otherwise calls [harfbuzz.global.fontGetVariationGlyph].
  * Params:
  *   font = #hb_font_t to work upon
  *   unicode = The Unicode code point to query
@@ -2667,7 +2667,7 @@ void fontGetGlyphOriginForDirection(Font font, Codepoint glyph, Direction direct
  *   dfuncs = #hb_draw_funcs_t to draw to
  *   drawData = User data to pass to draw callbacks
 
- * Deprecated: Use [HarfBuzz.Global.fontDrawGlyph] instead
+ * Deprecated: Use [harfbuzz.global.fontDrawGlyph] instead
  */
 void fontGetGlyphShape(Font font, Codepoint glyph, DrawFuncs dfuncs, void* drawData)
 {
@@ -2744,7 +2744,7 @@ Bool fontGetHExtents(Font font, out FontExtents extents)
  * specified font.
  * This version of the function should not be used to fetch glyph IDs
  * for code points modified by variation selectors. For variation-selector
- * support, user [HarfBuzz.Global.fontGetVariationGlyph] or use [HarfBuzz.Global.fontGetGlyph].
+ * support, user [harfbuzz.global.fontGetVariationGlyph] or use [harfbuzz.global.fontGetGlyph].
  * Params:
  *   font = #hb_font_t to work upon
  *   unicode = The Unicode code point to query
@@ -2998,7 +2998,7 @@ void fontMakeImmutable(Font font)
  * The painting instructions are returned by way of calls to
  * the callbacks of the funcs object, with paint_data passed
  * to them.
- * If the font has color palettes $(LPAREN)see [HarfBuzz.Global.otColorHasPalettes]$(RPAREN),
+ * If the font has color palettes $(LPAREN)see [harfbuzz.global.otColorHasPalettes]$(RPAREN),
  * then palette_index selects the palette to use. If the font only
  * has one palette, this will be 0.
  * Params:
@@ -3079,8 +3079,8 @@ void fontSetPtem(Font font, float ptem)
  * In the example above, even what font size 20 means is up to
  * you. It might be 20 pixels, or 20 points, or 20 millimeters.
  * HarfBuzz does not care about that.  You can set the point
- * size of the font using [HarfBuzz.Global.fontSetPtem], and the pixel
- * size using [HarfBuzz.Global.fontSetPpem].
+ * size of the font using [harfbuzz.global.fontSetPtem], and the pixel
+ * size using [harfbuzz.global.fontSetPpem].
  * The choice of scale is yours but needs to be consistent between
  * what you set here, and what you expect out of #hb_position_t
  * as well has draw / paint API output values.
@@ -3104,7 +3104,7 @@ void fontSetScale(Font font, int xScale, int yScale)
  * Synthetic boldness is applied by offsetting the contour
  * points of the glyph shape.
  * Synthetic boldness is applied when rendering a glyph via
- * [HarfBuzz.Global.fontDrawGlyph].
+ * [harfbuzz.global.fontDrawGlyph].
  * If in_place is `false`, then glyph advance-widths are also
  * adjusted, otherwise they are not.  The in-place mode is
  * useful for simulating [font grading](https://fonts.google.com/knowledge/glossary/grade).
@@ -3125,7 +3125,7 @@ void fontSetSyntheticBold(Font font, float xEmbolden, float yEmbolden, Bool inPl
  * at rendering time.
  * HarfBuzz needs to know this value to adjust shaping results,
  * metrics, and style values to match the slanted rendering.
- * <note>Note: The glyph shape fetched via the [HarfBuzz.Global.fontDrawGlyph]
+ * <note>Note: The glyph shape fetched via the [harfbuzz.global.fontDrawGlyph]
  * function is slanted to reflect this value as well.</note>
  * <note>Note: The slant value is a ratio.  For example, a
  * 20% slant would be represented as a 0.2 value.</note>
@@ -3194,7 +3194,7 @@ void fontSetVarNamedInstance(Font font, uint instanceIndex)
  * Change the value of one variation axis on the font.
  * Note: This function is expensive to be called repeatedly.
  * If you want to set multiple variation axes at the same time,
- * use [HarfBuzz.Global.fontSetVariations] instead.
+ * use [harfbuzz.global.fontSetVariations] instead.
  * Params:
  *   font = #hb_font_t to work upon
  *   tag = The #hb_tag_t tag of the variation-axis name
@@ -3228,7 +3228,7 @@ void fontSubtractGlyphOriginForDirection(Font font, Codepoint glyph, Direction d
  * Creates an #hb_face_t face object from the specified FT_Face.
  * Note that this is using the FT_Face object just to get at the underlying
  * font data, and fonts created from the returned #hb_face_t will use the native
- * HarfBuzz font implementation, unless you call [HarfBuzz.Global.ftFontSetFuncs] on them.
+ * HarfBuzz font implementation, unless you call [harfbuzz.global.ftFontSetFuncs] on them.
  * This variant of the function caches the newly created #hb_face_t
  * face object, using the generic pointer of ft_face. Subsequent function
  * calls that are passed the same ft_face parameter will have the same
@@ -3252,7 +3252,7 @@ HBFace ftFaceCreateCached(Face ftFace)
  * Creates an #hb_face_t face object from the specified FT_Face.
  * Note that this is using the FT_Face object just to get at the underlying
  * font data, and fonts created from the returned #hb_face_t will use the native
- * HarfBuzz font implementation, unless you call [HarfBuzz.Global.ftFontSetFuncs] on them.
+ * HarfBuzz font implementation, unless you call [harfbuzz.global.ftFontSetFuncs] on them.
  * This is the preferred variant of the hb_ft_face_create*
  * function family, because it calls FT_Reference_Face$(LPAREN)$(RPAREN) on ft_face,
  * ensuring that ft_face remains alive as long as the resulting
@@ -3286,7 +3286,7 @@ void ftFontChanged(Font font)
 /**
  * Creates an #hb_font_t font object from the specified FT_Face.
  * <note>Note: You must set the face size on ft_face before calling
- * [HarfBuzz.Global.ftFontCreateReferenced] on it. HarfBuzz assumes size is always set
+ * [harfbuzz.global.ftFontCreateReferenced] on it. HarfBuzz assumes size is always set
  * and will access `size` member of FT_Face unconditionally.</note>
  * This is the preferred variant of the hb_ft_font_create*
  * function family, because it calls FT_Reference_Face$(LPAREN)$(RPAREN) on ft_face,
@@ -3310,7 +3310,7 @@ Font ftFontCreateReferenced(Face ftFace)
  * For more information, see
  * <https://freetype.org/freetype2/docs/reference/ft2-glyph_retrieval.html#ft_load_xxx>
  * This function works with #hb_font_t objects created by
- * [HarfBuzz.Global.ftFontCreate] or [HarfBuzz.Global.ftFontCreateReferenced].
+ * [harfbuzz.global.ftFontCreate] or [harfbuzz.global.ftFontCreateReferenced].
  * Params:
  *   font = #hb_font_t to work upon
  * Returns: FT_Load_Glyph flags found, or 0
@@ -3328,13 +3328,13 @@ int ftFontGetLoadFlags(Font font)
  * In particular, you can use this function to configure an
  * existing #hb_face_t face object for use with FreeType font
  * functions even if that #hb_face_t face object was initially
- * created with [HarfBuzz.Global.faceCreate], and therefore was not
+ * created with [harfbuzz.global.faceCreate], and therefore was not
  * initially configured to use FreeType font functions.
- * An #hb_font_t object created with [HarfBuzz.Global.ftFontCreate]
+ * An #hb_font_t object created with [harfbuzz.global.ftFontCreate]
  * is preconfigured for FreeType font functions and does not
  * require this function to be used.
  * Note that if you modify the underlying #hb_font_t after
- * calling this function, you need to call [HarfBuzz.Global.ftHbFontChanged]
+ * calling this function, you need to call [harfbuzz.global.ftHbFontChanged]
  * to update the underlying FT_Face.
  * <note>Note: Internally, this function creates an FT_Face.
  * </note>
@@ -3351,7 +3351,7 @@ void ftFontSetFuncs(Font font)
  * For more information, see
  * <https://freetype.org/freetype2/docs/reference/ft2-glyph_retrieval.html#ft_load_xxx>
  * This function works with #hb_font_t objects created by
- * [HarfBuzz.Global.ftFontCreate] or [HarfBuzz.Global.ftFontCreateReferenced].
+ * [harfbuzz.global.ftFontCreate] or [harfbuzz.global.ftFontCreateReferenced].
  * Params:
  *   font = #hb_font_t to work upon
  *   loadFlags = The FreeType load flags to set
@@ -3475,7 +3475,7 @@ language_t languageFromString(ubyte[] str)
  * "setlocale $(LPAREN)LC_CTYPE, nullptr$(RPAREN)" to fetch current locale.  The underlying
  * setlocale function is, in many implementations, NOT threadsafe.  To avoid
  * problems, call this function once before multiple threads can call it.
- * This function is only used from [HarfBuzz.Global.bufferGuessSegmentProperties] by
+ * This function is only used from [harfbuzz.global.bufferGuessSegmentProperties] by
  * HarfBuzz itself.</note>
  * Returns: The default language of the locale as
  *   an #hb_language_t
@@ -3892,7 +3892,7 @@ OtNameId otColorPaletteColorGetNameId(HBFace face, uint colorIndex)
  * colors. If colors is NULL, the function will just return the number
  * of total colors without storing any actual colors; this can be used
  * for allocating a buffer of suitable size before calling
- * [HarfBuzz.Global.otColorPaletteGetColors] a second time.
+ * [harfbuzz.global.otColorPaletteGetColors] a second time.
  * The RGBA values in the palette are unpremultiplied. See the
  * OpenType spec [CPAL](https://learn.microsoft.com/en-us/typography/opentype/spec/cpal)
  * section for details.
@@ -4095,7 +4095,7 @@ Bool otLayoutGetBaseline(Font font, OtLayoutBaselineTag baselineTag, Direction d
 
 /**
  * Fetches a baseline value from the face.
- * This function is like [HarfBuzz.Global.otLayoutGetBaseline] but takes
+ * This function is like [harfbuzz.global.otLayoutGetBaseline] but takes
  * #hb_script_t and #hb_language_t instead of OpenType #hb_tag_t.
  * Params:
  *   font = a font
@@ -4132,7 +4132,7 @@ void otLayoutGetBaselineWithFallback(Font font, OtLayoutBaselineTag baselineTag,
 /**
  * Fetches a baseline value from the face, and synthesizes
  * it if the font does not have it.
- * This function is like [HarfBuzz.Global.otLayoutGetBaselineWithFallback] but takes
+ * This function is like [harfbuzz.global.otLayoutGetBaselineWithFallback] but takes
  * #hb_script_t and #hb_language_t instead of OpenType #hb_tag_t.
  * Params:
  *   font = a font
@@ -4178,7 +4178,7 @@ Bool otLayoutGetFontExtents(Font font, Direction direction, Tag scriptTag, Tag l
  * most part be ignored.  Note that the per-script/language extents
  * do not have a line-gap value, and the line-gap is set to zero in
  * that case.
- * This function is like [HarfBuzz.Global.otLayoutGetFontExtents] but takes
+ * This function is like [harfbuzz.global.otLayoutGetFontExtents] but takes
  * #hb_script_t and #hb_language_t instead of OpenType #hb_tag_t.
  * Params:
  *   font = a font
@@ -4984,7 +4984,7 @@ Position otMetricsGetYVariation(Font font, OtMetricsTag metricsTag)
  *   language = an #hb_language_t to convert.
  * Returns:
 
- * Deprecated: use [HarfBuzz.Global.otTagsFromScriptAndLanguage] instead
+ * Deprecated: use [harfbuzz.global.otTagsFromScriptAndLanguage] instead
  */
 Tag otTagFromLanguage(language_t language)
 {
@@ -5026,7 +5026,7 @@ Script otTagToScript(Tag tag)
  *   scriptTag1 = output #hb_tag_t.
  *   scriptTag2 = output #hb_tag_t.
 
- * Deprecated: use [HarfBuzz.Global.otTagsFromScriptAndLanguage] instead
+ * Deprecated: use [harfbuzz.global.otTagsFromScriptAndLanguage] instead
  */
 void otTagsFromScript(Script script, out Tag scriptTag1, out Tag scriptTag2)
 {
@@ -5094,7 +5094,7 @@ Bool otVarFindAxisInfo(HBFace face, Tag axisTag, out OtVarAxisInfo axisInfo)
  *   axesArray = The array of variation axes found
  * Returns:
 
- * Deprecated: use [HarfBuzz.Global.otVarGetAxisInfos] instead
+ * Deprecated: use [harfbuzz.global.otVarGetAxisInfos] instead
  */
 uint otVarGetAxes(HBFace face, uint startOffset, ref OtVarAxis[] axesArray)
 {
@@ -5282,7 +5282,7 @@ Bool paintCustomPaletteColor(PaintFuncs funcs, void* paintData, uint colorIndex,
 
 /**
  * Creates a new #hb_paint_funcs_t structure of paint functions.
- * The initial reference count of 1 should be released with [HarfBuzz.Global.paintFuncsDestroy]
+ * The initial reference count of 1 should be released with [harfbuzz.global.paintFuncsDestroy]
  * when you are done using the #hb_paint_funcs_t. This function never returns
  * `NULL`. If memory cannot be allocated, a special singleton #hb_paint_funcs_t
  * object will be returned.
@@ -5805,8 +5805,8 @@ Script scriptFromIso15924Tag(Tag tag)
 
 /**
  * Converts a string str representing an ISO 15924 script tag to a
- * corresponding #hb_script_t. Shorthand for [HarfBuzz.Global.tagFromString] then
- * [HarfBuzz.Global.scriptFromIso15924Tag].
+ * corresponding #hb_script_t. Shorthand for [harfbuzz.global.tagFromString] then
+ * [harfbuzz.global.scriptFromIso15924Tag].
  * Params:
  *   str = a string representing an
  *     ISO 15924 tag.
@@ -6334,7 +6334,7 @@ void shape(Font font, Buffer buffer, Feature[] features)
 }
 
 /**
- * See [HarfBuzz.Global.shape] for details. If shaper_list is not `NULL`, the specified
+ * See [harfbuzz.global.shape] for details. If shaper_list is not `NULL`, the specified
  * shapers will be used in the given order, otherwise the default shapers list
  * will be used.
  * Params:
@@ -6368,12 +6368,12 @@ Bool shapeFull(Font font, Buffer buffer, Feature[] features, string[] shaperList
 }
 
 /**
- * See [HarfBuzz.Global.shapeFull] for basic details. If shaper_list is not `NULL`, the specified
+ * See [harfbuzz.global.shapeFull] for basic details. If shaper_list is not `NULL`, the specified
  * shapers will be used in the given order, otherwise the default shapers list
  * will be used.
  * In addition, justify the shaping results such that the shaping results reach
  * the target advance width/height, depending on the buffer direction.
- * If the advance of the buffer shaped with [HarfBuzz.Global.shapeFull] is already known,
+ * If the advance of the buffer shaped with [harfbuzz.global.shapeFull] is already known,
  * put that in *advance. Otherwise set *advance to zero.
  * This API is currently experimental and will probably change in the future.
  * Params:

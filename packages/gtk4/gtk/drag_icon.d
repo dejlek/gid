@@ -3,7 +3,7 @@ module gtk.drag_icon;
 import gdk.drag;
 import gdk.paintable;
 import gdk.paintable_mixin;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gobject.value;
 import gtk.accessible;
@@ -26,8 +26,8 @@ import gtk.widget;
  * A drag icon moves with the pointer during a Drag-and-Drop operation
  * and is destroyed when the drag ends.
  * To set up a drag icon and associate it with an ongoing drag operation,
- * use [Gtk.DragIcon.getForDrag] to get the icon for a drag. You can
- * then use it like any other widget and use [Gtk.DragIcon.setChild]
+ * use [gtk.drag_icon.DragIcon.getForDrag] to get the icon for a drag. You can
+ * then use it like any other widget and use [gtk.drag_icon.DragIcon.setChild]
  * to set whatever widget should be used for the drag icon.
  * Keep in mind that drag icons do not allow user input.
  */

@@ -1,6 +1,6 @@
 module gtk.scrolled_window;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -20,21 +20,21 @@ import gtk.widget;
  * It does so using either internally added scrollbars or externally
  * associated adjustments, and optionally draws a frame around the child.
  * Widgets with native scrolling support, i.e. those whose classes implement
- * the [Gtk.Scrollable] interface, are added directly. For other types
- * of widget, the class [Gtk.Viewport] acts as an adaptor, giving
- * scrollability to other widgets. [Gtk.ScrolledWindow.setChild]
+ * the [gtk.scrollable.Scrollable] interface, are added directly. For other types
+ * of widget, the class [gtk.viewport.Viewport] acts as an adaptor, giving
+ * scrollability to other widgets. [gtk.scrolled_window.ScrolledWindow.setChild]
  * intelligently accounts for whether or not the added child is a `GtkScrollable`.
  * If it isn’t, then it wraps the child in a `GtkViewport`. Therefore, you can
  * just add any child widget and not worry about the details.
- * If [Gtk.ScrolledWindow.setChild] has added a `GtkViewport` for you,
+ * If [gtk.scrolled_window.ScrolledWindow.setChild] has added a `GtkViewport` for you,
  * it will be automatically removed when you unset the child.
  * Unless property@Gtk.ScrolledWindow:hscrollbar-policy and
  * property@Gtk.ScrolledWindow:vscrollbar-policy are %GTK_POLICY_NEVER or
  * %GTK_POLICY_EXTERNAL, `GtkScrolledWindow` adds internal `GtkScrollbar` widgets
  * around its child. The scroll position of the child, and if applicable the
- * scrollbars, is controlled by the [Gtk.ScrolledWindow.hadjustment]
- * and [Gtk.ScrolledWindow.vadjustment] that are associated with the
- * `GtkScrolledWindow`. See the docs on [Gtk.Scrollbar] for the details,
+ * scrollbars, is controlled by the [gtk.scrolled_window.ScrolledWindow.Adjustment]
+ * and [gtk.scrolled_window.ScrolledWindow.Adjustment] that are associated with the
+ * `GtkScrolledWindow`. See the docs on [gtk.scrollbar.Scrollbar] for the details,
  * but note that the “step_increment” and “page_increment” fields are only
  * effective if the policy causes scrollbars to be present.
  * If a `GtkScrolledWindow` doesn’t behave quite as you would like, or
@@ -101,9 +101,9 @@ class ScrolledWindow : Widget
 
   /**
    * Gets the child widget of scrolled_window.
-   * If the scrolled window automatically added a [Gtk.Viewport], this
+   * If the scrolled window automatically added a [gtk.viewport.Viewport], this
    * function will return the viewport widget, and you can retrieve its child
-   * using [Gtk.Viewport.getChild].
+   * using [gtk.viewport.Viewport.getChild].
    * Returns: the child widget of scrolled_window
    */
   Widget getChild()
@@ -232,7 +232,7 @@ class ScrolledWindow : Widget
   /**
    * Retrieves the current policy values for the horizontal and vertical
    * scrollbars.
-   * See [Gtk.ScrolledWindow.setPolicy].
+   * See [gtk.scrolled_window.ScrolledWindow.setPolicy].
    * Params:
    *   hscrollbarPolicy = location to store the policy
    *     for the horizontal scrollbar
@@ -296,8 +296,8 @@ class ScrolledWindow : Widget
 
   /**
    * Sets the child widget of scrolled_window.
-   * If child does not implement the [Gtk.Scrollable] interface,
-   * the scrolled window will add child to a [Gtk.Viewport] instance
+   * If child does not implement the [gtk.scrollable.Scrollable] interface,
+   * the scrolled window will add child to a [gtk.viewport.Viewport] instance
    * and then add the viewport as its child widget.
    * Params:
    *   child = the child widget
@@ -410,10 +410,10 @@ class ScrolledWindow : Widget
    * for the scrolled window.
    * The default is %GTK_CORNER_TOP_LEFT, meaning the child is
    * in the top left, with the scrollbars underneath and to the right.
-   * Other values in [Gtk.CornerType] are %GTK_CORNER_TOP_RIGHT,
+   * Other values in [gtk.CornerType] are %GTK_CORNER_TOP_RIGHT,
    * %GTK_CORNER_BOTTOM_LEFT, and %GTK_CORNER_BOTTOM_RIGHT.
-   * See also [Gtk.ScrolledWindow.getPlacement] and
-   * [Gtk.ScrolledWindow.unsetPlacement].
+   * See also [gtk.scrolled_window.ScrolledWindow.getPlacement] and
+   * [gtk.scrolled_window.ScrolledWindow.unsetPlacement].
    * Params:
    *   windowPlacement = position of the child window
    */
@@ -425,7 +425,7 @@ class ScrolledWindow : Widget
   /**
    * Sets the scrollbar policy for the horizontal and vertical scrollbars.
    * The policy determines when the scrollbar should appear; it is a value
-   * from the [Gtk.PolicyType] enumeration. If %GTK_POLICY_ALWAYS, the
+   * from the [gtk.PolicyType] enumeration. If %GTK_POLICY_ALWAYS, the
    * scrollbar is always present; if %GTK_POLICY_NEVER, the scrollbar is
    * never present; if %GTK_POLICY_AUTOMATIC, the scrollbar is present only
    * if needed $(LPAREN)that is, if the slider part of the bar would be smaller

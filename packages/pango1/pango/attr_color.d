@@ -1,6 +1,6 @@
 module pango.attr_color;
 
-import gid.gid;
+import gid.global;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;

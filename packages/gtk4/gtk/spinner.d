@@ -1,6 +1,6 @@
 module gtk.spinner;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -14,11 +14,11 @@ import gtk.widget;
 
 /**
  * A `GtkSpinner` widget displays an icon-size spinning animation.
- * It is often used as an alternative to a [Gtk.ProgressBar]
+ * It is often used as an alternative to a [gtk.progress_bar.ProgressBar]
  * for displaying indefinite activity, instead of actual progress.
  * ![An example GtkSpinner](spinner.png)
- * To start the animation, use [Gtk.Spinner.start], to stop it
- * use [Gtk.Spinner.stop].
+ * To start the animation, use [gtk.spinner.Spinner.start], to stop it
+ * use [gtk.spinner.Spinner.stop].
  * # CSS nodes
  * `GtkSpinner` has a single CSS node with the name spinner.
  * When the animation is active, the :checked pseudoclass is

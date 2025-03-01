@@ -1,6 +1,6 @@
 module glib.rwlock;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -12,9 +12,9 @@ import glib.types;
  * The difference to a mutex is that a reader-writer lock discriminates
  * between read-only $(LPAREN)'reader'$(RPAREN) and full $(LPAREN)'writer'$(RPAREN) access. While only
  * one thread at a time is allowed write access $(LPAREN)by holding the 'writer'
- * lock via [GLib.RWLock.writerLock]$(RPAREN), multiple threads can gain
+ * lock via [glib.rwlock.RWLock.writerLock]$(RPAREN), multiple threads can gain
  * simultaneous read-only access $(LPAREN)by holding the 'reader' lock via
- * [GLib.RWLock.readerLock]$(RPAREN).
+ * [glib.rwlock.RWLock.readerLock]$(RPAREN).
  * It is unspecified whether readers or writers have priority in acquiring the
  * lock when a reader already holds the lock and a writer is queued to acquire
  * it.
@@ -54,7 +54,7 @@ import glib.types;
  * functions is fully multi-thread safe now.
  * If a #GRWLock is allocated in static storage then it can be used
  * without initialisation.  Otherwise, you should call
- * [GLib.RWLock.init_] on it and [GLib.RWLock.clear] when done.
+ * [glib.rwlock.RWLock.init_] on it and [glib.rwlock.RWLock.clear] when done.
  * A GRWLock should only be accessed with the g_rw_lock_ functions.
  */
 class RWLock
@@ -78,10 +78,10 @@ class RWLock
   }
 
   /**
-   * Frees the resources allocated to a lock with [GLib.RWLock.init_].
+   * Frees the resources allocated to a lock with [glib.rwlock.RWLock.init_].
    * This function should not be used with a #GRWLock that has been
    * statically allocated.
-   * Calling [GLib.RWLock.clear] when any thread holds the lock
+   * Calling [glib.rwlock.RWLock.clear] when any thread holds the lock
    * leads to undefined behaviour.
    */
   void clear()
@@ -104,9 +104,9 @@ class RWLock
    * b \= g_new $(LPAREN)Blob, 1$(RPAREN);
    * g_rw_lock_init $(LPAREN)&b->l$(RPAREN);
    * ]|
-   * To undo the effect of [GLib.RWLock.init_] when a lock is no longer
-   * needed, use [GLib.RWLock.clear].
-   * Calling [GLib.RWLock.init_] on an already initialized #GRWLock leads
+   * To undo the effect of [glib.rwlock.RWLock.init_] when a lock is no longer
+   * needed, use [glib.rwlock.RWLock.clear].
+   * Calling [glib.rwlock.RWLock.init_] on an already initialized #GRWLock leads
    * to undefined behaviour.
    */
   void init_()
@@ -121,10 +121,10 @@ class RWLock
    * the write lock, but is waiting for it, it is implementation defined
    * whether the reader or writer will block. Read locks can be taken
    * recursively.
-   * Calling [GLib.RWLock.readerLock] while the current thread already
+   * Calling [glib.rwlock.RWLock.readerLock] while the current thread already
    * owns a write lock leads to undefined behaviour. Read locks however
    * can be taken recursively, in which case you need to make sure to
-   * call [GLib.RWLock.readerUnlock] the same amount of times.
+   * call [glib.rwlock.RWLock.readerUnlock] the same amount of times.
    * It is implementation-defined how many read locks are allowed to be
    * held on the same lock simultaneously. If the limit is hit,
    * or if a deadlock is detected, a critical warning will be emitted.
@@ -149,7 +149,7 @@ class RWLock
 
   /**
    * Release a read lock on rw_lock.
-   * Calling [GLib.RWLock.readerUnlock] on a lock that is not held
+   * Calling [glib.rwlock.RWLock.readerUnlock] on a lock that is not held
    * by the current thread leads to undefined behaviour.
    */
   void readerUnlock()
@@ -161,7 +161,7 @@ class RWLock
    * Obtain a write lock on rw_lock. If another thread currently holds
    * a read or write lock on rw_lock, the current thread will block
    * until all other threads have dropped their locks on rw_lock.
-   * Calling [GLib.RWLock.writerLock] while the current thread already
+   * Calling [glib.rwlock.RWLock.writerLock] while the current thread already
    * owns a read or write lock on rw_lock leads to undefined behaviour.
    */
   void writerLock()
@@ -185,7 +185,7 @@ class RWLock
 
   /**
    * Release a write lock on rw_lock.
-   * Calling [GLib.RWLock.writerUnlock] on a lock that is not held
+   * Calling [glib.rwlock.RWLock.writerUnlock] on a lock that is not held
    * by the current thread leads to undefined behaviour.
    */
   void writerUnlock()

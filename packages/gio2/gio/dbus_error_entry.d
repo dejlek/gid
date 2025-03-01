@@ -1,12 +1,12 @@
 module gio.dbus_error_entry;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
 
 /**
- * Struct used in [Gio.Global.dbusErrorRegisterErrorDomain].
+ * Struct used in [gio.global.dbusErrorRegisterErrorDomain].
  */
 class DBusErrorEntry
 {

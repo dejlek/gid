@@ -2,7 +2,7 @@ module gtk.cell_editable_mixin;
 
 public import gtk.cell_editable_iface_proxy;
 public import gdk.event;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -15,7 +15,7 @@ public import gtk.types;
  * temporary widgets should be configured for editing, get the new value, etc.
 
  * Deprecated: List views use widgets for displaying their
- *   contents. See [Gtk.Editable] for editable text widgets
+ *   contents. See [gtk.editable.Editable] for editable text widgets
  */
 template CellEditableT()
 {
@@ -39,8 +39,8 @@ template CellEditableT()
   /**
    * Begins editing on a cell_editable.
    * The `GtkCellRenderer` for the cell creates and returns a `GtkCellEditable` from
-   * [Gtk.CellRenderer.startEditing], configured for the `GtkCellRenderer` type.
-   * [Gtk.CellEditable.startEditing] can then set up cell_editable suitably for
+   * [gtk.cell_renderer.CellRenderer.startEditing], configured for the `GtkCellRenderer` type.
+   * [gtk.cell_editable.CellEditable.startEditing] can then set up cell_editable suitably for
    * editing a cell, e.g. making the Esc key emit `GtkCellEditable::editing-done`.
    * Note that the cell_editable is created on-demand for the current edit; its
    * lifetime is temporary and does not persist across other edits and/or cells.
@@ -61,7 +61,7 @@ template CellEditableT()
    * `GtkEntry` emits this signal when the user presses Enter. Typical things to
    * do in a handler for ::editing-done are to capture the edited value,
    * disconnect the cell_editable from signals on the `GtkCellRenderer`, etc.
-   * [Gtk.CellEditable.editingDone] is a convenience method
+   * [gtk.cell_editable.CellEditable.editingDone] is a convenience method
    * for emitting `GtkCellEditable::editing-done`.
    *   cellEditable = the instance the signal is connected to
    */
@@ -99,7 +99,7 @@ template CellEditableT()
    * be emitted after the `GtkCellEditable::editing-done` signal,
    * to give the cell renderer a chance to update the cell's value
    * before the widget is removed.
-   * [Gtk.CellEditable.removeWidget] is a convenience method
+   * [gtk.cell_editable.CellEditable.removeWidget] is a convenience method
    * for emitting `GtkCellEditable::remove-widget`.
    *   cellEditable = the instance the signal is connected to
    */

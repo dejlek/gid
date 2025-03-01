@@ -1,6 +1,6 @@
 module gio.dbus_action_group;
 
-import gid.gid;
+import gid.global;
 import gio.action_group;
 import gio.action_group_mixin;
 import gio.c.functions;
@@ -12,10 +12,10 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GDBusActionGroup` is an implementation of the [Gio.ActionGroup]
+ * `GDBusActionGroup` is an implementation of the [gio.action_group.ActionGroup]
  * interface.
  * `GDBusActionGroup` can be used as a proxy for an action group
- * that is exported over D-Bus with [Gio.DBusConnection.exportActionGroup].
+ * that is exported over D-Bus with [gio.dbus_connection.DBusConnection.exportActionGroup].
  */
 class DBusActionGroup : ObjectG, ActionGroup, RemoteActionGroup
 {
@@ -50,7 +50,7 @@ class DBusActionGroup : ObjectG, ActionGroup, RemoteActionGroup
    * This call is non-blocking.  The returned action group may or may not
    * already be filled in.  The correct thing to do is connect the signals
    * for the action group to monitor for changes and then to call
-   * [Gio.ActionGroup.listActions] to get the initial list.
+   * [gio.action_group.ActionGroup.listActions] to get the initial list.
    * Params:
    *   connection = A #GDBusConnection
    *   busName = the bus name which exports the action

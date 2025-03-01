@@ -1,6 +1,6 @@
 module gtk.printer;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -12,11 +12,11 @@ import gtk.types;
 /**
  * A `GtkPrinter` object represents a printer.
  * You only need to deal directly with printers if you use the
- * non-portable [Gtk.PrintUnixDialog] API.
+ * non-portable [gtk.print_unix_dialog.PrintUnixDialog] API.
  * A `GtkPrinter` allows to get status information about the printer,
  * such as its description, its location, the number of queued jobs,
  * etc. Most importantly, a `GtkPrinter` object can be used to create
- * a [Gtk.PrintJob] object, which lets you print to the printer.
+ * a [gtk.print_job.PrintJob] object, which lets you print to the printer.
  */
 class Printer : ObjectG
 {
@@ -107,8 +107,8 @@ class Printer : ObjectG
    * manual-capabilities setting and need to know which settings
    * the printer can handle and which you must handle yourself.
    * This will return 0 unless the printer’s details are
-   * available, see [Gtk.Printer.hasDetails] and
-   * [Gtk.Printer.requestDetails].
+   * available, see [gtk.printer.Printer.hasDetails] and
+   * [gtk.printer.Printer.requestDetails].
    * Returns: the printer’s capabilities
    */
   PrintCapabilities getCapabilities()
@@ -149,8 +149,8 @@ class Printer : ObjectG
    * These are the margins that define the area at the borders
    * of the paper that the printer cannot print to.
    * Note: This will not succeed unless the printer’s details are
-   * available, see [Gtk.Printer.hasDetails] and
-   * [Gtk.Printer.requestDetails].
+   * available, see [gtk.printer.Printer.hasDetails] and
+   * [gtk.printer.Printer.requestDetails].
    * Params:
    *   top = a location to store the top margin in
    *   bottom = a location to store the bottom margin in
@@ -170,8 +170,8 @@ class Printer : ObjectG
    * These are the margins that define the area at the borders
    * of the paper that the printer cannot print to.
    * Note: This will not succeed unless the printer’s details are
-   * available, see [Gtk.Printer.hasDetails] and
-   * [Gtk.Printer.requestDetails].
+   * available, see [gtk.printer.Printer.hasDetails] and
+   * [gtk.printer.Printer.requestDetails].
    * Params:
    *   paperSize = a `GtkPaperSize`
    *   top = a location to store the top margin in
@@ -321,8 +321,8 @@ class Printer : ObjectG
   /**
    * Lists all the paper sizes printer supports.
    * This will return and empty list unless the printer’s details
-   * are available, see [Gtk.Printer.hasDetails] and
-   * [Gtk.Printer.requestDetails].
+   * are available, see [gtk.printer.Printer.hasDetails] and
+   * [gtk.printer.Printer.requestDetails].
    * Returns: a newly
    *   allocated list of newly allocated `GtkPageSetup`s.
    */

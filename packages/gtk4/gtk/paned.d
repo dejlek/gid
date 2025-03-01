@@ -1,6 +1,6 @@
 module gtk.paned;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -24,14 +24,14 @@ import gtk.widget;
  * The division between the two panes is adjustable by the user
  * by dragging a handle.
  * Child widgets are added to the panes of the widget with
- * [Gtk.Paned.setStartChild] and [Gtk.Paned.setEndChild].
+ * [gtk.paned.Paned.setStartChild] and [gtk.paned.Paned.setEndChild].
  * The division between the two children is set by default from the size
  * requests of the children, but it can be adjusted by the user.
  * A paned widget draws a separator between the two child widgets and a
  * small handle that the user can drag to adjust the division. It does not
  * draw any relief around the children or around the separator. $(LPAREN)The space
  * in which the separator is called the gutter.$(RPAREN) Often, it is useful to put
- * each child inside a [Gtk.Frame] so that the gutter appears as a
+ * each child inside a [gtk.frame.Frame] so that the gutter appears as a
  * ridge. No separator is drawn if one of the children is missing.
  * Each child has two options that can be set, "resize" and "shrink". If
  * "resize" is true then, when the `GtkPaned` is resized, that child will
@@ -41,7 +41,7 @@ import gtk.widget;
  * If "resize" is false for both children, then this is treated as if
  * "resize" is true for both children.
  * The application can set the position of the slider as if it were set
- * by the user, by calling [Gtk.Paned.setPosition].
+ * by the user, by calling [gtk.paned.Paned.setPosition].
  * # CSS nodes
  * ```
  * paned

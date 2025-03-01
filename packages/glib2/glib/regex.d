@@ -1,6 +1,6 @@
 module glib.regex;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -89,7 +89,7 @@ class Regex : Boxed
    *   compileOptions = compile options for the regular expression, or 0
    *   matchOptions = match options for the regular expression, or 0
    * Returns: a #GRegex structure or %NULL if an error occurred. Call
-   *   [GLib.Regex.unref] when you are done with it
+   *   [glib.regex.Regex.unref] when you are done with it
    */
   this(string pattern, RegexCompileFlags compileOptions, RegexMatchFlags matchOptions)
   {
@@ -179,7 +179,7 @@ class Regex : Boxed
 
   /**
    * Gets the pattern string associated with regex, i.e. a copy of
-   * the string passed to [GLib.Regex.new_].
+   * the string passed to [glib.regex.Regex.new_].
    * Returns: the pattern of regex
    */
   string getPattern()
@@ -216,7 +216,7 @@ class Regex : Boxed
    * is not %NULL then it is created even if the function returns %FALSE,
    * i.e. you must free it regardless if regular expression actually matched.
    * To retrieve all the non-overlapping matches of the pattern in
-   * string you can use [GLib.MatchInfo.next].
+   * string you can use [glib.match_info.MatchInfo.next].
    * |[<!-- language\="C" -->
    * static void
    * print_uppercase_words $(LPAREN)const gchar *string$(RPAREN)
@@ -238,7 +238,7 @@ class Regex : Boxed
    * }
    * ]|
    * string is not copied and is used in #GMatchInfo internally. If
-   * you use any #GMatchInfo method $(LPAREN)except [GLib.MatchInfo.free]$(RPAREN) after
+   * you use any #GMatchInfo method $(LPAREN)except [glib.match_info.MatchInfo.free]$(RPAREN) after
    * freeing or modifying string then the behaviour is undefined.
    * Params:
    *   string_ = the string to scan for matches
@@ -261,14 +261,14 @@ class Regex : Boxed
    * Using the standard algorithm for regular expression matching only
    * the longest match in the string is retrieved. This function uses
    * a different algorithm so it can retrieve all the possible matches.
-   * For more documentation see [GLib.Regex.matchAllFull].
+   * For more documentation see [glib.regex.Regex.matchAllFull].
    * A #GMatchInfo structure, used to get information on the match, is
    * stored in match_info if not %NULL. Note that if match_info is
    * not %NULL then it is created even if the function returns %FALSE,
    * i.e. you must free it regardless if regular expression actually
    * matched.
    * string is not copied and is used in #GMatchInfo internally. If
-   * you use any #GMatchInfo method $(LPAREN)except [GLib.MatchInfo.free]$(RPAREN) after
+   * you use any #GMatchInfo method $(LPAREN)except [glib.match_info.MatchInfo.free]$(RPAREN) after
    * freeing or modifying string then the behaviour is undefined.
    * Params:
    *   string_ = the string to scan for matches
@@ -300,9 +300,9 @@ class Regex : Boxed
    * you would obtain three matches: "<a> <b> <c>",
    * "<a> <b>" and "<a>".
    * The number of matched strings is retrieved using
-   * [GLib.MatchInfo.getMatchCount]. To obtain the matched strings and
-   * their position you can use, respectively, [GLib.MatchInfo.fetch] and
-   * [GLib.MatchInfo.fetchPos]. Note that the strings are returned in
+   * [glib.match_info.MatchInfo.getMatchCount]. To obtain the matched strings and
+   * their position you can use, respectively, [glib.match_info.MatchInfo.fetch] and
+   * [glib.match_info.MatchInfo.fetchPos]. Note that the strings are returned in
    * reverse order of length; that is, the longest matching string is
    * given first.
    * Note that the DFA algorithm is slower than the standard one and it
@@ -317,7 +317,7 @@ class Regex : Boxed
    * i.e. you must free it regardless if regular expression actually
    * matched.
    * string is not copied and is used in #GMatchInfo internally. If
-   * you use any #GMatchInfo method $(LPAREN)except [GLib.MatchInfo.free]$(RPAREN) after
+   * you use any #GMatchInfo method $(LPAREN)except [glib.match_info.MatchInfo.free]$(RPAREN) after
    * freeing or modifying string then the behaviour is undefined.
    * Params:
    *   string_ = the string to scan for matches
@@ -359,10 +359,10 @@ class Regex : Boxed
    * i.e. you must free it regardless if regular expression actually
    * matched.
    * string is not copied and is used in #GMatchInfo internally. If
-   * you use any #GMatchInfo method $(LPAREN)except [GLib.MatchInfo.free]$(RPAREN) after
+   * you use any #GMatchInfo method $(LPAREN)except [glib.match_info.MatchInfo.free]$(RPAREN) after
    * freeing or modifying string then the behaviour is undefined.
    * To retrieve all the non-overlapping matches of the pattern in
-   * string you can use [GLib.MatchInfo.next].
+   * string you can use [glib.match_info.MatchInfo.next].
    * |[<!-- language\="C" -->
    * static void
    * print_uppercase_words $(LPAREN)const gchar *string$(RPAREN)
@@ -429,10 +429,10 @@ class Regex : Boxed
    * - \L: Convert to lower case till \E
    * - \U: Convert to upper case till \E
    * - \E: End case modification
-   * If you do not need to use backreferences use [GLib.Regex.replaceLiteral].
+   * If you do not need to use backreferences use [glib.regex.Regex.replaceLiteral].
    * The replacement string must be UTF-8 encoded even if %G_REGEX_RAW was
-   * passed to [GLib.Regex.new_]. If you want to use not UTF-8 encoded strings
-   * you can use [GLib.Regex.replaceLiteral].
+   * passed to [glib.regex.Regex.new_]. If you want to use not UTF-8 encoded strings
+   * you can use [glib.regex.Regex.replaceLiteral].
    * Setting start_position differs from just passing over a shortened
    * string and setting %G_REGEX_MATCH_NOTBOL in the case of a pattern that
    * begins with any kind of lookbehind assertion, such as "\b".
@@ -466,7 +466,7 @@ class Regex : Boxed
    * Setting start_position differs from just passing over a shortened
    * string and setting %G_REGEX_MATCH_NOTBOL in the case of a pattern
    * that begins with any kind of lookbehind assertion, such as "\b".
-   * The following example uses [GLib.Regex.replaceEval] to replace multiple
+   * The following example uses [glib.regex.Regex.replaceEval] to replace multiple
    * strings at once:
    * |[<!-- language\="C" -->
    * static gboolean
@@ -532,7 +532,7 @@ class Regex : Boxed
   /**
    * Replaces all occurrences of the pattern in regex with the
    * replacement text. replacement is replaced literally, to
-   * include backreferences use [GLib.Regex.replace].
+   * include backreferences use [glib.regex.Regex.replace].
    * Setting start_position differs from just passing over a
    * shortened string and setting %G_REGEX_MATCH_NOTBOL in the
    * case of a pattern that begins with any kind of lookbehind
@@ -581,7 +581,7 @@ class Regex : Boxed
    *   string_ = the string to split with the pattern
    *   matchOptions = match time option flags
    * Returns: a %NULL-terminated gchar ** array. Free
-   *   it using [GLib.Global.strfreev]
+   *   it using [glib.global.strfreev]
    */
   string[] split(string string_, RegexMatchFlags matchOptions)
   {
@@ -628,7 +628,7 @@ class Regex : Boxed
    *   maxTokens = the maximum number of tokens to split string into.
    *     If this is less than 1, the string is split completely
    * Returns: a %NULL-terminated gchar ** array. Free
-   *   it using [GLib.Global.strfreev]
+   *   it using [glib.global.strfreev]
    */
   string[] splitFull(string string_, int startPosition, RegexMatchFlags matchOptions, int maxTokens)
   {
@@ -658,7 +658,7 @@ class Regex : Boxed
 
   /**
    * Checks whether replacement is a valid replacement string
-   * $(LPAREN)see [GLib.Regex.replace]$(RPAREN), i.e. that all escape sequences in
+   * $(LPAREN)see [glib.regex.Regex.replace]$(RPAREN), i.e. that all escape sequences in
    * it are valid.
    * If has_references is not %NULL then replacement is checked
    * for pattern references. For instance, replacement text 'foo\n'
@@ -737,13 +737,13 @@ class Regex : Boxed
 
   /**
    * Scans for a match in string for pattern.
-   * This function is equivalent to [GLib.Regex.match] but it does not
-   * require to compile the pattern with [GLib.Regex.new_], avoiding some
+   * This function is equivalent to [glib.regex.Regex.match] but it does not
+   * require to compile the pattern with [glib.regex.Regex.new_], avoiding some
    * lines of code when you need just to do a match without extracting
    * substrings, capture counts, and so on.
    * If this function is to be called on the same pattern more than
    * once, it's more efficient to compile the pattern once with
-   * [GLib.Regex.new_] and then use [GLib.Regex.match].
+   * [glib.regex.Regex.new_] and then use [glib.regex.Regex.match].
    * Params:
    *   pattern = the regular expression
    *   string_ = the string to scan for matches
@@ -766,13 +766,13 @@ class Regex : Boxed
    * then the text for each of the substrings will also be returned.
    * If the pattern does not match anywhere in the string, then the
    * whole string is returned as the first token.
-   * This function is equivalent to [GLib.Regex.split] but it does
-   * not require to compile the pattern with [GLib.Regex.new_], avoiding
+   * This function is equivalent to [glib.regex.Regex.split] but it does
+   * not require to compile the pattern with [glib.regex.Regex.new_], avoiding
    * some lines of code when you need just to do a split without
    * extracting substrings, capture counts, and so on.
    * If this function is to be called on the same pattern more than
    * once, it's more efficient to compile the pattern once with
-   * [GLib.Regex.new_] and then use [GLib.Regex.split].
+   * [glib.regex.Regex.new_] and then use [glib.regex.Regex.split].
    * As a special case, the result of splitting the empty string ""
    * is an empty vector, not a vector containing a single string.
    * The reason for this special case is that being able to represent
@@ -790,7 +790,7 @@ class Regex : Boxed
    *   compileOptions = compile options for the regular expression, or 0
    *   matchOptions = match options, or 0
    * Returns: a %NULL-terminated array of strings. Free
-   *   it using [GLib.Global.strfreev]
+   *   it using [glib.global.strfreev]
    */
   static string[] splitSimple(string pattern, string string_, RegexCompileFlags compileOptions, RegexMatchFlags matchOptions)
   {

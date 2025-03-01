@@ -1,6 +1,6 @@
 module gio.socket_control_message;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -8,21 +8,21 @@ import gobject.object;
 
 /**
  * A `GSocketControlMessage` is a special-purpose utility message that
- * can be sent to or received from a [Gio.Socket]. These types of
+ * can be sent to or received from a [gio.socket.Socket]. These types of
  * messages are often called ‘ancillary data’.
  * The message can represent some sort of special instruction to or
  * information from the socket or can represent a special kind of
  * transfer to the peer $(LPAREN)for example, sending a file descriptor over
  * a UNIX socket$(RPAREN).
- * These messages are sent with [Gio.Socket.sendMessage] and received
- * with [Gio.Socket.receiveMessage].
+ * These messages are sent with [gio.socket.Socket.sendMessage] and received
+ * with [gio.socket.Socket.receiveMessage].
  * To extend the set of control message that can be sent, subclass this
  * class and override the `get_size`, `get_level`, `get_type` and `serialize`
  * methods.
  * To extend the set of control messages that can be received, subclass
  * this class and implement the `deserialize` method. Also, make sure your
- * class is registered with the [GObject.GType] type system before calling
- * [Gio.Socket.receiveMessage] to read such a message.
+ * class is registered with the [gobject.size_t] type system before calling
+ * [gio.socket.Socket.receiveMessage] to read such a message.
  */
 class SocketControlMessage : ObjectG
 {
@@ -109,7 +109,7 @@ class SocketControlMessage : ObjectG
    * Converts the data in the message to bytes placed in the
    * message.
    * data is guaranteed to have enough space to fit the size
-   * returned by [Gio.SocketControlMessage.getSize] on this
+   * returned by [gio.socket_control_message.SocketControlMessage.getSize] on this
    * object.
    * Params:
    *   data = A buffer to write data to

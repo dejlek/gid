@@ -1,7 +1,7 @@
 module gsk.texture_node;
 
 import gdk.texture;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import graphene.rect;
 import gsk.c.functions;
@@ -27,7 +27,7 @@ class TextureNode : RenderNode
    * Creates a `GskRenderNode` that will render the given
    * texture into the area given by bounds.
    * Note that GSK applies linear filtering when textures are
-   * scaled and transformed. See [Gsk.TextureScaleNode]
+   * scaled and transformed. See [gsk.texture_scale_node.TextureScaleNode]
    * for a way to influence filtering.
    * Params:
    *   texture = the `GdkTexture`

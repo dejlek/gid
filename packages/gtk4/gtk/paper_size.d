@@ -1,6 +1,6 @@
 module gtk.paper_size;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import glib.key_file;
 import glib.variant;
@@ -49,10 +49,10 @@ class PaperSize : Boxed
    * [PWG 5101.1-2002](ftp://ftp.pwg.org/pub/pwg/candidates/cs-pwgmsn10-20020226-5101.1.pdf)
    * paper name.
    * If name is %NULL, the default paper size is returned,
-   * see [Gtk.PaperSize.getDefault].
+   * see [gtk.paper_size.PaperSize.getDefault].
    * Params:
    *   name = a paper size name
-   * Returns: a new `GtkPaperSize`, use [Gtk.PaperSize.free]
+   * Returns: a new `GtkPaperSize`, use [gtk.paper_size.PaperSize.free]
    *   to free it
    */
   this(string name)
@@ -72,7 +72,7 @@ class PaperSize : Boxed
    *   width = the paper width, in units of unit
    *   height = the paper height, in units of unit
    *   unit = the unit for width and height. not %GTK_UNIT_NONE.
-   * Returns: a new `GtkPaperSize` object, use [Gtk.PaperSize.free]
+   * Returns: a new `GtkPaperSize` object, use [gtk.paper_size.PaperSize.free]
    *   to free it
    */
   static PaperSize newCustom(string name, string displayName, double width, double height, Unit unit)
@@ -88,7 +88,7 @@ class PaperSize : Boxed
   /**
    * Deserialize a paper size from a `GVariant`.
    * The `GVariant must be in the format produced by
-   * [Gtk.PaperSize.toGvariant].
+   * [gtk.paper_size.PaperSize.toGvariant].
    * Params:
    *   variant = an a{sv} `GVariant`
    * Returns: a new `GtkPaperSize` object
@@ -111,7 +111,7 @@ class PaperSize : Boxed
    *   ippName = an IPP paper name
    *   width = the paper width, in points
    *   height = the paper height in points
-   * Returns: a new `GtkPaperSize`, use [Gtk.PaperSize.free]
+   * Returns: a new `GtkPaperSize`, use [gtk.paper_size.PaperSize.free]
    *   to free it
    */
   static PaperSize newFromIpp(string ippName, double width, double height)
@@ -155,7 +155,7 @@ class PaperSize : Boxed
    *   ppdDisplayName = the corresponding human-readable name
    *   width = the paper width, in points
    *   height = the paper height in points
-   * Returns: a new `GtkPaperSize`, use [Gtk.PaperSize.free]
+   * Returns: a new `GtkPaperSize`, use [gtk.paper_size.PaperSize.free]
    *   to free it
    */
   static PaperSize newFromPpd(string ppdName, string ppdDisplayName, double width, double height)

@@ -1,6 +1,6 @@
 module gio.unix_socket_address;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_address;
@@ -18,7 +18,7 @@ import gobject.object;
  * permissions, visibility, etc. Currently this is only supported
  * under Linux. If you attempt to use abstract sockets on other
  * systems, function calls may return `G_IO_ERROR_NOT_SUPPORTED`
- * errors. You can use [Gio.UnixSocketAddress.abstractNamesSupported]
+ * errors. You can use [gio.unix_socket_address.UnixSocketAddress.abstractNamesSupported]
  * to see if abstract names are supported.
  * Since GLib 2.72, `GUnixSocketAddress` is available on all platforms. It
  * requires underlying system support $(LPAREN)such as Windows 10 with `AF_UNIX`$(RPAREN) at
@@ -49,7 +49,7 @@ class UnixSocketAddress : SocketAddress
   /**
    * Creates a new #GUnixSocketAddress for path.
    * To create abstract socket addresses, on systems that support that,
-   * use [Gio.UnixSocketAddress.newAbstract].
+   * use [gio.unix_socket_address.UnixSocketAddress.newAbstract].
    * Params:
    *   path = the socket path
    * Returns: a new #GUnixSocketAddress
@@ -69,7 +69,7 @@ class UnixSocketAddress : SocketAddress
    *   path = the abstract name
    * Returns: a new #GUnixSocketAddress
 
-   * Deprecated: Use [Gio.UnixSocketAddress.newWithType].
+   * Deprecated: Use [gio.unix_socket_address.UnixSocketAddress.newWithType].
    */
   static UnixSocketAddress newAbstract(string path)
   {
@@ -87,14 +87,14 @@ class UnixSocketAddress : SocketAddress
   /**
    * Creates a new #GUnixSocketAddress of type type with name path.
    * If type is %G_UNIX_SOCKET_ADDRESS_PATH, this is equivalent to
-   * calling [Gio.UnixSocketAddress.new_].
+   * calling [gio.unix_socket_address.UnixSocketAddress.new_].
    * If type is %G_UNIX_SOCKET_ADDRESS_ANONYMOUS, path and path_len will be
    * ignored.
    * If path_type is %G_UNIX_SOCKET_ADDRESS_ABSTRACT, then path_len
    * bytes of path will be copied to the socket's path, and only those
    * bytes will be considered part of the name. $(LPAREN)If path_len is -1,
    * then path is assumed to be NUL-terminated.$(RPAREN) For example, if path
-   * was "test", then calling [Gio.SocketAddress.getNativeSize] on the
+   * was "test", then calling [gio.socket_address.SocketAddress.getNativeSize] on the
    * returned socket would return 7 $(LPAREN)2 bytes of overhead, 1 byte for the
    * abstract-socket indicator byte, and 4 bytes for the name "test"$(RPAREN).
    * If path_type is %G_UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED, then
@@ -102,9 +102,9 @@ class UnixSocketAddress : SocketAddress
    * rest of the path will be padded with 0 bytes, and the entire
    * zero-padded buffer will be considered the name. $(LPAREN)As above, if
    * path_len is -1, then path is assumed to be NUL-terminated.$(RPAREN) In
-   * this case, [Gio.SocketAddress.getNativeSize] will always return
+   * this case, [gio.socket_address.SocketAddress.getNativeSize] will always return
    * the full size of a `struct sockaddr_un`, although
-   * [Gio.UnixSocketAddress.getPathLen] will still return just the
+   * [gio.unix_socket_address.UnixSocketAddress.getPathLen] will still return just the
    * length of path.
    * %G_UNIX_SOCKET_ADDRESS_ABSTRACT is preferred over
    * %G_UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED for new programs. Of course,
@@ -156,7 +156,7 @@ class UnixSocketAddress : SocketAddress
    * Tests if address is abstract.
    * Returns: %TRUE if the address is abstract, %FALSE otherwise
 
-   * Deprecated: Use [Gio.UnixSocketAddress.getAddressType]
+   * Deprecated: Use [gio.unix_socket_address.UnixSocketAddress.getAddressType]
    */
   bool getIsAbstract()
   {
@@ -169,7 +169,7 @@ class UnixSocketAddress : SocketAddress
    * Gets address's path, or for abstract sockets the "name".
    * Guaranteed to be zero-terminated, but an abstract socket
    * may contain embedded zeros, and thus you should use
-   * [Gio.UnixSocketAddress.getPathLen] to get the true length
+   * [gio.unix_socket_address.UnixSocketAddress.getPathLen] to get the true length
    * of this string.
    * Returns: the path for address
    */
@@ -183,7 +183,7 @@ class UnixSocketAddress : SocketAddress
 
   /**
    * Gets the length of address's path.
-   * For details, see [Gio.UnixSocketAddress.getPath].
+   * For details, see [gio.unix_socket_address.UnixSocketAddress.getPath].
    * Returns: the length of the path
    */
   size_t getPathLen()

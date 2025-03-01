@@ -1,7 +1,7 @@
 module gtk.pad_controller;
 
 import gdk.device;
-import gid.gid;
+import gid.global;
 import gio.action_group;
 import gio.action_group_mixin;
 import gobject.object;
@@ -17,7 +17,7 @@ import gtk.types;
  * the stylus-sensitive area.
  * These buttons and sensors have no implicit meaning, and by default they
  * perform no action. `GtkPadController` is provided to map those to
- * [Gio.Action] objects, thus letting the application give them a more
+ * [gio.action.Action] objects, thus letting the application give them a more
  * semantic meaning.
  * Buttons and sensors are not constrained to triggering a single action,
  * some %GDK_SOURCE_TABLET_PAD devices feature multiple "modes". All these
@@ -25,11 +25,11 @@ import gtk.types;
  * being triggered.
  * Pad devices often divide buttons and sensors into groups. All elements
  * in a group share the same current mode, but different groups may have
- * different modes. See [Gdk.DevicePad.getNGroups] and
- * [Gdk.DevicePad.getGroupNModes].
+ * different modes. See [gdk.device_pad.DevicePad.getNGroups] and
+ * [gdk.device_pad.DevicePad.getGroupNModes].
  * Each of the actions that a given button/strip/ring performs for a given mode
- * is defined by a [Gtk.PadActionEntry]. It contains an action name that
- * will be looked up in the given [Gio.ActionGroup] and activated whenever
+ * is defined by a [gtk.pad_action_entry.PadActionEntry]. It contains an action name that
+ * will be looked up in the given [gio.action_group.ActionGroup] and activated whenever
  * the specified input element and mode are triggered.
  * A simple example of `GtkPadController` usage: Assigning button 1 in all
  * modes and pad devices to an "invert-selection" action:
@@ -77,8 +77,8 @@ class PadController : EventController
    * %NULL and non-%NULL pad argument on the same toplevel window, as execution
    * order is not guaranteed.
    * The `GtkPadController` is created with no mapped actions. In order to
-   * map pad events to actions, use [Gtk.PadController.setActionEntries]
-   * or [Gtk.PadController.setAction].
+   * map pad events to actions, use [gtk.pad_controller.PadController.setActionEntries]
+   * or [gtk.pad_controller.PadController.setAction].
    * Be aware that pad events will only be delivered to `GtkWindow`s, so adding
    * a pad controller to any other type of widget will not have an effect.
    * Params:

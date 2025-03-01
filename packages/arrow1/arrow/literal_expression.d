@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.datum;
 import arrow.expression;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class LiteralExpression : Expression
 {

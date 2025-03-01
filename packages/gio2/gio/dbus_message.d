@@ -1,6 +1,6 @@
 module gio.dbus_message;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -11,7 +11,7 @@ import gobject.object;
 
 /**
  * A type for representing D-Bus messages that can be sent or received
- * on a [Gio.DBusConnection].
+ * on a [gio.dbus_connection.DBusConnection].
  */
 class DBusMessage : ObjectG
 {
@@ -34,7 +34,7 @@ class DBusMessage : ObjectG
 
   /**
    * Creates a new empty #GDBusMessage.
-   * Returns: A #GDBusMessage. Free with [GObject.ObjectG.unref].
+   * Returns: A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
    */
   this()
   {
@@ -46,14 +46,14 @@ class DBusMessage : ObjectG
   /**
    * Creates a new #GDBusMessage from the data stored at blob. The byte
    * order that the message was in can be retrieved using
-   * [Gio.DBusMessage.getByteOrder].
+   * [gio.dbus_message.DBusMessage.getByteOrder].
    * If the blob cannot be parsed, contains invalid fields, or contains invalid
    * headers, %G_IO_ERROR_INVALID_ARGUMENT will be returned.
    * Params:
    *   blob = A blob representing a binary D-Bus message.
    *   capabilities = A #GDBusCapabilityFlags describing what protocol features are supported.
    * Returns: A new #GDBusMessage or %NULL if error is set. Free with
-   *   [GObject.ObjectG.unref].
+   *   [gobject.object.ObjectG.unref].
    */
   static DBusMessage newFromBlob(ubyte[] blob, DBusCapabilityFlags capabilities)
   {
@@ -78,7 +78,7 @@ class DBusMessage : ObjectG
    *   path = A valid object path.
    *   interface_ = A valid D-Bus interface name or %NULL.
    *   method = A valid method name.
-   * Returns: A #GDBusMessage. Free with [GObject.ObjectG.unref].
+   * Returns: A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
    */
   static DBusMessage newMethodCall(string name, string path, string interface_, string method)
   {
@@ -98,7 +98,7 @@ class DBusMessage : ObjectG
    *   path = A valid object path.
    *   interface_ = A valid D-Bus interface name.
    *   signal = A valid signal name.
-   * Returns: A #GDBusMessage. Free with [GObject.ObjectG.unref].
+   * Returns: A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
    */
   static DBusMessage newSignal(string path, string interface_, string signal)
   {
@@ -142,7 +142,7 @@ class DBusMessage : ObjectG
    * This operation can fail if e.g. message contains file descriptors
    * and the per-process or system-wide open files limit is reached.
    * Returns: A new #GDBusMessage or %NULL if error is set.
-   *   Free with [GObject.ObjectG.unref].
+   *   Free with [gobject.object.ObjectG.unref].
    */
   DBusMessage copy()
   {
@@ -157,7 +157,7 @@ class DBusMessage : ObjectG
 
   /**
    * Convenience to get the first item in the body of message.
-   * See [Gio.DBusMessage.getArg0Path] for returning object-path-typed
+   * See [gio.dbus_message.DBusMessage.getArg0Path] for returning object-path-typed
    * arg0 values.
    * Returns: The string item or %NULL if the first item in the body of
    *   message is not a string.
@@ -172,7 +172,7 @@ class DBusMessage : ObjectG
 
   /**
    * Convenience to get the first item in the body of message.
-   * See [Gio.DBusMessage.getArg0] for returning string-typed arg0 values.
+   * See [gio.dbus_message.DBusMessage.getArg0] for returning string-typed arg0 values.
    * Returns: The object path item or `NULL` if the first item in the
    *   body of message is not an object path.
    */
@@ -266,7 +266,7 @@ class DBusMessage : ObjectG
    * Gets an array of all header fields on message that are set.
    * Returns: An array of header fields
    *   terminated by %G_DBUS_MESSAGE_HEADER_FIELD_INVALID.  Each element
-   *   is a #guchar. Free with [GLib.Global.gfree].
+   *   is a #guchar. Free with [glib.global.gfree].
    */
   ubyte[] getHeaderFields()
   {
@@ -408,7 +408,7 @@ class DBusMessage : ObjectG
    * This method is only available on UNIX.
    * The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE
    * values in the body of the message. For example,
-   * if [GLib.VariantG.getHandle] returns 5, that is intended to be a reference
+   * if [glib.variant.VariantG.getHandle] returns 5, that is intended to be a reference
    * to the file descriptor that can be accessed by
    * `g_unix_fd_list_get $(LPAREN)list, 5, ...$(RPAREN)`.
    * Returns: A #GUnixFDList or %NULL if no file descriptors are
@@ -435,7 +435,7 @@ class DBusMessage : ObjectG
    * Params:
    *   errorName = A valid D-Bus error name.
    *   errorMessage = The D-Bus error message.
-   * Returns: A #GDBusMessage. Free with [GObject.ObjectG.unref].
+   * Returns: A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
    */
   DBusMessage newMethodErrorLiteral(string errorName, string errorMessage)
   {
@@ -449,7 +449,7 @@ class DBusMessage : ObjectG
 
   /**
    * Creates a new #GDBusMessage that is a reply to method_call_message.
-   * Returns: #GDBusMessage. Free with [GObject.ObjectG.unref].
+   * Returns: #GDBusMessage. Free with [gobject.object.ObjectG.unref].
    */
   DBusMessage newMethodReply()
   {
@@ -686,12 +686,12 @@ class DBusMessage : ObjectG
 
   /**
    * Serializes message to a blob. The byte order returned by
-   * [Gio.DBusMessage.getByteOrder] will be used.
+   * [gio.dbus_message.DBusMessage.getByteOrder] will be used.
    * Params:
    *   capabilities = A #GDBusCapabilityFlags describing what protocol features are supported.
    * Returns: A pointer to a
    *   valid binary D-Bus message of out_size bytes generated by message
-   *   or %NULL if error is set. Free with [GLib.Global.gfree].
+   *   or %NULL if error is set. Free with [glib.global.gfree].
    */
   ubyte[] toBlob(DBusCapabilityFlags capabilities)
   {

@@ -1,6 +1,6 @@
 module gobject.types;
 
-import gid.gid;
+import gid.global;
 import gobject.binding;
 import gobject.c.functions;
 import gobject.c.types;
@@ -151,7 +151,7 @@ enum VALUE_COLLECT_FORMAT_MAX_LENGTH = 8;
 
 /**
  * For string values, indicates that the string contained is canonical and will
- * exist for the duration of the process. See [GObject.Value.setInternedString].
+ * exist for the duration of the process. See [gobject.value.Value.setInternedString].
  */
 enum VALUE_INTERNED_STRING = 268435456;
 
@@ -159,7 +159,7 @@ enum VALUE_INTERNED_STRING = 268435456;
 /**
  * If passed to G_VALUE_COLLECT$(LPAREN)$(RPAREN), allocated data won't be copied
  * but used verbatim. This does not affect ref-counted types like
- * objects. This does not affect usage of [GObject.Value.copy], the data will
+ * objects. This does not affect usage of [gobject.value.Value.copy], the data will
  * be copied if it is not ref-counted.
  */
 enum VALUE_NOCOPY_CONTENTS = 134217728;

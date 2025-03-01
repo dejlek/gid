@@ -1,6 +1,6 @@
 module glib.timer;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -49,7 +49,7 @@ class Timer
 
   /**
    * Resumes a timer that has previously been stopped with
-   * [GLib.Timer.stop]. [GLib.Timer.stop] must be called before using this
+   * [glib.timer.Timer.stop]. [glib.timer.Timer.stop] must be called before using this
    * function.
    */
   void continue_()
@@ -98,8 +98,8 @@ class Timer
   }
 
   /**
-   * This function is useless; it's fine to call [GLib.Timer.start] on an
-   * already-started timer to reset the start time, so [GLib.Timer.reset]
+   * This function is useless; it's fine to call [glib.timer.Timer.start] on an
+   * already-started timer to reset the start time, so [glib.timer.Timer.reset]
    * serves no purpose.
    */
   void reset()
@@ -108,10 +108,10 @@ class Timer
   }
 
   /**
-   * Marks a start time, so that future calls to [GLib.Timer.elapsed] will
-   * report the time since [GLib.Timer.start] was called. [GLib.Timer.new_]
+   * Marks a start time, so that future calls to [glib.timer.Timer.elapsed] will
+   * report the time since [glib.timer.Timer.start] was called. [glib.timer.Timer.new_]
    * automatically marks the start time, so no need to call
-   * [GLib.Timer.start] immediately after creating the timer.
+   * [glib.timer.Timer.start] immediately after creating the timer.
    */
   void start()
   {
@@ -119,7 +119,7 @@ class Timer
   }
 
   /**
-   * Marks an end time, so calls to [GLib.Timer.elapsed] will return the
+   * Marks an end time, so calls to [glib.timer.Timer.elapsed] will return the
    * difference between this end time and the start time.
    */
   void stop()
@@ -128,7 +128,7 @@ class Timer
   }
 
   /**
-   * Creates a new timer, and starts timing $(LPAREN)i.e. [GLib.Timer.start] is
+   * Creates a new timer, and starts timing $(LPAREN)i.e. [glib.timer.Timer.start] is
    * implicitly called for you$(RPAREN).
    * Returns: a new #GTimer.
    */

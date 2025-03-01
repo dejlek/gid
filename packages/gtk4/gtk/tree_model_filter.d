@@ -1,6 +1,6 @@
 module gtk.tree_model_filter;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -73,7 +73,7 @@ import gtk.types;
  * do implement reference counting, obtain references on these child levels
  * yourself.
 
- * Deprecated: Use [Gtk.FilterListModel] instead.
+ * Deprecated: Use [gtk.filter_list_model.FilterListModel] instead.
  */
 class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
 {
@@ -100,7 +100,7 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
   /**
    * This function should almost never be called. It clears the filter
    * of any cached iterators that haven’t been reffed with
-   * [Gtk.TreeModel.refNode]. This might be useful if the child model
+   * [gtk.tree_model.TreeModel.refNode]. This might be useful if the child model
    * being filtered is static $(LPAREN)and doesn’t change often$(RPAREN) and there has been
    * a lot of unreffed access to nodes. As a side effect of this function,
    * all unreffed iters will be invalid.
@@ -206,7 +206,7 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
    * data access, the goal of the modify function is to return the data which
    * should be displayed at the location specified using the parameters of the
    * modify function.
-   * Note that [Gtk.TreeModelFilter.setModifyFunc]
+   * Note that [gtk.tree_model_filter.TreeModelFilter.setModifyFunc]
    * can only be called once for a given filter model.
    * Params:
    *   types = The `GType`s of the columns.
@@ -240,8 +240,8 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
    * look for visibility information. columns should be a column of type
    * %G_TYPE_BOOLEAN, where %TRUE means that a row is visible, and %FALSE
    * if not.
-   * Note that [Gtk.TreeModelFilter.setVisibleFunc] or
-   * [Gtk.TreeModelFilter.setVisibleColumn] can only be called
+   * Note that [gtk.tree_model_filter.TreeModelFilter.setVisibleFunc] or
+   * [gtk.tree_model_filter.TreeModelFilter.setVisibleColumn] can only be called
    * once for a given filter model.
    * Params:
    *   column = A `int` which is the column containing the visible information
@@ -257,7 +257,7 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
    * %FALSE otherwise.
    * If the condition calculated by the function changes over time $(LPAREN)e.g.
    * because it depends on some global parameters$(RPAREN), you must call
-   * [Gtk.TreeModelFilter.refilter] to keep the visibility information
+   * [gtk.tree_model_filter.TreeModelFilter.refilter] to keep the visibility information
    * of the model up-to-date.
    * Note that func is called whenever a row is inserted, when it may still
    * be empty. The visible function should therefore take special care of empty
@@ -278,8 +278,8 @@ class TreeModelFilter : ObjectG, TreeDragSource, TreeModel
    * return visible;
    * }
    * ]|
-   * Note that [Gtk.TreeModelFilter.setVisibleFunc] or
-   * [Gtk.TreeModelFilter.setVisibleColumn] can only be called
+   * Note that [gtk.tree_model_filter.TreeModelFilter.setVisibleFunc] or
+   * [gtk.tree_model_filter.TreeModelFilter.setVisibleColumn] can only be called
    * once for a given filter model.
    * Params:
    *   func = A `GtkTreeModelFilterVisibleFunc`, the visible function

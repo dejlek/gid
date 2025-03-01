@@ -1,6 +1,6 @@
 module gtk.info_bar;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -19,17 +19,17 @@ import gtk.widget;
  * `GtkInfoBar` can be used to show messages to the user without a dialog.
  * ![An example GtkInfoBar](info-bar.png)
  * It is often temporarily shown at the top or bottom of a document.
- * In contrast to [Gtk.Dialog], which has an action area at the
+ * In contrast to [gtk.dialog.Dialog], which has an action area at the
  * bottom, `GtkInfoBar` has an action area at the side.
  * The API of `GtkInfoBar` is very similar to `GtkDialog`, allowing you
- * to add buttons to the action area with [Gtk.InfoBar.addButton]
- * or [Gtk.InfoBar.newWithButtons]. The sensitivity of action widgets
- * can be controlled with [Gtk.InfoBar.setResponseSensitive].
+ * to add buttons to the action area with [gtk.info_bar.InfoBar.addButton]
+ * or [gtk.info_bar.InfoBar.newWithButtons]. The sensitivity of action widgets
+ * can be controlled with [gtk.info_bar.InfoBar.setResponseSensitive].
  * To add widgets to the main content area of a `GtkInfoBar`, use
- * [Gtk.InfoBar.addChild].
- * Similar to [Gtk.MessageDialog], the contents of a `GtkInfoBar`
+ * [gtk.info_bar.InfoBar.addChild].
+ * Similar to [gtk.message_dialog.MessageDialog], the contents of a `GtkInfoBar`
  * can by classified as error message, warning, informational message, etc,
- * by using [Gtk.InfoBar.setMessageType]. GTK may use the message
+ * by using [gtk.info_bar.InfoBar.setMessageType]. GTK may use the message
  * type to determine how the message is displayed.
  * A simple example for using a `GtkInfoBar`:
  * ```c
@@ -76,8 +76,8 @@ import gtk.widget;
  * style class applied.
 
  * Deprecated: There is no replacement in GTK for an "info bar" widget;
- *   you can use [Gtk.Revealer] with a [Gtk.Box] containing a
- *   [Gtk.Label] and an optional [Gtk.Button], according to
+ *   you can use [gtk.revealer.Revealer] with a [gtk.box.Box] containing a
+ *   [gtk.label.Label] and an optional [gtk.button.Button], according to
  *   your application's design.
  */
 class InfoBar : Widget
@@ -113,7 +113,7 @@ class InfoBar : Widget
   /**
    * Add an activatable widget to the action area of a `GtkInfoBar`.
    * This also connects a signal handler that will emit the
-   * [Gtk.InfoBar.response] signal on the message area
+   * [gtk.info_bar.InfoBar.response] signal on the message area
    * when the widget is activated. The widget is appended to the
    * end of the message areas action area.
    * Params:
@@ -127,7 +127,7 @@ class InfoBar : Widget
 
   /**
    * Adds a button with the given text.
-   * Clicking the button will emit the [Gtk.InfoBar.response]
+   * Clicking the button will emit the [gtk.info_bar.InfoBar.response]
    * signal with the given response_id. The button is appended to the
    * end of the info bar's action area. The button widget is returned,
    * but usually you don't need it.
@@ -170,7 +170,7 @@ class InfoBar : Widget
 
   /**
    * Returns whether the info bar is currently revealed.
-   * Returns: the current value of the [Gtk.InfoBar.revealed] property
+   * Returns: the current value of the [gtk.info_bar.InfoBar.gboolean] property
    */
   bool getRevealed()
   {
@@ -193,7 +193,7 @@ class InfoBar : Widget
   /**
    * Removes a widget from the action area of info_bar.
    * The widget must have been put there by a call to
-   * [Gtk.InfoBar.addActionWidget] or [Gtk.InfoBar.addButton].
+   * [gtk.info_bar.InfoBar.addActionWidget] or [gtk.info_bar.InfoBar.addButton].
    * Params:
    *   widget = an action widget to remove
    */
@@ -266,8 +266,8 @@ class InfoBar : Widget
    * Changing this will make info_bar reveal or conceal
    * itself via a sliding transition.
    * Note: this does not show or hide info_bar in the
-   * [Gtk.Widget.visible] sense, so revealing has no effect
-   * if [Gtk.Widget.visible] is %FALSE.
+   * [gtk.widget.Widget.gboolean] sense, so revealing has no effect
+   * if [gtk.widget.Widget.gboolean] is %FALSE.
    * Params:
    *   revealed = The new value of the property
    */
@@ -321,7 +321,7 @@ class InfoBar : Widget
   /**
    * Emitted when an action widget is clicked.
    * The signal is also emitted when the application programmer
-   * calls [Gtk.InfoBar.response]. The response_id depends
+   * calls [gtk.info_bar.InfoBar.response]. The response_id depends
    * on which action widget was clicked.
    * Params
    *   responseId = the response ID

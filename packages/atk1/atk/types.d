@@ -6,7 +6,7 @@ import atk.key_event_struct;
 import atk.object;
 import atk.property_values;
 import atk.types;
-import gid.gid;
+import gid.global;
 
 
 // Aliases
@@ -40,7 +40,7 @@ alias KeySnoopFunc = int delegate(KeyEventStruct event);
 alias PropertyChangeHandler = void delegate(ObjectAtk obj, PropertyValues vals);
 
 /**
- * Like [Atk.Global.getBinaryAge], but from the headers used at
+ * Like [atk.global.getBinaryAge], but from the headers used at
  * application compile time, rather than from the library linked
  * against at application run time.
  */
@@ -48,7 +48,7 @@ enum BINARY_AGE = 25210;
 
 
 /**
- * Like [Atk.Global.getInterfaceAge], but from the headers used at
+ * Like [atk.global.getInterfaceAge], but from the headers used at
  * application compile time, rather than from the library linked
  * against at application run time.
  */
@@ -56,7 +56,7 @@ enum INTERFACE_AGE = 1;
 
 
 /**
- * Like [Atk.Global.getMajorVersion], but from the headers used at
+ * Like [atk.global.getMajorVersion], but from the headers used at
  * application compile time, rather than from the library linked
  * against at application run time.
  */
@@ -64,7 +64,7 @@ enum MAJOR_VERSION = 2;
 
 
 /**
- * Like [Atk.Global.getMicroVersion], but from the headers used at
+ * Like [atk.global.getMicroVersion], but from the headers used at
  * application compile time, rather than from the library linked
  * against at application run time.
  */
@@ -72,7 +72,7 @@ enum MICRO_VERSION = 0;
 
 
 /**
- * Like [Atk.Global.getMinorVersion], but from the headers used at
+ * Like [atk.global.getMinorVersion], but from the headers used at
  * application compile time, rather than from the library linked
  * against at application run time.
  */

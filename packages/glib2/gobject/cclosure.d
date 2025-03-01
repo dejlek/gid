@@ -1,6 +1,6 @@
 module gobject.cclosure;
 
-import gid.gid;
+import gid.global;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.closure;
@@ -39,7 +39,7 @@ class CClosure
    * A #GClosureMarshal function for use with signals with handlers that
    * take two boxed pointers as arguments and return a boolean.  If you
    * have such a signal, you will probably also need to use an
-   * accumulator, such as [GObject.Global.signalAccumulatorTrueHandled].
+   * accumulator, such as [gobject.global.signalAccumulatorTrueHandled].
    * Params:
    *   closure = A #GClosure.
    *   returnValue = A #GValue to store the return value. May be %NULL
@@ -48,10 +48,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalBOOLEANBOXEDBOXED(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -62,7 +62,7 @@ class CClosure
    * A #GClosureMarshal function for use with signals with handlers that
    * take a flags type as an argument and return a boolean.  If you have
    * such a signal, you will probably also need to use an accumulator,
-   * such as [GObject.Global.signalAccumulatorTrueHandled].
+   * such as [gobject.global.signalAccumulatorTrueHandled].
    * Params:
    *   closure = A #GClosure.
    *   returnValue = A #GValue to store the return value. May be %NULL
@@ -71,10 +71,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalBOOLEANFLAGS(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -93,10 +93,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalSTRINGOBJECTPOINTER(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -114,10 +114,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDBOOLEAN(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -135,10 +135,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDBOXED(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -156,10 +156,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDCHAR(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -177,10 +177,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDDOUBLE(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -198,10 +198,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDENUM(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -219,10 +219,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDFLAGS(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -240,10 +240,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDFLOAT(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -261,10 +261,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDINT(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -282,10 +282,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDLONG(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -303,10 +303,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDOBJECT(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -324,10 +324,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDPARAM(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -348,10 +348,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDPOINTER(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -369,10 +369,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDSTRING(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -390,10 +390,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDUCHAR(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -411,10 +411,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDUINT(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -432,10 +432,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDUINTPOINTER(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -453,10 +453,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDULONG(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -474,10 +474,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDVARIANT(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -494,10 +494,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalVOIDVOID(Closure closure, Value returnValue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {
@@ -507,7 +507,7 @@ class CClosure
   /**
    * A generic marshaller function implemented via
    * [libffi](http://sourceware.org/libffi/).
-   * Normally this function is not passed explicitly to [GObject.Global.signalNew],
+   * Normally this function is not passed explicitly to [gobject.global.signalNew],
    * but used automatically by GLib when specifying a %NULL marshaller.
    * Params:
    *   closure = A #GClosure.
@@ -517,10 +517,10 @@ class CClosure
    *   paramValues = An array of #GValues holding the arguments
    *     on which to invoke the callback of closure.
    *   invocationHint = The invocation hint given as the last argument to
-   *     [GObject.Closure.invoke].
+   *     [gobject.closure.Closure.invoke].
    *   marshalData = Additional data specified when registering the
-   *     marshaller, see [GObject.Closure.setMarshal] and
-   *     [GObject.Closure.setMetaMarshal]
+   *     marshaller, see [gobject.closure.Closure.setMarshal] and
+   *     [gobject.closure.Closure.setMetaMarshal]
    */
   static void marshalGeneric(Closure closure, Value returnGvalue, uint nParamValues, Value paramValues, void* invocationHint, void* marshalData)
   {

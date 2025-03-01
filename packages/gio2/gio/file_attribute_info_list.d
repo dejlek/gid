@@ -1,6 +1,6 @@
 module gio.file_attribute_info_list;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.file_attribute_info;

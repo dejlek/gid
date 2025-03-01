@@ -1,6 +1,6 @@
 module gtk.file_chooser_widget;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -17,7 +17,7 @@ import gtk.widget;
 
 /**
  * `GtkFileChooserWidget` is a widget for choosing files.
- * It exposes the [Gtk.FileChooser] interface, and you should
+ * It exposes the [gtk.file_chooser.FileChooser] interface, and you should
  * use the methods of this interface to interact with the
  * widget.
  * # CSS nodes

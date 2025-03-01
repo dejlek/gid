@@ -1,6 +1,6 @@
 module gio.socket_connection;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -15,19 +15,19 @@ import gobject.object;
 import gobject.types;
 
 /**
- * `GSocketConnection` is a [Gio.IOStream] for a connected socket. They
- * can be created either by [Gio.SocketClient] when connecting to a host,
- * or by [Gio.SocketListener] when accepting a new client.
+ * `GSocketConnection` is a [gio.iostream.IOStream] for a connected socket. They
+ * can be created either by [gio.socket_client.SocketClient] when connecting to a host,
+ * or by [gio.socket_listener.SocketListener] when accepting a new client.
  * The type of the `GSocketConnection` object returned from these calls
  * depends on the type of the underlying socket that is in use. For
- * instance, for a TCP/IP connection it will be a [Gio.TcpConnection].
+ * instance, for a TCP/IP connection it will be a [gio.tcp_connection.TcpConnection].
  * Choosing what type of object to construct is done with the socket
  * connection factory, and it is possible for third parties to register
  * custom socket connection types for specific combination of socket
- * family/type/protocol using [Gio.SocketConnection.factoryRegisterType].
- * To close a `GSocketConnection`, use [Gio.IOStream.close]. Closing both
- * substreams of the [Gio.IOStream] separately will not close the
- * underlying [Gio.Socket].
+ * family/type/protocol using [gio.socket_connection.SocketConnection.factoryRegisterType].
+ * To close a `GSocketConnection`, use [gio.iostream.IOStream.close]. Closing both
+ * substreams of the [gio.iostream.IOStream] separately will not close the
+ * underlying [gio.socket.Socket].
  */
 class SocketConnection : IOStream
 {
@@ -104,7 +104,7 @@ class SocketConnection : IOStream
    * If #GSocket:timeout is set, the operation will time out and return
    * %G_IO_ERROR_TIMED_OUT after that period. Otherwise, it will continue
    * indefinitely until operating system timeouts $(LPAREN)if any$(RPAREN) are hit.
-   * Use [Gio.SocketConnection.connectFinish] to retrieve the result.
+   * Use [gio.socket_connection.SocketConnection.connectFinish] to retrieve the result.
    * Params:
    *   address = a #GSocketAddress specifying the remote address.
    *   cancellable = a %GCancellable or %NULL
@@ -126,7 +126,7 @@ class SocketConnection : IOStream
   }
 
   /**
-   * Gets the result of a [Gio.SocketConnection.connectAsync] call.
+   * Gets the result of a [gio.socket_connection.SocketConnection.connectAsync] call.
    * Params:
    *   result = the #GAsyncResult
    * Returns: %TRUE if the connection succeeded, %FALSE on error
@@ -144,7 +144,7 @@ class SocketConnection : IOStream
   /**
    * Try to get the local address of a socket connection.
    * Returns: a #GSocketAddress or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   SocketAddress getLocalAddress()
   {
@@ -159,14 +159,14 @@ class SocketConnection : IOStream
 
   /**
    * Try to get the remote address of a socket connection.
-   * Since GLib 2.40, when used with [Gio.SocketClient.connect] or
-   * [Gio.SocketClient.connectAsync], during emission of
+   * Since GLib 2.40, when used with [gio.socket_client.SocketClient.connect] or
+   * [gio.socket_client.SocketClient.connectAsync], during emission of
    * %G_SOCKET_CLIENT_CONNECTING, this function will return the remote
    * address that will be used for the connection.  This allows
    * applications to print e.g. "Connecting to example.com
    * $(LPAREN)10.42.77.3$(RPAREN)...".
    * Returns: a #GSocketAddress or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   SocketAddress getRemoteAddress()
   {
@@ -195,7 +195,7 @@ class SocketConnection : IOStream
 
   /**
    * Checks if connection is connected. This is equivalent to calling
-   * [Gio.Socket.isConnected] on connection's underlying #GSocket.
+   * [gio.socket.Socket.isConnected] on connection's underlying #GSocket.
    * Returns: whether connection is connected
    */
   bool isConnected()

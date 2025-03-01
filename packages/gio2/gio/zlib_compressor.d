@@ -1,6 +1,6 @@
 module gio.zlib_compressor;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.converter;
@@ -10,7 +10,7 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GZlibCompressor` is an implementation of [Gio.Converter] that
+ * `GZlibCompressor` is an implementation of [gio.converter.Converter] that
  * compresses data using zlib.
  */
 class ZlibCompressor : ObjectG, Converter
@@ -67,7 +67,7 @@ class ZlibCompressor : ObjectG, Converter
    * the GZIP header of the compressed data.
    * Note: it is an error to call this function while a compression is in
    * progress; it may only be called immediately after creation of compressor,
-   * or after resetting it with [Gio.Converter.reset].
+   * or after resetting it with [gio.converter.Converter.reset].
    * Params:
    *   fileInfo = a #GFileInfo
    */

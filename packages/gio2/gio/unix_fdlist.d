@@ -1,6 +1,6 @@
 module gio.unix_fdlist;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -12,9 +12,9 @@ import gobject.object;
  * descriptors that it contains, closing them when finalized.
  * It may be wrapped in a
  * [`GUnixFDMessage`](../gio-unix/class.UnixFDMessage.html) and sent over a
- * [Gio.Socket] in the `G_SOCKET_FAMILY_UNIX` family by using
- * [Gio.Socket.sendMessage] and received using
- * [Gio.Socket.receiveMessage].
+ * [gio.socket.Socket] in the `G_SOCKET_FAMILY_UNIX` family by using
+ * [gio.socket.Socket.sendMessage] and received using
+ * [gio.socket.Socket.receiveMessage].
  * Before 2.74, `<gio/gunixfdlist.h>` belonged to the UNIX-specific GIO
  * interfaces, thus you had to use the `gio-unix-2.0.pc` pkg-config file when
  * using it.
@@ -82,7 +82,7 @@ class UnixFDList : ObjectG
    * A possible cause of failure is exceeding the per-process or
    * system-wide file descriptor limit.
    * The index of the file descriptor in the list is returned.  If you use
-   * this index with [Gio.UnixFDList.get] then you will receive back a
+   * this index with [gio.unix_fdlist.UnixFDList.get] then you will receive back a
    * duplicated copy of the same file descriptor.
    * Params:
    *   fd = a valid open file descriptor
@@ -103,7 +103,7 @@ class UnixFDList : ObjectG
    * Gets a file descriptor out of list.
    * index_ specifies the index of the file descriptor to get.  It is a
    * programmer error for index_ to be out of range; see
-   * [Gio.UnixFDList.getLength].
+   * [gio.unix_fdlist.UnixFDList.getLength].
    * The file descriptor is duplicated using dup$(LPAREN)$(RPAREN) and set as
    * close-on-exec before being returned.  You must call close$(LPAREN)$(RPAREN) on it
    * when you are done.
@@ -169,7 +169,7 @@ class UnixFDList : ObjectG
    * After this call, the descriptors are no longer contained in
    * list. Further calls will return an empty list $(LPAREN)unless more
    * descriptors have been added$(RPAREN).
-   * The return result of this function must be freed with [GLib.Global.gfree].
+   * The return result of this function must be freed with [glib.global.gfree].
    * The caller is also responsible for closing all of the file
    * descriptors.  The file descriptors in the array are set to
    * close-on-exec.

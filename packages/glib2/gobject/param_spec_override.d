@@ -1,6 +1,6 @@
 module gobject.param_spec_override;
 
-import gid.gid;
+import gid.global;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.param_spec;
@@ -12,9 +12,9 @@ import gobject.types;
  * All operations other than getting or setting the value are redirected,
  * including accessing the nick and blurb, validating a value, and so
  * forth.
- * See [GObject.ParamSpec.getRedirectTarget] for retrieving the overridden
+ * See [gobject.param_spec.ParamSpec.getRedirectTarget] for retrieving the overridden
  * property. #GParamSpecOverride is used in implementing
- * [GObject.ObjectClass.overrideProperty], and will not be directly useful
+ * [gobject.object_class.ObjectClass.overrideProperty], and will not be directly useful
  * unless you are implementing a new base type similar to GObject.
  */
 class ParamSpecOverride : ParamSpec

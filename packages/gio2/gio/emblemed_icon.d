@@ -1,6 +1,6 @@
 module gio.emblemed_icon;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.emblem;
@@ -10,11 +10,11 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GEmblemedIcon` is an implementation of [Gio.Icon] that supports
+ * `GEmblemedIcon` is an implementation of [gio.icon.Icon] that supports
  * adding an emblem to an icon. Adding multiple emblems to an
- * icon is ensured via [Gio.EmblemedIcon.addEmblem].
+ * icon is ensured via [gio.emblemed_icon.EmblemedIcon.addEmblem].
  * Note that `GEmblemedIcon` allows no control over the position
- * of the emblems. See also [Gio.Emblem] for more information.
+ * of the emblems. See also [gio.emblem.Emblem] for more information.
  */
 class EmblemedIcon : ObjectG, Icon
 {

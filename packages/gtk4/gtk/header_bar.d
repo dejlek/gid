@@ -1,6 +1,6 @@
 module gtk.header_bar;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -24,7 +24,7 @@ import gtk.widget;
  * `GtkHeaderBar` can add typical window frame controls, such as minimize,
  * maximize and close buttons, or the window icon.
  * For these reasons, `GtkHeaderBar` is the natural choice for use as the
- * custom titlebar widget of a `GtkWindow` $(LPAREN)see [Gtk.Window.setTitlebar]$(RPAREN),
+ * custom titlebar widget of a `GtkWindow` $(LPAREN)see [gtk.window.Window.setTitlebar]$(RPAREN),
  * as it gives features typical of titlebars while allowing the addition of
  * child widgets.
  * ## GtkHeaderBar as GtkBuildable
@@ -68,7 +68,7 @@ import gtk.widget;
  * the start and end of the header bar, as well as a center node that represents
  * the title.
  * Each of the boxes contains a `windowcontrols` subnode, see
- * [Gtk.WindowControls] for details, as well as other children.
+ * [gtk.window_controls.WindowControls] for details, as well as other children.
  * # Accessibility
  * `GtkHeaderBar` uses the %GTK_ACCESSIBLE_ROLE_GROUP role.
  */
@@ -128,7 +128,7 @@ class HeaderBar : Widget
 
   /**
    * Retrieves the title widget of the header.
-   * See [Gtk.HeaderBar.setTitleWidget].
+   * See [gtk.header_bar.HeaderBar.setTitleWidget].
    * Returns: the title widget of the header
    */
   Widget getTitleWidget()
@@ -164,9 +164,9 @@ class HeaderBar : Widget
   /**
    * Removes a child from the `GtkHeaderBar`.
    * The child must have been added with
-   * [Gtk.HeaderBar.packStart],
-   * [Gtk.HeaderBar.packEnd] or
-   * [Gtk.HeaderBar.setTitleWidget].
+   * [gtk.header_bar.HeaderBar.packStart],
+   * [gtk.header_bar.HeaderBar.packEnd] or
+   * [gtk.header_bar.HeaderBar.setTitleWidget].
    * Params:
    *   child = the child to remove
    */

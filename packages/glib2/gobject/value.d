@@ -1,6 +1,6 @@
 module gobject.value;
 
-import gid.gid;
+import gid.global;
 import glib.variant;
 import gobject.boxed;
 import gobject.c.functions;
@@ -9,6 +9,7 @@ import gobject.object;
 import gobject.param_spec;
 import gobject.type_instance;
 import gobject.types;
+
 
 import std.traits : isPointer;
 
@@ -141,7 +142,7 @@ class Value : Boxed
    * Get the contents of a variant #GValue, increasing its refcount. The returned
    * #GVariant is never floating.
    * Returns: variant contents of value $(LPAREN)may be %NULL$(RPAREN);
-   *   should be unreffed using [GLib.VariantG.unref] when no longer needed
+   *   should be unreffed using [glib.variant.VariantG.unref] when no longer needed
    */
   VariantG dupVariant()
   {
@@ -186,11 +187,11 @@ class Value : Boxed
 
   /**
    * Do not use this function; it is broken on platforms where the %char
-   * type is unsigned, such as ARM and PowerPC.  See [GObject.Value.getSchar].
+   * type is unsigned, such as ARM and PowerPC.  See [gobject.value.Value.getSchar].
    * Get the contents of a %G_TYPE_CHAR #GValue.
    * Returns: character contents of value
 
-   * Deprecated: This function's return type is broken, see [GObject.Value.getSchar]
+   * Deprecated: This function's return type is broken, see [gobject.value.Value.getSchar]
    */
   char getChar()
   {
@@ -420,7 +421,7 @@ class Value : Boxed
    * Note: The value will be initialised with the exact type of
    * instance.  If you wish to set the value's type to a different GType
    * $(LPAREN)such as a parent class GType$(RPAREN), you need to manually call
-   * [GObject.Value.init_] and [GObject.Value.setInstance].
+   * [gobject.value.Value.init_] and [gobject.value.Value.setInstance].
    * Params:
    *   instance = the instance
    */
@@ -431,7 +432,7 @@ class Value : Boxed
 
   /**
    * Returns the value contents as pointer. This function asserts that
-   * [GObject.Value.fitsPointer] returned %TRUE for the passed in value.
+   * [gobject.value.Value.fitsPointer] returned %TRUE for the passed in value.
    * This is an internal function introduced mainly for C marshallers.
    * Returns: the value contents as pointer
    */
@@ -479,7 +480,7 @@ class Value : Boxed
    * Params:
    *   vBoxed = duplicated unowned boxed value to be set
 
-   * Deprecated: Use [GObject.Value.takeBoxed] instead.
+   * Deprecated: Use [gobject.value.Value.takeBoxed] instead.
    */
   void setBoxedTakeOwnership(const(void)* vBoxed)
   {
@@ -491,7 +492,7 @@ class Value : Boxed
    * Params:
    *   vChar = character value to be set
 
-   * Deprecated: This function's input type is broken, see [GObject.Value.setSchar]
+   * Deprecated: This function's input type is broken, see [gobject.value.Value.setSchar]
    */
   void setChar(char vChar)
   {
@@ -582,7 +583,7 @@ class Value : Boxed
   /**
    * Set the contents of a %G_TYPE_STRING #GValue to v_string.  The string is
    * assumed to be static and interned $(LPAREN)canonical, for example from
-   * [GLib.Global.internString]$(RPAREN), and is thus not duplicated when setting the #GValue.
+   * [glib.global.internString]$(RPAREN), and is thus not duplicated when setting the #GValue.
    * Params:
    *   vString = static string to be set
    */
@@ -604,11 +605,11 @@ class Value : Boxed
 
   /**
    * Set the contents of a %G_TYPE_OBJECT derived #GValue to v_object.
-   * [GObject.Value.setObject] increases the reference count of v_object
+   * [gobject.value.Value.setObject] increases the reference count of v_object
    * $(LPAREN)the #GValue holds a reference to v_object$(RPAREN).  If you do not wish
    * to increase the reference count of the object $(LPAREN)i.e. you wish to
    * pass your current reference to the #GValue because you no longer
-   * need it$(RPAREN), use [GObject.Value.takeObject] instead.
+   * need it$(RPAREN), use [gobject.value.Value.takeObject] instead.
    * It is important that your #GValue holds a reference to v_object $(LPAREN)either its
    * own, or one it has taken$(RPAREN) to ensure that the object won't be destroyed while
    * the #GValue still exists$(RPAREN).
@@ -666,7 +667,7 @@ class Value : Boxed
    * Set the contents of a %G_TYPE_STRING #GValue to v_string.
    * The string is assumed to be static, and is thus not duplicated
    * when setting the #GValue.
-   * If the the string is a canonical string, using [GObject.Value.setInternedString]
+   * If the the string is a canonical string, using [gobject.value.Value.setInternedString]
    * is more appropriate.
    * Params:
    *   vString = static string to be set
@@ -693,7 +694,7 @@ class Value : Boxed
    * Params:
    *   vString = duplicated unowned string to be set
 
-   * Deprecated: Use [GObject.Value.takeString] instead.
+   * Deprecated: Use [gobject.value.Value.takeString] instead.
    */
   void setStringTakeOwnership(string vString)
   {
@@ -761,7 +762,7 @@ class Value : Boxed
    * static string, or an interned one, this function will return a copy
    * of the string. Otherwise the transfer notation would be ambiguous.
    * Returns: string content of value;
-   *   Should be freed with [GLib.Global.gfree] when no longer needed.
+   *   Should be freed with [glib.global.gfree] when no longer needed.
    */
   string stealString()
   {
@@ -802,7 +803,7 @@ class Value : Boxed
    * If variant was floating then its floating reference is converted to
    * a hard reference.
    * If you want the #GValue to hold its own reference to variant, use
-   * [GObject.Value.setVariant] instead.
+   * [gobject.value.Value.setVariant] instead.
    * This is an internal function introduced mainly for C marshallers.
    * Params:
    *   variant = a #GVariant, or %NULL
@@ -849,7 +850,7 @@ class Value : Boxed
    * Params:
    *   srcType = source type to be copied.
    *   destType = destination type for copying.
-   * Returns: %TRUE if [GObject.Value.copy] is possible with src_type and dest_type.
+   * Returns: %TRUE if [gobject.value.Value.copy] is possible with src_type and dest_type.
    */
   static bool typeCompatible(GType srcType, GType destType)
   {
@@ -859,7 +860,7 @@ class Value : Boxed
   }
 
   /**
-   * Check whether [GObject.Value.transform] is able to transform values
+   * Check whether [gobject.value.Value.transform] is able to transform values
    * of type src_type into values of type dest_type. Note that for
    * the types to be transformable, they must be compatible or a
    * transformation function must be registered.

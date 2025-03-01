@@ -1,6 +1,6 @@
 module pango.language;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -44,7 +44,7 @@ class PgLanguage : Boxed
    * font feature requirements unique to the language. It is suitable for use
    * as sample text in a font selection dialog.
    * If language is %NULL, the default language as found by
-   * [Pango.PgLanguage.getDefault] is used.
+   * [pango.language.PgLanguage.getDefault] is used.
    * If Pango does not have a sample string for language, the classic
    * "The quick brown fox..." is returned.  This can be detected by
    * comparing the returned pointer value to that returned for $(LPAREN)non-existent$(RPAREN)
@@ -76,7 +76,7 @@ class PgLanguage : Boxed
    * any assumptions on the maximum number of scripts returned
    * though, except that it is positive if the return value is not
    * %NULL, and it is a small number.
-   * The [Pango.PgLanguage.includesScript] function uses this
+   * The [pango.language.PgLanguage.includesScript] function uses this
    * function internally.
    * Note: while the return value is declared as `PangoScript`, the
    * returned values are from the `GUnicodeScript` enumeration, which
@@ -110,7 +110,7 @@ class PgLanguage : Boxed
    * determining if a supplied language tag is relevant to
    * a particular section of text. It probably is not useful
    * for applications in most circumstances.
-   * This function uses [Pango.PgLanguage.getScripts] internally.
+   * This function uses [pango.language.PgLanguage.getScripts] internally.
    * Params:
    *   script = a `PangoScript`
    * Returns: %TRUE if script is one of the scripts used
@@ -134,7 +134,7 @@ class PgLanguage : Boxed
    *   rangeList = a list of language ranges, separated by ';', ':',
    *     ',', or space characters.
    *     Each element must either be '*', or a RFC 3066 language range
-   *     canonicalized as by [Pango.PgLanguage.fromString]
+   *     canonicalized as by [pango.language.PgLanguage.fromString]
    * Returns: %TRUE if a match was found
    */
   bool matches(string rangeList)
@@ -166,7 +166,7 @@ class PgLanguage : Boxed
    * This function first canonicalizes the string by converting it to
    * lowercase, mapping '_' to '-', and stripping all characters other
    * than letters and '-'.
-   * Use [Pango.PgLanguage.getDefault] if you want to get the
+   * Use [pango.language.PgLanguage.getDefault] if you want to get the
    * `PangoLanguage` for the current locale of the process.
    * Params:
    *   language = a string representing a language tag
@@ -207,7 +207,7 @@ class PgLanguage : Boxed
    * Note that the default language can change over the life of an application.
    * Also note that this function will not do the right thing if you
    * use per-thread locales with uselocale$(LPAREN)$(RPAREN). In that case, you should
-   * just call [Pango.PgLanguage.fromString] yourself.
+   * just call [pango.language.PgLanguage.fromString] yourself.
    * Returns: the default language as a `PangoLanguage`
    */
   static PgLanguage getDefault()
@@ -223,9 +223,9 @@ class PgLanguage : Boxed
    * The list is specified by the `PANGO_LANGUAGE` or `LANGUAGE`
    * environment variables, in order of preference. Note that this
    * list does not necessarily include the language returned by
-   * [Pango.PgLanguage.getDefault].
+   * [pango.language.PgLanguage.getDefault].
    * When choosing language-specific resources, such as the sample
-   * text returned by [Pango.PgLanguage.getSampleString],
+   * text returned by [pango.language.PgLanguage.getSampleString],
    * you should first try the default language, followed by the
    * languages returned by this function.
    * Returns: a %NULL-terminated array

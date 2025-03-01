@@ -1,6 +1,6 @@
 module gtk.cell_renderer_toggle;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -15,7 +15,7 @@ import gtk.types;
  * When activated, it emits the `GtkCellRendererToggle::toggled` signal.
 
  * Deprecated: List views use widgets to display their contents.
- *   You should use [Gtk.ToggleButton] instead
+ *   You should use [gtk.toggle_button.ToggleButton] instead
  */
 class CellRendererToggle : CellRenderer
 {
@@ -39,7 +39,7 @@ class CellRendererToggle : CellRenderer
   /**
    * Creates a new `GtkCellRendererToggle`. Adjust rendering
    * parameters using object properties. Object properties can be set
-   * globally $(LPAREN)with [GObject.ObjectG.set]$(RPAREN). Also, with `GtkTreeViewColumn`, you
+   * globally $(LPAREN)with [gobject.object.ObjectG.set]$(RPAREN). Also, with `GtkTreeViewColumn`, you
    * can bind a property to a value in a `GtkTreeModel`. For example, you
    * can bind the “active” property on the cell renderer to a boolean value
    * in the model, thus causing the check button to reflect the state of
@@ -55,7 +55,7 @@ class CellRendererToggle : CellRenderer
 
   /**
    * Returns whether the cell renderer is activatable. See
-   * [Gtk.CellRendererToggle.setActivatable].
+   * [gtk.cell_renderer_toggle.CellRendererToggle.setActivatable].
    * Returns: %TRUE if the cell renderer is activatable.
    */
   bool getActivatable()
@@ -67,7 +67,7 @@ class CellRendererToggle : CellRenderer
 
   /**
    * Returns whether the cell renderer is active. See
-   * [Gtk.CellRendererToggle.setActive].
+   * [gtk.cell_renderer_toggle.CellRendererToggle.setActive].
    * Returns: %TRUE if the cell renderer is active.
    */
   bool getActive()

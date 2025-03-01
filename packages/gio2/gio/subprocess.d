@@ -1,6 +1,6 @@
 module gio.subprocess;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -19,21 +19,21 @@ import gobject.object;
  * `GSubprocess` allows the creation of and interaction with child
  * processes.
  * Processes can be communicated with using standard GIO-style APIs $(LPAREN)ie:
- * [Gio.InputStream], [Gio.OutputStream]$(RPAREN). There are GIO-style APIs
+ * [gio.input_stream.InputStream], [gio.output_stream.OutputStream]$(RPAREN). There are GIO-style APIs
  * to wait for process termination $(LPAREN)ie: cancellable and with an asynchronous
  * variant$(RPAREN).
  * There is an API to force a process to terminate, as well as a
  * race-free API for sending UNIX signals to a subprocess.
  * One major advantage that GIO brings over the core GLib library is
  * comprehensive API for asynchronous I/O, such
- * [Gio.OutputStream.spliceAsync].  This makes `GSubprocess`
+ * [gio.output_stream.OutputStream.spliceAsync].  This makes `GSubprocess`
  * significantly more powerful and flexible than equivalent APIs in
  * some other languages such as the `subprocess.py`
  * included with Python.  For example, using `GSubprocess` one could
  * create two child processes, reading standard output from the first,
  * processing it, and writing to the input stream of the second, all
  * without blocking the main loop.
- * A powerful [Gio.Subprocess.communicate] API is provided similar to the
+ * A powerful [gio.subprocess.Subprocess.communicate] API is provided similar to the
  * `communicate$(LPAREN)$(RPAREN)` method of `subprocess.py`. This enables very easy
  * interaction with a subprocess that has been opened with pipes.
  * `GSubprocess` defaults to tight control over the file descriptors open
@@ -44,7 +44,7 @@ import gobject.object;
  * specified$(RPAREN).
  * `GSubprocess` will quickly reap all child processes as they exit,
  * avoiding ‘zombie processes’ remaining around for long periods of
- * time.  [Gio.Subprocess.wait] can be used to wait for this to happen,
+ * time.  [gio.subprocess.Subprocess.wait] can be used to wait for this to happen,
  * but it will happen even without the call being explicitly made.
  * As a matter of principle, `GSubprocess` has no API that accepts
  * shell-style space-separated strings.  It will, however, match the
@@ -55,14 +55,14 @@ import gobject.object;
  * launcher environment instead.
  * `GSubprocess` attempts to have a very simple API for most uses $(LPAREN)ie:
  * spawning a subprocess with arguments and support for most typical
- * kinds of input and output redirection$(RPAREN).  See [Gio.Subprocess.new_]. The
- * [Gio.SubprocessLauncher] API is provided for more complicated cases
+ * kinds of input and output redirection$(RPAREN).  See [gio.subprocess.Subprocess.new_]. The
+ * [gio.subprocess_launcher.SubprocessLauncher] API is provided for more complicated cases
  * $(LPAREN)advanced types of redirection, environment variable manipulation,
  * change of working directory, child setup functions, etc$(RPAREN).
  * A typical use of `GSubprocess` will involve calling
- * [Gio.Subprocess.new_], followed by [Gio.Subprocess.waitAsync] or
- * [Gio.Subprocess.wait].  After the process exits, the status can be
- * checked using functions such as [Gio.Subprocess.getIfExited] $(LPAREN)which
+ * [gio.subprocess.Subprocess.new_], followed by [gio.subprocess.Subprocess.waitAsync] or
+ * [gio.subprocess.Subprocess.wait].  After the process exits, the status can be
+ * checked using functions such as [gio.subprocess.Subprocess.getIfExited] $(LPAREN)which
  * are similar to the familiar `WIFEXITED`-style POSIX macros$(RPAREN).
  */
 class Subprocess : ObjectG, Initable
@@ -139,8 +139,8 @@ class Subprocess : ObjectG, Initable
    * discarded. None of the out variables $(LPAREN)aside from error$(RPAREN) will have
    * been set to anything in particular and should not be inspected.
    * In the case that %TRUE is returned, the subprocess has exited and the
-   * exit status inspection APIs $(LPAREN)eg: [Gio.Subprocess.getIfExited],
-   * [Gio.Subprocess.getExitStatus]$(RPAREN) may be used.
+   * exit status inspection APIs $(LPAREN)eg: [gio.subprocess.Subprocess.getIfExited],
+   * [gio.subprocess.Subprocess.getExitStatus]$(RPAREN) may be used.
    * You should not attempt to use any of the subprocess pipes after
    * starting this function, since they may be left in strange states,
    * even if the operation was cancelled.  You should especially not
@@ -168,8 +168,8 @@ class Subprocess : ObjectG, Initable
   }
 
   /**
-   * Asynchronous version of [Gio.Subprocess.communicate].  Complete
-   * invocation with [Gio.Subprocess.communicateFinish].
+   * Asynchronous version of [gio.subprocess.Subprocess.communicate].  Complete
+   * invocation with [gio.subprocess.Subprocess.communicateFinish].
    * Params:
    *   stdinBuf = Input data, or %NULL
    *   cancellable = Cancellable
@@ -191,7 +191,7 @@ class Subprocess : ObjectG, Initable
   }
 
   /**
-   * Complete an invocation of [Gio.Subprocess.communicateAsync].
+   * Complete an invocation of [gio.subprocess.Subprocess.communicateAsync].
    * Params:
    *   result = Result
    *   stdoutBuf = Return location for stdout data
@@ -213,7 +213,7 @@ class Subprocess : ObjectG, Initable
   }
 
   /**
-   * Like [Gio.Subprocess.communicate], but validates the output of the
+   * Like [gio.subprocess.Subprocess.communicate], but validates the output of the
    * process as UTF-8, and returns it as a regular NUL terminated string.
    * On error, stdout_buf and stderr_buf will be set to undefined values and
    * should not be used.
@@ -240,8 +240,8 @@ class Subprocess : ObjectG, Initable
   }
 
   /**
-   * Asynchronous version of [Gio.Subprocess.communicateUtf8].  Complete
-   * invocation with [Gio.Subprocess.communicateUtf8Finish].
+   * Asynchronous version of [gio.subprocess.Subprocess.communicateUtf8].  Complete
+   * invocation with [gio.subprocess.Subprocess.communicateUtf8Finish].
    * Params:
    *   stdinBuf = Input data, or %NULL
    *   cancellable = Cancellable
@@ -264,7 +264,7 @@ class Subprocess : ObjectG, Initable
   }
 
   /**
-   * Complete an invocation of [Gio.Subprocess.communicateUtf8Async].
+   * Complete an invocation of [gio.subprocess.Subprocess.communicateUtf8Async].
    * Params:
    *   result = Result
    *   stdoutBuf = Return location for stdout data
@@ -289,7 +289,7 @@ class Subprocess : ObjectG, Initable
    * Use an operating-system specific method to attempt an immediate,
    * forceful termination of the process.  There is no mechanism to
    * determine whether or not the request itself was successful;
-   * however, you can use [Gio.Subprocess.wait] to monitor the status of
+   * however, you can use [gio.subprocess.Subprocess.wait] to monitor the status of
    * the process after calling this function.
    * On Unix, this function sends %SIGKILL.
    */
@@ -303,8 +303,8 @@ class Subprocess : ObjectG, Initable
    * normally.  This is the value passed to the exit$(LPAREN)$(RPAREN) system call or the
    * return value from main.
    * This is equivalent to the system WEXITSTATUS macro.
-   * It is an error to call this function before [Gio.Subprocess.wait] and
-   * unless [Gio.Subprocess.getIfExited] returned %TRUE.
+   * It is an error to call this function before [gio.subprocess.Subprocess.wait] and
+   * unless [gio.subprocess.Subprocess.getIfExited] returned %TRUE.
    * Returns: the exit status
    */
   int getExitStatus()
@@ -333,7 +333,7 @@ class Subprocess : ObjectG, Initable
    * Check if the given subprocess exited normally $(LPAREN)ie: by way of exit$(LPAREN)$(RPAREN)
    * or return from main$(LPAREN)$(RPAREN)$(RPAREN).
    * This is equivalent to the system WIFEXITED macro.
-   * It is an error to call this function before [Gio.Subprocess.wait] has
+   * It is an error to call this function before [gio.subprocess.Subprocess.wait] has
    * returned.
    * Returns: %TRUE if the case of a normal exit
    */
@@ -347,7 +347,7 @@ class Subprocess : ObjectG, Initable
   /**
    * Check if the given subprocess terminated in response to a signal.
    * This is equivalent to the system WIFSIGNALED macro.
-   * It is an error to call this function before [Gio.Subprocess.wait] has
+   * It is an error to call this function before [gio.subprocess.Subprocess.wait] has
    * returned.
    * Returns: %TRUE if the case of termination due to a signal
    */
@@ -362,10 +362,10 @@ class Subprocess : ObjectG, Initable
    * Gets the raw status code of the process, as from waitpid$(LPAREN)$(RPAREN).
    * This value has no particular meaning, but it can be used with the
    * macros defined by the system headers such as WIFEXITED.  It can also
-   * be used with [GLib.Global.spawnCheckWaitStatus].
-   * It is more likely that you want to use [Gio.Subprocess.getIfExited]
-   * followed by [Gio.Subprocess.getExitStatus].
-   * It is an error to call this function before [Gio.Subprocess.wait] has
+   * be used with [glib.global.spawnCheckWaitStatus].
+   * It is more likely that you want to use [gio.subprocess.Subprocess.getIfExited]
+   * followed by [gio.subprocess.Subprocess.getExitStatus].
+   * It is an error to call this function before [gio.subprocess.Subprocess.wait] has
    * returned.
    * Returns: the $(LPAREN)meaningless$(RPAREN) waitpid$(LPAREN)$(RPAREN) exit status from the kernel
    */
@@ -425,7 +425,7 @@ class Subprocess : ObjectG, Initable
    * Checks if the process was "successful".  A process is considered
    * successful if it exited cleanly with an exit status of 0, either by
    * way of the exit$(LPAREN)$(RPAREN) system call or return from main$(LPAREN)$(RPAREN).
-   * It is an error to call this function before [Gio.Subprocess.wait] has
+   * It is an error to call this function before [gio.subprocess.Subprocess.wait] has
    * returned.
    * Returns: %TRUE if the process exited cleanly with a exit status of 0
    */
@@ -440,8 +440,8 @@ class Subprocess : ObjectG, Initable
    * Get the signal number that caused the subprocess to terminate, given
    * that it terminated due to a signal.
    * This is equivalent to the system WTERMSIG macro.
-   * It is an error to call this function before [Gio.Subprocess.wait] and
-   * unless [Gio.Subprocess.getIfSignaled] returned %TRUE.
+   * It is an error to call this function before [gio.subprocess.Subprocess.wait] and
+   * unless [gio.subprocess.Subprocess.getIfSignaled] returned %TRUE.
    * Returns: the signal causing termination
    */
   int getTermSig()
@@ -468,12 +468,12 @@ class Subprocess : ObjectG, Initable
   /**
    * Synchronously wait for the subprocess to terminate.
    * After the process terminates you can query its exit status with
-   * functions such as [Gio.Subprocess.getIfExited] and
-   * [Gio.Subprocess.getExitStatus].
+   * functions such as [gio.subprocess.Subprocess.getIfExited] and
+   * [gio.subprocess.Subprocess.getExitStatus].
    * This function does not fail in the case of the subprocess having
-   * abnormal termination.  See [Gio.Subprocess.waitCheck] for that.
+   * abnormal termination.  See [gio.subprocess.Subprocess.waitCheck] for that.
    * Cancelling cancellable doesn't kill the subprocess.  Call
-   * [Gio.Subprocess.forceExit] if it is desirable.
+   * [gio.subprocess.Subprocess.forceExit] if it is desirable.
    * Params:
    *   cancellable = a #GCancellable
    * Returns: %TRUE on success, %FALSE if cancellable was cancelled
@@ -490,7 +490,7 @@ class Subprocess : ObjectG, Initable
 
   /**
    * Wait for the subprocess to terminate.
-   * This is the asynchronous version of [Gio.Subprocess.wait].
+   * This is the asynchronous version of [gio.subprocess.Subprocess.wait].
    * Params:
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback to call when the operation is complete
@@ -511,7 +511,7 @@ class Subprocess : ObjectG, Initable
   }
 
   /**
-   * Combines [Gio.Subprocess.wait] with [GLib.Global.spawnCheckWaitStatus].
+   * Combines [gio.subprocess.Subprocess.wait] with [glib.global.spawnCheckWaitStatus].
    * Params:
    *   cancellable = a #GCancellable
    * Returns: %TRUE on success, %FALSE if process exited abnormally, or
@@ -528,8 +528,8 @@ class Subprocess : ObjectG, Initable
   }
 
   /**
-   * Combines [Gio.Subprocess.waitAsync] with [GLib.Global.spawnCheckWaitStatus].
-   * This is the asynchronous version of [Gio.Subprocess.waitCheck].
+   * Combines [gio.subprocess.Subprocess.waitAsync] with [glib.global.spawnCheckWaitStatus].
+   * This is the asynchronous version of [gio.subprocess.Subprocess.waitCheck].
    * Params:
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback to call when the operation is complete
@@ -551,7 +551,7 @@ class Subprocess : ObjectG, Initable
 
   /**
    * Collects the result of a previous call to
-   * [Gio.Subprocess.waitCheckAsync].
+   * [gio.subprocess.Subprocess.waitCheckAsync].
    * Params:
    *   result = the #GAsyncResult passed to your #GAsyncReadyCallback
    * Returns: %TRUE if successful, or %FALSE with error set
@@ -568,7 +568,7 @@ class Subprocess : ObjectG, Initable
 
   /**
    * Collects the result of a previous call to
-   * [Gio.Subprocess.waitAsync].
+   * [gio.subprocess.Subprocess.waitAsync].
    * Params:
    *   result = the #GAsyncResult passed to your #GAsyncReadyCallback
    * Returns: %TRUE if successful, or %FALSE with error set

@@ -1,6 +1,6 @@
 module gio.buffered_input_stream;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -18,12 +18,12 @@ import gobject.object;
  * Buffered input stream implements #GFilterInputStream and provides
  * for buffered reads.
  * By default, `GBufferedInputStream`'s buffer size is set at 4 kilobytes.
- * To create a buffered input stream, use [Gio.BufferedInputStream.new_],
- * or [Gio.BufferedInputStream.newSized] to specify the buffer's size at
+ * To create a buffered input stream, use [gio.buffered_input_stream.BufferedInputStream.new_],
+ * or [gio.buffered_input_stream.BufferedInputStream.newSized] to specify the buffer's size at
  * construction.
  * To get the size of a buffer within a buffered input stream, use
- * [Gio.BufferedInputStream.getBufferSize]. To change the size of a
- * buffered input stream's buffer, use [Gio.BufferedInputStream.setBufferSize].
+ * [gio.buffered_input_stream.BufferedInputStream.getBufferSize]. To change the size of a
+ * buffered input stream's buffer, use [gio.buffered_input_stream.BufferedInputStream.setBufferSize].
  * Note that the buffer's size cannot be reduced below the size of the data within the buffer.
  */
 class BufferedInputStream : FilterInputStream, Seekable
@@ -95,7 +95,7 @@ class BufferedInputStream : FilterInputStream, Seekable
    * partial result will be returned, without an error.
    * On error -1 is returned and error is set accordingly.
    * For the asynchronous, non-blocking, version of this function, see
-   * [Gio.BufferedInputStream.fillAsync].
+   * [gio.buffered_input_stream.BufferedInputStream.fillAsync].
    * Params:
    *   count = the number of bytes that will be read from the stream
    *   cancellable = optional #GCancellable object, %NULL to ignore
@@ -115,7 +115,7 @@ class BufferedInputStream : FilterInputStream, Seekable
   /**
    * Reads data into stream's buffer asynchronously, up to count size.
    * io_priority can be used to prioritize reads. For the synchronous
-   * version of this function, see [Gio.BufferedInputStream.fill].
+   * version of this function, see [gio.buffered_input_stream.BufferedInputStream.fill].
    * If count is -1 then the attempted read size is equal to the number
    * of bytes that are required to fill the buffer.
    * Params:

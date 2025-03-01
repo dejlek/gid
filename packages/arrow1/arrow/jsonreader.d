@@ -6,7 +6,7 @@ import arrow.input_stream;
 import arrow.jsonread_options;
 import arrow.table;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

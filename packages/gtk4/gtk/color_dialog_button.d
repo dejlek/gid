@@ -1,7 +1,7 @@
 module gtk.color_dialog_button;
 
 import gdk.rgba;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -17,7 +17,7 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * The `GtkColorDialogButton` is a wrapped around a [Gtk.ColorDialog]
+ * The `GtkColorDialogButton` is a wrapped around a [gtk.color_dialog.ColorDialog]
  * and allows to open a color chooser dialog to change the color.
  * ![An example GtkColorDialogButton](color-button.png)
  * It is suitable widget for selecting a color in a preference dialog.

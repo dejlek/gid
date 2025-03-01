@@ -1,6 +1,6 @@
 module gio.simple_action;
 
-import gid.gid;
+import gid.global;
 import gio.action;
 import gio.action_mixin;
 import gio.c.functions;
@@ -13,8 +13,8 @@ import gobject.object;
 
 /**
  * A `GSimpleAction` is the obvious simple implementation of the
- * [Gio.Action] interface. This is the easiest way to create an action for
- * purposes of adding it to a [Gio.SimpleActionGroup].
+ * [gio.action.Action] interface. This is the easiest way to create an action for
+ * purposes of adding it to a [gio.simple_action_group.SimpleActionGroup].
  */
 class SimpleAction : ObjectG, Action
 {
@@ -39,7 +39,7 @@ class SimpleAction : ObjectG, Action
 
   /**
    * Creates a new action.
-   * The created action is stateless. See [Gio.SimpleAction.newStateful] to create
+   * The created action is stateless. See [gio.simple_action.SimpleAction.newStateful] to create
    * an action that has state.
    * Params:
    *   name = the name of the action
@@ -95,7 +95,7 @@ class SimpleAction : ObjectG, Action
    * This directly updates the 'state' property to the given value.
    * This should only be called by the implementor of the action.  Users
    * of the action should not attempt to directly modify the 'state'
-   * property.  Instead, they should call [Gio.Action.changeState] to
+   * property.  Instead, they should call [gio.action.Action.changeState] to
    * request the change.
    * If the value GVariant is floating, it is consumed.
    * Params:
@@ -108,7 +108,7 @@ class SimpleAction : ObjectG, Action
 
   /**
    * Sets the state hint for the action.
-   * See [Gio.Action.getStateHint] for more information about
+   * See [gio.action.Action.getStateHint] for more information about
    * action state hints.
    * Params:
    *   stateHint = a #GVariant representing the state hint
@@ -165,14 +165,14 @@ class SimpleAction : ObjectG, Action
    * Indicates that the action just received a request to change its
    * state.
    * value will always be of the correct state type, i.e. the type of the
-   * initial state passed to [Gio.SimpleAction.newStateful]. If an incorrect
+   * initial state passed to [gio.simple_action.SimpleAction.newStateful]. If an incorrect
    * type is given when requesting to change the state, this signal is not
    * emitted.
    * If no handler is connected to this signal then the default
-   * behaviour is to call [Gio.SimpleAction.setState] to set the state
+   * behaviour is to call [gio.simple_action.SimpleAction.setState] to set the state
    * to the requested value. If you connect a signal handler then no
    * default action is taken. If the state should change then you must
-   * call [Gio.SimpleAction.setState] from the handler.
+   * call [gio.simple_action.SimpleAction.setState] from the handler.
    * An example of a 'change-state' handler:
    * |[<!-- language\="C" -->
    * static void

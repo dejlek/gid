@@ -5,7 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.numeric_array;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class Int32Array : NumericArray

@@ -1,6 +1,6 @@
 module Vte.global;
 
-import gid.gid;
+import gid.global;
 import gobject.types;
 import vte.c.functions;
 import vte.c.types;
@@ -18,7 +18,7 @@ GType eventContextGetType()
  * Queries whether the legacy encoding encoding is supported.
  * If ICU support is not available, this function always returns %FALSE.
  * Note that UTF-8 is always supported; you can select it by
- * passing %NULL to [Vte.Terminal.setEncoding].
+ * passing %NULL to [vte.terminal.Terminal.setEncoding].
  * Params:
  *   encoding = the name of the legacy encoding
  * Returns: %TRUE iff the legacy encoding encoding is supported
@@ -35,11 +35,11 @@ bool getEncodingSupported(string encoding)
  * Gets the list of supported legacy encodings.
  * If ICU support is not available, this returns an empty vector.
  * Note that UTF-8 is always supported; you can select it by
- * passing %NULL to [Vte.Terminal.setEncoding].
+ * passing %NULL to [vte.terminal.Terminal.setEncoding].
  * Params:
  *   includeAliases = whether to include alias names
  * Returns: the list of supported encodings; free with
- *   [GLib.Global.strfreev]
+ *   [glib.global.strfreev]
  */
 string[] getEncodings(bool includeAliases)
 {

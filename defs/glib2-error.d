@@ -1,3 +1,4 @@
+//!class ErrorG pre
 //!kind ErrorG Wrap
 //!inhibit init funcs
 

@@ -1,7 +1,7 @@
 module gtk.actionable;
 
 public import gtk.actionable_iface_proxy;
-import gid.gid;
+import gid.global;
 import glib.variant;
 import gtk.c.functions;
 import gtk.c.types;
@@ -17,7 +17,7 @@ import gtk.types;
  * the widgets ancestors. Most commonly, these will be the actions with
  * the “win.” or “app.” prefix that are associated with the
  * `GtkApplicationWindow` or `GtkApplication`, but other action groups that
- * are added with [Gtk.Widget.insertActionGroup] will be consulted
+ * are added with [gtk.widget.Widget.insertActionGroup] will be consulted
  * as well.
  */
 interface Actionable
@@ -50,7 +50,7 @@ interface Actionable
    * located$(RPAREN) within the hierarchy of a `GtkApplicationWindow`.
    * Names are of the form “win.save” or “app.quit” for actions on the
    * containing classApplicationWindow or its associated classApplication,
-   * respectively. This is the same form used for actions in the [Gio.Menu]
+   * respectively. This is the same form used for actions in the [gio.menu.Menu]
    * associated with the window.
    * Params:
    *   actionName = an action name
@@ -64,7 +64,7 @@ interface Actionable
    * to activation of the action associated with the `GtkActionable` widget.
    * Second, it is used to determine if the widget should be rendered as
    * “active” — the widget is active if the state is equal to the given target.
-   * Consider the example of associating a set of buttons with a [Gio.Action]
+   * Consider the example of associating a set of buttons with a [gio.action.Action]
    * with string state in a typical “radio button” situation. Each button
    * will be associated with the same action, but with a different target
    * value for that action. Clicking on a particular button will activate
@@ -74,7 +74,7 @@ interface Actionable
    * be rendered as active $(LPAREN)and the other buttons, with different targets,
    * rendered inactive$(RPAREN).
    * Params:
-   *   targetValue = a [GLib.VariantG] to set as the target value
+   *   targetValue = a [glib.variant.VariantG] to set as the target value
    */
   void setActionTargetValue(VariantG targetValue);
 
@@ -82,7 +82,7 @@ interface Actionable
    * Sets the action-name and associated string target value of an
    * actionable widget.
    * detailed_action_name is a string in the format accepted by
-   * [Gio.Action.parseDetailedName].
+   * [gio.action.Action.parseDetailedName].
    * Params:
    *   detailedActionName = the detailed action name
    */

@@ -1,7 +1,7 @@
 module gio.list_model_mixin;
 
 public import gio.list_model_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
@@ -11,12 +11,12 @@ public import gobject.types;
 
 /**
  * `GListModel` is an interface that represents a mutable list of
- * [GObject.ObjectG]. Its main intention is as a model for various widgets
+ * [gobject.object.ObjectG]. Its main intention is as a model for various widgets
  * in user interfaces, such as list views, but it can also be used as a
  * convenient method of returning lists of data, with support for
  * updates.
  * Each object in the list may also report changes in itself via some
- * mechanism $(LPAREN)normally the [GObject.ObjectG.notify] signal$(RPAREN).  Taken
+ * mechanism $(LPAREN)normally the [gobject.object.ObjectG.notify] signal$(RPAREN).  Taken
  * together with the signal@Gio.ListModel::items-changed signal, this provides
  * for a list that can change its membership, and in which the members can
  * change their individual properties.
@@ -29,14 +29,14 @@ public import gobject.types;
  * then you need to connect signals to the objects that you are
  * interested in.
  * All items in a `GListModel` are of $(LPAREN)or derived from$(RPAREN) the same type.
- * [Gio.ListModel.getItemType] returns that type.  The type may be an
+ * [gio.list_model.ListModel.getItemType] returns that type.  The type may be an
  * interface, in which case all objects in the list must implement it.
  * The semantics are close to that of an array:
- * [Gio.ListModel.getNItems] returns the number of items in the list
- * and [Gio.ListModel.getItem] returns an item at a (0-based) position.
+ * [gio.list_model.ListModel.getNItems] returns the number of items in the list
+ * and [gio.list_model.ListModel.getItem] returns an item at a (0-based) position.
  * In order to allow implementations to calculate the list length lazily,
  * you can also iterate over items: starting from 0, repeatedly call
- * [Gio.ListModel.getItem] until it returns `NULL`.
+ * [gio.list_model.ListModel.getItem] until it returns `NULL`.
  * An implementation may create objects lazily, but must take care to
  * return the same object for a given position until all references to
  * it are gone.
@@ -48,14 +48,14 @@ public import gobject.types;
  * thread in which it is appropriate to use it depends on the particular
  * implementation, but typically it will be from the thread that owns
  * the thread-default main context $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN) in effect at the time that the
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) in effect at the time that the
  * model was created.
  * Over time, it has established itself as good practice for list model
  * implementations to provide properties `item-type` and `n-items` to
  * ease working with them. While it is not required, it is recommended
  * that implementations provide these two properties. They should return
- * the values of [Gio.ListModel.getItemType] and
- * [Gio.ListModel.getNItems] respectively and be defined as such:
+ * the values of [gio.list_model.ListModel.getItemType] and
+ * [gio.list_model.ListModel.getNItems] respectively and be defined as such:
  * ```c
  * properties[PROP_ITEM_TYPE] \=
  * g_param_spec_gtype $(LPAREN)"item-type", NULL, NULL, G_TYPE_OBJECT,
@@ -94,7 +94,7 @@ template ListModelT()
 
   /**
    * Gets the type of the items in list.
-   * All items returned from [Gio.ListModel.getItem] are of the type
+   * All items returned from [gio.list_model.ListModel.getItem] are of the type
    * returned by this function, or a subtype, or if the type is an
    * interface, they are an implementation of that interface.
    * The item type of a #GListModel can not change during the life of the
@@ -112,7 +112,7 @@ template ListModelT()
    * Gets the number of items in list.
    * Depending on the model implementation, calling this function may be
    * less efficient than iterating the list with increasing values for
-   * position until [Gio.ListModel.getItem] returns %NULL.
+   * position until [gio.list_model.ListModel.getItem] returns %NULL.
    * Returns: the number of items in list.
    */
   override uint getNItems()
@@ -129,8 +129,8 @@ template ListModelT()
    * %NULL is never returned for an index that is smaller than the length
    * of the list.
    * This function is meant to be used by language bindings in place
-   * of [Gio.ListModel.getItem].
-   * See also: [Gio.ListModel.getNItems]
+   * of [gio.list_model.ListModel.getItem].
+   * See also: [gio.list_model.ListModel.getNItems]
    * Params:
    *   position = the position of the item to fetch
    * Returns: the object at position.

@@ -1,6 +1,6 @@
 module gtk.button;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -32,9 +32,9 @@ import gtk.widget;
  * Other style classes that are commonly used with `GtkButton` include
  * .suggested-action and .destructive-action. In special cases, buttons
  * can be made round by adding the .circular style class.
- * Button-like widgets like [Gtk.ToggleButton], [Gtk.MenuButton],
- * [Gtk.VolumeButton], [Gtk.LockButton], [Gtk.ColorButton]
- * or [Gtk.FontButton] use style classes such as .toggle, .popup, .scale,
+ * Button-like widgets like [gtk.toggle_button.ToggleButton], [gtk.menu_button.MenuButton],
+ * [gtk.volume_button.VolumeButton], [gtk.lock_button.LockButton], [gtk.color_button.ColorButton]
+ * or [gtk.font_button.FontButton] use style classes such as .toggle, .popup, .scale,
  * .lock, .color on the button node to differentiate themselves from a plain
  * `GtkButton`.
  * # Accessibility
@@ -63,7 +63,7 @@ class Button : Widget, Actionable
 
   /**
    * Creates a new `GtkButton` widget.
-   * To add a child widget to the button, use [Gtk.Button.setChild].
+   * To add a child widget to the button, use [gtk.button.Button.setChild].
    * Returns: The newly created `GtkButton` widget.
    */
   this()
@@ -164,10 +164,10 @@ class Button : Widget, Actionable
 
   /**
    * Returns the icon name of the button.
-   * If the icon name has not been set with [Gtk.Button.setIconName]
+   * If the icon name has not been set with [gtk.button.Button.setIconName]
    * the return value will be %NULL. This will be the case if you create
-   * an empty button with [Gtk.Button.new_] to use as a container.
-   * Returns: The icon name set via [Gtk.Button.setIconName]
+   * an empty button with [gtk.button.Button.new_] to use as a container.
+   * Returns: The icon name set via [gtk.button.Button.setIconName]
    */
   string getIconName()
   {
@@ -179,9 +179,9 @@ class Button : Widget, Actionable
 
   /**
    * Fetches the text from the label of the button.
-   * If the label text has not been set with [Gtk.Button.setLabel]
+   * If the label text has not been set with [gtk.button.Button.setLabel]
    * the return value will be %NULL. This will be the case if you create
-   * an empty button with [Gtk.Button.new_] to use as a container.
+   * an empty button with [gtk.button.Button.new_] to use as a container.
    * Returns: The text of the label widget. This string is owned
    *   by the widget and must not be modified or freed.
    */
@@ -195,7 +195,7 @@ class Button : Widget, Actionable
 
   /**
    * gets whether underlines are interpreted as mnemonics.
-   * See [Gtk.Button.setUseUnderline].
+   * See [gtk.button.Button.setUseUnderline].
    * Returns: %TRUE if an embedded underline in the button label
    *   indicates the mnemonic accelerator keys.
    */
@@ -285,7 +285,7 @@ class Button : Widget, Actionable
   /**
    * Emitted to animate press then release.
    * This is an action signal. Applications should never connect
-   * to this signal, but use the [Gtk.Button.clicked] signal.
+   * to this signal, but use the [gtk.button.Button.clicked] signal.
    * The default bindings for this signal are all forms of the
    * <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
    *   button = the instance the signal is connected to

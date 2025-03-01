@@ -1,6 +1,6 @@
 module gsk.color_matrix_node;
 
-import gid.gid;
+import gid.global;
 import graphene.matrix;
 import graphene.vec4;
 import gsk.c.functions;

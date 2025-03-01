@@ -1,7 +1,7 @@
 module gtksource.style_scheme_chooser;
 
 public import gtksource.style_scheme_chooser_iface_proxy;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;

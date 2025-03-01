@@ -1,6 +1,6 @@
 module glib.relation;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -12,25 +12,25 @@ import glib.types;
  * fields. Records are not ordered, so it is not possible to find the
  * record at a particular index.
  * Note that `GRelation` tables are currently limited to 2 fields.
- * To create a `GRelation`, use [GLib.Relation.new_].
- * To specify which fields should be indexed, use [GLib.Relation.index].
+ * To create a `GRelation`, use [glib.relation.Relation.new_].
+ * To specify which fields should be indexed, use [glib.relation.Relation.index].
  * Note that this must be called before any tuples are added to the
  * `GRelation`.
- * To add records to a `GRelation` use [GLib.Relation.insert].
+ * To add records to a `GRelation` use [glib.relation.Relation.insert].
  * To determine if a given record appears in a `GRelation`, use
- * [GLib.Relation.exists]. Note that fields are compared directly, so
+ * [glib.relation.Relation.exists]. Note that fields are compared directly, so
  * pointers must point to the exact same position $(LPAREN)i.e. different
  * copies of the same string will not match.$(RPAREN)
  * To count the number of records which have a particular value in a
- * given field, use [GLib.Relation.count].
+ * given field, use [glib.relation.Relation.count].
  * To get all the records which have a particular value in a given
- * field, use [GLib.Relation.select]. To access fields of the resulting
- * records, use [GLib.Tuples.index]. To free the resulting records use
- * [GLib.Tuples.destroy].
+ * field, use [glib.relation.Relation.select]. To access fields of the resulting
+ * records, use [glib.tuples.Tuples.index]. To free the resulting records use
+ * [glib.tuples.Tuples.destroy].
  * To delete all records which have a particular value in a given
- * field, use [GLib.Relation.delete_].
- * To destroy the `GRelation`, use [GLib.Relation.destroy].
- * To help debug `GRelation` objects, use [GLib.Relation.print].
+ * field, use [glib.relation.Relation.delete_].
+ * To destroy the `GRelation`, use [glib.relation.Relation.destroy].
+ * To help debug `GRelation` objects, use [glib.relation.Relation.print].
  * `GRelation` has been marked as deprecated, since this API has never
  * been fully implemented, is not very actively maintained and rarely
  * used.

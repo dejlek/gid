@@ -3,7 +3,7 @@ module cairo.font_options;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
@@ -13,12 +13,12 @@ import gobject.boxed;
  * accessed using functions named
  * <function>cairo_font_options_set_<emphasis>feature_name</emphasis>$(LPAREN)$(RPAREN)</function> and
  * <function>cairo_font_options_get_<emphasis>feature_name</emphasis>$(LPAREN)$(RPAREN)</function>, like
- * [cairo.FontOptions.setAntialias] and
- * [cairo.FontOptions.getAntialias].
+ * [cairo.font_options.FontOptions.setAntialias] and
+ * [cairo.font_options.FontOptions.getAntialias].
  * New features may be added to a #cairo_font_options_t in the
- * future.  For this reason, [cairo.FontOptions.copy],
- * [cairo.FontOptions.equal], [cairo.FontOptions.merge], and
- * [cairo.FontOptions.hash] should be used to copy, check
+ * future.  For this reason, [cairo.font_options.FontOptions.copy],
+ * [cairo.font_options.FontOptions.equal], [cairo.font_options.FontOptions.merge], and
+ * [cairo.font_options.FontOptions.hash] should be used to copy, check
  * for equality, merge, or compute a hash value of
  * #cairo_font_options_t objects.
  */
@@ -50,10 +50,10 @@ class FontOptions : Boxed
    * Allocates a new font options object copying the option values from
    * original.
    * Returns: a newly allocated #cairo_font_options_t. Free with
-   *   [cairo.FontOptions.destroy]. This function always returns a
+   *   [cairo.font_options.FontOptions.destroy]. This function always returns a
    *   valid pointer; if memory cannot be allocated, then a special
    *   error object is returned where all operations on the object do nothing.
-   *   You can check for this with [cairo.FontOptions.status].
+   *   You can check for this with [cairo.font_options.FontOptions.status].
    */
   FontOptions copy()
   {
@@ -175,13 +175,13 @@ class FontOptions : Boxed
 
   /**
    * Gets the OpenType font variations for the font options object.
-   * See [cairo.FontOptions.setVariations] for details about the
+   * See [cairo.font_options.FontOptions.setVariations] for details about the
    * string format.
    * Returns: the font variations for the font options object. The
    *   returned string belongs to the options and must not be modified.
    *   It is valid until either the font options object is destroyed or
    *   the font variations in this object is modified with
-   *   [cairo.FontOptions.setVariations].
+   *   [cairo.font_options.FontOptions.setVariations].
    */
   string getVariations()
   {
@@ -248,7 +248,7 @@ class FontOptions : Boxed
    * palettes. The default color palette index is %CAIRO_COLOR_PALETTE_DEFAULT.
    * If palette_index is invalid, the default palette is used.
    * Individual colors within the palette may be overriden with
-   * [cairo.FontOptions.setCustomPaletteColor].
+   * [cairo.font_options.FontOptions.setCustomPaletteColor].
    * Params:
    *   paletteIndex = the palette index in the CPAL table
    */
@@ -261,7 +261,7 @@ class FontOptions : Boxed
    * Sets a custom palette color for the font options object. This
    * overrides the palette color at the specified color index. This override is
    * independent of the selected palette index and will remain in place
-   * even if [cairo.FontOptions.setColorPalette] is called to change
+   * even if [cairo.font_options.FontOptions.setColorPalette] is called to change
    * the palette index.
    * It is only possible to override color indexes already in the font
    * palette.

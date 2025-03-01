@@ -1,6 +1,6 @@
 module gtksource.style_scheme_chooser_widget;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -20,9 +20,9 @@ import gtksource.types;
  * style scheme. By default, the chooser presents a predefined list
  * of style schemes.
  * To change the initially selected style scheme,
- * use [GtkSource.StyleSchemeChooser.setStyleScheme].
+ * use [gtksource.style_scheme_chooser.StyleSchemeChooser.setStyleScheme].
  * To get the selected style scheme
- * use [GtkSource.StyleSchemeChooser.getStyleScheme].
+ * use [gtksource.style_scheme_chooser.StyleSchemeChooser.getStyleScheme].
  */
 class StyleSchemeChooserWidget : Widget, StyleSchemeChooser
 {

@@ -1,7 +1,7 @@
 module gio.desktop_app_info_lookup_mixin;
 
 public import gio.desktop_app_info_lookup_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.app_info;
 public import gio.app_info_mixin;
 public import gio.c.functions;
@@ -24,9 +24,9 @@ template DesktopAppInfoLookupT()
    * using this URI scheme for a particular #GDesktopAppInfoLookup
    * implementation.
    * The #GDesktopAppInfoLookup interface and this function is used
-   * to implement [Gio.AppInfo.getDefaultForUriScheme] backends
+   * to implement [gio.app_info.AppInfo.getDefaultForUriScheme] backends
    * in a GIO module. There is no reason for applications to use it
-   * directly. Applications should use [Gio.AppInfo.getDefaultForUriScheme].
+   * directly. Applications should use [gio.app_info.AppInfo.getDefaultForUriScheme].
    * Params:
    *   uriScheme = a string containing a URI scheme.
    * Returns: #GAppInfo for given uri_scheme or

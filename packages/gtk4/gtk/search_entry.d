@@ -1,6 +1,6 @@
 module gtk.search_entry;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -29,17 +29,17 @@ import gtk.widget;
  * not react to every change in the entry text immediately, but
  * only after a short delay. To support this, `GtkSearchEntry`
  * emits the signal@Gtk.SearchEntry::search-changed signal which
- * can be used instead of the [Gtk.Editable.changed] signal.
+ * can be used instead of the [gtk.editable.Editable.changed] signal.
  * The signal@Gtk.SearchEntry::previous-match,
  * signal@Gtk.SearchEntry::next-match and
  * signal@Gtk.SearchEntry::stop-search signals can be used to
  * implement moving between search results and ending the search.
  * Often, `GtkSearchEntry` will be fed events by means of being
- * placed inside a [Gtk.SearchBar]. If that is not the case,
- * you can use [Gtk.SearchEntry.setKeyCaptureWidget] to
+ * placed inside a [gtk.search_bar.SearchBar]. If that is not the case,
+ * you can use [gtk.search_entry.SearchEntry.setKeyCaptureWidget] to
  * let it capture key input from another widget.
  * `GtkSearchEntry` provides only minimal API and should be used with
- * the [Gtk.Editable] API.
+ * the [gtk.editable.Editable] API.
  * ## CSS Nodes
  * ```
  * entry.search
@@ -168,7 +168,7 @@ class SearchEntry : Widget, Editable
    * Key events are consumed by the search entry to start or
    * continue a search.
    * If the entry is part of a `GtkSearchBar`, it is preferable
-   * to call [Gtk.SearchBar.setKeyCaptureWidget] instead,
+   * to call [gtk.search_bar.SearchBar.setKeyCaptureWidget] instead,
    * which will reveal the entry in addition to triggering the
    * search entry.
    * Note that despite the name of this function, the events
@@ -176,7 +176,7 @@ class SearchEntry : Widget, Editable
    * editable child widgets of widget will receive text input
    * before it gets captured. If that is not desired, you can
    * capture and forward the events yourself with
-   * [Gtk.EventControllerKey.forward].
+   * [gtk.event_controller_key.EventControllerKey.forward].
    * Params:
    *   widget = a `GtkWidget`
    */

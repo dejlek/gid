@@ -1,6 +1,6 @@
 module gio.data_output_stream;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -12,7 +12,7 @@ import gio.types;
 import glib.error;
 
 /**
- * Data output stream implements [Gio.OutputStream] and includes functions
+ * Data output stream implements [gio.output_stream.OutputStream] and includes functions
  * for writing data directly to an output stream.
  */
 class DataOutputStream : FilterOutputStream, Seekable

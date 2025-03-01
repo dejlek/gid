@@ -1,6 +1,6 @@
 module gtk.size_group;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -16,7 +16,7 @@ import gtk.widget;
  * In detail, the size requested for each widget in a `GtkSizeGroup` is
  * the maximum of the sizes that would have been requested for each
  * widget in the size group if they were not in the size group. The mode
- * of the size group $(LPAREN)see [Gtk.SizeGroup.setMode]$(RPAREN) determines whether
+ * of the size group $(LPAREN)see [gtk.size_group.SizeGroup.setMode]$(RPAREN) determines whether
  * this applies to the horizontal size, the vertical size, or both sizes.
  * Note that size groups only affect the amount of space requested, not
  * the size that the widgets finally receive. If you want the widgets in
@@ -24,7 +24,7 @@ import gtk.widget;
  * such a way that they get the size they request and not more.
  * `GtkSizeGroup` objects are referenced by each widget in the size group,
  * so once you have added all widgets to a `GtkSizeGroup`, you can drop
- * the initial reference to the size group with [GObject.ObjectG.unref]. If the
+ * the initial reference to the size group with [gobject.object.ObjectG.unref]. If the
  * widgets in the size group are subsequently destroyed, then they will
  * be removed from the size group and drop their references on the size
  * group; when all widgets have been removed, the size group will be
@@ -106,7 +106,7 @@ class SizeGroup : ObjectG, Buildable
    * and the requisition of the other widgets in the size group.
    * Whether this applies horizontally, vertically, or in both directions
    * depends on the mode of the size group.
-   * See [Gtk.SizeGroup.setMode].
+   * See [gtk.size_group.SizeGroup.setMode].
    * When the widget is destroyed or no longer referenced elsewhere, it
    * will be removed from the size group.
    * Params:

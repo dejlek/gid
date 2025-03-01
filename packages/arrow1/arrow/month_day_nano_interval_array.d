@@ -6,7 +6,7 @@ import arrow.c.types;
 import arrow.month_day_nano;
 import arrow.primitive_array;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class MonthDayNanoIntervalArray : PrimitiveArray

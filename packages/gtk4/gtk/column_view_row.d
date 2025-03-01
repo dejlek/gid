@@ -1,13 +1,13 @@
 module gtk.column_view_row;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
 /**
- * `GtkColumnViewRow` is used by [Gtk.ColumnView] to allow configuring
+ * `GtkColumnViewRow` is used by [gtk.column_view.ColumnView] to allow configuring
  * how rows are displayed.
  * It is not used to set the widgets displayed in the individual cells. For that
  * see method@GtkColumnViewColumn.set_factory and class@GtkColumnViewCell.
@@ -57,7 +57,7 @@ class ColumnViewRow : ObjectG
 
   /**
    * Checks if the row has been set to be activatable via
-   * [Gtk.ColumnViewRow.setActivatable].
+   * [gtk.column_view_row.ColumnViewRow.setActivatable].
    * Returns: %TRUE if the row is activatable
    */
   bool getActivatable()
@@ -69,7 +69,7 @@ class ColumnViewRow : ObjectG
 
   /**
    * Checks if a row item has been set to be focusable via
-   * [Gtk.ColumnViewRow.setFocusable].
+   * [gtk.column_view_row.ColumnViewRow.setFocusable].
    * Returns: %TRUE if the row is focusable
    */
   bool getFocusable()
@@ -106,8 +106,8 @@ class ColumnViewRow : ObjectG
 
   /**
    * Checks if the row has been set to be selectable via
-   * [Gtk.ColumnViewRow.setSelectable].
-   * Do not confuse this function with [Gtk.ColumnViewRow.getSelected].
+   * [gtk.column_view_row.ColumnViewRow.setSelectable].
+   * Do not confuse this function with [gtk.column_view_row.ColumnViewRow.getSelected].
    * Returns: %TRUE if the row is selectable
    */
   bool getSelectable()
@@ -157,9 +157,9 @@ class ColumnViewRow : ObjectG
   /**
    * Sets self to be activatable.
    * If a row is activatable, double-clicking on the row, using
-   * the Return key or calling [Gtk.Widget.activate] will activate
+   * the Return key or calling [gtk.widget.Widget.activate] will activate
    * the row. Activating instructs the containing columnview to
-   * emit the [Gtk.ColumnView.activate] signal.
+   * emit the [gtk.column_view.ColumnView.activate] signal.
    * By default, row are activatable.
    * Params:
    *   activatable = if the row should be activatable
@@ -172,7 +172,7 @@ class ColumnViewRow : ObjectG
   /**
    * Sets self to be focusable.
    * If a row is focusable, it can be focused using the keyboard.
-   * This works similar to [Gtk.Widget.setFocusable].
+   * This works similar to [gtk.widget.Widget.setFocusable].
    * Note that if row are not focusable, the contents of cells can still be focused if
    * they are focusable.
    * By default, rows are focusable.

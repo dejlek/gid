@@ -1,6 +1,6 @@
 module glib.thread;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -9,12 +9,12 @@ import gobject.boxed;
 
 /**
  * The #GThread struct represents a running thread. This struct
- * is returned by [GLib.Thread.new_] or [GLib.Thread.tryNew]. You can
+ * is returned by [glib.thread.Thread.new_] or [glib.thread.Thread.tryNew]. You can
  * obtain the #GThread struct representing the current thread by
- * calling [GLib.Thread.self].
- * GThread is refcounted, see [GLib.Thread.ref_] and [GLib.Thread.unref].
+ * calling [glib.thread.Thread.self].
+ * GThread is refcounted, see [glib.thread.Thread.ref_] and [glib.thread.Thread.unref].
  * The thread represented by it holds a reference while it is running,
- * and [GLib.Thread.join] consumes the reference that it is given, so
+ * and [glib.thread.Thread.join] consumes the reference that it is given, so
  * it is normally not necessary to manage GThread references
  * explicitly.
  * The structure is opaque -- none of its fields may be directly
@@ -47,19 +47,19 @@ class Thread : Boxed
   /**
    * This function creates a new thread. The new thread starts by invoking
    * func with the argument data. The thread will run until func returns
-   * or until [GLib.Thread.exit] is called from the new thread. The return value
+   * or until [glib.thread.Thread.exit] is called from the new thread. The return value
    * of func becomes the return value of the thread, which can be obtained
-   * with [GLib.Thread.join].
+   * with [glib.thread.Thread.join].
    * The name can be useful for discriminating threads in a debugger.
    * It is not used for other purposes and does not have to be unique.
    * Some systems restrict the length of name to 16 bytes.
    * If the thread can not be created the program aborts. See
-   * [GLib.Thread.tryNew] if you want to attempt to deal with failures.
+   * [glib.thread.Thread.tryNew] if you want to attempt to deal with failures.
    * If you are using threads to offload $(LPAREN)potentially many$(RPAREN) short-lived tasks,
    * #GThreadPool may be more appropriate than manually spawning and tracking
    * multiple #GThreads.
-   * To free the struct returned by this function, use [GLib.Thread.unref].
-   * Note that [GLib.Thread.join] implicitly unrefs the #GThread as well.
+   * To free the struct returned by this function, use [glib.thread.Thread.unref].
+   * Note that [glib.thread.Thread.join] implicitly unrefs the #GThread as well.
    * New threads by default inherit their scheduler policy $(LPAREN)POSIX$(RPAREN) or thread
    * priority $(LPAREN)Windows$(RPAREN) of the thread creating the new thread.
    * This behaviour changed in GLib 2.64: before threads on Windows were not
@@ -91,7 +91,7 @@ class Thread : Boxed
   }
 
   /**
-   * This function is the same as [GLib.Thread.new_] except that
+   * This function is the same as [glib.thread.Thread.new_] except that
    * it allows for the possibility of failure.
    * If a thread can not be created $(LPAREN)due to resource limits$(RPAREN),
    * error is set and %NULL is returned.
@@ -125,18 +125,18 @@ class Thread : Boxed
 
   /**
    * Waits until thread finishes, i.e. the function func, as
-   * given to [GLib.Thread.new_], returns or [GLib.Thread.exit] is called.
-   * If thread has already terminated, then [GLib.Thread.join]
+   * given to [glib.thread.Thread.new_], returns or [glib.thread.Thread.exit] is called.
+   * If thread has already terminated, then [glib.thread.Thread.join]
    * returns immediately.
-   * Any thread can wait for any other thread by calling [GLib.Thread.join],
-   * not just its 'creator'. Calling [GLib.Thread.join] from multiple threads
+   * Any thread can wait for any other thread by calling [glib.thread.Thread.join],
+   * not just its 'creator'. Calling [glib.thread.Thread.join] from multiple threads
    * for the same thread leads to undefined behaviour.
-   * The value returned by func or given to [GLib.Thread.exit] is
+   * The value returned by func or given to [glib.thread.Thread.exit] is
    * returned by this function.
-   * [GLib.Thread.join] consumes the reference to the passed-in thread.
+   * [glib.thread.Thread.join] consumes the reference to the passed-in thread.
    * This will usually cause the #GThread struct and associated resources
-   * to be freed. Use [GLib.Thread.ref_] to obtain an extra reference if you
-   * want to keep the GThread alive beyond the [GLib.Thread.join] call.
+   * to be freed. Use [glib.thread.Thread.ref_] to obtain an extra reference if you
+   * want to keep the GThread alive beyond the [glib.thread.Thread.join] call.
    * Returns: the return value of the thread
    */
   void* join()
@@ -154,13 +154,13 @@ class Thread : Boxed
 
   /**
    * Terminates the current thread.
-   * If another thread is waiting for us using [GLib.Thread.join] then the
+   * If another thread is waiting for us using [glib.thread.Thread.join] then the
    * waiting thread will be woken up and get retval as the return value
-   * of [GLib.Thread.join].
-   * Calling [GLib.Thread.exit] with a parameter retval is equivalent to
-   * returning retval from the function func, as given to [GLib.Thread.new_].
-   * You must only call [GLib.Thread.exit] from a thread that you created
-   * yourself with [GLib.Thread.new_] or related APIs. You must not call
+   * of [glib.thread.Thread.join].
+   * Calling [glib.thread.Thread.exit] with a parameter retval is equivalent to
+   * returning retval from the function func, as given to [glib.thread.Thread.new_].
+   * You must only call [glib.thread.Thread.exit] from a thread that you created
+   * yourself with [glib.thread.Thread.new_] or related APIs. You must not call
    * this function from a thread created with another threading library
    * or or from within a #GThreadPool.
    * Params:
@@ -179,7 +179,7 @@ class Thread : Boxed
    * were not created by GLib $(LPAREN)i.e. those created by other threading
    * APIs$(RPAREN). This may be useful for thread identification purposes
    * $(LPAREN)i.e. comparisons$(RPAREN) but you must not use GLib functions $(LPAREN)such
-   * as [GLib.Thread.join]$(RPAREN) on these threads.
+   * as [glib.thread.Thread.join]$(RPAREN) on these threads.
    * Returns: the #GThread representing the current thread
    */
   static Thread self()

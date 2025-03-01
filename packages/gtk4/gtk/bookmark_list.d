@@ -1,6 +1,6 @@
 module gtk.bookmark_list;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;

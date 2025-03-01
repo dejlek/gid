@@ -5,7 +5,7 @@ import atk.c.types;
 import atk.object;
 import atk.registry;
 import atk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 
@@ -19,7 +19,7 @@ import gobject.object;
  *   to be implemented by ATK itself. As #AtkObject::focus-event was
  *   deprecated in favor of a #AtkObject::state-change signal, in order
  *   to notify a focus change on your implementation, you can use
- *   [Atk.ObjectAtk.notifyStateChange] instead.
+ *   [atk.object.ObjectAtk.notifyStateChange] instead.
  */
 void focusTrackerNotify(ObjectAtk object)
 {
@@ -43,7 +43,7 @@ uint getBinaryAge()
  * registry.
  * Note: For most toolkit maintainers, this will be the correct
  * registry for registering new #AtkObject factories. Following
- * a call to this function, maintainers may call [Atk.Registry.setFactoryType]
+ * a call to this function, maintainers may call [atk.registry.Registry.setFactoryType]
  * to associate an #AtkObjectFactory subclass with the GType of objects
  * for whom accessibility information will be provided.
  * Returns: a default implementation of the

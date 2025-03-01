@@ -3,7 +3,7 @@ module gtk.media_stream;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.surface;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 import gtk.c.functions;
@@ -13,19 +13,19 @@ import gtk.types;
 /**
  * `GtkMediaStream` is the integration point for media playback inside GTK.
  * GTK provides an implementation of the `GtkMediaStream` interface that
- * is called [Gtk.MediaFile].
+ * is called [gtk.media_file.MediaFile].
  * Apart from application-facing API for stream playback, `GtkMediaStream`
  * has a number of APIs that are only useful for implementations and should
  * not be used in applications:
- * [Gtk.MediaStream.prepared],
- * [Gtk.MediaStream.unprepared],
- * [Gtk.MediaStream.update],
- * [Gtk.MediaStream.ended],
- * [Gtk.MediaStream.seekSuccess],
- * [Gtk.MediaStream.seekFailed],
- * [Gtk.MediaStream.gerror],
- * [Gtk.MediaStream.error],
- * [Gtk.MediaStream.errorValist].
+ * [gtk.media_stream.MediaStream.prepared],
+ * [gtk.media_stream.MediaStream.unprepared],
+ * [gtk.media_stream.MediaStream.update],
+ * [gtk.media_stream.MediaStream.ended],
+ * [gtk.media_stream.MediaStream.seekSuccess],
+ * [gtk.media_stream.MediaStream.seekFailed],
+ * [gtk.media_stream.MediaStream.gerror],
+ * [gtk.media_stream.MediaStream.error],
+ * [gtk.media_stream.MediaStream.errorValist].
  */
 class MediaStream : ObjectG, Paintable
 {
@@ -51,13 +51,13 @@ class MediaStream : ObjectG, Paintable
   /**
    * Sets self into an error state.
    * This will pause the stream $(LPAREN)you can check for an error
-   * via [Gtk.MediaStream.getError] in your
+   * via [gtk.media_stream.MediaStream.getError] in your
    * GtkMediaStream.pause$(LPAREN)$(RPAREN) implementation$(RPAREN), abort pending
    * seeks and mark the stream as prepared.
    * if the stream is already in an error state, this call
    * will be ignored and the existing error will be retained.
    * To unset an error, the stream must be reset via a call to
-   * [Gtk.MediaStream.unprepared].
+   * [gtk.media_stream.MediaStream.unprepared].
    * Params:
    *   error = the `GError` to set
    */
@@ -95,12 +95,12 @@ class MediaStream : ObjectG, Paintable
    * Any type of error can be reported here depending on the
    * implementation of the media stream.
    * A media stream in an error cannot be operated on, calls
-   * like [Gtk.MediaStream.play] or
-   * [Gtk.MediaStream.seek] will not have any effect.
+   * like [gtk.media_stream.MediaStream.play] or
+   * [gtk.media_stream.MediaStream.seek] will not have any effect.
    * `GtkMediaStream` itself does not provide a way to unset
    * an error, but implementations may provide options. For example,
-   * a [Gtk.MediaFile] will unset errors when a new source is
-   * set, e.g. with [Gtk.MediaFile.setFile].
+   * a [gtk.media_file.MediaFile] will unset errors when a new source is
+   * set, e.g. with [gtk.media_file.MediaFile.setFile].
    * Returns: %NULL if not in an
    *   error state or the `GError` of the stream
    */
@@ -114,7 +114,7 @@ class MediaStream : ObjectG, Paintable
 
   /**
    * Returns whether the stream is set to loop.
-   * See [Gtk.MediaStream.setLoop] for details.
+   * See [gtk.media_stream.MediaStream.setLoop] for details.
    * Returns: %TRUE if the stream should loop
    */
   bool getLoop()
@@ -126,7 +126,7 @@ class MediaStream : ObjectG, Paintable
 
   /**
    * Returns whether the audio for the stream is muted.
-   * See [Gtk.MediaStream.setMuted] for details.
+   * See [gtk.media_stream.MediaStream.setMuted] for details.
    * Returns: %TRUE if the stream is muted
    */
   bool getMuted()
@@ -160,7 +160,7 @@ class MediaStream : ObjectG, Paintable
 
   /**
    * Returns the volume of the audio for the stream.
-   * See [Gtk.MediaStream.setVolume] for details.
+   * See [gtk.media_stream.MediaStream.setVolume] for details.
    * Returns: volume of the stream from 0.0 to 1.0
    */
   double getVolume()
@@ -210,7 +210,7 @@ class MediaStream : ObjectG, Paintable
    * this function returns %TRUE. However, if this function returns
    * %FALSE, streams are guaranteed to not be seekable and user interfaces
    * may hide controls that allow seeking.
-   * It is allowed to call [Gtk.MediaStream.seek] on a non-seekable
+   * It is allowed to call [gtk.media_stream.MediaStream.seek] on a non-seekable
    * stream, though it will not do anything.
    * Returns: %TRUE if the stream may support seeking
    */
@@ -256,12 +256,12 @@ class MediaStream : ObjectG, Paintable
    * rendering purposes. In particular, media streams might want to
    * create a `GdkGLContext` or sync to the `GdkFrameClock`.
    * Whoever calls this function is responsible for calling
-   * [Gtk.MediaStream.unrealize] before either the stream
+   * [gtk.media_stream.MediaStream.unrealize] before either the stream
    * or surface get destroyed.
    * Multiple calls to this function may happen from different
    * users of the video, even with the same surface. Each of these
    * calls must be followed by its own call to
-   * [Gtk.MediaStream.unrealize].
+   * [gtk.media_stream.MediaStream.unrealize].
    * It is not required to call this function to make a media stream work.
    * Params:
    *   surface = a `GdkSurface`
@@ -275,9 +275,9 @@ class MediaStream : ObjectG, Paintable
    * Start a seek operation on self to timestamp.
    * If timestamp is out of range, it will be clamped.
    * Seek operations may not finish instantly. While a
-   * seek operation is in process, the [Gtk.MediaStream.seeking]
+   * seek operation is in process, the [gtk.media_stream.MediaStream.gboolean]
    * property will be set.
-   * When calling [Gtk.MediaStream.seek] during an
+   * When calling [gtk.media_stream.MediaStream.seek] during an
    * ongoing seek operation, the new seek will override
    * any pending seek.
    * Params:
@@ -292,7 +292,7 @@ class MediaStream : ObjectG, Paintable
    * Ends a seek operation started via GtkMediaStream.seek$(LPAREN)$(RPAREN) as a failure.
    * This will not cause an error on the stream and will assume that
    * playback continues as if no seek had happened.
-   * See [Gtk.MediaStream.seekSuccess] for the other way of
+   * See [gtk.media_stream.MediaStream.seekSuccess] for the other way of
    * ending a seek.
    */
   void seekFailed()
@@ -304,7 +304,7 @@ class MediaStream : ObjectG, Paintable
    * Ends a seek operation started via GtkMediaStream.seek$(LPAREN)$(RPAREN) successfully.
    * This function will unset the GtkMediaStream:ended property
    * if it was set.
-   * See [Gtk.MediaStream.seekFailed] for the other way of
+   * See [gtk.media_stream.MediaStream.seekFailed] for the other way of
    * ending a seek.
    */
   void seekSuccess()
@@ -371,7 +371,7 @@ class MediaStream : ObjectG, Paintable
 
   /**
    * Pauses the media stream and marks it as ended.
-   * This is a hint only, calls to [Gtk.MediaStream.play]
+   * This is a hint only, calls to [gtk.media_stream.MediaStream.play]
    * may still happen.
    * The media stream must be prepared when this function is called.
    */
@@ -388,7 +388,7 @@ class MediaStream : ObjectG, Paintable
    * side of caution and return %TRUE. User interfaces will use those
    * values to determine what controls to show.
    * This function may not be called again until the stream has been
-   * reset via [Gtk.MediaStream.streamUnprepared].
+   * reset via [gtk.media_stream.MediaStream.streamUnprepared].
    * Params:
    *   hasAudio = %TRUE if the stream should advertise audio support
    *   hasVideo = %TRUE if the stream should advertise video support
@@ -402,7 +402,7 @@ class MediaStream : ObjectG, Paintable
 
   /**
    * Resets a given media stream implementation.
-   * [Gtk.MediaStream.streamPrepared] can then be called again.
+   * [gtk.media_stream.MediaStream.streamPrepared] can then be called again.
    * This function will also reset any error state the stream was in.
    */
   void streamUnprepared()
@@ -411,7 +411,7 @@ class MediaStream : ObjectG, Paintable
   }
 
   /**
-   * Undoes a previous call to [Gtk.MediaStream.realize].
+   * Undoes a previous call to [gtk.media_stream.MediaStream.realize].
    * This causes the stream to release all resources it had
    * allocated from surface.
    * Params:

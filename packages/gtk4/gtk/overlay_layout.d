@@ -1,13 +1,13 @@
 module gtk.overlay_layout;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
 import gtk.types;
 
 /**
- * `GtkOverlayLayout` is the layout manager used by [Gtk.Overlay].
+ * `GtkOverlayLayout` is the layout manager used by [gtk.overlay.Overlay].
  * It places widgets as overlays on top of the main child.
  * This is not a reusable layout manager, since it expects its widget
  * to be a `GtkOverlay`. It is only listed here so that its layout

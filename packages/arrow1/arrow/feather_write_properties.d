@@ -3,7 +3,7 @@ module arrow.feather_write_properties;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class FeatherWriteProperties : ObjectG

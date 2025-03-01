@@ -1,6 +1,6 @@
 module harfbuzz.ot_name_entry;
 
-import gid.gid;
+import gid.global;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
 import harfbuzz.types;

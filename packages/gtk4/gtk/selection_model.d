@@ -1,7 +1,7 @@
 module gtk.selection_model;
 
 public import gtk.selection_model_iface_proxy;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.bitset;
 import gtk.c.functions;
@@ -13,13 +13,13 @@ import gtk.types;
  * This support is then used by widgets using list models to add the ability
  * to select and unselect various items.
  * GTK provides default implementations of the most common selection modes such
- * as [Gtk.SingleSelection], so you will only need to implement this
+ * as [gtk.single_selection.SingleSelection], so you will only need to implement this
  * interface if you want detailed control about how selections should be handled.
  * A `GtkSelectionModel` supports a single boolean per item indicating if an item is
- * selected or not. This can be queried via [Gtk.SelectionModel.isSelected].
+ * selected or not. This can be queried via [gtk.selection_model.SelectionModel.isSelected].
  * When the selected state of one or more items changes, the model will emit the
  * signal@Gtk.SelectionModel::selection-changed signal by calling the
- * [Gtk.SelectionModel.selectionChanged] function. The positions given
+ * [gtk.selection_model.SelectionModel.selectionChanged] function. The positions given
  * in that signal may have their selection state changed, though that is not a
  * requirement. If new items added to the model via the
  * signal@Gio.ListModel::items-changed signal are selected or not is up to the
@@ -52,8 +52,8 @@ interface SelectionModel
   /**
    * Gets the set containing all currently selected items in the model.
    * This function may be slow, so if you are only interested in single item,
-   * consider using [Gtk.SelectionModel.isSelected] or if you are only
-   * interested in a few, consider [Gtk.SelectionModel.getSelectionInRange].
+   * consider using [gtk.selection_model.SelectionModel.isSelected] or if you are only
+   * interested in a few, consider [gtk.selection_model.SelectionModel.getSelectionInRange].
    * Returns: a `GtkBitset` containing all the values currently
    *   selected in model. If no items are selected, the bitset is empty.
    *   The bitset must not be modified.
@@ -63,7 +63,7 @@ interface SelectionModel
   /**
    * Gets the set of selected items in a range.
    * This function is an optimization for
-   * [Gtk.SelectionModel.getSelection] when you are only
+   * [gtk.selection_model.SelectionModel.getSelection] when you are only
    * interested in part of the model's selected state. A common use
    * case is in response to the signalGtk.SelectionModel::selection-changed
    * signal.

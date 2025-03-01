@@ -1,6 +1,6 @@
 module gtk.css_provider;
 
-import gid.gid;
+import gid.global;
 import gio.file;
 import gio.file_mixin;
 import glib.bytes;
@@ -19,10 +19,10 @@ import gtk.types;
  * for CSS.
  * It is able to parse CSS-like input in order to style widgets.
  * An application can make GTK parse a specific CSS style sheet by calling
- * [Gtk.CssProvider.loadFromFile] or
- * [Gtk.CssProvider.loadFromResource]
- * and adding the provider with [Gtk.StyleContext.addProvider] or
- * [Gtk.StyleContext.addProviderForDisplay].
+ * [gtk.css_provider.CssProvider.loadFromFile] or
+ * [gtk.css_provider.CssProvider.loadFromResource]
+ * and adding the provider with [gtk.style_context.StyleContext.addProvider] or
+ * [gtk.style_context.StyleContext.addProviderForDisplay].
  * In addition, certain files will be read when GTK is initialized.
  * First, the file `\$XDG_CONFIG_HOME/gtk-4.0/gtk.css` is loaded if it
  * exists. Then, GTK loads the first existing file among
@@ -91,8 +91,8 @@ class CssProvider : ObjectG, StyleProvider
    *   data = CSS data to be parsed
    *   length = the length of data in bytes, or -1 for NUL terminated strings
 
-   * Deprecated: Use [Gtk.CssProvider.loadFromString]
-   *   or [Gtk.CssProvider.loadFromBytes] instead
+   * Deprecated: Use [gtk.css_provider.CssProvider.loadFromString]
+   *   or [gtk.css_provider.CssProvider.loadFromBytes] instead
    */
   void loadFromData(string data, ptrdiff_t length)
   {
@@ -168,9 +168,9 @@ class CssProvider : ObjectG, StyleProvider
   /**
    * Converts the provider into a string representation in CSS
    * format.
-   * Using [Gtk.CssProvider.loadFromString] with the return
+   * Using [gtk.css_provider.CssProvider.loadFromString] with the return
    * value from this function on a new provider created with
-   * [Gtk.CssProvider.new_] will basically create a duplicate
+   * [gtk.css_provider.CssProvider.new_] will basically create a duplicate
    * of this provider.
    * Returns: a new string representing the provider.
    */

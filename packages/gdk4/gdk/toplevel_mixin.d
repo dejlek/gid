@@ -10,7 +10,7 @@ public import gdk.texture;
 public import gdk.toplevel_layout;
 public import gdk.toplevel_size;
 public import gdk.types;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 
 /**
@@ -31,7 +31,7 @@ template ToplevelT()
    *   x = surface X coordinate of mouse click that began the drag
    *   y = surface Y coordinate of mouse click that began the drag
    *   timestamp = timestamp of mouse click that began the drag $(LPAREN)use
-   *     [Gdk.Event.getTime]$(RPAREN)
+   *     [gdk.event.Event.getTime]$(RPAREN)
    */
   override void beginMove(Device device, int button, double x, double y, uint timestamp)
   {
@@ -48,7 +48,7 @@ template ToplevelT()
    *   x = surface X coordinate of mouse click that began the drag
    *   y = surface Y coordinate of mouse click that began the drag
    *   timestamp = timestamp of mouse click that began the drag $(LPAREN)use
-   *     [Gdk.Event.getTime]$(RPAREN)
+   *     [gdk.event.Event.getTime]$(RPAREN)
    */
   override void beginResize(SurfaceEdge edge, Device device, int button, double x, double y, uint timestamp)
   {
@@ -57,7 +57,7 @@ template ToplevelT()
 
   /**
    * Sets keyboard focus to surface.
-   * In most cases, [[Gtk.Window.presentWithTime]](../gtk4/method.Window.present_with_time.html)
+   * In most cases, [[gtk.window.Window.presentWithTime]](../gtk4/method.Window.present_with_time.html)
    * should be used on a [GtkWindow](../gtk4/class.Window.html), rather than
    * calling this function.
    * Params:
@@ -87,7 +87,7 @@ template ToplevelT()
    * keyboard events reach the surface, as long as it is focused, instead
    * of triggering system actions.
    * If granted, the rerouting remains active until the default shortcuts
-   * processing is restored with [Gdk.Toplevel.restoreSystemShortcuts],
+   * processing is restored with [gdk.toplevel.Toplevel.restoreSystemShortcuts],
    * or the request is revoked by the desktop environment, windowing system
    * or the user.
    * A typical use case for this API is remote desktop or virtual machine
@@ -151,7 +151,7 @@ template ToplevelT()
   /**
    * Restore default system keyboard shortcuts which were previously
    * inhibited.
-   * This undoes the effect of [Gdk.Toplevel.inhibitSystemShortcuts].
+   * This undoes the effect of [gdk.toplevel.Toplevel.inhibitSystemShortcuts].
    */
   override void restoreSystemShortcuts()
   {
@@ -208,7 +208,7 @@ template ToplevelT()
    * behaviour. The window manager can use this information
    * to handle modal surfaces in a special way.
    * You should only use this on surfaces for which you have
-   * previously called [Gdk.Toplevel.setTransientFor].
+   * previously called [gdk.toplevel.Toplevel.setTransientFor].
    * Params:
    *   modal = %TRUE if the surface is modal, %FALSE otherwise.
    */
@@ -220,7 +220,7 @@ template ToplevelT()
   /**
    * Sets the startup notification ID.
    * When using GTK, typically you should use
-   * [[Gtk.Window.setStartupId]](../gtk4/method.Window.set_startup_id.html)
+   * [[gtk.window.Window.setStartupId]](../gtk4/method.Window.set_startup_id.html)
    * instead of this low-level function.
    * Params:
    *   startupId = a string with startup-notification identifier
@@ -250,7 +250,7 @@ template ToplevelT()
    * dialog associated with the application surface parent. This
    * allows the window manager to do things like center surface
    * on parent and keep surface above parent.
-   * See [[Gtk.Window.setTransientFor]](../gtk4/method.Window.set_transient_for.html)
+   * See [[gtk.window.Window.setTransientFor]](../gtk4/method.Window.set_transient_for.html)
    * if you’re using [GtkWindow](../gtk4/class.Window.html).
    * Params:
    *   parent = another toplevel `GdkSurface`
@@ -300,13 +300,13 @@ template ToplevelT()
    * Emitted when the size for the surface needs to be computed, when
    * it is present.
    * This signal will normally be emitted during or after a call to
-   * [Gdk.Toplevel.present], depending on the configuration
+   * [gdk.toplevel.Toplevel.present], depending on the configuration
    * received by the windowing system. It may also be emitted at any
    * other point in time, in response to the windowing system
    * spontaneously changing the configuration of the toplevel surface.
    * It is the responsibility of the toplevel user to handle this signal
    * and compute the desired size of the toplevel, given the information
-   * passed via the [Gdk.ToplevelSize] object. Failing to do so
+   * passed via the [gdk.toplevel_size.ToplevelSize] object. Failing to do so
    * will result in an arbitrary size being used as a result.
    * Params
    *   size = a `GdkToplevelSize`

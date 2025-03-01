@@ -4,14 +4,14 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.display;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 
 /**
  * A singleton object that offers notification when displays appear or
  * disappear.
- * You can use [Gdk.DisplayManager.get] to obtain the `GdkDisplayManager`
+ * You can use [gdk.display_manager.DisplayManager.get] to obtain the `GdkDisplayManager`
  * singleton, but that should be rarely necessary. Typically, initializing
  * GTK opens a display that you can work with without ever accessing the
  * `GdkDisplayManager`.

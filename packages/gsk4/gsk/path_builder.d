@@ -1,7 +1,7 @@
 module gsk.path_builder;
 
 import cairo.path;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.point;
 import graphene.rect;
@@ -29,16 +29,16 @@ import pango.layout;
  * Adding contours to the path can be done in two ways.
  * The easiest option is to use the `gsk_path_builder_add_*` group
  * of functions that add predefined contours to the current path,
- * either common shapes like [Gsk.PathBuilder.addCircle]
- * or by adding from other paths like [Gsk.PathBuilder.addPath].
+ * either common shapes like [gsk.path_builder.PathBuilder.addCircle]
+ * or by adding from other paths like [gsk.path_builder.PathBuilder.addPath].
  * The `gsk_path_builder_add_*` methods always add complete contours,
  * and do not use or modify the current point.
  * The other option is to define each line and curve manually with
  * the `gsk_path_builder_*_to` group of functions. You start with
- * a call to [Gsk.PathBuilder.moveTo] to set the starting point
+ * a call to [gsk.path_builder.PathBuilder.moveTo] to set the starting point
  * and then use multiple calls to any of the drawing functions to
  * move the pen along the plane. Once you are done, you can call
- * [Gsk.PathBuilder.close] to close the path by connecting it
+ * [gsk.path_builder.PathBuilder.close] to close the path by connecting it
  * back with a line to the starting point.
  * This is similar to how paths are drawn in Cairo.
  * Note that `GskPathBuilder` will reduce the degree of added Bézier
@@ -83,7 +83,7 @@ class PathBuilder : Boxed
 
   /**
    * Adds a Cairo path to the builder.
-   * You can use [cairo.Context.copyPath] to access the path
+   * You can use [cairo.context.Context.copyPath] to access the path
    * from a Cairo context.
    * Params:
    *   path =
@@ -167,7 +167,7 @@ class PathBuilder : Boxed
    * from the beginning to end. If the path is closed, these segments
    * will be connected.
    * Note that this method always adds a path with the given start point
-   * and end point. To add a closed path, use [Gsk.PathBuilder.addPath].
+   * and end point. To add a closed path, use [gsk.path_builder.PathBuilder.addPath].
    * Params:
    *   path = the `GskPath` to take the segment to
    *   start = the point on path to start at
@@ -184,8 +184,8 @@ class PathBuilder : Boxed
    * After this, x3, y3 will be the new current point.
    * Note: Two points and their tangents do not determine
    * a unique ellipse, so GSK just picks one. If you need more
-   * precise control, use [Gsk.PathBuilder.conicTo]
-   * or [Gsk.PathBuilder.svgArcTo].
+   * precise control, use [gsk.path_builder.PathBuilder.conicTo]
+   * or [gsk.path_builder.PathBuilder.svgArcTo].
    * <picture>
    * <source srcset\="arc-dark.png" media\="$(LPAREN)prefers-color-scheme: dark$(RPAREN)">
    * <img alt\="Arc To" src\="arc-light.png">
@@ -203,7 +203,7 @@ class PathBuilder : Boxed
 
   /**
    * Ends the current contour with a line back to the start point.
-   * Note that this is different from calling [Gsk.PathBuilder.lineTo]
+   * Note that this is different from calling [gsk.path_builder.PathBuilder.lineTo]
    * with the start point in that the contour will be closed. A closed
    * contour behaves differently from an open one. When stroking, its
    * start and end point are considered connected, so they will be
@@ -351,7 +351,7 @@ class PathBuilder : Boxed
    * Adds an elliptical arc from the current point to x3, y3
    * with x1, y1 determining the tangent directions.
    * All coordinates are given relative to the current point.
-   * This is the relative version of [Gsk.PathBuilder.arcTo].
+   * This is the relative version of [gsk.path_builder.PathBuilder.arcTo].
    * Params:
    *   x1 = x coordinate of first control point
    *   y1 = y coordinate of first control point
@@ -368,7 +368,7 @@ class PathBuilder : Boxed
    * from the current point to x2, y2 with the given weight and x1, y1 as the
    * control point.
    * All coordinates are given relative to the current point.
-   * This is the relative version of [Gsk.PathBuilder.conicTo].
+   * This is the relative version of [gsk.path_builder.PathBuilder.conicTo].
    * Params:
    *   x1 = x offset of control point
    *   y1 = y offset of control point
@@ -386,7 +386,7 @@ class PathBuilder : Boxed
    * from the current point to x3, y3 with x1, y1 and x2, y2 as the control
    * points.
    * All coordinates are given relative to the current point.
-   * This is the relative version of [Gsk.PathBuilder.cubicTo].
+   * This is the relative version of [gsk.path_builder.PathBuilder.cubicTo].
    * Params:
    *   x1 = x offset of first control point
    *   y1 = y offset of first control point
@@ -403,7 +403,7 @@ class PathBuilder : Boxed
   /**
    * Implements arc-to according to the HTML Canvas spec.
    * All coordinates are given relative to the current point.
-   * This is the relative version of [Gsk.PathBuilder.htmlArcTo].
+   * This is the relative version of [gsk.path_builder.PathBuilder.htmlArcTo].
    * Params:
    *   x1 = X coordinate of first control point
    *   y1 = Y coordinate of first control point
@@ -419,7 +419,7 @@ class PathBuilder : Boxed
   /**
    * Draws a line from the current point to a point offset from it
    * by x, y and makes it the new current point.
-   * This is the relative version of [Gsk.PathBuilder.lineTo].
+   * This is the relative version of [gsk.path_builder.PathBuilder.lineTo].
    * Params:
    *   x = x offset
    *   y = y offset
@@ -432,7 +432,7 @@ class PathBuilder : Boxed
   /**
    * Starts a new contour by placing the pen at x, y
    * relative to the current point.
-   * This is the relative version of [Gsk.PathBuilder.moveTo].
+   * This is the relative version of [gsk.path_builder.PathBuilder.moveTo].
    * Params:
    *   x = x offset
    *   y = y offset
@@ -446,7 +446,7 @@ class PathBuilder : Boxed
    * Adds a [quadratic Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve)
    * from the current point to x2, y2 with x1, y1 the control point.
    * All coordinates are given relative to the current point.
-   * This is the relative version of [Gsk.PathBuilder.quadTo].
+   * This is the relative version of [gsk.path_builder.PathBuilder.quadTo].
    * Params:
    *   x1 = x offset of control point
    *   y1 = y offset of control point
@@ -461,7 +461,7 @@ class PathBuilder : Boxed
   /**
    * Implements arc-to according to the SVG spec.
    * All coordinates are given relative to the current point.
-   * This is the relative version of [Gsk.PathBuilder.svgArcTo].
+   * This is the relative version of [gsk.path_builder.PathBuilder.svgArcTo].
    * Params:
    *   rx = X radius
    *   ry = Y radius
@@ -502,7 +502,7 @@ class PathBuilder : Boxed
    * you cannot call this function multiple times on the same builder
    * instance.
    * This function is intended primarily for language bindings.
-   * C code should use [Gsk.PathBuilder.freeToPath].
+   * C code should use [gsk.path_builder.PathBuilder.freeToPath].
    * Returns: the newly created `GskPath`
    *   with all the contours added to the builder
    */

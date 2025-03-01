@@ -1,6 +1,6 @@
 module parquet.file_metadata;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 import parquet.c.functions;

@@ -1,6 +1,6 @@
 module gtk.string_list;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -12,7 +12,7 @@ import gtk.types;
 
 /**
  * `GtkStringList` is a list model that wraps an array of strings.
- * The objects in the model are of type [Gtk.StringObject] and have
+ * The objects in the model are of type [gtk.string_object.StringObject] and have
  * a "string" property that can be used inside expressions.
  * `GtkStringList` is well-suited for any place where you would
  * typically use a `char*[]`, but need a list model.
@@ -76,7 +76,7 @@ class StringList : ObjectG, ListModel, Buildable
   /**
    * Appends string to self.
    * The string will be copied. See
-   * [Gtk.StringList.take] for a way to avoid that.
+   * [gtk.string_list.StringList.take] for a way to avoid that.
    * Params:
    *   string_ = the string to insert
    */
@@ -90,7 +90,7 @@ class StringList : ObjectG, ListModel, Buildable
    * Gets the string that is at position in self.
    * If self does not contain position items, %NULL is returned.
    * This function returns the const char *. To get the
-   * object wrapping it, use [Gio.ListModel.getItem].
+   * object wrapping it, use [gio.list_model.ListModel.getItem].
    * Params:
    *   position = the position to get the string for
    * Returns: the string at the given position
@@ -118,8 +118,8 @@ class StringList : ObjectG, ListModel, Buildable
   /**
    * Changes self by removing n_removals strings and adding additions
    * to it.
-   * This function is more efficient than [Gtk.StringList.append]
-   * and [Gtk.StringList.remove], because it only emits the
+   * This function is more efficient than [gtk.string_list.StringList.append]
+   * and [gtk.string_list.StringList.remove], because it only emits the
    * ::items-changed signal once for the change.
    * This function copies the strings in additions.
    * The parameters position and n_removals must be correct $(LPAREN)ie:
@@ -143,7 +143,7 @@ class StringList : ObjectG, ListModel, Buildable
   /**
    * Adds string to self at the end, and takes
    * ownership of it.
-   * This variant of [Gtk.StringList.append]
+   * This variant of [gtk.string_list.StringList.append]
    * is convenient for formatting strings:
    * ```c
    * gtk_string_list_take $(LPAREN)self, g_strdup_print $(LPAREN)"%d dollars", lots$(RPAREN)$(RPAREN);

@@ -1,6 +1,6 @@
 module gsk.path_point;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.point;
 import graphene.vec2;
@@ -14,9 +14,9 @@ import gsk.types;
  * `GskPathPoint` is an opaque type representing a point on a path.
  * It can be queried for properties of the path at that point, such as
  * its tangent or its curvature.
- * To obtain a `GskPathPoint`, use [Gsk.Path.getClosestPoint],
- * [Gsk.Path.getStartPoint], [Gsk.Path.getEndPoint]
- * or [Gsk.PathMeasure.getPoint].
+ * To obtain a `GskPathPoint`, use [gsk.path.Path.getClosestPoint],
+ * [gsk.path.Path.getStartPoint], [gsk.path.Path.getEndPoint]
+ * or [gsk.path_measure.PathMeasure.getPoint].
  * Note that `GskPathPoint` structs are meant to be stack-allocated,
  * and don't hold a reference to the path object they are obtained from.
  * It is the callers responsibility to keep a reference to the path
@@ -74,7 +74,7 @@ class PathPoint : Boxed
    * location on all paths.
    * Note that the start- and endpoint of a closed contour
    * will compare nonequal according to this definition.
-   * Use [Gsk.Path.isClosed] to find out if the
+   * Use [gsk.path.Path.isClosed] to find out if the
    * start- and endpoint of a concrete path refer to the
    * same location.
    * Params:
@@ -150,10 +150,10 @@ class PathPoint : Boxed
 
   /**
    * Gets the direction of the tangent at a given point.
-   * This is a convenience variant of [Gsk.PathPoint.getTangent]
+   * This is a convenience variant of [gsk.path_point.PathPoint.getTangent]
    * that returns the angle between the tangent and the X axis. The angle
    * can e.g. be used in
-   * [[Gtk.Snapshot.rotate]](../gtk4/method.Snapshot.rotate.html).
+   * [[gtk.snapshot.Snapshot.rotate]](../gtk4/method.Snapshot.rotate.html).
    * Params:
    *   path = the path that point is on
    *   direction = the direction for which to return the rotation
@@ -176,7 +176,7 @@ class PathPoint : Boxed
    * If the path is just a single point $(LPAREN)e.g. a circle with
    * radius zero$(RPAREN), then tangent is set to `0, 0`.
    * If you want to orient something in the direction of the
-   * path, [Gsk.PathPoint.getRotation] may be more
+   * path, [gsk.path_point.PathPoint.getRotation] may be more
    * convenient to use.
    * Params:
    *   path = the path that point is on

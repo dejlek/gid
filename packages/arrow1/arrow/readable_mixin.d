@@ -5,7 +5,7 @@ public import arrow.buffer;
 public import arrow.c.functions;
 public import arrow.c.types;
 public import arrow.types;
-public import gid.gid;
+public import gid.global;
 public import glib.bytes;
 public import glib.error;
 public import gobject.object;

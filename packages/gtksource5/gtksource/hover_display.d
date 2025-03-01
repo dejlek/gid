@@ -1,6 +1,6 @@
 module gtksource.hover_display;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -14,9 +14,9 @@ import gtksource.types;
 
 /**
  * Display for interactive tooltips.
- * `GtkSourceHoverDisplay` is a [Gtk.Widget] that may be populated with widgets
+ * `GtkSourceHoverDisplay` is a [gtk.widget.Widget] that may be populated with widgets
  * to be displayed to the user in interactive tooltips. The children widgets
- * are packed vertically using a [Gtk.Box].
+ * are packed vertically using a [gtk.box.Box].
  * Implement the iface@HoverProvider interface to be notified of when
  * to populate a `GtkSourceHoverDisplay` on behalf of the user.
  */

@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.display;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gio.app_launch_context : DGioAppLaunchContext = AppLaunchContext;
 import gio.icon;
 import gio.icon_mixin;
@@ -81,7 +81,7 @@ class AppLaunchContext : DGioAppLaunchContext
    * context.
    * Window Managers can use this information when displaying startup
    * notification.
-   * See also [Gdk.AppLaunchContext.setIconName].
+   * See also [gdk.app_launch_context.AppLaunchContext.setIconName].
    * Params:
    *   icon = a `GIcon`
    */
@@ -93,7 +93,7 @@ class AppLaunchContext : DGioAppLaunchContext
   /**
    * Sets the icon for applications that are launched with this context.
    * The icon_name will be interpreted in the same way as the Icon field
-   * in desktop files. See also [Gdk.AppLaunchContext.setIcon].
+   * in desktop files. See also [gdk.app_launch_context.AppLaunchContext.setIcon].
    * If both icon and icon_name are set, the icon_name takes priority.
    * If neither icon or icon_name is set, the icon is taken from either
    * the file that is passed to launched application or from the `GAppInfo`

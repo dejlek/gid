@@ -1,6 +1,6 @@
 module gtksource.completion;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtksource.buffer;
@@ -24,7 +24,7 @@ import pango.attr_list;
  * be for example a provider to complete words $(LPAREN)see class@CompletionWords$(RPAREN),
  * another provider for the completion of
  * function names, etc. To add a provider, call
- * [GtkSource.Completion.addProvider].
+ * [gtksource.completion.Completion.addProvider].
  * The iface@CompletionProposal interface represents a proposal.
  * If a proposal contains extra information $(LPAREN)see
  * %GTK_SOURCE_COMPLETION_COLUMN_DETAILS$(RPAREN), it will be
@@ -32,7 +32,7 @@ import pango.attr_list;
  * the "Details" button is clicked.
  * Each class@View object is associated with a class@Completion
  * instance. This instance can be obtained with
- * [GtkSource.View.getCompletion]. The class@View class contains also the
+ * [gtksource.view.View.getCompletion]. The class@View class contains also the
  * signal@View::show-completion signal.
  * A same iface@CompletionProvider object can be used for several
  * `GtkSourceCompletion`'s.
@@ -83,7 +83,7 @@ class Completion : ObjectG
    * it will be set to zero.
    * Params:
    *   haystack = the string to be searched.
-   *   casefoldNeedle = A [GLib.Global.utf8Casefold] version of the needle.
+   *   casefoldNeedle = A [glib.global.utf8Casefold] version of the needle.
    *   priority = An optional location for the score of the match
    * Returns: %TRUE if haystack matched casefold_needle, otherwise %FALSE.
    */
@@ -155,7 +155,7 @@ class Completion : ObjectG
 
   /**
    * Removes a ifaceCompletionProvider previously added with
-   * [GtkSource.Completion.addProvider].
+   * [gtksource.completion.Completion.addProvider].
    * Params:
    *   provider = a #GtkSourceCompletionProvider
    */

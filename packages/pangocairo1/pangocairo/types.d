@@ -1,7 +1,7 @@
 module pangocairo.types;
 
 import cairo.context;
-import gid.gid;
+import gid.global;
 import pango.attr_shape;
 import pangocairo.c.functions;
 import pangocairo.c.types;

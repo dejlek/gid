@@ -1,6 +1,6 @@
 module gtk.emoji_chooser;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;

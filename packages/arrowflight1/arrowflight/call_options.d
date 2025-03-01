@@ -3,7 +3,7 @@ module arrowflight.call_options;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class CallOptions : ObjectG

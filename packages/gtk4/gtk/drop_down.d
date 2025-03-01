@@ -1,6 +1,6 @@
 module gtk.drop_down;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.dclosure;
@@ -22,21 +22,21 @@ import gtk.widget;
  * `GtkDropDown` is a widget that allows the user to choose an item
  * from a list of options.
  * ![An example GtkDropDown](drop-down.png)
- * The `GtkDropDown` displays the [selected][Gtk.DropDown.selected]
+ * The `GtkDropDown` displays the [selected][gtk.drop_down.DropDown.guint]
  * choice.
  * The options are given to `GtkDropDown` in the form of `GListModel`
  * and how the individual options are represented is determined by
- * a [Gtk.ListItemFactory]. The default factory displays simple strings,
+ * a [gtk.list_item_factory.ListItemFactory]. The default factory displays simple strings,
  * and adds a checkmark to the selected item in the popup.
- * To set your own factory, use [Gtk.DropDown.setFactory]. It is
+ * To set your own factory, use [gtk.drop_down.DropDown.setFactory]. It is
  * possible to use a separate factory for the items in the popup, with
- * [Gtk.DropDown.setListFactory].
+ * [gtk.drop_down.DropDown.setListFactory].
  * `GtkDropDown` knows how to obtain strings from the items in a
- * [Gtk.StringList]; for other models, you have to provide an expression
- * to find the strings via [Gtk.DropDown.setExpression].
+ * [gtk.string_list.StringList]; for other models, you have to provide an expression
+ * to find the strings via [gtk.drop_down.DropDown.setExpression].
  * `GtkDropDown` can optionally allow search in the popup, which is
  * useful if the list of options is long. To enable the search entry,
- * use [Gtk.DropDown.setEnableSearch].
+ * use [gtk.drop_down.DropDown.setEnableSearch].
  * Here is a UI definition example for `GtkDropDown` with a simple model:
  * ```xml
  * <object class\="GtkDropDown">
@@ -52,8 +52,8 @@ import gtk.widget;
  * </object>
  * ```
  * If a `GtkDropDown` is created in this manner, or with
- * [Gtk.DropDown.newFromStrings], for instance, the object returned from
- * [Gtk.DropDown.getSelectedItem] will be a [Gtk.StringObject].
+ * [gtk.drop_down.DropDown.newFromStrings], for instance, the object returned from
+ * [gtk.drop_down.DropDown.getSelectedItem] will be a [gtk.string_object.StringObject].
  * To learn more about the list widget framework, see the
  * [overview](section-list-widget.html).
  * ## CSS nodes
@@ -83,7 +83,7 @@ class DropDown : Widget
 
   /**
    * Creates a new `GtkDropDown`.
-   * You may want to call [Gtk.DropDown.setFactory]
+   * You may want to call [gtk.drop_down.DropDown.setFactory]
    * to set up a way to map its items to widgets.
    * Params:
    *   model = the model to use
@@ -130,7 +130,7 @@ class DropDown : Widget
 
   /**
    * Gets the expression set that is used to obtain strings from items.
-   * See [Gtk.DropDown.setExpression].
+   * See [gtk.drop_down.DropDown.setExpression].
    * Returns: a `GtkExpression`
    */
   Expression getExpression()
@@ -242,7 +242,7 @@ class DropDown : Widget
   /**
    * Sets whether a search entry will be shown in the popup that
    * allows to search for items in the list.
-   * Note that [Gtk.DropDown.expression] must be set for
+   * Note that [gtk.drop_down.DropDown.Expression] must be set for
    * search to work.
    * Params:
    *   enableSearch = whether to enable search

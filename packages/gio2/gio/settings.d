@@ -1,6 +1,6 @@
 module gio.settings;
 
-import gid.gid;
+import gid.global;
 import gio.action;
 import gio.action_mixin;
 import gio.c.functions;
@@ -19,7 +19,7 @@ import gobject.object;
  * Reads and writes can be considered to be non-blocking.  Reading
  * settings with `GSettings` is typically extremely fast: on
  * approximately the same order of magnitude $(LPAREN)but slower than$(RPAREN) a
- * [GLib.HashTable] lookup.  Writing settings is also extremely fast in
+ * [glib.hash_table.HashTable] lookup.  Writing settings is also extremely fast in
  * terms of time to return to your application, but can be extremely expensive
  * for other threads and other processes.  Many settings backends
  * $(LPAREN)including dconf$(RPAREN) have lazy initialisation which means in the common
@@ -29,7 +29,7 @@ import gobject.object;
  * only ever modify `GSettings` keys in response to explicit user action.
  * Particular care should be paid to ensure that modifications are not
  * made during startup — for example, when setting the initial value
- * of preferences widgets.  The built-in [Gio.Settings.bind]
+ * of preferences widgets.  The built-in [gio.settings.Settings.bind]
  * functionality is careful not to write settings in response to notify signals
  * as a result of modifications that it makes to widgets.
  * When creating a `GSettings` instance, you have to specify a schema
@@ -50,7 +50,7 @@ import gobject.object;
  * they often did in GConf.
  * Unlike other configuration systems $(LPAREN)like GConf$(RPAREN), GSettings does not
  * restrict keys to basic types like strings and numbers. GSettings stores
- * values as [GLib.VariantG], and allows any [GLib.VariantType] for
+ * values as [glib.variant.VariantG], and allows any [glib.variant_type.VariantType] for
  * keys. Key names are restricted to lowercase characters, numbers and `-`.
  * Furthermore, the names must begin with a lowercase character, must not end
  * with a `-`, and must not contain consecutive dashes.
@@ -79,7 +79,7 @@ import gobject.object;
  * <default l10n\='messages' context\='Banned words'>['bad', 'words']</default>
  * ```
  * Translations of default values must remain syntactically valid serialized
- * [GLib.VariantG]s (e.g. retaining any surrounding quotation marks) or
+ * [glib.variant.VariantG]s (e.g. retaining any surrounding quotation marks) or
  * runtime errors will occur.
  * GSettings uses schemas in a compact binary form that is created
  * by the [`glib-compile-schemas`](glib-compile-schemas.html)
@@ -96,13 +96,13 @@ import gobject.object;
  * and schema ID should match. For schemas which deal with settings not
  * associated with one named application, the ID should not use
  * StudlyCaps, e.g. `org.gnome.font-rendering`.
- * In addition to [GLib.VariantG] types, keys can have types that have
+ * In addition to [glib.variant.VariantG] types, keys can have types that have
  * enumerated types. These can be described by a `<choice>`,
  * `<enum>` or `<flags>` element, as seen in the
  * second example below. The underlying type of such a key
- * is string, but you can use [Gio.Settings.getEnum],
- * [Gio.Settings.setEnum], [Gio.Settings.getFlags],
- * [Gio.Settings.setFlags] access the numeric values corresponding to
+ * is string, but you can use [gio.settings.Settings.getEnum],
+ * [gio.settings.Settings.setEnum], [gio.settings.Settings.getFlags],
+ * [gio.settings.Settings.setFlags] access the numeric values corresponding to
  * the string value of enum and flags keys.
  * An example for default value:
  * ```xml
@@ -172,7 +172,7 @@ import gobject.object;
  * override’ files. These are keyfiles in the same directory as the XML
  * schema sources which can override default values. The schema ID serves
  * as the group name in the key file, and the values are expected in
- * serialized [GLib.VariantG] form, as in the following example:
+ * serialized [glib.variant.VariantG] form, as in the following example:
  * ```
  * [org.gtk.Example]
  * key1\='string'
@@ -181,11 +181,11 @@ import gobject.object;
  * `glib-compile-schemas` expects schema files to have the extension
  * `.gschema.override`.
  * ## Binding
- * A very convenient feature of GSettings lets you bind [GObject.ObjectG]
- * properties directly to settings, using [Gio.Settings.bind]. Once a
- * [GObject.ObjectG] property has been bound to a setting, changes on
+ * A very convenient feature of GSettings lets you bind [gobject.object.ObjectG]
+ * properties directly to settings, using [gio.settings.Settings.bind]. Once a
+ * [gobject.object.ObjectG] property has been bound to a setting, changes on
  * either side are automatically propagated to the other side. GSettings handles
- * details like mapping between [GObject.ObjectG] and [GLib.VariantG]
+ * details like mapping between [gobject.object.ObjectG] and [glib.variant.VariantG]
  * types, and preventing infinite cycles.
  * This makes it very easy to hook up a preferences dialog to the
  * underlying settings. To make this even more convenient, GSettings
@@ -195,9 +195,9 @@ import gobject.object;
  * `G_SETTINGS_BIND_NO_SENSITIVITY` flag.
  * ## Relocatable schemas
  * A relocatable schema is one with no `path` attribute specified on its
- * `<schema>` element. By using [Gio.Settings.newWithPath], a `GSettings`
+ * `<schema>` element. By using [gio.settings.Settings.newWithPath], a `GSettings`
  * object can be instantiated for a relocatable schema, assigning a path to the
- * instance. Paths passed to [Gio.Settings.newWithPath] will typically be
+ * instance. Paths passed to [gio.settings.Settings.newWithPath] will typically be
  * constructed dynamically from a constant prefix plus some form of instance
  * identifier; but they must still be valid GSettings paths. Paths could also
  * be constant and used with a globally installed schema originating from a
@@ -284,12 +284,12 @@ class Settings : ObjectG
    * It is an error for the schema to not exist: schemas are an
    * essential part of a program, as they provide type information.
    * If schemas need to be dynamically loaded $(LPAREN)for example, from an
-   * optional runtime dependency$(RPAREN), [Gio.SettingsSchemaSource.lookup]
+   * optional runtime dependency$(RPAREN), [gio.settings_schema_source.SettingsSchemaSource.lookup]
    * can be used to test for their existence before loading them.
    * Signals on the newly created #GSettings object will be dispatched
    * via the thread-default #GMainContext in effect at the time of the
-   * call to [Gio.Settings.new_].  The new #GSettings will hold a reference
-   * on the context.  See [GLib.MainContext.pushThreadDefault].
+   * call to [gio.settings.Settings.new_].  The new #GSettings will hold a reference
+   * on the context.  See [glib.main_context.MainContext.pushThreadDefault].
    * Params:
    *   schemaId = the id of the schema
    * Returns: a new #GSettings object
@@ -315,7 +315,7 @@ class Settings : ObjectG
    * This constructor therefore gives you full control over constructing
    * #GSettings instances.  The first 3 parameters are given directly as
    * schema, backend and path, and the main context is taken from the
-   * thread-default $(LPAREN)as per [Gio.Settings.new_]$(RPAREN).
+   * thread-default $(LPAREN)as per [gio.settings.Settings.new_]$(RPAREN).
    * If backend is %NULL then the default backend is used.
    * If path is %NULL then the path from the schema is used.  It is an
    * error if path is %NULL and the schema has no path of its own or if
@@ -361,8 +361,8 @@ class Settings : ObjectG
   /**
    * Creates a new #GSettings object with the schema specified by
    * schema_id and a given #GSettingsBackend and path.
-   * This is a mix of [Gio.Settings.newWithBackend] and
-   * [Gio.Settings.newWithPath].
+   * This is a mix of [gio.settings.Settings.newWithBackend] and
+   * [gio.settings.Settings.newWithPath].
    * Params:
    *   schemaId = the id of the schema
    *   backend = the #GSettingsBackend to use
@@ -411,7 +411,7 @@ class Settings : ObjectG
    *   relocatable #GSettings schemas that are available, in no defined order.
    *   The list must not be modified or freed.
 
-   * Deprecated: Use [Gio.SettingsSchemaSource.listSchemas] instead
+   * Deprecated: Use [gio.settings_schema_source.SettingsSchemaSource.listSchemas] instead
    */
   static string[] listRelocatableSchemas()
   {
@@ -437,9 +437,9 @@ class Settings : ObjectG
    *   #GSettings schemas that are available, in no defined order.  The list
    *   must not be modified or freed.
 
-   * Deprecated: Use [Gio.SettingsSchemaSource.listSchemas] instead.
-   *   If you used [Gio.Settings.listSchemas] to check for the presence of
-   *   a particular schema, use [Gio.SettingsSchemaSource.lookup] instead
+   * Deprecated: Use [gio.settings_schema_source.SettingsSchemaSource.listSchemas] instead.
+   *   If you used [gio.settings.Settings.listSchemas] to check for the presence of
+   *   a particular schema, use [gio.settings_schema_source.SettingsSchemaSource.lookup] instead
    *   of your whole loop.
    */
   static string[] listSchemas()
@@ -464,7 +464,7 @@ class Settings : ObjectG
    * Ensures that all pending operations are complete for the default backend.
    * Writes made to a #GSettings are handled asynchronously.  For this
    * reason, it is very unlikely that the changes have it to disk by the
-   * time [Gio.Settings.set] returns.
+   * time [gio.settings.Settings.set] returns.
    * This call will block until all of the writes have made it to the
    * backend.  Since the mainloop is not running, no change notifications
    * will be dispatched during this call $(LPAREN)but some may be queued by the
@@ -493,7 +493,7 @@ class Settings : ObjectG
   /**
    * Applies any changes that have been made to the settings.  This
    * function does nothing unless settings is in 'delay-apply' mode;
-   * see [Gio.Settings.delay].  In the normal case settings are always
+   * see [gio.settings.Settings.delay].  In the normal case settings are always
    * applied immediately.
    */
   void apply()
@@ -507,13 +507,13 @@ class Settings : ObjectG
    * The binding uses the default GIO mapping functions to map
    * between the settings and property values. These functions
    * handle booleans, numeric types and string types in a
-   * straightforward way. Use [Gio.Settings.bindWithMapping] if
+   * straightforward way. Use [gio.settings.Settings.bindWithMapping] if
    * you need a custom mapping, or map between types that are not
    * supported by the default mapping functions.
    * Unless the flags include %G_SETTINGS_BIND_NO_SENSITIVITY, this
    * function also establishes a binding between the writability of
    * key and the "sensitive" property of object $(LPAREN)if object has
-   * a boolean property by that name$(RPAREN). See [Gio.Settings.bindWritable]
+   * a boolean property by that name$(RPAREN). See [gio.settings.Settings.bindWritable]
    * for more details about writable bindings.
    * Note that the lifecycle of the binding is tied to object,
    * and that you can have only one binding per object property.
@@ -588,7 +588,7 @@ class Settings : ObjectG
   /**
    * Changes the #GSettings object into 'delay-apply' mode. In this
    * mode, changes to settings are not immediately propagated to the
-   * backend, but kept locally until [Gio.Settings.apply] is called.
+   * backend, but kept locally until [gio.settings.Settings.apply] is called.
    */
   void delay()
   {
@@ -597,7 +597,7 @@ class Settings : ObjectG
 
   /**
    * Gets the value that is stored at key in settings.
-   * A convenience variant of [Gio.Settings.get] for booleans.
+   * A convenience variant of [gio.settings.Settings.get] for booleans.
    * It is a programmer error to give a key that isn't specified as
    * having a boolean type in the schema for settings.
    * Params:
@@ -635,13 +635,13 @@ class Settings : ObjectG
 
   /**
    * Gets the "default value" of a key.
-   * This is the value that would be read if [Gio.Settings.reset] were to be
+   * This is the value that would be read if [gio.settings.Settings.reset] were to be
    * called on the key.
    * Note that this may be a different value than returned by
-   * [Gio.SettingsSchemaKey.getDefaultValue] if the system administrator
+   * [gio.settings_schema_key.SettingsSchemaKey.getDefaultValue] if the system administrator
    * has provided a default value.
-   * Comparing the return values of [Gio.Settings.getDefaultValue] and
-   * [Gio.Settings.getValue] is not sufficient for determining if a value
+   * Comparing the return values of [gio.settings.Settings.getDefaultValue] and
+   * [gio.settings.Settings.getValue] is not sufficient for determining if a value
    * has been set because the user may have explicitly set the value to
    * something that happens to be equal to the default.  The difference
    * here is that if the default changes in the future, the user's key
@@ -665,7 +665,7 @@ class Settings : ObjectG
 
   /**
    * Gets the value that is stored at key in settings.
-   * A convenience variant of [Gio.Settings.get] for doubles.
+   * A convenience variant of [gio.settings.Settings.get] for doubles.
    * It is a programmer error to give a key that isn't specified as
    * having a 'double' type in the schema for settings.
    * Params:
@@ -738,7 +738,7 @@ class Settings : ObjectG
 
   /**
    * Gets the value that is stored at key in settings.
-   * A convenience variant of [Gio.Settings.get] for 32-bit integers.
+   * A convenience variant of [gio.settings.Settings.get] for 32-bit integers.
    * It is a programmer error to give a key that isn't specified as
    * having a int32 type in the schema for settings.
    * Params:
@@ -755,7 +755,7 @@ class Settings : ObjectG
 
   /**
    * Gets the value that is stored at key in settings.
-   * A convenience variant of [Gio.Settings.get] for 64-bit integers.
+   * A convenience variant of [gio.settings.Settings.get] for 64-bit integers.
    * It is a programmer error to give a key that isn't specified as
    * having a int64 type in the schema for settings.
    * Params:
@@ -822,7 +822,7 @@ class Settings : ObjectG
    *   key = the key to query the range of
    * Returns:
 
-   * Deprecated: Use [Gio.SettingsSchemaKey.getRange] instead.
+   * Deprecated: Use [gio.settings_schema_key.SettingsSchemaKey.getRange] instead.
    */
   VariantG getRange(string key)
   {
@@ -835,7 +835,7 @@ class Settings : ObjectG
 
   /**
    * Gets the value that is stored at key in settings.
-   * A convenience variant of [Gio.Settings.get] for strings.
+   * A convenience variant of [gio.settings.Settings.get] for strings.
    * It is a programmer error to give a key that isn't specified as
    * having a string type in the schema for settings.
    * Params:
@@ -852,7 +852,7 @@ class Settings : ObjectG
   }
 
   /**
-   * A convenience variant of [Gio.Settings.get] for string arrays.
+   * A convenience variant of [gio.settings.Settings.get] for string arrays.
    * It is a programmer error to give a key that isn't specified as
    * having an array of strings type in the schema for settings.
    * Params:
@@ -882,7 +882,7 @@ class Settings : ObjectG
 
   /**
    * Gets the value that is stored at key in settings.
-   * A convenience variant of [Gio.Settings.get] for 32-bit unsigned
+   * A convenience variant of [gio.settings.Settings.get] for 32-bit unsigned
    * integers.
    * It is a programmer error to give a key that isn't specified as
    * having a uint32 type in the schema for settings.
@@ -900,7 +900,7 @@ class Settings : ObjectG
 
   /**
    * Gets the value that is stored at key in settings.
-   * A convenience variant of [Gio.Settings.get] for 64-bit unsigned
+   * A convenience variant of [gio.settings.Settings.get] for 64-bit unsigned
    * integers.
    * It is a programmer error to give a key that isn't specified as
    * having a uint64 type in the schema for settings.
@@ -919,10 +919,10 @@ class Settings : ObjectG
   /**
    * Checks the "user value" of a key, if there is one.
    * The user value of a key is the last value that was set by the user.
-   * After calling [Gio.Settings.reset] this function should always return
+   * After calling [gio.settings.Settings.reset] this function should always return
    * %NULL $(LPAREN)assuming something is not wrong with the system
    * configuration$(RPAREN).
-   * It is possible that [Gio.Settings.getValue] will return a different
+   * It is possible that [gio.settings.Settings.getValue] will return a different
    * value than this function.  This can happen in the case that the user
    * set a value for a key that was subsequently locked down by the system
    * administrator -- this function will return the user's old value.
@@ -977,11 +977,11 @@ class Settings : ObjectG
   /**
    * Gets the list of children on settings.
    * The list is exactly the list of strings for which it is not an error
-   * to call [Gio.Settings.getChild].
+   * to call [gio.settings.Settings.getChild].
    * There is little reason to call this function from "normal" code, since
    * you should already know what children are in your schema. This function
    * may still be useful there for introspection reasons, however.
-   * You should free the return value with [GLib.Global.strfreev] when you are done
+   * You should free the return value with [glib.global.strfreev] when you are done
    * with it.
    * Returns: a list of the children
    *   on settings, in no defined order
@@ -1009,12 +1009,12 @@ class Settings : ObjectG
    * You should probably not be calling this function from "normal" code
    * $(LPAREN)since you should already know what keys are in your schema$(RPAREN).  This
    * function is intended for introspection reasons.
-   * You should free the return value with [GLib.Global.strfreev] when you are done
+   * You should free the return value with [glib.global.strfreev] when you are done
    * with it.
    * Returns: a list
    *   of the keys on settings, in no defined order
 
-   * Deprecated: Use [Gio.SettingsSchema.listKeys] instead.
+   * Deprecated: Use [gio.settings_schema.SettingsSchema.listKeys] instead.
    */
   string[] listKeys()
   {
@@ -1042,7 +1042,7 @@ class Settings : ObjectG
    *   value = the value to check
    * Returns: %TRUE if value is valid for key
 
-   * Deprecated: Use [Gio.SettingsSchemaKey.rangeCheck] instead.
+   * Deprecated: Use [gio.settings_schema_key.SettingsSchemaKey.rangeCheck] instead.
    */
   bool rangeCheck(string key, VariantG value)
   {
@@ -1069,7 +1069,7 @@ class Settings : ObjectG
   /**
    * Reverts all non-applied changes to the settings.  This function
    * does nothing unless settings is in 'delay-apply' mode; see
-   * [Gio.Settings.delay].  In the normal case settings are always applied
+   * [gio.settings.Settings.delay].  In the normal case settings are always applied
    * immediately.
    * Change notifications will be emitted for affected keys.
    */
@@ -1080,7 +1080,7 @@ class Settings : ObjectG
 
   /**
    * Sets key in settings to value.
-   * A convenience variant of [Gio.Settings.set] for booleans.
+   * A convenience variant of [gio.settings.Settings.set] for booleans.
    * It is a programmer error to give a key that isn't specified as
    * having a boolean type in the schema for settings.
    * Params:
@@ -1099,7 +1099,7 @@ class Settings : ObjectG
 
   /**
    * Sets key in settings to value.
-   * A convenience variant of [Gio.Settings.set] for doubles.
+   * A convenience variant of [gio.settings.Settings.set] for doubles.
    * It is a programmer error to give a key that isn't specified as
    * having a 'double' type in the schema for settings.
    * Params:
@@ -1123,7 +1123,7 @@ class Settings : ObjectG
    * schema for settings or is not marked as an enumerated type, or for
    * value not to be a valid value for the named type.
    * After performing the write, accessing key directly with
-   * [Gio.Settings.getString] will return the 'nick' associated with
+   * [gio.settings.Settings.getString] will return the 'nick' associated with
    * value.
    * Params:
    *   key = a key, within settings
@@ -1146,7 +1146,7 @@ class Settings : ObjectG
    * schema for settings or is not marked as a flags type, or for value
    * to contain any bits that are not value for the named type.
    * After performing the write, accessing key directly with
-   * [Gio.Settings.getStrv] will return an array of 'nicks'; one for each
+   * [gio.settings.Settings.getStrv] will return an array of 'nicks'; one for each
    * bit in value.
    * Params:
    *   key = a key, within settings
@@ -1163,7 +1163,7 @@ class Settings : ObjectG
 
   /**
    * Sets key in settings to value.
-   * A convenience variant of [Gio.Settings.set] for 32-bit integers.
+   * A convenience variant of [gio.settings.Settings.set] for 32-bit integers.
    * It is a programmer error to give a key that isn't specified as
    * having a int32 type in the schema for settings.
    * Params:
@@ -1182,7 +1182,7 @@ class Settings : ObjectG
 
   /**
    * Sets key in settings to value.
-   * A convenience variant of [Gio.Settings.set] for 64-bit integers.
+   * A convenience variant of [gio.settings.Settings.set] for 64-bit integers.
    * It is a programmer error to give a key that isn't specified as
    * having a int64 type in the schema for settings.
    * Params:
@@ -1201,7 +1201,7 @@ class Settings : ObjectG
 
   /**
    * Sets key in settings to value.
-   * A convenience variant of [Gio.Settings.set] for strings.
+   * A convenience variant of [gio.settings.Settings.set] for strings.
    * It is a programmer error to give a key that isn't specified as
    * having a string type in the schema for settings.
    * Params:
@@ -1221,7 +1221,7 @@ class Settings : ObjectG
 
   /**
    * Sets key in settings to value.
-   * A convenience variant of [Gio.Settings.set] for string arrays.  If
+   * A convenience variant of [gio.settings.Settings.set] for string arrays.  If
    * value is %NULL, then key is set to be the empty array.
    * It is a programmer error to give a key that isn't specified as
    * having an array of strings type in the schema for settings.
@@ -1246,7 +1246,7 @@ class Settings : ObjectG
 
   /**
    * Sets key in settings to value.
-   * A convenience variant of [Gio.Settings.set] for 32-bit unsigned
+   * A convenience variant of [gio.settings.Settings.set] for 32-bit unsigned
    * integers.
    * It is a programmer error to give a key that isn't specified as
    * having a uint32 type in the schema for settings.
@@ -1266,7 +1266,7 @@ class Settings : ObjectG
 
   /**
    * Sets key in settings to value.
-   * A convenience variant of [Gio.Settings.set] for 64-bit unsigned
+   * A convenience variant of [gio.settings.Settings.set] for 64-bit unsigned
    * integers.
    * It is a programmer error to give a key that isn't specified as
    * having a uint64 type in the schema for settings.
@@ -1357,7 +1357,7 @@ class Settings : ObjectG
 
   /**
    * The "changed" signal is emitted when a key has potentially changed.
-   * You should call one of the [Gio.Settings.get] calls to check the new
+   * You should call one of the [gio.settings.Settings.get] calls to check the new
    * value.
    * This signal supports detailed connections.  You can connect to the
    * detailed signal "changed::x" in order to only receive callbacks
@@ -1449,7 +1449,7 @@ class Settings : ObjectG
   /**
    * The "writable-changed" signal is emitted when the writability of a
    * key has potentially changed.  You should call
-   * [Gio.Settings.isWritable] in order to determine the new status.
+   * [gio.settings.Settings.isWritable] in order to determine the new status.
    * This signal supports detailed connections.  You can connect to the
    * detailed signal "writable-changed::x" in order to only receive
    * callbacks when the writability of "x" changes.

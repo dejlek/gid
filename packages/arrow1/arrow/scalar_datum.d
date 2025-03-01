@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.datum;
 import arrow.scalar;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class ScalarDatum : Datum
 {

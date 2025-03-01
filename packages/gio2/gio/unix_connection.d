@@ -1,6 +1,6 @@
 module gio.unix_connection;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -13,7 +13,7 @@ import glib.error;
 import gobject.object;
 
 /**
- * This is the subclass of [Gio.SocketConnection] that is created
+ * This is the subclass of [gio.socket_connection.SocketConnection] that is created
  * for UNIX domain sockets.
  * It contains functions to do some of the UNIX socket specific
  * functionality like passing file descriptors.
@@ -44,7 +44,7 @@ class UnixConnection : SocketConnection
 
   /**
    * Receives credentials from the sending end of the connection.  The
-   * sending end has to call [Gio.UnixConnection.sendCredentials] $(LPAREN)or
+   * sending end has to call [gio.unix_connection.UnixConnection.sendCredentials] $(LPAREN)or
    * similar$(RPAREN) for this to work.
    * As well as reading the credentials this also reads $(LPAREN)and discards$(RPAREN) a
    * single byte from the stream, as this is required for credentials
@@ -56,11 +56,11 @@ class UnixConnection : SocketConnection
    * - Solaris, Illumos and OpenSolaris since GLib 2.40
    * - GNU/Hurd since GLib 2.40
    * Other ways to exchange credentials with a foreign peer includes the
-   * #GUnixCredentialsMessage type and [Gio.Socket.getCredentials] function.
+   * #GUnixCredentialsMessage type and [gio.socket.Socket.getCredentials] function.
    * Params:
    *   cancellable = A #GCancellable or %NULL.
    * Returns: Received credentials on success $(LPAREN)free with
-   *   [GObject.ObjectG.unref]$(RPAREN), %NULL if error is set.
+   *   [gobject.object.ObjectG.unref]$(RPAREN), %NULL if error is set.
    */
   Credentials receiveCredentials(Cancellable cancellable)
   {
@@ -75,10 +75,10 @@ class UnixConnection : SocketConnection
 
   /**
    * Asynchronously receive credentials.
-   * For more details, see [Gio.UnixConnection.receiveCredentials] which is
+   * For more details, see [gio.unix_connection.UnixConnection.receiveCredentials] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called. You can then call
-   * [Gio.UnixConnection.receiveCredentialsFinish] to get the result of the operation.
+   * [gio.unix_connection.UnixConnection.receiveCredentialsFinish] to get the result of the operation.
    * Params:
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback
@@ -101,11 +101,11 @@ class UnixConnection : SocketConnection
 
   /**
    * Finishes an asynchronous receive credentials operation started with
-   * [Gio.UnixConnection.receiveCredentialsAsync].
+   * [gio.unix_connection.UnixConnection.receiveCredentialsAsync].
    * Params:
    *   result = a #GAsyncResult.
    * Returns: a #GCredentials, or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   Credentials receiveCredentialsFinish(AsyncResult result)
   {
@@ -120,7 +120,7 @@ class UnixConnection : SocketConnection
 
   /**
    * Receives a file descriptor from the sending end of the connection.
-   * The sending end has to call [Gio.UnixConnection.sendFd] for this
+   * The sending end has to call [gio.unix_connection.UnixConnection.sendFd] for this
    * to work.
    * As well as reading the fd this also reads a single byte from the
    * stream, as this is required for fd passing to work on some
@@ -142,7 +142,7 @@ class UnixConnection : SocketConnection
   /**
    * Passes the credentials of the current user the receiving side
    * of the connection. The receiving end has to call
-   * [Gio.UnixConnection.receiveCredentials] (or similar) to accept the
+   * [gio.unix_connection.UnixConnection.receiveCredentials] (or similar) to accept the
    * credentials.
    * As well as sending the credentials this also writes a single NUL
    * byte to the stream, as this is required for credentials passing to
@@ -154,7 +154,7 @@ class UnixConnection : SocketConnection
    * - Solaris, Illumos and OpenSolaris since GLib 2.40
    * - GNU/Hurd since GLib 2.40
    * Other ways to exchange credentials with a foreign peer includes the
-   * #GUnixCredentialsMessage type and [Gio.Socket.getCredentials] function.
+   * #GUnixCredentialsMessage type and [gio.socket.Socket.getCredentials] function.
    * Params:
    *   cancellable = A #GCancellable or %NULL.
    * Returns: %TRUE on success, %FALSE if error is set.
@@ -171,10 +171,10 @@ class UnixConnection : SocketConnection
 
   /**
    * Asynchronously send credentials.
-   * For more details, see [Gio.UnixConnection.sendCredentials] which is
+   * For more details, see [gio.unix_connection.UnixConnection.sendCredentials] which is
    * the synchronous version of this call.
    * When the operation is finished, callback will be called. You can then call
-   * [Gio.UnixConnection.sendCredentialsFinish] to get the result of the operation.
+   * [gio.unix_connection.UnixConnection.sendCredentialsFinish] to get the result of the operation.
    * Params:
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback
@@ -197,7 +197,7 @@ class UnixConnection : SocketConnection
 
   /**
    * Finishes an asynchronous send credentials operation started with
-   * [Gio.UnixConnection.sendCredentialsAsync].
+   * [gio.unix_connection.UnixConnection.sendCredentialsAsync].
    * Params:
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the operation was successful, otherwise %FALSE.
@@ -214,7 +214,7 @@ class UnixConnection : SocketConnection
 
   /**
    * Passes a file descriptor to the receiving side of the
-   * connection. The receiving end has to call [Gio.UnixConnection.receiveFd]
+   * connection. The receiving end has to call [gio.unix_connection.UnixConnection.receiveFd]
    * to accept the file descriptor.
    * As well as sending the fd this also writes a single byte to the
    * stream, as this is required for fd passing to work on some

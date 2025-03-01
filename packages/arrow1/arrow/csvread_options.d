@@ -6,7 +6,7 @@ import arrow.data_type;
 import arrow.schema;
 import arrow.timestamp_parser;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class CSVReadOptions : ObjectG

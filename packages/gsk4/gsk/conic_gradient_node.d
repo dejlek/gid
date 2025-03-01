@@ -1,6 +1,6 @@
 module gsk.conic_gradient_node;
 
-import gid.gid;
+import gid.global;
 import graphene.point;
 import gsk.c.functions;
 import gsk.c.types;
@@ -25,7 +25,7 @@ class ConicGradientNode : RenderNode
    * Retrieves the angle for the gradient in radians, normalized in [0, 2 * PI].
    * The angle is starting at the top and going clockwise, as expressed
    * in the css specification:
-   * angle \= 90 - [Gsk.ConicGradientNode.getRotation]
+   * angle \= 90 - [gsk.conic_gradient_node.ConicGradientNode.getRotation]
    * Returns: the angle for the gradient
    */
   float getAngle()

@@ -1,6 +1,6 @@
 module pango.color;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -71,12 +71,12 @@ class Color : Boxed
 
   /**
    * Creates a copy of src.
-   * The copy should be freed with [Pango.Color.free].
+   * The copy should be freed with [pango.color.Color.free].
    * Primarily used by language bindings, not that useful
    * otherwise $(LPAREN)since colors can just be copied by assignment
    * in C$(RPAREN).
    * Returns: the newly allocated `PangoColor`,
-   *   which should be freed with [Pango.Color.free]
+   *   which should be freed with [pango.color.Color.free]
    */
   Color copy()
   {
@@ -142,7 +142,7 @@ class Color : Boxed
    * where `r`, `g` and `b` are hex digits representing the
    * red, green, and blue components respectively.
    * Returns: a newly-allocated text string that must
-   *   be freed with [GLib.Global.gfree].
+   *   be freed with [glib.global.gfree].
    */
   string toString_()
   {

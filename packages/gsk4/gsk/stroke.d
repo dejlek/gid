@@ -1,7 +1,7 @@
 module gsk.stroke;
 
 import cairo.context;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gsk.c.functions;
 import gsk.c.types;
@@ -50,7 +50,7 @@ class Stroke : Boxed
 
   /**
    * Creates a copy of the given other stroke.
-   * Returns: a new `GskStroke`. Use [Gsk.Stroke.free] to free it
+   * Returns: a new `GskStroke`. Use [gsk.stroke.Stroke.free] to free it
    */
   Stroke copy()
   {
@@ -91,7 +91,7 @@ class Stroke : Boxed
 
   /**
    * Gets the line cap used.
-   * See [Gsk.LineCap] for details.
+   * See [gsk.LineCap] for details.
    * Returns: The line cap
    */
   LineCap getLineCap()
@@ -104,7 +104,7 @@ class Stroke : Boxed
 
   /**
    * Gets the line join used.
-   * See [Gsk.LineJoin] for details.
+   * See [gsk.LineJoin] for details.
    * Returns: The line join
    */
   LineJoin getLineJoin()
@@ -154,7 +154,7 @@ class Stroke : Boxed
    * element in dash defining an "on" or "off" in alternating passes
    * through the array.
    * You can specify a starting offset into the dash with
-   * [Gsk.Stroke.setDashOffset].
+   * [gsk.stroke.Stroke.setDashOffset].
    * Params:
    *   dash = the array of dashes
    */
@@ -172,7 +172,7 @@ class Stroke : Boxed
    * Sets the offset into the dash pattern where dashing should begin.
    * This is an offset into the length of the path, not an index into
    * the array values of the dash array.
-   * See [Gsk.Stroke.setDash] for more details on dashing.
+   * See [gsk.stroke.Stroke.setDash] for more details on dashing.
    * Params:
    *   offset = offset into the dash pattern
    */
@@ -183,7 +183,7 @@ class Stroke : Boxed
 
   /**
    * Sets the line cap to be used when stroking.
-   * See [Gsk.LineCap] for details.
+   * See [gsk.LineCap] for details.
    * Params:
    *   lineCap = the `GskLineCap`
    */
@@ -194,7 +194,7 @@ class Stroke : Boxed
 
   /**
    * Sets the line join to be used when stroking.
-   * See [Gsk.LineJoin] for details.
+   * See [gsk.LineJoin] for details.
    * Params:
    *   lineJoin = The line join to use
    */

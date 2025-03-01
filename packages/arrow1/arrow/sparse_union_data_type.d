@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.field;
 import arrow.types;
 import arrow.union_data_type;
-import gid.gid;
+import gid.global;
 
 class SparseUnionDataType : UnionDataType
 {

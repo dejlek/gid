@@ -1,6 +1,6 @@
 module gtk.scale_button;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -23,7 +23,7 @@ import gtk.widget;
 /**
  * `GtkScaleButton` provides a button which pops up a scale widget.
  * This kind of widget is commonly used for volume controls in multimedia
- * applications, and GTK provides a [Gtk.VolumeButton] subclass that
+ * applications, and GTK provides a [gtk.volume_button.VolumeButton] subclass that
  * is tailored for this use case.
  * # CSS nodes
  * ```
@@ -67,7 +67,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    *     or up/down arrow event occurs $(LPAREN)usually 2$(RPAREN)
    *   icons = a %NULL-terminated
    *     array of icon names, or %NULL if you want to set the list
-   *     later with [Gtk.ScaleButton.setIcons]
+   *     later with [gtk.scale_button.ScaleButton.setIcons]
    * Returns: a new `GtkScaleButton`
    */
   this(double min, double max, double step, string[] icons)
@@ -97,7 +97,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
 
   /**
    * Gets the `GtkAdjustment` associated with the `GtkScaleButton`’s scale.
-   * See [Gtk.Range.getAdjustment] for details.
+   * See [gtk.range.Range.getAdjustment] for details.
    * Returns: the adjustment associated with the scale
    */
   Adjustment getAdjustment()
@@ -171,7 +171,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
   /**
    * Sets the `GtkAdjustment` to be used as a model
    * for the `GtkScaleButton`’s scale.
-   * See [Gtk.Range.setAdjustment] for details.
+   * See [gtk.range.Range.setAdjustment] for details.
    * Params:
    *   adjustment = a `GtkAdjustment`
    */

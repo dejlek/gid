@@ -1,6 +1,6 @@
 module gio.buffered_output_stream;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.filter_output_stream;
@@ -11,15 +11,15 @@ import gio.types;
 import gobject.object;
 
 /**
- * Buffered output stream implements [Gio.FilterOutputStream] and provides
+ * Buffered output stream implements [gio.filter_output_stream.FilterOutputStream] and provides
  * for buffered writes.
  * By default, `GBufferedOutputStream`'s buffer size is set at 4 kilobytes.
- * To create a buffered output stream, use [Gio.BufferedOutputStream.new_],
- * or [Gio.BufferedOutputStream.newSized] to specify the buffer's size
+ * To create a buffered output stream, use [gio.buffered_output_stream.BufferedOutputStream.new_],
+ * or [gio.buffered_output_stream.BufferedOutputStream.newSized] to specify the buffer's size
  * at construction.
  * To get the size of a buffer within a buffered input stream, use
- * [Gio.BufferedOutputStream.getBufferSize]. To change the size of a
- * buffered output stream's buffer, use [Gio.BufferedOutputStream.setBufferSize].
+ * [gio.buffered_output_stream.BufferedOutputStream.getBufferSize]. To change the size of a
+ * buffered output stream's buffer, use [gio.buffered_output_stream.BufferedOutputStream.setBufferSize].
  * Note that the buffer's size cannot be reduced below the size of the data within the buffer.
  */
 class BufferedOutputStream : FilterOutputStream, Seekable

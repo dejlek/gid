@@ -2,7 +2,7 @@ module gtk.glarea;
 
 import gdk.glcontext;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -20,12 +20,12 @@ import gtk.widget;
 /**
  * `GtkGLArea` is a widget that allows drawing with OpenGL.
  * ![An example GtkGLArea](glarea.png)
- * `GtkGLArea` sets up its own [Gdk.GLContext], and creates a custom
+ * `GtkGLArea` sets up its own [gdk.glcontext.GLContext], and creates a custom
  * GL framebuffer that the widget will do GL rendering onto. It also ensures
  * that this framebuffer is the default GL rendering target when rendering.
  * The completed rendering is integrated into the larger GTK scene graph as
  * a texture.
- * In order to draw, you have to connect to the [Gtk.GLArea.render]
+ * In order to draw, you have to connect to the [gtk.glarea.GLArea.render]
  * signal, or subclass `GtkGLArea` and override the GtkGLAreaClass.render
  * virtual function.
  * The `GtkGLArea` widget ensures that the `GdkGLContext` is associated with
@@ -33,7 +33,7 @@ import gtk.widget;
  * position of the drawing area changes.
  * ## Drawing with GtkGLArea
  * The simplest way to draw using OpenGL commands in a `GtkGLArea` is to
- * create a widget instance and connect to the [Gtk.GLArea.render] signal:
+ * create a widget instance and connect to the [gtk.glarea.GLArea.render] signal:
  * The `render$(LPAREN)$(RPAREN)` function will be called when the `GtkGLArea` is ready
  * for you to draw its content:
  * The initial contents of the framebuffer are transparent.
@@ -64,10 +64,10 @@ import gtk.widget;
  * }
  * ```
  * If you need to initialize OpenGL state, e.g. buffer objects or
- * shaders, you should use the [Gtk.Widget.realize] signal;
- * you can use the [Gtk.Widget.unrealize] signal to clean up.
+ * shaders, you should use the [gtk.widget.Widget.realize] signal;
+ * you can use the [gtk.widget.Widget.unrealize] signal to clean up.
  * Since the `GdkGLContext` creation and initialization may fail, you
- * will need to check for errors, using [Gtk.GLArea.getError].
+ * will need to check for errors, using [gtk.glarea.GLArea.getError].
  * An example of how to safely initialize the GL state is:
  * ```c
  * static void
@@ -81,7 +81,7 @@ import gtk.widget;
  * // function will return a GError for you to catch
  * if $(LPAREN)gtk_gl_area_get_error $(LPAREN)area$(RPAREN) !\= NULL$(RPAREN)
  * return;
- * // You can also use [Gtk.GLArea.setError] in order
+ * // You can also use [gtk.glarea.GLArea.setError] in order
  * // to show eventual initialization errors on the
  * // GtkGLArea widget itself
  * GError *internal_error \= NULL;
@@ -140,7 +140,7 @@ class GLArea : Widget
    * and read target, and that all the required buffers for the area
    * are created and bound to the framebuffer.
    * This function is automatically called before emitting the
-   * [Gtk.GLArea.render] signal, and doesn't normally need to be
+   * [gtk.glarea.GLArea.render] signal, and doesn't normally need to be
    * called by application code.
    */
   void attachBuffers()
@@ -150,7 +150,7 @@ class GLArea : Widget
 
   /**
    * Gets the allowed APIs.
-   * See [Gtk.GLArea.setAllowedApis].
+   * See [gtk.glarea.GLArea.setAllowedApis].
    * Returns: the allowed APIs
    */
   GLAPI getAllowedApis()
@@ -233,7 +233,7 @@ class GLArea : Widget
 
   /**
    * Retrieves the required version of OpenGL.
-   * See [Gtk.GLArea.setRequiredVersion].
+   * See [gtk.glarea.GLArea.setRequiredVersion].
    * Params:
    *   major = return location for the required major version
    *   minor = return location for the required minor version
@@ -245,11 +245,11 @@ class GLArea : Widget
 
   /**
    * Returns whether the `GtkGLArea` should use OpenGL ES.
-   * See [Gtk.GLArea.setUseEs].
+   * See [gtk.glarea.GLArea.setUseEs].
    * Returns: %TRUE if the `GtkGLArea` should create an OpenGL ES context
    *   and %FALSE otherwise
 
-   * Deprecated: Use [Gtk.GLArea.getApi]
+   * Deprecated: Use [gtk.glarea.GLArea.getApi]
    */
   bool getUseEs()
   {
@@ -262,7 +262,7 @@ class GLArea : Widget
    * Ensures that the `GdkGLContext` used by area is associated with
    * the `GtkGLArea`.
    * This function is automatically called before emitting the
-   * [Gtk.GLArea.render] signal, and doesn't normally need
+   * [gtk.glarea.GLArea.render] signal, and doesn't normally need
    * to be called by application code.
    */
   void makeCurrent()
@@ -273,11 +273,11 @@ class GLArea : Widget
   /**
    * Marks the currently rendered data $(LPAREN)if any$(RPAREN) as invalid, and queues
    * a redraw of the widget.
-   * This ensures that the [Gtk.GLArea.render] signal
+   * This ensures that the [gtk.glarea.GLArea.render] signal
    * is emitted during the draw.
-   * This is only needed when [Gtk.GLArea.setAutoRender] has
+   * This is only needed when [gtk.glarea.GLArea.setAutoRender] has
    * been called with a %FALSE value. The default behaviour is to
-   * emit [Gtk.GLArea.render] on each draw.
+   * emit [gtk.glarea.GLArea.render] on each draw.
    */
   void queueRender()
   {
@@ -286,7 +286,7 @@ class GLArea : Widget
 
   /**
    * Sets the allowed APIs to create a context with.
-   * You should check [Gtk.GLArea.api] before drawing
+   * You should check [gtk.glarea.GLArea.Gdk.GLAPI] before drawing
    * with either API.
    * By default, all APIs are allowed.
    * Params:
@@ -299,13 +299,13 @@ class GLArea : Widget
 
   /**
    * Sets whether the `GtkGLArea` is in auto render mode.
-   * If auto_render is %TRUE the [Gtk.GLArea.render] signal will
+   * If auto_render is %TRUE the [gtk.glarea.GLArea.render] signal will
    * be emitted every time the widget draws. This is the default and is
    * useful if drawing the widget is faster.
    * If auto_render is %FALSE the data from previous rendering is kept
    * around and will be used for drawing the widget the next time,
    * unless the window is resized. In order to force a rendering
-   * [Gtk.GLArea.queueRender] must be called. This mode is
+   * [gtk.glarea.GLArea.queueRender] must be called. This mode is
    * useful when the scene changes seldom, but takes a long time to redraw.
    * Params:
    *   autoRender = a boolean
@@ -374,7 +374,7 @@ class GLArea : Widget
    * Params:
    *   useEs = whether to use OpenGL or OpenGL ES
 
-   * Deprecated: Use [Gtk.GLArea.setAllowedApis]
+   * Deprecated: Use [gtk.glarea.GLArea.setAllowedApis]
    */
   void setUseEs(bool useEs)
   {
@@ -387,7 +387,7 @@ class GLArea : Widget
    * This is useful when you want to reuse an existing GL context,
    * or if you want to try creating different kinds of GL options.
    * If context creation fails then the signal handler can use
-   * [Gtk.GLArea.setError] to register a more detailed error
+   * [gtk.glarea.GLArea.setError] to register a more detailed error
    * of how the construction failed.
    *   gLArea = the instance the signal is connected to
    * Returns: a newly created `GdkGLContext`;

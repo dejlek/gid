@@ -1,6 +1,6 @@
 module gtk.scale;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -23,8 +23,8 @@ import pango.layout;
  * A `GtkScale` is a slider control used to select a numeric value.
  * ![An example GtkScale](scales.png)
  * To use it, you’ll probably want to investigate the methods on its base
- * class, [Gtk.Range], in addition to the methods for `GtkScale` itself.
- * To set the value of a scale, you would normally use [Gtk.Range.setValue].
+ * class, [gtk.range.Range], in addition to the methods for `GtkScale` itself.
+ * To set the value of a scale, you would normally use [gtk.range.Range.setValue].
  * To detect changes to the value, you would normally use the
  * signal@Gtk.Range::value-changed signal.
  * Note that using the same upper and lower bounds for the `GtkScale` $(LPAREN)through
@@ -34,7 +34,7 @@ import pango.layout;
  * # GtkScale as GtkBuildable
  * `GtkScale` supports a custom `<marks>` element, which can contain multiple
  * `<mark\>` elements. The “value” and “position” attributes have the same
- * meaning as [Gtk.Scale.addMark] parameters of the same name. If
+ * meaning as [gtk.scale.Scale.addMark] parameters of the same name. If
  * the element is not empty, its content is taken as the markup to show at
  * the mark. It can be translated with the usual ”translatable” and
  * “context” attributes.
@@ -63,10 +63,10 @@ import pango.layout;
  * with subnodes named trough and slider.
  * The main node gets the style class .fine-tune added when the scale is in
  * 'fine-tuning' mode.
- * If the scale has an origin $(LPAREN)see [Gtk.Scale.setHasOrigin]$(RPAREN), there is
+ * If the scale has an origin $(LPAREN)see [gtk.scale.Scale.setHasOrigin]$(RPAREN), there is
  * a subnode with name highlight below the trough node that is used for rendering
  * the highlighted part of the trough.
- * If the scale is showing a fill level $(LPAREN)see [Gtk.Range.setShowFillLevel]$(RPAREN),
+ * If the scale is showing a fill level $(LPAREN)see [gtk.range.Range.setShowFillLevel]$(RPAREN),
  * there is a subnode with name fill below the trough node that is used for
  * rendering the filled in part of the trough.
  * If marks are present, there is a marks subnode before or after the trough
@@ -107,7 +107,7 @@ class Scale : Range
    * Creates a new `GtkScale`.
    * Params:
    *   orientation = the scale’s orientation.
-   *   adjustment = the [Gtk.Adjustment] which sets
+   *   adjustment = the [gtk.adjustment.Adjustment] which sets
    *     the range of the scale, or %NULL to create a new adjustment.
    * Returns: a new `GtkScale`
    */
@@ -127,7 +127,7 @@ class Scale : Range
    * value.
    * Note that the way in which the precision is derived works best if
    * step is a power of ten. If the resulting precision is not suitable
-   * for your needs, use [Gtk.Scale.setDigits] to correct it.
+   * for your needs, use [gtk.scale.Scale.setDigits] to correct it.
    * Params:
    *   orientation = the scale’s orientation.
    *   min = minimum value
@@ -149,7 +149,7 @@ class Scale : Range
    * and GTK makes it easy for the user to position the scale exactly at the
    * marks value.
    * If markup is not %NULL, text is shown next to the tick mark.
-   * To remove marks from a scale, use [Gtk.Scale.clearMarks].
+   * To remove marks from a scale, use [gtk.scale.Scale.clearMarks].
    * Params:
    *   value = the value at which the mark is placed, must be between
    *     the lower and upper limits of the scales’ adjustment
@@ -211,7 +211,7 @@ class Scale : Range
    * Gets the `PangoLayout` used to display the scale.
    * The returned object is owned by the scale so does not need
    * to be freed by the caller.
-   * Returns: the [Pango.Layout]
+   * Returns: the [pango.layout.Layout]
    *   for this scale, or %NULL if the propertyGtk.Scale:draw-value
    *   property is %FALSE.
    */
@@ -260,7 +260,7 @@ class Scale : Range
    * is %FALSE, you can set propertyGtk.Range:round-digits instead.
    * Note that rounding to a small number of digits can interfere with
    * the smooth autoscrolling that is built into `GtkScale`. As an alternative,
-   * you can use [Gtk.Scale.setFormatValueFunc] to format the displayed
+   * you can use [gtk.scale.Scale.setFormatValueFunc] to format the displayed
    * value yourself.
    * Params:
    *   digits = the number of decimal places to display,
@@ -288,7 +288,7 @@ class Scale : Range
    * value. That string will then be used to display the scale's value.
    * If #NULL is passed as func, the value will be displayed on
    * its own, rounded according to the value of the
-   * [Gtk.Scale.digits] property.
+   * [gtk.scale.Scale.gint] property.
    * Params:
    *   func = function that formats the value
    */

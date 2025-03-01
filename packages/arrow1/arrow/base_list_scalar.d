@@ -5,7 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class BaseListScalar : Scalar

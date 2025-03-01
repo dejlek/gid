@@ -1,7 +1,7 @@
 module gio.action_group_mixin;
 
 public import gio.action_group_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
@@ -16,36 +16,36 @@ public import gobject.dclosure;
  * groups are often used together with a `GMenuModel` that provides additional
  * representation data for displaying the actions to the user, e.g. in a menu.
  * The main way to interact with the actions in a `GActionGroup` is to
- * activate them with [Gio.ActionGroup.activateAction]. Activating an
+ * activate them with [gio.action_group.ActionGroup.activateAction]. Activating an
  * action may require a `GVariant` parameter. The required type of the
- * parameter can be inquired with [Gio.ActionGroup.getActionParameterType].
- * Actions may be disabled, see [Gio.ActionGroup.getActionEnabled].
+ * parameter can be inquired with [gio.action_group.ActionGroup.getActionParameterType].
+ * Actions may be disabled, see [gio.action_group.ActionGroup.getActionEnabled].
  * Activating a disabled action has no effect.
  * Actions may optionally have a state in the form of a #GVariant. The current
- * state of an action can be inquired with [Gio.ActionGroup.getActionState].
+ * state of an action can be inquired with [gio.action_group.ActionGroup.getActionState].
  * Activating a stateful action may change its state, but it is also possible to
- * set the state by calling [Gio.ActionGroup.changeActionState].
+ * set the state by calling [gio.action_group.ActionGroup.changeActionState].
  * As typical example, consider a text editing application which has an
  * option to change the current font to 'bold'. A good way to represent
  * this would be a stateful action, with a boolean state. Activating the
  * action would toggle the state.
  * Each action in the group has a unique name $(LPAREN)which is a string$(RPAREN).  All
- * method calls, except [Gio.ActionGroup.listActions] take the name of
+ * method calls, except [gio.action_group.ActionGroup.listActions] take the name of
  * an action as an argument.
  * The `GActionGroup` API is meant to be the 'public' API to the action
  * group. The calls here are exactly the interaction that 'external
  * forces' $(LPAREN)eg: UI, incoming D-Bus messages, etc.$(RPAREN) are supposed to have
  * with actions. 'Internal' APIs $(LPAREN)ie: ones meant only to be accessed by
  * the action group implementation$(RPAREN) are found on subclasses. This is
- * why you will find - for example - [Gio.ActionGroup.getActionEnabled]
+ * why you will find - for example - [gio.action_group.ActionGroup.getActionEnabled]
  * but not an equivalent set$(LPAREN)$(RPAREN) call.
  * Signals are emitted on the action group in response to state changes
  * on individual actions.
  * Implementations of `GActionGroup` should provide implementations for
- * the virtual functions [Gio.ActionGroup.listActions] and
- * [Gio.ActionGroup.queryAction]. The other virtual functions should
+ * the virtual functions [gio.action_group.ActionGroup.listActions] and
+ * [gio.action_group.ActionGroup.queryAction]. The other virtual functions should
  * not be implemented - their "wrappers" are actually implemented with
- * calls to [Gio.ActionGroup.queryAction].
+ * calls to [gio.action_group.ActionGroup.queryAction].
  */
 template ActionGroupT()
 {
@@ -105,19 +105,19 @@ template ActionGroupT()
    * If the action is expecting a parameter, then the correct type of
    * parameter must be given as parameter.  If the action is expecting no
    * parameters then parameter must be %NULL.  See
-   * [Gio.ActionGroup.getActionParameterType].
+   * [gio.action_group.ActionGroup.getActionParameterType].
    * If the #GActionGroup implementation supports asynchronous remote
    * activation over D-Bus, this call may return before the relevant
    * D-Bus traffic has been sent, or any replies have been received. In
    * order to block on such asynchronous activation calls,
-   * [Gio.DBusConnection.flush] should be called prior to the code, which
+   * [gio.dbus_connection.DBusConnection.flush] should be called prior to the code, which
    * depends on the result of the action activation. Without flushing
    * the D-Bus connection, there is no guarantee that the action would
    * have been activated.
    * The following code which runs in a remote app instance, shows an
    * example of a "quit" action being activated on the primary app
-   * instance over D-Bus. Here [Gio.DBusConnection.flush] is called
-   * before `exit$(LPAREN)$(RPAREN)`. Without [Gio.DBusConnection.flush], the "quit" action
+   * instance over D-Bus. Here [gio.dbus_connection.DBusConnection.flush] is called
+   * before `exit$(LPAREN)$(RPAREN)`. Without [gio.dbus_connection.DBusConnection.flush], the "quit" action
    * may fail to be activated on the primary instance.
    * |[<!-- language\="C" -->
    * // call "quit" action on primary instance
@@ -141,10 +141,10 @@ template ActionGroupT()
    * Request for the state of the named action within action_group to be
    * changed to value.
    * The action must be stateful and value must be of the correct type.
-   * See [Gio.ActionGroup.getActionStateType].
+   * See [gio.action_group.ActionGroup.getActionStateType].
    * This call merely requests a change.  The action may refuse to change
    * its state or may change its state to something other than value.
-   * See [Gio.ActionGroup.getActionStateHint].
+   * See [gio.action_group.ActionGroup.getActionStateHint].
    * If the value GVariant is floating, it is consumed.
    * Params:
    *   actionName = the name of the action to request the change on
@@ -175,7 +175,7 @@ template ActionGroupT()
   /**
    * Queries the type of the parameter that must be given when activating
    * the named action within action_group.
-   * When activating the action using [Gio.ActionGroup.activateAction],
+   * When activating the action using [gio.action_group.ActionGroup.activateAction],
    * the #GVariant given to that function must be of the type returned
    * by this function.
    * In the case that this function returns %NULL, you must not give any
@@ -200,9 +200,9 @@ template ActionGroupT()
    * Queries the current state of the named action within action_group.
    * If the action is not stateful then %NULL will be returned.  If the
    * action is stateful then the type of the return value is the type
-   * given by [Gio.ActionGroup.getActionStateType].
+   * given by [gio.action_group.ActionGroup.getActionStateType].
    * The return value $(LPAREN)if non-%NULL$(RPAREN) should be freed with
-   * [GLib.VariantG.unref] when it is no longer required.
+   * [glib.variant.VariantG.unref] when it is no longer required.
    * Params:
    *   actionName = the name of the action to query
    * Returns: the current state of the action
@@ -230,7 +230,7 @@ template ActionGroupT()
    * have a state value outside of the hinted range and setting a value
    * within the range may fail.
    * The return value $(LPAREN)if non-%NULL$(RPAREN) should be freed with
-   * [GLib.VariantG.unref] when it is no longer required.
+   * [glib.variant.VariantG.unref] when it is no longer required.
    * Params:
    *   actionName = the name of the action to query
    * Returns: the state range hint
@@ -249,12 +249,12 @@ template ActionGroupT()
    * action_group.
    * If the action is stateful then this function returns the
    * #GVariantType of the state.  All calls to
-   * [Gio.ActionGroup.changeActionState] must give a #GVariant of this
-   * type and [Gio.ActionGroup.getActionState] will return a #GVariant
+   * [gio.action_group.ActionGroup.changeActionState] must give a #GVariant of this
+   * type and [gio.action_group.ActionGroup.getActionState] will return a #GVariant
    * of the same type.
    * If the action is not stateful then this function will return %NULL.
-   * In that case, [Gio.ActionGroup.getActionState] will return %NULL
-   * and you must not call [Gio.ActionGroup.changeActionState].
+   * In that case, [gio.action_group.ActionGroup.getActionState] will return %NULL
+   * and you must not call [gio.action_group.ActionGroup.changeActionState].
    * The state type of a particular action will never change but it is
    * possible for an action to be removed and for a new action to be added
    * with the same name but a different state type.
@@ -287,7 +287,7 @@ template ActionGroupT()
 
   /**
    * Lists the actions contained within action_group.
-   * The caller is responsible for freeing the list with [GLib.Global.strfreev] when
+   * The caller is responsible for freeing the list with [glib.global.strfreev] when
    * it is no longer required.
    * Returns: a %NULL-terminated array of the names of the
    *   actions in the group
@@ -313,11 +313,11 @@ template ActionGroupT()
   /**
    * Queries all aspects of the named action within an action_group.
    * This function acquires the information available from
-   * [Gio.ActionGroup.hasAction], [Gio.ActionGroup.getActionEnabled],
-   * [Gio.ActionGroup.getActionParameterType],
-   * [Gio.ActionGroup.getActionStateType],
-   * [Gio.ActionGroup.getActionStateHint] and
-   * [Gio.ActionGroup.getActionState] with a single function call.
+   * [gio.action_group.ActionGroup.hasAction], [gio.action_group.ActionGroup.getActionEnabled],
+   * [gio.action_group.ActionGroup.getActionParameterType],
+   * [gio.action_group.ActionGroup.getActionStateType],
+   * [gio.action_group.ActionGroup.getActionStateHint] and
+   * [gio.action_group.ActionGroup.getActionState] with a single function call.
    * This provides two main benefits.
    * The first is the improvement in efficiency that comes with not having
    * to perform repeated lookups of the action in order to discover

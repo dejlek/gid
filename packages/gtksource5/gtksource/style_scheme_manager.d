@@ -1,6 +1,6 @@
 module gtksource.style_scheme_manager;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -32,7 +32,7 @@ class StyleSchemeManager : ObjectG
   /**
    * Creates a new style manager.
    * If you do not need more than one style manager
-   * then use [GtkSource.StyleSchemeManager.getDefault] instead.
+   * then use [gtksource.style_scheme_manager.StyleSchemeManager.getDefault] instead.
    * Returns: a new #GtkSourceStyleSchemeManager.
    */
   this()
@@ -58,7 +58,7 @@ class StyleSchemeManager : ObjectG
   /**
    * Appends path to the list of directories where the manager looks for
    * style scheme files.
-   * See [GtkSource.StyleSchemeManager.setSearchPath] for details.
+   * See [gtksource.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
    * Params:
    *   path = a directory or a filename.
    */
@@ -121,7 +121,7 @@ class StyleSchemeManager : ObjectG
 
   /**
    * Returns the current search path for the manager.
-   * See [GtkSource.StyleSchemeManager.setSearchPath] for details.
+   * See [gtksource.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
    * Returns: a %NULL-terminated array
    *   of string containing the search path.
    *   The array is owned by the manager and must not be modified.
@@ -147,7 +147,7 @@ class StyleSchemeManager : ObjectG
   /**
    * Prepends path to the list of directories where the manager looks
    * for style scheme files.
-   * See [GtkSource.StyleSchemeManager.setSearchPath] for details.
+   * See [gtksource.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
    * Params:
    *   path = a directory or a filename.
    */

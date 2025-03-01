@@ -1,6 +1,6 @@
 module graphene.ray;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.box;
 import graphene.c.functions;
@@ -50,7 +50,7 @@ class Ray : Boxed
    * Allocates a new #graphene_ray_t structure.
    * The contents of the returned structure are undefined.
    * Returns: the newly allocated #graphene_ray_t.
-   *   Use [Graphene.Ray.free] to free the resources allocated by
+   *   Use [graphene.ray.Ray.free] to free the resources allocated by
    *   this function
    */
   static Ray alloc()
@@ -255,7 +255,7 @@ class Ray : Boxed
   /**
    * Checks whether the given #graphene_ray_t r intersects the
    * given #graphene_box_t b.
-   * See also: [Graphene.Ray.intersectBox]
+   * See also: [graphene.ray.Ray.intersectBox]
    * Params:
    *   b = a #graphene_box_t
    * Returns: `true` if the ray intersects the box
@@ -270,7 +270,7 @@ class Ray : Boxed
   /**
    * Checks if the given #graphene_ray_t r intersects the
    * given #graphene_sphere_t s.
-   * See also: [Graphene.Ray.intersectSphere]
+   * See also: [graphene.ray.Ray.intersectSphere]
    * Params:
    *   s = a #graphene_sphere_t
    * Returns: `true` if the ray intersects the sphere
@@ -285,7 +285,7 @@ class Ray : Boxed
   /**
    * Checks whether the given #graphene_ray_t r intersects the
    * given #graphene_triangle_t b.
-   * See also: [Graphene.Ray.intersectTriangle]
+   * See also: [graphene.ray.Ray.intersectTriangle]
    * Params:
    *   t = a #graphene_triangle_t
    * Returns: `true` if the ray intersects the triangle

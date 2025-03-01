@@ -1,6 +1,6 @@
 module graphene.vec3;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -45,9 +45,9 @@ class Vec3 : Boxed
   /**
    * Allocates a new #graphene_vec3_t structure.
    * The contents of the returned structure are undefined.
-   * Use [Graphene.Vec3.init_] to initialize the vector.
+   * Use [graphene.vec3.Vec3.init_] to initialize the vector.
    * Returns: the newly allocated #graphene_vec3_t
-   *   structure. Use [Graphene.Vec3.free] to free the resources allocated
+   *   structure. Use [graphene.vec3.Vec3.free] to free the resources allocated
    *   by this function.
    */
   static Vec3 alloc()

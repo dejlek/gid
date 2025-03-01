@@ -1,6 +1,6 @@
 module gtk.text;
 
-import gid.gid;
+import gid.global;
 import gio.menu_model;
 import gobject.dclosure;
 import gobject.object;
@@ -26,22 +26,22 @@ import pango.tab_array;
 /**
  * The `GtkText` widget is a single-line text entry widget.
  * `GtkText` is the common implementation of single-line text editing
- * that is shared between [Gtk.Entry], [Gtk.PasswordEntry],
- * [Gtk.SpinButton], and other widgets. In all of these, `GtkText` is
- * used as the delegate for the [Gtk.Editable] implementation.
+ * that is shared between [gtk.entry.Entry], [gtk.password_entry.PasswordEntry],
+ * [gtk.spin_button.SpinButton], and other widgets. In all of these, `GtkText` is
+ * used as the delegate for the [gtk.editable.Editable] implementation.
  * A fairly large set of key bindings are supported by default. If the
  * entered text is longer than the allocation of the widget, the widget
  * will scroll so that the cursor position is visible.
  * When using an entry for passwords and other sensitive information,
- * it can be put into “password mode” using [Gtk.Text.setVisibility].
+ * it can be put into “password mode” using [gtk.text.Text.setVisibility].
  * In this mode, entered text is displayed using a “invisible” character.
  * By default, GTK picks the best invisible character that is available
  * in the current font, but it can be changed with
- * [Gtk.Text.setInvisibleChar].
+ * [gtk.text.Text.setInvisibleChar].
  * If you are looking to add icons or progress display in an entry, look
- * at [Gtk.Entry]. There other alternatives for more specialized use
- * cases, such as [Gtk.SearchEntry].
- * If you need multi-line editable text, look at [Gtk.TextView].
+ * at [gtk.entry.Entry]. There other alternatives for more specialized use
+ * cases, such as [gtk.search_entry.SearchEntry].
+ * If you need multi-line editable text, look at [gtk.text_view.TextView].
  * # CSS nodes
  * ```
  * text[.read-only]
@@ -145,7 +145,7 @@ class Text : Widget, AccessibleText, Editable
   /**
    * Returns whether pressing Enter will activate
    * the default widget for the window containing self.
-   * See [Gtk.Text.setActivatesDefault].
+   * See [gtk.text.Text.setActivatesDefault].
    * Returns: %TRUE if the `GtkText` will activate the default widget
    */
   bool getActivatesDefault()
@@ -157,7 +157,7 @@ class Text : Widget, AccessibleText, Editable
 
   /**
    * Gets the attribute list that was set on the `GtkText`.
-   * See [Gtk.Text.setAttributes].
+   * See [gtk.text.Text.setAttributes].
    * Returns: the attribute list
    */
   AttrList getAttributes()
@@ -195,7 +195,7 @@ class Text : Widget, AccessibleText, Editable
 
   /**
    * Gets the menu model for extra items in the context menu.
-   * See [Gtk.Text.setExtraMenu].
+   * See [gtk.text.Text.setExtraMenu].
    * Returns: the menu model
    */
   MenuModel getExtraMenu()
@@ -234,7 +234,7 @@ class Text : Widget, AccessibleText, Editable
    * Retrieves the character displayed when visibility is set to false.
    * Note that GTK does not compute this value unless it needs it,
    * so the value returned by this function is not very useful unless
-   * it has been explicitly set with [Gtk.Text.setInvisibleChar].
+   * it has been explicitly set with [gtk.text.Text.setInvisibleChar].
    * Returns: the current invisible char, or 0, if text does not
    *   show invisible text at all.
    */
@@ -247,9 +247,9 @@ class Text : Widget, AccessibleText, Editable
 
   /**
    * Retrieves the maximum allowed length of the text in self.
-   * See [Gtk.Text.setMaxLength].
+   * See [gtk.text.Text.setMaxLength].
    * This is equivalent to getting self's `GtkEntryBuffer` and
-   * calling [Gtk.EntryBuffer.getMaxLength] on it.
+   * calling [gtk.entry_buffer.EntryBuffer.getMaxLength] on it.
    * Returns: the maximum allowed number of characters
    *   in `GtkText`, or 0 if there is no maximum.
    */
@@ -262,7 +262,7 @@ class Text : Widget, AccessibleText, Editable
 
   /**
    * Gets whether text is overwritten when typing in the `GtkText`.
-   * See [Gtk.Text.setOverwriteMode].
+   * See [gtk.text.Text.setOverwriteMode].
    * Returns: whether the text is overwritten when typing
    */
   bool getOverwriteMode()
@@ -300,7 +300,7 @@ class Text : Widget, AccessibleText, Editable
 
   /**
    * Gets the tabstops that were set on the `GtkText`.
-   * See [Gtk.Text.setTabs].
+   * See [gtk.text.Text.setTabs].
    * Returns: the tabstops
    */
   TabArray getTabs()
@@ -314,7 +314,7 @@ class Text : Widget, AccessibleText, Editable
   /**
    * Retrieves the current length of the text in self.
    * This is equivalent to getting self's `GtkEntryBuffer`
-   * and calling [Gtk.EntryBuffer.getLength] on it.
+   * and calling [gtk.entry_buffer.EntryBuffer.getLength] on it.
    * Returns: the current number of characters
    *   in `GtkText`, or 0 if there are none.
    */
@@ -350,7 +350,7 @@ class Text : Widget, AccessibleText, Editable
 
   /**
    * Causes self to have keyboard focus.
-   * It behaves like [Gtk.Widget.grabFocus],
+   * It behaves like [gtk.widget.Widget.grabFocus],
    * except that it doesn't select the contents of self.
    * You only want to call this on some special entries
    * which the user usually doesn't want to replace all text in,
@@ -465,7 +465,7 @@ class Text : Widget, AccessibleText, Editable
    * If the current contents are longer than the given length, then
    * they will be truncated to fit.
    * This is equivalent to getting self's `GtkEntryBuffer` and
-   * calling [Gtk.EntryBuffer.setMaxLength] on it.
+   * calling [gtk.entry_buffer.EntryBuffer.setMaxLength] on it.
    * Params:
    *   length = the maximum length of the `GtkText`, or 0 for no maximum.
    *     $(LPAREN)other than the maximum length of entries.$(RPAREN) The value passed
@@ -539,7 +539,7 @@ class Text : Widget, AccessibleText, Editable
    * the text in the widget is copied to the clipboard.
    * By default, GTK picks the best invisible character available
    * in the current font, but it can be changed with
-   * [Gtk.Text.setInvisibleChar].
+   * [gtk.text.Text.setInvisibleChar].
    * Note that you probably want to set propertyGtk.Text:input-purpose
    * to %GTK_INPUT_PURPOSE_PASSWORD or %GTK_INPUT_PURPOSE_PIN to
    * inform input methods about the purpose of this self,
@@ -807,7 +807,7 @@ class Text : Widget, AccessibleText, Editable
    * the viewport to be moved instead.
    * This is a [keybinding signal](class.SignalAction.html).
    * Applications should not connect to it, but may emit it with
-   * [GObject.Global.signalEmitByName] if they need to control the cursor
+   * [gobject.global.signalEmitByName] if they need to control the cursor
    * programmatically.
    * The default bindings for this signal come in two variants,
    * the variant with the <kbd>Shift</kbd> modifier extends the

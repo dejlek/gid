@@ -1,6 +1,6 @@
 module gio.settings_backend;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -9,7 +9,7 @@ import gobject.object;
 /**
  * The `GSettingsBackend` interface defines a generic interface for
  * non-strictly-typed data that is stored in a hierarchy. To implement
- * an alternative storage backend for [Gio.Settings], you need to
+ * an alternative storage backend for [gio.settings.Settings], you need to
  * implement the `GSettingsBackend` interface and then make it implement the
  * extension point `G_SETTINGS_BACKEND_EXTENSION_POINT_NAME`.
  * The interface defines methods for reading and writing values, a
@@ -19,8 +19,8 @@ import gobject.object;
  * implementations must carefully adhere to the expectations of
  * callers that are documented on each of the interface methods.
  * Some of the `GSettingsBackend` functions accept or return a
- * [GLib.Tree]. These trees always have strings as keys and
- * [GLib.VariantG] as values.
+ * [glib.tree.Tree]. These trees always have strings as keys and
+ * [glib.variant.VariantG] as values.
  * The `GSettingsBackend` API is exported to allow third-party
  * implementations, but does not carry the same stability guarantees
  * as the public GIO API. For this reason, you have to define the
@@ -104,9 +104,9 @@ class SettingsBackend : ObjectG
    * from the contatenation of path with each item in items may have
    * changed.
    * The same rules for when notifications must occur apply as per
-   * [Gio.SettingsBackend.changed].  These two calls can be used
+   * [gio.settings_backend.SettingsBackend.changed].  These two calls can be used
    * interchangeably if exactly one item has changed $(LPAREN)although in that
-   * case [Gio.SettingsBackend.changed] is definitely preferred$(RPAREN).
+   * case [gio.settings_backend.SettingsBackend.changed] is definitely preferred$(RPAREN).
    * For efficiency reasons, the implementation should strive for path to
    * be as long as possible $(LPAREN)ie: the longest common prefix of all of the
    * keys that were changed$(RPAREN) but this is not strictly required.
@@ -135,7 +135,7 @@ class SettingsBackend : ObjectG
    * The meaning of this signal is that any of the key which has a name
    * starting with path may have changed.
    * The same rules for when notifications must occur apply as per
-   * [Gio.SettingsBackend.changed].  This call might be an appropriate
+   * [gio.settings_backend.SettingsBackend.changed].  This call might be an appropriate
    * reasponse to a 'reset' call but implementations are also free to
    * explicitly list the keys that were affected by that call if they can
    * easily do so.

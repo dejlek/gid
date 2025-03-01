@@ -1,6 +1,6 @@
 module gtk.bin_layout;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -10,8 +10,8 @@ import gtk.types;
  * `GtkBinLayout` is a `GtkLayoutManager` subclass useful for create "bins" of
  * widgets.
  * `GtkBinLayout` will stack each child of a widget on top of each other,
- * using the [Gtk.Widget.hexpand], [Gtk.Widget.vexpand],
- * [Gtk.Widget.halign], and [Gtk.Widget.valign] properties
+ * using the [gtk.widget.Widget.gboolean], [gtk.widget.Widget.gboolean],
+ * [gtk.widget.Widget.Align], and [gtk.widget.Widget.Align] properties
  * of each child to determine where they should be positioned.
  */
 class BinLayout : LayoutManager

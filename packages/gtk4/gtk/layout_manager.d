@@ -1,6 +1,6 @@
 module gtk.layout_manager;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -16,13 +16,13 @@ import gtk.widget;
  * the size of a widget depending on its contents.
  * Each `GtkWidget` can only have a `GtkLayoutManager` instance associated
  * to it at any given time; it is possible, though, to replace the layout
- * manager instance using [Gtk.Widget.setLayoutManager].
+ * manager instance using [gtk.widget.Widget.setLayoutManager].
  * ## Layout properties
  * A layout manager can expose properties for controlling the layout of
- * each child, by creating an object type derived from [Gtk.LayoutChild]
+ * each child, by creating an object type derived from [gtk.layout_child.LayoutChild]
  * and installing the properties on it as normal `GObject` properties.
  * Each `GtkLayoutChild` instance storing the layout properties for a
- * specific child is created through the [Gtk.LayoutManager.getLayoutChild]
+ * specific child is created through the [gtk.layout_manager.LayoutManager.getLayoutChild]
  * method; a `GtkLayoutManager` controls the creation of its `GtkLayoutChild`
  * instances by overriding the GtkLayoutManagerClass.create_layout_child$(LPAREN)$(RPAREN)
  * virtual function. The typical implementation should look like:
@@ -45,9 +45,9 @@ import gtk.widget;
  * until the widget is removed from its parent, or the parent removes the
  * layout manager.
  * Each `GtkLayoutManager` instance creating a `GtkLayoutChild` should use
- * [Gtk.LayoutManager.getLayoutChild] every time it needs to query
+ * [gtk.layout_manager.LayoutManager.getLayoutChild] every time it needs to query
  * the layout properties; each `GtkLayoutChild` instance should call
- * [Gtk.LayoutManager.layoutChanged] every time a property is
+ * [gtk.layout_manager.LayoutManager.layoutChanged] every time a property is
  * updated, in order to queue a new size measuring and allocation.
  */
 class LayoutManager : ObjectG
@@ -140,7 +140,7 @@ class LayoutManager : ObjectG
   /**
    * Measures the size of the widget using manager, for the
    * given orientation and size.
-   * See the [Gtk.Widget] documentation on layout management for
+   * See the [gtk.widget.Widget] documentation on layout management for
    * more details.
    * Params:
    *   widget = the `GtkWidget` using manager

@@ -4,7 +4,7 @@ public import atk.document_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 
 /**
@@ -71,7 +71,7 @@ template DocumentT()
    * Gets a string indicating the document type.
    * Returns: a string indicating the document type
 
-   * Deprecated: Since 2.12. Please use [Atk.Document.getAttributes] to
+   * Deprecated: Since 2.12. Please use [atk.document.Document.getAttributes] to
    *   ask for the document type if it applies.
    */
   override string getDocumentType()
@@ -92,7 +92,7 @@ template DocumentT()
    *   locale of the document content as a whole, or NULL if
    *   the document content does not specify a locale.
 
-   * Deprecated: Please use [Atk.ObjectAtk.getObjectLocale] instead.
+   * Deprecated: Please use [atk.object.ObjectAtk.getObjectLocale] instead.
    */
   override string getLocale()
   {

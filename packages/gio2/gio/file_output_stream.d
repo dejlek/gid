@@ -1,6 +1,6 @@
 module gio.file_output_stream;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -17,16 +17,16 @@ import gobject.object;
 /**
  * `GFileOutputStream` provides output streams that write their
  * content to a file.
- * `GFileOutputStream` implements [Gio.Seekable], which allows the output
+ * `GFileOutputStream` implements [gio.seekable.Seekable], which allows the output
  * stream to jump to arbitrary positions in the file and to truncate
  * the file, provided the filesystem of the file supports these
  * operations.
- * To find the position of a file output stream, use [Gio.Seekable.tell].
+ * To find the position of a file output stream, use [gio.seekable.Seekable.tell].
  * To find out if a file output stream supports seeking, use
- * [Gio.Seekable.canSeek].To position a file output stream, use
- * [Gio.Seekable.seek]. To find out if a file output stream supports
- * truncating, use [Gio.Seekable.canTruncate]. To truncate a file output
- * stream, use [Gio.Seekable.truncate].
+ * [gio.seekable.Seekable.canSeek].To position a file output stream, use
+ * [gio.seekable.Seekable.seek]. To find out if a file output stream supports
+ * truncating, use [gio.seekable.Seekable.canTruncate]. To truncate a file output
+ * stream, use [gio.seekable.Seekable.truncate].
  */
 class FileOutputStream : OutputStream, Seekable
 {
@@ -66,7 +66,7 @@ class FileOutputStream : OutputStream, Seekable
   /**
    * Queries a file output stream for the given attributes.
    * This function blocks while querying the stream. For the asynchronous
-   * version of this function, see [Gio.FileOutputStream.queryInfoAsync].
+   * version of this function, see [gio.file_output_stream.FileOutputStream.queryInfoAsync].
    * While the stream is blocked, the stream will set the pending flag
    * internally, and any other operations on the stream will fail with
    * %G_IO_ERROR_PENDING.
@@ -99,9 +99,9 @@ class FileOutputStream : OutputStream, Seekable
   /**
    * Asynchronously queries the stream for a #GFileInfo. When completed,
    * callback will be called with a #GAsyncResult which can be used to
-   * finish the operation with [Gio.FileOutputStream.queryInfoFinish].
+   * finish the operation with [gio.file_output_stream.FileOutputStream.queryInfoFinish].
    * For the synchronous version of this function, see
-   * [Gio.FileOutputStream.queryInfo].
+   * [gio.file_output_stream.FileOutputStream.queryInfo].
    * Params:
    *   attributes = a file attribute query string.
    *   ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the
@@ -127,7 +127,7 @@ class FileOutputStream : OutputStream, Seekable
 
   /**
    * Finalizes the asynchronous query started
-   * by [Gio.FileOutputStream.queryInfoAsync].
+   * by [gio.file_output_stream.FileOutputStream.queryInfoAsync].
    * Params:
    *   result = a #GAsyncResult.
    * Returns: A #GFileInfo for the finished query.

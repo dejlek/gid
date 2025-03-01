@@ -1,6 +1,6 @@
 module gio.notification;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.icon;
@@ -19,7 +19,7 @@ import gobject.object;
  * and even across system reboots.
  * Since the user may click on a notification while the application is
  * not running, applications using `GNotification` should be able to be
- * started as a D-Bus service, using [Gio.ApplicationGio].
+ * started as a D-Bus service, using [gio.application.ApplicationGio].
  * In order for `GNotification` to work, the application must have installed
  * a `.desktop` file. For example:
  * ```
@@ -40,14 +40,14 @@ import gobject.object;
  * Control Center’s ‘Notifications’ panel.
  * The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
  * where `org.gnome.TestApplication` is the ID passed to
- * [Gio.ApplicationGio.new_].
+ * [gio.application.ApplicationGio.new_].
  * User interaction with a notification $(LPAREN)either the default action, or
  * buttons$(RPAREN) must be associated with actions on the application $(LPAREN)ie:
  * `app.` actions$(RPAREN).  It is not possible to route user interaction
  * through the notification itself, because the object will not exist if
  * the application is autostarted as a result of a notification being
  * clicked.
- * A notification can be sent with [Gio.ApplicationGio.sendNotification].
+ * A notification can be sent with [gio.application.ApplicationGio.sendNotification].
  */
 class Notification : ObjectG
 {
@@ -71,7 +71,7 @@ class Notification : ObjectG
   /**
    * Creates a new #GNotification with title as its title.
    * After populating notification with more details, it can be sent to
-   * the desktop shell with [Gio.ApplicationGio.sendNotification]. Changing
+   * the desktop shell with [gio.application.ApplicationGio.sendNotification]. Changing
    * any properties after this call will not have any effect until
    * resending notification.
    * Params:
@@ -92,7 +92,7 @@ class Notification : ObjectG
    * application-wide action $(LPAREN)starting with "app."$(RPAREN). If detailed_action
    * contains a target, the action will be activated with that target as
    * its parameter.
-   * See [Gio.Action.parseDetailedName] for a description of the format
+   * See [gio.action.Action.parseDetailedName] for a description of the format
    * for detailed_action.
    * Params:
    *   label = label of the button
@@ -154,7 +154,7 @@ class Notification : ObjectG
    * The action in detailed_action must be an application-wide action $(LPAREN)it
    * must start with "app."$(RPAREN). If detailed_action contains a target, the
    * given action will be activated with that target as its parameter.
-   * See [Gio.Action.parseDetailedName] for a description of the format
+   * See [gio.action.Action.parseDetailedName] for a description of the format
    * for detailed_action.
    * When no default action is set, the application that the notification
    * was sent on is activated.
@@ -218,12 +218,12 @@ class Notification : ObjectG
   }
 
   /**
-   * Deprecated in favor of [Gio.Notification.setPriority].
+   * Deprecated in favor of [gio.notification.Notification.setPriority].
    * Params:
    *   urgent = %TRUE if notification is urgent
 
    * Deprecated: Since 2.42, this has been deprecated in favour of
-   *   [Gio.Notification.setPriority].
+   *   [gio.notification.Notification.setPriority].
    */
   void setUrgent(bool urgent)
   {

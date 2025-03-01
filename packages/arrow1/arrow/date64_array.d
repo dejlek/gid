@@ -5,7 +5,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.numeric_array;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class Date64Array : NumericArray
 {

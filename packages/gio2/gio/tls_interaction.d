@@ -1,6 +1,6 @@
 module gio.tls_interaction;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -16,11 +16,11 @@ import gobject.object;
  * `GTlsInteraction` provides a mechanism for the TLS connection and database
  * code to interact with the user. It can be used to ask the user for passwords.
  * To use a `GTlsInteraction` with a TLS connection use
- * [Gio.TlsConnection.setInteraction].
+ * [gio.tls_connection.TlsConnection.setInteraction].
  * Callers should instantiate a derived class that implements the various
  * interaction methods to show the required dialogs.
  * Callers should use the 'invoke' functions like
- * [Gio.TlsInteraction.invokeAskPassword] to run interaction methods.
+ * [gio.tls_interaction.TlsInteraction.invokeAskPassword] to run interaction methods.
  * These functions make sure that the interaction is invoked in the main loop
  * and not in the current thread, if the current thread is not running the
  * main loop.
@@ -51,7 +51,7 @@ class TlsInteraction : ObjectG
 
   /**
    * Run synchronous interaction to ask the user for a password. In general,
-   * [Gio.TlsInteraction.invokeAskPassword] should be used instead of this
+   * [gio.tls_interaction.TlsInteraction.invokeAskPassword] should be used instead of this
    * function.
    * Derived subclasses usually implement a password prompt, although they may
    * also choose to provide a password from elsewhere. The password value will
@@ -79,7 +79,7 @@ class TlsInteraction : ObjectG
 
   /**
    * Run asynchronous interaction to ask the user for a password. In general,
-   * [Gio.TlsInteraction.invokeAskPassword] should be used instead of this
+   * [gio.tls_interaction.TlsInteraction.invokeAskPassword] should be used instead of this
    * function.
    * Derived subclasses usually implement a password prompt, although they may
    * also choose to provide a password from elsewhere. The password value will
@@ -112,9 +112,9 @@ class TlsInteraction : ObjectG
 
   /**
    * Complete an ask password user interaction request. This should be once
-   * the [Gio.TlsInteraction.askPasswordAsync] completion callback is called.
+   * the [gio.tls_interaction.TlsInteraction.askPasswordAsync] completion callback is called.
    * If %G_TLS_INTERACTION_HANDLED is returned, then the #GTlsPassword passed
-   * to [Gio.TlsInteraction.askPassword] will have its password filled in.
+   * to [gio.tls_interaction.TlsInteraction.askPassword] will have its password filled in.
    * If the interaction is cancelled by the cancellation object, or by the
    * user then %G_TLS_INTERACTION_FAILED will be returned with an error that
    * contains a %G_IO_ERROR_CANCELLED error code.
@@ -136,7 +136,7 @@ class TlsInteraction : ObjectG
   /**
    * Invoke the interaction to ask the user for a password. It invokes this
    * interaction in the main loop, specifically the #GMainContext returned by
-   * [GLib.MainContext.getThreadDefault] when the interaction is created. This
+   * [glib.main_context.MainContext.getThreadDefault] when the interaction is created. This
    * is called by called by #GTlsConnection or #GTlsDatabase to ask the user
    * for a password.
    * Derived subclasses usually implement a password prompt, although they may
@@ -170,7 +170,7 @@ class TlsInteraction : ObjectG
    * Invoke the interaction to ask the user to choose a certificate to
    * use with the connection. It invokes this interaction in the main
    * loop, specifically the #GMainContext returned by
-   * [GLib.MainContext.getThreadDefault] when the interaction is
+   * [glib.main_context.MainContext.getThreadDefault] when the interaction is
    * created. This is called by called by #GTlsConnection when the peer
    * requests a certificate during the handshake.
    * Derived subclasses usually implement a certificate selector,
@@ -203,13 +203,13 @@ class TlsInteraction : ObjectG
 
   /**
    * Run synchronous interaction to ask the user to choose a certificate to use
-   * with the connection. In general, [Gio.TlsInteraction.invokeRequestCertificate]
+   * with the connection. In general, [gio.tls_interaction.TlsInteraction.invokeRequestCertificate]
    * should be used instead of this function.
    * Derived subclasses usually implement a certificate selector, although they may
    * also choose to provide a certificate from elsewhere. Alternatively the user may
    * abort this certificate request, which will usually abort the TLS connection.
    * If %G_TLS_INTERACTION_HANDLED is returned, then the #GTlsConnection
-   * passed to [Gio.TlsInteraction.requestCertificate] will have had its
+   * passed to [gio.tls_interaction.TlsInteraction.requestCertificate] will have had its
    * #GTlsConnection:certificate filled in.
    * If the interaction is cancelled by the cancellation object, or by the
    * user then %G_TLS_INTERACTION_FAILED will be returned with an error that
@@ -234,7 +234,7 @@ class TlsInteraction : ObjectG
 
   /**
    * Run asynchronous interaction to ask the user for a certificate to use with
-   * the connection. In general, [Gio.TlsInteraction.invokeRequestCertificate] should
+   * the connection. In general, [gio.tls_interaction.TlsInteraction.invokeRequestCertificate] should
    * be used instead of this function.
    * Derived subclasses usually implement a certificate selector, although they may
    * also choose to provide a certificate from elsewhere. callback will be called
@@ -263,9 +263,9 @@ class TlsInteraction : ObjectG
 
   /**
    * Complete a request certificate user interaction request. This should be once
-   * the [Gio.TlsInteraction.requestCertificateAsync] completion callback is called.
+   * the [gio.tls_interaction.TlsInteraction.requestCertificateAsync] completion callback is called.
    * If %G_TLS_INTERACTION_HANDLED is returned, then the #GTlsConnection
-   * passed to [Gio.TlsInteraction.requestCertificateAsync] will have had its
+   * passed to [gio.tls_interaction.TlsInteraction.requestCertificateAsync] will have had its
    * #GTlsConnection:certificate filled in.
    * If the interaction is cancelled by the cancellation object, or by the
    * user then %G_TLS_INTERACTION_FAILED will be returned with an error that

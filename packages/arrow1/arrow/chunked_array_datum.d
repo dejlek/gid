@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.chunked_array;
 import arrow.datum;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class ChunkedArrayDatum : Datum
 {

@@ -4,7 +4,7 @@ import arrow.chunked_array;
 import arrow.schema;
 import arrow.seekable_input_stream;
 import arrow.table;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 import parquet.c.functions;

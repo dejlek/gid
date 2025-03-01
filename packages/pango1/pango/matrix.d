@@ -1,6 +1,6 @@
 module pango.matrix;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -132,7 +132,7 @@ class Matrix : Boxed
    * Returns the scale factor of a matrix on the height of the font.
    * That is, the scale factor in the direction perpendicular to the
    * vector that the X coordinate is mapped to.  If the scale in the X
-   * coordinate is needed as well, use [Pango.Matrix.getFontScaleFactors].
+   * coordinate is needed as well, use [pango.matrix.Matrix.getFontScaleFactors].
    * Returns: the scale factor of matrix on the height of the font,
    *   or 1.0 if matrix is %NULL.
    */
@@ -201,7 +201,7 @@ class Matrix : Boxed
 
   /**
    * Transforms the distance vector $(LPAREN)dx,dy$(RPAREN) by matrix.
-   * This is similar to [Pango.Matrix.transformPoint],
+   * This is similar to [pango.matrix.Matrix.transformPoint],
    * except that the translation components of the transformation
    * are ignored. The calculation of the returned vector is as follows:
    * ```
@@ -227,7 +227,7 @@ class Matrix : Boxed
    * This function is useful for example when you want to draw a rotated
    * PangoLayout to an image buffer, and want to know how large the image
    * should be and how much you should shift the layout when rendering.
-   * For better accuracy, you should use [Pango.Matrix.transformRectangle]
+   * For better accuracy, you should use [pango.matrix.Matrix.transformRectangle]
    * on original rectangle in Pango units and convert to pixels afterward
    * using funcextents_to_pixels's first argument.
    * Params:
@@ -256,10 +256,10 @@ class Matrix : Boxed
    * PangoLayout to an image buffer, and want to know how large the image
    * should be and how much you should shift the layout when rendering.
    * If you have a rectangle in device units $(LPAREN)pixels$(RPAREN), use
-   * [Pango.Matrix.transformPixelRectangle].
+   * [pango.matrix.Matrix.transformPixelRectangle].
    * If you have the rectangle in Pango units and want to convert to
    * transformed pixel bounding box, it is more accurate to transform it first
-   * $(LPAREN)using this function$(RPAREN) and pass the result to [Pango.Global.extentsToPixels],
+   * $(LPAREN)using this function$(RPAREN) and pass the result to [pango.global.extentsToPixels],
    * first argument, for an inclusive rounded rectangle.
    * However, there are valid reasons that you may want to convert
    * to pixels first and then transform, for example when the transformed

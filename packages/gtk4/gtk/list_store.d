@@ -1,6 +1,6 @@
 module gtk.list_store;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -20,7 +20,7 @@ import gtk.tree_sortable_mixin;
 import gtk.types;
 
 /**
- * A list-like data structure that can be used with the [Gtk.TreeView].
+ * A list-like data structure that can be used with the [gtk.tree_view.TreeView].
  * The `GtkListStore` object is a list model for use with a `GtkTreeView`
  * widget.  It implements the `GtkTreeModel` interface, and consequentialy,
  * can use all of the methods available there.  It also implements the
@@ -34,9 +34,9 @@ import gtk.types;
  * accept `GObject`s are handled a little differently.  The
  * `GtkListStore` will keep a reference to the object instead of copying the
  * value.  As a result, if the object is modified, it is up to the
- * application writer to call [Gtk.TreeModel.rowChanged] to emit the
+ * application writer to call [gtk.tree_model.TreeModel.rowChanged] to emit the
  * signal@Gtk.TreeModel::row_changed signal. This most commonly affects lists
- * with [Gdk.Texture]s stored.
+ * with [gdk.texture.Texture]s stored.
  * An example for creating a simple list store:
  * ```c
  * enum {
@@ -81,7 +81,7 @@ import gtk.types;
  * }
  * ```
  * `GtkListStore` is deprecated since GTK 4.10, and should not be used in newly
- * written code. You should use [Gio.DGioListStore] instead, and the various
+ * written code. You should use [gio.list_store.ListStore] instead, and the various
  * list models provided by GTK.
  * ## Performance Considerations
  * Internally, the `GtkListStore` was originally implemented with a linked list
@@ -93,10 +93,10 @@ import gtk.types;
  * keeping the iter around.
  * ## Atomic Operations
  * It is important to note that only the methods
- * [Gtk.ListStore.insertWithValues] and [Gtk.ListStore.insertWithValuesv]
+ * [gtk.list_store.ListStore.insertWithValues] and [gtk.list_store.ListStore.insertWithValuesv]
  * are atomic, in the sense that the row is being appended to the store and the
  * values filled in in a single operation with regard to `GtkTreeModel` signaling.
- * In contrast, using e.g. [Gtk.ListStore.append] and then [Gtk.ListStore.set]
+ * In contrast, using e.g. [gtk.list_store.ListStore.append] and then [gtk.list_store.ListStore.set]
  * will first create a row, which triggers the `GtkTreeModel::row-inserted` signal
  * on `GtkListStore`. The row, however, is still empty, and any signal handler
  * connecting to `GtkTreeModel::row-inserted` on this particular store should be prepared
@@ -107,7 +107,7 @@ import gtk.types;
  * `GtkTreeModel`FilterVisibleFunc to be visited with an empty row first; the
  * function must be prepared for that.
  * ## GtkListStore as GtkBuildable
- * The GtkListStore implementation of the [Gtk.Buildable] interface allows
+ * The GtkListStore implementation of the [gtk.buildable.Buildable] interface allows
  * to specify the model columns with a `<columns>` element that may contain
  * multiple `<column>` elements, each specifying one model column. The “type”
  * attribute specifies the data type for the column.
@@ -142,7 +142,7 @@ import gtk.types;
  * </object>
  * ```
 
- * Deprecated: Use [Gio.DGioListStore] instead
+ * Deprecated: Use [gio.list_store.ListStore] instead
  */
 class ListStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, TreeSortable
 {
@@ -176,7 +176,7 @@ class ListStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   types = an array of `GType` types for the columns, from first to last
    * Returns: a new `GtkListStore`
 
-   * Deprecated: Use [Gio.DGioListStore] instead
+   * Deprecated: Use [gio.list_store.ListStore] instead
    */
   static ListStore new_(GType[] types)
   {
@@ -194,7 +194,7 @@ class ListStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
   /**
    * Appends a new row to list_store.  iter will be changed to point to this new
    * row.  The row will be empty after this function is called.  To fill in
-   * values, you need to call [Gtk.ListStore.set] or [Gtk.ListStore.setValue].
+   * values, you need to call [gtk.list_store.ListStore.set] or [gtk.list_store.ListStore.setValue].
    * Params:
    *   iter = An unset `GtkTreeIter` to set to the appended row
 
@@ -222,7 +222,7 @@ class ListStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    * row.  If position is -1 or is larger than the number of rows on the list,
    * then the new row will be appended to the list. The row will be empty after
    * this function is called.  To fill in values, you need to call
-   * [Gtk.ListStore.set] or [Gtk.ListStore.setValue].
+   * [gtk.list_store.ListStore.set] or [gtk.list_store.ListStore.setValue].
    * Params:
    *   iter = An unset `GtkTreeIter` to set to the new row
    *   position = position to insert the new row, or -1 for last
@@ -240,7 +240,7 @@ class ListStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    * Inserts a new row after sibling. If sibling is %NULL, then the row will be
    * prepended to the beginning of the list. iter will be changed to point to
    * this new row. The row will be empty after this function is called. To fill
-   * in values, you need to call [Gtk.ListStore.set] or [Gtk.ListStore.setValue].
+   * in values, you need to call [gtk.list_store.ListStore.set] or [gtk.list_store.ListStore.setValue].
    * Params:
    *   iter = An unset `GtkTreeIter` to set to the new row
    *   sibling = A valid `GtkTreeIter`
@@ -258,7 +258,7 @@ class ListStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    * Inserts a new row before sibling. If sibling is %NULL, then the row will
    * be appended to the end of the list. iter will be changed to point to this
    * new row. The row will be empty after this function is called. To fill in
-   * values, you need to call [Gtk.ListStore.set] or [Gtk.ListStore.setValue].
+   * values, you need to call [gtk.list_store.ListStore.set] or [gtk.list_store.ListStore.setValue].
    * Params:
    *   iter = An unset `GtkTreeIter` to set to the new row
    *   sibling = A valid `GtkTreeIter`
@@ -273,7 +273,7 @@ class ListStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
   }
 
   /**
-   * A variant of [Gtk.ListStore.insertWithValues] which
+   * A variant of [gtk.list_store.ListStore.insertWithValues] which
    * takes the columns and values as two arrays, instead of
    * varargs.
    * This function is mainly intended for language-bindings.
@@ -354,7 +354,7 @@ class ListStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
   /**
    * Prepends a new row to list_store. iter will be changed to point to this new
    * row. The row will be empty after this function is called. To fill in
-   * values, you need to call [Gtk.ListStore.set] or [Gtk.ListStore.setValue].
+   * values, you need to call [gtk.list_store.ListStore.set] or [gtk.list_store.ListStore.setValue].
    * Params:
    *   iter = An unset `GtkTreeIter` to set to the prepend row
 
@@ -423,7 +423,7 @@ class ListStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
   }
 
   /**
-   * A variant of [Gtk.ListStore.setValist] which
+   * A variant of [gtk.list_store.ListStore.setValist] which
    * takes the columns and values as two arrays, instead of
    * varargs. This function is mainly intended for
    * language-bindings and in case the number of columns to

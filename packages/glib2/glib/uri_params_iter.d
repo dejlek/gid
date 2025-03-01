@@ -1,6 +1,6 @@
 module glib.uri_params_iter;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -13,7 +13,7 @@ import glib.types;
  * A #GUriParamsIter structure represents an iterator that can be used to
  * iterate over the attribute/value pairs of a URI query string. #GUriParamsIter
  * structures are typically allocated on the stack and then initialized with
- * [GLib.UriParamsIter.init_]. See the documentation for [GLib.UriParamsIter.init_]
+ * [glib.uri_params_iter.UriParamsIter.init_]. See the documentation for [glib.uri_params_iter.UriParamsIter.init_]
  * for a usage example.
  */
 class UriParamsIter
@@ -46,8 +46,8 @@ class UriParamsIter
    * will give attribute `foo` with value `bar baz`. This is commonly used on the
    * web $(LPAREN)the `https` and `http` schemes only$(RPAREN), but is deprecated in favour of
    * the equivalent of encoding spaces as `%20`.
-   * Unlike with [GLib.Uri.parseParams], %G_URI_PARAMS_CASE_INSENSITIVE has no
-   * effect if passed to flags for [GLib.UriParamsIter.init_]. The caller is
+   * Unlike with [glib.uri.Uri.parseParams], %G_URI_PARAMS_CASE_INSENSITIVE has no
+   * effect if passed to flags for [glib.uri_params_iter.UriParamsIter.init_]. The caller is
    * responsible for doing their own case-insensitive comparisons.
    * |[<!-- language\="C" -->
    * GUriParamsIter iter;
@@ -88,7 +88,7 @@ class UriParamsIter
    * an error has occurred $(LPAREN)in which case error is set$(RPAREN), or if the end of the
    * iteration is reached $(LPAREN)in which case attribute and value are set to %NULL
    * and the iterator becomes invalid$(RPAREN). If %TRUE is returned,
-   * [GLib.UriParamsIter.next] may be called again to receive another
+   * [glib.uri_params_iter.UriParamsIter.next] may be called again to receive another
    * attribute/value pair.
    * Note that the same attribute may be returned multiple times, since URIs
    * allow repeated attributes.

@@ -1,6 +1,6 @@
 module gtk.builder_cscope;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.builder_scope;
 import gtk.builder_scope_mixin;
@@ -11,7 +11,7 @@ import gtk.types;
 /**
  * A `GtkBuilderScope` implementation for the C language.
  * `GtkBuilderCScope` instances use symbols explicitly added to @builder
- * with prior calls to [Gtk.BuilderCScope.addCallbackSymbol].
+ * with prior calls to [gtk.builder_cscope.BuilderCScope.addCallbackSymbol].
  * If developers want to do that, they are encouraged to create their
  * own scopes for that purpose.
  * In the case that symbols are not explicitly added; GTK will uses
@@ -19,7 +19,7 @@ import gtk.types;
  * look at the application’s symbol table. From here it tries to match
  * the signal function names given in the interface description with
  * symbols in the application.
- * Note that unless [Gtk.BuilderCScope.addCallbackSymbol] is
+ * Note that unless [gtk.builder_cscope.BuilderCScope.addCallbackSymbol] is
  * called for all signal callbacks which are referenced by the loaded XML,
  * this functionality will require that `GModule` be supported on the platform.
  */
@@ -48,7 +48,7 @@ class BuilderCScope : ObjectG, BuilderScope
    * Creates a new `GtkBuilderCScope` object to use with future
    * `GtkBuilder` instances.
    * Calling this function is only necessary if you want to add
-   * custom callbacks via [Gtk.BuilderCScope.addCallbackSymbol].
+   * custom callbacks via [gtk.builder_cscope.BuilderCScope.addCallbackSymbol].
    * Returns: a new `GtkBuilderCScope`
    */
   this()

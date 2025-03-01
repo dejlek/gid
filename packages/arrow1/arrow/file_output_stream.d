@@ -8,7 +8,7 @@ import arrow.output_stream;
 import arrow.types;
 import arrow.writable;
 import arrow.writable_mixin;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class FileOutputStream : OutputStream

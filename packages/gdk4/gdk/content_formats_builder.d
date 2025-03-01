@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.content_formats;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gobject.types;
 
@@ -86,7 +86,7 @@ class ContentFormatsBuilder : Boxed
    * The given `GdkContentFormatsBuilder` is reset once this function returns;
    * you cannot call this function multiple times on the same builder instance.
    * This function is intended primarily for bindings. C code should use
-   * [Gdk.ContentFormatsBuilder.freeToFormats].
+   * [gdk.content_formats_builder.ContentFormatsBuilder.freeToFormats].
    * Returns: the newly created `GdkContentFormats`
    *   with all the formats added to builder
    */

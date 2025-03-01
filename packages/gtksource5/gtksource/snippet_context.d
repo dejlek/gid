@@ -1,6 +1,6 @@
 module gtksource.snippet_context;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtksource.c.functions;
@@ -82,7 +82,7 @@ class SnippetContext : ObjectG
 
   /**
    * Sets a constatnt within the context.
-   * This is similar to a variable set with [GtkSource.SnippetContext.setVariable]
+   * This is similar to a variable set with [gtksource.snippet_context.SnippetContext.setVariable]
    * but is expected to not change during use of the snippet.
    * Examples would be the date or users name.
    * Params:

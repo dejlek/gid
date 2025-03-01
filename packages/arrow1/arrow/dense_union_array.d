@@ -8,7 +8,7 @@ import arrow.int32_array;
 import arrow.int8_array;
 import arrow.types;
 import arrow.union_array;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

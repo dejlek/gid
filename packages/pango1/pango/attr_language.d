@@ -1,6 +1,6 @@
 module pango.attr_language;
 
-import gid.gid;
+import gid.global;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -47,7 +47,7 @@ class AttrLanguage
    *   language = language tag
    * Returns: the newly allocated
    *   `PangoAttribute`, which should be freed with
-   *   [Pango.Attribute.destroy]
+   *   [pango.attribute.Attribute.destroy]
    */
   static Attribute new_(PgLanguage language)
   {

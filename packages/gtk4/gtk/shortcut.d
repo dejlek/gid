@@ -1,6 +1,6 @@
 module gtk.shortcut;
 
-import gid.gid;
+import gid.global;
 import glib.variant;
 import gobject.object;
 import gtk.c.functions;
@@ -12,9 +12,9 @@ import gtk.types;
 /**
  * A `GtkShortcut` describes a keyboard shortcut.
  * It contains a description of how to trigger the shortcut via a
- * [Gtk.ShortcutTrigger] and a way to activate the shortcut
- * on a widget via a [Gtk.ShortcutAction].
- * The actual work is usually done via [Gtk.ShortcutController],
+ * [gtk.shortcut_trigger.ShortcutTrigger] and a way to activate the shortcut
+ * on a widget via a [gtk.shortcut_action.ShortcutAction].
+ * The actual work is usually done via [gtk.shortcut_controller.ShortcutController],
  * which decides if and when to activate a shortcut. Using that controller
  * directly however is rarely necessary as various higher level
  * convenience APIs exist on `GtkWidget`s that make it easier to use

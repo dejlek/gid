@@ -1,6 +1,6 @@
 module pango.attr_font_desc;
 
-import gid.gid;
+import gid.global;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -49,7 +49,7 @@ class AttrFontDesc
    *   desc = the font description
    * Returns: the newly allocated
    *   `PangoAttribute`, which should be freed with
-   *   [Pango.Attribute.destroy]
+   *   [pango.attribute.Attribute.destroy]
    */
   static Attribute new_(FontDescription desc)
   {

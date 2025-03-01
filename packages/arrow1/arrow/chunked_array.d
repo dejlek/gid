@@ -9,7 +9,7 @@ import arrow.filter_options;
 import arrow.take_options;
 import arrow.types;
 import arrow.uint64_array;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

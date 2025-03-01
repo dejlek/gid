@@ -1,7 +1,7 @@
 module gsk.texture_scale_node;
 
 import gdk.texture;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import graphene.rect;
 import gsk.c.functions;

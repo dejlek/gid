@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.draw_context;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gio.initable;
 import gio.initable_mixin;
 import gobject.dclosure;
@@ -13,7 +13,7 @@ import gobject.dclosure;
  * `GdkVulkanContext` is an object representing the platform-specific
  * Vulkan draw context.
  * `GdkVulkanContext`s are created for a surface using
- * [Gdk.Surface.createVulkanContext], and the context will match
+ * [gdk.surface.Surface.createVulkanContext], and the context will match
  * the characteristics of the surface.
  * Support for `GdkVulkanContext` is platform-specific and context creation
  * can fail, returning %NULL context.

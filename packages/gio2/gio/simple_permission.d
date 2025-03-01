@@ -1,16 +1,16 @@
 module gio.simple_permission;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.permission;
 import gio.types;
 
 /**
- * `GSimplePermission` is a trivial implementation of [Gio.Permission]
+ * `GSimplePermission` is a trivial implementation of [gio.permission.Permission]
  * that represents a permission that is either always or never allowed.  The
  * value is given at construction and doesn’t change.
- * Calling [Gio.Permission.acquire] or [Gio.Permission.release]
+ * Calling [gio.permission.Permission.acquire] or [gio.permission.Permission.release]
  * on a `GSimplePermission` will result in errors.
  */
 class SimplePermission : Permission

@@ -1,6 +1,6 @@
 module gtksource.search_settings;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -95,8 +95,8 @@ class SearchSettings : ObjectG
   /**
    * Change whether the search is done at word boundaries.
    * If at_word_boundaries is %TRUE, a search match must start and end a word.
-   * The match can span multiple words. See also [Gtk.TextIter.startsWord] and
-   * [Gtk.TextIter.endsWord].
+   * The match can span multiple words. See also [gtk.text_iter.TextIter.startsWord] and
+   * [gtk.text_iter.TextIter.endsWord].
    * Params:
    *   atWordBoundaries = the setting.
    */

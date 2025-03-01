@@ -1,7 +1,7 @@
 module gio.icon;
 
 public import gio.icon_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -15,24 +15,24 @@ import gobject.object;
  * serializing an icon to and from strings.
  * `GIcon` does not provide the actual pixmap for the icon as this is out
  * of GIO's scope, however implementations of `GIcon` may contain the name
- * of an icon $(LPAREN)see [Gio.ThemedIcon]$(RPAREN), or the path to an icon
- * $(LPAREN)see [Gio.LoadableIcon]$(RPAREN).
- * To obtain a hash of a `GIcon`, see [Gio.Icon.hash].
- * To check if two `GIcon`s are equal, see [Gio.Icon.equal].
- * For serializing a `GIcon`, use [Gio.Icon.serialize] and
- * [Gio.Icon.deserialize].
+ * of an icon $(LPAREN)see [gio.themed_icon.ThemedIcon]$(RPAREN), or the path to an icon
+ * $(LPAREN)see [gio.loadable_icon.LoadableIcon]$(RPAREN).
+ * To obtain a hash of a `GIcon`, see [gio.icon.Icon.hash].
+ * To check if two `GIcon`s are equal, see [gio.icon.Icon.equal].
+ * For serializing a `GIcon`, use [gio.icon.Icon.serialize] and
+ * [gio.icon.Icon.deserialize].
  * If you want to consume `GIcon` $(LPAREN)for example, in a toolkit$(RPAREN) you must
  * be prepared to handle at least the three following cases:
- * [Gio.LoadableIcon], [Gio.ThemedIcon] and [Gio.EmblemedIcon].
+ * [gio.loadable_icon.LoadableIcon], [gio.themed_icon.ThemedIcon] and [gio.emblemed_icon.EmblemedIcon].
  * It may also make sense to have fast-paths for other cases $(LPAREN)like handling
  * [`GdkPixbuf`](https://docs.gtk.org/gdk-pixbuf/class.Pixbuf.html) directly,
  * for example$(RPAREN) but all compliant `GIcon` implementations outside of GIO must
- * implement [Gio.LoadableIcon].
+ * implement [gio.loadable_icon.LoadableIcon].
  * If your application or library provides one or more `GIcon`
  * implementations you need to ensure that your new implementation also
- * implements [Gio.LoadableIcon].  Additionally, you must provide an
- * implementation of [Gio.Icon.serialize] that gives a result that is
- * understood by [Gio.Icon.deserialize], yielding one of the built-in
+ * implements [gio.loadable_icon.LoadableIcon].  Additionally, you must provide an
+ * implementation of [gio.icon.Icon.serialize] that gives a result that is
+ * understood by [gio.icon.Icon.deserialize], yielding one of the built-in
  * icon types.
  */
 interface Icon
@@ -45,9 +45,9 @@ interface Icon
   }
 
   /**
-   * Deserializes a #GIcon previously serialized using [Gio.Icon.serialize].
+   * Deserializes a #GIcon previously serialized using [gio.icon.Icon.serialize].
    * Params:
-   *   value = a #GVariant created with [Gio.Icon.serialize]
+   *   value = a #GVariant created with [gio.icon.Icon.serialize]
    * Returns: a #GIcon, or %NULL when deserialization fails.
    */
   static Icon deserialize(VariantG value)
@@ -60,12 +60,12 @@ interface Icon
 
   /**
    * Generate a #GIcon instance from str. This function can fail if
-   * str is not valid - see [Gio.Icon.toString_] for discussion.
+   * str is not valid - see [gio.icon.Icon.toString_] for discussion.
    * If your application or library provides one or more #GIcon
    * implementations you need to ensure that each #GType is registered
-   * with the type system prior to calling [Gio.Icon.newForString].
+   * with the type system prior to calling [gio.icon.Icon.newForString].
    * Params:
-   *   str = A string obtained via [Gio.Icon.toString_].
+   *   str = A string obtained via [gio.icon.Icon.toString_].
    * Returns: An object implementing the #GIcon
    *   interface or %NULL if error is set.
    */
@@ -98,7 +98,7 @@ interface Icon
 
   /**
    * Serializes a #GIcon into a #GVariant. An equivalent #GIcon can be retrieved
-   * back by calling [Gio.Icon.deserialize] on the returned value.
+   * back by calling [gio.icon.Icon.deserialize] on the returned value.
    * As serialization will avoid using raw icon data when possible, it only
    * makes sense to transfer the #GVariant between processes on the same machine,
    * $(LPAREN)as opposed to over the network$(RPAREN), and within the same file system namespace.
@@ -109,19 +109,19 @@ interface Icon
   /**
    * Generates a textual representation of icon that can be used for
    * serialization such as when passing icon to a different process or
-   * saving it to persistent storage. Use [Gio.Icon.newForString] to
+   * saving it to persistent storage. Use [gio.icon.Icon.newForString] to
    * get icon back from the returned string.
    * The encoding of the returned string is proprietary to #GIcon except
    * in the following two cases
    * - If icon is a #GFileIcon, the returned string is a native path
    * $(LPAREN)such as `/path/to/my icon.png`$(RPAREN) without escaping
    * if the #GFile for icon is a native file.  If the file is not
-   * native, the returned string is the result of [Gio.File.getUri]
+   * native, the returned string is the result of [gio.file.File.getUri]
    * $(LPAREN)such as `sftp://path/to/my%20icon.png`$(RPAREN).
    * - If icon is a #GThemedIcon with exactly one name and no fallbacks,
    * the encoding is simply the name $(LPAREN)such as `network-server`$(RPAREN).
    * Returns: An allocated NUL-terminated UTF8 string or
-   *   %NULL if icon can't be serialized. Use [GLib.Global.gfree] to free.
+   *   %NULL if icon can't be serialized. Use [glib.global.gfree] to free.
    */
   string toString_();
 }

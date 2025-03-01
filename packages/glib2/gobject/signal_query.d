@@ -1,13 +1,13 @@
 module gobject.signal_query;
 
-import gid.gid;
+import gid.global;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.types;
 
 /**
  * A structure holding in-depth information for a specific signal.
- * See also: [GObject.Global.signalQuery]
+ * See also: [gobject.global.signalQuery]
  */
 class SignalQuery
 {

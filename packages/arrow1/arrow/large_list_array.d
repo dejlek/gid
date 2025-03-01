@@ -6,7 +6,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.data_type;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class LargeListArray : Array

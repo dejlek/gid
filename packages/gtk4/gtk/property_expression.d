@@ -1,6 +1,6 @@
 module gtk.property_expression;
 
-import gid.gid;
+import gid.global;
 import gobject.param_spec;
 import gobject.types;
 import gtk.c.functions;

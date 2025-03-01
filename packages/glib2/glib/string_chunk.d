@@ -1,6 +1,6 @@
 module glib.string_chunk;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -14,13 +14,13 @@ import glib.types;
  * When storing a large number of strings, string chunks are more
  * efficient than using func@GLib.strdup since fewer calls to `malloc$(LPAREN)$(RPAREN)`
  * are needed, and less memory is wasted in memory allocation overheads.
- * By adding strings with [GLib.StringChunk.insertConst] it is also
+ * By adding strings with [glib.string_chunk.StringChunk.insertConst] it is also
  * possible to remove duplicates.
- * To create a new `GStringChunk` use [GLib.StringChunk.new_].
- * To add strings to a `GStringChunk` use [GLib.StringChunk.insert].
+ * To create a new `GStringChunk` use [glib.string_chunk.StringChunk.new_].
+ * To add strings to a `GStringChunk` use [glib.string_chunk.StringChunk.insert].
  * To add strings to a `GStringChunk`, but without duplicating strings
- * which are already in the `GStringChunk`, use [GLib.StringChunk.insertConst].
- * To free the entire `GStringChunk` use [GLib.StringChunk.free].
+ * which are already in the `GStringChunk`, use [glib.string_chunk.StringChunk.insertConst].
+ * To free the entire `GStringChunk` use [glib.string_chunk.StringChunk.free].
  * It is not possible to free individual strings.
  */
 class StringChunk
@@ -51,7 +51,7 @@ class StringChunk
 
   /**
    * Frees all strings contained within the #GStringChunk.
-   * After calling [GLib.StringChunk.clear] it is not safe to
+   * After calling [glib.string_chunk.StringChunk.clear] it is not safe to
    * access any of the strings which were contained within it.
    */
   void clear()
@@ -65,10 +65,10 @@ class StringChunk
    * in the #GStringChunk. The characters in the string
    * can be changed, if necessary, though you should not
    * change anything after the end of the string.
-   * Unlike [GLib.StringChunk.insertConst], this function
+   * Unlike [glib.string_chunk.StringChunk.insertConst], this function
    * does not check for duplicates. Also strings added
-   * with [GLib.StringChunk.insert] will not be searched
-   * by [GLib.StringChunk.insertConst] when looking for
+   * with [glib.string_chunk.StringChunk.insert] will not be searched
+   * by [glib.string_chunk.StringChunk.insertConst] when looking for
    * duplicates.
    * Params:
    *   string_ = the string to add
@@ -87,14 +87,14 @@ class StringChunk
   /**
    * Adds a copy of string to the #GStringChunk, unless the same
    * string has already been added to the #GStringChunk with
-   * [GLib.StringChunk.insertConst].
+   * [glib.string_chunk.StringChunk.insertConst].
    * This function is useful if you need to copy a large number
    * of strings but do not want to waste space storing duplicates.
    * But you must remember that there may be several pointers to
    * the same string, and so any changes made to the strings
    * should be done very carefully.
-   * Note that [GLib.StringChunk.insertConst] will not return a
-   * pointer to a string added with [GLib.StringChunk.insert], even
+   * Note that [glib.string_chunk.StringChunk.insertConst] will not return a
+   * pointer to a string added with [glib.string_chunk.StringChunk.insert], even
    * if they do match.
    * Params:
    *   string_ = the string to add

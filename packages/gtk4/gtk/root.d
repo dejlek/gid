@@ -2,7 +2,7 @@ module gtk.root;
 
 public import gtk.root_iface_proxy;
 import gdk.display;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -16,9 +16,9 @@ import gtk.widget;
  * and manages layout, drawing and event delivery for its widget hierarchy.
  * The obvious example of a `GtkRoot` is `GtkWindow`.
  * To get the display to which a `GtkRoot` belongs, use
- * [Gtk.Root.getDisplay].
+ * [gtk.root.Root.getDisplay].
  * `GtkRoot` also maintains the location of keyboard focus inside its widget
- * hierarchy, with [Gtk.Root.setFocus] and [Gtk.Root.getFocus].
+ * hierarchy, with [gtk.root.Root.setFocus] and [gtk.root.Root.getFocus].
  */
 interface Root
 {
@@ -50,7 +50,7 @@ interface Root
    * it as the focus widget for the root.
    * If focus is %NULL, unsets the focus widget for the root.
    * To set the focus to a particular widget in the root, it is usually
-   * more convenient to use [Gtk.Widget.grabFocus] instead of
+   * more convenient to use [gtk.widget.Widget.grabFocus] instead of
    * this function.
    * Params:
    *   focus = widget to be the new focus widget, or %NULL

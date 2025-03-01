@@ -1,7 +1,7 @@
 module gio.seekable;
 
 public import gio.seekable_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -11,7 +11,7 @@ import glib.types;
 
 /**
  * `GSeekable` is implemented by streams $(LPAREN)implementations of
- * [Gio.InputStream] or [Gio.OutputStream]$(RPAREN) that support seeking.
+ * [gio.input_stream.InputStream] or [gio.output_stream.OutputStream]$(RPAREN) that support seeking.
  * Seekable streams largely fall into two categories: resizable and
  * fixed-size.
  * `GSeekable` on fixed-sized streams is approximately the same as POSIX
@@ -39,7 +39,7 @@ interface Seekable
 
   /**
    * Tests if the length of the stream can be adjusted with
-   * [Gio.Seekable.truncate].
+   * [gio.seekable.Seekable.truncate].
    * Returns: %TRUE if the stream can be truncated, %FALSE otherwise.
    */
   bool canTruncate();

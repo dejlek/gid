@@ -1,7 +1,7 @@
 module gio.loadable_icon;
 
 public import gio.loadable_icon_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -13,7 +13,7 @@ import glib.error;
 import gobject.object;
 
 /**
- * `GLoadableIcon` extends the [Gio.Icon] interface and adds the ability
+ * `GLoadableIcon` extends the [gio.icon.Icon] interface and adds the ability
  * to load icons from streams.
  */
 interface LoadableIcon
@@ -27,7 +27,7 @@ interface LoadableIcon
 
   /**
    * Loads a loadable icon. For the asynchronous version of this function,
-   * see [Gio.LoadableIcon.loadAsync].
+   * see [gio.loadable_icon.LoadableIcon.loadAsync].
    * Params:
    *   size = an integer.
    *   type = a location to store the type of the loaded
@@ -40,8 +40,8 @@ interface LoadableIcon
 
   /**
    * Loads an icon asynchronously. To finish this function, see
-   * [Gio.LoadableIcon.loadFinish]. For the synchronous, blocking
-   * version of this function, see [Gio.LoadableIcon.load].
+   * [gio.loadable_icon.LoadableIcon.loadFinish]. For the synchronous, blocking
+   * version of this function, see [gio.loadable_icon.LoadableIcon.load].
    * Params:
    *   size = an integer.
    *   cancellable = optional #GCancellable object, %NULL to ignore.
@@ -51,7 +51,7 @@ interface LoadableIcon
   void loadAsync(int size, Cancellable cancellable, AsyncReadyCallback callback);
 
   /**
-   * Finishes an asynchronous icon load started in [Gio.LoadableIcon.loadAsync].
+   * Finishes an asynchronous icon load started in [gio.loadable_icon.LoadableIcon.loadAsync].
    * Params:
    *   res = a #GAsyncResult.
    *   type = a location to store the type of the loaded

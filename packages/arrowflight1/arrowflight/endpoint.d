@@ -5,7 +5,7 @@ import arrowflight.c.types;
 import arrowflight.location;
 import arrowflight.ticket;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class Endpoint : ObjectG

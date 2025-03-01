@@ -12,7 +12,7 @@ import gdk.monitor;
 import gdk.seat;
 import gdk.surface;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import glib.error;
@@ -26,11 +26,11 @@ import gobject.value;
  * - To manage and provide information about input devices $(LPAREN)pointers, keyboards, etc$(RPAREN)
  * - To manage and provide information about output devices $(LPAREN)monitors, projectors, etc$(RPAREN)
  * Most of the input device handling has been factored out into separate
- * [Gdk.Seat] objects. Every display has a one or more seats, which
- * can be accessed with [Gdk.Display.getDefaultSeat] and
- * [Gdk.Display.listSeats].
- * Output devices are represented by [Gdk.MonitorG] objects, which can
- * be accessed with [Gdk.Display.getMonitorAtSurface] and similar APIs.
+ * [gdk.seat.Seat] objects. Every display has a one or more seats, which
+ * can be accessed with [gdk.display.Display.getDefaultSeat] and
+ * [gdk.display.Display.listSeats].
+ * Output devices are represented by [gdk.monitor.MonitorG] objects, which can
+ * be accessed with [gdk.display.Display.getMonitorAtSurface] and similar APIs.
  */
 class Display : ObjectG
 {
@@ -106,7 +106,7 @@ class Display : ObjectG
    * draw to non-surface framebuffers like textures.
    * If the creation of the `GdkGLContext` failed, error will be set.
    * Before using the returned `GdkGLContext`, you will need to
-   * call [Gdk.GLContext.makeCurrent] or [Gdk.GLContext.realize].
+   * call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
    * Returns: the newly created `GdkGLContext`
    */
   GLContext createGlContext()
@@ -193,7 +193,7 @@ class Display : ObjectG
    * Calling this function will then initialize them if they aren't yet.
    * The formats returned by this function can be used for negotiating
    * buffer formats with producers such as v4l, pipewire or GStreamer.
-   * To learn more about dma-bufs, see [Gdk.DmabufTextureBuilder].
+   * To learn more about dma-bufs, see [gdk.dmabuf_texture_builder.DmabufTextureBuilder].
    * Returns: a `GdkDmabufFormats` object
    */
   DmabufFormats getDmabufFormats()
@@ -307,7 +307,7 @@ class Display : ObjectG
   /**
    * Returns whether surfaces can reasonably be expected to have
    * their alpha channel drawn correctly on the screen.
-   * Check [Gdk.Display.isRgba] for whether the display
+   * Check [gdk.display.Display.isRgba] for whether the display
    * supports an alpha channel.
    * On X11 this function returns whether a compositing manager is
    * compositing on display.
@@ -330,7 +330,7 @@ class Display : ObjectG
    * surface’s alpha channel won’t be honored when displaying the
    * surface on the screen: in particular, for X an appropriate
    * windowing manager and compositing manager must be running to
-   * provide appropriate display. Use [Gdk.Display.isComposited]
+   * provide appropriate display. Use [gdk.display.Display.isComposited]
    * to check if that is the case.
    * On modern displays, this value is always %TRUE.
    * Returns: %TRUE if surfaces are created with an alpha channel or
@@ -362,7 +362,7 @@ class Display : ObjectG
    * When a keycode is pressed by the user, the keyval from
    * this list of entries is selected by considering the effective
    * keyboard group and level.
-   * Free the returned arrays with [GLib.Global.gfree].
+   * Free the returned arrays with [glib.global.gfree].
    * Params:
    *   keycode = a keycode
    *   keys = return
@@ -398,7 +398,7 @@ class Display : ObjectG
    * Hebrew to English modes, for example.
    * `GdkEventKey` contains a %group field that indicates the active
    * keyboard group. The level is computed from the modifier mask.
-   * The returned array should be freed with [GLib.Global.gfree].
+   * The returned array should be freed with [glib.global.gfree].
    * Params:
    *   keyval = a keyval, such as %GDK_KEY_a, %GDK_KEY_Up, %GDK_KEY_Return, etc.
    *   keys = return location
@@ -422,13 +422,13 @@ class Display : ObjectG
    * finished loading, using a given identifier.
    * GTK will call this function automatically for [GtkWindow](../gtk4/class.Window.html)
    * with custom startup-notification identifier unless
-   * [[Gtk.Window.setAutoStartupNotification]](../gtk4/method.Window.set_auto_startup_notification.html)
+   * [[gtk.window.Window.setAutoStartupNotification]](../gtk4/method.Window.set_auto_startup_notification.html)
    * is called to disable that feature.
    * Params:
    *   startupId = a startup-notification identifier, for which
    *     notification process should be completed
 
-   * Deprecated: Using [Gdk.Toplevel.setStartupId] is sufficient
+   * Deprecated: Using [gdk.toplevel.Toplevel.setStartupId] is sufficient
    */
   void notifyStartupComplete(string startupId)
   {
@@ -475,7 +475,7 @@ class Display : ObjectG
 
   /**
    * Returns %TRUE if the display supports input shapes.
-   * This means that [Gdk.Surface.setInputRegion] can
+   * This means that [gdk.surface.Surface.setInputRegion] can
    * be used to modify the input shape of surfaces on display.
    * On modern displays, this value is always %TRUE.
    * Returns: %TRUE if surfaces with modified input shape are supported
@@ -505,7 +505,7 @@ class Display : ObjectG
    * Flushes any requests queued for the windowing system and waits until all
    * requests have been handled.
    * This is often used for making sure that the display is synchronized
-   * with the current state of the program. Calling [Gdk.Display.sync]
+   * with the current state of the program. Calling [gdk.display.Display.sync]
    * before methodGdkX11.Display.error_trap_pop makes sure that any errors
    * generated from earlier requests are handled before the error trap is removed.
    * This is most useful for X11. On windowing systems where requests are

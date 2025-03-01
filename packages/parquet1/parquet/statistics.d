@@ -1,6 +1,6 @@
 module parquet.statistics;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;

@@ -1,7 +1,7 @@
 module gtk.file_chooser;
 
 public import gtk.file_chooser_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.file;
 import gio.file_mixin;
 import gio.list_model;
@@ -17,7 +17,7 @@ import gtk.types;
  * `GtkFileChooser` is an interface that can be implemented by file
  * selection widgets.
  * In GTK, the main objects that implement this interface are
- * [Gtk.FileChooserWidget] and [Gtk.FileChooserDialog].
+ * [gtk.file_chooser_widget.FileChooserWidget] and [gtk.file_chooser_dialog.FileChooserDialog].
  * You do not need to write an object that implements the `GtkFileChooser`
  * interface unless you are trying to adapt an existing file selector to
  * expose a standard programming interface.
@@ -39,13 +39,13 @@ import gtk.types;
  * # Adding options
  * You can add extra widgets to a file chooser to provide options
  * that are not present in the default design, by using
- * [Gtk.FileChooser.addChoice]. Each choice has an identifier and
+ * [gtk.file_chooser.FileChooser.addChoice]. Each choice has an identifier and
  * a user visible label; additionally, each choice can have multiple
  * options. If a choice has no option, it will be rendered as a
  * check button with the given label; if a choice has options, it will
  * be rendered as a combo box.
 
- * Deprecated: Use [Gtk.FileDialog] instead
+ * Deprecated: Use [gtk.file_dialog.FileDialog] instead
  */
 interface FileChooser
 {
@@ -60,17 +60,17 @@ interface FileChooser
    * Adds a 'choice' to the file chooser.
    * This is typically implemented as a combobox or, for boolean choices,
    * as a checkbutton. You can select a value using
-   * [Gtk.FileChooser.setChoice] before the dialog is shown,
+   * [gtk.file_chooser.FileChooser.setChoice] before the dialog is shown,
    * and you can obtain the user-selected value in the
-   * [Gtk.Dialog.response] signal handler using
-   * [Gtk.FileChooser.getChoice].
+   * [gtk.dialog.Dialog.response] signal handler using
+   * [gtk.file_chooser.FileChooser.getChoice].
    * Params:
    *   id = id for the added choice
    *   label = user-visible label for the added choice
    *   options = ids for the options of the choice, or %NULL for a boolean choice
    *   optionLabels = user-visible labels for the options, must be the same length as options
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void addChoice(string id, string label, string[] options, string[] optionLabels);
 
@@ -83,7 +83,7 @@ interface FileChooser
    * Params:
    *   filter = a `GtkFileFilter`
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void addFilter(FileFilter filter);
 
@@ -95,7 +95,7 @@ interface FileChooser
    * Returns: %TRUE if the folder could be added successfully,
    *   %FALSE otherwise.
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   bool addShortcutFolder(File folder);
 
@@ -103,7 +103,7 @@ interface FileChooser
    * Gets the type of operation that the file chooser is performing.
    * Returns: the action that the file selector is performing
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   FileChooserAction getAction();
 
@@ -113,7 +113,7 @@ interface FileChooser
    *   id = the ID of the choice to get
    * Returns: the ID of the currently selected option
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   string getChoice(string id);
 
@@ -121,7 +121,7 @@ interface FileChooser
    * Gets whether file chooser will offer to create new folders.
    * Returns: %TRUE if the Create Folder button should be displayed.
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   bool getCreateFolders();
 
@@ -129,7 +129,7 @@ interface FileChooser
    * Gets the current folder of chooser as `GFile`.
    * Returns: the `GFile` for the current folder.
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   File getCurrentFolder();
 
@@ -138,12 +138,12 @@ interface FileChooser
    * This is meant to be used in save dialogs, to get the currently typed
    * filename when the file itself does not exist yet.
    * Returns: The raw text from the file chooser’s “Name” entry. Free with
-   *   [GLib.Global.gfree]. Note that this string is not a full pathname or URI; it is
+   *   [glib.global.gfree]. Note that this string is not a full pathname or URI; it is
    *   whatever the contents of the entry are. Note also that this string is
    *   in UTF-8 encoding, which is not necessarily the system’s encoding for
    *   filenames.
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   string getCurrentName();
 
@@ -155,9 +155,9 @@ interface FileChooser
    * If the file chooser is in folder mode, this function returns
    * the selected folder.
    * Returns: a selected `GFile`. You own the
-   *   returned file; use [GObject.ObjectG.unref] to release it.
+   *   returned file; use [gobject.object.ObjectG.unref] to release it.
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   File getFile();
 
@@ -166,9 +166,9 @@ interface FileChooser
    * of chooser as `GFile`.
    * Returns: a list model containing a `GFile` for each
    *   selected file and subfolder in the current folder. Free the returned
-   *   list with [GObject.ObjectG.unref].
+   *   list with [gobject.object.ObjectG.unref].
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   ListModel getFiles();
 
@@ -176,20 +176,20 @@ interface FileChooser
    * Gets the current filter.
    * Returns: the current filter
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   FileFilter getFilter();
 
   /**
    * Gets the current set of user-selectable filters, as a list model.
-   * See [Gtk.FileChooser.addFilter] and
-   * [Gtk.FileChooser.removeFilter] for changing individual filters.
+   * See [gtk.file_chooser.FileChooser.addFilter] and
+   * [gtk.file_chooser.FileChooser.removeFilter] for changing individual filters.
    * You should not modify the returned list model. Future changes to
    * chooser may or may not affect the returned model.
    * Returns: a `GListModel` containing the current set
    *   of user-selectable filters.
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   ListModel getFilters();
 
@@ -198,7 +198,7 @@ interface FileChooser
    * chooser.
    * Returns: %TRUE if multiple files can be selected.
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   bool getSelectMultiple();
 
@@ -208,16 +208,16 @@ interface FileChooser
    * chooser may or may not affect the returned model.
    * Returns: A list model of `GFile`s
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   ListModel getShortcutFolders();
 
   /**
-   * Removes a 'choice' that has been added with [Gtk.FileChooser.addChoice].
+   * Removes a 'choice' that has been added with [gtk.file_chooser.FileChooser.addChoice].
    * Params:
    *   id = the ID of the choice to remove
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void removeChoice(string id);
 
@@ -226,7 +226,7 @@ interface FileChooser
    * Params:
    *   filter = a `GtkFileFilter`
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void removeFilter(FileFilter filter);
 
@@ -237,7 +237,7 @@ interface FileChooser
    * Returns: %TRUE if the folder could be removed successfully,
    *   %FALSE otherwise.
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   bool removeShortcutFolder(File folder);
 
@@ -250,19 +250,19 @@ interface FileChooser
    * Params:
    *   action = the action that the file selector is performing
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void setAction(FileChooserAction action);
 
   /**
    * Selects an option in a 'choice' that has been added with
-   * [Gtk.FileChooser.addChoice].
+   * [gtk.file_chooser.FileChooser.addChoice].
    * For a boolean choice, the possible options are "true" and "false".
    * Params:
    *   id = the ID of the choice to set
    *   option = the ID of the option to select
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void setChoice(string id, string option);
 
@@ -273,7 +273,7 @@ interface FileChooser
    * Params:
    *   createFolders = %TRUE if the Create Folder button should be displayed
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void setCreateFolders(bool createFolders);
 
@@ -284,7 +284,7 @@ interface FileChooser
    * Returns: %TRUE if the folder could be changed successfully, %FALSE
    *   otherwise.
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   bool setCurrentFolder(File file);
 
@@ -296,13 +296,13 @@ interface FileChooser
    * suggested name in a “Save As...” dialog.  You can pass
    * “Untitled.doc” or a similarly suitable suggestion for the name.
    * If you want to preselect a particular existing file, you should
-   * use [Gtk.FileChooser.setFile] instead.
+   * use [gtk.file_chooser.FileChooser.setFile] instead.
    * Please see the documentation for those functions for an example
-   * of using [Gtk.FileChooser.setCurrentName] as well.
+   * of using [gtk.file_chooser.FileChooser.setCurrentName] as well.
    * Params:
    *   name = the filename to use, as a UTF-8 string
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void setCurrentName(string name);
 
@@ -346,7 +346,7 @@ interface FileChooser
    *   file = the `GFile` to set as current
    * Returns: Not useful
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   bool setFile(File file);
 
@@ -361,7 +361,7 @@ interface FileChooser
    * Params:
    *   filter = a `GtkFileFilter`
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void setFilter(FileFilter filter);
 
@@ -373,7 +373,7 @@ interface FileChooser
    * Params:
    *   selectMultiple = %TRUE if multiple files can be selected.
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void setSelectMultiple(bool selectMultiple);
 }

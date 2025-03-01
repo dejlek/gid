@@ -1,6 +1,6 @@
 module gtksource.region;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.text_buffer;
 import gtk.text_iter;
@@ -12,12 +12,12 @@ import gtksource.types;
 /**
  * Region utility.
  * A `GtkSourceRegion` permits to store a group of subregions of a
- * [Gtk.TextBuffer]. `GtkSourceRegion` stores the subregions with pairs of
- * [Gtk.TextMark]'s, so the region is still valid after insertions and deletions
- * in the [Gtk.TextBuffer].
- * The [Gtk.TextMark] for the start of a subregion has a left gravity, while the
- * [Gtk.TextMark] for the end of a subregion has a right gravity.
- * The typical use-case of `GtkSourceRegion` is to scan a [Gtk.TextBuffer] chunk by
+ * [gtk.text_buffer.TextBuffer]. `GtkSourceRegion` stores the subregions with pairs of
+ * [gtk.text_mark.TextMark]'s, so the region is still valid after insertions and deletions
+ * in the [gtk.text_buffer.TextBuffer].
+ * The [gtk.text_mark.TextMark] for the start of a subregion has a left gravity, while the
+ * [gtk.text_mark.TextMark] for the end of a subregion has a right gravity.
+ * The typical use-case of `GtkSourceRegion` is to scan a [gtk.text_buffer.TextBuffer] chunk by
  * chunk, not the whole buffer at once to not block the user interface. The
  * `GtkSourceRegion` represents in that case the remaining region to scan. You
  * can listen to the signal@Gtk.TextBuffer::insert-text and
@@ -208,7 +208,7 @@ class Region : ObjectG
    * The returned string contains the character offsets of the subregions. It
    * doesn't include a newline character at the end of the string.
    * Returns: a string represention of region. Free
-   *   with [GLib.Global.gfree] when no longer needed.
+   *   with [glib.global.gfree] when no longer needed.
    */
   string toString_()
   {

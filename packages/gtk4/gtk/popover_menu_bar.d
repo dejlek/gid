@@ -1,6 +1,6 @@
 module gtk.popover_menu_bar;
 
-import gid.gid;
+import gid.global;
 import gio.menu_model;
 import gobject.object;
 import gtk.accessible;
@@ -101,7 +101,7 @@ class PopoverMenuBar : Widget
 
   /**
    * Removes a widget that has previously been added with
-   * [Gtk.PopoverMenuBar.addChild].
+   * [gtk.popover_menu_bar.PopoverMenuBar.addChild].
    * Params:
    *   child = the `GtkWidget` to remove
    * Returns: %TRUE if the widget was removed

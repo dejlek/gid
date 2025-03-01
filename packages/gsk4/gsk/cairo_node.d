@@ -2,7 +2,7 @@ module gsk.cairo_node;
 
 import cairo.context;
 import cairo.surface;
-import gid.gid;
+import gid.global;
 import graphene.rect;
 import gsk.c.functions;
 import gsk.c.types;
@@ -26,7 +26,7 @@ class CairoNode : RenderNode
   /**
    * Creates a `GskRenderNode` that will render a cairo surface
    * into the area given by bounds.
-   * You can draw to the cairo surface using [Gsk.CairoNode.getDrawContext].
+   * You can draw to the cairo surface using [gsk.cairo_node.CairoNode.getDrawContext].
    * Params:
    *   bounds = the rectangle to render to
    * Returns: A new `GskRenderNode`
@@ -44,7 +44,7 @@ class CairoNode : RenderNode
    * If no surface exists yet, a surface will be created optimized for
    * rendering to renderer.
    * Returns: a Cairo context used for drawing; use
-   *   [cairo.Global.destroy] when done drawing
+   *   [cairo.global.destroy] when done drawing
    */
   Context getDrawContext()
   {

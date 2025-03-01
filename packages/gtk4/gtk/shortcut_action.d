@@ -1,6 +1,6 @@
 module gtk.shortcut_action;
 
-import gid.gid;
+import gid.global;
 import glib.string_;
 import glib.variant;
 import gobject.object;
@@ -18,20 +18,20 @@ import gtk.widget;
  * properties during construction. If you want to change a action, you
  * have to replace it with a new one. If you need to pass arguments to
  * an action, these are specified by the higher-level `GtkShortcut` object.
- * To activate a `GtkShortcutAction` manually, [Gtk.ShortcutAction.activate]
+ * To activate a `GtkShortcutAction` manually, [gtk.shortcut_action.ShortcutAction.activate]
  * can be called.
  * GTK provides various actions:
- * - [Gtk.MnemonicAction]: a shortcut action that calls
- * [Gtk.Widget.mnemonicActivate]
- * - [Gtk.CallbackAction]: a shortcut action that invokes
+ * - [gtk.mnemonic_action.MnemonicAction]: a shortcut action that calls
+ * [gtk.widget.Widget.mnemonicActivate]
+ * - [gtk.callback_action.CallbackAction]: a shortcut action that invokes
  * a given callback
- * - [Gtk.SignalAction]: a shortcut action that emits a
+ * - [gtk.signal_action.SignalAction]: a shortcut action that emits a
  * given signal
- * - [Gtk.ActivateAction]: a shortcut action that calls
- * [Gtk.Widget.activate]
- * - [Gtk.NamedAction]: a shortcut action that calls
- * [Gtk.Widget.activateAction]
- * - [Gtk.NothingAction]: a shortcut action that does nothing
+ * - [gtk.activate_action.ActivateAction]: a shortcut action that calls
+ * [gtk.widget.Widget.activate]
+ * - [gtk.named_action.NamedAction]: a shortcut action that calls
+ * [gtk.widget.Widget.activateAction]
+ * - [gtk.nothing_action.NothingAction]: a shortcut action that does nothing
  */
 class ShortcutAction : ObjectG
 {
@@ -109,7 +109,7 @@ class ShortcutAction : ObjectG
 
   /**
    * Prints the given action into a human-readable string.
-   * This is a small wrapper around [Gtk.ShortcutAction.print]
+   * This is a small wrapper around [gtk.shortcut_action.ShortcutAction.print]
    * to help when debugging.
    * Returns: a new string
    */

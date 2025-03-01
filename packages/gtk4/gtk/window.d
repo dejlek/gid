@@ -2,7 +2,7 @@ module gtk.window;
 
 import gdk.display;
 import gdk.monitor;
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.dclosure;
@@ -33,7 +33,7 @@ import gtk.window_group;
  * of the windowing system and allow the user to manipulate the window
  * $(LPAREN)resize it, move it, close it,...$(RPAREN).
  * # GtkWindow as GtkBuildable
- * The `GtkWindow` implementation of the [Gtk.Buildable] interface supports
+ * The `GtkWindow` implementation of the [gtk.buildable.Buildable] interface supports
  * setting a child as the titlebar by specifying “titlebar” as the “type”
  * attribute of a `<child>` element.
  * # CSS nodes
@@ -95,13 +95,13 @@ class Window : Widget, Native, Root, ShortcutManager
   /**
    * Creates a new `GtkWindow`.
    * To get an undecorated window $(LPAREN)no window borders$(RPAREN), use
-   * [Gtk.Window.setDecorated].
-   * All top-level windows created by [Gtk.Window.new_] are stored
+   * [gtk.window.Window.setDecorated].
+   * All top-level windows created by [gtk.window.Window.new_] are stored
    * in an internal top-level window list. This list can be obtained
-   * from [Gtk.Window.listToplevels]. Due to GTK keeping a
-   * reference to the window internally, [Gtk.Window.new_] does not
+   * from [gtk.window.Window.listToplevels]. Due to GTK keeping a
+   * reference to the window internally, [gtk.window.Window.new_] does not
    * return a reference to the caller.
-   * To delete a `GtkWindow`, call [Gtk.Window.destroy].
+   * To delete a `GtkWindow`, call [gtk.window.Window.destroy].
    * Returns: a new `GtkWindow`.
    */
   this()
@@ -115,7 +115,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Returns the fallback icon name for windows.
    * The returned string is owned by GTK and should not
    * be modified. It is only valid until the next call to
-   * [Gtk.Window.setDefaultIconName].
+   * [gtk.window.Window.setDefaultIconName].
    * Returns: the fallback icon name for windows
    */
   static string getDefaultIconName()
@@ -163,7 +163,7 @@ class Window : Widget, Native, Root, ShortcutManager
   /**
    * Sets whether the window should request startup notification.
    * By default, after showing the first `GtkWindow`, GTK calls
-   * [Gdk.Toplevel.setStartupId]. Call this function
+   * [gdk.toplevel.Toplevel.setStartupId]. Call this function
    * to disable the automatic startup notification. You might do this
    * if your first window is a splash screen, and you want to delay
    * notification until after your real main window has been shown,
@@ -182,7 +182,7 @@ class Window : Widget, Native, Root, ShortcutManager
   /**
    * Sets an icon to be used as fallback.
    * The fallback icon is used for windows that
-   * haven't had [Gtk.Window.setIconName]
+   * haven't had [gtk.window.Window.setIconName]
    * called on them.
    * Params:
    *   name = the name of the themed icon
@@ -232,8 +232,8 @@ class Window : Widget, Native, Root, ShortcutManager
    * unfullscreen it again, and not all window managers honor requests
    * to fullscreen windows.
    * You can track the result of this operation via the
-   * [Gdk.Toplevel.state] property, or by listening to
-   * notifications of the [Gtk.Window.fullscreened] property.
+   * [gdk.toplevel.Toplevel.ToplevelState] property, or by listening to
+   * notifications of the [gtk.window.Window.gboolean] property.
    */
   void fullscreen()
   {
@@ -246,8 +246,8 @@ class Window : Widget, Native, Root, ShortcutManager
    * afterward, or that the windowing system allows fullscreen windows on
    * any given monitor.
    * You can track the result of this operation via the
-   * [Gdk.Toplevel.state] property, or by listening to
-   * notifications of the [Gtk.Window.fullscreened] property.
+   * [gdk.toplevel.Toplevel.ToplevelState] property, or by listening to
+   * notifications of the [gtk.window.Window.gboolean] property.
    * Params:
    *   monitor = which monitor to go fullscreen on
    */
@@ -443,7 +443,7 @@ class Window : Widget, Native, Root, ShortcutManager
   }
 
   /**
-   * Gets the value set by [Gtk.Window.setResizable].
+   * Gets the value set by [gtk.window.Window.setResizable].
    * Returns: %TRUE if the user can resize the window
    */
   bool getResizable()
@@ -467,7 +467,7 @@ class Window : Widget, Native, Root, ShortcutManager
 
   /**
    * Returns the custom titlebar that has been set with
-   * [Gtk.Window.setTitlebar].
+   * [gtk.window.Window.setTitlebar].
    * Returns: the custom titlebar
    */
   Widget getTitlebar()
@@ -522,7 +522,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * manager and happens asynchronously to an application request, you
    * shouldn’t assume the return value of this function changing
    * immediately $(LPAREN)or at all$(RPAREN), as an effect of calling
-   * [Gtk.Window.fullscreen] or [Gtk.Window.unfullscreen].
+   * [gtk.window.Window.fullscreen] or [gtk.window.Window.unfullscreen].
    * If the window isn't yet mapped, the value returned will whether the
    * initial requested state is fullscreen.
    * Returns: whether the window has a fullscreen state.
@@ -540,7 +540,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * manager and happens asynchronously to an application request, you
    * shouldn’t assume the return value of this function changing
    * immediately $(LPAREN)or at all$(RPAREN), as an effect of calling
-   * [Gtk.Window.maximize] or [Gtk.Window.unmaximize].
+   * [gtk.window.Window.maximize] or [gtk.window.Window.unmaximize].
    * If the window isn't yet mapped, the value returned will whether the
    * initial requested state is maximized.
    * Returns: whether the window has a maximized state.
@@ -575,8 +575,8 @@ class Window : Widget, Native, Root, ShortcutManager
    * in which case the window will be maximized when it appears onscreen
    * initially.
    * You can track the result of this operation via the
-   * [Gdk.Toplevel.state] property, or by listening to
-   * notifications on the [Gtk.Window.maximized]
+   * [gdk.toplevel.Toplevel.ToplevelState] property, or by listening to
+   * notifications on the [gtk.window.Window.gboolean]
    * property.
    */
   void maximize()
@@ -595,7 +595,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * in which case the window will be minimized before it ever appears
    * onscreen.
    * You can track result of this operation via the
-   * [Gdk.Toplevel.state] property.
+   * [gdk.toplevel.Toplevel.ToplevelState] property.
    */
   void minimize()
   {
@@ -617,7 +617,7 @@ class Window : Widget, Native, Root, ShortcutManager
 
   /**
    * Presents a window to the user in response to an user interaction.
-   * See [Gtk.Window.present] for more details.
+   * See [gtk.window.Window.present] for more details.
    * The timestamp should be gathered when the window was requested
    * to be shown $(LPAREN)when clicking a link for example$(RPAREN), rather than once
    * the window is ready to be shown.
@@ -625,7 +625,7 @@ class Window : Widget, Native, Root, ShortcutManager
    *   timestamp = the timestamp of the user interaction $(LPAREN)typically a
    *     button or key press event$(RPAREN) which triggered this call
 
-   * Deprecated: Use [Gtk.Window.present]
+   * Deprecated: Use [gtk.window.Window.present]
    */
   void presentWithTime(uint timestamp)
   {
@@ -635,13 +635,13 @@ class Window : Widget, Native, Root, ShortcutManager
   /**
    * Sets or unsets the `GtkApplication` associated with the window.
    * The application will be kept alive for at least as long as it has
-   * any windows associated with it $(LPAREN)see [Gio.ApplicationGio.hold] for a way
+   * any windows associated with it $(LPAREN)see [gio.application.ApplicationGio.hold] for a way
    * to keep it alive without windows$(RPAREN).
    * Normally, the connection between the application and the window will
    * remain until the window is destroyed, but you can explicitly remove
    * it by setting the application to %NULL.
-   * This is equivalent to calling [Gtk.Application.removeWindow]
-   * and/or [Gtk.Application.addWindow] on the old/new applications
+   * This is equivalent to calling [gtk.application.Application.removeWindow]
+   * and/or [gtk.application.Application.addWindow] on the old/new applications
    * as relevant.
    * Params:
    *   application = a `GtkApplication`, or %NULL to unset
@@ -670,7 +670,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * convince the window manager not to decorate the window. Depending on
    * the system, this function may not have any effect when called on a
    * window that is already visible, so you should call it before calling
-   * [Gtk.Widget.show].
+   * [gtk.widget.Widget.show].
    * On Windows, this function always works, since there’s no window manager
    * policy involved.
    * Params:
@@ -693,7 +693,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * ignored and the natural size request will be used instead. It
    * is possible to do this while the window is showing to "reset"
    * it to its initial size.
-   * Unlike [Gtk.Widget.setSizeRequest], which sets a size
+   * Unlike [gtk.widget.Widget.setSizeRequest], which sets a size
    * request for a widget and thus would keep users from shrinking
    * the window, this function only sets the initial size, just as
    * if the user had resized the window themselves. Users can still
@@ -702,7 +702,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * of the window$(RPAREN).
    * If you use this function to reestablish a previously saved window size,
    * note that the appropriate size to save is the one returned by
-   * [Gtk.Window.getDefaultSize]. Using the window allocation
+   * [gtk.window.Window.getDefaultSize]. Using the window allocation
    * directly will not work in all circumstances and can lead to growing
    * or shrinking windows.
    * Params:
@@ -735,7 +735,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * will do its best to convince the window manager not to show a
    * close button. Depending on the system, this function may not
    * have any effect when called on a window that is already visible,
-   * so you should call it before calling [Gtk.Widget.show].
+   * so you should call it before calling [gtk.widget.Widget.show].
    * On Windows, this function always works, since there’s no window
    * manager policy involved.
    * Params:
@@ -777,7 +777,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * sets it as the focus widget for the window. If focus is %NULL,
    * unsets the focus widget for this window. To set the focus to a
    * particular widget in the toplevel, it is usually more convenient
-   * to use [Gtk.Widget.grabFocus] instead of this function.
+   * to use [gtk.widget.Widget.grabFocus] instead of this function.
    * Params:
    *   focus = widget to be the new focus widget, or %NULL to unset
    *     any focus widget for the toplevel window.
@@ -823,7 +823,7 @@ class Window : Widget, Native, Root, ShortcutManager
 
   /**
    * Sets the icon for the window from a named themed icon.
-   * See the docs for [Gtk.IconTheme] for more details.
+   * See the docs for [gtk.icon_theme.IconTheme] for more details.
    * On some platforms, the window icon is not used at all.
    * Note that this has nothing to do with the WM_ICON_NAME
    * property which is mentioned in the ICCCM.
@@ -852,7 +852,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Sets a window modal or non-modal.
    * Modal windows prevent interaction with other windows in the same
    * application. To keep modal dialogs on top of main application windows,
-   * use [Gtk.Window.setTransientFor] to make the dialog transient
+   * use [gtk.window.Window.setTransientFor] to make the dialog transient
    * for the parent; most window managers will then disallow lowering the
    * dialog below the parent.
    * Params:
@@ -883,7 +883,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Normally, startup identifier is managed automatically and you should
    * only use this function in special cases like transferring focus from
    * other processes. You should use this function before calling
-   * [Gtk.Window.present] or any equivalent function generating
+   * [gtk.window.Window.present] or any equivalent function generating
    * a window map event.
    * This function is only useful on X11, not with other GTK targets.
    * Params:
@@ -915,14 +915,14 @@ class Window : Widget, Native, Root, ShortcutManager
 
   /**
    * Sets a custom titlebar for window.
-   * A typical widget used here is [Gtk.HeaderBar], as it
+   * A typical widget used here is [gtk.header_bar.HeaderBar], as it
    * provides various features expected of a titlebar while allowing
    * the addition of child widgets to it.
    * If you set a custom titlebar, GTK will do its best to convince
    * the window manager not to put its own titlebar on the window.
    * Depending on the system, this function may not work for a window
    * that is already visible, so you set the titlebar before calling
-   * [Gtk.Widget.show].
+   * [gtk.widget.Widget.show].
    * Params:
    *   titlebar = the widget to use as titlebar
    */
@@ -935,9 +935,9 @@ class Window : Widget, Native, Root, ShortcutManager
    * Dialog windows should be set transient for the main application
    * window they were spawned from. This allows window managers to e.g.
    * keep the dialog on top of the main window, or center the dialog
-   * over the main window. [Gtk.Dialog.newWithButtons] and other
+   * over the main window. [gtk.dialog.Dialog.newWithButtons] and other
    * convenience functions in GTK will sometimes call
-   * [Gtk.Window.setTransientFor] on your behalf.
+   * [gtk.window.Window.setTransientFor] on your behalf.
    * Passing %NULL for parent unsets the current transient window.
    * On Windows, this function puts the child window on top of the parent,
    * much as the window manager would have done on X.
@@ -959,8 +959,8 @@ class Window : Widget, Native, Root, ShortcutManager
    * window will end up restored to its normal state. Just don’t
    * write code that crashes if not.
    * You can track the result of this operation via the
-   * [Gdk.Toplevel.state] property, or by listening to
-   * notifications of the [Gtk.Window.fullscreened] property.
+   * [gdk.toplevel.Toplevel.ToplevelState] property, or by listening to
+   * notifications of the [gtk.window.Window.gboolean] property.
    */
   void unfullscreen()
   {
@@ -974,8 +974,8 @@ class Window : Widget, Native, Root, ShortcutManager
    * maximize it again, and not all window managers honor requests to
    * unmaximize.
    * You can track the result of this operation via the
-   * [Gdk.Toplevel.state] property, or by listening to
-   * notifications on the [Gtk.Window.maximized] property.
+   * [gdk.toplevel.Toplevel.ToplevelState] property, or by listening to
+   * notifications on the [gtk.window.Window.gboolean] property.
    */
   void unmaximize()
   {
@@ -990,7 +990,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * could minimize it again, or there may not be a window manager in
    * which case minimization isn’t possible, etc.
    * You can track result of this operation via the
-   * [Gdk.Toplevel.state] property.
+   * [gdk.toplevel.Toplevel.ToplevelState] property.
    */
   void unminimize()
   {
@@ -1137,7 +1137,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * are associated with window changes.
    *   window = the instance the signal is connected to
 
-   * Deprecated: Use [Gtk.Shortcut] and [Gtk.EventController]
+   * Deprecated: Use [gtk.shortcut.Shortcut] and [gtk.event_controller.EventController]
    *   to implement keyboard shortcuts
    */
   alias KeysChangedCallbackDlg = void delegate(Window window);

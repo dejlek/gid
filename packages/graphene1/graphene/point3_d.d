@@ -1,6 +1,6 @@
 module graphene.point3_d;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -73,7 +73,7 @@ class Point3D : Boxed
   /**
    * Allocates a #graphene_point3d_t structure.
    * Returns: the newly allocated structure.
-   *   Use [Graphene.Point3D.free] to free the resources
+   *   Use [graphene.point3_d.Point3D.free] to free the resources
    *   allocated by this function.
    */
   static Point3D alloc()

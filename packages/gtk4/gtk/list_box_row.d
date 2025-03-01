@@ -1,6 +1,6 @@
 module gtk.list_box_row;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -58,14 +58,14 @@ class ListBoxRow : Widget, Actionable
    * Note that calls to this method must be in sync with the data
    * used for the row functions. For instance, if the list is
    * mirroring some external data set, and *two* rows changed in the
-   * external data set then when you call [Gtk.ListBoxRow.changed]
+   * external data set then when you call [gtk.list_box_row.ListBoxRow.changed]
    * on the first row the sort function must only read the new data
    * for the first of the two changed rows, otherwise the resorting
    * of the rows will be wrong.
    * This generally means that if you don’t fully control the data
    * model you have to duplicate the data that affects the listbox
    * row functions into the row widgets themselves. Another alternative
-   * is to call [Gtk.ListBox.invalidateSort] on any model change,
+   * is to call [gtk.list_box.ListBox.invalidateSort] on any model change,
    * but that is more expensive.
    */
   void changed()
@@ -99,7 +99,7 @@ class ListBoxRow : Widget, Actionable
   /**
    * Returns the current header of the row.
    * This can be used
-   * in a [Gtk.ListBoxUpdateHeaderFunc] to see if
+   * in a [gtk.ListBoxUpdateHeaderFunc] to see if
    * there is a header set already, and if so to update
    * the state of it.
    * Returns: the current header
@@ -169,7 +169,7 @@ class ListBoxRow : Widget, Actionable
   /**
    * Sets the current header of the row.
    * This is only allowed to be called
-   * from a [Gtk.ListBoxUpdateHeaderFunc].
+   * from a [gtk.ListBoxUpdateHeaderFunc].
    * It will replace any existing header in the row,
    * and be shown in front of the row in the listbox.
    * Params:

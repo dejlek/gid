@@ -1,7 +1,7 @@
 module gtk.combo_box;
 
 import gdk.device;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -32,15 +32,15 @@ import gtk.widget;
  * is specified in the form of a tree model, and the display of the choices
  * can be adapted to the data in the model by using cell renderers, as you
  * would in a tree view. This is possible since `GtkComboBox` implements the
- * [Gtk.CellLayout] interface. The tree model holding the valid
+ * [gtk.cell_layout.CellLayout] interface. The tree model holding the valid
  * choices is not restricted to a flat list, it can be a real tree, and the
  * popup will reflect the tree structure.
  * To allow the user to enter values not in the model, the
  * property@Gtk.ComboBox:has-entry property allows the `GtkComboBox` to
- * contain a [Gtk.Entry]. This entry can be accessed by calling
- * [Gtk.ComboBox.getChild] on the combo box.
+ * contain a [gtk.entry.Entry]. This entry can be accessed by calling
+ * [gtk.combo_box.ComboBox.getChild] on the combo box.
  * For a simple list of textual choices, the model-view API of `GtkComboBox`
- * can be a bit overwhelming. In this case, [Gtk.ComboBoxText] offers
+ * can be a bit overwhelming. In this case, [gtk.combo_box_text.ComboBoxText] offers
  * a simple alternative. Both `GtkComboBox` and `GtkComboBoxText` can contain
  * an entry.
  * ## CSS nodes
@@ -72,7 +72,7 @@ import gtk.widget;
  * ## Accessibility
  * `GtkComboBox` uses the %GTK_ACCESSIBLE_ROLE_COMBO_BOX role.
 
- * Deprecated: Use [Gtk.DropDown] instead
+ * Deprecated: Use [gtk.drop_down.DropDown] instead
  */
 class ComboBox : Widget, CellEditable, CellLayout
 {
@@ -100,7 +100,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Creates a new empty `GtkComboBox`.
    * Returns: A new `GtkComboBox`
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   this()
   {
@@ -113,10 +113,10 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Creates a new empty `GtkComboBox` with an entry.
    * In order to use a combo box with entry, you need to tell it
    * which column of the model contains the text for the entry
-   * by calling [Gtk.ComboBox.setEntryTextColumn].
+   * by calling [gtk.combo_box.ComboBox.setEntryTextColumn].
    * Returns: A new `GtkComboBox`
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   static ComboBox newWithEntry()
   {
@@ -132,7 +132,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    *   model = a `GtkTreeModel`
    * Returns: A new `GtkComboBox`
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   static ComboBox newWithModel(TreeModel model)
   {
@@ -144,12 +144,12 @@ class ComboBox : Widget, CellEditable, CellLayout
 
   /**
    * Creates a new empty `GtkComboBox` with an entry and a model.
-   * See also [Gtk.ComboBox.newWithEntry].
+   * See also [gtk.combo_box.ComboBox.newWithEntry].
    * Params:
    *   model = A `GtkTreeModel`
    * Returns: A new `GtkComboBox`
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   static ComboBox newWithModelAndEntry(TreeModel model)
   {
@@ -164,11 +164,11 @@ class ComboBox : Widget, CellEditable, CellLayout
    * If the model is a non-flat treemodel, and the active item is not
    * an immediate child of the root of the tree, this function returns
    * `gtk_tree_path_get_indices $(LPAREN)path$(RPAREN)[0]`, where `path` is the
-   * [Gtk.TreePath] of the active item.
+   * [gtk.tree_path.TreePath] of the active item.
    * Returns: An integer which is the index of the currently active item,
    *   or -1 if there’s no active item
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   int getActive()
   {
@@ -181,7 +181,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Returns the ID of the active row of combo_box.
    * This value is taken from the active row and the column specified
    * by the propertyGtk.ComboBox:id-column property of combo_box
-   * $(LPAREN)see [Gtk.ComboBox.setIdColumn]$(RPAREN).
+   * $(LPAREN)see [gtk.combo_box.ComboBox.setIdColumn]$(RPAREN).
    * The returned value is an interned string which means that you can
    * compare the pointer by value to other interned strings and that you
    * must not free it.
@@ -190,7 +190,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * ID value, then %NULL is returned.
    * Returns: the ID of the active row
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   string getActiveId()
   {
@@ -207,7 +207,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    *   iter = A `GtkTreeIter`
    * Returns: %TRUE if iter was set, %FALSE otherwise
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   bool getActiveIter(out TreeIter iter)
   {
@@ -227,7 +227,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    *   if it is only sensitive as long as the model has one item to
    *   be selected.
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   SensitivityType getButtonSensitivity()
   {
@@ -241,7 +241,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Gets the child widget of combo_box.
    * Returns: the child widget of combo_box
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   Widget getChild()
   {
@@ -256,7 +256,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * from to display in the internal entry.
    * Returns: A column in the data source model of combo_box.
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   int getEntryTextColumn()
   {
@@ -269,7 +269,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Returns whether the combo box has an entry.
    * Returns: whether there is an entry in combo_box.
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   bool getHasEntry()
   {
@@ -283,7 +283,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * for values from.
    * Returns: A column in the data source model of combo_box.
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   int getIdColumn()
   {
@@ -297,7 +297,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Returns: A `GtkTreeModel` which was passed
    *   during construction.
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   TreeModel getModel()
   {
@@ -311,7 +311,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Gets whether the popup uses a fixed width.
    * Returns: %TRUE if the popup uses a fixed width
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   bool getPopupFixedWidth()
   {
@@ -325,7 +325,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * This function is mostly intended for use by accessibility technologies;
    * applications should have little use for it.
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void popdown()
   {
@@ -338,7 +338,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * applications should have little use for it.
    * Before calling this, combo_box must be mapped, or nothing will happen.
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void popup()
   {
@@ -354,7 +354,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Params:
    *   device = a `GdkDevice`
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void popupForDevice(Device device)
   {
@@ -367,7 +367,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    *   index = An index in the model passed during construction,
    *     or -1 to have no active item
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void setActive(int index)
   {
@@ -388,7 +388,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    *   active_id was given to unset the active row, the function
    *   always returns %TRUE.
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   bool setActiveId(string activeId)
   {
@@ -404,7 +404,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Params:
    *   iter = The `GtkTreeIter`
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void setActiveIter(TreeIter iter)
   {
@@ -417,7 +417,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Params:
    *   sensitivity = specify the sensitivity of the dropdown button
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void setButtonSensitivity(SensitivityType sensitivity)
   {
@@ -429,7 +429,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Params:
    *   child = the child widget
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void setChild(Widget child)
   {
@@ -440,7 +440,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Sets the model column which combo_box should use to get strings
    * from to be text_column.
    * For this column no separate
-   * [Gtk.CellRenderer] is needed.
+   * [gtk.cell_renderer.CellRenderer] is needed.
    * The column text_column in the model of combo_box must be of
    * type %G_TYPE_STRING.
    * This is only relevant if combo_box has been created with
@@ -449,7 +449,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    *   textColumn = A column in model to get the strings from for
    *     the internal entry
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void setEntryTextColumn(int textColumn)
   {
@@ -464,7 +464,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Params:
    *   idColumn = A column in model to get string IDs for values from
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void setIdColumn(int idColumn)
   {
@@ -476,12 +476,12 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Will unset a previously set model $(LPAREN)if applicable$(RPAREN). If model is %NULL,
    * then it will unset the model.
    * Note that this function does not clear the cell renderers, you have to
-   * call [Gtk.CellLayout.clear] yourself if you need to set up different
+   * call [gtk.cell_layout.CellLayout.clear] yourself if you need to set up different
    * cell renderers for the new model.
    * Params:
    *   model = A `GtkTreeModel`
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void setModel(TreeModel model)
   {
@@ -495,7 +495,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Params:
    *   fixed = whether to use a fixed popup width
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void setPopupFixedWidth(bool fixed)
   {
@@ -510,7 +510,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Params:
    *   func = a `GtkTreeViewRowSeparatorFunc`
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void setRowSeparatorFunc(TreeViewRowSeparatorFunc func)
   {
@@ -562,7 +562,7 @@ class ComboBox : Widget, CellEditable, CellLayout
   /**
    * Emitted when the active item is changed.
    * The can be due to the user selecting a different item from the list,
-   * or due to a call to [Gtk.ComboBox.setActiveIter]. It will
+   * or due to a call to [gtk.combo_box.ComboBox.setActiveIter]. It will
    * also be emitted while typing into the entry of a combo box with an entry.
    *   comboBox = the instance the signal is connected to
    */
@@ -618,7 +618,7 @@ class ComboBox : Widget, CellEditable, CellLayout
    * }
    * ```
    * Params
-   *   path = the [Gtk.TreePath] string from the combo box's current model
+   *   path = the [gtk.tree_path.TreePath] string from the combo box's current model
    *     to format text for
    *   comboBox = the instance the signal is connected to
    * Returns: a newly allocated string representing path

@@ -1,6 +1,6 @@
 module gtk.column_view_sorter;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -11,7 +11,7 @@ import gtk.types;
 /**
  * `GtkColumnViewSorter` is a sorter implementation that
  * is geared towards the needs of `GtkColumnView`.
- * The sorter returned by [Gtk.ColumnView.getSorter] is
+ * The sorter returned by [gtk.column_view.ColumnView.getSorter] is
  * a `GtkColumnViewSorter`.
  * In column views, sorting can be configured by associating
  * sorters with columns, and users can invert sort order by clicking
@@ -23,8 +23,8 @@ import gtk.types;
  * and property@Gtk.ColumnViewSorter:primary-sort-order.
  * If you want to store the full sort configuration, including
  * secondary sort columns that are used for tie breaking, then
- * you can use [Gtk.ColumnViewSorter.getNthSortColumn].
- * To get notified about changes, use [Gtk.Sorter.changed].
+ * you can use [gtk.column_view_sorter.ColumnViewSorter.getNthSortColumn].
+ * To get notified about changes, use [gtk.sorter.Sorter.changed].
  * To restore a saved sort configuration on a `GtkColumnView`,
  * use code like:
  * ```
@@ -60,7 +60,7 @@ class ColumnViewSorter : Sorter
    * If the sorter of the primary sort column does not determine
    * a total order, then the secondary sorters are consulted to
    * break the ties.
-   * Use the [Gtk.Sorter.changed] signal to get notified
+   * Use the [gtk.sorter.Sorter.changed] signal to get notified
    * when the number of sort columns changes.
    * Returns: the number of sort columns
    */
@@ -73,7 +73,7 @@ class ColumnViewSorter : Sorter
 
   /**
    * Gets the position'th sort column and its associated sort order.
-   * Use the [Gtk.Sorter.changed] signal to get notified
+   * Use the [gtk.sorter.Sorter.changed] signal to get notified
    * when sort columns change.
    * Params:
    *   position = the position of the sort column to retrieve $(LPAREN)0 for the

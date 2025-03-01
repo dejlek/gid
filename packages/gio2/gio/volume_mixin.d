@@ -1,7 +1,7 @@
 module gio.volume_mixin;
 
 public import gio.volume_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.async_result;
 public import gio.async_result_mixin;
 public import gio.c.functions;
@@ -26,21 +26,21 @@ public import gobject.object;
  * mounted. Note, when [porting from GnomeVFS](migrating-gnome-vfs.html),
  * `GVolume` is the moral equivalent of `GnomeVFSDrive`.
  * Mounting a `GVolume` instance is an asynchronous operation. For more
- * information about asynchronous operations, see [Gio.AsyncResult] and
- * [Gio.Task]. To mount a `GVolume`, first call [Gio.Volume.mount]
+ * information about asynchronous operations, see [gio.async_result.AsyncResult] and
+ * [gio.task.Task]. To mount a `GVolume`, first call [gio.volume.Volume.mount]
  * with $(LPAREN)at least$(RPAREN) the `GVolume` instance, optionally a
- * [Gio.MountOperation] object and a [Gio.AsyncReadyCallback].
+ * [gio.mount_operation.MountOperation] object and a [gio.AsyncReadyCallback].
  * Typically, one will only want to pass `NULL` for the
- * [Gio.MountOperation] if automounting all volumes when a desktop session
+ * [gio.mount_operation.MountOperation] if automounting all volumes when a desktop session
  * starts since it’s not desirable to put up a lot of dialogs asking
  * for credentials.
  * The callback will be fired when the operation has resolved $(LPAREN)either
- * with success or failure$(RPAREN), and a [Gio.AsyncResult] instance will be
+ * with success or failure$(RPAREN), and a [gio.async_result.AsyncResult] instance will be
  * passed to the callback.  That callback should then call
- * [Gio.Volume.mountFinish] with the `GVolume` instance and the
- * [Gio.AsyncResult] data to see if the operation was completed
- * successfully.  If a [GLib.ErrorG] is present when
- * [Gio.Volume.mountFinish] is called, then it will be filled with any
+ * [gio.volume.Volume.mountFinish] with the `GVolume` instance and the
+ * [gio.async_result.AsyncResult] data to see if the operation was completed
+ * successfully.  If a [glib.error.ErrorG] is present when
+ * [gio.volume.Volume.mountFinish] is called, then it will be filled with any
  * error information.
  * ## Volume Identifiers
  * It is sometimes necessary to directly access the underlying
@@ -51,7 +51,7 @@ public import gobject.object;
  * traditional Unix devices $(LPAREN)e.g. `/dev/sda2`$(RPAREN), UUIDs. GIO uses predefined
  * strings as names for the different kinds of identifiers:
  * `G_VOLUME_IDENTIFIER_KIND_UUID`, `G_VOLUME_IDENTIFIER_KIND_LABEL`, etc.
- * Use [Gio.Volume.getIdentifier] to obtain an identifier for a volume.
+ * Use [gio.volume.Volume.getIdentifier] to obtain an identifier for a volume.
  * Note that `G_VOLUME_IDENTIFIER_KIND_HAL_UDI` will only be available
  * when the GVFS hal volume monitor is in use. Other volume monitors
  * will generally be able to provide the `G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE`
@@ -85,14 +85,14 @@ template VolumeT()
 
   /**
    * Ejects a volume. This is an asynchronous operation, and is
-   * finished by calling [Gio.Volume.ejectFinish] with the volume
+   * finished by calling [gio.volume.Volume.ejectFinish] with the volume
    * and #GAsyncResult returned in the callback.
    * Params:
    *   flags = flags affecting the unmount if required for eject
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback, or %NULL
 
-   * Deprecated: Use [Gio.Volume.ejectWithOperation] instead.
+   * Deprecated: Use [gio.volume.Volume.ejectWithOperation] instead.
    */
   override void eject(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback)
   {
@@ -116,7 +116,7 @@ template VolumeT()
    *   result = a #GAsyncResult
    * Returns: %TRUE, %FALSE if operation failed
 
-   * Deprecated: Use [Gio.Volume.ejectWithOperationFinish] instead.
+   * Deprecated: Use [gio.volume.Volume.ejectWithOperationFinish] instead.
    */
   override bool ejectFinish(AsyncResult result)
   {
@@ -130,7 +130,7 @@ template VolumeT()
 
   /**
    * Ejects a volume. This is an asynchronous operation, and is
-   * finished by calling [Gio.Volume.ejectWithOperationFinish] with the volume
+   * finished by calling [gio.volume.Volume.ejectWithOperationFinish] with the volume
    * and #GAsyncResult data returned in the callback.
    * Params:
    *   flags = flags affecting the unmount if required for eject
@@ -173,9 +173,9 @@ template VolumeT()
 
   /**
    * Gets the kinds of [identifiers](#volume-identifiers) that volume has.
-   * Use [Gio.Volume.getIdentifier] to obtain the identifiers themselves.
+   * Use [gio.volume.Volume.getIdentifier] to obtain the identifiers themselves.
    * Returns: a %NULL-terminated array
-   *   of strings containing kinds of identifiers. Use [GLib.Global.strfreev] to free.
+   *   of strings containing kinds of identifiers. Use [glib.global.strfreev] to free.
    */
   override string[] enumerateIdentifiers()
   {
@@ -198,8 +198,8 @@ template VolumeT()
   /**
    * Gets the activation root for a #GVolume if it is known ahead of
    * mount time. Returns %NULL otherwise. If not %NULL and if volume
-   * is mounted, then the result of [Gio.Mount.getRoot] on the
-   * #GMount object obtained from [Gio.Volume.getMount] will always
+   * is mounted, then the result of [gio.mount.Mount.getRoot] on the
+   * #GMount object obtained from [gio.volume.Volume.getMount] will always
    * either be equal or a prefix of what this function returns. In
    * other words, in code
    * |[<!-- language\="C" -->
@@ -218,9 +218,9 @@ template VolumeT()
    * will always be %TRUE.
    * Activation roots are typically used in #GVolumeMonitor
    * implementations to find the underlying mount to shadow, see
-   * [Gio.Mount.isShadowed] for more details.
+   * [gio.mount.Mount.isShadowed] for more details.
    * Returns: the activation root of volume
-   *   or %NULL. Use [GObject.ObjectG.unref] to free.
+   *   or %NULL. Use [gobject.object.ObjectG.unref] to free.
    */
   override File getActivationRoot()
   {
@@ -234,7 +234,7 @@ template VolumeT()
    * Gets the drive for the volume.
    * Returns: a #GDrive or %NULL if volume is not
    *   associated with a drive. The returned object should be unreffed
-   *   with [GObject.ObjectG.unref] when no longer needed.
+   *   with [gobject.object.ObjectG.unref] when no longer needed.
    */
   override Drive getDrive()
   {
@@ -247,7 +247,7 @@ template VolumeT()
   /**
    * Gets the icon for volume.
    * Returns: a #GIcon.
-   *   The returned object should be unreffed with [GObject.ObjectG.unref]
+   *   The returned object should be unreffed with [gobject.object.ObjectG.unref]
    *   when no longer needed.
    */
   override Icon getIcon()
@@ -280,7 +280,7 @@ template VolumeT()
   /**
    * Gets the mount for the volume.
    * Returns: a #GMount or %NULL if volume isn't mounted.
-   *   The returned object should be unreffed with [GObject.ObjectG.unref]
+   *   The returned object should be unreffed with [gobject.object.ObjectG.unref]
    *   when no longer needed.
    */
   override Mount getMount()
@@ -294,7 +294,7 @@ template VolumeT()
   /**
    * Gets the name of volume.
    * Returns: the name for the given volume. The returned string should
-   *   be freed with [GLib.Global.gfree] when no longer needed.
+   *   be freed with [glib.global.gfree] when no longer needed.
    */
   override string getName()
   {
@@ -319,7 +319,7 @@ template VolumeT()
   /**
    * Gets the symbolic icon for volume.
    * Returns: a #GIcon.
-   *   The returned object should be unreffed with [GObject.ObjectG.unref]
+   *   The returned object should be unreffed with [gobject.object.ObjectG.unref]
    *   when no longer needed.
    */
   override Icon getSymbolicIcon()
@@ -337,7 +337,7 @@ template VolumeT()
    * available.
    * Returns: the UUID for volume or %NULL if no UUID
    *   can be computed.
-   *   The returned string should be freed with [GLib.Global.gfree]
+   *   The returned string should be freed with [glib.global.gfree]
    *   when no longer needed.
    */
   override string getUuid()
@@ -350,7 +350,7 @@ template VolumeT()
 
   /**
    * Mounts a volume. This is an asynchronous operation, and is
-   * finished by calling [Gio.Volume.mountFinish] with the volume
+   * finished by calling [gio.volume.Volume.mountFinish] with the volume
    * and #GAsyncResult returned in the callback.
    * Params:
    *   flags = flags affecting the operation
@@ -376,7 +376,7 @@ template VolumeT()
   /**
    * Finishes mounting a volume. If any errors occurred during the operation,
    * error will be set to contain the errors and %FALSE will be returned.
-   * If the mount operation succeeded, [Gio.Volume.getMount] on volume
+   * If the mount operation succeeded, [gio.volume.Volume.getMount] on volume
    * is guaranteed to return the mount right after calling this
    * function; there's no need to listen for the 'mount-added' signal on
    * #GVolumeMonitor.

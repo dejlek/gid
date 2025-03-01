@@ -1,6 +1,6 @@
 module gtk.entry_completion;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.buildable;
@@ -19,15 +19,15 @@ import gtk.widget;
 /**
  * `GtkEntryCompletion` is an auxiliary object to provide completion functionality
  * for `GtkEntry`.
- * It implements the [Gtk.CellLayout] interface, to allow the user
+ * It implements the [gtk.cell_layout.CellLayout] interface, to allow the user
  * to add extra cells to the `GtkTreeView` with completion matches.
  * “Completion functionality” means that when the user modifies the text
  * in the entry, `GtkEntryCompletion` checks which rows in the model match
  * the current content of the entry, and displays a list of matches.
  * By default, the matching is done by comparing the entry text
  * case-insensitively against the text column of the model $(LPAREN)see
- * [Gtk.EntryCompletion.setTextColumn]$(RPAREN), but this can be overridden
- * with a custom match function $(LPAREN)see [Gtk.EntryCompletion.setMatchFunc]$(RPAREN).
+ * [gtk.entry_completion.EntryCompletion.setTextColumn]$(RPAREN), but this can be overridden
+ * with a custom match function $(LPAREN)see [gtk.entry_completion.EntryCompletion.setMatchFunc]$(RPAREN).
  * When the user selects a completion, the content of the entry is
  * updated. By default, the content of the entry is replaced by the
  * text column of the model, but this can be overridden by connecting
@@ -35,8 +35,8 @@ import gtk.widget;
  * entry in the signal handler. Note that you should return %TRUE from
  * the signal handler to suppress the default behaviour.
  * To add completion functionality to an entry, use
- * [Gtk.Entry.setCompletion].
- * `GtkEntryCompletion` uses a [Gtk.TreeModelFilter] model to
+ * [gtk.entry.Entry.setCompletion].
+ * `GtkEntryCompletion` uses a [gtk.tree_model_filter.TreeModelFilter] model to
  * represent the subset of the entire model that is currently matching.
  * While the `GtkEntryCompletion` signals
  * signal@Gtk.EntryCompletion::match-selected and
@@ -45,10 +45,10 @@ import gtk.widget;
  * signals $(LPAREN)such as `GtkCellLayoutDataFunc` or
  * signal@Gtk.CellArea::apply-attributes$(RPAREN)
  * will generally take the filter model as argument. As long as you are
- * only calling [Gtk.TreeModel.get], this will make no difference to
+ * only calling [gtk.tree_model.TreeModel.get], this will make no difference to
  * you. If for some reason, you need the original model, use
- * [Gtk.TreeModelFilter.getModel]. Don’t forget to use
- * [Gtk.TreeModelFilter.convertIterToChildIter] to obtain a
+ * [gtk.tree_model_filter.TreeModelFilter.getModel]. Don’t forget to use
+ * [gtk.tree_model_filter.TreeModelFilter.convertIterToChildIter] to obtain a
  * matching iter.
  */
 class EntryCompletion : ObjectG, Buildable, CellLayout
@@ -122,7 +122,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    * that start with key.
    * If no row matches key, %NULL will be returned.
    * Note that a text column must have been set for this function to work,
-   * see [Gtk.EntryCompletion.setTextColumn] for details.
+   * see [gtk.entry_completion.EntryCompletion.setTextColumn] for details.
    * Params:
    *   key = The text to complete for
    * Returns: The common prefix all rows
@@ -420,7 +420,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    * and to get those strings from column in the model of completion.
    * This functions creates and adds a `GtkCellRendererText` for the selected
    * column. If you need to set the text column, but don't want the cell
-   * renderer, use [GObject.ObjectG.set] to set the
+   * renderer, use [gobject.object.ObjectG.set] to set the
    * propertyGtk.EntryCompletion:text-column property directly.
    * Params:
    *   column = the column in the model of completion to get strings from
@@ -438,7 +438,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    * of the entry with the contents of the text column in the row
    * pointed to by iter.
    * Note that model is the model that was passed to
-   * [Gtk.EntryCompletion.setModel].
+   * [gtk.entry_completion.EntryCompletion.setModel].
    * Params
    *   model = the `GtkTreeModel` containing the matches
    *   iter = a `GtkTreeIter` positioned at the selected match
@@ -521,7 +521,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    * entry with the contents of the text column in the row
    * pointed to by iter.
    * Note that model is the model that was passed to
-   * [Gtk.EntryCompletion.setModel].
+   * [gtk.entry_completion.EntryCompletion.setModel].
    * Params
    *   model = the `GtkTreeModel` containing the matches
    *   iter = a `GtkTreeIter` positioned at the selected match

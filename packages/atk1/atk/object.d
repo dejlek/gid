@@ -6,7 +6,7 @@ import atk.property_values;
 import atk.relation_set;
 import atk.state_set;
 import atk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 
@@ -185,12 +185,12 @@ class ObjectAtk : ObjectG
 
   /**
    * Gets the accessible parent of the accessible. By default this is
-   * the one assigned with [Atk.ObjectAtk.setParent], but it is assumed
+   * the one assigned with [atk.object.ObjectAtk.setParent], but it is assumed
    * that ATK implementors have ways to get the parent of the object
    * without the need of assigning it manually with
-   * [Atk.ObjectAtk.setParent], and will return it with this method.
+   * [atk.object.ObjectAtk.setParent], and will return it with this method.
    * If you are only interested on the parent assigned with
-   * [Atk.ObjectAtk.setParent], use [Atk.ObjectAtk.peekParent].
+   * [atk.object.ObjectAtk.setParent], use [atk.object.ObjectAtk.peekParent].
    * Returns: an #AtkObject representing the accessible
    *   parent of the accessible
    */
@@ -245,7 +245,7 @@ class ObjectAtk : ObjectG
    * manually assigned with atk_object_set_parent. Otherwise, this
    * function returns %NULL.
    * This method is intended as an utility for ATK implementors, and not
-   * to be exposed to accessible tools. See [Atk.ObjectAtk.getParent] for
+   * to be exposed to accessible tools. See [atk.object.ObjectAtk.getParent] for
    * further reference.
    * Returns: an #AtkObject representing the accessible
    *   parent of the accessible if assigned
@@ -307,7 +307,7 @@ class ObjectAtk : ObjectG
    * Params:
    *   handlerId = a guint which identifies the handler to be removed.
 
-   * Deprecated: See [Atk.ObjectAtk.connectPropertyChangeHandler]
+   * Deprecated: See [atk.object.ObjectAtk.connectPropertyChangeHandler]
    */
   void removePropertyChangeHandler(uint handlerId)
   {
@@ -633,9 +633,9 @@ class ObjectAtk : ObjectG
    * may also be emitted when the setter of the property is called to
    * reinstate the previous value.
    * Toolkit implementor note: ATK implementors should use
-   * [GObject.ObjectG.notify] to emit property-changed
+   * [gobject.object.ObjectG.notify] to emit property-changed
    * notifications. #AtkObject::property-changed is needed by the
-   * implementation of [Atk.Global.addGlobalEventListener] because GObject
+   * implementation of [atk.global.addGlobalEventListener] because GObject
    * notify doesn't support emission hooks.
    * Params
    *   arg1 = an #AtkPropertyValues containing the new

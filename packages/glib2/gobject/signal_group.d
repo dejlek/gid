@@ -1,6 +1,6 @@
 module gobject.signal_group;
 
-import gid.gid;
+import gid.global;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.closure;
@@ -97,7 +97,7 @@ class SignalGroup : ObjectG
 
   /**
    * Sets the target instance used when connecting signals. Any signal
-   * that has been registered with [GObject.SignalGroup.connectObject] or
+   * that has been registered with [gobject.signal_group.SignalGroup.connectObject] or
    * similar functions will be connected to this object.
    * If the target instance was previously set, signals will be
    * disconnected from that object prior to connecting to target.

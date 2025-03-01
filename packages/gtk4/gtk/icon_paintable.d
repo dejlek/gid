@@ -2,7 +2,7 @@ module gtk.icon_paintable;
 
 import gdk.paintable;
 import gdk.paintable_mixin;
-import gid.gid;
+import gid.global;
 import gio.file;
 import gio.file_mixin;
 import gobject.object;
@@ -46,7 +46,7 @@ class IconPaintable : ObjectG, Paintable, SymbolicPaintable
    *   size = desired icon size
    *   scale = the desired scale
    * Returns: a `GtkIconPaintable` containing
-   *   for the icon. Unref with [GObject.ObjectG.unref]
+   *   for the icon. Unref with [gobject.object.ObjectG.unref]
    */
   static IconPaintable newForFile(File file, int size, int scale)
   {
@@ -73,7 +73,7 @@ class IconPaintable : ObjectG, Paintable, SymbolicPaintable
    * Get the icon name being used for this icon.
    * When an icon looked up in the icon theme was not available, the
    * icon theme may use fallback icons - either those specified to
-   * [Gtk.IconTheme.lookupIcon] or the always-available
+   * [gtk.icon_theme.IconTheme.lookupIcon] or the always-available
    * "image-missing". The icon chosen is returned by this function.
    * If the icon was created without an icon theme, this function
    * returns %NULL.

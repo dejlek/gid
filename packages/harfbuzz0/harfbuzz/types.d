@@ -1,6 +1,6 @@
 module harfbuzz.types;
 
-import gid.gid;
+import gid.global;
 import harfbuzz.blob;
 import harfbuzz.buffer;
 import harfbuzz.c.functions;

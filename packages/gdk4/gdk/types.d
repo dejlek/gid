@@ -5,7 +5,7 @@ import gdk.c.types;
 import gdk.content_deserializer;
 import gdk.content_serializer;
 import gdk.types;
-import gid.gid;
+import gid.global;
 
 
 // Enums
@@ -52,7 +52,7 @@ alias ContentSerializeFunc = void delegate(ContentSerializer serializer);
 
 /**
  * Defines all possible DND actions.
- * This can be used in [Gdk.Drop.status] messages when any drop
+ * This can be used in [gdk.drop.Drop.status] messages when any drop
  * can be accepted or a more specific drop method is not yet known.
  */
 enum ACTION_ALL = 7;

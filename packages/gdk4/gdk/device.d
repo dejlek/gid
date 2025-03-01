@@ -7,7 +7,7 @@ import gdk.display;
 import gdk.seat;
 import gdk.surface;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import pango.types;
@@ -15,7 +15,7 @@ import pango.types;
 /**
  * The `GdkDevice` object represents an input device, such
  * as a keyboard, a mouse, or a touchpad.
- * See the [Gdk.Seat] documentation for more information
+ * See the [gdk.seat.Seat] documentation for more information
  * about the various kinds of devices, and their relationships.
  */
 class Device : ObjectG
@@ -154,7 +154,7 @@ class Device : ObjectG
   /**
    * Returns the product ID of this device.
    * This ID is retrieved from the device, and does not change.
-   * See [Gdk.Device.getVendorId] for more information.
+   * See [gdk.device.Device.getVendorId] for more information.
    * Returns: the product ID
    */
   string getProductId()
@@ -240,7 +240,7 @@ class Device : ObjectG
   /**
    * Returns the vendor ID of this device.
    * This ID is retrieved from the device, and does not change.
-   * This function, together with [Gdk.Device.getProductId],
+   * This function, together with [gdk.device.Device.getProductId],
    * can be used to eg. compose `GSettings` paths to store settings
    * for this device.
    * ```c

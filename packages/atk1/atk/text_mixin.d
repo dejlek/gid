@@ -5,7 +5,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.text_range;
 public import atk.types;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 
 /**
@@ -187,7 +187,7 @@ template TextT()
    *   startOffset = passes back the starting character offset of the selected region
    *   endOffset = passes back the ending character offset $(LPAREN)offset immediately past$(RPAREN)
    *     of the selected region
-   * Returns: a newly allocated string containing the selected text. Use [GLib.Global.gfree]
+   * Returns: a newly allocated string containing the selected text. Use [glib.global.gfree]
    *   to free the returned string.
    */
   override string getSelection(int selectionNum, out int startOffset, out int endOffset)
@@ -230,7 +230,7 @@ template TextT()
    *   endOffset = the offset of the first character after the returned string,
    *     or -1 in the case of error $(LPAREN)e.g. invalid offset, not implemented$(RPAREN)
    * Returns: a newly allocated string containing the text at
-   *   the offset bounded by the specified granularity. Use [GLib.Global.gfree]
+   *   the offset bounded by the specified granularity. Use [glib.global.gfree]
    *   to free the returned string.  Returns %NULL if the offset is invalid
    *   or no implementation is available.
    */
@@ -248,7 +248,7 @@ template TextT()
    *   startOffset = a starting character offset within text
    *   endOffset = an ending character offset within text, or -1 for the end of the string.
    * Returns: a newly allocated string containing the text from start_offset up
-   *   to, but not including end_offset. Use [GLib.Global.gfree] to free the returned
+   *   to, but not including end_offset. Use [glib.global.gfree] to free the returned
    *   string.
    */
   override string getText(int startOffset, int endOffset)
@@ -268,10 +268,10 @@ template TextT()
    *   endOffset = the offset of the first character after the
    *     returned substring
    * Returns: a newly allocated string containing the text after offset bounded
-   *   by the specified boundary_type. Use [GLib.Global.gfree] to free the returned
+   *   by the specified boundary_type. Use [glib.global.gfree] to free the returned
    *   string.
 
-   * Deprecated: Please use [Atk.Text.getStringAtOffset] instead.
+   * Deprecated: Please use [atk.text.Text.getStringAtOffset] instead.
    */
   override string getTextAfterOffset(int offset, TextBoundary boundaryType, out int startOffset, out int endOffset)
   {
@@ -307,11 +307,11 @@ template TextT()
    *   endOffset = the offset of the first character after the
    *     returned substring
    * Returns: a newly allocated string containing the text at offset bounded
-   *   by the specified boundary_type. Use [GLib.Global.gfree] to free the returned
+   *   by the specified boundary_type. Use [glib.global.gfree] to free the returned
    *   string.
 
    * Deprecated: This method is deprecated since ATK version
-   *   2.9.4. Please use [Atk.Text.getStringAtOffset] instead.
+   *   2.9.4. Please use [atk.text.Text.getStringAtOffset] instead.
    */
   override string getTextAtOffset(int offset, TextBoundary boundaryType, out int startOffset, out int endOffset)
   {
@@ -330,10 +330,10 @@ template TextT()
    *   endOffset = the offset of the first character after the
    *     returned substring
    * Returns: a newly allocated string containing the text before offset bounded
-   *   by the specified boundary_type. Use [GLib.Global.gfree] to free the returned
+   *   by the specified boundary_type. Use [glib.global.gfree] to free the returned
    *   string.
 
-   * Deprecated: Please use [Atk.Text.getStringAtOffset] instead.
+   * Deprecated: Please use [atk.text.Text.getStringAtOffset] instead.
    */
   override string getTextBeforeOffset(int offset, TextBoundary boundaryType, out int startOffset, out int endOffset)
   {

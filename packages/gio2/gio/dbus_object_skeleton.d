@@ -1,6 +1,6 @@
 module gio.dbus_object_skeleton;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_interface_skeleton;
@@ -15,7 +15,7 @@ import gobject.object;
  * A `GDBusObjectSkeleton` instance is essentially a group of D-Bus
  * interfaces. The set of exported interfaces on the object may be
  * dynamic and change at runtime.
- * This type is intended to be used with [Gio.DBusObjectManager].
+ * This type is intended to be used with [gio.dbus_object_manager.DBusObjectManager].
  */
 class DBusObjectSkeleton : ObjectG, DBusObject
 {
@@ -42,7 +42,7 @@ class DBusObjectSkeleton : ObjectG, DBusObject
    * Creates a new #GDBusObjectSkeleton.
    * Params:
    *   objectPath = An object path.
-   * Returns: A #GDBusObjectSkeleton. Free with [GObject.ObjectG.unref].
+   * Returns: A #GDBusObjectSkeleton. Free with [gobject.object.ObjectG.unref].
    */
   this(string objectPath)
   {
@@ -67,7 +67,7 @@ class DBusObjectSkeleton : ObjectG, DBusObject
   }
 
   /**
-   * This method simply calls [Gio.DBusInterfaceSkeleton.flush] on all
+   * This method simply calls [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.flush] on all
    * interfaces belonging to object. See that method for when flushing
    * is useful.
    */

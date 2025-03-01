@@ -1,6 +1,6 @@
 module glib.mapped_file;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
@@ -10,7 +10,7 @@ import gobject.boxed;
 
 /**
  * The #GMappedFile represents a file mapping created with
- * [GLib.MappedFile.new_]. It has only private members and should
+ * [glib.mapped_file.MappedFile.new_]. It has only private members and should
  * not be accessed directly.
  */
 class MappedFile : Boxed
@@ -46,7 +46,7 @@ class MappedFile : Boxed
    * Note that modifications of the underlying file might affect the contents
    * of the #GMappedFile. Therefore, mapping should only be used if the file
    * will not be modified, or if all modifications of the file are done
-   * atomically $(LPAREN)e.g. using [GLib.Global.fileSetContents]$(RPAREN).
+   * atomically $(LPAREN)e.g. using [glib.global.fileSetContents]$(RPAREN).
    * If filename is the name of an empty, regular file, the function
    * will successfully return an empty #GMappedFile. In other cases of
    * size 0 $(LPAREN)e.g. device files such as /dev/null$(RPAREN), error will be set
@@ -56,7 +56,7 @@ class MappedFile : Boxed
    *     filename encoding
    *   writable = whether the mapping should be writable
    * Returns: a newly allocated #GMappedFile which must be unref'd
-   *   with [GLib.MappedFile.unref], or %NULL if the mapping failed.
+   *   with [glib.mapped_file.MappedFile.unref], or %NULL if the mapping failed.
    */
   this(string filename, bool writable)
   {
@@ -78,12 +78,12 @@ class MappedFile : Boxed
    * Note that modifications of the underlying file might affect the contents
    * of the #GMappedFile. Therefore, mapping should only be used if the file
    * will not be modified, or if all modifications of the file are done
-   * atomically $(LPAREN)e.g. using [GLib.Global.fileSetContents]$(RPAREN).
+   * atomically $(LPAREN)e.g. using [glib.global.fileSetContents]$(RPAREN).
    * Params:
    *   fd = The file descriptor of the file to load
    *   writable = whether the mapping should be writable
    * Returns: a newly allocated #GMappedFile which must be unref'd
-   *   with [GLib.MappedFile.unref], or %NULL if the mapping failed.
+   *   with [glib.mapped_file.MappedFile.unref], or %NULL if the mapping failed.
    */
   static MappedFile newFromFd(int fd, bool writable)
   {

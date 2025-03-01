@@ -1,6 +1,6 @@
 module pango.fontset_simple;
 
-import gid.gid;
+import gid.global;
 import pango.c.functions;
 import pango.c.types;
 import pango.font;

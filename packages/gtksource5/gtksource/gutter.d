@@ -1,6 +1,6 @@
 module gtksource.gutter;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -22,10 +22,10 @@ import gtksource.view;
  * class@Marks that might be present on a line. By packing
  * additional class@GutterRenderer objects in the gutter, you can extend the
  * gutter with your own custom drawings.
- * To get a `GtkSourceGutter`, use the [GtkSource.View.getGutter] function.
- * The gutter works very much the same way as cells rendered in a [Gtk.TreeView].
+ * To get a `GtkSourceGutter`, use the [gtksource.view.View.getGutter] function.
+ * The gutter works very much the same way as cells rendered in a [gtk.tree_view.TreeView].
  * The concept is similar, with the exception that the gutter does not have an
- * underlying [Gtk.TreeModel]. The builtin line number renderer is at position
+ * underlying [gtk.tree_model.TreeModel]. The builtin line number renderer is at position
  * %GTK_SOURCE_VIEW_GUTTER_POSITION_LINES $(LPAREN)-30$(RPAREN) and the marks renderer is at
  * %GTK_SOURCE_VIEW_GUTTER_POSITION_MARKS $(LPAREN)-20$(RPAREN). The gutter sorts the renderers
  * in ascending order, from left to right. So the marks are displayed on the

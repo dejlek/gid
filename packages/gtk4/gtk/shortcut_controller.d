@@ -1,7 +1,7 @@
 module gtk.shortcut_controller;
 
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -16,15 +16,15 @@ import gtk.types;
 /**
  * `GtkShortcutController` is an event controller that manages shortcuts.
  * Most common shortcuts are using this controller implicitly, e.g. by
- * adding a mnemonic underline to a [Gtk.Label], or by installing a key
- * binding using [Gtk.WidgetClass.addBinding], or by adding accelerators
- * to global actions using [Gtk.Application.setAccelsForAction].
+ * adding a mnemonic underline to a [gtk.label.Label], or by installing a key
+ * binding using [gtk.widget_class.WidgetClass.addBinding], or by adding accelerators
+ * to global actions using [gtk.application.Application.setAccelsForAction].
  * But it is possible to create your own shortcut controller, and add
  * shortcuts to it.
- * `GtkShortcutController` implements [Gio.ListModel] for querying the
+ * `GtkShortcutController` implements [gio.list_model.ListModel] for querying the
  * shortcuts that have been added to it.
  * # GtkShortcutController as GtkBuildable
- * `GtkShortcutController`s can be created in [Gtk.Builder] ui files, to set up
+ * `GtkShortcutController`s can be created in [gtk.builder.Builder] ui files, to set up
  * shortcuts in the same place as the widgets.
  * An example of a UI definition fragment with `GtkShortcutController`:
  * ```xml
@@ -42,10 +42,10 @@ import gtk.types;
  * </child>
  * </object>
  * ```
- * This example creates a [Gtk.ActivateAction] for triggering the
- * `activate` signal of the [Gtk.Button]. See [Gtk.ShortcutAction.parseString]
- * for the syntax for other kinds of [Gtk.ShortcutAction]. See
- * [Gtk.ShortcutTrigger.parseString] to learn more about the syntax
+ * This example creates a [gtk.activate_action.ActivateAction] for triggering the
+ * `activate` signal of the [gtk.button.Button]. See [gtk.shortcut_action.ShortcutAction.parseString]
+ * for the syntax for other kinds of [gtk.shortcut_action.ShortcutAction]. See
+ * [gtk.shortcut_trigger.ShortcutTrigger.parseString] to learn more about the syntax
  * for triggers.
  */
 class ShortcutController : EventController, ListModel, Buildable
@@ -125,7 +125,7 @@ class ShortcutController : EventController, ListModel, Buildable
 
   /**
    * Gets the scope for when this controller activates its shortcuts.
-   * See [Gtk.ShortcutController.setScope] for details.
+   * See [gtk.shortcut_controller.ShortcutController.setScope] for details.
    * Returns: the controller's scope
    */
   ShortcutScope getScope()

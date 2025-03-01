@@ -1,6 +1,6 @@
 module gtk.text_tag;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -12,9 +12,9 @@ import gtk.types;
  * [text widget conceptual overview](section-text-widget.html),
  * which gives an overview of all the objects and data types
  * related to the text widget and how they work together.
- * Tags should be in the [Gtk.TextTagTable] for a given
+ * Tags should be in the [gtk.text_tag_table.TextTagTable] for a given
  * `GtkTextBuffer` before using them with that buffer.
- * [Gtk.TextBuffer.createTag] is the best way to create tags.
+ * [gtk.text_buffer.TextBuffer.createTag] is the best way to create tags.
  * See “gtk4-demo” for numerous examples.
  * For each property of `GtkTextTag`, there is a “set” property, e.g.
  * “font-set” corresponds to “font”. These “set” properties reflect
@@ -81,7 +81,7 @@ class TextTag : ObjectG
   /**
    * Sets the priority of a `GtkTextTag`.
    * Valid priorities start at 0 and go to one less than
-   * [Gtk.TextTagTable.getSize]. Each tag in a table
+   * [gtk.text_tag_table.TextTagTable.getSize]. Each tag in a table
    * has a unique priority; setting the priority of one tag shifts
    * the priorities of all the other tags in the table to maintain
    * a unique priority for each tag.
@@ -89,7 +89,7 @@ class TextTag : ObjectG
    * attribute. When adding a tag to a tag table, it will be assigned
    * the highest priority in the table by default; so normally the
    * precedence of a set of tags is the order in which they were added
-   * to the table, or created with [Gtk.TextBuffer.createTag],
+   * to the table, or created with [gtk.text_buffer.TextBuffer.createTag],
    * which adds the tag to the buffer’s table automatically.
    * Params:
    *   priority = the new priority

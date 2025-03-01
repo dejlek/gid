@@ -1,6 +1,6 @@
 module pango.renderer;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -41,11 +41,11 @@ class Renderer : ObjectG
 
   /**
    * Does initial setup before rendering operations on renderer.
-   * [Pango.Renderer.deactivate] should be called when done drawing.
-   * Calls such as [Pango.Renderer.drawLayout] automatically
+   * [pango.renderer.Renderer.deactivate] should be called when done drawing.
+   * Calls such as [pango.renderer.Renderer.drawLayout] automatically
    * activate the layout before drawing on it.
-   * Calls to [Pango.Renderer.activate] and
-   * [Pango.Renderer.deactivate] can be nested and the
+   * Calls to [pango.renderer.Renderer.activate] and
+   * [pango.renderer.Renderer.deactivate] can be nested and the
    * renderer will only be initialized and deinitialized once.
    */
   void activate()
@@ -55,7 +55,7 @@ class Renderer : ObjectG
 
   /**
    * Cleans up after rendering operations on renderer.
-   * See docs for [Pango.Renderer.activate].
+   * See docs for [pango.renderer.Renderer.activate].
    */
   void deactivate()
   {
@@ -69,7 +69,7 @@ class Renderer : ObjectG
    * of up/down segments and the resulting rectangle is centered
    * in the original rectangle.
    * This should be called while renderer is already active.
-   * Use [Pango.Renderer.activate] to activate a renderer.
+   * Use [pango.renderer.Renderer.activate] to activate a renderer.
    * Params:
    *   x = X coordinate of underline, in Pango units in user coordinate system
    *   y = Y coordinate of underline, in Pango units in user coordinate system
@@ -101,13 +101,13 @@ class Renderer : ObjectG
    * This is useful for rendering text in PDF.
    * Note that this method does not handle attributes in glyph_item.
    * If you want colors, shapes and lines handled automatically according
-   * to those attributes, you need to use [Pango.Renderer.drawLayoutLine]
-   * or [Pango.Renderer.drawLayout].
+   * to those attributes, you need to use [pango.renderer.Renderer.drawLayoutLine]
+   * or [pango.renderer.Renderer.drawLayout].
    * Note that text is the start of the text for layout, which is then
    * indexed by `glyph_item->item->offset`.
-   * If text is %NULL, this simply calls [Pango.Renderer.drawGlyphs].
+   * If text is %NULL, this simply calls [pango.renderer.Renderer.drawGlyphs].
    * The default implementation of this method simply falls back to
-   * [Pango.Renderer.drawGlyphs].
+   * [pango.renderer.Renderer.drawGlyphs].
    * Params:
    *   text = the UTF-8 text that glyph_item refers to
    *   glyphItem = a `PangoGlyphItem`
@@ -174,7 +174,7 @@ class Renderer : ObjectG
    * Draws an axis-aligned rectangle in user space coordinates with the
    * specified `PangoRenderer`.
    * This should be called while renderer is already active.
-   * Use [Pango.Renderer.activate] to activate a renderer.
+   * Use [pango.renderer.Renderer.activate] to activate a renderer.
    * Params:
    *   part = type of object this rectangle is part of
    *   x = X position at which to draw rectangle, in user space coordinates
@@ -274,7 +274,7 @@ class Renderer : ObjectG
   /**
    * Gets the transformation matrix that will be applied when
    * rendering.
-   * See [Pango.Renderer.setMatrix].
+   * See [pango.renderer.Renderer.setMatrix].
    * Returns: the matrix, or %NULL if no matrix has
    *   been set $(LPAREN)which is the same as the identity matrix$(RPAREN). The returned
    *   matrix is owned by Pango and must not be modified or freed.
@@ -299,7 +299,7 @@ class Renderer : ObjectG
    * ```
    * When the stipple changes or underlines with different stipples
    * might be joined together. Pango automatically calls this for
-   * changes to colors. $(LPAREN)See [Pango.Renderer.setColor]$(RPAREN)
+   * changes to colors. $(LPAREN)See [pango.renderer.Renderer.setColor]$(RPAREN)
    * Params:
    *   part = the part for which rendering has changed.
    */
@@ -323,7 +323,7 @@ class Renderer : ObjectG
 
   /**
    * Sets the color for part of the rendering.
-   * Also see [Pango.Renderer.setAlpha].
+   * Also see [pango.renderer.Renderer.setAlpha].
    * Params:
    *   part = the part to change the color of
    *   color = the new color or %NULL to unset the current color

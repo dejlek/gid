@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.monitor;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gobject.object;
 
@@ -12,7 +12,7 @@ import gobject.object;
  * The `GdkToplevelLayout` struct contains information that
  * is necessary to present a sovereign window on screen.
  * The `GdkToplevelLayout` struct is necessary for using
- * [Gdk.Toplevel.present].
+ * [gdk.toplevel.Toplevel.present].
  * Toplevel surfaces are sovereign windows that can be presented
  * to the user in various states $(LPAREN)maximized, on all workspaces,
  * etc$(RPAREN).
@@ -43,10 +43,10 @@ class ToplevelLayout : Boxed
 
   /**
    * Create a toplevel layout description.
-   * Used together with [Gdk.Toplevel.present] to describe
+   * Used together with [gdk.toplevel.Toplevel.present] to describe
    * how a toplevel surface should be placed and behave on-screen.
    * The size is in ”application pixels”, not
-   * ”device pixels” $(LPAREN)see [Gdk.Surface.getScaleFactor]$(RPAREN).
+   * ”device pixels” $(LPAREN)see [gdk.surface.Surface.getScaleFactor]$(RPAREN).
    * Returns: newly created instance of `GdkToplevelLayout`
    */
   this()

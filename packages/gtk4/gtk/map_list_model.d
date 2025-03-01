@@ -1,6 +1,6 @@
 module gtk.map_list_model;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -12,7 +12,7 @@ import gtk.types;
 
 /**
  * A `GtkMapListModel` maps the items in a list model to different items.
- * `GtkMapListModel` uses a [Gtk.MapListModelMapFunc].
+ * `GtkMapListModel` uses a [gtk.MapListModelMapFunc].
  * Example: Create a list of `GtkEventControllers`
  * ```c
  * static gpointer

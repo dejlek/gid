@@ -1,6 +1,6 @@
 module gtk.tree_expander;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -18,20 +18,20 @@ import gtk.widget;
  * `GtkTreeExpander` is a widget that provides an expander for a list.
  * It is typically placed as a bottommost child into a `GtkListView`
  * to allow users to expand and collapse children in a list with a
- * [Gtk.TreeListModel]. `GtkTreeExpander` provides the common UI
+ * [gtk.tree_list_model.TreeListModel]. `GtkTreeExpander` provides the common UI
  * elements, gestures and keybindings for this purpose.
  * On top of this, the "listitem.expand", "listitem.collapse" and
  * "listitem.toggle-expand" actions are provided to allow adding custom
  * UI for managing expanded state.
  * It is important to mention that you want to set the
- * [Gtk.ListItem.focusable] property to FALSE when using this
+ * [gtk.list_item.ListItem.gboolean] property to FALSE when using this
  * widget, as you want the keyboard focus to be in the treexpander, and not
  * inside the list to make use of the keybindings.
  * The `GtkTreeListModel` must be set to not be passthrough. Then it
- * will provide [Gtk.TreeListRow] items which can be set via
- * [Gtk.TreeExpander.setListRow] on the expander.
+ * will provide [gtk.tree_list_row.TreeListRow] items which can be set via
+ * [gtk.tree_expander.TreeExpander.setListRow] on the expander.
  * The expander will then watch that row item automatically.
- * [Gtk.TreeExpander.setChild] sets the widget that displays
+ * [gtk.tree_expander.TreeExpander.setChild] sets the widget that displays
  * the actual row contents.
  * `GtkTreeExpander` can be modified with properties such as
  * property@Gtk.TreeExpander:indent-for-icon,

@@ -1,6 +1,6 @@
 module gtk.directory_list;
 
-import gid.gid;
+import gid.global;
 import gio.file;
 import gio.file_mixin;
 import gio.list_model;
@@ -12,20 +12,20 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * `GtkDirectoryList` is a list model that wraps [Gio.File.enumerateChildrenAsync].
+ * `GtkDirectoryList` is a list model that wraps [gio.file.File.enumerateChildrenAsync].
  * It presents a `GListModel` and fills it asynchronously with the `GFileInfo`s
  * returned from that function.
  * Enumeration will start automatically when the
- * [Gtk.DirectoryList.file] property is set.
+ * [gtk.directory_list.DirectoryList.Gio.File] property is set.
  * While the `GtkDirectoryList` is being filled, the
- * [Gtk.DirectoryList.loading] property will be set to %TRUE. You can
+ * [gtk.directory_list.DirectoryList.gboolean] property will be set to %TRUE. You can
  * listen to that property if you want to show information like a `GtkSpinner`
  * or a "Loading..." text.
- * If loading fails at any point, the [Gtk.DirectoryList.error]
+ * If loading fails at any point, the [gtk.directory_list.DirectoryList.GLib.Error]
  * property will be set to give more indication about the failure.
  * The `GFileInfo`s returned from a `GtkDirectoryList` have the "standard::file"
  * attribute set to the `GFile` they refer to. This way you can get at the file
- * that is referred to in the same way you would via [Gio.FileEnumerator.getChild].
+ * that is referred to in the same way you would via [gio.file_enumerator.FileEnumerator.getChild].
  * This means you do not need access to the `GtkDirectoryList`, but can access
  * the `GFile` directly from the `GFileInfo` when operating with a `GtkListView`
  * or similar.
@@ -111,7 +111,7 @@ class DirectoryList : ObjectG, ListModel
   }
 
   /**
-   * Gets the IO priority set via [Gtk.DirectoryList.setIoPriority].
+   * Gets the IO priority set via [gtk.directory_list.DirectoryList.setIoPriority].
    * Returns: The IO priority.
    */
   int getIoPriority()

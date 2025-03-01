@@ -1,6 +1,6 @@
 module gsk.fill_node;
 
-import gid.gid;
+import gid.global;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.path;
@@ -8,8 +8,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node filling the area given by [Gsk.Path]
- * and [Gsk.FillRule] with the child node.
+ * A render node filling the area given by [gsk.path.Path]
+ * and [gsk.FillRule] with the child node.
  */
 class FillNode : RenderNode
 {

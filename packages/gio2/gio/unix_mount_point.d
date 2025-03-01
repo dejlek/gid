@@ -1,6 +1,6 @@
 module gio.unix_mount_point;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.icon;
@@ -138,7 +138,7 @@ class UnixMountPoint : Boxed
    * Guesses the name of a Unix mount point.
    * The result is a translated string.
    * Returns: A newly allocated string that must
-   *   be freed with [GLib.Global.gfree]
+   *   be freed with [glib.global.gfree]
    */
   string guessName()
   {
@@ -196,7 +196,7 @@ class UnixMountPoint : Boxed
   /**
    * Gets a #GUnixMountPoint for a given mount path. If time_read is set, it
    * will be filled with a unix timestamp for checking if the mount points have
-   * changed since with [Gio.DGioGlobal.unixMountPointsChangedSince].
+   * changed since with [gio.global.unixMountPointsChangedSince].
    * If more mount points have the same mount path, the last matching mount point
    * is returned.
    * Params:

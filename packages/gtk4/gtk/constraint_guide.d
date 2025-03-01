@@ -1,6 +1,6 @@
 module gtk.constraint_guide;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -74,7 +74,7 @@ class ConstraintGuide : ObjectG, ConstraintTarget
   }
 
   /**
-   * Retrieves the name set using [Gtk.ConstraintGuide.setName].
+   * Retrieves the name set using [gtk.constraint_guide.ConstraintGuide.setName].
    * Returns: the name of the guide
    */
   string getName()
@@ -97,7 +97,7 @@ class ConstraintGuide : ObjectG, ConstraintTarget
   }
 
   /**
-   * Retrieves the strength set using [Gtk.ConstraintGuide.setStrength].
+   * Retrieves the strength set using [gtk.constraint_guide.ConstraintGuide.setStrength].
    * Returns: the strength of the constraint on the natural size
    */
   ConstraintStrength getStrength()

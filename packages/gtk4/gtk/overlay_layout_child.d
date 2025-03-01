@@ -1,6 +1,6 @@
 module gtk.overlay_layout_child;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_child;

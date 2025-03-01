@@ -1,6 +1,6 @@
 module glib.test_suite;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;

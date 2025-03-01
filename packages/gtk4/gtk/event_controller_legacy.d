@@ -1,7 +1,7 @@
 module gtk.event_controller_legacy;
 
 import gdk.event;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;

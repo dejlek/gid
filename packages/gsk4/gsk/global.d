@@ -1,6 +1,6 @@
 module Gsk.global;
 
-import gid.gid;
+import gid.global;
 import gobject.value;
 import gsk.c.functions;
 import gsk.c.types;
@@ -12,7 +12,7 @@ import gsk.types;
  * Retrieves the `GskRenderNode` stored inside the given `value`, and acquires
  * a reference to it.
  * Params:
- *   value = a [GObject.Value] initialized with type `GSK_TYPE_RENDER_NODE`
+ *   value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
  * Returns: a `GskRenderNode`
  */
 RenderNode valueDupRenderNode(Value value)
@@ -39,9 +39,9 @@ RenderNode valueGetRenderNode(Value value)
 
 /**
  * Stores the given `GskRenderNode` inside `value`.
- * The [GObject.Value] will acquire a reference to the `node`.
+ * The [gobject.value.Value] will acquire a reference to the `node`.
  * Params:
- *   value = a [GObject.Value] initialized with type `GSK_TYPE_RENDER_NODE`
+ *   value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
  *   node = a `GskRenderNode`
  */
 void valueSetRenderNode(Value value, RenderNode node)
@@ -53,7 +53,7 @@ void valueSetRenderNode(Value value, RenderNode node)
  * Stores the given `GskRenderNode` inside `value`.
  * This function transfers the ownership of the `node` to the `GValue`.
  * Params:
- *   value = a [GObject.Value] initialized with type `GSK_TYPE_RENDER_NODE`
+ *   value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
  *   node = a `GskRenderNode`
  */
 void valueTakeRenderNode(Value value, RenderNode node)

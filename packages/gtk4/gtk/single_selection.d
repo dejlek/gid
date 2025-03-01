@@ -1,6 +1,6 @@
 module gtk.single_selection;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -58,7 +58,7 @@ class SingleSelection : ObjectG, ListModel, SectionModel, SelectionModel
 
   /**
    * Checks if autoselect has been enabled or disabled via
-   * [Gtk.SingleSelection.setAutoselect].
+   * [gtk.single_selection.SingleSelection.setAutoselect].
    * Returns: %TRUE if autoselect is enabled
    */
   bool getAutoselect()
@@ -69,7 +69,7 @@ class SingleSelection : ObjectG, ListModel, SectionModel, SelectionModel
   }
 
   /**
-   * If %TRUE, [Gtk.SelectionModel.unselectItem] is supported and allows
+   * If %TRUE, [gtk.selection_model.SelectionModel.unselectItem] is supported and allows
    * unselecting the selected item.
    * Returns: %TRUE to support unselecting
    */
@@ -132,8 +132,8 @@ class SingleSelection : ObjectG, ListModel, SectionModel, SelectionModel
 
   /**
    * If %TRUE, unselecting the current item via
-   * [Gtk.SelectionModel.unselectItem] is supported.
-   * Note that setting [Gtk.SingleSelection.autoselect] will
+   * [gtk.selection_model.SelectionModel.unselectItem] is supported.
+   * Note that setting [gtk.single_selection.SingleSelection.gboolean] will
    * cause unselecting to not work, so it practically makes no sense
    * to set both at the same time the same time.
    * Params:
@@ -159,7 +159,7 @@ class SingleSelection : ObjectG, ListModel, SectionModel, SelectionModel
    * Selects the item at the given position.
    * If the list does not have an item at position or
    * %GTK_INVALID_LIST_POSITION is given, the behavior depends on the
-   * value of the [Gtk.SingleSelection.autoselect] property:
+   * value of the [gtk.single_selection.SingleSelection.gboolean] property:
    * If it is set, no change will occur and the old item will stay
    * selected. If it is unset, the selection will be unset and no item
    * will be selected.

@@ -1,7 +1,7 @@
 module gio.tls_server_connection;
 
 public import gio.tls_server_connection_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.iostream;
@@ -12,7 +12,7 @@ import gobject.object;
 
 /**
  * `GTlsServerConnection` is the server-side subclass of
- * [Gio.TlsConnection], representing a server-side TLS connection.
+ * [gio.tls_connection.TlsConnection], representing a server-side TLS connection.
  */
 interface TlsServerConnection
 {

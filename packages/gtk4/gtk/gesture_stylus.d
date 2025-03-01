@@ -2,7 +2,7 @@ module gtk.gesture_stylus;
 
 import gdk.device_tool;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -48,8 +48,8 @@ class GestureStylus : GestureSingle
   /**
    * Returns the current values for the requested axes.
    * This function must be called from the handler of one of the
-   * [Gtk.GestureStylus.down], [Gtk.GestureStylus.motion],
-   * [Gtk.GestureStylus.up] or [Gtk.GestureStylus.proximity]
+   * [gtk.gesture_stylus.GestureStylus.down], [gtk.gesture_stylus.GestureStylus.motion],
+   * [gtk.gesture_stylus.GestureStylus.up] or [gtk.gesture_stylus.GestureStylus.proximity]
    * signals.
    * Params:
    *   axes = array of requested axes, terminated with %GDK_AXIS_IGNORE
@@ -71,8 +71,8 @@ class GestureStylus : GestureSingle
   /**
    * Returns the current value for the requested axis.
    * This function must be called from the handler of one of the
-   * [Gtk.GestureStylus.down], [Gtk.GestureStylus.motion],
-   * [Gtk.GestureStylus.up] or [Gtk.GestureStylus.proximity]
+   * [gtk.gesture_stylus.GestureStylus.down], [gtk.gesture_stylus.GestureStylus.motion],
+   * [gtk.gesture_stylus.GestureStylus.up] or [gtk.gesture_stylus.GestureStylus.proximity]
    * signals.
    * Params:
    *   axis = requested device axis
@@ -92,9 +92,9 @@ class GestureStylus : GestureSingle
    * where accuracy of strokes is paramount, this function returns the
    * accumulated coordinate/timing state before the emission of the
    * current [Gtk.GestureStylus::motion] signal.
-   * This function may only be called within a [Gtk.GestureStylus.motion]
+   * This function may only be called within a [gtk.gesture_stylus.GestureStylus.motion]
    * signal handler, the state given in this signal and obtainable through
-   * [Gtk.GestureStylus.getAxis] express the latest (most up-to-date)
+   * [gtk.gesture_stylus.GestureStylus.getAxis] express the latest (most up-to-date)
    * state in motion history.
    * The backlog is provided in chronological order.
    * Params:
@@ -116,8 +116,8 @@ class GestureStylus : GestureSingle
   /**
    * Returns the `GdkDeviceTool` currently driving input through this gesture.
    * This function must be called from the handler of one of the
-   * [Gtk.GestureStylus.down], [Gtk.GestureStylus.motion],
-   * [Gtk.GestureStylus.up] or [Gtk.GestureStylus.proximity]
+   * [gtk.gesture_stylus.GestureStylus.down], [gtk.gesture_stylus.GestureStylus.motion],
+   * [gtk.gesture_stylus.GestureStylus.up] or [gtk.gesture_stylus.GestureStylus.proximity]
    * signals.
    * Returns: The current stylus tool
    */

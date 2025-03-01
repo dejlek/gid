@@ -1,6 +1,6 @@
 module gtk.tree_list_row_sorter;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -42,8 +42,8 @@ class TreeListRowSorter : Sorter
   /**
    * Create a special-purpose sorter that applies the sorting
    * of sorter to the levels of a `GtkTreeListModel`.
-   * Note that this sorter relies on [Gtk.TreeListModel.passthrough]
-   * being %FALSE as it can only sort [Gtk.TreeListRow]s.
+   * Note that this sorter relies on [gtk.tree_list_model.TreeListModel.gboolean]
+   * being %FALSE as it can only sort [gtk.tree_list_row.TreeListRow]s.
    * Params:
    *   sorter = a `GtkSorter`
    * Returns: a new `GtkTreeListRowSorter`
@@ -69,7 +69,7 @@ class TreeListRowSorter : Sorter
 
   /**
    * Sets the sorter to use for items with the same parent.
-   * This sorter will be passed the [Gtk.TreeListRow.item] of
+   * This sorter will be passed the [gtk.tree_list_row.TreeListRow.GObject.Object] of
    * the tree list rows passed to self.
    * Params:
    *   sorter = The sorter to use

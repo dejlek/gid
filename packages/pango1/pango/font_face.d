@@ -1,6 +1,6 @@
 module pango.font_face;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -37,7 +37,7 @@ class FontFace : ObjectG
    * variant, weight and stretch of the face, but its size field
    * will be unset.
    * Returns: a newly-created `PangoFontDescription` structure
-   *   holding the description of the face. Use [Pango.FontDescription.free]
+   *   holding the description of the face. Use [pango.font_description.FontDescription.free]
    *   to free the result.
    */
   FontDescription describe()
@@ -98,7 +98,7 @@ class FontFace : ObjectG
    * in ascending order.
    * Params:
    *   sizes = location to store a pointer to an array of int. This array
-   *     should be freed with [GLib.Global.gfree].
+   *     should be freed with [glib.global.gfree].
    */
   void listSizes(out int[] sizes)
   {

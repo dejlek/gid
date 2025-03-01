@@ -1,6 +1,6 @@
 module graphene.point;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -62,8 +62,8 @@ class Point : Boxed
   /**
    * Allocates a new #graphene_point_t structure.
    * The coordinates of the returned point are $(LPAREN)0, 0$(RPAREN).
-   * It's possible to chain this function with [Graphene.Point.init_]
-   * or [Graphene.Point.initFromPoint], e.g.:
+   * It's possible to chain this function with [graphene.point.Point.init_]
+   * or [graphene.point.Point.initFromPoint], e.g.:
    * |[<!-- language\="C" -->
    * graphene_point_t *
    * point_new $(LPAREN)float x, float y$(RPAREN)
@@ -77,7 +77,7 @@ class Point : Boxed
    * }
    * ]|
    * Returns: the newly allocated #graphene_point_t.
-   *   Use [Graphene.Point.free] to free the resources allocated by
+   *   Use [graphene.point.Point.free] to free the resources allocated by
    *   this function.
    */
   static Point alloc()
@@ -108,7 +108,7 @@ class Point : Boxed
    * coordinates.
    * This function accounts for floating point fluctuations; if
    * you want to control the fuzziness of the match, you can use
-   * [Graphene.Point.near] instead.
+   * [graphene.point.Point.near] instead.
    * Params:
    *   b = a #graphene_point_t
    * Returns: `true` if the points have the same coordinates

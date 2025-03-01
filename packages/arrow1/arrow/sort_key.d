@@ -3,7 +3,7 @@ module arrow.sort_key;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

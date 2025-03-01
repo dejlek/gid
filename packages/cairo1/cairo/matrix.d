@@ -3,7 +3,7 @@ module cairo.matrix;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
@@ -236,7 +236,7 @@ class Matrix : Boxed
 
   /**
    * Transforms the distance vector $(LPAREN)dx,dy$(RPAREN) by matrix. This is
-   * similar to [cairo.Matrix.transformPoint] except that the translation
+   * similar to [cairo.matrix.Matrix.transformPoint] except that the translation
    * components of the transformation are ignored. The calculation of
    * the returned vector is as follows:
    * <programlisting>

@@ -1,6 +1,6 @@
 module gtk.list_item;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -9,16 +9,16 @@ import gtk.widget;
 
 /**
  * `GtkListItem` is used by list widgets to represent items in a
- * [Gio.ListModel].
+ * [gio.list_model.ListModel].
  * `GtkListItem` objects are managed by the list widget $(LPAREN)with its factory$(RPAREN)
  * and cannot be created by applications, but they need to be populated
- * by application code. This is done by calling [Gtk.ListItem.setChild].
+ * by application code. This is done by calling [gtk.list_item.ListItem.setChild].
  * `GtkListItem` objects exist in 2 stages:
  * 1. The unbound stage where the listitem is not currently connected to
- * an item in the list. In that case, the [Gtk.ListItem.item]
+ * an item in the list. In that case, the [gtk.list_item.ListItem.GObject.Object]
  * property is set to %NULL.
  * 2. The bound stage where the listitem references an item from the list.
- * The [Gtk.ListItem.item] property is not %NULL.
+ * The [gtk.list_item.ListItem.GObject.Object] property is not %NULL.
  */
 class ListItem : ObjectG
 {
@@ -65,7 +65,7 @@ class ListItem : ObjectG
 
   /**
    * Checks if a list item has been set to be activatable via
-   * [Gtk.ListItem.setActivatable].
+   * [gtk.list_item.ListItem.setActivatable].
    * Returns: %TRUE if the item is activatable
    */
   bool getActivatable()
@@ -76,7 +76,7 @@ class ListItem : ObjectG
   }
 
   /**
-   * Gets the child previously set via [Gtk.ListItem.setChild] or
+   * Gets the child previously set via [gtk.list_item.ListItem.setChild] or
    * %NULL if none was set.
    * Returns: The child
    */
@@ -90,7 +90,7 @@ class ListItem : ObjectG
 
   /**
    * Checks if a list item has been set to be focusable via
-   * [Gtk.ListItem.setFocusable].
+   * [gtk.list_item.ListItem.setFocusable].
    * Returns: %TRUE if the item is focusable
    */
   bool getFocusable()
@@ -127,8 +127,8 @@ class ListItem : ObjectG
 
   /**
    * Checks if a list item has been set to be selectable via
-   * [Gtk.ListItem.setSelectable].
-   * Do not confuse this function with [Gtk.ListItem.getSelected].
+   * [gtk.list_item.ListItem.setSelectable].
+   * Do not confuse this function with [gtk.list_item.ListItem.getSelected].
    * Returns: %TRUE if the item is selectable
    */
   bool getSelectable()
@@ -178,10 +178,10 @@ class ListItem : ObjectG
   /**
    * Sets self to be activatable.
    * If an item is activatable, double-clicking on the item, using
-   * the Return key or calling [Gtk.Widget.activate] will activate
+   * the Return key or calling [gtk.widget.Widget.activate] will activate
    * the item. Activating instructs the containing view to handle
    * activation. `GtkListView` for example will be emitting the
-   * [Gtk.ListView.activate] signal.
+   * [gtk.list_view.ListView.activate] signal.
    * By default, list items are activatable.
    * Params:
    *   activatable = if the item should be activatable
@@ -207,7 +207,7 @@ class ListItem : ObjectG
   /**
    * Sets self to be focusable.
    * If an item is focusable, it can be focused using the keyboard.
-   * This works similar to [Gtk.Widget.setFocusable].
+   * This works similar to [gtk.widget.Widget.setFocusable].
    * Note that if items are not focusable, the keyboard cannot be used to activate
    * them and selecting only works if one of the listitem's children is focusable.
    * By default, list items are focusable.

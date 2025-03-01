@@ -1,6 +1,6 @@
 module gtksource.style;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.text_tag;
 import gtksource.c.functions;
@@ -32,10 +32,10 @@ class Style : ObjectG
   }
 
   /**
-   * This function modifies the [Gtk.TextTag] properties that are related to the
-   * #GtkSourceStyle properties. Other [Gtk.TextTag] properties are left untouched.
+   * This function modifies the [gtk.text_tag.TextTag] properties that are related to the
+   * #GtkSourceStyle properties. Other [gtk.text_tag.TextTag] properties are left untouched.
    * If style is non-%NULL, applies style to tag.
-   * If style is %NULL, the related *-set properties of [Gtk.TextTag] are set to
+   * If style is %NULL, the related *-set properties of [gtk.text_tag.TextTag] are set to
    * %FALSE.
    * Params:
    *   tag = a #GtkTextTag to apply styles to.
@@ -48,7 +48,7 @@ class Style : ObjectG
   /**
    * Creates a copy of style, that is a new #GtkSourceStyle instance which
    * has the same attributes set.
-   * Returns: copy of style, call [GObject.ObjectG.unref]
+   * Returns: copy of style, call [gobject.object.ObjectG.unref]
    *   when you are done with it.
    */
   Style copy()

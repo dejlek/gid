@@ -1,7 +1,7 @@
 module gtk.cell_renderer_accel;
 
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;

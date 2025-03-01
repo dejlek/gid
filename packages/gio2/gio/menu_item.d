@@ -1,6 +1,6 @@
 module gio.menu_item;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.icon;
@@ -40,7 +40,7 @@ class MenuItem : ObjectG
    * new item.
    * If detailed_action is non-%NULL it is used to set the "action" and
    * possibly the "target" attribute of the new item.  See
-   * [Gio.MenuItem.setDetailedAction] for more information.
+   * [gio.menu_item.MenuItem.setDetailedAction] for more information.
    * Params:
    *   label = the section label, or %NULL
    *   detailedAction = the detailed action string, or %NULL
@@ -59,7 +59,7 @@ class MenuItem : ObjectG
    * Creates a #GMenuItem as an exact copy of an existing menu item in a
    * #GMenuModel.
    * item_index must be valid $(LPAREN)ie: be sure to call
-   * [Gio.MenuModel.getNItems] first$(RPAREN).
+   * [gio.menu_model.MenuModel.getNItems] first$(RPAREN).
    * Params:
    *   model = a #GMenuModel
    *   itemIndex = the index of an item in model
@@ -75,8 +75,8 @@ class MenuItem : ObjectG
 
   /**
    * Creates a new #GMenuItem representing a section.
-   * This is a convenience API around [Gio.MenuItem.new_] and
-   * [Gio.MenuItem.setSection].
+   * This is a convenience API around [gio.menu_item.MenuItem.new_] and
+   * [gio.menu_item.MenuItem.setSection].
    * The effect of having one menu appear as a section of another is
    * exactly as it sounds: the items from section become a direct part of
    * the menu that menu_item is added to.
@@ -144,8 +144,8 @@ class MenuItem : ObjectG
 
   /**
    * Creates a new #GMenuItem representing a submenu.
-   * This is a convenience API around [Gio.MenuItem.new_] and
-   * [Gio.MenuItem.setSubmenu].
+   * This is a convenience API around [gio.menu_item.MenuItem.new_] and
+   * [gio.menu_item.MenuItem.setSubmenu].
    * Params:
    *   label = the section label, or %NULL
    *   submenu = a #GMenuModel with the items of the submenu
@@ -220,8 +220,8 @@ class MenuItem : ObjectG
    * as a radio menu item $(LPAREN)ie: with a radio bullet or equivalent
    * indication$(RPAREN).  The item should be marked as 'selected' when the string
    * state is equal to the value of the target property.
-   * See [Gio.MenuItem.setActionAndTarget] or
-   * [Gio.MenuItem.setDetailedAction] for two equivalent calls that are
+   * See [gio.menu_item.MenuItem.setActionAndTarget] or
+   * [gio.menu_item.MenuItem.setDetailedAction] for two equivalent calls that are
    * probably more convenient for most uses.
    * Params:
    *   action = the name of the action for this item
@@ -247,7 +247,7 @@ class MenuItem : ObjectG
    * If value is non-%NULL then it is used as the new value for the
    * attribute.  If value is %NULL then the attribute is unset. If
    * the value #GVariant is floating, it is consumed.
-   * See also [Gio.MenuItem.setAttribute] for a more convenient way to do
+   * See also [gio.menu_item.MenuItem.setAttribute] for a more convenient way to do
    * the same.
    * Params:
    *   attribute = the attribute to set
@@ -262,11 +262,11 @@ class MenuItem : ObjectG
   /**
    * Sets the "action" and possibly the "target" attribute of menu_item.
    * The format of detailed_action is the same format parsed by
-   * [Gio.Action.parseDetailedName].
-   * See [Gio.MenuItem.setActionAndTarget] or
-   * [Gio.MenuItem.setActionAndTargetValue] for more flexible $(LPAREN)but
+   * [gio.action.Action.parseDetailedName].
+   * See [gio.menu_item.MenuItem.setActionAndTarget] or
+   * [gio.menu_item.MenuItem.setActionAndTargetValue] for more flexible $(LPAREN)but
    * slightly less convenient$(RPAREN) alternatives.
-   * See also [Gio.MenuItem.setActionAndTargetValue] for a description of
+   * See also [gio.menu_item.MenuItem.setActionAndTargetValue] for a description of
    * the semantics of the action and target attributes.
    * Params:
    *   detailedAction = the "detailed" action string
@@ -279,8 +279,8 @@ class MenuItem : ObjectG
 
   /**
    * Sets $(LPAREN)or unsets$(RPAREN) the icon on menu_item.
-   * This call is the same as calling [Gio.Icon.serialize] and using the
-   * result as the value to [Gio.MenuItem.setAttributeValue] for
+   * This call is the same as calling [gio.icon.Icon.serialize] and using the
+   * result as the value to [gio.menu_item.MenuItem.setAttributeValue] for
    * %G_MENU_ATTRIBUTE_ICON.
    * This API is only intended for use with "noun" menu items; things like
    * bookmarks or applications in an "Open With" menu.  Don't use it on
@@ -332,7 +332,7 @@ class MenuItem : ObjectG
    * Sets or unsets the "section" link of menu_item to section.
    * The effect of having one menu appear as a section of another is
    * exactly as it sounds: the items from section become a direct part of
-   * the menu that menu_item is added to.  See [Gio.MenuItem.newSection]
+   * the menu that menu_item is added to.  See [gio.menu_item.MenuItem.newSection]
    * for more information about what it means for a menu item to be a
    * section.
    * Params:

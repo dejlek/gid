@@ -4,7 +4,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.temporal_data_type;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class Date64DataType : TemporalDataType
 {

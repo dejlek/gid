@@ -1,6 +1,6 @@
 module gtk.string_object;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -9,7 +9,7 @@ import gtk.types;
 /**
  * `GtkStringObject` is the type of items in a `GtkStringList`.
  * A `GtkStringObject` is a wrapper around a `const char*`; it has
- * a [Gtk.StringObject.string] property that can be used
+ * a [gtk.string_object.StringObject.utf8] property that can be used
  * for property bindings and expressions.
  */
 class StringObject : ObjectG

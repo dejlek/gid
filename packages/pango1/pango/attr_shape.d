@@ -1,6 +1,6 @@
 module pango.attr_shape;
 
-import gid.gid;
+import gid.global;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -86,7 +86,7 @@ class AttrShape
    *   logicalRect = logical rectangle to assign to each character
    * Returns: the newly allocated
    *   `PangoAttribute`, which should be freed with
-   *   [Pango.Attribute.destroy]
+   *   [pango.attribute.Attribute.destroy]
    */
   static Attribute new_(Rectangle inkRect, Rectangle logicalRect)
   {

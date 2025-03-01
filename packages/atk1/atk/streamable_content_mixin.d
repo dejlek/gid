@@ -4,7 +4,7 @@ public import atk.streamable_content_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
-public import gid.gid;
+public import gid.global;
 public import glib.iochannel;
 
 /**

@@ -4,12 +4,12 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.rectangle;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
  * The `GdkPopupLayout` struct contains information that is
- * necessary position a [Gdk.Popup] relative to its parent.
+ * necessary position a [gdk.popup.Popup] relative to its parent.
  * The positioning requires a negotiation with the windowing system,
  * since it depends on external constraints, such as the position of
  * the parent surface, and the screen dimensions.
@@ -27,8 +27,8 @@ import gobject.boxed;
  * These hints may be combined.
  * Ultimatively, it is up to the windowing system to determine the position
  * and size of the popup. You can learn about the result by calling
- * [Gdk.Popup.getPositionX], [Gdk.Popup.getPositionY],
- * [Gdk.Popup.getRectAnchor] and [Gdk.Popup.getSurfaceAnchor]
+ * [gdk.popup.Popup.getPositionX], [gdk.popup.Popup.getPositionY],
+ * [gdk.popup.Popup.getRectAnchor] and [gdk.popup.Popup.getSurfaceAnchor]
  * after the popup has been presented. This can be used to adjust the rendering.
  * For example, [GtkPopover](../gtk4/class.Popover.html) changes its arrow position
  * accordingly. But you have to be careful avoid changing the size of the popover,
@@ -60,13 +60,13 @@ class PopupLayout : Boxed
 
   /**
    * Create a popup layout description.
-   * Used together with [Gdk.Popup.present] to describe how a popup
+   * Used together with [gdk.popup.Popup.present] to describe how a popup
    * surface should be placed and behave on-screen.
    * anchor_rect is relative to the top-left corner of the surface's parent.
    * rect_anchor and surface_anchor determine anchor points on anchor_rect
    * and surface to pin together.
    * The position of anchor_rect's anchor point can optionally be offset using
-   * [Gdk.PopupLayout.setOffset], which is equivalent to offsetting the
+   * [gdk.popup_layout.PopupLayout.setOffset], which is equivalent to offsetting the
    * position of surface.
    * Params:
    *   anchorRect = the anchor `GdkRectangle` to align surface with

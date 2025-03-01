@@ -1,6 +1,6 @@
 module glib.bytes;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -17,16 +17,16 @@ import gobject.boxed;
  * move while they hold a reference.
  * A #GBytes can come from many different origins that may have
  * different procedures for freeing the memory region.  Examples are
- * memory from [GLib.Global.gmalloc], from memory slices, from a #GMappedFile or
+ * memory from [glib.global.gmalloc], from memory slices, from a #GMappedFile or
  * memory from other allocators.
- * #GBytes work well as keys in #GHashTable. Use [GLib.Bytes.equal] and
- * [GLib.Bytes.hash] as parameters to [GLib.HashTable.new_] or [GLib.HashTable.newFull].
- * #GBytes can also be used as keys in a #GTree by passing the [GLib.Bytes.compare]
- * function to [GLib.Tree.new_].
+ * #GBytes work well as keys in #GHashTable. Use [glib.bytes.Bytes.equal] and
+ * [glib.bytes.Bytes.hash] as parameters to [glib.hash_table.HashTable.new_] or [glib.hash_table.HashTable.newFull].
+ * #GBytes can also be used as keys in a #GTree by passing the [glib.bytes.Bytes.compare]
+ * function to [glib.tree.Tree.new_].
  * The data pointed to by this bytes must not be modified. For a mutable
- * array of bytes see #GByteArray. Use [GLib.Bytes.unrefToArray] to create a
+ * array of bytes see #GByteArray. Use [glib.bytes.Bytes.unrefToArray] to create a
  * mutable array for a #GBytes sequence. To create an immutable #GBytes from
- * a mutable #GByteArray, use the [GLib.ByteArray.freeToBytes] function.
+ * a mutable #GByteArray, use the [glib.byte_array.ByteArray.freeToBytes] function.
  */
 class Bytes : Boxed
 {
@@ -95,7 +95,7 @@ class Bytes : Boxed
   /**
    * Compares the two #GBytes values being pointed to and returns
    * %TRUE if they are equal.
-   * This function can be passed to [GLib.HashTable.new_] as the key_equal_func
+   * This function can be passed to [glib.hash_table.HashTable.new_] as the key_equal_func
    * parameter, when using non-%NULL #GBytes pointers as keys in a #GHashTable.
    * Params:
    *   bytes2 = a pointer to a #GBytes to compare with bytes1
@@ -173,7 +173,7 @@ class Bytes : Boxed
 
   /**
    * Creates an integer hash code for the byte data in the #GBytes.
-   * This function can be passed to [GLib.HashTable.new_] as the key_hash_func
+   * This function can be passed to [glib.hash_table.HashTable.new_] as the key_hash_func
    * parameter, when using non-%NULL #GBytes pointers as keys in a #GHashTable.
    * Returns: a hash value corresponding to the key.
    */
@@ -212,7 +212,7 @@ class Bytes : Boxed
    * the same byte data.
    * As an optimization, the byte data is transferred to the array without copying
    * if this was the last reference to bytes and bytes was created with
-   * [GLib.Bytes.new_], [GLib.Bytes.newTake] or [GLib.ByteArray.freeToBytes]. In all
+   * [glib.bytes.Bytes.new_], [glib.bytes.Bytes.newTake] or [glib.byte_array.ByteArray.freeToBytes]. In all
    * other cases the data is copied.
    * Do not use it if bytes contains more than %G_MAXUINT
    * bytes. #GByteArray stores the length of its data in #guint, which
@@ -231,11 +231,11 @@ class Bytes : Boxed
    * Unreferences the bytes, and returns a pointer the same byte data
    * contents.
    * As an optimization, the byte data is returned without copying if this was
-   * the last reference to bytes and bytes was created with [GLib.Bytes.new_],
-   * [GLib.Bytes.newTake] or [GLib.ByteArray.freeToBytes]. In all other cases the
+   * the last reference to bytes and bytes was created with [glib.bytes.Bytes.new_],
+   * [glib.bytes.Bytes.newTake] or [glib.byte_array.ByteArray.freeToBytes]. In all other cases the
    * data is copied.
    * Returns: a pointer to the same byte data, which should be
-   *   freed with [GLib.Global.gfree]
+   *   freed with [glib.global.gfree]
    */
   ubyte[] unrefToData()
   {

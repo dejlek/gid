@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.month_day_nano;
 import arrow.scalar;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class MonthDayNanoIntervalScalar : Scalar

@@ -1,6 +1,6 @@
 module gio.subprocess_launcher;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.subprocess;
@@ -12,7 +12,7 @@ import gobject.object;
  * This class contains a set of options for launching child processes,
  * such as where its standard input and output will be directed, the
  * argument list, the environment, and more.
- * While the [Gio.Subprocess] class has high level functions covering
+ * While the [gio.subprocess.Subprocess] class has high level functions covering
  * popular cases, use of this class allows access to more advanced
  * options.  It can also be used to launch multiple subprocesses with
  * a similar configuration.
@@ -54,8 +54,8 @@ class SubprocessLauncher : ObjectG
 
   /**
    * Closes all the file descriptors previously passed to the object with
-   * [Gio.SubprocessLauncher.takeFd], [Gio.SubprocessLauncher.takeStderrFd], etc.
-   * After calling this method, any subsequent calls to [Gio.SubprocessLauncher.spawn] or [Gio.SubprocessLauncher.spawnv] will
+   * [gio.subprocess_launcher.SubprocessLauncher.takeFd], [gio.subprocess_launcher.SubprocessLauncher.takeStderrFd], etc.
+   * After calling this method, any subsequent calls to [gio.subprocess_launcher.SubprocessLauncher.spawn] or [gio.subprocess_launcher.SubprocessLauncher.spawnv] will
    * return %G_IO_ERROR_CLOSED. This method is idempotent if
    * called more than once.
    * This function is called automatically when the #GSubprocessLauncher
@@ -103,16 +103,16 @@ class SubprocessLauncher : ObjectG
   /**
    * Replace the entire environment of processes launched from this
    * launcher with the given 'environ' variable.
-   * Typically you will build this variable by using [GLib.Global.listenv] to copy
-   * the process 'environ' and using the functions [GLib.Global.environSetenv],
-   * [GLib.Global.environUnsetenv], etc.
-   * As an alternative, you can use [Gio.SubprocessLauncher.setenv],
-   * [Gio.SubprocessLauncher.unsetenv], etc.
+   * Typically you will build this variable by using [glib.global.listenv] to copy
+   * the process 'environ' and using the functions [glib.global.environSetenv],
+   * [glib.global.environUnsetenv], etc.
+   * As an alternative, you can use [gio.subprocess_launcher.SubprocessLauncher.setenv],
+   * [gio.subprocess_launcher.SubprocessLauncher.unsetenv], etc.
    * Pass an empty array to set an empty environment. Pass %NULL to inherit the
    * parent process’ environment. As of GLib 2.54, the parent process’ environment
-   * will be copied when [Gio.SubprocessLauncher.setEnviron] is called.
+   * will be copied when [gio.subprocess_launcher.SubprocessLauncher.setEnviron] is called.
    * Previously, it was copied when the subprocess was executed. This means the
-   * copied environment may now be modified $(LPAREN)using [Gio.SubprocessLauncher.setenv],
+   * copied environment may now be modified $(LPAREN)using [gio.subprocess_launcher.SubprocessLauncher.setenv],
    * etc.$(RPAREN) before launching the subprocess.
    * On UNIX, all strings in this array can be arbitrary byte strings.
    * On Windows, they should be in UTF-8.
@@ -137,8 +137,8 @@ class SubprocessLauncher : ObjectG
    * %G_SUBPROCESS_FLAGS_STDIN_PIPE and
    * %G_SUBPROCESS_FLAGS_STDIN_INHERIT$(RPAREN).
    * You may also not set a flag that conflicts with a previous call to a
-   * function like [Gio.SubprocessLauncher.setStdinFilePath] or
-   * [Gio.SubprocessLauncher.takeStdoutFd].
+   * function like [gio.subprocess_launcher.SubprocessLauncher.setStdinFilePath] or
+   * [gio.subprocess_launcher.SubprocessLauncher.takeStdoutFd].
    * Params:
    *   flags = #GSubprocessFlags
    */

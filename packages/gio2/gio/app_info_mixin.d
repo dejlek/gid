@@ -1,7 +1,7 @@
 module gio.app_info_mixin;
 
 public import gio.app_info_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.app_launch_context;
 public import gio.async_result;
 public import gio.async_result_mixin;
@@ -22,7 +22,7 @@ public import gobject.object;
  * `GAppInfo` and `GAppLaunchContext` are used for describing and launching
  * applications installed on the system.
  * As of GLib 2.20, URIs will always be converted to POSIX paths
- * $(LPAREN)using [Gio.File.getPath]$(RPAREN) when using [Gio.AppInfo.launch]
+ * $(LPAREN)using [gio.file.File.getPath]$(RPAREN) when using [gio.app_info.AppInfo.launch]
  * even if the application requested an URI and not a POSIX path. For example
  * for a desktop-file based application with Exec key `totem
  * %U` and a single URI, `sftp://foo/file.avi`, then
@@ -34,12 +34,12 @@ public import gobject.object;
  * path $(LPAREN)in GVfs there's no FUSE mount for it$(RPAREN); such URIs will be
  * passed unmodified to the application.
  * Specifically for GVfs 2.26 and later, the POSIX URI will be mapped
- * back to the GIO URI in the [Gio.File] constructors $(LPAREN)since GVfs
+ * back to the GIO URI in the [gio.file.File] constructors $(LPAREN)since GVfs
  * implements the GVfs extension point$(RPAREN). As such, if the application
- * needs to examine the URI, it needs to use [Gio.File.getUri]
- * or similar on [Gio.File]. In other words, an application cannot
- * assume that the URI passed to e.g. [Gio.File.newForCommandlineArg]
- * is equal to the result of [Gio.File.getUri]. The following snippet
+ * needs to examine the URI, it needs to use [gio.file.File.getUri]
+ * or similar on [gio.file.File]. In other words, an application cannot
+ * assume that the URI passed to e.g. [gio.file.File.newForCommandlineArg]
+ * is equal to the result of [gio.file.File.getUri]. The following snippet
  * illustrates this:
  * ```c
  * GFile *f;
@@ -99,7 +99,7 @@ template AppInfoT()
 
   /**
    * Obtains the information whether the #GAppInfo can be deleted.
-   * See [Gio.AppInfo.delete_].
+   * See [gio.app_info.AppInfo.delete_].
    * Returns: %TRUE if appinfo can be deleted
    */
   override bool canDelete()
@@ -125,7 +125,7 @@ template AppInfoT()
    * Tries to delete a #GAppInfo.
    * On some platforms, there may be a difference between user-defined
    * #GAppInfos which can be deleted, and system-wide ones which cannot.
-   * See [Gio.AppInfo.canDelete].
+   * See [gio.app_info.AppInfo.canDelete].
    * Returns: %TRUE if appinfo has been deleted
    */
   override bool delete_()
@@ -207,7 +207,7 @@ template AppInfoT()
   /**
    * Gets the executable's name for the installed application.
    * This is intended to be used for debugging or labelling what program is going
-   * to be run. To launch the executable, use [Gio.AppInfo.launch] and related
+   * to be run. To launch the executable, use [gio.app_info.AppInfo.launch] and related
    * functions, rather than spawning the return value from this function.
    * Returns: a string containing the appinfo's application
    *   binaries name
@@ -267,7 +267,7 @@ template AppInfoT()
    * If this information is not provided by the environment, this function
    * will return %NULL.
    * This function does not take in consideration associations added with
-   * [Gio.AppInfo.addSupportsType], but only those exported directly by
+   * [gio.app_info.AppInfo.addSupportsType], but only those exported directly by
    * the application.
    * Returns: a list of content types.
    */
@@ -301,10 +301,10 @@ template AppInfoT()
    * Some URIs can be changed when passed through a GFile $(LPAREN)for instance
    * unsupported URIs with strange formats like mailto:$(RPAREN), so if you have
    * a textual URI you want to pass in as argument, consider using
-   * [Gio.AppInfo.launchUris] instead.
+   * [gio.app_info.AppInfo.launchUris] instead.
    * The launched application inherits the environment of the launching
-   * process, but it can be modified with [Gio.AppLaunchContext.setenv]
-   * and [Gio.AppLaunchContext.unsetenv].
+   * process, but it can be modified with [gio.app_launch_context.AppLaunchContext.setenv]
+   * and [gio.app_launch_context.AppLaunchContext.unsetenv].
    * On UNIX, this function sets the `GIO_LAUNCHED_DESKTOP_FILE`
    * environment variable with the path of the launched desktop file and
    * `GIO_LAUNCHED_DESKTOP_FILE_PID` to the process id of the launched
@@ -358,11 +358,11 @@ template AppInfoT()
   }
 
   /**
-   * Async version of [Gio.AppInfo.launchUris].
+   * Async version of [gio.app_info.AppInfo.launchUris].
    * The callback is invoked immediately after the application launch, but it
    * waits for activation in case of D-Bus–activated applications and also provides
    * extended error information for sandboxed applications, see notes for
-   * [Gio.AppInfo.launchDefaultForUriAsync].
+   * [gio.app_info.AppInfo.launchDefaultForUriAsync].
    * Params:
    *   uris = a #GList containing URIs to launch.
    *   context = a #GAppLaunchContext or %NULL
@@ -387,7 +387,7 @@ template AppInfoT()
   }
 
   /**
-   * Finishes a [Gio.AppInfo.launchUrisAsync] operation.
+   * Finishes a [gio.app_info.AppInfo.launchUrisAsync] operation.
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE on successful launch, %FALSE otherwise.
@@ -457,7 +457,7 @@ template AppInfoT()
   /**
    * Sets the application as the last used application for a given type.
    * This will make the application appear as first in the list returned
-   * by [Gio.AppInfo.getRecommendedForType], regardless of the default
+   * by [gio.app_info.AppInfo.getRecommendedForType], regardless of the default
    * application for that content type.
    * Params:
    *   contentType = the content type.

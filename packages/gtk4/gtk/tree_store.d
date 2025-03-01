@@ -1,6 +1,6 @@
 module gtk.tree_store;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -20,15 +20,15 @@ import gtk.tree_sortable_mixin;
 import gtk.types;
 
 /**
- * A tree-like data structure that can be used with the [Gtk.TreeView].
+ * A tree-like data structure that can be used with the [gtk.tree_view.TreeView].
  * The `GtkTreeStore` object is a list model for use with a `GtkTreeView`
- * widget. It implements the [Gtk.TreeModel] interface, and consequently,
+ * widget. It implements the [gtk.tree_model.TreeModel] interface, and consequently,
  * can use all of the methods available there. It also implements the
- * [Gtk.TreeSortable] interface so it can be sorted by the view.
- * Finally, it also implements the tree [drag][Gtk.TreeDragSource]
- * and [drop][Gtk.TreeDragDest] interfaces.
+ * [gtk.tree_sortable.TreeSortable] interface so it can be sorted by the view.
+ * Finally, it also implements the tree [drag][gtk.tree_drag_source.TreeDragSource]
+ * and [drop][gtk.tree_drag_dest.TreeDragDest] interfaces.
  * `GtkTreeStore` is deprecated since GTK 4.10, and should not be used in newly
- * written code. You should use [Gtk.TreeListModel] for a tree-like model
+ * written code. You should use [gtk.tree_list_model.TreeListModel] for a tree-like model
  * object.
  * ## GtkTreeStore as GtkBuildable
  * The GtkTreeStore implementation of the `GtkBuildable` interface allows
@@ -46,7 +46,7 @@ import gtk.types;
  * </object>
  * ```
 
- * Deprecated: Use [Gtk.TreeListModel] instead
+ * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
  */
 class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, TreeSortable
 {
@@ -80,7 +80,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   types = an array of `GType` types for the columns, from first to last
    * Returns: a new `GtkTreeStore`
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   static TreeStore new_(GType[] types)
   {
@@ -101,12 +101,12 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    * child of parent, otherwise it will append a row to the top level.
    * The iter parameter will be changed to point to this new row. The row will
    * be empty after this function is called. To fill in values, you need to call
-   * [Gtk.TreeStore.set] or [Gtk.TreeStore.setValue].
+   * [gtk.tree_store.TreeStore.set] or [gtk.tree_store.TreeStore.setValue].
    * Params:
    *   iter = An unset `GtkTreeIter` to set to the appended row
    *   parent = A valid `GtkTreeIter`
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void append(out TreeIter iter, TreeIter parent)
   {
@@ -118,7 +118,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
   /**
    * Removes all rows from tree_store
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void clear()
   {
@@ -133,13 +133,13 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    * then the new row will be inserted to the end of the list.
    * The iter parameter will be changed to point to this new row. The row
    * will be empty after this function is called. To fill in values, you
-   * need to call [Gtk.TreeStore.set] or [Gtk.TreeStore.setValue].
+   * need to call [gtk.tree_store.TreeStore.set] or [gtk.tree_store.TreeStore.setValue].
    * Params:
    *   iter = An unset `GtkTreeIter` to set to the new row
    *   parent = A valid `GtkTreeIter`
    *   position = position to insert the new row, or -1 for last
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void insert(out TreeIter iter, TreeIter parent, int position)
   {
@@ -157,13 +157,13 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    * of sibling. When sibling is set, parent is optional.
    * The iter parameter will be changed to point to this new row. The row will
    * be empty after this function is called. To fill in values, you need to call
-   * [Gtk.TreeStore.set] or [Gtk.TreeStore.setValue].
+   * [gtk.tree_store.TreeStore.set] or [gtk.tree_store.TreeStore.setValue].
    * Params:
    *   iter = An unset `GtkTreeIter` to set to the new row
    *   parent = A valid `GtkTreeIter`
    *   sibling = A valid `GtkTreeIter`
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void insertAfter(out TreeIter iter, TreeIter parent, TreeIter sibling)
   {
@@ -181,13 +181,13 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    * of sibling. When sibling is set, parent is optional.
    * The iter parameter will be changed to point to this new row. The row will
    * be empty after this function is called. To fill in values, you need to call
-   * [Gtk.TreeStore.set] or [Gtk.TreeStore.setValue].
+   * [gtk.tree_store.TreeStore.set] or [gtk.tree_store.TreeStore.setValue].
    * Params:
    *   iter = An unset `GtkTreeIter` to set to the new row
    *   parent = A valid `GtkTreeIter`
    *   sibling = A valid `GtkTreeIter`
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void insertBefore(out TreeIter iter, TreeIter parent, TreeIter sibling)
   {
@@ -197,7 +197,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
   }
 
   /**
-   * A variant of [Gtk.TreeStore.insertWithValues] which takes
+   * A variant of [gtk.tree_store.TreeStore.insertWithValues] which takes
    * the columns and values as two arrays, instead of varargs.
    * This function is mainly intended for language bindings.
    * Params:
@@ -207,7 +207,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   columns = an array of column numbers
    *   values = an array of GValues
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void insertWithValues(out TreeIter iter, TreeIter parent, int position, int[] columns, Value[] values)
   {
@@ -235,7 +235,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   descendant = A valid `GtkTreeIter`
    * Returns: true if iter is an ancestor of descendant, and false otherwise
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   bool isAncestor(TreeIter iter, TreeIter descendant)
   {
@@ -252,7 +252,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   iter = A valid `GtkTreeIter`
    * Returns: The depth of the position pointed by the iterator
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   int iterDepth(TreeIter iter)
   {
@@ -269,7 +269,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   iter = the iterator to check
    * Returns: true if the iter is valid, and false otherwise
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   bool iterIsValid(TreeIter iter)
   {
@@ -287,7 +287,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   iter = A `GtkTreeIter`.
    *   position = A `GtkTreeIter`.
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void moveAfter(TreeIter iter, TreeIter position)
   {
@@ -303,7 +303,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   iter = A `GtkTreeIter`
    *   position = A `GtkTreeIter`
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void moveBefore(TreeIter iter, TreeIter position)
   {
@@ -316,12 +316,12 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    * child of parent, otherwise it will prepend a row to the top level. The
    * `iter` parameter will be changed to point to this new row.  The row will
    * be empty after this function is called. To fill in values, you need to
-   * call [Gtk.TreeStore.set] or [Gtk.TreeStore.setValue].
+   * call [gtk.tree_store.TreeStore.set] or [gtk.tree_store.TreeStore.setValue].
    * Params:
    *   iter = An unset `GtkTreeIter` to set to the prepended row
    *   parent = A valid `GtkTreeIter`
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void prepend(out TreeIter iter, TreeIter parent)
   {
@@ -338,7 +338,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   iter = A valid `GtkTreeIter`
    * Returns: true if iter is still valid, and false otherwise
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   bool remove(TreeIter iter)
   {
@@ -358,7 +358,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    * Params:
    *   types = An array of `GType` types, one for each column
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void setColumnTypes(GType[] types)
   {
@@ -379,7 +379,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   column = column number to modify
    *   value = new value for the cell
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void setValue(TreeIter iter, int column, Value value)
   {
@@ -387,7 +387,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
   }
 
   /**
-   * A variant of [Gtk.TreeStore.setValist] which takes
+   * A variant of [gtk.tree_store.TreeStore.setValist] which takes
    * the columns and values as two arrays, instead of using variadic
    * arguments.
    * This function is mainly intended for language bindings or in case
@@ -397,7 +397,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   columns = an array of column numbers
    *   values = an array of GValues
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void set(TreeIter iter, int[] columns, Value[] values)
   {
@@ -423,7 +423,7 @@ class TreeStore : ObjectG, Buildable, TreeDragDest, TreeDragSource, TreeModel, T
    *   a = A `GtkTreeIter`.
    *   b = Another `GtkTreeIter`.
 
-   * Deprecated: Use [Gtk.TreeListModel] instead
+   * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
   void swap(TreeIter a, TreeIter b)
   {

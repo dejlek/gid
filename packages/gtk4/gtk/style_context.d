@@ -2,7 +2,7 @@ module gtk.style_context;
 
 import gdk.display;
 import gdk.rgba;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.border;
 import gtk.c.functions;
@@ -16,11 +16,11 @@ import gtk.types;
  * In order to construct the final style information, `GtkStyleContext`
  * queries information from all attached `GtkStyleProviders`. Style
  * providers can be either attached explicitly to the context through
- * [Gtk.StyleContext.addProvider], or to the display through
- * [Gtk.StyleContext.addProviderForDisplay]. The resulting
+ * [gtk.style_context.StyleContext.addProvider], or to the display through
+ * [gtk.style_context.StyleContext.addProviderForDisplay]. The resulting
  * style is a combination of all providers’ information in priority order.
  * For GTK widgets, any `GtkStyleContext` returned by
- * [Gtk.Widget.getStyleContext] will already have a `GdkDisplay`
+ * [gtk.widget.Widget.getStyleContext] will already have a `GdkDisplay`
  * and RTL/LTR information set. The style context will also be updated
  * automatically if any of these settings change on the widget.
  * ## Style Classes
@@ -43,7 +43,7 @@ import gtk.types;
  * still take precedence over your changes, as it uses the
  * %GTK_STYLE_PROVIDER_PRIORITY_USER priority.
 
- * Deprecated: The relevant API has been moved to [Gtk.Widget]
+ * Deprecated: The relevant API has been moved to [gtk.widget.Widget]
  *   where applicable; otherwise, there is no replacement for querying the
  *   style machinery. Stylable UI elements should use widgets.
  */
@@ -72,7 +72,7 @@ class StyleContext : ObjectG
    * GTK uses this to make styling information from `GtkSettings`
    * available.
    * Note: If both priorities are the same, A `GtkStyleProvider`
-   * added through [Gtk.StyleContext.addProvider] takes
+   * added through [gtk.style_context.StyleContext.addProvider] takes
    * precedence over another added through this function.
    * Params:
    *   display = a `GdkDisplay`
@@ -115,7 +115,7 @@ class StyleContext : ObjectG
    * Params:
    *   className = class name to use in styling
 
-   * Deprecated: Use [Gtk.Widget.addCssClass] instead
+   * Deprecated: Use [gtk.widget.Widget.addCssClass] instead
    */
   void addClass(string className)
   {
@@ -128,10 +128,10 @@ class StyleContext : ObjectG
    * Note that a style provider added by this function only affects
    * the style of the widget to which context belongs. If you want
    * to affect the style of all widgets, use
-   * [Gtk.StyleContext.addProviderForDisplay].
+   * [gtk.style_context.StyleContext.addProviderForDisplay].
    * Note: If both priorities are the same, a `GtkStyleProvider`
    * added through this function takes precedence over another added
-   * through [Gtk.StyleContext.addProviderForDisplay].
+   * through [gtk.style_context.StyleContext.addProviderForDisplay].
    * Params:
    *   provider = a `GtkStyleProvider`
    *   priority = the priority of the style provider. The lower
@@ -166,7 +166,7 @@ class StyleContext : ObjectG
    * Params:
    *   color = return value for the foreground color
 
-   * Deprecated: Use [Gtk.Widget.getColor] instead
+   * Deprecated: Use [gtk.widget.Widget.getColor] instead
    */
   void getColor(out RGBA color)
   {
@@ -179,7 +179,7 @@ class StyleContext : ObjectG
    * Returns the `GdkDisplay` to which context is attached.
    * Returns: a `GdkDisplay`.
 
-   * Deprecated: Use [Gtk.Widget.getDisplay] instead
+   * Deprecated: Use [gtk.widget.Widget.getDisplay] instead
    */
   Display getDisplay()
   {
@@ -221,7 +221,7 @@ class StyleContext : ObjectG
    * Returns the scale used for assets.
    * Returns: the scale
 
-   * Deprecated: Use [Gtk.Widget.getScaleFactor] instead
+   * Deprecated: Use [gtk.widget.Widget.getScaleFactor] instead
    */
   int getScale()
   {
@@ -234,12 +234,12 @@ class StyleContext : ObjectG
    * Returns the state used for style matching.
    * This method should only be used to retrieve the `GtkStateFlags`
    * to pass to `GtkStyleContext` methods, like
-   * [Gtk.StyleContext.getPadding].
+   * [gtk.style_context.StyleContext.getPadding].
    * If you need to retrieve the current state of a `GtkWidget`, use
-   * [Gtk.Widget.getStateFlags].
+   * [gtk.widget.Widget.getStateFlags].
    * Returns: the state flags
 
-   * Deprecated: Use [Gtk.Widget.getStateFlags] instead
+   * Deprecated: Use [gtk.widget.Widget.getStateFlags] instead
    */
   StateFlags getState()
   {
@@ -256,7 +256,7 @@ class StyleContext : ObjectG
    *   className = a class name
    * Returns: %TRUE if context has class_name defined
 
-   * Deprecated: Use [Gtk.Widget.hasCssClass] instead
+   * Deprecated: Use [gtk.widget.Widget.hasCssClass] instead
    */
   bool hasClass(string className)
   {
@@ -290,7 +290,7 @@ class StyleContext : ObjectG
    * Params:
    *   className = class name to remove
 
-   * Deprecated: Use [Gtk.Widget.removeCssClass] instead
+   * Deprecated: Use [gtk.widget.Widget.removeCssClass] instead
    */
   void removeClass(string className)
   {
@@ -310,7 +310,7 @@ class StyleContext : ObjectG
 
   /**
    * Restores context state to a previous stage.
-   * See [Gtk.StyleContext.save].
+   * See [gtk.style_context.StyleContext.save].
 
    * Deprecated: This API will be removed in GTK 5
    */
@@ -322,11 +322,11 @@ class StyleContext : ObjectG
   /**
    * Saves the context state.
    * This allows temporary modifications done through
-   * [Gtk.StyleContext.addClass],
-   * [Gtk.StyleContext.removeClass],
-   * [Gtk.StyleContext.setState] to be quickly
-   * reverted in one go through [Gtk.StyleContext.restore].
-   * The matching call to [Gtk.StyleContext.restore]
+   * [gtk.style_context.StyleContext.addClass],
+   * [gtk.style_context.StyleContext.removeClass],
+   * [gtk.style_context.StyleContext.setState] to be quickly
+   * reverted in one go through [gtk.style_context.StyleContext.restore].
+   * The matching call to [gtk.style_context.StyleContext.restore]
    * must be done before GTK returns to the main loop.
 
    * Deprecated: This API will be removed in GTK 5
@@ -341,7 +341,7 @@ class StyleContext : ObjectG
    * The display is used to add style information from “global”
    * style providers, such as the display's `GtkSettings` instance.
    * If you are using a `GtkStyleContext` returned from
-   * [Gtk.Widget.getStyleContext], you do not need to
+   * [gtk.widget.Widget.getStyleContext], you do not need to
    * call this yourself.
    * Params:
    *   display = a `GdkDisplay`

@@ -7,7 +7,7 @@ import arrow.chunked_array;
 import arrow.data_type;
 import arrow.extension_array;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class ExtensionDataType : DataType

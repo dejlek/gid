@@ -1,6 +1,6 @@
 module gtk.event_controller_motion;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,8 +10,8 @@ import gtk.types;
 /**
  * `GtkEventControllerMotion` is an event controller tracking the pointer
  * position.
- * The event controller offers [Gtk.EventControllerMotion.enter]
- * and [Gtk.EventControllerMotion.leave] signals, as well as
+ * The event controller offers [gtk.event_controller_motion.EventControllerMotion.enter]
+ * and [gtk.event_controller_motion.EventControllerMotion.leave] signals, as well as
  * property@Gtk.EventControllerMotion:is-pointer and
  * property@Gtk.EventControllerMotion:contains-pointer properties
  * which are updated to reflect changes in the pointer position as it

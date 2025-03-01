@@ -1,6 +1,6 @@
 module gtk.recent_info;
 
-import gid.gid;
+import gid.global;
 import gio.app_info;
 import gio.app_info_mixin;
 import gio.icon;
@@ -135,7 +135,7 @@ class RecentInfo : Boxed
   /**
    * Retrieves the list of applications that have registered this resource.
    * Returns: a newly
-   *   allocated %NULL-terminated array of strings. Use [GLib.Global.strfreev] to free it.
+   *   allocated %NULL-terminated array of strings. Use [glib.global.strfreev] to free it.
    */
   string[] getApplications()
   {
@@ -198,7 +198,7 @@ class RecentInfo : Boxed
    * The array of returned group names will be %NULL terminated, so
    * length might optionally be %NULL.
    * Returns: a newly allocated %NULL terminated array of strings.
-   *   Use [GLib.Global.strfreev] to free it.
+   *   Use [glib.global.strfreev] to free it.
    */
   string[] getGroups()
   {
@@ -263,7 +263,7 @@ class RecentInfo : Boxed
    * For example, calling this function on an item that refers
    * to “file:///foo/bar.txt” will yield “bar.txt”.
    * Returns: A newly-allocated string in UTF-8 encoding
-   *   free it with [GLib.Global.gfree]
+   *   free it with [glib.global.gfree]
    */
   string getShortName()
   {
@@ -290,9 +290,9 @@ class RecentInfo : Boxed
    * Gets a displayable version of the resource’s URI.
    * If the resource is local, it returns a local path; if the
    * resource is not local, it returns the UTF-8 encoded content
-   * of [Gtk.RecentInfo.getUri].
+   * of [gtk.recent_info.RecentInfo.getUri].
    * Returns: a newly allocated UTF-8 string containing the
-   *   resource’s URI or %NULL. Use [GLib.Global.gfree] when done using it.
+   *   resource’s URI or %NULL. Use [glib.global.gfree] when done using it.
    */
   string getUriDisplay()
   {
@@ -361,7 +361,7 @@ class RecentInfo : Boxed
   /**
    * Gets the name of the last application that have registered the
    * recently used resource represented by info.
-   * Returns: an application name. Use [GLib.Global.gfree] to free it.
+   * Returns: an application name. Use [glib.global.gfree] to free it.
    */
   string lastApplication()
   {

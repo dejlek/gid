@@ -6,18 +6,18 @@ import gdk.c.types;
 import gdk.glcontext;
 import gdk.texture;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import glib.types;
 import gobject.object;
 
 /**
- * `GdkGLTextureBuilder` is a builder used to construct [Gdk.Texture] objects from
+ * `GdkGLTextureBuilder` is a builder used to construct [gdk.texture.Texture] objects from
  * GL textures.
  * The operation is quite simple: Create a texture builder, set all the necessary
- * properties - keep in mind that the properties [Gdk.GLTextureBuilder.context],
- * [Gdk.GLTextureBuilder.id], [Gdk.GLTextureBuilder.width], and
- * [Gdk.GLTextureBuilder.height] are mandatory - and then call
- * [Gdk.GLTextureBuilder.build] to create the new texture.
+ * properties - keep in mind that the properties [gdk.gltexture_builder.GLTextureBuilder.GLContext],
+ * [gdk.gltexture_builder.GLTextureBuilder.guint], [gdk.gltexture_builder.GLTextureBuilder.gint], and
+ * [gdk.gltexture_builder.GLTextureBuilder.gint] are mandatory - and then call
+ * [gdk.gltexture_builder.GLTextureBuilder.build] to create the new texture.
  * `GdkGLTextureBuilder` can be used for quick one-shot construction of
  * textures as well as kept around and reused to construct multiple textures.
  */
@@ -55,9 +55,9 @@ class GLTextureBuilder : ObjectG
    * Builds a new `GdkTexture` with the values set up in the builder.
    * The `destroy` function gets called when the returned texture gets released;
    * either when the texture is finalized or by an explicit call to
-   * [Gdk.GLTexture.release]. It should release all GL resources associated
-   * with the texture, such as the [Gdk.GLTextureBuilder.id] and the
-   * [Gdk.GLTextureBuilder.sync].
+   * [gdk.gltexture.GLTexture.release]. It should release all GL resources associated
+   * with the texture, such as the [gdk.gltexture_builder.GLTextureBuilder.guint] and the
+   * [gdk.gltexture_builder.GLTextureBuilder.gpointer].
    * Note that it is a programming error to call this function if any mandatory
    * property has not been set.
    * It is possible to call this function multiple times to create multiple textures,
@@ -86,7 +86,7 @@ class GLTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the context previously set via [Gdk.GLTextureBuilder.setContext] or
+   * Gets the context previously set via [gdk.gltexture_builder.GLTextureBuilder.setContext] or
    * %NULL if none was set.
    * Returns: The context
    */
@@ -99,7 +99,7 @@ class GLTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the format previously set via [Gdk.GLTextureBuilder.setFormat].
+   * Gets the format previously set via [gdk.gltexture_builder.GLTextureBuilder.setFormat].
    * Returns: The format
    */
   MemoryFormat getFormat()
@@ -122,7 +122,7 @@ class GLTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the height previously set via [Gdk.GLTextureBuilder.setHeight] or
+   * Gets the height previously set via [gdk.gltexture_builder.GLTextureBuilder.setHeight] or
    * 0 if the height wasn't set.
    * Returns: The height
    */
@@ -134,7 +134,7 @@ class GLTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the texture id previously set via [Gdk.GLTextureBuilder.setId] or
+   * Gets the texture id previously set via [gdk.gltexture_builder.GLTextureBuilder.setId] or
    * 0 if the id wasn't set.
    * Returns: The id
    */
@@ -146,7 +146,7 @@ class GLTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the `GLsync` previously set via [Gdk.GLTextureBuilder.setSync].
+   * Gets the `GLsync` previously set via [gdk.gltexture_builder.GLTextureBuilder.setSync].
    * Returns: the `GLSync`
    */
   void* getSync()
@@ -156,7 +156,7 @@ class GLTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the region previously set via [Gdk.GLTextureBuilder.setUpdateRegion] or
+   * Gets the region previously set via [gdk.gltexture_builder.GLTextureBuilder.setUpdateRegion] or
    * %NULL if none was set.
    * Returns: The region
    */
@@ -169,7 +169,7 @@ class GLTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the texture previously set via [Gdk.GLTextureBuilder.setUpdateTexture] or
+   * Gets the texture previously set via [gdk.gltexture_builder.GLTextureBuilder.setUpdateTexture] or
    * %NULL if none was set.
    * Returns: The texture
    */
@@ -182,7 +182,7 @@ class GLTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the width previously set via [Gdk.GLTextureBuilder.setWidth] or
+   * Gets the width previously set via [gdk.gltexture_builder.GLTextureBuilder.setWidth] or
    * 0 if the width wasn't set.
    * Returns: The width
    */
@@ -196,7 +196,7 @@ class GLTextureBuilder : ObjectG
   /**
    * Sets the context to be used for the texture. This is the context that owns
    * the texture.
-   * The context must be set before calling [Gdk.GLTextureBuilder.build].
+   * The context must be set before calling [gdk.gltexture_builder.GLTextureBuilder.build].
    * Params:
    *   context = The context the texture beongs to or %NULL to unset
    */
@@ -208,7 +208,7 @@ class GLTextureBuilder : ObjectG
   /**
    * Sets the format of the texture. The default is `GDK_MEMORY_R8G8B8A8_PREMULTIPLIED`.
    * The format is the preferred format the texture data should be downloaded to. The
-   * format must be supported by the GL version of [Gdk.GLTextureBuilder.context].
+   * format must be supported by the GL version of [gdk.gltexture_builder.GLTextureBuilder.GLContext].
    * GDK's texture download code assumes that the format corresponds to the storage
    * parameters of the GL texture in an obvious way. For example, a format of
    * `GDK_MEMORY_R16G16B16A16_PREMULTIPLIED` is expected to be stored as `GL_RGBA16`
@@ -240,7 +240,7 @@ class GLTextureBuilder : ObjectG
 
   /**
    * Sets the height of the texture.
-   * The height must be set before calling [Gdk.GLTextureBuilder.build].
+   * The height must be set before calling [gdk.gltexture_builder.GLTextureBuilder.build].
    * Params:
    *   height = The texture's height or 0 to unset
    */
@@ -251,9 +251,9 @@ class GLTextureBuilder : ObjectG
 
   /**
    * Sets the texture id of the texture. The texture id must remain unmodified
-   * until the texture was finalized. See [Gdk.GLTextureBuilder.build]
+   * until the texture was finalized. See [gdk.gltexture_builder.GLTextureBuilder.build]
    * for a longer discussion.
-   * The id must be set before calling [Gdk.GLTextureBuilder.build].
+   * The id must be set before calling [gdk.gltexture_builder.GLTextureBuilder.build].
    * Params:
    *   id = The texture id to be used for creating the texture
    */
@@ -265,7 +265,7 @@ class GLTextureBuilder : ObjectG
   /**
    * Sets the GLSync object to use for the texture.
    * GTK will wait on this object before using the created `GdkTexture`.
-   * The `destroy` function that is passed to [Gdk.GLTextureBuilder.build]
+   * The `destroy` function that is passed to [gdk.gltexture_builder.GLTextureBuilder.build]
    * is responsible for freeing the sync object when it is no longer needed.
    * The texture builder does not destroy it and it is the callers
    * responsibility to make sure it doesn't leak.
@@ -296,7 +296,7 @@ class GLTextureBuilder : ObjectG
 
   /**
    * Sets the texture to be updated by this texture. See
-   * [Gdk.GLTextureBuilder.setUpdateRegion] for an explanation.
+   * [gdk.gltexture_builder.GLTextureBuilder.setUpdateRegion] for an explanation.
    * Params:
    *   texture = the texture to update
    */
@@ -307,7 +307,7 @@ class GLTextureBuilder : ObjectG
 
   /**
    * Sets the width of the texture.
-   * The width must be set before calling [Gdk.GLTextureBuilder.build].
+   * The width must be set before calling [gdk.gltexture_builder.GLTextureBuilder.build].
    * Params:
    *   width = The texture's width or 0 to unset
    */

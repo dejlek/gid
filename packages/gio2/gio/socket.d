@@ -1,6 +1,6 @@
 module gio.socket;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -25,23 +25,23 @@ import gobject.object;
  * It supports both the UNIX socket implementations and winsock2 on Windows.
  * `GSocket` is the platform independent base upon which the higher level
  * network primitives are based. Applications are not typically meant to
- * use it directly, but rather through classes like [Gio.SocketClient],
- * [Gio.SocketService] and [Gio.SocketConnection]. However there may
+ * use it directly, but rather through classes like [gio.socket_client.SocketClient],
+ * [gio.socket_service.SocketService] and [gio.socket_connection.SocketConnection]. However there may
  * be cases where direct use of `GSocket` is useful.
- * `GSocket` implements the [Gio.Initable] interface, so if it is manually
- * constructed by e.g. [GObject.ObjectG.new_] you must call
- * [Gio.Initable.init_] and check the results before using the object.
- * This is done automatically in [Gio.Socket.new_] and
- * [Gio.Socket.newFromFd], so these functions can return `NULL`.
+ * `GSocket` implements the [gio.initable.Initable] interface, so if it is manually
+ * constructed by e.g. [gobject.object.ObjectG.new_] you must call
+ * [gio.initable.Initable.init_] and check the results before using the object.
+ * This is done automatically in [gio.socket.Socket.new_] and
+ * [gio.socket.Socket.newFromFd], so these functions can return `NULL`.
  * Sockets operate in two general modes, blocking or non-blocking. When
  * in blocking mode all operations $(LPAREN)which don’t take an explicit blocking
  * parameter$(RPAREN) block until the requested operation
  * is finished or there is an error. In non-blocking mode all calls that
  * would block return immediately with a `G_IO_ERROR_WOULD_BLOCK` error.
  * To know when a call would successfully run you can call
- * [Gio.Socket.conditionCheck], or [Gio.Socket.conditionWait].
- * You can also use [Gio.Socket.createSource] and attach it to a
- * [GLib.MainContext] to get callbacks when I/O is possible.
+ * [gio.socket.Socket.conditionCheck], or [gio.socket.Socket.conditionWait].
+ * You can also use [gio.socket.Socket.createSource] and attach it to a
+ * [glib.main_context.MainContext] to get callbacks when I/O is possible.
  * Note that all sockets are always set to non blocking mode in the system, and
  * blocking mode is emulated in `GSocket`.
  * When working in non-blocking mode applications should always be able to
@@ -70,7 +70,7 @@ import gobject.object;
  * [Nagle’s algorithm](https://en.wikipedia.org/wiki/Nagle%27s_algorithm) as it
  * typically does more harm than good on modern networks.
  * If your application needs Nagle’s algorithm enabled, call
- * [Gio.Socket.setOption] after constructing a `GSocket` to enable it:
+ * [gio.socket.Socket.setOption] after constructing a `GSocket` to enable it:
  * ```c
  * socket \= g_socket_new $(LPAREN)…, G_SOCKET_TYPE_STREAM, …$(RPAREN);
  * if $(LPAREN)socket !\= NULL$(RPAREN)
@@ -119,7 +119,7 @@ class Socket : ObjectG, DatagramBased, Initable
    *   type = the socket type to use.
    *   protocol = the id of the protocol to use, or 0 for default.
    * Returns: a #GSocket or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   this(SocketFamily family, SocketType type, SocketProtocol protocol)
   {
@@ -145,7 +145,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * Params:
    *   fd = a native socket file descriptor.
    * Returns: a #GSocket or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   static Socket newFromFd(int fd)
   {
@@ -162,15 +162,15 @@ class Socket : ObjectG, DatagramBased, Initable
    * Accept incoming connections on a connection-based socket. This removes
    * the first outstanding connection request from the listening socket and
    * creates a #GSocket object for it.
-   * The socket must be bound to a local address with [Gio.Socket.bind] and
-   * must be listening for incoming connections $(LPAREN)[Gio.Socket.listen]$(RPAREN).
+   * The socket must be bound to a local address with [gio.socket.Socket.bind] and
+   * must be listening for incoming connections $(LPAREN)[gio.socket.Socket.listen]$(RPAREN).
    * If there are no outstanding connections then the operation will block
    * or return %G_IO_ERROR_WOULD_BLOCK if non-blocking I/O is enabled.
    * To be notified of an incoming connection, wait for the %G_IO_IN condition.
    * Params:
    *   cancellable = a %GCancellable or %NULL
    * Returns: a new #GSocket, or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   Socket accept(Cancellable cancellable)
   {
@@ -185,17 +185,17 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * When a socket is created it is attached to an address family, but it
-   * doesn't have an address in this family. [Gio.Socket.bind] assigns the
+   * doesn't have an address in this family. [gio.socket.Socket.bind] assigns the
    * address $(LPAREN)sometimes called name$(RPAREN) of the socket.
    * It is generally required to bind to a local address before you can
-   * receive connections. $(LPAREN)See [Gio.Socket.listen] and [Gio.Socket.accept] $(RPAREN).
+   * receive connections. $(LPAREN)See [gio.socket.Socket.listen] and [gio.socket.Socket.accept] $(RPAREN).
    * In certain situations, you may also want to bind a socket that will be
    * used to initiate connections, though this is not normally required.
    * If socket is a TCP socket, then allow_reuse controls the setting
    * of the `SO_REUSEADDR` socket option; normally it should be %TRUE for
    * server sockets $(LPAREN)sockets that you will eventually call
-   * [Gio.Socket.accept] on$(RPAREN), and %FALSE for client sockets. $(LPAREN)Failing to
-   * set this flag on a server socket may cause [Gio.Socket.bind] to return
+   * [gio.socket.Socket.accept] on$(RPAREN), and %FALSE for client sockets. $(LPAREN)Failing to
+   * set this flag on a server socket may cause [gio.socket.Socket.bind] to return
    * %G_IO_ERROR_ADDRESS_IN_USE if the server program is stopped and then
    * immediately restarted.$(RPAREN)
    * If socket is a UDP socket, then allow_reuse determines whether or
@@ -221,7 +221,7 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Checks and resets the pending connect error for the socket.
-   * This is used to check for errors when [Gio.Socket.connect] is
+   * This is used to check for errors when [gio.socket.Socket.connect] is
    * used in non-blocking mode.
    * Returns: %TRUE if no error, %FALSE otherwise, setting error to the error
    */
@@ -254,11 +254,11 @@ class Socket : ObjectG, DatagramBased, Initable
    * way to avoid this problem; the easiest fix is to design the network
    * protocol such that the client will never send data "out of turn".
    * Another solution is for the server to half-close the connection by
-   * calling [Gio.Socket.shutdown] with only the shutdown_write flag set,
+   * calling [gio.socket.Socket.shutdown] with only the shutdown_write flag set,
    * and then wait for the client to notice this and close its side of the
-   * connection, after which the server can safely call [Gio.Socket.close].
+   * connection, after which the server can safely call [gio.socket.Socket.close].
    * $(LPAREN)This is what #GTcpConnection does if you call
-   * [Gio.TcpConnection.setGracefulDisconnect]. But of course, this
+   * [gio.tcp_connection.TcpConnection.setGracefulDisconnect]. But of course, this
    * only works if the client will close its connection after the server
    * does.$(RPAREN)
    * Returns: %TRUE on success, %FALSE on error
@@ -280,8 +280,8 @@ class Socket : ObjectG, DatagramBased, Initable
    * is returned.
    * Note that on Windows, it is possible for an operation to return
    * %G_IO_ERROR_WOULD_BLOCK even immediately after
-   * [Gio.Socket.conditionCheck] has claimed that the socket is ready for
-   * writing. Rather than calling [Gio.Socket.conditionCheck] and then
+   * [gio.socket.Socket.conditionCheck] has claimed that the socket is ready for
+   * writing. Rather than calling [gio.socket.Socket.conditionCheck] and then
    * writing to the socket if it succeeds, it is generally better to
    * simply try writing to the socket right away, and try again later if
    * the initial attempt returns %G_IO_ERROR_WOULD_BLOCK.
@@ -308,7 +308,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * condition is met, then %FALSE is returned and error, if non-%NULL,
    * is set to the appropriate value $(LPAREN)%G_IO_ERROR_CANCELLED or
    * %G_IO_ERROR_TIMED_OUT$(RPAREN).
-   * If you don't want a timeout, use [Gio.Socket.conditionWait].
+   * If you don't want a timeout, use [gio.socket.Socket.conditionWait].
    * $(LPAREN)Alternatively, you can pass -1 for timeout_us.$(RPAREN)
    * Note that although timeout_us is in microseconds for consistency with
    * other GLib APIs, this function actually only has millisecond
@@ -338,7 +338,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * met, then %FALSE is returned and error, if non-%NULL, is set to
    * the appropriate value $(LPAREN)%G_IO_ERROR_CANCELLED or
    * %G_IO_ERROR_TIMED_OUT$(RPAREN).
-   * See also [Gio.Socket.conditionTimedWait].
+   * See also [gio.socket.Socket.conditionTimedWait].
    * Params:
    *   condition = a #GIOCondition mask to wait for
    *   cancellable = a #GCancellable, or %NULL
@@ -358,7 +358,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * Connect the socket to the specified remote address.
    * For connection oriented socket this generally means we attempt to make
    * a connection to the address. For a connection-less socket it sets
-   * the default address for [Gio.Socket.send] and discards all incoming datagrams
+   * the default address for [gio.socket.Socket.send] and discards all incoming datagrams
    * from other sources.
    * Generally connection oriented sockets can only connect once, but
    * connection-less sockets can connect multiple times to change the
@@ -367,7 +367,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * non-blocking I/O is enabled. Then %G_IO_ERROR_PENDING is returned
    * and the user can be notified of the connection finishing by waiting
    * for the G_IO_OUT condition. The result of the connection must then be
-   * checked with [Gio.Socket.checkConnectResult].
+   * checked with [gio.socket.Socket.checkConnectResult].
    * Params:
    *   address = a #GSocketAddress specifying the remote address.
    *   cancellable = a %GCancellable or %NULL
@@ -404,8 +404,8 @@ class Socket : ObjectG, DatagramBased, Initable
    * Note that on Windows, this function is rather inefficient in the
    * UDP case, and so if you know any plausible upper bound on the size
    * of the incoming packet, it is better to just do a
-   * [Gio.Socket.receive] with a buffer of that size, rather than calling
-   * [Gio.Socket.getAvailableBytes] first and then doing a receive of
+   * [gio.socket.Socket.receive] with a buffer of that size, rather than calling
+   * [gio.socket.Socket.getAvailableBytes] first and then doing a receive of
    * exactly the right size.
    * Returns: the number of bytes that can be read from the socket
    *   without blocking or truncating, or -1 on error.
@@ -419,7 +419,7 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Gets the blocking mode of the socket. For details on blocking I/O,
-   * see [Gio.Socket.setBlocking].
+   * see [gio.socket.Socket.setBlocking].
    * Returns: %TRUE if blocking I/O is used, %FALSE otherwise.
    */
   bool getBlocking()
@@ -457,10 +457,10 @@ class Socket : ObjectG, DatagramBased, Initable
    * - macOS, tvOS, iOS since GLib 2.66
    * Other ways to obtain credentials from a foreign peer includes the
    * #GUnixCredentialsMessage type and
-   * [Gio.UnixConnection.sendCredentials] /
-   * [Gio.UnixConnection.receiveCredentials] functions.
+   * [gio.unix_connection.UnixConnection.sendCredentials] /
+   * [gio.unix_connection.UnixConnection.receiveCredentials] functions.
    * Returns: %NULL if error is set, otherwise a #GCredentials object
-   *   that must be freed with [GObject.ObjectG.unref].
+   *   that must be freed with [gobject.object.ObjectG.unref].
    */
   Credentials getCredentials()
   {
@@ -502,7 +502,7 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Gets the keepalive mode of the socket. For details on this,
-   * see [Gio.Socket.setKeepalive].
+   * see [gio.socket.Socket.setKeepalive].
    * Returns: %TRUE if keepalive is active, %FALSE otherwise.
    */
   bool getKeepalive()
@@ -514,7 +514,7 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Gets the listen backlog setting of the socket. For details on this,
-   * see [Gio.Socket.setListenBacklog].
+   * see [gio.socket.Socket.setListenBacklog].
    * Returns: the maximum number of pending connections.
    */
   int getListenBacklog()
@@ -529,7 +529,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * useful if the socket has been bound to a local address,
    * either explicitly or implicitly when connecting.
    * Returns: a #GSocketAddress or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   SocketAddress getLocalAddress()
   {
@@ -557,7 +557,7 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Gets the multicast time-to-live setting on socket; see
-   * [Gio.Socket.setMulticastTtl] for more details.
+   * [gio.socket.Socket.setMulticastTtl] for more details.
    * Returns: the multicast time-to-live setting on socket
    */
   uint getMulticastTtl()
@@ -578,7 +578,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * headers.
    * Note that even for socket options that are a single byte in size,
    * value is still a pointer to a #gint variable, not a #guchar;
-   * [Gio.Socket.getOption] will handle the conversion internally.
+   * [gio.socket.Socket.getOption] will handle the conversion internally.
    * Params:
    *   level = the "API level" of the option $(LPAREN)eg, `SOL_SOCKET`$(RPAREN)
    *   optname = the "name" of the option $(LPAREN)eg, `SO_BROADCAST`$(RPAREN)
@@ -614,7 +614,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * Try to get the remote address of a connected socket. This is only
    * useful for connection oriented sockets that have been connected.
    * Returns: a #GSocketAddress or %NULL on error.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   SocketAddress getRemoteAddress()
   {
@@ -641,7 +641,7 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Gets the timeout setting of the socket. For details on this, see
-   * [Gio.Socket.setTimeout].
+   * [gio.socket.Socket.setTimeout].
    * Returns: the timeout in seconds
    */
   uint getTimeout()
@@ -653,7 +653,7 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Gets the unicast time-to-live setting on socket; see
-   * [Gio.Socket.setTtl] for more details.
+   * [gio.socket.Socket.setTtl] for more details.
    * Returns: the time-to-live setting on socket
    */
   uint getTtl()
@@ -677,10 +677,10 @@ class Socket : ObjectG, DatagramBased, Initable
   /**
    * Check whether the socket is connected. This is only useful for
    * connection-oriented sockets.
-   * If using [Gio.Socket.shutdown], this function will return %TRUE until the
+   * If using [gio.socket.Socket.shutdown], this function will return %TRUE until the
    * socket has been shut down for reading and writing. If you do a non-blocking
    * connect, this function will not return %TRUE until after you call
-   * [Gio.Socket.checkConnectResult].
+   * [gio.socket.Socket.checkConnectResult].
    * Returns: %TRUE if socket is connected, %FALSE otherwise.
    */
   bool isConnected()
@@ -694,14 +694,14 @@ class Socket : ObjectG, DatagramBased, Initable
    * Registers socket to receive multicast messages sent to group.
    * socket must be a %G_SOCKET_TYPE_DATAGRAM socket, and must have
    * been bound to an appropriate interface and port with
-   * [Gio.Socket.bind].
+   * [gio.socket.Socket.bind].
    * If iface is %NULL, the system will automatically pick an interface
    * to bind to based on group.
    * If source_specific is %TRUE, source-specific multicast as defined
    * in RFC 4604 is used. Note that on older platforms this may fail
    * with a %G_IO_ERROR_NOT_SUPPORTED error.
    * To bind to a given source-specific multicast address, use
-   * [Gio.Socket.joinMulticastGroupSsm] instead.
+   * [gio.socket.Socket.joinMulticastGroupSsm] instead.
    * Params:
    *   group = a #GInetAddress specifying the group address to join.
    *   sourceSpecific = %TRUE if source-specific multicast should be used
@@ -723,7 +723,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * Registers socket to receive multicast messages sent to group.
    * socket must be a %G_SOCKET_TYPE_DATAGRAM socket, and must have
    * been bound to an appropriate interface and port with
-   * [Gio.Socket.bind].
+   * [gio.socket.Socket.bind].
    * If iface is %NULL, the system will automatically pick an interface
    * to bind to based on group.
    * If source_specific is not %NULL, use source-specific multicast as
@@ -757,7 +757,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * socket remains bound to its address and port, and can still receive
    * unicast messages after calling this.
    * To unbind to a given source-specific multicast address, use
-   * [Gio.Socket.leaveMulticastGroupSsm] instead.
+   * [gio.socket.Socket.leaveMulticastGroupSsm] instead.
    * Params:
    *   group = a #GInetAddress specifying the group address to leave.
    *   sourceSpecific = %TRUE if source-specific multicast was used
@@ -801,11 +801,11 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Marks the socket as a server socket, i.e. a socket that is used
-   * to accept incoming requests using [Gio.Socket.accept].
+   * to accept incoming requests using [gio.socket.Socket.accept].
    * Before calling this the socket must be bound to a local address using
-   * [Gio.Socket.bind].
+   * [gio.socket.Socket.bind].
    * To set the maximum amount of outstanding clients, use
-   * [Gio.Socket.setListenBacklog].
+   * [gio.socket.Socket.setListenBacklog].
    * Returns: %TRUE on success, %FALSE on error.
    */
   bool listen()
@@ -820,17 +820,17 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Receive data $(LPAREN)up to size bytes$(RPAREN) from a socket. This is mainly used by
-   * connection-oriented sockets; it is identical to [Gio.Socket.receiveFrom]
+   * connection-oriented sockets; it is identical to [gio.socket.Socket.receiveFrom]
    * with address set to %NULL.
    * For %G_SOCKET_TYPE_DATAGRAM and %G_SOCKET_TYPE_SEQPACKET sockets,
-   * [Gio.Socket.receive] will always read either 0 or 1 complete messages from
+   * [gio.socket.Socket.receive] will always read either 0 or 1 complete messages from
    * the socket. If the received message is too large to fit in buffer, then
    * the data beyond size bytes will be discarded, without any explicit
    * indication that this has occurred.
-   * For %G_SOCKET_TYPE_STREAM sockets, [Gio.Socket.receive] can return any
+   * For %G_SOCKET_TYPE_STREAM sockets, [gio.socket.Socket.receive] can return any
    * number of bytes, up to size. If more than size bytes have been
    * received, the additional data will be returned in future calls to
-   * [Gio.Socket.receive].
+   * [gio.socket.Socket.receive].
    * If the socket is in blocking mode the call will block until there
    * is some data to receive, the connection is closed, or there is an
    * error. If there is no data available and the socket is in
@@ -857,11 +857,11 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Receives data $(LPAREN)up to size bytes$(RPAREN) from a socket.
-   * This function is a variant of [Gio.Socket.receive] which returns a
-   * [GLib.Bytes] rather than a plain buffer.
+   * This function is a variant of [gio.socket.Socket.receive] which returns a
+   * [glib.bytes.Bytes] rather than a plain buffer.
    * Pass `-1` to timeout_us to block indefinitely until data is received $(LPAREN)or
    * the connection is closed, or there is an error$(RPAREN). Pass `0` to use the default
-   * timeout from [Gio.Socket.timeout], or pass a positive number to wait
+   * timeout from [gio.socket.Socket.guint], or pass a positive number to wait
    * for that many microseconds for data before returning `G_IO_ERROR_TIMED_OUT`.
    * Params:
    *   size = the number of bytes you want to read from the socket
@@ -884,14 +884,14 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Receive data $(LPAREN)up to size bytes$(RPAREN) from a socket.
-   * This function is a variant of [Gio.Socket.receiveFrom] which returns
-   * a [GLib.Bytes] rather than a plain buffer.
+   * This function is a variant of [gio.socket.Socket.receiveFrom] which returns
+   * a [glib.bytes.Bytes] rather than a plain buffer.
    * If address is non-%NULL then address will be set equal to the
    * source address of the received packet.
    * The address is owned by the caller.
    * Pass `-1` to timeout_us to block indefinitely until data is received $(LPAREN)or
    * the connection is closed, or there is an error$(RPAREN). Pass `0` to use the default
-   * timeout from [Gio.Socket.timeout], or pass a positive number to wait
+   * timeout from [gio.socket.Socket.guint], or pass a positive number to wait
    * for that many microseconds for data before returning `G_IO_ERROR_TIMED_OUT`.
    * Params:
    *   address = return location for a #GSocketAddress
@@ -920,7 +920,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * If address is non-%NULL then address will be set equal to the
    * source address of the received packet.
    * address is owned by the caller.
-   * See [Gio.Socket.receive] for additional information.
+   * See [gio.socket.Socket.receive] for additional information.
    * Params:
    *   address = a pointer to a #GSocketAddress
    *     pointer, or %NULL
@@ -944,8 +944,8 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Receive data from a socket.  For receiving multiple messages, see
-   * [Gio.Socket.receiveMessages]; for easier use, see
-   * [Gio.Socket.receive] and [Gio.Socket.receiveFrom].
+   * [gio.socket.Socket.receiveMessages]; for easier use, see
+   * [gio.socket.Socket.receive] and [gio.socket.Socket.receiveFrom].
    * If address is non-%NULL then address will be set equal to the
    * source address of the received packet.
    * address is owned by the caller.
@@ -963,7 +963,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * messages was received. These correspond to the control messages
    * received from the kernel, one #GSocketControlMessage per message
    * from the kernel. This array is %NULL-terminated and must be freed
-   * by the caller using [GLib.Global.gfree] after calling [GObject.ObjectG.unref] on each
+   * by the caller using [glib.global.gfree] after calling [gobject.object.ObjectG.unref] on each
    * element. If messages is %NULL, any control messages received will
    * be discarded.
    * num_messages, if non-%NULL, will be set to the number of control
@@ -975,10 +975,10 @@ class Socket : ObjectG, DatagramBased, Initable
    * for this are available in the #GSocketMsgFlags enum, but the
    * values there are the same as the system values, and the flags
    * are passed in as-is, so you can pass in system-specific flags too
-   * $(LPAREN)and [Gio.Socket.receiveMessage] may pass system-specific flags out$(RPAREN).
+   * $(LPAREN)and [gio.socket.Socket.receiveMessage] may pass system-specific flags out$(RPAREN).
    * Flags passed in to the parameter affect the receive operation; flags returned
    * out of it are relevant to the specific returned message.
-   * As with [Gio.Socket.receive], data may be discarded if socket is
+   * As with [gio.socket.Socket.receive], data may be discarded if socket is
    * %G_SOCKET_TYPE_DATAGRAM or %G_SOCKET_TYPE_SEQPACKET and you do not
    * provide enough buffer space to read a complete message. You can pass
    * %G_SOCKET_MSG_PEEK in flags to peek at the current message without
@@ -1029,7 +1029,7 @@ class Socket : ObjectG, DatagramBased, Initable
   }
 
   /**
-   * This behaves exactly the same as [Gio.Socket.receive], except that
+   * This behaves exactly the same as [gio.socket.Socket.receive], except that
    * the choice of blocking or non-blocking behavior is determined by
    * the blocking argument rather than by socket's properties.
    * Params:
@@ -1053,13 +1053,13 @@ class Socket : ObjectG, DatagramBased, Initable
   /**
    * Tries to send size bytes from buffer on the socket. This is
    * mainly used by connection-oriented sockets; it is identical to
-   * [Gio.Socket.sendTo] with address set to %NULL.
+   * [gio.socket.Socket.sendTo] with address set to %NULL.
    * If the socket is in blocking mode the call will block until there is
    * space for the data in the socket queue. If there is no space available
    * and the socket is in non-blocking mode a %G_IO_ERROR_WOULD_BLOCK error
    * will be returned. To be notified when space is available, wait for the
    * %G_IO_OUT condition. Note though that you may still receive
-   * %G_IO_ERROR_WOULD_BLOCK from [Gio.Socket.send] even if you were previously
+   * %G_IO_ERROR_WOULD_BLOCK from [gio.socket.Socket.send] even if you were previously
    * notified of a %G_IO_OUT condition. $(LPAREN)On Windows in particular, this is
    * very common due to the way the underlying APIs work.$(RPAREN)
    * On error -1 is returned and error is set accordingly.
@@ -1087,10 +1087,10 @@ class Socket : ObjectG, DatagramBased, Initable
 
   /**
    * Send data to address on socket.  For sending multiple messages see
-   * [Gio.Socket.sendMessages]; for easier use, see
-   * [Gio.Socket.send] and [Gio.Socket.sendTo].
+   * [gio.socket.Socket.sendMessages]; for easier use, see
+   * [gio.socket.Socket.send] and [gio.socket.Socket.sendTo].
    * If address is %NULL then the message is sent to the default receiver
-   * $(LPAREN)set by [Gio.Socket.connect]$(RPAREN).
+   * $(LPAREN)set by [gio.socket.Socket.connect]$(RPAREN).
    * vectors must point to an array of #GOutputVector structs and
    * num_vectors must be the length of this array. $(LPAREN)If num_vectors is -1,
    * then vectors is assumed to be terminated by a #GOutputVector with a
@@ -1098,7 +1098,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * that the sent data will be gathered from. Using multiple
    * #GOutputVectors is more memory-efficient than manually copying
    * data from multiple sources into a single buffer, and more
-   * network-efficient than making multiple calls to [Gio.Socket.send].
+   * network-efficient than making multiple calls to [gio.socket.Socket.send].
    * messages, if non-%NULL, is taken to point to an array of num_messages
    * #GSocketControlMessage instances. These correspond to the control
    * messages to be sent on the socket.
@@ -1113,12 +1113,12 @@ class Socket : ObjectG, DatagramBased, Initable
    * and the socket is in non-blocking mode a %G_IO_ERROR_WOULD_BLOCK error
    * will be returned. To be notified when space is available, wait for the
    * %G_IO_OUT condition. Note though that you may still receive
-   * %G_IO_ERROR_WOULD_BLOCK from [Gio.Socket.send] even if you were previously
+   * %G_IO_ERROR_WOULD_BLOCK from [gio.socket.Socket.send] even if you were previously
    * notified of a %G_IO_OUT condition. $(LPAREN)On Windows in particular, this is
    * very common due to the way the underlying APIs work.$(RPAREN)
    * The sum of the sizes of each #GOutputVector in vectors must not be
    * greater than %G_MAXSSIZE. If the message can be larger than this,
-   * then it is mandatory to use the [Gio.Socket.sendMessageWithTimeout]
+   * then it is mandatory to use the [gio.socket.Socket.sendMessageWithTimeout]
    * function.
    * On error -1 is returned and error is set accordingly.
    * Params:
@@ -1157,7 +1157,7 @@ class Socket : ObjectG, DatagramBased, Initable
   }
 
   /**
-   * This behaves exactly the same as [Gio.Socket.sendMessage], except that
+   * This behaves exactly the same as [gio.socket.Socket.sendMessage], except that
    * the choice of timeout behavior is determined by the timeout_us argument
    * rather than by socket's properties.
    * On error %G_POLLABLE_RETURN_FAILED is returned and error is set accordingly, or
@@ -1205,8 +1205,8 @@ class Socket : ObjectG, DatagramBased, Initable
   /**
    * Tries to send size bytes from buffer to address. If address is
    * %NULL then the message is sent to the default receiver $(LPAREN)set by
-   * [Gio.Socket.connect]$(RPAREN).
-   * See [Gio.Socket.send] for additional information.
+   * [gio.socket.Socket.connect]$(RPAREN).
+   * See [gio.socket.Socket.send] for additional information.
    * Params:
    *   address = a #GSocketAddress, or %NULL
    *   buffer = the buffer
@@ -1231,7 +1231,7 @@ class Socket : ObjectG, DatagramBased, Initable
   }
 
   /**
-   * This behaves exactly the same as [Gio.Socket.send], except that
+   * This behaves exactly the same as [gio.socket.Socket.send], except that
    * the choice of blocking or non-blocking behavior is determined by
    * the blocking argument rather than by socket's properties.
    * Params:
@@ -1313,7 +1313,7 @@ class Socket : ObjectG, DatagramBased, Initable
    * when listening on this socket. If more clients than this are
    * connecting to the socket and the application is not handling them
    * on time then the new connections will be refused.
-   * Note that this must be called before [Gio.Socket.listen] and has no
+   * Note that this must be called before [gio.socket.Socket.listen] and has no
    * effect if called after that.
    * Params:
    *   backlog = the maximum number of pending connections.
@@ -1381,12 +1381,12 @@ class Socket : ObjectG, DatagramBased, Initable
    * On a blocking socket, this means that any blocking #GSocket
    * operation will time out after timeout seconds of inactivity,
    * returning %G_IO_ERROR_TIMED_OUT.
-   * On a non-blocking socket, calls to [Gio.Socket.conditionWait] will
+   * On a non-blocking socket, calls to [gio.socket.Socket.conditionWait] will
    * also fail with %G_IO_ERROR_TIMED_OUT after the given time. Sources
-   * created with [Gio.Socket.createSource] will trigger after
+   * created with [gio.socket.Socket.createSource] will trigger after
    * timeout seconds of inactivity, with the requested condition
-   * set, at which point calling [Gio.Socket.receive], [Gio.Socket.send],
-   * [Gio.Socket.checkConnectResult], etc, will fail with
+   * set, at which point calling [gio.socket.Socket.receive], [gio.socket.Socket.send],
+   * [gio.socket.Socket.checkConnectResult], etc, will fail with
    * %G_IO_ERROR_TIMED_OUT.
    * If timeout is 0 $(LPAREN)the default$(RPAREN), operations will never time out
    * on their own.

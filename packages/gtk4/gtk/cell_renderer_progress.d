@@ -1,6 +1,6 @@
 module gtk.cell_renderer_progress;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer;
@@ -14,7 +14,7 @@ import gtk.types;
  * Additionally, it can display a text on top of the progress bar.
 
  * Deprecated: List views use widgets to display their contents.
- *   You should use [Gtk.ProgressBar] instead
+ *   You should use [gtk.progress_bar.ProgressBar] instead
  */
 class CellRendererProgress : CellRenderer, Orientable
 {

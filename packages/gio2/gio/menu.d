@@ -1,6 +1,6 @@
 module gio.menu;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.menu_item;
@@ -8,13 +8,13 @@ import gio.menu_model;
 import gio.types;
 
 /**
- * `GMenu` is a simple implementation of [Gio.MenuModel].
- * You populate a `GMenu` by adding [Gio.MenuItem] instances to it.
+ * `GMenu` is a simple implementation of [gio.menu_model.MenuModel].
+ * You populate a `GMenu` by adding [gio.menu_item.MenuItem] instances to it.
  * There are some convenience functions to allow you to directly
- * add items $(LPAREN)avoiding [Gio.MenuItem]$(RPAREN) for the common cases. To add
- * a regular item, use [Gio.Menu.insert]. To add a section, use
- * [Gio.Menu.insertSection]. To add a submenu, use
- * [Gio.Menu.insertSubmenu].
+ * add items $(LPAREN)avoiding [gio.menu_item.MenuItem]$(RPAREN) for the common cases. To add
+ * a regular item, use [gio.menu.Menu.insert]. To add a section, use
+ * [gio.menu.Menu.insertSection]. To add a submenu, use
+ * [gio.menu.Menu.insertSubmenu].
  */
 class Menu : MenuModel
 {
@@ -49,7 +49,7 @@ class Menu : MenuModel
 
   /**
    * Convenience function for appending a normal menu item to the end of
-   * menu.  Combine [Gio.MenuItem.new_] and [Gio.Menu.insertItem] for a more
+   * menu.  Combine [gio.menu_item.MenuItem.new_] and [gio.menu.Menu.insertItem] for a more
    * flexible alternative.
    * Params:
    *   label = the section label, or %NULL
@@ -64,7 +64,7 @@ class Menu : MenuModel
 
   /**
    * Appends item to the end of menu.
-   * See [Gio.Menu.insertItem] for more information.
+   * See [gio.menu.Menu.insertItem] for more information.
    * Params:
    *   item = a #GMenuItem to append
    */
@@ -75,7 +75,7 @@ class Menu : MenuModel
 
   /**
    * Convenience function for appending a section menu item to the end of
-   * menu.  Combine [Gio.MenuItem.newSection] and [Gio.Menu.insertItem] for a
+   * menu.  Combine [gio.menu_item.MenuItem.newSection] and [gio.menu.Menu.insertItem] for a
    * more flexible alternative.
    * Params:
    *   label = the section label, or %NULL
@@ -89,7 +89,7 @@ class Menu : MenuModel
 
   /**
    * Convenience function for appending a submenu menu item to the end of
-   * menu.  Combine [Gio.MenuItem.newSubmenu] and [Gio.Menu.insertItem] for a
+   * menu.  Combine [gio.menu_item.MenuItem.newSubmenu] and [gio.menu.Menu.insertItem] for a
    * more flexible alternative.
    * Params:
    *   label = the section label, or %NULL
@@ -106,7 +106,7 @@ class Menu : MenuModel
    * After the menu is frozen, it is an error to attempt to make any
    * changes to it.  In effect this means that the #GMenu API must no
    * longer be used.
-   * This function causes [Gio.MenuModel.isMutable] to begin returning
+   * This function causes [gio.menu_model.MenuModel.isMutable] to begin returning
    * %FALSE, which has some positive performance implications.
    */
   void freeze()
@@ -116,7 +116,7 @@ class Menu : MenuModel
 
   /**
    * Convenience function for inserting a normal menu item into menu.
-   * Combine [Gio.MenuItem.new_] and [Gio.Menu.insertItem] for a more flexible
+   * Combine [gio.menu_item.MenuItem.new_] and [gio.menu.Menu.insertItem] for a more flexible
    * alternative.
    * Params:
    *   position = the position at which to insert the item
@@ -141,8 +141,8 @@ class Menu : MenuModel
    * again $(LPAREN)at which point its updated values will be copied$(RPAREN).
    * You should probably just free item once you're done.
    * There are many convenience functions to take care of common cases.
-   * See [Gio.Menu.insert], [Gio.Menu.insertSection] and
-   * [Gio.Menu.insertSubmenu] as well as "prepend" and "append" variants of
+   * See [gio.menu.Menu.insert], [gio.menu.Menu.insertSection] and
+   * [gio.menu.Menu.insertSubmenu] as well as "prepend" and "append" variants of
    * each of these functions.
    * Params:
    *   position = the position at which to insert the item
@@ -155,7 +155,7 @@ class Menu : MenuModel
 
   /**
    * Convenience function for inserting a section menu item into menu.
-   * Combine [Gio.MenuItem.newSection] and [Gio.Menu.insertItem] for a more
+   * Combine [gio.menu_item.MenuItem.newSection] and [gio.menu.Menu.insertItem] for a more
    * flexible alternative.
    * Params:
    *   position = the position at which to insert the item
@@ -170,7 +170,7 @@ class Menu : MenuModel
 
   /**
    * Convenience function for inserting a submenu menu item into menu.
-   * Combine [Gio.MenuItem.newSubmenu] and [Gio.Menu.insertItem] for a more
+   * Combine [gio.menu_item.MenuItem.newSubmenu] and [gio.menu.Menu.insertItem] for a more
    * flexible alternative.
    * Params:
    *   position = the position at which to insert the item
@@ -185,7 +185,7 @@ class Menu : MenuModel
 
   /**
    * Convenience function for prepending a normal menu item to the start
-   * of menu.  Combine [Gio.MenuItem.new_] and [Gio.Menu.insertItem] for a more
+   * of menu.  Combine [gio.menu_item.MenuItem.new_] and [gio.menu.Menu.insertItem] for a more
    * flexible alternative.
    * Params:
    *   label = the section label, or %NULL
@@ -200,7 +200,7 @@ class Menu : MenuModel
 
   /**
    * Prepends item to the start of menu.
-   * See [Gio.Menu.insertItem] for more information.
+   * See [gio.menu.Menu.insertItem] for more information.
    * Params:
    *   item = a #GMenuItem to prepend
    */
@@ -211,7 +211,7 @@ class Menu : MenuModel
 
   /**
    * Convenience function for prepending a section menu item to the start
-   * of menu.  Combine [Gio.MenuItem.newSection] and [Gio.Menu.insertItem] for
+   * of menu.  Combine [gio.menu_item.MenuItem.newSection] and [gio.menu.Menu.insertItem] for
    * a more flexible alternative.
    * Params:
    *   label = the section label, or %NULL
@@ -225,7 +225,7 @@ class Menu : MenuModel
 
   /**
    * Convenience function for prepending a submenu menu item to the start
-   * of menu.  Combine [Gio.MenuItem.newSubmenu] and [Gio.Menu.insertItem] for
+   * of menu.  Combine [gio.menu_item.MenuItem.newSubmenu] and [gio.menu.Menu.insertItem] for
    * a more flexible alternative.
    * Params:
    *   label = the section label, or %NULL

@@ -2,7 +2,7 @@ module pangocairo.font_map;
 
 public import pangocairo.font_map_iface_proxy;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import pango.font_map : DPangoFontMap = FontMap;
 import pangocairo.c.functions;
@@ -31,7 +31,7 @@ interface FontMap
    * should only use the `PangoFontMap` and `PangoCairoFontMap`
    * interfaces on the returned object.
    * The default Cairo fontmap can be changed by using
-   * [PangoCairo.FontMap.setDefault]. This can be used to
+   * [pangocairo.font_map.FontMap.setDefault]. This can be used to
    * change the Cairo font backend that the default fontmap uses
    * for example.
    * Note that since Pango 1.32.6, the default fontmap is per-thread.
@@ -66,7 +66,7 @@ interface FontMap
    * this is only useful for testing, when at least two backends
    * are compiled in.
    * Returns: the newly allocated `PangoFontMap`,
-   *   which should be freed with [GObject.ObjectG.unref].
+   *   which should be freed with [gobject.object.ObjectG.unref].
    */
   static DPangoFontMap new_()
   {
@@ -79,13 +79,13 @@ interface FontMap
   /**
    * Creates a new `PangoCairoFontMap` object of the type suitable
    * to be used with cairo font backend of type fonttype.
-   * In most cases one should simply use [PangoCairo.FontMap.new_], or
-   * in fact in most of those cases, just use [PangoCairo.FontMap.getDefault].
+   * In most cases one should simply use [pangocairo.font_map.FontMap.new_], or
+   * in fact in most of those cases, just use [pangocairo.font_map.FontMap.getDefault].
    * Params:
    *   fonttype = desired #cairo_font_type_t
    * Returns: the newly allocated
    *   `PangoFontMap` of suitable type which should be freed with
-   *   [GObject.ObjectG.unref], or %NULL if the requested cairo font backend
+   *   [gobject.object.ObjectG.unref], or %NULL if the requested cairo font backend
    *   is not supported / compiled in.
    */
   static DPangoFontMap newForFontType(FontType fonttype)
@@ -104,7 +104,7 @@ interface FontMap
 
   /**
    * Gets the resolution for the fontmap.
-   * See [PangoCairo.FontMap.setResolution].
+   * See [pangocairo.font_map.FontMap.setResolution].
    * Returns: the resolution in "dots per inch"
    */
   double getResolution();
@@ -118,10 +118,10 @@ interface FontMap
    * This function only changes the default fontmap for
    * the current thread. Default fontmaps of existing threads
    * are not changed. Default fontmaps of any new threads will
-   * still be created using [PangoCairo.FontMap.new_].
+   * still be created using [pangocairo.font_map.FontMap.new_].
    * A value of %NULL for fontmap will cause the current default
    * font map to be released and a new default font map to be created
-   * on demand, using [PangoCairo.FontMap.new_].
+   * on demand, using [pangocairo.font_map.FontMap.new_].
    */
   void setDefault();
 

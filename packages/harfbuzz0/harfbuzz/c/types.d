@@ -1767,7 +1767,7 @@ enum hb_buffer_flags_t : uint
   DoNotInsertDottedCircle = 16,
 
   /**
-   * flag indicating that the [HarfBuzz.Global.shape] call and its variants
+   * flag indicating that the [harfbuzz.global.shape] call and its variants
    * should perform various verification processes on the results
    * of the shaping operation on the buffer.  If the verification
    * fails, then either a buffer message is sent, if a message
@@ -1798,7 +1798,7 @@ enum hb_buffer_flags_t : uint
 }
 
 /**
- * Flags that control what glyph information are serialized in [HarfBuzz.Global.bufferSerializeGlyphs].
+ * Flags that control what glyph information are serialized in [harfbuzz.global.bufferSerializeGlyphs].
  */
 enum hb_buffer_serialize_flags_t : uint
 {
@@ -1846,7 +1846,7 @@ enum hb_buffer_serialize_flags_t : uint
 
 /**
  * The buffer serialization and de-serialization format used in
- * [HarfBuzz.Global.bufferSerializeGlyphs] and [HarfBuzz.Global.bufferDeserializeGlyphs].
+ * [harfbuzz.global.bufferSerializeGlyphs] and [harfbuzz.global.bufferDeserializeGlyphs].
  */
 enum hb_buffer_serialize_format_t
 {
@@ -3904,7 +3904,7 @@ enum hb_style_tag_t
  * from the Unicode Character Database.
  * <note>Note: newer versions of Unicode may add new values.
  * Client programs should be ready to handle any value in the 0..254 range
- * being returned from [HarfBuzz.Global.unicodeCombiningClass].</note>
+ * being returned from [harfbuzz.global.unicodeCombiningClass].</note>
  */
 enum hb_unicode_combining_class_t
 {
@@ -4633,14 +4633,14 @@ struct hb_glyph_info_t
   /**
    * the index of the character in the original text that corresponds
    * to this #hb_glyph_info_t, or whatever the client passes to
-   * [HarfBuzz.Global.bufferAdd]. More than one #hb_glyph_info_t can have the same
+   * [harfbuzz.global.bufferAdd]. More than one #hb_glyph_info_t can have the same
    * @cluster value, if they resulted from the same character $(LPAREN)e.g. one
    * to many glyph substitution$(RPAREN), and when more than one character gets
    * merged in the same glyph $(LPAREN)e.g. many to one glyph substitution$(RPAREN) the
    * #hb_glyph_info_t will have the smallest cluster value of them.
    * By default some characters are merged into the same cluster
    * $(LPAREN)e.g. combining marks have the same cluster as their bases$(RPAREN)
-   * even if they are separate glyphs, [HarfBuzz.Global.bufferSetClusterLevel]
+   * even if they are separate glyphs, [harfbuzz.global.bufferSetClusterLevel]
    * allow selecting more fine-grained cluster handling.
    */
   uint cluster;
@@ -4895,23 +4895,23 @@ struct hb_paint_funcs_t;
 
 /**
  * The structure that holds various text properties of an #hb_buffer_t. Can be
- * set and retrieved using [HarfBuzz.Global.bufferSetSegmentProperties] and
- * [HarfBuzz.Global.bufferGetSegmentProperties], respectively.
+ * set and retrieved using [harfbuzz.global.bufferSetSegmentProperties] and
+ * [harfbuzz.global.bufferGetSegmentProperties], respectively.
  */
 struct hb_segment_properties_t
 {
   /**
-   * the #hb_direction_t of the buffer, see [HarfBuzz.Global.bufferSetDirection].
+   * the #hb_direction_t of the buffer, see [harfbuzz.global.bufferSetDirection].
    */
   hb_direction_t direction;
 
   /**
-   * the #hb_script_t of the buffer, see [HarfBuzz.Global.bufferSetScript].
+   * the #hb_script_t of the buffer, see [harfbuzz.global.bufferSetScript].
    */
   hb_script_t script;
 
   /**
-   * the #hb_language_t of the buffer, see [HarfBuzz.Global.bufferSetLanguage].
+   * the #hb_language_t of the buffer, see [harfbuzz.global.bufferSetLanguage].
    */
   hb_language_t language;
 

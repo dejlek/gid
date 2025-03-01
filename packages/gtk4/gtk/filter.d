@@ -1,6 +1,6 @@
 module gtk.filter;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -9,14 +9,14 @@ import gtk.types;
 
 /**
  * A `GtkFilter` object describes the filtering to be performed by a
- * [Gtk.FilterListModel].
+ * [gtk.filter_list_model.FilterListModel].
  * The model will use the filter to determine if it should include items
- * or not by calling [Gtk.Filter.match] for each item and only
+ * or not by calling [gtk.filter.Filter.match] for each item and only
  * keeping the ones that the function returns %TRUE for.
  * Filters may change what items they match through their lifetime. In that
- * case, they will emit the [Gtk.Filter.changed] signal to notify
+ * case, they will emit the [gtk.filter.Filter.changed] signal to notify
  * that previous filter results are no longer valid and that items should
- * be checked again via [Gtk.Filter.match].
+ * be checked again via [gtk.filter.Filter.match].
  * GTK provides various pre-made filter implementations for common filtering
  * operations. These filters often include properties that can be linked to
  * various widgets to easily allow searches.
@@ -44,11 +44,11 @@ class Filter : ObjectG
 
   /**
    * Notifies all users of the filter that it has changed.
-   * This emits the [Gtk.Filter.changed] signal. Users
+   * This emits the [gtk.filter.Filter.changed] signal. Users
    * of the filter should then check items again via
-   * [Gtk.Filter.match].
+   * [gtk.filter.Filter.match].
    * Depending on the change parameter, not all items need to
-   * be changed, but only some. Refer to the [Gtk.FilterChange]
+   * be changed, but only some. Refer to the [gtk.FilterChange]
    * documentation for details.
    * This function is intended for implementers of `GtkFilter`
    * subclasses and should not be called from other functions.
@@ -63,7 +63,7 @@ class Filter : ObjectG
   /**
    * Gets the known strictness of filters.
    * If the strictness is not known, %GTK_FILTER_MATCH_SOME is returned.
-   * This value may change after emission of the [Gtk.Filter.changed]
+   * This value may change after emission of the [gtk.filter.Filter.changed]
    * signal.
    * This function is meant purely for optimization purposes, filters can
    * choose to omit implementing it, but `GtkFilterListModel` uses it.
@@ -94,10 +94,10 @@ class Filter : ObjectG
   /**
    * Emitted whenever the filter changed.
    * Users of the filter should then check items again via
-   * [Gtk.Filter.match].
+   * [gtk.filter.Filter.match].
    * `GtkFilterListModel` handles this signal automatically.
    * Depending on the change parameter, not all items need
-   * to be checked, but only some. Refer to the [Gtk.FilterChange]
+   * to be checked, but only some. Refer to the [gtk.FilterChange]
    * documentation for details.
    * Params
    *   change = how the filter changed

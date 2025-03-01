@@ -8,7 +8,7 @@ import cairo.rectangle_int;
 import cairo.scaled_font;
 import cairo.surface;
 import cairo.types;
-import gid.gid;
+import gid.global;
 
 
 // Aliases
@@ -152,7 +152,7 @@ enum MIME_TYPE_URI = "text/x-uri";
 
 
 /**
- * The root outline item in [cairo.Global.pdfSurfaceAddOutline].
+ * The root outline item in [cairo.global.pdfSurfaceAddOutline].
  */
 enum PDF_OUTLINE_ROOT = 0;
 

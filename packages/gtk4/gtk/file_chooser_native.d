@@ -1,6 +1,6 @@
 module gtk.file_chooser_native;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.file_chooser;
@@ -24,7 +24,7 @@ import gtk.window;
  * for the dialog. This is required, as there may not be one in the case of a
  * platform native dialog.
  * Showing, hiding and running the dialog is handled by the
- * [Gtk.NativeDialog] functions.
+ * [gtk.native_dialog.NativeDialog] functions.
  * Note that unlike `GtkFileChooserDialog`, `GtkFileChooserNative` objects
  * are not toplevel widgets, and GTK does not keep them alive. It is your
  * responsibility to keep a reference until you are done with the
@@ -90,14 +90,14 @@ import gtk.window;
  * gtk_native_dialog_show $(LPAREN)GTK_NATIVE_DIALOG $(LPAREN)native$(RPAREN)$(RPAREN);
  * ```
  * For more information on how to best set up a file dialog,
- * see the [Gtk.FileChooserDialog] documentation.
+ * see the [gtk.file_chooser_dialog.FileChooserDialog] documentation.
  * ## Response Codes
- * `GtkFileChooserNative` inherits from [Gtk.NativeDialog],
+ * `GtkFileChooserNative` inherits from [gtk.native_dialog.NativeDialog],
  * which means it will return %GTK_RESPONSE_ACCEPT if the user accepted,
  * and %GTK_RESPONSE_CANCEL if he pressed cancel. It can also return
  * %GTK_RESPONSE_DELETE_EVENT if the window was unexpectedly closed.
  * ## Differences from `GtkFileChooserDialog`
- * There are a few things in the [Gtk.FileChooser] interface that
+ * There are a few things in the [gtk.file_chooser.FileChooser] interface that
  * are not possible to use with `GtkFileChooserNative`, as such use would
  * prohibit the use of a native dialog.
  * No operations that change the dialog work while the dialog is visible.
@@ -106,7 +106,7 @@ import gtk.window;
  * On windows the `IFileDialog` implementation $(LPAREN)added in Windows Vista$(RPAREN) is
  * used. It supports many of the features that `GtkFileChooser` has, but
  * there are some things it does not handle:
- * * Any [Gtk.FileFilter] added using a mimetype
+ * * Any [gtk.file_filter.FileFilter] added using a mimetype
  * If any of these features are used the regular `GtkFileChooserDialog`
  * will be used in place of the native one.
  * ## Portal details
@@ -120,7 +120,7 @@ import gtk.window;
  * are not supported:
  * * Shortcut folders.
 
- * Deprecated: Use [Gtk.FileDialog] instead
+ * Deprecated: Use [gtk.file_dialog.FileDialog] instead
  */
 class FileChooserNative : NativeDialog, FileChooser
 {
@@ -153,7 +153,7 @@ class FileChooserNative : NativeDialog, FileChooser
    *   cancelLabel = text to go in the cancel button, or %NULL for the default
    * Returns: a new `GtkFileChooserNative`
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   this(string title, Window parent, FileChooserAction action, string acceptLabel, string cancelLabel)
   {
@@ -169,7 +169,7 @@ class FileChooserNative : NativeDialog, FileChooser
    * Retrieves the custom label text for the accept button.
    * Returns: The custom label
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   string getAcceptLabel()
   {
@@ -183,7 +183,7 @@ class FileChooserNative : NativeDialog, FileChooser
    * Retrieves the custom label text for the cancel button.
    * Returns: The custom label
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   string getCancelLabel()
   {
@@ -203,7 +203,7 @@ class FileChooserNative : NativeDialog, FileChooser
    * Params:
    *   acceptLabel = custom label
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void setAcceptLabel(string acceptLabel)
   {
@@ -221,7 +221,7 @@ class FileChooserNative : NativeDialog, FileChooser
    * Params:
    *   cancelLabel = custom label
 
-   * Deprecated: Use [Gtk.FileDialog] instead
+   * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
   void setCancelLabel(string cancelLabel)
   {

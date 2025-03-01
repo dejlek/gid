@@ -5,7 +5,7 @@ public import gdk.c.functions;
 public import gdk.c.types;
 public import gdk.drag_surface_size;
 public import gdk.types;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 
 /**
@@ -35,8 +35,8 @@ template DragSurfaceT()
    * cycle when the surface size needs to be recomputed.
    * It is the responsibility of the drag surface user to handle this signal
    * and compute the desired size of the surface, storing the computed size
-   * in the [Gdk.DragSurfaceSize] object that is passed to the signal
-   * handler, using [Gdk.DragSurfaceSize.setSize].
+   * in the [gdk.drag_surface_size.DragSurfaceSize] object that is passed to the signal
+   * handler, using [gdk.drag_surface_size.DragSurfaceSize.setSize].
    * Failing to set a size so will result in an arbitrary size being used as
    * a result.
    * Params

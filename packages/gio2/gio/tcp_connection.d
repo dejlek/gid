@@ -1,13 +1,13 @@
 module gio.tcp_connection;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_connection;
 import gio.types;
 
 /**
- * This is the subclass of [Gio.SocketConnection] that is created
+ * This is the subclass of [gio.socket_connection.SocketConnection] that is created
  * for TCP/IP sockets.
  */
 class TcpConnection : SocketConnection
@@ -31,7 +31,7 @@ class TcpConnection : SocketConnection
 
   /**
    * Checks if graceful disconnects are used. See
-   * [Gio.TcpConnection.setGracefulDisconnect].
+   * [gio.tcp_connection.TcpConnection.setGracefulDisconnect].
    * Returns: %TRUE if graceful disconnect is used on close, %FALSE otherwise
    */
   bool getGracefulDisconnect()

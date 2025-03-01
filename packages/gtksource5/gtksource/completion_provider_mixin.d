@@ -2,7 +2,7 @@ module gtksource.completion_provider_mixin;
 
 public import gtksource.completion_provider_iface_proxy;
 public import gdk.types;
-public import gid.gid;
+public import gid.global;
 public import gio.async_result;
 public import gio.async_result_mixin;
 public import gio.cancellable;
@@ -36,7 +36,7 @@ template CompletionProviderT()
    * What the provider does to activate the proposal is specific to that
    * provider. Many providers may choose to insert a #GtkSourceSnippet with
    * edit points the user may cycle through.
-   * See also: classSnippet, classSnippetChunk, [GtkSource.View.pushSnippet]
+   * See also: classSnippet, classSnippetChunk, [gtksource.view.View.pushSnippet]
    * Params:
    *   context = a #GtkSourceCompletionContext
    *   proposal = a #GtkSourceCompletionProposal
@@ -123,7 +123,7 @@ template CompletionProviderT()
    * Params:
    *   context = a #GtkSourceCompletionContext
    *   proposal = a #GtkSourceCompletionProposal
-   *   keyval = a keyval such as [Gdk.KEY_period]
+   *   keyval = a keyval such as [gdk.int]
    *   state = a #GdkModifierType or 0
    * Returns:
    */
@@ -155,9 +155,9 @@ template CompletionProviderT()
   /**
    * Asynchronously requests that the provider populates the completion
    * results for context.
-   * For providers that would like to populate a [Gio.ListModel] while those
+   * For providers that would like to populate a [gio.list_model.ListModel] while those
    * results are displayed to the user,
-   * [GtkSource.CompletionContext.setProposalsForProvider] may be used
+   * [gtksource.completion_context.CompletionContext.setProposalsForProvider] may be used
    * to reduce latency until the user sees results.
    * Params:
    *   context = a #GtkSourceCompletionContext
@@ -201,7 +201,7 @@ template CompletionProviderT()
    * the classCompletionContext by the #GtkSourceCompletionProvider.
    * This can happen as the user types additional text onto the word so
    * that previously matched items may be removed from the list instead of
-   * generating new [Gio.ListModel] of results.
+   * generating new [gio.list_model.ListModel] of results.
    * Params:
    *   context = a #GtkSourceCompletionContext
    *   model = a #GListModel

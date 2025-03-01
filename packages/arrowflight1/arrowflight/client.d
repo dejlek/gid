@@ -13,7 +13,7 @@ import arrowflight.location;
 import arrowflight.stream_reader;
 import arrowflight.ticket;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 
@@ -95,7 +95,7 @@ class Client : ObjectG
 
   /**
    * Upload data to a Flight described by the given descriptor. The
-   * caller must call [Arrow.RecordBatchWriter.close] on the
+   * caller must call [arrow.record_batch_writer.RecordBatchWriter.close] on the
    * returned stream once they are done writing.
    * The reader and writer are linked; closing the writer will also
    * close the reader. Use garrow_flight_stream_writer_done_writing$(LPAREN)$(RPAREN) to

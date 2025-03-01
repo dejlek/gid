@@ -1,7 +1,7 @@
 module gtk.accessible_text;
 
 public import gtk.accessible_text_iface_proxy;
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;

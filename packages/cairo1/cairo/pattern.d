@@ -5,23 +5,23 @@ import cairo.c.types;
 import cairo.matrix;
 import cairo.surface;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
  * A #cairo_pattern_t represents a source when drawing onto a
  * surface. There are different subtypes of #cairo_pattern_t,
  * for different types of sources; for example,
- * [cairo.Global.patternCreateRgb] creates a pattern for a solid
+ * [cairo.global.patternCreateRgb] creates a pattern for a solid
  * opaque color.
  * Other than various
  * <function>cairo_pattern_create_<emphasis>type</emphasis>$(LPAREN)$(RPAREN)</function>
  * functions, some of the pattern types can be implicitly created using various
  * <function>cairo_set_source_<emphasis>type</emphasis>$(LPAREN)$(RPAREN)</function> functions;
- * for example [cairo.Context.setSourceRgb].
- * The type of a pattern can be queried with [cairo.Pattern.getPatternType].
+ * for example [cairo.context.Context.setSourceRgb].
+ * The type of a pattern can be queried with [cairo.pattern.Pattern.getPatternType].
  * Memory management of #cairo_pattern_t is done with
- * [cairo.Pattern.reference] and [cairo.Pattern.destroy].
+ * [cairo.pattern.Pattern.reference] and [cairo.pattern.Pattern.destroy].
  */
 class Pattern : Boxed
 {
@@ -53,7 +53,7 @@ class Pattern : Boxed
    * example, a linear gradient's control vector is from $(LPAREN)x0,y0$(RPAREN) to
    * $(LPAREN)x1,y1$(RPAREN) while a radial gradient's control vector is from any point
    * on the start circle to the corresponding point on the end circle.
-   * The color is specified in the same way as in [cairo.Context.setSourceRgb].
+   * The color is specified in the same way as in [cairo.context.Context.setSourceRgb].
    * If two $(LPAREN)or more$(RPAREN) stops are specified with identical offset values,
    * they will be sorted according to the order in which the stops are
    * added, $(LPAREN)stops added earlier will compare less than stops added
@@ -79,7 +79,7 @@ class Pattern : Boxed
    * example, a linear gradient's control vector is from $(LPAREN)x0,y0$(RPAREN) to
    * $(LPAREN)x1,y1$(RPAREN) while a radial gradient's control vector is from any point
    * on the start circle to the corresponding point on the end circle.
-   * The color is specified in the same way as in [cairo.Context.setSourceRgba].
+   * The color is specified in the same way as in [cairo.context.Context.setSourceRgba].
    * If two $(LPAREN)or more$(RPAREN) stops are specified with identical offset values,
    * they will be sorted according to the order in which the stops are
    * added, $(LPAREN)stops added earlier will compare less than stops added
@@ -121,7 +121,7 @@ class Pattern : Boxed
    * Gets the color and offset information at the given index for a
    * gradient pattern.  Values of index range from 0 to n-1
    * where n is the number returned
-   * by [cairo.Pattern.getColorStopCount].
+   * by [cairo.pattern.Pattern.getColorStopCount].
    * Note that the color and alpha values are not premultiplied.
    * Params:
    *   index = index of the stop to return data for
@@ -145,7 +145,7 @@ class Pattern : Boxed
 
   /**
    * Gets the current dithering mode, as set by
-   * [cairo.Pattern.setDither].
+   * [cairo.pattern.Pattern.setDither].
    * Returns: the current dithering mode.
    */
   Dither getDither()
@@ -257,7 +257,7 @@ class Pattern : Boxed
   /**
    * Gets the surface of a surface pattern.  The reference returned in
    * surface is owned by the pattern; the caller should call
-   * [cairo.Surface.reference] if the surface is to be retained.
+   * [cairo.surface.Surface.reference] if the surface is to be retained.
    * Params:
    *   surface = return value for surface of pattern, or %NULL
    * Returns: %CAIRO_STATUS_SUCCESS, or
@@ -332,8 +332,8 @@ class Pattern : Boxed
    * See #cairo_filter_t for details on each filter.
    * * Note that you might want to control filtering even when you do not
    * have an explicit #cairo_pattern_t object, $(LPAREN)for example when using
-   * [cairo.Context.setSourceSurface]$(RPAREN). In these cases, it is convenient to
-   * use [cairo.Context.getSource] to get access to the pattern that cairo
+   * [cairo.context.Context.setSourceSurface]$(RPAREN). In these cases, it is convenient to
+   * use [cairo.context.Context.getSource] to get access to the pattern that cairo
    * creates implicitly. For example:
    * <informalexample><programlisting>
    * cairo_set_source_surface $(LPAREN)cr, image, x, y$(RPAREN);
@@ -368,7 +368,7 @@ class Pattern : Boxed
    * Meanwhile, using values of 2.0 rather than 0.5 in the code above
    * would cause the pattern to appear at half of its default size.
    * Also, please note the discussion of the user-space locking
-   * semantics of [cairo.Context.setSource].
+   * semantics of [cairo.context.Context.setSource].
    * Params:
    *   matrix = a #cairo_matrix_t
    */

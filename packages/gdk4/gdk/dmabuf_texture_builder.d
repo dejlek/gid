@@ -6,13 +6,13 @@ import gdk.c.types;
 import gdk.display;
 import gdk.texture;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import glib.types;
 import gobject.object;
 
 /**
- * `GdkDmabufTextureBuilder` is a builder used to construct [Gdk.Texture]
+ * `GdkDmabufTextureBuilder` is a builder used to construct [gdk.texture.Texture]
  * objects from DMA buffers.
  * DMA buffers are commonly called **_dma-bufs_**.
  * DMA buffers are a feature of the Linux kernel to enable efficient buffer and
@@ -41,7 +41,7 @@ import gobject.object;
  * instead return `DMA_FORMAT_MOD_INVALID` to indicate that their modifier is **_implicit_**.
  * GTK tries to accommodate this situation by accepting `DMA_FORMAT_MOD_INVALID` as modifier.
  * The operation of `GdkDmabufTextureBuilder` is quite simple: Create a texture builder,
- * set all the necessary properties, and then call [Gdk.DmabufTextureBuilder.build]
+ * set all the necessary properties, and then call [gdk.dmabuf_texture_builder.DmabufTextureBuilder.build]
  * to create the new texture.
  * The required properties for a dma-buf texture are
  * * The width and height in pixels
@@ -95,7 +95,7 @@ class DmabufTextureBuilder : ObjectG
    * open until the created texture is no longer used, and close them afterwards $(LPAREN)possibly
    * using the destroy notify$(RPAREN).
    * Not all formats defined in the `drm_fourcc.h` header are supported. You can use
-   * [Gdk.Display.getDmabufFormats] to get a list of supported formats.
+   * [gdk.display.Display.getDmabufFormats] to get a list of supported formats.
    * Params:
    *   destroy = destroy function to be called when the texture is
    *     released
@@ -150,7 +150,7 @@ class DmabufTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the format previously set via [Gdk.DmabufTextureBuilder.setFourcc]
+   * Gets the format previously set via [gdk.dmabuf_texture_builder.DmabufTextureBuilder.setFourcc]
    * or 0 if the format wasn't set.
    * The format is specified as a fourcc code.
    * Returns: The format
@@ -163,7 +163,7 @@ class DmabufTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the height previously set via [Gdk.DmabufTextureBuilder.setHeight] or
+   * Gets the height previously set via [gdk.dmabuf_texture_builder.DmabufTextureBuilder.setHeight] or
    * 0 if the height wasn't set.
    * Returns: The height
    */
@@ -234,7 +234,7 @@ class DmabufTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the region previously set via [Gdk.DmabufTextureBuilder.setUpdateRegion] or
+   * Gets the region previously set via [gdk.dmabuf_texture_builder.DmabufTextureBuilder.setUpdateRegion] or
    * %NULL if none was set.
    * Returns: The region
    */
@@ -247,7 +247,7 @@ class DmabufTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the texture previously set via [Gdk.DmabufTextureBuilder.setUpdateTexture] or
+   * Gets the texture previously set via [gdk.dmabuf_texture_builder.DmabufTextureBuilder.setUpdateTexture] or
    * %NULL if none was set.
    * Returns: The texture
    */
@@ -260,7 +260,7 @@ class DmabufTextureBuilder : ObjectG
   }
 
   /**
-   * Gets the width previously set via [Gdk.DmabufTextureBuilder.setWidth] or
+   * Gets the width previously set via [gdk.dmabuf_texture_builder.DmabufTextureBuilder.setWidth] or
    * 0 if the width wasn't set.
    * Returns: The width
    */
@@ -298,7 +298,7 @@ class DmabufTextureBuilder : ObjectG
   /**
    * Sets the format of the texture.
    * The format is specified as a fourcc code.
-   * The format must be set before calling [Gdk.GLTextureBuilder.build].
+   * The format must be set before calling [gdk.gltexture_builder.GLTextureBuilder.build].
    * Params:
    *   fourcc = the texture's format or 0 to unset
    */
@@ -309,7 +309,7 @@ class DmabufTextureBuilder : ObjectG
 
   /**
    * Sets the height of the texture.
-   * The height must be set before calling [Gdk.GLTextureBuilder.build].
+   * The height must be set before calling [gdk.gltexture_builder.GLTextureBuilder.build].
    * Params:
    *   height = the texture's height or 0 to unset
    */
@@ -363,7 +363,7 @@ class DmabufTextureBuilder : ObjectG
 
   /**
    * Sets the stride for a plane.
-   * The stride must be set for all planes before calling [Gdk.GLTextureBuilder.build].
+   * The stride must be set for all planes before calling [gdk.gltexture_builder.GLTextureBuilder.build].
    * Params:
    *   plane = the plane to set the stride for
    *   stride = the stride value
@@ -392,7 +392,7 @@ class DmabufTextureBuilder : ObjectG
 
   /**
    * Sets the texture to be updated by this texture. See
-   * [Gdk.DmabufTextureBuilder.setUpdateRegion] for an explanation.
+   * [gdk.dmabuf_texture_builder.DmabufTextureBuilder.setUpdateRegion] for an explanation.
    * Params:
    *   texture = the texture to update
    */
@@ -403,7 +403,7 @@ class DmabufTextureBuilder : ObjectG
 
   /**
    * Sets the width of the texture.
-   * The width must be set before calling [Gdk.GLTextureBuilder.build].
+   * The width must be set before calling [gdk.gltexture_builder.GLTextureBuilder.build].
    * Params:
    *   width = The texture's width or 0 to unset
    */

@@ -1,6 +1,6 @@
 module gtksource.hover;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -14,9 +14,9 @@ import gtksource.types;
  * When enabled, if the user hovers over a word in the text editor, a series
  * of registered iface@HoverProvider can populate a class@HoverDisplay
  * with useful information.
- * To enable call [GtkSource.View.getHover] and add iface@HoverProvider
- * using [GtkSource.Hover.addProvider]. To disable, remove all registered
- * providers with [GtkSource.Hover.removeProvider].
+ * To enable call [gtksource.view.View.getHover] and add iface@HoverProvider
+ * using [gtksource.hover.Hover.addProvider]. To disable, remove all registered
+ * providers with [gtksource.hover.Hover.removeProvider].
  * You can change how long to wait to display the interactive tooltip by
  * setting the property@Hover:hover-delay property in milliseconds.
  */

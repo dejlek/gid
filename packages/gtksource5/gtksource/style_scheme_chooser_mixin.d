@@ -1,7 +1,7 @@
 module gtksource.style_scheme_chooser_mixin;
 
 public import gtksource.style_scheme_chooser_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gobject.object;
 public import gtksource.c.functions;
 public import gtksource.c.types;

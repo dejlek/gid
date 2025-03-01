@@ -1,6 +1,6 @@
 module gtk.search_bar;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -24,12 +24,12 @@ import gtk.widget;
  * is toggled on.
  * For keyboard presses to start a search, the search bar must be told
  * of a widget to capture key events from through
- * [Gtk.SearchBar.setKeyCaptureWidget]. This widget will
+ * [gtk.search_bar.SearchBar.setKeyCaptureWidget]. This widget will
  * typically be the top-level window, or a parent container of the
  * search bar. Common shortcuts such as Ctrl+F should be handled as an
  * application action, or through the menu items.
  * You will also need to tell the search bar about which entry you
- * are using as your search entry using [Gtk.SearchBar.connectEntry].
+ * are using as your search entry using [gtk.search_bar.SearchBar.connectEntry].
  * ## Creating a search bar
  * The following example shows you how to create a more complex search
  * entry.
@@ -71,7 +71,7 @@ class SearchBar : Widget
   /**
    * Creates a `GtkSearchBar`.
    * You will need to tell it about which widget is going to be your text
-   * entry using [Gtk.SearchBar.connectEntry].
+   * entry using [gtk.search_bar.SearchBar.connectEntry].
    * Returns: a new `GtkSearchBar`
    */
   this()
@@ -161,7 +161,7 @@ class SearchBar : Widget
    * editable child widgets of widget will receive text input
    * before it gets captured. If that is not desired, you can
    * capture and forward the events yourself with
-   * [Gtk.EventControllerKey.forward].
+   * [gtk.event_controller_key.EventControllerKey.forward].
    * Params:
    *   widget = a `GtkWidget`
    */

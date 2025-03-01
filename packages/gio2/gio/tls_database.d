@@ -1,6 +1,6 @@
 module gio.tls_database;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -21,7 +21,7 @@ import gobject.object;
  * A `GTlsDatabase` may be accessed from multiple threads by the TLS backend.
  * All implementations are required to be fully thread-safe.
  * Most common client applications will not directly interact with
- * `GTlsDatabase`. It is used internally by [Gio.TlsConnection].
+ * `GTlsDatabase`. It is used internally by [gio.tls_connection.TlsConnection].
  */
 class TlsDatabase : ObjectG
 {
@@ -66,12 +66,12 @@ class TlsDatabase : ObjectG
   /**
    * Look up a certificate by its handle.
    * The handle should have been created by calling
-   * [Gio.TlsDatabase.createCertificateHandle] on a #GTlsDatabase object of
+   * [gio.tls_database.TlsDatabase.createCertificateHandle] on a #GTlsDatabase object of
    * the same TLS backend. The handle is designed to remain valid across
    * instantiations of the database.
    * If the handle is no longer valid, or does not point to a certificate in
    * this database, then %NULL will be returned.
-   * This function can block, use [Gio.TlsDatabase.lookupCertificateForHandleAsync] to perform
+   * This function can block, use [gio.tls_database.TlsDatabase.lookupCertificateForHandleAsync] to perform
    * the lookup operation asynchronously.
    * Params:
    *   handle = a certificate handle
@@ -79,7 +79,7 @@ class TlsDatabase : ObjectG
    *   flags = Flags which affect the lookup.
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a newly allocated
-   *   #GTlsCertificate, or %NULL. Use [GObject.ObjectG.unref] to release the certificate.
+   *   #GTlsCertificate, or %NULL. Use [gobject.object.ObjectG.unref] to release the certificate.
    */
   TlsCertificate lookupCertificateForHandle(string handle, TlsInteraction interaction, TlsDatabaseLookupFlags flags, Cancellable cancellable)
   {
@@ -95,7 +95,7 @@ class TlsDatabase : ObjectG
 
   /**
    * Asynchronously look up a certificate by its handle in the database. See
-   * [Gio.TlsDatabase.lookupCertificateForHandle] for more information.
+   * [gio.tls_database.TlsDatabase.lookupCertificateForHandle] for more information.
    * Params:
    *   handle = a certificate handle
    *   interaction = used to interact with the user if necessary
@@ -121,13 +121,13 @@ class TlsDatabase : ObjectG
 
   /**
    * Finish an asynchronous lookup of a certificate by its handle. See
-   * [Gio.TlsDatabase.lookupCertificateForHandle] for more information.
+   * [gio.tls_database.TlsDatabase.lookupCertificateForHandle] for more information.
    * If the handle is no longer valid, or does not point to a certificate in
    * this database, then %NULL will be returned.
    * Params:
    *   result = a #GAsyncResult.
    * Returns: a newly allocated #GTlsCertificate object.
-   *   Use [GObject.ObjectG.unref] to release the certificate.
+   *   Use [gobject.object.ObjectG.unref] to release the certificate.
    */
   TlsCertificate lookupCertificateForHandleFinish(AsyncResult result)
   {
@@ -144,7 +144,7 @@ class TlsDatabase : ObjectG
    * Look up the issuer of certificate in the database. The
    * #GTlsCertificate:issuer property of certificate is not modified, and
    * the two certificates are not hooked into a chain.
-   * This function can block. Use [Gio.TlsDatabase.lookupCertificateIssuerAsync]
+   * This function can block. Use [gio.tls_database.TlsDatabase.lookupCertificateIssuerAsync]
    * to perform the lookup operation asynchronously.
    * Beware this function cannot be used to build certification paths. The
    * issuer certificate returned by this function may not be the same as
@@ -165,7 +165,7 @@ class TlsDatabase : ObjectG
    *   flags = flags which affect the lookup operation
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a newly allocated issuer #GTlsCertificate,
-   *   or %NULL. Use [GObject.ObjectG.unref] to release the certificate.
+   *   or %NULL. Use [gobject.object.ObjectG.unref] to release the certificate.
    */
   TlsCertificate lookupCertificateIssuer(TlsCertificate certificate, TlsInteraction interaction, TlsDatabaseLookupFlags flags, Cancellable cancellable)
   {
@@ -180,7 +180,7 @@ class TlsDatabase : ObjectG
 
   /**
    * Asynchronously look up the issuer of certificate in the database. See
-   * [Gio.TlsDatabase.lookupCertificateIssuer] for more information.
+   * [gio.tls_database.TlsDatabase.lookupCertificateIssuer] for more information.
    * Params:
    *   certificate = a #GTlsCertificate
    *   interaction = used to interact with the user if necessary
@@ -205,11 +205,11 @@ class TlsDatabase : ObjectG
 
   /**
    * Finish an asynchronous lookup issuer operation. See
-   * [Gio.TlsDatabase.lookupCertificateIssuer] for more information.
+   * [gio.tls_database.TlsDatabase.lookupCertificateIssuer] for more information.
    * Params:
    *   result = a #GAsyncResult.
    * Returns: a newly allocated issuer #GTlsCertificate,
-   *   or %NULL. Use [GObject.ObjectG.unref] to release the certificate.
+   *   or %NULL. Use [gobject.object.ObjectG.unref] to release the certificate.
    */
   TlsCertificate lookupCertificateIssuerFinish(AsyncResult result)
   {
@@ -224,7 +224,7 @@ class TlsDatabase : ObjectG
 
   /**
    * Look up certificates issued by this issuer in the database.
-   * This function can block, use [Gio.TlsDatabase.lookupCertificatesIssuedByAsync] to perform
+   * This function can block, use [gio.tls_database.TlsDatabase.lookupCertificatesIssuedByAsync] to perform
    * the lookup operation asynchronously.
    * Params:
    *   issuerRawDn = a #GByteArray which holds the DER encoded issuer DN.
@@ -232,7 +232,7 @@ class TlsDatabase : ObjectG
    *   flags = Flags which affect the lookup operation.
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a newly allocated list of #GTlsCertificate
-   *   objects. Use [GObject.ObjectG.unref] on each certificate, and [GLib.List.free] on the release the list.
+   *   objects. Use [gobject.object.ObjectG.unref] on each certificate, and [glib.list.List.free] on the release the list.
    */
   TlsCertificate[] lookupCertificatesIssuedBy(ubyte[] issuerRawDn, TlsInteraction interaction, TlsDatabaseLookupFlags flags, Cancellable cancellable)
   {
@@ -249,7 +249,7 @@ class TlsDatabase : ObjectG
 
   /**
    * Asynchronously look up certificates issued by this issuer in the database. See
-   * [Gio.TlsDatabase.lookupCertificatesIssuedBy] for more information.
+   * [gio.tls_database.TlsDatabase.lookupCertificatesIssuedBy] for more information.
    * The database may choose to hold a reference to the issuer byte array for the duration
    * of this asynchronous operation. The byte array should not be modified during
    * this time.
@@ -279,11 +279,11 @@ class TlsDatabase : ObjectG
 
   /**
    * Finish an asynchronous lookup of certificates. See
-   * [Gio.TlsDatabase.lookupCertificatesIssuedBy] for more information.
+   * [gio.tls_database.TlsDatabase.lookupCertificatesIssuedBy] for more information.
    * Params:
    *   result = a #GAsyncResult.
    * Returns: a newly allocated list of #GTlsCertificate
-   *   objects. Use [GObject.ObjectG.unref] on each certificate, and [GLib.List.free] on the release the list.
+   *   objects. Use [gobject.object.ObjectG.unref] on each certificate, and [glib.list.List.free] on the release the list.
    */
   TlsCertificate[] lookupCertificatesIssuedByFinish(AsyncResult result)
   {
@@ -345,7 +345,7 @@ class TlsDatabase : ObjectG
    * The TLS backend may attempt to look up and add missing certificates
    * to the chain. This may involve HTTP requests to download missing
    * certificates.
-   * This function can block. Use [Gio.TlsDatabase.verifyChainAsync] to
+   * This function can block. Use [gio.tls_database.TlsDatabase.verifyChainAsync] to
    * perform the verification operation asynchronously.
    * Params:
    *   chain = a #GTlsCertificate chain
@@ -372,7 +372,7 @@ class TlsDatabase : ObjectG
   /**
    * Asynchronously determines the validity of a certificate chain after
    * looking up and adding any missing certificates to the chain. See
-   * [Gio.TlsDatabase.verifyChain] for more information.
+   * [gio.tls_database.TlsDatabase.verifyChain] for more information.
    * Params:
    *   chain = a #GTlsCertificate chain
    *   purpose = the purpose that this certificate chain will be used for.
@@ -400,7 +400,7 @@ class TlsDatabase : ObjectG
 
   /**
    * Finish an asynchronous verify chain operation. See
-   * [Gio.TlsDatabase.verifyChain] for more information.
+   * [gio.tls_database.TlsDatabase.verifyChain] for more information.
    * If chain is found to be valid, then the return value will be 0. If
    * chain is found to be invalid, then the return value will indicate
    * the problems found. If the function is unable to determine whether

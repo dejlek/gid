@@ -1,7 +1,7 @@
 module gio.initable_mixin;
 
 public import gio.initable_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
@@ -12,18 +12,18 @@ public import glib.error;
  * `GInitable` is implemented by objects that can fail during
  * initialization. If an object implements this interface then
  * it must be initialized as the first thing after construction,
- * either via [Gio.Initable.init_] or [Gio.AsyncInitable.initAsync]
- * $(LPAREN)the latter is only available if it also implements [Gio.AsyncInitable]$(RPAREN).
+ * either via [gio.initable.Initable.init_] or [gio.async_initable.AsyncInitable.initAsync]
+ * $(LPAREN)the latter is only available if it also implements [gio.async_initable.AsyncInitable]$(RPAREN).
  * If the object is not initialized, or initialization returns with an
- * error, then all operations on the object except `[GObject.ObjectG.ref_]` and
- * `[GObject.ObjectG.unref]` are considered to be invalid, and have undefined
+ * error, then all operations on the object except `[gobject.object.ObjectG.ref_]` and
+ * `[gobject.object.ObjectG.unref]` are considered to be invalid, and have undefined
  * behaviour. They will often fail with func@GLib.critical or
  * func@GLib.warning, but this must not be relied on.
  * Users of objects implementing this are not intended to use
  * the interface method directly, instead it will be used automatically
  * in various ways. For C applications you generally just call
- * [Gio.Initable.new_] directly, or indirectly via a `foo_thing_new()` wrapper.
- * This will call [Gio.Initable.init_] under the cover, returning `NULL`
+ * [gio.initable.Initable.new_] directly, or indirectly via a `foo_thing_new()` wrapper.
+ * This will call [gio.initable.Initable.init_] under the cover, returning `NULL`
  * and setting a `GError` on failure $(LPAREN)at which point the instance is
  * unreferenced$(RPAREN).
  * For bindings in languages where the native constructor supports
@@ -37,9 +37,9 @@ template InitableT()
   /**
    * Initializes the object implementing the interface.
    * This method is intended for language bindings. If writing in C,
-   * [Gio.Initable.new_] should typically be used instead.
+   * [gio.initable.Initable.new_] should typically be used instead.
    * The object must be initialized before any real use after initial
-   * construction, either with this function or [Gio.AsyncInitable.initAsync].
+   * construction, either with this function or [gio.async_initable.AsyncInitable.initAsync].
    * Implementations may also support cancellation. If cancellable is not %NULL,
    * then initialization can be cancelled by triggering the cancellable object
    * from another thread. If the operation was cancelled, the error
@@ -47,8 +47,8 @@ template InitableT()
    * the object doesn't support cancellable initialization the error
    * %G_IO_ERROR_NOT_SUPPORTED will be returned.
    * If the object is not initialized, or initialization returns with an
-   * error, then all operations on the object except [GObject.ObjectG.ref_] and
-   * [GObject.ObjectG.unref] are considered to be invalid, and have undefined
+   * error, then all operations on the object except [gobject.object.ObjectG.ref_] and
+   * [gobject.object.ObjectG.unref] are considered to be invalid, and have undefined
    * behaviour. See the [introduction][ginitable] for more details.
    * Callers should not assume that a class which implements #GInitable can be
    * initialized multiple times, unless the class explicitly documents itself as
@@ -63,8 +63,8 @@ template InitableT()
    * One reason why a class might need to support idempotent initialization is if
    * it is designed to be used via the singleton pattern, with a
    * #GObjectClass.constructor that sometimes returns an existing instance.
-   * In this pattern, a caller would expect to be able to call [Gio.Initable.init_]
-   * on the result of [GObject.ObjectG.new_], regardless of whether it is in fact a new
+   * In this pattern, a caller would expect to be able to call [gio.initable.Initable.init_]
+   * on the result of [gobject.object.ObjectG.new_], regardless of whether it is in fact a new
    * instance.
    * Params:
    *   cancellable = optional #GCancellable object, %NULL to ignore.

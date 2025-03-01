@@ -1,6 +1,6 @@
 module gtksource.region_iter;
 
-import gid.gid;
+import gid.global;
 import gtk.text_iter;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -8,7 +8,7 @@ import gtksource.types;
 
 /**
  * An opaque datatype.
- * Ignore all its fields and initialize the iter with [GtkSource.Region.getStartRegionIter].
+ * Ignore all its fields and initialize the iter with [gtksource.region.Region.getStartRegionIter].
  */
 class RegionIter
 {

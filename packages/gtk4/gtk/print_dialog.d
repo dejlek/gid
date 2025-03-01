@@ -1,6 +1,6 @@
 module gtk.print_dialog;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -22,9 +22,9 @@ import gtk.window;
  * A `GtkPrintDialog` object collects the arguments that
  * are needed to present a print dialog to the user, such
  * as a title for the dialog and whether it should be modal.
- * The dialog is shown with the [Gtk.PrintDialog.setup] function.
- * The actual printing can be done with [Gtk.PrintDialog.print] or
- * [Gtk.PrintDialog.printFile]. These APIs follows the GIO async pattern,
+ * The dialog is shown with the [gtk.print_dialog.PrintDialog.setup] function.
+ * The actual printing can be done with [gtk.print_dialog.PrintDialog.print] or
+ * [gtk.print_dialog.PrintDialog.printFile]. These APIs follows the GIO async pattern,
  * and the results can be obtained by calling the corresponding finish methods.
  */
 class PrintDialog : ObjectG
@@ -125,7 +125,7 @@ class PrintDialog : ObjectG
    * If you pass `NULL` as setup, then this method will present a print dialog.
    * Otherwise, it will attempt to print directly, without user interaction.
    * The callback will be called when the printing is done. It should call
-   * [Gtk.PrintDialog.printFinish] to obtain the results.
+   * [gtk.print_dialog.PrintDialog.printFinish] to obtain the results.
    * Params:
    *   parent = the parent `GtkWindow`
    *   setup = the `GtkPrintSetup` to use
@@ -152,7 +152,7 @@ class PrintDialog : ObjectG
    * If you pass `NULL` as setup, then this method will present a print dialog.
    * Otherwise, it will attempt to print directly, without user interaction.
    * The callback will be called when the printing is done. It should call
-   * [Gtk.PrintDialog.printFileFinish] to obtain the results.
+   * [gtk.print_dialog.PrintDialog.printFileFinish] to obtain the results.
    * Params:
    *   parent = the parent `GtkWindow`
    *   setup = the `GtkPrintSetup` to use
@@ -176,7 +176,7 @@ class PrintDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.PrintDialog.printFile] call and
+   * Finishes the [gtk.print_dialog.PrintDialog.printFile] call and
    * returns the results.
    * Params:
    *   result = a `GAsyncResult`
@@ -193,19 +193,19 @@ class PrintDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.PrintDialog.print] call and
+   * Finishes the [gtk.print_dialog.PrintDialog.print] call and
    * returns the results.
    * If the call was successful, the content to be printed should be
    * written to the returned output stream. Otherwise, `NULL` is returned.
    * The overall results of the print operation will be returned in the
-   * [Gio.OutputStream.close] call, so if you are interested in the
+   * [gio.output_stream.OutputStream.close] call, so if you are interested in the
    * results, you need to explicitly close the output stream $(LPAREN)it will be
    * closed automatically if you just unref it$(RPAREN). Be aware that the close
    * call may not be instant as it operation will for the printer to finish
    * printing.
    * Params:
    *   result = a `GAsyncResult`
-   * Returns: a [Gio.OutputStream]
+   * Returns: a [gio.output_stream.OutputStream]
    */
   OutputStream printFinish(AsyncResult result)
   {
@@ -221,7 +221,7 @@ class PrintDialog : ObjectG
   /**
    * Sets the label that will be shown on the
    * accept button of the print dialog shown for
-   * [Gtk.PrintDialog.setup].
+   * [gtk.print_dialog.PrintDialog.setup].
    * Params:
    *   acceptLabel = the new accept label
    */
@@ -278,13 +278,13 @@ class PrintDialog : ObjectG
    * This function presents a print dialog to let the user select a printer,
    * and set up print settings and page setup.
    * The callback will be called when the dialog is dismissed.
-   * It should call [Gtk.PrintDialog.setupFinish]
-   * to obtain the results in the form of a [Gtk.PrintSetup],
-   * that can then be passed to [Gtk.PrintDialog.print]
-   * or [Gtk.PrintDialog.printFile].
+   * It should call [gtk.print_dialog.PrintDialog.setupFinish]
+   * to obtain the results in the form of a [gtk.print_setup.PrintSetup],
+   * that can then be passed to [gtk.print_dialog.PrintDialog.print]
+   * or [gtk.print_dialog.PrintDialog.printFile].
    * One possible use for this method is to have the user select a printer,
    * then show a page setup UI in the application $(LPAREN)e.g. to arrange images
-   * on a page$(RPAREN), then call [Gtk.PrintDialog.print] on self
+   * on a page$(RPAREN), then call [gtk.print_dialog.PrintDialog.print] on self
    * to do the printing without further user interaction.
    * Params:
    *   parent = the parent `GtkWindow`
@@ -307,8 +307,8 @@ class PrintDialog : ObjectG
   }
 
   /**
-   * Finishes the [Gtk.PrintDialog.setup] call.
-   * If the call was successful, it returns a [Gtk.PrintSetup]
+   * Finishes the [gtk.print_dialog.PrintDialog.setup] call.
+   * If the call was successful, it returns a [gtk.print_setup.PrintSetup]
    * which contains the print settings and page setup information that
    * will be used to print.
    * Params:

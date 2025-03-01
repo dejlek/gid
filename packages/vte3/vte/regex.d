@@ -1,6 +1,6 @@
 module vte.regex;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.boxed;
 import vte.c.functions;
@@ -33,7 +33,7 @@ class Regex : Boxed
 
   /**
    * Compiles pattern into a regex for use as a match regex
-   * with [Vte.Terminal.matchAddRegex] or
+   * with [vte.terminal.Terminal.matchAddRegex] or
    * vte_terminal_event_check_regex_simple$(LPAREN)$(RPAREN).
    * See man:pcre2pattern$(LPAREN)3$(RPAREN) for information
    * about the supported regex language, and man:pcre2api$(LPAREN)3$(RPAREN) for
@@ -61,7 +61,7 @@ class Regex : Boxed
 
   /**
    * Compiles pattern into a regex for use as a match regex
-   * with [Vte.Terminal.matchAddRegex] or
+   * with [vte.terminal.Terminal.matchAddRegex] or
    * vte_terminal_event_check_regex_simple$(LPAREN)$(RPAREN).
    * See man:pcre2pattern$(LPAREN)3$(RPAREN) for information
    * about the supported regex language, and man:pcre2api$(LPAREN)3$(RPAREN) for
@@ -93,7 +93,7 @@ class Regex : Boxed
 
   /**
    * Compiles pattern into a regex for use as a search regex
-   * with [Vte.Terminal.searchSetRegex].
+   * with [vte.terminal.Terminal.searchSetRegex].
    * See man:pcre2pattern$(LPAREN)3$(RPAREN) for information
    * about the supported regex language, and man:pcre2api$(LPAREN)3$(RPAREN) for
    * information about the supported flags.
@@ -120,7 +120,7 @@ class Regex : Boxed
 
   /**
    * Compiles pattern into a regex for use as a search regex
-   * with [Vte.Terminal.searchSetRegex].
+   * with [vte.terminal.Terminal.searchSetRegex].
    * See man:pcre2pattern$(LPAREN)3$(RPAREN) for information
    * about the supported regex language, and man:pcre2api$(LPAREN)3$(RPAREN) for
    * information about the supported flags and extra_flags.

@@ -1,6 +1,6 @@
 module gtk.named_action;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.shortcut_action;
@@ -32,7 +32,7 @@ class NamedAction : ShortcutAction
    * Creates an action that when activated, activates
    * the named action on the widget.
    * It also passes the given arguments to it.
-   * See [Gtk.Widget.insertActionGroup] for
+   * See [gtk.widget.Widget.insertActionGroup] for
    * how to add actions to widgets.
    * Params:
    *   name = the detailed name of the action

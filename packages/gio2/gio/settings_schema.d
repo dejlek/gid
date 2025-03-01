@@ -1,6 +1,6 @@
 module gio.settings_schema;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.settings_schema_key;
@@ -8,7 +8,7 @@ import gio.types;
 import gobject.boxed;
 
 /**
- * The [Gio.SettingsSchemaSource] and `GSettingsSchema` APIs provide a
+ * The [gio.settings_schema_source.SettingsSchemaSource] and `GSettingsSchema` APIs provide a
  * mechanism for advanced control over the loading of schemas and a
  * mechanism for introspecting their content.
  * Plugin loading systems that wish to provide plugins a way to access
@@ -16,7 +16,7 @@ import gobject.boxed;
  * settings visible to GSettings.  Typically, a plugin will want to ship
  * the schema along with itself and it won't be installed into the
  * standard system directories for schemas.
- * [Gio.SettingsSchemaSource] provides a mechanism for dealing with this
+ * [gio.settings_schema_source.SettingsSchemaSource] provides a mechanism for dealing with this
  * by allowing the creation of a new ‘schema source’ from which schemas can
  * be acquired.  This schema source can then become part of the metadata
  * associated with the plugin and queried whenever the plugin requires
@@ -118,7 +118,7 @@ class SettingsSchema : Boxed
   /**
    * Gets the key named name from schema.
    * It is a programmer error to request a key that does not exist.  See
-   * [Gio.SettingsSchema.listKeys].
+   * [gio.settings_schema.SettingsSchema.listKeys].
    * Params:
    *   name = the name of a key
    * Returns: the #GSettingsSchemaKey for name
@@ -166,7 +166,7 @@ class SettingsSchema : Boxed
 
   /**
    * Gets the list of children in schema.
-   * You should free the return value with [GLib.Global.strfreev] when you are done
+   * You should free the return value with [glib.global.strfreev] when you are done
    * with it.
    * Returns: a list of
    *   the children on settings, in no defined order

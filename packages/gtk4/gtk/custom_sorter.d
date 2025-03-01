@@ -1,6 +1,6 @@
 module gtk.custom_sorter;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.sorter;

@@ -4,7 +4,7 @@ public import atk.image_iface_proxy;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.gid;
+import gid.global;
 
 /**
  * The ATK Interface implemented by components

@@ -1,7 +1,7 @@
 module gsk.color_node;
 
 import gdk.rgba;
-import gid.gid;
+import gid.global;
 import graphene.rect;
 import gsk.c.functions;
 import gsk.c.types;

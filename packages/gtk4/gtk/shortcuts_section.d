@@ -1,6 +1,6 @@
 module gtk.shortcuts_section;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -21,19 +21,19 @@ import gtk.types;
  * for a major application mode.
  * If your application needs multiple sections, you should give each
  * section a unique property@Gtk.ShortcutsSection:section-name and
- * a [Gtk.ShortcutsSection.title] that can be shown in the
- * section selector of the [Gtk.ShortcutsWindow].
+ * a [gtk.shortcuts_section.ShortcutsSection.utf8] that can be shown in the
+ * section selector of the [gtk.shortcuts_window.ShortcutsWindow].
  * The property@Gtk.ShortcutsSection:max-height property can be used
  * to influence how the groups in the section are distributed over pages
  * and columns.
- * This widget is only meant to be used with [Gtk.ShortcutsWindow].
+ * This widget is only meant to be used with [gtk.shortcuts_window.ShortcutsWindow].
  * The recommended way to construct a `GtkShortcutsSection` is with
- * [Gtk.Builder], by using the `<child>` tag to populate a
- * `GtkShortcutsSection` with one or more [Gtk.ShortcutsGroup]
- * instances, which in turn contain one or more [Gtk.ShortcutsShortcut]
+ * [gtk.builder.Builder], by using the `<child>` tag to populate a
+ * `GtkShortcutsSection` with one or more [gtk.shortcuts_group.ShortcutsGroup]
+ * instances, which in turn contain one or more [gtk.shortcuts_shortcut.ShortcutsShortcut]
  * objects.
  * If you need to add a group programmatically, use
- * [Gtk.ShortcutsSection.addGroup].
+ * [gtk.shortcuts_section.ShortcutsSection.addGroup].
  */
 class ShortcutsSection : Box
 {
@@ -56,7 +56,7 @@ class ShortcutsSection : Box
 
   /**
    * Adds a group to the shortcuts section.
-   * This is the programmatic equivalent to using [Gtk.Builder] and a
+   * This is the programmatic equivalent to using [gtk.builder.Builder] and a
    * `<child>` tag to add the child.
    * Adding children with the `GtkBox` API is not appropriate, as
    * `GtkShortcutsSection` manages its children internally.

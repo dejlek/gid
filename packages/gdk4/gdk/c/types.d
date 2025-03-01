@@ -779,7 +779,7 @@ enum GdkInputSource
 
 /**
  * Describes how well an event matches a given keyval and modifiers.
- * `GdkKeyMatch` values are returned by [Gdk.KeyEvent.matches].
+ * `GdkKeyMatch` values are returned by [gdk.key_event.KeyEvent.matches].
  */
 enum GdkKeyMatch
 {
@@ -1167,7 +1167,7 @@ enum GdkScrollDirection
 
   /**
    * the scrolling is determined by the delta values
-   * in scroll events. See [Gdk.ScrollEvent.getDeltas]
+   * in scroll events. See [gdk.scroll_event.ScrollEvent.getDeltas]
    */
   Smooth = 4,
 }
@@ -1546,7 +1546,7 @@ struct GdkButtonEvent;
  * `GdkCairoContext` is an object representing the platform-specific
  * draw context.
  * `GdkCairoContext`s are created for a surface using
- * [Gdk.Surface.createCairoContext], and the context
+ * [gdk.surface.Surface.createCairoContext], and the context
  * can then be used to draw on that surface.
  */
 struct GdkCairoContext;
@@ -1554,18 +1554,18 @@ struct GdkCairoContext;
 /**
  * The `GdkClipboard` object represents data shared between applications or
  * inside an application.
- * To get a `GdkClipboard` object, use [Gdk.Display.getClipboard] or
- * [Gdk.Display.getPrimaryClipboard]. You can find out about the data
+ * To get a `GdkClipboard` object, use [gdk.display.Display.getClipboard] or
+ * [gdk.display.Display.getPrimaryClipboard]. You can find out about the data
  * that is currently available in a clipboard using
- * [Gdk.Clipboard.getFormats].
+ * [gdk.clipboard.Clipboard.getFormats].
  * To make text or image data available in a clipboard, use
- * [Gdk.Clipboard.setText] or [Gdk.Clipboard.setTexture].
- * For other data, you can use [Gdk.Clipboard.setContent], which
- * takes a [Gdk.ContentProvider] object.
+ * [gdk.clipboard.Clipboard.setText] or [gdk.clipboard.Clipboard.setTexture].
+ * For other data, you can use [gdk.clipboard.Clipboard.setContent], which
+ * takes a [gdk.content_provider.ContentProvider] object.
  * To read textual or image data from a clipboard, use
- * [Gdk.Clipboard.readTextAsync] or
- * [Gdk.Clipboard.readTextureAsync]. For other data, use
- * [Gdk.Clipboard.readAsync], which provides a `GInputStream` object.
+ * [gdk.clipboard.Clipboard.readTextAsync] or
+ * [gdk.clipboard.Clipboard.readTextureAsync]. For other data, use
+ * [gdk.clipboard.Clipboard.readAsync], which provides a `GInputStream` object.
  */
 struct GdkClipboard;
 
@@ -1577,7 +1577,7 @@ struct GdkClipboard;
  * GTK provides serializers and deserializers for common data types
  * such as text, colors, images or file lists. To register your own
  * deserialization functions, use func@content_register_deserializer.
- * Also see [Gdk.ContentSerializer].
+ * Also see [gdk.content_serializer.ContentSerializer].
  */
 struct GdkContentDeserializer;
 
@@ -1586,28 +1586,28 @@ struct GdkContentDeserializer;
  * format of content.
  * You will encounter `GdkContentFormats` when interacting with objects
  * controlling operations that pass data between different widgets, window
- * or application, like [Gdk.Drag], [Gdk.Drop],
- * [Gdk.Clipboard] or [Gdk.ContentProvider].
+ * or application, like [gdk.drag.Drag], [gdk.drop.Drop],
+ * [gdk.clipboard.Clipboard] or [gdk.content_provider.ContentProvider].
  * GDK supports content in 2 forms: `GType` and mime type.
  * Using `GTypes` is meant only for in-process content transfers. Mime types
  * are meant to be used for data passing both in-process and out-of-process.
  * The details of how data is passed is described in the documentation of
  * the actual implementations. To transform between the two forms,
- * [Gdk.ContentSerializer] and [Gdk.ContentDeserializer] are used.
+ * [gdk.content_serializer.ContentSerializer] and [gdk.content_deserializer.ContentDeserializer] are used.
  * A `GdkContentFormats` describes a set of possible formats content can be
  * exchanged in. It is assumed that this set is ordered. `GTypes` are more
  * important than mime types. Order between different `GTypes` or mime types
  * is the order they were added in, most important first. Functions that
- * care about order, such as [Gdk.ContentFormats.union_], will describe
+ * care about order, such as [gdk.content_formats.ContentFormats.union_], will describe
  * in their documentation how they interpret that order, though in general the
  * order of the first argument is considered the primary order of the result,
  * followed by the order of further arguments.
- * For debugging purposes, the function [Gdk.ContentFormats.toString_]
+ * For debugging purposes, the function [gdk.content_formats.ContentFormats.toString_]
  * exists. It will print a comma-separated list of formats from most important
  * to least important.
  * `GdkContentFormats` is an immutable struct. After creation, you cannot change
  * the types it represents. Instead, new `GdkContentFormats` have to be created.
- * The [Gdk.ContentFormatsBuilder] structure is meant to help in this
+ * The [gdk.content_formats_builder.ContentFormatsBuilder] structure is meant to help in this
  * endeavor.
  */
 struct GdkContentFormats;
@@ -1621,10 +1621,10 @@ struct GdkContentFormatsBuilder;
 /**
  * A `GdkContentProvider` is used to provide content for the clipboard or
  * for drag-and-drop operations in a number of formats.
- * To create a `GdkContentProvider`, use [Gdk.ContentProvider.newForValue]
- * or [Gdk.ContentProvider.newForBytes].
+ * To create a `GdkContentProvider`, use [gdk.content_provider.ContentProvider.newForValue]
+ * or [gdk.content_provider.ContentProvider.newForBytes].
  * GDK knows how to handle common text and image formats out-of-the-box. See
- * [Gdk.ContentSerializer] and [Gdk.ContentDeserializer] if you want
+ * [gdk.content_serializer.ContentSerializer] and [gdk.content_deserializer.ContentDeserializer] if you want
  * to add support for application-specific data formats.
  */
 struct GdkContentProvider
@@ -1670,7 +1670,7 @@ struct GdkContentProviderClass
  * GTK provides serializers and deserializers for common data types
  * such as text, colors, images or file lists. To register your own
  * serialization functions, use func@Gdk.content_register_serializer.
- * Also see [Gdk.ContentDeserializer].
+ * Also see [gdk.content_deserializer.ContentDeserializer].
  */
 struct GdkContentSerializer;
 
@@ -1685,24 +1685,24 @@ struct GdkCrossingEvent;
  * to modify them later. You should create a new cursor when you want to change
  * something about it.
  * Cursors by themselves are not very interesting: they must be bound to a
- * window for users to see them. This is done with [Gdk.Surface.setCursor]
- * or [Gdk.Surface.setDeviceCursor]. Applications will typically
- * use higher-level GTK functions such as [[Gtk.Widget.setCursor]](../gtk4/method.Widget.set_cursor.html)
+ * window for users to see them. This is done with [gdk.surface.Surface.setCursor]
+ * or [gdk.surface.Surface.setDeviceCursor]. Applications will typically
+ * use higher-level GTK functions such as [[gtk.widget.Widget.setCursor]](../gtk4/method.Widget.set_cursor.html)
  * instead.
- * Cursors are not bound to a given [Gdk.Display], so they can be shared.
+ * Cursors are not bound to a given [gdk.display.Display], so they can be shared.
  * However, the appearance of cursors may vary when used on different
  * platforms.
  * ## Named and texture cursors
  * There are multiple ways to create cursors. The platform's own cursors
- * can be created with [Gdk.Cursor.newFromName]. That function lists
+ * can be created with [gdk.cursor.Cursor.newFromName]. That function lists
  * the commonly available names that are shared with the CSS specification.
  * Other names may be available, depending on the platform in use. On some
  * platforms, what images are used for named cursors may be influenced by
  * the cursor theme.
- * Another option to create a cursor is to use [Gdk.Cursor.newFromTexture]
+ * Another option to create a cursor is to use [gdk.cursor.Cursor.newFromTexture]
  * and provide an image to use for the cursor.
  * To ease work with unsupported cursors, a fallback cursor can be provided.
- * If a [Gdk.Surface] cannot use a cursor because of the reasons mentioned
+ * If a [gdk.surface.Surface] cannot use a cursor because of the reasons mentioned
  * above, it will try the fallback cursor. Fallback cursors can themselves have
  * fallback cursors again, so it is possible to provide a chain of progressively
  * easier to support cursors. If none of the provided cursors can be supported,
@@ -1723,7 +1723,7 @@ struct GdkDeleteEvent;
 /**
  * The `GdkDevice` object represents an input device, such
  * as a keyboard, a mouse, or a touchpad.
- * See the [Gdk.Seat] documentation for more information
+ * See the [gdk.seat.Seat] documentation for more information
  * about the various kinds of devices, and their relationships.
  */
 struct GdkDevice;
@@ -1733,15 +1733,15 @@ struct GdkDevice;
  * %GDK_SOURCE_TABLET_PAD
  * It allows querying the features provided by the pad device.
  * Tablet pads may contain one or more groups, each containing a subset
- * of the buttons/rings/strips available. [Gdk.DevicePad.getNGroups]
- * can be used to obtain the number of groups, [Gdk.DevicePad.getNFeatures]
- * and [Gdk.DevicePad.getFeatureGroup] can be combined to find out
+ * of the buttons/rings/strips available. [gdk.device_pad.DevicePad.getNGroups]
+ * can be used to obtain the number of groups, [gdk.device_pad.DevicePad.getNFeatures]
+ * and [gdk.device_pad.DevicePad.getFeatureGroup] can be combined to find out
  * the number of buttons/rings/strips the device has, and how are they grouped.
  * Each of those groups have different modes, which may be used to map each
  * individual pad feature to multiple actions. Only one mode is effective
  * $(LPAREN)current$(RPAREN) for each given group, different groups may have different
  * current modes. The number of available modes in a group can be found
- * out through [Gdk.DevicePad.getGroupNModes], and the current mode
+ * out through [gdk.device_pad.DevicePad.getGroupNModes], and the current mode
  * for a given group will be notified through events of type `GDK_PAD_GROUP_MODE`.
  */
 struct GdkDevicePad;
@@ -1759,18 +1759,18 @@ struct GdkDeviceTool;
  * - To manage and provide information about input devices $(LPAREN)pointers, keyboards, etc$(RPAREN)
  * - To manage and provide information about output devices $(LPAREN)monitors, projectors, etc$(RPAREN)
  * Most of the input device handling has been factored out into separate
- * [Gdk.Seat] objects. Every display has a one or more seats, which
- * can be accessed with [Gdk.Display.getDefaultSeat] and
- * [Gdk.Display.listSeats].
- * Output devices are represented by [Gdk.MonitorG] objects, which can
- * be accessed with [Gdk.Display.getMonitorAtSurface] and similar APIs.
+ * [gdk.seat.Seat] objects. Every display has a one or more seats, which
+ * can be accessed with [gdk.display.Display.getDefaultSeat] and
+ * [gdk.display.Display.listSeats].
+ * Output devices are represented by [gdk.monitor.MonitorG] objects, which can
+ * be accessed with [gdk.display.Display.getMonitorAtSurface] and similar APIs.
  */
 struct GdkDisplay;
 
 /**
  * A singleton object that offers notification when displays appear or
  * disappear.
- * You can use [Gdk.DisplayManager.get] to obtain the `GdkDisplayManager`
+ * You can use [gdk.display_manager.DisplayManager.get] to obtain the `GdkDisplayManager`
  * singleton, but that should be rarely necessary. Typically, initializing
  * GTK opens a display that you can work with without ever accessing the
  * `GdkDisplayManager`.
@@ -1811,16 +1811,16 @@ struct GdkDisplayManager;
  * The `GdkDmabufFormats` struct provides information about
  * supported DMA buffer formats.
  * You can query whether a given format is supported with
- * [Gdk.DmabufFormats.contains] and you can iterate
+ * [gdk.dmabuf_formats.DmabufFormats.contains] and you can iterate
  * over the list of all supported formats with
- * [Gdk.DmabufFormats.getNFormats] and
- * [Gdk.DmabufFormats.getFormat].
+ * [gdk.dmabuf_formats.DmabufFormats.getNFormats] and
+ * [gdk.dmabuf_formats.DmabufFormats.getFormat].
  * The list of supported formats is sorted by preference,
  * with the best formats coming first.
  * The list may contains $(LPAREN)format, modifier$(RPAREN) pairs where the modifier
  * is `DMA_FORMAT_MOD_INVALID`, indicating that **_implicit modifiers_**
  * may be used with this format.
- * See [Gdk.DmabufTextureBuilder] for more information
+ * See [gdk.dmabuf_texture_builder.DmabufTextureBuilder] for more information
  * about DMA buffers.
  * Note that DMA buffers only exist on Linux.
  */
@@ -1829,13 +1829,13 @@ struct GdkDmabufFormats;
 /**
  * A `GdkTexture` representing a DMA buffer.
  * To create a `GdkDmabufTexture`, use the auxiliary
- * [Gdk.DmabufTextureBuilder] object.
+ * [gdk.dmabuf_texture_builder.DmabufTextureBuilder] object.
  * Dma-buf textures can only be created on Linux.
  */
 struct GdkDmabufTexture;
 
 /**
- * `GdkDmabufTextureBuilder` is a builder used to construct [Gdk.Texture]
+ * `GdkDmabufTextureBuilder` is a builder used to construct [gdk.texture.Texture]
  * objects from DMA buffers.
  * DMA buffers are commonly called **_dma-bufs_**.
  * DMA buffers are a feature of the Linux kernel to enable efficient buffer and
@@ -1864,7 +1864,7 @@ struct GdkDmabufTexture;
  * instead return `DMA_FORMAT_MOD_INVALID` to indicate that their modifier is **_implicit_**.
  * GTK tries to accommodate this situation by accepting `DMA_FORMAT_MOD_INVALID` as modifier.
  * The operation of `GdkDmabufTextureBuilder` is quite simple: Create a texture builder,
- * set all the necessary properties, and then call [Gdk.DmabufTextureBuilder.build]
+ * set all the necessary properties, and then call [gdk.dmabuf_texture_builder.DmabufTextureBuilder.build]
  * to create the new texture.
  * The required properties for a dma-buf texture are
  * * The width and height in pixels
@@ -1885,7 +1885,7 @@ struct GdkDmabufTextureClass;
 /**
  * The `GdkDrag` object represents the source of an ongoing DND operation.
  * A `GdkDrag` is created when a drag is started, and stays alive for duration of
- * the DND operation. After a drag has been started with [Gdk.Drag.begin],
+ * the DND operation. After a drag has been started with [gdk.drag.Drag.begin],
  * the caller gets informed about the status of the ongoing drag operation
  * with signals on the `GdkDrag` object.
  * GTK provides a higher level abstraction based on top of these functions,
@@ -1913,7 +1913,7 @@ struct GdkDragSurfaceSize;
 /**
  * Base class for objects implementing different rendering methods.
  * `GdkDrawContext` is the base object used by contexts implementing different
- * rendering methods, such as [Gdk.CairoContext] or [Gdk.GLContext].
+ * rendering methods, such as [gdk.cairo_context.CairoContext] or [gdk.glcontext.GLContext].
  * It provides shared functionality between those contexts.
  * You will always interact with one of those subclasses.
  * A `GdkDrawContext` is always associated with a single toplevel surface.
@@ -1925,10 +1925,10 @@ struct GdkDrawContext;
  * Possible drop sites get informed about the status of the ongoing drag
  * operation with events of type %GDK_DRAG_ENTER, %GDK_DRAG_LEAVE,
  * %GDK_DRAG_MOTION and %GDK_DROP_START. The `GdkDrop` object can be obtained
- * from these [Gdk.Event] types using [Gdk.DNDEvent.getDrop].
+ * from these [gdk.event.Event] types using [gdk.dndevent.DNDEvent.getDrop].
  * The actual data transfer is initiated from the target side via an async
  * read, using one of the `GdkDrop` methods for this purpose:
- * [Gdk.Drop.readAsync] or [Gdk.Drop.readValueAsync].
+ * [gdk.drop.Drop.readAsync] or [gdk.drop.Drop.readValueAsync].
  * GTK provides a higher level abstraction based on top of these functions,
  * and so they are not normally needed in GTK applications. See the
  * "Drag and Drop" section of the GTK documentation for more information.
@@ -1972,22 +1972,22 @@ struct GdkFocusEvent;
  * `GdkFrameClock` is designed to be compatible with an OpenGL-based implementation
  * or with mozRequestAnimationFrame in Firefox, for example.
  * A frame clock is idle until someone requests a frame with
- * [Gdk.FrameClock.requestPhase]. At some later point that makes sense
+ * [gdk.frame_clock.FrameClock.requestPhase]. At some later point that makes sense
  * for the synchronization being implemented, the clock will process a frame and
  * emit signals for each phase that has been requested. $(LPAREN)See the signals of the
  * `GdkFrameClock` class for documentation of the phases.
- * %GDK_FRAME_CLOCK_PHASE_UPDATE and the [Gdk.FrameClock.update] signal
+ * %GDK_FRAME_CLOCK_PHASE_UPDATE and the [gdk.frame_clock.FrameClock.update] signal
  * are most interesting for application writers, and are used to update the
- * animations, using the frame time given by [Gdk.FrameClock.getFrameTime].
+ * animations, using the frame time given by [gdk.frame_clock.FrameClock.getFrameTime].
  * The frame time is reported in microseconds and generally in the same
- * timescale as [GLib.Global.getMonotonicTime], however, it is not the same
- * as [GLib.Global.getMonotonicTime]. The frame time does not advance during
+ * timescale as [glib.global.getMonotonicTime], however, it is not the same
+ * as [glib.global.getMonotonicTime]. The frame time does not advance during
  * the time a frame is being painted, and outside of a frame, an attempt
- * is made so that all calls to [Gdk.FrameClock.getFrameTime] that
+ * is made so that all calls to [gdk.frame_clock.FrameClock.getFrameTime] that
  * are called at a “similar” time get the same value. This means that
  * if different animations are timed by looking at the difference in
- * time between an initial value from [Gdk.FrameClock.getFrameTime]
- * and the value inside the [Gdk.FrameClock.update] signal of the clock,
+ * time between an initial value from [gdk.frame_clock.FrameClock.getFrameTime]
+ * and the value inside the [gdk.frame_clock.FrameClock.update] signal of the clock,
  * they will stay exactly synchronized.
  */
 struct GdkFrameClock;
@@ -1999,8 +1999,8 @@ struct GdkFrameClockPrivate;
 /**
  * A `GdkFrameTimings` object holds timing information for a single frame
  * of the application’s displays.
- * To retrieve `GdkFrameTimings` objects, use [Gdk.FrameClock.getTimings]
- * or [Gdk.FrameClock.getCurrentTimings]. The information in
+ * To retrieve `GdkFrameTimings` objects, use [gdk.frame_clock.FrameClock.getTimings]
+ * or [gdk.frame_clock.FrameClock.getCurrentTimings]. The information in
  * `GdkFrameTimings` is useful for precise synchronization of video with
  * the event or audio streams, and for measuring quality metrics for the
  * application’s display, such as latency and jitter.
@@ -2011,7 +2011,7 @@ struct GdkFrameTimings;
  * `GdkGLContext` is an object representing a platform-specific
  * OpenGL draw context.
  * `GdkGLContext`s are created for a surface using
- * [Gdk.Surface.createGlContext], and the context will match
+ * [gdk.surface.Surface.createGlContext], and the context will match
  * the characteristics of the surface.
  * A `GdkGLContext` is not tied to any particular normal framebuffer.
  * For instance, it cannot draw to the surface back buffer. The GDK
@@ -2026,11 +2026,11 @@ struct GdkFrameTimings;
  * ## Creating a new OpenGL context
  * In order to create a new `GdkGLContext` instance you need a `GdkSurface`,
  * which you typically get during the realize call of a widget.
- * A `GdkGLContext` is not realized until either [Gdk.GLContext.makeCurrent]
- * or [Gdk.GLContext.realize] is called. It is possible to specify
+ * A `GdkGLContext` is not realized until either [gdk.glcontext.GLContext.makeCurrent]
+ * or [gdk.glcontext.GLContext.realize] is called. It is possible to specify
  * details of the GL context like the OpenGL version to be used, or whether
  * the GL context should have extra state validation enabled after calling
- * [Gdk.Surface.createGlContext] by calling [Gdk.GLContext.realize].
+ * [gdk.surface.Surface.createGlContext] by calling [gdk.glcontext.GLContext.realize].
  * If the realization fails you have the option to change the settings of
  * the `GdkGLContext` and try again.
  * ## Using a GdkGLContext
@@ -2043,8 +2043,8 @@ struct GdkFrameTimings;
  * ```
  * You can now perform your drawing using OpenGL commands.
  * You can check which `GdkGLContext` is the current one by using
- * [Gdk.GLContext.getCurrent]; you can also unset any `GdkGLContext`
- * that is currently set by calling [Gdk.GLContext.clearCurrent].
+ * [gdk.glcontext.GLContext.getCurrent]; you can also unset any `GdkGLContext`
+ * that is currently set by calling [gdk.glcontext.GLContext.clearCurrent].
  */
 struct GdkGLContext;
 
@@ -2054,13 +2054,13 @@ struct GdkGLContext;
 struct GdkGLTexture;
 
 /**
- * `GdkGLTextureBuilder` is a builder used to construct [Gdk.Texture] objects from
+ * `GdkGLTextureBuilder` is a builder used to construct [gdk.texture.Texture] objects from
  * GL textures.
  * The operation is quite simple: Create a texture builder, set all the necessary
- * properties - keep in mind that the properties [Gdk.GLTextureBuilder.context],
- * [Gdk.GLTextureBuilder.id], [Gdk.GLTextureBuilder.width], and
- * [Gdk.GLTextureBuilder.height] are mandatory - and then call
- * [Gdk.GLTextureBuilder.build] to create the new texture.
+ * properties - keep in mind that the properties [gdk.gltexture_builder.GLTextureBuilder.GLContext],
+ * [gdk.gltexture_builder.GLTextureBuilder.guint], [gdk.gltexture_builder.GLTextureBuilder.gint], and
+ * [gdk.gltexture_builder.GLTextureBuilder.gint] are mandatory - and then call
+ * [gdk.gltexture_builder.GLTextureBuilder.build] to create the new texture.
  * `GdkGLTextureBuilder` can be used for quick one-shot construction of
  * textures as well as kept around and reused to construct multiple textures.
  */
@@ -2123,8 +2123,8 @@ struct GdkMonitorClass;
  * `GdkMonitor` objects represent the individual outputs that are
  * associated with a `GdkDisplay`.
  * `GdkDisplay` keeps a `GListModel` to enumerate and monitor
- * monitors with [Gdk.Display.getMonitors]. You can use
- * [Gdk.Display.getMonitorAtSurface] to find a particular
+ * monitors with [gdk.display.Display.getMonitors]. You can use
+ * [gdk.display.Display.getMonitorAtSurface] to find a particular
  * monitor.
  */
 struct GdkMonitor;
@@ -2149,36 +2149,36 @@ struct GdkPadEvent;
  * [HTML/CSS Paint Sources](https://www.w3.org/TR/css-images-4/#paint-source),
  * or [SVG Paint Servers](https://www.w3.org/TR/SVG2/pservers.html).
  * A `GdkPaintable` can be snapshot at any time and size using
- * [Gdk.Paintable.snapshot]. How the paintable interprets that size and
+ * [gdk.paintable.Paintable.snapshot]. How the paintable interprets that size and
  * if it scales or centers itself into the given rectangle is implementation
  * defined, though if you are implementing a `GdkPaintable` and don't know what
  * to do, it is suggested that you scale your paintable ignoring any potential
  * aspect ratio.
- * The contents that a `GdkPaintable` produces may depend on the [Gdk.Snapshot]
+ * The contents that a `GdkPaintable` produces may depend on the [gdk.snapshot.Snapshot]
  * passed to it. For example, paintables may decide to use more detailed images
  * on higher resolution screens or when OpenGL is available. A `GdkPaintable`
  * will however always produce the same output for the same snapshot.
  * A `GdkPaintable` may change its contents, meaning that it will now produce
  * a different output with the same snapshot. Once that happens, it will call
- * [Gdk.Paintable.invalidateContents] which will emit the
+ * [gdk.paintable.Paintable.invalidateContents] which will emit the
  * signal@Gdk.Paintable::invalidate-contents signal. If a paintable is known
  * to never change its contents, it will set the %GDK_PAINTABLE_STATIC_CONTENTS
  * flag. If a consumer cannot deal with changing contents, it may call
- * [Gdk.Paintable.getCurrentImage] which will return a static
+ * [gdk.paintable.Paintable.getCurrentImage] which will return a static
  * paintable and use that.
  * A paintable can report an intrinsic $(LPAREN)or preferred$(RPAREN) size or aspect ratio it
  * wishes to be rendered at, though it doesn't have to. Consumers of the interface
  * can use this information to layout thepaintable appropriately. Just like the
  * contents, the size of a paintable can change. A paintable will indicate this
- * by calling [Gdk.Paintable.invalidateSize] which will emit the
+ * by calling [gdk.paintable.Paintable.invalidateSize] which will emit the
  * signal@Gdk.Paintable::invalidate-size signal. And just like for contents,
  * if a paintable is known to never change its size, it will set the
  * %GDK_PAINTABLE_STATIC_SIZE flag.
  * Besides API for applications, there are some functions that are only
  * useful for implementing subclasses and should not be used by applications:
- * [Gdk.Paintable.invalidateContents],
- * [Gdk.Paintable.invalidateSize],
- * [Gdk.Paintable.newEmpty].
+ * [gdk.paintable.Paintable.invalidateContents],
+ * [gdk.paintable.Paintable.invalidateSize],
+ * [gdk.paintable.Paintable.newEmpty].
  */
 struct GdkPaintable;
 
@@ -2212,7 +2212,7 @@ struct GdkPaintableInterface
   extern(C) GdkPaintable* function(GdkPaintable* paintable) getCurrentImage;
 
   /**
-   * Get the flags for this instance. See [Gdk.PaintableFlags]
+   * Get the flags for this instance. See [gdk.PaintableFlags]
    * for details.
    */
   extern(C) GdkPaintableFlags function(GdkPaintable* paintable) getFlags;
@@ -2244,7 +2244,7 @@ struct GdkPaintableInterface
  * A `GdkPopup` is a surface that is attached to another surface.
  * The `GdkPopup` is positioned relative to its parent surface.
  * `GdkPopup`s are typically used to implement menus and similar popups.
- * They can be modal, which is indicated by the [Gdk.Popup.autohide]
+ * They can be modal, which is indicated by the [gdk.popup.Popup.gboolean]
  * property.
  */
 struct GdkPopup;
@@ -2253,7 +2253,7 @@ struct GdkPopupInterface;
 
 /**
  * The `GdkPopupLayout` struct contains information that is
- * necessary position a [Gdk.Popup] relative to its parent.
+ * necessary position a [gdk.popup.Popup] relative to its parent.
  * The positioning requires a negotiation with the windowing system,
  * since it depends on external constraints, such as the position of
  * the parent surface, and the screen dimensions.
@@ -2271,8 +2271,8 @@ struct GdkPopupInterface;
  * These hints may be combined.
  * Ultimatively, it is up to the windowing system to determine the position
  * and size of the popup. You can learn about the result by calling
- * [Gdk.Popup.getPositionX], [Gdk.Popup.getPositionY],
- * [Gdk.Popup.getRectAnchor] and [Gdk.Popup.getSurfaceAnchor]
+ * [gdk.popup.Popup.getPositionX], [gdk.popup.Popup.getPositionY],
+ * [gdk.popup.Popup.getRectAnchor] and [gdk.popup.Popup.getSurfaceAnchor]
  * after the popup has been presented. This can be used to adjust the rendering.
  * For example, [GtkPopover](../gtk4/class.Popover.html) changes its arrow position
  * accordingly. But you have to be careful avoid changing the size of the popover,
@@ -2325,8 +2325,8 @@ struct GdkRGBA
  * `cairo_region_t` data type, these are the central types for representing
  * sets of pixels.
  * The intersection of two rectangles can be computed with
- * [Gdk.Rectangle.intersect]; to find the union of two rectangles use
- * [Gdk.Rectangle.union_].
+ * [gdk.rectangle.Rectangle.intersect]; to find the union of two rectangles use
+ * [gdk.rectangle.Rectangle.union_].
  * The `cairo_region_t` type provided by Cairo is usually used for managing
  * non-rectangular clipping of graphical operations.
  * The Graphene library has a number of other data types for regions and
@@ -2381,8 +2381,8 @@ struct GdkSnapshotClass;
  * A `GdkSurface` is a rectangular region on the screen.
  * It’s a low-level object, used to implement high-level objects
  * such as [GtkWindow](../gtk4/class.Window.html).
- * The surfaces you see in practice are either [Gdk.Toplevel] or
- * [Gdk.Popup], and those interfaces provide much of the required
+ * The surfaces you see in practice are either [gdk.toplevel.Toplevel] or
+ * [gdk.popup.Popup], and those interfaces provide much of the required
  * API to interact with these surfaces. Other, more specialized surface
  * types exist, but you will rarely interact with them directly.
  */
@@ -2395,13 +2395,13 @@ struct GdkSurfaceClass;
  * It is primarily meant for pixel data that will not change over
  * multiple frames, and will be used for a long time.
  * There are various ways to create `GdkTexture` objects from a
- * [GdkPixbuf.Pixbuf], or from bytes stored in memory, a file, or a
- * [Gio.Resource].
+ * [gdkpixbuf.pixbuf.Pixbuf], or from bytes stored in memory, a file, or a
+ * [gio.resource.Resource].
  * The ownership of the pixel data is transferred to the `GdkTexture`
- * instance; you can only make a copy of it, via [Gdk.Texture.download].
+ * instance; you can only make a copy of it, via [gdk.texture.Texture.download].
  * `GdkTexture` is an immutable object: That means you cannot change
  * anything about it other than increasing the reference count via
- * [GObject.ObjectG.ref_], and consequently, it is a thread-safe object.
+ * [gobject.object.ObjectG.ref_], and consequently, it is a thread-safe object.
  */
 struct GdkTexture;
 
@@ -2409,7 +2409,7 @@ struct GdkTextureClass;
 
 /**
  * The `GdkTextureDownloader` is used to download the contents of a
- * [Gdk.Texture].
+ * [gdk.texture.Texture].
  * It is intended to be created as a short-term object for a single download,
  * but can be used for multiple downloads of different textures or with different
  * settings.
@@ -2422,9 +2422,9 @@ struct GdkTextureDownloader;
 /**
  * A `GdkTimeCoord` stores a single event in a motion history.
  * To check whether an axis is present, check whether the corresponding
- * flag from the [Gdk.AxisFlags] enumeration is set in the @flags
+ * flag from the [gdk.AxisFlags] enumeration is set in the @flags
  * To access individual axis values, use the values of the values of
- * the [Gdk.AxisUse] enumerations as indices.
+ * the [gdk.AxisUse] enumerations as indices.
  */
 struct GdkTimeCoord
 {
@@ -2434,12 +2434,12 @@ struct GdkTimeCoord
   uint time;
 
   /**
-   * Flags indicating what axes are present, see [Gdk.AxisFlags]
+   * Flags indicating what axes are present, see [gdk.AxisFlags]
    */
   GdkAxisFlags flags;
 
   /**
-   * axis values, indexed by [Gdk.AxisUse]
+   * axis values, indexed by [gdk.AxisUse]
    */
   double[12] axes;
 }
@@ -2458,7 +2458,7 @@ struct GdkToplevelInterface;
  * The `GdkToplevelLayout` struct contains information that
  * is necessary to present a sovereign window on screen.
  * The `GdkToplevelLayout` struct is necessary for using
- * [Gdk.Toplevel.present].
+ * [gdk.toplevel.Toplevel.present].
  * Toplevel surfaces are sovereign windows that can be presented
  * to the user in various states $(LPAREN)maximized, on all workspaces,
  * etc$(RPAREN).
@@ -2489,7 +2489,7 @@ struct GdkTouchpadEvent;
  * `GdkVulkanContext` is an object representing the platform-specific
  * Vulkan draw context.
  * `GdkVulkanContext`s are created for a surface using
- * [Gdk.Surface.createVulkanContext], and the context will match
+ * [gdk.surface.Surface.createVulkanContext], and the context will match
  * the characteristics of the surface.
  * Support for `GdkVulkanContext` is platform-specific and context creation
  * can fail, returning %NULL context.

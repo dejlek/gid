@@ -3,7 +3,7 @@ module gtk.tooltip;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.rectangle;
-import gid.gid;
+import gid.global;
 import gio.icon;
 import gio.icon_mixin;
 import gobject.object;
@@ -15,8 +15,8 @@ import gtk.widget;
 /**
  * `GtkTooltip` is an object representing a widget tooltip.
  * Basic tooltips can be realized simply by using
- * [Gtk.Widget.setTooltipText] or
- * [Gtk.Widget.setTooltipMarkup] without
+ * [gtk.widget.Widget.setTooltipText] or
+ * [gtk.widget.Widget.setTooltipMarkup] without
  * any explicit tooltip object.
  * When you need a tooltip with a little more fancy contents,
  * like adding an image, or you want the tooltip to have different
@@ -30,7 +30,7 @@ import gtk.widget;
  * One of the arguments passed to the signal handler is a `GtkTooltip`
  * object. This is the object that we are about to display as a tooltip,
  * and can be manipulated in your callback using functions like
- * [Gtk.Tooltip.setIcon]. There are functions for setting
+ * [gtk.tooltip.Tooltip.setIcon]. There are functions for setting
  * the tooltip’s markup, setting an image from a named icon, or even
  * putting in a custom widget.
  * - Return %TRUE from your ::query-tooltip handler. This causes the tooltip
@@ -60,8 +60,8 @@ class Tooltip : ObjectG
    * custom_widget. custom_widget does not get destroyed when the tooltip goes
    * away.
    * By default a box with a `GtkImage` and `GtkLabel` is embedded in
-   * the tooltip, which can be configured using [Gtk.Tooltip.setMarkup]
-   * and [Gtk.Tooltip.setIcon].
+   * the tooltip, which can be configured using [gtk.tooltip.Tooltip.setMarkup]
+   * and [gtk.tooltip.Tooltip.setIcon].
    * Params:
    *   customWidget = a `GtkWidget`, or %NULL to unset the old custom widget.
    */
@@ -122,7 +122,7 @@ class Tooltip : ObjectG
   /**
    * Sets the text of the tooltip to be text.
    * If text is %NULL, the label will be hidden.
-   * See also [Gtk.Tooltip.setMarkup].
+   * See also [gtk.tooltip.Tooltip.setMarkup].
    * Params:
    *   text = a text string
    */
@@ -138,8 +138,8 @@ class Tooltip : ObjectG
    * properly setting tooltips on `GtkTreeView` rows and cells, `GtkIconViews`,
    * etc.
    * For setting tooltips on `GtkTreeView`, please refer to the convenience
-   * functions for this: [Gtk.TreeView.setTooltipRow] and
-   * [Gtk.TreeView.setTooltipCell].
+   * functions for this: [gtk.tree_view.TreeView.setTooltipRow] and
+   * [gtk.tree_view.TreeView.setTooltipCell].
    * Params:
    *   rect = a `GdkRectangle`
    */

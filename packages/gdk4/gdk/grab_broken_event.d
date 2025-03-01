@@ -5,7 +5,7 @@ import gdk.c.types;
 import gdk.event;
 import gdk.surface;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**

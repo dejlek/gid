@@ -1,7 +1,7 @@
 module gtk.event_controller_key;
 
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -50,7 +50,7 @@ class EventControllerKey : EventController
    * This function can only be used in handlers for the
    * signalGtk.EventControllerKey::key-pressed,
    * signalGtk.EventControllerKey::key-released
-   * or [Gtk.EventControllerKey.modifiers] signals.
+   * or [gtk.event_controller_key.EventControllerKey.modifiers] signals.
    * Params:
    *   widget = a `GtkWidget`
    * Returns: whether the widget handled the event
@@ -64,7 +64,7 @@ class EventControllerKey : EventController
 
   /**
    * Gets the key group of the current event of this controller.
-   * See [Gdk.KeyEvent.getLayout].
+   * See [gdk.key_event.KeyEvent.getLayout].
    * Returns: the key group
    */
   uint getGroup()
@@ -99,8 +99,8 @@ class EventControllerKey : EventController
   /**
    * Emitted whenever the input method context filters away
    * a keypress and prevents the controller receiving it.
-   * See [Gtk.EventControllerKey.setImContext] and
-   * [Gtk.IMContext.filterKeypress].
+   * See [gtk.event_controller_key.EventControllerKey.setImContext] and
+   * [gtk.imcontext.IMContext.filterKeypress].
    *   eventControllerKey = the instance the signal is connected to
    */
   alias ImUpdateCallbackDlg = void delegate(EventControllerKey eventControllerKey);

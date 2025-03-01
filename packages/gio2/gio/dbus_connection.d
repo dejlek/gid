@@ -1,6 +1,6 @@
 module gio.dbus_connection;
 
-import gid.gid;
+import gid.global;
 import gio.action_group;
 import gio.action_group_mixin;
 import gio.async_initable;
@@ -33,29 +33,29 @@ import gobject.object;
  * peers such as a message buses.
  * It is a low-level API that offers a lot of flexibility. For instance,
  * it lets you establish a connection over any transport that can by represented
- * as a [Gio.IOStream].
+ * as a [gio.iostream.IOStream].
  * This class is rarely used directly in D-Bus clients. If you are writing
  * a D-Bus client, it is often easier to use the func@Gio.bus_own_name,
- * func@Gio.bus_watch_name or [Gio.DBusProxy.newForBus] APIs.
+ * func@Gio.bus_watch_name or [gio.dbus_proxy.DBusProxy.newForBus] APIs.
  * As an exception to the usual GLib rule that a particular object must not
  * be used by two threads at the same time, `GDBusConnection`s methods may be
  * called from any thread. This is so that func@Gio.bus_get and
  * func@Gio.bus_get_sync can safely return the same `GDBusConnection` when
  * called from any thread.
  * Most of the ways to obtain a `GDBusConnection` automatically initialize it
- * $(LPAREN)i.e. connect to D-Bus$(RPAREN): for instance, [Gio.DBusConnection.new_] and
+ * $(LPAREN)i.e. connect to D-Bus$(RPAREN): for instance, [gio.dbus_connection.DBusConnection.new_] and
  * func@Gio.bus_get, and the synchronous versions of those methods, give you
  * an initialized connection. Language bindings for GIO should use
- * [Gio.Initable.new_] or [Gio.AsyncInitable.newAsync], which also
+ * [gio.initable.Initable.new_] or [gio.async_initable.AsyncInitable.newAsync], which also
  * initialize the connection.
  * If you construct an uninitialized `GDBusConnection`, such as via
- * [GObject.ObjectG.new_], you must initialize it via [Gio.Initable.init_] or
- * [Gio.AsyncInitable.initAsync] before using its methods or properties.
+ * [gobject.object.ObjectG.new_], you must initialize it via [gio.initable.Initable.init_] or
+ * [gio.async_initable.AsyncInitable.initAsync] before using its methods or properties.
  * Calling methods or accessing properties on a `GDBusConnection` that has not
  * completed initialization successfully is considered to be invalid, and leads
  * to undefined behaviour. In particular, if initialization fails with a
  * `GError`, the only valid thing you can do with that `GDBusConnection` is to
- * free it with [GObject.ObjectG.unref].
+ * free it with [gobject.object.ObjectG.unref].
  * ## An example D-Bus server
  * Here is an example for a D-Bus server:
  * [gdbus-example-server.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-server.c)
@@ -92,12 +92,12 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   mixin InitableT!();
 
   /**
-   * Finishes an operation started with [Gio.DBusConnection.new_].
+   * Finishes an operation started with [gio.dbus_connection.DBusConnection.new_].
    * Params:
    *   res = a #GAsyncResult obtained from the #GAsyncReadyCallback
-   *     passed to [Gio.DBusConnection.new_].
+   *     passed to [gio.dbus_connection.DBusConnection.new_].
    * Returns: a #GDBusConnection or %NULL if error is set. Free
-   *   with [GObject.ObjectG.unref].
+   *   with [gobject.object.ObjectG.unref].
    */
   static DBusConnection newFinish(AsyncResult res)
   {
@@ -111,12 +111,12 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   }
 
   /**
-   * Finishes an operation started with [Gio.DBusConnection.newForAddress].
+   * Finishes an operation started with [gio.dbus_connection.DBusConnection.newForAddress].
    * Params:
    *   res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-   *     to [Gio.DBusConnection.new_]
+   *     to [gio.dbus_connection.DBusConnection.new_]
    * Returns: a #GDBusConnection or %NULL if error is set.
-   *   Free with [GObject.ObjectG.unref].
+   *   Free with [gobject.object.ObjectG.unref].
    */
   static DBusConnection newForAddressFinish(AsyncResult res)
   {
@@ -135,13 +135,13 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * which must be in the
    * [D-Bus address format](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
    * This constructor can only be used to initiate client-side
-   * connections - use [Gio.DBusConnection.newSync] if you need to act
+   * connections - use [gio.dbus_connection.DBusConnection.newSync] if you need to act
    * as the server. In particular, flags cannot contain the
    * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER,
    * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS or
    * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER flags.
    * This is a synchronous failable constructor. See
-   * [Gio.DBusConnection.newForAddress] for the asynchronous version.
+   * [gio.dbus_connection.DBusConnection.newForAddress] for the asynchronous version.
    * If observer is not %NULL it may be used to control the
    * authentication process.
    * Params:
@@ -150,7 +150,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    *   observer = a #GDBusAuthObserver or %NULL
    *   cancellable = a #GCancellable or %NULL
    * Returns: a #GDBusConnection or %NULL if error is set.
-   *   Free with [GObject.ObjectG.unref].
+   *   Free with [gobject.object.ObjectG.unref].
    */
   static DBusConnection newForAddressSync(string address, DBusConnectionFlags flags, DBusAuthObserver observer, Cancellable cancellable)
   {
@@ -171,11 +171,11 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * will be put into non-blocking mode.
    * The D-Bus connection will interact with stream from a worker thread.
    * As a result, the caller should not interact with stream after this
-   * method has been called, except by calling [GObject.ObjectG.unref] on it.
+   * method has been called, except by calling [gobject.object.ObjectG.unref] on it.
    * If observer is not %NULL it may be used to control the
    * authentication process.
    * This is a synchronous failable constructor. See
-   * [Gio.DBusConnection.new_] for the asynchronous version.
+   * [gio.dbus_connection.DBusConnection.new_] for the asynchronous version.
    * Params:
    *   stream = a #GIOStream
    *   guid = the GUID to use if authenticating as a server or %NULL
@@ -183,7 +183,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    *   observer = a #GDBusAuthObserver or %NULL
    *   cancellable = a #GCancellable or %NULL
    * Returns: a #GDBusConnection or %NULL if error is set.
-   *   Free with [GObject.ObjectG.unref].
+   *   Free with [gobject.object.ObjectG.unref].
    */
   static DBusConnection newSync(IOStream stream, string guid, DBusConnectionFlags flags, DBusAuthObserver observer, Cancellable cancellable)
   {
@@ -204,14 +204,14 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * will be put into non-blocking mode.
    * The D-Bus connection will interact with stream from a worker thread.
    * As a result, the caller should not interact with stream after this
-   * method has been called, except by calling [GObject.ObjectG.unref] on it.
+   * method has been called, except by calling [gobject.object.ObjectG.unref] on it.
    * If observer is not %NULL it may be used to control the
    * authentication process.
    * When the operation is finished, callback will be invoked. You can
-   * then call [Gio.DBusConnection.newFinish] to get the result of the
+   * then call [gio.dbus_connection.DBusConnection.newFinish] to get the result of the
    * operation.
    * This is an asynchronous failable constructor. See
-   * [Gio.DBusConnection.newSync] for the synchronous
+   * [gio.dbus_connection.DBusConnection.newSync] for the synchronous
    * version.
    * Params:
    *   stream = a #GIOStream
@@ -243,18 +243,18 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * which must be in the
    * [D-Bus address format](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
    * This constructor can only be used to initiate client-side
-   * connections - use [Gio.DBusConnection.new_] if you need to act as the
+   * connections - use [gio.dbus_connection.DBusConnection.new_] if you need to act as the
    * server. In particular, flags cannot contain the
    * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER,
    * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS or
    * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER flags.
    * When the operation is finished, callback will be invoked. You can
-   * then call [Gio.DBusConnection.newForAddressFinish] to get the result of
+   * then call [gio.dbus_connection.DBusConnection.newForAddressFinish] to get the result of
    * the operation.
    * If observer is not %NULL it may be used to control the
    * authentication process.
    * This is an asynchronous failable constructor. See
-   * [Gio.DBusConnection.newForAddressSync] for the synchronous
+   * [gio.dbus_connection.DBusConnection.newForAddressSync] for the synchronous
    * version.
    * Params:
    *   address = a D-Bus address
@@ -290,12 +290,12 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * Note that filters are run in a dedicated message handling thread so
    * they can't block and, generally, can't do anything but signal a
    * worker thread. Also note that filters are rarely needed - use API
-   * such as [Gio.DBusConnection.sendMessageWithReply],
-   * [Gio.DBusConnection.signalSubscribe] or [Gio.DBusConnection.call] instead.
+   * such as [gio.dbus_connection.DBusConnection.sendMessageWithReply],
+   * [gio.dbus_connection.DBusConnection.signalSubscribe] or [gio.dbus_connection.DBusConnection.call] instead.
    * If a filter consumes an incoming message the message is not
    * dispatched anywhere else - not even the standard dispatch machinery
-   * $(LPAREN)that API such as [Gio.DBusConnection.signalSubscribe] and
-   * [Gio.DBusConnection.sendMessageWithReply] relies on$(RPAREN) will see the
+   * $(LPAREN)that API such as [gio.dbus_connection.DBusConnection.signalSubscribe] and
+   * [gio.dbus_connection.DBusConnection.sendMessageWithReply] relies on$(RPAREN) will see the
    * message. Similarly, if a filter consumes an outgoing message, the
    * message will not be sent to the other peer.
    * If user_data_free_func is non-%NULL, it will be called $(LPAREN)in the
@@ -307,7 +307,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * Params:
    *   filterFunction = a filter function
    * Returns: a filter identifier that can be used with
-   *   [Gio.DBusConnection.removeFilter]
+   *   [gio.dbus_connection.DBusConnection.removeFilter]
    */
   uint addFilter(DBusMessageFilterFunction filterFunction)
   {
@@ -345,7 +345,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * %G_VARIANT_TYPE_UNIT, the reply_type will be a tuple containing one or more
    * values.
    * If the parameters #GVariant is floating, it is consumed. This allows
-   * convenient 'inline' use of [GLib.VariantG.new_], e.g.:
+   * convenient 'inline' use of [glib.variant.VariantG.new_], e.g.:
    * |[<!-- language\="C" -->
    * g_dbus_connection_call $(LPAREN)connection,
    * "org.freedesktop.StringThings",
@@ -366,8 +366,8 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * callback will be invoked in the
    * [thread-default main context][g-main-context-push-thread-default]
    * of the thread you are calling this method from. You can then call
-   * [Gio.DBusConnection.callFinish] to get the result of the operation.
-   * See [Gio.DBusConnection.callSync] for the synchronous version of this
+   * [gio.dbus_connection.DBusConnection.callFinish] to get the result of the operation.
+   * See [gio.dbus_connection.DBusConnection.callSync] for the synchronous version of this
    * function.
    * If callback is %NULL then the D-Bus method call message will be sent with
    * the %G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED flag set.
@@ -409,11 +409,11 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   }
 
   /**
-   * Finishes an operation started with [Gio.DBusConnection.call].
+   * Finishes an operation started with [gio.dbus_connection.DBusConnection.call].
    * Params:
-   *   res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed to [Gio.DBusConnection.call]
+   *   res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed to [gio.dbus_connection.DBusConnection.call]
    * Returns: %NULL if error is set. Otherwise a non-floating
-   *   #GVariant tuple with return values. Free with [GLib.VariantG.unref].
+   *   #GVariant tuple with return values. Free with [glib.variant.VariantG.unref].
    */
   VariantG callFinish(AsyncResult res)
   {
@@ -440,7 +440,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * another way, if you give a reply_type then any non-%NULL return
    * value will be of this type.
    * If the parameters #GVariant is floating, it is consumed.
-   * This allows convenient 'inline' use of [GLib.VariantG.new_], e.g.:
+   * This allows convenient 'inline' use of [glib.variant.VariantG.new_], e.g.:
    * |[<!-- language\="C" -->
    * g_dbus_connection_call_sync $(LPAREN)connection,
    * "org.freedesktop.StringThings",
@@ -457,7 +457,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * &error$(RPAREN);
    * ]|
    * The calling thread is blocked until a reply is received. See
-   * [Gio.DBusConnection.call] for the asynchronous version of
+   * [gio.dbus_connection.DBusConnection.call] for the asynchronous version of
    * this method.
    * Params:
    *   busName = a unique or well-known bus name or %NULL if
@@ -473,7 +473,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    *     timeout or %G_MAXINT for no timeout
    *   cancellable = a #GCancellable or %NULL
    * Returns: %NULL if error is set. Otherwise a non-floating
-   *   #GVariant tuple with return values. Free with [GLib.VariantG.unref].
+   *   #GVariant tuple with return values. Free with [glib.variant.VariantG.unref].
    */
   VariantG callSync(string busName, string objectPath, string interfaceName, string methodName, VariantG parameters, VariantType replyType, DBusCallFlags flags, int timeoutMsec, Cancellable cancellable)
   {
@@ -491,7 +491,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   }
 
   /**
-   * Like [Gio.DBusConnection.call] but also takes a #GUnixFDList object.
+   * Like [gio.dbus_connection.DBusConnection.call] but also takes a #GUnixFDList object.
    * The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE
    * values in the body of the message. For example, if a message contains
    * two file descriptors, fd_list would have length 2, and
@@ -541,10 +541,10 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   }
 
   /**
-   * Finishes an operation started with [Gio.DBusConnection.callWithUnixFdList].
+   * Finishes an operation started with [gio.dbus_connection.DBusConnection.callWithUnixFdList].
    * The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE
    * values in the body of the message. For example,
-   * if [GLib.VariantG.getHandle] returns 5, that is intended to be a reference
+   * if [glib.variant.VariantG.getHandle] returns 5, that is intended to be a reference
    * to the file descriptor that can be accessed by
    * `g_unix_fd_list_get $(LPAREN)*out_fd_list, 5, ...$(RPAREN)`.
    * When designing D-Bus APIs that are intended to be interoperable,
@@ -554,9 +554,9 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * Params:
    *   outFdList = return location for a #GUnixFDList or %NULL
    *   res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed to
-   *     [Gio.DBusConnection.callWithUnixFdList]
+   *     [gio.dbus_connection.DBusConnection.callWithUnixFdList]
    * Returns: %NULL if error is set. Otherwise a non-floating
-   *   #GVariant tuple with return values. Free with [GLib.VariantG.unref].
+   *   #GVariant tuple with return values. Free with [glib.variant.VariantG.unref].
    */
   VariantG callWithUnixFdListFinish(out UnixFDList outFdList, AsyncResult res)
   {
@@ -572,9 +572,9 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   }
 
   /**
-   * Like [Gio.DBusConnection.callSync] but also takes and returns #GUnixFDList objects.
-   * See [Gio.DBusConnection.callWithUnixFdList] and
-   * [Gio.DBusConnection.callWithUnixFdListFinish] for more details.
+   * Like [gio.dbus_connection.DBusConnection.callSync] but also takes and returns #GUnixFDList objects.
+   * See [gio.dbus_connection.DBusConnection.callWithUnixFdList] and
+   * [gio.dbus_connection.DBusConnection.callWithUnixFdListFinish] for more details.
    * This method is only available on UNIX.
    * Params:
    *   busName = a unique or well-known bus name or %NULL
@@ -592,7 +592,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    *   outFdList = return location for a #GUnixFDList or %NULL
    *   cancellable = a #GCancellable or %NULL
    * Returns: %NULL if error is set. Otherwise a non-floating
-   *   #GVariant tuple with return values. Free with [GLib.VariantG.unref].
+   *   #GVariant tuple with return values. Free with [glib.variant.VariantG.unref].
    */
   VariantG callWithUnixFdListSync(string busName, string objectPath, string interfaceName, string methodName, VariantG parameters, VariantType replyType, DBusCallFlags flags, int timeoutMsec, UnixFDList fdList, out UnixFDList outFdList, Cancellable cancellable)
   {
@@ -618,7 +618,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * Once the connection is closed, operations such as sending a message
    * will return with the error %G_IO_ERROR_CLOSED. Closing a connection
    * will not automatically flush the connection so queued messages may
-   * be lost. Use [Gio.DBusConnection.flush] if you need such guarantees.
+   * be lost. Use [gio.dbus_connection.DBusConnection.flush] if you need such guarantees.
    * If connection is already closed, this method fails with
    * %G_IO_ERROR_CLOSED.
    * When connection has been closed, the #GDBusConnection::closed
@@ -629,8 +629,8 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * callback will be invoked in the
    * [thread-default main context][g-main-context-push-thread-default]
    * of the thread you are calling this method from. You can
-   * then call [Gio.DBusConnection.closeFinish] to get the result of the
-   * operation. See [Gio.DBusConnection.closeSync] for the synchronous
+   * then call [gio.dbus_connection.DBusConnection.closeFinish] to get the result of the
+   * operation. See [gio.dbus_connection.DBusConnection.closeSync] for the synchronous
    * version.
    * Params:
    *   cancellable = a #GCancellable or %NULL
@@ -653,10 +653,10 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   }
 
   /**
-   * Finishes an operation started with [Gio.DBusConnection.close].
+   * Finishes an operation started with [gio.dbus_connection.DBusConnection.close].
    * Params:
    *   res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-   *     to [Gio.DBusConnection.close]
+   *     to [gio.dbus_connection.DBusConnection.close]
    * Returns: %TRUE if the operation succeeded, %FALSE if error is set
    */
   bool closeFinish(AsyncResult res)
@@ -671,7 +671,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
 
   /**
    * Synchronously closes connection. The calling thread is blocked
-   * until this is done. See [Gio.DBusConnection.close] for the
+   * until this is done. See [gio.dbus_connection.DBusConnection.close] for the
    * asynchronous version of this method and more details about what it
    * does.
    * Params:
@@ -726,7 +726,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * If this constraint is violated, the export will fail and 0 will be
    * returned $(LPAREN)with error set accordingly$(RPAREN).
    * You can unexport the action group using
-   * [Gio.DBusConnection.unexportActionGroup] with the return value of
+   * [gio.dbus_connection.DBusConnection.unexportActionGroup] with the return value of
    * this function.
    * The thread default main context is taken at the time of this call.
    * All incoming action activations and state change requests are
@@ -763,7 +763,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * %G_MENU_EXPORTER_MAX_SECTION_SIZE items is not supported and results in
    * undefined behavior.
    * You can unexport the menu model using
-   * [Gio.DBusConnection.unexportMenuModel] with the return value of
+   * [gio.dbus_connection.DBusConnection.unexportMenuModel] with the return value of
    * this function.
    * Params:
    *   objectPath = a D-Bus object path
@@ -784,7 +784,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   /**
    * Asynchronously flushes connection, that is, writes all queued
    * outgoing message to the transport and then flushes the transport
-   * $(LPAREN)using [Gio.OutputStream.flushAsync]$(RPAREN). This is useful in programs
+   * $(LPAREN)using [gio.output_stream.OutputStream.flushAsync]$(RPAREN). This is useful in programs
    * that wants to emit a D-Bus signal and then exit immediately. Without
    * flushing the connection, there is no guaranteed that the message has
    * been sent to the networking buffers in the OS kernel.
@@ -792,8 +792,8 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * callback will be invoked in the
    * [thread-default main context][g-main-context-push-thread-default]
    * of the thread you are calling this method from. You can
-   * then call [Gio.DBusConnection.flushFinish] to get the result of the
-   * operation. See [Gio.DBusConnection.flushSync] for the synchronous
+   * then call [gio.dbus_connection.DBusConnection.flushFinish] to get the result of the
+   * operation. See [gio.dbus_connection.DBusConnection.flushSync] for the synchronous
    * version.
    * Params:
    *   cancellable = a #GCancellable or %NULL
@@ -816,10 +816,10 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   }
 
   /**
-   * Finishes an operation started with [Gio.DBusConnection.flush].
+   * Finishes an operation started with [gio.dbus_connection.DBusConnection.flush].
    * Params:
    *   res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-   *     to [Gio.DBusConnection.flush]
+   *     to [gio.dbus_connection.DBusConnection.flush]
    * Returns: %TRUE if the operation succeeded, %FALSE if error is set
    */
   bool flushFinish(AsyncResult res)
@@ -834,7 +834,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
 
   /**
    * Synchronously flushes connection. The calling thread is blocked
-   * until this is done. See [Gio.DBusConnection.flush] for the
+   * until this is done. See [gio.dbus_connection.DBusConnection.flush] for the
    * asynchronous version of this method and more details about what it
    * does.
    * Params:
@@ -906,9 +906,9 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   /**
    * Retrieves the last serial number assigned to a #GDBusMessage on
    * the current thread. This includes messages sent via both low-level
-   * API such as [Gio.DBusConnection.sendMessage] as well as
-   * high-level API such as [Gio.DBusConnection.emitSignal],
-   * [Gio.DBusConnection.call] or [Gio.DBusProxy.call].
+   * API such as [gio.dbus_connection.DBusConnection.sendMessage] as well as
+   * high-level API such as [gio.dbus_connection.DBusConnection.emitSignal],
+   * [gio.dbus_connection.DBusConnection.call] or [gio.dbus_proxy.DBusProxy.call].
    * Returns: the last used serial or zero when no message has been sent
    *   within the current thread
    */
@@ -982,7 +982,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   }
 
   /**
-   * Version of [Gio.DBusConnection.registerObject] using closures instead of a
+   * Version of [gio.dbus_connection.DBusConnection.registerObject] using closures instead of a
    * #GDBusInterfaceVTable for easier binding in other languages.
    * Params:
    *   objectPath = The object path to register at.
@@ -991,7 +991,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    *   getPropertyClosure = #GClosure for getting a property.
    *   setPropertyClosure = #GClosure for setting a property.
    * Returns: 0 if error is set, otherwise a registration ID $(LPAREN)never 0$(RPAREN)
-   *   that can be used with [Gio.DBusConnection.unregisterObject] .
+   *   that can be used with [gio.dbus_connection.DBusConnection.unregisterObject] .
    */
   uint registerObject(string objectPath, DBusInterfaceInfo interfaceInfo, Closure methodCallClosure, Closure getPropertyClosure, Closure setPropertyClosure)
   {
@@ -1023,11 +1023,11 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * If an existing subtree is already registered at object_path or
    * then error is set to %G_IO_ERROR_EXISTS.
    * Note that it is valid to register regular objects $(LPAREN)using
-   * [Gio.DBusConnection.registerObject]$(RPAREN) in a subtree registered with
-   * [Gio.DBusConnection.registerSubtree] - if so, the subtree handler
+   * [gio.dbus_connection.DBusConnection.registerObject]$(RPAREN) in a subtree registered with
+   * [gio.dbus_connection.DBusConnection.registerSubtree] - if so, the subtree handler
    * is tried as the last resort. One way to think about a subtree
    * handler is to consider it a fallback handler for object paths not
-   * registered via [Gio.DBusConnection.registerObject] or other bindings.
+   * registered via [gio.dbus_connection.DBusConnection.registerObject] or other bindings.
    * Note that vtable will be copied so you cannot change it after
    * registration.
    * See this [server][gdbus-subtree-server] for an example of how to use
@@ -1040,7 +1040,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    *   userData = data to pass to functions in vtable
    *   userDataFreeFunc = function to call when the subtree is unregistered
    * Returns: 0 if error is set, otherwise a subtree registration ID $(LPAREN)never 0$(RPAREN)
-   *   that can be used with [Gio.DBusConnection.unregisterSubtree]
+   *   that can be used with [gio.dbus_connection.DBusConnection.unregisterSubtree]
    */
   uint registerSubtree(string objectPath, DBusSubtreeVTable vtable, DBusSubtreeFlags flags, void* userData, DestroyNotify userDataFreeFunc)
   {
@@ -1066,12 +1066,12 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * Removes a filter.
    * Note that since filters run in a different thread, there is a race
    * condition where it is possible that the filter will be running even
-   * after calling [Gio.DBusConnection.removeFilter], so you cannot just
+   * after calling [gio.dbus_connection.DBusConnection.removeFilter], so you cannot just
    * free data that the filter might be using. Instead, you should pass
-   * a #GDestroyNotify to [Gio.DBusConnection.addFilter], which will be
+   * a #GDestroyNotify to [gio.dbus_connection.DBusConnection.addFilter], which will be
    * called when it is guaranteed that the data is no longer needed.
    * Params:
-   *   filterId = an identifier obtained from [Gio.DBusConnection.addFilter]
+   *   filterId = an identifier obtained from [gio.dbus_connection.DBusConnection.addFilter]
    */
   void removeFilter(uint filterId)
   {
@@ -1083,7 +1083,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * Unless flags contain the
    * %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
    * will be assigned by connection and set on message via
-   * [Gio.DBusMessage.setSerial]. If out_serial is not %NULL, then the
+   * [gio.dbus_message.DBusMessage.setSerial]. If out_serial is not %NULL, then the
    * serial number used will be written to this location prior to
    * submitting the message to the underlying transport. While it has a `volatile`
    * qualifier, this is a historical artifact and the argument passed to it should
@@ -1119,7 +1119,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * Unless flags contain the
    * %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
    * will be assigned by connection and set on message via
-   * [Gio.DBusMessage.setSerial]. If out_serial is not %NULL, then the
+   * [gio.dbus_message.DBusMessage.setSerial]. If out_serial is not %NULL, then the
    * serial number used will be written to this location prior to
    * submitting the message to the underlying transport. While it has a `volatile`
    * qualifier, this is a historical artifact and the argument passed to it should
@@ -1132,8 +1132,8 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * will be invoked in the
    * [thread-default main context][g-main-context-push-thread-default]
    * of the thread you are calling this method from. You can then call
-   * [Gio.DBusConnection.sendMessageWithReplyFinish] to get the result of the operation.
-   * See [Gio.DBusConnection.sendMessageWithReplySync] for the synchronous version.
+   * [gio.dbus_connection.DBusConnection.sendMessageWithReplyFinish] to get the result of the operation.
+   * See [gio.dbus_connection.DBusConnection.sendMessageWithReplySync] for the synchronous version.
    * Note that message must be unlocked, unless flags contain the
    * %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
    * See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
@@ -1166,17 +1166,17 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   }
 
   /**
-   * Finishes an operation started with [Gio.DBusConnection.sendMessageWithReply].
+   * Finishes an operation started with [gio.dbus_connection.DBusConnection.sendMessageWithReply].
    * Note that error is only set if a local in-process error
    * occurred. That is to say that the returned #GDBusMessage object may
    * be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
-   * [Gio.DBusMessage.toGerror] to transcode this to a #GError.
+   * [gio.dbus_message.DBusMessage.toGerror] to transcode this to a #GError.
    * See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
    * for an example of how to use this low-level API to send and receive
    * UNIX file descriptors.
    * Params:
    *   res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed to
-   *     [Gio.DBusConnection.sendMessageWithReply]
+   *     [gio.dbus_connection.DBusConnection.sendMessageWithReply]
    * Returns: a locked #GDBusMessage or %NULL if error is set
    */
   DBusMessage sendMessageWithReplyFinish(AsyncResult res)
@@ -1193,12 +1193,12 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   /**
    * Synchronously sends message to the peer represented by connection
    * and blocks the calling thread until a reply is received or the
-   * timeout is reached. See [Gio.DBusConnection.sendMessageWithReply]
+   * timeout is reached. See [gio.dbus_connection.DBusConnection.sendMessageWithReply]
    * for the asynchronous version of this method.
    * Unless flags contain the
    * %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
    * will be assigned by connection and set on message via
-   * [Gio.DBusMessage.setSerial]. If out_serial is not %NULL, then the
+   * [gio.dbus_message.DBusMessage.setSerial]. If out_serial is not %NULL, then the
    * serial number used will be written to this location prior to
    * submitting the message to the underlying transport. While it has a `volatile`
    * qualifier, this is a historical artifact and the argument passed to it should
@@ -1210,7 +1210,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * Note that error is only set if a local in-process error
    * occurred. That is to say that the returned #GDBusMessage object may
    * be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
-   * [Gio.DBusMessage.toGerror] to transcode this to a #GError.
+   * [gio.dbus_message.DBusMessage.toGerror] to transcode this to a #GError.
    * See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
    * for an example of how to use this low-level API to send and receive
    * UNIX file descriptors.
@@ -1282,20 +1282,20 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * has been destroyed.$(RPAREN)
    * As callback is potentially invoked in a different thread from where it’s
    * emitted, it’s possible for this to happen after
-   * [Gio.DBusConnection.signalUnsubscribe] has been called in another thread.
+   * [gio.dbus_connection.DBusConnection.signalUnsubscribe] has been called in another thread.
    * Due to this, user_data should have a strong reference which is freed with
    * user_data_free_func, rather than pointing to data whose lifecycle is tied
    * to the signal subscription. For example, if a #GObject is used to store the
-   * subscription ID from [Gio.DBusConnection.signalSubscribe], a strong reference
-   * to that #GObject must be passed to user_data, and [GObject.ObjectG.unref] passed to
+   * subscription ID from [gio.dbus_connection.DBusConnection.signalSubscribe], a strong reference
+   * to that #GObject must be passed to user_data, and [gobject.object.ObjectG.unref] passed to
    * user_data_free_func. You are responsible for breaking the resulting
    * reference count cycle by explicitly unsubscribing from the signal when
    * dropping the last external reference to the #GObject. Alternatively, a weak
    * reference may be used.
    * It is guaranteed that if you unsubscribe from a signal using
-   * [Gio.DBusConnection.signalUnsubscribe] from the same thread which made the
-   * corresponding [Gio.DBusConnection.signalSubscribe] call, callback will not
-   * be invoked after [Gio.DBusConnection.signalUnsubscribe] returns.
+   * [gio.dbus_connection.DBusConnection.signalUnsubscribe] from the same thread which made the
+   * corresponding [gio.dbus_connection.DBusConnection.signalSubscribe] call, callback will not
+   * be invoked after [gio.dbus_connection.DBusConnection.signalUnsubscribe] returns.
    * The returned subscription identifier is an opaque value which is guaranteed
    * to never be zero.
    * This function can never fail.
@@ -1313,7 +1313,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    *   flags = #GDBusSignalFlags describing how arg0 is used in subscribing to the
    *     signal
    *   callback = callback to invoke when there is a signal matching the requested data
-   * Returns: a subscription identifier that can be used with [Gio.DBusConnection.signalUnsubscribe]
+   * Returns: a subscription identifier that can be used with [gio.dbus_connection.DBusConnection.signalUnsubscribe]
    */
   uint signalSubscribe(string sender, string interfaceName, string member, string objectPath, string arg0, DBusSignalFlags flags, DBusSignalCallback callback)
   {
@@ -1347,7 +1347,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * signal subscription$(RPAREN) in the current thread-default #GMainContext after this
    * function has returned. You should continue to iterate the #GMainContext
    * until the #GDestroyNotify function passed to
-   * [Gio.DBusConnection.signalSubscribe] is called, in order to avoid memory
+   * [gio.dbus_connection.DBusConnection.signalSubscribe] is called, in order to avoid memory
    * leaks through callbacks queued on the #GMainContext after it’s stopped being
    * iterated.
    * Alternatively, any idle source with a priority lower than %G_PRIORITY_DEFAULT
@@ -1355,7 +1355,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * of this subscription are released.
    * Params:
    *   subscriptionId = a subscription id obtained from
-   *     [Gio.DBusConnection.signalSubscribe]
+   *     [gio.dbus_connection.DBusConnection.signalSubscribe]
    */
   void signalUnsubscribe(uint subscriptionId)
   {
@@ -1375,12 +1375,12 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
 
   /**
    * Reverses the effect of a previous call to
-   * [Gio.DBusConnection.exportActionGroup].
+   * [gio.dbus_connection.DBusConnection.exportActionGroup].
    * It is an error to call this function with an ID that wasn't returned
-   * from [Gio.DBusConnection.exportActionGroup] or to call it with the
+   * from [gio.dbus_connection.DBusConnection.exportActionGroup] or to call it with the
    * same ID more than once.
    * Params:
-   *   exportId = the ID from [Gio.DBusConnection.exportActionGroup]
+   *   exportId = the ID from [gio.dbus_connection.DBusConnection.exportActionGroup]
    */
   void unexportActionGroup(uint exportId)
   {
@@ -1389,12 +1389,12 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
 
   /**
    * Reverses the effect of a previous call to
-   * [Gio.DBusConnection.exportMenuModel].
+   * [gio.dbus_connection.DBusConnection.exportMenuModel].
    * It is an error to call this function with an ID that wasn't returned
-   * from [Gio.DBusConnection.exportMenuModel] or to call it with the
+   * from [gio.dbus_connection.DBusConnection.exportMenuModel] or to call it with the
    * same ID more than once.
    * Params:
-   *   exportId = the ID from [Gio.DBusConnection.exportMenuModel]
+   *   exportId = the ID from [gio.dbus_connection.DBusConnection.exportMenuModel]
    */
   void unexportMenuModel(uint exportId)
   {
@@ -1405,7 +1405,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * Unregisters an object.
    * Params:
    *   registrationId = a registration id obtained from
-   *     [Gio.DBusConnection.registerObject]
+   *     [gio.dbus_connection.DBusConnection.registerObject]
    * Returns: %TRUE if the object was unregistered, %FALSE otherwise
    */
   bool unregisterObject(uint registrationId)
@@ -1419,7 +1419,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
    * Unregisters a subtree.
    * Params:
    *   registrationId = a subtree registration id obtained from
-   *     [Gio.DBusConnection.registerSubtree]
+   *     [gio.dbus_connection.DBusConnection.registerSubtree]
    * Returns: %TRUE if the subtree was unregistered, %FALSE otherwise
    */
   bool unregisterSubtree(uint registrationId)
@@ -1432,7 +1432,7 @@ class DBusConnection : ObjectG, AsyncInitable, Initable
   /**
    * Emitted when the connection is closed.
    * The cause of this event can be
-   * - If [Gio.DBusConnection.close] is called. In this case
+   * - If [gio.dbus_connection.DBusConnection.close] is called. In this case
    * remote_peer_vanished is set to %FALSE and error is %NULL.
    * - If the remote peer closes the connection. In this case
    * remote_peer_vanished is set to %TRUE and error is set.

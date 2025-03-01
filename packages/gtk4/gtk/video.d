@@ -1,6 +1,6 @@
 module gtk.video;
 
-import gid.gid;
+import gid.global;
 import gio.file;
 import gio.file_mixin;
 import gobject.object;
@@ -19,14 +19,14 @@ import gtk.widget;
 /**
  * `GtkVideo` is a widget to show a `GtkMediaStream` with media controls.
  * ![An example GtkVideo](video.png)
- * The controls are available separately as [Gtk.MediaControls].
+ * The controls are available separately as [gtk.media_controls.MediaControls].
  * If you just want to display a video without controls, you can treat it
- * like any other paintable and for example put it into a [Gtk.Picture].
+ * like any other paintable and for example put it into a [gtk.picture.Picture].
  * `GtkVideo` aims to cover use cases such as previews, embedded animations,
  * etc. It supports autoplay, looping, and simple media controls. It does
  * not have support for video overlays, multichannel audio, device
  * selection, or input. If you are writing a full-fledged video player,
- * you may want to use the [Gdk.Paintable] API and a media framework
+ * you may want to use the [gdk.paintable.Paintable] API and a media framework
  * such as Gstreamer directly.
  */
 class Video : Widget
@@ -75,7 +75,7 @@ class Video : Widget
 
   /**
    * Creates a `GtkVideo` to play back the given filename.
-   * This is a utility function that calls [Gtk.Video.newForFile],
+   * This is a utility function that calls [gtk.video.Video.newForFile],
    * See that function for details.
    * Params:
    *   filename = filename to play back
@@ -107,7 +107,7 @@ class Video : Widget
   /**
    * Creates a `GtkVideo` to play back the resource at the
    * given resource_path.
-   * This is a utility function that calls [Gtk.Video.newForFile].
+   * This is a utility function that calls [gtk.video.Video.newForFile].
    * Params:
    *   resourcePath = resource path to play back
    * Returns: a new `GtkVideo`
@@ -147,7 +147,7 @@ class Video : Widget
 
   /**
    * Returns whether graphics offload is enabled.
-   * See [Gtk.GraphicsOffload] for more information on graphics offload.
+   * See [gtk.graphics_offload.GraphicsOffload] for more information on graphics offload.
    * Returns: the graphics offload status
    */
   GraphicsOffloadEnabled getGraphicsOffload()
@@ -204,7 +204,7 @@ class Video : Widget
 
   /**
    * Makes self play the given filename.
-   * This is a utility function that calls [Gtk.Video.setFile],
+   * This is a utility function that calls [gtk.video.Video.setFile],
    * Params:
    *   filename = the filename to play
    */
@@ -216,7 +216,7 @@ class Video : Widget
 
   /**
    * Sets whether to enable graphics offload.
-   * See [Gtk.GraphicsOffload] for more information on graphics offload.
+   * See [gtk.graphics_offload.GraphicsOffload] for more information on graphics offload.
    * Params:
    *   enabled = the new graphics offload status
    */
@@ -239,8 +239,8 @@ class Video : Widget
    * Sets the media stream to be played back.
    * self will take full control of managing the media stream. If you
    * want to manage a media stream yourself, consider using a
-   * [Gtk.Picture] for display.
-   * If you want to display a file, consider using [Gtk.Video.setFile]
+   * [gtk.picture.Picture] for display.
+   * If you want to display a file, consider using [gtk.video.Video.setFile]
    * instead.
    * Params:
    *   stream = The media stream to play or %NULL to unset
@@ -252,7 +252,7 @@ class Video : Widget
 
   /**
    * Makes self play the resource at the given resource_path.
-   * This is a utility function that calls [Gtk.Video.setFile].
+   * This is a utility function that calls [gtk.video.Video.setFile].
    * Params:
    *   resourcePath = the resource to set
    */

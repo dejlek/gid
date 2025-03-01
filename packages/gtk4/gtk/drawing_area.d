@@ -1,7 +1,7 @@
 module gtk.drawing_area;
 
 import cairo.context;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -20,12 +20,12 @@ import gtk.widget;
  * ![An example GtkDrawingArea](drawingarea.png)
  * It’s essentially a blank widget; you can draw on it. After
  * creating a drawing area, the application may want to connect to:
- * - The [Gtk.Widget.realize] signal to take any necessary actions
+ * - The [gtk.widget.Widget.realize] signal to take any necessary actions
  * when the widget is instantiated on a particular display.
  * $(LPAREN)Create GDK resources in response to this signal.$(RPAREN)
- * - The [Gtk.DrawingArea.resize] signal to take any necessary
+ * - The [gtk.drawing_area.DrawingArea.resize] signal to take any necessary
  * actions when the widget changes size.
- * - Call [Gtk.DrawingArea.setDrawFunc] to handle redrawing the
+ * - Call [gtk.drawing_area.DrawingArea.setDrawFunc] to handle redrawing the
  * contents of the widget.
  * The following code portion demonstrates using a drawing
  * area to display a circle in the normal widget foreground
@@ -65,7 +65,7 @@ import gtk.widget;
  * The draw function is normally called when a drawing area first comes
  * onscreen, or when it’s covered by another window and then uncovered.
  * You can also force a redraw by adding to the “damage region” of the
- * drawing area’s window using [Gtk.Widget.queueDraw].
+ * drawing area’s window using [gtk.widget.Widget.queueDraw].
  * This will cause the drawing area to call the draw function again.
  * The available routines for drawing are documented in the
  * [Cairo documentation](https://www.cairographics.org/manual/); GDK
@@ -135,7 +135,7 @@ class DrawingArea : Widget
    * Note that because widgets may be allocated larger sizes than they
    * requested, it is possible that the actual height passed to your draw
    * function is larger than the height set here. You can use
-   * [Gtk.Widget.setValign] to avoid that.
+   * [gtk.widget.Widget.setValign] to avoid that.
    * If the height is set to 0 $(LPAREN)the default$(RPAREN), the drawing area may disappear.
    * Params:
    *   height = the height of contents
@@ -150,7 +150,7 @@ class DrawingArea : Widget
    * Note that because widgets may be allocated larger sizes than they
    * requested, it is possible that the actual width passed to your draw
    * function is larger than the width set here. You can use
-   * [Gtk.Widget.setHalign] to avoid that.
+   * [gtk.widget.Widget.setHalign] to avoid that.
    * If the width is set to 0 $(LPAREN)the default$(RPAREN), the drawing area may disappear.
    * Params:
    *   width = the width of contents
@@ -170,7 +170,7 @@ class DrawingArea : Widget
    * GTK widgets or call any functions that would cause any properties
    * to be changed. You should restrict yourself exclusively to drawing
    * your contents in the draw function.
-   * If what you are drawing does change, call [Gtk.Widget.queueDraw]
+   * If what you are drawing does change, call [gtk.widget.Widget.queueDraw]
    * on the drawing area. This will cause a redraw and will call draw_func again.
    * Params:
    *   drawFunc = callback that lets you draw

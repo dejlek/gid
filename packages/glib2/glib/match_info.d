@@ -1,6 +1,6 @@
 module glib.match_info;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -40,16 +40,16 @@ class MatchInfo : Boxed
    * Returns a new string containing the text in string_to_expand with
    * references and escape sequences expanded. References refer to the last
    * match done with string against regex and have the same syntax used by
-   * [GLib.Regex.replace].
+   * [glib.regex.Regex.replace].
    * The string_to_expand must be UTF-8 encoded even if %G_REGEX_RAW was
-   * passed to [GLib.Regex.new_].
+   * passed to [glib.regex.Regex.new_].
    * The backreferences are extracted from the string passed to the match
    * function, so you cannot call this function after freeing the string.
    * match_info may be %NULL in which case string_to_expand must not
    * contain references. For instance "foo\n" does not refer to an actual
    * pattern and '\n' merely will be replaced with \n character,
    * while to expand "\0" $(LPAREN)whole match$(RPAREN) one needs the result of a match.
-   * Use [GLib.Regex.checkReplacement] to find out whether string_to_expand
+   * Use [glib.regex.Regex.checkReplacement] to find out whether string_to_expand
    * contains references.
    * Params:
    *   stringToExpand = the string to expand
@@ -75,7 +75,7 @@ class MatchInfo : Boxed
    * $(LPAREN)e.g. sub pattern 1, matching "b" against "$(LPAREN)a$(RPAREN)?b"$(RPAREN) then an empty
    * string is returned.
    * If the match was obtained using the DFA algorithm, that is using
-   * [GLib.Regex.matchAll] or [GLib.Regex.matchAllFull], the retrieved
+   * [glib.regex.Regex.matchAll] or [glib.regex.Regex.matchAllFull], the retrieved
    * string is not that of a set of parentheses but that of a matched
    * substring. Substrings are matched in reverse order of length, so
    * 0 is the longest match.
@@ -102,14 +102,14 @@ class MatchInfo : Boxed
    * If a sub pattern didn't match anything $(LPAREN)e.g. sub pattern 1, matching
    * "b" against "$(LPAREN)a$(RPAREN)?b"$(RPAREN) then an empty string is inserted.
    * If the last match was obtained using the DFA algorithm, that is using
-   * [GLib.Regex.matchAll] or [GLib.Regex.matchAllFull], the retrieved
+   * [glib.regex.Regex.matchAll] or [glib.regex.Regex.matchAllFull], the retrieved
    * strings are not that matched by sets of parentheses but that of the
    * matched substring. Substrings are matched in reverse order of length,
    * so the first one is the longest match.
    * The strings are fetched from the string passed to the match function,
    * so you cannot call this function after freeing the string.
    * Returns: a %NULL-terminated array of gchar *
-   *   pointers.  It must be freed using [GLib.Global.strfreev]. If the previous
+   *   pointers.  It must be freed using [glib.global.strfreev]. If the previous
    *   match failed %NULL is returned
    */
   string[] fetchAll()
@@ -182,7 +182,7 @@ class MatchInfo : Boxed
    * $(LPAREN)e.g. sub pattern 1, matching "b" against "$(LPAREN)a$(RPAREN)?b"$(RPAREN) then start_pos
    * and end_pos are set to -1 and %TRUE is returned.
    * If the match was obtained using the DFA algorithm, that is using
-   * [GLib.Regex.matchAll] or [GLib.Regex.matchAllFull], the retrieved
+   * [glib.regex.Regex.matchAll] or [glib.regex.Regex.matchAllFull], the retrieved
    * position is not that of a set of parentheses but that of a matched
    * substring. Substrings are matched in reverse order of length, so
    * 0 is the longest match.
@@ -208,7 +208,7 @@ class MatchInfo : Boxed
    * that is the whole matched text$(RPAREN), so 1 is returned if the pattern
    * has no substrings in it and 0 is returned if the match failed.
    * If the last match was obtained using the DFA algorithm, that is
-   * using [GLib.Regex.matchAll] or [GLib.Regex.matchAllFull], the retrieved
+   * using [glib.regex.Regex.matchAll] or [glib.regex.Regex.matchAllFull], the retrieved
    * count is not that of the number of capturing parentheses but that of
    * the number of matched substrings.
    * Returns: Number of matched substrings, or -1 if an error occurred
@@ -222,7 +222,7 @@ class MatchInfo : Boxed
 
   /**
    * Returns #GRegex object used in match_info. It belongs to Glib
-   * and must not be freed. Use [GLib.Regex.ref_] if you need to keep it
+   * and must not be freed. Use [glib.regex.Regex.ref_] if you need to keep it
    * after you free match_info object.
    * Returns: #GRegex object used in match_info
    */
@@ -236,7 +236,7 @@ class MatchInfo : Boxed
 
   /**
    * Returns the string searched with match_info. This is the
-   * string passed to [GLib.Regex.match] or [GLib.Regex.replace] so
+   * string passed to [glib.regex.Regex.match] or [glib.regex.Regex.replace] so
    * you may not free it before calling this function.
    * Returns: the string searched with match_info
    */
@@ -263,10 +263,10 @@ class MatchInfo : Boxed
    * GRegex supports the concept of partial matching by means of the
    * %G_REGEX_MATCH_PARTIAL_SOFT and %G_REGEX_MATCH_PARTIAL_HARD flags.
    * When they are used, the return code for
-   * [GLib.Regex.match] or [GLib.Regex.matchFull] is, as usual, %TRUE
+   * [glib.regex.Regex.match] or [glib.regex.Regex.matchFull] is, as usual, %TRUE
    * for a complete match, %FALSE otherwise. But, when these functions
    * return %FALSE, you can check if the match was partial calling
-   * [GLib.MatchInfo.isPartialMatch].
+   * [glib.match_info.MatchInfo.isPartialMatch].
    * The difference between %G_REGEX_MATCH_PARTIAL_SOFT and
    * %G_REGEX_MATCH_PARTIAL_HARD is that when a partial match is encountered
    * with %G_REGEX_MATCH_PARTIAL_SOFT, matching continues to search for a
@@ -300,7 +300,7 @@ class MatchInfo : Boxed
 
   /**
    * Scans for the next match using the same parameters of the previous
-   * call to [GLib.Regex.matchFull] or [GLib.Regex.match] that returned
+   * call to [glib.regex.Regex.matchFull] or [glib.regex.Regex.match] that returned
    * match_info.
    * The match is done on the string passed to the match function, so you
    * cannot free it before calling this function.

@@ -1,6 +1,6 @@
 module glib.main_loop;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.main_context;
@@ -41,7 +41,7 @@ class MainLoop : Boxed
    *   context = a #GMainContext  $(LPAREN)if %NULL, the global-default
    *     main context will be used$(RPAREN).
    *   isRunning = set to %TRUE to indicate that the loop is running. This
-   *     is not very important since calling [GLib.MainLoop.run] will set this to
+   *     is not very important since calling [glib.main_loop.MainLoop.run] will set this to
    *     %TRUE anyway.
    * Returns: a new #GMainLoop.
    */
@@ -65,7 +65,7 @@ class MainLoop : Boxed
   }
 
   /**
-   * Checks to see if the main loop is currently being run via [GLib.MainLoop.run].
+   * Checks to see if the main loop is currently being run via [glib.main_loop.MainLoop.run].
    * Returns: %TRUE if the mainloop is currently being run.
    */
   bool isRunning()
@@ -76,10 +76,10 @@ class MainLoop : Boxed
   }
 
   /**
-   * Stops a #GMainLoop from running. Any calls to [GLib.MainLoop.run]
+   * Stops a #GMainLoop from running. Any calls to [glib.main_loop.MainLoop.run]
    * for the loop will return.
    * Note that sources that have already been dispatched when
-   * [GLib.MainLoop.quit] is called will still be executed.
+   * [glib.main_loop.MainLoop.quit] is called will still be executed.
    */
   void quit()
   {
@@ -87,7 +87,7 @@ class MainLoop : Boxed
   }
 
   /**
-   * Runs a main loop until [GLib.MainLoop.quit] is called on the loop.
+   * Runs a main loop until [glib.main_loop.MainLoop.quit] is called on the loop.
    * If this is called for the thread of the loop's #GMainContext,
    * it will process events from the loop, otherwise it will
    * simply wait.

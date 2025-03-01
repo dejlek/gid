@@ -27,8 +27,8 @@ alias GSignalCVaMarshaller = GVaClosureMarshal;
 alias GType = size_t;
 
 /**
- * Flags to be passed to [GObject.ObjectG.bindProperty] or
- * [GObject.ObjectG.bindPropertyFull].
+ * Flags to be passed to [gobject.object.ObjectG.bindProperty] or
+ * [gobject.object.ObjectG.bindPropertyFull].
  * This enumeration can be extended at later date.
  */
 enum GBindingFlags : uint
@@ -58,7 +58,7 @@ enum GBindingFlags : uint
    * booleans, setting one to %TRUE will result in the other being
    * set to %FALSE and vice versa. This flag will only work for
    * boolean properties, and cannot be used when passing custom
-   * transformation functions to [GObject.ObjectG.bindPropertyFull].
+   * transformation functions to [gobject.object.ObjectG.bindPropertyFull].
    */
   InvertBoolean = 4,
 }
@@ -121,7 +121,7 @@ enum GParamFlags : uint
   ConstructOnly = 8,
 
   /**
-   * upon parameter conversion $(LPAREN)see [GObject.Global.paramValueConvert]$(RPAREN)
+   * upon parameter conversion $(LPAREN)see [gobject.global.paramValueConvert]$(RPAREN)
    * strict validation is not required
    */
   LaxValidation = 16,
@@ -156,9 +156,9 @@ enum GParamFlags : uint
   StaticBlurb = 128,
 
   /**
-   * calls to [GObject.ObjectG.setProperty] for this
+   * calls to [gobject.object.ObjectG.setProperty] for this
    * property will not automatically result in a "notify" signal being
-   * emitted: the implementation must call [GObject.ObjectG.notify] themselves
+   * emitted: the implementation must call [gobject.object.ObjectG.notify] themselves
    * in case the property actually changes.  Since: 2.42.
    */
   ExplicitNotify = 1073741824,
@@ -207,7 +207,7 @@ enum GSignalFlags : uint
 
   /**
    * Action signals are signals that may freely be emitted on alive
-   * objects from user code via [GObject.Global.signalEmit] and friends, without
+   * objects from user code via [gobject.global.signalEmit] and friends, without
    * the need of being embedded into extra code that performs pre or
    * post emission adjustments on the object. They can also be thought
    * of as object methods which can be called generically by
@@ -242,8 +242,8 @@ enum GSignalFlags : uint
 }
 
 /**
- * The match types specify what [GObject.Global.signalHandlersBlockMatched],
- * [GObject.Global.signalHandlersUnblockMatched] and [GObject.Global.signalHandlersDisconnectMatched]
+ * The match types specify what [gobject.global.signalHandlersBlockMatched],
+ * [gobject.global.signalHandlersUnblockMatched] and [gobject.global.signalHandlersDisconnectMatched]
  * match signals by.
  */
 enum GSignalMatchType : uint
@@ -280,12 +280,12 @@ enum GSignalMatchType : uint
 }
 
 /**
- * These flags used to be passed to [GObject.Global.typeInitWithDebugFlags] which
+ * These flags used to be passed to [gobject.global.typeInitWithDebugFlags] which
  * is now deprecated.
  * If you need to enable debugging features, use the `GOBJECT_DEBUG`
  * environment variable.
 
- * Deprecated: [GObject.Global.typeInit] is now done automatically
+ * Deprecated: [gobject.global.typeInit] is now done automatically
  */
 enum GTypeDebugFlags : uint
 {
@@ -334,7 +334,7 @@ enum GTypeFlags : uint
   /**
    * Indicates an abstract value type, i.e. a type
    * that introduces a value table, but can't be used for
-   * [GObject.Value.init_]
+   * [gobject.value.Value.init_]
    */
   ValueAbstract = 32,
 
@@ -437,7 +437,7 @@ enum GTypeFundamentalFlags : uint
  * either one of the `GObject` instances it refers to are finalized, or when
  * the #GBinding instance loses its last reference.
  * Bindings for languages with garbage collection can use
- * [GObject.Binding.unbind] to explicitly release a binding between the source
+ * [gobject.binding.Binding.unbind] to explicitly release a binding between the source
  * and target properties, instead of relying on the last reference on the
  * binding, source, and target instances to drop.
  */
@@ -449,7 +449,7 @@ struct GBinding;
  * Use the various methods to bind properties from a single source
  * object to multiple destination objects. Properties can be bound
  * bidirectionally and are connected when the source object is set
- * with [GObject.BindingGroup.setSource].
+ * with [gobject.binding_group.BindingGroup.setSource].
  */
 struct GBindingGroup;
 
@@ -483,17 +483,17 @@ struct GCClosure
  * other languages need marshallers which convert between #GValues
  * and suitable representations in the runtime of the language in
  * order to use functions written in that language as callbacks. Use
- * [GObject.Closure.setMarshal] to set the marshaller on such a custom
+ * [gobject.closure.Closure.setMarshal] to set the marshaller on such a custom
  * closure implementation.
  * Within GObject, closures play an important role in the
  * implementation of signals. When a signal is registered, the
- * @c_marshaller argument to [GObject.Global.signalNew] specifies the default C
+ * @c_marshaller argument to [gobject.global.signalNew] specifies the default C
  * marshaller for any closure which is connected to this
  * signal. GObject provides a number of C marshallers for this
  * purpose, see the g_cclosure_marshal_*$(LPAREN)$(RPAREN) functions. Additional C
  * marshallers can be generated with the [glib-genmarshal][glib-genmarshal]
  * utility.  Closures can be explicitly connected to signals with
- * [GObject.Global.signalConnectClosure], but it usually more convenient to let
+ * [gobject.global.signalConnectClosure], but it usually more convenient to let
  * GObject create a closure automatically by using one of the
  * g_signal_connect_*$(LPAREN)$(RPAREN) functions which take a callback function/user
  * data pair.
@@ -505,7 +505,7 @@ struct GCClosure
  * - The reference counting of #GClosure makes it easy to handle reentrancy
  * right; if a callback is removed while it is being invoked, the closure
  * and its parameters won't be freed until the invocation finishes.
- * - [GObject.Closure.invalidate] and invalidation notifiers allow callbacks to be
+ * - [gobject.closure.Closure.invalidate] and invalidation notifiers allow callbacks to be
  * automatically removed when the objects they point to go away.
  */
 struct GClosure
@@ -528,13 +528,13 @@ struct GClosure
 
   /**
    * Indicates whether the closure is currently being invoked with
-   * [GObject.Closure.invoke]
+   * [gobject.closure.Closure.invoke]
    */
   uint inMarshal;
 
   /**
    * Indicates whether the closure has been invalidated by
-   * [GObject.Closure.invalidate]
+   * [gobject.closure.Closure.invalidate]
    */
   uint isInvalid;
 
@@ -736,7 +736,7 @@ struct GInitiallyUnownedClass
   extern(C) void function(ObjectC* object, GParamSpec* pspec) notify;
 
   /**
-   * the @constructed function is called by [GObject.ObjectG.new_] as the
+   * the @constructed function is called by [gobject.object.ObjectG.new_] as the
    * final step of the object creation process.  At the point of the call, all
    * construction properties have been set on the object.  The purpose of this
    * call is to allow for object initialisation steps that can only be performed
@@ -865,7 +865,7 @@ struct GObjectClass
   extern(C) void function(ObjectC* object, GParamSpec* pspec) notify;
 
   /**
-   * the @constructed function is called by [GObject.ObjectG.new_] as the
+   * the @constructed function is called by [gobject.object.ObjectG.new_] as the
    * final step of the object creation process.  At the point of the call, all
    * construction properties have been set on the object.  The purpose of this
    * call is to allow for object initialisation steps that can only be performed
@@ -1038,7 +1038,7 @@ struct GParamSpecChar
 /**
  * The class structure for the GParamSpec type.
  * Normally, GParamSpec classes are filled by
- * [GObject.Global.paramTypeRegisterStatic].
+ * [gobject.global.paramTypeRegisterStatic].
  */
 struct GParamSpecClass
 {
@@ -1060,21 +1060,21 @@ struct GParamSpecClass
 
   /**
    * Resets a @value to the default value for this type
-   * $(LPAREN)recommended, the default is [GObject.Value.reset]$(RPAREN), see
-   * [GObject.Global.paramValueSetDefault].
+   * $(LPAREN)recommended, the default is [gobject.value.Value.reset]$(RPAREN), see
+   * [gobject.global.paramValueSetDefault].
    */
   extern(C) void function(GParamSpec* pspec, GValue* value) valueSetDefault;
 
   /**
    * Ensures that the contents of @value comply with the
    * specifications set out by this type $(LPAREN)optional$(RPAREN), see
-   * [GObject.Global.paramValueValidate].
+   * [gobject.global.paramValueValidate].
    */
   extern(C) bool function(GParamSpec* pspec, GValue* value) valueValidate;
 
   /**
    * Compares @value1 with @value2 according to this type
-   * $(LPAREN)recommended, the default is memcmp$(LPAREN)$(RPAREN)$(RPAREN), see [GObject.Global.paramValuesCmp].
+   * $(LPAREN)recommended, the default is memcmp$(LPAREN)$(RPAREN)$(RPAREN), see [gobject.global.paramValuesCmp].
    */
   extern(C) int function(GParamSpec* pspec, const(GValue)* value1, const(GValue)* value2) valuesCmp;
 
@@ -1115,7 +1115,7 @@ struct GParamSpecDouble
 
   /**
    * values closer than @epsilon will be considered identical
-   * by [GObject.Global.paramValuesCmp]; the default value is 1e-90.
+   * by [gobject.global.paramValuesCmp]; the default value is 1e-90.
    */
   double epsilon;
 }
@@ -1191,7 +1191,7 @@ struct GParamSpecFloat
 
   /**
    * values closer than @epsilon will be considered identical
-   * by [GObject.Global.paramValuesCmp]; the default value is 1e-30.
+   * by [gobject.global.paramValuesCmp]; the default value is 1e-30.
    */
   float epsilon;
 }
@@ -1307,9 +1307,9 @@ struct GParamSpecObject
  * All operations other than getting or setting the value are redirected,
  * including accessing the nick and blurb, validating a value, and so
  * forth.
- * See [GObject.ParamSpec.getRedirectTarget] for retrieving the overridden
+ * See [gobject.param_spec.ParamSpec.getRedirectTarget] for retrieving the overridden
  * property. #GParamSpecOverride is used in implementing
- * [GObject.ObjectClass.overrideProperty], and will not be directly useful
+ * [gobject.object_class.ObjectClass.overrideProperty], and will not be directly useful
  * unless you are implementing a new base type similar to GObject.
  */
 struct GParamSpecOverride
@@ -1396,10 +1396,10 @@ struct GParamSpecString
  * This structure is used to provide the type system with the information
  * required to initialize and destruct $(LPAREN)finalize$(RPAREN) a parameter's class and
  * instances thereof.
- * The initialized structure is passed to the [GObject.Global.paramTypeRegisterStatic]
+ * The initialized structure is passed to the [gobject.global.paramTypeRegisterStatic]
  * The type system will perform a deep copy of this structure, so its memory
  * does not need to be persistent across invocation of
- * [GObject.Global.paramTypeRegisterStatic].
+ * [gobject.global.paramTypeRegisterStatic].
  */
 struct GParamSpecTypeInfo
 {
@@ -1430,21 +1430,21 @@ struct GParamSpecTypeInfo
 
   /**
    * Resets a @value to the default value for @pspec
-   * $(LPAREN)recommended, the default is [GObject.Value.reset]$(RPAREN), see
-   * [GObject.Global.paramValueSetDefault].
+   * $(LPAREN)recommended, the default is [gobject.value.Value.reset]$(RPAREN), see
+   * [gobject.global.paramValueSetDefault].
    */
   extern(C) void function(GParamSpec* pspec, GValue* value) valueSetDefault;
 
   /**
    * Ensures that the contents of @value comply with the
    * specifications set out by @pspec $(LPAREN)optional$(RPAREN), see
-   * [GObject.Global.paramValueValidate].
+   * [gobject.global.paramValueValidate].
    */
   extern(C) bool function(GParamSpec* pspec, GValue* value) valueValidate;
 
   /**
    * Compares @value1 with @value2 according to @pspec
-   * $(LPAREN)recommended, the default is memcmp$(LPAREN)$(RPAREN)$(RPAREN), see [GObject.Global.paramValuesCmp].
+   * $(LPAREN)recommended, the default is memcmp$(LPAREN)$(RPAREN)$(RPAREN), see [gobject.global.paramValuesCmp].
    */
   extern(C) int function(GParamSpec* pspec, const(GValue)* value1, const(GValue)* value2) valuesCmp;
 }
@@ -1592,9 +1592,9 @@ struct GParamSpecValueArray
 
 /**
  * A #GParamSpec derived structure that contains the meta data for #GVariant properties.
- * When comparing values with [GObject.Global.paramValuesCmp], scalar values with the same
- * type will be compared with [GLib.VariantG.compare]. Other non-%NULL variants will
- * be checked for equality with [GLib.VariantG.equal], and their sort order is
+ * When comparing values with [gobject.global.paramValuesCmp], scalar values with the same
+ * type will be compared with [glib.variant.VariantG.compare]. Other non-%NULL variants will
+ * be checked for equality with [glib.variant.VariantG.equal], and their sort order is
  * otherwise undefined. %NULL is ordered before non-%NULL variants. Two %NULL
  * values compare equal.
  */
@@ -1620,7 +1620,7 @@ struct GParamSpecVariant
 
 /**
  * The GParameter struct is an auxiliary structure used
- * to hand parameter name/value pairs to [GObject.ObjectG.newv].
+ * to hand parameter name/value pairs to [gobject.object.ObjectG.newv].
 
  * Deprecated: This type is not introspectable.
  */
@@ -1684,7 +1684,7 @@ struct GSignalInvocationHint
 
 /**
  * A structure holding in-depth information for a specific signal.
- * See also: [GObject.Global.signalQuery]
+ * See also: [gobject.global.signalQuery]
  */
 struct GSignalQuery
 {
@@ -1705,7 +1705,7 @@ struct GSignalQuery
   GType itype;
 
   /**
-   * The signal flags as passed in to [GObject.Global.signalNew].
+   * The signal flags as passed in to [gobject.global.signalNew].
    */
   GSignalFlags signalFlags;
 
@@ -1786,11 +1786,11 @@ struct GTypeFundamentalInfo
  * This structure is used to provide the type system with the information
  * required to initialize and destruct $(LPAREN)finalize$(RPAREN) a type's class and
  * its instances.
- * The initialized structure is passed to the [GObject.Global.typeRegisterStatic] function
+ * The initialized structure is passed to the [gobject.global.typeRegisterStatic] function
  * $(LPAREN)or is copied into the provided #GTypeInfo structure in the
- * [GObject.TypePlugin.completeTypeInfo]$(RPAREN). The type system will perform a deep
+ * [gobject.type_plugin.TypePlugin.completeTypeInfo]$(RPAREN). The type system will perform a deep
  * copy of this structure, so its memory does not need to be persistent
- * across invocation of [GObject.Global.typeRegisterStatic].
+ * across invocation of [gobject.global.typeRegisterStatic].
  */
 struct GTypeInfo
 {
@@ -1877,24 +1877,24 @@ struct GTypeInterface
  * The model of `GTypeModule` is a dynamically loaded module which
  * implements some number of types and interface implementations.
  * When the module is loaded, it registers its types and interfaces
- * using [GObject.TypeModule.registerType] and
- * [GObject.TypeModule.addInterface].
+ * using [gobject.type_module.TypeModule.registerType] and
+ * [gobject.type_module.TypeModule.addInterface].
  * As long as any instances of these types and interface implementations
  * are in use, the module is kept loaded. When the types and interfaces
  * are gone, the module may be unloaded. If the types and interfaces
  * become used again, the module will be reloaded. Note that the last
  * reference cannot be released from within the module code, since that
- * would lead to the caller's code being unloaded before `[GObject.ObjectG.unref]`
+ * would lead to the caller's code being unloaded before `[gobject.object.ObjectG.unref]`
  * returns to it.
  * Keeping track of whether the module should be loaded or not is done by
  * using a use count - it starts at zero, and whenever it is greater than
  * zero, the module is loaded. The use count is maintained internally by
  * the type system, but also can be explicitly controlled by
- * [GObject.TypeModule.use] and [GObject.TypeModule.unuse].
- * Typically, when loading a module for the first type, `[GObject.TypeModule.use]`
+ * [gobject.type_module.TypeModule.use] and [gobject.type_module.TypeModule.unuse].
+ * Typically, when loading a module for the first type, `[gobject.type_module.TypeModule.use]`
  * will be used to load it so that it can initialize its types. At some later
  * point, when the module no longer needs to be loaded except for the type
- * implementations it contains, `[GObject.TypeModule.unuse]` is called.
+ * implementations it contains, `[gobject.type_module.TypeModule.unuse]` is called.
  * `GTypeModule` does not actually provide any implementation of module
  * loading and unloading. To create a particular module type you must
  * derive from `GTypeModule` and implement the load and unload functions
@@ -1929,7 +1929,7 @@ struct GTypeModuleClass
 
   /**
    * loads the module and registers one or more types using
-   * [GObject.TypeModule.registerType].
+   * [gobject.type_module.TypeModule.registerType].
    */
   extern(C) bool function(GTypeModule* module_) load;
 
@@ -1963,28 +1963,28 @@ struct GTypeModuleClass
  * where `new_type_plugin` is an implementation of the
  * `GTypePlugin` interface.
  * 2. The type's implementation is referenced, e.g. through
- * [GObject.TypeClass.ref_] or through func@GObject.type_create_instance
- * $(LPAREN)this is being called by [GObject.ObjectG.new_]$(RPAREN) or through one of the above
+ * [gobject.type_class.TypeClass.ref_] or through func@GObject.type_create_instance
+ * $(LPAREN)this is being called by [gobject.object.ObjectG.new_]$(RPAREN) or through one of the above
  * done on a type derived from `new_type_id`.
  * 3. This causes the type system to load the type's implementation by calling
- * [GObject.TypePlugin.use] and [GObject.TypePlugin.completeTypeInfo]
+ * [gobject.type_plugin.TypePlugin.use] and [gobject.type_plugin.TypePlugin.completeTypeInfo]
  * on `new_type_plugin`.
  * 4. At some point the type's implementation isn't required anymore, e.g. after
- * [GObject.TypeClass.unref] or func@GObject.type_free_instance
+ * [gobject.type_class.TypeClass.unref] or func@GObject.type_free_instance
  * $(LPAREN)called when the reference count of an instance drops to zero$(RPAREN).
  * 5. This causes the type system to throw away the information retrieved
- * from [GObject.TypePlugin.completeTypeInfo] and then it calls
- * [GObject.TypePlugin.unuse] on `new_type_plugin`.
+ * from [gobject.type_plugin.TypePlugin.completeTypeInfo] and then it calls
+ * [gobject.type_plugin.TypePlugin.unuse] on `new_type_plugin`.
  * 6. Things may repeat from the second step.
  * So basically, you need to implement a `GTypePlugin` type that
  * carries a use_count, once use_count goes from zero to one, you need
  * to load the implementation to successfully handle the upcoming
- * [GObject.TypePlugin.completeTypeInfo] call. Later, maybe after
+ * [gobject.type_plugin.TypePlugin.completeTypeInfo] call. Later, maybe after
  * succeeding use/unuse calls, once use_count drops to zero, you can
  * unload the implementation again. The type system makes sure to call
- * [GObject.TypePlugin.use] and [GObject.TypePlugin.completeTypeInfo]
+ * [gobject.type_plugin.TypePlugin.use] and [gobject.type_plugin.TypePlugin.completeTypeInfo]
  * again when the type is needed again.
- * [GObject.TypeModule] is an implementation of `GTypePlugin` that
+ * [gobject.type_module.TypeModule] is an implementation of `GTypePlugin` that
  * already implements most of this except for the actual module loading and
  * unloading. It even handles multiple registered types per module.
  */
@@ -2025,7 +2025,7 @@ struct GTypePluginClass
 
 /**
  * A structure holding information for a specific type.
- * See also: [GObject.Global.typeQuery]
+ * See also: [gobject.global.typeQuery]
  */
 struct GTypeQuery
 {
@@ -2139,8 +2139,8 @@ struct GValue
  * `GValueArray` is deprecated in favour of `GArray` since GLib 2.32.
  * It is possible to create a `GArray` that behaves like a `GValueArray`
  * by using the size of `GValue` as the element size, and by setting
- * [GObject.Value.unset] as the clear function using
- * [GLib.Array.setClearFunc], for instance, the following code:
+ * [gobject.value.Value.unset] as the clear function using
+ * [glib.array.Array.setClearFunc], for instance, the following code:
  * ```c
  * GValueArray *array \= g_value_array_new $(LPAREN)10$(RPAREN);
  * ```
@@ -2197,7 +2197,7 @@ union _Value__data__union
  * every #GWeakRef associated with becomes empty $(LPAREN)i.e. points to %NULL$(RPAREN).
  * Like #GValue, #GWeakRef can be statically allocated, stack- or
  * heap-allocated, or embedded in larger structures.
- * Unlike [GObject.ObjectG.weakRef] and [GObject.ObjectG.addWeakPointer], this weak
+ * Unlike [gobject.object.ObjectG.weakRef] and [gobject.object.ObjectG.addWeakPointer], this weak
  * reference is thread-safe: converting a weak pointer to a reference is
  * atomic with respect to invalidation of weak pointers to destroyed
  * objects.

@@ -2,7 +2,7 @@ module gtk.text_iter;
 
 import gdk.paintable;
 import gdk.paintable_mixin;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gobject.object;
 import gtk.c.functions;
@@ -97,7 +97,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Like [Gtk.TextIter.forwardCursorPosition], but moves backward.
+   * Like [gtk.text_iter.TextIter.forwardCursorPosition], but moves backward.
    * Returns: %TRUE if we moved
    */
   bool backwardCursorPosition()
@@ -109,7 +109,7 @@ class TextIter : Boxed
 
   /**
    * Moves up to count cursor positions.
-   * See [Gtk.TextIter.forwardCursorPosition] for details.
+   * See [gtk.text_iter.TextIter.forwardCursorPosition] for details.
    * Params:
    *   count = number of positions to move
    * Returns: %TRUE if we moved and the new position is dereferenceable
@@ -122,7 +122,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Same as [Gtk.TextIter.forwardFindChar],
+   * Same as [gtk.text_iter.TextIter.forwardFindChar],
    * but goes backward from iter.
    * Params:
    *   pred = function to be called on each character
@@ -185,7 +185,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Same as [Gtk.TextIter.forwardSearch], but moves backward.
+   * Same as [gtk.text_iter.TextIter.forwardSearch], but moves backward.
    * match_end will never be set to a `GtkTextIter` located after iter,
    * even if there is a possible match_start before or at iter.
    * Params:
@@ -224,7 +224,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Calls [Gtk.TextIter.backwardSentenceStart] up to count times.
+   * Calls [gtk.text_iter.TextIter.backwardSentenceStart] up to count times.
    * If count is negative, moves forward instead of backward.
    * Params:
    *   count = number of sentences to move
@@ -259,7 +259,7 @@ class TextIter : Boxed
 
   /**
    * Moves iter backward to the previous visible cursor position.
-   * See [Gtk.TextIter.backwardCursorPosition] for details.
+   * See [gtk.text_iter.TextIter.backwardCursorPosition] for details.
    * Returns: %TRUE if we moved and the new position is dereferenceable
    */
   bool backwardVisibleCursorPosition()
@@ -271,7 +271,7 @@ class TextIter : Boxed
 
   /**
    * Moves up to count visible cursor positions.
-   * See [Gtk.TextIter.backwardCursorPosition] for details.
+   * See [gtk.text_iter.TextIter.backwardCursorPosition] for details.
    * Params:
    *   count = number of positions to move
    * Returns: %TRUE if we moved and the new position is dereferenceable
@@ -337,7 +337,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Calls [Gtk.TextIter.backwardVisibleWordStart] up to count times.
+   * Calls [gtk.text_iter.TextIter.backwardVisibleWordStart] up to count times.
    * Params:
    *   count = number of times to move
    * Returns: %TRUE if iter moved and is not the end iterator
@@ -365,7 +365,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Calls [Gtk.TextIter.backwardWordStart] up to count times.
+   * Calls [gtk.text_iter.TextIter.backwardWordStart] up to count times.
    * Params:
    *   count = number of times to move
    * Returns: %TRUE if iter moved and is not the end iterator
@@ -383,7 +383,7 @@ class TextIter : Boxed
    * be editable.
    * If text inserted at iter would be editable then the
    * user should be allowed to insert text at iter.
-   * [Gtk.TextBuffer.insertInteractive] uses this function
+   * [gtk.text_buffer.TextBuffer.insertInteractive] uses this function
    * to decide whether insertions are allowed at a given position.
    * Params:
    *   defaultEditability = %TRUE if text is editable by default
@@ -418,7 +418,7 @@ class TextIter : Boxed
    * iterators can be copied with a simple assignment
    * $(LPAREN)`GtkTextIter i \= j;`$(RPAREN).
    * The function is used by language bindings.
-   * Returns: a copy of the iter, free with [Gtk.TextIter.free]
+   * Returns: a copy of the iter, free with [gtk.text_iter.TextIter.free]
    */
   TextIter copy()
   {
@@ -438,7 +438,7 @@ class TextIter : Boxed
    * inserted at iter, because for insertion you don’t want to know
    * whether the char at iter is inside an editable range, you want to
    * know whether a new character inserted at iter would be inside an
-   * editable range. Use [Gtk.TextIter.canInsert] to handle this
+   * editable range. Use [gtk.text_iter.TextIter.canInsert] to handle this
    * case.
    * Params:
    *   defaultSetting = %TRUE if text is editable by default
@@ -489,8 +489,8 @@ class TextIter : Boxed
    * Note that if this function returns %TRUE, it means that
    * iter is at the end of the tagged range, but that the character
    * at iter is outside the tagged range. In other words,
-   * unlike [Gtk.TextIter.startsTag], if this function
-   * returns %TRUE, [Gtk.TextIter.hasTag] will return
+   * unlike [gtk.text_iter.TextIter.startsTag], if this function
+   * returns %TRUE, [gtk.text_iter.TextIter.hasTag] will return
    * %FALSE for the same parameters.
    * Params:
    *   tag = a `GtkTextTag`
@@ -522,7 +522,7 @@ class TextIter : Boxed
    * This function is very fast; you can expect it to perform
    * better than e.g. getting the character offset for each
    * iterator and comparing the offsets yourself. Also, it’s a
-   * bit faster than [Gtk.TextIter.compare].
+   * bit faster than [gtk.text_iter.TextIter.compare].
    * Params:
    *   rhs = another `GtkTextIter`
    * Returns: %TRUE if the iterators point to the same place in the buffer
@@ -580,7 +580,7 @@ class TextIter : Boxed
    * with an accent mark will be represented as two characters, first
    * the letter then a "combining mark" that causes the accent to be
    * rendered; so the cursor can’t go between those two characters.
-   * See also the [Pango.LogAttr] struct and the funcPango.break
+   * See also the [pango.log_attr.LogAttr] struct and the funcPango.break
    * function.
    * Returns: %TRUE if we moved and the new position is dereferenceable
    */
@@ -593,7 +593,7 @@ class TextIter : Boxed
 
   /**
    * Moves up to count cursor positions.
-   * See [Gtk.TextIter.forwardCursorPosition] for details.
+   * See [gtk.text_iter.TextIter.forwardCursorPosition] for details.
    * Params:
    *   count = number of positions to move
    * Returns: %TRUE if we moved and the new position is dereferenceable
@@ -712,7 +712,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Calls [Gtk.TextIter.forwardSentenceEnd] count times.
+   * Calls [gtk.text_iter.TextIter.forwardSentenceEnd] count times.
    * If count is negative, moves backward instead of forward.
    * Params:
    *   count = number of sentences to move
@@ -728,7 +728,7 @@ class TextIter : Boxed
   /**
    * Moves iter forward to the “end iterator”, which points
    * one past the last valid character in the buffer.
-   * [Gtk.TextIter.getChar] called on the end iterator
+   * [gtk.text_iter.TextIter.getChar] called on the end iterator
    * returns 0, which is convenient for writing loops.
    */
   void forwardToEnd()
@@ -777,7 +777,7 @@ class TextIter : Boxed
 
   /**
    * Moves iter forward to the next visible cursor position.
-   * See [Gtk.TextIter.forwardCursorPosition] for details.
+   * See [gtk.text_iter.TextIter.forwardCursorPosition] for details.
    * Returns: %TRUE if we moved and the new position is dereferenceable
    */
   bool forwardVisibleCursorPosition()
@@ -789,7 +789,7 @@ class TextIter : Boxed
 
   /**
    * Moves up to count visible cursor positions.
-   * See [Gtk.TextIter.forwardCursorPosition] for details.
+   * See [gtk.text_iter.TextIter.forwardCursorPosition] for details.
    * Params:
    *   count = number of positions to move
    * Returns: %TRUE if we moved and the new position is dereferenceable
@@ -852,7 +852,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Calls [Gtk.TextIter.forwardVisibleWordEnd] up to count times.
+   * Calls [gtk.text_iter.TextIter.forwardVisibleWordEnd] up to count times.
    * Params:
    *   count = number of times to move
    * Returns: %TRUE if iter moved and is not the end iterator
@@ -880,7 +880,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Calls [Gtk.TextIter.forwardWordEnd] up to count times.
+   * Calls [gtk.text_iter.TextIter.forwardWordEnd] up to count times.
    * Params:
    *   count = number of times to move
    * Returns: %TRUE if iter moved and is not the end iterator
@@ -1034,7 +1034,7 @@ class TextIter : Boxed
    * Returns the character offset of an iterator.
    * Each character in a `GtkTextBuffer` has an offset,
    * starting with 0 for the first character in the buffer.
-   * Use [Gtk.TextBuffer.getIterAtOffset] to convert
+   * Use [gtk.text_buffer.TextBuffer.getIterAtOffset] to convert
    * an offset back into an iterator.
    * Returns: a character offset
    */
@@ -1103,7 +1103,7 @@ class TextIter : Boxed
    * contains non-text elements such as images, the character and byte
    * offsets in the returned string will not correspond to character and
    * byte offsets in the buffer. If you want offsets to correspond, see
-   * [Gtk.TextIter.getSlice].
+   * [gtk.text_iter.TextIter.getSlice].
    * Params:
    *   end = iterator at end of a range
    * Returns: array of characters from the buffer
@@ -1167,7 +1167,7 @@ class TextIter : Boxed
 
   /**
    * Returns visible text in the given range.
-   * Like [Gtk.TextIter.getSlice], but invisible text
+   * Like [gtk.text_iter.TextIter.getSlice], but invisible text
    * is not included. Invisible text is usually invisible because
    * a `GtkTextTag` with the “invisible” attribute turned on has
    * been applied to it.
@@ -1185,7 +1185,7 @@ class TextIter : Boxed
 
   /**
    * Returns visible text in the given range.
-   * Like [Gtk.TextIter.getText], but invisible text
+   * Like [gtk.text_iter.TextIter.getText], but invisible text
    * is not included. Invisible text is usually invisible because
    * a `GtkTextTag` with the “invisible” attribute turned on has
    * been applied to it.
@@ -1205,8 +1205,8 @@ class TextIter : Boxed
   /**
    * Returns %TRUE if iter points to a character that is part
    * of a range tagged with tag.
-   * See also [Gtk.TextIter.startsTag] and
-   * [Gtk.TextIter.endsTag].
+   * See also [gtk.text_iter.TextIter.startsTag] and
+   * [gtk.text_iter.TextIter.endsTag].
    * Params:
    *   tag = a `GtkTextTag`
    * Returns: whether iter is tagged with tag
@@ -1253,7 +1253,7 @@ class TextIter : Boxed
    * natural-language word $(LPAREN)as opposed to say inside some whitespace$(RPAREN).
    * Word breaks are determined by Pango and should be correct
    * for nearly any language.
-   * Note that if [Gtk.TextIter.startsWord] returns %TRUE,
+   * Note that if [gtk.text_iter.TextIter.startsWord] returns %TRUE,
    * then this function returns %TRUE too, since iter points to
    * the first character of the word.
    * Returns: %TRUE if iter is inside a word
@@ -1267,8 +1267,8 @@ class TextIter : Boxed
 
   /**
    * Determine if iter is at a cursor position.
-   * See [Gtk.TextIter.forwardCursorPosition] or
-   * [Pango.LogAttr] or funcPango.break for details
+   * See [gtk.text_iter.TextIter.forwardCursorPosition] or
+   * [pango.log_attr.LogAttr] or funcPango.break for details
    * on what a cursor position is.
    * Returns: %TRUE if the cursor can be placed at iter
    */
@@ -1282,7 +1282,7 @@ class TextIter : Boxed
   /**
    * Returns %TRUE if iter is the end iterator.
    * This means it is one past the last dereferenceable iterator
-   * in the buffer. [Gtk.TextIter.isEnd] is the most efficient
+   * in the buffer. [gtk.text_iter.TextIter.isEnd] is the most efficient
    * way to check whether an iterator is the end iterator.
    * Returns: whether iter is the end iterator
    */
@@ -1311,7 +1311,7 @@ class TextIter : Boxed
    * Most text buffer functions that take a range call this
    * automatically on your behalf, so there’s no real reason to
    * call it yourself in those cases. There are some exceptions,
-   * such as [Gtk.TextIter.inRange], that expect a
+   * such as [gtk.text_iter.TextIter.inRange], that expect a
    * pre-sorted range.
    * Params:
    *   second = another `GtkTextIter`
@@ -1334,7 +1334,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Same as [Gtk.TextIter.setLineOffset], but works with a
+   * Same as [gtk.text_iter.TextIter.setLineOffset], but works with a
    * byte index. The given byte index must be at
    * the start of a character, it can’t be in the middle of a UTF-8
    * encoded character.
@@ -1350,7 +1350,7 @@ class TextIter : Boxed
    * Moves iter within a line, to a new character $(LPAREN)not byte$(RPAREN) offset.
    * The given character offset must be less than or equal to the number
    * of characters in the line; if equal, iter moves to the start of the
-   * next line. See [Gtk.TextIter.setLineIndex] if you have a byte
+   * next line. See [gtk.text_iter.TextIter.setLineIndex] if you have a byte
    * index rather than a character offset.
    * Params:
    *   charOnLine = a character offset relative to the start of iter’s current line
@@ -1373,7 +1373,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Like [Gtk.TextIter.setLineIndex], but the index is in visible
+   * Like [gtk.text_iter.TextIter.setLineIndex], but the index is in visible
    * bytes, i.e. text with a tag making it invisible is not counted
    * in the index.
    * Params:
@@ -1385,7 +1385,7 @@ class TextIter : Boxed
   }
 
   /**
-   * Like [Gtk.TextIter.setLineOffset], but the offset is in visible
+   * Like [gtk.text_iter.TextIter.setLineOffset], but the offset is in visible
    * characters, i.e. text with a tag making it invisible is not
    * counted in the offset.
    * Params:
@@ -1398,9 +1398,9 @@ class TextIter : Boxed
 
   /**
    * Returns %TRUE if iter begins a paragraph.
-   * This is the case if [Gtk.TextIter.getLineOffset]
+   * This is the case if [gtk.text_iter.TextIter.getLineOffset]
    * would return 0. However this function is potentially more
-   * efficient than [Gtk.TextIter.getLineOffset], because
+   * efficient than [gtk.text_iter.TextIter.getLineOffset], because
    * it doesn’t have to compute the offset, it just has to see
    * whether it’s 0.
    * Returns: whether iter begins a line
@@ -1431,8 +1431,8 @@ class TextIter : Boxed
    * Note that if this function returns %TRUE, it means that
    * iter is at the beginning of the tagged range, and that the
    * character at iter is inside the tagged range. In other
-   * words, unlike [Gtk.TextIter.endsTag], if
-   * this function returns %TRUE, [Gtk.TextIter.hasTag]
+   * words, unlike [gtk.text_iter.TextIter.endsTag], if
+   * this function returns %TRUE, [gtk.text_iter.TextIter.hasTag]
    * will also return %TRUE for the same parameters.
    * Params:
    *   tag = a `GtkTextTag`
@@ -1461,8 +1461,8 @@ class TextIter : Boxed
   /**
    * Gets whether a range with tag applied to it begins
    * or ends at iter.
-   * This is equivalent to $(LPAREN)[Gtk.TextIter.startsTag] ||
-   * [Gtk.TextIter.endsTag]$(RPAREN)
+   * This is equivalent to $(LPAREN)[gtk.text_iter.TextIter.startsTag] ||
+   * [gtk.text_iter.TextIter.endsTag]$(RPAREN)
    * Params:
    *   tag = a `GtkTextTag`
    * Returns: whether tag is toggled on or off at iter

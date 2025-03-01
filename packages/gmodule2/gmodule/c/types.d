@@ -4,7 +4,7 @@ public import gid.basictypes;
 public import glib.c.types;
 
 /**
- * Errors returned by [GModule.Module.openFull].
+ * Errors returned by [gmodule.module_.Module.openFull].
  */
 enum GModuleError
 {
@@ -20,7 +20,7 @@ enum GModuleError
 }
 
 /**
- * Flags passed to [GModule.Module.open].
+ * Flags passed to [gmodule.module_.Module.open].
  * Note that these flags are not supported on all platforms.
  */
 enum GModuleFlags : uint

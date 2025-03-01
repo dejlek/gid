@@ -1,6 +1,6 @@
 module gio.native_socket_address;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_address;

@@ -1,12 +1,13 @@
 module glib.variant;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
 import glib.types;
 import glib.variant_type;
+
 
 import glib.variant_builder;
 import glib.variant_type;
@@ -38,14 +39,14 @@ import std.variant : Variant;
  * More advanced examples of `GVariant` in use can be found in documentation for
  * [`GVariant` format strings](gvariant-format-strings.html#pointers).
  * The range of possible values is determined by the type.
- * The type system used by `GVariant` is [GLib.VariantType].
+ * The type system used by `GVariant` is [glib.variant_type.VariantType].
  * `GVariant` instances always have a type and a value $(LPAREN)which are given
  * at construction time$(RPAREN).  The type and value of a `GVariant` instance
  * can never change other than by the `GVariant` itself being
  * destroyed.  A `GVariant` cannot contain a pointer.
- * `GVariant` is reference counted using [GLib.VariantG.ref_] and
- * [GLib.VariantG.unref].  `GVariant` also has floating reference counts —
- * see [GLib.VariantG.refSink].
+ * `GVariant` is reference counted using [glib.variant.VariantG.ref_] and
+ * [glib.variant.VariantG.unref].  `GVariant` also has floating reference counts —
+ * see [glib.variant.VariantG.refSink].
  * `GVariant` is completely threadsafe.  A `GVariant` instance can be
  * concurrently accessed in any way from any number of threads without
  * problems.
@@ -55,7 +56,7 @@ import std.variant : Variant;
  * small constant time, usually touching only a single memory page.
  * Serialized `GVariant` data can also be sent over the network.
  * `GVariant` is largely compatible with D-Bus.  Almost all types of
- * `GVariant` instances can be sent over D-Bus.  See [GLib.VariantType] for
+ * `GVariant` instances can be sent over D-Bus.  See [glib.variant_type.VariantType] for
  * exceptions.  $(LPAREN)However, `GVariant`’s serialization format is not the same
  * as the serialization format of a D-Bus message body: use
  * [GDBusMessage](../gio/class.DBusMessage.html), in the GIO library, for those.$(RPAREN)
@@ -70,7 +71,7 @@ import std.variant : Variant;
  * A `GVariant`’s size is limited mainly by any lower level operating
  * system constraints, such as the number of bits in `gsize`.  For
  * example, it is reasonable to have a 2GB file mapped into memory
- * with [GLib.MappedFile], and call [GLib.VariantG.newFromData] on
+ * with [glib.mapped_file.MappedFile], and call [glib.variant.VariantG.newFromData] on
  * it.
  * For convenience to C programmers, `GVariant` features powerful
  * varargs-based value construction and destruction.  This feature is
@@ -164,7 +165,7 @@ import std.variant : Variant;
  * `{sv}` would require 61 bytes of memory $(LPAREN)plus allocation overhead$(RPAREN).
  * This means that in total, for our `a{sv}` example, 91 bytes of
  * type information would be allocated.
- * The type information cache, additionally, uses a [GLib.HashTable] to
+ * The type information cache, additionally, uses a [glib.hash_table.HashTable] to
  * store and look up the cached items and stores a pointer to this
  * hash table in static storage.  The hash table is freed when there
  * are zero items in the type cache.
@@ -178,7 +179,7 @@ import std.variant : Variant;
  * that it uses.  The buffer is responsible for ensuring that the
  * correct call is made when the data is no longer in use by
  * `GVariant`.  This may involve a func@GLib.free or
- * even [GLib.MappedFile.unref].
+ * even [glib.mapped_file.MappedFile.unref].
  * One buffer management structure is used for each chunk of
  * serialized data.  The size of the buffer management structure
  * is `4 * $(LPAREN)void *$(RPAREN)`.  On 32-bit systems, that’s 16 bytes.
@@ -195,7 +196,7 @@ import std.variant : Variant;
  * dictionary.
  * If calls are made to start accessing the other values then
  * `GVariant` instances will exist for those values only for as long
- * as they are in use $(LPAREN)ie: until you call [GLib.VariantG.unref]$(RPAREN).  The
+ * as they are in use $(LPAREN)ie: until you call [glib.variant.VariantG.unref]$(RPAREN).  The
  * type information is shared.  The serialized data and the buffer
  * management structure for that serialized data is shared by the
  * child.
@@ -205,7 +206,7 @@ import std.variant : Variant;
  * using 91 bytes of memory for type information, 29 bytes of memory
  * for the serialized data, 16 bytes for buffer management and 24
  * bytes for the `GVariant` instance, or a total of 160 bytes, plus
- * allocation overhead.  If we were to use [GLib.VariantG.getChildValue]
+ * allocation overhead.  If we were to use [glib.variant.VariantG.getChildValue]
  * to access the two dictionary entries, we would use an additional 48
  * bytes.  If we were to have other dictionaries of the same type, we
  * would use more memory for the serialized data and buffer
@@ -337,8 +338,8 @@ class VariantG
    * in the children array may be %NULL.
    * All items in the array must have the same type, which must be the
    * same as child_type, if given.
-   * If the children are floating references $(LPAREN)see [GLib.VariantG.refSink]$(RPAREN), the
-   * new instance takes ownership of them as if via [GLib.VariantG.refSink].
+   * If the children are floating references $(LPAREN)see [glib.variant.VariantG.refSink]$(RPAREN), the
+   * new instance takes ownership of them as if via [glib.variant.VariantG.refSink].
    * Params:
    *   childType = the element type of the new array
    *   children = an array of
@@ -391,7 +392,7 @@ class VariantG
 
   /**
    * Creates an array-of-bytes #GVariant with the contents of string.
-   * This function is just like [GLib.VariantG.newString] except that the
+   * This function is just like [glib.variant.VariantG.newString] except that the
    * string need not be valid UTF-8.
    * The nul terminator character at the end of the string is stored in
    * the array.
@@ -436,8 +437,8 @@ class VariantG
   /**
    * Creates a new dictionary entry #GVariant. key and value must be
    * non-%NULL. key must be a value of a basic type $(LPAREN)ie: not a container$(RPAREN).
-   * If the key or value are floating references $(LPAREN)see [GLib.VariantG.refSink]$(RPAREN),
-   * the new instance takes ownership of them as if via [GLib.VariantG.refSink].
+   * If the key or value are floating references $(LPAREN)see [glib.variant.VariantG.refSink]$(RPAREN),
+   * the new instance takes ownership of them as if via [glib.variant.VariantG.refSink].
    * Params:
    *   key = a basic #GVariant, the key
    *   value = a #GVariant, the value
@@ -579,7 +580,7 @@ class VariantG
    * If child_type is non-%NULL then it must be a definite type.
    * If they are both non-%NULL then child_type must be the type
    * of child.
-   * If child is a floating reference $(LPAREN)see [GLib.VariantG.refSink]$(RPAREN), the new
+   * If child is a floating reference $(LPAREN)see [glib.variant.VariantG.refSink]$(RPAREN), the new
    * instance takes ownership of child.
    * Params:
    *   childType = the #GVariantType of the child, or %NULL
@@ -597,7 +598,7 @@ class VariantG
   /**
    * Creates a D-Bus object path #GVariant with the contents of object_path.
    * object_path must be a valid D-Bus object path.  Use
-   * [GLib.VariantG.isObjectPath] if you're not sure.
+   * [glib.variant.VariantG.isObjectPath] if you're not sure.
    * Params:
    *   objectPath = a normal C nul-terminated string
    * Returns: a floating reference to a new object path #GVariant instance
@@ -615,7 +616,7 @@ class VariantG
    * Constructs an array of object paths #GVariant from the given array of
    * strings.
    * Each string must be a valid #GVariant object path; see
-   * [GLib.VariantG.isObjectPath].
+   * [glib.variant.VariantG.isObjectPath].
    * If length is -1 then strv is %NULL-terminated.
    * Params:
    *   strv = an array of strings
@@ -640,7 +641,7 @@ class VariantG
   /**
    * Creates a D-Bus type signature #GVariant with the contents of
    * string.  string must be a valid D-Bus type signature.  Use
-   * [GLib.VariantG.isSignature] if you're not sure.
+   * [glib.variant.VariantG.isSignature] if you're not sure.
    * Params:
    *   signature = a normal C nul-terminated string
    * Returns: a floating reference to a new signature #GVariant instance
@@ -657,7 +658,7 @@ class VariantG
   /**
    * Creates a string #GVariant with the contents of string.
    * string must be valid UTF-8, and must not be %NULL. To encode
-   * potentially-%NULL strings, use [GLib.VariantG.new_] with `ms` as the
+   * potentially-%NULL strings, use [glib.variant.VariantG.new_] with `ms` as the
    * [format string][gvariant-format-strings-maybe-types].
    * Params:
    *   string_ = a normal UTF-8 nul-terminated string
@@ -701,8 +702,8 @@ class VariantG
    * type is determined from the types of children.  No entry in the
    * children array may be %NULL.
    * If n_children is 0 then the unit tuple is constructed.
-   * If the children are floating references $(LPAREN)see [GLib.VariantG.refSink]$(RPAREN), the
-   * new instance takes ownership of them as if via [GLib.VariantG.refSink].
+   * If the children are floating references $(LPAREN)see [glib.variant.VariantG.refSink]$(RPAREN), the
+   * new instance takes ownership of them as if via [glib.variant.VariantG.refSink].
    * Params:
    *   children = the items to make the tuple out of
    * Returns: a floating reference to a new #GVariant tuple
@@ -768,7 +769,7 @@ class VariantG
   /**
    * Boxes value.  The result is a #GVariant instance representing a
    * variant containing the original value.
-   * If child is a floating reference $(LPAREN)see [GLib.VariantG.refSink]$(RPAREN), the new
+   * If child is a floating reference $(LPAREN)see [glib.variant.VariantG.refSink]$(RPAREN), the new
    * instance takes ownership of child.
    * Params:
    *   value = a #GVariant instance
@@ -793,7 +794,7 @@ class VariantG
    * bytes and containers containing only these things $(LPAREN)recursively$(RPAREN).
    * While this function can safely handle untrusted, non-normal data, it is
    * recommended to check whether the input is in normal form beforehand, using
-   * [GLib.VariantG.isNormalForm], and to reject non-normal inputs if your
+   * [glib.variant.VariantG.isNormalForm], and to reject non-normal inputs if your
    * application can be strict about what inputs it rejects.
    * The returned value is always in normal form and is marked as trusted.
    * A full, not floating, reference is returned.
@@ -808,18 +809,18 @@ class VariantG
   }
 
   /**
-   * Checks if calling [GLib.VariantG.get] with format_string on value would
+   * Checks if calling [glib.variant.VariantG.get] with format_string on value would
    * be valid from a type-compatibility standpoint.  format_string is
    * assumed to be a valid format string $(LPAREN)from a syntactic standpoint$(RPAREN).
    * If copy_only is %TRUE then this function additionally checks that it
-   * would be safe to call [GLib.VariantG.unref] on value immediately after
-   * the call to [GLib.VariantG.get] without invalidating the result.  This is
+   * would be safe to call [glib.variant.VariantG.unref] on value immediately after
+   * the call to [glib.variant.VariantG.get] without invalidating the result.  This is
    * only possible if deep copies are made $(LPAREN)ie: there are no pointers to
    * the data inside of the soon-to-be-freed #GVariant instance$(RPAREN).  If this
    * check fails then a g_critical$(LPAREN)$(RPAREN) is printed and %FALSE is returned.
    * This function is meant to be used by functions that wish to provide
    * varargs accessors to #GVariant values of uncertain values $(LPAREN)eg:
-   * [GLib.VariantG.lookup] or [Gio.MenuModel.getItemAttribute]$(RPAREN).
+   * [glib.variant.VariantG.lookup] or [gio.menu_model.MenuModel.getItemAttribute]$(RPAREN).
    * Params:
    *   formatString = a valid #GVariant format string
    *   copyOnly = %TRUE to ensure the format string makes deep copies
@@ -859,7 +860,7 @@ class VariantG
    * integer.  Also note that this function is not particularly
    * well-behaved when it comes to comparison of doubles; in particular,
    * the handling of incomparable values $(LPAREN)ie: NaN$(RPAREN) is undefined.
-   * If you only require an equality comparison, [GLib.VariantG.equal] is more
+   * If you only require an equality comparison, [glib.variant.VariantG.equal] is more
    * general.
    * Params:
    *   two = a #GVariant instance of the same type
@@ -875,9 +876,9 @@ class VariantG
   }
 
   /**
-   * Similar to [GLib.VariantG.getBytestring] except that instead of
+   * Similar to [glib.variant.VariantG.getBytestring] except that instead of
    * returning a constant string, the string is duplicated.
-   * The return value must be freed using [GLib.Global.gfree].
+   * The return value must be freed using [glib.global.gfree].
    * Returns: a newly allocated string
    */
   ubyte[] dupBytestring()
@@ -897,7 +898,7 @@ class VariantG
   /**
    * Gets the contents of an array of array of bytes #GVariant.  This call
    * makes a deep copy; the return result should be released with
-   * [GLib.Global.strfreev].
+   * [glib.global.strfreev].
    * If length is non-%NULL then the number of elements in the result is
    * stored there.  In any case, the resulting array will be
    * %NULL-terminated.
@@ -924,7 +925,7 @@ class VariantG
   /**
    * Gets the contents of an array of object paths #GVariant.  This call
    * makes a deep copy; the return result should be released with
-   * [GLib.Global.strfreev].
+   * [glib.global.strfreev].
    * If length is non-%NULL then the number of elements in the result
    * is stored there.  In any case, the resulting array will be
    * %NULL-terminated.
@@ -949,10 +950,10 @@ class VariantG
   }
 
   /**
-   * Similar to [GLib.VariantG.getString] except that instead of returning
+   * Similar to [glib.variant.VariantG.getString] except that instead of returning
    * a constant string, the string is duplicated.
    * The string will always be UTF-8 encoded.
-   * The return value must be freed using [GLib.Global.gfree].
+   * The return value must be freed using [glib.global.gfree].
    * Params:
    *   length = a pointer to a #gsize, to store the length
    * Returns: a newly allocated string, UTF-8 encoded
@@ -968,7 +969,7 @@ class VariantG
   /**
    * Gets the contents of an array of strings #GVariant.  This call
    * makes a deep copy; the return result should be released with
-   * [GLib.Global.strfreev].
+   * [glib.global.strfreev].
    * If length is non-%NULL then the number of elements in the result
    * is stored there.  In any case, the resulting array will be
    * %NULL-terminated.
@@ -1042,7 +1043,7 @@ class VariantG
    * If the array contains a nul terminator character somewhere other than
    * the last byte then the returned string is the string, up to the first
    * such nul character.
-   * [GLib.VariantG.getFixedArray] should be used instead if the array contains
+   * [glib.variant.VariantG.getFixedArray] should be used instead if the array contains
    * arbitrary data that could not be nul-terminated or could contain nul bytes.
    * It is an error to call this function with a value that is not an
    * array of bytes.
@@ -1060,7 +1061,7 @@ class VariantG
   /**
    * Gets the contents of an array of array of bytes #GVariant.  This call
    * makes a shallow copy; the return result should be released with
-   * [GLib.Global.gfree], but the individual strings must not be modified.
+   * [glib.global.gfree], but the individual strings must not be modified.
    * If length is non-%NULL then the number of elements in the result is
    * stored there.  In any case, the resulting array will be
    * %NULL-terminated.
@@ -1090,14 +1091,14 @@ class VariantG
    * entries.  It is an error to call this function on any other type of
    * #GVariant.
    * It is an error if index_ is greater than the number of child items
-   * in the container.  See [GLib.VariantG.nChildren].
+   * in the container.  See [glib.variant.VariantG.nChildren].
    * The returned value is never floating.  You should free it with
-   * [GLib.VariantG.unref] when you're done with it.
+   * [glib.variant.VariantG.unref] when you're done with it.
    * Note that values borrowed from the returned child are not guaranteed to
    * still be valid after the child is freed even if you still hold a reference
    * to value, if value has not been serialized at the time this function is
    * called. To avoid this, you can serialize value by calling
-   * [GLib.VariantG.getData] and optionally ignoring the return value.
+   * [glib.variant.VariantG.getData] and optionally ignoring the return value.
    * There may be implementation specific restrictions on deeply nested values,
    * which would result in the unit tuple being returned as the child value,
    * instead of further nested children. #GVariant is guaranteed to handle
@@ -1149,7 +1150,7 @@ class VariantG
   /**
    * Returns a pointer to the serialized form of a #GVariant instance.
    * The semantics of this function are exactly the same as
-   * [GLib.VariantG.getData], except that the returned #GBytes holds
+   * [glib.variant.VariantG.getData], except that the returned #GBytes holds
    * a reference to the variant data.
    * Returns: A new #GBytes representing the variant data
    */
@@ -1260,7 +1261,7 @@ class VariantG
    * If value is already in normal form, a new reference will be returned
    * $(LPAREN)which will be floating if value is floating$(RPAREN). If it is not in normal form,
    * the newly created #GVariant will be returned with a single non-floating
-   * reference. Typically, [GLib.VariantG.takeRef] should be called on the return
+   * reference. Typically, [glib.variant.VariantG.takeRef] should be called on the return
    * value from this function to guarantee ownership of a single non-floating
    * reference to it.
    * Returns: a trusted #GVariant
@@ -1276,7 +1277,7 @@ class VariantG
   /**
    * Gets the contents of an array of object paths #GVariant.  This call
    * makes a shallow copy; the return result should be released with
-   * [GLib.Global.gfree], but the individual strings must not be modified.
+   * [glib.global.gfree], but the individual strings must not be modified.
    * If length is non-%NULL then the number of elements in the result
    * is stored there.  In any case, the resulting array will be
    * %NULL-terminated.
@@ -1302,7 +1303,7 @@ class VariantG
 
   /**
    * Determines the number of bytes that would be required to store value
-   * with [GLib.VariantG.store].
+   * with [glib.variant.VariantG.store].
    * If value has a fixed-sized type then this function always returned
    * that fixed size.
    * In the case that value is already in serialized form or the size has
@@ -1353,7 +1354,7 @@ class VariantG
   /**
    * Gets the contents of an array of strings #GVariant.  This call
    * makes a shallow copy; the return result should be released with
-   * [GLib.Global.gfree], but the individual strings must not be modified.
+   * [glib.global.gfree], but the individual strings must not be modified.
    * If length is non-%NULL then the number of elements in the result
    * is stored there.  In any case, the resulting array will be
    * %NULL-terminated.
@@ -1393,7 +1394,7 @@ class VariantG
 
   /**
    * Returns the type string of value.  Unlike the result of calling
-   * [GLib.VariantType.peekString], this string is nul-terminated.  This
+   * [glib.variant_type.VariantType.peekString], this string is nul-terminated.  This
    * string belongs to #GVariant and must not be freed.
    * Returns: the type string for the type of value
    */
@@ -1489,9 +1490,9 @@ class VariantG
    * Checks whether value has a floating reference count.
    * This function should only ever be used to assert that a given variant
    * is or is not floating, or for debug purposes. To acquire a reference
-   * to a variant that might be floating, always use [GLib.VariantG.refSink]
-   * or [GLib.VariantG.takeRef].
-   * See [GLib.VariantG.refSink] for more information about floating reference
+   * to a variant that might be floating, always use [glib.variant.VariantG.refSink]
+   * or [glib.variant.VariantG.takeRef].
+   * See [glib.variant.VariantG.refSink] for more information about floating reference
    * counts.
    * Returns: whether value is floating
    */
@@ -1506,7 +1507,7 @@ class VariantG
    * Checks if value is in normal form.
    * The main reason to do this is to detect if a given chunk of
    * serialized data is in normal form: load the data into a #GVariant
-   * using [GLib.VariantG.newFromData] and then use this function to
+   * using [glib.variant.VariantG.newFromData] and then use this function to
    * check.
    * If value is found to be in normal form then it will be marked as
    * being trusted.  If the value was already marked as being trusted then
@@ -1586,7 +1587,7 @@ class VariantG
   }
 
   /**
-   * Pretty-prints value in the format understood by [GLib.VariantG.parse].
+   * Pretty-prints value in the format understood by [glib.variant.VariantG.parse].
    * The format is described [here][gvariant-text].
    * If type_annotate is %TRUE, then type information is included in
    * the output.
@@ -1607,16 +1608,16 @@ class VariantG
    * #GVariant uses a floating reference count system.  All functions with
    * names starting with `g_variant_new_` return floating
    * references.
-   * Calling [GLib.VariantG.refSink] on a #GVariant with a floating reference
+   * Calling [glib.variant.VariantG.refSink] on a #GVariant with a floating reference
    * will convert the floating reference into a full reference.  Calling
-   * [GLib.VariantG.refSink] on a non-floating #GVariant results in an
+   * [glib.variant.VariantG.refSink] on a non-floating #GVariant results in an
    * additional normal reference being added.
    * In other words, if the value is floating, then this call "assumes
    * ownership" of the floating reference, converting it to a normal
    * reference.  If the value is not floating, then this call adds a
    * new normal reference increasing the reference count by one.
    * All calls that result in a #GVariant instance being inserted into a
-   * container will call [GLib.VariantG.refSink] on the instance.  This means
+   * container will call [glib.variant.VariantG.refSink] on the instance.  This means
    * that if the value was just created $(LPAREN)and has only its floating
    * reference$(RPAREN) then the container will assume sole ownership of the value
    * at that point and the caller will not need to unreference it.  This
@@ -1635,11 +1636,11 @@ class VariantG
 
   /**
    * Stores the serialized form of value at data.  data should be
-   * large enough.  See [GLib.VariantG.getSize].
+   * large enough.  See [glib.variant.VariantG.getSize].
    * The stored data is in machine native byte order but may not be in
    * fully-normalised form if read from an untrusted source.  See
-   * [GLib.VariantG.getNormalForm] for a solution.
-   * As with [GLib.VariantG.getData], to be able to deserialize the
+   * [glib.variant.VariantG.getNormalForm] for a solution.
+   * As with [glib.variant.VariantG.getData], to be able to deserialize the
    * serialized variant successfully, its type and $(LPAREN)if the destination
    * machine might be different$(RPAREN) its endianness must also be available.
    * This function is approximately O$(LPAREN)n$(RPAREN) in the size of data.
@@ -1653,7 +1654,7 @@ class VariantG
 
   /**
    * If value is floating, sink it.  Otherwise, do nothing.
-   * Typically you want to use [GLib.VariantG.refSink] in order to
+   * Typically you want to use [glib.variant.VariantG.refSink] in order to
    * automatically do the correct thing with respect to floating or
    * non-floating references, but there is one specific scenario where
    * this function is helpful.
@@ -1672,10 +1673,10 @@ class VariantG
    * the one that was returned in the first place, or a floating reference
    * that has been converted to a full reference.
    * This function has an odd interaction when combined with
-   * [GLib.VariantG.refSink] running at the same time in another thread on
-   * the same #GVariant instance.  If [GLib.VariantG.refSink] runs first then
+   * [glib.variant.VariantG.refSink] running at the same time in another thread on
+   * the same #GVariant instance.  If [glib.variant.VariantG.refSink] runs first then
    * the result will be that the floating reference is converted to a hard
-   * reference.  If [GLib.VariantG.takeRef] runs first then the result will
+   * reference.  If [glib.variant.VariantG.takeRef] runs first then the result will
    * be that the floating reference is converted to a hard reference and
    * an additional reference on top of that one is added.  It is best to
    * avoid this situation.
@@ -1692,7 +1693,7 @@ class VariantG
   /**
    * Determines if a given string is a valid D-Bus object path.  You
    * should ensure that a string is a valid D-Bus object path before
-   * passing it to [GLib.VariantG.newObjectPath].
+   * passing it to [glib.variant.VariantG.newObjectPath].
    * A valid object path starts with `/` followed by zero or more
    * sequences of characters separated by `/` characters.  Each sequence
    * must contain only the characters `[A-Z][a-z][0-9]_`.  No sequence
@@ -1712,7 +1713,7 @@ class VariantG
   /**
    * Determines if a given string is a valid D-Bus type signature.  You
    * should ensure that a string is a valid D-Bus type signature before
-   * passing it to [GLib.VariantG.newSignature].
+   * passing it to [glib.variant.VariantG.newSignature].
    * D-Bus type signatures consist of zero or more definite #GVariantType
    * strings in sequence.
    * Params:
@@ -1745,10 +1746,10 @@ class VariantG
    * ^        ^^^^^
    * ]|
    * The format of the message may change in a future version.
-   * error must have come from a failed attempt to [GLib.VariantG.parse] and
+   * error must have come from a failed attempt to [glib.variant.VariantG.parse] and
    * source_str must be exactly the same string that caused the error.
    * If source_str was not nul-terminated when you passed it to
-   * [GLib.VariantG.parse] then you must add nul termination before using this
+   * [glib.variant.VariantG.parse] then you must add nul termination before using this
    * function.
    * Params:
    *   error = a #GError from the #GVariantParseError domain

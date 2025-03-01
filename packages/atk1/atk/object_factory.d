@@ -4,7 +4,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object;
 import atk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gobject.types;
 
@@ -13,7 +13,7 @@ import gobject.types;
  * create accessible objects for objects of a specific GType.
  * This class is the base object class for a factory used to create an
  * accessible object for a specific GType. The function
- * [Atk.Registry.setFactoryType] is normally called to store in the
+ * [atk.registry.Registry.setFactoryType] is normally called to store in the
  * registry the factory type to be used to create an accessible of a
  * particular GType.
  */

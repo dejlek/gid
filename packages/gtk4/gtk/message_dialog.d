@@ -1,6 +1,6 @@
 module gtk.message_dialog;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -27,9 +27,9 @@ import gtk.widget;
  * `GtkMessageDialog` from `GtkDialog` without too much effort, but
  * `GtkMessageDialog` saves typing.
  * The easiest way to do a modal message dialog is to use the %GTK_DIALOG_MODAL
- * flag, which will call [Gtk.Window.setModal] internally. The dialog will
+ * flag, which will call [gtk.window.Window.setModal] internally. The dialog will
  * prevent interaction with the parent window until it's hidden or destroyed.
- * You can use the [Gtk.Dialog.response] signal to know when the user
+ * You can use the [gtk.dialog.Dialog.response] signal to know when the user
  * dismissed the dialog.
  * An example for using a modal dialog:
  * ```c
@@ -68,7 +68,7 @@ import gtk.widget;
  * The `GtkMessageDialog` implementation of the `GtkBuildable` interface exposes
  * the message area as an internal child with the name “message_area”.
 
- * Deprecated: Use [Gtk.AlertDialog] instead
+ * Deprecated: Use [gtk.alert_dialog.AlertDialog] instead
  */
 class MessageDialog : Dialog
 {
@@ -93,12 +93,12 @@ class MessageDialog : Dialog
    * Returns the message area of the dialog.
    * This is the box where the dialog’s primary and secondary labels
    * are packed. You can add your own extra content to that box and it
-   * will appear below those labels. See [Gtk.Dialog.getContentArea]
-   * for the corresponding function in the parent [Gtk.Dialog].
+   * will appear below those labels. See [gtk.dialog.Dialog.getContentArea]
+   * for the corresponding function in the parent [gtk.dialog.Dialog].
    * Returns: A `GtkBox` corresponding to the
    *   “message area” in the message_dialog
 
-   * Deprecated: Use [Gtk.AlertDialog] instead
+   * Deprecated: Use [gtk.alert_dialog.AlertDialog] instead
    */
   Widget getMessageArea()
   {
@@ -113,7 +113,7 @@ class MessageDialog : Dialog
    * Params:
    *   str = string with Pango markup
 
-   * Deprecated: Use [Gtk.AlertDialog] instead
+   * Deprecated: Use [gtk.alert_dialog.AlertDialog] instead
    */
   void setMarkup(string str)
   {

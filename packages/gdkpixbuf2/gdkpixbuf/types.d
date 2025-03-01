@@ -7,7 +7,7 @@ import gdkpixbuf.pixbuf_animation;
 import gdkpixbuf.pixbuf_format;
 import gdkpixbuf.pixbuf_module;
 import gdkpixbuf.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 

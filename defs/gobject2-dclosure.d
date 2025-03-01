@@ -1,3 +1,4 @@
+//!class DClosure pre
 //!kind DClosure Opaque
 //!inhibit init funcs
 

@@ -3,7 +3,7 @@ module gdk.event_sequence;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**

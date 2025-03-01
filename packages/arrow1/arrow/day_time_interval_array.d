@@ -6,7 +6,7 @@ import arrow.c.types;
 import arrow.day_millisecond;
 import arrow.primitive_array;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class DayTimeIntervalArray : PrimitiveArray

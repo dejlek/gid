@@ -5,7 +5,7 @@ import gdk.event;
 import gdk.rectangle;
 import gdk.surface;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -24,7 +24,7 @@ import pango.attr_list;
  * composition states as preedit text. To do so, the `GtkIMContext` will emit
  * signal@Gtk.IMContext::preedit-start, signal@Gtk.IMContext::preedit-changed
  * and signal@Gtk.IMContext::preedit-end signals.
- * For instance, the built-in GTK input method [Gtk.IMContextSimple]
+ * For instance, the built-in GTK input method [gtk.imcontext_simple.IMContextSimple]
  * implements the input of arbitrary Unicode code points by holding down the
  * <kbd>Control</kbd> and <kbd>Shift</kbd> keys and then typing <kbd>u</kbd>
  * followed by the hexadecimal digits of the code point. When releasing the
@@ -36,7 +36,7 @@ import pango.attr_list;
  * loadable modules. An input method module is a small shared library which
  * provides a `GIOExtension` for the extension point named "gtk-im-module".
  * To connect a widget to the users preferred input method, you should use
- * [Gtk.IMMulticontext].
+ * [gtk.immulticontext.IMMulticontext].
  */
 class IMContext : ObjectG
 {
@@ -63,7 +63,7 @@ class IMContext : ObjectG
    * to the platform, other environmental factors may result in an on-screen
    * keyboard effectively not showing up.
    * Params:
-   *   event = a [Gdk.Event]
+   *   event = a [gdk.event.Event]
    * Returns: %TRUE if an on-screen keyboard could be requested to the platform.
    */
   bool activateOsk(Event event)
@@ -80,7 +80,7 @@ class IMContext : ObjectG
    * Note that offset and n_chars are in characters not in bytes
    * which differs from the usage other places in `GtkIMContext`.
    * In order to use this function, you should first call
-   * [Gtk.IMContext.getSurrounding] to get the current context,
+   * [gtk.imcontext.IMContext.getSurrounding] to get the current context,
    * and call this function immediately afterwards to make sure that you
    * know what you are deleting. You should also account for the fact
    * that even if the signal was handled, the input context might not
@@ -166,10 +166,10 @@ class IMContext : ObjectG
    * This string should be displayed inserted at the insertion point.
    * Params:
    *   str = location to store the retrieved
-   *     string. The string retrieved must be freed with [GLib.Global.gfree].
+   *     string. The string retrieved must be freed with [glib.global.gfree].
    *   attrs = location to store the retrieved
    *     attribute list. When you are done with this list, you
-   *     must unreference it with [Pango.AttrList.unref].
+   *     must unreference it with [pango.attr_list.AttrList.unref].
    *   cursorPos = location to store position of cursor
    *     $(LPAREN)in characters$(RPAREN) within the preedit string.
    */
@@ -191,7 +191,7 @@ class IMContext : ObjectG
    * signalGtk.IMContext::retrieve-surrounding signal on the input method;
    * in response to this signal, a widget should provide as much context as
    * is available, up to an entire paragraph, by calling
-   * [Gtk.IMContext.setSurrounding].
+   * [gtk.imcontext.IMContext.setSurrounding].
    * Note that there is no obligation for a widget to respond to the
    * `::retrieve-surrounding` signal, so input methods must be prepared to
    * function without context.
@@ -199,13 +199,13 @@ class IMContext : ObjectG
    *   text = location to store a UTF-8 encoded
    *     string of text holding context around the insertion point.
    *     If the function returns %TRUE, then you must free the result
-   *     stored in this location with [GLib.Global.gfree].
+   *     stored in this location with [glib.global.gfree].
    *   cursorIndex = location to store byte index of the insertion
    *     cursor within text.
    * Returns: `TRUE` if surrounding text was provided; in this case
    *   you must free the result stored in `text`.
 
-   * Deprecated: Use [Gtk.IMContext.getSurroundingWithSelection] instead.
+   * Deprecated: Use [gtk.imcontext.IMContext.getSurroundingWithSelection] instead.
    */
   bool getSurrounding(out string text, out int cursorIndex)
   {
@@ -225,7 +225,7 @@ class IMContext : ObjectG
    * signalGtk.IMContext::retrieve-surrounding signal on the input method;
    * in response to this signal, a widget should provide as much context as
    * is available, up to an entire paragraph, by calling
-   * [Gtk.IMContext.setSurroundingWithSelection].
+   * [gtk.imcontext.IMContext.setSurroundingWithSelection].
    * Note that there is no obligation for a widget to respond to the
    * `::retrieve-surrounding` signal, so input methods must be prepared to
    * function without context.
@@ -233,7 +233,7 @@ class IMContext : ObjectG
    *   text = location to store a UTF-8 encoded
    *     string of text holding context around the insertion point.
    *     If the function returns %TRUE, then you must free the result
-   *     stored in this location with [GLib.Global.gfree].
+   *     stored in this location with [glib.global.gfree].
    *   cursorIndex = location to store byte index of the insertion
    *     cursor within text.
    *   anchorIndex = location to store byte index of the selection
@@ -297,7 +297,7 @@ class IMContext : ObjectG
    *     the preedit string should not be included within text
    *   cursorIndex = the byte index of the insertion cursor within text.
 
-   * Deprecated: Use [Gtk.IMContext.setSurroundingWithSelection] instead
+   * Deprecated: Use [gtk.imcontext.IMContext.setSurroundingWithSelection] instead
    */
   void setSurrounding(string text, int cursorIndex)
   {
@@ -425,7 +425,7 @@ class IMContext : ObjectG
    * The ::preedit-changed signal is emitted whenever the preedit sequence
    * currently being entered has changed.
    * It is also emitted at the end of a preedit sequence, in which case
-   * [Gtk.IMContext.getPreeditString] returns the empty string.
+   * [gtk.imcontext.IMContext.getPreeditString] returns the empty string.
    *   iMContext = the instance the signal is connected to
    */
   alias PreeditChangedCallbackDlg = void delegate(IMContext iMContext);
@@ -517,7 +517,7 @@ class IMContext : ObjectG
    * The ::retrieve-surrounding signal is emitted when the input method
    * requires the context surrounding the cursor.
    * The callback should set the input method surrounding context by
-   * calling the [Gtk.IMContext.setSurrounding] method.
+   * calling the [gtk.imcontext.IMContext.setSurrounding] method.
    *   iMContext = the instance the signal is connected to
    * Returns: %TRUE if the signal was handled.
    */

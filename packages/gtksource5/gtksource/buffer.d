@@ -1,6 +1,6 @@
 module gtksource.buffer;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.text_buffer;
@@ -15,17 +15,17 @@ import gtksource.style_scheme;
 import gtksource.types;
 
 /**
- * Subclass of [Gtk.TextBuffer].
+ * Subclass of [gtk.text_buffer.TextBuffer].
  * A `GtkSourceBuffer` object is the model for class@View widgets.
- * It extends the [Gtk.TextBuffer] class by adding features useful to display
+ * It extends the [gtk.text_buffer.TextBuffer] class by adding features useful to display
  * and edit source code such as syntax highlighting and bracket matching.
- * To create a `GtkSourceBuffer` use [GtkSource.Buffer.new_] or
- * [GtkSource.Buffer.newWithLanguage]. The second form is just a convenience
+ * To create a `GtkSourceBuffer` use [gtksource.buffer.Buffer.new_] or
+ * [gtksource.buffer.Buffer.newWithLanguage]. The second form is just a convenience
  * function which allows you to initially set a class@Language. You can also
  * directly create a class@View and get its class@Buffer with
- * [Gtk.TextView.getBuffer].
+ * [gtk.text_view.TextView.getBuffer].
  * The highlighting is enabled by default, but you can disable it with
- * [GtkSource.Buffer.setHighlightSyntax].
+ * [gtksource.buffer.Buffer.setHighlightSyntax].
  * # Context Classes:
  * It is possible to retrieve some information from the syntax highlighting
  * engine. The default context classes that are applied to regions of a
@@ -35,18 +35,18 @@ import gtksource.types;
  * - **path**: the region delimits a path to a file;
  * - **string**: the region delimits a string.
  * Custom language definition files can create their own context classes,
- * since the functions like [GtkSource.Buffer.iterHasContextClass] take
+ * since the functions like [gtksource.buffer.Buffer.iterHasContextClass] take
  * a string parameter as the context class.
  * `GtkSourceBuffer` provides an API to access the context classes:
- * [GtkSource.Buffer.iterHasContextClass],
- * [GtkSource.Buffer.getContextClassesAtIter],
- * [GtkSource.Buffer.iterForwardToContextClassToggle] and
- * [GtkSource.Buffer.iterBackwardToContextClassToggle].
+ * [gtksource.buffer.Buffer.iterHasContextClass],
+ * [gtksource.buffer.Buffer.getContextClassesAtIter],
+ * [gtksource.buffer.Buffer.iterForwardToContextClassToggle] and
+ * [gtksource.buffer.Buffer.iterBackwardToContextClassToggle].
  * And the signal@GtkSource.Buffer::highlight-updated signal permits to be notified
  * when a context class region changes.
- * Each context class has also an associated [Gtk.TextTag] with the name
+ * Each context class has also an associated [gtk.text_tag.TextTag] with the name
  * `gtksourceview:context-classes:<name>`. For example to
- * retrieve the [Gtk.TextTag] for the string context class, one can write:
+ * retrieve the [gtk.text_tag.TextTag] for the string context class, one can write:
  * ```c
  * GtkTextTagTable *tag_table;
  * GtkTextTag *tag;
@@ -54,14 +54,14 @@ import gtksource.types;
  * tag \= gtk_text_tag_table_lookup $(LPAREN)tag_table, "gtksourceview:context-classes:string"$(RPAREN);
  * ```
  * The tag must be used for read-only purposes.
- * Accessing a context class via the associated [Gtk.TextTag] is less
+ * Accessing a context class via the associated [gtk.text_tag.TextTag] is less
  * convenient than the `GtkSourceBuffer` API, because:
  * - The tag doesn't always exist, you need to listen to the
  * signal@Gtk.TextTagTable::tag-added and signal@Gtk.TextTagTable::tag-removed signals.
  * - Instead of the signal@GtkSource.Buffer::highlight-updated signal, you can listen
  * to the signal@Gtk.TextBuffer::apply-tag and signal@Gtk.TextBuffer::remove-tag signals.
  * A possible use-case for accessing a context class via the associated
- * [Gtk.TextTag] is to read the region but without adding a hard dependency on the
+ * [gtk.text_tag.TextTag] is to read the region but without adding a hard dependency on the
  * GtkSourceView library $(LPAREN)for example for a spell-checking library that wants to
  * read the no-spell-check region$(RPAREN).
  */
@@ -100,7 +100,7 @@ class Buffer : TextBuffer
   /**
    * Creates a new source buffer using the highlighting patterns in `language`.
    * This is equivalent to creating a new source buffer with
-   * a new tag table and then calling [GtkSource.Buffer.setLanguage].
+   * a new tag table and then calling [gtksource.buffer.Buffer.setLanguage].
    * Params:
    *   language = a #GtkSourceLanguage.
    * Returns: a new source buffer which will highlight text
@@ -148,10 +148,10 @@ class Buffer : TextBuffer
 
   /**
    * Creates a source mark in the `buffer` of category `category`.
-   * A source mark is a [Gtk.TextMark] but organized into categories.
+   * A source mark is a [gtk.text_mark.TextMark] but organized into categories.
    * Depending on the category a pixbuf can be specified that will be displayed
    * along the line of the mark.
-   * Like a [Gtk.TextMark], a classMark can be anonymous if the
+   * Like a [gtk.text_mark.TextMark], a classMark can be anonymous if the
    * passed `name` is %NULL.  Also, the buffer owns the marks so you
    * shouldn't unreference it.
    * Marks always have left gravity and are moved to the beginning of
@@ -214,7 +214,7 @@ class Buffer : TextBuffer
    *   iter = a #GtkTextIter.
    * Returns: a new %NULL
    *   terminated array of context class names.
-   *   Use [GLib.Global.strfreev] to free the array if it is no longer needed.
+   *   Use [glib.global.strfreev] to free the array if it is no longer needed.
    */
   string[] getContextClassesAtIter(TextIter iter)
   {
@@ -268,7 +268,7 @@ class Buffer : TextBuffer
 
   /**
    * Returns the classLanguage associated with the buffer,
-   * see [GtkSource.Buffer.setLanguage].
+   * see [gtksource.buffer.Buffer.setLanguage].
    * The returned object should not be unreferenced by the user.
    * Returns: the classLanguage associated
    *   with the buffer, or %NULL.
@@ -324,7 +324,7 @@ class Buffer : TextBuffer
 
   /**
    * Returns the classStyleScheme associated with the buffer,
-   * see [GtkSource.Buffer.setStyleScheme].
+   * see [gtksource.buffer.Buffer.setStyleScheme].
    * The returned object should not be unreferenced by the user.
    * Returns: the classStyleScheme
    *   associated with the buffer, or %NULL.
@@ -434,9 +434,9 @@ class Buffer : TextBuffer
   /**
    * Controls whether syntax is highlighted in the buffer.
    * If highlight is %TRUE, the text will be highlighted according to the syntax
-   * patterns specified in the classLanguage set with [GtkSource.Buffer.setLanguage].
+   * patterns specified in the classLanguage set with [gtksource.buffer.Buffer.setLanguage].
    * If highlight is %FALSE, syntax highlighting is disabled and all the
-   * [Gtk.TextTag] objects that have been added by the syntax highlighting engine
+   * [gtk.text_tag.TextTag] objects that have been added by the syntax highlighting engine
    * are removed from the buffer.
    * Params:
    *   highlight = %TRUE to enable syntax highlighting, %FALSE to disable it.
@@ -448,7 +448,7 @@ class Buffer : TextBuffer
 
   /**
    * Sets whether the buffer has an implicit trailing newline.
-   * If an explicit trailing newline is present in a [Gtk.TextBuffer], [Gtk.TextView]
+   * If an explicit trailing newline is present in a [gtk.text_buffer.TextBuffer], [gtk.text_view.TextView]
    * shows it as an empty line. This is generally not what the user expects.
    * If implicit_trailing_newline is %TRUE $(LPAREN)the default value$(RPAREN):
    * - when a classFileLoader loads the content of a file into the buffer,
@@ -471,7 +471,7 @@ class Buffer : TextBuffer
    * Associates a classLanguage with the buffer.
    * Note that a classLanguage affects not only the syntax highlighting, but
    * also the [context classes](./class.Buffer.html#context-classes). If you want to disable just the
-   * syntax highlighting, see [GtkSource.Buffer.setHighlightSyntax].
+   * syntax highlighting, see [gtksource.buffer.Buffer.setHighlightSyntax].
    * The buffer holds a reference to language.
    * Params:
    *   language = a #GtkSourceLanguage to set, or %NULL.
@@ -487,7 +487,7 @@ class Buffer : TextBuffer
    * but also other classView features such as highlighting the current line,
    * matching brackets, the line numbers, etc.
    * Instead of setting a %NULL scheme, it is better to disable syntax
-   * highlighting with [GtkSource.Buffer.setHighlightSyntax], and setting the
+   * highlighting with [gtksource.buffer.Buffer.setHighlightSyntax], and setting the
    * classStyleScheme with the "classic" or "tango" ID, because those two
    * style schemes follow more closely the GTK theme $(LPAREN)for example for the
    * background color$(RPAREN).
@@ -519,7 +519,7 @@ class Buffer : TextBuffer
    * meaningless.
    * The signal is emitted only when the state changes, typically when
    * the cursor moves.
-   * A use-case for this signal is to show messages in a [Gtk.Statusbar].
+   * A use-case for this signal is to show messages in a [gtk.statusbar.Statusbar].
    * Params
    *   iter = if found, the location of the matching bracket.
    *   state = state of bracket matching.

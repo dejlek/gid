@@ -1,6 +1,6 @@
 module gtksource.language;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -11,7 +11,7 @@ import gtksource.types;
  * A `GtkSourceLanguage` represents a programming or markup language, affecting
  * syntax highlighting and [context classes](./class.Buffer.html#context-classes).
  * Use class@LanguageManager to obtain a `GtkSourceLanguage` instance, and
- * [GtkSource.Buffer.setLanguage] to apply it to a class@Buffer.
+ * [gtksource.buffer.Buffer.setLanguage] to apply it to a class@Buffer.
  */
 class Language : ObjectG
 {
@@ -34,11 +34,11 @@ class Language : ObjectG
 
   /**
    * Returns the globs associated to this language.
-   * This is just an utility wrapper around [GtkSource.Language.getMetadata] to
+   * This is just an utility wrapper around [gtksource.language.Language.getMetadata] to
    * retrieve the "globs" metadata property and split it into an array.
    * Returns: a newly-allocated %NULL terminated array containing the globs or %NULL
    *   if no globs are found.
-   *   The returned array must be freed with [GLib.Global.strfreev].
+   *   The returned array must be freed with [glib.global.strfreev].
    */
   string[] getGlobs()
   {
@@ -94,12 +94,12 @@ class Language : ObjectG
 
   /**
    * Returns the mime types associated to this language.
-   * This is just an utility wrapper around [GtkSource.Language.getMetadata] to
+   * This is just an utility wrapper around [gtksource.language.Language.getMetadata] to
    * retrieve the "mimetypes" metadata property and split it into an
    * array.
    * Returns: a newly-allocated %NULL terminated array containing the mime types
    *   or %NULL if no mime types are found.
-   *   The returned array must be freed with [GLib.Global.strfreev].
+   *   The returned array must be freed with [glib.global.strfreev].
    */
   string[] getMimeTypes()
   {
@@ -172,7 +172,7 @@ class Language : ObjectG
    * Returns the ids of the styles defined by this language.
    * Returns: a newly-allocated %NULL terminated array containing ids of the
    *   styles defined by this language or %NULL if no style is defined.
-   *   The returned array must be freed with [GLib.Global.strfreev].
+   *   The returned array must be freed with [glib.global.strfreev].
    */
   string[] getStyleIds()
   {

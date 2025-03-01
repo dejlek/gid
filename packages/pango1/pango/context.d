@@ -1,6 +1,6 @@
 module pango.context;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -20,7 +20,7 @@ import pango.types;
  * The information stored by `PangoContext` includes the fontmap used
  * to look up fonts, and default values such as the default language,
  * default gravity, or default font.
- * To obtain a `PangoContext`, use [Pango.FontMap.createContext].
+ * To obtain a `PangoContext`, use [pango.font_map.FontMap.createContext].
  */
 class Context : ObjectG
 {
@@ -44,15 +44,15 @@ class Context : ObjectG
   /**
    * Creates a new `PangoContext` initialized to default values.
    * This function is not particularly useful as it should always
-   * be followed by a [Pango.Context.setFontMap] call, and the
-   * function [Pango.FontMap.createContext] does these two steps
+   * be followed by a [pango.context.Context.setFontMap] call, and the
+   * function [pango.font_map.FontMap.createContext] does these two steps
    * together and hence users are recommended to use that.
    * If you are using Pango as part of a higher-level system,
    * that system may have it's own way of create a `PangoContext`.
    * For instance, the GTK toolkit has, among others,
-   * `[Gtk.Widget.getPangoContext]`. Use those instead.
+   * `[gtk.widget.Widget.getPangoContext]`. Use those instead.
    * Returns: the newly allocated `PangoContext`, which should
-   *   be freed with [GObject.ObjectG.unref].
+   *   be freed with [gobject.object.ObjectG.unref].
    */
   this()
   {
@@ -76,7 +76,7 @@ class Context : ObjectG
 
   /**
    * Retrieves the base direction for the context.
-   * See [Pango.Context.setBaseDir].
+   * See [pango.context.Context.setBaseDir].
    * Returns: the base direction for the context.
    */
   Direction getBaseDir()
@@ -89,7 +89,7 @@ class Context : ObjectG
 
   /**
    * Retrieves the base gravity for the context.
-   * See [Pango.Context.setBaseGravity].
+   * See [pango.context.Context.setBaseGravity].
    * Returns: the base gravity for the context.
    */
   Gravity getBaseGravity()
@@ -129,7 +129,7 @@ class Context : ObjectG
 
   /**
    * Retrieves the gravity for the context.
-   * This is similar to [Pango.Context.getBaseGravity],
+   * This is similar to [pango.context.Context.getBaseGravity],
    * except for when the base gravity is %PANGO_GRAVITY_AUTO for
    * which funcPango.Gravity.get_for_matrix is used to return the
    * gravity from the current context matrix.
@@ -145,7 +145,7 @@ class Context : ObjectG
 
   /**
    * Retrieves the gravity hint for the context.
-   * See [Pango.Context.setGravityHint] for details.
+   * See [pango.context.Context.setGravityHint] for details.
    * Returns: the gravity hint for the context.
    */
   GravityHint getGravityHint()
@@ -171,7 +171,7 @@ class Context : ObjectG
   /**
    * Gets the transformation matrix that will be applied when
    * rendering with this context.
-   * See [Pango.Context.setMatrix].
+   * See [pango.context.Context.setMatrix].
    * Returns: the matrix, or %NULL if no
    *   matrix has been set $(LPAREN)which is the same as the identity matrix$(RPAREN).
    *   The returned matrix is owned by Pango and must not be modified
@@ -201,10 +201,10 @@ class Context : ObjectG
    *   language = language tag used to determine which script to get
    *     the metrics for. %NULL means that the language tag from the context
    *     will be used. If no language tag is set on the context, metrics
-   *     for the default language $(LPAREN)as determined by [Pango.PgLanguage.getDefault]
+   *     for the default language $(LPAREN)as determined by [pango.language.PgLanguage.getDefault]
    *     will be returned.
    * Returns: a `PangoFontMetrics` object. The caller must call
-   *   [Pango.FontMetrics.unref] when finished using the object.
+   *   [pango.font_metrics.FontMetrics.unref] when finished using the object.
    */
   FontMetrics getMetrics(FontDescription desc, PgLanguage language)
   {
@@ -251,7 +251,7 @@ class Context : ObjectG
    * Params:
    *   families = location
    *     to store a pointer to an array of `PangoFontFamily`. This array should
-   *     be freed with [GLib.Global.gfree].
+   *     be freed with [glib.global.gfree].
    */
   void listFamilies(out FontFamily[] families)
   {
@@ -352,7 +352,7 @@ class Context : ObjectG
    * Sets the gravity hint for the context.
    * The gravity hint is used in laying vertical text out, and
    * is only relevant if gravity of the context as returned by
-   * [Pango.Context.getGravity] is set to %PANGO_GRAVITY_EAST
+   * [pango.context.Context.getGravity] is set to %PANGO_GRAVITY_EAST
    * or %PANGO_GRAVITY_WEST.
    * Params:
    *   hint = the new gravity hint
@@ -365,7 +365,7 @@ class Context : ObjectG
   /**
    * Sets the global language tag for the context.
    * The default language for the locale of the running process
-   * can be found using [Pango.PgLanguage.getDefault].
+   * can be found using [pango.language.PgLanguage.getDefault].
    * Params:
    *   language = the new language tag.
    */

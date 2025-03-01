@@ -1,6 +1,6 @@
 module gtk.page_setup_unix_dialog;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -28,7 +28,7 @@ import gtk.window;
  * ![An example GtkPageSetupUnixDialog](pagesetupdialog.png)
  * It can be used very much like any other GTK dialog, at the
  * cost of the portability offered by the high-level printing
- * API in [Gtk.PrintOperation].
+ * API in [gtk.print_operation.PrintOperation].
  * ## CSS nodes
  * `GtkPageSetupUnixDialog` has a single CSS node with the name `window` and
  * style class `.pagesetup`.

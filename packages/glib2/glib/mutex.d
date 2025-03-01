@@ -1,6 +1,6 @@
 module glib.mutex;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -41,7 +41,7 @@ import glib.types;
  * Its placement in static storage ensures that it will be initialised
  * to all-zeros, which is appropriate.
  * If a #GMutex is placed in other contexts $(LPAREN)eg: embedded in a struct$(RPAREN)
- * then it must be explicitly initialised using [GLib.Mutex.init_].
+ * then it must be explicitly initialised using [glib.mutex.Mutex.init_].
  * A #GMutex should only be accessed via g_mutex_ functions.
  */
 class Mutex
@@ -65,10 +65,10 @@ class Mutex
   }
 
   /**
-   * Frees the resources allocated to a mutex with [GLib.Mutex.init_].
+   * Frees the resources allocated to a mutex with [glib.mutex.Mutex.init_].
    * This function should not be used with a #GMutex that has been
    * statically allocated.
-   * Calling [GLib.Mutex.clear] on a locked mutex leads to undefined
+   * Calling [glib.mutex.Mutex.clear] on a locked mutex leads to undefined
    * behaviour.
    */
   void clear()
@@ -91,9 +91,9 @@ class Mutex
    * b \= g_new $(LPAREN)Blob, 1$(RPAREN);
    * g_mutex_init $(LPAREN)&b->m$(RPAREN);
    * ]|
-   * To undo the effect of [GLib.Mutex.init_] when a mutex is no longer
-   * needed, use [GLib.Mutex.clear].
-   * Calling [GLib.Mutex.init_] on an already initialized #GMutex leads
+   * To undo the effect of [glib.mutex.Mutex.init_] when a mutex is no longer
+   * needed, use [glib.mutex.Mutex.clear].
+   * Calling [glib.mutex.Mutex.init_] on an already initialized #GMutex leads
    * to undefined behaviour.
    */
   void init_()
@@ -106,7 +106,7 @@ class Mutex
    * current thread will block until mutex is unlocked by the other
    * thread.
    * #GMutex is neither guaranteed to be recursive nor to be
-   * non-recursive.  As such, calling [GLib.Mutex.lock] on a #GMutex that has
+   * non-recursive.  As such, calling [glib.mutex.Mutex.lock] on a #GMutex that has
    * already been locked by the same thread results in undefined behaviour
    * $(LPAREN)including but not limited to deadlocks$(RPAREN).
    */
@@ -120,7 +120,7 @@ class Mutex
    * it immediately returns %FALSE. Otherwise it locks mutex and returns
    * %TRUE.
    * #GMutex is neither guaranteed to be recursive nor to be
-   * non-recursive.  As such, calling [GLib.Mutex.lock] on a #GMutex that has
+   * non-recursive.  As such, calling [glib.mutex.Mutex.lock] on a #GMutex that has
    * already been locked by the same thread results in undefined behaviour
    * $(LPAREN)including but not limited to deadlocks or arbitrary return values$(RPAREN).
    * Returns: %TRUE if mutex could be locked
@@ -133,9 +133,9 @@ class Mutex
   }
 
   /**
-   * Unlocks mutex. If another thread is blocked in a [GLib.Mutex.lock]
+   * Unlocks mutex. If another thread is blocked in a [glib.mutex.Mutex.lock]
    * call for mutex, it will become unblocked and can lock mutex itself.
-   * Calling [GLib.Mutex.unlock] on a mutex that is not locked by the
+   * Calling [glib.mutex.Mutex.unlock] on a mutex that is not locked by the
    * current thread leads to undefined behaviour.
    */
   void unlock()

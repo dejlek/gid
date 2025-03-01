@@ -4,7 +4,7 @@ import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.file_format;
 import arrowdataset.types;
-import gid.gid;
+import gid.global;
 
 class ParquetFileFormat : FileFormat
 {

@@ -1,6 +1,6 @@
 module gtk.combo_box_text;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -22,18 +22,18 @@ import gtk.types;
  * use cases.
  * ![An example GtkComboBoxText](combo-box-text.png)
  * `GtkComboBoxText` hides the model-view complexity of `GtkComboBox`.
- * To create a `GtkComboBoxText`, use [Gtk.ComboBoxText.new_] or
- * [Gtk.ComboBoxText.newWithEntry].
+ * To create a `GtkComboBoxText`, use [gtk.combo_box_text.ComboBoxText.new_] or
+ * [gtk.combo_box_text.ComboBoxText.newWithEntry].
  * You can add items to a `GtkComboBoxText` with
- * [Gtk.ComboBoxText.appendText],
- * [Gtk.ComboBoxText.insertText] or
- * [Gtk.ComboBoxText.prependText] and remove options with
- * [Gtk.ComboBoxText.remove].
+ * [gtk.combo_box_text.ComboBoxText.appendText],
+ * [gtk.combo_box_text.ComboBoxText.insertText] or
+ * [gtk.combo_box_text.ComboBoxText.prependText] and remove options with
+ * [gtk.combo_box_text.ComboBoxText.remove].
  * If the `GtkComboBoxText` contains an entry $(LPAREN)via the
  * property@Gtk.ComboBox:has-entry property$(RPAREN), its contents can be retrieved
- * using [Gtk.ComboBoxText.getActiveText].
- * You should not call [Gtk.ComboBox.setModel] or attempt to pack more
- * cells into this combo box via its [Gtk.CellLayout] interface.
+ * using [gtk.combo_box_text.ComboBoxText.getActiveText].
+ * You should not call [gtk.combo_box.ComboBox.setModel] or attempt to pack more
+ * cells into this combo box via its [gtk.cell_layout.CellLayout] interface.
  * ## GtkComboBoxText as GtkBuildable
  * The `GtkComboBoxText` implementation of the `GtkBuildable` interface supports
  * adding items directly using the `<items>` element and specifying `<item>`
@@ -62,7 +62,7 @@ import gtk.types;
  * the style class .combo to the main CSS nodes of its entry and button
  * children, and the .linked class to the node of its internal box.
 
- * Deprecated: Use [Gtk.DropDown] with a [Gtk.StringList]
+ * Deprecated: Use [gtk.drop_down.DropDown] with a [gtk.string_list.StringList]
  *   instead
  */
 class ComboBoxText : ComboBox
@@ -88,7 +88,7 @@ class ComboBoxText : ComboBox
    * Creates a new `GtkComboBoxText`.
    * Returns: A new `GtkComboBoxText`
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   this()
   {
@@ -101,7 +101,7 @@ class ComboBoxText : ComboBox
    * Creates a new `GtkComboBoxText` with an entry.
    * Returns: a new `GtkComboBoxText`
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   static ComboBoxText newWithEntry()
   {
@@ -114,13 +114,13 @@ class ComboBoxText : ComboBox
   /**
    * Appends text to the list of strings stored in combo_box.
    * If id is non-%NULL then it is used as the ID of the row.
-   * This is the same as calling [Gtk.ComboBoxText.insert]
+   * This is the same as calling [gtk.combo_box_text.ComboBoxText.insert]
    * with a position of -1.
    * Params:
    *   id = a string ID for this value
    *   text = A string
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void append(string id, string text)
   {
@@ -131,12 +131,12 @@ class ComboBoxText : ComboBox
 
   /**
    * Appends text to the list of strings stored in combo_box.
-   * This is the same as calling [Gtk.ComboBoxText.insertText]
+   * This is the same as calling [gtk.combo_box_text.ComboBoxText.insertText]
    * with a position of -1.
    * Params:
    *   text = A string
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void appendText(string text)
   {
@@ -152,9 +152,9 @@ class ComboBoxText : ComboBox
    * be an item from the list$(RPAREN).
    * Returns: a newly allocated
    *   string containing the currently active text.
-   *   Must be freed with [GLib.Global.gfree].
+   *   Must be freed with [glib.global.gfree].
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   string getActiveText()
   {
@@ -174,7 +174,7 @@ class ComboBoxText : ComboBox
    *   id = a string ID for this value
    *   text = A string to display
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void insert(int position, string id, string text)
   {
@@ -186,13 +186,13 @@ class ComboBoxText : ComboBox
   /**
    * Inserts text at position in the list of strings stored in combo_box.
    * If position is negative then text is appended.
-   * This is the same as calling [Gtk.ComboBoxText.insert]
+   * This is the same as calling [gtk.combo_box_text.ComboBoxText.insert]
    * with a %NULL ID string.
    * Params:
    *   position = An index to insert text
    *   text = A string
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void insertText(int position, string text)
   {
@@ -203,13 +203,13 @@ class ComboBoxText : ComboBox
   /**
    * Prepends text to the list of strings stored in combo_box.
    * If id is non-%NULL then it is used as the ID of the row.
-   * This is the same as calling [Gtk.ComboBoxText.insert]
+   * This is the same as calling [gtk.combo_box_text.ComboBoxText.insert]
    * with a position of 0.
    * Params:
    *   id = a string ID for this value
    *   text = a string
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void prepend(string id, string text)
   {
@@ -220,12 +220,12 @@ class ComboBoxText : ComboBox
 
   /**
    * Prepends text to the list of strings stored in combo_box.
-   * This is the same as calling [Gtk.ComboBoxText.insertText]
+   * This is the same as calling [gtk.combo_box_text.ComboBoxText.insertText]
    * with a position of 0.
    * Params:
    *   text = A string
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void prependText(string text)
   {
@@ -238,7 +238,7 @@ class ComboBoxText : ComboBox
    * Params:
    *   position = Index of the item to remove
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void remove(int position)
   {
@@ -248,7 +248,7 @@ class ComboBoxText : ComboBox
   /**
    * Removes all the text entries from the combo box.
 
-   * Deprecated: Use [Gtk.DropDown]
+   * Deprecated: Use [gtk.drop_down.DropDown]
    */
   void removeAll()
   {

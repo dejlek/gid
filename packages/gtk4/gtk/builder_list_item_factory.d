@@ -1,6 +1,6 @@
 module gtk.builder_list_item_factory;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import gobject.object;
 import gtk.builder_scope;

@@ -6,7 +6,7 @@ import arrow.cast_options;
 import arrow.data_type;
 import arrow.equal_options;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

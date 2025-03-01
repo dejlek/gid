@@ -1,54 +1,55 @@
 module glib.variant_type;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
 import gobject.boxed;
 
+
 import std.traits : isSomeString;
 import std.typecons : isTuple;
 
 /**
- * A type in the [GLib.VariantG] type system.
- * This section introduces the [GLib.VariantG] type system. It is based, in
+ * A type in the [glib.variant.VariantG] type system.
+ * This section introduces the [glib.variant.VariantG] type system. It is based, in
  * large part, on the D-Bus type system, with two major changes and
  * some minor lifting of restrictions. The
  * [D-Bus specification](http://dbus.freedesktop.org/doc/dbus-specification.html),
  * therefore, provides a significant amount of
- * information that is useful when working with [GLib.VariantG].
+ * information that is useful when working with [glib.variant.VariantG].
  * The first major change with respect to the D-Bus type system is the
- * introduction of maybe $(LPAREN)or ‘nullable’$(RPAREN) types.  Any type in [GLib.VariantG]
+ * introduction of maybe $(LPAREN)or ‘nullable’$(RPAREN) types.  Any type in [glib.variant.VariantG]
  * can be converted to a maybe type, in which case, `nothing` $(LPAREN)or `null`$(RPAREN)
  * becomes a valid value.  Maybe types have been added by introducing the
  * character `m` to type strings.
- * The second major change is that the [GLib.VariantG] type system supports
+ * The second major change is that the [glib.variant.VariantG] type system supports
  * the concept of ‘indefinite types’ — types that are less specific than
  * the normal types found in D-Bus.  For example, it is possible to speak
- * of ‘an array of any type’ in [GLib.VariantG], where the D-Bus type system
+ * of ‘an array of any type’ in [glib.variant.VariantG], where the D-Bus type system
  * would require you to speak of ‘an array of integers’ or ‘an array of
  * strings’.  Indefinite types have been added by introducing the
  * characters `*`, `?` and `r` to type strings.
  * Finally, all arbitrary restrictions relating to the complexity of
  * types are lifted along with the restriction that dictionary entries
  * may only appear nested inside of arrays.
- * Just as in D-Bus, [GLib.VariantG] types are described with strings $(LPAREN)‘type
+ * Just as in D-Bus, [glib.variant.VariantG] types are described with strings $(LPAREN)‘type
  * strings’$(RPAREN).  Subject to the differences mentioned above, these strings
  * are of the same form as those found in D-Bus.  Note, however: D-Bus
  * always works in terms of messages and therefore individual type
  * strings appear nowhere in its interface.  Instead, ‘signatures’
  * are a concatenation of the strings of the type of each argument in a
- * message.  [GLib.VariantG] deals with single values directly so
- * [GLib.VariantG] type strings always describe the type of exactly one
+ * message.  [glib.variant.VariantG] deals with single values directly so
+ * [glib.variant.VariantG] type strings always describe the type of exactly one
  * value.  This means that a D-Bus signature string is generally not a valid
- * [GLib.VariantG] type string — except in the case that it is the signature
+ * [glib.variant.VariantG] type string — except in the case that it is the signature
  * of a message containing exactly one argument.
  * An indefinite type is similar in spirit to what may be called an
  * abstract type in other type systems.  No value can exist that has an
  * indefinite type as its type, but values can exist that have types
  * that are subtypes of indefinite types.  That is to say,
- * [GLib.VariantG.getType] will never return an indefinite type, but
- * calling [GLib.VariantG.isOfType] with an indefinite type may return
+ * [glib.variant.VariantG.getType] will never return an indefinite type, but
+ * calling [glib.variant.VariantG.isOfType] with an indefinite type may return
  * true.  For example, you cannot have a value that represents ‘an
  * array of no particular type’, but you can have an ‘array of integers’
  * which certainly matches the type of ‘an array of no particular type’,
@@ -61,11 +62,11 @@ import std.typecons : isTuple;
  * exist $(LPAREN)since `GtkWidget` is an abstract class$(RPAREN), but a [`GtkWindow`](https://docs.gtk.org/gtk4/class.Window.html)
  * can certainly be instantiated, and you would say that a `GtkWindow` is a
  * `GtkWidget` $(LPAREN)since `GtkWindow` is a subclass of `GtkWidget`$(RPAREN).
- * Two types may not be compared by value; use [GLib.VariantType.equal]
- * or [GLib.VariantType.isSubtypeOf]  May be copied using
- * [GLib.VariantType.copy] and freed using [GLib.VariantType.free].
+ * Two types may not be compared by value; use [glib.variant_type.VariantType.equal]
+ * or [glib.variant_type.VariantType.isSubtypeOf]  May be copied using
+ * [glib.variant_type.VariantType.copy] and freed using [glib.variant_type.VariantType.free].
  * ## GVariant Type Strings
- * A [GLib.VariantG] type string can be any of the following:
+ * A [glib.variant.VariantG] type string can be any of the following:
  * - any basic type string $(LPAREN)listed below$(RPAREN)
  * - `v`, `r` or `*`
  * - one of the characters `a` or `m`, followed by another type string
@@ -74,13 +75,13 @@ import std.typecons : isTuple;
  * - the character `{`, followed by a basic type string $(LPAREN)see below$(RPAREN),
  * followed by another type string, followed by the character `}`
  * A basic type string describes a basic type $(LPAREN)as per
- * [GLib.VariantType.isBasic]$(RPAREN) and is always a single character in
+ * [glib.variant_type.VariantType.isBasic]$(RPAREN) and is always a single character in
  * length. The valid basic type strings are `b`, `y`, `n`, `q`, `i`, `u`, `x`,
  * `t`, `h`, `d`, `s`, `o`, `g` and `?`.
  * The above definition is recursive to arbitrary depth. `aaaaai` and
  * `$(LPAREN)ui$(LPAREN)nq$(LPAREN)$(LPAREN)y$(RPAREN)$(RPAREN)$(RPAREN)s$(RPAREN)` are both valid type strings, as is
  * `a$(LPAREN)aa$(LPAREN)ui$(RPAREN)$(LPAREN)qna{ya$(LPAREN)yd$(RPAREN)}$(RPAREN)$(RPAREN)`. In order to not hit memory limits,
- * [GLib.VariantG] imposes a limit on recursion depth of 65 nested
+ * [glib.variant.VariantG] imposes a limit on recursion depth of 65 nested
  * containers. This is the limit in the D-Bus specification $(LPAREN)64$(RPAREN) plus one to
  * allow a [`GDBusMessage`](../gio/class.DBusMessage.html) to be nested in
  * a top-level tuple.
@@ -224,10 +225,10 @@ class VariantType : Boxed
 
   /**
    * Creates a new #GVariantType corresponding to the type string given
-   * by type_string.  It is appropriate to call [GLib.VariantType.free] on
+   * by type_string.  It is appropriate to call [glib.variant_type.VariantType.free] on
    * the return value.
    * It is a programmer error to call this function with an invalid type
-   * string.  Use [GLib.VariantType.stringIsValid] if you are unsure.
+   * string.  Use [glib.variant_type.VariantType.stringIsValid] if you are unsure.
    * Params:
    *   typeString = a valid GVariant type string
    * Returns: a new #GVariantType
@@ -243,7 +244,7 @@ class VariantType : Boxed
   /**
    * Constructs the type corresponding to an array of elements of the
    * type type.
-   * It is appropriate to call [GLib.VariantType.free] on the return value.
+   * It is appropriate to call [glib.variant_type.VariantType.free] on the return value.
    * Params:
    *   element = a #GVariantType
    * Returns: a new array #GVariantType
@@ -260,7 +261,7 @@ class VariantType : Boxed
   /**
    * Constructs the type corresponding to a dictionary entry with a key
    * of type key and a value of type value.
-   * It is appropriate to call [GLib.VariantType.free] on the return value.
+   * It is appropriate to call [glib.variant_type.VariantType.free] on the return value.
    * Params:
    *   key = a basic #GVariantType
    *   value = a #GVariantType
@@ -278,7 +279,7 @@ class VariantType : Boxed
   /**
    * Constructs the type corresponding to a maybe instance containing
    * type type or Nothing.
-   * It is appropriate to call [GLib.VariantType.free] on the return value.
+   * It is appropriate to call [glib.variant_type.VariantType.free] on the return value.
    * Params:
    *   element = a #GVariantType
    * Returns: a new maybe #GVariantType
@@ -296,7 +297,7 @@ class VariantType : Boxed
    * Constructs a new tuple type, from items.
    * length is the number of items in items, or -1 to indicate that
    * items is %NULL-terminated.
-   * It is appropriate to call [GLib.VariantType.free] on the return value.
+   * It is appropriate to call [glib.variant_type.VariantType.free] on the return value.
    * Params:
    *   items = an array of #GVariantTypes, one for each item
    * Returns: a new tuple #GVariantType
@@ -320,7 +321,7 @@ class VariantType : Boxed
 
   /**
    * Makes a copy of a #GVariantType.  It is appropriate to call
-   * [GLib.VariantType.free] on the return value.  type may not be %NULL.
+   * [glib.variant_type.VariantType.free] on the return value.  type may not be %NULL.
    * Returns: a new #GVariantType
    *   Since 2.24
    */
@@ -335,7 +336,7 @@ class VariantType : Boxed
   /**
    * Returns a newly-allocated copy of the type string corresponding to
    * type.  The returned string is nul-terminated.  It is appropriate to
-   * call [GLib.Global.gfree] on the return value.
+   * call [glib.global.gfree] on the return value.
    * Returns: the corresponding type string
    *   Since 2.24
    */
@@ -366,7 +367,7 @@ class VariantType : Boxed
    * Only returns %TRUE if the types are exactly equal.  Even if one type
    * is an indefinite type and the other is a subtype of it, %FALSE will
    * be returned if they are not exactly equal.  If you want to check for
-   * subtypes, use [GLib.VariantType.isSubtypeOf].
+   * subtypes, use [glib.variant_type.VariantType.isSubtypeOf].
    * The argument types of type1 and type2 are only #gconstpointer to
    * allow use with #GHashTable without function pointer casting.  For
    * both arguments, a valid #GVariantType must be provided.
@@ -391,7 +392,7 @@ class VariantType : Boxed
    * In the case of a dictionary entry type, this returns the type of
    * the key.
    * %NULL is returned in case of type being %G_VARIANT_TYPE_UNIT.
-   * This call, together with [GLib.VariantType.next] provides an iterator
+   * This call, together with [glib.variant_type.VariantType.next] provides an iterator
    * interface over tuple and dictionary entry types.
    * Returns: the first item type of type, or %NULL
    *   Since 2.24
@@ -407,7 +408,7 @@ class VariantType : Boxed
   /**
    * Returns the length of the type string corresponding to the given
    * type.  This function must be used to determine the valid extent of
-   * the memory region returned by [GLib.VariantType.peekString].
+   * the memory region returned by [glib.variant_type.VariantType.peekString].
    * Returns: the length of the corresponding type string
    *   Since 2.24
    */
@@ -488,7 +489,7 @@ class VariantType : Boxed
    * A type is definite if its type string does not contain any indefinite
    * type characters $(LPAREN)'*', '?', or 'r'$(RPAREN).
    * A #GVariant instance may not have an indefinite type, so calling
-   * this function on the result of [GLib.VariantG.getType] will always
+   * this function on the result of [glib.variant.VariantG.getType] will always
    * result in %TRUE being returned.  Calling this function on an
    * indefinite type like %G_VARIANT_TYPE_ARRAY, however, will result in
    * %FALSE being returned.
@@ -584,7 +585,7 @@ class VariantType : Boxed
    * Determines the key type of a dictionary entry type.
    * This function may only be used with a dictionary entry type.  Other
    * than the additional restriction, this call is equivalent to
-   * [GLib.VariantType.first].
+   * [glib.variant_type.VariantType.first].
    * Returns: the key type of the dictionary entry
    *   Since 2.24
    */
@@ -618,7 +619,7 @@ class VariantType : Boxed
    * Determines the next item type of a tuple or dictionary entry
    * type.
    * type must be the result of a previous call to
-   * [GLib.VariantType.first] or [GLib.VariantType.next].
+   * [glib.variant_type.VariantType.first] or [glib.variant_type.VariantType.next].
    * If called on the key type of a dictionary entry then this call
    * returns the value type.  If called on the value type of a dictionary
    * entry then this call returns %NULL.
@@ -667,7 +668,7 @@ class VariantType : Boxed
 
   /**
    * Checks if type_string is a valid GVariant type string.  This call is
-   * equivalent to calling [GLib.VariantType.stringScan] and confirming
+   * equivalent to calling [glib.variant_type.VariantType.stringScan] and confirming
    * that the following character is a nul terminator.
    * Params:
    *   typeString = a pointer to any string
@@ -692,7 +693,7 @@ class VariantType : Boxed
    * If there is no valid type string starting at string, or if the type
    * string does not end before limit then %FALSE is returned.
    * For the simple case of checking if a string is a valid type string,
-   * see [GLib.VariantType.stringIsValid].
+   * see [glib.variant_type.VariantType.stringIsValid].
    * Params:
    *   string_ = a pointer to any string
    *   limit = the end of string, or %NULL

@@ -1,7 +1,7 @@
 module gio.proxy_mixin;
 
 public import gio.proxy_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.async_result;
 public import gio.async_result_mixin;
 public import gio.c.functions;
@@ -19,7 +19,7 @@ public import gobject.object;
  * The extensions are named after their proxy protocol name. As an
  * example, a SOCKS5 proxy implementation can be retrieved with the
  * name `socks5` using the function
- * [Gio.IOExtensionPoint.getExtensionByName].
+ * [gio.ioextension_point.IOExtensionPoint.getExtensionByName].
  */
 template ProxyT()
 {
@@ -50,7 +50,7 @@ template ProxyT()
   }
 
   /**
-   * Asynchronous version of [Gio.Proxy.connect].
+   * Asynchronous version of [gio.proxy.Proxy.connect].
    * Params:
    *   connection = a #GIOStream
    *   proxyAddress = a #GProxyAddress
@@ -73,7 +73,7 @@ template ProxyT()
   }
 
   /**
-   * See [Gio.Proxy.connect].
+   * See [gio.proxy.Proxy.connect].
    * Params:
    *   result = a #GAsyncResult
    * Returns: a #GIOStream.
@@ -96,7 +96,7 @@ template ProxyT()
    * implementing such a protocol. When %FALSE is returned, the caller
    * should resolve the destination hostname first, and then pass a
    * #GProxyAddress containing the stringified IP address to
-   * [Gio.Proxy.connect] or [Gio.Proxy.connectAsync].
+   * [gio.proxy.Proxy.connect] or [gio.proxy.Proxy.connectAsync].
    * Returns: %TRUE if hostname resolution is supported.
    */
   override bool supportsHostname()

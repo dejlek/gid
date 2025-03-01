@@ -1,6 +1,6 @@
 module gtk.string_filter;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -11,13 +11,13 @@ import gtk.types;
  * `GtkStringFilter` determines whether to include items by comparing
  * strings to a fixed search term.
  * The strings are obtained from the items by evaluating a `GtkExpression`
- * set with [Gtk.StringFilter.setExpression], and they are
- * compared against a search term set with [Gtk.StringFilter.setSearch].
+ * set with [gtk.string_filter.StringFilter.setExpression], and they are
+ * compared against a search term set with [gtk.string_filter.StringFilter.setSearch].
  * `GtkStringFilter` has several different modes of comparison - it
  * can match the whole string, just a prefix, or any substring. Use
- * [Gtk.StringFilter.setMatchMode] choose a mode.
+ * [gtk.string_filter.StringFilter.setMatchMode] choose a mode.
  * It is also possible to make case-insensitive comparisons, with
- * [Gtk.StringFilter.setIgnoreCase].
+ * [gtk.string_filter.StringFilter.setIgnoreCase].
  */
 class StringFilter : Filter
 {

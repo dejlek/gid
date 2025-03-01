@@ -1,3 +1,4 @@
+//!class ObjectG pre
 //!inhibit init
 
 import core.atomic;

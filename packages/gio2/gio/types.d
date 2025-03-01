@@ -1,6 +1,6 @@
 module gio.types;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -265,7 +265,7 @@ enum DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME = "gio-desktop-app-info-lookup
 
 
 /**
- * The string used to obtain a Unix device path with [Gio.Drive.getIdentifier].
+ * The string used to obtain a Unix device path with [gio.drive.Drive.getIdentifier].
  */
 enum DRIVE_IDENTIFIER_KIND_UNIX_DEVICE = "unix-device";
 
@@ -396,7 +396,7 @@ enum FILE_ATTRIBUTE_FILESYSTEM_REMOTE = "filesystem::remote";
 
 /**
  * A key in the "filesystem" namespace for getting the total size $(LPAREN)in
- * bytes$(RPAREN) of the file system, used in [Gio.File.queryFilesystemInfo].
+ * bytes$(RPAREN) of the file system, used in [gio.file.File.queryFilesystemInfo].
  * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
  */
 enum FILE_ATTRIBUTE_FILESYSTEM_SIZE = "filesystem::size";
@@ -1176,7 +1176,7 @@ enum MEMORY_MONITOR_EXTENSION_POINT_NAME = "gio-memory-monitor";
  * names are namespaced with an identifier for the action group in which the
  * action resides. For example, "win." for window-specific actions and "app."
  * for application-wide actions.
- * See also [Gio.MenuModel.getItemAttribute] and [Gio.MenuItem.setAttribute].
+ * See also [gio.menu_model.MenuModel.getItemAttribute] and [gio.menu_item.MenuItem.setAttribute].
  */
 enum MENU_ATTRIBUTE_ACTION = "action";
 
@@ -1190,7 +1190,7 @@ enum MENU_ATTRIBUTE_ACTION_NAMESPACE = "action-namespace";
 
 /**
  * The menu item attribute which holds the icon of the item.
- * The icon is stored in the format returned by [Gio.Icon.serialize].
+ * The icon is stored in the format returned by [gio.icon.Icon.serialize].
  * This attribute is intended only to represent 'noun' icons such as
  * favicons for a webpage, or application icons.  It should not be used
  * for 'verbs' $(LPAREN)ie: stock icons$(RPAREN).
@@ -1207,14 +1207,14 @@ enum MENU_ATTRIBUTE_LABEL = "label";
 /**
  * The menu item attribute which holds the target with which the item's action
  * will be activated.
- * See also [Gio.MenuItem.setActionAndTarget]
+ * See also [gio.menu_item.MenuItem.setActionAndTarget]
  */
 enum MENU_ATTRIBUTE_TARGET = "target";
 
 
 /**
  * The maximum number of entries in a menu section supported by
- * [Gio.DBusConnection.exportMenuModel].
+ * [gio.dbus_connection.DBusConnection.exportMenuModel].
  * The exact value of the limit may change in future GLib versions.
  */
 enum MENU_EXPORTER_MAX_SECTION_SIZE = 1000;
@@ -1224,14 +1224,14 @@ enum MENU_EXPORTER_MAX_SECTION_SIZE = 1000;
  * The name of the link that associates a menu item with a section.  The linked
  * menu will usually be shown in place of the menu item, using the item's label
  * as a header.
- * See also [Gio.MenuItem.setLink].
+ * See also [gio.menu_item.MenuItem.setLink].
  */
 enum MENU_LINK_SECTION = "section";
 
 
 /**
  * The name of the link that associates a menu item with a submenu.
- * See also [Gio.MenuItem.setLink].
+ * See also [gio.menu_item.MenuItem.setLink].
  */
 enum MENU_LINK_SUBMENU = "submenu";
 
@@ -1302,7 +1302,7 @@ enum VFS_EXTENSION_POINT_NAME = "gio-vfs";
 
 
 /**
- * The string used to obtain the volume class with [Gio.Volume.getIdentifier].
+ * The string used to obtain the volume class with [gio.volume.Volume.getIdentifier].
  * Known volume classes include `device`, `network`, and `loop`. Other
  * classes may be added in the future.
  * This is intended to be used by applications to classify #GVolume
@@ -1314,7 +1314,7 @@ enum VOLUME_IDENTIFIER_KIND_CLASS = "class";
 
 
 /**
- * The string used to obtain a Hal UDI with [Gio.Volume.getIdentifier].
+ * The string used to obtain a Hal UDI with [gio.volume.Volume.getIdentifier].
 
  * Deprecated: Do not use, HAL is deprecated.
  */
@@ -1322,25 +1322,25 @@ enum VOLUME_IDENTIFIER_KIND_HAL_UDI = "hal-udi";
 
 
 /**
- * The string used to obtain a filesystem label with [Gio.Volume.getIdentifier].
+ * The string used to obtain a filesystem label with [gio.volume.Volume.getIdentifier].
  */
 enum VOLUME_IDENTIFIER_KIND_LABEL = "label";
 
 
 /**
- * The string used to obtain a NFS mount with [Gio.Volume.getIdentifier].
+ * The string used to obtain a NFS mount with [gio.volume.Volume.getIdentifier].
  */
 enum VOLUME_IDENTIFIER_KIND_NFS_MOUNT = "nfs-mount";
 
 
 /**
- * The string used to obtain a Unix device path with [Gio.Volume.getIdentifier].
+ * The string used to obtain a Unix device path with [gio.volume.Volume.getIdentifier].
  */
 enum VOLUME_IDENTIFIER_KIND_UNIX_DEVICE = "unix-device";
 
 
 /**
- * The string used to obtain a UUID with [Gio.Volume.getIdentifier].
+ * The string used to obtain a UUID with [gio.volume.Volume.getIdentifier].
  */
 enum VOLUME_IDENTIFIER_KIND_UUID = "uuid";
 

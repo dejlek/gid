@@ -1,6 +1,6 @@
 module glib.time_val;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -87,7 +87,7 @@ class TimeVal
    * the W3C Note
    * [Date and Time Formats](http://www.w3.org/TR/NOTE-datetime-19980827).
    * Both of these documents are profiles of ISO 8601.
-   * Use [GLib.DateTime.format] or [GLib.Global.strdupPrintf] if a different
+   * Use [glib.date_time.DateTime.format] or [glib.global.strdupPrintf] if a different
    * variation of ISO 8601 format is required.
    * If time_ represents a date which is too large to fit into a `struct tm`,
    * %NULL will be returned. This is platform dependent. Note also that since
@@ -99,7 +99,7 @@ class TimeVal
    * iso8601_string \= g_date_time_format_iso8601 $(LPAREN)dt$(RPAREN);
    * g_date_time_unref $(LPAREN)dt$(RPAREN);
    * ]|
-   * The return value of [GLib.TimeVal.toIso8601] has been nullable since GLib
+   * The return value of [glib.time_val.TimeVal.toIso8601] has been nullable since GLib
    * 2.54; before then, GLib would crash under the same conditions.
    * Returns: a newly allocated string containing an ISO 8601 date,
    *   or %NULL if time_ was too large
@@ -136,7 +136,7 @@ class TimeVal
    * Returns: %TRUE if the conversion was successful.
 
    * Deprecated: #GTimeVal is not year-2038-safe. Use
-   *   [GLib.DateTime.newFromIso8601] instead.
+   *   [glib.date_time.DateTime.newFromIso8601] instead.
    */
   static bool fromIso8601(string isoDate, out TimeVal time)
   {

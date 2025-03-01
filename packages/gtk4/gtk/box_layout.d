@@ -1,6 +1,6 @@
 module gtk.box_layout;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -12,14 +12,14 @@ import gtk.types;
  * `GtkBoxLayout` is a layout manager that arranges children in a single
  * row or column.
  * Whether it is a row or column depends on the value of its
- * [Gtk.Orientable.orientation] property. Within the other dimension
+ * [gtk.orientable.Orientable.Orientation] property. Within the other dimension
  * all children all allocated the same size. The `GtkBoxLayout` will respect
- * the [Gtk.Widget.halign] and [Gtk.Widget.valign]
+ * the [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
  * properties of each child widget.
  * If you want all children to be assigned the same size, you can use
- * the [Gtk.BoxLayout.homogeneous] property.
+ * the [gtk.box_layout.BoxLayout.gboolean] property.
  * If you want to specify the amount of space placed between each child,
- * you can use the [Gtk.BoxLayout.spacing] property.
+ * you can use the [gtk.box_layout.BoxLayout.gint] property.
  */
 class BoxLayout : LayoutManager, Orientable
 {
@@ -56,7 +56,7 @@ class BoxLayout : LayoutManager, Orientable
   }
 
   /**
-   * Gets the value set by [Gtk.BoxLayout.setBaselineChild].
+   * Gets the value set by [gtk.box_layout.BoxLayout.setBaselineChild].
    * Returns: the index of the child that determines the baseline
    *   in vertical layout, or -1
    */
@@ -68,7 +68,7 @@ class BoxLayout : LayoutManager, Orientable
   }
 
   /**
-   * Gets the value set by [Gtk.BoxLayout.setBaselinePosition].
+   * Gets the value set by [gtk.box_layout.BoxLayout.setBaselinePosition].
    * Returns: the baseline position
    */
   BaselinePosition getBaselinePosition()

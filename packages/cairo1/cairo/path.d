@@ -3,14 +3,14 @@ module cairo.path;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
  * A data structure for holding a path. This data structure serves as
- * the return value for [cairo.Context.copyPath] and
- * [cairo.Context.copyPathFlat] as well the input value for
- * [cairo.Context.appendPath].
+ * the return value for [cairo.context.Context.copyPath] and
+ * [cairo.context.Context.copyPathFlat] as well the input value for
+ * [cairo.context.Context.appendPath].
  * See #cairo_path_data_t for hints on how to iterate over the
  * actual data within the path.
  * The num_data member gives the number of elements in the data

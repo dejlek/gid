@@ -1,6 +1,6 @@
 module gobject.binding;
 
-import gid.gid;
+import gid.global;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.object;
@@ -64,7 +64,7 @@ import gobject.types;
  * either one of the `GObject` instances it refers to are finalized, or when
  * the #GBinding instance loses its last reference.
  * Bindings for languages with garbage collection can use
- * [GObject.Binding.unbind] to explicitly release a binding between the source
+ * [gobject.binding.Binding.unbind] to explicitly release a binding between the source
  * and target properties, instead of relying on the last reference on the
  * binding, source, and target instances to drop.
  */
@@ -136,13 +136,13 @@ class Binding : ObjectG
    * A #GBinding can outlive the source #GObject as the binding does not hold a
    * strong reference to the source. If the source is destroyed before the
    * binding then this function will return %NULL.
-   * Use [GObject.Binding.dupSource] if the source or binding are used from different
+   * Use [gobject.binding.Binding.dupSource] if the source or binding are used from different
    * threads as otherwise the pointer returned from this function might become
    * invalid if the source is finalized from another thread in the meantime.
    * Returns: the source #GObject, or %NULL if the
    *   source does not exist any more.
 
-   * Deprecated: Use [GObject.Binding.dupSource] for a safer version of this
+   * Deprecated: Use [gobject.binding.Binding.dupSource] for a safer version of this
    *   function.
    */
   ObjectG getSource()
@@ -171,13 +171,13 @@ class Binding : ObjectG
    * A #GBinding can outlive the target #GObject as the binding does not hold a
    * strong reference to the target. If the target is destroyed before the
    * binding then this function will return %NULL.
-   * Use [GObject.Binding.dupTarget] if the target or binding are used from different
+   * Use [gobject.binding.Binding.dupTarget] if the target or binding are used from different
    * threads as otherwise the pointer returned from this function might become
    * invalid if the target is finalized from another thread in the meantime.
    * Returns: the target #GObject, or %NULL if the
    *   target does not exist any more.
 
-   * Deprecated: Use [GObject.Binding.dupTarget] for a safer version of this
+   * Deprecated: Use [gobject.binding.Binding.dupTarget] for a safer version of this
    *   function.
    */
   ObjectG getTarget()
@@ -206,11 +206,11 @@ class Binding : ObjectG
    * property expressed by binding.
    * This function will release the reference that is being held on
    * the binding instance if the binding is still bound; if you want to hold on
-   * to the #GBinding instance after calling [GObject.Binding.unbind], you will need
+   * to the #GBinding instance after calling [gobject.binding.Binding.unbind], you will need
    * to hold a reference to it.
    * Note however that this function does not take ownership of binding, it
    * only unrefs the reference that was initially created by
-   * [GObject.ObjectG.bindProperty] and is owned by the binding.
+   * [gobject.object.ObjectG.bindProperty] and is owned by the binding.
    */
   void unbind()
   {

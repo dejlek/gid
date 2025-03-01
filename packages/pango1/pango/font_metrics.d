@@ -1,6 +1,6 @@
 module pango.font_metrics;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -68,7 +68,7 @@ class FontMetrics : Boxed
    * determining the initial size for a window. Actual digits in
    * text can be wider or narrower than this, though this value
    * is generally somewhat more accurate than the result of
-   * [Pango.FontMetrics.getApproximateCharWidth] for digits.
+   * [pango.font_metrics.FontMetrics.getApproximateCharWidth] for digits.
    * Returns: the digit width, in Pango units.
    */
   int getApproximateDigitWidth()

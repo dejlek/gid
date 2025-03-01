@@ -5,7 +5,7 @@ import gdk.c.types;
 import gdk.display;
 import gdk.rectangle;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 
@@ -13,8 +13,8 @@ import gobject.object;
  * `GdkMonitor` objects represent the individual outputs that are
  * associated with a `GdkDisplay`.
  * `GdkDisplay` keeps a `GListModel` to enumerate and monitor
- * monitors with [Gdk.Display.getMonitors]. You can use
- * [Gdk.Display.getMonitorAtSurface] to find a particular
+ * monitors with [gdk.display.Display.getMonitors]. You can use
+ * [gdk.display.Display.getMonitorAtSurface] to find a particular
  * monitor.
  */
 class MonitorG : ObjectG
@@ -80,7 +80,7 @@ class MonitorG : ObjectG
    * Retrieves the size and position of the monitor within the
    * display coordinate space.
    * The returned geometry is in  ”application pixels”, not in
-   * ”device pixels” $(LPAREN)see [Gdk.MonitorG.getScale]$(RPAREN).
+   * ”device pixels” $(LPAREN)see [gdk.monitor.MonitorG.getScale]$(RPAREN).
    * Params:
    *   geometry = a `GdkRectangle` to be filled with the monitor geometry
    */
@@ -148,7 +148,7 @@ class MonitorG : ObjectG
    * to device pixels.
    * This can be used if you want to create pixel based data for a
    * particular monitor, but most of the time you’re drawing to a surface
-   * where it is better to use [Gdk.Surface.getScale] instead.
+   * where it is better to use [gdk.surface.Surface.getScale] instead.
    * Returns: the scale
    */
   double getScale()
@@ -165,7 +165,7 @@ class MonitorG : ObjectG
    * it can be a higher value $(LPAREN)often 2$(RPAREN).
    * This can be used if you want to create pixel based data for a
    * particular monitor, but most of the time you’re drawing to a surface
-   * where it is better to use [Gdk.Surface.getScaleFactor] instead.
+   * where it is better to use [gdk.surface.Surface.getScaleFactor] instead.
    * Returns: the scale factor
    */
   int getScaleFactor()

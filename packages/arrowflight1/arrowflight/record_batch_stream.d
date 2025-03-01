@@ -6,7 +6,7 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.data_stream;
 import arrowflight.types;
-import gid.gid;
+import gid.global;
 
 class RecordBatchStream : DataStream
 {

@@ -1,6 +1,6 @@
 module gio.file_icon;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.file;
@@ -15,7 +15,7 @@ import gobject.object;
 /**
  * `GFileIcon` specifies an icon by pointing to an image file
  * to be used as icon.
- * It implements [Gio.LoadableIcon].
+ * It implements [gio.loadable_icon.LoadableIcon].
  */
 class FileIcon : ObjectG, Icon, LoadableIcon
 {

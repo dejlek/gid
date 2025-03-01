@@ -3,7 +3,7 @@ module gdk.toplevel_size;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.gid;
+import gid.global;
 
 /**
  * The `GdkToplevelSize` struct contains information that is useful
@@ -52,7 +52,7 @@ class ToplevelSize
    * calculate these given both the existing size, and the bounds retrieved from
    * the `GdkToplevelSize` object.
    * The minimum size should be within the bounds $(LPAREN)see
-   * [Gdk.ToplevelSize.getBounds]$(RPAREN).
+   * [gdk.toplevel_size.ToplevelSize.getBounds]$(RPAREN).
    * Params:
    *   minWidth = the minimum width
    *   minHeight = the minimum height
@@ -83,7 +83,7 @@ class ToplevelSize
   /**
    * Sets the size the toplevel prefers to be resized to.
    * The size should be within the bounds $(LPAREN)see
-   * [Gdk.ToplevelSize.getBounds]$(RPAREN). The set size should
+   * [gdk.toplevel_size.ToplevelSize.getBounds]$(RPAREN). The set size should
    * be considered as a hint, and should not be assumed to be
    * respected by the windowing system, or backend.
    * Params:

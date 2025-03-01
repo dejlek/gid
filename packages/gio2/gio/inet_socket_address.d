@@ -1,6 +1,6 @@
 module gio.inet_socket_address;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.inet_address;
@@ -12,7 +12,7 @@ import gobject.object;
 
 /**
  * An IPv4 or IPv6 socket address. That is, the combination of a
- * [Gio.InetAddress] and a port number.
+ * [gio.inet_address.InetAddress] and a port number.
  * In UNIX terms, `GInetSocketAddress` corresponds to a
  * [`struct sockaddr_in` or `struct sockaddr_in6`]$(LPAREN)$(RPAREN)(man:sockaddr3type).
  */
@@ -71,7 +71,7 @@ class InetSocketAddress : SocketAddress
   /**
    * Gets address's #GInetAddress.
    * Returns: the #GInetAddress for address, which must be
-   *   [GObject.ObjectG.ref_]'d if it will be stored
+   *   [gobject.object.ObjectG.ref_]'d if it will be stored
    */
   InetAddress getAddress()
   {

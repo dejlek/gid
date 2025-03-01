@@ -1,6 +1,6 @@
 module gtk.spin_button;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -33,7 +33,7 @@ import gtk.widget;
  * typed in, with the bonus that it can be checked to ensure it is in a
  * given range.
  * The main properties of a `GtkSpinButton` are through an adjustment.
- * See the [Gtk.Adjustment] documentation for more details about
+ * See the [gtk.adjustment.Adjustment] documentation for more details about
  * an adjustment's properties.
  * Note that `GtkSpinButton` will by default make its entry large enough
  * to accommodate the lower and upper bounds of the adjustment. If this
@@ -161,7 +161,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Note that the way in which the precision is derived works
    * best if step is a power of ten. If the resulting precision
    * is not suitable for your needs, use
-   * [Gtk.SpinButton.setDigits] to correct it.
+   * [gtk.spin_button.SpinButton.setDigits] to correct it.
    * Params:
    *   min = Minimum allowable value
    *   max = Maximum allowable value
@@ -192,7 +192,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
   }
 
   /**
-   * Retrieves the value set by [Gtk.SpinButton.setActivatesDefault].
+   * Retrieves the value set by [gtk.spin_button.SpinButton.setActivatesDefault].
    * Returns: %TRUE if the spin button will activate the default widget
    */
   bool getActivatesDefault()
@@ -239,7 +239,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
   /**
    * Gets the current step and page the increments
    * used by spin_button.
-   * See [Gtk.SpinButton.setIncrements].
+   * See [gtk.spin_button.SpinButton.setIncrements].
    * Params:
    *   step = location to store step increment
    *   page = location to store page increment
@@ -262,7 +262,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
 
   /**
    * Gets the range allowed for spin_button.
-   * See [Gtk.SpinButton.setRange].
+   * See [gtk.spin_button.SpinButton.setRange].
    * Params:
    *   min = location to store minimum allowed value
    *   max = location to store maximum allowed value
@@ -285,7 +285,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
 
   /**
    * Gets the update behavior of a spin button.
-   * See [Gtk.SpinButton.setUpdatePolicy].
+   * See [gtk.spin_button.SpinButton.setUpdatePolicy].
    * Returns: the current update policy
    */
   SpinButtonUpdatePolicy getUpdatePolicy()
@@ -334,7 +334,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
   /**
    * Sets whether activating the spin button will activate the default
    * widget for the window containing the spin button.
-   * See [Gtk.SpinButton.activate] for what counts as activation.
+   * See [gtk.spin_button.SpinButton.activate] for what counts as activation.
    * Params:
    *   activatesDefault = %TRUE to activate window’s default widget on activation
    */
@@ -516,7 +516,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Emitted when the user initiates a value change.
    * This is a [keybinding signal](class.SignalAction.html).
    * Applications should not connect to it, but may emit it with
-   * [GObject.Global.signalEmitByName] if they need to control the cursor
+   * [gobject.global.signalEmitByName] if they need to control the cursor
    * programmatically.
    * The default bindings for this signal are Up/Down and PageUp/PageDown.
    * Params
@@ -598,7 +598,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
 
   /**
    * Emitted when the value is changed.
-   * Also see the [Gtk.SpinButton.output] signal.
+   * Also see the [gtk.spin_button.SpinButton.output] signal.
    *   spinButton = the instance the signal is connected to
    */
   alias ValueChangedCallbackDlg = void delegate(SpinButton spinButton);

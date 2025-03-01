@@ -1,6 +1,6 @@
 module GObject.global;
 
-import gid.gid;
+import gid.global;
 import glib.source;
 import glib.types;
 import glib.variant;
@@ -39,7 +39,7 @@ void setClosure(Source source, Closure closure)
  * Sets a dummy callback for source. The callback will do nothing, and
  * if the source expects a #gboolean return value, it will return %TRUE.
  * $(LPAREN)If the source expects any other type of return value, it will return
- * a 0/%NULL value; whatever [GObject.Value.init_] initializes a #GValue to for
+ * a 0/%NULL value; whatever [gobject.value.Value.init_] initializes a #GValue to for
  * that type.$(RPAREN)
  * If the source is not one of the standard GLib types, the
  * closure_callback and closure_marshal fields of the #GSourceFuncs
@@ -151,7 +151,7 @@ EnumValue enumGetValueByNick(EnumClass enumClass, string nick)
  * Registers a new static enumeration type with the name name.
  * It is normally more convenient to let [glib-mkenums][glib-mkenums],
  * generate a my_enum_get_type$(LPAREN)$(RPAREN) function from a usual C enumeration
- * definition  than to write one yourself using [GObject.Global.enumRegisterStatic].
+ * definition  than to write one yourself using [gobject.global.enumRegisterStatic].
  * Params:
  *   name = A nul-terminated string used as the name of the new type.
  *   constStaticValues = An array of #GEnumValue structs for the possible
@@ -239,7 +239,7 @@ FlagsValue flagsGetValueByNick(FlagsClass flagsClass, string nick)
  * Registers a new static flags type with the name name.
  * It is normally more convenient to let [glib-mkenums][glib-mkenums]
  * generate a my_flags_get_type$(LPAREN)$(RPAREN) function from a usual C enumeration
- * definition than to write one yourself using [GObject.Global.flagsRegisterStatic].
+ * definition than to write one yourself using [gobject.global.flagsRegisterStatic].
  * Params:
  *   name = A nul-terminated string used as the name of the new type.
  *   constStaticValues = An array of #GFlagsValue structs for the possible
@@ -283,10 +283,10 @@ GType gtypeGetType()
 /**
  * Creates a new #GParamSpecBoolean instance specifying a %G_TYPE_BOOLEAN
  * property. In many cases, it may be more appropriate to use an enum with
- * [GObject.Global.paramSpecEnum], both to improve code clarity by using explicitly named
+ * [gobject.global.paramSpecEnum], both to improve code clarity by using explicitly named
  * values, and to allow for more values to be added in future without breaking
  * API.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -309,7 +309,7 @@ ParamSpec paramSpecBoolean(string name, string nick, string blurb, bool defaultV
 /**
  * Creates a new #GParamSpecBoxed instance specifying a %G_TYPE_BOXED
  * derived property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -355,7 +355,7 @@ ParamSpec paramSpecChar(string name, string nick, string blurb, byte minimum, by
 /**
  * Creates a new #GParamSpecDouble instance specifying a %G_TYPE_DOUBLE
  * property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -380,7 +380,7 @@ ParamSpec paramSpecDouble(string name, string nick, string blurb, double minimum
 /**
  * Creates a new #GParamSpecEnum instance specifying a %G_TYPE_ENUM
  * property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -404,7 +404,7 @@ ParamSpec paramSpecEnum(string name, string nick, string blurb, GType enumType, 
 /**
  * Creates a new #GParamSpecFlags instance specifying a %G_TYPE_FLAGS
  * property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -427,7 +427,7 @@ ParamSpec paramSpecFlags(string name, string nick, string blurb, GType flagsType
 
 /**
  * Creates a new #GParamSpecFloat instance specifying a %G_TYPE_FLOAT property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -452,7 +452,7 @@ ParamSpec paramSpecFloat(string name, string nick, string blurb, float minimum, 
 /**
  * Creates a new #GParamSpecGType instance specifying a
  * %G_TYPE_GTYPE property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -475,7 +475,7 @@ ParamSpec paramSpecGtype(string name, string nick, string blurb, GType isAType, 
 
 /**
  * Creates a new #GParamSpecInt instance specifying a %G_TYPE_INT property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -499,7 +499,7 @@ ParamSpec paramSpecInt(string name, string nick, string blurb, int minimum, int 
 
 /**
  * Creates a new #GParamSpecInt64 instance specifying a %G_TYPE_INT64 property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -523,7 +523,7 @@ ParamSpec paramSpecInt64(string name, string nick, string blurb, long minimum, l
 
 /**
  * Creates a new #GParamSpecLong instance specifying a %G_TYPE_LONG property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -548,7 +548,7 @@ ParamSpec paramSpecLong(string name, string nick, string blurb, glong minimum, g
 /**
  * Creates a new #GParamSpecBoxed instance specifying a %G_TYPE_OBJECT
  * derived property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -571,7 +571,7 @@ ParamSpec paramSpecObject(string name, string nick, string blurb, GType objectTy
 /**
  * Creates a new #GParamSpecParam instance specifying a %G_TYPE_PARAM
  * property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -593,9 +593,9 @@ ParamSpec paramSpecParam(string name, string nick, string blurb, GType paramType
 
 /**
  * Creates a new #GParamSpecPointer instance specifying a pointer property.
- * Where possible, it is better to use [GObject.Global.paramSpecObject] or
- * [GObject.Global.paramSpecBoxed] to expose memory management information.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * Where possible, it is better to use [gobject.global.paramSpecObject] or
+ * [gobject.global.paramSpecBoxed] to expose memory management information.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -616,7 +616,7 @@ ParamSpec paramSpecPointer(string name, string nick, string blurb, ParamFlags fl
 
 /**
  * Creates a new #GParamSpecString instance.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -662,7 +662,7 @@ ParamSpec paramSpecUchar(string name, string nick, string blurb, ubyte minimum, 
 
 /**
  * Creates a new #GParamSpecUInt instance specifying a %G_TYPE_UINT property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -687,7 +687,7 @@ ParamSpec paramSpecUint(string name, string nick, string blurb, uint minimum, ui
 /**
  * Creates a new #GParamSpecUInt64 instance specifying a %G_TYPE_UINT64
  * property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -712,7 +712,7 @@ ParamSpec paramSpecUint64(string name, string nick, string blurb, ulong minimum,
 /**
  * Creates a new #GParamSpecULong instance specifying a %G_TYPE_ULONG
  * property.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -737,8 +737,8 @@ ParamSpec paramSpecUlong(string name, string nick, string blurb, gulong minimum,
 /**
  * Creates a new #GParamSpecUnichar instance specifying a %G_TYPE_UINT
  * property. #GValue structures for this property can be accessed with
- * [GObject.Value.setUint] and [GObject.Value.getUint].
- * See [GObject.ParamSpec.internal] for details on property names.
+ * [gobject.value.Value.setUint] and [gobject.value.Value.getUint].
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -762,7 +762,7 @@ ParamSpec paramSpecUnichar(string name, string nick, string blurb, dchar default
  * Creates a new #GParamSpecVariant instance specifying a #GVariant
  * property.
  * If default_value is floating, it is consumed.
- * See [GObject.ParamSpec.internal] for details on property names.
+ * See [gobject.param_spec.ParamSpec.internal] for details on property names.
  * Params:
  *   name = canonical name of the property specified
  *   nick = nick name for the property specified
@@ -808,8 +808,8 @@ GType paramTypeRegisterStatic(string name, ParamSpecTypeInfo pspecInfo)
  * validates dest_value, in order for it to conform to pspec.  If
  * strict_validation is %TRUE this function will only succeed if the
  * transformed dest_value complied to pspec without modifications.
- * See also [GObject.Value.typeTransformable], [GObject.Value.transform] and
- * [GObject.Global.paramValueValidate].
+ * See also [gobject.value.Value.typeTransformable], [gobject.value.Value.transform] and
+ * [gobject.global.paramValueValidate].
  * Params:
  *   pspec = a valid #GParamSpec
  *   srcValue = source #GValue
@@ -970,10 +970,10 @@ bool signalAccumulatorTrueHandled(SignalInvocationHint ihint, Value returnAccu, 
  * of that signal, independent of the instance. This is possible only
  * for signals which don't have %G_SIGNAL_NO_HOOKS flag set.
  * Params:
- *   signalId = the signal identifier, as returned by [GObject.Global.signalLookup].
+ *   signalId = the signal identifier, as returned by [gobject.global.signalLookup].
  *   detail = the detail on which to call the hook.
  *   hookFunc = a #GSignalEmissionHook function.
- * Returns: the hook id, for later use with [GObject.Global.signalRemoveEmissionHook].
+ * Returns: the hook id, for later use with [gobject.global.signalRemoveEmissionHook].
  */
 gulong signalAddEmissionHook(uint signalId, Quark detail, SignalEmissionHook hookFunc)
 {
@@ -999,7 +999,7 @@ gulong signalAddEmissionHook(uint signalId, Quark detail, SignalEmissionHook hoo
 
 /**
  * Connects a closure to a signal for a particular object.
- * If closure is a floating reference $(LPAREN)see [GObject.Closure.sink]$(RPAREN), this function
+ * If closure is a floating reference $(LPAREN)see [gobject.closure.Closure.sink]$(RPAREN), this function
  * takes ownership of closure.
  * This function cannot fail. If the given signal doesn’t exist, a critical
  * warning is emitted.
@@ -1021,7 +1021,7 @@ gulong signalConnectClosure(ObjectG instance, string detailedSignal, Closure clo
 
 /**
  * Connects a closure to a signal for a particular object.
- * If closure is a floating reference $(LPAREN)see [GObject.Closure.sink]$(RPAREN), this function
+ * If closure is a floating reference $(LPAREN)see [gobject.closure.Closure.sink]$(RPAREN), this function
  * takes ownership of closure.
  * This function cannot fail. If the given signal doesn’t exist, a critical
  * warning is emitted.
@@ -1128,7 +1128,7 @@ bool signalHandlerIsConnected(ObjectG instance, gulong handlerId)
 }
 
 /**
- * Undoes the effect of a previous [GObject.Global.signalHandlerBlock] call.  A
+ * Undoes the effect of a previous [gobject.global.signalHandlerBlock] call.  A
  * blocked handler is skipped during signal emissions and will not be
  * invoked, unblocking it $(LPAREN)for exactly the amount of times it has been
  * blocked before$(RPAREN) reverts its "blocked" state, so the handler will be
@@ -1298,7 +1298,7 @@ bool signalIsValidName(string name)
 /**
  * Lists the signals by id that a certain instance or interface type
  * created. Further information about the signals can be acquired through
- * [GObject.Global.signalQuery].
+ * [gobject.global.signalQuery].
  * Params:
  *   itype = Instance or interface type.
  * Returns: Newly allocated array of signal IDs.
@@ -1323,9 +1323,9 @@ uint[] signalListIds(GType itype)
  * somewhat faster than using the name each time.
  * Also tries the ancestors of the given type.
  * The type class passed as itype must already have been instantiated $(LPAREN)for
- * example, using [GObject.TypeClass.ref_]$(RPAREN) for this function to work, as signals are
+ * example, using [gobject.type_class.TypeClass.ref_]$(RPAREN) for this function to work, as signals are
  * always installed during class initialization.
- * See [GObject.Global.signalNew] for details on allowed signal names.
+ * See [gobject.global.signalNew] for details on allowed signal names.
  * Params:
  *   name = the signal's name.
  *   itype = the type that the signal operates on.
@@ -1356,8 +1356,8 @@ string signalName(uint signalId)
 
 /**
  * Creates a new signal. $(LPAREN)This is usually done in the class initializer.$(RPAREN)
- * See [GObject.Global.signalNew] for details on allowed signal names.
- * If c_marshaller is %NULL, [GObject.CClosure.marshalGeneric] will be used as
+ * See [gobject.global.signalNew] for details on allowed signal names.
+ * If c_marshaller is %NULL, [gobject.cclosure.CClosure.marshalGeneric] will be used as
  * the marshaller for this signal.
  * Params:
  *   signalName = the name for the signal
@@ -1417,8 +1417,8 @@ uint signalNewv(string signalName, GType itype, SignalFlags signalFlags, Closure
  * Overrides the class closure $(LPAREN)i.e. the default handler$(RPAREN) for the given signal
  * for emissions on instances of instance_type. instance_type must be derived
  * from the type to which the signal belongs.
- * See [GObject.Global.signalChainFromOverridden] and
- * [GObject.Global.signalChainFromOverriddenHandler] for how to chain up to the
+ * See [gobject.global.signalChainFromOverridden] and
+ * [gobject.global.signalChainFromOverriddenHandler] for how to chain up to the
  * parent class closure from inside the overridden one.
  * Params:
  *   signalId = the signal id
@@ -1474,7 +1474,7 @@ void signalQuery(uint signalId, out SignalQuery query)
  * Params:
  *   signalId = the id of the signal
  *   hookId = the id of the emission hook, as returned by
- *     [GObject.Global.signalAddEmissionHook]
+ *     [gobject.global.signalAddEmissionHook]
  */
 void signalRemoveEmissionHook(uint signalId, gulong hookId)
 {
@@ -1489,7 +1489,7 @@ void signalRemoveEmissionHook(uint signalId, gulong hookId)
  * Prints a warning if used on a signal which isn't being emitted.
  * Params:
  *   instance = the object whose signal handlers you wish to stop.
- *   signalId = the signal identifier, as returned by [GObject.Global.signalLookup].
+ *   signalId = the signal identifier, as returned by [gobject.global.signalLookup].
  *   detail = the detail which the signal was emitted with.
  */
 void signalStopEmission(ObjectG instance, uint signalId, Quark detail)
@@ -1499,7 +1499,7 @@ void signalStopEmission(ObjectG instance, uint signalId, Quark detail)
 
 /**
  * Stops a signal's current emission.
- * This is just like [GObject.Global.signalStopEmission] except it will look up the
+ * This is just like [gobject.global.signalStopEmission] except it will look up the
  * signal id for you.
  * Params:
  *   instance = the object whose signal handlers you wish to stop.
@@ -1627,7 +1627,7 @@ bool typeCheckValueHolds(Value value, GType type)
  * Params:
  *   type = the parent type
  * Returns: Newly allocated
- *   and 0-terminated array of child types, free with [GLib.Global.gfree]
+ *   and 0-terminated array of child types, free with [glib.global.gfree]
  */
 GType[] typeChildren(GType type)
 {
@@ -1667,7 +1667,7 @@ uint typeDepth(GType type)
  * %G_GNUC_CONST requires that the function not have side effects,
  * which _get_type$(LPAREN)$(RPAREN) methods do on the first call$(RPAREN). As a result, if
  * you write a bare call to a _get_type$(LPAREN)$(RPAREN) macro, it may get optimized
- * out by the compiler. Using [GObject.Global.typeEnsure] guarantees that the
+ * out by the compiler. Using [gobject.global.typeEnsure] guarantees that the
  * type's _get_type$(LPAREN)$(RPAREN) method is called.
  * Params:
  *   type = a #GType
@@ -1680,7 +1680,7 @@ void typeEnsure(GType type)
 /**
  * Frees an instance of a type, returning it to the instance pool for
  * the type, if there is one.
- * Like [GObject.Global.typeCreateInstance], this function is reserved for
+ * Like [gobject.global.typeCreateInstance], this function is reserved for
  * implementors of fundamental types.
  * Params:
  *   instance = an instance of a type
@@ -1723,7 +1723,7 @@ GType typeFundamental(GType typeId)
 
 /**
  * Returns the next free fundamental type id which can be used to
- * register a new fundamental type with [GObject.Global.typeRegisterFundamental].
+ * register a new fundamental type with [gobject.global.typeRegisterFundamental].
  * The returned type ID represents the highest currently registered
  * fundamental type identifier.
  * Returns: the next available fundamental type ID to be registered,
@@ -1755,10 +1755,10 @@ int typeGetInstanceCount(GType type)
 
 /**
  * Obtains data which has previously been attached to type
- * with [GObject.Global.typeSetQdata].
+ * with [gobject.global.typeSetQdata].
  * Note that this does not take subtyping into account; data
- * attached to one type with [GObject.Global.typeSetQdata] cannot
- * be retrieved from a subtype using [GObject.Global.typeGetQdata].
+ * attached to one type with [gobject.global.typeSetQdata] cannot
+ * be retrieved from a subtype using [gobject.global.typeGetQdata].
  * Params:
  *   type = a #GType
  *   quark = a #GQuark id to identify the data
@@ -1774,7 +1774,7 @@ void* typeGetQdata(GType type, Quark quark)
  * Returns an opaque serial number that represents the state of the set
  * of registered types. Any time a type is registered this serial changes,
  * which means you can cache information based on type lookups $(LPAREN)such as
- * [GObject.Global.typeFromName]$(RPAREN) and know if the cache is still valid at a later
+ * [gobject.global.typeFromName]$(RPAREN) and know if the cache is still valid at a later
  * time by comparing the current serial with the one at the type lookup.
  * Returns: An unsigned int, representing the state of type registrations
  */
@@ -1820,7 +1820,7 @@ void typeInitWithDebugFlags(TypeDebugFlags debugFlags)
  * Params:
  *   type = the type to list interface types for
  * Returns: Newly allocated
- *   and 0-terminated array of interface types, free with [GLib.Global.gfree]
+ *   and 0-terminated array of interface types, free with [glib.global.gfree]
  */
 GType[] typeInterfaces(GType type)
 {

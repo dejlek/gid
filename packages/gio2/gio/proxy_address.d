@@ -1,6 +1,6 @@
 module gio.proxy_address;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.inet_address;
@@ -10,7 +10,7 @@ import gio.socket_connectable_mixin;
 import gio.types;
 
 /**
- * A [Gio.InetSocketAddress] representing a connection via a proxy server.
+ * A [gio.inet_socket_address.InetSocketAddress] representing a connection via a proxy server.
  */
 class ProxyAddress : InetSocketAddress
 {
@@ -35,7 +35,7 @@ class ProxyAddress : InetSocketAddress
    * Creates a new #GProxyAddress for inetaddr with protocol that should
    * tunnel through dest_hostname and dest_port.
    * $(LPAREN)Note that this method doesn't set the #GProxyAddress:uri or
-   * #GProxyAddress:destination-protocol fields; use [GObject.ObjectG.new_]
+   * #GProxyAddress:destination-protocol fields; use [gobject.object.ObjectG.new_]
    * directly if you want to set those.$(RPAREN)
    * Params:
    *   inetaddr = The proxy server #GInetAddress.

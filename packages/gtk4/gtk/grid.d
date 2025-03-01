@@ -1,6 +1,6 @@
 module gtk.grid;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -20,18 +20,18 @@ import gtk.widget;
  * rows and columns.
  * ![An example GtkGrid](grid.png)
  * It supports arbitrary positions and horizontal/vertical spans.
- * Children are added using [Gtk.Grid.attach]. They can span multiple
+ * Children are added using [gtk.grid.Grid.attach]. They can span multiple
  * rows or columns. It is also possible to add a child next to an existing
- * child, using [Gtk.Grid.attachNextTo]. To remove a child from the
- * grid, use [Gtk.Grid.remove].
+ * child, using [gtk.grid.Grid.attachNextTo]. To remove a child from the
+ * grid, use [gtk.grid.Grid.remove].
  * The behaviour of `GtkGrid` when several children occupy the same grid
  * cell is undefined.
  * # GtkGrid as GtkBuildable
- * Every child in a `GtkGrid` has access to a custom [Gtk.Buildable]
+ * Every child in a `GtkGrid` has access to a custom [gtk.buildable.Buildable]
  * element, called `<layout>`. It can by used to specify a position in the
  * grid and optionally spans. All properties that can be used in the `<layout>`
- * element are implemented by [Gtk.GridLayoutChild].
- * It is implemented by `GtkWidget` using [Gtk.LayoutManager].
+ * element are implemented by [gtk.grid_layout_child.GridLayoutChild].
+ * It is implemented by `GtkWidget` using [gtk.layout_manager.LayoutManager].
  * To showcase it, here is a simple example:
  * ```xml
  * <object class\="GtkGrid" id\="my_grid">
@@ -207,7 +207,7 @@ class Grid : Widget, Orientable
 
   /**
    * Returns the baseline position of row.
-   * See [Gtk.Grid.setRowBaselinePosition].
+   * See [gtk.grid.Grid.setRowBaselinePosition].
    * Params:
    *   row = a row index
    * Returns: the baseline position of row
@@ -301,7 +301,7 @@ class Grid : Widget, Orientable
   /**
    * Removes a child from grid.
    * The child must have been added with
-   * [Gtk.Grid.attach] or [Gtk.Grid.attachNextTo].
+   * [gtk.grid.Grid.attach] or [gtk.grid.Grid.attachNextTo].
    * Params:
    *   child = the child widget to remove
    */

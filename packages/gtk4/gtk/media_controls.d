@@ -1,6 +1,6 @@
 module gtk.media_controls;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -17,7 +17,7 @@ import gtk.widget;
 /**
  * `GtkMediaControls` is a widget to show controls for a video.
  * ![An example GtkMediaControls](media-controls.png)
- * Usually, `GtkMediaControls` is used as part of [Gtk.Video].
+ * Usually, `GtkMediaControls` is used as part of [gtk.video.Video].
  */
 class MediaControls : Widget
 {

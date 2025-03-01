@@ -5,7 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.hyperlink;
 import atk.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 /**

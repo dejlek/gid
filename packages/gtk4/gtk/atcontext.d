@@ -1,7 +1,7 @@
 module gtk.atcontext;
 
 import gdk.display;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;

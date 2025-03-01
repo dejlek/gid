@@ -1,7 +1,7 @@
 module gio.dtls_connection_mixin;
 
 public import gio.dtls_connection_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.async_result;
 public import gio.async_result_mixin;
 public import gio.c.functions;
@@ -17,20 +17,20 @@ public import gobject.object;
 
 /**
  * `GDtlsConnection` is the base DTLS connection class type, which wraps
- * a [Gio.DatagramBased] and provides DTLS encryption on top of it. Its
- * subclasses, [Gio.DtlsClientConnection] and
- * [Gio.DtlsServerConnection], implement client-side and server-side DTLS,
+ * a [gio.datagram_based.DatagramBased] and provides DTLS encryption on top of it. Its
+ * subclasses, [gio.dtls_client_connection.DtlsClientConnection] and
+ * [gio.dtls_server_connection.DtlsServerConnection], implement client-side and server-side DTLS,
  * respectively.
- * For TLS support, see [Gio.TlsConnection].
+ * For TLS support, see [gio.tls_connection.TlsConnection].
  * As DTLS is datagram based, `GDtlsConnection` implements
- * [Gio.DatagramBased], presenting a datagram-socket-like API for the
+ * [gio.datagram_based.DatagramBased], presenting a datagram-socket-like API for the
  * encrypted connection. This operates over a base datagram connection, which is
  * also a `GDatagramBased` $(LPAREN)property@Gio.DtlsConnection:base-socket$(RPAREN).
- * To close a DTLS connection, use [Gio.DtlsConnection.close].
- * Neither [Gio.DtlsServerConnection] or [Gio.DtlsClientConnection]
- * set the peer address on their base [Gio.DatagramBased] if it is a
- * [Gio.Socket] — it is up to the caller to do that if they wish. If they
- * do not, and [Gio.Socket.close] is called on the base socket, the
+ * To close a DTLS connection, use [gio.dtls_connection.DtlsConnection.close].
+ * Neither [gio.dtls_server_connection.DtlsServerConnection] or [gio.dtls_client_connection.DtlsClientConnection]
+ * set the peer address on their base [gio.datagram_based.DatagramBased] if it is a
+ * [gio.socket.Socket] — it is up to the caller to do that if they wish. If they
+ * do not, and [gio.socket.Socket.close] is called on the base socket, the
  * `GDtlsConnection` will not raise a `G_IO_ERROR_NOT_CONNECTED` error on
  * further I/O.
  */
@@ -39,7 +39,7 @@ template DtlsConnectionT()
 
   /**
    * Close the DTLS connection. This is equivalent to calling
-   * [Gio.DtlsConnection.shutdown] to shut down both sides of the connection.
+   * [gio.dtls_connection.DtlsConnection.shutdown] to shut down both sides of the connection.
    * Closing a #GDtlsConnection waits for all buffered but untransmitted data to
    * be sent before it completes. It then sends a `close_notify` DTLS alert to the
    * peer and may wait for a `close_notify` to be received from the peer. It does
@@ -52,7 +52,7 @@ template DtlsConnectionT()
    * released as early as possible.
    * If cancellable is cancelled, the #GDtlsConnection may be left
    * partially-closed and any pending untransmitted data may be lost. Call
-   * [Gio.DtlsConnection.close] again to complete closing the #GDtlsConnection.
+   * [gio.dtls_connection.DtlsConnection.close] again to complete closing the #GDtlsConnection.
    * Params:
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE on success, %FALSE otherwise
@@ -68,7 +68,7 @@ template DtlsConnectionT()
   }
 
   /**
-   * Asynchronously close the DTLS connection. See [Gio.DtlsConnection.close] for
+   * Asynchronously close the DTLS connection. See [gio.dtls_connection.DtlsConnection.close] for
    * more information.
    * Params:
    *   ioPriority = the [I/O priority][io-priority] of the request
@@ -91,7 +91,7 @@ template DtlsConnectionT()
   }
 
   /**
-   * Finish an asynchronous TLS close operation. See [Gio.DtlsConnection.close]
+   * Finish an asynchronous TLS close operation. See [gio.dtls_connection.DtlsConnection.close]
    * for more information.
    * Params:
    *   result = a #GAsyncResult
@@ -126,7 +126,7 @@ template DtlsConnectionT()
 
   /**
    * Gets conn's certificate, as set by
-   * [Gio.DtlsConnection.setCertificate].
+   * [gio.dtls_connection.DtlsConnection.setCertificate].
    * Returns: conn's certificate, or %NULL
    */
   override TlsCertificate getCertificate()
@@ -158,7 +158,7 @@ template DtlsConnectionT()
 
   /**
    * Gets the certificate database that conn uses to verify
-   * peer certificates. See [Gio.DtlsConnection.setDatabase].
+   * peer certificates. See [gio.dtls_connection.DtlsConnection.setDatabase].
    * Returns: the certificate database that conn uses or %NULL
    */
   override TlsDatabase getDatabase()
@@ -189,7 +189,7 @@ template DtlsConnectionT()
    * If the peer did not use the ALPN extension, or did not advertise a
    * protocol that matched one of conn's protocols, or the TLS backend
    * does not support ALPN, then this will be %NULL. See
-   * [Gio.DtlsConnection.setAdvertisedProtocols].
+   * [gio.dtls_connection.DtlsConnection.setAdvertisedProtocols].
    * Returns: the negotiated protocol, or %NULL
    */
   override string getNegotiatedProtocol()
@@ -245,7 +245,7 @@ template DtlsConnectionT()
 
   /**
    * Gets conn rehandshaking mode. See
-   * [Gio.DtlsConnection.setRehandshakeMode] for details.
+   * [gio.dtls_connection.DtlsConnection.setRehandshakeMode] for details.
    * Returns: %G_TLS_REHANDSHAKE_SAFELY
 
    * Deprecated: Changing the rehandshake mode is no longer
@@ -263,7 +263,7 @@ template DtlsConnectionT()
   /**
    * Tests whether or not conn expects a proper TLS close notification
    * when the connection is closed. See
-   * [Gio.DtlsConnection.setRequireCloseNotify] for details.
+   * [gio.dtls_connection.DtlsConnection.setRequireCloseNotify] for details.
    * Returns: %TRUE if conn requires a proper TLS close notification.
    */
   override bool getRequireCloseNotify()
@@ -279,7 +279,7 @@ template DtlsConnectionT()
    * although the connection needs to perform a handshake after
    * connecting, #GDtlsConnection will handle this for you automatically
    * when you try to send or receive data on the connection. You can call
-   * [Gio.DtlsConnection.handshake] manually if you want to know whether
+   * [gio.dtls_connection.DtlsConnection.handshake] manually if you want to know whether
    * the initial handshake succeeded or failed $(LPAREN)as opposed to just
    * immediately trying to use conn to read or write, in which case,
    * if it fails, it may not be possible to tell if it failed before
@@ -289,7 +289,7 @@ template DtlsConnectionT()
    * Likewise, on the server side, although a handshake is necessary at
    * the beginning of the communication, you do not need to call this
    * function explicitly unless you want clearer error reporting.
-   * Previously, calling [Gio.DtlsConnection.handshake] after the initial
+   * Previously, calling [gio.dtls_connection.DtlsConnection.handshake] after the initial
    * handshake would trigger a rehandshake; however, this usage was
    * deprecated in GLib 2.60 because rehandshaking was removed from the
    * TLS protocol in TLS 1.3. Since GLib 2.64, calling this function after
@@ -312,7 +312,7 @@ template DtlsConnectionT()
 
   /**
    * Asynchronously performs a TLS handshake on conn. See
-   * [Gio.DtlsConnection.handshake] for more information.
+   * [gio.dtls_connection.DtlsConnection.handshake] for more information.
    * Params:
    *   ioPriority = the [I/O priority][io-priority] of the request
    *   cancellable = a #GCancellable, or %NULL
@@ -335,7 +335,7 @@ template DtlsConnectionT()
 
   /**
    * Finish an asynchronous TLS handshake operation. See
-   * [Gio.DtlsConnection.handshake] for more information.
+   * [gio.dtls_connection.DtlsConnection.handshake] for more information.
    * Params:
    *   result = a #GAsyncResult.
    * Returns: %TRUE on success, %FALSE on failure, in which
@@ -356,7 +356,7 @@ template DtlsConnectionT()
    * caller is willing to speak on this connection. The
    * Application-Layer Protocol Negotiation $(LPAREN)ALPN$(RPAREN) extension will be
    * used to negotiate a compatible protocol with the peer; use
-   * [Gio.DtlsConnection.getNegotiatedProtocol] to find the negotiated
+   * [gio.dtls_connection.DtlsConnection.getNegotiatedProtocol] to find the negotiated
    * protocol after the handshake.  Specifying %NULL for the the value
    * of protocols will disable ALPN negotiation.
    * See [IANA TLS ALPN Protocol IDs](https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids)
@@ -384,13 +384,13 @@ template DtlsConnectionT()
    * with %G_TLS_ERROR_CERTIFICATE_REQUIRED, that means that the server
    * requires a certificate, and if you try connecting again, you should
    * call this method first. You can call
-   * [Gio.DtlsClientConnection.getAcceptedCas] on the failed connection
+   * [gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas] on the failed connection
    * to get a list of Certificate Authorities that the server will
    * accept certificates from.
    * $(LPAREN)It is also possible that a server will allow the connection with
    * or without a certificate; in that case, if you don't provide a
    * certificate, you can tell that the server requested one by the fact
-   * that [Gio.DtlsClientConnection.getAcceptedCas] will return
+   * that [gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas] will return
    * non-%NULL.$(RPAREN)
    * Params:
    *   certificate = the certificate to use for conn
@@ -403,7 +403,7 @@ template DtlsConnectionT()
   /**
    * Sets the certificate database that is used to verify peer certificates.
    * This is set to the default database by default. See
-   * [Gio.TlsBackend.getDefaultDatabase]. If set to %NULL, then
+   * [gio.tls_backend.TlsBackend.getDefaultDatabase]. If set to %NULL, then
    * peer certificate validation will always set the
    * %G_TLS_CERTIFICATE_UNKNOWN_CA error $(LPAREN)meaning
    * #GDtlsConnection::accept-certificate will always be emitted on
@@ -463,13 +463,13 @@ template DtlsConnectionT()
    * $(LPAREN)because the application-level data includes a length field, or is
    * somehow self-delimiting$(RPAREN); in this case, the close notify is
    * redundant and may be omitted. You
-   * can use [Gio.DtlsConnection.setRequireCloseNotify] to tell conn
+   * can use [gio.dtls_connection.DtlsConnection.setRequireCloseNotify] to tell conn
    * to allow an "unannounced" connection close, in which case the close
    * will show up as a 0-length read, as in a non-TLS
    * #GDatagramBased, and it is up to the application to check that
    * the data has been fully received.
    * Note that this only affects the behavior when the peer closes the
-   * connection; when the application calls [Gio.DtlsConnection.closeAsync] on
+   * connection; when the application calls [gio.dtls_connection.DtlsConnection.closeAsync] on
    * conn itself, this will send a close notification regardless of the
    * setting of this property. If you explicitly want to do an unclean
    * close, you can close conn's #GDtlsConnection:base-socket rather
@@ -486,15 +486,15 @@ template DtlsConnectionT()
    * Shut down part or all of a DTLS connection.
    * If shutdown_read is %TRUE then the receiving side of the connection is shut
    * down, and further reading is disallowed. Subsequent calls to
-   * [Gio.DatagramBased.receiveMessages] will return %G_IO_ERROR_CLOSED.
+   * [gio.datagram_based.DatagramBased.receiveMessages] will return %G_IO_ERROR_CLOSED.
    * If shutdown_write is %TRUE then the sending side of the connection is shut
    * down, and further writing is disallowed. Subsequent calls to
-   * [Gio.DatagramBased.sendMessages] will return %G_IO_ERROR_CLOSED.
+   * [gio.datagram_based.DatagramBased.sendMessages] will return %G_IO_ERROR_CLOSED.
    * It is allowed for both shutdown_read and shutdown_write to be TRUE — this
-   * is equivalent to calling [Gio.DtlsConnection.close].
+   * is equivalent to calling [gio.dtls_connection.DtlsConnection.close].
    * If cancellable is cancelled, the #GDtlsConnection may be left
    * partially-closed and any pending untransmitted data may be lost. Call
-   * [Gio.DtlsConnection.shutdown] again to complete closing the #GDtlsConnection.
+   * [gio.dtls_connection.DtlsConnection.shutdown] again to complete closing the #GDtlsConnection.
    * Params:
    *   shutdownRead = %TRUE to stop reception of incoming datagrams
    *   shutdownWrite = %TRUE to stop sending outgoing datagrams
@@ -513,7 +513,7 @@ template DtlsConnectionT()
 
   /**
    * Asynchronously shut down part or all of the DTLS connection. See
-   * [Gio.DtlsConnection.shutdown] for more information.
+   * [gio.dtls_connection.DtlsConnection.shutdown] for more information.
    * Params:
    *   shutdownRead = %TRUE to stop reception of incoming datagrams
    *   shutdownWrite = %TRUE to stop sending outgoing datagrams
@@ -538,7 +538,7 @@ template DtlsConnectionT()
 
   /**
    * Finish an asynchronous TLS shutdown operation. See
-   * [Gio.DtlsConnection.shutdown] for more information.
+   * [gio.dtls_connection.DtlsConnection.shutdown] for more information.
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE on success, %FALSE on failure, in which
@@ -557,7 +557,7 @@ template DtlsConnectionT()
   /**
    * Emitted during the TLS handshake after the peer certificate has
    * been received. You can examine peer_cert's certification path by
-   * calling [Gio.TlsCertificate.getIssuer] on it.
+   * calling [gio.tls_certificate.TlsCertificate.getIssuer] on it.
    * For a client-side connection, peer_cert is the server's
    * certificate, and the signal will only be emitted if the
    * certificate was not acceptable according to conn's

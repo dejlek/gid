@@ -6,7 +6,7 @@ import arrow.output_stream;
 import arrow.record_batch_writer;
 import arrow.schema;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class RecordBatchStreamWriter : RecordBatchWriter

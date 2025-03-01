@@ -1,6 +1,6 @@
 module gio.vfs;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.file;
@@ -60,7 +60,7 @@ class Vfs : ObjectG
    * Params:
    *   path = a string containing a VFS path.
    * Returns: a #GFile.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   File getFileForPath(string path)
   {
@@ -79,7 +79,7 @@ class Vfs : ObjectG
    * Params:
    *   uri = a string containing a URI
    * Returns: a #GFile.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   File getFileForUri(string uri)
   {
@@ -133,7 +133,7 @@ class Vfs : ObjectG
    * Params:
    *   parseName = a string to be parsed by the VFS module.
    * Returns: a #GFile for the given parse_name.
-   *   Free the returned object with [GObject.ObjectG.unref].
+   *   Free the returned object with [gobject.object.ObjectG.unref].
    */
   File parseName(string parseName)
   {
@@ -150,18 +150,18 @@ class Vfs : ObjectG
    * Note that scheme is registered only within the running application, as
    * opposed to desktop-wide as it happens with GVfs backends.
    * When a #GFile is requested with an URI containing scheme $(LPAREN)e.g. through
-   * [Gio.File.newForUri]$(RPAREN), uri_func will be called to allow a custom
+   * [gio.file.File.newForUri]$(RPAREN), uri_func will be called to allow a custom
    * constructor. The implementation of uri_func should not be blocking, and
-   * must not call [Gio.Vfs.registerUriScheme] or [Gio.Vfs.unregisterUriScheme].
-   * When [Gio.File.parseName] is called with a parse name obtained from such file,
+   * must not call [gio.vfs.Vfs.registerUriScheme] or [gio.vfs.Vfs.unregisterUriScheme].
+   * When [gio.file.File.parseName] is called with a parse name obtained from such file,
    * parse_name_func will be called to allow the #GFile to be created again. In
    * that case, it's responsibility of parse_name_func to make sure the parse
    * name matches what the custom #GFile implementation returned when
-   * [Gio.File.getParseName] was previously called. The implementation of
+   * [gio.file.File.getParseName] was previously called. The implementation of
    * parse_name_func should not be blocking, and must not call
-   * [Gio.Vfs.registerUriScheme] or [Gio.Vfs.unregisterUriScheme].
+   * [gio.vfs.Vfs.registerUriScheme] or [gio.vfs.Vfs.unregisterUriScheme].
    * It's an error to call this function twice with the same scheme. To unregister
-   * a custom URI scheme, use [Gio.Vfs.unregisterUriScheme].
+   * a custom URI scheme, use [gio.vfs.Vfs.unregisterUriScheme].
    * Params:
    *   scheme = an URI scheme, e.g. "http"
    *   uriFunc = a #GVfsFileLookupFunc
@@ -209,7 +209,7 @@ class Vfs : ObjectG
 
   /**
    * Unregisters the URI handler for scheme previously registered with
-   * [Gio.Vfs.registerUriScheme].
+   * [gio.vfs.Vfs.registerUriScheme].
    * Params:
    *   scheme = an URI scheme, e.g. "http"
    * Returns: %TRUE if scheme was successfully unregistered, or %FALSE if a

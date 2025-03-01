@@ -1,7 +1,7 @@
 module gio.mount_mixin;
 
 public import gio.mount_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.async_result;
 public import gio.async_result_mixin;
 public import gio.c.functions;
@@ -30,16 +30,16 @@ public import gobject.object;
  * mount, but you can still access the files on it if you use GIO. Might or
  * might not be related to a volume object.
  * Unmounting a `GMount` instance is an asynchronous operation. For
- * more information about asynchronous operations, see [Gio.AsyncResult]
- * and [Gio.Task]. To unmount a `GMount` instance, first call
- * [Gio.Mount.unmountWithOperation] with (at least) the `GMount`
- * instance and a [Gio.AsyncReadyCallback].  The callback will be fired
+ * more information about asynchronous operations, see [gio.async_result.AsyncResult]
+ * and [gio.task.Task]. To unmount a `GMount` instance, first call
+ * [gio.mount.Mount.unmountWithOperation] with (at least) the `GMount`
+ * instance and a [gio.AsyncReadyCallback].  The callback will be fired
  * when the operation has resolved $(LPAREN)either with success or failure$(RPAREN), and a
- * [Gio.AsyncResult] structure will be passed to the callback.  That
- * callback should then call [Gio.Mount.unmountWithOperationFinish]
- * with the `GMount` and the [Gio.AsyncResult] data to see if the
+ * [gio.async_result.AsyncResult] structure will be passed to the callback.  That
+ * callback should then call [gio.mount.Mount.unmountWithOperationFinish]
+ * with the `GMount` and the [gio.async_result.AsyncResult] data to see if the
  * operation was completed successfully.  If an `error` is present when
- * [Gio.Mount.unmountWithOperationFinish] is called, then it will be
+ * [gio.mount.Mount.unmountWithOperationFinish] is called, then it will be
  * filled with any error information.
  */
 template MountT()
@@ -69,14 +69,14 @@ template MountT()
 
   /**
    * Ejects a mount. This is an asynchronous operation, and is
-   * finished by calling [Gio.Mount.ejectFinish] with the mount
+   * finished by calling [gio.mount.Mount.ejectFinish] with the mount
    * and #GAsyncResult data returned in the callback.
    * Params:
    *   flags = flags affecting the unmount if required for eject
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
 
-   * Deprecated: Use [Gio.Mount.ejectWithOperation] instead.
+   * Deprecated: Use [gio.mount.Mount.ejectWithOperation] instead.
    */
   override void eject(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback)
   {
@@ -100,7 +100,7 @@ template MountT()
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the mount was successfully ejected. %FALSE otherwise.
 
-   * Deprecated: Use [Gio.Mount.ejectWithOperationFinish] instead.
+   * Deprecated: Use [gio.mount.Mount.ejectWithOperationFinish] instead.
    */
   override bool ejectFinish(AsyncResult result)
   {
@@ -114,7 +114,7 @@ template MountT()
 
   /**
    * Ejects a mount. This is an asynchronous operation, and is
-   * finished by calling [Gio.Mount.ejectWithOperationFinish] with the mount
+   * finished by calling [gio.mount.Mount.ejectWithOperationFinish] with the mount
    * and #GAsyncResult data returned in the callback.
    * Params:
    *   flags = flags affecting the unmount if required for eject
@@ -161,7 +161,7 @@ template MountT()
    * the home directory, or the root of the volume$(RPAREN).
    * Returns: a #GFile.
    *   The returned object should be unreffed with
-   *   [GObject.ObjectG.unref] when no longer needed.
+   *   [gobject.object.ObjectG.unref] when no longer needed.
    */
   override File getDefaultLocation()
   {
@@ -178,7 +178,7 @@ template MountT()
    * Returns: a #GDrive or %NULL if mount is not
    *   associated with a volume or a drive.
    *   The returned object should be unreffed with
-   *   [GObject.ObjectG.unref] when no longer needed.
+   *   [gobject.object.ObjectG.unref] when no longer needed.
    */
   override Drive getDrive()
   {
@@ -192,7 +192,7 @@ template MountT()
    * Gets the icon for mount.
    * Returns: a #GIcon.
    *   The returned object should be unreffed with
-   *   [GObject.ObjectG.unref] when no longer needed.
+   *   [gobject.object.ObjectG.unref] when no longer needed.
    */
   override Icon getIcon()
   {
@@ -205,7 +205,7 @@ template MountT()
   /**
    * Gets the name of mount.
    * Returns: the name for the given mount.
-   *   The returned string should be freed with [GLib.Global.gfree]
+   *   The returned string should be freed with [glib.global.gfree]
    *   when no longer needed.
    */
   override string getName()
@@ -220,7 +220,7 @@ template MountT()
    * Gets the root directory on mount.
    * Returns: a #GFile.
    *   The returned object should be unreffed with
-   *   [GObject.ObjectG.unref] when no longer needed.
+   *   [gobject.object.ObjectG.unref] when no longer needed.
    */
   override File getRoot()
   {
@@ -246,7 +246,7 @@ template MountT()
    * Gets the symbolic icon for mount.
    * Returns: a #GIcon.
    *   The returned object should be unreffed with
-   *   [GObject.ObjectG.unref] when no longer needed.
+   *   [gobject.object.ObjectG.unref] when no longer needed.
    */
   override Icon getSymbolicIcon()
   {
@@ -263,7 +263,7 @@ template MountT()
    * available.
    * Returns: the UUID for mount or %NULL if no UUID
    *   can be computed.
-   *   The returned string should be freed with [GLib.Global.gfree]
+   *   The returned string should be freed with [glib.global.gfree]
    *   when no longer needed.
    */
   override string getUuid()
@@ -279,7 +279,7 @@ template MountT()
    * Returns: a #GVolume or %NULL if mount is not
    *   associated with a volume.
    *   The returned object should be unreffed with
-   *   [GObject.ObjectG.unref] when no longer needed.
+   *   [gobject.object.ObjectG.unref] when no longer needed.
    */
   override Volume getVolume()
   {
@@ -297,8 +297,8 @@ template MountT()
    * [shared-mime-info](http://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec)
    * specification for more on x-content types.
    * This is an asynchronous operation $(LPAREN)see
-   * [Gio.Mount.guessContentTypeSync] for the synchronous version$(RPAREN), and
-   * is finished by calling [Gio.Mount.guessContentTypeFinish] with the
+   * [gio.mount.Mount.guessContentTypeSync] for the synchronous version$(RPAREN), and
+   * is finished by calling [gio.mount.Mount.guessContentTypeFinish] with the
    * mount and #GAsyncResult data returned in the callback.
    * Params:
    *   forceRescan = Whether to force a rescan of the content.
@@ -330,7 +330,7 @@ template MountT()
    * Params:
    *   result = a #GAsyncResult
    * Returns: a %NULL-terminated array of content types or %NULL on error.
-   *   Caller should free this array with [GLib.Global.strfreev] when done with it.
+   *   Caller should free this array with [glib.global.strfreev] when done with it.
    */
   override string[] guessContentTypeFinish(AsyncResult result)
   {
@@ -361,13 +361,13 @@ template MountT()
    * [shared-mime-info](http://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec)
    * specification for more on x-content types.
    * This is a synchronous operation and as such may block doing IO;
-   * see [Gio.Mount.guessContentType] for the asynchronous version.
+   * see [gio.mount.Mount.guessContentType] for the asynchronous version.
    * Params:
    *   forceRescan = Whether to force a rescan of the content.
    *     Otherwise a cached result will be used if available
    *   cancellable = optional #GCancellable object, %NULL to ignore
    * Returns: a %NULL-terminated array of content types or %NULL on error.
-   *   Caller should free this array with [GLib.Global.strfreev] when done with it.
+   *   Caller should free this array with [glib.global.strfreev] when done with it.
    */
   override string[] guessContentTypeSync(bool forceRescan, Cancellable cancellable)
   {
@@ -422,7 +422,7 @@ template MountT()
 
   /**
    * Remounts a mount. This is an asynchronous operation, and is
-   * finished by calling [Gio.Mount.remountFinish] with the mount
+   * finished by calling [gio.mount.Mount.remountFinish] with the mount
    * and #GAsyncResults data returned in the callback.
    * Remounting is useful when some setting affecting the operation
    * of the volume has been changed, as these may need a remount to
@@ -471,7 +471,7 @@ template MountT()
   /**
    * Increments the shadow count on mount. Usually used by
    * #GVolumeMonitor implementations when creating a shadow mount for
-   * mount, see [Gio.Mount.isShadowed] for more information. The caller
+   * mount, see [gio.mount.Mount.isShadowed] for more information. The caller
    * will need to emit the #GMount::changed signal on mount manually.
    */
   override void shadow()
@@ -481,14 +481,14 @@ template MountT()
 
   /**
    * Unmounts a mount. This is an asynchronous operation, and is
-   * finished by calling [Gio.Mount.unmountFinish] with the mount
+   * finished by calling [gio.mount.Mount.unmountFinish] with the mount
    * and #GAsyncResult data returned in the callback.
    * Params:
    *   flags = flags affecting the operation
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
 
-   * Deprecated: Use [Gio.Mount.unmountWithOperation] instead.
+   * Deprecated: Use [gio.mount.Mount.unmountWithOperation] instead.
    */
   override void unmount(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback)
   {
@@ -512,7 +512,7 @@ template MountT()
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the mount was successfully unmounted. %FALSE otherwise.
 
-   * Deprecated: Use [Gio.Mount.unmountWithOperationFinish] instead.
+   * Deprecated: Use [gio.mount.Mount.unmountWithOperationFinish] instead.
    */
   override bool unmountFinish(AsyncResult result)
   {
@@ -526,7 +526,7 @@ template MountT()
 
   /**
    * Unmounts a mount. This is an asynchronous operation, and is
-   * finished by calling [Gio.Mount.unmountWithOperationFinish] with the mount
+   * finished by calling [gio.mount.Mount.unmountWithOperationFinish] with the mount
    * and #GAsyncResult data returned in the callback.
    * Params:
    *   flags = flags affecting the operation
@@ -570,7 +570,7 @@ template MountT()
   /**
    * Decrements the shadow count on mount. Usually used by
    * #GVolumeMonitor implementations when destroying a shadow mount for
-   * mount, see [Gio.Mount.isShadowed] for more information. The caller
+   * mount, see [gio.mount.Mount.isShadowed] for more information. The caller
    * will need to emit the #GMount::changed signal on mount manually.
    */
   override void unshadow()

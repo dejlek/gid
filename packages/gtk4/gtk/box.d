@@ -1,6 +1,6 @@
 module gtk.box;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -18,20 +18,20 @@ import gtk.widget;
  * The `GtkBox` widget arranges child widgets into a single row or column.
  * ![An example GtkBox](box.png)
  * Whether it is a row or column depends on the value of its
- * [Gtk.Orientable.orientation] property. Within the other
+ * [gtk.orientable.Orientable.Orientation] property. Within the other
  * dimension, all children are allocated the same size. Of course, the
- * [Gtk.Widget.halign] and [Gtk.Widget.valign] properties
+ * [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align] properties
  * can be used on the children to influence their allocation.
- * Use repeated calls to [Gtk.Box.append] to pack widgets into a
- * `GtkBox` from start to end. Use [Gtk.Box.remove] to remove widgets
- * from the `GtkBox`. [Gtk.Box.insertChildAfter] can be used to add
+ * Use repeated calls to [gtk.box.Box.append] to pack widgets into a
+ * `GtkBox` from start to end. Use [gtk.box.Box.remove] to remove widgets
+ * from the `GtkBox`. [gtk.box.Box.insertChildAfter] can be used to add
  * a child at a particular position.
- * Use [Gtk.Box.setHomogeneous] to specify whether or not all children
+ * Use [gtk.box.Box.setHomogeneous] to specify whether or not all children
  * of the `GtkBox` are forced to get the same amount of space.
- * Use [Gtk.Box.setSpacing] to determine how much space will be minimally
+ * Use [gtk.box.Box.setSpacing] to determine how much space will be minimally
  * placed between all children in the `GtkBox`. Note that spacing is added
  * *between* the children.
- * Use [Gtk.Box.reorderChildAfter] to move a child to a different
+ * Use [gtk.box.Box.reorderChildAfter] to move a child to a different
  * place in the box.
  * # CSS nodes
  * `GtkBox` uses a single CSS node with name box.
@@ -85,7 +85,7 @@ class Box : Widget, Orientable
   }
 
   /**
-   * Gets the value set by [Gtk.Box.setBaselineChild].
+   * Gets the value set by [gtk.box.Box.setBaselineChild].
    * Returns: the baseline child
    */
   int getBaselineChild()
@@ -96,7 +96,7 @@ class Box : Widget, Orientable
   }
 
   /**
-   * Gets the value set by [Gtk.Box.setBaselinePosition].
+   * Gets the value set by [gtk.box.Box.setBaselinePosition].
    * Returns: the baseline position
    */
   BaselinePosition getBaselinePosition()
@@ -120,7 +120,7 @@ class Box : Widget, Orientable
   }
 
   /**
-   * Gets the value set by [Gtk.Box.setSpacing].
+   * Gets the value set by [gtk.box.Box.setSpacing].
    * Returns: spacing between children
    */
   int getSpacing()
@@ -156,8 +156,8 @@ class Box : Widget, Orientable
   /**
    * Removes a child widget from box.
    * The child must have been added before with
-   * [Gtk.Box.append], [Gtk.Box.prepend], or
-   * [Gtk.Box.insertChildAfter].
+   * [gtk.box.Box.append], [gtk.box.Box.prepend], or
+   * [gtk.box.Box.insertChildAfter].
    * Params:
    *   child = the child to remove
    */

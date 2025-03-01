@@ -1,6 +1,6 @@
 module gio.dbus_interface_skeleton;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_connection;
@@ -43,7 +43,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    * This can be called multiple times to export the same interface_
    * onto multiple connections however the object_path provided must be
    * the same for all connections.
-   * Use [Gio.DBusInterfaceSkeleton.unexport] to unexport the object.
+   * Use [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.unexport] to unexport the object.
    * Params:
    *   connection = A #GDBusConnection to export interface_ on.
    *   objectPath = The path to export the interface at.
@@ -92,8 +92,8 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    * Gets a list of the connections that interface_ is exported on.
    * Returns: A list of
    *   all the connections that interface_ is exported on. The returned
-   *   list should be freed with [GLib.List.free] after each element has
-   *   been freed with [GObject.ObjectG.unref].
+   *   list should be freed with [glib.list.List.free] after each element has
+   *   been freed with [gobject.object.ObjectG.unref].
    */
   DBusConnection[] getConnections()
   {
@@ -146,7 +146,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    * Gets all D-Bus properties for interface_.
    * Returns: A #GVariant of type
    *   ['a{sv}'][G-VARIANT-TYPE-VARDICT:CAPS].
-   *   Free with [GLib.VariantG.unref].
+   *   Free with [glib.variant.VariantG.unref].
    */
   VariantG getProperties()
   {
@@ -198,7 +198,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
   /**
    * Stops exporting interface_ on all connections it is exported on.
    * To unexport interface_ from only a single connection, use
-   * [Gio.DBusInterfaceSkeleton.unexportFromConnection]
+   * [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.unexportFromConnection]
    */
   void unexport()
   {
@@ -208,7 +208,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
   /**
    * Stops exporting interface_ on connection.
    * To stop exporting on all connections the interface is exported on,
-   * use [Gio.DBusInterfaceSkeleton.unexport].
+   * use [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.unexport].
    * Params:
    *   connection = A #GDBusConnection.
    */
@@ -230,7 +230,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    * If %FALSE is returned then no further handlers are run and the
    * signal handler must take a reference to invocation and finish
    * handling the call $(LPAREN)e.g. return an error via
-   * [Gio.DBusMethodInvocation.returnError]$(RPAREN).
+   * [gio.dbus_method_invocation.DBusMethodInvocation.returnError]$(RPAREN).
    * Otherwise, if %TRUE is returned, signal emission continues. If no
    * handlers return %FALSE, then the method is dispatched. If
    * interface has an enclosing #GDBusObjectSkeleton, then the

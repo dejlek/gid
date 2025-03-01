@@ -1,6 +1,6 @@
 module gtk.text_tag_table;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.buildable;

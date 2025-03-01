@@ -6,7 +6,7 @@ import arrow.decimal64;
 import arrow.decimal64_data_type;
 import arrow.scalar;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import gobject.object;
 
 class Decimal64Scalar : Scalar

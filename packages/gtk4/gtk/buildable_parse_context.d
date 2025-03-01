@@ -1,6 +1,6 @@
 module gtk.buildable_parse_context;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -32,7 +32,7 @@ class BuildableParseContext
    * Retrieves the name of the currently open element.
    * If called from the start_element or end_element handlers this will
    * give the element_name as passed to those functions. For the parent
-   * elements, see [Gtk.BuildableParseContext.getElementStack].
+   * elements, see [gtk.buildable_parse_context.BuildableParseContext.getElementStack].
    * Returns: the name of the currently open element
    */
   string getElement()
@@ -47,10 +47,10 @@ class BuildableParseContext
    * Retrieves the element stack from the internal state of the parser.
    * The returned `GPtrArray` is an array of strings where the last item is
    * the currently open tag $(LPAREN)as would be returned by
-   * [Gtk.BuildableParseContext.getElement]$(RPAREN) and the previous item is its
+   * [gtk.buildable_parse_context.BuildableParseContext.getElement]$(RPAREN) and the previous item is its
    * immediate parent.
    * This function is intended to be used in the start_element and
-   * end_element handlers where [Gtk.BuildableParseContext.getElement]
+   * end_element handlers where [gtk.buildable_parse_context.BuildableParseContext.getElement]
    * would merely return the name of the element that is being
    * processed.
    * Returns: the element stack, which must not be modified
@@ -80,16 +80,16 @@ class BuildableParseContext
   /**
    * Completes the process of a temporary sub-parser redirection.
    * This function exists to collect the user_data allocated by a
-   * matching call to [Gtk.BuildableParseContext.push]. It must be called
+   * matching call to [gtk.buildable_parse_context.BuildableParseContext.push]. It must be called
    * in the end_element handler corresponding to the start_element
-   * handler during which [Gtk.BuildableParseContext.push] was called.
+   * handler during which [gtk.buildable_parse_context.BuildableParseContext.push] was called.
    * You must not call this function from the error callback -- the
    * user_data is provided directly to the callback in that case.
    * This function is not intended to be directly called by users
    * interested in invoking subparsers. Instead, it is intended to
    * be used by the subparsers themselves to implement a higher-level
    * interface.
-   * Returns: the user data passed to [Gtk.BuildableParseContext.push]
+   * Returns: the user data passed to [gtk.buildable_parse_context.BuildableParseContext.push]
    */
   void* pop()
   {
@@ -101,7 +101,7 @@ class BuildableParseContext
    * Temporarily redirects markup data to a sub-parser.
    * This function may only be called from the start_element handler of
    * a `GtkBuildableParser`. It must be matched with a corresponding call to
-   * [Gtk.BuildableParseContext.pop] in the matching end_element handler
+   * [gtk.buildable_parse_context.BuildableParseContext.pop] in the matching end_element handler
    * $(LPAREN)except in the case that the parser aborts due to an error$(RPAREN).
    * All tags, text and other data between the matching tags is
    * redirected to the subparser given by parser. user_data is used
@@ -110,17 +110,17 @@ class BuildableParseContext
    * errors that occur in subparsers of the subparser.
    * The end tag matching the start tag for which this call was made is
    * handled by the previous parser $(LPAREN)which is given its own user_data$(RPAREN)
-   * which is why [Gtk.BuildableParseContext.pop] is provided to allow "one
+   * which is why [gtk.buildable_parse_context.BuildableParseContext.pop] is provided to allow "one
    * last access" to the user_data provided to this function. In the
    * case of error, the user_data provided here is passed directly to
-   * the error callback of the subparser and [Gtk.BuildableParseContext.pop]
+   * the error callback of the subparser and [gtk.buildable_parse_context.BuildableParseContext.pop]
    * should not be called. In either case, if user_data was allocated
    * then it ought to be freed from both of these locations.
    * This function is not intended to be directly called by users
    * interested in invoking subparsers. Instead, it is intended to be
    * used by the subparsers themselves to implement a higher-level
    * interface.
-   * For an example of how to use this, see [GLib.MarkupParseContext.push] which
+   * For an example of how to use this, see [glib.markup_parse_context.MarkupParseContext.push] which
    * has the same kind of API.
    * Params:
    *   parser = a `GtkBuildableParser`

@@ -1,7 +1,7 @@
 module gio.dtls_client_connection_mixin;
 
 public import gio.dtls_client_connection_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.datagram_based;
@@ -14,7 +14,7 @@ public import gobject.object;
 
 /**
  * `GDtlsClientConnection` is the client-side subclass of
- * [Gio.DtlsConnection], representing a client-side DTLS connection.
+ * [gio.dtls_connection.DtlsConnection], representing a client-side DTLS connection.
  */
 template DtlsClientConnectionT()
 {

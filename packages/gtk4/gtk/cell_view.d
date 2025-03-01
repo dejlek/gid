@@ -1,7 +1,7 @@
 module gtk.cell_view;
 
 import gdk.texture;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -41,7 +41,7 @@ import gtk.widget;
  * GtkCellView has a single CSS node with name cellview.
 
  * Deprecated: List views use widgets to display their contents.
- *   You can use [Gtk.Box] instead
+ *   You can use [gtk.box.Box] instead
  */
 class CellView : Widget, CellLayout, Orientable
 {

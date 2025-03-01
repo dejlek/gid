@@ -1,7 +1,7 @@
 module gio.action;
 
 public import gio.action_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -12,27 +12,27 @@ import glib.variant_type;
 /**
  * `GAction` represents a single named action.
  * The main interface to an action is that it can be activated with
- * [Gio.Action.activate]. This results in the 'activate' signal being
+ * [gio.action.Action.activate]. This results in the 'activate' signal being
  * emitted. An activation has a `GVariant` parameter $(LPAREN)which may be
  * `NULL`$(RPAREN). The correct type for the parameter is determined by a static
  * parameter type $(LPAREN)which is given at construction time$(RPAREN).
  * An action may optionally have a state, in which case the state may be
- * set with [Gio.Action.changeState]. This call takes a #GVariant. The
+ * set with [gio.action.Action.changeState]. This call takes a #GVariant. The
  * correct type for the state is determined by a static state type
  * $(LPAREN)which is given at construction time$(RPAREN).
  * The state may have a hint associated with it, specifying its valid
  * range.
  * `GAction` is merely the interface to the concept of an action, as
  * described above.  Various implementations of actions exist, including
- * [Gio.SimpleAction].
+ * [gio.simple_action.SimpleAction].
  * In all cases, the implementing class is responsible for storing the
  * name of the action, the parameter type, the enabled state, the optional
  * state type and the state and emitting the appropriate signals when these
  * change. The implementor is responsible for filtering calls to
- * [Gio.Action.activate] and [Gio.Action.changeState]
+ * [gio.action.Action.activate] and [gio.action.Action.changeState]
  * for type safety and for the state being enabled.
  * Probably the only useful thing to do with a `GAction` is to put it
- * inside of a [Gio.SimpleActionGroup].
+ * inside of a [gio.simple_action_group.SimpleActionGroup].
  */
 interface Action
 {
@@ -76,7 +76,7 @@ interface Action
    * The third format is used to represent an action with any type of
    * target value, including strings.  The target value follows the action
    * name, surrounded in parens.  For example: `app.action$(LPAREN)42$(RPAREN)`.  The
-   * target value is parsed using [GLib.VariantG.parse].  If a tuple-typed
+   * target value is parsed using [glib.variant.VariantG.parse].  If a tuple-typed
    * value is desired, it must be specified in the same way, resulting in
    * two sets of parens, for example: `app.action$(LPAREN)$(LPAREN)1,2,3$(RPAREN)$(RPAREN)`.  A string
    * target can be specified this way as well: `app.action$(LPAREN)'target'$(RPAREN)`.
@@ -111,7 +111,7 @@ interface Action
   /**
    * Formats a detailed action name from action_name and target_value.
    * It is an error to call this function with an invalid action name.
-   * This function is the opposite of [Gio.Action.parseDetailedName].
+   * This function is the opposite of [gio.action.Action.parseDetailedName].
    * It will produce a string that can be parsed back to the action_name
    * and target_value by that function.
    * See that function for the types of strings that will be printed by
@@ -144,10 +144,10 @@ interface Action
   /**
    * Request for the state of action to be changed to value.
    * The action must be stateful and value must be of the correct type.
-   * See [Gio.Action.getStateType].
+   * See [gio.action.Action.getStateType].
    * This call merely requests a change.  The action may refuse to change
    * its state or may change its state to something other than value.
-   * See [Gio.Action.getStateHint].
+   * See [gio.action.Action.getStateHint].
    * If the value GVariant is floating, it is consumed.
    * Params:
    *   value = the new state
@@ -171,7 +171,7 @@ interface Action
   /**
    * Queries the type of the parameter that must be given when activating
    * action.
-   * When activating the action using [Gio.Action.activate], the #GVariant
+   * When activating the action using [gio.action.Action.activate], the #GVariant
    * given to that function must be of the type returned by this function.
    * In the case that this function returns %NULL, you must not give any
    * #GVariant, but %NULL instead.
@@ -183,9 +183,9 @@ interface Action
    * Queries the current state of action.
    * If the action is not stateful then %NULL will be returned.  If the
    * action is stateful then the type of the return value is the type
-   * given by [Gio.Action.getStateType].
+   * given by [gio.action.Action.getStateType].
    * The return value $(LPAREN)if non-%NULL$(RPAREN) should be freed with
-   * [GLib.VariantG.unref] when it is no longer required.
+   * [glib.variant.VariantG.unref] when it is no longer required.
    * Returns: the current state of the action
    */
   VariantG getState();
@@ -204,7 +204,7 @@ interface Action
    * have a state value outside of the hinted range and setting a value
    * within the range may fail.
    * The return value $(LPAREN)if non-%NULL$(RPAREN) should be freed with
-   * [GLib.VariantG.unref] when it is no longer required.
+   * [glib.variant.VariantG.unref] when it is no longer required.
    * Returns: the state range hint
    */
   VariantG getStateHint();
@@ -212,14 +212,14 @@ interface Action
   /**
    * Queries the type of the state of action.
    * If the action is stateful $(LPAREN)e.g. created with
-   * [Gio.SimpleAction.newStateful]$(RPAREN) then this function returns the
+   * [gio.simple_action.SimpleAction.newStateful]$(RPAREN) then this function returns the
    * #GVariantType of the state.  This is the type of the initial value
-   * given as the state. All calls to [Gio.Action.changeState] must give a
-   * #GVariant of this type and [Gio.Action.getState] will return a
+   * given as the state. All calls to [gio.action.Action.changeState] must give a
+   * #GVariant of this type and [gio.action.Action.getState] will return a
    * #GVariant of the same type.
-   * If the action is not stateful $(LPAREN)e.g. created with [Gio.SimpleAction.new_]$(RPAREN)
-   * then this function will return %NULL. In that case, [Gio.Action.getState]
-   * will return %NULL and you must not call [Gio.Action.changeState].
+   * If the action is not stateful $(LPAREN)e.g. created with [gio.simple_action.SimpleAction.new_]$(RPAREN)
+   * then this function will return %NULL. In that case, [gio.action.Action.getState]
+   * will return %NULL and you must not call [gio.action.Action.changeState].
    * Returns: the state type, if the action is stateful
    */
   VariantType getStateType();

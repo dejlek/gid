@@ -1,6 +1,6 @@
 module glib.queue;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -142,7 +142,7 @@ class Queue
    * A statically-allocated #GQueue must be initialized with this function
    * before it can be used. Alternatively you can initialize it with
    * %G_QUEUE_INIT. It is not necessary to initialize queues created with
-   * [GLib.Queue.new_].
+   * [glib.queue.Queue.new_].
    */
   void init_()
   {

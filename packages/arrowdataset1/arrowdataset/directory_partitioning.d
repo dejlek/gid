@@ -7,7 +7,7 @@ import arrowdataset.c.types;
 import arrowdataset.key_value_partitioning;
 import arrowdataset.key_value_partitioning_options;
 import arrowdataset.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class DirectoryPartitioning : KeyValuePartitioning

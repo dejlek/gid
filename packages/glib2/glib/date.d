@@ -1,6 +1,6 @@
 module glib.date;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.time_val;
@@ -11,7 +11,7 @@ import gobject.boxed;
  * `GDate` is a struct for calendrical calculations.
  * The `GDate` data structure represents a day between January 1, Year 1,
  * and sometime a few thousand years in the future $(LPAREN)right now it will go
- * to the year 65535 or so, but [GLib.Date.setParse] only parses up to the
+ * to the year 65535 or so, but [glib.date.Date.setParse] only parses up to the
  * year 8000 or so - just count on "a few thousand"$(RPAREN). `GDate` is meant to
  * represent everyday dates, not astronomical dates or historical dates
  * or ISO timestamps or the like. It extrapolates the current Gregorian
@@ -28,16 +28,16 @@ import gobject.boxed;
  * technical sense; technically, Julian dates count from the start of the
  * Julian period, Jan 1, 4713 BC$(RPAREN).
  * `GDate` is simple to use. First you need a "blank" date; you can get a
- * dynamically allocated date from [GLib.Date.new_], or you can declare an
- * automatic variable or array and initialize it by calling [GLib.Date.clear].
- * A cleared date is safe; it's safe to call [GLib.Date.setDmy] and the other
+ * dynamically allocated date from [glib.date.Date.new_], or you can declare an
+ * automatic variable or array and initialize it by calling [glib.date.Date.clear].
+ * A cleared date is safe; it's safe to call [glib.date.Date.setDmy] and the other
  * mutator functions to initialize the value of a cleared date. However, a cleared date
  * is initially invalid, meaning that it doesn't represent a day that exists.
  * It is undefined to call any of the date calculation routines on an invalid date.
  * If you obtain a date from a user or other unpredictable source, you should check
- * its validity with the [GLib.Date.valid] predicate. [GLib.Date.valid]
- * is also used to check for errors with [GLib.Date.setParse] and other functions
- * that can fail. Dates can be invalidated by calling [GLib.Date.clear] again.
+ * its validity with the [glib.date.Date.valid] predicate. [glib.date.Date.valid]
+ * is also used to check for errors with [glib.date.Date.setParse] and other functions
+ * that can fail. Dates can be invalidated by calling [glib.date.Date.clear] again.
  * It is very important to use the API to access the `GDate` struct. Often only the
  * day-month-year or only the Julian representation is valid. Sometimes neither is valid.
  * Use the API.
@@ -130,8 +130,8 @@ class Date : Boxed
   /**
    * Allocates a #GDate and initializes
    * it to a safe state. The new date will
-   * be cleared $(LPAREN)as if you'd called [GLib.Date.clear]$(RPAREN) but invalid $(LPAREN)it won't
-   * represent an existing day$(RPAREN). Free the return value with [GLib.Date.free].
+   * be cleared $(LPAREN)as if you'd called [glib.date.Date.clear]$(RPAREN) but invalid $(LPAREN)it won't
+   * represent an existing day$(RPAREN). Free the return value with [glib.date.Date.free].
    * Returns: a newly-allocated #GDate
    */
   this()
@@ -143,7 +143,7 @@ class Date : Boxed
 
   /**
    * Create a new #GDate representing the given day-month-year triplet.
-   * The triplet you pass in must represent a valid date. Use [GLib.Date.validDmy]
+   * The triplet you pass in must represent a valid date. Use [glib.date.Date.validDmy]
    * if needed to validate it. The returned #GDate is guaranteed to be non-%NULL
    * and valid.
    * Params:
@@ -163,7 +163,7 @@ class Date : Boxed
 
   /**
    * Create a new #GDate representing the given Julian date.
-   * The julian_day you pass in must be valid. Use [GLib.Date.validJulian] if
+   * The julian_day you pass in must be valid. Use [glib.date.Date.validJulian] if
    * needed to validate it. The returned #GDate is guaranteed to be non-%NULL and
    * valid.
    * Params:
@@ -237,7 +237,7 @@ class Date : Boxed
    * Initializes one or more #GDate structs to a safe but invalid
    * state. The cleared dates will not represent an existing date, but will
    * not contain garbage. Useful to init a date declared on the stack.
-   * Validity can be tested with [GLib.Date.valid].
+   * Validity can be tested with [glib.date.Date.valid].
    * Params:
    *   nDates = number of dates to clear
    */
@@ -263,7 +263,7 @@ class Date : Boxed
 
   /**
    * Copies a GDate to a newly-allocated GDate. If the input was invalid
-   * $(LPAREN)as determined by [GLib.Date.valid]$(RPAREN), the invalid state will be copied
+   * $(LPAREN)as determined by [glib.date.Date.valid]$(RPAREN), the invalid state will be copied
    * as is into the new object.
    * Returns: a newly-allocated #GDate initialized from date
    */
@@ -449,7 +449,7 @@ class Date : Boxed
   /**
    * Sets the value of a #GDate from a day, month, and year.
    * The day-month-year triplet must be valid; if you aren't
-   * sure it is, call [GLib.Date.validDmy] to check before you
+   * sure it is, call [glib.date.Date.validDmy] to check before you
    * set it.
    * Params:
    *   day = day
@@ -486,7 +486,7 @@ class Date : Boxed
    * Parses a user-inputted string str, and try to figure out what date it
    * represents, taking the [current locale][setlocale] into account. If the
    * string is successfully parsed, the date will be valid after the call.
-   * Otherwise, it will be invalid. You should check using [GLib.Date.valid]
+   * Otherwise, it will be invalid. You should check using [glib.date.Date.valid]
    * to see whether the parsing succeeded.
    * This function is not appropriate for file formats and the like; it
    * isn't very precise, and its exact behavior varies with the locale.
@@ -508,7 +508,7 @@ class Date : Boxed
    * Params:
    *   time = #GTime value to set.
 
-   * Deprecated: Use [GLib.Date.setTimeT] instead.
+   * Deprecated: Use [glib.date.Date.setTimeT] instead.
    */
   void setTime(Time time)
   {
@@ -542,7 +542,7 @@ class Date : Boxed
    * Params:
    *   timeval = #GTimeVal value to set
 
-   * Deprecated: #GTimeVal is not year-2038-safe. Use [GLib.Date.setTimeT]
+   * Deprecated: #GTimeVal is not year-2038-safe. Use [glib.date.Date.setTimeT]
    *   instead.
    */
   void setTimeVal(TimeVal timeval)
@@ -613,8 +613,8 @@ class Date : Boxed
 
   /**
    * Returns %TRUE if the #GDate represents an existing day. The date must not
-   * contain garbage; it should have been initialized with [GLib.Date.clear]
-   * if it wasn't allocated by one of the [GLib.Date.new_] variants.
+   * contain garbage; it should have been initialized with [glib.date.Date.clear]
+   * if it wasn't allocated by one of the [glib.date.Date.new_] variants.
    * Returns: Whether the date is valid
    */
   bool valid()
@@ -704,7 +704,7 @@ class Date : Boxed
    * string and stores a UTF-8 result.
    * This function does not provide any conversion specifiers in
    * addition to those implemented by the platform's C library.
-   * For example, don't expect that using [GLib.Date.strftime] would
+   * For example, don't expect that using [glib.date.Date.strftime] would
    * make the \%F provided by the C99 strftime$(LPAREN)$(RPAREN) work on Windows
    * where the C library only complies to C89.
    * Params:

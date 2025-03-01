@@ -1,6 +1,6 @@
 module harfbuzz.draw_state;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;

@@ -5,7 +5,7 @@ import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf;
 import gdkpixbuf.pixbuf_animation_iter;
 import gdkpixbuf.types;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -116,7 +116,7 @@ class PixbufAnimation : ObjectG
 
   /**
    * Finishes an asynchronous pixbuf animation creation operation started with
-   * [GdkPixbuf.PixbufAnimation.newFromStreamAsync].
+   * [gdkpixbuf.pixbuf_animation.PixbufAnimation.newFromStreamAsync].
    * Params:
    *   asyncResult = a #GAsyncResult
    * Returns: the newly created animation
@@ -134,10 +134,10 @@ class PixbufAnimation : ObjectG
 
   /**
    * Creates a new animation by asynchronously loading an image from an input stream.
-   * For more details see [GdkPixbuf.Pixbuf.newFromStream], which is the synchronous
+   * For more details see [gdkpixbuf.pixbuf.Pixbuf.newFromStream], which is the synchronous
    * version of this function.
    * When the operation is finished, `callback` will be called in the main thread.
-   * You can then call [GdkPixbuf.PixbufAnimation.newFromStreamFinish] to get the
+   * You can then call [gdkpixbuf.pixbuf_animation.PixbufAnimation.newFromStreamFinish] to get the
    * result of the operation.
    * Params:
    *   stream = a #GInputStream from which to load the animation
@@ -174,24 +174,24 @@ class PixbufAnimation : ObjectG
    * Get an iterator for displaying an animation.
    * The iterator provides the frames that should be displayed at a
    * given time.
-   * start_time would normally come from [GLib.Global.getCurrentTime], and marks
+   * start_time would normally come from [glib.global.getCurrentTime], and marks
    * the beginning of animation playback. After creating an iterator, you
    * should immediately display the pixbuf returned by
-   * [GdkPixbuf.PixbufAnimationIter.getPixbuf]. Then, you should install
-   * a timeout $(LPAREN)with [GLib.Global.timeoutAdd]$(RPAREN) or by some other mechanism ensure
+   * [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter.getPixbuf]. Then, you should install
+   * a timeout $(LPAREN)with [glib.global.timeoutAdd]$(RPAREN) or by some other mechanism ensure
    * that you'll update the image after
-   * [GdkPixbuf.PixbufAnimationIter.getDelayTime] milliseconds. Each time
+   * [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter.getDelayTime] milliseconds. Each time
    * the image is updated, you should reinstall the timeout with the new,
    * possibly-changed delay time.
    * As a shortcut, if start_time is `NULL`, the result of
-   * [GLib.Global.getCurrentTime] will be used automatically.
+   * [glib.global.getCurrentTime] will be used automatically.
    * To update the image $(LPAREN)i.e. possibly change the result of
-   * [GdkPixbuf.PixbufAnimationIter.getPixbuf] to a new frame of the animation$(RPAREN),
-   * call [GdkPixbuf.PixbufAnimationIter.advance].
+   * [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter.getPixbuf] to a new frame of the animation$(RPAREN),
+   * call [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter.advance].
    * If you're using #GdkPixbufLoader, in addition to updating the image
    * after the delay time, you should also update it whenever you
    * receive the area_updated signal and
-   * [GdkPixbuf.PixbufAnimationIter.onCurrentlyLoadingFrame] returns
+   * [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter.onCurrentlyLoadingFrame] returns
    * `TRUE`. In this case, the frame currently being fed into the loader
    * has received new data, so needs to be refreshed. The delay time for
    * a frame may also be modified after an area_updated signal, for
@@ -243,9 +243,9 @@ class PixbufAnimation : ObjectG
 
   /**
    * Checks whether the animation is a static image.
-   * If you load a file with [GdkPixbuf.PixbufAnimation.newFromFile] and it
+   * If you load a file with [gdkpixbuf.pixbuf_animation.PixbufAnimation.newFromFile] and it
    * turns out to be a plain, unanimated image, then this function will
-   * return `TRUE`. Use [GdkPixbuf.PixbufAnimation.getStaticImage] to retrieve
+   * return `TRUE`. Use [gdkpixbuf.pixbuf_animation.PixbufAnimation.getStaticImage] to retrieve
    * the image.
    * Returns: `TRUE` if the "animation" was really just an image
    */

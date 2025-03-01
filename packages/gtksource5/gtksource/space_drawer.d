@@ -1,6 +1,6 @@
 module gtksource.space_drawer;
 
-import gid.gid;
+import gid.global;
 import gio.settings;
 import gio.types;
 import glib.variant;
@@ -13,14 +13,14 @@ import gtksource.types;
  * Represent white space characters with symbols.
  * #GtkSourceSpaceDrawer provides a way to visualize white spaces, by drawing
  * symbols.
- * Call [GtkSource.View.getSpaceDrawer] to get the `GtkSourceSpaceDrawer`
+ * Call [gtksource.view.View.getSpaceDrawer] to get the `GtkSourceSpaceDrawer`
  * instance of a certain class@View.
  * By default, no white spaces are drawn because the
  * property@SpaceDrawer:enable-matrix is %FALSE.
- * To draw white spaces, [GtkSource.SpaceDrawer.setTypesForLocations] can
+ * To draw white spaces, [gtksource.space_drawer.SpaceDrawer.setTypesForLocations] can
  * be called to set the property@SpaceDrawer:matrix property $(LPAREN)by default all
  * space types are enabled at all locations$(RPAREN). Then call
- * [GtkSource.SpaceDrawer.setEnableMatrix].
+ * [gtksource.space_drawer.SpaceDrawer.setEnableMatrix].
  * For a finer-grained method, there is also the class@Tag's
  * property@Tag:draw-spaces property.
  * # Example
@@ -75,11 +75,11 @@ class SpaceDrawer : ObjectG
   }
 
   /**
-   * Binds the propertySpaceDrawer:matrix property to a [Gio.Settings] key.
-   * The [Gio.Settings] key must be of the same type as the
+   * Binds the propertySpaceDrawer:matrix property to a [gio.settings.Settings] key.
+   * The [gio.settings.Settings] key must be of the same type as the
    * propertySpaceDrawer:matrix property, that is, `"au"`.
-   * The [Gio.Settings.bind] function cannot be used, because the default GIO
-   * mapping functions don't support [GLib.VariantG] properties $(LPAREN)maybe it will be
+   * The [gio.settings.Settings.bind] function cannot be used, because the default GIO
+   * mapping functions don't support [glib.variant.VariantG] properties $(LPAREN)maybe it will be
    * supported by a future GIO version, in which case this function can be
    * deprecated$(RPAREN).
    * Params:
@@ -101,9 +101,9 @@ class SpaceDrawer : ObjectG
   }
 
   /**
-   * Gets the value of the propertySpaceDrawer:matrix property, as a [GLib.VariantG].
+   * Gets the value of the propertySpaceDrawer:matrix property, as a [glib.variant.VariantG].
    * An empty array can be returned in case the matrix is a zero matrix.
-   * The [GtkSource.SpaceDrawer.getTypesForLocations] function may be more
+   * The [gtksource.space_drawer.SpaceDrawer.getTypesForLocations] function may be more
    * convenient to use.
    * Returns: the #GtkSourceSpaceDrawer:matrix value as a new floating #GVariant
    *   instance.
@@ -147,10 +147,10 @@ class SpaceDrawer : ObjectG
   }
 
   /**
-   * Sets a new value to the propertySpaceDrawer:matrix property, as a [GLib.VariantG].
+   * Sets a new value to the propertySpaceDrawer:matrix property, as a [glib.variant.VariantG].
    * If matrix is %NULL, then an empty array is set.
    * If matrix is floating, it is consumed.
-   * The [GtkSource.SpaceDrawer.setTypesForLocations] function may be more
+   * The [gtksource.space_drawer.SpaceDrawer.setTypesForLocations] function may be more
    * convenient to use.
    * Params:
    *   matrix = the new matrix value, or %NULL.

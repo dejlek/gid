@@ -1,7 +1,7 @@
 module gtk.popover;
 
 import gdk.rectangle;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -25,19 +25,19 @@ import gtk.widget;
  * It is primarily meant to provide context-dependent information
  * or options. Popovers are attached to a parent widget. By default,
  * they point to the whole widget area, although this behavior can be
- * changed with [Gtk.Popover.setPointingTo].
+ * changed with [gtk.popover.Popover.setPointingTo].
  * The position of a popover relative to the widget it is attached to
- * can also be changed with [Gtk.Popover.setPosition]
+ * can also be changed with [gtk.popover.Popover.setPosition]
  * By default, `GtkPopover` performs a grab, in order to ensure input
  * events get redirected to it while it is shown, and also so the popover
  * is dismissed in the expected situations $(LPAREN)clicks outside the popover,
  * or the Escape key being pressed$(RPAREN). If no such modal behavior is desired
- * on a popover, [Gtk.Popover.setAutohide] may be called on it to
+ * on a popover, [gtk.popover.Popover.setAutohide] may be called on it to
  * tweak its behavior.
  * ## GtkPopover as menu replacement
  * `GtkPopover` is often used to replace menus. The best was to do this
- * is to use the [Gtk.PopoverMenu] subclass which supports being
- * populated from a `GMenuModel` with [Gtk.PopoverMenu.newFromModel].
+ * is to use the [gtk.popover_menu.PopoverMenu] subclass which supports being
+ * populated from a `GMenuModel` with [gtk.popover_menu.PopoverMenu.newFromModel].
  * ```xml
  * <section>
  * <attribute name\="display-hint">horizontal-buttons</attribute>
@@ -68,7 +68,7 @@ import gtk.widget;
  * `GtkPopover` has a main node with name `popover`, an arrow with name `arrow`,
  * and another node for the content named `contents`. The `popover` node always
  * gets the `.background` style class. It also gets the `.menu` style class
- * if the popover is menu-like, e.g. is a [Gtk.PopoverMenu].
+ * if the popover is menu-like, e.g. is a [gtk.popover_menu.PopoverMenu].
  * Particular uses of `GtkPopover`, such as touch selection popups or
  * magnifiers in `GtkEntry` or `GtkTextView` get style classes like
  * `.touch-selection` or `.magnifier` to differentiate from plain popovers.
@@ -120,7 +120,7 @@ class Popover : Widget, Native, ShortcutManager
 
   /**
    * Returns whether the popover is modal.
-   * See [Gtk.Popover.setAutohide] for the
+   * See [gtk.popover.Popover.setAutohide] for the
    * implications of this.
    * Returns: %TRUE if popover is modal
    */
@@ -179,7 +179,7 @@ class Popover : Widget, Native, ShortcutManager
   }
 
   /**
-   * Gets the offset previous set with [Gtk.Popover.setOffset].
+   * Gets the offset previous set with [gtk.popover.Popover.setOffset].
    * Params:
    *   xOffset = a location for the x_offset
    *   yOffset = a location for the y_offset
@@ -243,7 +243,7 @@ class Popover : Widget, Native, ShortcutManager
    * This function needs to be called in size-allocate by widgets
    * who have a `GtkPopover` as child. When using a layout manager,
    * this is happening automatically.
-   * To make a popover appear on screen, use [Gtk.Popover.popup].
+   * To make a popover appear on screen, use [gtk.popover.Popover.popup].
    */
   void present()
   {
@@ -326,7 +326,7 @@ class Popover : Widget, Native, ShortcutManager
   /**
    * Sets the offset to use when calculating the position
    * of the popover.
-   * These values are used when preparing the [Gdk.PopupLayout]
+   * These values are used when preparing the [gdk.popup_layout.PopupLayout]
    * for positioning the popover.
    * Params:
    *   xOffset = the x offset to adjust the position by

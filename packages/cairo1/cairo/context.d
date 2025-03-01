@@ -13,7 +13,7 @@ import cairo.scaled_font;
 import cairo.surface;
 import cairo.text_cluster;
 import cairo.types;
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 
 /**
@@ -23,7 +23,7 @@ import gobject.boxed;
  * cairo and all drawing with cairo is always done to a #cairo_t
  * object.
  * Memory management of #cairo_t is done with
- * [cairo.Global.reference] and [cairo.Global.destroy].
+ * [cairo.global.reference] and [cairo.global.destroy].
  */
 class Context : Boxed
 {
@@ -51,8 +51,8 @@ class Context : Boxed
 
   /**
    * Append the path onto the current path. The path may be either the
-   * return value from one of [cairo.Context.copyPath] or
-   * [cairo.Context.copyPathFlat] or it may be constructed manually.  See
+   * return value from one of [cairo.context.Context.copyPath] or
+   * [cairo.context.Context.copyPathFlat] or it may be constructed manually.  See
    * #cairo_path_t for details on how the path data structure should be
    * initialized, and note that <literal>path->status</literal> must be
    * initialized to %CAIRO_STATUS_SUCCESS.
@@ -73,7 +73,7 @@ class Context : Boxed
    * If there is a current point, an initial line segment will be added
    * to the path to connect the current point to the beginning of the
    * arc. If this initial line is undesired, it can be avoided by
-   * calling [cairo.Context.newSubPath] before calling [cairo.Context.arc].
+   * calling [cairo.context.Context.newSubPath] before calling [cairo.context.Context.arc].
    * Angles are measured in radians. An angle of 0.0 is in the direction
    * of the positive X axis $(LPAREN)in user space$(RPAREN). An angle of
    * <literal>M_PI/2.0</literal> radians $(LPAREN)90 degrees$(RPAREN) is in the
@@ -84,7 +84,7 @@ class Context : Boxed
    * $(LPAREN)To convert from degrees to radians, use <literal>degrees * $(LPAREN)M_PI /
    * 180.$(RPAREN)</literal>.$(RPAREN)
    * This function gives the arc in the direction of increasing angles;
-   * see [cairo.Context.arcNegative] to get the arc in the direction of
+   * see [cairo.context.Context.arcNegative] to get the arc in the direction of
    * decreasing angles.
    * The arc is circular in user space. To achieve an elliptical arc,
    * you can scale the current transformation matrix by different
@@ -115,7 +115,7 @@ class Context : Boxed
    * the direction of decreasing angles to end at angle2. If angle2 is
    * greater than angle1 it will be progressively decreased by
    * <literal>2*M_PI</literal> until it is less than angle1.
-   * See [cairo.Context.arc] for more details. This function differs only in the
+   * See [cairo.context.Context.arc] for more details. This function differs only in the
    * direction of the arc between the two angles.
    * Params:
    *   xc = X position of the center of the arc
@@ -131,19 +131,19 @@ class Context : Boxed
 
   /**
    * Establishes a new clip region by intersecting the current clip
-   * region with the current path as it would be filled by [cairo.Context.fill]
-   * and according to the current fill rule $(LPAREN)see [cairo.Context.setFillRule]$(RPAREN).
-   * After [cairo.Context.clip], the current path will be cleared from the cairo
+   * region with the current path as it would be filled by [cairo.context.Context.fill]
+   * and according to the current fill rule $(LPAREN)see [cairo.context.Context.setFillRule]$(RPAREN).
+   * After [cairo.context.Context.clip], the current path will be cleared from the cairo
    * context.
    * The current clip region affects all drawing operations by
    * effectively masking out any changes to the surface that are outside
    * the current clip region.
-   * Calling [cairo.Context.clip] can only make the clip region smaller, never
+   * Calling [cairo.context.Context.clip] can only make the clip region smaller, never
    * larger. But the current clip is part of the graphics state, so a
    * temporary restriction of the clip region can be achieved by
-   * calling [cairo.Context.clip] within a [cairo.Context.save]/[cairo.Context.restore]
+   * calling [cairo.context.Context.clip] within a [cairo.context.Context.save]/[cairo.context.Context.restore]
    * pair. The only other means of increasing the size of the clip
-   * region is [cairo.Context.resetClip].
+   * region is [cairo.context.Context.resetClip].
    */
   void clip()
   {
@@ -166,19 +166,19 @@ class Context : Boxed
 
   /**
    * Establishes a new clip region by intersecting the current clip
-   * region with the current path as it would be filled by [cairo.Context.fill]
-   * and according to the current fill rule $(LPAREN)see [cairo.Context.setFillRule]$(RPAREN).
-   * Unlike [cairo.Context.clip], [cairo.Context.clipPreserve] preserves the path within
+   * region with the current path as it would be filled by [cairo.context.Context.fill]
+   * and according to the current fill rule $(LPAREN)see [cairo.context.Context.setFillRule]$(RPAREN).
+   * Unlike [cairo.context.Context.clip], [cairo.context.Context.clipPreserve] preserves the path within
    * the cairo context.
    * The current clip region affects all drawing operations by
    * effectively masking out any changes to the surface that are outside
    * the current clip region.
-   * Calling [cairo.Context.clipPreserve] can only make the clip region smaller, never
+   * Calling [cairo.context.Context.clipPreserve] can only make the clip region smaller, never
    * larger. But the current clip is part of the graphics state, so a
    * temporary restriction of the clip region can be achieved by
-   * calling [cairo.Context.clipPreserve] within a [cairo.Context.save]/[cairo.Context.restore]
+   * calling [cairo.context.Context.clipPreserve] within a [cairo.context.Context.save]/[cairo.context.Context.restore]
    * pair. The only other means of increasing the size of the clip
-   * region is [cairo.Context.resetClip].
+   * region is [cairo.context.Context.resetClip].
    */
   void clipPreserve()
   {
@@ -188,18 +188,18 @@ class Context : Boxed
   /**
    * Adds a line segment to the path from the current point to the
    * beginning of the current sub-path, $(LPAREN)the most recent point passed to
-   * [cairo.Context.moveTo]$(RPAREN), and closes this sub-path. After this call the
+   * [cairo.context.Context.moveTo]$(RPAREN), and closes this sub-path. After this call the
    * current point will be at the joined endpoint of the sub-path.
-   * The behavior of [cairo.Context.closePath] is distinct from simply calling
-   * [cairo.Context.lineTo] with the equivalent coordinate in the case of
+   * The behavior of [cairo.context.Context.closePath] is distinct from simply calling
+   * [cairo.context.Context.lineTo] with the equivalent coordinate in the case of
    * stroking. When a closed sub-path is stroked, there are no caps on
    * the ends of the sub-path. Instead, there is a line join connecting
    * the final and initial segments of the sub-path.
-   * If there is no current point before the call to [cairo.Context.closePath],
+   * If there is no current point before the call to [cairo.context.Context.closePath],
    * this function will have no effect.
-   * Note: As of cairo version 1.2.4 any call to [cairo.Context.closePath] will
+   * Note: As of cairo version 1.2.4 any call to [cairo.context.Context.closePath] will
    * place an explicit MOVE_TO element into the path immediately after
-   * the CLOSE_PATH element, $(LPAREN)which can be seen in [cairo.Context.copyPath] for
+   * the CLOSE_PATH element, $(LPAREN)which can be seen in [cairo.context.Context.copyPath] for
    * example$(RPAREN). This can simplify path processing in some cases as it may
    * not be necessary to save the "last move_to point" during processing
    * as the MOVE_TO immediately after the CLOSE_PATH will provide that
@@ -218,7 +218,7 @@ class Context : Boxed
    * user-space rectangles. The status may have other values to indicate
    * other errors.
    * Returns: the current clip region as a list of rectangles in user coordinates,
-   *   which should be destroyed using [cairo.RectangleList.destroy].
+   *   which should be destroyed using [cairo.rectangle_list.RectangleList.destroy].
    */
   RectangleList copyClipRectangleList()
   {
@@ -231,10 +231,10 @@ class Context : Boxed
   /**
    * Emits the current page for backends that support multiple pages, but
    * doesn't clear it, so, the contents of the current page will be retained
-   * for the next page too.  Use [cairo.Context.showPage] if you want to get an
+   * for the next page too.  Use [cairo.context.Context.showPage] if you want to get an
    * empty page after the emission.
    * This is a convenience function that simply calls
-   * [cairo.Surface.copyPage] on cr's target.
+   * [cairo.surface.Surface.copyPage] on cr's target.
    */
   void copyPage()
   {
@@ -255,10 +255,10 @@ class Context : Boxed
    * %CAIRO_STATUS_NO_MEMORY.</listitem>
    * <listitem>If cr is already in an error state. In this case
    * <literal>path->status</literal> will contain the same status that
-   * would be returned by [cairo.Context.status].</listitem>
+   * would be returned by [cairo.context.Context.status].</listitem>
    * </orderedlist>
    * Returns: the copy of the current path. The caller owns the
-   *   returned object and should call [cairo.Path.destroy] when finished
+   *   returned object and should call [cairo.path.Path.destroy] when finished
    *   with it.
    */
   Path copyPath()
@@ -273,7 +273,7 @@ class Context : Boxed
    * Gets a flattened copy of the current path and returns it to the
    * user as a #cairo_path_t. See #cairo_path_data_t for hints on
    * how to iterate over the returned data structure.
-   * This function is like [cairo.Context.copyPath] except that any curves
+   * This function is like [cairo.context.Context.copyPath] except that any curves
    * in the path will be approximated with piecewise-linear
    * approximations, $(LPAREN)accurate to within the current tolerance
    * value$(RPAREN). That is, the result is guaranteed to not have any elements
@@ -289,10 +289,10 @@ class Context : Boxed
    * %CAIRO_STATUS_NO_MEMORY.</listitem>
    * <listitem>If cr is already in an error state. In this case
    * <literal>path->status</literal> will contain the same status that
-   * would be returned by [cairo.Context.status].</listitem>
+   * would be returned by [cairo.context.Context.status].</listitem>
    * </orderedlist>
    * Returns: the copy of the current path. The caller owns the
-   *   returned object and should call [cairo.Path.destroy] when finished
+   *   returned object and should call [cairo.path.Path.destroy] when finished
    *   with it.
    */
   Path copyPathFlat()
@@ -308,7 +308,7 @@ class Context : Boxed
    * position $(LPAREN)x3, y3$(RPAREN) in user-space coordinates, using $(LPAREN)x1, y1$(RPAREN) and
    * $(LPAREN)x2, y2$(RPAREN) as the control points. After this call the current point
    * will be $(LPAREN)x3, y3$(RPAREN).
-   * If there is no current point before the call to [cairo.Context.curveTo]
+   * If there is no current point before the call to [cairo.context.Context.curveTo]
    * this function will behave as if preceded by a call to
    * cairo_move_to$(LPAREN)cr, x1, y1$(RPAREN).
    * Params:
@@ -339,7 +339,7 @@ class Context : Boxed
 
   /**
    * Transform a distance vector from device space to user space. This
-   * function is similar to [cairo.Context.deviceToUser] except that the
+   * function is similar to [cairo.context.Context.deviceToUser] except that the
    * translation components of the inverse CTM will be ignored when
    * transforming $(LPAREN)dx,dy$(RPAREN).
    * Params:
@@ -354,9 +354,9 @@ class Context : Boxed
   /**
    * A drawing operator that fills the current path according to the
    * current fill rule, $(LPAREN)each sub-path is implicitly closed before being
-   * filled$(RPAREN). After [cairo.Context.fill], the current path will be cleared from
-   * the cairo context. See [cairo.Context.setFillRule] and
-   * [cairo.Context.fillPreserve].
+   * filled$(RPAREN). After [cairo.context.Context.fill], the current path will be cleared from
+   * the cairo context. See [cairo.context.Context.setFillRule] and
+   * [cairo.context.Context.fillPreserve].
    */
   void fill()
   {
@@ -365,18 +365,18 @@ class Context : Boxed
 
   /**
    * Computes a bounding box in user coordinates covering the area that
-   * would be affected, $(LPAREN)the "inked" area$(RPAREN), by a [cairo.Context.fill] operation
+   * would be affected, $(LPAREN)the "inked" area$(RPAREN), by a [cairo.context.Context.fill] operation
    * given the current path and fill parameters. If the current path is
    * empty, returns an empty rectangle $(LPAREN)$(LPAREN)0,0$(RPAREN), $(LPAREN)0,0$(RPAREN)$(RPAREN). Surface
    * dimensions and clipping are not taken into account.
-   * Contrast with [cairo.Context.pathExtents], which is similar, but returns
+   * Contrast with [cairo.context.Context.pathExtents], which is similar, but returns
    * non-zero extents for some paths with no inked area, $(LPAREN)such as a
    * simple line segment$(RPAREN).
-   * Note that [cairo.Context.fillExtents] must necessarily do more work to
+   * Note that [cairo.context.Context.fillExtents] must necessarily do more work to
    * compute the precise inked areas in light of the fill rule, so
-   * [cairo.Context.pathExtents] may be more desirable for sake of performance
+   * [cairo.context.Context.pathExtents] may be more desirable for sake of performance
    * if the non-inked path extents are desired.
-   * See [cairo.Context.fill], [cairo.Context.setFillRule] and [cairo.Context.fillPreserve].
+   * See [cairo.context.Context.fill], [cairo.context.Context.setFillRule] and [cairo.context.Context.fillPreserve].
    * Params:
    *   x1 = left of the resulting extents
    *   y1 = top of the resulting extents
@@ -391,9 +391,9 @@ class Context : Boxed
   /**
    * A drawing operator that fills the current path according to the
    * current fill rule, $(LPAREN)each sub-path is implicitly closed before being
-   * filled$(RPAREN). Unlike [cairo.Context.fill], [cairo.Context.fillPreserve] preserves the
+   * filled$(RPAREN). Unlike [cairo.context.Context.fill], [cairo.context.Context.fillPreserve] preserves the
    * path within the cairo context.
-   * See [cairo.Context.setFillRule] and [cairo.Context.fill].
+   * See [cairo.context.Context.setFillRule] and [cairo.context.Context.fill].
    */
   void fillPreserve()
   {
@@ -413,7 +413,7 @@ class Context : Boxed
 
   /**
    * Gets the current shape antialiasing mode, as set by
-   * [cairo.Context.setAntialias].
+   * [cairo.context.Context.setAntialias].
    * Returns: the current shape antialiasing mode.
    */
   Antialias getAntialias()
@@ -430,20 +430,20 @@ class Context : Boxed
    * The current point is returned in the user-space coordinate
    * system. If there is no defined current point or if cr is in an
    * error status, x and y will both be set to 0.0. It is possible to
-   * check this in advance with [cairo.Context.hasCurrentPoint].
+   * check this in advance with [cairo.context.Context.hasCurrentPoint].
    * Most path construction functions alter the current point. See the
    * following for details on how they affect the current point:
-   * [cairo.Context.newPath], [cairo.Context.newSubPath],
-   * [cairo.Context.appendPath], [cairo.Context.closePath],
-   * [cairo.Context.moveTo], [cairo.Context.lineTo], [cairo.Context.curveTo],
-   * [cairo.Context.relMoveTo], [cairo.Context.relLineTo], [cairo.Context.relCurveTo],
-   * [cairo.Context.arc], [cairo.Context.arcNegative], [cairo.Context.rectangle],
-   * [cairo.Context.textPath], [cairo.Context.glyphPath].
+   * [cairo.context.Context.newPath], [cairo.context.Context.newSubPath],
+   * [cairo.context.Context.appendPath], [cairo.context.Context.closePath],
+   * [cairo.context.Context.moveTo], [cairo.context.Context.lineTo], [cairo.context.Context.curveTo],
+   * [cairo.context.Context.relMoveTo], [cairo.context.Context.relLineTo], [cairo.context.Context.relCurveTo],
+   * [cairo.context.Context.arc], [cairo.context.Context.arcNegative], [cairo.context.Context.rectangle],
+   * [cairo.context.Context.textPath], [cairo.context.Context.glyphPath].
    * Some functions use and alter the current point but do not
    * otherwise change current path:
-   * [cairo.Context.showText].
+   * [cairo.context.Context.showText].
    * Some functions unset the current path and as a result, current point:
-   * [cairo.Context.fill], [cairo.Context.stroke].
+   * [cairo.context.Context.fill], [cairo.context.Context.stroke].
    * Params:
    *   x = return value for X coordinate of the current point
    *   y = return value for Y coordinate of the current point
@@ -456,7 +456,7 @@ class Context : Boxed
   /**
    * Gets the current dash array.  If not %NULL, dashes should be big
    * enough to hold at least the number of values returned by
-   * [cairo.Context.getDashCount].
+   * [cairo.context.Context.getDashCount].
    * Params:
    *   dashes = return value for the dash array, or %NULL
    *   offset = return value for the current dash offset, or %NULL
@@ -469,7 +469,7 @@ class Context : Boxed
   /**
    * This function returns the length of the dash array in cr $(LPAREN)0 if dashing
    * is not currently in effect$(RPAREN).
-   * See also [cairo.Context.setDash] and [cairo.Context.getDash].
+   * See also [cairo.context.Context.setDash] and [cairo.context.Context.getDash].
    * Returns: the length of the dash array, or 0 if no dash array set.
    */
   int getDashCount()
@@ -480,7 +480,7 @@ class Context : Boxed
   }
 
   /**
-   * Gets the current fill rule, as set by [cairo.Context.setFillRule].
+   * Gets the current fill rule, as set by [cairo.context.Context.setFillRule].
    * Returns: the current fill rule.
    */
   FillRule getFillRule()
@@ -495,13 +495,13 @@ class Context : Boxed
    * Gets the current font face for a #cairo_t.
    * Returns: the current font face.  This object is owned by
    *   cairo. To keep a reference to it, you must call
-   *   [cairo.FontFace.reference].
+   *   [cairo.font_face.FontFace.reference].
    *   This function never returns %NULL. If memory cannot be allocated, a
    *   special "nil" #cairo_font_face_t object will be returned on which
-   *   [cairo.FontFace.status] returns %CAIRO_STATUS_NO_MEMORY. Using
+   *   [cairo.font_face.FontFace.status] returns %CAIRO_STATUS_NO_MEMORY. Using
    *   this nil object will cause its error state to propagate to other
    *   objects it is passed to, $(LPAREN)for example, calling
-   *   [cairo.Context.setFontFace] with a nil font will trigger an error that
+   *   [cairo.context.Context.setFontFace] with a nil font will trigger an error that
    *   will shutdown the #cairo_t object$(RPAREN).
    */
   FontFace getFontFace()
@@ -514,7 +514,7 @@ class Context : Boxed
 
   /**
    * Stores the current font matrix into matrix. See
-   * [cairo.Context.setFontMatrix].
+   * [cairo.context.Context.setFontMatrix].
    * Params:
    *   matrix = return value for the matrix
    */
@@ -527,7 +527,7 @@ class Context : Boxed
    * Retrieves font rendering options set via #cairo_set_font_options.
    * Note that the returned options do not include any options derived
    * from the underlying surface; they are literally the options
-   * passed to [cairo.Context.setFontOptions].
+   * passed to [cairo.context.Context.setFontOptions].
    * Params:
    *   options = a #cairo_font_options_t object into which to store
    *     the retrieved options. All existing values are overwritten
@@ -539,16 +539,16 @@ class Context : Boxed
 
   /**
    * Gets the current destination surface for the context. This is either
-   * the original target surface as passed to [cairo.Global.create] or the target
+   * the original target surface as passed to [cairo.global.create] or the target
    * surface for the current group as started by the most recent call to
-   * [cairo.Context.pushGroup] or [cairo.Context.pushGroupWithContent].
+   * [cairo.context.Context.pushGroup] or [cairo.context.Context.pushGroupWithContent].
    * This function will always return a valid pointer, but the result
    * can be a "nil" surface if cr is already in an error state,
-   * $(LPAREN)ie. [cairo.Context.status] <literal>!\=</literal> %CAIRO_STATUS_SUCCESS$(RPAREN).
-   * A nil surface is indicated by [cairo.Surface.status]
+   * $(LPAREN)ie. [cairo.context.Context.status] <literal>!\=</literal> %CAIRO_STATUS_SUCCESS$(RPAREN).
+   * A nil surface is indicated by [cairo.surface.Surface.status]
    * <literal>!\=</literal> %CAIRO_STATUS_SUCCESS.
    * Returns: the target surface. This object is owned by cairo. To
-   *   keep a reference to it, you must call [cairo.Surface.reference].
+   *   keep a reference to it, you must call [cairo.surface.Surface.reference].
    */
   Surface getGroupTarget()
   {
@@ -559,7 +559,7 @@ class Context : Boxed
   }
 
   /**
-   * Returns whether or not hairline mode is set, as set by [cairo.Context.setHairline].
+   * Returns whether or not hairline mode is set, as set by [cairo.context.Context.setHairline].
    * Returns: whether hairline mode is set.
    */
   Bool getHairline()
@@ -570,7 +570,7 @@ class Context : Boxed
   }
 
   /**
-   * Gets the current line cap style, as set by [cairo.Context.setLineCap].
+   * Gets the current line cap style, as set by [cairo.context.Context.setLineCap].
    * Returns: the current line cap style.
    */
   LineCap getLineCap()
@@ -582,7 +582,7 @@ class Context : Boxed
   }
 
   /**
-   * Gets the current line join style, as set by [cairo.Context.setLineJoin].
+   * Gets the current line join style, as set by [cairo.context.Context.setLineJoin].
    * Returns: the current line join style.
    */
   LineJoin getLineJoin()
@@ -595,9 +595,9 @@ class Context : Boxed
 
   /**
    * This function returns the current line width value exactly as set by
-   * [cairo.Context.setLineWidth]. Note that the value is unchanged even if
-   * the CTM has changed between the calls to [cairo.Context.setLineWidth] and
-   * [cairo.Context.getLineWidth].
+   * [cairo.context.Context.setLineWidth]. Note that the value is unchanged even if
+   * the CTM has changed between the calls to [cairo.context.Context.setLineWidth] and
+   * [cairo.context.Context.getLineWidth].
    * Returns: the current line width.
    */
   double getLineWidth()
@@ -618,7 +618,7 @@ class Context : Boxed
   }
 
   /**
-   * Gets the current miter limit, as set by [cairo.Context.setMiterLimit].
+   * Gets the current miter limit, as set by [cairo.context.Context.setMiterLimit].
    * Returns: the current miter limit.
    */
   double getMiterLimit()
@@ -644,13 +644,13 @@ class Context : Boxed
    * Gets the current scaled font for a #cairo_t.
    * Returns: the current scaled font. This object is owned by
    *   cairo. To keep a reference to it, you must call
-   *   [cairo.ScaledFont.reference].
+   *   [cairo.scaled_font.ScaledFont.reference].
    *   This function never returns %NULL. If memory cannot be allocated, a
    *   special "nil" #cairo_scaled_font_t object will be returned on which
-   *   [cairo.ScaledFont.status] returns %CAIRO_STATUS_NO_MEMORY. Using
+   *   [cairo.scaled_font.ScaledFont.status] returns %CAIRO_STATUS_NO_MEMORY. Using
    *   this nil object will cause its error state to propagate to other
    *   objects it is passed to, $(LPAREN)for example, calling
-   *   [cairo.Context.setScaledFont] with a nil font will trigger an error that
+   *   [cairo.context.Context.setScaledFont] with a nil font will trigger an error that
    *   will shutdown the #cairo_t object$(RPAREN).
    */
   ScaledFont getScaledFont()
@@ -665,7 +665,7 @@ class Context : Boxed
    * Gets the current source pattern for cr.
    * Returns: the current source pattern. This object is owned by
    *   cairo. To keep a reference to it, you must call
-   *   [cairo.Pattern.reference].
+   *   [cairo.pattern.Pattern.reference].
    */
   Pattern getSource()
   {
@@ -677,14 +677,14 @@ class Context : Boxed
 
   /**
    * Gets the target surface for the cairo context as passed to
-   * [cairo.Global.create].
+   * [cairo.global.create].
    * This function will always return a valid pointer, but the result
    * can be a "nil" surface if cr is already in an error state,
-   * $(LPAREN)ie. [cairo.Context.status] <literal>!\=</literal> %CAIRO_STATUS_SUCCESS$(RPAREN).
-   * A nil surface is indicated by [cairo.Surface.status]
+   * $(LPAREN)ie. [cairo.context.Context.status] <literal>!\=</literal> %CAIRO_STATUS_SUCCESS$(RPAREN).
+   * A nil surface is indicated by [cairo.surface.Surface.status]
    * <literal>!\=</literal> %CAIRO_STATUS_SUCCESS.
    * Returns: the target surface. This object is owned by cairo. To
-   *   keep a reference to it, you must call [cairo.Surface.reference].
+   *   keep a reference to it, you must call [cairo.surface.Surface.reference].
    */
   Surface getTarget()
   {
@@ -695,7 +695,7 @@ class Context : Boxed
   }
 
   /**
-   * Gets the current tolerance value, as set by [cairo.Context.setTolerance].
+   * Gets the current tolerance value, as set by [cairo.context.Context.setTolerance].
    * Returns: the current tolerance value.
    */
   double getTolerance()
@@ -708,10 +708,10 @@ class Context : Boxed
   /**
    * Gets the extents for an array of glyphs. The extents describe a
    * user-space rectangle that encloses the "inked" portion of the
-   * glyphs, $(LPAREN)as they would be drawn by [cairo.Context.showGlyphs]$(RPAREN).
+   * glyphs, $(LPAREN)as they would be drawn by [cairo.context.Context.showGlyphs]$(RPAREN).
    * Additionally, the x_advance and y_advance values indicate the
    * amount by which the current point would be advanced by
-   * [cairo.Context.showGlyphs].
+   * [cairo.context.Context.showGlyphs].
    * Note that whitespace glyphs do not contribute to the size of the
    * rectangle $(LPAREN)extents.width and extents.height$(RPAREN).
    * Params:
@@ -728,7 +728,7 @@ class Context : Boxed
   /**
    * Adds closed paths for the glyphs to the current path.  The generated
    * path if filled, achieves an effect similar to that of
-   * [cairo.Context.showGlyphs].
+   * [cairo.context.Context.showGlyphs].
    * Params:
    *   glyphs = array of glyphs to show
    *   numGlyphs = number of glyphs to show
@@ -740,7 +740,7 @@ class Context : Boxed
 
   /**
    * Returns whether a current point is defined on the current path.
-   * See [cairo.Context.getCurrentPoint] for details on the current point.
+   * See [cairo.context.Context.getCurrentPoint] for details on the current point.
    * Returns: whether a current point is defined.
    */
   Bool hasCurrentPoint()
@@ -764,8 +764,8 @@ class Context : Boxed
   /**
    * Tests whether the given point is inside the area that would be
    * visible through the current clip, i.e. the area that would be filled by
-   * a [cairo.Context.paint] operation.
-   * See [cairo.Context.clip], and [cairo.Context.clipPreserve].
+   * a [cairo.context.Context.paint] operation.
+   * See [cairo.context.Context.clip], and [cairo.context.Context.clipPreserve].
    * Params:
    *   x = X coordinate of the point to test
    *   y = Y coordinate of the point to test
@@ -781,10 +781,10 @@ class Context : Boxed
 
   /**
    * Tests whether the given point is inside the area that would be
-   * affected by a [cairo.Context.fill] operation given the current path and
+   * affected by a [cairo.context.Context.fill] operation given the current path and
    * filling parameters. Surface dimensions and clipping are not taken
    * into account.
-   * See [cairo.Context.fill], [cairo.Context.setFillRule] and [cairo.Context.fillPreserve].
+   * See [cairo.context.Context.fill], [cairo.context.Context.setFillRule] and [cairo.context.Context.fillPreserve].
    * Params:
    *   x = X coordinate of the point to test
    *   y = Y coordinate of the point to test
@@ -800,12 +800,12 @@ class Context : Boxed
 
   /**
    * Tests whether the given point is inside the area that would be
-   * affected by a [cairo.Context.stroke] operation given the current path and
+   * affected by a [cairo.context.Context.stroke] operation given the current path and
    * stroking parameters. Surface dimensions and clipping are not taken
    * into account.
-   * See [cairo.Context.stroke], [cairo.Context.setLineWidth], [cairo.Context.setLineJoin],
-   * [cairo.Context.setLineCap], [cairo.Context.setDash], and
-   * [cairo.Context.strokePreserve].
+   * See [cairo.context.Context.stroke], [cairo.context.Context.setLineWidth], [cairo.context.Context.setLineJoin],
+   * [cairo.context.Context.setLineCap], [cairo.context.Context.setDash], and
+   * [cairo.context.Context.strokePreserve].
    * Params:
    *   x = X coordinate of the point to test
    *   y = Y coordinate of the point to test
@@ -823,7 +823,7 @@ class Context : Boxed
    * Adds a line to the path from the current point to position $(LPAREN)x, y$(RPAREN)
    * in user-space coordinates. After this call the current point
    * will be $(LPAREN)x, y$(RPAREN).
-   * If there is no current point before the call to [cairo.Context.lineTo]
+   * If there is no current point before the call to [cairo.context.Context.lineTo]
    * this function will behave as cairo_move_to$(LPAREN)cr, x, y$(RPAREN).
    * Params:
    *   x = the X coordinate of the end of the new line
@@ -887,12 +887,12 @@ class Context : Boxed
    * Begin a new sub-path. Note that the existing path is not
    * affected. After this call there will be no current point.
    * In many cases, this call is not needed since new sub-paths are
-   * frequently started with [cairo.Context.moveTo].
-   * A call to [cairo.Context.newSubPath] is particularly useful when
-   * beginning a new sub-path with one of the [cairo.Context.arc] calls. This
+   * frequently started with [cairo.context.Context.moveTo].
+   * A call to [cairo.context.Context.newSubPath] is particularly useful when
+   * beginning a new sub-path with one of the [cairo.context.Context.arc] calls. This
    * makes things easier as it is no longer necessary to manually
    * compute the arc's initial coordinates for a call to
-   * [cairo.Context.moveTo].
+   * [cairo.context.Context.moveTo].
    */
   void newSubPath()
   {
@@ -911,7 +911,7 @@ class Context : Boxed
   /**
    * A drawing operator that paints the current source everywhere within
    * the current clip region using a mask of constant alpha value
-   * alpha. The effect is similar to [cairo.Context.paint], but the drawing
+   * alpha. The effect is similar to [cairo.context.Context.paint], but the drawing
    * is faded out using the alpha value.
    * Params:
    *   alpha = alpha value, between 0 $(LPAREN)transparent$(RPAREN) and 1 $(LPAREN)opaque$(RPAREN)
@@ -926,19 +926,19 @@ class Context : Boxed
    * points on the current path. If the current path is empty, returns
    * an empty rectangle $(LPAREN)$(LPAREN)0,0$(RPAREN), $(LPAREN)0,0$(RPAREN)$(RPAREN). Stroke parameters, fill rule,
    * surface dimensions and clipping are not taken into account.
-   * Contrast with [cairo.Context.fillExtents] and [cairo.Context.strokeExtents] which
+   * Contrast with [cairo.context.Context.fillExtents] and [cairo.context.Context.strokeExtents] which
    * return the extents of only the area that would be "inked" by
    * the corresponding drawing operations.
-   * The result of [cairo.Context.pathExtents] is defined as equivalent to the
-   * limit of [cairo.Context.strokeExtents] with %CAIRO_LINE_CAP_ROUND as the
+   * The result of [cairo.context.Context.pathExtents] is defined as equivalent to the
+   * limit of [cairo.context.Context.strokeExtents] with %CAIRO_LINE_CAP_ROUND as the
    * line width approaches 0.0, $(LPAREN)but never reaching the empty-rectangle
-   * returned by [cairo.Context.strokeExtents] for a line width of 0.0$(RPAREN).
+   * returned by [cairo.context.Context.strokeExtents] for a line width of 0.0$(RPAREN).
    * Specifically, this means that zero-area sub-paths such as
-   * [cairo.Context.moveTo];[cairo.Context.lineTo] segments, $(LPAREN)even degenerate cases
+   * [cairo.context.Context.moveTo];[cairo.context.Context.lineTo] segments, $(LPAREN)even degenerate cases
    * where the coordinates to both calls are identical$(RPAREN), will be
    * considered as contributing to the extents. However, a lone
-   * [cairo.Context.moveTo] will not contribute to the results of
-   * [cairo.Context.pathExtents].
+   * [cairo.context.Context.moveTo] will not contribute to the results of
+   * [cairo.context.Context.pathExtents].
    * Params:
    *   x1 = left of the resulting extents
    *   y1 = top of the resulting extents
@@ -951,18 +951,18 @@ class Context : Boxed
   }
 
   /**
-   * Terminates the redirection begun by a call to [cairo.Context.pushGroup] or
-   * [cairo.Context.pushGroupWithContent] and returns a new pattern
+   * Terminates the redirection begun by a call to [cairo.context.Context.pushGroup] or
+   * [cairo.context.Context.pushGroupWithContent] and returns a new pattern
    * containing the results of all drawing operations performed to the
    * group.
-   * The [cairo.Context.popGroup] function calls [cairo.Context.restore], $(LPAREN)balancing a
-   * call to [cairo.Context.save] by the push_group function$(RPAREN), so that any
+   * The [cairo.context.Context.popGroup] function calls [cairo.context.Context.restore], $(LPAREN)balancing a
+   * call to [cairo.context.Context.save] by the push_group function$(RPAREN), so that any
    * changes to the graphics state will not be visible outside the
    * group.
    * Returns: a newly created $(LPAREN)surface$(RPAREN) pattern containing the
    *   results of all drawing operations performed to the group. The
    *   caller owns the returned object and should call
-   *   [cairo.Pattern.destroy] when finished with it.
+   *   [cairo.pattern.Pattern.destroy] when finished with it.
    */
   Pattern popGroup()
   {
@@ -973,8 +973,8 @@ class Context : Boxed
   }
 
   /**
-   * Terminates the redirection begun by a call to [cairo.Context.pushGroup] or
-   * [cairo.Context.pushGroupWithContent] and installs the resulting pattern
+   * Terminates the redirection begun by a call to [cairo.context.Context.pushGroup] or
+   * [cairo.context.Context.pushGroupWithContent] and installs the resulting pattern
    * as the source pattern in the given cairo context.
    * The behavior of this function is equivalent to the sequence of
    * operations:
@@ -985,8 +985,8 @@ class Context : Boxed
    * </programlisting></informalexample>
    * but is more convenient as their is no need for a variable to store
    * the short-lived pointer to the pattern.
-   * The [cairo.Context.popGroup] function calls [cairo.Context.restore], $(LPAREN)balancing a
-   * call to [cairo.Context.save] by the push_group function$(RPAREN), so that any
+   * The [cairo.context.Context.popGroup] function calls [cairo.context.Context.restore], $(LPAREN)balancing a
+   * call to [cairo.context.Context.save] by the push_group function$(RPAREN), so that any
    * changes to the graphics state will not be visible outside the
    * group.
    */
@@ -998,7 +998,7 @@ class Context : Boxed
   /**
    * Temporarily redirects drawing to an intermediate surface known as a
    * group. The redirection lasts until the group is completed by a call
-   * to [cairo.Context.popGroup] or [cairo.Context.popGroupToSource]. These calls
+   * to [cairo.context.Context.popGroup] or [cairo.context.Context.popGroupToSource]. These calls
    * provide the result of any drawing to the group as a pattern,
    * $(LPAREN)either as an explicit object, or set as the source pattern$(RPAREN).
    * This group functionality can be convenient for performing
@@ -1007,14 +1007,14 @@ class Context : Boxed
    * other$(RPAREN), and then blend the result with translucence onto the
    * destination.
    * Groups can be nested arbitrarily deep by making balanced calls to
-   * [cairo.Context.pushGroup]/[cairo.Context.popGroup]. Each call pushes/pops the new
+   * [cairo.context.Context.pushGroup]/[cairo.context.Context.popGroup]. Each call pushes/pops the new
    * target group onto/from a stack.
-   * The [cairo.Context.pushGroup] function calls [cairo.Context.save] so that any
+   * The [cairo.context.Context.pushGroup] function calls [cairo.context.Context.save] so that any
    * changes to the graphics state will not be visible outside the
-   * group, $(LPAREN)the pop_group functions call [cairo.Context.restore]$(RPAREN).
+   * group, $(LPAREN)the pop_group functions call [cairo.context.Context.restore]$(RPAREN).
    * By default the intermediate group will have a content type of
    * %CAIRO_CONTENT_COLOR_ALPHA. Other content types can be chosen for
-   * the group by using [cairo.Context.pushGroupWithContent] instead.
+   * the group by using [cairo.context.Context.pushGroupWithContent] instead.
    * As an example, here is how one might fill and stroke a path with
    * translucence, but without any portion of the fill being visible
    * under the stroke:
@@ -1036,12 +1036,12 @@ class Context : Boxed
   /**
    * Temporarily redirects drawing to an intermediate surface known as a
    * group. The redirection lasts until the group is completed by a call
-   * to [cairo.Context.popGroup] or [cairo.Context.popGroupToSource]. These calls
+   * to [cairo.context.Context.popGroup] or [cairo.context.Context.popGroupToSource]. These calls
    * provide the result of any drawing to the group as a pattern,
    * $(LPAREN)either as an explicit object, or set as the source pattern$(RPAREN).
    * The group will have a content type of content. The ability to
    * control this content type is the only distinction between this
-   * function and [cairo.Context.pushGroup] which you should see for a more
+   * function and [cairo.context.Context.pushGroup] which you should see for a more
    * detailed description of group rendering.
    * Params:
    *   content = a #cairo_content_t indicating the type of group that
@@ -1075,7 +1075,7 @@ class Context : Boxed
   }
 
   /**
-   * Relative-coordinate version of [cairo.Context.curveTo]. All offsets are
+   * Relative-coordinate version of [cairo.context.Context.curveTo]. All offsets are
    * relative to the current point. Adds a cubic Bézier spline to the
    * path from the current point to a point offset from the current
    * point by $(LPAREN)dx3, dy3$(RPAREN), using points offset by $(LPAREN)dx1, dy1$(RPAREN) and
@@ -1101,7 +1101,7 @@ class Context : Boxed
   }
 
   /**
-   * Relative-coordinate version of [cairo.Context.lineTo]. Adds a line to the
+   * Relative-coordinate version of [cairo.context.Context.lineTo]. Adds a line to the
    * path from the current point to a point that is offset from the
    * current point by $(LPAREN)dx, dy$(RPAREN) in user space. After this call the
    * current point will be offset by $(LPAREN)dx, dy$(RPAREN).
@@ -1143,9 +1143,9 @@ class Context : Boxed
    * hard to grasp, one can imagine the clip region being reset to the
    * exact bounds of the target surface.
    * Note that code meant to be reusable should not call
-   * [cairo.Context.resetClip] as it will cause results unexpected by
-   * higher-level code which calls [cairo.Context.clip]. Consider using
-   * [cairo.Context.save] and [cairo.Context.restore] around [cairo.Context.clip] as a more
+   * [cairo.context.Context.resetClip] as it will cause results unexpected by
+   * higher-level code which calls [cairo.context.Context.clip]. Consider using
+   * [cairo.context.Context.save] and [cairo.context.Context.restore] around [cairo.context.Context.clip] as a more
    * robust means of temporarily restricting the clip region.
    */
   void resetClip()
@@ -1155,7 +1155,7 @@ class Context : Boxed
 
   /**
    * Restores cr to the state saved by a preceding call to
-   * [cairo.Context.save] and removes that state from the stack of
+   * [cairo.context.Context.save] and removes that state from the stack of
    * saved states.
    */
   void restore()
@@ -1181,13 +1181,13 @@ class Context : Boxed
   /**
    * Makes a copy of the current state of cr and saves it
    * on an internal stack of saved states for cr. When
-   * [cairo.Context.restore] is called, cr will be restored to
-   * the saved state. Multiple calls to [cairo.Context.save] and
-   * [cairo.Context.restore] can be nested; each call to [cairo.Context.restore]
-   * restores the state from the matching paired [cairo.Context.save].
+   * [cairo.context.Context.restore] is called, cr will be restored to
+   * the saved state. Multiple calls to [cairo.context.Context.save] and
+   * [cairo.context.Context.restore] can be nested; each call to [cairo.context.Context.restore]
+   * restores the state from the matching paired [cairo.context.Context.save].
    * It isn't necessary to clear all saved states before
    * a #cairo_t is freed. If the reference count of a #cairo_t
-   * drops to zero in response to a call to [cairo.Global.destroy],
+   * drops to zero in response to a call to [cairo.global.destroy],
    * any saved states will be freed along with the #cairo_t.
    */
   void save()
@@ -1210,7 +1210,7 @@ class Context : Boxed
   }
 
   /**
-   * Note: The [cairo.Context.selectFontFace] function call is part of what
+   * Note: The [cairo.context.Context.selectFontFace] function call is part of what
    * the cairo designers call the "toy" text API. It is convenient for
    * short demos and simple programs, but it is not expected to be
    * adequate for serious text-using applications.
@@ -1231,21 +1231,21 @@ class Context : Boxed
    * example, if you are using the freetype-based cairo-ft font backend,
    * see cairo_ft_font_face_create_for_ft_face$(LPAREN)$(RPAREN) or
    * cairo_ft_font_face_create_for_pattern$(LPAREN)$(RPAREN).$(RPAREN) The resulting font face
-   * could then be used with [cairo.Global.scaledFontCreate] and
-   * [cairo.Context.setScaledFont].
+   * could then be used with [cairo.global.scaledFontCreate] and
+   * [cairo.context.Context.setScaledFont].
    * Similarly, when using the "real" font support, you can call
    * directly into the underlying font system, $(LPAREN)such as fontconfig or
    * freetype$(RPAREN), for operations such as listing available fonts, etc.
    * It is expected that most applications will need to use a more
    * comprehensive font handling and text layout library, $(LPAREN)for example,
    * pango$(RPAREN), in conjunction with cairo.
-   * If text is drawn without a call to [cairo.Context.selectFontFace], $(LPAREN)nor
-   * [cairo.Context.setFontFace] nor [cairo.Context.setScaledFont]$(RPAREN), the default
+   * If text is drawn without a call to [cairo.context.Context.selectFontFace], $(LPAREN)nor
+   * [cairo.context.Context.setFontFace] nor [cairo.context.Context.setScaledFont]$(RPAREN), the default
    * family is platform-specific, but is essentially "sans-serif".
    * Default slant is %CAIRO_FONT_SLANT_NORMAL, and default weight is
    * %CAIRO_FONT_WEIGHT_NORMAL.
-   * This function is equivalent to a call to [cairo.Global.toyFontFaceCreate]
-   * followed by [cairo.Context.setFontFace].
+   * This function is equivalent to a call to [cairo.global.toyFontFaceCreate]
+   * followed by [cairo.context.Context.setFontFace].
    * Params:
    *   family = a font family name, encoded in UTF-8
    *   slant = the slant for the font
@@ -1263,7 +1263,7 @@ class Context : Boxed
    * a particular value.  At the current time, no backend supports
    * %CAIRO_ANTIALIAS_SUBPIXEL when drawing shapes.
    * Note that this option does not affect text rendering, instead see
-   * [cairo.FontOptions.setAntialias].
+   * [cairo.font_options.FontOptions.setAntialias].
    * Params:
    *   antialias = the new antialiasing mode
    */
@@ -1273,7 +1273,7 @@ class Context : Boxed
   }
 
   /**
-   * Sets the dash pattern to be used by [cairo.Context.stroke]. A dash pattern
+   * Sets the dash pattern to be used by [cairo.context.Context.stroke]. A dash pattern
    * is specified by dashes, an array of positive values. Each value
    * provides the length of alternate "on" and "off" portions of the
    * stroke. The offset specifies an offset into the pattern at which
@@ -1284,7 +1284,7 @@ class Context : Boxed
    * to distributed dots or squares along a path.
    * Note: The length values are in user-space units as evaluated at the
    * time of stroking. This is not necessarily the same as the user
-   * space at the time of [cairo.Context.setDash].
+   * space at the time of [cairo.context.Context.setDash].
    * If num_dashes is 0 dashing is disabled.
    * If num_dashes is 1 a symmetric pattern is assumed with alternating
    * on and off portions of the size specified by the single value in
@@ -1310,7 +1310,7 @@ class Context : Boxed
    * Set the current fill rule within the cairo context. The fill rule
    * is used to determine which regions are inside or outside a complex
    * $(LPAREN)potentially self-intersecting$(RPAREN) path. The current fill rule affects
-   * both [cairo.Context.fill] and [cairo.Context.clip]. See #cairo_fill_rule_t for details
+   * both [cairo.context.Context.fill] and [cairo.context.Context.clip]. See #cairo_fill_rule_t for details
    * on the semantics of each available fill rule.
    * The default fill rule is %CAIRO_FILL_RULE_WINDING.
    * Params:
@@ -1337,7 +1337,7 @@ class Context : Boxed
    * Sets the current font matrix to matrix. The font matrix gives a
    * transformation from the design space of the font $(LPAREN)in this space,
    * the em-square is 1 unit by 1 unit$(RPAREN) to user space. Normally, a
-   * simple scale is used $(LPAREN)see [cairo.Context.setFontSize]$(RPAREN), but a more
+   * simple scale is used $(LPAREN)see [cairo.context.Context.setFontSize]$(RPAREN), but a more
    * complex font matrix can be used to shear the font
    * or stretch it unequally along the two axes
    * Params:
@@ -1365,12 +1365,12 @@ class Context : Boxed
 
   /**
    * Sets the current font matrix to a scale by a factor of size, replacing
-   * any font matrix previously set with [cairo.Context.setFontSize] or
-   * [cairo.Context.setFontMatrix]. This results in a font size of size user space
+   * any font matrix previously set with [cairo.context.Context.setFontSize] or
+   * [cairo.context.Context.setFontMatrix]. This results in a font size of size user space
    * units. $(LPAREN)More precisely, this matrix will result in the font's
    * em-square being a size by size square in user space.$(RPAREN)
-   * If text is drawn without a call to [cairo.Context.setFontSize], $(LPAREN)nor
-   * [cairo.Context.setFontMatrix] nor [cairo.Context.setScaledFont]$(RPAREN), the default
+   * If text is drawn without a call to [cairo.context.Context.setFontSize], $(LPAREN)nor
+   * [cairo.context.Context.setFontMatrix] nor [cairo.context.Context.setScaledFont]$(RPAREN), the default
    * font size is 10.0.
    * Params:
    *   size = the new font size, in user space units
@@ -1396,7 +1396,7 @@ class Context : Boxed
    * renderers match Cairo's output, but some very popular implementations
    * $(LPAREN)Acrobat, Chrome, rsvg$(RPAREN) will scale the hairline unevenly.
    * As such, best practice is to reset any anisotropic scaling before calling
-   * [cairo.Context.stroke]. See https://cairographics.org/cookbook/ellipses/
+   * [cairo.context.Context.stroke]. See https://cairographics.org/cookbook/ellipses/
    * for an example.
    * Params:
    *   setHairline = whether or not to set hairline mode
@@ -1411,7 +1411,7 @@ class Context : Boxed
    * #cairo_line_cap_t for details about how the available line cap
    * styles are drawn.
    * As with the other stroke parameters, the current line cap style is
-   * examined by [cairo.Context.stroke], and [cairo.Context.strokeExtents], but does not have
+   * examined by [cairo.context.Context.stroke], and [cairo.context.Context.strokeExtents], but does not have
    * any effect during path construction.
    * The default line cap style is %CAIRO_LINE_CAP_BUTT.
    * Params:
@@ -1427,7 +1427,7 @@ class Context : Boxed
    * #cairo_line_join_t for details about how the available line join
    * styles are drawn.
    * As with the other stroke parameters, the current line join style is
-   * examined by [cairo.Context.stroke], and [cairo.Context.strokeExtents], but does not have
+   * examined by [cairo.context.Context.stroke], and [cairo.context.Context.strokeExtents], but does not have
    * any effect during path construction.
    * The default line join style is %CAIRO_LINE_JOIN_MITER.
    * Params:
@@ -1446,13 +1446,13 @@ class Context : Boxed
    * Note: When the description above refers to user space and CTM it
    * refers to the user space and CTM in effect at the time of the
    * stroking operation, not the user space and CTM in effect at the
-   * time of the call to [cairo.Context.setLineWidth]. The simplest usage
+   * time of the call to [cairo.context.Context.setLineWidth]. The simplest usage
    * makes both of these spaces identical. That is, if there is no
-   * change to the CTM between a call to [cairo.Context.setLineWidth] and the
+   * change to the CTM between a call to [cairo.context.Context.setLineWidth] and the
    * stroking operation, then one can just pass user-space values to
-   * [cairo.Context.setLineWidth] and ignore this note.
+   * [cairo.context.Context.setLineWidth] and ignore this note.
    * As with the other stroke parameters, the current line width is
-   * examined by [cairo.Context.stroke], and [cairo.Context.strokeExtents], but does not have
+   * examined by [cairo.context.Context.stroke], and [cairo.context.Context.strokeExtents], but does not have
    * any effect during path construction.
    * The default line width value is 2.0.
    * Params:
@@ -1477,13 +1477,13 @@ class Context : Boxed
   /**
    * Sets the current miter limit within the cairo context.
    * If the current line join style is set to %CAIRO_LINE_JOIN_MITER
-   * $(LPAREN)see [cairo.Context.setLineJoin]$(RPAREN), the miter limit is used to determine
+   * $(LPAREN)see [cairo.context.Context.setLineJoin]$(RPAREN), the miter limit is used to determine
    * whether the lines should be joined with a bevel instead of a miter.
    * Cairo divides the length of the miter by the line width.
    * If the result is greater than the miter limit, the style is
    * converted to a bevel.
    * As with the other stroke parameters, the current line miter limit is
-   * examined by [cairo.Context.stroke], and [cairo.Context.strokeExtents], but does not have
+   * examined by [cairo.context.Context.stroke], and [cairo.context.Context.strokeExtents], but does not have
    * any effect during path construction.
    * The default miter limit value is 10.0, which will convert joins
    * with interior angles less than 11 degrees to bevels instead of
@@ -1518,7 +1518,7 @@ class Context : Boxed
    * the #cairo_t with those of the #cairo_scaled_font_t.  Except for
    * some translation, the current CTM of the #cairo_t should be the
    * same as that of the #cairo_scaled_font_t, which can be accessed
-   * using [cairo.ScaledFont.getCtm].
+   * using [cairo.scaled_font.ScaledFont.getCtm].
    * Params:
    *   scaledFont = a #cairo_scaled_font_t
    */
@@ -1532,9 +1532,9 @@ class Context : Boxed
    * will then be used for any subsequent drawing operation until a new
    * source pattern is set.
    * Note: The pattern's transformation matrix will be locked to the
-   * user space in effect at the time of [cairo.Context.setSource]. This means
+   * user space in effect at the time of [cairo.context.Context.setSource]. This means
    * that further modifications of the current transformation matrix
-   * will not affect the source pattern. See [cairo.Pattern.setMatrix].
+   * will not affect the source pattern. See [cairo.pattern.Pattern.setMatrix].
    * The default source pattern is a solid pattern that is opaque black,
    * $(LPAREN)that is, it is equivalent to cairo_set_source_rgb$(LPAREN)cr, 0.0, 0.0,
    * 0.0$(RPAREN)$(RPAREN).
@@ -1589,7 +1589,7 @@ class Context : Boxed
 
   /**
    * This is a convenience function for creating a pattern from surface
-   * and setting it as the source in cr with [cairo.Context.setSource].
+   * and setting it as the source in cr with [cairo.context.Context.setSource].
    * The x and y parameters give the user-space coordinate at which
    * the surface origin should appear. $(LPAREN)The surface origin is its
    * upper-left corner before any transformation has been applied.$(RPAREN) The
@@ -1597,10 +1597,10 @@ class Context : Boxed
    * in the pattern matrix.
    * Other than the initial translation pattern matrix, as described
    * above, all other pattern attributes, $(LPAREN)such as its extend mode$(RPAREN), are
-   * set to the default values as in [cairo.Global.patternCreateForSurface].
-   * The resulting pattern can be queried with [cairo.Context.getSource] so
+   * set to the default values as in [cairo.global.patternCreateForSurface].
+   * The resulting pattern can be queried with [cairo.context.Context.getSource] so
    * that these attributes can be modified if desired, $(LPAREN)eg. to create a
-   * repeating pattern with [cairo.Pattern.setExtend]$(RPAREN).
+   * repeating pattern with [cairo.pattern.Pattern.setExtend]$(RPAREN).
    * Params:
    *   surface = a surface to be used to set the source pattern
    *   x = User-space X coordinate for surface origin
@@ -1645,9 +1645,9 @@ class Context : Boxed
 
   /**
    * Emits and clears the current page for backends that support multiple
-   * pages.  Use [cairo.Context.copyPage] if you don't want to clear the page.
+   * pages.  Use [cairo.context.Context.copyPage] if you don't want to clear the page.
    * This is a convenience function that simply calls
-   * [cairo.Surface.showPage] on cr's target.
+   * [cairo.surface.Surface.showPage] on cr's target.
    */
   void showPage()
   {
@@ -1667,11 +1667,11 @@ class Context : Boxed
    * the next glyph would be placed in this same progression. That is,
    * the current point will be at the origin of the final glyph offset
    * by its advance values. This allows for easy display of a single
-   * logical string with multiple calls to [cairo.Context.showText].
-   * Note: The [cairo.Context.showText] function call is part of what the cairo
+   * logical string with multiple calls to [cairo.context.Context.showText].
+   * Note: The [cairo.context.Context.showText] function call is part of what the cairo
    * designers call the "toy" text API. It is convenient for short demos
    * and simple programs, but it is not expected to be adequate for
-   * serious text-using applications. See [cairo.Context.showGlyphs] for the
+   * serious text-using applications. See [cairo.context.Context.showGlyphs] for the
    * "real" text display API in cairo.
    * Params:
    *   utf8 = a NUL-terminated string of text encoded in UTF-8, or %NULL
@@ -1683,11 +1683,11 @@ class Context : Boxed
   }
 
   /**
-   * This operation has rendering effects similar to [cairo.Context.showGlyphs]
+   * This operation has rendering effects similar to [cairo.context.Context.showGlyphs]
    * but, if the target surface supports it, uses the provided text and
    * cluster mapping to embed the text for the glyphs shown in the output.
    * If the target does not support the extended attributes, this function
-   * acts like the basic [cairo.Context.showGlyphs] as if it had been passed
+   * acts like the basic [cairo.context.Context.showGlyphs] as if it had been passed
    * glyphs and num_glyphs.
    * The mapping between utf8 and glyphs is provided by an array of
    * <firstterm>clusters</firstterm>.  Each cluster covers a number of
@@ -1730,21 +1730,21 @@ class Context : Boxed
   /**
    * A drawing operator that strokes the current path according to the
    * current line width, line join, line cap, and dash settings. After
-   * [cairo.Context.stroke], the current path will be cleared from the cairo
-   * context. See [cairo.Context.setLineWidth], [cairo.Context.setLineJoin],
-   * [cairo.Context.setLineCap], [cairo.Context.setDash], and
-   * [cairo.Context.strokePreserve].
+   * [cairo.context.Context.stroke], the current path will be cleared from the cairo
+   * context. See [cairo.context.Context.setLineWidth], [cairo.context.Context.setLineJoin],
+   * [cairo.context.Context.setLineCap], [cairo.context.Context.setDash], and
+   * [cairo.context.Context.strokePreserve].
    * Note: Degenerate segments and sub-paths are treated specially and
    * provide a useful result. These can result in two different
    * situations:
-   * 1. Zero-length "on" segments set in [cairo.Context.setDash]. If the cap
+   * 1. Zero-length "on" segments set in [cairo.context.Context.setDash]. If the cap
    * style is %CAIRO_LINE_CAP_ROUND or %CAIRO_LINE_CAP_SQUARE then these
    * segments will be drawn as circular dots or squares respectively. In
    * the case of %CAIRO_LINE_CAP_SQUARE, the orientation of the squares
    * is determined by the direction of the underlying path.
-   * 2. A sub-path created by [cairo.Context.moveTo] followed by either a
-   * [cairo.Context.closePath] or one or more calls to [cairo.Context.lineTo] to the
-   * same coordinate as the [cairo.Context.moveTo]. If the cap style is
+   * 2. A sub-path created by [cairo.context.Context.moveTo] followed by either a
+   * [cairo.context.Context.closePath] or one or more calls to [cairo.context.Context.lineTo] to the
+   * same coordinate as the [cairo.context.Context.moveTo]. If the cap style is
    * %CAIRO_LINE_CAP_ROUND then these sub-paths will be drawn as circular
    * dots. Note that in the case of %CAIRO_LINE_CAP_SQUARE a degenerate
    * sub-path will not be drawn at all, $(LPAREN)since the correct orientation
@@ -1759,21 +1759,21 @@ class Context : Boxed
 
   /**
    * Computes a bounding box in user coordinates covering the area that
-   * would be affected, $(LPAREN)the "inked" area$(RPAREN), by a [cairo.Context.stroke]
+   * would be affected, $(LPAREN)the "inked" area$(RPAREN), by a [cairo.context.Context.stroke]
    * operation given the current path and stroke parameters.
    * If the current path is empty, returns an empty rectangle $(LPAREN)$(LPAREN)0,0$(RPAREN), $(LPAREN)0,0$(RPAREN)$(RPAREN).
    * Surface dimensions and clipping are not taken into account.
    * Note that if the line width is set to exactly zero, then
-   * [cairo.Context.strokeExtents] will return an empty rectangle. Contrast with
-   * [cairo.Context.pathExtents] which can be used to compute the non-empty
+   * [cairo.context.Context.strokeExtents] will return an empty rectangle. Contrast with
+   * [cairo.context.Context.pathExtents] which can be used to compute the non-empty
    * bounds as the line width approaches zero.
-   * Note that [cairo.Context.strokeExtents] must necessarily do more work to
+   * Note that [cairo.context.Context.strokeExtents] must necessarily do more work to
    * compute the precise inked areas in light of the stroke parameters,
-   * so [cairo.Context.pathExtents] may be more desirable for sake of
+   * so [cairo.context.Context.pathExtents] may be more desirable for sake of
    * performance if non-inked path extents are desired.
-   * See [cairo.Context.stroke], [cairo.Context.setLineWidth], [cairo.Context.setLineJoin],
-   * [cairo.Context.setLineCap], [cairo.Context.setDash], and
-   * [cairo.Context.strokePreserve].
+   * See [cairo.context.Context.stroke], [cairo.context.Context.setLineWidth], [cairo.context.Context.setLineJoin],
+   * [cairo.context.Context.setLineCap], [cairo.context.Context.setDash], and
+   * [cairo.context.Context.strokePreserve].
    * Params:
    *   x1 = left of the resulting extents
    *   y1 = top of the resulting extents
@@ -1788,11 +1788,11 @@ class Context : Boxed
   /**
    * A drawing operator that strokes the current path according to the
    * current line width, line join, line cap, and dash settings. Unlike
-   * [cairo.Context.stroke], [cairo.Context.strokePreserve] preserves the path within the
+   * [cairo.context.Context.stroke], [cairo.context.Context.strokePreserve] preserves the path within the
    * cairo context.
-   * See [cairo.Context.setLineWidth], [cairo.Context.setLineJoin],
-   * [cairo.Context.setLineCap], [cairo.Context.setDash], and
-   * [cairo.Context.strokePreserve].
+   * See [cairo.context.Context.setLineWidth], [cairo.context.Context.setLineJoin],
+   * [cairo.context.Context.setLineCap], [cairo.context.Context.setDash], and
+   * [cairo.context.Context.strokePreserve].
    */
   void strokePreserve()
   {
@@ -1801,7 +1801,7 @@ class Context : Boxed
 
   /**
    * Marks the beginning of the tag_name structure. Call
-   * [cairo.Context.tagEnd] with the same tag_name to mark the end of the
+   * [cairo.context.Context.tagEnd] with the same tag_name to mark the end of the
    * structure.
    * The attributes string is of the form "key1\=value2 key2\=value2 ...".
    * Values may be boolean $(LPAREN)true/false or 1/0$(RPAREN), integer, float, string,
@@ -1818,7 +1818,7 @@ class Context : Boxed
    * for the list of tags and attributes.
    * Invalid nesting of tags or invalid attributes will cause cr to
    * shutdown with a status of %CAIRO_STATUS_TAG_ERROR.
-   * See [cairo.Context.tagEnd].
+   * See [cairo.context.Context.tagEnd].
    * Params:
    *   tagName = tag name
    *   attributes = tag attributes
@@ -1834,7 +1834,7 @@ class Context : Boxed
    * Marks the end of the tag_name structure.
    * Invalid nesting of tags will cause cr to shutdown with a status of
    * %CAIRO_STATUS_TAG_ERROR.
-   * See [cairo.Context.tagBegin].
+   * See [cairo.context.Context.tagBegin].
    * Params:
    *   tagName = tag name
    */
@@ -1847,9 +1847,9 @@ class Context : Boxed
   /**
    * Gets the extents for a string of text. The extents describe a
    * user-space rectangle that encloses the "inked" portion of the text,
-   * $(LPAREN)as it would be drawn by [cairo.Context.showText]$(RPAREN). Additionally, the
+   * $(LPAREN)as it would be drawn by [cairo.context.Context.showText]$(RPAREN). Additionally, the
    * x_advance and y_advance values indicate the amount by which the
-   * current point would be advanced by [cairo.Context.showText].
+   * current point would be advanced by [cairo.context.Context.showText].
    * Note that whitespace characters do not directly contribute to the
    * size of the rectangle $(LPAREN)extents.width and extents.height$(RPAREN). They do
    * contribute indirectly by changing the position of non-whitespace
@@ -1870,18 +1870,18 @@ class Context : Boxed
   /**
    * Adds closed paths for text to the current path.  The generated
    * path if filled, achieves an effect similar to that of
-   * [cairo.Context.showText].
-   * Text conversion and positioning is done similar to [cairo.Context.showText].
-   * Like [cairo.Context.showText], After this call the current point is
+   * [cairo.context.Context.showText].
+   * Text conversion and positioning is done similar to [cairo.context.Context.showText].
+   * Like [cairo.context.Context.showText], After this call the current point is
    * moved to the origin of where the next glyph would be placed in
    * this same progression.  That is, the current point will be at
    * the origin of the final glyph offset by its advance values.
-   * This allows for chaining multiple calls to to [cairo.Context.textPath]
+   * This allows for chaining multiple calls to to [cairo.context.Context.textPath]
    * without having to set current point in between.
-   * Note: The [cairo.Context.textPath] function call is part of what the cairo
+   * Note: The [cairo.context.Context.textPath] function call is part of what the cairo
    * designers call the "toy" text API. It is convenient for short demos
    * and simple programs, but it is not expected to be adequate for
-   * serious text-using applications. See [cairo.Context.glyphPath] for the
+   * serious text-using applications. See [cairo.context.Context.glyphPath] for the
    * "real" text path API in cairo.
    * Params:
    *   utf8 = a NUL-terminated string of text encoded in UTF-8, or %NULL
@@ -1908,7 +1908,7 @@ class Context : Boxed
    * Modifies the current transformation matrix $(LPAREN)CTM$(RPAREN) by translating the
    * user-space origin by $(LPAREN)tx, ty$(RPAREN). This offset is interpreted as a
    * user-space coordinate according to the CTM in place before the new
-   * call to [cairo.Context.translate]. In other words, the translation of the
+   * call to [cairo.context.Context.translate]. In other words, the translation of the
    * user-space origin takes place after any existing transformation.
    * Params:
    *   tx = amount to translate in the X direction
@@ -1934,7 +1934,7 @@ class Context : Boxed
 
   /**
    * Transform a distance vector from user space to device space. This
-   * function is similar to [cairo.Context.userToDevice] except that the
+   * function is similar to [cairo.context.Context.userToDevice] except that the
    * translation components of the CTM will be ignored when transforming
    * $(LPAREN)dx,dy$(RPAREN).
    * Params:

@@ -1,6 +1,6 @@
 module gtk.shortcuts_group;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.box;
@@ -21,13 +21,13 @@ import gtk.types;
  * The group has a title. It may optionally be associated with a view
  * of the application, which can be used to show only relevant shortcuts
  * depending on the application context.
- * This widget is only meant to be used with [Gtk.ShortcutsWindow].
+ * This widget is only meant to be used with [gtk.shortcuts_window.ShortcutsWindow].
  * The recommended way to construct a `GtkShortcutsGroup` is with
- * [Gtk.Builder], by using the `<child>` tag to populate a
- * `GtkShortcutsGroup` with one or more [Gtk.ShortcutsShortcut]
+ * [gtk.builder.Builder], by using the `<child>` tag to populate a
+ * `GtkShortcutsGroup` with one or more [gtk.shortcuts_shortcut.ShortcutsShortcut]
  * instances.
  * If you need to add a shortcut programmatically, use
- * [Gtk.ShortcutsGroup.addShortcut].
+ * [gtk.shortcuts_group.ShortcutsGroup.addShortcut].
  */
 class ShortcutsGroup : Box
 {
@@ -50,7 +50,7 @@ class ShortcutsGroup : Box
 
   /**
    * Adds a shortcut to the shortcuts group.
-   * This is the programmatic equivalent to using [Gtk.Builder] and a
+   * This is the programmatic equivalent to using [gtk.builder.Builder] and a
    * `<child>` tag to add the child. Adding children with other API is not
    * appropriate as `GtkShortcutsGroup` manages its children internally.
    * Params:

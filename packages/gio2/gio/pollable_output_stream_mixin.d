@@ -1,7 +1,7 @@
 module gio.pollable_output_stream_mixin;
 
 public import gio.pollable_output_stream_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
@@ -10,12 +10,12 @@ public import glib.error;
 public import glib.source;
 
 /**
- * `GPollableOutputStream` is implemented by [Gio.OutputStream]s that
+ * `GPollableOutputStream` is implemented by [gio.output_stream.OutputStream]s that
  * can be polled for readiness to write. This can be used when
  * interfacing with a non-GIO API that expects
  * UNIX-file-descriptor-style asynchronous I/O rather than GIO-style.
  * Some classes may implement `GPollableOutputStream` but have only certain
- * instances of that class be pollable. If [Gio.PollableOutputStream.canPoll]
+ * instances of that class be pollable. If [gio.pollable_output_stream.PollableOutputStream.canPoll]
  * returns false, then the behavior of other `GPollableOutputStream` methods is
  * undefined.
  */
@@ -42,12 +42,12 @@ template PollableOutputStreamT()
    * Creates a #GSource that triggers when stream can be written, or
    * cancellable is triggered or an error occurs. The callback on the
    * source is of the #GPollableSourceFunc type.
-   * As with [Gio.PollableOutputStream.isWritable], it is possible that
+   * As with [gio.pollable_output_stream.PollableOutputStream.isWritable], it is possible that
    * the stream may not actually be writable even after the source
-   * triggers, so you should use [Gio.PollableOutputStream.writeNonblocking]
-   * rather than [Gio.OutputStream.write] from the callback.
+   * triggers, so you should use [gio.pollable_output_stream.PollableOutputStream.writeNonblocking]
+   * rather than [gio.output_stream.OutputStream.write] from the callback.
    * The behaviour of this method is undefined if
-   * [Gio.PollableOutputStream.canPoll] returns %FALSE for stream.
+   * [gio.pollable_output_stream.PollableOutputStream.canPoll] returns %FALSE for stream.
    * Params:
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #GSource
@@ -63,16 +63,16 @@ template PollableOutputStreamT()
   /**
    * Checks if stream can be written.
    * Note that some stream types may not be able to implement this 100%
-   * reliably, and it is possible that a call to [Gio.OutputStream.write]
+   * reliably, and it is possible that a call to [gio.output_stream.OutputStream.write]
    * after this returns %TRUE would still block. To guarantee
    * non-blocking behavior, you should always use
-   * [Gio.PollableOutputStream.writeNonblocking], which will return a
+   * [gio.pollable_output_stream.PollableOutputStream.writeNonblocking], which will return a
    * %G_IO_ERROR_WOULD_BLOCK error rather than blocking.
    * The behaviour of this method is undefined if
-   * [Gio.PollableOutputStream.canPoll] returns %FALSE for stream.
+   * [gio.pollable_output_stream.PollableOutputStream.canPoll] returns %FALSE for stream.
    * Returns: %TRUE if stream is writable, %FALSE if not. If an error
    *   has occurred on stream, this will result in
-   *   [Gio.PollableOutputStream.isWritable] returning %TRUE, and the
+   *   [gio.pollable_output_stream.PollableOutputStream.isWritable] returning %TRUE, and the
    *   next attempt to write will return the error.
    */
   override bool isWritable()
@@ -84,9 +84,9 @@ template PollableOutputStreamT()
 
   /**
    * Attempts to write up to count bytes from buffer to stream, as
-   * with [Gio.OutputStream.write]. If stream is not currently writable,
+   * with [gio.output_stream.OutputStream.write]. If stream is not currently writable,
    * this will immediately return %G_IO_ERROR_WOULD_BLOCK, and you can
-   * use [Gio.PollableOutputStream.createSource] to create a #GSource
+   * use [gio.pollable_output_stream.PollableOutputStream.createSource] to create a #GSource
    * that will be triggered when stream is writable.
    * Note that since this method never blocks, you cannot actually
    * use cancellable to cancel it. However, it will return an error
@@ -97,7 +97,7 @@ template PollableOutputStreamT()
    * transports like D/TLS require that you re-send the same buffer and
    * count in the next write call.
    * The behaviour of this method is undefined if
-   * [Gio.PollableOutputStream.canPoll] returns %FALSE for stream.
+   * [gio.pollable_output_stream.PollableOutputStream.canPoll] returns %FALSE for stream.
    * Params:
    *   buffer = a buffer to write
    *     data from
@@ -122,9 +122,9 @@ template PollableOutputStreamT()
 
   /**
    * Attempts to write the bytes contained in the n_vectors vectors to stream,
-   * as with [Gio.OutputStream.writev]. If stream is not currently writable,
+   * as with [gio.output_stream.OutputStream.writev]. If stream is not currently writable,
    * this will immediately return %G_POLLABLE_RETURN_WOULD_BLOCK, and you can
-   * use [Gio.PollableOutputStream.createSource] to create a #GSource
+   * use [gio.pollable_output_stream.PollableOutputStream.createSource] to create a #GSource
    * that will be triggered when stream is writable. error will *not* be
    * set in that case.
    * Note that since this method never blocks, you cannot actually
@@ -136,7 +136,7 @@ template PollableOutputStreamT()
    * transports like D/TLS require that you re-send the same vectors and
    * n_vectors in the next write call.
    * The behaviour of this method is undefined if
-   * [Gio.PollableOutputStream.canPoll] returns %FALSE for stream.
+   * [gio.pollable_output_stream.PollableOutputStream.canPoll] returns %FALSE for stream.
    * Params:
    *   vectors = the buffer containing the #GOutputVectors to write.
    *   bytesWritten = location to store the number of bytes that were

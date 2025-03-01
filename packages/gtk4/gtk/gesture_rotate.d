@@ -1,6 +1,6 @@
 module gtk.gesture_rotate;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;

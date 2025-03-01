@@ -5,7 +5,7 @@ import gdk.drag;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -18,10 +18,10 @@ import gtk.types;
  * `GtkDragSource` can be set up with the necessary
  * ingredients for a DND operation ahead of time. This includes
  * the source for the data that is being transferred, in the form
- * of a [Gdk.ContentProvider], the desired action, and the icon to
+ * of a [gdk.content_provider.ContentProvider], the desired action, and the icon to
  * use during the drag operation. After setting it up, the drag
  * source must be added to a widget as an event controller, using
- * [Gtk.Widget.addController].
+ * [gtk.widget.Widget.addController].
  * ```c
  * static void
  * my_widget_init $(LPAREN)MyWidget *self$(RPAREN)
@@ -35,7 +35,7 @@ import gtk.types;
  * Setting up the content provider and icon ahead of time only makes
  * sense when the data does not change. More commonly, you will want
  * to set them up just in time. To do so, `GtkDragSource` has
- * [Gtk.DragSource.prepare] and signal@Gtk.DragSource::drag-begin
+ * [gtk.drag_source.DragSource.prepare] and signal@Gtk.DragSource::drag-begin
  * signals.
  * The ::prepare signal is emitted before a drag is started, and
  * can be used to set the content provider and actions that the
@@ -162,7 +162,7 @@ class DragSource : GestureSingle
    * to listen to the signalGtk.DragSource::drag-end signal and
    * handle delete_data being %TRUE.
    * This function can be called before a drag is started,
-   * or in a handler for the [Gtk.DragSource.prepare] signal.
+   * or in a handler for the [gtk.drag_source.DragSource.prepare] signal.
    * Params:
    *   actions = the actions to offer
    */
@@ -176,7 +176,7 @@ class DragSource : GestureSingle
    * When the data is requested in the cause of a DND operation,
    * it will be obtained from the content provider.
    * This function can be called before a drag is started,
-   * or in a handler for the [Gtk.DragSource.prepare] signal.
+   * or in a handler for the [gtk.drag_source.DragSource.prepare] signal.
    * You may consider setting the content provider back to
    * %NULL in a signalGtk.DragSource::drag-end signal handler.
    * Params:
@@ -193,7 +193,7 @@ class DragSource : GestureSingle
    * that gets aligned with the hotspot of the cursor.
    * If paintable is %NULL, a default icon is used.
    * This function can be called before a drag is started, or in
-   * a [Gtk.DragSource.prepare] or
+   * a [gtk.drag_source.DragSource.prepare] or
    * signalGtk.DragSource::drag-begin signal handler.
    * Params:
    *   paintable = the `GdkPaintable` to use as icon
@@ -208,7 +208,7 @@ class DragSource : GestureSingle
   /**
    * Emitted on the drag source when a drag is started.
    * It can be used to e.g. set a custom drag icon with
-   * [Gtk.DragSource.setIcon].
+   * [gtk.drag_source.DragSource.setIcon].
    * Params
    *   drag = the `GdkDrag` object
    *   dragSource = the instance the signal is connected to
@@ -282,7 +282,7 @@ class DragSource : GestureSingle
   /**
    * Emitted on the drag source when a drag is finished.
    * A typical reason to connect to this signal is to undo
-   * things done in [Gtk.DragSource.prepare] or
+   * things done in [gtk.drag_source.DragSource.prepare] or
    * signalGtk.DragSource::drag-begin handlers.
    * Params
    *   drag = the `GdkDrag` object
@@ -321,7 +321,7 @@ class DragSource : GestureSingle
    * Emitted when a drag is about to be initiated.
    * It returns the `GdkContentProvider` to use for the drag that is about
    * to start. The default handler for this signal returns the value of
-   * the [Gtk.DragSource.content] property, so if you set up that
+   * the [gtk.drag_source.DragSource.Gdk.ContentProvider] property, so if you set up that
    * property ahead of time, you don't need to connect to this signal.
    * Params
    *   x = the X coordinate of the drag starting point

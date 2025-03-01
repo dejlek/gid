@@ -1,6 +1,6 @@
 module gtk.text_child_anchor;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -34,9 +34,9 @@ class TextChildAnchor : ObjectG
   /**
    * Creates a new `GtkTextChildAnchor`.
    * Usually you would then insert it into a `GtkTextBuffer` with
-   * [Gtk.TextBuffer.insertChildAnchor]. To perform the
+   * [gtk.text_buffer.TextBuffer.insertChildAnchor]. To perform the
    * creation and insertion in one step, use the convenience
-   * function [Gtk.TextBuffer.createChildAnchor].
+   * function [gtk.text_buffer.TextBuffer.createChildAnchor].
    * Returns: a new `GtkTextChildAnchor`
    */
   this()
@@ -49,7 +49,7 @@ class TextChildAnchor : ObjectG
   /**
    * Creates a new `GtkTextChildAnchor` with the given replacement character.
    * Usually you would then insert it into a `GtkTextBuffer` with
-   * [Gtk.TextBuffer.insertChildAnchor].
+   * [gtk.text_buffer.TextBuffer.insertChildAnchor].
    * Params:
    *   character =
    * Returns: a new `GtkTextChildAnchor`
@@ -68,7 +68,7 @@ class TextChildAnchor : ObjectG
    * the buffer.
    * Keep in mind that the child anchor will be unreferenced
    * when removed from the buffer, so you need to hold your own
-   * reference $(LPAREN)with [GObject.ObjectG.ref_]$(RPAREN) if you plan to use this
+   * reference $(LPAREN)with [gobject.object.ObjectG.ref_]$(RPAREN) if you plan to use this
    * function — otherwise all deleted child anchors will also
    * be finalized.
    * Returns: %TRUE if the child anchor has been deleted from its buffer

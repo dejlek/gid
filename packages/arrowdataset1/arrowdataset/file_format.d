@@ -8,7 +8,7 @@ import arrowdataset.c.types;
 import arrowdataset.file_write_options;
 import arrowdataset.file_writer;
 import arrowdataset.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

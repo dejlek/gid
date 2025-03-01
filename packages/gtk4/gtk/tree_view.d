@@ -5,7 +5,7 @@ import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.rectangle;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -33,7 +33,7 @@ import gtk.widget;
 
 /**
  * A widget for displaying both trees and lists
- * Widget that displays any object that implements the [Gtk.TreeModel] interface.
+ * Widget that displays any object that implements the [gtk.tree_model.TreeModel] interface.
  * Please refer to the [tree widget conceptual overview](section-tree-widget.html)
  * for an overview of all the objects and data types related to the tree
  * widget and how they work together.
@@ -48,13 +48,13 @@ import gtk.widget;
  * Several functions are available for converting between the different
  * coordinate systems.  The most common translations are between widget and bin
  * window coordinates and between bin window and tree coordinates. For the
- * former you can use [Gtk.TreeView.convertWidgetToBinWindowCoords]
- * $(LPAREN)and vice versa$(RPAREN), for the latter [Gtk.TreeView.convertBinWindowToTreeCoords]
+ * former you can use [gtk.tree_view.TreeView.convertWidgetToBinWindowCoords]
+ * $(LPAREN)and vice versa$(RPAREN), for the latter [gtk.tree_view.TreeView.convertBinWindowToTreeCoords]
  * $(LPAREN)and vice versa$(RPAREN).
  * ## `GtkTreeView` as `GtkBuildable`
  * The `GtkTreeView` implementation of the `GtkBuildable` interface accepts
- * [Gtk.TreeViewColumn] objects as `<child>` elements and exposes the
- * internal [Gtk.TreeSelection] in UI definitions.
+ * [gtk.tree_view_column.TreeViewColumn] objects as `<child>` elements and exposes the
+ * internal [gtk.tree_selection.TreeSelection] in UI definitions.
  * An example of a UI definition fragment with `GtkTreeView`:
  * ```xml
  * <object class\="GtkTreeView" id\="treeview">
@@ -100,7 +100,7 @@ import gtk.widget;
  * For rubberband selection, a subnode with name `rubberband` is used.
  * For the drop target location during DND, a subnode with name `dndtarget` is used.
 
- * Deprecated: Use [Gtk.ListView] for lists, and [Gtk.ColumnView]
+ * Deprecated: Use [gtk.list_view.ListView] for lists, and [gtk.column_view.ColumnView]
  *   for tabular lists
  */
 class TreeView : Widget, Scrollable
@@ -128,7 +128,7 @@ class TreeView : Widget, Scrollable
    * Creates a new `GtkTreeView` widget.
    * Returns: A newly created `GtkTreeView` widget.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   this()
   {
@@ -143,7 +143,7 @@ class TreeView : Widget, Scrollable
    *   model = the model.
    * Returns: A newly created `GtkTreeView` widget.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   static TreeView newWithModel(TreeModel model)
   {
@@ -161,7 +161,7 @@ class TreeView : Widget, Scrollable
    *   column = The `GtkTreeViewColumn` to add.
    * Returns: The number of columns in tree_view after appending.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   int appendColumn(TreeViewColumn column)
   {
@@ -173,7 +173,7 @@ class TreeView : Widget, Scrollable
   /**
    * Recursively collapses all visible, expanded nodes in tree_view.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void collapseAll()
   {
@@ -186,7 +186,7 @@ class TreeView : Widget, Scrollable
    *   path = path to a row in the tree_view
    * Returns: %TRUE if the row was collapsed.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool collapseRow(TreePath path)
   {
@@ -199,7 +199,7 @@ class TreeView : Widget, Scrollable
    * Resizes all columns to their optimal width. Only works after the
    * treeview has been realized.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void columnsAutosize()
   {
@@ -215,7 +215,7 @@ class TreeView : Widget, Scrollable
    *   tx = return location for tree X coordinate
    *   ty = return location for tree Y coordinate
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void convertBinWindowToTreeCoords(int bx, int by, out int tx, out int ty)
   {
@@ -230,7 +230,7 @@ class TreeView : Widget, Scrollable
    *   wx = return location for widget X coordinate
    *   wy = return location for widget Y coordinate
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void convertBinWindowToWidgetCoords(int bx, int by, out int wx, out int wy)
   {
@@ -246,7 +246,7 @@ class TreeView : Widget, Scrollable
    *   bx = return location for X coordinate relative to bin_window
    *   by = return location for Y coordinate relative to bin_window
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void convertTreeToBinWindowCoords(int tx, int ty, out int bx, out int by)
   {
@@ -262,7 +262,7 @@ class TreeView : Widget, Scrollable
    *   wx = return location for widget X coordinate
    *   wy = return location for widget Y coordinate
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void convertTreeToWidgetCoords(int tx, int ty, out int wx, out int wy)
   {
@@ -277,7 +277,7 @@ class TreeView : Widget, Scrollable
    *   bx = return location for bin_window X coordinate
    *   by = return location for bin_window Y coordinate
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void convertWidgetToBinWindowCoords(int wx, int wy, out int bx, out int by)
   {
@@ -293,7 +293,7 @@ class TreeView : Widget, Scrollable
    *   tx = return location for tree X coordinate
    *   ty = return location for tree Y coordinate
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void convertWidgetToTreeCoords(int wx, int wy, out int tx, out int ty)
   {
@@ -307,7 +307,7 @@ class TreeView : Widget, Scrollable
    *   path = a `GtkTreePath` in tree_view
    * Returns: a newly-allocated surface of the drag icon.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   Paintable createRowDragIcon(TreePath path)
   {
@@ -325,7 +325,7 @@ class TreeView : Widget, Scrollable
    *   actions = the bitmask of possible actions for a drag from this
    *     widget
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void enableModelDragDest(ContentFormats formats, DragAction actions)
   {
@@ -341,7 +341,7 @@ class TreeView : Widget, Scrollable
    *   actions = the bitmask of possible actions for a drag from this
    *     widget
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void enableModelDragSource(ModifierType startButtonMask, ContentFormats formats, DragAction actions)
   {
@@ -351,7 +351,7 @@ class TreeView : Widget, Scrollable
   /**
    * Recursively expands all nodes in the tree_view.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void expandAll()
   {
@@ -365,7 +365,7 @@ class TreeView : Widget, Scrollable
    *   openAll = whether to recursively expand, or just expand immediate children
    * Returns: %TRUE if the row existed and had children
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool expandRow(TreePath path, bool openAll)
   {
@@ -380,7 +380,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   path = path to a row.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void expandToPath(TreePath path)
   {
@@ -388,10 +388,10 @@ class TreeView : Widget, Scrollable
   }
 
   /**
-   * Gets the setting set by [Gtk.TreeView.setActivateOnSingleClick].
+   * Gets the setting set by [gtk.tree_view.TreeView.setActivateOnSingleClick].
    * Returns: %TRUE if row-activated will be emitted on a single click
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getActivateOnSingleClick()
   {
@@ -408,14 +408,14 @@ class TreeView : Widget, Scrollable
    * fields will be filled with 0.  The returned rectangle is equivalent to the
    * background_area passed to gtk_cell_renderer_render$(LPAREN)$(RPAREN).  These background
    * areas tile to cover the entire bin window.  Contrast with the cell_area,
-   * returned by [Gtk.TreeView.getCellArea], which returns only the cell
+   * returned by [gtk.tree_view.TreeView.getCellArea], which returns only the cell
    * itself, excluding surrounding borders and the tree expander area.
    * Params:
    *   path = a `GtkTreePath` for the row, or %NULL to get only horizontal coordinates
    *   column = a `GtkTreeViewColumn` for the column, or %NULL to get only vertical coordinates
    *   rect = rectangle to fill with cell background rect
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void getBackgroundArea(TreePath path, TreeViewColumn column, out Rectangle rect)
   {
@@ -439,7 +439,7 @@ class TreeView : Widget, Scrollable
    *   column = a `GtkTreeViewColumn` for the column, or %NULL to get only vertical coordinates
    *   rect = rectangle to fill with cell rect
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void getCellArea(TreePath path, TreeViewColumn column, out Rectangle rect)
   {
@@ -455,7 +455,7 @@ class TreeView : Widget, Scrollable
    * Returns: The `GtkTreeViewColumn`, or %NULL if the
    *   position is outside the range of columns.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   TreeViewColumn getColumn(int n)
   {
@@ -470,7 +470,7 @@ class TreeView : Widget, Scrollable
    * The returned list must be freed with g_list_free $(LPAREN)$(RPAREN).
    * Returns: A list of `GtkTreeViewColumn`s
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   TreeViewColumn[] getColumns()
   {
@@ -486,7 +486,7 @@ class TreeView : Widget, Scrollable
    * Fills in path and focus_column with the current path and focus column.  If
    * the cursor isn’t currently set, then *path will be %NULL.  If no column
    * currently has focus, then *focus_column will be %NULL.
-   * The returned `GtkTreePath` must be freed with [Gtk.TreePath.free] when
+   * The returned `GtkTreePath` must be freed with [gtk.tree_path.TreePath.free] when
    * you are done with it.
    * Params:
    *   path = A pointer to be
@@ -494,7 +494,7 @@ class TreeView : Widget, Scrollable
    *   focusColumn = A
    *     pointer to be filled with the current focus column
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void getCursor(out TreePath path, out TreeViewColumn focusColumn)
   {
@@ -520,7 +520,7 @@ class TreeView : Widget, Scrollable
    * Returns: whether there is a row at the given position, %TRUE if this
    *   is indeed the case.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getDestRowAtPos(int dragX, int dragY, out TreePath path, out TreeViewDropPosition pos)
   {
@@ -537,7 +537,7 @@ class TreeView : Widget, Scrollable
    *   path = Return location for the path of the highlighted row
    *   pos = Return location for the drop position
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void getDragDestRow(out TreePath path, out TreeViewDropPosition pos)
   {
@@ -551,7 +551,7 @@ class TreeView : Widget, Scrollable
    * by typing in text.
    * Returns: whether or not to let the user search interactively
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getEnableSearch()
   {
@@ -565,7 +565,7 @@ class TreeView : Widget, Scrollable
    * Returns: %TRUE if tree lines are drawn in tree_view, %FALSE
    *   otherwise.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getEnableTreeLines()
   {
@@ -580,7 +580,7 @@ class TreeView : Widget, Scrollable
    * This column has the expander arrow drawn next to it.
    * Returns: The expander column.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   TreeViewColumn getExpanderColumn()
   {
@@ -594,7 +594,7 @@ class TreeView : Widget, Scrollable
    * Returns whether fixed height mode is turned on for tree_view.
    * Returns: %TRUE if tree_view is in fixed height mode
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getFixedHeightMode()
   {
@@ -608,7 +608,7 @@ class TreeView : Widget, Scrollable
    * Returns: a `GtkTreeView`GridLines value indicating which grid lines
    *   are enabled.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   TreeViewGridLines getGridLines()
   {
@@ -622,7 +622,7 @@ class TreeView : Widget, Scrollable
    * Returns whether all header columns are clickable.
    * Returns: %TRUE if all header columns are clickable, otherwise %FALSE
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getHeadersClickable()
   {
@@ -635,7 +635,7 @@ class TreeView : Widget, Scrollable
    * Returns %TRUE if the headers on the tree_view are visible.
    * Returns: Whether the headers are visible or not.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getHeadersVisible()
   {
@@ -648,7 +648,7 @@ class TreeView : Widget, Scrollable
    * Returns whether hover expansion mode is turned on for tree_view.
    * Returns: %TRUE if tree_view is in hover expansion mode
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getHoverExpand()
   {
@@ -661,7 +661,7 @@ class TreeView : Widget, Scrollable
    * Returns whether hover selection mode is turned on for tree_view.
    * Returns: %TRUE if tree_view is in hover selection mode
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getHoverSelection()
   {
@@ -676,7 +676,7 @@ class TreeView : Widget, Scrollable
    * Returns: the amount of extra indentation for child levels in
    *   tree_view.  A return value of 0 means that this feature is disabled.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   int getLevelIndentation()
   {
@@ -690,7 +690,7 @@ class TreeView : Widget, Scrollable
    * model is unset.
    * Returns: A `GtkTreeModel`
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   TreeModel getModel()
   {
@@ -704,7 +704,7 @@ class TreeView : Widget, Scrollable
    * Queries the number of columns in the given tree_view.
    * Returns: The number of columns in the tree_view
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   uint getNColumns()
   {
@@ -717,10 +717,10 @@ class TreeView : Widget, Scrollable
    * Finds the path at the point $(LPAREN)x, y$(RPAREN), relative to bin_window coordinates.
    * That is, x and y are relative to an events coordinates. Widget-relative
    * coordinates must be converted using
-   * [Gtk.TreeView.convertWidgetToBinWindowCoords]. It is primarily for
+   * [gtk.tree_view.TreeView.convertWidgetToBinWindowCoords]. It is primarily for
    * things like popup menus. If path is non-%NULL, then it will be filled
    * with the `GtkTreePath` at that point.  This path should be freed with
-   * [Gtk.TreePath.free].  If column is non-%NULL, then it will be filled
+   * [gtk.tree_path.TreePath.free].  If column is non-%NULL, then it will be filled
    * with the column at that point.  cell_x and cell_y return the coordinates
    * relative to the cell background $(LPAREN)i.e. the background_area passed to
    * gtk_cell_renderer_render$(LPAREN)$(RPAREN)$(RPAREN).  This function is only meaningful if
@@ -728,7 +728,7 @@ class TreeView : Widget, Scrollable
    * if tree_view is not realized or does not have a model.
    * For converting widget coordinates $(LPAREN)eg. the ones you get from
    * GtkWidget::query-tooltip$(RPAREN), please see
-   * [Gtk.TreeView.convertWidgetToBinWindowCoords].
+   * [gtk.tree_view.TreeView.convertWidgetToBinWindowCoords].
    * Params:
    *   x = The x position to be identified $(LPAREN)relative to bin_window$(RPAREN).
    *   y = The y position to be identified $(LPAREN)relative to bin_window$(RPAREN).
@@ -742,7 +742,7 @@ class TreeView : Widget, Scrollable
    *     relative to the cell can be placed
    * Returns: %TRUE if a row exists at that coordinate.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getPathAtPos(int x, int y, out TreePath path, out TreeViewColumn column, out int cellX, out int cellY)
   {
@@ -757,10 +757,10 @@ class TreeView : Widget, Scrollable
 
   /**
    * Retrieves whether the user can reorder the tree via drag-and-drop. See
-   * [Gtk.TreeView.setReorderable].
+   * [gtk.tree_view.TreeView.setReorderable].
    * Returns: %TRUE if the tree can be reordered.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getReorderable()
   {
@@ -775,7 +775,7 @@ class TreeView : Widget, Scrollable
    * user to select multiple rows by dragging the mouse.
    * Returns: %TRUE if rubber banding in tree_view is enabled.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getRubberBanding()
   {
@@ -788,7 +788,7 @@ class TreeView : Widget, Scrollable
    * Gets the column searched on by the interactive search code.
    * Returns: the column the interactive search code searches in.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   int getSearchColumn()
   {
@@ -803,7 +803,7 @@ class TreeView : Widget, Scrollable
    * will be returned.
    * Returns: the entry currently in use as search entry.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   Editable getSearchEntry()
   {
@@ -817,7 +817,7 @@ class TreeView : Widget, Scrollable
    * Gets the `GtkTreeSelection` associated with tree_view.
    * Returns: A `GtkTreeSelection` object.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   TreeSelection getSelection()
   {
@@ -832,7 +832,7 @@ class TreeView : Widget, Scrollable
    * Returns: %TRUE if expanders are drawn in tree_view, %FALSE
    *   otherwise.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getShowExpanders()
   {
@@ -847,7 +847,7 @@ class TreeView : Widget, Scrollable
    * Returns: the index of the tooltip column that is currently being
    *   used, or -1 if this is disabled.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   int getTooltipColumn()
   {
@@ -877,7 +877,7 @@ class TreeView : Widget, Scrollable
    *   iter = a pointer to receive a `GtkTreeIter`
    * Returns: whether or not the given tooltip context points to a row
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getTooltipContext(int x, int y, bool keyboardTip, out TreeModel model, out TreePath path, out TreeIter iter)
   {
@@ -895,13 +895,13 @@ class TreeView : Widget, Scrollable
   /**
    * Sets start_path and end_path to be the first and last visible path.
    * Note that there may be invisible paths in between.
-   * The paths should be freed with [Gtk.TreePath.free] after use.
+   * The paths should be freed with [gtk.tree_path.TreePath.free] after use.
    * Params:
    *   startPath = Return location for start of region
    *   endPath = Return location for end of region
    * Returns: %TRUE, if valid paths were placed in start_path and end_path.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool getVisibleRange(out TreePath startPath, out TreePath endPath)
   {
@@ -917,13 +917,13 @@ class TreeView : Widget, Scrollable
   /**
    * Fills visible_rect with the currently-visible region of the
    * buffer, in tree coordinates. Convert to bin_window coordinates with
-   * [Gtk.TreeView.convertTreeToBinWindowCoords].
+   * [gtk.tree_view.TreeView.convertTreeToBinWindowCoords].
    * Tree coordinates start at 0,0 for row 0 of the tree, and cover the entire
    * scrollable area of the tree.
    * Params:
    *   visibleRect = rectangle to fill
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void getVisibleRect(out Rectangle visibleRect)
   {
@@ -942,7 +942,7 @@ class TreeView : Widget, Scrollable
    *   position = The position to insert column in.
    * Returns: The number of columns in tree_view after insertion.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   int insertColumn(TreeViewColumn column, int position)
   {
@@ -955,7 +955,7 @@ class TreeView : Widget, Scrollable
    * Convenience function that inserts a new column into the `GtkTreeView`
    * with the given cell renderer and a `GtkTreeCellDataFunc` to set cell renderer
    * attributes $(LPAREN)normally using data from the model$(RPAREN). See also
-   * [Gtk.TreeViewColumn.setCellDataFunc], [Gtk.TreeViewColumn.packStart].
+   * [gtk.tree_view_column.TreeViewColumn.setCellDataFunc], [gtk.tree_view_column.TreeViewColumn.packStart].
    * If tree_view has “fixed_height” mode enabled, then the new column will have its
    * “sizing” property set to be GTK_TREE_VIEW_COLUMN_FIXED.
    * Params:
@@ -965,7 +965,7 @@ class TreeView : Widget, Scrollable
    *   func = function to set attributes of cell renderer
    * Returns: number of columns in the tree view post-insert
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   int insertColumnWithDataFunc(int position, string title, CellRenderer cell, TreeCellDataFunc func)
   {
@@ -993,13 +993,13 @@ class TreeView : Widget, Scrollable
    * selection, having a custom context menu or starting rubber banding.
    * The x and y coordinate that are provided must be relative to bin_window
    * coordinates.  Widget-relative coordinates must be converted using
-   * [Gtk.TreeView.convertWidgetToBinWindowCoords].
+   * [gtk.tree_view.TreeView.convertWidgetToBinWindowCoords].
    * For converting widget coordinates $(LPAREN)eg. the ones you get from
    * GtkWidget::query-tooltip$(RPAREN), please see
-   * [Gtk.TreeView.convertWidgetToBinWindowCoords].
+   * [gtk.tree_view.TreeView.convertWidgetToBinWindowCoords].
    * The path, column, cell_x and cell_y arguments will be filled in
-   * likewise as for [Gtk.TreeView.getPathAtPos].  Please see
-   * [Gtk.TreeView.getPathAtPos] for more information.
+   * likewise as for [gtk.tree_view.TreeView.getPathAtPos].  Please see
+   * [gtk.tree_view.TreeView.getPathAtPos] for more information.
    * Params:
    *   x = The x position to be identified $(LPAREN)relative to bin_window$(RPAREN)
    *   y = The y position to be identified $(LPAREN)relative to bin_window$(RPAREN)
@@ -1014,7 +1014,7 @@ class TreeView : Widget, Scrollable
    * Returns: %TRUE if the area at the given coordinates is blank,
    *   %FALSE otherwise.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool isBlankAtPos(int x, int y, out TreePath path, out TreeViewColumn column, out int cellX, out int cellY)
   {
@@ -1033,7 +1033,7 @@ class TreeView : Widget, Scrollable
    * Returns: %TRUE if a rubber banding operation is currently being
    *   done in tree_view.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool isRubberBandingActive()
   {
@@ -1047,7 +1047,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   func = A function to be called
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void mapExpandedRows(TreeViewMappingFunc func)
   {
@@ -1070,7 +1070,7 @@ class TreeView : Widget, Scrollable
    *   column = The `GtkTreeViewColumn` to be moved.
    *   baseColumn = The `GtkTreeViewColumn` to be moved relative to
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void moveColumnAfter(TreeViewColumn column, TreeViewColumn baseColumn)
   {
@@ -1083,7 +1083,7 @@ class TreeView : Widget, Scrollable
    *   column = The `GtkTreeViewColumn` to remove.
    * Returns: The number of columns in tree_view after removing.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   int removeColumn(TreeViewColumn column)
   {
@@ -1098,7 +1098,7 @@ class TreeView : Widget, Scrollable
    *   path = The `GtkTreePath` to be activated.
    *   column = The `GtkTreeViewColumn` to be activated.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void rowActivated(TreePath path, TreeViewColumn column)
   {
@@ -1111,7 +1111,7 @@ class TreeView : Widget, Scrollable
    *   path = A `GtkTreePath` to test expansion state.
    * Returns: %TRUE if #path is expanded.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   bool rowExpanded(TreePath path)
   {
@@ -1142,7 +1142,7 @@ class TreeView : Widget, Scrollable
    *   rowAlign = The vertical alignment of the row specified by path.
    *   colAlign = The horizontal alignment of the column specified by column.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void scrollToCell(TreePath path, TreeViewColumn column, bool useAlign, float rowAlign, float colAlign)
   {
@@ -1154,13 +1154,13 @@ class TreeView : Widget, Scrollable
    * area is tree_x, tree_y, where tree_x and tree_y are specified
    * in tree coordinates.  The tree_view must be realized before
    * this function is called.  If it isn't, you probably want to be
-   * using [Gtk.TreeView.scrollToCell].
+   * using [gtk.tree_view.TreeView.scrollToCell].
    * If either tree_x or tree_y are -1, then that direction isn’t scrolled.
    * Params:
    *   treeX = X coordinate of new top-left pixel of visible area, or -1
    *   treeY = Y coordinate of new top-left pixel of visible area, or -1
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void scrollToPoint(int treeX, int treeY)
   {
@@ -1173,7 +1173,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   single = %TRUE to emit row-activated on a single click
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setActivateOnSingleClick(bool single)
   {
@@ -1193,7 +1193,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   func = A function to determine which columns are reorderable
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setColumnDragFunction(TreeViewColumnDropFunc func)
   {
@@ -1229,7 +1229,7 @@ class TreeView : Widget, Scrollable
    *   focusColumn = A `GtkTreeViewColumn`
    *   startEditing = %TRUE if the specified cell should start being edited.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setCursor(TreePath path, TreeViewColumn focusColumn, bool startEditing)
   {
@@ -1256,7 +1256,7 @@ class TreeView : Widget, Scrollable
    *   focusCell = A `GtkCellRenderer`
    *   startEditing = %TRUE if the specified cell should start being edited.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setCursorOnCell(TreePath path, TreeViewColumn focusColumn, CellRenderer focusCell, bool startEditing)
   {
@@ -1270,7 +1270,7 @@ class TreeView : Widget, Scrollable
    *   path = The path of the row to highlight
    *   pos = Specifies whether to drop before, after or into the row
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setDragDestRow(TreePath path, TreeViewDropPosition pos)
   {
@@ -1285,7 +1285,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   enableSearch = %TRUE, if the user can search interactively
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setEnableSearch(bool enableSearch)
   {
@@ -1298,7 +1298,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   enabled = %TRUE to enable tree line drawing, %FALSE otherwise.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setEnableTreeLines(bool enabled)
   {
@@ -1314,7 +1314,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   column = %NULL, or the column to draw the expander arrow at.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setExpanderColumn(TreeViewColumn column)
   {
@@ -1330,7 +1330,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   enable = %TRUE to enable fixed height mode
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setFixedHeightMode(bool enable)
   {
@@ -1343,7 +1343,7 @@ class TreeView : Widget, Scrollable
    *   gridLines = a `GtkTreeView`GridLines value indicating which grid lines to
    *     enable.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setGridLines(TreeViewGridLines gridLines)
   {
@@ -1355,7 +1355,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   setting = %TRUE if the columns are clickable.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setHeadersClickable(bool setting)
   {
@@ -1367,7 +1367,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   headersVisible = %TRUE if the headers are visible
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setHeadersVisible(bool headersVisible)
   {
@@ -1381,7 +1381,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   expand = %TRUE to enable hover selection mode
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setHoverExpand(bool expand)
   {
@@ -1396,7 +1396,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   hover = %TRUE to enable hover selection mode
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setHoverSelection(bool hover)
   {
@@ -1412,7 +1412,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   indentation = the amount, in pixels, of extra indentation in tree_view.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setLevelIndentation(int indentation)
   {
@@ -1426,7 +1426,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   model = The model.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setModel(TreeModel model)
   {
@@ -1450,7 +1450,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   reorderable = %TRUE, if the tree can be reordered.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setReorderable(bool reorderable)
   {
@@ -1464,7 +1464,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   func = a `GtkTreeView`RowSeparatorFunc
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setRowSeparatorFunc(TreeViewRowSeparatorFunc func)
   {
@@ -1489,7 +1489,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   enable = %TRUE to enable rubber banding
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setRubberBanding(bool enable)
   {
@@ -1507,7 +1507,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   column = the column of the model to search in, or -1 to disable searching
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setSearchColumn(int column)
   {
@@ -1523,7 +1523,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   entry = the entry the interactive search code of tree_view should use
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setSearchEntry(Editable entry)
   {
@@ -1537,7 +1537,7 @@ class TreeView : Widget, Scrollable
    * Params:
    *   searchEqualFunc = the compare function to use during the search
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setSearchEqualFunc(TreeViewSearchEqualFunc searchEqualFunc)
   {
@@ -1562,12 +1562,12 @@ class TreeView : Widget, Scrollable
    * and there will be no way to expand and collapse rows by default.  Also
    * note that hiding the expanders will disable the default indentation.  You
    * can set a custom indentation in this case using
-   * [Gtk.TreeView.setLevelIndentation].
+   * [gtk.tree_view.TreeView.setLevelIndentation].
    * This does not have any visible effects for lists.
    * Params:
    *   enabled = %TRUE to enable expander drawing, %FALSE otherwise.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setShowExpanders(bool enabled)
   {
@@ -1578,19 +1578,19 @@ class TreeView : Widget, Scrollable
    * Sets the tip area of tooltip to the area path, column and cell have
    * in common.  For example if path is %NULL and column is set, the tip
    * area will be set to the full area covered by column.  See also
-   * [Gtk.Tooltip.setTipArea].
+   * [gtk.tooltip.Tooltip.setTipArea].
    * Note that if path is not specified and cell is set and part of a column
    * containing the expander, the tooltip might not show and hide at the correct
    * position.  In such cases path must be set to the current node under the
    * mouse cursor for this function to operate correctly.
-   * See also [Gtk.TreeView.setTooltipColumn] for a simpler alternative.
+   * See also [gtk.tree_view.TreeView.setTooltipColumn] for a simpler alternative.
    * Params:
    *   tooltip = a `GtkTooltip`
    *   path = a `GtkTreePath`
    *   column = a `GtkTreeViewColumn`
    *   cell = a `GtkCellRenderer`
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setTooltipCell(Tooltip tooltip, TreePath path, TreeViewColumn column, CellRenderer cell)
   {
@@ -1604,12 +1604,12 @@ class TreeView : Widget, Scrollable
    * containing the tooltip texts, or -1 to disable this feature.
    * When enabled, `GtkWidget:has-tooltip` will be set to %TRUE and
    * tree_view will connect a `GtkWidget::query-tooltip` signal handler.
-   * Note that the signal handler sets the text with [Gtk.Tooltip.setMarkup],
+   * Note that the signal handler sets the text with [gtk.tooltip.Tooltip.setMarkup],
    * so &, <, etc have to be escaped in the text.
    * Params:
    *   column = an integer, which is a valid column number for tree_view’s model
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setTooltipColumn(int column)
   {
@@ -1618,13 +1618,13 @@ class TreeView : Widget, Scrollable
 
   /**
    * Sets the tip area of tooltip to be the area covered by the row at path.
-   * See also [Gtk.TreeView.setTooltipColumn] for a simpler alternative.
-   * See also [Gtk.Tooltip.setTipArea].
+   * See also [gtk.tree_view.TreeView.setTooltipColumn] for a simpler alternative.
+   * See also [gtk.tooltip.Tooltip.setTipArea].
    * Params:
    *   tooltip = a `GtkTooltip`
    *   path = a `GtkTreePath`
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void setTooltipRow(Tooltip tooltip, TreePath path)
   {
@@ -1633,10 +1633,10 @@ class TreeView : Widget, Scrollable
 
   /**
    * Undoes the effect of
-   * [Gtk.TreeView.enableModelDragDest]. Calling this method sets
+   * [gtk.tree_view.TreeView.enableModelDragDest]. Calling this method sets
    * `GtkTreeView`:reorderable to %FALSE.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void unsetRowsDragDest()
   {
@@ -1645,10 +1645,10 @@ class TreeView : Widget, Scrollable
 
   /**
    * Undoes the effect of
-   * [Gtk.TreeView.enableModelDragSource]. Calling this method sets
+   * [gtk.tree_view.TreeView.enableModelDragSource]. Calling this method sets
    * `GtkTreeView`:reorderable to %FALSE.
 
-   * Deprecated: Use [Gtk.ListView] or [Gtk.ColumnView] instead
+   * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
   void unsetRowsDragSource()
   {
@@ -1745,12 +1745,12 @@ class TreeView : Widget, Scrollable
 
   /**
    * The `GtkTreeView`::move-cursor signal is a [keybinding
-   * signal][Gtk.SignalAction] which gets emitted when the user
+   * signal][gtk.signal_action.SignalAction] which gets emitted when the user
    * presses one of the cursor keys.
    * Applications should not connect to it, but may emit it with
-   * [GObject.Global.signalEmitByName] if they need to control the cursor
-   * programmatically. In contrast to [Gtk.TreeView.setCursor] and
-   * [Gtk.TreeView.setCursorOnCell] when moving horizontally
+   * [gobject.global.signalEmitByName] if they need to control the cursor
+   * programmatically. In contrast to [gtk.tree_view.TreeView.setCursor] and
+   * [gtk.tree_view.TreeView.setCursorOnCell] when moving horizontally
    * `GtkTreeView`::move-cursor does not reset the current selection.
    * Params
    *   step = the granularity of the move, as a `GtkMovementStep`.
@@ -1799,7 +1799,7 @@ class TreeView : Widget, Scrollable
 
   /**
    * The "row-activated" signal is emitted when the method
-   * [Gtk.TreeView.rowActivated] is called.
+   * [gtk.tree_view.TreeView.rowActivated] is called.
    * This signal is emitted when the user double-clicks a treeview row with the
    * propertyGtk.TreeView:activate-on-single-click property set to %FALSE,
    * or when the user single-clicks a row when that property set to %TRUE.

@@ -1,6 +1,6 @@
 module gtk.inscription;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.accessible_text;
@@ -148,7 +148,7 @@ class Inscription : Widget, AccessibleText
 
   /**
    * Returns line wrap mode used by the inscription.
-   * See [Gtk.Inscription.setWrapMode].
+   * See [gtk.inscription.Inscription.setWrapMode].
    * Returns: the line wrap mode
    */
   WrapMode getWrapMode()
@@ -161,7 +161,7 @@ class Inscription : Widget, AccessibleText
 
   /**
    * Gets the `xalign` of the inscription.
-   * See the [Gtk.Inscription.xalign] property.
+   * See the [gtk.inscription.Inscription.gfloat] property.
    * Returns: the xalign property
    */
   float getXalign()
@@ -173,7 +173,7 @@ class Inscription : Widget, AccessibleText
 
   /**
    * Gets the `yalign` of the inscription.
-   * See the [Gtk.Inscription.yalign] property.
+   * See the [gtk.inscription.Inscription.gfloat] property.
    * Returns: the yalign property
    */
   float getYalign()
@@ -187,7 +187,7 @@ class Inscription : Widget, AccessibleText
    * Apply attributes to the inscription text.
    * These attributes will not be evaluated for sizing the inscription.
    * Params:
-   *   attrs = a [Pango.AttrList]
+   *   attrs = a [pango.attr_list.AttrList]
    */
   void setAttributes(AttrList attrs)
   {
@@ -196,7 +196,7 @@ class Inscription : Widget, AccessibleText
 
   /**
    * Utility function to set the text and attributes to be displayed.
-   * See the [Gtk.Inscription.markup] property.
+   * See the [gtk.inscription.Inscription.utf8] property.
    * Params:
    *   markup = The markup to display
    */
@@ -283,7 +283,7 @@ class Inscription : Widget, AccessibleText
 
   /**
    * Sets the `xalign` of the inscription.
-   * See the [Gtk.Inscription.xalign] property.
+   * See the [gtk.inscription.Inscription.gfloat] property.
    * Params:
    *   xalign = the new xalign value, between 0 and 1
    */
@@ -294,7 +294,7 @@ class Inscription : Widget, AccessibleText
 
   /**
    * Sets the `yalign` of the inscription.
-   * See the [Gtk.Inscription.yalign] property.
+   * See the [gtk.inscription.Inscription.gfloat] property.
    * Params:
    *   yalign = the new yalign value, between 0 and 1
    */

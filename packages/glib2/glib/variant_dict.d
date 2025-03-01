@@ -1,6 +1,6 @@
 module glib.variant_dict;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -19,15 +19,15 @@ import gobject.boxed;
  * dictionaries.
  * It is possible to use #GVariantDict allocated on the stack or on the
  * heap.  When using a stack-allocated #GVariantDict, you begin with a
- * call to [GLib.VariantDict.init_] and free the resources with a call to
- * [GLib.VariantDict.clear].
+ * call to [glib.variant_dict.VariantDict.init_] and free the resources with a call to
+ * [glib.variant_dict.VariantDict.clear].
  * Heap-allocated #GVariantDict follows normal refcounting rules: you
- * allocate it with [GLib.VariantDict.new_] and use [GLib.VariantDict.ref_]
- * and [GLib.VariantDict.unref].
- * [GLib.VariantDict.end] is used to convert the #GVariantDict back into a
+ * allocate it with [glib.variant_dict.VariantDict.new_] and use [glib.variant_dict.VariantDict.ref_]
+ * and [glib.variant_dict.VariantDict.unref].
+ * [glib.variant_dict.VariantDict.end] is used to convert the #GVariantDict back into a
  * dictionary-type #GVariant.  When used with stack-allocated instances,
  * this also implicitly frees all associated memory, but for
- * heap-allocated instances, you must still call [GLib.VariantDict.unref]
+ * heap-allocated instances, you must still call [glib.variant_dict.VariantDict.unref]
  * afterwards.
  * You will typically want to use a heap-allocated #GVariantDict when
  * you expose it as part of an API.  For most other uses, the
@@ -107,12 +107,12 @@ class VariantDict : Boxed
 
   /**
    * Allocates and initialises a new #GVariantDict.
-   * You should call [GLib.VariantDict.unref] on the return value when it
+   * You should call [glib.variant_dict.VariantDict.unref] on the return value when it
    * is no longer needed.  The memory will not be automatically freed by
    * any other call.
    * In some cases it may be easier to place a #GVariantDict directly on
    * the stack of the calling function and initialise it with
-   * [GLib.VariantDict.init_].  This is particularly useful when you are
+   * [glib.variant_dict.VariantDict.init_].  This is particularly useful when you are
    * using #GVariantDict to construct a #GVariant.
    * Params:
    *   fromAsv = the #GVariant with which to initialise the
@@ -132,12 +132,12 @@ class VariantDict : Boxed
    * It typically only makes sense to do this on a stack-allocated
    * #GVariantDict if you want to abort building the value part-way
    * through.  This function need not be called if you call
-   * [GLib.VariantDict.end] and it also doesn't need to be called on dicts
-   * allocated with g_variant_dict_new $(LPAREN)see [GLib.VariantDict.unref] for
+   * [glib.variant_dict.VariantDict.end] and it also doesn't need to be called on dicts
+   * allocated with g_variant_dict_new $(LPAREN)see [glib.variant_dict.VariantDict.unref] for
    * that$(RPAREN).
    * It is valid to call this function on either an initialised
    * #GVariantDict or one that was previously cleared by an earlier call
-   * to [GLib.VariantDict.clear] but it is not valid to call this function
+   * to [glib.variant_dict.VariantDict.clear] but it is not valid to call this function
    * on uninitialised memory.
    */
   void clear()
@@ -164,7 +164,7 @@ class VariantDict : Boxed
    * %G_VARIANT_TYPE_VARDICT, clearing it in the process.
    * It is not permissible to use dict in any way after this call except
    * for reference counting operations $(LPAREN)in the case of a heap-allocated
-   * #GVariantDict$(RPAREN) or by reinitialising it with [GLib.VariantDict.init_] $(LPAREN)in
+   * #GVariantDict$(RPAREN) or by reinitialising it with [glib.variant_dict.VariantDict.init_] $(LPAREN)in
    * the case of stack-allocated$(RPAREN).
    * Returns: a new, floating, #GVariant
    */

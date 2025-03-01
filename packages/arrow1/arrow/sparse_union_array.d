@@ -7,7 +7,7 @@ import arrow.int8_array;
 import arrow.sparse_union_data_type;
 import arrow.types;
 import arrow.union_array;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 

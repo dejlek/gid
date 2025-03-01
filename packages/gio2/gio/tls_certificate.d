@@ -1,6 +1,6 @@
 module gio.tls_certificate;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.inet_address;
@@ -17,7 +17,7 @@ import gobject.object;
  * This can represent either a certificate only $(LPAREN)eg, the certificate
  * received by a client from a server$(RPAREN), or the combination of
  * a certificate and a private key $(LPAREN)which is needed when acting as a
- * [Gio.TlsServerConnection]$(RPAREN).
+ * [gio.tls_server_connection.TlsServerConnection]$(RPAREN).
  */
 class TlsCertificate : ObjectG
 {
@@ -41,8 +41,8 @@ class TlsCertificate : ObjectG
   /**
    * Creates a #GTlsCertificate from the data in file.
    * As of 2.72, if the filename ends in `.p12` or `.pfx` the data is loaded by
-   * [Gio.TlsCertificate.newFromPkcs12] otherwise it is loaded by
-   * [Gio.TlsCertificate.newFromPem]. See those functions for
+   * [gio.tls_certificate.TlsCertificate.newFromPkcs12] otherwise it is loaded by
+   * [gio.tls_certificate.TlsCertificate.newFromPem]. See those functions for
    * exact details.
    * If file cannot be read or parsed, the function will return %NULL and
    * set error.
@@ -68,7 +68,7 @@ class TlsCertificate : ObjectG
    * set error.
    * Any unknown file types will error with %G_IO_ERROR_NOT_SUPPORTED.
    * Currently only `.p12` and `.pfx` files are supported.
-   * See [Gio.TlsCertificate.newFromPkcs12] for more details.
+   * See [gio.tls_certificate.TlsCertificate.newFromPkcs12] for more details.
    * Params:
    *   file = file containing a certificate to import
    *   password = password for PKCS #12 files
@@ -100,7 +100,7 @@ class TlsCertificate : ObjectG
    * still be returned.
    * If either file cannot be read or parsed, the function will return
    * %NULL and set error. Otherwise, this behaves like
-   * [Gio.TlsCertificate.newFromPem].
+   * [gio.tls_certificate.TlsCertificate.newFromPem].
    * Params:
    *   certFile = file containing one or more PEM-encoded
    *     certificates to import

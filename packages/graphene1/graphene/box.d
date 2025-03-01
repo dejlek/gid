@@ -1,6 +1,6 @@
 module graphene.box;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -46,7 +46,7 @@ class Box : Boxed
    * Allocates a new #graphene_box_t.
    * The contents of the returned structure are undefined.
    * Returns: the newly allocated #graphene_box_t structure.
-   *   Use [Graphene.Box.free] to free the resources allocated by this function
+   *   Use [graphene.box.Box.free] to free the resources allocated by this function
    */
   static Box alloc()
   {
@@ -286,7 +286,7 @@ class Box : Boxed
    * Initializes the given #graphene_box_t with the given array
    * of vertices.
    * If n_points is 0, the returned box is initialized with
-   * [Graphene.Box.empty].
+   * [graphene.box.Box.empty].
    * Params:
    *   points = an array of #graphene_point3d_t
    * Returns: the initialized #graphene_box_t
@@ -327,7 +327,7 @@ class Box : Boxed
    * Initializes the given #graphene_box_t with the given array
    * of vertices.
    * If n_vectors is 0, the returned box is initialized with
-   * [Graphene.Box.empty].
+   * [graphene.box.Box.empty].
    * Params:
    *   vectors = an array of #graphene_vec3_t
    * Returns: the initialized #graphene_box_t
@@ -351,7 +351,7 @@ class Box : Boxed
   /**
    * Intersects the two given #graphene_box_t.
    * If the two boxes do not intersect, res will contain a degenerate box
-   * initialized with [Graphene.Box.empty].
+   * initialized with [graphene.box.Box.empty].
    * Params:
    *   b = a #graphene_box_t
    *   res = return location for the result

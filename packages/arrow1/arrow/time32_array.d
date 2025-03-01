@@ -6,7 +6,7 @@ import arrow.c.types;
 import arrow.numeric_array;
 import arrow.time32_data_type;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class Time32Array : NumericArray
 {

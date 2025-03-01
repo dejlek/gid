@@ -1,6 +1,6 @@
 module glib.time_zone;
 
-import gid.gid;
+import gid.global;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -10,15 +10,15 @@ import gobject.boxed;
  * A `GTimeZone` represents a time zone, at no particular point in time.
  * The `GTimeZone` struct is refcounted and immutable.
  * Each time zone has an identifier $(LPAREN)for example, ‘Europe/London’$(RPAREN) which is
- * platform dependent. See [GLib.TimeZone.new_] for information on the
+ * platform dependent. See [glib.time_zone.TimeZone.new_] for information on the
  * identifier formats. The identifier of a time zone can be retrieved using
- * [GLib.TimeZone.getIdentifier].
+ * [glib.time_zone.TimeZone.getIdentifier].
  * A time zone contains a number of intervals. Each interval has an abbreviation
  * to describe it $(LPAREN)for example, ‘PDT’$(RPAREN), an offset to UTC and a flag indicating
  * if the daylight savings time is in effect during that interval. A time zone
  * always has at least one interval — interval 0. Note that interval abbreviations
  * are not the same as time zone identifiers $(LPAREN)apart from ‘UTC’$(RPAREN), and cannot be
- * passed to [GLib.TimeZone.new_].
+ * passed to [glib.time_zone.TimeZone.new_].
  * Every UTC time is contained within exactly one interval, but a given
  * local time may be contained within zero, one or two intervals $(LPAREN)due to
  * incontinuities associated with daylight savings time$(RPAREN).
@@ -54,15 +54,15 @@ class TimeZone : Boxed
   }
 
   /**
-   * A version of [GLib.TimeZone.newIdentifier] which returns the UTC time zone
+   * A version of [glib.time_zone.TimeZone.newIdentifier] which returns the UTC time zone
    * if identifier could not be parsed or loaded.
    * If you need to check whether identifier was loaded successfully, use
-   * [GLib.TimeZone.newIdentifier].
+   * [glib.time_zone.TimeZone.newIdentifier].
    * Params:
    *   identifier = a timezone identifier
    * Returns: the requested timezone
 
-   * Deprecated: Use [GLib.TimeZone.newIdentifier] instead, as it provides
+   * Deprecated: Use [glib.time_zone.TimeZone.newIdentifier] instead, as it provides
    *   error reporting. Change your code to handle a potentially %NULL return
    *   value.
    */
@@ -108,7 +108,7 @@ class TimeZone : Boxed
    * with date and time of change taken from Pacific Standard Time.
    * Offsets are time values to be added to the local time to get
    * Coordinated Universal Time $(LPAREN)UTC$(RPAREN).
-   * [GLib.TimeZone.newLocal] calls this function with the value of the
+   * [glib.time_zone.TimeZone.newLocal] calls this function with the value of the
    * `TZ` environment variable. This function itself is independent of
    * the value of `TZ`, but if identifier is %NULL then `/etc/localtime`
    * will be consulted to discover the correct time zone on UNIX and the
@@ -129,7 +129,7 @@ class TimeZone : Boxed
    * values of the `TZ` environment variable. See
    * [Microsoft Time Zone Index Values](http://msdn.microsoft.com/en-us/library/ms912391%28v\=winembedded.11%29.aspx)
    * for the list of time zones on Windows.
-   * You should release the return value by calling [GLib.TimeZone.unref]
+   * You should release the return value by calling [glib.time_zone.TimeZone.unref]
    * when you are done with it.
    * Params:
    *   identifier = a timezone identifier
@@ -149,9 +149,9 @@ class TimeZone : Boxed
    * Creates a #GTimeZone corresponding to local time.  The local time
    * zone may change between invocations to this function; for example,
    * if the system administrator changes it.
-   * This is equivalent to calling [GLib.TimeZone.new_] with the value of
+   * This is equivalent to calling [glib.time_zone.TimeZone.new_] with the value of
    * the `TZ` environment variable $(LPAREN)including the possibility of %NULL$(RPAREN).
-   * You should release the return value by calling [GLib.TimeZone.unref]
+   * You should release the return value by calling [glib.time_zone.TimeZone.unref]
    * when you are done with it.
    * Returns: the local timezone
    */
@@ -166,12 +166,12 @@ class TimeZone : Boxed
   /**
    * Creates a #GTimeZone corresponding to the given constant offset from UTC,
    * in seconds.
-   * This is equivalent to calling [GLib.TimeZone.new_] with a string in the form
+   * This is equivalent to calling [glib.time_zone.TimeZone.new_] with a string in the form
    * `[+|-]hh[:mm[:ss]]`.
    * It is possible for this function to fail if seconds is too big $(LPAREN)greater than
    * 24 hours$(RPAREN), in which case this function will return the UTC timezone for
    * backwards compatibility. To detect failures like this, use
-   * [GLib.TimeZone.newIdentifier] directly.
+   * [glib.time_zone.TimeZone.newIdentifier] directly.
    * Params:
    *   seconds = offset to UTC, in seconds
    * Returns: a timezone at the given offset from UTC, or UTC on
@@ -187,9 +187,9 @@ class TimeZone : Boxed
 
   /**
    * Creates a #GTimeZone corresponding to UTC.
-   * This is equivalent to calling [GLib.TimeZone.new_] with a value like
+   * This is equivalent to calling [glib.time_zone.TimeZone.new_] with a value like
    * "Z", "UTC", "+00", etc.
-   * You should release the return value by calling [GLib.TimeZone.unref]
+   * You should release the return value by calling [glib.time_zone.TimeZone.unref]
    * when you are done with it.
    * Returns: the universal timezone
    */
@@ -205,10 +205,10 @@ class TimeZone : Boxed
    * Finds an interval within tz that corresponds to the given time_,
    * possibly adjusting time_ if required to fit into an interval.
    * The meaning of time_ depends on type.
-   * This function is similar to [GLib.TimeZone.findInterval], with the
+   * This function is similar to [glib.time_zone.TimeZone.findInterval], with the
    * difference that it always succeeds $(LPAREN)by making the adjustments
    * described below$(RPAREN).
-   * In any of the cases where [GLib.TimeZone.findInterval] succeeds then
+   * In any of the cases where [glib.time_zone.TimeZone.findInterval] succeeds then
    * this function returns the same value, without modifying time_.
    * This function may, however, modify time_ in order to deal with
    * non-existent times.  If the non-existent local time_ of 02:30 were
@@ -274,7 +274,7 @@ class TimeZone : Boxed
   }
 
   /**
-   * Get the identifier of this #GTimeZone, as passed to [GLib.TimeZone.new_].
+   * Get the identifier of this #GTimeZone, as passed to [glib.time_zone.TimeZone.new_].
    * If the identifier passed at construction time was not recognised, `UTC` will
    * be returned. If it was %NULL, the identifier of the local timezone at
    * construction time will be returned.

@@ -3,7 +3,7 @@ module gtk.symbolic_paintable;
 public import gtk.symbolic_paintable_iface_proxy;
 import gdk.rgba;
 import gdk.snapshot;
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;

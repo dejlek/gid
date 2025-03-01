@@ -1,6 +1,6 @@
 module gtk.multi_filter;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gtk.buildable;

@@ -1,6 +1,6 @@
 module gio.data_input_stream;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.buffered_input_stream;
@@ -15,7 +15,7 @@ import glib.error;
 import gobject.object;
 
 /**
- * Data input stream implements [Gio.InputStream] and includes functions
+ * Data input stream implements [gio.input_stream.InputStream] and includes functions
  * for reading structured data directly from a binary input stream.
  */
 class DataInputStream : BufferedInputStream
@@ -94,7 +94,7 @@ class DataInputStream : BufferedInputStream
   /**
    * Reads a 16-bit/2-byte value from stream.
    * In order to get the correct byte order for this read operation,
-   * see [Gio.DataInputStream.getByteOrder] and [Gio.DataInputStream.setByteOrder].
+   * see [gio.data_input_stream.DataInputStream.getByteOrder] and [gio.data_input_stream.DataInputStream.setByteOrder].
    * Params:
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: a signed 16-bit/2-byte value read from stream or `0` if
@@ -113,7 +113,7 @@ class DataInputStream : BufferedInputStream
   /**
    * Reads a signed 32-bit/4-byte value from stream.
    * In order to get the correct byte order for this read operation,
-   * see [Gio.DataInputStream.getByteOrder] and [Gio.DataInputStream.setByteOrder].
+   * see [gio.data_input_stream.DataInputStream.getByteOrder] and [gio.data_input_stream.DataInputStream.setByteOrder].
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
@@ -135,7 +135,7 @@ class DataInputStream : BufferedInputStream
   /**
    * Reads a 64-bit/8-byte value from stream.
    * In order to get the correct byte order for this read operation,
-   * see [Gio.DataInputStream.getByteOrder] and [Gio.DataInputStream.setByteOrder].
+   * see [gio.data_input_stream.DataInputStream.getByteOrder] and [gio.data_input_stream.DataInputStream.setByteOrder].
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
@@ -155,10 +155,10 @@ class DataInputStream : BufferedInputStream
   }
 
   /**
-   * The asynchronous version of [Gio.DataInputStream.readLine].  It is
+   * The asynchronous version of [gio.data_input_stream.DataInputStream.readLine].  It is
    * an error to have two outstanding calls to this function.
    * When the operation is finished, callback will be called. You
-   * can then call [Gio.DataInputStream.readLineFinish] to get
+   * can then call [gio.data_input_stream.DataInputStream.readLineFinish] to get
    * the result of the operation.
    * Params:
    *   ioPriority = the [I/O priority][io-priority] of the request
@@ -182,7 +182,7 @@ class DataInputStream : BufferedInputStream
 
   /**
    * Finish an asynchronous call started by
-   * [Gio.DataInputStream.readLineAsync].
+   * [gio.data_input_stream.DataInputStream.readLineAsync].
    * Params:
    *   result = the #GAsyncResult that was provided to the callback.
    *   length = a #gsize to get the length of the data read in.
@@ -234,7 +234,7 @@ class DataInputStream : BufferedInputStream
   /**
    * Reads an unsigned 16-bit/2-byte value from stream.
    * In order to get the correct byte order for this read operation,
-   * see [Gio.DataInputStream.getByteOrder] and [Gio.DataInputStream.setByteOrder].
+   * see [gio.data_input_stream.DataInputStream.getByteOrder] and [gio.data_input_stream.DataInputStream.setByteOrder].
    * Params:
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: an unsigned 16-bit/2-byte value read from the stream or `0` if
@@ -253,7 +253,7 @@ class DataInputStream : BufferedInputStream
   /**
    * Reads an unsigned 32-bit/4-byte value from stream.
    * In order to get the correct byte order for this read operation,
-   * see [Gio.DataInputStream.getByteOrder] and [Gio.DataInputStream.setByteOrder].
+   * see [gio.data_input_stream.DataInputStream.getByteOrder] and [gio.data_input_stream.DataInputStream.setByteOrder].
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
@@ -275,7 +275,7 @@ class DataInputStream : BufferedInputStream
   /**
    * Reads an unsigned 64-bit/8-byte value from stream.
    * In order to get the correct byte order for this read operation,
-   * see [Gio.DataInputStream.getByteOrder].
+   * see [gio.data_input_stream.DataInputStream.getByteOrder].
    * If cancellable is not %NULL, then the operation can be cancelled by
    * triggering the cancellable object from another thread. If the operation
    * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
@@ -297,12 +297,12 @@ class DataInputStream : BufferedInputStream
   /**
    * Reads a string from the data input stream, up to the first
    * occurrence of any of the stop characters.
-   * Note that, in contrast to [Gio.DataInputStream.readUntilAsync],
+   * Note that, in contrast to [gio.data_input_stream.DataInputStream.readUntilAsync],
    * this function consumes the stop character that it finds.
    * Don't use this function in new code.  Its functionality is
-   * inconsistent with [Gio.DataInputStream.readUntilAsync].  Both
+   * inconsistent with [gio.data_input_stream.DataInputStream.readUntilAsync].  Both
    * functions will be marked as deprecated in a future release.  Use
-   * [Gio.DataInputStream.readUpto] instead, but note that that function
+   * [gio.data_input_stream.DataInputStream.readUpto] instead, but note that that function
    * does not consume the stop character.
    * Params:
    *   stopChars = characters to terminate the read.
@@ -313,7 +313,7 @@ class DataInputStream : BufferedInputStream
    *   a #gsize to get the length of the string. This function will
    *   return %NULL on an error.
 
-   * Deprecated: Use [Gio.DataInputStream.readUpto] instead, which has more
+   * Deprecated: Use [gio.data_input_stream.DataInputStream.readUpto] instead, which has more
    *   consistent behaviour regarding the stop character.
    */
   string readUntil(string stopChars, out size_t length, Cancellable cancellable)
@@ -329,25 +329,25 @@ class DataInputStream : BufferedInputStream
   }
 
   /**
-   * The asynchronous version of [Gio.DataInputStream.readUntil].
+   * The asynchronous version of [gio.data_input_stream.DataInputStream.readUntil].
    * It is an error to have two outstanding calls to this function.
-   * Note that, in contrast to [Gio.DataInputStream.readUntil],
+   * Note that, in contrast to [gio.data_input_stream.DataInputStream.readUntil],
    * this function does not consume the stop character that it finds.  You
    * must read it for yourself.
    * When the operation is finished, callback will be called. You
-   * can then call [Gio.DataInputStream.readUntilFinish] to get
+   * can then call [gio.data_input_stream.DataInputStream.readUntilFinish] to get
    * the result of the operation.
    * Don't use this function in new code.  Its functionality is
-   * inconsistent with [Gio.DataInputStream.readUntil].  Both functions
+   * inconsistent with [gio.data_input_stream.DataInputStream.readUntil].  Both functions
    * will be marked as deprecated in a future release.  Use
-   * [Gio.DataInputStream.readUptoAsync] instead.
+   * [gio.data_input_stream.DataInputStream.readUptoAsync] instead.
    * Params:
    *   stopChars = characters to terminate the read.
    *   ioPriority = the [I/O priority][io-priority] of the request
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = callback to call when the request is satisfied.
 
-   * Deprecated: Use [Gio.DataInputStream.readUptoAsync] instead, which
+   * Deprecated: Use [gio.data_input_stream.DataInputStream.readUptoAsync] instead, which
    *   has more consistent behaviour regarding the stop character.
    */
   void readUntilAsync(string stopChars, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
@@ -368,7 +368,7 @@ class DataInputStream : BufferedInputStream
 
   /**
    * Finish an asynchronous call started by
-   * [Gio.DataInputStream.readUntilAsync].
+   * [gio.data_input_stream.DataInputStream.readUntilAsync].
    * Params:
    *   result = the #GAsyncResult that was provided to the callback.
    *   length = a #gsize to get the length of the data read in.
@@ -377,7 +377,7 @@ class DataInputStream : BufferedInputStream
    *   a #gsize to get the length of the string. This function will
    *   return %NULL on an error.
 
-   * Deprecated: Use [Gio.DataInputStream.readUptoFinish] instead, which
+   * Deprecated: Use [gio.data_input_stream.DataInputStream.readUptoFinish] instead, which
    *   has more consistent behaviour regarding the stop character.
    */
   string readUntilFinish(AsyncResult result, out size_t length)
@@ -394,10 +394,10 @@ class DataInputStream : BufferedInputStream
   /**
    * Reads a string from the data input stream, up to the first
    * occurrence of any of the stop characters.
-   * In contrast to [Gio.DataInputStream.readUntil], this function
+   * In contrast to [gio.data_input_stream.DataInputStream.readUntil], this function
    * does not consume the stop character. You have to use
-   * [Gio.DataInputStream.readByteData] to get it before calling
-   * [Gio.DataInputStream.readUpto] again.
+   * [gio.data_input_stream.DataInputStream.readByteData] to get it before calling
+   * [gio.data_input_stream.DataInputStream.readUpto] again.
    * Note that stop_chars may contain '\0' if stop_chars_len is
    * specified.
    * The returned string will always be nul-terminated on success.
@@ -425,16 +425,16 @@ class DataInputStream : BufferedInputStream
   }
 
   /**
-   * The asynchronous version of [Gio.DataInputStream.readUpto].
+   * The asynchronous version of [gio.data_input_stream.DataInputStream.readUpto].
    * It is an error to have two outstanding calls to this function.
-   * In contrast to [Gio.DataInputStream.readUntil], this function
+   * In contrast to [gio.data_input_stream.DataInputStream.readUntil], this function
    * does not consume the stop character. You have to use
-   * [Gio.DataInputStream.readByteData] to get it before calling
-   * [Gio.DataInputStream.readUpto] again.
+   * [gio.data_input_stream.DataInputStream.readByteData] to get it before calling
+   * [gio.data_input_stream.DataInputStream.readUpto] again.
    * Note that stop_chars may contain '\0' if stop_chars_len is
    * specified.
    * When the operation is finished, callback will be called. You
-   * can then call [Gio.DataInputStream.readUptoFinish] to get
+   * can then call [gio.data_input_stream.DataInputStream.readUptoFinish] to get
    * the result of the operation.
    * Params:
    *   stopChars = characters to terminate the read
@@ -462,10 +462,10 @@ class DataInputStream : BufferedInputStream
 
   /**
    * Finish an asynchronous call started by
-   * [Gio.DataInputStream.readUptoAsync].
+   * [gio.data_input_stream.DataInputStream.readUptoAsync].
    * Note that this function does not consume the stop character. You
-   * have to use [Gio.DataInputStream.readByteData] to get it before calling
-   * [Gio.DataInputStream.readUptoAsync] again.
+   * have to use [gio.data_input_stream.DataInputStream.readByteData] to get it before calling
+   * [gio.data_input_stream.DataInputStream.readUptoAsync] again.
    * The returned string will always be nul-terminated on success.
    * Params:
    *   result = the #GAsyncResult that was provided to the callback

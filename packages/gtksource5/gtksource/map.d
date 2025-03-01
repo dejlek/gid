@@ -1,6 +1,6 @@
 module gtksource.map;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -22,7 +22,7 @@ import gtksource.view;
  * `GtkSourceMap` is a widget that maps the content of a class@View into
  * a smaller view so the user can have a quick overview of the whole document.
  * This works by connecting a class@View to to the `GtkSourceMap` using
- * the property@Map:view property or [GtkSource.Map.setView].
+ * the property@Map:view property or [gtksource.map.Map.setView].
  * `GtkSourceMap` is a class@View object. This means that you can add a
  * class@GutterRenderer to a gutter in the same way you would for a
  * class@View. One example might be a class@GutterRenderer that shows
@@ -32,8 +32,8 @@ import gtksource.view;
  * should be used to set the target font. You will need to adjust this to the
  * desired font size for the map. A 1pt font generally seems to be an
  * appropriate font size. "Monospace 1" is the default. See
- * [Pango.FontDescription.setSize] for how to alter the size of an existing
- * [Pango.FontDescription].
+ * [pango.font_description.FontDescription.setSize] for how to alter the size of an existing
+ * [pango.font_description.FontDescription].
  * When FontConfig is available, `GtkSourceMap` will try to use a bundled
  * "block" font to make the map more legible.
  */

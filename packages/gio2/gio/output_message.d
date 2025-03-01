@@ -1,6 +1,6 @@
 module gio.output_message;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_address;
@@ -13,7 +13,7 @@ import gobject.object;
  * #GOutputVectors and the operation will use all the buffers as if they
  * were one buffer.
  * If @address is %NULL then the message is sent to the default receiver
- * $(LPAREN)as previously set by [Gio.Socket.connect]$(RPAREN).
+ * $(LPAREN)as previously set by [gio.socket.Socket.connect]$(RPAREN).
  */
 class OutputMessage
 {

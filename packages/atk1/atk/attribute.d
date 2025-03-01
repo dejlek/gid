@@ -3,18 +3,18 @@ module atk.attribute;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.gid;
+import gid.global;
 
 /**
  * AtkAttribute is a string name/value pair representing a generic
  * attribute. This can be used to expose additional information from
- * an accessible object as a whole $(LPAREN)see [Atk.ObjectAtk.getAttributes]$(RPAREN)
- * or an document $(LPAREN)see [Atk.Document.getAttributes]$(RPAREN). In the case of
- * text attributes $(LPAREN)see [Atk.Text.getDefaultAttributes]$(RPAREN),
+ * an accessible object as a whole $(LPAREN)see [atk.object.ObjectAtk.getAttributes]$(RPAREN)
+ * or an document $(LPAREN)see [atk.document.Document.getAttributes]$(RPAREN). In the case of
+ * text attributes $(LPAREN)see [atk.text.Text.getDefaultAttributes]$(RPAREN),
  * #AtkTextAttribute enum defines all the possible text attribute
- * names. You can use [Atk.Global.textAttributeGetName] to get the string
- * name from the enum value. See also [Atk.Global.textAttributeForName]
- * and [Atk.Global.textAttributeGetValue] for more information.
+ * names. You can use [atk.global.textAttributeGetName] to get the string
+ * name from the enum value. See also [atk.global.textAttributeForName]
+ * and [atk.global.textAttributeGetValue] for more information.
  * A string name/value pair representing a generic attribute.
  */
 class Attribute

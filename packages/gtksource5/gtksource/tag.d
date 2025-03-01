@@ -1,6 +1,6 @@
 module gtksource.tag;
 
-import gid.gid;
+import gid.global;
 import gtk.text_tag;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -8,10 +8,10 @@ import gtksource.types;
 
 /**
  * A tag that can be applied to text in a class@Buffer.
- * `GtkSourceTag` is a subclass of [Gtk.TextTag] that adds properties useful for
+ * `GtkSourceTag` is a subclass of [gtk.text_tag.TextTag] that adds properties useful for
  * the GtkSourceView library.
- * If, for a certain tag, [Gtk.TextTag] is sufficient, it's better that you create
- * a [Gtk.TextTag], not a class@Tag.
+ * If, for a certain tag, [gtk.text_tag.TextTag] is sufficient, it's better that you create
+ * a [gtk.text_tag.TextTag], not a class@Tag.
  */
 class Tag : TextTag
 {
@@ -34,8 +34,8 @@ class Tag : TextTag
 
   /**
    * Creates a `GtkSourceTag`.
-   * Configure the tag using object arguments, i.e. using [GObject.ObjectG.set].
-   * For usual cases, [GtkSource.Buffer.createSourceTag] is more convenient to
+   * Configure the tag using object arguments, i.e. using [gobject.object.ObjectG.set].
+   * For usual cases, [gtksource.buffer.Buffer.createSourceTag] is more convenient to
    * use.
    * Params:
    *   name = tag name, or %NULL.

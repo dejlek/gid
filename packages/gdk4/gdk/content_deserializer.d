@@ -3,7 +3,7 @@ module gdk.content_deserializer;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -22,7 +22,7 @@ import gobject.value;
  * GTK provides serializers and deserializers for common data types
  * such as text, colors, images or file lists. To register your own
  * deserialization functions, use func@content_register_deserializer.
- * Also see [Gdk.ContentSerializer].
+ * Also see [gdk.content_serializer.ContentSerializer].
  */
 class ContentDeserializer : ObjectG, AsyncResult
 {
@@ -108,7 +108,7 @@ class ContentDeserializer : ObjectG, AsyncResult
 
   /**
    * Gets the data that was associated with the current operation.
-   * See [Gdk.ContentDeserializer.setTaskData].
+   * See [gdk.content_deserializer.ContentDeserializer.setTaskData].
    * Returns: the task data for deserializer
    */
   void* getTaskData()

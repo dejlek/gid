@@ -1,6 +1,6 @@
 module gio.credentials;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -13,11 +13,11 @@ import gobject.object;
  * The information in `GCredentials` is typically used for identifying,
  * authenticating and authorizing other processes.
  * Some operating systems supports looking up the credentials of the remote
- * peer of a communication endpoint - see e.g. [Gio.Socket.getCredentials].
+ * peer of a communication endpoint - see e.g. [gio.socket.Socket.getCredentials].
  * Some operating systems supports securely sending and receiving
- * credentials over a Unix Domain Socket, see [Gio.UnixCredentialsMessage],
- * [Gio.UnixConnection.sendCredentials] and
- * [Gio.UnixConnection.receiveCredentials] for details.
+ * credentials over a Unix Domain Socket, see [gio.unix_credentials_message.UnixCredentialsMessage],
+ * [gio.unix_connection.UnixConnection.sendCredentials] and
+ * [gio.unix_connection.UnixConnection.receiveCredentials] for details.
  * On Linux, the native credential type is a `struct ucred` - see the
  * [`unix$(LPAREN)7$(RPAREN)` man page]$(LPAREN)$(RPAREN)(man:unix7) for details. This corresponds to
  * `G_CREDENTIALS_TYPE_LINUX_UCRED`.
@@ -56,7 +56,7 @@ class Credentials : ObjectG
   /**
    * Creates a new #GCredentials object with credentials matching the
    * the current process.
-   * Returns: A #GCredentials. Free with [GObject.ObjectG.unref].
+   * Returns: A #GCredentials. Free with [gobject.object.ObjectG.unref].
    */
   this()
   {
@@ -160,7 +160,7 @@ class Credentials : ObjectG
    * Creates a human-readable textual representation of credentials
    * that can be used in logging and debug messages. The format of the
    * returned string may change in future GLib release.
-   * Returns: A string that should be freed with [GLib.Global.gfree].
+   * Returns: A string that should be freed with [glib.global.gfree].
    */
   string toString_()
   {

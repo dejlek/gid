@@ -1,6 +1,6 @@
 module gtk.accessible_list;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gobject.object;
 import gtk.accessible;

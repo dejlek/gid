@@ -1,6 +1,6 @@
 module gio.menu_model;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.menu_attribute_iter;
@@ -56,13 +56,13 @@ import gobject.object;
  * dash boards, etc. To support such uses, it is necessary to ‘export’
  * information about actions and their representation in menus, which
  * is exactly what the action group exporter and the menu model exporter do for
- * [Gio.ActionGroup] and [Gio.MenuModel]. The client-side
+ * [gio.action_group.ActionGroup] and [gio.menu_model.MenuModel]. The client-side
  * counterparts to make use of the exported information are
- * [Gio.DBusActionGroup] and [Gio.DBusMenuModel].
+ * [gio.dbus_action_group.DBusActionGroup] and [gio.dbus_menu_model.DBusMenuModel].
  * The API of `GMenuModel` is very generic, with iterators for the
  * attributes and links of an item, see
- * [Gio.MenuModel.iterateItemAttributes] and
- * [Gio.MenuModel.iterateItemLinks]. The ‘standard’ attributes and
+ * [gio.menu_model.MenuModel.iterateItemAttributes] and
+ * [gio.menu_model.MenuModel.iterateItemLinks]. The ‘standard’ attributes and
  * link types have predefined names: `G_MENU_ATTRIBUTE_LABEL`,
  * `G_MENU_ATTRIBUTE_ACTION`, `G_MENU_ATTRIBUTE_TARGET`, `G_MENU_LINK_SECTION`
  * and `G_MENU_LINK_SUBMENU`.
@@ -218,7 +218,7 @@ class MenuModel : ObjectG
   /**
    * Creates a #GMenuAttributeIter to iterate over the attributes of
    * the item at position item_index in model.
-   * You must free the iterator with [GObject.ObjectG.unref] when you are done.
+   * You must free the iterator with [gobject.object.ObjectG.unref] when you are done.
    * Params:
    *   itemIndex = the index of the item
    * Returns: a new #GMenuAttributeIter
@@ -234,7 +234,7 @@ class MenuModel : ObjectG
   /**
    * Creates a #GMenuLinkIter to iterate over the links of the item at
    * position item_index in model.
-   * You must free the iterator with [GObject.ObjectG.unref] when you are done.
+   * You must free the iterator with [gobject.object.ObjectG.unref] when you are done.
    * Params:
    *   itemIndex = the index of the item
    * Returns: a new #GMenuLinkIter

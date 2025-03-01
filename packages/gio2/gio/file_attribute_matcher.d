@@ -1,6 +1,6 @@
 module gio.file_attribute_matcher;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -148,7 +148,7 @@ class FileAttributeMatcher : Boxed
 
   /**
    * Prints what the matcher is matching against. The format will be
-   * equal to the format passed to [Gio.FileAttributeMatcher.new_].
+   * equal to the format passed to [gio.file_attribute_matcher.FileAttributeMatcher.new_].
    * The output however, might not be identical, as the matcher may
    * decide to use a different order or omit needless parts.
    * Returns: a string describing the attributes the matcher matches

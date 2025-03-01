@@ -1,6 +1,6 @@
 module harfbuzz.ot_var_axis_info;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;

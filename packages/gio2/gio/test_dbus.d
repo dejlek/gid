@@ -1,6 +1,6 @@
 module gio.test_dbus;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -49,7 +49,7 @@ import gobject.object;
  * Note that these examples only deal with isolating the D-Bus aspect of your
  * service. To successfully run isolated unit tests on your service you may need
  * some additional modifications to your test case fixture. For example; if your
- * service uses [Gio.Settings] and installs a schema then it is important
+ * service uses [gio.settings.Settings] and installs a schema then it is important
  * that your test service not load the schema in the ordinary installed location
  * $(LPAREN)chances are that your service and schema files are not yet installed, or
  * worse; there is an older version of the schema file sitting in the install
@@ -109,7 +109,7 @@ class TestDBus : ObjectG
    * won't use user's session bus.
    * This is useful for unit tests that want to verify behaviour when no session
    * bus is running. It is not necessary to call this if unit test already calls
-   * [Gio.TestDBus.up] before acquiring the session bus.
+   * [gio.test_dbus.TestDBus.up] before acquiring the session bus.
    */
   static void unset()
   {
@@ -118,7 +118,7 @@ class TestDBus : ObjectG
 
   /**
    * Add a path where dbus-daemon will look up .service files. This can't be
-   * called after [Gio.TestDBus.up].
+   * called after [gio.test_dbus.TestDBus.up].
    * Params:
    *   path = path to a directory containing .service files
    */
@@ -129,8 +129,8 @@ class TestDBus : ObjectG
   }
 
   /**
-   * Stop the session bus started by [Gio.TestDBus.up].
-   * This will wait for the singleton returned by [Gio.Global.busGet] or [Gio.Global.busGetSync]
+   * Stop the session bus started by [gio.test_dbus.TestDBus.up].
+   * This will wait for the singleton returned by [gio.global.busGet] or [gio.global.busGetSync]
    * to be destroyed. This is done to ensure that the next unit test won't get a
    * leaked singleton from this test.
    */
@@ -140,9 +140,9 @@ class TestDBus : ObjectG
   }
 
   /**
-   * Get the address on which dbus-daemon is running. If [Gio.TestDBus.up] has not
+   * Get the address on which dbus-daemon is running. If [gio.test_dbus.TestDBus.up] has not
    * been called yet, %NULL is returned. This can be used with
-   * [Gio.DBusConnection.newForAddress].
+   * [gio.dbus_connection.DBusConnection.newForAddress].
    * Returns: the address of the bus, or %NULL.
    */
   string getBusAddress()
@@ -166,11 +166,11 @@ class TestDBus : ObjectG
   }
 
   /**
-   * Stop the session bus started by [Gio.TestDBus.up].
-   * Unlike [Gio.TestDBus.down], this won't verify the #GDBusConnection
-   * singleton returned by [Gio.Global.busGet] or [Gio.Global.busGetSync] is destroyed. Unit
+   * Stop the session bus started by [gio.test_dbus.TestDBus.up].
+   * Unlike [gio.test_dbus.TestDBus.down], this won't verify the #GDBusConnection
+   * singleton returned by [gio.global.busGet] or [gio.global.busGetSync] is destroyed. Unit
    * tests wanting to verify behaviour after the session bus has been stopped
-   * can use this function but should still call [Gio.TestDBus.down] when done.
+   * can use this function but should still call [gio.test_dbus.TestDBus.down] when done.
    */
   void stop()
   {
@@ -181,9 +181,9 @@ class TestDBus : ObjectG
    * Start a dbus-daemon instance and set DBUS_SESSION_BUS_ADDRESS. After this
    * call, it is safe for unit tests to start sending messages on the session bus.
    * If this function is called from setup callback of g_test_add$(LPAREN)$(RPAREN),
-   * [Gio.TestDBus.down] must be called in its teardown callback.
-   * If this function is called from unit test's main$(LPAREN)$(RPAREN), then [Gio.TestDBus.down]
-   * must be called after [GLib.DGLibGlobal.testRun].
+   * [gio.test_dbus.TestDBus.down] must be called in its teardown callback.
+   * If this function is called from unit test's main$(LPAREN)$(RPAREN), then [gio.test_dbus.TestDBus.down]
+   * must be called after [glib.global.testRun].
    */
   void up()
   {

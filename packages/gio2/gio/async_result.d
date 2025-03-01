@@ -1,7 +1,7 @@
 module gio.async_result;
 
 public import gio.async_result_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -16,7 +16,7 @@ import gobject.object;
  * asynchronous function. This callback will be triggered when the
  * operation has completed, and must be run in a later iteration of
  * the thread-default main context $(LPAREN)see
- * [GLib.MainContext.pushThreadDefault]$(RPAREN) from where the operation was
+ * [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) from where the operation was
  * initiated. It will be passed a `GAsyncResult` instance filled with the
  * details of the operation's success or failure, the object the asynchronous
  * function was started for and any error codes returned. The asynchronous
@@ -26,7 +26,7 @@ import gobject.object;
  * error conditions that may have occurred.
  * The `_finish$(LPAREN)$(RPAREN)` function for an operation takes the generic result
  * $(LPAREN)of type `GAsyncResult`$(RPAREN) and returns the specific result that the
- * operation in question yields $(LPAREN)e.g. a [Gio.FileEnumerator] for a
+ * operation in question yields $(LPAREN)e.g. a [gio.file_enumerator.FileEnumerator] for a
  * "enumerate children" operation$(RPAREN). If the result or error status of the
  * operation is not needed, there is no need to call the `_finish$(LPAREN)$(RPAREN)`
  * function; GIO will take care of cleaning up the result and error
@@ -113,7 +113,7 @@ interface AsyncResult
 
   /**
    * If res is a #GSimpleAsyncResult, this is equivalent to
-   * [Gio.SimpleAsyncResult.propagateError]. Otherwise it returns
+   * [gio.simple_async_result.SimpleAsyncResult.propagateError]. Otherwise it returns
    * %FALSE.
    * This can be used for legacy error handling in async *_finish$(LPAREN)$(RPAREN)
    * wrapper functions that traditionally handled #GSimpleAsyncResult

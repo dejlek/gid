@@ -1,6 +1,6 @@
 module gtksource.completion_context;
 
-import gid.gid;
+import gid.global;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.dclosure;
@@ -25,7 +25,7 @@ import gtksource.view;
  * could be displayed. If so, a `GtkSourceCompletionContext` is created with
  * information that is provided to the iface@CompletionProvider to populate
  * results which might be useful to the user.
- * iface@CompletionProvider are expected to provide [Gio.ListModel] with
+ * iface@CompletionProvider are expected to provide [gio.list_model.ListModel] with
  * iface@CompletionProposal which may be joined together in a list of
  * results for the user. They are also responsible for how the contents are
  * displayed using class@CompletionCell which allows for some level of
@@ -205,7 +205,7 @@ class CompletionContext : ObjectG, ListModel
 
   /**
    * This function allows providers to update their results for a context
-   * outside of a call to [GtkSource.CompletionProvider.populateAsync].
+   * outside of a call to [gtksource.completion_provider.CompletionProvider.populateAsync].
    * This can be used to immediately return results for a provider while it does
    * additional asynchronous work. Doing so will allow the completions to
    * update while the operation is in progress.

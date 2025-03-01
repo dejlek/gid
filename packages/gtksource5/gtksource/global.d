@@ -1,6 +1,6 @@
 module GtkSource.global;
 
-import gid.gid;
+import gid.global;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.types;
@@ -161,7 +161,7 @@ void schedulerRemove(size_t handlerId)
 
 /**
  * Use this function to escape the following characters: `\n`, `\r`, `\t` and `\`.
- * For a regular expression search, use [GLib.Regex.escapeString] instead.
+ * For a regular expression search, use [glib.regex.Regex.escapeString] instead.
  * One possible use case is to take the #GtkTextBuffer's selection and put it in a
  * search entry. The selection can contain tabulations, newlines, etc. So it's
  * better to escape those special characters to better fit in the search entry.
@@ -186,7 +186,7 @@ string utilsEscapeSearchText(string text)
 }
 
 /**
- * Use this function before [GtkSource.SearchSettings.setSearchText], to
+ * Use this function before [gtksource.search_settings.SearchSettings.setSearchText], to
  * unescape the following sequences of characters: `\n`, `\r`, `\t` and `\\`.
  * The purpose is to easily write those characters in a search entry.
  * Note that unescaping the search text is not needed for regular expression

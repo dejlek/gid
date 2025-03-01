@@ -1,6 +1,6 @@
 module gio.simple_action_group;
 
-import gid.gid;
+import gid.global;
 import gio.action;
 import gio.action_group;
 import gio.action_group_mixin;
@@ -13,8 +13,8 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GSimpleActionGroup` is a hash table filled with [Gio.Action] objects,
- * implementing the [Gio.ActionGroup] and [Gio.ActionMap]
+ * `GSimpleActionGroup` is a hash table filled with [gio.action.Action] objects,
+ * implementing the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap]
  * interfaces.
  */
 class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
@@ -58,7 +58,7 @@ class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
    * Params:
    *   action = a #GAction
 
-   * Deprecated: Use [Gio.ActionMap.addAction]
+   * Deprecated: Use [gio.action_map.ActionMap.addAction]
    */
   void insert(Action action)
   {
@@ -72,7 +72,7 @@ class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
    *   actionName = the name of an action
    * Returns: a #GAction, or %NULL
 
-   * Deprecated: Use [Gio.ActionMap.lookupAction]
+   * Deprecated: Use [gio.action_map.ActionMap.lookupAction]
    */
   Action lookup(string actionName)
   {
@@ -89,7 +89,7 @@ class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
    * Params:
    *   actionName = the name of the action
 
-   * Deprecated: Use [Gio.ActionMap.removeAction]
+   * Deprecated: Use [gio.action_map.ActionMap.removeAction]
    */
   void remove(string actionName)
   {

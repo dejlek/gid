@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.input_stream;
 import arrow.record_batch_reader;
 import arrow.types;
-import gid.gid;
+import gid.global;
 import glib.error;
 
 class RecordBatchStreamReader : RecordBatchReader

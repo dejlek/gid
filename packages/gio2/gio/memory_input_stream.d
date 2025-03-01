@@ -1,6 +1,6 @@
 module gio.memory_input_stream;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.input_stream;
@@ -16,7 +16,7 @@ import gobject.object;
  * `GMemoryInputStream` is a class for using arbitrary
  * memory chunks as input for GIO streaming input operations.
  * As of GLib 2.34, `GMemoryInputStream` implements
- * [Gio.PollableInputStream].
+ * [gio.pollable_input_stream.PollableInputStream].
  */
 class MemoryInputStream : InputStream, PollableInputStream, Seekable
 {

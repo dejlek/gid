@@ -1,6 +1,6 @@
 module gtksource.search_context;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -24,22 +24,22 @@ import gtksource.types;
  * search settings object can be shared between several search contexts; and a
  * buffer can contain several search contexts at the same time.
  * The total number of search occurrences can be retrieved with
- * [GtkSource.SearchContext.getOccurrencesCount]. To know the position of a
- * certain match, use [GtkSource.SearchContext.getOccurrencePosition].
+ * [gtksource.search_context.SearchContext.getOccurrencesCount]. To know the position of a
+ * certain match, use [gtksource.search_context.SearchContext.getOccurrencePosition].
  * The buffer is scanned asynchronously, so it doesn't block the user interface.
  * For each search, the buffer is scanned at most once. After that, navigating
  * through the occurrences doesn't require to re-scan the buffer entirely.
- * To search forward, use [GtkSource.SearchContext.forward] or
- * [GtkSource.SearchContext.forwardAsync] for the asynchronous version.
+ * To search forward, use [gtksource.search_context.SearchContext.forward] or
+ * [gtksource.search_context.SearchContext.forwardAsync] for the asynchronous version.
  * The backward search is done similarly. To replace a search match, or all
- * matches, use [GtkSource.SearchContext.replace] and
- * [GtkSource.SearchContext.replaceAll].
+ * matches, use [gtksource.search_context.SearchContext.replace] and
+ * [gtksource.search_context.SearchContext.replaceAll].
  * The search occurrences are highlighted by default. To disable it, use
- * [GtkSource.SearchContext.setHighlight]. You can enable the search
+ * [gtksource.search_context.SearchContext.setHighlight]. You can enable the search
  * highlighting for several `GtkSourceSearchContext`s attached to the
  * same buffer. Moreover, each of those `GtkSourceSearchContext`s can
  * have a different text style associated. Use
- * [GtkSource.SearchContext.setMatchStyle] to specify the class@Style
+ * [gtksource.search_context.SearchContext.setMatchStyle] to specify the class@Style
  * to apply on search matches.
  * Note that the property@SearchContext:highlight and
  * property@SearchContext:match-style properties are in the
@@ -84,7 +84,7 @@ class SearchContext : ObjectG
    * Creates a new search context, associated with buffer, and customized with
    * settings.
    * If settings is %NULL, a new classSearchSettings object will
-   * be created, that you can retrieve with [GtkSource.SearchContext.getSettings].
+   * be created, that you can retrieve with [gtksource.search_context.SearchContext.getSettings].
    * Params:
    *   buffer = a #GtkSourceBuffer.
    *   settings = a #GtkSourceSearchSettings, or %NULL.
@@ -126,8 +126,8 @@ class SearchContext : ObjectG
   }
 
   /**
-   * The asynchronous version of [GtkSource.SearchContext.backward].
-   * See the [Gio.AsyncResult] documentation to know how to use this function.
+   * The asynchronous version of [gtksource.search_context.SearchContext.backward].
+   * See the [gio.async_result.AsyncResult] documentation to know how to use this function.
    * If the operation is cancelled, the callback will only be called if
    * cancellable was not %NULL. The method takes
    * ownership of cancellable, so you can unref it after calling this function.
@@ -153,8 +153,8 @@ class SearchContext : ObjectG
 
   /**
    * Finishes a backward search started with
-   * [GtkSource.SearchContext.backwardAsync].
-   * See the documentation of [GtkSource.SearchContext.backward] for more
+   * [gtksource.search_context.SearchContext.backwardAsync].
+   * See the documentation of [gtksource.search_context.SearchContext.backward] for more
    * details.
    * Params:
    *   result = a #GAsyncResult.
@@ -207,8 +207,8 @@ class SearchContext : ObjectG
   }
 
   /**
-   * The asynchronous version of [GtkSource.SearchContext.forward].
-   * See the [Gio.AsyncResult] documentation to know how to use this function.
+   * The asynchronous version of [gtksource.search_context.SearchContext.forward].
+   * See the [gio.async_result.AsyncResult] documentation to know how to use this function.
    * If the operation is cancelled, the callback will only be called if
    * cancellable was not %NULL. The method takes
    * ownership of cancellable, so you can unref it after calling this function.
@@ -233,8 +233,8 @@ class SearchContext : ObjectG
   }
 
   /**
-   * Finishes a forward search started with [GtkSource.SearchContext.forwardAsync].
-   * See the documentation of [GtkSource.SearchContext.forward] for more
+   * Finishes a forward search started with [gtksource.search_context.SearchContext.forwardAsync].
+   * See the documentation of [gtksource.search_context.SearchContext.forward] for more
    * details.
    * Params:
    *   result = a #GAsyncResult.
@@ -317,8 +317,8 @@ class SearchContext : ObjectG
    * Regular expression patterns must follow certain rules. If
    * propertySearchSettings:search-text breaks a rule, the error can be
    * retrieved with this function.
-   * The error domain is [GLib.RegexError].
-   * Free the return value with [GLib.ErrorG.free].
+   * The error domain is [glib.RegexError].
+   * Free the return value with [glib.error.ErrorG.free].
    * Returns: the #GError, or %NULL if the
    *   pattern is valid.
    */
@@ -344,7 +344,7 @@ class SearchContext : ObjectG
    * match_start and match_end iters are revalidated to point to the replacement
    * text boundaries.
    * For a regular expression replacement, you can check if replace is valid by
-   * calling [GLib.Regex.checkReplacement]. The replace text can contain
+   * calling [glib.regex.Regex.checkReplacement]. The replace text can contain
    * backreferences.
    * Params:
    *   matchStart = the start of the match to replace.
@@ -368,7 +368,7 @@ class SearchContext : ObjectG
    * Replaces all search matches by another text.
    * It is a synchronous function, so it can block the user interface.
    * For a regular expression replacement, you can check if replace is valid by
-   * calling [GLib.Regex.checkReplacement]. The replace text can contain
+   * calling [glib.regex.Regex.checkReplacement]. The replace text can contain
    * backreferences.
    * Params:
    *   replace = the replacement text.
@@ -399,7 +399,7 @@ class SearchContext : ObjectG
   /**
    * Set the style to apply on search matches.
    * If match_style is %NULL, default theme's scheme 'match-style' will be used.
-   * To enable or disable the search highlighting, use [GtkSource.SearchContext.setHighlight].
+   * To enable or disable the search highlighting, use [gtksource.search_context.SearchContext.setHighlight].
    * Params:
    *   matchStyle = a #GtkSourceStyle, or %NULL.
    */

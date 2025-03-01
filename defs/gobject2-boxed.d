@@ -1,3 +1,4 @@
+//!class Boxed pre
 //!kind Boxed Boxed
 //!inhibit init funcs
 

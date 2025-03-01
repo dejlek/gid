@@ -1,6 +1,6 @@
 module gtk.print_setup;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gobject.object;
 import gtk.c.functions;
@@ -12,8 +12,8 @@ import gtk.types;
 /**
  * A `GtkPrintSetup` is an auxiliary object for printing that allows decoupling
  * the setup from the printing.
- * A print setup is obtained by calling [Gtk.PrintDialog.setup],
- * and can later be passed to print functions such as [Gtk.PrintDialog.print].
+ * A print setup is obtained by calling [gtk.print_dialog.PrintDialog.setup],
+ * and can later be passed to print functions such as [gtk.print_dialog.PrintDialog.print].
  * Print setups can be reused for multiple print calls.
  * Applications may wish to store the page_setup and print_settings from the print setup
  * and copy them to the PrintDialog if they want to keep using them.

@@ -5,7 +5,7 @@ import arrow.output_stream;
 import arrow.record_batch;
 import arrow.schema;
 import arrow.table;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 import parquet.c.functions;
@@ -123,7 +123,7 @@ class ArrowFileWriter : ObjectG
    * Write a record batch into the buffered row group.
    * Multiple record batches can be written into the same row group
    * through this function.
-   * [Parquet.WriterProperties.getMaxRowGroupLength] is respected
+   * [parquet.writer_properties.WriterProperties.getMaxRowGroupLength] is respected
    * and a new row group will be created if the current row group
    * exceeds the limit.
    * Record batches get flushed to the output stream once

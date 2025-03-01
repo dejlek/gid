@@ -1,6 +1,6 @@
 module gio.mount_operation;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -13,9 +13,9 @@ import gobject.object;
  * mounting files, hard drive partitions or server locations. It can
  * also be used to ask the user questions or show a list of applications
  * preventing unmount or eject operations from completing.
- * Note that `GMountOperation` is used for more than just [Gio.Mount]
- * objects – for example it is also used in [Gio.Drive.start] and
- * [Gio.Drive.stop].
+ * Note that `GMountOperation` is used for more than just [gio.mount.Mount]
+ * objects – for example it is also used in [gio.drive.Drive.start] and
+ * [gio.drive.Drive.stop].
  * Users should instantiate a subclass of this that implements all the
  * various callbacks to show the required dialogs, such as
  * [`GtkMountOperation`](https://docs.gtk.org/gtk4/class.MountOperation.html).

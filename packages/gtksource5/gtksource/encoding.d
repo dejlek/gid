@@ -1,6 +1,6 @@
 module gtksource.encoding;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -84,7 +84,7 @@ class Encoding : Boxed
   /**
    * Gets all encodings.
    * Returns: a list of
-   *   all #GtkSourceEncoding's. Free with [GLib.SList.free].
+   *   all #GtkSourceEncoding's. Free with [glib.slist.SList.free].
    */
   static Encoding[] getAll()
   {
@@ -109,12 +109,12 @@ class Encoding : Boxed
 
   /**
    * Gets the list of default candidate encodings to try when loading a file.
-   * See [GtkSource.FileLoader.setCandidateEncodings].
+   * See [gtksource.file_loader.FileLoader.setCandidateEncodings].
    * This function returns a different list depending on the current locale $(LPAREN)i.e.
    * language, country and default encoding$(RPAREN). The UTF-8 encoding and the current
    * locale encoding are guaranteed to be present in the returned list.
    * Returns: the list of
-   *   default candidate encodings. Free with [GLib.SList.free].
+   *   default candidate encodings. Free with [glib.slist.SList.free].
    */
   static Encoding[] getDefaultCandidates()
   {

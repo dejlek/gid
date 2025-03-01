@@ -5,7 +5,7 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.time64_data_type;
 import arrow.types;
-import gid.gid;
+import gid.global;
 
 class Time64Scalar : Scalar
 {

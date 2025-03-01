@@ -1,6 +1,6 @@
 module gio.simple_proxy_resolver;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.proxy_resolver;
@@ -9,13 +9,13 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GSimpleProxyResolver` is a simple [Gio.ProxyResolver] implementation
+ * `GSimpleProxyResolver` is a simple [gio.proxy_resolver.ProxyResolver] implementation
  * that handles a single default proxy, multiple URI-scheme-specific
  * proxies, and a list of hosts that proxies should not be used for.
  * `GSimpleProxyResolver` is never the default proxy resolver, but it
  * can be used as the base class for another proxy resolver
  * implementation, or it can be created and used manually, such as
- * with [Gio.SocketClient.setProxyResolver].
+ * with [gio.socket_client.SocketClient.setProxyResolver].
  */
 class SimpleProxyResolver : ObjectG, ProxyResolver
 {
@@ -67,7 +67,7 @@ class SimpleProxyResolver : ObjectG, ProxyResolver
   /**
    * Sets the default proxy on resolver, to be used for any URIs that
    * don't match #GSimpleProxyResolver:ignore-hosts or a proxy set
-   * via [Gio.SimpleProxyResolver.setUriProxy].
+   * via [gio.simple_proxy_resolver.SimpleProxyResolver.setUriProxy].
    * If default_proxy starts with "socks://",
    * #GSimpleProxyResolver will treat it as referring to all three of
    * the socks5, socks4a, and socks4 proxy types.

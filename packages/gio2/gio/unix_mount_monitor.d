@@ -1,6 +1,6 @@
 module gio.unix_mount_monitor;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -30,12 +30,12 @@ class UnixMountMonitor : ObjectG
   }
 
   /**
-   * Deprecated alias for [Gio.UnixMountMonitor.get].
+   * Deprecated alias for [gio.unix_mount_monitor.UnixMountMonitor.get].
    * This function was never a true constructor, which is why it was
    * renamed.
    * Returns: a #GUnixMountMonitor.
 
-   * Deprecated: Use [Gio.UnixMountMonitor.get] instead.
+   * Deprecated: Use [gio.unix_mount_monitor.UnixMountMonitor.get] instead.
    */
   this()
   {
@@ -50,7 +50,7 @@ class UnixMountMonitor : ObjectG
    * The mount monitor can be used to monitor for changes to the list of
    * mounted filesystems as well as the list of mount points $(LPAREN)ie: fstab
    * entries$(RPAREN).
-   * You must only call [GObject.ObjectG.unref] on the return value from under
+   * You must only call [gobject.object.ObjectG.unref] on the return value from under
    * the same main context as you called this function.
    * Returns: the #GUnixMountMonitor.
    */

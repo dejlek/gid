@@ -1,6 +1,6 @@
 module gio.charset_converter;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.converter;
@@ -12,8 +12,8 @@ import glib.error;
 import gobject.object;
 
 /**
- * `GCharsetConverter` is an implementation of [Gio.Converter] based on
- * [GLib.IConv].
+ * `GCharsetConverter` is an implementation of [gio.converter.Converter] based on
+ * [glib.void*].
  */
 class CharsetConverter : ObjectG, Converter, Initable
 {

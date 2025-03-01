@@ -1,6 +1,6 @@
 module gtk.print_settings;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import glib.key_file;
 import glib.variant;
@@ -57,7 +57,7 @@ class PrintSettings : ObjectG
    * Returns a new `GtkPrintSettings` object with the restored settings,
    * or %NULL if an error occurred. If the file could not be loaded then
    * error is set to either a `GFileError` or `GKeyFileError`.
-   * See [Gtk.PrintSettings.toFile].
+   * See [gtk.print_settings.PrintSettings.toFile].
    * Params:
    *   fileName = the filename to read the settings from
    * Returns: the restored `GtkPrintSettings`
@@ -77,7 +77,7 @@ class PrintSettings : ObjectG
   /**
    * Deserialize print settings from an a{sv} variant.
    * The variant must be in the format produced by
-   * [Gtk.PrintSettings.toGvariant].
+   * [gtk.print_settings.PrintSettings.toGvariant].
    * Params:
    *   variant = an a{sv} `GVariant`
    * Returns: a new `GtkPrintSettings` object
@@ -231,7 +231,7 @@ class PrintSettings : ObjectG
    * Returns the floating point number represented by
    * the value that is associated with key, or default_val
    * if the value does not represent a floating point number.
-   * Floating point numbers are parsed with [GLib.Global.asciiStrtod].
+   * Floating point numbers are parsed with [glib.global.asciiStrtod].
    * Params:
    *   key = a key
    *   def = the default value
@@ -391,7 +391,7 @@ class PrintSettings : ObjectG
   /**
    * Gets the value of %GTK_PRINT_SETTINGS_PAGE_RANGES.
    * Returns: an array
-   *   of `GtkPageRange`s. Use [GLib.Global.gfree] to free the array when
+   *   of `GtkPageRange`s. Use [glib.global.gfree] to free the array when
    *   it is no longer needed.
    */
   PageRange[] getPageRanges()
@@ -595,7 +595,7 @@ class PrintSettings : ObjectG
    * Reads the print settings from file_name.
    * If the file could not be loaded then error is set to either
    * a `GFileError` or `GKeyFileError`.
-   * See [Gtk.PrintSettings.toFile].
+   * See [gtk.print_settings.PrintSettings.toFile].
    * Params:
    *   fileName = the filename to read the settings from
    * Returns: %TRUE on success

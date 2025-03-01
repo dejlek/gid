@@ -1,6 +1,6 @@
 module gtk.cell_renderer_spinner;
 
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer;
@@ -16,10 +16,10 @@ import gtk.types;
  * property to %TRUE and increment the `GtkCellRendererSpinner:pulse` property
  * at regular intervals. The usual way to set the cell renderer properties
  * for each cell is to bind them to columns in your tree model using e.g.
- * [Gtk.TreeViewColumn.addAttribute].
+ * [gtk.tree_view_column.TreeViewColumn.addAttribute].
 
  * Deprecated: List views use widgets to display their contents.
- *   You should use [Gtk.Spinner] instead
+ *   You should use [gtk.spinner.Spinner] instead
  */
 class CellRendererSpinner : CellRenderer
 {

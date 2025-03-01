@@ -1,7 +1,7 @@
 module gtksource.hover_provider_mixin;
 
 public import gtksource.hover_provider_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gio.async_result;
 public import gio.async_result_mixin;
 public import gio.cancellable;

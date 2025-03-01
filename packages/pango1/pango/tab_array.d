@@ -1,6 +1,6 @@
 module pango.tab_array;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -44,7 +44,7 @@ class TabArray : Boxed
    *   initialSize = Initial number of tab stops to allocate, can be 0
    *   positionsInPixels = whether positions are in pixel units
    * Returns: the newly allocated `PangoTabArray`, which should
-   *   be freed with [Pango.TabArray.free].
+   *   be freed with [pango.tab_array.TabArray.free].
    */
   this(int initialSize, bool positionsInPixels)
   {
@@ -56,7 +56,7 @@ class TabArray : Boxed
   /**
    * Copies a `PangoTabArray`.
    * Returns: the newly allocated `PangoTabArray`, which should
-   *   be freed with [Pango.TabArray.free].
+   *   be freed with [pango.tab_array.TabArray.free].
    */
   TabArray copy()
   {
@@ -197,7 +197,7 @@ class TabArray : Boxed
 
   /**
    * Deserializes a `PangoTabArray` from a string.
-   * This is the counterpart to [Pango.TabArray.toString_].
+   * This is the counterpart to [pango.tab_array.TabArray.toString_].
    * See that functions for details about the format.
    * Params:
    *   text = a string

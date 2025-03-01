@@ -2,7 +2,7 @@ module gtksource.completion_cell;
 
 import gdk.paintable;
 import gdk.paintable_mixin;
-import gid.gid;
+import gid.global;
 import gio.icon;
 import gio.icon_mixin;
 import gobject.object;

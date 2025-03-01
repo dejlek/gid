@@ -1,6 +1,6 @@
 module gtk.volume_button;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.accessible_range;
@@ -46,7 +46,7 @@ class VolumeButton : ScaleButton
    * Creates a `GtkVolumeButton`.
    * The button has a range between 0.0 and 1.0, with a stepping of 0.02.
    * Volume values can be obtained and modified using the functions from
-   * [Gtk.ScaleButton].
+   * [gtk.scale_button.ScaleButton].
    * Returns: a new `GtkVolumeButton`
 
    * Deprecated: This widget will be removed in GTK 5

@@ -6,7 +6,7 @@ import atk.component;
 import atk.component_mixin;
 import atk.object;
 import atk.types;
-import gid.gid;
+import gid.global;
 
 /**
  * Container for AtkPlug objects from other processes
@@ -14,21 +14,21 @@ import gid.gid;
  * accessibles from one process into another in a fashion that is
  * transparent to assistive technologies. #AtkSocket works as the
  * container of #AtkPlug, embedding it using the method
- * [Atk.Socket.embed]. Any accessible contained in the #AtkPlug will
+ * [atk.socket.Socket.embed]. Any accessible contained in the #AtkPlug will
  * appear to the assistive technologies as being inside the
  * application that created the #AtkSocket.
  * The communication between a #AtkSocket and a #AtkPlug is done by
  * the IPC layer of the accessibility framework, normally implemented
  * by the D-Bus based implementation of AT-SPI $(LPAREN)at-spi2$(RPAREN). If that is
  * the case, at-spi-atk2 is the responsible to implement the abstract
- * methods [Atk.Plug.getId] and [Atk.Socket.embed], so an ATK
+ * methods [atk.plug.Plug.getId] and [atk.socket.Socket.embed], so an ATK
  * implementor shouldn't reimplement them. The process that contains
  * the #AtkPlug is responsible to send the ID returned by
  * atk_plug_id$(LPAREN)$(RPAREN) to the process that contains the #AtkSocket, so it
- * could call the method [Atk.Socket.embed] in order to embed it.
+ * could call the method [atk.socket.Socket.embed] in order to embed it.
  * For the same reasons, an implementor doesn't need to implement
- * [Atk.ObjectAtk.getNAccessibleChildren] and
- * [Atk.ObjectAtk.refAccessibleChild]. All the logic related to those
+ * [atk.object.ObjectAtk.getNAccessibleChildren] and
+ * [atk.object.ObjectAtk.refAccessibleChild]. All the logic related to those
  * functions will be implemented by the IPC layer.
  * See class@AtkPlug
  */
@@ -71,7 +71,7 @@ class Socket : ObjectAtk, Component
    * The class item used by this function should be filled in by the IPC
    * layer $(LPAREN)usually at-spi2-atk$(RPAREN). The implementor of the AtkSocket
    * should call this function and pass the id for the plug as returned
-   * by [Atk.Plug.getId].  It is the responsibility of the application
+   * by [atk.plug.Plug.getId].  It is the responsibility of the application
    * to pass the plug id on to the process implementing the #AtkSocket
    * as needed.
    * Params:

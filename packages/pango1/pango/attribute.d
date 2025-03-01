@@ -1,6 +1,6 @@
 module pango.attribute;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.attr_color;
 import pango.attr_float;
@@ -21,7 +21,7 @@ import pango.types;
  * Particular types of attributes include this structure as their initial
  * portion. The common portion of the attribute holds the range to which
  * the value in the type-specific part of the attribute applies and should
- * be initialized using [Pango.Attribute.init_]. By default, an attribute
+ * be initialized using [pango.attribute.Attribute.init_]. By default, an attribute
  * will have an all-inclusive range of [0,%G_MAXUINT].
  */
 class Attribute : Boxed
@@ -203,7 +203,7 @@ class Attribute : Boxed
    * Make a copy of an attribute.
    * Returns: the newly allocated
    *   `PangoAttribute`, which should be freed with
-   *   [Pango.Attribute.destroy].
+   *   [pango.attribute.Attribute.destroy].
    */
   Attribute copy()
   {

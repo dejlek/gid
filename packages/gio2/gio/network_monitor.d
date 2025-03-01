@@ -1,7 +1,7 @@
 module gio.network_monitor;
 
 public import gio.network_monitor_iface_proxy;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -57,7 +57,7 @@ interface NetworkMonitor
    * Note that although this does not attempt to connect to
    * connectable, it may still block for a brief period of time $(LPAREN)eg,
    * trying to do multicast DNS on the local network$(RPAREN), so if you do not
-   * want to block, you should use [Gio.NetworkMonitor.canReachAsync].
+   * want to block, you should use [gio.network_monitor.NetworkMonitor.canReachAsync].
    * Params:
    *   connectable = a #GSocketConnectable
    *   cancellable = a #GCancellable, or %NULL
@@ -69,9 +69,9 @@ interface NetworkMonitor
    * Asynchronously attempts to determine whether or not the host
    * pointed to by connectable can be reached, without actually
    * trying to connect to it.
-   * For more details, see [Gio.NetworkMonitor.canReach].
+   * For more details, see [gio.network_monitor.NetworkMonitor.canReach].
    * When the operation is finished, callback will be called.
-   * You can then call [Gio.NetworkMonitor.canReachFinish]
+   * You can then call [gio.network_monitor.NetworkMonitor.canReachFinish]
    * to get the result of the operation.
    * Params:
    *   connectable = a #GSocketConnectable
@@ -83,7 +83,7 @@ interface NetworkMonitor
 
   /**
    * Finishes an async network connectivity test.
-   * See [Gio.NetworkMonitor.canReachAsync].
+   * See [gio.network_monitor.NetworkMonitor.canReachAsync].
    * Params:
    *   result = a #GAsyncResult
    * Returns: %TRUE if network is reachable, %FALSE if not.
@@ -92,7 +92,7 @@ interface NetworkMonitor
 
   /**
    * Gets a more detailed networking state than
-   * [Gio.NetworkMonitor.getNetworkAvailable].
+   * [gio.network_monitor.NetworkMonitor.getNetworkAvailable].
    * If #GNetworkMonitor:network-available is %FALSE, then the
    * connectivity state will be %G_NETWORK_CONNECTIVITY_LOCAL.
    * If #GNetworkMonitor:network-available is %TRUE, then the

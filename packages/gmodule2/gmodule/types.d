@@ -1,6 +1,6 @@
 module gmodule.types;
 
-import gid.gid;
+import gid.global;
 import gmodule.c.functions;
 import gmodule.c.types;
 import gmodule.module_;

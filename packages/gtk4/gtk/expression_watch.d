@@ -1,6 +1,6 @@
 module gtk.expression_watch;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import gobject.value;
 import gtk.c.functions;
@@ -39,7 +39,7 @@ class ExpressionWatch : Boxed
   /**
    * Evaluates the watched expression and on success stores the result
    * in `value`.
-   * This is equivalent to calling [Gtk.Expression.evaluate] with the
+   * This is equivalent to calling [gtk.expression.Expression.evaluate] with the
    * expression and this pointer originally used to create `watch`.
    * Params:
    *   value = an empty `GValue` to be set
@@ -54,7 +54,7 @@ class ExpressionWatch : Boxed
 
   /**
    * Stops watching an expression.
-   * See [Gtk.Expression.watch] for how the watch
+   * See [gtk.expression.Expression.watch] for how the watch
    * was established.
    */
   void unwatch()

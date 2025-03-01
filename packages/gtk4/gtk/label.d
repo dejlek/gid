@@ -1,6 +1,6 @@
 module gtk.label;
 
-import gid.gid;
+import gid.global;
 import gio.menu_model;
 import gobject.dclosure;
 import gobject.object;
@@ -47,7 +47,7 @@ import pango.types : WrapMode = WrapMode;
  * The GtkLabel implementation of the GtkBuildable interface supports a
  * custom `<attributes>` element, which supports any number of `<attribute>`
  * elements. The `<attribute>` element has attributes named “name“, “value“,
- * “start“ and “end“ and allows you to specify [Pango.Attribute]
+ * “start“ and “end“ and allows you to specify [pango.attribute.Attribute]
  * values for this label.
  * An example of a UI definition fragment specifying Pango attributes:
  * ```xml
@@ -69,12 +69,12 @@ import pango.types : WrapMode = WrapMode;
  * Labels may contain “mnemonics”. Mnemonics are underlined characters in the
  * label, used for keyboard navigation. Mnemonics are created by providing a
  * string with an underscore before the mnemonic character, such as `"_File"`,
- * to the functions [Gtk.Label.newWithMnemonic] or
- * [Gtk.Label.setTextWithMnemonic].
+ * to the functions [gtk.label.Label.newWithMnemonic] or
+ * [gtk.label.Label.setTextWithMnemonic].
  * Mnemonics automatically activate any activatable widget the label is
- * inside, such as a [Gtk.Button]; if the label is not inside the
+ * inside, such as a [gtk.button.Button]; if the label is not inside the
  * mnemonic’s target widget, you have to tell the label about the target
- * using [Gtk.Label.setMnemonicWidget].
+ * using [gtk.label.Label.setMnemonicWidget].
  * Here’s a simple example where the label is inside a button:
  * ```c
  * // Pressing Alt+H will activate this button
@@ -89,8 +89,8 @@ import pango.types : WrapMode = WrapMode;
  * GtkWidget *button \= gtk_button_new_with_mnemonic $(LPAREN)"_Hello"$(RPAREN);
  * ```
  * To create a mnemonic for a widget alongside the label, such as a
- * [Gtk.Entry], you have to point the label at the entry with
- * [Gtk.Label.setMnemonicWidget]:
+ * [gtk.entry.Entry], you have to point the label at the entry with
+ * [gtk.label.Label.setMnemonicWidget]:
  * ```c
  * // Pressing Alt+H will focus the entry
  * GtkWidget *entry \= gtk_entry_new $(LPAREN)$(RPAREN);
@@ -108,21 +108,21 @@ import pango.types : WrapMode = WrapMode;
  * ```
  * $(LPAREN)See the Pango manual for complete documentation] of available
  * tags, func@Pango.parse_markup$(RPAREN)
- * The markup passed to [Gtk.Label.setMarkup] must be valid; for example,
+ * The markup passed to [gtk.label.Label.setMarkup] must be valid; for example,
  * literal `<`, `>` and `&` characters must be escaped as `&lt;`, `&gt;`, and `&amp;`.
  * If you pass text obtained from the user, file, or a network to
- * [Gtk.Label.setMarkup], you’ll want to escape it with
+ * [gtk.label.Label.setMarkup], you’ll want to escape it with
  * func@GLib.markup_escape_text or func@GLib.markup_printf_escaped.
- * Markup strings are just a convenient way to set the [Pango.AttrList]
- * on a label; [Gtk.Label.setAttributes] may be a simpler way to set
- * attributes in some cases. Be careful though; [Pango.AttrList] tends
+ * Markup strings are just a convenient way to set the [pango.attr_list.AttrList]
+ * on a label; [gtk.label.Label.setAttributes] may be a simpler way to set
+ * attributes in some cases. Be careful though; [pango.attr_list.AttrList] tends
  * to cause internationalization problems, unless you’re applying attributes
  * to the entire string $(LPAREN)i.e. unless you set the range of each attribute
  * to [0, %G_MAXINT$(RPAREN)$(RPAREN). The reason is that specifying the start_index and
- * end_index for a [Pango.Attribute] requires knowledge of the exact
+ * end_index for a [pango.attribute.Attribute] requires knowledge of the exact
  * string being displayed, so translations will cause problems.
  * ## Selectable labels
- * Labels can be made selectable with [Gtk.Label.setSelectable].
+ * Labels can be made selectable with [gtk.label.Label.setSelectable].
  * Selectable labels allow the user to copy the label contents to
  * the clipboard. Only labels that contain useful-to-copy information—such
  * as error messages—should be made selectable.
@@ -131,11 +131,11 @@ import pango.types : WrapMode = WrapMode;
  * performance problems if it contains more than a small number.
  * Paragraphs are separated by newlines or other paragraph separators
  * understood by Pango.
- * Labels can automatically wrap text if you call [Gtk.Label.setWrap].
- * [Gtk.Label.setJustify] sets how the lines in a label align
+ * Labels can automatically wrap text if you call [gtk.label.Label.setWrap].
+ * [gtk.label.Label.setJustify] sets how the lines in a label align
  * with one another. If you want to set how the label as a whole aligns
- * in its available space, see the [Gtk.Widget.halign] and
- * [Gtk.Widget.valign] properties.
+ * in its available space, see the [gtk.widget.Widget.Align] and
+ * [gtk.widget.Widget.Align] properties.
  * The property@Gtk.Label:width-chars and property@Gtk.Label:max-width-chars
  * properties can be used to control the size allocation of ellipsized or
  * wrapped labels. For ellipsizing labels, if either is specified $(LPAREN)and less
@@ -162,7 +162,7 @@ import pango.types : WrapMode = WrapMode;
  * ```
  * It is possible to implement custom handling for links and their tooltips
  * with the signal@Gtk.Label::activate-link signal and the
- * [Gtk.Label.getCurrentUri] function.
+ * [gtk.label.Label.getCurrentUri] function.
  */
 class Label : Widget, AccessibleText
 {
@@ -207,8 +207,8 @@ class Label : Widget, AccessibleText
    * '__' $(LPAREN)two underscores$(RPAREN). The first underlined character represents a
    * keyboard accelerator called a mnemonic. The mnemonic key can be used
    * to activate another widget, chosen automatically, or explicitly using
-   * [Gtk.Label.setMnemonicWidget].
-   * If [Gtk.Label.setMnemonicWidget] is not called, then the first
+   * [gtk.label.Label.setMnemonicWidget].
+   * If [gtk.label.Label.setMnemonicWidget] is not called, then the first
    * activatable ancestor of the `GtkLabel` will be chosen as the mnemonic
    * widget. For instance, if the label is inside a button or menu item,
    * the button or menu item will automatically become the mnemonic widget
@@ -229,10 +229,10 @@ class Label : Widget, AccessibleText
 
   /**
    * Gets the label's attribute list.
-   * This is the [Pango.AttrList] that was set on the label using
-   * [Gtk.Label.setAttributes], if any. This function does not
+   * This is the [pango.attr_list.AttrList] that was set on the label using
+   * [gtk.label.Label.setAttributes], if any. This function does not
    * reflect attributes that come from the label's markup $(LPAREN)see
-   * [Gtk.Label.setMarkup]$(RPAREN). If you want to get the effective
+   * [gtk.label.Label.setMarkup]$(RPAREN). If you want to get the effective
    * attributes for the label, use
    * `pango_layout_get_attributes $(LPAREN)gtk_label_get_layout $(LPAREN)self$(RPAREN)$(RPAREN)`.
    * Returns: the attribute list
@@ -264,7 +264,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Returns the ellipsizing position of the label.
-   * See [Gtk.Label.setEllipsize].
+   * See [gtk.label.Label.setEllipsize].
    * Returns: `PangoEllipsizeMode`
    */
   EllipsizeMode getEllipsize()
@@ -277,7 +277,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Gets the extra menu model of label.
-   * See [Gtk.Label.setExtraMenu].
+   * See [gtk.label.Label.setExtraMenu].
    * Returns: the menu model
    */
   MenuModel getExtraMenu()
@@ -290,7 +290,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Returns the justification of the label.
-   * See [Gtk.Label.setJustify].
+   * See [gtk.label.Label.setJustify].
    * Returns: `GtkJustification`
    */
   Justification getJustify()
@@ -304,7 +304,7 @@ class Label : Widget, AccessibleText
   /**
    * Fetches the text from a label.
    * The returned text includes any embedded underlines indicating
-   * mnemonics and Pango markup. $(LPAREN)See [Gtk.Label.getText]$(RPAREN).
+   * mnemonics and Pango markup. $(LPAREN)See [gtk.label.Label.getText]$(RPAREN).
    * Returns: the text of the label widget. This string is
    *   owned by the widget and must not be modified or freed.
    */
@@ -319,11 +319,11 @@ class Label : Widget, AccessibleText
   /**
    * Gets the `PangoLayout` used to display the label.
    * The layout is useful to e.g. convert text positions to pixel
-   * positions, in combination with [Gtk.Label.getLayoutOffsets].
+   * positions, in combination with [gtk.label.Label.getLayoutOffsets].
    * The returned layout is owned by the label so need not be
    * freed by the caller. The label is free to recreate its layout
    * at any time, so it should be considered read-only.
-   * Returns: the [Pango.Layout] for this label
+   * Returns: the [pango.layout.Layout] for this label
    */
   Layout getLayout()
   {
@@ -336,10 +336,10 @@ class Label : Widget, AccessibleText
   /**
    * Obtains the coordinates where the label will draw its `PangoLayout`.
    * The coordinates are useful to convert mouse events into coordinates
-   * inside the [Pango.Layout], e.g. to take some action if some part
-   * of the label is clicked. Remember when using the [Pango.Layout]
+   * inside the [pango.layout.Layout], e.g. to take some action if some part
+   * of the label is clicked. Remember when using the [pango.layout.Layout]
    * functions you need to convert to and from pixels using PANGO_PIXELS$(LPAREN)$(RPAREN)
-   * or [Pango.SCALE].
+   * or [pango.int].
    * Params:
    *   x = location to store X offset of layout
    *   y = location to store Y offset of layout
@@ -352,7 +352,7 @@ class Label : Widget, AccessibleText
   /**
    * Gets the number of lines to which an ellipsized, wrapping
    * label should be limited.
-   * See [Gtk.Label.setLines].
+   * See [gtk.label.Label.setLines].
    * Returns: The number of lines
    */
   int getLines()
@@ -364,7 +364,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Retrieves the desired maximum width of label, in characters.
-   * See [Gtk.Label.setWidthChars].
+   * See [gtk.label.Label.setWidthChars].
    * Returns: the maximum width of the label in characters.
    */
   int getMaxWidthChars()
@@ -391,7 +391,7 @@ class Label : Widget, AccessibleText
   /**
    * Retrieves the target of the mnemonic $(LPAREN)keyboard shortcut$(RPAREN) of this
    * label.
-   * See [Gtk.Label.setMnemonicWidget].
+   * See [gtk.label.Label.setMnemonicWidget].
    * Returns: the target of the label’s mnemonic,
    *   or %NULL if none has been set and the default algorithm will be used.
    */
@@ -405,7 +405,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Returns line wrap mode used by the label.
-   * See [Gtk.Label.setNaturalWrapMode].
+   * See [gtk.label.Label.setNaturalWrapMode].
    * Returns: the natural line wrap mode
    */
   NaturalWrapMode getNaturalWrapMode()
@@ -455,10 +455,10 @@ class Label : Widget, AccessibleText
   /**
    * Gets the tabs for self.
    * The returned array will be %NULL if “standard” $(LPAREN)8-space$(RPAREN) tabs are used.
-   * Free the return value with [Pango.TabArray.free].
+   * Free the return value with [pango.tab_array.TabArray.free].
    * Returns: copy of default tab array,
    *   or %NULL if standard tabs are used; must be freed with
-   *   [Pango.TabArray.free].
+   *   [pango.tab_array.TabArray.free].
    */
   TabArray getTabs()
   {
@@ -472,7 +472,7 @@ class Label : Widget, AccessibleText
    * Fetches the text from a label.
    * The returned text is as it appears on screen. This does not include
    * any embedded underlines indicating mnemonics or Pango markup. $(LPAREN)See
-   * [Gtk.Label.getLabel]$(RPAREN)
+   * [gtk.label.Label.getLabel]$(RPAREN)
    * Returns: the text in the label widget. This is the internal
    *   string used by the label, and must not be modified.
    */
@@ -486,7 +486,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Returns whether the label’s text is interpreted as Pango markup.
-   * See [Gtk.Label.setUseMarkup].
+   * See [gtk.label.Label.setUseMarkup].
    * Returns: %TRUE if the label’s text will be parsed for markup.
    */
   bool getUseMarkup()
@@ -498,7 +498,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Returns whether an embedded underlines in the label indicate mnemonics.
-   * See [Gtk.Label.setUseUnderline].
+   * See [gtk.label.Label.setUseUnderline].
    * Returns: %TRUE whether an embedded underline in the label indicates
    *   the mnemonic accelerator keys.
    */
@@ -511,7 +511,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Retrieves the desired width of label, in characters.
-   * See [Gtk.Label.setWidthChars].
+   * See [gtk.label.Label.setWidthChars].
    * Returns: the width of the label in characters.
    */
   int getWidthChars()
@@ -523,7 +523,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Returns whether lines in the label are automatically wrapped.
-   * See [Gtk.Label.setWrap].
+   * See [gtk.label.Label.setWrap].
    * Returns: %TRUE if the lines of the label are automatically wrapped.
    */
   bool getWrap()
@@ -535,7 +535,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Returns line wrap mode used by the label.
-   * See [Gtk.Label.setWrapMode].
+   * See [gtk.label.Label.setWrapMode].
    * Returns: the line wrap mode
    */
   WrapMode getWrapMode()
@@ -548,7 +548,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Gets the `xalign` of the label.
-   * See the [Gtk.Label.xalign] property.
+   * See the [gtk.label.Label.gfloat] property.
    * Returns: the xalign property
    */
   float getXalign()
@@ -560,7 +560,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Gets the `yalign` of the label.
-   * See the [Gtk.Label.yalign] property.
+   * See the [gtk.label.Label.gfloat] property.
    * Returns: the yalign property
    */
   float getYalign()
@@ -572,7 +572,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Selects a range of characters in the label, if the label is selectable.
-   * See [Gtk.Label.setSelectable]. If the label is not selectable,
+   * See [gtk.label.Label.setSelectable]. If the label is not selectable,
    * this function has no effect. If start_offset or
    * end_offset are -1, then the end of the label will be substituted.
    * Params:
@@ -593,7 +593,7 @@ class Label : Widget, AccessibleText
    * manually set attributes, if you must; know that the attributes will
    * be applied to the label after the markup string is parsed.
    * Params:
-   *   attrs = a [Pango.AttrList]
+   *   attrs = a [pango.attr_list.AttrList]
    */
   void setAttributes(AttrList attrs)
   {
@@ -627,9 +627,9 @@ class Label : Widget, AccessibleText
    * Sets the alignment of the lines in the text of the label relative to
    * each other.
    * %GTK_JUSTIFY_LEFT is the default value when the widget is first created
-   * with [Gtk.Label.new_]. If you instead want to set the alignment of
-   * the label as a whole, use [Gtk.Widget.setHalign] instead.
-   * [Gtk.Label.setJustify] has no effect on labels containing
+   * with [gtk.label.Label.new_]. If you instead want to set the alignment of
+   * the label as a whole, use [gtk.widget.Widget.setHalign] instead.
+   * [gtk.label.Label.setJustify] has no effect on labels containing
    * only a single line.
    * Params:
    *   jtype = a `GtkJustification`
@@ -671,7 +671,7 @@ class Label : Widget, AccessibleText
    * The string must be marked up with Pango markup
    * $(LPAREN)see funcPango.parse_markup$(RPAREN).
    * If the str is external data, you may need to escape it
-   * with [GLib.Global.markupEscapeText] or [GLib.Global.markupPrintfEscaped]:
+   * with [glib.global.markupEscapeText] or [glib.global.markupPrintfEscaped]:
    * ```c
    * GtkWidget *self \= gtk_label_new $(LPAREN)NULL$(RPAREN);
    * const char *str \= "...";
@@ -683,10 +683,10 @@ class Label : Widget, AccessibleText
    * ```
    * This function will set the propertyGtk.Label:use-markup property
    * to %TRUE as a side effect.
-   * If you set the label contents using the [Gtk.Label.label]
+   * If you set the label contents using the [gtk.label.Label.utf8]
    * property you should also ensure that you set the
    * propertyGtk.Label:use-markup property accordingly.
-   * See also: [Gtk.Label.setText]
+   * See also: [gtk.label.Label.setText]
    * Params:
    *   str = a markup string
    */
@@ -703,7 +703,7 @@ class Label : Widget, AccessibleText
    * If characters in str are preceded by an underscore, they are underlined
    * indicating that they represent a keyboard accelerator called a mnemonic.
    * The mnemonic key can be used to activate another widget, chosen
-   * automatically, or explicitly using [Gtk.Label.setMnemonicWidget].
+   * automatically, or explicitly using [gtk.label.Label.setMnemonicWidget].
    * Params:
    *   str = a markup string
    */
@@ -726,14 +726,14 @@ class Label : Widget, AccessibleText
   /**
    * Associate the label with its mnemonic target.
    * If the label has been set so that it has a mnemonic key $(LPAREN)using
-   * i.e. [Gtk.Label.setMarkupWithMnemonic],
-   * [Gtk.Label.setTextWithMnemonic],
-   * [Gtk.Label.newWithMnemonic]
+   * i.e. [gtk.label.Label.setMarkupWithMnemonic],
+   * [gtk.label.Label.setTextWithMnemonic],
+   * [gtk.label.Label.newWithMnemonic]
    * or the propertyGtk.Label:use_underline property$(RPAREN) the label can be
    * associated with a widget that is the target of the mnemonic. When the
-   * label is inside a widget $(LPAREN)like a [Gtk.Button] or a
-   * [Gtk.Notebook] tab$(RPAREN) it is automatically associated with the correct
-   * widget, but sometimes $(LPAREN)i.e. when the target is a [Gtk.Entry] next to
+   * label is inside a widget $(LPAREN)like a [gtk.button.Button] or a
+   * [gtk.notebook.Notebook] tab$(RPAREN) it is automatically associated with the correct
+   * widget, but sometimes $(LPAREN)i.e. when the target is a [gtk.entry.Entry] next to
    * the label$(RPAREN) you need to set it explicitly using this function.
    * The target widget will be accelerated by emitting the
    * signalGtk.Widget::mnemonic-activate signal on it. The default handler for
@@ -750,7 +750,7 @@ class Label : Widget, AccessibleText
   /**
    * Select the line wrapping for the natural size request.
    * This only affects the natural size requested, for the actual wrapping used,
-   * see the [Gtk.Label.wrap] property.
+   * see the [gtk.label.Label.gboolean] property.
    * Params:
    *   wrapMode = the line wrapping mode
    */
@@ -799,7 +799,7 @@ class Label : Widget, AccessibleText
    * a side effect.
    * This function will set the propertyGtk.Label:use-markup property
    * to %FALSE as a side effect.
-   * See also: [Gtk.Label.setMarkup]
+   * See also: [gtk.label.Label.setMarkup]
    * Params:
    *   str = The text you want to set
    */
@@ -814,7 +814,7 @@ class Label : Widget, AccessibleText
    * If characters in str are preceded by an underscore, they are underlined
    * indicating that they represent a keyboard accelerator called a mnemonic.
    * The mnemonic key can be used to activate another widget, chosen
-   * automatically, or explicitly using [Gtk.Label.setMnemonicWidget].
+   * automatically, or explicitly using [gtk.label.Label.setMnemonicWidget].
    * Params:
    *   str = a string
    */
@@ -826,7 +826,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Sets whether the text of the label contains markup.
-   * See [Gtk.Label.setMarkup].
+   * See [gtk.label.Label.setMarkup].
    * Params:
    *   setting = %TRUE if the label’s text should be parsed for markup.
    */
@@ -864,7 +864,7 @@ class Label : Widget, AccessibleText
    * wrap at its parent container’s width, because GTK widgets
    * conceptually can’t make their requisition depend on the parent
    * container’s size. For a label that wraps at a specific position,
-   * set the label’s width using [Gtk.Widget.setSizeRequest].
+   * set the label’s width using [gtk.widget.Widget.setSizeRequest].
    * Params:
    *   wrap = the setting
    */
@@ -876,7 +876,7 @@ class Label : Widget, AccessibleText
   /**
    * Controls how line wrapping is done.
    * This only affects the label if line wrapping is on. $(LPAREN)See
-   * [Gtk.Label.setWrap]$(RPAREN) The default is %PANGO_WRAP_WORD
+   * [gtk.label.Label.setWrap]$(RPAREN) The default is %PANGO_WRAP_WORD
    * which means wrap on word boundaries.
    * For sizing behavior, also consider the propertyGtk.Label:natural-wrap-mode
    * property.
@@ -890,7 +890,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Sets the `xalign` of the label.
-   * See the [Gtk.Label.xalign] property.
+   * See the [gtk.label.Label.gfloat] property.
    * Params:
    *   xalign = the new xalign value, between 0 and 1
    */
@@ -901,7 +901,7 @@ class Label : Widget, AccessibleText
 
   /**
    * Sets the `yalign` of the label.
-   * See the [Gtk.Label.yalign] property.
+   * See the [gtk.label.Label.gfloat] property.
    * Params:
    *   yalign = the new yalign value, between 0 and 1
    */
@@ -913,7 +913,7 @@ class Label : Widget, AccessibleText
   /**
    * Gets emitted when the user activates a link in the label.
    * The ::activate-current-link is a [keybinding signal](class.SignalAction.html).
-   * Applications may also emit the signal with [GObject.DGObjectGlobal.signalEmitByName]
+   * Applications may also emit the signal with [gobject.global.signalEmitByName]
    * if they need to control activation of URIs programmatically.
    * The default bindings for this signal are all forms of the <kbd>Enter</kbd> key.
    *   label = the instance the signal is connected to
@@ -946,7 +946,7 @@ class Label : Widget, AccessibleText
   /**
    * Gets emitted to activate a URI.
    * Applications may connect to it to override the default behaviour,
-   * which is to call [Gtk.FileLauncher.launch].
+   * which is to call [gtk.file_launcher.FileLauncher.launch].
    * Params
    *   uri = the URI that is activated
    *   label = the instance the signal is connected to
@@ -1017,7 +1017,7 @@ class Label : Widget, AccessibleText
    * If the cursor is not visible in entry, this signal causes the viewport to
    * be moved instead.
    * Applications should not connect to it, but may emit it with
-   * [GObject.DGObjectGlobal.signalEmitByName] if they need to control the cursor
+   * [gobject.global.signalEmitByName] if they need to control the cursor
    * programmatically.
    * The default bindings for this signal come in two variants,
    * the variant with the Shift modifier extends the selection,

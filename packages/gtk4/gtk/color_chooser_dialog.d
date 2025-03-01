@@ -1,6 +1,6 @@
 module gtk.color_chooser_dialog;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -24,18 +24,18 @@ import gtk.window;
 /**
  * A dialog for choosing a color.
  * ![An example GtkColorChooserDialog](colorchooser.png)
- * `GtkColorChooserDialog` implements the [Gtk.ColorChooser] interface
+ * `GtkColorChooserDialog` implements the [gtk.color_chooser.ColorChooser] interface
  * and does not provide much API of its own.
- * To create a `GtkColorChooserDialog`, use [Gtk.ColorChooserDialog.new_].
+ * To create a `GtkColorChooserDialog`, use [gtk.color_chooser_dialog.ColorChooserDialog.new_].
  * To change the initially selected color, use
- * [Gtk.ColorChooser.setRgba]. To get the selected color use
- * [Gtk.ColorChooser.getRgba].
- * `GtkColorChooserDialog` has been deprecated in favor of [Gtk.ColorDialog].
+ * [gtk.color_chooser.ColorChooser.setRgba]. To get the selected color use
+ * [gtk.color_chooser.ColorChooser.getRgba].
+ * `GtkColorChooserDialog` has been deprecated in favor of [gtk.color_dialog.ColorDialog].
  * ## CSS nodes
  * `GtkColorChooserDialog` has a single CSS node with the name `window` and style
  * class `.colorchooser`.
 
- * Deprecated: Use [Gtk.ColorDialog] instead
+ * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
  */
 class ColorChooserDialog : Dialog, ColorChooser
 {
@@ -65,7 +65,7 @@ class ColorChooserDialog : Dialog, ColorChooser
    *   parent = Transient parent of the dialog
    * Returns: a new `GtkColorChooserDialog`
 
-   * Deprecated: Use [Gtk.ColorDialog] instead
+   * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
   this(string title, Window parent)
   {

@@ -1,6 +1,6 @@
 module gtk.list_header;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,7 +10,7 @@ import gtk.widget;
 /**
  * `GtkListHeader` is used by list widgets to represent the headers they
  * display.
- * `GtkListHeader` objects are managed just like [Gtk.ListItem]
+ * `GtkListHeader` objects are managed just like [gtk.list_item.ListItem]
  * objects via their factory, but provide a different set of properties suitable
  * for managing the header instead of individual items.
  */
@@ -34,7 +34,7 @@ class ListHeader : ObjectG
   }
 
   /**
-   * Gets the child previously set via [Gtk.ListHeader.setChild] or
+   * Gets the child previously set via [gtk.list_header.ListHeader.setChild] or
    * %NULL if none was set.
    * Returns: The child
    */
@@ -62,7 +62,7 @@ class ListHeader : ObjectG
   /**
    * Gets the model item at the start of the section.
    * This is the item that occupies the list model at position
-   * [Gtk.ListHeader.start].
+   * [gtk.list_header.ListHeader.guint].
    * If self is unbound, this function returns %NULL.
    * Returns: The item displayed
    */

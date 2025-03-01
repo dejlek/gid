@@ -1,6 +1,6 @@
 module gtk.shortcut_label;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -14,7 +14,7 @@ import gtk.widget;
 
 /**
  * `GtkShortcutLabel` displays a single keyboard shortcut or gesture.
- * The main use case for `GtkShortcutLabel` is inside a [Gtk.ShortcutsWindow].
+ * The main use case for `GtkShortcutLabel` is inside a [gtk.shortcuts_window.ShortcutsWindow].
  */
 class ShortcutLabel : Widget
 {

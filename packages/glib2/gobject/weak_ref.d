@@ -1,6 +1,6 @@
 module gobject.weak_ref;
 
-import gid.gid;
+import gid.global;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.types;
@@ -13,7 +13,7 @@ import gobject.types;
  * every #GWeakRef associated with becomes empty $(LPAREN)i.e. points to %NULL$(RPAREN).
  * Like #GValue, #GWeakRef can be statically allocated, stack- or
  * heap-allocated, or embedded in larger structures.
- * Unlike [GObject.ObjectG.weakRef] and [GObject.ObjectG.addWeakPointer], this weak
+ * Unlike [gobject.object.ObjectG.weakRef] and [gobject.object.ObjectG.addWeakPointer], this weak
  * reference is thread-safe: converting a weak pointer to a reference is
  * atomic with respect to invalidation of weak pointers to destroyed
  * objects.

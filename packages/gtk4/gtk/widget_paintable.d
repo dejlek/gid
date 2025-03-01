@@ -2,7 +2,7 @@ module gtk.widget_paintable;
 
 import gdk.paintable;
 import gdk.paintable_mixin;
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -23,7 +23,7 @@ import gtk.widget;
  * the widget changes.
  * You can use a `GtkWidgetPaintable` everywhere a `GdkPaintable` is allowed,
  * including using it on a `GtkPicture` $(LPAREN)or one of its parents$(RPAREN) that it was
- * set on itself via [Gtk.Picture.setPaintable]. The paintable will take care
+ * set on itself via [gtk.picture.Picture.setPaintable]. The paintable will take care
  * of recursion when this happens. If you do this however, ensure that the
  * property@Gtk.Picture:can-shrink property is set to %TRUE or you might
  * end up with an infinitely growing widget.

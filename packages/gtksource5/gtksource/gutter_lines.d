@@ -1,6 +1,6 @@
 module gtksource.gutter_lines;
 
-import gid.gid;
+import gid.global;
 import glib.types;
 import gobject.object;
 import gtk.text_buffer;
@@ -40,9 +40,9 @@ class GutterLines : ObjectG
 
   /**
    * Adds the class name to line.
-   * name will be converted to a [GLib.Quark] as part of this process. A
+   * name will be converted to a [glib.uint] as part of this process. A
    * faster version of this function is available via
-   * [GtkSource.GutterLines.addQclass] for situations where the [GLib.Quark] is
+   * [gtksource.gutter_lines.GutterLines.addQclass] for situations where the [glib.uint] is
    * known ahead of time.
    * Params:
    *   line = a line number starting from zero
@@ -57,9 +57,9 @@ class GutterLines : ObjectG
   /**
    * Adds the class denoted by qname to line.
    * You may check if a line has qname by calling
-   * [GtkSource.GutterLines.hasQclass].
+   * [gtksource.gutter_lines.GutterLines.hasQclass].
    * You can remove qname by calling
-   * [GtkSource.GutterLines.removeQclass].
+   * [gtksource.gutter_lines.GutterLines.removeQclass].
    * Params:
    *   line = a line number starting from zero
    *   qname = a class name as a #GQuark
@@ -70,7 +70,7 @@ class GutterLines : ObjectG
   }
 
   /**
-   * Gets the [Gtk.TextBuffer] that the `GtkSourceGutterLines` represents.
+   * Gets the [gtk.text_buffer.TextBuffer] that the `GtkSourceGutterLines` represents.
    * Returns: a #GtkTextBuffer
    */
   TextBuffer getBuffer()
@@ -133,7 +133,7 @@ class GutterLines : ObjectG
   }
 
   /**
-   * Gets the [Gtk.TextView] that the `GtkSourceGutterLines` represents.
+   * Gets the [gtk.text_view.TextView] that the `GtkSourceGutterLines` represents.
    * Returns: a #GtkTextView
    */
   TextView getView()
@@ -160,10 +160,10 @@ class GutterLines : ObjectG
   }
 
   /**
-   * Checks to see if [GtkSource.GutterLines.addClass] was called with
+   * Checks to see if [gtksource.gutter_lines.GutterLines.addClass] was called with
    * the name for line.
    * A faster version of this function is provided via
-   * [GtkSource.GutterLines.hasQclass] for situations where the quark
+   * [gtksource.gutter_lines.GutterLines.hasQclass] for situations where the quark
    * is known ahead of time.
    * Params:
    *   line = a line number starting from zero
@@ -179,7 +179,7 @@ class GutterLines : ObjectG
   }
 
   /**
-   * Checks to see if [GtkSource.GutterLines.addQclass] was called with
+   * Checks to see if [gtksource.gutter_lines.GutterLines.addQclass] was called with
    * the quark denoted by qname for line.
    * Params:
    *   line = a line number starting from zero
@@ -237,7 +237,7 @@ class GutterLines : ObjectG
   /**
    * Removes the class matching name from line.
    * A faster version of this function is available via
-   * [GtkSource.GutterLines.removeQclass] for situations where the
+   * [gtksource.gutter_lines.GutterLines.removeQclass] for situations where the
    * #GQuark is known ahead of time.
    * Params:
    *   line = a line number starting from zero
@@ -250,8 +250,8 @@ class GutterLines : ObjectG
   }
 
   /**
-   * Reverses a call to [GtkSource.GutterLines.addQclass] by removing
-   * the [GLib.Quark] matching qname.
+   * Reverses a call to [gtksource.gutter_lines.GutterLines.addQclass] by removing
+   * the [glib.uint] matching qname.
    * Params:
    *   line = a line number starting from zero
    *   qname = a #GQuark to remove from line

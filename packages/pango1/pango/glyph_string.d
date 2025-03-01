@@ -1,6 +1,6 @@
 module pango.glyph_string;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import pango.analysis;
 import pango.c.functions;
@@ -51,7 +51,7 @@ class GlyphString : Boxed
   /**
    * Create a new `PangoGlyphString`.
    * Returns: the newly allocated `PangoGlyphString`, which
-   *   should be freed with [Pango.GlyphString.free].
+   *   should be freed with [pango.glyph_string.GlyphString.free].
    */
   this()
   {
@@ -74,7 +74,7 @@ class GlyphString : Boxed
 
   /**
    * Compute the logical and ink extents of a glyph string.
-   * See the documentation for [Pango.Font.getGlyphExtents] for details
+   * See the documentation for [pango.font.Font.getGlyphExtents] for details
    * about the interpretation of the rectangles.
    * Examples of logical $(LPAREN)red$(RPAREN) and ink $(LPAREN)green$(RPAREN) rects:
    * ![](rects1.png) ![](rects2.png)
@@ -110,7 +110,7 @@ class GlyphString : Boxed
 
   /**
    * Computes the logical width of the glyph string.
-   * This can also be computed using [Pango.GlyphString.extents].
+   * This can also be computed using [pango.glyph_string.GlyphString.extents].
    * However, since this only computes the width, it's much faster. This
    * is in fact only a convenience function that computes the sum of
    * geometry.width for each glyph in the glyphs.
@@ -153,7 +153,7 @@ class GlyphString : Boxed
 
   /**
    * Converts from character position to x position.
-   * This variant of [Pango.GlyphString.indexToX] additionally
+   * This variant of [pango.glyph_string.GlyphString.indexToX] additionally
    * accepts a `PangoLogAttr` array. The grapheme boundary information
    * in it can be used to disambiguate positioning inside some complex
    * clusters.

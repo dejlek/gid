@@ -1,6 +1,6 @@
 module gio.zlib_decompressor;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.converter;
@@ -10,7 +10,7 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GZlibDecompressor` is an implementation of [Gio.Converter] that
+ * `GZlibDecompressor` is an implementation of [gio.converter.Converter] that
  * decompresses data compressed with zlib.
  */
 class ZlibDecompressor : ObjectG, Converter

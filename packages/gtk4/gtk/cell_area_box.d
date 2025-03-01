@@ -1,6 +1,6 @@
 module gtk.cell_area_box;
 
-import gid.gid;
+import gid.global;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -28,8 +28,8 @@ import gtk.types;
  * side.
  * Alignments of `GtkCellRenderer`s rendered in adjacent rows can be
  * configured by configuring the `GtkCellAreaBox` align child cell property
- * with [Gtk.CellArea.cellSetProperty] or by specifying the "align"
- * argument to [Gtk.CellAreaBox.packStart] and [Gtk.CellAreaBox.packEnd].
+ * with [gtk.cell_area.CellArea.cellSetProperty] or by specifying the "align"
+ * argument to [gtk.cell_area_box.CellAreaBox.packStart] and [gtk.cell_area_box.CellAreaBox.packEnd].
 
  * Deprecated: List views use widgets for displaying their
  *   contents

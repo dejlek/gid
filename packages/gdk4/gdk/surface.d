@@ -15,7 +15,7 @@ import gdk.glcontext;
 import gdk.monitor;
 import gdk.types;
 import gdk.vulkan_context;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -24,8 +24,8 @@ import gobject.object;
  * A `GdkSurface` is a rectangular region on the screen.
  * It’s a low-level object, used to implement high-level objects
  * such as [GtkWindow](../gtk4/class.Window.html).
- * The surfaces you see in practice are either [Gdk.Toplevel] or
- * [Gdk.Popup], and those interfaces provide much of the required
+ * The surfaces you see in practice are either [gdk.toplevel.Toplevel] or
+ * [gdk.popup.Popup], and those interfaces provide much of the required
  * API to interact with these surfaces. Other, more specialized surface
  * types exist, but you will rarely interact with them directly.
  */
@@ -51,7 +51,7 @@ class Surface : ObjectG
   /**
    * Create a new popup surface.
    * The surface will be attached to parent and can be positioned
-   * relative to it using [Gdk.Popup.present].
+   * relative to it using [gdk.popup.Popup.present].
    * Params:
    *   parent = the parent surface to attach the surface to
    *   autohide = whether to hide the surface on outside clicks
@@ -82,7 +82,7 @@ class Surface : ObjectG
   /**
    * Emits a short beep associated to surface.
    * If the display of surface does not support per-surface beeps,
-   * emits a short beep on the display just as [Gdk.Display.beep].
+   * emits a short beep on the display just as [gdk.display.Display.beep].
    */
   void beep()
   {
@@ -106,7 +106,7 @@ class Surface : ObjectG
    * The context is disconnected from any particular surface or surface.
    * If the creation of the `GdkGLContext` failed, error will be set.
    * Before using the returned `GdkGLContext`, you will need to
-   * call [Gdk.GLContext.makeCurrent] or [Gdk.GLContext.realize].
+   * call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
    * Returns: the newly created `GdkGLContext`
    */
   GLContext createGlContext()
@@ -127,7 +127,7 @@ class Surface : ObjectG
    * and font options as surface. Generally, the new surface will also
    * use the same backend as surface, unless that is not possible for
    * some reason. The type of the returned surface may be examined with
-   * [cairo.DcairoSurface.getSurfaceType].
+   * [cairo.surface.Surface.getSurfaceType].
    * Initially the surface contents are all 0 $(LPAREN)transparent if contents
    * have transparency, black otherwise.$(RPAREN)
    * This function always returns a valid pointer, but it will return a
@@ -138,7 +138,7 @@ class Surface : ObjectG
    *   width = width of the new surface
    *   height = height of the new surface
    * Returns: a pointer to the newly allocated surface. The caller
-   *   owns the surface and should call [cairo.DcairoSurface.destroy] when done
+   *   owns the surface and should call [cairo.surface.Surface.destroy] when done
    *   with it.
 
    * Deprecated: Create a suitable cairo image surface yourself
@@ -188,7 +188,7 @@ class Surface : ObjectG
    * `GdkSurface`.
    * If the return value is %NULL then there is no custom cursor set on
    * the surface, and it is using the cursor for its parent surface.
-   * Use [Gdk.Surface.setCursor] to unset the cursor of the surface.
+   * Use [gdk.surface.Surface.setCursor] to unset the cursor of the surface.
    * Returns: a `GdkCursor`
    */
   Cursor getCursor()
@@ -204,7 +204,7 @@ class Surface : ObjectG
    * specified `GdkSurface`.
    * If the return value is %NULL then there is no custom cursor set on the
    * specified surface, and it is using the cursor for its parent surface.
-   * Use [Gdk.Surface.setCursor] to unset the cursor of the surface.
+   * Use [gdk.surface.Surface.setCursor] to unset the cursor of the surface.
    * Params:
    *   device = a pointer `GdkDevice`
    * Returns: a `GdkCursor`
@@ -264,7 +264,7 @@ class Surface : ObjectG
   /**
    * Returns the height of the given surface.
    * Surface size is reported in ”application pixels”, not
-   * ”device pixels” $(LPAREN)see [Gdk.Surface.getScaleFactor]$(RPAREN).
+   * ”device pixels” $(LPAREN)see [gdk.surface.Surface.getScaleFactor]$(RPAREN).
    * Returns: The height of surface
    */
   int getHeight()
@@ -276,8 +276,8 @@ class Surface : ObjectG
 
   /**
    * Checks whether the surface has been mapped.
-   * A surface is mapped with [Gdk.Toplevel.present]
-   * or [Gdk.Popup.present].
+   * A surface is mapped with [gdk.toplevel.Toplevel.present]
+   * or [gdk.popup.Popup.present].
    * Returns: %TRUE if the surface is mapped
    */
   bool getMapped()
@@ -293,7 +293,7 @@ class Surface : ObjectG
    * When the scale is bigger than 1, the windowing system prefers to get
    * buffers with a resolution that is bigger than the surface size $(LPAREN)e.g.
    * to show the surface on a high-resolution display, or in a magnifier$(RPAREN).
-   * Compare with [Gdk.Surface.getScaleFactor], which returns the
+   * Compare with [gdk.surface.Surface.getScaleFactor], which returns the
    * next larger integer.
    * The scale may change during the lifetime of the surface.
    * Returns: the scale
@@ -327,7 +327,7 @@ class Surface : ObjectG
   /**
    * Returns the width of the given surface.
    * Surface size is reported in ”application pixels”, not
-   * ”device pixels” $(LPAREN)see [Gdk.Surface.getScaleFactor]$(RPAREN).
+   * ”device pixels” $(LPAREN)see [gdk.surface.Surface.getScaleFactor]$(RPAREN).
    * Returns: The width of surface
    */
   int getWidth()
@@ -342,7 +342,7 @@ class Surface : ObjectG
    * For toplevel surfaces, withdraws them, so they will no longer be
    * known to the window manager; for all surfaces, unmaps them, so
    * they won’t be displayed. Normally done automatically as
-   * part of [[Gtk.Widget.hide]](../gtk4/method.Widget.hide.html).
+   * part of [[gtk.widget.Widget.hide]](../gtk4/method.Widget.hide.html).
    */
   void hide()
   {
@@ -361,7 +361,7 @@ class Surface : ObjectG
   }
 
   /**
-   * Forces a [Gdk.Surface.render] signal emission for surface
+   * Forces a [gdk.surface.Surface.render] signal emission for surface
    * to be scheduled.
    * This function is useful for implementations that track invalid
    * regions on their own.
@@ -373,7 +373,7 @@ class Surface : ObjectG
 
   /**
    * Request a layout phase from the surface's frame clock.
-   * See [Gdk.FrameClock.requestPhase].
+   * See [gdk.frame_clock.FrameClock.requestPhase].
    */
   void requestLayout()
   {
@@ -385,7 +385,7 @@ class Surface : ObjectG
    * Passing %NULL for the cursor argument means that surface will use
    * the cursor of its parent surface. Most surfaces should use this default.
    * Note that cursor must be for the same display as surface.
-   * Use [Gdk.Cursor.newFromName] or [Gdk.Cursor.newFromTexture]
+   * Use [gdk.cursor.Cursor.newFromName] or [gdk.cursor.Cursor.newFromTexture]
    * to create the cursor. To make the cursor invisible, use %GDK_BLANK_CURSOR.
    * Params:
    *   cursor = a `GdkCursor`
@@ -399,7 +399,7 @@ class Surface : ObjectG
    * Sets a specific `GdkCursor` for a given device when it gets inside surface.
    * Passing %NULL for the cursor argument means that surface will use the
    * cursor of its parent surface. Most surfaces should use this default.
-   * Use [Gdk.Cursor.newFromName] or [Gdk.Cursor.newFromTexture]
+   * Use [gdk.cursor.Cursor.newFromName] or [gdk.cursor.Cursor.newFromTexture]
    * to create the cursor. To make the cursor invisible, use %GDK_BLANK_CURSOR.
    * Params:
    *   device = a pointer `GdkDevice`
@@ -420,7 +420,7 @@ class Surface : ObjectG
    * channel of the surface defines which pixels are invisible and
    * allows for nicely antialiased borders, and the input region
    * controls where the surface is “clickable”.
-   * Use [Gdk.Display.supportsInputShapes] to find out if
+   * Use [gdk.display.Display.supportsInputShapes] to find out if
    * a particular backend supports input regions.
    * Params:
    *   region = region of surface to be reactive
@@ -540,7 +540,7 @@ class Surface : ObjectG
    * Emitted when the size of surface is changed, or when relayout should
    * be performed.
    * Surface size is reported in ”application pixels”, not
-   * ”device pixels” $(LPAREN)see [Gdk.Surface.getScaleFactor]$(RPAREN).
+   * ”device pixels” $(LPAREN)see [gdk.surface.Surface.getScaleFactor]$(RPAREN).
    * Params
    *   width = the current width
    *   height = the current height

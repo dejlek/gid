@@ -4,7 +4,7 @@ import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf_format;
 import gdkpixbuf.types;
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -27,8 +27,8 @@ import gobject.object;
  * and the start of the next$(RPAREN).
  * ## Creating new `GdkPixbuf`
  * The most basic way to create a pixbuf is to wrap an existing pixel
- * buffer with a [GdkPixbuf.Pixbuf] instance. You can use the
- * [GdkPixbuf.Pixbuf.newFromData] function to do this.
+ * buffer with a [gdkpixbuf.pixbuf.Pixbuf] instance. You can use the
+ * [gdkpixbuf.pixbuf.Pixbuf.newFromData] function to do this.
  * Every time you create a new `GdkPixbuf` instance for some data, you
  * will need to specify the destroy notification function that will be
  * called when the data buffer needs to be freed; this will happen when
@@ -36,15 +36,15 @@ import gobject.object;
  * you have a chunk of static data compiled into your application, you
  * can pass in `NULL` as the destroy notification function so that the
  * data will not be freed.
- * The [GdkPixbuf.Pixbuf.new_] constructor function can be used
+ * The [gdkpixbuf.pixbuf.Pixbuf.new_] constructor function can be used
  * as a convenience to create a pixbuf with an empty buffer; this is
  * equivalent to allocating a data buffer using `malloc$(LPAREN)$(RPAREN)` and then
- * wrapping it with `[GdkPixbuf.Pixbuf.newFromData]`. The `[GdkPixbuf.Pixbuf.new_]`
+ * wrapping it with `[gdkpixbuf.pixbuf.Pixbuf.newFromData]`. The `[gdkpixbuf.pixbuf.Pixbuf.new_]`
  * function will compute an optimal rowstride so that rendering can be
  * performed with an efficient algorithm.
- * As a special case, you can use the [GdkPixbuf.Pixbuf.newFromXpmData]
+ * As a special case, you can use the [gdkpixbuf.pixbuf.Pixbuf.newFromXpmData]
  * function to create a pixbuf from inline XPM image data.
- * You can also copy an existing pixbuf with the [GdkPixbuf.Pixbuf.copy]
+ * You can also copy an existing pixbuf with the [gdkpixbuf.pixbuf.Pixbuf.copy]
  * function. This is not the same as just acquiring a reference to
  * the old pixbuf instance: the copy function will actually duplicate
  * the pixel data in memory and create a new class@Pixbuf instance
@@ -53,9 +53,9 @@ import gobject.object;
  * `GdkPixbuf` structures are reference counted. This means that an
  * application can share a single pixbuf among many parts of the
  * code. When a piece of the program needs to use a pixbuf, it should
- * acquire a reference to it by calling `[GObject.ObjectG.ref_]`; when it no
+ * acquire a reference to it by calling `[gobject.object.ObjectG.ref_]`; when it no
  * longer needs the pixbuf, it should release the reference it acquired
- * by calling `[GObject.ObjectG.unref]`. The resources associated with a
+ * by calling `[gobject.object.ObjectG.unref]`. The resources associated with a
  * `GdkPixbuf` will be freed when its reference count drops to zero.
  * Newly-created `GdkPixbuf` instances start with a reference count
  * of one.
@@ -64,13 +64,13 @@ import gobject.object;
  * packed format. Rows in the image are stored top to bottom, and
  * in each row pixels are stored from left to right.
  * There may be padding at the end of a row.
- * The "rowstride" value of a pixbuf, as returned by [GdkPixbuf.Pixbuf.getRowstride],
+ * The "rowstride" value of a pixbuf, as returned by [gdkpixbuf.pixbuf.Pixbuf.getRowstride],
  * indicates the number of bytes between rows.
  * **NOTE**: If you are copying raw pixbuf data with `memcpy$(LPAREN)$(RPAREN)` note that the
  * last row in the pixbuf may not be as wide as the full rowstride, but rather
  * just as wide as the pixel data needs to be; that is: it is unsafe to do
  * `memcpy $(LPAREN)dest, pixels, rowstride * height$(RPAREN)` to copy a whole pixbuf. Use
- * [GdkPixbuf.Pixbuf.copy] instead, or compute the width in bytes of the
+ * [gdkpixbuf.pixbuf.Pixbuf.copy] instead, or compute the width in bytes of the
  * last row as:
  * ```c
  * last_row \= width * $(LPAREN)$(LPAREN)n_channels * bits_per_sample + 7$(RPAREN) / 8$(RPAREN);
@@ -117,7 +117,7 @@ import gobject.object;
  * an image from a file in synchronous and asynchronous fashion.
  * For GUI applications, it is recommended to use the asynchronous
  * stream API to avoid blocking the control flow of the application.
- * Additionally, `GdkPixbuf` provides the [GdkPixbuf.PixbufLoader]
+ * Additionally, `GdkPixbuf` provides the [gdkpixbuf.pixbuf_loader.PixbufLoader]
  * API for progressive image loading.
  * ## Saving images
  * The `GdkPixbuf` class provides methods for saving image data in
@@ -171,7 +171,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   /**
    * Creates a new #GdkPixbuf out of in-memory readonly image data.
    * Currently only RGB images with 8 bits per sample are supported.
-   * This is the `GBytes` variant of [GdkPixbuf.Pixbuf.newFromData], useful
+   * This is the `GBytes` variant of [gdkpixbuf.pixbuf.Pixbuf.newFromData], useful
    * for language bindings.
    * Params:
    *   data = Image data in 8-bit/sample packed format inside a #GBytes
@@ -267,7 +267,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * the image's aspect ratio. Note that the returned pixbuf may be smaller
    * than `width` x `height`, if the aspect ratio requires it. To load
    * and image at the requested size, regardless of aspect ratio, use
-   * [GdkPixbuf.Pixbuf.newFromFileAtScale].
+   * [gdkpixbuf.pixbuf.Pixbuf.newFromFileAtScale].
    * Params:
    *   filename = Name of file to load, in the GLib file
    *     name encoding
@@ -451,7 +451,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
   /**
    * Finishes an asynchronous pixbuf creation operation started with
-   * [GdkPixbuf.Pixbuf.newFromStreamAsync].
+   * [gdkpixbuf.pixbuf.Pixbuf.newFromStreamAsync].
    * Params:
    *   asyncResult = a `GAsyncResult`
    * Returns: the newly created pixbuf
@@ -529,10 +529,10 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   /**
    * Asynchronously parses an image file far enough to determine its
    * format and size.
-   * For more details see [GdkPixbuf.Pixbuf.getFileInfo], which is the synchronous
+   * For more details see [gdkpixbuf.pixbuf.Pixbuf.getFileInfo], which is the synchronous
    * version of this function.
    * When the operation is finished, callback will be called in the
-   * main thread. You can then call [GdkPixbuf.Pixbuf.getFileInfoFinish] to
+   * main thread. You can then call [gdkpixbuf.pixbuf.Pixbuf.getFileInfoFinish] to
    * get the result of the operation.
    * Params:
    *   filename = The name of the file to identify
@@ -557,7 +557,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
   /**
    * Finishes an asynchronous pixbuf parsing operation started with
-   * [GdkPixbuf.Pixbuf.getFileInfoAsync].
+   * [gdkpixbuf.pixbuf.Pixbuf.getFileInfoAsync].
    * Params:
    *   asyncResult = a `GAsyncResult`
    *   width = Return location for the width of the image, or `NULL`
@@ -619,10 +619,10 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
   /**
    * Creates a new pixbuf by asynchronously loading an image from an input stream.
-   * For more details see [GdkPixbuf.Pixbuf.newFromStream], which is the synchronous
+   * For more details see [gdkpixbuf.pixbuf.Pixbuf.newFromStream], which is the synchronous
    * version of this function.
    * When the operation is finished, callback will be called in the main thread.
-   * You can then call [GdkPixbuf.Pixbuf.newFromStreamFinish] to get the result of
+   * You can then call [gdkpixbuf.pixbuf.Pixbuf.newFromStreamFinish] to get the result of
    * the operation.
    * Params:
    *   stream = a `GInputStream` from which to load the pixbuf
@@ -646,10 +646,10 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
   /**
    * Creates a new pixbuf by asynchronously loading an image from an input stream.
-   * For more details see [GdkPixbuf.Pixbuf.newFromStreamAtScale], which is the synchronous
+   * For more details see [gdkpixbuf.pixbuf.Pixbuf.newFromStreamAtScale], which is the synchronous
    * version of this function.
    * When the operation is finished, callback will be called in the main thread.
-   * You can then call [GdkPixbuf.Pixbuf.newFromStreamFinish] to get the result of the operation.
+   * You can then call [gdkpixbuf.pixbuf.Pixbuf.newFromStreamFinish] to get the result of the operation.
    * Params:
    *   stream = a `GInputStream` from which to load the pixbuf
    *   width = the width the image should have or -1 to not constrain the width
@@ -675,7 +675,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
   /**
    * Finishes an asynchronous pixbuf save operation started with
-   * [GdkPixbuf.Pixbuf.saveToStreamAsync].
+   * [gdkpixbuf.pixbuf.Pixbuf.saveToStreamAsync].
    * Params:
    *   asyncResult = a `GAsyncResult`
    * Returns: `TRUE` if the pixbuf was saved successfully, `FALSE` if an error was set.
@@ -773,7 +773,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * image.
    * If the source image has no alpha channel, and overall_alpha is 255, a fast
    * path is used which omits the alpha blending and just performs the scaling.
-   * See [GdkPixbuf.Pixbuf.compositeColorSimple] for a simpler variant of this
+   * See [gdkpixbuf.pixbuf.Pixbuf.compositeColorSimple] for a simpler variant of this
    * function suitable for many tasks.
    * Params:
    *   dest = the #GdkPixbuf into which to render the results
@@ -824,7 +824,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * Creates a new `GdkPixbuf` with a copy of the information in the specified
    * `pixbuf`.
    * Note that this does not copy the options set on the original `GdkPixbuf`,
-   * use [GdkPixbuf.Pixbuf.copyOptions] for this.
+   * use [gdkpixbuf.pixbuf.Pixbuf.copyOptions] for this.
    * Returns: A newly-created pixbuf
    */
   Pixbuf copy()
@@ -971,7 +971,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   /**
    * Looks up key in the list of options that may have been attached to the
    * pixbuf when it was loaded, or that may have been attached by another
-   * function using [GdkPixbuf.Pixbuf.setOption].
+   * function using [gdkpixbuf.pixbuf.Pixbuf.setOption].
    * For instance, the ANI loader provides "Title" and "Artist" options.
    * The ICO, XBM, and XPM loaders provide "x_hot" and "y_hot" hot-spot
    * options for cursor definitions. The PNG loader provides the tEXt ancillary
@@ -999,7 +999,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   /**
    * Returns a `GHashTable` with a list of all the options that may have been
    * attached to the `pixbuf` when it was loaded, or that may have been
-   * attached by another function using [GdkPixbuf.Pixbuf.setOption].
+   * attached by another function using [gdkpixbuf.pixbuf.Pixbuf.setOption].
    * Returns: a #GHashTable
    *   of key/values pairs
    */
@@ -1084,7 +1084,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * Provides a #GBytes buffer containing the raw pixel data; the data
    * must not be modified.
    * This function allows skipping the implicit copy that must be made
-   * if [GdkPixbuf.Pixbuf.getPixels] is called on a read-only pixbuf.
+   * if [gdkpixbuf.pixbuf.Pixbuf.getPixels] is called on a read-only pixbuf.
    * Returns: A new reference to a read-only copy of
    *   the pixel data.  Note that for mutable pixbufs, this function will
    *   incur a one-time copy of the pixel data for conversion into the
@@ -1101,7 +1101,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   /**
    * Provides a read-only pointer to the raw pixel data.
    * This function allows skipping the implicit copy that must be made
-   * if [GdkPixbuf.Pixbuf.getPixels] is called on a read-only pixbuf.
+   * if [gdkpixbuf.pixbuf.Pixbuf.getPixels] is called on a read-only pixbuf.
    * Returns: a read-only pointer to the raw pixel data
    */
   const(ubyte)* readPixels()
@@ -1162,10 +1162,10 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   }
 
   /**
-   * Vector version of `[GdkPixbuf.Pixbuf.saveToBuffer]`.
+   * Vector version of `[gdkpixbuf.pixbuf.Pixbuf.saveToBuffer]`.
    * Saves pixbuf to a new buffer in format type, which is currently "jpeg",
    * "tiff", "png", "ico" or "bmp".
-   * See [GdkPixbuf.Pixbuf.saveToBuffer] for more details.
+   * See [gdkpixbuf.pixbuf.Pixbuf.saveToBuffer] for more details.
    * Params:
    *   buffer = location to receive a pointer to the new buffer.
    *   type = name of file format.
@@ -1202,11 +1202,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   }
 
   /**
-   * Vector version of `[GdkPixbuf.Pixbuf.saveToCallback]`.
+   * Vector version of `[gdkpixbuf.pixbuf.Pixbuf.saveToCallback]`.
    * Saves pixbuf to a callback in format type, which is currently "jpeg",
    * "png", "tiff", "ico" or "bmp".
    * If error is set, `FALSE` will be returned.
-   * See [GdkPixbuf.Pixbuf.saveToCallback] for more details.
+   * See [gdkpixbuf.pixbuf.Pixbuf.saveToCallback] for more details.
    * Params:
    *   saveFunc = a function that is called to save each block of data that
    *     the save routine generates.
@@ -1258,7 +1258,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * Saves `pixbuf` to an output stream.
    * Supported file formats are currently "jpeg", "tiff", "png", "ico" or
    * "bmp".
-   * See [GdkPixbuf.Pixbuf.saveToStream] for more details.
+   * See [gdkpixbuf.pixbuf.Pixbuf.saveToStream] for more details.
    * Params:
    *   stream = a `GOutputStream` to save the pixbuf to
    *   type = name of file format
@@ -1293,10 +1293,10 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
   /**
    * Saves `pixbuf` to an output stream asynchronously.
-   * For more details see [GdkPixbuf.Pixbuf.saveToStreamv], which is the synchronous
+   * For more details see [gdkpixbuf.pixbuf.Pixbuf.saveToStreamv], which is the synchronous
    * version of this function.
    * When the operation is finished, `callback` will be called in the main thread.
-   * You can then call [GdkPixbuf.Pixbuf.saveToStreamFinish] to get the result of
+   * You can then call [gdkpixbuf.pixbuf.Pixbuf.saveToStreamFinish] to get the result of
    * the operation.
    * Params:
    *   stream = a `GOutputStream` to which to save the pixbuf
@@ -1335,10 +1335,10 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   }
 
   /**
-   * Vector version of `[GdkPixbuf.Pixbuf.save]`.
+   * Vector version of `[gdkpixbuf.pixbuf.Pixbuf.save]`.
    * Saves pixbuf to a file in `type`, which is currently "jpeg", "png", "tiff", "ico" or "bmp".
    * If error is set, `FALSE` will be returned.
-   * See [GdkPixbuf.Pixbuf.save] for more details.
+   * See [gdkpixbuf.pixbuf.Pixbuf.save] for more details.
    * Params:
    *   filename = name of file to save.
    *   type = name of file format.
@@ -1376,9 +1376,9 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * then renders the rectangle $(LPAREN)dest_x, dest_y, dest_width,
    * dest_height$(RPAREN) of the resulting image onto the destination image
    * replacing the previous contents.
-   * Try to use [GdkPixbuf.Pixbuf.scaleSimple] first; this function is
+   * Try to use [gdkpixbuf.pixbuf.Pixbuf.scaleSimple] first; this function is
    * the industrial-strength power tool you can fall back to, if
-   * [GdkPixbuf.Pixbuf.scaleSimple] isn't powerful enough.
+   * [gdkpixbuf.pixbuf.Pixbuf.scaleSimple] isn't powerful enough.
    * If the source rectangle overlaps the destination rectangle on the
    * same pixbuf, it will be overwritten during the scaling which
    * results in rendering artifacts.
@@ -1408,11 +1408,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * ugly$(RPAREN). The default `interp_type` should be `GDK_INTERP_BILINEAR` which
    * offers reasonable quality and speed.
    * You can scale a sub-portion of `src` by creating a sub-pixbuf
-   * pointing into `src`; see [GdkPixbuf.Pixbuf.newSubpixbuf].
+   * pointing into `src`; see [gdkpixbuf.pixbuf.Pixbuf.newSubpixbuf].
    * If `dest_width` and `dest_height` are equal to the width and height of
    * `src`, this function will return an unscaled copy of `src`.
-   * For more complicated scaling/alpha blending see [GdkPixbuf.Pixbuf.scale]
-   * and [GdkPixbuf.Pixbuf.composite].
+   * For more complicated scaling/alpha blending see [gdkpixbuf.pixbuf.Pixbuf.scale]
+   * and [gdkpixbuf.pixbuf.Pixbuf.composite].
    * Params:
    *   destWidth = the width of destination image
    *   destHeight = the height of destination image

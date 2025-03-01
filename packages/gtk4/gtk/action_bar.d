@@ -1,6 +1,6 @@
 module gtk.action_bar;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -88,7 +88,7 @@ class ActionBar : Widget
 
   /**
    * Gets whether the contents of the action bar are revealed.
-   * Returns: the current value of the [Gtk.ActionBar.revealed]
+   * Returns: the current value of the [gtk.action_bar.ActionBar.gboolean]
    *   property
    */
   bool getRevealed()
@@ -143,7 +143,7 @@ class ActionBar : Widget
   /**
    * Reveals or conceals the content of the action bar.
    * Note: this does not show or hide action_bar in the
-   * [Gtk.Widget.visible] sense, so revealing has
+   * [gtk.widget.Widget.gboolean] sense, so revealing has
    * no effect if the action bar is hidden.
    * Params:
    *   revealed = The new value of the property

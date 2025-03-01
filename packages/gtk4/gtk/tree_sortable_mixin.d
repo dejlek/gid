@@ -1,7 +1,7 @@
 module gtk.tree_sortable_mixin;
 
 public import gtk.tree_sortable_iface_proxy;
-public import gid.gid;
+public import gid.global;
 public import gobject.dclosure;
 public import gobject.object;
 public import gtk.c.functions;
@@ -18,7 +18,7 @@ public import gtk.types;
  * to sort the model.
 
  * Deprecated: There is no replacement for this interface. You should
- *   use [Gtk.SortListModel] to wrap your list model instead
+ *   use [gtk.sort_list_model.SortListModel] to wrap your list model instead
  */
 template TreeSortableT()
 {

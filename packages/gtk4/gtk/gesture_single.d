@@ -1,7 +1,7 @@
 module gtk.gesture_single;
 
 import gdk.event_sequence;
-import gid.gid;
+import gid.global;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture;
@@ -11,15 +11,15 @@ import gtk.types;
  * `GtkGestureSingle` is a `GtkGestures` subclass optimized for singe-touch
  * and mouse gestures.
  * Under interaction, these gestures stick to the first interacting sequence,
- * which is accessible through [Gtk.GestureSingle.getCurrentSequence]
+ * which is accessible through [gtk.gesture_single.GestureSingle.getCurrentSequence]
  * while the gesture is being interacted with.
  * By default gestures react to both %GDK_BUTTON_PRIMARY and touch events.
- * [Gtk.GestureSingle.setTouchOnly] can be used to change the
+ * [gtk.gesture_single.GestureSingle.setTouchOnly] can be used to change the
  * touch behavior. Callers may also specify a different mouse button number
- * to interact with through [Gtk.GestureSingle.setButton], or react
+ * to interact with through [gtk.gesture_single.GestureSingle.setButton], or react
  * to any mouse button by setting it to 0. While the gesture is active, the
  * button being currently pressed can be known through
- * [Gtk.GestureSingle.getCurrentButton].
+ * [gtk.gesture_single.GestureSingle.getCurrentButton].
  */
 class GestureSingle : Gesture
 {
@@ -66,7 +66,7 @@ class GestureSingle : Gesture
 
   /**
    * Returns the event sequence currently interacting with gesture.
-   * This is only meaningful if [Gtk.Gesture.isActive]
+   * This is only meaningful if [gtk.gesture.Gesture.isActive]
    * returns %TRUE.
    * Returns: the current sequence
    */
@@ -80,7 +80,7 @@ class GestureSingle : Gesture
 
   /**
    * Gets whether a gesture is exclusive.
-   * For more information, see [Gtk.GestureSingle.setExclusive].
+   * For more information, see [gtk.gesture_single.GestureSingle.setExclusive].
    * Returns: Whether the gesture is exclusive
    */
   bool getExclusive()

@@ -1,6 +1,6 @@
 module gtk.color_chooser_widget;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -23,11 +23,11 @@ import gtk.widget;
  * color of the palette, or use the '+' button to add a new custom color.
  * The chooser automatically remembers the last selection, as well
  * as custom colors.
- * To create a `GtkColorChooserWidget`, use [Gtk.ColorChooserWidget.new_].
+ * To create a `GtkColorChooserWidget`, use [gtk.color_chooser_widget.ColorChooserWidget.new_].
  * To change the initially selected color, use
- * [Gtk.ColorChooser.setRgba]. To get the selected color use
- * [Gtk.ColorChooser.getRgba].
- * The `GtkColorChooserWidget` is used in the [Gtk.ColorChooserDialog]
+ * [gtk.color_chooser.ColorChooser.setRgba]. To get the selected color use
+ * [gtk.color_chooser.ColorChooser.getRgba].
+ * The `GtkColorChooserWidget` is used in the [gtk.color_chooser_dialog.ColorChooserDialog]
  * to provide a dialog for selecting colors.
  * # CSS names
  * `GtkColorChooserWidget` has a single CSS node with name colorchooser.

@@ -1,6 +1,6 @@
 module gtksource.gutter_renderer_text;
 
-import gid.gid;
+import gid.global;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;

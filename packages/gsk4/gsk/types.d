@@ -1,6 +1,6 @@
 module gsk.types;
 
-import gid.gid;
+import gid.global;
 import glib.error;
 import graphene.point;
 import gsk.c.functions;

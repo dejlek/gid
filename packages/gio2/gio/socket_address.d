@@ -1,6 +1,6 @@
 module gio.socket_address;
 
-import gid.gid;
+import gid.global;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_connectable;
@@ -12,8 +12,8 @@ import gobject.object;
 /**
  * `GSocketAddress` is the equivalent of
  * [`struct sockaddr`]$(LPAREN)$(RPAREN)(man:sockaddr3type) and its subtypes in the BSD sockets
- * API. This is an abstract class; use [Gio.InetSocketAddress] for
- * internet sockets, or [Gio.UnixSocketAddress] for UNIX domain sockets.
+ * API. This is an abstract class; use [gio.inet_socket_address.InetSocketAddress] for
+ * internet sockets, or [gio.unix_socket_address.UnixSocketAddress] for UNIX domain sockets.
  */
 class SocketAddress : ObjectG, SocketConnectable
 {
@@ -68,7 +68,7 @@ class SocketAddress : ObjectG, SocketConnectable
   /**
    * Gets the size of address's native struct sockaddr.
    * You can use this to allocate memory to pass to
-   * [Gio.SocketAddress.toNative].
+   * [gio.socket_address.SocketAddress.toNative].
    * Returns: the size of the native struct sockaddr that
    *   address represents
    */
@@ -89,7 +89,7 @@ class SocketAddress : ObjectG, SocketConnectable
    *   dest = a pointer to a memory location that will contain the native
    *     struct sockaddr
    *   destlen = the size of dest. Must be at least as large as
-   *     [Gio.SocketAddress.getNativeSize]
+   *     [gio.socket_address.SocketAddress.getNativeSize]
    * Returns: %TRUE if dest was filled in, %FALSE on error
    */
   bool toNative(void* dest, size_t destlen)
