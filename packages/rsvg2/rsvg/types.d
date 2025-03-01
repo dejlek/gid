@@ -1,6 +1,6 @@
 module rsvg.types;
 
-import gid.gid;
+import gid.global;
 import rsvg.c.functions;
 import rsvg.c.types;
 import rsvg.types;

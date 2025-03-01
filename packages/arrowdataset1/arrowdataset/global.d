@@ -1,4 +1,4 @@
-module ArrowDataset.global;
+module arrowdataset.global;
 
 import arrowdataset.c.functions;
 import arrowdataset.c.types;

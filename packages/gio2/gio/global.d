@@ -1,4 +1,4 @@
-module Gio.global;
+module gio.global;
 
 import gid.global;
 import gio.async_result;

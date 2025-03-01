@@ -1,4 +1,4 @@
-module GdkPixbuf.global;
+module gdkpixbuf.global;
 
 import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;

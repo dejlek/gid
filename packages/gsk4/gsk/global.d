@@ -1,4 +1,4 @@
-module Gsk.global;
+module gsk.global;
 
 import gid.global;
 import gobject.value;

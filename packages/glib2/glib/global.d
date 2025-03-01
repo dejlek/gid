@@ -1,4 +1,4 @@
-module GLib.global;
+module glib.global;
 
 import gid.global;
 import glib.bytes;

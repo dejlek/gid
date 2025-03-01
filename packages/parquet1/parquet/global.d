@@ -1,4 +1,4 @@
-module Parquet.global;
+module parquet.global;
 
 import gid.global;
 import parquet.c.functions;

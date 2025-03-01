@@ -24,6 +24,7 @@ Pango        |   44    0    0   100 |  387   43   13  96.8 |    0    0    0   10
 PangoCairo   |    4    0    0   100 |   26    5    0   100 |    0    0    0   100 |    0    0    0   100 |
 Parquet      |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |   28    0    0   100 |
 Rsvg         |    7    0    0   100 |   45    2    0   100 |    0    0    0   100 |   16    0    0   100 |
+Soup         |   38    0    0   100 |  364   27    7  98.1 |   41    0    1  97.6 |   72    9    1  98.6 |
 Vte          |    8    0    0   100 |  157    6    0   100 |   28    0    0   100 |   36    0    0   100 |
 cairo        |   20    0    1  95.2 |  328   56    2  99.4 |    0    0    0   100 |   38    0    1  97.4 |
 freetype2    |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -153,6 +154,13 @@ Pango.GlyphItem.get_logical_widths
 Pango.GlyphItem.letter_space
 Pango.GlyphString.get_logical_widths
 Pango.TabArray.get_tabs
+Soup.Global.websocket_client_prepare_handshake
+Soup.Global.websocket_client_verify_handshake
+Soup.Global.websocket_server_check_handshake
+Soup.Global.websocket_server_process_handshake
+Soup.MessageBody.append_take
+Soup.WebsocketConnection.new
+Soup.WebsocketExtension.configure
 cairo.Global.image_surface_create_for_data
 cairo.ScaledFont.text_to_glyphs
 
@@ -162,6 +170,7 @@ Gtk.Editable.insert-text
 Gtk.Overlay.get-child-position
 Gtk.SpinButton.input
 GtkSource.View.push-snippet
+Soup.Message.content-sniffed
 
 [Unsupported Fields]
 Atk.Registry.factory_type_registry
@@ -259,4 +268,5 @@ Pango.Attribute.klass
 Pango.GlyphString.glyphs
 Pango.GlyphString.log_clusters
 Pango.LayoutLine.runs
+Soup.MessageBody.data
 cairo.Path.data

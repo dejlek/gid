@@ -1,4 +1,4 @@
-module Arrow.global;
+module arrow.global;
 
 import arrow.c.functions;
 import arrow.c.types;

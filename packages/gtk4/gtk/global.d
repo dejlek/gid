@@ -1,4 +1,4 @@
-module Gtk.global;
+module gtk.global;
 
 import cairo.context;
 import gdk.content_provider;

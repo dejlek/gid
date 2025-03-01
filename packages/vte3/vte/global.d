@@ -1,4 +1,4 @@
-module Vte.global;
+module vte.global;
 
 import gid.global;
 import gobject.types;

@@ -1,4 +1,4 @@
-module ArrowFlight.global;
+module arrowflight.global;
 
 import arrowflight.c.functions;
 import arrowflight.c.types;
