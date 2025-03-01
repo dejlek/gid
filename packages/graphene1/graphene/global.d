@@ -1,4 +1,4 @@
-module Graphene.global;
+module graphene.global;
 
 import gid.global;
 import graphene.c.functions;

@@ -1,6 +1,6 @@
 module soup.cookie;
 
-import gid.gid;
+import gid.global;
 import glib.date_time;
 import glib.uri;
 import gobject.boxed;
@@ -55,7 +55,7 @@ class Cookie : Boxed
 
   /**
    * Creates a new #SoupCookie with the given attributes.
-   * Use [Soup.Cookie.setSecure] and [Soup.Cookie.setHttpOnly] if you
+   * Use [soup.cookie.Cookie.setSecure] and [soup.cookie.Cookie.setHttpOnly] if you
    * need to set those attributes on the returned cookie.
    * If domain starts with ".", that indicates a domain $(LPAREN)which matches
    * the string after the ".", or any hostname that has domain as a
@@ -68,7 +68,7 @@ class Cookie : Boxed
    * %SOUP_COOKIE_MAX_AGE_ONE_WEEK and %SOUP_COOKIE_MAX_AGE_ONE_YEAR $(LPAREN)or
    * multiples thereof$(RPAREN) to calculate this value. $(LPAREN)If you really care
    * about setting the exact time that the cookie will expire, use
-   * [Soup.Cookie.setExpires].$(RPAREN)
+   * [soup.cookie.Cookie.setExpires].$(RPAREN)
    * As of version 3.4.0 the default value of a cookie's same-site-policy
    * is %SOUP_SAME_SITE_POLICY_LAX.
    * Params:
@@ -259,7 +259,7 @@ class Cookie : Boxed
    * Sets cookie's expiration time to expires.
    * If expires is %NULL, cookie will be a session cookie and will expire at the
    * end of the client's session.
-   * $(LPAREN)This sets the same property as [Soup.Cookie.setMaxAge].$(RPAREN)
+   * $(LPAREN)This sets the same property as [soup.cookie.Cookie.setMaxAge].$(RPAREN)
    * Params:
    *   expires = the new expiration time, or %NULL
    */
@@ -289,7 +289,7 @@ class Cookie : Boxed
    * %SOUP_COOKIE_MAX_AGE_ONE_YEAR $(LPAREN)or multiples thereof$(RPAREN) to calculate this value.
    * $(LPAREN)A value of 0 indicates that the cookie should be considered
    * already-expired.$(RPAREN)
-   * This sets the same property as [Soup.Cookie.setExpires].
+   * This sets the same property as [soup.cookie.Cookie.setExpires].
    * Params:
    *   maxAge = the new max age
    */
@@ -322,7 +322,7 @@ class Cookie : Boxed
 
   /**
    * When used in conjunction with
-   * [Soup.CookieJar.getCookieListWithSameSiteInfo] this sets the policy
+   * [soup.cookie_jar.CookieJar.getCookieListWithSameSiteInfo] this sets the policy
    * of when this cookie should be exposed.
    * Params:
    *   policy = a #SoupSameSitePolicy

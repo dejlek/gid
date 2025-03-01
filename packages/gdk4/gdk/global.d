@@ -1,4 +1,4 @@
-module Gdk.global;
+module gdk.global;
 
 import cairo.context;
 import cairo.region;

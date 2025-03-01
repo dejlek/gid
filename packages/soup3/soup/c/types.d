@@ -70,8 +70,8 @@ enum SoupCookieJarAcceptPolicy
    * http://www.third-party.com is loaded from that page reject any cookie that
    * it could try to set. For libsoup to be able to tell apart first party
    * cookies from the rest, the application must call
-   * [Soup.Message.setFirstParty] on each outgoing class@Message, setting
-   * the [GLib.Uri] of the main document. If no first party is set in a
+   * [soup.message.Message.setFirstParty] on each outgoing class@Message, setting
+   * the [glib.uri.Uri] of the main document. If no first party is set in a
    * message when this policy is in effect, cookies will be assumed to be third
    * party by default.
    */
@@ -87,8 +87,8 @@ enum SoupCookieJarAcceptPolicy
    * from that page, reject any cookie that it could try to set unless it
    * already has a cookie in the cookie jar. For libsoup to be able to tell
    * apart first party cookies from the rest, the application must call
-   * [Soup.Message.setFirstParty] on each outgoing #SoupMessage, setting the
-   * [GLib.Uri] of the main document. If no first party is set in a
+   * [soup.message.Message.setFirstParty] on each outgoing #SoupMessage, setting the
+   * [glib.uri.Uri] of the main document. If no first party is set in a
    * message when this policy is in effect, cookies will be assumed to be third
    * party by default.
    */
@@ -281,7 +281,7 @@ enum SoupMessageFlags : uint
    * after the message is successfully authenticated. This applies to both server
    * and proxy authentication. Note that signal@Message::authenticate signal will
    * be emitted, if you want to disable authentication for a message use
-   * [Soup.Message.disableFeature] passing #SOUP_TYPE_AUTH_MANAGER instead.
+   * [soup.message.Message.disableFeature] passing #SOUP_TYPE_AUTH_MANAGER instead.
    */
   DoNotUseAuthCache = 16,
 
@@ -292,7 +292,7 @@ enum SoupMessageFlags : uint
 }
 
 /**
- * Value passed to [Soup.MessageHeaders.new_] to set certain default
+ * Value passed to [soup.message_headers.MessageHeaders.new_] to set certain default
  * behaviors.
  */
 enum SoupMessageHeadersType
@@ -374,10 +374,10 @@ enum SoupSameSitePolicy
 }
 
 /**
- * Options to pass to [Soup.Server.listen], etc.
+ * Options to pass to [soup.server.Server.listen], etc.
  * %SOUP_SERVER_LISTEN_IPV4_ONLY and %SOUP_SERVER_LISTEN_IPV6_ONLY
- * only make sense with [Soup.Server.listenAll] and
- * [Soup.Server.listenLocal], not plain [Soup.Server.listen] $(LPAREN)which
+ * only make sense with [soup.server.Server.listenAll] and
+ * [soup.server.Server.listenLocal], not plain [soup.server.Server.listen] $(LPAREN)which
  * simply listens on whatever kind of socket you give it$(RPAREN). And you
  * cannot specify both of them in a single call.
  */
@@ -839,8 +839,8 @@ enum SoupURIComponent
 
 /**
  * Pre-defined close codes that can be passed to
- * [Soup.WebsocketConnection.close] or received from
- * [Soup.WebsocketConnection.getCloseCode].
+ * [soup.websocket_connection.WebsocketConnection.close] or received from
+ * [soup.websocket_connection.WebsocketConnection.getCloseCode].
  * However, other codes are also allowed.
  */
 enum SoupWebsocketCloseCode
@@ -1047,15 +1047,15 @@ struct SoupAuthClass
  * A #SoupAuthDomain manages authentication for all or part of a
  * class@Server. To make a server require authentication, first create
  * an appropriate subclass of #SoupAuthDomain, and then add it to the
- * server with [Soup.Server.addAuthDomain].
+ * server with [soup.server.Server.addAuthDomain].
  * In order for an auth domain to have any effect, you must add one or more
- * paths to it $(LPAREN)via [Soup.AuthDomain.addPath]$(RPAREN). To require authentication for
+ * paths to it $(LPAREN)via [soup.auth_domain.AuthDomain.addPath]$(RPAREN). To require authentication for
  * all ordinary requests, add the path `"/"`. $(LPAREN)Note that this does not include
  * the special `"*"` URI $(LPAREN)eg, "OPTIONS *"$(RPAREN), which must be added as a separate
  * path if you want to cover it.$(RPAREN)
  * If you need greater control over which requests should and shouldn't be
  * authenticated, add paths covering everything you *might* want authenticated,
- * and then use a filter $(LPAREN)[Soup.AuthDomain.setFilter] to bypass
+ * and then use a filter $(LPAREN)[soup.auth_domain.AuthDomain.setFilter] to bypass
  * authentication for those requests that don't need it.
  */
 struct SoupAuthDomain
@@ -1107,10 +1107,10 @@ struct SoupAuthDomainDigestClass
  * A #SoupAuthManager is added to the session by default, and normally
  * you don't need to worry about it at all. However, if you want to
  * disable HTTP authentication, you can remove the feature from the
- * session with [Soup.Session.removeFeatureByType] or disable it on
- * individual requests with [Soup.Message.disableFeature].
- * You can use this with [Soup.Session.removeFeatureByType] or
- * [Soup.Message.disableFeature].
+ * session with [soup.session.Session.removeFeatureByType] or disable it on
+ * individual requests with [soup.message.Message.disableFeature].
+ * You can use this with [soup.session.Session.removeFeatureByType] or
+ * [soup.message.Message.disableFeature].
  * $(LPAREN)Although this type has only been publicly visible since libsoup 2.42, it has
  * always existed in the background, and you can use `g_type_from_name
  * $(LPAREN)"SoupAuthManager"$(RPAREN)` to get its alias@GLib.Type in earlier releases.$(RPAREN)
@@ -1147,7 +1147,7 @@ struct SoupCacheClass
  * content codings.
  * A #SoupContentDecoder will automatically be
  * added to the session by default. $(LPAREN)You can use
- * [Soup.Session.removeFeatureByType] if you don't
+ * [soup.session.Session.removeFeatureByType] if you don't
  * want this.$(RPAREN)
  * If #SoupContentDecoder successfully decodes the Content-Encoding,
  * the message body will contain the decoded data; however, the message headers
@@ -1173,8 +1173,8 @@ struct SoupContentDecoderClass
  * the files that are being downloaded by looking at some of the data
  * before the class@Message emits its signal@Message::got-headers signal.
  * #SoupContentSniffer implements iface@SessionFeature, so you can add
- * content sniffing to a session with [Soup.Session.addFeature] or
- * [Soup.Session.addFeatureByType].
+ * content sniffing to a session with [soup.session.Session.addFeature] or
+ * [soup.session.Session.addFeatureByType].
  */
 struct SoupContentSniffer;
 
@@ -1211,7 +1211,7 @@ struct SoupCookie;
  * A #SoupCookieJar stores struct@Cookies and arrange for them to be sent with
  * the appropriate class@Messages. #SoupCookieJar implements
  * iface@SessionFeature, so you can add a cookie jar to a session with
- * [Soup.Session.addFeature] or [Soup.Session.addFeatureByType].
+ * [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
  * Note that the base #SoupCookieJar class does not support any form
  * of long-term cookie persistence.
  */
@@ -1265,7 +1265,7 @@ struct SoupCookieJarTextClass
  * A #SoupHSTSEnforcer stores HSTS policies and enforces them when
  * required. #SoupHSTSEnforcer implements iface@SessionFeature, so you
  * can add an HSTS enforcer to a session with
- * [Soup.Session.addFeature] or [Soup.Session.addFeatureByType].
+ * [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
  * #SoupHSTSEnforcer keeps track of all the HTTPS destinations that,
  * when connected to, return the Strict-Transport-Security header with
  * valid values. #SoupHSTSEnforcer will forget those destinations
@@ -1334,7 +1334,7 @@ struct SoupHSTSEnforcerDBClass
  * #SoupHSTSPolicy implements HTTP policies, as described by
  * [RFC 6797](http://tools.ietf.org/html/rfc6797).
  * @domain represents the host that this policy applies to. The domain
- * must be IDNA-canonicalized. [Soup.HSTSPolicy.new_] and related methods
+ * must be IDNA-canonicalized. [soup.hstspolicy.HSTSPolicy.new_] and related methods
  * will do this for you.
  * @max_age contains the 'max-age' value from the Strict Transport
  * Security header and indicates the time to live of this policy,
@@ -1353,11 +1353,11 @@ struct SoupHSTSPolicy;
  * it generates, for debugging purposes. Many applications use an
  * environment variable to determine whether or not to use
  * #SoupLogger, and to determine the amount of debugging output.
- * To use #SoupLogger, first create a logger with [Soup.Logger.new_], optionally
- * configure it with [Soup.Logger.setRequestFilter],
- * [Soup.Logger.setResponseFilter], and [Soup.Logger.setPrinter], and
+ * To use #SoupLogger, first create a logger with [soup.logger.Logger.new_], optionally
+ * configure it with [soup.logger.Logger.setRequestFilter],
+ * [soup.logger.Logger.setResponseFilter], and [soup.logger.Logger.setPrinter], and
  * then attach it to a session $(LPAREN)or multiple sessions$(RPAREN) with
- * [Soup.Session.addFeature].
+ * [soup.session.Session.addFeature].
  * By default, the debugging output is sent to `stdout`, and looks something
  * like:
  * ```
@@ -1376,7 +1376,7 @@ struct SoupHSTSPolicy;
  * The `Soup-Debug-Timestamp` line gives the time $(LPAREN)as a `time_t`$(RPAREN) when the
  * request was sent, or the response fully received.
  * The `Soup-Debug` line gives further debugging information about the
- * class@Session, class@Message, and [Gio.Socket] involved; the hex
+ * class@Session, class@Message, and [gio.socket.Socket] involved; the hex
  * numbers are the addresses of the objects in question $(LPAREN)which may be useful if
  * you are running in a debugger$(RPAREN). The decimal IDs are simply counters that
  * uniquely identify objects across the lifetime of the #SoupLogger. In
@@ -1408,8 +1408,8 @@ struct SoupLoggerClass
  * Represents an HTTP message being sent or received.
  * A #SoupMessage represents an HTTP message that is being sent or
  * received.
- * You would create a #SoupMessage with [Soup.Message.new_] or
- * [Soup.Message.newFromUri], set up its fields appropriately, and send it.
+ * You would create a #SoupMessage with [soup.message.Message.new_] or
+ * [soup.message.Message.newFromUri], set up its fields appropriately, and send it.
  * property@Message:status-code will normally be a enum@Status value, eg,
  * %SOUP_STATUS_OK, though of course it might actually be an unknown status
  * code. property@Message:reason-phrase is the actual text returned from the
@@ -1431,7 +1431,7 @@ struct SoupMessage;
  * class@Message.
  * Note that while @length always reflects the full length of the
  * message body, @data is normally %NULL, and will only be filled in
- * after [Soup.MessageBody.flatten] is called. For client-side
+ * after [soup.message_body.MessageBody.flatten] is called. For client-side
  * messages, this automatically happens for the response body after it
  * has been fully read. Likewise, for server-side
  * messages, the request body is automatically filled in after being
@@ -1465,8 +1465,8 @@ struct SoupMessageHeaders;
 /**
  * An opaque type used to iterate over a %SoupMessageHeaders
  * structure.
- * After intializing the iterator with [Soup.MessageHeadersIter.init_], call
- * [Soup.MessageHeadersIter.next] to fetch data from it.
+ * After intializing the iterator with [soup.message_headers_iter.MessageHeadersIter.init_], call
+ * [soup.message_headers_iter.MessageHeadersIter.next] to fetch data from it.
  * You may not modify the headers while iterating over them.
  */
 struct SoupMessageHeadersIter
@@ -1506,11 +1506,11 @@ struct SoupMultipart;
 /**
  * Handles streams of multipart messages.
  * This adds support for the multipart responses. For handling the
- * multiple parts the user needs to wrap the [Gio.InputStream] obtained by
+ * multiple parts the user needs to wrap the [gio.input_stream.InputStream] obtained by
  * sending the request with a class@MultipartInputStream and use
- * [Soup.MultipartInputStream.nextPart] before reading. Responses
+ * [soup.multipart_input_stream.MultipartInputStream.nextPart] before reading. Responses
  * which are not wrapped will be treated like non-multipart responses.
- * Note that although #SoupMultipartInputStream is a [Gio.InputStream],
+ * Note that although #SoupMultipartInputStream is a [gio.input_stream.InputStream],
  * you should not read directly from it, and the results are undefined
  * if you do.
  */
@@ -1550,9 +1550,9 @@ struct SoupRange
 /**
  * A HTTP server.
  * #SoupServer implements a simple HTTP server.
- * To begin, create a server using [Soup.Server.new_]. Add at least one
- * handler by calling [Soup.Server.addHandler] or
- * [Soup.Server.addEarlyHandler]; the handler will be called to
+ * To begin, create a server using [soup.server.Server.new_]. Add at least one
+ * handler by calling [soup.server.Server.addHandler] or
+ * [soup.server.Server.addEarlyHandler]; the handler will be called to
  * process any requests underneath the path you pass. $(LPAREN)If you want all
  * requests to go to the same handler, just pass "/" $(LPAREN)or %NULL$(RPAREN) for
  * the path.$(RPAREN)
@@ -1569,7 +1569,7 @@ struct SoupRange
  * class@AuthDomain will set a status of %SOUP_STATUS_UNAUTHORIZED on
  * the message.
  * After checking for authorization, #SoupServer will look for "early"
- * handlers $(LPAREN)added with [Soup.Server.addEarlyHandler]$(RPAREN) matching the
+ * handlers $(LPAREN)added with [soup.server.Server.addEarlyHandler]$(RPAREN) matching the
  * Request-URI. If one is found, it will be run; in particular, this
  * can be used to connect to signals to do a streaming read of the
  * request body.
@@ -1586,7 +1586,7 @@ struct SoupRange
  * the client.
  * Otherwise $(LPAREN)assuming no previous step assigned a status to the
  * message$(RPAREN) any "normal" handlers $(LPAREN)added with
- * [Soup.Server.addHandler]$(RPAREN) for the message's Request-URI will be
+ * [soup.server.Server.addHandler]$(RPAREN) for the message's Request-URI will be
  * run.
  * Then, if the path has a WebSocket handler registered $(LPAREN)and has
  * not yet been assigned a status$(RPAREN), #SoupServer will attempt to
@@ -1594,7 +1594,7 @@ struct SoupRange
  * setting a status of %SOUP_STATUS_SWITCHING_PROTOCOLS or
  * %SOUP_STATUS_BAD_REQUEST accordingly.
  * If the message still has no status code at this point $(LPAREN)and has not
- * been paused with [Soup.ServerMessage.pause]$(RPAREN), then it will be
+ * been paused with [soup.server_message.ServerMessage.pause]$(RPAREN), then it will be
  * given a status of %SOUP_STATUS_INTERNAL_SERVER_ERROR $(LPAREN)because at
  * least one handler ran, but returned without assigning a status$(RPAREN).
  * Finally, the server will emit signal@Server::request-finished $(LPAREN)or
@@ -1607,8 +1607,8 @@ struct SoupRange
  * of$(RPAREN) http connections, you can set the property@Server:tls-certificate
  * property.
  * Once the server is set up, make one or more calls to
- * [Soup.Server.listen], [Soup.Server.listenLocal], or
- * [Soup.Server.listenAll] to tell it where to listen for
+ * [soup.server.Server.listen], [soup.server.Server.listenLocal], or
+ * [soup.server.Server.listenAll] to tell it where to listen for
  * connections. $(LPAREN)All ports on a #SoupServer use the same handlers; if
  * you need to handle some ports differently, such as returning
  * different data for http and https, you'll need to create multiple
@@ -1616,7 +1616,7 @@ struct SoupRange
  * function.$(RPAREN).
  * #SoupServer will begin processing connections as soon as you return
  * to $(LPAREN)or start$(RPAREN) the main loop for the current thread-default
- * [GLib.MainContext].
+ * [glib.main_context.MainContext].
  */
 struct SoupServer
 {
@@ -1673,7 +1673,7 @@ struct SoupServerMessageClass
  * user.$(RPAREN)
  * Additional #SoupSession functionality is provided by
  * iface@SessionFeature objects, which can be added to a session with
- * [Soup.Session.addFeature] or [Soup.Session.addFeatureByType]
+ * [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType]
  * For example, class@Logger provides support for
  * logging HTTP traffic, class@ContentDecoder provides support for
  * compressed response handling, and class@ContentSniffer provides
@@ -1724,7 +1724,7 @@ struct SoupSessionClass
  * authentication handling are implemented internally via
  * `SoupSessionFeature`s. Other features can be added to the session
  * by the application. $(LPAREN)Eg, class@Logger, class@CookieJar.$(RPAREN)
- * See [Soup.Session.addFeature], etc, to add a feature to a session.
+ * See [soup.session.Session.addFeature], etc, to add a feature to a session.
  */
 struct SoupSessionFeature;
 
@@ -1738,17 +1738,17 @@ struct SoupSessionFeatureInterface;
  * Provides support for the [WebSocket](http://tools.ietf.org/html/rfc6455)
  * protocol.
  * To connect to a WebSocket server, create a class@Session and call
- * [Soup.Session.websocketConnectAsync]. To accept WebSocket
+ * [soup.session.Session.websocketConnectAsync]. To accept WebSocket
  * connections, create a class@Server and add a handler to it with
- * [Soup.Server.addWebsocketHandler].
+ * [soup.server.Server.addWebsocketHandler].
  * $(LPAREN)Lower-level support is available via
  * func@websocket_client_prepare_handshake and
  * func@websocket_client_verify_handshake, for handling the client side of the
  * WebSocket handshake, and func@websocket_server_process_handshake for
  * handling the server side.$(RPAREN)
  * #SoupWebsocketConnection handles the details of WebSocket communication. You
- * can use [Soup.WebsocketConnection.sendText] and
- * [Soup.WebsocketConnection.sendBinary] to send data, and the
+ * can use [soup.websocket_connection.WebsocketConnection.sendText] and
+ * [soup.websocket_connection.WebsocketConnection.sendBinary] to send data, and the
  * signal@WebsocketConnection::message signal to receive data.
  * $(LPAREN)#SoupWebsocketConnection currently only supports asynchronous I/O.$(RPAREN)
  */
@@ -1837,8 +1837,8 @@ struct SoupWebsocketExtensionDeflateClass
  * A #SoupWebsocketExtensionManager is added to the session by default, and normally
  * you don't need to worry about it at all. However, if you want to
  * disable WebSocket extensions, you can remove the feature from the
- * session with [Soup.Session.removeFeatureByType] or disable it on
- * individual requests with [Soup.Message.disableFeature].
+ * session with [soup.session.Session.removeFeatureByType] or disable it on
+ * individual requests with [soup.message.Message.disableFeature].
  */
 struct SoupWebsocketExtensionManager;
 

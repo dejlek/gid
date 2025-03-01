@@ -1,6 +1,6 @@
 module soup.hstsenforcer;
 
-import gid.gid;
+import gid.global;
 import gobject.dclosure;
 import gobject.object;
 import soup.c.functions;
@@ -15,7 +15,7 @@ import soup.types;
  * A #SoupHSTSEnforcer stores HSTS policies and enforces them when
  * required. #SoupHSTSEnforcer implements iface@SessionFeature, so you
  * can add an HSTS enforcer to a session with
- * [Soup.Session.addFeature] or [Soup.Session.addFeatureByType].
+ * [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
  * #SoupHSTSEnforcer keeps track of all the HTTPS destinations that,
  * when connected to, return the Strict-Transport-Security header with
  * valid values. #SoupHSTSEnforcer will forget those destinations
@@ -69,7 +69,7 @@ class HSTSEnforcer : ObjectG, SessionFeature
    * Params:
    *   sessionPolicies = whether to include session policies
    * Returns: a newly allocated
-   *   list of domains. Use [GLib.List.freeFull] and funcGLib.free to free the
+   *   list of domains. Use [glib.list.List.freeFull] and funcGLib.free to free the
    *   list.
    */
   string[] getDomains(bool sessionPolicies)
@@ -85,8 +85,8 @@ class HSTSEnforcer : ObjectG, SessionFeature
    * Params:
    *   sessionPolicies = whether to include session policies
    * Returns: a newly
-   *   allocated list of policies. Use [GLib.List.freeFull] and
-   *   [Soup.HSTSPolicy.free] to free the list.
+   *   allocated list of policies. Use [glib.list.List.freeFull] and
+   *   [soup.hstspolicy.HSTSPolicy.free] to free the list.
    */
   HSTSPolicy[] getPolicies(bool sessionPolicies)
   {
@@ -127,7 +127,7 @@ class HSTSEnforcer : ObjectG, SessionFeature
    * If policy is expired, any existing HSTS policy for its host will be removed
    * instead. If a policy existed for this host, it will be replaced. Otherwise,
    * the new policy will be inserted. If the policy is a session policy, that is,
-   * one created with [Soup.HSTSPolicy.newSessionPolicy], the policy will not
+   * one created with [soup.hstspolicy.HSTSPolicy.newSessionPolicy], the policy will not
    * expire and will be enforced during the lifetime of hsts_enforcer's
    * classSession.
    * Params:

@@ -1,6 +1,6 @@
 module soup.multipart;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import gobject.boxed;
 import soup.c.functions;
@@ -48,7 +48,7 @@ class Multipart : Boxed
    * Creates a new empty #SoupMultipart with a randomly-generated
    * boundary string.
    * Note that mime_type must be the full MIME type, including "multipart/".
-   * See also: [Soup.Message.newFromMultipart].
+   * See also: [soup.message.Message.newFromMultipart].
    * Params:
    *   mimeType = the MIME type of the multipart to create.
    * Returns: a new empty #SoupMultipart of the given mime_type

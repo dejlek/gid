@@ -1,6 +1,6 @@
 module soup.message_body;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import gobject.boxed;
 import soup.c.functions;
@@ -12,7 +12,7 @@ import soup.types;
  * class@Message.
  * Note that while @length always reflects the full length of the
  * message body, @data is normally %NULL, and will only be filled in
- * after [Soup.MessageBody.flatten] is called. For client-side
+ * after [soup.message_body.MessageBody.flatten] is called. For client-side
  * messages, this automatically happens for the response body after it
  * has been fully read. Likewise, for server-side
  * messages, the request body is automatically filled in after being
@@ -92,7 +92,7 @@ class MessageBody : Boxed
    * Adds an additional `\0` byte not counted by body's
    * length field.
    * Returns: a #GBytes containing the same data as body.
-   *   $(LPAREN)You must [GLib.Bytes.unref] this if you do not want it.$(RPAREN)
+   *   $(LPAREN)You must [glib.bytes.Bytes.unref] this if you do not want it.$(RPAREN)
    */
   Bytes flatten()
   {
@@ -115,18 +115,18 @@ class MessageBody : Boxed
   }
 
   /**
-   * Gets a [GLib.Bytes] containing data from body starting at offset.
+   * Gets a [glib.bytes.Bytes] containing data from body starting at offset.
    * The size of the returned chunk is unspecified. You can iterate
    * through the entire body by first calling
-   * [Soup.MessageBody.getChunk] with an offset of 0, and then on each
+   * [soup.message_body.MessageBody.getChunk] with an offset of 0, and then on each
    * successive call, increment the offset by the length of the
    * previously-returned chunk.
    * If offset is greater than or equal to the total length of body,
    * then the return value depends on whether or not
-   * [Soup.MessageBody.complete] has been called or not; if it has,
-   * then [Soup.MessageBody.getChunk] will return a 0-length chunk
+   * [soup.message_body.MessageBody.complete] has been called or not; if it has,
+   * then [soup.message_body.MessageBody.getChunk] will return a 0-length chunk
    * $(LPAREN)indicating the end of body$(RPAREN). If it has not, then
-   * [Soup.MessageBody.getChunk] will return %NULL $(LPAREN)indicating that
+   * [soup.message_body.MessageBody.getChunk] will return %NULL $(LPAREN)indicating that
    * body may still potentially have more data, but that data is not
    * currently available$(RPAREN).
    * Params:
@@ -145,7 +145,7 @@ class MessageBody : Boxed
    * Handles the #SoupMessageBody part of receiving a chunk of data from
    * the network.
    * Normally this means appending chunk to body, exactly as with
-   * [Soup.MessageBody.appendBytes], but if you have set body's accumulate
+   * [soup.message_body.MessageBody.appendBytes], but if you have set body's accumulate
    * flag to %FALSE, then that will not happen.
    * This is a low-level method which you should not normally need to
    * use.
@@ -194,7 +194,7 @@ class MessageBody : Boxed
    * there are further restrictions on its proper use which are not
    * documented here.
    * Params:
-   *   chunk = a #GBytes returned from [Soup.MessageBody.getChunk]
+   *   chunk = a #GBytes returned from [soup.message_body.MessageBody.getChunk]
    */
   void wroteChunk(Bytes chunk)
   {

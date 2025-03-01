@@ -1,6 +1,6 @@
 module soup.message_headers_iter;
 
-import gid.gid;
+import gid.global;
 import soup.c.functions;
 import soup.c.types;
 import soup.message_headers;
@@ -9,8 +9,8 @@ import soup.types;
 /**
  * An opaque type used to iterate over a %SoupMessageHeaders
  * structure.
- * After intializing the iterator with [Soup.MessageHeadersIter.init_], call
- * [Soup.MessageHeadersIter.next] to fetch data from it.
+ * After intializing the iterator with [soup.message_headers_iter.MessageHeadersIter.init_], call
+ * [soup.message_headers_iter.MessageHeadersIter.next] to fetch data from it.
  * You may not modify the headers while iterating over them.
  */
 class MessageHeadersIter
@@ -37,7 +37,7 @@ class MessageHeadersIter
    * Yields the next name/value pair in the structMessageHeaders being
    * iterated by iter.
    * If iter has already yielded the last header, then
-   * [Soup.MessageHeadersIter.next] will return %FALSE and name and value
+   * [soup.message_headers_iter.MessageHeadersIter.next] will return %FALSE and name and value
    * will be unchanged.
    * Params:
    *   name = pointer to a variable to return

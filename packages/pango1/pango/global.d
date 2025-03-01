@@ -1,4 +1,4 @@
-module Pango.global;
+module pango.global;
 
 import gid.global;
 import glib.error;

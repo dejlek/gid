@@ -1,6 +1,6 @@
 module soup.message;
 
-import gid.gid;
+import gid.global;
 import gio.input_stream;
 import gio.iostream;
 import gio.socket_address;
@@ -26,8 +26,8 @@ import soup.types;
  * Represents an HTTP message being sent or received.
  * A #SoupMessage represents an HTTP message that is being sent or
  * received.
- * You would create a #SoupMessage with [Soup.Message.new_] or
- * [Soup.Message.newFromUri], set up its fields appropriately, and send it.
+ * You would create a #SoupMessage with [soup.message.Message.new_] or
+ * [soup.message.Message.newFromUri], set up its fields appropriately, and send it.
  * property@Message:status-code will normally be a enum@Status value, eg,
  * %SOUP_STATUS_OK, though of course it might actually be an unknown status
  * code. property@Message:reason-phrase is the actual text returned from the
@@ -195,7 +195,7 @@ class Message : ObjectG
   }
 
   /**
-   * Gets msg's first-party [GLib.Uri].
+   * Gets msg's first-party [glib.uri.Uri].
    * Returns: the msg's first party #GUri
    */
   Uri getFirstParty()
@@ -318,11 +318,11 @@ class Message : ObjectG
   }
 
   /**
-   * Get the remote [Gio.SocketAddress] of the connection associated with
+   * Get the remote [gio.socket_address.SocketAddress] of the connection associated with
    * the message.
    * The returned address can be %NULL if the connection hasn't been established
    * yet, or the resource was loaded from the disk cache. In case of proxy
-   * connections, the remote address returned is a [Gio.ProxyAddress]. If
+   * connections, the remote address returned is a [gio.proxy_address.ProxyAddress]. If
    * propertySession:remote-connectable is set the returned address id for the
    * connection to the session's remote connectable.
    * Returns: a #GSocketAddress or %NULL if the connection
@@ -398,7 +398,7 @@ class Message : ObjectG
   }
 
   /**
-   * Gets the peer's [Gio.TlsCertificate] associated with msg's connection.
+   * Gets the peer's [gio.tls_certificate.TlsCertificate] associated with msg's connection.
    * Note that this is not set yet during the emission of
    * signalMessage::accept-certificate signal.
    * Returns: msg's TLS peer certificate,
@@ -454,7 +454,7 @@ class Message : ObjectG
   /**
    * Get whether ifaceSessionFeatures of the given feature_type
    * $(LPAREN)or a subclass of that type$(RPAREN) are disabled on msg.
-   * See [Soup.Message.disableFeature].
+   * See [soup.message.Message.disableFeature].
    * Params:
    *   featureType = the #GType of a #SoupSessionFeature
    * Returns: %TRUE if feature is disabled, or %FALSE otherwise.
@@ -607,7 +607,7 @@ class Message : ObjectG
   }
 
   /**
-   * Set the request body of a #SoupMessage from [GLib.Bytes].
+   * Set the request body of a #SoupMessage from [glib.bytes.Bytes].
    * If content_type is %NULL and bytes is not %NULL the Content-Type header will
    * not be changed if present.
    * The request body needs to be set again in case msg is restarted
@@ -644,7 +644,7 @@ class Message : ObjectG
    * You can call this as a response to signalMessage::request-certificate
    * signal, or before the connection is started. If certificate is %NULL
    * the handshake will continue without providing a GTlsCertificate.
-   * Note that the [Gio.TlsCertificate] set by this function will be ignored if
+   * Note that the [gio.tls_certificate.TlsCertificate] set by this function will be ignored if
    * propertySession:tls-interaction is not %NULL.
    * Params:
    *   certificate = the #GTlsCertificate to set, or %NULL
@@ -670,7 +670,7 @@ class Message : ObjectG
    * Completes a certificate password request.
    * You must call this as a response to
    * signalMessage::request-certificate-password signal, to notify msg that
-   * the [Gio.TlsPassword] has already been updated.
+   * the [gio.tls_password.TlsPassword] has already been updated.
    */
   void tlsClientCertificatePasswordRequestComplete()
   {
@@ -721,16 +721,16 @@ class Message : ObjectG
 
   /**
    * Emitted when the message requires authentication.
-   * If credentials are available call [Soup.Auth.authenticate] on
+   * If credentials are available call [soup.auth.Auth.authenticate] on
    * auth. If these credentials fail, the signal will be emitted again,
    * with retrying set to %TRUE, which will continue until you return
-   * without calling [Soup.Auth.authenticate] on auth.
+   * without calling [soup.auth.Auth.authenticate] on auth.
    * Note that this may be emitted before msg's body has been
    * fully read.
    * You can authenticate auth asynchronously by calling
-   * [GObject.ObjectG.ref_] on auth and returning %TRUE. The operation will
-   * complete once either [Soup.Auth.authenticate] or
-   * [Soup.Auth.cancel] are called.
+   * [gobject.object.ObjectG.ref_] on auth and returning %TRUE. The operation will
+   * complete once either [soup.auth.Auth.authenticate] or
+   * [soup.auth.Auth.cancel] are called.
    * Params
    *   auth = the #SoupAuth to authenticate
    *   retrying = %TRUE if this is the second $(LPAREN)or later$(RPAREN) attempt
@@ -861,8 +861,8 @@ class Message : ObjectG
 
   /**
    * Emitted after receiving the Status-Line and response headers.
-   * See also [Soup.Message.addHeaderHandler] and
-   * [Soup.Message.addStatusCodeHandler], which can be used to
+   * See also [soup.message.Message.addHeaderHandler] and
+   * [soup.message.Message.addStatusCodeHandler], which can be used to
    * connect to a subset of emissions of this signal.
    * If you cancel or requeue msg while processing this signal,
    * then the current HTTP I/O will be stopped after this signal
@@ -969,12 +969,12 @@ class Message : ObjectG
   /**
    * Emitted to indicate that some network-related event
    * related to msg has occurred.
-   * This essentially proxies the [Gio.SocketClient.event] signal,
+   * This essentially proxies the [gio.socket_client.SocketClient.event] signal,
    * but only for events that occur while msg "owns" the connection; if
    * msg is sent on an existing persistent connection, then this signal
    * will not be emitted. $(LPAREN)If you want to force the message to be sent on
    * a new connection, set the %SOUP_MESSAGE_NEW_CONNECTION flag on it.$(RPAREN)
-   * See [Gio.SocketClient.event] for more information on what
+   * See [gio.socket_client.SocketClient.event] for more information on what
    * the different values of event correspond to, and what
    * connection will be in each case.
    * Params
@@ -1013,12 +1013,12 @@ class Message : ObjectG
    * Emitted during the msg's connection TLS handshake when
    * tls_connection requests a certificate from the client.
    * You can set the client certificate by calling
-   * [Soup.Message.setTlsClientCertificate] and returning %TRUE. It's
+   * [soup.message.Message.setTlsClientCertificate] and returning %TRUE. It's
    * possible to handle the request asynchornously by returning %TRUE and
-   * call [Soup.Message.setTlsClientCertificate] later once the
+   * call [soup.message.Message.setTlsClientCertificate] later once the
    * certificate is available. Note that this signal is not emitted if
    * propertySession:tls-interaction was set, or if
-   * [Soup.Message.setTlsClientCertificate] was called before the
+   * [soup.message.Message.setTlsClientCertificate] was called before the
    * connection TLS handshake started.
    * Params
    *   tlsConnection = the #GTlsClientConnection
@@ -1058,12 +1058,12 @@ class Message : ObjectG
    * Emitted during the msg's connection TLS handshake when
    * tls_connection requests a certificate password from the client.
    * You can set the certificate password on password, then call
-   * [Soup.Message.tlsClientCertificatePasswordRequestComplete] and
+   * [soup.message.Message.tlsClientCertificatePasswordRequestComplete] and
    * return %TRUE to handle the signal synchronously. It's possible to
    * handle the request asynchornously by calling
-   * [GObject.ObjectG.ref_] on password, then returning %TRUE and
+   * [gobject.object.ObjectG.ref_] on password, then returning %TRUE and
    * call
-   * [Soup.Message.tlsClientCertificatePasswordRequestComplete]
+   * [soup.message.Message.tlsClientCertificatePasswordRequestComplete]
    * later after setting the password on password. Note that this signal
    * is not emitted if propertySession:tls-interaction was set.
    * Params

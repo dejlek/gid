@@ -1,6 +1,6 @@
 module soup.server_message;
 
-import gid.gid;
+import gid.global;
 import gio.iostream;
 import gio.socket;
 import gio.socket_address;
@@ -59,11 +59,11 @@ class ServerMessage : ObjectG
   }
 
   /**
-   * Retrieves the [Gio.SocketAddress] associated with the local end
+   * Retrieves the [gio.socket_address.SocketAddress] associated with the local end
    * of a connection.
    * Returns: the #GSocketAddress
    *   associated with the local end of a connection, it may be
-   *   %NULL if you used [Soup.Server.acceptIostream].
+   *   %NULL if you used [soup.server.Server.acceptIostream].
    */
   SocketAddress getLocalAddress()
   {
@@ -98,7 +98,7 @@ class ServerMessage : ObjectG
   }
 
   /**
-   * Retrieves the [Gio.SocketAddress] associated with the remote end
+   * Retrieves the [gio.socket_address.SocketAddress] associated with the remote end
    * of a connection.
    * Returns: the #GSocketAddress
    *   associated with the remote end of a connection, it may be
@@ -117,7 +117,7 @@ class ServerMessage : ObjectG
    * connection.
    * Returns: the IP address associated with the remote
    *   end of a connection, it may be %NULL if you used
-   *   [Soup.Server.acceptIostream].
+   *   [soup.server.Server.acceptIostream].
    */
   string getRemoteHost()
   {
@@ -176,7 +176,7 @@ class ServerMessage : ObjectG
   }
 
   /**
-   * Retrieves the [Gio.Socket] that msg is associated with.
+   * Retrieves the [gio.socket.Socket] that msg is associated with.
    * If you are using this method to observe when multiple requests are
    * made on the same persistent HTTP connection $(LPAREN)eg, as the ntlm-test
    * test program does$(RPAREN), you will need to pay attention to socket
@@ -184,7 +184,7 @@ class ServerMessage : ObjectG
    * not get fooled when the allocator reuses the memory address of a
    * previously-destroyed socket to represent a new socket.
    * Returns: the #GSocket that msg is
-   *   associated with, %NULL if you used [Soup.Server.acceptIostream].
+   *   associated with, %NULL if you used [soup.server.Server.acceptIostream].
    */
   Socket getSocket()
   {
@@ -260,7 +260,7 @@ class ServerMessage : ObjectG
   /**
    * Pauses I/O on msg.
    * This can be used when you need to return from the server handler without
-   * having the full response ready yet. Use [Soup.ServerMessage.unpause] to
+   * having the full response ready yet. Use [soup.server_message.ServerMessage.unpause] to
    * resume I/O.
    */
   void pause()
@@ -354,7 +354,7 @@ class ServerMessage : ObjectG
 
   /**
    * Resumes I/O on msg.
-   * Use this to resume after calling [Soup.ServerMessage.pause], or after
+   * Use this to resume after calling [soup.server_message.ServerMessage.pause], or after
    * adding a new chunk to a chunked response. I/O won't actually resume until you
    * return to the main loop.
    */
@@ -652,8 +652,8 @@ class ServerMessage : ObjectG
    * Emitted immediately after writing a body chunk for a message.
    * Note that this signal is not parallel to
    * signalServerMessage::got-chunk; it is emitted only when a complete
-   * chunk $(LPAREN)added with [Soup.MessageBody.append] or
-   * [Soup.MessageBody.appendBytes] has been written. To get
+   * chunk $(LPAREN)added with [soup.message_body.MessageBody.append] or
+   * [soup.message_body.MessageBody.appendBytes] has been written. To get
    * more useful continuous progress information, use
    * signalServerMessage::wrote-body-data.
    *   serverMessage = the instance the signal is connected to

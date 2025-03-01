@@ -1,6 +1,6 @@
 module soup.auth_domain_digest;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import soup.auth_domain;
 import soup.c.functions;

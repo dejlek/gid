@@ -1,4 +1,4 @@
-module HarfBuzz.global;
+module harfbuzz.global;
 
 import freetype2.types;
 import gid.global;

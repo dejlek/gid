@@ -1,6 +1,6 @@
 module soup.content_sniffer;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import gobject.object;
 import soup.c.functions;
@@ -16,8 +16,8 @@ import soup.types;
  * the files that are being downloaded by looking at some of the data
  * before the class@Message emits its signal@Message::got-headers signal.
  * #SoupContentSniffer implements iface@SessionFeature, so you can add
- * content sniffing to a session with [Soup.Session.addFeature] or
- * [Soup.Session.addFeatureByType].
+ * content sniffing to a session with [soup.session.Session.addFeature] or
+ * [soup.session.Session.addFeatureByType].
  */
 class ContentSniffer : ObjectG, SessionFeature
 {

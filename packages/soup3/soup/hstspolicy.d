@@ -1,6 +1,6 @@
 module soup.hstspolicy;
 
-import gid.gid;
+import gid.global;
 import glib.date_time;
 import gobject.boxed;
 import soup.c.functions;
@@ -12,7 +12,7 @@ import soup.types;
  * #SoupHSTSPolicy implements HTTP policies, as described by
  * [RFC 6797](http://tools.ietf.org/html/rfc6797).
  * @domain represents the host that this policy applies to. The domain
- * must be IDNA-canonicalized. [Soup.HSTSPolicy.new_] and related methods
+ * must be IDNA-canonicalized. [soup.hstspolicy.HSTSPolicy.new_] and related methods
  * will do this for you.
  * @max_age contains the 'max-age' value from the Strict Transport
  * Security header and indicates the time to live of this policy,
@@ -87,9 +87,9 @@ class HSTSPolicy : Boxed
   }
 
   /**
-   * Full version of [Soup.HSTSPolicy.new_], to use with an existing
+   * Full version of [soup.hstspolicy.HSTSPolicy.new_], to use with an existing
    * expiration date.
-   * See [Soup.HSTSPolicy.new_] for details.
+   * See [soup.hstspolicy.HSTSPolicy.new_] for details.
    * Params:
    *   domain = policy domain or hostname
    *   maxAge = max age of the policy
@@ -216,7 +216,7 @@ class HSTSPolicy : Boxed
 
   /**
    * Gets whether policy is a non-permanent, non-expirable session policy.
-   * See [Soup.HSTSPolicy.newSessionPolicy] for details.
+   * See [soup.hstspolicy.HSTSPolicy.newSessionPolicy] for details.
    * Returns: %TRUE if policy is permanent, %FALSE otherwise
    */
   bool isSessionPolicy()

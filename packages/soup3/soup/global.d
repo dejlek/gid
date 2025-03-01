@@ -1,11 +1,10 @@
 module soup.global;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.date_time;
 import glib.error;
 import glib.string_;
-import glib.types;
 import glib.uri;
 import soup.c.functions;
 import soup.c.types;
@@ -36,7 +35,7 @@ bool checkVersion(uint major, uint minor, uint micro)
 }
 
 /**
- * Parses msg's Cookie request header and returns a [GLib.SList] of
+ * Parses msg's Cookie request header and returns a [glib.slist.SList] of
  * `SoupCookie`s.
  * As the "Cookie" header, unlike "Set-Cookie", only contains cookie names and
  * values, none of the other #SoupCookie fields will be filled in. $(LPAREN)Thus, you
@@ -45,7 +44,7 @@ bool checkVersion(uint major, uint minor, uint micro)
  * Params:
  *   msg = a #SoupMessage containing a "Cookie" request header
  * Returns: a #GSList of
- *   `SoupCookie`s, which can be freed with [Soup.Cookie.free].
+ *   `SoupCookie`s, which can be freed with [soup.cookie.Cookie.free].
  */
 Cookie[] cookiesFromRequest(Message msg)
 {
@@ -56,14 +55,14 @@ Cookie[] cookiesFromRequest(Message msg)
 }
 
 /**
- * Parses msg's Set-Cookie response headers and returns a [GLib.SList]
+ * Parses msg's Set-Cookie response headers and returns a [glib.slist.SList]
  * of `SoupCookie`s.
  * Cookies that do not specify "path" or "domain" attributes will have their
  * values defaulted from msg.
  * Params:
  *   msg = a #SoupMessage containing a "Set-Cookie" response header
  * Returns: a #GSList of
- *   `SoupCookie`s, which can be freed with [Soup.Cookie.free].
+ *   `SoupCookie`s, which can be freed with [soup.cookie.Cookie.free].
  */
 Cookie[] cookiesFromResponse(Message msg)
 {
@@ -74,7 +73,7 @@ Cookie[] cookiesFromResponse(Message msg)
 }
 
 /**
- * Serializes a [GLib.SList] of #SoupCookie into a string suitable for
+ * Serializes a [glib.slist.SList] of #SoupCookie into a string suitable for
  * setting as the value of the "Cookie" header.
  * Params:
  *   cookies = a #GSList of #SoupCookie
@@ -164,7 +163,7 @@ string dateTimeToString(DateTime date, DateFormat format)
  *   encodedForm = data of type "application/x-www-form-urlencoded"
  * Returns: a hash
  *   table containing the name/value pairs from encoded_form, which you
- *   can free with [GLib.HashTable.destroy].
+ *   can free with [glib.hash_table.HashTable.destroy].
  */
 string[string] formDecode(string encodedForm)
 {
@@ -183,15 +182,15 @@ string[string] formDecode(string encodedForm)
  * control in file_control_name, and funcform_decode_multipart will extract
  * the uploaded file data into filename, content_type, and file. All of the
  * other form control data will be returned $(LPAREN)as strings, as with
- * funcform_decode in the returned [GLib.HashTable].
+ * funcform_decode in the returned [glib.hash_table.HashTable].
  * You may pass %NULL for filename, content_type and/or file if you do not
  * care about those fields. funcform_decode_multipart may also
  * return %NULL in those fields if the client did not provide that
  * information. You must free the returned filename and content-type
  * with funcGLib.free, and the returned file data with methodGlib.Bytes.unref.
  * If you have a form with more than one file upload control, you will
- * need to decode it manually, using [Soup.Multipart.newFromMessage]
- * and [Soup.Multipart.getPart].
+ * need to decode it manually, using [soup.multipart.Multipart.newFromMessage]
+ * and [soup.multipart.Multipart.getPart].
  * Params:
  *   multipart = a #SoupMultipart
  *   fileControlName = the name of the HTML file upload control
@@ -200,7 +199,7 @@ string[string] formDecode(string encodedForm)
  *   file = return location for the uploaded file data
  * Returns: a hash table containing the name/value pairs $(LPAREN)other than
  *   file_control_name$(RPAREN) from msg, which you can free with
- *   [GLib.HashTable.destroy]. On error, it will return %NULL.
+ *   [glib.hash_table.HashTable.destroy]. On error, it will return %NULL.
  */
 string[string] formDecodeMultipart(Multipart multipart, string fileControlName, out string filename, out string contentType, out Bytes file)
 {
@@ -220,31 +219,12 @@ string[string] formDecodeMultipart(Multipart multipart, string fileControlName, 
 /**
  * Encodes form_data_set into a value of type
  * "application/x-www-form-urlencoded".
- * Encodes as defined in the HTML 4.01 spec. Unlike funcform_encode_hash,
- * this preserves the ordering of the form elements, which may be required in
- * some situations.
- * See also: [Soup.Message.newFromEncodedForm].
- * Params:
- *   formDataSet = a datalist containing name/value pairs
- * Returns: the encoded form
- */
-string formEncodeDatalist(Data formDataSet)
-{
-  char* _cretval;
-  _cretval = soup_form_encode_datalist(formDataSet);
-  string _retval = _cretval.fromCString(Yes.Free);
-  return _retval;
-}
-
-/**
- * Encodes form_data_set into a value of type
- * "application/x-www-form-urlencoded".
  * Encodes as defined in the HTML 4.01 spec.
  * Note that the HTML spec states that "The control names/values are
  * listed in the order they appear in the document." Since this method
  * takes a hash table, it cannot enforce that; if you care about the
  * ordering of the form fields, use funcform_encode_datalist.
- * See also: [Soup.Message.newFromEncodedForm].
+ * See also: [soup.message.Message.newFromEncodedForm].
  * Params:
  *   formDataSet = a hash table containing
  *     name/value pairs $(LPAREN)as strings$(RPAREN)

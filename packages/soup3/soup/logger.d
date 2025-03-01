@@ -1,6 +1,6 @@
 module soup.logger;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -15,11 +15,11 @@ import soup.types;
  * it generates, for debugging purposes. Many applications use an
  * environment variable to determine whether or not to use
  * #SoupLogger, and to determine the amount of debugging output.
- * To use #SoupLogger, first create a logger with [Soup.Logger.new_], optionally
- * configure it with [Soup.Logger.setRequestFilter],
- * [Soup.Logger.setResponseFilter], and [Soup.Logger.setPrinter], and
+ * To use #SoupLogger, first create a logger with [soup.logger.Logger.new_], optionally
+ * configure it with [soup.logger.Logger.setRequestFilter],
+ * [soup.logger.Logger.setResponseFilter], and [soup.logger.Logger.setPrinter], and
  * then attach it to a session $(LPAREN)or multiple sessions$(RPAREN) with
- * [Soup.Session.addFeature].
+ * [soup.session.Session.addFeature].
  * By default, the debugging output is sent to `stdout`, and looks something
  * like:
  * ```
@@ -38,7 +38,7 @@ import soup.types;
  * The `Soup-Debug-Timestamp` line gives the time $(LPAREN)as a `time_t`$(RPAREN) when the
  * request was sent, or the response fully received.
  * The `Soup-Debug` line gives further debugging information about the
- * class@Session, class@Message, and [Gio.Socket] involved; the hex
+ * class@Session, class@Message, and [gio.socket.Socket] involved; the hex
  * numbers are the addresses of the objects in question $(LPAREN)which may be useful if
  * you are running in a debugger$(RPAREN). The decimal IDs are simply counters that
  * uniquely identify objects across the lifetime of the #SoupLogger. In
@@ -83,8 +83,8 @@ class Logger : ObjectG, SessionFeature
   /**
    * Creates a new #SoupLogger with the given debug level.
    * If you need finer control over what message parts are and aren't
-   * logged, use [Soup.Logger.setRequestFilter] and
-   * [Soup.Logger.setResponseFilter].
+   * logged, use [soup.logger.Logger.setRequestFilter] and
+   * [soup.logger.Logger.setResponseFilter].
    * Params:
    *   level = the debug level
    * Returns: a new #SoupLogger
@@ -144,7 +144,7 @@ class Logger : ObjectG, SessionFeature
    * For each HTTP request logger will invoke request_filter to
    * determine how much $(LPAREN)if any$(RPAREN) of that request to log. $(LPAREN)If you do not
    * set a request filter, logger will just always log requests at the
-   * level passed to [Soup.Logger.new_].$(RPAREN)
+   * level passed to [soup.logger.Logger.new_].$(RPAREN)
    * Params:
    *   requestFilter = the callback for request debugging
    */
@@ -172,7 +172,7 @@ class Logger : ObjectG, SessionFeature
    * For each HTTP response logger will invoke response_filter to
    * determine how much $(LPAREN)if any$(RPAREN) of that response to log. $(LPAREN)If you do not
    * set a response filter, logger will just always log responses at
-   * the level passed to [Soup.Logger.new_].$(RPAREN)
+   * the level passed to [soup.logger.Logger.new_].$(RPAREN)
    * Params:
    *   responseFilter = the callback for response debugging
    */

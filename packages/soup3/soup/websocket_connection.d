@@ -1,6 +1,6 @@
 module soup.websocket_connection;
 
-import gid.gid;
+import gid.global;
 import gio.iostream;
 import glib.bytes;
 import glib.error;
@@ -17,17 +17,17 @@ import soup.websocket_extension;
  * Provides support for the [WebSocket](http://tools.ietf.org/html/rfc6455)
  * protocol.
  * To connect to a WebSocket server, create a class@Session and call
- * [Soup.Session.websocketConnectAsync]. To accept WebSocket
+ * [soup.session.Session.websocketConnectAsync]. To accept WebSocket
  * connections, create a class@Server and add a handler to it with
- * [Soup.Server.addWebsocketHandler].
+ * [soup.server.Server.addWebsocketHandler].
  * $(LPAREN)Lower-level support is available via
  * func@websocket_client_prepare_handshake and
  * func@websocket_client_verify_handshake, for handling the client side of the
  * WebSocket handshake, and func@websocket_server_process_handshake for
  * handling the server side.$(RPAREN)
  * #SoupWebsocketConnection handles the details of WebSocket communication. You
- * can use [Soup.WebsocketConnection.sendText] and
- * [Soup.WebsocketConnection.sendBinary] to send data, and the
+ * can use [soup.websocket_connection.WebsocketConnection.sendText] and
+ * [soup.websocket_connection.WebsocketConnection.sendBinary] to send data, and the
  * signal@WebsocketConnection::message signal to receive data.
  * $(LPAREN)#SoupWebsocketConnection currently only supports asynchronous I/O.$(RPAREN)
  */
@@ -242,7 +242,7 @@ class WebsocketConnection : ObjectG
   /**
    * Send a %NULL-terminated text $(LPAREN)UTF-8$(RPAREN) message to the peer.
    * If you need to send text messages containing %NULL characters use
-   * [Soup.WebsocketConnection.sendMessage] instead.
+   * [soup.websocket_connection.WebsocketConnection.sendMessage] instead.
    * The message is queued to be sent and will be sent when the main loop
    * is run.
    * Params:
@@ -280,7 +280,7 @@ class WebsocketConnection : ObjectG
   /**
    * Emitted when the connection has completely closed.
    * This happens either due to an orderly close from the peer, one
-   * initiated via [Soup.WebsocketConnection.close] or a fatal error
+   * initiated via [soup.websocket_connection.WebsocketConnection.close] or a fatal error
    * condition that caused a close.
    * This signal will be emitted once.
    *   websocketConnection = the instance the signal is connected to

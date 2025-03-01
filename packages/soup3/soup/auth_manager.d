@@ -1,6 +1,6 @@
 module soup.auth_manager;
 
-import gid.gid;
+import gid.global;
 import glib.uri;
 import gobject.object;
 import soup.auth;
@@ -17,10 +17,10 @@ import soup.types;
  * A #SoupAuthManager is added to the session by default, and normally
  * you don't need to worry about it at all. However, if you want to
  * disable HTTP authentication, you can remove the feature from the
- * session with [Soup.Session.removeFeatureByType] or disable it on
- * individual requests with [Soup.Message.disableFeature].
- * You can use this with [Soup.Session.removeFeatureByType] or
- * [Soup.Message.disableFeature].
+ * session with [soup.session.Session.removeFeatureByType] or disable it on
+ * individual requests with [soup.message.Message.disableFeature].
+ * You can use this with [soup.session.Session.removeFeatureByType] or
+ * [soup.message.Message.disableFeature].
  * $(LPAREN)Although this type has only been publicly visible since libsoup 2.42, it has
  * always existed in the background, and you can use `g_type_from_name
  * $(LPAREN)"SoupAuthManager"$(RPAREN)` to get its alias@GLib.Type in earlier releases.$(RPAREN)

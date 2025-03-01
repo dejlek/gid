@@ -1,6 +1,6 @@
 module soup.auth_domain;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -12,15 +12,15 @@ import soup.types;
  * A #SoupAuthDomain manages authentication for all or part of a
  * class@Server. To make a server require authentication, first create
  * an appropriate subclass of #SoupAuthDomain, and then add it to the
- * server with [Soup.Server.addAuthDomain].
+ * server with [soup.server.Server.addAuthDomain].
  * In order for an auth domain to have any effect, you must add one or more
- * paths to it $(LPAREN)via [Soup.AuthDomain.addPath]$(RPAREN). To require authentication for
+ * paths to it $(LPAREN)via [soup.auth_domain.AuthDomain.addPath]$(RPAREN). To require authentication for
  * all ordinary requests, add the path `"/"`. $(LPAREN)Note that this does not include
  * the special `"*"` URI $(LPAREN)eg, "OPTIONS *"$(RPAREN), which must be added as a separate
  * path if you want to cover it.$(RPAREN)
  * If you need greater control over which requests should and shouldn't be
  * authenticated, add paths covering everything you *might* want authenticated,
- * and then use a filter $(LPAREN)[Soup.AuthDomain.setFilter] to bypass
+ * and then use a filter $(LPAREN)[soup.auth_domain.AuthDomain.setFilter] to bypass
  * authentication for those requests that don't need it.
  */
 class AuthDomain : ObjectG
@@ -45,7 +45,7 @@ class AuthDomain : ObjectG
   /**
    * Checks if msg contains appropriate authorization for domain to
    * accept it.
-   * Mirroring [Soup.AuthDomain.covers], this does not check whether or not
+   * Mirroring [soup.auth_domain.AuthDomain.covers], this does not check whether or not
    * domain *cares* if msg is authorized.
    * This is used by classServer internally and is probably of no use to
    * anyone else.
@@ -65,8 +65,8 @@ class AuthDomain : ObjectG
   /**
    * Adds path to domain.
    * Requests under path on domain's server will require authentication $(LPAREN)unless
-   * overridden by [Soup.AuthDomain.removePath] or
-   * [Soup.AuthDomain.setFilter]$(RPAREN).
+   * overridden by [soup.auth_domain.AuthDomain.removePath] or
+   * [soup.auth_domain.AuthDomain.setFilter]$(RPAREN).
    * Params:
    *   path = the path to add to domain
    */
@@ -143,10 +143,10 @@ class AuthDomain : ObjectG
    * Removes path from domain.
    * Requests under path on domain's server will NOT require
    * authentication.
-   * This is not simply an undo-er for [Soup.AuthDomain.addPath]; it
+   * This is not simply an undo-er for [soup.auth_domain.AuthDomain.addPath]; it
    * can be used to "carve out" a subtree that does not require
    * authentication inside a hierarchy that does. Note also that unlike
-   * with [Soup.AuthDomain.addPath], this cannot be overridden by
+   * with [soup.auth_domain.AuthDomain.addPath], this cannot be overridden by
    * adding a filter, as filters can only bypass authentication that
    * would otherwise be required, not require it where it would
    * otherwise be unnecessary.

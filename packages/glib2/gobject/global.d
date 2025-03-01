@@ -1,4 +1,4 @@
-module GObject.global;
+module gobject.global;
 
 import gid.global;
 import glib.source;

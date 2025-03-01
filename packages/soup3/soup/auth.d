@@ -1,6 +1,6 @@
 module soup.auth;
 
-import gid.gid;
+import gid.global;
 import glib.uri;
 import gobject.object;
 import gobject.types;
@@ -73,7 +73,7 @@ class Auth : ObjectG
 
   /**
    * Tests if auth is able to authenticate by providing credentials to the
-   * [Soup.Auth.authenticate].
+   * [soup.auth.Auth.authenticate].
    * Returns: %TRUE if auth is able to accept credentials.
    */
   bool canAuthenticate()
@@ -86,7 +86,7 @@ class Auth : ObjectG
   /**
    * Call this on an auth to cancel it.
    * You need to cancel an auth to complete an asynchronous authenticate operation
-   * when no credentials are provided $(LPAREN)[Soup.Auth.authenticate] is not called$(RPAREN).
+   * when no credentials are provided $(LPAREN)[soup.auth.Auth.authenticate] is not called$(RPAREN).
    * The #SoupAuth will be cancelled on dispose if it hans't been authenticated.
    */
   void cancel()
@@ -108,7 +108,7 @@ class Auth : ObjectG
 
   /**
    * Generates an appropriate "Authorization" header for msg.
-   * $(LPAREN)The session will only call this if [Soup.Auth.isAuthenticated] returned
+   * $(LPAREN)The session will only call this if [soup.auth.Auth.isAuthenticated] returned
    * %TRUE.$(RPAREN)
    * Params:
    *   msg = the #SoupMessage to be authorized
@@ -147,7 +147,7 @@ class Auth : ObjectG
    *   sourceUri = the URI of the request that auth was generated in
    *     response to.
    * Returns: the list of
-   *   paths, which can be freed with [Soup.Auth.freeProtectionSpace].
+   *   paths, which can be freed with [soup.auth.Auth.freeProtectionSpace].
    */
   string[] getProtectionSpace(Uri sourceUri)
   {
@@ -221,7 +221,7 @@ class Auth : ObjectG
 
   /**
    * Tests if auth is ready to make a request for msg with.
-   * For most auths, this is equivalent to [Soup.Auth.isAuthenticated], but for
+   * For most auths, this is equivalent to [soup.auth.Auth.isAuthenticated], but for
    * some auth types $(LPAREN)eg, NTLM$(RPAREN), the auth may be sendable $(LPAREN)eg, as an
    * authentication request$(RPAREN) even before it is authenticated.
    * Params:
@@ -238,7 +238,7 @@ class Auth : ObjectG
   /**
    * Updates auth with the information from msg and auth_header,
    * possibly un-authenticating it.
-   * As with [Soup.Auth.new_], this is normally only used by classSession.
+   * As with [soup.auth.Auth.new_], this is normally only used by classSession.
    * Params:
    *   msg = the #SoupMessage auth is being updated for
    *   authHeader = the WWW-Authenticate/Proxy-Authenticate header

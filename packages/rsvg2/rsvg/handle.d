@@ -2,7 +2,7 @@ module rsvg.handle;
 
 import cairo.context;
 import gdkpixbuf.pixbuf;
-import gid.gid;
+import gid.global;
 import gio.cancellable;
 import gio.file;
 import gio.file_mixin;
@@ -14,10 +14,10 @@ import rsvg.c.types;
 import rsvg.types;
 
 /**
- * [Rsvg.Handle] loads an SVG document into memory.
- * This is the main entry point into the librsvg library.  An [Rsvg.Handle] is an
+ * [rsvg.handle.Handle] loads an SVG document into memory.
+ * This is the main entry point into the librsvg library.  An [rsvg.handle.Handle] is an
  * object that represents SVG data in memory.  Your program creates an
- * [Rsvg.Handle] from an SVG file, or from a memory buffer that contains SVG data,
+ * [rsvg.handle.Handle] from an SVG file, or from a memory buffer that contains SVG data,
  * or in the most general form, from a `GInputStream` that will provide SVG data.
  * Librsvg can load SVG images and render them to Cairo surfaces,
  * using a mixture of SVG's [static mode] and [secure static mode].
@@ -55,7 +55,7 @@ import rsvg.types;
  * 2. URLs with queries $(LPAREN)"?"$(RPAREN) or fragment identifiers $(LPAREN)"#"$(RPAREN) are not allowed.
  * 3. All URL schemes other than data: in references require a base URL.  For
  * example, this means that if you load an SVG with
- * [Rsvg.Handle.newFromData] without calling [Rsvg.Handle.setBaseUri],
+ * [rsvg.handle.Handle.newFromData] without calling [rsvg.handle.Handle.setBaseUri],
  * then any referenced files will not be allowed $(LPAREN)e.g. raster images to be
  * loaded from other files will not work$(RPAREN).
  * 4. If referenced URLs are absolute, rather than relative, then they must
@@ -76,53 +76,53 @@ import rsvg.types;
  * files meet these conditions.
  * # Loading an SVG with GIO
  * This is the easiest and most resource-efficient way of loading SVG data into
- * an [Rsvg.Handle].
+ * an [rsvg.handle.Handle].
  * If you have a `GFile` that stands for an SVG file, you can simply call
- * [Rsvg.Handle.newFromGfileSync] to load an [Rsvg.Handle] from it.
+ * [rsvg.handle.Handle.newFromGfileSync] to load an [rsvg.handle.Handle] from it.
  * Alternatively, if you have a `GInputStream`, you can use
- * [Rsvg.Handle.newFromStreamSync].
+ * [rsvg.handle.Handle.newFromStreamSync].
  * Both of those methods allow specifying a `GCancellable`, so the loading
  * process can be cancelled from another thread.
  * ## Loading an SVG from memory
  * If you already have SVG data in a byte buffer in memory, you can create a
- * memory input stream with [Gio.MemoryInputStream.newFromData] and feed that
- * to [Rsvg.Handle.newFromStreamSync].
+ * memory input stream with [gio.memory_input_stream.MemoryInputStream.newFromData] and feed that
+ * to [rsvg.handle.Handle.newFromStreamSync].
  * Note that in this case, it is important that you specify the base_file for
  * the in-memory SVG data.  Librsvg uses the base_file to resolve links to
  * external content, like raster images.
  * # Loading an SVG without GIO
- * You can load an [Rsvg.Handle] from a simple filename or URI with
- * [Rsvg.Handle.newFromFile].  Note that this is a blocking operation; there
+ * You can load an [rsvg.handle.Handle] from a simple filename or URI with
+ * [rsvg.handle.Handle.newFromFile].  Note that this is a blocking operation; there
  * is no way to cancel it if loading a remote URI takes a long time.  Also, note that
- * this method does not let you specify [Rsvg.HandleFlags].
+ * this method does not let you specify [rsvg.HandleFlags].
  * Otherwise, loading an SVG without GIO is not recommended, since librsvg will
  * need to buffer your entire data internally before actually being able to
  * parse it.  The deprecated way of doing this is by creating a handle with
- * [Rsvg.Handle.new_] or [Rsvg.Handle.newWithFlags], and then using
- * [Rsvg.Handle.write] and [Rsvg.Handle.close] to feed the handle with SVG data.
+ * [rsvg.handle.Handle.new_] or [rsvg.handle.Handle.newWithFlags], and then using
+ * [rsvg.handle.Handle.write] and [rsvg.handle.Handle.close] to feed the handle with SVG data.
  * Still, please try to use the GIO stream functions instead.
  * # Resolution of the rendered image $(LPAREN)dots per inch, or DPI$(RPAREN)
  * SVG images can contain dimensions like "`5cm`" or
  * "`2pt`" that must be converted from physical units into
  * device units.  To do this, librsvg needs to know the actual dots per inch
- * $(LPAREN)DPI$(RPAREN) of your target device.  You can call [Rsvg.Handle.setDpi] or
- * [Rsvg.Handle.setDpiXY] on an [Rsvg.Handle] to set the DPI before rendering
+ * $(LPAREN)DPI$(RPAREN) of your target device.  You can call [rsvg.handle.Handle.setDpi] or
+ * [rsvg.handle.Handle.setDpiXY] on an [rsvg.handle.Handle] to set the DPI before rendering
  * it.
  * # Rendering
  * The preferred way to render a whole SVG document is to use
- * [Rsvg.Handle.renderDocument].  Please see its documentation for
+ * [rsvg.handle.Handle.renderDocument].  Please see its documentation for
  * details.
  * # API ordering
- * Due to the way the librsvg API evolved over time, an [Rsvg.Handle] object is available
+ * Due to the way the librsvg API evolved over time, an [rsvg.handle.Handle] object is available
  * for use as soon as it is constructed.  However, not all of its methods can be
- * called at any time.  For example, an [Rsvg.Handle] just constructed with [Rsvg.Handle.new_]
- * is not loaded yet, and it does not make sense to call [Rsvg.Handle.renderDocument] on it
+ * called at any time.  For example, an [rsvg.handle.Handle] just constructed with [rsvg.handle.Handle.new_]
+ * is not loaded yet, and it does not make sense to call [rsvg.handle.Handle.renderDocument] on it
  * just at that point.
- * The documentation for the available methods in [Rsvg.Handle] may mention that a particular
+ * The documentation for the available methods in [rsvg.handle.Handle] may mention that a particular
  * method is only callable on a "fully loaded handle".  This means either:
- * * The handle was loaded with [Rsvg.Handle.write] and [Rsvg.Handle.close], and
+ * * The handle was loaded with [rsvg.handle.Handle.write] and [rsvg.handle.Handle.close], and
  * those functions returned no errors.
- * * The handle was loaded with [Rsvg.Handle.readStreamSync] and that function
+ * * The handle was loaded with [rsvg.handle.Handle.readStreamSync] and that function
  * returned no errors.
  * Before librsvg 2.46, the library did not fully verify that a handle was in a
  * fully loaded state for the methods that require it.  To preserve
@@ -153,23 +153,23 @@ class Handle : ObjectG
   }
 
   /**
-   * Returns a new rsvg handle.  Must be freed with [GObject.ObjectG.unref].  This
+   * Returns a new rsvg handle.  Must be freed with [gobject.object.ObjectG.unref].  This
    * handle can be used to load an image.
-   * The preferred way of loading SVG data into the returned [Rsvg.Handle] is with
-   * [Rsvg.Handle.readStreamSync].
-   * The deprecated way of loading SVG data is with [Rsvg.Handle.write] and
-   * [Rsvg.Handle.close]; note that these require buffering the entire file
+   * The preferred way of loading SVG data into the returned [rsvg.handle.Handle] is with
+   * [rsvg.handle.Handle.readStreamSync].
+   * The deprecated way of loading SVG data is with [rsvg.handle.Handle.write] and
+   * [rsvg.handle.Handle.close]; note that these require buffering the entire file
    * internally, and for this reason it is better to use the stream functions:
-   * [Rsvg.Handle.newFromStreamSync], [Rsvg.Handle.readStreamSync], or
-   * [Rsvg.Handle.newFromGfileSync].
-   * After loading the [Rsvg.Handle] with data, you can render it using Cairo or get
-   * a GdkPixbuf from it. When finished, free the handle with [GObject.ObjectG.unref]. No
+   * [rsvg.handle.Handle.newFromStreamSync], [rsvg.handle.Handle.readStreamSync], or
+   * [rsvg.handle.Handle.newFromGfileSync].
+   * After loading the [rsvg.handle.Handle] with data, you can render it using Cairo or get
+   * a GdkPixbuf from it. When finished, free the handle with [gobject.object.ObjectG.unref]. No
    * more than one image can be loaded with one handle.
-   * Note that this function creates an [Rsvg.Handle] with no flags set.  If you
-   * require any of [Rsvg.HandleFlags] to be set, use any of
-   * [Rsvg.Handle.newWithFlags], [Rsvg.Handle.newFromStreamSync], or
-   * [Rsvg.Handle.newFromGfileSync].
-   * Returns: A new [Rsvg.Handle] with no flags set.
+   * Note that this function creates an [rsvg.handle.Handle] with no flags set.  If you
+   * require any of [rsvg.HandleFlags] to be set, use any of
+   * [rsvg.handle.Handle.newWithFlags], [rsvg.handle.Handle.newFromStreamSync], or
+   * [rsvg.handle.Handle.newFromGfileSync].
+   * Returns: A new [rsvg.handle.Handle] with no flags set.
    */
   this()
   {
@@ -180,12 +180,12 @@ class Handle : ObjectG
 
   /**
    * Loads the SVG specified by data.  Note that this function creates an
-   * [Rsvg.Handle] without a base URL, and without any [Rsvg.HandleFlags].  If you
-   * need these, use [Rsvg.Handle.newFromStreamSync] instead by creating
-   * a [Gio.MemoryInputStream] from your data.
+   * [rsvg.handle.Handle] without a base URL, and without any [rsvg.HandleFlags].  If you
+   * need these, use [rsvg.handle.Handle.newFromStreamSync] instead by creating
+   * a [gio.memory_input_stream.MemoryInputStream] from your data.
    * Params:
    *   data = The SVG data
-   * Returns: A [Rsvg.Handle] or `NULL` if an error occurs.
+   * Returns: A [rsvg.handle.Handle] or `NULL` if an error occurs.
    */
   static Handle newFromData(ubyte[] data)
   {
@@ -205,12 +205,12 @@ class Handle : ObjectG
 
   /**
    * Loads the SVG specified by file_name.  Note that this function, like
-   * [Rsvg.Handle.new_], does not specify any loading flags for the resulting
-   * handle.  If you require the use of [Rsvg.HandleFlags], use
-   * [Rsvg.Handle.newFromGfileSync].
+   * [rsvg.handle.Handle.new_], does not specify any loading flags for the resulting
+   * handle.  If you require the use of [rsvg.HandleFlags], use
+   * [rsvg.handle.Handle.newFromGfileSync].
    * Params:
    *   filename = The file name to load, or a URI.
-   * Returns: A [Rsvg.Handle] or `NULL` if an error occurs.
+   * Returns: A [rsvg.handle.Handle] or `NULL` if an error occurs.
    */
   static Handle newFromFile(string filename)
   {
@@ -225,7 +225,7 @@ class Handle : ObjectG
   }
 
   /**
-   * Creates a new [Rsvg.Handle] for file.
+   * Creates a new [rsvg.handle.Handle] for file.
    * This function sets the "base file" of the handle to be file itself, so SVG
    * elements like `<image>` which reference external
    * resources will be resolved relative to the location of file.
@@ -235,9 +235,9 @@ class Handle : ObjectG
    * returned in error.
    * Params:
    *   file = a `GFile`
-   *   flags = flags from [Rsvg.HandleFlags]
+   *   flags = flags from [rsvg.HandleFlags]
    *   cancellable = a `GCancellable`, or `NULL`
-   * Returns: a new [Rsvg.Handle] on success, or `NULL` with error filled in
+   * Returns: a new [rsvg.handle.Handle] on success, or `NULL` with error filled in
    */
   static Handle newFromGfileSync(File file, HandleFlags flags, Cancellable cancellable)
   {
@@ -251,7 +251,7 @@ class Handle : ObjectG
   }
 
   /**
-   * Creates a new [Rsvg.Handle] for stream.
+   * Creates a new [rsvg.handle.Handle] for stream.
    * This function sets the "base file" of the handle to be base_file if
    * provided.  SVG elements like `<image>` which reference
    * external resources will be resolved relative to the location of base_file.
@@ -262,9 +262,9 @@ class Handle : ObjectG
    * Params:
    *   inputStream = a `GInputStream`
    *   baseFile = a `GFile`, or `NULL`
-   *   flags = flags from [Rsvg.HandleFlags]
+   *   flags = flags from [rsvg.HandleFlags]
    *   cancellable = a `GCancellable`, or `NULL`
-   * Returns: a new [Rsvg.Handle] on success, or `NULL` with error filled in
+   * Returns: a new [rsvg.handle.Handle] on success, or `NULL` with error filled in
    */
   static Handle newFromStreamSync(InputStream inputStream, File baseFile, HandleFlags flags, Cancellable cancellable)
   {
@@ -278,12 +278,12 @@ class Handle : ObjectG
   }
 
   /**
-   * Creates a new [Rsvg.Handle] with flags flags.  After calling this function,
+   * Creates a new [rsvg.handle.Handle] with flags flags.  After calling this function,
    * you can feed the resulting handle with SVG data by using
-   * [Rsvg.Handle.readStreamSync].
+   * [rsvg.handle.Handle.readStreamSync].
    * Params:
-   *   flags = flags from [Rsvg.HandleFlags]
-   * Returns: a new [Rsvg.Handle]
+   *   flags = flags from [rsvg.HandleFlags]
+   * Returns: a new [rsvg.handle.Handle]
    */
   static Handle newWithFlags(HandleFlags flags)
   {
@@ -294,20 +294,20 @@ class Handle : ObjectG
   }
 
   /**
-   * This is used after calling [Rsvg.Handle.write] to indicate that there is no more data
+   * This is used after calling [rsvg.handle.Handle.write] to indicate that there is no more data
    * to consume, and to start the actual parsing of the SVG document.  The only reason to
-   * call this function is if you use use [Rsvg.Handle.write] to feed data into the handle;
-   * if you use the other methods like [Rsvg.Handle.newFromFile] or
-   * [Rsvg.Handle.readStreamSync], then you do not need to call this function.
+   * call this function is if you use use [rsvg.handle.Handle.write] to feed data into the handle;
+   * if you use the other methods like [rsvg.handle.Handle.newFromFile] or
+   * [rsvg.handle.Handle.readStreamSync], then you do not need to call this function.
    * This will return `TRUE` if the loader closed successfully and the
    * SVG data was parsed correctly.  Note that handle isn't freed until
-   * [GObject.ObjectG.unref] is called.
+   * [gobject.object.ObjectG.unref] is called.
    * Returns: `TRUE` on success, or `FALSE` on error.
 
-   * Deprecated: Use [Rsvg.Handle.readStreamSync] or the constructor
-   *   functions [Rsvg.Handle.newFromGfileSync] or
-   *   [Rsvg.Handle.newFromStreamSync].  See the deprecation notes for
-   *   [Rsvg.Handle.write] for more information.
+   * Deprecated: Use [rsvg.handle.Handle.readStreamSync] or the constructor
+   *   functions [rsvg.handle.Handle.newFromGfileSync] or
+   *   [rsvg.handle.Handle.newFromStreamSync].  See the deprecation notes for
+   *   [rsvg.handle.Handle.write] for more information.
    */
   bool close()
   {
@@ -320,7 +320,7 @@ class Handle : ObjectG
   }
 
   /**
-   * Gets the base uri for this [Rsvg.Handle].
+   * Gets the base uri for this [rsvg.handle.Handle].
    * Returns: the base uri, possibly null
    */
   string getBaseUri()
@@ -342,12 +342,12 @@ class Handle : ObjectG
   /**
    * Get the SVG's size. Do not call from within the size_func callback, because
    * an infinite loop will occur.
-   * This function depends on the [Rsvg.Handle]'s DPI to compute dimensions in
-   * pixels, so you should call [Rsvg.Handle.setDpi] beforehand.
+   * This function depends on the [rsvg.handle.Handle]'s DPI to compute dimensions in
+   * pixels, so you should call [rsvg.handle.Handle.setDpi] beforehand.
    * Params:
    *   dimensionData = A place to store the SVG's size
 
-   * Deprecated: Use [Rsvg.Handle.getIntrinsicSizeInPixels] instead.  This
+   * Deprecated: Use [rsvg.handle.Handle.getIntrinsicSizeInPixels] instead.  This
    *   function is deprecated because it is not able to return exact fractional dimensions,
    *   only integer pixels.
    */
@@ -359,8 +359,8 @@ class Handle : ObjectG
   /**
    * Get the size of a subelement of the SVG file. Do not call from within the
    * size_func callback, because an infinite loop will occur.
-   * This function depends on the [Rsvg.Handle]'s DPI to compute dimensions in
-   * pixels, so you should call [Rsvg.Handle.setDpi] beforehand.
+   * This function depends on the [rsvg.handle.Handle]'s DPI to compute dimensions in
+   * pixels, so you should call [rsvg.handle.Handle.setDpi] beforehand.
    * Element IDs should look like an URL fragment identifier; for example, pass
    * `#foo` $(LPAREN)hash `foo`$(RPAREN) to get the geometry of the element that
    * has an `id\="foo"` attribute.
@@ -371,7 +371,7 @@ class Handle : ObjectG
    *     URL's fragment ID.  Alternatively, pass `NULL` to use the whole SVG.
    * Returns: `TRUE` if the dimensions could be obtained, `FALSE` if there was an error.
 
-   * Deprecated: Use [Rsvg.Handle.getGeometryForLayer] instead.
+   * Deprecated: Use [rsvg.handle.Handle.getGeometryForLayer] instead.
    */
   bool getDimensionsSub(out DimensionData dimensionData, string id)
   {
@@ -471,7 +471,7 @@ class Handle : ObjectG
   /**
    * In simple terms, queries the `width`, `height`, and `viewBox` attributes in an SVG document.
    * If you are calling this function to compute a scaling factor to render the SVG,
-   * consider simply using [Rsvg.Handle.renderDocument] instead; it will do the
+   * consider simply using [rsvg.handle.Handle.renderDocument] instead; it will do the
    * scaling computations automatically.
    * Before librsvg 2.54.0, the `out_has_width` and `out_has_height` arguments would be set to true or false
    * depending on whether the SVG document actually had `width` and `height` attributes, respectively.
@@ -522,7 +522,7 @@ class Handle : ObjectG
    * document has both `width` and `height` attributes
    * with physical units $(LPAREN)px, in, cm, mm, pt, pc$(RPAREN) or font-based units $(LPAREN)em, ex$(RPAREN).  For
    * physical units, the dimensions are normalized to pixels using the dots-per-inch $(LPAREN)DPI$(RPAREN)
-   * value set previously with [Rsvg.Handle.setDpi].  For font-based units, this function
+   * value set previously with [rsvg.handle.Handle.setDpi].  For font-based units, this function
    * uses the computed value of the `font-size` property for the toplevel
    * `<svg>` element.  In those cases, this function returns `TRUE`.
    * This function is not able to extract the size in pixels directly from the intrinsic
@@ -551,7 +551,7 @@ class Handle : ObjectG
    * ```
    * Instead of querying an SVG document's size, applications are encouraged to render SVG
    * documents to a size chosen by the application, by passing a suitably-sized viewport to
-   * [Rsvg.Handle.renderDocument].
+   * [rsvg.handle.Handle.renderDocument].
    * Params:
    *   outWidth = Will be set to the computed width; you should round this up to get integer pixels.
    *   outHeight = Will be set to the computed height; you should round this up to get integer pixels.
@@ -583,8 +583,8 @@ class Handle : ObjectG
    * the caller of this function must assume that ref.
    * API ordering: This function must be called on a fully-loaded handle.  See
    * the section "[API ordering](class.Handle.html#api-ordering)" for details.
-   * This function depends on the [Rsvg.Handle]'s dots-per-inch value (DPI) to compute the
-   * "natural size" of the document in pixels, so you should call [Rsvg.Handle.setDpi]
+   * This function depends on the [rsvg.handle.Handle]'s dots-per-inch value (DPI) to compute the
+   * "natural size" of the document in pixels, so you should call [rsvg.handle.Handle.setDpi]
    * beforehand.
    * Returns: A pixbuf, or %NULL on error.
    *   during rendering.
@@ -602,11 +602,11 @@ class Handle : ObjectG
    * only renders the sub-element that has the specified id $(LPAREN)and all its
    * sub-sub-elements recursively$(RPAREN).  If id is `NULL`, this function renders the
    * whole SVG.
-   * This function depends on the [Rsvg.Handle]'s dots-per-inch value (DPI) to compute the
-   * "natural size" of the document in pixels, so you should call [Rsvg.Handle.setDpi]
+   * This function depends on the [rsvg.handle.Handle]'s dots-per-inch value (DPI) to compute the
+   * "natural size" of the document in pixels, so you should call [rsvg.handle.Handle.setDpi]
    * beforehand.
    * If you need to render an image which is only big enough to fit a particular
-   * sub-element of the SVG, consider using [Rsvg.Handle.renderElement].
+   * sub-element of the SVG, consider using [rsvg.handle.Handle.renderElement].
    * Element IDs should look like an URL fragment identifier; for example, pass
    * `#foo` $(LPAREN)hash `foo`$(RPAREN) to get the geometry of the element that
    * has an `id\="foo"` attribute.
@@ -631,8 +631,8 @@ class Handle : ObjectG
   /**
    * Get the position of a subelement of the SVG file. Do not call from within
    * the size_func callback, because an infinite loop will occur.
-   * This function depends on the [Rsvg.Handle]'s DPI to compute dimensions in
-   * pixels, so you should call [Rsvg.Handle.setDpi] beforehand.
+   * This function depends on the [rsvg.handle.Handle]'s DPI to compute dimensions in
+   * pixels, so you should call [rsvg.handle.Handle.setDpi] beforehand.
    * Element IDs should look like an URL fragment identifier; for example, pass
    * `#foo` $(LPAREN)hash `foo`$(RPAREN) to get the geometry of the element that
    * has an `id\="foo"` attribute.
@@ -643,7 +643,7 @@ class Handle : ObjectG
    *     URL's fragment ID.  Alternatively, pass %NULL to use the whole SVG.
    * Returns: `TRUE` if the position could be obtained, `FALSE` if there was an error.
 
-   * Deprecated: Use [Rsvg.Handle.getGeometryForLayer] instead.  This function is
+   * Deprecated: Use [rsvg.handle.Handle.getGeometryForLayer] instead.  This function is
    *   deprecated since it is not able to return exact floating-point positions, only integer
    *   pixels.
    */
@@ -695,8 +695,8 @@ class Handle : ObjectG
 
   /**
    * Reads stream and writes the data from it to handle.
-   * Before calling this function, you may need to call [Rsvg.Handle.setBaseUri]
-   * or [Rsvg.Handle.setBaseGfile] to set the "base file" for resolving
+   * Before calling this function, you may need to call [rsvg.handle.Handle.setBaseUri]
+   * or [rsvg.handle.Handle.setBaseGfile] to set the "base file" for resolving
    * references to external resources.  SVG elements like
    * `<image>` which reference external resources will be
    * resolved relative to the location you specify with those functions.
@@ -722,14 +722,14 @@ class Handle : ObjectG
 
   /**
    * Draws a loaded SVG handle to a Cairo context.  Please try to use
-   * [Rsvg.Handle.renderDocument] instead, which allows you to pick the size
+   * [rsvg.handle.Handle.renderDocument] instead, which allows you to pick the size
    * at which the document will be rendered.
    * Historically this function has picked a size by itself, based on the following rules:
    * * If the SVG document has both `width` and `height`
    * attributes with physical units $(LPAREN)px, in, cm, mm, pt, pc$(RPAREN) or font-based units $(LPAREN)em,
    * ex$(RPAREN), the function computes the size directly based on the dots-per-inch $(LPAREN)DPI$(RPAREN) you
-   * have configured with [Rsvg.Handle.setDpi].  This is the same approach as
-   * [Rsvg.Handle.getIntrinsicSizeInPixels].
+   * have configured with [rsvg.handle.Handle.setDpi].  This is the same approach as
+   * [rsvg.handle.Handle.getIntrinsicSizeInPixels].
    * * Otherwise, if there is a `viewBox` attribute and both
    * `width` and `height` are set to
    * `100%` $(LPAREN)or if they don't exist at all and thus default to 100%$(RPAREN),
@@ -741,15 +741,15 @@ class Handle : ObjectG
    * * This function cannot deal with percentage-based units for `width`
    * and `height` because there is no viewport against which they could
    * be resolved; that is why it will compute the extents of objects in that case.  This
-   * is why we recommend that you use [Rsvg.Handle.renderDocument] instead, which takes
+   * is why we recommend that you use [rsvg.handle.Handle.renderDocument] instead, which takes
    * in a viewport and follows the sizing policy from the web platform.
    * Drawing will occur with respect to the cr's current transformation: for example, if
    * the cr has a rotated current transformation matrix, the whole SVG will be rotated in
    * the rendered version.
-   * This function depends on the [Rsvg.Handle]'s DPI to compute dimensions in
-   * pixels, so you should call [Rsvg.Handle.setDpi] beforehand.
+   * This function depends on the [rsvg.handle.Handle]'s DPI to compute dimensions in
+   * pixels, so you should call [rsvg.handle.Handle.setDpi] beforehand.
    * Note that cr must be a Cairo context that is not in an error state, that is,
-   * `[cairo.Context.status]` must return `CAIRO_STATUS_SUCCESS` for it.  Cairo can set a
+   * `[cairo.context.Context.status]` must return `CAIRO_STATUS_SUCCESS` for it.  Cairo can set a
    * context to be in an error state in various situations, for example, if it was
    * passed an invalid matrix or if it was created for an invalid surface.
    * Params:
@@ -757,7 +757,7 @@ class Handle : ObjectG
    * Returns: `TRUE` if drawing succeeded; `FALSE` otherwise.  This function will emit a g_warning$(LPAREN)$(RPAREN)
    *   if a rendering error occurs.
 
-   * Deprecated: Please use [Rsvg.Handle.renderDocument] instead; that function lets
+   * Deprecated: Please use [rsvg.handle.Handle.renderDocument] instead; that function lets
    *   you pass a viewport and obtain a good error message.
    */
   bool renderCairo(Context cr)
@@ -769,17 +769,17 @@ class Handle : ObjectG
 
   /**
    * Renders a single SVG element in the same place as for a whole SVG document $(LPAREN)a "subset"
-   * of the document$(RPAREN).  Please try to use [Rsvg.Handle.renderLayer] instead, which allows
+   * of the document$(RPAREN).  Please try to use [rsvg.handle.Handle.renderLayer] instead, which allows
    * you to pick the size at which the document with the layer will be rendered.
-   * This is equivalent to [Rsvg.Handle.renderCairo], but it renders only a single
+   * This is equivalent to [rsvg.handle.Handle.renderCairo], but it renders only a single
    * element and its children, as if they composed an individual layer in the SVG.
    * Historically this function has picked a size for the whole document by itself, based
    * on the following rules:
    * * If the SVG document has both `width` and `height`
    * attributes with physical units $(LPAREN)px, in, cm, mm, pt, pc$(RPAREN) or font-based units $(LPAREN)em,
    * ex$(RPAREN), the function computes the size directly based on the dots-per-inch $(LPAREN)DPI$(RPAREN) you
-   * have configured with [Rsvg.Handle.setDpi].  This is the same approach as
-   * [Rsvg.Handle.getIntrinsicSizeInPixels].
+   * have configured with [rsvg.handle.Handle.setDpi].  This is the same approach as
+   * [rsvg.handle.Handle.getIntrinsicSizeInPixels].
    * * Otherwise, if there is a `viewBox` attribute and both
    * `width` and `height` are set to
    * `100%` $(LPAREN)or if they don't exist at all and thus default to 100%$(RPAREN),
@@ -791,15 +791,15 @@ class Handle : ObjectG
    * * This function cannot deal with percentage-based units for `width`
    * and `height` because there is no viewport against which they could
    * be resolved; that is why it will compute the extents of objects in that case.  This
-   * is why we recommend that you use [Rsvg.Handle.renderLayer] instead, which takes
+   * is why we recommend that you use [rsvg.handle.Handle.renderLayer] instead, which takes
    * in a viewport and follows the sizing policy from the web platform.
    * Drawing will occur with respect to the cr's current transformation: for example, if
    * the cr has a rotated current transformation matrix, the whole SVG will be rotated in
    * the rendered version.
-   * This function depends on the [Rsvg.Handle]'s DPI to compute dimensions in
-   * pixels, so you should call [Rsvg.Handle.setDpi] beforehand.
+   * This function depends on the [rsvg.handle.Handle]'s DPI to compute dimensions in
+   * pixels, so you should call [rsvg.handle.Handle.setDpi] beforehand.
    * Note that cr must be a Cairo context that is not in an error state, that is,
-   * `[cairo.Context.status]` must return `CAIRO_STATUS_SUCCESS` for it.  Cairo can set a
+   * `[cairo.context.Context.status]` must return `CAIRO_STATUS_SUCCESS` for it.  Cairo can set a
    * context to be in an error state in various situations, for example, if it was
    * passed an invalid matrix or if it was created for an invalid surface.
    * Element IDs should look like an URL fragment identifier; for example, pass
@@ -813,7 +813,7 @@ class Handle : ObjectG
    * Returns: `TRUE` if drawing succeeded; `FALSE` otherwise.  This function will emit a g_warning$(LPAREN)$(RPAREN)
    *   if a rendering error occurs.
 
-   * Deprecated: Please use [Rsvg.Handle.renderLayer] instead; that function lets
+   * Deprecated: Please use [rsvg.handle.Handle.renderLayer] instead; that function lets
    *   you pass a viewport and obtain a good error message.
    */
   bool renderCairoSub(Context cr, string id)
@@ -891,7 +891,7 @@ class Handle : ObjectG
    * The viewport gives the position and size at which the whole SVG document would be
    * rendered.  The document is scaled proportionally to fit into this viewport; hence the
    * individual layer may be smaller than this.
-   * This is equivalent to [Rsvg.Handle.renderDocument], but it renders only a
+   * This is equivalent to [rsvg.handle.Handle.renderDocument], but it renders only a
    * single element and its children, as if they composed an individual layer in
    * the SVG.  The element is rendered with the same transformation matrix as it
    * has within the whole SVG document.  Applications can use this to re-render a
@@ -928,8 +928,8 @@ class Handle : ObjectG
 
   /**
    * Set the base URI for handle from file.
-   * Note: This function may only be called before [Rsvg.Handle.write] or
-   * [Rsvg.Handle.readStreamSync] have been called.
+   * Note: This function may only be called before [rsvg.handle.Handle.write] or
+   * [rsvg.handle.Handle.readStreamSync] have been called.
    * Params:
    *   baseFile = a `GFile`
    */
@@ -940,8 +940,8 @@ class Handle : ObjectG
 
   /**
    * Set the base URI for this SVG.
-   * Note: This function may only be called before [Rsvg.Handle.write] or
-   * [Rsvg.Handle.readStreamSync] have been called.
+   * Note: This function may only be called before [rsvg.handle.Handle.write] or
+   * [rsvg.handle.Handle.readStreamSync] have been called.
    * Params:
    *   baseUri = The base uri
    */
@@ -984,18 +984,18 @@ class Handle : ObjectG
    * Sets the sizing function for the handle, which can be used to override the
    * size that librsvg computes for SVG images.  The size_func is called from the
    * following functions:
-   * * [Rsvg.Handle.getDimensions]
-   * * [Rsvg.Handle.getDimensionsSub]
-   * * [Rsvg.Handle.getPositionSub]
-   * * [Rsvg.Handle.renderCairo]
-   * * [Rsvg.Handle.renderCairoSub]
+   * * [rsvg.handle.Handle.getDimensions]
+   * * [rsvg.handle.Handle.getDimensionsSub]
+   * * [rsvg.handle.Handle.getPositionSub]
+   * * [rsvg.handle.Handle.renderCairo]
+   * * [rsvg.handle.Handle.renderCairoSub]
    * Librsvg computes the size of the SVG being rendered, and passes it to the
    * size_func, which may then modify these values to set the final size of the
    * generated image.
    * Params:
    *   sizeFunc = A sizing function, or `NULL`
 
-   * Deprecated: Use [Rsvg.Handle.renderDocument] instead.
+   * Deprecated: Use [rsvg.handle.Handle.renderDocument] instead.
    *   This function was deprecated because when the size_func is used, it makes it
    *   unclear when the librsvg functions which call the size_func will use the
    *   size computed originally, or the callback-specified size, or whether it
@@ -1047,10 +1047,10 @@ class Handle : ObjectG
 
   /**
    * Loads the next count bytes of the image.  You can call this function multiple
-   * times until the whole document is consumed; then you must call [Rsvg.Handle.close]
+   * times until the whole document is consumed; then you must call [rsvg.handle.Handle.close]
    * to actually parse the document.
    * Before calling this function for the first time, you may need to call
-   * [Rsvg.Handle.setBaseUri] or [Rsvg.Handle.setBaseGfile] to set the "base
+   * [rsvg.handle.Handle.setBaseUri] or [rsvg.handle.Handle.setBaseGfile] to set the "base
    * file" for resolving references to external resources.  SVG elements like
    * `<image>` which reference external resources will be
    * resolved relative to the location you specify with those functions.
@@ -1058,10 +1058,10 @@ class Handle : ObjectG
    *   buf = pointer to svg data
    * Returns: `TRUE` on success, or `FALSE` on error.
 
-   * Deprecated: Use [Rsvg.Handle.readStreamSync] or the constructor
-   *   functions [Rsvg.Handle.newFromGfileSync] or
-   *   [Rsvg.Handle.newFromStreamSync].  This function is deprecated because it
-   *   will accumulate data from the buf in memory until [Rsvg.Handle.close] gets
+   * Deprecated: Use [rsvg.handle.Handle.readStreamSync] or the constructor
+   *   functions [rsvg.handle.Handle.newFromGfileSync] or
+   *   [rsvg.handle.Handle.newFromStreamSync].  This function is deprecated because it
+   *   will accumulate data from the buf in memory until [rsvg.handle.Handle.close] gets
    *   called.  To avoid a big temporary buffer, use the suggested functions, which
    *   take a `GFile` or a `GInputStream` and do not require a temporary buffer.
    */

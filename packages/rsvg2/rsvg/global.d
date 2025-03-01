@@ -1,7 +1,7 @@
-module Rsvg.global;
+module rsvg.global;
 
 import gdkpixbuf.pixbuf;
-import gid.gid;
+import gid.global;
 import glib.error;
 import gobject.object;
 import rsvg.c.functions;
@@ -37,7 +37,7 @@ void init_()
  *   filename = A file name
  * Returns: A pixbuf, or %NULL on error.
 
- * Deprecated: Use [Rsvg.Handle.newFromFile] and [Rsvg.Handle.renderDocument] instead.
+ * Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
  */
 Pixbuf pixbufFromFile(string filename)
 {
@@ -62,7 +62,7 @@ Pixbuf pixbufFromFile(string filename)
  *   maxHeight = The requested max height
  * Returns: A pixbuf, or %NULL on error.
 
- * Deprecated: Use [Rsvg.Handle.newFromFile] and [Rsvg.Handle.renderDocument] instead.
+ * Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
  */
 Pixbuf pixbufFromFileAtMaxSize(string filename, int maxWidth, int maxHeight)
 {
@@ -88,7 +88,7 @@ Pixbuf pixbufFromFileAtMaxSize(string filename, int maxWidth, int maxHeight)
  *   height = The new height, or -1
  * Returns: A pixbuf, or %NULL on error.
 
- * Deprecated: Use [Rsvg.Handle.newFromFile] and [Rsvg.Handle.renderDocument] instead.
+ * Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
  */
 Pixbuf pixbufFromFileAtSize(string filename, int width, int height)
 {
@@ -113,7 +113,7 @@ Pixbuf pixbufFromFileAtSize(string filename, int width, int height)
  *   yZoom = The vertical zoom factor
  * Returns: A pixbuf, or %NULL on error.
 
- * Deprecated: Use [Rsvg.Handle.newFromFile] and [Rsvg.Handle.renderDocument] instead.
+ * Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
  */
 Pixbuf pixbufFromFileAtZoom(string filename, double xZoom, double yZoom)
 {
@@ -141,7 +141,7 @@ Pixbuf pixbufFromFileAtZoom(string filename, double xZoom, double yZoom)
  *   maxHeight = The requested max height
  * Returns: A pixbuf, or %NULL on error.
 
- * Deprecated: Use [Rsvg.Handle.newFromFile] and [Rsvg.Handle.renderDocument] instead.
+ * Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
  */
 Pixbuf pixbufFromFileAtZoomWithMax(string filename, double xZoom, double yZoom, int maxWidth, int maxHeight)
 {
@@ -156,15 +156,15 @@ Pixbuf pixbufFromFileAtZoomWithMax(string filename, double xZoom, double yZoom, 
 }
 
 /**
- * Do not use this function.  Create an [Rsvg.Handle] and call
- * [Rsvg.Handle.setDpi] on it instead.
+ * Do not use this function.  Create an [rsvg.handle.Handle] and call
+ * [rsvg.handle.Handle.setDpi] on it instead.
  * Params:
  *   dpi = Dots Per Inch $(LPAREN)aka Pixels Per Inch$(RPAREN)
 
  * Deprecated: This function used to set a global default DPI.  However,
- *   it only worked if it was called before any [Rsvg.Handle] objects had been
+ *   it only worked if it was called before any [rsvg.handle.Handle] objects had been
  *   created; it would not work after that.  To avoid global mutable state, please
- *   use [Rsvg.Handle.setDpi] instead.
+ *   use [rsvg.handle.Handle.setDpi] instead.
  */
 void setDefaultDpi(double dpi)
 {
@@ -172,16 +172,16 @@ void setDefaultDpi(double dpi)
 }
 
 /**
- * Do not use this function.  Create an [Rsvg.Handle] and call
- * [Rsvg.Handle.setDpiXY] on it instead.
+ * Do not use this function.  Create an [rsvg.handle.Handle] and call
+ * [rsvg.handle.Handle.setDpiXY] on it instead.
  * Params:
  *   dpiX = Dots Per Inch $(LPAREN)aka Pixels Per Inch$(RPAREN)
  *   dpiY = Dots Per Inch $(LPAREN)aka Pixels Per Inch$(RPAREN)
 
  * Deprecated: This function used to set a global default DPI.  However,
- *   it only worked if it was called before any [Rsvg.Handle] objects had been
+ *   it only worked if it was called before any [rsvg.handle.Handle] objects had been
  *   created; it would not work after that.  To avoid global mutable state, please
- *   use [Rsvg.Handle.setDpi] instead.
+ *   use [rsvg.handle.Handle.setDpi] instead.
  */
 void setDefaultDpiXY(double dpiX, double dpiY)
 {

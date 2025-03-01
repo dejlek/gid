@@ -1,6 +1,6 @@
 module soup.types;
 
-import gid.gid;
+import gid.global;
 import soup.auth_domain;
 import soup.auth_domain_basic;
 import soup.auth_domain_digest;
@@ -55,28 +55,28 @@ alias ServerWebsocketCallback = void delegate(Server server, ServerMessage msg, 
 
 /**
  * A constant corresponding to 1 day.
- * For use with [Soup.Cookie.new_] and [Soup.Cookie.setMaxAge].
+ * For use with [soup.cookie.Cookie.new_] and [soup.cookie.Cookie.setMaxAge].
  */
 enum COOKIE_MAX_AGE_ONE_DAY = 0;
 
 
 /**
  * A constant corresponding to 1 hour.
- * For use with [Soup.Cookie.new_] and [Soup.Cookie.setMaxAge].
+ * For use with [soup.cookie.Cookie.new_] and [soup.cookie.Cookie.setMaxAge].
  */
 enum COOKIE_MAX_AGE_ONE_HOUR = 3600;
 
 
 /**
  * A constant corresponding to 1 week.
- * For use with [Soup.Cookie.new_] and [Soup.Cookie.setMaxAge].
+ * For use with [soup.cookie.Cookie.new_] and [soup.cookie.Cookie.setMaxAge].
  */
 enum COOKIE_MAX_AGE_ONE_WEEK = 0;
 
 
 /**
  * A constant corresponding to 1 year.
- * For use with [Soup.Cookie.new_] and [Soup.Cookie.setMaxAge].
+ * For use with [soup.cookie.Cookie.new_] and [soup.cookie.Cookie.setMaxAge].
  */
 enum COOKIE_MAX_AGE_ONE_YEAR = 0;
 

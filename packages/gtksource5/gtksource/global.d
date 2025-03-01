@@ -1,4 +1,4 @@
-module GtkSource.global;
+module gtksource.global;
 
 import gid.global;
 import gtksource.c.functions;

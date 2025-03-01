@@ -1,6 +1,6 @@
 module soup.server;
 
-import gid.gid;
+import gid.global;
 import gio.iostream;
 import gio.socket;
 import gio.socket_address;
@@ -22,9 +22,9 @@ import soup.websocket_connection;
 /**
  * A HTTP server.
  * #SoupServer implements a simple HTTP server.
- * To begin, create a server using [Soup.Server.new_]. Add at least one
- * handler by calling [Soup.Server.addHandler] or
- * [Soup.Server.addEarlyHandler]; the handler will be called to
+ * To begin, create a server using [soup.server.Server.new_]. Add at least one
+ * handler by calling [soup.server.Server.addHandler] or
+ * [soup.server.Server.addEarlyHandler]; the handler will be called to
  * process any requests underneath the path you pass. $(LPAREN)If you want all
  * requests to go to the same handler, just pass "/" $(LPAREN)or %NULL$(RPAREN) for
  * the path.$(RPAREN)
@@ -41,7 +41,7 @@ import soup.websocket_connection;
  * class@AuthDomain will set a status of %SOUP_STATUS_UNAUTHORIZED on
  * the message.
  * After checking for authorization, #SoupServer will look for "early"
- * handlers $(LPAREN)added with [Soup.Server.addEarlyHandler]$(RPAREN) matching the
+ * handlers $(LPAREN)added with [soup.server.Server.addEarlyHandler]$(RPAREN) matching the
  * Request-URI. If one is found, it will be run; in particular, this
  * can be used to connect to signals to do a streaming read of the
  * request body.
@@ -58,7 +58,7 @@ import soup.websocket_connection;
  * the client.
  * Otherwise $(LPAREN)assuming no previous step assigned a status to the
  * message$(RPAREN) any "normal" handlers $(LPAREN)added with
- * [Soup.Server.addHandler]$(RPAREN) for the message's Request-URI will be
+ * [soup.server.Server.addHandler]$(RPAREN) for the message's Request-URI will be
  * run.
  * Then, if the path has a WebSocket handler registered $(LPAREN)and has
  * not yet been assigned a status$(RPAREN), #SoupServer will attempt to
@@ -66,7 +66,7 @@ import soup.websocket_connection;
  * setting a status of %SOUP_STATUS_SWITCHING_PROTOCOLS or
  * %SOUP_STATUS_BAD_REQUEST accordingly.
  * If the message still has no status code at this point $(LPAREN)and has not
- * been paused with [Soup.ServerMessage.pause]$(RPAREN), then it will be
+ * been paused with [soup.server_message.ServerMessage.pause]$(RPAREN), then it will be
  * given a status of %SOUP_STATUS_INTERNAL_SERVER_ERROR $(LPAREN)because at
  * least one handler ran, but returned without assigning a status$(RPAREN).
  * Finally, the server will emit signal@Server::request-finished $(LPAREN)or
@@ -79,8 +79,8 @@ import soup.websocket_connection;
  * of$(RPAREN) http connections, you can set the property@Server:tls-certificate
  * property.
  * Once the server is set up, make one or more calls to
- * [Soup.Server.listen], [Soup.Server.listenLocal], or
- * [Soup.Server.listenAll] to tell it where to listen for
+ * [soup.server.Server.listen], [soup.server.Server.listenLocal], or
+ * [soup.server.Server.listenAll] to tell it where to listen for
  * connections. $(LPAREN)All ports on a #SoupServer use the same handlers; if
  * you need to handle some ports differently, such as returning
  * different data for http and https, you'll need to create multiple
@@ -88,7 +88,7 @@ import soup.websocket_connection;
  * function.$(RPAREN).
  * #SoupServer will begin processing connections as soon as you return
  * to $(LPAREN)or start$(RPAREN) the main loop for the current thread-default
- * [GLib.MainContext].
+ * [glib.main_context.MainContext].
  */
 class Server : ObjectG
 {
@@ -163,7 +163,7 @@ class Server : ObjectG
    * request-headers properties will be set.
    * Early handlers are generally used for processing requests with request bodies
    * in a streaming fashion. If you determine that the request will contain a
-   * message body, normally you would call [Soup.MessageBody.setAccumulate] on
+   * message body, normally you would call [soup.message_body.MessageBody.setAccumulate] on
    * the message's request-body to turn off request-body accumulation, and connect
    * to the message's signalServerMessage::got-chunk signal to process each
    * chunk as it comes in.
@@ -208,23 +208,23 @@ class Server : ObjectG
    * request body; the classServerMessage's method, request-headers,
    * and request-body properties will be set.
    * After determining what to do with the request, the callback must at a minimum
-   * call [Soup.ServerMessage.setStatus] on the message to set the response
+   * call [soup.server_message.ServerMessage.setStatus] on the message to set the response
    * status code. Additionally, it may set response headers and/or fill in the
    * response body.
    * If the callback cannot fully fill in the response before returning
    * $(LPAREN)eg, if it needs to wait for information from a database, or
-   * another network server$(RPAREN), it should call [Soup.ServerMessage.pause]
+   * another network server$(RPAREN), it should call [soup.server_message.ServerMessage.pause]
    * to tell server to not send the response right away. When the
-   * response is ready, call [Soup.ServerMessage.unpause] to cause it
+   * response is ready, call [soup.server_message.ServerMessage.unpause] to cause it
    * to be sent.
    * To send the response body a bit at a time using "chunked" encoding, first
-   * call [Soup.MessageHeaders.setEncoding] to set %SOUP_ENCODING_CHUNKED on
-   * the response-headers. Then call [Soup.MessageBody.append] $(LPAREN)or
-   * [Soup.MessageBody.appendBytes]$(RPAREN)$(RPAREN) to append each chunk as it becomes ready,
-   * and [Soup.ServerMessage.unpause] to make sure it's running. $(LPAREN)The server
+   * call [soup.message_headers.MessageHeaders.setEncoding] to set %SOUP_ENCODING_CHUNKED on
+   * the response-headers. Then call [soup.message_body.MessageBody.append] $(LPAREN)or
+   * [soup.message_body.MessageBody.appendBytes]$(RPAREN)$(RPAREN) to append each chunk as it becomes ready,
+   * and [soup.server_message.ServerMessage.unpause] to make sure it's running. $(LPAREN)The server
    * will automatically pause the message if it is using chunked encoding but no
    * more chunks are available.$(RPAREN) When you are done, call
-   * [Soup.MessageBody.complete] to indicate that no more chunks are coming.
+   * [soup.message_body.MessageBody.complete] to indicate that no more chunks are coming.
    * Params:
    *   path = the toplevel path for the handler
    *   callback = callback to invoke for
@@ -254,7 +254,7 @@ class Server : ObjectG
    * a new classWebsocketExtension of type extension_type will be created
    * to handle the request.
    * Note that classWebsocketExtensionDeflate is supported by default, use
-   * [Soup.Server.removeWebsocketExtension] if you want to disable it.
+   * [soup.server.Server.removeWebsocketExtension] if you want to disable it.
    * Params:
    *   extensionType = a #GType
    */
@@ -314,9 +314,9 @@ class Server : ObjectG
   /**
    * Closes and frees server's listening sockets.
    * Note that if there are currently requests in progress on server, that they
-   * will continue to be processed if server's [GLib.MainContext] is still
+   * will continue to be processed if server's [glib.main_context.MainContext] is still
    * running.
-   * You can call [Soup.Server.listen], etc, after calling this function
+   * You can call [soup.server.Server.listen], etc, after calling this function
    * if you want to start listening again.
    */
   void disconnect()
@@ -380,7 +380,7 @@ class Server : ObjectG
    * listening on.
    * These will contain IP addresses, not hostnames, and will also indicate
    * whether the given listener is http or https.
-   * Note that if you used [Soup.Server.listenAll] the returned URIs will use
+   * Note that if you used [soup.server.Server.listenAll] the returned URIs will use
    * the addresses `0.0.0.0` and `::`, rather than actually returning separate
    * URIs for each interface on the system.
    * Returns: a list of #GUris, which you
@@ -397,14 +397,14 @@ class Server : ObjectG
   /**
    * Checks whether server is capable of https.
    * In order for a server to run https, you must call
-   * [Soup.Server.setTlsCertificate], or set the
+   * [soup.server.Server.setTlsCertificate], or set the
    * propertyServer:tls-certificate property, to provide it with a
    * certificate to use.
    * If you are using the deprecated single-listener APIs, then a return value of
    * %TRUE indicates that the #SoupServer serves https exclusively. If you are
-   * using [Soup.Server.listen], etc, then a %TRUE return value merely indicates
+   * using [soup.server.Server.listen], etc, then a %TRUE return value merely indicates
    * that the server is *able* to do https, regardless of whether it actually
-   * currently is or not. Use [Soup.Server.getUris] to see if it currently has
+   * currently is or not. Use [soup.server.Server.getUris] to see if it currently has
    * any https listeners.
    * Returns: %TRUE if server is configured to serve https.
    */
@@ -424,7 +424,7 @@ class Server : ObjectG
    * any number of times on a server, if you want to listen on multiple
    * ports, or set up both http and https service.
    * After calling this method, server will begin accepting and processing
-   * connections as soon as the appropriate [GLib.MainContext] is run.
+   * connections as soon as the appropriate [glib.main_context.MainContext] is run.
    * Note that this API does not make use of dual IPv4/IPv6 sockets; if
    * address is an IPv6 address, it will only accept IPv6 connections.
    * You must configure IPv4 listening separately.
@@ -452,9 +452,9 @@ class Server : ObjectG
    * whether options includes %SOUP_SERVER_LISTEN_IPV4_ONLY,
    * %SOUP_SERVER_LISTEN_IPV6_ONLY, or neither.$(RPAREN) If port is specified, server
    * will listen on that port. If it is 0, server will find an unused port to
-   * listen on. $(LPAREN)In that case, you can use [Soup.Server.getUris] to find out
+   * listen on. $(LPAREN)In that case, you can use [soup.server.Server.getUris] to find out
    * what port it ended up choosing.
-   * See [Soup.Server.listen] for more details.
+   * See [soup.server.Server.listen] for more details.
    * Params:
    *   port = the port to listen on, or 0
    *   options = listening options for this server
@@ -477,8 +477,8 @@ class Server : ObjectG
    * %SOUP_SERVER_LISTEN_IPV4_ONLY, %SOUP_SERVER_LISTEN_IPV6_ONLY, or neither$(RPAREN). If
    * port is specified, server will listen on that port. If it is 0, server
    * will find an unused port to listen on. $(LPAREN)In that case, you can use
-   * [Soup.Server.getUris] to find out what port it ended up choosing.
-   * See [Soup.Server.listen] for more details.
+   * [soup.server.Server.getUris] to find out what port it ended up choosing.
+   * See [soup.server.Server.listen] for more details.
    * Params:
    *   port = the port to listen on, or 0
    *   options = listening options for this server
@@ -497,7 +497,7 @@ class Server : ObjectG
 
   /**
    * Attempts to set up server to listen for connections on socket.
-   * See [Soup.Server.listen] for more details.
+   * See [soup.server.Server.listen] for more details.
    * Params:
    *   socket = a listening #GSocket
    *   options = listening options for this server
@@ -517,7 +517,7 @@ class Server : ObjectG
   /**
    * Pauses I/O on msg.
    * This can be used when you need to return from the server handler without
-   * having the full response ready yet. Use [Soup.Server.unpauseMessage] to
+   * having the full response ready yet. Use [soup.server.Server.unpauseMessage] to
    * resume I/O.
    * This must only be called on a classServerMessage which was created by the
    * #SoupServer and are currently doing I/O, such as those passed into a
@@ -526,7 +526,7 @@ class Server : ObjectG
    * Params:
    *   msg = a #SoupServerMessage associated with server.
 
-   * Deprecated: Use [Soup.ServerMessage.pause] instead.
+   * Deprecated: Use [soup.server_message.ServerMessage.pause] instead.
    */
   void pauseMessage(ServerMessage msg)
   {
@@ -597,7 +597,7 @@ class Server : ObjectG
 
   /**
    * Resumes I/O on msg.
-   * Use this to resume after calling [Soup.Server.pauseMessage], or after
+   * Use this to resume after calling [soup.server.Server.pauseMessage], or after
    * adding a new chunk to a chunked response.
    * I/O won't actually resume until you return to the main loop.
    * This must only be called on a classServerMessage which was created by the
@@ -607,7 +607,7 @@ class Server : ObjectG
    * Params:
    *   msg = a #SoupServerMessage associated with server.
 
-   * Deprecated: Use [Soup.ServerMessage.unpause] instead.
+   * Deprecated: Use [soup.server_message.ServerMessage.unpause] instead.
    */
   void unpauseMessage(ServerMessage msg)
   {

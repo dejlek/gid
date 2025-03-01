@@ -1,6 +1,6 @@
 module soup.session;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -44,7 +44,7 @@ import soup.websocket_connection;
  * user.$(RPAREN)
  * Additional #SoupSession functionality is provided by
  * iface@SessionFeature objects, which can be added to a session with
- * [Soup.Session.addFeature] or [Soup.Session.addFeatureByType]
+ * [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType]
  * For example, class@Logger provides support for
  * logging HTTP traffic, class@ContentDecoder provides support for
  * compressed response handling, and class@ContentSniffer provides
@@ -113,7 +113,7 @@ class Session : ObjectG
   /**
    * If feature_type is the type of a class that implements
    * ifaceSessionFeature, this creates a new feature of that type and
-   * adds it to session as with [Soup.Session.addFeature]. You can use
+   * adds it to session as with [soup.session.Session.addFeature]. You can use
    * this when you don't need to customize the new feature in any way.
    * Adding multiple features of the same feature_type is not allowed.
    * If feature_type is not a ifaceSessionFeature type, this gives each
@@ -158,7 +158,7 @@ class Session : ObjectG
   /**
    * Gets the classMessage of the result asynchronous operation This is useful
    * to get the classMessage of an asynchronous operation started by session
-   * from its [Gio.AsyncReadyCallback].
+   * from its [gio.AsyncReadyCallback].
    * Params:
    *   result = the #GAsyncResult passed to your callback
    * Returns: a #SoupMessage or
@@ -217,7 +217,7 @@ class Session : ObjectG
   }
 
   /**
-   * Get the [Gio.InetSocketAddress] to use for the client side of
+   * Get the [gio.inet_socket_address.InetSocketAddress] to use for the client side of
    * connections in session.
    * Returns: a #GInetSocketAddress
    */
@@ -253,7 +253,7 @@ class Session : ObjectG
   }
 
   /**
-   * Get the [Gio.ProxyResolver] currently used by session.
+   * Get the [gio.proxy_resolver.ProxyResolver] currently used by session.
    * Returns: a #GProxyResolver or %NULL if proxies
    *   are disabled in session
    */
@@ -290,7 +290,7 @@ class Session : ObjectG
   }
 
   /**
-   * Get the [Gio.TlsDatabase] currently used by session.
+   * Get the [gio.tls_database.TlsDatabase] currently used by session.
    * Returns: a #GTlsDatabase
    */
   TlsDatabase getTlsDatabase()
@@ -302,7 +302,7 @@ class Session : ObjectG
   }
 
   /**
-   * Get the [Gio.TlsInteraction] currently used by session.
+   * Get the [gio.tls_interaction.TlsInteraction] currently used by session.
    * Returns: a #GTlsInteraction
    */
   TlsInteraction getTlsInteraction()
@@ -372,7 +372,7 @@ class Session : ObjectG
   }
 
   /**
-   * Complete a preconnect async operation started with [Soup.Session.preconnectAsync].
+   * Complete a preconnect async operation started with [soup.session.Session.preconnectAsync].
    * Params:
    *   result = the #GAsyncResult passed to your callback
    * Returns: %TRUE if the preconnect succeeded, or %FALSE in case of error.
@@ -410,19 +410,19 @@ class Session : ObjectG
 
   /**
    * Synchronously sends msg and waits for the beginning of a response.
-   * On success, a [Gio.InputStream] will be returned which you can use to
+   * On success, a [gio.input_stream.InputStream] will be returned which you can use to
    * read the response body. $(LPAREN)"Success" here means only that an HTTP
    * response was received and understood; it does not necessarily mean
    * that a 2xx class status code was received.$(RPAREN)
    * If non-%NULL, cancellable can be used to cancel the request;
-   * [Soup.Session.send] will return a %G_IO_ERROR_CANCELLED error. Note that
+   * [soup.session.Session.send] will return a %G_IO_ERROR_CANCELLED error. Note that
    * with requests that have side effects $(LPAREN)eg, `POST`, `PUT`, `DELETE`$(RPAREN) it is
    * possible that you might cancel the request after the server acts on it, but
    * before it returns a response, leaving the remote resource in an unknown
    * state.
    * If msg is requeued due to a redirect or authentication, the
    * initial $(LPAREN)`3xx/401/407`$(RPAREN) response body will be suppressed, and
-   * [Soup.Session.send] will only return once a final response has been
+   * [soup.session.Session.send] will only return once a final response has been
    * received.
    * Params:
    *   msg = a #SoupMessage
@@ -443,10 +443,10 @@ class Session : ObjectG
 
   /**
    * Synchronously sends msg and reads the response body.
-   * On success, a [GLib.Bytes] will be returned with the response body.
+   * On success, a [glib.bytes.Bytes] will be returned with the response body.
    * This function should only be used when the resource to be retrieved
    * is not too long and can be stored in memory.
-   * See [Soup.Session.send] for more details on the general semantics.
+   * See [soup.session.Session.send] for more details on the general semantics.
    * Params:
    *   msg = a #SoupMessage
    *   cancellable = a #GCancellable
@@ -468,9 +468,9 @@ class Session : ObjectG
    * When callback is called, then either msg has been sent, and its response
    * body read, or else an error has occurred. This function should only be used
    * when the resource to be retrieved is not too long and can be stored in
-   * memory. Call [Soup.Session.sendAndReadFinish] to get a
-   * [GLib.Bytes] with the response body.
-   * See [Soup.Session.send] for more details on the general semantics.
+   * memory. Call [soup.session.Session.sendAndReadFinish] to get a
+   * [glib.bytes.Bytes] with the response body.
+   * See [soup.session.Session.send] for more details on the general semantics.
    * Params:
    *   msg = a #SoupMessage
    *   ioPriority = the I/O priority of the request
@@ -493,8 +493,8 @@ class Session : ObjectG
   }
 
   /**
-   * Gets the response to a [Soup.Session.sendAndReadAsync].
-   * If successful, returns a [GLib.Bytes] with the response body.
+   * Gets the response to a [soup.session.Session.sendAndReadAsync].
+   * If successful, returns a [glib.bytes.Bytes] with the response body.
    * Params:
    *   result = the #GAsyncResult passed to your callback
    * Returns: a #GBytes, or %NULL on error.
@@ -512,7 +512,7 @@ class Session : ObjectG
 
   /**
    * Synchronously sends msg and splices the response body stream into out_stream.
-   * See [Soup.Session.send] for more details on the general semantics.
+   * See [soup.session.Session.send] for more details on the general semantics.
    * Params:
    *   msg = a #SoupMessage
    *   outStream = a #GOutputStream
@@ -534,7 +534,7 @@ class Session : ObjectG
    * Asynchronously sends msg and splices the response body stream into out_stream.
    * When callback is called, then either msg has been sent and its response body
    * spliced, or else an error has occurred.
-   * See [Soup.Session.send] for more details on the general semantics.
+   * See [soup.session.Session.send] for more details on the general semantics.
    * Params:
    *   msg = a #SoupMessage
    *   outStream = a #GOutputStream
@@ -559,7 +559,7 @@ class Session : ObjectG
   }
 
   /**
-   * Gets the response to a [Soup.Session.sendAndSpliceAsync].
+   * Gets the response to a [soup.session.Session.sendAndSpliceAsync].
    * Params:
    *   result = the #GAsyncResult passed to your callback
    * Returns: a #gssize containing the size of the data spliced, or -1 if an error occurred.
@@ -578,9 +578,9 @@ class Session : ObjectG
    * Asynchronously sends msg and waits for the beginning of a response.
    * When callback is called, then either msg has been sent, and its response
    * headers received, or else an error has occurred. Call
-   * [Soup.Session.sendFinish] to get a [Gio.InputStream] for reading the
+   * [soup.session.Session.sendFinish] to get a [gio.input_stream.InputStream] for reading the
    * response body.
-   * See [Soup.Session.send] for more details on the general semantics.
+   * See [soup.session.Session.send] for more details on the general semantics.
    * Params:
    *   msg = a #SoupMessage
    *   ioPriority = the I/O priority of the request
@@ -603,8 +603,8 @@ class Session : ObjectG
   }
 
   /**
-   * Gets the response to a [Soup.Session.sendAsync] call.
-   * If successful returns a [Gio.InputStream] that can be used to read the
+   * Gets the response to a [soup.session.Session.sendAsync] call.
+   * If successful returns a [gio.input_stream.InputStream] that can be used to read the
    * response body.
    * Params:
    *   result = the #GAsyncResult passed to your callback
@@ -662,7 +662,7 @@ class Session : ObjectG
   }
 
   /**
-   * Set a [Gio.ProxyResolver] to be used by session on new connections.
+   * Set a [gio.proxy_resolver.ProxyResolver] to be used by session on new connections.
    * If proxy_resolver is %NULL then no proxies will be used. See
    * propertySession:proxy-resolver for more information.
    * Params:
@@ -698,7 +698,7 @@ class Session : ObjectG
   }
 
   /**
-   * Set a [Gio.TlsInteraction] to be used by session on new connections.
+   * Set a [gio.tls_interaction.TlsInteraction] to be used by session on new connections.
    * If tls_interaction is %NULL then client certificate validation will always
    * fail.
    * See propertySession:tls-interaction for more information.
@@ -735,11 +735,11 @@ class Session : ObjectG
    * If the server returns "101 Switching Protocols", then msg's status
    * code and response headers will be updated, and then the WebSocket
    * handshake will be completed. On success,
-   * [Soup.Session.websocketConnectFinish] will return a new
+   * [soup.session.Session.websocketConnectFinish] will return a new
    * classWebsocketConnection. On failure it will return a #GError.
    * If the server returns a status other than "101 Switching Protocols", then
    * msg will contain the complete response headers and body from the server's
-   * response, and [Soup.Session.websocketConnectFinish] will return
+   * response, and [soup.session.Session.websocketConnectFinish] will return
    * %SOUP_WEBSOCKET_ERROR_NOT_WEBSOCKET.
    * Params:
    *   msg = #SoupMessage indicating the WebSocket server to connect to
@@ -774,7 +774,7 @@ class Session : ObjectG
 
   /**
    * Gets the classWebsocketConnection response to a
-   * [Soup.Session.websocketConnectAsync] call.
+   * [soup.session.Session.websocketConnectAsync] call.
    * If successful, returns a classWebsocketConnection that can be used to
    * communicate with the server.
    * Params:

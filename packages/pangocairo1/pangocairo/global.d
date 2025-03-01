@@ -1,4 +1,4 @@
-module PangoCairo.global;
+module pangocairo.global;
 
 import cairo.context : DcairoContext = Context;
 import cairo.font_options;

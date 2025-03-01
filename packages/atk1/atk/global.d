@@ -1,4 +1,4 @@
-module Atk.global;
+module atk.global;
 
 import atk.c.functions;
 import atk.c.types;

@@ -1,6 +1,6 @@
 module soup.cookie_jar;
 
-import gid.gid;
+import gid.global;
 import glib.uri;
 import gobject.dclosure;
 import gobject.object;
@@ -16,7 +16,7 @@ import soup.types;
  * A #SoupCookieJar stores struct@Cookies and arrange for them to be sent with
  * the appropriate class@Messages. #SoupCookieJar implements
  * iface@SessionFeature, so you can add a cookie jar to a session with
- * [Soup.Session.addFeature] or [Soup.Session.addFeatureByType].
+ * [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
  * Note that the base #SoupCookieJar class does not support any form
  * of long-term cookie persistence.
  */
@@ -97,7 +97,7 @@ class CookieJar : ObjectG, SessionFeature
    * resources in case such a security policy is set in the jar.
    * cookie will be 'stolen' by the jar, so don't free it afterwards.
    * For secure cookies to work properly you may want to use
-   * [Soup.CookieJar.addCookieFull].
+   * [soup.cookie_jar.CookieJar.addCookieFull].
    * Params:
    *   firstParty = the URI for the main document
    *   cookie = a #SoupCookie
@@ -108,7 +108,7 @@ class CookieJar : ObjectG, SessionFeature
   }
 
   /**
-   * Constructs a [GLib.List] with every cookie inside the jar.
+   * Constructs a [glib.list.List] with every cookie inside the jar.
    * The cookies in the list are a copy of the original, so
    * you have to free them when you are done with them.
    * Returns: a #GSList
@@ -147,7 +147,7 @@ class CookieJar : ObjectG, SessionFeature
 
   /**
    * Retrieves the list of cookies that would be sent with a request to uri
-   * as a [GLib.List] of #SoupCookie objects.
+   * as a [glib.list.List] of #SoupCookie objects.
    * If for_http is %TRUE, the return value will include cookies marked
    * "HttpOnly" $(LPAREN)that is, cookies that the server wishes to keep hidden
    * from client-side scripting operations such as the JavaScript
@@ -171,7 +171,7 @@ class CookieJar : ObjectG, SessionFeature
   }
 
   /**
-   * This is an extended version of [Soup.CookieJar.getCookieList] that
+   * This is an extended version of [soup.cookie_jar.CookieJar.getCookieList] that
    * provides more information required to use SameSite cookies.
    * See the [SameSite cookies
    * spec]$(LPAREN)https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00$(RPAREN) for
@@ -248,7 +248,7 @@ class CookieJar : ObjectG, SessionFeature
    * Keep in mind that if the enumCookieJarAcceptPolicy set is either
    * %SOUP_COOKIE_JAR_ACCEPT_NO_THIRD_PARTY or
    * %SOUP_COOKIE_JAR_ACCEPT_GRANDFATHERED_THIRD_PARTY you'll need to use
-   * [Soup.CookieJar.setCookieWithFirstParty], otherwise the jar
+   * [soup.cookie_jar.CookieJar.setCookieWithFirstParty], otherwise the jar
    * will have no way of knowing if the cookie is being set by a third
    * party or not.
    * Params:

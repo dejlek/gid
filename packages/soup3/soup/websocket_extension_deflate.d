@@ -1,6 +1,6 @@
 module soup.websocket_extension_deflate;
 
-import gid.gid;
+import gid.global;
 import soup.c.functions;
 import soup.c.types;
 import soup.types;

@@ -19,9 +19,9 @@ enum RsvgError
 }
 
 /**
- * Configuration flags for an [Rsvg.Handle].  Note that not all of [Rsvg.Handle]'s
- * constructors let you specify flags.  For this reason, [Rsvg.Handle.newFromGfileSync]
- * and [Rsvg.Handle.newFromStreamSync] are the preferred ways to create a handle.
+ * Configuration flags for an [rsvg.handle.Handle].  Note that not all of [rsvg.handle.Handle]'s
+ * constructors let you specify flags.  For this reason, [rsvg.handle.Handle.newFromGfileSync]
+ * and [rsvg.handle.Handle.newFromStreamSync] are the preferred ways to create a handle.
  */
 enum RsvgHandleFlags : uint
 {
@@ -103,12 +103,12 @@ enum RsvgUnit
 }
 
 /**
- * Dimensions of an SVG image from [Rsvg.Handle.getDimensions], or an
- * individual element from [Rsvg.Handle.getDimensionsSub].  Please see
+ * Dimensions of an SVG image from [rsvg.handle.Handle.getDimensions], or an
+ * individual element from [rsvg.handle.Handle.getDimensionsSub].  Please see
  * the deprecation documentation for those functions.
 
- * Deprecated: Use [Rsvg.Handle.getIntrinsicSizeInPixels] or
- *   [Rsvg.Handle.getGeometryForLayer] instead.
+ * Deprecated: Use [rsvg.handle.Handle.getIntrinsicSizeInPixels] or
+ *   [rsvg.handle.Handle.getGeometryForLayer] instead.
  */
 struct RsvgDimensionData
 {
@@ -134,10 +134,10 @@ struct RsvgDimensionData
 }
 
 /**
- * [Rsvg.Handle] loads an SVG document into memory.
- * This is the main entry point into the librsvg library.  An [Rsvg.Handle] is an
+ * [rsvg.handle.Handle] loads an SVG document into memory.
+ * This is the main entry point into the librsvg library.  An [rsvg.handle.Handle] is an
  * object that represents SVG data in memory.  Your program creates an
- * [Rsvg.Handle] from an SVG file, or from a memory buffer that contains SVG data,
+ * [rsvg.handle.Handle] from an SVG file, or from a memory buffer that contains SVG data,
  * or in the most general form, from a `GInputStream` that will provide SVG data.
  * Librsvg can load SVG images and render them to Cairo surfaces,
  * using a mixture of SVG's [static mode] and [secure static mode].
@@ -175,7 +175,7 @@ struct RsvgDimensionData
  * 2. URLs with queries $(LPAREN)"?"$(RPAREN) or fragment identifiers $(LPAREN)"#"$(RPAREN) are not allowed.
  * 3. All URL schemes other than data: in references require a base URL.  For
  * example, this means that if you load an SVG with
- * [Rsvg.Handle.newFromData] without calling [Rsvg.Handle.setBaseUri],
+ * [rsvg.handle.Handle.newFromData] without calling [rsvg.handle.Handle.setBaseUri],
  * then any referenced files will not be allowed $(LPAREN)e.g. raster images to be
  * loaded from other files will not work$(RPAREN).
  * 4. If referenced URLs are absolute, rather than relative, then they must
@@ -196,53 +196,53 @@ struct RsvgDimensionData
  * files meet these conditions.
  * # Loading an SVG with GIO
  * This is the easiest and most resource-efficient way of loading SVG data into
- * an [Rsvg.Handle].
+ * an [rsvg.handle.Handle].
  * If you have a `GFile` that stands for an SVG file, you can simply call
- * [Rsvg.Handle.newFromGfileSync] to load an [Rsvg.Handle] from it.
+ * [rsvg.handle.Handle.newFromGfileSync] to load an [rsvg.handle.Handle] from it.
  * Alternatively, if you have a `GInputStream`, you can use
- * [Rsvg.Handle.newFromStreamSync].
+ * [rsvg.handle.Handle.newFromStreamSync].
  * Both of those methods allow specifying a `GCancellable`, so the loading
  * process can be cancelled from another thread.
  * ## Loading an SVG from memory
  * If you already have SVG data in a byte buffer in memory, you can create a
- * memory input stream with [Gio.MemoryInputStream.newFromData] and feed that
- * to [Rsvg.Handle.newFromStreamSync].
+ * memory input stream with [gio.memory_input_stream.MemoryInputStream.newFromData] and feed that
+ * to [rsvg.handle.Handle.newFromStreamSync].
  * Note that in this case, it is important that you specify the base_file for
  * the in-memory SVG data.  Librsvg uses the base_file to resolve links to
  * external content, like raster images.
  * # Loading an SVG without GIO
- * You can load an [Rsvg.Handle] from a simple filename or URI with
- * [Rsvg.Handle.newFromFile].  Note that this is a blocking operation; there
+ * You can load an [rsvg.handle.Handle] from a simple filename or URI with
+ * [rsvg.handle.Handle.newFromFile].  Note that this is a blocking operation; there
  * is no way to cancel it if loading a remote URI takes a long time.  Also, note that
- * this method does not let you specify [Rsvg.HandleFlags].
+ * this method does not let you specify [rsvg.HandleFlags].
  * Otherwise, loading an SVG without GIO is not recommended, since librsvg will
  * need to buffer your entire data internally before actually being able to
  * parse it.  The deprecated way of doing this is by creating a handle with
- * [Rsvg.Handle.new_] or [Rsvg.Handle.newWithFlags], and then using
- * [Rsvg.Handle.write] and [Rsvg.Handle.close] to feed the handle with SVG data.
+ * [rsvg.handle.Handle.new_] or [rsvg.handle.Handle.newWithFlags], and then using
+ * [rsvg.handle.Handle.write] and [rsvg.handle.Handle.close] to feed the handle with SVG data.
  * Still, please try to use the GIO stream functions instead.
  * # Resolution of the rendered image $(LPAREN)dots per inch, or DPI$(RPAREN)
  * SVG images can contain dimensions like "`5cm`" or
  * "`2pt`" that must be converted from physical units into
  * device units.  To do this, librsvg needs to know the actual dots per inch
- * $(LPAREN)DPI$(RPAREN) of your target device.  You can call [Rsvg.Handle.setDpi] or
- * [Rsvg.Handle.setDpiXY] on an [Rsvg.Handle] to set the DPI before rendering
+ * $(LPAREN)DPI$(RPAREN) of your target device.  You can call [rsvg.handle.Handle.setDpi] or
+ * [rsvg.handle.Handle.setDpiXY] on an [rsvg.handle.Handle] to set the DPI before rendering
  * it.
  * # Rendering
  * The preferred way to render a whole SVG document is to use
- * [Rsvg.Handle.renderDocument].  Please see its documentation for
+ * [rsvg.handle.Handle.renderDocument].  Please see its documentation for
  * details.
  * # API ordering
- * Due to the way the librsvg API evolved over time, an [Rsvg.Handle] object is available
+ * Due to the way the librsvg API evolved over time, an [rsvg.handle.Handle] object is available
  * for use as soon as it is constructed.  However, not all of its methods can be
- * called at any time.  For example, an [Rsvg.Handle] just constructed with [Rsvg.Handle.new_]
- * is not loaded yet, and it does not make sense to call [Rsvg.Handle.renderDocument] on it
+ * called at any time.  For example, an [rsvg.handle.Handle] just constructed with [rsvg.handle.Handle.new_]
+ * is not loaded yet, and it does not make sense to call [rsvg.handle.Handle.renderDocument] on it
  * just at that point.
- * The documentation for the available methods in [Rsvg.Handle] may mention that a particular
+ * The documentation for the available methods in [rsvg.handle.Handle] may mention that a particular
  * method is only callable on a "fully loaded handle".  This means either:
- * * The handle was loaded with [Rsvg.Handle.write] and [Rsvg.Handle.close], and
+ * * The handle was loaded with [rsvg.handle.Handle.write] and [rsvg.handle.Handle.close], and
  * those functions returned no errors.
- * * The handle was loaded with [Rsvg.Handle.readStreamSync] and that function
+ * * The handle was loaded with [rsvg.handle.Handle.readStreamSync] and that function
  * returned no errors.
  * Before librsvg 2.46, the library did not fully verify that a handle was in a
  * fully loaded state for the methods that require it.  To preserve
@@ -261,7 +261,7 @@ struct RsvgHandle
 }
 
 /**
- * Class structure for [Rsvg.Handle].
+ * Class structure for [rsvg.handle.Handle].
  */
 struct RsvgHandleClass
 {
@@ -274,7 +274,7 @@ struct RsvgHandleClass
 }
 
 /**
- * `RsvgLength` values are used in [Rsvg.Handle.getIntrinsicDimensions], for
+ * `RsvgLength` values are used in [rsvg.handle.Handle.getIntrinsicDimensions], for
  * example, to return the CSS length values of the `width` and
  * `height` attributes of an `<svg>` element.
  * This is equivalent to [CSS lengths](https://www.w3.org/TR/CSS21/syndata.html#length-units).
@@ -298,10 +298,10 @@ struct RsvgLength
 }
 
 /**
- * Position of an SVG fragment from [Rsvg.Handle.getPositionSub].  Please
+ * Position of an SVG fragment from [rsvg.handle.Handle.getPositionSub].  Please
  * the deprecation documentation for that function.
 
- * Deprecated: Use [Rsvg.Handle.getGeometryForLayer] instead.
+ * Deprecated: Use [rsvg.handle.Handle.getGeometryForLayer] instead.
  */
 struct RsvgPositionData
 {

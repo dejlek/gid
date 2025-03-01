@@ -1,6 +1,6 @@
 module soup.cookie_jar_text;
 
-import gid.gid;
+import gid.global;
 import soup.c.functions;
 import soup.c.types;
 import soup.cookie_jar;

@@ -1,6 +1,6 @@
 module soup.cache;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -61,7 +61,7 @@ class Cache : ObjectG, SessionFeature
 
   /**
    * Synchronously writes the cache index out to disk.
-   * Contrast with [Soup.Cache.flush], which writes pending cache *entries* to
+   * Contrast with [soup.cache.Cache.flush], which writes pending cache *entries* to
    * disk.
    * You must call this before exiting if you want your cache data to
    * persist between sessions.
@@ -75,9 +75,9 @@ class Cache : ObjectG, SessionFeature
   /**
    * Forces all pending writes in the cache to be
    * committed to disk.
-   * For doing so it will iterate the [GLib.MainContext] associated with
+   * For doing so it will iterate the [glib.main_context.MainContext] associated with
    * cache's session as long as needed.
-   * Contrast with [Soup.Cache.dump], which writes out the cache index file.
+   * Contrast with [soup.cache.Cache.dump], which writes out the cache index file.
    */
   void flush()
   {

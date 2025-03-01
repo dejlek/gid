@@ -1,6 +1,6 @@
 module soup.content_decoder;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -16,7 +16,7 @@ import soup.types;
  * content codings.
  * A #SoupContentDecoder will automatically be
  * added to the session by default. $(LPAREN)You can use
- * [Soup.Session.removeFeatureByType] if you don't
+ * [soup.session.Session.removeFeatureByType] if you don't
  * want this.$(RPAREN)
  * If #SoupContentDecoder successfully decodes the Content-Encoding,
  * the message body will contain the decoded data; however, the message headers

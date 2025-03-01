@@ -1,6 +1,6 @@
 module soup.message_metrics;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import soup.c.functions;
 import soup.c.types;
@@ -132,7 +132,7 @@ class MessageMetrics : Boxed
    * Get the number of bytes sent to the network for the request body.
    * This is the size of the body sent, after encodings are applied, so it might
    * be greater than the value returned by
-   * [Soup.MessageMetrics.getRequestBodySize]. This value is available right
+   * [soup.message_metrics.MessageMetrics.getRequestBodySize]. This value is available right
    * before signalMessage::wrote-body signal is emitted, but you might get an
    * intermediate value if called before.
    * Returns: the request body bytes sent
@@ -201,7 +201,7 @@ class MessageMetrics : Boxed
    * Get the response body size in bytes.
    * This is the size of the body as given to the user after all encodings are
    * applied, so it might be greater than the value returned by
-   * [Soup.MessageMetrics.getResponseBodyBytesReceived]. This value is
+   * [soup.message_metrics.MessageMetrics.getResponseBodyBytesReceived]. This value is
    * available right before signalMessage::got-body signal is emitted, but you
    * might get an intermediate value if called before.
    * Returns: the response body size

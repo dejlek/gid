@@ -1,6 +1,6 @@
 module soup.message_headers;
 
-import gid.gid;
+import gid.global;
 import gobject.boxed;
 import soup.c.functions;
 import soup.c.types;
@@ -53,7 +53,7 @@ class MessageHeaders : Boxed
    * Appends a new header with name name and value value to hdrs.
    * $(LPAREN)If there is an existing header with name name, then this creates a second
    * one, which is only allowed for list-valued headers; see also
-   * [Soup.MessageHeaders.replace].$(RPAREN)
+   * [soup.message_headers.MessageHeaders.replace].$(RPAREN)
    * The caller is expected to make sure that name and value are
    * syntactically correct.
    * Params:
@@ -85,11 +85,11 @@ class MessageHeaders : Boxed
 
   /**
    * Calls func once for each header value in hdrs.
-   * Beware that unlike [Soup.MessageHeaders.getList], this processes the
+   * Beware that unlike [soup.message_headers.MessageHeaders.getList], this processes the
    * headers in exactly the way they were added, rather than
    * concatenating multiple same-named headers into a single value.
    * $(LPAREN)This is intentional; it ensures that if you call
-   * [Soup.MessageHeaders.append] multiple times with the same name,
+   * [soup.message_headers.MessageHeaders.append] multiple times with the same name,
    * then the I/O code will output multiple copies of the header when
    * sending the message to the remote implementation, which may be
    * required for interoperability in some cases.$(RPAREN)
@@ -114,7 +114,7 @@ class MessageHeaders : Boxed
   }
 
   /**
-   * Frees the array of ranges returned from [Soup.MessageHeaders.getRanges].
+   * Frees the array of ranges returned from [soup.message_headers.MessageHeaders.getRanges].
    * Params:
    *   ranges = an array of #SoupRange
    */
@@ -160,7 +160,7 @@ class MessageHeaders : Boxed
 
   /**
    * Gets the message body length that hdrs declare.
-   * This will only be non-0 if [Soup.MessageHeaders.getEncoding] returns
+   * This will only be non-0 if [soup.message_headers.MessageHeaders.getEncoding] returns
    * %SOUP_ENCODING_CONTENT_LENGTH.
    * Returns: the message body length declared by hdrs.
    */
@@ -257,9 +257,9 @@ class MessageHeaders : Boxed
    * Gets the value of header name in hdrs.
    * Use this for headers whose values are comma-delimited lists, and which are
    * therefore allowed to appear multiple times in the headers. For
-   * non-list-valued headers, use [Soup.MessageHeaders.getOne].
+   * non-list-valued headers, use [soup.message_headers.MessageHeaders.getOne].
    * If name appears multiple times in hdrs,
-   * [Soup.MessageHeaders.getList] will concatenate all of the values
+   * [soup.message_headers.MessageHeaders.getList] will concatenate all of the values
    * together, separated by commas. This is sometimes awkward to parse
    * $(LPAREN)eg, WWW-Authenticate, Set-Cookie$(RPAREN), but you have to be able to deal
    * with it anyway, because the HTTP spec explicitly states that this
@@ -282,7 +282,7 @@ class MessageHeaders : Boxed
    * Gets the value of header name in hdrs.
    * Use this for headers whose values are *not* comma-delimited lists, and which
    * therefore can only appear at most once in the headers. For list-valued
-   * headers, use [Soup.MessageHeaders.getList].
+   * headers, use [soup.message_headers.MessageHeaders.getList].
    * If hdrs does erroneously contain multiple copies of the header, it
    * is not defined which one will be returned. $(LPAREN)Ideally, it will return
    * whichever one makes libsoup most compatible with other HTTP
@@ -303,7 +303,7 @@ class MessageHeaders : Boxed
   /**
    * Parses hdrs's Range header and returns an array of the requested
    * byte ranges.
-   * The returned array must be freed with [Soup.MessageHeaders.freeRanges].
+   * The returned array must be freed with [soup.message_headers.MessageHeaders.freeRanges].
    * If total_length is non-0, its value will be used to adjust the
    * returned ranges to have explicit start and end values, and the
    * returned ranges will be sorted and non-overlapping. If
@@ -396,7 +396,7 @@ class MessageHeaders : Boxed
 
   /**
    * Replaces the value of the header name in hdrs with value.
-   * See also [Soup.MessageHeaders.append].
+   * See also [soup.message_headers.MessageHeaders.append].
    * The caller is expected to make sure that name and value are
    * syntactically correct.
    * Params:
@@ -413,7 +413,7 @@ class MessageHeaders : Boxed
   /**
    * Sets the "Content-Disposition" header in hdrs to disposition,
    * optionally with additional parameters specified in params.
-   * See [Soup.MessageHeaders.getContentDisposition] for a discussion
+   * See [soup.message_headers.MessageHeaders.getContentDisposition] for a discussion
    * of how Content-Disposition is used in HTTP.
    * Params:
    *   disposition = the disposition-type
@@ -435,7 +435,7 @@ class MessageHeaders : Boxed
    * Content-Length header for you immediately before sending the
    * headers. One situation in which this method is useful is when
    * generating the response to a HEAD request; Calling
-   * [Soup.MessageHeaders.setContentLength] allows you to put the
+   * [soup.message_headers.MessageHeaders.setContentLength] allows you to put the
    * correct content length into the response without needing to waste
    * memory by filling in a response body which won't actually be sent.
    * Params:
@@ -452,7 +452,7 @@ class MessageHeaders : Boxed
    * that this is a range of, not simply end - start + 1.$(RPAREN)
    * classServer has built-in handling for range requests, and you do
    * not normally need to call this function youself. See
-   * [Soup.MessageHeaders.getRanges] for more details.
+   * [soup.message_headers.MessageHeaders.getRanges] for more details.
    * Params:
    *   start = the start of the range
    *   end = the end of the range
@@ -512,7 +512,7 @@ class MessageHeaders : Boxed
    * Sets hdrs's Range header to request the indicated range.
    * start and end are interpreted as in a structRange.
    * If you need to request multiple ranges, use
-   * [Soup.MessageHeaders.setRanges].
+   * [soup.message_headers.MessageHeaders.setRanges].
    * Params:
    *   start = the start of the range to request
    *   end = the end of the range to request
@@ -525,7 +525,7 @@ class MessageHeaders : Boxed
   /**
    * Sets hdrs's Range header to request the indicated ranges.
    * If you only want to request a single range, you can use
-   * [Soup.MessageHeaders.setRange].
+   * [soup.message_headers.MessageHeaders.setRange].
    * Params:
    *   ranges = an array of #SoupRange
    *   length = the length of range

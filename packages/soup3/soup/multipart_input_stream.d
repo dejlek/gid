@@ -1,6 +1,6 @@
 module soup.multipart_input_stream;
 
-import gid.gid;
+import gid.global;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -20,11 +20,11 @@ import soup.types;
 /**
  * Handles streams of multipart messages.
  * This adds support for the multipart responses. For handling the
- * multiple parts the user needs to wrap the [Gio.InputStream] obtained by
+ * multiple parts the user needs to wrap the [gio.input_stream.InputStream] obtained by
  * sending the request with a class@MultipartInputStream and use
- * [Soup.MultipartInputStream.nextPart] before reading. Responses
+ * [soup.multipart_input_stream.MultipartInputStream.nextPart] before reading. Responses
  * which are not wrapped will be treated like non-multipart responses.
- * Note that although #SoupMultipartInputStream is a [Gio.InputStream],
+ * Note that although #SoupMultipartInputStream is a [gio.input_stream.InputStream],
  * you should not read directly from it, and the results are undefined
  * if you do.
  */
@@ -51,9 +51,9 @@ class MultipartInputStream : FilterInputStream, PollableInputStream
 
   /**
    * Creates a new #SoupMultipartInputStream that wraps the
-   * [Gio.InputStream] obtained by sending the classMessage.
+   * [gio.input_stream.InputStream] obtained by sending the classMessage.
    * Reads should not be done directly through this object, use the input streams
-   * returned by [Soup.MultipartInputStream.nextPart] or its async
+   * returned by [soup.multipart_input_stream.MultipartInputStream.nextPart] or its async
    * counterpart instead.
    * Params:
    *   msg = the #SoupMessage the response is related to.
@@ -71,7 +71,7 @@ class MultipartInputStream : FilterInputStream, PollableInputStream
    * Obtains the headers for the part currently being processed.
    * Note that the structMessageHeaders that are returned are owned by the
    * #SoupMultipartInputStream and will be replaced when a call is made to
-   * [Soup.MultipartInputStream.nextPart] or its async counterpart, so if
+   * [soup.multipart_input_stream.MultipartInputStream.nextPart] or its async counterpart, so if
    * keeping the headers is required, a copy must be made.
    * Note that if a part had no headers at all an empty structMessageHeaders
    * will be returned.
@@ -93,7 +93,7 @@ class MultipartInputStream : FilterInputStream, PollableInputStream
    * in a #SoupMultipartInputStream and this function or its async counterpart
    * need to be called to obtain the first part for reading.
    * After calling this function,
-   * [Soup.MultipartInputStream.getHeaders] can be used to obtain the
+   * [soup.multipart_input_stream.MultipartInputStream.getHeaders] can be used to obtain the
    * headers for the first part. A read of 0 bytes indicates the end of
    * the part; a new call to this function should be done at that point,
    * to obtain the next part.
@@ -114,8 +114,8 @@ class MultipartInputStream : FilterInputStream, PollableInputStream
   }
 
   /**
-   * Obtains a [Gio.InputStream] for the next request.
-   * See [Soup.MultipartInputStream.nextPart] for details on the workflow.
+   * Obtains a [gio.input_stream.InputStream] for the next request.
+   * See [soup.multipart_input_stream.MultipartInputStream.nextPart] for details on the workflow.
    * Params:
    *   ioPriority = the I/O priority for the request.
    *   cancellable = a #GCancellable.
@@ -141,7 +141,7 @@ class MultipartInputStream : FilterInputStream, PollableInputStream
    * Params:
    *   result = a #GAsyncResult.
    * Returns: a newly created
-   *   [Gio.InputStream] for reading the next part or %NULL if there are no
+   *   [gio.input_stream.InputStream] for reading the next part or %NULL if there are no
    *   more parts.
    */
   InputStream nextPartFinish(AsyncResult result)

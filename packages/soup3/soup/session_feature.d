@@ -1,7 +1,7 @@
 module soup.session_feature;
 
 public import soup.session_feature_iface_proxy;
-import gid.gid;
+import gid.global;
 import soup.c.functions;
 import soup.c.types;
 import soup.types;
@@ -13,7 +13,7 @@ import soup.types;
  * authentication handling are implemented internally via
  * `SoupSessionFeature`s. Other features can be added to the session
  * by the application. $(LPAREN)Eg, class@Logger, class@CookieJar.$(RPAREN)
- * See [Soup.Session.addFeature], etc, to add a feature to a session.
+ * See [soup.session.Session.addFeature], etc, to add a feature to a session.
  */
 interface SessionFeature
 {

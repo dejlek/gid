@@ -1,6 +1,6 @@
 module soup.websocket_extension;
 
-import gid.gid;
+import gid.global;
 import glib.bytes;
 import glib.error;
 import gobject.object;
@@ -62,8 +62,8 @@ class WebsocketExtension : ObjectG
   /**
    * Process a message after it's received.
    * If the payload isn't changed the given payload is just returned, otherwise
-   * [GLib.Bytes.unref] is called on the given payload and a new
-   * [GLib.Bytes] is returned with the new data.
+   * [glib.bytes.Bytes.unref] is called on the given payload and a new
+   * [glib.bytes.Bytes] is returned with the new data.
    * Extensions using reserved bits of the header will reset them in header.
    * Params:
    *   header = the message header
@@ -85,7 +85,7 @@ class WebsocketExtension : ObjectG
    * Process a message before it's sent.
    * If the payload isn't changed the given payload is just returned, otherwise
    * methodGlib.Bytes.unref is called on the given payload and a new
-   * [GLib.Bytes] is returned with the new data.
+   * [glib.bytes.Bytes] is returned with the new data.
    * Extensions using reserved bits of the header will change them in header.
    * Params:
    *   header = the message header

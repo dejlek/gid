@@ -1,6 +1,6 @@
 module soup.websocket_extension_manager;
 
-import gid.gid;
+import gid.global;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -14,8 +14,8 @@ import soup.types;
  * A #SoupWebsocketExtensionManager is added to the session by default, and normally
  * you don't need to worry about it at all. However, if you want to
  * disable WebSocket extensions, you can remove the feature from the
- * session with [Soup.Session.removeFeatureByType] or disable it on
- * individual requests with [Soup.Message.disableFeature].
+ * session with [soup.session.Session.removeFeatureByType] or disable it on
+ * individual requests with [soup.message.Message.disableFeature].
  */
 class WebsocketExtensionManager : ObjectG, SessionFeature
 {
