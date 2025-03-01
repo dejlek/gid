@@ -1,4 +1,4 @@
-module Soup.global;
+module soup.global;
 
 import gid.gid;
 import glib.bytes;
