@@ -51,7 +51,9 @@ with some added understanding of the D binding differences, and the D binding so
  * [GtkSource5](https://gnome.pages.gitlab.gnome.org/gtksourceview/gtksourceview5/)
  * [Pango](https://docs.gtk.org/Pango/)
  * [Parquet](https://arrow.apache.org/docs/c_glib/parquet-glib/index.html)
- * [Vte3.91](https://gnome.pages.gitlab.gnome.org/vte/gtk4/)
+ * [RSvg2](https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/index.html)
+ * [Soup3](https://libsoup.gnome.org/libsoup-3.0/index.html)
+ * [Vte3](https://gnome.pages.gitlab.gnome.org/vte/gtk4/)
 
 
 ## Dub Packages
