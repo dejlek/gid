@@ -1,26 +1,28 @@
 module vte.terminal;
 
+import atk.implementor_iface;
+import atk.implementor_iface_mixin;
 import cairo.font_options;
 import gdk.cursor;
+import gdk.event;
 import gdk.rectangle;
 import gdk.rgba;
+import gdk.types;
 import gid.gid;
 import gio.cancellable;
 import gio.menu_model;
 import gio.output_stream;
 import glib.error;
+import glib.regex;
 import glib.types;
 import gobject.dclosure;
 import gobject.object;
-import gtk.accessible;
-import gtk.accessible_mixin;
 import gtk.buildable;
 import gtk.buildable_mixin;
-import gtk.constraint_target;
-import gtk.constraint_target_mixin;
 import gtk.scrollable;
 import gtk.scrollable_mixin;
 import gtk.widget;
+import gtk.window;
 import pango.font_description;
 import vte.c.functions;
 import vte.c.types;
@@ -62,87 +64,6 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-   * Returns a nonempty string: the target of the explicit hyperlink $(LPAREN)printed using the OSC 8
-   * escape sequence$(RPAREN) at the position $(LPAREN)x, y$(RPAREN), or %NULL.
-   * Proper use of the escape sequence should result in URI-encoded URIs with a proper scheme
-   * like "http://", "https://", "file://", "mailto:" etc. This is, however, not enforced by VTE.
-   * The caller must tolerate the returned string potentially not being a valid URI.
-   * Params:
-   *   x =
-   *   y =
-   * Returns: a newly allocated string containing the target of the hyperlink,
-   *   or %NULL
-   */
-  string checkHyperlinkAt(double x, double y)
-  {
-    char* _cretval;
-    _cretval = vte_terminal_check_hyperlink_at(cast(VteTerminal*)cPtr, x, y);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
-    return _retval;
-  }
-
-  /**
-   * Checks if the text in and around the position $(LPAREN)x, y$(RPAREN) matches any of the
-   * regular expressions previously set using vte_terminal_match_add$(LPAREN)$(RPAREN).  If a
-   * match exists, the text string is returned and if tag is not %NULL, the number
-   * associated with the matched regular expression will be stored in tag.
-   * If more than one regular expression has been set with
-   * vte_terminal_match_add$(LPAREN)$(RPAREN), then expressions are checked in the order in
-   * which they were added.
-   * Params:
-   *   x =
-   *   y =
-   *   tag = a location to store the tag, or %NULL
-   * Returns: a newly allocated string which matches one of the previously
-   *   set regular expressions, or %NULL if there is no match
-   */
-  string checkMatchAt(double x, double y, out int tag)
-  {
-    char* _cretval;
-    _cretval = vte_terminal_check_match_at(cast(VteTerminal*)cPtr, x, y, cast(int*)&tag);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
-    return _retval;
-  }
-
-  /**
-   * Like [vte.terminal.Terminal.checkRegexSimpleAt], but returns an array of strings,
-   * containing the matching text $(LPAREN)or %NULL if no match$(RPAREN) corresponding to each of the
-   * regexes in regexes.
-   * You must free each string and the array; but note that this is *not* a %NULL-terminated
-   * string array, and so you must *not* use [glib.global.strfreev] on it.
-   * Params:
-   *   x =
-   *   y =
-   *   regexes = an array of #VteRegex
-   *   matchFlags = PCRE2 match flags, or 0
-   * Returns: a newly allocated array of strings,
-   *   or %NULL if none of the regexes matched
-   */
-  string[] checkRegexSimpleAt(double x, double y, vte.regex.Regex[] regexes, uint matchFlags)
-  {
-    char** _cretval;
-    size_t _cretlength;
-    size_t _nRegexes;
-    if (regexes)
-      _nRegexes = cast(size_t)regexes.length;
-
-    VteRegex*[] _tmpregexes;
-    foreach (obj; regexes)
-      _tmpregexes ~= cast(VteRegex*)obj.cPtr;
-    VteRegex** _regexes = _tmpregexes.ptr;
-    _cretval = vte_terminal_check_regex_array_at(cast(VteTerminal*)cPtr, x, y, _regexes, _nRegexes, matchFlags, &_cretlength);
-    string[] _retval;
-
-    if (_cretval)
-    {
-      _retval = new string[_cretlength];
-      foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
-    }
-    return _retval;
-  }
-
-  /**
    * Places the selected text in the terminal in the #GDK_SELECTION_CLIPBOARD
    * selection.
 
@@ -178,6 +99,43 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   void copyPrimary()
   {
     vte_terminal_copy_primary(cast(VteTerminal*)cPtr);
+  }
+
+  /**
+   * Like [vte.terminal.Terminal.eventCheckRegexSimple], but returns an array of strings,
+   * containing the matching text $(LPAREN)or %NULL if no match$(RPAREN) corresponding to each of the
+   * regexes in regexes.
+   * You must free each string and the array; but note that this is *not* a %NULL-terminated
+   * string array, and so you must *not* use [glib.global.strfreev] on it.
+   * Params:
+   *   event = a #GdkEvent
+   *   regexes = an array of #VteRegex
+   *   matchFlags = PCRE2 match flags, or 0
+   * Returns: a newly allocated array of strings,
+   *   or %NULL if none of the regexes matched
+   */
+  string[] eventCheckRegexSimple(gdk.event.Event event, vte.regex.Regex[] regexes, uint matchFlags)
+  {
+    char** _cretval;
+    size_t _cretlength;
+    size_t _nRegexes;
+    if (regexes)
+      _nRegexes = cast(size_t)regexes.length;
+
+    VteRegex*[] _tmpregexes;
+    foreach (obj; regexes)
+      _tmpregexes ~= cast(VteRegex*)obj.cPtr;
+    VteRegex** _regexes = _tmpregexes.ptr;
+    _cretval = vte_terminal_event_check_regex_array(cast(VteTerminal*)cPtr, event ? cast(GdkEvent*)event.cPtr : null, _regexes, _nRegexes, matchFlags, &_cretlength);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
+    }
+    return _retval;
   }
 
   /**
@@ -363,6 +321,22 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     return _retval;
   }
 
+  string getCurrentContainerName()
+  {
+    const(char)* _cretval;
+    _cretval = vte_terminal_get_current_container_name(cast(VteTerminal*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    return _retval;
+  }
+
+  string getCurrentContainerRuntime()
+  {
+    const(char)* _cretval;
+    _cretval = vte_terminal_get_current_container_runtime(cast(VteTerminal*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    return _retval;
+  }
+
   string getCurrentDirectoryUri()
   {
     const(char)* _cretval;
@@ -413,6 +387,17 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     VteCursorShape _cretval;
     _cretval = vte_terminal_get_cursor_shape(cast(VteTerminal*)cPtr);
     vte.types.CursorShape _retval = cast(vte.types.CursorShape)_cretval;
+    return _retval;
+  }
+
+  /**
+   * Checks whether the terminal communicates with a11y backends
+   * Returns: %TRUE if a11y is enabled, %FALSE if not
+   */
+  bool getEnableA11y()
+  {
+    bool _retval;
+    _retval = vte_terminal_get_enable_a11y(cast(VteTerminal*)cPtr);
     return _retval;
   }
 
@@ -496,6 +481,22 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     double _retval;
     _retval = vte_terminal_get_font_scale(cast(VteTerminal*)cPtr);
     return _retval;
+  }
+
+  /**
+   * Fills in some hints from terminal's geometry. The hints
+   * filled are those covered by the %GDK_HINT_RESIZE_INC,
+   * %GDK_HINT_MIN_SIZE and %GDK_HINT_BASE_SIZE flags.
+   * See [gtk.window.Window.setGeometryHints] for more information.
+   * terminal must be realized $(LPAREN)see [gtk.widget.Widget.getRealized]$(RPAREN).
+   * Params:
+   *   hints = a #GdkGeometry to fill in
+   *   minRows = the minimum number of rows to request
+   *   minColumns = the minimum number of columns to request
+   */
+  void getGeometryHints(out gdk.types.Geometry hints, int minRows, int minColumns)
+  {
+    vte_terminal_get_geometry_hints(cast(VteTerminal*)cPtr, &hints, minRows, minColumns);
   }
 
   /**
@@ -740,6 +741,41 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+   * Returns a nonempty string: the target of the explicit hyperlink $(LPAREN)printed using the OSC 8
+   * escape sequence$(RPAREN) at the position of the event, or %NULL.
+   * Proper use of the escape sequence should result in URI-encoded URIs with a proper scheme
+   * like "http://", "https://", "file://", "mailto:" etc. This is, however, not enforced by VTE.
+   * The caller must tolerate the returned string potentially not being a valid URI.
+   * Params:
+   *   event = a #GdkEvent
+   * Returns: a newly allocated string containing the target of the hyperlink,
+   *   or %NULL
+   */
+  string hyperlinkCheckEvent(gdk.event.Event event)
+  {
+    char* _cretval;
+    _cretval = vte_terminal_hyperlink_check_event(cast(VteTerminal*)cPtr, event ? cast(GdkEvent*)event.cPtr : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    return _retval;
+  }
+
+  /**
+   * This function does nothing since version 0.60.
+   * Params:
+   *   gregex = a #GRegex
+   *   gflags = the #GRegexMatchFlags to use when matching the regex
+   * Returns: -1
+
+   * Deprecated: Use [vte.terminal.Terminal.matchAddRegex] instead.
+   */
+  int matchAddGregex(glib.regex.Regex gregex, glib.types.RegexMatchFlags gflags)
+  {
+    int _retval;
+    _retval = vte_terminal_match_add_gregex(cast(VteTerminal*)cPtr, gregex ? cast(GRegex*)gregex.cPtr(No.Dup) : null, gflags);
+    return _retval;
+  }
+
+  /**
    * Adds the regular expression regex to the list of matching expressions.  When the
    * user moves the mouse cursor over a section of displayed text which matches
    * this expression, the text will be highlighted.
@@ -778,6 +814,28 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_match_check(cast(VteTerminal*)cPtr, column, row, cast(int*)&tag);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    return _retval;
+  }
+
+  /**
+   * Checks if the text in and around the position of the event matches any of the
+   * regular expressions previously set using vte_terminal_match_add$(LPAREN)$(RPAREN).  If a
+   * match exists, the text string is returned and if tag is not %NULL, the number
+   * associated with the matched regular expression will be stored in tag.
+   * If more than one regular expression has been set with
+   * vte_terminal_match_add$(LPAREN)$(RPAREN), then expressions are checked in the order in
+   * which they were added.
+   * Params:
+   *   event = a #GdkEvent
+   *   tag = a location to store the tag, or %NULL
+   * Returns: a newly allocated string which matches one of the previously
+   *   set regular expressions, or %NULL if there is no match
+   */
+  string matchCheckEvent(gdk.event.Event event, out int tag)
+  {
+    char* _cretval;
+    _cretval = vte_terminal_match_check_event(cast(VteTerminal*)cPtr, event ? cast(GdkEvent*)event.cPtr : null, cast(int*)&tag);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -829,6 +887,20 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cursorName = cursorName.toCString(No.Alloc);
     vte_terminal_match_set_cursor_name(cast(VteTerminal*)cPtr, tag, _cursorName);
+  }
+
+  /**
+   * Sets which cursor the terminal will use if the pointer is over the pattern
+   * specified by tag.
+   * Params:
+   *   tag = the tag of the regex which should use the specified cursor
+   *   cursorType = a #GdkCursorType
+
+   * Deprecated: Use [vte.terminal.Terminal.matchSetCursorName] instead.
+   */
+  void matchSetCursorType(int tag, gdk.types.CursorType cursorType)
+  {
+    vte_terminal_match_set_cursor_type(cast(VteTerminal*)cPtr, tag, cursorType);
   }
 
   /**
@@ -924,6 +996,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     return _retval;
   }
 
+  glib.regex.Regex searchGetGregex()
+  {
+    GRegex* _cretval;
+    _cretval = vte_terminal_search_get_gregex(cast(VteTerminal*)cPtr);
+    auto _retval = _cretval ? new glib.regex.Regex(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
   vte.regex.Regex searchGetRegex()
   {
     VteRegex* _cretval;
@@ -937,6 +1017,19 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     bool _retval;
     _retval = vte_terminal_search_get_wrap_around(cast(VteTerminal*)cPtr);
     return _retval;
+  }
+
+  /**
+   * This function does nothing since version 0.60.
+   * Params:
+   *   gregex = a #GRegex, or %NULL
+   *   gflags = flags from #GRegexMatchFlags
+
+   * Deprecated: use [vte.terminal.Terminal.searchSetRegex] instead.
+   */
+  void searchSetGregex(glib.regex.Regex gregex, glib.types.RegexMatchFlags gflags)
+  {
+    vte_terminal_search_set_gregex(cast(VteTerminal*)cPtr, gregex ? cast(GRegex*)gregex.cPtr(No.Dup) : null, gflags);
   }
 
   /**
@@ -1254,6 +1347,16 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+   * Controls whether or not the terminal will communicate with a11y backends.
+   * Params:
+   *   enableA11y = %TRUE to enable a11y support
+   */
+  void setEnableA11y(bool enableA11y)
+  {
+    vte_terminal_set_enable_a11y(cast(VteTerminal*)cPtr, enableA11y);
+  }
+
+  /**
    * Controls whether or not the terminal will perform bidirectional text rendering.
    * Params:
    *   enableBidi = %TRUE to enable BiDi support
@@ -1358,6 +1461,18 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   void setFontScale(double scale)
   {
     vte_terminal_set_font_scale(cast(VteTerminal*)cPtr, scale);
+  }
+
+  /**
+   * Sets terminal as window's geometry widget. See
+   * [gtk.window.Window.setGeometryHints] for more information.
+   * terminal must be realized $(LPAREN)see [gtk.widget.Widget.getRealized]$(RPAREN).
+   * Params:
+   *   window = a #GtkWindow
+   */
+  void setGeometryHintsForWindow(gtk.window.Window window)
+  {
+    vte_terminal_set_geometry_hints_for_window(cast(VteTerminal*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2446,6 +2561,41 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
+   * Emitted when a process running in the terminal wants to
+   * send a notification to the desktop environment.
+   * Params
+   *   summary = The summary
+   *   body_ = Extra optional text
+   *   terminal = the instance the signal is connected to
+   */
+  alias NotificationReceivedCallbackDlg = void delegate(string summary, string body_, vte.terminal.Terminal terminal);
+  alias NotificationReceivedCallbackFunc = void function(string summary, string body_, vte.terminal.Terminal terminal);
+
+  /**
+   * Connect to NotificationReceived signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectNotificationReceived(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : NotificationReceivedCallbackDlg) || is(T : NotificationReceivedCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      auto summary = getVal!(string)(&_paramVals[1]);
+      auto body_ = getVal!(string)(&_paramVals[2]);
+      _dClosure.dlg(summary, body_, terminal);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("notification-received", closure, after);
+  }
+
+  /**
    * Emitted whenever [vte.terminal.Terminal.pasteClipboard] is called.
    *   terminal = the instance the signal is connected to
    */
@@ -2663,6 +2813,167 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("setup-context-menu", closure, after);
+  }
+
+  /**
+   * Emitted right before an interactive shell shows a
+   * first-level prompt.
+   *   terminal = the instance the signal is connected to
+   */
+  alias ShellPrecmdCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias ShellPrecmdCallbackFunc = void function(vte.terminal.Terminal terminal);
+
+  /**
+   * Connect to ShellPrecmd signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectShellPrecmd(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : ShellPrecmdCallbackDlg) || is(T : ShellPrecmdCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      _dClosure.dlg(terminal);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("shell-precmd", closure, after);
+  }
+
+  /**
+   * Emitted when the interactive shell has read in a complete
+   * command and is about to execute it.
+   *   terminal = the instance the signal is connected to
+   */
+  alias ShellPreexecCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias ShellPreexecCallbackFunc = void function(vte.terminal.Terminal terminal);
+
+  /**
+   * Connect to ShellPreexec signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectShellPreexec(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : ShellPreexecCallbackDlg) || is(T : ShellPreexecCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      _dClosure.dlg(terminal);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("shell-preexec", closure, after);
+  }
+
+  alias TextDeletedCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias TextDeletedCallbackFunc = void function(vte.terminal.Terminal terminal);
+
+  /**
+   * Connect to TextDeleted signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectTextDeleted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : TextDeletedCallbackDlg) || is(T : TextDeletedCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      _dClosure.dlg(terminal);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("text-deleted", closure, after);
+  }
+
+  alias TextInsertedCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias TextInsertedCallbackFunc = void function(vte.terminal.Terminal terminal);
+
+  /**
+   * Connect to TextInserted signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectTextInserted(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : TextInsertedCallbackDlg) || is(T : TextInsertedCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      _dClosure.dlg(terminal);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("text-inserted", closure, after);
+  }
+
+  alias TextModifiedCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias TextModifiedCallbackFunc = void function(vte.terminal.Terminal terminal);
+
+  /**
+   * Connect to TextModified signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectTextModified(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : TextModifiedCallbackDlg) || is(T : TextModifiedCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      _dClosure.dlg(terminal);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("text-modified", closure, after);
+  }
+
+  alias TextScrolledCallbackDlg = void delegate(int delta, vte.terminal.Terminal terminal);
+  alias TextScrolledCallbackFunc = void function(int delta, vte.terminal.Terminal terminal);
+
+  /**
+   * Connect to TextScrolled signal.
+   * Params:
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectTextScrolled(T)(T callback, Flag!"After" after = No.After)
+  if (is(T : TextScrolledCallbackDlg) || is(T : TextScrolledCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      auto delta = getVal!(int)(&_paramVals[1]);
+      _dClosure.dlg(delta, terminal);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("text-scrolled", closure, after);
   }
 
   /**

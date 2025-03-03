@@ -27,6 +27,7 @@ parquet1      |   16    0    0   100 |   77    0    0   100 |    0    0    0   1
 rsvg2         |    7    0    0   100 |   45    2    0   100 |    0    0    0   100 |   16    0    0   100 |
 secret1       |   15    0    0   100 |  132   68    8  94.3 |    0    0    0   100 |   41    8    1  97.6 |
 soup3         |   38    0    0   100 |  364   27    7  98.1 |   41    0    1  97.6 |   72    9    1  98.6 |
+vte2          |    8    0    0   100 |  167    6    4  97.7 |   35    0    0   100 |   42    0    0   100 |
 vte3          |    8    0    0   100 |  157    6    0   100 |   28    0    0   100 |   36    0    0   100 |
 cairo1        |   20    0    1  95.2 |  328   56    2  99.4 |    0    0    0   100 |   38    0    1  97.4 |
 freetype2     |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -218,6 +219,10 @@ Soup.global.websocket_client_prepare_handshake
 Soup.global.websocket_client_verify_handshake
 Soup.global.websocket_server_check_handshake
 Soup.global.websocket_server_process_handshake
+Vte.Terminal.event_check_gregex_simple
+Vte.Terminal.get_text
+Vte.Terminal.get_text_include_trailing_spaces
+Vte.Terminal.get_text_range
 cairo.ScaledFont.text_to_glyphs
 cairo.global.image_surface_create_for_data
 

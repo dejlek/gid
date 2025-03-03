@@ -30,6 +30,7 @@
     ":rsvg2": "*",
     ":secret1": "*",
     ":soup3": "*",
+    ":vte2": "*",
     ":vte3": "*",
     ":xlib2": "*"
   },
@@ -58,6 +59,7 @@
     "packages/rsvg2/",
     "packages/secret1/",
     "packages/soup3/",
+    "packages/vte2/",
     "packages/vte3/",
     "packages/xlib2/"
   ]

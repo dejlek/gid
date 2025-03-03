@@ -1,0 +1,16 @@
+{
+  "name": "vte2",
+  "description": "Vte library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["vte"],
+  "dependencies": {
+    "gid:cairo1": "*",
+    "gid:gdk3": "*",
+    "gid:gtk3": "*",
+    "gid:pango1": "*"
+  }
+}
