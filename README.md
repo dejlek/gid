@@ -52,6 +52,7 @@ with some added understanding of the D binding differences, and the D binding so
  * [Pango](https://docs.gtk.org/Pango/)
  * [Parquet](https://arrow.apache.org/docs/c_glib/parquet-glib/index.html)
  * [RSvg2](https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/index.html)
+ * [Secret1](https://gnome.pages.gitlab.gnome.org/libsecret/)
  * [Soup3](https://libsoup.gnome.org/libsoup-3.0/index.html)
  * [Vte3](https://gnome.pages.gitlab.gnome.org/vte/gtk4/)
 
