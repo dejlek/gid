@@ -1,0 +1,1 @@
+//!gir GtkSource-4
