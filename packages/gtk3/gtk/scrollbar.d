@@ -73,7 +73,7 @@ class Scrollbar : gtk.range.Range
    *   adjustment = the #GtkAdjustment to use, or %NULL to create a new adjustment.
    * Returns: the new #GtkScrollbar.
    */
-  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment)
+  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);

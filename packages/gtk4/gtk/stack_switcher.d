@@ -89,7 +89,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
    * Params:
    *   stack = a `GtkStack`
    */
-  void setStack(gtk.stack.Stack stack)
+  void setStack(gtk.stack.Stack stack = null)
   {
     gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);
   }

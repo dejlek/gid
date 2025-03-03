@@ -53,7 +53,7 @@ class PixbufAnimationIter : gobject.object.ObjectG
    *   currentTime = current time
    * Returns: `TRUE` if the image may need updating
    */
-  bool advance(glib.time_val.TimeVal currentTime)
+  bool advance(glib.time_val.TimeVal currentTime = null)
   {
     bool _retval;
     _retval = gdk_pixbuf_animation_iter_advance(cast(GdkPixbufAnimationIter*)cPtr, currentTime ? cast(const(GTimeVal)*)currentTime.cPtr : null);

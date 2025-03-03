@@ -128,7 +128,7 @@ class IOStream : gobject.object.ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore
    * Returns: %TRUE on success, %FALSE on failure
    */
-  bool close(gio.cancellable.Cancellable cancellable)
+  bool close(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -153,7 +153,7 @@ class IOStream : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -265,7 +265,7 @@ class IOStream : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void spliceAsync(gio.iostream.IOStream stream2, gio.types.IOStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void spliceAsync(gio.iostream.IOStream stream2, gio.types.IOStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

@@ -531,7 +531,7 @@ class DBusMessage : gobject.object.ObjectG
    * Params:
    *   value = The value to set.
    */
-  void setDestination(string value)
+  void setDestination(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_destination(cast(GDBusMessage*)cPtr, _value);
@@ -566,7 +566,7 @@ class DBusMessage : gobject.object.ObjectG
    *   headerField = A 8-bit unsigned integer $(LPAREN)typically a value from the #GDBusMessageHeaderField enumeration$(RPAREN)
    *   value = A #GVariant to set the header field or %NULL to clear the header field.
    */
-  void setHeader(gio.types.DBusMessageHeaderField headerField, glib.variant.VariantG value)
+  void setHeader(gio.types.DBusMessageHeaderField headerField, glib.variant.VariantG value = null)
   {
     g_dbus_message_set_header(cast(GDBusMessage*)cPtr, headerField, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
@@ -576,7 +576,7 @@ class DBusMessage : gobject.object.ObjectG
    * Params:
    *   value = The value to set.
    */
-  void setInterface(string value)
+  void setInterface(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_interface(cast(GDBusMessage*)cPtr, _value);
@@ -587,7 +587,7 @@ class DBusMessage : gobject.object.ObjectG
    * Params:
    *   value = The value to set.
    */
-  void setMember(string value)
+  void setMember(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_member(cast(GDBusMessage*)cPtr, _value);
@@ -618,7 +618,7 @@ class DBusMessage : gobject.object.ObjectG
    * Params:
    *   value = The value to set.
    */
-  void setPath(string value)
+  void setPath(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_path(cast(GDBusMessage*)cPtr, _value);
@@ -639,7 +639,7 @@ class DBusMessage : gobject.object.ObjectG
    * Params:
    *   value = The value to set.
    */
-  void setSender(string value)
+  void setSender(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_sender(cast(GDBusMessage*)cPtr, _value);
@@ -660,7 +660,7 @@ class DBusMessage : gobject.object.ObjectG
    * Params:
    *   value = The value to set.
    */
-  void setSignature(string value)
+  void setSignature(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_signature(cast(GDBusMessage*)cPtr, _value);
@@ -679,7 +679,7 @@ class DBusMessage : gobject.object.ObjectG
    * Params:
    *   fdList = A #GUnixFDList or %NULL.
    */
-  void setUnixFdList(gio.unix_fdlist.UnixFDList fdList)
+  void setUnixFdList(gio.unix_fdlist.UnixFDList fdList = null)
   {
     g_dbus_message_set_unix_fd_list(cast(GDBusMessage*)cPtr, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
   }

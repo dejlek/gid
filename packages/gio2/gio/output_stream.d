@@ -80,7 +80,7 @@ class OutputStream : gobject.object.ObjectG
    *   cancellable = optional cancellable object
    * Returns: %TRUE on success, %FALSE on failure
    */
-  bool close(gio.cancellable.Cancellable cancellable)
+  bool close(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -105,7 +105,7 @@ class OutputStream : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -148,7 +148,7 @@ class OutputStream : gobject.object.ObjectG
    *   cancellable = optional cancellable object
    * Returns: %TRUE on success, %FALSE on error
    */
-  bool flush(gio.cancellable.Cancellable cancellable)
+  bool flush(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -171,7 +171,7 @@ class OutputStream : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void flushAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void flushAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -266,7 +266,7 @@ class OutputStream : gobject.object.ObjectG
    *   returned, and there is no way to determine the actual number
    *   of bytes spliced.
    */
-  ptrdiff_t splice(gio.input_stream.InputStream source, gio.types.OutputStreamSpliceFlags flags, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t splice(gio.input_stream.InputStream source, gio.types.OutputStreamSpliceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     GError *_err;
@@ -291,7 +291,7 @@ class OutputStream : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void spliceAsync(gio.input_stream.InputStream source, gio.types.OutputStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void spliceAsync(gio.input_stream.InputStream source, gio.types.OutputStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -347,7 +347,7 @@ class OutputStream : gobject.object.ObjectG
    *   cancellable = optional cancellable object
    * Returns: Number of bytes written, or -1 on error
    */
-  ptrdiff_t write(ubyte[] buffer, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t write(ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     size_t _count;
@@ -385,7 +385,7 @@ class OutputStream : gobject.object.ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: %TRUE on success, %FALSE if there was an error
    */
-  bool writeAll(ubyte[] buffer, out size_t bytesWritten, gio.cancellable.Cancellable cancellable)
+  bool writeAll(ubyte[] buffer, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     size_t _count;
@@ -419,7 +419,7 @@ class OutputStream : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void writeAllAsync(ubyte[] buffer, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void writeAllAsync(ubyte[] buffer, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -499,7 +499,7 @@ class OutputStream : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void writeAsync(ubyte[] buffer, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void writeAsync(ubyte[] buffer, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -535,7 +535,7 @@ class OutputStream : gobject.object.ObjectG
    *   cancellable = optional cancellable object
    * Returns: Number of bytes written, or -1 on error
    */
-  ptrdiff_t writeBytes(glib.bytes.Bytes bytes, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t writeBytes(glib.bytes.Bytes bytes, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     GError *_err;
@@ -564,7 +564,7 @@ class OutputStream : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void writeBytesAsync(glib.bytes.Bytes bytes, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void writeBytesAsync(glib.bytes.Bytes bytes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -638,7 +638,7 @@ class OutputStream : gobject.object.ObjectG
    *   cancellable = optional cancellable object
    * Returns: %TRUE on success, %FALSE if there was an error
    */
-  bool writev(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable)
+  bool writev(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     size_t _nVectors;
@@ -678,7 +678,7 @@ class OutputStream : gobject.object.ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: %TRUE on success, %FALSE if there was an error
    */
-  bool writevAll(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable)
+  bool writevAll(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     size_t _nVectors;
@@ -713,7 +713,7 @@ class OutputStream : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void writevAllAsync(gio.types.OutputVector[] vectors, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void writevAllAsync(gio.types.OutputVector[] vectors, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -789,7 +789,7 @@ class OutputStream : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void writevAsync(gio.types.OutputVector[] vectors, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void writevAsync(gio.types.OutputVector[] vectors, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

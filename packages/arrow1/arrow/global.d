@@ -31,7 +31,7 @@ bool s3Finalize()
  *   options = Options to initialize the S3 APIs.
  * Returns: %TRUE on success, %FALSE on error.
  */
-bool s3Initialize(arrow.s3_global_options.S3GlobalOptions options)
+bool s3Initialize(arrow.s3_global_options.S3GlobalOptions options = null)
 {
   bool _retval;
   GError *_err;

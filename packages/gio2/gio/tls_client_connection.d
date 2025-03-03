@@ -36,7 +36,7 @@ interface TlsClientConnection
    * Returns: the new
    *   #GTlsClientConnection, or %NULL on error
    */
-  static gio.tls_client_connection.TlsClientConnection new_(gio.iostream.IOStream baseIoStream, gio.socket_connectable.SocketConnectable serverIdentity)
+  static gio.tls_client_connection.TlsClientConnection new_(gio.iostream.IOStream baseIoStream, gio.socket_connectable.SocketConnectable serverIdentity = null)
   {
     GIOStream* _cretval;
     GError *_err;

@@ -239,7 +239,7 @@ class Image : gtk.misc.Misc
    *   pixbuf = a #GdkPixbuf, or %NULL
    * Returns: a new #GtkImage
    */
-  static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
@@ -306,7 +306,7 @@ class Image : gtk.misc.Misc
    *   surface = a #cairo_surface_t, or %NULL
    * Returns: a new #GtkImage
    */
-  static gtk.image.Image newFromSurface(cairo.surface.Surface surface)
+  static gtk.image.Image newFromSurface(cairo.surface.Surface surface = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
@@ -475,7 +475,7 @@ class Image : gtk.misc.Misc
    * Params:
    *   filename = a filename or %NULL
    */
-  void setFromFile(string filename)
+  void setFromFile(string filename = null)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_image_set_from_file(cast(GtkImage*)cPtr, _filename);
@@ -522,7 +522,7 @@ class Image : gtk.misc.Misc
    * Params:
    *   pixbuf = a #GdkPixbuf or %NULL
    */
-  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_image_set_from_pixbuf(cast(GtkImage*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
@@ -532,7 +532,7 @@ class Image : gtk.misc.Misc
    * Params:
    *   resourcePath = a resource path or %NULL
    */
-  void setFromResource(string resourcePath)
+  void setFromResource(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_image_set_from_resource(cast(GtkImage*)cPtr, _resourcePath);
@@ -557,7 +557,7 @@ class Image : gtk.misc.Misc
    * Params:
    *   surface = a cairo_surface_t or %NULL
    */
-  void setFromSurface(cairo.surface.Surface surface)
+  void setFromSurface(cairo.surface.Surface surface = null)
   {
     gtk_image_set_from_surface(cast(GtkImage*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
   }

@@ -1439,7 +1439,7 @@ class Window : gobject.object.ObjectG
    *   childFunc = function to use to decide if to
    *     recurse to a child, %NULL means never recurse.
    */
-  void invalidateMaybeRecurse(cairo.region.Region region, gdk.types.WindowChildFunc childFunc)
+  void invalidateMaybeRecurse(cairo.region.Region region, gdk.types.WindowChildFunc childFunc = null)
   {
     extern(C) bool _childFuncCallback(GdkWindow* window, void* userData)
     {
@@ -1861,7 +1861,7 @@ class Window : gobject.object.ObjectG
 
    * Deprecated: Don't use this function
    */
-  void setBackgroundPattern(cairo.pattern.Pattern pattern)
+  void setBackgroundPattern(cairo.pattern.Pattern pattern = null)
   {
     gdk_window_set_background_pattern(cast(GdkWindow*)cPtr, pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
   }
@@ -1943,7 +1943,7 @@ class Window : gobject.object.ObjectG
    * Params:
    *   cursor = a cursor
    */
-  void setCursor(gdk.cursor.Cursor cursor)
+  void setCursor(gdk.cursor.Cursor cursor = null)
   {
     gdk_window_set_cursor(cast(GdkWindow*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
@@ -2130,7 +2130,7 @@ class Window : gobject.object.ObjectG
    * Params:
    *   leader = group leader window, or %NULL to restore the default group leader window
    */
-  void setGroup(gdk.window.Window leader)
+  void setGroup(gdk.window.Window leader = null)
   {
     gdk_window_set_group(cast(GdkWindow*)cPtr, leader ? cast(GdkWindow*)leader.cPtr(No.Dup) : null);
   }
@@ -2167,7 +2167,7 @@ class Window : gobject.object.ObjectG
    * Params:
    *   name = name of window while iconified $(LPAREN)minimized$(RPAREN)
    */
-  void setIconName(string name)
+  void setIconName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gdk_window_set_icon_name(cast(GdkWindow*)cPtr, _name);
@@ -2261,7 +2261,7 @@ class Window : gobject.object.ObjectG
    * Params:
    *   region = a region, or %NULL
    */
-  void setOpaqueRegion(cairo.region.Region region)
+  void setOpaqueRegion(cairo.region.Region region = null)
   {
     gdk_window_set_opaque_region(cast(GdkWindow*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
@@ -2502,7 +2502,7 @@ class Window : gobject.object.ObjectG
    * Params:
    *   userData = user data
    */
-  void setUserData(gobject.object.ObjectG userData)
+  void setUserData(gobject.object.ObjectG userData = null)
   {
     gdk_window_set_user_data(cast(GdkWindow*)cPtr, userData ? cast(ObjectC*)userData.cPtr(No.Dup) : null);
   }

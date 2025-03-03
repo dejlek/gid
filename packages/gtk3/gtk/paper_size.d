@@ -55,7 +55,7 @@ class PaperSize : gobject.boxed.Boxed
    * Returns: a new #GtkPaperSize, use [gtk.paper_size.PaperSize.free]
    *   to free it
    */
-  this(string name)
+  this(string name = null)
   {
     GtkPaperSize* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -132,7 +132,7 @@ class PaperSize : gobject.boxed.Boxed
    * Returns: a new #GtkPaperSize object with the restored
    *   paper size, or %NULL if an error occurred
    */
-  static gtk.paper_size.PaperSize newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName)
+  static gtk.paper_size.PaperSize newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     GtkPaperSize* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);

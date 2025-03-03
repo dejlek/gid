@@ -47,7 +47,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
    * Returns: The newly allocated builder, free with
    *   [gsk.shader_args_builder.ShaderArgsBuilder.unref]
    */
-  this(gsk.glshader.GLShader shader, glib.bytes.Bytes initialValues)
+  this(gsk.glshader.GLShader shader, glib.bytes.Bytes initialValues = null)
   {
     GskShaderArgsBuilder* _cretval;
     _cretval = gsk_shader_args_builder_new(shader ? cast(GskGLShader*)shader.cPtr(No.Dup) : null, initialValues ? cast(GBytes*)initialValues.cPtr(No.Dup) : null);

@@ -111,7 +111,7 @@ class FlowBoxChild : gtk.widget.Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_flow_box_child_set_child(cast(GtkFlowBoxChild*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

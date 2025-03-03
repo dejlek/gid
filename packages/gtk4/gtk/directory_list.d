@@ -59,7 +59,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
    *   file = The file to query
    * Returns: a new `GtkDirectoryList`
    */
-  this(string attributes, gio.file.File file)
+  this(string attributes = null, gio.file.File file = null)
   {
     GtkDirectoryList* _cretval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -154,7 +154,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
    * Params:
    *   attributes = the attributes to enumerate
    */
-  void setAttributes(string attributes)
+  void setAttributes(string attributes = null)
   {
     const(char)* _attributes = attributes.toCString(No.Alloc);
     gtk_directory_list_set_attributes(cast(GtkDirectoryList*)cPtr, _attributes);
@@ -166,7 +166,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
    * Params:
    *   file = the `GFile` to be enumerated
    */
-  void setFile(gio.file.File file)
+  void setFile(gio.file.File file = null)
   {
     gtk_directory_list_set_file(cast(GtkDirectoryList*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }

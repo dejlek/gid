@@ -43,7 +43,7 @@ template NetworkMonitorT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if connectable is reachable, %FALSE if not.
    */
-  override bool canReach(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable)
+  override bool canReach(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -67,7 +67,7 @@ template NetworkMonitorT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void canReachAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void canReachAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

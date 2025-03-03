@@ -106,7 +106,7 @@ class Stack : gtk.widget.Widget
    *   name = the name for child
    * Returns: the `GtkStackPage` for child
    */
-  gtk.stack_page.StackPage addNamed(gtk.widget.Widget child, string name)
+  gtk.stack_page.StackPage addNamed(gtk.widget.Widget child, string name = null)
   {
     GtkStackPage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

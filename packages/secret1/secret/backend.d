@@ -35,7 +35,7 @@ interface Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  static void get(secret.types.BackendFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void get(secret.types.BackendFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

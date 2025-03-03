@@ -48,7 +48,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
 
   alias appendValue = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValue;
 
-  bool appendValue(arrow.decimal128.Decimal128 value)
+  bool appendValue(arrow.decimal128.Decimal128 value = null)
   {
     bool _retval;
     GError *_err;

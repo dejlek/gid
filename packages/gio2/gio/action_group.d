@@ -121,7 +121,7 @@ interface ActionGroup
    *   actionName = the name of the action to activate
    *   parameter = parameters to the activation
    */
-  void activateAction(string actionName, glib.variant.VariantG parameter);
+  void activateAction(string actionName, glib.variant.VariantG parameter = null);
 
   /**
    * Request for the state of the named action within action_group to be

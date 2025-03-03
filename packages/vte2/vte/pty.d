@@ -44,7 +44,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #VtePty for fd, or %NULL on error with error filled in
    */
-  static vte.pty.Pty newForeignSync(int fd, gio.cancellable.Cancellable cancellable)
+  static vte.pty.Pty newForeignSync(int fd, gio.cancellable.Cancellable cancellable = null)
   {
     VtePty* _cretval;
     GError *_err;
@@ -81,7 +81,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #VtePty, or %NULL on error with error filled in
    */
-  static vte.pty.Pty newSync(vte.types.PtyFlags flags, gio.cancellable.Cancellable cancellable)
+  static vte.pty.Pty newSync(vte.types.PtyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     VtePty* _cretval;
     GError *_err;
@@ -183,7 +183,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback, or %NULL
    */
-  void spawnAsync(string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void spawnAsync(string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _childSetupCallback(void* data)
     {
@@ -273,7 +273,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback, or %NULL
    */
-  void spawnWithFdsAsync(string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void spawnWithFdsAsync(string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _childSetupCallback(void* data)
     {

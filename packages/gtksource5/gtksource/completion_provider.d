@@ -134,7 +134,7 @@ interface CompletionProvider
    *   cancellable = a #GCancellable or %NULL
    *   callback = a callback to execute upon completion
    */
-  void populateAsync(gtksource.completion_context.CompletionContext context, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void populateAsync(gtksource.completion_context.CompletionContext context, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Completes an asynchronous operation to populate a completion provider.

@@ -247,7 +247,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
    * Params:
    *   widget = the widget to center
    */
-  void setCenterWidget(gtk.widget.Widget widget)
+  void setCenterWidget(gtk.widget.Widget widget = null)
   {
     gtk_box_set_center_widget(cast(GtkBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

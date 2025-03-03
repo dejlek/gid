@@ -323,7 +323,7 @@ class ServerMessage : gobject.object.ObjectG
    *   statusCode = an HTTP status code
    *   reasonPhrase = a reason phrase
    */
-  void setStatus(uint statusCode, string reasonPhrase)
+  void setStatus(uint statusCode, string reasonPhrase = null)
   {
     const(char)* _reasonPhrase = reasonPhrase.toCString(No.Alloc);
     soup_server_message_set_status(cast(SoupServerMessage*)cPtr, statusCode, _reasonPhrase);

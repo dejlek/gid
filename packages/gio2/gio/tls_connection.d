@@ -253,7 +253,7 @@ class TlsConnection : gio.iostream.IOStream
    *   cancellable = a #GCancellable, or %NULL
    * Returns: success or failure
    */
-  bool handshake(gio.cancellable.Cancellable cancellable)
+  bool handshake(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -271,7 +271,7 @@ class TlsConnection : gio.iostream.IOStream
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the handshake is complete
    */
-  void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -367,7 +367,7 @@ class TlsConnection : gio.iostream.IOStream
    * Params:
    *   database = a #GTlsDatabase
    */
-  void setDatabase(gio.tls_database.TlsDatabase database)
+  void setDatabase(gio.tls_database.TlsDatabase database = null)
   {
     g_tls_connection_set_database(cast(GTlsConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
   }
@@ -381,7 +381,7 @@ class TlsConnection : gio.iostream.IOStream
    * Params:
    *   interaction = an interaction object, or %NULL
    */
-  void setInteraction(gio.tls_interaction.TlsInteraction interaction)
+  void setInteraction(gio.tls_interaction.TlsInteraction interaction = null)
   {
     g_tls_connection_set_interaction(cast(GTlsConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null);
   }

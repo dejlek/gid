@@ -32,7 +32,7 @@ class ArrowFileWriter : gobject.object.ObjectG
     return getType();
   }
 
-  static parquet.arrow_file_writer.ArrowFileWriter newArrow(arrow.schema.Schema schema, arrow.output_stream.OutputStream sink, parquet.writer_properties.WriterProperties writerProperties)
+  static parquet.arrow_file_writer.ArrowFileWriter newArrow(arrow.schema.Schema schema, arrow.output_stream.OutputStream sink, parquet.writer_properties.WriterProperties writerProperties = null)
   {
     GParquetArrowFileWriter* _cretval;
     GError *_err;
@@ -43,7 +43,7 @@ class ArrowFileWriter : gobject.object.ObjectG
     return _retval;
   }
 
-  static parquet.arrow_file_writer.ArrowFileWriter newPath(arrow.schema.Schema schema, string path, parquet.writer_properties.WriterProperties writerProperties)
+  static parquet.arrow_file_writer.ArrowFileWriter newPath(arrow.schema.Schema schema, string path, parquet.writer_properties.WriterProperties writerProperties = null)
   {
     GParquetArrowFileWriter* _cretval;
     const(char)* _path = path.toCString(No.Alloc);

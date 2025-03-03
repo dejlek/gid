@@ -144,7 +144,7 @@ class Seat : gobject.object.ObjectG
    *     visible before this call.
    * Returns: %GDK_GRAB_SUCCESS if the grab was successful.
    */
-  gdk.types.GrabStatus grab(gdk.window.Window window, gdk.types.SeatCapabilities capabilities, bool ownerEvents, gdk.cursor.Cursor cursor, gdk.event.Event event, gdk.types.SeatGrabPrepareFunc prepareFunc)
+  gdk.types.GrabStatus grab(gdk.window.Window window, gdk.types.SeatCapabilities capabilities, bool ownerEvents, gdk.cursor.Cursor cursor = null, gdk.event.Event event = null, gdk.types.SeatGrabPrepareFunc prepareFunc = null)
   {
     extern(C) void _prepareFuncCallback(GdkSeat* seat, GdkWindow* window, void* userData)
     {

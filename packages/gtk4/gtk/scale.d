@@ -111,7 +111,7 @@ class Scale : gtk.range.Range
    *     the range of the scale, or %NULL to create a new adjustment.
    * Returns: a new `GtkScale`
    */
-  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment)
+  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
@@ -159,7 +159,7 @@ class Scale : gtk.range.Range
    *     the left of the scale, anything else to the right.
    *   markup = Text to be shown at the mark, using Pango markup
    */
-  void addMark(double value, gtk.types.PositionType position, string markup)
+  void addMark(double value, gtk.types.PositionType position, string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_scale_add_mark(cast(GtkScale*)cPtr, value, position, _markup);
@@ -292,7 +292,7 @@ class Scale : gtk.range.Range
    * Params:
    *   func = function that formats the value
    */
-  void setFormatValueFunc(gtk.types.ScaleFormatValueFunc func)
+  void setFormatValueFunc(gtk.types.ScaleFormatValueFunc func = null)
   {
     extern(C) char* _funcCallback(GtkScale* scale, double value, void* userData)
     {

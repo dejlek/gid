@@ -166,7 +166,7 @@ class TreeExpander : gtk.widget.Widget
    * Params:
    *   child = a `GtkWidget`
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_tree_expander_set_child(cast(GtkTreeExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -206,7 +206,7 @@ class TreeExpander : gtk.widget.Widget
    * Params:
    *   listRow = a `GtkTreeListRow`
    */
-  void setListRow(gtk.tree_list_row.TreeListRow listRow)
+  void setListRow(gtk.tree_list_row.TreeListRow listRow = null)
   {
     gtk_tree_expander_set_list_row(cast(GtkTreeExpander*)cPtr, listRow ? cast(GtkTreeListRow*)listRow.cPtr(No.Dup) : null);
   }

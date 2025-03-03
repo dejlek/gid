@@ -45,7 +45,7 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
    *   parent = Transient parent of the dialog, or %NULL
    * Returns: a new #GtkColorChooserDialog
    */
-  this(string title, gtk.window.Window parent)
+  this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);

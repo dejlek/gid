@@ -283,7 +283,7 @@ template RecentChooserT()
    * Params:
    *   filter = a #GtkRecentFilter
    */
-  override void setFilter(gtk.recent_filter.RecentFilter filter)
+  override void setFilter(gtk.recent_filter.RecentFilter filter = null)
   {
     gtk_recent_chooser_set_filter(cast(GtkRecentChooser*)cPtr, filter ? cast(GtkRecentFilter*)filter.cPtr(No.Dup) : null);
   }

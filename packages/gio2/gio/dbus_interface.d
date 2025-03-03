@@ -44,5 +44,5 @@ interface DBusInterface
    * Params:
    *   object = A #GDBusObject or %NULL.
    */
-  void setObject(gio.dbus_object.DBusObject object);
+  void setObject(gio.dbus_object.DBusObject object = null);
 }

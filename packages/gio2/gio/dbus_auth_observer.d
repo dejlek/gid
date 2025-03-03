@@ -115,7 +115,7 @@ class DBusAuthObserver : gobject.object.ObjectG
    *   credentials = Credentials received from the peer or %NULL.
    * Returns: %TRUE if the peer is authorized, %FALSE if not.
    */
-  bool authorizeAuthenticatedPeer(gio.iostream.IOStream stream, gio.credentials.Credentials credentials)
+  bool authorizeAuthenticatedPeer(gio.iostream.IOStream stream, gio.credentials.Credentials credentials = null)
   {
     bool _retval;
     _retval = g_dbus_auth_observer_authorize_authenticated_peer(cast(GDBusAuthObserver*)cPtr, stream ? cast(GIOStream*)stream.cPtr(No.Dup) : null, credentials ? cast(GCredentials*)credentials.cPtr(No.Dup) : null);

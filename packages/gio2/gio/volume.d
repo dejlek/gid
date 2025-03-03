@@ -85,7 +85,7 @@ interface Volume
 
    * Deprecated: Use [gio.volume.Volume.ejectWithOperation] instead.
    */
-  void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes ejecting a volume. If any errors occurred during the operation,
@@ -109,7 +109,7 @@ interface Volume
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback, or %NULL
    */
-  void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes ejecting a volume. If any errors occurred during the operation,
@@ -236,7 +236,7 @@ interface Volume
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback, or %NULL
    */
-  void mount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void mount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes mounting a volume. If any errors occurred during the operation,

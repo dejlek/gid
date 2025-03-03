@@ -140,7 +140,7 @@ class ConstraintGuide : gobject.object.ObjectG, gtk.constraint_target.Constraint
    * Params:
    *   name = a name for the guide
    */
-  void setName(string name)
+  void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_constraint_guide_set_name(cast(GtkConstraintGuide*)cPtr, _name);

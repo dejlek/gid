@@ -65,7 +65,7 @@ class TlsInteraction : gobject.object.ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    * Returns: The status of the ask password interaction.
    */
-  gio.types.TlsInteractionResult askPassword(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable)
+  gio.types.TlsInteractionResult askPassword(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable = null)
   {
     GTlsInteractionResult _cretval;
     GError *_err;
@@ -94,7 +94,7 @@ class TlsInteraction : gobject.object.ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    *   callback = will be called when the interaction completes
    */
-  void askPasswordAsync(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void askPasswordAsync(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -154,7 +154,7 @@ class TlsInteraction : gobject.object.ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    * Returns: The status of the ask password interaction.
    */
-  gio.types.TlsInteractionResult invokeAskPassword(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable)
+  gio.types.TlsInteractionResult invokeAskPassword(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable = null)
   {
     GTlsInteractionResult _cretval;
     GError *_err;
@@ -189,7 +189,7 @@ class TlsInteraction : gobject.object.ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    * Returns: The status of the certificate request interaction.
    */
-  gio.types.TlsInteractionResult invokeRequestCertificate(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable)
+  gio.types.TlsInteractionResult invokeRequestCertificate(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GTlsInteractionResult _cretval;
     GError *_err;
@@ -220,7 +220,7 @@ class TlsInteraction : gobject.object.ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    * Returns: The status of the request certificate interaction.
    */
-  gio.types.TlsInteractionResult requestCertificate(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable)
+  gio.types.TlsInteractionResult requestCertificate(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GTlsInteractionResult _cretval;
     GError *_err;
@@ -245,7 +245,7 @@ class TlsInteraction : gobject.object.ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    *   callback = will be called when the interaction completes
    */
-  void requestCertificateAsync(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void requestCertificateAsync(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

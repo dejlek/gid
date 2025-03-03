@@ -52,7 +52,7 @@ template PollableInputStreamT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #GSource
    */
-  override glib.source.Source createSource(gio.cancellable.Cancellable cancellable)
+  override glib.source.Source createSource(gio.cancellable.Cancellable cancellable = null)
   {
     GSource* _cretval;
     _cretval = g_pollable_input_stream_create_source(cast(GPollableInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
@@ -102,7 +102,7 @@ template PollableInputStreamT()
    * Returns: the number of bytes read, or -1 on error $(LPAREN)including
    *   %G_IO_ERROR_WOULD_BLOCK$(RPAREN).
    */
-  override ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable)
+  override ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     size_t _count;

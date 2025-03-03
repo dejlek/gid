@@ -77,7 +77,7 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
    * Returns: A #GDBusServer or %NULL if error is set. Free with
    *   [gobject.object.ObjectG.unref].
    */
-  static gio.dbus_server.DBusServer newSync(string address, gio.types.DBusServerFlags flags, string guid, gio.dbus_auth_observer.DBusAuthObserver observer, gio.cancellable.Cancellable cancellable)
+  static gio.dbus_server.DBusServer newSync(string address, gio.types.DBusServerFlags flags, string guid, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusServer* _cretval;
     const(char)* _address = address.toCString(No.Alloc);

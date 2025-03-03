@@ -259,7 +259,7 @@ class Box : gobject.boxed.Boxed
    *   max = the coordinates of the maximum vertex
    * Returns: the initialized #graphene_box_t
    */
-  graphene.box.Box init_(graphene.point3_d.Point3D min, graphene.point3_d.Point3D max)
+  graphene.box.Box init_(graphene.point3_d.Point3D min = null, graphene.point3_d.Point3D max = null)
   {
     graphene_box_t* _cretval;
     _cretval = graphene_box_init(cast(graphene_box_t*)cPtr, min ? cast(const(graphene_point3d_t)*)min.cPtr(No.Dup) : null, max ? cast(const(graphene_point3d_t)*)max.cPtr(No.Dup) : null);
@@ -315,7 +315,7 @@ class Box : gobject.boxed.Boxed
    *   max = the coordinates of the maximum vertex
    * Returns: the initialized #graphene_box_t
    */
-  graphene.box.Box initFromVec3(graphene.vec3.Vec3 min, graphene.vec3.Vec3 max)
+  graphene.box.Box initFromVec3(graphene.vec3.Vec3 min = null, graphene.vec3.Vec3 max = null)
   {
     graphene_box_t* _cretval;
     _cretval = graphene_box_init_from_vec3(cast(graphene_box_t*)cPtr, min ? cast(const(graphene_vec3_t)*)min.cPtr(No.Dup) : null, max ? cast(const(graphene_vec3_t)*)max.cPtr(No.Dup) : null);

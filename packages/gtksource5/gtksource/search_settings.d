@@ -139,7 +139,7 @@ class SearchSettings : gobject.object.ObjectG
    * Params:
    *   searchText = the nul-terminated text to search, or %NULL to disable the search.
    */
-  void setSearchText(string searchText)
+  void setSearchText(string searchText = null)
   {
     const(char)* _searchText = searchText.toCString(No.Alloc);
     gtk_source_search_settings_set_search_text(cast(GtkSourceSearchSettings*)cPtr, _searchText);

@@ -177,7 +177,7 @@ class Gesture : gtk.event_controller.EventController
    *   sequence = a `GdkEventSequence`
    * Returns: The last event from sequence
    */
-  gdk.event.Event getLastEvent(gdk.event_sequence.EventSequence sequence)
+  gdk.event.Event getLastEvent(gdk.event_sequence.EventSequence sequence = null)
   {
     GdkEvent* _cretval;
     _cretval = gtk_gesture_get_last_event(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null);
@@ -274,7 +274,7 @@ class Gesture : gtk.event_controller.EventController
    *   sequence = a `GdkEventSequence`
    * Returns: %TRUE if gesture is handling sequence, %FALSE otherwise
    */
-  bool handlesSequence(gdk.event_sequence.EventSequence sequence)
+  bool handlesSequence(gdk.event_sequence.EventSequence sequence = null)
   {
     bool _retval;
     _retval = gtk_gesture_handles_sequence(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null);

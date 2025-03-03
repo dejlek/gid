@@ -120,7 +120,7 @@ class Clipboard : gobject.object.ObjectG
    *   cancellable = optional `GCancellable` object
    *   callback = callback to call when the request is satisfied
    */
-  void readAsync(string[] mimeTypes, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void readAsync(string[] mimeTypes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -174,7 +174,7 @@ class Clipboard : gobject.object.ObjectG
    *   cancellable = optional `GCancellable` object
    *   callback = callback to call when the request is satisfied
    */
-  void readTextAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void readTextAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -218,7 +218,7 @@ class Clipboard : gobject.object.ObjectG
    *   cancellable = optional `GCancellable` object, %NULL to ignore.
    *   callback = callback to call when the request is satisfied
    */
-  void readTextureAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void readTextureAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -265,7 +265,7 @@ class Clipboard : gobject.object.ObjectG
    *   cancellable = optional `GCancellable` object
    *   callback = callback to call when the request is satisfied
    */
-  void readValueAsync(gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void readValueAsync(gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -313,7 +313,7 @@ class Clipboard : gobject.object.ObjectG
    *     or %NULL to clear the clipboard
    * Returns: %TRUE if setting the clipboard succeeded
    */
-  bool setContent(gdk.content_provider.ContentProvider provider)
+  bool setContent(gdk.content_provider.ContentProvider provider = null)
   {
     bool _retval;
     _retval = gdk_clipboard_set_content(cast(GdkClipboard*)cPtr, provider ? cast(GdkContentProvider*)provider.cPtr(No.Dup) : null);
@@ -346,7 +346,7 @@ class Clipboard : gobject.object.ObjectG
    *   cancellable = optional `GCancellable` object
    *   callback = callback to call when the request is satisfied
    */
-  void storeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void storeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

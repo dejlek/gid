@@ -181,7 +181,7 @@ class DragSource : gtk.gesture_single.GestureSingle
    * Params:
    *   content = a `GdkContentProvider`
    */
-  void setContent(gdk.content_provider.ContentProvider content)
+  void setContent(gdk.content_provider.ContentProvider content = null)
   {
     gtk_drag_source_set_content(cast(GtkDragSource*)cPtr, content ? cast(GdkContentProvider*)content.cPtr(No.Dup) : null);
   }

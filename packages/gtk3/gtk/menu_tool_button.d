@@ -63,7 +63,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
    *   label = a string that will be used as label, or %NULL
    * Returns: the new #GtkMenuToolButton
    */
-  this(gtk.widget.Widget iconWidget, string label)
+  this(gtk.widget.Widget iconWidget = null, string label = null)
   {
     GtkToolItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);

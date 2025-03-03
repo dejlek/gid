@@ -157,7 +157,7 @@ class EventController : gobject.object.ObjectG
    * Params:
    *   name = a name for controller
    */
-  void setName(string name)
+  void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_event_controller_set_name(cast(GtkEventController*)cPtr, _name);
@@ -193,7 +193,7 @@ class EventController : gobject.object.ObjectG
    * Params:
    *   name = a name for controller, must be a static string
    */
-  void setStaticName(string name)
+  void setStaticName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_event_controller_set_static_name(cast(GtkEventController*)cPtr, _name);

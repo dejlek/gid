@@ -59,7 +59,7 @@ class Queue
    * Params:
    *   freeFunc = the function to be called to free memory allocated
    */
-  void clearFull(glib.types.DestroyNotify freeFunc)
+  void clearFull(glib.types.DestroyNotify freeFunc = null)
   {
     extern(C) void _freeFuncCallback(void* data)
     {

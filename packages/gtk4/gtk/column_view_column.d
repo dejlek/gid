@@ -54,7 +54,7 @@ class ColumnViewColumn : gobject.object.ObjectG
    *   factory = The factory to populate items with
    * Returns: a new `GtkColumnViewColumn` using the given factory
    */
-  this(string title, gtk.list_item_factory.ListItemFactory factory)
+  this(string title = null, gtk.list_item_factory.ListItemFactory factory = null)
   {
     GtkColumnViewColumn* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -199,7 +199,7 @@ class ColumnViewColumn : gobject.object.ObjectG
    * Params:
    *   factory = the factory to use
    */
-  void setFactory(gtk.list_item_factory.ListItemFactory factory)
+  void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
     gtk_column_view_column_set_factory(cast(GtkColumnViewColumn*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -223,7 +223,7 @@ class ColumnViewColumn : gobject.object.ObjectG
    * Params:
    *   menu = a `GMenuModel`
    */
-  void setHeaderMenu(gio.menu_model.MenuModel menu)
+  void setHeaderMenu(gio.menu_model.MenuModel menu = null)
   {
     gtk_column_view_column_set_header_menu(cast(GtkColumnViewColumn*)cPtr, menu ? cast(GMenuModel*)menu.cPtr(No.Dup) : null);
   }
@@ -236,7 +236,7 @@ class ColumnViewColumn : gobject.object.ObjectG
    * Params:
    *   id = ID to use for this column
    */
-  void setId(string id)
+  void setId(string id = null)
   {
     const(char)* _id = id.toCString(No.Alloc);
     gtk_column_view_column_set_id(cast(GtkColumnViewColumn*)cPtr, _id);
@@ -263,7 +263,7 @@ class ColumnViewColumn : gobject.object.ObjectG
    * Params:
    *   sorter = the `GtkSorter` to associate with column
    */
-  void setSorter(gtk.sorter.Sorter sorter)
+  void setSorter(gtk.sorter.Sorter sorter = null)
   {
     gtk_column_view_column_set_sorter(cast(GtkColumnViewColumn*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }
@@ -276,7 +276,7 @@ class ColumnViewColumn : gobject.object.ObjectG
    * Params:
    *   title = Title to use for this column
    */
-  void setTitle(string title)
+  void setTitle(string title = null)
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_column_view_column_set_title(cast(GtkColumnViewColumn*)cPtr, _title);

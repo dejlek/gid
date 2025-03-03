@@ -67,7 +67,7 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
 
    * Deprecated: Use [gtk.font_dialog.FontDialog] instead
    */
-  this(string title, gtk.window.Window parent)
+  this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);

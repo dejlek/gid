@@ -138,7 +138,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
    * Returns: A file attribute matcher matching all attributes of
    *   matcher that are not matched by subtract
    */
-  gio.file_attribute_matcher.FileAttributeMatcher subtract(gio.file_attribute_matcher.FileAttributeMatcher subtract)
+  gio.file_attribute_matcher.FileAttributeMatcher subtract(gio.file_attribute_matcher.FileAttributeMatcher subtract = null)
   {
     GFileAttributeMatcher* _cretval;
     _cretval = g_file_attribute_matcher_subtract(cast(GFileAttributeMatcher*)cPtr, subtract ? cast(GFileAttributeMatcher*)subtract.cPtr(No.Dup) : null);

@@ -59,7 +59,7 @@ interface Proxy
    *   be the same as connection, in which case a reference
    *   will be added.
    */
-  gio.iostream.IOStream connect(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable);
+  gio.iostream.IOStream connect(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronous version of [gio.proxy.Proxy.connect].
@@ -69,7 +69,7 @@ interface Proxy
    *   cancellable = a #GCancellable
    *   callback = a #GAsyncReadyCallback
    */
-  void connectAsync(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void connectAsync(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * See [gio.proxy.Proxy.connect].

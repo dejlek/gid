@@ -192,7 +192,7 @@ class HeaderBar : gtk.widget.Widget
    * Params:
    *   layout = a decoration layout, or %NULL to unset the layout
    */
-  void setDecorationLayout(string layout)
+  void setDecorationLayout(string layout = null)
   {
     const(char)* _layout = layout.toCString(No.Alloc);
     gtk_header_bar_set_decoration_layout(cast(GtkHeaderBar*)cPtr, _layout);
@@ -221,7 +221,7 @@ class HeaderBar : gtk.widget.Widget
    * Params:
    *   titleWidget = a widget to use for a title
    */
-  void setTitleWidget(gtk.widget.Widget titleWidget)
+  void setTitleWidget(gtk.widget.Widget titleWidget = null)
   {
     gtk_header_bar_set_title_widget(cast(GtkHeaderBar*)cPtr, titleWidget ? cast(GtkWidget*)titleWidget.cPtr(No.Dup) : null);
   }

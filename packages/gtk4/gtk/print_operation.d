@@ -323,7 +323,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
    *   asynchronously, and will emit the [gtk.print_operation.PrintOperation.done]
    *   signal when done.
    */
-  gtk.types.PrintOperationResult run(gtk.types.PrintOperationAction action, gtk.window.Window parent)
+  gtk.types.PrintOperationResult run(gtk.types.PrintOperationAction action, gtk.window.Window parent = null)
   {
     GtkPrintOperationResult _cretval;
     GError *_err;
@@ -365,7 +365,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
    * Params:
    *   label = the label to use, or %NULL to use the default label
    */
-  void setCustomTabLabel(string label)
+  void setCustomTabLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_print_operation_set_custom_tab_label(cast(GtkPrintOperation*)cPtr, _label);
@@ -379,7 +379,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
    * Params:
    *   defaultPageSetup = a `GtkPageSetup`
    */
-  void setDefaultPageSetup(gtk.page_setup.PageSetup defaultPageSetup)
+  void setDefaultPageSetup(gtk.page_setup.PageSetup defaultPageSetup = null)
   {
     gtk_print_operation_set_default_page_setup(cast(GtkPrintOperation*)cPtr, defaultPageSetup ? cast(GtkPageSetup*)defaultPageSetup.cPtr(No.Dup) : null);
   }
@@ -475,7 +475,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
    * Params:
    *   printSettings = `GtkPrintSettings`
    */
-  void setPrintSettings(gtk.print_settings.PrintSettings printSettings)
+  void setPrintSettings(gtk.print_settings.PrintSettings printSettings = null)
   {
     gtk_print_operation_set_print_settings(cast(GtkPrintOperation*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);
   }

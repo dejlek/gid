@@ -355,7 +355,7 @@ class IconTheme : gobject.object.ObjectG
    *   first free each element in the list with [glib.global.gfree], then
    *   free the list itself with [glib.list.List.free].
    */
-  string[] listIcons(string context)
+  string[] listIcons(string context = null)
   {
     GList* _cretval;
     const(char)* _context = context.toCString(No.Alloc);
@@ -601,7 +601,7 @@ class IconTheme : gobject.object.ObjectG
    *   themeName = name of icon theme to use instead of
    *     configured theme, or %NULL to unset a previously set custom theme
    */
-  void setCustomTheme(string themeName)
+  void setCustomTheme(string themeName = null)
   {
     const(char)* _themeName = themeName.toCString(No.Alloc);
     gtk_icon_theme_set_custom_theme(cast(GtkIconTheme*)cPtr, _themeName);

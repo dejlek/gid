@@ -108,7 +108,7 @@ class Dir : gobject.boxed.Boxed
    *   is in the GLib file name encoding. In case of errors, %NULL is
    *   returned and error will be set.
    */
-  static string makeTmp(string tmpl)
+  static string makeTmp(string tmpl = null)
   {
     char* _cretval;
     const(char)* _tmpl = tmpl.toCString(No.Alloc);

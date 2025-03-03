@@ -157,7 +157,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
    *   variant = variant to load, for example, "dark", or
    *     %NULL for the default
    */
-  void loadNamed(string name, string variant)
+  void loadNamed(string name, string variant = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _variant = variant.toCString(No.Alloc);

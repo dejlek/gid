@@ -812,7 +812,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    * Params:
    *   completion = The #GtkEntryCompletion or %NULL
    */
-  void setCompletion(gtk.entry_completion.EntryCompletion completion)
+  void setCompletion(gtk.entry_completion.EntryCompletion completion = null)
   {
     gtk_entry_set_completion(cast(GtkEntry*)cPtr, completion ? cast(GtkEntryCompletion*)completion.cPtr(No.Dup) : null);
   }
@@ -828,7 +828,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   adjustment = an adjustment which should be adjusted when the cursor
    *     is moved, or %NULL
    */
-  void setCursorHadjustment(gtk.adjustment.Adjustment adjustment)
+  void setCursorHadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_entry_set_cursor_hadjustment(cast(GtkEntry*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
@@ -886,7 +886,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   iconPos = The position at which to set the icon
    *   icon = The icon to set, or %NULL
    */
-  void setIconFromGicon(gtk.types.EntryIconPosition iconPos, gio.icon.Icon icon)
+  void setIconFromGicon(gtk.types.EntryIconPosition iconPos, gio.icon.Icon icon = null)
   {
     gtk_entry_set_icon_from_gicon(cast(GtkEntry*)cPtr, iconPos, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
@@ -901,7 +901,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   iconPos = The position at which to set the icon
    *   iconName = An icon name, or %NULL
    */
-  void setIconFromIconName(gtk.types.EntryIconPosition iconPos, string iconName)
+  void setIconFromIconName(gtk.types.EntryIconPosition iconPos, string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_entry_set_icon_from_icon_name(cast(GtkEntry*)cPtr, iconPos, _iconName);
@@ -914,7 +914,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   iconPos = Icon position
    *   pixbuf = A #GdkPixbuf, or %NULL
    */
-  void setIconFromPixbuf(gtk.types.EntryIconPosition iconPos, gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setIconFromPixbuf(gtk.types.EntryIconPosition iconPos, gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_entry_set_icon_from_pixbuf(cast(GtkEntry*)cPtr, iconPos, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
@@ -929,7 +929,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
    * Deprecated: Use [gtk.entry.Entry.setIconFromIconName] instead.
    */
-  void setIconFromStock(gtk.types.EntryIconPosition iconPos, string stockId)
+  void setIconFromStock(gtk.types.EntryIconPosition iconPos, string stockId = null)
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_entry_set_icon_from_stock(cast(GtkEntry*)cPtr, iconPos, _stockId);
@@ -958,7 +958,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   iconPos = the icon position
    *   tooltip = the contents of the tooltip for the icon, or %NULL
    */
-  void setIconTooltipMarkup(gtk.types.EntryIconPosition iconPos, string tooltip)
+  void setIconTooltipMarkup(gtk.types.EntryIconPosition iconPos, string tooltip = null)
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_markup(cast(GtkEntry*)cPtr, iconPos, _tooltip);
@@ -979,7 +979,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   iconPos = the icon position
    *   tooltip = the contents of the tooltip for the icon, or %NULL
    */
-  void setIconTooltipText(gtk.types.EntryIconPosition iconPos, string tooltip)
+  void setIconTooltipText(gtk.types.EntryIconPosition iconPos, string tooltip = null)
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_text(cast(GtkEntry*)cPtr, iconPos, _tooltip);
@@ -1000,7 +1000,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   objects like #GtkStyleContext and #GtkCssProvider$(RPAREN); the value set with
    *   this function is ignored by #GtkEntry.
    */
-  void setInnerBorder(gtk.border.Border border)
+  void setInnerBorder(gtk.border.Border border = null)
   {
     gtk_entry_set_inner_border(cast(GtkEntry*)cPtr, border ? cast(const(GtkBorder)*)border.cPtr(No.Dup) : null);
   }
@@ -1093,7 +1093,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    * Params:
    *   text = a string to be displayed when entry is empty and unfocused, or %NULL
    */
-  void setPlaceholderText(string text)
+  void setPlaceholderText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_entry_set_placeholder_text(cast(GtkEntry*)cPtr, _text);

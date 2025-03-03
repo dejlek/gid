@@ -91,7 +91,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
    * Returns: a #GtkCssProvider with the theme loaded.
    *   This memory is owned by GTK+, and you must not free it.
    */
-  static gtk.css_provider.CssProvider getNamed(string name, string variant)
+  static gtk.css_provider.CssProvider getNamed(string name, string variant = null)
   {
     GtkCssProvider* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

@@ -397,7 +397,7 @@ class IconTheme : gobject.object.ObjectG
    *   themeName = name of icon theme to use instead of
    *     configured theme, or %NULL to unset a previously set custom theme
    */
-  void setThemeName(string themeName)
+  void setThemeName(string themeName = null)
   {
     const(char)* _themeName = themeName.toCString(No.Alloc);
     gtk_icon_theme_set_theme_name(cast(GtkIconTheme*)cPtr, _themeName);

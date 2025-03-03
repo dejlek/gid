@@ -58,7 +58,7 @@ class Permission : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if the permission was successfully acquired
    */
-  bool acquire(gio.cancellable.Cancellable cancellable)
+  bool acquire(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -76,7 +76,7 @@ class Permission : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = the #GAsyncReadyCallback to call when done
    */
-  void acquireAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void acquireAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -180,7 +180,7 @@ class Permission : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if the permission was successfully released
    */
-  bool release(gio.cancellable.Cancellable cancellable)
+  bool release(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -198,7 +198,7 @@ class Permission : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = the #GAsyncReadyCallback to call when done
    */
-  void releaseAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void releaseAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

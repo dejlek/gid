@@ -107,7 +107,7 @@ class ListHeader : gobject.object.ObjectG
    * Params:
    *   child = The list item's child or %NULL to unset
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_list_header_set_child(cast(GtkListHeader*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

@@ -27,7 +27,7 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     return getType();
   }
 
-  this(arrow.dense_union_data_type.DenseUnionDataType dataType)
+  this(arrow.dense_union_data_type.DenseUnionDataType dataType = null)
   {
     GArrowDenseUnionArrayBuilder* _cretval;
     GError *_err;

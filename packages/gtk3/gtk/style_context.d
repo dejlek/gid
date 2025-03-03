@@ -860,7 +860,7 @@ class StyleContext : gobject.object.ObjectG
    * Params:
    *   parent = the new parent or %NULL
    */
-  void setParent(gtk.style_context.StyleContext parent)
+  void setParent(gtk.style_context.StyleContext parent = null)
   {
     gtk_style_context_set_parent(cast(GtkStyleContext*)cPtr, parent ? cast(GtkStyleContext*)parent.cPtr(No.Dup) : null);
   }

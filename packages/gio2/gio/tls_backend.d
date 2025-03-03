@@ -94,7 +94,7 @@ interface TlsBackend
    * Params:
    *   database = the #GTlsDatabase
    */
-  void setDefaultDatabase(gio.tls_database.TlsDatabase database);
+  void setDefaultDatabase(gio.tls_database.TlsDatabase database = null);
 
   /**
    * Checks if DTLS is supported. DTLS support may not be available even if TLS

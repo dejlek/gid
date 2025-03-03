@@ -822,7 +822,7 @@ class Layout : gobject.object.ObjectG
    * Params:
    *   attrs = a `PangoAttrList`
    */
-  void setAttributes(pango.attr_list.AttrList attrs)
+  void setAttributes(pango.attr_list.AttrList attrs = null)
   {
     pango_layout_set_attributes(cast(PangoLayout*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
@@ -878,7 +878,7 @@ class Layout : gobject.object.ObjectG
    *   desc = the new `PangoFontDescription`
    *     to unset the current font description
    */
-  void setFontDescription(pango.font_description.FontDescription desc)
+  void setFontDescription(pango.font_description.FontDescription desc = null)
   {
     pango_layout_set_font_description(cast(PangoLayout*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
   }
@@ -1079,7 +1079,7 @@ class Layout : gobject.object.ObjectG
    * Params:
    *   tabs = a `PangoTabArray`
    */
-  void setTabs(pango.tab_array.TabArray tabs)
+  void setTabs(pango.tab_array.TabArray tabs = null)
   {
     pango_layout_set_tabs(cast(PangoLayout*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }

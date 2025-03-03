@@ -49,7 +49,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
    *     $(LPAREN)or %NULL$(RPAREN).
    * Returns: a new #GProxyAddress
    */
-  this(gio.inet_address.InetAddress inetaddr, ushort port, string protocol, string destHostname, ushort destPort, string username, string password)
+  this(gio.inet_address.InetAddress inetaddr, ushort port, string protocol, string destHostname, ushort destPort, string username = null, string password = null)
   {
     GSocketAddress* _cretval;
     const(char)* _protocol = protocol.toCString(No.Alloc);

@@ -70,7 +70,7 @@ interface ProxyResolver
    *   NULL-terminated array of proxy URIs. Must be freed
    *   with [glib.global.strfreev].
    */
-  string[] lookup(string uri, gio.cancellable.Cancellable cancellable);
+  string[] lookup(string uri, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronous lookup of proxy. See [gio.proxy_resolver.ProxyResolver.lookup] for more
@@ -80,7 +80,7 @@ interface ProxyResolver
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call after resolution completes
    */
-  void lookupAsync(string uri, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void lookupAsync(string uri, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Call this function to obtain the array of proxy URIs when

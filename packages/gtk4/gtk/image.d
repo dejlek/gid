@@ -126,7 +126,7 @@ class Image : gtk.widget.Widget
    *   iconName = an icon name
    * Returns: a new `GtkImage` displaying the themed icon
    */
-  static gtk.image.Image newFromIconName(string iconName)
+  static gtk.image.Image newFromIconName(string iconName = null)
   {
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -146,7 +146,7 @@ class Image : gtk.widget.Widget
    *   paintable = a `GdkPaintable`
    * Returns: a new `GtkImage`
    */
-  static gtk.image.Image newFromPaintable(gdk.paintable.Paintable paintable)
+  static gtk.image.Image newFromPaintable(gdk.paintable.Paintable paintable = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_paintable(paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
@@ -171,7 +171,7 @@ class Image : gtk.widget.Widget
    * Deprecated: Use [gtk.image.Image.newFromPaintable] and
    *   [gdk.texture.Texture.newForPixbuf] instead
    */
-  static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
@@ -303,7 +303,7 @@ class Image : gtk.widget.Widget
    * Params:
    *   filename = a filename
    */
-  void setFromFile(string filename)
+  void setFromFile(string filename = null)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_image_set_from_file(cast(GtkImage*)cPtr, _filename);
@@ -326,7 +326,7 @@ class Image : gtk.widget.Widget
    * Params:
    *   iconName = an icon name
    */
-  void setFromIconName(string iconName)
+  void setFromIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_image_set_from_icon_name(cast(GtkImage*)cPtr, _iconName);
@@ -338,7 +338,7 @@ class Image : gtk.widget.Widget
    * Params:
    *   paintable = a `GdkPaintable`
    */
-  void setFromPaintable(gdk.paintable.Paintable paintable)
+  void setFromPaintable(gdk.paintable.Paintable paintable = null)
   {
     gtk_image_set_from_paintable(cast(GtkImage*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
@@ -354,7 +354,7 @@ class Image : gtk.widget.Widget
 
    * Deprecated: Use [gtk.image.Image.setFromPaintable] instead
    */
-  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_image_set_from_pixbuf(cast(GtkImage*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
@@ -365,7 +365,7 @@ class Image : gtk.widget.Widget
    * Params:
    *   resourcePath = a resource path
    */
-  void setFromResource(string resourcePath)
+  void setFromResource(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_image_set_from_resource(cast(GtkImage*)cPtr, _resourcePath);

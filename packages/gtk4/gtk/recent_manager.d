@@ -222,7 +222,7 @@ class RecentManager : gobject.object.ObjectG
    *     %NULL to remove the item pointed by uri in the list
    * Returns: %TRUE on success
    */
-  bool moveItem(string uri, string newUri)
+  bool moveItem(string uri, string newUri = null)
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);

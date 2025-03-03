@@ -119,7 +119,7 @@ class VariantDict : gobject.boxed.Boxed
    *     dictionary
    * Returns: a #GVariantDict
    */
-  this(glib.variant.VariantG fromAsv)
+  this(glib.variant.VariantG fromAsv = null)
   {
     GVariantDict* _cretval;
     _cretval = g_variant_dict_new(fromAsv ? cast(VariantC*)fromAsv.cPtr(No.Dup) : null);
@@ -203,7 +203,7 @@ class VariantDict : gobject.boxed.Boxed
    *   expectedType = a #GVariantType, or %NULL
    * Returns: the value of the dictionary key, or %NULL
    */
-  glib.variant.VariantG lookupValue(string key, glib.variant_type.VariantType expectedType)
+  glib.variant.VariantG lookupValue(string key, glib.variant_type.VariantType expectedType = null)
   {
     VariantC* _cretval;
     const(char)* _key = key.toCString(No.Alloc);

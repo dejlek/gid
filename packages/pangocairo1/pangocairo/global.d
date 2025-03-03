@@ -59,7 +59,7 @@ double contextGetResolution(pango.context.Context context)
  *   options = a `cairo_font_options_t`, or %NULL to unset
  *     any previously set options. A copy is made.
  */
-void contextSetFontOptions(pango.context.Context context, cairo.font_options.FontOptions options)
+void contextSetFontOptions(pango.context.Context context, cairo.font_options.FontOptions options = null)
 {
   pango_cairo_context_set_font_options(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
 }
@@ -89,7 +89,7 @@ void contextSetResolution(pango.context.Context context, double dpi)
  *   func = Callback function for rendering attributes of
  *     type %PANGO_ATTR_SHAPE, or %NULL to disable shape rendering.
  */
-void contextSetShapeRenderer(pango.context.Context context, pangocairo.types.ShapeRendererFunc func)
+void contextSetShapeRenderer(pango.context.Context context, pangocairo.types.ShapeRendererFunc func = null)
 {
   extern(C) void _funcCallback(cairo_t* cr, PangoAttrShape* attr, bool doPath, void* data)
   {

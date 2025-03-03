@@ -157,7 +157,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
    *   cancelLabel = text to go in the cancel button, or %NULL for the default
    * Returns: a new #GtkFileChooserNative
    */
-  this(string title, gtk.window.Window parent, gtk.types.FileChooserAction action, string acceptLabel, string cancelLabel)
+  this(string title, gtk.window.Window parent, gtk.types.FileChooserAction action, string acceptLabel = null, string cancelLabel = null)
   {
     GtkFileChooserNative* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -203,7 +203,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
    * Params:
    *   acceptLabel = custom label or %NULL for the default
    */
-  void setAcceptLabel(string acceptLabel)
+  void setAcceptLabel(string acceptLabel = null)
   {
     const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
     gtk_file_chooser_native_set_accept_label(cast(GtkFileChooserNative*)cPtr, _acceptLabel);
@@ -219,7 +219,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
    * Params:
    *   cancelLabel = custom label or %NULL for the default
    */
-  void setCancelLabel(string cancelLabel)
+  void setCancelLabel(string cancelLabel = null)
   {
     const(char)* _cancelLabel = cancelLabel.toCString(No.Alloc);
     gtk_file_chooser_native_set_cancel_label(cast(GtkFileChooserNative*)cPtr, _cancelLabel);

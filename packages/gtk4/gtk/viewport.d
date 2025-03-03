@@ -60,7 +60,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
    *   vadjustment = vertical adjustment
    * Returns: a new `GtkViewport`
    */
-  this(gtk.adjustment.Adjustment hadjustment, gtk.adjustment.Adjustment vadjustment)
+  this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
@@ -100,7 +100,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
    *   scroll = details of how to perform
    *     the scroll operation or NULL to scroll into view
    */
-  void scrollTo(gtk.widget.Widget descendant, gtk.scroll_info.ScrollInfo scroll)
+  void scrollTo(gtk.widget.Widget descendant, gtk.scroll_info.ScrollInfo scroll = null)
   {
     gtk_viewport_scroll_to(cast(GtkViewport*)cPtr, descendant ? cast(GtkWidget*)descendant.cPtr(No.Dup) : null, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
@@ -110,7 +110,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   child = the child widget
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_viewport_set_child(cast(GtkViewport*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

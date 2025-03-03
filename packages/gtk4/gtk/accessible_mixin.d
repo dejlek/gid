@@ -196,7 +196,7 @@ template AccessibleT()
    *   parent = the parent accessible object
    *   nextSibling = the sibling accessible object
    */
-  override void setAccessibleParent(gtk.accessible.Accessible parent, gtk.accessible.Accessible nextSibling)
+  override void setAccessibleParent(gtk.accessible.Accessible parent = null, gtk.accessible.Accessible nextSibling = null)
   {
     gtk_accessible_set_accessible_parent(cast(GtkAccessible*)cPtr, parent ? cast(GtkAccessible*)(cast(ObjectG)parent).cPtr(No.Dup) : null, nextSibling ? cast(GtkAccessible*)(cast(ObjectG)nextSibling).cPtr(No.Dup) : null);
   }
@@ -208,7 +208,7 @@ template AccessibleT()
    * Params:
    *   newSibling = the new next accessible sibling to set
    */
-  override void updateNextAccessibleSibling(gtk.accessible.Accessible newSibling)
+  override void updateNextAccessibleSibling(gtk.accessible.Accessible newSibling = null)
   {
     gtk_accessible_update_next_accessible_sibling(cast(GtkAccessible*)cPtr, newSibling ? cast(GtkAccessible*)(cast(ObjectG)newSibling).cPtr(No.Dup) : null);
   }

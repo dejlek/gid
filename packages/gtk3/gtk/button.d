@@ -390,7 +390,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
    * Params:
    *   image = a widget to set as the image for the button, or %NULL to unset
    */
-  void setImage(gtk.widget.Widget image)
+  void setImage(gtk.widget.Widget image = null)
   {
     gtk_button_set_image(cast(GtkButton*)cPtr, image ? cast(GtkWidget*)image.cPtr(No.Dup) : null);
   }

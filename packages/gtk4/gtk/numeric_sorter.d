@@ -39,7 +39,7 @@ class NumericSorter : gtk.sorter.Sorter
    *   expression = The expression to evaluate
    * Returns: a new `GtkNumericSorter`
    */
-  this(gtk.expression.Expression expression)
+  this(gtk.expression.Expression expression = null)
   {
     GtkNumericSorter* _cretval;
     _cretval = gtk_numeric_sorter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
@@ -79,7 +79,7 @@ class NumericSorter : gtk.sorter.Sorter
    * Params:
    *   expression = a `GtkExpression`
    */
-  void setExpression(gtk.expression.Expression expression)
+  void setExpression(gtk.expression.Expression expression = null)
   {
     gtk_numeric_sorter_set_expression(cast(GtkNumericSorter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }

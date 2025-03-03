@@ -75,7 +75,7 @@ class SocketListener : gobject.object.ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: a #GSocketConnection on success, %NULL on error.
    */
-  gio.socket_connection.SocketConnection accept(out gobject.object.ObjectG sourceObject, gio.cancellable.Cancellable cancellable)
+  gio.socket_connection.SocketConnection accept(out gobject.object.ObjectG sourceObject, gio.cancellable.Cancellable cancellable = null)
   {
     GSocketConnection* _cretval;
     ObjectC* _sourceObject;
@@ -97,7 +97,7 @@ class SocketListener : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback
    */
-  void acceptAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void acceptAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -149,7 +149,7 @@ class SocketListener : gobject.object.ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: a #GSocket on success, %NULL on error.
    */
-  gio.socket.Socket acceptSocket(out gobject.object.ObjectG sourceObject, gio.cancellable.Cancellable cancellable)
+  gio.socket.Socket acceptSocket(out gobject.object.ObjectG sourceObject, gio.cancellable.Cancellable cancellable = null)
   {
     GSocket* _cretval;
     ObjectC* _sourceObject;
@@ -171,7 +171,7 @@ class SocketListener : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback
    */
-  void acceptSocketAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void acceptSocketAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -259,7 +259,7 @@ class SocketListener : gobject.object.ObjectG
    *   sourceObject = Optional #GObject identifying this source
    * Returns: the port number, or 0 in case of failure.
    */
-  ushort addAnyInetPort(gobject.object.ObjectG sourceObject)
+  ushort addAnyInetPort(gobject.object.ObjectG sourceObject = null)
   {
     ushort _retval;
     GError *_err;
@@ -285,7 +285,7 @@ class SocketListener : gobject.object.ObjectG
    *   sourceObject = Optional #GObject identifying this source
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool addInetPort(ushort port, gobject.object.ObjectG sourceObject)
+  bool addInetPort(ushort port, gobject.object.ObjectG sourceObject = null)
   {
     bool _retval;
     GError *_err;
@@ -312,7 +312,7 @@ class SocketListener : gobject.object.ObjectG
    *   sourceObject = Optional #GObject identifying this source
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool addSocket(gio.socket.Socket socket, gobject.object.ObjectG sourceObject)
+  bool addSocket(gio.socket.Socket socket, gobject.object.ObjectG sourceObject = null)
   {
     bool _retval;
     GError *_err;

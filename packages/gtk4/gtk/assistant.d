@@ -368,7 +368,7 @@ class Assistant : gtk.window.Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  void setForwardPageFunc(gtk.types.AssistantPageFunc pageFunc)
+  void setForwardPageFunc(gtk.types.AssistantPageFunc pageFunc = null)
   {
     extern(C) int _pageFuncCallback(int currentPage, void* data)
     {

@@ -94,7 +94,7 @@ class Popover : gtk.bin.Bin
    *   relativeTo = #GtkWidget the popover is related to
    * Returns: a new #GtkPopover
    */
-  this(gtk.widget.Widget relativeTo)
+  this(gtk.widget.Widget relativeTo = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_new(relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.Dup) : null);
@@ -150,7 +150,7 @@ class Popover : gtk.bin.Bin
    *     binding
    *   actionNamespace = the namespace for actions in model
    */
-  void bindModel(gio.menu_model.MenuModel model, string actionNamespace)
+  void bindModel(gio.menu_model.MenuModel model = null, string actionNamespace = null)
   {
     const(char)* _actionNamespace = actionNamespace.toCString(No.Alloc);
     gtk_popover_bind_model(cast(GtkPopover*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, _actionNamespace);
@@ -293,7 +293,7 @@ class Popover : gtk.bin.Bin
    * Params:
    *   widget = the new default widget, or %NULL
    */
-  void setDefaultWidget(gtk.widget.Widget widget)
+  void setDefaultWidget(gtk.widget.Widget widget = null)
   {
     gtk_popover_set_default_widget(cast(GtkPopover*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -347,7 +347,7 @@ class Popover : gtk.bin.Bin
    * Params:
    *   relativeTo = a #GtkWidget
    */
-  void setRelativeTo(gtk.widget.Widget relativeTo)
+  void setRelativeTo(gtk.widget.Widget relativeTo = null)
   {
     gtk_popover_set_relative_to(cast(GtkPopover*)cPtr, relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.Dup) : null);
   }

@@ -55,7 +55,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
    *     the action, or %NULL
    * Returns: the newly created #GtkRecentAction.
    */
-  this(string name, string label, string tooltip, string stockId)
+  this(string name, string label = null, string tooltip = null, string stockId = null)
   {
     GtkAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -81,7 +81,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
    *     #GtkRecentManager
    * Returns: the newly created #GtkRecentAction
    */
-  static gtk.recent_action.RecentAction newForManager(string name, string label, string tooltip, string stockId, gtk.recent_manager.RecentManager manager)
+  static gtk.recent_action.RecentAction newForManager(string name, string label = null, string tooltip = null, string stockId = null, gtk.recent_manager.RecentManager manager = null)
   {
     GtkAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

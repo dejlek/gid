@@ -84,7 +84,7 @@ class Mark : gtk.text_mark.TextMark
    *   category = a string specifying the mark category, or %NULL.
    * Returns: the next #GtkSourceMark, or %NULL.
    */
-  gtksource.mark.Mark next(string category)
+  gtksource.mark.Mark next(string category = null)
   {
     GtkSourceMark* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -102,7 +102,7 @@ class Mark : gtk.text_mark.TextMark
    *   category = a string specifying the mark category, or %NULL.
    * Returns: the previous #GtkSourceMark, or %NULL.
    */
-  gtksource.mark.Mark prev(string category)
+  gtksource.mark.Mark prev(string category = null)
   {
     GtkSourceMark* _cretval;
     const(char)* _category = category.toCString(No.Alloc);

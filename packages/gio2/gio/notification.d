@@ -114,7 +114,7 @@ class Notification : gobject.object.ObjectG
    *   action = an action name
    *   target = a #GVariant to use as action's parameter, or %NULL
    */
-  void addButtonWithTarget(string label, string action, glib.variant.VariantG target)
+  void addButtonWithTarget(string label, string action, glib.variant.VariantG target = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _action = action.toCString(No.Alloc);
@@ -126,7 +126,7 @@ class Notification : gobject.object.ObjectG
    * Params:
    *   body_ = the new body for notification, or %NULL
    */
-  void setBody(string body_)
+  void setBody(string body_ = null)
   {
     const(char)* _body_ = body_.toCString(No.Alloc);
     g_notification_set_body(cast(GNotification*)cPtr, _body_);
@@ -141,7 +141,7 @@ class Notification : gobject.object.ObjectG
    * Params:
    *   category = the category for notification, or %NULL for no category
    */
-  void setCategory(string category)
+  void setCategory(string category = null)
   {
     const(char)* _category = category.toCString(No.Alloc);
     g_notification_set_category(cast(GNotification*)cPtr, _category);
@@ -178,7 +178,7 @@ class Notification : gobject.object.ObjectG
    *   action = an action name
    *   target = a #GVariant to use as action's parameter, or %NULL
    */
-  void setDefaultActionAndTarget(string action, glib.variant.VariantG target)
+  void setDefaultActionAndTarget(string action, glib.variant.VariantG target = null)
   {
     const(char)* _action = action.toCString(No.Alloc);
     g_notification_set_default_action_and_target_value(cast(GNotification*)cPtr, _action, target ? cast(VariantC*)target.cPtr(No.Dup) : null);

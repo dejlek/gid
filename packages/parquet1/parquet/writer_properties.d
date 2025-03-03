@@ -33,13 +33,13 @@ class WriterProperties : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
-  void disableDictionary(string path)
+  void disableDictionary(string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
     gparquet_writer_properties_disable_dictionary(cast(GParquetWriterProperties*)cPtr, _path);
   }
 
-  void enableDictionary(string path)
+  void enableDictionary(string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
     gparquet_writer_properties_enable_dictionary(cast(GParquetWriterProperties*)cPtr, _path);
@@ -95,7 +95,7 @@ class WriterProperties : gobject.object.ObjectG
     gparquet_writer_properties_set_batch_size(cast(GParquetWriterProperties*)cPtr, batchSize);
   }
 
-  void setCompression(arrow.types.CompressionType compressionType, string path)
+  void setCompression(arrow.types.CompressionType compressionType, string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
     gparquet_writer_properties_set_compression(cast(GParquetWriterProperties*)cPtr, compressionType, _path);

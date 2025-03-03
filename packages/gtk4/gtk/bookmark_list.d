@@ -44,7 +44,7 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
    *   attributes = The attributes to query
    * Returns: a new `GtkBookmarkList`
    */
-  this(string filename, string attributes)
+  this(string filename = null, string attributes = null)
   {
     GtkBookmarkList* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -110,7 +110,7 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
    * Params:
    *   attributes = the attributes to enumerate
    */
-  void setAttributes(string attributes)
+  void setAttributes(string attributes = null)
   {
     const(char)* _attributes = attributes.toCString(No.Alloc);
     gtk_bookmark_list_set_attributes(cast(GtkBookmarkList*)cPtr, _attributes);

@@ -56,7 +56,7 @@ void valueSetRenderNode(gobject.value.Value value, gsk.render_node.RenderNode no
  *   value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
  *   node = a `GskRenderNode`
  */
-void valueTakeRenderNode(gobject.value.Value value, gsk.render_node.RenderNode node)
+void valueTakeRenderNode(gobject.value.Value value, gsk.render_node.RenderNode node = null)
 {
   gsk_value_take_render_node(value ? cast(GValue*)value.cPtr(No.Dup) : null, node ? cast(GskRenderNode*)node.cPtr(Yes.Dup) : null);
 }

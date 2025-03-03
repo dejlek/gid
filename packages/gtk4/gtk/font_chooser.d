@@ -166,7 +166,7 @@ interface FontChooser
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  void setFilterFunc(gtk.types.FontFilterFunc filter);
+  void setFilterFunc(gtk.types.FontFilterFunc filter = null);
 
   /**
    * Sets the currently-selected font.
@@ -213,7 +213,7 @@ interface FontChooser
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  void setFontMap(pango.font_map.FontMap fontmap);
+  void setFontMap(pango.font_map.FontMap fontmap = null);
 
   /**
    * Sets the language to use for font features.

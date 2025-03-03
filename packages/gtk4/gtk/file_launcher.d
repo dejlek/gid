@@ -48,7 +48,7 @@ class FileLauncher : gobject.object.ObjectG
    *   file = the file to open
    * Returns: the new `GtkFileLauncher`
    */
-  this(gio.file.File file)
+  this(gio.file.File file = null)
   {
     GtkFileLauncher* _cretval;
     _cretval = gtk_file_launcher_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
@@ -100,7 +100,7 @@ class FileLauncher : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void launch(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -145,7 +145,7 @@ class FileLauncher : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void openContainingFolder(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void openContainingFolder(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -194,7 +194,7 @@ class FileLauncher : gobject.object.ObjectG
    * Params:
    *   file = a `GFile`
    */
-  void setFile(gio.file.File file)
+  void setFile(gio.file.File file = null)
   {
     gtk_file_launcher_set_file(cast(GtkFileLauncher*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }

@@ -244,7 +244,7 @@ void cairoSetSourceWindow(cairo.context.Context cr, gdk.window.Window window, do
  *   forWindow = The window this will be drawn to, or %NULL
  * Returns: a new cairo surface, must be freed with [cairo.surface.Surface.destroy]
  */
-cairo.surface.Surface cairoSurfaceCreateFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf, int scale, gdk.window.Window forWindow)
+cairo.surface.Surface cairoSurfaceCreateFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf, int scale, gdk.window.Window forWindow = null)
 {
   cairo_surface_t* _cretval;
   _cretval = gdk_cairo_surface_create_from_pixbuf(pixbuf ? cast(const(PixbufC)*)pixbuf.cPtr(No.Dup) : null, scale, forWindow ? cast(GdkWindow*)forWindow.cPtr(No.Dup) : null);

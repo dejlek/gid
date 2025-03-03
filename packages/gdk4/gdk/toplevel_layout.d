@@ -144,7 +144,7 @@ class ToplevelLayout : gobject.boxed.Boxed
    *   fullscreen = %TRUE to fullscreen the surface
    *   monitor = the monitor to fullscreen on
    */
-  void setFullscreen(bool fullscreen, gdk.monitor.MonitorG monitor)
+  void setFullscreen(bool fullscreen, gdk.monitor.MonitorG monitor = null)
   {
     gdk_toplevel_layout_set_fullscreen(cast(GdkToplevelLayout*)cPtr, fullscreen, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }

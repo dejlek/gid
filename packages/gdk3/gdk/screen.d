@@ -603,7 +603,7 @@ class Screen : gobject.object.ObjectG
    *   options = a #cairo_font_options_t, or %NULL to unset any
    *     previously set default font options.
    */
-  void setFontOptions(cairo.font_options.FontOptions options)
+  void setFontOptions(cairo.font_options.FontOptions options = null)
   {
     gdk_screen_set_font_options(cast(GdkScreen*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
   }

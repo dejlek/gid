@@ -91,7 +91,7 @@ class EventControllerKey : gtk.event_controller.EventController
    * Params:
    *   imContext = a `GtkIMContext`
    */
-  void setImContext(gtk.imcontext.IMContext imContext)
+  void setImContext(gtk.imcontext.IMContext imContext = null)
   {
     gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)cPtr, imContext ? cast(GtkIMContext*)imContext.cPtr(No.Dup) : null);
   }

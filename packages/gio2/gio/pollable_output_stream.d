@@ -53,7 +53,7 @@ interface PollableOutputStream
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #GSource
    */
-  glib.source.Source createSource(gio.cancellable.Cancellable cancellable);
+  glib.source.Source createSource(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Checks if stream can be written.
@@ -95,7 +95,7 @@ interface PollableOutputStream
    * Returns: the number of bytes written, or -1 on error $(LPAREN)including
    *   %G_IO_ERROR_WOULD_BLOCK$(RPAREN).
    */
-  ptrdiff_t writeNonblocking(ubyte[] buffer, gio.cancellable.Cancellable cancellable);
+  ptrdiff_t writeNonblocking(ubyte[] buffer, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Attempts to write the bytes contained in the n_vectors vectors to stream,
@@ -124,5 +124,5 @@ interface PollableOutputStream
    *   %G_POLLABLE_RETURN_FAILED if there was an error in which case error will
    *   be set.
    */
-  gio.types.PollableReturn writevNonblocking(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable);
+  gio.types.PollableReturn writevNonblocking(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null);
 }

@@ -69,7 +69,7 @@ class DmabufFormats : gobject.boxed.Boxed
    *   formats2 = another `GdkDmabufFormats`
    * Returns: `TRUE` if formats1 and formats2 are equal
    */
-  bool equal(gdk.dmabuf_formats.DmabufFormats formats2)
+  bool equal(gdk.dmabuf_formats.DmabufFormats formats2 = null)
   {
     bool _retval;
     _retval = gdk_dmabuf_formats_equal(cast(const(GdkDmabufFormats)*)cPtr, formats2 ? cast(const(GdkDmabufFormats)*)formats2.cPtr(No.Dup) : null);

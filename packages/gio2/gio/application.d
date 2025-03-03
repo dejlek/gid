@@ -261,7 +261,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
    *   argDescription = the placeholder to use for the extra argument
    *     parsed by the option in `--help` output
    */
-  void addMainOption(string longName, char shortName, glib.types.OptionFlags flags, glib.types.OptionArg arg, string description, string argDescription)
+  void addMainOption(string longName, char shortName, glib.types.OptionFlags flags, glib.types.OptionArg arg, string description, string argDescription = null)
   {
     const(char)* _longName = longName.toCString(No.Alloc);
     const(char)* _description = description.toCString(No.Alloc);
@@ -625,7 +625,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if registration succeeded
    */
-  bool register(gio.cancellable.Cancellable cancellable)
+  bool register(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -776,7 +776,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
    *   introduce buggy behaviour $(LPAREN)ie: signals not emitted on changes to the
    *   action group$(RPAREN), so you should really use #GActionMap instead.
    */
-  void setActionGroup(gio.action_group.ActionGroup actionGroup)
+  void setActionGroup(gio.action_group.ActionGroup actionGroup = null)
   {
     g_application_set_action_group(cast(GApplication*)cPtr, actionGroup ? cast(GActionGroup*)(cast(ObjectG)actionGroup).cPtr(No.Dup) : null);
   }
@@ -790,7 +790,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
    * Params:
    *   applicationId = the identifier for application
    */
-  void setApplicationId(string applicationId)
+  void setApplicationId(string applicationId = null)
   {
     const(char)* _applicationId = applicationId.toCString(No.Alloc);
     g_application_set_application_id(cast(GApplication*)cPtr, _applicationId);
@@ -843,7 +843,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
    *   description = a string to be shown in `--help` output
    *     after the list of options, or %NULL
    */
-  void setOptionContextDescription(string description)
+  void setOptionContextDescription(string description = null)
   {
     const(char)* _description = description.toCString(No.Alloc);
     g_application_set_option_context_description(cast(GApplication*)cPtr, _description);
@@ -858,7 +858,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
    *   parameterString = a string which is displayed
    *     in the first line of `--help` output, after the usage summary `programname [OPTION...]`.
    */
-  void setOptionContextParameterString(string parameterString)
+  void setOptionContextParameterString(string parameterString = null)
   {
     const(char)* _parameterString = parameterString.toCString(No.Alloc);
     g_application_set_option_context_parameter_string(cast(GApplication*)cPtr, _parameterString);
@@ -871,7 +871,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
    *   summary = a string to be shown in `--help` output
    *     before the list of options, or %NULL
    */
-  void setOptionContextSummary(string summary)
+  void setOptionContextSummary(string summary = null)
   {
     const(char)* _summary = summary.toCString(No.Alloc);
     g_application_set_option_context_summary(cast(GApplication*)cPtr, _summary);
@@ -908,7 +908,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
    * Params:
    *   resourcePath = the resource path to use
    */
-  void setResourceBasePath(string resourcePath)
+  void setResourceBasePath(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     g_application_set_resource_base_path(cast(GApplication*)cPtr, _resourcePath);

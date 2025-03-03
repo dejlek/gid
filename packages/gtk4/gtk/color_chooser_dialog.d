@@ -67,7 +67,7 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
 
    * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
-  this(string title, gtk.window.Window parent)
+  this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);

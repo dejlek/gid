@@ -49,7 +49,7 @@ class RecentInfo : gobject.boxed.Boxed
    *     application for the MIME type is used
    * Returns: the newly created `GAppInfo`
    */
-  gio.app_info.AppInfo createAppInfo(string appName)
+  gio.app_info.AppInfo createAppInfo(string appName = null)
   {
     GAppInfo* _cretval;
     const(char)* _appName = appName.toCString(No.Alloc);

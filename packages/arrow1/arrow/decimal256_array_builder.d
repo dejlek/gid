@@ -38,7 +38,7 @@ class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
 
   alias appendValue = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValue;
 
-  bool appendValue(arrow.decimal256.Decimal256 value)
+  bool appendValue(arrow.decimal256.Decimal256 value = null)
   {
     bool _retval;
     GError *_err;

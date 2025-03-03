@@ -219,7 +219,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
    *   name = the human-readable-name for the filter, or %NULL
    *     to remove any existing name.
    */
-  void setName(string name)
+  void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_file_filter_set_name(cast(GtkFileFilter*)cPtr, _name);

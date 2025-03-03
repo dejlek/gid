@@ -53,7 +53,7 @@ interface PollableInputStream
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #GSource
    */
-  glib.source.Source createSource(gio.cancellable.Cancellable cancellable);
+  glib.source.Source createSource(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Checks if stream can be read.
@@ -92,5 +92,5 @@ interface PollableInputStream
    * Returns: the number of bytes read, or -1 on error $(LPAREN)including
    *   %G_IO_ERROR_WOULD_BLOCK$(RPAREN).
    */
-  ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable);
+  ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null);
 }

@@ -154,7 +154,7 @@ class File : gobject.object.ObjectG
    * Params:
    *   location = the new #GFile, or %NULL.
    */
-  void setLocation(gio.file.File location)
+  void setLocation(gio.file.File location = null)
   {
     gtk_source_file_set_location(cast(GtkSourceFile*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);
   }

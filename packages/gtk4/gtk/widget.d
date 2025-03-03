@@ -466,7 +466,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    * Returns: %TRUE if the action was activated, %FALSE if the
    *   action does not exist.
    */
-  bool activateAction(string name, glib.variant.VariantG args)
+  bool activateAction(string name, glib.variant.VariantG args = null)
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -584,7 +584,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    *   baseline = New baseline of widget, or -1
    *   transform = Transformation to be applied to widget
    */
-  void allocate(int width, int height, int baseline, gsk.transform.Transform transform)
+  void allocate(int width, int height, int baseline, gsk.transform.Transform transform = null)
   {
     gtk_widget_allocate(cast(GtkWidget*)cPtr, width, height, baseline, transform ? cast(GskTransform*)transform.cPtr(Yes.Dup) : null);
   }
@@ -751,7 +751,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    *   text = text to set on the layout
    * Returns: the new `PangoLayout`
    */
-  pango.layout.Layout createPangoLayout(string text)
+  pango.layout.Layout createPangoLayout(string text = null)
   {
     PangoLayout* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -1920,7 +1920,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    *   group = a `GActionGroup`, or %NULL to remove
    *     the previously inserted group for name
    */
-  void insertActionGroup(string name, gio.action_group.ActionGroup group)
+  void insertActionGroup(string name, gio.action_group.ActionGroup group = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_insert_action_group(cast(GtkWidget*)cPtr, _name, group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null);
@@ -1941,7 +1941,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    *   parent = the parent `GtkWidget` to insert widget into
    *   previousSibling = the new previous sibling of widget
    */
-  void insertAfter(gtk.widget.Widget parent, gtk.widget.Widget previousSibling)
+  void insertAfter(gtk.widget.Widget parent, gtk.widget.Widget previousSibling = null)
   {
     gtk_widget_insert_after(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null, previousSibling ? cast(GtkWidget*)previousSibling.cPtr(No.Dup) : null);
   }
@@ -1960,7 +1960,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    *   parent = the parent `GtkWidget` to insert widget into
    *   nextSibling = the new next sibling of widget
    */
-  void insertBefore(gtk.widget.Widget parent, gtk.widget.Widget nextSibling)
+  void insertBefore(gtk.widget.Widget parent, gtk.widget.Widget nextSibling = null)
   {
     gtk_widget_insert_before(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null, nextSibling ? cast(GtkWidget*)nextSibling.cPtr(No.Dup) : null);
   }
@@ -2398,7 +2398,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    * Params:
    *   cursor = the new cursor
    */
-  void setCursor(gdk.cursor.Cursor cursor)
+  void setCursor(gdk.cursor.Cursor cursor = null)
   {
     gtk_widget_set_cursor(cast(GtkWidget*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
@@ -2416,7 +2416,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    * Params:
    *   name = The name of the cursor
    */
-  void setCursorFromName(string name)
+  void setCursorFromName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_set_cursor_from_name(cast(GtkWidget*)cPtr, _name);
@@ -2451,7 +2451,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    *   child = a direct child widget of widget or %NULL
    *     to unset the focus child of widget
    */
-  void setFocusChild(gtk.widget.Widget child)
+  void setFocusChild(gtk.widget.Widget child = null)
   {
     gtk_widget_set_focus_child(cast(GtkWidget*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -2501,7 +2501,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    *   fontMap = a `PangoFontMap`, or %NULL to unset any
    *     previously set font map
    */
-  void setFontMap(pango.font_map.FontMap fontMap)
+  void setFontMap(pango.font_map.FontMap fontMap = null)
   {
     gtk_widget_set_font_map(cast(GtkWidget*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.Dup) : null);
   }
@@ -2515,7 +2515,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    *   options = a `cairo_font_options_t`
    *     to unset any previously set default font options
    */
-  void setFontOptions(cairo.font_options.FontOptions options)
+  void setFontOptions(cairo.font_options.FontOptions options = null)
   {
     gtk_widget_set_font_options(cast(GtkWidget*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
   }
@@ -2597,7 +2597,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    * Params:
    *   layoutManager = a `GtkLayoutManager`
    */
-  void setLayoutManager(gtk.layout_manager.LayoutManager layoutManager)
+  void setLayoutManager(gtk.layout_manager.LayoutManager layoutManager = null)
   {
     gtk_widget_set_layout_manager(cast(GtkWidget*)cPtr, layoutManager ? cast(GtkLayoutManager*)layoutManager.cPtr(Yes.Dup) : null);
   }
@@ -2810,7 +2810,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    * Params:
    *   markup = the contents of the tooltip for widget
    */
-  void setTooltipMarkup(string markup)
+  void setTooltipMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_widget_set_tooltip_markup(cast(GtkWidget*)cPtr, _markup);
@@ -2827,7 +2827,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
    * Params:
    *   text = the contents of the tooltip for widget
    */
-  void setTooltipText(string text)
+  void setTooltipText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_widget_set_tooltip_text(cast(GtkWidget*)cPtr, _text);

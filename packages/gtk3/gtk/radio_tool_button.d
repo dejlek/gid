@@ -90,7 +90,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
    *   group = An existing #GtkRadioToolButton, or %NULL
    * Returns: The new #GtkRadioToolButton
    */
-  static gtk.radio_tool_button.RadioToolButton newFromWidget(gtk.radio_tool_button.RadioToolButton group)
+  static gtk.radio_tool_button.RadioToolButton newFromWidget(gtk.radio_tool_button.RadioToolButton group = null)
   {
     GtkToolItem* _cretval;
     _cretval = gtk_radio_tool_button_new_from_widget(group ? cast(GtkRadioToolButton*)group.cPtr(No.Dup) : null);

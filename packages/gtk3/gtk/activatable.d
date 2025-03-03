@@ -261,5 +261,5 @@ interface Activatable
    * Params:
    *   action = the related #GtkAction or %NULL
    */
-  void syncActionProperties(gtk.action.Action action);
+  void syncActionProperties(gtk.action.Action action = null);
 }

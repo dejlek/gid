@@ -422,7 +422,7 @@ class Snapshot : gdk.snapshot.Snapshot
    *   childBounds = the bounds of the child or %NULL
    *     to use the full size of the collected child node
    */
-  void pushRepeat(graphene.rect.Rect bounds, graphene.rect.Rect childBounds)
+  void pushRepeat(graphene.rect.Rect bounds, graphene.rect.Rect childBounds = null)
   {
     gtk_snapshot_push_repeat(cast(GtkSnapshot*)cPtr, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, childBounds ? cast(const(graphene_rect_t)*)childBounds.cPtr(No.Dup) : null);
   }
@@ -641,7 +641,7 @@ class Snapshot : gdk.snapshot.Snapshot
    *     or %NULL to use the bounds of the snapshot
    * Returns: a new `GdkPaintable`
    */
-  gdk.paintable.Paintable toPaintable(graphene.size.Size size)
+  gdk.paintable.Paintable toPaintable(graphene.size.Size size = null)
   {
     GdkPaintable* _cretval;
     _cretval = gtk_snapshot_to_paintable(cast(GtkSnapshot*)cPtr, size ? cast(const(graphene_size_t)*)size.cPtr(No.Dup) : null);
@@ -654,7 +654,7 @@ class Snapshot : gdk.snapshot.Snapshot
    * Params:
    *   transform = the transform to apply
    */
-  void transform(gsk.transform.Transform transform)
+  void transform(gsk.transform.Transform transform = null)
   {
     gtk_snapshot_transform(cast(GtkSnapshot*)cPtr, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);
   }

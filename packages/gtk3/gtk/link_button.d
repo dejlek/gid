@@ -73,7 +73,7 @@ class LinkButton : gtk.button.Button
    *   label = the text of the button
    * Returns: a new link button widget.
    */
-  static gtk.link_button.LinkButton newWithLabel(string uri, string label)
+  static gtk.link_button.LinkButton newWithLabel(string uri, string label = null)
   {
     GtkWidget* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);

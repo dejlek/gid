@@ -145,7 +145,7 @@ class PopoverMenu : gtk.popover.Popover
    *   model = a `GMenuModel`
    * Returns: the new `GtkPopoverMenu`
    */
-  static gtk.popover_menu.PopoverMenu newFromModel(gio.menu_model.MenuModel model)
+  static gtk.popover_menu.PopoverMenu newFromModel(gio.menu_model.MenuModel model = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_menu_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
@@ -248,7 +248,7 @@ class PopoverMenu : gtk.popover.Popover
    * Params:
    *   model = a `GMenuModel`
    */
-  void setMenuModel(gio.menu_model.MenuModel model)
+  void setMenuModel(gio.menu_model.MenuModel model = null)
   {
     gtk_popover_menu_set_menu_model(cast(GtkPopoverMenu*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }

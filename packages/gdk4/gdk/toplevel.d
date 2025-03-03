@@ -93,7 +93,7 @@ interface Toplevel
    *   event = the `GdkEvent` that is triggering the inhibit
    *     request, or %NULL if none is available
    */
-  void inhibitSystemShortcuts(gdk.event.Event event);
+  void inhibitSystemShortcuts(gdk.event.Event event = null);
 
   /**
    * Asks to lower the toplevel below other windows.

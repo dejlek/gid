@@ -83,7 +83,7 @@ class GridView : gtk.list_base.ListBase
    *   factory = The factory to populate items with
    * Returns: a new `GtkGridView` using the given model and factory
    */
-  this(gtk.selection_model.SelectionModel model, gtk.list_item_factory.ListItemFactory factory)
+  this(gtk.selection_model.SelectionModel model = null, gtk.list_item_factory.ListItemFactory factory = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
@@ -182,7 +182,7 @@ class GridView : gtk.list_base.ListBase
    *   scroll = details of how to perform
    *     the scroll operation or %NULL to scroll into view
    */
-  void scrollTo(uint pos, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll)
+  void scrollTo(uint pos, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll = null)
   {
     gtk_grid_view_scroll_to(cast(GtkGridView*)cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
@@ -202,7 +202,7 @@ class GridView : gtk.list_base.ListBase
    * Params:
    *   factory = the factory to use
    */
-  void setFactory(gtk.list_item_factory.ListItemFactory factory)
+  void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
     gtk_grid_view_set_factory(cast(GtkGridView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -239,7 +239,7 @@ class GridView : gtk.list_base.ListBase
    * Params:
    *   model = the model to use
    */
-  void setModel(gtk.selection_model.SelectionModel model)
+  void setModel(gtk.selection_model.SelectionModel model = null)
   {
     gtk_grid_view_set_model(cast(GtkGridView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

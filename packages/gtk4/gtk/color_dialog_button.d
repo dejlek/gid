@@ -59,7 +59,7 @@ class ColorDialogButton : gtk.widget.Widget
    *   dialog = the `GtkColorDialog` to use
    * Returns: the new `GtkColorDialogButton`
    */
-  this(gtk.color_dialog.ColorDialog dialog)
+  this(gtk.color_dialog.ColorDialog dialog = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_dialog_button_new(dialog ? cast(GtkColorDialog*)dialog.cPtr(Yes.Dup) : null);

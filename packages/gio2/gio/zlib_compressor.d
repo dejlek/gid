@@ -71,7 +71,7 @@ class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
    * Params:
    *   fileInfo = a #GFileInfo
    */
-  void setFileInfo(gio.file_info.FileInfo fileInfo)
+  void setFileInfo(gio.file_info.FileInfo fileInfo = null)
   {
     g_zlib_compressor_set_file_info(cast(GZlibCompressor*)cPtr, fileInfo ? cast(GFileInfo*)fileInfo.cPtr(No.Dup) : null);
   }

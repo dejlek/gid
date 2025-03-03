@@ -104,7 +104,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  static void get(secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void get(secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -151,7 +151,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    * Returns: a new reference to a #SecretService proxy, which
    *   should be released with [gobject.object.ObjectG.unref].
    */
-  static secret.service.Service getSync(secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable)
+  static secret.service.Service getSync(secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     SecretService* _cretval;
     GError *_err;
@@ -178,7 +178,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  static void open(gobject.types.GType serviceGtype, string serviceBusName, secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void open(gobject.types.GType serviceGtype, string serviceBusName, secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -231,7 +231,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    * Returns: a new reference to a #SecretService proxy, which
    *   should be released with [gobject.object.ObjectG.unref].
    */
-  static secret.service.Service openSync(gobject.types.GType serviceGtype, string serviceBusName, secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable)
+  static secret.service.Service openSync(gobject.types.GType serviceGtype, string serviceBusName, secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     SecretService* _cretval;
     const(char)* _serviceBusName = serviceBusName.toCString(No.Alloc);
@@ -255,7 +255,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void clear(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void clear(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -302,7 +302,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    * Returns: whether items were removed or not
    */
-  bool clearSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable)
+  bool clearSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -362,7 +362,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void ensureSession(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void ensureSession(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -408,7 +408,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    * Returns: whether a session is established or not
    */
-  bool ensureSessionSync(gio.cancellable.Cancellable cancellable)
+  bool ensureSessionSync(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -520,7 +520,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void loadCollections(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void loadCollections(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -565,7 +565,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    * Returns: whether the load was successful or not
    */
-  bool loadCollectionsSync(gio.cancellable.Cancellable cancellable)
+  bool loadCollectionsSync(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -589,7 +589,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void lock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void lock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -669,7 +669,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void lookup(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void lookup(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -719,7 +719,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    * Returns: a newly allocated structValue, which should be
    *   released with [secret.value.Value.unref], or %NULL if no secret found
    */
-  secret.value.Value lookupSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable)
+  secret.value.Value lookupSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
   {
     SecretValue* _cretval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -745,7 +745,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void prompt(secret.prompt.Prompt prompt, glib.variant_type.VariantType returnType, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void prompt(secret.prompt.Prompt prompt, glib.variant_type.VariantType returnType = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -832,7 +832,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void search(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void search(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -891,7 +891,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    * Returns: a list of items that matched the search
    */
-  secret.item.Item[] searchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable)
+  secret.item.Item[] searchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -916,7 +916,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void setAlias(string alias_, secret.collection.Collection collection, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void setAlias(string alias_, secret.collection.Collection collection = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -960,7 +960,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    * Returns: %TRUE if successful
    */
-  bool setAliasSync(string alias_, secret.collection.Collection collection, gio.cancellable.Cancellable cancellable)
+  bool setAliasSync(string alias_, secret.collection.Collection collection = null, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _alias_ = alias_.toCString(No.Alloc);
@@ -992,7 +992,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void store(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void store(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1049,7 +1049,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    * Returns: whether the storage was successful or not
    */
-  bool storeSync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable)
+  bool storeSync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -1077,7 +1077,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void unlock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void unlock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

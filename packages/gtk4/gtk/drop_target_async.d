@@ -126,7 +126,7 @@ class DropTargetAsync : gtk.event_controller.EventController
    * Params:
    *   formats = the supported data formats or %NULL for any format
    */
-  void setFormats(gdk.content_formats.ContentFormats formats)
+  void setFormats(gdk.content_formats.ContentFormats formats = null)
   {
     gtk_drop_target_async_set_formats(cast(GtkDropTargetAsync*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null);
   }

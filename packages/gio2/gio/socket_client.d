@@ -105,7 +105,7 @@ class SocketClient : gobject.object.ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: a #GSocketConnection on success, %NULL on error.
    */
-  gio.socket_connection.SocketConnection connect(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable)
+  gio.socket_connection.SocketConnection connect(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null)
   {
     GSocketConnection* _cretval;
     GError *_err;
@@ -134,7 +134,7 @@ class SocketClient : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback
    */
-  void connectAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void connectAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -196,7 +196,7 @@ class SocketClient : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a #GSocketConnection on success, %NULL on error.
    */
-  gio.socket_connection.SocketConnection connectToHost(string hostAndPort, ushort defaultPort, gio.cancellable.Cancellable cancellable)
+  gio.socket_connection.SocketConnection connectToHost(string hostAndPort, ushort defaultPort, gio.cancellable.Cancellable cancellable = null)
   {
     GSocketConnection* _cretval;
     const(char)* _hostAndPort = hostAndPort.toCString(No.Alloc);
@@ -219,7 +219,7 @@ class SocketClient : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback
    */
-  void connectToHostAsync(string hostAndPort, ushort defaultPort, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void connectToHostAsync(string hostAndPort, ushort defaultPort, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -270,7 +270,7 @@ class SocketClient : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a #GSocketConnection if successful, or %NULL on error
    */
-  gio.socket_connection.SocketConnection connectToService(string domain, string service, gio.cancellable.Cancellable cancellable)
+  gio.socket_connection.SocketConnection connectToService(string domain, string service, gio.cancellable.Cancellable cancellable = null)
   {
     GSocketConnection* _cretval;
     const(char)* _domain = domain.toCString(No.Alloc);
@@ -292,7 +292,7 @@ class SocketClient : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback
    */
-  void connectToServiceAsync(string domain, string service, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void connectToServiceAsync(string domain, string service, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -349,7 +349,7 @@ class SocketClient : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a #GSocketConnection on success, %NULL on error.
    */
-  gio.socket_connection.SocketConnection connectToUri(string uri, ushort defaultPort, gio.cancellable.Cancellable cancellable)
+  gio.socket_connection.SocketConnection connectToUri(string uri, ushort defaultPort, gio.cancellable.Cancellable cancellable = null)
   {
     GSocketConnection* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -372,7 +372,7 @@ class SocketClient : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback
    */
-  void connectToUriAsync(string uri, ushort defaultPort, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void connectToUriAsync(string uri, ushort defaultPort, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -565,7 +565,7 @@ class SocketClient : gobject.object.ObjectG
    * Params:
    *   address = a #GSocketAddress, or %NULL
    */
-  void setLocalAddress(gio.socket_address.SocketAddress address)
+  void setLocalAddress(gio.socket_address.SocketAddress address = null)
   {
     g_socket_client_set_local_address(cast(GSocketClient*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null);
   }
@@ -595,7 +595,7 @@ class SocketClient : gobject.object.ObjectG
    *   proxyResolver = a #GProxyResolver, or %NULL for the
    *     default.
    */
-  void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver)
+  void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver = null)
   {
     g_socket_client_set_proxy_resolver(cast(GSocketClient*)cPtr, proxyResolver ? cast(GProxyResolver*)(cast(ObjectG)proxyResolver).cPtr(No.Dup) : null);
   }

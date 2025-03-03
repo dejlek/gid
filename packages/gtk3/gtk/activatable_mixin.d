@@ -275,7 +275,7 @@ template ActivatableT()
    * Params:
    *   action = the related #GtkAction or %NULL
    */
-  override void syncActionProperties(gtk.action.Action action)
+  override void syncActionProperties(gtk.action.Action action = null)
   {
     gtk_activatable_sync_action_properties(cast(GtkActivatable*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null);
   }

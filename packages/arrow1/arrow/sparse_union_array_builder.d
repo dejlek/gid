@@ -27,7 +27,7 @@ class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     return getType();
   }
 
-  this(arrow.sparse_union_data_type.SparseUnionDataType dataType)
+  this(arrow.sparse_union_data_type.SparseUnionDataType dataType = null)
   {
     GArrowSparseUnionArrayBuilder* _cretval;
     GError *_err;

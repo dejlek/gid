@@ -45,7 +45,7 @@ class Scalar : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.scalar.Scalar cast_(arrow.data_type.DataType dataType, arrow.cast_options.CastOptions options)
+  arrow.scalar.Scalar cast_(arrow.data_type.DataType dataType, arrow.cast_options.CastOptions options = null)
   {
     GArrowScalar* _cretval;
     GError *_err;
@@ -63,7 +63,7 @@ class Scalar : gobject.object.ObjectG
     return _retval;
   }
 
-  bool equalOptions(arrow.scalar.Scalar otherScalar, arrow.equal_options.EqualOptions options)
+  bool equalOptions(arrow.scalar.Scalar otherScalar, arrow.equal_options.EqualOptions options = null)
   {
     bool _retval;
     _retval = garrow_scalar_equal_options(cast(GArrowScalar*)cPtr, otherScalar ? cast(GArrowScalar*)otherScalar.cPtr(No.Dup) : null, options ? cast(GArrowEqualOptions*)options.cPtr(No.Dup) : null);

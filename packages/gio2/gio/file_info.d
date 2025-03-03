@@ -674,7 +674,7 @@ class FileInfo : gobject.object.ObjectG
    *   null-terminated array of strings of all of the possible attribute
    *   types for the given name_space, or %NULL on error.
    */
-  string[] listAttributes(string nameSpace)
+  string[] listAttributes(string nameSpace = null)
   {
     char** _cretval;
     const(char)* _nameSpace = nameSpace.toCString(No.Alloc);

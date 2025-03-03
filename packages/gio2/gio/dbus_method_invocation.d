@@ -247,7 +247,7 @@ class DBusMethodInvocation : gobject.object.ObjectG
    * Params:
    *   parameters = A #GVariant tuple with out parameters for the method or %NULL if not passing any parameters.
    */
-  void returnValue(glib.variant.VariantG parameters)
+  void returnValue(glib.variant.VariantG parameters = null)
   {
     g_dbus_method_invocation_return_value(cast(GDBusMethodInvocation*)cPtr, parameters ? cast(VariantC*)parameters.cPtr(No.Dup) : null);
   }
@@ -262,7 +262,7 @@ class DBusMethodInvocation : gobject.object.ObjectG
    *   parameters = A #GVariant tuple with out parameters for the method or %NULL if not passing any parameters.
    *   fdList = A #GUnixFDList or %NULL.
    */
-  void returnValueWithUnixFdList(glib.variant.VariantG parameters, gio.unix_fdlist.UnixFDList fdList)
+  void returnValueWithUnixFdList(glib.variant.VariantG parameters = null, gio.unix_fdlist.UnixFDList fdList = null)
   {
     g_dbus_method_invocation_return_value_with_unix_fd_list(cast(GDBusMethodInvocation*)cPtr, parameters ? cast(VariantC*)parameters.cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
   }

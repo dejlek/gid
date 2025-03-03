@@ -32,7 +32,7 @@ interface DtlsClientConnection
    * Returns: the new
    *   #GDtlsClientConnection, or %NULL on error
    */
-  static gio.dtls_client_connection.DtlsClientConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.socket_connectable.SocketConnectable serverIdentity)
+  static gio.dtls_client_connection.DtlsClientConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.socket_connectable.SocketConnectable serverIdentity = null)
   {
     GDatagramBased* _cretval;
     GError *_err;

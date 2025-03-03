@@ -1345,7 +1345,7 @@ class Window : gtk.bin.Bin
    * Params:
    *   application = a #GtkApplication, or %NULL to unset
    */
-  void setApplication(gtk.application.Application application)
+  void setApplication(gtk.application.Application application = null)
   {
     gtk_window_set_application(cast(GtkWindow*)cPtr, application ? cast(GtkApplication*)application.cPtr(No.Dup) : null);
   }
@@ -1365,7 +1365,7 @@ class Window : gtk.bin.Bin
    * Params:
    *   attachWidget = a #GtkWidget, or %NULL
    */
-  void setAttachedTo(gtk.widget.Widget attachWidget)
+  void setAttachedTo(gtk.widget.Widget attachWidget = null)
   {
     gtk_window_set_attached_to(cast(GtkWindow*)cPtr, attachWidget ? cast(GtkWidget*)attachWidget.cPtr(No.Dup) : null);
   }
@@ -1401,7 +1401,7 @@ class Window : gtk.bin.Bin
    *   defaultWidget = widget to be the default, or %NULL
    *     to unset the default widget for the toplevel
    */
-  void setDefault(gtk.widget.Widget defaultWidget)
+  void setDefault(gtk.widget.Widget defaultWidget = null)
   {
     gtk_window_set_default(cast(GtkWindow*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(No.Dup) : null);
   }
@@ -1500,7 +1500,7 @@ class Window : gtk.bin.Bin
    *   focus = widget to be the new focus widget, or %NULL to unset
    *     any focus widget for the toplevel window.
    */
-  void setFocus(gtk.widget.Widget focus)
+  void setFocus(gtk.widget.Widget focus = null)
   {
     gtk_window_set_focus(cast(GtkWindow*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
   }
@@ -1626,7 +1626,7 @@ class Window : gtk.bin.Bin
    * Params:
    *   icon = icon image, or %NULL
    */
-  void setIcon(gdkpixbuf.pixbuf.Pixbuf icon)
+  void setIcon(gdkpixbuf.pixbuf.Pixbuf icon = null)
   {
     gtk_window_set_icon(cast(GtkWindow*)cPtr, icon ? cast(PixbufC*)icon.cPtr(No.Dup) : null);
   }
@@ -1691,7 +1691,7 @@ class Window : gtk.bin.Bin
    * Params:
    *   name = the name of the themed icon
    */
-  void setIconName(string name)
+  void setIconName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_window_set_icon_name(cast(GtkWindow*)cPtr, _name);
@@ -1933,7 +1933,7 @@ class Window : gtk.bin.Bin
    * Params:
    *   titlebar = the widget to use as titlebar
    */
-  void setTitlebar(gtk.widget.Widget titlebar)
+  void setTitlebar(gtk.widget.Widget titlebar = null)
   {
     gtk_window_set_titlebar(cast(GtkWindow*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(No.Dup) : null);
   }
@@ -1957,7 +1957,7 @@ class Window : gtk.bin.Bin
    * Params:
    *   parent = parent window, or %NULL
    */
-  void setTransientFor(gtk.window.Window parent)
+  void setTransientFor(gtk.window.Window parent = null)
   {
     gtk_window_set_transient_for(cast(GtkWindow*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }

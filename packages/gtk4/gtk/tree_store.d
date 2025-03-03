@@ -108,7 +108,7 @@ class TreeStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
 
    * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
-  void append(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent)
+  void append(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null)
   {
     GtkTreeIter _iter;
     gtk_tree_store_append(cast(GtkTreeStore*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null);
@@ -165,7 +165,7 @@ class TreeStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
 
    * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
-  void insertAfter(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent, gtk.tree_iter.TreeIter sibling)
+  void insertAfter(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null, gtk.tree_iter.TreeIter sibling = null)
   {
     GtkTreeIter _iter;
     gtk_tree_store_insert_after(cast(GtkTreeStore*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null, sibling ? cast(GtkTreeIter*)sibling.cPtr(No.Dup) : null);
@@ -189,7 +189,7 @@ class TreeStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
 
    * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
-  void insertBefore(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent, gtk.tree_iter.TreeIter sibling)
+  void insertBefore(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null, gtk.tree_iter.TreeIter sibling = null)
   {
     GtkTreeIter _iter;
     gtk_tree_store_insert_before(cast(GtkTreeStore*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null, sibling ? cast(GtkTreeIter*)sibling.cPtr(No.Dup) : null);
@@ -289,7 +289,7 @@ class TreeStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
 
    * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
-  void moveAfter(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position)
+  void moveAfter(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position = null)
   {
     gtk_tree_store_move_after(cast(GtkTreeStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position.cPtr(No.Dup) : null);
   }
@@ -305,7 +305,7 @@ class TreeStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
 
    * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
-  void moveBefore(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position)
+  void moveBefore(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position = null)
   {
     gtk_tree_store_move_before(cast(GtkTreeStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position.cPtr(No.Dup) : null);
   }
@@ -323,7 +323,7 @@ class TreeStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
 
    * Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
    */
-  void prepend(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent)
+  void prepend(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null)
   {
     GtkTreeIter _iter;
     gtk_tree_store_prepend(cast(GtkTreeStore*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null);

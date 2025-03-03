@@ -111,7 +111,7 @@ class ColumnViewCell : gtk.list_item.ListItem
    * Params:
    *   child = The list item's child or %NULL to unset
    */
-  override void setChild(gtk.widget.Widget child)
+  override void setChild(gtk.widget.Widget child = null)
   {
     gtk_column_view_cell_set_child(cast(GtkColumnViewCell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

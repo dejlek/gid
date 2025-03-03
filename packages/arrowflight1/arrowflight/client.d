@@ -36,7 +36,7 @@ class Client : gobject.object.ObjectG
     return getType();
   }
 
-  this(arrowflight.location.Location location, arrowflight.client_options.ClientOptions options)
+  this(arrowflight.location.Location location, arrowflight.client_options.ClientOptions options = null)
   {
     GAFlightClient* _cretval;
     GError *_err;
@@ -82,7 +82,7 @@ class Client : gobject.object.ObjectG
     return _retval;
   }
 
-  arrowflight.stream_reader.StreamReader doGet(arrowflight.ticket.Ticket ticket, arrowflight.call_options.CallOptions options)
+  arrowflight.stream_reader.StreamReader doGet(arrowflight.ticket.Ticket ticket, arrowflight.call_options.CallOptions options = null)
   {
     GAFlightStreamReader* _cretval;
     GError *_err;
@@ -107,7 +107,7 @@ class Client : gobject.object.ObjectG
    * Returns: The #GAFlighDoPutResult holding a reader and a writer on success,
    *   %NULL on error.
    */
-  arrowflight.do_put_result.DoPutResult doPut(arrowflight.descriptor.Descriptor descriptor, arrow.schema.Schema schema, arrowflight.call_options.CallOptions options)
+  arrowflight.do_put_result.DoPutResult doPut(arrowflight.descriptor.Descriptor descriptor, arrow.schema.Schema schema, arrowflight.call_options.CallOptions options = null)
   {
     GAFlightDoPutResult* _cretval;
     GError *_err;
@@ -118,7 +118,7 @@ class Client : gobject.object.ObjectG
     return _retval;
   }
 
-  arrowflight.info.Info getFlightInfo(arrowflight.descriptor.Descriptor descriptor, arrowflight.call_options.CallOptions options)
+  arrowflight.info.Info getFlightInfo(arrowflight.descriptor.Descriptor descriptor, arrowflight.call_options.CallOptions options = null)
   {
     GAFlightInfo* _cretval;
     GError *_err;
@@ -129,7 +129,7 @@ class Client : gobject.object.ObjectG
     return _retval;
   }
 
-  arrowflight.info.Info[] listFlights(arrowflight.criteria.Criteria criteria, arrowflight.call_options.CallOptions options)
+  arrowflight.info.Info[] listFlights(arrowflight.criteria.Criteria criteria = null, arrowflight.call_options.CallOptions options = null)
   {
     GList* _cretval;
     GError *_err;

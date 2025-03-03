@@ -85,7 +85,7 @@ class BindingGroup : gobject.object.ObjectG
    *     transformation function from the target to the source object,
    *     or %NULL to use the default
    */
-  void bindFull(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo, gobject.closure.Closure transformFrom)
+  void bindFull(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo = null, gobject.closure.Closure transformFrom = null)
   {
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
@@ -113,7 +113,7 @@ class BindingGroup : gobject.object.ObjectG
    *   source = the source #GObject,
    *     or %NULL to clear it
    */
-  void setSource(gobject.object.ObjectG source)
+  void setSource(gobject.object.ObjectG source = null)
   {
     g_binding_group_set_source(cast(GBindingGroup*)cPtr, source ? cast(ObjectC*)source.cPtr(No.Dup) : null);
   }

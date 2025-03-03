@@ -88,7 +88,7 @@ class Resolver : gobject.object.ObjectG
    * Returns: a hostname $(LPAREN)either ASCII-only, or in ASCII-encoded
    *   form$(RPAREN), or %NULL on error.
    */
-  string lookupByAddress(gio.inet_address.InetAddress address, gio.cancellable.Cancellable cancellable)
+  string lookupByAddress(gio.inet_address.InetAddress address, gio.cancellable.Cancellable cancellable = null)
   {
     char* _cretval;
     GError *_err;
@@ -108,7 +108,7 @@ class Resolver : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call after resolution completes
    */
-  void lookupByAddressAsync(gio.inet_address.InetAddress address, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void lookupByAddressAsync(gio.inet_address.InetAddress address, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -173,7 +173,7 @@ class Resolver : gobject.object.ObjectG
    *   must unref each of the addresses and free the list when you are
    *   done with it. $(LPAREN)You can use [gio.resolver.Resolver.freeAddresses] to do this.$(RPAREN)
    */
-  gio.inet_address.InetAddress[] lookupByName(string hostname, gio.cancellable.Cancellable cancellable)
+  gio.inet_address.InetAddress[] lookupByName(string hostname, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
     const(char)* _hostname = hostname.toCString(No.Alloc);
@@ -195,7 +195,7 @@ class Resolver : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call after resolution completes
    */
-  void lookupByNameAsync(string hostname, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void lookupByNameAsync(string hostname, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -247,7 +247,7 @@ class Resolver : gobject.object.ObjectG
    *   must unref each of the addresses and free the list when you are
    *   done with it. $(LPAREN)You can use [gio.resolver.Resolver.freeAddresses] to do this.$(RPAREN)
    */
-  gio.inet_address.InetAddress[] lookupByNameWithFlags(string hostname, gio.types.ResolverNameLookupFlags flags, gio.cancellable.Cancellable cancellable)
+  gio.inet_address.InetAddress[] lookupByNameWithFlags(string hostname, gio.types.ResolverNameLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
     const(char)* _hostname = hostname.toCString(No.Alloc);
@@ -270,7 +270,7 @@ class Resolver : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call after resolution completes
    */
-  void lookupByNameWithFlagsAsync(string hostname, gio.types.ResolverNameLookupFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void lookupByNameWithFlagsAsync(string hostname, gio.types.ResolverNameLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -327,7 +327,7 @@ class Resolver : gobject.object.ObjectG
    *   when you are done with it. $(LPAREN)You can use [glib.list.List.freeFull] with
    *   [glib.variant.VariantG.unref] to do this.$(RPAREN)
    */
-  glib.variant.VariantG[] lookupRecords(string rrname, gio.types.ResolverRecordType recordType, gio.cancellable.Cancellable cancellable)
+  glib.variant.VariantG[] lookupRecords(string rrname, gio.types.ResolverRecordType recordType, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
     const(char)* _rrname = rrname.toCString(No.Alloc);
@@ -350,7 +350,7 @@ class Resolver : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call after resolution completes
    */
-  void lookupRecordsAsync(string rrname, gio.types.ResolverRecordType recordType, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void lookupRecordsAsync(string rrname, gio.types.ResolverRecordType recordType, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -420,7 +420,7 @@ class Resolver : gobject.object.ObjectG
    *   list when you are done with it. $(LPAREN)You can use [gio.resolver.Resolver.freeTargets] to do
    *   this.$(RPAREN)
    */
-  gio.srv_target.SrvTarget[] lookupService(string service, string protocol, string domain, gio.cancellable.Cancellable cancellable)
+  gio.srv_target.SrvTarget[] lookupService(string service, string protocol, string domain, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
     const(char)* _service = service.toCString(No.Alloc);
@@ -447,7 +447,7 @@ class Resolver : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call after resolution completes
    */
-  void lookupServiceAsync(string service, string protocol, string domain, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void lookupServiceAsync(string service, string protocol, string domain, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

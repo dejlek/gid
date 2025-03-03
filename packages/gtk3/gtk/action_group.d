@@ -118,7 +118,7 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
    *     the format understood by [gtk.global.acceleratorParse], or "" for no accelerator, or
    *     %NULL to use the stock accelerator
    */
-  void addActionWithAccel(gtk.action.Action action, string accelerator)
+  void addActionWithAccel(gtk.action.Action action, string accelerator = null)
   {
     const(char)* _accelerator = accelerator.toCString(No.Alloc);
     gtk_action_group_add_action_with_accel(cast(GtkActionGroup*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null, _accelerator);
@@ -219,7 +219,7 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
    * Params:
    *   accelGroup = a #GtkAccelGroup to set or %NULL
    */
-  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup)
+  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null)
   {
     gtk_action_group_set_accel_group(cast(GtkActionGroup*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
   }
@@ -272,7 +272,7 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
    *   domain = the translation domain to use for [glib.global.dgettext]
    *     calls, or %NULL to use the domain set with textdomain$(LPAREN)$(RPAREN)
    */
-  void setTranslationDomain(string domain)
+  void setTranslationDomain(string domain = null)
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     gtk_action_group_set_translation_domain(cast(GtkActionGroup*)cPtr, _domain);

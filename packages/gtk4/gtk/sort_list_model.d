@@ -64,7 +64,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
    *   sorter = the `GtkSorter` to sort model with,
    * Returns: a new `GtkSortListModel`
    */
-  this(gio.list_model.ListModel model, gtk.sorter.Sorter sorter)
+  this(gio.list_model.ListModel model = null, gtk.sorter.Sorter sorter = null)
   {
     GtkSortListModel* _cretval;
     _cretval = gtk_sort_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
@@ -171,7 +171,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
    * Params:
    *   model = The model to be sorted
    */
-  void setModel(gio.list_model.ListModel model)
+  void setModel(gio.list_model.ListModel model = null)
   {
     gtk_sort_list_model_set_model(cast(GtkSortListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -181,7 +181,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
    * Params:
    *   sorter = the `GtkSorter` to sort model with
    */
-  void setSectionSorter(gtk.sorter.Sorter sorter)
+  void setSectionSorter(gtk.sorter.Sorter sorter = null)
   {
     gtk_sort_list_model_set_section_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }
@@ -191,7 +191,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
    * Params:
    *   sorter = the `GtkSorter` to sort model with
    */
-  void setSorter(gtk.sorter.Sorter sorter)
+  void setSorter(gtk.sorter.Sorter sorter = null)
   {
     gtk_sort_list_model_set_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }

@@ -390,7 +390,7 @@ class Surface : gobject.object.ObjectG
    * Params:
    *   cursor = a `GdkCursor`
    */
-  void setCursor(gdk.cursor.Cursor cursor)
+  void setCursor(gdk.cursor.Cursor cursor = null)
   {
     gdk_surface_set_cursor(cast(GdkSurface*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
@@ -447,7 +447,7 @@ class Surface : gobject.object.ObjectG
    *   region = a region, or %NULL to make the entire
    *     surface opaque
    */
-  void setOpaqueRegion(cairo.region.Region region)
+  void setOpaqueRegion(cairo.region.Region region = null)
   {
     gdk_surface_set_opaque_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }

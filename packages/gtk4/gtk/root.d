@@ -56,5 +56,5 @@ interface Root
    *   focus = widget to be the new focus widget, or %NULL
    *     to unset the focus widget
    */
-  void setFocus(gtk.widget.Widget focus);
+  void setFocus(gtk.widget.Widget focus = null);
 }

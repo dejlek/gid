@@ -304,7 +304,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
    * Params:
    *   location = location to select, or %NULL for no current path
    */
-  void setLocation(gio.file.File location)
+  void setLocation(gio.file.File location = null)
   {
     gtk_places_sidebar_set_location(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);
   }

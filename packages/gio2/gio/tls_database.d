@@ -79,7 +79,7 @@ class TlsDatabase : gobject.object.ObjectG
    * Returns: a newly allocated
    *   #GTlsCertificate, or %NULL. Use [gobject.object.ObjectG.unref] to release the certificate.
    */
-  gio.tls_certificate.TlsCertificate lookupCertificateForHandle(string handle, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable)
+  gio.tls_certificate.TlsCertificate lookupCertificateForHandle(string handle, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GTlsCertificate* _cretval;
     const(char)* _handle = handle.toCString(No.Alloc);
@@ -101,7 +101,7 @@ class TlsDatabase : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the operation completes
    */
-  void lookupCertificateForHandleAsync(string handle, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void lookupCertificateForHandleAsync(string handle, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -165,7 +165,7 @@ class TlsDatabase : gobject.object.ObjectG
    * Returns: a newly allocated issuer #GTlsCertificate,
    *   or %NULL. Use [gobject.object.ObjectG.unref] to release the certificate.
    */
-  gio.tls_certificate.TlsCertificate lookupCertificateIssuer(gio.tls_certificate.TlsCertificate certificate, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable)
+  gio.tls_certificate.TlsCertificate lookupCertificateIssuer(gio.tls_certificate.TlsCertificate certificate, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GTlsCertificate* _cretval;
     GError *_err;
@@ -186,7 +186,7 @@ class TlsDatabase : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the operation completes
    */
-  void lookupCertificateIssuerAsync(gio.tls_certificate.TlsCertificate certificate, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void lookupCertificateIssuerAsync(gio.tls_certificate.TlsCertificate certificate, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -232,7 +232,7 @@ class TlsDatabase : gobject.object.ObjectG
    * Returns: a newly allocated list of #GTlsCertificate
    *   objects. Use [gobject.object.ObjectG.unref] on each certificate, and [glib.list.List.free] on the release the list.
    */
-  gio.tls_certificate.TlsCertificate[] lookupCertificatesIssuedBy(ubyte[] issuerRawDn, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable)
+  gio.tls_certificate.TlsCertificate[] lookupCertificatesIssuedBy(ubyte[] issuerRawDn, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
     auto _issuerRawDn = gByteArrayFromD(issuerRawDn);
@@ -258,7 +258,7 @@ class TlsDatabase : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the operation completes
    */
-  void lookupCertificatesIssuedByAsync(ubyte[] issuerRawDn, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void lookupCertificatesIssuedByAsync(ubyte[] issuerRawDn, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -355,7 +355,7 @@ class TlsDatabase : gobject.object.ObjectG
    * Returns: the appropriate #GTlsCertificateFlags which represents the
    *   result of verification.
    */
-  gio.types.TlsCertificateFlags verifyChain(gio.tls_certificate.TlsCertificate chain, string purpose, gio.socket_connectable.SocketConnectable identity, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseVerifyFlags flags, gio.cancellable.Cancellable cancellable)
+  gio.types.TlsCertificateFlags verifyChain(gio.tls_certificate.TlsCertificate chain, string purpose, gio.socket_connectable.SocketConnectable identity, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseVerifyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GTlsCertificateFlags _cretval;
     const(char)* _purpose = purpose.toCString(No.Alloc);
@@ -380,7 +380,7 @@ class TlsDatabase : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the operation completes
    */
-  void verifyChainAsync(gio.tls_certificate.TlsCertificate chain, string purpose, gio.socket_connectable.SocketConnectable identity, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseVerifyFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void verifyChainAsync(gio.tls_certificate.TlsCertificate chain, string purpose, gio.socket_connectable.SocketConnectable identity, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseVerifyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

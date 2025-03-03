@@ -72,7 +72,7 @@ interface Retrievable
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void retrieveSecret(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void retrieveSecret(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Complete asynchronous operation to retrieve the secret value of this object.
@@ -94,5 +94,5 @@ interface Retrievable
    * Returns: the secret value which should be
    *   released with [secret.value.Value.unref], or %NULL
    */
-  secret.value.Value retrieveSecretSync(gio.cancellable.Cancellable cancellable);
+  secret.value.Value retrieveSecretSync(gio.cancellable.Cancellable cancellable = null);
 }

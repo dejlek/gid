@@ -203,7 +203,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
    * Params:
    *   child = the widget to add
    */
-  void setEndChild(gtk.widget.Widget child)
+  void setEndChild(gtk.widget.Widget child = null)
   {
     gtk_paned_set_end_child(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -265,7 +265,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
    * Params:
    *   child = the widget to add
    */
-  void setStartChild(gtk.widget.Widget child)
+  void setStartChild(gtk.widget.Widget child = null)
   {
     gtk_paned_set_start_child(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

@@ -104,7 +104,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
    * Params:
    *   model = a `GMenuModel`
    */
-  void setExtraMenu(gio.menu_model.MenuModel model)
+  void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
     gtk_password_entry_set_extra_menu(cast(GtkPasswordEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }

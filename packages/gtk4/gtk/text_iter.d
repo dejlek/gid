@@ -128,7 +128,7 @@ class TextIter : gobject.boxed.Boxed
    *   limit = search limit
    * Returns: whether a match was found
    */
-  bool backwardFindChar(gtk.types.TextCharPredicate pred, gtk.text_iter.TextIter limit)
+  bool backwardFindChar(gtk.types.TextCharPredicate pred, gtk.text_iter.TextIter limit = null)
   {
     extern(C) bool _predCallback(dchar ch, void* userData)
     {
@@ -195,7 +195,7 @@ class TextIter : gobject.boxed.Boxed
    *   limit = location of last possible match_start, or %NULL for start of buffer
    * Returns: whether a match was found
    */
-  bool backwardSearch(string str, gtk.types.TextSearchFlags flags, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, gtk.text_iter.TextIter limit)
+  bool backwardSearch(string str, gtk.types.TextSearchFlags flags, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, gtk.text_iter.TextIter limit = null)
   {
     bool _retval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -249,7 +249,7 @@ class TextIter : gobject.boxed.Boxed
    *   tag = a `GtkTextTag`
    * Returns: whether we found a tag toggle before iter
    */
-  bool backwardToTagToggle(gtk.text_tag.TextTag tag)
+  bool backwardToTagToggle(gtk.text_tag.TextTag tag = null)
   {
     bool _retval;
     _retval = gtk_text_iter_backward_to_tag_toggle(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
@@ -495,7 +495,7 @@ class TextIter : gobject.boxed.Boxed
    *   tag = a `GtkTextTag`
    * Returns: whether iter is the end of a range tagged with tag
    */
-  bool endsTag(gtk.text_tag.TextTag tag)
+  bool endsTag(gtk.text_tag.TextTag tag = null)
   {
     bool _retval;
     _retval = gtk_text_iter_ends_tag(cast(const(GtkTextIter)*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
@@ -614,7 +614,7 @@ class TextIter : gobject.boxed.Boxed
    *   limit = search limit
    * Returns: whether a match was found
    */
-  bool forwardFindChar(gtk.types.TextCharPredicate pred, gtk.text_iter.TextIter limit)
+  bool forwardFindChar(gtk.types.TextCharPredicate pred, gtk.text_iter.TextIter limit = null)
   {
     extern(C) bool _predCallback(dchar ch, void* userData)
     {
@@ -683,7 +683,7 @@ class TextIter : gobject.boxed.Boxed
    *   limit = location of last possible match_end, or %NULL for the end of the buffer
    * Returns: whether a match was found
    */
-  bool forwardSearch(string str, gtk.types.TextSearchFlags flags, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, gtk.text_iter.TextIter limit)
+  bool forwardSearch(string str, gtk.types.TextSearchFlags flags, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, gtk.text_iter.TextIter limit = null)
   {
     bool _retval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -767,7 +767,7 @@ class TextIter : gobject.boxed.Boxed
    *   tag = a `GtkTextTag`
    * Returns: whether we found a tag toggle after iter
    */
-  bool forwardToTagToggle(gtk.text_tag.TextTag tag)
+  bool forwardToTagToggle(gtk.text_tag.TextTag tag = null)
   {
     bool _retval;
     _retval = gtk_text_iter_forward_to_tag_toggle(cast(GtkTextIter*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
@@ -1437,7 +1437,7 @@ class TextIter : gobject.boxed.Boxed
    *   tag = a `GtkTextTag`
    * Returns: whether iter is the start of a range tagged with tag
    */
-  bool startsTag(gtk.text_tag.TextTag tag)
+  bool startsTag(gtk.text_tag.TextTag tag = null)
   {
     bool _retval;
     _retval = gtk_text_iter_starts_tag(cast(const(GtkTextIter)*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
@@ -1466,7 +1466,7 @@ class TextIter : gobject.boxed.Boxed
    *   tag = a `GtkTextTag`
    * Returns: whether tag is toggled on or off at iter
    */
-  bool togglesTag(gtk.text_tag.TextTag tag)
+  bool togglesTag(gtk.text_tag.TextTag tag = null)
   {
     bool _retval;
     _retval = gtk_text_iter_toggles_tag(cast(const(GtkTextIter)*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);

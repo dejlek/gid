@@ -133,7 +133,7 @@ class DateTime : gobject.boxed.Boxed
    *     timezone, or %NULL.
    * Returns: a new #GDateTime, or %NULL
    */
-  static glib.date_time.DateTime newFromIso8601(string text, glib.time_zone.TimeZone defaultTz)
+  static glib.date_time.DateTime newFromIso8601(string text, glib.time_zone.TimeZone defaultTz = null)
   {
     GDateTime* _cretval;
     const(char)* _text = text.toCString(No.Alloc);

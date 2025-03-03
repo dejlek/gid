@@ -106,7 +106,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
    *   model = the list model to use
    * Returns: a new `GtkColumnView`
    */
-  this(gtk.selection_model.SelectionModel model)
+  this(gtk.selection_model.SelectionModel model = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_column_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
@@ -307,7 +307,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
    *   scroll = details of how to perform
    *     the scroll operation or %NULL to scroll into view
    */
-  void scrollTo(uint pos, gtk.column_view_column.ColumnViewColumn column, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll)
+  void scrollTo(uint pos, gtk.column_view_column.ColumnViewColumn column, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll = null)
   {
     gtk_column_view_scroll_to(cast(GtkColumnView*)cPtr, pos, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
@@ -330,7 +330,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   factory = the factory to use
    */
-  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory)
+  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
     gtk_column_view_set_header_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -341,7 +341,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   model = the model to use
    */
-  void setModel(gtk.selection_model.SelectionModel model)
+  void setModel(gtk.selection_model.SelectionModel model = null)
   {
     gtk_column_view_set_model(cast(GtkColumnView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -365,7 +365,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   factory = The row factory
    */
-  void setRowFactory(gtk.list_item_factory.ListItemFactory factory)
+  void setRowFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
     gtk_column_view_set_row_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }

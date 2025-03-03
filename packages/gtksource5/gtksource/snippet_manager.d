@@ -147,7 +147,7 @@ class SnippetManager : gobject.object.ObjectG
    *   triggerPrefix = a prefix for a trigger to activate
    * Returns: a #GListModel of #GtkSourceSnippet.
    */
-  gio.list_model.ListModel listMatching(string group, string languageId, string triggerPrefix)
+  gio.list_model.ListModel listMatching(string group = null, string languageId = null, string triggerPrefix = null)
   {
     GListModel* _cretval;
     const(char)* _group = group.toCString(No.Alloc);

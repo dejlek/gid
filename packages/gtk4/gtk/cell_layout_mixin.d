@@ -226,7 +226,7 @@ template CellLayoutT()
    *   cell = a `GtkCellRenderer`
    *   func = the `GtkCellLayout`DataFunc to use
    */
-  override void setCellDataFunc(gtk.cell_renderer.CellRenderer cell, gtk.types.CellLayoutDataFunc func)
+  override void setCellDataFunc(gtk.cell_renderer.CellRenderer cell, gtk.types.CellLayoutDataFunc func = null)
   {
     extern(C) void _funcCallback(GtkCellLayout* cellLayout, GtkCellRenderer* cell, GtkTreeModel* treeModel, GtkTreeIter* iter, void* data)
     {

@@ -112,7 +112,7 @@ template TlsBackendT()
    * Params:
    *   database = the #GTlsDatabase
    */
-  override void setDefaultDatabase(gio.tls_database.TlsDatabase database)
+  override void setDefaultDatabase(gio.tls_database.TlsDatabase database = null)
   {
     g_tls_backend_set_default_database(cast(GTlsBackend*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
   }

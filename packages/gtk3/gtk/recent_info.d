@@ -51,7 +51,7 @@ class RecentInfo : gobject.boxed.Boxed
    *   In case of error, error will be set either with a
    *   %GTK_RECENT_MANAGER_ERROR or a %G_IO_ERROR
    */
-  gio.app_info.AppInfo createAppInfo(string appName)
+  gio.app_info.AppInfo createAppInfo(string appName = null)
   {
     GAppInfo* _cretval;
     const(char)* _appName = appName.toCString(No.Alloc);

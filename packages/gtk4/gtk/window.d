@@ -645,7 +645,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
    * Params:
    *   application = a `GtkApplication`, or %NULL to unset
    */
-  void setApplication(gtk.application.Application application)
+  void setApplication(gtk.application.Application application = null)
   {
     gtk_window_set_application(cast(GtkWindow*)cPtr, application ? cast(GtkApplication*)application.cPtr(No.Dup) : null);
   }
@@ -655,7 +655,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
    * Params:
    *   child = the child widget
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_window_set_child(cast(GtkWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -721,7 +721,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
    *   defaultWidget = widget to be the default
    *     to unset the default widget for the toplevel
    */
-  void setDefaultWidget(gtk.widget.Widget defaultWidget)
+  void setDefaultWidget(gtk.widget.Widget defaultWidget = null)
   {
     gtk_window_set_default_widget(cast(GtkWindow*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(No.Dup) : null);
   }
@@ -781,7 +781,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
    *   focus = widget to be the new focus widget, or %NULL to unset
    *     any focus widget for the toplevel window.
    */
-  void setFocus(gtk.widget.Widget focus)
+  void setFocus(gtk.widget.Widget focus = null)
   {
     gtk_window_set_focus(cast(GtkWindow*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
   }
@@ -829,7 +829,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
    * Params:
    *   name = the name of the themed icon
    */
-  void setIconName(string name)
+  void setIconName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_window_set_icon_name(cast(GtkWindow*)cPtr, _name);
@@ -906,7 +906,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
    * Params:
    *   title = title of the window
    */
-  void setTitle(string title)
+  void setTitle(string title = null)
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_window_set_title(cast(GtkWindow*)cPtr, _title);
@@ -925,7 +925,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
    * Params:
    *   titlebar = the widget to use as titlebar
    */
-  void setTitlebar(gtk.widget.Widget titlebar)
+  void setTitlebar(gtk.widget.Widget titlebar = null)
   {
     gtk_window_set_titlebar(cast(GtkWindow*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(No.Dup) : null);
   }
@@ -943,7 +943,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
    * Params:
    *   parent = parent window
    */
-  void setTransientFor(gtk.window.Window parent)
+  void setTransientFor(gtk.window.Window parent = null)
   {
     gtk_window_set_transient_for(cast(GtkWindow*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }

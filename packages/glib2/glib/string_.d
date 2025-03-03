@@ -79,7 +79,7 @@ class String : gobject.boxed.Boxed
    *     start with an empty string
    * Returns: the new #GString
    */
-  this(string init_)
+  this(string init_ = null)
   {
     GString* _cretval;
     const(char)* _init_ = init_.toCString(No.Alloc);
@@ -119,7 +119,7 @@ class String : gobject.boxed.Boxed
    *     Passing %NULL creates an empty string.
    * Returns: the new #GString
    */
-  static glib.string_.String newTake(string init_)
+  static glib.string_.String newTake(string init_ = null)
   {
     GString* _cretval;
     char* _init_ = init_.toCString(Yes.Alloc);

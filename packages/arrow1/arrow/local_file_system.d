@@ -26,7 +26,7 @@ class LocalFileSystem : arrow.file_system.FileSystem
     return getType();
   }
 
-  this(arrow.local_file_system_options.LocalFileSystemOptions options)
+  this(arrow.local_file_system_options.LocalFileSystemOptions options = null)
   {
     GArrowLocalFileSystem* _cretval;
     _cretval = garrow_local_file_system_new(options ? cast(GArrowLocalFileSystemOptions*)options.cPtr(No.Dup) : null);

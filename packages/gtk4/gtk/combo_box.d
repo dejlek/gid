@@ -389,7 +389,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  bool setActiveId(string activeId)
+  bool setActiveId(string activeId = null)
   {
     bool _retval;
     const(char)* _activeId = activeId.toCString(No.Alloc);
@@ -405,7 +405,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  void setActiveIter(gtk.tree_iter.TreeIter iter)
+  void setActiveIter(gtk.tree_iter.TreeIter iter = null)
   {
     gtk_combo_box_set_active_iter(cast(GtkComboBox*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
@@ -430,7 +430,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_combo_box_set_child(cast(GtkComboBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -482,7 +482,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  void setModel(gtk.tree_model.TreeModel model)
+  void setModel(gtk.tree_model.TreeModel model = null)
   {
     gtk_combo_box_set_model(cast(GtkComboBox*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -511,7 +511,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func)
+  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func = null)
   {
     extern(C) bool _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
     {

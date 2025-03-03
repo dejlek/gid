@@ -73,7 +73,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.chunked_array.ChunkedArray filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options)
+  arrow.chunked_array.ChunkedArray filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowChunkedArray* _cretval;
     GError *_err;
@@ -84,7 +84,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.chunked_array.ChunkedArray filterChunkedArray(arrow.chunked_array.ChunkedArray filter, arrow.filter_options.FilterOptions options)
+  arrow.chunked_array.ChunkedArray filterChunkedArray(arrow.chunked_array.ChunkedArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowChunkedArray* _cretval;
     GError *_err;
@@ -174,7 +174,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.chunked_array.ChunkedArray take(arrow.array.Array indices, arrow.take_options.TakeOptions options)
+  arrow.chunked_array.ChunkedArray take(arrow.array.Array indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowChunkedArray* _cretval;
     GError *_err;
@@ -185,7 +185,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.chunked_array.ChunkedArray takeChunkedArray(arrow.chunked_array.ChunkedArray indices, arrow.take_options.TakeOptions options)
+  arrow.chunked_array.ChunkedArray takeChunkedArray(arrow.chunked_array.ChunkedArray indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowChunkedArray* _cretval;
     GError *_err;

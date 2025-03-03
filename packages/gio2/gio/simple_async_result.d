@@ -359,7 +359,7 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
 
    * Deprecated: Use #GTask instead.
    */
-  void setCheckCancellable(gio.cancellable.Cancellable checkCancellable)
+  void setCheckCancellable(gio.cancellable.Cancellable checkCancellable = null)
   {
     g_simple_async_result_set_check_cancellable(cast(GSimpleAsyncResult*)cPtr, checkCancellable ? cast(GCancellable*)checkCancellable.cPtr(No.Dup) : null);
   }

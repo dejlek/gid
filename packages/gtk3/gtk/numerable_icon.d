@@ -147,7 +147,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
    * Params:
    *   icon = a #GIcon, or %NULL
    */
-  void setBackgroundGicon(gio.icon.Icon icon)
+  void setBackgroundGicon(gio.icon.Icon icon = null)
   {
     gtk_numerable_icon_set_background_gicon(cast(GtkNumerableIcon*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
@@ -164,7 +164,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
    * Params:
    *   iconName = an icon name, or %NULL
    */
-  void setBackgroundIconName(string iconName)
+  void setBackgroundIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_numerable_icon_set_background_icon_name(cast(GtkNumerableIcon*)cPtr, _iconName);
@@ -201,7 +201,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
    * Params:
    *   label = a short label, or %NULL
    */
-  void setLabel(string label)
+  void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_numerable_icon_set_label(cast(GtkNumerableIcon*)cPtr, _label);

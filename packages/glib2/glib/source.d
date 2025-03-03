@@ -132,7 +132,7 @@ class Source : gobject.boxed.Boxed
    * Returns: the ID $(LPAREN)greater than 0$(RPAREN) for the source within the
    *   #GMainContext.
    */
-  uint attach(glib.main_context.MainContext context)
+  uint attach(glib.main_context.MainContext context = null)
   {
     uint _retval;
     _retval = g_source_attach(cast(GSource*)cPtr, context ? cast(GMainContext*)context.cPtr(No.Dup) : null);

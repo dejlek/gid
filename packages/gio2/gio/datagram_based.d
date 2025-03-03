@@ -111,7 +111,7 @@ interface DatagramBased
    *   cancellable = a #GCancellable
    * Returns: %TRUE if the condition was met, %FALSE otherwise
    */
-  bool conditionWait(glib.types.IOCondition condition, long timeout, gio.cancellable.Cancellable cancellable);
+  bool conditionWait(glib.types.IOCondition condition, long timeout, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Creates a #GSource that can be attached to a #GMainContext to monitor for
@@ -130,5 +130,5 @@ interface DatagramBased
    *   cancellable = a #GCancellable
    * Returns: a newly allocated #GSource
    */
-  glib.source.Source createSource(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable);
+  glib.source.Source createSource(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable = null);
 }

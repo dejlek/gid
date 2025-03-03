@@ -96,7 +96,7 @@ class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
    * Params:
    *   model = The model to be sliced
    */
-  void setModel(gio.list_model.ListModel model)
+  void setModel(gio.list_model.ListModel model = null)
   {
     gtk_slice_list_model_set_model(cast(GtkSliceListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

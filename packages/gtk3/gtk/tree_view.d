@@ -1024,7 +1024,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
    *   column = The #GtkTreeViewColumn to be moved.
    *   baseColumn = The #GtkTreeViewColumn to be moved relative to, or %NULL.
    */
-  void moveColumnAfter(gtk.tree_view_column.TreeViewColumn column, gtk.tree_view_column.TreeViewColumn baseColumn)
+  void moveColumnAfter(gtk.tree_view_column.TreeViewColumn column, gtk.tree_view_column.TreeViewColumn baseColumn = null)
   {
     gtk_tree_view_move_column_after(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, baseColumn ? cast(GtkTreeViewColumn*)baseColumn.cPtr(No.Dup) : null);
   }
@@ -1133,7 +1133,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
    * Params:
    *   func = A function to determine which columns are reorderable, or %NULL.
    */
-  void setColumnDragFunction(gtk.types.TreeViewColumnDropFunc func)
+  void setColumnDragFunction(gtk.types.TreeViewColumnDropFunc func = null)
   {
     extern(C) bool _funcCallback(GtkTreeView* treeView, GtkTreeViewColumn* column, GtkTreeViewColumn* prevColumn, GtkTreeViewColumn* nextColumn, void* data)
     {
@@ -1204,7 +1204,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
 
    * Deprecated: Accessibility does not need the function anymore.
    */
-  void setDestroyCountFunc(gtk.types.TreeDestroyCountFunc func)
+  void setDestroyCountFunc(gtk.types.TreeDestroyCountFunc func = null)
   {
     extern(C) void _funcCallback(GtkTreeView* treeView, GtkTreePath* path, int children, void* userData)
     {
@@ -1264,7 +1264,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
    * Params:
    *   column = %NULL, or the column to draw the expander arrow at.
    */
-  void setExpanderColumn(gtk.tree_view_column.TreeViewColumn column)
+  void setExpanderColumn(gtk.tree_view_column.TreeViewColumn column = null)
   {
     gtk_tree_view_set_expander_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null);
   }
@@ -1301,7 +1301,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.scrollable.Scrollable.setHadjustment]
    */
-  void setHadjustment(gtk.adjustment.Adjustment adjustment)
+  void setHadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_tree_view_set_hadjustment(cast(GtkTreeView*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
@@ -1372,7 +1372,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
    * Params:
    *   model = The model.
    */
-  void setModel(gtk.tree_model.TreeModel model)
+  void setModel(gtk.tree_model.TreeModel model = null)
   {
     gtk_tree_view_set_model(cast(GtkTreeView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -1406,7 +1406,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
    * Params:
    *   func = a #GtkTreeViewRowSeparatorFunc
    */
-  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func)
+  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func = null)
   {
     extern(C) bool _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
     {
@@ -1481,7 +1481,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
    * Params:
    *   entry = the entry the interactive search code of tree_view should use or %NULL
    */
-  void setSearchEntry(gtk.entry.Entry entry)
+  void setSearchEntry(gtk.entry.Entry entry = null)
   {
     gtk_tree_view_set_search_entry(cast(GtkTreeView*)cPtr, entry ? cast(GtkEntry*)entry.cPtr(No.Dup) : null);
   }
@@ -1516,7 +1516,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
    *   func = the function to use to position the search dialog, or %NULL
    *     to use the default search position function
    */
-  void setSearchPositionFunc(gtk.types.TreeViewSearchPositionFunc func)
+  void setSearchPositionFunc(gtk.types.TreeViewSearchPositionFunc func = null)
   {
     extern(C) void _funcCallback(GtkTreeView* treeView, GtkWidget* searchDialog, void* userData)
     {
@@ -1563,7 +1563,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
    *   column = a #GtkTreeViewColumn or %NULL
    *   cell = a #GtkCellRenderer or %NULL
    */
-  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, gtk.cell_renderer.CellRenderer cell)
+  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path = null, gtk.tree_view_column.TreeViewColumn column = null, gtk.cell_renderer.CellRenderer cell = null)
   {
     gtk_tree_view_set_tooltip_cell(cast(GtkTreeView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null);
   }
@@ -1605,7 +1605,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.scrollable.Scrollable.setVadjustment]
    */
-  void setVadjustment(gtk.adjustment.Adjustment adjustment)
+  void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_tree_view_set_vadjustment(cast(GtkTreeView*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }

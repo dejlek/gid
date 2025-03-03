@@ -66,7 +66,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void perform(string windowId, glib.variant_type.VariantType returnType, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void perform(string windowId, glib.variant_type.VariantType returnType, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

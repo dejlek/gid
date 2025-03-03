@@ -201,5 +201,5 @@ interface CellLayout
    *   cell = a `GtkCellRenderer`
    *   func = the `GtkCellLayout`DataFunc to use
    */
-  void setCellDataFunc(gtk.cell_renderer.CellRenderer cell, gtk.types.CellLayoutDataFunc func);
+  void setCellDataFunc(gtk.cell_renderer.CellRenderer cell, gtk.types.CellLayoutDataFunc func = null);
 }

@@ -71,18 +71,18 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
     return _retval;
   }
 
-  void setGicon(gio.icon.Icon icon)
+  void setGicon(gio.icon.Icon icon = null)
   {
     gtk_source_gutter_renderer_pixbuf_set_gicon(cast(GtkSourceGutterRendererPixbuf*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
-  void setIconName(string iconName)
+  void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_source_gutter_renderer_pixbuf_set_icon_name(cast(GtkSourceGutterRendererPixbuf*)cPtr, _iconName);
   }
 
-  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_source_gutter_renderer_pixbuf_set_pixbuf(cast(GtkSourceGutterRendererPixbuf*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }

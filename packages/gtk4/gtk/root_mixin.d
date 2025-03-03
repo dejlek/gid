@@ -62,7 +62,7 @@ template RootT()
    *   focus = widget to be the new focus widget, or %NULL
    *     to unset the focus widget
    */
-  override void setFocus(gtk.widget.Widget focus)
+  override void setFocus(gtk.widget.Widget focus = null)
   {
     gtk_root_set_focus(cast(GtkRoot*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
   }

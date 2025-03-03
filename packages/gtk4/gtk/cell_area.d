@@ -919,7 +919,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
    * Params:
    *   renderer = the `GtkCellRenderer` to give focus to
    */
-  void setFocusCell(gtk.cell_renderer.CellRenderer renderer)
+  void setFocusCell(gtk.cell_renderer.CellRenderer renderer = null)
   {
     gtk_cell_area_set_focus_cell(cast(GtkCellArea*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null);
   }

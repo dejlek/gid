@@ -178,7 +178,7 @@ class ToggleButton : gtk.button.Button
    *   group = another `GtkToggleButton` to
    *     form a group with
    */
-  void setGroup(gtk.toggle_button.ToggleButton group)
+  void setGroup(gtk.toggle_button.ToggleButton group = null)
   {
     gtk_toggle_button_set_group(cast(GtkToggleButton*)cPtr, group ? cast(GtkToggleButton*)group.cPtr(No.Dup) : null);
   }

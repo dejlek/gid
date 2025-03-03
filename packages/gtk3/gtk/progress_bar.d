@@ -239,7 +239,7 @@ class ProgressBar : gtk.widget.Widget, gtk.orientable.Orientable
    * Params:
    *   text = a UTF-8 string, or %NULL
    */
-  void setText(string text)
+  void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_progress_bar_set_text(cast(GtkProgressBar*)cPtr, _text);

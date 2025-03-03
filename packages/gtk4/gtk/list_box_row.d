@@ -161,7 +161,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
    * Params:
    *   child = the child widget
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_list_box_row_set_child(cast(GtkListBoxRow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -175,7 +175,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
    * Params:
    *   header = the header
    */
-  void setHeader(gtk.widget.Widget header)
+  void setHeader(gtk.widget.Widget header = null)
   {
     gtk_list_box_row_set_header(cast(GtkListBoxRow*)cPtr, header ? cast(GtkWidget*)header.cPtr(No.Dup) : null);
   }

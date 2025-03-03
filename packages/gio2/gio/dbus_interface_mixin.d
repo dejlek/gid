@@ -50,7 +50,7 @@ template DBusInterfaceT()
    * Params:
    *   object = A #GDBusObject or %NULL.
    */
-  override void setObject(gio.dbus_object.DBusObject object)
+  override void setObject(gio.dbus_object.DBusObject object = null)
   {
     g_dbus_interface_set_object(cast(GDBusInterface*)cPtr, object ? cast(GDBusObject*)(cast(ObjectG)object).cPtr(No.Dup) : null);
   }

@@ -94,7 +94,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.record_batch.RecordBatch filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options)
+  arrow.record_batch.RecordBatch filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
@@ -154,7 +154,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.buffer.Buffer serialize(arrow.write_options.WriteOptions options)
+  arrow.buffer.Buffer serialize(arrow.write_options.WriteOptions options = null)
   {
     GArrowBuffer* _cretval;
     GError *_err;
@@ -184,7 +184,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.record_batch.RecordBatch take(arrow.array.Array indices, arrow.take_options.TakeOptions options)
+  arrow.record_batch.RecordBatch take(arrow.array.Array indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowRecordBatch* _cretval;
     GError *_err;

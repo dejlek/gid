@@ -41,7 +41,7 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
    *   model = the selection model to filter
    * Returns: a new `GtkSelectionFilterModel`
    */
-  this(gtk.selection_model.SelectionModel model)
+  this(gtk.selection_model.SelectionModel model = null)
   {
     GtkSelectionFilterModel* _cretval;
     _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
    * Params:
    *   model = The model to be filtered
    */
-  void setModel(gtk.selection_model.SelectionModel model)
+  void setModel(gtk.selection_model.SelectionModel model = null)
   {
     gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

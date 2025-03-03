@@ -172,7 +172,7 @@ class AccelLabel : gtk.label.Label
    *   accelClosure = the closure to monitor for accelerator changes,
    *     or %NULL
    */
-  void setAccelClosure(gobject.closure.Closure accelClosure)
+  void setAccelClosure(gobject.closure.Closure accelClosure = null)
   {
     gtk_accel_label_set_accel_closure(cast(GtkAccelLabel*)cPtr, accelClosure ? cast(GClosure*)accelClosure.cPtr(No.Dup) : null);
   }
@@ -183,7 +183,7 @@ class AccelLabel : gtk.label.Label
    * Params:
    *   accelWidget = the widget to be monitored, or %NULL
    */
-  void setAccelWidget(gtk.widget.Widget accelWidget)
+  void setAccelWidget(gtk.widget.Widget accelWidget = null)
   {
     gtk_accel_label_set_accel_widget(cast(GtkAccelLabel*)cPtr, accelWidget ? cast(GtkWidget*)accelWidget.cPtr(No.Dup) : null);
   }

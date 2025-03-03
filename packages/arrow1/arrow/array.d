@@ -51,7 +51,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.array.Array cast_(arrow.data_type.DataType targetDataType, arrow.cast_options.CastOptions options)
+  arrow.array.Array cast_(arrow.data_type.DataType targetDataType, arrow.cast_options.CastOptions options = null)
   {
     GArrowArray* _cretval;
     GError *_err;
@@ -75,7 +75,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
-  long count(arrow.count_options.CountOptions options)
+  long count(arrow.count_options.CountOptions options = null)
   {
     long _retval;
     GError *_err;
@@ -129,14 +129,14 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
-  bool equalOptions(arrow.array.Array otherArray, arrow.equal_options.EqualOptions options)
+  bool equalOptions(arrow.array.Array otherArray, arrow.equal_options.EqualOptions options = null)
   {
     bool _retval;
     _retval = garrow_array_equal_options(cast(GArrowArray*)cPtr, otherArray ? cast(GArrowArray*)otherArray.cPtr(No.Dup) : null, options ? cast(GArrowEqualOptions*)options.cPtr(No.Dup) : null);
     return _retval;
   }
 
-  bool equalRange(long startIndex, arrow.array.Array otherArray, long otherStartIndex, long endIndex, arrow.equal_options.EqualOptions options)
+  bool equalRange(long startIndex, arrow.array.Array otherArray, long otherStartIndex, long endIndex, arrow.equal_options.EqualOptions options = null)
   {
     bool _retval;
     _retval = garrow_array_equal_range(cast(GArrowArray*)cPtr, startIndex, otherArray ? cast(GArrowArray*)otherArray.cPtr(No.Dup) : null, otherStartIndex, endIndex, options ? cast(GArrowEqualOptions*)options.cPtr(No.Dup) : null);
@@ -153,7 +153,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.array.Array filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options)
+  arrow.array.Array filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowArray* _cretval;
     GError *_err;
@@ -245,7 +245,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.run_end_encoded_array.RunEndEncodedArray runEndEncode(arrow.run_end_encode_options.RunEndEncodeOptions options)
+  arrow.run_end_encoded_array.RunEndEncodedArray runEndEncode(arrow.run_end_encode_options.RunEndEncodeOptions options = null)
   {
     GArrowRunEndEncodedArray* _cretval;
     GError *_err;
@@ -286,7 +286,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.array.Array take(arrow.array.Array indices, arrow.take_options.TakeOptions options)
+  arrow.array.Array take(arrow.array.Array indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowArray* _cretval;
     GError *_err;
@@ -297,7 +297,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.chunked_array.ChunkedArray takeChunkedArray(arrow.chunked_array.ChunkedArray indices, arrow.take_options.TakeOptions options)
+  arrow.chunked_array.ChunkedArray takeChunkedArray(arrow.chunked_array.ChunkedArray indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowChunkedArray* _cretval;
     GError *_err;

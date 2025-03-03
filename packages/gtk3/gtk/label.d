@@ -185,7 +185,7 @@ class Label : gtk.misc.Misc
    *   str = The text of the label
    * Returns: the new #GtkLabel
    */
-  this(string str)
+  this(string str = null)
   {
     GtkWidget* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -211,7 +211,7 @@ class Label : gtk.misc.Misc
    *     mnemonic character
    * Returns: the new #GtkLabel
    */
-  static gtk.label.Label newWithMnemonic(string str)
+  static gtk.label.Label newWithMnemonic(string str = null)
   {
     GtkWidget* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -582,7 +582,7 @@ class Label : gtk.misc.Misc
    * Params:
    *   attrs = a #PangoAttrList, or %NULL
    */
-  void setAttributes(pango.attr_list.AttrList attrs)
+  void setAttributes(pango.attr_list.AttrList attrs = null)
   {
     gtk_label_set_attributes(cast(GtkLabel*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
@@ -744,7 +744,7 @@ class Label : gtk.misc.Misc
    * Params:
    *   widget = the target #GtkWidget, or %NULL to unset
    */
-  void setMnemonicWidget(gtk.widget.Widget widget)
+  void setMnemonicWidget(gtk.widget.Widget widget = null)
   {
     gtk_label_set_mnemonic_widget(cast(GtkLabel*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

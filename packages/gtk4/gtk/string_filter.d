@@ -46,7 +46,7 @@ class StringFilter : gtk.filter.Filter
    *   expression = The expression to evaluate
    * Returns: a new `GtkStringFilter`
    */
-  this(gtk.expression.Expression expression)
+  this(gtk.expression.Expression expression = null)
   {
     GtkStringFilter* _cretval;
     _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
@@ -108,7 +108,7 @@ class StringFilter : gtk.filter.Filter
    * Params:
    *   expression = a `GtkExpression`
    */
-  void setExpression(gtk.expression.Expression expression)
+  void setExpression(gtk.expression.Expression expression = null)
   {
     gtk_string_filter_set_expression(cast(GtkStringFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
@@ -139,7 +139,7 @@ class StringFilter : gtk.filter.Filter
    *   search = The string to search for
    *     or %NULL to clear the search
    */
-  void setSearch(string search)
+  void setSearch(string search = null)
   {
     const(char)* _search = search.toCString(No.Alloc);
     gtk_string_filter_set_search(cast(GtkStringFilter*)cPtr, _search);

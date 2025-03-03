@@ -45,7 +45,7 @@ class MenuItem : gobject.object.ObjectG
    *   detailedAction = the detailed action string, or %NULL
    * Returns: a new #GMenuItem
    */
-  this(string label, string detailedAction)
+  this(string label = null, string detailedAction = null)
   {
     GMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -169,7 +169,7 @@ class MenuItem : gobject.object.ObjectG
    *   expectedType = the expected type of the attribute
    * Returns: the attribute value, or %NULL
    */
-  glib.variant.VariantG getAttributeValue(string attribute, glib.variant_type.VariantType expectedType)
+  glib.variant.VariantG getAttributeValue(string attribute, glib.variant_type.VariantType expectedType = null)
   {
     VariantC* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -226,7 +226,7 @@ class MenuItem : gobject.object.ObjectG
    *   action = the name of the action for this item
    *   targetValue = a #GVariant to use as the action target
    */
-  void setActionAndTargetValue(string action, glib.variant.VariantG targetValue)
+  void setActionAndTargetValue(string action = null, glib.variant.VariantG targetValue = null)
   {
     const(char)* _action = action.toCString(No.Alloc);
     g_menu_item_set_action_and_target_value(cast(GMenuItem*)cPtr, _action, targetValue ? cast(VariantC*)targetValue.cPtr(No.Dup) : null);
@@ -252,7 +252,7 @@ class MenuItem : gobject.object.ObjectG
    *   attribute = the attribute to set
    *   value = a #GVariant to use as the value, or %NULL
    */
-  void setAttributeValue(string attribute, glib.variant.VariantG value)
+  void setAttributeValue(string attribute, glib.variant.VariantG value = null)
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_menu_item_set_attribute_value(cast(GMenuItem*)cPtr, _attribute, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
@@ -301,7 +301,7 @@ class MenuItem : gobject.object.ObjectG
    * Params:
    *   label = the label to set, or %NULL to unset
    */
-  void setLabel(string label)
+  void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_item_set_label(cast(GMenuItem*)cPtr, _label);
@@ -321,7 +321,7 @@ class MenuItem : gobject.object.ObjectG
    *   link = type of link to establish or unset
    *   model = the #GMenuModel to link to $(LPAREN)or %NULL to unset$(RPAREN)
    */
-  void setLink(string link, gio.menu_model.MenuModel model)
+  void setLink(string link, gio.menu_model.MenuModel model = null)
   {
     const(char)* _link = link.toCString(No.Alloc);
     g_menu_item_set_link(cast(GMenuItem*)cPtr, _link, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
@@ -337,7 +337,7 @@ class MenuItem : gobject.object.ObjectG
    * Params:
    *   section = a #GMenuModel, or %NULL
    */
-  void setSection(gio.menu_model.MenuModel section)
+  void setSection(gio.menu_model.MenuModel section = null)
   {
     g_menu_item_set_section(cast(GMenuItem*)cPtr, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
   }
@@ -351,7 +351,7 @@ class MenuItem : gobject.object.ObjectG
    * Params:
    *   submenu = a #GMenuModel, or %NULL
    */
-  void setSubmenu(gio.menu_model.MenuModel submenu)
+  void setSubmenu(gio.menu_model.MenuModel submenu = null)
   {
     g_menu_item_set_submenu(cast(GMenuItem*)cPtr, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
   }

@@ -781,7 +781,7 @@ bool isZeroWidth(dchar ch)
  *   [pango.item.Item] structures. The items should be freed using
  *   [pango.item.Item.free] in combination with [glib.list.List.freeFull].
  */
-pango.item.Item[] itemize(pango.context.Context context, string text, int startIndex, int length, pango.attr_list.AttrList attrs, pango.attr_iterator.AttrIterator cachedIter)
+pango.item.Item[] itemize(pango.context.Context context, string text, int startIndex, int length, pango.attr_list.AttrList attrs, pango.attr_iterator.AttrIterator cachedIter = null)
 {
   GList* _cretval;
   const(char)* _text = text.toCString(No.Alloc);
@@ -809,7 +809,7 @@ pango.item.Item[] itemize(pango.context.Context context, string text, int startI
  *   [pango.item.Item] structures. The items should be freed using
  *   [pango.item.Item.free] probably in combination with [glib.list.List.freeFull].
  */
-pango.item.Item[] itemizeWithBaseDir(pango.context.Context context, pango.types.Direction baseDir, string text, int startIndex, int length, pango.attr_list.AttrList attrs, pango.attr_iterator.AttrIterator cachedIter)
+pango.item.Item[] itemizeWithBaseDir(pango.context.Context context, pango.types.Direction baseDir, string text, int startIndex, int length, pango.attr_list.AttrList attrs, pango.attr_iterator.AttrIterator cachedIter = null)
 {
   GList* _cretval;
   const(char)* _text = text.toCString(No.Alloc);

@@ -199,7 +199,7 @@ class ListItem : gobject.object.ObjectG
    * Params:
    *   child = The list item's child or %NULL to unset
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_list_item_set_child(cast(GtkListItem*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

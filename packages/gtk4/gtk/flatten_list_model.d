@@ -43,7 +43,7 @@ class FlattenListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.s
    *   model = the model to be flattened
    * Returns: a new `GtkFlattenListModel`
    */
-  this(gio.list_model.ListModel model)
+  this(gio.list_model.ListModel model = null)
   {
     GtkFlattenListModel* _cretval;
     _cretval = gtk_flatten_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
@@ -81,7 +81,7 @@ class FlattenListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.s
    * Params:
    *   model = the new model
    */
-  void setModel(gio.list_model.ListModel model)
+  void setModel(gio.list_model.ListModel model = null)
   {
     gtk_flatten_list_model_set_model(cast(GtkFlattenListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

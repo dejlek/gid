@@ -98,7 +98,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
    *   parent = Transient parent of the dialog
    * Returns: a new `GtkPrintUnixDialog`
    */
-  this(string title, gtk.window.Window parent)
+  this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -290,7 +290,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
    * Params:
    *   settings = a `GtkPrintSettings`
    */
-  void setSettings(gtk.print_settings.PrintSettings settings)
+  void setSettings(gtk.print_settings.PrintSettings settings = null)
   {
     gtk_print_unix_dialog_set_settings(cast(GtkPrintUnixDialog*)cPtr, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null);
   }

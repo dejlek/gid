@@ -234,7 +234,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
    * Params:
    *   name = the name of an offset in the bar
    */
-  void removeOffsetValue(string name)
+  void removeOffsetValue(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_level_bar_remove_offset_value(cast(GtkLevelBar*)cPtr, _name);

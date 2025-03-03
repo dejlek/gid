@@ -74,7 +74,7 @@ class Frame : gtk.bin.Bin
    *   label = the text to use as the label of the frame
    * Returns: a new #GtkFrame widget
    */
-  this(string label)
+  this(string label = null)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -147,7 +147,7 @@ class Frame : gtk.bin.Bin
    * Params:
    *   label = the text to use as the label of the frame
    */
-  void setLabel(string label)
+  void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_frame_set_label(cast(GtkFrame*)cPtr, _label);
@@ -176,7 +176,7 @@ class Frame : gtk.bin.Bin
    * Params:
    *   labelWidget = the new label widget
    */
-  void setLabelWidget(gtk.widget.Widget labelWidget)
+  void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
     gtk_frame_set_label_widget(cast(GtkFrame*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }

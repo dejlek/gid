@@ -134,7 +134,7 @@ class WindowControls : gtk.widget.Widget
    * Params:
    *   layout = a decoration layout, or %NULL to unset the layout
    */
-  void setDecorationLayout(string layout)
+  void setDecorationLayout(string layout = null)
   {
     const(char)* _layout = layout.toCString(No.Alloc);
     gtk_window_controls_set_decoration_layout(cast(GtkWindowControls*)cPtr, _layout);

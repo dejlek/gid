@@ -35,7 +35,7 @@ interface LoadableIcon
    *     ignore.
    * Returns: a #GInputStream to read the icon from.
    */
-  gio.input_stream.InputStream load(int size, out string type, gio.cancellable.Cancellable cancellable);
+  gio.input_stream.InputStream load(int size, out string type, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Loads an icon asynchronously. To finish this function, see
@@ -47,7 +47,7 @@ interface LoadableIcon
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void loadAsync(int size, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void loadAsync(int size, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous icon load started in [gio.loadable_icon.LoadableIcon.loadAsync].

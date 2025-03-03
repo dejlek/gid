@@ -943,7 +943,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
    * Params:
    *   buffer = a #GtkTextBuffer
    */
-  void setBuffer(gtk.text_buffer.TextBuffer buffer)
+  void setBuffer(gtk.text_buffer.TextBuffer buffer = null)
   {
     gtk_text_view_set_buffer(cast(GtkTextView*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }

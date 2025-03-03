@@ -200,7 +200,7 @@ class MountOperation : gobject.object.ObjectG
    * Params:
    *   domain = the domain to set.
    */
-  void setDomain(string domain)
+  void setDomain(string domain = null)
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     g_mount_operation_set_domain(cast(GMountOperation*)cPtr, _domain);
@@ -231,7 +231,7 @@ class MountOperation : gobject.object.ObjectG
    * Params:
    *   password = password to set.
    */
-  void setPassword(string password)
+  void setPassword(string password = null)
   {
     const(char)* _password = password.toCString(No.Alloc);
     g_mount_operation_set_password(cast(GMountOperation*)cPtr, _password);
@@ -262,7 +262,7 @@ class MountOperation : gobject.object.ObjectG
    * Params:
    *   username = input username.
    */
-  void setUsername(string username)
+  void setUsername(string username = null)
   {
     const(char)* _username = username.toCString(No.Alloc);
     g_mount_operation_set_username(cast(GMountOperation*)cPtr, _username);

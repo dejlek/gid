@@ -86,7 +86,7 @@ class SocketConnection : gio.iostream.IOStream
    *   cancellable = a %GCancellable or %NULL
    * Returns: %TRUE if the connection succeeded, %FALSE on error
    */
-  bool connect(gio.socket_address.SocketAddress address, gio.cancellable.Cancellable cancellable)
+  bool connect(gio.socket_address.SocketAddress address, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -109,7 +109,7 @@ class SocketConnection : gio.iostream.IOStream
    *   cancellable = a %GCancellable or %NULL
    *   callback = a #GAsyncReadyCallback
    */
-  void connectAsync(gio.socket_address.SocketAddress address, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void connectAsync(gio.socket_address.SocketAddress address, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

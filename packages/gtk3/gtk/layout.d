@@ -58,7 +58,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
    *   vadjustment = vertical scroll adjustment, or %NULL
    * Returns: a new #GtkLayout
    */
-  this(gtk.adjustment.Adjustment hadjustment, gtk.adjustment.Adjustment vadjustment)
+  this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
@@ -161,7 +161,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.scrollable.Scrollable.setHadjustment]
    */
-  void setHadjustment(gtk.adjustment.Adjustment adjustment)
+  void setHadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_layout_set_hadjustment(cast(GtkLayout*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
@@ -185,7 +185,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.scrollable.Scrollable.setVadjustment]
    */
-  void setVadjustment(gtk.adjustment.Adjustment adjustment)
+  void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_layout_set_vadjustment(cast(GtkLayout*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }

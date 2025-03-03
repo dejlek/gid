@@ -114,7 +114,7 @@ class Expander : gtk.widget.Widget
    *   label = the text of the label
    * Returns: a new `GtkExpander` widget.
    */
-  this(string label)
+  this(string label = null)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -134,7 +134,7 @@ class Expander : gtk.widget.Widget
    *     in front of the mnemonic character
    * Returns: a new `GtkExpander` widget.
    */
-  static gtk.expander.Expander newWithMnemonic(string label)
+  static gtk.expander.Expander newWithMnemonic(string label = null)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -237,7 +237,7 @@ class Expander : gtk.widget.Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_expander_set_child(cast(GtkExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -260,7 +260,7 @@ class Expander : gtk.widget.Widget
    * Params:
    *   label = a string
    */
-  void setLabel(string label)
+  void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_expander_set_label(cast(GtkExpander*)cPtr, _label);
@@ -273,7 +273,7 @@ class Expander : gtk.widget.Widget
    * Params:
    *   labelWidget = the new label widget
    */
-  void setLabelWidget(gtk.widget.Widget labelWidget)
+  void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
     gtk_expander_set_label_widget(cast(GtkExpander*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }

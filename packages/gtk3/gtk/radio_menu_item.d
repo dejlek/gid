@@ -86,7 +86,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
    *   group = An existing #GtkRadioMenuItem
    * Returns: The new #GtkRadioMenuItem
    */
-  static gtk.radio_menu_item.RadioMenuItem newFromWidget(gtk.radio_menu_item.RadioMenuItem group)
+  static gtk.radio_menu_item.RadioMenuItem newFromWidget(gtk.radio_menu_item.RadioMenuItem group = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_radio_menu_item_new_from_widget(group ? cast(GtkRadioMenuItem*)group.cPtr(No.Dup) : null);
@@ -120,7 +120,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
    *   label = the text for the label
    * Returns: The new #GtkRadioMenuItem
    */
-  static gtk.radio_menu_item.RadioMenuItem newWithLabelFromWidget(gtk.radio_menu_item.RadioMenuItem group, string label)
+  static gtk.radio_menu_item.RadioMenuItem newWithLabelFromWidget(gtk.radio_menu_item.RadioMenuItem group = null, string label = null)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -161,7 +161,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
    *     mnemonic character
    * Returns: The new #GtkRadioMenuItem
    */
-  static gtk.radio_menu_item.RadioMenuItem newWithMnemonicFromWidget(gtk.radio_menu_item.RadioMenuItem group, string label)
+  static gtk.radio_menu_item.RadioMenuItem newWithMnemonicFromWidget(gtk.radio_menu_item.RadioMenuItem group = null, string label = null)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -206,7 +206,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
    *     joining, or %NULL to remove the radio_menu_item from its current
    *     group
    */
-  void joinGroup(gtk.radio_menu_item.RadioMenuItem groupSource)
+  void joinGroup(gtk.radio_menu_item.RadioMenuItem groupSource = null)
   {
     gtk_radio_menu_item_join_group(cast(GtkRadioMenuItem*)cPtr, groupSource ? cast(GtkRadioMenuItem*)groupSource.cPtr(No.Dup) : null);
   }

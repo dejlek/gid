@@ -147,7 +147,7 @@ class FileSaver : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback to call when the request is
    *     satisfied.
    */
-  void saveAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.FileProgressCallback progressCallback, gio.types.AsyncReadyCallback callback)
+  void saveAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
     {
@@ -210,7 +210,7 @@ class FileSaver : gobject.object.ObjectG
    * Params:
    *   encoding = the new encoding, or %NULL for UTF-8.
    */
-  void setEncoding(gtksource.encoding.Encoding encoding)
+  void setEncoding(gtksource.encoding.Encoding encoding = null)
   {
     gtk_source_file_saver_set_encoding(cast(GtkSourceFileSaver*)cPtr, encoding ? cast(const(GtkSourceEncoding)*)encoding.cPtr(No.Dup) : null);
   }

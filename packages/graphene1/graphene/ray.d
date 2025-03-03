@@ -166,7 +166,7 @@ class Ray : gobject.boxed.Boxed
    *   direction = the direction vector
    * Returns: the initialized ray
    */
-  graphene.ray.Ray init_(graphene.point3_d.Point3D origin, graphene.vec3.Vec3 direction)
+  graphene.ray.Ray init_(graphene.point3_d.Point3D origin = null, graphene.vec3.Vec3 direction = null)
   {
     graphene_ray_t* _cretval;
     _cretval = graphene_ray_init(cast(graphene_ray_t*)cPtr, origin ? cast(const(graphene_point3d_t)*)origin.cPtr(No.Dup) : null, direction ? cast(const(graphene_vec3_t)*)direction.cPtr(No.Dup) : null);
@@ -196,7 +196,7 @@ class Ray : gobject.boxed.Boxed
    *   direction = a #graphene_vec3_t
    * Returns: the initialized ray
    */
-  graphene.ray.Ray initFromVec3(graphene.vec3.Vec3 origin, graphene.vec3.Vec3 direction)
+  graphene.ray.Ray initFromVec3(graphene.vec3.Vec3 origin = null, graphene.vec3.Vec3 direction = null)
   {
     graphene_ray_t* _cretval;
     _cretval = graphene_ray_init_from_vec3(cast(graphene_ray_t*)cPtr, origin ? cast(const(graphene_vec3_t)*)origin.cPtr(No.Dup) : null, direction ? cast(const(graphene_vec3_t)*)direction.cPtr(No.Dup) : null);

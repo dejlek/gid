@@ -148,7 +148,7 @@ class Fixed : gtk.widget.Widget
    *   transform = the transformation assigned to widget
    *     to reset widget's transform
    */
-  void setChildTransform(gtk.widget.Widget widget, gsk.transform.Transform transform)
+  void setChildTransform(gtk.widget.Widget widget, gsk.transform.Transform transform = null)
   {
     gtk_fixed_set_child_transform(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);
   }

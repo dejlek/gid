@@ -49,7 +49,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
    *   model = the `GListModel` to manage
    * Returns: a new `GtkSingleSelection`
    */
-  this(gio.list_model.ListModel model)
+  this(gio.list_model.ListModel model = null)
   {
     GtkSingleSelection* _cretval;
     _cretval = gtk_single_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
@@ -150,7 +150,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
    * Params:
    *   model = A `GListModel` to wrap
    */
-  void setModel(gio.list_model.ListModel model)
+  void setModel(gio.list_model.ListModel model = null)
   {
     gtk_single_selection_set_model(cast(GtkSingleSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

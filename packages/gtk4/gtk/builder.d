@@ -582,7 +582,7 @@ class Builder : gobject.object.ObjectG
    *   object = Object to create the closure with
    * Returns: A new closure for invoking function_name
    */
-  gobject.closure.Closure createClosure(string functionName, gtk.types.BuilderClosureFlags flags, gobject.object.ObjectG object)
+  gobject.closure.Closure createClosure(string functionName, gtk.types.BuilderClosureFlags flags, gobject.object.ObjectG object = null)
   {
     GClosure* _cretval;
     const(char)* _functionName = functionName.toCString(No.Alloc);
@@ -733,7 +733,7 @@ class Builder : gobject.object.ObjectG
    * Params:
    *   currentObject = the new current object
    */
-  void setCurrentObject(gobject.object.ObjectG currentObject)
+  void setCurrentObject(gobject.object.ObjectG currentObject = null)
   {
     gtk_builder_set_current_object(cast(GtkBuilder*)cPtr, currentObject ? cast(ObjectC*)currentObject.cPtr(No.Dup) : null);
   }
@@ -744,7 +744,7 @@ class Builder : gobject.object.ObjectG
    * Params:
    *   scope_ = the scope to use
    */
-  void setScope(gtk.builder_scope.BuilderScope scope_)
+  void setScope(gtk.builder_scope.BuilderScope scope_ = null)
   {
     gtk_builder_set_scope(cast(GtkBuilder*)cPtr, scope_ ? cast(GtkBuilderScope*)(cast(ObjectG)scope_).cPtr(No.Dup) : null);
   }
@@ -754,7 +754,7 @@ class Builder : gobject.object.ObjectG
    * Params:
    *   domain = the translation domain
    */
-  void setTranslationDomain(string domain)
+  void setTranslationDomain(string domain = null)
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     gtk_builder_set_translation_domain(cast(GtkBuilder*)cPtr, _domain);

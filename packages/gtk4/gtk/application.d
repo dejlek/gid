@@ -310,7 +310,7 @@ class Application : gio.application.Application
    *   in order to remove the request. If the platform does not support
    *   inhibiting or the request failed for some reason, 0 is returned.
    */
-  uint inhibit(gtk.window.Window window, gtk.types.ApplicationInhibitFlags flags, string reason)
+  uint inhibit(gtk.window.Window window, gtk.types.ApplicationInhibitFlags flags, string reason = null)
   {
     uint _retval;
     const(char)* _reason = reason.toCString(No.Alloc);
@@ -400,7 +400,7 @@ class Application : gio.application.Application
    * Params:
    *   menubar = a `GMenuModel`
    */
-  void setMenubar(gio.menu_model.MenuModel menubar)
+  void setMenubar(gio.menu_model.MenuModel menubar = null)
   {
     gtk_application_set_menubar(cast(GtkApplication*)cPtr, menubar ? cast(GMenuModel*)menubar.cPtr(No.Dup) : null);
   }

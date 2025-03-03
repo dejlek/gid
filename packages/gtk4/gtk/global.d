@@ -879,7 +879,7 @@ void showUri(gtk.window.Window parent, string uri, uint timestamp)
  * Deprecated: Use [gtk.file_launcher.FileLauncher.launch] or
  *   [gtk.uri_launcher.UriLauncher.launch] instead
  */
-void showUriFull(gtk.window.Window parent, string uri, uint timestamp, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+void showUriFull(gtk.window.Window parent, string uri, uint timestamp, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
 {
   extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
   {
@@ -1116,7 +1116,7 @@ void valueSetExpression(gobject.value.Value value, gtk.expression.Expression exp
  *   value = a `GValue` initialized with type `GTK_TYPE_EXPRESSION`
  *   expression = a `GtkExpression`
  */
-void valueTakeExpression(gobject.value.Value value, gtk.expression.Expression expression)
+void valueTakeExpression(gobject.value.Value value, gtk.expression.Expression expression = null)
 {
   gtk_value_take_expression(value ? cast(GValue*)value.cPtr(No.Dup) : null, expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
 }

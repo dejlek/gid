@@ -125,7 +125,7 @@ interface AsyncInitable
    * Deprecated: Use [gobject.object.ObjectG.newWithProperties] and
    *   [gio.async_initable.AsyncInitable.initAsync] instead. See #GParameter for more information.
    */
-  static void newvAsync(gobject.types.GType objectType, uint nParameters, gobject.parameter.Parameter parameters, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void newvAsync(gobject.types.GType objectType, uint nParameters, gobject.parameter.Parameter parameters, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -176,7 +176,7 @@ interface AsyncInitable
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied
    */
-  void initAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void initAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes asynchronous initialization and returns the result.

@@ -58,7 +58,7 @@ class Transform : gobject.boxed.Boxed
    *   second = the second transform
    * Returns: %TRUE if the two transforms perform the same operation
    */
-  bool equal(gsk.transform.Transform second)
+  bool equal(gsk.transform.Transform second = null)
   {
     bool _retval;
     _retval = gsk_transform_equal(cast(GskTransform*)cPtr, second ? cast(GskTransform*)second.cPtr(No.Dup) : null);
@@ -356,7 +356,7 @@ class Transform : gobject.boxed.Boxed
    *   other = Transform to apply
    * Returns: The new transform
    */
-  gsk.transform.Transform transform(gsk.transform.Transform other)
+  gsk.transform.Transform transform(gsk.transform.Transform other = null)
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_transform(cast(GskTransform*)cPtr, other ? cast(GskTransform*)other.cPtr(No.Dup) : null);

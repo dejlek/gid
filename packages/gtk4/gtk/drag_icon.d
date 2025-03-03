@@ -123,7 +123,7 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
    * Params:
    *   child = a `GtkWidget`
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_drag_icon_set_child(cast(GtkDragIcon*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

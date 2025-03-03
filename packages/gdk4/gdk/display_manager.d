@@ -115,7 +115,7 @@ class DisplayManager : gobject.object.ObjectG
    * Returns: a `GdkDisplay`, or %NULL
    *   if the display could not be opened
    */
-  gdk.display.Display openDisplay(string name)
+  gdk.display.Display openDisplay(string name = null)
   {
     GdkDisplay* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

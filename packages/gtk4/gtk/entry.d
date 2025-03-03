@@ -649,7 +649,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
    * Deprecated: GtkEntryCompletion will be removed in GTK 5.
    */
-  void setCompletion(gtk.entry_completion.EntryCompletion completion)
+  void setCompletion(gtk.entry_completion.EntryCompletion completion = null)
   {
     gtk_entry_set_completion(cast(GtkEntry*)cPtr, completion ? cast(GtkEntryCompletion*)completion.cPtr(No.Dup) : null);
   }
@@ -660,7 +660,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    * Params:
    *   model = a `GMenuModel`
    */
-  void setExtraMenu(gio.menu_model.MenuModel model)
+  void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
     gtk_entry_set_extra_menu(cast(GtkEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
@@ -711,7 +711,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   iconPos = The position at which to set the icon
    *   icon = The icon to set
    */
-  void setIconFromGicon(gtk.types.EntryIconPosition iconPos, gio.icon.Icon icon)
+  void setIconFromGicon(gtk.types.EntryIconPosition iconPos, gio.icon.Icon icon = null)
   {
     gtk_entry_set_icon_from_gicon(cast(GtkEntry*)cPtr, iconPos, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
@@ -727,7 +727,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   iconPos = The position at which to set the icon
    *   iconName = An icon name
    */
-  void setIconFromIconName(gtk.types.EntryIconPosition iconPos, string iconName)
+  void setIconFromIconName(gtk.types.EntryIconPosition iconPos, string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_entry_set_icon_from_icon_name(cast(GtkEntry*)cPtr, iconPos, _iconName);
@@ -740,7 +740,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   iconPos = Icon position
    *   paintable = A `GdkPaintable`
    */
-  void setIconFromPaintable(gtk.types.EntryIconPosition iconPos, gdk.paintable.Paintable paintable)
+  void setIconFromPaintable(gtk.types.EntryIconPosition iconPos, gdk.paintable.Paintable paintable = null)
   {
     gtk_entry_set_icon_from_paintable(cast(GtkEntry*)cPtr, iconPos, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
@@ -768,7 +768,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   iconPos = the icon position
    *   tooltip = the contents of the tooltip for the icon
    */
-  void setIconTooltipMarkup(gtk.types.EntryIconPosition iconPos, string tooltip)
+  void setIconTooltipMarkup(gtk.types.EntryIconPosition iconPos, string tooltip = null)
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_markup(cast(GtkEntry*)cPtr, iconPos, _tooltip);
@@ -793,7 +793,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    *   iconPos = the icon position
    *   tooltip = the contents of the tooltip for the icon
    */
-  void setIconTooltipText(gtk.types.EntryIconPosition iconPos, string tooltip)
+  void setIconTooltipText(gtk.types.EntryIconPosition iconPos, string tooltip = null)
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_text(cast(GtkEntry*)cPtr, iconPos, _tooltip);
@@ -871,7 +871,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    * Params:
    *   text = a string to be displayed when entry is empty and unfocused
    */
-  void setPlaceholderText(string text)
+  void setPlaceholderText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_entry_set_placeholder_text(cast(GtkEntry*)cPtr, _text);
@@ -908,7 +908,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
    * Params:
    *   tabs = a `PangoTabArray`
    */
-  void setTabs(pango.tab_array.TabArray tabs)
+  void setTabs(pango.tab_array.TabArray tabs = null)
   {
     gtk_entry_set_tabs(cast(GtkEntry*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }

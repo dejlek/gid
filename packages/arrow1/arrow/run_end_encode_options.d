@@ -26,7 +26,7 @@ class RunEndEncodeOptions : arrow.function_options.FunctionOptions
     return getType();
   }
 
-  this(arrow.data_type.DataType runEndDataType)
+  this(arrow.data_type.DataType runEndDataType = null)
   {
     GArrowRunEndEncodeOptions* _cretval;
     _cretval = garrow_run_end_encode_options_new(runEndDataType ? cast(GArrowDataType*)runEndDataType.cPtr(No.Dup) : null);

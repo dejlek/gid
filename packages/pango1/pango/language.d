@@ -172,7 +172,7 @@ class Language : gobject.boxed.Boxed
    *   language = a string representing a language tag
    * Returns: a `PangoLanguage`
    */
-  static pango.language.Language fromString(string language)
+  static pango.language.Language fromString(string language = null)
   {
     PangoLanguage* _cretval;
     const(char)* _language = language.toCString(No.Alloc);

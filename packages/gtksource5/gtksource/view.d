@@ -416,7 +416,7 @@ class View : gtk.text_view.TextView
    *   snippet = a #GtkSourceSnippet
    *   location = a #GtkTextIter or %NULL for the cursor position
    */
-  void pushSnippet(gtksource.snippet.Snippet snippet, gtk.text_iter.TextIter location)
+  void pushSnippet(gtksource.snippet.Snippet snippet, gtk.text_iter.TextIter location = null)
   {
     gtk_source_view_push_snippet(cast(GtkSourceView*)cPtr, snippet ? cast(GtkSourceSnippet*)snippet.cPtr(No.Dup) : null, location ? cast(GtkTextIter*)location.cPtr(No.Dup) : null);
   }
@@ -518,7 +518,7 @@ class View : gtk.text_view.TextView
    * Params:
    *   indenter = a #GtkSourceIndenter or %NULL
    */
-  void setIndenter(gtksource.indenter.Indenter indenter)
+  void setIndenter(gtksource.indenter.Indenter indenter = null)
   {
     gtk_source_view_set_indenter(cast(GtkSourceView*)cPtr, indenter ? cast(GtkSourceIndenter*)(cast(ObjectG)indenter).cPtr(No.Dup) : null);
   }

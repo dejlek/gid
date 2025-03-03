@@ -131,7 +131,7 @@ template ActionGroupT()
    *   actionName = the name of the action to activate
    *   parameter = parameters to the activation
    */
-  override void activateAction(string actionName, glib.variant.VariantG parameter)
+  override void activateAction(string actionName, glib.variant.VariantG parameter = null)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_activate_action(cast(GActionGroup*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null);

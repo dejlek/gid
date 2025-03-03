@@ -47,7 +47,7 @@ class UriLauncher : gobject.object.ObjectG
    *   uri = the uri to open
    * Returns: the new `GtkUriLauncher`
    */
-  this(string uri)
+  this(string uri = null)
   {
     GtkUriLauncher* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -78,7 +78,7 @@ class UriLauncher : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void launch(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -116,7 +116,7 @@ class UriLauncher : gobject.object.ObjectG
    * Params:
    *   uri = the uri
    */
-  void setUri(string uri)
+  void setUri(string uri = null)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     gtk_uri_launcher_set_uri(cast(GtkUriLauncher*)cPtr, _uri);

@@ -206,7 +206,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
    * Params:
    *   path = a `GtkTreePath` or %NULL to unset.
    */
-  void setDisplayedRow(gtk.tree_path.TreePath path)
+  void setDisplayedRow(gtk.tree_path.TreePath path = null)
   {
     gtk_cell_view_set_displayed_row(cast(GtkCellView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
@@ -244,7 +244,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
    * Params:
    *   model = a `GtkTreeModel`
    */
-  void setModel(gtk.tree_model.TreeModel model)
+  void setModel(gtk.tree_model.TreeModel model = null)
   {
     gtk_cell_view_set_model(cast(GtkCellView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

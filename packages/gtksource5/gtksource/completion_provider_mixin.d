@@ -161,7 +161,7 @@ template CompletionProviderT()
    *   cancellable = a #GCancellable or %NULL
    *   callback = a callback to execute upon completion
    */
-  override void populateAsync(gtksource.completion_context.CompletionContext context, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void populateAsync(gtksource.completion_context.CompletionContext context, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

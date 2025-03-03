@@ -46,7 +46,7 @@ class Snippet : gobject.object.ObjectG
    *   languageId = the source language
    * Returns: A new #GtkSourceSnippet
    */
-  this(string trigger, string languageId)
+  this(string trigger = null, string languageId = null)
   {
     GtkSourceSnippet* _cretval;
     const(char)* _trigger = trigger.toCString(No.Alloc);

@@ -28,7 +28,7 @@ class DatasetFactory : gobject.object.ObjectG
     return getType();
   }
 
-  arrowdataset.dataset.Dataset finish(arrowdataset.finish_options.FinishOptions options)
+  arrowdataset.dataset.Dataset finish(arrowdataset.finish_options.FinishOptions options = null)
   {
     GADatasetDataset* _cretval;
     GError *_err;

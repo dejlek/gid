@@ -108,23 +108,23 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
     gtk_source_gutter_renderer_pixbuf_overlay_paintable(cast(GtkSourceGutterRendererPixbuf*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
 
-  void setGicon(gio.icon.Icon icon)
+  void setGicon(gio.icon.Icon icon = null)
   {
     gtk_source_gutter_renderer_pixbuf_set_gicon(cast(GtkSourceGutterRendererPixbuf*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
-  void setIconName(string iconName)
+  void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_source_gutter_renderer_pixbuf_set_icon_name(cast(GtkSourceGutterRendererPixbuf*)cPtr, _iconName);
   }
 
-  void setPaintable(gdk.paintable.Paintable paintable)
+  void setPaintable(gdk.paintable.Paintable paintable = null)
   {
     gtk_source_gutter_renderer_pixbuf_set_paintable(cast(GtkSourceGutterRendererPixbuf*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
 
-  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_source_gutter_renderer_pixbuf_set_pixbuf(cast(GtkSourceGutterRendererPixbuf*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }

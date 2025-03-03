@@ -901,7 +901,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
    * Params:
    *   buffer = a `GtkTextBuffer`
    */
-  void setBuffer(gtk.text_buffer.TextBuffer buffer)
+  void setBuffer(gtk.text_buffer.TextBuffer buffer = null)
   {
     gtk_text_view_set_buffer(cast(GtkTextView*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }
@@ -939,7 +939,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
    * Params:
    *   model = a `GMenuModel`
    */
-  void setExtraMenu(gio.menu_model.MenuModel model)
+  void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
     gtk_text_view_set_extra_menu(cast(GtkTextView*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
@@ -952,7 +952,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
    *   win = a `GtkTextWindowType`
    *   widget = a `GtkWidget`
    */
-  void setGutter(gtk.types.TextWindowType win, gtk.widget.Widget widget)
+  void setGutter(gtk.types.TextWindowType win, gtk.widget.Widget widget = null)
   {
     gtk_text_view_set_gutter(cast(GtkTextView*)cPtr, win, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

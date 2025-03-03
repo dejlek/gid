@@ -509,7 +509,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
    *   callback = a #GAsyncReadyCallback.
    * Returns: a #GTask.
    */
-  this(gobject.object.ObjectG sourceObject, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  this(gobject.object.ObjectG sourceObject = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -537,7 +537,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
    * Returns: %TRUE if result and source_object are valid, %FALSE
    *   if not
    */
-  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectG sourceObject)
+  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectG sourceObject = null)
   {
     bool _retval;
     _retval = g_task_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null);
@@ -882,7 +882,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
    *     function
    *   resultDestroy = a #GDestroyNotify function.
    */
-  void returnPointer(void* result, glib.types.DestroyNotify resultDestroy)
+  void returnPointer(void* result, glib.types.DestroyNotify resultDestroy = null)
   {
     extern(C) void _resultDestroyCallback(void* data)
     {
@@ -906,7 +906,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
    *   result = the #GValue result of
    *     a task function
    */
-  void returnValue(gobject.value.Value result)
+  void returnValue(gobject.value.Value result = null)
   {
     g_task_return_value(cast(GTask*)cPtr, result ? cast(GValue*)result.cPtr(No.Dup) : null);
   }
@@ -1007,7 +1007,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
    * Params:
    *   name = a human readable name for the task, or %NULL to unset it
    */
-  void setName(string name)
+  void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     g_task_set_name(cast(GTask*)cPtr, _name);
@@ -1092,7 +1092,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
    * Params:
    *   name = a human readable name for the task. Must be a string literal
    */
-  void setStaticName(string name)
+  void setStaticName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     g_task_set_static_name(cast(GTask*)cPtr, _name);
@@ -1104,7 +1104,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
    *   taskData = task-specific data
    *   taskDataDestroy = #GDestroyNotify for task_data
    */
-  void setTaskData(void* taskData, glib.types.DestroyNotify taskDataDestroy)
+  void setTaskData(void* taskData, glib.types.DestroyNotify taskDataDestroy = null)
   {
     extern(C) void _taskDataDestroyCallback(void* data)
     {

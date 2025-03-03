@@ -101,7 +101,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
    * Returns: a new #GInputStream, or
    *   %NULL if there are no more parts
    */
-  gio.input_stream.InputStream nextPart(gio.cancellable.Cancellable cancellable)
+  gio.input_stream.InputStream nextPart(gio.cancellable.Cancellable cancellable = null)
   {
     GInputStream* _cretval;
     GError *_err;
@@ -120,7 +120,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
    *   cancellable = a #GCancellable.
    *   callback = callback to call when request is satisfied.
    */
-  void nextPartAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void nextPartAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

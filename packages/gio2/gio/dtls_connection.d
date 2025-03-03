@@ -62,7 +62,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE on success, %FALSE otherwise
    */
-  bool close(gio.cancellable.Cancellable cancellable);
+  bool close(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously close the DTLS connection. See [gio.dtls_connection.DtlsConnection.close] for
@@ -72,7 +72,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the close operation is complete
    */
-  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finish an asynchronous TLS close operation. See [gio.dtls_connection.DtlsConnection.close]
@@ -212,7 +212,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    * Returns: success or failure
    */
-  bool handshake(gio.cancellable.Cancellable cancellable);
+  bool handshake(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously performs a TLS handshake on conn. See
@@ -222,7 +222,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the handshake is complete
    */
-  void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finish an asynchronous TLS handshake operation. See
@@ -286,7 +286,7 @@ interface DtlsConnection
    * Params:
    *   database = a #GTlsDatabase
    */
-  void setDatabase(gio.tls_database.TlsDatabase database);
+  void setDatabase(gio.tls_database.TlsDatabase database = null);
 
   /**
    * Set the object that will be used to interact with the user. It will be used
@@ -297,7 +297,7 @@ interface DtlsConnection
    * Params:
    *   interaction = an interaction object, or %NULL
    */
-  void setInteraction(gio.tls_interaction.TlsInteraction interaction);
+  void setInteraction(gio.tls_interaction.TlsInteraction interaction = null);
 
   /**
    * Since GLib 2.64, changing the rehandshake mode is no longer supported
@@ -361,7 +361,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE on success, %FALSE otherwise
    */
-  bool shutdown(bool shutdownRead, bool shutdownWrite, gio.cancellable.Cancellable cancellable);
+  bool shutdown(bool shutdownRead, bool shutdownWrite, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously shut down part or all of the DTLS connection. See
@@ -373,7 +373,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the shutdown operation is complete
    */
-  void shutdownAsync(bool shutdownRead, bool shutdownWrite, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void shutdownAsync(bool shutdownRead, bool shutdownWrite, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finish an asynchronous TLS shutdown operation. See

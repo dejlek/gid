@@ -808,7 +808,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
    * Params:
    *   model = The model.
    */
-  void setModel(gtk.tree_model.TreeModel model)
+  void setModel(gtk.tree_model.TreeModel model = null)
   {
     gtk_icon_view_set_model(cast(GtkIconView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -897,7 +897,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
    *   path = a #GtkTreePath
    *   cell = a #GtkCellRenderer or %NULL
    */
-  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell)
+  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell = null)
   {
     gtk_icon_view_set_tooltip_cell(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null);
   }

@@ -284,7 +284,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  bool setCurrentFolder(gio.file.File file);
+  bool setCurrentFolder(gio.file.File file = null);
 
   /**
    * Sets the current name in the file selector, as if entered

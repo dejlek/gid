@@ -39,7 +39,7 @@ interface Buildable
    *   child = child to add
    *   type = kind of child or %NULL
    */
-  void addChild(gtk.builder.Builder builder, gobject.object.ObjectG child, string type);
+  void addChild(gtk.builder.Builder builder, gobject.object.ObjectG child, string type = null);
 
   /**
    * Constructs a child of buildable with the name name.

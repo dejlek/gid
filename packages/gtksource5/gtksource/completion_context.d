@@ -212,7 +212,7 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
    *   provider = an #GtkSourceCompletionProvider
    *   results = a #GListModel or %NULL
    */
-  void setProposalsForProvider(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel results)
+  void setProposalsForProvider(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel results = null)
   {
     gtk_source_completion_context_set_proposals_for_provider(cast(GtkSourceCompletionContext*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, results ? cast(GListModel*)(cast(ObjectG)results).cPtr(No.Dup) : null);
   }

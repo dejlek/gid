@@ -587,7 +587,7 @@ class VariantG
    *   child = the child value, or %NULL
    * Returns: a floating reference to a new #GVariant maybe instance
    */
-  static glib.variant.VariantG newMaybe(glib.variant_type.VariantType childType, glib.variant.VariantG child)
+  static glib.variant.VariantG newMaybe(glib.variant_type.VariantType childType = null, glib.variant.VariantG child = null)
   {
     VariantC* _cretval;
     _cretval = g_variant_new_maybe(childType ? cast(const(GVariantType)*)childType.cPtr(No.Dup) : null, child ? cast(VariantC*)child.cPtr(No.Dup) : null);
@@ -1558,7 +1558,7 @@ class VariantG
    *   expectedType = a #GVariantType, or %NULL
    * Returns: the value of the dictionary key, or %NULL
    */
-  glib.variant.VariantG lookupValue(string key, glib.variant_type.VariantType expectedType)
+  glib.variant.VariantG lookupValue(string key, glib.variant_type.VariantType expectedType = null)
   {
     VariantC* _cretval;
     const(char)* _key = key.toCString(No.Alloc);

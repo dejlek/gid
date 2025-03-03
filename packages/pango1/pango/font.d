@@ -219,7 +219,7 @@ class Font : gobject.object.ObjectG
    * Returns: a `PangoFontMetrics` object. The caller must call
    *   [pango.font_metrics.FontMetrics.unref] when finished using the object.
    */
-  pango.font_metrics.FontMetrics getMetrics(pango.language.Language language)
+  pango.font_metrics.FontMetrics getMetrics(pango.language.Language language = null)
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_font_get_metrics(cast(PangoFont*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);

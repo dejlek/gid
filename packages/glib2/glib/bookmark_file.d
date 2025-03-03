@@ -105,7 +105,7 @@ class BookmarkFile : gobject.boxed.Boxed
    *     or %NULL
    *   exec = command line to be used to launch the bookmark or %NULL
    */
-  void addApplication(string uri, string name, string exec)
+  void addApplication(string uri, string name = null, string exec = null)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _name = name.toCString(No.Alloc);
@@ -471,7 +471,7 @@ class BookmarkFile : gobject.boxed.Boxed
    * Returns: a newly allocated string or %NULL if the specified
    *   URI cannot be found.
    */
-  string getTitle(string uri)
+  string getTitle(string uri = null)
   {
     char* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -686,7 +686,7 @@ class BookmarkFile : gobject.boxed.Boxed
    *   newUri = a valid URI, or %NULL
    * Returns: %TRUE if the URI was successfully changed
    */
-  bool moveItem(string oldUri, string newUri)
+  bool moveItem(string oldUri, string newUri = null)
   {
     bool _retval;
     const(char)* _oldUri = oldUri.toCString(No.Alloc);
@@ -879,7 +879,7 @@ class BookmarkFile : gobject.boxed.Boxed
    * Returns: %TRUE if the application's meta-data was successfully
    *   changed.
    */
-  bool setApplicationInfo(string uri, string name, string exec, int count, glib.date_time.DateTime stamp)
+  bool setApplicationInfo(string uri, string name, string exec, int count, glib.date_time.DateTime stamp = null)
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);

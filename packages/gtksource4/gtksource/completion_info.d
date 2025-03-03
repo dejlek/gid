@@ -47,7 +47,7 @@ class CompletionInfo : gtk.window.Window
    *   view = a #GtkTextView on which the info window should be positioned.
    *   iter = a #GtkTextIter.
    */
-  void moveToIter(gtk.text_view.TextView view, gtk.text_iter.TextIter iter)
+  void moveToIter(gtk.text_view.TextView view, gtk.text_iter.TextIter iter = null)
   {
     gtk_source_completion_info_move_to_iter(cast(GtkSourceCompletionInfo*)cPtr, view ? cast(GtkTextView*)view.cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
   }

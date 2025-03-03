@@ -58,7 +58,7 @@ bool passwordClearFinish(gio.async_result.AsyncResult result)
  *   cancellable = optional cancellation object
  * Returns: whether any passwords were removed
  */
-bool passwordClearSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable)
+bool passwordClearSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
 {
   bool _retval;
   auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -101,7 +101,7 @@ string passwordLookupFinish(gio.async_result.AsyncResult result)
  * Returns: a new password string which should be freed with
  *   funcpassword_free or may be freed with funcGLib.free when done
  */
-string passwordLookupSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable)
+string passwordLookupSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
 {
   char* _cretval;
   auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -146,7 +146,7 @@ secret.retrievable.Retrievable[] passwordSearchFinish(gio.async_result.AsyncResu
  * Returns: a list of
  *   ifaceRetrievable containing attributes of the matched items
  */
-secret.retrievable.Retrievable[] passwordSearchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable)
+secret.retrievable.Retrievable[] passwordSearchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null)
 {
   GList* _cretval;
   auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -191,7 +191,7 @@ bool passwordStoreFinish(gio.async_result.AsyncResult result)
  *   cancellable = optional cancellation object
  * Returns: whether the storage was successful or not
  */
-bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable)
+bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null)
 {
   bool _retval;
   auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -225,7 +225,7 @@ bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attribu
  *   cancellable = optional cancellation object
  * Returns: whether the storage was successful or not
  */
-bool passwordStoreSync(secret.schema.Schema schema, string[string] attributes, string collection, string label, string password, gio.cancellable.Cancellable cancellable)
+bool passwordStoreSync(secret.schema.Schema schema, string[string] attributes, string collection, string label, string password, gio.cancellable.Cancellable cancellable = null)
 {
   bool _retval;
   auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -245,7 +245,7 @@ bool passwordStoreSync(secret.schema.Schema schema, string[string] attributes, s
  * Params:
  *   password = password to clear
  */
-void passwordWipe(string password)
+void passwordWipe(string password = null)
 {
   char* _password = password.toCString(No.Alloc);
   secret_password_wipe(_password);

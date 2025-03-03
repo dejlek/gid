@@ -615,7 +615,7 @@ class Event
    * Params:
    *   tool = tool to set on the event, or %NULL
    */
-  void setDeviceTool(gdk.device_tool.DeviceTool tool)
+  void setDeviceTool(gdk.device_tool.DeviceTool tool = null)
   {
     gdk_event_set_device_tool(cast(GdkEvent*)cPtr, tool ? cast(GdkDeviceTool*)tool.cPtr(No.Dup) : null);
   }

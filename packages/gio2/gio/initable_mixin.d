@@ -71,7 +71,7 @@ template InitableT()
    * Returns: %TRUE if successful. If an error has occurred, this function will
    *   return %FALSE and set error appropriately if present.
    */
-  override bool init_(gio.cancellable.Cancellable cancellable)
+  override bool init_(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;

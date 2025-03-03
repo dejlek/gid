@@ -490,7 +490,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
    *   cellRenderer = A #GtkCellRenderer
    *   func = The #GtkTreeCellDataFunc to use.
    */
-  void setCellDataFunc(gtk.cell_renderer.CellRenderer cellRenderer, gtk.types.TreeCellDataFunc func)
+  void setCellDataFunc(gtk.cell_renderer.CellRenderer cellRenderer, gtk.types.TreeCellDataFunc func = null)
   {
     extern(C) void _funcCallback(GtkTreeViewColumn* treeColumn, GtkCellRenderer* cell, GtkTreeModel* treeModel, GtkTreeIter* iter, void* data)
     {
@@ -689,7 +689,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
    * Params:
    *   widget = A child #GtkWidget, or %NULL.
    */
-  void setWidget(gtk.widget.Widget widget)
+  void setWidget(gtk.widget.Widget widget = null)
   {
     gtk_tree_view_column_set_widget(cast(GtkTreeViewColumn*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

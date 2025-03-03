@@ -149,7 +149,7 @@ interface Accessible
    *   parent = the parent accessible object
    *   nextSibling = the sibling accessible object
    */
-  void setAccessibleParent(gtk.accessible.Accessible parent, gtk.accessible.Accessible nextSibling);
+  void setAccessibleParent(gtk.accessible.Accessible parent = null, gtk.accessible.Accessible nextSibling = null);
 
   /**
    * Updates the next accessible sibling of self.
@@ -158,7 +158,7 @@ interface Accessible
    * Params:
    *   newSibling = the new next accessible sibling to set
    */
-  void updateNextAccessibleSibling(gtk.accessible.Accessible newSibling);
+  void updateNextAccessibleSibling(gtk.accessible.Accessible newSibling = null);
 
   /**
    * Updates an array of accessible properties.

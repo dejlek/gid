@@ -63,7 +63,7 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
    *   mapFunc = map function
    * Returns: a new `GtkMapListModel`
    */
-  this(gio.list_model.ListModel model, gtk.types.MapListModelMapFunc mapFunc)
+  this(gio.list_model.ListModel model = null, gtk.types.MapListModelMapFunc mapFunc = null)
   {
     extern(C) ObjectC* _mapFuncCallback(ObjectC* item, void* userData)
     {
@@ -119,7 +119,7 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
    * Params:
    *   mapFunc = map function
    */
-  void setMapFunc(gtk.types.MapListModelMapFunc mapFunc)
+  void setMapFunc(gtk.types.MapListModelMapFunc mapFunc = null)
   {
     extern(C) ObjectC* _mapFuncCallback(ObjectC* item, void* userData)
     {
@@ -146,7 +146,7 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
    * Params:
    *   model = The model to be mapped
    */
-  void setModel(gio.list_model.ListModel model)
+  void setModel(gio.list_model.ListModel model = null)
   {
     gtk_map_list_model_set_model(cast(GtkMapListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

@@ -180,7 +180,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
    * Params:
    *   widget = a `GtkWidget`
    */
-  void setKeyCaptureWidget(gtk.widget.Widget widget)
+  void setKeyCaptureWidget(gtk.widget.Widget widget = null)
   {
     gtk_search_entry_set_key_capture_widget(cast(GtkSearchEntry*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -190,7 +190,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
    * Params:
    *   text = the text to set as a placeholder
    */
-  void setPlaceholderText(string text)
+  void setPlaceholderText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_search_entry_set_placeholder_text(cast(GtkSearchEntry*)cPtr, _text);

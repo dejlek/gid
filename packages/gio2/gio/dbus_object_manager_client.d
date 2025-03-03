@@ -172,7 +172,7 @@ class DBusObjectManagerClient : gobject.object.ObjectG, gio.async_initable.Async
    *   #GDBusObjectManagerClient object or %NULL if error is set. Free
    *   with [gobject.object.ObjectG.unref].
    */
-  static gio.dbus_object_manager_client.DBusObjectManagerClient newForBusSync(gio.types.BusType busType, gio.types.DBusObjectManagerClientFlags flags, string name, string objectPath, gio.types.DBusProxyTypeFunc getProxyTypeFunc, gio.cancellable.Cancellable cancellable)
+  static gio.dbus_object_manager_client.DBusObjectManagerClient newForBusSync(gio.types.BusType busType, gio.types.DBusObjectManagerClientFlags flags, string name, string objectPath, gio.types.DBusProxyTypeFunc getProxyTypeFunc = null, gio.cancellable.Cancellable cancellable = null)
   {
     extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
     {
@@ -214,7 +214,7 @@ class DBusObjectManagerClient : gobject.object.ObjectG, gio.async_initable.Async
    *   #GDBusObjectManagerClient object or %NULL if error is set. Free
    *   with [gobject.object.ObjectG.unref].
    */
-  static gio.dbus_object_manager_client.DBusObjectManagerClient newSync(gio.dbus_connection.DBusConnection connection, gio.types.DBusObjectManagerClientFlags flags, string name, string objectPath, gio.types.DBusProxyTypeFunc getProxyTypeFunc, gio.cancellable.Cancellable cancellable)
+  static gio.dbus_object_manager_client.DBusObjectManagerClient newSync(gio.dbus_connection.DBusConnection connection, gio.types.DBusObjectManagerClientFlags flags, string name, string objectPath, gio.types.DBusProxyTypeFunc getProxyTypeFunc = null, gio.cancellable.Cancellable cancellable = null)
   {
     extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
     {
@@ -257,7 +257,7 @@ class DBusObjectManagerClient : gobject.object.ObjectG, gio.async_initable.Async
    *   cancellable = A #GCancellable or %NULL
    *   callback = A #GAsyncReadyCallback to call when the request is satisfied.
    */
-  static void new_(gio.dbus_connection.DBusConnection connection, gio.types.DBusObjectManagerClientFlags flags, string name, string objectPath, gio.types.DBusProxyTypeFunc getProxyTypeFunc, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void new_(gio.dbus_connection.DBusConnection connection, gio.types.DBusObjectManagerClientFlags flags, string name, string objectPath, gio.types.DBusProxyTypeFunc getProxyTypeFunc = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
     {
@@ -305,7 +305,7 @@ class DBusObjectManagerClient : gobject.object.ObjectG, gio.async_initable.Async
    *   cancellable = A #GCancellable or %NULL
    *   callback = A #GAsyncReadyCallback to call when the request is satisfied.
    */
-  static void newForBus(gio.types.BusType busType, gio.types.DBusObjectManagerClientFlags flags, string name, string objectPath, gio.types.DBusProxyTypeFunc getProxyTypeFunc, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void newForBus(gio.types.BusType busType, gio.types.DBusObjectManagerClientFlags flags, string name, string objectPath, gio.types.DBusProxyTypeFunc getProxyTypeFunc = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) GType _getProxyTypeFuncCallback(GDBusObjectManagerClient* manager, const(char)* objectPath, const(char)* interfaceName, void* data)
     {

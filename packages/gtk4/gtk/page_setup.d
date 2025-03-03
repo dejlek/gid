@@ -121,7 +121,7 @@ class PageSetup : gobject.object.ObjectG
    *     to use the default name “Page Setup”
    * Returns: the restored `GtkPageSetup`
    */
-  static gtk.page_setup.PageSetup newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName)
+  static gtk.page_setup.PageSetup newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     GtkPageSetup* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -312,7 +312,7 @@ class PageSetup : gobject.object.ObjectG
    *     to use the default name “Page Setup”
    * Returns: %TRUE on success
    */
-  bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName)
+  bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -436,7 +436,7 @@ class PageSetup : gobject.object.ObjectG
    *   groupName = the group to add the settings to in key_file,
    *     or %NULL to use the default name “Page Setup”
    */
-  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName)
+  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     gtk_page_setup_to_key_file(cast(GtkPageSetup*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName);

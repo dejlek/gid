@@ -57,7 +57,7 @@ template ProxyResolverT()
    *   NULL-terminated array of proxy URIs. Must be freed
    *   with [glib.global.strfreev].
    */
-  override string[] lookup(string uri, gio.cancellable.Cancellable cancellable)
+  override string[] lookup(string uri, gio.cancellable.Cancellable cancellable = null)
   {
     char** _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -87,7 +87,7 @@ template ProxyResolverT()
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call after resolution completes
    */
-  override void lookupAsync(string uri, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void lookupAsync(string uri, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

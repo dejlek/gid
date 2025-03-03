@@ -154,7 +154,7 @@ class MediaFile : gtk.media_stream.MediaStream
    * Params:
    *   file = the file to play
    */
-  void setFile(gio.file.File file)
+  void setFile(gio.file.File file = null)
   {
     gtk_media_file_set_file(cast(GtkMediaFile*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
@@ -166,7 +166,7 @@ class MediaFile : gtk.media_stream.MediaStream
    * Params:
    *   filename = name of file to play
    */
-  void setFilename(string filename)
+  void setFilename(string filename = null)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_media_file_set_filename(cast(GtkMediaFile*)cPtr, _filename);
@@ -180,7 +180,7 @@ class MediaFile : gtk.media_stream.MediaStream
    * Params:
    *   stream = the stream to play from
    */
-  void setInputStream(gio.input_stream.InputStream stream)
+  void setInputStream(gio.input_stream.InputStream stream = null)
   {
     gtk_media_file_set_input_stream(cast(GtkMediaFile*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null);
   }
@@ -192,7 +192,7 @@ class MediaFile : gtk.media_stream.MediaStream
    * Params:
    *   resourcePath = path to resource to play
    */
-  void setResource(string resourcePath)
+  void setResource(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_media_file_set_resource(cast(GtkMediaFile*)cPtr, _resourcePath);

@@ -248,7 +248,7 @@ bool acceleratorValid(uint keyval, gdk.types.ModifierType modifiers)
 
  * Deprecated: Deprecated
  */
-bool alternativeDialogButtonOrder(gdk.screen.Screen screen)
+bool alternativeDialogButtonOrder(gdk.screen.Screen screen = null)
 {
   bool _retval;
   _retval = gtk_alternative_dialog_button_order(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);

@@ -49,7 +49,7 @@ class VScrollbar : gtk.scrollbar.Scrollbar
 
    * Deprecated: Use [gtk.scrollbar.Scrollbar.new_] with %GTK_ORIENTATION_VERTICAL instead
    */
-  this(gtk.adjustment.Adjustment adjustment)
+  this(gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_vscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);

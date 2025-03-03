@@ -40,7 +40,7 @@ class Buffer : gtk.text_buffer.TextBuffer
    *   table = a #GtkTextTagTable, or %NULL to create a new one.
    * Returns: a new source buffer.
    */
-  this(gtk.text_tag_table.TextTagTable table)
+  this(gtk.text_tag_table.TextTagTable table = null)
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_buffer_new(table ? cast(GtkTextTagTable*)table.cPtr(No.Dup) : null);
@@ -73,7 +73,7 @@ class Buffer : gtk.text_buffer.TextBuffer
    *   category = category to search for, or %NULL
    * Returns: whether iter was moved.
    */
-  bool backwardIterToSourceMark(gtk.text_iter.TextIter iter, string category)
+  bool backwardIterToSourceMark(gtk.text_iter.TextIter iter, string category = null)
   {
     bool _retval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -194,7 +194,7 @@ class Buffer : gtk.text_buffer.TextBuffer
    *   category = category to search for, or %NULL
    * Returns: whether iter was moved.
    */
-  bool forwardIterToSourceMark(gtk.text_iter.TextIter iter, string category)
+  bool forwardIterToSourceMark(gtk.text_iter.TextIter iter, string category = null)
   {
     bool _retval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -295,7 +295,7 @@ class Buffer : gtk.text_buffer.TextBuffer
    *   category = category to search for, or %NULL
    * Returns: a newly allocated #GSList.
    */
-  gtksource.mark.Mark[] getSourceMarksAtIter(gtk.text_iter.TextIter iter, string category)
+  gtksource.mark.Mark[] getSourceMarksAtIter(gtk.text_iter.TextIter iter, string category = null)
   {
     GSList* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -312,7 +312,7 @@ class Buffer : gtk.text_buffer.TextBuffer
    *   category = category to search for, or %NULL
    * Returns: a newly allocated #GSList.
    */
-  gtksource.mark.Mark[] getSourceMarksAtLine(int line, string category)
+  gtksource.mark.Mark[] getSourceMarksAtLine(int line, string category = null)
   {
     GSList* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -436,7 +436,7 @@ class Buffer : gtk.text_buffer.TextBuffer
    *   end = a #GtkTextIter.
    *   category = category to search for, or %NULL.
    */
-  void removeSourceMarks(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, string category)
+  void removeSourceMarks(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, string category = null)
   {
     const(char)* _category = category.toCString(No.Alloc);
     gtk_source_buffer_remove_source_marks(cast(GtkSourceBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null, _category);
@@ -501,7 +501,7 @@ class Buffer : gtk.text_buffer.TextBuffer
    * Params:
    *   language = a #GtkSourceLanguage to set, or %NULL.
    */
-  void setLanguage(gtksource.language.Language language)
+  void setLanguage(gtksource.language.Language language = null)
   {
     gtk_source_buffer_set_language(cast(GtkSourceBuffer*)cPtr, language ? cast(GtkSourceLanguage*)language.cPtr(No.Dup) : null);
   }
@@ -534,7 +534,7 @@ class Buffer : gtk.text_buffer.TextBuffer
    * Params:
    *   scheme = a #GtkSourceStyleScheme or %NULL.
    */
-  void setStyleScheme(gtksource.style_scheme.StyleScheme scheme)
+  void setStyleScheme(gtksource.style_scheme.StyleScheme scheme = null)
   {
     gtk_source_buffer_set_style_scheme(cast(GtkSourceBuffer*)cPtr, scheme ? cast(GtkSourceStyleScheme*)scheme.cPtr(No.Dup) : null);
   }
@@ -545,7 +545,7 @@ class Buffer : gtk.text_buffer.TextBuffer
    * Params:
    *   manager = A #GtkSourceUndoManager or %NULL.
    */
-  void setUndoManager(gtksource.undo_manager.UndoManager manager)
+  void setUndoManager(gtksource.undo_manager.UndoManager manager = null)
   {
     gtk_source_buffer_set_undo_manager(cast(GtkSourceBuffer*)cPtr, manager ? cast(GtkSourceUndoManager*)(cast(ObjectG)manager).cPtr(No.Dup) : null);
   }

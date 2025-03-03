@@ -40,7 +40,7 @@ class Region : gobject.object.ObjectG
    * Params:
    *   regionToAdd = the #GtkSourceRegion to add to region, or %NULL.
    */
-  void addRegion(gtksource.region.Region regionToAdd)
+  void addRegion(gtksource.region.Region regionToAdd = null)
   {
     gtk_source_region_add_region(cast(GtkSourceRegion*)cPtr, regionToAdd ? cast(GtkSourceRegion*)regionToAdd.cPtr(No.Dup) : null);
   }
@@ -106,7 +106,7 @@ class Region : gobject.object.ObjectG
    * Returns: the intersection as a #GtkSourceRegion
    *   object.
    */
-  gtksource.region.Region intersectRegion(gtksource.region.Region region2)
+  gtksource.region.Region intersectRegion(gtksource.region.Region region2 = null)
   {
     GtkSourceRegion* _cretval;
     _cretval = gtk_source_region_intersect_region(cast(GtkSourceRegion*)cPtr, region2 ? cast(GtkSourceRegion*)region2.cPtr(No.Dup) : null);
@@ -149,7 +149,7 @@ class Region : gobject.object.ObjectG
    *   regionToSubtract = the #GtkSourceRegion to subtract from
    *     region, or %NULL.
    */
-  void subtractRegion(gtksource.region.Region regionToSubtract)
+  void subtractRegion(gtksource.region.Region regionToSubtract = null)
   {
     gtk_source_region_subtract_region(cast(GtkSourceRegion*)cPtr, regionToSubtract ? cast(GtkSourceRegion*)regionToSubtract.cPtr(No.Dup) : null);
   }

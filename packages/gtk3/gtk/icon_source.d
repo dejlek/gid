@@ -279,7 +279,7 @@ class IconSource : gobject.boxed.Boxed
 
    * Deprecated: Use #GtkIconTheme instead.
    */
-  void setIconName(string iconName)
+  void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_icon_source_set_icon_name(cast(GtkIconSource*)cPtr, _iconName);

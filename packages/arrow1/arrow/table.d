@@ -121,7 +121,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.table.Table concatenate(arrow.table.Table[] otherTables, arrow.table_concatenate_options.TableConcatenateOptions options)
+  arrow.table.Table concatenate(arrow.table.Table[] otherTables, arrow.table_concatenate_options.TableConcatenateOptions options = null)
   {
     GArrowTable* _cretval;
     auto _otherTables = gListFromD!(arrow.table.Table)(otherTables);
@@ -148,7 +148,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.table.Table filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options)
+  arrow.table.Table filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowTable* _cretval;
     GError *_err;
@@ -159,7 +159,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.table.Table filterChunkedArray(arrow.chunked_array.ChunkedArray filter, arrow.filter_options.FilterOptions options)
+  arrow.table.Table filterChunkedArray(arrow.chunked_array.ChunkedArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowTable* _cretval;
     GError *_err;
@@ -241,7 +241,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.table.Table take(arrow.array.Array indices, arrow.take_options.TakeOptions options)
+  arrow.table.Table take(arrow.array.Array indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowTable* _cretval;
     GError *_err;
@@ -252,7 +252,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.table.Table takeChunkedArray(arrow.chunked_array.ChunkedArray indices, arrow.take_options.TakeOptions options)
+  arrow.table.Table takeChunkedArray(arrow.chunked_array.ChunkedArray indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowTable* _cretval;
     GError *_err;
@@ -281,7 +281,7 @@ class Table : gobject.object.ObjectG
    *   properties = The properties for this write.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool writeAsFeather(arrow.output_stream.OutputStream sink, arrow.feather_write_properties.FeatherWriteProperties properties)
+  bool writeAsFeather(arrow.output_stream.OutputStream sink, arrow.feather_write_properties.FeatherWriteProperties properties = null)
   {
     bool _retval;
     GError *_err;

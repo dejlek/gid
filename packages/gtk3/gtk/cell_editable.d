@@ -44,7 +44,7 @@ interface CellEditable
    *   event = The #GdkEvent that began the editing process, or
    *     %NULL if editing was initiated programmatically
    */
-  void startEditing(gdk.event.Event event);
+  void startEditing(gdk.event.Event event = null);
 
   /**
    * This signal is a sign for the cell renderer to update its

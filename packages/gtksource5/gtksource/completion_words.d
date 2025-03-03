@@ -36,7 +36,7 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
 
   mixin CompletionProviderT!();
 
-  this(string title)
+  this(string title = null)
   {
     GtkSourceCompletionWords* _cretval;
     const(char)* _title = title.toCString(No.Alloc);

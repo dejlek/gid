@@ -107,7 +107,7 @@ template ScrollableT()
    * Params:
    *   hadjustment = a `GtkAdjustment`
    */
-  override void setHadjustment(gtk.adjustment.Adjustment hadjustment)
+  override void setHadjustment(gtk.adjustment.Adjustment hadjustment = null)
   {
     gtk_scrollable_set_hadjustment(cast(GtkScrollable*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null);
   }
@@ -129,7 +129,7 @@ template ScrollableT()
    * Params:
    *   vadjustment = a `GtkAdjustment`
    */
-  override void setVadjustment(gtk.adjustment.Adjustment vadjustment)
+  override void setVadjustment(gtk.adjustment.Adjustment vadjustment = null)
   {
     gtk_scrollable_set_vadjustment(cast(GtkScrollable*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
   }

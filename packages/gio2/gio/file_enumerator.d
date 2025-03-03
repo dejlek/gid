@@ -64,7 +64,7 @@ class FileEnumerator : gobject.object.ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: #TRUE on success or #FALSE on error.
    */
-  bool close(gio.cancellable.Cancellable cancellable)
+  bool close(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -86,7 +86,7 @@ class FileEnumerator : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -222,7 +222,7 @@ class FileEnumerator : gobject.object.ObjectG
    *   cancellable = a #GCancellable
    * Returns:
    */
-  bool iterate(out gio.file_info.FileInfo outInfo, out gio.file.File outChild, gio.cancellable.Cancellable cancellable)
+  bool iterate(out gio.file_info.FileInfo outInfo, out gio.file.File outChild, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GFileInfo* _outInfo;
@@ -252,7 +252,7 @@ class FileEnumerator : gobject.object.ObjectG
    *   or end of enumerator.  Free the returned object with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  gio.file_info.FileInfo nextFile(gio.cancellable.Cancellable cancellable)
+  gio.file_info.FileInfo nextFile(gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
     GError *_err;
@@ -325,7 +325,7 @@ class FileEnumerator : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void nextFilesAsync(int numFiles, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void nextFilesAsync(int numFiles, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

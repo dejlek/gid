@@ -78,7 +78,7 @@ class Cursor : gobject.object.ObjectG
    * Returns: a new `GdkCursor`, or %NULL if there is no
    *   cursor with the given name
    */
-  static gdk.cursor.Cursor newFromName(string name, gdk.cursor.Cursor fallback)
+  static gdk.cursor.Cursor newFromName(string name, gdk.cursor.Cursor fallback = null)
   {
     GdkCursor* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -97,7 +97,7 @@ class Cursor : gobject.object.ObjectG
    *     this one cannot be supported
    * Returns: a new `GdkCursor`
    */
-  static gdk.cursor.Cursor newFromTexture(gdk.texture.Texture texture, int hotspotX, int hotspotY, gdk.cursor.Cursor fallback)
+  static gdk.cursor.Cursor newFromTexture(gdk.texture.Texture texture, int hotspotX, int hotspotY, gdk.cursor.Cursor fallback = null)
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_new_from_texture(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, hotspotX, hotspotY, fallback ? cast(GdkCursor*)fallback.cPtr(No.Dup) : null);

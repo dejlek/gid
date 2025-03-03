@@ -200,7 +200,7 @@ class GLTextureBuilder : gobject.object.ObjectG
    * Params:
    *   context = The context the texture beongs to or %NULL to unset
    */
-  void setContext(gdk.glcontext.GLContext context)
+  void setContext(gdk.glcontext.GLContext context = null)
   {
     gdk_gl_texture_builder_set_context(cast(GdkGLTextureBuilder*)cPtr, context ? cast(GdkGLContext*)context.cPtr(No.Dup) : null);
   }
@@ -289,7 +289,7 @@ class GLTextureBuilder : gobject.object.ObjectG
    * Params:
    *   region = the region to update
    */
-  void setUpdateRegion(cairo.region.Region region)
+  void setUpdateRegion(cairo.region.Region region = null)
   {
     gdk_gl_texture_builder_set_update_region(cast(GdkGLTextureBuilder*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
@@ -300,7 +300,7 @@ class GLTextureBuilder : gobject.object.ObjectG
    * Params:
    *   texture = the texture to update
    */
-  void setUpdateTexture(gdk.texture.Texture texture)
+  void setUpdateTexture(gdk.texture.Texture texture = null)
   {
     gdk_gl_texture_builder_set_update_texture(cast(GdkGLTextureBuilder*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
   }

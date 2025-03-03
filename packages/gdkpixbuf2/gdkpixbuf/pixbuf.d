@@ -401,7 +401,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    * Returns: A newly-created pixbuf
    */
-  static gdkpixbuf.pixbuf.Pixbuf newFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable)
+  static gdkpixbuf.pixbuf.Pixbuf newFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
     PixbufC* _cretval;
     GError *_err;
@@ -437,7 +437,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    * Returns: A newly-created pixbuf
    */
-  static gdkpixbuf.pixbuf.Pixbuf newFromStreamAtScale(gio.input_stream.InputStream stream, int width, int height, bool preserveAspectRatio, gio.cancellable.Cancellable cancellable)
+  static gdkpixbuf.pixbuf.Pixbuf newFromStreamAtScale(gio.input_stream.InputStream stream, int width, int height, bool preserveAspectRatio, gio.cancellable.Cancellable cancellable = null)
   {
     PixbufC* _cretval;
     GError *_err;
@@ -538,7 +538,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    *   callback = a `GAsyncReadyCallback` to call when the file info is available
    */
-  static void getFileInfoAsync(string filename, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void getFileInfoAsync(string filename, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -628,7 +628,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    *   callback = a `GAsyncReadyCallback` to call when the pixbuf is loaded
    */
-  static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -657,7 +657,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    *   callback = a `GAsyncReadyCallback` to call when the pixbuf is loaded
    */
-  static void newFromStreamAtScaleAsync(gio.input_stream.InputStream stream, int width, int height, bool preserveAspectRatio, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void newFromStreamAtScaleAsync(gio.input_stream.InputStream stream, int width, int height, bool preserveAspectRatio, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1267,7 +1267,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    * Returns: `TRUE` if the pixbuf was saved successfully, `FALSE` if an
    *   error was set.
    */
-  bool saveToStreamv(gio.output_stream.OutputStream stream, string type, string[] optionKeys, string[] optionValues, gio.cancellable.Cancellable cancellable)
+  bool saveToStreamv(gio.output_stream.OutputStream stream, string type, string[] optionKeys, string[] optionValues, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _type = type.toCString(No.Alloc);
@@ -1305,7 +1305,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    *   callback = a `GAsyncReadyCallback` to call when the pixbuf is saved
    */
-  void saveToStreamvAsync(gio.output_stream.OutputStream stream, string type, string[] optionKeys, string[] optionValues, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void saveToStreamvAsync(gio.output_stream.OutputStream stream, string type, string[] optionKeys, string[] optionValues, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

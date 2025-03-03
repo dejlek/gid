@@ -107,7 +107,7 @@ class ScrolledWindow : gtk.bin.Bin
    *   vadjustment = vertical adjustment
    * Returns: a new scrolled window
    */
-  this(gtk.adjustment.Adjustment hadjustment, gtk.adjustment.Adjustment vadjustment)
+  this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
@@ -358,7 +358,7 @@ class ScrolledWindow : gtk.bin.Bin
    * Params:
    *   hadjustment = the #GtkAdjustment to use, or %NULL to create a new one
    */
-  void setHadjustment(gtk.adjustment.Adjustment hadjustment)
+  void setHadjustment(gtk.adjustment.Adjustment hadjustment = null)
   {
     gtk_scrolled_window_set_hadjustment(cast(GtkScrolledWindow*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null);
   }
@@ -513,7 +513,7 @@ class ScrolledWindow : gtk.bin.Bin
    * Params:
    *   vadjustment = the #GtkAdjustment to use, or %NULL to create a new one
    */
-  void setVadjustment(gtk.adjustment.Adjustment vadjustment)
+  void setVadjustment(gtk.adjustment.Adjustment vadjustment = null)
   {
     gtk_scrolled_window_set_vadjustment(cast(GtkScrolledWindow*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
   }

@@ -177,7 +177,7 @@ interface RecentChooser
    * Params:
    *   filter = a #GtkRecentFilter
    */
-  void setFilter(gtk.recent_filter.RecentFilter filter);
+  void setFilter(gtk.recent_filter.RecentFilter filter = null);
 
   /**
    * Sets the number of items that should be returned by

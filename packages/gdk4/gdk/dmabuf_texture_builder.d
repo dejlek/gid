@@ -385,7 +385,7 @@ class DmabufTextureBuilder : gobject.object.ObjectG
    * Params:
    *   region = the region to update
    */
-  void setUpdateRegion(cairo.region.Region region)
+  void setUpdateRegion(cairo.region.Region region = null)
   {
     gdk_dmabuf_texture_builder_set_update_region(cast(GdkDmabufTextureBuilder*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
@@ -396,7 +396,7 @@ class DmabufTextureBuilder : gobject.object.ObjectG
    * Params:
    *   texture = the texture to update
    */
-  void setUpdateTexture(gdk.texture.Texture texture)
+  void setUpdateTexture(gdk.texture.Texture texture = null)
   {
     gdk_dmabuf_texture_builder_set_update_texture(cast(GdkDmabufTextureBuilder*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
   }

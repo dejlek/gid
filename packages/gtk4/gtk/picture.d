@@ -93,7 +93,7 @@ class Picture : gtk.widget.Widget
    *   file = a `GFile`
    * Returns: a new `GtkPicture`
    */
-  static gtk.picture.Picture newForFile(gio.file.File file)
+  static gtk.picture.Picture newForFile(gio.file.File file = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_picture_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
@@ -109,7 +109,7 @@ class Picture : gtk.widget.Widget
    *   filename = a filename
    * Returns: a new `GtkPicture`
    */
-  static gtk.picture.Picture newForFilename(string filename)
+  static gtk.picture.Picture newForFilename(string filename = null)
   {
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -126,7 +126,7 @@ class Picture : gtk.widget.Widget
    *   paintable = a `GdkPaintable`
    * Returns: a new `GtkPicture`
    */
-  static gtk.picture.Picture newForPaintable(gdk.paintable.Paintable paintable)
+  static gtk.picture.Picture newForPaintable(gdk.paintable.Paintable paintable = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_picture_new_for_paintable(paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
@@ -146,7 +146,7 @@ class Picture : gtk.widget.Widget
    * Deprecated: Use [gtk.picture.Picture.newForPaintable] and
    *   [gdk.texture.Texture.newForPixbuf] instead
    */
-  static gtk.picture.Picture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  static gtk.picture.Picture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_picture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
@@ -162,7 +162,7 @@ class Picture : gtk.widget.Widget
    *   resourcePath = resource path to play back
    * Returns: a new `GtkPicture`
    */
-  static gtk.picture.Picture newForResource(string resourcePath)
+  static gtk.picture.Picture newForResource(string resourcePath = null)
   {
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -257,7 +257,7 @@ class Picture : gtk.widget.Widget
    * Params:
    *   alternativeText = a textual description of the contents
    */
-  void setAlternativeText(string alternativeText)
+  void setAlternativeText(string alternativeText = null)
   {
     const(char)* _alternativeText = alternativeText.toCString(No.Alloc);
     gtk_picture_set_alternative_text(cast(GtkPicture*)cPtr, _alternativeText);
@@ -296,7 +296,7 @@ class Picture : gtk.widget.Widget
    * Params:
    *   file = a `GFile`
    */
-  void setFile(gio.file.File file)
+  void setFile(gio.file.File file = null)
   {
     gtk_picture_set_file(cast(GtkPicture*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
@@ -307,7 +307,7 @@ class Picture : gtk.widget.Widget
    * Params:
    *   filename = the filename to play
    */
-  void setFilename(string filename)
+  void setFilename(string filename = null)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_picture_set_filename(cast(GtkPicture*)cPtr, _filename);
@@ -340,7 +340,7 @@ class Picture : gtk.widget.Widget
    * Params:
    *   paintable = a `GdkPaintable`
    */
-  void setPaintable(gdk.paintable.Paintable paintable)
+  void setPaintable(gdk.paintable.Paintable paintable = null)
   {
     gtk_picture_set_paintable(cast(GtkPicture*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
@@ -354,7 +354,7 @@ class Picture : gtk.widget.Widget
 
    * Deprecated: Use [gtk.picture.Picture.setPaintable] instead
    */
-  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_picture_set_pixbuf(cast(GtkPicture*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
@@ -366,7 +366,7 @@ class Picture : gtk.widget.Widget
    * Params:
    *   resourcePath = the resource to set
    */
-  void setResource(string resourcePath)
+  void setResource(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_picture_set_resource(cast(GtkPicture*)cPtr, _resourcePath);

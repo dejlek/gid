@@ -29,7 +29,7 @@ class JSONReader : gobject.object.ObjectG
     return getType();
   }
 
-  this(arrow.input_stream.InputStream input, arrow.jsonread_options.JSONReadOptions options)
+  this(arrow.input_stream.InputStream input, arrow.jsonread_options.JSONReadOptions options = null)
   {
     GArrowJSONReader* _cretval;
     GError *_err;

@@ -138,7 +138,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
    *   child = the `GtkWidget` to insert
    *   sibling = the sibling after which to insert child
    */
-  void insertChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling)
+  void insertChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null)
   {
     gtk_box_insert_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
   }
@@ -174,7 +174,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
    *   child = the `GtkWidget` to move, must be a child of box
    *   sibling = the sibling to move child after
    */
-  void reorderChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling)
+  void reorderChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null)
   {
     gtk_box_reorder_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
   }

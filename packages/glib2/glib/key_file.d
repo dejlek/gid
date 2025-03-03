@@ -221,7 +221,7 @@ class KeyFile : gobject.boxed.Boxed
    *   key = a key
    * Returns: a comment that should be freed with [glib.global.gfree]
    */
-  string getComment(string groupName, string key)
+  string getComment(string groupName = null, string key = null)
   {
     char* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -451,7 +451,7 @@ class KeyFile : gobject.boxed.Boxed
    * Returns: the locale from the file, or %NULL if the key was not
    *   found or the entry in the file was was untranslated
    */
-  string getLocaleForKey(string groupName, string key, string locale)
+  string getLocaleForKey(string groupName, string key, string locale = null)
   {
     char* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -480,7 +480,7 @@ class KeyFile : gobject.boxed.Boxed
    * Returns: a newly allocated string or %NULL if the specified
    *   key cannot be found.
    */
-  string getLocaleString(string groupName, string key, string locale)
+  string getLocaleString(string groupName, string key, string locale = null)
   {
     char* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -515,7 +515,7 @@ class KeyFile : gobject.boxed.Boxed
    *   or %NULL if the key isn't found. The string array should be freed
    *   with [glib.global.strfreev].
    */
-  string[] getLocaleStringList(string groupName, string key, string locale)
+  string[] getLocaleStringList(string groupName, string key, string locale = null)
   {
     char** _cretval;
     size_t _cretlength;
@@ -805,7 +805,7 @@ class KeyFile : gobject.boxed.Boxed
    *   key = a key
    * Returns: %TRUE if the comment was removed, %FALSE otherwise
    */
-  bool removeComment(string groupName, string key)
+  bool removeComment(string groupName = null, string key = null)
   {
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);

@@ -66,7 +66,7 @@ class ColorDialog : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void chooseRgba(gtk.window.Window parent, gdk.rgba.RGBA initialColor, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void chooseRgba(gtk.window.Window parent = null, gdk.rgba.RGBA initialColor = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

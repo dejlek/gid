@@ -101,7 +101,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
    * Returns: the number of bytes read into stream's buffer, up to count,
    *   or -1 on error.
    */
-  ptrdiff_t fill(ptrdiff_t count, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t fill(ptrdiff_t count, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     GError *_err;
@@ -123,7 +123,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
    *   cancellable = optional #GCancellable object
    *   callback = a #GAsyncReadyCallback
    */
-  void fillAsync(ptrdiff_t count, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void fillAsync(ptrdiff_t count, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -232,7 +232,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
    *   cancellable = optional #GCancellable object, %NULL to ignore
    * Returns: the byte read from the stream, or -1 on end of stream or error.
    */
-  int readByte(gio.cancellable.Cancellable cancellable)
+  int readByte(gio.cancellable.Cancellable cancellable = null)
   {
     int _retval;
     GError *_err;

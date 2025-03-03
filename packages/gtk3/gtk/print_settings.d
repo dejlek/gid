@@ -99,7 +99,7 @@ class PrintSettings : gobject.object.ObjectG
    *     the default “Print Settings”
    * Returns: the restored #GtkPrintSettings
    */
-  static gtk.print_settings.PrintSettings newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName)
+  static gtk.print_settings.PrintSettings newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     GtkPrintSettings* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -617,7 +617,7 @@ class PrintSettings : gobject.object.ObjectG
    *     “Print Settings”
    * Returns: %TRUE on success
    */
-  bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName)
+  bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -634,7 +634,7 @@ class PrintSettings : gobject.object.ObjectG
    *   key = a key
    *   value = a string value, or %NULL
    */
-  void set(string key, string value)
+  void set(string key, string value = null)
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -1000,7 +1000,7 @@ class PrintSettings : gobject.object.ObjectG
    *   groupName = the group to add the settings to in key_file, or
    *     %NULL to use the default “Print Settings”
    */
-  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName)
+  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     gtk_print_settings_to_key_file(cast(GtkPrintSettings*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName);

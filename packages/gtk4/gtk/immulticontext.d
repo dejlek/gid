@@ -65,7 +65,7 @@ class IMMulticontext : gtk.imcontext.IMContext
    * Params:
    *   contextId = the id to use
    */
-  void setContextId(string contextId)
+  void setContextId(string contextId = null)
   {
     const(char)* _contextId = contextId.toCString(No.Alloc);
     gtk_im_multicontext_set_context_id(cast(GtkIMMulticontext*)cPtr, _contextId);

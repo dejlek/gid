@@ -160,7 +160,7 @@ class SubprocessLauncher : gobject.object.ObjectG
    * Params:
    *   path = a filename or %NULL
    */
-  void setStderrFilePath(string path)
+  void setStderrFilePath(string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stderr_file_path(cast(GSubprocessLauncher*)cPtr, _path);
@@ -176,7 +176,7 @@ class SubprocessLauncher : gobject.object.ObjectG
    * Params:
    *   path = a filename or %NULL
    */
-  void setStdinFilePath(string path)
+  void setStdinFilePath(string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stdin_file_path(cast(GSubprocessLauncher*)cPtr, _path);
@@ -193,7 +193,7 @@ class SubprocessLauncher : gobject.object.ObjectG
    * Params:
    *   path = a filename or %NULL
    */
-  void setStdoutFilePath(string path)
+  void setStdoutFilePath(string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stdout_file_path(cast(GSubprocessLauncher*)cPtr, _path);

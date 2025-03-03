@@ -102,7 +102,7 @@ class PixbufAnimation : gobject.object.ObjectG
    *   cancellable = optional `GCancellable` object
    * Returns: A newly-created animation
    */
-  static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable)
+  static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
     GdkPixbufAnimation* _cretval;
     GError *_err;
@@ -143,7 +143,7 @@ class PixbufAnimation : gobject.object.ObjectG
    *   cancellable = optional #GCancellable object
    *   callback = a `GAsyncReadyCallback` to call when the pixbuf is loaded
    */
-  static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -202,7 +202,7 @@ class PixbufAnimation : gobject.object.ObjectG
    *   startTime = time when the animation starts playing
    * Returns: an iterator to move over the animation
    */
-  gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter getIter(glib.time_val.TimeVal startTime)
+  gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter getIter(glib.time_val.TimeVal startTime = null)
   {
     GdkPixbufAnimationIter* _cretval;
     _cretval = gdk_pixbuf_animation_get_iter(cast(GdkPixbufAnimation*)cPtr, startTime ? cast(const(GTimeVal)*)startTime.cPtr : null);

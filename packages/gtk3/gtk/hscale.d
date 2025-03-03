@@ -49,7 +49,7 @@ class HScale : gtk.scale.Scale
 
    * Deprecated: Use [gtk.scale.Scale.new_] with %GTK_ORIENTATION_HORIZONTAL instead
    */
-  this(gtk.adjustment.Adjustment adjustment)
+  this(gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_hscale_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);

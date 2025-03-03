@@ -27,7 +27,7 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
     return getType();
   }
 
-  this(arrow.record_batch_reader.RecordBatchReader reader, arrow.write_options.WriteOptions options)
+  this(arrow.record_batch_reader.RecordBatchReader reader, arrow.write_options.WriteOptions options = null)
   {
     GAFlightRecordBatchStream* _cretval;
     _cretval = gaflight_record_batch_stream_new(reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options.cPtr(No.Dup) : null);

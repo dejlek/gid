@@ -359,7 +359,7 @@ class Menu : gtk.menu_shell.MenuShell
    *   triggerEvent = the #GdkEvent that initiated this request or
    *     %NULL if it's the current event
    */
-  void popupAtPointer(gdk.event.Event triggerEvent)
+  void popupAtPointer(gdk.event.Event triggerEvent = null)
   {
     gtk_menu_popup_at_pointer(cast(GtkMenu*)cPtr, triggerEvent ? cast(const(GdkEvent)*)triggerEvent.cPtr : null);
   }
@@ -387,7 +387,7 @@ class Menu : gtk.menu_shell.MenuShell
    *   triggerEvent = the #GdkEvent that initiated this request or
    *     %NULL if it's the current event
    */
-  void popupAtRect(gdk.window.Window rectWindow, gdk.rectangle.Rectangle rect, gdk.types.Gravity rectAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent)
+  void popupAtRect(gdk.window.Window rectWindow, gdk.rectangle.Rectangle rect, gdk.types.Gravity rectAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent = null)
   {
     gtk_menu_popup_at_rect(cast(GtkMenu*)cPtr, rectWindow ? cast(GdkWindow*)rectWindow.cPtr(No.Dup) : null, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null, rectAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent.cPtr : null);
   }
@@ -415,7 +415,7 @@ class Menu : gtk.menu_shell.MenuShell
    *   triggerEvent = the #GdkEvent that initiated this request or
    *     %NULL if it's the current event
    */
-  void popupAtWidget(gtk.widget.Widget widget, gdk.types.Gravity widgetAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent)
+  void popupAtWidget(gtk.widget.Widget widget, gdk.types.Gravity widgetAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent = null)
   {
     gtk_menu_popup_at_widget(cast(GtkMenu*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, widgetAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent.cPtr : null);
   }
@@ -501,7 +501,7 @@ class Menu : gtk.menu_shell.MenuShell
    *   accelGroup = the #GtkAccelGroup to be associated
    *     with the menu.
    */
-  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup)
+  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null)
   {
     gtk_menu_set_accel_group(cast(GtkMenu*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
   }
@@ -530,7 +530,7 @@ class Menu : gtk.menu_shell.MenuShell
    * Params:
    *   accelPath = a valid accelerator path, or %NULL to unset the path
    */
-  void setAccelPath(string accelPath)
+  void setAccelPath(string accelPath = null)
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_menu_set_accel_path(cast(GtkMenu*)cPtr, _accelPath);
@@ -583,7 +583,7 @@ class Menu : gtk.menu_shell.MenuShell
    *   screen = a #GdkScreen, or %NULL if the screen should be
    *     determined by the widget the menu is attached to
    */
-  void setScreen(gdk.screen.Screen screen)
+  void setScreen(gdk.screen.Screen screen = null)
   {
     gtk_menu_set_screen(cast(GtkMenu*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
   }
@@ -611,7 +611,7 @@ class Menu : gtk.menu_shell.MenuShell
    *   title = a string containing the title for the menu, or %NULL to
    *     inherit the title of the parent menu item, if any
    */
-  void setTitle(string title)
+  void setTitle(string title = null)
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_menu_set_title(cast(GtkMenu*)cPtr, _title);

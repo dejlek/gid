@@ -236,7 +236,7 @@ class IconInfo : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback to call when the
    *     request is satisfied
    */
-  void loadIconAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void loadIconAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -290,7 +290,7 @@ class IconInfo : gobject.object.ObjectG
    *   not modify the icon. Use [cairo.surface.Surface.destroy] to release your
    *   reference to the icon.
    */
-  cairo.surface.Surface loadSurface(gdk.window.Window forWindow)
+  cairo.surface.Surface loadSurface(gdk.window.Window forWindow = null)
   {
     cairo_surface_t* _cretval;
     GError *_err;
@@ -356,7 +356,7 @@ class IconInfo : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback to call when the
    *     request is satisfied
    */
-  void loadSymbolicAsync(gdk.rgba.RGBA fg, gdk.rgba.RGBA successColor, gdk.rgba.RGBA warningColor, gdk.rgba.RGBA errorColor, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void loadSymbolicAsync(gdk.rgba.RGBA fg, gdk.rgba.RGBA successColor = null, gdk.rgba.RGBA warningColor = null, gdk.rgba.RGBA errorColor = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -433,7 +433,7 @@ class IconInfo : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback to call when the
    *     request is satisfied
    */
-  void loadSymbolicForContextAsync(gtk.style_context.StyleContext context, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void loadSymbolicForContextAsync(gtk.style_context.StyleContext context, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

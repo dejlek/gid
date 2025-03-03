@@ -54,7 +54,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
    *   text = The text to display.
    * Returns: a new `GtkInscription`
    */
-  this(string text)
+  this(string text = null)
   {
     GtkWidget* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -189,7 +189,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
    * Params:
    *   attrs = a [pango.attr_list.AttrList]
    */
-  void setAttributes(pango.attr_list.AttrList attrs)
+  void setAttributes(pango.attr_list.AttrList attrs = null)
   {
     gtk_inscription_set_attributes(cast(GtkInscription*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
@@ -200,7 +200,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
    * Params:
    *   markup = The markup to display
    */
-  void setMarkup(string markup)
+  void setMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_inscription_set_markup(cast(GtkInscription*)cPtr, _markup);
@@ -255,7 +255,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
    * Params:
    *   text = The text to display
    */
-  void setText(string text)
+  void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_inscription_set_text(cast(GtkInscription*)cPtr, _text);

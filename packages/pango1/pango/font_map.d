@@ -174,7 +174,7 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
    *   variations = font variations to use
    * Returns: the modified font
    */
-  pango.font.Font reloadFont(pango.font.Font font, double scale, pango.context.Context context, string variations)
+  pango.font.Font reloadFont(pango.font.Font font, double scale, pango.context.Context context = null, string variations = null)
   {
     PangoFont* _cretval;
     const(char)* _variations = variations.toCString(No.Alloc);

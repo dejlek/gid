@@ -813,7 +813,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 
    * Deprecated: Use [vte.terminal.Terminal.matchSetCursorName] instead.
    */
-  void matchSetCursor(int tag, gdk.cursor.Cursor cursor)
+  void matchSetCursor(int tag, gdk.cursor.Cursor cursor = null)
   {
     vte_terminal_match_set_cursor(cast(VteTerminal*)cPtr, tag, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
@@ -875,7 +875,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #VtePty
    */
-  vte.pty.Pty ptyNewSync(vte.types.PtyFlags flags, gio.cancellable.Cancellable cancellable)
+  vte.pty.Pty ptyNewSync(vte.types.PtyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     VtePty* _cretval;
     GError *_err;
@@ -1097,7 +1097,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   bold = the new bold color or %NULL
    */
-  void setColorBold(gdk.rgba.RGBA bold)
+  void setColorBold(gdk.rgba.RGBA bold = null)
   {
     vte_terminal_set_color_bold(cast(VteTerminal*)cPtr, bold ? cast(const(GdkRGBA)*)bold.cPtr(No.Dup) : null);
   }
@@ -1109,7 +1109,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   cursorBackground = the new color to use for the text cursor, or %NULL
    */
-  void setColorCursor(gdk.rgba.RGBA cursorBackground)
+  void setColorCursor(gdk.rgba.RGBA cursorBackground = null)
   {
     vte_terminal_set_color_cursor(cast(VteTerminal*)cPtr, cursorBackground ? cast(const(GdkRGBA)*)cursorBackground.cPtr(No.Dup) : null);
   }
@@ -1121,7 +1121,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   cursorForeground = the new color to use for the text cursor, or %NULL
    */
-  void setColorCursorForeground(gdk.rgba.RGBA cursorForeground)
+  void setColorCursorForeground(gdk.rgba.RGBA cursorForeground = null)
   {
     vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)cPtr, cursorForeground ? cast(const(GdkRGBA)*)cursorForeground.cPtr(No.Dup) : null);
   }
@@ -1144,7 +1144,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   highlightBackground = the new color to use for highlighted text, or %NULL
    */
-  void setColorHighlight(gdk.rgba.RGBA highlightBackground)
+  void setColorHighlight(gdk.rgba.RGBA highlightBackground = null)
   {
     vte_terminal_set_color_highlight(cast(VteTerminal*)cPtr, highlightBackground ? cast(const(GdkRGBA)*)highlightBackground.cPtr(No.Dup) : null);
   }
@@ -1157,7 +1157,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   highlightForeground = the new color to use for highlighted text, or %NULL
    */
-  void setColorHighlightForeground(gdk.rgba.RGBA highlightForeground)
+  void setColorHighlightForeground(gdk.rgba.RGBA highlightForeground = null)
   {
     vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)cPtr, highlightForeground ? cast(const(GdkRGBA)*)highlightForeground.cPtr(No.Dup) : null);
   }
@@ -1196,7 +1196,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   menu = a menu
    */
-  void setContextMenu(gtk.widget.Widget menu)
+  void setContextMenu(gtk.widget.Widget menu = null)
   {
     vte_terminal_set_context_menu(cast(VteTerminal*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.Dup) : null);
   }
@@ -1207,7 +1207,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   model = a #GMenuModel
    */
-  void setContextMenuModel(gio.menu_model.MenuModel model)
+  void setContextMenuModel(gio.menu_model.MenuModel model = null)
   {
     vte_terminal_set_context_menu_model(cast(VteTerminal*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
@@ -1311,7 +1311,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 
    * Deprecated: Support for non-UTF-8 is deprecated.
    */
-  bool setEncoding(string codeset)
+  bool setEncoding(string codeset = null)
   {
     bool _retval;
     const(char)* _codeset = codeset.toCString(No.Alloc);
@@ -1331,7 +1331,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   fontDesc = a #PangoFontDescription for the desired font, or %NULL
    */
-  void setFont(pango.font_description.FontDescription fontDesc)
+  void setFont(pango.font_description.FontDescription fontDesc = null)
   {
     vte_terminal_set_font(cast(VteTerminal*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.Dup) : null);
   }
@@ -1345,7 +1345,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   fontOptions = the font options, or %NULL
    */
-  override void setFontOptions(cairo.font_options.FontOptions fontOptions)
+  override void setFontOptions(cairo.font_options.FontOptions fontOptions = null)
   {
     vte_terminal_set_font_options(cast(VteTerminal*)cPtr, fontOptions ? cast(const(cairo_font_options_t)*)fontOptions.cPtr(No.Dup) : null);
   }
@@ -1391,7 +1391,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   pty = a #VtePty, or %NULL
    */
-  void setPty(vte.pty.Pty pty)
+  void setPty(vte.pty.Pty pty = null)
   {
     vte_terminal_set_pty(cast(VteTerminal*)cPtr, pty ? cast(VtePty*)pty.cPtr(No.Dup) : null);
   }
@@ -1576,7 +1576,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #VteTerminalSpawnAsyncCallback, or %NULL
    */
-  void spawnAsync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable, vte.types.TerminalSpawnAsyncCallback callback)
+  void spawnAsync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, vte.types.TerminalSpawnAsyncCallback callback = null)
   {
     extern(C) void _childSetupCallback(void* data)
     {
@@ -1648,7 +1648,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 
    * Deprecated: Use [vte.terminal.Terminal.spawnAsync] instead.
    */
-  bool spawnSync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, gio.cancellable.Cancellable cancellable)
+  bool spawnSync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, gio.cancellable.Cancellable cancellable = null)
   {
     extern(C) void _childSetupCallback(void* data)
     {
@@ -1732,7 +1732,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #VteTerminalSpawnAsyncCallback, or %NULL
    */
-  void spawnWithFdsAsync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable, vte.types.TerminalSpawnAsyncCallback callback)
+  void spawnWithFdsAsync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, vte.types.TerminalSpawnAsyncCallback callback = null)
   {
     extern(C) void _childSetupCallback(void* data)
     {
@@ -1822,7 +1822,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    *   cancellable = a #GCancellable object, or %NULL
    * Returns: %TRUE on success, %FALSE if there was an error
    */
-  bool writeContentsSync(gio.output_stream.OutputStream stream, vte.types.WriteFlags flags, gio.cancellable.Cancellable cancellable)
+  bool writeContentsSync(gio.output_stream.OutputStream stream, vte.types.WriteFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;

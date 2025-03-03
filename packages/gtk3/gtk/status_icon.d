@@ -557,7 +557,7 @@ class StatusIcon : gobject.object.ObjectG
    *   provide status notifications; you can use [gio.notification.Notification.setIcon]
    *   to associate a #GIcon with a notification
    */
-  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_status_icon_set_from_pixbuf(cast(GtkStatusIcon*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
@@ -660,7 +660,7 @@ class StatusIcon : gobject.object.ObjectG
    *   provide status notifications; there is no direct replacement
    *   for this function
    */
-  void setTooltipMarkup(string markup)
+  void setTooltipMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_status_icon_set_tooltip_markup(cast(GtkStatusIcon*)cPtr, _markup);

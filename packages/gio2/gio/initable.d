@@ -77,5 +77,5 @@ interface Initable
    * Returns: %TRUE if successful. If an error has occurred, this function will
    *   return %FALSE and set error appropriately if present.
    */
-  bool init_(gio.cancellable.Cancellable cancellable);
+  bool init_(gio.cancellable.Cancellable cancellable = null);
 }

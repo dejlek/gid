@@ -165,7 +165,7 @@ class FileDialog : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void open(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void open(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -212,7 +212,7 @@ class FileDialog : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void openMultiple(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void openMultiple(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -258,7 +258,7 @@ class FileDialog : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void save(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void save(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -306,7 +306,7 @@ class FileDialog : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void selectFolder(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void selectFolder(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -353,7 +353,7 @@ class FileDialog : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void selectMultipleFolders(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void selectMultipleFolders(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -395,7 +395,7 @@ class FileDialog : gobject.object.ObjectG
    * Params:
    *   acceptLabel = the new accept label
    */
-  void setAcceptLabel(string acceptLabel)
+  void setAcceptLabel(string acceptLabel = null)
   {
     const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
     gtk_file_dialog_set_accept_label(cast(GtkFileDialog*)cPtr, _acceptLabel);
@@ -410,7 +410,7 @@ class FileDialog : gobject.object.ObjectG
    * Params:
    *   filter = a `GtkFileFilter`
    */
-  void setDefaultFilter(gtk.file_filter.FileFilter filter)
+  void setDefaultFilter(gtk.file_filter.FileFilter filter = null)
   {
     gtk_file_dialog_set_default_filter(cast(GtkFileDialog*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
@@ -421,7 +421,7 @@ class FileDialog : gobject.object.ObjectG
    * Params:
    *   filters = a `GListModel` of `GtkFileFilters`
    */
-  void setFilters(gio.list_model.ListModel filters)
+  void setFilters(gio.list_model.ListModel filters = null)
   {
     gtk_file_dialog_set_filters(cast(GtkFileDialog*)cPtr, filters ? cast(GListModel*)(cast(ObjectG)filters).cPtr(No.Dup) : null);
   }
@@ -436,7 +436,7 @@ class FileDialog : gobject.object.ObjectG
    * Params:
    *   file = a `GFile`
    */
-  void setInitialFile(gio.file.File file)
+  void setInitialFile(gio.file.File file = null)
   {
     gtk_file_dialog_set_initial_file(cast(GtkFileDialog*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
@@ -447,7 +447,7 @@ class FileDialog : gobject.object.ObjectG
    * Params:
    *   folder = a `GFile`
    */
-  void setInitialFolder(gio.file.File folder)
+  void setInitialFolder(gio.file.File folder = null)
   {
     gtk_file_dialog_set_initial_folder(cast(GtkFileDialog*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.Dup) : null);
   }
@@ -460,7 +460,7 @@ class FileDialog : gobject.object.ObjectG
    * Params:
    *   name = a UTF8 string
    */
-  void setInitialName(string name)
+  void setInitialName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_file_dialog_set_initial_name(cast(GtkFileDialog*)cPtr, _name);

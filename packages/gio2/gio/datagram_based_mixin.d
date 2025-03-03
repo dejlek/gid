@@ -111,7 +111,7 @@ template DatagramBasedT()
    *   cancellable = a #GCancellable
    * Returns: %TRUE if the condition was met, %FALSE otherwise
    */
-  override bool conditionWait(glib.types.IOCondition condition, long timeout, gio.cancellable.Cancellable cancellable)
+  override bool conditionWait(glib.types.IOCondition condition, long timeout, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -138,7 +138,7 @@ template DatagramBasedT()
    *   cancellable = a #GCancellable
    * Returns: a newly allocated #GSource
    */
-  override glib.source.Source createSource(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable)
+  override glib.source.Source createSource(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable = null)
   {
     GSource* _cretval;
     _cretval = g_datagram_based_create_source(cast(GDatagramBased*)cPtr, condition, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);

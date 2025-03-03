@@ -31,7 +31,7 @@ class RepeatNode : gsk.render_node.RenderNode
    *     use the child's bounds
    * Returns: A new `GskRenderNode`
    */
-  this(graphene.rect.Rect bounds, gsk.render_node.RenderNode child, graphene.rect.Rect childBounds)
+  this(graphene.rect.Rect bounds, gsk.render_node.RenderNode child, graphene.rect.Rect childBounds = null)
   {
     GskRenderNode* _cretval;
     _cretval = gsk_repeat_node_new(bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, childBounds ? cast(const(graphene_rect_t)*)childBounds.cPtr(No.Dup) : null);

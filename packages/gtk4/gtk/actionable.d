@@ -55,7 +55,7 @@ interface Actionable
    * Params:
    *   actionName = an action name
    */
-  void setActionName(string actionName);
+  void setActionName(string actionName = null);
 
   /**
    * Sets the target value of an actionable widget.
@@ -76,7 +76,7 @@ interface Actionable
    * Params:
    *   targetValue = a [glib.variant.VariantG] to set as the target value
    */
-  void setActionTargetValue(glib.variant.VariantG targetValue);
+  void setActionTargetValue(glib.variant.VariantG targetValue = null);
 
   /**
    * Sets the action-name and associated string target value of an

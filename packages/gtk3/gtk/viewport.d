@@ -61,7 +61,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
    *   vadjustment = vertical adjustment
    * Returns: a new #GtkViewport
    */
-  this(gtk.adjustment.Adjustment hadjustment, gtk.adjustment.Adjustment vadjustment)
+  this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
@@ -140,7 +140,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.scrollable.Scrollable.setHadjustment]
    */
-  void setHadjustment(gtk.adjustment.Adjustment adjustment)
+  void setHadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_viewport_set_hadjustment(cast(GtkViewport*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
@@ -162,7 +162,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.scrollable.Scrollable.setVadjustment]
    */
-  void setVadjustment(gtk.adjustment.Adjustment adjustment)
+  void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_viewport_set_vadjustment(cast(GtkViewport*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }

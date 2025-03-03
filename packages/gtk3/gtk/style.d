@@ -180,7 +180,7 @@ class Style : gobject.object.ObjectG
 
    * Deprecated: Use [gtk.global.renderIconPixbuf] instead
    */
-  gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.icon_source.IconSource source, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget, string detail)
+  gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.icon_source.IconSource source, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget = null, string detail = null)
   {
     PixbufC* _cretval;
     const(char)* _detail = detail.toCString(No.Alloc);

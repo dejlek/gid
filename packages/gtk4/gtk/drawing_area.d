@@ -176,7 +176,7 @@ class DrawingArea : gtk.widget.Widget
    *   drawFunc = callback that lets you draw
    *     the drawing area's contents
    */
-  void setDrawFunc(gtk.types.DrawingAreaDrawFunc drawFunc)
+  void setDrawFunc(gtk.types.DrawingAreaDrawFunc drawFunc = null)
   {
     extern(C) void _drawFuncCallback(GtkDrawingArea* drawingArea, cairo_t* cr, int width, int height, void* userData)
     {

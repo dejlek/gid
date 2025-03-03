@@ -399,7 +399,7 @@ class Cookie : gobject.boxed.Boxed
    *   not be parsed, or contained an illegal "domain" attribute for a
    *   cookie originating from origin.
    */
-  static soup.cookie.Cookie parse(string header, glib.uri.Uri origin)
+  static soup.cookie.Cookie parse(string header, glib.uri.Uri origin = null)
   {
     SoupCookie* _cretval;
     const(char)* _header = header.toCString(No.Alloc);

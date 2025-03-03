@@ -29,7 +29,7 @@ class CSVReader : gobject.object.ObjectG
     return getType();
   }
 
-  this(arrow.input_stream.InputStream input, arrow.csvread_options.CSVReadOptions options)
+  this(arrow.input_stream.InputStream input, arrow.csvread_options.CSVReadOptions options = null)
   {
     GArrowCSVReader* _cretval;
     GError *_err;

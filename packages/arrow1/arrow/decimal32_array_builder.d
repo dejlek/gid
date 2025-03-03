@@ -38,7 +38,7 @@ class Decimal32ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
 
   alias appendValue = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValue;
 
-  bool appendValue(arrow.decimal32.Decimal32 value)
+  bool appendValue(arrow.decimal32.Decimal32 value = null)
   {
     bool _retval;
     GError *_err;

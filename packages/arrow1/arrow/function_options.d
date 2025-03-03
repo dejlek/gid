@@ -25,7 +25,7 @@ class FunctionOptions : gobject.object.ObjectG
     return getType();
   }
 
-  bool equal(arrow.function_options.FunctionOptions otherOptions)
+  bool equal(arrow.function_options.FunctionOptions otherOptions = null)
   {
     bool _retval;
     _retval = garrow_function_options_equal(cast(GArrowFunctionOptions*)cPtr, otherOptions ? cast(GArrowFunctionOptions*)otherOptions.cPtr(No.Dup) : null);

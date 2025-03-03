@@ -517,7 +517,7 @@ class IOChannel : gobject.boxed.Boxed
    *   encoding = the encoding type
    * Returns: %G_IO_STATUS_NORMAL if the encoding was successfully set
    */
-  glib.types.IOStatus setEncoding(string encoding)
+  glib.types.IOStatus setEncoding(string encoding = null)
   {
     GIOStatus _cretval;
     const(char)* _encoding = encoding.toCString(No.Alloc);

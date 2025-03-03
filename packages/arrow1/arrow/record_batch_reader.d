@@ -29,7 +29,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return getType();
   }
 
-  this(arrow.record_batch.RecordBatch[] recordBatches, arrow.schema.Schema schema)
+  this(arrow.record_batch.RecordBatch[] recordBatches, arrow.schema.Schema schema = null)
   {
     GArrowRecordBatchReader* _cretval;
     auto _recordBatches = gListFromD!(arrow.record_batch.RecordBatch)(recordBatches);

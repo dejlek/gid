@@ -140,7 +140,7 @@ class AccelGroup : gobject.object.ObjectG
    *     group, or %NULL to remove all closures
    * Returns: %TRUE if the closure was found and got disconnected
    */
-  bool disconnect(gobject.closure.Closure closure)
+  bool disconnect(gobject.closure.Closure closure = null)
   {
     bool _retval;
     _retval = gtk_accel_group_disconnect(cast(GtkAccelGroup*)cPtr, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);

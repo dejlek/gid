@@ -159,7 +159,7 @@ class Sphere : gobject.boxed.Boxed
    *   center = the center of the sphere
    * Returns: the initialized #graphene_sphere_t
    */
-  graphene.sphere.Sphere initFromPoints(graphene.point3_d.Point3D[] points, graphene.point3_d.Point3D center)
+  graphene.sphere.Sphere initFromPoints(graphene.point3_d.Point3D[] points, graphene.point3_d.Point3D center = null)
   {
     graphene_sphere_t* _cretval;
     uint _nPoints;
@@ -185,7 +185,7 @@ class Sphere : gobject.boxed.Boxed
    *   center = the center of the sphere
    * Returns: the initialized #graphene_sphere_t
    */
-  graphene.sphere.Sphere initFromVectors(graphene.vec3.Vec3[] vectors, graphene.point3_d.Point3D center)
+  graphene.sphere.Sphere initFromVectors(graphene.vec3.Vec3[] vectors, graphene.point3_d.Point3D center = null)
   {
     graphene_sphere_t* _cretval;
     uint _nVectors;

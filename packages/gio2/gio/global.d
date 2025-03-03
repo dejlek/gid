@@ -40,7 +40,7 @@ import gobject.value;
  *   cancellable = a #GCancellable or %NULL
  *   callback = a #GAsyncReadyCallback to call when the request is satisfied
  */
-void busGet(gio.types.BusType busType, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+void busGet(gio.types.BusType busType, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
 {
   extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
   {
@@ -105,7 +105,7 @@ gio.dbus_connection.DBusConnection busGetFinish(gio.async_result.AsyncResult res
  * Returns: a #GDBusConnection or %NULL if error is set.
  *   Free with [gobject.object.ObjectG.unref].
  */
-gio.dbus_connection.DBusConnection busGetSync(gio.types.BusType busType, gio.cancellable.Cancellable cancellable)
+gio.dbus_connection.DBusConnection busGetSync(gio.types.BusType busType, gio.cancellable.Cancellable cancellable = null)
 {
   GDBusConnection* _cretval;
   GError *_err;
@@ -130,7 +130,7 @@ gio.dbus_connection.DBusConnection busGetSync(gio.types.BusType busType, gio.can
  * Returns: an identifier $(LPAREN)never 0$(RPAREN) that can be used with
  *   [gio.global.busUnownName] to stop owning the name.
  */
-uint busOwnNameOnConnection(gio.dbus_connection.DBusConnection connection, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure nameAcquiredClosure, gobject.closure.Closure nameLostClosure)
+uint busOwnNameOnConnection(gio.dbus_connection.DBusConnection connection, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure nameAcquiredClosure = null, gobject.closure.Closure nameLostClosure = null)
 {
   uint _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -154,7 +154,7 @@ uint busOwnNameOnConnection(gio.dbus_connection.DBusConnection connection, strin
  * Returns: an identifier $(LPAREN)never 0$(RPAREN) that can be used with
  *   [gio.global.busUnownName] to stop owning the name.
  */
-uint busOwnName(gio.types.BusType busType, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure busAcquiredClosure, gobject.closure.Closure nameAcquiredClosure, gobject.closure.Closure nameLostClosure)
+uint busOwnName(gio.types.BusType busType, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure busAcquiredClosure = null, gobject.closure.Closure nameAcquiredClosure = null, gobject.closure.Closure nameLostClosure = null)
 {
   uint _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -208,7 +208,7 @@ void busUnwatchName(uint watcherId)
  * Returns: An identifier $(LPAREN)never 0$(RPAREN) that can be used with
  *   [gio.global.busUnwatchName] to stop watching the name.
  */
-uint busWatchNameOnConnection(gio.dbus_connection.DBusConnection connection, string name, gio.types.BusNameWatcherFlags flags, gobject.closure.Closure nameAppearedClosure, gobject.closure.Closure nameVanishedClosure)
+uint busWatchNameOnConnection(gio.dbus_connection.DBusConnection connection, string name, gio.types.BusNameWatcherFlags flags, gobject.closure.Closure nameAppearedClosure = null, gobject.closure.Closure nameVanishedClosure = null)
 {
   uint _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -230,7 +230,7 @@ uint busWatchNameOnConnection(gio.dbus_connection.DBusConnection connection, str
  * Returns: An identifier $(LPAREN)never 0$(RPAREN) that can be used with
  *   [gio.global.busUnwatchName] to stop watching the name.
  */
-uint busWatchName(gio.types.BusType busType, string name, gio.types.BusNameWatcherFlags flags, gobject.closure.Closure nameAppearedClosure, gobject.closure.Closure nameVanishedClosure)
+uint busWatchName(gio.types.BusType busType, string name, gio.types.BusNameWatcherFlags flags, gobject.closure.Closure nameAppearedClosure = null, gobject.closure.Closure nameVanishedClosure = null)
 {
   uint _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -590,7 +590,7 @@ string dbusAddressEscapeValue(string string_)
  * Returns: a valid D-Bus address string for bus_type or
  *   %NULL if error is set
  */
-string dbusAddressGetForBusSync(gio.types.BusType busType, gio.cancellable.Cancellable cancellable)
+string dbusAddressGetForBusSync(gio.types.BusType busType, gio.cancellable.Cancellable cancellable = null)
 {
   char* _cretval;
   GError *_err;
@@ -616,7 +616,7 @@ string dbusAddressGetForBusSync(gio.types.BusType busType, gio.cancellable.Cance
  *   cancellable = A #GCancellable or %NULL.
  *   callback = A #GAsyncReadyCallback to call when the request is satisfied.
  */
-void dbusAddressGetStream(string address, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+void dbusAddressGetStream(string address, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
 {
   extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
   {
@@ -669,7 +669,7 @@ gio.iostream.IOStream dbusAddressGetStreamFinish(gio.async_result.AsyncResult re
  *   cancellable = A #GCancellable or %NULL.
  * Returns: A #GIOStream or %NULL if error is set.
  */
-gio.iostream.IOStream dbusAddressGetStreamSync(string address, out string outGuid, gio.cancellable.Cancellable cancellable)
+gio.iostream.IOStream dbusAddressGetStreamSync(string address, out string outGuid, gio.cancellable.Cancellable cancellable = null)
 {
   GIOStream* _cretval;
   const(char)* _address = address.toCString(No.Alloc);
@@ -1085,7 +1085,7 @@ void ioSchedulerCancelAllJobs()
 
  * Deprecated: use #GThreadPool or [gio.task.Task.runInThread]
  */
-void ioSchedulerPushJob(gio.types.IOSchedulerJobFunc jobFunc, int ioPriority, gio.cancellable.Cancellable cancellable)
+void ioSchedulerPushJob(gio.types.IOSchedulerJobFunc jobFunc, int ioPriority, gio.cancellable.Cancellable cancellable = null)
 {
   extern(C) bool _jobFuncCallback(GIOSchedulerJob* job, GCancellable* cancellable, void* data)
   {
@@ -1148,7 +1148,7 @@ void ioSchedulerPushJob(gio.types.IOSchedulerJobFunc jobFunc, int ioPriority, gi
  *     root_path, or %NULL
  * Returns: a keyfile-backed #GSettingsBackend
  */
-gio.settings_backend.SettingsBackend keyfileSettingsBackendNew(string filename, string rootPath, string rootGroup)
+gio.settings_backend.SettingsBackend keyfileSettingsBackendNew(string filename, string rootPath, string rootGroup = null)
 {
   GSettingsBackend* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -1229,7 +1229,7 @@ glib.source.Source pollableSourceNew(gobject.object.ObjectG pollableStream)
  *   cancellable = optional #GCancellable to attach
  * Returns: the new #GSource.
  */
-glib.source.Source pollableSourceNewFull(gobject.object.ObjectG pollableStream, glib.source.Source childSource, gio.cancellable.Cancellable cancellable)
+glib.source.Source pollableSourceNewFull(gobject.object.ObjectG pollableStream, glib.source.Source childSource = null, gio.cancellable.Cancellable cancellable = null)
 {
   GSource* _cretval;
   _cretval = g_pollable_source_new_full(pollableStream ? cast(ObjectC*)pollableStream.cPtr(No.Dup) : null, childSource ? cast(GSource*)childSource.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
@@ -1254,7 +1254,7 @@ glib.source.Source pollableSourceNewFull(gobject.object.ObjectG pollableStream, 
  *   cancellable = optional #GCancellable object, %NULL to ignore.
  * Returns: the number of bytes read, or -1 on error.
  */
-ptrdiff_t pollableStreamRead(gio.input_stream.InputStream stream, ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable)
+ptrdiff_t pollableStreamRead(gio.input_stream.InputStream stream, ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable = null)
 {
   ptrdiff_t _retval;
   size_t _count;
@@ -1287,7 +1287,7 @@ ptrdiff_t pollableStreamRead(gio.input_stream.InputStream stream, ubyte[] buffer
  *   cancellable = optional #GCancellable object, %NULL to ignore.
  * Returns: the number of bytes written, or -1 on error.
  */
-ptrdiff_t pollableStreamWrite(gio.output_stream.OutputStream stream, ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable)
+ptrdiff_t pollableStreamWrite(gio.output_stream.OutputStream stream, ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable = null)
 {
   ptrdiff_t _retval;
   size_t _count;
@@ -1328,7 +1328,7 @@ ptrdiff_t pollableStreamWrite(gio.output_stream.OutputStream stream, ubyte[] buf
  *   cancellable = optional #GCancellable object, %NULL to ignore.
  * Returns: %TRUE on success, %FALSE if there was an error
  */
-bool pollableStreamWriteAll(gio.output_stream.OutputStream stream, ubyte[] buffer, bool blocking, out size_t bytesWritten, gio.cancellable.Cancellable cancellable)
+bool pollableStreamWriteAll(gio.output_stream.OutputStream stream, ubyte[] buffer, bool blocking, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
 {
   bool _retval;
   size_t _count;

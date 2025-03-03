@@ -155,7 +155,7 @@ class Application : gio.application.Application
 
    * Deprecated: Use [gtk.application.Application.setAccelsForAction] instead
    */
-  void addAccelerator(string accelerator, string actionName, glib.variant.VariantG parameter)
+  void addAccelerator(string accelerator, string actionName, glib.variant.VariantG parameter = null)
   {
     const(char)* _accelerator = accelerator.toCString(No.Alloc);
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -371,7 +371,7 @@ class Application : gio.application.Application
    *   in order to remove the request. If the platform does not support
    *   inhibiting or the request failed for some reason, 0 is returned.
    */
-  uint inhibit(gtk.window.Window window, gtk.types.ApplicationInhibitFlags flags, string reason)
+  uint inhibit(gtk.window.Window window, gtk.types.ApplicationInhibitFlags flags, string reason = null)
   {
     uint _retval;
     const(char)* _reason = reason.toCString(No.Alloc);
@@ -467,7 +467,7 @@ class Application : gio.application.Application
 
    * Deprecated: Use [gtk.application.Application.setAccelsForAction] instead
    */
-  void removeAccelerator(string actionName, glib.variant.VariantG parameter)
+  void removeAccelerator(string actionName, glib.variant.VariantG parameter = null)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     gtk_application_remove_accelerator(cast(GtkApplication*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null);
@@ -530,7 +530,7 @@ class Application : gio.application.Application
    * Params:
    *   appMenu = a #GMenuModel, or %NULL
    */
-  void setAppMenu(gio.menu_model.MenuModel appMenu)
+  void setAppMenu(gio.menu_model.MenuModel appMenu = null)
   {
     gtk_application_set_app_menu(cast(GtkApplication*)cPtr, appMenu ? cast(GMenuModel*)appMenu.cPtr(No.Dup) : null);
   }
@@ -553,7 +553,7 @@ class Application : gio.application.Application
    * Params:
    *   menubar = a #GMenuModel, or %NULL
    */
-  void setMenubar(gio.menu_model.MenuModel menubar)
+  void setMenubar(gio.menu_model.MenuModel menubar = null)
   {
     gtk_application_set_menubar(cast(GtkApplication*)cPtr, menubar ? cast(GMenuModel*)menubar.cPtr(No.Dup) : null);
   }

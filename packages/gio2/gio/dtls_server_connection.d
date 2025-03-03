@@ -31,7 +31,7 @@ interface DtlsServerConnection
    * Returns: the new
    *   #GDtlsServerConnection, or %NULL on error
    */
-  static gio.dtls_server_connection.DtlsServerConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.tls_certificate.TlsCertificate certificate)
+  static gio.dtls_server_connection.DtlsServerConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.tls_certificate.TlsCertificate certificate = null)
   {
     GDatagramBased* _cretval;
     GError *_err;

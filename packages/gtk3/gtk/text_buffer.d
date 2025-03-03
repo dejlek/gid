@@ -48,7 +48,7 @@ class TextBuffer : gobject.object.ObjectG
    *   table = a tag table, or %NULL to create a new one
    * Returns: a new text buffer
    */
-  this(gtk.text_tag_table.TextTagTable table)
+  this(gtk.text_tag_table.TextTagTable table = null)
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_buffer_new(table ? cast(GtkTextTagTable*)table.cPtr(No.Dup) : null);
@@ -1013,7 +1013,7 @@ class TextBuffer : gobject.object.ObjectG
    * Returns: the #GdkAtom that corresponds to the
    *   newly registered format’s mime-type.
    */
-  gdk.atom.Atom registerDeserializeTagset(string tagsetName)
+  gdk.atom.Atom registerDeserializeTagset(string tagsetName = null)
   {
     GdkAtom _cretval;
     const(char)* _tagsetName = tagsetName.toCString(No.Alloc);
@@ -1043,7 +1043,7 @@ class TextBuffer : gobject.object.ObjectG
    * Returns: the #GdkAtom that corresponds to the
    *   newly registered format’s mime-type.
    */
-  gdk.atom.Atom registerSerializeTagset(string tagsetName)
+  gdk.atom.Atom registerSerializeTagset(string tagsetName = null)
   {
     GdkAtom _cretval;
     const(char)* _tagsetName = tagsetName.toCString(No.Alloc);

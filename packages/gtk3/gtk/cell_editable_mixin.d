@@ -44,7 +44,7 @@ template CellEditableT()
    *   event = The #GdkEvent that began the editing process, or
    *     %NULL if editing was initiated programmatically
    */
-  override void startEditing(gdk.event.Event event)
+  override void startEditing(gdk.event.Event event = null)
   {
     gtk_cell_editable_start_editing(cast(GtkCellEditable*)cPtr, event ? cast(GdkEvent*)event.cPtr : null);
   }

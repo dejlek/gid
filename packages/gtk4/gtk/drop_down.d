@@ -89,7 +89,7 @@ class DropDown : gtk.widget.Widget
    *   expression = the expression to use
    * Returns: a new `GtkDropDown`
    */
-  this(gio.list_model.ListModel model, gtk.expression.Expression expression)
+  this(gio.list_model.ListModel model = null, gtk.expression.Expression expression = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_drop_down_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
@@ -258,7 +258,7 @@ class DropDown : gtk.widget.Widget
    * Params:
    *   expression = a `GtkExpression`
    */
-  void setExpression(gtk.expression.Expression expression)
+  void setExpression(gtk.expression.Expression expression = null)
   {
     gtk_drop_down_set_expression(cast(GtkDropDown*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
@@ -268,7 +268,7 @@ class DropDown : gtk.widget.Widget
    * Params:
    *   factory = the factory to use
    */
-  void setFactory(gtk.list_item_factory.ListItemFactory factory)
+  void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
     gtk_drop_down_set_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -278,7 +278,7 @@ class DropDown : gtk.widget.Widget
    * Params:
    *   factory = the factory to use
    */
-  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory)
+  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
     gtk_drop_down_set_header_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -288,7 +288,7 @@ class DropDown : gtk.widget.Widget
    * Params:
    *   factory = the factory to use
    */
-  void setListFactory(gtk.list_item_factory.ListItemFactory factory)
+  void setListFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
     gtk_drop_down_set_list_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -298,7 +298,7 @@ class DropDown : gtk.widget.Widget
    * Params:
    *   model = the model to use
    */
-  void setModel(gio.list_model.ListModel model)
+  void setModel(gio.list_model.ListModel model = null)
   {
     gtk_drop_down_set_model(cast(GtkDropDown*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

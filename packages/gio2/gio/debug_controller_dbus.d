@@ -144,7 +144,7 @@ class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugCo
    * Returns: a new #GDebugControllerDBus, or %NULL
    *   on failure
    */
-  this(gio.dbus_connection.DBusConnection connection, gio.cancellable.Cancellable cancellable)
+  this(gio.dbus_connection.DBusConnection connection, gio.cancellable.Cancellable cancellable = null)
   {
     GDebugControllerDBus* _cretval;
     GError *_err;

@@ -197,7 +197,7 @@ interface TreeModel
    *   root = A `GtkTreePath`
    * Returns: A new `GtkTreeModel`.
    */
-  gtk.tree_model.TreeModel filterNew(gtk.tree_path.TreePath root);
+  gtk.tree_model.TreeModel filterNew(gtk.tree_path.TreePath root = null);
 
   /**
    * Calls func on each node in model in a depth-first fashion.
@@ -306,7 +306,7 @@ interface TreeModel
    *   parent = the `GtkTreeIter`
    * Returns: %TRUE, if iter has been set to the first child
    */
-  bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent);
+  bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null);
 
   /**
    * Returns %TRUE if iter has children, %FALSE otherwise.
@@ -324,7 +324,7 @@ interface TreeModel
    *   iter = the `GtkTreeIter`
    * Returns: the number of children of iter
    */
-  int iterNChildren(gtk.tree_iter.TreeIter iter);
+  int iterNChildren(gtk.tree_iter.TreeIter iter = null);
 
   /**
    * Sets iter to point to the node following it at the current level.

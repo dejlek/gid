@@ -61,7 +61,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
    * Returns: Received credentials on success $(LPAREN)free with
    *   [gobject.object.ObjectG.unref]$(RPAREN), %NULL if error is set.
    */
-  gio.credentials.Credentials receiveCredentials(gio.cancellable.Cancellable cancellable)
+  gio.credentials.Credentials receiveCredentials(gio.cancellable.Cancellable cancellable = null)
   {
     GCredentials* _cretval;
     GError *_err;
@@ -83,7 +83,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void receiveCredentialsAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void receiveCredentialsAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -128,7 +128,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
    *   cancellable = optional #GCancellable object, %NULL to ignore
    * Returns: a file descriptor on success, -1 on error.
    */
-  int receiveFd(gio.cancellable.Cancellable cancellable)
+  int receiveFd(gio.cancellable.Cancellable cancellable = null)
   {
     int _retval;
     GError *_err;
@@ -158,7 +158,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
    *   cancellable = A #GCancellable or %NULL.
    * Returns: %TRUE on success, %FALSE if error is set.
    */
-  bool sendCredentials(gio.cancellable.Cancellable cancellable)
+  bool sendCredentials(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -179,7 +179,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void sendCredentialsAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void sendCredentialsAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -223,7 +223,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: a %TRUE on success, %NULL on error.
    */
-  bool sendFd(int fd, gio.cancellable.Cancellable cancellable)
+  bool sendFd(int fd, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;

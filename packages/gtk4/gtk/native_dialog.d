@@ -154,7 +154,7 @@ class NativeDialog : gobject.object.ObjectG
    * Params:
    *   parent = parent window
    */
-  void setTransientFor(gtk.window.Window parent)
+  void setTransientFor(gtk.window.Window parent = null)
   {
     gtk_native_dialog_set_transient_for(cast(GtkNativeDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }

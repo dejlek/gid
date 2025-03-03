@@ -168,7 +168,7 @@ class Vfs : gobject.object.ObjectG
    * Returns: %TRUE if scheme was successfully registered, or %FALSE if a handler
    *   for scheme already exists.
    */
-  bool registerUriScheme(string scheme, gio.types.VfsFileLookupFunc uriFunc, gio.types.VfsFileLookupFunc parseNameFunc)
+  bool registerUriScheme(string scheme, gio.types.VfsFileLookupFunc uriFunc = null, gio.types.VfsFileLookupFunc parseNameFunc = null)
   {
     extern(C) GFile* _uriFuncCallback(GVfs* vfs, const(char)* identifier, void* userData)
     {

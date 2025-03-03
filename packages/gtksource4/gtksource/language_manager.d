@@ -152,7 +152,7 @@ class LanguageManager : gobject.object.ObjectG
    *   is no suitable language for given filename and/or content_type. Return
    *   value is owned by lm and should not be freed.
    */
-  gtksource.language.Language guessLanguage(string filename, string contentType)
+  gtksource.language.Language guessLanguage(string filename = null, string contentType = null)
   {
     GtkSourceLanguage* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);

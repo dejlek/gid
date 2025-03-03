@@ -158,7 +158,7 @@ class TlsPassword : gobject.object.ObjectG
    *   value = the value for the password
    *   destroy = a function to use to free the password.
    */
-  void setValueFull(ubyte[] value, glib.types.DestroyNotify destroy)
+  void setValueFull(ubyte[] value, glib.types.DestroyNotify destroy = null)
   {
     extern(C) void _destroyCallback(void* data)
     {

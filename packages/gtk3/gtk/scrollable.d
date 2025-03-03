@@ -81,7 +81,7 @@ interface Scrollable
    * Params:
    *   hadjustment = a #GtkAdjustment
    */
-  void setHadjustment(gtk.adjustment.Adjustment hadjustment);
+  void setHadjustment(gtk.adjustment.Adjustment hadjustment = null);
 
   /**
    * Sets the #GtkScrollablePolicy to determine whether
@@ -97,7 +97,7 @@ interface Scrollable
    * Params:
    *   vadjustment = a #GtkAdjustment
    */
-  void setVadjustment(gtk.adjustment.Adjustment vadjustment);
+  void setVadjustment(gtk.adjustment.Adjustment vadjustment = null);
 
   /**
    * Sets the #GtkScrollablePolicy to determine whether

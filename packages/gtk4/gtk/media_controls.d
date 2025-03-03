@@ -44,7 +44,7 @@ class MediaControls : gtk.widget.Widget
    *   stream = a `GtkMediaStream` to manage
    * Returns: a new `GtkMediaControls`
    */
-  this(gtk.media_stream.MediaStream stream)
+  this(gtk.media_stream.MediaStream stream = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_media_controls_new(stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
@@ -68,7 +68,7 @@ class MediaControls : gtk.widget.Widget
    * Params:
    *   stream = a `GtkMediaStream`
    */
-  void setMediaStream(gtk.media_stream.MediaStream stream)
+  void setMediaStream(gtk.media_stream.MediaStream stream = null)
   {
     gtk_media_controls_set_media_stream(cast(GtkMediaControls*)cPtr, stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
   }

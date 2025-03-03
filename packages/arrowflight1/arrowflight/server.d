@@ -86,7 +86,7 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
     return _retval;
   }
 
-  arrowflight.info.Info[] listFlights(arrowflight.server_call_context.ServerCallContext context, arrowflight.criteria.Criteria criteria)
+  arrowflight.info.Info[] listFlights(arrowflight.server_call_context.ServerCallContext context, arrowflight.criteria.Criteria criteria = null)
   {
     GList* _cretval;
     GError *_err;

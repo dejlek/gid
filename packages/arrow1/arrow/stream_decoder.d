@@ -31,7 +31,7 @@ class StreamDecoder : gobject.object.ObjectG
     return getType();
   }
 
-  this(arrow.stream_listener.StreamListener listener, arrow.read_options.ReadOptions options)
+  this(arrow.stream_listener.StreamListener listener, arrow.read_options.ReadOptions options = null)
   {
     GArrowStreamDecoder* _cretval;
     _cretval = garrow_stream_decoder_new(listener ? cast(GArrowStreamListener*)listener.cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null);

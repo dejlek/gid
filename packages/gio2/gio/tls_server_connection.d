@@ -35,7 +35,7 @@ interface TlsServerConnection
    * Returns: the new
    *   #GTlsServerConnection, or %NULL on error
    */
-  static gio.tls_server_connection.TlsServerConnection new_(gio.iostream.IOStream baseIoStream, gio.tls_certificate.TlsCertificate certificate)
+  static gio.tls_server_connection.TlsServerConnection new_(gio.iostream.IOStream baseIoStream, gio.tls_certificate.TlsCertificate certificate = null)
   {
     GIOStream* _cretval;
     GError *_err;

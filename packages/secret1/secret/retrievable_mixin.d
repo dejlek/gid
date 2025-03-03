@@ -88,7 +88,7 @@ template RetrievableT()
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  override void retrieveSecret(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void retrieveSecret(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -132,7 +132,7 @@ template RetrievableT()
    * Returns: the secret value which should be
    *   released with [secret.value.Value.unref], or %NULL
    */
-  override secret.value.Value retrieveSecretSync(gio.cancellable.Cancellable cancellable)
+  override secret.value.Value retrieveSecretSync(gio.cancellable.Cancellable cancellable = null)
   {
     SecretValue* _cretval;
     GError *_err;

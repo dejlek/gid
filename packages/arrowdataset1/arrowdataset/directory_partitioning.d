@@ -29,7 +29,7 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
     return getType();
   }
 
-  this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries, arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions options)
+  this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries, arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions options = null)
   {
     GADatasetDirectoryPartitioning* _cretval;
     auto _dictionaries = gListFromD!(arrow.array.Array)(dictionaries);

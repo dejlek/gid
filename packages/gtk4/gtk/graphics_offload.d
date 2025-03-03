@@ -63,7 +63,7 @@ class GraphicsOffload : gtk.widget.Widget
    *   child = the child widget
    * Returns: the new widget
    */
-  this(gtk.widget.Widget child)
+  this(gtk.widget.Widget child = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
@@ -99,7 +99,7 @@ class GraphicsOffload : gtk.widget.Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_graphics_offload_set_child(cast(GtkGraphicsOffload*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

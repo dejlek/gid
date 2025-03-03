@@ -48,7 +48,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
    *   sorter = a `GtkSorter`
    * Returns: a new `GtkTreeListRowSorter`
    */
-  this(gtk.sorter.Sorter sorter)
+  this(gtk.sorter.Sorter sorter = null)
   {
     GtkTreeListRowSorter* _cretval;
     _cretval = gtk_tree_list_row_sorter_new(sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
@@ -74,7 +74,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
    * Params:
    *   sorter = The sorter to use
    */
-  void setSorter(gtk.sorter.Sorter sorter)
+  void setSorter(gtk.sorter.Sorter sorter = null)
   {
     gtk_tree_list_row_sorter_set_sorter(cast(GtkTreeListRowSorter*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }

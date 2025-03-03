@@ -63,7 +63,7 @@ class Tooltip : gobject.object.ObjectG
    * Params:
    *   customWidget = a `GtkWidget`, or %NULL to unset the old custom widget.
    */
-  void setCustom(gtk.widget.Widget customWidget)
+  void setCustom(gtk.widget.Widget customWidget = null)
   {
     gtk_tooltip_set_custom(cast(GtkTooltip*)cPtr, customWidget ? cast(GtkWidget*)customWidget.cPtr(No.Dup) : null);
   }
@@ -74,7 +74,7 @@ class Tooltip : gobject.object.ObjectG
    * Params:
    *   paintable = a `GdkPaintable`
    */
-  void setIcon(gdk.paintable.Paintable paintable)
+  void setIcon(gdk.paintable.Paintable paintable = null)
   {
     gtk_tooltip_set_icon(cast(GtkTooltip*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
@@ -86,7 +86,7 @@ class Tooltip : gobject.object.ObjectG
    * Params:
    *   gicon = a `GIcon` representing the icon
    */
-  void setIconFromGicon(gio.icon.Icon gicon)
+  void setIconFromGicon(gio.icon.Icon gicon = null)
   {
     gtk_tooltip_set_icon_from_gicon(cast(GtkTooltip*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
   }
@@ -98,7 +98,7 @@ class Tooltip : gobject.object.ObjectG
    * Params:
    *   iconName = an icon name
    */
-  void setIconFromIconName(string iconName)
+  void setIconFromIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_tooltip_set_icon_from_icon_name(cast(GtkTooltip*)cPtr, _iconName);
@@ -111,7 +111,7 @@ class Tooltip : gobject.object.ObjectG
    * Params:
    *   markup = a string with Pango markup or %NLL
    */
-  void setMarkup(string markup)
+  void setMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_tooltip_set_markup(cast(GtkTooltip*)cPtr, _markup);
@@ -124,7 +124,7 @@ class Tooltip : gobject.object.ObjectG
    * Params:
    *   text = a text string
    */
-  void setText(string text)
+  void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_tooltip_set_text(cast(GtkTooltip*)cPtr, _text);

@@ -83,7 +83,7 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: a #GFileInfo for the stream, or %NULL on error.
    */
-  gio.file_info.FileInfo queryInfo(string attributes, gio.cancellable.Cancellable cancellable)
+  gio.file_info.FileInfo queryInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -108,7 +108,7 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = callback to call when the request is satisfied
    */
-  void queryInfoAsync(string attributes, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void queryInfoAsync(string attributes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

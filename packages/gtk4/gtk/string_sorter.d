@@ -43,7 +43,7 @@ class StringSorter : gtk.sorter.Sorter
    *   expression = The expression to evaluate
    * Returns: a new `GtkStringSorter`
    */
-  this(gtk.expression.Expression expression)
+  this(gtk.expression.Expression expression = null)
   {
     GtkStringSorter* _cretval;
     _cretval = gtk_string_sorter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
@@ -101,7 +101,7 @@ class StringSorter : gtk.sorter.Sorter
    * Params:
    *   expression = a `GtkExpression`
    */
-  void setExpression(gtk.expression.Expression expression)
+  void setExpression(gtk.expression.Expression expression = null)
   {
     gtk_string_sorter_set_expression(cast(GtkStringSorter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }

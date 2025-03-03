@@ -114,7 +114,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
 
    * Deprecated: Use [gtk.menu_item.MenuItem.newWithMnemonic] instead.
    */
-  static gtk.image_menu_item.ImageMenuItem newFromStock(string stockId, gtk.accel_group.AccelGroup accelGroup)
+  static gtk.image_menu_item.ImageMenuItem newFromStock(string stockId, gtk.accel_group.AccelGroup accelGroup = null)
   {
     GtkWidget* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -233,7 +233,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
    * Params:
    *   image = a widget to set as the image for the menu item.
    */
-  void setImage(gtk.widget.Widget image)
+  void setImage(gtk.widget.Widget image = null)
   {
     gtk_image_menu_item_set_image(cast(GtkImageMenuItem*)cPtr, image ? cast(GtkWidget*)image.cPtr(No.Dup) : null);
   }

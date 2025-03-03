@@ -121,7 +121,7 @@ interface Action
    *   targetValue = a #GVariant target value, or %NULL
    * Returns: a detailed format string
    */
-  static string printDetailedName(string actionName, glib.variant.VariantG targetValue)
+  static string printDetailedName(string actionName, glib.variant.VariantG targetValue = null)
   {
     char* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -139,7 +139,7 @@ interface Action
    * Params:
    *   parameter = the parameter to the activation
    */
-  void activate(glib.variant.VariantG parameter);
+  void activate(glib.variant.VariantG parameter = null);
 
   /**
    * Request for the state of action to be changed to value.

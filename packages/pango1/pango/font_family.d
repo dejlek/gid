@@ -45,7 +45,7 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
    * Returns: the `PangoFontFace`,
    *   or %NULL if no face with the given name exists.
    */
-  pango.font_face.FontFace getFace(string name)
+  pango.font_face.FontFace getFace(string name = null)
   {
     PangoFontFace* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

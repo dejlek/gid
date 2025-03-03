@@ -267,7 +267,7 @@ interface File
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  static void newTmpAsync(string tmpl, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void newTmpAsync(string tmpl, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -296,7 +296,7 @@ interface File
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  static void newTmpDirAsync(string tmpl, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void newTmpDirAsync(string tmpl, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -392,7 +392,7 @@ interface File
    * Returns: a #GFileOutputStream, or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_output_stream.FileOutputStream appendTo(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable);
+  gio.file_output_stream.FileOutputStream appendTo(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously opens file for appending.
@@ -409,7 +409,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void appendToAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void appendToAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous file append operation started with
@@ -438,7 +438,7 @@ interface File
    * Returns: an attribute query string for [gio.file.File.queryInfo],
    *   or %NULL if an error occurs.
    */
-  string buildAttributeListForCopy(gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable);
+  string buildAttributeListForCopy(gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Copies the file source to the location specified by destination.
@@ -480,7 +480,7 @@ interface File
    *     progress information, or %NULL if progress information is not needed
    * Returns: %TRUE on success, %FALSE otherwise.
    */
-  bool copy(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable, gio.types.FileProgressCallback progressCallback);
+  bool copy(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null);
 
   /**
    * Copies the file source to the location specified by destination
@@ -502,7 +502,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void copyAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.FileProgressCallback progressCallback, gio.types.AsyncReadyCallback callback);
+  void copyAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Copies the file attributes from source to destination.
@@ -520,7 +520,7 @@ interface File
    * Returns: %TRUE if the attributes were copied successfully,
    *   %FALSE otherwise.
    */
-  bool copyAttributes(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable);
+  bool copyAttributes(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Finishes copying the file started with [gio.file.File.copyAsync].
@@ -555,7 +555,7 @@ interface File
    *   file, or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_output_stream.FileOutputStream create(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable);
+  gio.file_output_stream.FileOutputStream create(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously creates a new file and returns an output stream
@@ -573,7 +573,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void createAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void createAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous file create operation started with
@@ -613,7 +613,7 @@ interface File
    *   file, or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_iostream.FileIOStream createReadwrite(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable);
+  gio.file_iostream.FileIOStream createReadwrite(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously creates a new file and returns a stream
@@ -631,7 +631,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void createReadwriteAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void createReadwriteAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous file create operation started with
@@ -668,7 +668,7 @@ interface File
    *     %NULL to ignore
    * Returns: %TRUE if the file was deleted. %FALSE otherwise.
    */
-  bool delete_(gio.cancellable.Cancellable cancellable);
+  bool delete_(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously delete a file. If the file is a directory, it will
@@ -681,7 +681,7 @@ interface File
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied
    */
-  void deleteAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void deleteAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes deleting a file started with [gio.file.File.deleteAsync].
@@ -722,7 +722,7 @@ interface File
 
    * Deprecated: Use [gio.file.File.ejectMountableWithOperation] instead.
    */
-  void ejectMountable(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void ejectMountable(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous eject operation started by
@@ -754,7 +754,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void ejectMountableWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void ejectMountableWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous eject operation started by
@@ -797,7 +797,7 @@ interface File
    * Returns: A #GFileEnumerator if successful,
    *   %NULL on error. Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_enumerator.FileEnumerator enumerateChildren(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable);
+  gio.file_enumerator.FileEnumerator enumerateChildren(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously gets the requested information about the files
@@ -817,7 +817,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void enumerateChildrenAsync(string attributes, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void enumerateChildrenAsync(string attributes, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an async enumerate children operation.
@@ -857,7 +857,7 @@ interface File
    *   or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.mount.Mount findEnclosingMount(gio.cancellable.Cancellable cancellable);
+  gio.mount.Mount findEnclosingMount(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously gets the mount for the file.
@@ -873,7 +873,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void findEnclosingMountAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void findEnclosingMountAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous find mount request.
@@ -1018,7 +1018,7 @@ interface File
    * Returns: %TRUE if file is an immediate child of parent $(LPAREN)or any parent in
    *   the case that parent is %NULL$(RPAREN).
    */
-  bool hasParent(gio.file.File parent);
+  bool hasParent(gio.file.File parent = null);
 
   /**
    * Checks whether file has the prefix specified by prefix.
@@ -1103,7 +1103,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void loadBytesAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void loadBytesAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Completes an asynchronous request to [gio.file.File.loadBytesAsync].
@@ -1153,7 +1153,7 @@ interface File
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied
    */
-  void loadContentsAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void loadContentsAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous load of the file's contents.
@@ -1205,7 +1205,7 @@ interface File
    *     %NULL to ignore
    * Returns: %TRUE on successful creation, %FALSE otherwise.
    */
-  bool makeDirectory(gio.cancellable.Cancellable cancellable);
+  bool makeDirectory(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously creates a directory.
@@ -1216,7 +1216,7 @@ interface File
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied
    */
-  void makeDirectoryAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void makeDirectoryAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous directory creation, started with
@@ -1245,7 +1245,7 @@ interface File
    * Returns: %TRUE if all directories have been successfully created, %FALSE
    *   otherwise.
    */
-  bool makeDirectoryWithParents(gio.cancellable.Cancellable cancellable);
+  bool makeDirectoryWithParents(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Creates a symbolic link named file which contains the string
@@ -1260,7 +1260,7 @@ interface File
    *     %NULL to ignore
    * Returns: %TRUE on the creation of a new symlink, %FALSE otherwise.
    */
-  bool makeSymbolicLink(string symlinkValue, gio.cancellable.Cancellable cancellable);
+  bool makeSymbolicLink(string symlinkValue, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously creates a symbolic link named file which contains the
@@ -1274,7 +1274,7 @@ interface File
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied
    */
-  void makeSymbolicLinkAsync(string symlinkValue, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void makeSymbolicLinkAsync(string symlinkValue, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous symbolic link creation, started with
@@ -1340,7 +1340,7 @@ interface File
    *   or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_monitor.FileMonitor monitor(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable);
+  gio.file_monitor.FileMonitor monitor(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Obtains a directory monitor for the given file.
@@ -1360,7 +1360,7 @@ interface File
    * Returns: a #GFileMonitor for the given file,
    *   or %NULL on error. Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_monitor.FileMonitor monitorDirectory(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable);
+  gio.file_monitor.FileMonitor monitorDirectory(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Obtains a file monitor for the given file. If no file notification
@@ -1383,7 +1383,7 @@ interface File
    *   or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_monitor.FileMonitor monitorFile(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable);
+  gio.file_monitor.FileMonitor monitorFile(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Starts a mount_operation, mounting the volume that contains
@@ -1403,7 +1403,7 @@ interface File
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied, or %NULL
    */
-  void mountEnclosingVolume(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void mountEnclosingVolume(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes a mount operation started by [gio.file.File.mountEnclosingVolume].
@@ -1434,7 +1434,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void mountMountable(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void mountMountable(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes a mount operation. See [gio.file.File.mountMountable] for details.
@@ -1483,7 +1483,7 @@ interface File
    *     function for updates
    * Returns: %TRUE on successful move, %FALSE otherwise.
    */
-  bool move(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable, gio.types.FileProgressCallback progressCallback);
+  bool move(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null);
 
   /**
    * Asynchronously moves a file source to the location of destination. For details of the behaviour, see [gio.file.File.move].
@@ -1503,7 +1503,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void moveAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.FileProgressCallback progressCallback, gio.types.AsyncReadyCallback callback);
+  void moveAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous file movement, started with
@@ -1534,7 +1534,7 @@ interface File
    * Returns: #GFileIOStream or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_iostream.FileIOStream openReadwrite(gio.cancellable.Cancellable cancellable);
+  gio.file_iostream.FileIOStream openReadwrite(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously opens file for reading and writing.
@@ -1550,7 +1550,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void openReadwriteAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void openReadwriteAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous file read operation started with
@@ -1587,7 +1587,7 @@ interface File
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied, or %NULL
    */
-  void pollMountable(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void pollMountable(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes a poll operation. See [gio.file.File.pollMountable] for details.
@@ -1612,7 +1612,7 @@ interface File
    *   %NULL if there were errors.
    *   When you are done with it, release it with [gobject.object.ObjectG.unref]
    */
-  gio.app_info.AppInfo queryDefaultHandler(gio.cancellable.Cancellable cancellable);
+  gio.app_info.AppInfo queryDefaultHandler(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Async version of [gio.file.File.queryDefaultHandler].
@@ -1621,7 +1621,7 @@ interface File
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  void queryDefaultHandlerAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void queryDefaultHandlerAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes a [gio.file.File.queryDefaultHandlerAsync] operation.
@@ -1659,7 +1659,7 @@ interface File
    * Returns: %TRUE if the file exists $(LPAREN)and can be detected without error$(RPAREN),
    *   %FALSE otherwise $(LPAREN)or if cancelled$(RPAREN).
    */
-  bool queryExists(gio.cancellable.Cancellable cancellable);
+  bool queryExists(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Utility function to inspect the #GFileType of a file. This is
@@ -1673,7 +1673,7 @@ interface File
    * Returns: The #GFileType of the file and %G_FILE_TYPE_UNKNOWN
    *   if the file does not exist
    */
-  gio.types.FileType queryFileType(gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable);
+  gio.types.FileType queryFileType(gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Similar to [gio.file.File.queryInfo], but obtains information
@@ -1705,7 +1705,7 @@ interface File
    * Returns: a #GFileInfo or %NULL if there was an error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_info.FileInfo queryFilesystemInfo(string attributes, gio.cancellable.Cancellable cancellable);
+  gio.file_info.FileInfo queryFilesystemInfo(string attributes, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously gets the requested information about the filesystem
@@ -1725,7 +1725,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void queryFilesystemInfoAsync(string attributes, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void queryFilesystemInfoAsync(string attributes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous filesystem info query.
@@ -1773,7 +1773,7 @@ interface File
    * Returns: a #GFileInfo for the given file, or %NULL
    *   on error. Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_info.FileInfo queryInfo(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable);
+  gio.file_info.FileInfo queryInfo(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously gets the requested information about specified file.
@@ -1792,7 +1792,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void queryInfoAsync(string attributes, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void queryInfoAsync(string attributes, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous file info query.
@@ -1821,7 +1821,7 @@ interface File
    *   When you are done with it, release it with
    *   [gio.file_attribute_info_list.FileAttributeInfoList.unref]
    */
-  gio.file_attribute_info_list.FileAttributeInfoList querySettableAttributes(gio.cancellable.Cancellable cancellable);
+  gio.file_attribute_info_list.FileAttributeInfoList querySettableAttributes(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Obtain the list of attribute namespaces where new attributes
@@ -1837,7 +1837,7 @@ interface File
    *   When you are done with it, release it with
    *   [gio.file_attribute_info_list.FileAttributeInfoList.unref]
    */
-  gio.file_attribute_info_list.FileAttributeInfoList queryWritableNamespaces(gio.cancellable.Cancellable cancellable);
+  gio.file_attribute_info_list.FileAttributeInfoList queryWritableNamespaces(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Opens a file for reading. The result is a #GFileInputStream that
@@ -1854,7 +1854,7 @@ interface File
    * Returns: #GFileInputStream or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_input_stream.FileInputStream read(gio.cancellable.Cancellable cancellable);
+  gio.file_input_stream.FileInputStream read(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously opens file for reading.
@@ -1870,7 +1870,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void readAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void readAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous file read operation started with
@@ -1928,7 +1928,7 @@ interface File
    * Returns: a #GFileOutputStream or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_output_stream.FileOutputStream replace(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable);
+  gio.file_output_stream.FileOutputStream replace(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously overwrites the file, replacing the contents,
@@ -1949,7 +1949,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void replaceAsync(string etag, bool makeBackup, gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void replaceAsync(string etag, bool makeBackup, gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Replaces the contents of file with contents of length bytes.
@@ -1977,7 +1977,7 @@ interface File
    * Returns: %TRUE if successful. If an error has occurred, this function
    *   will return %FALSE and set error appropriately if present.
    */
-  bool replaceContents(ubyte[] contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, out string newEtag, gio.cancellable.Cancellable cancellable);
+  bool replaceContents(ubyte[] contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, out string newEtag, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Starts an asynchronous replacement of file with the given
@@ -2003,7 +2003,7 @@ interface File
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied
    */
-  void replaceContentsAsync(ubyte[] contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void replaceContentsAsync(ubyte[] contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Same as [gio.file.File.replaceContentsAsync] but takes a #GBytes input instead.
@@ -2021,7 +2021,7 @@ interface File
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied
    */
-  void replaceContentsBytesAsync(glib.bytes.Bytes contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void replaceContentsBytesAsync(glib.bytes.Bytes contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous replace of the given file. See
@@ -2065,7 +2065,7 @@ interface File
    * Returns: a #GFileIOStream or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file_iostream.FileIOStream replaceReadwrite(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable);
+  gio.file_iostream.FileIOStream replaceReadwrite(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously overwrites the file in read-write mode,
@@ -2087,7 +2087,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void replaceReadwriteAsync(string etag, bool makeBackup, gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void replaceReadwriteAsync(string etag, bool makeBackup, gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous file replace operation started with
@@ -2127,7 +2127,7 @@ interface File
    *     %NULL to ignore
    * Returns: %TRUE if the attribute was set, %FALSE otherwise.
    */
-  bool setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable);
+  bool setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Sets attribute of type %G_FILE_ATTRIBUTE_TYPE_BYTE_STRING to value.
@@ -2145,7 +2145,7 @@ interface File
    * Returns: %TRUE if the attribute was successfully set to value
    *   in the file, %FALSE otherwise.
    */
-  bool setAttributeByteString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable);
+  bool setAttributeByteString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Sets attribute of type %G_FILE_ATTRIBUTE_TYPE_INT32 to value.
@@ -2162,7 +2162,7 @@ interface File
    * Returns: %TRUE if the attribute was successfully set to value
    *   in the file, %FALSE otherwise.
    */
-  bool setAttributeInt32(string attribute, int value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable);
+  bool setAttributeInt32(string attribute, int value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Sets attribute of type %G_FILE_ATTRIBUTE_TYPE_INT64 to value.
@@ -2178,7 +2178,7 @@ interface File
    *     %NULL to ignore
    * Returns: %TRUE if the attribute was successfully set, %FALSE otherwise.
    */
-  bool setAttributeInt64(string attribute, long value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable);
+  bool setAttributeInt64(string attribute, long value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Sets attribute of type %G_FILE_ATTRIBUTE_TYPE_STRING to value.
@@ -2194,7 +2194,7 @@ interface File
    *     %NULL to ignore
    * Returns: %TRUE if the attribute was successfully set, %FALSE otherwise.
    */
-  bool setAttributeString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable);
+  bool setAttributeString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Sets attribute of type %G_FILE_ATTRIBUTE_TYPE_UINT32 to value.
@@ -2211,7 +2211,7 @@ interface File
    * Returns: %TRUE if the attribute was successfully set to value
    *   in the file, %FALSE otherwise.
    */
-  bool setAttributeUint32(string attribute, uint value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable);
+  bool setAttributeUint32(string attribute, uint value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Sets attribute of type %G_FILE_ATTRIBUTE_TYPE_UINT64 to value.
@@ -2228,7 +2228,7 @@ interface File
    * Returns: %TRUE if the attribute was successfully set to value
    *   in the file, %FALSE otherwise.
    */
-  bool setAttributeUint64(string attribute, ulong value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable);
+  bool setAttributeUint64(string attribute, ulong value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously sets the attributes of file with info.
@@ -2246,7 +2246,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void setAttributesAsync(gio.file_info.FileInfo info, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void setAttributesAsync(gio.file_info.FileInfo info, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes setting an attribute started in [gio.file.File.setAttributesAsync].
@@ -2275,7 +2275,7 @@ interface File
    *     %NULL to ignore
    * Returns: %FALSE if there was any error, %TRUE otherwise.
    */
-  bool setAttributesFromInfo(gio.file_info.FileInfo info, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable);
+  bool setAttributesFromInfo(gio.file_info.FileInfo info, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Renames file to the specified display name.
@@ -2297,7 +2297,7 @@ interface File
    *   or %NULL if there was an error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.file.File setDisplayName(string displayName, gio.cancellable.Cancellable cancellable);
+  gio.file.File setDisplayName(string displayName, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously sets the display name for a given #GFile.
@@ -2314,7 +2314,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void setDisplayNameAsync(string displayName, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void setDisplayNameAsync(string displayName, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes setting a display name started with
@@ -2342,7 +2342,7 @@ interface File
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied, or %NULL
    */
-  void startMountable(gio.types.DriveStartFlags flags, gio.mount_operation.MountOperation startOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void startMountable(gio.types.DriveStartFlags flags, gio.mount_operation.MountOperation startOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes a start operation. See [gio.file.File.startMountable] for details.
@@ -2372,7 +2372,7 @@ interface File
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied, or %NULL
    */
-  void stopMountable(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void stopMountable(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes a stop operation, see [gio.file.File.stopMountable] for details.
@@ -2409,7 +2409,7 @@ interface File
    *     %NULL to ignore
    * Returns: %TRUE on successful trash, %FALSE otherwise.
    */
-  bool trash(gio.cancellable.Cancellable cancellable);
+  bool trash(gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously sends file to the Trash location, if possible.
@@ -2420,7 +2420,7 @@ interface File
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied
    */
-  void trashAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void trashAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an asynchronous file trashing operation, started with
@@ -2448,7 +2448,7 @@ interface File
 
    * Deprecated: Use [gio.file.File.unmountMountableWithOperation] instead.
    */
-  void unmountMountable(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void unmountMountable(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an unmount operation, see [gio.file.File.unmountMountable] for details.
@@ -2481,7 +2481,7 @@ interface File
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void unmountMountableWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void unmountMountableWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an unmount operation,

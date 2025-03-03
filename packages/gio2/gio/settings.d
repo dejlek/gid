@@ -326,7 +326,7 @@ class Settings : gobject.object.ObjectG
    *   path = the path to use
    * Returns: a new #GSettings object
    */
-  static gio.settings.Settings newFull(gio.settings_schema.SettingsSchema schema, gio.settings_backend.SettingsBackend backend, string path)
+  static gio.settings.Settings newFull(gio.settings_schema.SettingsSchema schema, gio.settings_backend.SettingsBackend backend = null, string path = null)
   {
     GSettings* _cretval;
     const(char)* _path = path.toCString(No.Alloc);

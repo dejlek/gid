@@ -447,7 +447,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
    *   active_id was given to unset the active row, the function
    *   always returns %TRUE.
    */
-  bool setActiveId(string activeId)
+  bool setActiveId(string activeId = null)
   {
     bool _retval;
     const(char)* _activeId = activeId.toCString(No.Alloc);
@@ -461,7 +461,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
    * Params:
    *   iter = The #GtkTreeIter, or %NULL
    */
-  void setActiveIter(gtk.tree_iter.TreeIter iter)
+  void setActiveIter(gtk.tree_iter.TreeIter iter = null)
   {
     gtk_combo_box_set_active_iter(cast(GtkComboBox*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
@@ -553,7 +553,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
    * Params:
    *   model = A #GtkTreeModel
    */
-  void setModel(gtk.tree_model.TreeModel model)
+  void setModel(gtk.tree_model.TreeModel model = null)
   {
     gtk_combo_box_set_model(cast(GtkComboBox*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

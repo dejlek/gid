@@ -63,7 +63,7 @@ class SocketAddressEnumerator : gobject.object.ObjectG
    *   error $(LPAREN)in which case *error will be set$(RPAREN) or if there are no
    *   more addresses.
    */
-  gio.socket_address.SocketAddress next(gio.cancellable.Cancellable cancellable)
+  gio.socket_address.SocketAddress next(gio.cancellable.Cancellable cancellable = null)
   {
     GSocketAddress* _cretval;
     GError *_err;
@@ -84,7 +84,7 @@ class SocketAddressEnumerator : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied
    */
-  void nextAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void nextAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

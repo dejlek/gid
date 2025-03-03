@@ -96,7 +96,7 @@ class ValueArray : gobject.boxed.Boxed
 
    * Deprecated: Use #GArray and g_array_append_val$(LPAREN)$(RPAREN) instead.
    */
-  gobject.value_array.ValueArray append(gobject.value.Value value)
+  gobject.value_array.ValueArray append(gobject.value.Value value = null)
   {
     GValueArray* _cretval;
     _cretval = g_value_array_append(cast(GValueArray*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
@@ -145,7 +145,7 @@ class ValueArray : gobject.boxed.Boxed
 
    * Deprecated: Use #GArray and g_array_insert_val$(LPAREN)$(RPAREN) instead.
    */
-  gobject.value_array.ValueArray insert(uint index, gobject.value.Value value)
+  gobject.value_array.ValueArray insert(uint index, gobject.value.Value value = null)
   {
     GValueArray* _cretval;
     _cretval = g_value_array_insert(cast(GValueArray*)cPtr, index, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
@@ -162,7 +162,7 @@ class ValueArray : gobject.boxed.Boxed
 
    * Deprecated: Use #GArray and g_array_prepend_val$(LPAREN)$(RPAREN) instead.
    */
-  gobject.value_array.ValueArray prepend(gobject.value.Value value)
+  gobject.value_array.ValueArray prepend(gobject.value.Value value = null)
   {
     GValueArray* _cretval;
     _cretval = g_value_array_prepend(cast(GValueArray*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);

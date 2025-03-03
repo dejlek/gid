@@ -191,7 +191,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
    * Params:
    *   alignWidget = a #GtkWidget
    */
-  void setAlignWidget(gtk.widget.Widget alignWidget)
+  void setAlignWidget(gtk.widget.Widget alignWidget = null)
   {
     gtk_menu_button_set_align_widget(cast(GtkMenuButton*)cPtr, alignWidget ? cast(GtkWidget*)alignWidget.cPtr(No.Dup) : null);
   }
@@ -228,7 +228,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
    *   menuModel = a #GMenuModel, or %NULL to unset and disable the
    *     button
    */
-  void setMenuModel(gio.menu_model.MenuModel menuModel)
+  void setMenuModel(gio.menu_model.MenuModel menuModel = null)
   {
     gtk_menu_button_set_menu_model(cast(GtkMenuButton*)cPtr, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.Dup) : null);
   }
@@ -241,7 +241,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
    * Params:
    *   popover = a #GtkPopover, or %NULL to unset and disable the button
    */
-  void setPopover(gtk.widget.Widget popover)
+  void setPopover(gtk.widget.Widget popover = null)
   {
     gtk_menu_button_set_popover(cast(GtkMenuButton*)cPtr, popover ? cast(GtkWidget*)popover.cPtr(No.Dup) : null);
   }
@@ -254,7 +254,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
    * Params:
    *   menu = a #GtkMenu, or %NULL to unset and disable the button
    */
-  void setPopup(gtk.widget.Widget menu)
+  void setPopup(gtk.widget.Widget menu = null)
   {
     gtk_menu_button_set_popup(cast(GtkMenuButton*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.Dup) : null);
   }

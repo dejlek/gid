@@ -59,7 +59,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
    *   parent = transient parent of the dialog
    * Returns: the new `GtkPageSetupUnixDialog`
    */
-  this(string title, gtk.window.Window parent)
+  this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -108,7 +108,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
    * Params:
    *   printSettings = a `GtkPrintSettings`
    */
-  void setPrintSettings(gtk.print_settings.PrintSettings printSettings)
+  void setPrintSettings(gtk.print_settings.PrintSettings printSettings = null)
   {
     gtk_page_setup_unix_dialog_set_print_settings(cast(GtkPageSetupUnixDialog*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);
   }

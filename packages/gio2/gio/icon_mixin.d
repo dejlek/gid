@@ -46,7 +46,7 @@ template IconT()
    *   icon2 = pointer to the second #GIcon.
    * Returns: %TRUE if icon1 is equal to icon2. %FALSE otherwise.
    */
-  override bool equal(gio.icon.Icon icon2)
+  override bool equal(gio.icon.Icon icon2 = null)
   {
     bool _retval;
     _retval = g_icon_equal(cast(GIcon*)cPtr, icon2 ? cast(GIcon*)(cast(ObjectG)icon2).cPtr(No.Dup) : null);

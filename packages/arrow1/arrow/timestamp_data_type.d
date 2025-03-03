@@ -26,7 +26,7 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
     return getType();
   }
 
-  this(arrow.types.TimeUnit unit, glib.time_zone.TimeZone timeZone)
+  this(arrow.types.TimeUnit unit, glib.time_zone.TimeZone timeZone = null)
   {
     GArrowTimestampDataType* _cretval;
     _cretval = garrow_timestamp_data_type_new(unit, timeZone ? cast(GTimeZone*)timeZone.cPtr(No.Dup) : null);

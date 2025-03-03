@@ -58,7 +58,7 @@ class RenderNode
    *   errorFunc = Callback on parsing errors
    * Returns: a new `GskRenderNode`
    */
-  static gsk.render_node.RenderNode deserialize(glib.bytes.Bytes bytes, gsk.types.ParseErrorFunc errorFunc)
+  static gsk.render_node.RenderNode deserialize(glib.bytes.Bytes bytes, gsk.types.ParseErrorFunc errorFunc = null)
   {
     extern(C) void _errorFuncCallback(const(GskParseLocation)* start, const(GskParseLocation)* end, const(GError)* error, void* userData)
     {

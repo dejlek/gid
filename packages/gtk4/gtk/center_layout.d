@@ -132,7 +132,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
    * Params:
    *   widget = the new center widget
    */
-  void setCenterWidget(gtk.widget.Widget widget)
+  void setCenterWidget(gtk.widget.Widget widget = null)
   {
     gtk_center_layout_set_center_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -143,7 +143,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
    * Params:
    *   widget = the new end widget
    */
-  void setEndWidget(gtk.widget.Widget widget)
+  void setEndWidget(gtk.widget.Widget widget = null)
   {
     gtk_center_layout_set_end_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -179,7 +179,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
    * Params:
    *   widget = the new start widget
    */
-  void setStartWidget(gtk.widget.Widget widget)
+  void setStartWidget(gtk.widget.Widget widget = null)
   {
     gtk_center_layout_set_start_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

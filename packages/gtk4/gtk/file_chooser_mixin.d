@@ -396,7 +396,7 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override bool setCurrentFolder(gio.file.File file)
+  override bool setCurrentFolder(gio.file.File file = null)
   {
     bool _retval;
     GError *_err;

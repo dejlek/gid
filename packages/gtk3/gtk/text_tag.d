@@ -49,7 +49,7 @@ class TextTag : gobject.object.ObjectG
    *   name = tag name, or %NULL
    * Returns: a new #GtkTextTag
    */
-  this(string name)
+  this(string name = null)
   {
     GtkTextTag* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

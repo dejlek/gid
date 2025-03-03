@@ -96,7 +96,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
    *   label = the text for the check button.
    * Returns: a new `GtkCheckButton`
    */
-  static gtk.check_button.CheckButton newWithLabel(string label)
+  static gtk.check_button.CheckButton newWithLabel(string label = null)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -112,7 +112,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
    *     in front of the mnemonic character
    * Returns: a new `GtkCheckButton`
    */
-  static gtk.check_button.CheckButton newWithMnemonic(string label)
+  static gtk.check_button.CheckButton newWithMnemonic(string label = null)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -201,7 +201,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
    * Params:
    *   child = the child widget
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_check_button_set_child(cast(GtkCheckButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -222,7 +222,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
    *   group = another `GtkCheckButton` to
    *     form a group with
    */
-  void setGroup(gtk.check_button.CheckButton group)
+  void setGroup(gtk.check_button.CheckButton group = null)
   {
     gtk_check_button_set_group(cast(GtkCheckButton*)cPtr, group ? cast(GtkCheckButton*)group.cPtr(No.Dup) : null);
   }
@@ -248,7 +248,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
    *   label = The text shown next to the indicator, or %NULL
    *     to show no text
    */
-  void setLabel(string label)
+  void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_check_button_set_label(cast(GtkCheckButton*)cPtr, _label);

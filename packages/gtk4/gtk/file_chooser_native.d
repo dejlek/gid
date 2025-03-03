@@ -155,7 +155,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  this(string title, gtk.window.Window parent, gtk.types.FileChooserAction action, string acceptLabel, string cancelLabel)
+  this(string title, gtk.window.Window parent, gtk.types.FileChooserAction action, string acceptLabel = null, string cancelLabel = null)
   {
     GtkFileChooserNative* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -205,7 +205,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  void setAcceptLabel(string acceptLabel)
+  void setAcceptLabel(string acceptLabel = null)
   {
     const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
     gtk_file_chooser_native_set_accept_label(cast(GtkFileChooserNative*)cPtr, _acceptLabel);
@@ -223,7 +223,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  void setCancelLabel(string cancelLabel)
+  void setCancelLabel(string cancelLabel = null)
   {
     const(char)* _cancelLabel = cancelLabel.toCString(No.Alloc);
     gtk_file_chooser_native_set_cancel_label(cast(GtkFileChooserNative*)cPtr, _cancelLabel);

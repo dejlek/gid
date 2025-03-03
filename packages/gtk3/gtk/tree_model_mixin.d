@@ -188,7 +188,7 @@ template TreeModelT()
    *   root = A #GtkTreePath or %NULL.
    * Returns: A new #GtkTreeModel.
    */
-  override gtk.tree_model.TreeModel filterNew(gtk.tree_path.TreePath root)
+  override gtk.tree_model.TreeModel filterNew(gtk.tree_path.TreePath root = null)
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_model_filter_new(cast(GtkTreeModel*)cPtr, root ? cast(GtkTreePath*)root.cPtr(No.Dup) : null);
@@ -370,7 +370,7 @@ template TreeModelT()
    *   parent = the #GtkTreeIter-struct, or %NULL
    * Returns: %TRUE, if iter has been set to the first child
    */
-  override bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent)
+  override bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null)
   {
     bool _retval;
     GtkTreeIter _iter;
@@ -400,7 +400,7 @@ template TreeModelT()
    *   iter = the #GtkTreeIter-struct, or %NULL
    * Returns: the number of children of iter
    */
-  override int iterNChildren(gtk.tree_iter.TreeIter iter)
+  override int iterNChildren(gtk.tree_iter.TreeIter iter = null)
   {
     int _retval;
     _retval = gtk_tree_model_iter_n_children(cast(GtkTreeModel*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);

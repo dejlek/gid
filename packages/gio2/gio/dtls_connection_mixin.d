@@ -56,7 +56,7 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE on success, %FALSE otherwise
    */
-  override bool close(gio.cancellable.Cancellable cancellable)
+  override bool close(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -74,7 +74,7 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the close operation is complete
    */
-  override void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -299,7 +299,7 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: success or failure
    */
-  override bool handshake(gio.cancellable.Cancellable cancellable)
+  override bool handshake(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -317,7 +317,7 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the handshake is complete
    */
-  override void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -413,7 +413,7 @@ template DtlsConnectionT()
    * Params:
    *   database = a #GTlsDatabase
    */
-  override void setDatabase(gio.tls_database.TlsDatabase database)
+  override void setDatabase(gio.tls_database.TlsDatabase database = null)
   {
     g_dtls_connection_set_database(cast(GDtlsConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
   }
@@ -427,7 +427,7 @@ template DtlsConnectionT()
    * Params:
    *   interaction = an interaction object, or %NULL
    */
-  override void setInteraction(gio.tls_interaction.TlsInteraction interaction)
+  override void setInteraction(gio.tls_interaction.TlsInteraction interaction = null)
   {
     g_dtls_connection_set_interaction(cast(GDtlsConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null);
   }
@@ -500,7 +500,7 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE on success, %FALSE otherwise
    */
-  override bool shutdown(bool shutdownRead, bool shutdownWrite, gio.cancellable.Cancellable cancellable)
+  override bool shutdown(bool shutdownRead, bool shutdownWrite, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -520,7 +520,7 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the shutdown operation is complete
    */
-  override void shutdownAsync(bool shutdownRead, bool shutdownWrite, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void shutdownAsync(bool shutdownRead, bool shutdownWrite, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

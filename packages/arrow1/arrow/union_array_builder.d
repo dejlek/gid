@@ -26,7 +26,7 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
     return getType();
   }
 
-  byte appendChild(arrow.array_builder.ArrayBuilder child, string fieldName)
+  byte appendChild(arrow.array_builder.ArrayBuilder child, string fieldName = null)
   {
     byte _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);

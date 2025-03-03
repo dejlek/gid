@@ -1406,7 +1406,7 @@ string buildPathv(string separator, string[] args)
  * Returns: a newly allocated string with the
  *   canonical file path
  */
-string canonicalizeFilename(string filename, string relativeTo)
+string canonicalizeFilename(string filename, string relativeTo = null)
 {
   char* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -2685,7 +2685,7 @@ string filenameFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead, 
  * Returns: a newly-allocated string holding the resulting
  *   URI, or %NULL on an error.
  */
-string filenameToUri(string filename, string hostname)
+string filenameToUri(string filename, string hostname = null)
 {
   char* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -3940,7 +3940,7 @@ uint intHash(const(void)* v)
  *   string_ = a static string
  * Returns: a canonical representation for the string
  */
-string internStaticString(string string_)
+string internStaticString(string string_ = null)
 {
   const(char)* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -3960,7 +3960,7 @@ string internStaticString(string string_)
  *   string_ = a string
  * Returns: a canonical representation for the string
  */
-string internString(string string_)
+string internString(string string_ = null)
 {
   const(char)* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -4403,7 +4403,7 @@ void logWriterDefaultSetUseStderr(bool useStderr)
  * Returns: `TRUE` if the log message would be dropped by GLib’s
  *   default log handlers
  */
-bool logWriterDefaultWouldDrop(glib.types.LogLevelFlags logLevel, string logDomain)
+bool logWriterDefaultWouldDrop(glib.types.LogLevelFlags logLevel, string logDomain = null)
 {
   bool _retval;
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
@@ -5236,7 +5236,7 @@ void qsortWithData(const(void)* pbase, int totalElems, size_t size, glib.types.C
  *   string_ = a string
  * Returns: the #GQuark identifying the string, or 0 if string is %NULL
  */
-glib.types.Quark quarkFromStaticString(string string_)
+glib.types.Quark quarkFromStaticString(string string_ = null)
 {
   glib.types.Quark _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -5255,7 +5255,7 @@ glib.types.Quark quarkFromStaticString(string string_)
  *   string_ = a string
  * Returns: the #GQuark identifying the string, or 0 if string is %NULL
  */
-glib.types.Quark quarkFromString(string string_)
+glib.types.Quark quarkFromString(string string_ = null)
 {
   glib.types.Quark _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -5289,7 +5289,7 @@ string quarkToString(glib.types.Quark quark)
  * Returns: the #GQuark associated with the string, or 0 if string is
  *   %NULL or there is no #GQuark associated with it
  */
-glib.types.Quark quarkTryString(string string_)
+glib.types.Quark quarkTryString(string string_ = null)
 {
   glib.types.Quark _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -6892,7 +6892,7 @@ bool strMatchString(string searchTerm, string potentialHit, bool acceptAlternate
  *   fromLocale = the source locale, if known
  * Returns: a string in plain ASCII
  */
-string strToAscii(string str, string fromLocale)
+string strToAscii(string str, string fromLocale = null)
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -7055,7 +7055,7 @@ string strchug(string string_)
  *   str2 = another C string or %NULL
  * Returns: an integer less than, equal to, or greater than zero, if str1 is <, \=\= or > than str2.
  */
-int strcmp0(string str1, string str2)
+int strcmp0(string str1 = null, string str2 = null)
 {
   int _retval;
   const(char)* _str1 = str1.toCString(No.Alloc);
@@ -7138,7 +7138,7 @@ string strdown(string string_)
  *   str = the string to duplicate
  * Returns: a newly-allocated copy of str
  */
-string strdup(string str)
+string strdup(string str = null)
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -7221,7 +7221,7 @@ string strerror(int errnum)
  *   exceptions = a string of characters not to escape in source
  * Returns: a newly-allocated copy of source with special characters escaped
  */
-string strescape(string source, string exceptions)
+string strescape(string source, string exceptions = null)
 {
   char* _cretval;
   const(char)* _source = source.toCString(No.Alloc);
@@ -7938,7 +7938,7 @@ string testGetPath()
  * Params:
  *   msg = explanation
  */
-void testIncomplete(string msg)
+void testIncomplete(string msg = null)
 {
   const(char)* _msg = msg.toCString(No.Alloc);
   g_test_incomplete(_msg);
@@ -8109,7 +8109,7 @@ void testSetNonfatalAssertions()
  * Params:
  *   msg = explanation
  */
-void testSkip(string msg)
+void testSkip(string msg = null)
 {
   const(char)* _msg = msg.toCString(No.Alloc);
   g_test_skip(_msg);
@@ -9699,7 +9699,7 @@ string utf8CollateKeyForFilename(string str, ptrdiff_t len)
  * Returns: a pointer to the found character or %NULL if end is
  *   set and is reached
  */
-string utf8FindNextChar(string p, string end)
+string utf8FindNextChar(string p, string end = null)
 {
   char* _cretval;
   const(char)* _p = p.toCString(No.Alloc);

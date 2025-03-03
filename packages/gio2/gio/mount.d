@@ -69,7 +69,7 @@ interface Mount
 
    * Deprecated: Use [gio.mount.Mount.ejectWithOperation] instead.
    */
-  void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes ejecting a mount. If any errors occurred during the operation,
@@ -93,7 +93,7 @@ interface Mount
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes ejecting a mount. If any errors occurred during the operation,
@@ -201,7 +201,7 @@ interface Mount
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback
    */
-  void guessContentType(bool forceRescan, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void guessContentType(bool forceRescan, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes guessing content types of mount. If any errors occurred
@@ -232,7 +232,7 @@ interface Mount
    * Returns: a %NULL-terminated array of content types or %NULL on error.
    *   Caller should free this array with [glib.global.strfreev] when done with it.
    */
-  string[] guessContentTypeSync(bool forceRescan, gio.cancellable.Cancellable cancellable);
+  string[] guessContentTypeSync(bool forceRescan, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Determines if mount is shadowed. Applications or libraries should
@@ -275,7 +275,7 @@ interface Mount
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  void remount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void remount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes remounting a mount. If any errors occurred during the operation,
@@ -305,7 +305,7 @@ interface Mount
 
    * Deprecated: Use [gio.mount.Mount.unmountWithOperation] instead.
    */
-  void unmount(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void unmount(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes unmounting a mount. If any errors occurred during the operation,
@@ -329,7 +329,7 @@ interface Mount
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  void unmountWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void unmountWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes unmounting a mount. If any errors occurred during the operation,

@@ -86,7 +86,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
    * Deprecated: Use #GAction instead, associating it to a widget with
    *   #GtkActionable or creating a #GtkMenu with [gtk.menu.Menu.newFromModel]
    */
-  this(string name, string label, string tooltip, string stockId)
+  this(string name, string label = null, string tooltip = null, string stockId = null)
   {
     GtkAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -504,7 +504,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
    * Deprecated: Use #GAction and the accelerator group on an associated
    *   #GtkMenu instead
    */
-  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup)
+  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null)
   {
     gtk_action_set_accel_group(cast(GtkAction*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
   }

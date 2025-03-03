@@ -72,7 +72,7 @@ class Display : gobject.object.ObjectG
    *   displayName = the name of the display to open
    * Returns: a `GdkDisplay`
    */
-  static gdk.display.Display open(string displayName)
+  static gdk.display.Display open(string displayName = null)
   {
     GdkDisplay* _cretval;
     const(char)* _displayName = displayName.toCString(No.Alloc);

@@ -29,7 +29,7 @@ template LoadableIconT()
    *     ignore.
    * Returns: a #GInputStream to read the icon from.
    */
-  override gio.input_stream.InputStream load(int size, out string type, gio.cancellable.Cancellable cancellable)
+  override gio.input_stream.InputStream load(int size, out string type, gio.cancellable.Cancellable cancellable = null)
   {
     GInputStream* _cretval;
     char* _type;
@@ -52,7 +52,7 @@ template LoadableIconT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void loadAsync(int size, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void loadAsync(int size, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

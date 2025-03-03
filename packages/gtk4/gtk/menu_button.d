@@ -307,7 +307,7 @@ class MenuButton : gtk.widget.Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_menu_button_set_child(cast(GtkMenuButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -326,7 +326,7 @@ class MenuButton : gtk.widget.Widget
    *     be shown, but none has been provided via other means, or %NULL
    *     to reset to default behavior.
    */
-  void setCreatePopupFunc(gtk.types.MenuButtonCreatePopupFunc func)
+  void setCreatePopupFunc(gtk.types.MenuButtonCreatePopupFunc func = null)
   {
     extern(C) void _funcCallback(GtkMenuButton* menuButton, void* userData)
     {
@@ -412,7 +412,7 @@ class MenuButton : gtk.widget.Widget
    *   menuModel = a `GMenuModel`, or %NULL to unset and disable the
    *     button
    */
-  void setMenuModel(gio.menu_model.MenuModel menuModel)
+  void setMenuModel(gio.menu_model.MenuModel menuModel = null)
   {
     gtk_menu_button_set_menu_model(cast(GtkMenuButton*)cPtr, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.Dup) : null);
   }
@@ -425,7 +425,7 @@ class MenuButton : gtk.widget.Widget
    * Params:
    *   popover = a `GtkPopover`, or %NULL to unset and disable the button
    */
-  void setPopover(gtk.widget.Widget popover)
+  void setPopover(gtk.widget.Widget popover = null)
   {
     gtk_menu_button_set_popover(cast(GtkMenuButton*)cPtr, popover ? cast(GtkWidget*)popover.cPtr(No.Dup) : null);
   }

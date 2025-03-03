@@ -108,7 +108,7 @@ class PatternSpec : gobject.boxed.Boxed
    *   stringReversed = the reverse of string or %NULL
    * Returns: %TRUE if string matches pspec
    */
-  bool match(size_t stringLength, string string_, string stringReversed)
+  bool match(size_t stringLength, string string_, string stringReversed = null)
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);

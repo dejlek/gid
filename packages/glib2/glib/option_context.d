@@ -58,7 +58,7 @@ class OptionContext
    *     the `--help` output for the options in entries
    *     with gettext$(LPAREN)$(RPAREN), or %NULL
    */
-  void addMainEntries(glib.types.OptionEntry[] entries, string translationDomain)
+  void addMainEntries(glib.types.OptionEntry[] entries, string translationDomain = null)
   {
     auto _entries = cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr;
     const(char)* _translationDomain = translationDomain.toCString(No.Alloc);
@@ -90,7 +90,7 @@ class OptionContext
    *   group = the #GOptionGroup to create help for, or %NULL
    * Returns: A newly allocated string containing the help text
    */
-  string getHelp(bool mainHelp, glib.option_group.OptionGroup group)
+  string getHelp(bool mainHelp, glib.option_group.OptionGroup group = null)
   {
     char* _cretval;
     _cretval = g_option_context_get_help(cast(GOptionContext*)cPtr, mainHelp, group ? cast(GOptionGroup*)group.cPtr(No.Dup) : null);
@@ -169,7 +169,7 @@ class OptionContext
    *   description = a string to be shown in `--help` output
    *     after the list of options, or %NULL
    */
-  void setDescription(string description)
+  void setDescription(string description = null)
   {
     const(char)* _description = description.toCString(No.Alloc);
     g_option_context_set_description(cast(GOptionContext*)cPtr, _description);
@@ -255,7 +255,7 @@ class OptionContext
    *   summary = a string to be shown in `--help` output
    *     before the list of options, or %NULL
    */
-  void setSummary(string summary)
+  void setSummary(string summary = null)
   {
     const(char)* _summary = summary.toCString(No.Alloc);
     g_option_context_set_summary(cast(GOptionContext*)cPtr, _summary);
@@ -274,7 +274,7 @@ class OptionContext
    * Params:
    *   func = the #GTranslateFunc, or %NULL
    */
-  void setTranslateFunc(glib.types.TranslateFunc func)
+  void setTranslateFunc(glib.types.TranslateFunc func = null)
   {
     extern(C) const(char)* _funcCallback(const(char)* str, void* data)
     {

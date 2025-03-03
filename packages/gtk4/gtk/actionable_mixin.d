@@ -61,7 +61,7 @@ template ActionableT()
    * Params:
    *   actionName = an action name
    */
-  override void setActionName(string actionName)
+  override void setActionName(string actionName = null)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     gtk_actionable_set_action_name(cast(GtkActionable*)cPtr, _actionName);
@@ -86,7 +86,7 @@ template ActionableT()
    * Params:
    *   targetValue = a [glib.variant.VariantG] to set as the target value
    */
-  override void setActionTargetValue(glib.variant.VariantG targetValue)
+  override void setActionTargetValue(glib.variant.VariantG targetValue = null)
   {
     gtk_actionable_set_action_target_value(cast(GtkActionable*)cPtr, targetValue ? cast(VariantC*)targetValue.cPtr(No.Dup) : null);
   }

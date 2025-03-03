@@ -206,7 +206,7 @@ class Context : gobject.object.ObjectG
    * Returns: a `PangoFontMetrics` object. The caller must call
    *   [pango.font_metrics.FontMetrics.unref] when finished using the object.
    */
-  pango.font_metrics.FontMetrics getMetrics(pango.font_description.FontDescription desc, pango.language.Language language)
+  pango.font_metrics.FontMetrics getMetrics(pango.font_description.FontDescription desc = null, pango.language.Language language = null)
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_context_get_metrics(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
@@ -329,7 +329,7 @@ class Context : gobject.object.ObjectG
    * Params:
    *   desc = the new pango font description
    */
-  void setFontDescription(pango.font_description.FontDescription desc)
+  void setFontDescription(pango.font_description.FontDescription desc = null)
   {
     pango_context_set_font_description(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
   }
@@ -343,7 +343,7 @@ class Context : gobject.object.ObjectG
    * Params:
    *   fontMap = the `PangoFontMap` to set.
    */
-  void setFontMap(pango.font_map.FontMap fontMap)
+  void setFontMap(pango.font_map.FontMap fontMap = null)
   {
     pango_context_set_font_map(cast(PangoContext*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.Dup) : null);
   }
@@ -369,7 +369,7 @@ class Context : gobject.object.ObjectG
    * Params:
    *   language = the new language tag.
    */
-  void setLanguage(pango.language.Language language)
+  void setLanguage(pango.language.Language language = null)
   {
     pango_context_set_language(cast(PangoContext*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
   }
@@ -386,7 +386,7 @@ class Context : gobject.object.ObjectG
    *   matrix = a `PangoMatrix`, or %NULL to unset any existing
    *     matrix. $(LPAREN)No matrix set is the same as setting the identity matrix.$(RPAREN)
    */
-  void setMatrix(pango.matrix.Matrix matrix)
+  void setMatrix(pango.matrix.Matrix matrix = null)
   {
     pango_context_set_matrix(cast(PangoContext*)cPtr, matrix ? cast(const(PangoMatrix)*)matrix.cPtr(No.Dup) : null);
   }

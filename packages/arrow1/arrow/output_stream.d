@@ -46,7 +46,7 @@ class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Wri
     return _retval;
   }
 
-  long writeRecordBatch(arrow.record_batch.RecordBatch recordBatch, arrow.write_options.WriteOptions options)
+  long writeRecordBatch(arrow.record_batch.RecordBatch recordBatch, arrow.write_options.WriteOptions options = null)
   {
     long _retval;
     GError *_err;

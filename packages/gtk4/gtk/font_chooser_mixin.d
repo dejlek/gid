@@ -224,7 +224,7 @@ template FontChooserT()
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  override void setFilterFunc(gtk.types.FontFilterFunc filter)
+  override void setFilterFunc(gtk.types.FontFilterFunc filter = null)
   {
     extern(C) bool _filterCallback(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data)
     {
@@ -292,7 +292,7 @@ template FontChooserT()
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  override void setFontMap(pango.font_map.FontMap fontmap)
+  override void setFontMap(pango.font_map.FontMap fontmap = null)
   {
     gtk_font_chooser_set_font_map(cast(GtkFontChooser*)cPtr, fontmap ? cast(PangoFontMap*)fontmap.cPtr(No.Dup) : null);
   }

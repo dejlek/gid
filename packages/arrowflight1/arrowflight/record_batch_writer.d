@@ -38,7 +38,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
    *   options = A #GArrowWriteOptions.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool begin(arrow.schema.Schema schema, arrow.write_options.WriteOptions options)
+  bool begin(arrow.schema.Schema schema, arrow.write_options.WriteOptions options = null)
   {
     bool _retval;
     GError *_err;
@@ -73,7 +73,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
    *   metadata = A #GArrowBuffer.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool writeRecordBatch(arrow.record_batch.RecordBatch recordBatch, arrow.buffer.Buffer metadata)
+  bool writeRecordBatch(arrow.record_batch.RecordBatch recordBatch, arrow.buffer.Buffer metadata = null)
   {
     bool _retval;
     GError *_err;

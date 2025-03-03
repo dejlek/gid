@@ -72,7 +72,7 @@ class FontDialog : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void chooseFace(gtk.window.Window parent, pango.font_face.FontFace initialValue, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void chooseFace(gtk.window.Window parent = null, pango.font_face.FontFace initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -117,7 +117,7 @@ class FontDialog : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void chooseFamily(gtk.window.Window parent, pango.font_family.FontFamily initialValue, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void chooseFamily(gtk.window.Window parent = null, pango.font_family.FontFamily initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -167,7 +167,7 @@ class FontDialog : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void chooseFont(gtk.window.Window parent, pango.font_description.FontDescription initialValue, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void chooseFont(gtk.window.Window parent = null, pango.font_description.FontDescription initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -197,7 +197,7 @@ class FontDialog : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void chooseFontAndFeatures(gtk.window.Window parent, pango.font_description.FontDescription initialValue, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void chooseFontAndFeatures(gtk.window.Window parent = null, pango.font_description.FontDescription initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -329,7 +329,7 @@ class FontDialog : gobject.object.ObjectG
    * Params:
    *   filter = a `GtkFilter`
    */
-  void setFilter(gtk.filter.Filter filter)
+  void setFilter(gtk.filter.Filter filter = null)
   {
     gtk_font_dialog_set_filter(cast(GtkFontDialog*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(No.Dup) : null);
   }
@@ -340,7 +340,7 @@ class FontDialog : gobject.object.ObjectG
    * Params:
    *   fontmap = the fontmap
    */
-  void setFontMap(pango.font_map.FontMap fontmap)
+  void setFontMap(pango.font_map.FontMap fontmap = null)
   {
     gtk_font_dialog_set_font_map(cast(GtkFontDialog*)cPtr, fontmap ? cast(PangoFontMap*)fontmap.cPtr(No.Dup) : null);
   }

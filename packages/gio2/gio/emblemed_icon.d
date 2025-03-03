@@ -44,7 +44,7 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
    *   emblem = a #GEmblem, or %NULL
    * Returns: a new #GIcon
    */
-  this(gio.icon.Icon icon, gio.emblem.Emblem emblem)
+  this(gio.icon.Icon icon, gio.emblem.Emblem emblem = null)
   {
     GIcon* _cretval;
     _cretval = g_emblemed_icon_new(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, emblem ? cast(GEmblem*)emblem.cPtr(No.Dup) : null);

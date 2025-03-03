@@ -439,7 +439,7 @@ class PrintCompositor : gobject.object.ObjectG
    * Params:
    *   fontName = the name of the font for the footer text, or %NULL.
    */
-  void setFooterFontName(string fontName)
+  void setFooterFontName(string fontName = null)
   {
     const(char)* _fontName = fontName.toCString(No.Alloc);
     gtk_source_print_compositor_set_footer_font_name(cast(GtkSourcePrintCompositor*)cPtr, _fontName);
@@ -454,7 +454,7 @@ class PrintCompositor : gobject.object.ObjectG
    *   center = a format string to print on the center of the footer.
    *   right = a format string to print on the right of the footer.
    */
-  void setFooterFormat(bool separator, string left, string center, string right)
+  void setFooterFormat(bool separator, string left = null, string center = null, string right = null)
   {
     const(char)* _left = left.toCString(No.Alloc);
     const(char)* _center = center.toCString(No.Alloc);
@@ -475,7 +475,7 @@ class PrintCompositor : gobject.object.ObjectG
    * Params:
    *   fontName = the name of the font for header text, or %NULL.
    */
-  void setHeaderFontName(string fontName)
+  void setHeaderFontName(string fontName = null)
   {
     const(char)* _fontName = fontName.toCString(No.Alloc);
     gtk_source_print_compositor_set_header_font_name(cast(GtkSourcePrintCompositor*)cPtr, _fontName);
@@ -505,7 +505,7 @@ class PrintCompositor : gobject.object.ObjectG
    *   center = a format string to print on the center of the header.
    *   right = a format string to print on the right of the header.
    */
-  void setHeaderFormat(bool separator, string left, string center, string right)
+  void setHeaderFormat(bool separator, string left = null, string center = null, string right = null)
   {
     const(char)* _left = left.toCString(No.Alloc);
     const(char)* _center = center.toCString(No.Alloc);
@@ -550,7 +550,7 @@ class PrintCompositor : gobject.object.ObjectG
    * Params:
    *   fontName = the name of the font for line numbers, or %NULL.
    */
-  void setLineNumbersFontName(string fontName)
+  void setLineNumbersFontName(string fontName = null)
   {
     const(char)* _fontName = fontName.toCString(No.Alloc);
     gtk_source_print_compositor_set_line_numbers_font_name(cast(GtkSourcePrintCompositor*)cPtr, _fontName);

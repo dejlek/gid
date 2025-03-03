@@ -462,7 +462,7 @@ class FontDescription : gobject.boxed.Boxed
    * Params:
    *   variations = a string representing the variations
    */
-  void setVariations(string variations)
+  void setVariations(string variations = null)
   {
     const(char)* _variations = variations.toCString(No.Alloc);
     pango_font_description_set_variations(cast(PangoFontDescription*)cPtr, _variations);

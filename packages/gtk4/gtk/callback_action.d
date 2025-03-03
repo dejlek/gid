@@ -38,7 +38,7 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
    *   callback = the callback to call
    * Returns: A new shortcut action
    */
-  this(gtk.types.ShortcutFunc callback)
+  this(gtk.types.ShortcutFunc callback = null)
   {
     extern(C) bool _callbackCallback(GtkWidget* widget, VariantC* args, void* userData)
     {

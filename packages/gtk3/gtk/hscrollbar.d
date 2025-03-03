@@ -49,7 +49,7 @@ class HScrollbar : gtk.scrollbar.Scrollbar
 
    * Deprecated: Use [gtk.scrollbar.Scrollbar.new_] with %GTK_ORIENTATION_HORIZONTAL instead
    */
-  this(gtk.adjustment.Adjustment adjustment)
+  this(gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_hscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);

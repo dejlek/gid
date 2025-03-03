@@ -49,7 +49,7 @@ class TextBuffer : gobject.object.ObjectG
    *   table = a tag table, or %NULL to create a new one
    * Returns: a new text buffer
    */
-  this(gtk.text_tag_table.TextTagTable table)
+  this(gtk.text_tag_table.TextTagTable table = null)
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_buffer_new(table ? cast(GtkTextTagTable*)table.cPtr(No.Dup) : null);

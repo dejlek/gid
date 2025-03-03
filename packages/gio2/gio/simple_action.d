@@ -47,7 +47,7 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
    *     handlers for the #GSimpleAction::activate signal, or %NULL for no parameter
    * Returns: a new #GSimpleAction
    */
-  this(string name, glib.variant_type.VariantType parameterType)
+  this(string name, glib.variant_type.VariantType parameterType = null)
   {
     GSimpleAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -113,7 +113,7 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
    * Params:
    *   stateHint = a #GVariant representing the state hint
    */
-  void setStateHint(glib.variant.VariantG stateHint)
+  void setStateHint(glib.variant.VariantG stateHint = null)
   {
     g_simple_action_set_state_hint(cast(GSimpleAction*)cPtr, stateHint ? cast(VariantC*)stateHint.cPtr(No.Dup) : null);
   }

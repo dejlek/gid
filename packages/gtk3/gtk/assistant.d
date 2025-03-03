@@ -335,7 +335,7 @@ class Assistant : gtk.window.Window
    *   pageFunc = the #GtkAssistantPageFunc, or %NULL
    *     to use the default one
    */
-  void setForwardPageFunc(gtk.types.AssistantPageFunc pageFunc)
+  void setForwardPageFunc(gtk.types.AssistantPageFunc pageFunc = null)
   {
     extern(C) int _pageFuncCallback(int currentPage, void* data)
     {
@@ -385,7 +385,7 @@ class Assistant : gtk.window.Window
    * Deprecated: Since GTK+ 3.2, a header is no longer shown;
    *   add your header decoration to the page content instead.
    */
-  void setPageHeaderImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setPageHeaderImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_assistant_set_page_header_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
@@ -401,7 +401,7 @@ class Assistant : gtk.window.Window
    * Deprecated: Since GTK+ 3.2, sidebar images are not
    *   shown anymore.
    */
-  void setPageSideImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setPageSideImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_assistant_set_page_side_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }

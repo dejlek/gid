@@ -145,7 +145,7 @@ class SearchBar : gtk.widget.Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_search_bar_set_child(cast(GtkSearchBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -164,7 +164,7 @@ class SearchBar : gtk.widget.Widget
    * Params:
    *   widget = a `GtkWidget`
    */
-  void setKeyCaptureWidget(gtk.widget.Widget widget)
+  void setKeyCaptureWidget(gtk.widget.Widget widget = null)
   {
     gtk_search_bar_set_key_capture_widget(cast(GtkSearchBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

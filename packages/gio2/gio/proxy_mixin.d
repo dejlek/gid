@@ -37,7 +37,7 @@ template ProxyT()
    *   be the same as connection, in which case a reference
    *   will be added.
    */
-  override gio.iostream.IOStream connect(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable)
+  override gio.iostream.IOStream connect(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable = null)
   {
     GIOStream* _cretval;
     GError *_err;
@@ -56,7 +56,7 @@ template ProxyT()
    *   cancellable = a #GCancellable
    *   callback = a #GAsyncReadyCallback
    */
-  override void connectAsync(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void connectAsync(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

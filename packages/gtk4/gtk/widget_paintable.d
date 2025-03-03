@@ -55,7 +55,7 @@ class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
    *   widget = a `GtkWidget`
    * Returns: a new `GtkWidgetPaintable`
    */
-  this(gtk.widget.Widget widget)
+  this(gtk.widget.Widget widget = null)
   {
     GdkPaintable* _cretval;
     _cretval = gtk_widget_paintable_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
@@ -79,7 +79,7 @@ class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
    * Params:
    *   widget = the widget to observe
    */
-  void setWidget(gtk.widget.Widget widget)
+  void setWidget(gtk.widget.Widget widget = null)
   {
     gtk_widget_paintable_set_widget(cast(GtkWidgetPaintable*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

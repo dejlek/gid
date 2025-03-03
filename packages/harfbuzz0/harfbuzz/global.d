@@ -6755,7 +6755,7 @@ uint unicodeEastasianWidth(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.
  *   parent = Parent Unicode-functions structure
  * Returns: The Unicode-functions structure
  */
-harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsCreate(harfbuzz.unicode_funcs.UnicodeFuncs parent)
+harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsCreate(harfbuzz.unicode_funcs.UnicodeFuncs parent = null)
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_unicode_funcs_create(parent ? cast(hb_unicode_funcs_t*)parent.cPtr(No.Dup) : null);

@@ -26,7 +26,7 @@ class CallExpression : arrow.expression.Expression
     return getType();
   }
 
-  this(string function_, arrow.expression.Expression[] arguments, arrow.function_options.FunctionOptions options)
+  this(string function_, arrow.expression.Expression[] arguments, arrow.function_options.FunctionOptions options = null)
   {
     GArrowCallExpression* _cretval;
     const(char)* _function_ = function_.toCString(No.Alloc);

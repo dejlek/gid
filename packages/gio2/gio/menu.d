@@ -55,7 +55,7 @@ class Menu : gio.menu_model.MenuModel
    *   label = the section label, or %NULL
    *   detailedAction = the detailed action string, or %NULL
    */
-  void append(string label, string detailedAction)
+  void append(string label = null, string detailedAction = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
@@ -123,7 +123,7 @@ class Menu : gio.menu_model.MenuModel
    *   label = the section label, or %NULL
    *   detailedAction = the detailed action string, or %NULL
    */
-  void insert(int position, string label, string detailedAction)
+  void insert(int position, string label = null, string detailedAction = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
@@ -191,7 +191,7 @@ class Menu : gio.menu_model.MenuModel
    *   label = the section label, or %NULL
    *   detailedAction = the detailed action string, or %NULL
    */
-  void prepend(string label, string detailedAction)
+  void prepend(string label = null, string detailedAction = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);

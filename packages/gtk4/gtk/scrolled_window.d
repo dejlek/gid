@@ -302,7 +302,7 @@ class ScrolledWindow : gtk.widget.Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_scrolled_window_set_child(cast(GtkScrolledWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -312,7 +312,7 @@ class ScrolledWindow : gtk.widget.Widget
    * Params:
    *   hadjustment = the `GtkAdjustment` to use, or %NULL to create a new one
    */
-  void setHadjustment(gtk.adjustment.Adjustment hadjustment)
+  void setHadjustment(gtk.adjustment.Adjustment hadjustment = null)
   {
     gtk_scrolled_window_set_hadjustment(cast(GtkScrolledWindow*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null);
   }
@@ -466,7 +466,7 @@ class ScrolledWindow : gtk.widget.Widget
    * Params:
    *   vadjustment = the `GtkAdjustment` to use, or %NULL to create a new one
    */
-  void setVadjustment(gtk.adjustment.Adjustment vadjustment)
+  void setVadjustment(gtk.adjustment.Adjustment vadjustment = null)
   {
     gtk_scrolled_window_set_vadjustment(cast(GtkScrolledWindow*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
   }

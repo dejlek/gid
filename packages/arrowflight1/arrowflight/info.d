@@ -65,7 +65,7 @@ class Info : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.schema.Schema getSchema(arrow.read_options.ReadOptions options)
+  arrow.schema.Schema getSchema(arrow.read_options.ReadOptions options = null)
   {
     GArrowSchema* _cretval;
     GError *_err;

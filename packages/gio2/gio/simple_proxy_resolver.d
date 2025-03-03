@@ -74,7 +74,7 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
    * Params:
    *   defaultProxy = the default proxy to use
    */
-  void setDefaultProxy(string defaultProxy)
+  void setDefaultProxy(string defaultProxy = null)
   {
     const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);
     g_simple_proxy_resolver_set_default_proxy(cast(GSimpleProxyResolver*)cPtr, _defaultProxy);

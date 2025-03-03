@@ -157,7 +157,7 @@ interface AppInfo
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  static void getDefaultForTypeAsync(string contentType, bool mustSupportUris, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void getDefaultForTypeAsync(string contentType, bool mustSupportUris, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -222,7 +222,7 @@ interface AppInfo
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  static void getDefaultForUriSchemeAsync(string uriScheme, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void getDefaultForUriSchemeAsync(string uriScheme, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -310,7 +310,7 @@ interface AppInfo
    *   context = an optional #GAppLaunchContext
    * Returns: %TRUE on success, %FALSE on error.
    */
-  static bool launchDefaultForUri(string uri, gio.app_launch_context.AppLaunchContext context)
+  static bool launchDefaultForUri(string uri, gio.app_launch_context.AppLaunchContext context = null)
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -336,7 +336,7 @@ interface AppInfo
    *   cancellable = a #GCancellable
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  static void launchDefaultForUriAsync(string uri, gio.app_launch_context.AppLaunchContext context, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void launchDefaultForUriAsync(string uri, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -528,7 +528,7 @@ interface AppInfo
    *   context = a #GAppLaunchContext or %NULL
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  bool launch(gio.file.File[] files, gio.app_launch_context.AppLaunchContext context);
+  bool launch(gio.file.File[] files, gio.app_launch_context.AppLaunchContext context = null);
 
   /**
    * Launches the application. This passes the uris to the launched application
@@ -546,7 +546,7 @@ interface AppInfo
    *   context = a #GAppLaunchContext or %NULL
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  bool launchUris(string[] uris, gio.app_launch_context.AppLaunchContext context);
+  bool launchUris(string[] uris, gio.app_launch_context.AppLaunchContext context = null);
 
   /**
    * Async version of [gio.app_info.AppInfo.launchUris].
@@ -560,7 +560,7 @@ interface AppInfo
    *   cancellable = a #GCancellable
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  void launchUrisAsync(string[] uris, gio.app_launch_context.AppLaunchContext context, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void launchUrisAsync(string[] uris, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes a [gio.app_info.AppInfo.launchUrisAsync] operation.

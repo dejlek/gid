@@ -115,7 +115,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
    *   groupSource = a radio action object whos group we are
    *     joining, or %NULL to remove the radio action from its group
    */
-  void joinGroup(gtk.radio_action.RadioAction groupSource)
+  void joinGroup(gtk.radio_action.RadioAction groupSource = null)
   {
     gtk_radio_action_join_group(cast(GtkRadioAction*)cPtr, groupSource ? cast(GtkRadioAction*)groupSource.cPtr(No.Dup) : null);
   }

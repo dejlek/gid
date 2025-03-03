@@ -587,7 +587,7 @@ class Value : Boxed
    * Params:
    *   vString = static string to be set
    */
-  void setInternedString(string vString)
+  void setInternedString(string vString = null)
   {
     const(char)* _vString = vString.toCString(No.Alloc);
     g_value_set_interned_string(cast(GValue*)cPtr, _vString);
@@ -616,7 +616,7 @@ class Value : Boxed
    * Params:
    *   vObject = object value to be set
    */
-  void setObject(gobject.object.ObjectG vObject)
+  void setObject(gobject.object.ObjectG vObject = null)
   {
     g_value_set_object(cast(GValue*)cPtr, vObject ? cast(ObjectC*)vObject.cPtr(No.Dup) : null);
   }
@@ -626,7 +626,7 @@ class Value : Boxed
    * Params:
    *   param = the #GParamSpec to be set
    */
-  void setParam(gobject.param_spec.ParamSpec param)
+  void setParam(gobject.param_spec.ParamSpec param = null)
   {
     g_value_set_param(cast(GValue*)cPtr, param ? cast(GParamSpec*)param.cPtr(No.Dup) : null);
   }
@@ -672,7 +672,7 @@ class Value : Boxed
    * Params:
    *   vString = static string to be set
    */
-  void setStaticString(string vString)
+  void setStaticString(string vString = null)
   {
     const(char)* _vString = vString.toCString(No.Alloc);
     g_value_set_static_string(cast(GValue*)cPtr, _vString);
@@ -683,7 +683,7 @@ class Value : Boxed
    * Params:
    *   vString = caller-owned string to be duplicated for the #GValue
    */
-  void setString(string vString)
+  void setString(string vString = null)
   {
     const(char)* _vString = vString.toCString(No.Alloc);
     g_value_set_string(cast(GValue*)cPtr, _vString);
@@ -696,7 +696,7 @@ class Value : Boxed
 
    * Deprecated: Use [gobject.value.Value.takeString] instead.
    */
-  void setStringTakeOwnership(string vString)
+  void setStringTakeOwnership(string vString = null)
   {
     char* _vString = vString.toCString(No.Alloc);
     g_value_set_string_take_ownership(cast(GValue*)cPtr, _vString);
@@ -748,7 +748,7 @@ class Value : Boxed
    * Params:
    *   variant = a #GVariant, or %NULL
    */
-  void setVariant(glib.variant.VariantG variant)
+  void setVariant(glib.variant.VariantG variant = null)
   {
     g_value_set_variant(cast(GValue*)cPtr, variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
   }
@@ -789,7 +789,7 @@ class Value : Boxed
    * Params:
    *   vString = string to take ownership of
    */
-  void takeString(string vString)
+  void takeString(string vString = null)
   {
     char* _vString = vString.toCString(Yes.Alloc);
     g_value_take_string(cast(GValue*)cPtr, _vString);
@@ -808,7 +808,7 @@ class Value : Boxed
    * Params:
    *   variant = a #GVariant, or %NULL
    */
-  void takeVariant(glib.variant.VariantG variant)
+  void takeVariant(glib.variant.VariantG variant = null)
   {
     g_value_take_variant(cast(GValue*)cPtr, variant ? cast(VariantC*)variant.cPtr(Yes.Dup) : null);
   }

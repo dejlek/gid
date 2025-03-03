@@ -39,7 +39,7 @@ class CustomFilter : gtk.filter.Filter
    *   matchFunc = function to filter items
    * Returns: a new `GtkCustomFilter`
    */
-  this(gtk.types.CustomFilterFunc matchFunc)
+  this(gtk.types.CustomFilterFunc matchFunc = null)
   {
     extern(C) bool _matchFuncCallback(ObjectC* item, void* userData)
     {
@@ -67,7 +67,7 @@ class CustomFilter : gtk.filter.Filter
    * Params:
    *   matchFunc = function to filter items
    */
-  void setFilterFunc(gtk.types.CustomFilterFunc matchFunc)
+  void setFilterFunc(gtk.types.CustomFilterFunc matchFunc = null)
   {
     extern(C) bool _matchFuncCallback(ObjectC* item, void* userData)
     {

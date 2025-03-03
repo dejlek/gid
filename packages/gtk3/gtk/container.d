@@ -586,7 +586,7 @@ class Container : gtk.widget.Widget
    * Params:
    *   child = a #GtkWidget, or %NULL
    */
-  void setFocusChild(gtk.widget.Widget child)
+  void setFocusChild(gtk.widget.Widget child = null)
   {
     gtk_container_set_focus_child(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

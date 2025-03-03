@@ -253,7 +253,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
    *   accelPath = accelerator path, corresponding to this menu
    *     item’s functionality, or %NULL to unset the current path.
    */
-  void setAccelPath(string accelPath)
+  void setAccelPath(string accelPath = null)
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_menu_item_set_accel_path(cast(GtkMenuItem*)cPtr, _accelPath);
@@ -308,7 +308,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
    * Params:
    *   submenu = the submenu, or %NULL
    */
-  void setSubmenu(gtk.menu.Menu submenu)
+  void setSubmenu(gtk.menu.Menu submenu = null)
   {
     gtk_menu_item_set_submenu(cast(GtkMenuItem*)cPtr, submenu ? cast(GtkWidget*)submenu.cPtr(No.Dup) : null);
   }

@@ -139,7 +139,7 @@ class MenuModel : gobject.object.ObjectG
    *     %NULL
    * Returns: the value of the attribute
    */
-  glib.variant.VariantG getItemAttributeValue(int itemIndex, string attribute, glib.variant_type.VariantType expectedType)
+  glib.variant.VariantG getItemAttributeValue(int itemIndex, string attribute, glib.variant_type.VariantType expectedType = null)
   {
     VariantC* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);

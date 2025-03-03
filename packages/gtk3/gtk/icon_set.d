@@ -166,7 +166,7 @@ class IconSet : gobject.boxed.Boxed
 
    * Deprecated: Use [gtk.icon_set.IconSet.renderIconPixbuf] instead
    */
-  gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.style.Style style, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget, string detail)
+  gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.style.Style style, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget = null, string detail = null)
   {
     PixbufC* _cretval;
     const(char)* _detail = detail.toCString(No.Alloc);
@@ -214,7 +214,7 @@ class IconSet : gobject.boxed.Boxed
 
    * Deprecated: Use #GtkIconTheme instead.
    */
-  cairo.surface.Surface renderIconSurface(gtk.style_context.StyleContext context, gtk.types.IconSize size, int scale, gdk.window.Window forWindow)
+  cairo.surface.Surface renderIconSurface(gtk.style_context.StyleContext context, gtk.types.IconSize size, int scale, gdk.window.Window forWindow = null)
   {
     cairo_surface_t* _cretval;
     _cretval = gtk_icon_set_render_icon_surface(cast(GtkIconSet*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, size, scale, forWindow ? cast(GdkWindow*)forWindow.cPtr(No.Dup) : null);

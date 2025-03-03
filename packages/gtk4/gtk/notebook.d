@@ -131,7 +131,7 @@ class Notebook : gtk.widget.Widget
    * Returns: the index $(LPAREN)starting from 0$(RPAREN) of the appended
    *   page in the notebook, or -1 if function fails
    */
-  int appendPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel)
+  int appendPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
   {
     int _retval;
     _retval = gtk_notebook_append_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
@@ -154,7 +154,7 @@ class Notebook : gtk.widget.Widget
    * Returns: the index $(LPAREN)starting from 0$(RPAREN) of the appended
    *   page in the notebook, or -1 if function fails
    */
-  int appendPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel, gtk.widget.Widget menuLabel)
+  int appendPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null, gtk.widget.Widget menuLabel = null)
   {
     int _retval;
     _retval = gtk_notebook_append_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
@@ -507,7 +507,7 @@ class Notebook : gtk.widget.Widget
    * Returns: the index $(LPAREN)starting from 0$(RPAREN) of the prepended
    *   page in the notebook, or -1 if function fails
    */
-  int prependPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel)
+  int prependPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
   {
     int _retval;
     _retval = gtk_notebook_prepend_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
@@ -530,7 +530,7 @@ class Notebook : gtk.widget.Widget
    * Returns: the index $(LPAREN)starting from 0$(RPAREN) of the prepended
    *   page in the notebook, or -1 if function fails
    */
-  int prependPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel, gtk.widget.Widget menuLabel)
+  int prependPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null, gtk.widget.Widget menuLabel = null)
   {
     int _retval;
     _retval = gtk_notebook_prepend_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
@@ -612,7 +612,7 @@ class Notebook : gtk.widget.Widget
    *   groupName = the name of the notebook group,
    *     or %NULL to unset it
    */
-  void setGroupName(string groupName)
+  void setGroupName(string groupName = null)
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     gtk_notebook_set_group_name(cast(GtkNotebook*)cPtr, _groupName);
@@ -624,7 +624,7 @@ class Notebook : gtk.widget.Widget
    *   child = the child widget
    *   menuLabel = the menu label, or %NULL for default
    */
-  void setMenuLabel(gtk.widget.Widget child, gtk.widget.Widget menuLabel)
+  void setMenuLabel(gtk.widget.Widget child, gtk.widget.Widget menuLabel = null)
   {
     gtk_notebook_set_menu_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
   }
@@ -729,7 +729,7 @@ class Notebook : gtk.widget.Widget
    *   tabLabel = the tab label widget to use, or %NULL
    *     for default tab label
    */
-  void setTabLabel(gtk.widget.Widget child, gtk.widget.Widget tabLabel)
+  void setTabLabel(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
   {
     gtk_notebook_set_tab_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
   }

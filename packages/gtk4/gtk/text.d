@@ -383,7 +383,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
    * Params:
    *   attrs = a `PangoAttrList`
    */
-  void setAttributes(pango.attr_list.AttrList attrs)
+  void setAttributes(pango.attr_list.AttrList attrs = null)
   {
     gtk_text_set_attributes(cast(GtkText*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
@@ -418,7 +418,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
    * Params:
    *   model = a `GMenuModel`
    */
-  void setExtraMenu(gio.menu_model.MenuModel model)
+  void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
     gtk_text_set_extra_menu(cast(GtkText*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
@@ -495,7 +495,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
    *   text = a string to be displayed when self
    *     is empty and unfocused
    */
-  void setPlaceholderText(string text)
+  void setPlaceholderText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_text_set_placeholder_text(cast(GtkText*)cPtr, _text);
@@ -516,7 +516,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
    * Params:
    *   tabs = a `PangoTabArray`
    */
-  void setTabs(pango.tab_array.TabArray tabs)
+  void setTabs(pango.tab_array.TabArray tabs = null)
   {
     gtk_text_set_tabs(cast(GtkText*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }

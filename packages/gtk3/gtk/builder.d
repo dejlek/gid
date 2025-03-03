@@ -628,7 +628,7 @@ class Builder : gobject.object.ObjectG
    * Params:
    *   domain = the translation domain or %NULL
    */
-  void setTranslationDomain(string domain)
+  void setTranslationDomain(string domain = null)
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     gtk_builder_set_translation_domain(cast(GtkBuilder*)cPtr, _domain);

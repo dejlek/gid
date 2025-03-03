@@ -96,7 +96,7 @@ class CompletionCell : gtk.widget.Widget
    * Params:
    *   text = the text to set or %NULL
    */
-  void setText(string text)
+  void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_source_completion_cell_set_text(cast(GtkSourceCompletionCell*)cPtr, _text);

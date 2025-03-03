@@ -43,7 +43,7 @@ class SearchContext : gobject.object.ObjectG
    *   settings = a #GtkSourceSearchSettings, or %NULL.
    * Returns: a new search context.
    */
-  this(gtksource.buffer.Buffer buffer, gtksource.search_settings.SearchSettings settings)
+  this(gtksource.buffer.Buffer buffer, gtksource.search_settings.SearchSettings settings = null)
   {
     GtkSourceSearchContext* _cretval;
     _cretval = gtk_source_search_context_new(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null, settings ? cast(GtkSourceSearchSettings*)settings.cPtr(No.Dup) : null);
@@ -91,7 +91,7 @@ class SearchContext : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL.
    *   callback = a #GAsyncReadyCallback to call when the operation is finished.
    */
-  void backwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void backwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -174,7 +174,7 @@ class SearchContext : gobject.object.ObjectG
    *   cancellable = a #GCancellable, or %NULL.
    *   callback = a #GAsyncReadyCallback to call when the operation is finished.
    */
-  void forwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void forwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -360,7 +360,7 @@ class SearchContext : gobject.object.ObjectG
    * Params:
    *   matchStyle = a #GtkSourceStyle, or %NULL.
    */
-  void setMatchStyle(gtksource.style.Style matchStyle)
+  void setMatchStyle(gtksource.style.Style matchStyle = null)
   {
     gtk_source_search_context_set_match_style(cast(GtkSourceSearchContext*)cPtr, matchStyle ? cast(GtkSourceStyle*)matchStyle.cPtr(No.Dup) : null);
   }

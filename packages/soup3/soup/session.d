@@ -352,7 +352,7 @@ class Session : gobject.object.ObjectG
    *   cancellable = a #GCancellable
    *   callback = the callback to invoke when the operation finishes
    */
-  void preconnectAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void preconnectAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -426,7 +426,7 @@ class Session : gobject.object.ObjectG
    * Returns: a #GInputStream for reading the
    *   response body, or %NULL on error.
    */
-  gio.input_stream.InputStream send(soup.message.Message msg, gio.cancellable.Cancellable cancellable)
+  gio.input_stream.InputStream send(soup.message.Message msg, gio.cancellable.Cancellable cancellable = null)
   {
     GInputStream* _cretval;
     GError *_err;
@@ -448,7 +448,7 @@ class Session : gobject.object.ObjectG
    *   cancellable = a #GCancellable
    * Returns: a #GBytes, or %NULL on error.
    */
-  glib.bytes.Bytes sendAndRead(soup.message.Message msg, gio.cancellable.Cancellable cancellable)
+  glib.bytes.Bytes sendAndRead(soup.message.Message msg, gio.cancellable.Cancellable cancellable = null)
   {
     GBytes* _cretval;
     GError *_err;
@@ -473,7 +473,7 @@ class Session : gobject.object.ObjectG
    *   cancellable = a #GCancellable
    *   callback = the callback to invoke
    */
-  void sendAndReadAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void sendAndReadAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -516,7 +516,7 @@ class Session : gobject.object.ObjectG
    *   cancellable = a #GCancellable
    * Returns: a #gssize containing the size of the data spliced, or -1 if an error occurred.
    */
-  ptrdiff_t sendAndSplice(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t sendAndSplice(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     GError *_err;
@@ -539,7 +539,7 @@ class Session : gobject.object.ObjectG
    *   cancellable = a #GCancellable
    *   callback = the callback to invoke
    */
-  void sendAndSpliceAsync(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void sendAndSpliceAsync(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -583,7 +583,7 @@ class Session : gobject.object.ObjectG
    *   cancellable = a #GCancellable
    *   callback = the callback to invoke
    */
-  void sendAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void sendAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -664,7 +664,7 @@ class Session : gobject.object.ObjectG
    * Params:
    *   proxyResolver = a #GProxyResolver or %NULL
    */
-  void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver)
+  void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver = null)
   {
     soup_session_set_proxy_resolver(cast(SoupSession*)cPtr, proxyResolver ? cast(GProxyResolver*)(cast(ObjectG)proxyResolver).cPtr(No.Dup) : null);
   }
@@ -688,7 +688,7 @@ class Session : gobject.object.ObjectG
    * Params:
    *   tlsDatabase = a #GTlsDatabase
    */
-  void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase)
+  void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase = null)
   {
     soup_session_set_tls_database(cast(SoupSession*)cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase.cPtr(No.Dup) : null);
   }
@@ -701,7 +701,7 @@ class Session : gobject.object.ObjectG
    * Params:
    *   tlsInteraction = a #GTlsInteraction
    */
-  void setTlsInteraction(gio.tls_interaction.TlsInteraction tlsInteraction)
+  void setTlsInteraction(gio.tls_interaction.TlsInteraction tlsInteraction = null)
   {
     soup_session_set_tls_interaction(cast(SoupSession*)cPtr, tlsInteraction ? cast(GTlsInteraction*)tlsInteraction.cPtr(No.Dup) : null);
   }
@@ -746,7 +746,7 @@ class Session : gobject.object.ObjectG
    *   cancellable = a #GCancellable
    *   callback = the callback to invoke
    */
-  void websocketConnectAsync(soup.message.Message msg, string origin, string[] protocols, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void websocketConnectAsync(soup.message.Message msg, string origin, string[] protocols, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

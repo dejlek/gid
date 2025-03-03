@@ -272,7 +272,7 @@ class Triangle : gobject.boxed.Boxed
    *   c = a #graphene_point3d_t
    * Returns: the initialized #graphene_triangle_t
    */
-  graphene.triangle.Triangle initFromPoint3d(graphene.point3_d.Point3D a, graphene.point3_d.Point3D b, graphene.point3_d.Point3D c)
+  graphene.triangle.Triangle initFromPoint3d(graphene.point3_d.Point3D a = null, graphene.point3_d.Point3D b = null, graphene.point3_d.Point3D c = null)
   {
     graphene_triangle_t* _cretval;
     _cretval = graphene_triangle_init_from_point3d(cast(graphene_triangle_t*)cPtr, a ? cast(const(graphene_point3d_t)*)a.cPtr(No.Dup) : null, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.Dup) : null, c ? cast(const(graphene_point3d_t)*)c.cPtr(No.Dup) : null);
@@ -288,7 +288,7 @@ class Triangle : gobject.boxed.Boxed
    *   c = a #graphene_vec3_t
    * Returns: the initialized #graphene_triangle_t
    */
-  graphene.triangle.Triangle initFromVec3(graphene.vec3.Vec3 a, graphene.vec3.Vec3 b, graphene.vec3.Vec3 c)
+  graphene.triangle.Triangle initFromVec3(graphene.vec3.Vec3 a = null, graphene.vec3.Vec3 b = null, graphene.vec3.Vec3 c = null)
   {
     graphene_triangle_t* _cretval;
     _cretval = graphene_triangle_init_from_vec3(cast(graphene_triangle_t*)cPtr, a ? cast(const(graphene_vec3_t)*)a.cPtr(No.Dup) : null, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.Dup) : null, c ? cast(const(graphene_vec3_t)*)c.cPtr(No.Dup) : null);

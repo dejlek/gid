@@ -132,7 +132,7 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
    * Params:
    *   connection = A #GDBusConnection or %NULL.
    */
-  void setConnection(gio.dbus_connection.DBusConnection connection)
+  void setConnection(gio.dbus_connection.DBusConnection connection = null)
   {
     g_dbus_object_manager_server_set_connection(cast(GDBusObjectManagerServer*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null);
   }

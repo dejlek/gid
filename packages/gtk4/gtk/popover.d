@@ -283,7 +283,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
    * Params:
    *   child = the child widget
    */
-  void setChild(gtk.widget.Widget child)
+  void setChild(gtk.widget.Widget child = null)
   {
     gtk_popover_set_child(cast(GtkPopover*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -297,7 +297,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
    *   widget = a child widget of popover to set as
    *     the default, or %NULL to unset the default widget for the popover
    */
-  void setDefaultWidget(gtk.widget.Widget widget)
+  void setDefaultWidget(gtk.widget.Widget widget = null)
   {
     gtk_popover_set_default_widget(cast(GtkPopover*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -343,7 +343,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
    * Params:
    *   rect = rectangle to point to
    */
-  void setPointingTo(gdk.rectangle.Rectangle rect)
+  void setPointingTo(gdk.rectangle.Rectangle rect = null)
   {
     gtk_popover_set_pointing_to(cast(GtkPopover*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null);
   }

@@ -70,7 +70,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  static void create(secret.service.Service service, string label, string alias_, secret.types.CollectionCreateFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void create(secret.service.Service service, string label, string alias_, secret.types.CollectionCreateFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -126,7 +126,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    * Returns: the new collection, which should be unreferenced
    *   with [gobject.object.ObjectG.unref]
    */
-  static secret.collection.Collection createSync(secret.service.Service service, string label, string alias_, secret.types.CollectionCreateFlags flags, gio.cancellable.Cancellable cancellable)
+  static secret.collection.Collection createSync(secret.service.Service service, string label, string alias_, secret.types.CollectionCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     SecretCollection* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -152,7 +152,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  static void forAlias(secret.service.Service service, string alias_, secret.types.CollectionFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void forAlias(secret.service.Service service, string alias_, secret.types.CollectionFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -199,7 +199,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    * Returns: the collection, or %NULL if none assigned to the alias
    */
-  static secret.collection.Collection forAliasSync(secret.service.Service service, string alias_, secret.types.CollectionFlags flags, gio.cancellable.Cancellable cancellable)
+  static secret.collection.Collection forAliasSync(secret.service.Service service, string alias_, secret.types.CollectionFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     SecretCollection* _cretval;
     const(char)* _alias_ = alias_.toCString(No.Alloc);
@@ -220,7 +220,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void delete_(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void delete_(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -260,7 +260,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    * Returns: whether the collection was successfully deleted or not
    */
-  bool deleteSync(gio.cancellable.Cancellable cancellable)
+  bool deleteSync(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -376,7 +376,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void loadItems(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void loadItems(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -420,7 +420,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    * Returns: whether the load was successful or not
    */
-  bool loadItemsSync(gio.cancellable.Cancellable cancellable)
+  bool loadItemsSync(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -460,7 +460,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void search(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void search(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -514,7 +514,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    * Returns: a list of items that matched the search
    */
-  secret.item.Item[] searchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable)
+  secret.item.Item[] searchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -535,7 +535,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void setLabel(string label, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void setLabel(string label, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -576,7 +576,7 @@ class Collection : gio.dbus_proxy.DBusProxy
    *   cancellable = optional cancellation object
    * Returns: whether the change was successful or not
    */
-  bool setLabelSync(string label, gio.cancellable.Cancellable cancellable)
+  bool setLabelSync(string label, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _label = label.toCString(No.Alloc);

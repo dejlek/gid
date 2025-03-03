@@ -63,7 +63,7 @@ class WebsocketConnection : gobject.object.ObjectG
    *   code = close code
    *   data = close data
    */
-  void close(ushort code, string data)
+  void close(ushort code, string data = null)
   {
     const(char)* _data = data.toCString(No.Alloc);
     soup_websocket_connection_close(cast(SoupWebsocketConnection*)cPtr, code, _data);

@@ -61,7 +61,7 @@ interface NetworkMonitor
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if connectable is reachable, %FALSE if not.
    */
-  bool canReach(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable);
+  bool canReach(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Asynchronously attempts to determine whether or not the host
@@ -77,7 +77,7 @@ interface NetworkMonitor
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void canReachAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
+  void canReachAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes an async network connectivity test.

@@ -174,7 +174,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
    *   cancellable = Cancellable
    *   callback = Callback
    */
-  void communicateAsync(glib.bytes.Bytes stdinBuf, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void communicateAsync(glib.bytes.Bytes stdinBuf = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -246,7 +246,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
    *   cancellable = Cancellable
    *   callback = Callback
    */
-  void communicateUtf8Async(string stdinBuf, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void communicateUtf8Async(string stdinBuf = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -477,7 +477,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
    *   cancellable = a #GCancellable
    * Returns: %TRUE on success, %FALSE if cancellable was cancelled
    */
-  bool wait(gio.cancellable.Cancellable cancellable)
+  bool wait(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -494,7 +494,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback to call when the operation is complete
    */
-  void waitAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void waitAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -516,7 +516,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
    * Returns: %TRUE on success, %FALSE if process exited abnormally, or
    *   cancellable was cancelled
    */
-  bool waitCheck(gio.cancellable.Cancellable cancellable)
+  bool waitCheck(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -533,7 +533,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback to call when the operation is complete
    */
-  void waitCheckAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void waitCheckAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

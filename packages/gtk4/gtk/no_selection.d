@@ -48,7 +48,7 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
    *   model = the `GListModel` to manage
    * Returns: a new `GtkNoSelection`
    */
-  this(gio.list_model.ListModel model)
+  this(gio.list_model.ListModel model = null)
   {
     GtkNoSelection* _cretval;
     _cretval = gtk_no_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
@@ -73,7 +73,7 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
    * Params:
    *   model = A `GListModel` to wrap
    */
-  void setModel(gio.list_model.ListModel model)
+  void setModel(gio.list_model.ListModel model = null)
   {
     gtk_no_selection_set_model(cast(GtkNoSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

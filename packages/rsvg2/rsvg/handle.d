@@ -238,7 +238,7 @@ class Handle : gobject.object.ObjectG
    *   cancellable = a `GCancellable`, or `NULL`
    * Returns: a new [rsvg.handle.Handle] on success, or `NULL` with error filled in
    */
-  static rsvg.handle.Handle newFromGfileSync(gio.file.File file, rsvg.types.HandleFlags flags, gio.cancellable.Cancellable cancellable)
+  static rsvg.handle.Handle newFromGfileSync(gio.file.File file, rsvg.types.HandleFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     RsvgHandle* _cretval;
     GError *_err;
@@ -265,7 +265,7 @@ class Handle : gobject.object.ObjectG
    *   cancellable = a `GCancellable`, or `NULL`
    * Returns: a new [rsvg.handle.Handle] on success, or `NULL` with error filled in
    */
-  static rsvg.handle.Handle newFromStreamSync(gio.input_stream.InputStream inputStream, gio.file.File baseFile, rsvg.types.HandleFlags flags, gio.cancellable.Cancellable cancellable)
+  static rsvg.handle.Handle newFromStreamSync(gio.input_stream.InputStream inputStream, gio.file.File baseFile, rsvg.types.HandleFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     RsvgHandle* _cretval;
     GError *_err;
@@ -372,7 +372,7 @@ class Handle : gobject.object.ObjectG
 
    * Deprecated: Use [rsvg.handle.Handle.getGeometryForLayer] instead.
    */
-  bool getDimensionsSub(out rsvg.types.DimensionData dimensionData, string id)
+  bool getDimensionsSub(out rsvg.types.DimensionData dimensionData, string id = null)
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -618,7 +618,7 @@ class Handle : gobject.object.ObjectG
    * Returns: a pixbuf, or `NULL` if an error occurs
    *   during rendering.
    */
-  gdkpixbuf.pixbuf.Pixbuf getPixbufSub(string id)
+  gdkpixbuf.pixbuf.Pixbuf getPixbufSub(string id = null)
   {
     PixbufC* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -646,7 +646,7 @@ class Handle : gobject.object.ObjectG
    *   deprecated since it is not able to return exact floating-point positions, only integer
    *   pixels.
    */
-  bool getPositionSub(out rsvg.types.PositionData positionData, string id)
+  bool getPositionSub(out rsvg.types.PositionData positionData, string id = null)
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -709,7 +709,7 @@ class Handle : gobject.object.ObjectG
    * Returns: `TRUE` if reading stream succeeded, or `FALSE` otherwise
    *   with error filled in
    */
-  bool readStreamSync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable)
+  bool readStreamSync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -815,7 +815,7 @@ class Handle : gobject.object.ObjectG
    * Deprecated: Please use [rsvg.handle.Handle.renderLayer] instead; that function lets
    *   you pass a viewport and obtain a good error message.
    */
-  bool renderCairoSub(cairo.context.Context cr, string id)
+  bool renderCairoSub(cairo.context.Context cr, string id = null)
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -1001,7 +1001,7 @@ class Handle : gobject.object.ObjectG
    *   refers to the whole SVG or to just a sub-element of it.  It is easier, and
    *   unambiguous, to use code similar to the example above.
    */
-  void setSizeCallback(rsvg.types.SizeFunc sizeFunc)
+  void setSizeCallback(rsvg.types.SizeFunc sizeFunc = null)
   {
     extern(C) void _sizeFuncCallback(int* width, int* height, void* userData)
     {

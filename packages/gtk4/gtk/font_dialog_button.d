@@ -59,7 +59,7 @@ class FontDialogButton : gtk.widget.Widget
    *   dialog = the `GtkFontDialog` to use
    * Returns: the new `GtkFontDialogButton`
    */
-  this(gtk.font_dialog.FontDialog dialog)
+  this(gtk.font_dialog.FontDialog dialog = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_dialog_button_new(dialog ? cast(GtkFontDialog*)dialog.cPtr(Yes.Dup) : null);
@@ -185,7 +185,7 @@ class FontDialogButton : gtk.widget.Widget
    * Params:
    *   fontFeatures = the font features
    */
-  void setFontFeatures(string fontFeatures)
+  void setFontFeatures(string fontFeatures = null)
   {
     const(char)* _fontFeatures = fontFeatures.toCString(No.Alloc);
     gtk_font_dialog_button_set_font_features(cast(GtkFontDialogButton*)cPtr, _fontFeatures);
@@ -196,7 +196,7 @@ class FontDialogButton : gtk.widget.Widget
    * Params:
    *   language = the new language
    */
-  void setLanguage(pango.language.Language language)
+  void setLanguage(pango.language.Language language = null)
   {
     gtk_font_dialog_button_set_language(cast(GtkFontDialogButton*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
   }

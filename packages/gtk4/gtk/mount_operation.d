@@ -46,7 +46,7 @@ class MountOperation : gio.mount_operation.MountOperation
    *   parent = transient parent of the window
    * Returns: a new `GtkMountOperation`
    */
-  this(gtk.window.Window parent)
+  this(gtk.window.Window parent = null)
   {
     GMountOperation* _cretval;
     _cretval = gtk_mount_operation_new(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
@@ -106,7 +106,7 @@ class MountOperation : gio.mount_operation.MountOperation
    * Params:
    *   parent = transient parent of the window
    */
-  void setParent(gtk.window.Window parent)
+  void setParent(gtk.window.Window parent = null)
   {
     gtk_mount_operation_set_parent(cast(GtkMountOperation*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }

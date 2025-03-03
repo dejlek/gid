@@ -129,7 +129,7 @@ interface FontChooser
    * Params:
    *   filter = a #GtkFontFilterFunc, or %NULL
    */
-  void setFilterFunc(gtk.types.FontFilterFunc filter);
+  void setFilterFunc(gtk.types.FontFilterFunc filter = null);
 
   /**
    * Sets the currently-selected font.
@@ -167,7 +167,7 @@ interface FontChooser
    * Params:
    *   fontmap = a #PangoFontMap
    */
-  void setFontMap(pango.font_map.FontMap fontmap);
+  void setFontMap(pango.font_map.FontMap fontmap = null);
 
   /**
    * Sets the language to use for font features.

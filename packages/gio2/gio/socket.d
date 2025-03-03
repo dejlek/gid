@@ -172,7 +172,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    * Returns: a new #GSocket, or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  gio.socket.Socket accept(gio.cancellable.Cancellable cancellable)
+  gio.socket.Socket accept(gio.cancellable.Cancellable cancellable = null)
   {
     GSocket* _cretval;
     GError *_err;
@@ -320,7 +320,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if the condition was met, %FALSE otherwise
    */
-  bool conditionTimedWait(glib.types.IOCondition condition, long timeoutUs, gio.cancellable.Cancellable cancellable)
+  bool conditionTimedWait(glib.types.IOCondition condition, long timeoutUs, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -344,7 +344,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if the condition was met, %FALSE otherwise
    */
-  bool conditionWait(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable)
+  bool conditionWait(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -373,7 +373,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    *   cancellable = a %GCancellable or %NULL
    * Returns: %TRUE if connected, %FALSE on error.
    */
-  bool connect(gio.socket_address.SocketAddress address, gio.cancellable.Cancellable cancellable)
+  bool connect(gio.socket_address.SocketAddress address, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -708,7 +708,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    *   iface = Name of the interface to use, or %NULL
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool joinMulticastGroup(gio.inet_address.InetAddress group, bool sourceSpecific, string iface)
+  bool joinMulticastGroup(gio.inet_address.InetAddress group, bool sourceSpecific, string iface = null)
   {
     bool _retval;
     const(char)* _iface = iface.toCString(No.Alloc);
@@ -739,7 +739,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    *   iface = Name of the interface to use, or %NULL
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool joinMulticastGroupSsm(gio.inet_address.InetAddress group, gio.inet_address.InetAddress sourceSpecific, string iface)
+  bool joinMulticastGroupSsm(gio.inet_address.InetAddress group, gio.inet_address.InetAddress sourceSpecific = null, string iface = null)
   {
     bool _retval;
     const(char)* _iface = iface.toCString(No.Alloc);
@@ -764,7 +764,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    *   iface = Interface used
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool leaveMulticastGroup(gio.inet_address.InetAddress group, bool sourceSpecific, string iface)
+  bool leaveMulticastGroup(gio.inet_address.InetAddress group, bool sourceSpecific, string iface = null)
   {
     bool _retval;
     const(char)* _iface = iface.toCString(No.Alloc);
@@ -788,7 +788,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    *   iface = Name of the interface to use, or %NULL
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool leaveMulticastGroupSsm(gio.inet_address.InetAddress group, gio.inet_address.InetAddress sourceSpecific, string iface)
+  bool leaveMulticastGroupSsm(gio.inet_address.InetAddress group, gio.inet_address.InetAddress sourceSpecific = null, string iface = null)
   {
     bool _retval;
     const(char)* _iface = iface.toCString(No.Alloc);
@@ -844,7 +844,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    * Returns: Number of bytes read, or 0 if the connection was closed by
    *   the peer, or -1 on error
    */
-  ptrdiff_t receive(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t receive(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     size_t _size;
@@ -871,7 +871,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    * Returns: a bytes buffer containing the
    *   received bytes, or `NULL` on error
    */
-  glib.bytes.Bytes receiveBytes(size_t size, long timeoutUs, gio.cancellable.Cancellable cancellable)
+  glib.bytes.Bytes receiveBytes(size_t size, long timeoutUs, gio.cancellable.Cancellable cancellable = null)
   {
     GBytes* _cretval;
     GError *_err;
@@ -902,7 +902,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    * Returns: a bytes buffer containing the
    *   received bytes, or `NULL` on error
    */
-  glib.bytes.Bytes receiveBytesFrom(out gio.socket_address.SocketAddress address, size_t size, long timeoutUs, gio.cancellable.Cancellable cancellable)
+  glib.bytes.Bytes receiveBytesFrom(out gio.socket_address.SocketAddress address, size_t size, long timeoutUs, gio.cancellable.Cancellable cancellable = null)
   {
     GBytes* _cretval;
     GSocketAddress* _address;
@@ -929,7 +929,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    * Returns: Number of bytes read, or 0 if the connection was closed by
    *   the peer, or -1 on error
    */
-  ptrdiff_t receiveFrom(out gio.socket_address.SocketAddress address, ref ubyte[] buffer, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t receiveFrom(out gio.socket_address.SocketAddress address, ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     GSocketAddress* _address;
@@ -1005,7 +1005,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    * Returns: Number of bytes read, or 0 if the connection was closed by
    *   the peer, or -1 on error
    */
-  ptrdiff_t receiveMessage(out gio.socket_address.SocketAddress address, gio.types.InputVector[] vectors, out gio.socket_control_message.SocketControlMessage[] messages, ref int flags, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t receiveMessage(out gio.socket_address.SocketAddress address, gio.types.InputVector[] vectors, out gio.socket_control_message.SocketControlMessage[] messages, ref int flags, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     GSocketAddress* _address;
@@ -1039,7 +1039,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    * Returns: Number of bytes read, or 0 if the connection was closed by
    *   the peer, or -1 on error
    */
-  ptrdiff_t receiveWithBlocking(ref ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t receiveWithBlocking(ref ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     size_t _size;
@@ -1070,7 +1070,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    * Returns: Number of bytes written $(LPAREN)which may be less than size$(RPAREN), or -1
    *   on error
    */
-  ptrdiff_t send(ubyte[] buffer, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t send(ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     size_t _size;
@@ -1132,7 +1132,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    * Returns: Number of bytes written $(LPAREN)which may be less than size$(RPAREN), or -1
    *   on error
    */
-  ptrdiff_t sendMessage(gio.socket_address.SocketAddress address, gio.types.OutputVector[] vectors, gio.socket_control_message.SocketControlMessage[] messages, int flags, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t sendMessage(gio.socket_address.SocketAddress address, gio.types.OutputVector[] vectors, gio.socket_control_message.SocketControlMessage[] messages, int flags, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     int _numVectors;
@@ -1177,7 +1177,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    *   %G_POLLABLE_RETURN_WOULD_BLOCK if the socket is currently not writable, or
    *   %G_POLLABLE_RETURN_FAILED if an error happened and error is set.
    */
-  gio.types.PollableReturn sendMessageWithTimeout(gio.socket_address.SocketAddress address, gio.types.OutputVector[] vectors, gio.socket_control_message.SocketControlMessage[] messages, int flags, long timeoutUs, out size_t bytesWritten, gio.cancellable.Cancellable cancellable)
+  gio.types.PollableReturn sendMessageWithTimeout(gio.socket_address.SocketAddress address, gio.types.OutputVector[] vectors, gio.socket_control_message.SocketControlMessage[] messages, int flags, long timeoutUs, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
     GPollableReturn _cretval;
     int _numVectors;
@@ -1215,7 +1215,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    * Returns: Number of bytes written $(LPAREN)which may be less than size$(RPAREN), or -1
    *   on error
    */
-  ptrdiff_t sendTo(gio.socket_address.SocketAddress address, ubyte[] buffer, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t sendTo(gio.socket_address.SocketAddress address, ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     size_t _size;
@@ -1242,7 +1242,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
    * Returns: Number of bytes written $(LPAREN)which may be less than size$(RPAREN), or -1
    *   on error
    */
-  ptrdiff_t sendWithBlocking(ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable)
+  ptrdiff_t sendWithBlocking(ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     size_t _size;

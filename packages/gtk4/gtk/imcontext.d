@@ -66,7 +66,7 @@ class IMContext : gobject.object.ObjectG
    *   event = a [gdk.event.Event]
    * Returns: %TRUE if an on-screen keyboard could be requested to the platform.
    */
-  bool activateOsk(gdk.event.Event event)
+  bool activateOsk(gdk.event.Event event = null)
   {
     bool _retval;
     _retval = gtk_im_context_activate_osk(cast(GtkIMContext*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
@@ -269,7 +269,7 @@ class IMContext : gobject.object.ObjectG
    *   widget = the client widget. This may be %NULL to indicate
    *     that the previous client widget no longer exists.
    */
-  void setClientWidget(gtk.widget.Widget widget)
+  void setClientWidget(gtk.widget.Widget widget = null)
   {
     gtk_im_context_set_client_widget(cast(GtkIMContext*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

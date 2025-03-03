@@ -82,7 +82,7 @@ class Tooltip : gobject.object.ObjectG
    * Params:
    *   customWidget = a #GtkWidget, or %NULL to unset the old custom widget.
    */
-  void setCustom(gtk.widget.Widget customWidget)
+  void setCustom(gtk.widget.Widget customWidget = null)
   {
     gtk_tooltip_set_custom(cast(GtkTooltip*)cPtr, customWidget ? cast(GtkWidget*)customWidget.cPtr(No.Dup) : null);
   }
@@ -93,7 +93,7 @@ class Tooltip : gobject.object.ObjectG
    * Params:
    *   pixbuf = a #GdkPixbuf, or %NULL
    */
-  void setIcon(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setIcon(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_tooltip_set_icon(cast(GtkTooltip*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
@@ -148,7 +148,7 @@ class Tooltip : gobject.object.ObjectG
    * Params:
    *   markup = a markup string $(LPAREN)see [Pango markup format][PangoMarkupFormat]$(RPAREN) or %NULL
    */
-  void setMarkup(string markup)
+  void setMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_tooltip_set_markup(cast(GtkTooltip*)cPtr, _markup);
@@ -160,7 +160,7 @@ class Tooltip : gobject.object.ObjectG
    * Params:
    *   text = a text string or %NULL
    */
-  void setText(string text)
+  void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_tooltip_set_text(cast(GtkTooltip*)cPtr, _text);

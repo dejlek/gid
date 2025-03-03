@@ -184,7 +184,7 @@ class Euler : gobject.boxed.Boxed
    *   src = a #graphene_euler_t
    * Returns: the initialized #graphene_euler_t
    */
-  graphene.euler.Euler initFromEuler(graphene.euler.Euler src)
+  graphene.euler.Euler initFromEuler(graphene.euler.Euler src = null)
   {
     graphene_euler_t* _cretval;
     _cretval = graphene_euler_init_from_euler(cast(graphene_euler_t*)cPtr, src ? cast(const(graphene_euler_t)*)src.cPtr(No.Dup) : null);

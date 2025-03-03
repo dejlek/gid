@@ -33,7 +33,7 @@ template BuildableT()
    *   child = child to add
    *   type = kind of child or %NULL
    */
-  override void addChild(gtk.builder.Builder builder, gobject.object.ObjectG child, string type)
+  override void addChild(gtk.builder.Builder builder, gobject.object.ObjectG child, string type = null)
   {
     const(char)* _type = type.toCString(No.Alloc);
     gtk_buildable_add_child(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _type);

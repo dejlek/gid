@@ -358,7 +358,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
    *   menuItemId = a string used to identify menu_item
    *   menuItem = a #GtkMenuItem to use in the overflow menu, or %NULL
    */
-  void setProxyMenuItem(string menuItemId, gtk.widget.Widget menuItem)
+  void setProxyMenuItem(string menuItemId, gtk.widget.Widget menuItem = null)
   {
     const(char)* _menuItemId = menuItemId.toCString(No.Alloc);
     gtk_tool_item_set_proxy_menu_item(cast(GtkToolItem*)cPtr, _menuItemId, menuItem ? cast(GtkWidget*)menuItem.cPtr(No.Dup) : null);

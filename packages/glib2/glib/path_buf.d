@@ -106,7 +106,7 @@ class PathBuf
    *   path = a file system path
    * Returns: the initialized path builder
    */
-  glib.path_buf.PathBuf initFromPath(string path)
+  glib.path_buf.PathBuf initFromPath(string path = null)
   {
     GPathBuf* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -185,7 +185,7 @@ class PathBuf
    *   extension = the file extension
    * Returns: `TRUE` if the extension was replaced, and `FALSE` otherwise
    */
-  bool setExtension(string extension)
+  bool setExtension(string extension = null)
   {
     bool _retval;
     const(char)* _extension = extension.toCString(No.Alloc);

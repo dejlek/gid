@@ -521,7 +521,7 @@ class WidgetPath : gobject.boxed.Boxed
    *   pos = position to modify, -1 for the path head
    *   name = object name to set or %NULL to unset
    */
-  void iterSetObjectName(int pos, string name)
+  void iterSetObjectName(int pos, string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_path_iter_set_object_name(cast(GtkWidgetPath*)cPtr, pos, _name);

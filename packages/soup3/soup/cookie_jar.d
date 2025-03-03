@@ -83,7 +83,7 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
    *   uri = the URI setting the cookie
    *   firstParty = the URI for the main document
    */
-  void addCookieFull(soup.cookie.Cookie cookie, glib.uri.Uri uri, glib.uri.Uri firstParty)
+  void addCookieFull(soup.cookie.Cookie cookie, glib.uri.Uri uri = null, glib.uri.Uri firstParty = null)
   {
     soup_cookie_jar_add_cookie_full(cast(SoupCookieJar*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(Yes.Dup) : null, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, firstParty ? cast(GUri*)firstParty.cPtr(No.Dup) : null);
   }

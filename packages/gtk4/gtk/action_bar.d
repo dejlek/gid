@@ -135,7 +135,7 @@ class ActionBar : gtk.widget.Widget
    * Params:
    *   centerWidget = a widget to use for the center
    */
-  void setCenterWidget(gtk.widget.Widget centerWidget)
+  void setCenterWidget(gtk.widget.Widget centerWidget = null)
   {
     gtk_action_bar_set_center_widget(cast(GtkActionBar*)cPtr, centerWidget ? cast(GtkWidget*)centerWidget.cPtr(No.Dup) : null);
   }

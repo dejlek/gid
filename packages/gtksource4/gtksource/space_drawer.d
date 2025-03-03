@@ -121,7 +121,7 @@ class SpaceDrawer : gobject.object.ObjectG
    * Params:
    *   matrix = the new matrix value, or %NULL.
    */
-  void setMatrix(glib.variant.VariantG matrix)
+  void setMatrix(glib.variant.VariantG matrix = null)
   {
     gtk_source_space_drawer_set_matrix(cast(GtkSourceSpaceDrawer*)cPtr, matrix ? cast(VariantC*)matrix.cPtr(No.Dup) : null);
   }

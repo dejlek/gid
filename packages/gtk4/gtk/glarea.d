@@ -323,7 +323,7 @@ class GLArea : gtk.widget.Widget
    * Params:
    *   error = a new `GError`, or %NULL to unset the error
    */
-  void setError(glib.error.ErrorG error)
+  void setError(glib.error.ErrorG error = null)
   {
     gtk_gl_area_set_error(cast(GtkGLArea*)cPtr, error ? cast(const(GError)*)error.cPtr : null);
   }

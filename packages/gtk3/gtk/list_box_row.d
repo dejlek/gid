@@ -146,7 +146,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
    * Params:
    *   header = the header, or %NULL
    */
-  void setHeader(gtk.widget.Widget header)
+  void setHeader(gtk.widget.Widget header = null)
   {
     gtk_list_box_row_set_header(cast(GtkListBoxRow*)cPtr, header ? cast(GtkWidget*)header.cPtr(No.Dup) : null);
   }

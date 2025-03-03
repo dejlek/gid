@@ -65,7 +65,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
    *   label = a string that will be used as label, or %NULL
    * Returns: A new #GtkToolButton
    */
-  this(gtk.widget.Widget iconWidget, string label)
+  this(gtk.widget.Widget iconWidget = null, string label = null)
   {
     GtkToolItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -187,7 +187,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
    * Params:
    *   iconName = the name of the themed icon
    */
-  void setIconName(string iconName)
+  void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_tool_button_set_icon_name(cast(GtkToolButton*)cPtr, _iconName);
@@ -200,7 +200,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
    * Params:
    *   iconWidget = the widget used as icon, or %NULL
    */
-  void setIconWidget(gtk.widget.Widget iconWidget)
+  void setIconWidget(gtk.widget.Widget iconWidget = null)
   {
     gtk_tool_button_set_icon_widget(cast(GtkToolButton*)cPtr, iconWidget ? cast(GtkWidget*)iconWidget.cPtr(No.Dup) : null);
   }
@@ -215,7 +215,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
    * Params:
    *   label = a string that will be used as label, or %NULL.
    */
-  void setLabel(string label)
+  void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_tool_button_set_label(cast(GtkToolButton*)cPtr, _label);
@@ -230,7 +230,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
    * Params:
    *   labelWidget = the widget used as label, or %NULL
    */
-  void setLabelWidget(gtk.widget.Widget labelWidget)
+  void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
     gtk_tool_button_set_label_widget(cast(GtkToolButton*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }
@@ -244,7 +244,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
 
    * Deprecated: Use [gtk.tool_button.ToolButton.setIconName] instead.
    */
-  void setStockId(string stockId)
+  void setStockId(string stockId = null)
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_tool_button_set_stock_id(cast(GtkToolButton*)cPtr, _stockId);

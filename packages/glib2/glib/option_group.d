@@ -69,7 +69,7 @@ class OptionGroup : gobject.boxed.Boxed
    * Params:
    *   func = the #GTranslateFunc, or %NULL
    */
-  void setTranslateFunc(glib.types.TranslateFunc func)
+  void setTranslateFunc(glib.types.TranslateFunc func = null)
   {
     extern(C) const(char)* _funcCallback(const(char)* str, void* data)
     {

@@ -80,7 +80,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    * Returns: an unsigned 8-bit/1-byte value read from the stream or `0`
    *   if an error occurred.
    */
-  ubyte readByteData(gio.cancellable.Cancellable cancellable)
+  ubyte readByteData(gio.cancellable.Cancellable cancellable = null)
   {
     ubyte _retval;
     GError *_err;
@@ -99,7 +99,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    * Returns: a signed 16-bit/2-byte value read from stream or `0` if
    *   an error occurred.
    */
-  short readInt16(gio.cancellable.Cancellable cancellable)
+  short readInt16(gio.cancellable.Cancellable cancellable = null)
   {
     short _retval;
     GError *_err;
@@ -121,7 +121,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    * Returns: a signed 32-bit/4-byte value read from the stream or `0` if
    *   an error occurred.
    */
-  int readInt32(gio.cancellable.Cancellable cancellable)
+  int readInt32(gio.cancellable.Cancellable cancellable = null)
   {
     int _retval;
     GError *_err;
@@ -143,7 +143,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    * Returns: a signed 64-bit/8-byte value read from stream or `0` if
    *   an error occurred.
    */
-  long readInt64(gio.cancellable.Cancellable cancellable)
+  long readInt64(gio.cancellable.Cancellable cancellable = null)
   {
     long _retval;
     GError *_err;
@@ -164,7 +164,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = callback to call when the request is satisfied.
    */
-  void readLineAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void readLineAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -219,7 +219,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    *   there's no content to read, it will still return %NULL, but error
    *   won't be set.
    */
-  string readLineUtf8(out size_t length, gio.cancellable.Cancellable cancellable)
+  string readLineUtf8(out size_t length, gio.cancellable.Cancellable cancellable = null)
   {
     char* _cretval;
     GError *_err;
@@ -239,7 +239,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    * Returns: an unsigned 16-bit/2-byte value read from the stream or `0` if
    *   an error occurred.
    */
-  ushort readUint16(gio.cancellable.Cancellable cancellable)
+  ushort readUint16(gio.cancellable.Cancellable cancellable = null)
   {
     ushort _retval;
     GError *_err;
@@ -261,7 +261,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    * Returns: an unsigned 32-bit/4-byte value read from the stream or `0` if
    *   an error occurred.
    */
-  uint readUint32(gio.cancellable.Cancellable cancellable)
+  uint readUint32(gio.cancellable.Cancellable cancellable = null)
   {
     uint _retval;
     GError *_err;
@@ -283,7 +283,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    * Returns: an unsigned 64-bit/8-byte read from stream or `0` if
    *   an error occurred.
    */
-  ulong readUint64(gio.cancellable.Cancellable cancellable)
+  ulong readUint64(gio.cancellable.Cancellable cancellable = null)
   {
     ulong _retval;
     GError *_err;
@@ -315,7 +315,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    * Deprecated: Use [gio.data_input_stream.DataInputStream.readUpto] instead, which has more
    *   consistent behaviour regarding the stop character.
    */
-  string readUntil(string stopChars, out size_t length, gio.cancellable.Cancellable cancellable)
+  string readUntil(string stopChars, out size_t length, gio.cancellable.Cancellable cancellable = null)
   {
     char* _cretval;
     const(char)* _stopChars = stopChars.toCString(No.Alloc);
@@ -349,7 +349,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    * Deprecated: Use [gio.data_input_stream.DataInputStream.readUptoAsync] instead, which
    *   has more consistent behaviour regarding the stop character.
    */
-  void readUntilAsync(string stopChars, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void readUntilAsync(string stopChars, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -411,7 +411,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    *   a #gsize to get the length of the string. This function will
    *   return %NULL on an error
    */
-  string readUpto(string stopChars, ptrdiff_t stopCharsLen, out size_t length, gio.cancellable.Cancellable cancellable)
+  string readUpto(string stopChars, ptrdiff_t stopCharsLen, out size_t length, gio.cancellable.Cancellable cancellable = null)
   {
     char* _cretval;
     const(char)* _stopChars = stopChars.toCString(No.Alloc);
@@ -443,7 +443,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = callback to call when the request is satisfied
    */
-  void readUptoAsync(string stopChars, ptrdiff_t stopCharsLen, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void readUptoAsync(string stopChars, ptrdiff_t stopCharsLen, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

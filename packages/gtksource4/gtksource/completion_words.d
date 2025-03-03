@@ -31,7 +31,7 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
 
   mixin CompletionProviderT!();
 
-  this(string name, gdkpixbuf.pixbuf.Pixbuf icon)
+  this(string name = null, gdkpixbuf.pixbuf.Pixbuf icon = null)
   {
     GtkSourceCompletionWords* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

@@ -82,7 +82,7 @@ class PadController : gtk.event_controller.EventController
    *   pad = A %GDK_SOURCE_TABLET_PAD device, or %NULL to handle all pads
    * Returns: A newly created #GtkPadController
    */
-  this(gtk.window.Window window, gio.action_group.ActionGroup group, gdk.device.Device pad)
+  this(gtk.window.Window window, gio.action_group.ActionGroup group, gdk.device.Device pad = null)
   {
     GtkPadController* _cretval;
     _cretval = gtk_pad_controller_new(window ? cast(GtkWindow*)window.cPtr(No.Dup) : null, group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null, pad ? cast(GdkDevice*)pad.cPtr(No.Dup) : null);

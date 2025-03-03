@@ -151,7 +151,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
    * Params:
    *   child = the new center widget
    */
-  void setCenterWidget(gtk.widget.Widget child)
+  void setCenterWidget(gtk.widget.Widget child = null)
   {
     gtk_center_box_set_center_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -162,7 +162,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
    * Params:
    *   child = the new end widget
    */
-  void setEndWidget(gtk.widget.Widget child)
+  void setEndWidget(gtk.widget.Widget child = null)
   {
     gtk_center_box_set_end_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -188,7 +188,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
    * Params:
    *   child = the new start widget
    */
-  void setStartWidget(gtk.widget.Widget child)
+  void setStartWidget(gtk.widget.Widget child = null)
   {
     gtk_center_box_set_start_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

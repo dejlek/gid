@@ -138,7 +138,7 @@ template FileT()
    * Returns: a #GFileOutputStream, or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_output_stream.FileOutputStream appendTo(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable)
+  override gio.file_output_stream.FileOutputStream appendTo(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileOutputStream* _cretval;
     GError *_err;
@@ -164,7 +164,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void appendToAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void appendToAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -215,7 +215,7 @@ template FileT()
    * Returns: an attribute query string for [gio.file.File.queryInfo],
    *   or %NULL if an error occurs.
    */
-  override string buildAttributeListForCopy(gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable)
+  override string buildAttributeListForCopy(gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     char* _cretval;
     GError *_err;
@@ -266,7 +266,7 @@ template FileT()
    *     progress information, or %NULL if progress information is not needed
    * Returns: %TRUE on success, %FALSE otherwise.
    */
-  override bool copy(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable, gio.types.FileProgressCallback progressCallback)
+  override bool copy(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null)
   {
     extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
     {
@@ -305,7 +305,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void copyAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.FileProgressCallback progressCallback, gio.types.AsyncReadyCallback callback)
+  override void copyAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
     {
@@ -345,7 +345,7 @@ template FileT()
    * Returns: %TRUE if the attributes were copied successfully,
    *   %FALSE otherwise.
    */
-  override bool copyAttributes(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable)
+  override bool copyAttributes(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -396,7 +396,7 @@ template FileT()
    *   file, or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_output_stream.FileOutputStream create(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable)
+  override gio.file_output_stream.FileOutputStream create(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileOutputStream* _cretval;
     GError *_err;
@@ -423,7 +423,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void createAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void createAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -485,7 +485,7 @@ template FileT()
    *   file, or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_iostream.FileIOStream createReadwrite(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable)
+  override gio.file_iostream.FileIOStream createReadwrite(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileIOStream* _cretval;
     GError *_err;
@@ -512,7 +512,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void createReadwriteAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void createReadwriteAsync(gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -571,7 +571,7 @@ template FileT()
    *     %NULL to ignore
    * Returns: %TRUE if the file was deleted. %FALSE otherwise.
    */
-  override bool delete_(gio.cancellable.Cancellable cancellable)
+  override bool delete_(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -592,7 +592,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied
    */
-  override void deleteAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void deleteAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -660,7 +660,7 @@ template FileT()
 
    * Deprecated: Use [gio.file.File.ejectMountableWithOperation] instead.
    */
-  override void ejectMountable(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void ejectMountable(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -713,7 +713,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void ejectMountableWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void ejectMountableWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -777,7 +777,7 @@ template FileT()
    * Returns: A #GFileEnumerator if successful,
    *   %NULL on error. Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_enumerator.FileEnumerator enumerateChildren(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable)
+  override gio.file_enumerator.FileEnumerator enumerateChildren(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileEnumerator* _cretval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -807,7 +807,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void enumerateChildrenAsync(string attributes, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void enumerateChildrenAsync(string attributes, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -875,7 +875,7 @@ template FileT()
    *   or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.mount.Mount findEnclosingMount(gio.cancellable.Cancellable cancellable)
+  override gio.mount.Mount findEnclosingMount(gio.cancellable.Cancellable cancellable = null)
   {
     GMount* _cretval;
     GError *_err;
@@ -900,7 +900,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void findEnclosingMountAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void findEnclosingMountAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1126,7 +1126,7 @@ template FileT()
    * Returns: %TRUE if file is an immediate child of parent $(LPAREN)or any parent in
    *   the case that parent is %NULL$(RPAREN).
    */
-  override bool hasParent(gio.file.File parent)
+  override bool hasParent(gio.file.File parent = null)
   {
     bool _retval;
     _retval = g_file_has_parent(cast(GFile*)cPtr, parent ? cast(GFile*)(cast(ObjectG)parent).cPtr(No.Dup) : null);
@@ -1248,7 +1248,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void loadBytesAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void loadBytesAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1337,7 +1337,7 @@ template FileT()
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied
    */
-  override void loadContentsAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void loadContentsAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1432,7 +1432,7 @@ template FileT()
    *     %NULL to ignore
    * Returns: %TRUE on successful creation, %FALSE otherwise.
    */
-  override bool makeDirectory(gio.cancellable.Cancellable cancellable)
+  override bool makeDirectory(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -1451,7 +1451,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied
    */
-  override void makeDirectoryAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void makeDirectoryAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1501,7 +1501,7 @@ template FileT()
    * Returns: %TRUE if all directories have been successfully created, %FALSE
    *   otherwise.
    */
-  override bool makeDirectoryWithParents(gio.cancellable.Cancellable cancellable)
+  override bool makeDirectoryWithParents(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -1524,7 +1524,7 @@ template FileT()
    *     %NULL to ignore
    * Returns: %TRUE on the creation of a new symlink, %FALSE otherwise.
    */
-  override bool makeSymbolicLink(string symlinkValue, gio.cancellable.Cancellable cancellable)
+  override bool makeSymbolicLink(string symlinkValue, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _symlinkValue = symlinkValue.toCString(No.Alloc);
@@ -1547,7 +1547,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied
    */
-  override void makeSymbolicLinkAsync(string symlinkValue, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void makeSymbolicLinkAsync(string symlinkValue, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1660,7 +1660,7 @@ template FileT()
    *   or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_monitor.FileMonitor monitor(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable)
+  override gio.file_monitor.FileMonitor monitor(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileMonitor* _cretval;
     GError *_err;
@@ -1689,7 +1689,7 @@ template FileT()
    * Returns: a #GFileMonitor for the given file,
    *   or %NULL on error. Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_monitor.FileMonitor monitorDirectory(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable)
+  override gio.file_monitor.FileMonitor monitorDirectory(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileMonitor* _cretval;
     GError *_err;
@@ -1721,7 +1721,7 @@ template FileT()
    *   or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_monitor.FileMonitor monitorFile(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable)
+  override gio.file_monitor.FileMonitor monitorFile(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileMonitor* _cretval;
     GError *_err;
@@ -1750,7 +1750,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied, or %NULL
    */
-  override void mountEnclosingVolume(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void mountEnclosingVolume(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1802,7 +1802,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void mountMountable(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void mountMountable(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1873,7 +1873,7 @@ template FileT()
    *     function for updates
    * Returns: %TRUE on successful move, %FALSE otherwise.
    */
-  override bool move(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable, gio.types.FileProgressCallback progressCallback)
+  override bool move(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null)
   {
     extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
     {
@@ -1910,7 +1910,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void moveAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.FileProgressCallback progressCallback, gio.types.AsyncReadyCallback callback)
+  override void moveAsync(gio.file.File destination, gio.types.FileCopyFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
     {
@@ -1971,7 +1971,7 @@ template FileT()
    * Returns: #GFileIOStream or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_iostream.FileIOStream openReadwrite(gio.cancellable.Cancellable cancellable)
+  override gio.file_iostream.FileIOStream openReadwrite(gio.cancellable.Cancellable cancellable = null)
   {
     GFileIOStream* _cretval;
     GError *_err;
@@ -1996,7 +1996,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void openReadwriteAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void openReadwriteAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -2061,7 +2061,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied, or %NULL
    */
-  override void pollMountable(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void pollMountable(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -2107,7 +2107,7 @@ template FileT()
    *   %NULL if there were errors.
    *   When you are done with it, release it with [gobject.object.ObjectG.unref]
    */
-  override gio.app_info.AppInfo queryDefaultHandler(gio.cancellable.Cancellable cancellable)
+  override gio.app_info.AppInfo queryDefaultHandler(gio.cancellable.Cancellable cancellable = null)
   {
     GAppInfo* _cretval;
     GError *_err;
@@ -2125,7 +2125,7 @@ template FileT()
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  override void queryDefaultHandlerAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void queryDefaultHandlerAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -2185,7 +2185,7 @@ template FileT()
    * Returns: %TRUE if the file exists $(LPAREN)and can be detected without error$(RPAREN),
    *   %FALSE otherwise $(LPAREN)or if cancelled$(RPAREN).
    */
-  override bool queryExists(gio.cancellable.Cancellable cancellable)
+  override bool queryExists(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     _retval = g_file_query_exists(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
@@ -2204,7 +2204,7 @@ template FileT()
    * Returns: The #GFileType of the file and %G_FILE_TYPE_UNKNOWN
    *   if the file does not exist
    */
-  override gio.types.FileType queryFileType(gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable)
+  override gio.types.FileType queryFileType(gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileType _cretval;
     _cretval = g_file_query_file_type(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
@@ -2242,7 +2242,7 @@ template FileT()
    * Returns: a #GFileInfo or %NULL if there was an error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_info.FileInfo queryFilesystemInfo(string attributes, gio.cancellable.Cancellable cancellable)
+  override gio.file_info.FileInfo queryFilesystemInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -2272,7 +2272,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void queryFilesystemInfoAsync(string attributes, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void queryFilesystemInfoAsync(string attributes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -2343,7 +2343,7 @@ template FileT()
    * Returns: a #GFileInfo for the given file, or %NULL
    *   on error. Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_info.FileInfo queryInfo(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable)
+  override gio.file_info.FileInfo queryInfo(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -2372,7 +2372,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void queryInfoAsync(string attributes, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void queryInfoAsync(string attributes, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -2424,7 +2424,7 @@ template FileT()
    *   When you are done with it, release it with
    *   [gio.file_attribute_info_list.FileAttributeInfoList.unref]
    */
-  override gio.file_attribute_info_list.FileAttributeInfoList querySettableAttributes(gio.cancellable.Cancellable cancellable)
+  override gio.file_attribute_info_list.FileAttributeInfoList querySettableAttributes(gio.cancellable.Cancellable cancellable = null)
   {
     GFileAttributeInfoList* _cretval;
     GError *_err;
@@ -2449,7 +2449,7 @@ template FileT()
    *   When you are done with it, release it with
    *   [gio.file_attribute_info_list.FileAttributeInfoList.unref]
    */
-  override gio.file_attribute_info_list.FileAttributeInfoList queryWritableNamespaces(gio.cancellable.Cancellable cancellable)
+  override gio.file_attribute_info_list.FileAttributeInfoList queryWritableNamespaces(gio.cancellable.Cancellable cancellable = null)
   {
     GFileAttributeInfoList* _cretval;
     GError *_err;
@@ -2475,7 +2475,7 @@ template FileT()
    * Returns: #GFileInputStream or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_input_stream.FileInputStream read(gio.cancellable.Cancellable cancellable)
+  override gio.file_input_stream.FileInputStream read(gio.cancellable.Cancellable cancellable = null)
   {
     GFileInputStream* _cretval;
     GError *_err;
@@ -2500,7 +2500,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void readAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void readAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -2580,7 +2580,7 @@ template FileT()
    * Returns: a #GFileOutputStream or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_output_stream.FileOutputStream replace(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable)
+  override gio.file_output_stream.FileOutputStream replace(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileOutputStream* _cretval;
     const(char)* _etag = etag.toCString(No.Alloc);
@@ -2611,7 +2611,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void replaceAsync(string etag, bool makeBackup, gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void replaceAsync(string etag, bool makeBackup, gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -2653,7 +2653,7 @@ template FileT()
    * Returns: %TRUE if successful. If an error has occurred, this function
    *   will return %FALSE and set error appropriately if present.
    */
-  override bool replaceContents(ubyte[] contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, out string newEtag, gio.cancellable.Cancellable cancellable)
+  override bool replaceContents(ubyte[] contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, out string newEtag, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     size_t _length;
@@ -2695,7 +2695,7 @@ template FileT()
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied
    */
-  override void replaceContentsAsync(ubyte[] contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void replaceContentsAsync(ubyte[] contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -2732,7 +2732,7 @@ template FileT()
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied
    */
-  override void replaceContentsBytesAsync(glib.bytes.Bytes contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void replaceContentsBytesAsync(glib.bytes.Bytes contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -2809,7 +2809,7 @@ template FileT()
    * Returns: a #GFileIOStream or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file_iostream.FileIOStream replaceReadwrite(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable)
+  override gio.file_iostream.FileIOStream replaceReadwrite(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileIOStream* _cretval;
     const(char)* _etag = etag.toCString(No.Alloc);
@@ -2841,7 +2841,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void replaceReadwriteAsync(string etag, bool makeBackup, gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void replaceReadwriteAsync(string etag, bool makeBackup, gio.types.FileCreateFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -2911,7 +2911,7 @@ template FileT()
    *     %NULL to ignore
    * Returns: %TRUE if the attribute was set, %FALSE otherwise.
    */
-  override bool setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable)
+  override bool setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -2938,7 +2938,7 @@ template FileT()
    * Returns: %TRUE if the attribute was successfully set to value
    *   in the file, %FALSE otherwise.
    */
-  override bool setAttributeByteString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable)
+  override bool setAttributeByteString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -2965,7 +2965,7 @@ template FileT()
    * Returns: %TRUE if the attribute was successfully set to value
    *   in the file, %FALSE otherwise.
    */
-  override bool setAttributeInt32(string attribute, int value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable)
+  override bool setAttributeInt32(string attribute, int value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -2990,7 +2990,7 @@ template FileT()
    *     %NULL to ignore
    * Returns: %TRUE if the attribute was successfully set, %FALSE otherwise.
    */
-  override bool setAttributeInt64(string attribute, long value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable)
+  override bool setAttributeInt64(string attribute, long value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -3015,7 +3015,7 @@ template FileT()
    *     %NULL to ignore
    * Returns: %TRUE if the attribute was successfully set, %FALSE otherwise.
    */
-  override bool setAttributeString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable)
+  override bool setAttributeString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -3042,7 +3042,7 @@ template FileT()
    * Returns: %TRUE if the attribute was successfully set to value
    *   in the file, %FALSE otherwise.
    */
-  override bool setAttributeUint32(string attribute, uint value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable)
+  override bool setAttributeUint32(string attribute, uint value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -3068,7 +3068,7 @@ template FileT()
    * Returns: %TRUE if the attribute was successfully set to value
    *   in the file, %FALSE otherwise.
    */
-  override bool setAttributeUint64(string attribute, ulong value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable)
+  override bool setAttributeUint64(string attribute, ulong value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -3095,7 +3095,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void setAttributesAsync(gio.file_info.FileInfo info, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void setAttributesAsync(gio.file_info.FileInfo info, gio.types.FileQueryInfoFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -3147,7 +3147,7 @@ template FileT()
    *     %NULL to ignore
    * Returns: %FALSE if there was any error, %TRUE otherwise.
    */
-  override bool setAttributesFromInfo(gio.file_info.FileInfo info, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable)
+  override bool setAttributesFromInfo(gio.file_info.FileInfo info, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -3177,7 +3177,7 @@ template FileT()
    *   or %NULL if there was an error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  override gio.file.File setDisplayName(string displayName, gio.cancellable.Cancellable cancellable)
+  override gio.file.File setDisplayName(string displayName, gio.cancellable.Cancellable cancellable = null)
   {
     GFile* _cretval;
     const(char)* _displayName = displayName.toCString(No.Alloc);
@@ -3204,7 +3204,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void setDisplayNameAsync(string displayName, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void setDisplayNameAsync(string displayName, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -3255,7 +3255,7 @@ template FileT()
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied, or %NULL
    */
-  override void startMountable(gio.types.DriveStartFlags flags, gio.mount_operation.MountOperation startOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void startMountable(gio.types.DriveStartFlags flags, gio.mount_operation.MountOperation startOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -3306,7 +3306,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied, or %NULL
    */
-  override void stopMountable(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void stopMountable(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -3369,7 +3369,7 @@ template FileT()
    *     %NULL to ignore
    * Returns: %TRUE on successful trash, %FALSE otherwise.
    */
-  override bool trash(gio.cancellable.Cancellable cancellable)
+  override bool trash(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -3388,7 +3388,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback to call
    *     when the request is satisfied
    */
-  override void trashAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void trashAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -3437,7 +3437,7 @@ template FileT()
 
    * Deprecated: Use [gio.file.File.unmountMountableWithOperation] instead.
    */
-  override void unmountMountable(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void unmountMountable(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -3491,7 +3491,7 @@ template FileT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void unmountMountableWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  override void unmountMountableWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

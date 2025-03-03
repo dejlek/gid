@@ -87,7 +87,7 @@ interface Icon
    *   icon2 = pointer to the second #GIcon.
    * Returns: %TRUE if icon1 is equal to icon2. %FALSE otherwise.
    */
-  bool equal(gio.icon.Icon icon2);
+  bool equal(gio.icon.Icon icon2 = null);
 
   /**
    * Gets a hash for an icon.

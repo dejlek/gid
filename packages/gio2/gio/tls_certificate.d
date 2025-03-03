@@ -175,7 +175,7 @@ class TlsCertificate : gobject.object.ObjectG
    *   privateKeyPkcs11Uri = A PKCS \#11 URI
    * Returns: the new certificate, or %NULL on error
    */
-  static gio.tls_certificate.TlsCertificate newFromPkcs11Uris(string pkcs11Uri, string privateKeyPkcs11Uri)
+  static gio.tls_certificate.TlsCertificate newFromPkcs11Uris(string pkcs11Uri, string privateKeyPkcs11Uri = null)
   {
     GTlsCertificate* _cretval;
     const(char)* _pkcs11Uri = pkcs11Uri.toCString(No.Alloc);
@@ -207,7 +207,7 @@ class TlsCertificate : gobject.object.ObjectG
    *   password = optional password for encrypted certificate data
    * Returns: the new certificate, or %NULL if data is invalid
    */
-  static gio.tls_certificate.TlsCertificate newFromPkcs12(ubyte[] data, string password)
+  static gio.tls_certificate.TlsCertificate newFromPkcs12(ubyte[] data, string password = null)
   {
     GTlsCertificate* _cretval;
     size_t _length;
@@ -387,7 +387,7 @@ class TlsCertificate : gobject.object.ObjectG
    *   trustedCa = the certificate of a trusted authority
    * Returns: the appropriate #GTlsCertificateFlags
    */
-  gio.types.TlsCertificateFlags verify(gio.socket_connectable.SocketConnectable identity, gio.tls_certificate.TlsCertificate trustedCa)
+  gio.types.TlsCertificateFlags verify(gio.socket_connectable.SocketConnectable identity = null, gio.tls_certificate.TlsCertificate trustedCa = null)
   {
     GTlsCertificateFlags _cretval;
     _cretval = g_tls_certificate_verify(cast(GTlsCertificate*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null, trustedCa ? cast(GTlsCertificate*)trustedCa.cPtr(No.Dup) : null);

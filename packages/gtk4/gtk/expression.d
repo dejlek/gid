@@ -177,7 +177,7 @@ class Expression
    *     the evaluation of `self`
    * Returns: a `GtkExpressionWatch`
    */
-  gtk.expression_watch.ExpressionWatch bind(gobject.object.ObjectG target, string property, gobject.object.ObjectG this_)
+  gtk.expression_watch.ExpressionWatch bind(gobject.object.ObjectG target, string property, gobject.object.ObjectG this_ = null)
   {
     GtkExpressionWatch* _cretval;
     const(char)* _property = property.toCString(No.Alloc);

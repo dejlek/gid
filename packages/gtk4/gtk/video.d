@@ -64,7 +64,7 @@ class Video : gtk.widget.Widget
    *   file = a `GFile`
    * Returns: a new `GtkVideo`
    */
-  static gtk.video.Video newForFile(gio.file.File file)
+  static gtk.video.Video newForFile(gio.file.File file = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_video_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
@@ -80,7 +80,7 @@ class Video : gtk.widget.Widget
    *   filename = filename to play back
    * Returns: a new `GtkVideo`
    */
-  static gtk.video.Video newForFilename(string filename)
+  static gtk.video.Video newForFilename(string filename = null)
   {
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -95,7 +95,7 @@ class Video : gtk.widget.Widget
    *   stream = a `GtkMediaStream`
    * Returns: a new `GtkVideo`
    */
-  static gtk.video.Video newForMediaStream(gtk.media_stream.MediaStream stream)
+  static gtk.video.Video newForMediaStream(gtk.media_stream.MediaStream stream = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_video_new_for_media_stream(stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
@@ -111,7 +111,7 @@ class Video : gtk.widget.Widget
    *   resourcePath = resource path to play back
    * Returns: a new `GtkVideo`
    */
-  static gtk.video.Video newForResource(string resourcePath)
+  static gtk.video.Video newForResource(string resourcePath = null)
   {
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -196,7 +196,7 @@ class Video : gtk.widget.Widget
    * Params:
    *   file = the file to play
    */
-  void setFile(gio.file.File file)
+  void setFile(gio.file.File file = null)
   {
     gtk_video_set_file(cast(GtkVideo*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
@@ -207,7 +207,7 @@ class Video : gtk.widget.Widget
    * Params:
    *   filename = the filename to play
    */
-  void setFilename(string filename)
+  void setFilename(string filename = null)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_video_set_filename(cast(GtkVideo*)cPtr, _filename);
@@ -244,7 +244,7 @@ class Video : gtk.widget.Widget
    * Params:
    *   stream = The media stream to play or %NULL to unset
    */
-  void setMediaStream(gtk.media_stream.MediaStream stream)
+  void setMediaStream(gtk.media_stream.MediaStream stream = null)
   {
     gtk_video_set_media_stream(cast(GtkVideo*)cPtr, stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
   }
@@ -255,7 +255,7 @@ class Video : gtk.widget.Widget
    * Params:
    *   resourcePath = the resource to set
    */
-  void setResource(string resourcePath)
+  void setResource(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_video_set_resource(cast(GtkVideo*)cPtr, _resourcePath);

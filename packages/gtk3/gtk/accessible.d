@@ -74,7 +74,7 @@ class Accessible : atk.object.ObjectAtk
    * Params:
    *   widget = a #GtkWidget or %NULL to unset
    */
-  void setWidget(gtk.widget.Widget widget)
+  void setWidget(gtk.widget.Widget widget = null)
   {
     gtk_accessible_set_widget(cast(GtkAccessible*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

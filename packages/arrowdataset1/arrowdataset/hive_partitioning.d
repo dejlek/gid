@@ -29,7 +29,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     return getType();
   }
 
-  this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries, arrowdataset.hive_partitioning_options.HivePartitioningOptions options)
+  this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries, arrowdataset.hive_partitioning_options.HivePartitioningOptions options = null)
   {
     GADatasetHivePartitioning* _cretval;
     auto _dictionaries = gListFromD!(arrow.array.Array)(dictionaries);

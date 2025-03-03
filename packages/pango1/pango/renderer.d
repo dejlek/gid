@@ -328,7 +328,7 @@ class Renderer : gobject.object.ObjectG
    *   part = the part to change the color of
    *   color = the new color or %NULL to unset the current color
    */
-  void setColor(pango.types.RenderPart part, pango.color.Color color)
+  void setColor(pango.types.RenderPart part, pango.color.Color color = null)
   {
     pango_renderer_set_color(cast(PangoRenderer*)cPtr, part, color ? cast(const(PangoColor)*)color.cPtr(No.Dup) : null);
   }
@@ -339,7 +339,7 @@ class Renderer : gobject.object.ObjectG
    *   matrix = a `PangoMatrix`, or %NULL to unset any existing matrix
    *     $(LPAREN)No matrix set is the same as setting the identity matrix.$(RPAREN)
    */
-  void setMatrix(pango.matrix.Matrix matrix)
+  void setMatrix(pango.matrix.Matrix matrix = null)
   {
     pango_renderer_set_matrix(cast(PangoRenderer*)cPtr, matrix ? cast(const(PangoMatrix)*)matrix.cPtr(No.Dup) : null);
   }

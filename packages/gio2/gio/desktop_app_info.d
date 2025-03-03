@@ -287,7 +287,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
    *   `OnlyShowIn` and `NotShowIn` keys, %FALSE
    *   otherwise.
    */
-  bool getShowIn(string desktopEnv)
+  bool getShowIn(string desktopEnv = null)
   {
     bool _retval;
     const(char)* _desktopEnv = desktopEnv.toCString(No.Alloc);
@@ -385,7 +385,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
    *     [gio.desktop_app_info.DesktopAppInfo.listActions]
    *   launchContext = a #GAppLaunchContext
    */
-  void launchAction(string actionName, gio.app_launch_context.AppLaunchContext launchContext)
+  void launchAction(string actionName, gio.app_launch_context.AppLaunchContext launchContext = null)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_desktop_app_info_launch_action(cast(GDesktopAppInfo*)cPtr, _actionName, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null);
@@ -414,7 +414,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
    *   pidCallback = Callback for child processes
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  bool launchUrisAsManager(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup, gio.types.DesktopAppLaunchCallback pidCallback)
+  bool launchUrisAsManager(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup = null, gio.types.DesktopAppLaunchCallback pidCallback = null)
   {
     extern(C) void _userSetupCallback(void* data)
     {

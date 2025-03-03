@@ -51,7 +51,7 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
    *   filter = filter
    * Returns: a new `GtkFilterListModel`
    */
-  this(gio.list_model.ListModel model, gtk.filter.Filter filter)
+  this(gio.list_model.ListModel model = null, gtk.filter.Filter filter = null)
   {
     GtkFilterListModel* _cretval;
     _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
@@ -122,7 +122,7 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
    * Params:
    *   filter = filter to use
    */
-  void setFilter(gtk.filter.Filter filter)
+  void setFilter(gtk.filter.Filter filter = null)
   {
     gtk_filter_list_model_set_filter(cast(GtkFilterListModel*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(No.Dup) : null);
   }
@@ -157,7 +157,7 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
    * Params:
    *   model = The model to be filtered
    */
-  void setModel(gio.list_model.ListModel model)
+  void setModel(gio.list_model.ListModel model = null)
   {
     gtk_filter_list_model_set_model(cast(GtkFilterListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

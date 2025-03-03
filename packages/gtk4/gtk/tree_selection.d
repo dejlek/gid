@@ -275,7 +275,7 @@ class TreeSelection : gobject.object.ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  void setSelectFunction(gtk.types.TreeSelectionFunc func)
+  void setSelectFunction(gtk.types.TreeSelectionFunc func = null)
   {
     extern(C) bool _funcCallback(GtkTreeSelection* selection, GtkTreeModel* model, GtkTreePath* path, bool pathCurrentlySelected, void* data)
     {

@@ -230,7 +230,7 @@ class ListStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
    *   iter = An unset #GtkTreeIter to set to the new row
    *   sibling = A valid #GtkTreeIter, or %NULL
    */
-  void insertAfter(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter sibling)
+  void insertAfter(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter sibling = null)
   {
     GtkTreeIter _iter;
     gtk_list_store_insert_after(cast(GtkListStore*)cPtr, &_iter, sibling ? cast(GtkTreeIter*)sibling.cPtr(No.Dup) : null);
@@ -246,7 +246,7 @@ class ListStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
    *   iter = An unset #GtkTreeIter to set to the new row
    *   sibling = A valid #GtkTreeIter, or %NULL
    */
-  void insertBefore(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter sibling)
+  void insertBefore(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter sibling = null)
   {
     GtkTreeIter _iter;
     gtk_list_store_insert_before(cast(GtkListStore*)cPtr, &_iter, sibling ? cast(GtkTreeIter*)sibling.cPtr(No.Dup) : null);
@@ -306,7 +306,7 @@ class ListStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
    *   iter = A #GtkTreeIter.
    *   position = A #GtkTreeIter or %NULL.
    */
-  void moveAfter(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position)
+  void moveAfter(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position = null)
   {
     gtk_list_store_move_after(cast(GtkListStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position.cPtr(No.Dup) : null);
   }
@@ -319,7 +319,7 @@ class ListStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
    *   iter = A #GtkTreeIter.
    *   position = A #GtkTreeIter, or %NULL.
    */
-  void moveBefore(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position)
+  void moveBefore(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position = null)
   {
     gtk_list_store_move_before(cast(GtkListStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position.cPtr(No.Dup) : null);
   }

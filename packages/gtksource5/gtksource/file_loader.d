@@ -153,7 +153,7 @@ class FileLoader : gobject.object.ObjectG
    *   callback = a #GAsyncReadyCallback to call when the request is
    *     satisfied.
    */
-  void loadAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.FileProgressCallback progressCallback, gio.types.AsyncReadyCallback callback)
+  void loadAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
     {

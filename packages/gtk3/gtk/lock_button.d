@@ -65,7 +65,7 @@ class LockButton : gtk.button.Button
    *   permission = a #GPermission
    * Returns: a new #GtkLockButton
    */
-  this(gio.permission.Permission permission)
+  this(gio.permission.Permission permission = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_lock_button_new(permission ? cast(GPermission*)permission.cPtr(No.Dup) : null);
@@ -89,7 +89,7 @@ class LockButton : gtk.button.Button
    * Params:
    *   permission = a #GPermission object, or %NULL
    */
-  void setPermission(gio.permission.Permission permission)
+  void setPermission(gio.permission.Permission permission = null)
   {
     gtk_lock_button_set_permission(cast(GtkLockButton*)cPtr, permission ? cast(GPermission*)permission.cPtr(No.Dup) : null);
   }

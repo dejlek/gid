@@ -127,7 +127,7 @@ class RadioButton : gtk.check_button.CheckButton
    *   radioGroupMember = an existing #GtkRadioButton.
    * Returns: a new radio button.
    */
-  static gtk.radio_button.RadioButton newFromWidget(gtk.radio_button.RadioButton radioGroupMember)
+  static gtk.radio_button.RadioButton newFromWidget(gtk.radio_button.RadioButton radioGroupMember = null)
   {
     GtkWidget* _cretval;
     _cretval = gtk_radio_button_new_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember.cPtr(No.Dup) : null);
@@ -247,7 +247,7 @@ class RadioButton : gtk.check_button.CheckButton
    *   groupSource = a radio button object whos group we are
    *     joining, or %NULL to remove the radio button from its group
    */
-  void joinGroup(gtk.radio_button.RadioButton groupSource)
+  void joinGroup(gtk.radio_button.RadioButton groupSource = null)
   {
     gtk_radio_button_join_group(cast(GtkRadioButton*)cPtr, groupSource ? cast(GtkRadioButton*)groupSource.cPtr(No.Dup) : null);
   }

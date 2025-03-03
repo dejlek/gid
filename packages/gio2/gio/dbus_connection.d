@@ -150,7 +150,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    * Returns: a #GDBusConnection or %NULL if error is set.
    *   Free with [gobject.object.ObjectG.unref].
    */
-  static gio.dbus_connection.DBusConnection newForAddressSync(string address, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer, gio.cancellable.Cancellable cancellable)
+  static gio.dbus_connection.DBusConnection newForAddressSync(string address, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusConnection* _cretval;
     const(char)* _address = address.toCString(No.Alloc);
@@ -183,7 +183,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    * Returns: a #GDBusConnection or %NULL if error is set.
    *   Free with [gobject.object.ObjectG.unref].
    */
-  static gio.dbus_connection.DBusConnection newSync(gio.iostream.IOStream stream, string guid, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer, gio.cancellable.Cancellable cancellable)
+  static gio.dbus_connection.DBusConnection newSync(gio.iostream.IOStream stream, string guid, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusConnection* _cretval;
     const(char)* _guid = guid.toCString(No.Alloc);
@@ -219,7 +219,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    *   cancellable = a #GCancellable or %NULL
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied
    */
-  static void new_(gio.iostream.IOStream stream, string guid, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void new_(gio.iostream.IOStream stream, string guid, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -261,7 +261,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    *   cancellable = a #GCancellable or %NULL
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied
    */
-  static void newForAddress(string address, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void newForAddress(string address, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -387,7 +387,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    *     is satisfied or %NULL if you don't care about the result of the
    *     method invocation
    */
-  void call(string busName, string objectPath, string interfaceName, string methodName, glib.variant.VariantG parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void call(string busName, string objectPath, string interfaceName, string methodName, glib.variant.VariantG parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -473,7 +473,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    * Returns: %NULL if error is set. Otherwise a non-floating
    *   #GVariant tuple with return values. Free with [glib.variant.VariantG.unref].
    */
-  glib.variant.VariantG callSync(string busName, string objectPath, string interfaceName, string methodName, glib.variant.VariantG parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable)
+  glib.variant.VariantG callSync(string busName, string objectPath, string interfaceName, string methodName, glib.variant.VariantG parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null)
   {
     VariantC* _cretval;
     const(char)* _busName = busName.toCString(No.Alloc);
@@ -519,7 +519,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    *     satisfied or %NULL if you don't * care about the result of the
    *     method invocation
    */
-  void callWithUnixFdList(string busName, string objectPath, string interfaceName, string methodName, glib.variant.VariantG parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void callWithUnixFdList(string busName, string objectPath, string interfaceName, string methodName, glib.variant.VariantG parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -592,7 +592,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    * Returns: %NULL if error is set. Otherwise a non-floating
    *   #GVariant tuple with return values. Free with [glib.variant.VariantG.unref].
    */
-  glib.variant.VariantG callWithUnixFdListSync(string busName, string objectPath, string interfaceName, string methodName, glib.variant.VariantG parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList, out gio.unix_fdlist.UnixFDList outFdList, gio.cancellable.Cancellable cancellable)
+  glib.variant.VariantG callWithUnixFdListSync(string busName, string objectPath, string interfaceName, string methodName, glib.variant.VariantG parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList, out gio.unix_fdlist.UnixFDList outFdList, gio.cancellable.Cancellable cancellable = null)
   {
     VariantC* _cretval;
     const(char)* _busName = busName.toCString(No.Alloc);
@@ -635,7 +635,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    *   callback = a #GAsyncReadyCallback to call when the request is
    *     satisfied or %NULL if you don't care about the result
    */
-  void close(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void close(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -676,7 +676,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    *   cancellable = a #GCancellable or %NULL
    * Returns: %TRUE if the operation succeeded, %FALSE if error is set
    */
-  bool closeSync(gio.cancellable.Cancellable cancellable)
+  bool closeSync(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -702,7 +702,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    *     or %NULL if not passing parameters
    * Returns: %TRUE unless error is set
    */
-  bool emitSignal(string destinationBusName, string objectPath, string interfaceName, string signalName, glib.variant.VariantG parameters)
+  bool emitSignal(string destinationBusName, string objectPath, string interfaceName, string signalName, glib.variant.VariantG parameters = null)
   {
     bool _retval;
     const(char)* _destinationBusName = destinationBusName.toCString(No.Alloc);
@@ -798,7 +798,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    *   callback = a #GAsyncReadyCallback to call when the
    *     request is satisfied or %NULL if you don't care about the result
    */
-  void flush(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void flush(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -839,7 +839,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    *   cancellable = a #GCancellable or %NULL
    * Returns: %TRUE if the operation succeeded, %FALSE if error is set
    */
-  bool flushSync(gio.cancellable.Cancellable cancellable)
+  bool flushSync(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     GError *_err;
@@ -991,7 +991,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    * Returns: 0 if error is set, otherwise a registration ID $(LPAREN)never 0$(RPAREN)
    *   that can be used with [gio.dbus_connection.DBusConnection.unregisterObject] .
    */
-  uint registerObject(string objectPath, gio.dbus_interface_info.DBusInterfaceInfo interfaceInfo, gobject.closure.Closure methodCallClosure, gobject.closure.Closure getPropertyClosure, gobject.closure.Closure setPropertyClosure)
+  uint registerObject(string objectPath, gio.dbus_interface_info.DBusInterfaceInfo interfaceInfo, gobject.closure.Closure methodCallClosure = null, gobject.closure.Closure getPropertyClosure = null, gobject.closure.Closure setPropertyClosure = null)
   {
     uint _retval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
@@ -1148,7 +1148,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    *   callback = a #GAsyncReadyCallback to call when the request
    *     is satisfied or %NULL if you don't care about the result
    */
-  void sendMessageWithReply(gio.dbus_message.DBusMessage message, gio.types.DBusSendMessageFlags flags, int timeoutMsec, out uint outSerial, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void sendMessageWithReply(gio.dbus_message.DBusMessage message, gio.types.DBusSendMessageFlags flags, int timeoutMsec, out uint outSerial, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1225,7 +1225,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
    * Returns: a locked #GDBusMessage that is the reply
    *   to message or %NULL if error is set
    */
-  gio.dbus_message.DBusMessage sendMessageWithReplySync(gio.dbus_message.DBusMessage message, gio.types.DBusSendMessageFlags flags, int timeoutMsec, out uint outSerial, gio.cancellable.Cancellable cancellable)
+  gio.dbus_message.DBusMessage sendMessageWithReplySync(gio.dbus_message.DBusMessage message, gio.types.DBusSendMessageFlags flags, int timeoutMsec, out uint outSerial, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusMessage* _cretval;
     GError *_err;

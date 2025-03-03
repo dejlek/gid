@@ -66,7 +66,7 @@ class TimeZone : gobject.boxed.Boxed
    *   error reporting. Change your code to handle a potentially %NULL return
    *   value.
    */
-  this(string identifier)
+  this(string identifier = null)
   {
     GTimeZone* _cretval;
     const(char)* _identifier = identifier.toCString(No.Alloc);
@@ -136,7 +136,7 @@ class TimeZone : gobject.boxed.Boxed
    * Returns: the requested timezone, or %NULL on
    *   failure
    */
-  static glib.time_zone.TimeZone newIdentifier(string identifier)
+  static glib.time_zone.TimeZone newIdentifier(string identifier = null)
   {
     GTimeZone* _cretval;
     const(char)* _identifier = identifier.toCString(No.Alloc);

@@ -36,7 +36,7 @@ class BoolFilter : gtk.filter.Filter
    *   expression = The expression to evaluate
    * Returns: a new `GtkBoolFilter`
    */
-  this(gtk.expression.Expression expression)
+  this(gtk.expression.Expression expression = null)
   {
     GtkBoolFilter* _cretval;
     _cretval = gtk_bool_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
@@ -74,7 +74,7 @@ class BoolFilter : gtk.filter.Filter
    * Params:
    *   expression = a `GtkExpression`
    */
-  void setExpression(gtk.expression.Expression expression)
+  void setExpression(gtk.expression.Expression expression = null)
   {
     gtk_bool_filter_set_expression(cast(GtkBoolFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }

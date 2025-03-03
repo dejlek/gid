@@ -185,7 +185,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
    * Params:
    *   helpOverlay = a #GtkShortcutsWindow
    */
-  void setHelpOverlay(gtk.shortcuts_window.ShortcutsWindow helpOverlay)
+  void setHelpOverlay(gtk.shortcuts_window.ShortcutsWindow helpOverlay = null)
   {
     gtk_application_window_set_help_overlay(cast(GtkApplicationWindow*)cPtr, helpOverlay ? cast(GtkShortcutsWindow*)helpOverlay.cPtr(No.Dup) : null);
   }

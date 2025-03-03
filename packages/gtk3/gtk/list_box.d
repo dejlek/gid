@@ -95,7 +95,7 @@ class ListBox : gtk.container.Container
    *   createWidgetFunc = a function that creates widgets for items
    *     or %NULL in case you also passed %NULL as model
    */
-  void bindModel(gio.list_model.ListModel model, gtk.types.ListBoxCreateWidgetFunc createWidgetFunc)
+  void bindModel(gio.list_model.ListModel model = null, gtk.types.ListBoxCreateWidgetFunc createWidgetFunc = null)
   {
     extern(C) GtkWidget* _createWidgetFuncCallback(ObjectC* item, void* userData)
     {
@@ -304,7 +304,7 @@ class ListBox : gtk.container.Container
    * Params:
    *   row = The row to select or %NULL
    */
-  void selectRow(gtk.list_box_row.ListBoxRow row)
+  void selectRow(gtk.list_box_row.ListBoxRow row = null)
   {
     gtk_list_box_select_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
   }
@@ -351,7 +351,7 @@ class ListBox : gtk.container.Container
    * Params:
    *   adjustment = the adjustment, or %NULL
    */
-  void setAdjustment(gtk.adjustment.Adjustment adjustment)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_list_box_set_adjustment(cast(GtkListBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
@@ -368,7 +368,7 @@ class ListBox : gtk.container.Container
    * Params:
    *   filterFunc = callback that lets you filter which rows to show
    */
-  void setFilterFunc(gtk.types.ListBoxFilterFunc filterFunc)
+  void setFilterFunc(gtk.types.ListBoxFilterFunc filterFunc = null)
   {
     extern(C) bool _filterFuncCallback(GtkListBoxRow* row, void* userData)
     {
@@ -403,7 +403,7 @@ class ListBox : gtk.container.Container
    * Params:
    *   updateHeader = callback that lets you add row headers
    */
-  void setHeaderFunc(gtk.types.ListBoxUpdateHeaderFunc updateHeader)
+  void setHeaderFunc(gtk.types.ListBoxUpdateHeaderFunc updateHeader = null)
   {
     extern(C) void _updateHeaderCallback(GtkListBoxRow* row, GtkListBoxRow* before, void* userData)
     {
@@ -424,7 +424,7 @@ class ListBox : gtk.container.Container
    * Params:
    *   placeholder = a #GtkWidget or %NULL
    */
-  void setPlaceholder(gtk.widget.Widget placeholder)
+  void setPlaceholder(gtk.widget.Widget placeholder = null)
   {
     gtk_list_box_set_placeholder(cast(GtkListBox*)cPtr, placeholder ? cast(GtkWidget*)placeholder.cPtr(No.Dup) : null);
   }
@@ -451,7 +451,7 @@ class ListBox : gtk.container.Container
    * Params:
    *   sortFunc = the sort function
    */
-  void setSortFunc(gtk.types.ListBoxSortFunc sortFunc)
+  void setSortFunc(gtk.types.ListBoxSortFunc sortFunc = null)
   {
     extern(C) int _sortFuncCallback(GtkListBoxRow* row1, GtkListBoxRow* row2, void* userData)
     {

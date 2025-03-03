@@ -392,7 +392,7 @@ class Uri : gobject.boxed.Boxed
    *   fragment = the fragment, or %NULL
    * Returns: a new #GUri
    */
-  static glib.uri.Uri build(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query, string fragment)
+  static glib.uri.Uri build(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query = null, string fragment = null)
   {
     GUri* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -427,7 +427,7 @@ class Uri : gobject.boxed.Boxed
    *   fragment = the fragment, or %NULL
    * Returns: a new #GUri
    */
-  static glib.uri.Uri buildWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query, string fragment)
+  static glib.uri.Uri buildWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query = null, string fragment = null)
   {
     GUri* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -467,7 +467,7 @@ class Uri : gobject.boxed.Boxed
    * Returns: an escaped version of unescaped.
    *   The returned string should be freed when no longer needed.
    */
-  static string escapeBytes(ubyte[] unescaped, string reservedCharsAllowed)
+  static string escapeBytes(ubyte[] unescaped, string reservedCharsAllowed = null)
   {
     char* _cretval;
     size_t _length;
@@ -553,7 +553,7 @@ class Uri : gobject.boxed.Boxed
    *   fragment = the fragment, or %NULL
    * Returns: an absolute URI string
    */
-  static string join(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query, string fragment)
+  static string join(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query = null, string fragment = null)
   {
     char* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -590,7 +590,7 @@ class Uri : gobject.boxed.Boxed
    *   fragment = the fragment, or %NULL
    * Returns: an absolute URI string
    */
-  static string joinWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query, string fragment)
+  static string joinWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query = null, string fragment = null)
   {
     char* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -950,7 +950,7 @@ class Uri : gobject.boxed.Boxed
    *   or %NULL on error $(LPAREN)if decoding failed, using %G_URI_ERROR_FAILED error
    *   code$(RPAREN). The returned #GBytes should be unreffed when no longer needed.
    */
-  static glib.bytes.Bytes unescapeBytes(string escapedString, ptrdiff_t length, string illegalCharacters)
+  static glib.bytes.Bytes unescapeBytes(string escapedString, ptrdiff_t length, string illegalCharacters = null)
   {
     GBytes* _cretval;
     const(char)* _escapedString = escapedString.toCString(No.Alloc);
@@ -983,7 +983,7 @@ class Uri : gobject.boxed.Boxed
    *   needed.  As a special case if %NULL is given for escaped_string, this
    *   function will return %NULL.
    */
-  static string unescapeSegment(string escapedString, string escapedStringEnd, string illegalCharacters)
+  static string unescapeSegment(string escapedString = null, string escapedStringEnd = null, string illegalCharacters = null)
   {
     char* _cretval;
     const(char)* _escapedString = escapedString.toCString(No.Alloc);
@@ -1008,7 +1008,7 @@ class Uri : gobject.boxed.Boxed
    * Returns: an unescaped version of escaped_string.
    *   The returned string should be freed when no longer needed.
    */
-  static string unescapeString(string escapedString, string illegalCharacters)
+  static string unescapeString(string escapedString, string illegalCharacters = null)
   {
     char* _cretval;
     const(char)* _escapedString = escapedString.toCString(No.Alloc);

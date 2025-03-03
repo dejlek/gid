@@ -96,7 +96,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
    * Params:
    *   icon = a #GIcon, or %NULL
    */
-  void setIcon(gio.icon.Icon icon)
+  void setIcon(gio.icon.Icon icon = null)
   {
     gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
@@ -112,7 +112,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
    * Params:
    *   iconName = an icon name, or %NULL
    */
-  void setIconName(string iconName)
+  void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gdk_app_launch_context_set_icon_name(cast(GdkAppLaunchContext*)cPtr, _iconName);

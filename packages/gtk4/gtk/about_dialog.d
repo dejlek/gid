@@ -377,7 +377,7 @@ class AboutDialog : gtk.window.Window
    * Params:
    *   comments = a comments string
    */
-  void setComments(string comments)
+  void setComments(string comments = null)
   {
     const(char)* _comments = comments.toCString(No.Alloc);
     gtk_about_dialog_set_comments(cast(GtkAboutDialog*)cPtr, _comments);
@@ -389,7 +389,7 @@ class AboutDialog : gtk.window.Window
    * Params:
    *   copyright = the copyright string
    */
-  void setCopyright(string copyright)
+  void setCopyright(string copyright = null)
   {
     const(char)* _copyright = copyright.toCString(No.Alloc);
     gtk_about_dialog_set_copyright(cast(GtkAboutDialog*)cPtr, _copyright);
@@ -419,7 +419,7 @@ class AboutDialog : gtk.window.Window
    * Params:
    *   license = the license information
    */
-  void setLicense(string license)
+  void setLicense(string license = null)
   {
     const(char)* _license = license.toCString(No.Alloc);
     gtk_about_dialog_set_license(cast(GtkAboutDialog*)cPtr, _license);
@@ -443,7 +443,7 @@ class AboutDialog : gtk.window.Window
    * Params:
    *   logo = a `GdkPaintable`
    */
-  void setLogo(gdk.paintable.Paintable logo)
+  void setLogo(gdk.paintable.Paintable logo = null)
   {
     gtk_about_dialog_set_logo(cast(GtkAboutDialog*)cPtr, logo ? cast(GdkPaintable*)(cast(ObjectG)logo).cPtr(No.Dup) : null);
   }
@@ -453,7 +453,7 @@ class AboutDialog : gtk.window.Window
    * Params:
    *   iconName = an icon name
    */
-  void setLogoIconName(string iconName)
+  void setLogoIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_about_dialog_set_logo_icon_name(cast(GtkAboutDialog*)cPtr, _iconName);
@@ -466,7 +466,7 @@ class AboutDialog : gtk.window.Window
    * Params:
    *   name = the program name
    */
-  void setProgramName(string name)
+  void setProgramName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_about_dialog_set_program_name(cast(GtkAboutDialog*)cPtr, _name);
@@ -481,7 +481,7 @@ class AboutDialog : gtk.window.Window
    * Params:
    *   systemInformation = system information
    */
-  void setSystemInformation(string systemInformation)
+  void setSystemInformation(string systemInformation = null)
   {
     const(char)* _systemInformation = systemInformation.toCString(No.Alloc);
     gtk_about_dialog_set_system_information(cast(GtkAboutDialog*)cPtr, _systemInformation);
@@ -506,7 +506,7 @@ class AboutDialog : gtk.window.Window
    * Params:
    *   translatorCredits = the translator credits
    */
-  void setTranslatorCredits(string translatorCredits)
+  void setTranslatorCredits(string translatorCredits = null)
   {
     const(char)* _translatorCredits = translatorCredits.toCString(No.Alloc);
     gtk_about_dialog_set_translator_credits(cast(GtkAboutDialog*)cPtr, _translatorCredits);
@@ -517,7 +517,7 @@ class AboutDialog : gtk.window.Window
    * Params:
    *   version_ = the version string
    */
-  void setVersion(string version_)
+  void setVersion(string version_ = null)
   {
     const(char)* _version_ = version_.toCString(No.Alloc);
     gtk_about_dialog_set_version(cast(GtkAboutDialog*)cPtr, _version_);
@@ -528,7 +528,7 @@ class AboutDialog : gtk.window.Window
    * Params:
    *   website = a URL string starting with `http://`
    */
-  void setWebsite(string website)
+  void setWebsite(string website = null)
   {
     const(char)* _website = website.toCString(No.Alloc);
     gtk_about_dialog_set_website(cast(GtkAboutDialog*)cPtr, _website);

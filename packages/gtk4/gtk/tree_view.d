@@ -1069,7 +1069,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void moveColumnAfter(gtk.tree_view_column.TreeViewColumn column, gtk.tree_view_column.TreeViewColumn baseColumn)
+  void moveColumnAfter(gtk.tree_view_column.TreeViewColumn column, gtk.tree_view_column.TreeViewColumn baseColumn = null)
   {
     gtk_tree_view_move_column_after(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, baseColumn ? cast(GtkTreeViewColumn*)baseColumn.cPtr(No.Dup) : null);
   }
@@ -1097,7 +1097,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void rowActivated(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column)
+  void rowActivated(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column = null)
   {
     gtk_tree_view_row_activated(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null);
   }
@@ -1192,7 +1192,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setColumnDragFunction(gtk.types.TreeViewColumnDropFunc func)
+  void setColumnDragFunction(gtk.types.TreeViewColumnDropFunc func = null)
   {
     extern(C) bool _funcCallback(GtkTreeView* treeView, GtkTreeViewColumn* column, GtkTreeViewColumn* prevColumn, GtkTreeViewColumn* nextColumn, void* data)
     {
@@ -1313,7 +1313,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setExpanderColumn(gtk.tree_view_column.TreeViewColumn column)
+  void setExpanderColumn(gtk.tree_view_column.TreeViewColumn column = null)
   {
     gtk_tree_view_set_expander_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null);
   }
@@ -1425,7 +1425,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setModel(gtk.tree_model.TreeModel model)
+  void setModel(gtk.tree_model.TreeModel model = null)
   {
     gtk_tree_view_set_model(cast(GtkTreeView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -1463,7 +1463,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func)
+  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func = null)
   {
     extern(C) bool _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
     {
@@ -1522,7 +1522,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setSearchEntry(gtk.editable.Editable entry)
+  void setSearchEntry(gtk.editable.Editable entry = null)
   {
     gtk_tree_view_set_search_entry(cast(GtkTreeView*)cPtr, entry ? cast(GtkEditable*)(cast(ObjectG)entry).cPtr(No.Dup) : null);
   }
@@ -1589,7 +1589,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, gtk.cell_renderer.CellRenderer cell)
+  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path = null, gtk.tree_view_column.TreeViewColumn column = null, gtk.cell_renderer.CellRenderer cell = null)
   {
     gtk_tree_view_set_tooltip_cell(cast(GtkTreeView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null);
   }

@@ -50,7 +50,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     return _retval;
   }
 
-  override arrowdataset.file_system_dataset.FileSystemDataset finish(arrowdataset.finish_options.FinishOptions options)
+  override arrowdataset.file_system_dataset.FileSystemDataset finish(arrowdataset.finish_options.FinishOptions options = null)
   {
     GADatasetFileSystemDataset* _cretval;
     GError *_err;

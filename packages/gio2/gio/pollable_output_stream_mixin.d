@@ -52,7 +52,7 @@ template PollableOutputStreamT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #GSource
    */
-  override glib.source.Source createSource(gio.cancellable.Cancellable cancellable)
+  override glib.source.Source createSource(gio.cancellable.Cancellable cancellable = null)
   {
     GSource* _cretval;
     _cretval = g_pollable_output_stream_create_source(cast(GPollableOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
@@ -105,7 +105,7 @@ template PollableOutputStreamT()
    * Returns: the number of bytes written, or -1 on error $(LPAREN)including
    *   %G_IO_ERROR_WOULD_BLOCK$(RPAREN).
    */
-  override ptrdiff_t writeNonblocking(ubyte[] buffer, gio.cancellable.Cancellable cancellable)
+  override ptrdiff_t writeNonblocking(ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     size_t _count;
@@ -147,7 +147,7 @@ template PollableOutputStreamT()
    *   %G_POLLABLE_RETURN_FAILED if there was an error in which case error will
    *   be set.
    */
-  override gio.types.PollableReturn writevNonblocking(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable)
+  override gio.types.PollableReturn writevNonblocking(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
     GPollableReturn _cretval;
     size_t _nVectors;

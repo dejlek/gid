@@ -49,7 +49,7 @@ template ActionT()
    * Params:
    *   parameter = the parameter to the activation
    */
-  override void activate(glib.variant.VariantG parameter)
+  override void activate(glib.variant.VariantG parameter = null)
   {
     g_action_activate(cast(GAction*)cPtr, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null);
   }

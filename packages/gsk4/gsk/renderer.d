@@ -98,7 +98,7 @@ class Renderer : gobject.object.ObjectG
    *   surface = the `GdkSurface` renderer will be used on
    * Returns: Whether the renderer was successfully realized
    */
-  bool realize(gdk.surface.Surface surface)
+  bool realize(gdk.surface.Surface surface = null)
   {
     bool _retval;
     GError *_err;
@@ -142,7 +142,7 @@ class Renderer : gobject.object.ObjectG
    *   region = the `cairo_region_t` that must be redrawn or %NULL
    *     for the whole window
    */
-  void render(gsk.render_node.RenderNode root, cairo.region.Region region)
+  void render(gsk.render_node.RenderNode root, cairo.region.Region region = null)
   {
     gsk_renderer_render(cast(GskRenderer*)cPtr, root ? cast(GskRenderNode*)root.cPtr(No.Dup) : null, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
   }
@@ -159,7 +159,7 @@ class Renderer : gobject.object.ObjectG
    *   viewport = the section to draw or %NULL to use root's bounds
    * Returns: a `GdkTexture` with the rendered contents of root.
    */
-  gdk.texture.Texture renderTexture(gsk.render_node.RenderNode root, graphene.rect.Rect viewport)
+  gdk.texture.Texture renderTexture(gsk.render_node.RenderNode root, graphene.rect.Rect viewport = null)
   {
     GdkTexture* _cretval;
     _cretval = gsk_renderer_render_texture(cast(GskRenderer*)cPtr, root ? cast(GskRenderNode*)root.cPtr(No.Dup) : null, viewport ? cast(const(graphene_rect_t)*)viewport.cPtr(No.Dup) : null);

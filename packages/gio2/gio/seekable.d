@@ -64,7 +64,7 @@ interface Seekable
    *   has occurred, this function will return %FALSE and set error
    *   appropriately if present.
    */
-  bool seek(long offset, glib.types.SeekType type, gio.cancellable.Cancellable cancellable);
+  bool seek(long offset, glib.types.SeekType type, gio.cancellable.Cancellable cancellable = null);
 
   /**
    * Tells the current position within the stream.
@@ -89,5 +89,5 @@ interface Seekable
    *   has occurred, this function will return %FALSE and set error
    *   appropriately if present.
    */
-  bool truncate(long offset, gio.cancellable.Cancellable cancellable);
+  bool truncate(long offset, gio.cancellable.Cancellable cancellable = null);
 }

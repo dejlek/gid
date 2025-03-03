@@ -26,7 +26,7 @@ class SetLookupOptions : arrow.function_options.FunctionOptions
     return getType();
   }
 
-  this(arrow.datum.Datum valueSet)
+  this(arrow.datum.Datum valueSet = null)
   {
     GArrowSetLookupOptions* _cretval;
     _cretval = garrow_set_lookup_options_new(valueSet ? cast(GArrowDatum*)valueSet.cPtr(No.Dup) : null);

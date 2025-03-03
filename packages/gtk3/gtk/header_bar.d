@@ -171,7 +171,7 @@ class HeaderBar : gtk.container.Container
    * Params:
    *   titleWidget = a custom widget to use for a title
    */
-  void setCustomTitle(gtk.widget.Widget titleWidget)
+  void setCustomTitle(gtk.widget.Widget titleWidget = null)
   {
     gtk_header_bar_set_custom_title(cast(GtkHeaderBar*)cPtr, titleWidget ? cast(GtkWidget*)titleWidget.cPtr(No.Dup) : null);
   }
@@ -195,7 +195,7 @@ class HeaderBar : gtk.container.Container
    *   layout = a decoration layout, or %NULL to
    *     unset the layout
    */
-  void setDecorationLayout(string layout)
+  void setDecorationLayout(string layout = null)
   {
     const(char)* _layout = layout.toCString(No.Alloc);
     gtk_header_bar_set_decoration_layout(cast(GtkHeaderBar*)cPtr, _layout);
@@ -232,7 +232,7 @@ class HeaderBar : gtk.container.Container
    * Params:
    *   subtitle = a subtitle, or %NULL
    */
-  void setSubtitle(string subtitle)
+  void setSubtitle(string subtitle = null)
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
     gtk_header_bar_set_subtitle(cast(GtkHeaderBar*)cPtr, _subtitle);
@@ -245,7 +245,7 @@ class HeaderBar : gtk.container.Container
    * Params:
    *   title = a title, or %NULL
    */
-  void setTitle(string title)
+  void setTitle(string title = null)
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_header_bar_set_title(cast(GtkHeaderBar*)cPtr, _title);

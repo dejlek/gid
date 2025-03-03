@@ -334,7 +334,7 @@ void headerFreeParamList(string[string] paramList)
  *   name = a parameter name
  *   value = a parameter value, or %NULL
  */
-void headerGStringAppendParam(glib.string_.String string_, string name, string value)
+void headerGStringAppendParam(glib.string_.String string_, string name, string value = null)
 {
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);

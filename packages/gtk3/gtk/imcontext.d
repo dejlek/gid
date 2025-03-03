@@ -227,7 +227,7 @@ class IMContext : gobject.object.ObjectG
    *   window = the client window. This may be %NULL to indicate
    *     that the previous client window no longer exists.
    */
-  void setClientWindow(gdk.window.Window window)
+  void setClientWindow(gdk.window.Window window = null)
   {
     gtk_im_context_set_client_window(cast(GtkIMContext*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
   }

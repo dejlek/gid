@@ -41,7 +41,7 @@ class Tag : gtk.text_tag.TextTag
    *   name = tag name, or %NULL.
    * Returns: a new `GtkSourceTag`.
    */
-  this(string name)
+  this(string name = null)
   {
     GtkTextTag* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

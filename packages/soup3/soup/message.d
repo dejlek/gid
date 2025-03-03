@@ -615,7 +615,7 @@ class Message : gobject.object.ObjectG
    *   contentType = MIME Content-Type of the body, or %NULL if unknown
    *   bytes = a #GBytes with the request body data
    */
-  void setRequestBodyFromBytes(string contentType, glib.bytes.Bytes bytes)
+  void setRequestBodyFromBytes(string contentType = null, glib.bytes.Bytes bytes = null)
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     soup_message_set_request_body_from_bytes(cast(SoupMessage*)cPtr, _contentType, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
@@ -632,7 +632,7 @@ class Message : gobject.object.ObjectG
    * Params:
    *   siteForCookies = the #GUri for the msg's site for cookies
    */
-  void setSiteForCookies(glib.uri.Uri siteForCookies)
+  void setSiteForCookies(glib.uri.Uri siteForCookies = null)
   {
     soup_message_set_site_for_cookies(cast(SoupMessage*)cPtr, siteForCookies ? cast(GUri*)siteForCookies.cPtr(No.Dup) : null);
   }
@@ -648,7 +648,7 @@ class Message : gobject.object.ObjectG
    * Params:
    *   certificate = the #GTlsCertificate to set, or %NULL
    */
-  void setTlsClientCertificate(gio.tls_certificate.TlsCertificate certificate)
+  void setTlsClientCertificate(gio.tls_certificate.TlsCertificate certificate = null)
   {
     soup_message_set_tls_client_certificate(cast(SoupMessage*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
   }

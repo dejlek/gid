@@ -52,7 +52,7 @@ class AlertDialog : gobject.object.ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void choose(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void choose(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -248,7 +248,7 @@ class AlertDialog : gobject.object.ObjectG
    * Params:
    *   parent = the parent `GtkWindow`
    */
-  void show(gtk.window.Window parent)
+  void show(gtk.window.Window parent = null)
   {
     gtk_alert_dialog_show(cast(GtkAlertDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }

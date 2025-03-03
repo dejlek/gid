@@ -409,7 +409,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
    *   filterFunc = callback that
    *     lets you filter which children to show
    */
-  void setFilterFunc(gtk.types.FlowBoxFilterFunc filterFunc)
+  void setFilterFunc(gtk.types.FlowBoxFilterFunc filterFunc = null)
   {
     extern(C) bool _filterFuncCallback(GtkFlowBoxChild* child, void* userData)
     {
@@ -514,7 +514,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
    * Params:
    *   sortFunc = the sort function
    */
-  void setSortFunc(gtk.types.FlowBoxSortFunc sortFunc)
+  void setSortFunc(gtk.types.FlowBoxSortFunc sortFunc = null)
   {
     extern(C) int _sortFuncCallback(GtkFlowBoxChild* child1, GtkFlowBoxChild* child2, void* userData)
     {

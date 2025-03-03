@@ -45,7 +45,7 @@ class ToggleAction : gtk.action.Action
    *     the action, or %NULL
    * Returns: a new #GtkToggleAction
    */
-  this(string name, string label, string tooltip, string stockId)
+  this(string name, string label = null, string tooltip = null, string stockId = null)
   {
     GtkToggleAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

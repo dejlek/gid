@@ -121,7 +121,7 @@ class Server : gobject.object.ObjectG
    *   accepted or any other error occurred $(LPAREN)in which case error will be
    *   set$(RPAREN).
    */
-  bool acceptIostream(gio.iostream.IOStream stream, gio.socket_address.SocketAddress localAddr, gio.socket_address.SocketAddress remoteAddr)
+  bool acceptIostream(gio.iostream.IOStream stream, gio.socket_address.SocketAddress localAddr = null, gio.socket_address.SocketAddress remoteAddr = null)
   {
     bool _retval;
     GError *_err;

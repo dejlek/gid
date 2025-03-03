@@ -102,7 +102,7 @@ template ToplevelT()
    *   event = the `GdkEvent` that is triggering the inhibit
    *     request, or %NULL if none is available
    */
-  override void inhibitSystemShortcuts(gdk.event.Event event)
+  override void inhibitSystemShortcuts(gdk.event.Event event = null)
   {
     gdk_toplevel_inhibit_system_shortcuts(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
   }

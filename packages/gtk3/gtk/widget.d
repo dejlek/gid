@@ -737,7 +737,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    *   text = text to set on the layout $(LPAREN)can be %NULL$(RPAREN)
    * Returns: the new #PangoLayout
    */
-  pango.layout.Layout createPangoLayout(string text)
+  pango.layout.Layout createPangoLayout(string text = null)
   {
     PangoLayout* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -826,7 +826,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
    * Deprecated: Use [gtk.widget.Widget.dragBeginWithCoordinates] instead
    */
-  gdk.drag_context.DragContext dragBegin(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event)
+  gdk.drag_context.DragContext dragBegin(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event = null)
   {
     GdkDragContext* _cretval;
     _cretval = gtk_drag_begin(cast(GtkWidget*)cPtr, targets ? cast(GtkTargetList*)targets.cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event.cPtr : null);
@@ -947,7 +947,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    * Returns: first target that the source offers
    *   and the dest can accept, or %GDK_NONE
    */
-  gdk.atom.Atom dragDestFindTarget(gdk.drag_context.DragContext context, gtk.target_list.TargetList targetList)
+  gdk.atom.Atom dragDestFindTarget(gdk.drag_context.DragContext context, gtk.target_list.TargetList targetList = null)
   {
     GdkAtom _cretval;
     _cretval = gtk_drag_dest_find_target(cast(GtkWidget*)cPtr, context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, targetList ? cast(GtkTargetList*)targetList.cPtr(No.Dup) : null);
@@ -1060,7 +1060,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    * Params:
    *   targetList = list of droppable targets, or %NULL for none
    */
-  void dragDestSetTargetList(gtk.target_list.TargetList targetList)
+  void dragDestSetTargetList(gtk.target_list.TargetList targetList = null)
   {
     gtk_drag_dest_set_target_list(cast(GtkWidget*)cPtr, targetList ? cast(GtkTargetList*)targetList.cPtr(No.Dup) : null);
   }
@@ -1247,7 +1247,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    * Params:
    *   targetList = list of draggable targets, or %NULL for none
    */
-  void dragSourceSetTargetList(gtk.target_list.TargetList targetList)
+  void dragSourceSetTargetList(gtk.target_list.TargetList targetList = null)
   {
     gtk_drag_source_set_target_list(cast(GtkWidget*)cPtr, targetList ? cast(GtkTargetList*)targetList.cPtr(No.Dup) : null);
   }
@@ -2799,7 +2799,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    * Params:
    *   region = shape to be added, or %NULL to remove an existing shape
    */
-  void inputShapeCombineRegion(cairo.region.Region region)
+  void inputShapeCombineRegion(cairo.region.Region region = null)
   {
     gtk_widget_input_shape_combine_region(cast(GtkWidget*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
@@ -2815,7 +2815,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    *   name = the prefix for actions in group
    *   group = a #GActionGroup, or %NULL
    */
-  void insertActionGroup(string name, gio.action_group.ActionGroup group)
+  void insertActionGroup(string name, gio.action_group.ActionGroup group = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_insert_action_group(cast(GtkWidget*)cPtr, _name, group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null);
@@ -3084,7 +3084,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
    * Deprecated: Use [gtk.widget.Widget.overrideBackgroundColor] instead
    */
-  void modifyBase(gtk.types.StateType state, gdk.color.Color color)
+  void modifyBase(gtk.types.StateType state, gdk.color.Color color = null)
   {
     gtk_widget_modify_base(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
@@ -3110,7 +3110,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
    * Deprecated: Use [gtk.widget.Widget.overrideBackgroundColor] instead
    */
-  void modifyBg(gtk.types.StateType state, gdk.color.Color color)
+  void modifyBg(gtk.types.StateType state, gdk.color.Color color = null)
   {
     gtk_widget_modify_bg(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
@@ -3131,7 +3131,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
    * Deprecated: Use [gtk.widget.Widget.overrideCursor] instead.
    */
-  void modifyCursor(gdk.color.Color primary, gdk.color.Color secondary)
+  void modifyCursor(gdk.color.Color primary = null, gdk.color.Color secondary = null)
   {
     gtk_widget_modify_cursor(cast(GtkWidget*)cPtr, primary ? cast(const(GdkColor)*)primary.cPtr(No.Dup) : null, secondary ? cast(const(GdkColor)*)secondary.cPtr(No.Dup) : null);
   }
@@ -3148,7 +3148,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
    * Deprecated: Use [gtk.widget.Widget.overrideColor] instead
    */
-  void modifyFg(gtk.types.StateType state, gdk.color.Color color)
+  void modifyFg(gtk.types.StateType state, gdk.color.Color color = null)
   {
     gtk_widget_modify_fg(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
@@ -3163,7 +3163,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
    * Deprecated: Use [gtk.widget.Widget.overrideFont] instead
    */
-  void modifyFont(pango.font_description.FontDescription fontDesc)
+  void modifyFont(pango.font_description.FontDescription fontDesc = null)
   {
     gtk_widget_modify_font(cast(GtkWidget*)cPtr, fontDesc ? cast(PangoFontDescription*)fontDesc.cPtr(No.Dup) : null);
   }
@@ -3210,7 +3210,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
    * Deprecated: Use [gtk.widget.Widget.overrideColor] instead
    */
-  void modifyText(gtk.types.StateType state, gdk.color.Color color)
+  void modifyText(gtk.types.StateType state, gdk.color.Color color = null)
   {
     gtk_widget_modify_text(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
@@ -3231,7 +3231,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    *   drawing of a widget through the #GtkWidget::draw signal, and use Cairo to
    *   draw a specific color, regardless of the CSS style.
    */
-  void overrideBackgroundColor(gtk.types.StateFlags state, gdk.rgba.RGBA color)
+  void overrideBackgroundColor(gtk.types.StateFlags state, gdk.rgba.RGBA color = null)
   {
     gtk_widget_override_background_color(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
   }
@@ -3264,7 +3264,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
    * Deprecated: Use a custom style provider and style classes instead
    */
-  void overrideColor(gtk.types.StateFlags state, gdk.rgba.RGBA color)
+  void overrideColor(gtk.types.StateFlags state, gdk.rgba.RGBA color = null)
   {
     gtk_widget_override_color(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
   }
@@ -3289,7 +3289,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    *   and secondary cursors you should use a custom CSS style, through an
    *   application-specific #GtkStyleProvider and a CSS style class.
    */
-  void overrideCursor(gdk.rgba.RGBA cursor, gdk.rgba.RGBA secondaryCursor)
+  void overrideCursor(gdk.rgba.RGBA cursor = null, gdk.rgba.RGBA secondaryCursor = null)
   {
     gtk_widget_override_cursor(cast(GtkWidget*)cPtr, cursor ? cast(const(GdkRGBA)*)cursor.cPtr(No.Dup) : null, secondaryCursor ? cast(const(GdkRGBA)*)secondaryCursor.cPtr(No.Dup) : null);
   }
@@ -3306,7 +3306,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    *   you should use a custom CSS style, through an application-specific
    *   #GtkStyleProvider and a CSS style class.
    */
-  void overrideFont(pango.font_description.FontDescription fontDesc)
+  void overrideFont(pango.font_description.FontDescription fontDesc = null)
   {
     gtk_widget_override_font(cast(GtkWidget*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.Dup) : null);
   }
@@ -3327,7 +3327,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    *   you should use a custom CSS style, through an application-specific
    *   #GtkStyleProvider and a CSS style class.
    */
-  void overrideSymbolicColor(string name, gdk.rgba.RGBA color)
+  void overrideSymbolicColor(string name, gdk.rgba.RGBA color = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_override_symbolic_color(cast(GtkWidget*)cPtr, _name, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
@@ -3587,7 +3587,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
    * Deprecated: Use [gtk.widget.Widget.renderIconPixbuf] instead.
    */
-  gdkpixbuf.pixbuf.Pixbuf renderIcon(string stockId, gtk.types.IconSize size, string detail)
+  gdkpixbuf.pixbuf.Pixbuf renderIcon(string stockId, gtk.types.IconSize size, string detail = null)
   {
     PixbufC* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -3742,7 +3742,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    *   accelPath = path used to look up the accelerator
    *   accelGroup = a #GtkAccelGroup.
    */
-  void setAccelPath(string accelPath, gtk.accel_group.AccelGroup accelGroup)
+  void setAccelPath(string accelPath = null, gtk.accel_group.AccelGroup accelGroup = null)
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_widget_set_accel_path(cast(GtkWidget*)cPtr, _accelPath, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
@@ -3958,7 +3958,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    *   fontMap = a #PangoFontMap, or %NULL to unset any previously
    *     set font map
    */
-  void setFontMap(pango.font_map.FontMap fontMap)
+  void setFontMap(pango.font_map.FontMap fontMap = null)
   {
     gtk_widget_set_font_map(cast(GtkWidget*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.Dup) : null);
   }
@@ -3970,7 +3970,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    *   options = a #cairo_font_options_t, or %NULL to unset any
    *     previously set default font options.
    */
-  void setFontOptions(cairo.font_options.FontOptions options)
+  void setFontOptions(cairo.font_options.FontOptions options = null)
   {
     gtk_widget_set_font_options(cast(GtkWidget*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
   }
@@ -4376,7 +4376,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
    * Deprecated: Use #GtkStyleContext instead
    */
-  void setStyle(gtk.style.Style style)
+  void setStyle(gtk.style.Style style = null)
   {
     gtk_widget_set_style(cast(GtkWidget*)cPtr, style ? cast(GtkStyle*)style.cPtr(No.Dup) : null);
   }
@@ -4404,7 +4404,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    * Params:
    *   markup = the contents of the tooltip for widget, or %NULL
    */
-  void setTooltipMarkup(string markup)
+  void setTooltipMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_widget_set_tooltip_markup(cast(GtkWidget*)cPtr, _markup);
@@ -4418,7 +4418,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    * Params:
    *   text = the contents of the tooltip for widget
    */
-  void setTooltipText(string text)
+  void setTooltipText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_widget_set_tooltip_text(cast(GtkWidget*)cPtr, _text);
@@ -4433,7 +4433,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    * Params:
    *   customWindow = a #GtkWindow, or %NULL
    */
-  void setTooltipWindow(gtk.window.Window customWindow)
+  void setTooltipWindow(gtk.window.Window customWindow = null)
   {
     gtk_widget_set_tooltip_window(cast(GtkWidget*)cPtr, customWindow ? cast(GtkWindow*)customWindow.cPtr(No.Dup) : null);
   }
@@ -4498,7 +4498,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    * Params:
    *   visual = visual to be used or %NULL to unset a previous one
    */
-  void setVisual(gdk.visual.Visual visual)
+  void setVisual(gdk.visual.Visual visual = null)
   {
     gtk_widget_set_visual(cast(GtkWidget*)cPtr, visual ? cast(GdkVisual*)visual.cPtr(No.Dup) : null);
   }
@@ -4528,7 +4528,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
    * Params:
    *   region = shape to be added, or %NULL to remove an existing shape
    */
-  void shapeCombineRegion(cairo.region.Region region)
+  void shapeCombineRegion(cairo.region.Region region = null)
   {
     gtk_widget_shape_combine_region(cast(GtkWidget*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }

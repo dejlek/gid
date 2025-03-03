@@ -87,7 +87,7 @@ class ShortcutAction : gobject.object.ObjectG
    *   args = arguments to pass
    * Returns: %TRUE if this action was activated successfully
    */
-  bool activate(gtk.types.ShortcutActionFlags flags, gtk.widget.Widget widget, glib.variant.VariantG args)
+  bool activate(gtk.types.ShortcutActionFlags flags, gtk.widget.Widget widget, glib.variant.VariantG args = null)
   {
     bool _retval;
     _retval = gtk_shortcut_action_activate(cast(GtkShortcutAction*)cPtr, flags, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, args ? cast(VariantC*)args.cPtr(No.Dup) : null);

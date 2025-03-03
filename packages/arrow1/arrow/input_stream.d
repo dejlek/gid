@@ -61,7 +61,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     return _retval;
   }
 
-  arrow.record_batch.RecordBatch readRecordBatch(arrow.schema.Schema schema, arrow.read_options.ReadOptions options)
+  arrow.record_batch.RecordBatch readRecordBatch(arrow.schema.Schema schema, arrow.read_options.ReadOptions options = null)
   {
     GArrowRecordBatch* _cretval;
     GError *_err;

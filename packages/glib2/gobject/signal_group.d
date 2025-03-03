@@ -105,7 +105,7 @@ class SignalGroup : gobject.object.ObjectG
    *   target = The target instance used
    *     when connecting signals.
    */
-  void setTarget(gobject.object.ObjectG target)
+  void setTarget(gobject.object.ObjectG target = null)
   {
     g_signal_group_set_target(cast(GSignalGroup*)cPtr, target ? cast(ObjectC*)target.cPtr(No.Dup) : null);
   }
