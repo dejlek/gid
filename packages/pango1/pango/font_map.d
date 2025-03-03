@@ -154,7 +154,7 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
    * Returns: the newly allocated
    *   `PangoFontset` loaded, or %NULL if no font matched.
    */
-  pango.fontset.Fontset loadFontset(pango.context.Context context, pango.font_description.FontDescription desc, pango.language.PgLanguage language)
+  pango.fontset.Fontset loadFontset(pango.context.Context context, pango.font_description.FontDescription desc, pango.language.Language language)
   {
     PangoFontset* _cretval;
     _cretval = pango_font_map_load_fontset(cast(PangoFontMap*)cPtr, context ? cast(PangoContext*)context.cPtr(No.Dup) : null, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);

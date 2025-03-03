@@ -14,7 +14,7 @@ import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
-class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.ValueAtk
+class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.Value
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -33,5 +33,5 @@ class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.
     return getType();
   }
 
-  mixin ValueAtkT!();
+  mixin ValueT!();
 }

@@ -115,11 +115,11 @@ class FontDialogButton : gtk.widget.Widget
    * Returns the language that is used for font features.
    * Returns: the language
    */
-  pango.language.PgLanguage getLanguage()
+  pango.language.Language getLanguage()
   {
     PangoLanguage* _cretval;
     _cretval = gtk_font_dialog_button_get_language(cast(GtkFontDialogButton*)cPtr);
-    auto _retval = _cretval ? new pango.language.PgLanguage(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class FontDialogButton : gtk.widget.Widget
    * Params:
    *   language = the new language
    */
-  void setLanguage(pango.language.PgLanguage language)
+  void setLanguage(pango.language.Language language)
   {
     gtk_font_dialog_button_set_language(cast(GtkFontDialogButton*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
   }

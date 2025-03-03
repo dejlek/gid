@@ -36,9 +36,9 @@ class AttrLanguage
     return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrLanguage*)cPtr).attr);
   }
 
-  @property pango.language.PgLanguage value()
+  @property pango.language.Language value()
   {
-    return new pango.language.PgLanguage(cast(PangoLanguage*)(cast(PangoAttrLanguage*)cPtr).value);
+    return new pango.language.Language(cast(PangoLanguage*)(cast(PangoAttrLanguage*)cPtr).value);
   }
 
   /**
@@ -49,7 +49,7 @@ class AttrLanguage
    *   `PangoAttribute`, which should be freed with
    *   [pango.attribute.Attribute.destroy]
    */
-  static pango.attribute.Attribute new_(pango.language.PgLanguage language)
+  static pango.attribute.Attribute new_(pango.language.Language language)
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_language_new(language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);

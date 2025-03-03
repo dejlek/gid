@@ -191,7 +191,7 @@ bool passwordStoreFinish(gio.async_result.AsyncResult result)
  *   cancellable = optional cancellation object
  * Returns: whether the storage was successful or not
  */
-bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.ValueSecret value, gio.cancellable.Cancellable cancellable)
+bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable)
 {
   bool _retval;
   auto _attributes = gHashTableFromD!(string, string)(attributes);

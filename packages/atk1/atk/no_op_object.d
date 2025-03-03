@@ -38,7 +38,7 @@ import gobject.object;
  * accessible object is requested for an object type for which no
  * factory type is specified.
  */
-class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Component, atk.document.Document, atk.editable_text.EditableText, atk.hypertext.Hypertext, atk.image.Image, atk.selection.Selection, atk.table.Table, atk.table_cell.TableCell, atk.text.Text, atk.value.ValueAtk, atk.window.Window
+class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Component, atk.document.Document, atk.editable_text.EditableText, atk.hypertext.Hypertext, atk.image.Image, atk.selection.Selection, atk.table.Table, atk.table_cell.TableCell, atk.text.Text, atk.value.Value, atk.window.Window
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -67,7 +67,7 @@ class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Compon
   mixin TableT!();
   mixin TableCellT!();
   mixin TextT!();
-  mixin ValueAtkT!();
+  mixin ValueT!();
   mixin WindowT!();
   alias getDescription = atk.object.ObjectAtk.getDescription;
   alias getName = atk.object.ObjectAtk.getName;

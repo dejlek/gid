@@ -634,7 +634,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
    * Sets or unsets the `GtkApplication` associated with the window.
    * The application will be kept alive for at least as long as it has
-   * any windows associated with it $(LPAREN)see [gio.application.ApplicationGio.hold] for a way
+   * any windows associated with it $(LPAREN)see [gio.application.Application.hold] for a way
    * to keep it alive without windows$(RPAREN).
    * Normally, the connection between the application and the window will
    * remain until the window is destroyed, but you can explicitly remove

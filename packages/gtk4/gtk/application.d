@@ -30,7 +30,7 @@ import gtk.window;
  * ## Automatic resources
  * `GtkApplication` will automatically load menus from the `GtkBuilder`
  * resource located at "gtk/menus.ui", relative to the application's
- * resource base path $(LPAREN)see [gio.application.ApplicationGio.setResourceBasePath]$(RPAREN).
+ * resource base path $(LPAREN)see [gio.application.Application.setResourceBasePath]$(RPAREN).
  * The menu with the ID "menubar" is taken as the application's
  * menubar. Additional menus $(LPAREN)most interesting submenus$(RPAREN) can be named
  * and accessed via [gtk.application.Application.getMenuById] which allows for
@@ -70,7 +70,7 @@ import gtk.window;
  * [HowDoI: Using GtkApplication](https://wiki.gnome.org/HowDoI/GtkApplication),
  * [Getting Started with GTK: Basics](getting_started.html#basics)
  */
-class Application : gio.application.ApplicationGio
+class Application : gio.application.Application
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -100,7 +100,7 @@ class Application : gio.application.ApplicationGio
    * API.
    * Note that commandline arguments are not passed to funcGtk.init.
    * If `application_id` is not %NULL, then it must be valid. See
-   * `[gio.application.ApplicationGio.idIsValid]`.
+   * `[gio.application.Application.idIsValid]`.
    * If no application ID is given then some features $(LPAREN)most notably application
    * uniqueness$(RPAREN) will be disabled.
    * Params:

@@ -200,7 +200,7 @@ __gshared extern(C)
   int function(SecretService* service, GAsyncResult* result, GList** unlocked, GError** _err) c_secret_service_unlock_finish;
   int function(SecretService* service, GList* objects, GCancellable* cancellable, GList** unlocked, GError** _err) c_secret_service_unlock_sync;
 
-  // ValueSecret
+  // Value
   extern(C) GType function() c_secret_value_get_type;
   SecretValue* function(const(char)* secret, ptrdiff_t length, const(char)* contentType) c_secret_value_new;
   SecretValue* function(char* secretData, ptrdiff_t length, const(char)* contentType, GDestroyNotify destroy) c_secret_value_new_full;
@@ -435,7 +435,7 @@ alias secret_service_unlock_dbus_paths_sync = c_secret_service_unlock_dbus_paths
 alias secret_service_unlock_finish = c_secret_service_unlock_finish;
 alias secret_service_unlock_sync = c_secret_service_unlock_sync;
 
-// ValueSecret
+// Value
 alias secret_value_get_type = c_secret_value_get_type;
 alias secret_value_new = c_secret_value_new;
 alias secret_value_new_full = c_secret_value_new_full;
@@ -671,7 +671,7 @@ shared static this()
   gidLink(cast(void**)&secret_service_unlock_finish, "secret_service_unlock_finish", LIBS);
   gidLink(cast(void**)&secret_service_unlock_sync, "secret_service_unlock_sync", LIBS);
 
-  // ValueSecret
+  // Value
   gidLink(cast(void**)&secret_value_get_type, "secret_value_get_type", LIBS);
   gidLink(cast(void**)&secret_value_new, "secret_value_new", LIBS);
   gidLink(cast(void**)&secret_value_new_full, "secret_value_new_full", LIBS);

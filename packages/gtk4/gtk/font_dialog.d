@@ -223,7 +223,7 @@ class FontDialog : gobject.object.ObjectG
    * Returns: `TRUE` if a font was selected. Otherwise `FALSE` is returned
    *   and error is set
    */
-  bool chooseFontAndFeaturesFinish(gio.async_result.AsyncResult result, out pango.font_description.FontDescription fontDesc, out string fontFeatures, out pango.language.PgLanguage language)
+  bool chooseFontAndFeaturesFinish(gio.async_result.AsyncResult result, out pango.font_description.FontDescription fontDesc, out string fontFeatures, out pango.language.Language language)
   {
     bool _retval;
     PangoFontDescription* _fontDesc;
@@ -235,7 +235,7 @@ class FontDialog : gobject.object.ObjectG
       throw new ErrorG(_err);
     fontDesc = new pango.font_description.FontDescription(cast(void*)_fontDesc, Yes.Take);
     fontFeatures = _fontFeatures.fromCString(Yes.Free);
-    language = new pango.language.PgLanguage(cast(void*)_language, Yes.Take);
+    language = new pango.language.Language(cast(void*)_language, Yes.Take);
     return _retval;
   }
 
@@ -287,11 +287,11 @@ class FontDialog : gobject.object.ObjectG
    * Returns the language for which font features are applied.
    * Returns: the language for font features
    */
-  pango.language.PgLanguage getLanguage()
+  pango.language.Language getLanguage()
   {
     PangoLanguage* _cretval;
     _cretval = gtk_font_dialog_get_language(cast(GtkFontDialog*)cPtr);
-    auto _retval = _cretval ? new pango.language.PgLanguage(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class FontDialog : gobject.object.ObjectG
    * Params:
    *   language = the language for font features
    */
-  void setLanguage(pango.language.PgLanguage language)
+  void setLanguage(pango.language.Language language)
   {
     gtk_font_dialog_set_language(cast(GtkFontDialog*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
   }

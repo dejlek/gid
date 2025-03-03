@@ -39,7 +39,7 @@ class FontsetSimple : pango.fontset.Fontset
    *   language = a `PangoLanguage` tag
    * Returns: the newly allocated `PangoFontsetSimple`
    */
-  this(pango.language.PgLanguage language)
+  this(pango.language.Language language)
   {
     PangoFontsetSimple* _cretval;
     _cretval = pango_fontset_simple_new(language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);

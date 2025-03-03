@@ -79,9 +79,9 @@ interface Retrievable
    * Params:
    *   result = asynchronous result passed to callback
    * Returns: the secret value which should be
-   *   released with [secret.value.ValueSecret.unref], or %NULL
+   *   released with [secret.value.Value.unref], or %NULL
    */
-  secret.value.ValueSecret retrieveSecretFinish(gio.async_result.AsyncResult result);
+  secret.value.Value retrieveSecretFinish(gio.async_result.AsyncResult result);
 
   /**
    * Retrieve the secret value of this object synchronously.
@@ -92,7 +92,7 @@ interface Retrievable
    * Params:
    *   cancellable = optional cancellation object
    * Returns: the secret value which should be
-   *   released with [secret.value.ValueSecret.unref], or %NULL
+   *   released with [secret.value.Value.unref], or %NULL
    */
-  secret.value.ValueSecret retrieveSecretSync(gio.cancellable.Cancellable cancellable);
+  secret.value.Value retrieveSecretSync(gio.cancellable.Cancellable cancellable);
 }

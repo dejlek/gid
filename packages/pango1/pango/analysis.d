@@ -77,8 +77,8 @@ class Analysis
     (cast(PangoAnalysis*)cPtr).script = propval;
   }
 
-  @property pango.language.PgLanguage language()
+  @property pango.language.Language language()
   {
-    return new pango.language.PgLanguage(cast(PangoLanguage*)(cast(PangoAnalysis*)cPtr).language);
+    return new pango.language.Language(cast(PangoLanguage*)(cast(PangoAnalysis*)cPtr).language);
   }
 }

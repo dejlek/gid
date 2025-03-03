@@ -160,11 +160,11 @@ class Context : gobject.object.ObjectG
    * Retrieves the global language tag for the context.
    * Returns: the global language tag.
    */
-  pango.language.PgLanguage getLanguage()
+  pango.language.Language getLanguage()
   {
     PangoLanguage* _cretval;
     _cretval = pango_context_get_language(cast(PangoContext*)cPtr);
-    auto _retval = _cretval ? new pango.language.PgLanguage(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -201,12 +201,12 @@ class Context : gobject.object.ObjectG
    *   language = language tag used to determine which script to get
    *     the metrics for. %NULL means that the language tag from the context
    *     will be used. If no language tag is set on the context, metrics
-   *     for the default language $(LPAREN)as determined by [pango.language.PgLanguage.getDefault]
+   *     for the default language $(LPAREN)as determined by [pango.language.Language.getDefault]
    *     will be returned.
    * Returns: a `PangoFontMetrics` object. The caller must call
    *   [pango.font_metrics.FontMetrics.unref] when finished using the object.
    */
-  pango.font_metrics.FontMetrics getMetrics(pango.font_description.FontDescription desc, pango.language.PgLanguage language)
+  pango.font_metrics.FontMetrics getMetrics(pango.font_description.FontDescription desc, pango.language.Language language)
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_context_get_metrics(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
@@ -289,7 +289,7 @@ class Context : gobject.object.ObjectG
    * Returns: the newly allocated
    *   `PangoFontset` loaded, or %NULL if no font matched.
    */
-  pango.fontset.Fontset loadFontset(pango.font_description.FontDescription desc, pango.language.PgLanguage language)
+  pango.fontset.Fontset loadFontset(pango.font_description.FontDescription desc, pango.language.Language language)
   {
     PangoFontset* _cretval;
     _cretval = pango_context_load_fontset(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
@@ -365,11 +365,11 @@ class Context : gobject.object.ObjectG
   /**
    * Sets the global language tag for the context.
    * The default language for the locale of the running process
-   * can be found using [pango.language.PgLanguage.getDefault].
+   * can be found using [pango.language.Language.getDefault].
    * Params:
    *   language = the new language tag.
    */
-  void setLanguage(pango.language.PgLanguage language)
+  void setLanguage(pango.language.Language language)
   {
     pango_context_set_language(cast(PangoContext*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
   }

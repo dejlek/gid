@@ -736,16 +736,16 @@ uint getDebugFlags()
  * application.$(RPAREN) The default language is derived from the current
  * locale. It determines, for example, whether GTK+ uses the
  * right-to-left or left-to-right text direction.
- * This function is equivalent to [pango.language.PgLanguage.getDefault].
+ * This function is equivalent to [pango.language.Language.getDefault].
  * See that function for details.
  * Returns: the default language as a #PangoLanguage,
  *   must not be freed
  */
-pango.language.PgLanguage getDefaultLanguage()
+pango.language.Language getDefaultLanguage()
 {
   PangoLanguage* _cretval;
   _cretval = gtk_get_default_language();
-  auto _retval = _cretval ? new pango.language.PgLanguage(cast(void*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 

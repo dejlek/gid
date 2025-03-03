@@ -155,9 +155,9 @@ class TextAttributes : gobject.boxed.Boxed
     (cast(GtkTextAttributes*)cPtr).wrapMode = cast(GtkWrapMode)propval;
   }
 
-  @property pango.language.PgLanguage language()
+  @property pango.language.Language language()
   {
-    return new pango.language.PgLanguage(cast(PangoLanguage*)(cast(GtkTextAttributes*)cPtr).language);
+    return new pango.language.Language(cast(PangoLanguage*)(cast(GtkTextAttributes*)cPtr).language);
   }
 
   @property uint invisible()

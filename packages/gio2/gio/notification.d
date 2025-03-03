@@ -18,7 +18,7 @@ import gobject.object;
  * and even across system reboots.
  * Since the user may click on a notification while the application is
  * not running, applications using `GNotification` should be able to be
- * started as a D-Bus service, using [gio.application.ApplicationGio].
+ * started as a D-Bus service, using [gio.application.Application].
  * In order for `GNotification` to work, the application must have installed
  * a `.desktop` file. For example:
  * ```
@@ -39,14 +39,14 @@ import gobject.object;
  * Control Center’s ‘Notifications’ panel.
  * The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
  * where `org.gnome.TestApplication` is the ID passed to
- * [gio.application.ApplicationGio.new_].
+ * [gio.application.Application.new_].
  * User interaction with a notification $(LPAREN)either the default action, or
  * buttons$(RPAREN) must be associated with actions on the application $(LPAREN)ie:
  * `app.` actions$(RPAREN).  It is not possible to route user interaction
  * through the notification itself, because the object will not exist if
  * the application is autostarted as a result of a notification being
  * clicked.
- * A notification can be sent with [gio.application.ApplicationGio.sendNotification].
+ * A notification can be sent with [gio.application.Application.sendNotification].
  */
 class Notification : gobject.object.ObjectG
 {
@@ -70,7 +70,7 @@ class Notification : gobject.object.ObjectG
   /**
    * Creates a new #GNotification with title as its title.
    * After populating notification with more details, it can be sent to
-   * the desktop shell with [gio.application.ApplicationGio.sendNotification]. Changing
+   * the desktop shell with [gio.application.Application.sendNotification]. Changing
    * any properties after this call will not have any effect until
    * resending notification.
    * Params:

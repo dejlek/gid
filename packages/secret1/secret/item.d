@@ -79,7 +79,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  static void create(secret.collection.Collection collection, secret.schema.Schema schema, string[string] attributes, string label, secret.value.ValueSecret value, secret.types.ItemCreateFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  static void create(secret.collection.Collection collection, secret.schema.Schema schema, string[string] attributes, string label, secret.value.Value value, secret.types.ItemCreateFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -134,7 +134,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
    * Returns: the new item, which should be unreferenced
    *   with [gobject.object.ObjectG.unref]
    */
-  static secret.item.Item createSync(secret.collection.Collection collection, secret.schema.Schema schema, string[string] attributes, string label, secret.value.ValueSecret value, secret.types.ItemCreateFlags flags, gio.cancellable.Cancellable cancellable)
+  static secret.item.Item createSync(secret.collection.Collection collection, secret.schema.Schema schema, string[string] attributes, string label, secret.value.Value value, secret.types.ItemCreateFlags flags, gio.cancellable.Cancellable cancellable)
   {
     SecretItem* _cretval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -380,13 +380,13 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
    * return %NULL.
    * To load the secret call the [secret.item.Item.loadSecret] method.
    * Returns: the secret value which should be
-   *   released with [secret.value.ValueSecret.unref], or %NULL
+   *   released with [secret.value.Value.unref], or %NULL
    */
-  secret.value.ValueSecret getSecret()
+  secret.value.Value getSecret()
   {
     SecretValue* _cretval;
     _cretval = secret_item_get_secret(cast(SecretItem*)cPtr);
-    auto _retval = _cretval ? new secret.value.ValueSecret(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -617,7 +617,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void setSecret(secret.value.ValueSecret value, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void setSecret(secret.value.Value value, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -659,7 +659,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
    *   cancellable = optional cancellation object
    * Returns: whether the change was successful or not
    */
-  bool setSecretSync(secret.value.ValueSecret value, gio.cancellable.Cancellable cancellable)
+  bool setSecretSync(secret.value.Value value, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;

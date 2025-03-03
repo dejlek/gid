@@ -3,8 +3,6 @@
 //# Change package name to just vte3 rather than vte3-91
 //!info name vte3
 
-//!subdtype Align AlignVte
-
 //# Set basic parameters to out
 //!set record[EventContext].method[get_coordinates].parameters.parameter[x][direction] out
 //!set record[EventContext].method[get_coordinates].parameters.parameter[y][direction] out

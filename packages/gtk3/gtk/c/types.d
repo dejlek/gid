@@ -5374,7 +5374,7 @@ struct GtkAppChooserWidgetPrivate;
  * ## Automatic resources ## {#automatic-resources}
  * #GtkApplication will automatically load menus from the #GtkBuilder
  * resource located at "gtk/menus.ui", relative to the application's
- * resource base path $(LPAREN)see [gio.application.ApplicationGio.setResourceBasePath]$(RPAREN).  The
+ * resource base path $(LPAREN)see [gio.application.Application.setResourceBasePath]$(RPAREN).  The
  * menu with the ID "app-menu" is taken as the application's app menu
  * and the menu with the ID "menubar" is taken as the application's
  * menubar.  Additional menus $(LPAREN)most interesting submenus$(RPAREN) can be named

@@ -142,7 +142,7 @@ import gobject.value;
  * </para>
  * </refsect1>
  */
-interface ValueAtk
+interface Value
 {
 
   static GType getType()
@@ -156,7 +156,7 @@ interface ValueAtk
    * Params:
    *   value = a #GValue representing the current accessible value
 
-   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getValueAndText]
+   * Deprecated: Since 2.12. Use [atk.value.Value.getValueAndText]
    *   instead.
    */
   void getCurrentValue(out gobject.value.Value value);
@@ -176,7 +176,7 @@ interface ValueAtk
    * Params:
    *   value = a #GValue representing the maximum accessible value
 
-   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getRange] instead.
+   * Deprecated: Since 2.12. Use [atk.value.Value.getRange] instead.
    */
   void getMaximumValue(out gobject.value.Value value);
 
@@ -187,7 +187,7 @@ interface ValueAtk
    * Params:
    *   value = a #GValue representing the minimum increment by which the accessible value may be changed
 
-   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getIncrement] instead.
+   * Deprecated: Since 2.12. Use [atk.value.Value.getIncrement] instead.
    */
   void getMinimumIncrement(out gobject.value.Value value);
 
@@ -196,7 +196,7 @@ interface ValueAtk
    * Params:
    *   value = a #GValue representing the minimum accessible value
 
-   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getRange] instead.
+   * Deprecated: Since 2.12. Use [atk.value.Value.getRange] instead.
    */
   void getMinimumValue(out gobject.value.Value value);
 
@@ -234,7 +234,7 @@ interface ValueAtk
    *   value = a #GValue which is the desired new accessible value.
    * Returns: %TRUE if new value is successfully set, %FALSE otherwise.
 
-   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.setValue] instead.
+   * Deprecated: Since 2.12. Use [atk.value.Value.setValue] instead.
    */
   bool setCurrentValue(gobject.value.Value value);
 
@@ -245,7 +245,7 @@ interface ValueAtk
    * modified $(LPAREN)ie: a read-only component$(RPAREN). If the value changes due this
    * call, it is possible that the text could change, and will trigger
    * an #AtkValue::value-changed signal emission.
-   * Note for implementors: the deprecated [atk.value.ValueAtk.setCurrentValue]
+   * Note for implementors: the deprecated [atk.value.Value.setCurrentValue]
    * method returned TRUE or FALSE depending if the value was assigned
    * or not. In the practice several implementors were not able to
    * decide it, and returned TRUE in any case. For that reason it is not
@@ -272,10 +272,10 @@ interface ValueAtk
    *   value = the new value in a numerical form.
    *   text = human readable text alternative $(LPAREN)also called
    *     description$(RPAREN) of this object. NULL if not available.
-   *   valueAtk = the instance the signal is connected to
+   *   value = the instance the signal is connected to
    */
-  alias ValueChangedCallbackDlg = void delegate(double value, string text, atk.value.ValueAtk valueAtk);
-  alias ValueChangedCallbackFunc = void function(double value, string text, atk.value.ValueAtk valueAtk);
+  alias ValueChangedCallbackDlg = void delegate(double value, string text, atk.value.Value value);
+  alias ValueChangedCallbackFunc = void function(double value, string text, atk.value.Value value);
 
   /**
    * Connect to ValueChanged signal.

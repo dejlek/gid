@@ -2572,6 +2572,14 @@ struct PangoItem
 }
 
 /**
+ * The `PangoLanguage` structure is used to
+ * represent a language.
+ * `PangoLanguage` pointers can be efficiently
+ * copied and compared with each other.
+ */
+struct PangoLanguage;
+
+/**
  * A `PangoLayout` structure represents an entire paragraph of text.
  * While complete access to the layout capabilities of Pango is provided
  * using the detailed interfaces for itemization and shaping, using
@@ -2810,14 +2818,6 @@ struct PangoMatrix
    */
   double y0;
 }
-
-/**
- * The `PangoLanguage` structure is used to
- * represent a language.
- * `PangoLanguage` pointers can be efficiently
- * copied and compared with each other.
- */
-struct PangoLanguage;
 
 /**
  * The `PangoRectangle` structure represents a rectangle.

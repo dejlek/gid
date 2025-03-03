@@ -16,7 +16,7 @@ import gtk.c.types;
 import gtk.entry_accessible;
 import gtk.types;
 
-class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.ValueAtk
+class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Value
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -35,5 +35,5 @@ class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Val
     return getType();
   }
 
-  mixin ValueAtkT!();
+  mixin ValueT!();
 }

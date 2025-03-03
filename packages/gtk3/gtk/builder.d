@@ -534,7 +534,7 @@ class Builder : gobject.object.ObjectG
    * The #GtkApplication is used for creating action proxies as requested
    * from XML that the builder is loading.
    * By default, the builder uses the default application: the one from
-   * [gio.application.ApplicationGio.getDefault]. If you want to use another application
+   * [gio.application.Application.getDefault]. If you want to use another application
    * for constructing proxies, use [gtk.builder.Builder.setApplication].
    * Returns: the application being used by the builder,
    *   or %NULL

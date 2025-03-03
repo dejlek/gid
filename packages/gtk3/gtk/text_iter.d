@@ -991,11 +991,11 @@ class TextIter : gobject.boxed.Boxed
    * [gtk.global.getDefaultLanguage].
    * Returns: language in effect at iter
    */
-  pango.language.PgLanguage getLanguage()
+  pango.language.Language getLanguage()
   {
     PangoLanguage* _cretval;
     _cretval = gtk_text_iter_get_language(cast(const(GtkTextIter)*)cPtr);
-    auto _retval = _cretval ? new pango.language.PgLanguage(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

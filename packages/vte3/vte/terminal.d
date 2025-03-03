@@ -709,11 +709,11 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     return _retval;
   }
 
-  vte.types.AlignVte getXalign()
+  vte.types.Align getXalign()
   {
     VteAlign _cretval;
     _cretval = vte_terminal_get_xalign(cast(VteTerminal*)cPtr);
-    vte.types.AlignVte _retval = cast(vte.types.AlignVte)_cretval;
+    vte.types.Align _retval = cast(vte.types.Align)_cretval;
     return _retval;
   }
 
@@ -724,11 +724,11 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     return _retval;
   }
 
-  vte.types.AlignVte getYalign()
+  vte.types.Align getYalign()
   {
     VteAlign _cretval;
     _cretval = vte_terminal_get_yalign(cast(VteTerminal*)cPtr);
-    vte.types.AlignVte _retval = cast(vte.types.AlignVte)_cretval;
+    vte.types.Align _retval = cast(vte.types.Align)_cretval;
     return _retval;
   }
 
@@ -1518,7 +1518,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   align_ = alignment value from #VteAlign
    */
-  void setXalign(vte.types.AlignVte align_)
+  void setXalign(vte.types.Align align_)
   {
     vte_terminal_set_xalign(cast(VteTerminal*)cPtr, align_);
   }
@@ -1540,7 +1540,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   align_ = alignment value from #VteAlign
    */
-  void setYalign(vte.types.AlignVte align_)
+  void setYalign(vte.types.Align align_)
   {
     vte_terminal_set_yalign(cast(VteTerminal*)cPtr, align_);
   }

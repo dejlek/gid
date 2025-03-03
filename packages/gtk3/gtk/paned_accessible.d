@@ -10,7 +10,7 @@ import gtk.c.types;
 import gtk.container_accessible;
 import gtk.types;
 
-class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.ValueAtk
+class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.Value
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,5 +29,5 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
     return getType();
   }
 
-  mixin ValueAtkT!();
+  mixin ValueT!();
 }

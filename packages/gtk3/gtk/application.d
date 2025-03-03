@@ -39,7 +39,7 @@ import gtk.window;
  * ## Automatic resources ## {#automatic-resources}
  * #GtkApplication will automatically load menus from the #GtkBuilder
  * resource located at "gtk/menus.ui", relative to the application's
- * resource base path $(LPAREN)see [gio.application.ApplicationGio.setResourceBasePath]$(RPAREN).  The
+ * resource base path $(LPAREN)see [gio.application.Application.setResourceBasePath]$(RPAREN).  The
  * menu with the ID "app-menu" is taken as the application's app menu
  * and the menu with the ID "menubar" is taken as the application's
  * menubar.  Additional menus $(LPAREN)most interesting submenus$(RPAREN) can be named
@@ -81,7 +81,7 @@ import gtk.window;
  * [HowDoI: Using GtkApplication](https://wiki.gnome.org/HowDoI/GtkApplication),
  * [Getting Started with GTK+: Basics](https://developer.gnome.org/gtk3/stable/gtk-getting-started.html#id-1.2.3.3)
  */
-class Application : gio.application.ApplicationGio
+class Application : gio.application.Application
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -116,7 +116,7 @@ class Application : gio.application.ApplicationGio
    * you can explicitly call [gtk.global.init_] before creating the application
    * instance.
    * If non-%NULL, the application ID must be valid.  See
-   * [gio.application.ApplicationGio.idIsValid].
+   * [gio.application.Application.idIsValid].
    * If no application ID is given then some features $(LPAREN)most notably application
    * uniqueness$(RPAREN) will be disabled. A null application ID is only allowed with
    * GTK+ 3.6 or later.

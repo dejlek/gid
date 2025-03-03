@@ -29,8 +29,8 @@ import gobject.object;
  * this class outside of a higher level framework.
  * `GApplication` provides convenient life-cycle management by maintaining
  * a "use count" for the primary application instance. The use count can
- * be changed using [gio.application.ApplicationGio.hold] and
- * [gio.application.ApplicationGio.release]. If it drops to zero, the application
+ * be changed using [gio.application.Application.hold] and
+ * [gio.application.Application.release]. If it drops to zero, the application
  * exits. Higher-level classes such as `GtkApplication` employ the use count
  * to ensure that the application stays alive as long as it has any opened
  * windows.
@@ -51,18 +51,18 @@ import gobject.object;
  * if it is the primary instance. Instead, the main$(LPAREN)$(RPAREN) function of a
  * `GApplication` should do very little more than instantiating the
  * application instance, possibly connecting signal handlers, then
- * calling [gio.application.ApplicationGio.run]. All checks for uniqueness are done
+ * calling [gio.application.Application.run]. All checks for uniqueness are done
  * internally. If the application is the primary instance then the
  * startup signal is emitted and the mainloop runs. If the application
  * is not the primary instance then a signal is sent to the primary
- * instance and [gio.application.ApplicationGio.run] promptly returns. See the code
+ * instance and [gio.application.Application.run] promptly returns. See the code
  * examples below.
  * If used, the expected form of an application identifier is the
  * same as that of a
  * [D-Bus well-known bus name](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus).
  * Examples include: `com.example.MyApp`, `org.example.internal_apps.Calculator`,
  * `org._7_zip.Archiver`.
- * For details on valid application identifiers, see [gio.application.ApplicationGio.idIsValid].
+ * For details on valid application identifiers, see [gio.application.Application.idIsValid].
  * On Linux, the application identifier is claimed as a well-known bus name
  * on the user's session bus. This means that the uniqueness of your
  * application is scoped to the current session. It also means that your
@@ -73,7 +73,7 @@ import gobject.object;
  * $(LPAREN)even if a main loop is not running$(RPAREN). For this reason, you must ensure that
  * any object paths that you wish to register are registered before #GApplication
  * attempts to acquire the bus name of your application $(LPAREN)which happens in
- * [gio.application.ApplicationGio.register]$(RPAREN). Unfortunately, this means that you cannot
+ * [gio.application.Application.register]$(RPAREN). Unfortunately, this means that you cannot
  * use property@Gio.Application:is-remote to decide if you want to register
  * object paths.
  * `GApplication` also implements the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap]
@@ -92,7 +92,7 @@ import gobject.object;
  * - via 'Open' $(LPAREN)i.e. opening some files$(RPAREN)
  * - by handling a command-line
  * - via activating an action
- * The [gio.application.ApplicationGio.startup] signal lets you handle the application
+ * The [gio.application.Application.startup] signal lets you handle the application
  * initialization for all of these in a single place.
  * Regardless of which of these entry points is used to start the
  * application, `GApplication` passes some ‘platform data’ from the
@@ -125,7 +125,7 @@ import gobject.object;
  * For an example of using extra D-Bus hooks with `GApplication`, see
  * [gapplication-example-dbushooks.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-dbushooks.c).
  */
-class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.action_map.ActionMap
+class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.action_map.ActionMap
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -150,7 +150,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
   /**
    * Creates a new #GApplication instance.
    * If non-%NULL, the application id must be valid.  See
-   * [gio.application.ApplicationGio.idIsValid].
+   * [gio.application.Application.idIsValid].
    * If no application ID is given then some features of #GApplication
    * $(LPAREN)most notably application uniqueness$(RPAREN) will be disabled.
    * Params:
@@ -170,22 +170,22 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * Returns the default #GApplication instance for this process.
    * Normally there is only one #GApplication per process and it becomes
    * the default when it is created.  You can exercise more control over
-   * this by using [gio.application.ApplicationGio.setDefault].
+   * this by using [gio.application.Application.setDefault].
    * If there is no default application then %NULL is returned.
    * Returns: the default application for this process, or %NULL
    */
-  static gio.application.ApplicationGio getDefault()
+  static gio.application.Application getDefault()
   {
     GApplication* _cretval;
     _cretval = g_application_get_default();
-    auto _retval = ObjectG.getDObject!(gio.application.ApplicationGio)(cast(GApplication*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.application.Application)(cast(GApplication*)_cretval, No.Take);
     return _retval;
   }
 
   /**
    * Checks if application_id is a valid application identifier.
-   * A valid ID is required for calls to [gio.application.ApplicationGio.new_] and
-   * [gio.application.ApplicationGio.setApplicationId].
+   * A valid ID is required for calls to [gio.application.Application.new_] and
+   * [gio.application.Application.setApplicationId].
    * Application identifiers follow the same format as
    * [D-Bus well-known bus names](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus).
    * For convenience, the restrictions on application identifiers are
@@ -244,13 +244,13 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
   /**
    * Add an option to be handled by application.
    * Calling this function is the equivalent of calling
-   * [gio.application.ApplicationGio.addMainOptionEntries] with a single #GOptionEntry
+   * [gio.application.Application.addMainOptionEntries] with a single #GOptionEntry
    * that has its arg_data member set to %NULL.
    * The parsed arguments will be packed into a #GVariantDict which
    * is passed to #GApplication::handle-local-options. If
    * %G_APPLICATION_HANDLES_COMMAND_LINE is set, then it will also
    * be sent to the primary instance. See
-   * [gio.application.ApplicationGio.addMainOptionEntries] for more details.
+   * [gio.application.Application.addMainOptionEntries] for more details.
    * See #GOptionEntry for more documentation of the arguments.
    * Params:
    *   longName = the long name of an option used to specify it in a commandline
@@ -332,7 +332,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
   /**
    * Adds a #GOptionGroup to the commandline handling of application.
    * This function is comparable to [glib.option_context.OptionContext.addGroup].
-   * Unlike [gio.application.ApplicationGio.addMainOptionEntries], this function does
+   * Unlike [gio.application.Application.addMainOptionEntries], this function does
    * not deal with %NULL arg_data and never transmits options to the
    * primary instance.
    * The reason for that is because, by the time the options arrive at the
@@ -359,7 +359,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
   }
 
   /**
-   * Marks application as busy $(LPAREN)see [gio.application.ApplicationGio.markBusy]$(RPAREN) while
+   * Marks application as busy $(LPAREN)see [gio.application.Application.markBusy]$(RPAREN) while
    * property on object is %TRUE.
    * The binding holds a reference to application while it is active, but
    * not to object. Instead, the binding is destroyed when object is
@@ -396,7 +396,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * %NULL.  This includes the situation where the D-Bus backend would
    * normally be in use but we were unable to connect to the bus.
    * This function must not be called before the application has been
-   * registered.  See [gio.application.ApplicationGio.getIsRegistered].
+   * registered.  See [gio.application.Application.getIsRegistered].
    * Returns: a #GDBusConnection, or %NULL
    */
   gio.dbus_connection.DBusConnection getDbusConnection()
@@ -418,7 +418,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * %NULL.  This includes the situation where the D-Bus backend would
    * normally be in use but we were unable to connect to the bus.
    * This function must not be called before the application has been
-   * registered.  See [gio.application.ApplicationGio.getIsRegistered].
+   * registered.  See [gio.application.Application.getIsRegistered].
    * Returns: the object path, or %NULL
    */
   string getDbusObjectPath()
@@ -445,7 +445,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
   /**
    * Gets the current inactivity timeout for the application.
    * This is the amount of time $(LPAREN)in milliseconds$(RPAREN) after the last call to
-   * [gio.application.ApplicationGio.release] before the application stops running.
+   * [gio.application.Application.release] before the application stops running.
    * Returns: the timeout, in milliseconds
    */
   uint getInactivityTimeout()
@@ -457,7 +457,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
 
   /**
    * Gets the application's current busy state, as set through
-   * [gio.application.ApplicationGio.markBusy] or [gio.application.ApplicationGio.bindBusyProperty].
+   * [gio.application.Application.markBusy] or [gio.application.Application.bindBusyProperty].
    * Returns: %TRUE if application is currently marked as busy
    */
   bool getIsBusy()
@@ -469,7 +469,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
 
   /**
    * Checks if application is registered.
-   * An application is registered if [gio.application.ApplicationGio.register] has been
+   * An application is registered if [gio.application.Application.register] has been
    * successfully called.
    * Returns: %TRUE if application is registered
    */
@@ -487,8 +487,8 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * perform actions on application will result in the actions being
    * performed by the primary instance.
    * The value of this property cannot be accessed before
-   * [gio.application.ApplicationGio.register] has been called.  See
-   * [gio.application.ApplicationGio.getIsRegistered].
+   * [gio.application.Application.register] has been called.  See
+   * [gio.application.Application.getIsRegistered].
    * Returns: %TRUE if application is remote
    */
   bool getIsRemote()
@@ -500,7 +500,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
 
   /**
    * Gets the resource base path of application.
-   * See [gio.application.ApplicationGio.setResourceBasePath] for more information.
+   * See [gio.application.Application.setResourceBasePath] for more information.
    * Returns: the base resource path, if one is set
    */
   string getResourceBasePath()
@@ -526,9 +526,9 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
   /**
    * Increases the use count of application.
    * Use this function to indicate that the application has a reason to
-   * continue to run.  For example, [gio.application.ApplicationGio.hold] is called by GTK
+   * continue to run.  For example, [gio.application.Application.hold] is called by GTK
    * when a toplevel window is on the screen.
-   * To cancel the hold, call [gio.application.ApplicationGio.release].
+   * To cancel the hold, call [gio.application.Application.release].
    */
   void hold()
   {
@@ -542,7 +542,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * The busy state will be exposed to other processes, so a session shell will
    * use that information to indicate the state to the user $(LPAREN)e.g. with a
    * spinner$(RPAREN).
-   * To cancel the busy indication, use [gio.application.ApplicationGio.unmarkBusy].
+   * To cancel the busy indication, use [gio.application.Application.unmarkBusy].
    * The application must be registered before calling this function.
    */
   void markBusy()
@@ -582,14 +582,14 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
 
   /**
    * Immediately quits the application.
-   * Upon return to the mainloop, [gio.application.ApplicationGio.run] will return,
+   * Upon return to the mainloop, [gio.application.Application.run] will return,
    * calling only the 'shutdown' function before doing so.
    * The hold count is ignored.
-   * Take care if your code has called [gio.application.ApplicationGio.hold] on the application and
+   * Take care if your code has called [gio.application.Application.hold] on the application and
    * is therefore still expecting it to exist.
-   * $(LPAREN)Note that you may have called [gio.application.ApplicationGio.hold] indirectly, for example
+   * $(LPAREN)Note that you may have called [gio.application.Application.hold] indirectly, for example
    * through [gtk.application.Application.addWindow].$(RPAREN)
-   * The result of calling [gio.application.ApplicationGio.run] again after it returns is
+   * The result of calling [gio.application.Application.run] again after it returns is
    * unspecified.
    */
   void quit()
@@ -620,7 +620,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * is set appropriately.
    * Note: the return value of this function is not an indicator that this
    * instance is or is not the primary instance of the application.  See
-   * [gio.application.ApplicationGio.getIsRemote] for that.
+   * [gio.application.Application.getIsRemote] for that.
    * Params:
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if registration succeeded
@@ -639,7 +639,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * Decrease the use count of application.
    * When the use count reaches zero, the application will stop running.
    * Never call this function except to cancel the effect of a previous
-   * call to [gio.application.ApplicationGio.hold].
+   * call to [gio.application.Application.hold].
    */
   void release()
   {
@@ -657,7 +657,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * of Unicode commandline arguments$(RPAREN).
    * #GApplication will attempt to parse the commandline arguments.  You
    * can add commandline flags to the list of recognised options by way of
-   * [gio.application.ApplicationGio.addMainOptionEntries].  After this, the
+   * [gio.application.Application.addMainOptionEntries].  After this, the
    * #GApplication::handle-local-options signal is emitted, from which the
    * application can inspect the values of its #GOptionEntrys.
    * #GApplication::handle-local-options is a good place to handle options
@@ -690,7 +690,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * run for as much as 10 seconds with a use count of zero while waiting
    * for the message that caused the activation to arrive.  After that,
    * if the use count falls to zero the application will exit immediately,
-   * except in the case that [gio.application.ApplicationGio.setInactivityTimeout] is in
+   * except in the case that [gio.application.Application.setInactivityTimeout] is in
    * use.
    * This function sets the prgname $(LPAREN)[glib.global.setPrgname]$(RPAREN), if not already set,
    * to the basename of argv[0].
@@ -751,7 +751,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * id may be %NULL, but it is impossible to replace or withdraw
    * notifications without an id.
    * If notification is no longer relevant, it can be withdrawn with
-   * [gio.application.ApplicationGio.withdrawNotification].
+   * [gio.application.Application.withdrawNotification].
    * It is an error to call this function if application has no
    * application ID.
    * Params:
@@ -786,7 +786,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * The application id can only be modified if application has not yet
    * been registered.
    * If non-%NULL, the application id must be valid.  See
-   * [gio.application.ApplicationGio.idIsValid].
+   * [gio.application.Application.idIsValid].
    * Params:
    *   applicationId = the identifier for application
    */
@@ -798,7 +798,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
 
   /**
    * Sets or unsets the default application for the process, as returned
-   * by [gio.application.ApplicationGio.getDefault].
+   * by [gio.application.Application.getDefault].
    * This function does not take its own reference on application.  If
    * application is destroyed then the default application will revert
    * back to %NULL.
@@ -824,9 +824,9 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
   /**
    * Sets the current inactivity timeout for the application.
    * This is the amount of time $(LPAREN)in milliseconds$(RPAREN) after the last call to
-   * [gio.application.ApplicationGio.release] before the application stops running.
+   * [gio.application.Application.release] before the application stops running.
    * This call has no side effects of its own.  The value set here is only
-   * used for next time [gio.application.ApplicationGio.release] drops the use count to
+   * used for next time [gio.application.Application.release] drops the use count to
    * zero.  Any timeouts currently in progress are not impacted.
    * Params:
    *   inactivityTimeout = the timeout, in milliseconds
@@ -931,7 +931,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
   /**
    * Destroys a binding between property and the busy state of
    * application that was previously created with
-   * [gio.application.ApplicationGio.bindBusyProperty].
+   * [gio.application.Application.bindBusyProperty].
    * Params:
    *   object = a #GObject
    *   property = the name of a boolean property of object
@@ -947,7 +947,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * When the busy count reaches zero, the new state will be propagated
    * to other processes.
    * This function must only be called to cancel the effect of a previous
-   * call to [gio.application.ApplicationGio.markBusy].
+   * call to [gio.application.Application.markBusy].
    */
   void unmarkBusy()
   {
@@ -956,7 +956,7 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
 
   /**
    * Withdraws a notification that was sent with
-   * [gio.application.ApplicationGio.sendNotification].
+   * [gio.application.Application.sendNotification].
    * This call does nothing if a notification with id doesn't exist or
    * the notification was never sent.
    * This function works even for notifications sent in previous
@@ -976,11 +976,11 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
 
   /**
    * The ::activate signal is emitted on the primary instance when an
-   * activation occurs. See [gio.application.ApplicationGio.activate].
-   *   applicationGio = the instance the signal is connected to
+   * activation occurs. See [gio.application.Application.activate].
+   *   application = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(gio.application.ApplicationGio applicationGio);
-  alias ActivateCallbackFunc = void function(gio.application.ApplicationGio applicationGio);
+  alias ActivateCallbackDlg = void delegate(gio.application.Application application);
+  alias ActivateCallbackFunc = void function(gio.application.Application application);
 
   /**
    * Connect to Activate signal.
@@ -996,8 +996,8 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
-      _dClosure.dlg(applicationGio);
+      auto application = getVal!(gio.application.Application)(_paramVals);
+      _dClosure.dlg(application);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1006,17 +1006,17 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
 
   /**
    * The ::command-line signal is emitted on the primary instance when
-   * a commandline is not handled locally. See [gio.application.ApplicationGio.run] and
+   * a commandline is not handled locally. See [gio.application.Application.run] and
    * the #GApplicationCommandLine documentation for more information.
    * Params
    *   commandLine = a #GApplicationCommandLine representing the
    *     passed commandline
-   *   applicationGio = the instance the signal is connected to
+   *   application = the instance the signal is connected to
    * Returns: An integer that is set as the exit status for the calling
    *   process. See [gio.application_command_line.ApplicationCommandLine.setExitStatus].
    */
-  alias CommandLineCallbackDlg = int delegate(gio.application_command_line.ApplicationCommandLine commandLine, gio.application.ApplicationGio applicationGio);
-  alias CommandLineCallbackFunc = int function(gio.application_command_line.ApplicationCommandLine commandLine, gio.application.ApplicationGio applicationGio);
+  alias CommandLineCallbackDlg = int delegate(gio.application_command_line.ApplicationCommandLine commandLine, gio.application.Application application);
+  alias CommandLineCallbackFunc = int function(gio.application_command_line.ApplicationCommandLine commandLine, gio.application.Application application);
 
   /**
    * Connect to CommandLine signal.
@@ -1033,9 +1033,9 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       int _retval;
-      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
+      auto application = getVal!(gio.application.Application)(_paramVals);
       auto commandLine = getVal!(gio.application_command_line.ApplicationCommandLine)(&_paramVals[1]);
-      _retval = _dClosure.dlg(commandLine, applicationGio);
+      _retval = _dClosure.dlg(commandLine, application);
       setVal!int(_returnValue, _retval);
     }
 
@@ -1047,8 +1047,8 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * The ::handle-local-options signal is emitted on the local instance
    * after the parsing of the commandline options has occurred.
    * You can add options to be recognised during commandline option
-   * parsing using [gio.application.ApplicationGio.addMainOptionEntries] and
-   * [gio.application.ApplicationGio.addOptionGroup].
+   * parsing using [gio.application.Application.addMainOptionEntries] and
+   * [gio.application.Application.addOptionGroup].
    * Signal handlers can inspect options $(LPAREN)along with values pointed to
    * from the arg_data of an installed #GOptionEntrys$(RPAREN) in order to
    * decide to perform certain actions, including direct local handling
@@ -1062,13 +1062,13 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * In the event that %G_APPLICATION_HANDLES_COMMAND_LINE is not set,
    * "normal processing" will treat the remaining uncollected command
    * line arguments as filenames or URIs.  If there are no arguments,
-   * the application is activated by [gio.application.ApplicationGio.activate].  One or
-   * more arguments results in a call to [gio.application.ApplicationGio.open].
+   * the application is activated by [gio.application.Application.activate].  One or
+   * more arguments results in a call to [gio.application.Application.open].
    * If you want to handle the local commandline arguments for yourself
-   * by converting them to calls to [gio.application.ApplicationGio.open] or
+   * by converting them to calls to [gio.application.Application.open] or
    * [gio.action_group.ActionGroup.activateAction] then you must be sure to register
    * the application first.  You should probably not call
-   * [gio.application.ApplicationGio.activate] for yourself, however: just return -1 and
+   * [gio.application.Application.activate] for yourself, however: just return -1 and
    * allow the default handler to do it for you.  This will ensure that
    * the `--gapplication-service` switch works properly $(LPAREN)i.e. no activation
    * in that case$(RPAREN).
@@ -1080,14 +1080,14 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * normally be required.
    * Params
    *   options = the options dictionary
-   *   applicationGio = the instance the signal is connected to
+   *   application = the instance the signal is connected to
    * Returns: an exit code. If you have handled your options and want
    *   to exit the process, return a non-negative option, 0 for success,
    *   and a positive value for failure. To continue, return -1 to let
    *   the default option processing continue.
    */
-  alias HandleLocalOptionsCallbackDlg = int delegate(glib.variant_dict.VariantDict options, gio.application.ApplicationGio applicationGio);
-  alias HandleLocalOptionsCallbackFunc = int function(glib.variant_dict.VariantDict options, gio.application.ApplicationGio applicationGio);
+  alias HandleLocalOptionsCallbackDlg = int delegate(glib.variant_dict.VariantDict options, gio.application.Application application);
+  alias HandleLocalOptionsCallbackFunc = int function(glib.variant_dict.VariantDict options, gio.application.Application application);
 
   /**
    * Connect to HandleLocalOptions signal.
@@ -1104,9 +1104,9 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       int _retval;
-      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
+      auto application = getVal!(gio.application.Application)(_paramVals);
       auto options = getVal!(glib.variant_dict.VariantDict)(&_paramVals[1]);
-      _retval = _dClosure.dlg(options, applicationGio);
+      _retval = _dClosure.dlg(options, application);
       setVal!int(_returnValue, _retval);
     }
 
@@ -1118,12 +1118,12 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
    * The ::name-lost signal is emitted only on the registered primary instance
    * when a new instance has taken over. This can only happen if the application
    * is using the %G_APPLICATION_ALLOW_REPLACEMENT flag.
-   * The default handler for this signal calls [gio.application.ApplicationGio.quit].
-   *   applicationGio = the instance the signal is connected to
+   * The default handler for this signal calls [gio.application.Application.quit].
+   *   application = the instance the signal is connected to
    * Returns: %TRUE if the signal has been handled
    */
-  alias NameLostCallbackDlg = bool delegate(gio.application.ApplicationGio applicationGio);
-  alias NameLostCallbackFunc = bool function(gio.application.ApplicationGio applicationGio);
+  alias NameLostCallbackDlg = bool delegate(gio.application.Application application);
+  alias NameLostCallbackFunc = bool function(gio.application.Application application);
 
   /**
    * Connect to NameLost signal.
@@ -1140,8 +1140,8 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
-      _retval = _dClosure.dlg(applicationGio);
+      auto application = getVal!(gio.application.Application)(_paramVals);
+      _retval = _dClosure.dlg(application);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -1151,14 +1151,14 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
 
   /**
    * The ::open signal is emitted on the primary instance when there are
-   * files to open. See [gio.application.ApplicationGio.open] for more information.
+   * files to open. See [gio.application.Application.open] for more information.
    * Params
    *   files = an array of #GFiles
    *   hint = a hint provided by the calling instance
-   *   applicationGio = the instance the signal is connected to
+   *   application = the instance the signal is connected to
    */
-  alias OpenCallbackDlg = void delegate(gio.file.File[] files, string hint, gio.application.ApplicationGio applicationGio);
-  alias OpenCallbackFunc = void function(gio.file.File[] files, string hint, gio.application.ApplicationGio applicationGio);
+  alias OpenCallbackDlg = void delegate(gio.file.File[] files, string hint, gio.application.Application application);
+  alias OpenCallbackFunc = void function(gio.file.File[] files, string hint, gio.application.Application application);
 
   /**
    * Connect to Open signal.
@@ -1174,14 +1174,14 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
+      auto application = getVal!(gio.application.Application)(_paramVals);
       auto files = getVal!(GFile**)(&_paramVals[1]);
       gio.file.File[] _files;
       auto nFiles = getVal!(int)(&_paramVals[2]);
       auto hint = getVal!(string)(&_paramVals[3]);
       foreach (i; 0 .. nFiles)
         _files ~= ObjectG.getDObject!(gio.file.File)(files[i], No.Take);
-      _dClosure.dlg(_files, hint, applicationGio);
+      _dClosure.dlg(_files, hint, application);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1191,10 +1191,10 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
   /**
    * The ::shutdown signal is emitted only on the registered primary instance
    * immediately after the main loop terminates.
-   *   applicationGio = the instance the signal is connected to
+   *   application = the instance the signal is connected to
    */
-  alias ShutdownCallbackDlg = void delegate(gio.application.ApplicationGio applicationGio);
-  alias ShutdownCallbackFunc = void function(gio.application.ApplicationGio applicationGio);
+  alias ShutdownCallbackDlg = void delegate(gio.application.Application application);
+  alias ShutdownCallbackFunc = void function(gio.application.Application application);
 
   /**
    * Connect to Shutdown signal.
@@ -1210,8 +1210,8 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
-      _dClosure.dlg(applicationGio);
+      auto application = getVal!(gio.application.Application)(_paramVals);
+      _dClosure.dlg(application);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1220,11 +1220,11 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
 
   /**
    * The ::startup signal is emitted on the primary instance immediately
-   * after registration. See [gio.application.ApplicationGio.register].
-   *   applicationGio = the instance the signal is connected to
+   * after registration. See [gio.application.Application.register].
+   *   application = the instance the signal is connected to
    */
-  alias StartupCallbackDlg = void delegate(gio.application.ApplicationGio applicationGio);
-  alias StartupCallbackFunc = void function(gio.application.ApplicationGio applicationGio);
+  alias StartupCallbackDlg = void delegate(gio.application.Application application);
+  alias StartupCallbackFunc = void function(gio.application.Application application);
 
   /**
    * Connect to Startup signal.
@@ -1240,8 +1240,8 @@ class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
-      _dClosure.dlg(applicationGio);
+      auto application = getVal!(gio.application.Application)(_paramVals);
+      _dClosure.dlg(application);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -10,7 +10,7 @@ import gtk.c.types;
 import gtk.types;
 import gtk.widget_accessible;
 
-class RangeAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.ValueAtk
+class RangeAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Value
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,5 +29,5 @@ class RangeAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.ValueA
     return getType();
   }
 
-  mixin ValueAtkT!();
+  mixin ValueT!();
 }

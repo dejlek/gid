@@ -3348,7 +3348,7 @@ string getOsInfo(string keyName)
  * Gets the name of the program. This name should not be localized,
  * in contrast to [glib.global.getApplicationName].
  * If you are using #GApplication the program name is set in
- * [gio.application.ApplicationGio.run]. In case of GDK or GTK it is set in
+ * [gio.application.Application.run]. In case of GDK or GTK it is set in
  * [gdk.global.init_], which is called by [gtk.global.init_] and the
  * #GtkApplication::startup handler. The program name is found by
  * taking the last component of argv[0].
@@ -5780,7 +5780,7 @@ void setErrorLiteral(out glib.error.ErrorG err, glib.types.Quark domain, int cod
  * Sets the name of the program. This name should not be localized,
  * in contrast to [glib.global.setApplicationName].
  * If you are using #GApplication the program name is set in
- * [gio.application.ApplicationGio.run]. In case of GDK or GTK it is set in
+ * [gio.application.Application.run]. In case of GDK or GTK it is set in
  * [gdk.global.init_], which is called by [gtk.global.init_] and the
  * #GtkApplication::startup handler. The program name is found by
  * taking the last component of argv[0].

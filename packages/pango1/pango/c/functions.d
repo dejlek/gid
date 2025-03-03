@@ -272,6 +272,17 @@ __gshared extern(C)
   void function(PangoItem* item) c_pango_item_free;
   PangoItem* function(PangoItem* orig, int splitIndex, int splitOffset) c_pango_item_split;
 
+  // Language
+  extern(C) GType function() c_pango_language_get_type;
+  const(char)* function(PangoLanguage* language) c_pango_language_get_sample_string;
+  const(PangoScript)* function(PangoLanguage* language, int* numScripts) c_pango_language_get_scripts;
+  bool function(PangoLanguage* language, PangoScript script) c_pango_language_includes_script;
+  bool function(PangoLanguage* language, const(char)* rangeList) c_pango_language_matches;
+  const(char)* function(PangoLanguage* language) c_pango_language_to_string;
+  PangoLanguage* function(const(char)* language) c_pango_language_from_string;
+  PangoLanguage* function() c_pango_language_get_default;
+  PangoLanguage** function() c_pango_language_get_preferred;
+
   // Layout
   extern(C) GType function() c_pango_layout_get_type;
   PangoLayout* function(PangoContext* context) c_pango_layout_new;
@@ -395,17 +406,6 @@ __gshared extern(C)
   void function(const(PangoMatrix)* matrix, double* x, double* y) c_pango_matrix_transform_point;
   void function(const(PangoMatrix)* matrix, PangoRectangle* rect) c_pango_matrix_transform_rectangle;
   void function(PangoMatrix* matrix, double tx, double ty) c_pango_matrix_translate;
-
-  // PgLanguage
-  extern(C) GType function() c_pango_language_get_type;
-  const(char)* function(PangoLanguage* language) c_pango_language_get_sample_string;
-  const(PangoScript)* function(PangoLanguage* language, int* numScripts) c_pango_language_get_scripts;
-  bool function(PangoLanguage* language, PangoScript script) c_pango_language_includes_script;
-  bool function(PangoLanguage* language, const(char)* rangeList) c_pango_language_matches;
-  const(char)* function(PangoLanguage* language) c_pango_language_to_string;
-  PangoLanguage* function(const(char)* language) c_pango_language_from_string;
-  PangoLanguage* function() c_pango_language_get_default;
-  PangoLanguage** function() c_pango_language_get_preferred;
 
   // Renderer
   extern(C) GType function() c_pango_renderer_get_type;
@@ -784,6 +784,17 @@ alias pango_item_copy = c_pango_item_copy;
 alias pango_item_free = c_pango_item_free;
 alias pango_item_split = c_pango_item_split;
 
+// Language
+alias pango_language_get_type = c_pango_language_get_type;
+alias pango_language_get_sample_string = c_pango_language_get_sample_string;
+alias pango_language_get_scripts = c_pango_language_get_scripts;
+alias pango_language_includes_script = c_pango_language_includes_script;
+alias pango_language_matches = c_pango_language_matches;
+alias pango_language_to_string = c_pango_language_to_string;
+alias pango_language_from_string = c_pango_language_from_string;
+alias pango_language_get_default = c_pango_language_get_default;
+alias pango_language_get_preferred = c_pango_language_get_preferred;
+
 // Layout
 alias pango_layout_get_type = c_pango_layout_get_type;
 alias pango_layout_new = c_pango_layout_new;
@@ -907,17 +918,6 @@ alias pango_matrix_transform_pixel_rectangle = c_pango_matrix_transform_pixel_re
 alias pango_matrix_transform_point = c_pango_matrix_transform_point;
 alias pango_matrix_transform_rectangle = c_pango_matrix_transform_rectangle;
 alias pango_matrix_translate = c_pango_matrix_translate;
-
-// PgLanguage
-alias pango_language_get_type = c_pango_language_get_type;
-alias pango_language_get_sample_string = c_pango_language_get_sample_string;
-alias pango_language_get_scripts = c_pango_language_get_scripts;
-alias pango_language_includes_script = c_pango_language_includes_script;
-alias pango_language_matches = c_pango_language_matches;
-alias pango_language_to_string = c_pango_language_to_string;
-alias pango_language_from_string = c_pango_language_from_string;
-alias pango_language_get_default = c_pango_language_get_default;
-alias pango_language_get_preferred = c_pango_language_get_preferred;
 
 // Renderer
 alias pango_renderer_get_type = c_pango_renderer_get_type;
@@ -1297,6 +1297,17 @@ shared static this()
   gidLink(cast(void**)&pango_item_free, "pango_item_free", LIBS);
   gidLink(cast(void**)&pango_item_split, "pango_item_split", LIBS);
 
+  // Language
+  gidLink(cast(void**)&pango_language_get_type, "pango_language_get_type", LIBS);
+  gidLink(cast(void**)&pango_language_get_sample_string, "pango_language_get_sample_string", LIBS);
+  gidLink(cast(void**)&pango_language_get_scripts, "pango_language_get_scripts", LIBS);
+  gidLink(cast(void**)&pango_language_includes_script, "pango_language_includes_script", LIBS);
+  gidLink(cast(void**)&pango_language_matches, "pango_language_matches", LIBS);
+  gidLink(cast(void**)&pango_language_to_string, "pango_language_to_string", LIBS);
+  gidLink(cast(void**)&pango_language_from_string, "pango_language_from_string", LIBS);
+  gidLink(cast(void**)&pango_language_get_default, "pango_language_get_default", LIBS);
+  gidLink(cast(void**)&pango_language_get_preferred, "pango_language_get_preferred", LIBS);
+
   // Layout
   gidLink(cast(void**)&pango_layout_get_type, "pango_layout_get_type", LIBS);
   gidLink(cast(void**)&pango_layout_new, "pango_layout_new", LIBS);
@@ -1420,17 +1431,6 @@ shared static this()
   gidLink(cast(void**)&pango_matrix_transform_point, "pango_matrix_transform_point", LIBS);
   gidLink(cast(void**)&pango_matrix_transform_rectangle, "pango_matrix_transform_rectangle", LIBS);
   gidLink(cast(void**)&pango_matrix_translate, "pango_matrix_translate", LIBS);
-
-  // PgLanguage
-  gidLink(cast(void**)&pango_language_get_type, "pango_language_get_type", LIBS);
-  gidLink(cast(void**)&pango_language_get_sample_string, "pango_language_get_sample_string", LIBS);
-  gidLink(cast(void**)&pango_language_get_scripts, "pango_language_get_scripts", LIBS);
-  gidLink(cast(void**)&pango_language_includes_script, "pango_language_includes_script", LIBS);
-  gidLink(cast(void**)&pango_language_matches, "pango_language_matches", LIBS);
-  gidLink(cast(void**)&pango_language_to_string, "pango_language_to_string", LIBS);
-  gidLink(cast(void**)&pango_language_from_string, "pango_language_from_string", LIBS);
-  gidLink(cast(void**)&pango_language_get_default, "pango_language_get_default", LIBS);
-  gidLink(cast(void**)&pango_language_get_preferred, "pango_language_get_preferred", LIBS);
 
   // Renderer
   gidLink(cast(void**)&pango_renderer_get_type, "pango_renderer_get_type", LIBS);

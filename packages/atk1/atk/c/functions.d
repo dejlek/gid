@@ -315,7 +315,7 @@ __gshared extern(C)
   // Util
   extern(C) GType function() c_atk_util_get_type;
 
-  // ValueAtk
+  // Value
   extern(C) GType function() c_atk_value_get_type;
   void function(AtkValue* obj, GValue* value) c_atk_value_get_current_value;
   double function(AtkValue* obj) c_atk_value_get_increment;
@@ -654,7 +654,7 @@ alias atk_text_range_get_type = c_atk_text_range_get_type;
 // Util
 alias atk_util_get_type = c_atk_util_get_type;
 
-// ValueAtk
+// Value
 alias atk_value_get_type = c_atk_value_get_type;
 alias atk_value_get_current_value = c_atk_value_get_current_value;
 alias atk_value_get_increment = c_atk_value_get_increment;
@@ -994,7 +994,7 @@ shared static this()
   // Util
   gidLink(cast(void**)&atk_util_get_type, "atk_util_get_type", LIBS);
 
-  // ValueAtk
+  // Value
   gidLink(cast(void**)&atk_value_get_type, "atk_value_get_type", LIBS);
   gidLink(cast(void**)&atk_value_get_current_value, "atk_value_get_current_value", LIBS);
   gidLink(cast(void**)&atk_value_get_increment, "atk_value_get_increment", LIBS);

@@ -324,11 +324,11 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   value = the encoded secret
    * Returns: the decoded secret value
    */
-  secret.value.ValueSecret decodeDbusSecret(glib.variant.VariantG value)
+  secret.value.Value decodeDbusSecret(glib.variant.VariantG value)
   {
     SecretValue* _cretval;
     _cretval = secret_service_decode_dbus_secret(cast(SecretService*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new secret.value.ValueSecret(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -341,7 +341,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   value = the secret value
    * Returns: the encoded secret
    */
-  glib.variant.VariantG encodeDbusSecret(secret.value.ValueSecret value)
+  glib.variant.VariantG encodeDbusSecret(secret.value.Value value)
   {
     VariantC* _cretval;
     _cretval = secret_service_encode_dbus_secret(cast(SecretService*)cPtr, value ? cast(SecretValue*)value.cPtr(No.Dup) : null);
@@ -692,16 +692,16 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    * Params:
    *   result = the asynchronous result passed to the callback
    * Returns: a newly allocated structValue, which should be
-   *   released with [secret.value.ValueSecret.unref], or %NULL if no secret found
+   *   released with [secret.value.Value.unref], or %NULL if no secret found
    */
-  secret.value.ValueSecret lookupFinish(gio.async_result.AsyncResult result)
+  secret.value.Value lookupFinish(gio.async_result.AsyncResult result)
   {
     SecretValue* _cretval;
     GError *_err;
     _cretval = secret_service_lookup_finish(cast(SecretService*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new secret.value.ValueSecret(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -717,9 +717,9 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   attributes = the attribute keys and values
    *   cancellable = optional cancellation object
    * Returns: a newly allocated structValue, which should be
-   *   released with [secret.value.ValueSecret.unref], or %NULL if no secret found
+   *   released with [secret.value.Value.unref], or %NULL if no secret found
    */
-  secret.value.ValueSecret lookupSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable)
+  secret.value.Value lookupSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable)
   {
     SecretValue* _cretval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -728,7 +728,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     _cretval = secret_service_lookup_sync(cast(SecretService*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new secret.value.ValueSecret(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -992,7 +992,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void store(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.ValueSecret value, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void store(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1049,7 +1049,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
    *   cancellable = optional cancellation object
    * Returns: whether the storage was successful or not
    */
-  bool storeSync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.ValueSecret value, gio.cancellable.Cancellable cancellable)
+  bool storeSync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);

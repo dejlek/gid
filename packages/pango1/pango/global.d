@@ -726,7 +726,7 @@ void findParagraphBoundary(string text, out int paragraphDelimiterIndex, out int
  *   attrs = array with one `PangoLogAttr`
  *     per character in text, plus one extra, to be filled in
  */
-void getLogAttrs(string text, int level, pango.language.PgLanguage language, pango.types.LogAttr[] attrs)
+void getLogAttrs(string text, int level, pango.language.Language language, pango.types.LogAttr[] attrs)
 {
   int _length;
   if (text)

@@ -142,7 +142,7 @@ public import gobject.value;
  * </para>
  * </refsect1>
  */
-template ValueAtkT()
+template ValueT()
 {
 
   /**
@@ -150,7 +150,7 @@ template ValueAtkT()
    * Params:
    *   value = a #GValue representing the current accessible value
 
-   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getValueAndText]
+   * Deprecated: Since 2.12. Use [atk.value.Value.getValueAndText]
    *   instead.
    */
   override void getCurrentValue(out gobject.value.Value value)
@@ -180,7 +180,7 @@ template ValueAtkT()
    * Params:
    *   value = a #GValue representing the maximum accessible value
 
-   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getRange] instead.
+   * Deprecated: Since 2.12. Use [atk.value.Value.getRange] instead.
    */
   override void getMaximumValue(out gobject.value.Value value)
   {
@@ -196,7 +196,7 @@ template ValueAtkT()
    * Params:
    *   value = a #GValue representing the minimum increment by which the accessible value may be changed
 
-   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getIncrement] instead.
+   * Deprecated: Since 2.12. Use [atk.value.Value.getIncrement] instead.
    */
   override void getMinimumIncrement(out gobject.value.Value value)
   {
@@ -210,7 +210,7 @@ template ValueAtkT()
    * Params:
    *   value = a #GValue representing the minimum accessible value
 
-   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getRange] instead.
+   * Deprecated: Since 2.12. Use [atk.value.Value.getRange] instead.
    */
   override void getMinimumValue(out gobject.value.Value value)
   {
@@ -270,7 +270,7 @@ template ValueAtkT()
    *   value = a #GValue which is the desired new accessible value.
    * Returns: %TRUE if new value is successfully set, %FALSE otherwise.
 
-   * Deprecated: Since 2.12. Use [atk.value.ValueAtk.setValue] instead.
+   * Deprecated: Since 2.12. Use [atk.value.Value.setValue] instead.
    */
   override bool setCurrentValue(gobject.value.Value value)
   {
@@ -286,7 +286,7 @@ template ValueAtkT()
    * modified $(LPAREN)ie: a read-only component$(RPAREN). If the value changes due this
    * call, it is possible that the text could change, and will trigger
    * an #AtkValue::value-changed signal emission.
-   * Note for implementors: the deprecated [atk.value.ValueAtk.setCurrentValue]
+   * Note for implementors: the deprecated [atk.value.Value.setCurrentValue]
    * method returned TRUE or FALSE depending if the value was assigned
    * or not. In the practice several implementors were not able to
    * decide it, and returned TRUE in any case. For that reason it is not
@@ -316,10 +316,10 @@ template ValueAtkT()
    *   value = the new value in a numerical form.
    *   text = human readable text alternative $(LPAREN)also called
    *     description$(RPAREN) of this object. NULL if not available.
-   *   valueAtk = the instance the signal is connected to
+   *   value = the instance the signal is connected to
    */
-  alias ValueChangedCallbackDlg = void delegate(double value, string text, atk.value.ValueAtk valueAtk);
-  alias ValueChangedCallbackFunc = void function(double value, string text, atk.value.ValueAtk valueAtk);
+  alias ValueChangedCallbackDlg = void delegate(double value, string text, atk.value.Value value);
+  alias ValueChangedCallbackFunc = void function(double value, string text, atk.value.Value value);
 
   /**
    * Connect to ValueChanged signal.
@@ -335,10 +335,10 @@ template ValueAtkT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto valueAtk = getVal!(atk.value.ValueAtk)(_paramVals);
+      auto value = getVal!(atk.value.Value)(_paramVals);
       auto value = getVal!(double)(&_paramVals[1]);
       auto text = getVal!(string)(&_paramVals[2]);
-      _dClosure.dlg(value, text, valueAtk);
+      _dClosure.dlg(value, text, value);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

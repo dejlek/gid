@@ -12,7 +12,7 @@ import pango.types;
  * `PangoLanguage` pointers can be efficiently
  * copied and compared with each other.
  */
-class PgLanguage : gobject.boxed.Boxed
+class Language : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -44,7 +44,7 @@ class PgLanguage : gobject.boxed.Boxed
    * font feature requirements unique to the language. It is suitable for use
    * as sample text in a font selection dialog.
    * If language is %NULL, the default language as found by
-   * [pango.language.PgLanguage.getDefault] is used.
+   * [pango.language.Language.getDefault] is used.
    * If Pango does not have a sample string for language, the classic
    * "The quick brown fox..." is returned.  This can be detected by
    * comparing the returned pointer value to that returned for $(LPAREN)non-existent$(RPAREN)
@@ -76,7 +76,7 @@ class PgLanguage : gobject.boxed.Boxed
    * any assumptions on the maximum number of scripts returned
    * though, except that it is positive if the return value is not
    * %NULL, and it is a small number.
-   * The [pango.language.PgLanguage.includesScript] function uses this
+   * The [pango.language.Language.includesScript] function uses this
    * function internally.
    * Note: while the return value is declared as `PangoScript`, the
    * returned values are from the `GUnicodeScript` enumeration, which
@@ -110,7 +110,7 @@ class PgLanguage : gobject.boxed.Boxed
    * determining if a supplied language tag is relevant to
    * a particular section of text. It probably is not useful
    * for applications in most circumstances.
-   * This function uses [pango.language.PgLanguage.getScripts] internally.
+   * This function uses [pango.language.Language.getScripts] internally.
    * Params:
    *   script = a `PangoScript`
    * Returns: %TRUE if script is one of the scripts used
@@ -134,7 +134,7 @@ class PgLanguage : gobject.boxed.Boxed
    *   rangeList = a list of language ranges, separated by ';', ':',
    *     ',', or space characters.
    *     Each element must either be '*', or a RFC 3066 language range
-   *     canonicalized as by [pango.language.PgLanguage.fromString]
+   *     canonicalized as by [pango.language.Language.fromString]
    * Returns: %TRUE if a match was found
    */
   bool matches(string rangeList)
@@ -166,18 +166,18 @@ class PgLanguage : gobject.boxed.Boxed
    * This function first canonicalizes the string by converting it to
    * lowercase, mapping '_' to '-', and stripping all characters other
    * than letters and '-'.
-   * Use [pango.language.PgLanguage.getDefault] if you want to get the
+   * Use [pango.language.Language.getDefault] if you want to get the
    * `PangoLanguage` for the current locale of the process.
    * Params:
    *   language = a string representing a language tag
    * Returns: a `PangoLanguage`
    */
-  static pango.language.PgLanguage fromString(string language)
+  static pango.language.Language fromString(string language)
   {
     PangoLanguage* _cretval;
     const(char)* _language = language.toCString(No.Alloc);
     _cretval = pango_language_from_string(_language);
-    auto _retval = _cretval ? new pango.language.PgLanguage(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -207,14 +207,14 @@ class PgLanguage : gobject.boxed.Boxed
    * Note that the default language can change over the life of an application.
    * Also note that this function will not do the right thing if you
    * use per-thread locales with uselocale$(LPAREN)$(RPAREN). In that case, you should
-   * just call [pango.language.PgLanguage.fromString] yourself.
+   * just call [pango.language.Language.fromString] yourself.
    * Returns: the default language as a `PangoLanguage`
    */
-  static pango.language.PgLanguage getDefault()
+  static pango.language.Language getDefault()
   {
     PangoLanguage* _cretval;
     _cretval = pango_language_get_default();
-    auto _retval = _cretval ? new pango.language.PgLanguage(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -223,28 +223,28 @@ class PgLanguage : gobject.boxed.Boxed
    * The list is specified by the `PANGO_LANGUAGE` or `LANGUAGE`
    * environment variables, in order of preference. Note that this
    * list does not necessarily include the language returned by
-   * [pango.language.PgLanguage.getDefault].
+   * [pango.language.Language.getDefault].
    * When choosing language-specific resources, such as the sample
-   * text returned by [pango.language.PgLanguage.getSampleString],
+   * text returned by [pango.language.Language.getSampleString],
    * you should first try the default language, followed by the
    * languages returned by this function.
    * Returns: a %NULL-terminated array
    *   of `PangoLanguage`*
    */
-  static pango.language.PgLanguage[] getPreferred()
+  static pango.language.Language[] getPreferred()
   {
     PangoLanguage** _cretval;
     _cretval = pango_language_get_preferred();
-    pango.language.PgLanguage[] _retval;
+    pango.language.Language[] _retval;
 
     if (_cretval)
     {
       uint _cretlength;
       for (; _cretval[_cretlength] !is null; _cretlength++)
         break;
-      _retval = new pango.language.PgLanguage[_cretlength];
+      _retval = new pango.language.Language[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new pango.language.PgLanguage(cast(void*)_cretval[i], No.Take);
+        _retval[i] = new pango.language.Language(cast(void*)_cretval[i], No.Take);
     }
     return _retval;
   }

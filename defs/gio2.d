@@ -1,8 +1,5 @@
 //!gir Gio-2.0
 
-//# Rename Application to ApplicationGio to avoid conflicts with Gtk.Application
-//!subdtype Application ApplicationGio
-
 //# Ignore APIs which aren't useful to D binding
 //!set record[IOExtension][ignore] 1
 //!set record[IOExtensionPoint][ignore] 1

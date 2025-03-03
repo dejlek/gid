@@ -96,7 +96,7 @@ class Font : gobject.object.ObjectG
    * Returns: a newly-allocated `PangoCoverage`
    *   object.
    */
-  pango.coverage.Coverage getCoverage(pango.language.PgLanguage language)
+  pango.coverage.Coverage getCoverage(pango.language.Language language)
   {
     PangoCoverage* _cretval;
     _cretval = pango_font_get_coverage(cast(PangoFont*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
@@ -187,20 +187,20 @@ class Font : gobject.object.ObjectG
    * and its fontmap are valid.
    * Returns: an array of `PangoLanguage`
    */
-  pango.language.PgLanguage[] getLanguages()
+  pango.language.Language[] getLanguages()
   {
     PangoLanguage** _cretval;
     _cretval = pango_font_get_languages(cast(PangoFont*)cPtr);
-    pango.language.PgLanguage[] _retval;
+    pango.language.Language[] _retval;
 
     if (_cretval)
     {
       uint _cretlength;
       for (; _cretval[_cretlength] !is null; _cretlength++)
         break;
-      _retval = new pango.language.PgLanguage[_cretlength];
+      _retval = new pango.language.Language[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new pango.language.PgLanguage(cast(void*)_cretval[i], No.Take);
+        _retval[i] = new pango.language.Language(cast(void*)_cretval[i], No.Take);
     }
     return _retval;
   }
@@ -219,7 +219,7 @@ class Font : gobject.object.ObjectG
    * Returns: a `PangoFontMetrics` object. The caller must call
    *   [pango.font_metrics.FontMetrics.unref] when finished using the object.
    */
-  pango.font_metrics.FontMetrics getMetrics(pango.language.PgLanguage language)
+  pango.font_metrics.FontMetrics getMetrics(pango.language.Language language)
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_font_get_metrics(cast(PangoFont*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);

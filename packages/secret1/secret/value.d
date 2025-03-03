@@ -10,15 +10,15 @@ import secret.types;
 /**
  * A value containing a secret
  * A #SecretValue contains a password or other secret value.
- * Use [secret.value.ValueSecret.get] to get the actual secret data, such as a password.
+ * Use [secret.value.Value.get] to get the actual secret data, such as a password.
  * The secret data is not necessarily null-terminated, unless the content type
  * is "text/plain".
  * Each #SecretValue has a content type. For passwords, this is `text/plain`.
- * Use [secret.value.ValueSecret.getContentType] to look at the content type.
+ * Use [secret.value.Value.getContentType] to look at the content type.
  * #SecretValue is reference counted and immutable. The secret data is only
- * freed when all references have been released via [secret.value.ValueSecret.unref].
+ * freed when all references have been released via [secret.value.Value.unref].
  */
-class ValueSecret : gobject.boxed.Boxed
+class Value : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -75,7 +75,7 @@ class ValueSecret : gobject.boxed.Boxed
    *   destroy = function to call to free the secret data
    * Returns: the new #SecretValue
    */
-  static secret.value.ValueSecret newFull(string secretData, ptrdiff_t length, string contentType, glib.types.DestroyNotify destroy)
+  static secret.value.Value newFull(string secretData, ptrdiff_t length, string contentType, glib.types.DestroyNotify destroy)
   {
     extern(C) void _destroyCallback(void* data)
     {
@@ -90,15 +90,15 @@ class ValueSecret : gobject.boxed.Boxed
     char* _secretData = secretData.toCString(No.Alloc);
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = secret_value_new_full(_secretData, length, _contentType, _destroyCB);
-    auto _retval = _cretval ? new secret.value.ValueSecret(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
   /**
    * Get the secret data in the #SecretValue.
    * The value is not necessarily null-terminated unless it was created with
-   * [secret.value.ValueSecret.new_] or a null-terminated string was passed to
-   * [secret.value.ValueSecret.newFull].
+   * [secret.value.Value.new_] or a null-terminated string was passed to
+   * [secret.value.Value.newFull].
    * Returns: the secret data
    */
   ubyte[] get()

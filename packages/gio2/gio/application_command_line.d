@@ -13,7 +13,7 @@ import gobject.object;
 /**
  * `GApplicationCommandLine` represents a command-line invocation of
  * an application.
- * It is created by [gio.application.ApplicationGio] and emitted
+ * It is created by [gio.application.Application] and emitted
  * in the signal@Gio.Application::command-line signal and virtual function.
  * The class contains the list of arguments that the program was invoked
  * with. It is also possible to query if the commandline invocation was
@@ -303,7 +303,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
    * Gets the options that were passed to g_application_command_line$(LPAREN)$(RPAREN).
    * If you did not override local_command_line$(LPAREN)$(RPAREN) then these are the same
    * options that were parsed according to the #GOptionEntrys added to the
-   * application with [gio.application.ApplicationGio.addMainOptionEntries] and possibly
+   * application with [gio.application.Application.addMainOptionEntries] and possibly
    * modified from your GApplication::handle-local-options handler.
    * If no options were sent then an empty dictionary is returned so that
    * you don't need to check for %NULL.
